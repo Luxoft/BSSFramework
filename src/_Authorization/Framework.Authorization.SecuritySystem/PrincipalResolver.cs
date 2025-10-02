@@ -6,7 +6,7 @@ using GenericQueryable;
 using SecuritySystem.Attributes;
 using SecuritySystem.Credential;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class PrincipalResolver([DisabledSecurity] IRepository<Principal> principalRepository) : IPrincipalResolver
 {

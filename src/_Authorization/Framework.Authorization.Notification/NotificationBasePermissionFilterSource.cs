@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem;
+using Framework.Authorization.SecuritySystemImpl;
 using SecuritySystem;
 using SecuritySystem.Services;
 

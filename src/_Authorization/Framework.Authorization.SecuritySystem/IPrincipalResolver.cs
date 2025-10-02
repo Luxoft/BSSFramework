@@ -1,7 +1,7 @@
 ﻿using Framework.Authorization.Domain;
 using SecuritySystem.Credential;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public interface IPrincipalResolver
 {

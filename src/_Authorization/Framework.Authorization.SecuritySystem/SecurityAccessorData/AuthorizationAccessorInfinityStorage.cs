@@ -4,7 +4,7 @@ using Framework.DomainDriven.Repository;
 using SecuritySystem.Attributes;
 using SecuritySystem.SecurityAccessor;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class AuthorizationAccessorInfinityStorage([DisabledSecurity] IRepository<Principal> principalRepository)
     : ISecurityAccessorInfinityStorage

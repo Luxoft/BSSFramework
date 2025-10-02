@@ -13,7 +13,7 @@ using SecuritySystem.Attributes;
 using SecuritySystem.Credential;
 using SecuritySystem.ExternalSystem.Management;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class AuthorizationPrincipalSourceService(
     [DisabledSecurity] IRepository<Principal> principalRepository,

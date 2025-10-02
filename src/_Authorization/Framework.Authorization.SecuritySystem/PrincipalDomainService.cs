@@ -3,7 +3,7 @@
 using FluentValidation;
 
 using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem.Validation;
+using Framework.Authorization.SecuritySystemImpl.Validation;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.Exceptions;
@@ -12,7 +12,7 @@ using Framework.Persistent;
 using SecuritySystem.Attributes;
 using SecuritySystem.UserSource;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class PrincipalDomainService(
     [DisabledSecurity] IRepository<Principal> principalRepository,

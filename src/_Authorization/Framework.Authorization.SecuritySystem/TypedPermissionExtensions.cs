@@ -2,7 +2,7 @@
 
 using SecuritySystem.ExternalSystem.Management;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public static class TypedPermissionExtensions
 {

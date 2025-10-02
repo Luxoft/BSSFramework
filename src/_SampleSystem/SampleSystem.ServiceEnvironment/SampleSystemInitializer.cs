@@ -1,4 +1,4 @@
-﻿using Framework.Authorization.SecuritySystem.Initialize;
+﻿using Framework.Authorization.SecuritySystemImpl.Initialize;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.DomainDriven;

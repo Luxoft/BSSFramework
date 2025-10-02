@@ -4,7 +4,7 @@ using Framework.Authorization.Domain;
 using Framework.Core;
 using SecuritySystem;
 
-namespace Framework.Authorization.SecuritySystem.Initialize;
+namespace Framework.Authorization.SecuritySystemImpl.Initialize;
 
 public interface IAuthorizationBusinessRoleInitializer : ISecurityInitializer
 {

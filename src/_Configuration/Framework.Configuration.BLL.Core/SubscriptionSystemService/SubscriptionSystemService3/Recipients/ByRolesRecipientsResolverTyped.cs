@@ -70,7 +70,7 @@ internal sealed class ByRolesRecipientsResolverTyped<TBLLContext> : ByRolesRecip
     {
         var lambdaProcessor = this.LambdaProcessorFactory.Create<SecurityItemSourceLambdaProcessor<TBLLContext>>();
         var identityObjects = lambdaProcessor.Invoke<T, TSecurityItem>(securityItem, versions);
-        var result = new NotificationFilterGroup<TSecurityItem>(identityObjects, securityItem.ExpandType);
+        var result = NotificationFilterGroup.Create(identityObjects, securityItem.ExpandType);
 
         return result;
     }

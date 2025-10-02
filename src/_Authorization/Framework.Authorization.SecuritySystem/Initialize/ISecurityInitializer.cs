@@ -1,4 +1,4 @@
-﻿namespace Framework.Authorization.SecuritySystem.Initialize;
+﻿namespace Framework.Authorization.SecuritySystemImpl.Initialize;
 
 public interface ISecurityInitializer
 {

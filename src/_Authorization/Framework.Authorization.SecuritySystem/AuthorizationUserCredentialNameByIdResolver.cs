@@ -3,7 +3,7 @@
 using SecuritySystem.Credential;
 using SecuritySystem.Services;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class AuthorizationUserCredentialNameByIdResolver(IQueryableSource queryableSource)
     : IUserCredentialNameByIdResolver

@@ -7,7 +7,7 @@ using Framework.DomainDriven.Repository;
 using SecuritySystem.Attributes;
 using SecuritySystem.Services;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class CurrentPrincipalSource(
     [DisabledSecurity] IRepository<Principal> principalRepository,

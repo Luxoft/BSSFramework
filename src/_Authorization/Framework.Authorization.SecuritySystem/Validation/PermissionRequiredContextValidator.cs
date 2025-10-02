@@ -6,7 +6,7 @@ using SecuritySystem;
 
 using CommonFramework;
 
-namespace Framework.Authorization.SecuritySystem.Validation;
+namespace Framework.Authorization.SecuritySystemImpl.Validation;
 
 public class PermissionRequiredContextValidator : AbstractValidator<Permission>
 {

@@ -3,7 +3,6 @@
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.Exceptions;
-using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.Validation;
 
@@ -67,16 +66,5 @@ public partial class PermissionBLL
         changePermissionDelegatesModel.Merge(updatePermissionDelegatesModel);
 
         this.ChangeDelegatePermissions(changePermissionDelegatesModel);
-    }
-
-    public void WithdrawDelegation(Permission permission)
-    {
-        if (permission == null) throw new ArgumentNullException(nameof(permission));
-
-        var newPeriod = permission.Period.StartDate.ToPeriod(this.Context.TimeProvider.GetToday().SubtractDay());
-
-        permission.GetAllChildren().Foreach(p => p.Period = newPeriod);
-
-        this.Save(permission);
     }
 }

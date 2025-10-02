@@ -9,7 +9,7 @@ using SecuritySystem.Credential;
 using SecuritySystem.Services;
 using SecuritySystem.UserSource;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class AuthorizationRunAsManager(
     IRawUserAuthenticationService userAuthenticationService,

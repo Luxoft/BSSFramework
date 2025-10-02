@@ -43,7 +43,7 @@ public partial class ConfigurationBLLContext
             IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,
             IConfigurationValidator validator,
-            IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
+            IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
             IMessageSender<MessageTemplateNotification> subscriptionSender,
             IRootSecurityService<PersistentDomainObjectBase> securityService,

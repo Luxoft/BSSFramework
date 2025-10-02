@@ -1,5 +1,5 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem;
+using Framework.Authorization.SecuritySystemImpl;
 using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;

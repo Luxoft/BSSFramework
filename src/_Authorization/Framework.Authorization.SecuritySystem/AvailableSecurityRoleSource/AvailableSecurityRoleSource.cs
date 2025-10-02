@@ -2,7 +2,7 @@
 
 using SecuritySystem;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class AuthorizationAvailableSecurityRoleSource(
     IAvailablePermissionSource availablePermissionSource,

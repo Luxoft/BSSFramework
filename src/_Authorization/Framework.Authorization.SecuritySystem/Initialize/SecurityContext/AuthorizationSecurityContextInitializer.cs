@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 using SecuritySystem.Attributes;
 
-namespace Framework.Authorization.SecuritySystem.Initialize;
+namespace Framework.Authorization.SecuritySystemImpl.Initialize;
 
 public class AuthorizationSecurityContextInitializer(
     [DisabledSecurity] IRepository<SecurityContextType> securityContextTypeRepository,

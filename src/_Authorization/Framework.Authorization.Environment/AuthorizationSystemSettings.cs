@@ -1,6 +1,6 @@
 ﻿using Framework.Authorization.Notification;
-using Framework.Authorization.SecuritySystem;
-using Framework.Authorization.SecuritySystem.Validation;
+using Framework.Authorization.SecuritySystemImpl;
+using Framework.Authorization.SecuritySystemImpl.Validation;
 using SecuritySystem.Services;
 
 using Microsoft.Extensions.DependencyInjection;

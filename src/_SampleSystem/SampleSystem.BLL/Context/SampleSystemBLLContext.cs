@@ -23,7 +23,7 @@ public partial class SampleSystemBLLContext(
     IAccessDeniedExceptionService accessDeniedExceptionService,
     IStandartExpressionBuilder standartExpressionBuilder,
     ISampleSystemValidator validator,
-    IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
+    IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
     IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
     IRootSecurityService<PersistentDomainObjectBase> securityService,
     ISampleSystemBLLFactoryContainer logics,

@@ -7,7 +7,7 @@ using SecuritySystem;
 using SecuritySystem.ExternalSystem;
 using SecuritySystem.Services;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class AuthorizationPermissionSystem(
     IServiceProvider serviceProvider,

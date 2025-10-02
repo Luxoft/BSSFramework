@@ -1,6 +1,6 @@
 ﻿using Framework.Authorization.Domain;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public interface IPrincipalDomainService
 {

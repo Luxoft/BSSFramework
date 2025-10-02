@@ -10,7 +10,7 @@ using Framework.Persistent;
 using SecuritySystem;
 using SecuritySystem.ExternalSystem.SecurityContextStorage;
 
-namespace Framework.Authorization.SecuritySystem.Validation;
+namespace Framework.Authorization.SecuritySystemImpl.Validation;
 
 public class PermissionDelegateValidator : AbstractValidator<Permission>
 {

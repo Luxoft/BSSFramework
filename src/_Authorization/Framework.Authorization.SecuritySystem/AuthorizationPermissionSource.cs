@@ -14,7 +14,7 @@ using SecuritySystem.ExternalSystem;
 using SecuritySystem.HierarchicalExpand;
 using SecuritySystem.Services;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class AuthorizationPermissionSource(
     IAvailablePermissionSource availablePermissionSource,

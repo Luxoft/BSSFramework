@@ -6,19 +6,19 @@ using Framework.DomainDriven;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 
-using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
 using SecuritySystem;
 
 using Framework.Authorization.Notification;
-using Framework.Authorization.SecuritySystem;
-using Framework.Authorization.SecuritySystem.Validation;
+using Framework.Authorization.SecuritySystemImpl;
+using Framework.Authorization.SecuritySystemImpl.Validation;
 using Framework.Events;
 using SecuritySystem.Services;
 
 using Microsoft.Extensions.DependencyInjection;
 using SecuritySystem.AvailableSecurity;
 using SecuritySystem.ExternalSystem.SecurityContextStorage;
+using SecuritySystem.HierarchicalExpand;
 
 namespace Framework.Authorization.BLL;
 
@@ -29,7 +29,7 @@ public partial class AuthorizationBLLContext(
     IAccessDeniedExceptionService accessDeniedExceptionService,
     IStandartExpressionBuilder standartExpressionBuilder,
     IAuthorizationValidator validator,
-    IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
+    IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
     IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
     TimeProvider timeProvider,
     IRootSecurityService<PersistentDomainObjectBase> securityService,
@@ -62,6 +62,8 @@ public partial class AuthorizationBLLContext(
             true)).WithLock();
 
     public ITypeResolver<string> TypeResolver { get; } = settings.TypeResolver;
+
+    public ISecurityContextInfoSource SecurityContextInfoSource { get; } = securityContextInfoSource;
 
     public INotificationPrincipalExtractor NotificationPrincipalExtractor { get; } = notificationPrincipalExtractor;
 

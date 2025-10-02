@@ -8,7 +8,7 @@ using Framework.Core;
 using SecuritySystem;
 using SecuritySystem.ExternalSystem.SecurityContextStorage;
 
-namespace Framework.Authorization.SecuritySystem.Validation;
+namespace Framework.Authorization.SecuritySystemImpl.Validation;
 
 public class PrincipalUniquePermissionValidator : AbstractValidator<Principal>, IPrincipalUniquePermissionValidator
 {

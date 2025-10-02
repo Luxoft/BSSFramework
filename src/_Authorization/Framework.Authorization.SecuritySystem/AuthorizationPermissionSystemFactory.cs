@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem.ExternalSystem;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class AuthorizationPermissionSystemFactory(IServiceProvider serviceProvider) : IPermissionSystemFactory
 {

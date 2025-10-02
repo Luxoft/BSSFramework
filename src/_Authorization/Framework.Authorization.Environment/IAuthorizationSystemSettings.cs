@@ -1,5 +1,5 @@
 ﻿using Framework.Authorization.Notification;
-using Framework.Authorization.SecuritySystem.Validation;
+using Framework.Authorization.SecuritySystemImpl.Validation;
 
 namespace Framework.Authorization.Environment;
 

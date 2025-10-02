@@ -46,31 +46,33 @@ public class LegacyNotificationPrincipalExtractor(
 
                 foreach (var preExpandedIdent in firstGroup.Idents)
                 {
-                    var withExpandPrincipalsRequest = from expandedIdent in firstGroupExternalSource.GetSecurityContextsWithMasterExpand(preExpandedIdent)
+                    throw new Exception("Use CommonFramework");
 
-                                                      let newFirstGroup = new NotificationFilterGroup(firstGroup.SecurityContextType, [expandedIdent.Id], firstGroup.ExpandType.WithoutHierarchical())
+                    //var withExpandPrincipalsRequest = from expandedIdent in firstGroupExternalSource.GetSecurityContextsWithMasterExpand(preExpandedIdent)
 
-                                                      let principals = this.GetDirectNotificationPrincipals(baseNotificationFilter, new[] { newFirstGroup }.Concat(tailGroups)).ToArray()
+                    //                                  let newFirstGroup = new NotificationFilterGroup(firstGroup.SecurityContextType, [expandedIdent.Id], firstGroup.ExpandType.WithoutHierarchical())
 
-                                                      where principals.Any()
+                    //                                  let principals = this.GetDirectNotificationPrincipals(baseNotificationFilter, new[] { newFirstGroup }.Concat(tailGroups)).ToArray()
 
-                                                      select principals;
+                    //                                  where principals.Any()
 
-                    Principal[] withExpandPrincipals;
+                    //                                  select principals;
 
-                    if (firstGroup.ExpandType == NotificationExpandType.All)
-                    {
-                        withExpandPrincipals = withExpandPrincipalsRequest.SelectMany(z => z).ToArray();
-                    }
-                    else
-                    {
-                        withExpandPrincipals = withExpandPrincipalsRequest.FirstOrDefault();
-                    }
+                    //Principal[] withExpandPrincipals;
 
-                    if (withExpandPrincipals != null)
-                    {
-                        yield return withExpandPrincipals;
-                    }
+                    //if (firstGroup.ExpandType == NotificationExpandType.All)
+                    //{
+                    //    withExpandPrincipals = withExpandPrincipalsRequest.SelectMany(z => z).ToArray();
+                    //}
+                    //else
+                    //{
+                    //    withExpandPrincipals = withExpandPrincipalsRequest.FirstOrDefault();
+                    //}
+
+                    //if (withExpandPrincipals != null)
+                    //{
+                    //    yield return withExpandPrincipals;
+                    //}
                 }
             }
             else

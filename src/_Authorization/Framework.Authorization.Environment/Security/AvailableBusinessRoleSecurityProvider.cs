@@ -3,7 +3,7 @@
 using CommonFramework;
 
 using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem;
+using Framework.Authorization.SecuritySystemImpl;
 using Framework.Core;
 using SecuritySystem;
 using SecuritySystem.SecurityAccessor;

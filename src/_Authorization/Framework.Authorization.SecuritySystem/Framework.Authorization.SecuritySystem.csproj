@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.Authorization.SecuritySystem</PackageId>
+    <PackageId>Luxoft.Framework.Authorization.SecuritySystemImpl</PackageId>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 

@@ -1,7 +1,7 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Authorization.Notification;
-using Framework.Authorization.SecuritySystem;
-using Framework.Authorization.SecuritySystem.Validation;
+using Framework.Authorization.SecuritySystemImpl;
+using Framework.Authorization.SecuritySystemImpl.Validation;
 using Framework.Core;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
@@ -39,6 +39,8 @@ public partial interface IAuthorizationBLLContext :
     TimeProvider TimeProvider { get; }
 
     ISecurityContextStorage SecurityContextStorage { get; }
+
+    ISecurityContextInfoSource SecurityContextInfoSource { get; }
 
     INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
 

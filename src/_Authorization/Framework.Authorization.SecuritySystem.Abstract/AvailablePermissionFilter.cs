@@ -3,9 +3,10 @@
 using CommonFramework;
 using CommonFramework.ExpressionEvaluate;
 
+using Framework.Authorization.Domain;
 using Framework.Core;
 
-namespace Framework.Authorization.Domain;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class AvailablePermissionFilter(DateTime today)
 {

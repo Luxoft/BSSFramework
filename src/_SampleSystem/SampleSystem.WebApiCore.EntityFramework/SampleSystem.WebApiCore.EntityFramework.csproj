@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="IvAt.SecuritySystem.Configurator" />
+    <PackageReference Include="IvAt.SecuritySystem.VirtualPermission" />
     <PackageReference Include="Luxoft.Bss.Platform.Api.Documentation" />
     <PackageReference Include="Luxoft.Bss.Platform.Api.Middlewares" />
     <PackageReference Include="Luxoft.Bss.Platform.Logging" />

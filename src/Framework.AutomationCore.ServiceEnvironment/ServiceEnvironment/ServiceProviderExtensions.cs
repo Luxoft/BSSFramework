@@ -2,6 +2,8 @@
 
 using Automation.ServiceEnvironment.Services;
 
+using CommonFramework.DependencyInjection;
+
 using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.Jobs;
 using Framework.DomainDriven.WebApiNetCore;

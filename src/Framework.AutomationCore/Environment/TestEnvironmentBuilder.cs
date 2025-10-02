@@ -3,6 +3,8 @@ using Automation.Settings;
 using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
+using CommonFramework.DependencyInjection;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -108,13 +110,10 @@ public class TestEnvironmentBuilder
 
     protected virtual IServiceProvider BuildServiceProvider(IServiceCollection serviceCollection) =>
         serviceCollection
-            .ValidateDuplicateDeclaration()
+            .AddValidator<DuplicateServiceUsageValidator>()
+            .Validate()
             .BuildServiceProvider(
-            new ServiceProviderOptions
-            {
-                ValidateOnBuild = true,
-                ValidateScopes = true
-            });
+                new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
 
     protected virtual IServiceProviderPool GetServiceProviderPool(
         IConfiguration rootConfiguration,

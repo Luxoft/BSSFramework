@@ -3,6 +3,8 @@ using Automation.ServiceEnvironment;
 
 using Bss.Platform.Events.Abstractions;
 
+using CommonFramework.DependencyInjection;
+
 using Framework.Configuration.BLL;
 using Framework.Core;
 using Framework.DomainDriven.Jobs;

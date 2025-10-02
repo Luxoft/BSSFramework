@@ -1,9 +1,12 @@
-﻿using Automation.Utils.DatabaseUtils;
+﻿using Automation.ServiceEnvironment;
+using Automation.Utils.DatabaseUtils;
 using Automation.Xunit;
 using Automation.Xunit.ServiceEnvironment;
 
 using Bss.Platform.Events.Abstractions;
 using Bss.Testing.Xunit.Interfaces;
+
+using CommonFramework.DependencyInjection;
 
 using Framework.Configuration.BLL;
 using Framework.Core;

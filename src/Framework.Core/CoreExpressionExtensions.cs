@@ -8,6 +8,35 @@ namespace Framework.Core;
 
 public static class CoreExpressionExtensions
 {
+    public static MethodInfo? TryGetStartMethodInfo(this LambdaExpression expression)
+    {
+        var currentExpr = expression.Body;
+        var startParam = expression.Parameters.Single();
+
+        do
+        {
+            if (currentExpr is MemberExpression memberExpression)
+            {
+                currentExpr = memberExpression.Expression;
+            }
+            else if (currentExpr is MethodCallExpression methodCallExpression)
+            {
+                if (methodCallExpression.Object == startParam)
+                {
+                    return methodCallExpression.Method;
+                }
+                else
+                {
+                    currentExpr = methodCallExpression.Object ?? methodCallExpression.Arguments.First();
+                }
+            }
+            else
+            {
+                return null;
+            }
+        } while (true);
+    }
+
     /// <summary>
     /// Получение имени мембера (поле или свойство)
     /// </summary>

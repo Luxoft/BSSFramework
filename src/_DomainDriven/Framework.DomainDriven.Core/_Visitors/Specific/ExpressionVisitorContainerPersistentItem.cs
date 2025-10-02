@@ -16,9 +16,7 @@ public class ExpressionVisitorContainerPersistentItem : IExpressionVisitorContai
                        typeof(ICodeObject<>),
                        typeof(IDomainType),
                        typeof(IIdentityObject<>),
-                       typeof(IParentSource<>),
-                       typeof(IChildrenSource<>),
-                       //typeof(IEmployee)
+                       typeof(IParentSource<>)
                }.ToReadOnlyCollection(type => new OverrideCallInterfacePropertiesVisitor(type));
     }
 }

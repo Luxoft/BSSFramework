@@ -1,5 +1,7 @@
 ﻿using System.Data;
 
+using CommonFramework.DependencyInjection;
+
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.DALExceptions;

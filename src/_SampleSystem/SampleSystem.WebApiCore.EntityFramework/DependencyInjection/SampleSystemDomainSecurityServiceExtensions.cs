@@ -2,6 +2,9 @@
 
 using SampleSystem.Domain;
 
+using SecuritySystem.DependencyInjection;
+using SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
+
 namespace SampleSystem.Security;
 
 public static class SampleSystemDomainSecurityServiceExtensions

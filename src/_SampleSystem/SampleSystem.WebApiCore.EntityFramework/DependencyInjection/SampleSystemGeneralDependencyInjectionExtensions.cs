@@ -1,7 +1,10 @@
-﻿using Framework.DomainDriven.EntityFramework;
+﻿using CommonFramework.DependencyInjection;
+
+using Framework.DomainDriven.EntityFramework;
 using Framework.DomainDriven.Setup;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 using SampleSystem.Domain;
 using SampleSystem.Security;
@@ -38,7 +41,6 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                        o.UseSqlServer(
                            "Data Source=.;Initial Catalog=SampleSystem;Integrated Security=True;TrustServerCertificate=True"))
                .AddHttpContextAccessor()
-               .AddLogging()
-               .Replace(ServiceDescriptor.Scoped(_ => UserAuthenticationService.CreateFor("testEmployeeLogin")));
+               .AddLogging();
     }
 }

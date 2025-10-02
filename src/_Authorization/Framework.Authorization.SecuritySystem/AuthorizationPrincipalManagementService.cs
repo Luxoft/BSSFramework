@@ -29,12 +29,12 @@ public class AuthorizationPrincipalManagementService(
       availablePermissionSource),
       IPrincipalManagementService
 {
-    public async Task<IIdentityObject<Guid>> CreatePrincipalAsync(string principalName, CancellationToken cancellationToken = default)
+    public async Task<object> CreatePrincipalAsync(string principalName, CancellationToken cancellationToken = default)
     {
         return await principalDomainService.GetOrCreateAsync(principalName, cancellationToken);
     }
 
-    public async Task<IIdentityObject<Guid>> UpdatePrincipalNameAsync(
+    public async Task<object> UpdatePrincipalNameAsync(
         UserCredential userCredential,
         string principalName,
         CancellationToken cancellationToken)
@@ -48,7 +48,7 @@ public class AuthorizationPrincipalManagementService(
         return principal;
     }
 
-    public async Task<IIdentityObject<Guid>> RemovePrincipalAsync(UserCredential userCredential, bool force, CancellationToken cancellationToken = default)
+    public async Task<object> RemovePrincipalAsync(UserCredential userCredential, bool force, CancellationToken cancellationToken = default)
     {
         var principal = await principalResolver.Resolve(userCredential, cancellationToken);
 
@@ -57,7 +57,7 @@ public class AuthorizationPrincipalManagementService(
         return principal;
     }
 
-    public async Task<MergeResult<IIdentityObject<Guid>, IIdentityObject<Guid>>> UpdatePermissionsAsync(
+    public async Task<MergeResult<object, object>> UpdatePermissionsAsync(
         Guid principalId,
         IEnumerable<TypedPermission> typedPermissions,
         CancellationToken cancellationToken = default)
@@ -79,9 +79,9 @@ public class AuthorizationPrincipalManagementService(
 
         await principalDomainService.ValidateAsync(dbPrincipal, cancellationToken);
 
-        return new MergeResult<IIdentityObject<Guid>, IIdentityObject<Guid>>(
+        return new MergeResult<object, object>(
             newPermissions,
-            updatedPermissions.Select(pair => (IIdentityObject<Guid>)pair.Item1).Select(v => (v, v)),
+            updatedPermissions.Select(pair => (object)pair.Item1).Select(v => (v, v)),
             permissionMergeResult.RemovingItems);
     }
 
@@ -110,14 +110,14 @@ public class AuthorizationPrincipalManagementService(
 
         var newDbPermission = new Permission(dbPrincipal)
                               {
-                                  Comment = typedPermission.Comment, Period = typedPermission.Period, Role = dbRole
+                                  Comment = typedPermission.Comment, Period = typedPermission.GetPeriod(), Role = dbRole
                               };
 
         foreach (var restrictionGroup in typedPermission.Restrictions)
         {
             var securityContextTypeId = securityContextInfoSource.GetSecurityContextInfo(restrictionGroup.Key).Id;
 
-            foreach (var securityContextId in restrictionGroup.Value)
+            foreach (Guid securityContextId in restrictionGroup.Value)
             {
                 _ = new PermissionRestriction(newDbPermission)
                     {
@@ -163,19 +163,19 @@ public class AuthorizationPrincipalManagementService(
 
         var restrictionMergeResult = dbPermission.Restrictions.GetMergeResult(
             typedPermission.Restrictions.ChangeKey(t => securityContextInfoSource.GetSecurityContextInfo(t).Id)
-                           .SelectMany(pair => pair.Value.Select(securityContextId => (pair.Key, securityContextId))),
+                           .SelectMany(pair => pair.Value.Cast<Guid>().Select(securityContextId => (pair.Key, securityContextId))),
             r => (r.SecurityContextType.Id, r.SecurityContextId),
             pair => pair);
 
         if (restrictionMergeResult.IsEmpty
             && dbPermission.Comment == typedPermission.Comment
-            && dbPermission.Period == typedPermission.Period)
+            && dbPermission.Period ==  typedPermission.GetPeriod())
         {
             return false;
         }
 
         dbPermission.Comment = typedPermission.Comment;
-        dbPermission.Period = typedPermission.Period;
+        dbPermission.Period = typedPermission.GetPeriod();
 
         foreach (var restriction in restrictionMergeResult.AddingItems)
         {

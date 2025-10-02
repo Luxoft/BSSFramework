@@ -1,5 +1,5 @@
-﻿using Framework.Core.Services;
-using Framework.DependencyInjection;
+﻿using CommonFramework.DependencyInjection;
+
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.ApplicationCore.DALListeners;
 using Framework.DomainDriven.Auth;
@@ -8,8 +8,7 @@ using Framework.DomainDriven.Repository;
 using Framework.Events;
 using Framework.Exceptions;
 using Framework.FinancialYear;
-using Framework.HierarchicalExpand.DependencyInjection;
-using QueryableSource;
+
 using SecuritySystem;
 using SecuritySystem.PersistStorage;
 
@@ -32,14 +31,13 @@ public static class ServiceCollectionExtensions
         services.RegisterRepository();
         services.RegisterAuthenticationServices();
         services.RegisterEvaluators();
-        services.RegisterHierarchicalObjectExpander();
         services.RegistryGenericDatabaseVisitors();
 
         services.AddSingleton<IInitializeManager, InitializeManager>();
         services.AddScoped<IEventOperationSender, EventOperationSender>();
 
         services.AddScoped<IQueryableSource, AsyncDalQueryableSource>();
-        services.AddScoped(typeof(IPersistStorage<>), typeof(PersistStorage<>));
+        services.AddScoped<IStorageWriter, DalStorageWriter>();
 
         services.AddSingleton<IJobServiceEvaluatorFactory, JobServiceEvaluatorFactory>();
         services.AddSingleton(typeof(IJobServiceEvaluator<>), typeof(JobServiceEvaluator<>));

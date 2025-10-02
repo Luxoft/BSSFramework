@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.Domain;
 
+using SecuritySystem.Credential;
 using SecuritySystem.Services;
 
 namespace Framework.Authorization.SecuritySystem;

@@ -2,6 +2,7 @@
 using Framework.DomainDriven.Repository;
 
 using SecuritySystem.Attributes;
+using SecuritySystem.SecurityAccessor;
 
 namespace Framework.Authorization.SecuritySystem;
 

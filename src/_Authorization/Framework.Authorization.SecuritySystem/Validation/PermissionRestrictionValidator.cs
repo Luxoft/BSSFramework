@@ -6,6 +6,7 @@ using Framework.Authorization.Domain;
 using Framework.Core;
 using SecuritySystem;
 using SecuritySystem.ExternalSystem.SecurityContextStorage;
+using SecuritySystem.Services;
 
 namespace Framework.Authorization.SecuritySystem.Validation;
 
@@ -15,57 +16,62 @@ public class PermissionRestrictionValidator : AbstractValidator<PermissionRestri
 
     private readonly ISecurityContextSource securityContextSource;
 
+    private readonly IIdentityInfoSource identityInfoSource;
+
     public PermissionRestrictionValidator(
         ISecurityContextInfoSource securityContextInfoSource,
         ISecurityRoleSource securityRoleSource,
         ISecurityContextStorage securityEntitySource,
-        ISecurityContextSource securityContextSource)
+        ISecurityContextSource securityContextSource,
+        IIdentityInfoSource identityInfoSource)
     {
         this.securityContextInfoSource = securityContextInfoSource;
         this.securityContextSource = securityContextSource;
+        this.identityInfoSource = identityInfoSource;
 
         this.RuleFor(permissionRestriction => permissionRestriction.SecurityContextType)
-            .Must(
-                (permissionRestriction, securityContextType) =>
-                {
-                    var securityRole = securityRoleSource.GetSecurityRole(permissionRestriction.Permission.Role.Id);
+            .Must((permissionRestriction, securityContextType) =>
+                  {
+                      var securityRole = securityRoleSource.GetSecurityRole(permissionRestriction.Permission.Role.Id);
 
-                    var securityContextInfo = this.GetSecurityContextInfo(securityContextType);
+                      var securityContextInfo = this.GetSecurityContextInfo(securityContextType);
 
-                    var allowedSecurityContexts = securityRole.Information.Restriction.SecurityContextTypes;
+                      var allowedSecurityContexts = securityRole.Information.Restriction.SecurityContextTypes;
 
-                    return allowedSecurityContexts == null || allowedSecurityContexts.Contains(securityContextInfo.Type);
-                })
+                      return allowedSecurityContexts == null || allowedSecurityContexts.Contains(securityContextInfo.Type);
+                  })
             .WithMessage(permissionRestriction => $"Invalid SecurityContextType: {permissionRestriction.SecurityContextType.Name}.");
 
         this.RuleFor(permissionRestriction => permissionRestriction.SecurityContextId)
-            .Must(
-                (permissionRestriction, securityContextId) =>
-                {
-                    var authorizationTypedExternalSource = securityEntitySource.GetTyped(permissionRestriction.SecurityContextType.Id);
+            .Must((permissionRestriction, securityContextId) =>
+                  {
+                      var securityContextTypeInfo =
+                          securityContextInfoSource.GetSecurityContextInfo(permissionRestriction.SecurityContextType.Id);
 
-                    return authorizationTypedExternalSource.IsExists(securityContextId);
-                })
-            .WithMessage(
-                permissionRestriction =>
-                    $"{permissionRestriction.SecurityContextType.Name} with id '{permissionRestriction.SecurityContextId}' not exists.");
+                      var authorizationTypedExternalSource =
+                          (ITypedSecurityContextStorage<Guid>)securityEntitySource.GetTyped(securityContextTypeInfo.Type);
+
+                      return authorizationTypedExternalSource.IsExists(securityContextId);
+                  })
+            .WithMessage(permissionRestriction =>
+                             $"{permissionRestriction.SecurityContextType.Name} with id '{permissionRestriction.SecurityContextId}' not exists.");
 
         this.RuleFor(permissionRestriction => permissionRestriction.SecurityContextType)
-            .Must(
-                (permissionRestriction, securityContextType) =>
-                {
-                    var securityRole = securityRoleSource.GetSecurityRole(permissionRestriction.Permission.Role.Id);
+            .Must((permissionRestriction, securityContextType) =>
+                  {
+                      var securityRole = securityRoleSource.GetSecurityRole(permissionRestriction.Permission.Role.Id);
 
-                    var securityContextInfo = this.GetSecurityContextInfo(securityContextType);
+                      var securityContextInfo = this.GetSecurityContextInfo(securityContextType);
 
-                    var securityContextRestriction =
-                        securityRole.Information.Restriction.SecurityContextRestrictions?.SingleOrDefault(
-                            r => r.SecurityContextType == securityContextInfo.Type);
+                      var securityContextRestriction =
+                          securityRole.Information.Restriction.SecurityContextRestrictions?.SingleOrDefault(r => r.SecurityContextType
+                              == securityContextInfo.Type);
 
-                    var restrictionFilterInfo = securityContextRestriction?.RawFilter;
+                      var restrictionFilterInfo = securityContextRestriction?.RawFilter;
 
-                    return restrictionFilterInfo == null || this.IsAllowed(permissionRestriction.SecurityContextId, restrictionFilterInfo);
-                })
+                      return restrictionFilterInfo == null
+                             || this.IsAllowed(permissionRestriction.SecurityContextId, restrictionFilterInfo);
+                  })
             .WithMessage(permissionRestriction => $"SecurityContext: '{permissionRestriction.SecurityContextId}' denied by filter.");
     }
 
@@ -86,7 +92,8 @@ public class PermissionRestrictionValidator : AbstractValidator<PermissionRestri
         SecurityContextRestrictionFilterInfo<TSecurityContext> restrictionFilterInfo)
         where TSecurityContext : class, ISecurityContext
     {
-        return this.securityContextSource.GetQueryable(restrictionFilterInfo)
-                   .Any(securityContext => securityContext.Id == securityContextId);
+        var identityInfo = this.identityInfoSource.GetIdentityInfo<TSecurityContext, Guid>();
+
+        return this.securityContextSource.GetQueryable(restrictionFilterInfo).Select(identityInfo.IdPath).Contains(securityContextId);
     }
 }

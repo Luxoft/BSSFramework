@@ -9,33 +9,17 @@ using Framework.Exceptions;
 
 namespace Framework.ExpressionParsers;
 
-public abstract class ExpressionParser : ExpressionParser<Delegate, LambdaExpression>
+public abstract class ExpressionParser<TDelegate>(INativeExpressionParser parser)
+    : ExpressionParser<TDelegate, Expression<TDelegate>>(parser, expr => LambdaCompileCache.GetFunc(expr))
+    where TDelegate : class
 {
-    protected ExpressionParser(INativeExpressionParser parser)
-            : base(parser, expr => expr.Compile(LambdaCompileCache))
-    {
-
-    }
-
-    private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
-}
-
-public abstract class ExpressionParser<TDelegate> : ExpressionParser<TDelegate, Expression<TDelegate>>
-        where TDelegate : class
-{
-    protected ExpressionParser(INativeExpressionParser parser)
-            : base(parser, expr => expr.Compile(LambdaCompileCache))
-    {
-
-    }
-
     protected override Expression<TDelegate> GetInternalExpression(string value)
     {
         return this.Parser.Parse<TDelegate>(value);
     }
 
 
-    private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
+    private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.None);
 }
 
 public abstract class ExpressionParser<TDelegate, TExpression> : NativeExpressionParserContainer,

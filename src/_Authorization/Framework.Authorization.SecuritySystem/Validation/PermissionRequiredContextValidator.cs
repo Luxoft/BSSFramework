@@ -1,8 +1,10 @@
 ﻿using FluentValidation;
 
 using Framework.Authorization.Domain;
-using Framework.Core;
+
 using SecuritySystem;
+
+using CommonFramework;
 
 namespace Framework.Authorization.SecuritySystem.Validation;
 

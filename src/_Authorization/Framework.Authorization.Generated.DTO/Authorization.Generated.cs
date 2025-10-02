@@ -6454,7 +6454,7 @@ namespace Framework.Authorization.Generated.DTO
         Framework.Authorization.Domain.UpdatePermissionDelegatesModel ToUpdatePermissionDelegatesModel(Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelStrictDTO updatePermissionDelegatesModelStrictDTO);
     }
     
-    public abstract partial class AuthorizationServerPrimitiveDTOMappingServiceBase : Framework.DomainDriven.DTOMappingService<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.AuditPersistentDomainObjectBase, System.Guid, Framework.Core.Ignore>, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService
+    public abstract partial class AuthorizationServerPrimitiveDTOMappingServiceBase : Framework.DomainDriven.DTOMappingService<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.AuditPersistentDomainObjectBase, System.Guid, CommonFramework.Ignore>, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService
     {
         
         protected AuthorizationServerPrimitiveDTOMappingServiceBase(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 

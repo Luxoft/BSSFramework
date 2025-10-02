@@ -58,7 +58,7 @@ public class AuthorizationBusinessRoleInitializer(
 
         foreach (var securityRole in mergeResult.AddingItems)
         {
-            var businessRole = new BusinessRole { Name = GetActualName(securityRole), Description = securityRole.Information.Description };
+            var businessRole = new BusinessRole { Name = securityRole.Name, Description = securityRole.Information.Description ?? "" };
 
             logger.LogDebug("Role created: {Name} {Id}", businessRole.Name, securityRole.Id);
 
@@ -67,8 +67,8 @@ public class AuthorizationBusinessRoleInitializer(
 
         foreach (var (businessRole, securityRole) in mergeResult.CombineItems)
         {
-            var newName = GetActualName(securityRole);
-            var newDescription = securityRole.Information.Description;
+            var newName = securityRole.Name;
+            var newDescription = securityRole.Information.Description ?? "";
 
             if (newName != businessRole.Name || newDescription != businessRole.Description)
             {
@@ -83,11 +83,6 @@ public class AuthorizationBusinessRoleInitializer(
 
         return mergeResult;
     }
-
-    private static string GetActualName(FullSecurityRole securityRole)
-    {
-        return securityRole.Information.CustomName ?? securityRole.Name;
-    }
-
+    
     async Task ISecurityInitializer.Init(CancellationToken cancellationToken) => await this.Init(cancellationToken);
 }

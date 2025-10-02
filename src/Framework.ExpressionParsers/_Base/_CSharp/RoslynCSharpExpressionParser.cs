@@ -46,7 +46,7 @@ public class RoslynCSharpExpressionParser : INativeBodyExpressionParser
                          .ToCSharpFullName();
 
         var methodName = "GetExpression";
-        var typeName = nameof(ExpressionParser);
+        var typeName = nameof(ExpressionParser<object>);
         var namespaceName = "Generated";
 
 

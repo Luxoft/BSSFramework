@@ -7,6 +7,8 @@ using Microsoft.CSharp;
 
 using Framework.Core;
 
+using CommonFramework;
+
 namespace Framework.ExpressionParsers;
 
 /// <summary>

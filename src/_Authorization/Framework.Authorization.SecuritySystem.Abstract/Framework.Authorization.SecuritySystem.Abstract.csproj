@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" />
+    <PackageReference Include="IvAt.SecuritySystem.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>

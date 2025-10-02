@@ -4,6 +4,8 @@ using FluentValidation;
 
 using Framework.Authorization.Domain;
 using Framework.Core;
+
+using SecuritySystem;
 using SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 namespace Framework.Authorization.SecuritySystem.Validation;
@@ -12,11 +14,14 @@ public class PrincipalUniquePermissionValidator : AbstractValidator<Principal>, 
 {
     private readonly ISecurityContextStorage securityEntitySource;
 
-    public PrincipalUniquePermissionValidator(ISecurityContextStorage securityEntitySource)
+    private readonly ISecurityContextInfoSource securityContextInfoSource;
+
+    public PrincipalUniquePermissionValidator(ISecurityContextStorage securityEntitySource, ISecurityContextInfoSource securityContextInfoSource)
     {
         var duplicatesVar = "Duplicates";
 
         this.securityEntitySource = securityEntitySource;
+        this.securityContextInfoSource = securityContextInfoSource;
 
         this.RuleFor(principal => principal.Permissions)
             .Must((_, permissions, context) =>
@@ -63,7 +68,12 @@ public class PrincipalUniquePermissionValidator : AbstractValidator<Principal>, 
 
         foreach (var securityContextTypeGroup in permission.Restrictions.GroupBy(fi => fi.SecurityContextType, fi => fi.SecurityContextId))
         {
-            var securityEntities = this.securityEntitySource.GetTyped(securityContextTypeGroup.Key.Id).GetSecurityContextsByIdents(securityContextTypeGroup);
+            var securityContextInfo = this.securityContextInfoSource.GetSecurityContextInfo(securityContextTypeGroup.Key.Id);
+
+            var securityEntities = this.securityEntitySource
+                                       .GetTyped(securityContextInfo.Type)
+                                       .Pipe(v => (ITypedSecurityContextStorage<Guid>)v)
+                                       .GetSecurityContextsByIdents(securityContextTypeGroup);
 
             yield return $"{securityContextTypeGroup.Key.Name.ToPluralize()}: {securityEntities.Select(v => v.Name).Join(", ")}";
         }

@@ -135,11 +135,4 @@ public class CSharpNativeExpressionParser : INativeExpressionParser
     /// </summary>
     /// <returns></returns>
     public static readonly CSharpNativeExpressionParser Compile = new CSharpNativeExpressionParser(new RoslynCSharpExpressionParser());
-
-
-    public static readonly INativeExpressionParser Composite = new INativeExpressionParser[]
-                                                               {
-                                                                       Default,
-                                                                       Compile
-                                                               }.ToSafeComposite().WithCache();
 }

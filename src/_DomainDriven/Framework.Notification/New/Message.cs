@@ -1,5 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Net.Mail;
+
+using CommonFramework;
+
 using Framework.Core;
 
 namespace Framework.Notification.New;

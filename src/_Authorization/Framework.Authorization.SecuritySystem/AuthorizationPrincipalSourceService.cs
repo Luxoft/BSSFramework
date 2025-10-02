@@ -56,7 +56,7 @@ public class AuthorizationPrincipalSourceService(
                                                  //.ThenFetch(permission => permission.Restrictions)
                                                  .GenericSingleOrDefaultAsync(cancellationToken);
 
-        if (principal == null)
+        if (principal is null)
         {
             return null;
         }
@@ -70,13 +70,14 @@ public class AuthorizationPrincipalSourceService(
                                  permission.Id,
                                  false,
                                  securityRoleSource.GetSecurityRole(permission.Role.Id),
-                                 permission.Period,
+                                 permission.Period.StartDate,
+                                 permission.Period.EndDate,
                                  permission.Comment,
                                  permission.Restrictions
                                            .GroupBy(r => r.SecurityContextType.Id, r => r.SecurityContextId)
                                            .ToDictionary(
                                                g => securityContextInfoSource.GetSecurityContextInfo(g.Key).Type,
-                                               g => g.ToReadOnlyListI())))
+                                               Array (g) => g.ToArray())))
                          .ToList());
         }
     }

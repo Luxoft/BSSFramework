@@ -7,6 +7,32 @@ namespace Framework.Core;
 
 public static class CoreTypeExtensions
 {
+    public static bool IsAssignableToAny(this Type type, IEnumerable<Type> baseTypes)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (baseTypes == null) throw new ArgumentNullException(nameof(baseTypes));
+
+        return baseTypes.Any(type.IsAssignableTo);
+    }
+
+    public static Type ToDelegateType(this IEnumerable<Type> preParameterTypes, Type resultType)
+    {
+        if (preParameterTypes == null) throw new ArgumentNullException(nameof(preParameterTypes));
+        if (resultType == null) throw new ArgumentNullException(nameof(resultType));
+
+        var parameterTypes = preParameterTypes.ToArray();
+
+        var rankDelegateTypeName =
+
+            resultType == typeof(void)
+                ? typeof(Action<>).FullName!.Replace("`1", "`" + parameterTypes.Length)
+                : typeof(Func<>).FullName!.Replace("`1", "`" + (1 + parameterTypes.Length));
+
+        var rankDelegateType = Type.GetType(rankDelegateTypeName)!;
+
+        return rankDelegateType.MakeGenericType(resultType == typeof(void) ? parameterTypes : parameterTypes.Concat(new[] { resultType }).ToArray());
+    }
+
     public static bool HasDefaultConstructor(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));

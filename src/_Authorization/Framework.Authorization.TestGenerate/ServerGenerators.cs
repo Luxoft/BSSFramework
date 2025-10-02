@@ -3,8 +3,6 @@ using Framework.DomainDriven.BLLGenerator;
 using Framework.DomainDriven.DTOGenerator.Server;
 using Framework.DomainDriven.Generation;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using FileInfo = Framework.DomainDriven.Generation.FileInfo;
 
 namespace Framework.Authorization.TestGenerate;

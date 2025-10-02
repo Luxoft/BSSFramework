@@ -1,12 +1,12 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.VirtualPermission;
-using Framework.HierarchicalExpand;
+
 using SecuritySystem;
-using SecuritySystem.DependencyInjection;
 
 using SampleSystem.Domain;
 
+using SecuritySystem.DependencyInjection;
 using SecuritySystem.HierarchicalExpand;
+using SecuritySystem.VirtualPermission;
 
 namespace SampleSystem.Security;
 
@@ -19,7 +19,7 @@ public static class SampleSystemSecuritySystemExtensions
                        .AddSecurityContext<ManagementUnit>(new Guid("77E78AEF-9512-46E0-A33D-AAE58DC7E18C"))
                        .AddSecurityContext<Employee>(
                            new Guid("B3F2536E-27C4-4B91-AE0B-0EE2FFD4465F"),
-                           displayFunc: employee => employee.Login);
+                           b => b.SetDisplayFunc(employee => employee.Login));
     }
 
     public static ISecuritySystemSettings AddSecurityRoles(this ISecuritySystemSettings settings)

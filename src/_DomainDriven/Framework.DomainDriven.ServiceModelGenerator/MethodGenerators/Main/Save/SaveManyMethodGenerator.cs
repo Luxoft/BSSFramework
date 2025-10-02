@@ -75,7 +75,7 @@ public class SaveManyMethodGenerator<TConfiguration> : BaseSaveMethodGenerator<T
                          .ToVariableReferenceExpression()
                          .ToStaticMethodInvokeExpression(
 
-                                                         typeof(CommonFramework.EnumerableExtensions)
+                                                         typeof(CoreEnumerableExtensions)
                                                                  .ToTypeReferenceExpression()
                                                                  .ToMethodReferenceExpression("ToList"), convertLambda)
 

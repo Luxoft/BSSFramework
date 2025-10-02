@@ -1,10 +1,9 @@
-﻿using Framework.Persistent;
-using Framework.Persistent.Mapping;
+﻿using Framework.Persistent.Mapping;
 
 namespace SampleSystem.Domain;
 
 [View]
-public class LocationToAncestorChildView : AuditPersistentDomainObjectBase, IHierarchicalToAncestorOrChildLink<Location, Guid>
+public class LocationToAncestorChildView : AuditPersistentDomainObjectBase
 {
     private Location childOrAncestor;
 

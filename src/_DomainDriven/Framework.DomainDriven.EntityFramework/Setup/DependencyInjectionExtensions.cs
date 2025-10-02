@@ -3,7 +3,6 @@
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.DALExceptions;
-using Framework.GenericQueryable;
 
 using GenericQueryable;
 

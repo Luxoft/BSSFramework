@@ -1,14 +1,13 @@
 ﻿using CommonFramework;
 
 using Framework.Core;
-using Framework.Core.Services;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
-using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.Restriction;
-using SecuritySystem;
 using Framework.Validation;
+
+using SecuritySystem;
 
 using SecuritySystem.Services;
 
@@ -17,7 +16,6 @@ namespace SampleSystem.Domain;
 [BLLViewRole, BLLSaveRole(AllowCreate = false)]
 public partial class BusinessUnit :
         CommonUnitBase,
-        IDenormalizedHierarchicalPersistentSource<BusinessUnitAncestorLink, BusinessUnitToAncestorChildView, BusinessUnit, Guid>,
         IUnit<BusinessUnit>,
         IMaster<ManagementUnitAndBusinessUnitLink>,
         IMaster<BusinessUnitEmployeeRole>,

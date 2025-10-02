@@ -1,7 +1,6 @@
 ﻿using CommonFramework;
 
 using Framework.Configuration.Domain;
-using Framework.Core;
 
 namespace Framework.Configuration.BLL;
 

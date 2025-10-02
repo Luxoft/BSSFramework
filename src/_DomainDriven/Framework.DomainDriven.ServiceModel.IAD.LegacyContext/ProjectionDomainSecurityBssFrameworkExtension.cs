@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 
-using SecuritySystem;
-
 using Microsoft.Extensions.DependencyInjection;
+
+using SecuritySystem.DependencyInjection;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 

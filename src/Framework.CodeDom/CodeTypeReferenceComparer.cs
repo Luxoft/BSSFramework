@@ -2,8 +2,6 @@
 
 using CommonFramework;
 
-using Framework.Core;
-
 namespace Framework.CodeDom;
 
 public class CodeTypeReferenceComparer : IEqualityComparer<CodeTypeReference>

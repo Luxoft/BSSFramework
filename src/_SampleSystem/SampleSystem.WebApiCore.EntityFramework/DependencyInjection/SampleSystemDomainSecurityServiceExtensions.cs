@@ -1,6 +1,4 @@
 ﻿using SecuritySystem;
-using SecuritySystem.DependencyInjection;
-using SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 using SampleSystem.Domain;
 

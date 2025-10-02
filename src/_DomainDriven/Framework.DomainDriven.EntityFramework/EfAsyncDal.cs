@@ -1,7 +1,8 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+
+using Framework.Core;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.Lock;
-using Framework.GenericQueryable;
 using Framework.Persistent;
 
 using GenericQueryable;
@@ -24,7 +25,7 @@ public class EfAsyncDal<TDomainObject, TIdent>(
         var queryable = (IQueryable<TDomainObject>)this.NativeSession.Set<TDomainObject>();
 
         var queryProvider = (queryable.Provider as VisitedEfQueryProvider)
-                            .FromMaybe("Register VisitedQueryProvider in Nhib configuration");
+                            .FromMaybe(() => "Register VisitedQueryProvider in Nhib configuration");
 
         queryProvider.Visitor = expressionVisitorContainer.Visitor;
         queryProvider.GenericQueryableExecutor = genericQueryableExecutor;

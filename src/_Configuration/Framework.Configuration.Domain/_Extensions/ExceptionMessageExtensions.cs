@@ -1,7 +1,5 @@
 ﻿using CommonFramework;
 
-using Framework.Core;
-
 namespace Framework.Configuration.Domain;
 
 public static class ExceptionMessageExtensions

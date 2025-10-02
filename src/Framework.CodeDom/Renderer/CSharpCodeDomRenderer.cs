@@ -199,7 +199,7 @@ public class CSharpCodeDomRenderer : CodeDomProviderRenderer
 
             var renderedStatements = statement.Statements.OfType<CodeStatement>().ToArray(st => $"{this.NextDeepOffset}{this.WithoutDeepOperation(() => this.Renderer.Render(this.VisitStatement(st)))}");
 
-            var renderedIterator = statement.Iterator.FromMaybe("Iterator not initialized")
+            var renderedIterator = statement.Iterator.FromMaybe(() => "Iterator not initialized")
                                             .Pipe(iterator => this.Renderer.Render(iterator.Type.BaseType == VoidType.BaseType ? new CodeParameterDeclarationExpression("var", iterator.Name) : iterator));
 
             var body = new[] { $"{this.DeepOffset}{{" }.Concat(renderedStatements).Concat(new[] { $"{this.DeepOffset}}}" }).Concat(str => Environment.NewLine + str.SkipLast(Environment.NewLine, false));

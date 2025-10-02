@@ -12,13 +12,14 @@ using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.Tracking;
 using Framework.Events;
 using Framework.Exceptions;
-using Framework.HierarchicalExpand;
 using Framework.Notification;
 using Framework.Persistent;
 using Framework.QueryLanguage;
 using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using SecuritySystem.HierarchicalExpand;
 
 namespace Framework.Configuration.BLL;
 

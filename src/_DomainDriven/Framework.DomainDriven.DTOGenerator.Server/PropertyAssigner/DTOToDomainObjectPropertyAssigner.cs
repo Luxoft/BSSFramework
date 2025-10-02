@@ -121,7 +121,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration> : ServerPropertyA
                        {
                                TrueStatements =
                                {
-                                       typeof(CommonFramework.EnumerableExtensions).ToTypeReferenceExpression()
+                                       typeof(CoreEnumerableExtensions).ToTypeReferenceExpression()
                                                                                   .ToMethodInvokeExpression(
                                                                                    "ToList",
                                                                                    sourcePropertyRef,

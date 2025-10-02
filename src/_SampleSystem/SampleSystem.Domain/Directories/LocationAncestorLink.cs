@@ -1,10 +1,8 @@
 ﻿using Framework.DomainDriven.Serialization;
-using Framework.Persistent;
 
 namespace SampleSystem.Domain;
 
-public class LocationAncestorLink : AuditPersistentDomainObjectBase,
-                                    IModifiedHierarchicalAncestorLink<Location, LocationToAncestorChildView, Guid>
+public class LocationAncestorLink : AuditPersistentDomainObjectBase
 {
     private Location ancestor;
 

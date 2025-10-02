@@ -4,8 +4,6 @@ using CommonFramework;
 
 using SExpressions = System.Linq.Expressions;
 
-using Framework.Core;
-
 namespace Framework.QueryLanguage;
 
 [DataContract]

@@ -2,7 +2,6 @@
 using System.Reflection;
 
 using Framework.CodeDom;
-using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
 
 using CommonFramework;

@@ -1,7 +1,5 @@
 ﻿using CommonFramework;
 
-using Framework.Core;
-
 using Unity.Interception.InterceptionBehaviors;
 using Unity.Interception.Interceptors.TypeInterceptors.VirtualMethodInterception;
 using Unity.Interception.PolicyInjection.Pipeline;

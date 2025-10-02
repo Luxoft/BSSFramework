@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Authorization.Notification.Abstract</PackageId>
+    <RootNamespace>Framework.Authorization.Notification</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="IvAt.SecuritySystem.Abstractions" />

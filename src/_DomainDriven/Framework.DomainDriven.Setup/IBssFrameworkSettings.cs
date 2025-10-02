@@ -1,6 +1,7 @@
 ﻿using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.Lock;
 using Framework.Events;
+
 using SecuritySystem.DependencyInjection;
 
 namespace Framework.DomainDriven.Setup;

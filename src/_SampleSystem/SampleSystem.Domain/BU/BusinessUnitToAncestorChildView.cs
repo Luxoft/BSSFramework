@@ -1,10 +1,9 @@
-﻿using Framework.Persistent;
-using Framework.Persistent.Mapping;
+﻿using Framework.Persistent.Mapping;
 
 namespace SampleSystem.Domain;
 
 [View]
-public class BusinessUnitToAncestorChildView : AuditPersistentDomainObjectBase, IHierarchicalToAncestorOrChildLink<BusinessUnit, Guid>
+public class BusinessUnitToAncestorChildView : AuditPersistentDomainObjectBase
 {
     private BusinessUnit childOrAncestor;
 

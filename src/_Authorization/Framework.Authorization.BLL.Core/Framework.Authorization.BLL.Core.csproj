@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Authorization.BLL.Core</PackageId>
+    <RootNamespace>Framework.Authorization.BLL</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

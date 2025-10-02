@@ -2,8 +2,6 @@
 
 using CommonFramework;
 
-using Framework.Core;
-
 namespace Framework.Notification;
 
 public class MessageTemplateNotification

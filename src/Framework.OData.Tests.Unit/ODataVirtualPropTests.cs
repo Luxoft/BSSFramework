@@ -1,12 +1,8 @@
 ﻿using CommonFramework;
 using CommonFramework.ExpressionComparers;
 
-using Framework.Core;
-
 using NUnit.Framework;
 using FluentAssertions;
-
-using Framework.Core.ExpressionComparers;
 
 namespace Framework.OData.Tests.Unit;
 

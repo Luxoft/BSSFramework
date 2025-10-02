@@ -2,7 +2,6 @@
 
 using CommonFramework;
 
-using Framework.Core;
 using Framework.Notification.DTO;
 using Framework.NotificationCore.Extensions;
 using Framework.NotificationCore.Settings;

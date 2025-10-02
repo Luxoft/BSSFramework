@@ -1,11 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
 using Framework.Events;
-using SecuritySystem.DependencyInjection;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.ApplicationCore;
 using Framework.DomainDriven.ApplicationCore.DALListeners;
 using Framework.DomainDriven.Lock;
+
+using SecuritySystem.DependencyInjection;
 
 namespace Framework.DomainDriven.Setup;
 

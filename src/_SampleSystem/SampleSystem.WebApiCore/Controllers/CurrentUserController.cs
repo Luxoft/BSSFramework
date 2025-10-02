@@ -1,6 +1,4 @@
-﻿using SecuritySystem;
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 using SecuritySystem.Services;
 

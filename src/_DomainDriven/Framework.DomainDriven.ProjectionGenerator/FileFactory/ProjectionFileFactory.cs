@@ -280,7 +280,7 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
                                     Statements = { elementType.ToTypeReference().ToObjectCreateExpression(param.ToVariableReferenceExpression()).ToMethodReturnStatement() }
                             });
 
-                        yield return typeof(CommonFramework.EnumerableExtensions)
+                        yield return typeof(CoreEnumerableExtensions)
                                      .ToTypeReferenceExpression()
                                      .ToMethodInvokeExpression("ToList", sourcePropExpr, lambda)
                                      .ToAssignStatement(targetMemberExpr);

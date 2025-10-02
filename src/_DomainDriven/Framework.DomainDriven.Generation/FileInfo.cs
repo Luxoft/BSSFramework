@@ -2,10 +2,6 @@
 
 using CommonFramework;
 
-using Framework.Core;
-
-
-
 namespace Framework.DomainDriven.Generation;
 
 public class FileInfo

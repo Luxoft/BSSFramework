@@ -3,7 +3,6 @@
 using CommonFramework;
 
 using Framework.CodeDom;
-using Framework.Core;
 using Framework.DomainDriven.ServiceModelGenerator;
 
 using Microsoft.AspNetCore.Mvc;

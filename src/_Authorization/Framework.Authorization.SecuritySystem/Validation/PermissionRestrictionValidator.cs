@@ -3,7 +3,7 @@
 using FluentValidation;
 
 using Framework.Authorization.Domain;
-using Framework.Core;
+
 using SecuritySystem;
 using SecuritySystem.ExternalSystem.SecurityContextStorage;
 using SecuritySystem.Services;

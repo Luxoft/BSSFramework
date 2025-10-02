@@ -1,7 +1,5 @@
 ﻿using CommonFramework;
 
-using Framework.Core;
-
 namespace Framework.Projection.Lambda;
 
 internal static class ProjectionExtensions

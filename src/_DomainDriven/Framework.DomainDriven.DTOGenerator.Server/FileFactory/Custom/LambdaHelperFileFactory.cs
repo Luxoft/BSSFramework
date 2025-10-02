@@ -155,7 +155,7 @@ public class LambdaHelperFileFactory<TConfiguration> : FileFactory<IServerGenera
                            },
                            Statements =
                            {
-                                   typeof(CommonFramework.EnumerableExtensions)
+                                   typeof(CoreEnumerableExtensions)
                                            .ToTypeReferenceExpression()
                                            .ToMethodInvokeExpression("ToList",
 
@@ -192,7 +192,7 @@ public class LambdaHelperFileFactory<TConfiguration> : FileFactory<IServerGenera
                            },
                            Statements =
                            {
-                                   typeof(CommonFramework.EnumerableExtensions)
+                                   typeof(CoreEnumerableExtensions)
                                            .ToTypeReferenceExpression()
                                            .ToMethodInvokeExpression("ToList",
 

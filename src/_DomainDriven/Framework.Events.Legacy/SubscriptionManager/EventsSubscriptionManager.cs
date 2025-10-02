@@ -1,7 +1,5 @@
 ﻿using CommonFramework;
 
-using Framework.Core;
-
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Events.Legacy;

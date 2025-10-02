@@ -17,6 +17,7 @@
     <PackageVersion Include="IvAt.SecuritySystem" Version="1.2.2" />
     <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="1.2.2" />
     <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="1.2.2" />
+    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="1.2.2" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="1.5.8.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Middlewares" Version="1.5.8.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Events" Version="1.5.8.1" />

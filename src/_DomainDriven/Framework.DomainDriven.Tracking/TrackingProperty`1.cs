@@ -2,8 +2,6 @@
 
 using CommonFramework.Maybe;
 
-using Framework.Core;
-
 namespace Framework.DomainDriven.Tracking;
 
 /// <summary>

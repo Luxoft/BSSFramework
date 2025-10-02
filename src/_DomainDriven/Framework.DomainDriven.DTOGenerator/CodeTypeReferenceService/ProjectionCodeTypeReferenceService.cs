@@ -2,8 +2,6 @@
 
 using CommonFramework;
 
-using Framework.Core;
-
 namespace Framework.DomainDriven.DTOGenerator;
 
 public class ProjectionCodeTypeReferenceService<TConfiguration> : MainCodeTypeReferenceService<TConfiguration>

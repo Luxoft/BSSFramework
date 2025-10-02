@@ -2,7 +2,6 @@
 
 using CommonFramework;
 
-using Framework.Core;
 using Framework.DomainDriven;
 
 using SampleSystem.Domain;

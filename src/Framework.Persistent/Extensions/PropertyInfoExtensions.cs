@@ -2,8 +2,6 @@
 
 using CommonFramework;
 
-using Framework.Core;
-
 namespace Framework.Persistent;
 
 public static class PropertyInfoExtensions

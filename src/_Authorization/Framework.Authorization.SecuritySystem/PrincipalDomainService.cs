@@ -4,7 +4,6 @@ using FluentValidation;
 
 using Framework.Authorization.Domain;
 using Framework.Authorization.SecuritySystemImpl.Validation;
-using Framework.Core;
 using Framework.DomainDriven.Repository;
 using Framework.Exceptions;
 using Framework.Persistent;

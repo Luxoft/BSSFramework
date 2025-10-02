@@ -4,7 +4,6 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.CodeDom;
-using Framework.Core;
 
 namespace Framework.DomainDriven.DTOGenerator;
 

@@ -1,6 +1,5 @@
 ﻿using CommonFramework;
 
-using Framework.Core;
 using Framework.DomainDriven.DAL.Sql;
 using Framework.DomainDriven.DBGenerator.Contracts;
 using Framework.DomainDriven.DBGenerator.ScriptGenerators;

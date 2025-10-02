@@ -8,7 +8,7 @@ namespace SampleSystem.Domain.Inline;
 
 [ExpandValidation]
 [DataContract(Namespace = "")]
-public class Fio : FioShort, ICloneable<Fio>
+public class Fio : FioShort, ICloneable
 {
     private string middleName;
 

@@ -339,7 +339,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         var internalPropertyValidatorType = typeof(UniqueCollectionValidator<,,,>).MakeGenericType(property.ReflectedType, property.PropertyType, elementType, groupElementType);
 
 
-        var trimNullMethod = typeof(StringExtensions)
+        var trimNullMethod = typeof(CoreStringExtensions)
                              .ToTypeReferenceExpression()
                              .ToMethodReferenceExpression("TrimNull");
 

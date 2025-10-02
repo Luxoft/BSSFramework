@@ -1,8 +1,6 @@
 ﻿using System.CodeDom;
 using System.Runtime.Serialization;
 
-using CommonFramework;
-
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.Generation;

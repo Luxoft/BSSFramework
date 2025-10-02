@@ -2,6 +2,7 @@
 
 using SampleSystem.Domain;
 
+using SecuritySystem.DomainServices;
 using SecuritySystem.Providers;
 
 namespace SampleSystem.Security.Services;

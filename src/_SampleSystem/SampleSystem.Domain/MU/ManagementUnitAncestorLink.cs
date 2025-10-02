@@ -1,11 +1,8 @@
 ﻿using Framework.DomainDriven.Serialization;
-using Framework.Persistent;
 
 namespace SampleSystem.Domain;
 
-public class ManagementUnitAncestorLink :
-        AuditPersistentDomainObjectBase,
-        IModifiedHierarchicalAncestorLink<ManagementUnit, ManagementUnitToAncestorChildView, Guid>
+public class ManagementUnitAncestorLink : AuditPersistentDomainObjectBase
 {
     private ManagementUnit ancestor;
     private ManagementUnit child;

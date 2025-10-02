@@ -1,7 +1,5 @@
-﻿using Framework.Core.Services;
-using Framework.DomainDriven;
+﻿using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
-using Framework.GenericQueryable;
 
 using GenericQueryable;
 

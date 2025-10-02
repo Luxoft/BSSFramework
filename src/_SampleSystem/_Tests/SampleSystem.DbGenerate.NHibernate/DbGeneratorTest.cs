@@ -2,8 +2,6 @@
 using Framework.DomainDriven.DBGenerator;
 using Framework.DomainDriven.NHibernate;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using SampleSystem.CodeGenerate;
 using SampleSystem.Generated.DAL.NHibernate;
 

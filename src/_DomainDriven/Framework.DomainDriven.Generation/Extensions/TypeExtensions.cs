@@ -1,6 +1,4 @@
-﻿using Framework.Core;
-
-using CommonFramework;
+﻿using CommonFramework;
 
 namespace Framework.DomainDriven;
 

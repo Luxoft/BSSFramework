@@ -7,8 +7,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Framework.Persistent;
-
 namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
 public class HierarchyObjectAncestorLink : PersistentDomainObjectBase, IModifiedHierarchicalAncestorLink<HierarchyObject, HierarchyObjectToAncestorOrChildLink, Guid>

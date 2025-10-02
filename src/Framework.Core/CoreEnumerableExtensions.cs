@@ -7,6 +7,73 @@ namespace Framework.Core;
 
 public static class CoreEnumerableExtensions
 {
+    public static void Merge<TSource, TTarget, TKey>(
+        this IEnumerable<TSource> source,
+        IEnumerable<TTarget> target,
+        Func<TTarget, TKey> getTargetKey,
+        Func<TSource, TKey> getSourceKey,
+        Func<TTarget, TSource> createFunc,
+        Action<IEnumerable<TSource>> removeAction,
+        Action<TTarget, TSource> mapAction,
+        Func<TKey, bool>? isDefaultKey = null)
+        where TKey : notnull
+    {
+        var isDefaultKeyF = isDefaultKey ?? (v => v.IsDefault());
+
+        var targetMap = target.ToDictionary(
+            s => isDefaultKeyF(getTargetKey(s))
+                     ? new object()
+                     : getTargetKey(s));
+        var removed = new List<TSource>();
+
+        foreach (var sourceItem in source.ToList())
+        {
+            var key = getSourceKey(sourceItem);
+            if (targetMap.TryGetValue(key, out var targetItem))
+            {
+                mapAction(targetItem, sourceItem);
+                targetMap.Remove(key);
+            }
+            else
+            {
+                removed.Add(sourceItem);
+            }
+        }
+
+        removeAction(removed);
+
+        foreach (var sourceItem in targetMap.Values)
+        {
+            var targetItem = createFunc(sourceItem);
+            mapAction(sourceItem, targetItem);
+        }
+    }
+
+    public static bool SequenceEqual<TSource, TOther>(this IEnumerable<TSource> first, IEnumerable<TOther> second, Func<TSource, TOther, bool> compareFunc)
+    {
+        using (var enumerator1 = first.GetEnumerator())
+        {
+            using (var enumerator2 = second.GetEnumerator())
+            {
+                while (enumerator1.MoveNext())
+                {
+                    if (!enumerator2.MoveNext() || !compareFunc(enumerator1.Current, enumerator2.Current))
+                        return false;
+                }
+                if (enumerator2.MoveNext())
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static IEnumerable<TSource> Except<TSource, TOther>(this IEnumerable<TSource> source, IEnumerable<TOther> other, Func<TSource, TOther, bool> equalsFunc)
+    {
+        var otherCache = other.ToArray();
+
+        return source.Where(sourceItem => !otherCache.Any(otherItem => equalsFunc(sourceItem, otherItem)));
+    }
 
     public static void Foreach<T>(this IEnumerable<T> source, Action<T, int> action)
     {

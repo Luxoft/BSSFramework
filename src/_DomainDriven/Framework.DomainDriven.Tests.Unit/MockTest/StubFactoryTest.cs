@@ -1,7 +1,5 @@
 ﻿using Framework.DomainDriven.UnitTest.Mock.StubProxy;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 namespace Framework.DomainDriven.UnitTest.MockTest;
 
 [TestClass]

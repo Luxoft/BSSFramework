@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Authorization.SecuritySystem.Abstract</PackageId>
+    <RootNamespace>Framework.Authorization.SecuritySystemImpl</RootNamespace>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 

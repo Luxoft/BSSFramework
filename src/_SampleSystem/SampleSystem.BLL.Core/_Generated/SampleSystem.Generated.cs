@@ -24,7 +24,7 @@ namespace SampleSystem.BLL
         where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.ISecurityProvider<TDomainObject> securityProvider) : 
+        public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider) : 
                 base(context, securityProvider)
         {
         }

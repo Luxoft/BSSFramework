@@ -1,5 +1,7 @@
 ﻿using System.Runtime.Serialization;
 
+using CommonFramework;
+
 namespace Framework.Core;
 
 [DataContract(Namespace = "")]

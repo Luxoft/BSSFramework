@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using CommonFramework.DependencyInjection;
+
+using FluentValidation;
 
 using Framework.Authorization.Domain;
 using Framework.Authorization.Environment.Security;
@@ -6,7 +8,6 @@ using Framework.Authorization.Notification;
 using Framework.Authorization.SecuritySystemImpl;
 using Framework.Authorization.SecuritySystemImpl.Initialize;
 using Framework.Authorization.SecuritySystemImpl.Validation;
-using Framework.DependencyInjection;
 using Framework.DomainDriven._Visitors;
 using SecuritySystem;
 using SecuritySystem.Credential;

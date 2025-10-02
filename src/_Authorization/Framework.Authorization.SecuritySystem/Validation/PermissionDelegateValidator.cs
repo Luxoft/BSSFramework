@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using CommonFramework;
+﻿using CommonFramework;
 
 using FluentValidation;
 

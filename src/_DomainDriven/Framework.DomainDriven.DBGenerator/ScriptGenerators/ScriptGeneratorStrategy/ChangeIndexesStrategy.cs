@@ -1,6 +1,5 @@
 ﻿using CommonFramework;
 
-using Framework.Core;
 using Framework.DomainDriven.DAL.Sql;
 using Framework.DomainDriven.DBGenerator.Team;
 using Framework.DomainDriven.Metadata;

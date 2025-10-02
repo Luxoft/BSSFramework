@@ -1,10 +1,8 @@
 ﻿using Framework.DomainDriven.Serialization;
-using Framework.Persistent;
 
 namespace SampleSystem.Domain;
 
-public class BusinessUnitAncestorLink : AuditPersistentDomainObjectBase,
-                                        IModifiedHierarchicalAncestorLink<BusinessUnit, BusinessUnitToAncestorChildView, Guid>
+public class BusinessUnitAncestorLink : AuditPersistentDomainObjectBase
 {
     private BusinessUnit ancestor;
 

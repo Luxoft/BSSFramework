@@ -2,6 +2,8 @@
 
 using Framework.Core;
 
+using CommonFramework;
+
 namespace Framework.Configuration.Domain;
 
 public class ExceptionMessageRootFilterModel : DomainObjectFilterModel<ExceptionMessage>

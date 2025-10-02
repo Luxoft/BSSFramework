@@ -2,7 +2,6 @@
 
 using CommonFramework.DictionaryCache;
 
-using Framework.Core;
 using Framework.DomainDriven;
 using SecuritySystem.Credential;
 

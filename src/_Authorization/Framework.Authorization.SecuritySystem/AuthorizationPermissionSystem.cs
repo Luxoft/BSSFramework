@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using CommonFramework;
 using Framework.Authorization.Domain;
-using Framework.Core;
+
 using Microsoft.Extensions.DependencyInjection;
 using SecuritySystem;
 using SecuritySystem.ExternalSystem;

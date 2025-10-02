@@ -1,6 +1,4 @@
-﻿using Framework.Persistent;
-
-namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
+﻿namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
 public class HierarchyObjectToAncestorOrChildLink : IHierarchicalToAncestorOrChildLink<HierarchyObject, Guid>
 {

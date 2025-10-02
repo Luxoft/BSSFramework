@@ -1,5 +1,4 @@
 ﻿using Framework.DomainDriven.EntityFramework;
-using Framework.GenericQueryable;
 
 using GenericQueryable;
 

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Framework.DomainDriven.DALExceptions;
+﻿using Framework.DomainDriven.DALExceptions;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.NHibernate.SqlExceptionProcessors;
 using Framework.Exceptions;

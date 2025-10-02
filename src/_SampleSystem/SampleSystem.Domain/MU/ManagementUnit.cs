@@ -10,7 +10,6 @@ namespace SampleSystem.Domain;
 [BLLViewRole, BLLSaveRole(AllowCreate = false)]
 public class ManagementUnit :
         CommonUnitBase,
-        IDenormalizedHierarchicalPersistentSource<ManagementUnitAncestorLink, ManagementUnitToAncestorChildView, ManagementUnit, Guid>,
         IUnit<ManagementUnit>,
         IMaster<ManagementUnitAndBusinessUnitLink>,
         IMaster<ManagementUnitAndHRDepartmentLink>,

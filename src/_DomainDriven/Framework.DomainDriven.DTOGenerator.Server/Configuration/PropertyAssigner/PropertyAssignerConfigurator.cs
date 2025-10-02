@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
-using Framework.Core;
 using Framework.Security;
 
 using CommonFramework;

@@ -7,6 +7,8 @@ using Framework.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+using CommonFramework;
+
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 
 /// <summary>

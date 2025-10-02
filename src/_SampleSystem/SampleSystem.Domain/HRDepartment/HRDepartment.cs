@@ -1,7 +1,5 @@
 ﻿using CommonFramework;
 
-using Framework.Core;
-using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;

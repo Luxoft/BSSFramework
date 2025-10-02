@@ -1,7 +1,5 @@
 ﻿using CommonFramework;
 
-using Framework.Core;
-
 using Microsoft.SqlServer.Management.Common;
 
 namespace Framework.DomainDriven.DBGenerator;

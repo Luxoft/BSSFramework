@@ -2,8 +2,6 @@
 using Bss.Platform.Api.Middlewares;
 using Bss.Platform.Logging;
 
-using Framework.Configurator;
-using Framework.DependencyInjection;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.DomainDriven.WebApiNetCore.JsonConverter;
 using Framework.DomainDriven.WebApiNetCore.Swagger;

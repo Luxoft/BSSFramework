@@ -3,8 +3,6 @@
 using CommonFramework;
 using CommonFramework.DictionaryCache;
 
-using Framework.Core;
-
 using Hangfire.Common;
 
 namespace Framework.HangfireCore;

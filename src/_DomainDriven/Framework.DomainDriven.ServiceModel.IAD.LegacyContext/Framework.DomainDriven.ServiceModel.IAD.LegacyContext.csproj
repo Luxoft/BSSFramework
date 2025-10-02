@@ -9,6 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IvAt.SecuritySystem" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.BLL\Framework.Authorization.BLL.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Events\Framework.Authorization.Events.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.BLL\Framework.Configuration.BLL.csproj" />

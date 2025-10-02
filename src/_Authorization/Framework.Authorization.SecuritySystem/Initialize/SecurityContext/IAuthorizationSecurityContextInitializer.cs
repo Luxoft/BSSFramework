@@ -1,7 +1,7 @@
 ﻿using CommonFramework;
 
 using Framework.Authorization.Domain;
-using Framework.Core;
+
 using SecuritySystem;
 
 namespace Framework.Authorization.SecuritySystemImpl.Initialize;

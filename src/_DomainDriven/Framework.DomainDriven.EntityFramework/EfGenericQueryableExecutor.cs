@@ -1,6 +1,4 @@
-﻿using Framework.GenericQueryable;
-
-using GenericQueryable;
+﻿using GenericQueryable;
 
 using Microsoft.EntityFrameworkCore;
 

@@ -1,7 +1,4 @@
 ﻿using Framework.DomainDriven.ServiceModel.IAD;
-using SecuritySystem;
-using SecuritySystem.DependencyInjection;
-using SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.EnversBug1676;
@@ -9,6 +6,10 @@ using SampleSystem.Domain.ManualProjections;
 using SampleSystem.Domain.Projections;
 using SampleSystem.Security.Metadata;
 using SampleSystem.Security.Services;
+
+using SecuritySystem;
+using SecuritySystem.DependencyInjection;
+using SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 namespace SampleSystem.Security;
 

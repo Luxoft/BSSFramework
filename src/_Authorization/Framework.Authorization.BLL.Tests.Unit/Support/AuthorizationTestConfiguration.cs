@@ -6,7 +6,7 @@ using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.UnitTest.Mock;
 using Framework.DomainDriven.UnitTest.Mock.StubProxy;
 using Framework.Events;
-using SecuritySystem;
+
 using SecuritySystem.ExternalSystem.SecurityContextStorage;
 using Framework.Validation;
 

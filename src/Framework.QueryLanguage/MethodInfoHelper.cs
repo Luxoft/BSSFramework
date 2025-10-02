@@ -1,7 +1,5 @@
 ﻿using System.Reflection;
 
-using CommonFramework;
-
 namespace Framework.QueryLanguage;
 
 public static class MethodInfoHelper

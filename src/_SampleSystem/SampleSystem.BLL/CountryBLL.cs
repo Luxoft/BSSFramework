@@ -1,6 +1,4 @@
-﻿using SecuritySystem;
-
-using SampleSystem.Domain;
+﻿using SampleSystem.Domain;
 
 using SecuritySystem.Providers;
 

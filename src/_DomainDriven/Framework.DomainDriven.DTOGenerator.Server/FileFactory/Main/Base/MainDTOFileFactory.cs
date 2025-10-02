@@ -3,8 +3,6 @@ using System.Reflection;
 
 using CommonFramework;
 
-using Framework.Core;
-
 namespace Framework.DomainDriven.DTOGenerator.Server;
 
 public abstract class MainDTOFileFactory<TConfiguration> : DTOFileFactory<TConfiguration, MainDTOFileType>

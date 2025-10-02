@@ -1,7 +1,5 @@
 ﻿using CommonFramework;
 
-using Framework.Core;
-
 namespace SampleSystem.Domain.Projections;
 
 public partial class TestBusinessUnit

@@ -1,6 +1,4 @@
-﻿using CommonFramework;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public static class RangeExtensions
 {

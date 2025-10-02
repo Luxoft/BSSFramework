@@ -109,7 +109,7 @@ public class MainToStrictPropertyAssigner<TConfiguration> : PropertyAssigner<TCo
                        };
             });
 
-            var selectMethod = typeof(CommonFramework.EnumerableExtensions)
+            var selectMethod = typeof(CoreEnumerableExtensions)
                                .ToTypeReferenceExpression()
                                .ToMethodReferenceExpression("To" + this.Configuration.CollectionType.Name.TakeWhileNot("`"));
 

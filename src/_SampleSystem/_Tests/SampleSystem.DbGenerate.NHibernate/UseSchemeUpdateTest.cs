@@ -8,7 +8,6 @@ using Framework.DomainDriven.NHibernate;
 
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using NHibernate.Tool.hbm2ddl;
 

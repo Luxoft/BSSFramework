@@ -1,5 +1,4 @@
-﻿using Automation.ServiceEnvironment;
-using Automation.Utils.DatabaseUtils;
+﻿using Automation.Utils.DatabaseUtils;
 using Automation.Xunit;
 using Automation.Xunit.ServiceEnvironment;
 
@@ -8,7 +7,6 @@ using Bss.Testing.Xunit.Interfaces;
 
 using Framework.Configuration.BLL;
 using Framework.Core;
-using Framework.DependencyInjection;
 using Framework.Notification.DTO;
 
 using Microsoft.Extensions.Configuration;

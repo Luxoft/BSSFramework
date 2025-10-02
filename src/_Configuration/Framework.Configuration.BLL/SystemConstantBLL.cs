@@ -4,7 +4,6 @@ using CommonFramework;
 
 using Framework.ApplicationVariable;
 using Framework.Configuration.Domain;
-using Framework.Core;
 using Framework.DomainDriven.BLL;
 
 namespace Framework.Configuration.BLL;

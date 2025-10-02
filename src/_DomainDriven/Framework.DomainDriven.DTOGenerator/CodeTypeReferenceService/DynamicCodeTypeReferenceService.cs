@@ -2,7 +2,6 @@
 
 using CommonFramework;
 
-using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Persistent;
 

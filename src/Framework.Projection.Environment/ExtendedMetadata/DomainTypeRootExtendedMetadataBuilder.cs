@@ -2,8 +2,6 @@
 
 using CommonFramework;
 
-using Framework.Core;
-
 namespace Framework.Projection.Environment;
 
 public class DomainTypeRootExtendedMetadataBuilder : IDomainTypeRootExtendedMetadata

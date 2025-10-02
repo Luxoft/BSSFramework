@@ -1,6 +1,5 @@
 ﻿using CommonFramework;
 
-using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Restriction;

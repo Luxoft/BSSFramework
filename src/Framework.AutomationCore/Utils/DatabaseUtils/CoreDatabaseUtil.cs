@@ -5,8 +5,6 @@ using Automation.Utils.DatabaseUtils.Interfaces;
 
 using CommonFramework;
 
-using Framework.Core;
-
 using MartinCostello.SqlLocalDb;
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Management.Smo;

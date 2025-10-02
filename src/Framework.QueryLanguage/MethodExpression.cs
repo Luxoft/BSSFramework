@@ -3,8 +3,6 @@ using System.Runtime.Serialization;
 
 using CommonFramework;
 
-using Framework.Core;
-
 namespace Framework.QueryLanguage;
 
 [DataContract]

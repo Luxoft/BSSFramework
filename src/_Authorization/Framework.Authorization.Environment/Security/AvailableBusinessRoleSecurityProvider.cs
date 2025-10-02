@@ -14,10 +14,10 @@ using SecuritySystem.SecurityAccessor;
 namespace Framework.Authorization.Environment.Security;
 
 public class AvailableBusinessRoleSecurityProvider<TDomainObject>(
-    IExpressionEvaluator expressionEvaluator,
+    IExpressionEvaluatorStorage expressionEvaluatorStorage,
     IAvailablePermissionSource availablePermissionSource,
     IRelativeDomainPathInfo<TDomainObject, BusinessRole> toBusinessRolePathInfo)
-    : SecurityProvider<TDomainObject>(expressionEvaluator)
+    : SecurityProvider<TDomainObject>(expressionEvaluatorStorage)
 {
     public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } =
 

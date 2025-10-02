@@ -92,15 +92,18 @@ public static class CoreTypeExtensions
 
     }
 
-    public static List<FieldInfo> GetInstanseFieldsDeep(this Type type)
+    public static List<FieldInfo> GetInstanceFieldsDeep(this Type type)
     {
-        Type currentType = type;
-        List<FieldInfo> result = new List<FieldInfo>();
-        while ((currentType != null) && (currentType != typeof(object)))
+        var currentType = type;
+        var result = new List<FieldInfo>();
+
+        while (currentType != null && (currentType != typeof(object)))
         {
             result.AddRange(currentType.GetFields(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic));
+
             currentType = currentType.BaseType;
         }
+
         return result;
     }
 
@@ -303,7 +306,7 @@ public static class CoreTypeExtensions
 
                where typeof(T).IsAssignableFrom(prop.PropertyType)
 
-               select (T)prop.GetValue(null);
+               select (T)prop.GetValue(null)!;
     }
 
     public static PropertyInfo? GetProperty(this Type type, string propertyName, bool raiseIfNotFound)
@@ -348,7 +351,7 @@ public static class CoreTypeExtensions
         return type.GetMethod(methodName, bindingFlags, raiseIfNotFound ? () => new Exception($"Method \"{methodName}\" not found") : default(Func<Exception>));
     }
 
-    public static MethodInfo GetMethod(this Type type, string methodName, BindingFlags bindingFlags, Func<Exception>? raiseIfNotFoundException)
+    public static MethodInfo? GetMethod(this Type type, string methodName, BindingFlags bindingFlags, Func<Exception>? raiseIfNotFoundException)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (methodName == null) throw new ArgumentNullException(nameof(methodName));
@@ -375,7 +378,7 @@ public static class CoreTypeExtensions
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
-        return type.ToCSharpName(t => t.FullName);
+        return type.ToCSharpName(t => t.FullName!);
     }
 
     public static string ToCSharpShortName(this Type type)
@@ -401,7 +404,7 @@ public static class CoreTypeExtensions
         }
         else if (type.IsArray)
         {
-            return type.GetElementType().ToCSharpName(nameSelector) + "[" + new string(',', type.GetArrayRank() - 1) + "]";
+            return type.GetElementType()!.ToCSharpName(nameSelector) + "[" + new string(',', type.GetArrayRank() - 1) + "]";
         }
 
         return nameSelector(type);
@@ -426,7 +429,7 @@ public static class CoreTypeExtensions
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        if (!property.DeclaringType.IsAssignableFrom(type))
+        if (!property.DeclaringType!.IsAssignableFrom(type))
         {
             throw new Exception($"Type \"{property.DeclaringType}\" isn't assignable from \"{type}\"");
         }
@@ -443,7 +446,7 @@ public static class CoreTypeExtensions
             }
             else
             {
-                var implMethod = type.GetInterfaceMapDictionary(property.DeclaringType)[property.GetMethod];
+                var implMethod = type.GetInterfaceMapDictionary(property.DeclaringType)[property.GetMethod!];
 
                 var implMethods = new[] { implMethod }.Concat(
 
@@ -455,7 +458,7 @@ public static class CoreTypeExtensions
 
                                           from prop in t.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
 
-                                          where implMethods.Contains(prop.GetMethod)
+                                          where implMethods.Contains(prop.GetMethod!)
 
                                           select prop;
 
@@ -468,7 +471,7 @@ public static class CoreTypeExtensions
 
                                       from prop in t.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
 
-                                      where prop.GetMethod.GetBaseDefinition() == property.GetMethod.GetBaseDefinition()
+                                      where prop.GetMethod!.GetBaseDefinition() == property.GetMethod!.GetBaseDefinition()
 
                                       select prop;
 
@@ -512,7 +515,7 @@ public static class CoreTypeExtensions
         }
     }
 
-    public static Type GetSuperSet(this Type type, Type otherType, bool safe)
+    public static Type? GetSuperSet(this Type type, Type otherType, bool safe)
     {
         var res = type.IsSubsetOf(otherType) ? otherType : otherType.IsSubsetOf(type) ? type : null;
 
@@ -553,7 +556,7 @@ public static class CoreTypeExtensions
         return type.GetAllInterfaces().SelectMany(t => t.GetProperties());
     }
 
-    public static Type[] GetInterfaceImplementationArguments(this Type type, Type interfaceType)
+    public static Type[]? GetInterfaceImplementationArguments(this Type type, Type interfaceType)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (interfaceType == null) throw new ArgumentNullException(nameof(interfaceType));
@@ -569,7 +572,7 @@ public static class CoreTypeExtensions
         return type.GetMethod(methodName, raiseIfNotFound ? () => new Exception($"Method \"{methodName}\" not found") : default(Func<Exception>));
     }
 
-    public static MethodInfo? GetMethod(this Type type, string methodName, Func<Exception> raiseIfNotFoundException)
+    public static MethodInfo? GetMethod(this Type type, string methodName, Func<Exception>? raiseIfNotFoundException)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (methodName == null) throw new ArgumentNullException(nameof(methodName));

@@ -1,7 +1,7 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
 
-using Framework.Core;
+using CommonFramework;
 
 namespace Framework.DomainDriven.DTOGenerator;
 

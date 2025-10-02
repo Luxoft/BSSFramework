@@ -7,6 +7,7 @@ using CommonFramework;
 using Framework.Authorization.Notification;
 using Framework.DomainDriven.BLL;
 using SecuritySystem;
+using SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 namespace Framework.Authorization.BLL;
 
@@ -41,37 +42,35 @@ public class LegacyNotificationPrincipalExtractor(
             {
                 var tailGroups = notificationFilterGroups.Skip(1).ToArray();
 
-                var firstGroupExternalSource = this.Context.SecurityContextStorage.GetTyped(firstGroup.SecurityContextType);
+                var firstGroupExternalSource = this.Context.SecurityContextStorage.GetTyped<Guid>(firstGroup.SecurityContextType);
 
                 foreach (var preExpandedIdent in firstGroup.Idents)
                 {
-                    throw new Exception("Use CommonFramework");
+                    var withExpandPrincipalsRequest = from expandedIdent in firstGroupExternalSource.GetSecurityContextsWithMasterExpand(preExpandedIdent)
 
-                    //var withExpandPrincipalsRequest = from expandedIdent in firstGroupExternalSource.GetSecurityContextsWithMasterExpand(preExpandedIdent)
+                                                      let newFirstGroup = new NotificationFilterGroup(firstGroup.SecurityContextType, [expandedIdent.Id], firstGroup.ExpandType.WithoutHierarchical())
 
-                    //                                  let newFirstGroup = new NotificationFilterGroup(firstGroup.SecurityContextType, [expandedIdent.Id], firstGroup.ExpandType.WithoutHierarchical())
+                                                      let principals = this.GetDirectNotificationPrincipals(baseNotificationFilter, new[] { newFirstGroup }.Concat(tailGroups)).ToArray()
 
-                    //                                  let principals = this.GetDirectNotificationPrincipals(baseNotificationFilter, new[] { newFirstGroup }.Concat(tailGroups)).ToArray()
+                                                      where principals.Any()
 
-                    //                                  where principals.Any()
+                                                      select principals;
 
-                    //                                  select principals;
+                    Principal[] withExpandPrincipals;
 
-                    //Principal[] withExpandPrincipals;
+                    if (firstGroup.ExpandType == NotificationExpandType.All)
+                    {
+                        withExpandPrincipals = withExpandPrincipalsRequest.SelectMany(z => z).ToArray();
+                    }
+                    else
+                    {
+                        withExpandPrincipals = withExpandPrincipalsRequest.FirstOrDefault();
+                    }
 
-                    //if (firstGroup.ExpandType == NotificationExpandType.All)
-                    //{
-                    //    withExpandPrincipals = withExpandPrincipalsRequest.SelectMany(z => z).ToArray();
-                    //}
-                    //else
-                    //{
-                    //    withExpandPrincipals = withExpandPrincipalsRequest.FirstOrDefault();
-                    //}
-
-                    //if (withExpandPrincipals != null)
-                    //{
-                    //    yield return withExpandPrincipals;
-                    //}
+                    if (withExpandPrincipals != null)
+                    {
+                        yield return withExpandPrincipals;
+                    }
                 }
             }
             else

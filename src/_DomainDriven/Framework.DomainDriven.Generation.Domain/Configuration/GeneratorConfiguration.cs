@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using CommonFramework;
 using CommonFramework.Maybe;
 
-using Framework.Core;
 using Framework.Exceptions;
 
 namespace Framework.DomainDriven.Generation.Domain;

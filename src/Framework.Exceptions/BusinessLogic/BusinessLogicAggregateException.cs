@@ -1,7 +1,5 @@
 ﻿using CommonFramework;
 
-using Framework.Core;
-
 namespace Framework.Exceptions;
 
 public class BusinessLogicAggregateException : BusinessLogicException, IAggregateException<BusinessLogicException>

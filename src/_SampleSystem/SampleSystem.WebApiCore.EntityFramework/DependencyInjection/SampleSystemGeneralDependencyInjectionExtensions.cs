@@ -4,7 +4,6 @@ using Framework.DomainDriven.EntityFramework;
 using Framework.DomainDriven.Setup;
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 using SampleSystem.Domain;
 using SampleSystem.Security;

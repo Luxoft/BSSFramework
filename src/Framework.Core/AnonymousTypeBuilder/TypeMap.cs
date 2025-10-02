@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 
+using CommonFramework;
+
 namespace Framework.Core;
 
 public class TypeMap : TypeMap<TypeMapMember>, IEquatable<TypeMap>, ISwitchNameObject<TypeMap>

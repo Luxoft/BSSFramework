@@ -1,7 +1,5 @@
 ﻿using CommonFramework;
 
-using Framework.Core;
-
 namespace Framework.Parsing;
 
 public class ParserTableRow<TInput, TValue>

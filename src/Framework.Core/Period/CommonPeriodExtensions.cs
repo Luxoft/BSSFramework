@@ -1,5 +1,7 @@
 ﻿using System.Globalization;
 
+using CommonFramework;
+
 namespace Framework.Core;
 
 /// <summary>

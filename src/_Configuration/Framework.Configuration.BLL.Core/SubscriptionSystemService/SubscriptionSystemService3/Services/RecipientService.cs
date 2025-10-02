@@ -2,7 +2,6 @@
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
-using Framework.Core;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

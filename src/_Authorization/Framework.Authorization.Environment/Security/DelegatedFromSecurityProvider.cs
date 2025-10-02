@@ -9,10 +9,10 @@ using SecuritySystem.RelativeDomainPathInfo;
 namespace Framework.Authorization.Environment.Security;
 
 public class DelegatedFromSecurityProvider<TDomainObject>(
-    IExpressionEvaluator expressionEvaluator,
+    IExpressionEvaluatorStorage expressionEvaluatorStorage,
     ICurrentPrincipalSource currentPrincipalSource,
     [FromKeyedServices(nameof(Permission.DelegatedFrom))] IRelativeDomainPathInfo<TDomainObject, Permission> toPermissionPathInfo)
     : CurrentPrincipalSecurityProvider<TDomainObject>(
-        expressionEvaluator,
+        expressionEvaluatorStorage,
         currentPrincipalSource,
         toPermissionPathInfo.Select(permission => permission.Principal));

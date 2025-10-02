@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.DBGenerator;

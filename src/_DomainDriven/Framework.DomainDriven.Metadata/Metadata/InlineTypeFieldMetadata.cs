@@ -68,7 +68,7 @@ public class InlineTypeFieldMetadata : FieldMetadata
     public IEnumerable<PrimitiveTypeFieldMetadata> GetPrimitiveTypeFieldMetadata (Type declarationType)
     {
         var parentPrefix = this.Parent.Maybe(z => z.Name, string.Empty);
-        return this.Type.GetInstanseFieldsDeep()
+        return this.Type.GetInstanceFieldsDeep()
                    .Select(z => new PrimitiveTypeFieldMetadata(parentPrefix+z.Name, z.FieldType, z.GetAttributes(declarationType)
                                                                        .Concat(z.GetAttributes(z.DeclaringType)), this.DomainTypeMetadata, z.Name.ToLower() == "id"));
     }

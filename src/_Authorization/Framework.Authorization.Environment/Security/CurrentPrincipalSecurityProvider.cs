@@ -12,10 +12,10 @@ using SecuritySystem.SecurityAccessor;
 namespace Framework.Authorization.Environment.Security;
 
 public class CurrentPrincipalSecurityProvider<TDomainObject>(
-    IExpressionEvaluator expressionEvaluator,
+    IExpressionEvaluatorStorage expressionEvaluatorStorage,
     ICurrentPrincipalSource currentPrincipalSource,
     IRelativeDomainPathInfo<TDomainObject, Principal> toPrincipalPathInfo)
-    : SecurityProvider<TDomainObject>(expressionEvaluator)
+    : SecurityProvider<TDomainObject>(expressionEvaluatorStorage)
 {
     public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } =
 

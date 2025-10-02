@@ -75,59 +75,6 @@ public static class CoreEnumerableExtensions
         return source.Where(sourceItem => !otherCache.Any(otherItem => equalsFunc(sourceItem, otherItem)));
     }
 
-    public static void Foreach<T>(this IEnumerable<T> source, Action<T, int> action)
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (action == null) throw new ArgumentNullException(nameof(action));
-
-        foreach (var pair in source.Select((value, index) => new { Value = value, Index = index }))
-        {
-            action(pair.Value, pair.Index);
-        }
-    }
-
-    public static TSource? SingleOrDefault<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, Func<IReadOnlyCollection<TSource>, Exception> manyExceptionHandler)
-    {
-        if (source == null)
-        {
-            throw new ArgumentNullException(nameof(source));
-        }
-
-        if (predicate == null)
-        {
-            throw new ArgumentNullException(nameof(predicate));
-        }
-
-        if (manyExceptionHandler == null)
-        {
-            throw new ArgumentNullException(nameof(manyExceptionHandler));
-        }
-
-        return source.Where(predicate).SingleOrDefault(manyExceptionHandler);
-    }
-
-    public static TSource? SingleOrDefault<TSource>(this IEnumerable<TSource> source, Func<IReadOnlyCollection<TSource>, Exception> manyExceptionHandler)
-    {
-        if (source == null)
-        {
-            throw new ArgumentNullException(nameof(source));
-        }
-
-        if (manyExceptionHandler == null)
-        {
-            throw new ArgumentNullException(nameof(manyExceptionHandler));
-        }
-
-        var items = source.ToList();
-
-        if (items.Count > 1)
-        {
-            throw manyExceptionHandler(items.ToReadOnlyCollection());
-        }
-
-        return items.SingleOrDefault();
-    }
-
     public static IGrouping<TKey, TElement> ToGroup<TKey, TElement>(this TKey key, IEnumerable<TElement> values)
     {
         if (values == null) throw new ArgumentNullException(nameof(values));
@@ -138,12 +85,6 @@ public static class CoreEnumerableExtensions
     public static IGrouping<TKey, TElement> ToGroup<TKey, TElement>(this KeyValuePair<TKey, IEnumerable<TElement>> pair)
     {
         return new PairGrouping<TKey, TElement>(pair.Value.ToList(), pair.Key);
-    }
-
-    public static bool HasAttribute<T>(this IEnumerable<Attribute> source)
-        where T : Attribute
-    {
-        return source.OfType<T>().Any();
     }
 
     public static IEnumerable<T> IfEmpty<T>(this IEnumerable<T> source, Func<IEnumerable<T>> func)
@@ -199,46 +140,6 @@ public static class CoreEnumerableExtensions
         {
             return enumerator.MoveNext() ? enumerator.Current : func();
         }
-    }
-
-    public static IReadOnlyCollection<T> ToReadOnlyCollectionI<T>(this IEnumerable<T> source)
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
-        return source.ToList();
-    }
-
-    public static ReadOnlyDictionary<TKey, TValue> ToReadOnlyDictionary<TSource, TKey, TValue>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TValue> elementSelector)
-        where TKey : notnull
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
-        return new ReadOnlyDictionary<TKey, TValue>(source.ToDictionary(keySelector, elementSelector));
-    }
-
-    public static ReadOnlyDictionary<TKey, TSource> ToReadOnlyDictionary<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
-        where TKey : notnull
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
-        return source.ToReadOnlyDictionary(keySelector, v => v);
-    }
-
-    public static IReadOnlyDictionary<TKey, TValue> ToReadOnlyDictionaryI<TValue, TKey>(this IEnumerable<TValue> source, Func<TValue, TKey> keySelector)
-        where TKey : notnull
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
-
-        return source.ToReadOnlyDictionary(keySelector);
-    }
-
-    public static IReadOnlyDictionary<TKey, TValue> ToReadOnlyDictionaryI<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> source)
-        where TKey : notnull
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
-        return source.ToDictionary(pair => pair.Key, pair => pair.Value);
     }
 
     public static void Override<T>(this ICollection<T> source, IEnumerable<T> newItems)
@@ -351,61 +252,6 @@ public static class CoreEnumerableExtensions
         return source.Distinct(new PropertyEqualityComparer<T, TProperty>(getPropertyFunc));
     }
 
-    public static TSource Single<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, Func<Exception> emptyExceptionHandler, Func<Exception> manyExceptionHandler)
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (predicate == null) throw new ArgumentNullException(nameof(predicate));
-        if (emptyExceptionHandler == null) throw new ArgumentNullException(nameof(emptyExceptionHandler));
-        if (manyExceptionHandler == null) throw new ArgumentNullException(nameof(manyExceptionHandler));
-
-        return source.Where(predicate).Single(emptyExceptionHandler, manyExceptionHandler);
-    }
-
-    public static TSource Single<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, Func<Exception> emptyExceptionHandler)
-    {
-        return source.Single(predicate, emptyExceptionHandler, () => new InvalidOperationException("More Than One Element"));
-    }
-
-    public static TSource Single<TSource>(this IEnumerable<TSource> source, Func<Exception> emptyExceptionHandler)
-    {
-        return source.Single(emptyExceptionHandler, () => new InvalidOperationException("More Than One Element"));
-    }
-
-    public static TSource Single<TSource>(this IEnumerable<TSource> source, Func<Exception> emptyExceptionHandler, Func<Exception> manyExceptionHandler)
-    {
-        if (source == null)
-        {
-            throw new ArgumentNullException(nameof(source));
-        }
-
-        if (emptyExceptionHandler == null)
-        {
-            throw new ArgumentNullException(nameof(emptyExceptionHandler));
-        }
-
-        if (manyExceptionHandler == null)
-        {
-            throw new ArgumentNullException(nameof(manyExceptionHandler));
-        }
-
-        using (var enumerator = source.GetEnumerator())
-        {
-            if (!enumerator.MoveNext())
-            {
-                throw emptyExceptionHandler();
-            }
-
-            var current = enumerator.Current;
-
-            if (enumerator.MoveNext())
-            {
-                throw manyExceptionHandler();
-            }
-
-            return current;
-        }
-    }
-
     public static T Aggregate<T>(this IEnumerable<Func<T, T>> source, T startElement)
     {
         return source.Aggregate(startElement, (v, f) => f(v));
@@ -469,14 +315,6 @@ public static class CoreEnumerableExtensions
         if (source == null) throw new ArgumentNullException(nameof(source));
 
         return !source.Any();
-    }
-
-    public static ReadOnlyCollection<TResult> ToReadOnlyCollection<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-        return source.Select(selector).ToReadOnlyCollection();
     }
 
     public static TResult[] ToArray<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
@@ -559,12 +397,6 @@ public static class CoreEnumerableExtensions
         return selector(l1, l2);
     }
 
-    public static ReadOnlyCollection<TSource> ToReadOnlyCollection<TSource>(this IEnumerable<TSource> source)
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
-        return new ReadOnlyCollection<TSource>(source.ToArray());
-    }
 
     public static List<TResult> ToList<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
     {

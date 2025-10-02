@@ -1,7 +1,10 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
+using Framework.Core;
 using Framework.DomainDriven;
+
+using SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 namespace Framework.Authorization.BLL;
 
@@ -31,15 +34,13 @@ internal class PermissionDirectInternalFilterModel : IDomainObjectFilterModel<Pe
         else
         {
             var securityContextInfo = this.context.SecurityContextInfoSource.GetSecurityContextInfo(securityContextType.Id);
-            
-            throw new Exception("Use CommonFramework");
 
-            //var securityEntities = this.context.SecurityContextStorage.GetTyped(securityContextInfo.Type).GetSecurityContextsWithMasterExpand(securityContextId);
+            var securityEntities = this.context.SecurityContextStorage.GetTyped<Guid>(securityContextInfo.Type).GetSecurityContextsWithMasterExpand(securityContextId);
 
-            //var entityIdents = securityEntities.ToList(se => se.Id);
+            var entityIdents = securityEntities.ToList(se => se.Id);
 
-            //return permission => permission.Restrictions.All(filterItem => filterItem.SecurityContextType != securityContextType)
-            //                     || permission.Restrictions.Any(filterItem => entityIdents.Contains(filterItem.SecurityContextId));
+            return permission => permission.Restrictions.All(filterItem => filterItem.SecurityContextType != securityContextType)
+                                 || permission.Restrictions.Any(filterItem => entityIdents.Contains(filterItem.SecurityContextId));
         }
     }
 }

@@ -11,13 +11,13 @@
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="Dapper" Version="2.1.66" />
     <PackageVersion Include="Dapper.Contrib" Version="2.0.78" />
-    <PackageVersion Include="IvAt.CommonFramework" Version="1.2.2" />
-    <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="1.2.2" />
+    <PackageVersion Include="IvAt.CommonFramework" Version="1.2.4" />
+    <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="1.2.4" />
     <PackageVersion Include="IvAt.GenericQueryable" Version="1.1.0" />
-    <PackageVersion Include="IvAt.SecuritySystem" Version="1.2.2" />
-    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="1.2.2" />
-    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="1.2.2" />
-    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="1.2.2" />
+    <PackageVersion Include="IvAt.SecuritySystem" Version="1.2.4" />
+    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="1.2.4" />
+    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="1.2.4" />
+    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="1.2.4" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="1.5.8.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Middlewares" Version="1.5.8.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Events" Version="1.5.8.1" />

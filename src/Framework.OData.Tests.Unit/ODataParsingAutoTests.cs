@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using Framework.Core;
+
 using Framework.QueryLanguage;
 using NUnit.Framework;
 using FluentAssertions;

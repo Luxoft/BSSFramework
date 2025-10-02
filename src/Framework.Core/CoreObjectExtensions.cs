@@ -42,13 +42,6 @@ public static class CoreObjectExtensions
         return EqualityComparer<T>.Default.Equals(value, default(T));
     }
 
-    public static TResult MaybeNullable<TSource, TResult>(this TSource? source, Func<TSource, TResult> selector, TResult nullableResult = default(TResult))
-        where TSource : struct
-    {
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-        return null == source ? nullableResult : selector(source.Value);
-    }
     public static KeyValuePair<TKey, TValue> ToKeyValuePair<TKey, TValue>(this TKey key, TValue value)
     {
         return new KeyValuePair<TKey, TValue>(key, value);

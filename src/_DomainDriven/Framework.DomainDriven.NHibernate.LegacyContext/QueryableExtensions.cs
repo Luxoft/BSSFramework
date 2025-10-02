@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
+using CommonFramework;
 using CommonFramework.DictionaryCache;
 
 using Framework.Core;

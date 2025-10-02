@@ -130,11 +130,6 @@ public static class CoreExpressionExtensions
                    .GetValue(() => new ArgumentException("not member expression", nameof(expr)));
     }
 
-    public static Expression<Action<TSource, TProperty>> ToSetLambdaExpression<TSource, TProperty>(this Expression<Func<TSource, TProperty>> expr)
-    {
-        return expr.GetProperty().ToSetLambdaExpression<TSource, TProperty>();
-    }
-
     public static Expression ExtractBoxingValue(this Expression expression)
     {
         if (expression == null) throw new ArgumentNullException(nameof(expression));

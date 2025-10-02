@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.Core;
+using CommonFramework;
+
 using Framework.Core.Visitors;
 using Framework.Persistent;
 

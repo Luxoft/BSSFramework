@@ -6,8 +6,6 @@ using SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 using Microsoft.AspNetCore.Mvc;
 
-using SecuritySystem;
-
 namespace Framework.Authorization.WebApi;
 
 public partial class AuthSLJsonController

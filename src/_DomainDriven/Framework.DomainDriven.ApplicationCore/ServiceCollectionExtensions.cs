@@ -10,7 +10,6 @@ using Framework.Exceptions;
 using Framework.FinancialYear;
 
 using SecuritySystem;
-using SecuritySystem.PersistStorage;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -37,7 +36,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IEventOperationSender, EventOperationSender>();
 
         services.AddScoped<IQueryableSource, AsyncDalQueryableSource>();
-        services.AddScoped<IStorageWriter, DalStorageWriter>();
+        services.AddScoped<IGenericRepository, DalGenericRepository>();
 
         services.AddSingleton<IJobServiceEvaluatorFactory, JobServiceEvaluatorFactory>();
         services.AddSingleton(typeof(IJobServiceEvaluator<>), typeof(JobServiceEvaluator<>));

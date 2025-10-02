@@ -2,7 +2,6 @@
 
 using Framework.DomainDriven.DAL.Sql;
 using Framework.DomainDriven.Metadata;
-using Framework.Core;
 
 namespace Framework.DomainDriven.NHibernate.DALGenerator;
 

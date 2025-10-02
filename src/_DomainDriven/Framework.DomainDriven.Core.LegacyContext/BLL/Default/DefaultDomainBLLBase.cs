@@ -138,20 +138,17 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
 
     private Dictionary<TIdent, TIdent> ExpandEnumerableWithParents(IEnumerable<TIdent> projectionsIdents, HierarchicalExpandType parentExpandMode)
     {
-        throw new Exception("Use CommonFramework");
+        var hierarchicalObjectExpander = this.Context.HierarchicalObjectExpanderFactory.Create<TIdent>(typeof(TDomainObject));
 
-        //var hierarchicalObjectExpander = this.Context.HierarchicalObjectExpanderFactory.Create<TIdent>(typeof(TDomainObject));
-        //return projectionsIdents.Split(MaxItemsInSql)
-        //                        .SelectMany(z => hierarchicalObjectExpander.ExpandWithParents(z, parentExpandMode))
-        //                        .Distinct()
-        //                        .ToDictionary(z => z.Key, z => z.Value);
+        return projectionsIdents.Split(MaxItemsInSql)
+                                .SelectMany(z => hierarchicalObjectExpander.ExpandWithParents(z, parentExpandMode))
+                                .Distinct()
+                                .ToDictionary(z => z.Key, z => z.Value);
     }
 
     private Dictionary<TIdent, TIdent> ExpandQueryableWithParents(IQueryable<TIdent> projectionsIdents, HierarchicalExpandType parentExpandMode)
     {
-        throw new Exception("Use CommonFramework");
-
-        //return this.Context.HierarchicalObjectExpanderFactory.Create(typeof(TDomainObject)).ExpandWithParents(projectionsIdents, parentExpandMode);
+        return this.Context.HierarchicalObjectExpanderFactory.Create<TIdent>(typeof(TDomainObject)).ExpandWithParents(projectionsIdents, parentExpandMode);
     }
 
     public List<TDomainObject> GetListByIdents<TIdentity>(IEnumerable<TIdentity> idents, IFetchContainer<TDomainObject>? fetchContainer = null)

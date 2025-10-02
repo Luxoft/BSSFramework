@@ -1,7 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
-using Framework.Core;
+using CommonFramework;
+
 using Framework.QueryLanguage;
 
 namespace Framework.OData;

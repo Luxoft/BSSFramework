@@ -109,7 +109,7 @@ public static class CoreStringExtensions
         return (str ?? string.Empty).Trim();
     }
 
-    public static string TrimNull(this string? str, bool replaceNull)
+    public static string? TrimNull(this string? str, bool replaceNull)
     {
         if (replaceNull)
         {

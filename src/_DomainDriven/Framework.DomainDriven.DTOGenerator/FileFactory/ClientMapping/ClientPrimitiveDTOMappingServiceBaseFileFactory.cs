@@ -2,8 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Reflection;
 
+using CommonFramework;
+
 using Framework.CodeDom;
-using Framework.Core;
 using Framework.Persistent;
 
 namespace Framework.DomainDriven.DTOGenerator;

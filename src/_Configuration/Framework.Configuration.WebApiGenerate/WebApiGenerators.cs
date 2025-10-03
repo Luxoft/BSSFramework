@@ -1,8 +1,6 @@
 ﻿using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.WebApiGenerator.NetCore.SingleController;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using FileInfo = Framework.DomainDriven.Generation.FileInfo;
 
 namespace Framework.Configuration.WebApiGenerate;

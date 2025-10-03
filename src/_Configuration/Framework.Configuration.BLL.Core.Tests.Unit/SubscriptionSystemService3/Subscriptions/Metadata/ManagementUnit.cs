@@ -1,4 +1,4 @@
-﻿using Framework.SecuritySystem;
+﻿using SecuritySystem;
 
 namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Subscriptions.Metadata;
 

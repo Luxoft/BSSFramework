@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 using Framework.Configuration.Domain;
 using Framework.Core;
@@ -84,7 +86,7 @@ public class RevisionSubscriptionSystemService<TBLLContext, T> : SubscriptionSys
         }
         catch (TargetInvocationException ex)
         {
-            return new[] { TryResult.CreateFault<Subscription>(ex.GetLastInnerException()) };
+            return new[] { TryResult.CreateFault<Subscription>(ex.GetBaseException()) };
         }
         catch (Exception ex)
         {

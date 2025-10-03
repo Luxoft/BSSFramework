@@ -7,6 +7,4 @@ public partial interface IPermissionBLL
     void ChangeDelegatePermissions(ChangePermissionDelegatesModel changePermissionDelegatesModel);
 
     void UpdateDelegatePermissions(UpdatePermissionDelegatesModel updatePermissionDelegatesModel);
-
-    void WithdrawDelegation(Permission permission);
 }

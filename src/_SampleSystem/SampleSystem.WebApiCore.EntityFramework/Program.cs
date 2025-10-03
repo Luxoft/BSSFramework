@@ -2,8 +2,8 @@
 using Bss.Platform.Api.Middlewares;
 using Bss.Platform.Logging;
 
-using Framework.Configurator;
-using Framework.DependencyInjection;
+using CommonFramework.DependencyInjection;
+
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.DomainDriven.WebApiNetCore.JsonConverter;
 using Framework.DomainDriven.WebApiNetCore.Swagger;
@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Authorization;
 
 using SampleSystem.ServiceEnvironment;
+
+using SecuritySystem.Configurator;
 
 namespace SampleSystem.WebApiCore;
 
@@ -65,7 +67,9 @@ public static class Program
                        x.JsonSerializerOptions.Converters.Add(new PeriodJsonConverter());
                    });
 
-        builder.Services.ValidateDuplicateDeclaration(typeof(ILoggerFactory));
+        builder.Services
+               .AddValidator(new DuplicateServiceUsageValidator([typeof(ILoggerFactory)]))
+               .Validate();
 
         var app = builder.Build();
 

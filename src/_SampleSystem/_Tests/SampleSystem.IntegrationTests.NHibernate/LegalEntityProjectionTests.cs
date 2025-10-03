@@ -1,5 +1,7 @@
 ﻿using Automation.ServiceEnvironment;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 

@@ -22,4 +22,12 @@
     <ProjectReference Include="..\Framework.Events\Framework.Events.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="_Visitors\Specific\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IvAt.SecuritySystem" />
+  </ItemGroup>
+
 </Project>

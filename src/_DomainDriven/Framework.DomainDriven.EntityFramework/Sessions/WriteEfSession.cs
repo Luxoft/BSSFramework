@@ -1,6 +1,5 @@
 ﻿using System.Data;
 
-using Framework.Core;
 using Framework.DomainDriven.Audit;
 
 using Microsoft.EntityFrameworkCore;
@@ -131,12 +130,12 @@ public class WriteEfSession : EfSessionBase
                 var beforeTransactionCompletedChangeState = dalHistory.Composite();
 
                 // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
-                this.eventListeners.Foreach(eventListener =>
-                                            {
-                                                cancellationToken.ThrowIfCancellationRequested();
+                foreach (var eventListener in this.eventListeners)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
 
-                                                eventListener.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState));
-                                            });
+                    await eventListener.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState), cancellationToken);
+                }
 
                 await this.NativeSession.SaveChangesAsync(cancellationToken);
 

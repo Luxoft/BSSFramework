@@ -1,9 +1,12 @@
-﻿using Framework.ApplicationVariable;
+﻿using CommonFramework;
+
+using Framework.ApplicationVariable;
 using Framework.Configuration.Domain;
-using Framework.Core;
 using Framework.DomainDriven.Repository;
-using Framework.GenericQueryable;
-using Framework.SecuritySystem;
+
+using GenericQueryable;
+
+using SecuritySystem.Attributes;
 
 namespace Framework.Configuration.BLL;
 

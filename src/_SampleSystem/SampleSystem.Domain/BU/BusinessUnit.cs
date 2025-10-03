@@ -1,19 +1,21 @@
-﻿using Framework.Core;
-using Framework.Core.Services;
+﻿using CommonFramework;
+
+using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
-using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.Restriction;
-using Framework.SecuritySystem;
 using Framework.Validation;
+
+using SecuritySystem;
+
+using SecuritySystem.Services;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole, BLLSaveRole(AllowCreate = false)]
 public partial class BusinessUnit :
         CommonUnitBase,
-        IDenormalizedHierarchicalPersistentSource<BusinessUnitAncestorLink, BusinessUnitToAncestorChildView, BusinessUnit, Guid>,
         IUnit<BusinessUnit>,
         IMaster<ManagementUnitAndBusinessUnitLink>,
         IMaster<BusinessUnitEmployeeRole>,
@@ -544,7 +546,7 @@ public partial class BusinessUnit :
         return this.GetAllParents().Any(x => x.Options.HasFlag(BusinessUnitOptions.DoNotPrintNameOnLabel));
     }
 
-    public virtual IEnumerable<BusinessUnitEmployeeRoleType> GetCurrentUserRoles(IUserAuthenticationService userAuthenticationService)
+    public virtual IEnumerable<BusinessUnitEmployeeRoleType> GetCurrentUserRoles(IRawUserAuthenticationService userAuthenticationService)
     {
         var currentUserName = userAuthenticationService.GetUserName();
 

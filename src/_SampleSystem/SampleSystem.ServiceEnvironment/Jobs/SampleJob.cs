@@ -1,12 +1,14 @@
 ﻿using Framework.DomainDriven.Jobs;
 using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem;
 
 using Hangfire;
 
 using Microsoft.Extensions.Logging;
 
 using SampleSystem.Domain;
+
+using SecuritySystem.Attributes;
+using SecuritySystem.Services;
 
 namespace SampleSystem.ServiceEnvironment.Jobs;
 

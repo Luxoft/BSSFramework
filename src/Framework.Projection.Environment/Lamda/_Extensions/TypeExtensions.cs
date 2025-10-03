@@ -1,5 +1,7 @@
-﻿using Framework.Core;
-using Framework.Persistent;
+﻿using CommonFramework;
+using CommonFramework.DictionaryCache;
+
+using Framework.Core;
 
 namespace Framework.Projection.Lambda;
 
@@ -49,59 +51,5 @@ internal static class TypeExtensions
         {
             throw new ArgumentOutOfRangeException(nameof(collectionType));
         }
-    }
-
-    /// <summary>
-    /// Получение связанных типов для денормализации и иерархии
-    /// </summary>
-    /// <param name="sourceType">Базовый тип</param>
-    /// <returns></returns>
-    internal static IEnumerable<Type> GetHierarchicalSecurityTypes(this Type sourceType)
-    {
-        if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
-
-        if (sourceType.IsHierarchical())
-        {
-            var denormalizedHierarchicalArgs = sourceType.GetInterfaceImplementationArguments(typeof(IDenormalizedHierarchicalPersistentSource<,,,>));
-
-            if (denormalizedHierarchicalArgs != null)
-            {
-                var denormalizedType = denormalizedHierarchicalArgs[0];
-
-                var ancestorChildLinkType = denormalizedHierarchicalArgs[1];
-
-                yield return denormalizedType;
-
-                yield return ancestorChildLinkType;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Получение дополнительного имлементированного интерфейса для безопасности
-    /// </summary>
-    /// <param name="sourceType">Базовый тип</param>
-    /// <returns></returns>
-    internal static Type GetExtraSecurityNodeInterface(this Type sourceType)
-    {
-        if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
-
-        var extraGenericSecurityTypes = new[]
-                                        {
-                                                typeof(IDenormalizedHierarchicalPersistentSource<,,,>),
-                                                typeof(IHierarchicalSource<>),
-                                                typeof(IHierarchicalAncestorLink<,,>),
-                                                typeof(IHierarchicalToAncestorOrChildLink<,>)
-                                        };
-
-        foreach (var interfaceType in extraGenericSecurityTypes)
-        {
-            if (sourceType.IsInterfaceImplementation(interfaceType))
-            {
-                return sourceType.GetInterfaceImplementation(interfaceType);
-            }
-        }
-
-        return null;
     }
 }

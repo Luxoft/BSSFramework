@@ -1,6 +1,8 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
+using CommonFramework;
+
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
@@ -24,36 +26,42 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration> : ServerPropertyA
 
         var isFixReferencePropertyMode = property.IsFixReference(this.FileType.Role);
 
-        var getToDomainObjectExpr = FuncHelper.Create((CodeExpression expr, Type type, bool isDetail) =>
-                                                      {
-                                                          var methodName = "To" + type.Name;
+        var getToDomainObjectExpr =
+            (CodeExpression expr, Type type, bool isDetail) =>
+            {
+                var methodName = "To" + type.Name;
 
-                                                          if (property.HasAttribute<AutoMappingAttribute>(attr => !attr.Enabled))
-                                                          {
-                                                              if (this.Configuration.IsPersistentObject(type))
-                                                              {
-                                                                  return this.MappingServiceRefExpr.ToMethodInvokeExpression(methodName, expr.ToPropertyReference(this.Configuration.DTOIdentityPropertyName));
-                                                              }
-                                                              else
-                                                              {
-                                                                  throw new NotImplementedException();
-                                                              }
-                                                          }
+                if (property.HasAttribute<AutoMappingAttribute>(attr => !attr.Enabled))
+                {
+                    if (this.Configuration.IsPersistentObject(type))
+                    {
+                        return this.MappingServiceRefExpr.ToMethodInvokeExpression(
+                            methodName,
+                            expr.ToPropertyReference(this.Configuration.DTOIdentityPropertyName));
+                    }
+                    else
+                    {
+                        throw new NotImplementedException();
+                    }
+                }
 
-                                                          if (isDetail)
-                                                          {
-                                                              if (this.Configuration.IsPersistentObject(this.DomainType))
-                                                              {
-                                                                  return this.MappingServiceRefExpr.ToMethodInvokeExpression(methodName, expr, this.DomainParameter.ToVariableReferenceExpression());
-                                                              }
-                                                              else if (this.Configuration.CanCreateDomainObject(property, type, this.FileType))
-                                                              {
-                                                                  return this.MappingServiceRefExpr.ToMethodInvokeExpression(methodName, expr, true.ToPrimitiveExpression());
-                                                              }
-                                                          }
+                if (isDetail)
+                {
+                    if (this.Configuration.IsPersistentObject(this.DomainType))
+                    {
+                        return this.MappingServiceRefExpr.ToMethodInvokeExpression(
+                            methodName,
+                            expr,
+                            this.DomainParameter.ToVariableReferenceExpression());
+                    }
+                    else if (this.Configuration.CanCreateDomainObject(property, type, this.FileType))
+                    {
+                        return this.MappingServiceRefExpr.ToMethodInvokeExpression(methodName, expr, true.ToPrimitiveExpression());
+                    }
+                }
 
-                                                          return this.MappingServiceRefExpr.ToMethodInvokeExpression(methodName, expr);
-                                                      });
+                return this.MappingServiceRefExpr.ToMethodInvokeExpression(methodName, expr);
+            };
 
         if (this.Configuration.IsReferenceProperty(property))
         {
@@ -113,7 +121,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration> : ServerPropertyA
                        {
                                TrueStatements =
                                {
-                                       typeof(Core.EnumerableExtensions).ToTypeReferenceExpression()
+                                       typeof(CoreEnumerableExtensions).ToTypeReferenceExpression()
                                                                                   .ToMethodInvokeExpression(
                                                                                    "ToList",
                                                                                    sourcePropertyRef,
@@ -236,7 +244,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration> : ServerPropertyA
         joinStatement.Parameters.Add(new CodeSnippetExpression("(domainItem, dtoItem)=>new{domainItem, dtoItem}"));
 
         var foreachStatement =
-                typeof(Core.EnumerableExtensions)
+                typeof(CommonFramework.EnumerableExtensions)
                         .ToTypeReferenceExpression()
                         .ToMethodInvokeExpression("Foreach");
 

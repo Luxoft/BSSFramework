@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.Persistent;
 
@@ -27,7 +29,7 @@ public class UniqueCollectionValidator : IDynamicPropertyValidator
         var uniProperties = property.GetUniqueElementPropeties(this._groupKey, true);
 
         var groupElementType = typeof(Tuple<>).Assembly
-                                              .GetType(typeof(Tuple<>).FullName.SkipLast("1", true) + uniProperties.Length, true)
+                                              .GetType(typeof(Tuple<>).FullName!.SkipLast("1", true) + uniProperties.Length, true)!
                                               .MakeGenericType(uniProperties.ToArray(p => p.PropertyType));
 
 
@@ -75,7 +77,7 @@ public class UniqueCollectionValidator<TSource, TProperty, TElement, TGroupEleme
         if (getGroupElement == null) throw new ArgumentNullException(nameof(getGroupElement));
         if (uniqueElementString == null) throw new ArgumentNullException(nameof(uniqueElementString));
 
-        this._getGroupElement = getGroupElement.Compile(CompileCache);
+        this._getGroupElement = getGroupElement.Compile();
         this._uniqueElementString = uniqueElementString;
     }
 
@@ -89,6 +91,4 @@ public class UniqueCollectionValidator<TSource, TProperty, TElement, TGroupEleme
 
                                               () => $"{context.GetPropertyName()}{(context.GetSource() as IVisualIdentityObject).Maybe(x => " (" + x.Name + ")")} error. Duplicate fields ({this._uniqueElementString}) combination: {duplicates.Join(", ", d => d.Key)}");
     }
-
-    private static readonly LambdaCompileCache CompileCache = new LambdaCompileCache();
 }

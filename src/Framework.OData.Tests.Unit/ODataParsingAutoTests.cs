@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using Framework.Core;
+
 using Framework.QueryLanguage;
 using NUnit.Framework;
 using FluentAssertions;
@@ -220,61 +220,7 @@ public class ODataParsingAutoTests
 
         this.Test(testStr, expectedOperation);
     }
-
-
-    [Test]
-    public void Test005()
-    {
-        var constDateStr1 = "2014-05-01T00:00:00";
-        var constDateStr2 = "2014-06-01T00:00:00";
-        var constDateStr3 = "2014-07-01T00:00:00";
-
-        var constDate1 = DateTime.Parse(constDateStr1);
-        var constDate2 = DateTime.Parse(constDateStr2);
-        var constDate3 = DateTime.Parse(constDateStr3);
-
-        var constPeriod1 = new Period(constDate1);
-        var constPeriod2 = new Period(constDate2, constDate3);
-
-        var prop0 = "Period";
-
-
-        var testStr = string.Format("$filter=isIntersectedP(period(datetime'{0}'), {1}) and containsP({1}, period(datetime'{2}', datetime'{3}'))",
-                                    constDate1, prop0, constDate2, constDateStr3);
-
-
-        var parameter = ParameterExpression.Default;
-
-        var filter = new LambdaExpression(
-
-                                          new BinaryExpression(
-
-                                                               new MethodExpression(
-                                                                                    new PeriodConstantExpression(constPeriod1),
-                                                                                    MethodExpressionType.PeriodIsIntersected,
-                                                                                    new PropertyExpression(parameter, prop0)),
-
-                                                               BinaryOperation.AndAlso,
-
-                                                               new MethodExpression(
-                                                                                    new PropertyExpression(parameter, prop0),
-                                                                                    MethodExpressionType.PeriodContains,
-                                                                                    new PeriodConstantExpression(constPeriod2))),
-
-                                          parameter);
-
-
-        var expectedOperation = new SelectOperation(
-                                                    filter,
-                                                    SelectOperation.Default.Orders,
-                                                    SelectOperation.Default.Expands,
-                                                    SelectOperation.Default.Selects,
-                                                    SelectOperation.Default.SkipCount,
-                                                    SelectOperation.Default.TakeCount);
-
-        this.Test(testStr, expectedOperation);
-    }
-
+    
     [Test]
     [TestCase("m")]
     [TestCase("M")]

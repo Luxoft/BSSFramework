@@ -1,7 +1,10 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
-using Framework.Core;
+using CommonFramework;
+using CommonFramework.Maybe;
+
+using ExpressionExtensions = CommonFramework.ExpressionExtensions;
 
 namespace Framework.DomainDriven._Visitors;
 

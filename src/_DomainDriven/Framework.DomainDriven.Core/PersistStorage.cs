@@ -1,8 +1,24 @@
-﻿using Framework.SecuritySystem.PersistStorage;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+using SecuritySystem.Services;
 
 namespace Framework.DomainDriven;
 
-public class PersistStorage<T>(IAsyncDal<T, Guid> dal) : IPersistStorage<T>
+public class DalGenericRepository(IServiceProvider serviceProvider) : IGenericRepository
 {
-    public async Task SaveAsync(T data, CancellationToken cancellationToken) => await dal.SaveAsync(data, cancellationToken);
+    public async Task SaveAsync<TDomainObject>(TDomainObject data, CancellationToken cancellationToken)
+        where TDomainObject : class
+    {
+        var dal = serviceProvider.GetRequiredService<IAsyncDal<TDomainObject, Guid>>();
+
+        await dal.SaveAsync(data, cancellationToken);
+    }
+
+    public async Task RemoveAsync<TDomainObject>(TDomainObject data, CancellationToken cancellationToken)
+        where TDomainObject : class
+    {
+        var dal = serviceProvider.GetRequiredService<IAsyncDal<TDomainObject, Guid>>();
+
+        await dal.RemoveAsync(data, cancellationToken);
+    }
 }

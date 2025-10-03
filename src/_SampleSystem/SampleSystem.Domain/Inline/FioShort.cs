@@ -10,7 +10,7 @@ namespace SampleSystem.Domain.Inline;
 [ExpandValidation]
 [DataContract(Namespace = "")]
 [KnownType(typeof(Fio))]
-public class FioShort : ICloneable<FioShort>, IEquatable<FioShort>
+public class FioShort : ICloneable, IEquatable<FioShort>
 {
     private string firstName;
     private string lastName;

@@ -1,5 +1,4 @@
-﻿using Framework.Core;
-using Framework.DomainDriven.DAL.Revisions;
+﻿using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.NHibernate.Audit;
 
 using NHibernate.Cfg;
@@ -7,6 +6,8 @@ using NHibernate.Envers.Configuration;
 using NHibernate.Envers.Configuration.Store;
 using NHibernate.Envers.Patch.Forke;
 using NHibernate.Envers.Strategy;
+
+using CommonFramework;
 
 namespace Framework.DomainDriven.NHibernate;
 

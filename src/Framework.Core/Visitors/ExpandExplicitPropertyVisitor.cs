@@ -1,7 +1,10 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Framework.Core;
+using CommonFramework.DictionaryCache;
+using CommonFramework.Maybe;
+
+namespace Framework.Core.Visitors;
 
 public class ExpandExplicitPropertyVisitor : ExpressionVisitor
 {

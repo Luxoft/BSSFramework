@@ -1,12 +1,14 @@
-﻿using Framework.Core.Services;
-using Framework.DomainDriven;
+﻿using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
-using Framework.GenericQueryable;
+
+using GenericQueryable;
 
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
+
+using SecuritySystem.Services;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
@@ -16,13 +18,13 @@ public class EmployeeAsyncController : ControllerBase
 {
     private readonly IRepositoryFactory<Employee> employeeRepositoryFactory;
 
-    private readonly IUserAuthenticationService userAuthenticationService;
+    private readonly IRawUserAuthenticationService userAuthenticationService;
 
     private readonly ISampleSystemDTOMappingService mappingService;
 
     public EmployeeAsyncController(
             IRepositoryFactory<Employee> employeeRepositoryFactory,
-            IUserAuthenticationService userAuthenticationService,
+            IRawUserAuthenticationService userAuthenticationService,
             ISampleSystemDTOMappingService mappingService)
     {
         this.employeeRepositoryFactory = employeeRepositoryFactory;

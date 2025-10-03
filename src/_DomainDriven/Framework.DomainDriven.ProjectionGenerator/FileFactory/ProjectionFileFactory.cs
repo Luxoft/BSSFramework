@@ -1,6 +1,8 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
+using CommonFramework;
+
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
@@ -188,7 +190,7 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
                                              {
                                                  if (propertyPath.Count > 1 && property.PropertyType.IsCollection())
                                                  {
-                                                     return typeof(Core.EnumerableExtensions)
+                                                     return typeof(CommonFramework.EnumerableExtensions)
                                                             .ToTypeReferenceExpression()
                                                             .ToMethodInvokeExpression("EmptyIfNull", state.Expression);
                                                  }
@@ -278,7 +280,7 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
                                     Statements = { elementType.ToTypeReference().ToObjectCreateExpression(param.ToVariableReferenceExpression()).ToMethodReturnStatement() }
                             });
 
-                        yield return typeof(Core.EnumerableExtensions)
+                        yield return typeof(CoreEnumerableExtensions)
                                      .ToTypeReferenceExpression()
                                      .ToMethodInvokeExpression("ToList", sourcePropExpr, lambda)
                                      .ToAssignStatement(targetMemberExpr);

@@ -1,5 +1,5 @@
 ﻿using Framework.Configuration.SubscriptionModeling;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using SampleSystem.BLL;
 

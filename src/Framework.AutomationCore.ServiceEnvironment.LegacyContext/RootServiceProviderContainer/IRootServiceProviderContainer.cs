@@ -1,7 +1,7 @@
 ﻿using Framework.DomainDriven;
 using Framework.DomainDriven.ServiceModel;
 using Framework.DomainDriven.ServiceModel.Service;
-using Framework.SecuritySystem.Credential;
+using SecuritySystem.Credential;
 
 using Microsoft.Extensions.DependencyInjection;
 

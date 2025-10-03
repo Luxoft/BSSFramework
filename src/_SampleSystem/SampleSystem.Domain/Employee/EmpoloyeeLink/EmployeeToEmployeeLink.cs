@@ -1,4 +1,5 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+
 using Framework.Persistent;
 
 namespace SampleSystem.Domain;

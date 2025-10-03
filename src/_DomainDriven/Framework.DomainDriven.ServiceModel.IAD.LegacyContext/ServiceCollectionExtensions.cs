@@ -1,18 +1,18 @@
 ﻿using System.Reflection;
 
+using CommonFramework.DependencyInjection;
+
 using Framework.Authorization.BLL;
 using Framework.Authorization.Events;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
-using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
-using Framework.HierarchicalExpand;
 using Framework.Projection;
 using Framework.QueryLanguage;
 using Framework.Security;
-using Framework.SecuritySystem;
+using SecuritySystem;
 using Framework.Events.Legacy;
 using Framework.Events;
 using Framework.DomainDriven.ServiceModel.Service;
@@ -24,11 +24,15 @@ using Framework.Configuration.Generated.DTO;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven.Setup;
-using Framework.SecuritySystem.SecurityRuleInfo;
+using SecuritySystem.SecurityRuleInfo;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.Lock;
-using Framework.SecuritySystem.DependencyInjection;
 using Framework.ApplicationVariable;
+
+using SecuritySystem.DependencyInjection;
+using SecuritySystem.DomainServices;
+using SecuritySystem.DomainServices.DependencySecurity;
+using SecuritySystem.HierarchicalExpand;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 

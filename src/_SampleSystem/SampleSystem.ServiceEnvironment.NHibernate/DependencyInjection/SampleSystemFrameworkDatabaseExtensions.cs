@@ -1,7 +1,8 @@
-﻿using Framework.Authorization.Environment;
+﻿using CommonFramework;
+
+using Framework.Authorization.Environment;
 using Framework.Authorization.Generated.DAL.NHibernate;
 using Framework.Configuration.Generated.DAL.NHibernate;
-using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Setup;

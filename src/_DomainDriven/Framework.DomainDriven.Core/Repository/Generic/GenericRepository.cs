@@ -1,6 +1,8 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+
 using Framework.DomainDriven.Lock;
-using Framework.SecuritySystem;
+using SecuritySystem;
+using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.Repository;
 

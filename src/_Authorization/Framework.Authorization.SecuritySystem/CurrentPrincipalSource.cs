@@ -1,14 +1,17 @@
-﻿using Framework.Authorization.Domain;
-using Framework.Core;
-using Framework.Core.Services;
-using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem;
+﻿using CommonFramework;
 
-namespace Framework.Authorization.SecuritySystem;
+using Framework.Authorization.Domain;
+
+using Framework.DomainDriven.Repository;
+
+using SecuritySystem.Attributes;
+using SecuritySystem.Services;
+
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class CurrentPrincipalSource(
     [DisabledSecurity] IRepository<Principal> principalRepository,
-    IUserAuthenticationService userAuthenticationService) : ICurrentPrincipalSource
+    IRawUserAuthenticationService userAuthenticationService) : ICurrentPrincipalSource
 {
     private readonly Lazy<Principal> currentPrincipalLazy = LazyHelper.Create(
         () =>

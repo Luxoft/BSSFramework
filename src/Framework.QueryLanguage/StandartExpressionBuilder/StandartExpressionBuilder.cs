@@ -1,5 +1,6 @@
-﻿using Framework.Core;
-using Framework.HierarchicalExpand;
+﻿using CommonFramework;
+
+using Framework.Core;
 
 using SExpressions = System.Linq.Expressions;
 
@@ -66,30 +67,6 @@ public class StandartExpressionBuilder : StandartExpressionBuilderBase
             case MethodExpressionType.StringEndsWith:
                 return SExpressions.Expression.Call(this.TryCallToString(standartSourceExpr), MethodInfoHelper.StringEndsWithMethod, standartArguments);
 
-            case MethodExpressionType.PeriodContains:
-            {
-                if (allArgs.Any(t => t.Type.IsNullable()))
-                {
-                    return SExpressions.Expression.Call(MethodInfoHelper.NullablePeriodContainsMethod, allArgs.Select(arg => arg.TryLiftToNullable()));
-                }
-                else
-                {
-                    return SExpressions.Expression.Call(MethodInfoHelper.PeriodContainsMethod, allArgs);
-                }
-            }
-
-            case MethodExpressionType.PeriodIsIntersected:
-            {
-                if (allArgs.Any(t => t.Type.IsNullable()))
-                {
-                    return SExpressions.Expression.Call(MethodInfoHelper.NullablePeriodIsIntersectedMethod, allArgs.Select(arg => arg.TryLiftToNullable()));
-                }
-                else
-                {
-                    return SExpressions.Expression.Call(MethodInfoHelper.PeriodIsIntersectedMethod, allArgs);
-                }
-            }
-
             case MethodExpressionType.CollectionAny:
                 return SExpressions.Expression.Call(standartArguments.Any() ? MethodInfoHelper.CollectionAnyFilterMethod.MakeGenericMethod(elementType) : MethodInfoHelper.CollectionAnyEmptyMethod.MakeGenericMethod(elementType), allArgs);
 
@@ -118,7 +95,7 @@ public class StandartExpressionBuilder : StandartExpressionBuilderBase
 
         var sourceExpr = preSourceExpr.Type.IsNullable() ? SExpressions.Expression.Property(preSourceExpr, "Value") : preSourceExpr;
 
-        return ExpressionHelper.PropertyOrFieldAuto(sourceExpr, expression.PropertyName);
+        return CoreExpressionHelper.PropertyOrFieldAuto(sourceExpr, expression.PropertyName);
     }
 
     protected override SExpressions.UnaryExpression ToStandartExpression(UnaryExpression expression, Dictionary<ParameterExpression, System.Linq.Expressions.ParameterExpression> parameters)
@@ -126,23 +103,6 @@ public class StandartExpressionBuilder : StandartExpressionBuilderBase
         var standartOperand = this.ToStandartExpressionBase(expression.Operand, parameters);
 
         return SExpressions.Expression.MakeUnary(expression.Operation.ToExpressionType(), standartOperand, standartOperand.Type);
-    }
-
-    protected override SExpressions.Expression ToStandartExpression(ExpandContainsExpression expression, Dictionary<ParameterExpression, System.Linq.Expressions.ParameterExpression> parameters)
-    {
-        var source = this.ToStandartExpressionBase(expression.Source, parameters);
-
-        var expandTypeConst = this.ToStandartExpression(expression.ExpandType);
-
-        var expandType = expandTypeConst.TryConvertToEnumExpression(typeof(HierarchicalExpandType)).GetDeepMemberConstValue<HierarchicalExpandType>().GetValue();
-
-        var filterElement = this.ToStandartExpression(expression.FilterElement);
-
-        var sourceType = source.Type;
-
-        var containsMethod = MethodInfoHelper.ExpandContainsMethod.MakeGenericMethod(sourceType, filterElement.Type);
-
-        return SExpressions.Expression.Call(containsMethod, source, filterElement, SExpressions.Expression.Constant(expandType));
     }
 
     private SExpressions.Expression TryCallToString(SExpressions.Expression source)

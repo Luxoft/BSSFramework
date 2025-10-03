@@ -15,7 +15,7 @@ public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObjec
     /// <param name="fetchContainer">Подгружаемые свойства</param>
     /// /// <param name="lockRole">lockRole</param>
     /// <returns></returns>
-    IQueryable<TDomainObject> GetSecureQueryable(IFetchContainer<TDomainObject> fetchContainer = null, LockRole lockRole = LockRole.None);
+    IQueryable<TDomainObject> GetSecureQueryable(IFetchContainer<TDomainObject>? fetchContainer = null, LockRole lockRole = LockRole.None);
 
     /// <summary>
     /// Получение IQueryable с учётом безопасности
@@ -47,7 +47,7 @@ public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObjec
     /// <param name="fetchContainer">Подгружаемые свойства</param>
     /// <returns></returns>
     [Obsolete("Use other overload method with LockRole parameter")]
-    IQueryable<TDomainObject> GetUnsecureQueryable(LockRole lockRole, IFetchContainer<TDomainObject> fetchContainer = null);
+    IQueryable<TDomainObject> GetUnsecureQueryable(LockRole lockRole, IFetchContainer<TDomainObject>? fetchContainer = null);
 
     /// <summary>
     /// Получение IQueryable без учёта безопасности
@@ -65,29 +65,29 @@ public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObjec
     IQueryable<TDomainObject> GetUnsecureQueryable(IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs);
 
 
-    SelectOperationResult<TDomainObject> GetObjectsByOData(SelectOperation selectOperation, IFetchContainer<TDomainObject> fetchContainer = null);
+    SelectOperationResult<TDomainObject> GetObjectsByOData(SelectOperation selectOperation, IFetchContainer<TDomainObject>? fetchContainer = null);
 
 
-    SelectOperationResult<TDomainObject> GetObjectsByOData(SelectOperation<TDomainObject> selectOperation, IFetchContainer<TDomainObject> fetchContainer = null);
+    SelectOperationResult<TDomainObject> GetObjectsByOData(SelectOperation<TDomainObject> selectOperation, IFetchContainer<TDomainObject>? fetchContainer = null);
 
-    SelectOperationResult<TDomainObject> GetObjectsByOData(SelectOperation<TDomainObject> selectOperation, Expression<Func<TDomainObject, bool>> filter, IFetchContainer<TDomainObject> fetchContainer = null);
+    SelectOperationResult<TDomainObject> GetObjectsByOData(SelectOperation<TDomainObject> selectOperation, Expression<Func<TDomainObject, bool>> filter, IFetchContainer<TDomainObject>? fetchContainer = null);
 
-    SelectOperationResult<TDomainObject> GetObjectsByOData(SelectOperation<TDomainObject> selectOperation, IDomainObjectFilterModel<TDomainObject> filter, IFetchContainer<TDomainObject> fetchContainer = null);
+    SelectOperationResult<TDomainObject> GetObjectsByOData(SelectOperation<TDomainObject> selectOperation, IDomainObjectFilterModel<TDomainObject> filter, IFetchContainer<TDomainObject>? fetchContainer = null);
 
-    List<TDomainObject> GetFullList(IFetchContainer<TDomainObject> fetchContainer = null);
+    List<TDomainObject> GetFullList(IFetchContainer<TDomainObject>? fetchContainer = null);
 
     List<TDomainObject> GetFullList(Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs);
 
     List<TDomainObject> GetFullList(IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs);
 
 
-    List<TDomainObject> GetListBy(IDomainObjectFilterModel<TDomainObject> filter, IFetchContainer<TDomainObject> fetchContainer = null, LockRole lockRole = LockRole.None);
+    List<TDomainObject> GetListBy(IDomainObjectFilterModel<TDomainObject> filter, IFetchContainer<TDomainObject>? fetchContainer = null, LockRole lockRole = LockRole.None);
 
     List<TDomainObject> GetListBy(IDomainObjectFilterModel<TDomainObject> filter, Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs);
 
     List<TDomainObject> GetListBy(IDomainObjectFilterModel<TDomainObject> filter, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs);
 
-    List<TDomainObject> GetListBy(Expression<Func<TDomainObject, bool>> filter, IFetchContainer<TDomainObject> fetchContainer = null, LockRole lockRole = LockRole.None);
+    List<TDomainObject> GetListBy(Expression<Func<TDomainObject, bool>> filter, IFetchContainer<TDomainObject>? fetchContainer = null, LockRole lockRole = LockRole.None);
 
     List<TDomainObject> GetListBy(Expression<Func<TDomainObject, bool>> filter, Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs);
 
@@ -108,7 +108,7 @@ public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObjec
     /// <returns>Экземпляр найденного объекта или null, если объект не найден.</returns>
     /// <exception cref="BusinessLogicException">Если параметр throwOnNotFound задан как true и объект не найден.</exception>
     /// <exception cref="InvalidOperationException">По заданному условию найден более чем один объект.</exception>
-    TDomainObject GetObjectBy(Expression<Func<TDomainObject, bool>> filter, bool throwOnNotFound = false, IFetchContainer<TDomainObject> fetchContainer = null);
+    TDomainObject GetObjectBy(Expression<Func<TDomainObject, bool>> filter, bool throwOnNotFound = false, IFetchContainer<TDomainObject>? fetchContainer = null);
 
     TDomainObject GetObjectBy(Expression<Func<TDomainObject, bool>> filter, bool throwOnNotFound, Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs);
 

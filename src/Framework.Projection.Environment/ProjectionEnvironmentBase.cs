@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.Projection.Environment;
 
@@ -33,7 +35,7 @@ public abstract class ProjectionEnvironmentBase : IProjectionEnvironment
 
     protected virtual PropertyInfo GetIdentityProperty()
     {
-        return this.PersistentDomainObjectBaseType.GetProperty("Id", true);
+        return this.PersistentDomainObjectBaseType.GetProperty("Id", true)!;
     }
 
     /// <summary>

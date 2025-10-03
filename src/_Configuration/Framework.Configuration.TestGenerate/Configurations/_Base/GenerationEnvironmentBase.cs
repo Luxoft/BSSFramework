@@ -1,6 +1,6 @@
 ﻿using Framework.Configuration.Domain;
 using Framework.DomainDriven.Generation.Domain;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.Configuration.TestGenerate;
 

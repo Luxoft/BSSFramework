@@ -1,5 +1,8 @@
 ﻿using System.Reflection;
 
+using CommonFramework;
+using CommonFramework.Maybe;
+
 using Framework.Core;
 
 namespace Framework.Exceptions;
@@ -27,7 +30,7 @@ public class ExceptionExpander : IExceptionExpander
     public virtual Exception Process(Exception exception)
     {
         var targetInvocationRequest = from targetInvocationException in (exception as TargetInvocationException).ToMaybe()
-                                      let lastInnerException = targetInvocationException.GetLastInnerException()
+                                      let lastInnerException = targetInvocationException.GetBaseException()
                                       select this.Process(lastInnerException);
 
         return targetInvocationRequest

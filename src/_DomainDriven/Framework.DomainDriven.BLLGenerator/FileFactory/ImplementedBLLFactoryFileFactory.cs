@@ -3,7 +3,8 @@
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Generation.Domain;
-using Framework.SecuritySystem;
+
+using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.BLLGenerator;
 

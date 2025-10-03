@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 
+using CommonFramework;
+
 using Framework.Core;
 
 namespace Framework.DomainDriven.Metadata;
@@ -66,7 +68,7 @@ public class InlineTypeFieldMetadata : FieldMetadata
     public IEnumerable<PrimitiveTypeFieldMetadata> GetPrimitiveTypeFieldMetadata (Type declarationType)
     {
         var parentPrefix = this.Parent.Maybe(z => z.Name, string.Empty);
-        return this.Type.GetInstanseFieldsDeep()
+        return this.Type.GetInstanceFieldsDeep()
                    .Select(z => new PrimitiveTypeFieldMetadata(parentPrefix+z.Name, z.FieldType, z.GetAttributes(declarationType)
                                                                        .Concat(z.GetAttributes(z.DeclaringType)), this.DomainTypeMetadata, z.Name.ToLower() == "id"));
     }
@@ -107,7 +109,7 @@ public static class FieldInfoExtension
         {
             property = declarationType
                        .GetProperties()
-                       .Where(z => (z.GetGetMethod(true) ?? z.GetSetMethod(true)).IsDefined(typeof(CompilerGeneratedAttribute), false))
+                       .Where(z => (z.GetGetMethod(true) ?? z.GetSetMethod(true))!.IsDefined(typeof(CompilerGeneratedAttribute), false))
                        .Select(z => new { GeneratedName = $"<{z.Name}>k__BackingField", Property = z })
                        .FirstOrDefault(z => string.Equals(z.GeneratedName, field.Name, StringComparison.InvariantCultureIgnoreCase))
                        .Maybe(z=>z.Property);

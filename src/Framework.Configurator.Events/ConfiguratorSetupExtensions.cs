@@ -1,4 +1,6 @@
-﻿namespace Framework.Configurator;
+﻿using SecuritySystem.Configurator;
+
+namespace Framework.Configurator;
 
 public static class ConfiguratorSetupExtensions
 {

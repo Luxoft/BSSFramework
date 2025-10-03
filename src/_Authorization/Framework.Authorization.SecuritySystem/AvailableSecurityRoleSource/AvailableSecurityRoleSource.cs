@@ -1,7 +1,8 @@
-﻿using Framework.GenericQueryable;
-using Framework.SecuritySystem;
+﻿using GenericQueryable;
 
-namespace Framework.Authorization.SecuritySystem;
+using SecuritySystem;
+
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class AuthorizationAvailableSecurityRoleSource(
     IAvailablePermissionSource availablePermissionSource,

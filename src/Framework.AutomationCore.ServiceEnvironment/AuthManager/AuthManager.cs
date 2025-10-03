@@ -1,14 +1,16 @@
 ﻿using Automation.Utils;
 
-using Framework.Core.Services;
-using Framework.SecuritySystem.Credential;
-using Framework.SecuritySystem.ExternalSystem.Management;
-using Framework.SecuritySystem.UserSource;
+using Framework.Persistent;
+
+using SecuritySystem.Credential;
+using SecuritySystem.ExternalSystem.Management;
+using SecuritySystem.Services;
+using SecuritySystem.UserSource;
 
 namespace Automation.ServiceEnvironment;
 
 public class AuthManager(
-    IUserAuthenticationService userAuthenticationService,
+    IRawUserAuthenticationService userAuthenticationService,
     IPrincipalManagementService principalManagementService,
     IUserCredentialNameResolver credentialNameResolver)
 {
@@ -19,7 +21,7 @@ public class AuthManager(
 
     public async Task<Guid> CreatePrincipalAsync(string name, CancellationToken cancellationToken = default)
     {
-        var principal = await principalManagementService.CreatePrincipalAsync(name, cancellationToken);
+        var principal = (IIdentityObject<Guid>)await principalManagementService.CreatePrincipalAsync(name, cancellationToken);
 
         return principal.Id;
     }
@@ -43,7 +45,8 @@ public class AuthManager(
                 Guid.Empty,
                 false,
                 testPermission.SecurityRole,
-                testPermission.Period,
+                testPermission.Period.StartDate,
+                testPermission.Period.EndDate,
                 "",
                 testPermission.Restrictions));
 
@@ -61,7 +64,7 @@ public class AuthManager(
     {
         return new TypedPrincipal(
             new TypedPrincipalHeader(
-                (await principalManagementService.CreatePrincipalAsync(usedPrincipalName, cancellationToken)).Id,
+                ((IIdentityObject<Guid>) await principalManagementService.CreatePrincipalAsync(usedPrincipalName, cancellationToken)).Id,
                 usedPrincipalName,
                 false),
             []);

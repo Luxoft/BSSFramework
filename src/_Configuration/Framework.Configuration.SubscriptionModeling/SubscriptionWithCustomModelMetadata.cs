@@ -1,7 +1,7 @@
 ﻿using System.Net.Mail;
 
 using Framework.Notification;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.Configuration.SubscriptionModeling;
 

@@ -1,5 +1,6 @@
-﻿using Framework.Authorization.Environment;
-using Framework.Core;
+﻿using CommonFramework;
+
+using Framework.Authorization.Environment;
 using Framework.DomainDriven.Setup;
 
 using Microsoft.Extensions.Configuration;

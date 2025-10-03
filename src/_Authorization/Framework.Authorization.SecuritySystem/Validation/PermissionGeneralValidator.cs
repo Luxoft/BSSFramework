@@ -4,7 +4,7 @@ using Framework.Authorization.Domain;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.Authorization.SecuritySystem.Validation;
+namespace Framework.Authorization.SecuritySystemImpl.Validation;
 
 public class PermissionGeneralValidator : AbstractValidator<Permission>, IPermissionGeneralValidator
 {

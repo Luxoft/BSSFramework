@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Authorization.SecuritySystem.Abstract</PackageId>
+    <RootNamespace>Framework.Authorization.SecuritySystemImpl</RootNamespace>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
@@ -11,11 +12,11 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" />
+    <PackageReference Include="IvAt.SecuritySystem.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
-    <ProjectReference Include="..\..\Framework.SecuritySystem.Abstract\Framework.SecuritySystem.Abstract.csproj" />
   </ItemGroup>
 
 </Project>

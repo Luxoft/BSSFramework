@@ -1,4 +1,4 @@
-﻿namespace Framework.Authorization.SecuritySystem.Validation;
+﻿namespace Framework.Authorization.SecuritySystemImpl.Validation;
 
 [Flags]
 public enum ValidatePermissionDelegateMode

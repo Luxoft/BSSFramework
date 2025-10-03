@@ -1,5 +1,7 @@
 ﻿using Framework.Core;
 
+using ExpressionHelper = CommonFramework.ExpressionHelper;
+
 namespace Framework.Persistent;
 
 public static class AuditObjectHelper

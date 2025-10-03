@@ -4,7 +4,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 

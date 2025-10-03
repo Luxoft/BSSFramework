@@ -11,6 +11,8 @@
     <PackageProjectUrl>https://www.nuget.org/profiles/Luxoft</PackageProjectUrl>
     <IsPackable>true</IsPackable>
     <MinClientVersion>3.6</MinClientVersion>
+
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <!-- PDB settings -->

@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 
-using Framework.Core;
+using CommonFramework;
+
 using Framework.Exceptions;
 
 namespace Framework.Validation;

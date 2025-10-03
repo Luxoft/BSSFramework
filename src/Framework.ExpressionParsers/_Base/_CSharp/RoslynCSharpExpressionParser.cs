@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 using System.Runtime.Loader;
 
+using CommonFramework;
+
 using Framework.Core;
 
 using Microsoft.CodeAnalysis;
@@ -44,7 +46,7 @@ public class RoslynCSharpExpressionParser : INativeBodyExpressionParser
                          .ToCSharpFullName();
 
         var methodName = "GetExpression";
-        var typeName = nameof(ExpressionParser);
+        var typeName = nameof(ExpressionParser<object>);
         var namespaceName = "Generated";
 
 

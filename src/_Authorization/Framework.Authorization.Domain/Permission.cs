@@ -125,6 +125,4 @@ public class Permission : AuditPersistentDomainObjectBase,
     Permission IDetail<Permission>.Master => this.DelegatedFrom;
 
     Permission IParentSource<Permission>.Parent => this.DelegatedFrom;
-
-    IEnumerable<Permission> IChildrenSource<Permission>.Children => this.DelegatedTo;
 }

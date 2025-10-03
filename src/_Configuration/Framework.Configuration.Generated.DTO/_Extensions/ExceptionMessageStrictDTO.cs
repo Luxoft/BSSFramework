@@ -1,4 +1,5 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+
 using Framework.Configuration.Domain;
 
 namespace Framework.Configuration.Generated.DTO;

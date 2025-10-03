@@ -3,7 +3,8 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Restriction;
-using Framework.SecuritySystem;
+
+using SecuritySystem;
 
 namespace SampleSystem.Domain;
 
@@ -11,7 +12,6 @@ namespace SampleSystem.Domain;
 [UniqueGroup]
 public class Location :
         BaseDirectory,
-        IDenormalizedHierarchicalPersistentSource<LocationAncestorLink, LocationToAncestorChildView, Location, Guid>,
         IDefaultHierarchicalPersistentDomainObjectBase<Location>,
         IMaster<Location>,
         IDetail<Location>,

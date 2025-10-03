@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.Persistent;
 using Framework.Validation;
@@ -15,7 +17,6 @@ namespace Framework.DomainDriven.BLL;
 /// <seealso cref="IDynamicClassValidator" />
 public class UniqueGroupDatabaseValidator : IDynamicClassValidator
 {
-    private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
     private readonly string groupKey;
 
     /// <summary>
@@ -59,9 +60,9 @@ public class UniqueGroupDatabaseValidator : IDynamicClassValidator
         var getFilterExpression = this.GetGetFilterExpression(
                                                               domainObjectType,
                                                               contexTypeData.IdentType,
-                                                              uniProperties).Compile(LambdaCompileCache);
+                                                              uniProperties).Compile();
 
-        var getPropertyValuesFunc = GetGetPropertyValuesExpression(domainObjectType, uniProperties).Compile(LambdaCompileCache);
+        var getPropertyValuesFunc = GetGetPropertyValuesExpression(domainObjectType, uniProperties).Compile();
 
         var validator = (IClassValidator)internalValidatorType.GetConstructors().Single().Invoke(
          new object[] { getFilterExpression, getPropertyValuesFunc, propertyNames });

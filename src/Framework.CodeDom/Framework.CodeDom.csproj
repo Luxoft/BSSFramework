@@ -7,8 +7,6 @@
     <PackageReference Include="System.CodeDom" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Framework.Core.AnonymousTypeBuilder\Framework.Core.AnonymousTypeBuilder.csproj" />
-    <ProjectReference Include="..\Framework.Core.Reflection\Framework.Core.Reflection.csproj" />
     <ProjectReference Include="..\Framework.Persistent\Framework.Persistent.csproj" />
   </ItemGroup>
 </Project>

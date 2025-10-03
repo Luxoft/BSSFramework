@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.Core;
+using CommonFramework;
+using CommonFramework.DictionaryCache;
+using CommonFramework.Maybe;
 
 namespace Framework.DomainDriven._Visitors;
 

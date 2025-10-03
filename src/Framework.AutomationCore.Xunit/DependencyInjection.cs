@@ -5,7 +5,8 @@ using Automation.Xunit.ServiceEnvironment;
 
 using Bss.Testing.Xunit.Interfaces;
 
-using Framework.DependencyInjection;
+using CommonFramework.DependencyInjection;
+
 using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.WebApiNetCore;
 

@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.Core;
+using CommonFramework.Visitor;
+
 using Framework.Persistent;
 
 namespace Framework.DomainDriven._Visitors;

@@ -1,7 +1,8 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
-using Framework.SecuritySystem;
+
+using SecuritySystem;
 
 namespace Framework.Authorization.Notification;
 

@@ -4,7 +4,7 @@ using Automation.Utils;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.Persistent;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;

@@ -1,9 +1,9 @@
 ﻿using Framework.Core;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Automation.Utils;
 
-public record TestPermission(SecurityRole SecurityRole, Period Period, IReadOnlyDictionary<Type, IReadOnlyList<Guid>> Restrictions)
+public record TestPermission(SecurityRole SecurityRole, Period Period, IReadOnlyDictionary<Type, Array> Restrictions)
 {
     public TestPermission(SecurityRole securityRole)
         : this(securityRole, Period.Eternity)
@@ -11,7 +11,7 @@ public record TestPermission(SecurityRole SecurityRole, Period Period, IReadOnly
     }
 
     public TestPermission(SecurityRole securityRole, Period period)
-        : this(securityRole, period, new Dictionary<Type, IReadOnlyList<Guid>>())
+        : this(securityRole, period, new Dictionary<Type, Array>())
     {
     }
 

@@ -1,6 +1,9 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+using CommonFramework.Maybe;
+
 using Framework.Persistent;
-using Framework.SecuritySystem;
+
+using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.BLL.Security
 {
@@ -37,7 +40,7 @@ namespace Framework.DomainDriven.BLL.Security
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
-        where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>, IAccessDeniedExceptionServiceContainer, IHierarchicalObjectExpanderFactoryContainer<TIdent>
+        where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>, IAccessDeniedExceptionServiceContainer, IHierarchicalObjectExpanderFactoryContainer
     {
         protected DefaultSecurityDomainBLLBase(
             TBLLContext context,

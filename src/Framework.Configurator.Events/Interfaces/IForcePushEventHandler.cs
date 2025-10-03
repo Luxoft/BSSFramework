@@ -1,4 +1,6 @@
-﻿namespace Framework.Configurator.Interfaces;
+﻿using SecuritySystem.Configurator.Interfaces;
+
+namespace Framework.Configurator.Interfaces;
 
 public interface IForcePushEventHandler : IHandler
 {

@@ -1,5 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 
+using CommonFramework;
+using CommonFramework.DictionaryCache;
+
 using Framework.Core;
 
 namespace Framework.DomainDriven.NHibernate;
@@ -37,6 +40,6 @@ internal static class QueryableExtensions
                         return fetchExpr.Compile();
 
                     },
-                    SequenceComparer<PropertyPath>.Value).WithLock();
+                    SequenceComparer<PropertyPath>.Default).WithLock();
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 internal static class TimeProviderExtensions
 {

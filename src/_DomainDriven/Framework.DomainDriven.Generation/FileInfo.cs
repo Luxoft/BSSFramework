@@ -1,8 +1,6 @@
 ﻿using System.Text;
 
-using Framework.Core;
-
-
+using CommonFramework;
 
 namespace Framework.DomainDriven.Generation;
 

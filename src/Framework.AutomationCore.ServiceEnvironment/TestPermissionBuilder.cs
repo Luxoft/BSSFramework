@@ -1,5 +1,7 @@
-﻿using Framework.Core;
-using Framework.SecuritySystem;
+﻿using CommonFramework;
+
+using Framework.Core;
+using SecuritySystem;
 
 namespace Automation.Utils;
 
@@ -70,6 +72,6 @@ public class TestPermissionBuilder
         return new TestPermission(
             testPermissionBuilder.SecurityRole,
             testPermissionBuilder.Period,
-            testPermissionBuilder.Restrictions.Where(pair => pair.Value.Any()).ToDictionary(pair => pair.Key, pair => pair.Value.ToReadOnlyListI()));
+            testPermissionBuilder.Restrictions.Where(pair => pair.Value.Any()).ToDictionary(pair => pair.Key, Array (pair) => pair.Value.ToArray()));
     }
 }

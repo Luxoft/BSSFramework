@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 
-using Framework.Core;
+using CommonFramework;
 
 namespace Framework.ExpressionParsers;
 

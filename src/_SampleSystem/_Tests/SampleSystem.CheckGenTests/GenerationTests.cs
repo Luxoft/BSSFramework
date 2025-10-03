@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using FileInfo = Framework.DomainDriven.Generation.FileInfo;
+﻿using FileInfo = Framework.DomainDriven.Generation.FileInfo;
 
 namespace SampleSystem.CheckGenTests;
 

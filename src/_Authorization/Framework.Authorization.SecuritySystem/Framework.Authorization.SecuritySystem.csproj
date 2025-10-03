@@ -1,12 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.Authorization.SecuritySystem</PackageId>
+    <PackageId>Luxoft.Framework.Authorization.SecuritySystemImpl</PackageId>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" />
+    <PackageReference Include="IvAt.SecuritySystem" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
   </ItemGroup>
 
@@ -16,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
-    <ProjectReference Include="..\..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
 
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ApplicationCore\Framework.DomainDriven.ApplicationCore.csproj" />
 

@@ -1,5 +1,6 @@
 ﻿using Framework.Persistent;
-using Framework.SecuritySystem;
+using SecuritySystem;
+using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.BLL.Security;
 

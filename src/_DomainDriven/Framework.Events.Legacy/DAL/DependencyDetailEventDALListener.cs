@@ -16,14 +16,14 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase> : IBe
 
     public DependencyDetailEventDALListener(
         IEventDTOMessageSender<TPersistentDomainObjectBase> messageSender,
-        EventDALListenerSettings<TPersistentDomainObjectBase> settings = null)
+        EventDALListenerSettings<TPersistentDomainObjectBase>? settings = null)
     {
         this.messageSender = messageSender;
         this.settings = settings ?? new EventDALListenerSettings<TPersistentDomainObjectBase>();
     }
 
     /// <inheritdoc />
-    public void Process(DALChangesEventArgs eventArgs)
+    public async Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
     {
         if (!this.settings.TypeEvents.Any())
         {
@@ -144,7 +144,7 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase> : IBe
 
         if (dalChanges != null)
         {
-            this.Process(new DALChangesEventArgs(dalChanges));
+            this.Process(new DALChangesEventArgs(dalChanges), CancellationToken.None).GetAwaiter().GetResult();
         }
     }
 

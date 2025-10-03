@@ -1,4 +1,4 @@
-﻿using Framework.SecuritySystem.AvailableSecurity;
+﻿using SecuritySystem.AvailableSecurity;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;

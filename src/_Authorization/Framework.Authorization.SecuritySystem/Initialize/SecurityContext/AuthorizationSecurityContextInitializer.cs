@@ -1,12 +1,18 @@
-﻿using Framework.Authorization.Domain;
+﻿using CommonFramework;
+
+using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
-using Framework.GenericQueryable;
-using Framework.SecuritySystem;
+
+using GenericQueryable;
+
+using SecuritySystem;
 
 using Microsoft.Extensions.Logging;
 
-namespace Framework.Authorization.SecuritySystem.Initialize;
+using SecuritySystem.Attributes;
+
+namespace Framework.Authorization.SecuritySystemImpl.Initialize;
 
 public class AuthorizationSecurityContextInitializer(
     [DisabledSecurity] IRepository<SecurityContextType> securityContextTypeRepository,

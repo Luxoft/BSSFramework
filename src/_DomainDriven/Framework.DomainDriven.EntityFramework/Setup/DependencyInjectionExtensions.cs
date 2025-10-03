@@ -1,9 +1,12 @@
 ﻿using System.Data;
 
+using CommonFramework.DependencyInjection;
+
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.DALExceptions;
-using Framework.GenericQueryable;
+
+using GenericQueryable;
 
 using Microsoft.Extensions.DependencyInjection;
 

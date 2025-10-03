@@ -4,7 +4,7 @@ using Automation.ServiceEnvironment.Services;
 using Automation.Settings;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

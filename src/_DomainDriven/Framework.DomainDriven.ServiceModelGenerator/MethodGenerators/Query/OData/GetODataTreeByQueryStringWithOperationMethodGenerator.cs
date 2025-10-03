@@ -1,5 +1,7 @@
 ﻿using System.CodeDom;
 
+using CommonFramework;
+
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.Core.Serialization;
@@ -7,7 +9,7 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.OData;
 using Framework.Persistent;
-using Framework.SecuritySystem;
+using SecuritySystem;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;

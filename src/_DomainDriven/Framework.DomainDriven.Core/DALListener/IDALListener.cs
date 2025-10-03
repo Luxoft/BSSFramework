@@ -9,5 +9,5 @@ public interface IDALListener
     /// Обработка евента
     /// </summary>
     /// <param name="eventArgs">Даннные о DAL-изменениях</param>
-    void Process(DALChangesEventArgs eventArgs);
+    Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken);
 }

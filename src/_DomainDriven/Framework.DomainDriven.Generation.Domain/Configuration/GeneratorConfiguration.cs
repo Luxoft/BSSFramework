@@ -1,7 +1,9 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
 
-using Framework.Core;
+using CommonFramework;
+using CommonFramework.Maybe;
+
 using Framework.Exceptions;
 
 namespace Framework.DomainDriven.Generation.Domain;

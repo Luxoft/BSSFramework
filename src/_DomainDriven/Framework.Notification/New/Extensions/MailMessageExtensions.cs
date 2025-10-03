@@ -1,5 +1,6 @@
 ﻿using System.Net.Mail;
-using Framework.Core;
+
+using CommonFramework;
 
 namespace Framework.Notification.New;
 

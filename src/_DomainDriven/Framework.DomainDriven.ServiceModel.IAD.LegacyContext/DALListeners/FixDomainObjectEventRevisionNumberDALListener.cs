@@ -4,15 +4,10 @@ using Framework.DomainDriven.BLL;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
-public class FixDomainObjectEventRevisionNumberDALListener : BLLContextContainer<IConfigurationBLLContext>, IBeforeTransactionCompletedDALListener
+public class FixDomainObjectEventRevisionNumberDALListener(IConfigurationBLLContext context) : BLLContextContainer<IConfigurationBLLContext>(context),
+                                                                                               IBeforeTransactionCompletedDALListener
 {
-    public FixDomainObjectEventRevisionNumberDALListener(IConfigurationBLLContext context)
-            : base(context)
-    {
-    }
-
-
-    public void Process(DALChangesEventArgs eventArgs)
+    public async Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
     {
         if (eventArgs == null) throw new ArgumentNullException(nameof(eventArgs));
 

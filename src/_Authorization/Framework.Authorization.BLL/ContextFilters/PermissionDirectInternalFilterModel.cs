@@ -4,34 +4,27 @@ using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven;
 
+using SecuritySystem.ExternalSystem.SecurityContextStorage;
+
 namespace Framework.Authorization.BLL;
 
-internal class PermissionDirectInternalFilterModel : IDomainObjectFilterModel<Permission>
+internal class PermissionDirectInternalFilterModel(IAuthorizationBLLContext context, PermissionDirectFilterModel baseFilterModel)
+    : IDomainObjectFilterModel<Permission>
 {
-    private readonly IAuthorizationBLLContext context;
-    private readonly PermissionDirectFilterModel baseFilterModel;
-
-    public PermissionDirectInternalFilterModel(IAuthorizationBLLContext context, PermissionDirectFilterModel baseFilterModel)
-    {
-        if (context == null) throw new ArgumentNullException(nameof(context));
-        if (baseFilterModel == null) throw new ArgumentNullException(nameof(baseFilterModel));
-
-        this.context = context;
-        this.baseFilterModel = baseFilterModel;
-    }
-
     public Expression<Func<Permission, bool>> ToFilterExpression()
     {
-        var securityContextType = this.baseFilterModel.SecurityContextType;
-        var securityContextId = this.baseFilterModel.SecurityContextId;
+        var securityContextType = baseFilterModel.SecurityContextType;
+        var securityContextId = baseFilterModel.SecurityContextId;
 
-        if (this.baseFilterModel.StrongDirect)
+        if (baseFilterModel.StrongDirect)
         {
             return permission => permission.Restrictions.Any(filterItem => filterItem.SecurityContextType == securityContextType && filterItem.SecurityContextId == securityContextId);
         }
         else
         {
-            var securityEntities = this.context.SecurityContextStorage.GetTyped(securityContextType.Id).GetSecurityContextsWithMasterExpand(securityContextId);
+            var securityContextInfo = context.SecurityContextInfoSource.GetSecurityContextInfo(securityContextType.Id);
+
+            var securityEntities = context.SecurityContextStorage.GetTyped<Guid>(securityContextInfo.Type).GetSecurityContextsWithMasterExpand(securityContextId);
 
             var entityIdents = securityEntities.ToList(se => se.Id);
 

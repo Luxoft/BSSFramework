@@ -1,5 +1,5 @@
 ﻿using Framework.DomainDriven;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;

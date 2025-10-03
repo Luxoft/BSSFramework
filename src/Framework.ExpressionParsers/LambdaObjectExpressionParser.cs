@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 
+using CommonFramework.ExpressionEvaluate;
+
 using Framework.Core;
 
 using Framework.Exceptions;
@@ -7,35 +9,18 @@ using Framework.Persistent;
 
 namespace Framework.ExpressionParsers;
 
-public abstract class LambdaObjectExpressionParser<TLambdaObject> : LambdaObjectExpressionParser<TLambdaObject, Delegate, LambdaExpression>
-        where TLambdaObject : class, ILambdaObject
+public abstract class LambdaObjectExpressionParser<TLambdaObject, TDelegate>(INativeExpressionParser parser)
+    : LambdaObjectExpressionParser<TLambdaObject, TDelegate, Expression<TDelegate>>(parser, expr => LambdaCompileCache.GetFunc(expr))
+    where TLambdaObject : class, ILambdaObject
+    where TDelegate : class
 {
-    protected LambdaObjectExpressionParser(INativeExpressionParser parser)
-            : base(parser, expr => expr.Compile(LambdaCompileCache))
-    {
-
-    }
-
-    private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
-}
-
-public abstract class LambdaObjectExpressionParser<TLambdaObject, TDelegate> : LambdaObjectExpressionParser<TLambdaObject, TDelegate, Expression<TDelegate>>
-        where TLambdaObject : class, ILambdaObject
-        where TDelegate : class
-{
-    protected LambdaObjectExpressionParser(INativeExpressionParser parser)
-            : base(parser, expr => expr.Compile(LambdaCompileCache))
-    {
-
-    }
-
     protected override Expression<TDelegate> GetInternalExpression(string value)
     {
         return this.Parser.Parse<TDelegate>(value);
     }
 
 
-    private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
+    private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.None);
 }
 
 public abstract class LambdaObjectExpressionParser<TLambdaObject, TDelegate, TExpression> : ExpressionParser<TDelegate, TExpression>,

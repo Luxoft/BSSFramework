@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Core;
 
 namespace Framework.DomainDriven;
@@ -23,7 +25,7 @@ public static class FetchContainerExtensions
     {
         if (fetchs == null) throw new ArgumentNullException(nameof(fetchs));
 
-        return fetchs.AnyA() ? fetchs.ToTree().ToFetchContainer() : FetchContainer<TDomainObject>.Empty;
+        return fetchs.Any() ? fetchs.ToTree().ToFetchContainer() : FetchContainer<TDomainObject>.Empty;
     }
 
     public static IFetchContainer<TDomainObject> ToFetchContainer<TDomainObject>(this IPropertyPathTree<TDomainObject> fetchs)

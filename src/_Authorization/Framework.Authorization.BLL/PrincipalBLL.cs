@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem;
+using Framework.Authorization.SecuritySystemImpl;
 using Framework.Exceptions;
 
 using Microsoft.Extensions.DependencyInjection;

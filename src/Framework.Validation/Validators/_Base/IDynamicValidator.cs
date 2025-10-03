@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-using Framework.Core;
+using CommonFramework;
 
 namespace Framework.Validation;
 

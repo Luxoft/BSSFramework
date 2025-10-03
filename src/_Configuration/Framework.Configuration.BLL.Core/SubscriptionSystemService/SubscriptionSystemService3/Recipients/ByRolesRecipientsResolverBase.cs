@@ -5,7 +5,7 @@ using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Notification;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 

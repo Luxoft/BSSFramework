@@ -1,8 +1,9 @@
-﻿using Framework.DomainDriven.VirtualPermission;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.DependencyInjection;
+﻿using SecuritySystem;
 
 using SampleSystem.Domain;
+
+using SecuritySystem.DependencyInjection;
+using SecuritySystem.VirtualPermission;
 
 namespace SampleSystem.Security;
 
@@ -10,7 +11,7 @@ public static class SampleSystemSecuritySystemExtensions
 {
     public static ISecuritySystemSettings AddSecurityContexts(this ISecuritySystemSettings settings)
     {
-        return settings.AddSecurityContext<BusinessUnit>(new Guid("263D2C60-7BCE-45D6-A0AF-A0830152353E"), displayFunc: bu => bu.Name);
+        return settings.AddSecurityContext<BusinessUnit>(new Guid("263D2C60-7BCE-45D6-A0AF-A0830152353E"), b => b.SetDisplayFunc(displayFunc: bu => bu.Name));
     }
 
     public static ISecuritySystemSettings AddSecurityRoles(this ISecuritySystemSettings settings)

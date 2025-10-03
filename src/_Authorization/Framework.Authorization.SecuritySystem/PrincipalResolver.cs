@@ -1,10 +1,12 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.DomainDriven.Repository;
-using Framework.GenericQueryable;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.Credential;
 
-namespace Framework.Authorization.SecuritySystem;
+using GenericQueryable;
+
+using SecuritySystem.Attributes;
+using SecuritySystem.Credential;
+
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class PrincipalResolver([DisabledSecurity] IRepository<Principal> principalRepository) : IPrincipalResolver
 {

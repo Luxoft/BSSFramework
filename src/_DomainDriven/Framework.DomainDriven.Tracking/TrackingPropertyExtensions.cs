@@ -1,4 +1,5 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+using CommonFramework.Maybe;
 
 namespace Framework.DomainDriven.Tracking;
 

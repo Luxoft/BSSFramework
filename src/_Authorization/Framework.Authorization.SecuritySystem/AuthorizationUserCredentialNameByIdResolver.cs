@@ -1,8 +1,9 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.QueryableSource;
-using Framework.SecuritySystem.Credential;
 
-namespace Framework.Authorization.SecuritySystem;
+using SecuritySystem.Credential;
+using SecuritySystem.Services;
+
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class AuthorizationUserCredentialNameByIdResolver(IQueryableSource queryableSource)
     : IUserCredentialNameByIdResolver

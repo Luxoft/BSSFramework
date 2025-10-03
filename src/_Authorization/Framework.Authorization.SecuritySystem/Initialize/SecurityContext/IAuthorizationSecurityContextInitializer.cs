@@ -1,8 +1,10 @@
-﻿using Framework.Authorization.Domain;
-using Framework.Core;
-using Framework.SecuritySystem;
+﻿using CommonFramework;
 
-namespace Framework.Authorization.SecuritySystem.Initialize;
+using Framework.Authorization.Domain;
+
+using SecuritySystem;
+
+namespace Framework.Authorization.SecuritySystemImpl.Initialize;
 
 public interface IAuthorizationSecurityContextInitializer : ISecurityInitializer
 {

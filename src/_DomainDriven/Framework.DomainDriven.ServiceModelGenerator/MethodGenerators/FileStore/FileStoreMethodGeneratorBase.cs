@@ -2,7 +2,7 @@
 
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator.MethodGenerators.FileStore;
 

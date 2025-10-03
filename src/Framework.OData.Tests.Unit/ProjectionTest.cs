@@ -69,7 +69,7 @@ public class TestEmployee : ITestEmployee
     }
 }
 
-public class TestLocation : IHierarchicalSource<TestLocation>, ITestLocation
+public class TestLocation : IParentSource<ITestLocation>, ITestLocation
 {
     public Guid Id { get; set; }
 
@@ -94,11 +94,6 @@ public class TestLocation : IHierarchicalSource<TestLocation>, ITestLocation
     {
         get { return this.Parent; }
     }
-
-    IEnumerable<ITestLocation> IChildrenSource<ITestLocation>.Children
-    {
-        get { return this.Children; }
-    }
 }
 
 public class TestDepartment : ITestDepartment
@@ -115,7 +110,7 @@ public interface ITestEmployee : IDefaultIdentityObject, IVisualIdentityObject, 
 
 }
 
-public interface ITestLocation : IDefaultIdentityObject, IVisualIdentityObject, IHierarchicalSource<ITestLocation>
+public interface ITestLocation : IDefaultIdentityObject, IVisualIdentityObject
 {
     ITestDepartment Department { get; }
 }

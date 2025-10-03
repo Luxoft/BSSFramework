@@ -1,11 +1,13 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.Core;
 
 using System.Linq.Expressions;
 
+using CommonFramework;
+
 using Framework.Authorization.Notification;
 using Framework.DomainDriven.BLL;
-using Framework.SecuritySystem;
+using SecuritySystem;
+using SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 namespace Framework.Authorization.BLL;
 
@@ -40,7 +42,7 @@ public class LegacyNotificationPrincipalExtractor(
             {
                 var tailGroups = notificationFilterGroups.Skip(1).ToArray();
 
-                var firstGroupExternalSource = this.Context.SecurityContextStorage.GetTyped(firstGroup.SecurityContextType);
+                var firstGroupExternalSource = this.Context.SecurityContextStorage.GetTyped<Guid>(firstGroup.SecurityContextType);
 
                 foreach (var preExpandedIdent in firstGroup.Idents)
                 {

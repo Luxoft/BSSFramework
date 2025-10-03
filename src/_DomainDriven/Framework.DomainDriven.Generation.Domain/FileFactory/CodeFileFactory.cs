@@ -63,15 +63,15 @@ public abstract class CodeFileFactory<TConfiguration, TFileType> : GeneratorConf
     {
         return this.GetCodeTypeDeclaration().Self(decl =>
                                                   {
-                                                      decl.BaseTypes.AddRange(this.GetBaseTypes().ToArray(true));
+                                                      decl.BaseTypes.AddRange(this.GetBaseTypes().ToArray());
 
                                                       decl.Members.AddRange(this.GetMembers()
                                                                                 .OrderBy(x => x.Attributes.HasFlag(MemberAttributes.Const) ? 0 : 1)
                                                                                 .ThenBy(x => x is CodeConstructor ? 0 : 1)
                                                                                 .ThenBy(x => x.Attributes.HasFlag(MemberAttributes.Static) ? 0 : 1)
-                                                                                .ThenBy(x => x.Name).ToArray(true));
+                                                                                .ThenBy(x => x.Name).ToArray());
 
-                                                      decl.CustomAttributes.AddRange(this.GetCustomAttributes().OrderBy(x => x.Name).ToArray(true));
+                                                      decl.CustomAttributes.AddRange(this.GetCustomAttributes().OrderBy(x => x.Name).ToArray());
 
                                                       decl.UserData["DomainType"] = this.DomainType;
                                                       decl.UserData["FileType"] = this.FileType;

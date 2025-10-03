@@ -1,7 +1,8 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
-using Framework.SecuritySystem;
+
+using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.BLLGenerator;
 

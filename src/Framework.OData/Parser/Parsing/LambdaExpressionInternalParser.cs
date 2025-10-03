@@ -1,6 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Globalization;
 
+using CommonFramework;
+using CommonFramework.Maybe;
+
 using Framework.Core;
 using Framework.Parsing;
 using Framework.QueryLanguage;
@@ -157,12 +160,9 @@ internal class LambdaExpressionInternalParser : CharParsers
     {
         get
         {
-            return this.ExpandContainsExpressionParser
-                       .Or(() => this.PeriodMethodExpressionParser)
-                       .Or(() => this.StringMethodExpressionParser)
+            return this.StringMethodExpressionParser
                        .Or(() => this.CollectionMethodExpressionParser)
                        .Or(() => this.GuidConstantExpressionParser)
-                       .Or(() => this.PeriodConstantExpressionParser)
                        .Or(() => this.DateTimeConstantExpressionParser)
                        .Or(() => this.BooleanConstantExpressionParser)
                        .Or(() => this.DecimalConstantExpressionParser)
@@ -174,52 +174,6 @@ internal class LambdaExpressionInternalParser : CharParsers
                        .Or(() => this.DateTimePropertyParser)
                        .Or(() => this.LengthPropertyParser)
                        .Or(() => this.PropertyExpressionParser);
-        }
-    }
-
-    private ExpressionParser ExpandContainsExpressionParser
-    {
-        get
-        {
-            return from ___ in this.BetweenSpaces(this.StringIgnoreCase("expandC"))
-
-                   from res in this.BetweenBrackets(from expandType in this.RootBodyParser
-
-                                                    where expandType is ConstantExpression
-
-                                                    from _ in this.Char(',')
-
-                                                    from filterId in this.RootBodyParser
-
-                                                    where filterId is ConstantExpression
-
-                                                    from __ in this.Char(',')
-
-                                                    from source in this.RootBodyParser
-
-                                                    select new ExpandContainsExpression(expandType as ConstantExpression, filterId as ConstantExpression, source))
-
-
-                   select res;
-        }
-    }
-
-    private ExpressionParser PeriodMethodExpressionParser
-    {
-        get
-        {
-            return from methodType in this.PeriodMethodExpressionTypeParser
-
-                   from result in
-                           this.BetweenBrackets(from arg1 in this.RootBodyParser
-
-                                                from _ in this.PreSpaces(this.Char(','))
-
-                                                from arg2 in this.RootBodyParser
-
-                                                select new MethodExpression(arg1, methodType, new[] { arg2 }))
-
-                   select result;
         }
     }
 
@@ -263,26 +217,6 @@ internal class LambdaExpressionInternalParser : CharParsers
                    from dateStr in this.TakeTo("'")
                    from res in this.CatchParser(() => DateTime.Parse(dateStr))
                    select new DateTimeConstantExpression(res);
-        }
-    }
-
-    private ExpressionParser PeriodConstantExpressionParser
-    {
-        get
-        {
-            var endDateParser = this.Pre(this.PreSpaces(this.DateTimeConstantExpressionParser), this.PreSpaces(this.Char(',')))
-                                    .Select(dateTime => new DateTime?(dateTime.Value));
-
-            return from _ in this.StringIgnoreCase("period")
-
-                   from res in
-                           this.BetweenBrackets(from startDateConst in this.DateTimeConstantExpressionParser
-
-                                                from endDate in endDateParser.Or(this.Return(default(DateTime?)))
-
-                                                select new Period(startDateConst.Value, endDate))
-
-                   select new PeriodConstantExpression(res);
         }
     }
 
@@ -474,12 +408,6 @@ internal class LambdaExpressionInternalParser : CharParsers
         get { return this.FromDictionary(StringMethodExpressions, this.StringIgnoreCase); }
     }
 
-    private Parser<string, MethodExpressionType> PeriodMethodExpressionTypeParser
-    {
-        get { return this.FromDictionary(PeriodMethodExpressions, this.StringIgnoreCase); }
-    }
-
-
     private Parser<string, MethodExpressionType> CollectionMethodExpressionTypeParser
     {
         get { return this.FromDictionary(CollectionMethodExpressions, this.StringIgnoreCase); }
@@ -534,12 +462,6 @@ internal class LambdaExpressionInternalParser : CharParsers
                 { "startswith", MethodExpressionType.StringStartsWith },
                 { "substringof", MethodExpressionType.StringContains },
                 { "endswith", MethodExpressionType.StringEndsWith }
-        };
-
-    private static readonly Dictionary<string, MethodExpressionType> PeriodMethodExpressions = new Dictionary<string, MethodExpressionType>
-        {
-                { "containsP", MethodExpressionType.PeriodContains},
-                { "isIntersectedP", MethodExpressionType.PeriodIsIntersected},
         };
 
     private static readonly Dictionary<string, MethodExpressionType> CollectionMethodExpressions = new Dictionary<string, MethodExpressionType>

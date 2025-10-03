@@ -1,5 +1,8 @@
 ﻿using System.Linq.Expressions;
 
+using CommonFramework;
+using CommonFramework.ExpressionEvaluate;
+
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.Lock;
@@ -19,7 +22,7 @@ namespace Framework.DomainDriven.NHibernate;
 public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
     where TDomainObject : class, IIdentityObject<TIdent>
 {
-    private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
+    private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.None);
 
     private readonly INHibSession session;
 
@@ -172,7 +175,7 @@ public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
 
         var result = new DomainObjectPropertyRevisions<TIdent, TProperty>(id, propertyPath);
 
-        var getPropertyFunc = propertyExpression.Compile(LambdaCompileCache);
+        var getPropertyFunc = LambdaCompileCache.GetFunc(propertyExpression);
 
         foreach (var queryResult in queryResults.Cast<object[]>())
         {

@@ -1,7 +1,9 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Framework.Core;
+using CommonFramework.Maybe;
+
+namespace Framework.Core.Visitors;
 
 /// <summary>
 /// Выправление MemberExpression со свойствами, которых ReflectedType не текущий, а базовый

@@ -1,4 +1,4 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
 
 namespace SampleSystem.Domain.Projections;
 

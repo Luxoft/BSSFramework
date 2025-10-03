@@ -7,6 +7,8 @@ using Framework.Notification;
 using Framework.Notification.DTO;
 using Framework.Persistent;
 
+using CommonFramework;
+
 namespace Framework.Configuration.BLL.Notification;
 
 public class TemplateMessageSender : BLLContextContainer<IConfigurationBLLContext>, IMessageSender<MessageTemplateNotification>

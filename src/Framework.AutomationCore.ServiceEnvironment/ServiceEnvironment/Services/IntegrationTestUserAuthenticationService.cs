@@ -1,8 +1,9 @@
 ﻿using Automation.Settings;
 
-using Framework.Core;
+using CommonFramework.DictionaryCache;
+
 using Framework.DomainDriven;
-using Framework.SecuritySystem.Credential;
+using SecuritySystem.Credential;
 
 using Microsoft.Extensions.Options;
 

@@ -1,16 +1,23 @@
 ﻿using System.Linq.Expressions;
 
+using CommonFramework;
+using CommonFramework.ExpressionEvaluate;
+
 using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystem;
-using Framework.Core;
-using Framework.SecuritySystem;
+using Framework.Authorization.SecuritySystemImpl;
+
+using SecuritySystem;
+using SecuritySystem.Providers;
+using SecuritySystem.RelativeDomainPathInfo;
+using SecuritySystem.SecurityAccessor;
 
 namespace Framework.Authorization.Environment.Security;
 
 public class AvailableBusinessRoleSecurityProvider<TDomainObject>(
+    IExpressionEvaluatorStorage expressionEvaluatorStorage,
     IAvailablePermissionSource availablePermissionSource,
     IRelativeDomainPathInfo<TDomainObject, BusinessRole> toBusinessRolePathInfo)
-    : SecurityProvider<TDomainObject>
+    : SecurityProvider<TDomainObject>(expressionEvaluatorStorage)
 {
     public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } =
 

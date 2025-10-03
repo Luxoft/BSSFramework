@@ -2,6 +2,6 @@
 
 using Framework.Authorization.Domain;
 
-namespace Framework.Authorization.SecuritySystem.Validation;
+namespace Framework.Authorization.SecuritySystemImpl.Validation;
 
 public class PrincipalDisableUniquePermissionValidator : AbstractValidator<Principal>, IPrincipalUniquePermissionValidator;

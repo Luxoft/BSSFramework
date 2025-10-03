@@ -15,20 +15,8 @@ public enum MethodExpressionType
     StringEndsWith,
 
     [EnumMember]
-    PeriodContains,
-
-    [EnumMember]
-    PeriodIsIntersected,
-
-    [EnumMember]
     CollectionAny,
 
     [EnumMember]
     CollectionAll,
-
-    [EnumMember]
-    CalendarPeriodContains,
-
-    [EnumMember]
-    CalendarPeriodIsIntersected
 }

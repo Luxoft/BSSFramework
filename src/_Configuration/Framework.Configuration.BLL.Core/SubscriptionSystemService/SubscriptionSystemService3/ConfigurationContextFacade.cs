@@ -4,7 +4,7 @@ using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.Notification;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 

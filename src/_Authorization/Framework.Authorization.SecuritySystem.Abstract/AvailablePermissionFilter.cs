@@ -1,7 +1,12 @@
 ﻿using System.Linq.Expressions;
+
+using CommonFramework;
+using CommonFramework.ExpressionEvaluate;
+
+using Framework.Authorization.Domain;
 using Framework.Core;
 
-namespace Framework.Authorization.Domain;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class AvailablePermissionFilter(DateTime today)
 {
@@ -33,11 +38,14 @@ public class AvailablePermissionFilter(DateTime today)
         foreach (var (securityContextTypeId, (allowGrandAccess, restrictionFilterExpr)) in this.RestrictionFilters)
         {
             var baseFilter =
-                ExpressionHelper
-                    .Create(
-                        (Permission permission) => permission.Restrictions.Any(
-                            r => r.SecurityContextType.Id == securityContextTypeId && restrictionFilterExpr.Eval(r.SecurityContextId)))
-                    .ExpandConst().InlineEval();
+                ExpressionEvaluateHelper.InlineEvaluate(ee =>
+                                                            ExpressionHelper
+                                                                .Create((Permission permission) =>
+                                                                            permission.Restrictions.Any(r => r.SecurityContextType.Id
+                                                                                        == securityContextTypeId
+                                                                                        && ee.Evaluate(
+                                                                                            restrictionFilterExpr,
+                                                                                            r.SecurityContextId))));
 
             if (allowGrandAccess)
             {

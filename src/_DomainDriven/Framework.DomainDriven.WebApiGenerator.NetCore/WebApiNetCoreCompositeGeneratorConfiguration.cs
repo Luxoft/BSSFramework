@@ -1,6 +1,7 @@
 ﻿using System.CodeDom;
 
-using Framework.Core;
+using CommonFramework;
+
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.ServiceModelGenerator;
 

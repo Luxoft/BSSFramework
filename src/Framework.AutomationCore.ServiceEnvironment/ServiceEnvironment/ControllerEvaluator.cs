@@ -2,10 +2,13 @@
 
 using Automation.ServiceEnvironment.Services;
 
+using CommonFramework;
+using CommonFramework.Visitor;
+
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;
-using Framework.SecuritySystem.Credential;
+using SecuritySystem.Credential;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +23,7 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
     {
         this.InternalEvaluateAsync<object?>(actionExpr, async c =>
         {
-            actionExpr.Eval(c);
+            actionExpr.Compile().Invoke(c);
             return default;
         }).GetAwaiter().GetResult();
     }
@@ -29,21 +32,21 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
     {
         TaskResultHelper<T>.TypeIsNotTaskValidate();
 
-        return this.InternalEvaluateAsync(funcExpr, async c => funcExpr.Eval(c)).GetAwaiter().GetResult();
+        return this.InternalEvaluateAsync(funcExpr, async c => funcExpr.Compile().Invoke(c)).GetAwaiter().GetResult();
     }
 
     public async Task EvaluateAsync(Expression<Func<TController, Task>> actionExpr)
     {
         await this.InternalEvaluateAsync<object?>(actionExpr, async c =>
         {
-            await actionExpr.Eval(c);
+            await actionExpr.Compile().Invoke(c);
             return default;
         });
     }
 
     public async Task<T> EvaluateAsync<T>(Expression<Func<TController, Task<T>>> funcExpr)
     {
-        return await this.InternalEvaluateAsync(funcExpr, funcExpr.Compile(LambdaCompileCache.Default));
+        return await this.InternalEvaluateAsync(funcExpr, funcExpr.Compile());
     }
 
     private async Task<T> InternalEvaluateAsync<T>(LambdaExpression invokeExpr, Func<TController, Task<T>> func)
@@ -101,7 +104,7 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
         {
             var currentMethod = invokeExpr.UpdateBodyBase(ExpandConstVisitor.Value)
                                           .TryGetStartMethodInfo()
-                                          .FromMaybe("Current controller method can't be extracted");
+                                          .FromMaybe(() => "Current controller method can't be extracted");
 
             context.RequestServices.GetRequiredService<TestWebApiCurrentMethodResolver>().SetCurrentMethod(currentMethod);
 

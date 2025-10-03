@@ -2,12 +2,13 @@
 
 using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.Domain;
 using SampleSystem.ServiceEnvironment;
+
+using SecuritySystem.Attributes;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 

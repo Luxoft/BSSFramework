@@ -1,6 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Reflection;
 
+using CommonFramework;
+using CommonFramework.Maybe;
+
 namespace Framework.Core;
 
 public static class EnumHelper
@@ -22,12 +25,6 @@ public static class EnumHelper
         if (enumType == null) throw new ArgumentNullException(nameof(enumType));
 
         return Enum.GetValues(enumType).Cast<object>().ToArray();
-    }
-
-    public static Maybe<TEnum> MaybeParse<TEnum>(string str)
-            where TEnum : struct, Enum
-    {
-        return Maybe.OfTryMethod(new TryMethod<string, TEnum>(Enum.TryParse)) (str);
     }
 
     public static TEnum Parse<TEnum>(string str)

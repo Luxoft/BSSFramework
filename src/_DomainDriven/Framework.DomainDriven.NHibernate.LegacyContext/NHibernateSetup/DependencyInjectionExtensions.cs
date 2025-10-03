@@ -1,4 +1,5 @@
-﻿using Framework.DependencyInjection;
+﻿using CommonFramework.DependencyInjection;
+
 using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.DALExceptions;
 

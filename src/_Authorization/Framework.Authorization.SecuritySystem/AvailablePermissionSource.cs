@@ -1,11 +1,15 @@
 ﻿using System.Linq.Expressions;
 
+using CommonFramework;
+
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem;
+using SecuritySystem;
+using SecuritySystem.Attributes;
+using SecuritySystem.Services;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class AvailablePermissionSource(
     [DisabledSecurity] IRepository<Permission> permissionRepository,
@@ -14,6 +18,7 @@ public class AvailablePermissionSource(
     ISecurityRolesIdentsResolver securityRolesIdentsResolver,
     ISecurityContextInfoSource securityContextInfoSource,
     ISecurityContextSource securityContextSource,
+    IIdentityInfoSource identityInfoSource,
     SecurityRuleCredential defaultSecurityRuleCredential)
     : IAvailablePermissionSource
 {
@@ -25,9 +30,9 @@ public class AvailablePermissionSource(
 
             where securityContextRestriction.RawFilter != null
 
-            let securityContextType = securityContextInfoSource.GetSecurityContextInfo(securityContextRestriction.SecurityContextType)
+            let filter = this.GetRestrictionFilter(securityContextRestriction.RawFilter!)
 
-            let filter = this.GetRestrictionFilter(securityContextRestriction.RawFilter)
+            let securityContextType = securityContextInfoSource.GetSecurityContextInfo(securityContextRestriction.SecurityContextType)
 
             select (securityContextType.Id, (!securityContextRestriction.Required, filter));
 
@@ -51,8 +56,10 @@ public class AvailablePermissionSource(
         SecurityContextRestrictionFilterInfo<TSecurityContext> restrictionFilterInfo)
         where TSecurityContext : class, ISecurityContext
     {
+        var identityInfo = identityInfoSource.GetIdentityInfo<TSecurityContext, Guid>();
+
         var filteredSecurityContextQueryable = securityContextSource.GetQueryable(restrictionFilterInfo)
-                                                                    .Select(securityContext => securityContext.Id);
+                                                                    .Select(identityInfo.IdPath);
 
         return securityContextId => filteredSecurityContextQueryable.Contains(securityContextId);
     }

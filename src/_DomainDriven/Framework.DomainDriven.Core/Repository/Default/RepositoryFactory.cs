@@ -1,4 +1,4 @@
-﻿using Framework.SecuritySystem;
+﻿using SecuritySystem.DomainServices;
 
 namespace Framework.DomainDriven.Repository;
 

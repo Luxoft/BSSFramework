@@ -1,5 +1,6 @@
-﻿using Framework.Configuration.SubscriptionModeling;
-using Framework.Core;
+﻿using CommonFramework;
+
+using Framework.Configuration.SubscriptionModeling;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 

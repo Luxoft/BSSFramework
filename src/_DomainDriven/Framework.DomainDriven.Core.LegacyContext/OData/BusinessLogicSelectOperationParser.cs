@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 
-using Framework.Core;
+using CommonFramework;
+
 using Framework.Core.Serialization;
 using Framework.OData;
 

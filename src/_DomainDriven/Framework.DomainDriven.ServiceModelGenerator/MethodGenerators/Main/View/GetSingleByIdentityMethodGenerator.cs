@@ -1,5 +1,7 @@
 ﻿using System.CodeDom;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.CodeDom;
 using Framework.Projection;

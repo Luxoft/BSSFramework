@@ -1,10 +1,13 @@
 ﻿using System.Data;
 
+using CommonFramework.DependencyInjection;
+
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.DALExceptions;
 using Framework.DomainDriven.NHibernate.Audit;
-using Framework.GenericQueryable;
+
+using GenericQueryable;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -45,7 +48,7 @@ public static class DependencyInjectionExtensions
         services.AddSingleton<IDefaultConnectionStringSource, DefaultConnectionStringSource>();
 
         setupAction(setupObject);
-
+        
         setupObject.Initialize(services);
 
         return services;

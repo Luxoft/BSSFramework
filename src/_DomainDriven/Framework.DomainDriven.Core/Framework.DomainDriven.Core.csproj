@@ -11,13 +11,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.GenericQueryable\Framework.GenericQueryable.csproj" />
-    <ProjectReference Include="..\..\Framework.HierarchicalExpand\Framework.HierarchicalExpand.csproj" />
     <ProjectReference Include="..\..\Framework.Persistent\Framework.Persistent.csproj" />
-    <ProjectReference Include="..\..\Framework.SecuritySystem.Abstract\Framework.SecuritySystem.Abstract.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IvAt.GenericQueryable" />
+    <PackageReference Include="IvAt.SecuritySystem.Abstractions" />
+
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
   </ItemGroup>

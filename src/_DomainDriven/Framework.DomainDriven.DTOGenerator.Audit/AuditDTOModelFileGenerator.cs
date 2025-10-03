@@ -1,6 +1,9 @@
 ﻿using System.CodeDom;
 using System.Runtime.Serialization;
 
+using CommonFramework;
+using CommonFramework.Maybe;
+
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
@@ -112,8 +115,7 @@ public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TCon
 
     private IEnumerable<CodeTypeReference> GetMaybePropertyCodeTypeReferences(CodeTypeReference typeReference)
     {
-        return Maybe<object>
-               .GetKnownTypes()
+        return new[] { typeof(Just<>), typeof(Nothing<>) } 
                .Select(z => z.GetGenericTypeDefinition())
                .Select(z => new CodeTypeReference(z.GetGenericTypeDefinition()).Self(q => q.TypeArguments.Add(typeReference)));
     }

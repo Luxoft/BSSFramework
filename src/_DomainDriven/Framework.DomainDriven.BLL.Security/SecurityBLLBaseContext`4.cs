@@ -1,12 +1,15 @@
 ﻿using Framework.DomainDriven.Tracking;
 using Framework.Events;
-using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.QueryLanguage;
-using Framework.SecuritySystem;
 using Framework.Validation;
 
+using SecuritySystem;
+
 using Microsoft.Extensions.DependencyInjection;
+
+using SecuritySystem.HierarchicalExpand;
+using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.BLL.Security;
 
@@ -23,7 +26,7 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
             IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,
             IValidator validator,
-            IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
+            IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
             IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
             : base(serviceProvider, operationSender, trackingService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService) =>
 

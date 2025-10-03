@@ -1,6 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Reflection;
 
+using CommonFramework;
+using CommonFramework.DictionaryCache;
+
 using Framework.Core;
 using Framework.Persistent;
 using Framework.QueryLanguage;
@@ -39,7 +42,7 @@ internal static class PropertyInfoExtensions
 
             new DictionaryCache<PropertyInfo, bool>(property => property.IsSystemVirtualProperty() || property.HasPrivateField(true) || property.HasAttribute<ExpandPathAttribute>()).WithLock();
 
-    private static readonly IDictionaryCache<Type, IEnumerable<Type>> BaseTypesCache = new DictionaryCache<Type, IEnumerable<Type>>(type => type.GetAllElements(q => q.BaseType).TakeWhile(q => typeof(object) != q).ToHashSet(x => x)).WithLock();
+    private static readonly IDictionaryCache<Type, IEnumerable<Type>> BaseTypesCache = new DictionaryCache<Type, IEnumerable<Type>>(type => type.GetAllElements(q => q.BaseType).TakeWhile(q => typeof(object) != q).ToHashSet()).WithLock();
 
 
 

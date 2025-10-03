@@ -7,7 +7,7 @@ public interface IDefaultBLLContext<in TPersistentDomainObjectBase, TIdent> : IB
 
     IBLLFactoryContainerContext<IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>>,
 
-    IHierarchicalObjectExpanderFactoryContainer<TIdent>,
+    IHierarchicalObjectExpanderFactoryContainer,
 
     IValidatorContainer
 

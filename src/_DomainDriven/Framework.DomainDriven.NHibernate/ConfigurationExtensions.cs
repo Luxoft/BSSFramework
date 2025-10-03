@@ -1,5 +1,7 @@
 ﻿using System.Xml.Linq;
 
+using CommonFramework;
+
 using Framework.Core;
 
 using NHibernate.Cfg;

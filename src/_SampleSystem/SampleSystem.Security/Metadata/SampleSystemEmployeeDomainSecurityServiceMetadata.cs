@@ -1,7 +1,8 @@
-﻿using Framework.SecuritySystem;
-using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
+﻿using SecuritySystem;
 
 using SampleSystem.Domain;
+
+using SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 namespace SampleSystem.Security.Metadata;
 

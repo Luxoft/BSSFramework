@@ -1,5 +1,7 @@
 ﻿using System.Net.Mail;
 
+using CommonFramework.Maybe;
+
 using Framework.Authorization.Notification;
 using Framework.Core;
 using Framework.DomainDriven.Serialization;

@@ -1,10 +1,12 @@
 ﻿using FluentValidation;
 
 using Framework.Authorization.Domain;
-using Framework.Core;
-using Framework.SecuritySystem;
 
-namespace Framework.Authorization.SecuritySystem.Validation;
+using SecuritySystem;
+
+using CommonFramework;
+
+namespace Framework.Authorization.SecuritySystemImpl.Validation;
 
 public class PermissionRequiredContextValidator : AbstractValidator<Permission>
 {

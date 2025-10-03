@@ -34,7 +34,7 @@ namespace SampleSystem.BLL
     public partial class BusinessUnitBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.BusinessUnit>, SampleSystem.BLL.IBusinessUnitBLL
     {
         
-        public BusinessUnitBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnit> securityProvider) : 
+        public BusinessUnitBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.BusinessUnit> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -52,7 +52,7 @@ namespace SampleSystem.BLL
     public partial class BusinessUnitHrDepartmentBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.BusinessUnitHrDepartment>, SampleSystem.BLL.IBusinessUnitHrDepartmentBLL
     {
         
-        public BusinessUnitHrDepartmentBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnitHrDepartment> securityProvider) : 
+        public BusinessUnitHrDepartmentBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.BusinessUnitHrDepartment> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -70,7 +70,7 @@ namespace SampleSystem.BLL
     public partial class BusinessUnitManagerCommissionLinkBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.BusinessUnitManagerCommissionLink>, SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL
     {
         
-        public BusinessUnitManagerCommissionLinkBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnitManagerCommissionLink> securityProvider) : 
+        public BusinessUnitManagerCommissionLinkBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.BusinessUnitManagerCommissionLink> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -88,7 +88,7 @@ namespace SampleSystem.BLL
     public partial class BusinessUnitTypeBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.BusinessUnitType>, SampleSystem.BLL.IBusinessUnitTypeBLL
     {
         
-        public BusinessUnitTypeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnitType> securityProvider) : 
+        public BusinessUnitTypeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.BusinessUnitType> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -106,7 +106,7 @@ namespace SampleSystem.BLL
     public partial class CompanyLegalEntityBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.CompanyLegalEntity>, SampleSystem.BLL.ICompanyLegalEntityBLL
     {
         
-        public CompanyLegalEntityBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.CompanyLegalEntity> securityProvider) : 
+        public CompanyLegalEntityBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.CompanyLegalEntity> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -137,7 +137,7 @@ namespace SampleSystem.BLL
     public partial class EmployeeBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Employee>, SampleSystem.BLL.IEmployeeBLL
     {
         
-        public EmployeeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Employee> securityProvider) : 
+        public EmployeeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.Employee> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -155,7 +155,7 @@ namespace SampleSystem.BLL
     public partial class EmployeeInformationBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EmployeeInformation>, SampleSystem.BLL.IEmployeeInformationBLL
     {
         
-        public EmployeeInformationBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeInformation> securityProvider) : 
+        public EmployeeInformationBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.EmployeeInformation> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -173,7 +173,7 @@ namespace SampleSystem.BLL
     public partial class EmployeePhotoBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EmployeePhoto>, SampleSystem.BLL.IEmployeePhotoBLL
     {
         
-        public EmployeePhotoBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeePhoto> securityProvider) : 
+        public EmployeePhotoBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.EmployeePhoto> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -191,7 +191,7 @@ namespace SampleSystem.BLL
     public partial class EmployeePositionBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EmployeePosition>, SampleSystem.BLL.IEmployeePositionBLL
     {
         
-        public EmployeePositionBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeePosition> securityProvider) : 
+        public EmployeePositionBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.EmployeePosition> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -209,7 +209,7 @@ namespace SampleSystem.BLL
     public partial class EmployeeRegistrationTypeBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EmployeeRegistrationType>, SampleSystem.BLL.IEmployeeRegistrationTypeBLL
     {
         
-        public EmployeeRegistrationTypeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeRegistrationType> securityProvider) : 
+        public EmployeeRegistrationTypeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.EmployeeRegistrationType> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -227,7 +227,7 @@ namespace SampleSystem.BLL
     public partial class EmployeeRoleBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EmployeeRole>, SampleSystem.BLL.IEmployeeRoleBLL
     {
         
-        public EmployeeRoleBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeRole> securityProvider) : 
+        public EmployeeRoleBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.EmployeeRole> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -245,7 +245,7 @@ namespace SampleSystem.BLL
     public partial class EmployeeRoleDegreeBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EmployeeRoleDegree>, SampleSystem.BLL.IEmployeeRoleDegreeBLL
     {
         
-        public EmployeeRoleDegreeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeRoleDegree> securityProvider) : 
+        public EmployeeRoleDegreeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.EmployeeRoleDegree> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -263,7 +263,7 @@ namespace SampleSystem.BLL
     public partial class EmployeeSpecializationBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EmployeeSpecialization>, SampleSystem.BLL.IEmployeeSpecializationBLL
     {
         
-        public EmployeeSpecializationBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EmployeeSpecialization> securityProvider) : 
+        public EmployeeSpecializationBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.EmployeeSpecialization> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -281,7 +281,7 @@ namespace SampleSystem.BLL
     public partial class Location1676BLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EnversBug1676.Location1676>, SampleSystem.BLL.ILocation1676BLL
     {
         
-        public Location1676BLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EnversBug1676.Location1676> securityProvider) : 
+        public Location1676BLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.EnversBug1676.Location1676> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -299,7 +299,7 @@ namespace SampleSystem.BLL
     public partial class WorkingCalendar1676BLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>, SampleSystem.BLL.IWorkingCalendar1676BLL
     {
         
-        public WorkingCalendar1676BLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676> securityProvider) : 
+        public WorkingCalendar1676BLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -317,7 +317,7 @@ namespace SampleSystem.BLL
     public partial class Example1BLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Example1>, SampleSystem.BLL.IExample1BLL
     {
         
-        public Example1BLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Example1> securityProvider) : 
+        public Example1BLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.Example1> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -335,7 +335,7 @@ namespace SampleSystem.BLL
     public partial class HRDepartmentBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.HRDepartment>, SampleSystem.BLL.IHRDepartmentBLL
     {
         
-        public HRDepartmentBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.HRDepartment> securityProvider) : 
+        public HRDepartmentBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.HRDepartment> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -353,7 +353,7 @@ namespace SampleSystem.BLL
     public partial class IMRequestBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.IMRequest>, SampleSystem.BLL.IIMRequestBLL
     {
         
-        public IMRequestBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.IMRequest> securityProvider) : 
+        public IMRequestBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.IMRequest> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -371,7 +371,7 @@ namespace SampleSystem.BLL
     public partial class InformationBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Information>, SampleSystem.BLL.IInformationBLL
     {
         
-        public InformationBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Information> securityProvider) : 
+        public InformationBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.Information> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -389,7 +389,7 @@ namespace SampleSystem.BLL
     public partial class IntegrationVersionContainer1BLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>, SampleSystem.BLL.IIntegrationVersionContainer1BLL
     {
         
-        public IntegrationVersionContainer1BLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1> securityProvider) : 
+        public IntegrationVersionContainer1BLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -407,7 +407,7 @@ namespace SampleSystem.BLL
     public partial class IntegrationVersionContainer2BLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>, SampleSystem.BLL.IIntegrationVersionContainer2BLL
     {
         
-        public IntegrationVersionContainer2BLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2> securityProvider) : 
+        public IntegrationVersionContainer2BLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -425,7 +425,7 @@ namespace SampleSystem.BLL
     public partial class LocationBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Location>, SampleSystem.BLL.ILocationBLL
     {
         
-        public LocationBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Location> securityProvider) : 
+        public LocationBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.Location> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -443,7 +443,7 @@ namespace SampleSystem.BLL
     public partial class ManagementUnitBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.ManagementUnit>, SampleSystem.BLL.IManagementUnitBLL
     {
         
-        public ManagementUnitBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnit> securityProvider) : 
+        public ManagementUnitBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.ManagementUnit> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -461,7 +461,7 @@ namespace SampleSystem.BLL
     public partial class ManagementUnitAndBusinessUnitLinkBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>, SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLL
     {
         
-        public ManagementUnitAndBusinessUnitLinkBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> securityProvider) : 
+        public ManagementUnitAndBusinessUnitLinkBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -479,7 +479,7 @@ namespace SampleSystem.BLL
     public partial class ManagementUnitAndHRDepartmentLinkBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>, SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL
     {
         
-        public ManagementUnitAndHRDepartmentLinkBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> securityProvider) : 
+        public ManagementUnitAndHRDepartmentLinkBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -497,7 +497,7 @@ namespace SampleSystem.BLL
     public partial class ManagementUnitFluentMappingBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.ManagementUnitFluentMapping>, SampleSystem.BLL.IManagementUnitFluentMappingBLL
     {
         
-        public ManagementUnitFluentMappingBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManagementUnitFluentMapping> securityProvider) : 
+        public ManagementUnitFluentMappingBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.ManagementUnitFluentMapping> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -515,7 +515,7 @@ namespace SampleSystem.BLL
     public partial class TestManualEmployeeProjectionBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>, SampleSystem.BLL.ITestManualEmployeeProjectionBLL
     {
         
-        public TestManualEmployeeProjectionBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection> securityProvider) : 
+        public TestManualEmployeeProjectionBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -533,7 +533,7 @@ namespace SampleSystem.BLL
     public partial class PrincipalBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Principal>, SampleSystem.BLL.IPrincipalBLL
     {
         
-        public PrincipalBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Principal> securityProvider) : 
+        public PrincipalBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.Principal> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -551,7 +551,7 @@ namespace SampleSystem.BLL
     public partial class BusinessUnitProgramClassBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.BusinessUnitProgramClass>, SampleSystem.BLL.IBusinessUnitProgramClassBLL
     {
         
-        public BusinessUnitProgramClassBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.BusinessUnitProgramClass> securityProvider) : 
+        public BusinessUnitProgramClassBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.Projections.BusinessUnitProgramClass> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -569,7 +569,7 @@ namespace SampleSystem.BLL
     public partial class CustomCompanyLegalEntityBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>, SampleSystem.BLL.ICustomCompanyLegalEntityBLL
     {
         
-        public CustomCompanyLegalEntityBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.CustomCompanyLegalEntity> securityProvider) : 
+        public CustomCompanyLegalEntityBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.Projections.CustomCompanyLegalEntity> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -587,7 +587,7 @@ namespace SampleSystem.BLL
     public partial class TestBusinessUnitBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestBusinessUnit>, SampleSystem.BLL.ITestBusinessUnitBLL
     {
         
-        public TestBusinessUnitBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestBusinessUnit> securityProvider) : 
+        public TestBusinessUnitBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.Projections.TestBusinessUnit> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -605,7 +605,7 @@ namespace SampleSystem.BLL
     public partial class TestCustomContextSecurityObjProjectionBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>, SampleSystem.BLL.ITestCustomContextSecurityObjProjectionBLL
     {
         
-        public TestCustomContextSecurityObjProjectionBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection> securityProvider) : 
+        public TestCustomContextSecurityObjProjectionBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -623,7 +623,7 @@ namespace SampleSystem.BLL
     public partial class TestDepartmentBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestDepartment>, SampleSystem.BLL.ITestDepartmentBLL
     {
         
-        public TestDepartmentBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestDepartment> securityProvider) : 
+        public TestDepartmentBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.Projections.TestDepartment> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -641,7 +641,7 @@ namespace SampleSystem.BLL
     public partial class TestEmployeeBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestEmployee>, SampleSystem.BLL.ITestEmployeeBLL
     {
         
-        public TestEmployeeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestEmployee> securityProvider) : 
+        public TestEmployeeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.Projections.TestEmployee> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -659,7 +659,7 @@ namespace SampleSystem.BLL
     public partial class TestIMRequestBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestIMRequest>, SampleSystem.BLL.ITestIMRequestBLL
     {
         
-        public TestIMRequestBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestIMRequest> securityProvider) : 
+        public TestIMRequestBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.Projections.TestIMRequest> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -677,7 +677,7 @@ namespace SampleSystem.BLL
     public partial class TestLegacyEmployeeBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestLegacyEmployee>, SampleSystem.BLL.ITestLegacyEmployeeBLL
     {
         
-        public TestLegacyEmployeeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestLegacyEmployee> securityProvider) : 
+        public TestLegacyEmployeeBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.Projections.TestLegacyEmployee> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -695,7 +695,7 @@ namespace SampleSystem.BLL
     public partial class TestLocationBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestLocation>, SampleSystem.BLL.ITestLocationBLL
     {
         
-        public TestLocationBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestLocation> securityProvider) : 
+        public TestLocationBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.Projections.TestLocation> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -713,7 +713,7 @@ namespace SampleSystem.BLL
     public partial class TestLocationCollectionPropertiesBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestLocationCollectionProperties>, SampleSystem.BLL.ITestLocationCollectionPropertiesBLL
     {
         
-        public TestLocationCollectionPropertiesBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestLocationCollectionProperties> securityProvider) : 
+        public TestLocationCollectionPropertiesBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.Projections.TestLocationCollectionProperties> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -731,7 +731,7 @@ namespace SampleSystem.BLL
     public partial class TestSecurityObjItemProjectionBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>, SampleSystem.BLL.ITestSecurityObjItemProjectionBLL
     {
         
-        public TestSecurityObjItemProjectionBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestSecurityObjItemProjection> securityProvider) : 
+        public TestSecurityObjItemProjectionBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.Projections.TestSecurityObjItemProjection> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -749,7 +749,7 @@ namespace SampleSystem.BLL
     public partial class RoleRoleDegreeLinkBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.RoleRoleDegreeLink>, SampleSystem.BLL.IRoleRoleDegreeLinkBLL
     {
         
-        public RoleRoleDegreeLinkBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.RoleRoleDegreeLink> securityProvider) : 
+        public RoleRoleDegreeLinkBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.RoleRoleDegreeLink> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -767,7 +767,7 @@ namespace SampleSystem.BLL
     public partial class SqlParserTestObjBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.SqlParserTestObj>, SampleSystem.BLL.ISqlParserTestObjBLL
     {
         
-        public SqlParserTestObjBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.SqlParserTestObj> securityProvider) : 
+        public SqlParserTestObjBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.SqlParserTestObj> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -785,7 +785,7 @@ namespace SampleSystem.BLL
     public partial class SqlParserTestObjContainerBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.SqlParserTestObjContainer>, SampleSystem.BLL.ISqlParserTestObjContainerBLL
     {
         
-        public SqlParserTestObjContainerBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.SqlParserTestObjContainer> securityProvider) : 
+        public SqlParserTestObjContainerBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.SqlParserTestObjContainer> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -803,7 +803,7 @@ namespace SampleSystem.BLL
     public partial class TestCustomContextSecurityObjBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestCustomContextSecurityObj>, SampleSystem.BLL.ITestCustomContextSecurityObjBLL
     {
         
-        public TestCustomContextSecurityObjBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestCustomContextSecurityObj> securityProvider) : 
+        public TestCustomContextSecurityObjBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.TestCustomContextSecurityObj> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -821,7 +821,7 @@ namespace SampleSystem.BLL
     public partial class TestImmutableObjBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestImmutableObj>, SampleSystem.BLL.ITestImmutableObjBLL
     {
         
-        public TestImmutableObjBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestImmutableObj> securityProvider) : 
+        public TestImmutableObjBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.TestImmutableObj> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -839,7 +839,7 @@ namespace SampleSystem.BLL
     public partial class TestPerformanceObjectBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestPerformanceObject>, SampleSystem.BLL.ITestPerformanceObjectBLL
     {
         
-        public TestPerformanceObjectBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestPerformanceObject> securityProvider) : 
+        public TestPerformanceObjectBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.TestPerformanceObject> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -857,7 +857,7 @@ namespace SampleSystem.BLL
     public partial class TestPlainAuthObjectBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestPlainAuthObject>, SampleSystem.BLL.ITestPlainAuthObjectBLL
     {
         
-        public TestPlainAuthObjectBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestPlainAuthObject> securityProvider) : 
+        public TestPlainAuthObjectBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.TestPlainAuthObject> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -875,7 +875,7 @@ namespace SampleSystem.BLL
     public partial class TestRestrictionObjectBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestRestrictionObject>, SampleSystem.BLL.ITestRestrictionObjectBLL
     {
         
-        public TestRestrictionObjectBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestRestrictionObject> securityProvider) : 
+        public TestRestrictionObjectBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.TestRestrictionObject> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -893,7 +893,7 @@ namespace SampleSystem.BLL
     public partial class TestRootSecurityObjBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestRootSecurityObj>, SampleSystem.BLL.ITestRootSecurityObjBLL
     {
         
-        public TestRootSecurityObjBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestRootSecurityObj> securityProvider) : 
+        public TestRootSecurityObjBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.TestRootSecurityObj> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -911,7 +911,7 @@ namespace SampleSystem.BLL
     public partial class TestSecurityObjItemBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestSecurityObjItem>, SampleSystem.BLL.ITestSecurityObjItemBLL
     {
         
-        public TestSecurityObjItemBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecurityObjItem> securityProvider) : 
+        public TestSecurityObjItemBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.TestSecurityObjItem> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -929,7 +929,7 @@ namespace SampleSystem.BLL
     public partial class TestSecuritySubObjItemBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestSecuritySubObjItem>, SampleSystem.BLL.ITestSecuritySubObjItemBLL
     {
         
-        public TestSecuritySubObjItemBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem> securityProvider) : 
+        public TestSecuritySubObjItemBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -947,7 +947,7 @@ namespace SampleSystem.BLL
     public partial class TestSecuritySubObjItem2BLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestSecuritySubObjItem2>, SampleSystem.BLL.ITestSecuritySubObjItem2BLL
     {
         
-        public TestSecuritySubObjItem2BLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem2> securityProvider) : 
+        public TestSecuritySubObjItem2BLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem2> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -965,7 +965,7 @@ namespace SampleSystem.BLL
     public partial class TestSecuritySubObjItem3BLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestSecuritySubObjItem3>, SampleSystem.BLL.ITestSecuritySubObjItem3BLL
     {
         
-        public TestSecuritySubObjItem3BLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem3> securityProvider) : 
+        public TestSecuritySubObjItem3BLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem3> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -2185,111 +2185,111 @@ namespace SampleSystem.BLL
         public static void RegisterBLLFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
         {
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IBusinessUnitBLLFactory, SampleSystem.BLL.BusinessUnitBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnit, System.Guid>, SampleSystem.Domain.BusinessUnit>, SampleSystem.BLL.IBusinessUnitBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnit, System.Guid>, SampleSystem.Domain.BusinessUnit>, SampleSystem.BLL.IBusinessUnitBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IBusinessUnitHrDepartmentBLLFactory, SampleSystem.BLL.BusinessUnitHrDepartmentBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitHrDepartment, System.Guid>, SampleSystem.Domain.BusinessUnitHrDepartment>, SampleSystem.BLL.IBusinessUnitHrDepartmentBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitHrDepartment, System.Guid>, SampleSystem.Domain.BusinessUnitHrDepartment>, SampleSystem.BLL.IBusinessUnitHrDepartmentBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLLFactory, SampleSystem.BLL.BusinessUnitManagerCommissionLinkBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitManagerCommissionLink, System.Guid>, SampleSystem.Domain.BusinessUnitManagerCommissionLink>, SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitManagerCommissionLink, System.Guid>, SampleSystem.Domain.BusinessUnitManagerCommissionLink>, SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IBusinessUnitTypeBLLFactory, SampleSystem.BLL.BusinessUnitTypeBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitType, System.Guid>, SampleSystem.Domain.BusinessUnitType>, SampleSystem.BLL.IBusinessUnitTypeBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitType, System.Guid>, SampleSystem.Domain.BusinessUnitType>, SampleSystem.BLL.IBusinessUnitTypeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ICompanyLegalEntityBLLFactory, SampleSystem.BLL.CompanyLegalEntityBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.CompanyLegalEntity, System.Guid>, SampleSystem.Domain.CompanyLegalEntity>, SampleSystem.BLL.ICompanyLegalEntityBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.CompanyLegalEntity, System.Guid>, SampleSystem.Domain.CompanyLegalEntity>, SampleSystem.BLL.ICompanyLegalEntityBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ICountryBLLFactory, SampleSystem.BLL.CountryBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Country, System.Guid>, SampleSystem.Domain.Country>, SampleSystem.BLL.ICountryBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Country, System.Guid>, SampleSystem.Domain.Country>, SampleSystem.BLL.ICountryBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IEmployeeBLLFactory, SampleSystem.BLL.EmployeeBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Employee, System.Guid>, SampleSystem.Domain.Employee>, SampleSystem.BLL.IEmployeeBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Employee, System.Guid>, SampleSystem.Domain.Employee>, SampleSystem.BLL.IEmployeeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IEmployeeInformationBLLFactory, SampleSystem.BLL.EmployeeInformationBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeInformation, System.Guid>, SampleSystem.Domain.EmployeeInformation>, SampleSystem.BLL.IEmployeeInformationBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeInformation, System.Guid>, SampleSystem.Domain.EmployeeInformation>, SampleSystem.BLL.IEmployeeInformationBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IEmployeePhotoBLLFactory, SampleSystem.BLL.EmployeePhotoBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePhoto, System.Guid>, SampleSystem.Domain.EmployeePhoto>, SampleSystem.BLL.IEmployeePhotoBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePhoto, System.Guid>, SampleSystem.Domain.EmployeePhoto>, SampleSystem.BLL.IEmployeePhotoBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IEmployeePositionBLLFactory, SampleSystem.BLL.EmployeePositionBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePosition, System.Guid>, SampleSystem.Domain.EmployeePosition>, SampleSystem.BLL.IEmployeePositionBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePosition, System.Guid>, SampleSystem.Domain.EmployeePosition>, SampleSystem.BLL.IEmployeePositionBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IEmployeeRegistrationTypeBLLFactory, SampleSystem.BLL.EmployeeRegistrationTypeBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRegistrationType, System.Guid>, SampleSystem.Domain.EmployeeRegistrationType>, SampleSystem.BLL.IEmployeeRegistrationTypeBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRegistrationType, System.Guid>, SampleSystem.Domain.EmployeeRegistrationType>, SampleSystem.BLL.IEmployeeRegistrationTypeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IEmployeeRoleBLLFactory, SampleSystem.BLL.EmployeeRoleBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRole, System.Guid>, SampleSystem.Domain.EmployeeRole>, SampleSystem.BLL.IEmployeeRoleBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRole, System.Guid>, SampleSystem.Domain.EmployeeRole>, SampleSystem.BLL.IEmployeeRoleBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IEmployeeRoleDegreeBLLFactory, SampleSystem.BLL.EmployeeRoleDegreeBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRoleDegree, System.Guid>, SampleSystem.Domain.EmployeeRoleDegree>, SampleSystem.BLL.IEmployeeRoleDegreeBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRoleDegree, System.Guid>, SampleSystem.Domain.EmployeeRoleDegree>, SampleSystem.BLL.IEmployeeRoleDegreeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IEmployeeSpecializationBLLFactory, SampleSystem.BLL.EmployeeSpecializationBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeSpecialization, System.Guid>, SampleSystem.Domain.EmployeeSpecialization>, SampleSystem.BLL.IEmployeeSpecializationBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeSpecialization, System.Guid>, SampleSystem.Domain.EmployeeSpecialization>, SampleSystem.BLL.IEmployeeSpecializationBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ILocation1676BLLFactory, SampleSystem.BLL.Location1676BLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EnversBug1676.Location1676, System.Guid>, SampleSystem.Domain.EnversBug1676.Location1676>, SampleSystem.BLL.ILocation1676BLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EnversBug1676.Location1676, System.Guid>, SampleSystem.Domain.EnversBug1676.Location1676>, SampleSystem.BLL.ILocation1676BLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IWorkingCalendar1676BLLFactory, SampleSystem.BLL.WorkingCalendar1676BLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EnversBug1676.WorkingCalendar1676, System.Guid>, SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>, SampleSystem.BLL.IWorkingCalendar1676BLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EnversBug1676.WorkingCalendar1676, System.Guid>, SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>, SampleSystem.BLL.IWorkingCalendar1676BLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IExample1BLLFactory, SampleSystem.BLL.Example1BLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Example1, System.Guid>, SampleSystem.Domain.Example1>, SampleSystem.BLL.IExample1BLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Example1, System.Guid>, SampleSystem.Domain.Example1>, SampleSystem.BLL.IExample1BLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IHRDepartmentBLLFactory, SampleSystem.BLL.HRDepartmentBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.HRDepartment, System.Guid>, SampleSystem.Domain.HRDepartment>, SampleSystem.BLL.IHRDepartmentBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.HRDepartment, System.Guid>, SampleSystem.Domain.HRDepartment>, SampleSystem.BLL.IHRDepartmentBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IIMRequestBLLFactory, SampleSystem.BLL.IMRequestBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IMRequest, System.Guid>, SampleSystem.Domain.IMRequest>, SampleSystem.BLL.IIMRequestBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IMRequest, System.Guid>, SampleSystem.Domain.IMRequest>, SampleSystem.BLL.IIMRequestBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IInformationBLLFactory, SampleSystem.BLL.InformationBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Information, System.Guid>, SampleSystem.Domain.Information>, SampleSystem.BLL.IInformationBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Information, System.Guid>, SampleSystem.Domain.Information>, SampleSystem.BLL.IInformationBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IIntegrationVersionContainer1BLLFactory, SampleSystem.BLL.IntegrationVersionContainer1BLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1, System.Guid>, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>, SampleSystem.BLL.IIntegrationVersionContainer1BLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1, System.Guid>, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>, SampleSystem.BLL.IIntegrationVersionContainer1BLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IIntegrationVersionContainer2BLLFactory, SampleSystem.BLL.IntegrationVersionContainer2BLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2, System.Guid>, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>, SampleSystem.BLL.IIntegrationVersionContainer2BLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2, System.Guid>, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>, SampleSystem.BLL.IIntegrationVersionContainer2BLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ILocationBLLFactory, SampleSystem.BLL.LocationBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Location, System.Guid>, SampleSystem.Domain.Location>, SampleSystem.BLL.ILocationBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Location, System.Guid>, SampleSystem.Domain.Location>, SampleSystem.BLL.ILocationBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IManagementUnitBLLFactory, SampleSystem.BLL.ManagementUnitBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnit, System.Guid>, SampleSystem.Domain.ManagementUnit>, SampleSystem.BLL.IManagementUnitBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnit, System.Guid>, SampleSystem.Domain.ManagementUnit>, SampleSystem.BLL.IManagementUnitBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLLFactory, SampleSystem.BLL.ManagementUnitAndBusinessUnitLinkBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, System.Guid>, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>, SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, System.Guid>, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>, SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLLFactory, SampleSystem.BLL.ManagementUnitAndHRDepartmentLinkBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, System.Guid>, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>, SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, System.Guid>, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>, SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IManagementUnitFluentMappingBLLFactory, SampleSystem.BLL.ManagementUnitFluentMappingBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitFluentMapping, System.Guid>, SampleSystem.Domain.ManagementUnitFluentMapping>, SampleSystem.BLL.IManagementUnitFluentMappingBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitFluentMapping, System.Guid>, SampleSystem.Domain.ManagementUnitFluentMapping>, SampleSystem.BLL.IManagementUnitFluentMappingBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestManualEmployeeProjectionBLLFactory, SampleSystem.BLL.TestManualEmployeeProjectionBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection, System.Guid>, SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>, SampleSystem.BLL.ITestManualEmployeeProjectionBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection, System.Guid>, SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>, SampleSystem.BLL.ITestManualEmployeeProjectionBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IPrincipalBLLFactory, SampleSystem.BLL.PrincipalBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Principal, System.Guid>, SampleSystem.Domain.Principal>, SampleSystem.BLL.IPrincipalBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Principal, System.Guid>, SampleSystem.Domain.Principal>, SampleSystem.BLL.IPrincipalBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IBusinessUnitProgramClassBLLFactory, SampleSystem.BLL.BusinessUnitProgramClassBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.BusinessUnitProgramClass, System.Guid>, SampleSystem.Domain.Projections.BusinessUnitProgramClass>, SampleSystem.BLL.IBusinessUnitProgramClassBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.BusinessUnitProgramClass, System.Guid>, SampleSystem.Domain.Projections.BusinessUnitProgramClass>, SampleSystem.BLL.IBusinessUnitProgramClassBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ICustomCompanyLegalEntityBLLFactory, SampleSystem.BLL.CustomCompanyLegalEntityBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.CustomCompanyLegalEntity, System.Guid>, SampleSystem.Domain.Projections.CustomCompanyLegalEntity>, SampleSystem.BLL.ICustomCompanyLegalEntityBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.CustomCompanyLegalEntity, System.Guid>, SampleSystem.Domain.Projections.CustomCompanyLegalEntity>, SampleSystem.BLL.ICustomCompanyLegalEntityBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestBusinessUnitBLLFactory, SampleSystem.BLL.TestBusinessUnitBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestBusinessUnit, System.Guid>, SampleSystem.Domain.Projections.TestBusinessUnit>, SampleSystem.BLL.ITestBusinessUnitBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestBusinessUnit, System.Guid>, SampleSystem.Domain.Projections.TestBusinessUnit>, SampleSystem.BLL.ITestBusinessUnitBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestCustomContextSecurityObjProjectionBLLFactory, SampleSystem.BLL.TestCustomContextSecurityObjProjectionBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection, System.Guid>, SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>, SampleSystem.BLL.ITestCustomContextSecurityObjProjectionBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection, System.Guid>, SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>, SampleSystem.BLL.ITestCustomContextSecurityObjProjectionBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestDepartmentBLLFactory, SampleSystem.BLL.TestDepartmentBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestDepartment, System.Guid>, SampleSystem.Domain.Projections.TestDepartment>, SampleSystem.BLL.ITestDepartmentBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestDepartment, System.Guid>, SampleSystem.Domain.Projections.TestDepartment>, SampleSystem.BLL.ITestDepartmentBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestEmployeeBLLFactory, SampleSystem.BLL.TestEmployeeBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestEmployee, System.Guid>, SampleSystem.Domain.Projections.TestEmployee>, SampleSystem.BLL.ITestEmployeeBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestEmployee, System.Guid>, SampleSystem.Domain.Projections.TestEmployee>, SampleSystem.BLL.ITestEmployeeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestIMRequestBLLFactory, SampleSystem.BLL.TestIMRequestBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestIMRequest, System.Guid>, SampleSystem.Domain.Projections.TestIMRequest>, SampleSystem.BLL.ITestIMRequestBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestIMRequest, System.Guid>, SampleSystem.Domain.Projections.TestIMRequest>, SampleSystem.BLL.ITestIMRequestBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestLegacyEmployeeBLLFactory, SampleSystem.BLL.TestLegacyEmployeeBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestLegacyEmployee, System.Guid>, SampleSystem.Domain.Projections.TestLegacyEmployee>, SampleSystem.BLL.ITestLegacyEmployeeBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestLegacyEmployee, System.Guid>, SampleSystem.Domain.Projections.TestLegacyEmployee>, SampleSystem.BLL.ITestLegacyEmployeeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestLocationBLLFactory, SampleSystem.BLL.TestLocationBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestLocation, System.Guid>, SampleSystem.Domain.Projections.TestLocation>, SampleSystem.BLL.ITestLocationBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestLocation, System.Guid>, SampleSystem.Domain.Projections.TestLocation>, SampleSystem.BLL.ITestLocationBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestLocationCollectionPropertiesBLLFactory, SampleSystem.BLL.TestLocationCollectionPropertiesBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestLocationCollectionProperties, System.Guid>, SampleSystem.Domain.Projections.TestLocationCollectionProperties>, SampleSystem.BLL.ITestLocationCollectionPropertiesBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestLocationCollectionProperties, System.Guid>, SampleSystem.Domain.Projections.TestLocationCollectionProperties>, SampleSystem.BLL.ITestLocationCollectionPropertiesBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecurityObjItemProjectionBLLFactory, SampleSystem.BLL.TestSecurityObjItemProjectionBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestSecurityObjItemProjection, System.Guid>, SampleSystem.Domain.Projections.TestSecurityObjItemProjection>, SampleSystem.BLL.ITestSecurityObjItemProjectionBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestSecurityObjItemProjection, System.Guid>, SampleSystem.Domain.Projections.TestSecurityObjItemProjection>, SampleSystem.BLL.ITestSecurityObjItemProjectionBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IRoleRoleDegreeLinkBLLFactory, SampleSystem.BLL.RoleRoleDegreeLinkBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.RoleRoleDegreeLink, System.Guid>, SampleSystem.Domain.RoleRoleDegreeLink>, SampleSystem.BLL.IRoleRoleDegreeLinkBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.RoleRoleDegreeLink, System.Guid>, SampleSystem.Domain.RoleRoleDegreeLink>, SampleSystem.BLL.IRoleRoleDegreeLinkBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ISqlParserTestObjBLLFactory, SampleSystem.BLL.SqlParserTestObjBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.SqlParserTestObj, System.Guid>, SampleSystem.Domain.SqlParserTestObj>, SampleSystem.BLL.ISqlParserTestObjBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.SqlParserTestObj, System.Guid>, SampleSystem.Domain.SqlParserTestObj>, SampleSystem.BLL.ISqlParserTestObjBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ISqlParserTestObjContainerBLLFactory, SampleSystem.BLL.SqlParserTestObjContainerBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.SqlParserTestObjContainer, System.Guid>, SampleSystem.Domain.SqlParserTestObjContainer>, SampleSystem.BLL.ISqlParserTestObjContainerBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.SqlParserTestObjContainer, System.Guid>, SampleSystem.Domain.SqlParserTestObjContainer>, SampleSystem.BLL.ISqlParserTestObjContainerBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestCustomContextSecurityObjBLLFactory, SampleSystem.BLL.TestCustomContextSecurityObjBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestCustomContextSecurityObj, System.Guid>, SampleSystem.Domain.TestCustomContextSecurityObj>, SampleSystem.BLL.ITestCustomContextSecurityObjBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestCustomContextSecurityObj, System.Guid>, SampleSystem.Domain.TestCustomContextSecurityObj>, SampleSystem.BLL.ITestCustomContextSecurityObjBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestImmutableObjBLLFactory, SampleSystem.BLL.TestImmutableObjBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestImmutableObj, System.Guid>, SampleSystem.Domain.TestImmutableObj>, SampleSystem.BLL.ITestImmutableObjBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestImmutableObj, System.Guid>, SampleSystem.Domain.TestImmutableObj>, SampleSystem.BLL.ITestImmutableObjBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestPerformanceObjectBLLFactory, SampleSystem.BLL.TestPerformanceObjectBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPerformanceObject, System.Guid>, SampleSystem.Domain.TestPerformanceObject>, SampleSystem.BLL.ITestPerformanceObjectBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPerformanceObject, System.Guid>, SampleSystem.Domain.TestPerformanceObject>, SampleSystem.BLL.ITestPerformanceObjectBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestPlainAuthObjectBLLFactory, SampleSystem.BLL.TestPlainAuthObjectBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPlainAuthObject, System.Guid>, SampleSystem.Domain.TestPlainAuthObject>, SampleSystem.BLL.ITestPlainAuthObjectBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPlainAuthObject, System.Guid>, SampleSystem.Domain.TestPlainAuthObject>, SampleSystem.BLL.ITestPlainAuthObjectBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestRestrictionObjectBLLFactory, SampleSystem.BLL.TestRestrictionObjectBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestRestrictionObject, System.Guid>, SampleSystem.Domain.TestRestrictionObject>, SampleSystem.BLL.ITestRestrictionObjectBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestRestrictionObject, System.Guid>, SampleSystem.Domain.TestRestrictionObject>, SampleSystem.BLL.ITestRestrictionObjectBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestRootSecurityObjBLLFactory, SampleSystem.BLL.TestRootSecurityObjBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestRootSecurityObj, System.Guid>, SampleSystem.Domain.TestRootSecurityObj>, SampleSystem.BLL.ITestRootSecurityObjBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestRootSecurityObj, System.Guid>, SampleSystem.Domain.TestRootSecurityObj>, SampleSystem.BLL.ITestRootSecurityObjBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecurityObjItemBLLFactory, SampleSystem.BLL.TestSecurityObjItemBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecurityObjItem, System.Guid>, SampleSystem.Domain.TestSecurityObjItem>, SampleSystem.BLL.ITestSecurityObjItemBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecurityObjItem, System.Guid>, SampleSystem.Domain.TestSecurityObjItem>, SampleSystem.BLL.ITestSecurityObjItemBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecuritySubObjItemBLLFactory, SampleSystem.BLL.TestSecuritySubObjItemBLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem, System.Guid>, SampleSystem.Domain.TestSecuritySubObjItem>, SampleSystem.BLL.ITestSecuritySubObjItemBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem, System.Guid>, SampleSystem.Domain.TestSecuritySubObjItem>, SampleSystem.BLL.ITestSecuritySubObjItemBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecuritySubObjItem2BLLFactory, SampleSystem.BLL.TestSecuritySubObjItem2BLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem2, System.Guid>, SampleSystem.Domain.TestSecuritySubObjItem2>, SampleSystem.BLL.ITestSecuritySubObjItem2BLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem2, System.Guid>, SampleSystem.Domain.TestSecuritySubObjItem2>, SampleSystem.BLL.ITestSecuritySubObjItem2BLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecuritySubObjItem3BLLFactory, SampleSystem.BLL.TestSecuritySubObjItem3BLLFactory>(serviceCollection);
-            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem3, System.Guid>, SampleSystem.Domain.TestSecuritySubObjItem3>, SampleSystem.BLL.ITestSecuritySubObjItem3BLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem3, System.Guid>, SampleSystem.Domain.TestSecuritySubObjItem3>, SampleSystem.BLL.ITestSecuritySubObjItem3BLLFactory>(serviceCollection);
         }
     }
     
@@ -2301,7 +2301,7 @@ namespace SampleSystem.BLL
         {
         }
         
-        public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider)
+        public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider)
         {
             return new SampleSystem.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context, securityProvider);
         }
@@ -2315,7 +2315,7 @@ namespace SampleSystem.BLL
         {
         }
         
-        protected override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> CreateDefault<TDomainObject>(Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider)
+        protected override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> CreateDefault<TDomainObject>(SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider)
         {
             return new SampleSystem.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context, securityProvider);
         }

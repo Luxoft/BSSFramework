@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 
+using CommonFramework;
+
 namespace Framework.Core;
 
 public class Node<T> : IEnumerable<T>
@@ -9,7 +11,7 @@ public class Node<T> : IEnumerable<T>
         if (children == null) throw new ArgumentNullException(nameof(children));
 
         this.Value = value;
-        this.Children = children.CheckNotNull().ToReadOnlyCollection();
+        this.Children = children.ToReadOnlyCollection();
     }
 
 

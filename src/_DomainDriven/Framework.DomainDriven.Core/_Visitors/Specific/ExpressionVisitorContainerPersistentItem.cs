@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.Core;
+using CommonFramework;
+
+using Framework.Core.Visitors;
 using Framework.Persistent;
 
 namespace Framework.DomainDriven._Visitors;
@@ -15,9 +17,7 @@ public class ExpressionVisitorContainerPersistentItem : IExpressionVisitorContai
                        typeof(ICodeObject<>),
                        typeof(IDomainType),
                        typeof(IIdentityObject<>),
-                       typeof(IParentSource<>),
-                       typeof(IChildrenSource<>),
-                       //typeof(IEmployee)
+                       typeof(IParentSource<>)
                }.ToReadOnlyCollection(type => new OverrideCallInterfacePropertiesVisitor(type));
     }
 }

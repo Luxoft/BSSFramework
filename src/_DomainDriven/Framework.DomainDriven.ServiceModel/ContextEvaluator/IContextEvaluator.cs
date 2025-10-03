@@ -1,5 +1,5 @@
 ﻿using Framework.DomainDriven.ServiceModel.Service;
-using Framework.SecuritySystem.Credential;
+using SecuritySystem.Credential;
 
 namespace Framework.DomainDriven.ServiceModel;
 

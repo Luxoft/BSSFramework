@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
+using CommonFramework;
+
 namespace Framework.Core;
 
 public static class PropertyPathBuilder

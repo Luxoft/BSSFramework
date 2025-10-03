@@ -1,4 +1,5 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+
 using Framework.DomainDriven.DAL.Sql;
 using Framework.DomainDriven.DBGenerator.Contracts;
 using Framework.DomainDriven.DBGenerator.ScriptGenerators;
@@ -183,7 +184,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
                                                            {
                                                                    DomainTypeMetadata = z,
                                                                    RequeredFields = z.Fields.Where(q => !(q is ListTypeFieldMetadata))
-                                                                                     .Where(q => q.Attributes.HasAttribute<RequiredAttribute>()).ToList()
+                                                                                     .Where(q => q.Attributes.OfType<RequiredAttribute>().Any()).ToList()
                                                            })
                                            .SelectMany(z => z.RequeredFields.Select(q => new { DomainTypeMetadata = z.DomainTypeMetadata, RequeredField = q }))
                                            .Where(z => !this._ignoreDomainTypeLinksHash

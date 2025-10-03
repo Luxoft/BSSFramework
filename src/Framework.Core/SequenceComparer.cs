@@ -1,16 +1,11 @@
 ﻿namespace Framework.Core;
 
-public class SequenceComparer<T> : IEqualityComparer<IEnumerable<T>>
+public class SequenceComparer<T>(IEqualityComparer<T> equalityComparer) : IEqualityComparer<IEnumerable<T>>
 {
-    private SequenceComparer ()
-    {
-
-    }
-
 
     public bool Equals (IEnumerable<T> x, IEnumerable<T> y)
     {
-        return x.SequenceEqual (y);
+        return x.SequenceEqual (y, equalityComparer);
     }
 
     public int GetHashCode(IEnumerable<T> sequence)
@@ -19,20 +14,14 @@ public class SequenceComparer<T> : IEqualityComparer<IEnumerable<T>>
     }
 
 
-    public static readonly SequenceComparer<T> Value = new SequenceComparer<T> ();
+    public static SequenceComparer<T> Default { get; } = new SequenceComparer<T> (EqualityComparer<T>.Default);
 }
 
-public class ListComparer<T> : IEqualityComparer<List<T>>
+public class ListComparer<T>(IEqualityComparer<T> equalityComparer) : IEqualityComparer<List<T>>
 {
-    private ListComparer()
-    {
-
-    }
-
-
     public bool Equals(List<T> x, List<T> y)
     {
-        return x.SequenceEqual(y);
+        return x.SequenceEqual(y, equalityComparer);
     }
 
     public int GetHashCode(List<T> list)
@@ -41,7 +30,7 @@ public class ListComparer<T> : IEqualityComparer<List<T>>
     }
 
 
-    public static readonly ListComparer<T> Value = new ListComparer<T>();
+    public static ListComparer<T> Default { get; } = new ListComparer<T>(EqualityComparer<T>.Default);
 }
 
 

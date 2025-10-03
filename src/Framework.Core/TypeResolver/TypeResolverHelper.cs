@@ -1,4 +1,6 @@
-﻿namespace Framework.Core;
+﻿using CommonFramework;
+
+namespace Framework.Core;
 
 public class TypeResolverHelper
 {

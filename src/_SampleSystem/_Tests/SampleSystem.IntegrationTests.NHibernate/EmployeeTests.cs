@@ -2,18 +2,18 @@
 
 using Automation.Utils.DatabaseUtils;
 
+using CommonFramework.Maybe;
+
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 using Framework.Configuration.Generated.DTO;
-
-using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.NHibernate;
 using Framework.Events;
 using Framework.OData;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 

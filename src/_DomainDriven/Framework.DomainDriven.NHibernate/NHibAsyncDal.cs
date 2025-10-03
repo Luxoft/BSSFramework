@@ -1,8 +1,11 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+
+using Framework.Core;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.Lock;
-using Framework.GenericQueryable;
 using Framework.Persistent;
+
+using GenericQueryable;
 
 using NHibernate;
 
@@ -22,7 +25,7 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
         var queryable = this.NativeSession.Query<TDomainObject>();
 
         var queryProvider = (queryable.Provider as VisitedNHibQueryProvider)
-                            .FromMaybe("Register VisitedQueryProvider in Nhib configuration");
+                            .FromMaybe(() => "Register VisitedQueryProvider in Nhib configuration");
 
         queryProvider.Visitor = expressionVisitorContainer.Visitor;
         queryProvider.GenericQueryableExecutor = genericQueryableExecutor;

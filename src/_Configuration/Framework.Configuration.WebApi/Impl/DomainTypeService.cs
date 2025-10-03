@@ -1,6 +1,6 @@
 ﻿using Framework.Configuration.Generated.DTO;
 using Framework.DomainDriven;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,4 +1,6 @@
-﻿using Framework.Configuration.BLL;
+﻿using CommonFramework;
+
+using Framework.Configuration.BLL;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL;

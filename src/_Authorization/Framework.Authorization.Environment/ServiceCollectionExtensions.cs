@@ -1,19 +1,20 @@
-﻿using FluentValidation;
+﻿using CommonFramework.DependencyInjection;
+
+using FluentValidation;
 
 using Framework.Authorization.Domain;
 using Framework.Authorization.Environment.Security;
 using Framework.Authorization.Notification;
-using Framework.Authorization.SecuritySystem;
-using Framework.Authorization.SecuritySystem.Initialize;
-using Framework.Authorization.SecuritySystem.Validation;
-using Framework.DependencyInjection;
+using Framework.Authorization.SecuritySystemImpl;
+using Framework.Authorization.SecuritySystemImpl.Initialize;
+using Framework.Authorization.SecuritySystemImpl.Validation;
 using Framework.DomainDriven._Visitors;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.Credential;
-using Framework.SecuritySystem.DependencyInjection;
-using Framework.SecuritySystem.ExternalSystem;
-using Framework.SecuritySystem.ExternalSystem.ApplicationSecurity;
-using Framework.SecuritySystem.ExternalSystem.Management;
+using SecuritySystem;
+using SecuritySystem.Credential;
+using SecuritySystem.DependencyInjection;
+using SecuritySystem.ExternalSystem;
+using SecuritySystem.ExternalSystem.ApplicationSecurity;
+using SecuritySystem.ExternalSystem.Management;
 
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
@@ -8,7 +10,7 @@ namespace Framework.DomainDriven.DTOGenerator.Server;
 
 public static class Extensions
 {
-    public static PropertyInfo TryGetIntegrationVersionProperty(this Type domainType)
+    public static PropertyInfo? TryGetIntegrationVersionProperty(this Type domainType)
     {
         var integrationVersionProperty = domainType
                                          .GetProperties(BindingFlags.Public | BindingFlags.Instance)

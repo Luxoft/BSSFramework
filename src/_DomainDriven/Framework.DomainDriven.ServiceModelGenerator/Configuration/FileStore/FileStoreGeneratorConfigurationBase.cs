@@ -1,6 +1,7 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+
 using Framework.DomainDriven.ServiceModelGenerator.MethodGenerators.FileStore;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 

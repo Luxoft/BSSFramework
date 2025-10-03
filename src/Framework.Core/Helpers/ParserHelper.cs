@@ -1,6 +1,11 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
+using CommonFramework;
+using CommonFramework.ExpressionEvaluate;
+using CommonFramework.Maybe;
+using static CommonFramework.Maybe.Maybe;
+
 namespace Framework.Core.Serialization;
 
 public static class ParserHelper
@@ -74,14 +79,14 @@ public static class ParserHelper
         return expr;
     }
 
-    public static Delegate GetTryParseFunc(Type type, bool raiseError = true)
+    public static Delegate? GetTryParseFunc(Type type, bool raiseError = true)
     {
         return new Func<bool, Func<string, object>>(GetTryParseFunc<object>)
                .CreateGenericMethod(type)
                .Invoke<Delegate>(null, raiseError);
     }
 
-    public static Func<string, Maybe<T>> GetTryParseFunc<T>(bool raiseError = true)
+    public static Func<string, Maybe<T>>? GetTryParseFunc<T>(bool raiseError = true)
     {
         var func = InternalHelper<T>.TryParseFunc;
 
@@ -93,28 +98,27 @@ public static class ParserHelper
         return func;
     }
 
-
     private static class InternalHelper<T>
     {
-        public static readonly Expression<Func<string, T>> ParseExpression = GetParseExpression();
+        public static readonly Expression<Func<string, T>>? ParseExpression = GetParseExpression();
 
-        public static readonly Func<string, T> ParseFunc = ParseExpression.Maybe(l => l.Compile());
-
-
-        public static readonly Expression<Func<string, Maybe<T>>> TryParseExpression = GetTryParseExpression();
-
-        public static readonly Func<string, Maybe<T>> TryParseFunc = TryParseExpression.Maybe(l => l.Compile());
+        public static readonly Func<string, T>? ParseFunc = ParseExpression?.Compile();
 
 
+        public static readonly Expression<Func<string, Maybe<T>>>? TryParseExpression = GetTryParseExpression();
 
-        private static Expression<Func<string, T>> GetParseExpression()
+        public static readonly Func<string, Maybe<T>>? TryParseFunc = TryParseExpression?.Compile();
+
+
+
+        private static Expression<Func<string, T>>? GetParseExpression()
         {
             var parameter = Expression.Parameter(typeof(string));
 
             return GetParseExpressionBody(parameter).Maybe(body => Expression.Lambda<Func<string, T>>(body, parameter));
         }
 
-        private static Expression GetParseExpressionBody(Expression parameter)
+        private static Expression? GetParseExpressionBody(Expression parameter)
         {
             if (typeof(T) == typeof(string))
             {
@@ -134,14 +138,14 @@ public static class ParserHelper
         }
 
 
-        private static Expression<Func<string, Maybe<T>>> GetTryParseExpression()
+        private static Expression<Func<string, Maybe<T>>>? GetTryParseExpression()
         {
             var parameter = Expression.Parameter(typeof(string));
 
             return GetTryParseExpressionBody(parameter).Maybe(body => Expression.Lambda<Func<string, Maybe<T>>>(body, parameter));
         }
 
-        private static Expression GetTryParseExpressionBody(Expression parameter)
+        private static Expression? GetTryParseExpressionBody(Expression parameter)
         {
             if (typeof(T) == typeof(string))
             {
@@ -159,7 +163,7 @@ public static class ParserHelper
                 {
                     var tryParseDelType = typeof(TryMethod<,>).MakeGenericType(typeof(string), typeof(T));
 
-                    var tryParseDel = (TryMethod<string, T>) Delegate.CreateDelegate(tryParseDelType, tryParseMethod);
+                    var tryParseDel = (TryMethod<string, T>)Delegate.CreateDelegate(tryParseDelType, tryParseMethod);
 
                     var maybeDel = Maybe.OfTryMethod(tryParseDel);
 

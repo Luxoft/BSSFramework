@@ -1,5 +1,8 @@
 ﻿using System.Linq.Expressions;
 
+using CommonFramework;
+using CommonFramework.ExpressionEvaluate;
+
 using Framework.Core;
 
 namespace Framework.OData;
@@ -26,7 +29,7 @@ public class SelectOrder<TDomainObject, TOrderKey> : ISelectOrder<TDomainObject>
 
         if (compile)
         {
-            var path = this.Path.Compile(LambdaCompileCache);
+            var path = LambdaCompileCache.GetFunc(this.Path);
 
             switch (this.OrderType)
             {

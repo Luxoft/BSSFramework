@@ -1,9 +1,12 @@
 ﻿using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
 using Framework.Events;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
+
+using SecuritySystem.Attributes;
+using SecuritySystem.Configurator.Handlers;
 
 namespace Framework.Configurator.Handlers;
 

@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 
+using CommonFramework;
+
 using FluentAssertions;
 
 using Framework.Core;

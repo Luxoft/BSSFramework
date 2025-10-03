@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-using Framework.Core;
+using CommonFramework.Maybe;
 
 namespace Framework.DomainDriven.Tracking;
 

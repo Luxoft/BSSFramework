@@ -1,6 +1,8 @@
 ﻿using System.CodeDom;
 using System.Collections;
 
+using CommonFramework;
+
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.Generation;
@@ -156,7 +158,7 @@ public static class Extensions
 
     private class CodeMemberMethodComparer : IEqualityComparer<CodeMemberMethod>
     {
-        public bool Equals(CodeMemberMethod x, CodeMemberMethod y)
+        public bool Equals(CodeMemberMethod? x, CodeMemberMethod? y)
         {
             if (null == x && null == y)
             {

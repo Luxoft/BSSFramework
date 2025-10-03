@@ -1,53 +1,76 @@
-﻿using System.Reflection;
+﻿using CommonFramework;
 
 using Framework.Core;
+using Framework.DomainDriven.Lock;
 using Framework.Persistent;
 
-using Microsoft.Extensions.DependencyInjection;
+using SecuritySystem;
+using SecuritySystem.AncestorDenormalization;
+using SecuritySystem.HierarchicalExpand;
 
 namespace Framework.DomainDriven.ApplicationCore.DALListeners;
 
-public class DenormalizeHierarchicalDALListener(IServiceProvider serviceProvider) : IBeforeTransactionCompletedDALListener
+public class DenormalizeHierarchicalDALListener(
+    IEnumerable<HierarchicalInfo> hierarchicalInfoList,
+    IDenormalizedAncestorsServiceFactory denormalizedAncestorsServiceFactory,
+    INamedLockSource namedLockSource,
+    INamedLockService namedLockService)
+    : IBeforeTransactionCompletedDALListener
 {
-    public void Process(DALChangesEventArgs eventArgs)
-    {
-        if (eventArgs == null) throw new ArgumentNullException(nameof(eventArgs));
+    private readonly IReadOnlyDictionary<Type, HierarchicalInfo> hierarchicalInfoTypes = hierarchicalInfoList.ToDictionary(h => h.DomainObjectType);
 
+    public async Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
+    {
         foreach (var typeGroup in eventArgs.Changes.GroupByType())
         {
-            DenormalizeCache.DenormalizeMethods[typeGroup.Key].Maybe(method =>
-                                                                     {
-                                                                         var values = typeGroup.Value.ToChangeTypeDict().Partial(pair => pair.Value == DALObjectChangeType.Created || pair.Value == DALObjectChangeType.Updated, (modified, removing) => new { Modified = modified, Removing = removing });
+            var domainType = typeGroup.Key;
 
-                                                                         method.Invoke(this, new object[] { values.Modified.Select(z => z.Key).ToArray(typeGroup.Key), values.Removing.Select(z => z.Key).ToArray(typeGroup.Key) });
-                                                                     });
+            if (this.hierarchicalInfoTypes.TryGetValue(domainType, out var hierarchicalInfo))
+            {
+                var values = typeGroup.Value.ToChangeTypeDict().Partial(
+                    pair => pair.Value == DALObjectChangeType.Created || pair.Value == DALObjectChangeType.Updated,
+                    (modified, removing) => new { Modified = modified, Removing = removing });
+
+                var method = new Func<ISecurityContext[], ISecurityContext[], HierarchicalInfo<ISecurityContext>, CancellationToken, Task>(this.Process).CreateGenericMethod(domainType);
+
+                await method.Invoke<Task>(
+                    this,
+                    [
+                        values.Modified.Select(z => z.Key).ToArray(domainType),
+                        values.Removing.Select(z => z.Key).ToArray(domainType),
+                        hierarchicalInfo,
+                        cancellationToken
+                    ]);
+            }
         }
     }
 
-    private void Denormalize<TDomainObject, TAncestorChildLink, TSourceToAncestorOrChildLink>(
-        TDomainObject[] modified,
-        TDomainObject[] removing)
-
-        where TDomainObject : class, IDenormalizedHierarchicalPersistentSource<TAncestorChildLink, TSourceToAncestorOrChildLink, TDomainObject, Guid>
-
-        where TAncestorChildLink : class, IModifiedHierarchicalAncestorLink<TDomainObject, TSourceToAncestorOrChildLink, Guid>, new()
-
-        where TSourceToAncestorOrChildLink : IHierarchicalToAncestorOrChildLink<TDomainObject, Guid>
+    private async Task Process<TDomainObject>(TDomainObject[] modified, TDomainObject[] removing, HierarchicalInfo<TDomainObject> hierarchicalInfo, CancellationToken cancellationToken)
+        where TDomainObject : class
     {
-        var service = ActivatorUtilities
-            .CreateInstance<
-                SyncDenormalizedValuesService<TDomainObject, TAncestorChildLink,
-                TSourceToAncestorOrChildLink, Guid>>(serviceProvider);
+        await this.LockChanges(hierarchicalInfo, cancellationToken);
 
-        service.Sync(modified, removing);
+        modified.Foreach(domainObject => this.UpdateDeepLevel(domainObject, hierarchicalInfo));
+
+        await denormalizedAncestorsServiceFactory.Create<TDomainObject>().SyncAsync(modified, removing, cancellationToken);
     }
 
-    private static class DenormalizeCache
+    private void UpdateDeepLevel<TDomainObject>(TDomainObject domainObject, HierarchicalInfo<TDomainObject> hierarchicalInfo)
+        where TDomainObject : class
     {
-        private static readonly MethodInfo DenormalizeMethod = typeof(DenormalizeHierarchicalDALListener).GetMethod(nameof(Denormalize), BindingFlags.NonPublic | BindingFlags.Instance, true);
+        if (domainObject is IHierarchicalLevelObjectDenormalized objectDenormalized)
+        {
+            objectDenormalized.SetDeepLevel(domainObject.GetAllElements(v => hierarchicalInfo.ParentFunc(v)).Count());
+        }
+    }
 
-        public static readonly IDictionaryCache<Type, MethodInfo> DenormalizeMethods = new DictionaryCache<Type, MethodInfo>(type =>
-                type.GetInterfaceImplementationArguments(typeof(IDenormalizedHierarchicalPersistentSource<,,,>))
-                    .Maybe(args => DenormalizeMethod.MakeGenericMethod(args[2], args[0], args[1]))).WithLock();
+    private async Task LockChanges(HierarchicalInfo hierarchicalInfo, CancellationToken cancellationToken)
+    {
+        var domainObjectAncestorLinkType = hierarchicalInfo.DirectedLinkType;
+
+        var namedLock = namedLockSource.NamedLocks.Where(nl => nl.DomainType == domainObjectAncestorLinkType).Single(
+            () => new ArgumentException($"System must have namedLock for {domainObjectAncestorLinkType.Name} global lock "));
+
+        await namedLockService.LockAsync(namedLock, LockRole.Update, cancellationToken);
     }
 }

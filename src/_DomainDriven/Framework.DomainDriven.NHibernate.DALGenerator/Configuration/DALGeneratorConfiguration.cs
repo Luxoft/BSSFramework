@@ -31,7 +31,7 @@ public class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<T
         var baseRequest = from domainType in this.DomainTypes
                           group domainType by domainType.Assembly into assemblyGroup
                           let assembly = assemblyGroup.Key
-                          select new AssemblyInfo(assembly.GetName().Name, assembly.FullName, new TypeSource(assemblyGroup.ToList()));
+                          select new AssemblyInfo(assembly.GetName().Name!, assembly.FullName!, new TypeSource(assemblyGroup.ToList()));
 
         foreach (var assemblyInfo in baseRequest)
         {

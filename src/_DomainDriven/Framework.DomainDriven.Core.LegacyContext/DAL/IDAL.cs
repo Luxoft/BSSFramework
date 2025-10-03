@@ -9,7 +9,7 @@ public interface IDAL<TDomainObject, TIdent> : IAuditDAL<TDomainObject, TIdent>
     /// Предоставляет Queryable в контексте Read
     /// </summary>
     /// <returns></returns>
-    IQueryable<TDomainObject> GetQueryable(LockRole lockRole, IFetchContainer<TDomainObject> fetchContainer = null);
+    IQueryable<TDomainObject> GetQueryable(LockRole lockRole, IFetchContainer<TDomainObject>? fetchContainer = null);
 
     TDomainObject GetById(TIdent id, LockRole lockRole);
 

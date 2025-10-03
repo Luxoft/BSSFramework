@@ -1,4 +1,5 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+
 using Framework.DomainDriven.Metadata;
 using Framework.Persistent.Mapping;
 

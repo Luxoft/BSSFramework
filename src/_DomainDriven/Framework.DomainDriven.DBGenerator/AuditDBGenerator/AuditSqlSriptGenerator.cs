@@ -1,5 +1,8 @@
 ﻿using System.Data;
 using System.Text;
+
+using CommonFramework;
+
 using Framework.Core;
 
 using NHibernate.Envers.Configuration.Attributes;

@@ -1,14 +1,17 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.DomainDriven.Lock;
 using Framework.Exceptions;
-using Framework.HierarchicalExpand;
 using Framework.OData;
 using Framework.Persistent;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using SecuritySystem.HierarchicalExpand;
 
 #nullable enable
 
@@ -19,8 +22,9 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
     IDefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
-    where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>, IHierarchicalObjectExpanderFactoryContainer<TIdent>,
+    where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>, IHierarchicalObjectExpanderFactoryContainer,
     IBLLBaseContext
+    where TIdent : notnull
 {
     private const int MaxItemsInSql = 2000;
 
@@ -134,7 +138,8 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
 
     private Dictionary<TIdent, TIdent> ExpandEnumerableWithParents(IEnumerable<TIdent> projectionsIdents, HierarchicalExpandType parentExpandMode)
     {
-        var hierarchicalObjectExpander = this.Context.HierarchicalObjectExpanderFactory.Create(typeof(TDomainObject));
+        var hierarchicalObjectExpander = this.Context.HierarchicalObjectExpanderFactory.Create<TIdent>(typeof(TDomainObject));
+
         return projectionsIdents.Split(MaxItemsInSql)
                                 .SelectMany(z => hierarchicalObjectExpander.ExpandWithParents(z, parentExpandMode))
                                 .Distinct()
@@ -143,7 +148,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
 
     private Dictionary<TIdent, TIdent> ExpandQueryableWithParents(IQueryable<TIdent> projectionsIdents, HierarchicalExpandType parentExpandMode)
     {
-        return this.Context.HierarchicalObjectExpanderFactory.Create(typeof(TDomainObject)).ExpandWithParents(projectionsIdents, parentExpandMode);
+        return this.Context.HierarchicalObjectExpanderFactory.Create<TIdent>(typeof(TDomainObject)).ExpandWithParents(projectionsIdents, parentExpandMode);
     }
 
     public List<TDomainObject> GetListByIdents<TIdentity>(IEnumerable<TIdentity> idents, IFetchContainer<TDomainObject>? fetchContainer = null)

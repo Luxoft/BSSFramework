@@ -1,23 +1,41 @@
 ﻿using System.Linq.Expressions;
-
+using CommonFramework;
 using Framework.Authorization.Domain;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.ExternalSystem;
 
 using Microsoft.Extensions.DependencyInjection;
+using SecuritySystem;
+using SecuritySystem.ExternalSystem;
+using SecuritySystem.Services;
 
-namespace Framework.Authorization.SecuritySystem;
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class AuthorizationPermissionSystem(
     IServiceProvider serviceProvider,
     ISecurityContextInfoSource securityContextInfoSource,
     ISecurityContextSource securityContextSource,
+    IIdentityInfoSource identityInfoSource,
     SecurityRuleCredential securityRuleCredential)
     : IPermissionSystem<Permission>
 {
     public Type PermissionType { get; } = typeof(Permission);
 
-    public Expression<Func<Permission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>(SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
+    public Expression<Func<Permission, IEnumerable<TIdent>>> GetPermissionRestrictionsExpr<TSecurityContext, TIdent>(
+        SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
+        where TSecurityContext : class, ISecurityContext
+        where TIdent : notnull
+    {
+        if (typeof(TIdent) != typeof(Guid))
+        {
+            throw new InvalidOperationException($"{nameof(TIdent)} must be {nameof(Guid)}");
+        }
+        else
+        {
+            return (Expression<Func<Permission, IEnumerable<TIdent>>>)(object)this.GetPermissionRestrictionsExpr(restrictionFilterInfo);
+        }
+    }
+
+    private Expression<Func<Permission, IEnumerable<Guid>>> GetPermissionRestrictionsExpr<TSecurityContext>(
+        SecurityContextRestrictionFilterInfo<TSecurityContext>? restrictionFilterInfo)
         where TSecurityContext : class, ISecurityContext
     {
         var securityContextTypeId = securityContextInfoSource.GetSecurityContextInfo<TSecurityContext>().Id;
@@ -30,9 +48,11 @@ public class AuthorizationPermissionSystem(
         }
         else
         {
+            var identityInfo = identityInfoSource.GetIdentityInfo<TSecurityContext, Guid>();
+
             var securityContextQueryable = securityContextSource.GetQueryable(restrictionFilterInfo)
                                                                 .Where(restrictionFilterInfo.GetPureFilter(serviceProvider))
-                                                                .Select(securityContext => securityContext.Id);
+                                                                .Select(identityInfo.IdPath);
 
             return permission => permission.Restrictions
                                            .Where(restriction => restriction.SecurityContextType.Id == securityContextTypeId)
@@ -41,9 +61,16 @@ public class AuthorizationPermissionSystem(
         }
     }
 
+    public Expression<Func<Permission, bool>> GetGrandAccessExpr<TSecurityContext>()
+        where TSecurityContext : class, ISecurityContext =>
+
+        this.GetPermissionRestrictionsExpr<TSecurityContext>(null).Select(v => !v.Any());
+
     public IPermissionSource<Permission> GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
-        return ActivatorUtilities.CreateInstance<AuthorizationPermissionSource>(serviceProvider, securityRule.TryApplyCredential(securityRuleCredential));
+        return ActivatorUtilities.CreateInstance<AuthorizationPermissionSource>(
+            serviceProvider,
+            securityRule.TryApplyCredential(securityRuleCredential));
     }
 
     public Task<IEnumerable<SecurityRole>> GetAvailableSecurityRoles(CancellationToken cancellationToken = default)
@@ -51,6 +78,7 @@ public class AuthorizationPermissionSystem(
         return ActivatorUtilities.CreateInstance<AuthorizationAvailableSecurityRoleSource>(serviceProvider, securityRuleCredential)
                                  .GetAvailableSecurityRoles(cancellationToken);
     }
+
     IPermissionSource IPermissionSystem.GetPermissionSource(DomainSecurityRule.RoleBaseSecurityRule securityRule)
     {
         return this.GetPermissionSource(securityRule);

@@ -1,5 +1,4 @@
-﻿using Framework.Core;
-using Framework.DomainDriven.DALExceptions;
+﻿using Framework.DomainDriven.DALExceptions;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.NHibernate.SqlExceptionProcessors;
 using Framework.Exceptions;
@@ -31,7 +30,7 @@ public class NHibSessionEnvironment : IDisposable
         {
             this.cfg = new Configuration();
 
-            this.RegisteredTypes = cachedMappingSettings.ToHashSet(ms => ms.PersistentDomainObjectBaseType);
+            this.RegisteredTypes = cachedMappingSettings.Select(ms => ms.PersistentDomainObjectBaseType).ToHashSet();
 
             foreach (var initializer in cachedMappingSettings.Select(ms => ms.Initializer).Concat(initializers))
             {

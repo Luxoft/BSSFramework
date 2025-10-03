@@ -2,11 +2,12 @@
 using System.Collections.ObjectModel;
 using System.ServiceModel;
 
+using CommonFramework;
+
 using Framework.CodeDom;
-using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Generation.Domain;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 

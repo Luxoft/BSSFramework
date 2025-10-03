@@ -4,7 +4,7 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
-using Framework.SecuritySystem.SecurityAccessor;
+using SecuritySystem.SecurityAccessor;
 
 using SampleSystem.Domain;
 

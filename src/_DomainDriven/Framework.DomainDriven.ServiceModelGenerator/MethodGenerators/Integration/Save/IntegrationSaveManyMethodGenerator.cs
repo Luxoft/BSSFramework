@@ -1,5 +1,7 @@
 ﻿using System.CodeDom;
 
+using CommonFramework;
+
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.Transfering;
@@ -80,7 +82,7 @@ public class IntegrationSaveManyMethodGenerator<TConfiguration> : IntegrationBas
                          .ToVariableReferenceExpression()
                          .ToStaticMethodInvokeExpression(
 
-                                                         typeof(Core.EnumerableExtensions)
+                                                         typeof(CoreEnumerableExtensions)
                                                                  .ToTypeReferenceExpression()
                                                                  .ToMethodReferenceExpression("ToList"), convertLambda)
 

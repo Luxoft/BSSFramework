@@ -13,6 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Dapper" />
     <PackageReference Include="Dapper.Contrib" />
+    <PackageReference Include="IvAt.CommonFramework.DependencyInjection" />
     <PackageReference Include="MartinCostello.SqlLocalDb" />
     <PackageReference Include="Microsoft.Extensions.Configuration" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />

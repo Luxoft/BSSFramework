@@ -1,6 +1,6 @@
-﻿using Framework.SecuritySystem;
+﻿using Microsoft.AspNetCore.Mvc;
 
-using Microsoft.AspNetCore.Mvc;
+using SecuritySystem.Services;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 

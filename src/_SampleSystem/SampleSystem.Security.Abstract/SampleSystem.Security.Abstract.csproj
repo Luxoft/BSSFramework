@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.SecuritySystem.Abstract\Framework.SecuritySystem.Abstract.csproj" />
+    <PackageReference Include="IvAt.SecuritySystem.Abstractions" />
   </ItemGroup>
 
 </Project>

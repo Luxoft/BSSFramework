@@ -6,9 +6,10 @@ using Automation.Xunit.ServiceEnvironment;
 using Bss.Platform.Events.Abstractions;
 using Bss.Testing.Xunit.Interfaces;
 
+using CommonFramework.DependencyInjection;
+
 using Framework.Configuration.BLL;
 using Framework.Core;
-using Framework.DependencyInjection;
 using Framework.Notification.DTO;
 
 using Microsoft.Extensions.Configuration;

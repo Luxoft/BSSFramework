@@ -3,9 +3,9 @@ using Bss.Platform.Api.Middlewares;
 using Bss.Platform.Events;
 using Bss.Platform.Logging;
 
+using CommonFramework.DependencyInjection;
+
 using Framework.Configurator;
-using Framework.Configurator.Interfaces;
-using Framework.DependencyInjection;
 using Framework.DomainDriven.Setup;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.DomainDriven.WebApiNetCore.JsonConverter;
@@ -27,6 +27,9 @@ using SampleSystem.BLL._Command.CreateClassA.Integration;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.ServiceEnvironment.Jobs;
 using SampleSystem.WebApiCore.Services;
+
+using SecuritySystem.Configurator;
+using SecuritySystem.Configurator.Interfaces;
 
 namespace SampleSystem.WebApiCore;
 
@@ -93,7 +96,9 @@ public static class GenericProgram
             s => s.AddJob<SampleJob>(new JobSettings { DisplayName = "SampleDisplayName" })
                   .AddJob<ISendNotificationsJob>((job, ct) => job.ExecuteAsync(ct), new JobSettings { CronTiming = Cron.Never() }));
 
-        builder.Services.ValidateDuplicateDeclaration(typeof(ILoggerFactory));
+        builder.Services
+               .AddValidator(new DuplicateServiceUsageValidator([typeof(ILoggerFactory)]))
+               .Validate();
 
         var app = builder.Build();
 

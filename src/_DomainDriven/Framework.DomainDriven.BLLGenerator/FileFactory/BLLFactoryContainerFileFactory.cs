@@ -7,6 +7,9 @@ using Framework.DomainDriven.BLLCoreGenerator;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.BLL;
 
+using CommonFramework;
+using CommonFramework.DependencyInjection;
+
 namespace Framework.DomainDriven.BLLGenerator;
 
 public class BLLFactoryContainerFileFactory<TConfiguration> : BLLFactoryContainerFileFactoryBase<TConfiguration>
@@ -158,9 +161,9 @@ public class BLLFactoryContainerFileFactory<TConfiguration> : BLLFactoryContaine
                 typeof(IDefaultSecurityDomainBLLBase<,,>).MakeGenericType(this.Configuration.Environment.PersistentDomainObjectBaseType, domainType, this.Configuration.Environment.GetIdentityType()).ToTypeReference(),
                 domainType.ToTypeReference());
 
-        var addScopedFromMethod = typeof(DependencyInjection.ServiceCollectionExtensions).ToTypeReferenceExpression()
+        var addScopedFromMethod = typeof(ServiceCollectionExtensions).ToTypeReferenceExpression()
             .ToMethodReferenceExpression(
-                nameof(DependencyInjection.ServiceCollectionExtensions.AddScopedFrom),
+                nameof(ServiceCollectionExtensions.AddScopedFrom),
                 baseFactoryDecl,
                 factoryDecl);
 

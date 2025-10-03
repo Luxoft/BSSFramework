@@ -1,6 +1,6 @@
-﻿using Framework.SecuritySystem;
+﻿using SampleSystem.Domain;
 
-using SampleSystem.Domain;
+using SecuritySystem.Providers;
 
 namespace SampleSystem.BLL;
 

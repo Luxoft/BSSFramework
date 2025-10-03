@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 
+using CommonFramework;
+
 using Framework.Core;
 
 namespace Framework.ExpressionParsers;
@@ -27,12 +29,6 @@ public static class NativeExpressionParserExtensions
     {
         return new TryFaultMixedExpressionParserFactory(innerParsers);
     }
-
-    public static INativeExpressionParser WithCache(this INativeExpressionParser baseParser)
-    {
-        return new CachedExpressionParser(baseParser);
-    }
-
 
     private class TryFaultMixedExpressionParserFactory : INativeExpressionParser
     {
@@ -62,25 +58,6 @@ public static class NativeExpressionParserExtensions
             var errors = preResult.Select(v => v.Value).GetErrors();
 
             throw new AggregateException(errors);
-        }
-    }
-
-    private class CachedExpressionParser : INativeExpressionParser
-    {
-        private readonly IDictionaryCache<NativeExpressionParsingData, LambdaExpression> _cache;
-
-
-        public CachedExpressionParser(INativeExpressionParser baseParser)
-        {
-            if (baseParser == null) throw new ArgumentNullException(nameof(baseParser));
-
-            this._cache = new DictionaryCache<NativeExpressionParsingData, LambdaExpression>(baseParser.Parse).WithLock();
-        }
-
-
-        public LambdaExpression Parse(NativeExpressionParsingData input)
-        {
-            return this._cache.GetValue(input);
         }
     }
 }

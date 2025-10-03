@@ -1,8 +1,8 @@
 ﻿using System.Runtime.Serialization;
 
-using SExpressions = System.Linq.Expressions;
+using CommonFramework;
 
-using Framework.Core;
+using SExpressions = System.Linq.Expressions;
 
 namespace Framework.QueryLanguage;
 

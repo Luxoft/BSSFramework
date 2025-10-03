@@ -3,9 +3,10 @@ using Automation.ServiceEnvironment;
 
 using Bss.Platform.Events.Abstractions;
 
+using CommonFramework.DependencyInjection;
+
 using Framework.Configuration.BLL;
 using Framework.Core;
-using Framework.DependencyInjection;
 using Framework.DomainDriven.Jobs;
 using Framework.Notification.DTO;
 using Microsoft.Extensions.Configuration;

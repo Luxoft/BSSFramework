@@ -1,7 +1,9 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.DomainDriven.Tracking;
-using Framework.SecuritySystem;
+
+using SecuritySystem.Providers;
+using SecuritySystem.SecurityAccessor;
 
 namespace Framework.DomainDriven.BLL.Security
 {

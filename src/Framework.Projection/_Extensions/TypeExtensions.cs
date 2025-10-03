@@ -1,6 +1,8 @@
 ﻿using Framework.Core;
 using Framework.Projection.Contract;
 
+using CommonFramework;
+
 namespace Framework.Projection;
 
 public static class TypeExtensions

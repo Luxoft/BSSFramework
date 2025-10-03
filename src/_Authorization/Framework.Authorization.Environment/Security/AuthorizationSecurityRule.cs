@@ -1,4 +1,4 @@
-﻿using Framework.SecuritySystem;
+﻿using SecuritySystem;
 
 namespace Framework.Authorization.Environment.Security;
 

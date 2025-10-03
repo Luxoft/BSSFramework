@@ -1145,37 +1145,37 @@ namespace SampleSystem.Generated.DTO
             {
                 throw new System.ArgumentNullException("currentSource");
             }
-            target.Age = Framework.Core.Maybe.Return(currentSource.Age);
-            target.BirthDate = Framework.Core.Maybe.Return(currentSource.BirthDate);
-            target.CanBePPM = Framework.Core.Maybe.Return(currentSource.CanBePPM);
+            target.Age = CommonFramework.Maybe.Maybe.Return(currentSource.Age);
+            target.BirthDate = CommonFramework.Maybe.Maybe.Return(currentSource.BirthDate);
+            target.CanBePPM = CommonFramework.Maybe.Maybe.Return(currentSource.CanBePPM);
             target.CellPhones = this.ExtractUpdateDataFromSingle<SampleSystem.Generated.DTO.EmployeeCellPhoneStrictDTO, SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO, SampleSystem.Generated.DTO.EmployeeCellPhoneUpdateDTO>(currentSource.CellPhones, employeeCellPhone => new SampleSystem.Generated.DTO.EmployeeCellPhoneUpdateDTO(employeeCellPhone, this));
-            target.EducationDuration = Framework.Core.Maybe.Return(currentSource.EducationDuration);
-            target.Email = Framework.Core.Maybe.Return(currentSource.Email);
+            target.EducationDuration = CommonFramework.Maybe.Maybe.Return(currentSource.EducationDuration);
+            target.Email = CommonFramework.Maybe.Maybe.Return(currentSource.Email);
             target.EmployeeToEmployeeLinks = this.ExtractUpdateDataFromSingle<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkStrictDTO, SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO, SampleSystem.Generated.DTO.EmployeeToEmployeeLinkUpdateDTO>(currentSource.EmployeeToEmployeeLinks, employeeToEmployeeLink => new SampleSystem.Generated.DTO.EmployeeToEmployeeLinkUpdateDTO(employeeToEmployeeLink, this));
-            target.ExternalId = Framework.Core.Maybe.Return(currentSource.ExternalId);
-            target.Gender = Framework.Core.Maybe.Return(currentSource.Gender);
+            target.ExternalId = CommonFramework.Maybe.Maybe.Return(currentSource.ExternalId);
+            target.Gender = CommonFramework.Maybe.Maybe.Return(currentSource.Gender);
             target.Id = currentSource.Id;
-            target.Interphone = Framework.Core.Maybe.Return(currentSource.Interphone);
-            target.Landlinephone = Framework.Core.Maybe.Return(currentSource.Landlinephone);
-            target.LastActionDate = Framework.Core.Maybe.Return(currentSource.LastActionDate);
+            target.Interphone = CommonFramework.Maybe.Maybe.Return(currentSource.Interphone);
+            target.Landlinephone = CommonFramework.Maybe.Maybe.Return(currentSource.Landlinephone);
+            target.LastActionDate = CommonFramework.Maybe.Maybe.Return(currentSource.LastActionDate);
             target.Login = currentSource.Login;
-            target.NameEng = Framework.Core.Maybe.Return(currentSource.NameEng);
-            target.NameNative = Framework.Core.Maybe.Return(currentSource.NameNative);
-            target.NameRussian = Framework.Core.Maybe.Return(currentSource.NameRussian);
-            target.NonValidateVirtualProp = Framework.Core.Maybe.Return(currentSource.NonValidateVirtualProp);
+            target.NameEng = CommonFramework.Maybe.Maybe.Return(currentSource.NameEng);
+            target.NameNative = CommonFramework.Maybe.Maybe.Return(currentSource.NameNative);
+            target.NameRussian = CommonFramework.Maybe.Maybe.Return(currentSource.NameRussian);
+            target.NonValidateVirtualProp = CommonFramework.Maybe.Maybe.Return(currentSource.NonValidateVirtualProp);
             target.PersonalCellPhones = this.ExtractSecurityUpdateDataFromSingle<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO, SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO, SampleSystem.Generated.DTO.EmployeePersonalCellPhoneUpdateDTO>(currentSource.PersonalCellPhones, employeePersonalCellPhone => new SampleSystem.Generated.DTO.EmployeePersonalCellPhoneUpdateDTO(employeePersonalCellPhone, this));
-            target.Pin = Framework.Core.Maybe.Return(currentSource.Pin);
-            target.PlannedHireDate = Framework.Core.Maybe.Return(currentSource.PlannedHireDate);
+            target.Pin = CommonFramework.Maybe.Maybe.Return(currentSource.Pin);
+            target.PlannedHireDate = CommonFramework.Maybe.Maybe.Return(currentSource.PlannedHireDate);
             target.Position = currentSource.Position;
-            target.Ppm = Framework.Core.Maybe.Return(currentSource.Ppm);
-            target.RegistrationType = Framework.Core.Maybe.Return(currentSource.RegistrationType);
-            target.Role = Framework.Core.Maybe.Return(currentSource.Role);
-            target.RoleDegree = Framework.Core.Maybe.Return(currentSource.RoleDegree);
+            target.Ppm = CommonFramework.Maybe.Maybe.Return(currentSource.Ppm);
+            target.RegistrationType = CommonFramework.Maybe.Maybe.Return(currentSource.RegistrationType);
+            target.Role = CommonFramework.Maybe.Maybe.Return(currentSource.Role);
+            target.RoleDegree = CommonFramework.Maybe.Maybe.Return(currentSource.RoleDegree);
             target.Specializations = this.ExtractUpdateDataFromSingle<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkUpdateDTO>(currentSource.Specializations, employeeAndEmployeeSpecializationLink => new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkUpdateDTO(employeeAndEmployeeSpecializationLink, this));
-            target.VacationApprover = Framework.Core.Maybe.Return(currentSource.VacationApprover);
-            target.ValidateVirtualProp = Framework.Core.Maybe.Return(currentSource.ValidateVirtualProp);
+            target.VacationApprover = CommonFramework.Maybe.Maybe.Return(currentSource.VacationApprover);
+            target.ValidateVirtualProp = CommonFramework.Maybe.Maybe.Return(currentSource.ValidateVirtualProp);
             target.Version = currentSource.Version;
-            target.WorkPeriod = Framework.Core.Maybe.Return(currentSource.WorkPeriod);
+            target.WorkPeriod = CommonFramework.Maybe.Maybe.Return(currentSource.WorkPeriod);
         }
         
         public virtual void MapEmployee(SampleSystem.Generated.DTO.EmployeeUpdateDTO target, SampleSystem.Generated.DTO.EmployeeStrictDTO currentSource, SampleSystem.Generated.DTO.EmployeeStrictDTO baseSource)
@@ -1194,46 +1194,46 @@ namespace SampleSystem.Generated.DTO
             }
             if (baseSource.Age != currentSource.Age)
             {
-                target.Age = Framework.Core.Maybe.Return(currentSource.Age);
+                target.Age = CommonFramework.Maybe.Maybe.Return(currentSource.Age);
             }
             if (baseSource.BirthDate != currentSource.BirthDate)
             {
-                target.BirthDate = Framework.Core.Maybe.Return(currentSource.BirthDate);
+                target.BirthDate = CommonFramework.Maybe.Maybe.Return(currentSource.BirthDate);
             }
             if (baseSource.CanBePPM != currentSource.CanBePPM)
             {
-                target.CanBePPM = Framework.Core.Maybe.Return(currentSource.CanBePPM);
+                target.CanBePPM = CommonFramework.Maybe.Maybe.Return(currentSource.CanBePPM);
             }
             target.CellPhones = this.ExtractUpdateDataL<SampleSystem.Generated.DTO.EmployeeCellPhoneStrictDTO, SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO, SampleSystem.Generated.DTO.EmployeeCellPhoneUpdateDTO>(currentSource.CellPhones, baseSource.CellPhones, (currentSourceItem, baseSourceItem) => new SampleSystem.Generated.DTO.EmployeeCellPhoneUpdateDTO(currentSourceItem, baseSourceItem, this), currentSourceItem => new SampleSystem.Generated.DTO.EmployeeCellPhoneUpdateDTO(currentSourceItem, this));
             if (baseSource.EducationDuration != currentSource.EducationDuration)
             {
-                target.EducationDuration = Framework.Core.Maybe.Return(currentSource.EducationDuration);
+                target.EducationDuration = CommonFramework.Maybe.Maybe.Return(currentSource.EducationDuration);
             }
             if (baseSource.Email != currentSource.Email)
             {
-                target.Email = Framework.Core.Maybe.Return(currentSource.Email);
+                target.Email = CommonFramework.Maybe.Maybe.Return(currentSource.Email);
             }
             target.EmployeeToEmployeeLinks = this.ExtractUpdateDataL<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkStrictDTO, SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO, SampleSystem.Generated.DTO.EmployeeToEmployeeLinkUpdateDTO>(currentSource.EmployeeToEmployeeLinks, baseSource.EmployeeToEmployeeLinks, (currentSourceItem, baseSourceItem) => new SampleSystem.Generated.DTO.EmployeeToEmployeeLinkUpdateDTO(currentSourceItem, baseSourceItem, this), currentSourceItem => new SampleSystem.Generated.DTO.EmployeeToEmployeeLinkUpdateDTO(currentSourceItem, this));
             if (baseSource.ExternalId != currentSource.ExternalId)
             {
-                target.ExternalId = Framework.Core.Maybe.Return(currentSource.ExternalId);
+                target.ExternalId = CommonFramework.Maybe.Maybe.Return(currentSource.ExternalId);
             }
             if (baseSource.Gender != currentSource.Gender)
             {
-                target.Gender = Framework.Core.Maybe.Return(currentSource.Gender);
+                target.Gender = CommonFramework.Maybe.Maybe.Return(currentSource.Gender);
             }
             target.Id = this.GetEqualsValue(currentSource.Id, baseSource.Id, "Id");
             if (baseSource.Interphone != currentSource.Interphone)
             {
-                target.Interphone = Framework.Core.Maybe.Return(currentSource.Interphone);
+                target.Interphone = CommonFramework.Maybe.Maybe.Return(currentSource.Interphone);
             }
             if (baseSource.Landlinephone != currentSource.Landlinephone)
             {
-                target.Landlinephone = Framework.Core.Maybe.Return(currentSource.Landlinephone);
+                target.Landlinephone = CommonFramework.Maybe.Maybe.Return(currentSource.Landlinephone);
             }
             if (baseSource.LastActionDate != currentSource.LastActionDate)
             {
-                target.LastActionDate = Framework.Core.Maybe.Return(currentSource.LastActionDate);
+                target.LastActionDate = CommonFramework.Maybe.Maybe.Return(currentSource.LastActionDate);
             }
             if (baseSource.Login != currentSource.Login)
             {
@@ -1241,28 +1241,28 @@ namespace SampleSystem.Generated.DTO
             }
             if (baseSource.NameEng != currentSource.NameEng)
             {
-                target.NameEng = Framework.Core.Maybe.Return(currentSource.NameEng);
+                target.NameEng = CommonFramework.Maybe.Maybe.Return(currentSource.NameEng);
             }
             if (baseSource.NameNative != currentSource.NameNative)
             {
-                target.NameNative = Framework.Core.Maybe.Return(currentSource.NameNative);
+                target.NameNative = CommonFramework.Maybe.Maybe.Return(currentSource.NameNative);
             }
             if (baseSource.NameRussian != currentSource.NameRussian)
             {
-                target.NameRussian = Framework.Core.Maybe.Return(currentSource.NameRussian);
+                target.NameRussian = CommonFramework.Maybe.Maybe.Return(currentSource.NameRussian);
             }
             if (baseSource.NonValidateVirtualProp != currentSource.NonValidateVirtualProp)
             {
-                target.NonValidateVirtualProp = Framework.Core.Maybe.Return(currentSource.NonValidateVirtualProp);
+                target.NonValidateVirtualProp = CommonFramework.Maybe.Maybe.Return(currentSource.NonValidateVirtualProp);
             }
             target.PersonalCellPhones = this.ExtractSecurityUpdateDataL<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO, SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO, SampleSystem.Generated.DTO.EmployeePersonalCellPhoneUpdateDTO>(currentSource.PersonalCellPhones, baseSource.PersonalCellPhones, (currentSourceItem, baseSourceItem) => new SampleSystem.Generated.DTO.EmployeePersonalCellPhoneUpdateDTO(currentSourceItem, baseSourceItem, this), currentSourceItem => new SampleSystem.Generated.DTO.EmployeePersonalCellPhoneUpdateDTO(currentSourceItem, this));
             if (baseSource.Pin != currentSource.Pin)
             {
-                target.Pin = Framework.Core.Maybe.Return(currentSource.Pin);
+                target.Pin = CommonFramework.Maybe.Maybe.Return(currentSource.Pin);
             }
             if (baseSource.PlannedHireDate != currentSource.PlannedHireDate)
             {
-                target.PlannedHireDate = Framework.Core.Maybe.Return(currentSource.PlannedHireDate);
+                target.PlannedHireDate = CommonFramework.Maybe.Maybe.Return(currentSource.PlannedHireDate);
             }
             if (baseSource.Position != currentSource.Position)
             {
@@ -1270,33 +1270,33 @@ namespace SampleSystem.Generated.DTO
             }
             if (baseSource.Ppm != currentSource.Ppm)
             {
-                target.Ppm = Framework.Core.Maybe.Return(currentSource.Ppm);
+                target.Ppm = CommonFramework.Maybe.Maybe.Return(currentSource.Ppm);
             }
             if (baseSource.RegistrationType != currentSource.RegistrationType)
             {
-                target.RegistrationType = Framework.Core.Maybe.Return(currentSource.RegistrationType);
+                target.RegistrationType = CommonFramework.Maybe.Maybe.Return(currentSource.RegistrationType);
             }
             if (baseSource.Role != currentSource.Role)
             {
-                target.Role = Framework.Core.Maybe.Return(currentSource.Role);
+                target.Role = CommonFramework.Maybe.Maybe.Return(currentSource.Role);
             }
             if (baseSource.RoleDegree != currentSource.RoleDegree)
             {
-                target.RoleDegree = Framework.Core.Maybe.Return(currentSource.RoleDegree);
+                target.RoleDegree = CommonFramework.Maybe.Maybe.Return(currentSource.RoleDegree);
             }
             target.Specializations = this.ExtractUpdateDataL<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkUpdateDTO>(currentSource.Specializations, baseSource.Specializations, (currentSourceItem, baseSourceItem) => new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkUpdateDTO(currentSourceItem, baseSourceItem, this), currentSourceItem => new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkUpdateDTO(currentSourceItem, this));
             if (baseSource.VacationApprover != currentSource.VacationApprover)
             {
-                target.VacationApprover = Framework.Core.Maybe.Return(currentSource.VacationApprover);
+                target.VacationApprover = CommonFramework.Maybe.Maybe.Return(currentSource.VacationApprover);
             }
             if (baseSource.ValidateVirtualProp != currentSource.ValidateVirtualProp)
             {
-                target.ValidateVirtualProp = Framework.Core.Maybe.Return(currentSource.ValidateVirtualProp);
+                target.ValidateVirtualProp = CommonFramework.Maybe.Maybe.Return(currentSource.ValidateVirtualProp);
             }
             target.Version = this.GetEqualsValue(currentSource.Version, baseSource.Version, "Version");
             if (baseSource.WorkPeriod != currentSource.WorkPeriod)
             {
-                target.WorkPeriod = Framework.Core.Maybe.Return(currentSource.WorkPeriod);
+                target.WorkPeriod = CommonFramework.Maybe.Maybe.Return(currentSource.WorkPeriod);
             }
             target.Compress();
         }
@@ -1311,9 +1311,9 @@ namespace SampleSystem.Generated.DTO
             {
                 throw new System.ArgumentNullException("currentSource");
             }
-            target.Employee = Framework.Core.Maybe.Return(currentSource.Employee);
+            target.Employee = CommonFramework.Maybe.Maybe.Return(currentSource.Employee);
             target.Id = currentSource.Id;
-            target.Specialization = Framework.Core.Maybe.Return(currentSource.Specialization);
+            target.Specialization = CommonFramework.Maybe.Maybe.Return(currentSource.Specialization);
             target.Version = currentSource.Version;
         }
         
@@ -1333,12 +1333,12 @@ namespace SampleSystem.Generated.DTO
             }
             if (baseSource.Employee != currentSource.Employee)
             {
-                target.Employee = Framework.Core.Maybe.Return(currentSource.Employee);
+                target.Employee = CommonFramework.Maybe.Maybe.Return(currentSource.Employee);
             }
             target.Id = this.GetEqualsValue(currentSource.Id, baseSource.Id, "Id");
             if (baseSource.Specialization != currentSource.Specialization)
             {
-                target.Specialization = Framework.Core.Maybe.Return(currentSource.Specialization);
+                target.Specialization = CommonFramework.Maybe.Maybe.Return(currentSource.Specialization);
             }
             target.Version = this.GetEqualsValue(currentSource.Version, baseSource.Version, "Version");
             target.Compress();
@@ -1354,10 +1354,10 @@ namespace SampleSystem.Generated.DTO
             {
                 throw new System.ArgumentNullException("currentSource");
             }
-            target.CityCode = Framework.Core.Maybe.Return(currentSource.CityCode);
-            target.CountryCode = Framework.Core.Maybe.Return(currentSource.CountryCode);
+            target.CityCode = CommonFramework.Maybe.Maybe.Return(currentSource.CityCode);
+            target.CountryCode = CommonFramework.Maybe.Maybe.Return(currentSource.CountryCode);
             target.Id = currentSource.Id;
-            target.Number = Framework.Core.Maybe.Return(currentSource.Number);
+            target.Number = CommonFramework.Maybe.Maybe.Return(currentSource.Number);
             target.Version = currentSource.Version;
         }
         
@@ -1377,16 +1377,16 @@ namespace SampleSystem.Generated.DTO
             }
             if (baseSource.CityCode != currentSource.CityCode)
             {
-                target.CityCode = Framework.Core.Maybe.Return(currentSource.CityCode);
+                target.CityCode = CommonFramework.Maybe.Maybe.Return(currentSource.CityCode);
             }
             if (baseSource.CountryCode != currentSource.CountryCode)
             {
-                target.CountryCode = Framework.Core.Maybe.Return(currentSource.CountryCode);
+                target.CountryCode = CommonFramework.Maybe.Maybe.Return(currentSource.CountryCode);
             }
             target.Id = this.GetEqualsValue(currentSource.Id, baseSource.Id, "Id");
             if (baseSource.Number != currentSource.Number)
             {
-                target.Number = Framework.Core.Maybe.Return(currentSource.Number);
+                target.Number = CommonFramework.Maybe.Maybe.Return(currentSource.Number);
             }
             target.Version = this.GetEqualsValue(currentSource.Version, baseSource.Version, "Version");
             target.Compress();
@@ -1402,10 +1402,10 @@ namespace SampleSystem.Generated.DTO
             {
                 throw new System.ArgumentNullException("currentSource");
             }
-            target.CityCode = Framework.Core.Maybe.Return(currentSource.CityCode);
-            target.CountryCode = Framework.Core.Maybe.Return(currentSource.CountryCode);
+            target.CityCode = CommonFramework.Maybe.Maybe.Return(currentSource.CityCode);
+            target.CountryCode = CommonFramework.Maybe.Maybe.Return(currentSource.CountryCode);
             target.Id = currentSource.Id;
-            target.Number = Framework.Core.Maybe.Return(currentSource.Number);
+            target.Number = CommonFramework.Maybe.Maybe.Return(currentSource.Number);
             target.Version = currentSource.Version;
         }
         
@@ -1425,16 +1425,16 @@ namespace SampleSystem.Generated.DTO
             }
             if (baseSource.CityCode != currentSource.CityCode)
             {
-                target.CityCode = Framework.Core.Maybe.Return(currentSource.CityCode);
+                target.CityCode = CommonFramework.Maybe.Maybe.Return(currentSource.CityCode);
             }
             if (baseSource.CountryCode != currentSource.CountryCode)
             {
-                target.CountryCode = Framework.Core.Maybe.Return(currentSource.CountryCode);
+                target.CountryCode = CommonFramework.Maybe.Maybe.Return(currentSource.CountryCode);
             }
             target.Id = this.GetEqualsValue(currentSource.Id, baseSource.Id, "Id");
             if (baseSource.Number != currentSource.Number)
             {
-                target.Number = Framework.Core.Maybe.Return(currentSource.Number);
+                target.Number = CommonFramework.Maybe.Maybe.Return(currentSource.Number);
             }
             target.Version = this.GetEqualsValue(currentSource.Version, baseSource.Version, "Version");
             target.Compress();
@@ -1450,9 +1450,9 @@ namespace SampleSystem.Generated.DTO
             {
                 throw new System.ArgumentNullException("currentSource");
             }
-            target.EmployeeLinkType = Framework.Core.Maybe.Return(currentSource.EmployeeLinkType);
+            target.EmployeeLinkType = CommonFramework.Maybe.Maybe.Return(currentSource.EmployeeLinkType);
             target.Id = currentSource.Id;
-            target.LinkedEmployee = Framework.Core.Maybe.Return(currentSource.LinkedEmployee);
+            target.LinkedEmployee = CommonFramework.Maybe.Maybe.Return(currentSource.LinkedEmployee);
             target.Version = currentSource.Version;
         }
         
@@ -1472,12 +1472,12 @@ namespace SampleSystem.Generated.DTO
             }
             if (baseSource.EmployeeLinkType != currentSource.EmployeeLinkType)
             {
-                target.EmployeeLinkType = Framework.Core.Maybe.Return(currentSource.EmployeeLinkType);
+                target.EmployeeLinkType = CommonFramework.Maybe.Maybe.Return(currentSource.EmployeeLinkType);
             }
             target.Id = this.GetEqualsValue(currentSource.Id, baseSource.Id, "Id");
             if (baseSource.LinkedEmployee != currentSource.LinkedEmployee)
             {
-                target.LinkedEmployee = Framework.Core.Maybe.Return(currentSource.LinkedEmployee);
+                target.LinkedEmployee = CommonFramework.Maybe.Maybe.Return(currentSource.LinkedEmployee);
             }
             target.Version = this.GetEqualsValue(currentSource.Version, baseSource.Version, "Version");
             target.Compress();
@@ -1493,8 +1493,8 @@ namespace SampleSystem.Generated.DTO
             {
                 throw new System.ArgumentNullException("currentSource");
             }
-            target.Field1 = Framework.Core.Maybe.Return(currentSource.Field1);
-            target.Field2 = Framework.Core.Maybe.Return(currentSource.Field2);
+            target.Field1 = CommonFramework.Maybe.Maybe.Return(currentSource.Field1);
+            target.Field2 = CommonFramework.Maybe.Maybe.Return(currentSource.Field2);
             target.Field3 = currentSource.Field3;
             target.Id = currentSource.Id;
             target.Items2 = this.ExtractUpdateDataFromSingle<SampleSystem.Generated.DTO.Example2StrictDTO, SampleSystem.Generated.DTO.Example2IdentityDTO, SampleSystem.Generated.DTO.Example2UpdateDTO>(currentSource.Items2, example2 => new SampleSystem.Generated.DTO.Example2UpdateDTO(example2, this));
@@ -1517,11 +1517,11 @@ namespace SampleSystem.Generated.DTO
             }
             if (baseSource.Field1 != currentSource.Field1)
             {
-                target.Field1 = Framework.Core.Maybe.Return(currentSource.Field1);
+                target.Field1 = CommonFramework.Maybe.Maybe.Return(currentSource.Field1);
             }
             if (baseSource.Field2 != currentSource.Field2)
             {
-                target.Field2 = Framework.Core.Maybe.Return(currentSource.Field2);
+                target.Field2 = CommonFramework.Maybe.Maybe.Return(currentSource.Field2);
             }
             if (baseSource.Field3 != currentSource.Field3)
             {
@@ -1543,8 +1543,8 @@ namespace SampleSystem.Generated.DTO
             {
                 throw new System.ArgumentNullException("currentSource");
             }
-            target.Field1 = Framework.Core.Maybe.Return(currentSource.Field1);
-            target.Field2 = Framework.Core.Maybe.Return(currentSource.Field2);
+            target.Field1 = CommonFramework.Maybe.Maybe.Return(currentSource.Field1);
+            target.Field2 = CommonFramework.Maybe.Maybe.Return(currentSource.Field2);
             target.Id = currentSource.Id;
             target.Version = currentSource.Version;
         }
@@ -1565,11 +1565,11 @@ namespace SampleSystem.Generated.DTO
             }
             if (baseSource.Field1 != currentSource.Field1)
             {
-                target.Field1 = Framework.Core.Maybe.Return(currentSource.Field1);
+                target.Field1 = CommonFramework.Maybe.Maybe.Return(currentSource.Field1);
             }
             if (baseSource.Field2 != currentSource.Field2)
             {
-                target.Field2 = Framework.Core.Maybe.Return(currentSource.Field2);
+                target.Field2 = CommonFramework.Maybe.Maybe.Return(currentSource.Field2);
             }
             target.Id = this.GetEqualsValue(currentSource.Id, baseSource.Id, "Id");
             target.Version = this.GetEqualsValue(currentSource.Version, baseSource.Version, "Version");
@@ -1838,7 +1838,7 @@ namespace SampleSystem.Generated.DTO
             {
                 throw new System.ArgumentNullException("target");
             }
-            Framework.Core.Just<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> justPosition = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO>>(source.Position);
+            CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> justPosition = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO>>(source.Position);
             if (!object.ReferenceEquals(justPosition, null))
             {
                 SampleSystem.Generated.DTO.EmployeePositionIdentityDTO resultPosition;
@@ -1850,11 +1850,11 @@ namespace SampleSystem.Generated.DTO
                 {
                     resultPosition = SampleSystem.Generated.DTO.EmployeePositionIdentityDTO.Empty;
                 }
-                target.Position = new Framework.Core.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>(resultPosition);
+                target.Position = new CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>(resultPosition);
             }
             else
             {
-                target.Position = Framework.Core.Maybe<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>.Nothing;
+                target.Position = CommonFramework.Maybe.Maybe<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>.Nothing;
             }
             if (!object.ReferenceEquals(source.Ppm, null))
             {
@@ -2044,7 +2044,7 @@ namespace SampleSystem.Generated.DTO
             {
                 target.ApprovedBy = SampleSystem.Generated.DTO.EmployeeIdentityDTO.Empty;
             }
-            Framework.Core.Just<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO> justCompanyLegalEntity = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO>>(source.CompanyLegalEntity);
+            CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO> justCompanyLegalEntity = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO>>(source.CompanyLegalEntity);
             if (!object.ReferenceEquals(justCompanyLegalEntity, null))
             {
                 SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO resultCompanyLegalEntity;
@@ -2056,11 +2056,11 @@ namespace SampleSystem.Generated.DTO
                 {
                     resultCompanyLegalEntity = SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO.Empty;
                 }
-                target.CompanyLegalEntity = new Framework.Core.Just<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>(resultCompanyLegalEntity);
+                target.CompanyLegalEntity = new CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>(resultCompanyLegalEntity);
             }
             else
             {
-                target.CompanyLegalEntity = Framework.Core.Maybe<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>.Nothing;
+                target.CompanyLegalEntity = CommonFramework.Maybe.Maybe<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>.Nothing;
             }
             if (!object.ReferenceEquals(source.Head, null))
             {
@@ -2312,15 +2312,15 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(source.BusinessUnitEmployeeRoles, null))
             {
-                target.BusinessUnitEmployeeRoles = Framework.Core.EnumerableExtensions.ToList(source.BusinessUnitEmployeeRoles, businessUnitEmployeeRole => new SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleStrictDTO(businessUnitEmployeeRole));
+                target.BusinessUnitEmployeeRoles = Framework.Core.CoreEnumerableExtensions.ToList(source.BusinessUnitEmployeeRoles, businessUnitEmployeeRole => new SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleStrictDTO(businessUnitEmployeeRole));
             }
             if (!object.ReferenceEquals(source.ManagementUnits, null))
             {
-                target.ManagementUnits = Framework.Core.EnumerableExtensions.ToList(source.ManagementUnits, managementUnitAndBusinessUnitLink => new SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO(managementUnitAndBusinessUnitLink));
+                target.ManagementUnits = Framework.Core.CoreEnumerableExtensions.ToList(source.ManagementUnits, managementUnitAndBusinessUnitLink => new SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO(managementUnitAndBusinessUnitLink));
             }
             if (!object.ReferenceEquals(source.ManagerCommissions, null))
             {
-                target.ManagerCommissions = Framework.Core.EnumerableExtensions.ToList(source.ManagerCommissions, businessUnitManagerCommissionLink => new SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkStrictDTO(businessUnitManagerCommissionLink));
+                target.ManagerCommissions = Framework.Core.CoreEnumerableExtensions.ToList(source.ManagerCommissions, businessUnitManagerCommissionLink => new SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkStrictDTO(businessUnitManagerCommissionLink));
             }
         }
         
@@ -2372,15 +2372,15 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(source.PossibleFinancialProjectTypes, null))
             {
-                target.PossibleFinancialProjectTypes = Framework.Core.EnumerableExtensions.ToList(source.PossibleFinancialProjectTypes, businessUnitTypeLinkWithPossibleFinancialProjectType => new SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeStrictDTO(businessUnitTypeLinkWithPossibleFinancialProjectType));
+                target.PossibleFinancialProjectTypes = Framework.Core.CoreEnumerableExtensions.ToList(source.PossibleFinancialProjectTypes, businessUnitTypeLinkWithPossibleFinancialProjectType => new SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeStrictDTO(businessUnitTypeLinkWithPossibleFinancialProjectType));
             }
             if (!object.ReferenceEquals(source.PossibleParents, null))
             {
-                target.PossibleParents = Framework.Core.EnumerableExtensions.ToList(source.PossibleParents, businessUnitTypeLinkWithPossibleParent => new SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentStrictDTO(businessUnitTypeLinkWithPossibleParent));
+                target.PossibleParents = Framework.Core.CoreEnumerableExtensions.ToList(source.PossibleParents, businessUnitTypeLinkWithPossibleParent => new SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentStrictDTO(businessUnitTypeLinkWithPossibleParent));
             }
             if (!object.ReferenceEquals(source.TransferTo, null))
             {
-                target.TransferTo = Framework.Core.EnumerableExtensions.ToList(source.TransferTo, businessUnitTypeLinkWithTransferTo => new SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToStrictDTO(businessUnitTypeLinkWithTransferTo));
+                target.TransferTo = Framework.Core.CoreEnumerableExtensions.ToList(source.TransferTo, businessUnitTypeLinkWithTransferTo => new SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToStrictDTO(businessUnitTypeLinkWithTransferTo));
             }
         }
         
@@ -2432,7 +2432,7 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(source.Addresses, null))
             {
-                target.Addresses = Framework.Core.EnumerableExtensions.ToList(source.Addresses, address => new SampleSystem.Generated.DTO.AddressStrictDTO(address));
+                target.Addresses = Framework.Core.CoreEnumerableExtensions.ToList(source.Addresses, address => new SampleSystem.Generated.DTO.AddressStrictDTO(address));
             }
         }
         
@@ -2460,29 +2460,29 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(source.CellPhones, null))
             {
-                target.CellPhones = Framework.Core.EnumerableExtensions.ToList(source.CellPhones, employeeCellPhone => new SampleSystem.Generated.DTO.EmployeeCellPhoneStrictDTO(employeeCellPhone));
+                target.CellPhones = Framework.Core.CoreEnumerableExtensions.ToList(source.CellPhones, employeeCellPhone => new SampleSystem.Generated.DTO.EmployeeCellPhoneStrictDTO(employeeCellPhone));
             }
             if (!object.ReferenceEquals(source.EmployeeToEmployeeLinks, null))
             {
-                target.EmployeeToEmployeeLinks = Framework.Core.EnumerableExtensions.ToList(source.EmployeeToEmployeeLinks, employeeToEmployeeLink => new SampleSystem.Generated.DTO.EmployeeToEmployeeLinkStrictDTO(employeeToEmployeeLink));
+                target.EmployeeToEmployeeLinks = Framework.Core.CoreEnumerableExtensions.ToList(source.EmployeeToEmployeeLinks, employeeToEmployeeLink => new SampleSystem.Generated.DTO.EmployeeToEmployeeLinkStrictDTO(employeeToEmployeeLink));
             }
-            Framework.Core.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO>> justPersonalCellPhones = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO>>>(source.PersonalCellPhones);
+            CommonFramework.Maybe.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO>> justPersonalCellPhones = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO>>>(source.PersonalCellPhones);
             if (!object.ReferenceEquals(justPersonalCellPhones, null))
             {
                 System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO> resultPersonalCellPhones = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>();
                 if (!object.ReferenceEquals(justPersonalCellPhones.Value, null))
                 {
-                    resultPersonalCellPhones = Framework.Core.EnumerableExtensions.ToList(justPersonalCellPhones.Value, employeePersonalCellPhone => new SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO(employeePersonalCellPhone));
+                    resultPersonalCellPhones = Framework.Core.CoreEnumerableExtensions.ToList(justPersonalCellPhones.Value, employeePersonalCellPhone => new SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO(employeePersonalCellPhone));
                 }
-                target.PersonalCellPhones = new Framework.Core.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>>(resultPersonalCellPhones);
+                target.PersonalCellPhones = new CommonFramework.Maybe.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>>(resultPersonalCellPhones);
             }
             else
             {
-                target.PersonalCellPhones = Framework.Core.Maybe<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>>.Nothing;
+                target.PersonalCellPhones = CommonFramework.Maybe.Maybe<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>>.Nothing;
             }
             if (!object.ReferenceEquals(source.Specializations, null))
             {
-                target.Specializations = Framework.Core.EnumerableExtensions.ToList(source.Specializations, employeeAndEmployeeSpecializationLink => new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO(employeeAndEmployeeSpecializationLink));
+                target.Specializations = Framework.Core.CoreEnumerableExtensions.ToList(source.Specializations, employeeAndEmployeeSpecializationLink => new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO(employeeAndEmployeeSpecializationLink));
             }
         }
         
@@ -2534,7 +2534,7 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(source.ChangingObjects, null))
             {
-                target.ChangingObjects = Framework.Core.EnumerableExtensions.ToList(source.ChangingObjects, employee => employee.Identity);
+                target.ChangingObjects = Framework.Core.CoreEnumerableExtensions.ToList(source.ChangingObjects, employee => employee.Identity);
             }
         }
         
@@ -2574,7 +2574,7 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(source.Items2, null))
             {
-                target.Items2 = Framework.Core.EnumerableExtensions.ToList(source.Items2, example2 => new SampleSystem.Generated.DTO.Example2StrictDTO(example2));
+                target.Items2 = Framework.Core.CoreEnumerableExtensions.ToList(source.Items2, example2 => new SampleSystem.Generated.DTO.Example2StrictDTO(example2));
             }
         }
         
@@ -2602,19 +2602,19 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(source.BusinessUnitHrDepartments, null))
             {
-                target.BusinessUnitHrDepartments = Framework.Core.EnumerableExtensions.ToList(source.BusinessUnitHrDepartments, businessUnitHrDepartment => new SampleSystem.Generated.DTO.BusinessUnitHrDepartmentStrictDTO(businessUnitHrDepartment));
+                target.BusinessUnitHrDepartments = Framework.Core.CoreEnumerableExtensions.ToList(source.BusinessUnitHrDepartments, businessUnitHrDepartment => new SampleSystem.Generated.DTO.BusinessUnitHrDepartmentStrictDTO(businessUnitHrDepartment));
             }
             if (!object.ReferenceEquals(source.EmployeePositions, null))
             {
-                target.EmployeePositions = Framework.Core.EnumerableExtensions.ToList(source.EmployeePositions, hRDepartmentEmployeePosition => new SampleSystem.Generated.DTO.HRDepartmentEmployeePositionStrictDTO(hRDepartmentEmployeePosition));
+                target.EmployeePositions = Framework.Core.CoreEnumerableExtensions.ToList(source.EmployeePositions, hRDepartmentEmployeePosition => new SampleSystem.Generated.DTO.HRDepartmentEmployeePositionStrictDTO(hRDepartmentEmployeePosition));
             }
             if (!object.ReferenceEquals(source.HrDepartmentRoleEmployees, null))
             {
-                target.HrDepartmentRoleEmployees = Framework.Core.EnumerableExtensions.ToList(source.HrDepartmentRoleEmployees, hRDepartmentRoleEmployee => new SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeStrictDTO(hRDepartmentRoleEmployee));
+                target.HrDepartmentRoleEmployees = Framework.Core.CoreEnumerableExtensions.ToList(source.HrDepartmentRoleEmployees, hRDepartmentRoleEmployee => new SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeStrictDTO(hRDepartmentRoleEmployee));
             }
             if (!object.ReferenceEquals(source.ManagementUnits, null))
             {
-                target.ManagementUnits = Framework.Core.EnumerableExtensions.ToList(source.ManagementUnits, managementUnitAndHRDepartmentLink => new SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO(managementUnitAndHRDepartmentLink));
+                target.ManagementUnits = Framework.Core.CoreEnumerableExtensions.ToList(source.ManagementUnits, managementUnitAndHRDepartmentLink => new SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO(managementUnitAndHRDepartmentLink));
             }
         }
         
@@ -2674,11 +2674,11 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(source.BusinessUnits, null))
             {
-                target.BusinessUnits = Framework.Core.EnumerableExtensions.ToList(source.BusinessUnits, managementUnitAndBusinessUnitLink => new SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO(managementUnitAndBusinessUnitLink));
+                target.BusinessUnits = Framework.Core.CoreEnumerableExtensions.ToList(source.BusinessUnits, managementUnitAndBusinessUnitLink => new SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO(managementUnitAndBusinessUnitLink));
             }
             if (!object.ReferenceEquals(source.HRDepartments, null))
             {
-                target.HRDepartments = Framework.Core.EnumerableExtensions.ToList(source.HRDepartments, managementUnitAndHRDepartmentLink => new SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO(managementUnitAndHRDepartmentLink));
+                target.HRDepartments = Framework.Core.CoreEnumerableExtensions.ToList(source.HRDepartments, managementUnitAndHRDepartmentLink => new SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO(managementUnitAndHRDepartmentLink));
             }
         }
         
@@ -2930,16 +2930,16 @@ namespace SampleSystem.Generated.DTO
             target.Interphone = source.Interphone;
             target.Landlinephone = source.Landlinephone;
             target.LastActionDate = source.LastActionDate;
-            Framework.Core.Just<string> justLogin = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<string>>(source.Login);
+            CommonFramework.Maybe.Just<string> justLogin = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<string>>(source.Login);
             if (!object.ReferenceEquals(justLogin, null))
             {
                 string resultLogin;
                 resultLogin = justLogin.Value;
-                target.Login = new Framework.Core.Just<string>(resultLogin);
+                target.Login = new CommonFramework.Maybe.Just<string>(resultLogin);
             }
             else
             {
-                target.Login = Framework.Core.Maybe<string>.Nothing;
+                target.Login = CommonFramework.Maybe.Maybe<string>.Nothing;
             }
             target.NameEng = source.NameEng;
             target.NameNative = source.NameNative;
@@ -3044,16 +3044,16 @@ namespace SampleSystem.Generated.DTO
             }
             target.Field1 = source.Field1;
             target.Field2 = source.Field2;
-            Framework.Core.Just<System.Guid> justField3 = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<System.Guid>>(source.Field3);
+            CommonFramework.Maybe.Just<System.Guid> justField3 = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<System.Guid>>(source.Field3);
             if (!object.ReferenceEquals(justField3, null))
             {
                 System.Guid resultField3;
                 resultField3 = justField3.Value;
-                target.Field3 = new Framework.Core.Just<System.Guid>(resultField3);
+                target.Field3 = new CommonFramework.Maybe.Just<System.Guid>(resultField3);
             }
             else
             {
-                target.Field3 = Framework.Core.Maybe<System.Guid>.Nothing;
+                target.Field3 = CommonFramework.Maybe.Maybe<System.Guid>.Nothing;
             }
         }
         

@@ -2,7 +2,7 @@
 using System.CodeDom.Compiler;
 using System.Text;
 
-using Framework.Core;
+using CommonFramework;
 
 namespace Framework.CodeDom;
 

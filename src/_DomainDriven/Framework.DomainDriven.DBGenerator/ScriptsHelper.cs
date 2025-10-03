@@ -1,4 +1,4 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
 
 using Microsoft.SqlServer.Management.Common;
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-using Framework.Core;
+using CommonFramework;
 
 namespace Framework.DomainDriven.Metadata;
 

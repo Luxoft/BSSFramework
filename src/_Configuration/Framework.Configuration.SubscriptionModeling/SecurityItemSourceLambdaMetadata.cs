@@ -1,5 +1,5 @@
 ﻿using Framework.Authorization.Notification;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.Configuration.SubscriptionModeling;
 

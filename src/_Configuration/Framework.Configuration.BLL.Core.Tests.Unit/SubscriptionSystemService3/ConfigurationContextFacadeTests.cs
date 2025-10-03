@@ -15,7 +15,7 @@ using Framework.UnitTesting;
 using NUnit.Framework;
 
 using NSubstitute;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3;
 

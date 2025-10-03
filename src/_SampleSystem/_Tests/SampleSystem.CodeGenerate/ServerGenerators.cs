@@ -1,7 +1,8 @@
 ﻿using System.CodeDom;
 
+using CommonFramework;
+
 using Framework.CodeDom;
-using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLLGenerator;
 using Framework.DomainDriven.DTOGenerator;
@@ -14,7 +15,6 @@ using Framework.DomainDriven.ServiceModelGenerator;
 using Framework.DomainDriven.WebApiGenerator.NetCore;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.CodeGenerate.ServerDTO;
 

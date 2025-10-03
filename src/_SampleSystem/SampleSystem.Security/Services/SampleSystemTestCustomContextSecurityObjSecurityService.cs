@@ -1,6 +1,9 @@
-﻿using Framework.SecuritySystem;
+﻿using SecuritySystem;
 
 using SampleSystem.Domain;
+
+using SecuritySystem.DomainServices;
+using SecuritySystem.Providers;
 
 namespace SampleSystem.Security.Services;
 

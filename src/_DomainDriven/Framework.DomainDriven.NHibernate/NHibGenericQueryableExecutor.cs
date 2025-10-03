@@ -1,4 +1,4 @@
-﻿using Framework.GenericQueryable;
+﻿using GenericQueryable;
 
 using Microsoft.Extensions.DependencyInjection;
 

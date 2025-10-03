@@ -1,7 +1,7 @@
 ﻿using Automation.Utils;
 
 using Framework.DomainDriven;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;

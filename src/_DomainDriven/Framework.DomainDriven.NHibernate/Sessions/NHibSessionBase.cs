@@ -1,6 +1,7 @@
 ﻿using System.Data;
 
-using Framework.Core;
+using CommonFramework;
+
 using Framework.DomainDriven.DAL.Revisions;
 
 using NHibernate;

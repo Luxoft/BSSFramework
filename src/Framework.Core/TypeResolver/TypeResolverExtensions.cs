@@ -1,4 +1,6 @@
-﻿namespace Framework.Core;
+﻿using CommonFramework;
+
+namespace Framework.Core;
 
 public static class TypeResolverExtensions
 {
@@ -16,7 +18,8 @@ public static class TypeResolverExtensions
         return type;
     }
 
-    public static ITypeResolver<T> WithCache<T>(this ITypeResolver<T> baseTypeResolver, IEqualityComparer<T> comparer = null)
+    public static ITypeResolver<T> WithCache<T>(this ITypeResolver<T> baseTypeResolver, IEqualityComparer<T>? comparer = null)
+        where T : notnull
     {
         if (baseTypeResolver == null) throw new ArgumentNullException(nameof(baseTypeResolver));
 

@@ -1,6 +1,6 @@
 ﻿using System.CodeDom;
 
-using Framework.Core;
+using CommonFramework;
 
 namespace Framework.DomainDriven.DTOGenerator;
 

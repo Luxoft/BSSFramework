@@ -3,7 +3,7 @@
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.Security;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,9 +1,10 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
-using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using SecuritySystem.DomainServices;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 

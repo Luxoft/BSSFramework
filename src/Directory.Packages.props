@@ -11,58 +11,65 @@
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="Dapper" Version="2.1.66" />
     <PackageVersion Include="Dapper.Contrib" Version="2.0.78" />
-    <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="1.5.7" />
-    <PackageVersion Include="Luxoft.Bss.Platform.Api.Middlewares" Version="1.5.7" />
-    <PackageVersion Include="Luxoft.Bss.Platform.Events" Version="1.5.7" />
-    <PackageVersion Include="Luxoft.Bss.Platform.Events.Abstractions" Version="1.5.7" />
-    <PackageVersion Include="Luxoft.Bss.Platform.Logging" Version="1.5.7" />
+    <PackageVersion Include="IvAt.CommonFramework" Version="1.2.4" />
+    <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="1.2.4" />
+    <PackageVersion Include="IvAt.GenericQueryable" Version="1.1.0" />
+    <PackageVersion Include="IvAt.SecuritySystem" Version="1.2.4.5" />
+    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="1.2.4.5" />
+    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="1.2.4.5" />
+    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="1.2.4.5" />
+    <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="1.5.8.1" />
+    <PackageVersion Include="Luxoft.Bss.Platform.Api.Middlewares" Version="1.5.8.1" />
+    <PackageVersion Include="Luxoft.Bss.Platform.Events" Version="1.5.8.1" />
+    <PackageVersion Include="Luxoft.Bss.Platform.Events.Abstractions" Version="1.5.8.1" />
+    <PackageVersion Include="Luxoft.Bss.Platform.Logging" Version="1.5.8.1" />
     <PackageVersion Include="Luxoft.Bss.Testing.Xunit" Version="[1.0.2,)" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc" Version="2.3.0" />
-    <PackageVersion Include="FluentValidation" Version="11.11.0" />
+    <PackageVersion Include="FluentValidation" Version="12.0.0" />
     <PackageVersion Include="FluentAssertions" Version="[7.2.0]" />
-    <PackageVersion Include="FluentMigrator" Version="6.2.0" />
-    <PackageVersion Include="FluentMigrator.Runner" Version="6.2.0" />
-    <PackageVersion Include="FluentNHibernate" Version="3.4.0" />
-    <PackageVersion Include="Hangfire.AspNetCore" Version="1.8.18" />
-    <PackageVersion Include="Hangfire.SqlServer" Version="1.8.18" />
-    <PackageVersion Include="MartinCostello.SqlLocalDb" Version="3.4.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Authentication.Negotiate" Version="9.0.2" />
+    <PackageVersion Include="FluentMigrator" Version="[6.2.0]" />
+    <PackageVersion Include="FluentMigrator.Runner" Version="[6.2.0]" />
+    <PackageVersion Include="FluentNHibernate" Version="3.4.1" />
+    <PackageVersion Include="Hangfire.AspNetCore" Version="1.8.21" />
+    <PackageVersion Include="Hangfire.SqlServer" Version="1.8.21" />
+    <PackageVersion Include="MartinCostello.SqlLocalDb" Version="[3.4.0]" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.Negotiate" Version="9.0.9" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0" />
-    <PackageVersion Include="Microsoft.Data.SqlClient" Version="6.0.1" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Proxies" Version="9.0.2" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.0" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.2" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="9.0.2" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.2" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.2" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="9.0.2" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="9.0.2" />
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.2" />
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.2" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.2" />
-    <PackageVersion Include="Microsoft.Extensions.Options" Version="9.0.2" />
-    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.2" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
-    <PackageVersion Include="Microsoft.SqlServer.SqlManagementObjects" Version="172.61.0" />
-    <PackageVersion Include="MSTest.TestAdapter" Version="3.8.0" />
-    <PackageVersion Include="MSTest.TestFramework" Version="3.8.0" />
-    <PackageVersion Include="NHibernate" Version="5.5.2" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
+    <PackageVersion Include="Microsoft.Data.SqlClient" Version="6.1.1" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Proxies" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
+    <PackageVersion Include="Microsoft.SqlServer.SqlManagementObjects" Version="172.76.0" />
+    <PackageVersion Include="MSTest.TestAdapter" Version="3.11.0" />
+    <PackageVersion Include="MSTest.TestFramework" Version="3.11.0" />
+    <PackageVersion Include="NHibernate" Version="5.5.3" />
     <PackageVersion Include="NHibernate.Envers" Version="5.5.2" />
     <PackageVersion Include="NSubstitute" Version="5.3.0" />
-    <PackageVersion Include="NUnit" Version="4.3.2" />
-    <PackageVersion Include="NUnit.ConsoleRunner" Version="3.19.2" />
-    <PackageVersion Include="NUnit3TestAdapter" Version="5.0.0" />
-    <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="7.2.0" />
-    <PackageVersion Include="System.CodeDom" Version="9.0.2" />
+    <PackageVersion Include="NUnit" Version="4.4.0" />
+    <PackageVersion Include="NUnit.ConsoleRunner" Version="3.20.1" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="5.1.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="[7.2.0]" />
+    <PackageVersion Include="System.CodeDom" Version="9.0.9" />
     <PackageVersion Include="System.Reflection.Emit" Version="4.7.0" />
     <PackageVersion Include="System.Runtime.Loader" Version="4.3.0" />
     <PackageVersion Include="Unity" Version="5.11.10" />
     <PackageVersion Include="Unity.Interception" Version="5.11.1" />
     <PackageVersion Include="xunit" Version="2.9.3" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
     <PackageVersion Include="xunit.abstractions" Version="2.0.3" />
     <PackageVersion Include="xunit.core" Version="2.9.3" />
   </ItemGroup>

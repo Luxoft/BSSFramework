@@ -1,7 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
-using Framework.Core;
+using CommonFramework;
+
 using Framework.QueryLanguage;
 
 namespace Framework.OData;
@@ -17,9 +18,9 @@ public class SelectOperation : IDynamicSelectOperation, IEquatable<SelectOperati
         if (selects == null) throw new ArgumentNullException(nameof(selects));
 
         this.Filter = filter;
-        this.Orders = orders.CheckNotNull().ToReadOnlyCollection();
-        this.Expands = expands.CheckNotNull().ToReadOnlyCollection();
-        this.Selects = selects.CheckNotNull().ToReadOnlyCollection();
+        this.Orders = orders.ToReadOnlyCollection();
+        this.Expands = expands.ToReadOnlyCollection();
+        this.Selects = selects.ToReadOnlyCollection();
         this.SkipCount = skipCount;
         this.TakeCount = takeCount;
     }

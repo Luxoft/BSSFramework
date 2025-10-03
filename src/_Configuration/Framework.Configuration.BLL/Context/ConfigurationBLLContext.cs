@@ -1,4 +1,7 @@
-﻿using Framework.Authorization.BLL;
+﻿using CommonFramework;
+using CommonFramework.DictionaryCache;
+
+using Framework.Authorization.BLL;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.Serialization;
@@ -9,13 +12,14 @@ using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.Tracking;
 using Framework.Events;
 using Framework.Exceptions;
-using Framework.HierarchicalExpand;
 using Framework.Notification;
 using Framework.Persistent;
 using Framework.QueryLanguage;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using SecuritySystem.HierarchicalExpand;
 
 namespace Framework.Configuration.BLL;
 
@@ -40,7 +44,7 @@ public partial class ConfigurationBLLContext
             IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,
             IConfigurationValidator validator,
-            IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
+            IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
             IMessageSender<MessageTemplateNotification> subscriptionSender,
             IRootSecurityService<PersistentDomainObjectBase> securityService,

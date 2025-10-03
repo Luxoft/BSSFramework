@@ -1,8 +1,9 @@
-﻿using Framework.SecuritySystem;
-using Framework.SecuritySystem.DependencyInjection;
-using Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
+﻿using SecuritySystem;
 
 using SampleSystem.Domain;
+
+using SecuritySystem.DependencyInjection;
+using SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 namespace SampleSystem.Security;
 

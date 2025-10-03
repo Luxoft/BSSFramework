@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <Nullable>enable</Nullable>
     <PackageId>Luxoft.Framework.Core</PackageId>
   </PropertyGroup>
 
@@ -9,17 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framework.Core.Maybe\Framework.Core.Maybe.csproj" />
-    <ProjectReference Include="..\Framework.Core.DictionaryCache\Framework.Core.DictionaryCache.csproj" />
-    <ProjectReference Include="..\Framework.Core.Expression\Framework.Core.Expression.csproj" />
-    <ProjectReference Include="..\Framework.Core.TryResult\Framework.Core.TryResult.csproj" />
-    <ProjectReference Include="..\Framework.Core.Enumerable\Framework.Core.Enumerable.csproj" />
-    <ProjectReference Include="..\Framework.Core.Pipe\Framework.Core.Pipe.csproj" />
-    <ProjectReference Include="..\Framework.Core.TypeImplementationToolkit\Framework.Core.TypeImplementationToolkit.csproj" />
-    <ProjectReference Include="..\Framework.Core.TypeMemberReflection\Framework.Core.TypeMemberReflection.csproj" />
-    <ProjectReference Include="..\Framework.Core.Nullable\Framework.Core.Nullable.csproj" />
-    <ProjectReference Include="..\Framework.Core.NullableObject\Framework.Core.NullableObject.csproj" />
-    <ProjectReference Include="..\Framework.Core.Delegate\Framework.Core.Delegate.csproj" />
+    <PackageReference Include="IvAt.CommonFramework" />
   </ItemGroup>
 
 </Project>

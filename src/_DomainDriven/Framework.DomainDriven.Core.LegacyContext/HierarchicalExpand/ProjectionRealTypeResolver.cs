@@ -1,5 +1,6 @@
-﻿using Framework.HierarchicalExpand;
-using Framework.Projection;
+﻿using Framework.Projection;
+
+using SecuritySystem.HierarchicalExpand;
 
 namespace Framework.DomainDriven;
 

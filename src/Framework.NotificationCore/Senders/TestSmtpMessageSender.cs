@@ -1,6 +1,7 @@
 ﻿using System.Net.Mail;
 
-using Framework.Core;
+using CommonFramework;
+
 using Framework.Notification.DTO;
 using Framework.NotificationCore.Extensions;
 using Framework.NotificationCore.Services;

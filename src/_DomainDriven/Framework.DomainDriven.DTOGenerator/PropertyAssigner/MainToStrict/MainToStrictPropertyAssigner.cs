@@ -1,6 +1,8 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
+using CommonFramework;
+
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
@@ -107,7 +109,7 @@ public class MainToStrictPropertyAssigner<TConfiguration> : PropertyAssigner<TCo
                        };
             });
 
-            var selectMethod = typeof(Core.EnumerableExtensions)
+            var selectMethod = typeof(CoreEnumerableExtensions)
                                .ToTypeReferenceExpression()
                                .ToMethodReferenceExpression("To" + this.Configuration.CollectionType.Name.TakeWhileNot("`"));
 

@@ -1,6 +1,8 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
+using CommonFramework;
+
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
@@ -153,7 +155,7 @@ public class LambdaHelperFileFactory<TConfiguration> : FileFactory<IServerGenera
                            },
                            Statements =
                            {
-                                   typeof(Core.EnumerableExtensions)
+                                   typeof(CoreEnumerableExtensions)
                                            .ToTypeReferenceExpression()
                                            .ToMethodInvokeExpression("ToList",
 
@@ -190,7 +192,7 @@ public class LambdaHelperFileFactory<TConfiguration> : FileFactory<IServerGenera
                            },
                            Statements =
                            {
-                                   typeof(Core.EnumerableExtensions)
+                                   typeof(CoreEnumerableExtensions)
                                            .ToTypeReferenceExpression()
                                            .ToMethodInvokeExpression("ToList",
 

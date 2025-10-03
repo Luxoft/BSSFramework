@@ -1,5 +1,6 @@
-﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.Core;
+﻿using CommonFramework;
+
+using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 

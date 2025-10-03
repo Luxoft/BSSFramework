@@ -1,5 +1,7 @@
 ﻿using System.CodeDom;
 
+using CommonFramework.DictionaryCache;
+
 using Framework.Core;
 
 using Microsoft.CSharp;

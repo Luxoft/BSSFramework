@@ -1,6 +1,6 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.DomainDriven.Generation.Domain;
-using Framework.SecuritySystem;
+using SecuritySystem;
 
 namespace Framework.Authorization.TestGenerate;
 

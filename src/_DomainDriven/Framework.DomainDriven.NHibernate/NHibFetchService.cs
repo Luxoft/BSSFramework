@@ -5,6 +5,9 @@ using NHibernate.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
+using CommonFramework;
+using CommonFramework.DictionaryCache;
+
 namespace Framework.DomainDriven.NHibernate;
 
 public class NHibFetchService<TSource> : INHibFetchService<TSource>

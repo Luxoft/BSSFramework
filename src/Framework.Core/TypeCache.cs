@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 
+using CommonFramework;
+
 namespace Framework.Core;
 
 public abstract class TypeCache

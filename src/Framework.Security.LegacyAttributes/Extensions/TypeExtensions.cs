@@ -1,5 +1,7 @@
-﻿using Framework.Core;
-using Framework.SecuritySystem;
+﻿using CommonFramework;
+
+using Framework.Core;
+using SecuritySystem;
 
 namespace Framework.Security;
 

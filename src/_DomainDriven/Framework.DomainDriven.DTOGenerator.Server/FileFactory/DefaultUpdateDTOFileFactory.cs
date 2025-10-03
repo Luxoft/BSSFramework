@@ -3,6 +3,9 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.Serialization;
 
+using CommonFramework;
+using CommonFramework.Maybe;
+
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
@@ -200,7 +203,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         }
         else
         {
-            return propRef.ToPropertyReference(nameof(IMaybe.HasValue)).ToNegateExpression();
+            return propRef.ToPropertyReference(nameof(Maybe<object>.HasValue)).ToNegateExpression();
         }
     }
 

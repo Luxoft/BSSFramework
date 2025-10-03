@@ -19,7 +19,7 @@ public class MethodTypeInfo : IEquatable<MethodTypeInfo>
         if (inputTypes == null) throw new ArgumentNullException(nameof(inputTypes));
         if (returnType == null) throw new ArgumentNullException(nameof(returnType));
 
-        this.InputTypes = inputTypes.CheckNotNull().ToArray();
+        this.InputTypes = inputTypes.ToArray();
         this.ReturnType = returnType;
     }
 

@@ -4,15 +4,16 @@ using Framework.DomainDriven;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.Events;
-using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.SecurityAccessor;
+using SecuritySystem;
+using SecuritySystem.SecurityAccessor;
 
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Projections;
+
+using SecuritySystem.HierarchicalExpand;
 
 namespace SampleSystem.BLL;
 
@@ -23,7 +24,7 @@ public partial class SampleSystemBLLContext(
     IAccessDeniedExceptionService accessDeniedExceptionService,
     IStandartExpressionBuilder standartExpressionBuilder,
     ISampleSystemValidator validator,
-    IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
+    IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
     IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
     IRootSecurityService<PersistentDomainObjectBase> securityService,
     ISampleSystemBLLFactoryContainer logics,

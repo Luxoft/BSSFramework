@@ -1,4 +1,4 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
 
 namespace Framework.Parsing;
 
@@ -42,17 +42,17 @@ public abstract class Parsers<TInput>
 
         return from proccessResult in this.SubOfTable(table, separator)
 
-               let v1 = (T1)proccessResult.GetValueOrDefault("p1", () => p1.GetDefaultValue())
+               let v1 = (T1)DictionaryExtensions.GetValueOrDefault(proccessResult, "p1", () => p1.GetDefaultValue())
 
-               let v2 = (T2)proccessResult.GetValueOrDefault("p2", () => p2.GetDefaultValue())
+               let v2 = (T2)DictionaryExtensions.GetValueOrDefault(proccessResult, "p2", () => p2.GetDefaultValue())
 
-               let v3 = (T3)proccessResult.GetValueOrDefault("p3", () => p3.GetDefaultValue())
+               let v3 = (T3)DictionaryExtensions.GetValueOrDefault(proccessResult, "p3", () => p3.GetDefaultValue())
 
-               let v4 = (T4)proccessResult.GetValueOrDefault("p4", () => p4.GetDefaultValue())
+               let v4 = (T4)DictionaryExtensions.GetValueOrDefault(proccessResult, "p4", () => p4.GetDefaultValue())
 
-               let v5 = (T5)proccessResult.GetValueOrDefault("p5", () => p5.GetDefaultValue())
+               let v5 = (T5)DictionaryExtensions.GetValueOrDefault(proccessResult, "p5", () => p5.GetDefaultValue())
 
-               let v6 = (T6)proccessResult.GetValueOrDefault("p6", () => p6.GetDefaultValue())
+               let v6 = (T6)DictionaryExtensions.GetValueOrDefault(proccessResult, "p6", () => p6.GetDefaultValue())
 
                select resultSelector(v1, v2, v3, v4, v5, v6);
     }

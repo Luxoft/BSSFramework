@@ -1,9 +1,6 @@
-﻿namespace Framework.Core;
+﻿using CommonFramework;
 
-public interface IFactory<out T>
-{
-    T Create();
-}
+namespace Framework.Core;
 
 public interface IFactory<in TArg, out TResult>
 {

@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+
 using Framework.Core;
 
 namespace Framework.DomainDriven.DAL.Revisions;

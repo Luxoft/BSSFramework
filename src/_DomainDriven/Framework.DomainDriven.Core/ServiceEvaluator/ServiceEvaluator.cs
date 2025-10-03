@@ -1,5 +1,5 @@
 ﻿using Framework.DomainDriven.ScopedEvaluate;
-using Framework.SecuritySystem.Credential;
+using SecuritySystem.Credential;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven;

@@ -1,5 +1,4 @@
-﻿using Framework.Core;
-using Framework.DomainDriven.Generation.Domain;
+﻿using Framework.DomainDriven.Generation.Domain;
 
 namespace Framework.DomainDriven.DTOGenerator;
 
@@ -11,7 +10,7 @@ public class DependencyGeneratePolicy : CachedGeneratePolicy<RoleFileType>
         if (baseGeneratePolicy == null) throw new ArgumentNullException(nameof(baseGeneratePolicy));
         if (maps == null) throw new ArgumentNullException(nameof(maps));
 
-        this.Maps = maps.ToArray(true);
+        this.Maps = maps.ToArray();
 
         this.DomainTypes = this.Maps.Select(map => map.DomainType).Distinct().ToArray();
     }

@@ -24,7 +24,7 @@ namespace Framework.Authorization.BLL
         where TDomainObject : Framework.Authorization.Domain.PersistentDomainObjectBase
     {
         
-        public SecurityDomainBLLBase(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider) : 
+        public SecurityDomainBLLBase(Framework.Authorization.BLL.IAuthorizationBLLContext context, SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider) : 
                 base(context, securityProvider)
         {
         }

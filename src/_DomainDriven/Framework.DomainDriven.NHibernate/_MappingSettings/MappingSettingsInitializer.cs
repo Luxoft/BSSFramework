@@ -3,7 +3,7 @@
 using System.Reflection;
 using System.Xml.Linq;
 
-using Framework.Core;
+using CommonFramework;
 
 using NHibernate.Cfg;
 

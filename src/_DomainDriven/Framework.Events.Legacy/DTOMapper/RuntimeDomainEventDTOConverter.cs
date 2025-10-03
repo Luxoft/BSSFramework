@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.Core;
+using CommonFramework;
 
 namespace Framework.Events.Legacy;
 

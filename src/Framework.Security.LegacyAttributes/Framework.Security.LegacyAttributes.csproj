@@ -10,8 +10,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IvAt.SecuritySystem.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Framework.Persistent\Framework.Persistent.csproj" />
-    <ProjectReference Include="..\Framework.SecuritySystem.Abstract\Framework.SecuritySystem.Abstract.csproj" />
   </ItemGroup>
 
 </Project>

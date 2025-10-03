@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.GenericQueryable;
+using GenericQueryable;
 
 using Microsoft.EntityFrameworkCore.Query.Internal;
 

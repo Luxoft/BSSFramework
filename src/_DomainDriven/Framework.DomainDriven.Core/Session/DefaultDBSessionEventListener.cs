@@ -1,6 +1,4 @@
-﻿using Framework.Core;
-
-namespace Framework.DomainDriven;
+﻿namespace Framework.DomainDriven;
 
 public class DefaultDBSessionEventListener(
     IInitializeManager initializeManager,
@@ -15,33 +13,42 @@ public class DefaultDBSessionEventListener(
 
     private readonly IReadOnlyCollection<IAfterTransactionCompletedDALListener> afterTransactionCompletedDalListener = afterTransactionCompletedDalListener.ToArray();
 
-    public void OnFlushed(DALChangesEventArgs eventArgs)
+    public async Task OnFlushed(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
     {
         if (initializeManager.IsInitialize)
         {
             return;
         }
 
-        this.flushedDalListener.Foreach(listener => listener.Process(eventArgs));
+        foreach (var listener in this.flushedDalListener)
+        {
+            await listener.Process(eventArgs, cancellationToken);
+        }
     }
 
-    public void OnBeforeTransactionCompleted(DALChangesEventArgs eventArgs)
+    public async Task OnBeforeTransactionCompleted(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
     {
         if (initializeManager.IsInitialize)
         {
             return;
         }
 
-        this.beforeTransactionCompletedDalListener.Foreach(listener => listener.Process(eventArgs));
+        foreach (var listener in this.beforeTransactionCompletedDalListener)
+        {
+            await listener.Process(eventArgs, cancellationToken);
+        }
     }
 
-    public void OnAfterTransactionCompleted(DALChangesEventArgs eventArgs)
+    public async Task OnAfterTransactionCompleted(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
     {
         if (initializeManager.IsInitialize)
         {
             return;
         }
 
-        this.afterTransactionCompletedDalListener.Foreach(listener => listener.Process(eventArgs));
+        foreach (var listener in this.afterTransactionCompletedDalListener)
+        {
+            await listener.Process(eventArgs, cancellationToken);
+        }
     }
 }

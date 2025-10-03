@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-using Framework.Core;
+using CommonFramework;
 
 namespace Framework.ExpressionParsers;
 

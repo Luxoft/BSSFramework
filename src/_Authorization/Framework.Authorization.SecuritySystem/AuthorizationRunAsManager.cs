@@ -1,16 +1,18 @@
-﻿using Framework.Authorization.Domain;
-using Framework.Core;
-using Framework.Core.Services;
-using Framework.DomainDriven.Repository;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.Credential;
-using Framework.SecuritySystem.Services;
-using Framework.SecuritySystem.UserSource;
+﻿using CommonFramework;
 
-namespace Framework.Authorization.SecuritySystem;
+using Framework.Authorization.Domain;
+
+using Framework.DomainDriven.Repository;
+using SecuritySystem;
+using SecuritySystem.Attributes;
+using SecuritySystem.Credential;
+using SecuritySystem.Services;
+using SecuritySystem.UserSource;
+
+namespace Framework.Authorization.SecuritySystemImpl;
 
 public class AuthorizationRunAsManager(
-    IUserAuthenticationService userAuthenticationService,
+    IRawUserAuthenticationService userAuthenticationService,
     ISecuritySystemFactory securitySystemFactory,
     ICurrentPrincipalSource currentPrincipalSource,
     [DisabledSecurity] IRepository<Principal> principalRepository,

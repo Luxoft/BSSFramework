@@ -1,11 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
+    <Nullable>enable</Nullable>
     <PackageId>Luxoft.Framework.QueryLanguage</PackageId>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Framework.Persistent\Framework.Persistent.csproj" />
   </ItemGroup>
+
 </Project>

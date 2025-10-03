@@ -1,12 +1,16 @@
 ﻿using System.CodeDom;
 
+using CommonFramework;
+
 using Framework.CodeDom;
-using Framework.Core;
 using Framework.Persistent;
-using Framework.QueryableSource;
 using Framework.Security;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.Expanders;
+
+using SecuritySystem.DomainServices;
+using SecuritySystem.DomainServices.DependencySecurity;
+using SecuritySystem.Expanders;
+using SecuritySystem.RelativeDomainPathInfo;
+using SecuritySystem.Services;
 
 namespace Framework.DomainDriven.BLLCoreGenerator
 {
@@ -56,8 +60,8 @@ namespace Framework.DomainDriven.BLLCoreGenerator
 
 
             return typeof(SingleRelativeDomainPathInfo<,>).MakeGenericType(this.DomainType, this.dependencySecurityAttr.SourceType)
-                                                                 .ToTypeReference()
-                                                                 .ToObjectCreateExpression(lambdaExpr);
+                                                          .ToTypeReference()
+                                                          .ToObjectCreateExpression(lambdaExpr);
         }
     }
 }

@@ -14,13 +14,14 @@ public class EventDALListenerTests : TestBase
         //Arrange
 
         // Act
-        var action = () => this.Evaluate(
-                         DBSessionMode.Write,
-                         ctx => ctx.OperationSender.Send(
-                             ctx.Logics.Employee.GetCurrent(),
-                             SampleSystemEventOperation.CustomAction));
+        var action = () => this.EvaluateAsync(
+            DBSessionMode.Write,
+            ctx => ctx.OperationSender.Send(
+                ctx.Logics.Employee.GetCurrent(),
+                SampleSystemEventOperation.CustomAction,
+                CancellationToken.None));
 
         // Assert
-        action.Should().NotThrow();
+        action.Should().NotThrowAsync();
     }
 }

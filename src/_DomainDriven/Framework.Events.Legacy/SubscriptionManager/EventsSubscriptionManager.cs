@@ -87,7 +87,7 @@ public abstract class EventsSubscriptionManager<TPersistentDomainObjectBase> : I
             });
     }
 
-    void IEventOperationReceiver.Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
+    async Task IEventOperationReceiver.Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken cancellationToken)
     {
         if (domainObject is TPersistentDomainObjectBase)
         {

@@ -2,11 +2,11 @@
 
 public class EventOperationSender(IEnumerable<IEventOperationReceiver> receivers) : IEventOperationSender
 {
-    public void Send<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
+    public async Task Send<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken cancellationToken)
     {
         foreach (var receiver in receivers)
         {
-            receiver.Receive(domainObject, domainObjectEvent);
+            await receiver.Receive(domainObject, domainObjectEvent, cancellationToken);
         }
     }
 }

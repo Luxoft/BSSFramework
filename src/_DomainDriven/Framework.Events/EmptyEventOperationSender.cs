@@ -2,7 +2,7 @@
 
 public class EmptyEventOperationSender : IEventOperationSender
 {
-    public void Send<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
+    public async Task Send<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken cancellationToken)
     {
     }
 }

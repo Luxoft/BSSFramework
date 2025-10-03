@@ -5,8 +5,8 @@ using Framework.DomainDriven.Lock;
 using Framework.Persistent;
 
 using SecuritySystem;
+using SecuritySystem.AncestorDenormalization;
 using SecuritySystem.HierarchicalExpand;
-using SecuritySystem.Services;
 
 namespace Framework.DomainDriven.ApplicationCore.DALListeners;
 

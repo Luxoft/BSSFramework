@@ -14,10 +14,10 @@
     <PackageVersion Include="IvAt.CommonFramework" Version="1.2.4" />
     <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="1.2.4" />
     <PackageVersion Include="IvAt.GenericQueryable" Version="1.1.0" />
-    <PackageVersion Include="IvAt.SecuritySystem" Version="1.2.4.2" />
-    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="1.2.4.2" />
-    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="1.2.4.2" />
-    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="1.2.4.2" />
+    <PackageVersion Include="IvAt.SecuritySystem" Version="1.2.4.3" />
+    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="1.2.4.3" />
+    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="1.2.4.3" />
+    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="1.2.4.3" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="1.5.8.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Middlewares" Version="1.5.8.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Events" Version="1.5.8.1" />
@@ -27,12 +27,12 @@
     <PackageVersion Include="Microsoft.AspNetCore.Mvc" Version="2.3.0" />
     <PackageVersion Include="FluentValidation" Version="12.0.0" />
     <PackageVersion Include="FluentAssertions" Version="[7.2.0]" />
-    <PackageVersion Include="FluentMigrator" Version="6.2.0" />
-    <PackageVersion Include="FluentMigrator.Runner" Version="6.2.0" />
+    <PackageVersion Include="FluentMigrator" Version="[6.2.0]" />
+    <PackageVersion Include="FluentMigrator.Runner" Version="[6.2.0]" />
     <PackageVersion Include="FluentNHibernate" Version="3.4.1" />
     <PackageVersion Include="Hangfire.AspNetCore" Version="1.8.21" />
     <PackageVersion Include="Hangfire.SqlServer" Version="1.8.21" />
-    <PackageVersion Include="MartinCostello.SqlLocalDb" Version="3.4.0" />
+    <PackageVersion Include="MartinCostello.SqlLocalDb" Version="[3.4.0]" />
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.Negotiate" Version="9.0.9" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
@@ -62,7 +62,7 @@
     <PackageVersion Include="NUnit" Version="4.4.0" />
     <PackageVersion Include="NUnit.ConsoleRunner" Version="3.20.1" />
     <PackageVersion Include="NUnit3TestAdapter" Version="5.1.0" />
-    <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="7.2.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="[7.2.0]" />
     <PackageVersion Include="System.CodeDom" Version="9.0.9" />
     <PackageVersion Include="System.Reflection.Emit" Version="4.7.0" />
     <PackageVersion Include="System.Runtime.Loader" Version="4.3.0" />

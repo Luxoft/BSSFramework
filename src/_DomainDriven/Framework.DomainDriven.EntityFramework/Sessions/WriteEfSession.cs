@@ -1,7 +1,5 @@
 ﻿using System.Data;
 
-using CommonFramework;
-
 using Framework.DomainDriven.Audit;
 
 using Microsoft.EntityFrameworkCore;

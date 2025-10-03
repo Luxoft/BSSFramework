@@ -1,7 +1,5 @@
 ﻿using System.Data;
 
-using CommonFramework;
-
 using Framework.Core;
 using Framework.DomainDriven.Audit;
 using Framework.DomainDriven.NHibernate.Audit;

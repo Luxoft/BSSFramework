@@ -2,20 +2,13 @@
 
 namespace Framework.Events.Legacy;
 
-public class BLLEventOperationSender : IEventOperationSender
+public class BLLEventOperationSender([FromKeyedServices("BLL")] IEnumerable<IEventOperationReceiver> receivers) : IEventOperationSender
 {
-    private readonly IEnumerable<IEventOperationReceiver> receivers;
-
-    public BLLEventOperationSender([FromKeyedServices("BLL")]IEnumerable<IEventOperationReceiver> receivers)
+    public async Task Send<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken cancellationToken)
     {
-        this.receivers = receivers;
-    }
-
-    public void Send<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
-    {
-        foreach (var receiver in this.receivers)
+        foreach (var receiver in receivers)
         {
-            receiver.Receive(domainObject, domainObjectEvent);
+            await receiver.Receive(domainObject, domainObjectEvent, cancellationToken);
         }
     }
 }

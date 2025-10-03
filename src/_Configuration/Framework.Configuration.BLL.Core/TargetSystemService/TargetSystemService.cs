@@ -83,7 +83,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLL
 
         var domainObjectEvent = new EventOperation(operationName);
 
-        this.eventOperationSender.Send(domainObject, domainObjectEvent);
+        this.eventOperationSender.Send(domainObject, domainObjectEvent, CancellationToken.None).GetAwaiter().GetResult();
     }
 
     public bool IsAssignable(Type domainType)

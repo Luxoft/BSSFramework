@@ -23,10 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="_Visitors\Specific\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="IvAt.SecuritySystem" />
   </ItemGroup>
 

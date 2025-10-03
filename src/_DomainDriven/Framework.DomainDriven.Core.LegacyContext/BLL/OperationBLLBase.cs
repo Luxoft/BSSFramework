@@ -12,13 +12,13 @@ public abstract class OperationBLLBase<TBLLContext, TPersistentDomainObjectBase,
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-        this.Context.OperationSender.Send(domainObject, EventOperation.Save);
+        this.Context.OperationSender.Send(domainObject, EventOperation.Save, CancellationToken.None).GetAwaiter().GetResult();
     }
 
     public virtual void Remove(TDomainObject domainObject)
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-        this.Context.OperationSender.Send(domainObject, EventOperation.Remove);
+        this.Context.OperationSender.Send(domainObject, EventOperation.Remove, CancellationToken.None).GetAwaiter().GetResult();
     }
 }

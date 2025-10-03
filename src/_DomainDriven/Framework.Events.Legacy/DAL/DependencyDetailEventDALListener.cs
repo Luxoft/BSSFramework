@@ -138,13 +138,13 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase> : IBe
                 z => ValueTuple.Create((IDALObject)(new DALObject(z.TargetObject, z.TargetObjectType, 1)), EventOperation.Save)));
     }
 
-    void IEventOperationReceiver.Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
+    async Task IEventOperationReceiver.Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken cancellationToken)
     {
         var dalChanges = GetDALChanges(domainObject, domainObjectEvent);
 
         if (dalChanges != null)
         {
-            this.Process(new DALChangesEventArgs(dalChanges), CancellationToken.None).GetAwaiter().GetResult();
+            await this.Process(new DALChangesEventArgs(dalChanges), cancellationToken);
         }
     }
 

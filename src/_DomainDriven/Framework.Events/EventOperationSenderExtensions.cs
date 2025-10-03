@@ -4,10 +4,10 @@ namespace Framework.Events;
 
 public static class EventOperationSenderExtensions
 {
-    public static void Send(this IEventOperationSender sender, object domainObject, Type domainObjectType, EventOperation domainObjectEvent)
+    public static async Task Send(this IEventOperationSender sender, object domainObject, Type domainObjectType, EventOperation domainObjectEvent, CancellationToken cancellationToken)
     {
-        new Action<object, EventOperation>(sender.Send)
-            .CreateGenericMethod(domainObjectType)
-            .Invoke(sender, [domainObject, domainObjectEvent]);
+        await new Func<object, EventOperation, CancellationToken, Task>(sender.Send)
+              .CreateGenericMethod(domainObjectType)
+              .Invoke<Task>(sender, [domainObject, domainObjectEvent]);
     }
 }

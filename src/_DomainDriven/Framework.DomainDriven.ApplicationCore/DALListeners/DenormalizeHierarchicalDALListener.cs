@@ -2,6 +2,7 @@
 
 using Framework.Core;
 using Framework.DomainDriven.Lock;
+using Framework.Persistent;
 
 using SecuritySystem;
 using SecuritySystem.HierarchicalExpand;
@@ -45,10 +46,22 @@ public class DenormalizeHierarchicalDALListener(
     }
 
     private async Task Process<TDomainObject>(TDomainObject[] modified, TDomainObject[] removing, HierarchicalInfo<TDomainObject> hierarchicalInfo, CancellationToken cancellationToken)
+        where TDomainObject : class
     {
         await this.LockChanges(hierarchicalInfo, cancellationToken);
 
+        modified.Foreach(domainObject => this.UpdateDeepLevel(domainObject, hierarchicalInfo));
+
         await denormalizedAncestorsServiceFactory.Create<TDomainObject>().SyncAsync(modified, removing, cancellationToken);
+    }
+
+    private void UpdateDeepLevel<TDomainObject>(TDomainObject domainObject, HierarchicalInfo<TDomainObject> hierarchicalInfo)
+        where TDomainObject : class
+    {
+        if (domainObject is IHierarchicalLevelObjectDenormalized objectDenormalized)
+        {
+            objectDenormalized.SetDeepLevel(domainObject.GetAllElements(v => hierarchicalInfo.ParentFunc(v)).Count());
+        }
     }
 
     private async Task LockChanges(HierarchicalInfo hierarchicalInfo, CancellationToken cancellationToken)

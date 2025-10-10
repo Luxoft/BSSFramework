@@ -14,10 +14,10 @@
     <PackageVersion Include="IvAt.CommonFramework" Version="1.2.5" />
     <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="1.2.5" />
     <PackageVersion Include="IvAt.GenericQueryable" Version="1.1.0" />
-    <PackageVersion Include="IvAt.SecuritySystem" Version="1.2.5" />
-    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="1.2.5" />
-    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="1.2.5" />
-    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="1.2.5" />
+    <PackageVersion Include="IvAt.SecuritySystem" Version="1.2.6" />
+    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="1.2.6" />
+    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="1.2.6" />
+    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="1.2.6" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="1.5.8.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Middlewares" Version="1.5.8.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Events" Version="1.5.8.1" />
@@ -36,7 +36,7 @@
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.Negotiate" Version="9.0.9" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
-    <PackageVersion Include="Microsoft.Data.SqlClient" Version="6.1.1" />
+    <PackageVersion Include="Microsoft.Data.SqlClient" Version="6.1.2" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Proxies" Version="9.0.9" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.9" />
@@ -54,14 +54,14 @@
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.9" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
     <PackageVersion Include="Microsoft.SqlServer.SqlManagementObjects" Version="172.76.0" />
-    <PackageVersion Include="MSTest.TestAdapter" Version="3.11.0" />
-    <PackageVersion Include="MSTest.TestFramework" Version="3.11.0" />
-    <PackageVersion Include="NHibernate" Version="5.5.3" />
+    <PackageVersion Include="MSTest.TestAdapter" Version="4.0.0" />
+    <PackageVersion Include="MSTest.TestFramework" Version="4.0.0" />
+    <PackageVersion Include="NHibernate" Version="5.6.0" />
     <PackageVersion Include="NHibernate.Envers" Version="5.5.2" />
     <PackageVersion Include="NSubstitute" Version="5.3.0" />
     <PackageVersion Include="NUnit" Version="4.4.0" />
     <PackageVersion Include="NUnit.ConsoleRunner" Version="3.20.1" />
-    <PackageVersion Include="NUnit3TestAdapter" Version="5.1.0" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="5.2.0" />
     <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="[7.2.0]" />
     <PackageVersion Include="System.CodeDom" Version="9.0.9" />
     <PackageVersion Include="System.Reflection.Emit" Version="4.7.0" />

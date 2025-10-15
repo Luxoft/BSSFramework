@@ -120,10 +120,10 @@ public class NHibObjectStatesService : IObjectStateService
                             }
 
                             return new ObjectState(
-                                                   z.Item1,
-                                                   currentValue,
-                                                   previusState,
-                                                   true);
+                                z.Item1,
+                                currentValue,
+                                previusState,
+                                true);
                         });
     }
 

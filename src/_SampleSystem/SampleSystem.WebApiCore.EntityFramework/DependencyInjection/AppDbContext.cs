@@ -1,16 +1,14 @@
-﻿using Framework.DomainDriven.EntityFramework;
+﻿using Framework.DomainDriven._Visitors;
 
-using GenericQueryable;
+using GenericQueryable.EntityFramework;
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 
 using SampleSystem.Domain;
 
 namespace SampleSystem.ServiceEnvironment;
 
-public class AppDbContext(DbContextOptions<AppDbContext> rootOptions, IGenericQueryableExecutor genericQueryableExecutor) : DbContext(rootOptions)
+public class AppDbContext(DbContextOptions<AppDbContext> rootOptions, IExpressionVisitorContainer expressionVisitorContainer) : DbContext(rootOptions)
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -25,20 +23,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> rootOptions, IGenericQu
     {
         base.OnConfiguring(options);
 
-        options.ReplaceService<IAsyncQueryProvider, EntityQueryProvider, VisitedEfQueryProvider>();
-
+        options.UseGenericQueryable();
         options.UseLazyLoadingProxies();
-
-        //options.UseInternalServiceProvider(this.BuildInternalServiceProvider());
+        options.AddInterceptors(new GeneralQueryExpressionInterceptor(expressionVisitorContainer));
     }
-
-    //private IServiceProvider BuildInternalServiceProvider()
-    //{
-    //    return new ServiceCollection()
-    //        .AddEntityFrameworkProxies()
-    //        .AddEntityFrameworkSqlServer()
-    //        .AddSingleton(genericQueryableExecutor)
-    //        .ReplaceScoped<IAsyncQueryProvider, EfEntityQueryProvider>()
-    //    .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
-    //}
 }

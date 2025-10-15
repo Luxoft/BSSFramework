@@ -22,7 +22,7 @@ public class PrincipalDomainService(
     {
         var principal = principalRepository.GetQueryable().SingleOrDefault(p => p.Name == name);
 
-        if (principal == null)
+        if (principal is null)
         {
             principal = new Principal { Name = name };
 

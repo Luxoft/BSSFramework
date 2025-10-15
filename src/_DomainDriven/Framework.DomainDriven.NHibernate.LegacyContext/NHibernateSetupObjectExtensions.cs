@@ -1,6 +1,4 @@
-﻿using Framework.DomainDriven.NHibernate;
-
-namespace Framework.Authorization.Environment;
+﻿namespace Framework.DomainDriven.NHibernate.LegacyContext;
 
 public static class NHibernateSetupObjectExtensions
 {

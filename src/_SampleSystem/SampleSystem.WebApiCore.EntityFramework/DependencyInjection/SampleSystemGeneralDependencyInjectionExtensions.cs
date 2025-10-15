@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using SampleSystem.Domain;
 using SampleSystem.Security;
 
+using SecuritySystem;
+
 namespace SampleSystem.ServiceEnvironment;
 
 public static class SampleSystemGeneralDependencyInjectionExtensions
@@ -33,7 +35,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                                            employee => employee.Login,
                                            employee => employee.Active)
                                        .AddVirtualPermissions()
-                                       .SetSecurityAdministratorRule(SampleSystemSecurityRole.SeManager))
+                                       .SetSecurityAdministratorRule(DomainSecurityRule.AnyRole with { CustomCredential = new SecurityRuleCredential.AnyUserCredential() } ))
                            .AddEntityFramework(s => {});
                    })
                .AddScopedFrom<DbContext, AppDbContext>()

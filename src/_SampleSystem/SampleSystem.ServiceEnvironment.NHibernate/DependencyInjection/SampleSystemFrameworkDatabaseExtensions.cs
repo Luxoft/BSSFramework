@@ -1,10 +1,10 @@
 ﻿using CommonFramework;
 
-using Framework.Authorization.Environment;
 using Framework.Authorization.Generated.DAL.NHibernate;
 using Framework.Configuration.Generated.DAL.NHibernate;
 using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate;
+using Framework.DomainDriven.NHibernate.LegacyContext;
 using Framework.DomainDriven.Setup;
 
 using Microsoft.Extensions.DependencyInjection;

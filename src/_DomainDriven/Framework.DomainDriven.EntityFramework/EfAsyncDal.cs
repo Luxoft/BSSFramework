@@ -1,42 +1,25 @@
-﻿using CommonFramework;
-
-using Framework.Core;
-using Framework.DomainDriven._Visitors;
+﻿using Framework.Core;
 using Framework.DomainDriven.Lock;
 using Framework.Persistent;
-
-using GenericQueryable;
 
 using Microsoft.EntityFrameworkCore;
 
 namespace Framework.DomainDriven.EntityFramework;
 
-public class EfAsyncDal<TDomainObject, TIdent>(
-    IEfSession session,
-    IExpressionVisitorContainer expressionVisitorContainer,
-    IGenericQueryableExecutor genericQueryableExecutor)
-    : IAsyncDal<TDomainObject, TIdent>
+public class EfAsyncDal<TDomainObject, TIdent>(IEfSession session) : IAsyncDal<TDomainObject, TIdent>
     where TDomainObject : class, IIdentityObject<TIdent>
 {
     private DbContext NativeSession => session.NativeSession;
 
     public IQueryable<TDomainObject> GetQueryable()
     {
-        var queryable = (IQueryable<TDomainObject>)this.NativeSession.Set<TDomainObject>();
-
-        var queryProvider = (queryable.Provider as VisitedEfQueryProvider)
-                            .FromMaybe(() => "Register VisitedQueryProvider in Nhib configuration");
-
-        queryProvider.Visitor = expressionVisitorContainer.Visitor;
-        queryProvider.GenericQueryableExecutor = genericQueryableExecutor;
-
-        return queryable;
+        return this.NativeSession.Set<TDomainObject>();
     }
 
     public virtual TDomainObject Load(TIdent id) => this.LoadAsync(id).GetAwaiter().GetResult();
 
     public virtual async Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken = default) =>
-        await this.NativeSession.FindAsync<TDomainObject>([id], cancellationToken); // Hack
+        (await this.NativeSession.FindAsync<TDomainObject>([id], cancellationToken))!; // Hack
 
     public virtual async Task RefreshAsync(TDomainObject domainObject, CancellationToken cancellationToken = default) =>
         await this.NativeSession.Entry(domainObject).ReloadAsync(cancellationToken);

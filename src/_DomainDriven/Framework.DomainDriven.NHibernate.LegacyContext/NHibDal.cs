@@ -281,7 +281,7 @@ public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
         this.GetPeriodAuditCriterions(period).Aggregate(query, (prevQuery, criterion) => prevQuery.Add(criterion));
 
     private IAuditQuery TryInjectPeriodQuery(IAuditQuery query, Period? period = null) => this.GetPeriodAuditCriterions(period)
-        .Aggregate(query, (prevQuery, criterion) => prevQuery.Add(criterion));
+                                                                                              .Aggregate(query, (prevQuery, criterion) => prevQuery.Add(criterion));
 
     private IEnumerable<IAuditCriterion> GetPeriodAuditCriterions(Period? period = null)
     {

@@ -51,7 +51,7 @@ public class AuthorizationPrincipalSourceService(
     {
         var principal = await principalRepository.GetQueryable()
                                                  .Where(filter)
-                                                 .WithFetch(FetchRule<Principal>.Create(v => v.Permissions).FetchThen(v => v.Restrictions))
+                                                 .WithFetch(r => r.Fetch(v => v.Permissions).FetchThen(v => v.Restrictions))
                                                  .GenericSingleOrDefaultAsync(cancellationToken);
 
         if (principal is null)

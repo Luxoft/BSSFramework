@@ -19,6 +19,8 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                .AddBssFramework(
                    rootSettings =>
                    {
+                       rootSettings.RegisterDenormalizeHierarchicalDALListener = false;
+
                        rootSettings
                            .AddSecuritySystem(
                                securitySettings =>

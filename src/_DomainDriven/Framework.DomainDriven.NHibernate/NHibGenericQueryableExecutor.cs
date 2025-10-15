@@ -53,19 +53,27 @@ public class NHibGenericQueryableExecutor(IServiceProvider serviceProvider) : Ge
     private MethodInfo GetFetchMethod<TSource>(LambdaExpression prop, bool isFirst)
         where TSource : class
     {
+        var prevPropertyType = prop.Parameters.Single().Type;
+
+        var nextPropertyType = prop.Body.Type;
+
+        var nextElementType = nextPropertyType.IsGenericType ? nextPropertyType.GetInterfaceImplementationArgument(typeof(IEnumerable<>)) : null;
+
         if (isFirst)
         {
-            return new Func<IQueryable<TSource>, Expression<Func<TSource, Ignore>>, INhFetchRequest<TSource, Ignore>>(this.ApplyFetch)
-                .CreateGenericMethod(typeof(TSource), prop.Body.Type);
+            if (nextElementType != null)
+            {
+                return new Func<IQueryable<TSource>, Expression<Func<TSource, IEnumerable<Ignore>>>, INhFetchRequest<TSource, Ignore>>(this.ApplyFetch)
+                    .CreateGenericMethod(typeof(TSource), nextElementType);
+            }
+            else
+            {
+                return new Func<IQueryable<TSource>, Expression<Func<TSource, Ignore>>, INhFetchRequest<TSource, Ignore>>(this.ApplyFetch)
+                    .CreateGenericMethod(typeof(TSource), nextPropertyType);
+            }
         }
         else
         {
-            var prevPropertyType = prop.Parameters.Single().Type;
-
-            var nextPropertyType = prop.Body.Type;
-
-            var nextElementType = nextPropertyType.IsGenericType ? nextPropertyType.GetInterfaceImplementationArgument(typeof(IEnumerable<>)) : null;
-
             if (nextElementType != null)
             {
                 return new Func<INhFetchRequest<TSource, Ignore>, Expression<Func<Ignore, IEnumerable<Ignore>>>, INhFetchRequest<TSource, Ignore>>(
@@ -85,6 +93,11 @@ public class NHibGenericQueryableExecutor(IServiceProvider serviceProvider) : Ge
         where TSource : class
     {
         return source.Fetch(prop);
+    }
+    private INhFetchRequest<TSource, TProperty> ApplyFetch<TSource, TProperty>(IQueryable<TSource> source, Expression<Func<TSource, IEnumerable<TProperty>>> prop)
+        where TSource : class
+    {
+        return source.FetchMany(prop);
     }
 
     private INhFetchRequest<TSource, TNextProperty> ApplyFetchThen<TSource, TPrevProperty, TNextProperty>(

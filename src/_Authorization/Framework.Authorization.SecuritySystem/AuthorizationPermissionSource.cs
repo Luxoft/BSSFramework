@@ -33,7 +33,7 @@ public class AuthorizationPermissionSource(
     public List<Dictionary<Type, Array>> GetPermissions(IEnumerable<Type> securityContextTypes)
     {
         var permissions = availablePermissionSource.GetAvailablePermissionsQueryable(securityRule)
-                                                   .WithFetch(r => r.Fetch(v => v.Restrictions).FetchThen(v => v.SecurityContextType))
+                                                   .WithFetch(r => r.Fetch(v => v.Restrictions).ThenFetch(v => v.SecurityContextType))
                                                    .ToList();
 
         return permissions

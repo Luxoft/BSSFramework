@@ -6,6 +6,7 @@ using Framework.Authorization.Domain;
 using Framework.DomainDriven.Repository;
 
 using GenericQueryable;
+using GenericQueryable.Fetching;
 
 using SecuritySystem;
 using SecuritySystem.Attributes;
@@ -50,9 +51,7 @@ public class AuthorizationPrincipalSourceService(
     {
         var principal = await principalRepository.GetQueryable()
                                                  .Where(filter)
-                                                 .WithFetch($"{nameof(Principal.Permissions)}.{nameof(Permission.Restrictions)}")
-                                                 //.FetchMany(principal => principal.Permissions)
-                                                 //.ThenFetch(permission => permission.Restrictions)
+                                                 .WithFetch(FetchRule<Principal>.Create(v => v.Permissions).FetchThen(v => v.Restrictions))
                                                  .GenericSingleOrDefaultAsync(cancellationToken);
 
         if (principal is null)

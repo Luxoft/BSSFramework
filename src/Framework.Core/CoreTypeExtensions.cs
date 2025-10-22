@@ -7,6 +7,13 @@ namespace Framework.Core;
 
 public static class CoreTypeExtensions
 {
+    public static bool IsCollectionOrArray(this Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        return type.GetCollectionOrArrayElementType() != null;
+    }
+
     public static bool IsAssignableToAny(this Type type, IEnumerable<Type> baseTypes)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));

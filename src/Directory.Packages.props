@@ -63,7 +63,7 @@
     <PackageVersion Include="NUnit" Version="4.4.0" />
     <PackageVersion Include="NUnit.ConsoleRunner" Version="3.20.2" />
     <PackageVersion Include="NUnit3TestAdapter" Version="5.2.0" />
-    <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="[7.2.0]" />
+    <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="9.0.6" />
     <PackageVersion Include="System.CodeDom" Version="9.0.10" />
     <PackageVersion Include="System.Reflection.Emit" Version="4.7.0" />
     <PackageVersion Include="System.Runtime.Loader" Version="4.3.0" />

@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.Configurator.ApplicationVariable\Framework.Configurator.ApplicationVariable.csproj" />
     <ProjectReference Include="..\..\Framework.Configurator.Events\Framework.Configurator.Events.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.WebApiNetCore.Swagger\Framework.DomainDriven.WebApiNetCore.Swagger.csproj" />
 
     <ProjectReference Include="..\SampleSystem.ServiceEnvironment\SampleSystem.ServiceEnvironment.csproj" />
 

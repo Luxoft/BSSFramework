@@ -72,6 +72,7 @@
     <Project Path="_DomainDriven/Framework.DomainDriven.Tracking/Framework.DomainDriven.Tracking.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.WebApiGenerator.NetCore/Framework.DomainDriven.WebApiGenerator.NetCore.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.WebApiNetCore.LegacyContext/Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj" />
+    <Project Path="_DomainDriven/Framework.DomainDriven.WebApiNetCore.Swagger/Framework.DomainDriven.WebApiNetCore.Swagger.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.WebApiNetCore/Framework.DomainDriven.WebApiNetCore.csproj" />
   </Folder>
   <Folder Name="/DomainDriven/Generators/">

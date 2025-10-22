@@ -60,6 +60,7 @@ public static class CoreEnumerableExtensions
                     if (!enumerator2.MoveNext() || !compareFunc(enumerator1.Current, enumerator2.Current))
                         return false;
                 }
+
                 if (enumerator2.MoveNext())
                     return false;
             }
@@ -181,14 +182,15 @@ public static class CoreEnumerableExtensions
         return source.Distinct(new EqualityComparerImpl<T>(equalsFunc, getHashFunc));
     }
 
-    public static void Merge<T, S, TKey>(
+    public static void Merge<T, TSource, TKey>(
         this IEnumerable<T> source,
-        IEnumerable<S> target,
-        Func<S, TKey> getSKey,
+        IEnumerable<TSource> target,
+        Func<TSource, TKey> getSKey,
         Func<T, TKey> getTKey,
-        Func<S, T> createAndMapFunc,
+        Func<TSource, T> createAndMapFunc,
         Action<IEnumerable<T>> removeAction,
         Func<TKey, bool>? isDefaultKey = null)
+        where TKey : notnull
     {
         var isDefaultKeyF = isDefaultKey ?? (v => v.IsDefault());
 
@@ -257,7 +259,11 @@ public static class CoreEnumerableExtensions
         return source.Aggregate(startElement, (v, f) => f(v));
     }
 
-    public static TResult Partial<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, bool> firstResultPredicate, Func<TSource, bool> secondResultPredicate, Func<List<TSource>, List<TSource>, IList<TSource>, TResult> selector)
+    public static TResult Partial<TSource, TResult>(
+        this IEnumerable<TSource> source,
+        Func<TSource, bool> firstResultPredicate,
+        Func<TSource, bool> secondResultPredicate,
+        Func<List<TSource>, List<TSource>, IList<TSource>, TResult> selector)
     {
         var l1 = new List<TSource>();
         var l2 = new List<TSource>();
@@ -368,6 +374,7 @@ public static class CoreEnumerableExtensions
             if (splitFunc(enumerable) && result.Any())
             {
                 yield return result;
+
                 result.Clear();
             }
 
@@ -397,61 +404,12 @@ public static class CoreEnumerableExtensions
         return selector(l1, l2);
     }
 
-
     public static List<TResult> ToList<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (selector == null) throw new ArgumentNullException(nameof(selector));
 
         return source.Select(selector).ToList();
-    }
-
-    public static MergeResult<T, T> GetMergeResult<T>(this IEnumerable<T> source, IEnumerable<T> target, IEqualityComparer<T>? comparer = null)
-        where T : notnull
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (target == null) throw new ArgumentNullException(nameof(target));
-
-        return source.GetMergeResult(target, v => v, v => v, comparer);
-    }
-
-    public static MergeResult<TSource, TTarget> GetMergeResult<TSource, TTarget, TKey>(
-        this IEnumerable<TSource> source,
-        IEnumerable<TTarget> target,
-        Func<TSource, TKey> sourceKeySelector,
-        Func<TTarget, TKey> targetKeySelector,
-        IEqualityComparer<TKey>? comparer = null)
-        where TKey : notnull
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (target == null) throw new ArgumentNullException(nameof(target));
-        if (sourceKeySelector == null) throw new ArgumentNullException(nameof(sourceKeySelector));
-        if (targetKeySelector == null) throw new ArgumentNullException(nameof(targetKeySelector));
-
-        var targetMap = target.ToDictionary(targetKeySelector, z => z, comparer ?? EqualityComparer<TKey>.Default);
-
-        var removingItems = new List<TSource>();
-
-        var combineItems = new List<ValueTuple<TSource, TTarget>>();
-
-        foreach (var sourceItem in source)
-        {
-            var sourceKey = sourceKeySelector(sourceItem);
-
-            if (targetMap.TryGetValue(sourceKey, out var targetItem))
-            {
-                combineItems.Add(ValueTuple.Create(sourceItem, targetItem));
-                targetMap.Remove(sourceKey);
-            }
-            else
-            {
-                removingItems.Add(sourceItem);
-            }
-        }
-
-        var addingItems = targetMap.Values.ToList();
-
-        return new MergeResult<TSource, TTarget>(addingItems, combineItems, removingItems);
     }
 
     public static IEnumerable<T> Skip<T>(this IEnumerable<T> source, T expectedElement, bool raiseIfNotEquals = false)
@@ -539,5 +497,4 @@ public static class CoreEnumerableExtensions
     {
         public TKey Key { get; private set; } = key;
     }
-
 }

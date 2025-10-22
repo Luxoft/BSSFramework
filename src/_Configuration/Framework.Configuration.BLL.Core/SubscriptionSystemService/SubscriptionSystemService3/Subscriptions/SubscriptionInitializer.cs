@@ -1,5 +1,6 @@
-﻿using Framework.Configuration.Domain;
-using Framework.Core;
+﻿using CommonFramework;
+
+using Framework.Configuration.Domain;
 using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.Tracking;
 

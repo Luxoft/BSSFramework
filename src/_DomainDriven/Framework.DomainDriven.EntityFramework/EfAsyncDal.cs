@@ -35,16 +35,19 @@ public class EfAsyncDal<TDomainObject, TIdent>(IEfSession session) : IAsyncDal<T
 
     public virtual async Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken = default)
     {
-        if (id.IsDefault())
+        if (domainObject.Id.IsDefault())
         {
             throw new ArgumentOutOfRangeException(nameof(id), "The given identifier is not initialized");
         }
 
         this.CheckWrite();
 
-        this.NativeSession.Attach(domainObject);
+        var state = this.NativeSession.Entry(domainObject).State;
 
-        await this.NativeSession.SaveChangesAsync(cancellationToken); // Hack
+        if (state == EntityState.Detached)
+        {
+            await this.NativeSession.AddAsync(domainObject, cancellationToken);
+        }
     }
 
     public virtual async Task RemoveAsync(TDomainObject domainObject, CancellationToken cancellationToken = default)
@@ -52,6 +55,7 @@ public class EfAsyncDal<TDomainObject, TIdent>(IEfSession session) : IAsyncDal<T
         this.CheckWrite();
 
         this.NativeSession.Remove(domainObject);
+
         await this.NativeSession.SaveChangesAsync(cancellationToken);
     }
 
@@ -62,9 +66,8 @@ public class EfAsyncDal<TDomainObject, TIdent>(IEfSession session) : IAsyncDal<T
         await this.NativeSession.Set<TDomainObject>()
                   .FromSqlRaw($"SELECT * FROM {nameof(TDomainObject)} WITH (UPDLOCK) WHERE Id = {0}", domainObject.Id)
                   .ToListAsync(cancellationToken);
-        //throw new NotImplementedException();
 
-        //await this.NativeSession.LockAsync(domainObject, lockRole.ToLockMode(), cancellationToken);
+        //throw new NotImplementedException();
     }
 
     private void CheckWrite()

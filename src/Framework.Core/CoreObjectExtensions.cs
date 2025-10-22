@@ -42,6 +42,14 @@ public static class CoreObjectExtensions
         return EqualityComparer<T>.Default.Equals(value, default(T));
     }
 
+    public static IEnumerable<TSource> RepeatInfinity<TSource>(this TSource v)
+    {
+        while (true)
+        {
+            yield return v;
+        }
+    }
+
     public static KeyValuePair<TKey, TValue> ToKeyValuePair<TKey, TValue>(this TKey key, TValue value)
     {
         return new KeyValuePair<TKey, TValue>(key, value);

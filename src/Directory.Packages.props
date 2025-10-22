@@ -11,14 +11,14 @@
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="Dapper" Version="2.1.66" />
     <PackageVersion Include="Dapper.Contrib" Version="2.0.78" />
-    <PackageVersion Include="IvAt.CommonFramework" Version="1.2.5" />
-    <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="1.2.5" />
-    <PackageVersion Include="IvAt.GenericQueryable" Version="1.2.2.3" />
-    <PackageVersion Include="IvAt.GenericQueryable.EntityFramework" Version="1.2.2.3" />
-    <PackageVersion Include="IvAt.SecuritySystem" Version="1.2.6" />
-    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="1.2.6" />
-    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="1.2.6" />
-    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="1.2.6" />
+    <PackageVersion Include="IvAt.CommonFramework" Version="1.3.0.3" />
+    <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="1.3.0.3" />
+    <PackageVersion Include="IvAt.GenericQueryable" Version="1.3.0.3" />
+    <PackageVersion Include="IvAt.GenericQueryable.EntityFramework" Version="1.3.0.3" />
+    <PackageVersion Include="IvAt.SecuritySystem" Version="1.3.0.3" />
+    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="1.3.0.3" />
+    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="1.3.0.3" />
+    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="1.3.0.3" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="1.5.8.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Middlewares" Version="1.5.8.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Events" Version="1.5.8.1" />
@@ -58,10 +58,10 @@
     <PackageVersion Include="MSTest.TestAdapter" Version="4.0.1" />
     <PackageVersion Include="MSTest.TestFramework" Version="4.0.1" />
     <PackageVersion Include="NHibernate" Version="5.6.0" />
-    <PackageVersion Include="NHibernate.Envers" Version="5.5.2" />
+    <PackageVersion Include="NHibernate.Envers" Version="5.6.0" />
     <PackageVersion Include="NSubstitute" Version="5.3.0" />
     <PackageVersion Include="NUnit" Version="4.4.0" />
-    <PackageVersion Include="NUnit.ConsoleRunner" Version="3.20.1" />
+    <PackageVersion Include="NUnit.ConsoleRunner" Version="3.20.2" />
     <PackageVersion Include="NUnit3TestAdapter" Version="5.2.0" />
     <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="[7.2.0]" />
     <PackageVersion Include="System.CodeDom" Version="9.0.10" />

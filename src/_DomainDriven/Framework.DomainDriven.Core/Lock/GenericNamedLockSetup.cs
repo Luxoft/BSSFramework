@@ -41,7 +41,7 @@ public class GenericNamedLockSetup : IGenericNamedLockSetup
     {
         if (this.mainInitAction == null)
         {
-            throw new InvalidOperationException("Use 'SetNameLockType' method");
+            throw new InvalidOperationException($"Use '{nameof(this.SetNameLockType)}' method");
         }
 
         this.mainInitAction(services);

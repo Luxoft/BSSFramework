@@ -21,6 +21,7 @@
 
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.EntityFramework\Framework.DomainDriven.EntityFramework.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Setup\Framework.DomainDriven.Setup.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.WebApiNetCore.Swagger\Framework.DomainDriven.WebApiNetCore.Swagger.csproj" />
   </ItemGroup>
 
 </Project>

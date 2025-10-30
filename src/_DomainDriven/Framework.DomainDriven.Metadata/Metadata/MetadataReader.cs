@@ -29,7 +29,7 @@ internal static class Extensions
 
 public static class MetadataReader
 {
-    private static readonly Func<FieldInfo, DomainTypeMetadata, FieldMetadata>
+    private static readonly Func<FieldInfo, DomainTypeMetadata, FieldMetadata?>
             listTypeFieldMetadataCreator
                     = (f, d) =>
                       {
@@ -50,7 +50,7 @@ public static class MetadataReader
                           return result;
                       };
 
-    private static readonly Func<FieldInfo, DomainTypeMetadata, FieldMetadata>
+    private static readonly Func<FieldInfo, DomainTypeMetadata, FieldMetadata?>
             inlineTypeFieldMetadataCreator
                     = (f, d) =>
                       {
@@ -68,7 +68,7 @@ public static class MetadataReader
                           return result;
                       };
 
-    private static readonly Func<FieldInfo, DomainTypeMetadata, FieldMetadata>
+    private static readonly Func<FieldInfo, DomainTypeMetadata, FieldMetadata?>
             referenceTypeFieldMetadataCreator
                     = (f, d) =>
                       {
@@ -81,7 +81,7 @@ public static class MetadataReader
                           return result;
                       };
 
-    private static readonly Func<FieldInfo, DomainTypeMetadata, FieldMetadata>
+    private static readonly Func<FieldInfo, DomainTypeMetadata, FieldMetadata?>
             primitiveTypeFieldMetadataCreator
                     = (f, d) =>
                       {
@@ -100,7 +100,7 @@ public static class MetadataReader
                           return null;
                       };
 
-    private static IEnumerable<Func<FieldInfo, DomainTypeMetadata, FieldMetadata>> GetFieldConveyer()
+    private static IEnumerable<Func<FieldInfo, DomainTypeMetadata, FieldMetadata?>> GetFieldConveyer()
     {
         yield return primitiveTypeFieldMetadataCreator;
         yield return referenceTypeFieldMetadataCreator;
@@ -108,7 +108,7 @@ public static class MetadataReader
         yield return inlineTypeFieldMetadataCreator;
     }
 
-    static Func<FieldInfo, DomainTypeMetadata, FieldMetadata> fieldMetadataCreator = (f, d) =>
+    static Func<FieldInfo, DomainTypeMetadata, FieldMetadata?> fieldMetadataCreator = (f, d) =>
                                                                                      {
                                                                                          foreach (var func in GetFieldConveyer())
                                                                                          {
@@ -154,7 +154,7 @@ public static class MetadataReader
         var typesToProcess = allTypes
                              .Where(z => !z.IsAbstract)
                              .Where(z => persistentDomainObjectBase.IsAssignableFrom(z))
-                             .Where(z => z.BaseType.IsAbstract)
+                             .Where(z => z.BaseType!.IsAbstract)
                              .Where(
                                     z => z.BaseType.GetAllElements(q => q.BaseType)
                                           .TakeWhile(q => q != null && q != persistentDomainObjectBase)

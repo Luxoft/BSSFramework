@@ -15,8 +15,8 @@ public interface IMainDBScriptGeneratorBuilder : IConfigurable
     IMainDBScriptGeneratorBuilder WithMain(
         DatabaseScriptGeneratorMode mode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
         string previousColumnPostfix = "_previousVersion",
-        ICollection<string> ignoredIndexes = null,
-        IDataTypeComparer dataTypeComparer = null);
+        ICollection<string>? ignoredIndexes = null,
+        IDataTypeComparer? dataTypeComparer = null);
 
     IMainDBScriptGeneratorBuilder WithUniqueGroup(params IgnoreLink[] ignore);
 

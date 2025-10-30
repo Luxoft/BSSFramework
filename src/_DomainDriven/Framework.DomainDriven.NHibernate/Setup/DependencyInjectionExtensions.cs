@@ -48,7 +48,7 @@ public static class DependencyInjectionExtensions
         services.AddSingleton<IDefaultConnectionStringSource, DefaultConnectionStringSource>();
 
         setupAction(setupObject);
-        
+
         setupObject.Initialize(services);
 
         return services;

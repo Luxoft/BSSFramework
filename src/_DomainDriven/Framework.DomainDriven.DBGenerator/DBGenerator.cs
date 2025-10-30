@@ -17,7 +17,7 @@ public class DBGenerator
     protected virtual void Init(
             DatascriptGeneratorBuilder builder,
             DatabaseScriptGeneratorMode mode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
-            ICollection<string> ignoredIndexes = null)
+            ICollection<string>? ignoredIndexes = null)
     {
         builder.MainBuilder.WithMain(mode, ignoredIndexes: ignoredIndexes);
         builder.MainBuilder.WithRequireRef(this.GetIgnoreLinks().ToArray());
@@ -49,15 +49,15 @@ public class DBGenerator
             string serverName,
             DatabaseScriptGeneratorMode generatorMode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
             DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnTargetDatabase,
-            string databaseName = null,
-            string updateScriptsDB = null,
+            string? databaseName = null,
+            string? updateScriptsDB = null,
             string executedScriptsTable = "ExecutedScripts",
-            IEnumerable<string> migrationScriptFolderPaths = null,
-            IEnumerable<string> auditMigrationScriptFolderPaths = null,
+            IEnumerable<string>? migrationScriptFolderPaths = null,
+            IEnumerable<string>? auditMigrationScriptFolderPaths = null,
             bool preserveSchemaDatabase = false,
-            IMigrationScriptReader customMigrationScriptReader = null,
-            ICollection<string> ignoredIndexes = null,
-            DbUserCredential credentials = null)
+            IMigrationScriptReader? customMigrationScriptReader = null,
+            ICollection<string>? ignoredIndexes = null,
+            DbUserCredential? credentials = null)
     {
         migrationScriptFolderPaths ??= new string[0];
         auditMigrationScriptFolderPaths ??= new string[0];

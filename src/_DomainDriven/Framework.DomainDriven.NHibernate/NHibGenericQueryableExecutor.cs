@@ -16,7 +16,12 @@ public class NHibGenericQueryableExecutor(IServiceProvider serviceProvider) : Ge
 {
     protected override Type ExtensionsType { get; } = typeof(LinqExtensionMethods);
 
-    protected override IQueryable<TSource> ApplyFetch<TSource>(IQueryable<TSource> source, FetchRule<TSource> fetchRule)
+    public override Task<TResult> ExecuteAsync<TResult>(Expression<Func<Task<TResult>>> expression)
+    {
+        return base.Execute<Task<TResult>>(expression);
+    }
+
+    public override IQueryable<TSource> ApplyFetch<TSource>(IQueryable<TSource> source, FetchRule<TSource> fetchRule)
     {
         return fetchRule switch
         {

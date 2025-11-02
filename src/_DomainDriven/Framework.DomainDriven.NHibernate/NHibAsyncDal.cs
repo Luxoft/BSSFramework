@@ -28,7 +28,7 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
                             .FromMaybe(() => "Register VisitedQueryProvider in Nhib configuration");
 
         queryProvider.Visitor = expressionVisitorContainer.Visitor;
-        queryProvider.GenericQueryableExecutor = genericQueryableExecutor;
+        queryProvider.Executor = genericQueryableExecutor;
 
         return queryable;
     }

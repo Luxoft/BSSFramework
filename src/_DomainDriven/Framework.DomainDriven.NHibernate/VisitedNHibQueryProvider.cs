@@ -11,28 +11,25 @@ namespace Framework.DomainDriven.NHibernate;
 /// <summary>
 /// NHibnate-провайдер доступа, который применяет Visitor-ы для Expression-ов
 /// </summary>
-public class VisitedNHibQueryProvider : DefaultQueryProvider
+public class VisitedNHibQueryProvider : DefaultQueryProvider, IGenericQueryProvider
 {
     public VisitedNHibQueryProvider(ISessionImplementor session)
-            : base(session)
+        : base(session)
     {
     }
 
     protected VisitedNHibQueryProvider(ISessionImplementor session, object collection, NhQueryableOptions options)
-            : base(session, collection, options)
+        : base(session, collection, options)
     {
     }
 
-    public ExpressionVisitor Visitor { get; set; }
+    public ExpressionVisitor? Visitor { get; set; }
 
-    public IGenericQueryableExecutor GenericQueryableExecutor { get; set; }
+    public IGenericQueryableExecutor Executor { get; set; }
 
     protected override IQueryProvider CreateWithOptions(NhQueryableOptions options)
     {
-        return new VisitedNHibQueryProvider(this.Session, this.Collection, options)
-               {
-                   Visitor = this.Visitor, GenericQueryableExecutor = this.GenericQueryableExecutor
-               };
+        return new VisitedNHibQueryProvider(this.Session, this.Collection, options) { Visitor = this.Visitor, Executor = this.Executor };
     }
 
     private Expression TryApplyVisitor(Expression expression)
@@ -53,17 +50,5 @@ public class VisitedNHibQueryProvider : DefaultQueryProvider
     public override IQueryable<T> CreateQuery<T>(Expression expression)
     {
         return base.CreateQuery<T>(this.TryApplyVisitor(expression));
-    }
-
-    public override object Execute(Expression expression)
-    {
-        if (expression is GenericQueryableExecuteExpression genericQueryableExecuteExpression)
-        {
-            return this.GenericQueryableExecutor.Execute(genericQueryableExecuteExpression.CallExpression);
-        }
-        else
-        {
-            return base.Execute(expression);
-        }
     }
 }

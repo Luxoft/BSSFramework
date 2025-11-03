@@ -4,6 +4,8 @@ using Framework.Core;
 using Framework.DomainDriven.Lock;
 using Framework.Persistent;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using SecuritySystem;
 using SecuritySystem.AncestorDenormalization;
 using SecuritySystem.HierarchicalExpand;
@@ -11,13 +13,14 @@ using SecuritySystem.HierarchicalExpand;
 namespace Framework.DomainDriven.ApplicationCore.DALListeners;
 
 public class DenormalizeHierarchicalDALListener(
-    IEnumerable<HierarchicalInfo> hierarchicalInfoList,
+    IServiceProvider serviceProvider,
+    IEnumerable<FullAncestorLinkInfo> hierarchicalInfoList,
     IDenormalizedAncestorsServiceFactory denormalizedAncestorsServiceFactory,
     INamedLockSource namedLockSource,
     INamedLockService namedLockService)
     : IBeforeTransactionCompletedDALListener
 {
-    private readonly IReadOnlyDictionary<Type, HierarchicalInfo> hierarchicalInfoTypes = hierarchicalInfoList.ToDictionary(h => h.DomainObjectType);
+    private readonly IReadOnlyDictionary<Type, FullAncestorLinkInfo> hierarchicalInfoTypes = hierarchicalInfoList.ToDictionary(h => h.DomainObjectType);
 
     public async Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
     {
@@ -31,7 +34,7 @@ public class DenormalizeHierarchicalDALListener(
                     pair => pair.Value == DALObjectChangeType.Created || pair.Value == DALObjectChangeType.Updated,
                     (modified, removing) => new { Modified = modified, Removing = removing });
 
-                var method = new Func<ISecurityContext[], ISecurityContext[], HierarchicalInfo<ISecurityContext>, CancellationToken, Task>(this.Process).CreateGenericMethod(domainType);
+                var method = new Func<ISecurityContext[], ISecurityContext[], FullAncestorLinkInfo<ISecurityContext>, CancellationToken, Task>(this.Process).CreateGenericMethod(domainType);
 
                 await method.Invoke<Task>(
                     this,
@@ -45,28 +48,22 @@ public class DenormalizeHierarchicalDALListener(
         }
     }
 
-    private async Task Process<TDomainObject>(TDomainObject[] modified, TDomainObject[] removing, HierarchicalInfo<TDomainObject> hierarchicalInfo, CancellationToken cancellationToken)
+    private async Task Process<TDomainObject>(TDomainObject[] modified, TDomainObject[] removing, FullAncestorLinkInfo<TDomainObject> fullAncestorLinkInfo, CancellationToken cancellationToken)
         where TDomainObject : class
     {
-        await this.LockChanges(hierarchicalInfo, cancellationToken);
+        await this.LockChanges(fullAncestorLinkInfo, cancellationToken);
 
-        modified.Foreach(domainObject => this.UpdateDeepLevel(domainObject, hierarchicalInfo));
+        if (typeof(IHierarchicalLevelObjectDenormalized).IsAssignableFrom(typeof(TDomainObject)))
+        {
+            await serviceProvider.GetRequiredService<IUpdateDeepLevelService<TDomainObject>>().UpdateDeepLevels(modified, cancellationToken);
+        }
 
         await denormalizedAncestorsServiceFactory.Create<TDomainObject>().SyncAsync(modified, removing, cancellationToken);
     }
 
-    private void UpdateDeepLevel<TDomainObject>(TDomainObject domainObject, HierarchicalInfo<TDomainObject> hierarchicalInfo)
-        where TDomainObject : class
+    private async Task LockChanges(FullAncestorLinkInfo fullAncestorLinkInfo, CancellationToken cancellationToken)
     {
-        if (domainObject is IHierarchicalLevelObjectDenormalized objectDenormalized)
-        {
-            objectDenormalized.SetDeepLevel(domainObject.GetAllElements(v => hierarchicalInfo.ParentFunc(v)).Count());
-        }
-    }
-
-    private async Task LockChanges(HierarchicalInfo hierarchicalInfo, CancellationToken cancellationToken)
-    {
-        var domainObjectAncestorLinkType = hierarchicalInfo.DirectedLinkType;
+        var domainObjectAncestorLinkType = fullAncestorLinkInfo.DirectedLinkType;
 
         var namedLock = namedLockSource.NamedLocks.Where(nl => nl.DomainType == domainObjectAncestorLinkType).Single(
             () => new ArgumentException($"System must have namedLock for {domainObjectAncestorLinkType.Name} global lock "));

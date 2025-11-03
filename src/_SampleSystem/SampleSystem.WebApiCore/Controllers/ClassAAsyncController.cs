@@ -14,35 +14,24 @@ namespace SampleSystem.WebApiCore.Controllers;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class ClassAAsyncController : ControllerBase
+public class ClassAAsyncController(
+    IRepositoryFactory<ClassA> classARepositoryFactory,
+    IMediator mediator)
+    : ControllerBase
 {
-    private readonly IRepositoryFactory<ClassA> classARepositoryFactory;
-
-    private readonly IMediator mediator;
-
-    private readonly IServiceEvaluator<IMediator> mediatorEvaluator;
-
-    public ClassAAsyncController(
-        IRepositoryFactory<ClassA> classARepositoryFactory,
-        IMediator mediator)
-    {
-        this.classARepositoryFactory = classARepositoryFactory;
-        this.mediator = mediator;
-    }
-
     [DBSessionMode(DBSessionMode.Write)]
     [HttpPost]
     public async Task CreateClassA(int value, bool withSession, CancellationToken cancellationToken)
     {
         if (withSession)
         {
-            var repository = this.classARepositoryFactory.Create();
+            var repository = classARepositoryFactory.Create();
 
             var classA = await repository.GetQueryable().Where(x => x.Value == value).GenericSingleOrDefaultAsync(cancellationToken);
 
             if (classA != null) throw new Exception("Should not exist yet");
         }
 
-        await this.mediator.Send(new CreateClassAEvent(value), cancellationToken);
+        await mediator.Send(new CreateClassAEvent(value), cancellationToken);
     }
 }

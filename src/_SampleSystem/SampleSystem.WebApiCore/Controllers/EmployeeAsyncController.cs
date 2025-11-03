@@ -14,37 +14,25 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class EmployeeAsyncController : ControllerBase
+public class EmployeeAsyncController(
+    IRepositoryFactory<Employee> employeeRepositoryFactory,
+    IRawUserAuthenticationService userAuthenticationService,
+    ISampleSystemDTOMappingService mappingService)
+    : ControllerBase
 {
-    private readonly IRepositoryFactory<Employee> employeeRepositoryFactory;
-
-    private readonly IRawUserAuthenticationService userAuthenticationService;
-
-    private readonly ISampleSystemDTOMappingService mappingService;
-
-    public EmployeeAsyncController(
-            IRepositoryFactory<Employee> employeeRepositoryFactory,
-            IRawUserAuthenticationService userAuthenticationService,
-            ISampleSystemDTOMappingService mappingService)
-    {
-        this.employeeRepositoryFactory = employeeRepositoryFactory;
-        this.userAuthenticationService = userAuthenticationService;
-        this.mappingService = mappingService;
-    }
-
     [DBSessionMode(DBSessionMode.Read)]
     [HttpPost]
     public async Task<EmployeeSimpleDTO> GetCurrentEmployee(CancellationToken cancellationToken)
     {
-        var userName = this.userAuthenticationService.GetUserName();
+        var userName = userAuthenticationService.GetUserName();
 
-        var repository = this.employeeRepositoryFactory.Create();
+        var repository = employeeRepositoryFactory.Create();
 
         var employees = await repository
                               .GetQueryable()
                               .Where(employee => employee.Login == userName)
                               .GenericToListAsync(cancellationToken);
 
-        return employees.Single().ToSimpleDTO(this.mappingService);
+        return employees.Single().ToSimpleDTO(mappingService);
     }
 }

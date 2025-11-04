@@ -11,9 +11,7 @@ namespace Framework.Configuration.Domain;
 public class ControlSettings : BaseDirectory,
                                IMaster<ControlSettings>,
                                IMaster<ControlSettingsParam>,
-                               IDetail<ControlSettings>,
-                               IDefaultHierarchicalPersistentDomainObjectBase<ControlSettings>,
-                               ITypeObject<ControlSettingsType>
+                               IDetail<ControlSettings>
 {
     private readonly ICollection<ControlSettings> children = new List<ControlSettings>();
 

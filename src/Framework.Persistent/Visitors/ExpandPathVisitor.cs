@@ -13,7 +13,7 @@ namespace Framework.Persistent;
 
 public class ExpandPathVisitor : ExpressionVisitor
 {
-    private static readonly IDictionaryCache<Tuple<Type, MemberInfo>, PropertyPath> ExpandPathCache = new DictionaryCache<Tuple<Type, MemberInfo>, PropertyPath>(memberPair =>
+    private static readonly IDictionaryCache<Tuple<Type, MemberInfo>, PropertyPath?> ExpandPathCache = new DictionaryCache<Tuple<Type, MemberInfo>, PropertyPath?>(memberPair =>
     {
         var pathsRequest = from property in (memberPair.Item2 as PropertyInfo).ToMaybe()
 
@@ -65,7 +65,7 @@ public class ExpandPathVisitor : ExpressionVisitor
     {
         var anyNullable = args.Any(arg => arg.Type.IsNullable());
 
-        return anyNullable ? success(args.ToList(this.Visit).ToList(arg => arg.TryLiftToNullable())) : fault();
+        return anyNullable ? success(args.ToList(this.Visit).ToList(arg => arg!.TryLiftToNullable())) : fault();
     }
 
     public static readonly ExpandPathVisitor Value = new ExpandPathVisitor();

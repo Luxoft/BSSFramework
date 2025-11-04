@@ -1,6 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
+using Framework.Persistent;
 
 namespace Framework.DomainDriven.ServiceModel.Subscriptions;
 

@@ -1,4 +1,4 @@
-﻿#nullable enable
+﻿
 namespace Framework.DomainDriven.NHibernate;
 
 public static class ConfigurationInitializerExtensions

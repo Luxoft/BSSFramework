@@ -24,9 +24,7 @@ public class Permission : AuditPersistentDomainObjectBase,
                           IMaster<Permission>,
 
                           IDetail<Permission>,
-
-                          IDefaultHierarchicalPersistentDomainObjectBase<Permission>,
-
+    
                           IPeriodObject
 {
     private readonly ICollection<PermissionRestriction> restrictions = new List<PermissionRestriction>();
@@ -123,6 +121,4 @@ public class Permission : AuditPersistentDomainObjectBase,
     ICollection<Permission> IMaster<Permission>.Details => (ICollection<Permission>)this.DelegatedTo;
 
     Permission IDetail<Permission>.Master => this.DelegatedFrom;
-
-    Permission IParentSource<Permission>.Parent => this.DelegatedFrom;
 }

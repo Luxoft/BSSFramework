@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.DAL.Revisions;
+﻿namespace Framework.Persistent;
 
 public enum ModificationType
 {

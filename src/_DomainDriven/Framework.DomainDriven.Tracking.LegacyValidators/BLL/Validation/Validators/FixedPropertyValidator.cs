@@ -17,7 +17,7 @@ public class FixedPropertyValidator : IDynamicPropertyValidator
 {
     public IPropertyValidator GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
-        var identType = property.DeclaringType.GetIdentType();
+        var identType = property.DeclaringType!.GetIdentType();
 
         var persistentDomainObjectBaseTypeResolver = serviceProvider.GetRequiredService<IPersistentDomainObjectBaseTypeResolver>();
 

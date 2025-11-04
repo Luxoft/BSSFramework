@@ -11,12 +11,7 @@ namespace Framework.Configuration.Domain;
 /// </summary>
 [UniqueGroup]
 [NotAuditedClass]
-public class SystemConstant :
-        AuditPersistentDomainObjectBase,
-        ICodeObject,
-        ITypeObject<DomainType>,
-        IValueObject<string>,
-        IDescriptionObject
+public class SystemConstant : AuditPersistentDomainObjectBase, ICodeObject
 {
     private DomainType type;
 

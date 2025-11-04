@@ -1,6 +1,6 @@
 ﻿namespace SampleSystem.Domain;
 
-public abstract class CommonUnitBase : ContextBaseDirectory
+public abstract class CommonUnitBase : BaseDirectory
 {
     private BusinessUnitStatus businessUnitStatus;
 

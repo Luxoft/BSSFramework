@@ -1,4 +1,4 @@
-﻿#nullable enable
+﻿
 
 using System.Data;
 using System.Reflection;

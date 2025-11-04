@@ -13,26 +13,30 @@ using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer> :
-        DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer>, IAccessDeniedExceptionServiceContainer, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>
-
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TBLLFactoryContainer : IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>
+public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer>(
+    IServiceProvider serviceProvider,
+    IEventOperationSender operationSender,
+    ITrackingService<TPersistentDomainObjectBase> trackingService,
+    IAccessDeniedExceptionService accessDeniedExceptionService,
+    IStandartExpressionBuilder standartExpressionBuilder,
+    IValidator validator,
+    IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
+    IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
+    :
+        DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer>(
+        serviceProvider,
+        operationSender,
+        trackingService,
+        standartExpressionBuilder,
+        validator,
+        hierarchicalObjectExpanderFactory,
+        fetchService),
+        IAccessDeniedExceptionServiceContainer,
+        ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+    where TBLLFactoryContainer : IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>
 {
-    protected SecurityBLLBaseContext(
-            IServiceProvider serviceProvider,
-            IEventOperationSender operationSender,
-            ITrackingService<TPersistentDomainObjectBase> trackingService,
-            IAccessDeniedExceptionService accessDeniedExceptionService,
-            IStandartExpressionBuilder standartExpressionBuilder,
-            IValidator validator,
-            IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
-            IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
-            : base(serviceProvider, operationSender, trackingService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService) =>
-
-            this.AccessDeniedExceptionService = accessDeniedExceptionService ?? throw new ArgumentNullException(nameof(accessDeniedExceptionService));
-
-    public virtual IAccessDeniedExceptionService AccessDeniedExceptionService { get; }
+    public virtual IAccessDeniedExceptionService AccessDeniedExceptionService { get; } = accessDeniedExceptionService;
 
     public ISecurityProvider<TDomainObject> GetDisabledSecurityProvider<TDomainObject>()
         where TDomainObject : TPersistentDomainObjectBase

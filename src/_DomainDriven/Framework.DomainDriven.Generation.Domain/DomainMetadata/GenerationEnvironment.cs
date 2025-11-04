@@ -10,6 +10,7 @@ using Framework.Projection;
 using Framework.Projection.Contract;
 using Framework.Projection.Environment;
 using Framework.Projection.Lambda;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.Generation.Domain;
 
@@ -17,11 +18,11 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
         where TPersistentDomainObjectBase : TDomainObjectBase, IIdentityObject<TIdent>
         where TAuditPersistentDomainObjectBase : TPersistentDomainObjectBase, IAuditObject
 {
-    private readonly Assembly _modelAssembly;
+    private readonly Assembly? _modelAssembly;
 
     private readonly Lazy<ReadOnlyCollection<Assembly>> _domainObjectAssemblies;
 
-    protected GenerationEnvironment(Expression<Func<TPersistentDomainObjectBase, TIdent>> identityPropertyExpr, Assembly modelAssembly = null)
+    protected GenerationEnvironment(Expression<Func<TPersistentDomainObjectBase, TIdent>> identityPropertyExpr, Assembly? modelAssembly = null)
     {
         if (identityPropertyExpr == null) throw new ArgumentNullException(nameof(identityPropertyExpr));
 
@@ -39,6 +40,8 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
 
         this.ProjectionEnvironments = LazyInterfaceImplementHelper.CreateProxy(() => this.GetProjectionEnvironments().ToReadOnlyCollectionI());
     }
+
+    public virtual IServiceProvider ServiceProvider { get; } = new ServiceCollection().BuildServiceProvider();
 
     public PropertyInfo IdentityProperty { get; }
 
@@ -59,6 +62,11 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
     public IReadOnlyCollection<IProjectionEnvironment> ProjectionEnvironments { get; }
 
     public virtual IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } = new DomainTypeRootExtendedMetadataBuilder();
+
+    public virtual bool IsHierarchical(Type type)
+    {
+        return this.ServiceProvider.IsHierarchical(type);
+    }
 
     public ReadOnlyCollection<Assembly> DomainObjectAssemblies => this._domainObjectAssemblies.Value;
 

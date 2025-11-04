@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.DAL.Revisions;
 
 namespace Framework.DomainDriven;
 
@@ -102,22 +101,6 @@ public static class DALChangesExtensions
             var updateStates = states.Where(state => state.Value == DALObjectChangeType.Updated).OrderByDescending(state => state.Key.ApplyIndex);
 
             return updateStates.First();
-        }
-    }
-
-    public static ModificationType ToModificationType(this DALObjectChangeType changeType)
-    {
-        switch (changeType)
-        {
-            case DALObjectChangeType.Created:
-            case DALObjectChangeType.Updated:
-                return ModificationType.Save;
-
-            case DALObjectChangeType.Removed:
-                return ModificationType.Remove;
-
-            default:
-                throw new ArgumentOutOfRangeException(nameof(changeType));
         }
     }
 }

@@ -295,7 +295,7 @@ public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguratio
                              };
             }
 
-            if (this.DomainType.GetProjectionSourceTypeOrSelf().IsHierarchical())
+            if (this.Configuration.Environment.IsHierarchical(this.DomainType.GetProjectionSourceTypeOrSelf()))
             {
                 foreach (var filterModelType in this.DomainType.GetProjectionFilters(ProjectionFilterTargets.ODataTree))
                 {

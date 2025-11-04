@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem.HierarchicalExpand;
 
-#nullable enable
+
 
 namespace Framework.DomainDriven.BLL;
 

@@ -86,7 +86,7 @@ public abstract class MainGeneratorConfigurationBase<TEnvironment> : GeneratorCo
 
             yield return new GetListByOperationMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType, dtoType);
 
-            if (domainType.GetProjectionSourceTypeOrSelf().IsHierarchical())
+            if (this.Environment.IsHierarchical(domainType))
             {
                 yield return new GetTreeByOperationMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType, dtoType);
             }

@@ -4,7 +4,6 @@ using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven;
-using Framework.Persistent;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
@@ -55,7 +54,7 @@ internal sealed class ByRolesRecipientsResolverDynamic<TBLLContext> : ByRolesRec
                 from item in fids.GroupBy(fid => fid.Type)
                 let securityContextType = item.Key
                 let ids = item.Select(i => i.Id)
-                let et = securityContextType.IsHierarchical() ? expandType : expandType.WithoutHierarchical()
+                let et = this.ConfigurationContextFacade.ServiceProvider.IsHierarchical(securityContextType) ? expandType : expandType.WithoutHierarchical()
                 select new NotificationFilterGroup(securityContextType, ids, et);
 
         return result;

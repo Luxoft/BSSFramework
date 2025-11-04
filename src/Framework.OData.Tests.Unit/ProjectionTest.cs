@@ -61,15 +61,9 @@ public class TestEmployee : ITestEmployee
     public string Name { get; set; }
 
     public TestLocation Location { get; set; }
-
-
-    ITestLocation ILocationObject<ITestLocation>.Location
-    {
-        get { return this.Location; }
-    }
 }
 
-public class TestLocation : IParentSource<ITestLocation>, ITestLocation
+public class TestLocation : ITestLocation
 {
     public Guid Id { get; set; }
 
@@ -89,11 +83,6 @@ public class TestLocation : IParentSource<ITestLocation>, ITestLocation
             return this.Department;
         }
     }
-
-    ITestLocation IParentSource<ITestLocation>.Parent
-    {
-        get { return this.Parent; }
-    }
 }
 
 public class TestDepartment : ITestDepartment
@@ -105,17 +94,17 @@ public class TestDepartment : ITestDepartment
 
 
 
-public interface ITestEmployee : IDefaultIdentityObject, IVisualIdentityObject, ILocationObject<ITestLocation>
+public interface ITestEmployee : IIdentityObject<Guid>, IVisualIdentityObject
 {
 
 }
 
-public interface ITestLocation : IDefaultIdentityObject, IVisualIdentityObject
+public interface ITestLocation : IIdentityObject<Guid>, IVisualIdentityObject
 {
     ITestDepartment Department { get; }
 }
 
-public interface ITestDepartment : IDefaultIdentityObject, IVisualIdentityObject
+public interface ITestDepartment : IIdentityObject<Guid>, IVisualIdentityObject
 {
 
 }

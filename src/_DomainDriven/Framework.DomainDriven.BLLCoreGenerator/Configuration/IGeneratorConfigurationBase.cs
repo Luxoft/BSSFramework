@@ -15,8 +15,6 @@ public interface IGeneratorConfigurationBase<out TEnvironment> : IGeneratorConfi
 #pragma warning disable S100 // Methods and properties should be named in camel case
 public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTypeReferenceService<FileType>
 {
-    IServiceProvider ServiceProvider { get; }
-
     CodeTypeReference ActualRootSecurityServiceInterfaceType { get; }
 
     bool GenerateAuthServices { get; }

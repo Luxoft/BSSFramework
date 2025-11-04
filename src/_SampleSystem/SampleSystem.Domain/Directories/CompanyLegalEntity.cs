@@ -7,10 +7,7 @@ namespace SampleSystem.Domain;
 
 [BLLViewRole, BLLSaveRole, BLLRemoveRole]
 [UniqueGroup]
-public class CompanyLegalEntity :
-        LegalEntityBase,
-        IParentSource<CompanyLegalEntity>,
-        ICodeObject
+public class CompanyLegalEntity : LegalEntityBase, ICodeObject
 {
     private string code;
     private CompanyLegalEntity parent;

@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven.DAL.Revisions;
-using Framework.Persistent;
+﻿using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
@@ -10,13 +9,13 @@ namespace Framework.Configuration.Domain;
 /// </summary>
 [UniqueGroup]
 [NotAuditedClass]
-public class DomainObjectModification : AuditPersistentDomainObjectBase, ITypeObject<ModificationType>, IVersionObject<long>
+public class DomainObjectModification : AuditPersistentDomainObjectBase, IVersionObject<long>
 {
     private Guid domainObjectId;
 
     private long revision;
 
-    private DomainType domainType;
+    private DomainType domainType = null!;
 
     private ModificationType type;
 

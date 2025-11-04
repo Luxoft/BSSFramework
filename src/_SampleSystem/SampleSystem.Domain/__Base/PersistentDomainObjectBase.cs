@@ -4,7 +4,7 @@ using Framework.Core;
 
 namespace SampleSystem.Domain;
 
-public abstract class PersistentDomainObjectBase : DomainObjectBase, IDefaultIdentityObject, IEquatable<PersistentDomainObjectBase>
+public abstract class PersistentDomainObjectBase : DomainObjectBase, IIdentityObject<Guid>, IEquatable<PersistentDomainObjectBase>
 {
     private Guid id;
 

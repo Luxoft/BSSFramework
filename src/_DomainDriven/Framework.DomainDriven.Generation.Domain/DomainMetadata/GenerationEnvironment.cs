@@ -12,6 +12,8 @@ using Framework.Projection.Environment;
 using Framework.Projection.Lambda;
 using Microsoft.Extensions.DependencyInjection;
 
+using SecuritySystem.Services;
+
 namespace Framework.DomainDriven.Generation.Domain;
 
 public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomainObjectBase, TAuditPersistentDomainObjectBase, TIdent> : IGenerationEnvironment
@@ -21,6 +23,8 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
     private readonly Assembly? _modelAssembly;
 
     private readonly Lazy<ReadOnlyCollection<Assembly>> _domainObjectAssemblies;
+
+    private readonly Lazy<IServiceProvider> lazyServiceProvider;
 
     protected GenerationEnvironment(Expression<Func<TPersistentDomainObjectBase, TIdent>> identityPropertyExpr, Assembly? modelAssembly = null)
     {
@@ -39,9 +43,11 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
         this._domainObjectAssemblies = LazyHelper.Create(() => this.GetDomainObjectAssemblies().Distinct().ToReadOnlyCollection());
 
         this.ProjectionEnvironments = LazyInterfaceImplementHelper.CreateProxy(() => this.GetProjectionEnvironments().ToReadOnlyCollectionI());
+
+        this.lazyServiceProvider = LazyHelper.Create(this.BuildServiceProvider);
     }
 
-    public virtual IServiceProvider ServiceProvider { get; } = new ServiceCollection().BuildServiceProvider();
+    public IServiceProvider ServiceProvider => this.lazyServiceProvider.Value;
 
     public PropertyInfo IdentityProperty { get; }
 
@@ -65,10 +71,24 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
 
     public virtual bool IsHierarchical(Type type)
     {
-        return this.ServiceProvider.IsHierarchical(type);
+        var hierarchicalInfoSource = this.ServiceProvider.GetService<IHierarchicalInfoSource>();
+
+        return hierarchicalInfoSource != null && hierarchicalInfoSource.IsHierarchical(type);
     }
 
     public ReadOnlyCollection<Assembly> DomainObjectAssemblies => this._domainObjectAssemblies.Value;
+
+    protected virtual IServiceProvider BuildServiceProvider()
+    {
+        return new ServiceCollection()
+               .Pipe(this.InitServices)
+               .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
+    }
+
+    protected virtual IServiceCollection InitServices(IServiceCollection services)
+    {
+        return services.AddSingleton<IHierarchicalInfoSource, HierarchicalInfoSource>();
+    }
 
     protected virtual IEnumerable<Assembly> GetDomainObjectAssemblies()
     {

@@ -69,7 +69,7 @@ public abstract class EventsSubscriptionManager<TPersistentDomainObjectBase> : I
     {
         this.Subscribe();
 
-        return this.sc.BuildServiceProvider();
+        return this.sc.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
     }
 
     private void Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)

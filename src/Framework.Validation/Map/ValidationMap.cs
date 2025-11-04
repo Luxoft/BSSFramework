@@ -187,5 +187,5 @@ public class ValidationMap : ValidationMapBase
     }
 
 
-    public static readonly ValidationMap Default = new ValidationMap(new ServiceCollection().BuildServiceProvider());
+    public static readonly ValidationMap Default = new ValidationMap(new ServiceCollection().BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true }));
 }

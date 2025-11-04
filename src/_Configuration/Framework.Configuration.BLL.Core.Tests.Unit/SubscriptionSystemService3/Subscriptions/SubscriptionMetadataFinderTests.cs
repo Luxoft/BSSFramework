@@ -26,13 +26,7 @@ public sealed class SubscriptionMetadataFinderTests
         subscription.Should().BeOfType<ObjectChangingSubscription>();
     }
 
-    private class TestSubscriptionMetadataFinder : SubscriptionMetadataFinder
-    {
-        public TestSubscriptionMetadataFinder()
-            : base(
-                new ServiceCollection().BuildServiceProvider(),
-                new[] { new SubscriptionMetadataFinderAssemblyInfo(typeof(TestSubscriptionMetadataFinder).Assembly) })
-        {
-        }
-    }
+    private class TestSubscriptionMetadataFinder() : SubscriptionMetadataFinder(
+        new ServiceCollection().BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true }),
+        [new SubscriptionMetadataFinderAssemblyInfo(typeof(TestSubscriptionMetadataFinder).Assembly)]);
 }

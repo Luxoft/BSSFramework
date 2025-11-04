@@ -35,10 +35,11 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
                 useDependencySecurity: false));
     }
 
-    public override IServiceProvider ServiceProvider { get; } =
-        new ServiceCollection()
-            .AddSingleton(new HierarchicalInfo<BusinessUnit>(v => v.Parent))
-            .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
+    protected override IServiceCollection InitServices(IServiceCollection services)
+    {
+        return base.InitServices(services)
+                   .AddSingleton(new HierarchicalInfo<BusinessUnit>(v => v.Parent));
+    }
 
     public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = [typeof(SampleSystemSecurityOperation), typeof(SecurityRule)];
 

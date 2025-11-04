@@ -5,15 +5,19 @@ using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven;
 
+using Microsoft.Extensions.DependencyInjection;
+
+using SecuritySystem.Services;
+
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
 internal sealed class ByRolesRecipientsResolverDynamic<TBLLContext> : ByRolesRecipientsResolverBase<TBLLContext>
-        where TBLLContext : class
+    where TBLLContext : class
 {
     public ByRolesRecipientsResolverDynamic(
-            ConfigurationContextFacade configurationContextFacade,
-            LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
-            : base(configurationContextFacade, lambdaProcessorFactory)
+        ConfigurationContextFacade configurationContextFacade,
+        LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
+        : base(configurationContextFacade, lambdaProcessorFactory)
     {
     }
 
@@ -36,9 +40,9 @@ internal sealed class ByRolesRecipientsResolverDynamic<TBLLContext> : ByRolesRec
     }
 
     private IEnumerable<FilterItemIdentity> GetFilterItemIdentities<T>(
-            Subscription subscription,
-            DomainObjectVersions<T> versions)
-            where T : class
+        Subscription subscription,
+        DomainObjectVersions<T> versions)
+        where T : class
     {
         var processor = this.LambdaProcessorFactory.Create<DynamicSourceLambdaProcessor<TBLLContext>>();
         var result = processor.Invoke(subscription, versions);
@@ -47,15 +51,17 @@ internal sealed class ByRolesRecipientsResolverDynamic<TBLLContext> : ByRolesRec
     }
 
     private IEnumerable<NotificationFilterGroup> GetNotificationFilterGroups(
-            IEnumerable<FilterItemIdentity> fids,
-            NotificationExpandType expandType)
+        IEnumerable<FilterItemIdentity> fids,
+        NotificationExpandType expandType)
     {
         var result =
-                from item in fids.GroupBy(fid => fid.Type)
-                let securityContextType = item.Key
-                let ids = item.Select(i => i.Id)
-                let et = this.ConfigurationContextFacade.ServiceProvider.IsHierarchical(securityContextType) ? expandType : expandType.WithoutHierarchical()
-                select new NotificationFilterGroup(securityContextType, ids, et);
+            from item in fids.GroupBy(fid => fid.Type)
+            let securityContextType = item.Key
+            let ids = item.Select(i => i.Id)
+            let et = this.ConfigurationContextFacade.ServiceProvider.GetRequiredService<IHierarchicalInfoSource>().IsHierarchical(securityContextType)
+                         ? expandType
+                         : expandType.WithoutHierarchical()
+            select new NotificationFilterGroup(securityContextType, ids, et);
 
         return result;
     }

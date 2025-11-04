@@ -31,24 +31,18 @@ public class FixedPropertyValidator : IDynamicPropertyValidator
 /// <summary>
 /// Валидатор проверки неизменяемости свойства
 /// </summary>
-public class FixedPropertyValidator<TSource, TProperty, TIdent, TPersistentDomainObjectBase> : IPropertyValidator<TSource, TProperty>
+public class FixedPropertyValidator<TSource, TProperty, TIdent, TPersistentDomainObjectBase>(Expression<Func<TSource, TProperty>> propertyPath)
+    : IPropertyValidator<TSource, TProperty>
     where TSource : TPersistentDomainObjectBase
     where TPersistentDomainObjectBase : IIdentityObject<TIdent>
 {
-    private readonly Expression<Func<TSource, TProperty>> propertyPath;
-
-    public FixedPropertyValidator(Expression<Func<TSource, TProperty>> propertyPath)
-    {
-        this.propertyPath = propertyPath ?? throw new ArgumentNullException(nameof(propertyPath));
-    }
-
     public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> validationContext)
     {
         var trackingService = validationContext.ServiceProvider.GetRequiredService<ITrackingService<TPersistentDomainObjectBase>>();
 
         return ValidationResult.FromCondition(
             trackingService.GetPersistentState(validationContext.Source) == PersistentLifeObjectState.NotPersistent
-            || !trackingService.GetChanges(validationContext.Source).HasChange(this.propertyPath),
+            || !trackingService.GetChanges(validationContext.Source).HasChange(propertyPath),
             () => $"{validationContext.GetPropertyName()} field in {validationContext.GetPropertyTypeName()} can't be changed");
     }
 }

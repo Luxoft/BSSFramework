@@ -6,17 +6,12 @@ using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.Events;
 
-public class ExampleSampleSystemEventsSubscriptionManager : EventsSubscriptionManager<PersistentDomainObjectBase>
+public class ExampleSampleSystemEventsSubscriptionManager(
+    IEventDTOMessageSender<PersistentDomainObjectBase> messageSender,
+    ISampleSystemDTOMappingService mappingService)
+    : EventsSubscriptionManager<PersistentDomainObjectBase>(messageSender)
 {
-    private readonly ISampleSystemDTOMappingService mappingService;
-
-    public ExampleSampleSystemEventsSubscriptionManager(
-        IEventDTOMessageSender<PersistentDomainObjectBase> messageSender,
-        ISampleSystemDTOMappingService mappingService)
-        : base(messageSender)
-    {
-        this.mappingService = mappingService ?? throw new ArgumentNullException(nameof(mappingService));
-    }
+    private readonly ISampleSystemDTOMappingService mappingService = mappingService ?? throw new ArgumentNullException(nameof(mappingService));
 
     public override void Subscribe()
     {

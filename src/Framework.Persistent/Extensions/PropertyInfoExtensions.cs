@@ -25,7 +25,7 @@ public static class PropertyInfoExtensions
         if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
 
         var detailRoleAttr = propertyInfo.GetCustomAttribute<DetailRoleAttribute>(false)
-                             ?? propertyInfo.DeclaringType.GetCustomAttribute<DetailRoleAttribute>(false);
+                             ?? propertyInfo.DeclaringType!.GetCustomAttribute<DetailRoleAttribute>(false);
 
         return detailRoleAttr.Maybe(attr => attr.HasValue(value));
     }

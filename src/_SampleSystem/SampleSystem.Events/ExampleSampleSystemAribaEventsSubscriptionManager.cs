@@ -4,13 +4,9 @@ using SampleSystem.Domain;
 
 namespace SampleSystem.Events;
 
-public class ExampleSampleSystemAribaEventsSubscriptionManager : EventsSubscriptionManager<PersistentDomainObjectBase>
+public class ExampleSampleSystemAribaEventsSubscriptionManager(SampleSystemCustomAribaLocalDBEventMessageSender messageSender)
+    : EventsSubscriptionManager<PersistentDomainObjectBase>(messageSender)
 {
-    public ExampleSampleSystemAribaEventsSubscriptionManager(SampleSystemCustomAribaLocalDBEventMessageSender messageSender)
-            : base(messageSender)
-    {
-    }
-
     public override void Subscribe()
     {
         this.SubscribeForSaveOperation<Employee>();

@@ -1,12 +1,15 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
+
 using CommonFramework;
 using CommonFramework.ExpressionEvaluate;
+
 using Framework.Authorization.Domain;
-using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
 using Framework.Persistent;
+
 using Microsoft.Extensions.DependencyInjection;
+
 using SecuritySystem;
 using SecuritySystem.Attributes;
 using SecuritySystem.HierarchicalExpand;
@@ -16,6 +19,7 @@ namespace Framework.Authorization.Notification;
 
 public class NotificationPrincipalExtractor(
     IServiceProvider serviceProvider,
+    IHierarchicalInfoSource hierarchicalInfoSource,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
     INotificationBasePermissionFilterSource notificationBasePermissionFilterSource,
     IIdentityInfoSource identityInfoSource,
@@ -107,7 +111,7 @@ public class NotificationPrincipalExtractor(
     {
         var genericMethod =
 
-            serviceProvider.IsHierarchical(notificationFilterGroup.SecurityContextType)
+            hierarchicalInfoSource.IsHierarchical(notificationFilterGroup.SecurityContextType)
 
                 ? this.GetType().GetMethod(
                     nameof(this.GetFullPermissionLevelInfoHierarchicalSelector),

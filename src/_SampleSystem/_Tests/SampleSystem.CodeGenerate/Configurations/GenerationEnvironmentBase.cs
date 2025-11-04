@@ -4,10 +4,15 @@ using Framework.DomainDriven.Generation.Domain;
 using Framework.Projection;
 using Framework.Projection.Environment;
 using Framework.Security;
+
+using Microsoft.Extensions.DependencyInjection;
+
 using SecuritySystem;
 
 using SampleSystem.Domain;
 using SampleSystem.Security;
+
+using SecuritySystem.HierarchicalExpand;
 
 namespace SampleSystem.CodeGenerate;
 
@@ -29,6 +34,11 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
                 projectionSubNamespace: "LegacyProjections",
                 useDependencySecurity: false));
     }
+
+    public override IServiceProvider ServiceProvider { get; } =
+        new ServiceCollection()
+            .AddSingleton(new HierarchicalInfo<BusinessUnit>(v => v.Parent))
+            .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
 
     public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = [typeof(SampleSystemSecurityOperation), typeof(SecurityRule)];
 

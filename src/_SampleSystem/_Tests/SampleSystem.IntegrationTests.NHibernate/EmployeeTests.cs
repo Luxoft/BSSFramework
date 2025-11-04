@@ -9,10 +9,11 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 using Framework.Configuration.Generated.DTO;
 using Framework.DomainDriven;
-using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.NHibernate;
 using Framework.Events;
 using Framework.OData;
+using Framework.Persistent;
+
 using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;

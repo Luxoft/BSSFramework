@@ -13,7 +13,6 @@ namespace SampleSystem.Domain;
 [BLLViewRole, BLLSaveRole(AllowCreate = false), BLLRemoveRole]
 public partial class HRDepartment :
         HRDepartmentBase,
-        IDefaultHierarchicalPersistentDomainObjectBase<HRDepartment>,
         IMaster<ManagementUnitAndHRDepartmentLink>,
         IMaster<HRDepartmentRoleEmployee>,
         IMaster<HRDepartmentEmployeePosition>,

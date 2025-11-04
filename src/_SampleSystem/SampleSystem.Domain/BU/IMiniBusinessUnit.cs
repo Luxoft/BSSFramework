@@ -5,7 +5,7 @@ using Framework.Projection.Contract;
 namespace SampleSystem.Domain;
 
 [ProjectionContract(typeof(BusinessUnit))]
-public interface IMiniBusinessUnit : IDefaultIdentityObject, IVisualIdentityObject, IPeriodObject
+public interface IMiniBusinessUnit : IIdentityObject<Guid>, IVisualIdentityObject, IPeriodObject
 {
 
 }

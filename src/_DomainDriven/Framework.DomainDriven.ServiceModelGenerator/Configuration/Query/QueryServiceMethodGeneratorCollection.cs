@@ -2,7 +2,6 @@
 
 using Framework.DomainDriven.BLLCoreGenerator;
 using Framework.DomainDriven.Generation.Domain;
-using Framework.Persistent;
 using Framework.Projection;
 using Framework.Transfering;
 
@@ -32,7 +31,7 @@ public class QueryServiceMethodGeneratorCollection<TConfiguration> : GeneratorCo
 
         yield return new GetODataListByQueryStringWithOperationMethodGenerator<TConfiguration>(this.Configuration, this._domainType, this._dtoType);
 
-        if (this._domainType.GetProjectionSourceTypeOrSelf().IsHierarchical())
+        if (this.Configuration.Environment.IsHierarchical(this._domainType.GetProjectionSourceTypeOrSelf()))
         {
             yield return new GetODataTreeByQueryStringWithOperationMethodGenerator<TConfiguration>(this.Configuration, this._domainType, this._dtoType);
         }
@@ -76,7 +75,7 @@ public class QueryServiceMethodGeneratorCollection<TConfiguration> : GeneratorCo
 
     private IEnumerable<Type> GetODataTreeFilterTypes()
     {
-        if (this._domainType.IsProjection(sourceType => sourceType.IsHierarchical()))
+        if (this._domainType.IsProjection(this.Configuration.Environment.IsHierarchical))
         {
             foreach (var filterModelType in this._domainType.GetProjectionFilters(ProjectionFilterTargets.ODataTree))
             {

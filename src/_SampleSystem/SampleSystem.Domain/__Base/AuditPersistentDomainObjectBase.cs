@@ -10,17 +10,17 @@ namespace SampleSystem.Domain;
 /// <summary>
 ///     Базовый персистентный класс
 /// </summary>
-public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBase, IDefaultAuditPersistentDomainObjectBase, IVersionObject<long>
+public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBase, IAuditObject, IVersionObject<long>
 {
     private bool active = true;
 
-    private string createdBy;
+    private string? createdBy;
 
     private DateTime? createDate;
 
     private DateTime? modifyDate;
 
-    private string modifiedBy;
+    private string? modifiedBy;
 
     private long version;
 
@@ -47,7 +47,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     ///     Дата изменения доменного объекта
     /// </summary>
     [SystemProperty]
-    public virtual string ModifiedBy
+    public virtual string? ModifiedBy
     {
         get { return this.modifiedBy.TrimNull(); }
         protected internal set { this.modifiedBy = value.TrimNull(); }
@@ -56,7 +56,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// <summary>
     ///     Логин сотрудника, изменившего доменный объект
     /// </summary>
-    public virtual string CreatedBy
+    public virtual string? CreatedBy
     {
         get { return this.createdBy.TrimNull(); }
         protected internal set { this.createdBy = value.TrimNull(); }

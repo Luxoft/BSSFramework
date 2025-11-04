@@ -18,8 +18,6 @@ using Framework.Security;
 using Framework.Transfering;
 using Framework.Validation;
 
-using Microsoft.Extensions.DependencyInjection;
-
 #pragma warning disable S100 // Methods and properties should be named in camel case
 namespace Framework.DomainDriven.BLLCoreGenerator;
 
@@ -60,8 +58,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     public virtual bool GenerateExternalPropertyValidators { get; } = false;
 
     public virtual bool GenerateAuthServices { get; } = false;
-
-    public virtual IServiceProvider ServiceProvider { get; } =  new ServiceCollection().BuildServiceProvider();
 
     public CodeTypeReference ActualRootSecurityServiceInterfaceType =>
 
@@ -536,7 +532,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         return baseTypes.Concat(classes).Concat(structs).Distinct();
     }
 
-    public override CodeTypeReference GetCodeTypeReference(Type domainType, FileType fileType)
+    public override CodeTypeReference GetCodeTypeReference(Type? domainType, FileType fileType)
     {
         var baseRef = base.GetCodeTypeReference(domainType, fileType);
 

@@ -11,9 +11,9 @@ namespace Framework.Persistent;
 
 public static class PropertyPathExtensions
 {
-    private static readonly IDictionaryCache<Type, IDictionaryCache<Tuple<PropertyInfo, bool>, PropertyPath>> SinglePathCache = new DictionaryCache<Type, IDictionaryCache<Tuple<PropertyInfo, bool>, PropertyPath>>(attributeType =>
+    private static readonly IDictionaryCache<Type, IDictionaryCache<Tuple<PropertyInfo, bool>, PropertyPath?>> SinglePathCache = new DictionaryCache<Type, IDictionaryCache<Tuple<PropertyInfo, bool>, PropertyPath?>>(attributeType =>
 
-            new Func<IDictionaryCache<Tuple<PropertyInfo, bool>, PropertyPath>>(GetInternalSingleCache<PathAttribute>)
+            new Func<IDictionaryCache<Tuple<PropertyInfo, bool>, PropertyPath?>>(GetInternalSingleCache<PathAttribute>)
                     .CreateGenericMethod(attributeType)
                     .Invoke<IDictionaryCache<Tuple<PropertyInfo, bool>, PropertyPath>>(null)).WithLock();
 
@@ -23,10 +23,10 @@ public static class PropertyPathExtensions
                     .CreateGenericMethod(attributeType)
                     .Invoke<IDictionaryCache<PropertyInfo, ReadOnlyCollection<PropertyPath>>>(null)).WithLock();
 
-    private static IDictionaryCache<Tuple<PropertyInfo, bool>, PropertyPath> GetInternalSingleCache<TAttribute>()
+    private static IDictionaryCache<Tuple<PropertyInfo, bool>, PropertyPath?> GetInternalSingleCache<TAttribute>()
             where TAttribute : Attribute, IPathAttribute
     {
-        return new DictionaryCache<Tuple<PropertyInfo, bool>, PropertyPath>((propertyPair, cache) =>
+        return new DictionaryCache<Tuple<PropertyInfo, bool>, PropertyPath?>((propertyPair, cache) =>
                                                                             {
                                                                                 var property = propertyPair.Item1;
 
@@ -91,7 +91,7 @@ public static class PropertyPathExtensions
         return type.GetPropertyPath(attr.Path);
     }
 
-    public static PropertyPath GetPropertyPath<TAttribute>(this PropertyInfo property, bool recurse)
+    public static PropertyPath? GetPropertyPath<TAttribute>(this PropertyInfo property, bool recurse)
             where TAttribute : Attribute, IPathAttribute
     {
         if (property == null) throw new ArgumentNullException(nameof(property));

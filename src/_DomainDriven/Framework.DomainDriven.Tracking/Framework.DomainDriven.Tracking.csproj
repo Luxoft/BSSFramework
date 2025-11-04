@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.Persistent.Mapping\Framework.Persistent.Mapping.csproj" />
-    <ProjectReference Include="..\..\Framework.Persistent\Framework.Persistent.csproj" />
+    <ProjectReference Include="..\..\Framework.Persistent.LegacyContext\Framework.Persistent.LegacyContext.csproj" />
   </ItemGroup>
 
 </Project>

@@ -12,7 +12,6 @@ namespace SampleSystem.Domain;
 [UniqueGroup]
 public class Location :
         BaseDirectory,
-        IDefaultHierarchicalPersistentDomainObjectBase<Location>,
         IMaster<Location>,
         IDetail<Location>,
         IHierarchicalLevelObjectDenormalized,
@@ -23,7 +22,7 @@ public class Location :
     private Country country;
     private bool isFinancial;
     private LocationType locationType;
-    private Location parent;
+    private Location? parent;
 
     private int closeDate;
     private int code;
@@ -36,7 +35,7 @@ public class Location :
     {
     }
 
-    public Location(Location parent)
+    public Location(Location? parent)
     {
         if (parent != null)
         {
@@ -105,7 +104,7 @@ public class Location :
         get { return this.children; }
     }
 
-    public virtual Location Parent
+    public virtual Location? Parent
     {
         get { return this.parent; }
         set { this.parent = value; }
@@ -133,7 +132,7 @@ public class Location :
     }
     public virtual void SetDeepLevel(int value) => this.DeepLevel = value;
 
-    Location IDetail<Location>.Master
+    Location? IDetail<Location>.Master
     {
         get { return this.Parent; }
     }

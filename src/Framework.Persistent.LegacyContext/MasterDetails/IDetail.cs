@@ -10,5 +10,5 @@ public interface IDetail<out TMaster>
     /// <summary>
     /// Ссылка на мастера
     /// </summary>
-    TMaster Master { get; }
+    TMaster? Master { get; }
 }

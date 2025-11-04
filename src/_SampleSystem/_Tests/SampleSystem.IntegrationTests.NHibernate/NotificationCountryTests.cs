@@ -1,6 +1,6 @@
 ﻿using Framework.Configuration.Domain;
 using Framework.DomainDriven;
-using Framework.DomainDriven.DAL.Revisions;
+using Framework.Persistent;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;

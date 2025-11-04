@@ -11,7 +11,7 @@ namespace Framework.Persistent;
 
 public static class PersistentDomainObjectBaseExtensions
 {
-    public static TIdent TryGetId<TIdent>(this IIdentityObject<TIdent> source)
+    public static TIdent? TryGetId<TIdent>(this IIdentityObject<TIdent> source)
     {
         return source.Maybe(v => v.Id);
     }
@@ -83,7 +83,7 @@ public static class PersistentDomainObjectBaseExtensions
     }
 
 
-    public static TProperty GetOneToOne<TSource, TProperty, TIdent>(this TSource source, Expression<Func<TSource, IEnumerable<TProperty>>> propertyExpr)
+    public static TProperty? GetOneToOne<TSource, TProperty, TIdent>(this TSource source, Expression<Func<TSource, IEnumerable<TProperty>>> propertyExpr)
             where TSource : class, IIdentityObject<TIdent>
             where TProperty : class, IIdentityObject<TIdent>
     {
@@ -96,7 +96,7 @@ public static class PersistentDomainObjectBaseExtensions
                             _ => { throw new Exception($"{typeof(TSource).Name} one-to-one error. To many items in collection {typeof(TProperty).Name}"); });
     }
 
-    public static void SetOneToOne<TSource, TProperty, TIdent>(this TSource source, Expression<Func<TSource, IEnumerable<TProperty>>> propertyExpr, TProperty newValue)
+    public static void SetOneToOne<TSource, TProperty, TIdent>(this TSource source, Expression<Func<TSource, IEnumerable<TProperty>>> propertyExpr, TProperty? newValue)
             where TSource : class, IIdentityObject<TIdent>
             where TProperty : class, IIdentityObject<TIdent>
     {

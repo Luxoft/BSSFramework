@@ -5172,7 +5172,7 @@ namespace Framework.Configuration.Generated.DTO
         
         private long _revision;
         
-        private Framework.DomainDriven.DAL.Revisions.ModificationType _type;
+        private Framework.Persistent.ModificationType _type;
         
         private long _version;
         
@@ -5240,7 +5240,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.DomainDriven.DAL.Revisions.ModificationType Type
+        public Framework.Persistent.ModificationType Type
         {
             get
             {
@@ -5376,7 +5376,7 @@ namespace Framework.Configuration.Generated.DTO
         
         private long _revision;
         
-        private Framework.DomainDriven.DAL.Revisions.ModificationType _type;
+        private Framework.Persistent.ModificationType _type;
         
         private long _version;
         
@@ -5541,7 +5541,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.DomainDriven.DAL.Revisions.ModificationType Type
+        public Framework.Persistent.ModificationType Type
         {
             get
             {

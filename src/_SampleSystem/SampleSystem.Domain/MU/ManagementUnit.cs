@@ -22,7 +22,7 @@ public class ManagementUnit :
     private ICollection<ManagementUnitAndHRDepartmentLink> hRDepartments = new List<ManagementUnitAndHRDepartmentLink>();
     private ICollection<ManagementUnitAndBusinessUnitLink> businessUnits = new List<ManagementUnitAndBusinessUnitLink>();
 
-    private ManagementUnit parent;
+    private ManagementUnit? parent;
 
     private Period period;
 
@@ -64,7 +64,7 @@ public class ManagementUnit :
     ///  Supposed to be set from dto only.
     /// </summary>
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public virtual ManagementUnit Parent
+    public virtual ManagementUnit? Parent
     {
         get { return this.parent; }
         set { this.parent = value; }

@@ -8,5 +8,5 @@ public interface ICodeTypeReferenceService<in TFileType>
 
     CodeTypeReference GetCodeTypeReference(Type domainType, TFileType fileType);
 
-    ICodeFileFactoryHeader GetFileFactoryHeader(TFileType fileType, bool raiseIfNotFound = true);
+    ICodeFileFactoryHeader? GetFileFactoryHeader(TFileType fileType, bool raiseIfNotFound = true);
 }

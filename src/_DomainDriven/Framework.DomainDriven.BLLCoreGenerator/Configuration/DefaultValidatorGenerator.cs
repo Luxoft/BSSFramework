@@ -173,7 +173,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        var instanceType = attribute.CreateValidator(this.Configuration.ServiceProvider).GetLastPropertyValidator(property, this.Configuration.ServiceProvider).GetType();
+        var instanceType = attribute.CreateValidator(this.Configuration.Environment.ServiceProvider).GetLastPropertyValidator(property, this.Configuration.Environment.ServiceProvider).GetType();
 
         if (instanceType.IsInterfaceImplementation(typeof(IPropertyValidator<,>)))
         {
@@ -217,7 +217,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
     {
         if (attribute == null) throw new ArgumentNullException(nameof(attribute));
 
-        var instanceType = attribute.CreateValidator(this.Configuration.ServiceProvider).GetType();
+        var instanceType = attribute.CreateValidator(this.Configuration.Environment.ServiceProvider).GetType();
 
         if (instanceType.IsInterfaceImplementation(typeof(IClassValidator<>)))
         {
@@ -368,7 +368,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
     {
         if (attribute == null) throw new ArgumentNullException(nameof(attribute));
 
-        var identType = property.DeclaringType.GetIdentType();
+        var identType = property.DeclaringType!.GetIdentType();
 
         var validatorType = typeof(FixedPropertyValidator<,,,>).MakeGenericType(property.ReflectedType, property.PropertyType, identType, this.Configuration.Environment.PersistentDomainObjectBaseType);
 

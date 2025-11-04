@@ -7,7 +7,7 @@ using Framework.Restriction;
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>, ITypeObject<EmployeePhotoType>
+public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>
 {
     public const int DEFAULT_PHOTO_MAX_SIZE = 1024 * 1024;
 

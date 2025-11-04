@@ -110,9 +110,6 @@ public static class TrackingServiceExtensions
         }
     }
 
-
-
-
     private static IEnumerable<PropertyPath> GetPropertyPaths(this Type sourceType, Type targetType)
     {
         if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));

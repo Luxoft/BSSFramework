@@ -4,7 +4,7 @@ namespace Framework.DomainDriven.Generation.Domain;
 
 public static class CodeTypeDeclarationExtensions
 {
-    public static CodeTypeReference WithGenerateInfo<TFileType>(this CodeTypeReference typeDecl, Type domainType, TFileType fileType)
+    public static CodeTypeReference WithGenerateInfo<TFileType>(this CodeTypeReference typeDecl, Type? domainType, TFileType fileType)
     {
         if (typeDecl == null) throw new ArgumentNullException(nameof(typeDecl));
 

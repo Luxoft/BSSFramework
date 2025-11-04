@@ -6,8 +6,6 @@ using Framework.DomainDriven.Lock;
 using Framework.OData;
 using Framework.Persistent;
 
-#nullable enable
-
 namespace Framework.DomainDriven.BLL;
 
 public partial interface IDefaultDomainBLLQueryBase<in TPersistentDomainObjectBase, TDomainObject, TIdent> :

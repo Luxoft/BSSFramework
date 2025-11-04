@@ -11,15 +11,15 @@ namespace Framework.Configuration.Domain;
 /// <summary>
 /// Базовый персистентные класс
 /// </summary>
-public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBase, IDefaultAuditPersistentDomainObjectBase
+public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBase, IAuditObject
 {
     private bool active = true;
 
-    private string createdBy;
+    private string? createdBy;
     private DateTime? createDate;
 
     private DateTime? modifyDate;
-    private string modifiedBy;
+    private string? modifiedBy;
 
     #region Constructor
 
@@ -61,7 +61,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// </summary>
     [SystemProperty]
     [NotAuditedProperty]
-    public virtual string ModifiedBy
+    public virtual string? ModifiedBy
     {
         get { return this.modifiedBy.TrimNull(); }
         protected internal set { this.modifiedBy = value.TrimNull(); }
@@ -72,7 +72,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// Логин сотрудника, создавшего доменный объект
     /// </summary>
     [NotAuditedProperty]
-    public virtual string CreatedBy
+    public virtual string? CreatedBy
     {
         get { return this.createdBy.TrimNull(); }
         internal protected set { this.createdBy = value.TrimNull(); }

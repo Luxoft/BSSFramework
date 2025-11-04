@@ -60,12 +60,12 @@ public abstract class GeneratorConfiguration<TEnvironment, TFileType> : Generato
 
     public virtual Type ExceptionType { get; } = typeof(BusinessLogicException);
 
-    public virtual CodeTypeReference GetCodeTypeReference(Type domainType, TFileType fileType)
+    public virtual CodeTypeReference GetCodeTypeReference(Type? domainType, TFileType fileType)
     {
         return new CodeTypeReference(this.GetTypeFullName(domainType, fileType)).WithGenerateInfo(domainType, fileType);
     }
 
-    public virtual ICodeFileFactoryHeader GetFileFactoryHeader(TFileType fileType, bool raiseIfNotFound = true)
+    public virtual ICodeFileFactoryHeader? GetFileFactoryHeader(TFileType fileType, bool raiseIfNotFound = true)
     {
         var res = this._fileFactoryHeadersLazy.Value.GetValueOrDefault(fileType);
 
@@ -77,12 +77,12 @@ public abstract class GeneratorConfiguration<TEnvironment, TFileType> : Generato
         return res;
     }
 
-    public string GetTypeName(Type domainType, TFileType fileType)
+    public string GetTypeName(Type? domainType, TFileType fileType)
     {
         return this.GetFileFactoryHeader(fileType).GetName(domainType);
     }
 
-    protected string GetTypeFullName(Type domainType, TFileType fileType)
+    protected string GetTypeFullName(Type? domainType, TFileType fileType)
     {
         return $"{this.Namespace}.{this.GetTypeName(domainType, fileType)}";
     }

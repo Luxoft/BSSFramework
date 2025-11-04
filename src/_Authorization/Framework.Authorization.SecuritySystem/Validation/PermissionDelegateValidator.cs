@@ -4,7 +4,7 @@ using FluentValidation;
 
 using Framework.Authorization.Domain;
 using Framework.Core;
-using Framework.Persistent;
+using Framework.DomainDriven;
 
 using SecuritySystem;
 using SecuritySystem.ExternalSystem.SecurityContextStorage;
@@ -15,6 +15,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 {
     public const string Key = "PermissionDelegate";
 
+    private readonly IServiceProvider serviceProvider;
 
     private readonly TimeProvider timeProvider;
 
@@ -25,11 +26,13 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
     private readonly ISecurityRoleSource securityRoleSource;
 
     public PermissionDelegateValidator(
+        IServiceProvider serviceProvider,
         TimeProvider timeProvider,
         ISecurityContextStorage securityEntitySource,
         ISecurityContextInfoSource securityContextInfoSource,
         ISecurityRoleSource securityRoleSource)
     {
+        this.serviceProvider = serviceProvider;
         this.timeProvider = timeProvider;
         this.securityEntitySource = securityEntitySource;
         this.securityContextInfoSource = securityContextInfoSource;
@@ -226,6 +229,6 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
     private bool IsExpandable(SecurityContextType securityContextType)
     {
-        return this.GetSecurityContextInfo(securityContextType).Type.IsHierarchical();
+        return this.serviceProvider.IsHierarchical(this.GetSecurityContextInfo(securityContextType).Type);
     }
 }

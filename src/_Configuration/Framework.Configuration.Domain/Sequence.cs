@@ -1,5 +1,4 @@
-﻿using Framework.Persistent;
-using Framework.Persistent.Mapping;
+﻿using Framework.Persistent.Mapping;
 using Framework.Restriction;
 using Framework.Validation;
 
@@ -10,7 +9,7 @@ namespace Framework.Configuration.Domain;
 /// </summary>
 [UniqueGroup]
 [NotAuditedClass]
-public class Sequence : BaseDirectory, INumberObject<long>
+public class Sequence : BaseDirectory
 {
     private long number;
 

@@ -9,8 +9,6 @@ using Framework.Validation;
 
 using SecuritySystem;
 
-using SecuritySystem.Services;
-
 namespace SampleSystem.Domain;
 
 [BLLViewRole, BLLSaveRole(AllowCreate = false)]
@@ -35,13 +33,13 @@ public partial class BusinessUnit :
 
     private DateTime? firstNewBusinessStatusMonth;
     private int newBusinessStatusLeft;
-    private BusinessUnit parent;
+    private BusinessUnit? parent;
     private string projectStartMailList;
     private int rank;
     private DateTime? leastProjectStartDate;
     private DateTime? lastBusinessUnitHasNoLinkedProjectsWarningCheckDate;
     private bool needSendBusinessUnitHasNoLinkedProjectsWarning;
-    private BusinessUnitType businessUnitType;
+    private BusinessUnitType? businessUnitType;
     private BusinessUnitOptions options;
 
     private BusinessUnit businessUnitForRent;
@@ -102,7 +100,7 @@ public partial class BusinessUnit :
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public virtual BusinessUnitType BusinessUnitType
+    public virtual BusinessUnitType? BusinessUnitType
     {
         get { return this.businessUnitType; }
         set { this.businessUnitType = value; }
@@ -392,19 +390,12 @@ public partial class BusinessUnit :
         get { return this.projects; }
     }
 
-    ////[CustomSerialization(CustomSerializationMode.Ignore)]
-    ////[IgnoreValidation]
-    ////public virtual IEnumerable<SeProject> SeProjects
-    ////{
-    ////    get { return this.Projects.Where(prj => prj is SeProject).Cast<SeProject>(); }
-    ////}
-
     /// <summary>
     /// Supposed to be set from dto only.
     /// </summary>
     [IsMaster]
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public virtual BusinessUnit Parent
+    public virtual BusinessUnit? Parent
     {
         get { return this.parent; }
         set { this.parent = value; }
@@ -467,19 +458,6 @@ public partial class BusinessUnit :
         return !Equals(left, right);
     }
 
-    ////public virtual string GetNodePath()
-    ////{
-    ////    return UnitExtensions.GetNodePath(this);
-    ////}
-
-    ////public virtual IEnumerable<NotificationMessageGenerationInfo> GetNoLinkedProjectsWarningRecipients(BusinessUnit prev)
-    ////{
-    ////    IEnumerable<IEmployee> recipients = this.BusinessUnitEmployeeRoles
-    ////        .Where(r => r.Role == BusinessUnitEmployeeRoleType.Manager)
-    ////        .Select(s => s.Employee).ToList();
-
-    ////    yield return new NotificationMessageGenerationInfo(recipients, this, prev);
-    ////}
     public virtual void SetDeepLevel(int value) => this.DeepLevel = value;
 
     public override string ToString()
@@ -487,96 +465,10 @@ public partial class BusinessUnit :
         return $"{base.ToString()}";
     }
 
-    public virtual DateTime? GetLastNewBusinessStatusMonth()
-    {
-        if (this.FirstNewBusinessStatusMonth == null)
-        {
-            return null;
-        }
-
-        return this.FirstNewBusinessStatusMonth.Value.AddMonths(this.NewBusinessStatusLeft - 1);
-    }
-
-    public virtual BusinessUnit GetParentByTypeIds(IEnumerable<Guid> businessUnitTypesIds)
+    public virtual BusinessUnit? GetParentByTypeIds(IEnumerable<Guid> businessUnitTypesIds)
     {
         return businessUnitTypesIds.Contains(this.BusinessUnitType.Maybe(v => v.Id))
                        ? this
                        : this.Parent.Maybe(z => z.GetParentByTypeIds(businessUnitTypesIds));
-    }
-
-    public virtual BusinessUnit GetParentByTypes(IEnumerable<BusinessUnitType> businessUnitTypes)
-    {
-        return this.GetParentByTypeIds(businessUnitTypes.Select(z => z.Id));
-    }
-
-    public virtual string GetProjectStartMailListByHierarahy()
-    {
-        var result = this.GetAllParents()
-                         .Select(z => z.ProjectStartMailList)
-                         .Where(z => !string.IsNullOrWhiteSpace(z))
-                         .SelectMany(z => z.Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries))
-                         .Distinct(StringComparer.CurrentCultureIgnoreCase)
-                         .ToArray();
-
-        return string.Join(";", result);
-    }
-
-    public virtual bool GetNoLinkedProjectsWarningCondition(BusinessUnit prev)
-    {
-        if (prev != null &&
-            prev.NeedSendBusinessUnitHasNoLinkedProjectsWarning &&
-            prev.LastBusinessUnitHasNoLinkedProjectsWarningCheckDate.HasValue &&
-            prev.LastBusinessUnitHasNoLinkedProjectsWarningCheckDate.Value.Date == DateTime.Today)
-        {
-            return false;
-        }
-
-        if (!this.NeedSendBusinessUnitHasNoLinkedProjectsWarning ||
-            !this.LastBusinessUnitHasNoLinkedProjectsWarningCheckDate.HasValue ||
-            this.LastBusinessUnitHasNoLinkedProjectsWarningCheckDate.Value.Date != DateTime.Today)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-    public virtual bool CurrentOrParentHasDoNotPrintNameOnLabel()
-    {
-        return this.GetAllParents().Any(x => x.Options.HasFlag(BusinessUnitOptions.DoNotPrintNameOnLabel));
-    }
-
-    public virtual IEnumerable<BusinessUnitEmployeeRoleType> GetCurrentUserRoles(IRawUserAuthenticationService userAuthenticationService)
-    {
-        var currentUserName = userAuthenticationService.GetUserName();
-
-        return this.GetAllParents()
-                   .SelectMany(bu => bu.BusinessUnitEmployeeRoles)
-                   .Where(r => r.Employee.Login == currentUserName && r.Role != BusinessUnitEmployeeRoleType.None)
-                   .Select(z => z.Role).Distinct();
-    }
-
-    public virtual string GetManagersListCommaSeparatedEng()
-    {
-        return string.Join(
-                           ", ",
-                           this.BusinessUnitEmployeeRoles
-                               .Where(
-                                      z =>
-                                              z.Role == BusinessUnitEmployeeRoleType.Manager ||
-                                              z.Role == BusinessUnitEmployeeRoleType.ManagerDelegated)
-                               .Select(z => z.Employee.NameEng.ToString()));
-    }
-
-    public virtual string GetManagersListCommaSeparatedNative()
-    {
-        return string.Join(
-                           ", ",
-                           this.BusinessUnitEmployeeRoles
-                               .Where(
-                                      z =>
-                                              z.Role == BusinessUnitEmployeeRoleType.Manager ||
-                                              z.Role == BusinessUnitEmployeeRoleType.ManagerDelegated)
-                               .Select(z => z.Employee.NameNative.ToString()));
     }
 }

@@ -11,14 +11,14 @@
     <Project Path="_Authorization/Framework.Authorization.Notification/Framework.Authorization.Notification.csproj" />
     <Project Path="_Authorization/Framework.Authorization.SecuritySystem.Abstract/Framework.Authorization.SecuritySystem.Abstract.csproj" />
     <Project Path="_Authorization/Framework.Authorization.SecuritySystem/Framework.Authorization.SecuritySystem.csproj" />
-    <Project Path="_Authorization/Framework.Authorization.TestGenerate/Framework.Authorization.TestGenerate.csproj" />
+    <Project Path="_Authorization/Framework.Authorization.WebApi/Framework.Authorization.WebApi.csproj" />
   </Folder>
   <Folder Name="/Authorization/GeneratedLayout/">
     <Project Path="_Authorization/Framework.Authorization.Generated.DAL.NHibernate/Framework.Authorization.Generated.DAL.NHibernate.csproj" />
     <Project Path="_Authorization/Framework.Authorization.Generated.DTO/Framework.Authorization.Generated.DTO.csproj" />
   </Folder>
   <Folder Name="/Authorization/GeneratedTools/">
-    <Project Path="_Authorization/Framework.Authorization.WebApi/Framework.Authorization.WebApi.csproj" />
+    <Project Path="_Authorization/Framework.Authorization.TestGenerate/Framework.Authorization.TestGenerate.csproj" />
     <Project Path="_Authorization/Framework.Authorization.WebApiGenerate/Framework.Authorization.WebApiGenerate.csproj" />
   </Folder>
   <Folder Name="/Configuration/">

@@ -51,13 +51,13 @@ public class SmtpNotificationMessageSender : IMessageSender<NotificationEventDTO
     protected virtual bool IsProduction()
         => Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == Environments.Production;
 
-    public void Send(NotificationEventDTO message)
+    public async Task SendAsync(NotificationEventDTO message, CancellationToken cancellationToken)
     {
         using var client = this.GetSmtpClient();
 
         try
         {
-            this.sender.Send(client, message);
+            await this.sender.SendAsync(client, message, cancellationToken);
 
             this.SaveSentMessage(message.ToSentMessage());
         }

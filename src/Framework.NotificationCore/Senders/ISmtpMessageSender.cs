@@ -6,5 +6,5 @@ namespace Framework.NotificationCore.Senders;
 
 internal interface ISmtpMessageSender
 {
-    void Send(SmtpClient client, NotificationEventDTO message);
+    Task SendAsync(SmtpClient client, NotificationEventDTO message, CancellationToken cancellationToken);
 }

@@ -74,7 +74,7 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase> : IBe
                               DomainObject = domainObject, Operation = eventType, CustomDomainObjectType = domainObjectType
                           };
 
-            this.messageSender.Send(message);
+            await this.messageSender.SendAsync(message, cancellationToken);
         }
     }
 
@@ -119,12 +119,11 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase> : IBe
                 .Select(
                     z =>
                     {
-                        DALChanges<IDALObject> dalChanges;
-                        eventArgs.Changes.GroupDALObjectByType().TryGetValue(z, out dalChanges);
+                        eventArgs.Changes.GroupDALObjectByType().TryGetValue(z, out var dalChanges);
                         return ValueTuple.Create(z, dalChanges);
                     })
                 .Where(z => z.Item2 != null)
-                .Select(z => z.Item2)
+                .Select(z => z.Item2!)
                 .SelectMany(z => z.CreatedItems.Concat(z.UpdatedItems).Concat(z.RemovedItems).Select(q => q.Object))
                 .ToHashSet();
 

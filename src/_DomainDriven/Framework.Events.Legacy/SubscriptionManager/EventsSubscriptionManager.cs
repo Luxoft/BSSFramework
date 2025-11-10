@@ -48,7 +48,7 @@ public abstract class EventsSubscriptionManager<TPersistentDomainObjectBase> : I
 
     protected void Subscribe<TDomainObject>(
         Func<TDomainObject, EventOperation, bool> filter,
-        Func<TDomainObject, EventOperation, object> customSendObjectConvertFunc = null)
+        Func<TDomainObject, EventOperation, object>? customSendObjectConvertFunc = null)
         where TDomainObject : class, TPersistentDomainObjectBase
     {
         var listener = new Listener<TDomainObject>
@@ -72,35 +72,34 @@ public abstract class EventsSubscriptionManager<TPersistentDomainObjectBase> : I
         return this.sc.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
     }
 
-    private void Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
+    private async Task Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken cancellationToken)
         where TDomainObject : class, TPersistentDomainObjectBase
     {
-        this.cache.Value.GetRequiredService<IEnumerable<Listener<TDomainObject>>>().Foreach(
-            listener =>
+        foreach (var listener in this.cache.Value.GetRequiredService<IEnumerable<Listener<TDomainObject>>>())
+        {
+            if (listener.Filter(domainObject, domainObjectEvent))
             {
-                if (listener.Filter(domainObject, domainObjectEvent))
-                {
-                    var message = listener.CreateMessage(domainObject, domainObjectEvent);
+                var message = listener.CreateMessage(domainObject, domainObjectEvent);
 
-                    this.MessageSender.Send(message);
-                }
-            });
+                await this.MessageSender.SendAsync(message, cancellationToken);
+            }
+        }
     }
 
     async Task IEventOperationReceiver.Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken cancellationToken)
     {
         if (domainObject is TPersistentDomainObjectBase)
         {
-            new Action<TPersistentDomainObjectBase, EventOperation>(this.Receive)
-                .CreateGenericMethod(typeof(TDomainObject))
-                .Invoke(this, [domainObject, domainObjectEvent]);
+            await new Func<TPersistentDomainObjectBase, EventOperation, CancellationToken, Task>(this.Receive)
+                  .CreateGenericMethod(typeof(TDomainObject))
+                  .Invoke<Task>(this, [domainObject, domainObjectEvent, cancellationToken]);
         }
     }
 
     private class Listener<TDomainObject>
     {
-        public Func<TDomainObject, EventOperation, bool> Filter { get; init; }
+        public required Func<TDomainObject, EventOperation, bool> Filter { get; init; }
 
-        public Func<TDomainObject, EventOperation, DomainOperationSerializeData<TDomainObject>> CreateMessage { get; init; }
+        public required Func<TDomainObject, EventOperation, DomainOperationSerializeData<TDomainObject>> CreateMessage { get; init; }
     }
 }

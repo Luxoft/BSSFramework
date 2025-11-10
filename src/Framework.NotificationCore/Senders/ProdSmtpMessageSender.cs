@@ -15,7 +15,8 @@ namespace Framework.NotificationCore.Senders
     internal class ProdSmtpMessageSender(SmtpSettings settings, IRewriteReceiversService rewriteReceiversService, ILogger<SmtpNotificationMessageSender> logger)
         : ISmtpMessageSender
     {
-        public void Send(SmtpClient client, NotificationEventDTO message) => client.Send(this.ToMailMessage(message));
+        public async Task SendAsync(SmtpClient client, NotificationEventDTO message, CancellationToken cancellationToken) =>
+            await client.SendMailAsync(this.ToMailMessage(message), cancellationToken);
 
         protected virtual MailMessage ToMailMessage(NotificationEventDTO dto)
         {

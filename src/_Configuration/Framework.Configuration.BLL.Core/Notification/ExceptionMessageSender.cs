@@ -67,7 +67,7 @@ public class ExceptionMessageSender : BLLContextContainer<IConfigurationBLLConte
     /// </summary>
     /// <param name="exception">Исключение.</param>
     /// <exception cref="ArgumentNullException">Аргумент <paramref name="exception"/> равен null.</exception>
-    public void Send(Exception exception)
+    public async Task SendAsync(Exception exception, CancellationToken cancellationToken = default)
     {
         if (exception == null)
         {
@@ -95,7 +95,7 @@ public class ExceptionMessageSender : BLLContextContainer<IConfigurationBLLConte
                                                              false,
                                                              new Attachment[0]);
 
-        this.messageSender.Send(message);
+        await this.messageSender.SendAsync(message, cancellationToken);
     }
 
     /// <summary>

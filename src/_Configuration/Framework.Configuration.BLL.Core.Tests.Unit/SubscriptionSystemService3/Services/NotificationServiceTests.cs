@@ -47,7 +47,7 @@ public sealed class NotificationServiceTests : TestFixtureBase
     }
 
     [Test]
-    public void NotifyDomainObjectChanged_NoErrors_EmptyTryResultCollection()
+    public async Task NotifyDomainObjectChanged_NoErrors_EmptyTryResultCollection()
     {
         // Arrange
         var versions = this.Fixture.Create<DomainObjectVersions<string>>();
@@ -56,7 +56,7 @@ public sealed class NotificationServiceTests : TestFixtureBase
 
         var template = new MessageTemplateNotification("test", this, this.GetType(), new string[0], new string[0], new string[0], null);
 
-        this.templateSender.Send(template);
+        await this.templateSender.SendAsync(template);
 
         this.subscriptionsResolver.Resolve(versions).Returns(subscriptions);
 
@@ -73,7 +73,7 @@ public sealed class NotificationServiceTests : TestFixtureBase
     }
 
     [Test]
-    public void NotifyDomainObjectChanged_SubscriptionAndVersions_InnerComponentsCorrectInvoked()
+    public async Task NotifyDomainObjectChanged_SubscriptionAndVersions_InnerComponentsCorrectInvoked()
     {
         // Arrange
         var versions = this.Fixture.Create<DomainObjectVersions<string>>();
@@ -93,7 +93,7 @@ public sealed class NotificationServiceTests : TestFixtureBase
 
         this.templateFactory.Received().Create(Arg.Is<List<Subscription>>(v => v.SequenceEqual(subscriptions)), versions);
 
-        this.templateSender.Received().Send(template);
+        await this.templateSender.Received().SendAsync(template);
     }
 
     [Test]

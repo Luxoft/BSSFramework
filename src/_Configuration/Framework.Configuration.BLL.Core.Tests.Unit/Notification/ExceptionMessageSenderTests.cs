@@ -60,29 +60,29 @@ public sealed class ExceptionMessageSenderTests : TestFixtureBase
     }
 
     [Test]
-    public void Send_LoginWithDomain_MessageWasSent()
+    public async Task Send_LoginWithDomain_MessageWasSent()
     {
         // Arrange
 
         // Act
 
         // Assert
-        this.TestMessageWasSent(@"luxoft\John");
+        await this.TestMessageWasSent(@"luxoft\John");
     }
 
     [Test]
-    public void Send_LoginWithoutDomain_MessageWasSent()
+    public async Task Send_LoginWithoutDomain_MessageWasSent()
     {
         // Arrange
 
         // Act
 
         // Assert
-        this.TestMessageWasSent(@"John");
+        await this.TestMessageWasSent(@"John");
     }
 
     [Test]
-    public void Send_SomeException_CorrectMessageWasSent()
+    public async Task Send_SomeException_CorrectMessageWasSent()
     {
         // Arrange
         var exception = this.Fixture.Create<ArgumentOutOfRangeException>();
@@ -92,10 +92,10 @@ public sealed class ExceptionMessageSenderTests : TestFixtureBase
 
         Message sendedMessage = null;
 
-        this.messageSender.Send(Arg.Do<Message>(m => sendedMessage = m));
+        await this.messageSender.SendAsync(Arg.Do<Message>(m => sendedMessage = m));
 
         // Act
-        sender.Send(exception);
+        await sender.SendAsync(exception);
 
         // Assert
         sendedMessage.Sender.Should().Be(FromAddress);
@@ -105,55 +105,55 @@ public sealed class ExceptionMessageSenderTests : TestFixtureBase
     }
 
     [Test]
-    public void Send_InheritorSpecifiesExcludeExceptionType_MessageWasNotSent()
+    public async Task Send_InheritorSpecifiesExcludeExceptionType_MessageWasNotSent()
     {
         // Arrange
         var sender = this.Fixture.Create<TestingExceptionMessageSender>();
         sender.SetExceptTypes(typeof(InvalidOperationException));
 
         // Act
-        sender.Send(
-                    this.Fixture.Create<InvalidOperationException>());
+        await sender.SendAsync(
+            this.Fixture.Create<InvalidOperationException>());
 
         // Assert
-        this.messageSender.DidNotReceive().Send(Arg.Any<Message>());
+        await this.messageSender.DidNotReceive().SendAsync(Arg.Any<Message>());
     }
 
     [Test]
-    public void Send_ValidationException_MessageWasNotSent()
+    public async Task Send_ValidationException_MessageWasNotSent()
     {
         // Arrange
 
         // Act
 
         // Assert
-        this.TestMessageWasNotSent(this.Fixture.Create<ValidationException>());
+        await this.TestMessageWasNotSent(this.Fixture.Create<ValidationException>());
     }
 
     [Test]
-    public void Send_AggregateValidationException_MessageWasNotSent()
+    public async Task Send_AggregateValidationException_MessageWasNotSent()
     {
         // Arrange
 
         // Act
 
         // Assert
-        this.TestMessageWasNotSent(new AggregateValidationException(Enumerable.Empty<ValidationExceptionBase>()));
+        await this.TestMessageWasNotSent(new AggregateValidationException([]));
     }
 
-    private void TestMessageWasNotSent(Exception exception)
+    private async Task TestMessageWasNotSent(Exception exception)
     {
         // Arrange
         var sender = this.Fixture.Create<ExceptionMessageSender>();
 
         // Act
-        sender.Send(exception);
+        await sender.SendAsync(exception);
 
         // Assert
-        this.messageSender.DidNotReceive().Send(Arg.Any<Message>());
+        await this.messageSender.DidNotReceive().SendAsync(Arg.Any<Message>());
     }
 
-    private void TestMessageWasSent(string login)
+    private async Task TestMessageWasSent(string login)
     {
         // Arrange
         this.authorizationBLLContext.CurrentPrincipalSource.CurrentPrincipal.Returns(new Principal { Name = login });
@@ -161,11 +161,10 @@ public sealed class ExceptionMessageSenderTests : TestFixtureBase
         var sender = this.Fixture.Create<ExceptionMessageSender>();
 
         // Act
-        sender.Send(
-                    this.Fixture.Create<ArgumentOutOfRangeException>());
+        await sender.SendAsync(this.Fixture.Create<ArgumentOutOfRangeException>());
 
         // Assert
-        this.messageSender.DidNotReceive().Send(Arg.Any<Message>());
+        await this.messageSender.DidNotReceive().SendAsync(Arg.Any<Message>());
     }
 
     public class TestingExceptionMessageSender : ExceptionMessageSender

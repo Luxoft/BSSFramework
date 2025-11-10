@@ -52,12 +52,12 @@ internal sealed class ByRolesRecipientsResolverTyped<TBLLContext> : ByRolesRecip
 
         var method = this
                      .GetType()
-                     .GetMethod(nameof(this.GetNotificationFilterGroupTyped), BindingFlags.Instance | BindingFlags.NonPublic)
+                     .GetMethod(nameof(this.GetNotificationFilterGroupTyped), BindingFlags.Instance | BindingFlags.NonPublic)!
                      .MakeGenericMethod(typeof(T), securityItemType);
 
         var notificationFilterGroup = (NotificationFilterGroup)method.Invoke(
                                                                              this,
-                                                                             new object[] { securityItem, versions });
+                                                                             new object[] { securityItem, versions })!;
 
         return notificationFilterGroup;
     }

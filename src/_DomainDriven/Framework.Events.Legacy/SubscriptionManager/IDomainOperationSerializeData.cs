@@ -6,7 +6,7 @@ public interface IDomainOperationSerializeData<out TDomainObject>
 
     EventOperation Operation { get; }
 
-    object CustomSendObject { get; }
+    object? CustomSendObject { get; }
 
     Type DomainObjectType { get; }
 }

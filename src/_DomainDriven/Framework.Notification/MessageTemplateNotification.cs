@@ -54,9 +54,9 @@ public class MessageTemplateNotification
             Type contextObjectType,
             IEnumerable<string> receivers,
             IEnumerable<Attachment> attachments,
-            ISubscription subscription = null,
+            ISubscription? subscription = null,
             bool sendWithEmptyListOfRecipients = false,
-            Type sourceContextObjectType = null)
+            Type? sourceContextObjectType = null)
     {
         if (receivers == null)
         {

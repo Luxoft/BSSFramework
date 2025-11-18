@@ -1,26 +1,20 @@
 ﻿using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.Repository;
 using Framework.Notification.DTO;
+
+using SecuritySystem.Attributes;
 
 namespace Framework.Configuration.BLL;
 
 /// <summary>
 /// Sender для отправки нотификакий в локальную бд
 /// </summary>
-public class LocalDBNotificationEventDTOMessageSender : BLLContextContainer<IConfigurationBLLContext>, IMessageSender<NotificationEventDTO>
+public class LocalDBNotificationEventDTOMessageSender([DisabledSecurity] IRepository<DomainObjectNotification> domainObjectNotificationRepository) : IMessageSender<NotificationEventDTO>
 {
-    /// <summary>
-    /// Конструктор
-    /// </summary>
-    /// <param name="context">Контекст утилит</param>
-    public LocalDBNotificationEventDTOMessageSender(IConfigurationBLLContext context)
-            : base(context)
-    {
-    }
-
     /// <inheritdoc />
-    public void Send(NotificationEventDTO dto)
+    public async Task SendAsync(NotificationEventDTO dto, CancellationToken cancellationToken)
     {
         if (dto == null)
         {
@@ -34,6 +28,6 @@ public class LocalDBNotificationEventDTOMessageSender : BLLContextContainer<ICon
                                      Size = serializedData.Length
                              };
 
-        this.Context.Logics.DomainObjectNotification.Save(dbNotification);
+        await domainObjectNotificationRepository.SaveAsync(dbNotification, cancellationToken);
     }
 }

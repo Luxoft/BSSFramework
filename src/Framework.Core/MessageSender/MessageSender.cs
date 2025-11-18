@@ -2,7 +2,7 @@
 
 public abstract class MessageSender<TMessage> : IMessageSender<TMessage>
 {
-    public abstract void Send(TMessage message);
+    public abstract Task SendAsync(TMessage message, CancellationToken cancellationToken);
 
 
     public static readonly IMessageSender<TMessage> Empty = new EmptyMessageSender();
@@ -26,7 +26,7 @@ public abstract class MessageSender<TMessage> : IMessageSender<TMessage>
 
         }
 
-        public override void Send(TMessage message)
+        public override async Task SendAsync (TMessage message, CancellationToken cancellationToken)
         {
 
         }
@@ -39,7 +39,7 @@ public abstract class MessageSender<TMessage> : IMessageSender<TMessage>
 
         }
 
-        public override void Send(TMessage message)
+        public override async Task SendAsync(TMessage message, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

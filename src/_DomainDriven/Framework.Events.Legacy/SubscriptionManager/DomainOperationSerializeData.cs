@@ -1,14 +1,14 @@
 ﻿namespace Framework.Events.Legacy;
 
-public struct DomainOperationSerializeData<TDomainObject> : IDomainOperationSerializeData<TDomainObject>
+public readonly struct DomainOperationSerializeData<TDomainObject> : IDomainOperationSerializeData<TDomainObject>
 {
-    public TDomainObject DomainObject { get; set; }
+    public TDomainObject DomainObject { get; init; }
 
-    public EventOperation Operation { get; set; }
+    public EventOperation Operation { get; init; }
 
-    public object CustomSendObject { get; set; }
+    public object? CustomSendObject { get; init; }
 
-    public Type CustomDomainObjectType { get; set; }
+    public Type CustomDomainObjectType { get; init; }
 
     Type IDomainOperationSerializeData<TDomainObject>.DomainObjectType => this.CustomDomainObjectType ?? typeof(TDomainObject);
 }

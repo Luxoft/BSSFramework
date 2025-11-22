@@ -2,7 +2,6 @@
 
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.Notification;
 using Framework.Notification.DTO;
 using Framework.Persistent;
@@ -11,19 +10,13 @@ using CommonFramework;
 
 namespace Framework.Configuration.BLL.Notification;
 
-public class TemplateMessageSender : BLLContextContainer<IConfigurationBLLContext>, IMessageSender<MessageTemplateNotification>
+public class TemplateMessageSender(
+    IConfigurationBLLContext context,
+    IMessageSender<NotificationEventDTO> notificationEventSender,
+    IDefaultMailSenderContainer defaultMailSenderContainer)
+    : IMessageSender<MessageTemplateNotification>
 {
-    private readonly IDefaultMailSenderContainer defaultMailSenderContainer;
-    private readonly IMessageSender<NotificationEventDTO> notificationEventSender;
-
-    public TemplateMessageSender(IConfigurationBLLContext context, IMessageSender<NotificationEventDTO> notificationEventSender, IDefaultMailSenderContainer defaultMailSenderContainer)
-            : base(context)
-    {
-        this.defaultMailSenderContainer = defaultMailSenderContainer ?? throw new ArgumentNullException(nameof(defaultMailSenderContainer));
-        this.notificationEventSender = notificationEventSender ?? throw new ArgumentNullException(nameof(notificationEventSender));
-    }
-
-    public void Send(MessageTemplateNotification message)
+    public async Task SendAsync(MessageTemplateNotification message, CancellationToken cancellationToken)
     {
         if (message == null)
         {
@@ -43,16 +36,11 @@ public class TemplateMessageSender : BLLContextContainer<IConfigurationBLLContex
         var notification = this.CreateNotification(message);
         notification.Message.IsBodyHtml = true;
 
-        this.notificationEventSender.Send(new NotificationEventDTO(notification));
+        await notificationEventSender.SendAsync(new NotificationEventDTO(notification), cancellationToken);
     }
 
     private Framework.Notification.Notification CreateNotification(MessageTemplateNotification message)
     {
-        if (message == null)
-        {
-            throw new ArgumentNullException(nameof(message));
-        }
-
         var messageTemplate = new MessageTemplate();
 
         var splittedReceivers = message.Receivers.SelectMany(z => z.Split(new[] { ';', ' ' }, StringSplitOptions.RemoveEmptyEntries)).ToList();
@@ -61,9 +49,9 @@ public class TemplateMessageSender : BLLContextContainer<IConfigurationBLLContex
 
         var includeAttachments = message.Subscription.Maybe(s => s.IncludeAttachments, true);
 
-        var sender = message.Subscription.Maybe(s => s.Sender) ?? this.defaultMailSenderContainer.DefaultSender;
+        var sender = message.Subscription.Maybe(s => s.Sender) ?? defaultMailSenderContainer.DefaultSender;
 
-        var mailMessage = new MessageTemplateBLL(this.Context).CreateMailMessage(
+        var mailMessage = new MessageTemplateBLL(context).CreateMailMessage(
                                                                message,
                                                                messageTemplate,
                                                                includeAttachments,

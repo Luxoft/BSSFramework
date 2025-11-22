@@ -1,5 +1,4 @@
-﻿using CommonFramework;
-using CommonFramework.Maybe;
+﻿using CommonFramework.Maybe;
 
 using Framework.Core;
 
@@ -121,7 +120,11 @@ public class EmployeeProjectionTests : TestBase
     {
         // Arrange
         var logins = new[] { "PST_AEmployee", "PST_BEmployee", "PST_ZEmployee" };
-        logins.Foreach(login => this.DataHelper.SaveEmployee(login: login));
+
+        foreach (var login in logins)
+        {
+            this.DataHelper.SaveEmployee(login: login);
+        }
 
         var expected = logins.Reverse().ToArray(Maybe.Return);
         var controller = this.GetControllerEvaluator<EmployeeQueryController>();

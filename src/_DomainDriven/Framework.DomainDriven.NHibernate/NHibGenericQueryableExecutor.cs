@@ -14,7 +14,7 @@ namespace Framework.DomainDriven.NHibernate;
 
 public class NHibGenericQueryableExecutor(IServiceProvider serviceProvider) : GenericQueryableExecutor
 {
-    protected override Type ExtensionsType { get; } = typeof(LinqExtensionMethods);
+    protected override IReadOnlyList<Type> ExtensionsTypes { get; } = [typeof(LinqExtensionMethods)];
 
     public override Task<TResult> ExecuteAsync<TResult>(Expression<Func<Task<TResult>>> expression)
     {

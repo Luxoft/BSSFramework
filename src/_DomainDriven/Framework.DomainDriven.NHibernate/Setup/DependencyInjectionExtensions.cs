@@ -7,8 +7,7 @@ using Framework.DependencyInjection;
 using Framework.DomainDriven.DALExceptions;
 using Framework.DomainDriven.NHibernate.Audit;
 
-using GenericQueryable.Fetching;
-using GenericQueryable.Services;
+using GenericQueryable.DependencyInjection;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,13 +27,8 @@ public static class DependencyInjectionExtensions
 
         services.AddScoped<IDBSessionSettings, DBSessionSettings>();
 
-        
-        services.AddSingleton<IGenericQueryableExecutor, GenericQueryableExecutor>();
-        services.AddSingleton<IMethodRedirector, MethodRedirector>();
-
         services.AddSingleton(typeof(INHibRawFetchService<>), typeof(NHibRawFetchService<>));
-        services.AddSingleton(typeof(IFetchService), typeof(NHibFetchService));
-        services.AddSingleton<ITargetMethodExtractor, NhibTargetMethodExtractor>();
+        services.AddGenericQueryable(v => v.SetFetchService<NHibFetchService>().SetTargetMethodExtractor<NhibTargetMethodExtractor>());
 
         //For close db session by middleware
         services.AddScopedFromLazyObject<INHibSession, NHibSession>();

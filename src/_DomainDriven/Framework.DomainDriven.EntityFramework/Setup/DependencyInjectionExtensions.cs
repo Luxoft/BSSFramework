@@ -6,9 +6,8 @@ using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.DALExceptions;
 
+using GenericQueryable.DependencyInjection;
 using GenericQueryable.EntityFramework;
-using GenericQueryable.Fetching;
-using GenericQueryable.Services;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,12 +25,7 @@ public static class DependencyInjectionExtensions
 
         services.AddScoped<IDBSessionSettings, DBSessionSettings>();
 
-
-        services.AddSingleton<IMethodRedirector, MethodRedirector>();
-        services.AddSingleton<IGenericQueryableExecutor, GenericQueryableExecutor>();
-
-        services.AddSingleton<IFetchService, EfFetchService>();
-        services.AddSingleton<ITargetMethodExtractor, EfTargetMethodExtractor>();
+        services.AddGenericQueryable(v => v.SetFetchService<EfFetchService>().SetTargetMethodExtractor<EfTargetMethodExtractor>());
 
         //For close db session by middleware
         services.AddScopedFromLazyObject<IEfSession, EfSession>();

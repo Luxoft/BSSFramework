@@ -1,75 +1,116 @@
-﻿using Framework.Core;
-
-using NHibernate.Linq;
-
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using System.Reflection;
 
 using CommonFramework;
-using CommonFramework.DictionaryCache;
+
+using GenericQueryable.Fetching;
+
+using Microsoft.Extensions.DependencyInjection;
+
+using NHibernate.Linq;
 
 namespace Framework.DomainDriven.NHibernate;
 
-public class NHibFetchService<TSource> : INHibFetchService<TSource>
+public class NHibFetchService(IServiceProvider serviceProvider) : IFetchService
 {
-    private readonly IDictionaryCache<string, Func<IQueryable<TSource>, IQueryable<TSource>>> cache =
-        new DictionaryCache<string, Func<IQueryable<TSource>, IQueryable<TSource>>>(
-            path =>
-            {
-                var propertyPath = PropertyPath.Create(typeof(TSource), path.Split('.'));
-
-                var fetchExp = GetWithFetchExpr([propertyPath]);
-
-                return fetchExp.Compile();
-
-            }).WithLock();
-
-    public IQueryable<TSource> ApplyFetch(IQueryable<TSource> source, string path)
+    public IQueryable<TSource> ApplyFetch<TSource>(IQueryable<TSource> source, FetchRule<TSource> fetchRule)
+        where TSource: class
     {
-        return this.cache[path].Invoke(source);
-    }
-
-    public static Expression<Func<IQueryable<TSource>, IQueryable<TSource>>> GetWithFetchExpr(IEnumerable<PropertyPath> paths)
-    {
-        var sourceParam = Expression.Parameter(typeof(IQueryable<TSource>));
-
-        var body = paths.Aggregate((Expression)sourceParam, (expr, propertyPath) =>
+        return fetchRule switch
         {
-            var internalParam = (Expression)Expression.Parameter(typeof(IQueryable<TSource>));
+            UntypedFetchRule<TSource> untypedFetchRule => serviceProvider.GetRequiredService<INHibRawFetchService<TSource>>().ApplyFetch(source, untypedFetchRule.Path),
 
-            var queryPath = propertyPath.Aggregate(internalParam, ApplyFetch);
+            PropertyFetchRule<TSource> propertyFetchRule => this.ApplyFetch(source, propertyFetchRule),
 
-
-            return queryPath.Override(internalParam, expr);
-        });
-
-
-        var result = Expression.Lambda<Func<IQueryable<TSource>, IQueryable<TSource>>>(body, sourceParam);
-
-        return result;
+            _ => throw new ArgumentOutOfRangeException(nameof(fetchRule))
+        };
     }
 
-    private static Expression ApplyFetch(Expression queryExpression, PropertyInfo property)
+    protected IQueryable<TSource> ApplyFetch<TSource>(IQueryable<TSource> source, PropertyFetchRule<TSource> fetchRule)
+        where TSource : class
     {
-        if (queryExpression == null) throw new ArgumentNullException(nameof(queryExpression));
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        return fetchRule.Paths.Aggregate(source, this.ApplyFetch);
+    }
 
-        var isContinue = queryExpression.Type.GetGenericTypeDefinition() == typeof(INhFetchRequest<,>);
-        var isCollection = property.PropertyType.IsCollection();
+    private IQueryable<TSource> ApplyFetch<TSource>(IQueryable<TSource> source, FetchPath fetchPath)
+        where TSource : class
+    {
+        return fetchPath
+               .Properties
+               .Select((prop, index) => new { Prop = prop, IsFirst = index == 0 })
+               .Aggregate(source, (q, pair) => this.ApplyFetch(q, pair.Prop, pair.IsFirst));
+    }
 
-        var relatedType = isCollection ? property.PropertyType.GetCollectionElementType() : property.PropertyType;
+    private IQueryable<TSource> ApplyFetch<TSource>(IQueryable<TSource> source, LambdaExpression prop, bool isFirst)
+        where TSource : class
+    {
+        return this.GetFetchMethod<TSource>(prop, isFirst).Invoke<IQueryable<TSource>>(this, source, prop);
+    }
 
-        var methodName = isContinue ? isCollection ? "ThenFetchMany" : "ThenFetch"
-                         : isCollection ? "FetchMany" : "Fetch";
 
-        var baseMethod = typeof(EagerFetchingExtensionMethods).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public, true);
+    private MethodInfo GetFetchMethod<TSource>(LambdaExpression prop, bool isFirst)
+        where TSource : class
+    {
+        var prevPropertyType = prop.Parameters.Single().Type;
 
-        var method = baseMethod.MakeGenericMethod(queryExpression.Type.GetGenericArguments().Concat(new[] { relatedType }).ToArray());
+        var nextPropertyType = prop.Body.Type;
 
-        var sourceParameter = Expression.Parameter(queryExpression.Type.GetGenericArguments()[isContinue ? 1 : 0]);
+        var nextElementType = nextPropertyType.IsGenericType ? nextPropertyType.GetInterfaceImplementationArgument(typeof(IEnumerable<>)) : null;
 
-        var lambda = Expression.Lambda(Expression.Property(sourceParameter, property), sourceParameter);
+        if (isFirst)
+        {
+            if (nextElementType != null)
+            {
+                return new Func<IQueryable<TSource>, Expression<Func<TSource, IEnumerable<Ignore>>>, INhFetchRequest<TSource, Ignore>>(this.ApplyFetch)
+                    .CreateGenericMethod(typeof(TSource), nextElementType);
+            }
+            else
+            {
+                return new Func<IQueryable<TSource>, Expression<Func<TSource, Ignore>>, INhFetchRequest<TSource, Ignore>>(this.ApplyFetch)
+                    .CreateGenericMethod(typeof(TSource), nextPropertyType);
+            }
+        }
+        else
+        {
+            if (nextElementType != null)
+            {
+                return new Func<INhFetchRequest<TSource, Ignore>, Expression<Func<Ignore, IEnumerable<Ignore>>>, INhFetchRequest<TSource, Ignore>>(
+                        this.ApplyFetchThen)
+                    .CreateGenericMethod(typeof(TSource), prevPropertyType, nextElementType);
+            }
+            else
+            {
+                return new Func<INhFetchRequest<TSource, Ignore>, Expression<Func<Ignore, Ignore>>, INhFetchRequest<TSource, Ignore>>(
+                        this.ApplyFetchThen)
+                    .CreateGenericMethod(typeof(TSource), prevPropertyType, nextPropertyType);
+            }
+        }
+    }
 
-        return Expression.Call(method, queryExpression, lambda);
+    private INhFetchRequest<TSource, TProperty> ApplyFetch<TSource, TProperty>(IQueryable<TSource> source, Expression<Func<TSource, TProperty>> prop)
+        where TSource : class
+    {
+        return source.Fetch(prop);
+    }
+    private INhFetchRequest<TSource, TProperty> ApplyFetch<TSource, TProperty>(IQueryable<TSource> source, Expression<Func<TSource, IEnumerable<TProperty>>> prop)
+        where TSource : class
+    {
+        return source.FetchMany(prop);
+    }
+
+    private INhFetchRequest<TSource, TNextProperty> ApplyFetchThen<TSource, TPrevProperty, TNextProperty>(
+        INhFetchRequest<TSource, TPrevProperty> source,
+        Expression<Func<TPrevProperty, TNextProperty>> prop)
+        where TSource : class
+    {
+        return source.ThenFetch(prop);
+    }
+
+    private INhFetchRequest<TSource, TNextProperty> ApplyFetchThen<TSource, TPrevProperty, TNextProperty>(
+        INhFetchRequest<TSource, TPrevProperty> source,
+        Expression<Func<TPrevProperty, IEnumerable<TNextProperty>>> prop)
+        where TSource : class
+    {
+        return source.ThenFetchMany(prop);
     }
 }

@@ -8,8 +8,6 @@ using Framework.Restriction;
 
 using Microsoft.SqlServer.Management.Smo;
 
-using NHibernate.Util;
-
 using Index = Microsoft.SqlServer.Management.Smo.Index;
 
 namespace Framework.DomainDriven.DBGenerator;

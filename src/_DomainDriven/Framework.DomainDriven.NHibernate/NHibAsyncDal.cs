@@ -5,7 +5,7 @@ using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.Lock;
 using Framework.Persistent;
 
-using GenericQueryable;
+using GenericQueryable.Services;
 
 using NHibernate;
 

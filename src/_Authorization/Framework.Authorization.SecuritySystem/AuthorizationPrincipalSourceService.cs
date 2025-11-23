@@ -6,7 +6,6 @@ using Framework.Authorization.Domain;
 using Framework.DomainDriven.Repository;
 
 using GenericQueryable;
-using GenericQueryable.Fetching;
 
 using SecuritySystem;
 using SecuritySystem.Attributes;

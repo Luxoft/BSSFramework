@@ -11,7 +11,7 @@ internal static class QueryableExtensions
 {
     public static IQueryable<TDomainObject> WithFetchs<TDomainObject>(
         this IQueryable<TDomainObject> queryable,
-        IFetchContainer<TDomainObject> fetchContainer)
+        IFetchContainer<TDomainObject>? fetchContainer)
     {
         if (queryable == null) throw new ArgumentNullException(nameof(queryable));
 
@@ -35,7 +35,7 @@ internal static class QueryableExtensions
                 new DictionaryCache<ReadOnlyCollection<PropertyPath>, Func<IQueryable<TDomainObject>, IQueryable<TDomainObject>>>(
                     paths =>
                     {
-                        var fetchExpr = NHibFetchService<TDomainObject>.GetWithFetchExpr(paths);
+                        var fetchExpr = NHibRawFetchService<TDomainObject>.GetWithFetchExpr(paths);
 
                         return fetchExpr.Compile();
 

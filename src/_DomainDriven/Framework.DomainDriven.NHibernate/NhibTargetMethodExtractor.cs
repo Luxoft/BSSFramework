@@ -6,5 +6,5 @@ namespace Framework.DomainDriven.NHibernate;
 
 public class NhibTargetMethodExtractor : TargetMethodExtractor
 {
-    protected override IReadOnlyList<Type> ExtensionsTypes { get; } = [typeof(LinqExtensionMethods)];
+    protected override IReadOnlyList<Type> ExtensionsTypes { get; } = [typeof(LinqExtensionMethods), typeof(NhibLinqExtensions)];
 }

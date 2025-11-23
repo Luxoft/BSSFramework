@@ -5,7 +5,7 @@ using CommonFramework;
 using Framework.Authorization.Domain;
 using Framework.DomainDriven.Repository;
 
-using GenericQueryable.Fetching;
+using GenericQueryable;
 
 using SecuritySystem;
 using SecuritySystem.Attributes;

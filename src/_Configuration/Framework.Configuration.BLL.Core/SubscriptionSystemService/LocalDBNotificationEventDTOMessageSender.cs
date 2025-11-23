@@ -1,6 +1,5 @@
 ﻿using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Repository;
 using Framework.Notification.DTO;
 

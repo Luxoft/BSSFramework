@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-using GenericQueryable;
+using GenericQueryable.Services;
 
 using NHibernate;
 using NHibernate.Engine;

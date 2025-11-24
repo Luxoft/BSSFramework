@@ -18,94 +18,97 @@ namespace Framework.DomainDriven.ApplicationCore;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection RegisterGenericServices(this IServiceCollection services)
+    extension(IServiceCollection services)
     {
-        services.TryAddSingleton(TimeProvider.System);
-
-        services.AddSingleton<IExceptionExpander, ExceptionExpander>();
-
-        services.AddScoped(typeof(IUpdateDeepLevelService<>), typeof(UpdateDeepLevelService<>));
-
-        services.RegisterFinancialYearServices();
-        services.RegisterRepository();
-        services.RegisterAuthenticationServices();
-        services.RegisterEvaluators();
-        services.RegistryGenericDatabaseVisitors();
-
-        services.AddSingleton<IInitializeManager, InitializeManager>();
-        services.AddScoped<IEventOperationSender, EventOperationSender>();
-
-        services.AddSingleton<IJobServiceEvaluatorFactory, JobServiceEvaluatorFactory>();
-        services.AddSingleton(typeof(IJobServiceEvaluator<>), typeof(JobServiceEvaluator<>));
-        services.AddScoped<IJobMiddlewareFactory, JobMiddlewareFactory>();
-
-        return services;
-    }
-
-    public static IServiceCollection RegisterListeners(this IServiceCollection services, Action<IDALListenerSetupObject> setup)
-    {
-        var setupObject = new DALListenerSetupObject();
-
-        setup(setupObject);
-
-        foreach (var setupObjectInitAction in setupObject.InitActions)
+        public IServiceCollection RegisterGenericServices()
         {
-            setupObjectInitAction(services);
+            services.TryAddSingleton(TimeProvider.System);
+
+            services.AddSingleton<IExceptionExpander, ExceptionExpander>();
+
+            services.AddScoped(typeof(IUpdateDeepLevelService<>), typeof(UpdateDeepLevelService<>));
+
+            services.RegisterFinancialYearServices();
+            services.RegisterRepository();
+            services.RegisterAuthenticationServices();
+            services.RegisterEvaluators();
+            services.RegistryGenericDatabaseVisitors();
+
+            services.AddSingleton<IInitializeManager, InitializeManager>();
+            services.AddScoped<IEventOperationSender, EventOperationSender>();
+
+            services.AddSingleton<IJobServiceEvaluatorFactory, JobServiceEvaluatorFactory>();
+            services.AddSingleton(typeof(IJobServiceEvaluator<>), typeof(JobServiceEvaluator<>));
+            services.AddScoped<IJobMiddlewareFactory, JobMiddlewareFactory>();
+
+            return services;
         }
 
-        return services;
-    }
+        public IServiceCollection RegisterListeners(Action<IDALListenerSetupObject> setup)
+        {
+            var setupObject = new DALListenerSetupObject();
 
-    private static IServiceCollection RegisterRepository(this IServiceCollection services)
-    {
-        services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.Disabled), typeof(Repository<>));
-        services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.View), typeof(ViewRepository<>));
-        services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.Edit), typeof(EditRepository<>));
+            setup(setupObject);
 
-        services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+            foreach (var setupObjectInitAction in setupObject.InitActions)
+            {
+                setupObjectInitAction(services);
+            }
 
-        services.AddScoped(typeof(IRepositoryFactory<>), typeof(RepositoryFactory<>));
-        services.AddScoped(typeof(IGenericRepositoryFactory<,>), typeof(GenericRepositoryFactory<,>));
+            return services;
+        }
 
-        return services;
-    }
+        private IServiceCollection RegisterRepository()
+        {
+            services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.Disabled), typeof(Repository<>));
+            services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.View), typeof(ViewRepository<>));
+            services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.Edit), typeof(EditRepository<>));
 
-    private static IServiceCollection RegisterFinancialYearServices(this IServiceCollection services)
-    {
-        services.AddSingleton<IFinancialYearCalculator, FinancialYearCalculator>();
-        services.AddSingleton<FinancialYearServiceSettings>();
-        services.AddSingleton<IFinancialYearService, FinancialYearService>();
+            services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
 
-        return services;
-    }
+            services.AddScoped(typeof(IRepositoryFactory<>), typeof(RepositoryFactory<>));
+            services.AddScoped(typeof(IGenericRepositoryFactory<,>), typeof(GenericRepositoryFactory<,>));
 
-    private static IServiceCollection RegisterEvaluators(this IServiceCollection services)
-    {
-        services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
-        services.AddSingleton(typeof(IServiceEvaluator<>), typeof(ServiceEvaluator<>));
+            return services;
+        }
 
-        return services;
-    }
+        private IServiceCollection RegisterFinancialYearServices()
+        {
+            services.AddSingleton<IFinancialYearCalculator, FinancialYearCalculator>();
+            services.AddSingleton<FinancialYearServiceSettings>();
+            services.AddSingleton<IFinancialYearService, FinancialYearService>();
 
-    private static IServiceCollection RegisterAuthenticationServices(this IServiceCollection services)
-    {
-        services.AddScoped<ApplicationUserAuthenticationService>();
-        services.AddScopedFrom<IImpersonateService, ApplicationUserAuthenticationService>();
+            return services;
+        }
 
-        return services;
-    }
+        private IServiceCollection RegisterEvaluators()
+        {
+            services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
+            services.AddSingleton(typeof(IServiceEvaluator<>), typeof(ServiceEvaluator<>));
 
-    private static IServiceCollection RegistryGenericDatabaseVisitors(this IServiceCollection services)
-    {
-        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
-        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPeriodItem>();
-        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDefaultItem>();
-        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerMathItem>();
+            return services;
+        }
 
-        services.AddSingleton<IIdPropertyResolver, IdPropertyResolver>();
+        private IServiceCollection RegisterAuthenticationServices()
+        {
+            services.AddScoped<ApplicationUserAuthenticationService>();
+            services.AddScopedFrom<IImpersonateService, ApplicationUserAuthenticationService>();
 
-        services.AddScoped<IExpressionVisitorContainer, ExpressionVisitorAggregator>();
+            return services;
+        }
 
-        return services;
+        private IServiceCollection RegistryGenericDatabaseVisitors()
+        {
+            services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
+            services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPeriodItem>();
+            services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDefaultItem>();
+            services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerMathItem>();
+
+            services.AddSingleton<IIdPropertyResolver, IdPropertyResolver>();
+
+            services.AddScoped<IExpressionVisitorContainer, ExpressionVisitorAggregator>();
+
+            return services;
+        }
     }
 }

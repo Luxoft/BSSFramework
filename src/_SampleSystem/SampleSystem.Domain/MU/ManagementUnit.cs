@@ -3,6 +3,7 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Restriction;
+
 using SecuritySystem;
 
 namespace SampleSystem.Domain;
@@ -14,7 +15,6 @@ public class ManagementUnit :
         IMaster<ManagementUnitAndBusinessUnitLink>,
         IMaster<ManagementUnitAndHRDepartmentLink>,
         IPeriodObject,
-        IHierarchicalLevelObjectDenormalized,
         ISecurityContext
 {
     private readonly ICollection<ManagementUnit> children = new List<ManagementUnit>();
@@ -73,8 +73,6 @@ public class ManagementUnit :
     [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Client | DTORole.Report)]
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event | DTORole.Integration)]
     public virtual IEnumerable<ManagementUnit> Children => this.children;
-
-    public virtual void SetDeepLevel(int value) => this.DeepLevel = value;
 
     ManagementUnit IUnit<ManagementUnit>.CurrentObject => this;
 

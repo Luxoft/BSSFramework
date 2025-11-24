@@ -2,14 +2,14 @@
 
 namespace Framework.Authorization.Notification;
 
-internal class PermissionLevelInfo
+public class PermissionLevelInfo
 {
     public required Permission Permission { get; init; }
 
     public required string LevelInfo { get; init; }
 }
 
-internal class FullPermissionLevelInfo : PermissionLevelInfo
+public class FullPermissionLevelInfo : PermissionLevelInfo
 {
     public required int Level { get; init; }
 }

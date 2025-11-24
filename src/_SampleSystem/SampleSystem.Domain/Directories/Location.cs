@@ -14,7 +14,6 @@ public class Location :
         BaseDirectory,
         IMaster<Location>,
         IDetail<Location>,
-        IHierarchicalLevelObjectDenormalized,
         ISecurityContext
 {
     private readonly ICollection<Location> children = new List<Location>();
@@ -130,7 +129,6 @@ public class Location :
         get { return base.Active; }
         set { base.Active = value; }
     }
-    public virtual void SetDeepLevel(int value) => this.DeepLevel = value;
 
     Location? IDetail<Location>.Master
     {

@@ -165,7 +165,7 @@ public class ConfigurationContextFacade
             throw new ArgumentNullException(nameof(notificationFilterGroups));
         }
 
-        var result = this.context.Authorization.NotificationPrincipalExtractor.GetNotificationPrincipalsByRoles(securityRoles, notificationFilterGroups);
+        var result = this.context.Authorization.NotificationPrincipalExtractor.GetPrincipalsAsync(securityRoles, notificationFilterGroups).GetAwaiter().GetResult();
 
         return result;
     }
@@ -183,7 +183,7 @@ public class ConfigurationContextFacade
             throw new ArgumentNullException(nameof(securityRoles));
         }
 
-        var result = this.context.Authorization.NotificationPrincipalExtractor.GetNotificationPrincipalsByRoles(securityRoles, Array.Empty<NotificationFilterGroup>());
+        var result = this.context.Authorization.NotificationPrincipalExtractor.GetPrincipalsAsync(securityRoles, []).GetAwaiter().GetResult();
 
         return result;
     }

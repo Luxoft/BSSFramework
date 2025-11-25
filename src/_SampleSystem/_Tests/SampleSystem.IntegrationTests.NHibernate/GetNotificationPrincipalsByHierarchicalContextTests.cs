@@ -1,5 +1,4 @@
 ﻿using Framework.Authorization.Notification;
-using Framework.Core;
 using Framework.DomainDriven;
 
 using SampleSystem.Domain;
@@ -15,15 +14,21 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
     private BusinessUnitIdentityDTO rootBusinessUnit;
 
     private BusinessUnitIdentityDTO child_1_0_BusinessUnit;
+
     private BusinessUnitIdentityDTO child_1_1_BusinessUnit;
+
     private BusinessUnitIdentityDTO child_2_0_BusinessUnit;
+
     private BusinessUnitIdentityDTO child_2_1_BusinessUnit;
 
     private ManagementUnitIdentityDTO rootManagementUnit;
 
     private ManagementUnitIdentityDTO child_1_0_ManagementUnit;
+
     private ManagementUnitIdentityDTO child_1_1_ManagementUnit;
+
     private ManagementUnitIdentityDTO child_2_0_ManagementUnit;
+
     private ManagementUnitIdentityDTO child_2_1_ManagementUnit;
 
     private EmployeeIdentityDTO rootEmployee;
@@ -301,8 +306,12 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
             DBSessionMode.Read,
             context => context.Authorization
                               .NotificationPrincipalExtractor
+
                               //.GetNotificationPrincipalsByOperations(new Guid[] { this.searchNotificationOperation.Id }, notificationFilterGroups)
-                              .GetNotificationPrincipalsByRoles([SampleSystemSecurityRole.SearchTestBusinessRole], notificationFilterGroups)
-                              .ToArray(p => p.Name));
+                              .GetPrincipalsAsync([SampleSystemSecurityRole.SearchTestBusinessRole], notificationFilterGroups)
+                              .GetAwaiter()
+                              .GetResult()
+                              .Select(p => p.Name)
+                              .ToArray());
     }
 }

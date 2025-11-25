@@ -9,16 +9,16 @@ namespace Framework.Authorization.Environment;
 
 public class AuthorizationSystemSettings : IAuthorizationSystemSettings
 {
-    private Type notificationPrincipalExtractorType = typeof(NotificationPrincipalExtractor);
+    private Type notificationPermissionExtractorType = typeof(NotificationPermissionExtractor);
 
     private Type principalUniquePermissionValidatorType = typeof(PrincipalUniquePermissionValidator);
 
     public bool RegisterRunAsManager { get; set; } = true;
 
-    public IAuthorizationSystemSettings SetNotificationPrincipalExtractor<T>()
-        where T : INotificationPrincipalExtractor
+    public IAuthorizationSystemSettings SetNotificationPermissionExtractor<T>()
+        where T : INotificationPermissionExtractor
     {
-        this.notificationPrincipalExtractorType = typeof(T);
+        this.notificationPermissionExtractorType = typeof(T);
 
         return this;
     }
@@ -32,8 +32,7 @@ public class AuthorizationSystemSettings : IAuthorizationSystemSettings
     }
     public void Initialize(IServiceCollection services)
     {
-        services.AddScoped(typeof(INotificationPrincipalExtractor), this.notificationPrincipalExtractorType);
-
+        services.AddScoped(typeof(INotificationPermissionExtractor), this.notificationPermissionExtractorType);
         services.AddScoped(typeof(IPrincipalUniquePermissionValidator), this.principalUniquePermissionValidatorType);
 
         if (this.RegisterRunAsManager)

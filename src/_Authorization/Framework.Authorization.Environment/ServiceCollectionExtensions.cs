@@ -9,6 +9,7 @@ using Framework.Authorization.SecuritySystemImpl;
 using Framework.Authorization.SecuritySystemImpl.Initialize;
 using Framework.Authorization.SecuritySystemImpl.Validation;
 using Framework.DomainDriven._Visitors;
+
 using SecuritySystem;
 using SecuritySystem.Credential;
 using SecuritySystem.DependencyInjection;
@@ -22,90 +23,94 @@ namespace Framework.Authorization.Environment;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddAuthorizationSystem(this IServiceCollection services, Action<IAuthorizationSystemSettings>? setup = null)
+    extension(IServiceCollection services)
     {
-        services.RegisterGeneralAuthorizationSystem()
-                .RegisterAuthorizationSecurity()
-                .RegistryGenericDatabaseVisitors()
-                .UpdateSecuritySystem();
+        public IServiceCollection AddAuthorizationSystem(Action<IAuthorizationSystemSettings>? setup = null)
+        {
+            services.RegisterGeneralAuthorizationSystem()
+                    .RegisterAuthorizationSecurity()
+                    .RegistryGenericDatabaseVisitors()
+                    .UpdateSecuritySystem();
 
-        var settings = new AuthorizationSystemSettings();
+            var settings = new AuthorizationSystemSettings();
 
-        setup?.Invoke(settings);
+            setup?.Invoke(settings);
 
-        settings.Initialize(services);
+            settings.Initialize(services);
 
-        return services;
-    }
+            return services;
+        }
 
-    private static IServiceCollection RegisterGeneralAuthorizationSystem(this IServiceCollection services)
-    {
-        return services.AddScoped<IPrincipalResolver, PrincipalResolver>()
-                       .AddScoped<IUserCredentialNameByIdResolver, AuthorizationUserCredentialNameByIdResolver>()
+        private IServiceCollection RegisterGeneralAuthorizationSystem()
+        {
+            return services.AddScoped<IPrincipalResolver, PrincipalResolver>()
+                           .AddScoped<IUserCredentialNameByIdResolver, AuthorizationUserCredentialNameByIdResolver>()
 
-                       .AddScoped<INotificationBasePermissionFilterSource, NotificationBasePermissionFilterSource>()
+                           .AddScoped<INotificationGeneralPermissionFilterFactory, NotificationGeneralPermissionFilterFactory>()
+                           .AddScoped<INotificationPrincipalExtractor, NotificationPrincipalExtractor>()
 
-                       .AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
-                       .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>()
+                           .AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
+                           .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>()
 
-                       .AddSingleton<InitializerSettings>()
-                       .AddScoped<IAuthorizationSecurityContextInitializer, AuthorizationSecurityContextInitializer>()
-                       .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
+                           .AddSingleton<InitializerSettings>()
+                           .AddScoped<IAuthorizationSecurityContextInitializer, AuthorizationSecurityContextInitializer>()
+                           .AddScoped<IAuthorizationBusinessRoleInitializer, AuthorizationBusinessRoleInitializer>()
 
-                       .AddScoped<IPrincipalDomainService, PrincipalDomainService>()
+                           .AddScoped<IPrincipalDomainService, PrincipalDomainService>()
 
-                       .AddScoped<IPrincipalGeneralValidator, PrincipalGeneralValidator>()
-                       .AddScoped<IPermissionGeneralValidator, PermissionGeneralValidator>()
-                       .AddKeyedScoped<IValidator<Permission>, PermissionDelegateValidator>(PermissionDelegateValidator.Key)
-                       .AddKeyedScoped<IValidator<Permission>, PermissionRequiredContextValidator>(PermissionRequiredContextValidator.Key)
-                       .AddScoped<IValidator<PermissionRestriction>, PermissionRestrictionValidator>();
-    }
+                           .AddScoped<IPrincipalGeneralValidator, PrincipalGeneralValidator>()
+                           .AddScoped<IPermissionGeneralValidator, PermissionGeneralValidator>()
+                           .AddKeyedScoped<IValidator<Permission>, PermissionDelegateValidator>(PermissionDelegateValidator.Key)
+                           .AddKeyedScoped<IValidator<Permission>, PermissionRequiredContextValidator>(PermissionRequiredContextValidator.Key)
+                           .AddScoped<IValidator<PermissionRestriction>, PermissionRestrictionValidator>();
+        }
 
-    private static IServiceCollection RegisterAuthorizationSecurity(this IServiceCollection services)
-    {
-        var securityAdministratorRule = ApplicationSecurityRule.SecurityAdministrator;
+        private IServiceCollection RegisterAuthorizationSecurity()
+        {
+            var securityAdministratorRule = ApplicationSecurityRule.SecurityAdministrator;
 
-        var principalViewSecurityRule = securityAdministratorRule.Or(AuthorizationSecurityRule.CurrentPrincipal);
+            var principalViewSecurityRule = securityAdministratorRule.Or(AuthorizationSecurityRule.CurrentPrincipal);
 
-        return services
+            return services
 
-               .AddRelativeDomainPath((Permission permission) => permission.Principal)
-               .AddScoped(typeof(CurrentPrincipalSecurityProvider<>))
+                   .AddRelativeDomainPath((Permission permission) => permission.Principal)
+                   .AddScoped(typeof(CurrentPrincipalSecurityProvider<>))
 
-               .AddRelativeDomainPath((BusinessRole businessRole) => businessRole)
-               .AddScoped(typeof(AvailableBusinessRoleSecurityProvider<>))
+                   .AddRelativeDomainPath((BusinessRole businessRole) => businessRole)
+                   .AddScoped(typeof(AvailableBusinessRoleSecurityProvider<>))
 
-               .AddRelativeDomainPath((Permission permission) => permission.DelegatedFrom, nameof(Permission.DelegatedFrom))
-               .AddScoped(typeof(DelegatedFromSecurityProvider<>))
+                   .AddRelativeDomainPath((Permission permission) => permission.DelegatedFrom, nameof(Permission.DelegatedFrom))
+                   .AddScoped(typeof(DelegatedFromSecurityProvider<>))
 
-               .RegisterDomainSecurityServices(
-                   rb => rb
-                         .Add<Principal>(
-                             b => b.SetView(principalViewSecurityRule)
-                                   .SetEdit(securityAdministratorRule))
+                   .RegisterDomainSecurityServices(
+                       rb => rb
+                             .Add<Principal>(
+                                 b => b.SetView(principalViewSecurityRule)
+                                       .SetEdit(securityAdministratorRule))
 
-                         .Add<Permission>(
-                             b => b.SetView(principalViewSecurityRule.Or(AuthorizationSecurityRule.DelegatedFrom))
-                                   .SetEdit(securityAdministratorRule.Or(AuthorizationSecurityRule.DelegatedFrom)))
+                             .Add<Permission>(
+                                 b => b.SetView(principalViewSecurityRule.Or(AuthorizationSecurityRule.DelegatedFrom))
+                                       .SetEdit(securityAdministratorRule.Or(AuthorizationSecurityRule.DelegatedFrom)))
 
-                         .Add<BusinessRole>(
-                             b => b.SetView(securityAdministratorRule.Or(AuthorizationSecurityRule.AvailableBusinessRole))
-                                   .SetEdit(securityAdministratorRule))
+                             .Add<BusinessRole>(
+                                 b => b.SetView(securityAdministratorRule.Or(AuthorizationSecurityRule.AvailableBusinessRole))
+                                       .SetEdit(securityAdministratorRule))
 
-                         .Add<SecurityContextType>(
-                             b => b.SetView(SecurityRule.Disabled)));
-    }
+                             .Add<SecurityContextType>(
+                                 b => b.SetView(SecurityRule.Disabled)));
+        }
 
-    private static IServiceCollection RegistryGenericDatabaseVisitors(this IServiceCollection services)
-    {
-        return services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<PersistentDomainObjectBase, Guid>>();
-    }
+        private IServiceCollection RegistryGenericDatabaseVisitors()
+        {
+            return services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<PersistentDomainObjectBase, Guid>>();
+        }
 
-    private static IServiceCollection UpdateSecuritySystem(this IServiceCollection services)
-    {
-        return services.AddScoped<IPermissionSystemFactory, AuthorizationPermissionSystemFactory>()
-                       .AddScoped<AuthorizationPrincipalManagementService>()
-                       .AddScopedFrom<IPrincipalSourceService, AuthorizationPrincipalManagementService>()
-                       .ReplaceScopedFrom<IPrincipalManagementService, AuthorizationPrincipalManagementService>();
+        private IServiceCollection UpdateSecuritySystem()
+        {
+            return services.AddScoped<IPermissionSystemFactory, AuthorizationPermissionSystemFactory>()
+                           .AddScoped<AuthorizationPrincipalManagementService>()
+                           .AddScopedFrom<IPrincipalSourceService, AuthorizationPrincipalManagementService>()
+                           .ReplaceScopedFrom<IPrincipalManagementService, AuthorizationPrincipalManagementService>();
+        }
     }
 }

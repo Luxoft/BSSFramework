@@ -2,7 +2,7 @@
 
 internal static class PriorityLevels
 {
-    public const int Grand_Access = -1;
+    public const int GrandAccess = -1;
 
-    public const int Access_Denied = -2;
+    public const int AccessDenied = -2;
 }

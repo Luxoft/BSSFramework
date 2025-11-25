@@ -6,5 +6,5 @@ namespace Framework.Authorization.Notification;
 
 public interface INotificationPrincipalExtractor
 {
-    IEnumerable<Principal> GetNotificationPrincipalsByRoles(SecurityRole[] securityRoles, IEnumerable<NotificationFilterGroup> notificationFilterGroups);
+    Task<IEnumerable<Principal>> GetPrincipalsAsync(SecurityRole[] securityRoles, IEnumerable<NotificationFilterGroup> notificationFilterGroups, CancellationToken cancellationToken = default);
 }

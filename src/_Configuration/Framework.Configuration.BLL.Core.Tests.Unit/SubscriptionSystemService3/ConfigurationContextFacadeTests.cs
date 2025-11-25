@@ -98,7 +98,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
         var principals = this.Fixture.CreateMany<Principal>();
 
         this.notificationPrincipalExtractor
-            .GetNotificationPrincipalsByRoles(securityRoles, Array.Empty<NotificationFilterGroup>())
+            .GetPrincipalsAsync(securityRoles, [])
             .Returns(principals);
 
         // Act
@@ -118,7 +118,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
         var principals = this.Fixture.CreateMany<Principal>();
 
         this.notificationPrincipalExtractor
-            .GetNotificationPrincipalsByRoles(securityRoles, notificationFilterGroups)
+            .GetPrincipalsAsync(securityRoles, notificationFilterGroups)
             .Returns(principals);
 
         // Act

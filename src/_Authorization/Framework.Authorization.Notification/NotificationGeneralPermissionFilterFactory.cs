@@ -2,22 +2,21 @@
 
 using Framework.Authorization.Domain;
 using Framework.Authorization.SecuritySystemImpl;
+
 using SecuritySystem;
 using SecuritySystem.Services;
 
 namespace Framework.Authorization.Notification;
 
-public class NotificationBasePermissionFilterSource(
+public class NotificationGeneralPermissionFilterFactory(
     IAvailablePermissionSource availablePermissionSource,
     ISecurityRolesIdentsResolver securityRolesIdentsResolver)
-    : INotificationBasePermissionFilterSource
+    : INotificationGeneralPermissionFilterFactory
 {
-    public Expression<Func<Permission, bool>> GetBasePermissionFilter(SecurityRole[] securityRoles)
+    public Expression<Func<Permission, bool>> Create(IEnumerable<SecurityRole> securityRoles)
     {
-        if (securityRoles == null) throw new ArgumentNullException(nameof(securityRoles));
-
         var businessRoleIdents = securityRolesIdentsResolver.Resolve(DomainSecurityRule.ExpandedRolesSecurityRule.Create(securityRoles))
-                                                            .ToList();
+                                                            .ToHashSet();
 
         var permissionQ = availablePermissionSource.GetAvailablePermissionsQueryable(
             DomainSecurityRule.AnyRole with { CustomCredential = new SecurityRuleCredential.AnyUserCredential() });

@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 
-using CommonFramework;
 using CommonFramework.ExpressionEvaluate;
 
 using Framework.DomainDriven.Repository;
@@ -16,9 +15,9 @@ public class PermissionLevelInfoHierarchicalExtractor<TSecurityContext>(
     [DisabledSecurity] IRepository<TSecurityContext> repository,
     IIdentityInfoSource identityInfoSource,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
-    DeepLevelInfo<TSecurityContext> deepLevelInfo) : IPermissionLevelInfoExtractor
+    DeepLevelInfo<TSecurityContext> deepLevelInfo) : PermissionLevelInfoExtractor<TSecurityContext>(repository, identityInfoSource)
 {
-    public Expression<Func<PermissionLevelInfo, FullPermissionLevelInfo>> GetSelector(NotificationFilterGroup notificationFilterGroup)
+    protected override Expression<Func<IQueryable<TSecurityContext>, int>> GetDirectLevelExpression(NotificationFilterGroup notificationFilterGroup, IExpressionEvaluator ee)
     {
         var expandedSecIdents = notificationFilterGroup.ExpandType.IsHierarchical()
                                     ? hierarchicalObjectExpanderFactory.Create<Guid>(notificationFilterGroup.SecurityContextType).Expand(
@@ -26,49 +25,13 @@ public class PermissionLevelInfoHierarchicalExtractor<TSecurityContext>(
                                         HierarchicalExpandType.Parents)
                                     : notificationFilterGroup.Idents;
 
-        var grandAccess = notificationFilterGroup.ExpandType.AllowEmpty();
-
-        var securityContextQ = repository.GetQueryable();
-
-        var identityInfo = identityInfoSource.GetIdentityInfo<TSecurityContext, Guid>();
-
-        return ExpressionEvaluateHelper
-            .InlineEvaluate(ee =>
-
-                                from permissionInfo in ExpressionHelper.GetIdentity<PermissionLevelInfo>()
-
-                                let permission = permissionInfo.Permission
-
-                                let permissionSecurityContextItems =
-                                    securityContextQ.Where(securityContext => permission
-                                                                              .Restrictions
-                                                                              .Any(fi => fi.SecurityContextType.Name
-                                                                                         == typeof(TSecurityContext).Name
-                                                                                         && fi.SecurityContextId
-                                                                                         == ee.Evaluate(
-                                                                                             identityInfo.IdPath,
-                                                                                             securityContext)))
-
-
-                                let directLevel =
-                                    permissionSecurityContextItems
-                                        .Where(securityContext =>
-                                                   expandedSecIdents.Contains(
-                                                       ee.Evaluate(
-                                                           identityInfo.IdPath,
-                                                           securityContext)))
-                                        .Select(secItem => (int?)ee.Evaluate(deepLevelInfo.Path, secItem)).Max()
-                                    ?? PriorityLevels.Access_Denied
-
-                                let grandLevel =
-                                    grandAccess
-                                    && permission.Restrictions.All(fi => fi.SecurityContextType.Name
-                                                                         != typeof(TSecurityContext).Name)
-                                        ? PriorityLevels.Grand_Access
-                                        : PriorityLevels.Access_Denied
-
-                                let level = Math.Max(directLevel, grandLevel)
-
-                                select new FullPermissionLevelInfo { Permission = permissionInfo.Permission, LevelInfo = permissionInfo.LevelInfo, Level = level });
+        return permissionSecurityContextItems => permissionSecurityContextItems
+                                                 .Where(securityContext =>
+                                                            expandedSecIdents.Contains(
+                                                                ee.Evaluate(
+                                                                    this.IdentityInfo.IdPath,
+                                                                    securityContext)))
+                                                 .Select(secItem => (int?)ee.Evaluate(deepLevelInfo.Path, secItem)).Max()
+                                                 ?? PriorityLevels.AccessDenied;
     }
 }

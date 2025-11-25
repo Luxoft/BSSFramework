@@ -7,8 +7,8 @@ public interface IAuthorizationSystemSettings
 {
     bool RegisterRunAsManager { get; set; }
 
-    IAuthorizationSystemSettings SetNotificationPrincipalExtractor<T>()
-        where T : INotificationPrincipalExtractor;
+    IAuthorizationSystemSettings SetNotificationPermissionExtractor<T>()
+        where T : INotificationPermissionExtractor;
 
     IAuthorizationSystemSettings SetUniquePermissionValidator<TValidator>()
         where TValidator : class, IPrincipalUniquePermissionValidator;

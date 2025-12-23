@@ -2,7 +2,7 @@
 
 using Framework.Persistent;
 
-using SecuritySystem.HierarchicalExpand;
+using HierarchicalExpand;
 
 namespace Framework.DomainDriven.ApplicationCore.DALListeners;
 

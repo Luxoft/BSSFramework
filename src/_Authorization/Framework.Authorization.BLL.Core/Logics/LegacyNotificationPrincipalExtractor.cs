@@ -97,7 +97,7 @@ public class LegacyNotificationPrincipalExtractor(
         if (securityContextType == null) throw new ArgumentNullException(nameof(securityContextType));
         if (idetns == null) throw new ArgumentNullException(nameof(idetns));
 
-        var securityContextTypeId = securityContextInfoSource.GetSecurityContextInfo(securityContextType).Id;
+        var securityContextTypeId = (Guid)securityContextInfoSource.GetSecurityContextInfo(securityContextType).Identity.GetId();
 
         return permission => permission.Restrictions.Any(fi => fi.SecurityContextType.Id == securityContextTypeId && idetns.Contains(fi.SecurityContextId))
                              || (allowEmpty && permission.Restrictions.All(fi => fi.SecurityContextType.Id != securityContextTypeId));

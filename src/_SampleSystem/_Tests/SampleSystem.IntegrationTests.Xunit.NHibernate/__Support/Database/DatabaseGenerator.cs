@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
 using SampleSystem.DbGenerate;
-using SampleSystem.IntegrationTests.__Support;
+using SampleSystem.IntegrationTests.__Support.FluentMigration;
 using SampleSystem.IntegrationTests.Xunit.NHibernate.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests.Xunit.NHibernate.__Support.Database;

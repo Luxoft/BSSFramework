@@ -1,8 +1,5 @@
-﻿using Automation.ServiceEnvironment;
-using Automation.ServiceEnvironment.Services;
+﻿using Automation.ServiceEnvironment.Services;
 using Automation.Settings;
-
-using SecuritySystem;
 
 using Microsoft.Extensions.Options;
 
@@ -10,6 +7,9 @@ using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
+
+using SecuritySystem;
+using SecuritySystem.Testing;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData;
 

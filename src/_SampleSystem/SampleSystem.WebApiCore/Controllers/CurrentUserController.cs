@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-using SecuritySystem.Services;
+using SecuritySystem;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 

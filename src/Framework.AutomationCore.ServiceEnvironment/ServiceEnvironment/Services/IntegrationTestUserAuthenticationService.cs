@@ -3,6 +3,8 @@
 using CommonFramework.DictionaryCache;
 
 using Framework.DomainDriven;
+using Framework.DomainDriven.Auth;
+
 using SecuritySystem.Credential;
 
 using Microsoft.Extensions.Options;

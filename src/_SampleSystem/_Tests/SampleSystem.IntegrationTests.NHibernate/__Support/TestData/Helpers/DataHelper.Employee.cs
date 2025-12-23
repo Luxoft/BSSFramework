@@ -2,13 +2,14 @@
 using Automation.Utils;
 
 using Framework.Core;
-using SecuritySystem.UserSource;
 
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
+
+using SecuritySystem.UserSource;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 

@@ -1,14 +1,16 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Authorization.Notification;
-using Framework.Authorization.SecuritySystemImpl;
-using Framework.Authorization.SecuritySystemImpl.Validation;
+
 using Framework.Core;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
+
 using SecuritySystem;
 using SecuritySystem.AvailableSecurity;
 using SecuritySystem.ExternalSystem.SecurityContextStorage;
+using SecuritySystem.GeneralPermission.Validation.Principal;
 using SecuritySystem.Services;
+using SecuritySystem.UserSource;
 
 namespace Framework.Authorization.BLL;
 
@@ -20,9 +22,9 @@ public partial interface IAuthorizationBLLContext :
 
     ITypeResolverContainer<string>
 {
-    IPrincipalGeneralValidator PrincipalValidator { get; }
+    IPrincipalValidator<Principal, Permission, PermissionRestriction> PrincipalValidator { get; }
 
-    ICurrentPrincipalSource CurrentPrincipalSource { get; }
+    ICurrentUserSource<Principal> CurrentPrincipalSource { get; }
 
     ICurrentUser CurrentUser { get; }
 
@@ -30,7 +32,7 @@ public partial interface IAuthorizationBLLContext :
 
     ISecuritySystem SecuritySystem { get; }
 
-    IAvailablePermissionSource AvailablePermissionSource { get; }
+    IAvailablePermissionSource<Permission> AvailablePermissionSource { get; }
 
     IAvailableSecurityRoleSource AvailableSecurityRoleSource { get; }
 

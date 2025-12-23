@@ -2,12 +2,11 @@
 
 using CommonFramework;
 using CommonFramework.ExpressionEvaluate;
+using CommonFramework.IdentitySource;
 
 using Framework.DomainDriven.Repository;
 
-using SecuritySystem;
 using SecuritySystem.Attributes;
-using SecuritySystem.Services;
 
 namespace Framework.Authorization.Notification;
 
@@ -40,7 +39,7 @@ public abstract class PermissionLevelInfoExtractor<TSecurityContext>(
                                                                                           == typeof(TSecurityContext).Name
                                                                                           && fi.SecurityContextId
                                                                                           == ee.Evaluate(
-                                                                                              this.IdentityInfo.IdPath,
+                                                                                              this.IdentityInfo.Id.Path,
                                                                                               securityContext)))
 
 

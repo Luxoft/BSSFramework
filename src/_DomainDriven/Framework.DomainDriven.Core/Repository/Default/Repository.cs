@@ -1,4 +1,4 @@
-﻿using SecuritySystem;
+﻿using SecuritySystem.AccessDenied;
 using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.Repository;

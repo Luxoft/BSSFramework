@@ -9,8 +9,6 @@
     <Project Path="_Authorization/Framework.Authorization.LegacyAttributes/Framework.Authorization.LegacyAttributes.csproj" />
     <Project Path="_Authorization/Framework.Authorization.Notification.Abstract/Framework.Authorization.Notification.Abstract.csproj" />
     <Project Path="_Authorization/Framework.Authorization.Notification/Framework.Authorization.Notification.csproj" />
-    <Project Path="_Authorization/Framework.Authorization.SecuritySystem.Abstract/Framework.Authorization.SecuritySystem.Abstract.csproj" />
-    <Project Path="_Authorization/Framework.Authorization.SecuritySystem/Framework.Authorization.SecuritySystem.csproj" />
     <Project Path="_Authorization/Framework.Authorization.WebApi/Framework.Authorization.WebApi.csproj" />
   </Folder>
   <Folder Name="/Authorization/GeneratedLayout/">

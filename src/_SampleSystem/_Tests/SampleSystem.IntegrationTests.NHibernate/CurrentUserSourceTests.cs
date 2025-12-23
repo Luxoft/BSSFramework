@@ -22,7 +22,7 @@ public class CurrentUserSourceTests : TestBase
         var result = this.Evaluate(
             DBSessionMode.Read,
             randomName,
-            ctx => ctx.Authorization.CurrentUser.Id);
+            ctx => ctx.Authorization.CurrentPrincipalSource.CurrentUser.Id);
 
         // Assert
         employeeId.Should().Be(result);
@@ -38,7 +38,7 @@ public class CurrentUserSourceTests : TestBase
         var action = () => this.Evaluate(
                          DBSessionMode.Read,
                          randomName,
-                         ctx => ctx.Authorization.CurrentUser.Id);
+                         ctx => ctx.Authorization.CurrentPrincipalSource.CurrentUser.Id);
 
         // Assert
         action.Should().Throw<UserSourceException>().And.Message.Should().Be($"{nameof(Employee)} \"{randomName}\" not found");

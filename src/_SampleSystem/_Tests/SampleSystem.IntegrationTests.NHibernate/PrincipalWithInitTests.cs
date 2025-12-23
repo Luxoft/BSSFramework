@@ -7,6 +7,8 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
+using SecuritySystem;
+
 namespace SampleSystem.IntegrationTests;
 
 [TestClass]
@@ -43,7 +45,7 @@ public class PrincipalWithInitTests : TestBase
         this.AuthManager.For(TestPrincipalName).SetRole(
             new SampleSystemTestPermission(
             SampleSystemSecurityRole.TestPerformance,
-            new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)) { Period = this.testPeriod });
+            new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)) { Period = new PermissionPeriod(this.testPeriod.StartDate, this.testPeriod.EndDate) });
     }
 
     [TestMethod]

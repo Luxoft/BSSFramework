@@ -3,17 +3,18 @@
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
-using SecuritySystem;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
 
+using SecuritySystem;
+
 using PersistentDomainObjectBase = SampleSystem.Domain.PersistentDomainObjectBase;
 using Principal = Framework.Authorization.Domain.Principal;
 
-namespace SampleSystem.IntegrationTests.Workflow;
+namespace SampleSystem.IntegrationTests;
 
 [TestClass]
 public class AuthPerformanceTests : TestBase

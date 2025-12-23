@@ -25,7 +25,7 @@ public abstract class DomainSecurityServiceGenerator<TConfiguration> : Generator
 
     public abstract IEnumerable<CodeTypeReference> GetBaseTypes();
 
-    public abstract IEnumerable<(CodeTypeReference ParameterType, string Name, CodeExpression CustomBaseInvoke)> GetBaseTypeConstructorParameters();
+    public abstract IEnumerable<(CodeTypeReference? ParameterType, string? Name, CodeExpression? CustomBaseInvoke)> GetBaseTypeConstructorParameters();
 
     public virtual CodeConstructor GetConstructor()
     {

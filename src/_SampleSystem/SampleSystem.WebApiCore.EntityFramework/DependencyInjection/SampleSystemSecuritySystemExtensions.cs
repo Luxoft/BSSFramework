@@ -3,7 +3,8 @@
 using SampleSystem.Domain;
 
 using SecuritySystem.DependencyInjection;
-using SecuritySystem.VirtualPermission;
+
+using SecuritySystem.VirtualPermission.DependencyInjection;
 
 namespace SampleSystem.Security;
 
@@ -31,10 +32,10 @@ public static class SampleSystemSecuritySystemExtensions
     public static ISecuritySystemSettings AddVirtualPermissions(this ISecuritySystemSettings settings)
     {
         return settings.AddVirtualPermission<Employee, BusinessUnitEmployeeRole>(
-            SampleSystemSecurityRole.SeManager,
             link => link.Employee,
-            employee => employee.Login,
-            v => v.AddRestriction(link => link.BusinessUnit)
-                  .AddFilter(link => link.Role == BusinessUnitEmployeeRoleType.Manager));
+            vpb => vpb.ForRole(
+                SampleSystemSecurityRole.SeManager,
+                v => v.AddRestriction(link => link.BusinessUnit)
+                      .AddFilter(link => link.Role == BusinessUnitEmployeeRoleType.Manager)));
     }
 }

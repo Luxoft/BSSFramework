@@ -1,5 +1,4 @@
 ﻿using Automation.Extensions;
-using Automation.ServiceEnvironment;
 using Automation.ServiceEnvironment.Services;
 using Automation.Settings;
 using Automation.Utils.DatabaseUtils.Interfaces;
@@ -15,6 +14,8 @@ using SampleSystem.Domain.Inline;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
+
+using SecuritySystem.Testing;
 
 namespace SampleSystem.IntegrationTests.Xunit.NHibernate.__Support.TestData;
 

@@ -67,7 +67,7 @@ internal class AutoProjectionFactory : IFactory<ProjectionBuilder>
                                                         $"{projectionName}_AutoProp_{property.Name}",
                                                         node.Children);
 
-            yield return new ProjectionPropertyBuilder(property.ToLambdaExpression(domainType), "_Auto")
+            yield return new ProjectionPropertyBuilder(property.ToGetLambdaExpression(domainType), "_Auto")
                          {
                                  ElementProjection = elementProjection,
                                  Role = ProjectionPropertyRole.AutoNode,

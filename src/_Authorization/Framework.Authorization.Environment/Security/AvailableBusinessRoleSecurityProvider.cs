@@ -2,31 +2,29 @@
 
 using CommonFramework;
 using CommonFramework.ExpressionEvaluate;
+using CommonFramework.RelativePath;
 
 using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystemImpl;
 
 using SecuritySystem;
 using SecuritySystem.Providers;
-using SecuritySystem.RelativeDomainPathInfo;
 using SecuritySystem.SecurityAccessor;
+using SecuritySystem.Services;
 
 namespace Framework.Authorization.Environment.Security;
 
 public class AvailableBusinessRoleSecurityProvider<TDomainObject>(
     IExpressionEvaluatorStorage expressionEvaluatorStorage,
-    IAvailablePermissionSource availablePermissionSource,
+    IAvailablePermissionSource<Permission> availablePermissionSource,
     IRelativeDomainPathInfo<TDomainObject, BusinessRole> toBusinessRolePathInfo)
     : SecurityProvider<TDomainObject>(expressionEvaluatorStorage)
 {
     public override Expression<Func<TDomainObject, bool>> SecurityFilter { get; } =
 
-        availablePermissionSource
-            .GetAvailablePermissionsQueryable(DomainSecurityRule.AnyRole)
-            .Pipe(
-                permissionQ =>
-                    ExpressionHelper.Create((BusinessRole businessRole) => permissionQ.Select(p => p.Role).Contains(businessRole)))
-            .Pipe(toBusinessRolePathInfo.CreateCondition);
+        availablePermissionSource.GetQueryable(DomainSecurityRule.AnyRole)
+                                 .Pipe(permissionQ =>
+                                           ExpressionHelper.Create((BusinessRole businessRole) => permissionQ.Select(p => p.Role).Contains(businessRole)))
+                                 .Pipe(toBusinessRolePathInfo.CreateCondition);
 
     public override SecurityAccessorData GetAccessorData(TDomainObject domainObject)
     {
@@ -37,7 +35,7 @@ public class AvailableBusinessRoleSecurityProvider<TDomainObject>(
     {
         return SecurityAccessorData.Return(
             availablePermissionSource
-                .GetAvailablePermissionsQueryable(DomainSecurityRule.AnyRole with { CustomCredential = new SecurityRuleCredential.AnyUserCredential() })
+                .GetQueryable(DomainSecurityRule.AnyRole with { CustomCredential = new SecurityRuleCredential.AnyUserCredential() })
                 .Where(permission => permission.Role == businessRole)
                 .Select(permission => permission.Principal)
                 .Distinct()

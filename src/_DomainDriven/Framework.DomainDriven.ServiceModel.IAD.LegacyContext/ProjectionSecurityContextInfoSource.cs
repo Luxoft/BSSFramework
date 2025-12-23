@@ -1,12 +1,14 @@
 ﻿using SecuritySystem;
-using SecuritySystem.HierarchicalExpand;
+
+using HierarchicalExpand;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
 public class ProjectionSecurityContextInfoSource(
+    IServiceProvider serviceProvider,
     IEnumerable<SecurityContextInfo> securityContextInfoList,
     IRealTypeResolver realTypeResolver)
-    : SecurityContextInfoSource(securityContextInfoList)
+    : SecurityContextInfoSource(serviceProvider, securityContextInfoList)
 {
     public override SecurityContextInfo GetSecurityContextInfo(Type type)
     {

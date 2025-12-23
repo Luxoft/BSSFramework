@@ -12,6 +12,8 @@ using Framework.DomainDriven.WebApiNetCore;
 
 using Microsoft.Extensions.DependencyInjection;
 
+using SecuritySystem.Testing.DependencyInjection;
+
 namespace Automation.Xunit;
 
 public static class DependencyInjection
@@ -26,21 +28,19 @@ public static class DependencyInjection
         }
 
         return services
-            .AddSingleton<ITestInitializeAndCleanup, DiTestInitializeAndCleanup>()
-            .AddSingleton<IIntegrationTestUserAuthenticationService, IntegrationTestUserAuthenticationService>()
-            .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
+               .AddSingleton<ITestInitializeAndCleanup, DiTestInitializeAndCleanup>()
+               .AddSingleton<IIntegrationTestUserAuthenticationService, IntegrationTestUserAuthenticationService>()
+               .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
 
-            .AddSingleton<IntegrationTestTimeProvider>()
-            .ReplaceSingletonFrom<TimeProvider, IntegrationTestTimeProvider>()
+               .AddSingleton<IntegrationTestTimeProvider>()
+               .ReplaceSingletonFrom<TimeProvider, IntegrationTestTimeProvider>()
 
-            .AddScoped<TestWebApiCurrentMethodResolver>()
-            .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
-            .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>()
+               .AddScoped<TestWebApiCurrentMethodResolver>()
+               .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
+               .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>()
 
-            .AddSingleton(typeof(ControllerEvaluator<>))
+               .AddSingleton(typeof(ControllerEvaluator<>))
 
-            .AddSingleton<RootAuthManager>()
-            .AddSingleton(AdministratorsRoleList.Default)
-            .AddScoped<AuthManager>();
+               .AddSecuritySystemTesting();
     }
 }

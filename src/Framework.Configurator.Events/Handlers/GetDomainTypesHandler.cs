@@ -10,7 +10,7 @@ using SecuritySystem.Configurator.Handlers;
 
 namespace Framework.Configurator.Handlers;
 
-public class GetDomainTypesHandler([CurrentUserWithoutRunAs] ISecuritySystem securitySystem, IEventSystem eventSystem)
+public class GetDomainTypesHandler([WithoutRunAs] ISecuritySystem securitySystem, IEventSystem eventSystem)
     : BaseReadHandler, IGetDomainTypesHandler
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)

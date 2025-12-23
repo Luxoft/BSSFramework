@@ -49,7 +49,7 @@ public class CurrentUserManyRelativePathTests : TestBase
     {
         // Arrange
 
-        var currentUserId = this.EvaluateRead(ctx => ctx.Authorization.CurrentUser.Id);
+        var currentUserId = this.EvaluateRead(ctx => ctx.Logics.Employee.GetCurrent().Id);
 
         Guid[] allTestIdents = [currentUserId, .. this.testEmployeeIdents];
 

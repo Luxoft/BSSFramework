@@ -1,19 +1,19 @@
-﻿using Framework.DomainDriven.Setup;
+﻿using SecuritySystem.DependencyInjection;
 
 namespace Framework.Authorization.Environment;
 
 public static class BssFrameworkSettingsExtensions
 {
-    /// <summary>
-    /// Must be called AFTER 'AddSecuritySystem'
-    /// </summary>
-    /// <typeparam name="TSelf"></typeparam>
-    /// <param name="settings"></param>
-    /// /// <param name="setup"></param>
-    /// <returns></returns>
-    public static TSelf AddAuthorizationSystem<TSelf>(
-        this IBssFrameworkSettingsBase<TSelf> settings,
-        Action<IAuthorizationSystemSettings>? setup = null) =>
+    public static ISecuritySystemSettings AddAuthorizationSystem(
+        this ISecuritySystemSettings settings,
+        Action<IAuthorizationSystemSettings>? setup = null)
+    {
+        var authSettings = new AuthorizationSystemSettings();
 
-        settings.AddExtensions(new BssFrameworkExtension(services => services.AddAuthorizationSystem(setup)));
+        setup?.Invoke(authSettings);
+
+        authSettings.Initialize(settings);
+
+        return settings;
+    }
 }

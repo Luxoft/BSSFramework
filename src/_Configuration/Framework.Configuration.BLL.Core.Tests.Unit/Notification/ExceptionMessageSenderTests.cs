@@ -88,7 +88,7 @@ public sealed class ExceptionMessageSenderTests : TestFixtureBase
         var exception = this.Fixture.Create<ArgumentOutOfRangeException>();
         var sender = this.Fixture.Create<ExceptionMessageSender>();
 
-        this.authorizationBLLContext.CurrentPrincipalSource.CurrentPrincipal.Returns(new Principal { Name = @"luxoft\John" });
+        this.authorizationBLLContext.CurrentPrincipalSource.CurrentUser.Returns(new Principal { Name = @"luxoft\John" });
 
         Message sendedMessage = null;
 
@@ -156,7 +156,7 @@ public sealed class ExceptionMessageSenderTests : TestFixtureBase
     private async Task TestMessageWasSent(string login)
     {
         // Arrange
-        this.authorizationBLLContext.CurrentPrincipalSource.CurrentPrincipal.Returns(new Principal { Name = login });
+        this.authorizationBLLContext.CurrentPrincipalSource.CurrentUser.Returns(new Principal { Name = login });
 
         var sender = this.Fixture.Create<ExceptionMessageSender>();
 

@@ -4,11 +4,11 @@ using Framework.Persistent;
 using Framework.QueryLanguage;
 using Framework.Validation;
 
-using SecuritySystem;
-
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem.HierarchicalExpand;
+using HierarchicalExpand;
+
+using SecuritySystem.AccessDenied;
 using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.BLL.Security;

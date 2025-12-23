@@ -1,6 +1,4 @@
-﻿using Automation.Utils;
-
-using Framework.DomainDriven;
+﻿using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
 using SecuritySystem;
 
@@ -10,6 +8,8 @@ using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
+
+using SecuritySystem.Testing;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -39,7 +39,7 @@ public class AuthPerformanceTest : TestBase
 
         this.employeeSource = [null, this.DataHelper.SaveEmployee()];
 
-        this.AuthManager.CreatePrincipal(PrincipalName);
+        this.AuthManager.For(PrincipalName).CreatePrincipal();
 
         this.GeneratePermission();
     }

@@ -1,13 +1,14 @@
 ﻿using System.Linq.Expressions;
 
 using CommonFramework.ExpressionEvaluate;
+using CommonFramework.IdentitySource;
 
 using Framework.DomainDriven.Repository;
 using Framework.Persistent;
 
+using HierarchicalExpand;
+
 using SecuritySystem.Attributes;
-using SecuritySystem.HierarchicalExpand;
-using SecuritySystem.Services;
 
 namespace Framework.Authorization.Notification;
 
@@ -29,7 +30,7 @@ public class PermissionLevelInfoHierarchicalExtractor<TSecurityContext>(
                                                  .Where(securityContext =>
                                                             expandedSecIdents.Contains(
                                                                 ee.Evaluate(
-                                                                    this.IdentityInfo.IdPath,
+                                                                    this.IdentityInfo.Id.Path,
                                                                     securityContext)))
                                                  .Select(secItem => (int?)ee.Evaluate(deepLevelInfo.Path, secItem)).Max()
                                                  ?? PriorityLevels.AccessDenied;

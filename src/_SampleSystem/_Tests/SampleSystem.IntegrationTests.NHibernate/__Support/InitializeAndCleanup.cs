@@ -12,11 +12,11 @@ using Framework.Notification.DTO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
-using SampleSystem.IntegrationTests.Support.Utils;
+using SampleSystem.IntegrationTests.__Support.Utils;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers.Main;
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.ServiceEnvironment.Jobs;
 using SampleSystem.ServiceEnvironment.NHibernate;
 

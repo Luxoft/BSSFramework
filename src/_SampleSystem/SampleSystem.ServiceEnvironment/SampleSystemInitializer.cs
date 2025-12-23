@@ -1,4 +1,4 @@
-﻿using Framework.Authorization.SecuritySystemImpl.Initialize;
+﻿using Framework.Authorization.Domain;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.DomainDriven;
@@ -7,6 +7,8 @@ using Framework.DomainDriven.Lock;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
+
+using SecuritySystem.GeneralPermission.Initialize;
 
 namespace SampleSystem.ServiceEnvironment;
 
@@ -23,8 +25,8 @@ public class SampleSystemInitializer(
             DBSessionMode.Write,
             async context => await context.ServiceProvider.GetRequiredService<INamedLockInitializer>().Initialize(cancellationToken));
 
-        await this.InitSecurityAsync<IAuthorizationSecurityContextInitializer>(cancellationToken);
-        await this.InitSecurityAsync<IAuthorizationBusinessRoleInitializer>(cancellationToken);
+        await this.InitSecurityAsync<ISecurityContextInitializer<SecurityContextType>>(cancellationToken);
+        await this.InitSecurityAsync<ISecurityRoleInitializer<BusinessRole>>(cancellationToken);
 
         await contextEvaluator.EvaluateAsync(
             DBSessionMode.Write,

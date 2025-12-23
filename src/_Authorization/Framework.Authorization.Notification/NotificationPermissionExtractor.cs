@@ -3,12 +3,12 @@ using Framework.DomainDriven.Repository;
 
 using GenericQueryable;
 
+using HierarchicalExpand;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem;
 using SecuritySystem.Attributes;
-using SecuritySystem.Services;
-
 namespace Framework.Authorization.Notification;
 
 public class NotificationPermissionExtractor(

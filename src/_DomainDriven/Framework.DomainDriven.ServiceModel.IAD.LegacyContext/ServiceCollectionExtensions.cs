@@ -30,7 +30,7 @@ using SecuritySystem;
 using SecuritySystem.DependencyInjection;
 using SecuritySystem.DomainServices;
 using SecuritySystem.DomainServices.DependencySecurity;
-using SecuritySystem.HierarchicalExpand;
+using HierarchicalExpand;
 using SecuritySystem.SecurityRuleInfo;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;

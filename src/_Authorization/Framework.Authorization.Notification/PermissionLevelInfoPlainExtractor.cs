@@ -1,11 +1,11 @@
 ﻿using System.Linq.Expressions;
 
 using CommonFramework.ExpressionEvaluate;
+using CommonFramework.IdentitySource;
 
 using Framework.DomainDriven.Repository;
 
 using SecuritySystem.Attributes;
-using SecuritySystem.Services;
 
 namespace Framework.Authorization.Notification;
 
@@ -19,7 +19,7 @@ public class PermissionLevelInfoPlainExtractor<TSecurityContext>(
 
         return permissionSecurityContextItems => permissionSecurityContextItems.Any(securityContext => expandedSecIdents.Contains(
                                                                                         ee.Evaluate(
-                                                                                            this.IdentityInfo.IdPath,
+                                                                                            this.IdentityInfo.Id.Path,
                                                                                             securityContext)))
                                                      ? 0
                                                      : PriorityLevels.AccessDenied;

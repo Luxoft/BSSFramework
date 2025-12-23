@@ -170,7 +170,7 @@ public static class TrackingServiceExtensions
 
                                                             var detailType = property.PropertyType.GetCollectionElementType();
 
-                                                            return Expression.Call(selectManyMethod.MakeGenericMethod(sourceType, detailType), expr, property.ToLambdaExpression());
+                                                            return Expression.Call(selectManyMethod.MakeGenericMethod(sourceType, detailType), expr, property.ToGetLambdaExpression());
                                                         });
 
             return Expression.Lambda(resultExpr, parameter).Compile();

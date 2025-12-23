@@ -18,31 +18,26 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
     {
         return services
 
-               .AddBssFramework(
-                   rootSettings =>
-                   {
-                       rootSettings.RegisterDenormalizeHierarchicalDALListener = false;
+               .AddBssFramework(rootSettings =>
+               {
+                   rootSettings.RegisterDenormalizeHierarchicalDALListener = false;
 
-                       rootSettings
-                           .AddSecuritySystem(
-                               securitySettings =>
-                                   securitySettings
-                                       .AddSecurityContexts()
-                                       .AddDomainSecurityServices()
-                                       .AddSecurityRoles()
-                                       .SetUserSource<Employee>(
-                                           employee => employee.Id,
-                                           employee => employee.Login,
-                                           employee => employee.Active)
-                                       .AddVirtualPermissions()
-                                       .SetSecurityAdministratorRule(DomainSecurityRule.AnyRole with { CustomCredential = new SecurityRuleCredential.AnyUserCredential() } ))
-                           .AddEntityFramework(s => {});
-                   })
+                   rootSettings
+                       .AddSecuritySystem(securitySettings =>
+                                              securitySettings
+                                                  .AddSecurityContexts()
+                                                  .AddDomainSecurityServices()
+                                                  .AddSecurityRoles()
+                                                  .AddUserSource<Employee>(usb => usb.SetFilter(employee => employee.Active))
+                                                  .AddVirtualPermissions()
+                                                  .SetSecurityAdministratorRule(
+                                                      DomainSecurityRule.AnyRole with { CustomCredential = new SecurityRuleCredential.AnyUserCredential() }))
+                       .AddEntityFramework(s => { });
+               })
                .AddScopedFrom<DbContext, AppDbContext>()
-               .AddDbContext<AppDbContext>(
-                   o =>
-                       o.UseSqlServer(
-                           "Data Source=.;Initial Catalog=SampleSystem;Integrated Security=True;TrustServerCertificate=True"))
+               .AddDbContext<AppDbContext>(o =>
+                                               o.UseSqlServer(
+                                                   "Data Source=.;Initial Catalog=SampleSystem;Integrated Security=True;TrustServerCertificate=True"))
                .AddHttpContextAccessor()
                .AddLogging();
     }

@@ -1,4 +1,4 @@
-﻿using SecuritySystem;
+﻿using SecuritySystem.AccessDenied;
 
 namespace Framework.DomainDriven.BLL.Security;
 

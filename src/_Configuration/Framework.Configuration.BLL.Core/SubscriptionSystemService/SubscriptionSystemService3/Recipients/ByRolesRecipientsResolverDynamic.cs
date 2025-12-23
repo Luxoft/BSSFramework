@@ -5,9 +5,9 @@ using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven;
 
-using Microsoft.Extensions.DependencyInjection;
+using HierarchicalExpand;
 
-using SecuritySystem.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 

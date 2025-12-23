@@ -28,3 +28,8 @@ public class ApplicationUserAuthenticationService(IDefaultUserAuthenticationServ
         }
     }
 }
+
+public interface IUserCredentialNameResolver
+{
+    string GetUserName(UserCredential userCredential);
+}

@@ -1,4 +1,5 @@
 ﻿using SampleSystem.IntegrationTests.__Support.TestData;
+
 using ValidationException = Framework.Validation.ValidationException;
 
 namespace SampleSystem.IntegrationTests;

@@ -24,7 +24,7 @@ public class Permission : AuditPersistentDomainObjectBase,
                           IMaster<Permission>,
 
                           IDetail<Permission>,
-    
+
                           IPeriodObject
 {
     private readonly ICollection<PermissionRestriction> restrictions = new List<PermissionRestriction>();
@@ -33,7 +33,7 @@ public class Permission : AuditPersistentDomainObjectBase,
 
     private readonly Principal principal;
 
-    private readonly Permission delegatedFrom;
+    private readonly Permission? delegatedFrom;
 
     private BusinessRole role;
 
@@ -89,7 +89,7 @@ public class Permission : AuditPersistentDomainObjectBase,
     /// Пермиссия, от которой была делегирована данная пермиссия
     /// </summary>
     [CustomSerialization(CustomSerializationMode.Ignore)]
-    public virtual Permission DelegatedFrom => this.delegatedFrom;
+    public virtual Permission? DelegatedFrom => this.delegatedFrom;
 
     /// <summary>
     /// Период действия пермиссии

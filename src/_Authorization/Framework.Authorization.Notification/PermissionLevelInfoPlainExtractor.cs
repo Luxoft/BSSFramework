@@ -1,10 +1,10 @@
 ﻿using System.Linq.Expressions;
 
-using CommonFramework.ExpressionEvaluate;
 using CommonFramework.IdentitySource;
 
 using Framework.DomainDriven.Repository;
 
+using SecuritySystem;
 using SecuritySystem.Attributes;
 
 namespace Framework.Authorization.Notification;
@@ -12,16 +12,12 @@ namespace Framework.Authorization.Notification;
 public class PermissionLevelInfoPlainExtractor<TSecurityContext>(
     [DisabledSecurity] IRepository<TSecurityContext> repository,
     IIdentityInfoSource identityInfoSource) : PermissionLevelInfoExtractor<TSecurityContext>(repository, identityInfoSource)
+    where TSecurityContext : class, ISecurityContext
 {
-    protected override Expression<Func<IQueryable<TSecurityContext>, int>> GetDirectLevelExpression(NotificationFilterGroup notificationFilterGroup, IExpressionEvaluator ee)
+    protected override Expression<Func<IQueryable<TSecurityContext>, int>> GetDirectLevelExpression(NotificationFilterGroup notificationFilterGroup)
     {
-        var expandedSecIdents = notificationFilterGroup.Idents;
+        var containsFilter = this.IdentityInfo.CreateContainsFilter(notificationFilterGroup.Idents);
 
-        return permissionSecurityContextItems => permissionSecurityContextItems.Any(securityContext => expandedSecIdents.Contains(
-                                                                                        ee.Evaluate(
-                                                                                            this.IdentityInfo.Id.Path,
-                                                                                            securityContext)))
-                                                     ? 0
-                                                     : PriorityLevels.AccessDenied;
+        return permissionSecurityContextItems => permissionSecurityContextItems.Any(containsFilter) ? 0 : PriorityLevels.AccessDenied;
     }
 }

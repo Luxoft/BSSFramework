@@ -2,47 +2,50 @@
 
 public static class NotificationExpandTypeExtensions
 {
-    public static bool IsHierarchical(this NotificationExpandType notificationExpandType)
+    extension(NotificationExpandType notificationExpandType)
     {
-        switch (notificationExpandType)
+        public bool IsHierarchical()
         {
-            case NotificationExpandType.DirectOrFirstParent:
-            case NotificationExpandType.DirectOrFirstParentOrEmpty:
-            case NotificationExpandType.All:
-                return true;
+            switch (notificationExpandType)
+            {
+                case NotificationExpandType.DirectOrFirstParent:
+                case NotificationExpandType.DirectOrFirstParentOrEmpty:
+                case NotificationExpandType.All:
+                    return true;
 
-            default:
-                return false;
+                default:
+                    return false;
+            }
         }
-    }
 
-    public static NotificationExpandType WithoutHierarchical(this NotificationExpandType notificationExpandType)
-    {
-        switch (notificationExpandType)
+        public NotificationExpandType WithoutHierarchical()
         {
-            case NotificationExpandType.DirectOrFirstParent:
-                return NotificationExpandType.Direct;
+            switch (notificationExpandType)
+            {
+                case NotificationExpandType.DirectOrFirstParent:
+                    return NotificationExpandType.Direct;
 
-            case NotificationExpandType.DirectOrFirstParentOrEmpty:
-            case NotificationExpandType.All:
-                return NotificationExpandType.DirectOrEmpty;
+                case NotificationExpandType.DirectOrFirstParentOrEmpty:
+                case NotificationExpandType.All:
+                    return NotificationExpandType.DirectOrEmpty;
 
-            default:
-                return notificationExpandType;
+                default:
+                    return notificationExpandType;
+            }
         }
-    }
 
-    public static bool AllowEmpty(this NotificationExpandType notificationExpandType)
-    {
-        switch (notificationExpandType)
+        public bool AllowEmpty()
         {
-            case NotificationExpandType.DirectOrEmpty:
-            case NotificationExpandType.DirectOrFirstParentOrEmpty:
-            case NotificationExpandType.All:
-                return true;
+            switch (notificationExpandType)
+            {
+                case NotificationExpandType.DirectOrEmpty:
+                case NotificationExpandType.DirectOrFirstParentOrEmpty:
+                case NotificationExpandType.All:
+                    return true;
 
-            default:
-                return false;
+                default:
+                    return false;
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using CommonFramework.DependencyInjection;
-
+﻿using CommonFramework;
+using CommonFramework.DependencyInjection;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.ApplicationCore.DALListeners;
 using Framework.DomainDriven.Auth;
@@ -8,11 +8,11 @@ using Framework.DomainDriven.Repository;
 using Framework.Events;
 using Framework.Exceptions;
 using Framework.FinancialYear;
-
-using SecuritySystem;
-
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using SecuritySystem;
+using SecuritySystem.Credential;
+using SecuritySystem.UserSource;
 
 namespace Framework.DomainDriven.ApplicationCore;
 
@@ -94,6 +94,8 @@ public static class ServiceCollectionExtensions
             services.AddScoped<ApplicationUserAuthenticationService>();
             services.AddScopedFrom<IImpersonateService, ApplicationUserAuthenticationService>();
 
+            services.AddScoped<ITempUserCredentialNameResolver, TempUserCredentialNameResolver>();
+
             return services;
         }
 
@@ -109,6 +111,38 @@ public static class ServiceCollectionExtensions
             services.AddScoped<IExpressionVisitorContainer, ExpressionVisitorAggregator>();
 
             return services;
+        }
+    }
+}
+
+
+public class TempUserCredentialNameResolver(IEnumerable<IUserSource> userSourceList) : ITempUserCredentialNameResolver
+{
+    public virtual string GetUserName(UserCredential userCredential)
+    {
+        switch (userCredential)
+        {
+            case UserCredential.NamedUserCredential { Name: var name }:
+                return name;
+
+            case UserCredential.IdentUserCredential { Identity: var identity }:
+            {
+                var request =
+
+                    from userSource in userSourceList
+
+                    let user = userSource.ToSimple().TryGetUser(userCredential)
+
+                    where user != null
+
+                    select user.Name;
+
+                return request.Distinct().Single(
+                    () => new Exception($"{nameof(UserCredential)} with id {identity} not found"),
+                    names => new Exception($"More one {nameof(UserCredential)} with id {identity}: {names.Join(", ", name => $"\"{name}\"")}"));
+            }
+
+            default: throw new ArgumentOutOfRangeException(nameof(userCredential));
         }
     }
 }

@@ -30,10 +30,12 @@ public class ManagementUnit :
 
     private int deepLevel;
 
+
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual int DeepLevel
     {
         get { return this.deepLevel; }
-        protected set { this.deepLevel = value; }
+        set { this.deepLevel = value; }
     }
 
     public virtual Period Period

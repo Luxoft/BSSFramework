@@ -42,10 +42,13 @@ public class Location :
             this.parent.AddDetail(this);
         }
     }
+
+
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual int DeepLevel
     {
         get { return this.deepLevel; }
-        protected set { this.deepLevel = value; }
+        set { this.deepLevel = value; }
     }
 
     public virtual byte[] BinaryData

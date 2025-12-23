@@ -3,7 +3,7 @@ using SecuritySystem.Services;
 
 namespace Framework.DomainDriven.Auth;
 
-public class ApplicationUserAuthenticationService(IDefaultUserAuthenticationService defaultAuthenticationService, IUserCredentialNameResolver userCredentialNameResolver)
+public class ApplicationUserAuthenticationService(IDefaultUserAuthenticationService defaultAuthenticationService, ITempUserCredentialNameResolver userCredentialNameResolver)
     : IRawUserAuthenticationService, IImpersonateService
 {
     public string GetUserName() => this.CustomUserCredential == null
@@ -29,7 +29,7 @@ public class ApplicationUserAuthenticationService(IDefaultUserAuthenticationServ
     }
 }
 
-public interface IUserCredentialNameResolver
+public interface ITempUserCredentialNameResolver
 {
     string GetUserName(UserCredential userCredential);
 }

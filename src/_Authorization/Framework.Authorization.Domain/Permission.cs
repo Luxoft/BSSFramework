@@ -31,7 +31,7 @@ public class Permission : AuditPersistentDomainObjectBase,
 
     private readonly ICollection<Permission> delegatedTo = new List<Permission>();
 
-    private readonly Principal principal;
+    private Principal principal;
 
     private readonly Permission? delegatedFrom;
 
@@ -99,7 +99,12 @@ public class Permission : AuditPersistentDomainObjectBase,
     /// <summary>
     /// Приниципал, к которому относится данная пермиссия
     /// </summary>
-    public virtual Principal Principal => this.principal;
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
+    public virtual Principal Principal
+    {
+        get { return this.principal; }
+        set { this.principal = value; }
+    }
 
     /// <summary>
     /// Бизнес-роль, которую содержит пермиссия

@@ -9,6 +9,8 @@ using SecuritySystem.Credential;
 
 using Microsoft.Extensions.Options;
 
+using SecuritySystem.Testing;
+
 namespace Automation.ServiceEnvironment.Services;
 
 public class IntegrationTestUserAuthenticationService(

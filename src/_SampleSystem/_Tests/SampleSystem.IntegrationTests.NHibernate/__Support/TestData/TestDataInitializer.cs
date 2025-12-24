@@ -1,5 +1,4 @@
-﻿using Automation.ServiceEnvironment.Services;
-using Automation.Settings;
+﻿using Automation.Settings;
 
 using Microsoft.Extensions.Options;
 

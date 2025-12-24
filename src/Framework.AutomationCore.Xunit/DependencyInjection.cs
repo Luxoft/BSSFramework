@@ -7,15 +7,9 @@ using Bss.Testing.Xunit.Interfaces;
 
 using CommonFramework.DependencyInjection;
 
-using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.WebApiNetCore;
 
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Options;
-
-using SecuritySystem.Testing;
-using SecuritySystem.Testing.DependencyInjection;
 
 namespace Automation.Xunit;
 

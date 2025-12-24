@@ -15,6 +15,7 @@ using SecuritySystem.ExternalSystem.ApplicationSecurity;
 using SecuritySystem.GeneralPermission.DependencyInjection;
 using SecuritySystem.GeneralPermission.Validation;
 using SecuritySystem.GeneralPermission.Validation.Permission;
+using SecuritySystem.UserSource;
 
 namespace Framework.Authorization.Environment;
 
@@ -50,6 +51,8 @@ public class AuthorizationSystemSettings : IAuthorizationSystemSettings
 
         settings.AddUserSource<Principal>(usb =>
                 {
+                    usb.SetMissedService<CreateVirtualMissedUserService<Principal>>();
+
                     if (this.RegisterRunAsManager)
                     {
                         usb.SetRunAs(p => p.RunAs);

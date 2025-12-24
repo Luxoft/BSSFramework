@@ -16,7 +16,7 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
 
     private Guid securityContextId;
 
-    protected PermissionRestriction()
+    public PermissionRestriction()
     {
     }
 

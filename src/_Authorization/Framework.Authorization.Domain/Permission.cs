@@ -41,7 +41,7 @@ public class Permission : AuditPersistentDomainObjectBase,
 
     private string comment;
 
-    protected Permission()
+    public Permission()
     {
     }
 

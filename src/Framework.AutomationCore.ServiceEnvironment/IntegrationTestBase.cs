@@ -3,6 +3,7 @@ using Automation.ServiceEnvironment.Services;
 using Automation.Utils.DatabaseUtils;
 
 using Microsoft.Extensions.DependencyInjection;
+using SecuritySystem.Testing;
 
 namespace Automation.ServiceEnvironment;
 
@@ -32,7 +33,7 @@ public abstract class IntegrationTestBase(IServiceProviderPool rootServiceProvid
 
     protected virtual void ResetServices()
     {
-        this.RootServiceProvider.GetService<IIntegrationTestUserAuthenticationService>()?.Reset();
+        this.RootServiceProvider.GetService<ITestingUserAuthenticationService>()?.Reset();
         this.RootServiceProvider.GetService<IntegrationTestTimeProvider>()?.Reset();
     }
 

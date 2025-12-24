@@ -18,7 +18,7 @@ public class TestDataInitializer(
     RootAuthManager authManager,
     DataHelper dataHelper,
     IOptions<AutomationFrameworkSettings> settings,
-    IIntegrationTestUserAuthenticationService integrationTestUserAuthenticationServices)
+    ITestingUserAuthenticationService integrationTestUserAuthenticationServices)
 {
     public async Task InitializeAsync(CancellationToken cancellationToken) =>
         await integrationTestUserAuthenticationServices

@@ -1,17 +1,17 @@
 ﻿using System.Reflection;
-
 using Automation.ServiceEnvironment.Services;
-
+using Automation.Settings;
 using CommonFramework.DependencyInjection;
 
-using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.Jobs;
 using Framework.DomainDriven.WebApiNetCore;
-using SecuritySystem.Credential;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
+using SecuritySystem.Credential;
+using SecuritySystem.Testing;
 using SecuritySystem.Testing.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;
@@ -64,10 +64,7 @@ public static class ServiceProviderExtensions
 
         public IServiceCollection ApplyIntegrationTestServices() =>
 
-            services.AddSingleton<IIntegrationTestUserAuthenticationService, IntegrationTestUserAuthenticationService>()
-                    .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
-
-                    .AddSingleton<IntegrationTestTimeProvider>()
+            services.AddSingleton<IntegrationTestTimeProvider>()
                     .ReplaceSingletonFrom<TimeProvider, IntegrationTestTimeProvider>()
 
                     .AddScoped<TestWebApiCurrentMethodResolver>()
@@ -77,6 +74,12 @@ public static class ServiceProviderExtensions
 
                     .AddSingleton(typeof(ControllerEvaluator<>))
 
-                    .AddSecuritySystemTesting();
+                    .AddBssSecuritySystemTesting();
+
+        public IServiceCollection AddBssSecuritySystemTesting() =>
+            services.AddSecuritySystemTesting()
+                    .Replace(ServiceDescriptor.Singleton(typeof(ITestingEvaluator<>), typeof(BssTestingEvaluator<>)))
+                    .Replace(
+                        ServiceDescriptor.Singleton<TestRootUserInfo>(sp => new(sp.GetRequiredService<IOptions<AutomationFrameworkSettings>>().Value.IntegrationTestUserName)));
     }
 }

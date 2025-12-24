@@ -6,13 +6,15 @@ using Automation.Utils.DatabaseUtils.Interfaces;
 
 using Microsoft.Extensions.Options;
 
+using SecuritySystem.Testing;
+
 namespace Automation.ServiceEnvironment;
 
 public class TestInitializeAndCleanup(
     IOptions<AutomationFrameworkSettings> settings,
     IDatabaseContext databaseContext,
     IntegrationTestTimeProvider timeProvider,
-    IIntegrationTestUserAuthenticationService userAuthenticationService)
+    ITestingUserAuthenticationService userAuthenticationService)
 {
     private readonly AutomationFrameworkSettings settings = settings.Value;
 

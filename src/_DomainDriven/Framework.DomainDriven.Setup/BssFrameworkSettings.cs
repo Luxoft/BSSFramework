@@ -26,7 +26,7 @@ public class BssFrameworkSettings : IBssFrameworkSettings
     {
         this.registerActions.Add(sc => sc.AddSecuritySystem(s =>
         {
-            s.SetQueryableSource<AsyncDalQueryableSource>();
+            s.SetQueryableSource<DalQueryableSource>();
             s.SetGenericRepository<DalGenericRepository>();
             s.SetRawUserAuthenticationService(sp => sp.GetRequiredService<ApplicationUserAuthenticationService>());
 

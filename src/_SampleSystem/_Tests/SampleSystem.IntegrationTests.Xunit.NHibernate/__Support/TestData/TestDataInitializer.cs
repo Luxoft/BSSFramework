@@ -4,6 +4,7 @@ using Automation.Settings;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
 using SecuritySystem;
+using SecuritySystem.Testing;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,8 +15,6 @@ using SampleSystem.Domain.Inline;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
-
-using SecuritySystem.Testing;
 
 namespace SampleSystem.IntegrationTests.Xunit.NHibernate.__Support.TestData;
 
@@ -43,7 +42,7 @@ public class TestDataInitializer
 
     public async Task InitializeAsync(CancellationToken cancellationToken) =>
         await this.serviceProvider
-                  .GetRequiredService<IIntegrationTestUserAuthenticationService>()
+                  .GetRequiredService<ITestingUserAuthenticationService>()
                   .WithImpersonateAsync(
                       nameof(TestDataInitializer),
                       async () => await this.InitializeAsyncInternal(cancellationToken));

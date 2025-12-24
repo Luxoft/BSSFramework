@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using CommonFramework.IdentitySource;
+
+using Framework.Core;
 using Framework.DomainDriven.Lock;
 using Framework.Persistent;
 
@@ -6,8 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Framework.DomainDriven.EntityFramework;
 
-public class EfAsyncDal<TDomainObject, TIdent>(IEfSession session) : IAsyncDal<TDomainObject, TIdent>
-    where TDomainObject : class, IIdentityObject<TIdent>
+public class EfAsyncDal<TDomainObject, TIdent>(IEfSession session, IIdentityInfoSource identityInfoSource) : IAsyncDal<TDomainObject, TIdent>
+    where TDomainObject : class, IIdentityObject<TIdent> where TIdent : notnull
 {
     private DbContext NativeSession => session.NativeSession;
 
@@ -41,6 +43,10 @@ public class EfAsyncDal<TDomainObject, TIdent>(IEfSession session) : IAsyncDal<T
         }
 
         this.CheckWrite();
+
+        var identityInfo = identityInfoSource.GetIdentityInfo<TDomainObject, TIdent>();
+
+        identityInfo.Id.Setter(domainObject, id);
 
         var state = this.NativeSession.Entry(domainObject).State;
 

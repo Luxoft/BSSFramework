@@ -2,19 +2,22 @@
 
 public static class ScopedEvaluatorMiddlewareExtensions
 {
-    public static async Task EvaluateAsync(this IScopedEvaluatorMiddleware middleware, Func<Task> action)
+    extension(IScopedEvaluatorMiddleware middleware)
     {
-        await middleware.EvaluateAsync(
-            async () =>
-            {
-                await action();
-                return default(object);
-            });
-    }
+        public async Task EvaluateAsync(Func<Task> action)
+        {
+            await middleware.EvaluateAsync(
+                async () =>
+                {
+                    await action();
+                    return default(object);
+                });
+        }
 
-    public static IScopedEvaluatorMiddleware With(this IScopedEvaluatorMiddleware middleware, IScopedEvaluatorMiddleware otherMiddleware)
-    {
-        return new WithMiddleware(middleware, otherMiddleware);
+        public IScopedEvaluatorMiddleware With(IScopedEvaluatorMiddleware otherMiddleware)
+        {
+            return new WithMiddleware(middleware, otherMiddleware);
+        }
     }
 
     public static IScopedEvaluatorMiddleware Aggregate(this IEnumerable<IScopedEvaluatorMiddleware> middlewareList)
@@ -28,21 +31,11 @@ public static class ScopedEvaluatorMiddlewareExtensions
         public async Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult) => await getResult();
     }
 
-    private class WithMiddleware : IScopedEvaluatorMiddleware
+    private class WithMiddleware(IScopedEvaluatorMiddleware middleware, IScopedEvaluatorMiddleware otherMiddleware) : IScopedEvaluatorMiddleware
     {
-        private readonly IScopedEvaluatorMiddleware middleware;
-
-        private readonly IScopedEvaluatorMiddleware otherMiddleware;
-
-        public WithMiddleware(IScopedEvaluatorMiddleware middleware, IScopedEvaluatorMiddleware otherMiddleware)
-        {
-            this.middleware = middleware;
-            this.otherMiddleware = otherMiddleware;
-        }
-
         public async Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult)
         {
-            return await this.otherMiddleware.EvaluateAsync(async () => await this.middleware.EvaluateAsync(async () => await getResult()));
+            return await otherMiddleware.EvaluateAsync(async () => await middleware.EvaluateAsync(async () => await getResult()));
         }
     }
 }

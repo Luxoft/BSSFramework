@@ -11,7 +11,10 @@ using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.WebApiNetCore;
 
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
+using SecuritySystem.Testing;
 using SecuritySystem.Testing.DependencyInjection;
 
 namespace Automation.Xunit;
@@ -29,8 +32,6 @@ public static class DependencyInjection
 
         return services
                .AddSingleton<ITestInitializeAndCleanup, DiTestInitializeAndCleanup>()
-               .AddSingleton<IIntegrationTestUserAuthenticationService, IntegrationTestUserAuthenticationService>()
-               .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
 
                .AddSingleton<IntegrationTestTimeProvider>()
                .ReplaceSingletonFrom<TimeProvider, IntegrationTestTimeProvider>()
@@ -41,6 +42,6 @@ public static class DependencyInjection
 
                .AddSingleton(typeof(ControllerEvaluator<>))
 
-               .AddSecuritySystemTesting();
+               .AddBssSecuritySystemTesting();
     }
 }

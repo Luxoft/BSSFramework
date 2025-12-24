@@ -1,11 +1,12 @@
 ﻿using SecuritySystem.Credential;
+using SecuritySystem.Testing;
 
 namespace Automation.ServiceEnvironment.Services;
 
-public static class IntegrationTestUserAuthenticationServiceExtensions
+public static class TestingUserAuthenticationServiceExtensions
 {
     public static async Task WithImpersonateAsync(
-        this IIntegrationTestUserAuthenticationService service,
+        this ITestingUserAuthenticationService service,
         UserCredential customUserCredential,
         Func<Task> action)
     {

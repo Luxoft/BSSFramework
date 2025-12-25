@@ -1,13 +1,14 @@
 ﻿using System.Reflection;
+
 using Automation.ServiceEnvironment.Services;
 using Automation.Settings;
+
 using CommonFramework.DependencyInjection;
 
 using Framework.DomainDriven.Jobs;
 using Framework.DomainDriven.WebApiNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
 using SecuritySystem.Credential;
@@ -78,7 +79,7 @@ public static class ServiceProviderExtensions
 
         public IServiceCollection AddBssSecuritySystemTesting() =>
             services.AddSecuritySystemTesting()
-                    .Replace(ServiceDescriptor.Singleton(typeof(ITestingEvaluator<>), typeof(BssTestingEvaluator<>)))
+                    .ReplaceSingleton(typeof(ITestingEvaluator<>), typeof(BssTestingEvaluator<>))
                     .ReplaceSingletonFrom<TestRootUserInfo, IOptions<AutomationFrameworkSettings>>(options => new TestRootUserInfo(options.Value.IntegrationTestUserName));
     }
 }

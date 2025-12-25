@@ -7,8 +7,6 @@ using GenericQueryable;
 
 using HierarchicalExpand;
 
-using Microsoft.Extensions.DependencyInjection;
-
 using SecuritySystem;
 using SecuritySystem.Attributes;
 namespace Framework.Authorization.Notification;

@@ -1,6 +1,4 @@
-﻿using CommonFramework;
-using CommonFramework.IdentitySource;
-using Framework.DomainDriven;
+﻿using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
 using Microsoft.Extensions.DependencyInjection;
 

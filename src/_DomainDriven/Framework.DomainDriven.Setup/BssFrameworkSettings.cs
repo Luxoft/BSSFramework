@@ -28,7 +28,7 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         {
             s.SetQueryableSource<DalQueryableSource>();
             s.SetGenericRepository<DalGenericRepository>();
-            s.SetRawUserAuthenticationService(f => f.Create<IServiceProvider>().GetRequiredService<ApplicationUserAuthenticationService>());
+            s.SetRawUserAuthenticationService(sp => sp.GetRequiredService<ApplicationUserAuthenticationService>());
 
             setupAction(s);
         }));

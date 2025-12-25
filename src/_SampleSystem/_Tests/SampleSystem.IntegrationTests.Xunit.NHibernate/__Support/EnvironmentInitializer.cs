@@ -51,5 +51,7 @@ public class EnvironmentInitializer : AutomationCoreFrameworkInitializer
             .AddSingleton<DataHelper>()
             .AddSingleton<TestDataInitializer>()
             .AddIntegrationTestServices()
+            .AddValidator<DuplicateServiceUsageValidator>()
+            .Validate()
             .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
 }

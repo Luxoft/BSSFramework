@@ -1,10 +1,15 @@
 ﻿using Automation.Utils;
 
 using Framework.DomainDriven;
+
+using Microsoft.Extensions.DependencyInjection;
+
 using SecuritySystem.UserSource;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
+
+using SecuritySystem.Services;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -22,7 +27,15 @@ public class CurrentUserSourceTests : TestBase
         var result = this.Evaluate(
             DBSessionMode.Read,
             randomName,
-            ctx => ctx.Authorization.CurrentPrincipalSource.CurrentUser.Id);
+            ctx =>
+            {
+                var serv = ctx.ServiceProvider.GetRequiredService<IRawUserAuthenticationService>();
+
+                var cc = serv.GetUserName();
+
+                var emp = ctx.CurrentEmployeeSource.CurrentUser;
+                return emp.Id;
+            });
 
         // Assert
         employeeId.Should().Be(result);
@@ -38,7 +51,7 @@ public class CurrentUserSourceTests : TestBase
         var action = () => this.Evaluate(
                          DBSessionMode.Read,
                          randomName,
-                         ctx => ctx.Authorization.CurrentPrincipalSource.CurrentUser.Id);
+                         ctx => ctx.CurrentEmployeeSource.CurrentUser.Id);
 
         // Assert
         action.Should().Throw<UserSourceException>().And.Message.Should().Be($"{nameof(Employee)} \"{randomName}\" not found");

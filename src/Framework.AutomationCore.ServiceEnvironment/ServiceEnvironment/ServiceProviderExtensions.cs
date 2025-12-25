@@ -5,6 +5,7 @@ using Automation.Settings;
 
 using CommonFramework.DependencyInjection;
 
+using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.Jobs;
 using Framework.DomainDriven.WebApiNetCore;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 using SecuritySystem.Credential;
+using SecuritySystem.Services;
 using SecuritySystem.Testing;
 using SecuritySystem.Testing.DependencyInjection;
 
@@ -80,6 +82,16 @@ public static class ServiceProviderExtensions
         public IServiceCollection AddBssSecuritySystemTesting() =>
             services.AddSecuritySystemTesting()
                     .ReplaceSingleton(typeof(ITestingEvaluator<>), typeof(BssTestingEvaluator<>))
-                    .ReplaceSingletonFrom<TestRootUserInfo, IOptions<AutomationFrameworkSettings>>(options => new TestRootUserInfo(options.Value.IntegrationTestUserName));
+                    .ReplaceSingletonFrom<TestRootUserInfo, IOptions<AutomationFrameworkSettings>>(options => new TestRootUserInfo(options.Value.IntegrationTestUserName))
+
+                    .AddScoped<BssTestingUserAuthenticationService>()
+                    .ReplaceScopedFrom<IRawUserAuthenticationService, BssTestingUserAuthenticationService>()
+                    .ReplaceScopedFrom<IImpersonateService, BssTestingUserAuthenticationService>();
     }
 }
+
+public class BssTestingUserAuthenticationService(ITestingEvaluator<IUserCredentialNameResolver> credentialNameResolverEvaluator, TestRootUserInfo testRootUserInfo)
+    : TestingUserAuthenticationService(credentialNameResolverEvaluator, testRootUserInfo), IImpersonateService
+{
+
+};

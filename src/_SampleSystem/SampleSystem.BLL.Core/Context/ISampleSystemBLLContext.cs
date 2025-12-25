@@ -8,6 +8,8 @@ using SecuritySystem.SecurityAccessor;
 
 using SampleSystem.Domain;
 
+using SecuritySystem.UserSource;
+
 namespace SampleSystem.BLL;
 
 public partial interface ISampleSystemBLLContext :
@@ -20,6 +22,8 @@ public partial interface ISampleSystemBLLContext :
 
     IDefaultHierarchicalBLLContext<PersistentDomainObjectBase, Guid>
 {
+    ICurrentUserSource<Employee> CurrentEmployeeSource { get; }
+
     IConfigurationBLLContext Configuration { get; }
 
     ISecurityAccessorResolver SecurityAccessorResolver { get; }

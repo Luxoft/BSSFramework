@@ -17,7 +17,7 @@ public partial class DataHelper
 {
     public ExceptionMessageIdentityDTO SaveExceptionMessage(
             Guid? id = null,
-            string message = null)
+            string? message = null)
     {
         return this.EvaluateWrite(
                                   context =>
@@ -41,10 +41,10 @@ public partial class DataHelper
 
     public CountryIdentityDTO SaveCountry(
             Guid? id = null,
-            string name = null,
-            string nativeName = null,
-            string code = null,
-            string culture = null,
+            string? name = null,
+            string? nativeName = null,
+            string? code = null,
+            string? culture = null,
             bool active = true)
     {
         name = name ?? TextRandomizer.UniqueString("Country");
@@ -78,7 +78,7 @@ public partial class DataHelper
 
     public LocationIdentityDTO SaveLocation(
             Guid? id = null,
-            string name = null,
+            string? name = null,
             LocationIdentityDTO? parent = null,
             CountryIdentityDTO? country = null,
             bool isFinancial = true,
@@ -119,7 +119,7 @@ public partial class DataHelper
 
     public BusinessUnitTypeIdentityDTO SaveBusinessUnitType(
             Guid? id = null,
-            string name = null,
+            string? name = null,
             bool startConfirm = false,
             bool transferConfirm = false,
             bool billProjectAreNotAllowed = false,
@@ -134,9 +134,9 @@ public partial class DataHelper
             bool projectStartAllowed = true,
             bool startBOConfirm = true,
             bool transferBOConfirm = true,
-            List<BusinessUnitTypeIdentityDTO> possibleParents = null,
-            List<FinancialProjectType> possibleFinancialProjectTypes = null,
-            List<BusinessUnitTypeIdentityDTO> transferTo = null,
+            List<BusinessUnitTypeIdentityDTO>? possibleParents = null,
+            List<FinancialProjectType>? possibleFinancialProjectTypes = null,
+            List<BusinessUnitTypeIdentityDTO>? transferTo = null,
             bool currentTypeInPossibleParents = false,
             bool currentTypeInTransferTo = false,
             bool active = true,
@@ -144,7 +144,7 @@ public partial class DataHelper
     {
         name = name ?? TextRandomizer.UniqueString("Type");
 
-        BusinessUnitType type = null;
+        BusinessUnitType? type = null;
 
         this.EvaluateWrite(
                            context =>

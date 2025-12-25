@@ -69,7 +69,7 @@ public class Location :
         get { return this.Children.All(x => !x.Active); }
     }
 
-    public virtual Country Country
+    public virtual Country? Country
     {
         get { return this.country; }
         set { this.country = value; }

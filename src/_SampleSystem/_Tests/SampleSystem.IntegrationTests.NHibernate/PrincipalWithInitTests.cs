@@ -8,6 +8,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
 using SecuritySystem;
+using SecuritySystem.Validation;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -98,6 +99,6 @@ public class PrincipalWithInitTests : TestBase
                    };
 
         // Assert
-        call.Should().Throw<ValidationException>().And.Message.Should().Contain(expectedErrorMessage);
+        call.Should().Throw<SecuritySystemValidationException>().And.Message.Should().Contain(expectedErrorMessage);
     }
 }

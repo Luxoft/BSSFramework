@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem.DependencyInjection;
 
-
 namespace Framework.DomainDriven.Setup;
 
 public class BssFrameworkSettings : IBssFrameworkSettings
@@ -28,7 +27,7 @@ public class BssFrameworkSettings : IBssFrameworkSettings
         {
             s.SetQueryableSource<DalQueryableSource>();
             s.SetGenericRepository<DalGenericRepository>();
-            s.SetRawUserAuthenticationService(sp => sp.GetRequiredService<ApplicationUserAuthenticationService>());
+            s.SetRawUserAuthenticationService<ApplicationUserAuthenticationService>();
 
             setupAction(s);
         }));

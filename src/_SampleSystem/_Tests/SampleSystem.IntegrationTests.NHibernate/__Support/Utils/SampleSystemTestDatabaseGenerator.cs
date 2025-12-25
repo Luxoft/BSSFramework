@@ -39,7 +39,10 @@ public class SampleSystemTestDatabaseGenerator(
         }
     }
 
-    public override async Task GenerateTestDataAsync() => await testDataInitializer.InitializeAsync(default);
+    public override async Task GenerateTestDataAsync()
+    {
+        await testDataInitializer.InitializeAsync(default);
+    }
 
     public override void ExecuteInsertsForDatabases()
     {

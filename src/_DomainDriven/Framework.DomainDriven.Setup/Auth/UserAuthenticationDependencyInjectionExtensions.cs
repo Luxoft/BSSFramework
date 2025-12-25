@@ -1,8 +1,8 @@
-﻿using Framework.DomainDriven.Auth;
+﻿using Framework.DomainDriven.WebApiNetCore.Auth;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.DomainDriven.WebApiNetCore.Auth;
+namespace Framework.DomainDriven.Auth;
 
 public static class UserAuthenticationDependencyInjectionExtensions
 {

@@ -9,5 +9,5 @@ public class ApplicationDefaultUserAuthenticationService(
     IApplicationDefaultUserAuthenticationServiceSettings settings)
     : IDefaultUserAuthenticationService
 {
-    public string GetUserName() => httpContextAccessor.HttpContext?.User?.Identity?.Name ?? settings.DefaultValue;
+    public string GetUserName() => httpContextAccessor.HttpContext?.User.Identity?.Name ?? settings.DefaultValue;
 }

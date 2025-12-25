@@ -1,13 +1,12 @@
-﻿using SampleSystem.Domain;
-
-using Framework.DomainDriven;
+﻿using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-
+using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
 using SecuritySystem;
+using SecuritySystem.Validation;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -88,7 +87,7 @@ public class RestrictionRoleTests : TestBase
                                  location: location));
 
         // Assert
-        action.Should().Throw<ValidationException>()
+        action.Should().Throw<SecuritySystemValidationException>()
               .And.Message.Should().Contain($"Invalid SecurityContextType: {nameof(Location)}.");
     }
 
@@ -171,7 +170,7 @@ public class RestrictionRoleTests : TestBase
                          new SampleSystemTestPermission(SampleSystemSecurityRole.RequiredRestrictionRole, location: location));
 
         // Assert
-        action.Should().Throw<ValidationException>()
+        action.Should().Throw<SecuritySystemValidationException>()
               .And.Message.Should().Contain(
                   $"{nameof(Framework.Authorization.Domain.Permission)} must contain the required contexts: {nameof(BusinessUnit)}");
     }

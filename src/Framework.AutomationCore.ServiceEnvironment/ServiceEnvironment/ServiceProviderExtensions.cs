@@ -3,6 +3,7 @@
 using Automation.ServiceEnvironment.Services;
 using Automation.Settings;
 
+using CommonFramework;
 using CommonFramework.DependencyInjection;
 
 using Framework.DomainDriven.Jobs;
@@ -75,11 +76,8 @@ public static class ServiceProviderExtensions
 
                     .AddSingleton(typeof(ControllerEvaluator<>))
 
-                    .AddBssSecuritySystemTesting();
-
-        public IServiceCollection AddBssSecuritySystemTesting() =>
-            services.AddSecuritySystemTesting()
-                    .ReplaceSingleton(typeof(ITestingEvaluator<>), typeof(BssTestingEvaluator<>))
-                    .ReplaceSingletonFrom<TestRootUserInfo, IOptions<AutomationFrameworkSettings>>(options => new TestRootUserInfo(options.Value.IntegrationTestUserName));
+                    .AddSecuritySystemTesting(b => b.SetEvaluator(typeof(BssTestingEvaluator<>))
+                                                    .SetTestRootUserInfo(sp => sp.GetRequiredService<IOptions<AutomationFrameworkSettings>>()
+                                                                                 .Pipe(options => new TestRootUserInfo(options.Value.IntegrationTestUserName))));
     }
 }

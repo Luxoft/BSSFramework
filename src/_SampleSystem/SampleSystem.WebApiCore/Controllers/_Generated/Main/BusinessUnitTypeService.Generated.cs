@@ -13,7 +13,14 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.BusinessUnitTypeFullDTO GetFullBusinessUnitType([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO businessUnitTypeIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessUnitTypeInternal(businessUnitTypeIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData =>
+            {
+                var ctx = evaluateData.Context;
+
+                var permissions = ctx.Authorization.CurrentPrincipalSource.CurrentUser.Permissions.ToArray();
+
+                return this.GetFullBusinessUnitTypeInternal(businessUnitTypeIdentity, evaluateData);
+            });
         }
         
         /// <summary>

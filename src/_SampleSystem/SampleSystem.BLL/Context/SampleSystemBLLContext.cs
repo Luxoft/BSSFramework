@@ -16,6 +16,7 @@ using SampleSystem.Domain.Projections;
 using HierarchicalExpand;
 
 using SecuritySystem.AccessDenied;
+using SecuritySystem.UserSource;
 
 namespace SampleSystem.BLL;
 
@@ -33,7 +34,8 @@ public partial class SampleSystemBLLContext(
     IAuthorizationBLLContext authorization,
     Framework.Configuration.BLL.IConfigurationBLLContext configuration,
     BLLContextSettings<PersistentDomainObjectBase> settings,
-    ISecurityAccessorResolver securityAccessorResolver)
+    ISecurityAccessorResolver securityAccessorResolver,
+    ICurrentUserSource<Employee> currentEmployeeSource)
     : SecurityBLLBaseContext<PersistentDomainObjectBase, Guid,
         ISampleSystemBLLFactoryContainer>(
         serviceProvider,
@@ -52,6 +54,8 @@ public partial class SampleSystemBLLContext(
     public override ISampleSystemBLLFactoryContainer Logics { get; } = logics;
 
     public IAuthorizationBLLContext Authorization { get; } = authorization;
+
+    public ICurrentUserSource<Employee> CurrentEmployeeSource { get; } = currentEmployeeSource;
 
     public Framework.Configuration.BLL.IConfigurationBLLContext Configuration { get; } = configuration;
 

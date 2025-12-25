@@ -1,18 +1,18 @@
-﻿using SecuritySystem;
+﻿using CommonFramework.DependencyInjection;
 
-using Microsoft.Extensions.DependencyInjection;
+using SecuritySystem;
 
 using SecuritySystem.DomainServices;
 using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.Repository;
 
-public abstract class TemplateRepositoryFactory<TRepository, TTRepositoryImpl, TDomainObject>(
-    IServiceProvider serviceProvider,
+public abstract class TemplateRepositoryFactory<TRepository, TRepositoryImpl, TDomainObject>(
+    IServiceProxyFactory serviceProxyFactory,
     IDomainSecurityService<TDomainObject> domainSecurityService)
     : ITemplateGenericRepositoryFactory<TRepository, TDomainObject>
     where TDomainObject : class
-    where TTRepositoryImpl : TRepository
+    where TRepositoryImpl : TRepository
 {
     public TRepository Create() => this.Create(SecurityRule.Disabled);
 
@@ -20,5 +20,5 @@ public abstract class TemplateRepositoryFactory<TRepository, TTRepositoryImpl, T
         this.Create(domainSecurityService.GetSecurityProvider(securityRule));
 
     public TRepository Create(ISecurityProvider<TDomainObject> securityProvider) =>
-        ActivatorUtilities.CreateInstance<TTRepositoryImpl>(serviceProvider, securityProvider);
+        serviceProxyFactory.Create<TRepository, TRepositoryImpl>();
 }

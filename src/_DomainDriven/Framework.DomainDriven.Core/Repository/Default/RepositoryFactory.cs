@@ -1,13 +1,13 @@
-﻿using SecuritySystem.DomainServices;
+﻿using CommonFramework.DependencyInjection;
+
+using SecuritySystem.DomainServices;
 
 namespace Framework.DomainDriven.Repository;
 
-public class RepositoryFactory<TDomainObject>(
-    IServiceProvider serviceProvider,
-    IDomainSecurityService<TDomainObject> domainSecurityService)
+public class RepositoryFactory<TDomainObject>(IServiceProxyFactory serviceProxyFactory, IDomainSecurityService<TDomainObject> domainSecurityService)
     : TemplateRepositoryFactory<
       IRepository<TDomainObject>,
       Repository<TDomainObject>,
-      TDomainObject>(serviceProvider, domainSecurityService),
+      TDomainObject>(serviceProxyFactory, domainSecurityService),
       IRepositoryFactory<TDomainObject>
     where TDomainObject : class;

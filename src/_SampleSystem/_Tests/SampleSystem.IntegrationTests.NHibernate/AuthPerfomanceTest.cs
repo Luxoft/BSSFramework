@@ -1,7 +1,7 @@
-﻿using Framework.DomainDriven;
+﻿using CommonFramework;
+using CommonFramework.IdentitySource;
+using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
-using SecuritySystem;
-
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
@@ -9,6 +9,7 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
+using SecuritySystem;
 using SecuritySystem.Testing;
 
 namespace SampleSystem.IntegrationTests;

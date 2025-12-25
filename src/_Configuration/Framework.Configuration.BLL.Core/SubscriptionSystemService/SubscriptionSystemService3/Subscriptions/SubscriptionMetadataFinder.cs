@@ -1,30 +1,21 @@
-﻿using Framework.Configuration.SubscriptionModeling;
+﻿using CommonFramework.DependencyInjection;
 
-using Microsoft.Extensions.DependencyInjection;
+using Framework.Configuration.SubscriptionModeling;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 
 /// <inheritdoc />
-public class SubscriptionMetadataFinder : ISubscriptionMetadataFinder
+public class SubscriptionMetadataFinder(IServiceProxyFactory serviceProxyFactory, IEnumerable<SubscriptionMetadataFinderAssemblyInfo> assemblyInfoList)
+    : ISubscriptionMetadataFinder
 {
-    private readonly IServiceProvider rootServiceProvider;
-
-    private readonly IEnumerable<SubscriptionMetadataFinderAssemblyInfo> assemblyInfoList;
-
-    public SubscriptionMetadataFinder(IServiceProvider rootServiceProvider, IEnumerable<SubscriptionMetadataFinderAssemblyInfo> assemblyInfoList)
-    {
-        this.rootServiceProvider = rootServiceProvider;
-        this.assemblyInfoList = assemblyInfoList;
-    }
-
     public IEnumerable<ISubscriptionMetadata> Find()
     {
-        return from assemblyInfo in this.assemblyInfoList
+        return from assemblyInfo in assemblyInfoList
 
                from type in assemblyInfo.Assembly.GetTypes()
 
                where !type.IsAbstract && typeof(ISubscriptionMetadata).IsAssignableFrom(type)
 
-               select (ISubscriptionMetadata)ActivatorUtilities.CreateInstance(this.rootServiceProvider, type);
+               select serviceProxyFactory.Create<ISubscriptionMetadata>(type);
     }
 }

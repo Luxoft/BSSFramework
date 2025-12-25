@@ -11,6 +11,7 @@ using Framework.DomainDriven.Jobs;
 using Framework.Notification.DTO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
@@ -19,6 +20,8 @@ using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers.Main;
 using SampleSystem.ServiceEnvironment.Jobs;
 using SampleSystem.ServiceEnvironment.NHibernate;
+
+using SecuritySystem.GeneralPermission.Validation;
 
 namespace SampleSystem.IntegrationTests.__Support;
 

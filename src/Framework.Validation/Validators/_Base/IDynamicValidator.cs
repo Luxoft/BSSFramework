@@ -22,15 +22,15 @@ public interface IDynamicClassValidatorBase : IDynamicValidator<Type, IClassVali
 
 public static class DynamicValidatorExtensions
 {
-    public static IPropertyValidator GetLastPropertyValidator(this IPropertyValidator propertyValidator, PropertyInfo property, IServiceProvider serviceProvider)
+    public static IPropertyValidator? GetLastPropertyValidator(this IPropertyValidator propertyValidator, PropertyInfo property, IServiceProvider serviceProvider)
     {
         if (propertyValidator == null) throw new ArgumentNullException(nameof(propertyValidator));
         if (property == null) throw new ArgumentNullException(nameof(property));
         if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
-        if (propertyValidator is IDynamicPropertyValidatorBase)
+        if (propertyValidator is IDynamicPropertyValidatorBase dynamicPropertyValidatorBase)
         {
-            return (propertyValidator as IDynamicPropertyValidatorBase).GetLastPropertyValidator(property, serviceProvider);
+            return dynamicPropertyValidatorBase.GetLastPropertyValidator(property, serviceProvider);
         }
         else
         {
@@ -38,7 +38,7 @@ public static class DynamicValidatorExtensions
         }
     }
 
-    public static IPropertyValidator GetLastPropertyValidator(this IDynamicPropertyValidatorBase dynamicValidator, PropertyInfo property, IServiceProvider serviceProvider)
+    public static IPropertyValidator? GetLastPropertyValidator(this IDynamicPropertyValidatorBase dynamicValidator, PropertyInfo property, IServiceProvider serviceProvider)
     {
         if (dynamicValidator == null) throw new ArgumentNullException(nameof(dynamicValidator));
         if (property == null) throw new ArgumentNullException(nameof(property));
@@ -47,15 +47,15 @@ public static class DynamicValidatorExtensions
     }
 
 
-    public static IClassValidator GetLastClassValidator(this IClassValidator typeValidator, Type type, IServiceProvider serviceProvider)
+    public static IClassValidator? GetLastClassValidator(this IClassValidator typeValidator, Type type, IServiceProvider serviceProvider)
     {
         if (typeValidator == null) throw new ArgumentNullException(nameof(typeValidator));
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
-        if (typeValidator is IDynamicClassValidatorBase)
+        if (typeValidator is IDynamicClassValidatorBase dynamicClassValidatorBase)
         {
-            return (typeValidator as IDynamicClassValidatorBase).GetLastClassValidator(type, serviceProvider);
+            return dynamicClassValidatorBase.GetLastClassValidator(type, serviceProvider);
         }
         else
         {
@@ -63,7 +63,7 @@ public static class DynamicValidatorExtensions
         }
     }
 
-    public static IClassValidator GetLastClassValidator(this IDynamicClassValidatorBase dynamicValidator, Type type, IServiceProvider serviceProvider)
+    public static IClassValidator? GetLastClassValidator(this IDynamicClassValidatorBase dynamicValidator, Type type, IServiceProvider serviceProvider)
     {
         if (dynamicValidator == null) throw new ArgumentNullException(nameof(dynamicValidator));
         if (type == null) throw new ArgumentNullException(nameof(type));

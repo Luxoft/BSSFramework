@@ -1,9 +1,8 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.Persistent;
+using CommonFramework.DependencyInjection;
 
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using Framework.Persistent;
 
 using SecuritySystem;
 using SecuritySystem.DependencyInjection;
@@ -17,6 +16,6 @@ public static class SecurityContextInfoBuilderExtensions
         Expression<Func<TDomainObject, int>> path)
         where TDomainObject : class, ISecurityContext
     {
-        return builder.AddExtension(services => services.Replace(ServiceDescriptor.Singleton(new DeepLevelInfo<TDomainObject>(path))));
+        return builder.AddExtension(services => services.ReplaceSingleton(new DeepLevelInfo<TDomainObject>(path)));
     }
 }

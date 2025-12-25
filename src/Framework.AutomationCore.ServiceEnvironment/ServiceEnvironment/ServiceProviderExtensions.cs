@@ -79,7 +79,6 @@ public static class ServiceProviderExtensions
         public IServiceCollection AddBssSecuritySystemTesting() =>
             services.AddSecuritySystemTesting()
                     .Replace(ServiceDescriptor.Singleton(typeof(ITestingEvaluator<>), typeof(BssTestingEvaluator<>)))
-                    .Replace(
-                        ServiceDescriptor.Singleton<TestRootUserInfo>(sp => new(sp.GetRequiredService<IOptions<AutomationFrameworkSettings>>().Value.IntegrationTestUserName)));
+                    .ReplaceSingletonFrom<TestRootUserInfo, IOptions<AutomationFrameworkSettings>>(options => new TestRootUserInfo(options.Value.IntegrationTestUserName));
     }
 }

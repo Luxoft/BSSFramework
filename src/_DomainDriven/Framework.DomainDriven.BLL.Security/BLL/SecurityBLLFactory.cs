@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using CommonFramework.DependencyInjection;
+
+using Framework.Core;
 using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +28,6 @@ public abstract class SecurityBLLFactory<TBLLContext, TBLL, TBLLImpl, TDomainObj
 
     public virtual TBLL Create(ISecurityProvider<TDomainObject> securityProvider)
     {
-        return ActivatorUtilities.CreateInstance<TBLLImpl>(this.Context.ServiceProvider, securityProvider);
+        return this.Context.ServiceProvider.GetRequiredService<IServiceProxyFactory>().Create<TBLL, TBLLImpl>(securityProvider);
     }
 }

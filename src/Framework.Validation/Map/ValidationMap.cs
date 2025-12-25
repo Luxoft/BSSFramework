@@ -22,7 +22,7 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
                let getPropertyMapMethod = new Func<PropertyInfo, PropertyValidationMap<TSource, object>>(this.GetPropertyMap<TSource, object>)
                        .CreateGenericMethod(typeof(TSource), property.PropertyType)
 
-               select (IPropertyValidationMap<TSource>)getPropertyMapMethod.Invoke(this, new object[] { property });
+               select getPropertyMapMethod.Invoke<IPropertyValidationMap<TSource>>(this, property);
     }
 
     private PropertyValidationMap<TSource, TProperty> GetPropertyMap<TSource, TProperty>(PropertyInfo property)

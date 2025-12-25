@@ -96,7 +96,8 @@ public class AuthorizationSystemSettings : IAuthorizationSystemSettings
                         services.AddScoped(typeof(IPermissionEqualityComparer<Permission, PermissionRestriction>), this.uniquePermissionComparerType);
                     }
 
-                    services.AddRelativeDomainPath((Permission permission) => permission.DelegatedFrom!, nameof(Permission.DelegatedFrom))
+                    services.AddRelativeDomainPath((Permission permission) => permission.Principal)
+                            .AddRelativeDomainPath((Permission permission) => permission.DelegatedFrom!.Principal, nameof(Permission.DelegatedFrom))
 
                             .AddRelativeDomainPath((BusinessRole businessRole) => businessRole)
                             .AddScoped(typeof(AvailableBusinessRoleSecurityProvider<>))

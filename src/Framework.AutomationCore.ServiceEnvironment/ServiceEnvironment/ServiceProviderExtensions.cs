@@ -6,7 +6,6 @@ using Automation.Settings;
 using CommonFramework;
 using CommonFramework.DependencyInjection;
 
-using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.Jobs;
 using Framework.DomainDriven.WebApiNetCore;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 using SecuritySystem.Credential;
-using SecuritySystem.Services;
 using SecuritySystem.Testing;
 using SecuritySystem.Testing.DependencyInjection;
 

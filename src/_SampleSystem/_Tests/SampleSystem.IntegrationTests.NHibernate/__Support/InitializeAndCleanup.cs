@@ -5,6 +5,7 @@ using Bss.Platform.Events.Abstractions;
 
 using CommonFramework.DependencyInjection;
 
+using Framework.Authorization.Domain;
 using Framework.Configuration.BLL;
 using Framework.Core;
 using Framework.DomainDriven.Jobs;
@@ -13,7 +14,6 @@ using Framework.Notification.DTO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.IntegrationTests.__Support.Utils;
@@ -22,8 +22,11 @@ using SampleSystem.WebApiCore.Controllers.Main;
 using SampleSystem.ServiceEnvironment.Jobs;
 using SampleSystem.ServiceEnvironment.NHibernate;
 
+using SecuritySystem.GeneralPermission.Validation.Principal;
+using SecuritySystem.Services;
+using SecuritySystem.Testing;
 
-using SecuritySystem.UserSource;
+using Principal = SampleSystem.Domain.Principal;
 
 namespace SampleSystem.IntegrationTests.__Support;
 

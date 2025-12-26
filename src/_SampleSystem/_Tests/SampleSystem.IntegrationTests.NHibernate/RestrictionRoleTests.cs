@@ -88,7 +88,7 @@ public class RestrictionRoleTests : TestBase
 
         // Assert
         action.Should().Throw<SecuritySystemValidationException>()
-              .And.Message.Should().Contain($"Invalid SecurityContextType: {nameof(Location)}.");
+              .And.Message.Should().Contain($"Invalid SecurityContextType: {nameof(Location)}");
     }
 
     [TestMethod]

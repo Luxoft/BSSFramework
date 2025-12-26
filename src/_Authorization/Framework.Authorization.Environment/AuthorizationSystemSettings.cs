@@ -59,7 +59,7 @@ public class AuthorizationSystemSettings : IAuthorizationSystemSettings
                     }
                 })
 
-            .AddGeneralPermission(
+                .AddGeneralPermission(
                     p => p.Principal,
                     p => p.Role,
                     (PermissionRestriction pr) => pr.Permission,

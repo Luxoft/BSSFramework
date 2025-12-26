@@ -1,8 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-using SampleSystem.IntegrationTests.__Support.TestData;
-
-namespace SampleSystem.IntegrationTests;
+﻿namespace SampleSystem.IntegrationTests;
 
 //[TestClass]
 //public class InitTests : TestBase

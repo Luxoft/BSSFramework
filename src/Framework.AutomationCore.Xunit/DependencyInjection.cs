@@ -5,11 +5,16 @@ using Automation.Xunit.ServiceEnvironment;
 
 using Bss.Testing.Xunit.Interfaces;
 
+using CommonFramework;
 using CommonFramework.DependencyInjection;
 
 using Framework.DomainDriven.WebApiNetCore;
 
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+
+using SecuritySystem.Testing;
+using SecuritySystem.Testing.DependencyInjection;
 
 namespace Automation.Xunit;
 
@@ -36,6 +41,8 @@ public static class DependencyInjection
 
                .AddSingleton(typeof(ControllerEvaluator<>))
 
-               .AddBssSecuritySystemTesting();
+               .AddSecuritySystemTesting(b => b.SetEvaluator(typeof(BssTestingEvaluator<>))
+                                               .SetTestRootUserInfo(sp => sp.GetRequiredService<IOptions<AutomationFrameworkSettings>>()
+                                                                            .Pipe(o => new TestRootUserInfo(o.Value.IntegrationTestUserName))));
     }
 }

@@ -83,9 +83,3 @@ public static class ServiceProviderExtensions
                                                                                  .Pipe(options => new TestRootUserInfo(options.Value.IntegrationTestUserName))));
     }
 }
-
-public class BssTestingUserAuthenticationService(ITestingEvaluator<IUserCredentialNameResolver> credentialNameResolverEvaluator, TestRootUserInfo testRootUserInfo)
-    : TestingUserAuthenticationService(credentialNameResolverEvaluator, testRootUserInfo), IImpersonateService
-{
-
-};

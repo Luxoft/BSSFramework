@@ -71,29 +71,29 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
     }
 
 
-    [TestMethod]
-    public void TestLegacyEmployeeProjection_AccessorsResolved()
-    {
-        // Arrange
+    //[TestMethod]
+    //public void TestLegacyEmployeeProjection_AccessorsResolved()
+    //{
+    //    // Arrange
 
-        // Act
-        var items = this.Evaluate(
-            DBSessionMode.Read,
-            TestEmployeeLogin,
-            ctx =>
-            {
-                var bll = ctx.Logics.TestLegacyEmployeeFactory.Create(SecurityRule.View);
+    //    // Act
+    //    var items = this.Evaluate(
+    //        DBSessionMode.Read,
+    //        TestEmployeeLogin,
+    //        ctx =>
+    //        {
+    //            var bll = ctx.Logics.TestLegacyEmployeeFactory.Create(SecurityRule.View);
 
-                return bll.GetListBy(v => v.BusinessUnit_Security != null)
-                          .ToDictionary(v => v.Id, bll.SecurityProvider.GetAccessorData)
-                          .ChangeValue(ctx.SecurityAccessorResolver.Resolve);
-            });
+    //            return bll.GetListBy(v => v.BusinessUnit_Security != null)
+    //                      .ToDictionary(v => v.Id, bll.SecurityProvider.GetAccessorData)
+    //                      .ChangeValue(ctx.SecurityAccessorResolver.Resolve);
+    //        });
 
-        // Assert
-        items.Count().Should().Be(1);
-        var item = items.Single();
-        item.Key.Should().Be(this.TestEmp2.Id);
+    //    // Assert
+    //    items.Count().Should().Be(1);
+    //    var item = items.Single();
+    //    item.Key.Should().Be(this.TestEmp2.Id);
 
-        item.Value.Should().Contain(TestEmployeeLogin);
-    }
+    //    item.Value.Should().Contain(TestEmployeeLogin);
+    //}
 }

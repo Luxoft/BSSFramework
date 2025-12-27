@@ -62,6 +62,8 @@ public class InitializeAndCleanup
 
                .AddSingleton<DataHelper>()
 
-               .AddSingleton<TestDataInitializer>();
+               .AddSingleton<TestDataInitializer>()
+               //.AddServiceProxyFactory(b => b.AddRedirect(typeof(RawPermissionConverter<,>), typeof(MyRawPermissionConverter<,>)))
+               ;
     }
 }

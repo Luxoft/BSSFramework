@@ -2,7 +2,7 @@
 
 using SampleSystem.WebApiCore.Controllers.Main;
 
-namespace SampleSystem.IntegrationTests;
+namespace SampleSystem.IntegrationTests.__Support.WebApi;
 
 public class MainWebApi : WebApiBase
 {

@@ -2910,6 +2910,11 @@ namespace Framework.Authorization.Generated.DTO
         {
             return mappingService.ToPermission(this);
         }
+        
+        public Framework.Authorization.Domain.Permission ToDomainObject(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, bool allowCreate)
+        {
+            return mappingService.ToPermission(this, allowCreate);
+        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
@@ -3920,6 +3925,11 @@ namespace Framework.Authorization.Generated.DTO
         public Framework.Authorization.Domain.PermissionRestriction ToDomainObject(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService)
         {
             return mappingService.ToPermissionRestriction(this);
+        }
+        
+        public Framework.Authorization.Domain.PermissionRestriction ToDomainObject(Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService mappingService, bool allowCreate)
+        {
+            return mappingService.ToPermissionRestriction(this, allowCreate);
         }
     }
     
@@ -6429,6 +6439,8 @@ namespace Framework.Authorization.Generated.DTO
         
         Framework.Authorization.Domain.Permission ToPermission(Framework.Authorization.Generated.DTO.PermissionStrictDTO permissionStrictDTO);
         
+        Framework.Authorization.Domain.Permission ToPermission(Framework.Authorization.Generated.DTO.PermissionStrictDTO permissionStrictDTO, bool allowCreate);
+        
         Framework.Authorization.Domain.Permission ToPermission(Framework.Authorization.Generated.DTO.PermissionStrictDTO permissionStrictDTO, Framework.Authorization.Domain.Principal master);
         
         Framework.Authorization.Domain.PermissionDirectFilterModel ToPermissionDirectFilterModel(Framework.Authorization.Generated.DTO.PermissionDirectFilterModelStrictDTO permissionDirectFilterModelStrictDTO);
@@ -6436,6 +6448,8 @@ namespace Framework.Authorization.Generated.DTO
         Framework.Authorization.Domain.PermissionRestriction ToPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO permissionRestrictionIdentityDTO);
         
         Framework.Authorization.Domain.PermissionRestriction ToPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO permissionRestrictionStrictDTO);
+        
+        Framework.Authorization.Domain.PermissionRestriction ToPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO permissionRestrictionStrictDTO, bool allowCreate);
         
         Framework.Authorization.Domain.PermissionRestriction ToPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO permissionRestrictionStrictDTO, Framework.Authorization.Domain.Permission master);
         
@@ -7125,6 +7139,18 @@ namespace Framework.Authorization.Generated.DTO
             return this.ToDomainObject<Framework.Authorization.Generated.DTO.PermissionStrictDTO, Framework.Authorization.Domain.Permission>(permissionStrictDTO);
         }
         
+        public virtual Framework.Authorization.Domain.Permission ToPermission(Framework.Authorization.Generated.DTO.PermissionStrictDTO permissionStrictDTO, bool allowCreate)
+        {
+            if (allowCreate)
+            {
+                return this.ToDomainObject(permissionStrictDTO, () => new Framework.Authorization.Domain.Permission());
+            }
+            else
+            {
+                return this.ToPermission(permissionStrictDTO);
+            }
+        }
+        
         public virtual Framework.Authorization.Domain.Permission ToPermission(Framework.Authorization.Generated.DTO.PermissionStrictDTO permissionStrictDTO, Framework.Authorization.Domain.Principal principal)
         {
             return this.ToDomainObject(permissionStrictDTO, () => new Framework.Authorization.Domain.Permission(principal));
@@ -7143,6 +7169,18 @@ namespace Framework.Authorization.Generated.DTO
         public virtual Framework.Authorization.Domain.PermissionRestriction ToPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO permissionRestrictionStrictDTO)
         {
             return this.ToDomainObject<Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO, Framework.Authorization.Domain.PermissionRestriction>(permissionRestrictionStrictDTO);
+        }
+        
+        public virtual Framework.Authorization.Domain.PermissionRestriction ToPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO permissionRestrictionStrictDTO, bool allowCreate)
+        {
+            if (allowCreate)
+            {
+                return this.ToDomainObject(permissionRestrictionStrictDTO, () => new Framework.Authorization.Domain.PermissionRestriction());
+            }
+            else
+            {
+                return this.ToPermissionRestriction(permissionRestrictionStrictDTO);
+            }
         }
         
         public virtual Framework.Authorization.Domain.PermissionRestriction ToPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO permissionRestrictionStrictDTO, Framework.Authorization.Domain.Permission permission)

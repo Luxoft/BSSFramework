@@ -31,11 +31,11 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                                        .AddCustomSecurityOperations()
                                        .SetClientDomainModeSecurityRuleSource<SampleSystemClientDomainModeSecurityRuleSource>()
                                        .AddClientSecurityRuleInfoSource(typeof(SampleSystemSecurityGroup))
-                                       .SetUserSource<Employee>(employee => employee.Id, employee => employee.Login, employee => employee.Active)
+                                       .AddUserSource<Employee>(usb => usb.SetFilter(employee => employee.Active))
                                        .AddVirtualPermissions()
-                                       .SetSecurityAdministratorRule(SampleSystemSecurityRole.PermissionAdministrator))
+                                       .SetSecurityAdministratorRule(SampleSystemSecurityRole.PermissionAdministrator)
 
-                           .AddAuthorizationSystem()
+                                       .AddAuthorizationSystem())
 
                            .AddNamedLocks()
 

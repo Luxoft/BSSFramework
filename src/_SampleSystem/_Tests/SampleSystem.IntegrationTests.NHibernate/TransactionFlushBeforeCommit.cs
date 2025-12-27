@@ -3,7 +3,7 @@
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-namespace SampleSystem.IntegrationTests.IADFRAME_1694;
+namespace SampleSystem.IntegrationTests;
 
 [TestClass]
 public class TransactionFlushBeforeCommit : TestBase

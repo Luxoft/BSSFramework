@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="IvAt.CommonFramework.DependencyInjection" />
+    <PackageReference Include="IvAt.CommonFramework.IdentitySource" />
     <PackageReference Include="IvAt.GenericQueryable.EntityFramework" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />

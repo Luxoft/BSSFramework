@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CommonFramework.GenericRepository;
 
-using SecuritySystem.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven;
 
-public class AsyncDalQueryableSource(IServiceProvider serviceProvider) : IQueryableSource
+public class DalQueryableSource(IServiceProvider serviceProvider) : IQueryableSource
 {
     public IQueryable<TDomainObject> GetQueryable<TDomainObject>()
         where TDomainObject : class

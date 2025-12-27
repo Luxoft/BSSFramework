@@ -1,7 +1,5 @@
 ﻿using CommonFramework;
 
-using FluentValidation;
-
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.Exceptions;
@@ -16,7 +14,7 @@ public partial class PermissionBLL
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));
 
-        if (this.Context.CurrentPrincipalSource.CurrentPrincipal.RunAs != null)
+        if (this.Context.CurrentPrincipalSource.CurrentUser.RunAs != null)
         {
             throw new BusinessLogicException("RunAs mode must be disabled");
         }
@@ -26,7 +24,7 @@ public partial class PermissionBLL
 
     protected override void Validate(Permission permission, AuthorizationOperationContext operationContext)
     {
-        this.Context.PrincipalValidator.ValidateAndThrow(permission.Principal);
+        this.Context.PrincipalValidator.ValidateAsync(permission.Principal.ToPrincipalData(), CancellationToken.None).GetAwaiter().GetResult();
 
         base.Validate(permission, operationContext);
     }

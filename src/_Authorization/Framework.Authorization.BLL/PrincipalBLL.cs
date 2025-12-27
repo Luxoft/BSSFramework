@@ -1,9 +1,9 @@
-﻿using FluentValidation;
-using Framework.Authorization.Domain;
-using Framework.Authorization.SecuritySystemImpl;
+﻿using Framework.Authorization.Domain;
 using Framework.Exceptions;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using SecuritySystem.Services;
 
 namespace Framework.Authorization.BLL;
 
@@ -13,7 +13,7 @@ public partial class PrincipalBLL
     {
         if (principal == null) throw new ArgumentNullException(nameof(principal));
 
-        if (this.Context.CurrentPrincipalSource.CurrentPrincipal.RunAs != null)
+        if (this.Context.CurrentPrincipalSource.CurrentUser.RunAs != null)
         {
             throw new BusinessLogicException("RunAs mode must be disabled");
         }
@@ -23,14 +23,14 @@ public partial class PrincipalBLL
 
     protected override void Validate(Principal domainObject, AuthorizationOperationContext operationContext)
     {
-        this.Context.PrincipalValidator.ValidateAndThrow(domainObject);
+        this.Context.PrincipalValidator.ValidateAsync(domainObject.ToPrincipalData(), CancellationToken.None).GetAwaiter().GetResult();
 
         base.Validate(domainObject, operationContext);
     }
 
     public override void Remove(Principal domainObject)
     {
-        this.Context.ServiceProvider.GetRequiredService<IPrincipalDomainService>().RemoveAsync(domainObject).GetAwaiter().GetResult();
+        this.Context.ServiceProvider.GetRequiredService<IPrincipalDomainService<Principal>>().RemoveAsync(domainObject).GetAwaiter().GetResult();
 
         base.Remove(domainObject);
     }

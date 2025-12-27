@@ -1,4 +1,4 @@
-﻿using SecuritySystem.HierarchicalExpand;
+﻿using HierarchicalExpand;
 
 namespace Framework.DomainDriven;
 

@@ -12,7 +12,7 @@ using SecuritySystem.Configurator.Handlers;
 
 namespace Framework.Configurator.Handlers;
 
-public class ForcePushEventHandler([CurrentUserWithoutRunAs] ISecuritySystem securitySystem, IEventSystem eventSystem)
+public class ForcePushEventHandler([WithoutRunAs] ISecuritySystem securitySystem, IEventSystem eventSystem)
     : BaseWriteHandler, IForcePushEventHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)

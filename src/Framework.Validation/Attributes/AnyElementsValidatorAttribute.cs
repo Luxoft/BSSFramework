@@ -30,13 +30,13 @@ public class AnyElementsValidator : IDynamicPropertyValidator
     public static AnyElementsValidator Value { get; } = new AnyElementsValidator();
 }
 
-public class AnyElementsValidator<TElement> : IPropertyValidator<object, IEnumerable<TElement>>
+public class AnyElementsValidator<TElement> : IPropertyValidator<object, IEnumerable<TElement>?>
 {
-    public ValidationResult GetValidationResult(IPropertyValidationContext<object, IEnumerable<TElement>> context)
+    public ValidationResult GetValidationResult(IPropertyValidationContext<object, IEnumerable<TElement>?> context)
     {
         var value = context.Value;
 
-        return ValidationResult.FromCondition(null == value || value.Any(),
+        return ValidationResult.FromCondition(value is null || value.Any(),
                                               () => $"Collection {context.GetPropertyTypeName()} of {context.GetSourceTypeName()} can't be empty");
     }
 }

@@ -11,7 +11,7 @@ using SecuritySystem.Configurator.Handlers;
 namespace Framework.Configurator.Handlers;
 
 public class GetSystemConstantsHandler(
-    [CurrentUserWithoutRunAs] ISecuritySystem securitySystem,
+    [WithoutRunAs] ISecuritySystem securitySystem,
     IApplicationVariableStorage variableStorage)
     : BaseReadHandler, IGetSystemConstantsHandler
 {

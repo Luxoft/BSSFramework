@@ -10,13 +10,13 @@ namespace Framework.Authorization.Domain;
 /// </summary>
 public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Permission>
 {
-    private readonly Permission permission;
+    private Permission permission;
 
     private SecurityContextType securityContextType;
 
     private Guid securityContextId;
 
-    protected PermissionRestriction()
+    public PermissionRestriction()
     {
     }
 
@@ -35,7 +35,12 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
     /// <summary>
     /// Пермиссия по связке контекст+пермиссия
     /// </summary>
-    public virtual Permission Permission => this.permission;
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
+    public virtual Permission Permission
+    {
+        get { return this.permission; }
+        set { this.permission = value; }
+    }
 
     /// <summary>
     /// Вычисляемый доменный тип по связке контекст+пермиссия

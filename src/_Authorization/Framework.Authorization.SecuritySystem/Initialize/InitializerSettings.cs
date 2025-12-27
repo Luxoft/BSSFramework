@@ -1,3 +1,0 @@
-﻿namespace Framework.Authorization.SecuritySystemImpl.Initialize;
-
-public record InitializerSettings(UnexpectedAuthElementMode UnexpectedAuthElementMode = UnexpectedAuthElementMode.Remove);

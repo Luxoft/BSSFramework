@@ -1,9 +1,13 @@
 ﻿using Automation.ServiceEnvironment;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
+using SampleSystem.IntegrationTests.__Support.WebApi;
 using SampleSystem.WebApiCore.Controllers;
+
+using SecuritySystem.Testing;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData;
 
@@ -18,9 +22,9 @@ public class TestBase : IntegrationTestBase<ISampleSystemBLLContext>
 
     public MainAuditWebApi MainAuditWebApi => new(this.RootServiceProvider);
 
-    protected DataHelper DataHelper => this.RootServiceProvider.GetService<DataHelper>();
+    protected DataHelper DataHelper => this.RootServiceProvider.GetRequiredService<DataHelper>();
 
-    protected RootAuthManager AuthManager => this.RootServiceProvider.GetService<RootAuthManager>();
+    protected RootAuthManager AuthManager => this.RootServiceProvider.GetRequiredService<RootAuthManager>();
 
     [TestInitialize]
     public void TestBaseInitialize()
@@ -34,12 +38,12 @@ public class TestBase : IntegrationTestBase<ISampleSystemBLLContext>
         base.Cleanup();
     }
 
-    protected ControllerEvaluator<AuthSLJsonController> GetAuthControllerEvaluator(string principalName = null)
+    protected ControllerEvaluator<AuthSLJsonController> GetAuthControllerEvaluator(string? principalName = null)
     {
         return this.GetControllerEvaluator<AuthSLJsonController>(principalName);
     }
 
-    protected ControllerEvaluator<ConfigSLJsonController> GetConfigurationControllerEvaluator(string principalName = null)
+    protected ControllerEvaluator<ConfigSLJsonController> GetConfigurationControllerEvaluator(string? principalName = null)
     {
         return this.GetControllerEvaluator<ConfigSLJsonController>(principalName);
     }

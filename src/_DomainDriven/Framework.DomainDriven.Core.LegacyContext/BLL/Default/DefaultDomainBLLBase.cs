@@ -11,7 +11,7 @@ using Framework.Persistent;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem.HierarchicalExpand;
+using HierarchicalExpand;
 
 
 

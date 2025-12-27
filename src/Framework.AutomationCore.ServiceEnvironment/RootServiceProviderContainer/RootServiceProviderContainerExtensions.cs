@@ -12,39 +12,22 @@ namespace Automation.ServiceEnvironment;
 
 public static class RootServiceProviderContainerExtensions
 {
-    public static IDatabaseContext GetDatabaseContext(this IRootServiceProviderContainer rootServiceProviderContainer)
+    extension(IRootServiceProviderContainer rootServiceProviderContainer)
     {
-        return rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IDatabaseContext>();
-    }
+        public IDatabaseContext GetDatabaseContext() => rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IDatabaseContext>();
 
-    public static AutomationFrameworkSettings GetAutomationFrameworkSettings(this IRootServiceProviderContainer rootServiceProviderContainer)
-    {
-        return rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IOptions<AutomationFrameworkSettings>>().Value;
-    }
+        public AutomationFrameworkSettings GetAutomationFrameworkSettings() => rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IOptions<AutomationFrameworkSettings>>().Value;
 
-    public static TimeProvider GetTimeProvider(this IRootServiceProviderContainer rootServiceProviderContainer)
-    {
-        return rootServiceProviderContainer.RootServiceProvider.GetRequiredService<TimeProvider>();
-    }
+        public TimeProvider GetTimeProvider() => rootServiceProviderContainer.RootServiceProvider.GetRequiredService<TimeProvider>();
 
-    public static void SetCurrentDateTime(this IRootServiceProviderContainer rootServiceProviderContainer, DateTime newDateTime)
-    {
-        rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IntegrationTestTimeProvider>().SetCurrentDateTime(newDateTime);
-    }
+        public void SetCurrentDateTime(DateTime newDateTime) => rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IntegrationTestTimeProvider>().SetCurrentDateTime(newDateTime);
 
-    public static TResult EvaluateController<TController, TResult>(
-            this IRootServiceProviderContainer rootServiceProviderContainer,
-            Expression<Func<TController, TResult>> func)
-            where TController : ControllerBase
-    {
-        return rootServiceProviderContainer.RootServiceProvider.GetDefaultControllerEvaluator<TController>().Evaluate(func);
-    }
+        public TResult EvaluateController<TController, TResult>(Expression<Func<TController, TResult>> func)
+            where TController : ControllerBase =>
+            rootServiceProviderContainer.RootServiceProvider.GetDefaultControllerEvaluator<TController>().Evaluate(func);
 
-    public static void EvaluateController<TController>(
-            this IRootServiceProviderContainer rootServiceProviderContainer,
-            Expression<Action<TController>> action)
-            where TController : ControllerBase
-    {
-        rootServiceProviderContainer.RootServiceProvider.GetDefaultControllerEvaluator<TController>().Evaluate(action);
+        public void EvaluateController<TController>(Expression<Action<TController>> action)
+            where TController : ControllerBase =>
+            rootServiceProviderContainer.RootServiceProvider.GetDefaultControllerEvaluator<TController>().Evaluate(action);
     }
 }

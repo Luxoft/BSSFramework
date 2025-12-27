@@ -1,7 +1,8 @@
 ﻿using CommonFramework;
 
 using Framework.DomainDriven.Lock;
-using SecuritySystem;
+
+using SecuritySystem.AccessDenied;
 using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.Repository;

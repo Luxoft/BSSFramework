@@ -7,6 +7,9 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
+using SecuritySystem;
+using SecuritySystem.Validation;
+
 namespace SampleSystem.IntegrationTests;
 
 [TestClass]
@@ -43,14 +46,14 @@ public class PrincipalWithInitTests : TestBase
         this.AuthManager.For(TestPrincipalName).SetRole(
             new SampleSystemTestPermission(
             SampleSystemSecurityRole.TestPerformance,
-            new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)) { Period = this.testPeriod });
+            new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)) { Period = new PermissionPeriod(this.testPeriod.StartDate, this.testPeriod.EndDate) });
     }
 
     [TestMethod]
     public void CreateDuplicatePermission_ValidationError()
     {
         // Arrange
-        var expectedErrorMessage = $"Principal \"{TestPrincipalName}\" has duplicate permissions: (Role: {SampleSystemSecurityRole.TestPerformance} | Period: {this.testPeriod} | BusinessUnits: {DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME})";
+        var expectedErrorMessage = $"Principal \"{TestPrincipalName}\" has duplicate permissions";
 
         // Act
         var call = () =>
@@ -96,6 +99,6 @@ public class PrincipalWithInitTests : TestBase
                    };
 
         // Assert
-        call.Should().Throw<ValidationException>().And.Message.Should().Contain(expectedErrorMessage);
+        call.Should().Throw<SecuritySystemValidationException>().And.Message.Should().Contain(expectedErrorMessage);
     }
 }

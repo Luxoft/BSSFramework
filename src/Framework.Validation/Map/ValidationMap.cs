@@ -8,14 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Validation;
 
-public class ValidationMap : ValidationMapBase
+public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase(serviceProvider)
 {
-    public ValidationMap(IServiceProvider serviceProvider)
-            : base(serviceProvider)
-    {
-    }
-
-
     protected override IClassValidationMap<TSource> GetInternalClassMap<TSource>()
     {
         return new ClassValidationMap<TSource>(this.GetPropertyMaps<TSource>(), this.GetClassValidators<TSource>());
@@ -28,7 +22,7 @@ public class ValidationMap : ValidationMapBase
                let getPropertyMapMethod = new Func<PropertyInfo, PropertyValidationMap<TSource, object>>(this.GetPropertyMap<TSource, object>)
                        .CreateGenericMethod(typeof(TSource), property.PropertyType)
 
-               select (IPropertyValidationMap<TSource>)getPropertyMapMethod.Invoke(this, new object[] { property });
+               select getPropertyMapMethod.Invoke<IPropertyValidationMap<TSource>>(this, property);
     }
 
     private PropertyValidationMap<TSource, TProperty> GetPropertyMap<TSource, TProperty>(PropertyInfo property)
@@ -45,7 +39,7 @@ public class ValidationMap : ValidationMapBase
         {
             var func = new Func<PropertyInfo, CollectionPropertyValidationMap<object, IEnumerable<object>, object>>(this.GetCollectionPropertyMap<object, IEnumerable<object>, object>);
 
-            return (PropertyValidationMap<TSource, TProperty>)func.CreateGenericMethod(typeof(TSource), typeof(TProperty), collectionElementType).Invoke(this, new object[] { property });
+            return func.CreateGenericMethod(typeof(TSource), typeof(TProperty), collectionElementType).Invoke<PropertyValidationMap<TSource, TProperty>>(this, property);
         }
     }
 
@@ -124,9 +118,9 @@ public class ValidationMap : ValidationMapBase
             }
             catch (Exception ex)
             {
-                throw new InvalidCastException($"Can't apply validator \"{basePropertyValidator.GetType().Name}\" to property \"{property.Name}\" of type \"{property.DeclaringType}\"", ex);
+                throw new InvalidCastException($"Can't apply validator \"{basePropertyValidator?.GetType().Name}\" to property \"{property.Name}\" of type \"{property.DeclaringType}\"", ex);
             }
-        }).Where(val => val != null);
+        }).Where(val => val != null).Select(v => v!);
     }
 
     private IEnumerable<IPropertyValidator<TSource, TProperty>> GetBasePropertyValidators<TSource, TProperty>(PropertyInfo property)

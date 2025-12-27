@@ -75,10 +75,11 @@ public partial class BusinessUnit :
         set { this.allowedForFilterRole = value; }
     }
 
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual int DeepLevel
     {
         get { return this.deepLevel; }
-        protected set { this.deepLevel = value; }
+        set { this.deepLevel = value; }
     }
 
     public virtual DateTime? LastBusinessUnitHasNoLinkedProjectsWarningCheckDate

@@ -1,5 +1,5 @@
-﻿using SampleSystem.IntegrationTests.__Support.TestData;
-using SampleSystem.DbGenerate;
+﻿using SampleSystem.DbGenerate;
+using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 

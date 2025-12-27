@@ -1,4 +1,6 @@
-﻿using System.Runtime.Serialization;
+﻿using System.IO;
+using System.Runtime.Serialization;
+using System.Threading;
 
 namespace Framework.Notification.DTO;
 
@@ -46,28 +48,26 @@ public class NotificationEventDTO
         this.Subject = mailMessage.Subject;
 
         this.Message = new NotificationMessage()
-                       {
-                               IsBodyHtml = mailMessage.IsBodyHtml,
-                               Message = mailMessage.Body
-                       };
+        {
+            IsBodyHtml = mailMessage.IsBodyHtml,
+            Message = mailMessage.Body
+        };
 
-        this.Attachments =  mailMessage.Attachments.Select(z =>
-                                                           {
-                                                               byte[] content;
-                                                               using (var reader = new BinaryReader(z.ContentStream))
-                                                               {
-                                                                   content = reader.ReadBytes((int)z.ContentStream.Length);
-                                                                   //todo check size
-                                                               }
-                                                               return new NotificationAttachmentDTO
-                                                                      {
-                                                                              Content = content,
-                                                                              Extension = z.ContentType.Name,
-                                                                              Name = z.Name,
-                                                                              ContentId = z.ContentId,
-                                                                              IsInline = z.ContentDisposition.Inline
-                                                                      };
-                                                           }).ToList();
+        this.Attachments = mailMessage.Attachments.Select(z =>
+        {
+            using var ms = new MemoryStream();
+            z.ContentStream.CopyTo(ms);
+            byte[] content = ms.ToArray();
+
+            return new NotificationAttachmentDTO
+            {
+                Content = content,
+                Extension = z.ContentType.Name,
+                Name = z.Name,
+                ContentId = z.ContentId,
+                IsInline = z.ContentDisposition.Inline
+            };
+        }).ToList();
 
         this.TechnicalInformation = new NotificationTechnicalInformationDTO(technicalInformation);
     }

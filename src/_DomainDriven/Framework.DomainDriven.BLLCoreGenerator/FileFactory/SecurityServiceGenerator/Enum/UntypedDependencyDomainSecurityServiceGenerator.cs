@@ -1,12 +1,13 @@
 ﻿using System.CodeDom;
 
+using CommonFramework.GenericRepository;
+
 using Framework.CodeDom;
 using Framework.Security;
 
 using SecuritySystem.DomainServices;
 using SecuritySystem.DomainServices.DependencySecurity;
 using SecuritySystem.Expanders;
-using SecuritySystem.Services;
 
 namespace Framework.DomainDriven.BLLCoreGenerator
 {
@@ -37,7 +38,7 @@ namespace Framework.DomainDriven.BLLCoreGenerator
             yield break;
         }
 
-        public override IEnumerable<(CodeTypeReference ParameterType, string Name, CodeExpression CustomBaseInvoke)> GetBaseTypeConstructorParameters()
+        public override IEnumerable<(CodeTypeReference? ParameterType, string? Name, CodeExpression? CustomBaseInvoke)> GetBaseTypeConstructorParameters()
         {
             yield return (typeof(ISecurityRuleExpander).ToTypeReference(), "securityRuleExpander", null);
             yield return (typeof(IDomainSecurityService<>).ToTypeReference(this.dependencySecurityAttr.SourceType), "baseDomainSecurityService", null);

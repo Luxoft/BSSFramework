@@ -7,10 +7,10 @@ using Framework.DomainDriven.DBGenerator;
 using Microsoft.Extensions.Options;
 
 using SampleSystem.DbGenerate;
-using SampleSystem.IntegrationTests.__Support;
+using SampleSystem.IntegrationTests.__Support.FluentMigration;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-namespace SampleSystem.IntegrationTests.Support.Utils;
+namespace SampleSystem.IntegrationTests.__Support.Utils;
 
 public class SampleSystemTestDatabaseGenerator(
     IDatabaseContext databaseContext,
@@ -39,7 +39,10 @@ public class SampleSystemTestDatabaseGenerator(
         }
     }
 
-    public override async Task GenerateTestDataAsync() => await testDataInitializer.InitializeAsync(default);
+    public override async Task GenerateTestDataAsync()
+    {
+        await testDataInitializer.InitializeAsync(default);
+    }
 
     public override void ExecuteInsertsForDatabases()
     {

@@ -2,7 +2,7 @@
 
 using SampleSystem.WebApiCore.Controllers.Audit;
 
-namespace SampleSystem.IntegrationTests;
+namespace SampleSystem.IntegrationTests.__Support.WebApi;
 
 public class MainAuditWebApi : WebApiBase
 {

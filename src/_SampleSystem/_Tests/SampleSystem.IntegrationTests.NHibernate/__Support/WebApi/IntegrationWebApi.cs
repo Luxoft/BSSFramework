@@ -2,7 +2,7 @@
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-namespace SampleSystem.IntegrationTests;
+namespace SampleSystem.IntegrationTests.__Support.WebApi;
 
 public class IntegrationWebApi : IntegrationWebApiBase
 {

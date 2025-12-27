@@ -10,15 +10,17 @@ using Framework.QueryLanguage;
 using SecuritySystem;
 
 using Framework.Authorization.Notification;
-using Framework.Authorization.SecuritySystemImpl;
-using Framework.Authorization.SecuritySystemImpl.Validation;
 using Framework.Events;
 using SecuritySystem.Services;
 
 using Microsoft.Extensions.DependencyInjection;
 using SecuritySystem.AvailableSecurity;
 using SecuritySystem.ExternalSystem.SecurityContextStorage;
-using SecuritySystem.HierarchicalExpand;
+using HierarchicalExpand;
+
+using SecuritySystem.AccessDenied;
+using SecuritySystem.GeneralPermission.Validation.Principal;
+using SecuritySystem.UserSource;
 
 namespace Framework.Authorization.BLL;
 
@@ -38,10 +40,10 @@ public partial class AuthorizationBLLContext(
     INotificationPrincipalExtractor notificationPrincipalExtractor,
     ISecuritySystem securitySystem,
     IRunAsManager runAsManager,
-    IAvailablePermissionSource availablePermissionSource,
+    IAvailablePermissionSource<Permission> availablePermissionSource,
     IAvailableSecurityRoleSource availableSecurityRoleSource,
-    ICurrentPrincipalSource currentPrincipalSource,
-    IPrincipalGeneralValidator principalValidator,
+    ICurrentUserSource<Principal> currentPrincipalSource,
+    [FromKeyedServices("Root")] IPrincipalValidator<Principal, Permission, PermissionRestriction> principalValidator,
     ICurrentUser currentUser,
     ISecurityContextInfoSource securityContextInfoSource,
     BLLContextSettings<PersistentDomainObjectBase> settings,
@@ -58,7 +60,7 @@ public partial class AuthorizationBLLContext(
 {
     private readonly IDictionaryCache<Type, SecurityContextType> securityContextTypeCache = new DictionaryCache<Type, SecurityContextType>(
         securityContextType => logics.SecurityContextType.GetById(
-            securityContextInfoSource.GetSecurityContextInfo(securityContextType).Id,
+            (Guid)securityContextInfoSource.GetSecurityContextInfo(securityContextType).Identity.GetId(),
             true)).WithLock();
 
     public ITypeResolver<string> TypeResolver { get; } = settings.TypeResolver;
@@ -69,15 +71,15 @@ public partial class AuthorizationBLLContext(
 
     public ISecuritySystem SecuritySystem { get; } = securitySystem;
 
-    public IPrincipalGeneralValidator PrincipalValidator { get; } = principalValidator;
+    public IPrincipalValidator<Principal, Permission, PermissionRestriction> PrincipalValidator { get; } = principalValidator;
 
-    public ICurrentPrincipalSource CurrentPrincipalSource { get; } = currentPrincipalSource;
+    public ICurrentUserSource<Principal> CurrentPrincipalSource { get; } = currentPrincipalSource;
 
     public ICurrentUser CurrentUser { get; } = currentUser;
 
     public IRunAsManager RunAsManager { get; } = runAsManager;
 
-    public IAvailablePermissionSource AvailablePermissionSource { get; } = availablePermissionSource;
+    public IAvailablePermissionSource<Permission> AvailablePermissionSource { get; } = availablePermissionSource;
 
     public IAvailableSecurityRoleSource AvailableSecurityRoleSource { get; } = availableSecurityRoleSource;
 

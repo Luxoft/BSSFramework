@@ -1,7 +1,5 @@
 ﻿using System.Linq.Expressions;
 
-using Automation.ServiceEnvironment.Services;
-
 using CommonFramework;
 using CommonFramework.Visitor;
 
@@ -13,6 +11,8 @@ using SecuritySystem.Credential;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+
+using SecuritySystem.Testing;
 
 namespace Automation.ServiceEnvironment;
 
@@ -92,7 +92,7 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
             else
             {
                 await context.RequestServices
-                             .GetRequiredService<IIntegrationTestUserAuthenticationService>()
+                             .GetRequiredService<ITestingUserAuthenticationService>()
                              .WithImpersonateAsync(customUserCredential, async () => await next(context));
             }
         }

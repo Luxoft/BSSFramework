@@ -1,4 +1,5 @@
 ﻿using Automation;
+
 using Automation.ServiceEnvironment;
 
 using Bss.Platform.Events.Abstractions;
@@ -9,16 +10,19 @@ using Framework.Configuration.BLL;
 using Framework.Core;
 using Framework.DomainDriven.Jobs;
 using Framework.Notification.DTO;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
-using SampleSystem.IntegrationTests.Support.Utils;
-using SampleSystem.ServiceEnvironment;
-using SampleSystem.WebApiCore.Controllers.Main;
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
+using SampleSystem.IntegrationTests.__Support.Utils;
+using SampleSystem.ServiceEnvironment;
 using SampleSystem.ServiceEnvironment.Jobs;
 using SampleSystem.ServiceEnvironment.NHibernate;
+using SampleSystem.WebApiCore.Controllers.Main;
+
+using SecuritySystem.GeneralPermission;
 
 namespace SampleSystem.IntegrationTests.__Support;
 
@@ -58,6 +62,8 @@ public class InitializeAndCleanup
 
                .AddSingleton<DataHelper>()
 
-               .AddSingleton<TestDataInitializer>();
+               .AddSingleton<TestDataInitializer>()
+               //.AddServiceProxyFactory(b => b.AddRedirect(typeof(RawPermissionConverter<,>), typeof(MyRawPermissionConverter<,>)))
+               ;
     }
 }

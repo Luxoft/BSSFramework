@@ -1,9 +1,10 @@
 ﻿using Microsoft.SqlServer.Management.Smo;
 
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.DbGenerate;
 
 using Framework.DomainDriven.DBGenerator;
+
+using SampleSystem.IntegrationTests.__Support.TestData;
 
 using Index = Microsoft.SqlServer.Management.Smo.Index;
 

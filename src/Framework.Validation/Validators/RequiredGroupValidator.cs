@@ -43,7 +43,7 @@ public class RequiredGroupValidator : DynamicClassValidator
 
         return new Func<Expression<Func<TSource, object>>, Func<TSource, bool>>(GetPropertyRequiredValidator)
                .CreateGenericMethod(typeof(TSource), property.PropertyType)
-               .Invoke<Func<TSource, bool>>(null, property.ToLambdaExpression());
+               .Invoke<Func<TSource, bool>>(null, property.ToGetLambdaExpression());
     }
 
     private static Func<TSource, bool> GetPropertyRequiredValidator<TSource, TProperty>(Expression<Func<TSource, TProperty>> propertyExpr)

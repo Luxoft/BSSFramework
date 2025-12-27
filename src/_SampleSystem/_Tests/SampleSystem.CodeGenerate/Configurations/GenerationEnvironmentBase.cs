@@ -12,7 +12,7 @@ using SecuritySystem;
 using SampleSystem.Domain;
 using SampleSystem.Security;
 
-using SecuritySystem.HierarchicalExpand;
+using HierarchicalExpand;
 
 namespace SampleSystem.CodeGenerate;
 

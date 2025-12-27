@@ -6,7 +6,7 @@ using Framework.Persistent;
 using Framework.QueryLanguage;
 using Framework.Validation;
 
-using SecuritySystem.HierarchicalExpand;
+using HierarchicalExpand;
 
 namespace Framework.DomainDriven.BLL;
 

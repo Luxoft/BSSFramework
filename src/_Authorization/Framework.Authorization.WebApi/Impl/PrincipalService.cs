@@ -11,7 +11,7 @@ public partial class AuthSLJsonController
     [HttpPost]
     public PrincipalFullDTO GetCurrentPrincipal()
     {
-        return this.Evaluate(DBSessionMode.Read, evaluateData => evaluateData.Context.CurrentPrincipalSource.CurrentPrincipal.ToFullDTO(evaluateData.MappingService));
+        return this.Evaluate(DBSessionMode.Read, evaluateData => evaluateData.Context.CurrentPrincipalSource.CurrentUser.ToFullDTO(evaluateData.MappingService));
     }
 
     [HttpPost]

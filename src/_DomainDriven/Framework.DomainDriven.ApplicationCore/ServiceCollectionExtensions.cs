@@ -1,18 +1,15 @@
-﻿using CommonFramework.DependencyInjection;
-
-using Framework.DomainDriven._Visitors;
+﻿using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.ApplicationCore.DALListeners;
-using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.Jobs;
 using Framework.DomainDriven.Repository;
 using Framework.Events;
 using Framework.Exceptions;
 using Framework.FinancialYear;
 
-using SecuritySystem;
-
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+
+using SecuritySystem;
 
 namespace Framework.DomainDriven.ApplicationCore;
 
@@ -30,7 +27,6 @@ public static class ServiceCollectionExtensions
 
             services.RegisterFinancialYearServices();
             services.RegisterRepository();
-            services.RegisterAuthenticationServices();
             services.RegisterEvaluators();
             services.RegistryGenericDatabaseVisitors();
 
@@ -85,14 +81,6 @@ public static class ServiceCollectionExtensions
         {
             services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
             services.AddSingleton(typeof(IServiceEvaluator<>), typeof(ServiceEvaluator<>));
-
-            return services;
-        }
-
-        private IServiceCollection RegisterAuthenticationServices()
-        {
-            services.AddScoped<ApplicationUserAuthenticationService>();
-            services.AddScopedFrom<IImpersonateService, ApplicationUserAuthenticationService>();
 
             return services;
         }

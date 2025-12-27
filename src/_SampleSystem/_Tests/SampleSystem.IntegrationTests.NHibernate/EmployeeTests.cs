@@ -5,7 +5,6 @@ using Automation.Utils.DatabaseUtils;
 using CommonFramework.Maybe;
 
 using SampleSystem.Domain;
-using SampleSystem.IntegrationTests.__Support.TestData;
 
 using Framework.Configuration.Generated.DTO;
 using Framework.DomainDriven;
@@ -21,6 +20,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Impl;
 
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 

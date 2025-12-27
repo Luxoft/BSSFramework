@@ -1,6 +1,6 @@
 ﻿using SampleSystem.IntegrationTests.__Support.TestData;
 
-namespace SampleSystem.IntegrationTests;
+namespace SampleSystem.IntegrationTests.WebApi;
 
 [TestClass]
 public class WebApiTests : TestBase

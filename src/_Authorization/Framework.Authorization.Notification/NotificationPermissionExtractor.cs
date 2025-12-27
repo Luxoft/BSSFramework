@@ -1,18 +1,18 @@
-﻿using Framework.Authorization.Domain;
+﻿using CommonFramework.DependencyInjection;
+
+using Framework.Authorization.Domain;
 using Framework.DomainDriven.Repository;
 
 using GenericQueryable;
 
-using Microsoft.Extensions.DependencyInjection;
+using HierarchicalExpand;
 
 using SecuritySystem;
 using SecuritySystem.Attributes;
-using SecuritySystem.Services;
-
 namespace Framework.Authorization.Notification;
 
 public class NotificationPermissionExtractor(
-    IServiceProvider serviceProvider,
+    IServiceProxyFactory serviceProxyFactory,
     IHierarchicalInfoSource hierarchicalInfoSource,
     INotificationGeneralPermissionFilterFactory notificationGeneralPermissionFilterFactory,
     [DisabledSecurity] IRepository<Permission> permissionRepository)
@@ -31,7 +31,7 @@ public class NotificationPermissionExtractor(
 
         var startPermissionQ = permissionRepository.GetQueryable()
                                                    .Where(notificationGeneralPermissionFilterFactory.Create(securityRoles))
-                                                   .Select(p => new PermissionLevelInfo { Permission = p, LevelInfo = ""});
+                                                   .Select(p => new PermissionLevelInfo { Permission = p, LevelInfo = "" });
 
         var permissionInfoResult = await cachedNotificationFilterGroups.Aggregate(startPermissionQ, this.ApplyNotificationFilter).GenericToListAsync(cancellationToken);
 
@@ -105,6 +105,6 @@ public class NotificationPermissionExtractor(
 
         var extractorType = genericExtractorType.MakeGenericType(securityContextType);
 
-        return (IPermissionLevelInfoExtractor)ActivatorUtilities.CreateInstance(serviceProvider, extractorType);
+        return serviceProxyFactory.Create<IPermissionLevelInfoExtractor>(extractorType);
     }
 }

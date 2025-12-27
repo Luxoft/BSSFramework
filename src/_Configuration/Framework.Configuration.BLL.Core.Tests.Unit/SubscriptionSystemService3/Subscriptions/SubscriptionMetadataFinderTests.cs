@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using CommonFramework.DependencyInjection;
+
+using FluentAssertions;
 
 using Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Subscriptions.Metadata;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
@@ -27,6 +29,8 @@ public sealed class SubscriptionMetadataFinderTests
     }
 
     private class TestSubscriptionMetadataFinder() : SubscriptionMetadataFinder(
-        new ServiceCollection().BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true }),
+        new ServiceCollection().AddServiceProxyFactory()
+                               .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true })
+                               .GetRequiredService<IServiceProxyFactory>(),
         [new SubscriptionMetadataFinderAssemblyInfo(typeof(TestSubscriptionMetadataFinder).Assembly)]);
 }

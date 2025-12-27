@@ -1,9 +1,9 @@
 ﻿using SampleSystem.Domain;
-using SampleSystem.IntegrationTests.__Support.TestData;
 
 using Framework.DomainDriven;
 
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 

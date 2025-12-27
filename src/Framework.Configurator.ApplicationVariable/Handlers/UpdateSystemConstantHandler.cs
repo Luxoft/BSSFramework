@@ -10,7 +10,7 @@ using SecuritySystem.Configurator.Handlers;
 namespace Framework.Configurator.Handlers;
 
 public class UpdateSystemConstantHandler(
-    [CurrentUserWithoutRunAs] ISecuritySystem securitySystem,
+    [WithoutRunAs] ISecuritySystem securitySystem,
     IApplicationVariableStorage variableStorage)
     : BaseWriteHandler, IUpdateSystemConstantHandler
 {

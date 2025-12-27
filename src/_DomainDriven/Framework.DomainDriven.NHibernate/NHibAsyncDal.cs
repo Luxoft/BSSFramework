@@ -1,4 +1,5 @@
 ﻿using CommonFramework;
+using CommonFramework.IdentitySource;
 
 using Framework.Core;
 using Framework.DomainDriven._Visitors;
@@ -14,9 +15,11 @@ namespace Framework.DomainDriven.NHibernate;
 public class NHibAsyncDal<TDomainObject, TIdent>(
     INHibSession session,
     IExpressionVisitorContainer expressionVisitorContainer,
-    IGenericQueryableExecutor genericQueryableExecutor)
+    IGenericQueryableExecutor genericQueryableExecutor,
+    IIdentityInfoSource identityInfoSource)
     : IAsyncDal<TDomainObject, TIdent>
     where TDomainObject : class, IIdentityObject<TIdent>
+    where TIdent : notnull
 {
     private ISession NativeSession => session.NativeSession;
 
@@ -44,6 +47,19 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
     public virtual async Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken = default)
     {
         this.CheckWrite();
+
+        if (!this.NativeSession.Contains(domainObject))
+        {
+            var identityInfo = identityInfoSource.GetIdentityInfo<TDomainObject, TIdent>();
+
+            var id = identityInfo.Id.Getter(domainObject);
+
+            if (!EqualityComparer<TIdent>.Default.Equals(id, default))
+            {
+                await this.NativeSession.SaveAsync(domainObject, id, cancellationToken);
+                return;
+            }
+        }
 
         await this.NativeSession.SaveOrUpdateAsync(domainObject, cancellationToken);
     }

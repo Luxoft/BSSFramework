@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CommonFramework.GenericRepository;
 
-using SecuritySystem.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven;
 

@@ -6,15 +6,12 @@ namespace Framework.Validation;
 
 public static class ClassValidatorExtensions
 {
-    public static IClassValidator<TSource> TryApplyValidationData<TSource>(this IClassValidator<TSource> baseValidator, IValidationData validationData)
+    public static IClassValidator<TSource> TryApplyValidationData<TSource>(this IClassValidator<TSource> baseValidator, IValidationData? validationData)
     {
-        return validationData.Maybe(data => baseValidator.ApplyCustomError(validationData.CustomError)
-                                                         .ApplyCustomOperationContext(validationData.OperationContext),
-
-                                    baseValidator);
+        return validationData.Maybe(data => baseValidator.ApplyCustomError(data.CustomError).ApplyCustomOperationContext(data.OperationContext), baseValidator);
     }
 
-    public static IClassValidator<TSource> ApplyCustomError<TSource>(this IClassValidator<TSource> baseValidator, object customError)
+    public static IClassValidator<TSource> ApplyCustomError<TSource>(this IClassValidator<TSource> baseValidator, object? customError)
     {
         if (baseValidator == null) throw new ArgumentNullException(nameof(baseValidator));
 
@@ -52,7 +49,7 @@ public static class ClassValidatorExtensions
                     var unboxFunc = new Func<IClassValidator<object>, IClassValidator<TSource>>(Unbox<TSource, object>)
                             .CreateGenericMethod(typeof(TSource), validatorSourceType);
 
-                    return (IClassValidator<TSource>)unboxFunc.Invoke(null, new object[] { baseClassValidator });
+                    return unboxFunc.Invoke<IClassValidator<TSource>>(null, baseClassValidator);
                 }
             }
         }

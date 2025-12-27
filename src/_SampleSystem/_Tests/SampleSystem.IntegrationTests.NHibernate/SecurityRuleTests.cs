@@ -1,5 +1,4 @@
 ﻿using SampleSystem.Domain;
-using SampleSystem.IntegrationTests.__Support.TestData;
 
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
@@ -7,6 +6,8 @@ using Framework.DomainDriven.Repository;
 using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 

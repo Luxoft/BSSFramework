@@ -10,9 +10,10 @@ using Framework.Projection;
 using Framework.Projection.Contract;
 using Framework.Projection.Environment;
 using Framework.Projection.Lambda;
-using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem.Services;
+using HierarchicalExpand;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.Generation.Domain;
 

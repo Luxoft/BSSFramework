@@ -1,65 +1,48 @@
 ﻿using CommonFramework;
 
-using FluentValidation;
-
 using Framework.Authorization.Domain;
 using Framework.Core;
 
+using HierarchicalExpand;
+
 using SecuritySystem;
+using SecuritySystem.ExternalSystem.Management;
 using SecuritySystem.ExternalSystem.SecurityContextStorage;
-using SecuritySystem.Services;
+using SecuritySystem.GeneralPermission.Validation.Permission;
+using SecuritySystem.Validation;
 
-namespace Framework.Authorization.SecuritySystemImpl.Validation;
+namespace Framework.Authorization.Environment.Validation;
 
-public class PermissionDelegateValidator : AbstractValidator<Permission>
+public class PermissionDelegateValidator(
+    IHierarchicalInfoSource hierarchicalInfoSource,
+    TimeProvider timeProvider,
+    ISecurityContextStorage securityEntitySource,
+    ISecurityContextInfoSource securityContextInfoSource,
+    ISecurityRoleSource securityRoleSource)
+    : IPermissionValidator<Permission, PermissionRestriction>
 {
-    public const string Key = "PermissionDelegate";
-
-    private readonly IHierarchicalInfoSource hierarchicalInfoSource;
-
-    private readonly TimeProvider timeProvider;
-
-    private readonly ISecurityContextStorage securityEntitySource;
-
-    private readonly ISecurityContextInfoSource securityContextInfoSource;
-
-    private readonly ISecurityRoleSource securityRoleSource;
-
-    public PermissionDelegateValidator(
-        IHierarchicalInfoSource hierarchicalInfoSource,
-        TimeProvider timeProvider,
-        ISecurityContextStorage securityEntitySource,
-        ISecurityContextInfoSource securityContextInfoSource,
-        ISecurityRoleSource securityRoleSource)
+    public async Task ValidateAsync(PermissionData<Permission, PermissionRestriction> permissionData, CancellationToken cancellationToken)
     {
-        this.hierarchicalInfoSource = hierarchicalInfoSource;
-        this.timeProvider = timeProvider;
-        this.securityEntitySource = securityEntitySource;
-        this.securityContextInfoSource = securityContextInfoSource;
-        this.securityRoleSource = securityRoleSource;
+        var permission = permissionData.Permission;
 
-        this.RuleFor(permission => permission.DelegatedFrom)
-            .Must((permission, delegatedFrom) => delegatedFrom?.Principal != permission.Principal)
-            .WithMessage("Permission cannot be delegated to the original user");
+        var delegatedFrom = permission.DelegatedFrom;
 
-        this.RuleFor(permission => permission.DelegatedFrom)
-            .Must(
-                (permission, delegatedFrom, context) =>
-                {
-                    try
-                    {
-                        this.Validate(permission, ValidatePermissionDelegateMode.All);
+        if (delegatedFrom != null)
+        {
+            if (delegatedFrom.Principal == permission.Principal)
+            {
+                throw new SecuritySystemValidationException("Permission cannot be delegated to the original user");
+            }
 
-                        return true;
-                    }
-                    catch (Exception ex)
-                    {
-                        context.MessageFormatter.AppendArgument("ExceptionMessage", ex.Message);
-
-                        return false;
-                    }
-                })
-            .WithMessage("{ExceptionMessage}");
+            try
+            {
+                this.Validate(permission, ValidatePermissionDelegateMode.All);
+            }
+            catch (Exception ex)
+            {
+                throw new SecuritySystemValidationException(ex.Message);
+            }
+        }
     }
 
     private void Validate(Permission permission, ValidatePermissionDelegateMode mode)
@@ -91,7 +74,7 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
         {
             if (!this.IsCorrectRoleSubset(permission, delegatedFrom))
             {
-                throw new ValidationException(
+                throw new SecuritySystemValidationException(
                     $"Invalid delegated permission role. Selected role \"{permission.Role}\" not subset of \"{delegatedFrom.Role}\"");
             }
         }
@@ -100,18 +83,18 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
         {
             if (!this.IsCorrectPeriodSubset(permission, delegatedFrom))
             {
-                throw new ValidationException(
+                throw new SecuritySystemValidationException(
                     $"Invalid delegated permission period. Selected period \"{permission.Period}\" not subset of \"{delegatedFrom.Period}\"");
             }
         }
 
-        if (mode.HasFlag(ValidatePermissionDelegateMode.SecurityObjects) && this.timeProvider.IsActivePeriod(permission))
+        if (mode.HasFlag(ValidatePermissionDelegateMode.SecurityObjects) && permission.Period.Contains(timeProvider.GetToday()))
         {
             var invalidEntityGroups = this.GetInvalidDelegatedPermissionSecurities(permission, delegatedFrom).ToList();
 
             if (invalidEntityGroups.Any())
             {
-                throw new ValidationException(
+                throw new SecuritySystemValidationException(
                     string.Format(
                         "Can't delegate permission from {0} to {1}, because {0} have no access to objects ({2})",
                         delegatedFrom.Principal.Name,
@@ -128,10 +111,10 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
         if (subPermission == null) throw new ArgumentNullException(nameof(subPermission));
         if (delegatedFrom == null) throw new ArgumentNullException(nameof(delegatedFrom));
 
-        return this.securityRoleSource
+        return securityRoleSource
                    .GetSecurityRole(delegatedFrom.Role.Id)
-                   .GetAllElements(role => role.Information.Children.Select(subRole => this.securityRoleSource.GetSecurityRole(subRole)))
-                   .Contains(this.securityRoleSource.GetSecurityRole(subPermission.Role.Id));
+                   .GetAllElements(role => role.Information.Children.Select(subRole => securityRoleSource.GetSecurityRole(subRole)))
+                   .Contains(securityRoleSource.GetSecurityRole(subPermission.Role.Id));
     }
 
     private bool IsCorrectPeriodSubset(Permission subPermission, Permission delegatedFrom)
@@ -161,9 +144,9 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
         var invalidRequest1 = from requiredGroup in requiredEntitiesRequest
 
-                              let securityContextTypeInfo = this.securityContextInfoSource.GetSecurityContextInfo(requiredGroup.Key.Id)
+                              let securityContextTypeInfo = securityContextInfoSource.GetSecurityContextInfo(requiredGroup.Key.Id)
 
-                              let allSecurityContexts = this.securityEntitySource
+                              let allSecurityContexts = securityEntitySource
                                                             .GetTyped(securityContextTypeInfo.Type)
                                                             .Pipe(v => (ITypedSecurityContextStorage<Guid>)v)
                                                             .GetSecurityContexts()
@@ -176,11 +159,9 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
                               let allowedEntities = this.IsExpandable(securityContextType)
                                                         ? preAllowedEntities.Distinct()
-                                                                            .GetAllElements(
-                                                                                allowedEntityId =>
-                                                                                    allSecurityContexts.Where(
-                                                                                            v => v.ParentId == allowedEntityId)
-                                                                                        .Select(v => v.Id))
+                                                                            .GetAllElements(allowedEntityId =>
+                                                                                                allSecurityContexts.Where(v => v.ParentId == allowedEntityId)
+                                                                                                                   .Select(v => v.Id))
                                                                             .Distinct()
                                                                             .ToList()
 
@@ -224,11 +205,11 @@ public class PermissionDelegateValidator : AbstractValidator<Permission>
 
     private SecurityContextInfo GetSecurityContextInfo(SecurityContextType securityContextType)
     {
-        return this.securityContextInfoSource.GetSecurityContextInfo(securityContextType.Id);
+        return securityContextInfoSource.GetSecurityContextInfo(securityContextType.Id);
     }
 
     private bool IsExpandable(SecurityContextType securityContextType)
     {
-        return this.hierarchicalInfoSource.IsHierarchical(this.GetSecurityContextInfo(securityContextType).Type);
+        return hierarchicalInfoSource.IsHierarchical(this.GetSecurityContextInfo(securityContextType).Type);
     }
 }

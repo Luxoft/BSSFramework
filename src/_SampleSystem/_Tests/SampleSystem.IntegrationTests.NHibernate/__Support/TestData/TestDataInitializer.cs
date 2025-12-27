@@ -1,8 +1,4 @@
-﻿using Automation.ServiceEnvironment;
-using Automation.ServiceEnvironment.Services;
-using Automation.Settings;
-
-using SecuritySystem;
+﻿using Automation.Settings;
 
 using Microsoft.Extensions.Options;
 
@@ -11,6 +7,9 @@ using SampleSystem.Domain.Inline;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
 
+using SecuritySystem;
+using SecuritySystem.Testing;
+
 namespace SampleSystem.IntegrationTests.__Support.TestData;
 
 public class TestDataInitializer(
@@ -18,7 +17,7 @@ public class TestDataInitializer(
     RootAuthManager authManager,
     DataHelper dataHelper,
     IOptions<AutomationFrameworkSettings> settings,
-    IIntegrationTestUserAuthenticationService integrationTestUserAuthenticationServices)
+    ITestingUserAuthenticationService integrationTestUserAuthenticationServices)
 {
     public async Task InitializeAsync(CancellationToken cancellationToken) =>
         await integrationTestUserAuthenticationServices

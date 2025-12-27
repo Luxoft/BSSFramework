@@ -1,9 +1,11 @@
 ﻿using Framework.Authorization.Generated.DTO;
 using Framework.Core;
 using Framework.Events;
-using SecuritySystem;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
+
+using SecuritySystem;
+
 using SampleSystem.WebApiCore.Controllers;
 
 namespace SampleSystem.IntegrationTests;
@@ -18,7 +20,7 @@ public class PrincipalTests : TestBase
         var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
 
         // Act
-        var principalId = this.AuthManager.CreatePrincipal(name);
+        var principalId = (Guid)this.AuthManager.For(name).CreatePrincipal().GetId();
 
         // Assert
         this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
@@ -30,7 +32,7 @@ public class PrincipalTests : TestBase
         // Arrange
         var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
 
-        var principalId = this.AuthManager.CreatePrincipal(name);
+        var principalId = (Guid)this.AuthManager.For(name).CreatePrincipal().GetId();
 
         var configFacade = this.GetConfigurationControllerEvaluator();
 
@@ -60,7 +62,7 @@ public class PrincipalTests : TestBase
         // Arrange
         var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
 
-        var principalId = this.AuthManager.CreatePrincipal(name);
+        var principalId = (Guid)this.AuthManager.For(name).CreatePrincipal().GetId();
 
         var role = this.GetAuthControllerEvaluator().Evaluate(c => c.GetVisualBusinessRoleByName(SecurityRole.Administrator.Name)).Identity;
 

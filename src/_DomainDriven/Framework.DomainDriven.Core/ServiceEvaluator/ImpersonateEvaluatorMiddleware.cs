@@ -1,6 +1,7 @@
-﻿using Framework.DomainDriven.Auth;
-using Framework.DomainDriven.ScopedEvaluate;
+﻿using Framework.DomainDriven.ScopedEvaluate;
+
 using SecuritySystem.Credential;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem.Services;
@@ -14,18 +15,13 @@ public class ImpersonateEvaluatorMiddleware(IServiceProvider scopedServiceProvid
         var userAuthenticationService = scopedServiceProvider.GetRequiredService<IRawUserAuthenticationService>();
         var impersonateService = scopedServiceProvider.GetRequiredService<IImpersonateService>();
 
-        var actualImpersonateService =
-            customUserCredential != null && customUserCredential != userAuthenticationService.GetUserName()
-                ? impersonateService
-                : null;
-
-        if (actualImpersonateService == null)
+        if (customUserCredential != null && customUserCredential != userAuthenticationService.GetUserName())
         {
-            return await getResult();
+            return await impersonateService.WithImpersonateAsync(customUserCredential, getResult);
         }
         else
         {
-            return await actualImpersonateService.WithImpersonateAsync(customUserCredential, getResult);
+            return await getResult();
         }
     }
 }

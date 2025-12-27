@@ -4,18 +4,18 @@ using Framework.Core;
 using Framework.DomainDriven.Lock;
 using Framework.Persistent;
 
+using HierarchicalExpand;
+using HierarchicalExpand.AncestorDenormalization;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem;
-using SecuritySystem.AncestorDenormalization;
-using SecuritySystem.HierarchicalExpand;
 
 namespace Framework.DomainDriven.ApplicationCore.DALListeners;
 
 public class DenormalizeHierarchicalDALListener(
     IServiceProvider serviceProvider,
     IEnumerable<FullAncestorLinkInfo> hierarchicalInfoList,
-    IDenormalizedAncestorsServiceFactory denormalizedAncestorsServiceFactory,
     INamedLockSource namedLockSource,
     INamedLockService namedLockService)
     : IBeforeTransactionCompletedDALListener
@@ -34,7 +34,8 @@ public class DenormalizeHierarchicalDALListener(
                     pair => pair.Value == DALObjectChangeType.Created || pair.Value == DALObjectChangeType.Updated,
                     (modified, removing) => new { Modified = modified, Removing = removing });
 
-                var method = new Func<ISecurityContext[], ISecurityContext[], FullAncestorLinkInfo<ISecurityContext>, CancellationToken, Task>(this.Process).CreateGenericMethod(domainType);
+                var method =
+                    new Func<ISecurityContext[], ISecurityContext[], FullAncestorLinkInfo<ISecurityContext>, CancellationToken, Task>(this.Process).CreateGenericMethod(domainType);
 
                 await method.Invoke<Task>(
                     this,
@@ -48,7 +49,11 @@ public class DenormalizeHierarchicalDALListener(
         }
     }
 
-    private async Task Process<TDomainObject>(TDomainObject[] modified, TDomainObject[] removing, FullAncestorLinkInfo<TDomainObject> fullAncestorLinkInfo, CancellationToken cancellationToken)
+    private async Task Process<TDomainObject>(
+        TDomainObject[] modified,
+        TDomainObject[] removing,
+        FullAncestorLinkInfo<TDomainObject> fullAncestorLinkInfo,
+        CancellationToken cancellationToken)
         where TDomainObject : class
     {
         await this.LockChanges(fullAncestorLinkInfo, cancellationToken);
@@ -58,15 +63,15 @@ public class DenormalizeHierarchicalDALListener(
             await serviceProvider.GetRequiredService<IUpdateDeepLevelService<TDomainObject>>().UpdateDeepLevels(modified, cancellationToken);
         }
 
-        await denormalizedAncestorsServiceFactory.Create<TDomainObject>().SyncAsync(modified, removing, cancellationToken);
+        await serviceProvider.GetRequiredService<IDenormalizedAncestorsService<TDomainObject>>().SyncAsync(modified, removing, cancellationToken);
     }
 
     private async Task LockChanges(FullAncestorLinkInfo fullAncestorLinkInfo, CancellationToken cancellationToken)
     {
         var domainObjectAncestorLinkType = fullAncestorLinkInfo.DirectedLinkType;
 
-        var namedLock = namedLockSource.NamedLocks.Where(nl => nl.DomainType == domainObjectAncestorLinkType).Single(
-            () => new ArgumentException($"System must have namedLock for {domainObjectAncestorLinkType.Name} global lock "));
+        var namedLock = namedLockSource.NamedLocks.Where(nl => nl.DomainType == domainObjectAncestorLinkType)
+                                       .Single(() => new ArgumentException($"System must have namedLock for {domainObjectAncestorLinkType.Name} global lock "));
 
         await namedLockService.LockAsync(namedLock, LockRole.Update, cancellationToken);
     }

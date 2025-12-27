@@ -1,10 +1,9 @@
 ﻿using Automation.Extensions;
-using Automation.ServiceEnvironment;
-using Automation.ServiceEnvironment.Services;
 using Automation.Settings;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
 using SecuritySystem;
+using SecuritySystem.Testing;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,7 +41,7 @@ public class TestDataInitializer
 
     public async Task InitializeAsync(CancellationToken cancellationToken) =>
         await this.serviceProvider
-                  .GetRequiredService<IIntegrationTestUserAuthenticationService>()
+                  .GetRequiredService<ITestingUserAuthenticationService>()
                   .WithImpersonateAsync(
                       nameof(TestDataInitializer),
                       async () => await this.InitializeAsyncInternal(cancellationToken));

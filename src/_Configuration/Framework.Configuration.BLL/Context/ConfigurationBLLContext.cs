@@ -15,11 +15,12 @@ using Framework.Exceptions;
 using Framework.Notification;
 using Framework.Persistent;
 using Framework.QueryLanguage;
-using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem.HierarchicalExpand;
+using HierarchicalExpand;
+
+using SecuritySystem.AccessDenied;
 
 namespace Framework.Configuration.BLL;
 

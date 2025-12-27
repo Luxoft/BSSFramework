@@ -48,7 +48,7 @@ internal class InjectMissedParentsProjectionSource : IProjectionSource
 
         foreach (var pair in missedParentRequest)
         {
-            var newPropertyBuilder = new ProjectionPropertyBuilder(pair.ParentProperty.ToLambdaExpression(pair.Projection.SourceType))
+            var newPropertyBuilder = new ProjectionPropertyBuilder(pair.ParentProperty.ToGetLambdaExpression(pair.Projection.SourceType))
                                      {
                                              Role = ProjectionPropertyRole.MissedParent,
                                              ElementProjection = pair.ParentProjection,

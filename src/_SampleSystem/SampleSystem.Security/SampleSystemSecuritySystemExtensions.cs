@@ -6,8 +6,9 @@ using SecuritySystem;
 using SampleSystem.Domain;
 
 using SecuritySystem.DependencyInjection;
-using SecuritySystem.HierarchicalExpand;
-using SecuritySystem.VirtualPermission;
+using SecuritySystem.VirtualPermission.DependencyInjection;
+
+using HierarchicalExpand;
 
 namespace SampleSystem.Security;
 
@@ -158,11 +159,11 @@ public static class SampleSystemSecuritySystemExtensions
         public ISecuritySystemSettings AddVirtualPermissions()
         {
             return settings.AddVirtualPermission<Employee, BusinessUnitEmployeeRole>(
-                SampleSystemSecurityRole.SeManager,
                 link => link.Employee,
-                employee => employee.Login,
-                v => v.AddRestriction(link => link.BusinessUnit)
-                      .AddFilter(link => link.Role == BusinessUnitEmployeeRoleType.Manager));
+                vpb => vpb.ForRole(
+                    SampleSystemSecurityRole.SeManager,
+                    v => v.AddRestriction(link => link.BusinessUnit)
+                          .AddFilter(link => link.Role == BusinessUnitEmployeeRoleType.Manager)));
         }
     }
 }

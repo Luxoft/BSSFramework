@@ -6,24 +6,13 @@ using Framework.Persistent;
 
 namespace Framework.Authorization.Notification;
 
-public class NotificationFilterGroup
+public class NotificationFilterGroup(Type securityContextType, IEnumerable<Guid> idents, NotificationExpandType expandType)
 {
-    public NotificationFilterGroup(Type securityContextType, IEnumerable<Guid> idents, NotificationExpandType expandType)
-    {
-        if (securityContextType == null) throw new ArgumentNullException(nameof(securityContextType));
-        if (idents == null) throw new ArgumentNullException(nameof(idents));
+    public Type SecurityContextType { get; private set; } = securityContextType;
 
-        this.SecurityContextType = securityContextType;
-        this.Idents = idents.ToReadOnlyCollection();
-        this.ExpandType = expandType;
-    }
+    public ReadOnlyCollection<Guid> Idents { get; private set; } = idents.ToReadOnlyCollection();
 
-
-    public Type SecurityContextType { get; private set; }
-
-    public ReadOnlyCollection<Guid> Idents { get; private set; }
-
-    public NotificationExpandType ExpandType { get; private set; }
+    public NotificationExpandType ExpandType { get; private set; } = expandType;
 
     public static NotificationFilterGroup Create<TDomainObject>(IEnumerable<TDomainObject> domainObjects, NotificationExpandType expandType)
         where TDomainObject : IIdentityObject<Guid>

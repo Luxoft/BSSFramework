@@ -7,8 +7,8 @@ using Microsoft.Extensions.Logging;
 
 using SampleSystem.Domain;
 
+using SecuritySystem;
 using SecuritySystem.Attributes;
-using SecuritySystem.Services;
 
 namespace SampleSystem.ServiceEnvironment.Jobs;
 

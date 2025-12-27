@@ -9,14 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.Domain;
 
-using SecuritySystem.Services;
-
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
 public class TestSecurityController(
-    ICurrentUser currentUser,
     ICurrentUserSource<Employee> currentUserSource,
     IRepositoryFactory<Employee> employeeRepositoryFactory,
     IRepositoryFactory<BusinessUnit> buRepositoryFactory) : ControllerBase
@@ -24,7 +21,7 @@ public class TestSecurityController(
     [HttpGet]
     public User GetCurrentUser()
     {
-        return new(currentUser.Id, currentUser.Name);
+        return currentUserSource.ToSimple().CurrentUser;
     }
 
     [HttpGet]

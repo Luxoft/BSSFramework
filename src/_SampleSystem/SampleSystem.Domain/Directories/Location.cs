@@ -42,10 +42,13 @@ public class Location :
             this.parent.AddDetail(this);
         }
     }
+
+
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual int DeepLevel
     {
         get { return this.deepLevel; }
-        protected set { this.deepLevel = value; }
+        set { this.deepLevel = value; }
     }
 
     public virtual byte[] BinaryData
@@ -66,7 +69,7 @@ public class Location :
         get { return this.Children.All(x => !x.Active); }
     }
 
-    public virtual Country Country
+    public virtual Country? Country
     {
         get { return this.country; }
         set { this.country = value; }

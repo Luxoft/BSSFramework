@@ -16,7 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
-using SampleSystem.IntegrationTests.Support.Utils;
+using SampleSystem.IntegrationTests.__Support.Utils;
 using SampleSystem.IntegrationTests.Xunit.NHibernate.__Support.Database;
 using SampleSystem.IntegrationTests.Xunit.NHibernate.__Support.TestData;
 using SampleSystem.ServiceEnvironment;
@@ -51,5 +51,7 @@ public class EnvironmentInitializer : AutomationCoreFrameworkInitializer
             .AddSingleton<DataHelper>()
             .AddSingleton<TestDataInitializer>()
             .AddIntegrationTestServices()
+            .AddValidator<DuplicateServiceUsageValidator>()
+            .Validate()
             .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
 }

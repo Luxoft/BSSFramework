@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IvAt.SecuritySystem.Testing" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Framework.AutomationCore\Framework.AutomationCore.csproj" />
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.Jobs\Framework.DomainDriven.Jobs.csproj" />
 

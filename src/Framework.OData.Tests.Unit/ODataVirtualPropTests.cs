@@ -2,6 +2,7 @@
 using CommonFramework.ExpressionComparers;
 
 using NUnit.Framework;
+
 using FluentAssertions;
 
 namespace Framework.OData.Tests.Unit;
@@ -82,7 +83,7 @@ public class ODataVirtualPropTests
         var realFilter = operation.Filter.ToRealFilter().Optimize();
 
         // Assert
-        var equals = ExpressionComparer.Value.Equals(realFilter, filterExpr1);
+        var equals = ExpressionComparer.Default.Equals(realFilter, filterExpr1);
         equals.Should().Be(true);
     }
 
@@ -105,7 +106,7 @@ public class ODataVirtualPropTests
         var realFilter = operation.Filter.ToRealFilter().Optimize();
 
         // Assert
-        var equals = ExpressionComparer.Value.Equals(realFilter, filterExpr1);
+        var equals = ExpressionComparer.Default.Equals(realFilter, filterExpr1);
         equals.Should().Be(true);
     }
 
@@ -127,7 +128,7 @@ public class ODataVirtualPropTests
         var realFilter = operation.Filter.ToRealFilter().Optimize();
 
         // Assert
-        var equals = ExpressionComparer.Value.Equals(realFilter, filterExpr1);
+        var equals = ExpressionComparer.Default.Equals(realFilter, filterExpr1);
         equals.Should().Be(true);
     }
 
@@ -149,7 +150,7 @@ public class ODataVirtualPropTests
         var realFilter = operation.Filter.ToRealFilter().Optimize();
 
         // Assert
-        var equals = ExpressionComparer.Value.Equals(realFilter, filterExpr1);
+        var equals = ExpressionComparer.Default.Equals(realFilter, filterExpr1);
         equals.Should().Be(true);
     }
 

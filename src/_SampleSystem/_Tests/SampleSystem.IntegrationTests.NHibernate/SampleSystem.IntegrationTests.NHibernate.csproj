@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
+    <RootNamespace>SampleSystem.IntegrationTests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,7 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="FluentValidation" />
     <Using Include="FluentAssertions" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>

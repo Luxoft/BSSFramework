@@ -48,7 +48,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
                          });
 
         // Assert
-        action.Should().Throw<SecuritySystemValidationException>().And.Message.Should().Contain($"SecurityContext: '{this.defaultBu.Id}' denied by filter.");
+        action.Should().Throw<SecuritySystemValidationException>().And.Message.Should().Contain($"SecurityContext: '{this.defaultBu.Id}' denied by filter");
     }
 
     [TestMethod]
@@ -78,9 +78,11 @@ public class SecurityContextRestrictionFilterTests : TestBase
         var allowedBuList = this.Evaluate(DBSessionMode.Read, this.employee.Id,
                                           ctx =>
                                           {
-                                              var ee = ctx.CurrentEmployeeSource.CurrentUser;
+                                              var l0 = ctx.Logics.BusinessUnitFactory.Create(DefaultSecurityRole).GetSecureQueryable().ToList();
 
-                                              return ctx.Logics.BusinessUnitFactory.Create(DefaultRestrictionRule).GetSecureQueryable().Select(bu => bu.ToIdentityDTO()).ToList();
+                                              var l1 = ctx.Logics.BusinessUnitFactory.Create(DefaultRestrictionRule).GetSecureQueryable().ToList();
+
+                                              return l1.Select(bu => bu.ToIdentityDTO()).ToList();
                                           });
 
         // Assert

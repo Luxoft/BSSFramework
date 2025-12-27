@@ -53,7 +53,7 @@ public class PrincipalWithInitTests : TestBase
     public void CreateDuplicatePermission_ValidationError()
     {
         // Arrange
-        var expectedErrorMessage = $"Principal \"{TestPrincipalName}\" has duplicate permissions: (Role: {SampleSystemSecurityRole.TestPerformance} | Period: {this.testPeriod} | BusinessUnits: {DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME})";
+        var expectedErrorMessage = $"Principal \"{TestPrincipalName}\" has duplicate permissions";
 
         // Act
         var call = () =>

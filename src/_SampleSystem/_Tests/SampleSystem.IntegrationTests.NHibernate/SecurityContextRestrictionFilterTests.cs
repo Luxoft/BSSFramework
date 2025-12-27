@@ -4,6 +4,7 @@ using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
+
 using SecuritySystem;
 using SecuritySystem.Validation;
 
@@ -78,8 +79,6 @@ public class SecurityContextRestrictionFilterTests : TestBase
         var allowedBuList = this.Evaluate(DBSessionMode.Read, this.employee.Id,
                                           ctx =>
                                           {
-                                              var l0 = ctx.Logics.BusinessUnitFactory.Create(DefaultSecurityRole).GetSecureQueryable().ToList();
-
                                               var l1 = ctx.Logics.BusinessUnitFactory.Create(DefaultRestrictionRule).GetSecureQueryable().ToList();
 
                                               return l1.Select(bu => bu.ToIdentityDTO()).ToList();

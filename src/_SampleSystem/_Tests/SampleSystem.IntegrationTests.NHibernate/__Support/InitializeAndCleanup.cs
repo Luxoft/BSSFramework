@@ -22,6 +22,8 @@ using SampleSystem.ServiceEnvironment.Jobs;
 using SampleSystem.ServiceEnvironment.NHibernate;
 using SampleSystem.WebApiCore.Controllers.Main;
 
+using SecuritySystem.GeneralPermission;
+
 namespace SampleSystem.IntegrationTests.__Support;
 
 [TestClass]

@@ -4,6 +4,7 @@ using CommonFramework.DependencyInjection;
 
 using Framework.Core;
 using Framework.DependencyInjection;
+using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.DALExceptions;
 using Framework.DomainDriven.NHibernate.Audit;
 
@@ -50,6 +51,8 @@ public static class DependencyInjectionExtensions
         setupAction(setupObject);
 
         setupObject.Initialize(services);
+
+        services.AddSingleton<IExpressionVisitorContainerItem, NHibExpressionVisitorContainerItem>();
 
         return services;
     }

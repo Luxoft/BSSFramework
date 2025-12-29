@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using System.Diagnostics.CodeAnalysis;
+
+using Framework.Core;
 
 using NHibernate.Linq;
 

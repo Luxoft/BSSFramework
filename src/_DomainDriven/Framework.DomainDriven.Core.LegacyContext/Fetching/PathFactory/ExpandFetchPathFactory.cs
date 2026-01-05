@@ -55,8 +55,6 @@ public class ExpandFetchPathFactory : DTOFetchPathFactory, IFetchPathFactory<Fet
 
     private PropertyLoadNode ToLoadNode(Type domainType, PropertyPath propertyPath)
     {
-        if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
-
         if (propertyPath.Any())
         {
             var property = propertyPath.Head;

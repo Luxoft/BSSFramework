@@ -14,7 +14,7 @@ namespace Framework.Configuration.BLL
     public abstract partial class ConfigurationMainFetchServiceBase : Framework.DomainDriven.MainFetchServiceBase<Framework.Configuration.Domain.PersistentDomainObjectBase>
     {
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.CodeFirstSubscription> GetCodeFirstSubscriptionContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Configuration.Domain.CodeFirstSubscription> GetCodeFirstSubscriptionContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -38,63 +38,63 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected override Framework.DomainDriven.IFetchContainer<TDomainObject> GetContainer<TDomainObject>(Framework.Transfering.ViewDTOType rule)
+        protected override Framework.DomainDriven.FetchRule<TDomainObject> GetContainer<TDomainObject>(Framework.Transfering.ViewDTOType rule)
         {
             if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.CodeFirstSubscription)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetCodeFirstSubscriptionContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetCodeFirstSubscriptionContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.ControlSettings)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetControlSettingsContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetControlSettingsContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.ControlSettingsParam)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetControlSettingsParamContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetControlSettingsParamContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.ControlSettingsParamValue)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetControlSettingsParamValueContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetControlSettingsParamValueContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.DomainObjectEvent)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetDomainObjectEventContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetDomainObjectEventContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.DomainObjectModification)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetDomainObjectModificationContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetDomainObjectModificationContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.DomainObjectNotification)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetDomainObjectNotificationContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetDomainObjectNotificationContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.DomainType)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetDomainTypeContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetDomainTypeContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.DomainTypeEventOperation)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetDomainTypeEventOperationContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetDomainTypeEventOperationContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.ExceptionMessage)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetExceptionMessageContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetExceptionMessageContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SentMessage)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetSentMessageContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetSentMessageContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Sequence)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetSequenceContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetSequenceContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SystemConstant)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetSystemConstantContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetSystemConstantContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.TargetSystem)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTargetSystemContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTargetSystemContainer(rule)));
             }
             else
             {
@@ -102,7 +102,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.ControlSettings> GetControlSettingsContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Configuration.Domain.ControlSettings> GetControlSettingsContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -129,7 +129,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.ControlSettingsParam> GetControlSettingsParamContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Configuration.Domain.ControlSettingsParam> GetControlSettingsParamContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -155,7 +155,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.ControlSettingsParamValue> GetControlSettingsParamValueContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Configuration.Domain.ControlSettingsParamValue> GetControlSettingsParamValueContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -179,7 +179,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.DomainObjectEvent> GetDomainObjectEventContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Configuration.Domain.DomainObjectEvent> GetDomainObjectEventContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -203,7 +203,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.DomainObjectModification> GetDomainObjectModificationContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Configuration.Domain.DomainObjectModification> GetDomainObjectModificationContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -227,7 +227,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.DomainObjectNotification> GetDomainObjectNotificationContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Configuration.Domain.DomainObjectNotification> GetDomainObjectNotificationContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -251,7 +251,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.DomainType> GetDomainTypeContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Configuration.Domain.DomainType> GetDomainTypeContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -277,7 +277,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.DomainTypeEventOperation> GetDomainTypeEventOperationContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Configuration.Domain.DomainTypeEventOperation> GetDomainTypeEventOperationContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -301,7 +301,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.ExceptionMessage> GetExceptionMessageContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Configuration.Domain.ExceptionMessage> GetExceptionMessageContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -325,7 +325,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.SentMessage> GetSentMessageContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Configuration.Domain.SentMessage> GetSentMessageContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -349,7 +349,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.Sequence> GetSequenceContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Configuration.Domain.Sequence> GetSequenceContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -373,7 +373,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.SystemConstant> GetSystemConstantContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Configuration.Domain.SystemConstant> GetSystemConstantContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -397,7 +397,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.TargetSystem> GetTargetSystemContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Configuration.Domain.TargetSystem> GetTargetSystemContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {

@@ -69,7 +69,7 @@ public class MainFetchServiceBaseFileFactory<TConfiguration> : FileFactory<TConf
                                 let condition = new CodeValueEqualityOperatorExpression(domainObjectTypeRef.ToTypeOfExpression(), domainType.ToTypeOfExpression())
 
                                 let statement = new CodeThisReferenceExpression().ToMethodInvokeExpression($"Get{domainType.Name}Container", ruleVar)
-                                                                                 .ToCastExpression(typeof(IFetchContainer<>).ToTypeReference(domainObjectTypeRef))
+                                                                                 .ToCastExpression(typeof(FetchRule<>).ToTypeReference(domainObjectTypeRef))
                                                                                  .ToMethodReturnStatement()
 
                                 select Tuple.Create((CodeExpression)condition, (CodeStatement)statement);
@@ -78,7 +78,7 @@ public class MainFetchServiceBaseFileFactory<TConfiguration> : FileFactory<TConf
                {
                        Attributes = MemberAttributes.Family | MemberAttributes.Override,
                        Name = "GetContainer",
-                       ReturnType = typeof(IFetchContainer<>).ToTypeReference(domainObjectTypeRef),
+                       ReturnType = typeof(FetchRule<>).ToTypeReference(domainObjectTypeRef),
                        TypeParameters = { domainObjectParameter },
                        Parameters = { ruleParameter },
                        Statements =
@@ -115,7 +115,7 @@ public class MainFetchServiceBaseFileFactory<TConfiguration> : FileFactory<TConf
                {
                        Attributes = MemberAttributes.Family,
                        Name = $"Get{domainType.Name}Container",
-                       ReturnType = typeof(IFetchContainer<>).ToTypeReference(domainType),
+                       ReturnType = typeof(FetchRule<>).ToTypeReference(domainType),
                        Parameters = { ruleParameter },
 
                        Statements = { statementsRequest.ToSwitchExpressionStatement(new CodeThrowArgumentOutOfRangeExceptionStatement(ruleParameter)) }

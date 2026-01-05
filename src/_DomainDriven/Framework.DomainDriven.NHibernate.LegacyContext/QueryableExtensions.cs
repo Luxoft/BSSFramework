@@ -11,17 +11,17 @@ internal static class QueryableExtensions
 {
     public static IQueryable<TDomainObject> WithFetchs<TDomainObject>(
         this IQueryable<TDomainObject> queryable,
-        IFetchContainer<TDomainObject>? fetchContainer)
+        FetchRule<TDomainObject>? fetchRule)
     {
         if (queryable == null) throw new ArgumentNullException(nameof(queryable));
 
-        if (fetchContainer == null || !fetchContainer.Fetchs.Any())
+        if (fetchRule == null || !fetchRule.Fetchs.Any())
         {
             return queryable;
         }
         else
         {
-            var func = FetchHelper<TDomainObject>.Cache[fetchContainer //.Compress()
+            var func = FetchHelper<TDomainObject>.Cache[fetchRule //.Compress()
                                                         .Fetchs.SelectMany(fetch => fetch.ToPropertyPaths()).ToReadOnlyCollection()];
 
             return func(queryable);

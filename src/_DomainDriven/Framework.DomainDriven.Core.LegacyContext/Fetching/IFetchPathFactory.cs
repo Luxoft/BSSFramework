@@ -1,26 +1,13 @@
 ﻿using Framework.Core;
 
+using GenericQueryable.Fetching;
+
 namespace Framework.DomainDriven;
 
-public interface IFetchPathFactory<in TFetchBuildRule> : IFactory<Type, TFetchBuildRule, IEnumerable<PropertyPath>>
+public record PropertyPathFetchRule<TSource>(IReadOnlyList<PropertyPath> Paths) : FetchRule<TSource>
 {
-
-}
-
-public static class FetchPathFactoryExtensions
-{
-    public static IFetchPathFactory<TSource> WithCompress<TSource>(this IFetchPathFactory<TSource> fetchPathFactory)
+    public PropertyPathFetchRule<TSource> Compress()
     {
-        if (fetchPathFactory == null) throw new ArgumentNullException(nameof(fetchPathFactory));
-
-        return new FuncFetchPathFactory<TSource>((domainType, source) => fetchPathFactory.Create(domainType, source).Compress());
-    }
-
-    private class FuncFetchPathFactory<TFetchBuildRule> : FuncFactory<Type, TFetchBuildRule, IEnumerable<PropertyPath>>, IFetchPathFactory<TFetchBuildRule>
-    {
-        public FuncFetchPathFactory(Func<Type, TFetchBuildRule, IEnumerable<PropertyPath>> createFunc)
-                : base(createFunc)
-        {
-        }
+        throw new NotImplementedException();
     }
 }

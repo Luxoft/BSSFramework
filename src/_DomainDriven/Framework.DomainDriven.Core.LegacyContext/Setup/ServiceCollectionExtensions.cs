@@ -5,6 +5,7 @@ using CommonFramework;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.Tracking;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -33,7 +34,6 @@ public static class ServiceCollectionExtensions
                    settings.GetSafe(v => v.ValidatorCompileCacheType, typeof(ValidatorCompileCache)),
                    settings.GetSafe(v => v.ValidatorDeclType),
                    settings.GetSafe(v => v.ValidatorImplType, typeof(SuccessValidator)),
-                   settings.GetSafe(v => v.FetchServiceType, typeof(EmptyFetchService<,>).MakeGenericType(settings.PersistentDomainObjectBaseType, typeof(FetchBuildRule.DTOFetchBuildRule))),
                    settings.GetSafe(v => v.FactoryContainerDeclType),
                    settings.GetSafe(v => v.FactoryContainerImplType),
                    settings.GetSafe(v => v.SettingsType)
@@ -49,7 +49,6 @@ public static class ServiceCollectionExtensions
         TValidatorCompileCache,
         TValidatorDecl,
         TValidatorImpl,
-        TFetchService,
         TBLLFactoryContainerDecl,
         TBLLFactoryContainerImpl,
         TBLLContextSettings>(this IServiceCollection services)
@@ -59,8 +58,6 @@ public static class ServiceCollectionExtensions
         where TValidatorCompileCache : ValidatorCompileCache
         where TValidatorImpl : class, TValidatorDecl
         where TValidatorDecl : class
-
-        where TFetchService : IFetchService<TPersistentDomainObjectBase, FetchBuildRule.DTOFetchBuildRule>, new()
 
         where TBLLFactoryContainerDecl : class
         where TBLLFactoryContainerImpl : class, TBLLFactoryContainerDecl, IBLLFactoryInitializer
@@ -78,10 +75,6 @@ public static class ServiceCollectionExtensions
         }
 
         services.AddScoped<TValidatorDecl, TValidatorImpl>()
-
-                .AddSingleton(
-                    new TFetchService().WithCompress().WithCache().WithLock()
-                                       .Add(FetchService<TPersistentDomainObjectBase>.OData))
                 .AddScoped<TBLLFactoryContainerDecl, TBLLFactoryContainerImpl>()
                 .AddSingleton<TBLLContextSettings>()
                 .AddScopedFromLazyInterfaceImplement<TBLLContextDecl, TBLLContextImpl>()
@@ -106,13 +99,11 @@ public static class ServiceCollectionExtensions
 
         var validationMapType = validatorCompileCacheType?.GetSingleCtorParameterTypeImpl(typeof(IValidationMap));
 
-        var persistentDomainObjectBaseType = typeof(TBLLContextDecl).GetInterfaceImplementationArguments(typeof(IFetchServiceContainer<,>)).First();
+        var persistentDomainObjectBaseType = typeof(TBLLContextDecl).GetInterfaceImplementationArgument(typeof(ITrackingServiceContainer<>))!;
 
         var baseBllSettingType = typeof(BLLContextSettings<>).MakeGenericType(persistentDomainObjectBaseType);
 
         var factoryContainerDeclType = typeof(TBLLContextImpl).GetSingleCtorParameterTypeImpl(typeof(IBLLFactoryContainer<object>));
-
-        var fetchServiceImpl = GetImplType(typeof(MainFetchServiceBase<>).MakeGenericType(persistentDomainObjectBaseType), false);
 
         return new BLLSystemSettings
                {
@@ -121,7 +112,6 @@ public static class ServiceCollectionExtensions
                    ValidatorImplType = validatorImplType,
                    ValidatorCompileCacheType = validatorCompileCacheType,
                    ValidationMapType = validationMapType,
-                   FetchServiceType = fetchServiceImpl,
                    SettingsType = GetImplType(baseBllSettingType, false) ?? baseBllSettingType,
                    FactoryContainerDeclType = factoryContainerDeclType,
                    FactoryContainerImplType = GetImplType(factoryContainerDeclType, true)

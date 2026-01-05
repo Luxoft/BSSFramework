@@ -14,7 +14,7 @@ namespace Framework.Authorization.BLL
     public abstract partial class AuthorizationMainFetchServiceBase : Framework.DomainDriven.MainFetchServiceBase<Framework.Authorization.Domain.PersistentDomainObjectBase>
     {
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Authorization.Domain.BusinessRole> GetBusinessRoleContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Authorization.Domain.BusinessRole> GetBusinessRoleContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -38,27 +38,27 @@ namespace Framework.Authorization.BLL
             }
         }
         
-        protected override Framework.DomainDriven.IFetchContainer<TDomainObject> GetContainer<TDomainObject>(Framework.Transfering.ViewDTOType rule)
+        protected override Framework.DomainDriven.FetchRule<TDomainObject> GetContainer<TDomainObject>(Framework.Transfering.ViewDTOType rule)
         {
             if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.BusinessRole)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBusinessRoleContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetBusinessRoleContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.Permission)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetPermissionContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetPermissionContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.PermissionRestriction)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetPermissionRestrictionContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetPermissionRestrictionContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.Principal)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetPrincipalContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetPrincipalContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.SecurityContextType)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetSecurityContextTypeContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetSecurityContextTypeContainer(rule)));
             }
             else
             {
@@ -66,7 +66,7 @@ namespace Framework.Authorization.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Authorization.Domain.Permission> GetPermissionContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Authorization.Domain.Permission> GetPermissionContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -98,7 +98,7 @@ namespace Framework.Authorization.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Authorization.Domain.PermissionRestriction> GetPermissionRestrictionContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Authorization.Domain.PermissionRestriction> GetPermissionRestrictionContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -126,7 +126,7 @@ namespace Framework.Authorization.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Authorization.Domain.Principal> GetPrincipalContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Authorization.Domain.Principal> GetPrincipalContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -156,7 +156,7 @@ namespace Framework.Authorization.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Authorization.Domain.SecurityContextType> GetSecurityContextTypeContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<Framework.Authorization.Domain.SecurityContextType> GetSecurityContextTypeContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {

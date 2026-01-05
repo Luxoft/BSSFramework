@@ -148,7 +148,7 @@ public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguratio
                                      Parameters =
                                      {
                                              contextFilterModelType.ToTypeReference().ToParameterDeclarationExpression("filter"),
-                                             typeof(IFetchContainer<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
+                                             typeof(FetchRule<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
                                      }
                              };
             }
@@ -168,7 +168,7 @@ public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguratio
                                      Parameters =
                                      {
                                              contextFilterModelType.ToTypeReference().ToParameterDeclarationExpression("filter"),
-                                             typeof(IFetchContainer<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
+                                             typeof(FetchRule<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
                                      }
                              };
             }
@@ -184,7 +184,7 @@ public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguratio
                                      Parameters =
                                      {
                                              contextFilterModelType.ToTypeReference().ToParameterDeclarationExpression("filter"),
-                                             typeof(IFetchContainer<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
+                                             typeof(FetchRule<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
                                      }
                              };
             }
@@ -203,7 +203,7 @@ public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguratio
                                      {
                                              typeof(OData.SelectOperation<>).ToTypeReference(this.DomainType).ToParameterDeclarationExpression("selectOperation"),
                                              contextFilterModelType.ToTypeReference().ToParameterDeclarationExpression("filter"),
-                                             typeof(IFetchContainer<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
+                                             typeof(FetchRule<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
                                      }
                              };
             }
@@ -290,7 +290,7 @@ public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguratio
                                      {
                                              typeof(OData.SelectOperation<>).ToTypeReference(this.DomainType).ToParameterDeclarationExpression("selectOperation"),
                                              filterModelType.ToTypeReference().ToParameterDeclarationExpression("filter"),
-                                             typeof(IFetchContainer<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
+                                             typeof(FetchRule<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
                                      }
                              };
             }
@@ -307,7 +307,7 @@ public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguratio
                                          {
                                                  typeof(OData.SelectOperation<>).ToTypeReference(this.DomainType).ToParameterDeclarationExpression("selectOperation"),
                                                  filterModelType.ToTypeReference().ToParameterDeclarationExpression("filter"),
-                                                 typeof(IFetchContainer<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
+                                                 typeof(FetchRule<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
                                          }
                                  };
                 }

@@ -10,6 +10,8 @@ using Framework.Exceptions;
 using Framework.OData;
 using Framework.Persistent;
 
+using GenericQueryable.Fetching;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLL;
@@ -72,7 +74,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         var isSimpleSave = !domainObject.Id.IsDefault()
                            && this.GetUnsecureQueryable().Select(z => z.Id).Any(d => d.Equals(domainObject.Id));
 
-        this.InternalSave(domainObject, isSimpleSave ? default(TIdent) : id);
+        this.InternalSave(domainObject, isSimpleSave ? default! : id);
     }
 
     public override void Remove(TDomainObject domainObject)
@@ -140,196 +142,66 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
 
     public List<TDomainObject> GetListBy(
         Expression<Func<TDomainObject, bool>> filter,
-        Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch,
-        params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs)
-    {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
-        if (firstFetch == null) throw new ArgumentNullException(nameof(firstFetch));
-        if (otherFetchs == null) throw new ArgumentNullException(nameof(otherFetchs));
-
-        return this.GetListBy(filter, new[] { firstFetch }.Concat(otherFetchs));
-    }
-
-    public List<TDomainObject> GetListBy(
-        Expression<Func<TDomainObject, bool>> filter,
-        IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs)
-    {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
-        if (fetchs == null) throw new ArgumentNullException(nameof(fetchs));
-
-        return this.GetListBy(filter, fetchs.ToFetchContainer());
-    }
-
-    public List<TDomainObject> GetListBy(
-        Expression<Func<TDomainObject, bool>> filter,
-        IFetchContainer<TDomainObject>? fetchContainer = null,
+        FetchRule<TDomainObject>? fetchRule = null,
         LockRole lockRole = LockRole.None)
     {
-        return ((IEnumerable<TDomainObject>)this.GetSecureQueryable(fetchContainer, lockRole).Where(filter)).Distinct().ToList();
-    }
-
-    public List<TDomainObject> GetListBy(
-        Expression<Func<TDomainObject, bool>> filter,
-        LockRole lockRole,
-        Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch,
-        params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs)
-    {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
-        if (firstFetch == null) throw new ArgumentNullException(nameof(firstFetch));
-        if (otherFetchs == null) throw new ArgumentNullException(nameof(otherFetchs));
-
-        return this.GetListBy(filter, new[] { firstFetch }.Concat(otherFetchs));
-    }
-
-    public List<TDomainObject> GetListBy(
-        IDomainObjectFilterModel<TDomainObject> filterModel,
-        IFetchContainer<TDomainObject>? fetchContainer = null,
-        LockRole lockRole = LockRole.None)
-    {
-        if (filterModel == null) throw new ArgumentNullException(nameof(filterModel));
-
-        return this.GetListBy(filterModel.ToFilterExpression(), fetchContainer, lockRole);
-    }
-
-    public List<TDomainObject> GetListBy(
-        IDomainObjectFilterModel<TDomainObject> filter,
-        Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch,
-        params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs)
-    {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
-        if (firstFetch == null) throw new ArgumentNullException(nameof(firstFetch));
-        if (otherFetchs == null) throw new ArgumentNullException(nameof(otherFetchs));
-
-        return this.GetListBy(filter, new[] { firstFetch }.Concat(otherFetchs));
-    }
-
-    public List<TDomainObject> GetListBy(
-        IDomainObjectFilterModel<TDomainObject> filter,
-        IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs)
-    {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
-        if (fetchs == null) throw new ArgumentNullException(nameof(fetchs));
-
-        return this.GetListBy(filter, fetchs.ToFetchContainer());
+        return ((IEnumerable<TDomainObject>)this.GetSecureQueryable(fetchRule, lockRole).Where(filter)).Distinct().ToList();
     }
 
     public abstract SelectOperationResult<TDomainObject> GetObjectsByOData(
         SelectOperation selectOperation,
-        IFetchContainer<TDomainObject>? fetchContainer = null);
+        FetchRule<TDomainObject>? fetchRule = null);
 
     public abstract SelectOperationResult<TDomainObject> GetObjectsByOData(
         SelectOperation<TDomainObject> selectOperation,
-        IFetchContainer<TDomainObject>? fetchContainer = null);
+        FetchRule<TDomainObject>? fetchRule = null);
 
     public SelectOperationResult<TDomainObject> GetObjectsByOData(
         SelectOperation<TDomainObject> selectOperation,
         Expression<Func<TDomainObject, bool>> filter,
-        IFetchContainer<TDomainObject>? fetchContainer = null)
+        FetchRule<TDomainObject>? fetchRule = null)
     {
         var selectOperationWithFilter = selectOperation.AddFilter(filter);
 
-        return this.GetObjectsByOData(selectOperationWithFilter, fetchContainer);
+        return this.GetObjectsByOData(selectOperationWithFilter, fetchRule);
     }
 
-    public SelectOperationResult<TDomainObject> GetObjectsByOData(
-        SelectOperation<TDomainObject> selectOperation,
-        IDomainObjectFilterModel<TDomainObject> filter,
-        IFetchContainer<TDomainObject>? fetchContainer = null)
+    public List<TDomainObject> GetFullList(FetchRule<TDomainObject>? fetchRule = null)
     {
-        return this.GetObjectsByOData(selectOperation, filter.ToFilterExpression(), fetchContainer);
+        return this.GetSecureQueryable(fetchRule).ToList();
     }
 
     /// <summary>
     /// Получение IQueryable без учёта безопасности
     /// </summary>
     /// <param name="lockRole">Тип блокировки</param>
-    /// <param name="fetchContainer">Подгружаемые свойства</param>
+    /// <param name="fetchRule">Подгружаемые свойства</param>
     /// <returns></returns>
-    public IQueryable<TDomainObject> GetUnsecureQueryable(IFetchContainer<TDomainObject>? fetchContainer, LockRole lockRole = LockRole.None)
+    public IQueryable<TDomainObject> GetUnsecureQueryable(FetchRule<TDomainObject>? fetchRule, LockRole lockRole = LockRole.None)
     {
-        return this.dal.GetQueryable(lockRole, fetchContainer);
-    }
-
-    public IQueryable<TDomainObject> GetUnsecureQueryable(
-        LockRole lockRole,
-        IFetchContainer<TDomainObject>? fetchContainer = null) => this.GetUnsecureQueryable(null, lockRole);
-
-    /// <summary>
-    /// Получение IQueryable без учёта безопасности
-    /// </summary>
-    /// <param name="firstFetch">Первое подгружаемое свойство</param>
-    /// <param name="otherFetchs">Прочие подгружаемые свойства</param>
-    /// <returns></returns>
-    public IQueryable<TDomainObject> GetUnsecureQueryable(
-        Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch,
-        params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs)
-    {
-        if (firstFetch == null) throw new ArgumentNullException(nameof(firstFetch));
-        if (otherFetchs == null) throw new ArgumentNullException(nameof(otherFetchs));
-
-        return this.GetUnsecureQueryable(new[] { firstFetch }.Concat(otherFetchs));
-    }
-
-    /// <summary>
-    /// Получение IQueryable без учёта безопасности
-    /// </summary>
-    /// <param name="fetchs">Подгружаемые свойства</param>
-    /// <returns></returns>
-    public IQueryable<TDomainObject> GetUnsecureQueryable(IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs)
-    {
-        if (fetchs == null) throw new ArgumentNullException(nameof(fetchs));
-
-        return this.GetUnsecureQueryable(fetchs.ToFetchContainer());
+        return this.dal.GetQueryable(lockRole, fetchRule);
     }
 
     /// <summary>
     /// Получение IQueryable с учётом безопасности
     /// </summary>
     /// <param name="lockRole">Тип блокировки</param>
-    /// <param name="fetchContainer">Подгружаемые свойства</param>
+    /// <param name="fetchRule">Подгружаемые свойства</param>
     /// <returns></returns>
     public IQueryable<TDomainObject> GetSecureQueryable(
-        IFetchContainer<TDomainObject>? fetchContainer = null,
+        FetchRule<TDomainObject>? fetchRule = null,
         LockRole lockRole = LockRole.None)
     {
-        return this.ProcessSecurity(this.GetUnsecureQueryable(fetchContainer, lockRole));
-    }
-
-    /// <summary>
-    /// Получение IQueryable с учётом безопасности
-    /// </summary>
-    /// <param name="firstFetch">Первое подгружаемое свойство</param>
-    /// <param name="otherFetchs">Прочие подгружаемые свойства</param>
-    /// <returns></returns>
-    public IQueryable<TDomainObject> GetSecureQueryable(
-        Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch,
-        params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs)
-    {
-        if (firstFetch == null) throw new ArgumentNullException(nameof(firstFetch));
-        if (otherFetchs == null) throw new ArgumentNullException(nameof(otherFetchs));
-
-        return this.GetSecureQueryable(new[] { firstFetch }.Concat(otherFetchs));
-    }
-
-    /// <summary>
-    /// Получение IQueryable с учётом безопасности
-    /// </summary>
-    /// <param name="fetchs">Подгружаемые свойства</param>
-    /// <returns></returns>
-    public IQueryable<TDomainObject> GetSecureQueryable(IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs)
-    {
-        if (fetchs == null) throw new ArgumentNullException(nameof(fetchs));
-
-        return this.GetSecureQueryable(fetchs.ToFetchContainer());
+        return this.ProcessSecurity(this.GetUnsecureQueryable(fetchRule, lockRole));
     }
 
     protected IQueryable<TDomainObject> GetSecureQueryable(
         IQueryableProcessor<TDomainObject> baseProcessor,
-        IFetchContainer<TDomainObject>? fetchContainer = null)
+        FetchRule<TDomainObject>? fetchRule = null)
     {
         if (baseProcessor == null) throw new ArgumentNullException(nameof(baseProcessor));
 
-        return this.GetSecureQueryable(fetchContainer).Pipe(q => baseProcessor.Process(q));
+        return this.GetSecureQueryable(fetchRule).Pipe(q => baseProcessor.Process(q));
     }
 
     /// <summary>
@@ -337,7 +209,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     /// </summary>
     /// <param name="filter">Выражение, определяющее условие поиска.</param>
     /// <param name="getNotFoundException">Делегат, возвращающий исключение, которое необходимо бросить, если объект не найден.</param>
-    /// <param name="fetchContainer">Пути, определяющие выгрузку графа.</param>
+    /// <param name="fetchRule">Пути, определяющие выгрузку графа.</param>
     /// <returns>Объект, найденный по условию.</returns>
     /// <exception cref="ArgumentNullException">Аргумент
     /// <paramref name="filter"/>
@@ -348,12 +220,12 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     public TDomainObject GetObjectBy(
         Expression<Func<TDomainObject, bool>> filter,
         Func<Exception> getNotFoundException,
-        IFetchContainer<TDomainObject>? fetchContainer = null)
+        FetchRule<TDomainObject>? fetchRule = null)
     {
         if (filter == null) throw new ArgumentNullException(nameof(filter));
         if (getNotFoundException == null) throw new ArgumentNullException(nameof(getNotFoundException));
 
-        return this.GetObjectBy(filter, false, fetchContainer).FromMaybe(getNotFoundException);
+        return this.GetObjectBy(filter, false, fetchRule).FromMaybe(getNotFoundException);
     }
 
     /// <summary>
@@ -361,7 +233,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     /// </summary>
     /// <param name="lockRole">Экземпляр <see cref="LockRole"/>, определяющий запрашиваемую блокировку.</param>
     /// <param name="filter">Выражение, определяющее условие поиска.</param>
-    /// <param name="fetchContainer">Пути, определяющие выгрузку графа.</param>
+    /// <param name="fetchRule">Пути, определяющие выгрузку графа.</param>
     /// <param name="throwOnNotFound">
     ///   Когда передано <c>true</c> будет выброшено <see cref="BusinessLogicException"/>.
     ///   если объект по условию не найден.
@@ -370,22 +242,22 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     /// <exception cref="BusinessLogicException">Если параметр throwOnNotFound задан как true и объект не найден.</exception>
     /// <exception cref="InvalidOperationException">По заданному условию найден более чем один объект.</exception>
     [Obsolete("Эта перегрузка метода будет удалёна в следующих версиях. Используйте вместо неё другие перегрузки.")]
-    public TDomainObject GetObjectBy(
+    public TDomainObject? GetObjectBy(
         LockRole lockRole,
         Expression<Func<TDomainObject, bool>> filter,
-        IFetchContainer<TDomainObject>? fetchContainer = null,
+        FetchRule<TDomainObject>? fetchRule = null,
         bool throwOnNotFound = false)
     {
-        return this.GetObjectBy(lockRole, filter, throwOnNotFound, fetchContainer);
+        return this.GetObjectBy(lockRole, filter, throwOnNotFound, fetchRule);
     }
 
     /// <inheritdoc />
-    public TDomainObject GetObjectBy(
+    public TDomainObject? GetObjectBy(
         Expression<Func<TDomainObject, bool>> filter,
         bool throwOnNotFound = false,
-        IFetchContainer<TDomainObject>? fetchContainer = null)
+        FetchRule<TDomainObject>? fetchRule = null)
     {
-        return this.GetObjectBy(LockRole.None, filter, throwOnNotFound, fetchContainer);
+        return this.GetObjectBy(LockRole.None, filter, throwOnNotFound, fetchRule);
     }
 
     /// <summary>
@@ -397,17 +269,17 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     ///   Когда передано <c>true</c> будет выброшено <see cref="BusinessLogicException"/>.
     ///   если объект по условию не найден.
     /// </param>
-    /// <param name="fetchContainer">Пути, определяющие выгрузку графа.</param>
+    /// <param name="fetchRule">Пути, определяющие выгрузку графа.</param>
     /// <returns>Экземпляр найденного объекта или null, если объект не найден.</returns>
     /// <exception cref="BusinessLogicException">Если параметр throwOnNotFound задан как true и объект не найден.</exception>
     /// <exception cref="InvalidOperationException">По заданному условию найден более чем один объект.</exception>
-    public TDomainObject GetObjectBy(
+    public TDomainObject? GetObjectBy(
         LockRole lockRole,
         Expression<Func<TDomainObject, bool>> filter,
         bool throwOnNotFound = false,
-        IFetchContainer<TDomainObject>? fetchContainer = null)
+        FetchRule<TDomainObject>? fetchRule = null)
     {
-        var result = this.GetListBy(filter, fetchContainer, lockRole).SingleOrDefault();
+        var result = this.GetListBy(filter, fetchRule, lockRole).SingleOrDefault();
 
         if (null == result && throwOnNotFound)
         {
@@ -415,52 +287,6 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         }
 
         return result;
-    }
-
-    public TDomainObject GetObjectBy(
-        Expression<Func<TDomainObject, bool>> filter,
-        bool throwOnNotFound,
-        Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch,
-        params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs)
-    {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
-        if (firstFetch == null) throw new ArgumentNullException(nameof(firstFetch));
-        if (otherFetchs == null) throw new ArgumentNullException(nameof(otherFetchs));
-
-        return this.GetObjectBy(filter, throwOnNotFound, new[] { firstFetch }.Concat(otherFetchs));
-    }
-
-    public TDomainObject GetObjectBy(
-        Expression<Func<TDomainObject, bool>> filter,
-        bool throwOnNotFound,
-        IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs)
-    {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
-        if (fetchs == null) throw new ArgumentNullException(nameof(fetchs));
-
-        return this.GetObjectBy(filter, throwOnNotFound, fetchs.ToFetchContainer());
-    }
-
-    public List<TDomainObject> GetFullList(IFetchContainer<TDomainObject>? fetchContainer = null)
-    {
-        return this.GetSecureQueryable(fetchContainer).ToList();
-    }
-
-    public List<TDomainObject> GetFullList(
-        Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch,
-        params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs)
-    {
-        if (firstFetch == null) throw new ArgumentNullException(nameof(firstFetch));
-        if (otherFetchs == null) throw new ArgumentNullException(nameof(otherFetchs));
-
-        return this.GetFullList(new[] { firstFetch }.Concat(otherFetchs));
-    }
-
-    public List<TDomainObject> GetFullList(IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs)
-    {
-        if (fetchs == null) throw new ArgumentNullException(nameof(fetchs));
-
-        return this.GetFullList(fetchs.ToFetchContainer());
     }
 
     public virtual void Lock(TDomainObject domainObject, LockRole lockRole)
@@ -590,5 +416,5 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         }
     }
 
-    public IQueryable<TDomainObject> GetUnsecureQueryable() => this.GetUnsecureQueryable(null, LockRole.None);
+    public IQueryable<TDomainObject> GetUnsecureQueryable() => this.GetUnsecureQueryable(null);
 }

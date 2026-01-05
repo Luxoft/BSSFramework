@@ -16,8 +16,6 @@ public class BLLSystemSettings
 
     public Type ValidatorCompileCacheType { get; set; }
 
-    public Type FetchServiceType { get; set; }
-
     public Type FactoryContainerDeclType { get; set; }
 
     public Type FactoryContainerImplType { get; set; }

@@ -11,6 +11,14 @@ using NHibernate.Linq;
 
 namespace Framework.DomainDriven.NHibernate;
 
+public class NHibFetchConverter : INHibFetchConverter
+{
+    PropertyFetchRule<TSource> Convert<TSource>(FetchRule<TSource> fetchRule)
+    {
+
+    }
+}
+
 public class NHibFetchService(IServiceProvider serviceProvider) : IFetchService
 {
     public IQueryable<TSource> ApplyFetch<TSource>(IQueryable<TSource> source, FetchRule<TSource> fetchRule)

@@ -113,7 +113,7 @@ public class MockDAL<TDomain, TIdent> : IMockDAL<TDomain, TIdent>
     {
     }
 
-    public IQueryable<TDomain> GetQueryable(LockRole lockRole, IFetchContainer<TDomain> fetchContainer = null)
+    public IQueryable<TDomain> GetQueryable(LockRole lockRole, FetchRule<TDomain> fetchRule = null)
     {
         var list = new List<TDomain>(this.Collection.Count);
         list.AddRange(this.Collection);

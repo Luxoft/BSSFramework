@@ -12,7 +12,7 @@ public partial class TestBusinessUnitBLL
     public SelectOperationResult<HierarchicalNode<TestBusinessUnit, Guid>> GetTreeByOData(
             SelectOperation<TestBusinessUnit> selectOperation,
             HierarchicalBusinessUnitFilterModel filter,
-            IFetchContainer<TestBusinessUnit> fetchs)
+            FetchRule<TestBusinessUnit> fetchs)
     {
         return this.GetTreeByOData(selectOperation, fetchs);
     }

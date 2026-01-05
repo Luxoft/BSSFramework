@@ -23,7 +23,7 @@ public partial class EmployeeBLL
         throw new NotImplementedException();
     }
 
-    public List<Employee> GetListBy(EmployeeFilterModel filter, IFetchContainer<Employee> fetchs)
+    public List<Employee> GetListBy(EmployeeFilterModel filter, FetchRule<Employee> fetchs)
     {
         throw new NotImplementedException();
     }

@@ -14,7 +14,7 @@ namespace SampleSystem.BLL
     public abstract partial class SampleSystemMainFetchServiceBase : Framework.DomainDriven.MainFetchServiceBase<SampleSystem.Domain.PersistentDomainObjectBase>
     {
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Address> GetAddressContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Address> GetAddressContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -42,7 +42,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.AnotherSqlParserTestObj> GetAnotherSqlParserTestObjContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.AnotherSqlParserTestObj> GetAnotherSqlParserTestObjContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -66,7 +66,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.AuthPerformanceObject> GetAuthPerformanceObjectContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.AuthPerformanceObject> GetAuthPerformanceObjectContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -100,7 +100,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.BusinessUnitAncestorLink> GetBusinessUnitAncestorLinkContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.BusinessUnitAncestorLink> GetBusinessUnitAncestorLinkContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -128,7 +128,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.BusinessUnit> GetBusinessUnitContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.BusinessUnit> GetBusinessUnitContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -169,7 +169,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.BusinessUnitEmployeeRole> GetBusinessUnitEmployeeRoleContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.BusinessUnitEmployeeRole> GetBusinessUnitEmployeeRoleContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -199,7 +199,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.BusinessUnitHrDepartment> GetBusinessUnitHrDepartmentContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.BusinessUnitHrDepartment> GetBusinessUnitHrDepartmentContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -227,7 +227,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.BusinessUnitIdentity> GetBusinessUnitIdentityContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.BusinessUnitIdentity> GetBusinessUnitIdentityContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -255,7 +255,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.BusinessUnitManagerCommissionLink> GetBusinessUnitManagerCommissionLinkContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.BusinessUnitManagerCommissionLink> GetBusinessUnitManagerCommissionLinkContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -285,7 +285,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.BusinessUnitProgramClass> GetBusinessUnitProgramClassContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.BusinessUnitProgramClass> GetBusinessUnitProgramClassContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -313,7 +313,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.BusinessUnitToAncestorChildView> GetBusinessUnitToAncestorChildViewContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.BusinessUnitToAncestorChildView> GetBusinessUnitToAncestorChildViewContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -341,7 +341,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.BusinessUnitType> GetBusinessUnitTypeContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.BusinessUnitType> GetBusinessUnitTypeContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -368,7 +368,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType> GetBusinessUnitTypeLinkWithPossibleFinancialProjectTypeContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType> GetBusinessUnitTypeLinkWithPossibleFinancialProjectTypeContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -392,7 +392,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent> GetBusinessUnitTypeLinkWithPossibleParentContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent> GetBusinessUnitTypeLinkWithPossibleParentContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -420,7 +420,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo> GetBusinessUnitTypeLinkWithTransferToContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo> GetBusinessUnitTypeLinkWithTransferToContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -448,7 +448,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.UniqueByParent.ChildEntity> GetChildEntityContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.UniqueByParent.ChildEntity> GetChildEntityContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -472,7 +472,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestForceAbstract.ClassAChild> GetClassAChildContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestForceAbstract.ClassAChild> GetClassAChildContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -496,7 +496,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestForceAbstract.ClassA> GetClassAContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestForceAbstract.ClassA> GetClassAContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -520,7 +520,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.EnversBug1676.Coefficient1676> GetCoefficient1676Container(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.EnversBug1676.Coefficient1676> GetCoefficient1676Container(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -544,7 +544,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.CompanyLegalEntity> GetCompanyLegalEntityContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.CompanyLegalEntity> GetCompanyLegalEntityContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -576,7 +576,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestForceAbstract.ConcreteClassA> GetConcreteClassAContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestForceAbstract.ConcreteClassA> GetConcreteClassAContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -600,419 +600,419 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected override Framework.DomainDriven.IFetchContainer<TDomainObject> GetContainer<TDomainObject>(Framework.Transfering.ViewDTOType rule)
+        protected override Framework.DomainDriven.FetchRule<TDomainObject> GetContainer<TDomainObject>(Framework.Transfering.ViewDTOType rule)
         {
             if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Address)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetAddressContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetAddressContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.AnotherSqlParserTestObj)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetAnotherSqlParserTestObjContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetAnotherSqlParserTestObjContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.AuthPerformanceObject)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetAuthPerformanceObjectContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetAuthPerformanceObjectContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnit)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBusinessUnitContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetBusinessUnitContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitAncestorLink)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBusinessUnitAncestorLinkContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetBusinessUnitAncestorLinkContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitEmployeeRole)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBusinessUnitEmployeeRoleContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetBusinessUnitEmployeeRoleContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitHrDepartment)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBusinessUnitHrDepartmentContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetBusinessUnitHrDepartmentContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBusinessUnitManagerCommissionLinkContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetBusinessUnitManagerCommissionLinkContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitToAncestorChildView)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBusinessUnitToAncestorChildViewContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetBusinessUnitToAncestorChildViewContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitType)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBusinessUnitTypeContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetBusinessUnitTypeContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBusinessUnitTypeLinkWithPossibleFinancialProjectTypeContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetBusinessUnitTypeLinkWithPossibleFinancialProjectTypeContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBusinessUnitTypeLinkWithPossibleParentContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetBusinessUnitTypeLinkWithPossibleParentContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBusinessUnitTypeLinkWithTransferToContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetBusinessUnitTypeLinkWithTransferToContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.CompanyLegalEntity)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetCompanyLegalEntityContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetCompanyLegalEntityContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Country)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetCountryContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetCountryContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Employee)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetEmployeeContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetEmployeeContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetEmployeeAndEmployeeSpecializationLinkContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetEmployeeAndEmployeeSpecializationLinkContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeCellPhone)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetEmployeeCellPhoneContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetEmployeeCellPhoneContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeCellPhoneBase)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetEmployeeCellPhoneBaseContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetEmployeeCellPhoneBaseContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeInformation)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetEmployeeInformationContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetEmployeeInformationContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeePersonalCellPhone)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetEmployeePersonalCellPhoneContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetEmployeePersonalCellPhoneContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeePhoto)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetEmployeePhotoContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetEmployeePhotoContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeePosition)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetEmployeePositionContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetEmployeePositionContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeRegistrationType)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetEmployeeRegistrationTypeContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetEmployeeRegistrationTypeContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeRole)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetEmployeeRoleContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetEmployeeRoleContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeRoleDegree)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetEmployeeRoleDegreeContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetEmployeeRoleDegreeContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeSpecialization)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetEmployeeSpecializationContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetEmployeeSpecializationContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EmployeeToEmployeeLink)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetEmployeeToEmployeeLinkContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetEmployeeToEmployeeLinkContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EnversBug1676.Coefficient1676)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetCoefficient1676Container(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetCoefficient1676Container(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EnversBug1676.Location1676)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetLocation1676Container(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetLocation1676Container(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetWorkingCalendar1676Container(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetWorkingCalendar1676Container(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Example1)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetExample1Container(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetExample1Container(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Example2)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetExample2Container(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetExample2Container(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.GenericNamedLock)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetGenericNamedLockContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetGenericNamedLockContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.HRDepartment)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetHRDepartmentContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetHRDepartmentContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.HRDepartmentEmployeePosition)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetHRDepartmentEmployeePositionContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetHRDepartmentEmployeePositionContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.HRDepartmentRoleEmployee)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetHRDepartmentRoleEmployeeContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetHRDepartmentRoleEmployeeContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IMRequest)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetIMRequestContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetIMRequestContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IMRequestDetail)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetIMRequestDetailContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetIMRequestDetailContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Information)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetInformationContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetInformationContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.InsuranceDetail)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetInsuranceDetailContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetInsuranceDetailContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetIntegrationVersionContainer1Container(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetIntegrationVersionContainer1Container(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetIntegrationVersionContainer2Container(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetIntegrationVersionContainer2Container(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.LegalEntityBase)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetLegalEntityBaseContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetLegalEntityBaseContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Location)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetLocationContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetLocationContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.LocationAncestorLink)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetLocationAncestorLinkContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetLocationAncestorLinkContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.LocationToAncestorChildView)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetLocationToAncestorChildViewContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetLocationToAncestorChildViewContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnit)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetManagementUnitContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetManagementUnitContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnitAncestorLink)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetManagementUnitAncestorLinkContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetManagementUnitAncestorLinkContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetManagementUnitAndBusinessUnitLinkContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetManagementUnitAndBusinessUnitLinkContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetManagementUnitAndHRDepartmentLinkContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetManagementUnitAndHRDepartmentLinkContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnitFluentMapping)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetManagementUnitFluentMappingContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetManagementUnitFluentMappingContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnitToAncestorChildView)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetManagementUnitToAncestorChildViewContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetManagementUnitToAncestorChildViewContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestManualEmployeeProjectionContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestManualEmployeeProjectionContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.NoSecurityObject)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetNoSecurityObjectContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetNoSecurityObjectContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Principal)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetPrincipalContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetPrincipalContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Project)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetProjectContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetProjectContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.BusinessUnitIdentity)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBusinessUnitIdentityContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetBusinessUnitIdentityContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.BusinessUnitProgramClass)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBusinessUnitProgramClassContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetBusinessUnitProgramClassContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.CustomCompanyLegalEntity)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetCustomCompanyLegalEntityContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetCustomCompanyLegalEntityContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.CustomTestObjForNested)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetCustomTestObjForNestedContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetCustomTestObjForNestedContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.HerBusinessUnit)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetHerBusinessUnitContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetHerBusinessUnitContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.MiniBusinessUnitEmployeeRole)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetMiniBusinessUnitEmployeeRoleContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetMiniBusinessUnitEmployeeRoleContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestBusinessUnit)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestBusinessUnitContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestBusinessUnitContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestBusinessUnitType)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestBusinessUnitTypeContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestBusinessUnitTypeContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestCustomContextSecurityObjProjectionContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestCustomContextSecurityObjProjectionContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestDepartment)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestDepartmentContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestDepartmentContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestEmployee)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestEmployeeContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestEmployeeContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestIMRequest)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestIMRequestContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestIMRequestContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestIMRequestDetail)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestIMRequestDetailContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestIMRequestDetailContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLegacyEmployee)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestLegacyEmployeeContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestLegacyEmployeeContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLocation)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestLocationContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestLocationContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLocationCollectionProperties)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestLocationCollectionPropertiesContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestLocationCollectionPropertiesContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestSecurityObjItemProjection)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestSecurityObjItemProjectionContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestSecurityObjItemProjectionContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.VisualEmployee)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetVisualEmployeeContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetVisualEmployeeContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.VisualProject)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetVisualProjectContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetVisualProjectContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.PureFluentMappingObject)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetPureFluentMappingObjectContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetPureFluentMappingObjectContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RoleRoleDegreeLink)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetRoleRoleDegreeLinkContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetRoleRoleDegreeLinkContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SqlParserTestObj)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetSqlParserTestObjContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetSqlParserTestObjContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SqlParserTestObjContainer)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetSqlParserTestObjContainerContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetSqlParserTestObjContainerContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestCustomContextSecurityObj)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestCustomContextSecurityObjContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestCustomContextSecurityObjContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestExceptObject)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestExceptObjectContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestExceptObjectContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestForceAbstract.ClassA)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetClassAContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetClassAContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestForceAbstract.ClassAChild)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetClassAChildContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetClassAChildContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestForceAbstract.ConcreteClassA)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetConcreteClassAContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetConcreteClassAContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestImmutableObj)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestImmutableObjContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestImmutableObjContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestItemAuthObject)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestItemAuthObjectContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestItemAuthObjectContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestJobObject)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestJobObjectContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestJobObjectContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestObjForNested)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestObjForNestedContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestObjForNestedContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestObjForNestedBase)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestObjForNestedBaseContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestObjForNestedBaseContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestPerformanceObject)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestPerformanceObjectContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestPerformanceObjectContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestPlainAuthObject)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestPlainAuthObjectContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestPlainAuthObjectContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRelativeEmployeeChildObject)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestRelativeEmployeeChildObjectContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestRelativeEmployeeChildObjectContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRelativeEmployeeObject)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestRelativeEmployeeObjectContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestRelativeEmployeeObjectContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRelativeEmployeeParentObject)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestRelativeEmployeeParentObjectContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestRelativeEmployeeParentObjectContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRestrictionObject)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestRestrictionObjectContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestRestrictionObjectContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRootSecurityObj)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestRootSecurityObjContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestRootSecurityObjContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecurityObjItem)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestSecurityObjItemContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestSecurityObjItemContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestSecuritySubObjItemContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestSecuritySubObjItemContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem2)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestSecuritySubObjItem2Container(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestSecuritySubObjItem2Container(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem3)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestSecuritySubObjItem3Container(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetTestSecuritySubObjItem3Container(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.UniqueByMaster.ParentEntity)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetParentEntityContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetParentEntityContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.UniqueByParent.ChildEntity)))
             {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetChildEntityContainer(rule)));
+                return ((Framework.DomainDriven.FetchRule<TDomainObject>)(this.GetChildEntityContainer(rule)));
             }
             else
             {
@@ -1020,7 +1020,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Country> GetCountryContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Country> GetCountryContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1044,7 +1044,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.CustomCompanyLegalEntity> GetCustomCompanyLegalEntityContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.CustomCompanyLegalEntity> GetCustomCompanyLegalEntityContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1078,7 +1078,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.CustomTestObjForNested> GetCustomTestObjForNestedContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.CustomTestObjForNested> GetCustomTestObjForNestedContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1106,7 +1106,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink> GetEmployeeAndEmployeeSpecializationLinkContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink> GetEmployeeAndEmployeeSpecializationLinkContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1136,7 +1136,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.EmployeeCellPhoneBase> GetEmployeeCellPhoneBaseContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.EmployeeCellPhoneBase> GetEmployeeCellPhoneBaseContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1164,7 +1164,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.EmployeeCellPhone> GetEmployeeCellPhoneContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.EmployeeCellPhone> GetEmployeeCellPhoneContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1192,7 +1192,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Employee> GetEmployeeContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Employee> GetEmployeeContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1246,7 +1246,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.EmployeeInformation> GetEmployeeInformationContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.EmployeeInformation> GetEmployeeInformationContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1270,7 +1270,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.EmployeePersonalCellPhone> GetEmployeePersonalCellPhoneContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.EmployeePersonalCellPhone> GetEmployeePersonalCellPhoneContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1298,7 +1298,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.EmployeePhoto> GetEmployeePhotoContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.EmployeePhoto> GetEmployeePhotoContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1326,7 +1326,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.EmployeePosition> GetEmployeePositionContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.EmployeePosition> GetEmployeePositionContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1350,7 +1350,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.EmployeeRegistrationType> GetEmployeeRegistrationTypeContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.EmployeeRegistrationType> GetEmployeeRegistrationTypeContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1374,7 +1374,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.EmployeeRole> GetEmployeeRoleContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.EmployeeRole> GetEmployeeRoleContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1398,7 +1398,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.EmployeeRoleDegree> GetEmployeeRoleDegreeContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.EmployeeRoleDegree> GetEmployeeRoleDegreeContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1422,7 +1422,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.EmployeeSpecialization> GetEmployeeSpecializationContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.EmployeeSpecialization> GetEmployeeSpecializationContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1446,7 +1446,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.EmployeeToEmployeeLink> GetEmployeeToEmployeeLinkContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.EmployeeToEmployeeLink> GetEmployeeToEmployeeLinkContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1478,7 +1478,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Example1> GetExample1Container(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Example1> GetExample1Container(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1502,7 +1502,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Example2> GetExample2Container(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Example2> GetExample2Container(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1526,7 +1526,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.GenericNamedLock> GetGenericNamedLockContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.GenericNamedLock> GetGenericNamedLockContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1550,7 +1550,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.HerBusinessUnit> GetHerBusinessUnitContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.HerBusinessUnit> GetHerBusinessUnitContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1578,7 +1578,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.HRDepartment> GetHRDepartmentContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.HRDepartment> GetHRDepartmentContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1632,7 +1632,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.HRDepartmentEmployeePosition> GetHRDepartmentEmployeePositionContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.HRDepartmentEmployeePosition> GetHRDepartmentEmployeePositionContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1660,7 +1660,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.HRDepartmentRoleEmployee> GetHRDepartmentRoleEmployeeContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.HRDepartmentRoleEmployee> GetHRDepartmentRoleEmployeeContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1690,7 +1690,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.IMRequest> GetIMRequestContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.IMRequest> GetIMRequestContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1714,7 +1714,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.IMRequestDetail> GetIMRequestDetailContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.IMRequestDetail> GetIMRequestDetailContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1738,7 +1738,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Information> GetInformationContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Information> GetInformationContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1762,7 +1762,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.InsuranceDetail> GetInsuranceDetailContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.InsuranceDetail> GetInsuranceDetailContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1786,7 +1786,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1> GetIntegrationVersionContainer1Container(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1> GetIntegrationVersionContainer1Container(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1810,7 +1810,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2> GetIntegrationVersionContainer2Container(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2> GetIntegrationVersionContainer2Container(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1834,7 +1834,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.LegalEntityBase> GetLegalEntityBaseContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.LegalEntityBase> GetLegalEntityBaseContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1860,7 +1860,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.EnversBug1676.Location1676> GetLocation1676Container(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.EnversBug1676.Location1676> GetLocation1676Container(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1884,7 +1884,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.LocationAncestorLink> GetLocationAncestorLinkContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.LocationAncestorLink> GetLocationAncestorLinkContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1912,7 +1912,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Location> GetLocationContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Location> GetLocationContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1943,7 +1943,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.LocationToAncestorChildView> GetLocationToAncestorChildViewContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.LocationToAncestorChildView> GetLocationToAncestorChildViewContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1971,7 +1971,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.ManagementUnitAncestorLink> GetManagementUnitAncestorLinkContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.ManagementUnitAncestorLink> GetManagementUnitAncestorLinkContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -1999,7 +1999,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> GetManagementUnitAndBusinessUnitLinkContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> GetManagementUnitAndBusinessUnitLinkContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2027,7 +2027,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> GetManagementUnitAndHRDepartmentLinkContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> GetManagementUnitAndHRDepartmentLinkContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2055,7 +2055,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.ManagementUnit> GetManagementUnitContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.ManagementUnit> GetManagementUnitContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2084,7 +2084,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.ManagementUnitFluentMapping> GetManagementUnitFluentMappingContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.ManagementUnitFluentMapping> GetManagementUnitFluentMappingContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2110,7 +2110,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.ManagementUnitToAncestorChildView> GetManagementUnitToAncestorChildViewContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.ManagementUnitToAncestorChildView> GetManagementUnitToAncestorChildViewContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2138,7 +2138,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.MiniBusinessUnitEmployeeRole> GetMiniBusinessUnitEmployeeRoleContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.MiniBusinessUnitEmployeeRole> GetMiniBusinessUnitEmployeeRoleContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2166,7 +2166,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.NoSecurityObject> GetNoSecurityObjectContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.NoSecurityObject> GetNoSecurityObjectContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2190,7 +2190,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.UniqueByMaster.ParentEntity> GetParentEntityContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.UniqueByMaster.ParentEntity> GetParentEntityContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2214,7 +2214,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Principal> GetPrincipalContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Principal> GetPrincipalContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2238,7 +2238,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Project> GetProjectContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Project> GetProjectContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2262,7 +2262,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.PureFluentMappingObject> GetPureFluentMappingObjectContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.PureFluentMappingObject> GetPureFluentMappingObjectContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2286,7 +2286,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.RoleRoleDegreeLink> GetRoleRoleDegreeLinkContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.RoleRoleDegreeLink> GetRoleRoleDegreeLinkContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2316,7 +2316,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.SqlParserTestObj> GetSqlParserTestObjContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.SqlParserTestObj> GetSqlParserTestObjContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2340,7 +2340,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.SqlParserTestObjContainer> GetSqlParserTestObjContainerContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.SqlParserTestObjContainer> GetSqlParserTestObjContainerContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2364,7 +2364,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.TestBusinessUnit> GetTestBusinessUnitContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.TestBusinessUnit> GetTestBusinessUnitContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2400,7 +2400,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.TestBusinessUnitType> GetTestBusinessUnitTypeContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.TestBusinessUnitType> GetTestBusinessUnitTypeContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2428,7 +2428,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestCustomContextSecurityObj> GetTestCustomContextSecurityObjContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestCustomContextSecurityObj> GetTestCustomContextSecurityObjContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2452,7 +2452,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection> GetTestCustomContextSecurityObjProjectionContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection> GetTestCustomContextSecurityObjProjectionContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2480,7 +2480,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.TestDepartment> GetTestDepartmentContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.TestDepartment> GetTestDepartmentContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2508,7 +2508,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.TestEmployee> GetTestEmployeeContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.TestEmployee> GetTestEmployeeContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2555,7 +2555,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestExceptObject> GetTestExceptObjectContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestExceptObject> GetTestExceptObjectContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2583,7 +2583,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestImmutableObj> GetTestImmutableObjContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestImmutableObj> GetTestImmutableObjContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2611,7 +2611,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.TestIMRequest> GetTestIMRequestContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.TestIMRequest> GetTestIMRequestContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2639,7 +2639,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.TestIMRequestDetail> GetTestIMRequestDetailContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.TestIMRequestDetail> GetTestIMRequestDetailContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2667,7 +2667,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestItemAuthObject> GetTestItemAuthObjectContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestItemAuthObject> GetTestItemAuthObjectContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2697,7 +2697,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestJobObject> GetTestJobObjectContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestJobObject> GetTestJobObjectContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2721,7 +2721,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.TestLegacyEmployee> GetTestLegacyEmployeeContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.TestLegacyEmployee> GetTestLegacyEmployeeContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2749,7 +2749,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.TestLocationCollectionProperties> GetTestLocationCollectionPropertiesContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.TestLocationCollectionProperties> GetTestLocationCollectionPropertiesContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2777,7 +2777,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.TestLocation> GetTestLocationContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.TestLocation> GetTestLocationContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2805,7 +2805,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection> GetTestManualEmployeeProjectionContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection> GetTestManualEmployeeProjectionContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2833,7 +2833,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestObjForNestedBase> GetTestObjForNestedBaseContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestObjForNestedBase> GetTestObjForNestedBaseContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2857,7 +2857,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestObjForNested> GetTestObjForNestedContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestObjForNested> GetTestObjForNestedContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2881,7 +2881,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestPerformanceObject> GetTestPerformanceObjectContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestPerformanceObject> GetTestPerformanceObjectContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2915,7 +2915,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestPlainAuthObject> GetTestPlainAuthObjectContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestPlainAuthObject> GetTestPlainAuthObjectContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2947,7 +2947,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestRelativeEmployeeChildObject> GetTestRelativeEmployeeChildObjectContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestRelativeEmployeeChildObject> GetTestRelativeEmployeeChildObjectContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -2977,7 +2977,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestRelativeEmployeeObject> GetTestRelativeEmployeeObjectContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestRelativeEmployeeObject> GetTestRelativeEmployeeObjectContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -3009,7 +3009,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestRelativeEmployeeParentObject> GetTestRelativeEmployeeParentObjectContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestRelativeEmployeeParentObject> GetTestRelativeEmployeeParentObjectContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -3035,7 +3035,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestRestrictionObject> GetTestRestrictionObjectContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestRestrictionObject> GetTestRestrictionObjectContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -3059,7 +3059,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestRootSecurityObj> GetTestRootSecurityObjContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestRootSecurityObj> GetTestRootSecurityObjContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -3092,7 +3092,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestSecurityObjItem> GetTestSecurityObjItemContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestSecurityObjItem> GetTestSecurityObjItemContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -3120,7 +3120,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.TestSecurityObjItemProjection> GetTestSecurityObjItemProjectionContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.TestSecurityObjItemProjection> GetTestSecurityObjItemProjectionContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -3148,7 +3148,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestSecuritySubObjItem2> GetTestSecuritySubObjItem2Container(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestSecuritySubObjItem2> GetTestSecuritySubObjItem2Container(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -3172,7 +3172,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestSecuritySubObjItem3> GetTestSecuritySubObjItem3Container(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestSecuritySubObjItem3> GetTestSecuritySubObjItem3Container(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -3196,7 +3196,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.TestSecuritySubObjItem> GetTestSecuritySubObjItemContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.TestSecuritySubObjItem> GetTestSecuritySubObjItemContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -3220,7 +3220,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.VisualEmployee> GetVisualEmployeeContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.VisualEmployee> GetVisualEmployeeContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -3248,7 +3248,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.VisualProject> GetVisualProjectContainer(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.VisualProject> GetVisualProjectContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {
@@ -3276,7 +3276,7 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676> GetWorkingCalendar1676Container(Framework.Transfering.ViewDTOType rule)
+        protected virtual Framework.DomainDriven.FetchRule<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676> GetWorkingCalendar1676Container(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
             {

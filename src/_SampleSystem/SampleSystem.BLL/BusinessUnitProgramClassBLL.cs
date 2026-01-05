@@ -12,7 +12,7 @@ public partial class BusinessUnitProgramClassBLL
     public SelectOperationResult<BusinessUnitProgramClass> GetObjectsByOData(
             SelectOperation<BusinessUnitProgramClass> selectOperation,
             BusinessUnitProgramClassFilterModel filter,
-            IFetchContainer<BusinessUnitProgramClass> fetchs)
+            FetchRule<BusinessUnitProgramClass> fetchs)
     {
         var nextSelectOperation = selectOperation.AddFilter(this.GetFilter(filter)).AddFilter(this.GetVirtualFilter(filter));
 

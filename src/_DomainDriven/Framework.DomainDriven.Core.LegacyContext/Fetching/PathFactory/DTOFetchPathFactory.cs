@@ -10,7 +10,23 @@ using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Transfering;
 
+using GenericQueryable.Fetching;
+
 namespace Framework.DomainDriven;
+
+public interface IFetchRuleFactory<in T>
+{
+    PropertyFetchRule<TSource> Create<TSource>(T value);
+}
+
+public class DTOFetchRuleFactory : IFetchRuleFactory<ViewDTOType>
+{
+    public PropertyFetchRule<TSource> Create<TSource>(ViewDTOType value)
+    {
+
+        throw new NotImplementedException();
+    }
+}
 
 public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
 {

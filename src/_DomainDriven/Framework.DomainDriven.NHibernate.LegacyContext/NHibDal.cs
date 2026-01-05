@@ -63,11 +63,11 @@ public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
         this.asyncDal.RemoveAsync(domainObject).GetAwaiter().GetResult();
     }
 
-    public IQueryable<TDomainObject> GetQueryable(LockRole lockRole, IFetchContainer<TDomainObject> fetchContainer)
+    public IQueryable<TDomainObject> GetQueryable(LockRole lockRole, FetchRule<TDomainObject> fetchRule)
     {
         var queryable = this.asyncDal.GetQueryable();
 
-        var fetchsResult = queryable.WithFetchs(fetchContainer);
+        var fetchsResult = queryable.WithFetchs(fetchRule);
 
         if (lockRole == LockRole.None)
         {

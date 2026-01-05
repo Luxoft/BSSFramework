@@ -95,7 +95,7 @@ namespace Framework.Authorization.BLL
     public partial interface IPermissionBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Permission, System.Guid>
     {
         
-        System.Collections.Generic.List<Framework.Authorization.Domain.Permission> GetListBy(Framework.Authorization.Domain.PermissionDirectFilterModel filter, Framework.DomainDriven.IFetchContainer<Framework.Authorization.Domain.Permission> fetchs);
+        System.Collections.Generic.List<Framework.Authorization.Domain.Permission> GetListBy(Framework.Authorization.Domain.PermissionDirectFilterModel filter, Framework.DomainDriven.FetchRule<Framework.Authorization.Domain.Permission> fetchs);
     }
     
     public partial interface IPermissionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IPermissionBLL, Framework.Authorization.Domain.Permission>

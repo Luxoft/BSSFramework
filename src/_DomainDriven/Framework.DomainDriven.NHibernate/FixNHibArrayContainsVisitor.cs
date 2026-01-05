@@ -7,14 +7,19 @@ namespace Framework.DomainDriven.NHibernate;
 
 public class FixNHibArrayContainsVisitor : ExpressionVisitor
 {
-    private static readonly MethodInfo ArrayContainsMethod = new Func<ReadOnlySpan<Ignore>, Ignore, bool>(MemoryExtensions.Contains).Method.GetGenericMethodDefinition();
+    private static readonly IReadOnlySet<MethodInfo> ArrayContainsMethods =
+        new HashSet<MethodInfo>
+        {
+            new Func<ReadOnlySpan<Ignore>, Ignore, bool>(MemoryExtensions.Contains).Method.GetGenericMethodDefinition(),
+            new Func<ReadOnlySpan<Ignore>, Ignore, IEqualityComparer<Ignore>, bool>(MemoryExtensions.Contains).Method.GetGenericMethodDefinition()
+        };
 
     private static readonly MethodInfo EnumerableContainsMethod = new Func<IEnumerable<Ignore>, Ignore, bool>(Enumerable.Contains).Method.GetGenericMethodDefinition();
 
     public override Expression? Visit(Expression? node)
     {
         if (node is MethodCallExpression { Method: { IsGenericMethod: true } method } callExpr
-            && method.GetGenericMethodDefinition() == ArrayContainsMethod
+            && ArrayContainsMethods.Contains(method.GetGenericMethodDefinition())
             && callExpr.Arguments[0] is MethodCallExpression { Method: var castMethod } castExpr
             && castMethod.Name == "op_Implicit")
         {

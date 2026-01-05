@@ -1,19 +1,4 @@
-﻿using System.Linq.Expressions;
-
-using CommonFramework;
-using CommonFramework.ExpressionEvaluate;
-using CommonFramework.GenericRepository;
-using CommonFramework.IdentitySource;
-using CommonFramework.VisualIdentitySource;
-
-using HierarchicalExpand;
-
-using SecuritySystem;
-using SecuritySystem.ExternalSystem;
-using SecuritySystem.GeneralPermission;
-using SecuritySystem.Services;
-
-namespace SampleSystem.IntegrationTests;
+﻿namespace SampleSystem.IntegrationTests;
 
 //[TestClass]
 //public class InitTests : TestBase

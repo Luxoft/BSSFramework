@@ -5,7 +5,6 @@ using Automation.Utils;
 using CommonFramework;
 
 using Framework.DomainDriven;
-using Framework.DomainDriven.NHibernate;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;

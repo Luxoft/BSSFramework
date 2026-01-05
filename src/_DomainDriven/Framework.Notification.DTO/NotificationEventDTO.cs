@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Runtime.Serialization;
-using System.Threading;
+﻿using System.Runtime.Serialization;
 
 namespace Framework.Notification.DTO;
 

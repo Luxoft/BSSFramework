@@ -58,6 +58,7 @@ public class AuthorizationSystemSettings : IAuthorizationSystemSettings
                         usb.SetRunAs(p => p.RunAs);
                     }
                 })
+                .AddRunAsValidator<ExistsOtherwiseUsersRunAsValidator<Principal>>()
 
                 .AddGeneralPermission(
                     p => p.Principal,

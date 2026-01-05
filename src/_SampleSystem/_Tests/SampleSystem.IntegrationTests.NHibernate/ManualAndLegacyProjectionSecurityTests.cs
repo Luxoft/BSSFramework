@@ -1,9 +1,4 @@
-﻿using CommonFramework;
-
-using Framework.DomainDriven;
-using SecuritySystem;
-
-using SampleSystem.Domain.Projections;
+﻿using SampleSystem.Domain.Projections;
 using SampleSystem.Generated.DTO;
 using SampleSystem.Domain.ManualProjections;
 using SampleSystem.IntegrationTests.__Support.TestData;

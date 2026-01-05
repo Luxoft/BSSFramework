@@ -15,7 +15,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterBLLSystem<TBLLContextDecl, TBLLContextImpl>(
         this IServiceCollection services,
-        Action<BLLSystemSettings> setupAction = null)
+        Action<BLLSystemSettings>? setupAction = null)
         where TBLLContextImpl : TBLLContextDecl
     {
         var settings = ExtractSettings<TBLLContextDecl, TBLLContextImpl>();
@@ -23,7 +23,7 @@ public static class ServiceCollectionExtensions
         setupAction?.Invoke(settings);
 
         return typeof(ServiceCollectionExtensions)
-               .GetMethod(nameof(RegisterBLLSystemInternal), BindingFlags.NonPublic | BindingFlags.Static, true)
+               .GetMethod(nameof(RegisterBLLSystemInternal), BindingFlags.NonPublic | BindingFlags.Static, true)!
                .MakeGenericMethod(
                [
                    typeof(TBLLContextDecl),

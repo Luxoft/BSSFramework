@@ -1,6 +1,7 @@
 ﻿using CommonFramework;
 
 using Framework.Authorization.Environment;
+using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.Setup;
 
 using Microsoft.Extensions.Configuration;
@@ -35,7 +36,8 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                                        .AddVirtualPermissions()
                                        .SetSecurityAdministratorRule(SampleSystemSecurityRole.PermissionAdministrator)
 
-                                       .AddAuthorizationSystem())
+                                       .AddAuthorizationSystem()
+                                       .AddConfigurationSecurity())
 
                            .AddNamedLocks()
 

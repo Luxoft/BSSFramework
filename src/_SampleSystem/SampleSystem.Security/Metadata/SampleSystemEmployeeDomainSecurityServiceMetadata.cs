@@ -2,7 +2,7 @@
 
 using SampleSystem.Domain;
 
-using SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
+using SecuritySystem.DependencyInjection.Domain;
 
 namespace SampleSystem.Security.Metadata;
 

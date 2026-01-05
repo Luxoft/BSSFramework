@@ -3,7 +3,6 @@
 using SampleSystem.Domain;
 
 using SecuritySystem.DependencyInjection;
-using SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
 namespace SampleSystem.Security;
 
@@ -11,17 +10,14 @@ public static class SampleSystemDomainSecurityServiceExtensions
 {
     public static ISecuritySystemSettings AddDomainSecurityServices(this ISecuritySystemSettings settings)
     {
-        return settings.AddDomainSecurityServices(
-            rb => rb
+        return settings.AddDomainSecurity(
+                           SampleSystemSecurityRole.SeManager,
+                           SecurityPath<BusinessUnit>.Create(bu => bu))
 
-                  .Add<BusinessUnit>(
-                      SampleSystemSecurityRole.SeManager,
-                      SecurityPath<BusinessUnit>.Create(bu => bu))
-
-                  .Add<Employee>(
-                      SampleSystemSecurityRole.SeManager.Or(DomainSecurityRule.CurrentUser),
-                      SecurityPath<Employee>.Create(
-                          employee => employee.CoreBusinessUnit,
-                          true)));
+                       .AddDomainSecurity(
+                           SampleSystemSecurityRole.SeManager.Or(DomainSecurityRule.CurrentUser),
+                           SecurityPath<Employee>.Create(
+                               employee => employee.CoreBusinessUnit,
+                               true));
     }
 }

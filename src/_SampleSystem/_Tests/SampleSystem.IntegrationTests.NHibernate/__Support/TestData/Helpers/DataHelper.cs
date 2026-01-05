@@ -265,7 +265,7 @@ public partial class DataHelper
 
     public BusinessUnitIdentityDTO SaveBusinessUnit(
             Guid? id = null,
-            string name = null,
+            string? name = null,
             BusinessUnitIdentityDTO? parent = null,
             BusinessUnitTypeIdentityDTO? type = null,
             bool parentIsNeeded = true,

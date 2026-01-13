@@ -28,8 +28,10 @@ public static class DependencyInjectionExtensions
 
         services.AddScoped<IDBSessionSettings, DBSessionSettings>();
 
-        services.AddSingleton(typeof(INHibRawFetchService<>), typeof(NHibRawFetchService<>));
-        services.AddGenericQueryable(v => v.SetFetchService<NHibFetchService>().SetTargetMethodExtractor<NhibTargetMethodExtractor>());
+        services.AddGenericQueryable(v => v
+                                          .SetFetchService<NHibFetchService>()
+                                          .SetTargetMethodExtractor<NhibTargetMethodExtractor>()
+                                          .AddFetchRuleExpander<UntypedFetchExpander>());
 
         //For close db session by middleware
         services.AddScopedFromLazyObject<INHibSession, NHibSession>();

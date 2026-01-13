@@ -8,6 +8,7 @@ using CommonFramework.DependencyInjection;
 
 using Framework.DomainDriven.Jobs;
 using Framework.DomainDriven.WebApiNetCore;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -64,20 +65,25 @@ public static class ServiceProviderExtensions
             return services;
         }
 
-        public IServiceCollection ApplyIntegrationTestServices() =>
+        public IServiceCollection ApplyIntegrationTestServices(Action<AutomationFrameworkSettings>? setup = null)
+        {
+            if (setup != null)
+            {
+                services.Configure(setup);
+            }
 
-            services.AddSingleton<IntegrationTestTimeProvider>()
-                    .ReplaceSingletonFrom<TimeProvider, IntegrationTestTimeProvider>()
+            return services.AddSingleton<IntegrationTestTimeProvider>()
+                           .ReplaceSingletonFrom<TimeProvider, IntegrationTestTimeProvider>()
 
-                    .AddScoped<TestWebApiCurrentMethodResolver>()
-                    .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
+                           .AddScoped<TestWebApiCurrentMethodResolver>()
+                           .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
+                           .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>()
 
-                    .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>()
+                           .AddSingleton(typeof(ControllerEvaluator<>))
 
-                    .AddSingleton(typeof(ControllerEvaluator<>))
-
-                    .AddSecuritySystemTesting(b => b.SetEvaluator(typeof(BssTestingEvaluator<>))
-                                                    .SetTestRootUserInfo(sp => sp.GetRequiredService<IOptions<AutomationFrameworkSettings>>()
-                                                                                 .Pipe(options => new TestRootUserInfo(options.Value.IntegrationTestUserName))));
+                           .AddSecuritySystemTesting(b => b.SetEvaluator(typeof(BssTestingEvaluator<>))
+                                                           .SetTestRootUserInfo(sp => sp.GetRequiredService<IOptions<AutomationFrameworkSettings>>()
+                                                                                        .Pipe(options => new TestRootUserInfo(options.Value.IntegrationTestUserName))));
+        }
     }
 }

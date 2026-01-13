@@ -11,25 +11,25 @@
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="Dapper" Version="2.1.66" />
     <PackageVersion Include="Dapper.Contrib" Version="2.0.78" />
-    <PackageVersion Include="IvAt.CommonFramework" Version="2.0.3" />
-    <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="2.0.3" />
-    <PackageVersion Include="IvAt.CommonFramework.GenericRepository" Version="2.0.3" />
-    <PackageVersion Include="IvAt.CommonFramework.IdentitySource" Version="2.0.3" />
-    <PackageVersion Include="IvAt.GenericQueryable" Version="2.0.3" />
-    <PackageVersion Include="IvAt.GenericQueryable.EntityFramework" Version="2.0.3" />
-    <PackageVersion Include="IvAt.SecuritySystem" Version="2.0.14" />
-    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="2.0.14" />
-    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="2.0.14" />
-    <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission" Version="2.0.14" />
-    <PackageVersion Include="IvAt.SecuritySystem.Testing" Version="2.0.14" />
-    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="2.0.14" />
+    <PackageVersion Include="IvAt.CommonFramework" Version="2.0.4" />
+    <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="2.0.4" />
+    <PackageVersion Include="IvAt.CommonFramework.GenericRepository" Version="2.0.4" />
+    <PackageVersion Include="IvAt.CommonFramework.IdentitySource" Version="2.0.4" />
+    <PackageVersion Include="IvAt.GenericQueryable" Version="2.0.4" />
+    <PackageVersion Include="IvAt.GenericQueryable.EntityFramework" Version="2.0.4" />
+    <PackageVersion Include="IvAt.SecuritySystem" Version="2.0.15" />
+    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="2.0.15" />
+    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="2.0.15" />
+    <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission" Version="2.0.15" />
+    <PackageVersion Include="IvAt.SecuritySystem.Testing" Version="2.0.15" />
+    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="2.0.15" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="1.6.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Middlewares" Version="1.6.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Events" Version="1.6.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Events.Abstractions" Version="1.6.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Logging" Version="1.6.1" />
     <PackageVersion Include="Luxoft.Bss.Testing.Xunit" Version="[1.0.2,)" />
-    <PackageVersion Include="Microsoft.AspNetCore.Mvc" Version="2.3.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc" Version="2.3.9" />
     <PackageVersion Include="FluentValidation" Version="12.1.1" />
     <PackageVersion Include="FluentAssertions" Version="[7.2.0]" />
     <PackageVersion Include="FluentMigrator" Version="[6.2.0]" />
@@ -66,7 +66,7 @@
     <PackageVersion Include="NSubstitute" Version="5.3.0" />
     <PackageVersion Include="NUnit" Version="4.4.0" />
     <PackageVersion Include="NUnit.ConsoleRunner" Version="3.22.0" />
-    <PackageVersion Include="NUnit3TestAdapter" Version="6.0.1" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="6.1.0" />
     <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="[7.2.0]" />
     <PackageVersion Include="System.CodeDom" Version="10.0.1" />
     <PackageVersion Include="System.Reflection.Emit" Version="4.7.0" />

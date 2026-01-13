@@ -78,17 +78,17 @@ public class AuthorizationSystemSettings : IAuthorizationSystemSettings
                                  v => v.Period.EndDate,
                                  (permission, endDate) => permission.Period = new Period(permission.Period.StartDate, endDate)))
                          .SetPermissionComment(v => v.Comment))
-                .AddDomainSecurityServices(rb => rb
-                                                 .Add<Principal>(b => b.SetView(principalViewSecurityRule)
-                                                                       .SetEdit(securityAdministratorRule))
 
-                                                 .Add<Permission>(b => b.SetView(principalViewSecurityRule.Or(delegatedFromSecurityRule))
-                                                                        .SetEdit(securityAdministratorRule.Or(delegatedFromSecurityRule)))
+                .AddDomainSecurity<Principal>(b => b.SetView(principalViewSecurityRule)
+                                                    .SetEdit(securityAdministratorRule))
 
-                                                 .Add<BusinessRole>(b => b.SetView(securityAdministratorRule.Or(AuthorizationSecurityRule.AvailableBusinessRole))
-                                                                          .SetEdit(securityAdministratorRule))
+                .AddDomainSecurity<Permission>(b => b.SetView(principalViewSecurityRule.Or(delegatedFromSecurityRule))
+                                                     .SetEdit(securityAdministratorRule.Or(delegatedFromSecurityRule)))
 
-                                                 .Add<SecurityContextType>(b => b.SetView(SecurityRule.Disabled)))
+                .AddDomainSecurity<BusinessRole>(b => b.SetView(securityAdministratorRule.Or(AuthorizationSecurityRule.AvailableBusinessRole))
+                                                       .SetEdit(securityAdministratorRule))
+
+                .AddDomainSecurity<SecurityContextType>(b => b.SetView(SecurityRule.Disabled))
 
                 .AddExtensions(services =>
                 {

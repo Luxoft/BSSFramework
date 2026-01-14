@@ -14,7 +14,7 @@ public class WebApiCurrentMethodResolver : IWebApiCurrentMethodResolver
         this.httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
     }
 
-    public MethodInfo GetCurrentMethod()
+    public MethodInfo? GetCurrentMethod()
     {
         var endPoint = this.httpContextAccessor?.HttpContext?.GetEndpoint();
 

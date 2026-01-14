@@ -18,6 +18,8 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     public virtual IBLLFactoryContainerGeneratorConfiguration Logics { get; }
 
 
+    public virtual bool GenerateFetchService => true;
+
 
     public CodeTypeReference BLLContextTypeReference => this.Environment.BLLCore.BLLContextInterfaceTypeReference;
 

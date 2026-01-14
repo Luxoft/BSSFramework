@@ -4,18 +4,8 @@ using Framework.Persistent;
 
 namespace Framework.DomainDriven;
 
-public class ODataFetchPathFactory : IFetchPathFactory<SelectOperation>
+public class ODataFetchPathFactory(Type persistentDomainObjectBase) : IFetchPathFactory<SelectOperation>
 {
-    private readonly Type _persistentDomainObjectBase;
-
-    public ODataFetchPathFactory(Type persistentDomainObjectBase)
-    {
-        if (persistentDomainObjectBase == null) throw new ArgumentNullException(nameof(persistentDomainObjectBase));
-
-        this._persistentDomainObjectBase = persistentDomainObjectBase;
-    }
-
-
     public IEnumerable<PropertyPath> Create(Type startDomainType, SelectOperation selectOperation)
     {
         if (startDomainType == null) throw new ArgumentNullException(nameof(startDomainType));
@@ -46,7 +36,7 @@ public class ODataFetchPathFactory : IFetchPathFactory<SelectOperation>
         {
             var property = domainType.GetProperty(propertyPath.First(), StringComparison.CurrentCultureIgnoreCase, true);
 
-            if (this._persistentDomainObjectBase.IsAssignableFrom(property.PropertyType))
+            if (persistentDomainObjectBase.IsAssignableFrom(property.PropertyType))
             {
                 yield return property.GetExpandPathOrSelf();
             }

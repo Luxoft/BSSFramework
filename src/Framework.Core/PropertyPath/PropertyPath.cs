@@ -68,12 +68,12 @@ public class PropertyPath : ReadOnlyCollection<PropertyInfo>, IEquatable<Propert
     }
 
 
-    public bool Equals(PropertyPath other)
+    public bool Equals(PropertyPath? other)
     {
-        return other != null && this.SequenceEqual(other);
+        return other is not null && this.SequenceEqual(other);
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         return this.Equals(obj as PropertyPath);
     }
@@ -85,25 +85,17 @@ public class PropertyPath : ReadOnlyCollection<PropertyInfo>, IEquatable<Propert
 
     public bool StartsWith(PropertyPath otherPath)
     {
-        if (otherPath == null) throw new ArgumentNullException(nameof(otherPath));
-
         return this.Count >= otherPath.Count && this.Take(otherPath.Count).SequenceEqual(otherPath);
     }
 
 
     public static PropertyPath operator +(PropertyInfo propertyInfo, PropertyPath path)
     {
-        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
-        if (path == null) throw new ArgumentNullException(nameof(path));
-
         return new[] { propertyInfo }.Concat(path).ToPropertyPath();
     }
 
     public static PropertyPath operator +(PropertyPath path, PropertyInfo propertyInfo)
     {
-        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
-        if (path == null) throw new ArgumentNullException(nameof(path));
-
         return path.Concat(new[] { propertyInfo }).ToPropertyPath();
     }
 
@@ -117,7 +109,7 @@ public class PropertyPath : ReadOnlyCollection<PropertyInfo>, IEquatable<Propert
         return !(path1 == path2);
     }
 
-    public static readonly PropertyPath Empty = new PropertyPath(new PropertyInfo[0]);
+    public static PropertyPath Empty { get; } = new([]);
 
     public static PropertyPath Create(Type sourceType, string[] properties)
     {
@@ -126,7 +118,6 @@ public class PropertyPath : ReadOnlyCollection<PropertyInfo>, IEquatable<Propert
             (prevProperty, propertyName) =>
             {
                 var currentType = prevProperty == null ? sourceType : prevProperty.PropertyType.GetCollectionElementTypeOrSelf();
-
 
                 return currentType.GetProperty(propertyName, true);
             }).Skip(1);

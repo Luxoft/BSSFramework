@@ -125,14 +125,14 @@ public static class PropertyPathExtensions
 
             var expandPath = property.GetPropertyPath<ExpandPathAttribute>(true);
 
-            if (validate && expandPath != null)
+            if (validate && expandPath is not null)
             {
-                var isValid = expandPath.IsEmpty ? property.PropertyType.SafeEquals(property.ReflectedType)
+                var isValid = expandPath.IsEmpty ? property.PropertyType.SafeEquals(property.ReflectedType!)
                                   : property.PropertyType.SafeIsAssignableFrom(expandPath.Last().PropertyType);
 
                 if (!isValid)
                 {
-                    throw new Exception($"Property \"{property.Name}\" of Type \"{property.ReflectedType.Name}\" has invalid ExpandPath");
+                    throw new Exception($"Property \"{property.Name}\" of Type \"{property.ReflectedType!.Name}\" has invalid ExpandPath");
                 }
             }
 

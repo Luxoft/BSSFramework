@@ -5,7 +5,7 @@ using Framework.Persistent;
 
 namespace Framework.DomainDriven;
 
-public class ExpandFetchPathFactory : DTOFetchPathFactory, IFetchPathFactory<FetchBuildRule.DTOFetchBuildRule>
+public class ExpandFetchPathFactory : DTOFetchPathFactory
 {
     public ExpandFetchPathFactory(Type persistentDomainObjectBase, int maxRecurseLevel = 1)
             : base(persistentDomainObjectBase, maxRecurseLevel)
@@ -40,7 +40,7 @@ public class ExpandFetchPathFactory : DTOFetchPathFactory, IFetchPathFactory<Fet
 
         var expandPath = property.GetExpandPath();
 
-        if (expandPath == null)
+        if (expandPath is null)
         {
             foreach (var fetchPath in property.GetFetchPaths())
             {
@@ -88,14 +88,5 @@ public class ExpandFetchPathFactory : DTOFetchPathFactory, IFetchPathFactory<Fet
                                         new Dictionary<PropertyInfo, PropertyLoadNode>(),
                                         new PropertyInfo[0]);
         }
-    }
-
-
-    IEnumerable<PropertyPath> IFactory<Type, FetchBuildRule.DTOFetchBuildRule, IEnumerable<PropertyPath>>.Create(Type type, FetchBuildRule.DTOFetchBuildRule rule)
-    {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-        if (rule == null) throw new ArgumentNullException(nameof(rule));
-
-        return this.Create(type, rule.DTOType);
     }
 }

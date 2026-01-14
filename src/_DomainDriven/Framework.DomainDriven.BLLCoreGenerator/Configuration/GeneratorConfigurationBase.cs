@@ -92,7 +92,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public ReadOnlyCollection<Type> BLLDomainTypes => this.lazyBLLDomainTypes.Value;
 
-    public virtual IFetchPathFactory<FetchBuildRule.DTOFetchBuildRule> FetchPathFactory { get; }
+    public virtual IFetchPathFactory<ViewDTOType> FetchPathFactory { get; }
 
     /// <inheritdoc />
     public virtual bool UseDbUniquenessEvaluation { get; } = false;

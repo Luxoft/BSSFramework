@@ -85,7 +85,7 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     IRootSecurityServiceGenerator RootSecurityServerGenerator { get; }
 
-    IFetchPathFactory<FetchBuildRule.DTOFetchBuildRule> FetchPathFactory { get; }
+    IFetchPathFactory<ViewDTOType> FetchPathFactory { get; }
 
     /// <summary>
     ///     Получает или возвращает флаг, указывающий на необходимость проверки уникальности путем запроса к БД.

@@ -6,5 +6,5 @@ public interface IGenerationEnvironmentBase : IGenerationEnvironment,
 
                                               BLLCoreGenerator.IGeneratorConfigurationContainer
 {
-
+    bool GenerateFetchService { get; }
 }

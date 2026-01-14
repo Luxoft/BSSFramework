@@ -8,16 +8,13 @@ using Framework.Core;
 using Framework.Projection;
 using Framework.Transfering;
 
+using GenericQueryable.Fetching;
+
 namespace Framework.DomainDriven.BLLCoreGenerator;
 
-public class MainFetchServiceBaseFileFactory<TConfiguration> : FileFactory<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+public class MainFetchServiceBaseFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public MainFetchServiceBaseFileFactory(TConfiguration configuration)
-            : base(configuration, null)
-    {
-    }
-
     public override FileType FileType => FileType.MainFetchServiceBase;
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
@@ -122,12 +119,9 @@ public class MainFetchServiceBaseFileFactory<TConfiguration> : FileFactory<TConf
                };
     }
 
-    private CodeExpression GetDomainContainerExpression(Type domainType, FetchBuildRule.DTOFetchBuildRule fetchBuildRule)
+    private CodeExpression GetDomainContainerExpression(Type domainType, ViewDTOType dtoType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (fetchBuildRule == null) throw new ArgumentNullException(nameof(fetchBuildRule));
-
-        var paths = this.Configuration.FetchPathFactory.Create(domainType, fetchBuildRule).ToArray();
+        var paths = this.Configuration.FetchPathFactory.Create(domainType, dtoType).ToArray();
 
         if (paths.Any())
         {

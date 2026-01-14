@@ -1,13 +1,8 @@
 ﻿using Framework.Core;
 
-using GenericQueryable.Fetching;
-
 namespace Framework.DomainDriven;
 
-public record PropertyPathFetchRule<TSource>(IReadOnlyList<PropertyPath> Paths) : FetchRule<TSource>
+public interface IFetchPathFactory<in T>
 {
-    public PropertyPathFetchRule<TSource> Compress()
-    {
-        throw new NotImplementedException();
-    }
+    IEnumerable<PropertyPath> Create(Type startDomainType, T rule);
 }

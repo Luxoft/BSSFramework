@@ -13,5 +13,5 @@ public class NotificationGeneralPermissionFilterFactory(
 {
     public Expression<Func<Permission, bool>> Create(IEnumerable<SecurityRole> securityRoles) =>
         availablePermissionFilterFactory.CreateFilter(
-            DomainSecurityRule.ExpandedRolesSecurityRule.Create(securityRoles) with { CustomCredential = new SecurityRuleCredential.AnyUserCredential() });
+            new DomainSecurityRule.ExpandedRolesSecurityRule(securityRoles) { CustomCredential = new SecurityRuleCredential.AnyUserCredential() });
 }

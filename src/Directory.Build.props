@@ -4,7 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Copyright>Luxoft 2009-2025</Copyright>
+    <Copyright>Luxoft 2009-2026</Copyright>
     <Authors>Luxoft BSS</Authors>
     <RepositoryUrl>https://github.com/Luxoft/BSSFramework</RepositoryUrl>
     <RepositoryType>git</RepositoryType>

@@ -132,7 +132,7 @@ public static class SampleSystemSecuritySystemExtensions
 
         public ISecuritySystemSettings AddSecurityRules()
         {
-            DomainSecurityRule.RoleBaseSecurityRule g = new[] { SecurityRole.Administrator, };
+            DomainSecurityRule.NonExpandedRolesSecurityRule g = new[] { SecurityRole.Administrator, };
 
             return settings.AddSecurityRule(
                                SampleSystemSecurityRule.TestRestriction,

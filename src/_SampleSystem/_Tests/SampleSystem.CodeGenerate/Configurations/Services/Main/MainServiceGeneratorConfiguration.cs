@@ -12,7 +12,7 @@ public class MainServiceGeneratorConfiguration : MainGeneratorConfigurationBase<
     public MainServiceGeneratorConfiguration(ServerGenerationEnvironment environment)
         : base(environment)
     {
-        this.GeneratePolicy = new CustomServiceGeneratePolicy(this);
+        this.GeneratePolicy = new CustomServiceGeneratePolicy(this.Environment);
     }
 
     public override IGeneratePolicy<MethodIdentity> GeneratePolicy { get; }
@@ -27,9 +27,7 @@ public class MainServiceGeneratorConfiguration : MainGeneratorConfigurationBase<
 
         if (!domainType.IsProjection())
         {
-            foreach (var complexChangeModelType in this.Environment.GetModelTypes(
-                         domainType,
-                         this.Environment.BLLCore.ComplexChangeModelType))
+            foreach (var complexChangeModelType in this.Environment.GetModelTypes(domainType, this.Environment.BLLCore.ComplexChangeModelType))
             {
                 yield return new ComplexChangeMethodGenerator(this, domainType, complexChangeModelType);
             }

@@ -11,16 +11,11 @@ namespace Framework.DomainDriven.ServiceModelGenerator;
 /// <summary>
 /// Стандартная политика для управления генерацией фасадных методов
 /// </summary>
-public class DefaultServiceGeneratePolicy(IGeneratorConfiguration<IGenerationEnvironment> configuration) : IGeneratePolicy<MethodIdentity>
+public class DefaultServiceGeneratePolicy(IGenerationEnvironment generationEnvironment) : IGeneratePolicy<MethodIdentity>
 {
-    private readonly IGeneratorConfiguration<IGenerationEnvironment> configuration = configuration;
-
     public virtual bool Used(Type domainType, MethodIdentity identity)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (identity == null) throw new ArgumentNullException(nameof(identity));
-
-        var extendedMetadata = this.configuration.Environment.ExtendedMetadata;
+        var extendedMetadata = generationEnvironment.ExtendedMetadata;
 
         var allowedSingleDTO = () => extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType, attr => attr.Single.Contains((MainDTOType)identity.DTOType.Value));
         var allowedCollectionDTO = () => extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType, attr => attr.Collection.Contains((MainDTOType)identity.DTOType.Value));
@@ -103,10 +98,9 @@ public class DefaultServiceGeneratePolicy(IGeneratorConfiguration<IGenerationEnv
         {
             return identity.ModelType.GetDirectMode().HasFlag(DirectMode.In);
         }
-        else if (identity == MethodIdentityType.HasAccess
-                 || identity == MethodIdentityType.CheckAccess)
+        else if (identity == MethodIdentityType.HasAccess || identity == MethodIdentityType.CheckAccess)
         {
-            return extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType);
+            return false;
         }
         else if (identity == MethodIdentityType.Create)
         {

@@ -30,8 +30,6 @@ public abstract class MainGeneratorConfigurationBase<TEnvironment> : GeneratorCo
 
     public override IEnumerable<IServiceMethodGenerator> GetMethodGenerators(Type domainType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
         foreach (var dtoType in domainType.GetViewDTOTypes())
         {
             if (domainType.IsInterfaceImplementation(typeof(IVisualIdentityObject)))
@@ -95,11 +93,8 @@ public abstract class MainGeneratorConfigurationBase<TEnvironment> : GeneratorCo
 
         if (!domainType.IsProjection())
         {
-            if (this.GenerateAccessMethodFor(domainType))
-            {
-                yield return new HasAccessMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType);
-                yield return new CheckAccessMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType);
-            }
+            yield return new HasAccessMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType);
+            yield return new CheckAccessMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType);
 
             {
                 var singleSaveGenerator = new SaveMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType);
@@ -164,11 +159,5 @@ public abstract class MainGeneratorConfigurationBase<TEnvironment> : GeneratorCo
                 }
             }
         }
-    }
-
-
-    protected virtual bool GenerateAccessMethodFor(Type domainType)
-    {
-        return domainType.HasAttribute<DomainObjectAccessAttribute>();
     }
 }

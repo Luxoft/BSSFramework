@@ -11,7 +11,7 @@ namespace SampleSystem.CodeGenerate;
 /// <summary>
 /// Кастомная политика для управления генерацией фасадных методов (пример для обработки генерируемых методов по ComplexChange-модели)
 /// </summary>
-public class CustomServiceGeneratePolicy(IGeneratorConfiguration<IGenerationEnvironment> configuration) : DefaultServiceGeneratePolicy(configuration)
+public class CustomServiceGeneratePolicy(IGenerationEnvironment generationEnvironment) : DefaultServiceGeneratePolicy(generationEnvironment)
 {
     public override bool Used(Type domainType, MethodIdentity identity)
     {

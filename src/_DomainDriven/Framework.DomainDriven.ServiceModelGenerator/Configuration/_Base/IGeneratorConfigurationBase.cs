@@ -10,8 +10,6 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     string ImplementClassName { get; }
 
-    string ServiceContractNamespace { get; }
-
     IEnumerable<IServiceMethodGenerator> GetMethodGenerators(Type domainType);
 
     bool HasMethods(Type domainType);

@@ -2,12 +2,4 @@
 
 namespace Framework.Configuration.TestGenerate;
 
-public class AuditServiceGeneratorConfiguration : AuditGeneratorConfigurationBase<ServerGenerationEnvironment>
-{
-    public AuditServiceGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
-    {
-    }
-
-    public override string ServiceContractNamespace { get; } = "http://invoicing.luxoft.com/AuditConfigurationFacade";
-}
+public class AuditServiceGeneratorConfiguration(ServerGenerationEnvironment environment) : AuditGeneratorConfigurationBase<ServerGenerationEnvironment>(environment);

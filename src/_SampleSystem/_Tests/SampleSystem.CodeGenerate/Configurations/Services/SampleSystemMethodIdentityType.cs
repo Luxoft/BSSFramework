@@ -10,5 +10,5 @@ public static class SampleSystemMethodIdentityType
     /// <summary>
     /// Идентификатор генерации фасадных методов по ComplexChange-модели
     /// </summary>
-    public static readonly MethodIdentityType ComplexChange = new MethodIdentityType(() => ComplexChange);
+    public static readonly MethodIdentityType ComplexChange = new (nameof(ComplexChange));
 }

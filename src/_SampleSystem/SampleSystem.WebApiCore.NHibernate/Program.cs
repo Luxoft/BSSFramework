@@ -2,7 +2,6 @@
 
 namespace SampleSystem.WebApiCore;
 
-
 public static class Program
 {
     private static async Task Main(string[] args)

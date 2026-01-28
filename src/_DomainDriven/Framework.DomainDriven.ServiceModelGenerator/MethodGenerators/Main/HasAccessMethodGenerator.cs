@@ -7,15 +7,10 @@ using Framework.Transfering;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
-public class HasAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfiguration, BLLViewRoleAttribute>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+public class HasAccessMethodGenerator<TConfiguration>(TConfiguration configuration, Type domainType)
+    : MethodGenerator<TConfiguration, BLLViewRoleAttribute>(configuration, domainType)
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public HasAccessMethodGenerator(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
-    {
-    }
-
-
     public override MethodIdentity Identity { get; } = MethodIdentityType.HasAccess;
 
 

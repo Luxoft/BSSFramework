@@ -12,7 +12,7 @@ public class UntypedFetchExpander : IFetchRuleExpander
 {
     private readonly ConcurrentDictionary<Type, object> cache = new();
 
-    public FetchRule<TSource>? TryExpand<TSource>(FetchRule<TSource> fetchRule)
+    public PropertyFetchRule<TSource>? TryExpand<TSource>(FetchRule<TSource> fetchRule)
     {
         if (fetchRule is UntypedFetchRule<TSource> untypedFetchRule)
         {

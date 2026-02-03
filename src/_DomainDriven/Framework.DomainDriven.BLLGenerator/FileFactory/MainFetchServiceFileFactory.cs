@@ -1,6 +1,6 @@
 ﻿using System.CodeDom;
 
-namespace Framework.DomainDriven.BLLCoreGenerator;
+namespace Framework.DomainDriven.BLLGenerator;
 
 public class MainFetchServiceFileFactory<TConfiguration> : FileFactory<TConfiguration>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>

@@ -7,6 +7,8 @@ using Framework.DomainDriven.Generation.Domain;
 using Framework.Persistent;
 using Framework.Projection;
 
+using GenericQueryable.Fetching;
+
 namespace Framework.DomainDriven.BLLCoreGenerator;
 
 /// <summary>

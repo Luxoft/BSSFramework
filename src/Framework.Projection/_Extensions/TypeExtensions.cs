@@ -28,7 +28,7 @@ public static class TypeExtensions
     /// <param name="contractType">Тип контракта проекции</param>
     /// <param name="raiseIfNull">Проверка на существоание</param>
     /// <returns></returns>
-    public static Type GetProjectionContractSourceType(this Type contractType, bool raiseIfNull = true)
+    public static Type? GetProjectionContractSourceType(this Type contractType, bool raiseIfNull = true)
     {
         if (contractType == null) throw new ArgumentNullException(nameof(contractType));
 
@@ -66,7 +66,7 @@ public static class TypeExtensions
     /// <param name="type">Тип проекции</param>
     /// <param name="raiseIfNull">Проверка на существоание</param>
     /// <returns></returns>
-    public static Type GetProjectionSourceType(this Type type, bool raiseIfNull = true)
+    public static Type? GetProjectionSourceType(this Type type, bool raiseIfNull = true)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
@@ -107,7 +107,7 @@ public static class TypeExtensions
     /// <param name="type">Тип проекции</param>
     /// <param name="raiseIfNull">Проверка на существоание</param>
     /// <returns></returns>
-    public static Type GetProjectionContractType(this Type type, bool raiseIfNull = true)
+    public static Type? GetProjectionContractType(this Type type, bool raiseIfNull = true)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 

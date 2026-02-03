@@ -14,6 +14,11 @@ public interface ICodeFileFactoryHeader<out TFileType> : ICodeFileFactoryHeader
 
 public class CodeFileFactoryHeader<TFileType>(TFileType type, string relativePath, Func<Type?, string> getNameFunc) : ICodeFileFactoryHeader<TFileType>
 {
+    public CodeFileFactoryHeader(TFileType type, string relativePath, Func<Type?, Enum> getNameFunc)
+        : this(type, relativePath, t => getNameFunc(t).ToString())
+    {
+    }
+
     public TFileType Type { get; } = type;
 
     public string RelativePath { get; } = relativePath;

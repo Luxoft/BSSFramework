@@ -12,5 +12,25 @@ public enum FileType
 
     ImplementedBLLFactory,
 
-    BLLFactoryContainer
+    BLLFactoryContainer,
+
+    MainFetchServiceBase,
+
+    MainFetchService,
+
+    SecurityDomainBLLBase,
+
+    ValidationMapBase,
+
+    ValidationMap,
+
+    ValidatorCompileCache,
+
+
+    ValidatorBase,
+
+    Validator,
+
+
+    ValidatorInterface
 }

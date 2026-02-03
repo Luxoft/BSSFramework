@@ -5,15 +5,8 @@ using Framework.Persistent;
 
 namespace Framework.DomainDriven;
 
-public class ExpandFetchPathFactory : DTOFetchPathFactory
+public class ExpandFetchPathFactory(Type persistentDomainObjectBase, int maxRecurseLevel = 1) : DTOFetchPathFactory(persistentDomainObjectBase, maxRecurseLevel)
 {
-    public ExpandFetchPathFactory(Type persistentDomainObjectBase, int maxRecurseLevel = 1)
-            : base(persistentDomainObjectBase, maxRecurseLevel)
-    {
-
-    }
-
-
     protected override PropertyLoadNode ExpandNode(PropertyLoadNode node)
     {
         if (node == null) throw new ArgumentNullException(nameof(node));

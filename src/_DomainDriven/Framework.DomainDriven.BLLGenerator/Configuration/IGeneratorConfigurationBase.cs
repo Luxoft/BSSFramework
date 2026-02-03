@@ -1,6 +1,10 @@
 ﻿using System.CodeDom;
+using System.Collections.ObjectModel;
+using System.Reflection;
 
+using Framework.DomainDriven.BLLCoreGenerator;
 using Framework.DomainDriven.Generation.Domain;
+using Framework.Transfering;
 
 namespace Framework.DomainDriven.BLLGenerator;
 
@@ -11,9 +15,62 @@ public interface IGeneratorConfigurationBase<out TEnvironment> : IGeneratorConfi
 
 public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTypeReferenceService<FileType>
 {
+    ReadOnlyCollection<Type> ValidationTypes { get; }
+
+    /// <summary>
+    /// Добавление глобальных валидаторов для классов
+    /// </summary>
+    bool GenerateExternalClassValidators { get; }
+
+    /// <summary>
+    /// Добавление глобальных валидаторов для свойств
+    /// </summary>
+    bool GenerateExternalPropertyValidators { get; }
+
+    CodeMethodReferenceExpression GetGetSecurityProviderMethodReferenceExpression(CodeExpression contextExpression, Type domainType);
+
+
+    /// <summary>
+    /// Валидация виртуальных свойств (свойства, без одноимённого поля). По умолчанию включена только для свойств с хотя бы одним явно указаным атрибутом валидации "PropertyValidatorAttribute" или "IRestrictionAttribute"
+    /// </summary>
+    /// <param name="property">Cвойство</param>
+    /// <returns></returns>
+    bool AllowVirtualValidation(PropertyInfo property);
+
+    CodeTypeReference GetSecurityDomainBLLBaseTypeReference(Type type);
+
+    IValidatorGenerator GetValidatorGenerator(Type domainType, CodeExpression validatorMapExpr);
+
+    CodeExpression GetCreateDefaultBLLExpression(CodeExpression contextExpression, CodeTypeReference genericType);
+
+    bool GenerateValidation { get; }
+
+    ReadOnlyCollection<Type> SecurityServiceDomainTypes { get; }
+
+    string GetOperationByModeMethodName { get; }
+
+    CodeTypeReference SecurityDomainBLLBaseTypeReference { get; }
+
+    IFetchPathFactory<ViewDTOType> FetchPathFactory { get; }
     IBLLFactoryContainerGeneratorConfiguration Logics { get; }
 
     CodeTypeReference BLLContextTypeReference { get; }
 
+    bool GenerateFetchService { get; }
+
     bool GenerateBllConstructor(Type domainType);
+
+    /// <summary>
+    /// Схлопывание пустого списка валидаторов класса
+    /// </summary>
+    /// <param name="domainType">Доменный тип</param>
+    /// <returns></returns>
+    bool SquashClassValidators(Type domainType);
+
+    /// <summary>
+    /// Схлопывание пустого списка валидаторов свойства
+    /// </summary>
+    /// <param name="property">Свойство</param>
+    /// <returns></returns>
+    bool SquashPropertyValidators(PropertyInfo property);
 }

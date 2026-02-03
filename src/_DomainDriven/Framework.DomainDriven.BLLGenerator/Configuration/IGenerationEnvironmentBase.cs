@@ -1,10 +1,6 @@
-﻿using Framework.DomainDriven.Generation.Domain;
+﻿namespace Framework.DomainDriven.BLLGenerator;
 
-namespace Framework.DomainDriven.BLLGenerator;
-
-public interface IGenerationEnvironmentBase : IGenerationEnvironment,
-
-                                              BLLCoreGenerator.IGeneratorConfigurationContainer
+public interface IGenerationEnvironmentBase : Framework.DomainDriven.BLLCoreGenerator.IGenerationEnvironmentBase
 {
-    bool GenerateFetchService { get; }
+    IGeneratorConfigurationBase<IGenerationEnvironmentBase> BLL { get; }
 }

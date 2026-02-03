@@ -11,8 +11,6 @@ using Framework.Projection.Contract;
 using Framework.Projection.Environment;
 using Framework.Projection.Lambda;
 
-using HierarchicalExpand;
-
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.Generation.Domain;
@@ -72,23 +70,14 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
 
     public virtual bool IsHierarchical(Type type)
     {
-        var hierarchicalInfoSource = this.ServiceProvider.GetService<IHierarchicalInfoSource>();
-
-        return hierarchicalInfoSource != null && hierarchicalInfoSource.IsHierarchical(type);
+        return false;
     }
 
     public ReadOnlyCollection<Assembly> DomainObjectAssemblies => this._domainObjectAssemblies.Value;
 
     protected virtual IServiceProvider BuildServiceProvider()
     {
-        return new ServiceCollection()
-               .Pipe(this.InitServices)
-               .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
-    }
-
-    protected virtual IServiceCollection InitServices(IServiceCollection services)
-    {
-        return services.AddSingleton<IHierarchicalInfoSource, HierarchicalInfoSource>();
+        return new ServiceCollection().BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
     }
 
     protected virtual IEnumerable<Assembly> GetDomainObjectAssemblies()

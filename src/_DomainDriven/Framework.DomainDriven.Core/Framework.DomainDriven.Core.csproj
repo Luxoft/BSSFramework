@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="IvAt.CommonFramework.GenericRepository" />
-    <PackageReference Include="IvAt.GenericQueryable" />
+    <PackageReference Include="IvAt.GenericQueryable.Abstractions" />
     <PackageReference Include="IvAt.SecuritySystem.Abstractions" />
 
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />

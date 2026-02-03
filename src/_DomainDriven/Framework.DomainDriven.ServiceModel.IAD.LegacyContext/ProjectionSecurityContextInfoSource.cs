@@ -1,4 +1,4 @@
-﻿using CommonFramework.DependencyInjection;
+﻿using CommonFramework;
 
 using HierarchicalExpand;
 

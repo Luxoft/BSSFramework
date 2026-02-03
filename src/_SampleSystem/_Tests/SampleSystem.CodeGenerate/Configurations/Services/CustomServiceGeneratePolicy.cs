@@ -25,6 +25,11 @@ public class CustomServiceGeneratePolicy(IGenerationEnvironment generationEnviro
             return true;
         }
 
+        if (domainType == typeof(BusinessUnit) && identity.Type == MethodIdentityType.HasAccess)
+        {
+            return true;
+        }
+
         if (identity == SampleSystemMethodIdentityType.ComplexChange)
         {
             return identity.ModelType.GetDirectMode().HasFlag(DirectMode.In);

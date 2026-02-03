@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.SecuritySystem" />
+    <PackageReference Include="IvAt.SecuritySystem.Abstractions" />
   </ItemGroup>
 
 </Project>

@@ -11,18 +11,19 @@
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="Dapper" Version="2.1.66" />
     <PackageVersion Include="Dapper.Contrib" Version="2.0.78" />
-    <PackageVersion Include="IvAt.CommonFramework" Version="2.0.4" />
-    <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="2.0.4" />
-    <PackageVersion Include="IvAt.CommonFramework.GenericRepository" Version="2.0.4" />
-    <PackageVersion Include="IvAt.CommonFramework.IdentitySource" Version="2.0.4" />
-    <PackageVersion Include="IvAt.GenericQueryable" Version="2.0.6" />
-    <PackageVersion Include="IvAt.GenericQueryable.EntityFramework" Version="2.0.6" />
-    <PackageVersion Include="IvAt.SecuritySystem" Version="2.1.1" />
-    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="2.1.1" />
-    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="2.1.1" />
-    <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission" Version="2.1.1" />
-    <PackageVersion Include="IvAt.SecuritySystem.Testing" Version="2.1.1" />
-    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="2.1.1" />
+    <PackageVersion Include="IvAt.CommonFramework" Version="2.1.6" />
+    <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="2.1.6" />
+    <PackageVersion Include="IvAt.CommonFramework.GenericRepository" Version="2.1.6" />
+    <PackageVersion Include="IvAt.CommonFramework.IdentitySource.Abstractions" Version="2.1.6" />
+    <PackageVersion Include="IvAt.GenericQueryable" Version="2.1.6" />
+    <PackageVersion Include="IvAt.GenericQueryable.Abstractions" Version="2.1.6" />
+    <PackageVersion Include="IvAt.GenericQueryable.EntityFramework" Version="2.1.6" />
+    <PackageVersion Include="IvAt.SecuritySystem" Version="2.1.6" />
+    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="2.1.6" />
+    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="2.1.6" />
+    <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission" Version="2.1.6" />
+    <PackageVersion Include="IvAt.SecuritySystem.Testing" Version="2.1.6" />
+    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="2.1.6" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="1.6.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Middlewares" Version="1.6.1" />
     <PackageVersion Include="Luxoft.Bss.Platform.Events" Version="1.6.1" />

@@ -1,10 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Authorization.Notification</PackageId>
   </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="IvAt.CommonFramework.IdentitySource" />
+    <PackageReference Include="IvAt.CommonFramework.IdentitySource.Abstractions" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Notification.Abstract\Framework.Authorization.Notification.Abstract.csproj" />

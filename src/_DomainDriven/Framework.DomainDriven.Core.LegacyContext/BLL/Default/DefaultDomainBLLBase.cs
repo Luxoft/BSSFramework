@@ -13,8 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 using HierarchicalExpand;
 
-
-
 namespace Framework.DomainDriven.BLL;
 
 public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>(TBLLContext context) :

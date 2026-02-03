@@ -2,7 +2,7 @@
 
 using HierarchicalExpand;
 
-namespace Framework.DomainDriven;
+namespace Framework.DomainDriven.ServiceModel.IAD;
 
 public class ProjectionRealTypeResolver : IRealTypeResolver
 {

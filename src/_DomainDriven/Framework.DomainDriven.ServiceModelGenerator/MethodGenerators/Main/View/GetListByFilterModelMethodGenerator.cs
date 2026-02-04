@@ -51,7 +51,7 @@ public class GetListByFilterModelMethodGenerator<TConfiguration> : ViewCollectio
 
         yield return typedFilterDecl;
 
-        yield return bllRefExpr.ToMethodInvokeExpression(nameof(IBLLQueryBase<object>.GetListBy), typedFilterDecl.ToVariableReferenceExpression(), this.GetFetchsExpression(evaluateDataExpr))
+        yield return bllRefExpr.ToMethodInvokeExpression(nameof(IBLLQueryBase<>.GetListBy), typedFilterDecl.ToVariableReferenceExpression(), this.GetFetchRule())
                                .Pipe(source => this.ConvertToDTOList(source, evaluateDataExpr.GetMappingService()))
                                .ToMethodReturnStatement();
 

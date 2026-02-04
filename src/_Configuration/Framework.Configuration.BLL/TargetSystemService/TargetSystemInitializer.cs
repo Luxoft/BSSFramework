@@ -2,6 +2,7 @@
 
 using Framework.Configuration.Domain;
 using Framework.Core;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Lock;
 using Framework.Persistent;
@@ -29,7 +30,7 @@ public class TargetSystemInitializer(
 
         var isBase = targetSystemInfo.Id == PersistentHelper.BaseTargetSystemId;
 
-        var targetSystem = bll.GetById(targetSystemInfo.Id, false, context.FetchService.GetContainer<TargetSystem>(MainDTOType.RichDTO))
+        var targetSystem = bll.GetById(targetSystemInfo.Id, false, MainDTOType.RichDTO.ToFetchRule<TargetSystem>())
                            ?? new TargetSystem(isBase, targetSystemInfo.IsMain, targetSystemInfo.IsRevision)
                               {
                                   Name = targetSystemInfo.Name, SubscriptionEnabled = !isBase, Id = targetSystemInfo.Id
@@ -43,12 +44,12 @@ public class TargetSystemInitializer(
             {
                 Id = newItem.Id,
                 Name = newItem.Type.Name,
-                NameSpace = newItem.Type.Namespace
+                NameSpace = newItem.Type.Namespace!
             };
 
             if (!isBase)
             {
-                context.EventOperationSource.GetEventOperations(newItem.Type).Foreach(value => new DomainTypeEventOperation(newDomainType, value));
+                context.EventOperationSource.GetEventOperations(newItem.Type).Foreach(value => _ = new DomainTypeEventOperation(newDomainType, value));
             }
 
             context.Logics.DomainType.Insert(newDomainType);
@@ -64,13 +65,13 @@ public class TargetSystemInitializer(
             if (changedName || (!isBase && !mergeEventResult.IsEmpty))
             {
                 domainType.Name = type.Name;
-                domainType.NameSpace = type.Namespace;
+                domainType.NameSpace = type.Namespace!;
 
                 if (!isBase)
                 {
                     domainType.RemoveDetails(mergeEventResult.RemovingItems);
 
-                    mergeEventResult.AddingItems.Foreach(value => new DomainTypeEventOperation(domainType, value));
+                    mergeEventResult.AddingItems.Foreach(value => _ = new DomainTypeEventOperation(domainType, value));
                 }
 
                 bll.Save(targetSystem);

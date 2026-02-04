@@ -22,7 +22,7 @@ public partial class SystemConstantBLL
     {
         if (applicationVariable == null) throw new ArgumentNullException(nameof(applicationVariable));
 
-        var systemConstant = this.GetByCode(applicationVariable.Name, true);
+        var systemConstant = this.GetByCode(applicationVariable.Name, true)!;
 
         var serializer = this.Context.SystemConstantSerializerFactory.Create<T>();
 

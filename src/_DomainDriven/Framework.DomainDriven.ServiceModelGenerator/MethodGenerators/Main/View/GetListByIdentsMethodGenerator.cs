@@ -38,7 +38,7 @@ public class GetListByIdentsMethodGenerator<TConfiguration> : ViewCollectionMeth
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
-        yield return bllRefExpr.ToMethodInvokeExpression("GetListByIdents", this.Parameter.ToVariableReferenceExpression(), this.GetFetchsExpression(evaluateDataExpr))
+        yield return bllRefExpr.ToMethodInvokeExpression("GetListByIdents", this.Parameter.ToVariableReferenceExpression(), this.GetFetchRule())
                                .Pipe(source => this.ConvertToDTOList(source, evaluateDataExpr.GetMappingService()))
                                .ToMethodReturnStatement();
     }

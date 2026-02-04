@@ -37,7 +37,7 @@ public abstract class GetByODataQueryMethodGeneratorBase<TConfiguration> : ViewM
                                                                  selectOperationDecl.ToVariableReferenceExpression()));
 
         var preResultDecl = typeof(SelectOperationResult<>).MakeGenericType(this.DomainType).ToTypeReference().ToVariableDeclarationStatement("preResult",
-            bllRefExpr.ToMethodInvokeExpression("GetObjectsByOData", typedSelectOperationDecl.ToVariableReferenceExpression(), this.GetFetchsExpression(evaluateDataExpr)));
+            bllRefExpr.ToMethodInvokeExpression("GetObjectsByOData", typedSelectOperationDecl.ToVariableReferenceExpression(), this.GetFetchRule()));
 
         var preResultDeclRefExpr = preResultDecl.ToVariableReferenceExpression();
 

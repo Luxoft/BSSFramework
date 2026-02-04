@@ -35,14 +35,4 @@ public class BLLCoreGeneratorConfiguration(ServerGenerationEnvironment environme
 
     /// <inheritdoc />
     public override bool UseDbUniquenessEvaluation { get; } = false;
-
-    public override bool SquashPropertyValidators(PropertyInfo property)
-    {
-        return property != typeof(Employee).GetProperty(nameof(Employee.ExternalId));
-    }
-
-    public override bool GenerateDomainServiceConstructor(Type domainType)
-    {
-        return !new[] { typeof(Employee) }.Contains(domainType);
-    }
 }

@@ -26,21 +26,13 @@ public abstract class ViewMethodGenerator<TConfiguration> : MethodGenerator<TCon
 
     protected ViewDTOType MaxFetchLevel => this.DTOType.Min(((IMaxFetchContainer)this.Attribute).MaxFetch);
 
-
-    protected CodeExpression GetFetchsExpression(CodeExpression evaluateDataExpr)
+    protected CodeExpression GetFetchRule()
     {
-        if (evaluateDataExpr == null) throw new ArgumentNullException(nameof(evaluateDataExpr));
+        var args = new[] { this.MaxFetchLevel.ToPrimitiveExpression() };
 
-        return this.GetFetchsExpressionC(evaluateDataExpr.GetContext());
-    }
-
-    protected CodeExpression GetFetchsExpressionC(CodeExpression contextExpr)
-    {
-        if (contextExpr == null) throw new ArgumentNullException(nameof(contextExpr));
-
-        var fetchParams = new[] { this.MaxFetchLevel.ToPrimitiveExpression() };
-
-        return contextExpr.GetFetchContainerExpr(this.DomainType, fetchParams);
+        return typeof(DTOFetchRule<>).MakeGenericType(this.DomainType)
+                                     .ToTypeReference()
+                                     .ToObjectCreateExpression(args);
     }
 
     protected string CreateName(bool pluralize, string postfix, string postfixName = "By")
@@ -65,7 +57,7 @@ public abstract class ViewMethodGenerator<TConfiguration> : MethodGenerator<TCon
 
         if (withFetchs)
         {
-            return this.ToDomainObjectVarDecl(this.Configuration.GetByIdExpr(bllRefExpr, parameter.ToVariableReferenceExpression(), this.GetFetchsExpressionC(evaluateDataExpr.GetContext())));
+            return this.ToDomainObjectVarDecl(this.Configuration.GetByIdExpr(bllRefExpr, parameter.ToVariableReferenceExpression(), this.GetFetchRule()));
         }
         else
         {
@@ -84,7 +76,7 @@ public abstract class ViewMethodGenerator<TConfiguration> : MethodGenerator<TCon
         if (bllRefExpr == null) throw new ArgumentNullException(nameof(bllRefExpr));
         if (parameter == null) throw new ArgumentNullException(nameof(parameter));
 
-        return this.ToDomainObjectVarDecl(this.Configuration.GetByNameExpr(bllRefExpr, parameter.ToVariableReferenceExpression(), this.GetFetchsExpressionC(evaluateDataExpr.GetContext())));
+        return this.ToDomainObjectVarDecl(this.Configuration.GetByNameExpr(bllRefExpr, parameter.ToVariableReferenceExpression(), this.GetFetchRule()));
     }
 
     protected CodeVariableDeclarationStatement ToDomainObjectVarDeclByName(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
@@ -98,7 +90,7 @@ public abstract class ViewMethodGenerator<TConfiguration> : MethodGenerator<TCon
         if (bllRefExpr == null) throw new ArgumentNullException(nameof(bllRefExpr));
         if (parameter == null) throw new ArgumentNullException(nameof(parameter));
 
-        return this.ToDomainObjectVarDecl(this.Configuration.GetByCodeExpr(bllRefExpr, parameter.ToVariableReferenceExpression(), this.GetFetchsExpressionC(evaluateDataExpr.GetContext())));
+        return this.ToDomainObjectVarDecl(this.Configuration.GetByCodeExpr(bllRefExpr, parameter.ToVariableReferenceExpression(), this.GetFetchRule()));
     }
 
     protected CodeVariableDeclarationStatement ToDomainObjectVarDeclByCode(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)

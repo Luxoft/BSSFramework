@@ -85,10 +85,8 @@ public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObjec
     /// <returns>Экземпляр найденного объекта или null, если объект не найден.</returns>
     /// <exception cref="BusinessLogicException">Если параметр throwOnNotFound задан как true и объект не найден.</exception>
     /// <exception cref="InvalidOperationException">По заданному условию найден более чем один объект.</exception>
-    [return: NotNullIfNotNull(nameof(throwOnNotFound))]
     TDomainObject? GetObjectBy(Expression<Func<TDomainObject, bool>> filter, bool throwOnNotFound = false, FetchRule<TDomainObject>? fetchRule = null);
 
-    [return: NotNullIfNotNull(nameof(throwOnNotFound))]
     TDomainObject? GetObjectBy(
         Expression<Func<TDomainObject, bool>> filter,
         bool throwOnNotFound,

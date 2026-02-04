@@ -81,7 +81,7 @@ public class GetODataTreeByQueryStringWithFilterMethodGenerator<TConfiguration> 
                                                               typeof(StandartExpressionBuilderExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression("ToTyped", this.DomainType.ToTypeReference()),
                                                               selectOperationDecl.ToVariableReferenceExpression()));
 
-        var treeDecl = new CodeVariableDeclarationStatement("var", "odataTree", bllRefExpr.ToMethodReferenceExpression("GetTreeByOData").ToMethodInvokeExpression(typedSelectOperationDecl.ToVariableReferenceExpression(), typedFilterDeсl.ToVariableReferenceExpression(), this.GetFetchsExpression(evaluateDataExpr)));
+        var treeDecl = new CodeVariableDeclarationStatement("var", "odataTree", bllRefExpr.ToMethodReferenceExpression("GetTreeByOData").ToMethodInvokeExpression(typedSelectOperationDecl.ToVariableReferenceExpression(), typedFilterDeсl.ToVariableReferenceExpression(), this.GetFetchRule()));
 
         yield return selectOperationDecl;
 

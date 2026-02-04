@@ -4,7 +4,6 @@ using CommonFramework;
 
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.ServiceModelGenerator;
-using Framework.DomainDriven.ServiceModelGenerator.Configuration._Base;
 
 namespace Framework.DomainDriven.WebApiGenerator.NetCore;
 

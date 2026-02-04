@@ -2,7 +2,7 @@
 
 using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.Generation.Domain;
-using Framework.DomainDriven.ServiceModelGenerator.Configuration._Base;
+using Framework.DomainDriven.ServiceModelGenerator;
 using Framework.Projection;
 
 namespace Framework.DomainDriven.WebApiGenerator.NetCore;

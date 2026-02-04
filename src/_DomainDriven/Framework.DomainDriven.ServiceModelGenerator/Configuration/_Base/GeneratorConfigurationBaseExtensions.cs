@@ -79,14 +79,4 @@ internal static class GeneratorConfigurationExtensions
 
         return bllRefExpr.ToStaticMethodInvokeExpression(method, parameterExprRef, new CodePrimitiveExpression(true), fetchsExpr);
     }
-
-    public static CodeExpression GetFetchContainerExpr(this CodeExpression contextExpr, Type domainType, CodeExpression[] fetchParams)
-    {
-        if (contextExpr == null) throw new ArgumentNullException(nameof(contextExpr));
-        if (fetchParams == null) throw new ArgumentNullException(nameof(fetchParams));
-
-        return contextExpr.ToPropertyReference("FetchService")
-                          .ToMethodReferenceExpression("GetContainer", domainType.ToTypeReference())
-                          .ToMethodInvokeExpression(fetchParams);
-    }
 }

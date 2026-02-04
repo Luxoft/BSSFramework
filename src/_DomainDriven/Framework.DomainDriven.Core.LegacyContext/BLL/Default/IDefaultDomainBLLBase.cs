@@ -17,10 +17,8 @@ public interface IDefaultDomainBLLQueryBase<in TPersistentDomainObjectBase, TDom
 
     TDomainObject? GetById(TIdent id, IdCheckMode idCheckMode, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
 
-    [return: NotNullIfNotNull(nameof(throwOnNotFound))]
     TDomainObject? GetById(TIdent id, bool throwOnNotFound = false, FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None);
 
-    [return: NotNullIfNotNull(nameof(throwOnNotFound))]
     TDomainObject? GetById(TIdent id, bool throwOnNotFound, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
 
     List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, FetchRule<TDomainObject>? fetchRule = null);

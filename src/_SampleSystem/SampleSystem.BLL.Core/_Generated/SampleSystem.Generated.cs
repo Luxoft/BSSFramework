@@ -11,22 +11,12 @@ namespace SampleSystem.BLL
 {
     
     
-    public partial interface ISampleSystemBLLContext : Framework.DomainDriven.BLL.Security.IAccessDeniedExceptionServiceContainer, Framework.DomainDriven.BLL.Security.ISecurityServiceContainer<Framework.DomainDriven.BLL.Security.IRootSecurityService<SampleSystem.Domain.PersistentDomainObjectBase>>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<SampleSystem.BLL.ISampleSystemBLLFactoryContainer>, Framework.DomainDriven.IFetchServiceContainer<SampleSystem.Domain.PersistentDomainObjectBase, Framework.DomainDriven.FetchBuildRule>
+    public partial interface ISampleSystemBLLContext : Framework.DomainDriven.BLL.Security.IAccessDeniedExceptionServiceContainer, Framework.DomainDriven.BLL.Security.ISecurityServiceContainer<Framework.DomainDriven.BLL.Security.IRootSecurityService<SampleSystem.Domain.PersistentDomainObjectBase>>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<SampleSystem.BLL.ISampleSystemBLLFactoryContainer>
     {
         
         new SampleSystem.BLL.ISampleSystemBLLFactoryContainer Logics
         {
             get;
-        }
-    }
-    
-    public partial class SecurityDomainBLLBase<TDomainObject> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
-        where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
-    {
-        
-        public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider) : 
-                base(context, securityProvider)
-        {
         }
     }
     
@@ -621,7 +611,7 @@ namespace SampleSystem.BLL
         
         SampleSystem.Domain.EmployeeEmailChangeModel GetChangeByEmail(SampleSystem.Domain.Employee employee);
         
-        System.Collections.Generic.List<SampleSystem.Domain.Employee> GetListBy(SampleSystem.Domain.Models.Filters.EmployeeFilterModel filter, Framework.DomainDriven.FetchRule<SampleSystem.Domain.Employee> fetchs);
+        System.Collections.Generic.List<SampleSystem.Domain.Employee> GetListBy(SampleSystem.Domain.Models.Filters.EmployeeFilterModel filter, GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee> fetchs);
         
         SampleSystem.Domain.EmployeeEmailMassChangeModel GetMassChangeByEmail(System.Collections.Generic.List<SampleSystem.Domain.Employee> employees);
         
@@ -815,7 +805,7 @@ namespace SampleSystem.BLL
     public partial interface IBusinessUnitProgramClassBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.BusinessUnitProgramClass, System.Guid>
     {
         
-        Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.BusinessUnitProgramClass> GetObjectsByOData(Framework.OData.SelectOperation<SampleSystem.Domain.Projections.BusinessUnitProgramClass> selectOperation, SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel filter, Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.BusinessUnitProgramClass> fetchs);
+        Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.BusinessUnitProgramClass> GetObjectsByOData(Framework.OData.SelectOperation<SampleSystem.Domain.Projections.BusinessUnitProgramClass> selectOperation, SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel filter, GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.BusinessUnitProgramClass> fetchs);
     }
     
     public partial interface IBusinessUnitProgramClassBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitProgramClassBLL, SampleSystem.Domain.Projections.BusinessUnitProgramClass>
@@ -833,7 +823,7 @@ namespace SampleSystem.BLL
     public partial interface ITestBusinessUnitBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestBusinessUnit, System.Guid>
     {
         
-        Framework.OData.SelectOperationResult<Framework.Persistent.HierarchicalNode<SampleSystem.Domain.Projections.TestBusinessUnit, System.Guid>> GetTreeByOData(Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestBusinessUnit> selectOperation, SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel filter, Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.TestBusinessUnit> fetchs);
+        Framework.OData.SelectOperationResult<Framework.Persistent.HierarchicalNode<SampleSystem.Domain.Projections.TestBusinessUnit, System.Guid>> GetTreeByOData(Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestBusinessUnit> selectOperation, SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel filter, GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestBusinessUnit> fetchs);
     }
     
     public partial interface ITestBusinessUnitBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestBusinessUnitBLL, SampleSystem.Domain.Projections.TestBusinessUnit>
@@ -859,13 +849,13 @@ namespace SampleSystem.BLL
     public partial interface ITestEmployeeBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestEmployee, System.Guid>
     {
         
-        System.Collections.Generic.List<SampleSystem.Domain.Projections.TestEmployee> GetListBy(SampleSystem.Domain.TestEmployeeFilter filter, Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.TestEmployee> fetchs);
+        System.Collections.Generic.List<SampleSystem.Domain.Projections.TestEmployee> GetListBy(SampleSystem.Domain.TestEmployeeFilter filter, GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestEmployee> fetchs);
         
-        System.Collections.Generic.List<SampleSystem.Domain.Projections.TestEmployee> GetListBy(SampleSystem.Domain.Models.Filters.EmployeeFilterModel filter, Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.TestEmployee> fetchs);
+        System.Collections.Generic.List<SampleSystem.Domain.Projections.TestEmployee> GetListBy(SampleSystem.Domain.Models.Filters.EmployeeFilterModel filter, GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestEmployee> fetchs);
         
-        SampleSystem.Domain.Projections.TestEmployee GetObjectBy(SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel filter, Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.TestEmployee> fetchs);
+        SampleSystem.Domain.Projections.TestEmployee GetObjectBy(SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel filter, GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestEmployee> fetchs);
         
-        Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.TestEmployee> GetObjectsByOData(Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestEmployee> selectOperation, SampleSystem.Domain.TestEmployeeFilter filter, Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.TestEmployee> fetchs);
+        Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.TestEmployee> GetObjectsByOData(Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestEmployee> selectOperation, SampleSystem.Domain.TestEmployeeFilter filter, GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestEmployee> fetchs);
     }
     
     public partial interface ITestEmployeeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestEmployeeBLL, SampleSystem.Domain.Projections.TestEmployee>
@@ -883,7 +873,7 @@ namespace SampleSystem.BLL
     public partial interface ITestLegacyEmployeeBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestLegacyEmployee, System.Guid>
     {
         
-        System.Collections.Generic.List<SampleSystem.Domain.Projections.TestLegacyEmployee> GetListBy(SampleSystem.Domain.Models.Filters.EmployeeFilterModel filter, Framework.DomainDriven.FetchRule<SampleSystem.Domain.Projections.TestLegacyEmployee> fetchs);
+        System.Collections.Generic.List<SampleSystem.Domain.Projections.TestLegacyEmployee> GetListBy(SampleSystem.Domain.Models.Filters.EmployeeFilterModel filter, GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLegacyEmployee> fetchs);
     }
     
     public partial interface ITestLegacyEmployeeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestLegacyEmployeeBLL, SampleSystem.Domain.Projections.TestLegacyEmployee>

@@ -3,7 +3,8 @@
 using CommonFramework;
 
 using Framework.CodeDom;
-using Framework.DomainDriven.ServiceModelGenerator.Configuration._Base;
+using Framework.DomainDriven.ServiceModelGenerator;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace Framework.DomainDriven.WebApiGenerator.NetCore;

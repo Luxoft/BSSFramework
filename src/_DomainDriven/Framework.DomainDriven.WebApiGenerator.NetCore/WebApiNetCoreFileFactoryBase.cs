@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 
 using Framework.DomainDriven.ServiceModelGenerator;
-using Framework.DomainDriven.ServiceModelGenerator.Configuration._Base;
 using Framework.DomainDriven.WebApiNetCore;
 
 namespace Framework.DomainDriven.WebApiGenerator.NetCore;
@@ -20,7 +19,7 @@ public class WebApiNetCoreFileFactoryBase<TConfiguration> : FileFactory<TConfigu
     {
         return new CodeTypeDeclaration
                {
-                       Name = this.DomainType.Name,
+                       Name = this.DomainType!.Name,
                        Attributes = MemberAttributes.Public,
                        IsPartial = true,
                        IsClass = true,

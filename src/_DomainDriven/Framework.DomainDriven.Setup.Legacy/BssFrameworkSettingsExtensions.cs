@@ -18,6 +18,11 @@ public static class BssFrameworkSettingsExtensions
 {
     extension(IBssFrameworkSettings settings)
     {
+        public IBssFrameworkSettings AddSystemConstant(Type systemConstantContainerType)
+        {
+            return settings.AddServices(sc => sc.AddSingleton(new SystemConstantInfo(systemConstantContainerType)));
+        }
+
         public IBssFrameworkSettings AddSubscriptionManager<TSubscriptionManager>()
             where TSubscriptionManager : class, IEventOperationReceiver
         {

@@ -8,7 +8,7 @@ public static class MissingParsingMethodExceptionExtensions
     }
 
 
-    public static Type GetArgumentType<TDelegate, TArg>(this INativeExpressionParser nativeExpression, string expression)
+    public static Type? GetArgumentType<TDelegate, TArg>(this INativeExpressionParser nativeExpression, string expression)
     {
         if (nativeExpression == null) throw new ArgumentNullException(nameof(nativeExpression));
 

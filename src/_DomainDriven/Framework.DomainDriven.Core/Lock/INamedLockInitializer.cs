@@ -1,6 +1,5 @@
-﻿namespace Framework.DomainDriven.Lock;
+﻿using CommonFramework;
 
-public interface INamedLockInitializer
-{
-    Task Initialize(CancellationToken cancellationToken = default);
-}
+namespace Framework.DomainDriven.Lock;
+
+public interface INamedLockInitializer : IInitializer;

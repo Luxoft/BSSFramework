@@ -140,7 +140,7 @@ public static class FieldInfoExtension
                .Maybe (z => z.GetCustomAttributes<Attribute>()).EmptyIfNull ();
     }
 
-    private static PropertyInfo GetPropertyInfoBy(this Type type, FieldInfo fieldInfo)
+    private static PropertyInfo? GetPropertyInfoBy(this Type type, FieldInfo fieldInfo)
     {
         var result = type.GetProperties().FirstOrDefault(
                                                          z => fieldInfo.FieldType == z.PropertyType

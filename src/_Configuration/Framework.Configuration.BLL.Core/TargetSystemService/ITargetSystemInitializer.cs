@@ -1,6 +1,5 @@
 ﻿namespace Framework.Configuration.BLL;
 
-public interface ITargetSystemInitializer
-{
-    Task Initialize(CancellationToken cancellationToken);
-}
+using CommonFramework;
+
+public interface ITargetSystemInitializer : IInitializer;

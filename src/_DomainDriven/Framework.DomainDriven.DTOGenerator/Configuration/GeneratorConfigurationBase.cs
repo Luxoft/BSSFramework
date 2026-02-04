@@ -219,7 +219,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         return new GeneratePropertyMap(property, elementType, elementFileType, isCollection, isNullable, isDetail);
     }
 
-    public virtual ILayerCodeTypeReferenceService GetLayerCodeTypeReferenceService(DTOFileType fileType)
+    public virtual ILayerCodeTypeReferenceService? GetLayerCodeTypeReferenceService(DTOFileType fileType)
     {
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 

@@ -2,7 +2,6 @@
 
 using Microsoft.AspNetCore.Mvc;
 
-using SampleSystem.BLL;
 using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.WebApiCore.Controllers;
@@ -10,14 +9,14 @@ namespace SampleSystem.WebApiCore.Controllers;
 [Route("api/[controller]/[action]")]
 [ApiController]
 public class InitializationController(
-    IServiceEvaluator<ISampleSystemBLLContext> contextEvaluator,
+    IDBSessionEvaluator sessionEvaluator,
     IInitializeManager initializeManager)
     : ControllerBase
 {
     [HttpPost]
     public async Task RunInitialize(CancellationToken cancellationToken)
     {
-        var service = new SampleSystemInitializer(contextEvaluator, initializeManager);
+        var service = new SampleSystemInitializer(sessionEvaluator, initializeManager);
 
         await service.InitializeAsync(cancellationToken);
     }

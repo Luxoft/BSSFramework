@@ -12,7 +12,7 @@ public static class TypeExtensions
         return (tableName: tableAttribute.Name, schemaName: tableAttribute.Schema ?? defaultSchema);
     }
 
-    public static TableAttribute GetTableAttribute(this Type type)
+    public static TableAttribute? GetTableAttribute(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 

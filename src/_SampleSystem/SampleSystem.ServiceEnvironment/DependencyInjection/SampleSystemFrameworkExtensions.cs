@@ -15,33 +15,27 @@ public static class SampleSystemFrameworkExtensions
 {
     extension(IBssFrameworkSettings settings)
     {
-        public IBssFrameworkSettings AddNamedLocks()
-        {
-            return settings.AddNamedLocks(s => s
-                                               .SetNameLockType<GenericNamedLock>(nl => nl.Name)
-                                               .AddManual(typeof(BusinessUnitAncestorLink))
-                                               .AddManual(typeof(ManagementUnitAncestorLink))
-                                               .AddManual(typeof(LocationAncestorLink)));
-        }
+        public IBssFrameworkSettings AddNamedLocks() =>
+            settings.AddNamedLocks(s => s
+                                        .SetNameLockType<GenericNamedLock>(nl => nl.Name)
+                                        .AddManual(typeof(BusinessUnitAncestorLink))
+                                        .AddManual(typeof(ManagementUnitAncestorLink))
+                                        .AddManual(typeof(LocationAncestorLink)));
 
-        public IBssFrameworkSettings AddListeners()
-        {
-            return settings.AddListener<SubscriptionDALListener>()
-                           .AddListener<ExampleFaultDALListener>()
-                           .AddListener<FixDomainObjectEventRevisionNumberDALListener>()
-                           .AddListener<DependencyDetailEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>();
-        }
+        public IBssFrameworkSettings AddListeners() =>
+            settings.AddListener<SubscriptionDALListener>()
+                    .AddListener<ExampleFaultDALListener>()
+                    .AddListener<FixDomainObjectEventRevisionNumberDALListener>()
+                    .AddListener<DependencyDetailEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>();
 
-        public IBssFrameworkSettings AddSubscriptionManagers()
-        {
-            return settings.AddSubscriptionManager<ExampleSampleSystemEventsSubscriptionManager>()
-                           .AddSubscriptionManager<ExampleSampleSystemAribaEventsSubscriptionManager>();
-        }
+        public IBssFrameworkSettings AddSubscriptionManagers() =>
+            settings.AddSubscriptionManager<ExampleSampleSystemEventsSubscriptionManager>()
+                    .AddSubscriptionManager<ExampleSampleSystemAribaEventsSubscriptionManager>();
 
-        public IBssFrameworkSettings AddBLLSystem()
-        {
-            return settings.AddBLLSystem<ISampleSystemBLLContext, SampleSystemBLLContext>();
-        }
+        public IBssFrameworkSettings AddBLLSystem() => settings.AddBLLSystem<ISampleSystemBLLContext, SampleSystemBLLContext>();
+
+        public IBssFrameworkSettings AddConfigurationSystemConstants() =>
+            settings.AddSystemConstant(typeof(SampleSystemSystemConstant));
 
         public IBssFrameworkSettings AddConfigurationTargetSystems() =>
             settings.AddConfigurationTargetSystems(tsSettings =>
@@ -55,18 +49,14 @@ public static class SampleSystemFrameworkExtensions
                                                                new(typeof(Employee), new Guid("{AA46DA53-9B21-4DEC-9C70-720BDA1CB198}")),
                                                            ]));
 
-        public IBssFrameworkSettings RegisterSupportLegacyServices()
-        {
-            return settings.SetSubscriptionAssembly(typeof(EmployeeUpdateSubscription).Assembly)
-                           .SetNotificationDefaultMailSenderContainer<SampleSystemDefaultMailSenderContainer>()
-                           .SetNotificationEmployee<Employee>()
-                           .SetDTOMapping<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService, PersistentDomainObjectBase, EventDTOBase>();
-        }
+        public IBssFrameworkSettings RegisterSupportLegacyServices() =>
+            settings.SetSubscriptionAssembly(typeof(EmployeeUpdateSubscription).Assembly)
+                    .SetNotificationDefaultMailSenderContainer<SampleSystemDefaultMailSenderContainer>()
+                    .SetNotificationEmployee<Employee>()
+                    .SetDTOMapping<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService, PersistentDomainObjectBase, EventDTOBase>();
 
-        public IBssFrameworkSettings AddQueryVisitors()
-        {
-            return settings.AddQueryVisitors<ExpressionVisitorContainerDomainIdentItem<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
-                           .AddQueryVisitors<ExpressionVisitorContainerDomainIdentItem<PersistentDomainObjectBase, Guid>>();
-        }
+        public IBssFrameworkSettings AddQueryVisitors() =>
+            settings.AddQueryVisitors<ExpressionVisitorContainerDomainIdentItem<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
+                    .AddQueryVisitors<ExpressionVisitorContainerDomainIdentItem<PersistentDomainObjectBase, Guid>>();
     }
 }

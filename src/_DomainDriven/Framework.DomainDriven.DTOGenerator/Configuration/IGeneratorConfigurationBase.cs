@@ -43,7 +43,7 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     IEnumerable<GenerateTypeMap> GetTypeMaps();
 
-    ILayerCodeTypeReferenceService GetLayerCodeTypeReferenceService(DTOFileType fileType);
+    ILayerCodeTypeReferenceService? GetLayerCodeTypeReferenceService(DTOFileType fileType);
 
     CodeExpression GetDefaultClientDTOMappingServiceExpression();
 

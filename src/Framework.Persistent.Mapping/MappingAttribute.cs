@@ -73,5 +73,5 @@ public class MappingAttribute : Attribute
     /// <summary>
     /// Имя из сторонней таблицы которая join-тся по id и из которой берётся данная колонка
     /// </summary>
-    public string ExternalTableName { get; set; }
+    public string? ExternalTableName { get; set; }
 }

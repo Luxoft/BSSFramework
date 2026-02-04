@@ -20,14 +20,14 @@ public class ProjectionCustomPropertyAttributeSource : AttributeSourceBase<IProj
 
     protected override IEnumerable<Attribute> GetDefaultAttributes()
     {
-        return new Attribute[]
+        return new Attribute?[]
                {
                        this.TryCreateIgnoreFetchAttribute(),
                        this.CreateProjectionPropertyAttribute()
-               }.Where(attr => attr != null).Concat(this.GetFetchPathAttributes());
+               }.Where(attr => attr != null).Select(v => v!).Concat(this.GetFetchPathAttributes());
     }
 
-    protected virtual IgnoreFetchAttribute TryCreateIgnoreFetchAttribute()
+    protected virtual IgnoreFetchAttribute? TryCreateIgnoreFetchAttribute()
     {
         if (this.ProjectionValue.Fetchs.Any())
         {

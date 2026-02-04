@@ -8,9 +8,12 @@ using Framework.DomainDriven.Repository;
 
 using GenericQueryable;
 
+using SecuritySystem.Attributes;
+
 namespace Framework.Configuration.BLL;
 
-public class SystemConstantInitializer(IConfigurationBLLContext context, IRepository<SystemConstant> repository, IEnumerable<SystemConstantInfo> infoList) : ISystemConstantInitializer
+public class SystemConstantInitializer(IConfigurationBLLContext context, [DisabledSecurity] IRepository<SystemConstant> repository, IEnumerable<SystemConstantInfo> infoList)
+    : ISystemConstantInitializer
 {
     public async Task Initialize(CancellationToken cancellationToken)
     {

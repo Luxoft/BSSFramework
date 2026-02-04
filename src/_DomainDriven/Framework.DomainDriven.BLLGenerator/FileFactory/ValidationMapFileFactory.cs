@@ -2,7 +2,7 @@
 
 using Framework.CodeDom;
 
-namespace Framework.DomainDriven.BLLCoreGenerator;
+namespace Framework.DomainDriven.BLLGenerator;
 
 public class ValidationMapFileFactory<TConfiguration> : FileFactory<TConfiguration>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>

@@ -309,4 +309,14 @@ namespace Framework.Authorization.BLL
             return new Framework.Authorization.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context, securityProvider);
         }
     }
+    
+    public partial class SecurityDomainBLLBase<TDomainObject> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
+        where TDomainObject : Framework.Authorization.Domain.PersistentDomainObjectBase
+    {
+        
+        public SecurityDomainBLLBase(Framework.Authorization.BLL.IAuthorizationBLLContext context, SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider) : 
+                base(context, securityProvider)
+        {
+        }
+    }
 }

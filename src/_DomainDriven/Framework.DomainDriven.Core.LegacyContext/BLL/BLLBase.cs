@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 
 using CommonFramework;
@@ -10,6 +11,7 @@ using Framework.Exceptions;
 using Framework.OData;
 using Framework.Persistent;
 
+using GenericQueryable;
 using GenericQueryable.Fetching;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -148,6 +150,15 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         return ((IEnumerable<TDomainObject>)this.GetSecureQueryable(fetchRule, lockRole).Where(filter)).Distinct().ToList();
     }
 
+    public List<TDomainObject> GetListBy(Expression<Func<TDomainObject, bool>> filter, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
+        this.GetListBy(filter, buildFetchRule.ToFetchRule());
+
+    public List<TDomainObject> GetListBy(IDomainObjectFilterModel<TDomainObject> filter, FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None) =>
+        this.GetListBy(filter.ToFilterExpression(), fetchRule, lockRole);
+
+    public List<TDomainObject> GetListBy(IDomainObjectFilterModel<TDomainObject> filter, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
+        this.GetListBy(filter, buildFetchRule.ToFetchRule());
+
     public abstract SelectOperationResult<TDomainObject> GetObjectsByOData(
         SelectOperation selectOperation,
         FetchRule<TDomainObject>? fetchRule = null);
@@ -166,10 +177,19 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         return this.GetObjectsByOData(selectOperationWithFilter, fetchRule);
     }
 
+    public SelectOperationResult<TDomainObject> GetObjectsByOData(
+        SelectOperation<TDomainObject> selectOperation,
+        IDomainObjectFilterModel<TDomainObject> filter,
+        FetchRule<TDomainObject>? fetchRule = null) =>
+        this.GetObjectsByOData(selectOperation, filter.ToFilterExpression(), fetchRule);
+
     public List<TDomainObject> GetFullList(FetchRule<TDomainObject>? fetchRule = null)
     {
         return this.GetSecureQueryable(fetchRule).ToList();
     }
+
+    public List<TDomainObject> GetFullList(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
+        this.GetFullList(buildFetchRule.ToFetchRule());
 
     /// <summary>
     /// Получение IQueryable без учёта безопасности
@@ -181,6 +201,9 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     {
         return this.dal.GetQueryable(lockRole, fetchRule);
     }
+
+    public IQueryable<TDomainObject> GetUnsecureQueryable(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
+        this.GetUnsecureQueryable(buildFetchRule.ToFetchRule());
 
     /// <summary>
     /// Получение IQueryable с учётом безопасности
@@ -194,6 +217,9 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     {
         return this.ProcessSecurity(this.GetUnsecureQueryable(fetchRule, lockRole));
     }
+
+    public IQueryable<TDomainObject> GetSecureQueryable(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
+        this.GetSecureQueryable(buildFetchRule.ToFetchRule());
 
     protected IQueryable<TDomainObject> GetSecureQueryable(
         IQueryableProcessor<TDomainObject> baseProcessor,
@@ -259,6 +285,12 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     {
         return this.GetObjectBy(LockRole.None, filter, throwOnNotFound, fetchRule);
     }
+
+    public TDomainObject? GetObjectBy(
+        Expression<Func<TDomainObject, bool>> filter,
+        bool throwOnNotFound,
+        Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
+        this.GetObjectBy(filter, throwOnNotFound, buildFetchRule.ToFetchRule());
 
     /// <summary>
     /// Выполняет поиск доменного объекта по условию.

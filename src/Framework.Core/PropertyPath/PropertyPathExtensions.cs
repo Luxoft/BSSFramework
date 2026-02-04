@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
+using CommonFramework;
+
 namespace Framework.Core;
 
 public static class PropertyPathExtensions
@@ -31,6 +33,31 @@ public static class PropertyPathExtensions
 
         var rootParam = Expression.Parameter(sourceType ?? propertyPath.Head.ReflectedType!);
 
-        return propertyPath.Aggregate((Expression)rootParam, (state, prop) => Expression.Property(state, prop), res => Expression.Lambda(res, rootParam));
+        return propertyPath.Aggregate((Expression)rootParam, Expression.Property, res => Expression.Lambda(res, rootParam));
+    }
+
+    public static IEnumerable<PropertyPath> Compress(this IEnumerable<PropertyPath> paths)
+    {
+        var resultPaths = new List<PropertyPath>();
+
+        paths.Foreach(path =>
+        {
+            var overridePath = resultPaths.FirstOrDefault(path.StartsWith);
+
+            if (overridePath is null)
+            {
+                if (resultPaths.All(rPath => !rPath.StartsWith(path)))
+                {
+                    resultPaths.Add(path);
+                }
+            }
+            else
+            {
+                resultPaths.Remove(overridePath);
+                resultPaths.Add(path);
+            }
+        });
+
+        return resultPaths;
     }
 }

@@ -91,7 +91,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public virtual IFetchPathFactory<ViewDTOType> FetchPathFactory { get; }
 
-    public virtual bool GenerateFetchService => true;
+    public virtual bool GenerateDTOFetchRuleExpander => true;
 
 
     public CodeTypeReference BLLContextTypeReference => this.Environment.BLLCore.BLLContextInterfaceTypeReference;
@@ -119,6 +119,10 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
         return new DefaultValidatorGenerator<IGeneratorConfigurationBase<TEnvironment>>(this, domainType, validatorMapExpr);
     }
+
+    public virtual bool GenerateValidation { get; } = true;
+
+    public virtual bool UseDbUniquenessEvaluation { get; } = false;
 
     public virtual bool GenerateBllConstructor(Type domainType)
     {
@@ -149,13 +153,13 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
         new CodeFileFactoryHeader<FileType>(FileType.ValidatorCompileCache, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.ValidatorCompileCache}");
 
-    protected virtual ICodeFileFactoryHeader<FileType> MainFetchServiceFileFactoryHeader =>
+    protected virtual ICodeFileFactoryHeader<FileType> MainDTOFetchRuleExpanderFileFactoryHeader =>
 
-        new CodeFileFactoryHeader<FileType>(FileType.MainFetchService, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.MainFetchService}");
+        new CodeFileFactoryHeader<FileType>(FileType.MainDTOFetchRuleExpander, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.MainDTOFetchRuleExpander}");
 
-    protected virtual ICodeFileFactoryHeader<FileType> MainFetchServiceBaseFileFactoryHeader =>
+    protected virtual ICodeFileFactoryHeader<FileType> MainDTOFetchRuleExpanderBaseFileFactoryHeader =>
 
-        new CodeFileFactoryHeader<FileType>(FileType.MainFetchServiceBase, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.MainFetchServiceBase}");
+        new CodeFileFactoryHeader<FileType>(FileType.MainDTOFetchRuleExpanderBase, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.MainDTOFetchRuleExpanderBase}");
 
     protected virtual ICodeFileFactoryHeader<FileType> ValidationMapFileFactoryHeader =>
 
@@ -192,8 +196,8 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         yield return this.ValidatorFileFactoryHeader;
         yield return this.ValidatorInterfaceFileFactoryHeader;
 
-        yield return this.MainFetchServiceBaseFileFactoryHeader;
-        yield return this.MainFetchServiceFileFactoryHeader;
+        yield return this.MainDTOFetchRuleExpanderBaseFileFactoryHeader;
+        yield return this.MainDTOFetchRuleExpanderFileFactoryHeader;
 
         yield return this.SecurityDomainBLLBaseFileFactoryHeader;
 

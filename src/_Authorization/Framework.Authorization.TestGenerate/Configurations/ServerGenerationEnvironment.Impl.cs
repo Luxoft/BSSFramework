@@ -1,6 +1,4 @@
-﻿using Framework.DomainDriven.ServiceModelGenerator.Configuration._Base;
-
-namespace Framework.Authorization.TestGenerate;
+﻿namespace Framework.Authorization.TestGenerate;
 
 public partial class ServerGenerationEnvironment :
 
@@ -10,13 +8,11 @@ public partial class ServerGenerationEnvironment :
 
         DomainDriven.DTOGenerator.Server.IServerGenerationEnvironmentBase,
 
-        IGenerationEnvironmentBase,
+        DomainDriven.ServiceModelGenerator.IGenerationEnvironmentBase,
 
-        Framework.DomainDriven.NHibernate.DALGenerator.IGenerationEnvironmentBase
+        DomainDriven.NHibernate.DALGenerator.IGenerationEnvironmentBase
 {
     DomainDriven.BLLCoreGenerator.IGeneratorConfigurationBase<DomainDriven.BLLCoreGenerator.IGenerationEnvironmentBase> DomainDriven.BLLCoreGenerator.IGeneratorConfigurationContainer.BLLCore => this.BLLCore;
-
-    DomainDriven.BLLGenerator.IGeneratorConfigurationBase<DomainDriven.BLLGenerator.IGenerationEnvironmentBase> DomainDriven.BLLGenerator.IGeneratorConfigurationContainer.BLL => this.BLL;
 
     DomainDriven.DTOGenerator.Server.IServerGeneratorConfigurationBase<DomainDriven.DTOGenerator.Server.IServerGenerationEnvironmentBase> DomainDriven.DTOGenerator.Server.IGeneratorConfigurationContainer.ServerDTO => this.ServerDTO;
 }

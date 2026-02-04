@@ -35,10 +35,10 @@ public class BLLFileGenerator<TConfiguration> : CodeFileGenerator<TConfiguration
 
         yield return new ImplementedBLLFactoryFileFactory<TConfiguration>(this.Configuration);
 
-        if (this.Configuration.GenerateFetchService)
+        if (this.Configuration.GenerateDTOFetchRuleExpander)
         {
-            yield return new MainFetchServiceBaseFileFactory<TConfiguration>(this.Configuration);
-            yield return new MainFetchServiceFileFactory<TConfiguration>(this.Configuration);
+            yield return new MainDTOFetchRuleExpanderBaseFileFactory<TConfiguration>(this.Configuration);
+            yield return new MainDTOFetchRuleExpanderFileFactory<TConfiguration>(this.Configuration);
         }
 
         yield return new SecurityDomainBLLBaseFileFactory<TConfiguration>(this.Configuration);

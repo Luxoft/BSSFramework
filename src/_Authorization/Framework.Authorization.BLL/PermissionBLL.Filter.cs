@@ -2,6 +2,8 @@
 using Framework.DomainDriven;
 using Framework.Validation;
 
+using GenericQueryable.Fetching;
+
 namespace Framework.Authorization.BLL;
 
 public partial class PermissionBLL
@@ -12,8 +14,8 @@ public partial class PermissionBLL
 
         this.Context.Validator.Validate(filter);
 
-        var innerFilter = new PermissionDirectInternalFilterModel(this.Context, filter);
+        IDomainObjectFilterModel<Permission> innerFilter = new PermissionDirectInternalFilterModel(this.Context, filter);
 
-        return this.GetListBy(innerFilter, fetchs);
+        return base.GetListBy(innerFilter, fetchs);
     }
 }

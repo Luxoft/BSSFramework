@@ -2,7 +2,7 @@
 
 using Framework.CodeDom;
 
-namespace Framework.DomainDriven.BLLCoreGenerator;
+namespace Framework.DomainDriven.BLLGenerator;
 
 public class ValidatorFileFactory<TConfiguration> : FileFactory<TConfiguration>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
@@ -38,7 +38,7 @@ public class ValidatorFileFactory<TConfiguration> : FileFactory<TConfiguration>
         }
 
         {
-            var contextParameter = this.Configuration.BLLContextInterfaceTypeReference.ToParameterDeclarationExpression("context");
+            var contextParameter = this.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference.ToParameterDeclarationExpression("context");
             var cacheParameter = this.Configuration.GetCodeTypeReference(null, FileType.ValidatorCompileCache).ToParameterDeclarationExpression("cache");
 
             yield return new CodeConstructor

@@ -13,17 +13,17 @@ public partial class SecurityDomainBLLBase<TDomainObject>
         this.Validate(domainObject, AuthorizationOperationContext.Save);
     }
 
-    protected internal virtual void Recalculate(TDomainObject domainObject)
+    protected virtual void Recalculate(TDomainObject domainObject)
     {
 
     }
 
-    protected internal virtual void Validate(TDomainObject domainObject, AuthorizationOperationContext operationContext)
+    protected virtual void Validate(TDomainObject domainObject, AuthorizationOperationContext operationContext)
     {
         this.Context.Validator.Validate(domainObject, (int)operationContext);
     }
 
-    internal protected void Save(TDomainObject domainObject, bool validate)
+    protected void Save(TDomainObject domainObject, bool validate)
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 

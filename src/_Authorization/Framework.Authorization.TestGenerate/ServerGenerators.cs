@@ -33,13 +33,7 @@ public partial class ServerGenerators
     {
         var generator = new BLLCoreFileGenerator(this.Environment.BLLCore);
 
-        return generator.GenerateGroup(
-                                       this.GeneratePath + @"/Framework.Authorization.BLL.Core/_Generated",
-                                       decl => decl.Name.Contains("FetchService") ? "Authorization.FetchService.Generated"
-                                               : decl.Name.Contains("ValidationMap") ? "Authorization.ValidationMap.Generated"
-                                               : decl.Name.Contains("Validator") ? "Authorization.Validator.Generated"
-                                               : "Authorization.Generated",
-                                       this.CheckOutService);
+        yield return generator.GenerateSingle(this.GeneratePath + @"/Framework.Authorization.BLL.Core/_Generated", "Authorization.Generated", this.CheckOutService);
     }
 
     [TestMethod]
@@ -52,10 +46,13 @@ public partial class ServerGenerators
     {
         var generator = new BLLFileGenerator(this.Environment.BLL);
 
-        yield return generator.GenerateSingle(
-                                              this.GeneratePath + @"/Framework.Authorization.BLL/_Generated",
-                                              "Authorization.Generated",
-                                              this.CheckOutService);
+        return generator.GenerateGroup(
+            this.GeneratePath + @"/Framework.Authorization.BLL/_Generated",
+            decl => decl.Name.Contains("FetchRuleExpander") ? "Authorization.FetchRuleExpander.Generated"
+                    : decl.Name.Contains("ValidationMap") ? "Authorization.ValidationMap.Generated"
+                    : decl.Name.Contains("Validator") ? "Authorization.Validator.Generated"
+                    : "Authorization.Generated",
+            this.CheckOutService);
     }
 
     [TestMethod]

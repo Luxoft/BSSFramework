@@ -3,7 +3,7 @@
 using Framework.CodeDom;
 using Framework.Validation;
 
-namespace Framework.DomainDriven.BLLCoreGenerator;
+namespace Framework.DomainDriven.BLLGenerator;
 
 public class ValidatorInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguration>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>

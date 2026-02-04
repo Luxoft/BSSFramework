@@ -2,7 +2,7 @@
 
 using ValidatorExpr = System.Collections.Generic.IReadOnlyDictionary<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
 
-namespace Framework.DomainDriven.BLLCoreGenerator;
+namespace Framework.DomainDriven.BLLGenerator;
 
 public interface IValidatorGenerator
 {

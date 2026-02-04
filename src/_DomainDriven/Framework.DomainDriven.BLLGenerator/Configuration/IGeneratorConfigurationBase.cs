@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Reflection;
 
-using Framework.DomainDriven.BLLCoreGenerator;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Transfering;
 
@@ -15,6 +14,8 @@ public interface IGeneratorConfigurationBase<out TEnvironment> : IGeneratorConfi
 
 public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTypeReferenceService<FileType>
 {
+     bool UseDbUniquenessEvaluation { get; }
+
     ReadOnlyCollection<Type> ValidationTypes { get; }
 
     /// <summary>
@@ -39,13 +40,7 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     IValidatorGenerator GetValidatorGenerator(Type domainType, CodeExpression validatorMapExpr);
 
-    CodeExpression GetCreateDefaultBLLExpression(CodeExpression contextExpression, CodeTypeReference genericType);
-
     bool GenerateValidation { get; }
-
-    ReadOnlyCollection<Type> SecurityServiceDomainTypes { get; }
-
-    string GetOperationByModeMethodName { get; }
 
     CodeTypeReference SecurityDomainBLLBaseTypeReference { get; }
 
@@ -54,7 +49,7 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     CodeTypeReference BLLContextTypeReference { get; }
 
-    bool GenerateFetchService { get; }
+    bool GenerateDTOFetchRuleExpander { get; }
 
     bool GenerateBllConstructor(Type domainType);
 

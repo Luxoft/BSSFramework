@@ -5,16 +5,11 @@ using Framework.CodeDom;
 using Framework.DomainDriven.BLL;
 using Framework.Validation;
 
-namespace Framework.DomainDriven.BLLCoreGenerator;
+namespace Framework.DomainDriven.BLLGenerator;
 
-public class ValidatorBaseFileFactory<TConfiguration> : FileFactory<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+public class ValidatorBaseFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public ValidatorBaseFileFactory(TConfiguration configuration)
-            : base(configuration, null)
-    {
-    }
-
     public override FileType FileType => FileType.ValidatorBase;
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
@@ -29,7 +24,7 @@ public class ValidatorBaseFileFactory<TConfiguration> : FileFactory<TConfigurati
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
-        yield return typeof(BLLContextHandlerValidator<,>).ToTypeReference(this.Configuration.BLLContextInterfaceTypeReference, this.Configuration.Environment.OperationContextType.ToTypeReference());
+        yield return typeof(BLLContextHandlerValidator<,>).ToTypeReference(this.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference, this.Configuration.Environment.OperationContextType.ToTypeReference());
     }
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
@@ -41,7 +36,7 @@ public class ValidatorBaseFileFactory<TConfiguration> : FileFactory<TConfigurati
 
 
         {
-            var contextParameter = this.Configuration.BLLContextInterfaceTypeReference.ToParameterDeclarationExpression("context");
+            var contextParameter = this.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference.ToParameterDeclarationExpression("context");
             var cacheParameter = typeof(ValidatorCompileCache).ToTypeReference().ToParameterDeclarationExpression("cache");
 
             var statements = from domainType in this.Configuration.ValidationTypes

@@ -14,9 +14,9 @@ public enum FileType
 
     BLLFactoryContainer,
 
-    MainFetchServiceBase,
+    MainDTOFetchRuleExpanderBase,
 
-    MainFetchService,
+    MainDTOFetchRuleExpander,
 
     SecurityDomainBLLBase,
 

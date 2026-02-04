@@ -1,21 +1,15 @@
 ﻿using System.CodeDom;
 using System.Reflection;
+
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Generation.Domain;
 
-namespace Framework.DomainDriven.BLLCoreGenerator;
+namespace Framework.DomainDriven.BLLGenerator;
 
-public class SecurityDomainBLLBaseFileFactory<TConfiguration> : FileFactory<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+public class SecurityDomainBLLBaseFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public SecurityDomainBLLBaseFileFactory(TConfiguration configuration)
-            : base(configuration, null)
-    {
-
-    }
-
-
     public override FileType FileType => FileType.SecurityDomainBLLBase;
 
 
@@ -43,7 +37,7 @@ public class SecurityDomainBLLBaseFileFactory<TConfiguration> : FileFactory<TCon
                        IsPartial = true,
                        BaseTypes =
                        {
-                               typeof(DefaultSecurityDomainBLLBase<,,,>).ToTypeReference(this.Configuration.BLLContextInterfaceTypeReference,
+                               typeof(DefaultSecurityDomainBLLBase<,,,>).ToTypeReference(this.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference,
                                    this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
                                    genericDomainObjectParameterTypeRef,
                                    this.Configuration.Environment.GetIdentityType().ToTypeReference())

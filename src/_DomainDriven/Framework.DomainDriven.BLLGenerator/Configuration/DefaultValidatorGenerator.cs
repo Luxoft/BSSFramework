@@ -16,7 +16,7 @@ using CommonFramework.Maybe;
 using ValidatorPairExpr = System.Collections.Generic.KeyValuePair<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
 using ValidatorExpr = System.Collections.Generic.IReadOnlyDictionary<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
 
-namespace Framework.DomainDriven.BLLCoreGenerator;
+namespace Framework.DomainDriven.BLLGenerator;
 
 public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationContainer<TConfiguration>, IValidatorGenerator
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
@@ -470,7 +470,8 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         var uniqueElementString = uniProperties.GetUniqueElementString(false);
 
         var internalValidatorType = typeof(UniqueGroupDatabaseValidator<,,,>).ToTypeReference(
-         this.Configuration.BLLContextInterfaceTypeReference,
+
+         this.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference,
          this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
          this.DomainType.ToTypeReference(),
          this.Configuration.Environment.GetIdentityType().ToTypeReference());

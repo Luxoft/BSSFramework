@@ -32,7 +32,6 @@ public partial class AuthorizationBLLContext(
     IStandartExpressionBuilder standartExpressionBuilder,
     IAuthorizationValidator validator,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
-    IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
     TimeProvider timeProvider,
     IRootSecurityService<PersistentDomainObjectBase> securityService,
     IAuthorizationBLLFactoryContainer logics,
@@ -55,8 +54,7 @@ public partial class AuthorizationBLLContext(
         accessDeniedExceptionService,
         standartExpressionBuilder,
         validator,
-        hierarchicalObjectExpanderFactory,
-        fetchService)
+        hierarchicalObjectExpanderFactory)
 {
     private readonly IDictionaryCache<Type, SecurityContextType> securityContextTypeCache = new DictionaryCache<Type, SecurityContextType>(
         securityContextType => logics.SecurityContextType.GetById(

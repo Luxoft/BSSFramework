@@ -79,7 +79,7 @@ public class ImplementedBLLFactoryFileFactory<TConfiguration> : FileFactory<TCon
                        Parameters = { parameter },
                        Statements =
                        {
-                           this.Configuration.Environment.BLLCore.SecurityDomainBLLBaseTypeReference.ToTypeReference(genericDomainTypeRefExpr).ToObjectCreateExpression(contextFieldRefExpr, parameter.ToVariableReferenceExpression()).ToMethodReturnStatement()
+                           this.Configuration.SecurityDomainBLLBaseTypeReference.ToTypeReference(genericDomainTypeRefExpr).ToObjectCreateExpression(contextFieldRefExpr, parameter.ToVariableReferenceExpression()).ToMethodReturnStatement()
                        },
                        TypeParameters = { genericDomainTypeRef }
                };

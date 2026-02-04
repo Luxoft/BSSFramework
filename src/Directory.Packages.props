@@ -18,6 +18,7 @@
     <PackageVersion Include="IvAt.GenericQueryable" Version="2.1.8" />
     <PackageVersion Include="IvAt.GenericQueryable.Abstractions" Version="2.1.8" />
     <PackageVersion Include="IvAt.GenericQueryable.EntityFramework" Version="2.1.8" />
+    <PackageVersion Include="IvAt.GenericQueryable.Runtime" Version="2.1.8" />
     <PackageVersion Include="IvAt.SecuritySystem" Version="2.1.8" />
     <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="2.1.8" />
     <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="2.1.8" />

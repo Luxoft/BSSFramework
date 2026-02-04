@@ -1,19 +1,15 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
-
 using CommonFramework;
-
 using Framework.Core;
 using Framework.DomainDriven.Lock;
 using Framework.Exceptions;
 using Framework.OData;
 using Framework.Persistent;
-
+using GenericQueryable;
 using GenericQueryable.Fetching;
-
-using Microsoft.Extensions.DependencyInjection;
-
 using HierarchicalExpand;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLL;
 
@@ -36,6 +32,9 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
                     IdCheckMode.SkipEmpty => id.IsDefault() ? null : this.GetById(id, true, fetchRule, lockRole),
                     _ => throw new ArgumentOutOfRangeException(nameof(idCheckMode))
             };
+
+    public TDomainObject? GetById(TIdent id, IdCheckMode idCheckMode, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
+        this.GetById(id, idCheckMode, buildFetchRule.ToFetchRule());
 
     public TDomainObject GetNested(TDomainObject domainObject)
     {
@@ -153,6 +152,9 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
         throw uniqueIdents.Except(uniqueResult.Select(v => v.Id)).Select(this.GetMissingObjectException).Aggregate();
     }
 
+    public List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
+        this.GetListByIdents(baseIdents, buildFetchRule.ToFetchRule());
+
     public override SelectOperationResult<TDomainObject> GetObjectsByOData(
             SelectOperation selectOperation,
             FetchRule<TDomainObject>? fetchRule = null)
@@ -263,6 +265,9 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
         return baseIdents.Distinct().Split(MaxItemsInSql).SelectMany(path => this.GetListBy(v => path.Contains(v.Id), fetchRule)).ToList();
     }
 
+    public List<TDomainObject> GetListByIdentsUnsafe(IEnumerable<TIdent> baseIdents, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
+        this.GetListByIdentsUnsafe(baseIdents, buildFetchRule.ToFetchRule());
+
     public TDomainObject? GetById(TIdent id, bool throwOnNotFound = false, FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None)
     {
         var result = this.GetListBy(domainObject => domainObject.Id.Equals(id), fetchRule, lockRole).FirstOrDefault();
@@ -274,6 +279,9 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
 
         return result;
     }
+
+    public TDomainObject? GetById(TIdent id, bool throwOnNotFound, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
+        this.GetById(id, throwOnNotFound, buildFetchRule.ToFetchRule());
 
     protected List<TDomainObject> GetListByIdentsQueryable(IQueryable<TIdent> baseIdents, FetchRule<TDomainObject>? fetchRule = null)
     {

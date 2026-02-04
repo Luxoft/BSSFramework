@@ -5,7 +5,6 @@ using Framework.DomainDriven.Lock;
 using Framework.Exceptions;
 using Framework.OData;
 
-using GenericQueryable;
 using GenericQueryable.Fetching;
 
 namespace Framework.DomainDriven.BLL;
@@ -25,8 +24,7 @@ public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObjec
     /// </summary>
     /// <param name="buildFetchRule">Подгружаемые свойства</param>
     /// <returns></returns>
-    IQueryable<TDomainObject> GetSecureQueryable(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
-        this.GetSecureQueryable(buildFetchRule.ToFetchRule());
+    IQueryable<TDomainObject> GetSecureQueryable(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
 
     /// <summary>
     /// Получение IQueryable без учёта безопасности
@@ -41,8 +39,7 @@ public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObjec
     /// </summary>
     /// <param name="buildFetchRule">Подгружаемые свойства</param>
     /// <returns></returns>
-    IQueryable<TDomainObject> GetUnsecureQueryable(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
-        this.GetUnsecureQueryable(buildFetchRule.ToFetchRule());
+    IQueryable<TDomainObject> GetUnsecureQueryable(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
 
 
     SelectOperationResult<TDomainObject> GetObjectsByOData(SelectOperation selectOperation, FetchRule<TDomainObject>? fetchRule = null);
@@ -57,24 +54,19 @@ public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObjec
     SelectOperationResult<TDomainObject> GetObjectsByOData(
         SelectOperation<TDomainObject> selectOperation,
         IDomainObjectFilterModel<TDomainObject> filter,
-        FetchRule<TDomainObject>? fetchRule = null) =>
-        this.GetObjectsByOData(selectOperation, filter.ToFilterExpression(), fetchRule);
+        FetchRule<TDomainObject>? fetchRule = null);
 
     List<TDomainObject> GetFullList(FetchRule<TDomainObject>? fetchRule = null);
 
-    List<TDomainObject> GetFullList(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
-        this.GetFullList(buildFetchRule.ToFetchRule());
+    List<TDomainObject> GetFullList(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
 
-    List<TDomainObject> GetListBy(IDomainObjectFilterModel<TDomainObject> filter, FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None) =>
-        this.GetListBy(filter.ToFilterExpression(), fetchRule, lockRole);
+    List<TDomainObject> GetListBy(IDomainObjectFilterModel<TDomainObject> filter, FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None);
 
-    List<TDomainObject> GetListBy(IDomainObjectFilterModel<TDomainObject> filter, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
-        this.GetListBy(filter, buildFetchRule.ToFetchRule());
+    List<TDomainObject> GetListBy(IDomainObjectFilterModel<TDomainObject> filter, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
 
     List<TDomainObject> GetListBy(Expression<Func<TDomainObject, bool>> filter, FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None);
 
-    List<TDomainObject> GetListBy(Expression<Func<TDomainObject, bool>> filter, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
-        this.GetListBy(filter, buildFetchRule.ToFetchRule());
+    List<TDomainObject> GetListBy(Expression<Func<TDomainObject, bool>> filter, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
 
 
     SelectOperationResult<TProjection> GetObjectsByOData<TProjection>(
@@ -100,6 +92,5 @@ public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObjec
     TDomainObject? GetObjectBy(
         Expression<Func<TDomainObject, bool>> filter,
         bool throwOnNotFound,
-        Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
-        this.GetObjectBy(filter, throwOnNotFound, buildFetchRule.ToFetchRule());
+        Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
 }

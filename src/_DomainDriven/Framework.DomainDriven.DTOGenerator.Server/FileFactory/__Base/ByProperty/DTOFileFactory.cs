@@ -27,9 +27,9 @@ public abstract class DTOFileFactory<TConfiguration, TFileType> : FileFactory<TC
     }
 
 
-    protected virtual IPropertyAssigner MapDomainObjectToMappingObjectPropertyAssigner { get; }
+    protected virtual IPropertyAssigner? MapDomainObjectToMappingObjectPropertyAssigner { get; }
 
-    protected virtual IPropertyAssigner MapMappingObjectToDomainObjectPropertyAssigner { get; }
+    protected virtual IPropertyAssigner? MapMappingObjectToDomainObjectPropertyAssigner { get; }
 
 
     protected virtual bool HasMapToDomainObjectMethod { get; }

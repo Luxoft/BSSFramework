@@ -115,7 +115,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
                                                                                .ToTypeReference()
                                                                                .ToParameterDeclarationExpression("securityRule");
 
-    protected virtual object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
+    protected virtual object? GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
         if (this.RequiredSecurity)
         {

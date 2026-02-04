@@ -11,11 +11,7 @@ public static class ServiceEvaluatorExtensions
         public async Task<TResult> EvaluateAsync<TResult>(DBSessionMode sessionMode, Func<TService, Task<TResult>> getResult) => await contextEvaluator.EvaluateAsync(sessionMode, null, getResult);
 
         public async Task EvaluateAsync(DBSessionMode sessionMode, UserCredential? customUserCredential, Func<TService, Task> action) =>
-            await contextEvaluator.EvaluateAsync(sessionMode, customUserCredential, async service =>
-            {
-                await action(service);
-                return default(object?);
-            });
+            await contextEvaluator.EvaluateAsync(sessionMode, customUserCredential, action.ToDefaultTask());
 
         public async Task EvaluateAsync(DBSessionMode sessionMode, Func<TService, Task> action) => await contextEvaluator.EvaluateAsync(sessionMode, null, action);
 

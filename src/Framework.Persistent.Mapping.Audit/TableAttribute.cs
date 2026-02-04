@@ -3,15 +3,15 @@
 [AttributeUsage(AttributeTargets.Class)]
 public class TableAttribute : Attribute
 {
-    public string Name
+    public required string Name
     {
         get;
-        set;
+        init;
     }
 
-    public string Schema
+    public string? Schema
     {
         get;
-        set;
+        init;
     }
 }

@@ -158,7 +158,7 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
         }
     }
 
-    public override ILayerCodeTypeReferenceService GetLayerCodeTypeReferenceService(DTOFileType fileType)
+    public override ILayerCodeTypeReferenceService? GetLayerCodeTypeReferenceService(DTOFileType fileType)
     {
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 

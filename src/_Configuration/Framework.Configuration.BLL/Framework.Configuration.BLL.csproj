@@ -6,13 +6,6 @@
 
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-    <Compile Update="Subscriptions\SubscriptionBLL.Processing.cs">
-      <DependentUpon>SubscriptionBLL.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="IvAt.CommonFramework.DependencyInjection" />
   </ItemGroup>
 
   <ItemGroup>

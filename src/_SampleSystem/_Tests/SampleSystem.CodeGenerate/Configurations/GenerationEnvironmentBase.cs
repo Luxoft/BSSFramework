@@ -5,14 +5,10 @@ using Framework.Projection;
 using Framework.Projection.Environment;
 using Framework.Security;
 
-using Microsoft.Extensions.DependencyInjection;
-
 using SecuritySystem;
 
 using SampleSystem.Domain;
 using SampleSystem.Security;
-
-using HierarchicalExpand;
 
 namespace SampleSystem.CodeGenerate;
 
@@ -35,11 +31,7 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
                 useDependencySecurity: false));
     }
 
-    protected override IServiceCollection InitServices(IServiceCollection services)
-    {
-        return base.InitServices(services)
-                   .AddSingleton(new HierarchicalInfo<BusinessUnit>(v => v.Parent));
-    }
+    public override bool IsHierarchical(Type type) => new[] { typeof(BusinessUnit) }.Contains(type);
 
     public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = [typeof(SampleSystemSecurityOperation), typeof(SecurityRule)];
 

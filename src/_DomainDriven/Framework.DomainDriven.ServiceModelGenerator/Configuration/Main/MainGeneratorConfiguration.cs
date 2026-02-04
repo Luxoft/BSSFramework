@@ -1,11 +1,9 @@
 ﻿using CommonFramework;
 
-using Framework.Core;
 using Framework.DomainDriven.BLLCoreGenerator;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Persistent;
 using Framework.Projection;
-using Framework.Security;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -20,7 +18,6 @@ public abstract class MainGeneratorConfigurationBase<TEnvironment> : GeneratorCo
             : base(environment)
     {
     }
-
 
     public override string ImplementClassName { get; } = "Facade";
 

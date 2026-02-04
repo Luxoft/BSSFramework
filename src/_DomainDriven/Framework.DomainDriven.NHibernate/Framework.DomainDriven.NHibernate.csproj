@@ -10,8 +10,12 @@
 
   <ItemGroup>
     <PackageReference Include="FluentNHibernate" />
-    <PackageReference Include="IvAt.CommonFramework.IdentitySource" />
+
+    <PackageReference Include="IvAt.CommonFramework.IdentitySource.Abstractions" />
+    <PackageReference Include="IvAt.GenericQueryable" />
+
     <PackageReference Include="Microsoft.Data.SqlClient" />
+
     <PackageReference Include="NHibernate" />
     <PackageReference Include="NHibernate.Envers" />
   </ItemGroup>

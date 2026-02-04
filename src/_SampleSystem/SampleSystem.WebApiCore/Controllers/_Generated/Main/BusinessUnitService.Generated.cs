@@ -274,6 +274,24 @@
         }
         
         /// <summary>
+        /// Check access for BusinessUnit
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
+        public virtual bool HasBusinessUnitAccess(HasBusinessUnitAccessAutoRequest hasBusinessUnitAccessAutoRequest)
+        {
+            SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule = hasBusinessUnitAccessAutoRequest.SecurityRule;
+            SampleSystem.Generated.DTO.BusinessUnitIdentityDTO businessUnitIdent = hasBusinessUnitAccessAutoRequest.BusinessUnitIdent;
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasBusinessUnitAccessInternal(businessUnitIdent, securityRule, evaluateData));
+        }
+        
+        protected virtual bool HasBusinessUnitAccessInternal(SampleSystem.Generated.DTO.BusinessUnitIdentityDTO businessUnitIdent, SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        {
+            SampleSystem.BLL.IBusinessUnitBLL bll = evaluateData.Context.Logics.BusinessUnit;
+            SampleSystem.Domain.BusinessUnit domainObject = bll.GetById(businessUnitIdent.Id, true);
+            return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.BusinessUnit>(securityRule).HasAccess(domainObject);
+        }
+        
+        /// <summary>
         /// Save BusinessUnits
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -326,6 +344,44 @@
             SampleSystem.BLL.ITestBusinessUnitBLL bll = evaluateData.Context.Logics.TestBusinessUnitFactory.Create(SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Projections.TestBusinessUnit domainObject = bll.GetById(testBusinessUnitIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestBusinessUnit>(Framework.Transfering.ViewDTOType.ProjectionDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(domainObject, evaluateData.MappingService);
+        }
+    }
+    
+    [System.Runtime.Serialization.DataContractAttribute()]
+    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    public partial class HasBusinessUnitAccessAutoRequest
+    {
+        
+        private SampleSystem.Generated.DTO.BusinessUnitIdentityDTO businessUnitIdent;
+        
+        private SecuritySystem.DomainSecurityRule.ClientSecurityRule securityRule;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        public virtual SampleSystem.Generated.DTO.BusinessUnitIdentityDTO BusinessUnitIdent
+        {
+            get
+            {
+                return this.businessUnitIdent;
+            }
+            set
+            {
+                this.businessUnitIdent = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        public virtual SecuritySystem.DomainSecurityRule.ClientSecurityRule SecurityRule
+        {
+            get
+            {
+                return this.securityRule;
+            }
+            set
+            {
+                this.securityRule = value;
+            }
         }
     }
 }

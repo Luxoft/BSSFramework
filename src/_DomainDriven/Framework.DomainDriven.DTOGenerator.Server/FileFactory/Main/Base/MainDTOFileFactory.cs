@@ -30,7 +30,7 @@ public abstract class MainDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
 
     protected override bool HasMapToDomainObjectMethod => this.Configuration.MapToDomainRole.HasFlag(ClientDTORole.Main) && !this.FileType.IsAbstract;
 
-    protected override IPropertyAssigner MapMappingObjectToDomainObjectPropertyAssigner
+    protected override IPropertyAssigner? MapMappingObjectToDomainObjectPropertyAssigner
     {
         get
         {

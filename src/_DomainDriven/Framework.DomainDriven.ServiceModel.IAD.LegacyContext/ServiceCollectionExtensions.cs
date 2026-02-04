@@ -30,7 +30,9 @@ using SecuritySystem;
 using SecuritySystem.DependencyInjection;
 using SecuritySystem.DomainServices;
 using SecuritySystem.DomainServices.DependencySecurity;
+
 using HierarchicalExpand;
+
 using SecuritySystem.SecurityRuleInfo;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
@@ -47,6 +49,8 @@ public static class ServiceCollectionExtensions
             services.AddSingleton<SubscriptionMetadataStore>();
             services.AddSingleton<ISubscriptionMetadataFinder, SubscriptionMetadataFinder>();
             services.AddScoped<ISubscriptionInitializer, SubscriptionInitializer>();
+
+            services.AddScoped<ISystemConstantInitializer, SystemConstantInitializer>();
 
             services.AddSingleton(AuthDALListenerSettings.DefaultSettings);
 

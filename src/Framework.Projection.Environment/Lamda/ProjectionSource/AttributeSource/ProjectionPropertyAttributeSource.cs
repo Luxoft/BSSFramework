@@ -67,7 +67,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
     /// <inheritdoc />
     protected override IEnumerable<Attribute> GetDefaultAttributes()
     {
-        return new Attribute[]
+        return new Attribute?[]
                {
                        this.TryCreateExpandPathAttributes(),
                        this.TryCreateCustomSerializationAttribute(),
@@ -75,10 +75,10 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
                        this.TryCreateMappingAttribute(),
                        this.CreateMappingPropertyAttribute(),
                        this.TryCreateViewAccessAttribute()
-               }.Where(attr => attr != null);
+               }.Where(attr => attr != null).Select(v => v!);
     }
 
-    protected virtual ExpandPathAttribute TryCreateExpandPathAttributes()
+    protected virtual ExpandPathAttribute? TryCreateExpandPathAttributes()
     {
         if (this.IsExpand)
         {
@@ -112,7 +112,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
         }
     }
 
-    protected virtual CustomSerializationAttribute TryCreateCustomSerializationAttribute()
+    protected virtual CustomSerializationAttribute? TryCreateCustomSerializationAttribute()
     {
         if (this.ProjectionValue.IgnoreSerialization || this.ProjectionValue.Type.ElementProjection.Maybe(proj => proj.Role != ProjectionRole.Default))
         {
@@ -129,7 +129,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
         return new ProjectionPropertyAttribute(this.ProjectionValue.Role);
     }
 
-    protected virtual DomainObjectAccessAttribute TryCreateViewAccessAttribute()
+    protected virtual DomainObjectAccessAttribute? TryCreateViewAccessAttribute()
     {
         return this.ProjectionValue
                    .Path
@@ -145,7 +145,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
         return new MappingPropertyAttribute() { CanInsert = false, CanUpdate = false };
     }
 
-    protected virtual MappingAttribute TryCreateMappingAttribute()
+    protected virtual MappingAttribute? TryCreateMappingAttribute()
     {
         var externalTableName = this.TryGetExternalTableName();
 
@@ -191,7 +191,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
     }
 
 
-    private string TryGetExternalTableName()
+    private string? TryGetExternalTableName()
     {
         var property = this.ProjectionValue.Path.FirstOrDefault();
 
@@ -201,7 +201,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
 
             var baseTypes = this.SourceType.GetAllElements(t => t.BaseType).TakeWhile(t => t != topProperty.ReflectedType);
 
-            var nonAbstractDeclType = new[] { topProperty.ReflectedType }.Concat(baseTypes.Reverse()).First(type => !type.IsAbstract);
+            var nonAbstractDeclType = new[] { topProperty.ReflectedType! }.Concat(baseTypes.Reverse()).First(type => !type.IsAbstract);
 
             if (nonAbstractDeclType != this.SourceType)
             {

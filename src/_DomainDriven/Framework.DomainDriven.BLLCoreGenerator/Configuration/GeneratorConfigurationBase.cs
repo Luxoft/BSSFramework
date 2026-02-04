@@ -1,22 +1,14 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
-using System.Reflection;
 
 using CommonFramework;
-using CommonFramework.DictionaryCache;
-using CommonFramework.Maybe;
 
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Generation.Domain;
-using Framework.Persistent;
 using Framework.Projection;
-using Framework.Restriction;
-using Framework.Security;
-using Framework.Transfering;
-using Framework.Validation;
 
 #pragma warning disable S100 // Methods and properties should be named in camel case
 namespace Framework.DomainDriven.BLLCoreGenerator;
@@ -55,6 +47,17 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     public virtual bool UseDbUniquenessEvaluation { get; } = false;
 
     public virtual string IntegrationSaveMethodName { get; } = "IntegrationSave";
+
+
+    public CodeMethodReferenceExpression GetGetSecurityProviderMethodReferenceExpression(CodeExpression contextExpression, Type domainType)
+    {
+        if (contextExpression == null) throw new ArgumentNullException(nameof(contextExpression));
+        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+
+        var securityServiceExpr = this.GetSecurityService(contextExpression);
+
+        return securityServiceExpr.ToMethodReferenceExpression("GetSecurityProvider", domainType.ToTypeReference());
+    }
 
     protected virtual ICodeFileFactoryHeader<FileType> BLLContextInterfaceFileFactoryHeader =>
 

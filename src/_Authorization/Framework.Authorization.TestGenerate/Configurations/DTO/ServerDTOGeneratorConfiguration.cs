@@ -5,13 +5,8 @@ using Framework.DomainDriven.Serialization;
 
 namespace Framework.Authorization.TestGenerate;
 
-public class ServerDTOGeneratorConfiguration : ServerGeneratorConfigurationBase<ServerGenerationEnvironment>
+public class ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environment) : ServerGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {
-    public ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
-    {
-    }
-
     public override string DataContractNamespace => this.Environment.DTODataContractNamespace;
 
     public override string EventDataContractNamespace { get; } = "http://authorization.luxoft.com/IntegrationEvent";

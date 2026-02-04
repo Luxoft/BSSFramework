@@ -115,7 +115,7 @@ public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TCon
 
     private IEnumerable<CodeTypeReference> GetMaybePropertyCodeTypeReferences(CodeTypeReference typeReference)
     {
-        return new[] { typeof(Just<>), typeof(Nothing<>) } 
+        return new[] { typeof(Just<>), typeof(Nothing<>) }
                .Select(z => z.GetGenericTypeDefinition())
                .Select(z => new CodeTypeReference(z.GetGenericTypeDefinition()).Self(q => q.TypeArguments.Add(typeReference)));
     }

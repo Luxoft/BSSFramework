@@ -43,7 +43,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     protected override IEnumerable<Type> GetDomainTypes()
     {
-        return this.Environment.BLL.DomainTypes;
+        return this.Environment.BLLCore.DomainTypes;
     }
 
 

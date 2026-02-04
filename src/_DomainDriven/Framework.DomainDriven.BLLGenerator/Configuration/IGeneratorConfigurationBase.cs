@@ -27,8 +27,6 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
     /// </summary>
     bool GenerateExternalPropertyValidators { get; }
 
-    CodeMethodReferenceExpression GetGetSecurityProviderMethodReferenceExpression(CodeExpression contextExpression, Type domainType);
-
 
     /// <summary>
     /// Валидация виртуальных свойств (свойства, без одноимённого поля). По умолчанию включена только для свойств с хотя бы одним явно указаным атрибутом валидации "PropertyValidatorAttribute" или "IRestrictionAttribute"

@@ -148,7 +148,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration> : ServerPropertyA
                             Statements = { getToDomainObjectExpr(lambdaParam.ToVariableReferenceExpression(), elementType, true) }
                     });
 
-                var removeDetailLambda = this.Configuration.Environment.BLLCore.UseRemoveMappingExtension
+                var removeDetailLambda = this.Configuration.UseRemoveMappingExtension
 
                                                  ? (CodeExpression)new CodeParameterDeclarationExpression { Name = "detail" }.Pipe(lamdaParam => new CodeLambdaExpression
                                                      {

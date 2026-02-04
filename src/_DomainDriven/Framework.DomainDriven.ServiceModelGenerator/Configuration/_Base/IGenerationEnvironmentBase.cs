@@ -6,9 +6,4 @@ public interface IGenerationEnvironmentBase : IGenerationEnvironment,
 
                                               BLLCoreGenerator.IGeneratorConfigurationContainer,
 
-                                              BLLGenerator.IGeneratorConfigurationContainer,
-
-                                              DTOGenerator.Server.IGeneratorConfigurationContainer
-{
-
-}
+                                              DTOGenerator.Server.IGeneratorConfigurationContainer;

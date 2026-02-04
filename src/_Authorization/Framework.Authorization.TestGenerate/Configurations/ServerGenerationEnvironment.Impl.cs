@@ -1,4 +1,6 @@
-﻿namespace Framework.Authorization.TestGenerate;
+﻿using Framework.DomainDriven.ServiceModelGenerator.Configuration._Base;
+
+namespace Framework.Authorization.TestGenerate;
 
 public partial class ServerGenerationEnvironment :
 
@@ -8,7 +10,7 @@ public partial class ServerGenerationEnvironment :
 
         DomainDriven.DTOGenerator.Server.IServerGenerationEnvironmentBase,
 
-        DomainDriven.ServiceModelGenerator.IGenerationEnvironmentBase,
+        IGenerationEnvironmentBase,
 
         Framework.DomainDriven.NHibernate.DALGenerator.IGenerationEnvironmentBase
 {

@@ -2,7 +2,4 @@
 
 namespace Framework.DomainDriven.DTOGenerator;
 
-public interface IGenerationEnvironmentBase : IGenerationEnvironment
-{
-
-}
+public interface IGenerationEnvironmentBase : IGenerationEnvironment;

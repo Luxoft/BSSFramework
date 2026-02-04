@@ -20,7 +20,7 @@ using SampleSystem.CodeGenerate.ServerDTO;
 
 using FileInfo = Framework.DomainDriven.Generation.FileInfo;
 using FileType = Framework.DomainDriven.DTOGenerator.FileType;
-using IGenerationEnvironmentBase = Framework.DomainDriven.ServiceModelGenerator.IGenerationEnvironmentBase;
+using IGenerationEnvironmentBase = Framework.DomainDriven.ServiceModelGenerator.Configuration._Base.IGenerationEnvironmentBase;
 
 namespace SampleSystem.CodeGenerate;
 
@@ -51,7 +51,7 @@ public partial class ServerGenerators
     public IEnumerable<FileInfo> GenerateMainWebApiNetCore()
     {
         var configurators =
-            new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<
+            new Framework.DomainDriven.ServiceModelGenerator.Configuration._Base.IGeneratorConfigurationBase<
             IGenerationEnvironmentBase>[] { this.environment.MainService };
 
         var generator = new WebApiNetCoreFileGenerator(
@@ -67,7 +67,7 @@ public partial class ServerGenerators
     public IEnumerable<FileInfo> GenerateMainQueryWebApiNetCore()
     {
         var configurators =
-            new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<
+            new Framework.DomainDriven.ServiceModelGenerator.Configuration._Base.IGeneratorConfigurationBase<
             IGenerationEnvironmentBase>[] { this.environment.QueryService };
 
         var attr = new CodeAttributeDeclaration(
@@ -88,7 +88,7 @@ public partial class ServerGenerators
     public IEnumerable<FileInfo> GenerateIntegrationWebApiNetCore()
     {
         var configurators =
-            new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<
+            new Framework.DomainDriven.ServiceModelGenerator.Configuration._Base.IGeneratorConfigurationBase<
             IGenerationEnvironmentBase>[] { this.environment.IntegrationService };
 
         var attr = new CodeAttributeDeclaration(
@@ -109,7 +109,7 @@ public partial class ServerGenerators
     public IEnumerable<FileInfo> GenerateAuditWebApiNetCore()
     {
         var configurators =
-            new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<
+            new Framework.DomainDriven.ServiceModelGenerator.Configuration._Base.IGeneratorConfigurationBase<
             IGenerationEnvironmentBase>[] { this.environment.AuditService };
 
         var attr = new CodeAttributeDeclaration(
@@ -132,7 +132,7 @@ public partial class ServerGenerators
         var e = new Framework.Authorization.TestGenerate.ServerGenerationEnvironment(new DatabaseName("$", "$"));
 
         var configurators =
-            new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<
+            new Framework.DomainDriven.ServiceModelGenerator.Configuration._Base.IGeneratorConfigurationBase<
             IGenerationEnvironmentBase>[] { e.MainService };
 
         var attr = new CodeAttributeDeclaration(
@@ -153,7 +153,7 @@ public partial class ServerGenerators
         var e = new Framework.Configuration.TestGenerate.ServerGenerationEnvironment(new DatabaseName("$", "$"));
 
         var configurators =
-            new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<
+            new Framework.DomainDriven.ServiceModelGenerator.Configuration._Base.IGeneratorConfigurationBase<
             IGenerationEnvironmentBase>[] { e.MainService };
 
         var attr = new CodeAttributeDeclaration(

@@ -1,15 +1,12 @@
 ﻿using System.CodeDom;
-using System.Linq;
 using System.Reflection;
 
-using CommonFramework;
 
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.Projection;
 using Framework.Transfering;
 
-using GenericQueryable;
 using GenericQueryable.Fetching;
 
 namespace Framework.DomainDriven.BLLGenerator;
@@ -22,6 +19,11 @@ public class MainDTOFetchRuleExpanderBaseFileFactory<TConfiguration>(TConfigurat
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
     {
         return new CodeTypeDeclaration { Name = this.Name, TypeAttributes = TypeAttributes.Public | TypeAttributes.Abstract, IsPartial = true, };
+    }
+
+    protected override IEnumerable<string> GetImportedNamespaces()
+    {
+        yield return "GenericQueryable";
     }
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
@@ -55,15 +57,16 @@ public class MainDTOFetchRuleExpanderBaseFileFactory<TConfiguration>(TConfigurat
         var domainObjectParameter = new CodeTypeParameter("TDomainObject");
         var domainObjectTypeRef = domainObjectParameter.ToTypeReference();
 
-        var ruleParameter = new CodeParameterDeclarationExpression(typeof(ViewDTOType), "rule");
-        var ruleVar = ruleParameter.ToVariableReferenceExpression();
+        var dtoTypeParameter = new CodeParameterDeclarationExpression(typeof(ViewDTOType), "dtoType");
+        var dtoTypeParameterExpr = dtoTypeParameter.ToVariableReferenceExpression();
 
         var statementsRequest = from domainType in this.Configuration.DomainTypes
 
                                 let condition = new CodeValueEqualityOperatorExpression(domainObjectTypeRef.ToTypeOfExpression(), domainType.ToTypeOfExpression())
 
-                                let statement = new CodeThisReferenceExpression().ToMethodInvokeExpression($"Get{domainType.Name}Container", ruleVar)
-                                                                                 .ToCastExpression(typeof(FetchRule<>).ToTypeReference(domainObjectTypeRef))
+                                let statement = new CodeThisReferenceExpression().ToMethodInvokeExpression($"TryGet{domainType.Name}FetchRule", dtoTypeParameterExpr)
+                                                                                 .ToCastExpression(typeof(object).ToTypeReference())
+                                                                                 .ToCastExpression(typeof(PropertyFetchRule<>).ToTypeReference(domainObjectTypeRef))
                                                                                  .ToMethodReturnStatement()
 
                                 select Tuple.Create((CodeExpression)condition, (CodeStatement)statement);
@@ -71,11 +74,11 @@ public class MainDTOFetchRuleExpanderBaseFileFactory<TConfiguration>(TConfigurat
         return new CodeMemberMethod
                {
                    Attributes = MemberAttributes.Family | MemberAttributes.Override,
-                   Name = "GetContainer",
-                   ReturnType = typeof(FetchRule<>).ToTypeReference(domainObjectTypeRef),
+                   Name = "TryExpand",
+                   ReturnType = typeof(PropertyFetchRule<>).ToTypeReference(domainObjectTypeRef),
                    TypeParameters = { domainObjectParameter },
-                   Parameters = { ruleParameter },
-                   Statements = { statementsRequest.ToSwitchExpressionStatement(new CodeThrowArgumentOutOfRangeExceptionStatement(domainObjectParameter)) }
+                   Parameters = { dtoTypeParameter },
+                   Statements = { statementsRequest.ToSwitchExpressionStatement(new CodePrimitiveExpression(null).ToMethodReturnStatement()) }
                };
     }
 
@@ -84,8 +87,8 @@ public class MainDTOFetchRuleExpanderBaseFileFactory<TConfiguration>(TConfigurat
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 
-        var ruleParameter = new CodeParameterDeclarationExpression(typeof(ViewDTOType), "rule");
-        var ruleVar = ruleParameter.ToVariableReferenceExpression();
+        var dtoTypeParameter = new CodeParameterDeclarationExpression(typeof(ViewDTOType), "dtoType");
+        var dtoTypeParameterExpr = dtoTypeParameter.ToVariableReferenceExpression();
 
 
         var statementsRequest = from dtoType in EnumHelper.GetValues<ViewDTOType>()
@@ -94,7 +97,7 @@ public class MainDTOFetchRuleExpanderBaseFileFactory<TConfiguration>(TConfigurat
 
                                 orderby dtoType
 
-                                let condition = new CodeValueEqualityOperatorExpression(ruleVar, dtoType.ToPrimitiveExpression())
+                                let condition = new CodeValueEqualityOperatorExpression(dtoTypeParameterExpr, dtoType.ToPrimitiveExpression())
 
                                 let statement = this.GetDomainContainerExpression(domainType, dtoType).ToMethodReturnStatement()
 
@@ -103,11 +106,11 @@ public class MainDTOFetchRuleExpanderBaseFileFactory<TConfiguration>(TConfigurat
         return new CodeMemberMethod
                {
                    Attributes = MemberAttributes.Family,
-                   Name = $"Get{domainType.Name}Container",
-                   ReturnType = typeof(FetchRule<>).ToTypeReference(domainType),
-                   Parameters = { ruleParameter },
-                   Statements = { statementsRequest.ToSwitchExpressionStatement(new CodeThrowArgumentOutOfRangeExceptionStatement(ruleParameter)) }
-               };
+                   Name = $"TryGet{domainType.Name}FetchRule",
+                   ReturnType = typeof(PropertyFetchRule<>).ToTypeReference(domainType),
+                   Parameters = { dtoTypeParameter },
+                   Statements = { statementsRequest.ToSwitchExpressionStatement(new CodePrimitiveExpression(null).ToMethodReturnStatement()) }
+        };
     }
 
     private CodeExpression GetDomainContainerExpression(Type domainType, ViewDTOType dtoType)
@@ -141,7 +144,7 @@ public class MainDTOFetchRuleExpanderBaseFileFactory<TConfiguration>(TConfigurat
 
         return propertyPath.Select((prop, index) => new { prop, index }).Aggregate(startState, (state, propInfo) =>
         {
-            var methodName = propInfo.index == 0 ? "FetchThen" : pathIndex == 0 ? "Create" : "Fetch";
+            var methodName = propInfo.index == 0 ? pathIndex == 0 ? "Create" : "Fetch" : "ThenFetch";
 
             return state.ToMethodReferenceExpression(methodName)
                         .ToMethodInvokeExpression(

@@ -1,23 +1,23 @@
-﻿using System.Linq.Expressions;
-
-using Framework.Core;
-using Framework.Persistent;
+﻿using Framework.Persistent;
 using Framework.Configuration.Domain;
+
+using GenericQueryable;
+using GenericQueryable.Fetching;
 
 namespace Framework.Configuration.BLL;
 
 public partial class ControlSettingsBLL
 {
-    public ControlSettings GetRootControlSettingsForCurrentPrincipal(string name)
+    public ControlSettings? GetRootControlSettingsForCurrentPrincipal(string name)
     {
         var currentPrincipalName = this.Context.Authorization.CurrentUser.Name;
 
         return this.GetRootControlSettings(name, currentPrincipalName);
     }
 
-    public ControlSettings GetRootControlSettings(string name, string accountName)
+    public ControlSettings? GetRootControlSettings(string name, string accountName)
     {
-        var results = this.GetListBy(z => z.Name == name && z.AccountName == accountName && z.Parent == null, this.GetFullPropertyLoadParamActions().ToArray());
+        var results = this.GetListBy(z => z.Name == name && z.AccountName == accountName && z.Parent == null, FullPropertyFetchRule);
 
         if (results.Count > 1)
         {
@@ -28,11 +28,10 @@ public partial class ControlSettingsBLL
         return results.FirstOrDefault();
     }
 
-    private IEnumerable<Expression<Action<IPropertyPathNode<ControlSettings>>>> GetFullPropertyLoadParamActions()
-    {
-        yield return q => q.Select(z => z.Parent);
-        yield return q => q.SelectMany(z => z.ControlSettingsParams).SelectMany(z => z.ControlSettingsParamValues);
-    }
+    private static readonly FetchRule<ControlSettings> FullPropertyFetchRule =
+        FetchRule<ControlSettings>
+            .Create(z => z.Parent)
+            .Fetch(z => z.ControlSettingsParams).ThenFetch(z => z.ControlSettingsParamValues);
 
     public void AddChild(ControlSettings parent, ControlSettings child)
     {

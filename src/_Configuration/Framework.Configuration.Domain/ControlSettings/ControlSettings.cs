@@ -17,7 +17,7 @@ public class ControlSettings : BaseDirectory,
 
     private readonly ICollection<ControlSettingsParam> controlSettingsParams = new List<ControlSettingsParam>();
 
-    private ControlSettings parent; // readonly
+    private ControlSettings? parent; // readonly
 
     private readonly string accountName;
 
@@ -31,13 +31,13 @@ public class ControlSettings : BaseDirectory,
     /// not used cto'r
     /// </summary>
     /// <param name="parent"></param>
-    public ControlSettings(ControlSettings parent)
+    public ControlSettings(ControlSettings? parent)
             : this(parent, null)
     {
 
     }
 
-    public ControlSettings(ControlSettings parent, string accountName)
+    public ControlSettings(ControlSettings? parent, string? accountName)
     {
         if (accountName == null) throw new ArgumentNullException(nameof(accountName));
 
@@ -65,7 +65,7 @@ public class ControlSettings : BaseDirectory,
     /// Supposed to be set from dto only.
     /// </summary>
     [FixedPropertyValidator]
-    public virtual ControlSettings Parent
+    public virtual ControlSettings? Parent
     {
         get { return this.parent; }
         set { this.parent = value; }

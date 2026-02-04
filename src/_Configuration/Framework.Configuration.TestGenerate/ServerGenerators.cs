@@ -33,23 +33,20 @@ public partial class ServerGenerators
     {
         var generator = new BLLCoreFileGenerator(this.Environment.BLLCore);
 
-        return generator.GenerateGroup(
-                                       this.GeneratePath + @"/Framework.Configuration.BLL.Core/_Generated",
-                                       decl => decl.Name.Contains("FetchService") ? "Configuration.FetchService.Generated"
-                                               : decl.Name.Contains("ValidationMap") ? "Configuration.ValidationMap.Generated"
-                                               : decl.Name.Contains("Validator") ? "Configuration.Validator.Generated"
-                                               : "Configuration.Generated",
-                                       this.CheckOutService);
+        yield return generator.GenerateSingle(this.GeneratePath + @"/Framework.Configuration.BLL.Core/_Generated", "Configuration.Generated", this.CheckOutService);
     }
 
     private IEnumerable<FileInfo> GenerateBLL()
     {
         var generator = new BLLFileGenerator(this.Environment.BLL);
 
-        yield return generator.GenerateSingle(
-                                              this.GeneratePath + @"/Framework.Configuration.BLL/_Generated",
-                                              "Configuration.Generated",
-                                              this.CheckOutService);
+        return generator.GenerateGroup(
+            this.GeneratePath + @"/Framework.Configuration.BLL/_Generated",
+            decl => decl.Name.Contains("FetchRuleExpander") ? "Configuration.FetchRuleExpander.Generated"
+                    : decl.Name.Contains("ValidationMap") ? "Configuration.ValidationMap.Generated"
+                    : decl.Name.Contains("Validator") ? "Configuration.Validator.Generated"
+                    : "Configuration.Generated",
+            this.CheckOutService);
     }
 
     [TestMethod]

@@ -13,7 +13,7 @@ using SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 namespace Framework.Authorization.BLL;
 
-public class LegacyNotificationPrincipalExtractor(
+public class LegacyNotificationPermissionExtractor(
     ISecurityContextStorage securityContextStorage,
     [DisabledSecurity] IRepository<Permission> permissionRepository,
     INotificationGeneralPermissionFilterFactory notificationGeneralPermissionFilterFactory,

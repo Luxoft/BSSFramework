@@ -190,6 +190,11 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     public List<TDomainObject> GetFullList(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
         this.GetFullList(buildFetchRule.ToFetchRule());
 
+    public IQueryable<TDomainObject> GetUnsecureQueryable() => this.GetUnsecureQueryable(FetchRule<TDomainObject>.Empty);
+
+    public IQueryable<TDomainObject> GetUnsecureQueryable(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
+        this.GetUnsecureQueryable(buildFetchRule.ToFetchRule());
+
     /// <summary>
     /// Получение IQueryable без учёта безопасности
     /// </summary>
@@ -201,18 +206,13 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         return this.dal.GetQueryable(lockRole, fetchRule);
     }
 
-    public IQueryable<TDomainObject> GetUnsecureQueryable(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
-        this.GetUnsecureQueryable(buildFetchRule.ToFetchRule());
-
     /// <summary>
     /// Получение IQueryable с учётом безопасности
     /// </summary>
     /// <param name="lockRole">Тип блокировки</param>
     /// <param name="fetchRule">Подгружаемые свойства</param>
     /// <returns></returns>
-    public IQueryable<TDomainObject> GetSecureQueryable(
-        FetchRule<TDomainObject>? fetchRule = null,
-        LockRole lockRole = LockRole.None)
+    public IQueryable<TDomainObject> GetSecureQueryable(FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None)
     {
         return this.ProcessSecurity(this.GetUnsecureQueryable(fetchRule, lockRole));
     }
@@ -446,6 +446,4 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
                    };
         }
     }
-
-    public IQueryable<TDomainObject> GetUnsecureQueryable() => this.GetUnsecureQueryable(null);
 }

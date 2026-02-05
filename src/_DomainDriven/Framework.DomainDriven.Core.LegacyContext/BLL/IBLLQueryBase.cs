@@ -25,13 +25,14 @@ public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObjec
     /// <returns></returns>
     IQueryable<TDomainObject> GetSecureQueryable(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
 
+
     /// <summary>
     /// Получение IQueryable без учёта безопасности
     /// </summary>
     /// <param name="fetchRule">Подгружаемые свойства</param>
     /// <param name="lockRole">lockRole</param>
     /// <returns></returns>
-    IQueryable<TDomainObject> GetUnsecureQueryable(FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None);
+    IQueryable<TDomainObject> GetUnsecureQueryable(FetchRule<TDomainObject> fetchRule, LockRole lockRole = LockRole.None);
 
     /// <summary>
     /// Получение IQueryable без учёта безопасности

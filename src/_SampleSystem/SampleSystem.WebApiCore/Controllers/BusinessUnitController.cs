@@ -20,7 +20,7 @@ public partial class BusinessUnitController
                              evaluateData =>
                              {
                                  var bll = evaluateData.Context.Logics.BusinessUnit;
-                                 var tree = bll.GetTree(evaluateData.Context.FetchService.GetContainer<BusinessUnit>(ViewDTOType.FullDTO));
+                                 var tree = bll.GetTree(new DTOFetchRule<BusinessUnit>(ViewDTOType.FullDTO));
                                  return tree.ChangeItem(unit => unit.ToFullDTO(evaluateData.MappingService));
                              });
     }
@@ -38,7 +38,7 @@ public partial class BusinessUnitController
 
                                  var odataTree = bll.GetTreeByOData(
                                                                     typedSelectOperation,
-                                                                    evaluateData.Context.FetchService.GetContainer<BusinessUnit>(ViewDTOType.FullDTO));
+                                                                    new DTOFetchRule<BusinessUnit>(ViewDTOType.FullDTO));
 
                                  return odataTree.ChangeItem(x => x.ToFullDTO(evaluateData.MappingService));
                              });

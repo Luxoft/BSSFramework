@@ -14,7 +14,7 @@ public class WebApiNetCoreCompositeGeneratorConfiguration : IGeneratorConfigurat
     public WebApiNetCoreCompositeGeneratorConfiguration(
             IGenerationEnvironmentBase environment,
             IList<IGeneratorConfigurationBase<IGenerationEnvironmentBase>> source,
-            string nameSpace = null)
+            string? nameSpace = null)
     {
         this.Environment = environment;
 
@@ -37,9 +37,7 @@ public class WebApiNetCoreCompositeGeneratorConfiguration : IGeneratorConfigurat
 
     public IGeneratePolicy<MethodIdentity> GeneratePolicy { get; }
 
-    public string ImplementClassName { get; }
-
-    public string ServiceContractNamespace { get; }
+    public string? ImplementClassName { get; }
 
     public CodeTypeReference EvaluateDataTypeReference { get; }
 

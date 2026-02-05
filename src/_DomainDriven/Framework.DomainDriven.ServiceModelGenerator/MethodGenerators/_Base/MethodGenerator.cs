@@ -72,7 +72,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
     protected virtual IEnumerable<CodeMemberMethod> GetFacadeMethods(CodeParameterDeclarationExpression evaluateDataParameterExpr, CodeParameterDeclarationExpression bllParameterExpr)
     {
-        if (this.Attribute == null || !this.Attribute.CustomImplementation)
+        if (!this.Attribute.CustomImplementation)
         {
             yield return this.GetFacadeMethod(evaluateDataParameterExpr);
             yield return this.GetFacadeMethodInternal(evaluateDataParameterExpr, bllParameterExpr);

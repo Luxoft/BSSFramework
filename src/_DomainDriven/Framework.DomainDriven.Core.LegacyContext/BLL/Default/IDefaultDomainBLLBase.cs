@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-using Framework.DomainDriven.Lock;
+﻿using Framework.DomainDriven.Lock;
 using Framework.OData;
 using Framework.Persistent;
 

@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven.BLLCoreGenerator;
-using Framework.DomainDriven.Generation;
+﻿using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.Generation.Domain;
 
 namespace Framework.DomainDriven.BLLGenerator;

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using CommonFramework;
 using Framework.Core;
 using Framework.DomainDriven.Lock;

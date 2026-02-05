@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven;
+﻿using GenericQueryable.Fetching;
 
 using SampleSystem.Domain.Models.Filters;
 using SampleSystem.Domain.Projections;

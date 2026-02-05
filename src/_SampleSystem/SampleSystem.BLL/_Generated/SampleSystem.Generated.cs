@@ -2320,4 +2320,14 @@ namespace SampleSystem.BLL
             return new SampleSystem.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context, securityProvider);
         }
     }
+    
+    public partial class SecurityDomainBLLBase<TDomainObject> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
+        where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
+    {
+        
+        public SecurityDomainBLLBase(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider) : 
+                base(context, securityProvider)
+        {
+        }
+    }
 }

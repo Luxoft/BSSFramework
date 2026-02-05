@@ -10,6 +10,9 @@ using Framework.DomainDriven.NHibernate.Audit;
 using Framework.Exceptions;
 using Framework.Persistent;
 
+using GenericQueryable;
+using GenericQueryable.Fetching;
+
 using NHibernate;
 using NHibernate.Envers.Patch;
 using NHibernate.Envers.Query;
@@ -63,18 +66,18 @@ public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
         this.asyncDal.RemoveAsync(domainObject).GetAwaiter().GetResult();
     }
 
-    public IQueryable<TDomainObject> GetQueryable(LockRole lockRole, FetchRule<TDomainObject> fetchRule)
+    public IQueryable<TDomainObject> GetQueryable(LockRole lockRole, FetchRule<TDomainObject>? fetchRule = null)
     {
         var queryable = this.asyncDal.GetQueryable();
 
-        var fetchsResult = queryable.WithFetchs(fetchRule);
+        var withFetchQueryable = fetchRule == null ? queryable : queryable.WithFetch(fetchRule);
 
         if (lockRole == LockRole.None)
         {
-            return fetchsResult;
+            return withFetchQueryable;
         }
 
-        return fetchsResult.WithLock(lockRole.ToLockMode());
+        return withFetchQueryable.WithLock(lockRole.ToLockMode());
     }
 
     public TDomainObject GetObjectByRevision(TIdent id, long revision) => this.GetAuditReader().Find<TDomainObject>(id, revision);

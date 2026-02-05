@@ -5,7 +5,6 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.Core;
-using Framework.DomainDriven.BLLCoreGenerator;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Restriction;
 using Framework.Transfering;

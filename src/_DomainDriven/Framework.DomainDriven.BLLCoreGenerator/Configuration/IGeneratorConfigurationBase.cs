@@ -1,9 +1,7 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
-using System.Reflection;
 
 using Framework.DomainDriven.Generation.Domain;
-using Framework.Transfering;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 

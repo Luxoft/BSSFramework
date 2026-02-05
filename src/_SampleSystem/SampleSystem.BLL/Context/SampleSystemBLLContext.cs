@@ -43,8 +43,7 @@ public partial class SampleSystemBLLContext(
         accessDeniedExceptionService,
         standartExpressionBuilder,
         validator,
-        hierarchicalObjectExpanderFactory,
-        fetchService)
+        hierarchicalObjectExpanderFactory)
 {
     public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; } = securityService;
 

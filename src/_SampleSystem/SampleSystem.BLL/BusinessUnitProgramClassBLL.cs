@@ -1,6 +1,9 @@
 ﻿using System.Linq.Expressions;
-using Framework.DomainDriven;
+
 using Framework.OData;
+
+using GenericQueryable.Fetching;
+
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Filters;
 using SampleSystem.Domain.Projections;

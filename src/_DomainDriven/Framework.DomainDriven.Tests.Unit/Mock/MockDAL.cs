@@ -8,6 +8,8 @@ using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.Lock;
 using Framework.Persistent;
 
+using GenericQueryable.Fetching;
+
 namespace Framework.DomainDriven.UnitTest.Mock;
 
 public class MockDAL<TDomain, TIdent> : IMockDAL<TDomain, TIdent>
@@ -113,7 +115,7 @@ public class MockDAL<TDomain, TIdent> : IMockDAL<TDomain, TIdent>
     {
     }
 
-    public IQueryable<TDomain> GetQueryable(LockRole lockRole, FetchRule<TDomain> fetchRule = null)
+    public IQueryable<TDomain> GetQueryable(LockRole lockRole, FetchRule<TDomain>? fetchRule = null)
     {
         var list = new List<TDomain>(this.Collection.Count);
         list.AddRange(this.Collection);

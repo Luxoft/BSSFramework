@@ -20,8 +20,7 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
     IAccessDeniedExceptionService accessDeniedExceptionService,
     IStandartExpressionBuilder standartExpressionBuilder,
     IValidator validator,
-    IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
-    IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
+    IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory)
     :
         DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer>(
         serviceProvider,
@@ -29,8 +28,7 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
         trackingService,
         standartExpressionBuilder,
         validator,
-        hierarchicalObjectExpanderFactory,
-        fetchService),
+        hierarchicalObjectExpanderFactory),
         IAccessDeniedExceptionServiceContainer,
         ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>

@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Framework.Authorization.Notification.Abstract\Framework.Authorization.Notification.Abstract.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="_Generated\" />
+  </ItemGroup>
+
 </Project>

@@ -14,9 +14,7 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>
 
         IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>,
 
-        ITrackingServiceContainer<TPersistentDomainObjectBase>,
-
-        IFetchServiceContainer<TPersistentDomainObjectBase, FetchBuildRule>
+        ITrackingServiceContainer<TPersistentDomainObjectBase>
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
@@ -52,8 +50,7 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>
             ITrackingService<TPersistentDomainObjectBase> trackingService,
             IStandartExpressionBuilder standardExpressionBuilder,
             IValidator validator,
-            IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
-            IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
+            IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory)
     {
         this.ServiceProvider = serviceProvider;
         this.OperationSender = operationSender;
@@ -64,13 +61,9 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>
         this.HierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory ?? throw new ArgumentNullException(nameof(hierarchicalObjectExpanderFactory));
 
         this.SelectOperationParser = BusinessLogicSelectOperationParser.CachedDefault;
-
-        this.FetchService = fetchService ?? throw new ArgumentNullException(nameof(fetchService));
     }
 
     public IValidator Validator { get; }
-
-    public IFetchService<TPersistentDomainObjectBase, FetchBuildRule> FetchService { get; }
 
     public IServiceProvider ServiceProvider { get; }
 
@@ -109,9 +102,8 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent,
             ITrackingService<TPersistentDomainObjectBase> trackingService,
             IStandartExpressionBuilder standardExpressionBuilder,
             IValidator validator,
-            IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
-            IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
-            : base(serviceProvider, operationSender, trackingService, standardExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
+            IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory)
+            : base(serviceProvider, operationSender, trackingService, standardExpressionBuilder, validator, hierarchicalObjectExpanderFactory)
     {
     }
 

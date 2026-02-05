@@ -19,7 +19,7 @@
         protected virtual SampleSystem.Generated.DTO.Example1FullDTO GetFullExample1Internal(SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IExample1BLL bll = evaluateData.Context.Logics.Example1Factory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.Example1 domainObject = bll.GetById(example1Identity.Id, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Example1>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.Example1 domainObject = bll.GetById(example1Identity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Example1>(Framework.Transfering.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -44,13 +44,13 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Example1FullDTO> GetFullExample1sByIdentsInternal(SampleSystem.Generated.DTO.Example1IdentityDTO[] example1Idents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IExample1BLL bll = evaluateData.Context.Logics.Example1Factory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(example1Idents, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Example1>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(example1Idents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Example1>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Example1FullDTO> GetFullExample1sInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IExample1BLL bll = evaluateData.Context.Logics.Example1Factory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Example1>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Example1>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -65,7 +65,7 @@
         protected virtual SampleSystem.Generated.DTO.Example1RichDTO GetRichExample1Internal(SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IExample1BLL bll = evaluateData.Context.Logics.Example1Factory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.Example1 domainObject = bll.GetById(example1Identity.Id, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Example1>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.Example1 domainObject = bll.GetById(example1Identity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Example1>(Framework.Transfering.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -81,7 +81,7 @@
         protected virtual SampleSystem.Generated.DTO.Example1SimpleDTO GetSimpleExample1Internal(SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IExample1BLL bll = evaluateData.Context.Logics.Example1Factory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.Example1 domainObject = bll.GetById(example1Identity.Id, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Example1>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.Example1 domainObject = bll.GetById(example1Identity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Example1>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -106,13 +106,13 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Example1SimpleDTO> GetSimpleExample1sByIdentsInternal(SampleSystem.Generated.DTO.Example1IdentityDTO[] example1Idents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IExample1BLL bll = evaluateData.Context.Logics.Example1Factory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(example1Idents, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Example1>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(example1Idents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Example1>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Example1SimpleDTO> GetSimpleExample1sInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IExample1BLL bll = evaluateData.Context.Logics.Example1Factory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Example1>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Example1>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>

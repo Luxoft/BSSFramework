@@ -59,7 +59,7 @@ public abstract class GetByODataQueryWithFilterMethodGeneratorBase<TConfiguratio
             this.Parameters[1].ToVariableReferenceExpression().ToMethodInvokeExpression(this.Configuration.Environment.ServerDTO.ToDomainObjectMethodName, evaluateDataExpr.GetMappingService()));
 
         var preResultDecl = typeof(SelectOperationResult<>).MakeGenericType(this.DomainType).ToTypeReference().ToVariableDeclarationStatement("preResult",
-            bllRefExpr.ToMethodInvokeExpression("GetObjectsByOData", typedSelectOperationDecl.ToVariableReferenceExpression(), typedFilterDecl.ToVariableReferenceExpression(), this.GetFetchsExpression(evaluateDataExpr)));
+            bllRefExpr.ToMethodInvokeExpression("GetObjectsByOData", typedSelectOperationDecl.ToVariableReferenceExpression(), typedFilterDecl.ToVariableReferenceExpression(), this.GetFetchRule()));
 
         var preResultDeclRefExpr = preResultDecl.ToVariableReferenceExpression();
 

@@ -1,6 +1,7 @@
-﻿using Framework.DomainDriven;
-using Framework.OData;
+﻿using Framework.OData;
 using Framework.Persistent;
+
+using GenericQueryable.Fetching;
 
 using SampleSystem.Domain.Models.Filters;
 using SampleSystem.Domain.Projections;
@@ -12,7 +13,7 @@ public partial class TestBusinessUnitBLL
     public SelectOperationResult<HierarchicalNode<TestBusinessUnit, Guid>> GetTreeByOData(
             SelectOperation<TestBusinessUnit> selectOperation,
             HierarchicalBusinessUnitFilterModel filter,
-            IFetchContainer<TestBusinessUnit> fetchs)
+            FetchRule<TestBusinessUnit> fetchs)
     {
         return this.GetTreeByOData(selectOperation, fetchs);
     }

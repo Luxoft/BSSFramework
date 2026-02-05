@@ -21,7 +21,7 @@
             SampleSystem.BLL.ITestSecurityObjItemBLL bll = evaluateData.Context.Logics.TestSecurityObjItemFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.TestSecurityObjItem> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.TestSecurityObjItem>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
-            Framework.OData.SelectOperationResult<SampleSystem.Domain.TestSecurityObjItem> preResult = bll.GetObjectsByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestSecurityObjItem>(Framework.Transfering.ViewDTOType.FullDTO));
+            Framework.OData.SelectOperationResult<SampleSystem.Domain.TestSecurityObjItem> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestSecurityObjItem>(Framework.Transfering.ViewDTOType.FullDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestSecurityObjItemFullDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
@@ -39,7 +39,7 @@
             SampleSystem.BLL.ITestSecurityObjItemBLL bll = evaluateData.Context.Logics.TestSecurityObjItemFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.TestSecurityObjItem> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.TestSecurityObjItem>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
-            Framework.OData.SelectOperationResult<SampleSystem.Domain.TestSecurityObjItem> preResult = bll.GetObjectsByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestSecurityObjItem>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            Framework.OData.SelectOperationResult<SampleSystem.Domain.TestSecurityObjItem> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestSecurityObjItem>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
@@ -57,7 +57,7 @@
             SampleSystem.BLL.ITestSecurityObjItemBLL bll = evaluateData.Context.Logics.TestSecurityObjItemFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.TestSecurityObjItem> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.TestSecurityObjItem>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
-            Framework.OData.SelectOperationResult<SampleSystem.Domain.TestSecurityObjItem> preResult = bll.GetObjectsByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestSecurityObjItem>(Framework.Transfering.ViewDTOType.VisualDTO));
+            Framework.OData.SelectOperationResult<SampleSystem.Domain.TestSecurityObjItem> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestSecurityObjItem>(Framework.Transfering.ViewDTOType.VisualDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestSecurityObjItemVisualDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
@@ -75,7 +75,7 @@
             SampleSystem.BLL.ITestSecurityObjItemProjectionBLL bll = evaluateData.Context.Logics.TestSecurityObjItemProjectionFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestSecurityObjItemProjection> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
-            Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.TestSecurityObjItemProjection> preResult = bll.GetObjectsByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>(Framework.Transfering.ViewDTOType.ProjectionDTO));
+            Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.TestSecurityObjItemProjection> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>(Framework.Transfering.ViewDTOType.ProjectionDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestSecurityObjItemProjectionDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
     }

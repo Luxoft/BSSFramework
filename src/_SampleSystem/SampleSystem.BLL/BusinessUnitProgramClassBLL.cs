@@ -1,6 +1,9 @@
 ﻿using System.Linq.Expressions;
-using Framework.DomainDriven;
+
 using Framework.OData;
+
+using GenericQueryable.Fetching;
+
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Filters;
 using SampleSystem.Domain.Projections;
@@ -12,7 +15,7 @@ public partial class BusinessUnitProgramClassBLL
     public SelectOperationResult<BusinessUnitProgramClass> GetObjectsByOData(
             SelectOperation<BusinessUnitProgramClass> selectOperation,
             BusinessUnitProgramClassFilterModel filter,
-            IFetchContainer<BusinessUnitProgramClass> fetchs)
+            FetchRule<BusinessUnitProgramClass> fetchs)
     {
         var nextSelectOperation = selectOperation.AddFilter(this.GetFilter(filter)).AddFilter(this.GetVirtualFilter(filter));
 

@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IvAt.GenericQueryable.Runtime" />
     <PackageReference Include="IvAt.SecuritySystem.Abstractions" />
   </ItemGroup>
 

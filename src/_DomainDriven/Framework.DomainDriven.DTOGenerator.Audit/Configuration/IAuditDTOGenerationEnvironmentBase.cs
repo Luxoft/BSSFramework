@@ -1,9 +1,3 @@
-﻿using Framework.DomainDriven.Generation.Domain;
+﻿namespace Framework.DomainDriven.DTOGenerator.Audit;
 
-namespace Framework.DomainDriven.DTOGenerator.Audit;
-
-public interface IAuditDTOGenerationEnvironmentBase : IGenerationEnvironment,
-
-                                                      Server.IGeneratorConfigurationContainer
-{
-}
+public interface IAuditDTOGenerationEnvironmentBase : Server.IServerGenerationEnvironmentBase, Server.IGeneratorConfigurationContainer;

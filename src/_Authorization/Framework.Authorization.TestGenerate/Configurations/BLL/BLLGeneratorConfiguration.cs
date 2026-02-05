@@ -2,10 +2,4 @@
 
 namespace Framework.Authorization.TestGenerate;
 
-public class BLLGeneratorConfiguration : GeneratorConfigurationBase<ServerGenerationEnvironment>
-{
-    public BLLGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
-    {
-    }
-}
+public class BLLGeneratorConfiguration(ServerGenerationEnvironment environment) : GeneratorConfigurationBase<ServerGenerationEnvironment>(environment);

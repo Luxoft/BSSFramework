@@ -4,31 +4,22 @@ using Framework.Core;
 
 namespace Framework.DomainDriven.Generation.Domain;
 
-public abstract class CodeFileFactory<TConfiguration, TFileType> : GeneratorConfigurationContainer<TConfiguration>, ICodeFileFactory<TFileType>
-        where TConfiguration : class, IGeneratorConfiguration<IGenerationEnvironment, TFileType>
+public abstract class CodeFileFactory<TConfiguration, TFileType>(TConfiguration configuration, Type? domainType)
+    : GeneratorConfigurationContainer<TConfiguration>(configuration), ICodeFileFactory<TFileType>
+    where TConfiguration : class, IGeneratorConfiguration<IGenerationEnvironment, TFileType>
 {
-    protected CodeFileFactory(TConfiguration configuration, Type domainType)
-            : base(configuration)
-    {
-        if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-
-        this.DomainType = domainType;
-    }
-
-
     public string Name => this.Header.GetName(this.DomainType);
 
     public virtual CodeTypeReference CurrentReference => this.Configuration.GetCodeTypeReference(this.DomainType, this.FileType);
 
     public abstract TFileType FileType { get; }
 
-    public virtual CodeTypeReference BaseReference { get; } = null;
+    public virtual CodeTypeReference? BaseReference { get; } = null;
 
 
-    public ICodeFileFactoryHeader<TFileType> Header => (ICodeFileFactoryHeader<TFileType>)this.Configuration.GetFileFactoryHeader(this.FileType);
+    public ICodeFileFactoryHeader<TFileType> Header => (ICodeFileFactoryHeader<TFileType>)this.Configuration.GetFileFactoryHeader(this.FileType)!;
 
-    public Type DomainType { get; }
-
+    public Type? DomainType { get; } = domainType;
 
     protected abstract CodeTypeDeclaration GetCodeTypeDeclaration();
 

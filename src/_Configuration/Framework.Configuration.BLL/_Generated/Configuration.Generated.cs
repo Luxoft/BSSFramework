@@ -561,4 +561,14 @@ namespace Framework.Configuration.BLL
             return new Framework.Configuration.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context, securityProvider);
         }
     }
+    
+    public partial class SecurityDomainBLLBase<TDomainObject> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
+        where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
+    {
+        
+        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider) : 
+                base(context, securityProvider)
+        {
+        }
+    }
 }

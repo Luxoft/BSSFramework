@@ -1,48 +1,34 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-
-using Framework.Core;
-using Framework.DomainDriven.Lock;
+﻿using Framework.DomainDriven.Lock;
 using Framework.OData;
 using Framework.Persistent;
 
+using GenericQueryable.Fetching;
+
 namespace Framework.DomainDriven.BLL;
 
-public partial interface IDefaultDomainBLLQueryBase<in TPersistentDomainObjectBase, TDomainObject, TIdent> :
+public interface IDefaultDomainBLLQueryBase<in TPersistentDomainObjectBase, TDomainObject, TIdent> :
         IBLLQueryBase<TDomainObject>, IRevisionBLL<TDomainObject, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
 {
-    TDomainObject? GetById(TIdent id, IdCheckMode idCheckMode, IFetchContainer<TDomainObject>? fetchContainer = null, LockRole lockRole = LockRole.None);
+    TDomainObject? GetById(TIdent id, IdCheckMode idCheckMode, FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None);
 
-    TDomainObject? GetById(TIdent id, IdCheckMode idCheckMode, Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs);
+    TDomainObject? GetById(TIdent id, IdCheckMode idCheckMode, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
 
-    TDomainObject? GetById(TIdent id, IdCheckMode idCheckMode, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs);
+    TDomainObject? GetById(TIdent id, bool throwOnNotFound = false, FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None);
 
+    TDomainObject? GetById(TIdent id, bool throwOnNotFound, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
 
-    TDomainObject? GetById(TIdent id, [DoesNotReturnIf(true)] bool throwOnNotFound = false, IFetchContainer<TDomainObject>? fetchContainer = null, LockRole lockRole = LockRole.None);
+    List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, FetchRule<TDomainObject>? fetchRule = null);
 
-    TDomainObject? GetById(TIdent id,  [DoesNotReturnIf(true)] bool throwOnNotFound, Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs);
+    List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
 
-    TDomainObject? GetById(TIdent id, [DoesNotReturnIf(true)] bool throwOnNotFound, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs);
+    List<TDomainObject> GetListByIdentsUnsafe(IEnumerable<TIdent> baseIdents, FetchRule<TDomainObject>? fetchRule = null);
 
-
-
-    List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, IFetchContainer<TDomainObject>? fetchContainer = null);
-
-    List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs);
-
-    List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs);
+    List<TDomainObject> GetListByIdentsUnsafe(IEnumerable<TIdent> baseIdents, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
 
 
-    List<TDomainObject> GetListByIdentsUnsafe(IEnumerable<TIdent> baseIdents, IFetchContainer<TDomainObject>? fetchContainer = null);
-
-    List<TDomainObject> GetListByIdentsUnsafe(IEnumerable<TIdent> baseIdents, Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs);
-
-    List<TDomainObject> GetListByIdentsUnsafe(IEnumerable<TIdent> baseIdents, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs);
-
-
-    List<TDomainObject> GetListByIdents<TIdentity>(IEnumerable<TIdentity> idents, IFetchContainer<TDomainObject>? fetchContainer = null)
+    List<TDomainObject> GetListByIdents<TIdentity>(IEnumerable<TIdentity> idents, FetchRule<TDomainObject>? fetchRule = null)
             where TIdentity : IIdentityObject<TIdent>;
 
     TDomainObject GetNested(TDomainObject domainObject);
@@ -50,17 +36,17 @@ public partial interface IDefaultDomainBLLQueryBase<in TPersistentDomainObjectBa
     /// <summary>
     /// Получение дерева объектов
     /// </summary>
-    /// <param name="fetchs">Подгружаемые свойства</param>
+    /// <param name="fetchRule">Подгружаемые свойства</param>
     /// <returns></returns>
-    List<HierarchicalNode<TDomainObject, TIdent>> GetTree(IFetchContainer<TDomainObject>? fetchs = null);
+    List<HierarchicalNode<TDomainObject, TIdent>> GetTree(FetchRule<TDomainObject>? fetchRule = null);
 
     /// <summary>
     /// Получение дерева объектов по OData-запросу
     /// </summary>
     /// <param name="selectOperation">OData-запрос</param>
-    /// <param name="fetchs">Подгружаемые свойства</param>
+    /// <param name="fetchRule">Подгружаемые свойства</param>
     /// <returns></returns>
-    SelectOperationResult<HierarchicalNode<TDomainObject, TIdent>> GetTreeByOData(SelectOperation<TDomainObject> selectOperation, IFetchContainer<TDomainObject>? fetchs = null);
+    SelectOperationResult<HierarchicalNode<TDomainObject, TIdent>> GetTreeByOData(SelectOperation<TDomainObject> selectOperation, FetchRule<TDomainObject>? fetchRule = null);
 }
 
 

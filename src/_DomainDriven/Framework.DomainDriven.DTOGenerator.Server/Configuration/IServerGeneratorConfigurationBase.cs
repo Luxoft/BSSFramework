@@ -13,6 +13,8 @@ public interface IServerGeneratorConfigurationBase<out TEnvironmentBase> : IServ
 
 public interface IServerGeneratorConfigurationBase : IGeneratorConfigurationBase
 {
+    bool UseRemoveMappingExtension { get; }
+
     IPropertyAssignerConfigurator PropertyAssignerConfigurator { get; }
 
 

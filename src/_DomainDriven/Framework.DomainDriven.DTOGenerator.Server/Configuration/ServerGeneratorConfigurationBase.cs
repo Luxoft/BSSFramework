@@ -76,6 +76,7 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
         this.VersionProperty = this.Environment.AuditPersistentDomainObjectBaseType.GetProperties().SingleOrDefault(prop => prop.HasAttribute<VersionAttribute>());
     }
 
+    public virtual bool UseRemoveMappingExtension { get; } = true;
 
     public IPropertyAssignerConfigurator PropertyAssignerConfigurator { get; }
 

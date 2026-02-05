@@ -2,9 +2,4 @@
 
 namespace Framework.DomainDriven.BLLGenerator;
 
-public interface IGenerationEnvironmentBase : IGenerationEnvironment,
-
-                                              BLLCoreGenerator.IGeneratorConfigurationContainer
-{
-
-}
+public interface IGenerationEnvironmentBase : IGenerationEnvironment, BLLCoreGenerator.IGeneratorConfigurationContainer;

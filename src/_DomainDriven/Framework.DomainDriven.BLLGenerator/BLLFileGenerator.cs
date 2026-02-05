@@ -33,5 +33,25 @@ public class BLLFileGenerator<TConfiguration> : CodeFileGenerator<TConfiguration
         yield return new DefaultBLLFactoryFileFactory<TConfiguration>(this.Configuration);
 
         yield return new ImplementedBLLFactoryFileFactory<TConfiguration>(this.Configuration);
+
+        if (this.Configuration.GenerateDTOFetchRuleExpander)
+        {
+            yield return new MainDTOFetchRuleExpanderBaseFileFactory<TConfiguration>(this.Configuration);
+            yield return new MainDTOFetchRuleExpanderFileFactory<TConfiguration>(this.Configuration);
+        }
+
+        yield return new SecurityDomainBLLBaseFileFactory<TConfiguration>(this.Configuration);
+
+        if (this.Configuration.GenerateValidation)
+        {
+            yield return new ValidationMapBaseFileFactory<TConfiguration>(this.Configuration);
+            yield return new ValidationMapFileFactory<TConfiguration>(this.Configuration);
+
+            yield return new ValidatorCompileCacheFileFactory<TConfiguration>(this.Configuration);
+
+            yield return new ValidatorBaseFileFactory<TConfiguration>(this.Configuration);
+            yield return new ValidatorFileFactory<TConfiguration>(this.Configuration);
+            yield return new ValidatorInterfaceFileFactory<TConfiguration>(this.Configuration);
+        }
     }
 }

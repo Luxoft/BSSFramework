@@ -19,8 +19,8 @@ public class BLLFileFactory<TConfiguration> : FileFactory<TConfiguration>
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
     {
-        var baseBLLType = this.Configuration.Environment.BLLCore.GetSecurityDomainBLLBaseTypeReference(this.DomainType)
-                              .ToTypeReference(this.DomainType.ToTypeReference());
+        var baseBLLType = this.Configuration.GetSecurityDomainBLLBaseTypeReference(this.DomainType!)
+                              .ToTypeReference(this.DomainType!.ToTypeReference());
 
         var codeTypeDeclaration = new CodeTypeDeclaration
                                   {

@@ -46,7 +46,6 @@ public partial class ConfigurationBLLContext
             IStandartExpressionBuilder standartExpressionBuilder,
             IConfigurationValidator validator,
             IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
-            IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
             IMessageSender<MessageTemplateNotification> subscriptionSender,
             IRootSecurityService<PersistentDomainObjectBase> securityService,
             IConfigurationBLLFactoryContainer logics,
@@ -58,7 +57,7 @@ public partial class ConfigurationBLLContext
             IEnumerable<TargetSystemInfo> targetSystemInfoList,
             ICurrentRevisionService currentRevisionService,
             ConfigurationBLLContextSettings settings)
-            : base(serviceProvider, operationSender, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
+            : base(serviceProvider, operationSender, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory)
     {
         this.SubscriptionSender = subscriptionSender ?? throw new ArgumentNullException(nameof(subscriptionSender));
 

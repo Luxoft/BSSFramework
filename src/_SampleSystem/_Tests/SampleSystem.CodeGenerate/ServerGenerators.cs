@@ -208,12 +208,10 @@ public partial class ServerGenerators
     {
         var generator = new SampleSystemBLLCoreFileGenerator(this.environment.BLLCore);
 
-        return generator.GenerateGroup(
+
+        yield return generator.GenerateSingle(
             TargetSystemPath + @"/SampleSystem.BLL.Core/_Generated",
-            decl => decl.Name.Contains("FetchService") ? "SampleSystem.FetchService.Generated"
-                    : decl.Name.Contains("ValidationMap") ? "SampleSystem.ValidationMap.Generated"
-                    : decl.Name.Contains("Validator") ? "SampleSystem.Validator.Generated"
-                    : "SampleSystem.Generated",
+            "SampleSystem.Generated",
             this.CheckOutService);
     }
 
@@ -224,9 +222,12 @@ public partial class ServerGenerators
     {
         var generator = new BLLFileGenerator(this.environment.BLL);
 
-        yield return generator.GenerateSingle(
+        return generator.GenerateGroup(
             TargetSystemPath + @"/SampleSystem.BLL/_Generated",
-            "SampleSystem.Generated",
+            decl => decl.Name.Contains("FetchRuleExpander") ? "SampleSystem.FetchRuleExpander.Generated"
+                    : decl.Name.Contains("ValidationMap") ? "SampleSystem.ValidationMap.Generated"
+                    : decl.Name.Contains("Validator") ? "SampleSystem.Validator.Generated"
+                    : "SampleSystem.Generated",
             this.CheckOutService);
     }
 

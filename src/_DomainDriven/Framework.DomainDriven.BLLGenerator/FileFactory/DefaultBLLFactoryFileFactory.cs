@@ -58,7 +58,7 @@ public class DefaultBLLFactoryFileFactory<TConfiguration> : FileFactory<TConfigu
                                  TypeParameters = { genericDomainObjectParameter },
                                  Statements =
                                  {
-                                         this.Configuration.Environment.BLLCore
+                                         this.Configuration
                                              .SecurityDomainBLLBaseTypeReference
                                              .ToTypeReference(genericDomainObjectParameterTypeRef)
                                              .ToObjectCreateExpression(contextFieldRefExpr, parameter.ToVariableReferenceExpression())

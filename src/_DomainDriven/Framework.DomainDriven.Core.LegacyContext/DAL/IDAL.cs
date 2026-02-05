@@ -1,6 +1,8 @@
 ﻿using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.Lock;
 
+using GenericQueryable.Fetching;
+
 namespace Framework.DomainDriven;
 
 public interface IDAL<TDomainObject, TIdent> : IAuditDAL<TDomainObject, TIdent>
@@ -9,7 +11,7 @@ public interface IDAL<TDomainObject, TIdent> : IAuditDAL<TDomainObject, TIdent>
     /// Предоставляет Queryable в контексте Read
     /// </summary>
     /// <returns></returns>
-    IQueryable<TDomainObject> GetQueryable(LockRole lockRole, IFetchContainer<TDomainObject>? fetchContainer = null);
+    IQueryable<TDomainObject> GetQueryable(LockRole lockRole, FetchRule<TDomainObject>? fetchRule = null);
 
     TDomainObject GetById(TIdent id, LockRole lockRole);
 

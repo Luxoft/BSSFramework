@@ -3,15 +3,10 @@ using Framework.DomainDriven.Generation.Domain;
 
 namespace Framework.DomainDriven.BLLGenerator;
 
-public class BLLFactoryContainerGeneratorConfiguration<TConfiguration> : GeneratorConfigurationContainer<TConfiguration>, IBLLFactoryContainerGeneratorConfiguration
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+public class BLLFactoryContainerGeneratorConfiguration<TConfiguration>(TConfiguration configuration)
+    : GeneratorConfigurationContainer<TConfiguration>(configuration), IBLLFactoryContainerGeneratorConfiguration
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public BLLFactoryContainerGeneratorConfiguration(TConfiguration configuration) : base(configuration)
-    {
-
-    }
-
-
     public IEnumerable<ICodeFile> GetFileFactories()
     {
         foreach (var domainType in this.Configuration.DomainTypes)

@@ -21,7 +21,7 @@
             SampleSystem.BLL.ITestPlainAuthObjectBLL bll = evaluateData.Context.Logics.TestPlainAuthObjectFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.TestPlainAuthObject> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.TestPlainAuthObject>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
-            Framework.OData.SelectOperationResult<SampleSystem.Domain.TestPlainAuthObject> preResult = bll.GetObjectsByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestPlainAuthObject>(Framework.Transfering.ViewDTOType.FullDTO));
+            Framework.OData.SelectOperationResult<SampleSystem.Domain.TestPlainAuthObject> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestPlainAuthObject>(Framework.Transfering.ViewDTOType.FullDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestPlainAuthObjectFullDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
@@ -39,7 +39,7 @@
             SampleSystem.BLL.ITestPlainAuthObjectBLL bll = evaluateData.Context.Logics.TestPlainAuthObjectFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.TestPlainAuthObject> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.TestPlainAuthObject>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
-            Framework.OData.SelectOperationResult<SampleSystem.Domain.TestPlainAuthObject> preResult = bll.GetObjectsByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestPlainAuthObject>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            Framework.OData.SelectOperationResult<SampleSystem.Domain.TestPlainAuthObject> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestPlainAuthObject>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
@@ -57,7 +57,7 @@
             SampleSystem.BLL.ITestPlainAuthObjectBLL bll = evaluateData.Context.Logics.TestPlainAuthObjectFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.TestPlainAuthObject> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.TestPlainAuthObject>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
-            Framework.OData.SelectOperationResult<SampleSystem.Domain.TestPlainAuthObject> preResult = bll.GetObjectsByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestPlainAuthObject>(Framework.Transfering.ViewDTOType.VisualDTO));
+            Framework.OData.SelectOperationResult<SampleSystem.Domain.TestPlainAuthObject> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestPlainAuthObject>(Framework.Transfering.ViewDTOType.VisualDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestPlainAuthObjectVisualDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
     }

@@ -40,7 +40,7 @@ public class GetListByOperationMethodGenerator<TConfiguration> : ViewCollectionM
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
-        yield return bllRefExpr.ToMethodInvokeExpression("GetFullList", this.GetFetchsExpression(evaluateDataExpr))
+        yield return bllRefExpr.ToMethodInvokeExpression("GetFullList", this.GetFetchRule())
                                .Pipe(source => this.ConvertToDTOList(source, evaluateDataExpr.GetMappingService()))
                                .ToMethodReturnStatement();
     }

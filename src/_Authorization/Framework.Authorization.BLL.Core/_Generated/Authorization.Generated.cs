@@ -11,22 +11,12 @@ namespace Framework.Authorization.BLL
 {
     
     
-    public partial interface IAuthorizationBLLContext : Framework.DomainDriven.BLL.Security.IAccessDeniedExceptionServiceContainer, Framework.DomainDriven.BLL.Security.ISecurityServiceContainer<Framework.DomainDriven.BLL.Security.IRootSecurityService<Framework.Authorization.Domain.PersistentDomainObjectBase>>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.Authorization.BLL.IAuthorizationBLLFactoryContainer>, Framework.DomainDriven.IFetchServiceContainer<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.DomainDriven.FetchBuildRule>
+    public partial interface IAuthorizationBLLContext : Framework.DomainDriven.BLL.Security.IAccessDeniedExceptionServiceContainer, Framework.DomainDriven.BLL.Security.ISecurityServiceContainer<Framework.DomainDriven.BLL.Security.IRootSecurityService<Framework.Authorization.Domain.PersistentDomainObjectBase>>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.Authorization.BLL.IAuthorizationBLLFactoryContainer>
     {
         
         new Framework.Authorization.BLL.IAuthorizationBLLFactoryContainer Logics
         {
             get;
-        }
-    }
-    
-    public partial class SecurityDomainBLLBase<TDomainObject> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
-        where TDomainObject : Framework.Authorization.Domain.PersistentDomainObjectBase
-    {
-        
-        public SecurityDomainBLLBase(Framework.Authorization.BLL.IAuthorizationBLLContext context, SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider) : 
-                base(context, securityProvider)
-        {
         }
     }
     
@@ -95,7 +85,7 @@ namespace Framework.Authorization.BLL
     public partial interface IPermissionBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Permission, System.Guid>
     {
         
-        System.Collections.Generic.List<Framework.Authorization.Domain.Permission> GetListBy(Framework.Authorization.Domain.PermissionDirectFilterModel filter, Framework.DomainDriven.IFetchContainer<Framework.Authorization.Domain.Permission> fetchs);
+        System.Collections.Generic.List<Framework.Authorization.Domain.Permission> GetListBy(Framework.Authorization.Domain.PermissionDirectFilterModel filter, GenericQueryable.Fetching.FetchRule<Framework.Authorization.Domain.Permission> fetchs);
     }
     
     public partial interface IPermissionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IPermissionBLL, Framework.Authorization.Domain.Permission>

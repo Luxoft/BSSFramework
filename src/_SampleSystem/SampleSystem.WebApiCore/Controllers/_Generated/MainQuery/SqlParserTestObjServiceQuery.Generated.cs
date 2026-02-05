@@ -21,7 +21,7 @@
             SampleSystem.BLL.ISqlParserTestObjBLL bll = evaluateData.Context.Logics.SqlParserTestObjFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.SqlParserTestObj> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.SqlParserTestObj>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
-            Framework.OData.SelectOperationResult<SampleSystem.Domain.SqlParserTestObj> preResult = bll.GetObjectsByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.SqlParserTestObj>(Framework.Transfering.ViewDTOType.FullDTO));
+            Framework.OData.SelectOperationResult<SampleSystem.Domain.SqlParserTestObj> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.SqlParserTestObj>(Framework.Transfering.ViewDTOType.FullDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.SqlParserTestObjFullDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
@@ -39,7 +39,7 @@
             SampleSystem.BLL.ISqlParserTestObjBLL bll = evaluateData.Context.Logics.SqlParserTestObjFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
             Framework.OData.SelectOperation<SampleSystem.Domain.SqlParserTestObj> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.SqlParserTestObj>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
-            Framework.OData.SelectOperationResult<SampleSystem.Domain.SqlParserTestObj> preResult = bll.GetObjectsByOData(typedSelectOperation, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.SqlParserTestObj>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            Framework.OData.SelectOperationResult<SampleSystem.Domain.SqlParserTestObj> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.SqlParserTestObj>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.SqlParserTestObjSimpleDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
     }

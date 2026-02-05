@@ -28,14 +28,14 @@
         protected virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3FullDTO GetFullTestSecuritySubObjItem3ByNameInternal(string testSecuritySubObjItem3Name, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, testSecuritySubObjItem3Name, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, testSecuritySubObjItem3Name, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3FullDTO GetFullTestSecuritySubObjItem3Internal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = bll.GetById(testSecuritySubObjItem3Identity.Id, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = bll.GetById(testSecuritySubObjItem3Identity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -60,13 +60,13 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestSecuritySubObjItem3FullDTO> GetFullTestSecuritySubObjItem3sByIdentsInternal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO[] testSecuritySubObjItem3Idents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(testSecuritySubObjItem3Idents, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(testSecuritySubObjItem3Idents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestSecuritySubObjItem3FullDTO> GetFullTestSecuritySubObjItem3sInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -90,14 +90,14 @@
         protected virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3RichDTO GetRichTestSecuritySubObjItem3ByNameInternal(string testSecuritySubObjItem3Name, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, testSecuritySubObjItem3Name, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, testSecuritySubObjItem3Name, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3RichDTO GetRichTestSecuritySubObjItem3Internal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = bll.GetById(testSecuritySubObjItem3Identity.Id, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = bll.GetById(testSecuritySubObjItem3Identity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -122,14 +122,14 @@
         protected virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3SimpleDTO GetSimpleTestSecuritySubObjItem3ByNameInternal(string testSecuritySubObjItem3Name, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, testSecuritySubObjItem3Name, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, testSecuritySubObjItem3Name, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3SimpleDTO GetSimpleTestSecuritySubObjItem3Internal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = bll.GetById(testSecuritySubObjItem3Identity.Id, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = bll.GetById(testSecuritySubObjItem3Identity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -154,13 +154,13 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestSecuritySubObjItem3SimpleDTO> GetSimpleTestSecuritySubObjItem3sByIdentsInternal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO[] testSecuritySubObjItem3Idents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(testSecuritySubObjItem3Idents, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(testSecuritySubObjItem3Idents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestSecuritySubObjItem3SimpleDTO> GetSimpleTestSecuritySubObjItem3sInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -184,14 +184,14 @@
         protected virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3VisualDTO GetVisualTestSecuritySubObjItem3ByNameInternal(string testSecuritySubObjItem3Name, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, testSecuritySubObjItem3Name, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.VisualDTO));
+            SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, testSecuritySubObjItem3Name, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3VisualDTO GetVisualTestSecuritySubObjItem3Internal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = bll.GetById(testSecuritySubObjItem3Identity.Id, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.VisualDTO));
+            SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = bll.GetById(testSecuritySubObjItem3Identity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -216,13 +216,13 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestSecuritySubObjItem3VisualDTO> GetVisualTestSecuritySubObjItem3sByIdentsInternal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO[] testSecuritySubObjItem3Idents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(testSecuritySubObjItem3Idents, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(testSecuritySubObjItem3Idents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestSecuritySubObjItem3VisualDTO> GetVisualTestSecuritySubObjItem3sInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestSecuritySubObjItem3>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
     }
 }

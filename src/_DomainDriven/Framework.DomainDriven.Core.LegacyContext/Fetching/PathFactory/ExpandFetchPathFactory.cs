@@ -5,15 +5,8 @@ using Framework.Persistent;
 
 namespace Framework.DomainDriven;
 
-public class ExpandFetchPathFactory : DTOFetchPathFactory, IFetchPathFactory<FetchBuildRule.DTOFetchBuildRule>
+public class ExpandFetchPathFactory(Type persistentDomainObjectBase, int maxRecurseLevel = 1) : DTOFetchPathFactory(persistentDomainObjectBase, maxRecurseLevel)
 {
-    public ExpandFetchPathFactory(Type persistentDomainObjectBase, int maxRecurseLevel = 1)
-            : base(persistentDomainObjectBase, maxRecurseLevel)
-    {
-
-    }
-
-
     protected override PropertyLoadNode ExpandNode(PropertyLoadNode node)
     {
         if (node == null) throw new ArgumentNullException(nameof(node));
@@ -40,7 +33,7 @@ public class ExpandFetchPathFactory : DTOFetchPathFactory, IFetchPathFactory<Fet
 
         var expandPath = property.GetExpandPath();
 
-        if (expandPath == null)
+        if (expandPath is null)
         {
             foreach (var fetchPath in property.GetFetchPaths())
             {
@@ -55,8 +48,6 @@ public class ExpandFetchPathFactory : DTOFetchPathFactory, IFetchPathFactory<Fet
 
     private PropertyLoadNode ToLoadNode(Type domainType, PropertyPath propertyPath)
     {
-        if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
-
         if (propertyPath.Any())
         {
             var property = propertyPath.Head;
@@ -90,14 +81,5 @@ public class ExpandFetchPathFactory : DTOFetchPathFactory, IFetchPathFactory<Fet
                                         new Dictionary<PropertyInfo, PropertyLoadNode>(),
                                         new PropertyInfo[0]);
         }
-    }
-
-
-    IEnumerable<PropertyPath> IFactory<Type, FetchBuildRule.DTOFetchBuildRule, IEnumerable<PropertyPath>>.Create(Type type, FetchBuildRule.DTOFetchBuildRule rule)
-    {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-        if (rule == null) throw new ArgumentNullException(nameof(rule));
-
-        return this.Create(type, rule.DTOType);
     }
 }

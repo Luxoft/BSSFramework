@@ -5,21 +5,19 @@ using CommonFramework;
 
 using GenericQueryable.Fetching;
 
-using Microsoft.Extensions.DependencyInjection;
-
 using NHibernate.Linq;
 
 namespace Framework.DomainDriven.NHibernate;
 
-public class NHibFetchService(IServiceProvider serviceProvider) : IFetchService
+public class NHibFetchService(IEnumerable<IFetchRuleExpander> expanders) : IFetchService
 {
     public IQueryable<TSource> ApplyFetch<TSource>(IQueryable<TSource> source, FetchRule<TSource> fetchRule)
         where TSource: class
     {
-        return fetchRule switch
-        {
-            UntypedFetchRule<TSource> untypedFetchRule => serviceProvider.GetRequiredService<INHibRawFetchService<TSource>>().ApplyFetch(source, untypedFetchRule.Path),
+        var expandedFetchRule = expanders.Aggregate(fetchRule, (state, expander) => expander.TryExpand(state) ?? state);
 
+        return expandedFetchRule switch
+        {
             PropertyFetchRule<TSource> propertyFetchRule => this.ApplyFetch(source, propertyFetchRule),
 
             _ => throw new ArgumentOutOfRangeException(nameof(fetchRule))

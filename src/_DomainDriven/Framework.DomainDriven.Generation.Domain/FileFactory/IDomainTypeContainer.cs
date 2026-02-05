@@ -2,5 +2,5 @@
 
 public interface IDomainTypeContainer
 {
-    Type DomainType { get; }
+    Type? DomainType { get; }
 }

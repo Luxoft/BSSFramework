@@ -50,7 +50,7 @@ public class EnvironmentInitializer : AutomationCoreFrameworkInitializer
             .RegisterControllers([typeof(EmployeeController).Assembly])
             .AddSingleton<DataHelper>()
             .AddSingleton<TestDataInitializer>()
-            .AddIntegrationTestServices()
+            .ApplyXunitIntegrationTestServices()
             .AddValidator<DuplicateServiceUsageValidator>()
             .Validate()
             .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });

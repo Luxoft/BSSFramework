@@ -35,14 +35,14 @@ namespace Framework.Authorization.WebApi
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleFullDTO GetFullBusinessRoleByNameInternal(string businessRoleName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.BusinessRole domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, businessRoleName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.FullDTO));
+            Framework.Authorization.Domain.BusinessRole domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, businessRoleName, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleFullDTO GetFullBusinessRoleInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.FullDTO));
+            Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -67,13 +67,13 @@ namespace Framework.Authorization.WebApi
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleFullDTO> GetFullBusinessRolesByIdentsInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(businessRoleIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(businessRoleIdents, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleFullDTO> GetFullBusinessRolesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -97,14 +97,14 @@ namespace Framework.Authorization.WebApi
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleRichDTO GetRichBusinessRoleByNameInternal(string businessRoleName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.BusinessRole domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, businessRoleName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.FullDTO));
+            Framework.Authorization.Domain.BusinessRole domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, businessRoleName, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleRichDTO GetRichBusinessRoleInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.FullDTO));
+            Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -129,14 +129,14 @@ namespace Framework.Authorization.WebApi
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO GetSimpleBusinessRoleByNameInternal(string businessRoleName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.BusinessRole domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, businessRoleName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            Framework.Authorization.Domain.BusinessRole domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, businessRoleName, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO GetSimpleBusinessRoleInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -161,13 +161,13 @@ namespace Framework.Authorization.WebApi
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO> GetSimpleBusinessRolesByIdentsInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(businessRoleIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(businessRoleIdents, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO> GetSimpleBusinessRolesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -191,14 +191,14 @@ namespace Framework.Authorization.WebApi
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO GetVisualBusinessRoleByNameInternal(string businessRoleName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.BusinessRole domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, businessRoleName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.VisualDTO));
+            Framework.Authorization.Domain.BusinessRole domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, businessRoleName, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.VisualDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO GetVisualBusinessRoleInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.VisualDTO));
+            Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.VisualDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -223,13 +223,13 @@ namespace Framework.Authorization.WebApi
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO> GetVisualBusinessRolesByIdentsInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(businessRoleIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(businessRoleIdents, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO> GetVisualBusinessRolesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
     }
     
@@ -248,7 +248,7 @@ namespace Framework.Authorization.WebApi
         protected virtual Framework.Authorization.Generated.DTO.PermissionFullDTO GetFullPermissionInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.PermissionFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.FullDTO));
+            Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -274,7 +274,7 @@ namespace Framework.Authorization.WebApi
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.PermissionFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.PermissionDirectFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -289,13 +289,13 @@ namespace Framework.Authorization.WebApi
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionFullDTO> GetFullPermissionsByIdentsInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO[] permissionIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.PermissionFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(permissionIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(permissionIdents, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionFullDTO> GetFullPermissionsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.PermissionFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -310,7 +310,7 @@ namespace Framework.Authorization.WebApi
         protected virtual Framework.Authorization.Generated.DTO.PermissionRichDTO GetRichPermissionInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.PermissionFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.FullDTO));
+            Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -336,7 +336,7 @@ namespace Framework.Authorization.WebApi
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.PermissionFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.PermissionDirectFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTOList(bll.GetListBy(typedFilter, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -351,13 +351,13 @@ namespace Framework.Authorization.WebApi
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionRichDTO> GetRichPermissionsByIdentsInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO[] permissionIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.PermissionFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTOList(bll.GetListByIdents(permissionIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTOList(bll.GetListByIdents(permissionIdents, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionRichDTO> GetRichPermissionsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.PermissionFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -372,7 +372,7 @@ namespace Framework.Authorization.WebApi
         protected virtual Framework.Authorization.Generated.DTO.PermissionSimpleDTO GetSimplePermissionInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.PermissionFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -398,7 +398,7 @@ namespace Framework.Authorization.WebApi
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.PermissionFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.PermissionDirectFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -413,13 +413,13 @@ namespace Framework.Authorization.WebApi
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionSimpleDTO> GetSimplePermissionsByIdentsInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO[] permissionIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.PermissionFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(permissionIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(permissionIdents, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PermissionSimpleDTO> GetSimplePermissionsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.PermissionFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Permission>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -468,14 +468,14 @@ namespace Framework.Authorization.WebApi
         protected virtual Framework.Authorization.Generated.DTO.PrincipalFullDTO GetFullPrincipalByNameInternal(string principalName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.Principal domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, principalName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.FullDTO));
+            Framework.Authorization.Domain.Principal domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, principalName, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Authorization.Generated.DTO.PrincipalFullDTO GetFullPrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.FullDTO));
+            Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -500,13 +500,13 @@ namespace Framework.Authorization.WebApi
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalFullDTO> GetFullPrincipalsByIdentsInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO[] principalIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(principalIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(principalIdents, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalFullDTO> GetFullPrincipalsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -530,14 +530,14 @@ namespace Framework.Authorization.WebApi
         protected virtual Framework.Authorization.Generated.DTO.PrincipalRichDTO GetRichPrincipalByNameInternal(string principalName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.Principal domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, principalName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.FullDTO));
+            Framework.Authorization.Domain.Principal domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, principalName, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Authorization.Generated.DTO.PrincipalRichDTO GetRichPrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.FullDTO));
+            Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -562,14 +562,14 @@ namespace Framework.Authorization.WebApi
         protected virtual Framework.Authorization.Generated.DTO.PrincipalSimpleDTO GetSimplePrincipalByNameInternal(string principalName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.Principal domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, principalName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            Framework.Authorization.Domain.Principal domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, principalName, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Authorization.Generated.DTO.PrincipalSimpleDTO GetSimplePrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -594,13 +594,13 @@ namespace Framework.Authorization.WebApi
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalSimpleDTO> GetSimplePrincipalsByIdentsInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO[] principalIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(principalIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(principalIdents, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalSimpleDTO> GetSimplePrincipalsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -624,14 +624,14 @@ namespace Framework.Authorization.WebApi
         protected virtual Framework.Authorization.Generated.DTO.PrincipalVisualDTO GetVisualPrincipalByNameInternal(string principalName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.Principal domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, principalName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.VisualDTO));
+            Framework.Authorization.Domain.Principal domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, principalName, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.VisualDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Authorization.Generated.DTO.PrincipalVisualDTO GetVisualPrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.VisualDTO));
+            Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.VisualDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -656,13 +656,13 @@ namespace Framework.Authorization.WebApi
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalVisualDTO> GetVisualPrincipalsByIdentsInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO[] principalIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(principalIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(principalIdents, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalVisualDTO> GetVisualPrincipalsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -734,14 +734,14 @@ namespace Framework.Authorization.WebApi
         protected virtual Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO GetFullSecurityContextTypeByNameInternal(string securityContextTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, securityContextTypeName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO));
+            Framework.Authorization.Domain.SecurityContextType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, securityContextTypeName, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO GetFullSecurityContextTypeInternal(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextType domainObject = bll.GetById(securityContextTypeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO));
+            Framework.Authorization.Domain.SecurityContextType domainObject = bll.GetById(securityContextTypeIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -766,13 +766,13 @@ namespace Framework.Authorization.WebApi
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO> GetFullSecurityContextTypesByIdentsInternal(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO[] securityContextTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(securityContextTypeIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(securityContextTypeIdents, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO> GetFullSecurityContextTypesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -796,14 +796,14 @@ namespace Framework.Authorization.WebApi
         protected virtual Framework.Authorization.Generated.DTO.SecurityContextTypeRichDTO GetRichSecurityContextTypeByNameInternal(string securityContextTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, securityContextTypeName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO));
+            Framework.Authorization.Domain.SecurityContextType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, securityContextTypeName, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Authorization.Generated.DTO.SecurityContextTypeRichDTO GetRichSecurityContextTypeInternal(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextType domainObject = bll.GetById(securityContextTypeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO));
+            Framework.Authorization.Domain.SecurityContextType domainObject = bll.GetById(securityContextTypeIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -828,14 +828,14 @@ namespace Framework.Authorization.WebApi
         protected virtual Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO GetSimpleSecurityContextTypeByNameInternal(string securityContextTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, securityContextTypeName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            Framework.Authorization.Domain.SecurityContextType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, securityContextTypeName, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO GetSimpleSecurityContextTypeInternal(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextType domainObject = bll.GetById(securityContextTypeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            Framework.Authorization.Domain.SecurityContextType domainObject = bll.GetById(securityContextTypeIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -860,13 +860,13 @@ namespace Framework.Authorization.WebApi
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO> GetSimpleSecurityContextTypesByIdentsInternal(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO[] securityContextTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(securityContextTypeIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(securityContextTypeIdents, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO> GetSimpleSecurityContextTypesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -890,14 +890,14 @@ namespace Framework.Authorization.WebApi
         protected virtual Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO GetVisualSecurityContextTypeByNameInternal(string securityContextTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, securityContextTypeName, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO));
+            Framework.Authorization.Domain.SecurityContextType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, securityContextTypeName, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO GetVisualSecurityContextTypeInternal(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Authorization.Domain.SecurityContextType domainObject = bll.GetById(securityContextTypeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO));
+            Framework.Authorization.Domain.SecurityContextType domainObject = bll.GetById(securityContextTypeIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -922,13 +922,13 @@ namespace Framework.Authorization.WebApi
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO> GetVisualSecurityContextTypesByIdentsInternal(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO[] securityContextTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(securityContextTypeIdents, evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(securityContextTypeIdents, new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.SecurityContextTypeVisualDTO> GetVisualSecurityContextTypesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.ISecurityContextTypeBLL bll = evaluateData.Context.Logics.SecurityContextTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+            return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<Framework.Authorization.Domain.SecurityContextType>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
     }
 }

@@ -56,7 +56,7 @@ public class GetTreeByOperationMethodGenerator<TConfiguration> : ViewMethodGener
                     Statements = { param.ToVariableReferenceExpression().Pipe(source => this.ConvertToDTO(source, evaluateDataExpr.GetMappingService())) }
             });
 
-        var treeDecl = new CodeVariableDeclarationStatement("var", "tree", bllRefExpr.ToMethodReferenceExpression("GetTree").ToMethodInvokeExpression(this.GetFetchsExpression(evaluateDataExpr)));
+        var treeDecl = new CodeVariableDeclarationStatement("var", "tree", bllRefExpr.ToMethodReferenceExpression("GetTree").ToMethodInvokeExpression(this.GetFetchRule()));
 
         yield return treeDecl;
 

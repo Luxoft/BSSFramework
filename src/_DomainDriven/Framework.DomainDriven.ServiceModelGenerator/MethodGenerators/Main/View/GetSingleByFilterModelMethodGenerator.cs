@@ -46,7 +46,7 @@ public class GetSingleByFilterModelMethodGenerator<TConfiguration> : ViewMethodG
 
         yield return typedFilterDeсl;
 
-        yield return bllRefExpr.ToMethodInvokeExpression("GetObjectBy", typedFilterDeсl.ToVariableReferenceExpression(), this.GetFetchsExpression(evaluateDataExpr))
+        yield return bllRefExpr.ToMethodInvokeExpression("GetObjectBy", typedFilterDeсl.ToVariableReferenceExpression(), this.GetFetchRule())
                                .Pipe(source => this.ConvertToDTO(source, evaluateDataExpr.GetMappingService()))
                                .ToMethodReturnStatement();
 

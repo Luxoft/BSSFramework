@@ -71,7 +71,7 @@ internal static class CodeDomHelper
         return new CodeParameterDeclarationExpression(fileFactory.Configuration.DTOMappingServiceInterfaceTypeReference, "mappingService");
     }
 
-    public static CodeParameterDeclarationExpression GetDomainTypeTargetParameter(this IFileFactory fileFactory, Type domainType = null)
+    public static CodeParameterDeclarationExpression GetDomainTypeTargetParameter(this IFileFactory fileFactory, Type? domainType = null)
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 

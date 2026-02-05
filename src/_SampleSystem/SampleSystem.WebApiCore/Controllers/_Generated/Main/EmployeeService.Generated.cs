@@ -57,7 +57,7 @@
         protected virtual SampleSystem.Generated.DTO.EmployeeFullDTO GetFullEmployeeInternal(SampleSystem.Generated.DTO.EmployeeIdentityDTO employeeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.EmployeeFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.Employee domainObject = bll.GetById(employeeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.Employee domainObject = bll.GetById(employeeIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -83,7 +83,7 @@
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.EmployeeFactory.Create(SecuritySystem.SecurityRule.View.ToDomain<SampleSystem.Domain.Employee>());
             SampleSystem.Domain.Models.Filters.EmployeeFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -98,7 +98,7 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeFullDTO> GetFullEmployeesByIdentsInternal(SampleSystem.Generated.DTO.EmployeeIdentityDTO[] employeeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.EmployeeFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(employeeIdents, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(employeeIdents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -114,13 +114,13 @@
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.EmployeeFactory.Create(SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.EmployeeRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeFullDTO> GetFullEmployeesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.EmployeeFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -151,7 +151,7 @@
         protected virtual SampleSystem.Generated.DTO.EmployeeSimpleDTO GetSimpleEmployeeInternal(SampleSystem.Generated.DTO.EmployeeIdentityDTO employeeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.EmployeeFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.Employee domainObject = bll.GetById(employeeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.Employee domainObject = bll.GetById(employeeIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -177,7 +177,7 @@
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.EmployeeFactory.Create(SecuritySystem.SecurityRule.View.ToDomain<SampleSystem.Domain.Employee>());
             SampleSystem.Domain.Models.Filters.EmployeeFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -192,7 +192,7 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeSimpleDTO> GetSimpleEmployeesByIdentsInternal(SampleSystem.Generated.DTO.EmployeeIdentityDTO[] employeeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.EmployeeFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(employeeIdents, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(employeeIdents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -208,13 +208,13 @@
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.EmployeeFactory.Create(SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.EmployeeRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeSimpleDTO> GetSimpleEmployeesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.EmployeeFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Employee>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -290,7 +290,7 @@
         protected virtual SampleSystem.Generated.DTO.TestManualEmployeeProjectionDTO GetTestManualEmployeeProjectionInternal(SampleSystem.Generated.DTO.EmployeeIdentityDTO testManualEmployeeProjectionIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestManualEmployeeProjectionBLL bll = evaluateData.Context.Logics.TestManualEmployeeProjectionFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection domainObject = bll.GetById(testManualEmployeeProjectionIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>(Framework.Transfering.ViewDTOType.ProjectionDTO));
+            SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection domainObject = bll.GetById(testManualEmployeeProjectionIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>(Framework.Transfering.ViewDTOType.ProjectionDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -316,13 +316,13 @@
         {
             SampleSystem.BLL.ITestEmployeeBLL bll = evaluateData.Context.Logics.TestEmployeeFactory.Create(SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(bll.GetObjectBy(typedFilter, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestEmployee>(Framework.Transfering.ViewDTOType.ProjectionDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(bll.GetObjectBy(typedFilter, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Projections.TestEmployee>(Framework.Transfering.ViewDTOType.ProjectionDTO)), evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.TestEmployeeProjectionDTO GetTestEmployeeInternal(SampleSystem.Generated.DTO.EmployeeIdentityDTO testEmployeeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestEmployeeBLL bll = evaluateData.Context.Logics.TestEmployeeFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.Projections.TestEmployee domainObject = bll.GetById(testEmployeeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestEmployee>(Framework.Transfering.ViewDTOType.ProjectionDTO));
+            SampleSystem.Domain.Projections.TestEmployee domainObject = bll.GetById(testEmployeeIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Projections.TestEmployee>(Framework.Transfering.ViewDTOType.ProjectionDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -339,7 +339,7 @@
         {
             SampleSystem.BLL.ITestEmployeeBLL bll = evaluateData.Context.Logics.TestEmployeeFactory.Create(SecuritySystem.SecurityRule.View.ToDomain<SampleSystem.Domain.Employee>());
             SampleSystem.Domain.Models.Filters.EmployeeFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestEmployee>(Framework.Transfering.ViewDTOType.ProjectionDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(bll.GetListBy(typedFilter, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Projections.TestEmployee>(Framework.Transfering.ViewDTOType.ProjectionDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -355,7 +355,7 @@
         {
             SampleSystem.BLL.ITestEmployeeBLL bll = evaluateData.Context.Logics.TestEmployeeFactory.Create(SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.TestEmployeeFilter typedFilter = filter.ToDomainObject(evaluateData.MappingService);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestEmployee>(Framework.Transfering.ViewDTOType.ProjectionDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(bll.GetListBy(typedFilter, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Projections.TestEmployee>(Framework.Transfering.ViewDTOType.ProjectionDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -370,7 +370,7 @@
         protected virtual SampleSystem.Generated.DTO.TestLegacyEmployeeProjectionDTO GetTestLegacyEmployeeInternal(SampleSystem.Generated.DTO.EmployeeIdentityDTO testLegacyEmployeeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestLegacyEmployeeBLL bll = evaluateData.Context.Logics.TestLegacyEmployeeFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.Projections.TestLegacyEmployee domainObject = bll.GetById(testLegacyEmployeeIdentity.Id, true, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestLegacyEmployee>(Framework.Transfering.ViewDTOType.ProjectionDTO));
+            SampleSystem.Domain.Projections.TestLegacyEmployee domainObject = bll.GetById(testLegacyEmployeeIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Projections.TestLegacyEmployee>(Framework.Transfering.ViewDTOType.ProjectionDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -387,7 +387,7 @@
         {
             SampleSystem.BLL.ITestLegacyEmployeeBLL bll = evaluateData.Context.Logics.TestLegacyEmployeeFactory.Create(SecuritySystem.SecurityRule.View.ToDomain<SampleSystem.Domain.Employee>());
             SampleSystem.Domain.Models.Filters.EmployeeFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(bll.GetListBy(typedFilter, evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestLegacyEmployee>(Framework.Transfering.ViewDTOType.ProjectionDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(bll.GetListBy(typedFilter, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Projections.TestLegacyEmployee>(Framework.Transfering.ViewDTOType.ProjectionDTO)), evaluateData.MappingService);
         }
     }
 }

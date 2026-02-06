@@ -30,7 +30,7 @@ public class TargetSystemInitializer(
 
         var isBase = targetSystemInfo.Id == PersistentHelper.BaseTargetSystemId;
 
-        var targetSystem = bll.GetById(targetSystemInfo.Id, false, MainDTOType.RichDTO.ToFetchRule<TargetSystem>())
+        var targetSystem = bll.GetById(targetSystemInfo.Id, false, new DTOFetchRule<TargetSystem>(MainDTOType.RichDTO))
                            ?? new TargetSystem(isBase, targetSystemInfo.IsMain, targetSystemInfo.IsRevision)
                               {
                                   Name = targetSystemInfo.Name, SubscriptionEnabled = !isBase, Id = targetSystemInfo.Id

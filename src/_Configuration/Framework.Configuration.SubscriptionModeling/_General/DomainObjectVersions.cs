@@ -12,7 +12,7 @@ public sealed class DomainObjectVersions<T> : IDomainObjectVersions
     /// </summary>
     /// <param name="previous">Предыдущая версия доменного объекта.</param>
     /// <param name="current">Текущая версия доменного объекта.</param>
-    public DomainObjectVersions(T previous, T current)
+    public DomainObjectVersions(T? previous, T? current)
     {
         if (previous == null && current == null)
         {
@@ -30,7 +30,7 @@ public sealed class DomainObjectVersions<T> : IDomainObjectVersions
     /// <value>
     /// Текущая версия доменного объекта.
     /// </value>
-    public T Current { get; }
+    public T? Current { get; }
 
     /// <summary>
     /// Возвращает предыдущую версию доменного объекта.
@@ -38,7 +38,7 @@ public sealed class DomainObjectVersions<T> : IDomainObjectVersions
     /// <value>
     /// Предыдущая версия доменного объекта.
     /// </value>
-    public T Previous { get; }
+    public T? Previous { get; }
 
     /// <summary>
     /// Реальный тип версий доменного объекта, сохранённый в этом экземпляре.
@@ -77,9 +77,9 @@ public sealed class DomainObjectVersions<T> : IDomainObjectVersions
         }
     }
 
-    object IDomainObjectVersions.Previous => this.Previous;
+    object? IDomainObjectVersions.Previous => this.Previous;
 
-    object IDomainObjectVersions.Current => this.Current;
+    object? IDomainObjectVersions.Current => this.Current;
 
     /// <inheritdoc/>
     public override string ToString()
@@ -88,7 +88,7 @@ public sealed class DomainObjectVersions<T> : IDomainObjectVersions
     }
 
     /// <inheritdoc/>
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj))
         {

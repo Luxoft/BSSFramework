@@ -5,7 +5,7 @@
 /// </summary>
 public interface IDomainObjectVersions
 {
-    object Previous { get; }
+    object? Previous { get; }
 
-    object Current { get; }
+    object? Current { get; }
 }

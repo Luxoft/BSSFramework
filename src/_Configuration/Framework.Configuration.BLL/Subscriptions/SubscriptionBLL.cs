@@ -1,22 +1,16 @@
 ﻿using CommonFramework;
 
 using Framework.Configuration.Domain;
-using Framework.DomainDriven.BLL;
 
 namespace Framework.Configuration.BLL;
 
-public partial class SubscriptionBLL : BLLContextContainer<IConfigurationBLLContext>
+public partial class SubscriptionBLL(IConfigurationBLLContext context) : ISubscriptionBLL
 {
-    public SubscriptionBLL(IConfigurationBLLContext context)
-            : base(context)
-    {
-    }
-
     public bool HasActiveSubscriptions(Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
-        return this.Context.GetDomainType(type, false).Maybe(domainType => this.HasActiveSubscriptions(domainType));
+        return context.GetDomainType(type, false).Maybe(domainType => this.HasActiveSubscriptions(domainType));
     }
 
     public bool HasActiveSubscriptions(DomainType domainType)

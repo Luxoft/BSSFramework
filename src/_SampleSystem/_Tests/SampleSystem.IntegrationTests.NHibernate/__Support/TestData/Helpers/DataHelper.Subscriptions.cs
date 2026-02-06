@@ -38,7 +38,7 @@ public partial class DataHelper
     {
         return this.EvaluateRead(context =>
                                  {
-                                     var bll = new SubscriptionBLL(context.Configuration);
+                                     var bll = context.Configuration.Logics.Subscription;
 
                                      var result = bll.GetRecipientsUntyped(
                                                                            domainObjectType,
@@ -57,7 +57,7 @@ public partial class DataHelper
     {
         return this.EvaluateWrite(context =>
                                   {
-                                      var bll = new SubscriptionBLL(context.Configuration);
+                                      var bll = context.Configuration.Logics.Subscription;
 
                                       var result = bll.ProcessChangedObjectUntyped(
                                                                                    prev,
@@ -72,7 +72,7 @@ public partial class DataHelper
     {
         return this.EvaluateWrite(context =>
                                   {
-                                      var bll = new SubscriptionBLL(context.Configuration);
+                                      var bll = context.Configuration.Logics.Subscription;
                                       var result = bll.Process(changedObjectInfo);
                                       return result;
                                   });

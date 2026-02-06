@@ -50,8 +50,8 @@ public class SubscriptionSystemService<TBLLContext> : ISubscriptionSystemService
     /// </exception>
     public SubscriptionRecipientInfo GetRecipientsUntyped(
             Type type,
-            object prev,
-            object next,
+            object? prev,
+            object? next,
             string subscriptionCode)
     {
         if (type == null)
@@ -112,8 +112,8 @@ public class SubscriptionSystemService<TBLLContext> : ISubscriptionSystemService
     }
 
     private SubscriptionRecipientInfo GetRecipientsTyped<TDomainObject>(
-            TDomainObject prev,
-            TDomainObject next,
+            TDomainObject? prev,
+            TDomainObject? next,
             string subscriptionCode)
             where TDomainObject : class
     {

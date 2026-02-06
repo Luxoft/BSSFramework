@@ -106,6 +106,8 @@ public static class ServiceCollectionExtensions
         {
             return services
                    .RegisterBLLSystem<IConfigurationBLLContext, ConfigurationBLLContext>()
+                   .AddScoped<ISubscriptionBLL, SubscriptionBLL>()
+
                    .AddScopedFrom<ICurrentRevisionService, IDBSession>()
                    .AddScoped<IMessageSender<Notification.MessageTemplateNotification>, TemplateMessageSender>()
                    .AddScoped<IMessageSender<Notification.DTO.NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>();

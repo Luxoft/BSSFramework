@@ -16,14 +16,14 @@ public partial class SubscriptionBLL
 
         try
         {
-            var domainType = this.Context.Logics.DomainType.GetByDomainType(changedObjectInfo.TypeInfo);
+            var domainType = context.Logics.DomainType.GetByDomainType(changedObjectInfo.TypeInfo);
 
             if (!domainType.TargetSystem.IsRevision)
             {
                 throw new InvalidOperationException($"{nameof(SubscriptionBLL)}::{nameof(this.Process)}: For {nameof(DomainType)} \'{domainType.Name}\' in {nameof(TargetSystem)} \'{domainType.TargetSystem.Name}\' {nameof(TargetSystem.IsRevision)} false but must be true.");
             }
 
-            var subscriptionService = this.Context.GetTargetSystemService(domainType.TargetSystem).SubscriptionService;
+            var subscriptionService = context.GetTargetSystemService(domainType.TargetSystem).SubscriptionService;
 
             return subscriptionService.Process(changedObjectInfo);
         }
@@ -39,7 +39,7 @@ public partial class SubscriptionBLL
 
         try
         {
-            var subscriptionService = this.Context.GetSubscriptionSystemService(type);
+            var subscriptionService = context.GetSubscriptionSystemService(type);
 
             return subscriptionService.ProcessChangedObjectUntyped(previous, current, type);
         }
@@ -53,7 +53,7 @@ public partial class SubscriptionBLL
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
-        var subscriptionService = this.Context.GetSubscriptionSystemService(type);
+        var subscriptionService = context.GetSubscriptionSystemService(type);
 
         return subscriptionService.GetRecipientsUntyped(type, previous, current, subscriptionCode);
     }

@@ -26,21 +26,23 @@ public partial class DomainObjectModificationBLL
         {
             var info = new ObjectModificationInfo<Guid>
                        {
-                               Identity = modification.DomainObjectId,
-                               ModificationType = modification.Type,
-                               Revision = modification.Revision,
-                               TypeInfo = new TypeInfoDescription(modification.DomainType)
+                           Identity = modification.DomainObjectId,
+                           ModificationType = modification.Type,
+                           Revision = modification.Revision,
+                           TypeInfo = new TypeInfoDescription(modification.DomainType)
                        };
 
             logger.LogDebug("Process modification {DomainObjectId}", modification.DomainObjectId);
 
-            foreach (var tryResult in new SubscriptionBLL(this.Context).Process(info))
+            foreach (var tryResult in this.Context.Logics.Subscription.Process(info))
             {
-                tryResult.Match(_ => { }, ex =>
-                                          {
-                                              logger.LogError("Process modification {DomainObjectId} has {Error}", modification.DomainObjectId, ex.Message);
-                                              errors.Add(ex);
-                                          });
+                tryResult.Match(
+                    _ => { },
+                    ex =>
+                    {
+                        logger.LogError("Process modification {DomainObjectId} has {Error}", modification.DomainObjectId, ex.Message);
+                        errors.Add(ex);
+                    });
             }
 
             modification.Processed = true;

@@ -352,19 +352,6 @@ public static class CoreEnumerableExtensions
         return -1;
     }
 
-    public static IEnumerable<TState> Scan<TSource, TState>(this IEnumerable<TSource> source, TState state, Func<TState, TSource, TState> selector)
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-        yield return state;
-
-        foreach (var item in source)
-        {
-            yield return state = selector(state, item);
-        }
-    }
-
     public static IEnumerable<IEnumerable<T>> While<T>(this IEnumerable<T> source, Func<T, bool> splitFunc, Func<T, T> processElement)
     {
         var result = new List<T>();

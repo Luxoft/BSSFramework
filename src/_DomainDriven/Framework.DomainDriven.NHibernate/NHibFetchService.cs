@@ -5,48 +5,18 @@ using CommonFramework;
 
 using GenericQueryable.Fetching;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using NHibernate.Linq;
 
 namespace Framework.DomainDriven.NHibernate;
 
-public class NHibFetchService(IEnumerable<IFetchRuleExpander> expanders) : IFetchService
+public class NHibFetchService([FromKeyedServices(RootFetchRuleExpander.Key)]IFetchRuleExpander fetchRuleExpander) : FetchService(fetchRuleExpander)
 {
-    public IQueryable<TSource> ApplyFetch<TSource>(IQueryable<TSource> source, FetchRule<TSource> fetchRule)
-        where TSource: class
-    {
-        var expandedFetchRule = expanders.Aggregate(fetchRule, (state, expander) => expander.TryExpand(state) ?? state);
+    protected override IEnumerable<MethodInfo> GetFetchMethods<TSource>(LambdaExpressionPath fetchPath) =>
+        fetchPath.Properties.Select((prop, index) => GetFetchMethod<TSource>(prop, index == 0));
 
-        return expandedFetchRule switch
-        {
-            PropertyFetchRule<TSource> propertyFetchRule => this.ApplyFetch(source, propertyFetchRule),
-
-            _ => throw new ArgumentOutOfRangeException(nameof(fetchRule))
-        };
-    }
-
-    protected IQueryable<TSource> ApplyFetch<TSource>(IQueryable<TSource> source, PropertyFetchRule<TSource> fetchRule)
-        where TSource : class
-    {
-        return fetchRule.Paths.Aggregate(source, this.ApplyFetch);
-    }
-
-    private IQueryable<TSource> ApplyFetch<TSource>(IQueryable<TSource> source, FetchPath fetchPath)
-        where TSource : class
-    {
-        return fetchPath
-               .Properties
-               .Select((prop, index) => new { Prop = prop, IsFirst = index == 0 })
-               .Aggregate(source, (q, pair) => this.ApplyFetch(q, pair.Prop, pair.IsFirst));
-    }
-
-    private IQueryable<TSource> ApplyFetch<TSource>(IQueryable<TSource> source, LambdaExpression prop, bool isFirst)
-        where TSource : class
-    {
-        return this.GetFetchMethod<TSource>(prop, isFirst).Invoke<IQueryable<TSource>>(this, source, prop);
-    }
-
-
-    private MethodInfo GetFetchMethod<TSource>(LambdaExpression prop, bool isFirst)
+    private static MethodInfo GetFetchMethod<TSource>(LambdaExpression prop, bool isFirst)
         where TSource : class
     {
         var prevPropertyType = prop.Parameters.Single().Type;
@@ -59,12 +29,12 @@ public class NHibFetchService(IEnumerable<IFetchRuleExpander> expanders) : IFetc
         {
             if (nextElementType != null)
             {
-                return new Func<IQueryable<TSource>, Expression<Func<TSource, IEnumerable<Ignore>>>, INhFetchRequest<TSource, Ignore>>(this.ApplyFetch)
+                return new Func<IQueryable<TSource>, Expression<Func<TSource, IEnumerable<Ignore>>>, INhFetchRequest<TSource, Ignore>>(EagerFetchingExtensionMethods.FetchMany)
                     .CreateGenericMethod(typeof(TSource), nextElementType);
             }
             else
             {
-                return new Func<IQueryable<TSource>, Expression<Func<TSource, Ignore>>, INhFetchRequest<TSource, Ignore>>(this.ApplyFetch)
+                return new Func<IQueryable<TSource>, Expression<Func<TSource, Ignore>>, INhFetchRequest<TSource, Ignore>>(EagerFetchingExtensionMethods.Fetch)
                     .CreateGenericMethod(typeof(TSource), nextPropertyType);
             }
         }
@@ -73,42 +43,15 @@ public class NHibFetchService(IEnumerable<IFetchRuleExpander> expanders) : IFetc
             if (nextElementType != null)
             {
                 return new Func<INhFetchRequest<TSource, Ignore>, Expression<Func<Ignore, IEnumerable<Ignore>>>, INhFetchRequest<TSource, Ignore>>(
-                        this.ApplyFetchThen)
+                        EagerFetchingExtensionMethods.ThenFetchMany)
                     .CreateGenericMethod(typeof(TSource), prevPropertyType, nextElementType);
             }
             else
             {
                 return new Func<INhFetchRequest<TSource, Ignore>, Expression<Func<Ignore, Ignore>>, INhFetchRequest<TSource, Ignore>>(
-                        this.ApplyFetchThen)
+                        EagerFetchingExtensionMethods.ThenFetch)
                     .CreateGenericMethod(typeof(TSource), prevPropertyType, nextPropertyType);
             }
         }
-    }
-
-    private INhFetchRequest<TSource, TProperty> ApplyFetch<TSource, TProperty>(IQueryable<TSource> source, Expression<Func<TSource, TProperty>> prop)
-        where TSource : class
-    {
-        return source.Fetch(prop);
-    }
-    private INhFetchRequest<TSource, TProperty> ApplyFetch<TSource, TProperty>(IQueryable<TSource> source, Expression<Func<TSource, IEnumerable<TProperty>>> prop)
-        where TSource : class
-    {
-        return source.FetchMany(prop);
-    }
-
-    private INhFetchRequest<TSource, TNextProperty> ApplyFetchThen<TSource, TPrevProperty, TNextProperty>(
-        INhFetchRequest<TSource, TPrevProperty> source,
-        Expression<Func<TPrevProperty, TNextProperty>> prop)
-        where TSource : class
-    {
-        return source.ThenFetch(prop);
-    }
-
-    private INhFetchRequest<TSource, TNextProperty> ApplyFetchThen<TSource, TPrevProperty, TNextProperty>(
-        INhFetchRequest<TSource, TPrevProperty> source,
-        Expression<Func<TPrevProperty, IEnumerable<TNextProperty>>> prop)
-        where TSource : class
-    {
-        return source.ThenFetchMany(prop);
     }
 }

@@ -10,26 +10,20 @@ namespace Framework.Core;
 public class PropertyPath : ReadOnlyCollection<PropertyInfo>, IEquatable<PropertyPath>
 {
     public PropertyPath(IEnumerable<PropertyInfo> list)
-            : this(list.ToList())
+        : this(list.ToList())
     {
     }
 
     public PropertyPath(IList<PropertyInfo> list)
-            : base(list)
+        : base(list)
     {
         //TODO: add path validate
     }
 
 
-    private string DebuggerDisplay
-    {
-        get { return this.ToString(); }
-    }
+    private string DebuggerDisplay { get { return this.ToString(); } }
 
-    public bool IsEmpty
-    {
-        get { return !this.Any(); }
-    }
+    public bool IsEmpty { get { return !this.Any(); } }
 
     public PropertyInfo Head
     {
@@ -109,7 +103,7 @@ public class PropertyPath : ReadOnlyCollection<PropertyInfo>, IEquatable<Propert
         return !(path1 == path2);
     }
 
-    public static PropertyPath Empty { get; } = new([]);
+    public new static PropertyPath Empty { get; } = new([]);
 
     public static PropertyPath Create(Type sourceType, string[] properties)
     {
@@ -119,8 +113,8 @@ public class PropertyPath : ReadOnlyCollection<PropertyInfo>, IEquatable<Propert
             {
                 var currentType = prevProperty == null ? sourceType : prevProperty.PropertyType.GetCollectionElementTypeOrSelf();
 
-                return currentType.GetProperty(propertyName, true);
-            }).Skip(1);
+                return currentType.GetRequiredProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+            }).Skip(1).Select(v => v!);
 
         return new PropertyPath(typedProperties);
     }

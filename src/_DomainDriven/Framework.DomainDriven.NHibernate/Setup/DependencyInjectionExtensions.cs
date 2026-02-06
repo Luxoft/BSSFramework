@@ -30,8 +30,7 @@ public static class DependencyInjectionExtensions
 
         services.AddGenericQueryable(v => v
                                           .SetFetchService<NHibFetchService>()
-                                          .SetTargetMethodExtractor<NhibTargetMethodExtractor>()
-                                          .AddFetchRuleExpander<UntypedFetchExpander>());
+                                          .SetTargetMethodExtractor<NhibTargetMethodExtractor>());
 
         //For close db session by middleware
         services.AddScopedFromLazyObject<INHibSession, NHibSession>();

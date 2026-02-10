@@ -6,6 +6,7 @@ using Framework.Authorization.Environment.Security;
 using Framework.Authorization.Environment.Validation;
 using Framework.Authorization.Notification;
 using Framework.Core;
+using Framework.DomainDriven;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -49,7 +50,10 @@ public class AuthorizationSystemSettings : IAuthorizationSystemSettings
         var principalViewSecurityRule = securityAdministratorRule.Or(DomainSecurityRule.CurrentUser);
         var delegatedFromSecurityRule = new DomainSecurityRule.CurrentUserSecurityRule(nameof(Permission.DelegatedFrom));
 
-        settings.AddUserSource<Principal>(usb =>
+        settings.AddExtensions(sc => sc.AddScoped<IDalGenericInterceptor<Permission>, MasterDetailDalGenericInterceptor<Permission, Principal>>()
+                                       .AddScoped<IDalGenericInterceptor<PermissionRestriction>, MasterDetailDalGenericInterceptor<PermissionRestriction, Permission>>())
+
+                .AddUserSource<Principal>(usb =>
                 {
                     usb.SetMissedService<CreateVirtualMissedUserService<Principal>>();
 

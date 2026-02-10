@@ -11,6 +11,11 @@ public class DalGenericRepository(IServiceProvider serviceProvider) : IGenericRe
     {
         var dal = serviceProvider.GetRequiredService<IAsyncDal<TDomainObject, Guid>>();
 
+        if (serviceProvider.GetService<IDalGenericInterceptor<TDomainObject>>() is { } interceptor)
+        {
+            await interceptor.SaveAsync(data, cancellationToken);
+        }
+
         await dal.SaveAsync(data, cancellationToken);
     }
 
@@ -18,6 +23,11 @@ public class DalGenericRepository(IServiceProvider serviceProvider) : IGenericRe
         where TDomainObject : class
     {
         var dal = serviceProvider.GetRequiredService<IAsyncDal<TDomainObject, Guid>>();
+
+        if (serviceProvider.GetService<IDalGenericInterceptor<TDomainObject>>() is { } interceptor)
+        {
+            await interceptor.RemoveAsync(data, cancellationToken);
+        }
 
         await dal.RemoveAsync(data, cancellationToken);
     }

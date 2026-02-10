@@ -1,7 +1,9 @@
 ﻿using CommonFramework;
 
 using Framework.Configuration.BLL;
+using Framework.Configuration.Domain;
 using Framework.Core;
+using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
 using Framework.Notification.DTO;
 
@@ -68,6 +70,9 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProviderPool root
             bll.GetFullList().ForEach(bll.Remove);
         });
     }
+
+    protected int GetIntegrationEventCount() => this.EvaluateRead(ctx => ctx.ServiceProvider.GetRequiredService<IRepositoryFactory<DomainObjectEvent>>().Create().GetQueryable().Count());
+
 
     /// <summary>
     /// Получение интегационных евентов

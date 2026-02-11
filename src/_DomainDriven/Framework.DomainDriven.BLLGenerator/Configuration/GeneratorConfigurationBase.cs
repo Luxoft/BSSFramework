@@ -4,6 +4,7 @@ using System.Reflection;
 
 using CommonFramework;
 
+using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Restriction;
@@ -120,6 +121,8 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     }
 
     public virtual bool GenerateValidation { get; } = true;
+
+    public virtual Type OperationContextType { get; } = typeof(OperationContextBase);
 
     public virtual bool UseDbUniquenessEvaluation { get; } = false;
 

@@ -1,5 +1,4 @@
-﻿using Framework.Configuration.Domain;
-using Framework.Validation;
+﻿using Framework.Validation;
 
 namespace Framework.Configuration.BLL;
 
@@ -9,18 +8,18 @@ public partial class SecurityDomainBLLBase<TDomainObject>
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-        this.Validate(domainObject, ConfigurationOperationContext.Save);
+        this.Validate(domainObject, OperationContextBase.Save);
     }
 
 
-    private void Validate(TDomainObject domainObject, ConfigurationOperationContext context)
+    private void Validate(TDomainObject domainObject, OperationContextBase context)
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
         this.GetValidationResult(domainObject, context).TryThrow();
     }
 
-    protected virtual ValidationResult GetValidationResult(TDomainObject domainObject, ConfigurationOperationContext context)
+    protected virtual ValidationResult GetValidationResult(TDomainObject domainObject, OperationContextBase context)
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 

@@ -6,7 +6,7 @@ namespace Framework.Configuration.BLL;
 
 public partial class ConfigurationValidator
 {
-    protected override ValidationResult GetSystemConstantValidationResult(SystemConstant source, ConfigurationOperationContext operationContext, IValidationState ownerState)
+    protected override ValidationResult GetSystemConstantValidationResult(SystemConstant source, OperationContextBase operationContext, IValidationState ownerState)
     {
         var baseResult = base.GetSystemConstantValidationResult(source, operationContext, ownerState);
 

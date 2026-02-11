@@ -1,25 +1,26 @@
-﻿using System.Reflection;
+﻿using System.CodeDom;
+using System.Reflection;
+
+using Framework.CodeDom;
+
 using SampleSystem.Domain;
 
 namespace SampleSystem.CodeGenerate;
 
-public class BLLGeneratorConfiguration : Framework.DomainDriven.BLLGenerator.GeneratorConfigurationBase<
-        ServerGenerationEnvironment>
+public class BLLGeneratorConfiguration(ServerGenerationEnvironment environment) : Framework.DomainDriven.BLLGenerator.GeneratorConfigurationBase<
+    ServerGenerationEnvironment>(environment)
 {
-    public BLLGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
-    {
-    }
+    public override Type OperationContextType { get; } = typeof(SampleSystemOperationContext);
 
     /// <summary>
     /// Do not generate BLL Constructors
     /// </summary>
     public override bool GenerateBllConstructor(Type domainType) =>
-            domainType switch
-            {
-                    { } type when type == typeof(Country) => false,
-                    _ => base.GenerateBllConstructor(domainType)
-            };
+        domainType switch
+        {
+            { } type when type == typeof(Country) => false,
+            _ => base.GenerateBllConstructor(domainType)
+        };
 
     public override bool SquashPropertyValidators(PropertyInfo property)
     {

@@ -6,7 +6,6 @@
     <Project Path="_Authorization/Framework.Authorization.Domain/Framework.Authorization.Domain.csproj" />
     <Project Path="_Authorization/Framework.Authorization.Environment/Framework.Authorization.Environment.csproj" />
     <Project Path="_Authorization/Framework.Authorization.Events/Framework.Authorization.Events.csproj" />
-    <Project Path="_Authorization/Framework.Authorization.LegacyAttributes/Framework.Authorization.LegacyAttributes.csproj" />
     <Project Path="_Authorization/Framework.Authorization.Notification.Abstract/Framework.Authorization.Notification.Abstract.csproj" />
     <Project Path="_Authorization/Framework.Authorization.Notification/Framework.Authorization.Notification.csproj" />
     <Project Path="_Authorization/Framework.Authorization.WebApi/Framework.Authorization.WebApi.csproj" />
@@ -25,7 +24,6 @@
     <Project Path="_Configuration/Framework.Configuration.BLL/Framework.Configuration.BLL.csproj" />
     <Project Path="_Configuration/Framework.Configuration.Domain.Models/Framework.Configuration.Domain.Models.csproj" />
     <Project Path="_Configuration/Framework.Configuration.Domain/Framework.Configuration.Domain.csproj" />
-    <Project Path="_Configuration/Framework.Configuration.LegacyAttributes/Framework.Configuration.LegacyAttributes.csproj" />
     <Project Path="_Configuration/Framework.Configuration.SubscriptionModeling.Tests.Unit/Framework.Configuration.SubscriptionModeling.Tests.Unit.csproj" />
     <Project Path="_Configuration/Framework.Configuration.SubscriptionModeling/Framework.Configuration.SubscriptionModeling.csproj" />
     <Project Path="_Configuration/Framework.Configuration.WebApi/Framework.Configuration.WebApi.csproj" />

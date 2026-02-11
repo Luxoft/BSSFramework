@@ -22,7 +22,7 @@ public partial class PermissionBLL
         base.Save(permission);
     }
 
-    protected override void Validate(Permission permission, AuthorizationOperationContext operationContext)
+    protected override void Validate(Permission permission, OperationContextBase operationContext)
     {
         this.Context.PrincipalValidator.ValidateAsync(permission.Principal.ToPrincipalData(), CancellationToken.None).GetAwaiter().GetResult();
 

@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Exceptions;
+using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,7 +22,7 @@ public partial class PrincipalBLL
         base.Save(principal);
     }
 
-    protected override void Validate(Principal domainObject, AuthorizationOperationContext operationContext)
+    protected override void Validate(Principal domainObject, OperationContextBase operationContext)
     {
         this.Context.PrincipalValidator.ValidateAsync(domainObject.ToPrincipalData(), CancellationToken.None).GetAwaiter().GetResult();
 

@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.Authorization.Domain.Models\Framework.Authorization.Domain.Models.csproj" />
-    <ProjectReference Include="..\Framework.Authorization.LegacyAttributes\Framework.Authorization.LegacyAttributes.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Notification.Abstract\Framework.Authorization.Notification.Abstract.csproj" />
   </ItemGroup>
 

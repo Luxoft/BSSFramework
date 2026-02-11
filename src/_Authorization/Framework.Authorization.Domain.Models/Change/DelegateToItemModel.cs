@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven;
-using Framework.Persistent;
+﻿using Framework.Persistent;
 
 namespace Framework.Authorization.Domain;
 

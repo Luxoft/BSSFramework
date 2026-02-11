@@ -24,7 +24,7 @@ public class ValidatorBaseFileFactory<TConfiguration>(TConfiguration configurati
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
-        yield return typeof(BLLContextHandlerValidator<,>).ToTypeReference(this.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference, this.Configuration.Environment.OperationContextType.ToTypeReference());
+        yield return typeof(BLLContextHandlerValidator<,>).ToTypeReference(this.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference, this.Configuration.OperationContextType.ToTypeReference());
     }
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
@@ -57,7 +57,7 @@ public class ValidatorBaseFileFactory<TConfiguration>(TConfiguration configurati
         {
             var sourceParameter = domainType.ToTypeReference().ToParameterDeclarationExpression("source");
 
-            var operationContextParameter = this.Configuration.Environment.OperationContextType.ToTypeReference().ToParameterDeclarationExpression("operationContext");
+            var operationContextParameter = this.Configuration.OperationContextType.ToTypeReference().ToParameterDeclarationExpression("operationContext");
 
             var ownerStateParameter = typeof(IValidationState).ToTypeReference().ToParameterDeclarationExpression("ownerState");
 

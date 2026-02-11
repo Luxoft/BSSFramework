@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core.LegacyAttributes\Framework.DomainDriven.Core.LegacyAttributes.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Serialization\Framework.DomainDriven.Serialization.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Tracking.LegacyValidators\Framework.DomainDriven.Tracking.LegacyValidators.csproj" />
   </ItemGroup>

@@ -36,9 +36,9 @@ public partial interface IConfigurationBLLContext :
 
     ITypeResolver<DomainType> ComplexDomainTypeResolver { get; }
 
-    DomainType GetDomainType(Type type, bool throwOnNotFound);
+    DomainType? GetDomainType(Type type, bool throwOnNotFound);
 
-    DomainType GetDomainType(IDomainType type, bool throwOnNotFound = true);
+    DomainType? GetDomainType(IDomainType type, bool throwOnNotFound = true);
 
     ISubscriptionSystemService GetSubscriptionSystemService(Type domainType);
 

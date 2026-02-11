@@ -2,6 +2,7 @@
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
+using Framework.DomainDriven.Serialization;
 using Framework.Projection.Environment;
 using Framework.Transfering;
 
@@ -22,7 +23,7 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
     public readonly DALGeneratorConfiguration DAL;
 
     public ServerGenerationEnvironment()
-            : this(new DatabaseName("", "auth"))
+        : this(new DatabaseName("", "auth"))
     {
     }
 
@@ -68,28 +69,25 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
 
         new DomainTypeRootExtendedMetadataBuilder()
 
-            .Add<BusinessRole>(
-                tb =>
-                    tb.AddAttribute(new BLLViewRoleAttribute()))
+            .Add<BusinessRole>(tb =>
+                                   tb.AddAttribute(new BLLViewRoleAttribute()))
 
-            .Add<Principal>(
-                tb =>
-                    tb.AddAttribute(new BLLViewRoleAttribute())
-                      .AddAttribute(new BLLSaveRoleAttribute())
-                      .AddAttribute(new BLLRemoveRoleAttribute()))
+            .Add<Principal>(tb =>
+                                tb.AddAttribute(new BLLViewRoleAttribute())
+                                  .AddAttribute(new BLLSaveRoleAttribute())
+                                  .AddAttribute(new BLLRemoveRoleAttribute()))
 
-            .Add<Permission>(
-                tb =>
-                    tb.AddAttribute(new BLLViewRoleAttribute { MaxCollection = MainDTOType.RichDTO })
-                      .AddAttribute(new BLLRemoveRoleAttribute()))
+            .Add<Permission>(tb =>
+                                 tb.AddAttribute(new BLLViewRoleAttribute { MaxCollection = MainDTOType.RichDTO })
+                                   .AddAttribute(new BLLRemoveRoleAttribute()))
 
-            .Add<PermissionRestriction>(
-                tb =>
-                    tb.AddAttribute(new BLLRoleAttribute()))
+            .Add<PermissionRestriction>(tb =>
+                                            tb.AddAttribute(new BLLRoleAttribute()))
 
-            .Add<SecurityContextType>(
-                tb =>
-                    tb.AddAttribute(new BLLViewRoleAttribute()));
+            .Add<SecurityContextType>(tb =>
+                                          tb.AddAttribute(new BLLViewRoleAttribute()))
+            .Add<DelegateToItemModel>(tb => tb.AddProperty(v => v.Permission,
+                                                           pb => pb.AddAttribute(new AutoMappingAttribute(false))));
 
-    public static readonly ServerGenerationEnvironment Default = new ServerGenerationEnvironment();
+    public static readonly ServerGenerationEnvironment Default = new();
 }

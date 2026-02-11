@@ -2,6 +2,7 @@
 using Framework.DomainDriven.NHibernate;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.Serialization;
 using Framework.Projection.Environment;
 
 namespace Framework.Configuration.TestGenerate;
@@ -26,7 +27,7 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
     public readonly ServerDTOGeneratorConfiguration ServerDTO;
 
     public ServerGenerationEnvironment()
-            :this(new DatabaseName("", "configuration"))
+        : this(new DatabaseName("", "configuration"))
     {
     }
 
@@ -64,56 +65,46 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
 
         new DomainTypeRootExtendedMetadataBuilder()
 
-            .Add<CodeFirstSubscription>(
-                tb =>
-                    tb.AddAttribute(new BLLViewRoleAttribute())
-                      .AddAttribute(new BLLSaveRoleAttribute { AllowCreate = false }))
+            .Add<CodeFirstSubscription>(tb =>
+                                            tb.AddAttribute(new BLLViewRoleAttribute())
+                                              .AddAttribute(new BLLSaveRoleAttribute { AllowCreate = false }))
 
-            .Add<DomainObjectEvent>(
-                tb =>
-                    tb.AddAttribute(new BLLRoleAttribute()))
+            .Add<DomainObjectEvent>(tb =>
+                                        tb.AddAttribute(new BLLRoleAttribute()))
 
-            .Add<DomainObjectModification>(
-                tb =>
-                    tb.AddAttribute(new BLLRoleAttribute()))
+            .Add<DomainObjectModification>(tb =>
+                                               tb.AddAttribute(new BLLRoleAttribute()))
 
-            .Add<ExceptionMessage>(
-                tb =>
-                    tb.AddAttribute(new BLLViewRoleAttribute())
-                      .AddAttribute(new BLLSaveRoleAttribute { CustomImplementation = true }))
+            .Add<ExceptionMessage>(tb =>
+                                       tb.AddAttribute(new BLLViewRoleAttribute())
+                                         .AddAttribute(new BLLSaveRoleAttribute { CustomImplementation = true }))
 
-            .Add<SentMessage>(
-                tb =>
-                    tb.AddAttribute(new BLLRoleAttribute()))
+            .Add<SentMessage>(tb =>
+                                  tb.AddAttribute(new BLLRoleAttribute()))
 
-            .Add<Sequence>(
-                tb =>
-                    tb.AddAttribute(new BLLViewRoleAttribute())
-                      .AddAttribute(new BLLSaveRoleAttribute())
-                      .AddAttribute(new BLLRemoveRoleAttribute()))
+            .Add<Sequence>(tb =>
+                               tb.AddAttribute(new BLLViewRoleAttribute())
+                                 .AddAttribute(new BLLSaveRoleAttribute())
+                                 .AddAttribute(new BLLRemoveRoleAttribute()))
 
-            .Add<SystemConstant>(
-                tb =>
-                    tb.AddAttribute(new BLLViewRoleAttribute())
-                      .AddAttribute(new BLLSaveRoleAttribute { AllowCreate = false }))
+            .Add<SystemConstant>(tb =>
+                                     tb.AddAttribute(new BLLViewRoleAttribute())
+                                       .AddAttribute(new BLLSaveRoleAttribute { AllowCreate = false }))
 
 
-            .Add<TargetSystem>(
-                tb =>
-                    tb.AddAttribute(new BLLViewRoleAttribute())
-                      .AddAttribute(new BLLSaveRoleAttribute { AllowCreate = false }))
+            .Add<TargetSystem>(tb =>
+                                   tb.AddAttribute(new BLLViewRoleAttribute())
+                                     .AddAttribute(new BLLSaveRoleAttribute { AllowCreate = false }))
 
-            .Add<DomainType>(
-                tb =>
-                    tb.AddAttribute(new BLLViewRoleAttribute()))
+            .Add<DomainType>(tb =>
+                                 tb.AddAttribute(new BLLViewRoleAttribute()))
 
-            .Add<DomainObjectNotification>(
-                tb =>
-                    tb.AddAttribute(new BLLRoleAttribute()))
+            .Add<DomainObjectNotification>(tb =>
+                                               tb.AddAttribute(new BLLRoleAttribute()))
 
-            .Add<ControlSettings>(
-                tb =>
-                    tb.AddAttribute(new BLLRoleAttribute()));
+            .Add<ControlSettings>(tb =>
+                                      tb.AddAttribute(new BLLRoleAttribute())
+                                        .AddProperty(v => v.Children, pb => pb.AddAttribute(new AutoMappingAttribute(false))));
 
-    public static readonly ServerGenerationEnvironment Default = new ServerGenerationEnvironment();
+    public static readonly ServerGenerationEnvironment Default = new ();
 }

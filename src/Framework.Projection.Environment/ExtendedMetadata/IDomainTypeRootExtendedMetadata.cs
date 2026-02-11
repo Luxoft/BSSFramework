@@ -20,4 +20,12 @@ public interface IDomainTypeRootExtendedMetadata
     bool HasAttribute<TAttribute>(Type type, Func<TAttribute, bool> predicate)
         where TAttribute : Attribute
         => this.GetType(type).GetCustomAttributes<TAttribute>().Any(predicate);
+
+    bool HasAttribute<TAttribute>(PropertyInfo property)
+        where TAttribute : Attribute
+        => this.GetProperty(property).HasAttribute<TAttribute>();
+
+    bool HasAttribute<TAttribute>(PropertyInfo property, Func<TAttribute, bool> predicate)
+        where TAttribute : Attribute
+        => this.GetProperty(property).GetCustomAttributes<TAttribute>().Any(predicate);
 }

@@ -31,7 +31,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration> : ServerPropertyA
             {
                 var methodName = "To" + type.Name;
 
-                if (property.HasAttribute<AutoMappingAttribute>(attr => !attr.Enabled))
+                if (this.Configuration.Environment.ExtendedMetadata.HasAttribute<AutoMappingAttribute>(property, attr => !attr.Enabled))
                 {
                     if (this.Configuration.IsPersistentObject(type))
                     {

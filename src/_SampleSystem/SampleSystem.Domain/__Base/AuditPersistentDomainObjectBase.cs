@@ -36,7 +36,6 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// <summary>
     ///     Логин сотрудника, создавшего доменный объект
     /// </summary>
-    [SystemProperty]
     public virtual DateTime? ModifyDate
     {
         get { return this.modifyDate; }
@@ -46,7 +45,6 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// <summary>
     ///     Дата изменения доменного объекта
     /// </summary>
-    [SystemProperty]
     public virtual string? ModifiedBy
     {
         get { return this.modifiedBy.TrimNull(); }

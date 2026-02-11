@@ -35,8 +35,6 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
 
     public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = [typeof(SampleSystemSecurityOperation), typeof(SecurityRule)];
 
-    public override Type OperationContextType { get; } = typeof(SampleSystemOperationContext);
-
     protected override IEnumerable<Assembly> GetDomainObjectAssemblies()
     {
         return base.GetDomainObjectAssemblies().Concat([typeof(Employee).Assembly]);

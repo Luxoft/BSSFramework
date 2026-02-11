@@ -12,6 +12,4 @@ public abstract class GenerationEnvironmentBase()
     public readonly string DTODataContractNamespace = "Auth";
 
     public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = new[] { typeof(SecurityRole) };
-
-    public override Type OperationContextType { get; } = typeof(AuthorizationOperationContext);
 }

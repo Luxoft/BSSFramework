@@ -10,8 +10,6 @@ public interface IGenerationEnvironment : IDomainMetadata, IServiceProviderConta
 
     IReadOnlyList<Type> SecurityRuleTypeList { get; }
 
-    Type OperationContextType { get; }
-
     IReadOnlyCollection<IProjectionEnvironment> ProjectionEnvironments { get; }
 
     IDomainTypeRootExtendedMetadata ExtendedMetadata { get; }

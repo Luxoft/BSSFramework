@@ -19,9 +19,9 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
         where TPersistentDomainObjectBase : TDomainObjectBase, IIdentityObject<TIdent>
         where TAuditPersistentDomainObjectBase : TPersistentDomainObjectBase, IAuditObject
 {
-    private readonly Assembly? _modelAssembly;
+    private readonly Assembly? modelAssembly;
 
-    private readonly Lazy<ReadOnlyCollection<Assembly>> _domainObjectAssemblies;
+    private readonly Lazy<ReadOnlyCollection<Assembly>> domainObjectAssemblies;
 
     private readonly Lazy<IServiceProvider> lazyServiceProvider;
 
@@ -37,9 +37,9 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
         this.PersistentDomainObjectBaseType = typeof(TPersistentDomainObjectBase);
         this.AuditPersistentDomainObjectBaseType = typeof(TAuditPersistentDomainObjectBase);
 
-        this._modelAssembly = modelAssembly;
+        this.modelAssembly = modelAssembly;
 
-        this._domainObjectAssemblies = LazyHelper.Create(() => this.GetDomainObjectAssemblies().Distinct().ToReadOnlyCollection());
+        this.domainObjectAssemblies = LazyHelper.Create(() => this.GetDomainObjectAssemblies().Distinct().ToReadOnlyCollection());
 
         this.ProjectionEnvironments = LazyInterfaceImplementHelper.CreateProxy(() => this.GetProjectionEnvironments().ToReadOnlyCollectionI());
 
@@ -62,8 +62,6 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
 
     public virtual IReadOnlyList<Type> SecurityRuleTypeList { get; } = new List<Type>();
 
-    public abstract Type OperationContextType { get; }
-
     public IReadOnlyCollection<IProjectionEnvironment> ProjectionEnvironments { get; }
 
     public virtual IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } = new DomainTypeRootExtendedMetadataBuilder();
@@ -73,7 +71,7 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
         return false;
     }
 
-    public ReadOnlyCollection<Assembly> DomainObjectAssemblies => this._domainObjectAssemblies.Value;
+    public ReadOnlyCollection<Assembly> DomainObjectAssemblies => this.domainObjectAssemblies.Value;
 
     protected virtual IServiceProvider BuildServiceProvider()
     {
@@ -84,9 +82,9 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
     {
         yield return this.PersistentDomainObjectBaseType.Assembly;
 
-        if (this._modelAssembly != null)
+        if (this.modelAssembly != null)
         {
-            yield return this._modelAssembly;
+            yield return this.modelAssembly;
         }
     }
 
@@ -105,7 +103,7 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
         }
     }
 
-    protected virtual IProjectionEnvironment GetProjectionEnvironment()
+    protected virtual IProjectionEnvironment? GetProjectionEnvironment()
     {
         return null;
     }
@@ -116,11 +114,11 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
     /// <returns></returns>
     protected IProjectionEnvironment CreateDefaultProjectionContractEnvironment()
     {
-        var baseName = this.PersistentDomainObjectBaseType.Assembly.GetName().Name;
+        var baseName = this.PersistentDomainObjectBaseType.Assembly.GetName().Name!;
 
         var assemblyName = $"{baseName}.Projections";
 
-        var fullAssemblyNamePostfix = this.PersistentDomainObjectBaseType.Assembly.FullName.Skip(baseName, true);
+        var fullAssemblyNamePostfix = this.PersistentDomainObjectBaseType.Assembly.FullName!.Skip(baseName, true);
 
         var fullAssemblyName = assemblyName + fullAssemblyNamePostfix;
 
@@ -158,7 +156,7 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
     /// </summary>
     /// <param name="projectionSource"></param>
     /// <returns></returns>
-    protected IProjectionEnvironment CreateDefaultProjectionLambdaEnvironment(IProjectionSource projectionSource, Action<CreateProjectionLambdaSetupParams> setupAction = null)
+    protected IProjectionEnvironment CreateDefaultProjectionLambdaEnvironment(IProjectionSource projectionSource, Action<CreateProjectionLambdaSetupParams>? setupAction = null)
     {
         if (projectionSource == null) { throw new ArgumentNullException(nameof(projectionSource)); }
 

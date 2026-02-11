@@ -1,4 +1,4 @@
-﻿using Framework.Authorization.Domain;
+﻿using Framework.Authorization.BLL._Validation;
 using Framework.Validation;
 
 namespace Framework.Authorization.BLL;

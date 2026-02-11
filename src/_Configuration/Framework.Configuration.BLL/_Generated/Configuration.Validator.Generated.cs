@@ -20,7 +20,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public abstract partial class ConfigurationValidatorBase : Framework.DomainDriven.BLL.BLLContextHandlerValidator<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.ConfigurationOperationContext>
+    public abstract partial class ConfigurationValidatorBase : Framework.DomainDriven.BLL.BLLContextHandlerValidator<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Validation.OperationContextBase>
     {
         
         public ConfigurationValidatorBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
@@ -51,117 +51,117 @@ namespace Framework.Configuration.BLL
             base.RegisterHandler<Framework.Configuration.Domain.TargetSystemRootFilterModel>(this.GetTargetSystemRootFilterModelValidationResult);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetCodeFirstSubscriptionRootFilterModelValidationResult(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetCodeFirstSubscriptionRootFilterModelValidationResult(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetCodeFirstSubscriptionValidationResult(Framework.Configuration.Domain.CodeFirstSubscription source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetCodeFirstSubscriptionValidationResult(Framework.Configuration.Domain.CodeFirstSubscription source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetControlSettingsParamValidationResult(Framework.Configuration.Domain.ControlSettingsParam source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetControlSettingsParamValidationResult(Framework.Configuration.Domain.ControlSettingsParam source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetControlSettingsParamValueValidationResult(Framework.Configuration.Domain.ControlSettingsParamValue source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetControlSettingsParamValueValidationResult(Framework.Configuration.Domain.ControlSettingsParamValue source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetControlSettingsValidationResult(Framework.Configuration.Domain.ControlSettings source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetControlSettingsValidationResult(Framework.Configuration.Domain.ControlSettings source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetDomainObjectEventValidationResult(Framework.Configuration.Domain.DomainObjectEvent source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetDomainObjectEventValidationResult(Framework.Configuration.Domain.DomainObjectEvent source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetDomainObjectModificationValidationResult(Framework.Configuration.Domain.DomainObjectModification source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetDomainObjectModificationValidationResult(Framework.Configuration.Domain.DomainObjectModification source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetDomainObjectNotificationValidationResult(Framework.Configuration.Domain.DomainObjectNotification source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetDomainObjectNotificationValidationResult(Framework.Configuration.Domain.DomainObjectNotification source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetDomainTypeEventModelValidationResult(Framework.Configuration.Domain.DomainTypeEventModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetDomainTypeEventModelValidationResult(Framework.Configuration.Domain.DomainTypeEventModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetDomainTypeEventOperationValidationResult(Framework.Configuration.Domain.DomainTypeEventOperation source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetDomainTypeEventOperationValidationResult(Framework.Configuration.Domain.DomainTypeEventOperation source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetDomainTypeRootFilterModelValidationResult(Framework.Configuration.Domain.DomainTypeRootFilterModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetDomainTypeRootFilterModelValidationResult(Framework.Configuration.Domain.DomainTypeRootFilterModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetDomainTypeValidationResult(Framework.Configuration.Domain.DomainType source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetDomainTypeValidationResult(Framework.Configuration.Domain.DomainType source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetExceptionMessageRootFilterModelValidationResult(Framework.Configuration.Domain.ExceptionMessageRootFilterModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetExceptionMessageRootFilterModelValidationResult(Framework.Configuration.Domain.ExceptionMessageRootFilterModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetExceptionMessageValidationResult(Framework.Configuration.Domain.ExceptionMessage source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetExceptionMessageValidationResult(Framework.Configuration.Domain.ExceptionMessage source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetQueueProcessingStateValidationResult(Framework.Configuration.Domain.QueueProcessingState source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetQueueProcessingStateValidationResult(Framework.Configuration.Domain.QueueProcessingState source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetSentMessageValidationResult(Framework.Configuration.Domain.SentMessage source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetSentMessageValidationResult(Framework.Configuration.Domain.SentMessage source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetSequenceCreateModelValidationResult(Framework.Configuration.Domain.SequenceCreateModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetSequenceCreateModelValidationResult(Framework.Configuration.Domain.SequenceCreateModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetSequenceRootFilterModelValidationResult(Framework.Configuration.Domain.SequenceRootFilterModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetSequenceRootFilterModelValidationResult(Framework.Configuration.Domain.SequenceRootFilterModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetSequenceValidationResult(Framework.Configuration.Domain.Sequence source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetSequenceValidationResult(Framework.Configuration.Domain.Sequence source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetSystemConstantRootFilterModelValidationResult(Framework.Configuration.Domain.SystemConstantRootFilterModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetSystemConstantRootFilterModelValidationResult(Framework.Configuration.Domain.SystemConstantRootFilterModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetSystemConstantValidationResult(Framework.Configuration.Domain.SystemConstant source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetSystemConstantValidationResult(Framework.Configuration.Domain.SystemConstant source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTargetSystemRootFilterModelValidationResult(Framework.Configuration.Domain.TargetSystemRootFilterModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTargetSystemRootFilterModelValidationResult(Framework.Configuration.Domain.TargetSystemRootFilterModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTargetSystemValidationResult(Framework.Configuration.Domain.TargetSystem source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTargetSystemValidationResult(Framework.Configuration.Domain.TargetSystem source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

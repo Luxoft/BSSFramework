@@ -10,7 +10,7 @@ namespace SampleSystem.CodeGenerate;
 public class BLLGeneratorConfiguration(ServerGenerationEnvironment environment) : Framework.DomainDriven.BLLGenerator.GeneratorConfigurationBase<
     ServerGenerationEnvironment>(environment)
 {
-    public override CodeTypeReference OperationContextTypeReference { get; } = typeof(SampleSystemOperationContext).ToTypeReference();
+    public override Type OperationContextType { get; } = typeof(SampleSystemOperationContext);
 
     /// <summary>
     /// Do not generate BLL Constructors

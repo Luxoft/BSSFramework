@@ -14,7 +14,7 @@ public interface IGeneratorConfigurationBase<out TEnvironment> : IGeneratorConfi
 
 public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTypeReferenceService<FileType>
 {
-    CodeTypeReference OperationContextTypeReference { get; }
+    Type OperationContextType { get; }
 
     bool UseDbUniquenessEvaluation { get; }
 

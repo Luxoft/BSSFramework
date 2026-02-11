@@ -122,7 +122,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public virtual bool GenerateValidation { get; } = true;
 
-    public virtual CodeTypeReference OperationContextTypeReference { get; } = typeof(OperationContextBase).ToTypeReference();
+    public virtual Type OperationContextType { get; } = typeof(OperationContextBase);
 
     public virtual bool UseDbUniquenessEvaluation { get; } = false;
 

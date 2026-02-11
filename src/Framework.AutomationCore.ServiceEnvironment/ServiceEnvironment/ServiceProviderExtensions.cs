@@ -6,6 +6,7 @@ using Automation.Settings;
 using CommonFramework;
 using CommonFramework.DependencyInjection;
 
+using Framework.DomainDriven.Auth;
 using Framework.DomainDriven.Jobs;
 using Framework.DomainDriven.WebApiNetCore;
 
@@ -80,6 +81,8 @@ public static class ServiceProviderExtensions
                            .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>()
 
                            .AddSingleton(typeof(ControllerEvaluator<>))
+
+                           .ReplaceSingleton<IDefaultUserAuthenticationService, TestingDefaultUserAuthenticationService>()
 
                            .AddSecuritySystemTesting(b => b.SetEvaluator(typeof(BssTestingEvaluator<>))
                                                            .SetTestRootUserInfo(sp => sp.GetRequiredService<IOptions<AutomationFrameworkSettings>>()

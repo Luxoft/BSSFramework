@@ -265,19 +265,27 @@ public class AuditTests : TestBase
     public void CrateNewBu_AuditBuLoadedFromCustomMapping()
     {
         // Arrange
-        var newBu = this.DataHelper.SaveBusinessUnit();
-        var newBuRevInfo = this.GetControllerEvaluator<BusinessUnitController>()
-                           .Evaluate(c => c.GetBusinessUnitRevisions(newBu))
-                           .RevisionInfos
-                           .Single();
+        var testUser = nameof(this.CrateNewBu_AuditBuLoadedFromCustomMapping);
+        this.AuthManager.For(testUser).LoginAs();
 
         // Act
-        var auditBu = this.GetControllerEvaluator<BusinessUnitAuditController>()
-                                .Evaluate(c => c.LoadFromCustomAuditMapping(newBu, newBuRevInfo.RevisionNumber));
+        var newBu = this.DataHelper.SaveBusinessUnit();
 
         // Assert
+
+        var newBuRevInfo = this.GetControllerEvaluator<BusinessUnitController>(testUser)
+                               .Evaluate(c => c.GetBusinessUnitRevisions(newBu))
+                               .RevisionInfos
+                               .Single();
+
+        var auditBu = this.GetControllerEvaluator<BusinessUnitAuditController>(testUser)
+                          .Evaluate(c => c.LoadFromCustomAuditMapping(newBu, newBuRevInfo.RevisionNumber));
+
+
         auditBu.Revision.Should().Be(newBuRevInfo.RevisionNumber);
-        auditBu.Author.Should().Be(newBuRevInfo.Author);
+        auditBu.Author.Should().Be(testUser);
+        newBuRevInfo.Author.Should().Be(testUser);
+
         auditBu.BuIdent.Should().Be(newBu);
     }
 }

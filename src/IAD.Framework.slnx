@@ -43,7 +43,6 @@
     <Project Path="_DomainDriven/Framework.DomainDriven.ApplicationCore/Framework.DomainDriven.ApplicationCore.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.BLL.Security/Framework.DomainDriven.BLL.Security.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.BLL/Framework.DomainDriven.BLL.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.Core.LegacyAttributes/Framework.DomainDriven.Core.LegacyAttributes.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.Core.LegacyContext/Framework.DomainDriven.Core.LegacyContext.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.Core/Framework.DomainDriven.Core.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.DAL.Sql/Framework.DomainDriven.DAL.Sql.csproj" />

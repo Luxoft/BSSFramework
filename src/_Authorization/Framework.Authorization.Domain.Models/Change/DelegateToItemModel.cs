@@ -10,6 +10,5 @@ public class DelegateToItemModel : DomainObjectBase
 
     [Restriction.Required]
     [DetailRole(true)]
-    [AutoMapping(false)]
     public Permission Permission { get; set; }
 }

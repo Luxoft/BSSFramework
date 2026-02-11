@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.Attributes;
 using Framework.Persistent;
 
 namespace Framework.Authorization.Domain;
@@ -10,14 +9,12 @@ namespace Framework.Authorization.Domain;
 public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBase, IAuditObject
 {
     private string? createdBy;
+
     private DateTime? createDate;
 
     private DateTime? modifyDate;
-    private string? modifiedBy;
 
-    protected AuditPersistentDomainObjectBase()
-    {
-    }
+    private string? modifiedBy;
 
     /// <summary>
     /// Дата создания доменного объекта
@@ -31,7 +28,6 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// <summary>
     /// Дата изменения доменного объекта
     /// </summary>
-    [SystemProperty]
     public virtual DateTime? ModifyDate
     {
         get { return this.modifyDate; }
@@ -41,7 +37,6 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// <summary>
     /// Логин сотрудника, изменившего доменный объект
     /// </summary>
-    [SystemProperty]
     public virtual string? ModifiedBy
     {
         get { return this.modifiedBy.TrimNull(); }

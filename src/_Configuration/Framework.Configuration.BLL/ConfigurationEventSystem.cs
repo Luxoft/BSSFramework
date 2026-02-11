@@ -19,14 +19,14 @@ public class ConfigurationEventSystem(IConfigurationBLLContext context, IEnumera
                .Pipe(
                    dbDomainTypes =>
                        targetSystems.SelectMany(ts => ts.TypeResolverS.GetTypes())
-                                    .Where(t => dbDomainTypes.Contains(t.FullName)))
+                                    .Where(t => dbDomainTypes.Contains(t.FullName!)))
                .Pipe(domainTypes => TypeResolverHelper.Create(new TypeSource(domainTypes), TypeSearchMode.Both));
 
     public IDomainObjectEventMetadata DomainObjectEventMetadata { get; } = domainObjectEventMetadata;
 
     public async Task ForceEventAsync(EventModel eventModel, CancellationToken cancellationToken)
     {
-        var domainType = context.GetDomainType(eventModel.DomainType, true);
+        var domainType = context.GetDomainType(eventModel.DomainType, true)!;
 
         var operation = domainType.EventOperations.Single(op => op.Name == eventModel.EventOperation.Name);
 

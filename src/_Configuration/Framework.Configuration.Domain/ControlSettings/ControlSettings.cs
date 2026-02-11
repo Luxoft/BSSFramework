@@ -1,5 +1,5 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven;
+
 using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
@@ -49,7 +49,6 @@ public class ControlSettings : BaseDirectory,
         this.accountName = accountName.TrimNull();
     }
 
-    [AutoMapping(false)]
     public virtual IEnumerable<ControlSettings> Children
     {
         get { return this.children; }

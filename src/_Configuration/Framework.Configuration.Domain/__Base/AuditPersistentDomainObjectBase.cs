@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 
 using Framework.Core;
-using Framework.DomainDriven.Attributes;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
@@ -48,7 +47,6 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// <summary>
     /// Дата изменения доменного объекта
     /// </summary>
-    [SystemProperty]
     [NotAuditedProperty]
     public virtual DateTime? ModifyDate
     {
@@ -59,7 +57,6 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// <summary>
     /// Логин сотрудника, изменившего доменный объект
     /// </summary>
-    [SystemProperty]
     [NotAuditedProperty]
     public virtual string? ModifiedBy
     {

@@ -1,5 +1,4 @@
-﻿using Framework.Authorization.BLL._Validation;
-using Framework.Validation;
+﻿using Framework.Validation;
 
 namespace Framework.Authorization.BLL;
 
@@ -10,7 +9,7 @@ public partial class SecurityDomainBLLBase<TDomainObject>
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
         this.Recalculate(domainObject);
-        this.Validate(domainObject, AuthorizationOperationContext.Save);
+        this.Validate(domainObject, OperationContextBase.Save);
     }
 
     protected virtual void Recalculate(TDomainObject domainObject)
@@ -18,7 +17,7 @@ public partial class SecurityDomainBLLBase<TDomainObject>
 
     }
 
-    protected virtual void Validate(TDomainObject domainObject, AuthorizationOperationContext operationContext)
+    protected virtual void Validate(TDomainObject domainObject, OperationContextBase operationContext)
     {
         this.Context.Validator.Validate(domainObject, (int)operationContext);
     }

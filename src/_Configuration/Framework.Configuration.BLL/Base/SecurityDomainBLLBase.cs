@@ -1,5 +1,4 @@
-﻿using Framework.Configuration.Domain;
-using Framework.Validation;
+﻿using Framework.Validation;
 
 namespace Framework.Configuration.BLL;
 

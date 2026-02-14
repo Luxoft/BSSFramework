@@ -2,7 +2,7 @@
 
 public class AvailableDateTimeValidatorAttribute : ClassValidatorAttribute
 {
-    public override IClassValidator CreateValidator(IServiceProvider serviceProvider)
+    public override IClassValidator CreateValidator(Type type, IServiceProvider serviceProvider)
     {
         return AvailableDateTimeValidator.Value;
     }

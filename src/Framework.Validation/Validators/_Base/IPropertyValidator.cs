@@ -9,8 +9,3 @@ public interface IPropertyValidator<in TSource, in TProperty> : IPropertyValidat
 {
 
 }
-
-public interface IDynamicPropertyValidator : IPropertyValidator, IDynamicPropertyValidatorBase
-{
-
-}

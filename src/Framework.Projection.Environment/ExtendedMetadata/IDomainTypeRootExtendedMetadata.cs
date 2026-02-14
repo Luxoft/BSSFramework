@@ -13,6 +13,9 @@ public interface IDomainTypeRootExtendedMetadata
     TAttribute GetCustomAttribute<TAttribute>(Type type)
         where TAttribute : Attribute => this.GetType(type).GetCustomAttribute<TAttribute>();
 
+    IEnumerable<TAttribute> GetCustomAttributes<TAttribute>(Type type)
+        where TAttribute : Attribute => this.GetType(type).GetCustomAttributes<TAttribute>();
+
     bool HasAttribute<TAttribute>(Type type)
         where TAttribute : Attribute
         => this.GetType(type).HasAttribute<TAttribute>();

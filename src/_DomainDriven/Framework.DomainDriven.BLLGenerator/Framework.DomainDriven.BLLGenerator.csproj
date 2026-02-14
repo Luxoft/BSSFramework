@@ -7,5 +7,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Framework.DomainDriven.BLLCoreGenerator\Framework.DomainDriven.BLLCoreGenerator.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.Tracking.LegacyValidators\Framework.DomainDriven.Tracking.LegacyValidators.csproj" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,6 @@
-﻿namespace Framework.Validation;
+﻿using System.Reflection;
+
+namespace Framework.Validation;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class SignValidatorAttribute : PropertyValidatorAttribute
@@ -11,7 +13,7 @@ public class SignValidatorAttribute : PropertyValidatorAttribute
 
     public SignType ExpectedPropertyValueSignType { get; }
 
-    public override IPropertyValidator CreateValidator(IServiceProvider serviceProvider)
+    public override IPropertyValidator CreateValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
         return new SignValidator(this.ExpectedPropertyValueSignType);
     }

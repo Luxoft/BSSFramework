@@ -1,8 +1,6 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.Serialization;
-using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
-using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Authorization.Domain;
@@ -80,7 +78,6 @@ public class Permission : AuditPersistentDomainObjectBase,
     /// <summary>
     /// Коллекция пермиссий, которым данная пермиссия была делегирована
     /// </summary>
-    [Mapping(CascadeMode = CascadeMode.Enabled)]
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event)]
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual IEnumerable<Permission> DelegatedTo => this.delegatedTo;
@@ -110,7 +107,6 @@ public class Permission : AuditPersistentDomainObjectBase,
     /// Бизнес-роль, которую содержит пермиссия
     /// </summary>
     [Required]
-    [FixedPropertyValidator]
     public virtual BusinessRole Role { get => this.role; set => this.role = value; }
 
     /// <summary>

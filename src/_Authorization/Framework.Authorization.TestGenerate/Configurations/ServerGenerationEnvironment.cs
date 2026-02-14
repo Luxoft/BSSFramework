@@ -1,10 +1,15 @@
-﻿using Framework.Authorization.Domain;
+﻿using CommonFramework;
+
+using Framework.Authorization.Domain;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Serialization;
+using Framework.DomainDriven.Tracking.LegacyValidators;
+using Framework.Persistent.Mapping;
 using Framework.Projection.Environment;
 using Framework.Transfering;
+using Framework.Validation;
 
 namespace Framework.Authorization.TestGenerate;
 
@@ -69,25 +74,37 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
 
         new DomainTypeRootExtendedMetadataBuilder()
 
+            .Add<DomainObjectBase>(tb =>
+                                       tb.AddAttribute<AvailableDecimalValidatorAttribute>()
+                                         .AddAttribute<AvailablePeriodValidatorAttribute>()
+                                         .AddAttribute<AvailableDateTimeValidatorAttribute>()
+                                         .AddAttribute<DefaultStringMaxLengthValidatorAttribute>())
+
             .Add<BusinessRole>(tb =>
-                                   tb.AddAttribute(new BLLViewRoleAttribute()))
+                                   tb.AddAttribute<BLLViewRoleAttribute>())
 
             .Add<Principal>(tb =>
-                                tb.AddAttribute(new BLLViewRoleAttribute())
-                                  .AddAttribute(new BLLSaveRoleAttribute())
-                                  .AddAttribute(new BLLRemoveRoleAttribute()))
+                                tb.AddAttribute<BLLViewRoleAttribute>()
+                                  .AddAttribute<BLLSaveRoleAttribute>()
+                                  .AddAttribute<BLLRemoveRoleAttribute>())
 
             .Add<Permission>(tb =>
                                  tb.AddAttribute(new BLLViewRoleAttribute { MaxCollection = MainDTOType.RichDTO })
-                                   .AddAttribute(new BLLRemoveRoleAttribute()))
+                                   .AddAttribute<BLLRemoveRoleAttribute>()
+                                   .AddProperty(v => v.DelegatedTo, pb => pb.AddAttribute(new MappingAttribute { CascadeMode = CascadeMode.Enabled }))
+                                   .AddProperty(v => v.Role, pb => pb.AddAttribute<FixedPropertyValidatorAttribute>()))
 
             .Add<PermissionRestriction>(tb =>
-                                            tb.AddAttribute(new BLLRoleAttribute()))
+                                            tb.AddAttribute<BLLRoleAttribute>()
+                                              .AddProperty(v => v.SecurityContextType, pb => pb.AddAttribute<FixedPropertyValidatorAttribute>())
+                                              .AddProperty(v => v.SecurityContextId, pb => pb.AddAttribute<FixedPropertyValidatorAttribute>()))
 
             .Add<SecurityContextType>(tb =>
-                                          tb.AddAttribute(new BLLViewRoleAttribute()))
-            .Add<DelegateToItemModel>(tb => tb.AddProperty(v => v.Permission,
-                                                           pb => pb.AddAttribute(new AutoMappingAttribute(false))));
+                                          tb.AddAttribute<BLLViewRoleAttribute>())
+
+            .Add<DelegateToItemModel>(tb => tb.AddProperty(
+                                          v => v.Permission,
+                                          pb => pb.AddAttribute(new AutoMappingAttribute(false))));
 
     public static readonly ServerGenerationEnvironment Default = new();
 }

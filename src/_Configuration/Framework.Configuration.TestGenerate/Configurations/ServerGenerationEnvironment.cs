@@ -66,44 +66,44 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
         new DomainTypeRootExtendedMetadataBuilder()
 
             .Add<CodeFirstSubscription>(tb =>
-                                            tb.AddAttribute(new BLLViewRoleAttribute())
+                                            tb.AddAttribute<BLLViewRoleAttribute>()
                                               .AddAttribute(new BLLSaveRoleAttribute { AllowCreate = false }))
 
             .Add<DomainObjectEvent>(tb =>
-                                        tb.AddAttribute(new BLLRoleAttribute()))
+                                        tb.AddAttribute<BLLRoleAttribute>())
 
             .Add<DomainObjectModification>(tb =>
-                                               tb.AddAttribute(new BLLRoleAttribute()))
+                                               tb.AddAttribute<BLLRoleAttribute>())
 
             .Add<ExceptionMessage>(tb =>
-                                       tb.AddAttribute(new BLLViewRoleAttribute())
+                                       tb.AddAttribute<BLLViewRoleAttribute>()
                                          .AddAttribute(new BLLSaveRoleAttribute { CustomImplementation = true }))
 
             .Add<SentMessage>(tb =>
-                                  tb.AddAttribute(new BLLRoleAttribute()))
+                                  tb.AddAttribute<BLLRoleAttribute>())
 
             .Add<Sequence>(tb =>
-                               tb.AddAttribute(new BLLViewRoleAttribute())
-                                 .AddAttribute(new BLLSaveRoleAttribute())
-                                 .AddAttribute(new BLLRemoveRoleAttribute()))
+                               tb.AddAttribute<BLLViewRoleAttribute>()
+                                 .AddAttribute<BLLSaveRoleAttribute>()
+                                 .AddAttribute<BLLRemoveRoleAttribute>())
 
             .Add<SystemConstant>(tb =>
-                                     tb.AddAttribute(new BLLViewRoleAttribute())
+                                     tb.AddAttribute<BLLViewRoleAttribute>()
                                        .AddAttribute(new BLLSaveRoleAttribute { AllowCreate = false }))
 
 
             .Add<TargetSystem>(tb =>
-                                   tb.AddAttribute(new BLLViewRoleAttribute())
+                                   tb.AddAttribute<BLLViewRoleAttribute>()
                                      .AddAttribute(new BLLSaveRoleAttribute { AllowCreate = false }))
 
             .Add<DomainType>(tb =>
-                                 tb.AddAttribute(new BLLViewRoleAttribute()))
+                                 tb.AddAttribute<BLLViewRoleAttribute>())
 
             .Add<DomainObjectNotification>(tb =>
                                                tb.AddAttribute(new BLLRoleAttribute()))
 
             .Add<ControlSettings>(tb =>
-                                      tb.AddAttribute(new BLLRoleAttribute())
+                                      tb.AddAttribute<BLLViewRoleAttribute>()
                                         .AddProperty(v => v.Children, pb => pb.AddAttribute(new AutoMappingAttribute(false))));
 
     public static readonly ServerGenerationEnvironment Default = new ();

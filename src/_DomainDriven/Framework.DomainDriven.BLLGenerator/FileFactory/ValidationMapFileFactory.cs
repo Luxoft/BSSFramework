@@ -4,14 +4,9 @@ using Framework.CodeDom;
 
 namespace Framework.DomainDriven.BLLGenerator;
 
-public class ValidationMapFileFactory<TConfiguration> : FileFactory<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+public class ValidationMapFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public ValidationMapFileFactory(TConfiguration configuration)
-            : base(configuration, null)
-    {
-    }
-
     public override FileType FileType => FileType.ValidationMap;
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()

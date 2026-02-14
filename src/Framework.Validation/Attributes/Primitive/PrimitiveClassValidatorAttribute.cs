@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CommonFramework;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Validation;
 
@@ -18,6 +20,6 @@ public class PrimitiveClassValidatorAttribute : ClassValidatorAttribute
 
     public override IClassValidator CreateValidator(IServiceProvider serviceProvider)
     {
-        return (IClassValidator)ActivatorUtilities.CreateInstance(serviceProvider, this.validatorType);
+        return serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<IClassValidator>(this.validatorType);
     }
 }

@@ -1,36 +1,64 @@
-﻿using System.Reflection;
+﻿using System.Collections.Concurrent;
+using System.Collections.Immutable;
+using System.Reflection;
+
+using Framework.Core;
 
 namespace Framework.Projection.Environment;
 
-public class MixedCustomAttributeProvider : ICustomAttributeProvider
+public class MixedCustomAttributeProvider<TBaseProvider, TAttributesExtendedMetadata>(
+    TBaseProvider baseProvider,
+    ImmutableArray<TAttributesExtendedMetadata> attributesExtendedMetadataList)
+    : ICustomAttributeProvider
+    where TBaseProvider : ICustomAttributeProvider
+    where TAttributesExtendedMetadata : IAttributesExtendedMetadata
 {
-    private readonly ICustomAttributeProvider baseProvider;
+    private readonly ConcurrentDictionary<bool, ImmutableArray<object>> simpleCustomAttributesCache = [];
 
-    private readonly IAttributesExtendedMetadata attributesExtendedMetadata;
+    private readonly ConcurrentDictionary<(Type, bool), ImmutableArray<object>> customAttributesCache = [];
 
-    public MixedCustomAttributeProvider(ICustomAttributeProvider baseProvider, IAttributesExtendedMetadata attributesExtendedMetadata)
+    private readonly ConcurrentDictionary<(Type, bool), bool> isDefinedCache = [];
+
+    private IEnumerable<Attribute> GetMetadataAttributes(Type attributeType)
     {
-        this.baseProvider = baseProvider;
-        this.attributesExtendedMetadata = attributesExtendedMetadata;
+        var allowMultiple = attributeType.HasAttribute<AttributeUsageAttribute>(a => a.AllowMultiple);
+
+        return from attributesExtendedMetadata in attributesExtendedMetadataList
+
+               from attr in attributesExtendedMetadata.Attributes
+
+               where attributeType.IsInstanceOfType(attr)
+
+               group attr by attr.GetType()
+
+               into attrGroup
+
+               from attr in allowMultiple ? attrGroup.Select(v => v) : [attrGroup.First()]
+
+               select attr;
     }
 
-    public object[] GetCustomAttributes(bool inherit)
-    {
-        return this.baseProvider.GetCustomAttributes(inherit).Cast<Attribute>()
-                   .Concat(this.attributesExtendedMetadata.Attributes)
-                   .ToArray();
-    }
+    public object[] GetCustomAttributes(bool inherit) =>
+        this.simpleCustomAttributesCache.GetOrAdd(
+            inherit,
+            _ => baseProvider.GetCustomAttributes(inherit)
+                             .Cast<Attribute>()
+                             .Concat(this.GetMetadataAttributes(typeof(Attribute)))
+                             .ToImmutableArray<object>())
+            .ToArray();
 
-    public object[] GetCustomAttributes(Type attributeType, bool inherit)
-    {
-        return this.baseProvider.GetCustomAttributes(attributeType, inherit).Cast<Attribute>()
-                   .Concat(this.attributesExtendedMetadata.Attributes.Where(attr => attributeType.IsAssignableFrom(attr.GetType())))
-                   .ToArray();
-    }
+    public object[] GetCustomAttributes(Type attributeType, bool inherit) =>
+        this.customAttributesCache.GetOrAdd(
+                (attributeType, inherit),
+                _ => baseProvider.GetCustomAttributes(attributeType, inherit)
+                                 .Cast<Attribute>()
+                                 .Concat(this.GetMetadataAttributes(attributeType))
+                                 .ToImmutableArray<object>())
+            .ToArray();
 
-    public bool IsDefined(Type attributeType, bool inherit)
-    {
-        return this.baseProvider.IsDefined(attributeType, inherit)
-               || this.attributesExtendedMetadata.Attributes.Any(attr => attributeType.IsAssignableFrom(attr.GetType()));
-    }
+    public bool IsDefined(Type attributeType, bool inherit) =>
+        this.isDefinedCache.GetOrAdd(
+            (attributeType, inherit),
+            _ => baseProvider.IsDefined(attributeType, inherit)
+                 || this.GetMetadataAttributes(attributeType).Any(attributeType.IsInstanceOfType));
 }

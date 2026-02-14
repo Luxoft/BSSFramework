@@ -17,14 +17,16 @@ public class FixedPropertyValidator : IDynamicPropertyValidator
 {
     public IPropertyValidator GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
-        var identType = property.DeclaringType!.GetIdentType();
+        var identType = property.DeclaringType!.GetIdentType()!;
 
         var persistentDomainObjectBaseTypeResolver = serviceProvider.GetRequiredService<IPersistentDomainObjectBaseTypeResolver>();
 
-        var persistentDomainObjectBaseType = persistentDomainObjectBaseTypeResolver.Resolve(property.ReflectedType);
+        var persistentDomainObjectBaseType = persistentDomainObjectBaseTypeResolver.Resolve(property.ReflectedType!);
 
-        return (IPropertyValidator)Activator.CreateInstance(typeof(FixedPropertyValidator<,,,>)
-                                                                    .MakeGenericType(property.ReflectedType, property.PropertyType, identType, persistentDomainObjectBaseType), property.ToGetLambdaExpression());
+        var validatorType = typeof(FixedPropertyValidator<,,,>)
+            .MakeGenericType(property.ReflectedType!, property.PropertyType, identType, persistentDomainObjectBaseType);
+
+        return serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<IPropertyValidator>(validatorType, property.ToGetLambdaExpression());
     }
 }
 

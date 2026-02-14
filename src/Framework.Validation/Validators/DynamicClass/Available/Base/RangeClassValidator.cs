@@ -1,18 +1,20 @@
 ﻿using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Core;
 
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Validation;
 
-public abstract class RangeClassValidator<TProperty, TRange> : IManyPropertyDynamicClassValidator
+public abstract class RangeClassValidator<TProperty, TRange> : IClassValidator
         where TProperty : struct
 {
     protected abstract Func<Range<TRange>, TProperty, bool> IsValidValueFunc { get; }
 
 
-    public IPropertyValidator GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
+    public IPropertyValidator? GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
         if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
@@ -23,17 +25,17 @@ public abstract class RangeClassValidator<TProperty, TRange> : IManyPropertyDyna
         {
             var availableRange = availableValues.GetAvailableRange<TRange>();
 
-            var propValidatorType = typeof(RangePropertyValidator<,,>).MakeGenericType(property.ReflectedType, typeof(TProperty), typeof(TRange));
+            var propValidatorType = typeof(RangePropertyValidator<,,>).MakeGenericType(property.ReflectedType!, typeof(TProperty), typeof(TRange));
 
-            return (IPropertyValidator)Activator.CreateInstance(propValidatorType, availableRange, this.IsValidValueFunc);
+            return serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<IPropertyValidator>(propValidatorType, availableRange, this.IsValidValueFunc);
         }
         else if (property.PropertyType == typeof(TProperty?))
         {
             var availableRange = availableValues.GetAvailableRange<TRange>();
 
-            var propValidatorType = typeof(NullableRangePropertyValidator<,,>).MakeGenericType(property.ReflectedType, typeof(TProperty), typeof(TRange));
+            var propValidatorType = typeof(NullableRangePropertyValidator<,,>).MakeGenericType(property.ReflectedType!, typeof(TProperty), typeof(TRange));
 
-            return (IPropertyValidator)Activator.CreateInstance(propValidatorType, availableRange, this.IsValidValueFunc);
+            return serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<IPropertyValidator>(propValidatorType, availableRange, this.IsValidValueFunc);
         }
         else
         {

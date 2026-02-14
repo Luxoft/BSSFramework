@@ -1,5 +1,4 @@
 ﻿using Framework.DomainDriven.Serialization;
-using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
 using Framework.Restriction;
 
@@ -46,7 +45,6 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
     /// Вычисляемый доменный тип по связке контекст+пермиссия
     /// </summary>
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Integration)]
-    [FixedPropertyValidator]
     [Required]
     [UniqueElement]
     public virtual SecurityContextType SecurityContextType
@@ -55,7 +53,6 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
         set => this.securityContextType = value;
     }
 
-    [FixedPropertyValidator]
     [Required]
     [UniqueElement]
     public virtual Guid SecurityContextId { get => this.securityContextId; set => this.securityContextId = value; }

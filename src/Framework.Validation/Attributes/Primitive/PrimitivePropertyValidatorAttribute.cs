@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Reflection;
+
+using CommonFramework;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Validation;
 
@@ -15,8 +19,8 @@ public class PrimitivePropertyValidatorAttribute : PropertyValidatorAttribute
     }
 
 
-    public override IPropertyValidator CreateValidator(IServiceProvider serviceProvider)
+    public override IPropertyValidator CreateValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
-        return (IPropertyValidator)ActivatorUtilities.CreateInstance(serviceProvider, this.validatorType);
+        return serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<IPropertyValidator>(this.validatorType);
     }
 }

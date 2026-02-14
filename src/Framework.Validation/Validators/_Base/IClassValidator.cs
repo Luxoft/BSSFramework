@@ -2,20 +2,7 @@
 
 public interface IClassValidator
 {
-
+    IClassValidator GetActual(IServiceProvider serviceProvider, Type type) => this;
 }
 
-public interface IClassValidator<in TSource> : IClassValidator, IElementValidator<IClassValidationContext<TSource>>
-{
-
-}
-
-public interface IDynamicClassValidator : IClassValidator, IDynamicClassValidatorBase
-{
-
-}
-
-public interface IManyPropertyDynamicClassValidator : IClassValidator, IDynamicPropertyValidatorBase
-{
-
-}
+public interface IClassValidator<in TSource> : IClassValidator, IElementValidator<IClassValidationContext<TSource>>;

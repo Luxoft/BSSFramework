@@ -8,7 +8,7 @@ using Framework.Restriction;
 
 namespace Framework.Validation;
 
-public class RequiredGroupValidator : DynamicClassValidator
+public class RequiredGroupValidator : IClassValidator
 {
     private readonly RequiredGroupValidatorMode _mode;
 
@@ -23,11 +23,8 @@ public class RequiredGroupValidator : DynamicClassValidator
         this._groupKey = groupKey;
     }
 
-
-    protected override IClassValidator GetValidator<TSource>(IServiceProvider serviceProvider)
+    public IClassValidator GetActual(IServiceProvider serviceProvider, Type type)
     {
-        if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
-
         var uniProperties = typeof(TSource).GetUniqueElementPropeties(this._groupKey, true);
 
         var uniqueElementString = uniProperties.GetUniqueElementString(false);
@@ -36,7 +33,6 @@ public class RequiredGroupValidator : DynamicClassValidator
 
         return new RequiredGroupValidator<TSource>(this._mode, propertyValidators, uniqueElementString);
     }
-
     private static Func<TSource, bool> GetPropertyRequiredValidator<TSource>(PropertyInfo property)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
@@ -58,60 +54,46 @@ public class RequiredGroupValidator : DynamicClassValidator
     }
 }
 
-public class RequiredGroupValidator<TSource> : IClassValidator<TSource>
+public class RequiredGroupValidator<TSource>(RequiredGroupValidatorMode mode, Dictionary<string, Func<TSource, bool>> propertyValidators, string uniqueElementString)
+    : IClassValidator<TSource>
 {
-    private readonly RequiredGroupValidatorMode _mode;
-
-    private readonly Dictionary<string, Func<TSource, bool>> _propertyValidators;
-
-    private readonly string _uniqueElementString;
-
-
-    public RequiredGroupValidator(RequiredGroupValidatorMode mode, Dictionary<string, Func<TSource, bool>> propertyValidators, string uniqueElementString)
-    {
-        this._mode = mode;
-        this._propertyValidators = propertyValidators;
-        this._uniqueElementString = uniqueElementString;
-    }
-
-
     public ValidationResult GetValidationResult(IClassValidationContext<TSource> validationContext)
     {
         if (validationContext == null) throw new ArgumentNullException(nameof(validationContext));
 
-        var validState = this._propertyValidators.ChangeValue(f => f(validationContext.Source))
+        var validState = propertyValidators.ChangeValue(f => f(validationContext.Source))
                              .Where(pair => pair.Value).ToDictionary();
 
 
-        if (this._mode == RequiredGroupValidatorMode.OneOrNothing)
+        if (mode == RequiredGroupValidatorMode.OneOrNothing)
         {
             if (validState.Count > 1)
             {
-                return ValidationResult.CreateError("More one of properties ({0}) initialized", this._uniqueElementString);
+                return ValidationResult.CreateError("More one of properties ({0}) initialized", uniqueElementString);
             }
             else
             {
                 return ValidationResult.Success;
             }
         }
-        else if (this._mode == RequiredGroupValidatorMode.AllOrNothing)
+        else if (mode == RequiredGroupValidatorMode.AllOrNothing)
         {
-            if (validState.IsEmpty() || validState.Count == this._propertyValidators.Count)
+            if (validState.IsEmpty() || validState.Count == propertyValidators.Count)
             {
                 return ValidationResult.Success;
             }
             else
             {
-                return ValidationResult.CreateError("All or no one of properties ({0}) must initialized", this._uniqueElementString);
+                return ValidationResult.CreateError("All or no one of properties ({0}) must initialized", uniqueElementString);
             }
         }
         else if (!validState.Any())
         {
-            return ValidationResult.CreateError("No one of properties ({0}) not initialized", this._uniqueElementString);
+            return ValidationResult.CreateError("No one of properties ({0}) not initialized", uniqueElementString);
         }
-        else if (this._mode == RequiredGroupValidatorMode.One && validState.Count > 1)
+        else if (mode == RequiredGroupValidatorMode.One && validState.Count > 1)
         {
-            return ValidationResult.CreateError("More one of properties ({0}) initialized", this._uniqueElementString);
+            return ValidationResult.CreateError("More one of properties ({0}) initialized", uniqueElementString);
         }
         else
         {

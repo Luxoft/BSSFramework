@@ -13,8 +13,8 @@ using Framework.Validation;
 using CommonFramework;
 using CommonFramework.Maybe;
 
-using ValidatorPairExpr = System.Collections.Generic.KeyValuePair<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
-using ValidatorExpr = System.Collections.Generic.IReadOnlyDictionary<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
+using ValidatorPairExpr = System.Collections.Generic.KeyValuePair<System.CodeDom.CodeExpression, Framework.Validation.IValidationData?>;
+using ValidatorExpr = System.Collections.Generic.IReadOnlyDictionary<System.CodeDom.CodeExpression, Framework.Validation.IValidationData?>;
 
 namespace Framework.DomainDriven.BLLGenerator;
 
@@ -65,7 +65,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
             yield return new ValidatorPairExpr(typeof(SelfClassValidator<>).ToTypeReference(this.DomainType).ToObjectCreateExpression(), null);
         }
 
-        foreach (var attr in this.DomainType.GetCustomAttributes<ClassValidatorAttribute>())
+        foreach (var attr in this.Configuration.Environment.ExtendedMetadata.GetCustomAttributes<ClassValidatorAttribute>(this.DomainType))
         {
             if (!this.IsManyPropertyDynamicClassAttribute(attr))
             {
@@ -101,7 +101,9 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
             yield return expandedClassValidator;
         }
 
-        foreach (var attr in property.TryGetRestrictionValidatorAttributes().Concat(property.GetCustomAttributes<PropertyValidatorAttribute>()))
+        var propMetadata = this.Configuration.Environment.ExtendedMetadata.GetProperty(property);
+
+        foreach (var attr in propMetadata.TryGetRestrictionValidatorAttributes().Concat(propMetadata.GetCustomAttributes<PropertyValidatorAttribute>()))
         {
             var expr = this.ExpandPropertyAttributes(property, attr);
 
@@ -169,11 +171,11 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         }
     }
 
-    private CodeExpression TryAutoExpandPropertyAttributes(PropertyInfo property, PropertyValidatorAttribute attribute)
+    private CodeExpression? TryAutoExpandPropertyAttributes(PropertyInfo property, PropertyValidatorAttribute attribute)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        var instanceType = attribute.CreateValidator(this.Configuration.Environment.ServiceProvider).GetLastPropertyValidator(property, this.Configuration.Environment.ServiceProvider).GetType();
+        var instanceType = attribute.CreateValidator(property, this.Configuration.Environment.ServiceProvider).GetLastPropertyValidator(property, this.Configuration.Environment.ServiceProvider).GetType();
 
         if (instanceType.IsInterfaceImplementation(typeof(IPropertyValidator<,>)))
         {
@@ -213,11 +215,11 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         return null;
     }
 
-    private CodeExpression TryAutoExpandClassAttributes(ClassValidatorAttribute attribute)
+    private CodeExpression? TryAutoExpandClassAttributes(ClassValidatorAttribute attribute)
     {
         if (attribute == null) throw new ArgumentNullException(nameof(attribute));
 
-        var instanceType = attribute.CreateValidator(this.Configuration.Environment.ServiceProvider).GetType();
+        var instanceType = attribute.CreateValidator(this.DomainType, this.Configuration.Environment.ServiceProvider).GetType();
 
         if (instanceType.IsInterfaceImplementation(typeof(IClassValidator<>)))
         {
@@ -328,15 +330,15 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
     {
         if (attribute == null) throw new ArgumentNullException(nameof(attribute));
 
-        var elementType = property.PropertyType.GetCollectionElementType();
+        var elementType = property.PropertyType.GetCollectionElementType()!;
 
         var uniProperties = property.GetUniqueElementPropeties(attribute.GroupKey, true);
 
         var groupElementType = typeof(Tuple<>).Assembly
-                                              .GetType(typeof(Tuple<>).FullName.SkipLast("1", true) + uniProperties.Length, true)
+                                              .GetType(typeof(Tuple<>).FullName!.SkipLast("1", true) + uniProperties.Length, true)!
                                               .MakeGenericType(uniProperties.ToArray(p => p.PropertyType));
 
-        var internalPropertyValidatorType = typeof(UniqueCollectionValidator<,,,>).MakeGenericType(property.ReflectedType, property.PropertyType, elementType, groupElementType);
+        var internalPropertyValidatorType = typeof(UniqueCollectionValidator<,,,>).MakeGenericType(property.ReflectedType!, property.PropertyType, elementType, groupElementType);
 
 
         var trimNullMethod = typeof(CoreStringExtensions)

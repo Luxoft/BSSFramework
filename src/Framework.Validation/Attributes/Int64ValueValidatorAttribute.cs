@@ -1,4 +1,6 @@
-﻿namespace Framework.Validation;
+﻿using System.Reflection;
+
+namespace Framework.Validation;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class Int64ValueValidatorAttribute : PropertyValidatorAttribute
@@ -8,7 +10,7 @@ public class Int64ValueValidatorAttribute : PropertyValidatorAttribute
     public long Max { get; set; } = long.MaxValue;
 
 
-    public override IPropertyValidator CreateValidator(IServiceProvider serviceProvider)
+    public override IPropertyValidator CreateValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
         return new Int64ValueValidator(this.Min, this.Max);
     }

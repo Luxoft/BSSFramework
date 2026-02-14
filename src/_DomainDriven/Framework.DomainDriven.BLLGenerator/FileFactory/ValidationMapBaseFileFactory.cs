@@ -10,14 +10,9 @@ using Framework.Validation;
 
 namespace Framework.DomainDriven.BLLGenerator;
 
-public class ValidationMapBaseFileFactory<TConfiguration> : FileFactory<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public ValidationMapBaseFileFactory(TConfiguration configuration)
-            : base(configuration, null)
-    {
-    }
-
     public override FileType FileType { get; } = FileType.ValidationMapBase;
 
     protected virtual string ExternalClassValidatorsMethodName { get; } = "GetExternalClassValidators";

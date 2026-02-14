@@ -1,4 +1,6 @@
-﻿namespace Framework.Validation;
+﻿using System.Reflection;
+
+namespace Framework.Validation;
 
 [AttributeUsage(AttributeTargets.Property)]
 public abstract class PropertyValidatorAttribute : ValidatorAttribute
@@ -9,5 +11,5 @@ public abstract class PropertyValidatorAttribute : ValidatorAttribute
     }
 
 
-    public abstract IPropertyValidator CreateValidator(IServiceProvider serviceProvider);
+    public abstract IPropertyValidator CreateValidator(PropertyInfo property, IServiceProvider serviceProvider);
 }

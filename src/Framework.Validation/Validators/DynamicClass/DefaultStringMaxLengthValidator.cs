@@ -8,7 +8,7 @@ namespace Framework.Validation;
 
 public class DefaultStringMaxLengthValidator : IManyPropertyDynamicClassValidator
 {
-    public IPropertyValidator GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
+    public IPropertyValidator? GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
         if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));

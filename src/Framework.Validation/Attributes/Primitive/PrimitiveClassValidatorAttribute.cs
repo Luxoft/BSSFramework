@@ -1,23 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CommonFramework;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Validation;
 
 [AttributeUsage(AttributeTargets.Class)]
-public class PrimitiveClassValidatorAttribute : ClassValidatorAttribute
+public class PrimitiveClassValidatorAttribute(Type validatorType) : ClassValidatorAttribute
 {
-    private readonly Type validatorType;
-
-
-    public PrimitiveClassValidatorAttribute(Type validatorType)
-    {
-        if (validatorType == null) throw new ArgumentNullException(nameof(validatorType));
-
-        this.validatorType = validatorType;
-    }
-
-
     public override IClassValidator CreateValidator(IServiceProvider serviceProvider)
     {
-        return (IClassValidator)ActivatorUtilities.CreateInstance(serviceProvider, this.validatorType);
+        return serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<IClassValidator>(validatorType);
     }
 }

@@ -1,22 +1,22 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Reflection;
+
+using CommonFramework;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Validation;
 
 [AttributeUsage(AttributeTargets.Property)]
-public class PrimitivePropertyValidatorAttribute : PropertyValidatorAttribute
+public class PrimitivePropertyValidatorAttribute(Type validatorType) : PropertyValidatorAttribute
 {
-    private readonly Type validatorType;
-
-    public PrimitivePropertyValidatorAttribute(Type validatorType)
+    public override IPropertyValidator CreateValidator()
     {
-        if (validatorType == null) throw new ArgumentNullException(nameof(validatorType));
-
-        this.validatorType = validatorType;
+        return new PrimitivePropertyValidator(validatorType);
     }
 
-
-    public override IPropertyValidator CreateValidator(IServiceProvider serviceProvider)
+    public class PrimitivePropertyValidator(Type validatorType) : IDynamicPropertyValidator
     {
-        return (IPropertyValidator)ActivatorUtilities.CreateInstance(serviceProvider, this.validatorType);
+        public IPropertyValidator GetValidator(PropertyInfo _, IServiceProvider serviceProvider) =>
+            serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<IPropertyValidator>(validatorType);
     }
 }

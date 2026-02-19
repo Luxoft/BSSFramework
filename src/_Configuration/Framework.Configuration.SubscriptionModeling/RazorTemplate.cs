@@ -20,7 +20,7 @@ public abstract class RazorTemplate<TDomainObject> : IRazorTemplate
     /// <value>
     ///     Предыдущая версия доменного объекта.
     /// </value>
-    public TDomainObject Previous { get; set; }
+    public TDomainObject? Previous { get; set; }
 
     /// <summary>
     ///     Получает текущую версию доменного объекта.
@@ -28,12 +28,12 @@ public abstract class RazorTemplate<TDomainObject> : IRazorTemplate
     /// <value>
     ///     Текущая версия доменного объекта.
     /// </value>
-    public TDomainObject Current { get; set; }
+    public TDomainObject? Current { get; set; }
 
     /// <summary>
     /// Контекст системы
     /// </summary>
-    public IServiceProvider ServiceProvider { get; set; }
+    public IServiceProvider ServiceProvider { get; set; } = null!;
 
     protected TextWriter Output
     {

@@ -2,37 +2,16 @@
 
 public abstract class ValidatorBase : IValidator
 {
-    protected ValidatorBase()
-    {
-
-    }
-
-
-    public abstract ValidationResult GetValidationResult<TSource>(TSource source, int operationContext = int.MaxValue, IValidationState ownerState = null);
-
+    public abstract ValidationResult GetValidationResult<TSource>(TSource source, int operationContext = int.MaxValue, IValidationState? ownerState = null);
 
 
     public static readonly IValidator Success = new SuccessValidator();
 }
 
-public class Validator : ValidatorBase
+public class Validator(ValidatorCompileCache cache) : ValidatorBase
 {
-    private readonly ValidatorCompileCache _cache;
-
-
-    public Validator(ValidatorCompileCache cache)
+    public override ValidationResult GetValidationResult<TSource>(TSource source, int operationContext = int.MaxValue, IValidationState? ownerState = null)
     {
-        if (cache == null) throw new ArgumentNullException(nameof(cache));
-
-        this._cache = cache;
+        return cache.GetValidationResult(new ValidationContextBase<TSource>(this, operationContext, source, ownerState));
     }
-
-
-    public override ValidationResult GetValidationResult<TSource>(TSource source, int operationContext = int.MaxValue, IValidationState ownerState = null)
-    {
-        return this._cache.GetValidationResult(new ValidationContextBase<TSource>(this, operationContext, source, ownerState));
-    }
-
-
-    public static readonly Validator Default = new Validator(ValidationMap.Default.ToCompileCache());
 }

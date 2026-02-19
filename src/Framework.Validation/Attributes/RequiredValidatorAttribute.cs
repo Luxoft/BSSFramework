@@ -5,7 +5,7 @@ namespace Framework.Validation;
 [AttributeUsage(AttributeTargets.Property)]
 public class RequiredValidatorAttribute : PropertyValidatorAttribute
 {
-    public override IPropertyValidator CreateValidator(IServiceProvider serviceProvider)
+    public override IPropertyValidator CreateValidator()
     {
         return new RequiredValidator(this.Mode);
     }

@@ -7,7 +7,7 @@ public class UniqueCollectionValidatorAttribute : PropertyValidatorAttribute
     public string GroupKey { get; set; }
 
 
-    public override IPropertyValidator CreateValidator(IServiceProvider serviceProvider)
+    public override IPropertyValidator CreateValidator()
     {
         return new UniqueCollectionValidator (this.GroupKey);
     }

@@ -1,27 +1,17 @@
 ﻿namespace Framework.Validation;
 
-public class ValidationContextBase<TSource> : IValidationContextBase<TSource>
+public class ValidationContextBase<TSource>(IValidator validator, int operationContext, TSource source, IValidationState? parentState)
+    : IValidationContextBase<TSource>
 {
-    public ValidationContextBase(IValidator validator, int operationContext, TSource source, IValidationState parentState)
-    {
-        if (validator == null) throw new ArgumentNullException(nameof(validator));
-
-        this.OperationContext = operationContext;
-        this.Source = source;
-        this.Validator = validator;
-        this.ParentState = parentState;
-    }
-
+    /// <inheritdoc />
+    public IValidator Validator { get; } = validator;
 
     /// <inheritdoc />
-    public IValidator Validator { get; }
+    public int OperationContext { get; } = operationContext;
 
     /// <inheritdoc />
-    public int OperationContext { get; }
+    public TSource Source { get; } = source;
 
     /// <inheritdoc />
-    public TSource Source { get; }
-
-    /// <inheritdoc />
-    public IValidationState ParentState { get; }
+    public IValidationState? ParentState { get; } = parentState;
 }

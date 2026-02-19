@@ -9,7 +9,7 @@ namespace Framework.Validation;
 [AttributeUsage(AttributeTargets.Property)]
 public class AnyElementsValidatorAttribute : PropertyValidatorAttribute
 {
-    public override IPropertyValidator CreateValidator(IServiceProvider serviceProvider)
+    public override IPropertyValidator CreateValidator()
     {
         return AnyElementsValidator.Value;
     }
@@ -24,7 +24,7 @@ public class AnyElementsValidator : IDynamicPropertyValidator
 
         var elementType = property.PropertyType.GetCollectionElementType();
 
-        return (IPropertyValidator)ActivatorUtilities.CreateInstance(serviceProvider, typeof(AnyElementsValidator<>).MakeGenericType(elementType));
+        return serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<IPropertyValidator>(typeof(AnyElementsValidator<>).MakeGenericType(elementType));
     }
 
     public static AnyElementsValidator Value { get; } = new AnyElementsValidator();

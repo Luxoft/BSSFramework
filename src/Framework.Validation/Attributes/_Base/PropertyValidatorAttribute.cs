@@ -9,5 +9,5 @@ public abstract class PropertyValidatorAttribute : ValidatorAttribute
     }
 
 
-    public abstract IPropertyValidator CreateValidator(IServiceProvider serviceProvider);
+    public abstract IPropertyValidator CreateValidator();
 }

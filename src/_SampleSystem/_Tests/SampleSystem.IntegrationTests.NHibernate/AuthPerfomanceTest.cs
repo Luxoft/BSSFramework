@@ -72,7 +72,7 @@ public class AuthPerformanceTest : TestBase
 
                       from employee in this.employeeSource
 
-                      select new SampleSystemTestPermission(SampleSystemSecurityRole.TestPerformance, fbu, mbu, location, employee).ToManagedPermissionData();
+                      select new SampleSystemTestPermission(SampleSystemSecurityRole.TestPerformance, fbu, mbu, location, employee).ToManagedPermission();
 
         this.AuthManager.For(PrincipalName).SetRole(request.ToArray());
     }

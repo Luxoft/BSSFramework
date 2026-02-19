@@ -9,6 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IvAt.CommonFramework.DependencyInjection" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Framework.Projection.Environment\Framework.Projection.Environment.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.Generation\Framework.DomainDriven.Generation.csproj" />
   </ItemGroup>

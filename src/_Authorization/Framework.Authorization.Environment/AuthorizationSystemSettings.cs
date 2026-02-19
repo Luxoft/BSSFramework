@@ -3,7 +3,6 @@ using CommonFramework.RelativePath.DependencyInjection;
 
 using Framework.Authorization.Domain;
 using Framework.Authorization.Environment.Security;
-using Framework.Authorization.Environment.Validation;
 using Framework.Authorization.Notification;
 using Framework.Core;
 using Framework.DomainDriven;
@@ -15,7 +14,6 @@ using SecuritySystem.DependencyInjection;
 using SecuritySystem.ExternalSystem.ApplicationSecurity;
 using SecuritySystem.GeneralPermission.DependencyInjection;
 using SecuritySystem.GeneralPermission.Validation;
-using SecuritySystem.GeneralPermission.Validation.Permission;
 using SecuritySystem.UserSource;
 
 namespace Framework.Authorization.Environment;
@@ -81,7 +79,8 @@ public class AuthorizationSystemSettings : IAuthorizationSystemSettings
                                  v => v.Period.EndDate,
                                  v => v.Period.EndDate,
                                  (permission, endDate) => permission.Period = new Period(permission.Period.StartDate, endDate)))
-                         .SetPermissionComment(v => v.Comment))
+                         .SetPermissionComment(v => v.Comment)
+                         .SetPermissionDelegation(p => p.DelegatedFrom))
 
                 .AddDomainSecurity<Principal>(b => b.SetView(principalViewSecurityRule)
                                                     .SetEdit(securityAdministratorRule))
@@ -109,9 +108,7 @@ public class AuthorizationSystemSettings : IAuthorizationSystemSettings
                             .AddScoped(typeof(INotificationPermissionExtractor), this.notificationPermissionExtractorType)
 
                             .AddScoped<INotificationGeneralPermissionFilterFactory, NotificationGeneralPermissionFilterFactory>()
-                            .AddScoped<INotificationPrincipalExtractor, NotificationPrincipalExtractor>()
-
-                            .AddScoped<IPermissionValidator<Permission, PermissionRestriction>, PermissionDelegateValidator>();
+                            .AddScoped<INotificationPrincipalExtractor, NotificationPrincipalExtractor>();
                 });
     }
 }

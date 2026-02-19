@@ -126,7 +126,7 @@ public static class SampleSystemSecuritySystemExtensions
                        SecurityRole.Administrator,
                        new SecurityRoleInfo(new Guid("d9c1d2f0-0c2f-49ab-bb0b-de13a456169e"))
                        {
-                           Operations = typeof(SampleSystemSecurityOperation).GetStaticPropertyValueList<SecurityOperation>().ToList()
+                           Operations = [..typeof(SampleSystemSecurityOperation).GetStaticPropertyValueList<SecurityOperation>()]
                        });
         }
 

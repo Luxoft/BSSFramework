@@ -8,7 +8,6 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
 using SecuritySystem;
-using SecuritySystem.Testing;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -73,7 +72,7 @@ public class AuthPerformanceTest : TestBase
 
                       from employee in this.employeeSource
 
-                      select (TestPermission)new SampleSystemTestPermission(SampleSystemSecurityRole.TestPerformance, fbu, mbu, location, employee);
+                      select new SampleSystemTestPermission(SampleSystemSecurityRole.TestPerformance, fbu, mbu, location, employee).ToManagedPermission();
 
         this.AuthManager.For(PrincipalName).SetRole(request.ToArray());
     }

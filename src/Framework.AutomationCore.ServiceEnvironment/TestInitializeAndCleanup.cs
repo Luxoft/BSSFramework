@@ -33,7 +33,7 @@ public class TestInitializeAndCleanup(
     protected virtual void ResetServices()
     {
         timeProvider.Reset();
-        userAuthenticationService.Reset();
+        userAuthenticationService.CustomUserCredential = null;
     }
 
     protected virtual void DropDatabaseAfterTest()

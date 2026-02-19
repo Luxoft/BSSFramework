@@ -54,4 +54,16 @@ public class NHibFetchService([FromKeyedServices(RootFetchRuleExpander.Key)]IFet
             }
         }
     }
+
+    protected override LambdaExpression GetFetchProperty(LambdaExpression prop)
+    {
+        var nextPropertyType = prop.Body.Type;
+
+        return nextPropertyType.IsGenericType
+               && nextPropertyType.GetInterfaceImplementationArgument(typeof(IEnumerable<>)) is { } nextElementType
+               && typeof(IEnumerable<>).MakeGenericType(nextElementType) is { } expectedNextPropertyType
+               && nextPropertyType != expectedNextPropertyType
+                   ? Expression.Lambda(Expression.Convert(prop.Body, expectedNextPropertyType), prop.Parameters)
+                   : prop;
+    }
 }

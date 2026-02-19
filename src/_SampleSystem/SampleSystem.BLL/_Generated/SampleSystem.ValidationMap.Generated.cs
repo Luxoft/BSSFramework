@@ -921,9 +921,9 @@ namespace SampleSystem.BLL
             yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.Employee>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Employee, System.Collections.Generic.IEnumerable<SampleSystem.Domain.EmployeeCellPhone>>> GetEmployee_CellPhonesValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Employee, System.Collections.Generic.ICollection<SampleSystem.Domain.EmployeeCellPhone>>> GetEmployee_CellPhonesValidators()
         {
-            yield return new Framework.Validation.DeepCollectionValidator<SampleSystem.Domain.Employee, System.Collections.Generic.IEnumerable<SampleSystem.Domain.EmployeeCellPhone>, SampleSystem.Domain.EmployeeCellPhone>();
+            yield return new Framework.Validation.DeepCollectionValidator<SampleSystem.Domain.Employee, System.Collections.Generic.ICollection<SampleSystem.Domain.EmployeeCellPhone>, SampleSystem.Domain.EmployeeCellPhone>();
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Employee, System.DateTime?>> GetEmployee_CreateDateValidators()
@@ -951,10 +951,10 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Employee>(50);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Employee, System.Collections.Generic.IEnumerable<SampleSystem.Domain.EmployeePhoto>>> GetEmployee_EmployeePhotosValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Employee, System.Collections.Generic.ICollection<SampleSystem.Domain.EmployeePhoto>>> GetEmployee_EmployeePhotosValidators()
         {
-            yield return new Framework.Validation.UniqueCollectionValidator<SampleSystem.Domain.Employee, System.Collections.Generic.IEnumerable<SampleSystem.Domain.EmployeePhoto>, SampleSystem.Domain.EmployeePhoto, System.Tuple<SampleSystem.Domain.EmployeePhotoType>>(source => new System.Tuple<SampleSystem.Domain.EmployeePhotoType>(source.Type), "Type");
-            yield return new Framework.Validation.DeepCollectionValidator<SampleSystem.Domain.Employee, System.Collections.Generic.IEnumerable<SampleSystem.Domain.EmployeePhoto>, SampleSystem.Domain.EmployeePhoto>();
+            yield return new Framework.Validation.UniqueCollectionValidator<SampleSystem.Domain.Employee, System.Collections.Generic.ICollection<SampleSystem.Domain.EmployeePhoto>, SampleSystem.Domain.EmployeePhoto, System.Tuple<SampleSystem.Domain.EmployeePhotoType>>(source => new System.Tuple<SampleSystem.Domain.EmployeePhotoType>(source.Type), "Type");
+            yield return new Framework.Validation.DeepCollectionValidator<SampleSystem.Domain.Employee, System.Collections.Generic.ICollection<SampleSystem.Domain.EmployeePhoto>, SampleSystem.Domain.EmployeePhoto>();
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Employee, System.Collections.Generic.IEnumerable<SampleSystem.Domain.EmployeeToEmployeeLink>>> GetEmployee_EmployeeToEmployeeLinksValidators()
@@ -1550,13 +1550,13 @@ namespace SampleSystem.BLL
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.Employee>> GetEmployeeProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.Employee> currentClass)
         {
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, System.DateTime?>(source => source.BirthDate, currentClass, this.GetEmployee_BirthDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.Employee, System.Collections.Generic.IEnumerable<SampleSystem.Domain.EmployeeCellPhone>, SampleSystem.Domain.EmployeeCellPhone>(source => source.CellPhones, currentClass, this.GetEmployee_CellPhonesValidators(), this.GetClassMap<SampleSystem.Domain.EmployeeCellPhone>(true));
+            yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.Employee, System.Collections.Generic.ICollection<SampleSystem.Domain.EmployeeCellPhone>, SampleSystem.Domain.EmployeeCellPhone>(source => source.CellPhones, currentClass, this.GetEmployee_CellPhonesValidators(), this.GetClassMap<SampleSystem.Domain.EmployeeCellPhone>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, System.DateTime?>(source => source.CreateDate, currentClass, this.GetEmployee_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, string>(source => source.CreatedBy, currentClass, this.GetEmployee_CreatedByValidators(), this.GetClassMap<string>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, System.DateTime?>(source => source.DismissDate, currentClass, this.GetEmployee_DismissDateValidators(), this.GetClassMap<System.DateTime?>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, Framework.Core.Period>(source => source.EducationDuration, currentClass, this.GetEmployee_EducationDurationValidators(), this.GetClassMap<Framework.Core.Period>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, string>(source => source.Email, currentClass, this.GetEmployee_EmailValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.Employee, System.Collections.Generic.IEnumerable<SampleSystem.Domain.EmployeePhoto>, SampleSystem.Domain.EmployeePhoto>(source => source.EmployeePhotos, currentClass, this.GetEmployee_EmployeePhotosValidators(), this.GetClassMap<SampleSystem.Domain.EmployeePhoto>(true));
+            yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.Employee, System.Collections.Generic.ICollection<SampleSystem.Domain.EmployeePhoto>, SampleSystem.Domain.EmployeePhoto>(source => source.EmployeePhotos, currentClass, this.GetEmployee_EmployeePhotosValidators(), this.GetClassMap<SampleSystem.Domain.EmployeePhoto>(true));
             yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.Employee, System.Collections.Generic.IEnumerable<SampleSystem.Domain.EmployeeToEmployeeLink>, SampleSystem.Domain.EmployeeToEmployeeLink>(source => source.EmployeeToEmployeeLinks, currentClass, this.GetEmployee_EmployeeToEmployeeLinksValidators(), this.GetClassMap<SampleSystem.Domain.EmployeeToEmployeeLink>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, long>(source => source.ExternalId, currentClass, this.GetEmployee_ExternalIdValidators(), this.GetClassMap<long>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, System.DateTime?>(source => source.HireDate, currentClass, this.GetEmployee_HireDateValidators(), this.GetClassMap<System.DateTime?>(true));

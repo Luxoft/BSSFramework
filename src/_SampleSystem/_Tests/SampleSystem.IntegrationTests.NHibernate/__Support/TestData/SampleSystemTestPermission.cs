@@ -8,7 +8,7 @@ using SecuritySystem.Testing;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData;
 
-public class SampleSystemTestPermission : TestPermissionBuilder
+public class SampleSystemTestPermission : TestPermission
 {
     public SampleSystemTestPermission(
         SecurityRole securityRole,

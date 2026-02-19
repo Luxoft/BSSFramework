@@ -106,12 +106,12 @@ public partial class Employee :
 
     [UniqueGroup]
     [CustomSerialization(CustomSerializationMode.Ignore)]
-    public virtual IEnumerable<EmployeePhoto> EmployeePhotos
+    public virtual ICollection<EmployeePhoto> EmployeePhotos
     {
         get { return this.employeePhotos; }
     }
 
-    public virtual IEnumerable<EmployeeCellPhone> CellPhones
+    public virtual ICollection<EmployeeCellPhone> CellPhones
     {
         get { return this.cellPhones; }
     }

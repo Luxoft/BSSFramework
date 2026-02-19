@@ -4,6 +4,7 @@ using Automation.Utils;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.Persistent;
+
 using SecuritySystem;
 
 using SampleSystem.Domain;
@@ -116,12 +117,9 @@ public class BusinessUnitTests : TestBase
         var childBu = this.DataHelper.SaveBusinessUnit(parent: parentBu);
 
         this.ClearIntegrationEvents();
-        var eventCount1 = this.GetIntegrationEventCount();
 
         var userId = this.AuthManager.For(TextRandomizer.RandomString(10))
                          .SetRole(new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, childBu));
-
-        var eventCount2 = this.GetIntegrationEventCount();
 
         // Act
         var result = this.Evaluate(

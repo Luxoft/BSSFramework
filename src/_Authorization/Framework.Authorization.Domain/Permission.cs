@@ -33,7 +33,7 @@ public class Permission : AuditPersistentDomainObjectBase,
 
     private Principal principal;
 
-    private readonly Permission? delegatedFrom;
+    private Permission? delegatedFrom;
 
     private BusinessRole role;
 
@@ -89,7 +89,11 @@ public class Permission : AuditPersistentDomainObjectBase,
     /// Пермиссия, от которой была делегирована данная пермиссия
     /// </summary>
     [CustomSerialization(CustomSerializationMode.Ignore)]
-    public virtual Permission? DelegatedFrom => this.delegatedFrom;
+    public virtual Permission? DelegatedFrom
+    {
+        get { return this.delegatedFrom; }
+        set { this.delegatedFrom = value; }
+    }
 
     /// <summary>
     /// Период действия пермиссии

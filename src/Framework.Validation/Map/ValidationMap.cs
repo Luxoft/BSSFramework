@@ -20,7 +20,7 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
         return from property in typeof(TSource).GetValidationProperties()
 
                let getPropertyMapMethod = new Func<PropertyInfo, PropertyValidationMap<TSource, object>>(this.GetPropertyMap<TSource, object>)
-                       .CreateGenericMethod(typeof(TSource), property.PropertyType)
+                   .CreateGenericMethod(typeof(TSource), property.PropertyType)
 
                select getPropertyMapMethod.Invoke<IPropertyValidationMap<TSource>>(this, property);
     }
@@ -37,7 +37,8 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
         }
         else
         {
-            var func = new Func<PropertyInfo, CollectionPropertyValidationMap<object, IEnumerable<object>, object>>(this.GetCollectionPropertyMap<object, IEnumerable<object>, object>);
+            var func = new Func<PropertyInfo, CollectionPropertyValidationMap<object, IEnumerable<object>, object>>(
+                this.GetCollectionPropertyMap<object, IEnumerable<object>, object>);
 
             return func.CreateGenericMethod(typeof(TSource), typeof(TProperty), collectionElementType).Invoke<PropertyValidationMap<TSource, TProperty>>(this, property);
         }
@@ -53,22 +54,26 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
         if (property == null) throw new ArgumentNullException(nameof(property));
 
         return new SinglePropertyValidationMap<TSource, TProperty>(
-                                                                   property,
-                                                                   this.GetClassMap<TSource>(),
-                                                                   this.GetOperationContextPropertyValidators<TSource, TProperty>(property).Pipe(this.HasDeepValidation(property), val => val.Concat(new[] { new DeepSingleValidator<TSource, TProperty>() })),
-                                                                   this.GetClassMap<TProperty>());
+            property,
+            this.GetClassMap<TSource>(),
+            this.GetOperationContextPropertyValidators<TSource, TProperty>(property).Pipe(
+                this.HasDeepValidation(property),
+                val => val.Concat(new[] { new DeepSingleValidator<TSource, TProperty>() })),
+            this.GetClassMap<TProperty>());
     }
 
     protected virtual CollectionPropertyValidationMap<TSource, TProperty, TElement> GetCollectionPropertyMap<TSource, TProperty, TElement>(PropertyInfo property)
-            where TProperty : IEnumerable<TElement>
+        where TProperty : IEnumerable<TElement>
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
         return new CollectionPropertyValidationMap<TSource, TProperty, TElement>(
-                                                                                 property,
-                                                                                 this.GetClassMap<TSource>(),
-                                                                                 this.GetOperationContextPropertyValidators<TSource, TProperty>(property).Pipe(this.HasDeepValidation(property), val => val.Concat(new[] { new DeepCollectionValidator<TSource, TProperty, TElement>() })),
-                                                                                 this.GetClassMap<TElement>());
+            property,
+            this.GetClassMap<TSource>(),
+            this.GetOperationContextPropertyValidators<TSource, TProperty>(property).Pipe(
+                this.HasDeepValidation(property),
+                val => val.Concat(new[] { new DeepCollectionValidator<TSource, TProperty, TElement>() })),
+            this.GetClassMap<TElement>());
     }
 
     private IEnumerable<IPropertyValidator<TSource, TProperty>> GetOperationContextPropertyValidators<TSource, TProperty>(PropertyInfo property)
@@ -91,14 +96,20 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
 
                               let baseClassValidator = pair.Key.GetLastClassValidator(typeof(TSource), this.ServiceProvider)
 
+                              where baseClassValidator != null
+
                               let classValidator = (IClassValidator<TSource>)baseClassValidator
 
                               select classValidator.TryApplyValidationData(pair.Value);
 
 
         var selfClassValidator = typeof(IClassValidator<TSource>).IsAssignableFrom(typeof(TSource))
-                                         ? (IClassValidator<TSource>)ActivatorUtilities.CreateInstance(this.ServiceProvider, typeof(SelfClassValidator<>).MakeGenericType(typeof(TSource)))
-                                         : null;
+
+                                     ? this.ServiceProvider
+                                           .GetRequiredService<IServiceProxyFactory>()
+                                           .Create<IClassValidator<TSource>>(typeof(SelfClassValidator<>).MakeGenericType(typeof(TSource)))
+
+                                     : null;
 
         return classValidators.Concat(selfClassValidator.MaybeYield());
     }
@@ -118,7 +129,9 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
             }
             catch (Exception ex)
             {
-                throw new InvalidCastException($"Can't apply validator \"{basePropertyValidator?.GetType().Name}\" to property \"{property.Name}\" of type \"{property.DeclaringType}\"", ex);
+                throw new InvalidCastException(
+                    $"Can't apply validator \"{basePropertyValidator?.GetType().Name}\" to property \"{property.Name}\" of type \"{property.DeclaringType}\"",
+                    ex);
             }
         }).Where(val => val != null).Select(v => v!);
     }
@@ -128,18 +141,20 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
         if (property == null) throw new ArgumentNullException(nameof(property));
 
         return this.GetPropertyValidatorDict(property).Select(pair =>
-                                                              {
-                                                                  var basePropertyValidator = pair.Key.GetLastPropertyValidator(property, this.ServiceProvider);
+        {
+            var basePropertyValidator = pair.Key.GetLastPropertyValidator(property, this.ServiceProvider);
 
-                                                                  try
-                                                                  {
-                                                                      return basePropertyValidator.TryUnbox<TSource, TProperty>().TryApplyValidationData(pair.Value);
-                                                                  }
-                                                                  catch (Exception ex)
-                                                                  {
-                                                                      throw new InvalidCastException($"Can't apply validator \"{basePropertyValidator.GetType().Name}\" to property \"{property.Name}\" of type \"{property.DeclaringType}\"", ex);
-                                                                  }
-                                                              });
+            try
+            {
+                return basePropertyValidator.Maybe(val => val.TryUnbox<TSource, TProperty>().TryApplyValidationData(pair.Value));
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidCastException(
+                    $"Can't apply validator \"{basePropertyValidator?.GetType().Name}\" to property \"{property.Name}\" of type \"{property.DeclaringType}\"",
+                    ex);
+            }
+        }).Where(val => val != null).Select(v => v!);
     }
 
     protected virtual IEnumerable<KeyValuePair<IClassValidator, IValidationData>> GetClassValidatorDict<TSource>()
@@ -150,7 +165,7 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
     }
 
     private IEnumerable<KeyValuePair<TFilterValidator, IValidationData>> GetClassValidatorDict<TSource, TFilterValidator>()
-            where TFilterValidator : class
+        where TFilterValidator : class
     {
         return from pair in this.GetClassValidatorDict<TSource>()
 
@@ -177,9 +192,6 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
 
         return from attribute in this.GetPropertyValidatorAttributes(property)
 
-               select attribute.CreateValidator(this.ServiceProvider).ToKeyValuePair((IValidationData)attribute);
+               select attribute.CreateValidator().ToKeyValuePair((IValidationData)attribute);
     }
-
-
-    public static readonly ValidationMap Default = new ValidationMap(new ServiceCollection().BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true }));
 }

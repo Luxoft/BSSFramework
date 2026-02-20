@@ -169,13 +169,13 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         }
     }
 
-    private CodeExpression TryAutoExpandPropertyAttributes(PropertyInfo property, PropertyValidatorAttribute attribute)
+    private CodeExpression? TryAutoExpandPropertyAttributes(PropertyInfo property, PropertyValidatorAttribute attribute)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        var instanceType = attribute.CreateValidator(this.Configuration.Environment.ServiceProvider).GetLastPropertyValidator(property, this.Configuration.Environment.ServiceProvider).GetType();
+        var instanceType = attribute.CreateValidator().GetLastPropertyValidator(property, this.Configuration.Environment.ServiceProvider)?.GetType();
 
-        if (instanceType.IsInterfaceImplementation(typeof(IPropertyValidator<,>)))
+        if (instanceType != null && instanceType.IsInterfaceImplementation(typeof(IPropertyValidator<,>)))
         {
             var attrProperties = attribute.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
                                           .Where(prop => !prop.GetIndexParameters().Any() && !prop.DeclaringType.IsAssignableFrom(typeof(ValidatorAttribute)))

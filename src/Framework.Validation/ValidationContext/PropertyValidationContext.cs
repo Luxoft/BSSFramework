@@ -4,7 +4,7 @@ public class PropertyValidationContext<TSource, TProperty>(
     IValidator validator,
     int operationContext,
     TSource source,
-    IValidationState parentState,
+    IValidationState? parentState,
     IPropertyValidationMap<TSource, TProperty> map,
     IServiceProvider serviceProvider,
     TProperty value)

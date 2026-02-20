@@ -8,24 +8,15 @@ using Framework.Restriction;
 
 namespace Framework.Validation;
 
-public class RequiredValidator : IPropertyValidator<object, object>, IDynamicPropertyValidator
+public class RequiredValidator(RequiredMode mode) : IPropertyValidator<object, object>, IDynamicPropertyValidator
 {
-    private readonly RequiredMode _mode;
-
-
-    public RequiredValidator(RequiredMode mode)
-    {
-        this._mode = mode;
-    }
-
-
     public ValidationResult GetValidationResult(IPropertyValidationContext<object, object> context)
     {
         if (context == null) throw new ArgumentNullException(nameof(context));
 
         var property = context.Map.Property;
 
-        this._mode.ValidateAppliedType(property.PropertyType);
+        mode.ValidateAppliedType(property.PropertyType);
 
         return new Func<IPropertyValidationContext<object, object>, ValidationResult>(this.GetValidationResult<object, object>)
                .CreateGenericMethod(property.ReflectedType, property.PropertyType)
@@ -36,7 +27,7 @@ public class RequiredValidator : IPropertyValidator<object, object>, IDynamicPro
     {
         if (context == null) throw new ArgumentNullException(nameof(context));
 
-        return new RequiredValidator<TSource, TProperty>(this._mode).GetValidationResult(context.Cast(v => (TSource)v, v => (TProperty)v));
+        return new RequiredValidator<TSource, TProperty>(mode).GetValidationResult(context.Cast(v => (TSource)v, v => (TProperty)v));
     }
 
 
@@ -45,35 +36,26 @@ public class RequiredValidator : IPropertyValidator<object, object>, IDynamicPro
         if (property == null) throw new ArgumentNullException(nameof(property));
         if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
-        this._mode.ValidateAppliedType(property.PropertyType);
+        mode.ValidateAppliedType(property.PropertyType);
 
         return (IPropertyValidator)typeof(RequiredValidator<,>).MakeGenericType(property.ReflectedType, property.PropertyType)
                                                                .GetConstructor(new[] {typeof(RequiredMode)})
-                                                               .Invoke(new object[] { this._mode });
+                                                               .Invoke(new object[] { mode });
     }
 
 
     public static RequiredValidator Default { get; } = new RequiredValidator(RequiredMode.Default);
 }
 
-public class RequiredValidator<TSource, TProperty> : IPropertyValidator<TSource, TProperty>
+public class RequiredValidator<TSource, TProperty>(RequiredMode mode) : IPropertyValidator<TSource, TProperty>
 {
-    private readonly RequiredMode _mode;
-
-
-    public RequiredValidator(RequiredMode mode)
-    {
-        this._mode = mode;
-    }
-
-
     public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> context)
     {
         return ValidationResult.FromCondition(this.IsValid(context), () =>
                                                                      {
                                                                          var name = (context.GetSource() as IVisualIdentityObject).Maybe(x => x.Name);
 
-                                                                         if (context.Value is Period && this._mode == RequiredMode.ClosedPeriodEndDate)
+                                                                         if (context.Value is Period && mode == RequiredMode.ClosedPeriodEndDate)
                                                                          {
                                                                              var value = (Period)(object)context.Value;
 
@@ -89,7 +71,7 @@ public class RequiredValidator<TSource, TProperty> : IPropertyValidator<TSource,
 
     protected virtual bool IsValid(IPropertyValidationContext<TSource, TProperty> context)
     {
-        return RequiredHelper.IsValid(context.Value, this._mode);
+        return RequiredHelper.IsValid(context.Value, mode);
     }
 
 

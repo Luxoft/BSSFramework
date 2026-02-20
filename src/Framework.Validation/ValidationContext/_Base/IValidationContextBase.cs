@@ -8,7 +8,7 @@ public interface IValidationContextBase : IValidatorContainer<IValidator>, IOper
     /// <summary>
     /// Верхний (по стеку) стейт валидации
     /// </summary>
-    IValidationState ParentState { get; }
+    IValidationState? ParentState { get; }
 }
 
 /// <summary>

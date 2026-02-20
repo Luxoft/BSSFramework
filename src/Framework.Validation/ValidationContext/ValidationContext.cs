@@ -1,23 +1,16 @@
 ﻿namespace Framework.Validation;
 
-public class ValidationContext<TSource, TValidationMap> : ValidationContextBase<TSource>, IValidationContext<TSource, TValidationMap>
-        where TValidationMap : class
+public class ValidationContext<TSource, TValidationMap>(
+    IValidator validator,
+    int operationContext,
+    TSource source,
+    IValidationState? parentState,
+    TValidationMap map,
+    IServiceProvider serviceProvider)
+    : ValidationContextBase<TSource>(validator, operationContext, source, parentState), IValidationContext<TSource, TValidationMap>
+    where TValidationMap : class
 {
-    public ValidationContext(IValidator validator, int operationContext, TSource source, IValidationState parentState, TValidationMap map, IServiceProvider serviceProvider)
-            : base(validator, operationContext, source, parentState)
-    {
-        if (map == null) throw new ArgumentNullException(nameof(map));
-        if (validator == null) throw new ArgumentNullException(nameof(validator));
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
+    public TValidationMap Map { get; } = map;
 
-        this.Map = map;
-        this.ServiceProvider = serviceProvider;
-    }
-
-
-    public TValidationMap Map { get; }
-
-
-    public IServiceProvider ServiceProvider { get; }
+    public IServiceProvider ServiceProvider { get; } = serviceProvider;
 }

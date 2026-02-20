@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using NUnit.Framework;
 
 namespace Framework.Validation.Tests.Unit;
@@ -11,7 +13,14 @@ public class ExpandValidationTest
     public void ExpandValidation_CheckCompositeProperty_ErrorContainsFullPropertyPath()
     {
         // Arrange
-        var validator = Validator.Default;
+        var sp = new ServiceCollection()
+                 .AddSingleton<IValidationMap, ValidationMap>()
+                 .AddSingleton<ValidatorCompileCache>()
+                 .AddSingleton<IValidator, Validator>()
+                 .BuildServiceProvider(new ServiceProviderOptions{ ValidateScopes = true, ValidateOnBuild = true });
+
+
+        var validator = sp.GetRequiredService<IValidator>();
         var source = new TestRootClass { CompositeProp = new TestCompositeClass() };
 
         // Act

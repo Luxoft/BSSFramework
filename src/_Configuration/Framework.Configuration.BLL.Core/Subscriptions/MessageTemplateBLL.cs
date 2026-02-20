@@ -3,6 +3,8 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 
+using CommonFramework;
+
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Configuration.SubscriptionModeling;
@@ -299,7 +301,11 @@ public class MessageTemplateBLL : BLLContextContainer<IConfigurationBLLContext>
             throw new InvalidOperationException($"Wrong type of DomainObjectVersions instance. Required type '{typeof(DomainObjectVersions<TModelObjectType>)}' but actual type {messageTemplate.ContextObject.GetType()}");
         }
 
-        var viewTemplate = (RazorTemplate<TModelObjectType>)ActivatorUtilities.CreateInstance(this.Context.ServiceProvider, messageTemplate.RazorMessageTemplateType);
+        var viewTemplate = this.Context
+                               .ServiceProvider
+                               .GetRequiredService<IServiceProxyFactory>()
+                               .Create<RazorTemplate<TModelObjectType>>(messageTemplate.RazorMessageTemplateType);
+
         viewTemplate.Previous = versions.Previous;
         viewTemplate.Current = versions.Current;
         viewTemplate.ServiceProvider = this.Context.ServiceProvider;

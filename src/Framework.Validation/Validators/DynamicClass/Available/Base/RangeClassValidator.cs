@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 
+using CommonFramework;
+
 using Framework.Core;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +14,7 @@ public abstract class RangeClassValidator<TProperty, TRange> : IManyPropertyDyna
     protected abstract Func<Range<TRange>, TProperty, bool> IsValidValueFunc { get; }
 
 
-    public IPropertyValidator GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
+    public IPropertyValidator? GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
         if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
@@ -23,17 +25,17 @@ public abstract class RangeClassValidator<TProperty, TRange> : IManyPropertyDyna
         {
             var availableRange = availableValues.GetAvailableRange<TRange>();
 
-            var propValidatorType = typeof(RangePropertyValidator<,,>).MakeGenericType(property.ReflectedType, typeof(TProperty), typeof(TRange));
+            var propValidatorType = typeof(RangePropertyValidator<,,>).MakeGenericType(property.ReflectedType!, typeof(TProperty), typeof(TRange));
 
-            return (IPropertyValidator)Activator.CreateInstance(propValidatorType, availableRange, this.IsValidValueFunc);
+            return serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<IPropertyValidator>(propValidatorType, availableRange, this.IsValidValueFunc);
         }
         else if (property.PropertyType == typeof(TProperty?))
         {
             var availableRange = availableValues.GetAvailableRange<TRange>();
 
-            var propValidatorType = typeof(NullableRangePropertyValidator<,,>).MakeGenericType(property.ReflectedType, typeof(TProperty), typeof(TRange));
+            var propValidatorType = typeof(NullableRangePropertyValidator<,,>).MakeGenericType(property.ReflectedType!, typeof(TProperty), typeof(TRange));
 
-            return (IPropertyValidator)Activator.CreateInstance(propValidatorType, availableRange, this.IsValidValueFunc);
+            return serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<IPropertyValidator>(propValidatorType, availableRange, this.IsValidValueFunc);
         }
         else
         {
@@ -43,30 +45,20 @@ public abstract class RangeClassValidator<TProperty, TRange> : IManyPropertyDyna
 }
 
 
-public class RangePropertyValidator<TSource, TProperty, TRange> : IPropertyValidator<TSource, TProperty>
+public class RangePropertyValidator<TSource, TProperty, TRange>(Range<TRange> availableRange, Func<Range<TRange>, TProperty, bool> isValidValueFunc)
+    : IPropertyValidator<TSource, TProperty>
 {
-    private readonly Range<TRange> _availableRange;
-
-    private readonly Func<Range<TRange>, TProperty, bool> _isValidValueFunc;
-
-    public RangePropertyValidator(Range<TRange> availableRange, Func<Range<TRange>, TProperty, bool> isValidValueFunc)
-    {
-        if (availableRange == null) throw new ArgumentNullException(nameof(availableRange));
-        if (isValidValueFunc == null) throw new ArgumentNullException(nameof(isValidValueFunc));
-
-        this._availableRange = availableRange;
-        this._isValidValueFunc = isValidValueFunc;
-    }
-
     public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> context)
     {
-        return ValidationResult.FromCondition(this.IsValidValue(context), () =>
-                                                                                  $"{context.GetSourceTypeName()} has {context.Map.Property.Name.ToStartUpperCase()} value was too overflow for a {context.GetPropertyTypeName()}");
+        return ValidationResult.FromCondition(
+            this.IsValidValue(context),
+            () =>
+                $"{context.GetSourceTypeName()} has {context.Map.Property.Name.ToStartUpperCase()} value was too overflow for a {context.GetPropertyTypeName()}");
     }
 
     private bool IsValidValue(IPropertyValidationContext<TSource, TProperty> context)
     {
-        return this._isValidValueFunc(this._availableRange, context.Value);
+        return isValidValueFunc(availableRange, context.Value);
     }
 }
 

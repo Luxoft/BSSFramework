@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 
 using CommonFramework;
+using CommonFramework.DependencyInjection;
 
 using Framework.Core;
 using Framework.Persistent;
@@ -75,7 +76,9 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
 
     protected virtual IServiceProvider BuildServiceProvider()
     {
-        return new ServiceCollection().BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
+        return new ServiceCollection()
+               .AddServiceProxyFactory()
+               .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
     }
 
     protected virtual IEnumerable<Assembly> GetDomainObjectAssemblies()

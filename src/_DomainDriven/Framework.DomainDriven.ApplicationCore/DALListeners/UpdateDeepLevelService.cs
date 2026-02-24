@@ -7,14 +7,16 @@ using HierarchicalExpand;
 namespace Framework.DomainDriven.ApplicationCore.DALListeners;
 
 public class UpdateDeepLevelService<TDomainObject>(
-    IDomainObjectExpander<TDomainObject> domainObjectExpander,
+    IDomainObjectExpanderFactory<TDomainObject> domainObjectExpanderFactory,
     HierarchicalInfo<TDomainObject> hierarchicalInfo,
     DeepLevelInfo<TDomainObject> deepLevelInfo) : IUpdateDeepLevelService<TDomainObject>
     where TDomainObject : class
 {
+    private readonly IDomainObjectExpander<TDomainObject> domainObjectExpander = domainObjectExpanderFactory.Create();
+
     public async Task UpdateDeepLevels(IEnumerable<TDomainObject> domainObjects, CancellationToken cancellationToken)
     {
-        foreach (var domainObject in await domainObjectExpander.GetAllChildren(domainObjects, cancellationToken))
+        foreach (var domainObject in await this.domainObjectExpander.GetAllChildren(domainObjects, cancellationToken))
         {
             deepLevelInfo.Setter.Invoke(
                 domainObject,

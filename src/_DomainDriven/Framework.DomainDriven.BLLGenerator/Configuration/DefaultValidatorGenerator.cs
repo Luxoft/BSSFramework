@@ -178,7 +178,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         if (instanceType != null && instanceType.IsInterfaceImplementation(typeof(IPropertyValidator<,>)))
         {
             var attrProperties = attribute.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                                          .Where(prop => !prop.GetIndexParameters().Any() && !prop.DeclaringType.IsAssignableFrom(typeof(ValidatorAttribute)))
+                                          .Where(prop => !prop.GetIndexParameters().Any() && !prop.DeclaringType!.IsAssignableFrom(typeof(ValidatorAttribute)))
                                           .ToDictionary(p => p, p => p.GetValue(attribute));
 
             var ctor = instanceType.GetConstructors().SingleMaybe().GetValueOrDefault();
@@ -213,16 +213,16 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         return null;
     }
 
-    private CodeExpression TryAutoExpandClassAttributes(ClassValidatorAttribute attribute)
+    private CodeExpression? TryAutoExpandClassAttributes(ClassValidatorAttribute attribute)
     {
         if (attribute == null) throw new ArgumentNullException(nameof(attribute));
 
-        var instanceType = attribute.CreateValidator(this.Configuration.Environment.ServiceProvider).GetType();
+        var instanceType = attribute.CreateValidator().GetLastClassValidator(this.DomainType, this.Configuration.Environment.ServiceProvider)?.GetType();
 
-        if (instanceType.IsInterfaceImplementation(typeof(IClassValidator<>)))
+        if (instanceType != null && instanceType.IsInterfaceImplementation(typeof(IClassValidator<>)))
         {
             var attrProperties = attribute.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                                          .Where(prop => !prop.GetIndexParameters().Any() && !prop.DeclaringType.IsAssignableFrom(typeof(ValidatorAttribute)))
+                                          .Where(prop => !prop.GetIndexParameters().Any() && !prop.DeclaringType!.IsAssignableFrom(typeof(ValidatorAttribute)))
                                           .ToDictionary(p => p, p => p.GetValue(attribute));
 
             var ctor = instanceType.GetConstructors().SingleMaybe().GetValueOrDefault();

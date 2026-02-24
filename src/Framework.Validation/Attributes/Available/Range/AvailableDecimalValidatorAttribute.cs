@@ -2,7 +2,7 @@
 
 public class AvailableDecimalValidatorAttribute : ClassValidatorAttribute
 {
-    public override IClassValidator CreateValidator(IServiceProvider serviceProvider)
+    public override IClassValidator CreateValidator()
     {
         return AvailableDecimalValidator.Value;
     }

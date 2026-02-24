@@ -4,7 +4,7 @@ namespace SampleSystem.Domain.Validators.Employee;
 
 public sealed class EmployeeValidatorAttribute : ClassValidatorAttribute
 {
-    public override IClassValidator CreateValidator(IServiceProvider serviceProvider)
+    public override IClassValidator CreateValidator()
     {
         return new EmployeeValidator();
     }

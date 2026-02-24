@@ -161,7 +161,7 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
     {
         return from attribute in typeof(TSource).GetCustomAttributes<ClassValidatorAttribute>()
 
-               select attribute.CreateValidator(this.ServiceProvider).ToKeyValuePair((IValidationData)attribute);
+               select attribute.CreateValidator().ToKeyValuePair((IValidationData)attribute);
     }
 
     private IEnumerable<KeyValuePair<TFilterValidator, IValidationData>> GetClassValidatorDict<TSource, TFilterValidator>()

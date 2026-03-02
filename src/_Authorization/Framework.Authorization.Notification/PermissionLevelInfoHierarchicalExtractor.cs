@@ -31,7 +31,7 @@ public class PermissionLevelInfoHierarchicalExtractor<TSecurityContext>(
 
         return permissionSecurityContextItems => permissionSecurityContextItems
                                                  .Where(containsFilter)
-                                                 .Select(deepLevelInfo.Path)
+                                                 .Select(deepLevelInfo.DeepLevel.Path)
                                                  .Select(v => (int?)v)
                                                  .Max()
                                                  ?? PriorityLevels.AccessDenied;

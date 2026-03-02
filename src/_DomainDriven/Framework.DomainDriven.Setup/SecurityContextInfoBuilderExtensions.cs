@@ -14,8 +14,6 @@ public static class SecurityContextInfoBuilderExtensions
     public static ISecurityContextInfoBuilder<TDomainObject> SetDeepLevel<TDomainObject>(
         this ISecurityContextInfoBuilder<TDomainObject> builder,
         Expression<Func<TDomainObject, int>> path)
-        where TDomainObject : class, ISecurityContext
-    {
-        return builder.AddExtension(services => services.ReplaceSingleton(new DeepLevelInfo<TDomainObject>(path)));
-    }
+        where TDomainObject : class, ISecurityContext =>
+        builder.AddExtension(services => services.ReplaceSingleton(new DeepLevelInfo<TDomainObject>(path)));
 }

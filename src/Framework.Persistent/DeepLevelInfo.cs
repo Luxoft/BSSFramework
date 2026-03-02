@@ -4,8 +4,10 @@ using CommonFramework;
 
 namespace Framework.Persistent;
 
-public record DeepLevelInfo<TDomainObject>(Expression<Func<TDomainObject, int>> Path)
-    where TDomainObject : notnull
+public record DeepLevelInfo<TDomainObject>(PropertyAccessors<TDomainObject, int> DeepLevel)
 {
-    public Action<TDomainObject, int> Setter { get; } = Path.ToSetLambdaExpression().Compile();
+    public DeepLevelInfo(Expression<Func<TDomainObject, int>> deepLevelPath)
+        : this(deepLevelPath.ToPropertyAccessors())
+    {
+    }
 }

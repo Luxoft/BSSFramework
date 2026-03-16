@@ -98,7 +98,7 @@ public class AuditService<TIdent, TBllContext, TBllFactoryContainer, TRootSecuri
     {
         var viewSecurityRule = propertyInfo.GetViewSecurityRule();
 
-        return bllContext.SecurityService.GetSecurityProvider<TDomain>(viewSecurityRule).HasAccess(domainObject);
+        return bllContext.SecurityService.GetSecurityProvider<TDomain>(viewSecurityRule).HasAccessAsync(domainObject).GetAwaiter().GetResult();
     }
 
     private TPropertyRevisionDto ToPropertyRevisionDto<TDtoProperty, TProperty>(

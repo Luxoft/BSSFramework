@@ -81,7 +81,7 @@ public static class ParserHelper
 
     public static Delegate? GetTryParseFunc(Type type, bool raiseError = true)
     {
-        return new Func<bool, Func<string, object>>(GetTryParseFunc<object>)
+        return new Func<bool, Func<string, Maybe<object>>>(GetTryParseFunc<object>)
                .CreateGenericMethod(type)
                .Invoke<Delegate>(null, raiseError);
     }

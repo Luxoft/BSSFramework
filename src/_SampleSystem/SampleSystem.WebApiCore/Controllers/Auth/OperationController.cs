@@ -9,10 +9,11 @@ namespace Authorization.WebApi.Controllers;
 public class OperationController(IAvailableSecurityOperationSource availableSecurityOperationSource) : ControllerBase
 {
     [HttpPost]
-    public async Task<IEnumerable<string>> GetSecurityOperations(CancellationToken cancellationToken)
+    public async Task<List<string>> GetSecurityOperations(CancellationToken cancellationToken)
     {
-        var operations = await availableSecurityOperationSource.GetAvailableSecurityOperations(cancellationToken);
-
-        return operations.Select(op => op.Name);
+        return await availableSecurityOperationSource
+                     .GetAvailableSecurityOperations()
+                     .Select(op => op.Name)
+                     .ToListAsync(cancellationToken);
     }
 }

@@ -3,7 +3,6 @@ using CommonFramework.RelativePath.DependencyInjection;
 
 using Framework.Authorization.Domain;
 using Framework.Authorization.Environment.Security;
-using Framework.Authorization.Notification;
 using Framework.Core;
 using Framework.DomainDriven;
 
@@ -14,25 +13,19 @@ using SecuritySystem.DependencyInjection;
 using SecuritySystem.ExternalSystem.ApplicationSecurity;
 using SecuritySystem.GeneralPermission.DependencyInjection;
 using SecuritySystem.GeneralPermission.Validation;
+using SecuritySystem.Notification;
+using SecuritySystem.Notification.DependencyInjection;
 using SecuritySystem.UserSource;
 
 namespace Framework.Authorization.Environment;
 
 public class AuthorizationSystemSettings : IAuthorizationSystemSettings
 {
-    private Type notificationPermissionExtractorType = typeof(NotificationPermissionExtractor);
+    private Type notificationPermissionExtractorType = typeof(NotificationPermissionExtractor<>);
 
     private Type? uniquePermissionComparerType;
 
     public bool RegisterRunAsManager { get; set; } = true;
-
-    public IAuthorizationSystemSettings SetNotificationPermissionExtractor<T>()
-        where T : INotificationPermissionExtractor
-    {
-        this.notificationPermissionExtractorType = typeof(T);
-
-        return this;
-    }
 
     public IAuthorizationSystemSettings SetUniquePermissionComparer<TComparer>()
         where TComparer : class, IPermissionEqualityComparer<Permission, PermissionRestriction>
@@ -42,7 +35,7 @@ public class AuthorizationSystemSettings : IAuthorizationSystemSettings
         return this;
     }
 
-    public void Initialize(ISecuritySystemSettings settings)
+    public void Initialize(ISecuritySystemBuilder settings)
     {
         var securityAdministratorRule = ApplicationSecurityRule.SecurityAdministrator;
         var principalViewSecurityRule = securityAdministratorRule.Or(DomainSecurityRule.CurrentUser);
@@ -93,6 +86,8 @@ public class AuthorizationSystemSettings : IAuthorizationSystemSettings
 
                 .AddDomainSecurity<SecurityContextType>(b => b.SetView(SecurityRule.Disabled))
 
+                .AddNotification()
+
                 .AddExtensions(services =>
                 {
                     if (this.uniquePermissionComparerType != null)
@@ -104,11 +99,7 @@ public class AuthorizationSystemSettings : IAuthorizationSystemSettings
                             .AddRelativeDomainPath((Permission permission) => permission.DelegatedFrom!.Principal, nameof(Permission.DelegatedFrom))
 
                             .AddRelativeDomainPath((BusinessRole businessRole) => businessRole)
-                            .AddScoped(typeof(AvailableBusinessRoleSecurityProvider<>))
-                            .AddScoped(typeof(INotificationPermissionExtractor), this.notificationPermissionExtractorType)
-
-                            .AddScoped<INotificationGeneralPermissionFilterFactory, NotificationGeneralPermissionFilterFactory>()
-                            .AddScoped<INotificationPrincipalExtractor, NotificationPrincipalExtractor>();
+                            .AddScoped(typeof(AvailableBusinessRoleSecurityProvider<>));
                 });
     }
 }

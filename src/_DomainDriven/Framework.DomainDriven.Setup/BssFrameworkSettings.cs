@@ -13,15 +13,15 @@ namespace Framework.DomainDriven.Setup;
 
 public class BssFrameworkSettings : IBssFrameworkSettings
 {
-    private readonly List<Action<IServiceCollection>> registerActions = new();
+    private readonly List<Action<IServiceCollection>> registerActions = [];
 
-    private readonly List<IBssFrameworkExtension> extensions = new();
+    private readonly List<IBssFrameworkExtension> extensions = [];
 
     private Type domainObjectEventMetadataType = typeof(DomainObjectEventMetadata);
 
     public bool RegisterDenormalizeHierarchicalDALListener { get; set; } = true;
 
-    public IBssFrameworkSettings AddSecuritySystem(Action<ISecuritySystemSettings> setupAction)
+    public IBssFrameworkSettings AddSecuritySystem(Action<ISecuritySystemBuilder> setupAction)
     {
         this.registerActions.Add(sc => sc.AddSecuritySystem(s =>
         {

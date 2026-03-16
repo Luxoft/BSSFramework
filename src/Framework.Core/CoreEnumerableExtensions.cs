@@ -445,9 +445,8 @@ public static class CoreEnumerableExtensions
         if (source == null) throw new ArgumentNullException(nameof(source));
 
         return from item in source
-               let just = item as Just<T>
-               where just != null
-               select just.Value;
+               where item.HasValue
+               select item.Value;
     }
 
     public static TSource? SingleOrDefault<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, Func<Exception> manyExceptionHandler)

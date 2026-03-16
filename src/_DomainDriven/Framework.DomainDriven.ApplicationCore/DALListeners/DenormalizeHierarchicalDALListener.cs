@@ -2,10 +2,9 @@
 
 using Framework.Core;
 using Framework.DomainDriven.Lock;
-using Framework.Persistent;
 
 using HierarchicalExpand;
-using HierarchicalExpand.AncestorDenormalization;
+using HierarchicalExpand.Denormalization;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -60,10 +59,10 @@ public class DenormalizeHierarchicalDALListener(
 
         if (serviceProvider.GetService(typeof(DeepLevelInfo<>).MakeGenericType(typeof(TDomainObject))) != null)
         {
-            await serviceProvider.GetRequiredService<IUpdateDeepLevelService<TDomainObject>>().UpdateDeepLevels(modified, cancellationToken);
+            await serviceProvider.GetRequiredService<IDeepLevelDenormalizer<TDomainObject>>().UpdateDeepLevels(modified, cancellationToken);
         }
 
-        await serviceProvider.GetRequiredService<IDenormalizedAncestorsService<TDomainObject>>().SyncAsync(modified, removing, cancellationToken);
+        await serviceProvider.GetRequiredService<IAncestorDenormalizer<TDomainObject>>().SyncAsync(modified, removing, cancellationToken);
     }
 
     private async Task LockChanges(FullAncestorLinkInfo fullAncestorLinkInfo, CancellationToken cancellationToken)

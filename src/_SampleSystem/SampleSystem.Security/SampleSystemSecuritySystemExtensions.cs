@@ -14,9 +14,9 @@ namespace SampleSystem.Security;
 
 public static class SampleSystemSecuritySystemExtensions
 {
-    extension(ISecuritySystemSettings settings)
+    extension(ISecuritySystemBuilder settings)
     {
-        public ISecuritySystemSettings AddSecurityContexts()
+        public ISecuritySystemBuilder AddSecurityContexts()
         {
             return settings.AddSecurityContext<BusinessUnit>(
                                new Guid("263D2C60-7BCE-45D6-A0AF-A0830152353E"),
@@ -44,7 +44,7 @@ public static class SampleSystemSecuritySystemExtensions
                                b => b.SetDisplayFunc(employee => employee.Login));
         }
 
-        public ISecuritySystemSettings AddSecurityRoles()
+        public ISecuritySystemBuilder AddSecurityRoles()
         {
             return settings
                    .AddSecurityRole(
@@ -130,7 +130,7 @@ public static class SampleSystemSecuritySystemExtensions
                        });
         }
 
-        public ISecuritySystemSettings AddSecurityRules()
+        public ISecuritySystemBuilder AddSecurityRules()
         {
             DomainSecurityRule.NonExpandedRolesSecurityRule g = new[] { SecurityRole.Administrator, };
 
@@ -145,7 +145,7 @@ public static class SampleSystemSecuritySystemExtensions
                                new[] { g });
         }
 
-        public ISecuritySystemSettings AddCustomSecurityOperations()
+        public ISecuritySystemBuilder AddCustomSecurityOperations()
         {
             return settings.AddSecurityOperation(
                                SampleSystemSecurityOperation.BusinessUnitView,
@@ -156,14 +156,14 @@ public static class SampleSystemSecuritySystemExtensions
                                new SecurityOperationInfo { CustomExpandType = HierarchicalExpandType.All });
         }
 
-        public ISecuritySystemSettings AddVirtualPermissions()
+        public ISecuritySystemBuilder AddVirtualPermissions()
         {
             return settings.AddVirtualPermission<Employee, BusinessUnitEmployeeRole>(
                 link => link.Employee,
-                vpb => vpb.ForRole(
-                    SampleSystemSecurityRole.SeManager,
-                    v => v.AddRestriction(link => link.BusinessUnit)
-                          .AddFilter(link => link.Role == BusinessUnitEmployeeRoleType.Manager)));
+                vpb => vpb.AddRestriction(link => link.BusinessUnit)
+                          .AddSecurityRole(
+                              SampleSystemSecurityRole.SeManager,
+                              v => v.AddFilter(link => link.Role == BusinessUnitEmployeeRoleType.Manager)));
         }
     }
 }

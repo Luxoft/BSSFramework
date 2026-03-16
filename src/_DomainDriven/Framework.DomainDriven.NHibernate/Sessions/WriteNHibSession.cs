@@ -96,7 +96,7 @@ public class WriteNHibSession : NHibSessionBase
 
         this.closed = true;
 
-        using (this.NativeSession)
+       using (this.NativeSession)
         {
             using (this.nhibTransaction)
             {

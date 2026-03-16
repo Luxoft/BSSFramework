@@ -30,9 +30,12 @@ public class EfAsyncDal<TDomainObject, TIdent>(IEfSession session, IIdentityInfo
     {
         this.CheckWrite();
 
-        this.NativeSession.Attach(domainObject);
+        var state = session.NativeSession.Entry(domainObject).State;
 
-        await this.NativeSession.SaveChangesAsync(cancellationToken);
+        if (state == EntityState.Detached)
+        {
+            await session.NativeSession.AddAsync(domainObject, cancellationToken);
+        }
     }
 
     public virtual async Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken = default)
@@ -61,8 +64,6 @@ public class EfAsyncDal<TDomainObject, TIdent>(IEfSession session, IIdentityInfo
         this.CheckWrite();
 
         this.NativeSession.Remove(domainObject);
-
-        await this.NativeSession.SaveChangesAsync(cancellationToken);
     }
 
     public virtual async Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken cancellationToken)

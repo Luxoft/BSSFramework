@@ -9,6 +9,7 @@ using Framework.DomainDriven.DALExceptions;
 using Framework.DomainDriven.NHibernate.Audit;
 
 using GenericQueryable.DependencyInjection;
+using GenericQueryable.NHibernate;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,9 +29,7 @@ public static class DependencyInjectionExtensions
 
         services.AddScoped<IDBSessionSettings, DBSessionSettings>();
 
-        services.AddGenericQueryable(v => v
-                                          .SetFetchService<NHibFetchService>()
-                                          .SetTargetMethodExtractor<NhibTargetMethodExtractor>());
+        services.AddNHibernateGenericQueryable();
 
         //For close db session by middleware
         services.AddScopedFromLazyObject<INHibSession, NHibSession>();

@@ -148,7 +148,7 @@ public static class ServiceCollectionExtensions
     }
 
 
-    public static ISecuritySystemSettings AddConfigurationSecurity(this ISecuritySystemSettings securitySystemSettings)
+    public static ISecuritySystemBuilder AddConfigurationSecurity(this ISecuritySystemBuilder securitySystemSettings)
     {
         return securitySystemSettings
                .AddDomainSecurity<ExceptionMessage>(b => b.SetView(SecurityRole.Administrator))

@@ -171,8 +171,6 @@ public static partial class TryResultExtensions
 
     public static ITryResult<T> ToTryResult<T>(this Maybe<T> source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
         return source.Match(TryResult.Return<T>, TryResult.CreateBreak<T>);
     }
 

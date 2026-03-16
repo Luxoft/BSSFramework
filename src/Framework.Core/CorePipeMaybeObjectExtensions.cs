@@ -11,18 +11,15 @@ public static class CorePipeMaybeObjectExtensions
 
     public static void Match<TSource>(this Maybe<TSource> maybeValue, Action<TSource> fromJustAction, Action? fromNothingAction = null)
     {
-        if (maybeValue == null) throw new ArgumentNullException(nameof(maybeValue));
         if (fromJustAction == null) throw new ArgumentNullException(nameof(fromJustAction));
 
-        var just = maybeValue as Just<TSource>;
-
-        if (just == null)
+        if (maybeValue.HasValue)
         {
-            fromNothingAction?.Invoke();
+            fromJustAction(maybeValue.Value);
         }
         else
         {
-            fromJustAction(just.Value);
+            fromNothingAction?.Invoke();
         }
     }
 }

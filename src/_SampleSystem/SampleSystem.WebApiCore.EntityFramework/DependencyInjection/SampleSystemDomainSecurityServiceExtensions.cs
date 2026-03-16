@@ -8,7 +8,7 @@ namespace SampleSystem.Security;
 
 public static class SampleSystemDomainSecurityServiceExtensions
 {
-    public static ISecuritySystemSettings AddDomainSecurityServices(this ISecuritySystemSettings settings)
+    public static ISecuritySystemBuilder AddDomainSecurityServices(this ISecuritySystemBuilder settings)
     {
         return settings.AddDomainSecurity(
                            SampleSystemSecurityRole.SeManager,

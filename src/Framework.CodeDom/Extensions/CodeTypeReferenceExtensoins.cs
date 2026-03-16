@@ -47,35 +47,13 @@ public static class CodeTypeReferenceExtensions
         return new CodeTypeReference(typeof(Maybe<>)) { TypeArguments = { typeArgument } };
     }
 
-    public static CodeTypeReference ToJustReference(this CodeTypeReference typeArgument)
-    {
-        if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
-
-        return new CodeTypeReference(typeof(Just<>)) { TypeArguments = { typeArgument } };
-    }
-
-    public static CodeExpression ToJustCodeExpression(this CodeExpression sourceExpression, CodeTypeReference typeArgument)
-    {
-        if (sourceExpression == null) { throw new ArgumentNullException(nameof(sourceExpression)); }
-        if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
-
-        return typeArgument.ToJustReference().ToObjectCreateExpression(sourceExpression);
-    }
-
-    public static CodeTypeReference ToNothingReference(this CodeTypeReference typeArgument)
-    {
-        if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
-
-        return new CodeTypeReference(typeof(Nothing<>)) { TypeArguments = { typeArgument } };
-    }
-
     public static CodeExpression ToNothingValueExpression(this CodeTypeReference typeArgumentT)
     {
         if (typeArgumentT == null) throw new ArgumentNullException(nameof(typeArgumentT));
 
         return typeArgumentT.ToMaybeReference()
                             .ToTypeReferenceExpression()
-                            .ToPropertyReference(nameof(Maybe<Ignore>.Nothing));
+                            .ToPropertyReference(nameof(Maybe<>.Nothing));
     }
 
     public static CodeExpression ToValueFieldReference(this CodeExpression codeExpression)

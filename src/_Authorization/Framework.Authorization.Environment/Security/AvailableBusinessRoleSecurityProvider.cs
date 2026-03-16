@@ -6,6 +6,8 @@ using CommonFramework.RelativePath;
 
 using Framework.Authorization.Domain;
 
+using GenericQueryable;
+
 using SecuritySystem;
 using SecuritySystem.Providers;
 using SecuritySystem.SecurityAccessor;
@@ -26,19 +28,25 @@ public class AvailableBusinessRoleSecurityProvider<TDomainObject>(
                                            ExpressionHelper.Create((BusinessRole businessRole) => permissionQ.Select(p => p.Role).Contains(businessRole)))
                                  .Pipe(toBusinessRolePathInfo.CreateCondition);
 
-    public override SecurityAccessorData GetAccessorData(TDomainObject domainObject)
+    public override async ValueTask<SecurityAccessorData> GetAccessorDataAsync(TDomainObject domainObject, CancellationToken cancellationToken)
     {
-        return toBusinessRolePathInfo.GetRelativeObjects(domainObject).Select(this.GetAccessorData).Or();
+        return (await toBusinessRolePathInfo
+                      .GetRelativeObjects(domainObject)
+                      .ToAsyncEnumerable()
+                      .Select(async (br, ct) => await this.GetAccessorData(br, ct))
+                      .ToListAsync(cancellationToken))
+            .Or();
     }
 
-    private SecurityAccessorData GetAccessorData(BusinessRole businessRole)
+    private async Task<SecurityAccessorData> GetAccessorData(BusinessRole businessRole, CancellationToken cancellationToken)
     {
         return SecurityAccessorData.Return(
-            availablePermissionSource
-                .GetQueryable(DomainSecurityRule.AnyRole with { CustomCredential = new SecurityRuleCredential.AnyUserCredential() })
-                .Where(permission => permission.Role == businessRole)
-                .Select(permission => permission.Principal)
-                .Distinct()
-                .Select(principal => principal.Name));
+            await availablePermissionSource
+                  .GetQueryable(DomainSecurityRule.AnyRole with { CustomCredential = new SecurityRuleCredential.AnyUserCredential() })
+                  .Where(permission => permission.Role == businessRole)
+                  .Select(permission => permission.Principal)
+                  .Distinct()
+                  .Select(principal => principal.Name)
+                  .GenericToListAsync(cancellationToken));
     }
 }

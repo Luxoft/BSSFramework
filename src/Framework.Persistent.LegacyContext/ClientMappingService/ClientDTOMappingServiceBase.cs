@@ -21,7 +21,7 @@ public abstract class ClientDTOMappingServiceBase
     protected virtual List<UpdateItemData<TTarget, TIdentity>> ExtractSecurityUpdateDataFromSingle<TSource, TIdentity, TTarget>(Maybe<List<TSource>> currentSource, Func<TSource, TTarget> getTargetFromSingle)
             where TSource : class, IIdentityObjectContainer<TIdentity>
     {
-        var tryCurrentSourceValue = (currentSource as Just<List<TSource>>).Maybe(v => v.Value);
+        var tryCurrentSourceValue = currentSource.GetValueOrDefault();
 
         if (tryCurrentSourceValue == null)
         {
@@ -42,9 +42,9 @@ public abstract class ClientDTOMappingServiceBase
     protected virtual List<UpdateItemData<TTarget, TIdentity>> ExtractSecurityUpdateDataL<TSource, TIdentity, TTarget>(Maybe<List<TSource>> currentSource, Maybe<List<TSource>> baseSource,  Func<TSource, TSource, TTarget> getTargetFromPair, Func<TSource, TTarget> getTargetFromSingle)
             where TSource : class, IIdentityObjectContainer<TIdentity>
     {
-        var tryCurrentSourceValue = (currentSource as Just<List<TSource>>).Maybe(v => v.Value);
+        var tryCurrentSourceValue = currentSource.GetValueOrDefault();
 
-        var tryBaseSourceValue = (baseSource as Just<List<TSource>>).Maybe(v => v.Value);
+        var tryBaseSourceValue = baseSource.GetValueOrDefault();
 
         if (tryCurrentSourceValue == null)
         {

@@ -14,9 +14,9 @@ namespace SampleSystem.Security;
 
 public static class SampleSystemDomainSecurityServiceExtensions
 {
-    extension(ISecuritySystemSettings settings)
+    extension(ISecuritySystemBuilder settings)
     {
-        public ISecuritySystemSettings AddDomainSecurityServices()
+        public ISecuritySystemBuilder AddDomainSecurityServices()
         {
             return settings.RegisterMainDomainSecurityServices()
                            .RegisterDisabledDomainSecurityServices()
@@ -26,7 +26,7 @@ public static class SampleSystemDomainSecurityServiceExtensions
                            .AddExtensions(new ProjectionDomainSecurityBssFrameworkExtension(typeof(TestManualEmployeeProjection).Assembly));
         }
 
-        private ISecuritySystemSettings RegisterMainDomainSecurityServices()
+        private ISecuritySystemBuilder RegisterMainDomainSecurityServices()
         {
             return settings
                    .AddDomainSecurityMetadata<SampleSystemEmployeeDomainSecurityServiceMetadata>()
@@ -137,7 +137,7 @@ public static class SampleSystemDomainSecurityServiceExtensions
                    .AddDomainSecurity<TestSecuritySubObjItem3>(b => b.SetDependency(v => v.InnerMaster.FirstMaster));
         }
 
-        private ISecuritySystemSettings RegisterDisabledDomainSecurityServices()
+        private ISecuritySystemBuilder RegisterDisabledDomainSecurityServices()
         {
             return settings
                    .AddDomainSecurity<EmployeeInformation>(SecurityRule.Disabled)
@@ -153,7 +153,7 @@ public static class SampleSystemDomainSecurityServiceExtensions
                    .AddDomainSecurity<TestImmutableObj>(SecurityRule.Disabled, SecurityRule.Disabled);
         }
 
-        private ISecuritySystemSettings RegisterLegacyProjectionDomainSecurityServices()
+        private ISecuritySystemBuilder RegisterLegacyProjectionDomainSecurityServices()
         {
             return settings.AddDomainSecurity<SecurityBusinessUnit>(b => b.SetUntypedDependency<BusinessUnit>())
 

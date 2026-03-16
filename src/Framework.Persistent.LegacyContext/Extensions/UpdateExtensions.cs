@@ -91,23 +91,16 @@ public static class UpdateExtensions
     }
 
     public static bool IsEmpty<TItem>(this Maybe<TItem> maybeItem)
-            where TItem : IUpdateDTO
-    {
-        if (maybeItem == null) throw new ArgumentNullException(nameof(maybeItem));
-
-        return maybeItem.Match(item =>
-                               {
-                                   item.Compress();
-                                   return item.IsEmpty;
-                               }, () => true);
-    }
-
+            where TItem : IUpdateDTO =>
+        maybeItem.Match(item =>
+        {
+            item.Compress();
+            return item.IsEmpty;
+        }, () => true);
 
     public static Maybe<TItem> GetActualUpdateElement<TItem>(this Maybe<TItem> maybeItem)
             where TItem : IUpdateDTO
     {
-        if (maybeItem == null) throw new ArgumentNullException(nameof(maybeItem));
-
         if (maybeItem.IsEmpty())
         {
             return Maybe<TItem>.Nothing;

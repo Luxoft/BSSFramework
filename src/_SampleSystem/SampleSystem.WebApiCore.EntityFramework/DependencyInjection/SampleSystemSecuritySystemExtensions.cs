@@ -10,14 +10,14 @@ namespace SampleSystem.Security;
 
 public static class SampleSystemSecuritySystemExtensions
 {
-    public static ISecuritySystemSettings AddSecurityContexts(this ISecuritySystemSettings settings)
+    public static ISecuritySystemBuilder AddSecurityContexts(this ISecuritySystemBuilder settings)
     {
         return settings.AddSecurityContext<BusinessUnit>(
             new Guid("263D2C60-7BCE-45D6-A0AF-A0830152353E"),
             scb => scb.SetDisplayFunc(displayFunc: bu => bu.Name));
     }
 
-    public static ISecuritySystemSettings AddSecurityRoles(this ISecuritySystemSettings settings)
+    public static ISecuritySystemBuilder AddSecurityRoles(this ISecuritySystemBuilder settings)
     {
         return settings
                .AddSecurityRole(
@@ -29,13 +29,13 @@ public static class SampleSystemSecuritySystemExtensions
                    new SecurityRoleInfo(new Guid("d9c1d2f0-0c2f-49ab-bb0b-de13a456169e")));
     }
 
-    public static ISecuritySystemSettings AddVirtualPermissions(this ISecuritySystemSettings settings)
+    public static ISecuritySystemBuilder AddVirtualPermissions(this ISecuritySystemBuilder settings)
     {
         return settings.AddVirtualPermission<Employee, BusinessUnitEmployeeRole>(
             link => link.Employee,
-            vpb => vpb.ForRole(
-                SampleSystemSecurityRole.SeManager,
-                v => v.AddRestriction(link => link.BusinessUnit)
-                      .AddFilter(link => link.Role == BusinessUnitEmployeeRoleType.Manager)));
+            vpb => vpb.AddRestriction(link => link.BusinessUnit)
+                      .AddSecurityRole(
+                          SampleSystemSecurityRole.SeManager,
+                          v => v.AddFilter(link => link.Role == BusinessUnitEmployeeRoleType.Manager)));
     }
 }

@@ -2,7 +2,7 @@
 
 using CommonFramework.DependencyInjection;
 
-using Framework.Persistent;
+using HierarchicalExpand;
 
 using SecuritySystem;
 using SecuritySystem.DependencyInjection;

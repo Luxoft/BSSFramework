@@ -23,8 +23,6 @@ public static class ServiceCollectionExtensions
 
             services.AddSingleton<IExceptionExpander, ExceptionExpander>();
 
-            services.AddScoped(typeof(IUpdateDeepLevelService<>), typeof(UpdateDeepLevelService<>));
-
             services.RegisterFinancialYearServices();
             services.RegisterRepository();
             services.RegisterEvaluators();

@@ -4,8 +4,8 @@ namespace Framework.Authorization.Environment;
 
 public static class BssFrameworkSettingsExtensions
 {
-    public static ISecuritySystemSettings AddAuthorizationSystem(
-        this ISecuritySystemSettings settings,
+    public static ISecuritySystemBuilder AddAuthorizationSystem(
+        this ISecuritySystemBuilder settings,
         Action<IAuthorizationSystemSettings>? setup = null)
     {
         var authSettings = new AuthorizationSystemSettings();

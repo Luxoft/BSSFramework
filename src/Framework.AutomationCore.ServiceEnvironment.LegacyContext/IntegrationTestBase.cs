@@ -21,7 +21,9 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProviderPool root
     public Task<TResult> EvaluateAsync<TResult>(
         DBSessionMode sessionMode,
         UserCredential? customUserCredential,
-        Func<TBLLContext, Task<TResult>> getResult) => ((IServiceEvaluator<TBLLContext>)this).EvaluateAsync(sessionMode, customUserCredential, getResult);
+        Func<TBLLContext, Task<TResult>> getResult) =>
+        this.RootServiceProvider.GetRequiredService<IServiceEvaluator<TBLLContext>>().EvaluateAsync(sessionMode, customUserCredential, getResult);
+
 
     protected IConfigurationBLLContext GetConfigurationBLLContext(TBLLContext context)
     {

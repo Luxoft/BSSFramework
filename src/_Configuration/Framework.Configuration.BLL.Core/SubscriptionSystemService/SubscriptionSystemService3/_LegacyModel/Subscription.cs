@@ -2,7 +2,6 @@
 
 using CommonFramework.Maybe;
 
-using Framework.Authorization.Notification;
 using Framework.Core;
 using Framework.DomainDriven.Serialization;
 using Framework.Notification;
@@ -10,6 +9,8 @@ using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
 using Framework.Validation;
+
+using SecuritySystem.Notification;
 
 namespace Framework.Configuration.Domain;
 

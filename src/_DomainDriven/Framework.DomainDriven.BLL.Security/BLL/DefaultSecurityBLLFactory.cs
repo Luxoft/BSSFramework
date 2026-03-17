@@ -4,18 +4,11 @@ using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public abstract class DefaultSecurityBLLFactory<TBLLContext, TPersistentDomainObjectBase, TIdent> : BLLContextContainer<TBLLContext>,
-
+public abstract class DefaultSecurityBLLFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(TBLLContext context) : BLLContextContainer<TBLLContext>(context),
     IDefaultSecurityBLLFactory<TPersistentDomainObjectBase, TIdent>
-
-    where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>, ISecurityServiceContainer<IRootSecurityService<TPersistentDomainObjectBase>>
+    where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>, ISecurityServiceContainer<IRootSecurityService>
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
-    protected DefaultSecurityBLLFactory(TBLLContext context)
-        : base(context)
-    {
-    }
-
     public virtual IDefaultDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>()
         where TDomainObject : class, TPersistentDomainObjectBase
     {

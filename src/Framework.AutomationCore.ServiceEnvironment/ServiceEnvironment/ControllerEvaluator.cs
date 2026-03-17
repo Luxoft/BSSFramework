@@ -92,7 +92,7 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
             else
             {
                 await context.RequestServices
-                             .GetRequiredService<ITestingUserAuthenticationService>()
+                             .GetRequiredService<IRootImpersonateService>()
                              .WithImpersonateAsync(customUserCredential, async () => await next(context));
             }
         }

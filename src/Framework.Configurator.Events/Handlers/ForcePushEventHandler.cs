@@ -17,7 +17,7 @@ public class ForcePushEventHandler([WithoutRunAs] ISecuritySystem securitySystem
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        securitySystem.CheckAccess(SecurityRole.Administrator);
+        await securitySystem.CheckAccessAsync(SecurityRole.Administrator, cancellationToken);
 
         var body = await this.ParseRequestBodyAsync<RequestBodyDto>(context);
 

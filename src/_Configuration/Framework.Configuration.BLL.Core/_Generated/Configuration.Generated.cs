@@ -11,7 +11,7 @@ namespace Framework.Configuration.BLL
 {
     
     
-    public partial interface IConfigurationBLLContext : Framework.DomainDriven.BLL.Security.IAccessDeniedExceptionServiceContainer, Framework.DomainDriven.BLL.Security.ISecurityServiceContainer<Framework.DomainDriven.BLL.Security.IRootSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase>>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.Configuration.BLL.IConfigurationBLLFactoryContainer>
+    public partial interface IConfigurationBLLContext : Framework.DomainDriven.BLL.Security.IAccessDeniedExceptionServiceContainer, Framework.DomainDriven.BLL.Security.ISecurityServiceContainer<Framework.DomainDriven.BLL.Security.IRootSecurityService>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.Configuration.BLL.IConfigurationBLLFactoryContainer>
     {
         
         new Framework.Configuration.BLL.IConfigurationBLLFactoryContainer Logics

@@ -3,9 +3,8 @@
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.BLL.Security;
 using Framework.Transfering;
-
-using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -45,12 +44,11 @@ public class HasAccessMethodGenerator<TConfiguration>(TConfiguration configurati
 
         yield return domainObjectVarDecl;
 
-        yield return this.Configuration.Environment.BLLCore.GetGetSecurityProviderMethodReferenceExpression(evaluateDataExpr.GetContext(), this.DomainType)
-                         .ToMethodInvokeExpression(this.GetSecurityRuleParameter().ToVariableReferenceExpression())
+        yield return this.Configuration.Environment.BLLCore.GetSecurityService(evaluateDataExpr.GetContext())
                          .ToMethodInvokeExpression(
-                             nameof(ISecurityProvider<>.HasAccessAsync),
+                             nameof(IRootSecurityService.HasAccess),
                              domainObjectVarDecl.ToVariableReferenceExpression(),
-                             this.CancellationTokenParameter.ToVariableReferenceExpression())
+                             this.GetSecurityRuleParameter().ToVariableReferenceExpression())
                          .ToMethodReturnStatement();
     }
 }

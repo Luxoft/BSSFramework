@@ -1235,7 +1235,7 @@ namespace SampleSystem.Generated.DTO
             {
                 target.LastActionDate = CommonFramework.Maybe.Maybe.Return(currentSource.LastActionDate);
             }
-            if (baseSource.Login != currentSource.Login)
+            //if (baseSource.Login != currentSource.Login)
             {
                 target.Login = currentSource.Login;
             }
@@ -1264,7 +1264,7 @@ namespace SampleSystem.Generated.DTO
             {
                 target.PlannedHireDate = CommonFramework.Maybe.Maybe.Return(currentSource.PlannedHireDate);
             }
-            if (baseSource.Position != currentSource.Position)
+            //if (baseSource.Position != currentSource.Position)
             {
                 target.Position = currentSource.Position;
             }
@@ -1523,7 +1523,7 @@ namespace SampleSystem.Generated.DTO
             {
                 target.Field2 = CommonFramework.Maybe.Maybe.Return(currentSource.Field2);
             }
-            if (baseSource.Field3 != currentSource.Field3)
+            //if (baseSource.Field3 != currentSource.Field3)
             {
                 target.Field3 = currentSource.Field3;
             }
@@ -1838,19 +1838,18 @@ namespace SampleSystem.Generated.DTO
             {
                 throw new System.ArgumentNullException("target");
             }
-            CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> justPosition = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO>>(source.Position);
-            if (!object.ReferenceEquals(justPosition, null))
+            if (source.Position.HasValue)
             {
                 SampleSystem.Generated.DTO.EmployeePositionIdentityDTO resultPosition;
-                if (!object.ReferenceEquals(justPosition.Value, null))
+                if (!object.ReferenceEquals(source.Position.Value, null))
                 {
-                    resultPosition = justPosition.Value.Identity;
+                    resultPosition = source.Position.Value.Identity;
                 }
                 else
                 {
                     resultPosition = SampleSystem.Generated.DTO.EmployeePositionIdentityDTO.Empty;
                 }
-                target.Position = new CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>(resultPosition);
+                target.Position = CommonFramework.Maybe.Maybe.Return(resultPosition);
             }
             else
             {
@@ -2044,19 +2043,18 @@ namespace SampleSystem.Generated.DTO
             {
                 target.ApprovedBy = SampleSystem.Generated.DTO.EmployeeIdentityDTO.Empty;
             }
-            CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO> justCompanyLegalEntity = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO>>(source.CompanyLegalEntity);
-            if (!object.ReferenceEquals(justCompanyLegalEntity, null))
+            if (source.CompanyLegalEntity.HasValue)
             {
                 SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO resultCompanyLegalEntity;
-                if (!object.ReferenceEquals(justCompanyLegalEntity.Value, null))
+                if (!object.ReferenceEquals(source.CompanyLegalEntity.Value, null))
                 {
-                    resultCompanyLegalEntity = justCompanyLegalEntity.Value.Identity;
+                    resultCompanyLegalEntity = source.CompanyLegalEntity.Value.Identity;
                 }
                 else
                 {
                     resultCompanyLegalEntity = SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO.Empty;
                 }
-                target.CompanyLegalEntity = new CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>(resultCompanyLegalEntity);
+                target.CompanyLegalEntity = CommonFramework.Maybe.Maybe.Return(resultCompanyLegalEntity);
             }
             else
             {
@@ -2466,15 +2464,14 @@ namespace SampleSystem.Generated.DTO
             {
                 target.EmployeeToEmployeeLinks = Framework.Core.CoreEnumerableExtensions.ToList(source.EmployeeToEmployeeLinks, employeeToEmployeeLink => new SampleSystem.Generated.DTO.EmployeeToEmployeeLinkStrictDTO(employeeToEmployeeLink));
             }
-            CommonFramework.Maybe.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO>> justPersonalCellPhones = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO>>>(source.PersonalCellPhones);
-            if (!object.ReferenceEquals(justPersonalCellPhones, null))
+            if (source.PersonalCellPhones.HasValue)
             {
                 System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO> resultPersonalCellPhones = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>();
-                if (!object.ReferenceEquals(justPersonalCellPhones.Value, null))
+                if (!object.ReferenceEquals(source.PersonalCellPhones.Value, null))
                 {
-                    resultPersonalCellPhones = Framework.Core.CoreEnumerableExtensions.ToList(justPersonalCellPhones.Value, employeePersonalCellPhone => new SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO(employeePersonalCellPhone));
+                    resultPersonalCellPhones = Framework.Core.CoreEnumerableExtensions.ToList(source.PersonalCellPhones.Value, employeePersonalCellPhone => new SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO(employeePersonalCellPhone));
                 }
-                target.PersonalCellPhones = new CommonFramework.Maybe.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>>(resultPersonalCellPhones);
+                target.PersonalCellPhones = CommonFramework.Maybe.Maybe.Return(resultPersonalCellPhones);
             }
             else
             {
@@ -2930,12 +2927,11 @@ namespace SampleSystem.Generated.DTO
             target.Interphone = source.Interphone;
             target.Landlinephone = source.Landlinephone;
             target.LastActionDate = source.LastActionDate;
-            CommonFramework.Maybe.Just<string> justLogin = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<string>>(source.Login);
-            if (!object.ReferenceEquals(justLogin, null))
+            if (source.Login.HasValue)
             {
                 string resultLogin;
-                resultLogin = justLogin.Value;
-                target.Login = new CommonFramework.Maybe.Just<string>(resultLogin);
+                resultLogin = source.Login.Value;
+                target.Login = CommonFramework.Maybe.Maybe.Return(resultLogin);
             }
             else
             {
@@ -3044,12 +3040,11 @@ namespace SampleSystem.Generated.DTO
             }
             target.Field1 = source.Field1;
             target.Field2 = source.Field2;
-            CommonFramework.Maybe.Just<System.Guid> justField3 = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<System.Guid>>(source.Field3);
-            if (!object.ReferenceEquals(justField3, null))
+            if (source.Field3.HasValue)
             {
                 System.Guid resultField3;
-                resultField3 = justField3.Value;
-                target.Field3 = new CommonFramework.Maybe.Just<System.Guid>(resultField3);
+                resultField3 = source.Field3.Value;
+                target.Field3 = CommonFramework.Maybe.Maybe.Return(resultField3);
             }
             else
             {

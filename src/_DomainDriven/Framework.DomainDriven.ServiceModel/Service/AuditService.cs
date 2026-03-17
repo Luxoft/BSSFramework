@@ -23,7 +23,7 @@ public class AuditService<TIdent, TBllContext, TBllFactoryContainer, TRootSecuri
     where TPersistentObjectBase : class, IIdentityObject<TIdent>
     where TBllFactoryContainer : IBLLFactoryContainer<IDefaultBLLFactory<TPersistentObjectBase, TIdent>>
     where TBllContext : IBLLFactoryContainerContext<TBllFactoryContainer>, ISecurityServiceContainer<TRootSecurityService>, IServiceProviderContainer
-    where TRootSecurityService : IRootSecurityService<TPersistentObjectBase>
+    where TRootSecurityService : IRootSecurityService
 {
     private static readonly Lazy<Type> GenericTPropertyRevisionDtoType = new Lazy<Type>(
      () => typeof(TPropertyRevisionDto)

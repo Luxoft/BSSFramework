@@ -25,6 +25,7 @@
     <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="3.0.2" />
     <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission" Version="3.0.2" />
     <PackageVersion Include="IvAt.SecuritySystem.Notification" Version="3.0.2" />
+    <PackageVersion Include="IvAt.SecuritySystem.Notification.Abstractions" Version="3.0.2" />
     <PackageVersion Include="IvAt.SecuritySystem.Testing" Version="3.0.2" />
     <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="3.0.2" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="1.6.2" />

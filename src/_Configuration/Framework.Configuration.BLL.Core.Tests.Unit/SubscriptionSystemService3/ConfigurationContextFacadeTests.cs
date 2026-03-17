@@ -1,10 +1,12 @@
-﻿using AutoFixture;
+﻿using System.Collections.Immutable;
+
+using AutoFixture;
 using AutoFixture.Idioms;
 
 using FluentAssertions;
+
 using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
-using Framework.Authorization.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.Domain;
@@ -12,10 +14,12 @@ using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.Notification;
 using Framework.UnitTesting;
+
 using NUnit.Framework;
 
 using NSubstitute;
 using SecuritySystem;
+using SecuritySystem.Notification;
 
 namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3;
 
@@ -24,7 +28,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
 {
     private IConfigurationBLLContext context;
     private IEmployeeSource employeeSource;
-    private INotificationPrincipalExtractor notificationPrincipalExtractor;
+    private INotificationPrincipalExtractor<Principal> notificationPrincipalExtractor;
     private IAuthorizationBLLContext authorizationContext;
     private ITypeResolver<DomainType> domainTypeResolver;
     private IDomainTypeBLL domainTypeBll;
@@ -35,7 +39,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     public void SetUp()
     {
         this.employeeSource = this.CreateStub<IEmployeeSource>();
-        this.notificationPrincipalExtractor = this.CreateStub<INotificationPrincipalExtractor>();
+        this.notificationPrincipalExtractor = this.CreateStub<INotificationPrincipalExtractor<Principal>>();
         this.domainTypeResolver = this.CreateStub<ITypeResolver<DomainType>>();
         this.domainTypeBll = this.CreateStub<IDomainTypeBLL>();
         this.securityContextTypeBll = this.CreateStub<ISecurityContextTypeBLL>();
@@ -94,12 +98,12 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     public void GetNotificationPrincipals_Call_CollectionOfPrincipals()
     {
         // Arrange
-        var securityRoles = this.Fixture.CreateMany<SecurityRole>().ToArray();
-        var principals = this.Fixture.CreateMany<Principal>();
+        var securityRoles = this.Fixture.CreateMany<SecurityRole>().ToImmutableArray();
+        var principals = this.Fixture.CreateMany<Principal>().ToList();
 
         this.notificationPrincipalExtractor
             .GetPrincipalsAsync(securityRoles, [])
-            .Returns(principals);
+            .Returns(principals.ToAsyncEnumerable());
 
         // Act
         var configurationContextFacade = this.Fixture.Create<ConfigurationContextFacade>();
@@ -113,13 +117,13 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     public void GetNotificationPrincipals2_Call_CollectionOfPrincipals()
     {
         // Arrange
-        var securityRoles = this.Fixture.CreateMany<SecurityRole>().ToArray();
-        var notificationFilterGroups = this.Fixture.CreateMany<NotificationFilterGroup>();
-        var principals = this.Fixture.CreateMany<Principal>();
+        var securityRoles = this.Fixture.CreateMany<SecurityRole>().ToImmutableArray();
+        var notificationFilterGroups = this.Fixture.CreateMany<NotificationFilterGroup>().ToImmutableArray();
+        var principals = this.Fixture.CreateMany<Principal>().ToList();
 
         this.notificationPrincipalExtractor
             .GetPrincipalsAsync(securityRoles, notificationFilterGroups)
-            .Returns(principals);
+            .Returns(principals.ToAsyncEnumerable());
 
         // Act
         var configurationContextFacade = this.Fixture.Create<ConfigurationContextFacade>();

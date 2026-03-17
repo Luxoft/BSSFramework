@@ -1,5 +1,6 @@
-﻿using Framework.Authorization.Notification;
-using Framework.Configuration.Core;
+﻿using Framework.Configuration.Core;
+
+using SecuritySystem.Notification;
 
 namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;
 

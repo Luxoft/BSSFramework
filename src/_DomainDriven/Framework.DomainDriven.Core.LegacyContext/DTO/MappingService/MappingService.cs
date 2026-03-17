@@ -2,28 +2,32 @@
 using Framework.DomainDriven.Lock;
 using Framework.Persistent;
 
+using Microsoft.Extensions.DependencyInjection;
+
+using SecuritySystem;
+using SecuritySystem.DomainServices;
+
 namespace Framework.DomainDriven;
 
-public abstract class DTOMappingService<TBLLContext, TPersistentDomainObjectBase, TAuditPersistentDomainObjectBase, TIdent, TVersion>
-
-        : BLLContextContainer<TBLLContext>, IDTOMappingService<TPersistentDomainObjectBase, TIdent>
-
-        where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TAuditPersistentDomainObjectBase : class, TPersistentDomainObjectBase
-        where TVersion : IEquatable<TVersion>
+public abstract class DTOMappingService<TBLLContext, TPersistentDomainObjectBase, TAuditPersistentDomainObjectBase, TIdent, TVersion>(TBLLContext context)
+    : BLLContextContainer<TBLLContext>(context), IDTOMappingService<TPersistentDomainObjectBase, TIdent>
+    where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+    where TAuditPersistentDomainObjectBase : class, TPersistentDomainObjectBase
+    where TVersion : IEquatable<TVersion>
 {
-    protected DTOMappingService(TBLLContext context)
-            : base(context)
-    {
-        this.VersionService = new DTOMappingVersionService<TBLLContext, TAuditPersistentDomainObjectBase, TIdent, TVersion>(this.Context);
-    }
-
-
-    public virtual IDTOMappingVersionService<TAuditPersistentDomainObjectBase, TVersion> VersionService { get; private set; }
+    public virtual IDTOMappingVersionService<TAuditPersistentDomainObjectBase, TVersion> VersionService { get; } = new DTOMappingVersionService<TBLLContext, TAuditPersistentDomainObjectBase, TIdent, TVersion>(context);
 
     public virtual IBinaryConverter BinaryConverter { get; } = new BinaryConverter();
 
+    protected bool HasAccess<TDomainObject>(TDomainObject domainObject, SecurityRule securityRule)
+    {
+        return this.Context.ServiceProvider.GetRequiredService<IDomainSecurityService<TDomainObject>>()
+                   .GetSecurityProvider(securityRule)
+                   .HasAccessAsync(domainObject)
+                   .GetAwaiter()
+                   .GetResult();
+    }
 
     public virtual TDomainObject GetById<TDomainObject>(TIdent ident, IdCheckMode checkMode = IdCheckMode.SkipEmpty, LockRole lockRole = LockRole.None)
             where TDomainObject : class, TPersistentDomainObjectBase

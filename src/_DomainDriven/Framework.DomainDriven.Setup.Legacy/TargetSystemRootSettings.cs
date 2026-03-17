@@ -28,7 +28,7 @@ public class TargetSystemRootSettings : ITargetSystemRootSettings
         bool isRevision,
         IEnumerable<DomainTypeInfo> domainTypes)
         where TBLLContext : class, ITypeResolverContainer<string>,
-        ISecurityServiceContainer<IRootSecurityService<TPersistentDomainObjectBase>>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
+        ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
     {
         var info = new TargetSystemInfo<TPersistentDomainObjectBase>(
@@ -43,7 +43,7 @@ public class TargetSystemRootSettings : ITargetSystemRootSettings
 
     public ITargetSystemRootSettings AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(TargetSystemInfo<TPersistentDomainObjectBase> info)
         where TBLLContext : class, ITypeResolverContainer<string>,
-        ISecurityServiceContainer<IRootSecurityService<TPersistentDomainObjectBase>>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
+        ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
     {
         this.AddTargetSystem(info);

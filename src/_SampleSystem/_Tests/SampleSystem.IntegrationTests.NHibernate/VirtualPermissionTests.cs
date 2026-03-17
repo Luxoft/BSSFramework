@@ -68,22 +68,21 @@ public class VirtualPermissionTests : TestBase
     }
 
     [TestMethod]
-    public void VirtualPermission_EmployeeWithLink_ResolvedByAccessors()
+    public  async Task VirtualPermission_EmployeeWithLink_ResolvedByAccessors()
     {
         // Arrange
 
         // Act
         var accessorList =
-
-            this.Evaluate(
+            await this.EvaluateAsync(
                 DBSessionMode.Read,
                 this.Datas[0].EmployeeId,
-                ctx =>
+                async ctx =>
                 {
-                    var bu = ctx.Logics.BusinessUnit.GetById(this.Datas[0].BuId);
+                    var bu = ctx.Logics.BusinessUnit.GetById(this.Datas[0].BuId, true)!;
 
-                    var accessorData = ctx.SecurityService.GetSecurityProvider<BusinessUnit>(SampleSystemSecurityRole.SeManager)
-                                          .GetAccessorData(bu);
+                    var accessorData = await ctx.SecurityService.GetSecurityProvider<BusinessUnit>(SampleSystemSecurityRole.SeManager)
+                                                .GetAccessorDataAsync(bu);
 
                     return ctx.SecurityAccessorResolver.Resolve(accessorData);
                 });
@@ -93,68 +92,68 @@ public class VirtualPermissionTests : TestBase
     }
 
     [TestMethod]
-    public void VirtualPermission_EmployeeWithMyLink_AccessGranted()
+    public async Task VirtualPermission_EmployeeWithMyLink_AccessGranted()
     {
         // Arrange
 
         // Act
         var hasAccess =
 
-            this.Evaluate(
+            await this.EvaluateAsync(
                 DBSessionMode.Read,
                 this.Datas[1].EmployeeId,
-                ctx =>
+                async ctx =>
                 {
-                    var bu = ctx.Logics.BusinessUnit.GetById(this.Datas[1].BuId);
+                    var bu = ctx.Logics.BusinessUnit.GetById(this.Datas[1].BuId)!;
 
-                    return ctx.SecurityService.GetSecurityProvider<BusinessUnit>(SampleSystemSecurityRole.SeManager)
-                              .HasAccess(bu);
+                    return await ctx.SecurityService.GetSecurityProvider<BusinessUnit>(SampleSystemSecurityRole.SeManager)
+                              .HasAccessAsync(bu);
                 });
 
         // Assert
-        hasAccess.Should().Be(true);
+        hasAccess.Should().BeTrue();
     }
 
     [TestMethod]
-    public void VirtualPermission_EmployeeWithNotMyLink_AccessDenied()
+    public async Task VirtualPermission_EmployeeWithNotMyLink_AccessDenied()
     {
         // Arrange
 
         // Act
         var hasAccess =
 
-            this.Evaluate(
+            await this.EvaluateAsync(
                 DBSessionMode.Read,
                 this.Datas[1].EmployeeId,
-                ctx =>
+                async ctx =>
                 {
-                    var bu = ctx.Logics.BusinessUnit.GetById(this.Datas[0].BuId);
+                    var bu = ctx.Logics.BusinessUnit.GetById(this.Datas[0].BuId)!;
 
-                    return ctx.SecurityService.GetSecurityProvider<BusinessUnit>(SampleSystemSecurityRole.SeManager)
-                              .HasAccess(bu);
+                    return await ctx.SecurityService.GetSecurityProvider<BusinessUnit>(SampleSystemSecurityRole.SeManager)
+                              .HasAccessAsync(bu);
                 });
 
         // Assert
-        hasAccess.Should().Be(false);
+        hasAccess.Should().BeFalse();
     }
 
     [TestMethod]
-    public void VirtualPermission_NoNameWithoutLink_AccessDenied()
+    public async Task VirtualPermission_NoNameWithoutLink_AccessDenied()
     {
         // Arrange
 
         // Act
         var hasAccess =
 
-            this.Evaluate(
+            await this.Evaluate(
                 DBSessionMode.Read,
                 "Noname",
-                ctx =>
+                async ctx =>
                 {
-                    return ctx.Authorization.SecuritySystem.HasAccess(SampleSystemSecurityRole.SeManager);
+                    return await ctx.Authorization.SecuritySystem.HasAccessAsync(SampleSystemSecurityRole.SeManager);
                 });
 
         // Assert
-        hasAccess.Should().Be(false);
+        hasAccess.Should().BeFalse();
     }
 }

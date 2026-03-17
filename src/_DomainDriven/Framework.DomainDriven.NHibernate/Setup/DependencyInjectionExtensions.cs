@@ -8,7 +8,6 @@ using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.DALExceptions;
 using Framework.DomainDriven.NHibernate.Audit;
 
-using GenericQueryable.DependencyInjection;
 using GenericQueryable.NHibernate;
 
 using Microsoft.Extensions.DependencyInjection;

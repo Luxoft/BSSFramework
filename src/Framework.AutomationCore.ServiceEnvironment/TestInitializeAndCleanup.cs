@@ -14,7 +14,7 @@ public class TestInitializeAndCleanup(
     IOptions<AutomationFrameworkSettings> settings,
     IDatabaseContext databaseContext,
     IntegrationTestTimeProvider timeProvider,
-    ITestingUserAuthenticationService userAuthenticationService)
+    RootImpersonateServiceState rootImpersonateServiceState)
 {
     private readonly AutomationFrameworkSettings settings = settings.Value;
 
@@ -33,7 +33,7 @@ public class TestInitializeAndCleanup(
     protected virtual void ResetServices()
     {
         timeProvider.Reset();
-        userAuthenticationService.CustomUserCredential = null;
+        rootImpersonateServiceState.Reset();
     }
 
     protected virtual void DropDatabaseAfterTest()

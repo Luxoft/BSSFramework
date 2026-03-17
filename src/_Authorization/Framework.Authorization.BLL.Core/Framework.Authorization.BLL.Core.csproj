@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="IvAt.SecuritySystem.GeneralPermission" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <PackageReference Include="IvAt.SecuritySystem.Notification.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,5 +1,4 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.Authorization.Notification;
 
 using Framework.Core;
 using Framework.DomainDriven.BLL.Security;
@@ -9,6 +8,7 @@ using SecuritySystem;
 using SecuritySystem.AvailableSecurity;
 using SecuritySystem.ExternalSystem.SecurityContextStorage;
 using SecuritySystem.GeneralPermission.Validation.Principal;
+using SecuritySystem.Notification;
 using SecuritySystem.Services;
 using SecuritySystem.UserSource;
 
@@ -44,7 +44,7 @@ public partial interface IAuthorizationBLLContext :
 
     ISecurityContextInfoSource SecurityContextInfoSource { get; }
 
-    INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
+    INotificationPrincipalExtractor<Principal> NotificationPrincipalExtractor { get; }
 
     SecurityContextType GetSecurityContextType(Type type);
 }

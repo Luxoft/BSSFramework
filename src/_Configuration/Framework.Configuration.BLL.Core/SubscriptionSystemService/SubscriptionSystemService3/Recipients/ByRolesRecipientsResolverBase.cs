@@ -1,9 +1,10 @@
 ﻿#pragma warning disable SA1600 // ElementsMustBeDocumented. Internal type does not require inline documentation by convention.
 
+using System.Collections.Immutable;
+
 using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
-using Framework.Core;
 using Framework.Notification;
 using SecuritySystem;
 
@@ -47,9 +48,10 @@ internal class ByRolesRecipientsResolverBase<TBLLContext>
         return new Recipient(employee.Login, employee.Email);
     }
 
-    protected SecurityRole[] GetBusinessRoles(Subscription subscription)
+    protected ImmutableArray<SecurityRole> GetBusinessRoles(Subscription subscription)
     {
-        var result = subscription.SubBusinessRoles.ToArray(r => r.SecurityRole);
+        var result = subscription.SubBusinessRoles.Select(r => r.SecurityRole).ToImmutableArray();
+
         return result;
     }
 }

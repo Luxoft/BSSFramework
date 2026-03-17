@@ -24,11 +24,9 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         this.lazyBLLDomainTypes = LazyHelper.Create(() => this.GetBLLDomainTypes().ToReadOnlyCollection());
 
         this.Logics = LazyInterfaceImplementHelper.CreateProxy(this.GetLogics);
-
-        this.ActualRootSecurityServiceInterfaceType = typeof(IRootSecurityService<>).MakeGenericType(this.Environment.PersistentDomainObjectBaseType).ToTypeReference();
     }
 
-    public CodeTypeReference ActualRootSecurityServiceInterfaceType { get; }
+    public CodeTypeReference ActualRootSecurityServiceInterfaceType { get; } = typeof(IRootSecurityService).ToTypeReference();
 
 
     public virtual IBLLFactoryContainerInterfaceGeneratorConfiguration Logics { get; }
@@ -47,17 +45,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     public virtual bool UseDbUniquenessEvaluation { get; } = false;
 
     public virtual string IntegrationSaveMethodName { get; } = "IntegrationSave";
-
-
-    public CodeMethodReferenceExpression GetGetSecurityProviderMethodReferenceExpression(CodeExpression contextExpression, Type domainType)
-    {
-        if (contextExpression == null) throw new ArgumentNullException(nameof(contextExpression));
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
-        var securityServiceExpr = this.GetSecurityService(contextExpression);
-
-        return securityServiceExpr.ToMethodReferenceExpression("GetSecurityProvider", domainType.ToTypeReference());
-    }
 
     protected virtual ICodeFileFactoryHeader<FileType> BLLContextInterfaceFileFactoryHeader =>
 
@@ -152,14 +139,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public virtual CodeExpression GetSecurityService(CodeExpression contextExpr)
     {
-        return contextExpr.ToPropertyReference((ISecurityServiceContainer<object> container) => container.SecurityService);
-    }
-
-    public CodeExpression GetCreateDefaultBLLExpression(CodeExpression contextExpression, CodeTypeReference genericType)
-    {
-        return contextExpression.ToPropertyReference((IBLLFactoryContainerContext<object> context) => context.Logics)
-                                .ToPropertyReference((IBLLFactoryContainer<Ignore> container) => container.Default)
-                                .ToMethodReferenceExpression("Create", genericType).ToMethodInvokeExpression();
+        return contextExpr.ToPropertyReference(nameof(ISecurityServiceContainer<>.SecurityService));
     }
 }
 #pragma warning restore S100 // Methods and properties should be named in camel case

@@ -2,6 +2,9 @@
 
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.BLL.Security;
+
+using SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -23,9 +26,9 @@ public abstract class IntegrationMethodGenerator<TConfiguration, TBLLRoleAttribu
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
         yield return evaluateDataExpr.GetContext()
-                                     .ToPropertyReference("Authorization")
-                                     .ToPropertyReference("SecuritySystem")
-                                     .ToMethodInvokeExpression("CheckAccess", this.Configuration.IntegrationSecurityRule)
+                                     .ToPropertyReference(nameof(IAuthorizationBLLContextContainer<>.Authorization))
+                                     .ToPropertyReference(nameof(SecuritySystem))
+                                     .ToMethodInvokeExpression(nameof(ISecuritySystem.CheckAccessAsync), this.Configuration.IntegrationSecurityRule)
                                      .ToExpressionStatement();
     }
 }

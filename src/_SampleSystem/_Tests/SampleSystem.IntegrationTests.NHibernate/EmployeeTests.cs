@@ -239,7 +239,7 @@ public class EmployeeTests : TestBase
 
         employeeController.Evaluate(
             c => c.UpdateEmployee(
-                new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234"), Version = employeeVersion }));
+                new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = Maybe.Return("1234"), Version = employeeVersion }));
 
         var restFacade = this.GetConfigurationControllerEvaluator();
 
@@ -274,7 +274,7 @@ public class EmployeeTests : TestBase
 
         employeeController.Evaluate(
             c => c.UpdateEmployee(
-                new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234"), Version = employeeVersion }));
+                new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = Maybe.Return("1234"), Version = employeeVersion }));
 
         var restFacade = this.GetConfigurationControllerEvaluator();
 
@@ -308,7 +308,7 @@ public class EmployeeTests : TestBase
         // Act
         employeeController.Evaluate(
             c => c.UpdateEmployee(
-                new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234"), Version = employeeVersion }));
+                new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = Maybe.Return("1234"), Version = employeeVersion }));
 
         // Assert
         this.GetIntegrationEvents<EmployeeSaveEventDTO>("ariba").Should().ContainSingle(dto => dto.Employee.Id == employeeIdentity.Id);
@@ -341,7 +341,7 @@ public class EmployeeTests : TestBase
         // Act
         var call = new Action(
             () => employeeController.Evaluate(
-                c => c.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234") })));
+                c => c.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = Maybe.Return("1234") })));
 
         // Assert
         call.Should().Throw<Exception>().WithMessage($"Object '{nameof(Employee)}' was updated or deleted by another transaction");

@@ -47,7 +47,7 @@ public partial class ConfigurationBLLContext
             IConfigurationValidator validator,
             IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
             IMessageSender<MessageTemplateNotification> subscriptionSender,
-            IRootSecurityService<PersistentDomainObjectBase> securityService,
+            IRootSecurityService securityService,
             IConfigurationBLLFactoryContainer logics,
             IAuthorizationBLLContext authorization,
             IEmployeeSource employeeSource,
@@ -119,7 +119,7 @@ public partial class ConfigurationBLLContext
 
     public IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
 
-    public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; }
+    public IRootSecurityService SecurityService { get; }
 
     public ITypeResolver<string> TypeResolver { get; }
 

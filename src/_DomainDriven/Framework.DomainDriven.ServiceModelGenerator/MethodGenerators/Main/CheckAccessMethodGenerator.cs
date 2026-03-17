@@ -6,8 +6,6 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.Transfering;
 
-using SecuritySystem.Providers;
-
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
 public class CheckAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfiguration, BLLViewRoleAttribute>
@@ -44,24 +42,19 @@ public class CheckAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfi
                          .ToParameterDeclarationExpression(this.DomainType.Name.ToStartLowerCase() + "Ident");
 
         yield return this.GetSecurityRuleParameter();
-
-        yield return this.CancellationTokenParameter;
     }
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
         var domainObjectVarDecl = this.ToDomainObjectVarDeclById(bllRefExpr);
-        var method = typeof(SecurityProviderBaseExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression(nameof(SecurityProviderBaseExtensions.CheckAccessAsync));
 
         yield return domainObjectVarDecl;
 
-        yield return this.Configuration.Environment.BLLCore.GetGetSecurityProviderMethodReferenceExpression(evaluateDataExpr.GetContext(), this.DomainType)
-                         .ToMethodInvokeExpression(this.GetSecurityRuleParameter().ToVariableReferenceExpression())
-                         .ToStaticMethodInvokeExpression(
-                             method,
+        yield return this.Configuration.Environment.BLLCore.GetSecurityService(evaluateDataExpr.GetContext())
+                         .ToMethodInvokeExpression(
+                             nameof(IRootSecurityService.CheckAccess),
                              domainObjectVarDecl.ToVariableReferenceExpression(),
-                             evaluateDataExpr.GetContext().ToPropertyReference((IAccessDeniedExceptionServiceContainer c) => c.AccessDeniedExceptionService),
-                             this.CancellationTokenParameter.ToVariableReferenceExpression())
+                             this.GetSecurityRuleParameter().ToVariableReferenceExpression())
                          .ToExpressionStatement();
     }
 }

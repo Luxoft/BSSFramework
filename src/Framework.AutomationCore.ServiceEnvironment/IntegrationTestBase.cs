@@ -34,7 +34,7 @@ public abstract class IntegrationTestBase(IServiceProviderPool rootServiceProvid
     protected virtual void ResetServices()
     {
         this.RootServiceProvider.GetService<IntegrationTestTimeProvider>()?.Reset();
-        this.RootServiceProvider.GetService<ITestingUserAuthenticationService>()?.CustomUserCredential = null;
+        this.RootServiceProvider.GetService<RootImpersonateServiceState>()?.Reset();
     }
 
     protected virtual void DropDatabaseAfterTest()

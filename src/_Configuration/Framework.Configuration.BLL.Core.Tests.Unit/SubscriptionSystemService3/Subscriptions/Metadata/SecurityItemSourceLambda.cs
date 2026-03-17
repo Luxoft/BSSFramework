@@ -1,5 +1,6 @@
-﻿using Framework.Authorization.Notification;
-using Framework.Configuration.SubscriptionModeling;
+﻿using Framework.Configuration.SubscriptionModeling;
+
+using SecuritySystem.Notification;
 
 using DomainObjectChangeType = Framework.Configuration.SubscriptionModeling.DomainObjectChangeType;
 

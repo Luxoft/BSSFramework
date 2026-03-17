@@ -16,7 +16,7 @@ public class UpdateSystemConstantHandler(
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        securitySystem.CheckAccess(SecurityRole.Administrator);
+        await securitySystem.CheckAccessAsync(SecurityRole.Administrator, cancellationToken);
 
         var variableName = (string?)context.Request.RouteValues["name"]!;
         var newValue = await this.ParseRequestBodyAsync<string>(context);

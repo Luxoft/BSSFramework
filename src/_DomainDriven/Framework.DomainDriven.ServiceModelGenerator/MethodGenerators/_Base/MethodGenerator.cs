@@ -53,9 +53,6 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
     protected abstract string GetComment();
 
-    protected CodeParameterDeclarationExpression CancellationTokenParameter { get; } =
-        typeof(CancellationToken).ToTypeReference().ToParameterDeclarationExpression("cancellationToken");
-
     public virtual CodeMemberMethod GetContractMethod() =>
             new CodeMemberMethod
                     {

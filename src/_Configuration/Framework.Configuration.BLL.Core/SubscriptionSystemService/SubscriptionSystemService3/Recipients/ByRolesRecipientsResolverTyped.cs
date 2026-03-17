@@ -1,13 +1,13 @@
 ﻿#pragma warning disable SA1600 // ElementsMustBeDocumented. Internal type does not require inline documentation by convention.
+using System.Collections.Immutable;
 using System.Reflection;
 
-using Framework.Authorization.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Persistent;
 
-
+using SecuritySystem.Notification;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
@@ -32,15 +32,16 @@ internal sealed class ByRolesRecipientsResolverTyped<TBLLContext> : ByRolesRecip
         return new RecipientCollection(recipients);
     }
 
-    private IEnumerable<NotificationFilterGroup> GetNotificationFilterGroups<T>(
+    private ImmutableArray<NotificationFilterGroup> GetNotificationFilterGroups<T>(
             Subscription subscription,
             DomainObjectVersions<T> versions)
             where T : class
     {
-        return subscription
-               .SecurityItems
-               .Select(securityItem => this.GetNotificationFilterGroup(versions, securityItem))
-               .ToList();
+        return [
+            ..subscription
+              .SecurityItems
+              .Select(securityItem => this.GetNotificationFilterGroup(versions, securityItem))
+        ];
     }
 
     private NotificationFilterGroup GetNotificationFilterGroup<T>(
@@ -70,7 +71,12 @@ internal sealed class ByRolesRecipientsResolverTyped<TBLLContext> : ByRolesRecip
     {
         var lambdaProcessor = this.LambdaProcessorFactory.Create<SecurityItemSourceLambdaProcessor<TBLLContext>>();
         var identityObjects = lambdaProcessor.Invoke<T, TSecurityItem>(securityItem, versions);
-        var result = NotificationFilterGroup.Create(identityObjects, securityItem.ExpandType);
+        var result = new NotificationFilterGroup<Guid>
+                     {
+                         Idents = [..identityObjects.Select(v => v.Id)],
+                         ExpandType = securityItem.ExpandType,
+                         SecurityContextType = typeof(TSecurityItem)
+                     };
 
         return result;
     }

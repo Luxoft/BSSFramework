@@ -1,12 +1,16 @@
-﻿using Framework.Authorization.Domain;
-using Framework.Authorization.Notification;
+﻿using System.Collections.Immutable;
+
+using Framework.Authorization.Domain;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.Notification;
+
 using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using SecuritySystem.Notification;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3;
 
@@ -152,8 +156,8 @@ public class ConfigurationContextFacade
     ///     notificationFilterGroups равен null.
     /// </exception>
     public virtual IEnumerable<Principal> GetNotificationPrincipals(
-        SecurityRole[] securityRoles,
-        IEnumerable<NotificationFilterGroup> notificationFilterGroups)
+        ImmutableArray<SecurityRole> securityRoles,
+        ImmutableArray<NotificationFilterGroup> notificationFilterGroups)
     {
         if (securityRoles == null)
         {
@@ -165,7 +169,7 @@ public class ConfigurationContextFacade
             throw new ArgumentNullException(nameof(notificationFilterGroups));
         }
 
-        var result = this.context.Authorization.NotificationPrincipalExtractor.GetPrincipalsAsync(securityRoles, notificationFilterGroups).GetAwaiter().GetResult();
+        var result = this.context.Authorization.NotificationPrincipalExtractor.GetPrincipalsAsync(securityRoles, notificationFilterGroups).ToArrayAsync().GetAwaiter().GetResult();
 
         return result;
     }
@@ -176,14 +180,14 @@ public class ConfigurationContextFacade
     /// <param name="securityRoles"></param>
     /// <returns>Экземпляр <see cref="IEnumerable{Principal}" />.</returns>
     /// <exception cref="ArgumentNullException">Аргумент roleIdents равен null.</exception>
-    public virtual IEnumerable<Principal> GetNotificationPrincipals(SecurityRole[] securityRoles)
+    public virtual IEnumerable<Principal> GetNotificationPrincipals(ImmutableArray<SecurityRole> securityRoles)
     {
         if (securityRoles == null)
         {
             throw new ArgumentNullException(nameof(securityRoles));
         }
 
-        var result = this.context.Authorization.NotificationPrincipalExtractor.GetPrincipalsAsync(securityRoles, []).GetAwaiter().GetResult();
+        var result = this.context.Authorization.NotificationPrincipalExtractor.GetPrincipalsAsync(securityRoles, []).ToArrayAsync().GetAwaiter().GetResult();
 
         return result;
     }

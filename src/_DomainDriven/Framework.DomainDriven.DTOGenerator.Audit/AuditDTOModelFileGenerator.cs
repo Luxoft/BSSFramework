@@ -2,7 +2,6 @@
 using System.Runtime.Serialization;
 
 using CommonFramework;
-using CommonFramework.Maybe;
 
 using Framework.CodeDom;
 using Framework.Core;

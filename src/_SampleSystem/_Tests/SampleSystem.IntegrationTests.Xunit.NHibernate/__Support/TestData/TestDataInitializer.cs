@@ -41,7 +41,7 @@ public class TestDataInitializer
 
     public async Task InitializeAsync(CancellationToken cancellationToken) =>
         await this.serviceProvider
-                  .GetRequiredService<ITestingUserAuthenticationService>()
+                  .GetRequiredService<IRootImpersonateService>()
                   .WithImpersonateAsync(
                       nameof(TestDataInitializer),
                       async () => await this.InitializeAsyncInternal(cancellationToken));

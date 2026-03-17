@@ -11,23 +11,23 @@
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="Dapper" Version="2.1.72" />
     <PackageVersion Include="Dapper.Contrib" Version="2.0.78" />
-    <PackageVersion Include="IvAt.CommonFramework" Version="3.0.2" />
-    <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="3.0.2" />
-    <PackageVersion Include="IvAt.CommonFramework.GenericRepository" Version="3.0.2" />
-    <PackageVersion Include="IvAt.CommonFramework.IdentitySource.Abstractions" Version="3.0.2" />
-    <PackageVersion Include="IvAt.GenericQueryable" Version="3.0.2" />
-    <PackageVersion Include="IvAt.GenericQueryable.Abstractions" Version="3.0.2" />
-    <PackageVersion Include="IvAt.GenericQueryable.EntityFramework" Version="3.0.2" />
-    <PackageVersion Include="IvAt.GenericQueryable.NHibernate" Version="3.0.2" />
-    <PackageVersion Include="IvAt.GenericQueryable.Runtime" Version="3.0.2" />
-    <PackageVersion Include="IvAt.SecuritySystem" Version="3.0.2" />
-    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="3.0.2" />
-    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="3.0.2" />
-    <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission" Version="3.0.2" />
-    <PackageVersion Include="IvAt.SecuritySystem.Notification" Version="3.0.2" />
-    <PackageVersion Include="IvAt.SecuritySystem.Notification.Abstractions" Version="3.0.2" />
-    <PackageVersion Include="IvAt.SecuritySystem.Testing" Version="3.0.2" />
-    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="3.0.2" />
+    <PackageVersion Include="IvAt.CommonFramework" Version="3.0.5" />
+    <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="3.0.5" />
+    <PackageVersion Include="IvAt.CommonFramework.GenericRepository" Version="3.0.5" />
+    <PackageVersion Include="IvAt.CommonFramework.IdentitySource.Abstractions" Version="3.0.5" />
+    <PackageVersion Include="IvAt.GenericQueryable" Version="3.0.5" />
+    <PackageVersion Include="IvAt.GenericQueryable.Abstractions" Version="3.0.5" />
+    <PackageVersion Include="IvAt.GenericQueryable.EntityFramework" Version="3.0.5" />
+    <PackageVersion Include="IvAt.GenericQueryable.NHibernate" Version="3.0.5" />
+    <PackageVersion Include="IvAt.GenericQueryable.Runtime" Version="3.0.5" />
+    <PackageVersion Include="IvAt.SecuritySystem" Version="3.0.5" />
+    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="3.0.5" />
+    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="3.0.5" />
+    <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission" Version="3.0.5" />
+    <PackageVersion Include="IvAt.SecuritySystem.Notification" Version="3.0.5" />
+    <PackageVersion Include="IvAt.SecuritySystem.Notification.Abstractions" Version="3.0.5" />
+    <PackageVersion Include="IvAt.SecuritySystem.Testing" Version="3.0.5" />
+    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="3.0.5" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="1.6.2" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Middlewares" Version="1.6.2" />
     <PackageVersion Include="Luxoft.Bss.Platform.Events" Version="1.6.2" />

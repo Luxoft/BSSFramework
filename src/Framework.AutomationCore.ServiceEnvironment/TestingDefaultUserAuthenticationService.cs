@@ -1,4 +1,6 @@
-﻿using Framework.DomainDriven.Auth;
+﻿using CommonFramework;
+
+using Framework.DomainDriven.Auth;
 
 using SecuritySystem.Services;
 using SecuritySystem.Testing;

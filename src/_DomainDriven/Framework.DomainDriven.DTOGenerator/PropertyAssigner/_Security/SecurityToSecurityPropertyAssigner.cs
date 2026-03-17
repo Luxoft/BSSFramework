@@ -50,5 +50,7 @@ public class SecurityToSecurityPropertyAssigner<TConfiguration> : MaybePropertyA
                    },
                    FalseStatements = { targetPropertyTypeRef.ToNothingValueExpression().ToAssignStatement(targetPropertyRef) }
                };
+
+
     }
 }

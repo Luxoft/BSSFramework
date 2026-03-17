@@ -1,4 +1,6 @@
-﻿using SecuritySystem.Services;
+﻿using CommonFramework;
+
+using SecuritySystem.Services;
 
 namespace Framework.DomainDriven.Auth;
 

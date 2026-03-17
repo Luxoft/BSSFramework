@@ -28,7 +28,7 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
 
     protected override bool HasMapToDomainObjectMethod => this.Configuration.MapToDomainRole.HasFlag(ClientDTORole.Strict);
 
-    protected override IPropertyAssigner MapMappingObjectToDomainObjectPropertyAssigner
+    protected override IPropertyAssigner? MapMappingObjectToDomainObjectPropertyAssigner
     {
         get
         {

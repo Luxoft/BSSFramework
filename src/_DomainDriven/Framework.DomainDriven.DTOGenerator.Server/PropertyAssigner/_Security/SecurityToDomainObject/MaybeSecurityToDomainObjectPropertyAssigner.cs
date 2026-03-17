@@ -1,8 +1,6 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
-using CommonFramework.Maybe;
-
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.Persistent;
@@ -27,7 +25,13 @@ public abstract class MaybeSecurityToDomainObjectPropertyAssigner<TConfiguration
         }
         else
         {
-            return this.InnerAssigner.GetAssignStatement(property, sourcePropertyRef.ToPropertyReference(nameof(Maybe<>.Value)), targetPropertyRef);
+
+            return this.GetSecurityAssignStatementInternal(
+                property,
+                sourcePropertyRef,
+                this.InnerAssigner.GetAssignStatement(property, sourcePropertyRef.ToPropertyReference("Value"), targetPropertyRef));
+
+            //return this.InnerAssigner.GetAssignStatement(property, sourcePropertyRef.ToPropertyReference(nameof(Maybe<>.Value)), targetPropertyRef);
         }
     }
 }

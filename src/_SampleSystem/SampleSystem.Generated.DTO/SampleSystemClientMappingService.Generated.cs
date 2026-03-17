@@ -1235,7 +1235,7 @@ namespace SampleSystem.Generated.DTO
             {
                 target.LastActionDate = CommonFramework.Maybe.Maybe.Return(currentSource.LastActionDate);
             }
-            //if (baseSource.Login != currentSource.Login)
+            if (baseSource.Login != currentSource.Login)
             {
                 target.Login = currentSource.Login;
             }
@@ -1264,7 +1264,7 @@ namespace SampleSystem.Generated.DTO
             {
                 target.PlannedHireDate = CommonFramework.Maybe.Maybe.Return(currentSource.PlannedHireDate);
             }
-            //if (baseSource.Position != currentSource.Position)
+            if (baseSource.Position != currentSource.Position)
             {
                 target.Position = currentSource.Position;
             }
@@ -1523,7 +1523,7 @@ namespace SampleSystem.Generated.DTO
             {
                 target.Field2 = CommonFramework.Maybe.Maybe.Return(currentSource.Field2);
             }
-            //if (baseSource.Field3 != currentSource.Field3)
+            if (baseSource.Field3 != currentSource.Field3)
             {
                 target.Field3 = currentSource.Field3;
             }

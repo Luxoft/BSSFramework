@@ -3074,47 +3074,47 @@ namespace SampleSystem.Generated.DTO
             {
                 this.GetUpdateCollectionMappingService<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkUpdateDTO, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(detailDTO => this.ToEmployeeAndEmployeeSpecializationLink(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(domainObject, detail)).Map(mappingObject.Specializations, domainObject.Specializations);
             }
-            if (!object.ReferenceEquals(mappingObject.Age, null))
+            if (mappingObject.Age.HasValue)
             {
                 domainObject.Age = mappingObject.Age.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.BirthDate, null))
+            if (mappingObject.BirthDate.HasValue)
             {
                 domainObject.BirthDate = mappingObject.BirthDate.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.CanBePPM, null))
+            if (mappingObject.CanBePPM.HasValue)
             {
                 domainObject.CanBePPM = mappingObject.CanBePPM.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.EducationDuration, null))
+            if (mappingObject.EducationDuration.HasValue)
             {
                 domainObject.EducationDuration = mappingObject.EducationDuration.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.Email, null))
+            if (mappingObject.Email.HasValue)
             {
                 domainObject.Email = mappingObject.Email.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.ExternalId, null))
+            if (mappingObject.ExternalId.HasValue)
             {
                 domainObject.ExternalId = mappingObject.ExternalId.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.Gender, null))
+            if (mappingObject.Gender.HasValue)
             {
                 domainObject.Gender = mappingObject.Gender.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.Interphone, null))
+            if (mappingObject.Interphone.HasValue)
             {
                 domainObject.Interphone = mappingObject.Interphone.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.Landlinephone, null))
+            if (mappingObject.Landlinephone.HasValue)
             {
                 domainObject.Landlinephone = mappingObject.Landlinephone.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.LastActionDate, null))
+            if (mappingObject.LastActionDate.HasValue)
             {
                 domainObject.LastActionDate = mappingObject.LastActionDate.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.Login, null))
+            if (mappingObject.Login.HasValue)
             {
                 if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.EmployeeEdit))
                 {
@@ -3125,31 +3125,31 @@ namespace SampleSystem.Generated.DTO
                     throw new Framework.Exceptions.BusinessLogicException("Access for write to field \"Login\" denied");
                 }
             }
-            if (!object.ReferenceEquals(mappingObject.NameEng, null))
+            if (mappingObject.NameEng.HasValue)
             {
                 domainObject.NameEng = mappingObject.NameEng.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.NameNative, null))
+            if (mappingObject.NameNative.HasValue)
             {
                 domainObject.NameNative = mappingObject.NameNative.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.NameRussian, null))
+            if (mappingObject.NameRussian.HasValue)
             {
                 domainObject.NameRussian = mappingObject.NameRussian.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.NonValidateVirtualProp, null))
+            if (mappingObject.NonValidateVirtualProp.HasValue)
             {
                 domainObject.NonValidateVirtualProp = mappingObject.NonValidateVirtualProp.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.Pin, null))
+            if (mappingObject.Pin.HasValue)
             {
                 domainObject.Pin = mappingObject.Pin.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.PlannedHireDate, null))
+            if (mappingObject.PlannedHireDate.HasValue)
             {
                 domainObject.PlannedHireDate = mappingObject.PlannedHireDate.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.Position, null))
+            if (mappingObject.Position.HasValue)
             {
                 if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.EmployeePositionEdit))
                 {
@@ -3167,7 +3167,7 @@ namespace SampleSystem.Generated.DTO
                     throw new Framework.Exceptions.BusinessLogicException("Access for write to field \"Position\" denied");
                 }
             }
-            if (!object.ReferenceEquals(mappingObject.Ppm, null))
+            if (mappingObject.Ppm.HasValue)
             {
                 if (!object.Equals(mappingObject.Ppm.Value, default(SampleSystem.Generated.DTO.EmployeeIdentityDTO)))
                 {
@@ -3178,7 +3178,7 @@ namespace SampleSystem.Generated.DTO
                     domainObject.Ppm = null;
                 }
             }
-            if (!object.ReferenceEquals(mappingObject.RegistrationType, null))
+            if (mappingObject.RegistrationType.HasValue)
             {
                 if (!object.Equals(mappingObject.RegistrationType.Value, default(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO)))
                 {
@@ -3189,7 +3189,7 @@ namespace SampleSystem.Generated.DTO
                     domainObject.RegistrationType = null;
                 }
             }
-            if (!object.ReferenceEquals(mappingObject.Role, null))
+            if (mappingObject.Role.HasValue)
             {
                 if (!object.Equals(mappingObject.Role.Value, default(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO)))
                 {
@@ -3200,7 +3200,7 @@ namespace SampleSystem.Generated.DTO
                     domainObject.Role = null;
                 }
             }
-            if (!object.ReferenceEquals(mappingObject.RoleDegree, null))
+            if (mappingObject.RoleDegree.HasValue)
             {
                 if (!object.Equals(mappingObject.RoleDegree.Value, default(SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO)))
                 {
@@ -3211,7 +3211,7 @@ namespace SampleSystem.Generated.DTO
                     domainObject.RoleDegree = null;
                 }
             }
-            if (!object.ReferenceEquals(mappingObject.VacationApprover, null))
+            if (mappingObject.VacationApprover.HasValue)
             {
                 if (!object.Equals(mappingObject.VacationApprover.Value, default(SampleSystem.Generated.DTO.EmployeeIdentityDTO)))
                 {
@@ -3222,11 +3222,11 @@ namespace SampleSystem.Generated.DTO
                     domainObject.VacationApprover = null;
                 }
             }
-            if (!object.ReferenceEquals(mappingObject.ValidateVirtualProp, null))
+            if (mappingObject.ValidateVirtualProp.HasValue)
             {
                 domainObject.ValidateVirtualProp = mappingObject.ValidateVirtualProp.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.WorkPeriod, null))
+            if (mappingObject.WorkPeriod.HasValue)
             {
                 domainObject.WorkPeriod = mappingObject.WorkPeriod.Value;
             }
@@ -3742,7 +3742,7 @@ namespace SampleSystem.Generated.DTO
         public virtual void MapEmployeeAndEmployeeSpecializationLink(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkUpdateDTO mappingObject, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink domainObject)
         {
             domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
-            if (!object.ReferenceEquals(mappingObject.Employee, null))
+            if (mappingObject.Employee.HasValue)
             {
                 if (!object.Equals(mappingObject.Employee.Value, default(SampleSystem.Generated.DTO.EmployeeIdentityDTO)))
                 {
@@ -3753,7 +3753,7 @@ namespace SampleSystem.Generated.DTO
                     domainObject.Employee = null;
                 }
             }
-            if (!object.ReferenceEquals(mappingObject.Specialization, null))
+            if (mappingObject.Specialization.HasValue)
             {
                 if (!object.Equals(mappingObject.Specialization.Value, default(SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO)))
                 {
@@ -3874,15 +3874,15 @@ namespace SampleSystem.Generated.DTO
         public virtual void MapEmployeeCellPhone(SampleSystem.Generated.DTO.EmployeeCellPhoneUpdateDTO mappingObject, SampleSystem.Domain.EmployeeCellPhone domainObject)
         {
             domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
-            if (!object.ReferenceEquals(mappingObject.CityCode, null))
+            if (mappingObject.CityCode.HasValue)
             {
                 domainObject.CityCode = mappingObject.CityCode.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.CountryCode, null))
+            if (mappingObject.CountryCode.HasValue)
             {
                 domainObject.CountryCode = mappingObject.CountryCode.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.Number, null))
+            if (mappingObject.Number.HasValue)
             {
                 domainObject.Number = mappingObject.Number.Value;
             }
@@ -4189,15 +4189,15 @@ namespace SampleSystem.Generated.DTO
         public virtual void MapEmployeePersonalCellPhone(SampleSystem.Generated.DTO.EmployeePersonalCellPhoneUpdateDTO mappingObject, SampleSystem.Domain.EmployeePersonalCellPhone domainObject)
         {
             domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
-            if (!object.ReferenceEquals(mappingObject.CityCode, null))
+            if (mappingObject.CityCode.HasValue)
             {
                 domainObject.CityCode = mappingObject.CityCode.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.CountryCode, null))
+            if (mappingObject.CountryCode.HasValue)
             {
                 domainObject.CountryCode = mappingObject.CountryCode.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.Number, null))
+            if (mappingObject.Number.HasValue)
             {
                 domainObject.Number = mappingObject.Number.Value;
             }
@@ -4648,11 +4648,11 @@ namespace SampleSystem.Generated.DTO
         public virtual void MapEmployeeToEmployeeLink(SampleSystem.Generated.DTO.EmployeeToEmployeeLinkUpdateDTO mappingObject, SampleSystem.Domain.EmployeeToEmployeeLink domainObject)
         {
             domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
-            if (!object.ReferenceEquals(mappingObject.EmployeeLinkType, null))
+            if (mappingObject.EmployeeLinkType.HasValue)
             {
                 domainObject.EmployeeLinkType = mappingObject.EmployeeLinkType.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.LinkedEmployee, null))
+            if (mappingObject.LinkedEmployee.HasValue)
             {
                 if (!object.Equals(mappingObject.LinkedEmployee.Value, default(SampleSystem.Generated.DTO.EmployeeIdentityDTO)))
                 {
@@ -4787,15 +4787,15 @@ namespace SampleSystem.Generated.DTO
             {
                 this.GetUpdateCollectionMappingService<SampleSystem.Generated.DTO.Example2UpdateDTO, SampleSystem.Generated.DTO.Example2IdentityDTO, SampleSystem.Domain.Example2>(detailDTO => this.ToExample2(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Example1, SampleSystem.Domain.Example2>(domainObject, detail)).Map(mappingObject.Items2, domainObject.Items2);
             }
-            if (!object.ReferenceEquals(mappingObject.Field1, null))
+            if (mappingObject.Field1.HasValue)
             {
                 domainObject.Field1 = mappingObject.Field1.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.Field2, null))
+            if (mappingObject.Field2.HasValue)
             {
                 domainObject.Field2 = mappingObject.Field2.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.Field3, null))
+            if (mappingObject.Field3.HasValue)
             {
                 if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.LocationEdit))
                 {
@@ -4869,11 +4869,11 @@ namespace SampleSystem.Generated.DTO
         public virtual void MapExample2(SampleSystem.Generated.DTO.Example2UpdateDTO mappingObject, SampleSystem.Domain.Example2 domainObject)
         {
             domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
-            if (!object.ReferenceEquals(mappingObject.Field1, null))
+            if (mappingObject.Field1.HasValue)
             {
                 domainObject.Field1 = mappingObject.Field1.Value;
             }
-            if (!object.ReferenceEquals(mappingObject.Field2, null))
+            if (mappingObject.Field2.HasValue)
             {
                 domainObject.Field2 = mappingObject.Field2.Value;
             }

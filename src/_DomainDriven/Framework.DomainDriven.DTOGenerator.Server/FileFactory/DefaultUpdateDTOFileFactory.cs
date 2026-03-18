@@ -31,7 +31,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
 
     public override IPropertyCodeTypeReferenceService CodeTypeReferenceService { get; }
 
-    protected override IPropertyAssigner MapMappingObjectToDomainObjectPropertyAssigner
+    protected override IPropertyAssigner? MapMappingObjectToDomainObjectPropertyAssigner
     {
         get
         {

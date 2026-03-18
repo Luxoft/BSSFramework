@@ -8,6 +8,7 @@ using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
 
 using SecuritySystem;
+using SecuritySystem.Services;
 using SecuritySystem.Testing;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData;

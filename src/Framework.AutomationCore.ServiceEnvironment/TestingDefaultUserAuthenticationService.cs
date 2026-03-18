@@ -1,16 +1,21 @@
-﻿using CommonFramework;
-
+﻿using Framework.DomainDriven;
 using Framework.DomainDriven.Auth;
 
-using SecuritySystem.Services;
+using SecuritySystem;
 using SecuritySystem.Testing;
 
 namespace Automation.ServiceEnvironment;
 
 public class TestingDefaultUserAuthenticationService(
-    ITestingEvaluator<IRawUserAuthenticationService> userAuthenticationServiceEvaluator,
-    IDefaultCancellationTokenSource? defaultCancellationTokenSource = null) : IDefaultUserAuthenticationService
+    RootImpersonateServiceState rootImpersonateServiceState,
+    TestRootUserInfo testRootUserInfo,
+    IServiceEvaluator<ICurrentUser> currentUserEvaluator) : IDefaultUserAuthenticationService
 {
     public string GetUserName() =>
-        defaultCancellationTokenSource.RunSync(async _ => await userAuthenticationServiceEvaluator.EvaluateAsync(TestingScopeMode.Read, async s => s.GetUserName()));
+
+        rootImpersonateServiceState.CustomUserCredential == null
+            ? testRootUserInfo.Name
+            : rootImpersonateServiceState.Cache.TryGetValue(rootImpersonateServiceState.CustomUserCredential, out var cachedUserName)
+                ? cachedUserName
+                : currentUserEvaluator.Evaluate(DBSessionMode.Read, s => s.Name);
 }

@@ -3,6 +3,7 @@ using Automation.Settings;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
 using SecuritySystem;
+using SecuritySystem.Services;
 using SecuritySystem.Testing;
 
 using Microsoft.Extensions.Configuration;

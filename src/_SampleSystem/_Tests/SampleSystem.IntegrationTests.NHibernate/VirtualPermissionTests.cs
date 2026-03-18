@@ -145,7 +145,7 @@ public class VirtualPermissionTests : TestBase
         // Act
         var hasAccess =
 
-            await this.Evaluate(
+            await this.EvaluateAsync(
                 DBSessionMode.Read,
                 "Noname",
                 async ctx =>

@@ -26,6 +26,9 @@ public static class DependencyInjectionExtensions
 
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
+        services.AddSingleton(typeof(IDomainObjectSaveStrategy<>), typeof(DomainObjectSaveStrategy<>));
+        services.BindServiceProxy(typeof(IDomainObjectSaveStrategy<>), typeof(DomainObjectSaveStrategyServiceProxyBinder<>));
+
         services.AddScoped<IDBSessionSettings, DBSessionSettings>();
 
         services.AddNHibernateGenericQueryable();

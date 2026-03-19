@@ -23,7 +23,7 @@ public class AuditService<TIdent, TBllContext, TBllFactoryContainer, TRootSecuri
     where TPersistentObjectBase : class, IIdentityObject<TIdent>
     where TBllFactoryContainer : IBLLFactoryContainer<IDefaultBLLFactory<TPersistentObjectBase, TIdent>>
     where TBllContext : IBLLFactoryContainerContext<TBllFactoryContainer>, ISecurityServiceContainer<TRootSecurityService>, IServiceProviderContainer
-    where TRootSecurityService : IRootSecurityService<TPersistentObjectBase>
+    where TRootSecurityService : IRootSecurityService
 {
     private static readonly Lazy<Type> GenericTPropertyRevisionDtoType = new Lazy<Type>(
      () => typeof(TPropertyRevisionDto)
@@ -98,7 +98,7 @@ public class AuditService<TIdent, TBllContext, TBllFactoryContainer, TRootSecuri
     {
         var viewSecurityRule = propertyInfo.GetViewSecurityRule();
 
-        return bllContext.SecurityService.GetSecurityProvider<TDomain>(viewSecurityRule).HasAccess(domainObject);
+        return bllContext.SecurityService.GetSecurityProvider<TDomain>(viewSecurityRule).HasAccessAsync(domainObject).GetAwaiter().GetResult();
     }
 
     private TPropertyRevisionDto ToPropertyRevisionDto<TDtoProperty, TProperty>(

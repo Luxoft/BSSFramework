@@ -13,7 +13,7 @@ namespace Framework.DomainDriven.BLL.Security;
 public abstract class SecurityBLLFactory<TBLLContext, TBLL, TBLLImpl, TDomainObject>(TBLLContext context) :
     BLLContextContainer<TBLLContext>(context),
     ISecurityBLLFactory<TBLL, TDomainObject>
-    where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService<TDomainObject>>, IServiceProviderContainer
+    where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService>, IServiceProviderContainer
     where TDomainObject : class
     where TBLLImpl : TBLL
 {

@@ -1,7 +1,8 @@
-﻿using Framework.Authorization.Notification;
-using Framework.Configuration.SubscriptionModeling;
+﻿using Framework.Configuration.SubscriptionModeling;
 
 using SampleSystem.Domain;
+
+using SecuritySystem.Notification;
 
 namespace SampleSystem.Subscriptions.Metadata.Employee.Update;
 
@@ -16,6 +17,6 @@ public sealed class SecurityItemSourceLambda
     {
         this.ExpandType = NotificationExpandType.All;
         this.DomainObjectChangeType = DomainObjectChangeType.Update;
-        this.Lambda = (context, versions) => new ManagementUnit[0];
+        this.Lambda = (context, versions) => [];
     }
 }

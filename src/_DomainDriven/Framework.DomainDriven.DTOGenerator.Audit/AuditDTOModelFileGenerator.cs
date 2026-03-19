@@ -2,7 +2,6 @@
 using System.Runtime.Serialization;
 
 using CommonFramework;
-using CommonFramework.Maybe;
 
 using Framework.CodeDom;
 using Framework.Core;
@@ -113,12 +112,6 @@ public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TCon
         }
     }
 
-    private IEnumerable<CodeTypeReference> GetMaybePropertyCodeTypeReferences(CodeTypeReference typeReference)
-    {
-        return new[] { typeof(Just<>), typeof(Nothing<>) }
-               .Select(z => z.GetGenericTypeDefinition())
-               .Select(z => new CodeTypeReference(z.GetGenericTypeDefinition()).Self(q => q.TypeArguments.Add(typeReference)));
-    }
     private IEnumerable<CodeTypeReference> GetPropertyCodeTypeRefences(Type propertyType)
     {
         if (this.Configuration.IsDomainObject(propertyType))
@@ -128,11 +121,6 @@ public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TCon
                 var result = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(propertyType, FileType.SimpleDTO);
 
                 yield return result;
-
-                foreach (var maybePropertyCodeTypeReference in this.GetMaybePropertyCodeTypeReferences(result))
-                {
-                    yield return maybePropertyCodeTypeReference;
-                }
             }
         }
         else if (propertyType.IsCollection()
@@ -144,11 +132,6 @@ public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TCon
                 var result = new CodeTypeReference(propertyType.GetGenericTypeDefinition()).Self(z => z.TypeArguments.Add(type));
 
                 yield return result;
-
-                foreach (var maybePropertyCodeTypeReference in this.GetMaybePropertyCodeTypeReferences(result))
-                {
-                    yield return maybePropertyCodeTypeReference;
-                }
             }
         }
         else
@@ -156,11 +139,6 @@ public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TCon
             var result = new CodeTypeReference(propertyType);
 
             yield return result;
-
-            foreach (var maybePropertyCodeTypeReference in this.GetMaybePropertyCodeTypeReferences(result))
-            {
-                yield return maybePropertyCodeTypeReference;
-            }
         }
     }
 

@@ -9,11 +9,11 @@ namespace Framework.DomainDriven.ServiceModel.IAD;
 public class ProjectionSecurityContextInfoSource(
     IServiceProxyFactory serviceProxyFactory,
     IEnumerable<SecurityContextInfo> securityContextInfoList,
-    IRealTypeResolver realTypeResolver)
+    IActualDomainTypeResolver actualDomainTypeResolver)
     : SecurityContextInfoSource(serviceProxyFactory, securityContextInfoList)
 {
     public override SecurityContextInfo GetSecurityContextInfo(Type type)
     {
-        return base.GetSecurityContextInfo(realTypeResolver.Resolve(type));
+        return base.GetSecurityContextInfo(actualDomainTypeResolver.Resolve(type));
     }
 }

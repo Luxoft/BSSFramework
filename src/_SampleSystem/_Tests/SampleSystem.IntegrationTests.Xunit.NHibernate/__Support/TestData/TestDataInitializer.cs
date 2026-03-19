@@ -3,6 +3,7 @@ using Automation.Settings;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
 using SecuritySystem;
+using SecuritySystem.Services;
 using SecuritySystem.Testing;
 
 using Microsoft.Extensions.Configuration;
@@ -41,7 +42,7 @@ public class TestDataInitializer
 
     public async Task InitializeAsync(CancellationToken cancellationToken) =>
         await this.serviceProvider
-                  .GetRequiredService<ITestingUserAuthenticationService>()
+                  .GetRequiredService<IRootImpersonateService>()
                   .WithImpersonateAsync(
                       nameof(TestDataInitializer),
                       async () => await this.InitializeAsyncInternal(cancellationToken));

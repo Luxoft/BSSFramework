@@ -103,20 +103,20 @@ public class SecurityContextRestrictionFilterTests : TestBase
     }
 
     [TestMethod]
-    public void CreateCustomRestrictionRule_SearchAccessorsForGrandPermission_EmployeeFounded()
+    public async Task CreateCustomRestrictionRule_SearchAccessorsForGrandPermission_EmployeeFounded()
     {
         // Arrange
-        this.AuthManager.For(this.employee.Id).SetRole(DefaultSecurityRole);
+        await this.AuthManager.For(this.employee.Id).SetRoleAsync(DefaultSecurityRole);
 
         // Act
-        var accesors = this.Evaluate(DBSessionMode.Read, this.employee.Id,
-                                     ctx =>
+        var accesors = await this.EvaluateAsync(DBSessionMode.Read, this.employee.Id,
+                                     async ctx =>
                                      {
-                                         var bu = ctx.Logics.BusinessUnit.GetById(this.buWithAllowedFilter.Id, true);
+                                         var bu = ctx.Logics.BusinessUnit.GetById(this.buWithAllowedFilter.Id, true)!;
 
-                                         var accessorData = ctx
-                                                            .SecurityService.GetSecurityProvider<BusinessUnit>(DefaultRestrictionRule)
-                                                            .GetAccessorData(bu);
+                                         var accessorData = await ctx
+                                                                  .SecurityService.GetSecurityProvider<BusinessUnit>(DefaultRestrictionRule)
+                                                                  .GetAccessorDataAsync(bu);
 
                                          return ctx.SecurityAccessorResolver.Resolve(accessorData).ToList();
                                      });
@@ -126,46 +126,46 @@ public class SecurityContextRestrictionFilterTests : TestBase
     }
 
     [TestMethod]
-    public void CreateCustomRestrictionRule_SearchAccessorsForCorrectBU_EmployeeFounded()
+    public async Task CreateCustomRestrictionRule_SearchAccessorsForCorrectBU_EmployeeFounded()
     {
         // Arrange
-        this.AuthManager.For(this.employee.Id).SetRole(new SampleSystemTestPermission(DefaultSecurityRole) { BusinessUnits = [this.defaultBu, this.buWithAllowedFilter] });
+        await this.AuthManager.For(this.employee.Id).SetRoleAsync(new SampleSystemTestPermission(DefaultSecurityRole) { BusinessUnits = [this.defaultBu, this.buWithAllowedFilter] });
 
         // Act
-        var accesors = this.Evaluate(DBSessionMode.Read, this.employee.Id,
-                                          ctx =>
-                                          {
-                                              var bu = ctx.Logics.BusinessUnit.GetById(this.buWithAllowedFilter.Id, true);
+        var accesors = await this.EvaluateAsync(DBSessionMode.Read, this.employee.Id,
+                                                async ctx =>
+                                                {
+                                                    var bu = ctx.Logics.BusinessUnit.GetById(this.buWithAllowedFilter.Id, true)!;
 
-                                              var accessorData = ctx
-                                                                  .SecurityService.GetSecurityProvider<BusinessUnit>(DefaultRestrictionRule)
-                                                                  .GetAccessorData(bu);
+                                                    var accessorData = await ctx
+                                                                             .SecurityService.GetSecurityProvider<BusinessUnit>(DefaultRestrictionRule)
+                                                                             .GetAccessorDataAsync(bu);
+
+                                                    return ctx.SecurityAccessorResolver.Resolve(accessorData).ToList();
+                                                });
+
+        // Assert
+        accesors.Should().Contain(this.employeeLogin);
+    }
+
+    [TestMethod]
+    public async Task CreateCustomRestrictionRule_SearchAccessorsForIncorrectBU_EmployeeNotFounded()
+    {
+        // Arrange
+        await this.AuthManager.For(this.employee.Id).SetRoleAsync(new SampleSystemTestPermission(DefaultSecurityRole) { BusinessUnits = [this.defaultBu, this.buWithAllowedFilter] });
+
+        // Act
+        var accesors = await this.EvaluateAsync(DBSessionMode.Read, this.employee.Id,
+                                          async ctx =>
+                                          {
+                                              var bu = ctx.Logics.BusinessUnit.GetById(this.defaultBu.Id, true)!;
+
+                                              var accessorData = await ctx
+                                                                 .SecurityService.GetSecurityProvider<BusinessUnit>(DefaultRestrictionRule)
+                                                                 .GetAccessorDataAsync(bu);
 
                                               return ctx.SecurityAccessorResolver.Resolve(accessorData).ToList();
                                           });
-
-        // Assert
-        accesors.Should().Contain(this.employeeLogin);
-    }
-
-    [TestMethod]
-    public void CreateCustomRestrictionRule_SearchAccessorsForIncorrectBU_EmployeeNotFounded()
-    {
-        // Arrange
-        this.AuthManager.For(this.employee.Id).SetRole(new SampleSystemTestPermission(DefaultSecurityRole) { BusinessUnits = [this.defaultBu, this.buWithAllowedFilter] });
-
-        // Act
-        var accesors = this.Evaluate(DBSessionMode.Read, this.employee.Id,
-                                     ctx =>
-                                     {
-                                         var bu = ctx.Logics.BusinessUnit.GetById(this.defaultBu.Id, true);
-
-                                         var accessorData = ctx
-                                                            .SecurityService.GetSecurityProvider<BusinessUnit>(DefaultRestrictionRule)
-                                                            .GetAccessorData(bu);
-
-                                         return ctx.SecurityAccessorResolver.Resolve(accessorData).ToList();
-                                     });
 
         // Assert
         accesors.Should().NotContainInConsecutiveOrder(this.employeeLogin);

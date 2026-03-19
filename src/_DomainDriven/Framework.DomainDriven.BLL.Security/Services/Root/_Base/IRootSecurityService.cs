@@ -3,9 +3,12 @@ using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public interface IRootSecurityService<in TPersistentDomainObjectBase>
-    where TPersistentDomainObjectBase : class
+public interface IRootSecurityService
 {
-    ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityRule securityRule)
-        where TDomainObject : TPersistentDomainObjectBase;
+    ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityRule securityRule);
+
+    bool HasAccess<TDomainObject>(TDomainObject domainObject, SecurityRule securityRule) =>
+        this.GetSecurityProvider<TDomainObject>(securityRule).HasAccessAsync(domainObject).GetAwaiter().GetResult();
+
+    void CheckAccess<TDomainObject>(TDomainObject domainObject, SecurityRule securityRule);
 }

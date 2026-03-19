@@ -63,8 +63,6 @@ public static class NullableExtensions
     public static Maybe<TResult> Or<TSource, TResult>(this Maybe<TSource> v1, TResult v2)
         where TSource : TResult
     {
-        if (v1 == null) throw new ArgumentNullException(nameof(v1));
-
         return v1.HasValue ? v1.Select(v => (TResult)v) : Maybe.Return(v2);
     }
 }

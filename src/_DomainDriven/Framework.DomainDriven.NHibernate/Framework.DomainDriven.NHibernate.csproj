@@ -13,6 +13,7 @@
 
     <PackageReference Include="IvAt.CommonFramework.IdentitySource.Abstractions" />
     <PackageReference Include="IvAt.GenericQueryable" />
+    <PackageReference Include="IvAt.GenericQueryable.NHibernate" />
 
     <PackageReference Include="Microsoft.Data.SqlClient" />
 

@@ -3,7 +3,7 @@ using Framework.Persistent;
 
 namespace SampleSystem.Domain;
 
-[BLLViewRole, BLLSaveRole(SaveType = BLLSaveType.Both)]
+[BLLViewRole, BLLSaveRole(SaveType = BLLSaveType.Both )]
 public class Example1 : AuditPersistentDomainObjectBase, IMaster<Example2>
 {
     private readonly ICollection<Example2> items2 = new HashSet<Example2>();

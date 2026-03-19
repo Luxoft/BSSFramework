@@ -23,7 +23,7 @@ public class PropertyAssignerConfigurator<TConfiguration> : PropertyAssignerConf
 
         var attr = this.GetDomainObjectAttribute(propertyAssigner, property, isEdit);
 
-        return this.Configuration.ToHasAccessMethod(propertyAssigner.ContextRef, attr.SecurityRule, propertyAssigner.DomainType, propertyAssigner.DomainParameter);
+        return this.Configuration.ToHasAccessMethod(propertyAssigner.ContextRef, attr.SecurityRule, propertyAssigner.DomainType!, propertyAssigner.DomainParameter);
     }
 
     private DomainObjectAccessAttribute GetDomainObjectAttribute(IServerPropertyAssigner propertyAssigner, PropertyInfo property, bool isEdit)

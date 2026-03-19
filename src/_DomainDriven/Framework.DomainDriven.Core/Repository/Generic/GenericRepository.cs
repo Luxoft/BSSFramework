@@ -16,29 +16,27 @@ public class GenericRepository<TDomainObject, TIdent>(
 {
     public async Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken)
     {
-        this.CheckAccess(domainObject);
+        await this.CheckAccess(domainObject, cancellationToken);
 
         await dal.SaveAsync(domainObject, cancellationToken);
     }
 
     public async Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken)
     {
-        this.CheckAccess(domainObject);
+        await this.CheckAccess(domainObject, cancellationToken);
 
         await dal.InsertAsync(domainObject, id, cancellationToken);
     }
 
     public async Task RemoveAsync(TDomainObject domainObject, CancellationToken cancellationToken)
     {
-        this.CheckAccess(domainObject);
+        await this.CheckAccess(domainObject, cancellationToken);
 
         await dal.RemoveAsync(domainObject, cancellationToken);
     }
 
-    private void CheckAccess(TDomainObject domainObject)
-    {
-        securityProvider.CheckAccess(domainObject, accessDeniedExceptionService);
-    }
+    private Task CheckAccess(TDomainObject domainObject, CancellationToken cancellationToken) =>
+        securityProvider.CheckAccessAsync(domainObject, accessDeniedExceptionService, cancellationToken);
 
     public IQueryable<TDomainObject> GetQueryable() => dal.GetQueryable().Pipe(securityProvider.InjectFilter);
 

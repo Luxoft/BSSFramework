@@ -6,7 +6,9 @@ using CommonFramework.Visitor;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;
+
 using SecuritySystem.Credential;
+using SecuritySystem.Services;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -92,7 +94,7 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
             else
             {
                 await context.RequestServices
-                             .GetRequiredService<ITestingUserAuthenticationService>()
+                             .GetRequiredService<IRootImpersonateService>()
                              .WithImpersonateAsync(customUserCredential, async () => await next(context));
             }
         }

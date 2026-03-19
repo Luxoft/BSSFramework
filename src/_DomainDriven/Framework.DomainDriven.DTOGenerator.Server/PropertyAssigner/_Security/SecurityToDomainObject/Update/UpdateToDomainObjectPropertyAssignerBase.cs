@@ -1,6 +1,8 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
+using CommonFramework.Maybe;
+
 using Framework.CodeDom;
 using Framework.Exceptions;
 using Framework.Security;
@@ -35,26 +37,26 @@ public abstract class UpdateToDomainObjectPropertyAssignerBase<TConfiguration> :
 
         var editAttr = this.configuration.Environment.ExtendedMetadata.GetProperty(property).GetEditDomainObjectAttribute();
 
-        return new CodeNotNullConditionStatement(justValueRefExpr)
+        return new CodeConditionStatement(justValueRefExpr.ToPropertyReference(nameof(Maybe<>.HasValue)))
                {
-                       TrueStatements =
-                       {
-                               editAttr == null ? innerAssignStatement : new CodeConditionStatement
-                                                                         {
-                                                                                 Condition = this.GetCondition(property),
+                   TrueStatements =
+                   {
+                       editAttr == null ? innerAssignStatement : new CodeConditionStatement
+                                                                 {
+                                                                     Condition = this.GetCondition(property),
 
-                                                                                 TrueStatements =
-                                                                                 {
-                                                                                         innerAssignStatement
-                                                                                 },
+                                                                     TrueStatements =
+                                                                     {
+                                                                         innerAssignStatement
+                                                                     },
 
-                                                                                 FalseStatements =
-                                                                                 {
-                                                                                         new CodeThrowExceptionStatement(new CodeObjectCreateExpression(typeof(BusinessLogicException),
-                                                                                             $"Access for write to field \"{property.Name}\" denied".ToPrimitiveExpression()))
-                                                                                 }
-                                                                         }
-                       }
+                                                                     FalseStatements =
+                                                                     {
+                                                                         new CodeThrowExceptionStatement(new CodeObjectCreateExpression(typeof(BusinessLogicException),
+                                                                                                             $"Access for write to field \"{property.Name}\" denied".ToPrimitiveExpression()))
+                                                                     }
+                                                                 }
+                   }
                };
     }
 }

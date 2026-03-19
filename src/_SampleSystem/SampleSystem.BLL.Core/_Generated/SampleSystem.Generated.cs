@@ -11,7 +11,7 @@ namespace SampleSystem.BLL
 {
     
     
-    public partial interface ISampleSystemBLLContext : Framework.DomainDriven.BLL.Security.IAccessDeniedExceptionServiceContainer, Framework.DomainDriven.BLL.Security.ISecurityServiceContainer<Framework.DomainDriven.BLL.Security.IRootSecurityService<SampleSystem.Domain.PersistentDomainObjectBase>>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<SampleSystem.BLL.ISampleSystemBLLFactoryContainer>
+    public partial interface ISampleSystemBLLContext : Framework.DomainDriven.BLL.Security.IAccessDeniedExceptionServiceContainer, Framework.DomainDriven.BLL.Security.ISecurityServiceContainer<Framework.DomainDriven.BLL.Security.IRootSecurityService>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<SampleSystem.BLL.ISampleSystemBLLFactoryContainer>
     {
         
         new SampleSystem.BLL.ISampleSystemBLLFactoryContainer Logics

@@ -30,7 +30,7 @@ public partial class SampleSystemBLLContext(
     IStandartExpressionBuilder standartExpressionBuilder,
     ISampleSystemValidator validator,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
-    IRootSecurityService<PersistentDomainObjectBase> securityService,
+    IRootSecurityService securityService,
     ISampleSystemBLLFactoryContainer logics,
     IAuthorizationBLLContext authorization,
     Framework.Configuration.BLL.IConfigurationBLLContext configuration,
@@ -48,7 +48,7 @@ public partial class SampleSystemBLLContext(
         validator,
         hierarchicalObjectExpanderFactory)
 {
-    public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; } = securityService;
+    public IRootSecurityService SecurityService { get; } = securityService;
 
     public ISecurityAccessorResolver SecurityAccessorResolver { get; } = securityAccessorResolver;
 

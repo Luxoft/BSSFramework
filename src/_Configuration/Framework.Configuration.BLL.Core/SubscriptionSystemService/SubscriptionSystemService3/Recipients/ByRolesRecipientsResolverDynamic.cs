@@ -1,5 +1,6 @@
 ﻿#pragma warning disable SA1600 // ElementsMustBeDocumented. Internal type does not require inline documentation by convention.
-using Framework.Authorization.Notification;
+using System.Collections.Immutable;
+
 using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
@@ -8,6 +9,8 @@ using Framework.DomainDriven;
 using HierarchicalExpand;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using SecuritySystem.Notification;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
@@ -50,7 +53,7 @@ internal sealed class ByRolesRecipientsResolverDynamic<TBLLContext> : ByRolesRec
         return result;
     }
 
-    private IEnumerable<NotificationFilterGroup> GetNotificationFilterGroups(
+    private ImmutableArray<NotificationFilterGroup> GetNotificationFilterGroups(
         IEnumerable<FilterItemIdentity> fids,
         NotificationExpandType expandType)
     {
@@ -61,9 +64,9 @@ internal sealed class ByRolesRecipientsResolverDynamic<TBLLContext> : ByRolesRec
             let et = this.ConfigurationContextFacade.ServiceProvider.GetRequiredService<IHierarchicalInfoSource>().IsHierarchical(securityContextType)
                          ? expandType
                          : expandType.WithoutHierarchical()
-            select new NotificationFilterGroup(securityContextType, ids, et);
+            select (NotificationFilterGroup)new NotificationFilterGroup<Guid> { Idents = [..ids], SecurityContextType = securityContextType, ExpandType = et };
 
-        return result;
+        return [.. result];
     }
 }
 #pragma warning restore SA1600 // ElementsMustBeDocumented

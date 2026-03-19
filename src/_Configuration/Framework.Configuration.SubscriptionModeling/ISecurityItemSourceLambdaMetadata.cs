@@ -1,4 +1,4 @@
-﻿using Framework.Authorization.Notification;
+﻿using SecuritySystem.Notification;
 
 namespace Framework.Configuration.SubscriptionModeling;
 

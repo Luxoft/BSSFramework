@@ -2730,11 +2730,11 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.BaseObj = null;
             }
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>(SampleSystem.Security.SampleSystemSecurityOperation.CompanyLegalEntityView).HasAccess(domainObject))
+            if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.CompanyLegalEntityView))
             {
                 string resultCode;
                 resultCode = domainObject.Code;
-                mappingObject.Code = new CommonFramework.Maybe.Just<string>(resultCode);
+                mappingObject.Code = CommonFramework.Maybe.Maybe.Return(resultCode);
             }
             else
             {
@@ -2788,11 +2788,11 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Landlinephone = domainObject.Landlinephone;
             mappingObject.LastActionDate = domainObject.LastActionDate;
             mappingObject.LocationCode = domainObject.LocationCode;
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SecuritySystem.SecurityRule.View).HasAccess(domainObject))
+            if (this.HasAccess(domainObject, SecuritySystem.SecurityRule.View))
             {
                 string resultLogin;
                 resultLogin = domainObject.Login;
-                mappingObject.Login = new CommonFramework.Maybe.Just<string>(resultLogin);
+                mappingObject.Login = CommonFramework.Maybe.Maybe.Return(resultLogin);
             }
             else
             {
@@ -2803,11 +2803,11 @@ namespace SampleSystem.Generated.DTO
             mappingObject.NameNative = domainObject.NameNative;
             mappingObject.NameRussian = domainObject.NameRussian;
             mappingObject.NonValidateVirtualProp = domainObject.NonValidateVirtualProp;
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.Security.SampleSystemSecurityOperation.EmployeePersonalCellPhoneView).HasAccess(domainObject))
+            if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.EmployeePersonalCellPhoneView))
             {
                 string resultPersonalCellPhone;
                 resultPersonalCellPhone = domainObject.PersonalCellPhone;
-                mappingObject.PersonalCellPhone = new CommonFramework.Maybe.Just<string>(resultPersonalCellPhone);
+                mappingObject.PersonalCellPhone = CommonFramework.Maybe.Maybe.Return(resultPersonalCellPhone);
             }
             else
             {
@@ -2861,7 +2861,7 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.PersonalAssistant = null;
             }
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.Security.SampleSystemSecurityOperation.EmployeePositionView).HasAccess(domainObject))
+            if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.EmployeePositionView))
             {
                 SampleSystem.Generated.DTO.EmployeePositionSimpleDTO resultPosition;
                 if (!object.ReferenceEquals(domainObject.Position, null))
@@ -2872,7 +2872,7 @@ namespace SampleSystem.Generated.DTO
                 {
                     resultPosition = null;
                 }
-                mappingObject.Position = new CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO>(resultPosition);
+                mappingObject.Position = CommonFramework.Maybe.Maybe.Return(resultPosition);
             }
             else
             {
@@ -2924,11 +2924,11 @@ namespace SampleSystem.Generated.DTO
         {
             mappingObject.CellPhones = SampleSystem.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.CellPhones, this);
             mappingObject.EmployeeToEmployeeLinks = SampleSystem.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.EmployeeToEmployeeLinks, this);
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.Security.SampleSystemSecurityOperation.EmployeePersonalCellPhoneView).HasAccess(domainObject))
+            if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.EmployeePersonalCellPhoneView))
             {
                 System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO> resultPersonalCellPhones;
                 resultPersonalCellPhones = SampleSystem.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.PersonalCellPhones, this);
-                mappingObject.PersonalCellPhones = new CommonFramework.Maybe.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO>>(resultPersonalCellPhones);
+                mappingObject.PersonalCellPhones = CommonFramework.Maybe.Maybe.Return(resultPersonalCellPhones);
             }
             else
             {
@@ -3010,26 +3010,24 @@ namespace SampleSystem.Generated.DTO
             }
             domainObject.ValidateVirtualProp = mappingObject.ValidateVirtualProp;
             domainObject.WorkPeriod = mappingObject.WorkPeriod;
-            CommonFramework.Maybe.Just<string> justLogin = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<string>>(mappingObject.Login);
-            if (!object.ReferenceEquals(justLogin, null))
+            if (mappingObject.Login.HasValue)
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.Security.SampleSystemSecurityOperation.EmployeeEdit).HasAccess(domainObject))
+                if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.EmployeeEdit))
                 {
-                    domainObject.Login = justLogin.Value;
+                    domainObject.Login = mappingObject.Login.Value;
                 }
                 else
                 {
                     throw new Framework.Exceptions.BusinessLogicException("Access for write to field \"Login\" denied");
                 }
             }
-            CommonFramework.Maybe.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>> justPersonalCellPhones = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>>>(mappingObject.PersonalCellPhones);
-            if (!object.ReferenceEquals(justPersonalCellPhones, null))
+            if (mappingObject.PersonalCellPhones.HasValue)
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.Security.SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit).HasAccess(domainObject))
+                if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit))
                 {
-                    if (!object.ReferenceEquals(justPersonalCellPhones.Value, null))
+                    if (!object.ReferenceEquals(mappingObject.PersonalCellPhones.Value, null))
                     {
-                        this.GetCollectionMappingService<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO, SampleSystem.Domain.EmployeePersonalCellPhone>(detailDTO => this.ToEmployeePersonalCellPhone(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeePersonalCellPhone>(domainObject, detail)).Map(justPersonalCellPhones.Value, domainObject.PersonalCellPhones);
+                        this.GetCollectionMappingService<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO, SampleSystem.Domain.EmployeePersonalCellPhone>(detailDTO => this.ToEmployeePersonalCellPhone(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeePersonalCellPhone>(domainObject, detail)).Map(mappingObject.PersonalCellPhones.Value, domainObject.PersonalCellPhones);
                     }
                 }
                 else
@@ -3037,14 +3035,13 @@ namespace SampleSystem.Generated.DTO
                     throw new Framework.Exceptions.BusinessLogicException("Access for write to field \"PersonalCellPhones\" denied");
                 }
             }
-            CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO> justPosition = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>>(mappingObject.Position);
-            if (!object.ReferenceEquals(justPosition, null))
+            if (mappingObject.Position.HasValue)
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.Security.SampleSystemSecurityOperation.EmployeePositionEdit).HasAccess(domainObject))
+                if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.EmployeePositionEdit))
                 {
-                    if (!object.Equals(justPosition.Value, default(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO)))
+                    if (!object.Equals(mappingObject.Position.Value, default(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO)))
                     {
-                        domainObject.Position = this.ToEmployeePosition(justPosition.Value);
+                        domainObject.Position = this.ToEmployeePosition(mappingObject.Position.Value);
                     }
                     else
                     {
@@ -3077,106 +3074,88 @@ namespace SampleSystem.Generated.DTO
             {
                 this.GetUpdateCollectionMappingService<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkUpdateDTO, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(detailDTO => this.ToEmployeeAndEmployeeSpecializationLink(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(domainObject, detail)).Map(mappingObject.Specializations, domainObject.Specializations);
             }
-            CommonFramework.Maybe.Just<int> justAge = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<int>>(mappingObject.Age);
-            if (!object.ReferenceEquals(justAge, null))
+            if (mappingObject.Age.HasValue)
             {
-                domainObject.Age = justAge.Value;
+                domainObject.Age = mappingObject.Age.Value;
             }
-            CommonFramework.Maybe.Just<System.DateTime?> justBirthDate = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<System.DateTime?>>(mappingObject.BirthDate);
-            if (!object.ReferenceEquals(justBirthDate, null))
+            if (mappingObject.BirthDate.HasValue)
             {
-                domainObject.BirthDate = justBirthDate.Value;
+                domainObject.BirthDate = mappingObject.BirthDate.Value;
             }
-            CommonFramework.Maybe.Just<bool> justCanBePPM = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<bool>>(mappingObject.CanBePPM);
-            if (!object.ReferenceEquals(justCanBePPM, null))
+            if (mappingObject.CanBePPM.HasValue)
             {
-                domainObject.CanBePPM = justCanBePPM.Value;
+                domainObject.CanBePPM = mappingObject.CanBePPM.Value;
             }
-            CommonFramework.Maybe.Just<Framework.Core.Period> justEducationDuration = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<Framework.Core.Period>>(mappingObject.EducationDuration);
-            if (!object.ReferenceEquals(justEducationDuration, null))
+            if (mappingObject.EducationDuration.HasValue)
             {
-                domainObject.EducationDuration = justEducationDuration.Value;
+                domainObject.EducationDuration = mappingObject.EducationDuration.Value;
             }
-            CommonFramework.Maybe.Just<string> justEmail = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<string>>(mappingObject.Email);
-            if (!object.ReferenceEquals(justEmail, null))
+            if (mappingObject.Email.HasValue)
             {
-                domainObject.Email = justEmail.Value;
+                domainObject.Email = mappingObject.Email.Value;
             }
-            CommonFramework.Maybe.Just<long> justExternalId = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<long>>(mappingObject.ExternalId);
-            if (!object.ReferenceEquals(justExternalId, null))
+            if (mappingObject.ExternalId.HasValue)
             {
-                domainObject.ExternalId = justExternalId.Value;
+                domainObject.ExternalId = mappingObject.ExternalId.Value;
             }
-            CommonFramework.Maybe.Just<SampleSystem.Domain.Enums.Gender> justGender = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Domain.Enums.Gender>>(mappingObject.Gender);
-            if (!object.ReferenceEquals(justGender, null))
+            if (mappingObject.Gender.HasValue)
             {
-                domainObject.Gender = justGender.Value;
+                domainObject.Gender = mappingObject.Gender.Value;
             }
-            CommonFramework.Maybe.Just<string> justInterphone = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<string>>(mappingObject.Interphone);
-            if (!object.ReferenceEquals(justInterphone, null))
+            if (mappingObject.Interphone.HasValue)
             {
-                domainObject.Interphone = justInterphone.Value;
+                domainObject.Interphone = mappingObject.Interphone.Value;
             }
-            CommonFramework.Maybe.Just<string> justLandlinephone = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<string>>(mappingObject.Landlinephone);
-            if (!object.ReferenceEquals(justLandlinephone, null))
+            if (mappingObject.Landlinephone.HasValue)
             {
-                domainObject.Landlinephone = justLandlinephone.Value;
+                domainObject.Landlinephone = mappingObject.Landlinephone.Value;
             }
-            CommonFramework.Maybe.Just<System.DateTime?> justLastActionDate = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<System.DateTime?>>(mappingObject.LastActionDate);
-            if (!object.ReferenceEquals(justLastActionDate, null))
+            if (mappingObject.LastActionDate.HasValue)
             {
-                domainObject.LastActionDate = justLastActionDate.Value;
+                domainObject.LastActionDate = mappingObject.LastActionDate.Value;
             }
-            CommonFramework.Maybe.Just<string> justLogin = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<string>>(mappingObject.Login);
-            if (!object.ReferenceEquals(justLogin, null))
+            if (mappingObject.Login.HasValue)
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.Security.SampleSystemSecurityOperation.EmployeeEdit).HasAccess(domainObject))
+                if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.EmployeeEdit))
                 {
-                    domainObject.Login = justLogin.Value;
+                    domainObject.Login = mappingObject.Login.Value;
                 }
                 else
                 {
                     throw new Framework.Exceptions.BusinessLogicException("Access for write to field \"Login\" denied");
                 }
             }
-            CommonFramework.Maybe.Just<SampleSystem.Domain.Inline.FioShort> justNameEng = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Domain.Inline.FioShort>>(mappingObject.NameEng);
-            if (!object.ReferenceEquals(justNameEng, null))
+            if (mappingObject.NameEng.HasValue)
             {
-                domainObject.NameEng = justNameEng.Value;
+                domainObject.NameEng = mappingObject.NameEng.Value;
             }
-            CommonFramework.Maybe.Just<SampleSystem.Domain.Inline.Fio> justNameNative = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Domain.Inline.Fio>>(mappingObject.NameNative);
-            if (!object.ReferenceEquals(justNameNative, null))
+            if (mappingObject.NameNative.HasValue)
             {
-                domainObject.NameNative = justNameNative.Value;
+                domainObject.NameNative = mappingObject.NameNative.Value;
             }
-            CommonFramework.Maybe.Just<SampleSystem.Domain.Inline.Fio> justNameRussian = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Domain.Inline.Fio>>(mappingObject.NameRussian);
-            if (!object.ReferenceEquals(justNameRussian, null))
+            if (mappingObject.NameRussian.HasValue)
             {
-                domainObject.NameRussian = justNameRussian.Value;
+                domainObject.NameRussian = mappingObject.NameRussian.Value;
             }
-            CommonFramework.Maybe.Just<System.DateTime> justNonValidateVirtualProp = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<System.DateTime>>(mappingObject.NonValidateVirtualProp);
-            if (!object.ReferenceEquals(justNonValidateVirtualProp, null))
+            if (mappingObject.NonValidateVirtualProp.HasValue)
             {
-                domainObject.NonValidateVirtualProp = justNonValidateVirtualProp.Value;
+                domainObject.NonValidateVirtualProp = mappingObject.NonValidateVirtualProp.Value;
             }
-            CommonFramework.Maybe.Just<int?> justPin = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<int?>>(mappingObject.Pin);
-            if (!object.ReferenceEquals(justPin, null))
+            if (mappingObject.Pin.HasValue)
             {
-                domainObject.Pin = justPin.Value;
+                domainObject.Pin = mappingObject.Pin.Value;
             }
-            CommonFramework.Maybe.Just<System.DateTime?> justPlannedHireDate = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<System.DateTime?>>(mappingObject.PlannedHireDate);
-            if (!object.ReferenceEquals(justPlannedHireDate, null))
+            if (mappingObject.PlannedHireDate.HasValue)
             {
-                domainObject.PlannedHireDate = justPlannedHireDate.Value;
+                domainObject.PlannedHireDate = mappingObject.PlannedHireDate.Value;
             }
-            CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO> justPosition = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>>(mappingObject.Position);
-            if (!object.ReferenceEquals(justPosition, null))
+            if (mappingObject.Position.HasValue)
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.Security.SampleSystemSecurityOperation.EmployeePositionEdit).HasAccess(domainObject))
+                if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.EmployeePositionEdit))
                 {
-                    if (!object.Equals(justPosition.Value, default(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO)))
+                    if (!object.Equals(mappingObject.Position.Value, default(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO)))
                     {
-                        domainObject.Position = this.ToEmployeePosition(justPosition.Value);
+                        domainObject.Position = this.ToEmployeePosition(mappingObject.Position.Value);
                     }
                     else
                     {
@@ -3188,75 +3167,68 @@ namespace SampleSystem.Generated.DTO
                     throw new Framework.Exceptions.BusinessLogicException("Access for write to field \"Position\" denied");
                 }
             }
-            CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeeIdentityDTO> justPpm = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeeIdentityDTO>>(mappingObject.Ppm);
-            if (!object.ReferenceEquals(justPpm, null))
+            if (mappingObject.Ppm.HasValue)
             {
-                if (!object.Equals(justPpm.Value, default(SampleSystem.Generated.DTO.EmployeeIdentityDTO)))
+                if (!object.Equals(mappingObject.Ppm.Value, default(SampleSystem.Generated.DTO.EmployeeIdentityDTO)))
                 {
-                    domainObject.Ppm = this.ToEmployee(justPpm.Value);
+                    domainObject.Ppm = this.ToEmployee(mappingObject.Ppm.Value);
                 }
                 else
                 {
                     domainObject.Ppm = null;
                 }
             }
-            CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO> justRegistrationType = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO>>(mappingObject.RegistrationType);
-            if (!object.ReferenceEquals(justRegistrationType, null))
+            if (mappingObject.RegistrationType.HasValue)
             {
-                if (!object.Equals(justRegistrationType.Value, default(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO)))
+                if (!object.Equals(mappingObject.RegistrationType.Value, default(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO)))
                 {
-                    domainObject.RegistrationType = this.ToEmployeeRegistrationType(justRegistrationType.Value);
+                    domainObject.RegistrationType = this.ToEmployeeRegistrationType(mappingObject.RegistrationType.Value);
                 }
                 else
                 {
                     domainObject.RegistrationType = null;
                 }
             }
-            CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO> justRole = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO>>(mappingObject.Role);
-            if (!object.ReferenceEquals(justRole, null))
+            if (mappingObject.Role.HasValue)
             {
-                if (!object.Equals(justRole.Value, default(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO)))
+                if (!object.Equals(mappingObject.Role.Value, default(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO)))
                 {
-                    domainObject.Role = this.ToEmployeeRole(justRole.Value);
+                    domainObject.Role = this.ToEmployeeRole(mappingObject.Role.Value);
                 }
                 else
                 {
                     domainObject.Role = null;
                 }
             }
-            CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO> justRoleDegree = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO>>(mappingObject.RoleDegree);
-            if (!object.ReferenceEquals(justRoleDegree, null))
+            if (mappingObject.RoleDegree.HasValue)
             {
-                if (!object.Equals(justRoleDegree.Value, default(SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO)))
+                if (!object.Equals(mappingObject.RoleDegree.Value, default(SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO)))
                 {
-                    domainObject.RoleDegree = this.ToEmployeeRoleDegree(justRoleDegree.Value);
+                    domainObject.RoleDegree = this.ToEmployeeRoleDegree(mappingObject.RoleDegree.Value);
                 }
                 else
                 {
                     domainObject.RoleDegree = null;
                 }
             }
-            CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeeIdentityDTO> justVacationApprover = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeeIdentityDTO>>(mappingObject.VacationApprover);
-            if (!object.ReferenceEquals(justVacationApprover, null))
+            if (mappingObject.VacationApprover.HasValue)
             {
-                if (!object.Equals(justVacationApprover.Value, default(SampleSystem.Generated.DTO.EmployeeIdentityDTO)))
+                if (!object.Equals(mappingObject.VacationApprover.Value, default(SampleSystem.Generated.DTO.EmployeeIdentityDTO)))
                 {
-                    domainObject.VacationApprover = this.ToEmployee(justVacationApprover.Value);
+                    domainObject.VacationApprover = this.ToEmployee(mappingObject.VacationApprover.Value);
                 }
                 else
                 {
                     domainObject.VacationApprover = null;
                 }
             }
-            CommonFramework.Maybe.Just<System.DateTime> justValidateVirtualProp = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<System.DateTime>>(mappingObject.ValidateVirtualProp);
-            if (!object.ReferenceEquals(justValidateVirtualProp, null))
+            if (mappingObject.ValidateVirtualProp.HasValue)
             {
-                domainObject.ValidateVirtualProp = justValidateVirtualProp.Value;
+                domainObject.ValidateVirtualProp = mappingObject.ValidateVirtualProp.Value;
             }
-            CommonFramework.Maybe.Just<Framework.Core.Period> justWorkPeriod = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<Framework.Core.Period>>(mappingObject.WorkPeriod);
-            if (!object.ReferenceEquals(justWorkPeriod, null))
+            if (mappingObject.WorkPeriod.HasValue)
             {
-                domainObject.WorkPeriod = justWorkPeriod.Value;
+                domainObject.WorkPeriod = mappingObject.WorkPeriod.Value;
             }
         }
         
@@ -3770,24 +3742,22 @@ namespace SampleSystem.Generated.DTO
         public virtual void MapEmployeeAndEmployeeSpecializationLink(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkUpdateDTO mappingObject, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink domainObject)
         {
             domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
-            CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeeIdentityDTO> justEmployee = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeeIdentityDTO>>(mappingObject.Employee);
-            if (!object.ReferenceEquals(justEmployee, null))
+            if (mappingObject.Employee.HasValue)
             {
-                if (!object.Equals(justEmployee.Value, default(SampleSystem.Generated.DTO.EmployeeIdentityDTO)))
+                if (!object.Equals(mappingObject.Employee.Value, default(SampleSystem.Generated.DTO.EmployeeIdentityDTO)))
                 {
-                    domainObject.Employee = this.ToEmployee(justEmployee.Value);
+                    domainObject.Employee = this.ToEmployee(mappingObject.Employee.Value);
                 }
                 else
                 {
                     domainObject.Employee = null;
                 }
             }
-            CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO> justSpecialization = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO>>(mappingObject.Specialization);
-            if (!object.ReferenceEquals(justSpecialization, null))
+            if (mappingObject.Specialization.HasValue)
             {
-                if (!object.Equals(justSpecialization.Value, default(SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO)))
+                if (!object.Equals(mappingObject.Specialization.Value, default(SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO)))
                 {
-                    domainObject.Specialization = this.ToEmployeeSpecialization(justSpecialization.Value);
+                    domainObject.Specialization = this.ToEmployeeSpecialization(mappingObject.Specialization.Value);
                 }
                 else
                 {
@@ -3904,20 +3874,17 @@ namespace SampleSystem.Generated.DTO
         public virtual void MapEmployeeCellPhone(SampleSystem.Generated.DTO.EmployeeCellPhoneUpdateDTO mappingObject, SampleSystem.Domain.EmployeeCellPhone domainObject)
         {
             domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
-            CommonFramework.Maybe.Just<string> justCityCode = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<string>>(mappingObject.CityCode);
-            if (!object.ReferenceEquals(justCityCode, null))
+            if (mappingObject.CityCode.HasValue)
             {
-                domainObject.CityCode = justCityCode.Value;
+                domainObject.CityCode = mappingObject.CityCode.Value;
             }
-            CommonFramework.Maybe.Just<string> justCountryCode = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<string>>(mappingObject.CountryCode);
-            if (!object.ReferenceEquals(justCountryCode, null))
+            if (mappingObject.CountryCode.HasValue)
             {
-                domainObject.CountryCode = justCountryCode.Value;
+                domainObject.CountryCode = mappingObject.CountryCode.Value;
             }
-            CommonFramework.Maybe.Just<string> justNumber = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<string>>(mappingObject.Number);
-            if (!object.ReferenceEquals(justNumber, null))
+            if (mappingObject.Number.HasValue)
             {
-                domainObject.Number = justNumber.Value;
+                domainObject.Number = mappingObject.Number.Value;
             }
         }
         
@@ -4222,20 +4189,17 @@ namespace SampleSystem.Generated.DTO
         public virtual void MapEmployeePersonalCellPhone(SampleSystem.Generated.DTO.EmployeePersonalCellPhoneUpdateDTO mappingObject, SampleSystem.Domain.EmployeePersonalCellPhone domainObject)
         {
             domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
-            CommonFramework.Maybe.Just<string> justCityCode = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<string>>(mappingObject.CityCode);
-            if (!object.ReferenceEquals(justCityCode, null))
+            if (mappingObject.CityCode.HasValue)
             {
-                domainObject.CityCode = justCityCode.Value;
+                domainObject.CityCode = mappingObject.CityCode.Value;
             }
-            CommonFramework.Maybe.Just<string> justCountryCode = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<string>>(mappingObject.CountryCode);
-            if (!object.ReferenceEquals(justCountryCode, null))
+            if (mappingObject.CountryCode.HasValue)
             {
-                domainObject.CountryCode = justCountryCode.Value;
+                domainObject.CountryCode = mappingObject.CountryCode.Value;
             }
-            CommonFramework.Maybe.Just<string> justNumber = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<string>>(mappingObject.Number);
-            if (!object.ReferenceEquals(justNumber, null))
+            if (mappingObject.Number.HasValue)
             {
-                domainObject.Number = justNumber.Value;
+                domainObject.Number = mappingObject.Number.Value;
             }
         }
         
@@ -4684,17 +4648,15 @@ namespace SampleSystem.Generated.DTO
         public virtual void MapEmployeeToEmployeeLink(SampleSystem.Generated.DTO.EmployeeToEmployeeLinkUpdateDTO mappingObject, SampleSystem.Domain.EmployeeToEmployeeLink domainObject)
         {
             domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
-            CommonFramework.Maybe.Just<SampleSystem.Domain.EmployeeLinkType> justEmployeeLinkType = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Domain.EmployeeLinkType>>(mappingObject.EmployeeLinkType);
-            if (!object.ReferenceEquals(justEmployeeLinkType, null))
+            if (mappingObject.EmployeeLinkType.HasValue)
             {
-                domainObject.EmployeeLinkType = justEmployeeLinkType.Value;
+                domainObject.EmployeeLinkType = mappingObject.EmployeeLinkType.Value;
             }
-            CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeeIdentityDTO> justLinkedEmployee = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.EmployeeIdentityDTO>>(mappingObject.LinkedEmployee);
-            if (!object.ReferenceEquals(justLinkedEmployee, null))
+            if (mappingObject.LinkedEmployee.HasValue)
             {
-                if (!object.Equals(justLinkedEmployee.Value, default(SampleSystem.Generated.DTO.EmployeeIdentityDTO)))
+                if (!object.Equals(mappingObject.LinkedEmployee.Value, default(SampleSystem.Generated.DTO.EmployeeIdentityDTO)))
                 {
-                    domainObject.LinkedEmployee = this.ToEmployee(justLinkedEmployee.Value);
+                    domainObject.LinkedEmployee = this.ToEmployee(mappingObject.LinkedEmployee.Value);
                 }
                 else
                 {
@@ -4775,11 +4737,11 @@ namespace SampleSystem.Generated.DTO
         {
             mappingObject.Field1 = domainObject.Field1;
             mappingObject.Field2 = domainObject.Field2;
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.Security.SampleSystemSecurityOperation.LocationView).HasAccess(domainObject))
+            if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.LocationView))
             {
                 System.Guid resultField3;
                 resultField3 = domainObject.Field3;
-                mappingObject.Field3 = new CommonFramework.Maybe.Just<System.Guid>(resultField3);
+                mappingObject.Field3 = CommonFramework.Maybe.Maybe.Return(resultField3);
             }
             else
             {
@@ -4805,12 +4767,11 @@ namespace SampleSystem.Generated.DTO
             {
                 this.GetCollectionMappingService<SampleSystem.Generated.DTO.Example2StrictDTO, SampleSystem.Domain.Example2>(detailDTO => this.ToExample2(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Example1, SampleSystem.Domain.Example2>(domainObject, detail)).Map(mappingObject.Items2, domainObject.Items2);
             }
-            CommonFramework.Maybe.Just<System.Guid> justField3 = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<System.Guid>>(mappingObject.Field3);
-            if (!object.ReferenceEquals(justField3, null))
+            if (mappingObject.Field3.HasValue)
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.Security.SampleSystemSecurityOperation.LocationEdit).HasAccess(domainObject))
+                if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.LocationEdit))
                 {
-                    domainObject.Field3 = justField3.Value;
+                    domainObject.Field3 = mappingObject.Field3.Value;
                 }
                 else
                 {
@@ -4826,22 +4787,19 @@ namespace SampleSystem.Generated.DTO
             {
                 this.GetUpdateCollectionMappingService<SampleSystem.Generated.DTO.Example2UpdateDTO, SampleSystem.Generated.DTO.Example2IdentityDTO, SampleSystem.Domain.Example2>(detailDTO => this.ToExample2(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Example1, SampleSystem.Domain.Example2>(domainObject, detail)).Map(mappingObject.Items2, domainObject.Items2);
             }
-            CommonFramework.Maybe.Just<System.Guid> justField1 = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<System.Guid>>(mappingObject.Field1);
-            if (!object.ReferenceEquals(justField1, null))
+            if (mappingObject.Field1.HasValue)
             {
-                domainObject.Field1 = justField1.Value;
+                domainObject.Field1 = mappingObject.Field1.Value;
             }
-            CommonFramework.Maybe.Just<System.Guid> justField2 = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<System.Guid>>(mappingObject.Field2);
-            if (!object.ReferenceEquals(justField2, null))
+            if (mappingObject.Field2.HasValue)
             {
-                domainObject.Field2 = justField2.Value;
+                domainObject.Field2 = mappingObject.Field2.Value;
             }
-            CommonFramework.Maybe.Just<System.Guid> justField3 = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<System.Guid>>(mappingObject.Field3);
-            if (!object.ReferenceEquals(justField3, null))
+            if (mappingObject.Field3.HasValue)
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.Security.SampleSystemSecurityOperation.LocationEdit).HasAccess(domainObject))
+                if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.LocationEdit))
                 {
-                    domainObject.Field3 = justField3.Value;
+                    domainObject.Field3 = mappingObject.Field3.Value;
                 }
                 else
                 {
@@ -4911,15 +4869,13 @@ namespace SampleSystem.Generated.DTO
         public virtual void MapExample2(SampleSystem.Generated.DTO.Example2UpdateDTO mappingObject, SampleSystem.Domain.Example2 domainObject)
         {
             domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
-            CommonFramework.Maybe.Just<System.Guid> justField1 = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<System.Guid>>(mappingObject.Field1);
-            if (!object.ReferenceEquals(justField1, null))
+            if (mappingObject.Field1.HasValue)
             {
-                domainObject.Field1 = justField1.Value;
+                domainObject.Field1 = mappingObject.Field1.Value;
             }
-            CommonFramework.Maybe.Just<System.Guid> justField2 = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<System.Guid>>(mappingObject.Field2);
-            if (!object.ReferenceEquals(justField2, null))
+            if (mappingObject.Field2.HasValue)
             {
-                domainObject.Field2 = justField2.Value;
+                domainObject.Field2 = mappingObject.Field2.Value;
             }
         }
         
@@ -5013,7 +4969,7 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.ApprovedBy = null;
             }
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.HRDepartment>(SampleSystem.Security.SampleSystemSecurityOperation.CompanyLegalEntityView).HasAccess(domainObject))
+            if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.CompanyLegalEntityView))
             {
                 SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO resultCompanyLegalEntity;
                 if (!object.ReferenceEquals(domainObject.CompanyLegalEntity, null))
@@ -5024,7 +4980,7 @@ namespace SampleSystem.Generated.DTO
                 {
                     resultCompanyLegalEntity = null;
                 }
-                mappingObject.CompanyLegalEntity = new CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO>(resultCompanyLegalEntity);
+                mappingObject.CompanyLegalEntity = CommonFramework.Maybe.Maybe.Return(resultCompanyLegalEntity);
             }
             else
             {
@@ -5116,14 +5072,13 @@ namespace SampleSystem.Generated.DTO
             {
                 domainObject.Parent = null;
             }
-            CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO> justCompanyLegalEntity = Framework.Core.CorePipeObjectExtensions.AsCast<CommonFramework.Maybe.Just<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>>(mappingObject.CompanyLegalEntity);
-            if (!object.ReferenceEquals(justCompanyLegalEntity, null))
+            if (mappingObject.CompanyLegalEntity.HasValue)
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.HRDepartment>(SampleSystem.Security.SampleSystemSecurityOperation.CompanyLegalEntityEdit).HasAccess(domainObject))
+                if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.CompanyLegalEntityEdit))
                 {
-                    if (!object.Equals(justCompanyLegalEntity.Value, default(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO)))
+                    if (!object.Equals(mappingObject.CompanyLegalEntity.Value, default(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO)))
                     {
-                        domainObject.CompanyLegalEntity = this.ToCompanyLegalEntity(justCompanyLegalEntity.Value);
+                        domainObject.CompanyLegalEntity = this.ToCompanyLegalEntity(mappingObject.CompanyLegalEntity.Value);
                     }
                     else
                     {
@@ -6757,22 +6712,22 @@ namespace SampleSystem.Generated.DTO
             }
             mappingObject.CoreBusinessUnitName = domainObject.CoreBusinessUnitName;
             mappingObject.CoreBusinessUnitProjects = SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(domainObject.CoreBusinessUnitProjects, this);
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestEmployee>(SecuritySystem.SecurityRule.View).HasAccess(domainObject))
+            if (this.HasAccess(domainObject, SecuritySystem.SecurityRule.View))
             {
                 string resultLogin;
                 resultLogin = domainObject.Login;
-                mappingObject.Login = new CommonFramework.Maybe.Just<string>(resultLogin);
+                mappingObject.Login = CommonFramework.Maybe.Maybe.Return(resultLogin);
             }
             else
             {
                 mappingObject.Login = CommonFramework.Maybe.Maybe<string>.Nothing;
             }
             mappingObject.NameEngFirstName = domainObject.NameEngFirstName;
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestEmployee>(SampleSystem.Security.SampleSystemSecurityOperation.EmployeePositionView).HasAccess(domainObject))
+            if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.EmployeePositionView))
             {
                 string resultPositionName;
                 resultPositionName = domainObject.PositionName;
-                mappingObject.PositionName = new CommonFramework.Maybe.Just<string>(resultPositionName);
+                mappingObject.PositionName = CommonFramework.Maybe.Maybe.Return(resultPositionName);
             }
             else
             {
@@ -7018,11 +6973,11 @@ namespace SampleSystem.Generated.DTO
         
         public virtual void MapTestLegacyEmployee(SampleSystem.Domain.Projections.TestLegacyEmployee domainObject, SampleSystem.Generated.DTO.TestLegacyEmployeeProjectionDTO mappingObject)
         {
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestLegacyEmployee>(SecuritySystem.SecurityRule.View).HasAccess(domainObject))
+            if (this.HasAccess(domainObject, SecuritySystem.SecurityRule.View))
             {
                 string resultLogin;
                 resultLogin = domainObject.Login;
-                mappingObject.Login = new CommonFramework.Maybe.Just<string>(resultLogin);
+                mappingObject.Login = CommonFramework.Maybe.Maybe.Return(resultLogin);
             }
             else
             {

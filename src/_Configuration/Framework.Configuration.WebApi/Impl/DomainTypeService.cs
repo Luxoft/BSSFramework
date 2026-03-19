@@ -11,10 +11,12 @@ public partial class ConfigSLJsonController
     [HttpPost]
     public DomainTypeSimpleDTO GetSimpleDomainTypeByPath(string path)
     {
-        return this.Evaluate(DBSessionMode.Read, data =>
-                                                         data.Context.Logics.DomainType // without security?
-                                                             .GetByPath(path)
-                                                             .ToSimpleDTO(data.MappingService));
+        return this.Evaluate(
+            DBSessionMode.Read,
+            data =>
+                data.Context.Logics.DomainType // without security?
+                    .GetByPath(path)
+                    .ToSimpleDTO(data.MappingService));
     }
 
     [HttpPost]
@@ -22,11 +24,13 @@ public partial class ConfigSLJsonController
     {
         if (domainTypeEventModel == null) throw new ArgumentNullException(nameof(domainTypeEventModel));
 
-        this.Evaluate(DBSessionMode.Write, evaluateData =>
-                                           {
-                                               evaluateData.Context.Authorization.SecuritySystem.CheckAccess(SecurityRole.Administrator);
+        this.Evaluate(
+            DBSessionMode.Write,
+            evaluateData =>
+            {
+                evaluateData.Context.Authorization.SecuritySystem.CheckAccessAsync(SecurityRole.Administrator, this.HttpContext.RequestAborted).GetAwaiter().GetResult();
 
-                                               evaluateData.Context.Logics.DomainType.ForceEvent(domainTypeEventModel.ToDomainObject(evaluateData.MappingService));
-                                           });
+                evaluateData.Context.Logics.DomainType.ForceEvent(domainTypeEventModel.ToDomainObject(evaluateData.MappingService));
+            });
     }
 }

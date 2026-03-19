@@ -1,10 +1,11 @@
-﻿using Framework.Authorization.Notification;
-using Framework.DomainDriven;
+﻿using Framework.DomainDriven;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
+
+using SecuritySystem.Notification;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -72,18 +73,25 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
                 this.rootBusinessUnit,
                 this.child_1_1_ManagementUnit));
 
-        var fbuChildFilter = new NotificationFilterGroup(
-            typeof(BusinessUnit),
-            new[] { this.child_1_1_BusinessUnit.Id },
-            NotificationExpandType.Direct);
-        var mbuChildFilter = new NotificationFilterGroup(
-            typeof(ManagementUnit),
-            new[] { this.child_1_1_ManagementUnit.Id },
-            NotificationExpandType.Direct);
-        var employeeFilter = new NotificationFilterGroup(
-            typeof(Employee),
-            new[] { this.rootEmployee.Id },
-            NotificationExpandType.DirectOrFirstParent);
+        var fbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(BusinessUnit), ExpandType = NotificationExpandType.Direct, Idents = [this.child_1_1_BusinessUnit.Id]
+                             };
+
+        var mbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(ManagementUnit),
+                                 ExpandType = NotificationExpandType.Direct,
+                                 Idents = [this.child_1_1_ManagementUnit.Id]
+                             };
+
+
+        var employeeFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(Employee),
+                                 ExpandType = NotificationExpandType.DirectOrFirstParent,
+                                 Idents = [this.rootEmployee.Id]
+                             };
 
         // Act
         var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter, employeeFilter);
@@ -104,8 +112,19 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
                 this.rootBusinessUnit,
                 this.child_1_1_ManagementUnit));
 
-        var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.Direct);
-        var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.Direct);
+        var fbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(BusinessUnit),
+                                 ExpandType = NotificationExpandType.Direct,
+                                 Idents = [this.child_1_1_BusinessUnit.Id]
+                             };
+
+        var mbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(ManagementUnit),
+                                 ExpandType = NotificationExpandType.Direct,
+                                 Idents = [this.child_1_1_ManagementUnit.Id]
+                             };
 
         // Act
         var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter);
@@ -125,9 +144,27 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
                 this.rootBusinessUnit,
                 this.child_1_1_ManagementUnit));
 
-        var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.DirectOrEmpty);
-        var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.DirectOrEmpty);
-        var employeeChildFilter = new NotificationFilterGroup(typeof(Employee), new[] { this.rootEmployee.Id }, NotificationExpandType.Direct);
+        var fbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(BusinessUnit),
+                                 ExpandType = NotificationExpandType.DirectOrEmpty,
+                                 Idents = [this.child_1_1_BusinessUnit.Id]
+                             };
+
+        var mbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(ManagementUnit),
+                                 ExpandType = NotificationExpandType.DirectOrEmpty,
+                                 Idents = [this.child_1_1_ManagementUnit.Id]
+                             };
+
+
+        var employeeChildFilter = new NotificationFilterGroup<Guid>
+                                  {
+                                      SecurityContextType = typeof(Employee),
+                                      ExpandType = NotificationExpandType.Direct,
+                                      Idents = [this.rootEmployee.Id]
+                                  };
 
         // Act
         var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter, employeeChildFilter);
@@ -148,9 +185,28 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
                 this.child_1_1_ManagementUnit,
                 employee: this.rootEmployee));
 
-        var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.DirectOrFirstParentOrEmpty);
-        var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.DirectOrFirstParentOrEmpty);
-        var employeeChildFilter = new NotificationFilterGroup(typeof(Employee), new[] { this.rootEmployee.Id }, NotificationExpandType.Direct);
+
+        var fbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(BusinessUnit),
+                                 ExpandType = NotificationExpandType.DirectOrFirstParentOrEmpty,
+                                 Idents = [this.child_1_1_BusinessUnit.Id]
+                             };
+
+        var mbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(ManagementUnit),
+                                 ExpandType = NotificationExpandType.DirectOrFirstParentOrEmpty,
+                                 Idents = [this.child_1_1_ManagementUnit.Id]
+                             };
+
+
+        var employeeChildFilter = new NotificationFilterGroup<Guid>
+                                  {
+                                      SecurityContextType = typeof(Employee),
+                                      ExpandType = NotificationExpandType.Direct,
+                                      Idents = [this.rootEmployee.Id]
+                                  };
 
         // Act
         var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter, employeeChildFilter);
@@ -175,8 +231,19 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
                 this.rootBusinessUnit,
                 this.child_1_1_ManagementUnit));
 
-        var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.DirectOrEmpty);
-        var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.Direct);
+        var fbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(BusinessUnit),
+                                 ExpandType = NotificationExpandType.DirectOrEmpty,
+                                 Idents = [this.child_1_1_BusinessUnit.Id]
+                             };
+
+        var mbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(ManagementUnit),
+                                 ExpandType = NotificationExpandType.Direct,
+                                 Idents = [this.child_1_1_ManagementUnit.Id]
+                             };
 
         // Act
         var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter);
@@ -203,8 +270,19 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
                 this.rootBusinessUnit,
                 this.child_1_1_ManagementUnit));
 
-        var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.DirectOrFirstParentOrEmpty);
-        var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.Direct);
+        var fbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(BusinessUnit),
+                                 ExpandType = NotificationExpandType.DirectOrFirstParentOrEmpty,
+                                 Idents = [this.child_1_1_BusinessUnit.Id]
+                             };
+
+        var mbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(ManagementUnit),
+                                 ExpandType = NotificationExpandType.Direct,
+                                 Idents = [this.child_1_1_ManagementUnit.Id]
+                             };
 
         // Act
         var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter);
@@ -230,9 +308,19 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
                 this.rootBusinessUnit,
                 this.rootManagementUnit));
 
-        var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.DirectOrFirstParentOrEmpty);
-        var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.DirectOrFirstParentOrEmpty);
+        var fbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(BusinessUnit),
+                                 ExpandType = NotificationExpandType.DirectOrFirstParentOrEmpty,
+                                 Idents = [this.child_1_1_BusinessUnit.Id]
+                             };
 
+        var mbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(ManagementUnit),
+                                 ExpandType = NotificationExpandType.DirectOrFirstParentOrEmpty,
+                                 Idents = [this.child_1_1_ManagementUnit.Id]
+                             };
         // Act
         var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter);
 
@@ -259,9 +347,20 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
                 this.rootBusinessUnit,
                 this.child_1_0_ManagementUnit));
 
-        var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.DirectOrFirstParentOrEmpty);
-        var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.DirectOrFirstParentOrEmpty);
 
+        var fbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(BusinessUnit),
+                                 ExpandType = NotificationExpandType.DirectOrFirstParentOrEmpty,
+                                 Idents = [this.child_1_1_BusinessUnit.Id]
+                             };
+
+        var mbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(ManagementUnit),
+                                 ExpandType = NotificationExpandType.DirectOrFirstParentOrEmpty,
+                                 Idents = [this.child_1_1_ManagementUnit.Id]
+                             };
         // Act
         var result = swapPriority
                          ? this.GetNotificationPrincipalsByRoles(mbuChildFilter, fbuChildFilter)
@@ -288,8 +387,20 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
                 this.rootBusinessUnit,
                 this.child_1_1_ManagementUnit));
 
-        var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.All);
-        var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.Direct);
+
+        var fbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(BusinessUnit),
+                                 ExpandType = NotificationExpandType.All,
+                                 Idents = [this.child_1_1_BusinessUnit.Id]
+                             };
+
+        var mbuChildFilter = new NotificationFilterGroup<Guid>
+                             {
+                                 SecurityContextType = typeof(ManagementUnit),
+                                 ExpandType = NotificationExpandType.Direct,
+                                 Idents = [this.child_1_1_ManagementUnit.Id]
+                             };
 
         // Act
         var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter);
@@ -307,8 +418,8 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
             context => context.Authorization
                               .NotificationPrincipalExtractor
 
-                              //.GetNotificationPrincipalsByOperations(new Guid[] { this.searchNotificationOperation.Id }, notificationFilterGroups)
-                              .GetPrincipalsAsync([SampleSystemSecurityRole.SearchTestBusinessRole], notificationFilterGroups)
+                              .GetPrincipalsAsync([SampleSystemSecurityRole.SearchTestBusinessRole], [..notificationFilterGroups])
+                              .ToListAsync()
                               .GetAwaiter()
                               .GetResult()
                               .Select(p => p.Name)

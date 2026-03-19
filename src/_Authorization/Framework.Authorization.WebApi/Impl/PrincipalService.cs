@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.Generated.DTO;
 using Framework.DomainDriven;
+
 using SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +18,11 @@ public partial class AuthSLJsonController
     [HttpPost]
     public IEnumerable<PrincipalVisualDTO> GetVisualPrincipalsWithoutSecurity()
     {
-        return this.Evaluate(DBSessionMode.Read, evaluateData =>
-                                                         evaluateData.Context.SecuritySystem.HasAccess(DomainSecurityRule.AnyRole)
-                                                                 ? evaluateData.Context.Logics.Principal.GetFullList().ToVisualDTOList(evaluateData.MappingService)
-                                                                 : Enumerable.Empty<PrincipalVisualDTO>());
+        return this.Evaluate(
+            DBSessionMode.Read,
+            evaluateData =>
+                evaluateData.Context.SecuritySystem.HasAccessAsync(DomainSecurityRule.AnyRole, this.HttpContext.RequestAborted).GetAwaiter().GetResult()
+                    ? evaluateData.Context.Logics.Principal.GetFullList().ToVisualDTOList(evaluateData.MappingService)
+                    : Enumerable.Empty<PrincipalVisualDTO>());
     }
 }

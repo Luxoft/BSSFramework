@@ -1,20 +1,25 @@
-﻿using AutoFixture;
+﻿using System.Collections.Immutable;
+
+using AutoFixture;
 using AutoFixture.Idioms;
 
 using FluentAssertions;
 
 using Framework.Authorization.Domain;
-using Framework.Authorization.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven;
-using SecuritySystem;
 using Framework.UnitTesting;
+
+using SecuritySystem;
+
 using NUnit.Framework;
 using NSubstitute;
+
+using SecuritySystem.Notification;
 
 namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Recipients;
 
@@ -110,8 +115,8 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
 
         this.configurationContextFacade
             .GetNotificationPrincipals(
-                                       Arg.Is<SecurityRole[]>(v => v.SequenceEqual(businessRoleIds)),
-                                       Arg.Is<IEnumerable<NotificationFilterGroup>>(v => v != null))
+                                       Arg.Is<ImmutableArray<SecurityRole>>(v => v.SequenceEqual(businessRoleIds)),
+                                       Arg.Is<ImmutableArray<NotificationFilterGroup>>(v => v != null))
             .Returns(principals);
 
         this.dynamicSourceLambdaProcessor
@@ -158,7 +163,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
         ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
 
         this.configurationContextFacade
-            .GetNotificationPrincipals(Arg.Is<SecurityRole[]>(v => v.SequenceEqual(businessRoleIds)))
+            .GetNotificationPrincipals(Arg.Is<ImmutableArray<SecurityRole>>(v => v.SequenceEqual(businessRoleIds)))
             .Returns(principals);
 
         this.configurationContextFacade
@@ -208,8 +213,8 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
 
         this.configurationContextFacade
             .GetNotificationPrincipals(
-                                       Arg.Is<SecurityRole[]>(v => v.SequenceEqual(businessRoleIds)),
-                                       Arg.Is<IEnumerable<NotificationFilterGroup>>(v => v != null))
+                                       Arg.Is<ImmutableArray<SecurityRole>>(v => v.SequenceEqual(businessRoleIds)),
+                                       Arg.Is<ImmutableArray<NotificationFilterGroup>>(v => v != null))
             .Returns(principals);
 
         this.securityItemSourceLambdaProcessor
@@ -267,8 +272,8 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
 
         this.configurationContextFacade
             .GetNotificationPrincipals(
-                                       Arg.Is<SecurityRole[]>(v => v.SequenceEqual(businessRoleIds)),
-                                       Arg.Is<IEnumerable<NotificationFilterGroup>>(z => z != null))
+                                       Arg.Is<ImmutableArray<SecurityRole>>(v => v.SequenceEqual(businessRoleIds)),
+                                       Arg.Is<ImmutableArray<NotificationFilterGroup>>(z => z != null))
             .Returns(principals);
 
         this.securityItemSourceLambdaProcessor

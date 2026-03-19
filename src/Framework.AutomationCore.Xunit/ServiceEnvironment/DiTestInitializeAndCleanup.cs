@@ -15,6 +15,6 @@ public class DiTestInitializeAndCleanup(
     IOptions<AutomationFrameworkSettings> settings,
     IDatabaseContext databaseContext,
     IntegrationTestTimeProvider timeProvider,
-    ITestingUserAuthenticationService userAuthenticationService)
-    : TestInitializeAndCleanup(settings, databaseContext, timeProvider, userAuthenticationService),
+    RootImpersonateServiceState rootImpersonateServiceState)
+    : TestInitializeAndCleanup(settings, databaseContext, timeProvider, rootImpersonateServiceState),
       ITestInitializeAndCleanup;

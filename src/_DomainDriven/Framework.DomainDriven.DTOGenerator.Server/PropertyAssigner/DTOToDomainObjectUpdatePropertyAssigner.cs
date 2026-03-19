@@ -5,14 +5,9 @@ using Framework.Transfering;
 
 namespace Framework.DomainDriven.DTOGenerator.Server;
 
-public class DTOToDomainObjectUpdatePropertyAssigner<TConfiguration> : DTOToDomainObjectPropertyAssigner<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+public class DTOToDomainObjectUpdatePropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> source) : DTOToDomainObjectPropertyAssigner<TConfiguration>(source)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public DTOToDomainObjectUpdatePropertyAssigner(IDTOSource<TConfiguration> source)
-            : base(source)
-    {
-    }
-
     protected override CodeMethodReferenceExpression GetCollectionMappingMethodReferenceExpression(CodeTypeReference transferElementTypeRef, Type elementType)
     {
         return this.MappingServiceRefExpr.ToMethodReferenceExpression(

@@ -17,11 +17,16 @@ public class GetSystemConstantsHandler(
 {
     protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!securitySystem.IsAdministrator()) return new List<SystemConstantDto>();
+        if (await securitySystem.HasAccessAsync(SecurityRole.Administrator, cancellationToken))
+        {
+            var variables = await variableStorage.GetVariablesAsync(cancellationToken);
 
-        var variables = await variableStorage.GetVariablesAsync(cancellationToken);
-
-        return variables.Select(x => new SystemConstantDto { Name = x.Key.Name, Description = x.Key.Description, Value = x.Value })
-                        .OrderBy(x => x.Name);
+            return variables.Select(x => new SystemConstantDto { Name = x.Key.Name, Description = x.Key.Description, Value = x.Value })
+                            .OrderBy(x => x.Name);
+        }
+        else
+        {
+            return new List<SystemConstantDto>();
+        }
     }
 }

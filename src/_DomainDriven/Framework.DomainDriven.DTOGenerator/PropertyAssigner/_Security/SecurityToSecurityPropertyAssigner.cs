@@ -1,6 +1,8 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
+using CommonFramework.Maybe;
+
 using Framework.CodeDom;
 using Framework.Core;
 
@@ -27,12 +29,6 @@ public class SecurityToSecurityPropertyAssigner<TConfiguration> : MaybePropertyA
         if (sourcePropertyRef == null) throw new ArgumentNullException(nameof(sourcePropertyRef));
         if (targetPropertyRef == null) throw new ArgumentNullException(nameof(targetPropertyRef));
 
-        var sourcePropertyTypeRef = this._sourceTypeReferenceService.GetCodeTypeReference(property);
-        var sourcePropertyTypeJustRef = sourcePropertyTypeRef.ToJustReference();
-
-        var justVarDecl = new CodeVariableDeclarationStatement(sourcePropertyTypeJustRef, "just" + property.Name, sourcePropertyRef.ToAsCastExpression(sourcePropertyTypeJustRef));
-        var justVarDeclRef = new CodeVariableReferenceExpression(justVarDecl.Name);
-
         var targetPropertyTypeRef = this.CodeTypeReferenceService.GetCodeTypeReference(property);
 
         var resultVarDecl = new CodeVariableDeclarationStatement(targetPropertyTypeRef, "result" + property.Name,
@@ -41,28 +37,20 @@ public class SecurityToSecurityPropertyAssigner<TConfiguration> : MaybePropertyA
 
         var resultVarDeclRef = new CodeVariableReferenceExpression(resultVarDecl.Name);
 
-        return new CodeConditionStatement
+        return new CodeConditionStatement(sourcePropertyRef.ToPropertyReference(nameof(Maybe<>.HasValue)))
                {
-                       Condition = new CodePrimitiveExpression(true),
-                       TrueStatements =
-                       {
-                               justVarDecl,
-                               new CodeNotNullConditionStatement (justVarDeclRef)
-                               {
-                                       TrueStatements =
-                                       {
-                                               resultVarDecl,
-
-                                               this.InnerAssigner.GetAssignStatement(property, justVarDeclRef.ToPropertyReference("Value"), resultVarDeclRef),
-
-                                               new CodeObjectCreateExpression(targetPropertyTypeRef.ToJustReference(), resultVarDeclRef).ToAssignStatement(targetPropertyRef)
-                                       },
-                                       FalseStatements =
-                                       {
-                                               targetPropertyTypeRef.ToNothingValueExpression().ToAssignStatement(targetPropertyRef)
-                                       }
-                               },
-                       }
+                   TrueStatements =
+                   {
+                       resultVarDecl,
+                       this.InnerAssigner.GetAssignStatement(property, sourcePropertyRef.ToPropertyReference(nameof(Maybe<>.Value)), resultVarDeclRef),
+                       typeof(Maybe).ToTypeReferenceExpression()
+                                    .ToMethodReferenceExpression(nameof(Maybe.Return))
+                                    .ToMethodInvokeExpression(resultVarDeclRef)
+                                    .ToAssignStatement(targetPropertyRef)
+                   },
+                   FalseStatements = { targetPropertyTypeRef.ToNothingValueExpression().ToAssignStatement(targetPropertyRef) }
                };
+
+
     }
 }

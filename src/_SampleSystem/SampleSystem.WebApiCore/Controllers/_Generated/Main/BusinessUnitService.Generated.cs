@@ -288,7 +288,7 @@
         {
             SampleSystem.BLL.IBusinessUnitBLL bll = evaluateData.Context.Logics.BusinessUnit;
             SampleSystem.Domain.BusinessUnit domainObject = bll.GetById(businessUnitIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.BusinessUnit>(securityRule).HasAccess(domainObject);
+            return evaluateData.Context.SecurityService.HasAccess(domainObject, securityRule);
         }
         
         /// <summary>

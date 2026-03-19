@@ -1,6 +1,8 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
+using CommonFramework.Maybe;
+
 using Framework.CodeDom;
 
 namespace Framework.DomainDriven.DTOGenerator.Server;
@@ -22,11 +24,9 @@ public abstract class DomainObjectToSecurityPropertyAssignerBase<TConfiguration>
         if (property == null) throw new ArgumentNullException(nameof(property));
         if (resultVarDeclRef == null) throw new ArgumentNullException(nameof(resultVarDeclRef));
 
-        var targetPropertyTypeRef = this.CodeTypeReferenceService.GetCodeTypeReference(property);
-
-        var targetPropertyTypeJustRef = targetPropertyTypeRef.ToJustReference();
-
-        return targetPropertyTypeJustRef.ToObjectCreateExpression(resultVarDeclRef);
+        return typeof(Maybe).ToTypeReferenceExpression()
+                            .ToMethodReferenceExpression(nameof(Maybe.Return))
+                            .ToMethodInvokeExpression(resultVarDeclRef);
     }
 
     protected sealed override CodeStatement GetSecurityAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef)

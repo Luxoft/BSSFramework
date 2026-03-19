@@ -1,33 +1,23 @@
-﻿using Framework.Core;
-using SecuritySystem;
+﻿using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
+using SecuritySystem.AccessDenied;
 using SecuritySystem.DomainServices;
 using SecuritySystem.Providers;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public class RootSecurityService<TPersistentDomainObjectBase> : IRootSecurityService<TPersistentDomainObjectBase>, IServiceProviderContainer
-
-    where TPersistentDomainObjectBase : class
+public class RootSecurityService(
+    IServiceProvider serviceProvider,
+    IAccessDeniedExceptionService accessDeniedExceptionService) : IRootSecurityService
 {
-    public RootSecurityService(IServiceProvider serviceProvider)
-    {
-        this.ServiceProvider = serviceProvider;
-    }
+    public virtual ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityRule securityRule) =>
+        this.GetDomainSecurityService<TDomainObject>().GetSecurityProvider(securityRule);
 
-    public IServiceProvider ServiceProvider { get; }
+    public void CheckAccess<TDomainObject>(TDomainObject domainObject, SecurityRule securityRule) =>
+        this.GetSecurityProvider<TDomainObject>(securityRule).CheckAccessAsync(domainObject, accessDeniedExceptionService).GetAwaiter().GetResult();
 
-    public virtual ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityRule securityRule)
-        where TDomainObject : TPersistentDomainObjectBase
-    {
-        return this.GetDomainSecurityService<TDomainObject>().GetSecurityProvider(securityRule);
-    }
-
-    protected IDomainSecurityService<TDomainObject> GetDomainSecurityService<TDomainObject>()
-        where TDomainObject : TPersistentDomainObjectBase
-    {
-        return this.ServiceProvider.GetService<IDomainSecurityService<TDomainObject>>();
-    }
+    protected IDomainSecurityService<TDomainObject> GetDomainSecurityService<TDomainObject>() =>
+        serviceProvider.GetRequiredService<IDomainSecurityService<TDomainObject>>();
 }

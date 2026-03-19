@@ -8,10 +8,10 @@ using Framework.Persistent;
 namespace Framework.DomainDriven.DTOGenerator.Server;
 
 public abstract class MaybeSecurityToDomainObjectPropertyAssigner<TConfiguration> : SecurityServerPropertyAssigner<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
     protected MaybeSecurityToDomainObjectPropertyAssigner(IPropertyAssigner<TConfiguration> innerAssigner)
-            : base(innerAssigner)
+        : base(innerAssigner)
     {
     }
 
@@ -25,17 +25,13 @@ public abstract class MaybeSecurityToDomainObjectPropertyAssigner<TConfiguration
         }
         else
         {
-            var sourcePropertyTypeRef = this.CodeTypeReferenceService.GetCodeTypeReference(property);
-            var sourcePropertyTypeJustRef = sourcePropertyTypeRef.ToJustReference();
 
-            var justVarDecl = sourcePropertyTypeJustRef.ToVariableDeclarationStatement("just" + property.Name, sourcePropertyRef.ToAsCastExpression(sourcePropertyTypeJustRef));
-            var justVarDeclRef = justVarDecl.ToVariableReferenceExpression();
+            return this.GetSecurityAssignStatementInternal(
+                property,
+                sourcePropertyRef,
+                this.InnerAssigner.GetAssignStatement(property, sourcePropertyRef.ToPropertyReference("Value"), targetPropertyRef));
 
-            return new[]
-                   {
-                           justVarDecl,
-                           this.GetSecurityAssignStatementInternal(property, justVarDeclRef, this.InnerAssigner.GetAssignStatement(property, justVarDeclRef.ToPropertyReference("Value"), targetPropertyRef))
-                   }.Composite();
+            //return this.InnerAssigner.GetAssignStatement(property, sourcePropertyRef.ToPropertyReference(nameof(Maybe<>.Value)), targetPropertyRef);
         }
     }
 }

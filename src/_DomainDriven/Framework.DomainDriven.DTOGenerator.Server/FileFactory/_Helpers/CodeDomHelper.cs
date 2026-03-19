@@ -57,11 +57,17 @@ internal static class CodeDomHelper
 
 
 
-    public static CodeExpression ToHasAccessMethod(this IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase> configuration, CodeExpression contextRef, SecurityRule securityRule, Type domainType, CodeParameterDeclarationExpression domainObjectParameter)
+    public static CodeExpression ToHasAccessMethod(
+        this IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase> configuration,
+        CodeExpression contextRef,
+        SecurityRule securityRule,
+        Type domainType,
+        CodeParameterDeclarationExpression domainObjectParameter)
     {
-        return configuration.Environment.BLLCore.GetGetSecurityProviderMethodReferenceExpression(contextRef, domainType)
-                            .ToMethodInvokeExpression(configuration.Environment.BLLCore.GetSecurityCodeExpression(securityRule))
-                            .ToMethodInvokeExpression("HasAccess", domainObjectParameter.ToVariableReferenceExpression());
+        return new CodeThisReferenceExpression()
+            .ToMethodInvokeExpression("HasAccess",
+                                      domainObjectParameter.ToVariableReferenceExpression(),
+                                      configuration.Environment.BLLCore.GetSecurityCodeExpression(securityRule));
     }
 
     public static CodeParameterDeclarationExpression GetMappingServiceParameter(this IFileFactory<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>> fileFactory)

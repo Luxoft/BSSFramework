@@ -65,6 +65,6 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     string IntegrationSaveMethodName { get; }
 
-    CodeMethodReferenceExpression GetGetSecurityProviderMethodReferenceExpression(CodeExpression contextExpression, Type domainType);
+    CodeExpression GetSecurityService(CodeExpression contextExpression);
 }
 #pragma warning restore S100 // Methods and properties should be named in camel case

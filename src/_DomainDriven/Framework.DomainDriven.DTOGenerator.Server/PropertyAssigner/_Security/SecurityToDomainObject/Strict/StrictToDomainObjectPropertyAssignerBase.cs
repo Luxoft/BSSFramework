@@ -1,6 +1,8 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
+using CommonFramework.Maybe;
+
 using Framework.CodeDom;
 using Framework.Exceptions;
 
@@ -23,20 +25,20 @@ public abstract class StrictToDomainObjectPropertyAssignerBase<TConfiguration> :
         if (justValueRefExpr == null) throw new ArgumentNullException(nameof(justValueRefExpr));
         if (innerAssignStatement == null) throw new ArgumentNullException(nameof(innerAssignStatement));
 
-        return new CodeNotNullConditionStatement(justValueRefExpr)
+        return new CodeConditionStatement(justValueRefExpr.ToPropertyReference(nameof(Maybe<>.HasValue)))
                {
-                       TrueStatements =
+                   TrueStatements =
+                   {
+                       new CodeConditionStatement
                        {
-                               new CodeConditionStatement
-                               {
-                                       Condition = this.GetCondition(property),
+                           Condition = this.GetCondition(property),
 
-                                       TrueStatements = { innerAssignStatement },
+                           TrueStatements = { innerAssignStatement },
 
-                                       FalseStatements = { new CodeThrowExceptionStatement(new CodeObjectCreateExpression(typeof(BusinessLogicException),
-                                                               new CodePrimitiveExpression($"Access for write to field \"{property.Name}\" denied"))) }
-                               }
+                           FalseStatements = { new CodeThrowExceptionStatement(new CodeObjectCreateExpression(typeof(BusinessLogicException),
+                                                                                                              new CodePrimitiveExpression($"Access for write to field \"{property.Name}\" denied"))) }
                        }
+                   }
                };
     }
 }

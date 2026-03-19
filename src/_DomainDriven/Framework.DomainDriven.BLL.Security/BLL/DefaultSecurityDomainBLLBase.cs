@@ -61,7 +61,7 @@ namespace Framework.DomainDriven.BLL.Security
         {
             if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            this.SecurityProvider.CheckAccess(domainObject, this.Context.AccessDeniedExceptionService);
+            this.SecurityProvider.CheckAccessAsync(domainObject, this.Context.AccessDeniedExceptionService).GetAwaiter().GetResult();
         }
 
         protected virtual void CheckInsertAccess(TDomainObject domainObject, TIdent id)
@@ -83,7 +83,7 @@ namespace Framework.DomainDriven.BLL.Security
         {
             if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            this.CheckInsertAccess(domainObject, id);
+            this.CheckAccess(domainObject);
 
             base.Insert(domainObject, id);
         }
@@ -102,7 +102,7 @@ namespace Framework.DomainDriven.BLL.Security
             var request = from objectWithoutPermission in this.Context.Logics.Default.Create<TDomainObject>().GetById(id).ToMaybe()
 
                           let accessDeniedResult =
-                              this.SecurityProvider.GetAccessResult(objectWithoutPermission) as AccessResult.AccessDeniedResult
+                              this.SecurityProvider.GetAccessResultAsync(objectWithoutPermission).GetAwaiter().GetResult() as AccessResult.AccessDeniedResult
 
                           where accessDeniedResult != null
 

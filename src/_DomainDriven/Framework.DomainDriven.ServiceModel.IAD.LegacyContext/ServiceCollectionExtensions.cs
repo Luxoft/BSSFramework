@@ -69,14 +69,14 @@ public static class ServiceCollectionExtensions
 
             services.AddSingleton<IPersistentInfoService, PersistentInfoService>();
 
-            services.AddScoped(typeof(IRootSecurityService<>), typeof(RootSecurityService<>));
+            services.AddScoped<IRootSecurityService, RootSecurityService>();
             services.AddScoped(typeof(ITrackingService<>), typeof(TrackingService<>));
 
             services.RegisterAuthorizationBLL();
             services.RegisterConfigurationBLL();
             services.RegisterConfigurationNamedLocks();
 
-            services.ReplaceSingleton<IRealTypeResolver, ProjectionRealTypeResolver>();
+            services.ReplaceSingleton<IActualDomainTypeResolver, ProjectionActualDomainTypeResolver>();
             services.ReplaceSingleton<ISecurityContextInfoSource, ProjectionSecurityContextInfoSource>();
 
             services
@@ -148,7 +148,7 @@ public static class ServiceCollectionExtensions
     }
 
 
-    public static ISecuritySystemSettings AddConfigurationSecurity(this ISecuritySystemSettings securitySystemSettings)
+    public static ISecuritySystemBuilder AddConfigurationSecurity(this ISecuritySystemBuilder securitySystemSettings)
     {
         return securitySystemSettings
                .AddDomainSecurity<ExceptionMessage>(b => b.SetView(SecurityRole.Administrator))

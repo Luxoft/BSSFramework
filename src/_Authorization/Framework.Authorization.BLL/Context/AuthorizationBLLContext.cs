@@ -7,19 +7,19 @@ using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 
 using Framework.QueryLanguage;
-using SecuritySystem;
-
-using Framework.Authorization.Notification;
 using Framework.Events;
-using SecuritySystem.Services;
 
 using Microsoft.Extensions.DependencyInjection;
-using SecuritySystem.AvailableSecurity;
-using SecuritySystem.ExternalSystem.SecurityContextStorage;
+
 using HierarchicalExpand;
 
+using SecuritySystem;
+using SecuritySystem.Services;
+using SecuritySystem.AvailableSecurity;
+using SecuritySystem.ExternalSystem.SecurityContextStorage;
 using SecuritySystem.AccessDenied;
 using SecuritySystem.GeneralPermission.Validation.Principal;
+using SecuritySystem.Notification;
 using SecuritySystem.UserSource;
 
 namespace Framework.Authorization.BLL;
@@ -33,10 +33,10 @@ public partial class AuthorizationBLLContext(
     IAuthorizationValidator validator,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
     TimeProvider timeProvider,
-    IRootSecurityService<PersistentDomainObjectBase> securityService,
+    IRootSecurityService securityService,
     IAuthorizationBLLFactoryContainer logics,
     ISecurityContextStorage securityContextStorage,
-    INotificationPrincipalExtractor notificationPrincipalExtractor,
+    INotificationPrincipalExtractor<Principal> notificationPrincipalExtractor,
     ISecuritySystem securitySystem,
     IRunAsManager runAsManager,
     IAvailablePermissionSource<Permission> availablePermissionSource,
@@ -65,7 +65,7 @@ public partial class AuthorizationBLLContext(
 
     public ISecurityContextInfoSource SecurityContextInfoSource { get; } = securityContextInfoSource;
 
-    public INotificationPrincipalExtractor NotificationPrincipalExtractor { get; } = notificationPrincipalExtractor;
+    public INotificationPrincipalExtractor<Principal> NotificationPrincipalExtractor { get; } = notificationPrincipalExtractor;
 
     public ISecuritySystem SecuritySystem { get; } = securitySystem;
 
@@ -83,7 +83,7 @@ public partial class AuthorizationBLLContext(
 
     public IAvailableSecurityOperationSource AvailableSecurityOperationSource { get; } = availableSecurityOperationSource;
 
-    public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; } = securityService;
+    public IRootSecurityService SecurityService { get; } = securityService;
 
     public override IAuthorizationBLLFactoryContainer Logics { get; } = logics;
 

@@ -8,6 +8,7 @@ using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
 
 using SecuritySystem;
+using SecuritySystem.Services;
 using SecuritySystem.Testing;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData;
@@ -17,10 +18,10 @@ public class TestDataInitializer(
     RootAuthManager authManager,
     DataHelper dataHelper,
     IOptions<AutomationFrameworkSettings> settings,
-    ITestingUserAuthenticationService integrationTestUserAuthenticationServices)
+    IRootImpersonateService rootImpersonateService)
 {
     public async Task InitializeAsync(CancellationToken cancellationToken) =>
-        await integrationTestUserAuthenticationServices
+        await rootImpersonateService
             .WithImpersonateAsync(nameof(TestDataInitializer), async () => await this.InitializeAsyncInternal(cancellationToken));
 
     public async Task InitializeAsyncInternal(CancellationToken cancellationToken)

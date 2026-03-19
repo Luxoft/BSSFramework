@@ -1,6 +1,7 @@
-﻿using Framework.Authorization.Notification;
-using Framework.Persistent;
+﻿using Framework.Persistent;
 using Framework.Restriction;
+
+using SecuritySystem.Notification;
 
 namespace Framework.Configuration.Domain;
 

@@ -10,7 +10,7 @@ public interface IBssFrameworkSettings : IBssFrameworkSettingsBase<IBssFramework
 {
     bool RegisterDenormalizeHierarchicalDALListener { get; set; }
 
-    IBssFrameworkSettings AddSecuritySystem(Action<ISecuritySystemSettings> setupAction);
+    IBssFrameworkSettings AddSecuritySystem(Action<ISecuritySystemBuilder> setupAction);
 
     IBssFrameworkSettings AddNamedLocks(Action<IGenericNamedLockSetup> setupAction);
 

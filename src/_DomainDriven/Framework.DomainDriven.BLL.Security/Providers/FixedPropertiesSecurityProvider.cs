@@ -7,39 +7,28 @@ using SecuritySystem.SecurityAccessor;
 
 namespace Framework.DomainDriven.BLL.Security
 {
-    internal class FixedPropertiesSecurityProvider<TBLLContext, TDomainObject> : ISecurityProvider<TDomainObject>
+    internal class FixedPropertiesSecurityProvider<TBLLContext, TDomainObject>(
+        TBLLContext context,
+        ISecurityProvider<TDomainObject> baseSecurityProvider,
+        Expression<Func<TDomainObject, object>>[] allowedPropertiesForChangingExpressions)
+        : ISecurityProvider<TDomainObject>
         where TBLLContext : class, IAccessDeniedExceptionServiceContainer, ITrackingServiceContainer<TDomainObject>
         where TDomainObject : class
     {
-        private readonly ISecurityProvider<TDomainObject> baseSecurityProvider;
-
-        private readonly Expression<Func<TDomainObject, object>>[] allowedPropertiesForChangingExpressions;
-
-
-        public FixedPropertiesSecurityProvider(TBLLContext context, ISecurityProvider<TDomainObject> baseSecurityProvider, Expression<Func<TDomainObject, object>>[] allowedPropertiesForChangingExpressions)
-        {
-            this.Context = context;
-            this.baseSecurityProvider = baseSecurityProvider;
-            this.allowedPropertiesForChangingExpressions = allowedPropertiesForChangingExpressions;
-        }
-
-        public TBLLContext Context { get; }
-
+        public TBLLContext Context { get; } = context;
 
         public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
         {
-            return this.baseSecurityProvider.InjectFilter(queryable);
+            return baseSecurityProvider.InjectFilter(queryable);
         }
 
-        public bool HasAccess(TDomainObject domainObject)
+        public async ValueTask<bool> HasAccessAsync(TDomainObject domainObject, CancellationToken cancellationToken)
         {
-            return this.baseSecurityProvider.HasAccess(domainObject)
-                   && !this.Context.TrackingService.GetChanges(domainObject).GetUnexpectedChangedProprties(this.allowedPropertiesForChangingExpressions).Any();
+            return await baseSecurityProvider.HasAccessAsync(domainObject, cancellationToken)
+                   && !this.Context.TrackingService.GetChanges(domainObject).GetUnexpectedChangedProprties(allowedPropertiesForChangingExpressions).Any();
         }
 
-        public SecurityAccessorData GetAccessorData(TDomainObject domainObject)
-        {
-            return this.baseSecurityProvider.GetAccessorData(domainObject);
-        }
+        public ValueTask<SecurityAccessorData> GetAccessorDataAsync(TDomainObject domainObject, CancellationToken cancellationToken) =>
+            baseSecurityProvider.GetAccessorDataAsync(domainObject, cancellationToken);
     }
 }

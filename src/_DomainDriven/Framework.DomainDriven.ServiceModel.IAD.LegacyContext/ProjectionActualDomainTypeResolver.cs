@@ -4,7 +4,7 @@ using HierarchicalExpand;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
-public class ProjectionRealTypeResolver : IRealTypeResolver
+public class ProjectionActualDomainTypeResolver : IActualDomainTypeResolver
 {
     public Type Resolve(Type identity) => identity.GetProjectionSourceTypeOrSelf();
 }

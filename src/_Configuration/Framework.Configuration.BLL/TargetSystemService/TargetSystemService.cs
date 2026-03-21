@@ -70,7 +70,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLL
 
         new Action<string, long?, Guid>(this.ForceEvent<TPersistentDomainObjectBase>)
             .CreateGenericMethod(domainType)
-            .Invoke(this, new object[] { operation.Name, revision, domainObjectId });
+            .Invoke(this, [operation.Name, revision, domainObjectId]);
     }
 
     private void ForceEvent<TDomainObject>(string operationName, long? revision, Guid domainObjectId)

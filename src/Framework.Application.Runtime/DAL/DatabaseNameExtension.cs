@@ -1,0 +1,10 @@
+﻿namespace Framework.Application.DAL;
+
+public static class DatabaseNameExtension
+{
+    /// <summary>
+    /// Создание дефолтного инстанса <see cref="AuditDatabaseName"/>
+    /// В котором для хранения аудита испльзуется схема appAudit
+    /// </summary>
+    public static AuditDatabaseName ToDefaultAudit(this DatabaseName source) => new (source.Name, source.Schema + "Audit", "appAudit");
+}

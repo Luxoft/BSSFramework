@@ -8,8 +8,5 @@ public class IntValueValidatorAttribute : PropertyValidatorAttribute
     public int Max { get; set; } = int.MaxValue;
 
 
-    public override IPropertyValidator CreateValidator()
-    {
-        return new IntValueValidator(this.Min, this.Max);
-    }
+    public override IPropertyValidator CreateValidator() => new IntValueValidator(this.Min, this.Max);
 }

@@ -47,10 +47,7 @@ public class PrincipalTests : TestBase
         var principalStrict = new PrincipalStrictDTO
                               {
                                       Name = Name,
-                                      Permissions = new List<PermissionStrictDTO>
-                                                    {
-                                                            new PermissionStrictDTO { Role = businessRoleIdentity }
-                                                    }
+                                      Permissions = [new PermissionStrictDTO { Role = businessRoleIdentity }]
                               };
 
         // Act

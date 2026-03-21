@@ -18,11 +18,13 @@ internal class SelectOperationInternalParser : CharParsers
 
     public SelectOperationInternalParser(NumberFormatInfo numberFormatInfo)
     {
-        if (numberFormatInfo == null) throw new ArgumentNullException(nameof(numberFormatInfo));
-
         this.numberFormatInfo = numberFormatInfo;
 
-        this.rootLambdaExpressionParser = new LambdaExpressionInternalParser(this.numberFormatInfo, this.rootParameter, this.rootParameter, new [] { this.rootParameter }.ToReadOnlyCollection());
+        this.rootLambdaExpressionParser = new LambdaExpressionInternalParser(
+            this.numberFormatInfo,
+            this.rootParameter,
+            this.rootParameter,
+            new[] { this.rootParameter }.ToReadOnlyCollection());
     }
 
 
@@ -30,7 +32,7 @@ internal class SelectOperationInternalParser : CharParsers
     {
         if (body == null) throw new ArgumentNullException(nameof(body));
 
-        return new LambdaExpression(body, new[] { this.rootParameter });
+        return new LambdaExpression(body, [this.rootParameter]);
     }
 
 
@@ -40,29 +42,29 @@ internal class SelectOperationInternalParser : CharParsers
         {
             return from result in this.OfTable(
 
-                                               this.GetElementParser("filter", this.GetLazy(() => this.FilterParser))
-                                                   .ToRow(() => SelectOperation.Default.Filter),
+                       this.GetElementParser("filter", this.GetLazy(() => this.FilterParser))
+                           .ToRow(() => SelectOperation.Default.Filter),
 
-                                               this.GetElementParser("orderby", this.GetLazy(() => this.OrdersParser))
-                                                   .ToRow(() => SelectOperation.Default.Orders),
+                       this.GetElementParser("orderby", this.GetLazy(() => this.OrdersParser))
+                           .ToRow(() => SelectOperation.Default.Orders),
 
-                                               this.GetElementParser("expand", this.GetLazy(() => this.ExpandsParser))
-                                                   .ToRow(() => SelectOperation.Default.Expands),
+                       this.GetElementParser("expand", this.GetLazy(() => this.ExpandsParser))
+                           .ToRow(() => SelectOperation.Default.Expands),
 
-                                               this.GetElementParser("select", this.GetLazy(() => this.SelectsParser))
-                                                   .ToRow(() => SelectOperation.Default.Selects),
+                       this.GetElementParser("select", this.GetLazy(() => this.SelectsParser))
+                           .ToRow(() => SelectOperation.Default.Selects),
 
-                                               this.GetElementParser("skip", this.Int32Parser)
-                                                   .ToRow(() => SelectOperation.Default.SkipCount),
+                       this.GetElementParser("skip", this.Int32Parser)
+                           .ToRow(() => SelectOperation.Default.SkipCount),
 
-                                               this.GetElementParser("top", this.Int32Parser)
-                                                   .ToRow(() => SelectOperation.Default.TakeCount),
+                       this.GetElementParser("top", this.Int32Parser)
+                           .ToRow(() => SelectOperation.Default.TakeCount),
 
-                                               this.PreSpaces(this.Char('&')),
+                       this.PreSpaces(this.Char('&')),
 
-                                               (filter, orders, expands, selects, skipCount, takeCount) =>
+                       (filter, orders, expands, selects, skipCount, takeCount) =>
 
-                                                       new SelectOperation(filter, orders, expands, selects, skipCount, takeCount))
+                           new SelectOperation(filter, [.. orders], skipCount, takeCount) { Expands = [.. expands], Selects = [.. selects] })
 
                    from _ in this.PreSpaces(this.Eof)
 
@@ -87,15 +89,9 @@ internal class SelectOperationInternalParser : CharParsers
 
 
 
-    private Parser<string, Expression> RootBodyParser
-    {
-        get { return this.rootLambdaExpressionParser.RootBodyParser; }
-    }
+    private Parser<string, Expression> RootBodyParser { get { return this.rootLambdaExpressionParser.RootBodyParser; } }
 
-    private Parser<string, LambdaExpression> FilterParser
-    {
-        get { return this.RootBodyParser.Select(this.CreateRootLambda); }
-    }
+    private Parser<string, LambdaExpression> FilterParser { get { return this.RootBodyParser.Select(this.CreateRootLambda); } }
 
     private Parser<string, SelectOrder> OrderParser
     {
@@ -109,25 +105,16 @@ internal class SelectOperationInternalParser : CharParsers
         }
     }
 
-    private Parser<string, IEnumerable<SelectOrder>> OrdersParser
-    {
-        get { return this.SepBy1(this.OrderParser, ','); }
-    }
+    private Parser<string, IEnumerable<SelectOrder>> OrdersParser { get { return this.SepBy1(this.OrderParser, ','); } }
 
-    private Parser<string, IEnumerable<LambdaExpression>> ExpandsParser
-    {
-        get { return this.SepBy1(this.RootLambdaExpressionParser, ','); }
-    }
+    private Parser<string, IEnumerable<LambdaExpression>> ExpandsParser { get { return this.SepBy1(this.RootLambdaExpressionParser, ','); } }
 
     private Parser<string, IEnumerable<LambdaExpression>> SelectsParser
     {
         get { return this.SepBy1(this.rootLambdaExpressionParser.PropertyPathParser.Select(this.CreateRootLambda), ','); }
     }
 
-    private Parser<string, LambdaExpression> RootLambdaExpressionParser
-    {
-        get { return this.RootBodyParser.Select(this.CreateRootLambda); }
-    }
+    private Parser<string, LambdaExpression> RootLambdaExpressionParser { get { return this.RootBodyParser.Select(this.CreateRootLambda); } }
 
 
     private Parser<string, OrderType> OrderTypeParser

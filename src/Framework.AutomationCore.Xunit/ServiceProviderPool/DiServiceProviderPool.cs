@@ -7,7 +7,7 @@ namespace Automation.Xunit.ServiceProviderPool;
 public class DiServiceProviderPool(ServiceProviderPoolFunc createServiceProviderFunc) : ITestServiceProviderPool
 {
     private readonly Func<IServiceProvider> createServiceProviderFunc = createServiceProviderFunc.Value;
-    private readonly ConcurrentBag<IServiceProvider> providersCache = new ();
+    private readonly ConcurrentBag<IServiceProvider> providersCache = [];
 
     public IServiceProvider Get() =>
         this.providersCache.TryTake(out var provider) ? provider : this.createServiceProviderFunc.Invoke();

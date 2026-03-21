@@ -2,27 +2,19 @@
 
 public static class MethodExpressionTypeExtensions
 {
-    public static string ToFormatString(this MethodExpressionType type)
-    {
-        switch (type)
+    public static string ToFormatString(this MethodExpressionType type) =>
+        type switch
         {
-            case MethodExpressionType.StringStartsWith:
-                return "StartsWith";
+            MethodExpressionType.StringStartsWith => "StartsWith",
 
-            case MethodExpressionType.StringContains:
-                return "Contains";
+            MethodExpressionType.StringContains => "Contains",
 
-            case MethodExpressionType.StringEndsWith:
-                return "EndsWith";
+            MethodExpressionType.StringEndsWith => "EndsWith",
 
-            case MethodExpressionType.CollectionAny:
-                return "Any";
+            MethodExpressionType.CollectionAny => "Any",
 
-            case MethodExpressionType.CollectionAll:
-                return "All";
+            MethodExpressionType.CollectionAll => "All",
 
-            default:
-                throw new ArgumentOutOfRangeException(nameof(type));
-        }
-    }
+            _ => throw new ArgumentOutOfRangeException(nameof(type))
+        };
 }

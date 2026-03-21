@@ -42,7 +42,7 @@ public class ObjectsVersion : IObjectsVersion
         }
         else
         {
-            return new[] { this };
+            return [this];
         }
     }
 
@@ -70,9 +70,9 @@ public class ObjectsVersion : IObjectsVersion
                              : current == null ? previous.GetType()
                              : current.GetType().GetSuperSet(previous.GetType(), true));
 
-            var ctor = typeof(ObjectsVersion<>).MakeGenericType(superType).GetConstructor(new[] { superType, superType, typeof(IEnumerable<IEmployee>) });
+            var ctor = typeof(ObjectsVersion<>).MakeGenericType(superType).GetConstructor([superType, superType, typeof(IEnumerable<IEmployee>)]);
 
-            return (ObjectsVersion)ctor.Invoke(new object[] { previous, current, recipients });
+            return (ObjectsVersion)ctor.Invoke([previous, current, recipients]);
         }
         else
         {

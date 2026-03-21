@@ -54,13 +54,13 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
 
         this.authorizationContext = this.CreateStub<IAuthorizationBLLContext>();
         this.authorizationContext.Logics.Returns(authorizationLogics);
-        this.authorizationContext.NotificationPrincipalExtractor.Returns(this.notificationPrincipalExtractor);
 
         this.context = this.Fixture.RegisterStub<IConfigurationBLLContext>();
         this.context.EmployeeSource.Returns(this.employeeSource);
         this.context.Logics.Returns(configurationLogics);
         this.context.Authorization.Returns(this.authorizationContext);
         this.context.ComplexDomainTypeResolver.Returns(this.domainTypeResolver);
+        this.context.NotificationPrincipalExtractor.Returns(this.notificationPrincipalExtractor);
     }
 
     [Test]
@@ -80,7 +80,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     public void ConvertPrincipals_Call_Employee()
     {
         // Arrange
-        var employees = new RecipientCollection(new[] { new Recipient("ivanov", "ivanov@ya.ru") });
+        var employees = new RecipientCollection([new Recipient("ivanov", "ivanov@ya.ru")]);
         var principals = new[] { new Principal { Name = "ivanov" }, new Principal { Name = "petrov" } };
 
         this.employeeSource.GetQueryable().Returns(employees.AsQueryable());

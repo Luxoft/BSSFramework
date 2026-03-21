@@ -1,18 +1,9 @@
 ﻿namespace Framework.Validation;
 
 [AttributeUsage(AttributeTargets.Property)]
-public class SignValidatorAttribute : PropertyValidatorAttribute
+public class SignValidatorAttribute(SignType expectedPropertyValueSignType) : PropertyValidatorAttribute
 {
-    public SignValidatorAttribute(SignType expectedPropertyValueSignType)
-    {
-        this.ExpectedPropertyValueSignType = expectedPropertyValueSignType;
-    }
+    public SignType ExpectedPropertyValueSignType { get; } = expectedPropertyValueSignType;
 
-
-    public SignType ExpectedPropertyValueSignType { get; }
-
-    public override IPropertyValidator CreateValidator()
-    {
-        return new SignValidator(this.ExpectedPropertyValueSignType);
-    }
+    public override IPropertyValidator CreateValidator() => new SignValidator(this.ExpectedPropertyValueSignType);
 }

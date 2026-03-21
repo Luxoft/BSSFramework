@@ -17,7 +17,7 @@ namespace Framework.DomainDriven.NHibernate;
 public class DiffDaysHqlGenerator : BaseHqlGeneratorForMethod
 {
     public DiffDaysHqlGenerator() =>
-            this.SupportedMethods = new[] { ReflectHelper.GetMethodDefinition((DateTime x) => x.DiffDays(DateTime.MinValue)) };
+            this.SupportedMethods = [ReflectHelper.GetMethodDefinition((DateTime x) => x.DiffDays(DateTime.MinValue))];
 
     public override HqlTreeNode BuildHql(
             MethodInfo method,

@@ -1,57 +1,19 @@
-﻿using System.Collections.ObjectModel;
-using System.Runtime.Serialization;
+﻿using System.Collections.Immutable;
 
 using CommonFramework;
 
 namespace Framework.QueryLanguage;
 
-[DataContract]
-public class MethodExpression : Expression
+public record MethodExpression(Expression Source, MethodExpressionType Type, ImmutableArray<Expression?> Arguments) : Expression
 {
-    public MethodExpression(Expression source, MethodExpressionType type, params Expression[] arguments)
-            : this(source, type, (IEnumerable<Expression>)arguments)
-    {
+    public override string ToString() => $"{this.Source}.{this.Type.ToFormatString()}({this.Arguments.Join(", ")})";
 
-    }
+    public virtual bool Equals(MethodExpression? other) =>
+        object.ReferenceEquals(this, other)
+        || (other is not null
+            && this.Type == other.Type
+            && this.Source == other.Source
+            && this.Arguments.SequenceEqual(other.Arguments));
 
-    public MethodExpression(Expression source, MethodExpressionType type, IEnumerable<Expression> arguments)
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (arguments == null) throw new ArgumentNullException(nameof(arguments));
-
-        this.Source = source;
-        this.Type = type;
-        this.Arguments = arguments.ToReadOnlyCollection();
-    }
-
-
-    [DataMember]
-    public Expression Source { get; private set; }
-
-    [DataMember]
-    public MethodExpressionType Type { get; private set; }
-
-    [DataMember]
-    public ReadOnlyCollection<Expression> Arguments { get; private set; }
-
-
-    public override string ToString()
-    {
-        return $"{this.Source}.{this.Type.ToFormatString()}({this.Arguments.Join(", ")})";
-    }
-
-
-    public override int GetHashCode()
-    {
-        return base.GetHashCode() ^ this.Type.GetHashCode();
-    }
-
-    protected override bool InternalEquals(Expression other)
-    {
-        return (other as MethodExpression).Maybe(otherMethodExpression =>
-
-                                                         this.Type == otherMethodExpression.Type
-                                                         && this.Source == otherMethodExpression.Source
-                                                         && this.Arguments.SequenceEqual(otherMethodExpression.Arguments));
-    }
+    public override int GetHashCode() => base.GetHashCode() ^ this.Type.GetHashCode();
 }

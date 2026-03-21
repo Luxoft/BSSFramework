@@ -68,9 +68,9 @@ public class WriteNHibSession : NHibSessionBase
 
     private void InjectListeners(EventListeners eventListeners)
     {
-        eventListeners.PostDeleteEventListeners = eventListeners.PostDeleteEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
-        eventListeners.PostUpdateEventListeners = eventListeners.PostUpdateEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
-        eventListeners.PostInsertEventListeners = eventListeners.PostInsertEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
+        eventListeners.PostDeleteEventListeners = eventListeners.PostDeleteEventListeners.Concat([this.collectChangedEventListener]).ToArray();
+        eventListeners.PostUpdateEventListeners = eventListeners.PostUpdateEventListeners.Concat([this.collectChangedEventListener]).ToArray();
+        eventListeners.PostInsertEventListeners = eventListeners.PostInsertEventListeners.Concat([this.collectChangedEventListener]).ToArray();
     }
 
     public override void AsFault()

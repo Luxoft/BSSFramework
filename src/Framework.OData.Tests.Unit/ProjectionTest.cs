@@ -21,7 +21,7 @@ public class ProjectionTest
         var rootLocation = new TestLocation
                            {
                                    Id = Guid.NewGuid(),
-                                   Children = new [] { employeeLocation }
+                                   Children = [employeeLocation]
                            };
 
         employeeLocation.Parent = rootLocation;
@@ -41,7 +41,7 @@ public class ProjectionTest
 
         var selectOperation = SelectOperation.Parse(request);
 
-        var selectOperationBuilder = new StandartExpressionBuilder();
+        var selectOperationBuilder = new StandardExpressionBuilder();
 
         var selectOperationGeneric = selectOperationBuilder.ToTyped<TestEmployee, ITestEmployee>(selectOperation);
 

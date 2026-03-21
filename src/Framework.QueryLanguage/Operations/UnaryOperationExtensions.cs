@@ -3,61 +3,32 @@ using System.Runtime.Serialization;
 
 namespace Framework.QueryLanguage;
 
-[DataContract]
 public static class UnaryOperationExtensions
 {
-    public static string ToFormatString(this UnaryOperation operation)
-    {
-        switch (operation)
+    public static string ToFormatString(this UnaryOperation operation) =>
+        operation switch
         {
-            case UnaryOperation.Not:
-                return "!";
+            UnaryOperation.Not => "!",
+            UnaryOperation.Plus => "+",
+            UnaryOperation.Negate => "-",
+            _ => throw new ArgumentOutOfRangeException(nameof(operation))
+        };
 
-            case UnaryOperation.Plus:
-                return "+";
-
-            case UnaryOperation.Negate:
-                return "-";
-
-            default:
-                throw new ArgumentOutOfRangeException(nameof(operation));
-        }
-    }
-
-    public static ExpressionType ToExpressionType(this UnaryOperation operation)
-    {
-        switch (operation)
+    public static ExpressionType ToExpressionType(this UnaryOperation operation) =>
+        operation switch
         {
-            case UnaryOperation.Not:
-                return ExpressionType.Not;
+            UnaryOperation.Not => ExpressionType.Not,
+            UnaryOperation.Plus => ExpressionType.UnaryPlus,
+            UnaryOperation.Negate => ExpressionType.Negate,
+            _ => throw new ArgumentOutOfRangeException(nameof(operation))
+        };
 
-            case UnaryOperation.Plus:
-                return ExpressionType.UnaryPlus;
-
-            case UnaryOperation.Negate:
-                return ExpressionType.Negate;
-
-
-            default:
-                throw new ArgumentOutOfRangeException(nameof(operation));
-        }
-    }
-
-    public static int GetPriority(this UnaryOperation operation)
-    {
-        switch (operation)
+    public static int GetPriority(this UnaryOperation operation) =>
+        operation switch
         {
-            case UnaryOperation.Not:
-                return 10;
-
-            case UnaryOperation.Negate:
-                return 20;
-
-            case UnaryOperation.Plus:
-                return 20;
-
-            default:
-                throw new ArgumentOutOfRangeException(nameof(operation));
-        }
-    }
+            UnaryOperation.Not => 10,
+            UnaryOperation.Negate => 20,
+            UnaryOperation.Plus => 20,
+            _ => throw new ArgumentOutOfRangeException(nameof(operation))
+        };
 }

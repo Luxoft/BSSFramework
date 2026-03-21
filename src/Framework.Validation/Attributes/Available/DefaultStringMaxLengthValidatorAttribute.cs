@@ -5,8 +5,5 @@
 /// </summary>
 public class DefaultStringMaxLengthValidatorAttribute : ClassValidatorAttribute
 {
-    public override IClassValidator CreateValidator()
-    {
-        return DefaultStringMaxLengthValidator.Value;
-    }
+    public override IClassValidator CreateValidator() => DefaultStringMaxLengthValidator.Value;
 }

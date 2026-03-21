@@ -1,6 +1,6 @@
 ﻿namespace Framework.QueryLanguage;
 
-public interface IStandartExpressionBuilder
+public interface IStandardExpressionBuilder
 {
-    System.Linq.Expressions.Expression<TDelegate> ToStandartExpression<TDelegate>(LambdaExpression expression);
+    System.Linq.Expressions.Expression<TDelegate> ToStandardExpression<TDelegate>(LambdaExpression expression);
 }

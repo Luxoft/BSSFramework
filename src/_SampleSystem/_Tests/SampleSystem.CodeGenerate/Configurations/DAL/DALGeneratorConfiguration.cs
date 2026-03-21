@@ -33,9 +33,6 @@ public class DALGeneratorConfiguration : Framework.DomainDriven.NHibernate.DALGe
 
     private (Type fromType, string propertyName)[] GetIgnoreFields()
     {
-        return new (Type fromType, string propertyName)[0]
-               {
-
-               };
+        return [];
     }
 }

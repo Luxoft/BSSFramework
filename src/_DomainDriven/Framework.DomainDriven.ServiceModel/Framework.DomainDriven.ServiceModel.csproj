@@ -13,9 +13,4 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Framework.DomainDriven.BLL.Security\Framework.DomainDriven.BLL.Security.csproj" />
-    <ProjectReference Include="..\Framework.DomainDriven.Core.LegacyContext\Framework.DomainDriven.Core.LegacyContext.csproj" />
-  </ItemGroup>
-
 </Project>

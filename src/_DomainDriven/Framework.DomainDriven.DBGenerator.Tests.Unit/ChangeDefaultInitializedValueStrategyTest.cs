@@ -17,7 +17,7 @@ public class ChangeDefaultInitializedValueStrategyTest
     public void Execute_NotAddedNewFields_OnlyTemplateScriptGenerated()
     {
         // Arrange
-        var databaseScriptGeneratorStrategeInfo = this.CreateDatabaseScriptGeneratorStrategeInfo(Enumerable.Empty<DomainTypeMetadata>());
+        var databaseScriptGeneratorStrategeInfo = this.CreateDatabaseScriptGeneratorStrategeInfo([]);
 
         var changeDefaultInitializedValueStrategy = new ChangeDefaultInitializedValueStrategy(databaseScriptGeneratorStrategeInfo);
 
@@ -34,9 +34,9 @@ public class ChangeDefaultInitializedValueStrategyTest
     {
         // Arrange
         var domainTypeMetadata = new DomainTypeMetadata(typeof(object), new AssemblyMetadata(typeof(object)));
-        domainTypeMetadata.AddFields(new[] { new PrimitiveTypeFieldMetadata("test", typeof(string), Enumerable.Empty<Attribute>(), domainTypeMetadata, false) });
+        domainTypeMetadata.AddFields([new PrimitiveTypeFieldMetadata("test", typeof(string), [], domainTypeMetadata, false)]);
 
-        var databaseScriptGeneratorStrategeInfo = this.CreateDatabaseScriptGeneratorStrategeInfo(new[] { domainTypeMetadata });
+        var databaseScriptGeneratorStrategeInfo = this.CreateDatabaseScriptGeneratorStrategeInfo([domainTypeMetadata]);
 
         var table = new Table { Name = "Object" };
         var column = new Column { Name = "test" };
@@ -57,9 +57,9 @@ public class ChangeDefaultInitializedValueStrategyTest
     {
         // Arrange
         var domainTypeMetadata = new DomainTypeMetadata(typeof(object), new AssemblyMetadata(typeof(object)));
-        domainTypeMetadata.AddFields(new[] { new PrimitiveTypeFieldMetadata("test", typeof(string), new[] { new VersionAttribute() }, domainTypeMetadata, false) });
+        domainTypeMetadata.AddFields([new PrimitiveTypeFieldMetadata("test", typeof(string), new[] { new VersionAttribute() }, domainTypeMetadata, false)]);
 
-        var databaseScriptGeneratorStrategeInfo = this.CreateDatabaseScriptGeneratorStrategeInfo(new[] { domainTypeMetadata });
+        var databaseScriptGeneratorStrategeInfo = this.CreateDatabaseScriptGeneratorStrategeInfo([domainTypeMetadata]);
 
         var table = new Table { Name = "Object" };
         var column = new Column { Name = "test" };

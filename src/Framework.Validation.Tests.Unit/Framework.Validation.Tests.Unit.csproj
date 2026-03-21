@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.Validation\Framework.Validation.csproj" />
-    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.Core.LegacyContext\Framework.DomainDriven.Core.LegacyContext.csproj" />
   </ItemGroup>
 
 </Project>

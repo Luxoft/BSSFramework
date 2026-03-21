@@ -6,9 +6,9 @@ using SExpressions = System.Linq.Expressions;
 
 namespace Framework.QueryLanguage;
 
-public class StandartExpressionBuilder : StandartExpressionBuilderBase
+public class StandardExpressionBuilder : StandardExpressionBuilderBase
 {
-    protected override SExpressions.LambdaExpression ToStandartExpression(LambdaExpression expression, Dictionary<ParameterExpression, SExpressions.ParameterExpression> parameters, Type expectedResultType)
+    protected override SExpressions.LambdaExpression ToStandardExpression(LambdaExpression expression, Dictionary<ParameterExpression, SExpressions.ParameterExpression> parameters, Type expectedResultType)
     {
         if (expression == null) throw new ArgumentNullException(nameof(expression));
         if (parameters == null) throw new ArgumentNullException(nameof(parameters));
@@ -22,87 +22,76 @@ public class StandartExpressionBuilder : StandartExpressionBuilderBase
 
         var summParameters = sparameters.Concat(parameters);
 
-        var bodyExpr = this.ToStandartExpressionBase(expression.Body, summParameters);
+        var bodyExpr = this.ToStandardExpressionBase(expression.Body, summParameters);
 
         return SExpressions.Expression.Lambda(expectedResultType, bodyExpr, parameterPairs.Select(pair => pair.OutParameter));
     }
 
-    protected override SExpressions.BinaryExpression ToStandartExpression(BinaryExpression expression, Dictionary<ParameterExpression, SExpressions.ParameterExpression> parameters)
+    protected override SExpressions.BinaryExpression ToStandardExpression(BinaryExpression expression, Dictionary<ParameterExpression, SExpressions.ParameterExpression> parameters)
     {
         if (expression == null) throw new ArgumentNullException(nameof(expression));
         if (parameters == null) throw new ArgumentNullException(nameof(parameters));
 
-        var preLeftStandartExpression = this.ToStandartExpressionBase(expression.Left, parameters);
-        var preRightStandartExpression = this.ToStandartExpressionBase(expression.Right, parameters);
+        var preLeftStandardExpression = this.ToStandardExpressionBase(expression.Left, parameters);
+        var preRightStandardExpression = this.ToStandardExpressionBase(expression.Right, parameters);
 
-        var leftStandartExpression = preLeftStandartExpression.TryNormalize(preLeftStandartExpression.Type, preRightStandartExpression.Type);
+        var leftStandardExpression = preLeftStandardExpression.TryNormalize(preLeftStandardExpression.Type, preRightStandardExpression.Type);
 
-        var rightStandartExpression = preRightStandartExpression.TryNormalize(preLeftStandartExpression.Type, preRightStandartExpression.Type);
+        var rightStandardExpression = preRightStandardExpression.TryNormalize(preLeftStandardExpression.Type, preRightStandardExpression.Type);
 
 
-        return SExpressions.Expression.MakeBinary(expression.Operation.ToExpressionType(), leftStandartExpression, rightStandartExpression);
+        return SExpressions.Expression.MakeBinary(expression.Operation.ToExpressionType(), leftStandardExpression, rightStandardExpression);
     }
 
 
-    protected override SExpressions.MethodCallExpression ToStandartExpression(MethodExpression expression, Dictionary<ParameterExpression, System.Linq.Expressions.ParameterExpression> parameters)
+    protected override SExpressions.MethodCallExpression ToStandardExpression(MethodExpression expression, Dictionary<ParameterExpression, System.Linq.Expressions.ParameterExpression> parameters)
     {
-        var standartSourceExpr = this.ToStandartExpressionBase(expression.Source, parameters);
+        var standardSourceExpr = this.ToStandardExpressionBase(expression.Source, parameters);
 
-        var elementType = standartSourceExpr.Type.GetCollectionElementType();
+        var elementType = standardSourceExpr.Type.GetCollectionElementType();
 
         var delegateType = elementType.Maybe(v => typeof(Func<,>).MakeGenericType(v, typeof(bool)));
 
-        var standartArguments = expression.Arguments.Select(arg => this.ToStandartExpressionBase(arg, parameters, delegateType)).ToList();
+        var standardArguments = expression.Arguments.Select(arg => this.ToStandardExpressionBase(arg, parameters, delegateType)).ToList();
 
-        var allArgs = new[] { standartSourceExpr }.Concat(standartArguments).ToList();
+        var allArgs = new[] { standardSourceExpr }.Concat(standardArguments).ToList();
 
-        switch (expression.Type)
+        return expression.Type switch
         {
-            case MethodExpressionType.StringStartsWith:
-                return SExpressions.Expression.Call(this.TryCallToString(standartSourceExpr), MethodInfoHelper.StringStartsWithMethod, standartArguments);
-
-            case MethodExpressionType.StringContains:
-                return SExpressions.Expression.Call(this.TryCallToString(standartSourceExpr), MethodInfoHelper.StringContainsMethod, standartArguments);
-
-            case MethodExpressionType.StringEndsWith:
-                return SExpressions.Expression.Call(this.TryCallToString(standartSourceExpr), MethodInfoHelper.StringEndsWithMethod, standartArguments);
-
-            case MethodExpressionType.CollectionAny:
-                return SExpressions.Expression.Call(standartArguments.Any() ? MethodInfoHelper.CollectionAnyFilterMethod.MakeGenericMethod(elementType) : MethodInfoHelper.CollectionAnyEmptyMethod.MakeGenericMethod(elementType), allArgs);
-
-            case MethodExpressionType.CollectionAll:
-                return SExpressions.Expression.Call(MethodInfoHelper.CollectionAllFilterMethod.MakeGenericMethod(elementType), allArgs);
-
-            default:
-                throw new ArgumentOutOfRangeException("this.Type");
-        }
+            MethodExpressionType.StringStartsWith => SExpressions.Expression.Call(
+                this.TryCallToString(standardSourceExpr),
+                MethodInfoHelper.StringStartsWithMethod,
+                standardArguments),
+            MethodExpressionType.StringContains => SExpressions.Expression.Call(this.TryCallToString(standardSourceExpr), MethodInfoHelper.StringContainsMethod, standardArguments),
+            MethodExpressionType.StringEndsWith => SExpressions.Expression.Call(this.TryCallToString(standardSourceExpr), MethodInfoHelper.StringEndsWithMethod, standardArguments),
+            MethodExpressionType.CollectionAny => SExpressions.Expression.Call(
+                standardArguments.Any()
+                    ? MethodInfoHelper.CollectionAnyFilterMethod.MakeGenericMethod(elementType)
+                    : MethodInfoHelper.CollectionAnyEmptyMethod.MakeGenericMethod(elementType),
+                allArgs),
+            MethodExpressionType.CollectionAll => SExpressions.Expression.Call(MethodInfoHelper.CollectionAllFilterMethod.MakeGenericMethod(elementType), allArgs),
+            _ => throw new ArgumentOutOfRangeException("this.Type")
+        };
     }
 
-    protected override SExpressions.ParameterExpression ToStandartExpression(ParameterExpression expression, Dictionary<ParameterExpression, System.Linq.Expressions.ParameterExpression> parameters)
-    {
-        return parameters[expression];
-    }
+    protected override SExpressions.ParameterExpression ToStandardExpression(ParameterExpression expression, Dictionary<ParameterExpression, System.Linq.Expressions.ParameterExpression> parameters) => parameters[expression];
 
-    protected override SExpressions.ConstantExpression ToStandartExpression(ConstantExpression expression)
-    {
-        return SExpressions.Expression.Constant(expression.UntypedValue);
-    }
+    protected override SExpressions.ConstantExpression ToStandardExpression(ConstantExpression expression) => SExpressions.Expression.Constant(expression.GetRawValue());
 
-
-    protected override SExpressions.MemberExpression ToStandartExpression(PropertyExpression expression, Dictionary<ParameterExpression, System.Linq.Expressions.ParameterExpression> parameters)
+    protected override SExpressions.MemberExpression ToStandardExpression(PropertyExpression expression, Dictionary<ParameterExpression, System.Linq.Expressions.ParameterExpression> parameters)
     {
-        var preSourceExpr = this.ToStandartExpressionBase(expression.Source, parameters);
+        var preSourceExpr = this.ToStandardExpressionBase(expression.Source, parameters);
 
         var sourceExpr = preSourceExpr.Type.IsNullable() ? SExpressions.Expression.Property(preSourceExpr, "Value") : preSourceExpr;
 
         return CoreExpressionHelper.PropertyOrFieldAuto(sourceExpr, expression.PropertyName);
     }
 
-    protected override SExpressions.UnaryExpression ToStandartExpression(UnaryExpression expression, Dictionary<ParameterExpression, System.Linq.Expressions.ParameterExpression> parameters)
+    protected override SExpressions.UnaryExpression ToStandardExpression(UnaryExpression expression, Dictionary<ParameterExpression, System.Linq.Expressions.ParameterExpression> parameters)
     {
-        var standartOperand = this.ToStandartExpressionBase(expression.Operand, parameters);
+        var standardOperand = this.ToStandardExpressionBase(expression.Operand, parameters);
 
-        return SExpressions.Expression.MakeUnary(expression.Operation.ToExpressionType(), standartOperand, standartOperand.Type);
+        return SExpressions.Expression.MakeUnary(expression.Operation.ToExpressionType(), standardOperand, standardOperand.Type);
     }
 
     private SExpressions.Expression TryCallToString(SExpressions.Expression source)
@@ -115,11 +104,11 @@ public class StandartExpressionBuilder : StandartExpressionBuilderBase
 
         if (memberExpression.Type != typeof(string))
         {
-            return SExpressions.Expression.Call(memberExpression, nameof(string.ToString), new Type[0] { });
+            return SExpressions.Expression.Call(memberExpression, nameof(string.ToString), []);
         }
 
         return source;
     }
 
-    public static readonly StandartExpressionBuilder Default = new StandartExpressionBuilder();
+    public static readonly StandardExpressionBuilder Default = new StandardExpressionBuilder();
 }

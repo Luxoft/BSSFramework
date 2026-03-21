@@ -125,7 +125,7 @@ public class DateParsingTests
     {
         var selectOperation = SelectOperation.Parse(query);
 
-        var selectOperationGeneric = new StandartExpressionBuilder().ToTyped<TestClass>(selectOperation);
+        var selectOperationGeneric = new StandardExpressionBuilder().ToTyped<TestClass>(selectOperation);
 
         var res = selectOperationGeneric.Process(this.stream).Single();
 

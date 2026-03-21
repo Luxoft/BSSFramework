@@ -406,7 +406,7 @@ public class MappingGenerator : IMappingGenerator
 
         if (fieldType == typeof(decimal) || fieldType == typeof(decimal?))
         {
-            var attribute = attributes.OfType<LengthAndPrecisionAttribute>().Concat(new[] { LengthAndPrecisionAttribute.Default }).First();
+            var attribute = attributes.OfType<LengthAndPrecisionAttribute>().Concat([LengthAndPrecisionAttribute.Default]).First();
 
             el.WithAttribute("precision", attribute.Length).WithAttribute("scale", attribute.Precision);
         }
@@ -545,7 +545,7 @@ public class MappingGenerator : IMappingGenerator
                                         .DomainTypeMetadata
                                         .AssemblyMetadata
                                         .DomainTypes
-                                        .SelectMany(z => z.NotAbstractChildrenDomainTypes.Concat(new[] { z }))
+                                        .SelectMany(z => z.NotAbstractChildrenDomainTypes.Concat([z]))
                                         .Single(z => z.DomainType == listTypeFieldMetadata.ElementType);
 
         var reverseReferenceArray =
@@ -557,7 +557,7 @@ public class MappingGenerator : IMappingGenerator
         while (0 == reverseReferenceArray.Length && elementType != typeof(object))
         {
             elementType = elementType.BaseType;
-            var domainTypeMetadatas = listTypeFieldMetadata.DomainTypeMetadata.AssemblyMetadata.DomainTypes.SelectMany(z => z.NotAbstractChildrenDomainTypes.Concat(new[] { z })).ToList();
+            var domainTypeMetadatas = listTypeFieldMetadata.DomainTypeMetadata.AssemblyMetadata.DomainTypes.SelectMany(z => z.NotAbstractChildrenDomainTypes.Concat([z])).ToList();
 
             var baseElementDomainTypeMetadata = domainTypeMetadatas
                                                 .Where(z => !z.DomainType.IsAbstract)

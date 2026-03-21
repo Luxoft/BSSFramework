@@ -21,8 +21,8 @@ public class DomainTypeMetadata
 
         this.type = domainType;
         this.assemblyMetadata = assemblyMetadata;
-        this.fields = new List<FieldMetadata>();
-        this.children = new List<DomainTypeMetadata>();
+        this.fields = [];
+        this.children = [];
 
         this.indexUniqueMetadataLazy = new Lazy<IList<UniqueIndexMetadata>>(this.CreateUniqueIndexMetadata);
     }

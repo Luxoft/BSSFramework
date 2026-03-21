@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.SecuritySystem.GeneralPermission" />
+    <PackageReference Include="IvAt.SecuritySystem.GeneralPermission.Abstractions" />
     <PackageReference Include="IvAt.SecuritySystem.Notification.Abstractions" />
   </ItemGroup>
 

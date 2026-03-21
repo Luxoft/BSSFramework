@@ -149,7 +149,7 @@ public class SubscriptionNotificationService<TBLLContext>
     {
         if (tryResult.IsFault())
         {
-            return Enumerable.Empty<ITryResult<IEnumerable<MessageTemplateNotification>>>();
+            return [];
         }
 
         var subscriptions = tryResult.GetValue();
@@ -177,7 +177,7 @@ public class SubscriptionNotificationService<TBLLContext>
         catch (Exception ex)
         {
             var fault = TryResult.CreateFault<IEnumerable<MessageTemplateNotification>>(ex);
-            return new[] { fault };
+            return [fault];
         }
     }
 
@@ -197,7 +197,7 @@ public class SubscriptionNotificationService<TBLLContext>
 
         if (!successResults.Any())
         {
-            return Enumerable.Empty<ITryResult<MessageTemplateNotification>>();
+            return [];
         }
 
         var templates = successResults.SelectMany(r => r.GetValue());
@@ -228,7 +228,7 @@ public class SubscriptionNotificationService<TBLLContext>
 
     private IEnumerable<ITryResult<Subscription>> GetFaults<T>(ITryResult<T> tryResult)
     {
-        return this.GetFaults(new[] { tryResult });
+        return this.GetFaults([tryResult]);
     }
 
     private ILogger<SubscriptionNotificationService<TBLLContext>> GetLogger() =>

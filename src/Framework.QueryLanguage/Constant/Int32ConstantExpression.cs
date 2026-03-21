@@ -1,13 +1,3 @@
-﻿using System.Runtime.Serialization;
+﻿namespace Framework.QueryLanguage;
 
-namespace Framework.QueryLanguage;
-
-[DataContract]
-public class Int32ConstantExpression : ConstantExpression<int>
-{
-    public Int32ConstantExpression(int value)
-            : base (value)
-    {
-
-    }
-}
+public record Int32ConstantExpression(int Value) : ConstantExpression<int>(Value);

@@ -1,11 +1,12 @@
 ﻿using CommonFramework;
 using CommonFramework.Maybe;
 
+using Framework.BLL.Domain.Attributes;
+using Framework.BLL.Domain.Extensions;
 using Framework.Core;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
-using Framework.Security;
 
 namespace Framework.Projection.Lambda;
 

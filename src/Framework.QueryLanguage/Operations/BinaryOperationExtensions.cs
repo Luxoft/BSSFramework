@@ -6,150 +6,60 @@ namespace Framework.QueryLanguage;
 [DataContract]
 public static class BinaryOperationExtensions
 {
-    public static string ToFormatString(this BinaryOperation operation)
-    {
-        switch (operation)
+    public static string ToFormatString(this BinaryOperation operation) =>
+        operation switch
         {
-            case BinaryOperation.Equal:
-                return "==";
+            BinaryOperation.Equal => "==",
+            BinaryOperation.GreaterThanOrEqual => ">=",
+            BinaryOperation.LessThanOrEqual => "<=",
+            BinaryOperation.NotEqual => "!=",
+            BinaryOperation.GreaterThan => ">",
+            BinaryOperation.LessThan => "<",
+            BinaryOperation.Add => "+",
+            BinaryOperation.Subtract => "-",
+            BinaryOperation.Mul => "*",
+            BinaryOperation.Div => "/",
+            BinaryOperation.Mod => "%",
+            BinaryOperation.OrElse => "||",
+            BinaryOperation.AndAlso => "&&",
+            _ => throw new ArgumentOutOfRangeException(nameof(operation))
+        };
 
-            case BinaryOperation.GreaterThanOrEqual:
-                return ">=";
-
-            case BinaryOperation.LessThanOrEqual:
-                return "<=";
-
-            case BinaryOperation.NotEqual:
-                return "!=";
-
-            case BinaryOperation.GreaterThan:
-                return ">";
-
-            case BinaryOperation.LessThan:
-                return "<";
-
-            case BinaryOperation.Add:
-                return "+";
-
-            case BinaryOperation.Subtract:
-                return "-";
-
-            case BinaryOperation.Mul:
-                return "*";
-
-            case BinaryOperation.Div:
-                return "/";
-
-            case BinaryOperation.Mod:
-                return "%";
-
-            case BinaryOperation.OrElse:
-                return "||";
-
-            case BinaryOperation.AndAlso:
-                return "&&";
-
-            default:
-                throw new ArgumentOutOfRangeException(nameof(operation));
-        }
-    }
-
-    public static ExpressionType ToExpressionType(this BinaryOperation operation)
-    {
-        switch (operation)
+    public static ExpressionType ToExpressionType(this BinaryOperation operation) =>
+        operation switch
         {
-            case BinaryOperation.Equal:
-                return ExpressionType.Equal;
+            BinaryOperation.Equal => ExpressionType.Equal,
+            BinaryOperation.GreaterThanOrEqual => ExpressionType.GreaterThanOrEqual,
+            BinaryOperation.LessThanOrEqual => ExpressionType.LessThanOrEqual,
+            BinaryOperation.NotEqual => ExpressionType.NotEqual,
+            BinaryOperation.GreaterThan => ExpressionType.GreaterThan,
+            BinaryOperation.LessThan => ExpressionType.LessThan,
+            BinaryOperation.Add => ExpressionType.Add,
+            BinaryOperation.Subtract => ExpressionType.Subtract,
+            BinaryOperation.Mul => ExpressionType.Multiply,
+            BinaryOperation.Div => ExpressionType.Divide,
+            BinaryOperation.Mod => ExpressionType.Modulo,
+            BinaryOperation.OrElse => ExpressionType.OrElse,
+            BinaryOperation.AndAlso => ExpressionType.AndAlso,
+            _ => throw new ArgumentOutOfRangeException(nameof(operation))
+        };
 
-            case BinaryOperation.GreaterThanOrEqual:
-                return ExpressionType.GreaterThanOrEqual;
-
-            case BinaryOperation.LessThanOrEqual:
-                return ExpressionType.LessThanOrEqual;
-
-            case BinaryOperation.NotEqual:
-                return ExpressionType.NotEqual;
-
-            case BinaryOperation.GreaterThan:
-                return ExpressionType.GreaterThan;
-
-            case BinaryOperation.LessThan:
-                return ExpressionType.LessThan;
-
-            case BinaryOperation.Add:
-                return ExpressionType.Add;
-
-            case BinaryOperation.Subtract:
-                return ExpressionType.Subtract;
-
-            case BinaryOperation.Mul:
-                return ExpressionType.Multiply;
-
-            case BinaryOperation.Div:
-                return ExpressionType.Divide;
-
-            case BinaryOperation.Mod:
-                return ExpressionType.Modulo;
-
-            case BinaryOperation.OrElse:
-                return ExpressionType.OrElse;
-
-            case BinaryOperation.AndAlso:
-                return ExpressionType.AndAlso;
-
-            default:
-                throw new ArgumentOutOfRangeException(nameof(operation));
-        }
-    }
-
-    public static int GetPriority(this BinaryOperation operation)
-    {
-        switch (operation)
+    public static int GetPriority(this BinaryOperation operation) =>
+        operation switch
         {
-            case BinaryOperation.Equal:
-                return 0;
-
-            case BinaryOperation.GreaterThanOrEqual:
-                return 0;
-
-            case BinaryOperation.LessThanOrEqual:
-                return 0;
-
-            case BinaryOperation.NotEqual:
-                return 0;
-
-            case BinaryOperation.GreaterThan:
-                return 0;
-
-            case BinaryOperation.LessThan:
-                return 0;
-
-            case BinaryOperation.Add:
-                return 1;
-
-            case BinaryOperation.Subtract:
-                return 1;
-
-            case BinaryOperation.Mul:
-                return 2;
-
-            case BinaryOperation.Div:
-                return 2;
-
-            case BinaryOperation.Mod:
-                return 2;
-
-            case BinaryOperation.OrElse:
-                return -1;
-
-            case BinaryOperation.AndAlso:
-                return -1;
-
-            //case BinaryOperation.Pow: Правоассоциативная операция, приоритет выше, чем у унарных
-            //    return 40;
-
-            default:
-                throw new ArgumentOutOfRangeException(nameof(operation));
-        }
-    }
+            BinaryOperation.Equal => 0,
+            BinaryOperation.GreaterThanOrEqual => 0,
+            BinaryOperation.LessThanOrEqual => 0,
+            BinaryOperation.NotEqual => 0,
+            BinaryOperation.GreaterThan => 0,
+            BinaryOperation.LessThan => 0,
+            BinaryOperation.Add => 1,
+            BinaryOperation.Subtract => 1,
+            BinaryOperation.Mul => 2,
+            BinaryOperation.Div => 2,
+            BinaryOperation.Mod => 2,
+            BinaryOperation.OrElse => -1,
+            BinaryOperation.AndAlso => -1,
+            _ => throw new ArgumentOutOfRangeException(nameof(operation))
+        };
 }

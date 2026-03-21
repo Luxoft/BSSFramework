@@ -128,7 +128,7 @@ public static class FieldInfoExtension
             }
         }
 
-        return Enumerable.Empty<Attribute> ();
+        return [];
     }
 
     public static IEnumerable<Attribute> GetAttributes(this FieldInfo field, Type declarationType)

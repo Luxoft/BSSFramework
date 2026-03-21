@@ -10,7 +10,7 @@ internal sealed class TestSubscription : SubscriptionWithCustomModelMetadata<obj
     private LambdaMetadata<object, object, bool> conditionLambda = new ConditionLambda();
     private LambdaMetadata<object, object, IEnumerable<NotificationMessageGenerationInfo>> generationLambda = new GenerationLambda();
     private LambdaMetadata<object, object, IEnumerable<NotificationMessageGenerationInfo>> copyGenerationLambda = new CopyGenerationLambda();
-    private IEnumerable<ISecurityItemSourceLambdaMetadata<object, object, ISecurityContext>> securityItemSourceLambdas = new[] { new SecurityItemSourceSourceLambda() };
+    private IEnumerable<ISecurityItemSourceLambdaMetadata<object, object, ISecurityContext>> securityItemSourceLambdas = [new SecurityItemSourceSourceLambda()];
 
     public override string SenderName => this.senderName;
 
@@ -32,7 +32,7 @@ internal sealed class TestSubscription : SubscriptionWithCustomModelMetadata<obj
     public override RecepientsSelectorMode RecepientsSelectorMode { get; protected set; } =
         RecepientsSelectorMode.RolesExceptGeneration;
 
-    public override IEnumerable<SecurityRole> SubBusinessRoles { get; protected set; } = new[] { SecurityRole.Administrator };
+    public override IEnumerable<SecurityRole> SubBusinessRoles { get; protected set; } = [SecurityRole.Administrator];
 
     public override bool SendIndividualLetters { get; protected set; } = true;
 

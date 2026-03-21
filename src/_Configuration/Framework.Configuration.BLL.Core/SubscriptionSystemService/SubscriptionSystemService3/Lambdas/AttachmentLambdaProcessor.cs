@@ -33,7 +33,7 @@ public class AttachmentLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLContex
 
         if (!DomainObjectCompliesLambdaRequiredMode(lambda, versions))
         {
-            return Enumerable.Empty<NativeAttachment>();
+            return [];
         }
 
         var result = this.TryInvoke(subscription, versions, this.InvokeWithTypedContext);
@@ -58,6 +58,6 @@ public class AttachmentLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLContex
             return this.TryCast<IEnumerable<NativeAttachment>>(funcValue(this.BllContext, versions));
         }
 
-        return Enumerable.Empty<NativeAttachment>();
+        return [];
     }
 }

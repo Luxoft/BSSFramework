@@ -3,15 +3,10 @@
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Configurator.ApplicationVariable</PackageId>
     <RootNamespace>Framework.Configurator</RootNamespace>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="IvAt.SecuritySystem.Configurator" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\_DomainDriven\Framework.ApplicationVariable\Framework.ApplicationVariable.csproj" />
   </ItemGroup>
 
 </Project>

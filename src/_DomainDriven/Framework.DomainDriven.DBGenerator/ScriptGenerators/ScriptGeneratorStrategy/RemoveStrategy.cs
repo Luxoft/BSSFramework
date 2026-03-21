@@ -54,7 +54,7 @@ internal class RemoveStrategy : ScriptGeneratorStrategyBase
 
     private void RemoveColumns(Column removableColumn)
     {
-        this.RemoveColumns(removableColumn.Parent as Table, new[] { removableColumn });
+        this.RemoveColumns(removableColumn.Parent as Table, [removableColumn]);
     }
 
     private void RemoveColumns(Table table, IEnumerable<Column> removableColums)

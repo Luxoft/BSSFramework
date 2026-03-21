@@ -14,8 +14,6 @@
 
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.BLL.Core\Framework.Configuration.BLL.Core.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.Generated.DTO\Framework.Configuration.Generated.DTO.csproj" />
-
-    <ProjectReference Include="..\Framework.DomainDriven.BLL.Security\Framework.DomainDriven.BLL.Security.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.ServiceModel\Framework.DomainDriven.ServiceModel.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.WebApiNetCore\Framework.DomainDriven.WebApiNetCore.csproj" />
   </ItemGroup>

@@ -50,7 +50,7 @@ public class WrongSecurityMessageTests : TestBase
         var action = () => this.Evaluate(
                          DBSessionMode.Read,
                          TestPrincipalName,
-                         ctx => ctx.Logics.EmployeeFactory.Create(securityRule).CheckAccess(ctx.Logics.Employee.GetCurrent()));
+                         ctx => ctx.Logics.EmployeeFactory.Create(securityRule).CheckAccess(ctx.CurrentEmployeeSource.CurrentUser));
 
         // Assert
         action.Should()

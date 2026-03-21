@@ -12,8 +12,7 @@ public partial class TestBusinessUnit
 
     public override string[][] CalcMatrix => new string[][]
                                              {
-                                                     new string[] { "A", "B" },
-                                                     new string[] { "B", "C" }
+                                                 ["A", "B"], ["B", "C"]
                                              };
 
     public override TestBusinessUnitType CalcProjectionProp => null;

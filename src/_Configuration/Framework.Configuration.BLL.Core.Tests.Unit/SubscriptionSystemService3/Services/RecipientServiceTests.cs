@@ -52,9 +52,9 @@ public class RecipientServiceTests : TestFixtureBase
         var recipient = this.Fixture.Create<Recipient>();
 
         var bag = new RecipientsBag(
-                                    new RecipientCollection(new[] { recipient }),
-                                    new RecipientCollection(new[] { this.Fixture.Create<Recipient>() }),
-                                    new RecipientCollection(new[] { this.Fixture.Create<Recipient>() }));
+                                    new RecipientCollection([recipient]),
+                                    new RecipientCollection([this.Fixture.Create<Recipient>()]),
+                                    new RecipientCollection([this.Fixture.Create<Recipient>()]));
 
         var resolverResult = new RecipientsResolverResult(
                                                           bag,
@@ -66,7 +66,7 @@ public class RecipientServiceTests : TestFixtureBase
 
         this.recipientsResolver
             .Resolve(subscription, versions)
-            .Returns(new[] { resolverResult });
+            .Returns([resolverResult]);
 
         // Act
         var service = this.Fixture.Create<RecipientService<ITestBLLContext>>();

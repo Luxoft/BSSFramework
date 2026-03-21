@@ -16,7 +16,7 @@ public static class MessageTemplateNotificationSenderExtensions
         if (contextObject == null) throw new ArgumentNullException(nameof(contextObject));
         if (receivers == null) throw new ArgumentNullException(nameof(receivers));
 
-        sender.Send(new MessageTemplateNotification(messageTemplateCode, contextObject, typeof(T), receivers,  Enumerable.Empty<System.Net.Mail.Attachment>(), subscription));
+        sender.Send(new MessageTemplateNotification(messageTemplateCode, contextObject, typeof(T), receivers,  [], subscription));
     }
 
     /// <summary>

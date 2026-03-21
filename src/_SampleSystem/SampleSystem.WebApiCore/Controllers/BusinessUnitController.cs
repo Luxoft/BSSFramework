@@ -34,7 +34,7 @@ public partial class BusinessUnitController
                              {
                                  var bll = evaluateData.Context.Logics.BusinessUnit;
                                  var selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-                                 var typedSelectOperation = evaluateData.Context.StandartExpressionBuilder.ToTyped<BusinessUnit>(selectOperation);
+                                 var typedSelectOperation = evaluateData.Context.StandardExpressionBuilder.ToTyped<BusinessUnit>(selectOperation);
 
                                  var odataTree = bll.GetTreeByOData(
                                                                     typedSelectOperation,

@@ -4,13 +4,13 @@ namespace Framework.Validation;
 
 public class MaxLengthValidator : IDynamicPropertyValidator
 {
-    private readonly int _maxLength;
+    private readonly int maxLength;
 
     public MaxLengthValidator(int maxLength)
     {
         if (maxLength < 0) { throw new ArgumentOutOfRangeException(nameof(maxLength)); }
 
-        this._maxLength = maxLength;
+        this.maxLength = maxLength;
     }
 
     public IPropertyValidator GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
@@ -22,7 +22,7 @@ public class MaxLengthValidator : IDynamicPropertyValidator
 
         var ctor = validatorType.GetConstructors().Single();
 
-        return (IPropertyValidator)ctor.Invoke(new object[] { this._maxLength });
+        return (IPropertyValidator)ctor.Invoke([this.maxLength]);
     }
 
     public Type GetValidatorType(PropertyInfo property)
@@ -45,13 +45,13 @@ public class MaxLengthValidator : IDynamicPropertyValidator
 
     public class StringMaxLengthValidator<TSource> : IPropertyValidator<TSource, string>
     {
-        private readonly int _maxLength;
+        private readonly int maxLength;
 
         public StringMaxLengthValidator(int maxLength)
         {
             if (maxLength < 0) { throw new ArgumentOutOfRangeException(nameof(maxLength)); }
 
-            this._maxLength = maxLength;
+            this.maxLength = maxLength;
         }
 
         public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, string> context)
@@ -62,27 +62,20 @@ public class MaxLengthValidator : IDynamicPropertyValidator
             }
 
             return ValidationResult.FromCondition(
-                                                  context.Value == null || context.Value.Length <= this._maxLength,
-                                                  () => $"The length of {context.GetPropertyName()} property of {context.GetSourceTypeName()} should not be more than {this._maxLength}");
+                                                  context.Value == null || context.Value.Length <= this.maxLength,
+                                                  () => $"The length of {context.GetPropertyName()} property of {context.GetSourceTypeName()} should not be more than {this.maxLength}");
         }
     }
 
-    public class BinaryMaxLengthValidator<TSource> : IPropertyValidator<TSource, byte[]>
+    public class BinaryMaxLengthValidator<TSource>(int maxLength) : IPropertyValidator<TSource, byte[]>
     {
-        private readonly int _maxLength;
-
-        public BinaryMaxLengthValidator(int maxLength)
-        {
-            this._maxLength = maxLength;
-        }
-
         public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, byte[]> context)
         {
             if (context == null) throw new ArgumentNullException(nameof(context));
 
             return ValidationResult.FromCondition(
-                                                  context.Value == null || context.Value.Length <= this._maxLength,
-                                                  () => $"The length of {context.GetPropertyName()} property of {context.GetSourceTypeName()} should not be more than {this._maxLength}");
+                                                  context.Value == null || context.Value.Length <= maxLength,
+                                                  () => $"The length of {context.GetPropertyName()} property of {context.GetSourceTypeName()} should not be more than {maxLength}");
         }
     }
 }

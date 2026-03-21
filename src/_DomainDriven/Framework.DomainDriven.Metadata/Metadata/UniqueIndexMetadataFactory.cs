@@ -91,7 +91,7 @@ public class UniqueIndexMetadataReader
 
             var fields = refFields.Where(z => z.Attributes.OfType<UniqueElementAttribute>().Any(q => q.Key == groupName)).ToList();
 
-            var uniqueFields = fields.Union(new[] { masterRef }).ToList();
+            var uniqueFields = fields.Union([masterRef]).ToList();
 
             yield return new UniqueIndexMetadata(domainTypeMetadata, groupName, uniqueFields);
         }

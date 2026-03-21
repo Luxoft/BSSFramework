@@ -95,7 +95,7 @@ public class AuditReaderPatched : AuditReader, IAuditReaderPatched
 
         var resultList = from object[] revisionoObject in auditDomainObjects
                          where revisionoObject[0] is T && revisionoObject[1].GetType().FullName.Contains("AuditRevisionEntity")
-                         let revisionNumber = (long)revisionoObject[1].GetType().GetProperty("Id", typeof(long)).GetValue(revisionoObject[1], new object[] { })
+                         let revisionNumber = (long)revisionoObject[1].GetType().GetProperty("Id", typeof(long)).GetValue(revisionoObject[1], [])
                          select new Tuple<T, long>(revisionoObject[0] as T, revisionNumber);
 
         return resultList.ToList();

@@ -3,7 +3,6 @@
   <PropertyGroup>
     <PackageId>Luxoft.Framework.DomainDriven.Setup.Abstract</PackageId>
     <RootNamespace>Framework.DomainDriven.Setup</RootNamespace>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

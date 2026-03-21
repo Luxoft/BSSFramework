@@ -33,7 +33,8 @@ public class AnonymousTypeByPropertyBuilder<TMap, TMapMember> : AnonymousTypeByM
         }
 
         {
-            var setMethod = typeBuilder.DefineMethod("set_" + member.Name, MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.HideBySig | MethodAttributes.SpecialName, typeof(void), new[] { member.Type });
+            var setMethod = typeBuilder.DefineMethod("set_" + member.Name, MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.HideBySig | MethodAttributes.SpecialName, typeof(void),
+                                                     [member.Type]);
 
             var ilGenerator = setMethod.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ldarg_0);

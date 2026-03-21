@@ -24,7 +24,7 @@ public sealed class ExceptionMessageSenderTests : TestFixtureBase
 {
     private static readonly MailAddress FromAddress = new MailAddress("support@luxoft.com");
 
-    private static readonly string[] ToAddresses = { "user@luxoft.com" };
+    private static readonly string[] ToAddresses = ["user@luxoft.com"];
 
     private IAuthorizationBLLContext authorizationBLLContext;
 

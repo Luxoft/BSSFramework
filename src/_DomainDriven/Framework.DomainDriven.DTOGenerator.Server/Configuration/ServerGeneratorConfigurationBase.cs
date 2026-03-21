@@ -281,7 +281,7 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
 
         if (baseFileType is DomainOperationEventDTOFileType || baseFileType == ServerFileType.BaseEventDTO)
         {
-            return new PropertyInfo[0];
+            return Array.Empty<PropertyInfo>();
         }
 
         var clientFileType = baseFileType == ServerFileType.SimpleEventDTO || baseFileType == ServerFileType.SimpleIntegrationDTO
@@ -332,9 +332,9 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
     /// <returns><see cref="IEnumerable{DTOFileType}"/>.</returns>
     protected virtual IEnumerable<DTOFileType> GetLambdaConvertTypes()
     {
-        return new[]
-               {
-                       FileType.IdentityDTO,
+        return
+        [
+            FileType.IdentityDTO,
                        FileType.VisualDTO,
                        FileType.SimpleDTO,
                        FileType.FullDTO,
@@ -346,7 +346,7 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
                        ServerFileType.RichEventDTO,
                        ServerFileType.SimpleIntegrationDTO,
                        ServerFileType.RichIntegrationDTO
-               };
+        ];
     }
 
 

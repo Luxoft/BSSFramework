@@ -15,7 +15,7 @@ public static class StubProxyFactory
         var result = Intercept.ThroughProxy(
                                             defaultSource,
                                             new InterfaceInterceptor(),
-                                            new[] { new OverrideMethodInterceptor(overrideMethoBuilder.OverrideMethods) });
+                                            [new OverrideMethodInterceptor(overrideMethoBuilder.OverrideMethods)]);
 
         return result;
     }

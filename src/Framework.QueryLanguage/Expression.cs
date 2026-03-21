@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Runtime.Serialization;
 
 using CommonFramework;
 using CommonFramework.Maybe;
@@ -7,107 +6,85 @@ using CommonFramework.Maybe;
 using Framework.Core;
 using SExpressions = System.Linq.Expressions;
 
-
 namespace Framework.QueryLanguage;
 
-[DataContract]
-[KnownType("GetKnownTypes")]
-public abstract class Expression : IEquatable<Expression>
+public abstract record Expression
 {
-    internal Expression()
-    {
+    public static LambdaExpression Create<TDelegate>(SExpressions.Expression<TDelegate> standardExpression) =>
+        (LambdaExpression)Create((SExpressions.Expression)standardExpression);
 
-    }
+    internal static Expression Create(SExpressions.Expression baseExpression) =>
+        CreateInternal(baseExpression.ExtractBoxingValue());
 
-    public static IEnumerable<Type> GetKnownTypes()
-    {
-        return typeof(Expression).Assembly.GetTypes().Where(t => typeof(Expression).IsAssignableFrom(t) && !t.IsGenericType);
-    }
+    internal static Expression CreateInternal(SExpressions.Expression baseExpression) =>
 
-    public static LambdaExpression Create<TDelegate>(SExpressions.Expression<TDelegate> standartExpression)
-    {
-        return (LambdaExpression)Create((SExpressions.Expression)standartExpression);
-    }
+        (from expression in (baseExpression as SExpressions.LambdaExpression).ToMaybe()
 
-    internal static Expression Create(SExpressions.Expression baseExpression)
-    {
-        if (baseExpression == null) throw new ArgumentNullException(nameof(baseExpression));
-
-        return CreateInternal(baseExpression.ExtractBoxingValue());
-    }
-
-    internal static Expression CreateInternal(SExpressions.Expression baseExpression)
-    {
-        if (baseExpression == null) throw new ArgumentNullException(nameof(baseExpression));
-
-        return (from expression in (baseExpression as SExpressions.LambdaExpression).ToMaybe()
-
-                select new LambdaExpression(expression))
+         select new LambdaExpression(expression))
 
 
-               .Or(() => from expression in baseExpression.GetDeepMemberConstExpression()
+        .Or(() => from expression in baseExpression.GetDeepMemberConstExpression()
 
-                         select (Expression)CreateConstant(expression.Type, expression.Value))
-
-
-               .Or(() => from expression in (baseExpression as SExpressions.MemberExpression).ToMaybe()
-
-                         where expression.Member is PropertyInfo || expression.Member is FieldInfo
-
-                         select (Expression)new PropertyExpression(Create(expression.Expression), expression.Member.Name))
+                  select (Expression)CreateConstant(expression.Type, expression.Value))
 
 
-               .Or(() => from expression in (baseExpression as SExpressions.BinaryExpression).ToMaybe()
+        .Or(() => from expression in (baseExpression as SExpressions.MemberExpression).ToMaybe()
 
-                         from left in expression.Left.GetConvertOperand()
+                  where expression.Member is PropertyInfo || expression.Member is FieldInfo
 
-                         where left.Type.IsEnum
-
-                         from enumUnderValue in expression.Right.GetDeepMemberConstValue()
-
-                         let enumValue = Enum.ToObject(left.Type, enumUnderValue)
-
-                         let enumValueConst = SExpressions.Expression.Constant(enumValue)
-
-                         select CreateInternal(SExpressions.Expression.MakeBinary(expression.NodeType, left, enumValueConst)))
+                  select (Expression)new PropertyExpression(Create(expression.Expression!), expression.Member.Name))
 
 
-               .Or(() => from expression in (baseExpression as SExpressions.BinaryExpression).ToMaybe()
+        .Or(() => from expression in (baseExpression as SExpressions.BinaryExpression).ToMaybe()
 
-                         from right in expression.Right.GetConvertOperand()
+                  from left in expression.Left.GetConvertOperand()
 
-                         where right.Type.IsEnum
+                  where left.Type.IsEnum
 
-                         from enumUnderValue in expression.Left.GetDeepMemberConstValue()
+                  from enumUnderValue in expression.Right.GetDeepMemberConstValue()
 
-                         let enumValue = Enum.ToObject(right.Type, enumUnderValue)
+                  let enumValue = Enum.ToObject(left.Type, enumUnderValue)
 
-                         let enumValueConst = SExpressions.Expression.Constant(enumValue)
+                  let enumValueConst = SExpressions.Expression.Constant(enumValue)
 
-                         select CreateInternal(SExpressions.Expression.MakeBinary(expression.NodeType, enumValueConst, right)))
-
-
-               .Or(() => from expression in (baseExpression as SExpressions.BinaryExpression).ToMaybe()
-
-                         select (Expression)new BinaryExpression(expression))
+                  select CreateInternal(SExpressions.Expression.MakeBinary(expression.NodeType, left, enumValueConst)))
 
 
-               .Or(() => from expression in (baseExpression as SExpressions.ParameterExpression).ToMaybe()
+        .Or(() => from expression in (baseExpression as SExpressions.BinaryExpression).ToMaybe()
 
-                         select (Expression)new ParameterExpression(expression.Name))
+                  from right in expression.Right.GetConvertOperand()
 
-               .Or(() => from expression in (baseExpression as SExpressions.MethodCallExpression).ToMaybe()
+                  where right.Type.IsEnum
 
-                         from methodType in expression.Method.GetMethodType().ToMaybe()
+                  from enumUnderValue in expression.Left.GetDeepMemberConstValue()
 
-                         select (Expression)expression.GetChildren()
-                                                      .Select(Create)
-                                                      .GetByFirst((head, tail) => new MethodExpression(head, methodType, tail)))
+                  let enumValue = Enum.ToObject(right.Type, enumUnderValue)
 
-               .GetValue(() => new NotImplementedException());
-    }
+                  let enumValueConst = SExpressions.Expression.Constant(enumValue)
 
-    internal static ConstantExpression CreateConstant(Type constType, object constValue)
+                  select CreateInternal(SExpressions.Expression.MakeBinary(expression.NodeType, enumValueConst, right)))
+
+
+        .Or(() => from expression in (baseExpression as SExpressions.BinaryExpression).ToMaybe()
+
+                  select (Expression)new BinaryExpression(expression))
+
+
+        .Or(() => from expression in (baseExpression as SExpressions.ParameterExpression).ToMaybe()
+
+                  select (Expression)new ParameterExpression(expression.Name!))
+
+        .Or(() => from expression in (baseExpression as SExpressions.MethodCallExpression).ToMaybe()
+
+                  from methodType in expression.Method.GetMethodType().ToMaybe()
+
+                  select (Expression)expression.GetChildren()
+                                               .Select(Create)
+                                               .GetByFirst((head, tail) => new MethodExpression(head, methodType, [.. tail])))
+
+        .GetValue(() => new NotImplementedException());
+
+    internal static ConstantExpression CreateConstant(Type constType, object? constValue)
     {
         if (constType == null) throw new ArgumentNullException(nameof(constType));
 
@@ -115,7 +92,6 @@ public abstract class Expression : IEquatable<Expression>
         {
             return NullConstantExpression.Value;
         }
-
 
         if (constType == typeof(string))
         {
@@ -155,10 +131,9 @@ public abstract class Expression : IEquatable<Expression>
         if (constType.IsNullable())
         {
             return CreateNullableConstantMethod.MakeGenericMethod(constType.GetGenericArguments().Single())
-                                               .Invoke(null, new[] { constValue }) as ConstantExpression;
+                                               .Invoke<ConstantExpression>(null, [constValue]);
 
         }
-
 
         throw new NotImplementedException();
     }
@@ -166,39 +141,7 @@ public abstract class Expression : IEquatable<Expression>
     private static readonly MethodInfo CreateNullableConstantMethod = new Func<int?, ConstantExpression>(CreateNullableConstant).Method.GetGenericMethodDefinition();
 
     internal static ConstantExpression CreateNullableConstant<TConstValue>(TConstValue? constValue)
-            where TConstValue : struct
-    {
-        return constValue.ToMaybe().Select(v => CreateConstant(typeof(TConstValue), v)).GetValueOrDefault((ConstantExpression)NullConstantExpression.Value);
-    }
+        where TConstValue : struct =>
+        constValue.ToMaybe().Select(v => CreateConstant(typeof(TConstValue), v)).GetValueOrDefault((ConstantExpression)NullConstantExpression.Value);
 
-    public override bool Equals(object obj)
-    {
-        return this.Equals(obj as Expression);
-    }
-
-    public override int GetHashCode()
-    {
-        return this.GetType().GetHashCode();
-    }
-
-    public bool Equals(Expression other)
-    {
-        return ReferenceEquals(this, other)
-               || (!ReferenceEquals(null, other) && this.InternalEquals(other));
-    }
-
-
-    protected abstract bool InternalEquals(Expression other);
-
-
-    public static bool operator ==(Expression expression, Expression otherExpression)
-    {
-        return ReferenceEquals(expression, otherExpression)
-               || (!ReferenceEquals(expression, null) && expression.Equals(otherExpression));
-    }
-
-    public static bool operator !=(Expression expression, Expression otherExpression)
-    {
-        return !(expression == otherExpression);
-    }
 }

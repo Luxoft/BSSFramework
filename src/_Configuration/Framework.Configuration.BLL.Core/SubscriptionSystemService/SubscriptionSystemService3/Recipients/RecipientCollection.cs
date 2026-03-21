@@ -9,7 +9,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 public sealed class RecipientCollection : IEnumerable<Recipient>
 {
     private static readonly RecipientComparer Comparer = new RecipientComparer();
-    private readonly List<Recipient> store = new List<Recipient>();
+    private readonly List<Recipient> store = [];
 
     /// <summary>Создаёт экземпляр класса <see cref="RecipientCollection"/>.</summary>
     public RecipientCollection()

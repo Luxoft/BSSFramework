@@ -58,7 +58,7 @@ internal sealed class ByRolesRecipientsResolverTyped<TBLLContext> : ByRolesRecip
 
         var notificationFilterGroup = (NotificationFilterGroup)method.Invoke(
                                                                              this,
-                                                                             new object[] { securityItem, versions })!;
+                                                                             [securityItem, versions])!;
 
         return notificationFilterGroup;
     }

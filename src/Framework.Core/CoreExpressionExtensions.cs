@@ -248,7 +248,7 @@ public static class CoreExpressionExtensions
     {
         private readonly Expression _startNode;
 
-        private readonly List<NodeExpressionVisitor> ChildVisitors = new List<NodeExpressionVisitor>();
+        private readonly List<NodeExpressionVisitor> ChildVisitors = [];
 
         public NodeExpressionVisitor(Expression startNode)
         {

@@ -18,8 +18,6 @@
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.BLL\Framework.Configuration.BLL.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.Generated.DTO\Framework.Configuration.Generated.DTO.csproj" />
 
-    <ProjectReference Include="..\Framework.DomainDriven.Core.LegacyContext\Framework.DomainDriven.Core.LegacyContext.csproj" />
-
     <ProjectReference Include="..\Framework.DomainDriven.ServiceModel\Framework.DomainDriven.ServiceModel.csproj" />
 
     <ProjectReference Include="..\Framework.Events\Framework.Events.csproj" />

@@ -19,7 +19,7 @@ public class AddHoursGenerator : BaseHqlGeneratorForMethod
     /// </summary>
     public AddHoursGenerator()
     {
-        this.SupportedMethods = new[] { ReflectionHelper.GetMethodDefinition<DateTime?>(d => d.Value.AddHours(0)) };
+        this.SupportedMethods = [ReflectionHelper.GetMethodDefinition<DateTime?>(d => d.Value.AddHours(0))];
     }
 
     /// <summary>

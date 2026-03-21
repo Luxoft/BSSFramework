@@ -1,84 +1,33 @@
 ﻿using System.Linq.Expressions;
 
 using CommonFramework;
-using CommonFramework.ExpressionEvaluate;
-
-using Framework.Core;
 
 namespace Framework.OData;
 
-public class SelectOrder<TDomainObject, TOrderKey> : ISelectOrder<TDomainObject>
+public record SelectOrder<TDomainObject, TOrderKey>(Expression<Func<TDomainObject, TOrderKey>> Path) : SelectOrder<TDomainObject>
 {
-    public SelectOrder(Expression<Func<TDomainObject, TOrderKey>> path, OrderType orderType)
-    {
-        if (path == null) throw new ArgumentNullException(nameof(path));
-        if (!Enum.IsDefined(typeof (OrderType), orderType)) throw new ArgumentOutOfRangeException(nameof(orderType));
+    public override LambdaExpression BasePath => this.BasePath;
 
-        this.Path = path;
-        this.OrderType = orderType;
-    }
+    public override IQueryable<TDomainObject> Process(IQueryable<TDomainObject> queryable) =>
 
-
-    public Expression<Func<TDomainObject, TOrderKey>> Path { get; private set; }
-    public OrderType OrderType { get; private set; }
-
-
-    public IQueryable<TDomainObject> Process(IQueryable<TDomainObject> queryable, bool compile)
-    {
-        if (queryable == null) throw new ArgumentNullException(nameof(queryable));
-
-        if (compile)
+        this.OrderType switch
         {
-            var path = LambdaCompileCache.GetFunc(this.Path);
+            OrderType.Asc => queryable.OrderBy(this.Path),
+            OrderType.Desc => queryable.OrderByDescending(this.Path),
+            _ => throw new ArgumentOutOfRangeException(nameof(this.OrderType))
+        };
 
-            switch (this.OrderType)
-            {
-                case OrderType.Asc:
-                    return queryable.OrderBy(path).AsQueryable();
+    public override SelectOrder<TDomainObject> Visit(ExpressionVisitor visitor) => this with { Path = this.Path.UpdateBody(visitor) };
+}
 
-                case OrderType.Desc:
-                    return queryable.OrderByDescending(path).AsQueryable();
+public abstract record SelectOrder<TDomainObject>
+{
 
-                default:
-                    throw new ArgumentOutOfRangeException("this._orderType");
-            }
-        }
-        else
-        {
-            switch (this.OrderType)
-            {
-                case OrderType.Asc:
-                    return queryable.OrderBy(this.Path);
+    public abstract LambdaExpression BasePath { get; }
 
-                case OrderType.Desc:
-                    return queryable.OrderByDescending(this.Path);
+    public required OrderType OrderType { get; init; }
 
-                default:
-                    throw new ArgumentOutOfRangeException("this._orderType");
-            }
-        }
-    }
+    public abstract IQueryable<TDomainObject> Process(IQueryable<TDomainObject> queryable);
 
-    public ISelectOrder<TOutput> Covariance<TOutput>()
-            where TOutput : TDomainObject
-    {
-        var newPath = this.Path.Covariance<TOutput, TDomainObject, TOrderKey>();
-
-        return new SelectOrder<TOutput, TOrderKey>(newPath, this.OrderType);
-    }
-
-    public ISelectOrder<TDomainObject> Visit(ExpressionVisitor visitor)
-    {
-        if (visitor == null) throw new ArgumentNullException(nameof(visitor));
-
-        var newPath = this.Path.UpdateBody(visitor);
-
-        return new SelectOrder<TDomainObject, TOrderKey>(newPath, this.OrderType);
-    }
-
-
-    LambdaExpression ISelectOrder<TDomainObject>.Path => this.Path;
-
-
-    private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
+    public abstract SelectOrder<TDomainObject> Visit(ExpressionVisitor visitor);
 }

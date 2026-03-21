@@ -1,33 +1,14 @@
 ﻿using System.Runtime.Serialization;
 
-using CommonFramework;
-
 namespace Framework.QueryLanguage;
 
 [DataContract]
-public class EnumConstantExpression : ConstantExpression<string>
+public record EnumConstantExpression(string Value) : ConstantExpression<string>(Value)
 {
     public EnumConstantExpression(Enum value)
-            : base(value.FromMaybe(() => new ArgumentNullException(nameof(value))).ToString())
+        : this(value.ToString())
     {
-
     }
 
-    public EnumConstantExpression(string value)
-            : base(value)
-    {
-
-    }
-
-    //public override System.Type ValueType
-    //{
-    //    get { return typeof(Enum); }
-    //}
-
-
-
-    public override string ToString()
-    {
-        return $"\"{this.Value}\"";
-    }
+    public override string ToString() => $"\"{this.Value}\"";
 }

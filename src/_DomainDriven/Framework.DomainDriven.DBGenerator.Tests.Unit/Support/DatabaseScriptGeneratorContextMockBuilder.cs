@@ -27,7 +27,7 @@ public class DatabaseScriptGeneratorContextMockBuilder
         this.DatabaseScriptGeneratorContext.SqlDatabaseFactory.Returns(this.SqlDatabaseFactory);
         this.DatabaseScriptGeneratorContext.AssemblyMetadata.Returns(new AssemblyMetadata(typeof(object))
                                                                      {
-                                                                             DomainTypes = new DomainTypeMetadata[0]
+                                                                             DomainTypes = Array.Empty<DomainTypeMetadata>()
                                                                      });
     }
 

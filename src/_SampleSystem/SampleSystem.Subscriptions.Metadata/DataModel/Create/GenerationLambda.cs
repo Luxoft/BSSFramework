@@ -18,6 +18,6 @@ public sealed class GenerationLambda : GenerationLambdaBase<DateModel>
             ISampleSystemBLLContext context,
             DomainObjectVersions<DateModel> versions)
     {
-        return new[] { new NotificationMessageGenerationInfo("tester@luxoft.com", versions.Previous, versions.Current) };
+        return [new NotificationMessageGenerationInfo("tester@luxoft.com", versions.Previous, versions.Current)];
     }
 }

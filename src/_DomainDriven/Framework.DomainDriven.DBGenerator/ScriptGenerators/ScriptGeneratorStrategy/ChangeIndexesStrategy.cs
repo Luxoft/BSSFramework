@@ -218,7 +218,7 @@ internal class ChangeIndexesStrategy : ScriptGeneratorStrategyBase
         foreach (var mappingInfo in sqlMappings)
         {
             var indexName = $"IX_{table.Name}_{mappingInfo.Name}";
-            this.TryCreateIndex(table, indexName, mappingInfo.IsUniqueKey ? IndexKeyType.DriUniqueKey : IndexKeyType.None, new[] { mappingInfo.Name });
+            this.TryCreateIndex(table, indexName, mappingInfo.IsUniqueKey ? IndexKeyType.DriUniqueKey : IndexKeyType.None, [mappingInfo.Name]);
         }
     }
 

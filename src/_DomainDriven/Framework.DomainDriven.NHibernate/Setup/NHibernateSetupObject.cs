@@ -10,13 +10,13 @@ namespace Framework.DomainDriven.NHibernate;
 
 public class NHibernateSetupObject : INHibernateSetupObject
 {
-    private readonly List<INHibernateSetupObjectExtension> extensions = new();
+    private readonly List<INHibernateSetupObjectExtension> extensions = [];
 
-    private readonly List<Assembly> autoMappingAssemblies = new();
+    private readonly List<Assembly> autoMappingAssemblies = [];
 
     private DefaultConfigurationInitializerSettings settings = new();
 
-    private readonly List<Action<IServiceCollection>> initActions = new();
+    private readonly List<Action<IServiceCollection>> initActions = [];
 
     private string defaultConnectionStringName = "DefaultConnection";
 

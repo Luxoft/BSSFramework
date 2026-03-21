@@ -20,11 +20,10 @@ public class ExceptionMessageSender : BLLContextContainer<IConfigurationBLLConte
     private readonly string[] receivers;
 
     private readonly IEnumerable<Type> exceptTypes =
-            new[]
-            {
-                    typeof(ValidationException),
-                    typeof(AggregateValidationException),
-            };
+    [
+        typeof(ValidationException),
+                    typeof(AggregateValidationException)
+    ];
 
     /// <summary>
     /// Создаёт экземпляр класса <see cref="ExceptionMessageSender"/>.
@@ -93,7 +92,7 @@ public class ExceptionMessageSender : BLLContextContainer<IConfigurationBLLConte
                                                              subject,
                                                              body,
                                                              false,
-                                                             new Attachment[0]);
+                                                             Array.Empty<Attachment>());
 
         await this.messageSender.SendAsync(message, cancellationToken);
     }

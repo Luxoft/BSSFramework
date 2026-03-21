@@ -14,13 +14,13 @@ public class DefaultAuditTypeFilter : IAuditTypeFilter
 
     public DefaultAuditTypeFilter()
     {
-        this._filters = new IAuditTypeFilter[]
-                        {
-                                new AuditTypeFilterService<ViewAttribute>(),
+        this._filters =
+        [
+            new AuditTypeFilterService<ViewAttribute>(),
                                 new AuditTypeFilterService<NotAuditedClassAttribute>(),
                                 new AuditPropertyFilterService<NotAuditedPropertyAttribute>(),
-                                new AuditPropertyFilterService<DetailRoleAttribute>(z=>z.Role == DetailRole.No),
-                        };
+                                new AuditPropertyFilterService<DetailRoleAttribute>(z=>z.Role == DetailRole.No)
+        ];
     }
 
     public bool IsAuditedType(Type type)

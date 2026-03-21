@@ -147,7 +147,7 @@ internal class AuditSqlSriptGenerator
 
         buf.Append(dialect.TableTypeString);
 
-        return new[] { buf.ToString() };
+        return [buf.ToString()];
     }
 
     private static IEnumerable<Column> GetAuditedColumns(AuditTableGenerateContext context, Table table)

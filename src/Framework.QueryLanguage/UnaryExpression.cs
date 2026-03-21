@@ -1,44 +1,14 @@
-﻿using System.Runtime.Serialization;
+﻿namespace Framework.QueryLanguage;
 
-using CommonFramework;
-
-namespace Framework.QueryLanguage;
-
-[DataContract]
-public class UnaryExpression : Expression
+public record UnaryExpression(UnaryOperation Operation, Expression Operand) : Expression
 {
-    public UnaryExpression(UnaryOperation operation, Expression operand)
-    {
-        if (operand == null) throw new ArgumentNullException(nameof(operand));
+    public override string ToString() => $"({this.Operation.ToFormatString()}{this.Operand})";
 
-        this.Operation = operation;
-        this.Operand = operand;
-    }
+    public override int GetHashCode() => this.Operation.GetHashCode();
 
-
-    [DataMember]
-    public UnaryOperation Operation { get; private set; }
-
-    [DataMember]
-    public Expression Operand { get; private set; }
-
-
-
-    public override string ToString()
-    {
-        return $"({this.Operation.ToFormatString()}{this.Operand})";
-    }
-
-
-    public override int GetHashCode()
-    {
-        return base.GetHashCode() ^ this.Operation.GetHashCode();
-    }
-
-    protected override bool InternalEquals(Expression other)
-    {
-        return (other as UnaryExpression).Maybe(otherUnaryExpression =>
-                                                        this.Operation == otherUnaryExpression.Operation
-                                                        && this.Operand == otherUnaryExpression.Operand);
-    }
+    public virtual bool Equals(UnaryExpression? other) =>
+        object.ReferenceEquals(this, other)
+        || (other is not null
+            && this.Operation == other.Operation
+            && this.Operand == other.Operand);
 }

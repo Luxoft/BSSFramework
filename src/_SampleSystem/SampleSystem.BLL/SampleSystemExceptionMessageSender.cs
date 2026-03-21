@@ -38,6 +38,6 @@ public sealed class SampleSystemExceptionMessageSender : ExceptionMessageSender
     /// <inheritdoc />
     protected override IEnumerable<Type> GetExceptTypes()
     {
-        return new[] { typeof(SampleSystemException) };
+        return [typeof(SampleSystemException)];
     }
 }

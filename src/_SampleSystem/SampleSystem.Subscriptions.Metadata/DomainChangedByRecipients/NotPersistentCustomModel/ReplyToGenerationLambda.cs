@@ -16,12 +16,12 @@ public sealed class ReplyToGenerationLambda : GenerationLambdaBase<Domain.Countr
             ISampleSystemBLLContext context,
             DomainObjectVersions<Domain.Country> versions)
     {
-        return new[]
-               {
-                       new NotificationMessageGenerationInfo(
+        return
+        [
+            new NotificationMessageGenerationInfo(
                                                              "replayTo@luxoft.com",
                                                              new CustomNotificationModel(context, versions.Current),
                                                              new CustomNotificationModel(context, versions.Previous))
-               };
+        ];
     }
 }

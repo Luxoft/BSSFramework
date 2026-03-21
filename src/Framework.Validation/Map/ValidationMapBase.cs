@@ -9,7 +9,7 @@ namespace Framework.Validation;
 
 public abstract class ValidationMapBase : IValidationMap
 {
-    private readonly IDictionaryCache<Type, IClassValidationMap> _cache;
+    private readonly IDictionaryCache<Type, IClassValidationMap> cache;
 
 
     protected ValidationMapBase(IServiceProvider serviceProvider)
@@ -19,7 +19,7 @@ public abstract class ValidationMapBase : IValidationMap
         this.AvailableValues = LazyInterfaceImplementHelper.CreateProxy(() => this.ServiceProvider.GetRequiredService<IAvailableValues>());
 
 
-        this._cache = new LazyImplementDictionaryCache<Type, IClassValidationMap>(type =>
+        this.cache = new LazyImplementDictionaryCache<Type, IClassValidationMap>(type =>
                                                                                   {
                                                                                       var func = new Func<IClassValidationMap<Ignore>>(this.GetInternalClassMap<Ignore>);
 
@@ -39,19 +39,14 @@ public abstract class ValidationMapBase : IValidationMap
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
-        return this._cache[type];
+        return this.cache[type];
     }
 
-    public IClassValidationMap<TSource> GetClassMap<TSource>()
-    {
-        return (IClassValidationMap<TSource>)this.GetClassMap(typeof(TSource));
-    }
+    public IClassValidationMap<TSource> GetClassMap<TSource>() => (IClassValidationMap<TSource>)this.GetClassMap(typeof(TSource));
 
-    protected IClassValidationMap<TSource> GetClassMap<TSource>(bool lazy)
-    {
-        return lazy ? LazyInterfaceImplementHelper.CreateProxy(() => this.GetClassMap<TSource>())
-                       : this.GetClassMap<TSource>();
-    }
+    protected IClassValidationMap<TSource> GetClassMap<TSource>(bool lazy) =>
+        lazy ? LazyInterfaceImplementHelper.CreateProxy(() => this.GetClassMap<TSource>())
+            : this.GetClassMap<TSource>();
 
     protected abstract IClassValidationMap<TSource> GetInternalClassMap<TSource>();
 }

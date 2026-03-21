@@ -1,91 +1,13 @@
-﻿using System.Runtime.Serialization;
+﻿namespace Framework.QueryLanguage;
 
-using CommonFramework;
-
-namespace Framework.QueryLanguage;
-
-[DataContract]
-public abstract class ConstantExpression : Expression
+public abstract record ConstantExpression : Expression
 {
-    internal ConstantExpression()
-    {
+    public abstract object? GetRawValue();
 
-    }
-
-    [IgnoreDataMember]
-    public abstract object UntypedValue { get; }
-
-    //public abstract Type ValueType { get; }
-
-
-    public override string ToString()
-    {
-        return this.UntypedValue.ToString();
-    }
+    public override string? ToString() => this.GetRawValue()?.ToString();
 }
 
-[DataContract]
-public class NullConstantExpression : ConstantExpression
+public abstract record ConstantExpression<TValue>(TValue Value) : ConstantExpression
 {
-    internal NullConstantExpression()
-    {
-
-    }
-
-    [IgnoreDataMember]
-    public override object UntypedValue
-    {
-        get { return null; }
-    }
-
-    public override string ToString()
-    {
-        return "null";
-    }
-
-    protected override bool InternalEquals(Expression other)
-    {
-        return other is NullConstantExpression;
-    }
-
-
-    public static readonly NullConstantExpression Value = new NullConstantExpression();
-}
-
-
-[DataContract]
-public abstract class ConstantExpression<TValue> : ConstantExpression
-{
-    internal ConstantExpression()
-    {
-
-    }
-
-
-    internal ConstantExpression(TValue value)
-    {
-        this.Value = value;
-    }
-
-
-    [DataMember]
-    public TValue Value { get; private set; }
-
-    [IgnoreDataMember]
-    public override object UntypedValue
-    {
-        get { return this.Value; }
-    }
-
-
-    public override int GetHashCode()
-    {
-        return this.Value == null ? 0 : this.Value.GetHashCode();
-    }
-
-    protected override bool InternalEquals(Expression other)
-    {
-        return (other as ConstantExpression<TValue>).Maybe(otherConstantExpression =>
-                                                                   EqualityComparer<TValue>.Default.Equals(this.Value, otherConstantExpression.Value));
-    }
+    public override object? GetRawValue() => this.Value;
 }

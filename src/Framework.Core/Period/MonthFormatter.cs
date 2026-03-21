@@ -8,17 +8,17 @@ public static class MonthFormatter
 
     private static readonly DateTimeFormatInfo EngDateTimeFormat = new CultureInfo("en-US").DateTimeFormat;
 
-    private static readonly string[] RusInMonths = new[]
-                                                   {
-                                                           "Январе", "Феврале", "Марте", "Апреле", "Мае", "Июне",
+    private static readonly string[] RusInMonths =
+    [
+        "Январе", "Феврале", "Марте", "Апреле", "Мае", "Июне",
                                                            "Июле", "Августе", "Сентябре", "Октябре", "Ноябре", "Декабре"
-                                                   };
+    ];
 
-    private static readonly string[] RomanMonths = new[]
-                                                   {
-                                                           "I ", "II ", "III ", "IV ", "V ", "VI ",
+    private static readonly string[] RomanMonths =
+    [
+        "I ", "II ", "III ", "IV ", "V ", "VI ",
                                                            "VII ", "VIII ", "IX ", "X ", "XI ", "XII "
-                                                   };
+    ];
 
     /// <summary>
     /// Преобразует значение аргумента <see cref="date"/> в строковое представление месяца и года в предложном падеже для Российского стандарта

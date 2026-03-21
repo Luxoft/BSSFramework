@@ -29,7 +29,7 @@ public partial class AuthorizationBLLContext(
     [FromKeyedServices("BLL")] IEventOperationSender operationSender,
     ITrackingService<PersistentDomainObjectBase> trackingService,
     IAccessDeniedExceptionService accessDeniedExceptionService,
-    IStandartExpressionBuilder standartExpressionBuilder,
+    IStandardExpressionBuilder standardExpressionBuilder,
     IAuthorizationValidator validator,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
     TimeProvider timeProvider,
@@ -52,7 +52,7 @@ public partial class AuthorizationBLLContext(
         operationSender,
         trackingService,
         accessDeniedExceptionService,
-        standartExpressionBuilder,
+        standardExpressionBuilder,
         validator,
         hierarchicalObjectExpanderFactory)
 {
@@ -69,7 +69,7 @@ public partial class AuthorizationBLLContext(
 
     public ISecuritySystem SecuritySystem { get; } = securitySystem;
 
-    public IPrincipalValidator<Principal, Permission, PermissionRestriction> PrincipalValidator { get; } = principalValidator;
+    public IPrincipalValidator<Principal, Permission, PermissionRestriction> PrincipalValidator { get; } = principalValidator;  
 
     public ICurrentUserSource<Principal> CurrentPrincipalSource { get; } = currentPrincipalSource;
 

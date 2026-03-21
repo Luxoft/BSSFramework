@@ -3,7 +3,6 @@
   <PropertyGroup>
     <PackageId>Luxoft.Framework.AutomationCore</PackageId>
     <RootNamespace>Automation</RootNamespace>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

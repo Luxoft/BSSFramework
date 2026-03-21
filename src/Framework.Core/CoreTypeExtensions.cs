@@ -37,7 +37,7 @@ public static class CoreTypeExtensions
 
         var rankDelegateType = Type.GetType(rankDelegateTypeName)!;
 
-        return rankDelegateType.MakeGenericType(resultType == typeof(void) ? parameterTypes : parameterTypes.Concat(new[] { resultType }).ToArray());
+        return rankDelegateType.MakeGenericType(resultType == typeof(void) ? parameterTypes : parameterTypes.Concat([resultType]).ToArray());
     }
 
     public static bool HasDefaultConstructor(this Type type)
@@ -84,7 +84,7 @@ public static class CoreTypeExtensions
 
         if (source.IsCollection())
         {
-            return new FieldInfo[0];
+            return Array.Empty<FieldInfo>();
         }
 
         var currentType = source;
@@ -615,8 +615,5 @@ public static class CoreTypeExtensions
                                                                                  { typeof(decimal), 2 },
                                                                          };
 
-    private static readonly List<Dictionary<Type, int>> TypeSetsPriority = new List<Dictionary<Type, int>>
-                                                                           {
-                                                                                   SignedTypeSetPriority, UnsignedTypeSetPriority, FloatTypeSetPriority
-                                                                           };
+    private static readonly List<Dictionary<Type, int>> TypeSetsPriority = [SignedTypeSetPriority, UnsignedTypeSetPriority, FloatTypeSetPriority];
 }

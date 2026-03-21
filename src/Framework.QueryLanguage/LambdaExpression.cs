@@ -1,104 +1,55 @@
-﻿using System.Collections.ObjectModel;
-using System.Runtime.Serialization;
-
-using CommonFramework;
+﻿using System.Collections.Immutable;
 
 using SExpressions = System.Linq.Expressions;
 
 namespace Framework.QueryLanguage;
 
-[DataContract]
-public class LambdaExpression : Expression
+public record LambdaExpression(Expression Body, ImmutableArray<ParameterExpression> Parameters) : Expression
 {
     public LambdaExpression(SExpressions.LambdaExpression expression)
+        : this(Create(expression.Body), [.. expression.Parameters.Select(p => new ParameterExpression(p.Name!))])
     {
-        if (expression == null) throw new ArgumentNullException(nameof(expression));
-
-        this.Body = Create(expression.Body);
-        this.Parameters = expression.Parameters.ToReadOnlyCollection(p => new ParameterExpression(p.Name));
     }
 
-    public LambdaExpression(Expression body, params ParameterExpression[] parameters)
-            : this(body, (IEnumerable<ParameterExpression>)parameters)
-    {
-
-    }
-
-    public LambdaExpression(Expression body, IEnumerable<ParameterExpression> parameters)
-    {
-        if (body == null) throw new ArgumentNullException(nameof(body));
-        if (parameters == null) throw new ArgumentNullException(nameof(parameters));
-
-        this.Body = body;
-        this.Parameters = parameters.ToReadOnlyCollection();
-    }
-
-
-    [DataMember]
-    public Expression Body { get; private set; }
-
-    [DataMember]
-    public ReadOnlyCollection<ParameterExpression> Parameters { get; private set; }
-
-
-    public Type ExtractTargetType<TDomainObject>()
-    {
-        return this.ExtractPropertyPath(this.Body)
-                   .Reverse()
-                   .Aggregate(
-                       (SExpressions.Expression)SExpressions.Expression.Parameter(typeof(TDomainObject)),
-                       (currentExpr, property) =>
-                           SExpressions.Expression.PropertyOrField(currentExpr, property.PropertyName))
-                   .Type;
-    }
+    public Type ExtractTargetType<TDomainObject>() =>
+        this.ExtractPropertyPath(this.Body)
+            .Reverse()
+            .Aggregate(
+                (SExpressions.Expression)SExpressions.Expression.Parameter(typeof(TDomainObject)),
+                (currentExpr, property) =>
+                    SExpressions.Expression.PropertyOrField(currentExpr, property.PropertyName))
+            .Type;
 
     private IEnumerable<PropertyExpression> ExtractPropertyPath(Expression currentNode)
     {
-        if (currentNode == null) throw new ArgumentNullException(nameof(currentNode));
-
-        if (currentNode is ParameterExpression)
+        switch (currentNode)
         {
-            if ((currentNode as ParameterExpression) != this.Parameters.Single())
-            {
-                throw new Exception("invalid startup element");
-            }
-            else
-            {
+            case ParameterExpression parameterExpression when parameterExpression == this.Parameters.Single():
                 yield break;
-            }
-        }
-        else if (currentNode is PropertyExpression)
-        {
-            var currentProperty = currentNode as PropertyExpression;
 
-            yield return currentProperty;
-
-            foreach (var baseNode in this.ExtractPropertyPath(currentProperty.Source))
+            case PropertyExpression propertyExpression:
             {
-                yield return baseNode;
+                yield return propertyExpression;
+
+                foreach (var baseNode in this.ExtractPropertyPath(propertyExpression.Source))
+                {
+                    yield return baseNode;
+                }
+
+                break;
             }
-        }
-        else
-        {
-            throw new Exception("invalid expression");
+            default:
+                throw new Exception("invalid expression");
         }
     }
 
-    public override string ToString()
-    {
-        return $"({string.Join(", ", this.Parameters)}) => {this.Body}";
-    }
+    public override string ToString() => $"({string.Join(", ", this.Parameters)}) => {this.Body}";
 
-    public override int GetHashCode()
-    {
-        return base.GetHashCode() ^ this.Parameters.Count;
-    }
+    public virtual bool Equals(LambdaExpression? other) =>
+        object.ReferenceEquals(this, other)
+        || (other is not null
+            && this.Parameters.SequenceEqual(other.Parameters)
+            && this.Body == other.Body);
 
-
-    protected override bool InternalEquals(Expression other)
-    {
-        return (other as LambdaExpression).Maybe(otherLambdaExpression =>
-                                                         this.Parameters.SequenceEqual(otherLambdaExpression.Parameters)
-                                                         && this.Body == otherLambdaExpression.Body);
-    }
+    public override int GetHashCode() => base.GetHashCode() ^ this.Parameters.Length;
 }

@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.Projection\Framework.Projection.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.DAL.Sql\Framework.DomainDriven.DAL.Sql.csproj" />
-    <ProjectReference Include="..\Framework.DomainDriven.Generation\Framework.DomainDriven.Generation.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
   </ItemGroup>
 </Project>

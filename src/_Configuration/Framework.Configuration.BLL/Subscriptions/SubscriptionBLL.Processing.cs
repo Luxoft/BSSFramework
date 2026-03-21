@@ -29,7 +29,7 @@ public partial class SubscriptionBLL
         }
         catch (Exception ex)
         {
-            return new[] { TryResult.CreateFault<Subscription>(ex) };
+            return [TryResult.CreateFault<Subscription>(ex)];
         }
     }
 
@@ -45,7 +45,7 @@ public partial class SubscriptionBLL
         }
         catch (Exception ex)
         {
-            return new[] { TryResult.CreateFault<Subscription>(ex) };
+            return [TryResult.CreateFault<Subscription>(ex)];
         }
     }
 

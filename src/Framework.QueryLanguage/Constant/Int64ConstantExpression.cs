@@ -1,13 +1,3 @@
-﻿using System.Runtime.Serialization;
+﻿namespace Framework.QueryLanguage;
 
-namespace Framework.QueryLanguage;
-
-[DataContract]
-public class Int64ConstantExpression : ConstantExpression<long>
-{
-    public Int64ConstantExpression(long value)
-            : base(value)
-    {
-
-    }
-}
+public record Int64ConstantExpression(long Value) : ConstantExpression<long>(Value);

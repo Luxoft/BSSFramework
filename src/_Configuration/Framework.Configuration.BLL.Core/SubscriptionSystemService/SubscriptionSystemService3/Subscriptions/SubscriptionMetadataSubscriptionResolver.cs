@@ -121,7 +121,7 @@ public sealed class SubscriptionMetadataSubscriptionResolver : SubscriptionResol
 
         if (!metadata.Any())
         {
-            return Enumerable.Empty<Subscription>();
+            return [];
         }
 
         var activeCodeFirstSubscriptionCodes = this.configurationContextFacade.GetActiveCodeFirstSubscriptionCodes();

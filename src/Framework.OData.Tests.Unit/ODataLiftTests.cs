@@ -23,7 +23,7 @@ public class ODataLiftTests
         // Act
         var parsedExpr = SelectOperation.Parse(testQuery);
 
-        var parsedTypedExpr = StandartExpressionBuilder.Default.ToTyped<TestIntObjContainer>(parsedExpr);
+        var parsedTypedExpr = StandardExpressionBuilder.Default.ToTyped<TestIntObjContainer>(parsedExpr);
 
         var typesSelectOperation = parsedTypedExpr.Visit(ExpandPathVisitor.Value);
 
@@ -48,7 +48,7 @@ public class ODataLiftTests
         // Act
         var parsedExpr = SelectOperation.Parse(testQuery);
 
-        var parsedTypedExpr = StandartExpressionBuilder.Default.ToTyped<TestPeriodObjContainer>(parsedExpr);
+        var parsedTypedExpr = StandardExpressionBuilder.Default.ToTyped<TestPeriodObjContainer>(parsedExpr);
 
         var typesSelectOperation = parsedTypedExpr.Visit(ExpandPathVisitor.Value);
 
@@ -73,7 +73,7 @@ public class ODataLiftTests
         // Act
         var parsedExpr = SelectOperation.Parse(testQuery);
 
-        var parsedTypedExpr = StandartExpressionBuilder.Default.ToTyped<TestPeriodObjContainer>(parsedExpr);
+        var parsedTypedExpr = StandardExpressionBuilder.Default.ToTyped<TestPeriodObjContainer>(parsedExpr);
 
         var typesSelectOperation = parsedTypedExpr.Visit(ExpandPathVisitor.Value);
 

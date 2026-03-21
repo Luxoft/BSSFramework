@@ -24,6 +24,7 @@
     <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="3.0.7" />
     <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="3.0.7" />
     <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission" Version="3.0.7" />
+    <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission.Abstractions" Version="3.0.7" />
     <PackageVersion Include="IvAt.SecuritySystem.Notification" Version="3.0.7" />
     <PackageVersion Include="IvAt.SecuritySystem.Notification.Abstractions" Version="3.0.7" />
     <PackageVersion Include="IvAt.SecuritySystem.Testing" Version="3.0.7" />

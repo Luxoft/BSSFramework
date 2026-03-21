@@ -20,7 +20,7 @@
         {
             SampleSystem.BLL.ITestRestrictionObjectBLL bll = evaluateData.Context.Logics.TestRestrictionObjectFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.TestRestrictionObject> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.TestRestrictionObject>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
+            Framework.OData.SelectOperation<SampleSystem.Domain.TestRestrictionObject> typedSelectOperation = Framework.OData.StandardExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.TestRestrictionObject>(evaluateData.Context.StandardExpressionBuilder, selectOperation);
             Framework.OData.SelectOperationResult<SampleSystem.Domain.TestRestrictionObject> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestRestrictionObject>(Framework.Transfering.ViewDTOType.FullDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
@@ -38,7 +38,7 @@
         {
             SampleSystem.BLL.ITestRestrictionObjectBLL bll = evaluateData.Context.Logics.TestRestrictionObjectFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.TestRestrictionObject> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.TestRestrictionObject>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
+            Framework.OData.SelectOperation<SampleSystem.Domain.TestRestrictionObject> typedSelectOperation = Framework.OData.StandardExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.TestRestrictionObject>(evaluateData.Context.StandardExpressionBuilder, selectOperation);
             Framework.OData.SelectOperationResult<SampleSystem.Domain.TestRestrictionObject> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestRestrictionObject>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }

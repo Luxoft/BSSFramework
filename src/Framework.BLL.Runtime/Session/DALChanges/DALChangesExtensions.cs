@@ -1,0 +1,23 @@
+﻿using Framework.Application.Session.DALObject;
+using Framework.BLL.Domain;
+
+namespace Framework.BLL.Session.DALChanges;
+
+public static class DALChangesExtensions
+{
+    public static ModificationType ToModificationType(this DALObjectChangeType changeType)
+    {
+        switch (changeType)
+        {
+            case DALObjectChangeType.Created:
+            case DALObjectChangeType.Updated:
+                return ModificationType.Save;
+
+            case DALObjectChangeType.Removed:
+                return ModificationType.Remove;
+
+            default:
+                throw new ArgumentOutOfRangeException(nameof(changeType));
+        }
+    }
+}

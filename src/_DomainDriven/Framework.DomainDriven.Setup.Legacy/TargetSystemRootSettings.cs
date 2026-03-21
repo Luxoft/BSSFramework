@@ -13,7 +13,7 @@ namespace Framework.DomainDriven.Setup;
 
 public class TargetSystemRootSettings : ITargetSystemRootSettings
 {
-    private readonly List<Action<IServiceCollection>> registerActions = new();
+    private readonly List<Action<IServiceCollection>> registerActions = [];
 
     public bool RegisterBase { get; set; } = true;
 

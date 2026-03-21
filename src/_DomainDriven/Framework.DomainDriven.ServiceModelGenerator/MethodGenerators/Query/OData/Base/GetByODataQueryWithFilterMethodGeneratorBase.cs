@@ -46,11 +46,11 @@ public abstract class GetByODataQueryWithFilterMethodGeneratorBase<TConfiguratio
     {
         var selectOperationDecl = typeof(SelectOperation).ToTypeReference().ToVariableDeclarationStatement("selectOperation", this.GetSelectOperationExpression(evaluateDataExpr));
 
-        var expressionBuilderExpr = evaluateDataExpr.GetContext().ToPropertyReference("StandartExpressionBuilder");
+        var expressionBuilderExpr = evaluateDataExpr.GetContext().ToPropertyReference("StandardExpressionBuilder");
 
         var typedSelectOperationDecl = typeof(SelectOperation<>).ToTypeReference(this.DomainType).ToVariableDeclarationStatement("typedSelectOperation",
 
-            expressionBuilderExpr.ToStaticMethodInvokeExpression(typeof(StandartExpressionBuilderExtensions).ToTypeReferenceExpression()
+            expressionBuilderExpr.ToStaticMethodInvokeExpression(typeof(StandardExpressionBuilderExtensions).ToTypeReferenceExpression()
                                                                          .ToMethodReferenceExpression("ToTyped", this.DomainType.ToTypeReference()),
 
                                                                  selectOperationDecl.ToVariableReferenceExpression()));

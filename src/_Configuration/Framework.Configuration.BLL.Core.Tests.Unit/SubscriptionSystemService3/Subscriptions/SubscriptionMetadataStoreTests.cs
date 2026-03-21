@@ -25,7 +25,7 @@ public sealed class SubscriptionMetadataStoreTests : TestFixtureBase
         this.subscriptionMetadataFinder = this.Fixture.RegisterStub<ISubscriptionMetadataFinder>();
         this.subscriptionMetadataFinder
             .Find()
-            .Returns(new[] { this.metadata });
+            .Returns([this.metadata]);
     }
 
     [Test]
@@ -75,7 +75,7 @@ public sealed class SubscriptionMetadataStoreTests : TestFixtureBase
         subscription.SetSenderName(null);
 
         var finder = Substitute.For<ISubscriptionMetadataFinder>();
-        finder.Find().Returns(new[] { subscription });
+        finder.Find().Returns([subscription]);
 
         // Act
         Action call = () => new SubscriptionMetadataStore(finder);

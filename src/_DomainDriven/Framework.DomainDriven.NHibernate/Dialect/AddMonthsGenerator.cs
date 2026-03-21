@@ -19,7 +19,7 @@ public class AddMonthsGenerator : BaseHqlGeneratorForMethod
     /// </summary>
     public AddMonthsGenerator()
     {
-        this.SupportedMethods = new[] { ReflectionHelper.GetMethodDefinition<DateTime?>(d => d.Value.AddMonths(0)) };
+        this.SupportedMethods = [ReflectionHelper.GetMethodDefinition<DateTime?>(d => d.Value.AddMonths(0))];
     }
 
     /// <summary>

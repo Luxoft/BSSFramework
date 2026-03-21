@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.DomainDriven.Metadata\Framework.DomainDriven.Metadata.csproj" />
-    <ProjectReference Include="..\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
   </ItemGroup>
 
 </Project>

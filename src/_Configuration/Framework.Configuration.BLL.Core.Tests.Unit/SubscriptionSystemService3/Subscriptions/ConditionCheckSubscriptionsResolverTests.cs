@@ -53,7 +53,7 @@ public sealed class ConditionCheckSubscriptionsResolverTests : TestFixtureBase
         var subscription1 = this.Fixture.Build<Subscription>().With(s => s.Code, "s_1").Create();
         var subscription2 = this.Fixture.Build<Subscription>().With(s => s.Code, "s_2").Create();
 
-        this.innerResolver.Resolve(versions).Returns(new[] { subscription1, subscription2 });
+        this.innerResolver.Resolve(versions).Returns([subscription1, subscription2]);
 
         this.lambdaProcessor.Invoke(subscription1, versions).Returns(false);
         this.lambdaProcessor.Invoke(subscription2, versions).Returns(true);
@@ -76,7 +76,7 @@ public sealed class ConditionCheckSubscriptionsResolverTests : TestFixtureBase
         var subscription1 = this.Fixture.Build<Subscription>().With(s => s.Code, "s_1").Create();
         var subscription2 = this.Fixture.Build<Subscription>().With(s => s.Code, "s_2").Create();
 
-        this.innerResolver.Resolve(versions).Returns(new[] { subscription1, subscription2 });
+        this.innerResolver.Resolve(versions).Returns([subscription1, subscription2]);
 
         this.lambdaProcessor.Invoke(subscription1, versions).Returns(true);
         this.lambdaProcessor.Invoke(subscription2, versions).Throws(new Exception());

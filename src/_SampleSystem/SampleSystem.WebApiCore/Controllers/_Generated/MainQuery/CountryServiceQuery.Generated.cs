@@ -20,7 +20,7 @@
         {
             SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.Country> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Country>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
+            Framework.OData.SelectOperation<SampleSystem.Domain.Country> typedSelectOperation = Framework.OData.StandardExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Country>(evaluateData.Context.StandardExpressionBuilder, selectOperation);
             Framework.OData.SelectOperationResult<SampleSystem.Domain.Country> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Country>(Framework.Transfering.ViewDTOType.FullDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.CountryFullDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
@@ -38,7 +38,7 @@
         {
             SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.Country> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Country>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
+            Framework.OData.SelectOperation<SampleSystem.Domain.Country> typedSelectOperation = Framework.OData.StandardExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Country>(evaluateData.Context.StandardExpressionBuilder, selectOperation);
             Framework.OData.SelectOperationResult<SampleSystem.Domain.Country> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Country>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.CountrySimpleDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
@@ -56,7 +56,7 @@
         {
             SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.Country> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Country>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
+            Framework.OData.SelectOperation<SampleSystem.Domain.Country> typedSelectOperation = Framework.OData.StandardExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Country>(evaluateData.Context.StandardExpressionBuilder, selectOperation);
             Framework.OData.SelectOperationResult<SampleSystem.Domain.Country> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Country>(Framework.Transfering.ViewDTOType.VisualDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.CountryVisualDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }

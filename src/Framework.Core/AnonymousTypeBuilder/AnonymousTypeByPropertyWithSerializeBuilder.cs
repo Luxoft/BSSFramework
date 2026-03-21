@@ -32,11 +32,11 @@ public class AnonymousTypeByPropertyWithSerializeBuilder<TMap, TMapMember> : Ano
 
     protected virtual CustomAttributeBuilder GetDataContractAttribute(TMap typeMap)
     {
-        return new CustomAttributeBuilder(typeof(DataContractAttribute).GetConstructor(Type.EmptyTypes), new object[0]);
+        return new CustomAttributeBuilder(typeof(DataContractAttribute).GetConstructor(Type.EmptyTypes), []);
     }
 
     protected virtual CustomAttributeBuilder GetDataMemberAttribute(TMapMember member)
     {
-        return new CustomAttributeBuilder(typeof (DataMemberAttribute).GetConstructor(Type.EmptyTypes), new object[0]);
+        return new CustomAttributeBuilder(typeof (DataMemberAttribute).GetConstructor(Type.EmptyTypes), []);
     }
 }

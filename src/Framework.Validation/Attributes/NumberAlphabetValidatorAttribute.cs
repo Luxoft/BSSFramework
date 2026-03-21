@@ -6,8 +6,5 @@ public class NumberAlphabetValidatorAttribute : PropertyValidatorAttribute
     public string ExternalChars { get; set; }
 
 
-    public override IPropertyValidator CreateValidator()
-    {
-        return new NumberAlphabetValidator(this.ExternalChars);
-    }
+    public override IPropertyValidator CreateValidator() => new NumberAlphabetValidator(this.ExternalChars);
 }

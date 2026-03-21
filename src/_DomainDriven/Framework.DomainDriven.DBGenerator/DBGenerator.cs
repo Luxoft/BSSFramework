@@ -59,8 +59,8 @@ public class DBGenerator
             ICollection<string>? ignoredIndexes = null,
             DbUserCredential? credentials = null)
     {
-        migrationScriptFolderPaths ??= new string[0];
-        auditMigrationScriptFolderPaths ??= new string[0];
+        migrationScriptFolderPaths ??= Array.Empty<string>();
+        auditMigrationScriptFolderPaths ??= Array.Empty<string>();
 
         var dbName = this._settings.Database;
 

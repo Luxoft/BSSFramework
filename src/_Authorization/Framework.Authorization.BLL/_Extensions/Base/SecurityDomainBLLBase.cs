@@ -8,13 +8,7 @@ public partial class SecurityDomainBLLBase<TDomainObject>
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-        this.Recalculate(domainObject);
         this.Validate(domainObject, OperationContextBase.Save);
-    }
-
-    protected virtual void Recalculate(TDomainObject domainObject)
-    {
-
     }
 
     protected virtual void Validate(TDomainObject domainObject, OperationContextBase operationContext)

@@ -148,7 +148,7 @@ public class RecipientsResolver<TBLLContext>
                                         new RecipientCollection());
 
             var result = new RecipientsResolverResult(bag, versions);
-            return new[] { result };
+            return [result];
         }
 
         var results = generationResults.Select(r => this.CreateResult(subscription, r, rolesRecipients)).ToArray();

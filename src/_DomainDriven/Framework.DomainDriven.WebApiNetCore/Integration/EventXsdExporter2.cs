@@ -66,7 +66,7 @@ public class EventXsdExporter2 : IEventXsdExporter2
         var xmlSchema = schemas.First();
         OverrideDerivedClassProperties(xsdNamespace, localName, xmlSchema);
 
-        AddReferences(xmlSchema, schemas.Except(new[] { xmlSchema }).ToList());
+        AddReferences(xmlSchema, schemas.Except([xmlSchema]).ToList());
 
         foreach (XmlSchema schema in schemas)
         {

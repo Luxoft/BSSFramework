@@ -136,7 +136,7 @@ public static class AutoFixtureExtensions
         }
 
         var ctor = ctors.SingleOrDefault();
-        var ctorArgTypes = ctor?.GetParameters().Select(c => c.ParameterType).ToArray() ?? new Type[0];
+        var ctorArgTypes = ctor?.GetParameters().Select(c => c.ParameterType).ToArray() ?? [];
         return ctorArgTypes;
     }
 
@@ -144,13 +144,13 @@ public static class AutoFixtureExtensions
     {
         if (ctorArgumentTypes.Length == 0)
         {
-            return new object[0];
+            return [];
         }
 
         var context = new SpecimenContext(fixture);
 
         return ctorArgumentTypes
-               .Select(t => t.IsInterface ? Substitute.For(new[] { t }, new object[0]) : context.Resolve(t))
+               .Select(t => t.IsInterface ? Substitute.For([t], []) : context.Resolve(t))
                .ToArray();
     }
 }

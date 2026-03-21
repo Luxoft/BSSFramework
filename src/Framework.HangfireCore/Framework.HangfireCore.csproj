@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.HangfireCore</PackageId>
-    <Nullable>enable</Nullable>
+    <PackageId>Luxoft.Framework.HangfireCore</PackageId><Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

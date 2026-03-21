@@ -7,7 +7,7 @@ public static class DatabaseScriptGeneratorExtension
 {
     public static IDatabaseScriptGenerator Combine(this IDatabaseScriptGenerator scriptGenerator, params IDatabaseScriptGenerator[] generators)
     {
-        return generators.Concat(new[] { scriptGenerator }).Combine();
+        return generators.Concat([scriptGenerator]).Combine();
     }
 
     public static IDatabaseScriptGenerator Combine(this IEnumerable<IDatabaseScriptGenerator> scriptGenerators)

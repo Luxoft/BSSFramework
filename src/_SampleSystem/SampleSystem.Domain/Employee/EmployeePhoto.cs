@@ -14,7 +14,7 @@ public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>
     private readonly Employee employee;
 
     private string contentType;
-    private byte[] data = new byte[0];
+    private byte[] data = [];
 
     private EmployeePhotoType type;
 

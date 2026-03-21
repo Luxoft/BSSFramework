@@ -9,5 +9,7 @@ public class NHibExpressionVisitorContainerItem : IExpressionVisitorContainerIte
     public IEnumerable<ExpressionVisitor> GetVisitors()
     {
         yield return FixNHibArrayContainsVisitor.Value;
+
+        yield return ExpandPathVisitor.Value;
     }
 }

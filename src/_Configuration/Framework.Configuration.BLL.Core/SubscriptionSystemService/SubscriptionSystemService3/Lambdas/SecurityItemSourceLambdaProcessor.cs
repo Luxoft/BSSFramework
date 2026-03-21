@@ -57,7 +57,7 @@ public class SecurityItemSourceLambdaProcessor<TBLLContext> : LambdaProcessor<TB
 
         if (!DomainObjectCompliesLambdaRequiredMode(lambda, versions))
         {
-            return Enumerable.Empty<TSecurityItem>();
+            return [];
         }
 
         var result = this.TryInvoke(

@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.BLL.Core\Framework.Configuration.BLL.Core.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL.Security\Framework.DomainDriven.BLL.Security.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.Projections\SampleSystem.Domain.Projections.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.LegacyProjections\SampleSystem.Domain.LegacyProjections.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.ManualProjections\SampleSystem.Domain.ManualProjections.csproj" />

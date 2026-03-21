@@ -51,7 +51,7 @@ public class DynamicSourceLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLCon
 
         if (!DomainObjectCompliesLambdaRequiredMode(lambda, versions))
         {
-            return Enumerable.Empty<FilterItemIdentity>();
+            return [];
         }
 
         var result = this.TryInvoke(subscription, versions, this.InvokeInternal);
@@ -81,6 +81,6 @@ public class DynamicSourceLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLCon
             return this.TryCast<IEnumerable<FilterItemIdentity>>(funcValue(this.BllContext, versions));
         }
 
-        return Enumerable.Empty<FilterItemIdentity>();
+        return [];
     }
 }

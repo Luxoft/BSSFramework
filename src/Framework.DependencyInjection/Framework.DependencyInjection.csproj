@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <PackageId>Luxoft.Framework.DependencyInjection</PackageId>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

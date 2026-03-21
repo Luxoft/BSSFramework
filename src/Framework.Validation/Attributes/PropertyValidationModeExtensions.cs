@@ -2,10 +2,7 @@
 
 internal static class PropertyValidationModeExtensions
 {
-    public static PropertyValidationMode ToPropertyValidationMode(this bool value)
-    {
-        return value ? PropertyValidationMode.Enabled : PropertyValidationMode.Disabled;
-    }
+    public static PropertyValidationMode ToPropertyValidationMode(this bool value) => value ? PropertyValidationMode.Enabled : PropertyValidationMode.Disabled;
 
     public static PropertyValidationMode ToPropertyValidationMode(this bool? value)
     {

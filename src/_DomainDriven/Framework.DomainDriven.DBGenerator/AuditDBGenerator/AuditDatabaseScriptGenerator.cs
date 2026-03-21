@@ -20,6 +20,7 @@ using NHibernate.Mapping;
 using NHibernate.Tool.hbm2ddl;
 using NHibernate.Util;
 
+using Array = System.Array;
 using Environment = NHibernate.Cfg.Environment;
 
 namespace Framework.DomainDriven.NHibernate;
@@ -31,7 +32,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
     private readonly string auditTablePostFix;
 
     public AuditDatabaseScriptGenerator(MappingSettings mappingSettings, string auditTablePostfix)
-            : this(new[] { mappingSettings }, auditTablePostfix)
+            : this([mappingSettings], auditTablePostfix)
     {
     }
 
@@ -215,7 +216,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 
             if (isCreateMode && string.Equals(classMapping.EntityName, typeof(AuditRevisionEntity).FullName, StringComparison.InvariantCultureIgnoreCase))
             {
-                createOrAlterTableScripts = new[] { $"IF NOT EXISTS (  SELECT [name] FROM sys.tables WHERE [name] = '{table.Name}' ) {createOrAlterTableScripts.First()}" };
+                createOrAlterTableScripts = [$"IF NOT EXISTS (  SELECT [name] FROM sys.tables WHERE [name] = '{table.Name}' ) {createOrAlterTableScripts.First()}"];
             }
 
             sqlScript.AddRange(createOrAlterTableScripts);
@@ -344,7 +345,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
                 return generator.SqlCreateStrings(dialect);
             }
         }
-        return new string[0];
+        return Array.Empty<string>();
     }
 
     private static IEnumerable<string> CreateCreateOrAlterTableScripts(AuditTableGenerateContext context, bool createMode)

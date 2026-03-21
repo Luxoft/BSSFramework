@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.Persistent\Framework.Persistent.csproj" />
     <ProjectReference Include="..\Framework.Notification.Abstract\Framework.Notification.Abstract.csproj" />
   </ItemGroup>
 

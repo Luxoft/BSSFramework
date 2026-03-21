@@ -1,6 +1,4 @@
-﻿using Framework.Persistent;
-
-namespace Framework.OData;
+﻿namespace Framework.OData;
 
 public static class SelectOperationResultExtensions
 {
@@ -18,16 +16,6 @@ public static class SelectOperationResultExtensions
         if (selector == null) throw new ArgumentNullException(nameof(selector));
 
         return source.Items.Select(selector).ToSelectOperationResult(source.TotalCount);
-    }
-
-    public static SelectOperationResult<HierarchicalNode<TResult, TIdent>> ChangeItem<TSource, TResult, TIdent>(this SelectOperationResult<HierarchicalNode<TSource, TIdent>> source, Func<TSource, TResult> selector)
-            where TSource : IIdentityObject<TIdent>
-            where TResult : IIdentityObject<TIdent>
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-        return source.Items.Select(node => node.ChangeItem(selector)).ToSelectOperationResult(source.TotalCount);
     }
 
     public static SelectOperationResult<T> Where<T>(this SelectOperationResult<T> source, Func<T, bool> filter)

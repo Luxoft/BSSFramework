@@ -8,7 +8,6 @@ using SecuritySystem;
 using SecuritySystem.AvailableSecurity;
 using SecuritySystem.ExternalSystem.SecurityContextStorage;
 using SecuritySystem.GeneralPermission.Validation.Principal;
-using SecuritySystem.Notification;
 using SecuritySystem.Services;
 using SecuritySystem.UserSource;
 
@@ -43,8 +42,6 @@ public partial interface IAuthorizationBLLContext :
     ISecurityContextStorage SecurityContextStorage { get; }
 
     ISecurityContextInfoSource SecurityContextInfoSource { get; }
-
-    INotificationPrincipalExtractor<Principal> NotificationPrincipalExtractor { get; }
 
     SecurityContextType GetSecurityContextType(Type type);
 }

@@ -27,7 +27,7 @@ public partial class SampleSystemBLLContext(
     [FromKeyedServices("BLL")] IEventOperationSender operationSender,
     ITrackingService<PersistentDomainObjectBase> trackingService,
     IAccessDeniedExceptionService accessDeniedExceptionService,
-    IStandartExpressionBuilder standartExpressionBuilder,
+    IStandardExpressionBuilder standardExpressionBuilder,
     ISampleSystemValidator validator,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
     IRootSecurityService securityService,
@@ -44,7 +44,7 @@ public partial class SampleSystemBLLContext(
         operationSender,
         trackingService,
         accessDeniedExceptionService,
-        standartExpressionBuilder,
+        standardExpressionBuilder,
         validator,
         hierarchicalObjectExpanderFactory)
 {
@@ -63,9 +63,4 @@ public partial class SampleSystemBLLContext(
     public Framework.Configuration.BLL.IConfigurationBLLContext Configuration { get; } = configuration;
 
     public ITypeResolver<string> TypeResolver { get; } = settings.TypeResolver;
-
-    public override bool AllowVirtualPropertyInOdata(Type domainType)
-    {
-        return base.AllowVirtualPropertyInOdata(domainType) || domainType == typeof(BusinessUnitProgramClass);
-    }
 }

@@ -13,9 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-
-    <ProjectReference Include="..\Framework.DomainDriven.Tracking\Framework.DomainDriven.Tracking.csproj" />
-    <ProjectReference Include="..\..\Framework.Persistent.LegacyContext\Framework.Persistent.LegacyContext.csproj" />
     <ProjectReference Include="..\..\Framework.Validation\Framework.Validation.csproj" />
   </ItemGroup>
 

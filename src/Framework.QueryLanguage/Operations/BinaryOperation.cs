@@ -1,38 +1,35 @@
-﻿using System.Runtime.Serialization;
+﻿namespace Framework.QueryLanguage;
 
-namespace Framework.QueryLanguage;
-
-[DataContract]
 public enum BinaryOperation
 {
-    [EnumMember] Equal,
+    Equal,
 
-    [EnumMember] GreaterThanOrEqual,
+    GreaterThanOrEqual,
 
-    [EnumMember] LessThanOrEqual,
+    LessThanOrEqual,
 
-    [EnumMember] NotEqual,
+    NotEqual,
 
-    [EnumMember] GreaterThan,
+    GreaterThan,
 
-    [EnumMember] LessThan,
+    LessThan,
 
-    [EnumMember] Add,
+    Add,
 
-    [EnumMember] Subtract,
+    Subtract,
 
-    [EnumMember] Mul,
+    Mul,
 
-    [EnumMember] Div,
+    Div,
 
-    [EnumMember] Mod,
+    Mod,
 
-    [EnumMember] OrElse,
+    OrElse,
 
-    [EnumMember] AndAlso,
+    AndAlso,
 
     ///// <summary>
     ///// Если добавлять в парсер, то надо будет учитывать ассоциативность
     ///// </summary>
-    //[EnumMember] Pow,
+    //Pow,
 }

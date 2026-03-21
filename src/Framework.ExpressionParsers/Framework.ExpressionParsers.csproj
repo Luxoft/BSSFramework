@@ -14,8 +14,4 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
     <PackageReference Include="System.Runtime.Loader" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Framework.Persistent.LegacyContext\Framework.Persistent.LegacyContext.csproj" />
-  </ItemGroup>
 </Project>

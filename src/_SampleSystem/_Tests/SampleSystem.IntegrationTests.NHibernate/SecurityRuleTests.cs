@@ -67,7 +67,7 @@ public class SecurityRuleTests : TestBase
                          {
                              var bll = ctx.Logics.EmployeeFactory.Create(testSecurityRule);
 
-                             bll.CheckAccess(ctx.Logics.Employee.GetCurrent());
+                             bll.CheckAccess(ctx.CurrentEmployeeSource.CurrentUser);
                          });
 
         // Assert

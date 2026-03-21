@@ -41,7 +41,7 @@ public class ProjectionTest
 
         var selectOperation = SelectOperation.Parse(request);
 
-        var selectOperationBuilder = new StandartExpressionBuilder();
+        var selectOperationBuilder = new StandardExpressionBuilder();
 
         var selectOperationGeneric = selectOperationBuilder.ToTyped<TestEmployee, ITestEmployee>(selectOperation);
 

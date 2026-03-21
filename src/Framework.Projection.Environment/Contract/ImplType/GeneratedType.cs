@@ -2,11 +2,11 @@
 
 using CommonFramework;
 
+using Framework.BLL.Domain.Attributes;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
-using Framework.Security;
 using Framework.Validation;
 
 namespace Framework.Projection.Contract;

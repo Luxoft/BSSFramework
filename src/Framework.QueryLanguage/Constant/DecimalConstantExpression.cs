@@ -1,13 +1,3 @@
-﻿using System.Runtime.Serialization;
+﻿namespace Framework.QueryLanguage;
 
-namespace Framework.QueryLanguage;
-
-[DataContract]
-public class DecimalConstantExpression : ConstantExpression<decimal>
-{
-    public DecimalConstantExpression(decimal value)
-            : base(value)
-    {
-
-    }
-}
+public record DecimalConstantExpression(decimal Value) : ConstantExpression<decimal>(Value);

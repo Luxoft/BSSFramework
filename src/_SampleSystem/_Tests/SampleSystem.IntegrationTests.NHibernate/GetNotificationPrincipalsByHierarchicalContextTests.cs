@@ -415,9 +415,8 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
     {
         return this.Evaluate(
             DBSessionMode.Read,
-            context => context.Authorization
+            context => context.Configuration
                               .NotificationPrincipalExtractor
-
                               .GetPrincipalsAsync([SampleSystemSecurityRole.SearchTestBusinessRole], [..notificationFilterGroups])
                               .ToListAsync()
                               .GetAwaiter()

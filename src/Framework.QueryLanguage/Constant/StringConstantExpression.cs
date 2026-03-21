@@ -1,18 +1,6 @@
-﻿using System.Runtime.Serialization;
+﻿namespace Framework.QueryLanguage;
 
-namespace Framework.QueryLanguage;
-
-[DataContract]
-public class StringConstantExpression : ConstantExpression<string>
+public record StringConstantExpression(string Value) : ConstantExpression<string>(Value)
 {
-    public StringConstantExpression(string value)
-            : base(value)
-    {
-
-    }
-
-    public override string ToString()
-    {
-        return $"\"{this.Value}\"";
-    }
+    public override string ToString() => $"\"{this.Value}\"";
 }

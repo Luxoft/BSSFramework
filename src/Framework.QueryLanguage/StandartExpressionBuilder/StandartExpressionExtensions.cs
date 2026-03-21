@@ -7,7 +7,7 @@ using Framework.Core;
 
 namespace Framework.QueryLanguage;
 
-public static class StandartExpressionExtensions
+public static class StandardExpressionExtensions
 {
     internal static System.Linq.Expressions.Expression TryNormalize(this System.Linq.Expressions.Expression baseExpression, Type leftType, Type rightType)
     {
@@ -25,7 +25,7 @@ public static class StandartExpressionExtensions
 
         return request.Or(() => from enumType in tryEnumType.ToMaybe()
 
-                                select TryConvertToEnumExpression(baseExpression, enumType))
+                                select baseExpression.TryConvertToEnumExpression(enumType))
 
 
                       .Or(() => from superType in leftType.GetSuperSet(rightType, false).ToMaybe()
@@ -123,7 +123,7 @@ public static class StandartExpressionExtensions
 
                                                                    if (value.GetType() != expectedNullableElementType && expectedNullableElementType.IsEnum)
                                                                    {
-                                                                       return LiftToNullable(TryConvertToEnumExpression(expression, expectedNullableElementType), expectedNullableType);
+                                                                       return LiftToNullable(expression.TryConvertToEnumExpression(expectedNullableElementType), expectedNullableType);
                                                                    }
                                                                    else
                                                                    {
@@ -140,8 +140,6 @@ public static class StandartExpressionExtensions
 
     internal static TExpectedValue? ToNullableValue<TConstValue, TExpectedValue>(TConstValue constValue)
             where TConstValue : struct
-            where TExpectedValue : struct
-    {
-        return (TExpectedValue)(object)Convert.ChangeType(constValue, typeof(TExpectedValue), null);
-    }
+            where TExpectedValue : struct =>
+        (TExpectedValue)(object)Convert.ChangeType(constValue, typeof(TExpectedValue), null);
 }

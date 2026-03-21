@@ -1,8 +1,10 @@
 ﻿using System.Reflection;
 
+using Framework.BLL.Domain.Attributes;
+using Framework.BLL.Domain.ServiceRole;
+using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.DomainDriven.BLL;
 using Framework.Persistent.Mapping;
-using Framework.Security;
 using Framework.Validation;
 
 namespace Framework.Projection.Lambda;
@@ -83,7 +85,7 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
         }
     }
 
-    private Attribute CreateInlineBaseTypeAttribute()
+    private Attribute? CreateInlineBaseTypeAttribute()
     {
         if (this.HasBaseSecurityType)
         {

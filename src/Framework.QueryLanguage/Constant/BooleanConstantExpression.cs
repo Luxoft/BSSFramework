@@ -1,18 +1,8 @@
-﻿using System.Runtime.Serialization;
+﻿namespace Framework.QueryLanguage;
 
-namespace Framework.QueryLanguage;
-
-[DataContract]
-public class BooleanConstantExpression : ConstantExpression<bool>
+public record BooleanConstantExpression(bool Value) : ConstantExpression<bool>(Value)
 {
-    public BooleanConstantExpression(bool value)
-            : base(value)
-    {
+    public static BooleanConstantExpression True { get; } = new(true);
 
-    }
-
-
-    public static readonly BooleanConstantExpression True = new BooleanConstantExpression(true);
-
-    public static readonly BooleanConstantExpression False = new BooleanConstantExpression(false);
+    public static BooleanConstantExpression False { get; } = new(false);
 }

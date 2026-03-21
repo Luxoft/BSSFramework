@@ -1,4 +1,5 @@
 ﻿using Framework.Authorization.BLL;
+using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.DomainDriven.BLL.Security;
@@ -10,6 +11,10 @@ using Framework.DomainDriven.Lock;
 using Framework.Events;
 using Framework.Persistent;
 
+using SecuritySystem.Notification;
+
+using PersistentDomainObjectBase = Framework.Configuration.Domain.PersistentDomainObjectBase;
+
 namespace Framework.Configuration.BLL;
 
 public partial interface IConfigurationBLLContext :
@@ -20,6 +25,8 @@ public partial interface IConfigurationBLLContext :
 
     ITrackingServiceContainer<PersistentDomainObjectBase>
 {
+    INotificationPrincipalExtractor<Principal> NotificationPrincipalExtractor { get; }
+
     IDomainObjectEventMetadata EventOperationSource { get; }
 
     INamedLockService NamedLockService { get; }

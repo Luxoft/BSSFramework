@@ -17,15 +17,23 @@ namespace Framework.OData;
 internal class LambdaExpressionInternalParser : CharParsers
 {
     private const char EscapeChar = (char)27;
+
     private const string PostEscapeChars = "'";
 
     private readonly NumberFormatInfo numberFormatInfo;
+
     private readonly ParameterExpression rootParameter;
+
     private readonly ParameterExpression currentParameter;
+
     private readonly ReadOnlyCollection<ParameterExpression> usedParameters;
 
 
-    public LambdaExpressionInternalParser(NumberFormatInfo numberFormatInfo, ParameterExpression rootParameter, ParameterExpression currentParameter, ReadOnlyCollection<ParameterExpression> usedParameters)
+    public LambdaExpressionInternalParser(
+        NumberFormatInfo numberFormatInfo,
+        ParameterExpression rootParameter,
+        ParameterExpression currentParameter,
+        ReadOnlyCollection<ParameterExpression> usedParameters)
     {
         if (numberFormatInfo == null) throw new ArgumentNullException(nameof(numberFormatInfo));
         if (rootParameter == null) throw new ArgumentNullException(nameof(rootParameter));
@@ -41,32 +49,28 @@ internal class LambdaExpressionInternalParser : CharParsers
 
 
 
-    private ExpressionParser BracketsRootParser
-    {
-        get { return this.BetweenBrackets(this.RootBodyParser); }
-    }
+    private ExpressionParser BracketsRootParser { get { return this.BetweenBrackets(this.RootBodyParser); } }
 
-    public ExpressionParser RootBodyParser
-    {
-        get { return this.MainParser.Pipe(this.InnerRootBodyParser); }
-    }
+    public ExpressionParser RootBodyParser { get { return this.MainParser.Pipe(this.InnerRootBodyParser); } }
 
-    private ExpressionParser MainParser
-    {
-        get { return this.GetMainParser((expression, _) => expression); }
-    }
+    private ExpressionParser MainParser { get { return this.GetMainParser((expression, _) => expression); } }
 
 
     private Parser<string, TResult> GetMainParser<TResult>(Func<Expression, bool, TResult> resultSelector)
     {
-        return this.OneOfMany(this.GetLazy(() => this.BracketsRootParser.Select(res => resultSelector(res, true))),
-                              this.GetLazy(() => this.UnaryExpressionParser.Select(res => resultSelector(res, false))),
-                              this.GetLazy(() => this.OtherExpressionParser.Select(res => resultSelector(res, false))));
+        return this.OneOfMany(
+            this.GetLazy(() => this.BracketsRootParser.Select(res => resultSelector(res, true))),
+            this.GetLazy(() => this.UnaryExpressionParser.Select(res => resultSelector(res, false))),
+            this.GetLazy(() => this.OtherExpressionParser.Select(res => resultSelector(res, false))));
     }
 
     private LambdaExpressionInternalParser GetSubParser(ParameterExpression subParameter)
     {
-        return new LambdaExpressionInternalParser(this.numberFormatInfo, this.rootParameter, subParameter, this.usedParameters.Concat(new[] { subParameter }).ToReadOnlyCollection());
+        return new LambdaExpressionInternalParser(
+            this.numberFormatInfo,
+            this.rootParameter,
+            subParameter,
+            this.usedParameters.Concat(new[] { subParameter }).ToReadOnlyCollection());
     }
 
 
@@ -84,17 +88,17 @@ internal class LambdaExpressionInternalParser : CharParsers
         get
         {
             Func<UnaryExpression, Expression> applyPriorityFunc = sourceExpr =>
-                                                                  {
-                                                                      var req = from changeExpr in (sourceExpr.Operand as BinaryExpression).ToMaybe()
+            {
+                var req = from changeExpr in (sourceExpr.Operand as BinaryExpression).ToMaybe()
 
-                                                                                where changeExpr.Operation.GetPriority() < sourceExpr.Operation.GetPriority()
+                          where changeExpr.Operation.GetPriority() < sourceExpr.Operation.GetPriority()
 
-                                                                                let newLeft = new UnaryExpression(sourceExpr.Operation, changeExpr.Left)
+                          let newLeft = new UnaryExpression(sourceExpr.Operation, changeExpr.Left)
 
-                                                                                select new BinaryExpression(newLeft, changeExpr.Operation, changeExpr.Right);
+                          select new BinaryExpression(changeExpr.Operation, newLeft, changeExpr.Right);
 
-                                                                      return req.GetValueOrDefault((Expression)sourceExpr);
-                                                                  };
+                return req.GetValueOrDefault((Expression)sourceExpr);
+            };
 
 
             return from unaryOperation in this.PreSpaces(this.UnaryOperationParser)
@@ -118,17 +122,17 @@ internal class LambdaExpressionInternalParser : CharParsers
         get
         {
             Func<BinaryExpression, Expression> applyPriorityFunc = sourceExpr =>
-                                                                   {
-                                                                       var req = from changeExpr in (sourceExpr.Right as BinaryExpression).ToMaybe()
+            {
+                var req = from changeExpr in (sourceExpr.Right as BinaryExpression).ToMaybe()
 
-                                                                                 where changeExpr.Operation.GetPriority() < sourceExpr.Operation.GetPriority()
+                          where changeExpr.Operation.GetPriority() < sourceExpr.Operation.GetPriority()
 
-                                                                                 let newLeft = new BinaryExpression(sourceExpr.Left, sourceExpr.Operation, changeExpr.Left)
+                          let newLeft = new BinaryExpression(sourceExpr.Operation, sourceExpr.Left, changeExpr.Left)
 
-                                                                                 select new BinaryExpression(newLeft, changeExpr.Operation, changeExpr.Right);
+                          select new BinaryExpression(changeExpr.Operation, newLeft, changeExpr.Right);
 
-                                                                       return req.GetValueOrDefault(sourceExpr);
-                                                                   };
+                return req.GetValueOrDefault(sourceExpr);
+            };
 
 
             return from binaryOperation in this.BinaryOperationParser
@@ -140,21 +144,18 @@ internal class LambdaExpressionInternalParser : CharParsers
                    from overridePriorityFunc in rootResult.IsRoot ? this.GetIdentity<Expression>() : this.Return(applyPriorityFunc)
 
                    select new MapFunc(left =>
-                                      {
-                                          var baseExpression = new BinaryExpression(left, binaryOperation, mapRightFunc(rootResult.Right));
+                   {
+                       var baseExpression = new BinaryExpression(binaryOperation, left, mapRightFunc(rootResult.Right));
 
-                                          return overridePriorityFunc(baseExpression);
-                                      });
+                       return overridePriorityFunc(baseExpression);
+                   });
         }
     }
 
 
 
 
-    private ExpressionParser OtherExpressionParser
-    {
-        get { return this.PreSpaces(this.InnerOtherExpressionParser); }
-    }
+    private ExpressionParser OtherExpressionParser { get { return this.PreSpaces(this.InnerOtherExpressionParser); } }
 
     private ExpressionParser InnerOtherExpressionParser
     {
@@ -184,17 +185,18 @@ internal class LambdaExpressionInternalParser : CharParsers
             return from methodType in this.StringMethodExpressionTypeParser
 
                    from result in
-                           this.BetweenBrackets(from arg1 in this.RootBodyParser
+                       this.BetweenBrackets(
+                           from arg1 in this.RootBodyParser
 
-                                                from _ in this.PreSpaces(this.Char(','))
+                           from _ in this.PreSpaces(this.Char(','))
 
-                                                from arg2 in this.RootBodyParser
+                           from arg2 in this.RootBodyParser
 
-                                                select methodType == MethodExpressionType.StringContains
+                           select methodType == MethodExpressionType.StringContains
 
-                                                               ? new MethodExpression(arg2, methodType, new[] { arg1 })
+                                      ? new MethodExpression(arg2, methodType, [arg1])
 
-                                                               : new MethodExpression(arg1, methodType, new[] { arg2 }))
+                                      : new MethodExpression(arg1, methodType, [arg2]))
 
                    select result;
         }
@@ -226,7 +228,7 @@ internal class LambdaExpressionInternalParser : CharParsers
         get
         {
             return (this.StringIgnoreCase(bool.TrueString).Select(_ => BooleanConstantExpression.True))
-                    .Or(() => this.StringIgnoreCase(bool.FalseString).Select(_ => BooleanConstantExpression.False));
+                .Or(() => this.StringIgnoreCase(bool.FalseString).Select(_ => BooleanConstantExpression.False));
         }
     }
 
@@ -253,7 +255,6 @@ internal class LambdaExpressionInternalParser : CharParsers
                    from c in this.OneOfMany(PostEscapeChars.Select(this.Char))
 
                    select c;
-
         }
     }
 
@@ -261,10 +262,13 @@ internal class LambdaExpressionInternalParser : CharParsers
     {
         get
         {
-            var propWithAlias = this.BetweenBrackets(from propertyName in this.Variable
-                                                     from _ in this.Spaces1
-                                                     from alias in this.Variable
-                                                     select new { PropertyName = propertyName, Alias = alias }, '[', ']');
+            var propWithAlias = this.BetweenBrackets(
+                from propertyName in this.Variable
+                from _ in this.Spaces1
+                from alias in this.Variable
+                select new { PropertyName = propertyName, Alias = alias },
+                '[',
+                ']');
 
             var propWithoutAlias = this.BetweenSpaces(this.Variable)
                                        .Select(propertyName => new { PropertyName = propertyName, Alias = default(string) });
@@ -273,10 +277,13 @@ internal class LambdaExpressionInternalParser : CharParsers
 
             return from properties in this.SepBy(propWithAlias.Or(propWithoutAlias), '/')
 
-                   select properties.Aggregate((Expression)this.currentParameter, (source, propertyPair) =>
+                   select properties.Aggregate(
+                       (Expression)this.currentParameter,
+                       (source, propertyPair) =>
 
-                                                                                           propertyPair.Alias == null ? new PropertyExpression(source, propertyPair.PropertyName)
-                                                                                                   : new SelectExpression(source, propertyPair.PropertyName, propertyPair.Alias));
+                           propertyPair.Alias == null
+                               ? new PropertyExpression(source, propertyPair.PropertyName)
+                               : new SelectExpression(source, propertyPair.PropertyName, propertyPair.Alias));
         }
     }
 
@@ -287,10 +294,12 @@ internal class LambdaExpressionInternalParser : CharParsers
             return from startParameterInfo in this.PropertyStartParameterExpressionParser
 
                    from parameterNames in
-                           startParameterInfo.Item2 ? this.Many(from _ in this.BetweenSpaces(this.Char('/'))
-                                                                from parameterName in this.Variable
-                                                                select parameterName)
-                                   : this.SepBy(this.PreSpaces(this.Variable), this.Char('/'))
+                       startParameterInfo.Item2
+                           ? this.Many(
+                               from _ in this.BetweenSpaces(this.Char('/'))
+                               from parameterName in this.Variable
+                               select parameterName)
+                           : this.SepBy(this.PreSpaces(this.Variable), this.Char('/'))
 
                    where startParameterInfo.Item2 || parameterNames.Any()
 
@@ -323,18 +332,21 @@ internal class LambdaExpressionInternalParser : CharParsers
             return from collectionMethodType in this.CollectionMethodExpressionTypeParser
 
                    from result in
-                           this.BetweenBrackets(from source in this.RootBodyParser
+                       this.BetweenBrackets(
+                           from source in this.RootBodyParser
 
-                                                from subParameter in this.PreSpaces(this.Variable).Select(aliasName => new ParameterExpression(aliasName))
-                                                                         .Or(() => this.Return(this.GenerateAnonymousParameterExpression((source as PropertyExpression).Maybe(propExpr => propExpr.PropertyName.FromPluralize()) ?? "collection")))
+                           from subParameter in this.PreSpaces(this.Variable).Select(aliasName => new ParameterExpression(aliasName))
+                                                    .Or(() => this.Return(
+                                                            this.GenerateAnonymousParameterExpression(
+                                                                (source as PropertyExpression).Maybe(propExpr => propExpr.PropertyName.FromPluralize()) ?? "collection")))
 
-                                                from _ in this.PreSpaces(this.Char(','))
+                           from _ in this.PreSpaces(this.Char(','))
 
-                                                from bodyExpr in this.GetSubParser(subParameter).RootBodyParser
+                           from bodyExpr in this.GetSubParser(subParameter).RootBodyParser
 
-                                                let arg = new LambdaExpression(bodyExpr, new[] { subParameter })
+                           let arg = new LambdaExpression(bodyExpr, [subParameter])
 
-                                                select new MethodExpression(source, collectionMethodType, new[] { arg }))
+                           select new MethodExpression(source, collectionMethodType, [arg]))
 
                    select result;
         }
@@ -344,9 +356,10 @@ internal class LambdaExpressionInternalParser : CharParsers
     {
         get
         {
-            return this.OneOfMany(DateTimeProperties.Select(propertyName => from _ in this.StringIgnoreCase(propertyName)
-                                                                            from source in this.BetweenBrackets(this.RootBodyParser)
-                                                                            select new PropertyExpression(source, propertyName.ToStartUpperCase())));
+            return this.OneOfMany(
+                DateTimeProperties.Select(propertyName => from _ in this.StringIgnoreCase(propertyName)
+                                                          from source in this.BetweenBrackets(this.RootBodyParser)
+                                                          select new PropertyExpression(source, propertyName.ToStartUpperCase())));
         }
     }
 
@@ -403,15 +416,9 @@ internal class LambdaExpressionInternalParser : CharParsers
 
 
 
-    private Parser<string, MethodExpressionType> StringMethodExpressionTypeParser
-    {
-        get { return this.FromDictionary(StringMethodExpressions, this.StringIgnoreCase); }
-    }
+    private Parser<string, MethodExpressionType> StringMethodExpressionTypeParser { get { return this.FromDictionary(StringMethodExpressions, this.StringIgnoreCase); } }
 
-    private Parser<string, MethodExpressionType> CollectionMethodExpressionTypeParser
-    {
-        get { return this.FromDictionary(CollectionMethodExpressions, this.StringIgnoreCase); }
-    }
+    private Parser<string, MethodExpressionType> CollectionMethodExpressionTypeParser { get { return this.FromDictionary(CollectionMethodExpressions, this.StringIgnoreCase); } }
 
 
     private Parser<string, UnaryOperation> UnaryOperationParser
@@ -458,51 +465,50 @@ internal class LambdaExpressionInternalParser : CharParsers
 
 
     private static readonly Dictionary<string, MethodExpressionType> StringMethodExpressions = new Dictionary<string, MethodExpressionType>
-        {
-                { "startswith", MethodExpressionType.StringStartsWith },
-                { "substringof", MethodExpressionType.StringContains },
-                { "endswith", MethodExpressionType.StringEndsWith }
-        };
+                                                                                               {
+                                                                                                   { "startswith", MethodExpressionType.StringStartsWith },
+                                                                                                   { "substringof", MethodExpressionType.StringContains },
+                                                                                                   { "endswith", MethodExpressionType.StringEndsWith }
+                                                                                               };
 
     private static readonly Dictionary<string, MethodExpressionType> CollectionMethodExpressions = new Dictionary<string, MethodExpressionType>
-        {
-                { "any", MethodExpressionType.CollectionAny },
-                { "all", MethodExpressionType.CollectionAll }
-        };
+                                                                                                   {
+                                                                                                       { "any", MethodExpressionType.CollectionAny },
+                                                                                                       { "all", MethodExpressionType.CollectionAll }
+                                                                                                   };
 
     private static readonly Dictionary<string, BinaryOperation> BinaryOperations = new Dictionary<string, BinaryOperation>
                                                                                    {
-                                                                                           { "gt"  , BinaryOperation.GreaterThan },
-                                                                                           { "lt"  , BinaryOperation.LessThan },
-
-                                                                                           { "le"  , BinaryOperation.LessThanOrEqual },
-                                                                                           { "ge"  , BinaryOperation.GreaterThanOrEqual },
-
-                                                                                           { "eq"  , BinaryOperation.Equal },
-                                                                                           { "ne"  , BinaryOperation.NotEqual },
-
-                                                                                           { "and" , BinaryOperation.AndAlso },
-                                                                                           { "or"  , BinaryOperation.OrElse },
-
-                                                                                           { "add" , BinaryOperation.Add },
-
-                                                                                           { "sub" , BinaryOperation.Subtract },
-                                                                                           { "mult", BinaryOperation.Mul },
-
-                                                                                           { "div" , BinaryOperation.Div },
-                                                                                           { "mod" , BinaryOperation.Mod }
+                                                                                       { "gt", BinaryOperation.GreaterThan },
+                                                                                       { "lt", BinaryOperation.LessThan },
+                                                                                       { "le", BinaryOperation.LessThanOrEqual },
+                                                                                       { "ge", BinaryOperation.GreaterThanOrEqual },
+                                                                                       { "eq", BinaryOperation.Equal },
+                                                                                       { "ne", BinaryOperation.NotEqual },
+                                                                                       { "and", BinaryOperation.AndAlso },
+                                                                                       { "or", BinaryOperation.OrElse },
+                                                                                       { "add", BinaryOperation.Add },
+                                                                                       { "sub", BinaryOperation.Subtract },
+                                                                                       { "mult", BinaryOperation.Mul },
+                                                                                       { "div", BinaryOperation.Div },
+                                                                                       { "mod", BinaryOperation.Mod }
                                                                                    };
 
     private static readonly Dictionary<string, UnaryOperation> UnaryOperations = new Dictionary<string, UnaryOperation>
                                                                                  {
-                                                                                         { "not"   , UnaryOperation.Not },
-                                                                                         { "negate", UnaryOperation.Negate },
-                                                                                         { "plus"  , UnaryOperation.Plus }
+                                                                                     { "not", UnaryOperation.Not },
+                                                                                     { "negate", UnaryOperation.Negate },
+                                                                                     { "plus", UnaryOperation.Plus }
                                                                                  };
 
     private static readonly ReadOnlyCollection<string> DateTimeProperties = new System.Linq.Expressions.Expression<Func<DateTime, object>>[]
                                                                             {
-                                                                                    d => d.Day, d => d.Hour, d => d.Minute, d => d.Month, d => d.Second, d => d.Year,
-                                                                                    d => d.Date // extra
+                                                                                d => d.Day,
+                                                                                d => d.Hour,
+                                                                                d => d.Minute,
+                                                                                d => d.Month,
+                                                                                d => d.Second,
+                                                                                d => d.Year,
+                                                                                d => d.Date // extra
                                                                             }.ToReadOnlyCollection(expr => expr.GetMemberName().ToLower());
 }

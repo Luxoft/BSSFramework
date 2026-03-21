@@ -2,7 +2,4 @@
   <PropertyGroup>
     <PackageId>Luxoft.Framework.DomainDriven.ProjectionGenerator</PackageId>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Framework.DomainDriven.Generation.Domain\Framework.DomainDriven.Generation.Domain.csproj" />
-  </ItemGroup>
 </Project>

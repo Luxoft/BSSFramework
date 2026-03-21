@@ -1,142 +1,53 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Immutable;
 using System.Linq.Expressions;
 
 using CommonFramework;
-using CommonFramework.ExpressionEvaluate;
 
 using Framework.Core;
 
 namespace Framework.OData;
 
-public class SelectOperation<TDomainObject> : IDynamicSelectOperation, IQueryableProcessor<TDomainObject>
+public record SelectOperation<TDomainObject>(
+    Expression<Func<TDomainObject, bool>> Filter,
+    ImmutableArray<SelectOrder<TDomainObject>> Orders,
+    int SkipCount,
+    int TakeCount) : IDynamicSelectOperation, IQueryableProcessor<TDomainObject>
 {
-    private readonly Lazy<bool> isVirtualLazy;
+    public bool HasPaging => this.SkipCount != 0 || this.TakeCount != 0;
 
-    private readonly Lazy<bool> isVirtualFilterLazy;
+    public ImmutableArray<Framework.QueryLanguage.LambdaExpression> Expands { get; init; } = [];
 
-    private readonly Lazy<bool> isVirtualOrderLazy;
+    public ImmutableArray<Framework.QueryLanguage.LambdaExpression> Selects { get; init; } = [];
 
-    public SelectOperation(Expression<Func<TDomainObject, bool>> filter, IEnumerable<ISelectOrder<TDomainObject>> orders, IEnumerable<Framework.QueryLanguage.LambdaExpression> expands, IEnumerable<Framework.QueryLanguage.LambdaExpression> selects, int skipCount, int takeCount)
-    {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
-        if (orders == null) throw new ArgumentNullException(nameof(orders));
-        if (expands == null) throw new ArgumentNullException(nameof(expands));
-        if (selects == null) throw new ArgumentNullException(nameof(selects));
+    public SelectOperation<TDomainObject> WithoutPaging() => this.HasPaging ? this with { SkipCount = 0, TakeCount = 0 } : this;
 
-        this.Filter = filter;
-        this.Orders = orders.ToReadOnlyCollection();
-        this.Expands = expands.ToReadOnlyCollection();
-        this.Selects = selects.ToReadOnlyCollection();
-        this.SkipCount = skipCount;
-        this.TakeCount = takeCount;
+    public SelectOperation<TDomainObject> AddFilter(Expression<Func<TDomainObject, bool>> filter) =>
 
-        this.isVirtualFilterLazy = LazyHelper.Create(() => this.Filter.HasVirtualProperty());
+        this with { Filter = this.Filter.BuildAnd(filter) };
 
-        this.isVirtualOrderLazy = LazyHelper.Create(() => this.Orders.Any(order => order.HasVirtualProperty()));
+    public SelectOperation<TDomainObject> AddOrder<TOrderKey>(Expression<Func<TDomainObject, TOrderKey>> path, OrderType type) =>
 
-        this.isVirtualLazy = LazyHelper.Create(() => this.isVirtualFilterLazy.Value || this.isVirtualOrderLazy.Value);
-    }
+        this with { Orders = [..this.Orders, new SelectOrder<TDomainObject, TOrderKey>(path) { OrderType = type }] };
 
-
-    public Expression<Func<TDomainObject, bool>> Filter { get; private set; }
-
-    public ReadOnlyCollection<ISelectOrder<TDomainObject>> Orders { get; private set; }
-
-    public int SkipCount { get; private set; }
-
-    public int TakeCount { get; private set; }
-
-
-    public bool IsVirtual => this.isVirtualLazy.Value;
-
-    public bool HasPaging => this.SkipCount != Default.SkipCount || this.TakeCount != Default.TakeCount;
-
-    public SelectOperation<TDomainObject> WithoutPaging()
-    {
-        return new SelectOperation<TDomainObject>(
-                                                  this.Filter,
-                                                  this.Orders,
-                                                  this.Expands,
-                                                  this.Selects,
-                                                  Default.SkipCount,
-                                                  Default.TakeCount);
-    }
-
-    private ReadOnlyCollection<Framework.QueryLanguage.LambdaExpression> Expands { get; set; }
-
-    private ReadOnlyCollection<Framework.QueryLanguage.LambdaExpression> Selects { get; set; }
-
-    public SelectOperation<TDomainObject> AddFilter(Expression<Func<TDomainObject, bool>> filter)
-    {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
-
-        return this.OverrideFilter(this.Filter.BuildAnd(filter));
-    }
-
-    public SelectOperation<TDomainObject> OverrideFilter(Expression<Func<TDomainObject, bool>> filter)
-    {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
-
-        return new SelectOperation<TDomainObject>(filter, this.Orders, this.Expands, this.Selects, this.SkipCount, this.TakeCount);
-    }
-
-    public SelectOperation<TDomainObject> AddOrder<TOrderKey>(Expression<Func<TDomainObject, TOrderKey>> order, OrderType type)
-    {
-        if (order == null) throw new ArgumentNullException(nameof(order));
-
-        return new SelectOperation<TDomainObject>(this.Filter, this.Orders.Concat(new[] { new SelectOrder<TDomainObject, TOrderKey>(order, type) }), this.Expands, this.Selects, this.SkipCount, this.TakeCount);
-    }
-
-    public SelectOperation<TOutput> Covariance<TOutput>()
-            where TOutput : TDomainObject
-    {
-        var newFilter = this.Filter.Covariance<TOutput, TDomainObject, bool>();
-
-        var newOrders = this.Orders.Select(order => order.Covariance<TOutput>());
-
-        return new SelectOperation<TOutput>(newFilter, newOrders, this.Expands, this.Selects, this.SkipCount, this.TakeCount);
-    }
-
-    public SelectOperation<TDomainObject> ToCountOperation()
-    {
-        return new SelectOperation<TDomainObject>(this.Filter, Default.Orders, Default.Expands, Default.Selects, Default.SkipCount, Default.TakeCount);
-    }
+    public SelectOperation<TDomainObject> ToCountOperation() => Default with { Filter = this.Filter };
 
     public SelectOperation<TDomainObject> Visit(ExpressionVisitor visitor)
     {
-        if (visitor == null) throw new ArgumentNullException(nameof(visitor));
-
         var newFilter = this.Filter.UpdateBody(visitor);
 
         var newOrders = this.Orders.Select(order => order.Visit(visitor));
 
-        return new SelectOperation<TDomainObject>(newFilter, newOrders, this.Expands, this.Selects, this.SkipCount, this.TakeCount);
+        return this with { Filter = newFilter, Orders = [.. newOrders] };
     }
 
-
-    public IQueryable<TDomainObject> Process(IQueryable<TDomainObject> baseQueryable)
-    {
-        if (baseQueryable == null) throw new ArgumentNullException(nameof(baseQueryable));
-
-        return this.GetProcessQueryableElements().Aggregate(baseQueryable);
-    }
+    public IQueryable<TDomainObject> Process(IQueryable<TDomainObject> baseQueryable) =>
+        this.GetProcessQueryableElements().Aggregate(baseQueryable);
 
     private IEnumerable<Func<IQueryable<TDomainObject>, IQueryable<TDomainObject>>> GetProcessQueryableElements()
     {
-        if (this.isVirtualFilterLazy.Value)
-        {
-            yield return q => q.Where(this.Filter.ToRealFilter())
-                               .AsEnumerable()
-                               .AsQueryable()
-                               .Where(LambdaCompileCache.GetFunc(this.Filter))
-                               .AsQueryable();
-        }
-        else
-        {
-            yield return q => q.Where(this.Filter);
-        }
+        yield return q => q.Where(this.Filter);
 
-        yield return q => this.Orders.Aggregate(q, (query, order) => order.Process(query, this.isVirtualOrderLazy.Value));
+        yield return q => this.Orders.Aggregate(q, (query, order) => order.Process(query));
 
         if (this.SkipCount != SelectOperation.Default.SkipCount)
         {
@@ -150,35 +61,9 @@ public class SelectOperation<TDomainObject> : IDynamicSelectOperation, IQueryabl
     }
 
 
-    public static readonly SelectOperation<TDomainObject> Default = new SelectOperation<TDomainObject>(
+    public static readonly SelectOperation<TDomainObject> Default = new(_ => true, [], 0, int.MaxValue);
 
-     _ => true,
+    IEnumerable<Framework.QueryLanguage.LambdaExpression> IDynamicSelectOperation.Expands => this.Expands;
 
-     new ISelectOrder<TDomainObject>[0],
-
-     new Framework.QueryLanguage.LambdaExpression[0],
-
-     new Framework.QueryLanguage.LambdaExpression[0],
-
-     0,
-
-     int.MaxValue);
-
-    #region IDynamicSelectOperation Members
-
-    IEnumerable<Framework.QueryLanguage.LambdaExpression> IDynamicSelectOperation.Expands
-    {
-        get { return this.Expands; }
-    }
-
-    IEnumerable<Framework.QueryLanguage.LambdaExpression> IDynamicSelectOperation.Selects
-    {
-        get { return this.Selects; }
-    }
-
-    #endregion
-
-
-
-    private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
+    IEnumerable<Framework.QueryLanguage.LambdaExpression> IDynamicSelectOperation.Selects => this.Selects;
 }

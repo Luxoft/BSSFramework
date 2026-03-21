@@ -2,21 +2,20 @@
 
 namespace Framework.QueryLanguage;
 
-[DataContract]
 public enum UnaryOperation
 {
     /// <summary>
     /// (! a)
     /// </summary>
-    [EnumMember] Not,
+    Not,
 
     /// <summary>
     /// (+ a)
     /// </summary>
-    [EnumMember] Plus,
+    Plus,
 
     /// <summary>
     /// (- a)
     /// </summary>
-    [EnumMember] Negate,
+    Negate,
 }

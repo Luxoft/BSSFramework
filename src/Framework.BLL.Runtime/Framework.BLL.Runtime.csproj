@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.BLL.Runtime</PackageId>
+    <RootNamespace>Framework.BLL</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Application.Runtime\Framework.Application.Runtime.csproj" />
+    <ProjectReference Include="..\Framework.BLL.Abstractions\Framework.BLL.Abstractions.csproj" />
+    <ProjectReference Include="..\Framework.Validation.Abstractions\Framework.Validation.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -5,7 +5,7 @@ namespace Automation;
 public class ServiceProviderPool : IServiceProviderPool
 {
     private readonly Func<IServiceProvider> createServiceProviderFunc;
-    private readonly ConcurrentBag<IServiceProvider> providersCache = new ConcurrentBag<IServiceProvider>();
+    private readonly ConcurrentBag<IServiceProvider> providersCache = [];
     private readonly SemaphoreSlim semaphore;
     private readonly bool enableLimiter;
 

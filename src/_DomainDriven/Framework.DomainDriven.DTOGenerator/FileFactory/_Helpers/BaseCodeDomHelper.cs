@@ -51,7 +51,7 @@ public static class BaseCodeDomHelper
             where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
     {
         return source.GetActualStrictConstructorFileTypes()
-                     .Concat(new[] { default(MainDTOFileType) })
+                     .Concat([default(MainDTOFileType)])
                      .Windowed2((fileType, baseFileType) => new[] { false, true}.Select(withoutMappingParameter => source.GenerateStrictConstructor(fileType, baseFileType, withoutMappingParameter)))
                      .SelectMany();
     }

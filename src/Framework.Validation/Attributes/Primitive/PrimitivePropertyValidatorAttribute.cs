@@ -9,10 +9,7 @@ namespace Framework.Validation;
 [AttributeUsage(AttributeTargets.Property)]
 public class PrimitivePropertyValidatorAttribute(Type validatorType) : PropertyValidatorAttribute
 {
-    public override IPropertyValidator CreateValidator()
-    {
-        return new PrimitivePropertyValidator(validatorType);
-    }
+    public override IPropertyValidator CreateValidator() => new PrimitivePropertyValidator(validatorType);
 
     public class PrimitivePropertyValidator(Type validatorType) : IDynamicPropertyValidator
     {

@@ -64,7 +64,7 @@ public class UniqueGroupDatabaseValidator : IDynamicClassValidator
         var getPropertyValuesFunc = GetGetPropertyValuesExpression(domainObjectType, uniProperties).Compile();
 
         var validator = (IClassValidator)internalValidatorType.GetConstructors().Single().Invoke(
-         new object[] { getFilterExpression, getPropertyValuesFunc, propertyNames });
+            [getFilterExpression, getPropertyValuesFunc, propertyNames]);
 
         return validator;
     }

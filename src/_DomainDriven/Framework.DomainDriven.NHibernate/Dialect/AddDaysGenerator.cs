@@ -19,7 +19,7 @@ public class AddDaysGenerator : BaseHqlGeneratorForMethod
     /// </summary>
     public AddDaysGenerator()
     {
-        this.SupportedMethods = new[] { ReflectionHelper.GetMethodDefinition<DateTime?>(d => d.Value.AddDays(0)) };
+        this.SupportedMethods = [ReflectionHelper.GetMethodDefinition<DateTime?>(d => d.Value.AddDays(0))];
     }
 
     /// <summary>

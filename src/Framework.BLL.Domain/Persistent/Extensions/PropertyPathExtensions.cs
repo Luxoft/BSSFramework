@@ -37,7 +37,10 @@ public static class PropertyPathExtensions
 
                                                                                     let basePath = property.ReflectedType!.GetPropertyPath(pathAttribute.Path)
 
-                                                                                    select recurse && !basePath.SequenceEqual(new[] { property }) ? new PropertyPath(basePath.SelectMany(prop => (IEnumerable<PropertyInfo>)cache.GetValue(prop, true) ?? new[] { prop })) : basePath;
+                                                                                    select recurse && !basePath.SequenceEqual([property]) ? new PropertyPath(basePath.SelectMany(prop => (IEnumerable<PropertyInfo>)cache.GetValue(prop, true) ??
+                                                                                    [
+                                                                                        prop
+                                                                                    ])) : basePath;
 
                                                                                 return pathRequest.GetValueOrDefault();
                                                                             }).WithLock();
@@ -73,7 +76,7 @@ public static class PropertyPathExtensions
                     {
                         var property = state.LastType.GetProperty(propertyName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, true);
 
-                        return new { LastType = property.GetNestedType(), TotalPath = state.TotalPath.Concat(new[] { property }) };
+                        return new { LastType = property.GetNestedType(), TotalPath = state.TotalPath.Concat([property]) };
                     },
 
                     state => state.TotalPath.ToPropertyPath());
@@ -144,7 +147,7 @@ public static class PropertyPathExtensions
         {
             if (property == null) throw new ArgumentNullException(nameof(property));
 
-            return property.GetExpandPath() ?? new PropertyPath(new[] { property });
+            return property.GetExpandPath() ?? new PropertyPath([property]);
         }
     }
 

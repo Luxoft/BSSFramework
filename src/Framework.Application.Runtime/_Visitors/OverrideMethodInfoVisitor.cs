@@ -24,12 +24,12 @@ public class OverrideMethodInfoVisitor : ExpressionVisitor
 
     protected override Expression VisitUnary(UnaryExpression node)
     {
-        return node.Method == this._methodInfo ? this.GetExpressionByArgs(new[] { node.Operand }) : base.VisitUnary(node);
+        return node.Method == this._methodInfo ? this.GetExpressionByArgs([node.Operand]) : base.VisitUnary(node);
     }
 
     protected override Expression VisitBinary(BinaryExpression node)
     {
-        return node.Method == this._methodInfo ? this.GetExpressionByArgs(new[] { node.Left, node.Right }) : base.VisitBinary(node);
+        return node.Method == this._methodInfo ? this.GetExpressionByArgs([node.Left, node.Right]) : base.VisitBinary(node);
     }
 
     protected override Expression VisitMethodCall(MethodCallExpression node)

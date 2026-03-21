@@ -176,7 +176,7 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
     {
         foreach (var pair in node.Properties.OrderBy(pair => pair.Key.Name))
         {
-            yield return new PropertyPath(new[] { pair.Key });
+            yield return new PropertyPath([pair.Key]);
 
             foreach (var subPath in this.GetPaths(pair.Value))
             {

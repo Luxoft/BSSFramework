@@ -86,11 +86,11 @@ public class RevisionSubscriptionSystemService<TBLLContext, T> : SubscriptionSys
         }
         catch (TargetInvocationException ex)
         {
-            return new[] { TryResult.CreateFault<Subscription>(ex.GetBaseException()) };
+            return [TryResult.CreateFault<Subscription>(ex.GetBaseException())];
         }
         catch (Exception ex)
         {
-            return new[] { TryResult.CreateFault<Subscription>(ex) };
+            return [TryResult.CreateFault<Subscription>(ex)];
         }
     }
 

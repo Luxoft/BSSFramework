@@ -2,8 +2,5 @@
 
 public class AvailableDateTimeValidatorAttribute : ClassValidatorAttribute
 {
-    public override IClassValidator CreateValidator()
-    {
-        return AvailableDateTimeValidator.Value;
-    }
+    public override IClassValidator CreateValidator() => AvailableDateTimeValidator.Value;
 }

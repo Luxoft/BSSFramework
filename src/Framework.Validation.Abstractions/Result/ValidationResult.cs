@@ -88,10 +88,10 @@ public class ValidationResult
     {
         if (message == null) throw new ArgumentNullException(nameof(message));
 
-        return new ValidationResult(new[] { new ValidationException(message) });
+        return new ValidationResult([new ValidationException(message)]);
     }
 
-    internal static ValidationResult CreateError(object exceptionObject)
+    public static ValidationResult CreateError(object exceptionObject)
     {
         return (exceptionObject as string).ToMaybe().Select(CreateError)
                                           .Or(() => (exceptionObject as ValidationExceptionBase).ToMaybe().Select(CreateError))
@@ -103,16 +103,13 @@ public class ValidationResult
     {
         if (exception == null) throw new ArgumentNullException(nameof(exception));
 
-        return new ValidationResult(new[] { exception });
+        return new ValidationResult([exception]);
     }
 
-    public static readonly ValidationResult Success = new ValidationResult(new ValidationExceptionBase[0].ToReadOnlyCollection());
+    public static readonly ValidationResult Success = new(Array.Empty<ValidationExceptionBase>().ToReadOnlyCollection());
 
     public static ValidationResult operator +(ValidationResult result1, ValidationResult result2)
     {
-        if (result1 == null) throw new ArgumentNullException(nameof(result1));
-        if (result2 == null) throw new ArgumentNullException(nameof(result2));
-
         if (!result1.HasErrors)
         {
             return result2;
@@ -125,10 +122,5 @@ public class ValidationResult
         {
             return new ValidationResult(result1.Errors.Union(result2.Errors));
         }
-    }
-
-    internal static Func<T, ValidationResult> GetSuccessFunc<T>()
-    {
-        return _ => Success;
     }
 }

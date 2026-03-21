@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 
+
 namespace Framework.BLL;
 
 public class BLLContextSettings<TPersistentDomainObjectBase> : ITypeResolverContainer<string>

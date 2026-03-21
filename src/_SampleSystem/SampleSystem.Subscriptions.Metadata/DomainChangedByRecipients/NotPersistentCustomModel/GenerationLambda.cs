@@ -17,12 +17,12 @@ public sealed class GenerationLambda : GenerationLambdaBase<Domain.Country>
             ISampleSystemBLLContext context,
             DomainObjectVersions<Domain.Country> versions)
     {
-        return new[]
-               {
-                       new NotificationMessageGenerationInfo(
+        return
+        [
+            new NotificationMessageGenerationInfo(
                                                              "tester@luxoft.com",
                                                              new CustomNotificationModel(context, versions.Current),
                                                              new CustomNotificationModel(context, versions.Previous))
-               };
+        ];
     }
 }

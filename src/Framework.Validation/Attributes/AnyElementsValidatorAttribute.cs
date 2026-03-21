@@ -9,10 +9,7 @@ namespace Framework.Validation;
 [AttributeUsage(AttributeTargets.Property)]
 public class AnyElementsValidatorAttribute : PropertyValidatorAttribute
 {
-    public override IPropertyValidator CreateValidator()
-    {
-        return AnyElementsValidator.Value;
-    }
+    public override IPropertyValidator CreateValidator() => AnyElementsValidator.Value;
 }
 
 public class AnyElementsValidator : IDynamicPropertyValidator

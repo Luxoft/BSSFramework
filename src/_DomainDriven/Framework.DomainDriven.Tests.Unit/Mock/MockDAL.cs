@@ -15,7 +15,7 @@ namespace Framework.DomainDriven.UnitTest.Mock;
 public class MockDAL<TDomain, TIdent> : IMockDAL<TDomain, TIdent>
     where TDomain : IIdentityObject<TIdent>
 {
-    private readonly HashSet<TDomain> _collection = new HashSet<TDomain>();
+    private readonly HashSet<TDomain> _collection = [];
 
     private readonly IList<Action<HashSet<TDomain>>> _actions = new List<Action<HashSet<TDomain>>>();
 
@@ -28,7 +28,7 @@ public class MockDAL<TDomain, TIdent> : IMockDAL<TDomain, TIdent>
     {
     }
 
-    public MockDAL(TDomain value) : this(new[] { value })
+    public MockDAL(TDomain value) : this([value])
     {
     }
 
@@ -208,6 +208,6 @@ public class MockDAL<TDomain, TIdent> : IMockDAL<TDomain, TIdent>
     private static void SetIdentity(TDomain domainObject, object id)
     {
         typeof(TDomain).GetProperty(nameof(domainObject.Id), BindingFlags.Public | BindingFlags.Instance)
-                       .SetValue(domainObject, id, new object[0]);
+                       .SetValue(domainObject, id, Array.Empty<object>());
     }
 }

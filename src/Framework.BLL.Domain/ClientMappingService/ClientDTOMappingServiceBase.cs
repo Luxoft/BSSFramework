@@ -27,7 +27,7 @@ public abstract class ClientDTOMappingServiceBase
 
         if (tryCurrentSourceValue == null)
         {
-            return new List<UpdateItemData<TTarget, TIdentity>>();
+            return [];
         }
         else
         {
@@ -50,7 +50,7 @@ public abstract class ClientDTOMappingServiceBase
 
         if (tryCurrentSourceValue == null)
         {
-            return new List<UpdateItemData<TTarget, TIdentity>>();
+            return [];
         }
         else
         {

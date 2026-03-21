@@ -36,7 +36,7 @@ public static class ValidationMapExtensions
         if (assemblies == null) throw new ArgumentNullException(nameof(assemblies));
 
 
-        var types = from assembly in assemblies.Any() ? assemblies : new[] { typeof(TDomainObjectBase).Assembly }
+        var types = from assembly in assemblies.Any() ? assemblies : [typeof(TDomainObjectBase).Assembly]
 
                     from type in assembly.GetTypes()
 
@@ -51,9 +51,9 @@ public static class ValidationMapExtensions
 
     private class FixedValidationMap : IValidationMap
     {
-        private readonly IValidationMap _baseValidationMap;
+        private readonly IValidationMap baseValidationMap;
 
-        private readonly Dictionary<Type, IClassValidationMap> _classMapCache;
+        private readonly Dictionary<Type, IClassValidationMap> classMapCache;
 
 
         public FixedValidationMap(IValidationMap baseValidationMap, IEnumerable<Type> types)
@@ -61,26 +61,26 @@ public static class ValidationMapExtensions
             if (baseValidationMap == null) throw new ArgumentNullException(nameof(baseValidationMap));
             if (types == null) throw new ArgumentNullException(nameof(types));
 
-            this._baseValidationMap = baseValidationMap;
+            this.baseValidationMap = baseValidationMap;
 
-            this._classMapCache = types.ToDictionary(t => t, t => this._baseValidationMap.GetClassMap(t));
+            this.classMapCache = types.ToDictionary(t => t, t => this.baseValidationMap.GetClassMap(t));
         }
 
 
-        public IServiceProvider ServiceProvider => this._baseValidationMap.ServiceProvider;
+        public IServiceProvider ServiceProvider => this.baseValidationMap.ServiceProvider;
 
 
         public IClassValidationMap GetClassMap(Type type)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
 
-            var classValidator = this._classMapCache.GetMaybeValue(type);
+            var classValidator = this.classMapCache.GetMaybeValue(type);
 
             return classValidator.Match(map => map, () =>
                                                     {
                                                         if (type.IsSystemOrCoreType())
                                                         {
-                                                            return this._baseValidationMap.GetClassMap(type);
+                                                            return this.baseValidationMap.GetClassMap(type);
                                                         }
                                                         else
                                                         {

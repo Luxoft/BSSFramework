@@ -32,8 +32,8 @@ internal sealed class MessageTemplateFactoryTo : MessageTemplateFactoryBase
                                        recipient => this.CreateTemplate<TSourceDomainObjectType, TModelObjectType>(
                                         domainObjectVersions,
                                         subscription,
-                                        new[] { recipient.Email },
-                                        Enumerable.Empty<string>(),
+                                        [recipient.Email],
+                                        [],
                                         replyTo.Select(z=>z.Email),
                                         attachments));
 
@@ -52,7 +52,7 @@ internal sealed class MessageTemplateFactoryTo : MessageTemplateFactoryBase
                                                                                     domainObjectVersions,
                                                                                     subscription,
                                                                                     recipients.Select(r => r.Email),
-                                                                                    Enumerable.Empty<string>(),
+                                                                                    [],
                                                                                     replyTo.Select(z => z.Email),
                                                                                     attachments);
 

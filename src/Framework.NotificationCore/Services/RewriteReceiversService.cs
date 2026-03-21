@@ -50,7 +50,7 @@ public class RewriteReceiversService : IRewriteReceiversService
 
                         return newRecipients.Any()
                                        ? newRecipients
-                                       : new[] { new MailAddress(z.Name) };
+                                       : [new MailAddress(z.Name)];
                     })
             .SelectMany(z => z);
 }

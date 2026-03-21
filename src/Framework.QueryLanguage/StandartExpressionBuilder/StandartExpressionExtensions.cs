@@ -127,7 +127,8 @@ public static class StandardExpressionExtensions
                                                                    }
                                                                    else
                                                                    {
-                                                                       var liftedValue = CreateNullableConstantMethod.MakeGenericMethod(expression.Type, expectedNullableElementType).Invoke(null, new[] { value });
+                                                                       var liftedValue = CreateNullableConstantMethod.MakeGenericMethod(expression.Type, expectedNullableElementType).Invoke(null,
+                                                                           [value]);
 
                                                                        return System.Linq.Expressions.Expression.Constant(liftedValue, expectedNullableType);
                                                                    }

@@ -23,14 +23,14 @@ public sealed class AttachmentLambda : AttachmentLambdaBase<Domain.Employee>
             ISampleSystemBLLContext context,
             DomainObjectVersions<Domain.Employee> versions)
     {
-        return new[]
-               {
-                       // Attachments could be get from any storage: Assembly Resources, Database, File system
+        return
+        [
+            // Attachments could be get from any storage: Assembly Resources, Database, File system
                        new System.Net.Mail.Attachment(new MemoryStream(Encoding.UTF8.GetBytes("Hello world!")), AttachmentName)
                        {
                                // If ContentId not set .NET generate new GUID https://github.com/Microsoft/referencesource/blob/master/System/net/System/Net/mail/Attachment.cs
                                ContentId = "testId@luxoft.com"
                        }
-               };
+        ];
     }
 }

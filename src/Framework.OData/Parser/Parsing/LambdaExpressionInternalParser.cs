@@ -70,7 +70,7 @@ internal class LambdaExpressionInternalParser : CharParsers
             this.numberFormatInfo,
             this.rootParameter,
             subParameter,
-            this.usedParameters.Concat(new[] { subParameter }).ToReadOnlyCollection());
+            this.usedParameters.Concat([subParameter]).ToReadOnlyCollection());
     }
 
 

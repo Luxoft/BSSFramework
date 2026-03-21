@@ -47,7 +47,7 @@ public abstract class GenerationLambdaProcessorBase<TBLLContext> : LambdaProcess
 
         if (!DomainObjectCompliesLambdaRequiredMode(lambda, versions))
         {
-            return Enumerable.Empty<NotificationMessageGenerationInfo>();
+            return [];
         }
 
         var result = this.TryInvoke(subscription, versions, this.InvokeInternal);

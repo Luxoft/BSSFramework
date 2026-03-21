@@ -153,7 +153,7 @@ public class MessageTemplateFactory<TBLLContext>
         var method = new Func<Subscription, DomainObjectVersions<object>, RecipientsBag, IEnumerable<MessageTemplateNotification>>(this.CreateImplicit<object, object>)
                 .CreateGenericMethod(sourceDomainObjectType, newDomainObjectType);
 
-        var result = method.Invoke(this, new[] { subscription, newDomainObjectVersions, recipients });
+        var result = method.Invoke(this, [subscription, newDomainObjectVersions, recipients]);
 
         return (IEnumerable<MessageTemplateNotification>)result;
     }
@@ -163,7 +163,7 @@ public class MessageTemplateFactory<TBLLContext>
     {
         var genericType = typeof(DomainObjectVersions<>).MakeGenericType(versions.DomainObjectType);
         var ctor = genericType.GetConstructors().Single();
-        var result = ctor.Invoke(new object[] { versions.Previous, versions.Current });
+        var result = ctor.Invoke([versions.Previous, versions.Current]);
 
         return result;
     }

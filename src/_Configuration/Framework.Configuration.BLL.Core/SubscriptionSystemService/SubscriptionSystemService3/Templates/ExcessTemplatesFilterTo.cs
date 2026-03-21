@@ -38,8 +38,8 @@ internal sealed class ExcessTemplatesFilterTo : ExcessTemplatesFilterBase
 
         var result = recipients.Select(r => CopyTemplate(
                                                          commonTemplate,
-                                                         new[] { r },
-                                                         Enumerable.Empty<string>(),
+                                                         [r],
+                                                         [],
                                                          commonTemplate.ReplyTo));
 
         return result;
@@ -48,7 +48,7 @@ internal sealed class ExcessTemplatesFilterTo : ExcessTemplatesFilterBase
     private static IEnumerable<MessageTemplateNotification> CreateTemplatesForAll(
             MessageTemplateNotification commonTemplate, IEnumerable<string> recipients)
     {
-        var result = CopyTemplate(commonTemplate, recipients, Enumerable.Empty<string>(), commonTemplate.ReplyTo);
+        var result = CopyTemplate(commonTemplate, recipients, [], commonTemplate.ReplyTo);
         yield return result;
     }
 

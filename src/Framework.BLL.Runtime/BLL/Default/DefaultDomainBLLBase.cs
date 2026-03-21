@@ -50,7 +50,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
         var request = from t in typeof(TDomainObject).Assembly.GetTypes()
                       where t != typeof(TDomainObject) && !t.IsAbstract && !t.IsGenericTypeDefinition && typeof(TDomainObject).IsAssignableFrom(t)
                       let nestedDomainObject =
-                              t.IsInstanceOfType(domainObject) ? domainObject : method.MakeGenericMethod(t).Invoke<TDomainObject>(this, new[] { domainObject })
+                              t.IsInstanceOfType(domainObject) ? domainObject : method.MakeGenericMethod(t).Invoke<TDomainObject>(this, [domainObject])
                       where nestedDomainObject != null
                       select nestedDomainObject;
 

@@ -2,13 +2,7 @@
 
 public static class EnumExtensions
 {
-    public static bool HasFlag(this int source, int target)
-    {
-        return (source & target) == target;
-    }
+    public static bool HasFlag(this int source, int target) => (source & target) == target;
 
-    public static bool IsIntersected(this int source, int target)
-    {
-        return (source & target) != 0;
-    }
+    public static bool IsIntersected(this int source, int target) => (source & target) != 0;
 }

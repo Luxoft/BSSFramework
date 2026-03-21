@@ -3,7 +3,7 @@
 /// <summary>
 /// Метаданные валидируемого типа
 /// </summary>
-public interface IClassValidationMap// : IValidatorCollection<IClassValidator>
+public interface IClassValidationMap
 {
     /// <summary>
     /// Имя валидируемого тип

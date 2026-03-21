@@ -3,8 +3,8 @@ using System.Reflection;
 
 using CommonFramework;
 
+using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.Core.Visitors;
-using Framework.Persistent;
 
 namespace Framework.Validation;
 
@@ -106,7 +106,12 @@ public abstract class PropertyValidationMap<TSource, TProperty> : PropertyValida
 /// </summary>
 /// <typeparam name="TSource">Валидируемый тип</typeparam>
 /// <typeparam name="TProperty">Тип свойства</typeparam>
-public class SinglePropertyValidationMap<TSource, TProperty> : PropertyValidationMap<TSource, TProperty>, ISinglePropertyValidationMap<TSource, TProperty>
+public class SinglePropertyValidationMap<TSource, TProperty>(
+    PropertyInfo property,
+    IClassValidationMap<TSource> reflectedTypeMap,
+    IEnumerable<IPropertyValidator<TSource, TProperty>> validators,
+    IClassValidationMap<TProperty> propertyTypeMap)
+    : PropertyValidationMap<TSource, TProperty>(property, reflectedTypeMap, validators), ISinglePropertyValidationMap<TSource, TProperty>
 {
     public SinglePropertyValidationMap(
             Expression<Func<TSource, TProperty>> propertyExpr,
@@ -117,25 +122,11 @@ public class SinglePropertyValidationMap<TSource, TProperty> : PropertyValidatio
     {
     }
 
-    public SinglePropertyValidationMap(
-            PropertyInfo property,
-            IClassValidationMap<TSource> reflectedTypeMap,
-            IEnumerable<IPropertyValidator<TSource, TProperty>> validators,
-            IClassValidationMap<TProperty> propertyTypeMap)
-            : base(property, reflectedTypeMap, validators)
-    {
-        if (propertyTypeMap == null) throw new ArgumentNullException(nameof(propertyTypeMap));
-
-        this.PropertyTypeMap = propertyTypeMap;
-
-        this.IsDetail = property.IsDetail();
-    }
-
     public override bool IsCollection { get; } = false;
 
-    public override bool IsDetail { get; }
+    public override bool IsDetail { get; } = property.IsDetail();
 
-    public IClassValidationMap<TProperty> PropertyTypeMap { get; }
+    public IClassValidationMap<TProperty> PropertyTypeMap { get; } = propertyTypeMap;
 
     protected override IClassValidationMap BasePropertyTypeMap => this.PropertyTypeMap;
 

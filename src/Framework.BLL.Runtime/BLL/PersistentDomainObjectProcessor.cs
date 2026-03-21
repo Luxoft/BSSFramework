@@ -28,7 +28,7 @@ public abstract class PersistentDomainObjectProcessor<TBLLContext, TPersistentDo
 
         var genericMethod = new Func<TResult>(this.Process<TPersistentDomainObjectBase>).Method.GetGenericMethodDefinition();
 
-        return (TResult)genericMethod.MakeGenericMethod(new[] { domainType }).Invoke(this, new object[] { });
+        return (TResult)genericMethod.MakeGenericMethod(new[] { domainType }).Invoke(this, []);
     }
 }
 
@@ -59,7 +59,7 @@ public abstract class PersistentDomainObjectProcessor<TBLLContext, TPersistentDo
 
         var genericMethod = new Action(this.Process<TPersistentDomainObjectBase>).Method.GetGenericMethodDefinition();
 
-        genericMethod.MakeGenericMethod(new[] { domainType }).Invoke(this, new object[] { });
+        genericMethod.MakeGenericMethod(new[] { domainType }).Invoke(this, []);
     }
 }
 

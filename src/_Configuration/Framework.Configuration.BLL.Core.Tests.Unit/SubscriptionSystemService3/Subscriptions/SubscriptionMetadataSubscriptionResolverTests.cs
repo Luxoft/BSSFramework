@@ -63,7 +63,7 @@ public sealed class SubscriptionMetadataSubscriptionResolverTests : TestFixtureB
 
         this.metadataStore
             .Get(typeof(object))
-            .Returns(new[] { metadata });
+            .Returns([metadata]);
 
         this.metadataMapper
             .Map(metadata)
@@ -71,11 +71,11 @@ public sealed class SubscriptionMetadataSubscriptionResolverTests : TestFixtureB
 
         this.wrappedResolver
             .Resolve(versions)
-            .Returns(new[] { subscriptionByDb });
+            .Returns([subscriptionByDb]);
 
         this.configurationContextFacade
             .GetActiveCodeFirstSubscriptionCodes()
-            .Returns(new[] { metadata.Code });
+            .Returns([metadata.Code]);
 
         var resolver = this.Fixture.Create<SubscriptionMetadataSubscriptionResolver>();
 
@@ -99,7 +99,7 @@ public sealed class SubscriptionMetadataSubscriptionResolverTests : TestFixtureB
 
         this.metadataStore
             .Get(typeof(object))
-            .Returns(new[] { metadata });
+            .Returns([metadata]);
 
         this.metadataMapper
             .Map(metadata)
@@ -107,11 +107,11 @@ public sealed class SubscriptionMetadataSubscriptionResolverTests : TestFixtureB
 
         this.wrappedResolver
             .Resolve(versions)
-            .Returns(Enumerable.Empty<Subscription>());
+            .Returns([]);
 
         this.configurationContextFacade
             .GetActiveCodeFirstSubscriptionCodes()
-            .Returns(new[] { metadata.Code });
+            .Returns([metadata.Code]);
 
         var resolver = this.Fixture.Create<SubscriptionMetadataSubscriptionResolver>();
 
@@ -134,11 +134,11 @@ public sealed class SubscriptionMetadataSubscriptionResolverTests : TestFixtureB
 
         this.metadataStore
             .Get(typeof(object))
-            .Returns(Enumerable.Empty<ISubscriptionMetadata>());
+            .Returns([]);
 
         this.wrappedResolver
             .Resolve(versions)
-            .Returns(new[] { expectedSubscription });
+            .Returns([expectedSubscription]);
 
         var resolver = this.Fixture.Create<SubscriptionMetadataSubscriptionResolver>();
 
@@ -157,7 +157,7 @@ public sealed class SubscriptionMetadataSubscriptionResolverTests : TestFixtureB
 
         this.metadataStore
             .Get(type)
-            .Returns(Enumerable.Empty<ISubscriptionMetadata>());
+            .Returns([]);
 
         this.wrappedResolver
             .IsActiveSubscriptionForTypeExists(type)
@@ -185,11 +185,11 @@ public sealed class SubscriptionMetadataSubscriptionResolverTests : TestFixtureB
 
         this.metadataStore
             .Get(type)
-            .Returns(new[] { subscriptionMetadata });
+            .Returns([subscriptionMetadata]);
 
         this.configurationContextFacade
             .GetActiveCodeFirstSubscriptionCodes()
-            .Returns(new[] { subscriptionMetadata.Code });
+            .Returns([subscriptionMetadata.Code]);
 
         this.metadataMapper
             .Map(subscriptionMetadata)

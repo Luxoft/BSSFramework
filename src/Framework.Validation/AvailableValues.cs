@@ -14,7 +14,7 @@ public interface IAvailableValues
 
 public class AvailableValues : IAvailableValues
 {
-    private readonly object _source;
+    private readonly object source;
 
 
     protected AvailableValues()
@@ -26,20 +26,13 @@ public class AvailableValues : IAvailableValues
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
-        this._source = source;
+        this.source = source;
     }
 
 
-    public virtual Range<T> GetAvailableRange<T>()
-    {
-        return (this._source as IRangeContainer<T>).Maybe(c => c.Range);
-    }
+    public virtual Range<T> GetAvailableRange<T>() => (this.source as IRangeContainer<T>).Maybe(c => c.Range);
 
-    public virtual int GetAvailableSize<T>()
-    {
-        return (this._source as ISizeContainer<T>).Maybe(c => c.Size);
-    }
-
+    public virtual int GetAvailableSize<T>() => (this.source as ISizeContainer<T>).Maybe(c => c.Size);
 
     public static readonly AvailableValues Empty = new AvailableValues(new object());
 
@@ -48,14 +41,8 @@ public class AvailableValues : IAvailableValues
 
     private class InfinityAvailableValues : AvailableValues
     {
-        public override Range<T> GetAvailableRange<T>()
-        {
-            return Range<T>.Infinity;
-        }
+        public override Range<T> GetAvailableRange<T>() => Range<T>.Infinity;
 
-        public override int GetAvailableSize<T>()
-        {
-            return int.MaxValue;
-        }
+        public override int GetAvailableSize<T>() => int.MaxValue;
     }
 }

@@ -18,7 +18,7 @@ public class AddYearsGenerator : BaseHqlGeneratorForMethod
     /// Creates new generator instance
     /// </summary>
     public AddYearsGenerator() =>
-            this.SupportedMethods = new[] { ReflectHelper.GetMethodDefinition<DateTime?>(d => d.Value.AddYears(0)) };
+            this.SupportedMethods = [ReflectHelper.GetMethodDefinition<DateTime?>(d => d.Value.AddYears(0))];
 
     /// <summary>
     /// Creates new <see cref="HqlTreeNode"/> node that represents AddYears method call

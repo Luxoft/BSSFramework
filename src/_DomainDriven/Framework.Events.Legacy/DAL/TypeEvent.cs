@@ -23,7 +23,7 @@ public struct TypeEvent
         Func<T, bool> isSaveProcessingFunc = null,
         Func<T, bool> isRemoveProcessingFunc = null)
     {
-        return Create(new[] { domainObjectEvent }, isSaveProcessingFunc, isRemoveProcessingFunc);
+        return Create([domainObjectEvent], isSaveProcessingFunc, isRemoveProcessingFunc);
     }
 
     public static TypeEvent Create<T>(

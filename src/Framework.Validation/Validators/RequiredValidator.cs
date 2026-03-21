@@ -2,8 +2,8 @@
 
 using CommonFramework;
 
+using Framework.Application.Domain;
 using Framework.Core;
-using Framework.Persistent;
 using Framework.Restriction;
 
 namespace Framework.Validation;
@@ -39,8 +39,8 @@ public class RequiredValidator(RequiredMode mode) : IPropertyValidator<object, o
         mode.ValidateAppliedType(property.PropertyType);
 
         return (IPropertyValidator)typeof(RequiredValidator<,>).MakeGenericType(property.ReflectedType, property.PropertyType)
-                                                               .GetConstructor(new[] {typeof(RequiredMode)})
-                                                               .Invoke(new object[] { mode });
+                                                               .GetConstructor([typeof(RequiredMode)])
+                                                               .Invoke([mode]);
     }
 
 
@@ -49,31 +49,25 @@ public class RequiredValidator(RequiredMode mode) : IPropertyValidator<object, o
 
 public class RequiredValidator<TSource, TProperty>(RequiredMode mode) : IPropertyValidator<TSource, TProperty>
 {
-    public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> context)
-    {
-        return ValidationResult.FromCondition(this.IsValid(context), () =>
-                                                                     {
-                                                                         var name = (context.GetSource() as IVisualIdentityObject).Maybe(x => x.Name);
+    public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> context) =>
+        ValidationResult.FromCondition(this.IsValid(context), () =>
+        {
+            var name = (context.GetSource() as IVisualIdentityObject).Maybe(x => x.Name);
 
-                                                                         if (context.Value is Period && mode == RequiredMode.ClosedPeriodEndDate)
-                                                                         {
-                                                                             var value = (Period)(object)context.Value;
+            if (context.Value is Period && mode == RequiredMode.ClosedPeriodEndDate)
+            {
+                var value = (Period)(object)context.Value;
 
-                                                                             if (value.EndDate == null)
-                                                                             {
-                                                                                 return $"The End Date for field {context.GetPropertyName()} of type {context.GetSourceTypeName()}{name.Maybe(x => $" ['{x}']")} must be initialized";
-                                                                             }
-                                                                         }
+                if (value.EndDate == null)
+                {
+                    return $"The End Date for field {context.GetPropertyName()} of type {context.GetSourceTypeName()}{name.Maybe(x => $" ['{x}']")} must be initialized";
+                }
+            }
 
-                                                                         return $"The field {context.GetPropertyName()} of type {context.GetSourceTypeName()}{name.Maybe(x => $" ['{x}']")} must be initialized";
-                                                                     });
-    }
+            return $"The field {context.GetPropertyName()} of type {context.GetSourceTypeName()}{name.Maybe(x => $" ['{x}']")} must be initialized";
+        });
 
-    protected virtual bool IsValid(IPropertyValidationContext<TSource, TProperty> context)
-    {
-        return RequiredHelper.IsValid(context.Value, mode);
-    }
-
+    protected virtual bool IsValid(IPropertyValidationContext<TSource, TProperty> context) => RequiredHelper.IsValid(context.Value, mode);
 
     public static RequiredValidator<TSource, TProperty> Default { get; } = new RequiredValidator<TSource, TProperty>(RequiredMode.Default);
 }

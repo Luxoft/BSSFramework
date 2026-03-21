@@ -189,7 +189,7 @@ public partial class DataHelper
         var businessUnitTypeController = this.RootServiceProvider.GetDefaultControllerEvaluator<BusinessUnitTypeController>();
         var buTypeStrict = new BusinessUnitTypeStrictDTO(businessUnitTypeController.Evaluate(c => c.GetFullBusinessUnitType(type.ToIdentityDTO())));
 
-        possibleParents = possibleParents ?? new List<BusinessUnitTypeIdentityDTO>();
+        possibleParents = possibleParents ?? [];
         possibleParents.Add(type.ToIdentityDTO());
 
         var possibleParentsList =

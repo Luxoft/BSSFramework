@@ -104,7 +104,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
             return;
         }
 
-        var tree = walker.DiscoverDependencies(new[] { view }, false);
+        var tree = walker.DiscoverDependencies([view], false);
         var result = walker.WalkDependencies(tree);
         var filteredResult = result.Where(z => z.Urn.Type == "View").ToList();
         var nextViews = filteredResult.Select(z => walker.Server.GetSmoObject(z.Urn)).Cast<View>().Where(z => z != view).ToList();
@@ -141,7 +141,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
 
             foreach (var view in database.Views.Cast<View>().Where(z => !z.IsSystemObject))
             {
-                var tree = walker.DiscoverDependencies(new[] { view }, true);
+                var tree = walker.DiscoverDependencies([view], true);
 
                 var result = walker.WalkDependencies(tree);
 
@@ -247,7 +247,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
 
     private void ApplyRequered(RequiredRefContext context, Table table, string columnName)
     {
-        this.ApplyRequered(context, table, new string[] { columnName });
+        this.ApplyRequered(context, table, [columnName]);
     }
 
     private void ApplyRequered(RequiredRefContext refContext, Table table, IEnumerable<string> columnNames)
@@ -300,9 +300,9 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
         public RequiredRefContext(IDatabaseScriptGeneratorContext contex)
         {
             this.context = contex;
-            this.recreateIndexies = new HashSet<Index>();
-            this.requeredColumns = new List<Column>();
-            this.expectedRemovableViews = new HashSet<View>();
+            this.recreateIndexies = [];
+            this.requeredColumns = [];
+            this.expectedRemovableViews = [];
         }
 
         public IDatabaseScriptGeneratorContext Context
@@ -342,7 +342,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
 
         public void Add(View view)
         {
-            this.Add(new[] { view });
+            this.Add([view]);
         }
     }
 }

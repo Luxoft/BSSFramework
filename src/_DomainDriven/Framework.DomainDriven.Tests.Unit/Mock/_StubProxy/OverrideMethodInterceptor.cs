@@ -33,7 +33,7 @@ internal class OverrideMethodInterceptor : IInterceptionBehavior
                                                                                return isEqual;
                                                                            });
 
-        return overrideMethodInfo.Maybe(z=>new VirtualMethodReturn(input, z.ReturnValue, new object[0]))
+        return overrideMethodInfo.Maybe(z=>new VirtualMethodReturn(input, z.ReturnValue, Array.Empty<object>()))
                ?? getNext()(input, getNext);
     }
 

@@ -2,7 +2,7 @@
 
 public class EventDALListenerSettings<TPersistentDomainObjectBase>
 {
-    public TypeEvent[] TypeEvents { get; init; } = Array.Empty<TypeEvent>();
+    public TypeEvent[] TypeEvents { get; init; } = [];
 
-    public TypeEventDependency[] Dependencies { get; init; } = Array.Empty<TypeEventDependency>();
+    public TypeEventDependency[] Dependencies { get; init; } = [];
 }

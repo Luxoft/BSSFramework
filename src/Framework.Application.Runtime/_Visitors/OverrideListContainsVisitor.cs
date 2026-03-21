@@ -60,7 +60,7 @@ public class OverrideListContainsVisitor<TIdent> : ExpressionVisitor
 
                       where idPropertyDeclaringType != null && idPropertyDeclaringType.IsAssignableFrom(genericArgType)
 
-                      from result in (Maybe<Expression>)VisitListCallMethod.MakeGenericMethod(genericArgType).Invoke(null, new[] { node, value })
+                      from result in (Maybe<Expression>)VisitListCallMethod.MakeGenericMethod(genericArgType).Invoke(null, [node, value])
 
                       select result;
 

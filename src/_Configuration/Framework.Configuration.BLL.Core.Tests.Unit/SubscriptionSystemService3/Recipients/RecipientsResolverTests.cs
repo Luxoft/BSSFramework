@@ -47,9 +47,9 @@ public sealed class RecipientsResolverTests : TestFixtureBase
         var replyTo = new Recipient("replayTo", "replayTo@ya.ru");
 
         var recipientsBag = new RecipientsBag(
-                                              new RecipientCollection(new []{recipient2}),
-                                              new RecipientCollection(new []{recipient3}),
-                                              new RecipientCollection(new[] { replyTo }));
+                                              new RecipientCollection([recipient2]),
+                                              new RecipientCollection([recipient3]),
+                                              new RecipientCollection([replyTo]));
 
         var generationResolverResult = new RecipientsResolverResult(
                                                                     recipientsBag,
@@ -64,11 +64,11 @@ public sealed class RecipientsResolverTests : TestFixtureBase
 
         this.rolesResolver
             .Resolve(subscription, versions)
-            .Returns(new RecipientCollection(new[] {recipient1}));
+            .Returns(new RecipientCollection([recipient1]));
 
         this.generationResolver
             .Resolve(subscription, versions)
-            .Returns(new[] { generationResolverResult });
+            .Returns([generationResolverResult]);
 
         // Act
         var resolver = this.Fixture.Create<RecipientsResolver<ITestBLLContext>>();
@@ -76,9 +76,9 @@ public sealed class RecipientsResolverTests : TestFixtureBase
         var resultBag = resolverResult.RecipientsBag;
 
         // Assert
-        resultBag.To.Should().BeEquivalentTo(new RecipientCollection(new[] {recipient1, recipient2}));
-        resultBag.Cc.Should().BeEquivalentTo(new RecipientCollection(new[] {recipient3}));
-        resultBag.ReplyTo.Should().BeEquivalentTo(new RecipientCollection(new[] { replyTo }));
+        resultBag.To.Should().BeEquivalentTo(new RecipientCollection([recipient1, recipient2]));
+        resultBag.Cc.Should().BeEquivalentTo(new RecipientCollection([recipient3]));
+        resultBag.ReplyTo.Should().BeEquivalentTo(new RecipientCollection([replyTo]));
     }
 
     [Test]
@@ -92,9 +92,9 @@ public sealed class RecipientsResolverTests : TestFixtureBase
         var replayTo = new Recipient("replayTo", "replayTo@ya.ru");
 
         var recipientsBag = new RecipientsBag(
-                                              new RecipientCollection(new[] { recipient1, recipient2 }),
-                                              new RecipientCollection(new[] { recipient3, recipient4 }),
-                                              new RecipientCollection(new[] { replayTo}));
+                                              new RecipientCollection([recipient1, recipient2]),
+                                              new RecipientCollection([recipient3, recipient4]),
+                                              new RecipientCollection([replayTo]));
 
         var subscription = this.Fixture
                                .Build<Subscription>()
@@ -115,11 +115,11 @@ public sealed class RecipientsResolverTests : TestFixtureBase
 
         this.rolesResolver
             .Resolve(subscription, versions)
-            .Returns(new RecipientCollection(new[] { recipient1 }));
+            .Returns(new RecipientCollection([recipient1]));
 
         this.generationResolver
             .Resolve(subscription, versions)
-            .Returns(new[] { generationResolverResult });
+            .Returns([generationResolverResult]);
 
         var resolver = this.Fixture.Create<RecipientsResolver<ITestBLLContext>>();
 
@@ -129,8 +129,8 @@ public sealed class RecipientsResolverTests : TestFixtureBase
         var actualBag = resolverResults.First().RecipientsBag;
 
         // Assert
-        actualBag.To.Should().BeEquivalentTo(new RecipientCollection(new[] { recipient1 }));
-        actualBag.ReplyTo.Should().BeEquivalentTo(new RecipientCollection(new[] { replayTo }));
+        actualBag.To.Should().BeEquivalentTo(new RecipientCollection([recipient1]));
+        actualBag.ReplyTo.Should().BeEquivalentTo(new RecipientCollection([replayTo]));
     }
 
     [Test]
@@ -148,11 +148,11 @@ public sealed class RecipientsResolverTests : TestFixtureBase
 
         this.rolesResolver
             .Resolve(subscription, versions)
-            .Returns(new RecipientCollection(new[] { recipient1 }));
+            .Returns(new RecipientCollection([recipient1]));
 
         this.generationResolver
             .Resolve(subscription, versions)
-            .Returns(Enumerable.Empty<RecipientsResolverResult>());
+            .Returns([]);
 
         // Act
         var resolver = this.Fixture.Create<RecipientsResolver<ITestBLLContext>>();
@@ -160,7 +160,7 @@ public sealed class RecipientsResolverTests : TestFixtureBase
         var resultBag = resolverResult.RecipientsBag;
 
         // Assert
-        resultBag.To.Should().BeEquivalentTo(new RecipientCollection(new[] { recipient1 }));
+        resultBag.To.Should().BeEquivalentTo(new RecipientCollection([recipient1]));
         resultBag.Cc.Should().BeEmpty();
     }
 }

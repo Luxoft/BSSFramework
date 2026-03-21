@@ -122,7 +122,7 @@ public abstract class Parsers<TInput>
 
     public Parser<TInput, TValue[]> Many<TValue>(Parser<TInput, TValue> parser)
     {
-        return this.Many1(parser).Or(this.Return(new TValue[0]));
+        return this.Many1(parser).Or(this.Return(Array.Empty<TValue>()));
     }
 
     public Parser<TInput, TValue[]> Many1<TValue>(Parser<TInput, TValue> parser)
@@ -205,7 +205,7 @@ public abstract class Parsers<TInput>
 
     public Parser<TInput, TValue[]> SepBy<TValue, TSeparator>(Parser<TInput, TValue> parser, Parser<TInput, TSeparator> separatorParser)
     {
-        return this.SepBy1(parser, separatorParser).Or(this.Return(new TValue[0]));
+        return this.SepBy1(parser, separatorParser).Or(this.Return(Array.Empty<TValue>()));
     }
 
     public Parser<TInput, TValue> Pre<TValue, TOpen>(Parser<TInput, TValue> parser, Parser<TInput, TOpen> openParser)

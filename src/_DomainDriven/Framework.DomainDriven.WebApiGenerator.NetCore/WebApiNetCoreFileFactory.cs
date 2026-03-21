@@ -19,7 +19,7 @@ public class WebApiNetCoreFileFactory<TConfiguration> : WebApiNetCoreFileFactory
         Type domainType,
         List<CodeAttributeDeclaration> additionalAttributes)
         : base(configuration, domainType) =>
-        this.additionalAttributes = additionalAttributes ?? new List<CodeAttributeDeclaration>();
+        this.additionalAttributes = additionalAttributes ?? [];
 
     protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
     {

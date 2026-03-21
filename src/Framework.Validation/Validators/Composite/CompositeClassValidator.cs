@@ -1,17 +1,9 @@
 ﻿namespace Framework.Validation;
 
-public class CompositeClassValidator<TSource> : IClassValidator<TSource>
-        where TSource : class
+public class CompositeClassValidator<TSource>(params IClassValidator<TSource>[] classValidators) : IClassValidator<TSource>
+    where TSource : class
 {
-    private readonly IList<IClassValidator<TSource>> _classValidators;
+    private readonly IList<IClassValidator<TSource>> classValidators = classValidators.ToList();
 
-    public CompositeClassValidator(params IClassValidator<TSource>[] classValidators)
-    {
-        this._classValidators = classValidators.ToList();
-    }
-
-    public ValidationResult GetValidationResult(IClassValidationContext<TSource> context)
-    {
-        return this._classValidators.Select(validator => validator.GetValidationResult(context)).Sum();
-    }
+    public ValidationResult GetValidationResult(IClassValidationContext<TSource> context) => this.classValidators.Select(validator => validator.GetValidationResult(context)).Sum();
 }

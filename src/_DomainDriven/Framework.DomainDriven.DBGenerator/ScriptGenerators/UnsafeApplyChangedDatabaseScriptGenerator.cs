@@ -92,7 +92,7 @@ public class UnsafeApplyChangedDatabaseScriptGenerator : IDatabaseScriptGenerato
             context.SqlDatabaseFactory.Server.ConnectionContext.SqlExecutionModes = prevMode;
 
             var tryCreateScript = source != null
-                                          ? new List<string>(0)
+                                          ? []
                                           : context.SqlDatabaseFactory.Server.ConnectionContext.CapturedSql.GetScriptsForBatchExecuting();
 
             this.TransferSchema(source, target);

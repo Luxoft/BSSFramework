@@ -34,11 +34,11 @@ public sealed class MessageTemplateFactoryTests : TestFixtureBase
         this.subscription = this.Fixture.Create<Subscription>();
 
         this.to = new RecipientCollection(
-                                          new[] { this.Fixture.Create<Recipient>(), this.Fixture.Create<Recipient>() });
+            [this.Fixture.Create<Recipient>(), this.Fixture.Create<Recipient>()]);
 
-        this.cc = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
+        this.cc = new RecipientCollection([this.Fixture.Create<Recipient>()]);
 
-        this.replyTo = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
+        this.replyTo = new RecipientCollection([this.Fixture.Create<Recipient>()]);
 
         this.domainObjectVersions = new DomainObjectVersions<string>("1", "2");
 
@@ -79,10 +79,10 @@ public sealed class MessageTemplateFactoryTests : TestFixtureBase
 
         this.recipientsResolver
             .Resolve(this.subscription, this.domainObjectVersions)
-            .Returns(new[] { resolverResult });
+            .Returns([resolverResult]);
 
         // Act
-        var templates = factory.Create(new []{ this.subscription }, this.domainObjectVersions);
+        var templates = factory.Create([this.subscription], this.domainObjectVersions);
 
         // Asssert
         templates.Should().HaveCount(2);
@@ -98,10 +98,10 @@ public sealed class MessageTemplateFactoryTests : TestFixtureBase
 
         this.recipientsResolver
             .Resolve(this.subscription, this.domainObjectVersions)
-            .Returns(new[] { resolverResult });
+            .Returns([resolverResult]);
 
         // Act
-        var templates = factory.Create(new []{ this.subscription }, this.domainObjectVersions);
+        var templates = factory.Create([this.subscription], this.domainObjectVersions);
 
         // Asssert
         templates.Should().HaveCount(1);
@@ -117,10 +117,10 @@ public sealed class MessageTemplateFactoryTests : TestFixtureBase
 
         this.recipientsResolver
             .Resolve(this.subscription, this.domainObjectVersions)
-            .Returns(new[] { resolverResult });
+            .Returns([resolverResult]);
 
         // Act
-        var templates = factory.Create(new[] { this.subscription }, this.domainObjectVersions);
+        var templates = factory.Create([this.subscription], this.domainObjectVersions);
 
         // Asssert
         templates.Should().HaveCount(1);
@@ -136,10 +136,10 @@ public sealed class MessageTemplateFactoryTests : TestFixtureBase
 
         this.recipientsResolver
             .Resolve(this.subscription, this.domainObjectVersions)
-            .Returns(new[] { resolverResult });
+            .Returns([resolverResult]);
 
         // Act
-        var template = factory.Create(new[] { this.subscription }, this.domainObjectVersions).Single();
+        var template = factory.Create([this.subscription], this.domainObjectVersions).Single();
 
         // Asssert
         template.Receivers.Should().BeEquivalentTo(this.to.Select(r => r.Email));
@@ -163,10 +163,10 @@ public sealed class MessageTemplateFactoryTests : TestFixtureBase
 
         this.recipientsResolver
             .Resolve(this.subscription, this.domainObjectVersions)
-            .Returns(new[] { resolverResult });
+            .Returns([resolverResult]);
 
         // Act
-        var template = factory.Create(new[] { this.subscription }, this.domainObjectVersions).Single();
+        var template = factory.Create([this.subscription], this.domainObjectVersions).Single();
 
         // Asssert
         template.Receivers.Should().BeEquivalentTo(this.to.Select(r => r.Email));
@@ -190,10 +190,10 @@ public sealed class MessageTemplateFactoryTests : TestFixtureBase
         this.subscription.SendIndividualLetters = true;
         this.recipientsResolver
             .Resolve(this.subscription, this.domainObjectVersions)
-            .Returns(new[] { resolverResult });
+            .Returns([resolverResult]);
 
         // Act
-        var template = factory.Create(new[] { this.subscription }, this.domainObjectVersions).First();
+        var template = factory.Create([this.subscription], this.domainObjectVersions).First();
 
         // Asssert
         template.Receivers.Should().BeEquivalentTo(this.to.First().Email);
@@ -216,7 +216,7 @@ public sealed class MessageTemplateFactoryTests : TestFixtureBase
             .Throws(exception);
 
         // Act
-        Action call = () => factory.Create(new[] { this.subscription }, this.domainObjectVersions);
+        Action call = () => factory.Create([this.subscription], this.domainObjectVersions);
 
         // Asssert
         call.Should().Throw<AggregateException>().Where(ae => ae.InnerExceptions.Contains(exception));
@@ -235,10 +235,10 @@ public sealed class MessageTemplateFactoryTests : TestFixtureBase
 
         this.recipientsResolver
             .Resolve(this.subscription, this.domainObjectVersions)
-            .Returns(new[] { resolverResult });
+            .Returns([resolverResult]);
 
         // Act
-        var template = factory.Create(new[] { this.subscription }, this.domainObjectVersions).Single();
+        var template = factory.Create([this.subscription], this.domainObjectVersions).Single();
 
         // Asssert
         template.ContextObject.Should().Be(expectedVersions);

@@ -23,12 +23,12 @@ public class NHibObjectStatesService : IObjectStateService
     {
         if (entity == null)
         {
-            return new ObjectState[0];
+            return Array.Empty<ObjectState>();
         }
 
         if (this.session.DefaultReadOnly)
         {
-            return new ObjectState[0];
+            return Array.Empty<ObjectState>();
         }
 
         var sessionImpl = this.session.GetSessionImplementation();
@@ -39,7 +39,7 @@ public class NHibObjectStatesService : IObjectStateService
 
         if (null == oldEntry)
         {
-            return new ObjectState[0];
+            return Array.Empty<ObjectState>();
         }
 
         var persister = this.session.GetPersister(oldEntry);
@@ -50,7 +50,7 @@ public class NHibObjectStatesService : IObjectStateService
 
         var dirtyIndexies = persister.FindDirty(currentState, oldState, unProxy, sessionImpl);
 
-        var modifiedIndexies = (dirtyIndexies ?? new int[0]).ToHashSet();
+        var modifiedIndexies = (dirtyIndexies ?? []).ToHashSet();
 
         Func<int, bool> isModifiedPropertyFunc = (index) =>
         {

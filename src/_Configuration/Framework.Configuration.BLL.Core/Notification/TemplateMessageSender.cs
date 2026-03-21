@@ -43,9 +43,9 @@ public class TemplateMessageSender(
     {
         var messageTemplate = new MessageTemplate();
 
-        var splittedReceivers = message.Receivers.SelectMany(z => z.Split(new[] { ';', ' ' }, StringSplitOptions.RemoveEmptyEntries)).ToList();
-        var splittedCarbonCopy = message.CopyReceivers.SelectMany(z => z.Split(new[] { ';', ' ' }, StringSplitOptions.RemoveEmptyEntries)).ToList();
-        var splittedReplyTo = message.ReplyTo.SelectMany(z => z.Split(new[] { ';', ' ' }, StringSplitOptions.RemoveEmptyEntries)).ToList();
+        var splittedReceivers = message.Receivers.SelectMany(z => z.Split([';', ' '], StringSplitOptions.RemoveEmptyEntries)).ToList();
+        var splittedCarbonCopy = message.CopyReceivers.SelectMany(z => z.Split([';', ' '], StringSplitOptions.RemoveEmptyEntries)).ToList();
+        var splittedReplyTo = message.ReplyTo.SelectMany(z => z.Split([';', ' '], StringSplitOptions.RemoveEmptyEntries)).ToList();
 
         var includeAttachments = message.Subscription.Maybe(s => s.IncludeAttachments, true);
 

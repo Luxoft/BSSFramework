@@ -272,7 +272,7 @@ public class MessageTemplateBLL : BLLContextContainer<IConfigurationBLLContext>
                          .GetMethod(nameof(this.GetRazorTemplate), BindingFlags.Instance | BindingFlags.NonPublic)
                          .MakeGenericMethod(messageTemplateNotification.SourceContextObjectType, messageTemplateNotification.ContextObjectType);
 
-        var razorTemplate = (IRazorTemplate)method.Invoke(this, new object[] { messageTemplateNotification });
+        var razorTemplate = (IRazorTemplate)method.Invoke(this, [messageTemplateNotification]);
         var sb = new StringBuilder();
         razorTemplate.SetWriter(new StringWriter(sb));
         razorTemplate.Execute();

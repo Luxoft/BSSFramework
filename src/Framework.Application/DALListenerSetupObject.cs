@@ -8,7 +8,7 @@ namespace Framework.Application.DALListeners;
 
 public class DALListenerSetupObject : IDALListenerSetupObject
 {
-    private readonly List<Action<IServiceCollection>> initActions = new();
+    private readonly List<Action<IServiceCollection>> initActions = [];
 
     public IReadOnlyList<Action<IServiceCollection>> InitActions => this.initActions;
 

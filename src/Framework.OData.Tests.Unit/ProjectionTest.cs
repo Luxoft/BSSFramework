@@ -21,7 +21,7 @@ public class ProjectionTest
         var rootLocation = new TestLocation
                            {
                                    Id = Guid.NewGuid(),
-                                   Children = new [] { employeeLocation }
+                                   Children = [employeeLocation]
                            };
 
         employeeLocation.Parent = rootLocation;

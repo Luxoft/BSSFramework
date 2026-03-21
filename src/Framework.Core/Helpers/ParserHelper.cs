@@ -132,7 +132,7 @@ public static class ParserHelper
             }
             else
             {
-                return typeof(T).GetMethod("Parse", BindingFlags.Public | BindingFlags.Static, null, new[] { typeof(string) }, null)
+                return typeof(T).GetMethod("Parse", BindingFlags.Public | BindingFlags.Static, null, [typeof(string)], null)
                                 .Maybe(parseMethod => Expression.Call(parseMethod, parameter));
             }
         }
@@ -159,7 +159,7 @@ public static class ParserHelper
             }
             else
             {
-                return typeof(T).GetMethod("TryParse", BindingFlags.Public | BindingFlags.Static, null, new[] { typeof(string), typeof(T).MakeByRefType() }, null).Maybe(tryParseMethod =>
+                return typeof(T).GetMethod("TryParse", BindingFlags.Public | BindingFlags.Static, null, [typeof(string), typeof(T).MakeByRefType()], null).Maybe(tryParseMethod =>
                 {
                     var tryParseDelType = typeof(TryMethod<,>).MakeGenericType(typeof(string), typeof(T));
 

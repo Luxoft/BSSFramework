@@ -2,11 +2,6 @@
 
 namespace Framework.Validation;
 
-public interface IPropertyValidationContext<out TSource, out TProperty> : IValidationContext<TSource, IPropertyValidationMap>
-{
-    TProperty Value { get; }
-}
-
 public static class PropertyValidationContextExtensions
 {
     /// <summary>
@@ -82,8 +77,8 @@ public static class PropertyValidationContextExtensions
     }
 
     public static IPropertyValidationContext<TExpectedSource, TExpectedProperty> Box<TBaseSource, TExpectedSource, TBaseProperty, TExpectedProperty>(this IPropertyValidationContext<TBaseSource, TBaseProperty> context)
-            where TBaseProperty : TExpectedProperty
-            where TBaseSource : TExpectedSource
+        where TBaseProperty : TExpectedProperty
+        where TBaseSource : TExpectedSource
     {
         if (context == null) throw new ArgumentNullException(nameof(context));
 

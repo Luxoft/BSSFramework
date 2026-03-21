@@ -60,11 +60,11 @@ class MainDBScriptGeneratorBuilder : DatabaseScriptGeneratorContainer, IMainDBSc
         {
             case DBGenerateScriptMode.AppliedOnCopySchemeDatabase:
             {
-                return combined.Unsafe(false, this._removeSchemaDatabase, new[] { this._migrationDbScriptGeneratorBuilder.TableName });
+                return combined.Unsafe(false, this._removeSchemaDatabase, [this._migrationDbScriptGeneratorBuilder.TableName]);
             }
             case DBGenerateScriptMode.AppliedOnCopySchemeAndDataDatabase:
             {
-                return combined.Unsafe(true, this._removeSchemaDatabase, new[] { this._migrationDbScriptGeneratorBuilder.TableName });
+                return combined.Unsafe(true, this._removeSchemaDatabase, [this._migrationDbScriptGeneratorBuilder.TableName]);
             }
 
             default:

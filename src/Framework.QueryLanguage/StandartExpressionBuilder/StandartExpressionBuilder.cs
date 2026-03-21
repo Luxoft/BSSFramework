@@ -104,7 +104,7 @@ public class StandardExpressionBuilder : StandardExpressionBuilderBase
 
         if (memberExpression.Type != typeof(string))
         {
-            return SExpressions.Expression.Call(memberExpression, nameof(string.ToString), new Type[0] { });
+            return SExpressions.Expression.Call(memberExpression, nameof(string.ToString), []);
         }
 
         return source;

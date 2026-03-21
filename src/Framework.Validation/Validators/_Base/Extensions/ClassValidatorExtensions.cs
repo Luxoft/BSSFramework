@@ -6,10 +6,7 @@ namespace Framework.Validation;
 
 public static class ClassValidatorExtensions
 {
-    public static IClassValidator<TSource> TryApplyValidationData<TSource>(this IClassValidator<TSource> baseValidator, IValidationData? validationData)
-    {
-        return validationData.Maybe(data => baseValidator.ApplyCustomError(data.CustomError).ApplyCustomOperationContext(data.OperationContext), baseValidator);
-    }
+    public static IClassValidator<TSource> TryApplyValidationData<TSource>(this IClassValidator<TSource> baseValidator, IValidationData? validationData) => validationData.Maybe(data => baseValidator.ApplyCustomError(data.CustomError).ApplyCustomOperationContext(data.OperationContext), baseValidator);
 
     public static IClassValidator<TSource> ApplyCustomError<TSource>(this IClassValidator<TSource> baseValidator, object? customError)
     {
@@ -77,30 +74,15 @@ public static class ClassValidatorExtensions
         return new UnboxedClassValidator<TExpectedSource, TBaseSource>(baseValidator);
     }
 
-    private class ClassValidatorWithOverrideError<TSource> : IClassValidator<TSource>
+    private class ClassValidatorWithOverrideError<TSource>(IClassValidator<TSource> baseValidator, object customError) : IClassValidator<TSource>
     {
-        private readonly IClassValidator<TSource> baseValidator;
-
-        private readonly object customError;
-
-
-        public ClassValidatorWithOverrideError(IClassValidator<TSource> baseValidator, object customError)
-        {
-            if (baseValidator == null) throw new ArgumentNullException(nameof(baseValidator));
-            if (customError == null) throw new ArgumentNullException(nameof(customError));
-
-            this.baseValidator = baseValidator;
-            this.customError = customError;
-        }
-
-
         public ValidationResult GetValidationResult(IClassValidationContext<TSource> context)
         {
             if (context == null) throw new ArgumentNullException(nameof(context));
 
-            var baseResult = this.baseValidator.GetValidationResult(context);
+            var baseResult = baseValidator.GetValidationResult(context);
 
-            return baseResult.HasErrors ? ValidationResult.CreateError(this.customError) : baseResult;
+            return baseResult.HasErrors ? ValidationResult.CreateError(customError) : baseResult;
         }
     }
 
@@ -143,9 +125,6 @@ public static class ClassValidatorExtensions
         }
 
 
-        public ValidationResult GetValidationResult(IClassValidationContext<TExpectedSource> context)
-        {
-            return this.baseClassValidator.GetValidationResult(context.Box<TExpectedSource, TBaseSource>());
-        }
+        public ValidationResult GetValidationResult(IClassValidationContext<TExpectedSource> context) => this.baseClassValidator.GetValidationResult(context.Box<TExpectedSource, TBaseSource>());
     }
 }

@@ -66,7 +66,7 @@ public class SubscriptionSystemService<TBLLContext> : ISubscriptionSystemService
 
         var @delegate = (Func<object, object, string, SubscriptionRecipientInfo>)this.GetRecipientsTyped;
         var method = @delegate.CreateGenericMethod(type);
-        var result = (SubscriptionRecipientInfo)method.Invoke(this, new[] { prev, next, subscriptionCode });
+        var result = (SubscriptionRecipientInfo)method.Invoke(this, [prev, next, subscriptionCode]);
 
         return result;
     }
@@ -97,7 +97,7 @@ public class SubscriptionSystemService<TBLLContext> : ISubscriptionSystemService
 
         var @delegate = (Func<object, object, IList<ITryResult<Subscription>>>)this.ProcessChangedObjectTyped;
         var method = @delegate.CreateGenericMethod(type);
-        var result = (IList<ITryResult<Subscription>>)method.Invoke(this, new[] { prev, next });
+        var result = (IList<ITryResult<Subscription>>)method.Invoke(this, [prev, next]);
 
         return result;
     }

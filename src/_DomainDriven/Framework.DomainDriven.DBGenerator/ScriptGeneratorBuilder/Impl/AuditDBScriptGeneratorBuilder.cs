@@ -20,7 +20,7 @@ class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
 
     public IAuditDBScriptGeneratorBuilder WithAudit(MappingSettings mappingSettings, string auditTablePostfix = "audit")
     {
-        return this.WithAudit(new[] { mappingSettings }, auditTablePostfix);
+        return this.WithAudit([mappingSettings], auditTablePostfix);
     }
 
     public IAuditDBScriptGeneratorBuilder WithAudit(IEnumerable<MappingSettings> mappingSettings, string auditPostfix = "audit")
@@ -47,7 +47,7 @@ class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
 
     public IAuditDBScriptGeneratorBuilder WithMappingSettings(MappingSettings mappingSettings)
     {
-        return this.WithMappingSettings(new[] {mappingSettings});
+        return this.WithMappingSettings([mappingSettings]);
     }
 
     public IAuditDBScriptGeneratorBuilder WithMappingSettings(IList<MappingSettings> mappingSettings)

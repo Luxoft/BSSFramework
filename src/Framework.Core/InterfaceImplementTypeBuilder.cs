@@ -71,7 +71,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
 
         var name = $"{sourceType.ToCSharpFullName()}_{this.baseType.Name}Proxy";
 
-        var typeBuilder = this.moduleBuilder.DefineType(name, TypeAttributes.Public | TypeAttributes.Class | TypeAttributes.Sealed, lazyType, new[] { sourceType });
+        var typeBuilder = this.moduleBuilder.DefineType(name, TypeAttributes.Public | TypeAttributes.Class | TypeAttributes.Sealed, lazyType, [sourceType]);
 
         var getInstanceMethod = lazyType.GetProperty("Value", true).GetGetMethod();
 
@@ -204,7 +204,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
             generator.Emit(OpCodes.Ret);
         }
 
-        var factoryMethodBuilder = typeBuilder.DefineMethod(CreateInstanceMethodName, MethodAttributes.Public | MethodAttributes.Static, sourceType, new[] { funcType });
+        var factoryMethodBuilder = typeBuilder.DefineMethod(CreateInstanceMethodName, MethodAttributes.Public | MethodAttributes.Static, sourceType, [funcType]);
         {
             var generator = factoryMethodBuilder.GetILGenerator();
 

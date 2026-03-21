@@ -124,7 +124,7 @@ public class TrackingServiceTests
     public void GetChanges_IsNewTrue_ResultShouldHaveAllPropertiesChanges()
     {
         // Arrange
-        var domainObject = new PersistentDomainObject() { Id = Guid.NewGuid(), CreatedAt = DateTime.Today, Name = "z", Array = new string[0], ModifiedAt = DateTime.Today };
+        var domainObject = new PersistentDomainObject() { Id = Guid.NewGuid(), CreatedAt = DateTime.Today, Name = "z", Array = [], ModifiedAt = DateTime.Today };
         this.objectStateService.IsNew(domainObject).Returns(true);
         var allProperties = typeof(PersistentDomainObject).GetProperties();
 
@@ -348,7 +348,7 @@ public class TrackingServiceTests
     public void HasChange_RealChangedCollectionProperty_ResultTrue()
     {
         // Arrange
-        var domainObject = new PersistentDomainObject { Array = new string[0] };
+        var domainObject = new PersistentDomainObject { Array = [] };
         this.objectStateService.IsNew(domainObject).Returns(true);
         this.objectStateService.IsRemoving(domainObject).Returns(false);
         var changes = this.trackingService.GetChanges(domainObject);
@@ -576,7 +576,7 @@ public class TrackingServiceTests
     public void HasChange_ObjectVersionRealChangedArrayProperty_ResultTrue()
     {
         // Arrange
-        var domainObject = new PersistentDomainObject { Array = new string[0] };
+        var domainObject = new PersistentDomainObject { Array = [] };
         this.objectStateService.IsNew(domainObject).Returns(true);
         this.objectStateService.IsRemoving(domainObject).Returns(false);
         var changes = this.trackingService.GetChanges(domainObject);

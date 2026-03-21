@@ -8,7 +8,7 @@ public class GenericNamedLockSetup : IGenericNamedLockSetup
 {
     private Action<IServiceCollection>? mainInitAction;
 
-    private readonly List<Action<IServiceCollection>> elementsInitAction = new();
+    private readonly List<Action<IServiceCollection>> elementsInitAction = [];
 
     public IGenericNamedLockSetup SetNameLockType<TGenericNamedLock>(Expression<Func<TGenericNamedLock, string>> namePath)
         where TGenericNamedLock : new()

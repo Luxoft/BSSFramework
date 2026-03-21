@@ -34,11 +34,8 @@ internal static class FuncExtensions
     {
         if (items == null) throw new ArgumentNullException(nameof(items));
 
-        return items.Aggregate(ValidationResult.GetSuccessFunc<T>(), (f1, f2) => f1.And(f2));
+        return items.Aggregate((Func<T, ValidationResult>)(_ => ValidationResult.Success), (f1, f2) => f1.And(f2));
     }
 
-    public static Func<Validator, TSource, int, ValidationResult> WithTryEmptySource<TSource>(this Func<Validator, TSource, int, ValidationResult> baseFunc)
-    {
-        return (validator, source, operationContext) => source == null ? ValidationResult.Success : baseFunc(validator, source, operationContext);
-    }
+    public static Func<Validator, TSource, int, ValidationResult> WithTryEmptySource<TSource>(this Func<Validator, TSource, int, ValidationResult> baseFunc) => (validator, source, operationContext) => source == null ? ValidationResult.Success : baseFunc(validator, source, operationContext);
 }

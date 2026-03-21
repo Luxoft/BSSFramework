@@ -109,7 +109,7 @@ internal class SquashWhereQueryableVisitor : ExpressionVisitor
 
                let buildAndMethod = GenericBuildAndMethod.MakeGenericMethod(elementType)
 
-               let newFilter = (Expression)buildAndMethod.Invoke(null, new object[] { q1FilterQuote.Operand, q2FilterQuote.Operand })
+               let newFilter = (Expression)buildAndMethod.Invoke(null, [q1FilterQuote.Operand, q2FilterQuote.Operand])
 
                select (Expression)Expression.Call(method, innerCallExpr.Arguments[0], Expression.Quote(newFilter));
     }

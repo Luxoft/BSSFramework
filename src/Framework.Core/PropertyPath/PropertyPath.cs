@@ -90,7 +90,7 @@ public class PropertyPath : ReadOnlyCollection<PropertyInfo>, IEquatable<Propert
 
     public static PropertyPath operator +(PropertyPath path, PropertyInfo propertyInfo)
     {
-        return path.Concat(new[] { propertyInfo }).ToPropertyPath();
+        return path.Concat([propertyInfo]).ToPropertyPath();
     }
 
     public static bool operator ==(PropertyPath path1, PropertyPath path2)

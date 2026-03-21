@@ -2,8 +2,5 @@
 
 public class AvailableDecimalValidatorAttribute : ClassValidatorAttribute
 {
-    public override IClassValidator CreateValidator()
-    {
-        return AvailableDecimalValidator.Value;
-    }
+    public override IClassValidator CreateValidator() => AvailableDecimalValidator.Value;
 }

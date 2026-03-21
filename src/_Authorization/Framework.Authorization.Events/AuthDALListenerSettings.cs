@@ -14,10 +14,10 @@ public static class AuthDALListenerSettings
                 TypeEvent.SaveAndRemove<Permission>(),
                 TypeEvent.SaveAndRemove<BusinessRole>()
             ],
-            Dependencies = new[]
-                           {
-                               TypeEventDependency.FromSaveAndRemove<PermissionRestriction, Permission>(z => z.Permission),
+            Dependencies =
+            [
+                TypeEventDependency.FromSaveAndRemove<PermissionRestriction, Permission>(z => z.Permission),
                                TypeEventDependency.FromSaveAndRemove<Permission, Principal>(z => z.Principal)
-                           }
+            ]
         };
 }

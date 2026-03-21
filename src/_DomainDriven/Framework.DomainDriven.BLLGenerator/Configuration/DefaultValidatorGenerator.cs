@@ -27,13 +27,13 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
     private readonly IReadOnlyDictionary<PropertyInfo, IReadOnlyDictionary<CodeExpression, IValidationData>> _expandedClassAttributes;
 
-    private static readonly IReadOnlyCollection<Type> ManyPropertyDynamicClassAttributes = new[]
-        {
-                typeof (DefaultStringMaxLengthValidatorAttribute),
+    private static readonly IReadOnlyCollection<Type> ManyPropertyDynamicClassAttributes =
+    [
+        typeof (DefaultStringMaxLengthValidatorAttribute),
                 typeof (AvailableDateTimeValidatorAttribute),
                 typeof (AvailablePeriodValidatorAttribute),
                 typeof (AvailableDecimalValidatorAttribute)
-        };
+    ];
 
 
     public DefaultValidatorGenerator(TConfiguration configuration, Type domainType, CodeExpression validatorMapExpr)

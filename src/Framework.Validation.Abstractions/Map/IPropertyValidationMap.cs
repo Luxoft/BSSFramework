@@ -5,7 +5,7 @@ namespace Framework.Validation;
 /// <summary>
 /// Метаданные валидируемого свойства
 /// </summary>
-public interface IPropertyValidationMap// : IValidatorCollection<IPropertyValidator>
+public interface IPropertyValidationMap
 {
     /// <summary>
     /// Имя свойства

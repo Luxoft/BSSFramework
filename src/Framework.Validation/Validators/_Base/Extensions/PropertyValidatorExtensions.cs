@@ -8,15 +8,12 @@ public static class PropertyValidatorExtensions
 {
     public static IPropertyValidator<TSource, TProperty> TryApplyValidationData<TSource, TProperty>(
         this IPropertyValidator<TSource, TProperty> baseValidator,
-        IValidationData? validationData)
-    {
-        return validationData.Maybe(
+        IValidationData? validationData) =>
+        validationData.Maybe(
             data => baseValidator.ApplyCustomError(data.CustomError)
                                  .ApplyCustomOperationContext(data.OperationContext),
 
             baseValidator);
-    }
-
 
     public static IPropertyValidator<TSource, TProperty> ApplyCustomError<TSource, TProperty>(this IPropertyValidator<TSource, TProperty> baseValidator, object? customError)
     {
@@ -35,9 +32,6 @@ public static class PropertyValidatorExtensions
                    ? new PropertyValidatorWithOverrideOperationContext<TSource, TProperty>(baseValidator, customOperationContext)
                    : baseValidator;
     }
-
-
-
 
     public static IPropertyValidator<TSource, TProperty> TryUnbox<TSource, TProperty>(this IPropertyValidator basePropertyValidator)
     {
@@ -75,79 +69,31 @@ public static class PropertyValidatorExtensions
         return new UnboxedPropertyValidator<TExpectedSource, TBaseSource, TExpectedProperty, TBaseProperty>(baseValidator);
     }
 
-
-
-
-    private class PropertyValidatorWithOverrideError<TSource, TProperty> : IPropertyValidator<TSource, TProperty>
+    private class PropertyValidatorWithOverrideError<TSource, TProperty>(IPropertyValidator<TSource, TProperty> baseValidator, object customError)
+        : IPropertyValidator<TSource, TProperty>
     {
-        private readonly IPropertyValidator<TSource, TProperty> _baseValidator;
-
-        private readonly object _customError;
-
-        public PropertyValidatorWithOverrideError(IPropertyValidator<TSource, TProperty> baseValidator, object customError)
-        {
-            if (baseValidator == null) throw new ArgumentNullException(nameof(baseValidator));
-            if (customError == null) throw new ArgumentNullException(nameof(customError));
-
-            this._baseValidator = baseValidator;
-            this._customError = customError;
-        }
-
-
         public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> context)
         {
-            var baseResult = this._baseValidator.GetValidationResult(context);
+            var baseResult = baseValidator.GetValidationResult(context);
 
-            return baseResult.HasErrors ? ValidationResult.CreateError(this._customError) : baseResult;
+            return baseResult.HasErrors ? ValidationResult.CreateError(customError) : baseResult;
         }
     }
 
-
-
-    private class PropertyValidatorWithOverrideOperationContext<TSource, TProperty> : IPropertyValidator<TSource, TProperty>
+    private class PropertyValidatorWithOverrideOperationContext<TSource, TProperty>(IPropertyValidator<TSource, TProperty> baseValidator, int customOperationContext)
+        : IPropertyValidator<TSource, TProperty>
     {
-        private readonly IPropertyValidator<TSource, TProperty> _baseValidator;
-
-        private readonly int _customOperationContext;
-
-        public PropertyValidatorWithOverrideOperationContext(IPropertyValidator<TSource, TProperty> baseValidator, int customOperationContext)
-        {
-            if (baseValidator == null) throw new ArgumentNullException(nameof(baseValidator));
-
-            this._baseValidator = baseValidator;
-            this._customOperationContext = customOperationContext;
-        }
-
-
-        public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> context)
-        {
-            if (context == null) throw new ArgumentNullException(nameof(context));
-
-            return context.OperationContext.IsIntersected(this._customOperationContext)
-                       ? this._baseValidator.GetValidationResult(context)
-                       : ValidationResult.Success;
-        }
+        public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> context) =>
+            context.OperationContext.IsIntersected(customOperationContext)
+                ? baseValidator.GetValidationResult(context)
+                : ValidationResult.Success;
     }
 
-
-
-    private class UnboxedPropertyValidator<TExpectedSource, TBaseSource, TExpectedProperty, TBaseProperty> : IPropertyValidator<TExpectedSource, TExpectedProperty>
+    private class UnboxedPropertyValidator<TExpectedSource, TBaseSource, TExpectedProperty, TBaseProperty>(IPropertyValidator<TBaseSource, TBaseProperty> basePropertyValidator)
+        : IPropertyValidator<TExpectedSource, TExpectedProperty>
         where TExpectedProperty : TBaseProperty
         where TExpectedSource : TBaseSource
     {
-        private readonly IPropertyValidator<TBaseSource, TBaseProperty> _basePropertyValidator;
-
-        public UnboxedPropertyValidator(IPropertyValidator<TBaseSource, TBaseProperty> basePropertyValidator)
-        {
-            if (basePropertyValidator == null) throw new ArgumentNullException(nameof(basePropertyValidator));
-
-            this._basePropertyValidator = basePropertyValidator;
-        }
-
-
-        public ValidationResult GetValidationResult(IPropertyValidationContext<TExpectedSource, TExpectedProperty> context)
-        {
-            return this._basePropertyValidator.GetValidationResult(context.Box<TExpectedSource, TBaseSource, TExpectedProperty, TBaseProperty>());
-        }
+        public ValidationResult GetValidationResult(IPropertyValidationContext<TExpectedSource, TExpectedProperty> context) => basePropertyValidator.GetValidationResult(context.Box<TExpectedSource, TBaseSource, TExpectedProperty, TBaseProperty>());
     }
 }

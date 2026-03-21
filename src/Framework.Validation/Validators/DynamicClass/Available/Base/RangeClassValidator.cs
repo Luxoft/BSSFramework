@@ -48,25 +48,15 @@ public abstract class RangeClassValidator<TProperty, TRange> : IManyPropertyDyna
 public class RangePropertyValidator<TSource, TProperty, TRange>(Range<TRange> availableRange, Func<Range<TRange>, TProperty, bool> isValidValueFunc)
     : IPropertyValidator<TSource, TProperty>
 {
-    public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> context)
-    {
-        return ValidationResult.FromCondition(
+    public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> context) =>
+        ValidationResult.FromCondition(
             this.IsValidValue(context),
             () =>
                 $"{context.GetSourceTypeName()} has {context.Map.Property.Name.ToStartUpperCase()} value was too overflow for a {context.GetPropertyTypeName()}");
-    }
 
-    private bool IsValidValue(IPropertyValidationContext<TSource, TProperty> context)
-    {
-        return isValidValueFunc(availableRange, context.Value);
-    }
+    private bool IsValidValue(IPropertyValidationContext<TSource, TProperty> context) => isValidValueFunc(availableRange, context.Value);
 }
 
-public class NullableRangePropertyValidator<TSource, TProperty, TRange> : RangePropertyValidator<TSource, TProperty?, TRange>
-        where TProperty : struct
-{
-    public NullableRangePropertyValidator(Range<TRange> availableRange, Func<Range<TRange>, TProperty, bool> isValidValueFunc)
-            : base(availableRange, (range, value) => value == null || isValidValueFunc(range, value.Value))
-    {
-    }
-}
+public class NullableRangePropertyValidator<TSource, TProperty, TRange>(Range<TRange> availableRange, Func<Range<TRange>, TProperty, bool> isValidValueFunc)
+    : RangePropertyValidator<TSource, TProperty?, TRange>(availableRange, (range, value) => value == null || isValidValueFunc(range, value.Value))
+    where TProperty : struct;

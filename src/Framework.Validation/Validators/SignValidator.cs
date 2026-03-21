@@ -1,7 +1,7 @@
 ﻿using CommonFramework;
 
+using Framework.Application.Domain;
 using Framework.Core;
-using Framework.Persistent;
 
 namespace Framework.Validation;
 
@@ -19,20 +19,14 @@ public class SignValidator : IPropertyValidator<object, object>
     /// Initializes new validator instance using expected numeric value sign type
     /// </summary>
     /// <param name="expectedPropertyValueSignType">Numeric property value acceptable sign type</param>
-    public SignValidator(SignType expectedPropertyValueSignType)
-    {
-        this.ExpectedPropertyValueSignType = expectedPropertyValueSignType;
-    }
+    public SignValidator(SignType expectedPropertyValueSignType) => this.ExpectedPropertyValueSignType = expectedPropertyValueSignType;
 
     /// <summary>
     /// Runs validation using sign type passed to ctor end returns validation results that can be verified by caller
     /// </summary>
     /// <param name="context">Validation context that contains all necessary data</param>
     /// <returns>Validation result to be verified by caller</returns>
-    public virtual ValidationResult GetValidationResult(IPropertyValidationContext<object, object> context)
-    {
-        return this.GetValidateResult(this.ExpectedPropertyValueSignType, context);
-    }
+    public virtual ValidationResult GetValidationResult(IPropertyValidationContext<object, object> context) => this.GetValidateResult(this.ExpectedPropertyValueSignType, context);
 
     /// <summary>
     /// Runs validation using sign type specified end returns validation results that can be verified by caller
@@ -82,12 +76,10 @@ public class SignValidator : IPropertyValidator<object, object>
         return ValidationResult.Success;
     }
 
-    private static ValidationResult CreateErrorResult(IPropertyValidationContext<object, object> context, string template, string name)
-    {
-        return ValidationResult.CreateError(
-                                            template,
-                                            context.GetPropertyName(),
-                                            context.GetSourceTypeName(),
-                                            name.IsNullOrWhiteSpace() ? string.Empty : $":'{name}'");
-    }
+    private static ValidationResult CreateErrorResult(IPropertyValidationContext<object, object> context, string template, string name) =>
+        ValidationResult.CreateError(
+            template,
+            context.GetPropertyName(),
+            context.GetSourceTypeName(),
+            name.IsNullOrWhiteSpace() ? string.Empty : $":'{name}'");
 }

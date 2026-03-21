@@ -23,7 +23,7 @@ public static class PropertyPathBuilder
         {
             var pair = selectPathEnumerator.Current;
 
-            var nextPath = prevPath.Concat(new[] { pair.Value }).ToArray();
+            var nextPath = prevPath.Concat([pair.Value]).ToArray();
 
             switch (pair.Key.Name)
             {

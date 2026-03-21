@@ -162,5 +162,5 @@ internal static class Base85Convert
     const char c_firstCharacter = '!';
     const char c_lastCharacter = 'u';
 
-    static readonly uint[] s_powersOf85 = new uint[] { 85u * 85u * 85u * 85u, 85u * 85u * 85u, 85u * 85u, 85u, 1 };
+    static readonly uint[] s_powersOf85 = [85u * 85u * 85u * 85u, 85u * 85u * 85u, 85u * 85u, 85u, 1];
 }

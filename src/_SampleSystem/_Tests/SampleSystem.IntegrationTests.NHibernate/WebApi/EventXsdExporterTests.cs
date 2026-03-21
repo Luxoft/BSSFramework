@@ -12,7 +12,7 @@ public class EventXsdExporterTests
         var exporter2 = new EventXsdExporter2();
 
         // Act
-        var stream = exporter2.Export("Test", "test", new[] { typeof(TestDto) });
+        var stream = exporter2.Export("Test", "test", [typeof(TestDto)]);
 
         // Assert
         stream.Should().BeReadable();

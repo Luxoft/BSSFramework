@@ -10,18 +10,9 @@ namespace Framework.Validation;
 
 public static class RequiredHelper
 {
-    public static bool IsValid<TValue>(TValue value, RequiredMode requiredMode)
-    {
-        return InternalHelper<TValue>.IsValidFunc(value, requiredMode);
-    }
+    public static bool IsValid<TValue>(TValue value, RequiredMode requiredMode) => InternalHelper<TValue>.IsValidFunc(value, requiredMode);
 
-    public static Expression<Func<TValue, RequiredMode, bool>> GetIsValidExpression<TValue>()
-    {
-        return InternalHelper<TValue>.IsValidExpression;
-    }
-
-
-
+    public static Expression<Func<TValue, RequiredMode, bool>> GetIsValidExpression<TValue>() => InternalHelper<TValue>.IsValidExpression;
 
     private static bool IsValidNullable<TValue>(TValue? value, RequiredMode mode)
             where TValue : struct
@@ -93,11 +84,7 @@ public static class RequiredHelper
         }
     }
 
-    private static Exception GetUnappliedException<TValue>(this RequiredMode mode)
-    {
-        return new Exception($"{mode.ToCSharpCode()} can't be applied to type {typeof(TValue)}");
-    }
-
+    private static Exception GetUnappliedException<TValue>(this RequiredMode mode) => new($"{mode.ToCSharpCode()} can't be applied to type {typeof(TValue)}");
 
     private static class InternalHelper<TValue>
     {

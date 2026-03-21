@@ -52,7 +52,8 @@ public class ExpandPathVisitor : ExpressionVisitor
     {
         if (LiftableOperators.Contains(node.NodeType))
         {
-            return this.VisitWithLiftToNullable(new[] { node.Left, node.Right },
+            return this.VisitWithLiftToNullable(
+                [node.Left, node.Right],
                                                 args => Expression.MakeBinary(node.NodeType, args[0], args[1], false, node.Method, node.Conversion),
                                                 () => base.VisitBinary(node));
         }

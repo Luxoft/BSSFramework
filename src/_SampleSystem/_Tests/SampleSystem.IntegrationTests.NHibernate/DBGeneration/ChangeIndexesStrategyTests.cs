@@ -78,7 +78,7 @@ public class ChangeIndexesStrategyTests : TestBase
                                 credential: DbUserCredential.Create(
                                                                   this.DatabaseContext.Main.UserId,
                                                                   this.DatabaseContext.Main.Password),
-                                ignoredIndexes: new[] { ignoredIndexName },
+                                ignoredIndexes: [ignoredIndexName],
                                 skipFrameworkDatabases: true);
         var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 

@@ -3,16 +3,13 @@
 namespace Framework.Validation
 {
     /// <summary>
-    /// Âíóòðåííÿÿ âàëèäàöèÿ
+    /// Внутренняя валидация
     /// </summary>
-    /// <typeparam name="TSource">Òèï òåêóùåãî îáúåêòà</typeparam>
-    /// <typeparam name="TProperty">Òèï ñâîéñòâà</typeparam>
+    /// <typeparam name="TSource">Тип текущего объекта</typeparam>
+    /// <typeparam name="TProperty">Тип свойства</typeparam>
     public class DeepSingleValidator<TSource, TProperty> : IPropertyValidator<TSource, TProperty>
     {
         /// <inheritdoc />
-        public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> validationContext)
-        {
-            return validationContext.Value.Pipe(value => validationContext.Validator.GetValidationResult(value, validationContext.OperationContext, new ValidationState(validationContext.ParentState, validationContext.Map, validationContext.Source)));
-        }
+        public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> validationContext) => validationContext.Value.Pipe(value => validationContext.Validator.GetValidationResult(value, validationContext.OperationContext, new ValidationState(validationContext.ParentState, validationContext.Map, validationContext.Source)));
     }
 }

@@ -1,4 +1,4 @@
-namespace Framework.Validation
+﻿namespace Framework.Validation
 {
     /// <summary>
     /// Àòðèáóò äëÿ âûáîðî÷íîé âàëèäàöèè ñâîéñòâà
@@ -41,19 +41,13 @@ namespace Framework.Validation
         /// </summary>
         /// <param name="value">Çíà÷åíèå</param>
         /// <returns></returns>
-        public bool HasValue(bool value)
-        {
-            return this.Mode == value.ToPropertyValidationMode();
-        }
+        public bool HasValue(bool value) => this.Mode == value.ToPropertyValidationMode();
 
         /// <summary>
         /// Ïðîâåðêà íà óêàçàíèå ÿâíîé âàëèäàöèè âíóòðåííîãî îáúåêòà
         /// </summary>
         /// <param name="value">Çíà÷åíèå</param>
         /// <returns></returns>
-        public bool HasDeepValue(bool value)
-        {
-            return this.DeepMode == value.ToPropertyValidationMode();
-        }
+        public bool HasDeepValue(bool value) => this.DeepMode == value.ToPropertyValidationMode();
     }
 }

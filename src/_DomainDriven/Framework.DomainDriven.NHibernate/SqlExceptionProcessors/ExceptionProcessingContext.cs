@@ -53,7 +53,7 @@ public class ExceptionProcessingContext
     private readonly ICollection<PersistentClass> _nhibernatePersistentClass;
     private readonly SchemaDescription _defaultSchemaDescription;
     private readonly Dictionary<TableDescription, IReadOnlyList<PersistentClass>> _tableNameToPersistentClass;
-    private IReadOnlyList<string> _removingSymbols = new[] {".[dbo]", "[", "]"};
+    private IReadOnlyList<string> _removingSymbols = [".[dbo]", "[", "]"];
 
     public ExceptionProcessingContext(ICollection<PersistentClass> nhibernatePersistentClass,
                                       SchemaDescription defaultSchemaDescription)

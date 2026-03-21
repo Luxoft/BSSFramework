@@ -218,7 +218,8 @@ internal static class MicrosoftCSharpExpressionParserImplement
                     genGet.Emit(OpCodes.Ret);
                     var mbSet = tb.DefineMethod("set_" + dp.Name,
                                                 MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig,
-                                                null, new Type[] { dp.Type });
+                                                null,
+                                                [dp.Type]);
                     var genSet = mbSet.GetILGenerator();
                     genSet.Emit(OpCodes.Ldarg_0);
                     genSet.Emit(OpCodes.Ldarg_1);
@@ -236,7 +237,8 @@ internal static class MicrosoftCSharpExpressionParserImplement
                 var mb = tb.DefineMethod("Equals",
                                          MethodAttributes.Public | MethodAttributes.ReuseSlot |
                                          MethodAttributes.Virtual | MethodAttributes.HideBySig,
-                                         typeof(bool), new Type[] { typeof(object) });
+                                         typeof(bool),
+                                         [typeof(object)]);
                 var gen = mb.GetILGenerator();
                 var other = gen.DeclareLocal(tb);
                 var next = gen.DefineLabel();
@@ -258,7 +260,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
                     gen.Emit(OpCodes.Ldfld, field);
                     gen.Emit(OpCodes.Ldloc, other);
                     gen.Emit(OpCodes.Ldfld, field);
-                    gen.EmitCall(OpCodes.Callvirt, ct.GetMethod("Equals", new Type[] { ft, ft }), null);
+                    gen.EmitCall(OpCodes.Callvirt, ct.GetMethod("Equals", [ft, ft]), null);
                     gen.Emit(OpCodes.Brtrue_S, next);
                     gen.Emit(OpCodes.Ldc_I4_0);
                     gen.Emit(OpCodes.Ret);
@@ -283,7 +285,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
                     gen.EmitCall(OpCodes.Call, ct.GetMethod("get_Default"), null);
                     gen.Emit(OpCodes.Ldarg_0);
                     gen.Emit(OpCodes.Ldfld, field);
-                    gen.EmitCall(OpCodes.Callvirt, ct.GetMethod("GetHashCode", new Type[] { ft }), null);
+                    gen.EmitCall(OpCodes.Callvirt, ct.GetMethod("GetHashCode", [ft]), null);
                     gen.Emit(OpCodes.Xor);
                 }
                 gen.Emit(OpCodes.Ret);
@@ -522,8 +524,9 @@ internal static class MicrosoftCSharpExpressionParserImplement
 
         #endregion
 
-        static readonly Type[] predefinedTypes = {
-                                                         typeof(object),
+        static readonly Type[] predefinedTypes =
+        [
+            typeof(object),
                                                          typeof(bool),
                                                          typeof(char),
                                                          typeof(string),
@@ -543,7 +546,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
                                                          typeof(Guid),
                                                          typeof(Math),
                                                          typeof(Convert)
-                                                 };
+        ];
 
         static readonly Expression trueLiteral = Expression.Constant(true);
         static readonly Expression falseLiteral = Expression.Constant(false);
@@ -639,7 +642,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
 #pragma warning disable 0219
         public IEnumerable<DynamicOrdering> ParseOrdering()
         {
-            List<DynamicOrdering> orderings = new List<DynamicOrdering>();
+            List<DynamicOrdering> orderings = [];
             while (true)
             {
                 Expression expr = this.ParseExpression();
@@ -1275,7 +1278,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
                     var types = new Type[0];
                     if (multy.MethodInfo.IsGenericMethod)
                     {
-                        types = new Type[] { multy.GenericType };
+                        types = [multy.GenericType];
                     }
 
                     return Expression.Call(
@@ -1329,7 +1332,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
         {
             this.ValidateToken(TokenId.OpenParen, ExpressionParsersResources.OpenParenExpected);
             this.NextToken();
-            Expression[] args = this._token.id != TokenId.CloseParen ? this.ParseArguments() : new Expression[0];
+            Expression[] args = this._token.id != TokenId.CloseParen ? this.ParseArguments() : [];
             this.ValidateToken(TokenId.CloseParen, ExpressionParsersResources.CloseParenOrCommaExpected);
             this.NextToken();
             return args;
@@ -1337,7 +1340,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
 
         Expression[] ParseArguments()
         {
-            List<Expression> argList = new List<Expression>();
+            List<Expression> argList = [];
             while (true)
             {
                 argList.Add(this.ParseExpression());
@@ -1556,7 +1559,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
         {
             if (type.IsInterface)
             {
-                List<Type> types = new List<Type>();
+                List<Type> types = [];
                 AddInterface(types, type);
                 return types;
             }
@@ -1975,18 +1978,18 @@ internal static class MicrosoftCSharpExpressionParserImplement
         {
             return Expression.Call(
                                    null,
-                                   typeof(string).GetMethod("Concat", new[] { typeof(object), typeof(object) }),
-                                   new[] { left, right });
+                                   typeof(string).GetMethod("Concat", [typeof(object), typeof(object)]),
+                                   [left, right]);
         }
 
         MethodInfo GetStaticMethod(string methodName, Expression left, Expression right)
         {
-            return left.Type.GetMethod(methodName, new[] { left.Type, right.Type });
+            return left.Type.GetMethod(methodName, [left.Type, right.Type]);
         }
 
         Expression GenerateStaticMethodCall(string methodName, Expression left, Expression right)
         {
-            return Expression.Call(null, this.GetStaticMethod(methodName, left, right), new[] { left, right });
+            return Expression.Call(null, this.GetStaticMethod(methodName, left, right), [left, right]);
         }
 
         void SetTextPos(int pos)

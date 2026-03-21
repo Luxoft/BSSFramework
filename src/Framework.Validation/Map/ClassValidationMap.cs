@@ -2,18 +2,11 @@
 
 namespace Framework.Validation;
 
-public abstract class ClassValidationMap : IClassValidationMap, IValidatorCollection<IClassValidator>
+public abstract class ClassValidationMap(string typeName) : IClassValidationMap, IValidatorCollection<IClassValidator>
 {
-    protected ClassValidationMap(string typeName)
-    {
-        if (typeName == null) throw new ArgumentNullException(nameof(typeName));
-
-        this.TypeName = typeName;
-    }
-
     public abstract Type Type { get; }
 
-    public string TypeName { get; }
+    public string TypeName { get; } = typeName;
 
     protected abstract IReadOnlyCollection<IPropertyValidationMap> BasePropertyMaps { get; }
 
@@ -31,7 +24,7 @@ public abstract class ClassValidationMap : IClassValidationMap, IValidatorCollec
 public class ClassValidationMap<TSource> : ClassValidationMap, IClassValidationMap<TSource>
 {
     public ClassValidationMap(Func<IClassValidationMap<TSource>, IEnumerable<IPropertyValidationMap<TSource>>> getPropertyMaps)
-            : this(getPropertyMaps, new IClassValidator<TSource>[0])
+            : this(getPropertyMaps, [])
     {
     }
 
@@ -63,5 +56,5 @@ public class ClassValidationMap<TSource> : ClassValidationMap, IClassValidationM
 
     protected override IReadOnlyCollection<IClassValidator> BaseValidators => this.Validators;
 
-    public static readonly ClassValidationMap<TSource> Empty = new ClassValidationMap<TSource>(new IPropertyValidationMap<TSource>[0], new IClassValidator<TSource>[0]);
+    public static readonly ClassValidationMap<TSource> Empty = new ClassValidationMap<TSource>([], []);
 }

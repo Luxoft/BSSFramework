@@ -36,7 +36,7 @@ public static class DatabaseScriptResultFactory
                 {
                     return result;
                 }
-                return new string[0];
+                return Array.Empty<string>();
             }
         }
 
@@ -80,7 +80,7 @@ public static class DatabaseScriptResultFactory
                 {
                     return result.Value;
                 }
-                return new string[0];
+                return Array.Empty<string>();
             }
         }
 

@@ -14,7 +14,7 @@ internal class MessageTemplateBuilder
 
     public static MessageTemplateBuilder With()
     {
-        return new MessageTemplateBuilder(new List<MessageTemplateNotification>());
+        return new MessageTemplateBuilder([]);
     }
 
     public TemplateBuilder Template(string templateCode)
@@ -41,10 +41,10 @@ internal class MessageTemplateBuilder
         private readonly MessageTemplateBuilder host;
 
         private string templateCode;
-        private string[] toRecipients = new string[0];
-        private string[] ccRecipients = new string[0];
-        private string[] replayTo = new string[0];
-        private System.Net.Mail.Attachment[] attachments = new System.Net.Mail.Attachment[0];
+        private string[] toRecipients = [];
+        private string[] ccRecipients = [];
+        private string[] replayTo = [];
+        private System.Net.Mail.Attachment[] attachments = [];
         private bool includeAttachments;
         private string subscriptionCode;
         private bool sendIndividualLetters;

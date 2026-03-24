@@ -1,13 +1,12 @@
-﻿using System.Reflection;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection;
 
 using CommonFramework;
 
 using Framework.BLL.Domain.Attributes;
+using Framework.BLL.Domain.Persistent.Attributes;
+using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.Persistent;
-using Framework.Persistent.Mapping;
-using Framework.Validation;
 
 namespace Framework.Projection.Contract;
 

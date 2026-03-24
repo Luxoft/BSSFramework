@@ -2,7 +2,9 @@
 
 using CommonFramework;
 
-namespace Framework.DomainDriven.Generation;
+using Framework.CodeGeneration.Checkout;
+
+namespace Framework.CodeGeneration;
 
 public class FileInfo
 {

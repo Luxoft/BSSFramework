@@ -37,20 +37,7 @@ public struct TrackingResult<TDomainObject> : IEnumerable<TrackingProperty>
         var path = propertyExpression.ToPath().ToLower(CultureInfo.InvariantCulture);
         var property = this.properties.Single(z => z.LowPropertyName == path, () => new ArgumentException($"The {path} property was not modified"));
 
-        return TrackingProperty.Create<TProperty>(property.PropertyName, property.PreviusValue, property.CurrentValue);
-    }
-
-    /// <summary>
-    /// Gets modified property info
-    /// </summary>
-    /// <param name="propertyExpression">Property get expression</param>
-    [Obsolete("Use Property method")]
-    public ObsoleteTrackingProperty<TProperty> ObsoleteProperty<TProperty>(Expression<Func<TDomainObject, TProperty>> propertyExpression)
-    {
-        var path = propertyExpression.ToPath().ToLower(CultureInfo.InvariantCulture);
-        var property = this.properties.Single(z => z.LowPropertyName == path, () => new ArgumentException($"The {path} property was not modified"));
-
-        return TrackingProperty.CreateObsolete<TProperty>(property.PropertyName, property.PreviusValue, property.CurrentValue);
+        return TrackingProperty.Create<TProperty>(property.PropertyName, property.PreviousValue, property.CurrentValue);
     }
 
     /// <summary>
@@ -65,7 +52,7 @@ public struct TrackingResult<TDomainObject> : IEnumerable<TrackingProperty>
 
         return TrackingProperty.Create<IEnumerable<TProperty>>(
                                                                property.PropertyName,
-                                                               ((IEnumerable)property.PreviusValue ?? Enumerable.Empty<TProperty>()).Cast<TProperty>().ToList(),
+                                                               ((IEnumerable)property.PreviousValue ?? Enumerable.Empty<TProperty>()).Cast<TProperty>().ToList(),
                                                                ((IEnumerable)property.CurrentValue ?? Enumerable.Empty<TProperty>()).Cast<TProperty>().ToList());
     }
 
@@ -78,7 +65,7 @@ public struct TrackingResult<TDomainObject> : IEnumerable<TrackingProperty>
     /// <returns>Previous or default property value identified by expression specified</returns>
     public TProperty GetPrevValue<TProperty>(Expression<Func<TDomainObject, TProperty>> propertyExpression, TProperty defaultValue)
     {
-        return this.GetChange(propertyExpression).Match(z => z.PreviusValue.GetValueOrDefault(defaultValue), () => defaultValue);
+        return this.GetChange(propertyExpression).Match(z => z.PreviousValue.GetValueOrDefault(defaultValue), () => defaultValue);
     }
 
     /// <inheritdoc />
@@ -177,41 +164,5 @@ public struct TrackingResult<TDomainObject> : IEnumerable<TrackingProperty>
     IEnumerator IEnumerable.GetEnumerator()
     {
         return this.GetEnumerator();
-    }
-}
-
-/// <summary>
-/// Internal helper that helps creation result
-/// </summary>
-internal static class TrackingResult
-{
-    /// <summary>
-    /// Creates new TrackingResult instance using domain object specified
-    /// </summary>
-    /// <param name="source">Domain object</param>
-    /// <param name="mode">Mode that defines changes detection algorithm on not persistent objects (that not exist in DB)</param>
-    public static TrackingResult<TDomainObject> Create<TDomainObject>(IPersistentInfoService persistentInfoService, TDomainObject source, GetChangesMode mode)
-    {
-        var allProperties =
-                typeof(TDomainObject).GetProperties()
-                                     .Where(persistentInfoService.IsPersistent)
-                                     .Select(z => new { Type = z.PropertyType, Value = z.GetValue(source, new object[0]), Name = z.Name })
-                                     .Where(z => mode == GetChangesMode.Default || !Equals(z.Value, GetDefault(z.Type)))
-                                     .Select(z => new TrackingProperty(z.Name, null, z.Value))
-                                     .ToList();
-
-        return new TrackingResult<TDomainObject>(allProperties);
-    }
-
-    private static object GetDefault(Type type)
-    {
-        return ThreadsafeMemoize<Type, object>(t => t.IsValueType ? Activator.CreateInstance(t) : null)(type);
-    }
-
-    private static Func<TArg, TResult> ThreadsafeMemoize<TArg, TResult>(this Func<TArg, TResult> func)
-    {
-        var cache = new ConcurrentDictionary<TArg, TResult>();
-
-        return argument => cache.GetOrAdd(argument, func);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 
 using Framework.Core;
-using Framework.DomainDriven.Metadata;
 
 namespace Framework.Projection.Lambda;
 

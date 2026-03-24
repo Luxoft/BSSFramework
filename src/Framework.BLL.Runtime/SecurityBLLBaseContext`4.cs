@@ -4,7 +4,6 @@ using Framework.BLL.BLL.Default;
 using Framework.BLL.Context;
 using Framework.Events;
 using Framework.QueryLanguage;
-using Framework.Validation;
 
 using HierarchicalExpand;
 
@@ -18,18 +17,14 @@ namespace Framework.BLL;
 public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer>(
     IServiceProvider serviceProvider,
     IEventOperationSender operationSender,
-    ITrackingService<TPersistentDomainObjectBase> trackingService,
     IAccessDeniedExceptionService accessDeniedExceptionService,
     IStandardExpressionBuilder standardExpressionBuilder,
-    IValidator validator,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory)
     :
         DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer>(
         serviceProvider,
         operationSender,
-        trackingService,
         standardExpressionBuilder,
-        validator,
         hierarchicalObjectExpanderFactory),
         IAccessDeniedExceptionServiceContainer,
         ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>

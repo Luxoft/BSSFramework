@@ -4,16 +4,10 @@ using CommonFramework;
 
 namespace Framework.Core;
 
-public class TypeMap : TypeMap<TypeMapMember>, IEquatable<TypeMap>, ISwitchNameObject<TypeMap>
+public class TypeMap(string name, IEnumerable<TypeMapMember> members) : TypeMap<TypeMapMember>(name, members), IEquatable<TypeMap>, ISwitchNameObject<TypeMap>
 {
     public TypeMap(string name, IEnumerable<KeyValuePair<string, Type>> members)
             : this(name, members.Select(pair => new TypeMapMember(pair.Key, pair.Value)))
-    {
-
-    }
-
-    public TypeMap(string name, IEnumerable<TypeMapMember> members)
-            :base (name, members)
     {
 
     }

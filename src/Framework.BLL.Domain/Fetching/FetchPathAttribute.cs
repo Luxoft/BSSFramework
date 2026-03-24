@@ -1,6 +1,6 @@
 ﻿using Framework.BLL.Domain.Persistent.Attributes;
 
-namespace Framework.BLL.Fetching;
+namespace Framework.BLL.Domain.Fetching;
 
 /// <summary>
 /// Атрибут пути, для генерации Fetch-ей

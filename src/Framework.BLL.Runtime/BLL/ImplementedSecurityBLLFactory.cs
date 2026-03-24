@@ -3,6 +3,8 @@ using Framework.BLL.Context;
 using Framework.BLL.Services;
 using Framework.BLL.Services.Root._Base;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using SecuritySystem.Providers;
 
 namespace Framework.BLL.BLL;

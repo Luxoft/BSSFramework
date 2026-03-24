@@ -5,7 +5,7 @@ using CommonFramework;
 
 using Framework.CodeDom;
 
-namespace Framework.DomainDriven.Generation;
+namespace Framework.CodeGeneration.MethodGenerator;
 
 public abstract class MethodGenerator : IMethodGenerator, IMethodGeneratorInfo
 {

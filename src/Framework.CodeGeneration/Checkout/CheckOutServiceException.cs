@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.Generation;
+﻿namespace Framework.CodeGeneration.Checkout;
 
 public class CheckOutServiceException : Exception
 {

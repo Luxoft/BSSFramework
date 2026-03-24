@@ -1,9 +1,10 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
+using Framework.CodeGeneration.Checkout;
 using Framework.Core;
 
-namespace Framework.DomainDriven.Generation;
+namespace Framework.CodeGeneration.Extensions;
 
 public static class FileGeneratorExtensions
 {

@@ -1,6 +1,6 @@
 ﻿using CommonFramework;
 
-namespace Framework.DomainDriven;
+namespace Framework.CodeGeneration.Extensions;
 
 public static class TypeExtensions
 {

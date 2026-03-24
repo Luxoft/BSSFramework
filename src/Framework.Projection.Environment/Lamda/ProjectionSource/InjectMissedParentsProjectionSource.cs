@@ -1,9 +1,9 @@
 ﻿using Framework.Core;
-using Framework.Persistent;
-using Framework.Persistent.Mapping;
 
 using CommonFramework;
 using CommonFramework.Maybe;
+
+using Framework.BLL.Domain.Attributes;
 
 namespace Framework.Projection.Lambda;
 

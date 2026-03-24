@@ -10,15 +10,15 @@ public struct TrackingProperty
 
     private readonly string lowPropertyName;
 
-    private readonly object previusValue;
+    private readonly object previousValue;
 
     private readonly object currentValue;
 
-    internal TrackingProperty(string propertyName, object previusValue, object currentValue)
+    internal TrackingProperty(string propertyName, object previousValue, object currentValue)
             : this()
     {
         this.propertyName = propertyName;
-        this.previusValue = previusValue;
+        this.previousValue = previousValue;
         this.currentValue = currentValue;
         this.lowPropertyName = propertyName.ToLower(CultureInfo.InvariantCulture);
     }
@@ -27,25 +27,22 @@ public struct TrackingProperty
 
     public string LowPropertyName => this.lowPropertyName;
 
-    public object PreviusValue => this.previusValue;
+    public object PreviousValue => this.previousValue;
 
     public object CurrentValue => this.currentValue;
 
-    public static TrackingProperty<T> Create<T>(string propertyName, object previusValue, object currentValue)
+    public static TrackingProperty<T> Create<T>(string propertyName, object previousValue, object currentValue)
     {
         if (typeof(T).IsClass)
         {
-            return new TrackingProperty<T>(propertyName, Maybe.Return((T)previusValue), Maybe.Return((T)currentValue));
+            return new TrackingProperty<T>(propertyName, Maybe.Return((T)previousValue), Maybe.Return((T)currentValue));
         }
-
-        return new TrackingProperty<T>(
-                                       propertyName,
-                                       previusValue == null ? Maybe<T>.Nothing : Maybe.Return((T)previusValue),
-                                       currentValue == null ? Maybe<T>.Nothing : Maybe.Return<T>((T)currentValue));
-    }
-
-    public static ObsoleteTrackingProperty<T> CreateObsolete<T>(string propertyName, object previusValue, object currentValue)
-    {
-        return new ObsoleteTrackingProperty<T>(propertyName, (T)previusValue, (T)currentValue);
+        else
+        {
+            return new TrackingProperty<T>(
+                propertyName,
+                previousValue == null ? Maybe<T>.Nothing : Maybe.Return((T)previousValue),
+                currentValue == null ? Maybe<T>.Nothing : Maybe.Return<T>((T)currentValue));
+        }
     }
 }

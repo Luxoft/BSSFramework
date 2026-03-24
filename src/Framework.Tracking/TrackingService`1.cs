@@ -18,7 +18,7 @@ public class TrackingService<TPersistentDomainObjectBase>(IObjectStateService ob
             return TrackingResult.Create(persistentInfoService, value, mode);
         }
 
-        var trackingProperties = this.GetModifiedObjectStates(value).Select(z => new TrackingProperty(z.PropertyName, z.PreviusValue, z.CurrentValue));
+        var trackingProperties = this.GetModifiedObjectStates(value).Select(z => new TrackingProperty(z.PropertyName, z.PreviousValue, z.CurrentValue));
 
         return new TrackingResult<TDomainObject>(trackingProperties);
     }

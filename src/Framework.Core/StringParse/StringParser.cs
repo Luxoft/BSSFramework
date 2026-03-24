@@ -6,13 +6,9 @@ namespace Framework.Core.StringParse;
 [Obsolete("v10 This method will be protected in future")]
 public class StringParser
 {
-    private readonly StringBuilder _regexPatternBuilder;
+    private readonly StringBuilder _regexPatternBuilder = new();
     private int _resultCount;
 
-    public StringParser()
-    {
-        this._regexPatternBuilder = new StringBuilder();
-    }
     public MatchResultDescription Add(StringPattern pattern)
     {
         this.Validate(pattern);

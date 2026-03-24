@@ -1,11 +1,10 @@
-﻿using System.Reflection;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection;
 
 using Framework.BLL.Domain.Attributes;
+using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.BLL.Domain.ServiceRole.Base;
-using Framework.DomainDriven.BLL;
-using Framework.Persistent.Mapping;
-using Framework.Validation;
 
 namespace Framework.Projection.Lambda;
 

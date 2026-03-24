@@ -14,16 +14,16 @@ using SecuritySystem;
 
 namespace Framework.Application.DALListener;
 
-public class DenormalizeHierarchicalDALListener(
+public class DenormalizeHierarchicalDalListener(
     IServiceProvider serviceProvider,
     IEnumerable<FullAncestorLinkInfo> hierarchicalInfoList,
     INamedLockSource namedLockSource,
     INamedLockService namedLockService)
-    : IBeforeTransactionCompletedDALListener
+    : IBeforeTransactionCompletedDalListener
 {
     private readonly IReadOnlyDictionary<Type, FullAncestorLinkInfo> hierarchicalInfoTypes = hierarchicalInfoList.ToDictionary(h => h.DomainObjectType);
 
-    public async Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
+    public async Task Process(DalChangesEventArgs eventArgs, CancellationToken cancellationToken)
     {
         foreach (var typeGroup in eventArgs.Changes.GroupByType())
         {
@@ -32,7 +32,7 @@ public class DenormalizeHierarchicalDALListener(
             if (this.hierarchicalInfoTypes.TryGetValue(domainType, out var hierarchicalInfo))
             {
                 var values = typeGroup.Value.ToChangeTypeDict().Partial(
-                    pair => pair.Value == DALObjectChangeType.Created || pair.Value == DALObjectChangeType.Updated,
+                    pair => pair.Value == DalObjectChangeType.Created || pair.Value == DalObjectChangeType.Updated,
                     (modified, removing) => new { Modified = modified, Removing = removing });
 
                 var method =

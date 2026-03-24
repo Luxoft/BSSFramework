@@ -14,7 +14,7 @@ public struct TrackingProperty<T>
 
     private readonly string lowPropertyName;
 
-    private readonly Maybe<T> previusValue;
+    private readonly Maybe<T> previousValue;
 
     private readonly Maybe<T> currentValue;
 
@@ -22,13 +22,13 @@ public struct TrackingProperty<T>
     /// Initializes new TrackingProperty instance
     /// </summary>
     /// <param name="propertyName">Property name</param>
-    /// <param name="previusValue">Property's prev value</param>
+    /// <param name="previousValue">Property's prev value</param>
     /// <param name="currentValue">Property's current value</param>
-    internal TrackingProperty(string propertyName, Maybe<T> previusValue, Maybe<T> currentValue)
+    internal TrackingProperty(string propertyName, Maybe<T> previousValue, Maybe<T> currentValue)
             : this()
     {
         this.propertyName = propertyName;
-        this.previusValue = previusValue;
+        this.previousValue = previousValue;
         this.currentValue = currentValue;
         this.lowPropertyName = propertyName.ToLower(CultureInfo.InvariantCulture);
     }
@@ -46,7 +46,7 @@ public struct TrackingProperty<T>
     /// <summary>
     /// Gets property's previous value
     /// </summary>
-    public Maybe<T> PreviusValue => this.previusValue;
+    public Maybe<T> PreviousValue => this.previousValue;
 
     /// <summary>
     /// Gets property's current value

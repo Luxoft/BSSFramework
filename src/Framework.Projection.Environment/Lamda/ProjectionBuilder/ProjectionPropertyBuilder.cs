@@ -3,8 +3,8 @@ using System.Reflection;
 
 using CommonFramework;
 
+using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.Core;
-using Framework.Persistent;
 
 namespace Framework.Projection.Lambda;
 

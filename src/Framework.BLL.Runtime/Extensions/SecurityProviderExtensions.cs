@@ -2,6 +2,7 @@
 
 using Framework.BLL.AccessDeniedExceptionService;
 using Framework.BLL.Providers;
+using Framework.DomainDriven.Tracking;
 
 using SecuritySystem.Providers;
 
@@ -17,10 +18,6 @@ public static class SecurityProviderExtensions
         where TBLLContext : class, IAccessDeniedExceptionServiceContainer, ITrackingServiceContainer<TDomainObject>
         where TDomainObject : class
     {
-        if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
-        if (context == null) throw new ArgumentNullException(nameof(context));
-        if (allowedPropertiesForChangingExpressions == null) throw new ArgumentNullException(nameof(allowedPropertiesForChangingExpressions));
-
         return new FixedPropertiesSecurityProvider<TBLLContext, TDomainObject>(context, securityProvider, allowedPropertiesForChangingExpressions);
     }
 }

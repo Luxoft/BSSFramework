@@ -1,12 +1,7 @@
 ﻿namespace Framework.Core;
 
-public class TypeMapMember : TypeMapMemberBase, IEquatable<TypeMapMember>
+public class TypeMapMember(string name, Type type) : TypeMapMemberBase(name, type), IEquatable<TypeMapMember>
 {
-    public TypeMapMember(string name, Type type) : base(name, type)
-    {
-
-    }
-
     public override int GetHashCode()
     {
         return this.Name.GetHashCode() ^ this.Type.GetHashCode();

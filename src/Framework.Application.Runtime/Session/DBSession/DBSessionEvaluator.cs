@@ -2,7 +2,7 @@
 
 namespace Framework.Application.Session.DBSession;
 
-public class DBSessionEvaluator(IServiceProvider rootServiceProvider) : IDBSessionEvaluator
+public class DbSessionEvaluator(IServiceProvider rootServiceProvider) : IDBSessionEvaluator
 {
     public async Task<TResult> EvaluateAsync<TResult>(DBSessionMode sessionMode, Func<IServiceProvider, Task<TResult>> getResult)
     {

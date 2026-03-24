@@ -1,6 +1,6 @@
 ﻿namespace Framework.Application.Session.DALObject;
 
-public enum DALObjectChangeType
+public enum DalObjectChangeType
 {
     Created,
 

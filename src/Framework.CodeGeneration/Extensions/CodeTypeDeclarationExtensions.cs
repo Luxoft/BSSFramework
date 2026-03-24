@@ -1,6 +1,6 @@
 ﻿using System.CodeDom;
 
-namespace Framework.DomainDriven.Generation;
+namespace Framework.CodeGeneration.Extensions;
 
 public static class CodeTypeDeclarationExtensions
 {

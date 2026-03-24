@@ -29,8 +29,6 @@ public static class PropertyPathExtensions
     /// <returns></returns>
     public static LambdaExpression ToLambdaExpression(this PropertyPath propertyPath, Type? sourceType = null)
     {
-        if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
-
         var rootParam = Expression.Parameter(sourceType ?? propertyPath.Head.ReflectedType!);
 
         return propertyPath.Aggregate((Expression)rootParam, Expression.Property, res => Expression.Lambda(res, rootParam));

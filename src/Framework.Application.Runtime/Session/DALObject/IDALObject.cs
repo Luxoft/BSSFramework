@@ -3,7 +3,7 @@
 /// <summary>
 /// For proxy types
 /// </summary>
-public interface IDALObject
+public interface IdalObject
 {
     object Object { get; }
 

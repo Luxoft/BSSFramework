@@ -20,7 +20,7 @@ public interface IAuditReaderPatched : IAuditReader
     IReadOnlyList<Tuple<T, long>> GetDomainObjectRevisions<T>(object primaryKey, int takeCount)
             where T : class;
 
-    long? GetPreviusRevision(System.Type cls, object primaryKey, long maxRevisions);
+    long? GetPreviousRevision(System.Type cls, object primaryKey, long maxRevisions);
 
     AuditQueryCreatorPatched CreatePatchedQuery();
 

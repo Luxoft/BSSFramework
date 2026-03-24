@@ -61,7 +61,7 @@ public static class PropertyPathExtensions
 
     extension(Type domainObjectType)
     {
-        private PropertyPath GetPropertyPath(string path)
+        public PropertyPath GetPropertyPath(string path)
         {
             if (domainObjectType == null) throw new ArgumentNullException(nameof(domainObjectType));
             if (path == null) throw new ArgumentNullException(nameof(path));

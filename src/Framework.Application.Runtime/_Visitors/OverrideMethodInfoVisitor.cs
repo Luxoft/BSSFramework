@@ -7,8 +7,8 @@ namespace Framework.Application._Visitors;
 
 public class OverrideMethodInfoVisitor : ExpressionVisitor
 {
-    private readonly MethodInfo _methodInfo;
-    private readonly LambdaExpression _expression;
+    private readonly MethodInfo methodInfo;
+    private readonly LambdaExpression expression;
 
 
     public OverrideMethodInfoVisitor(MethodInfo methodInfo, LambdaExpression expression)
@@ -17,24 +17,24 @@ public class OverrideMethodInfoVisitor : ExpressionVisitor
         if (expression == null) throw new ArgumentNullException(nameof(expression));
         if (methodInfo.GetParameters().Length != expression.Parameters.Count) throw new Exception("Different parameters count");
 
-        this._methodInfo = methodInfo;
-        this._expression = expression;
+        this.methodInfo = methodInfo;
+        this.expression = expression;
     }
 
 
     protected override Expression VisitUnary(UnaryExpression node)
     {
-        return node.Method == this._methodInfo ? this.GetExpressionByArgs([node.Operand]) : base.VisitUnary(node);
+        return node.Method == this.methodInfo ? this.GetExpressionByArgs([node.Operand]) : base.VisitUnary(node);
     }
 
     protected override Expression VisitBinary(BinaryExpression node)
     {
-        return node.Method == this._methodInfo ? this.GetExpressionByArgs([node.Left, node.Right]) : base.VisitBinary(node);
+        return node.Method == this.methodInfo ? this.GetExpressionByArgs([node.Left, node.Right]) : base.VisitBinary(node);
     }
 
     protected override Expression VisitMethodCall(MethodCallExpression node)
     {
-        return node.Method == this._methodInfo ? this.GetExpressionByArgs(node.Arguments) : base.VisitMethodCall(node);
+        return node.Method == this.methodInfo ? this.GetExpressionByArgs(node.Arguments) : base.VisitMethodCall(node);
     }
 
 
@@ -42,10 +42,10 @@ public class OverrideMethodInfoVisitor : ExpressionVisitor
     {
         if (arguments == null) throw new ArgumentNullException(nameof(arguments));
 
-        return this._expression
+        return this.expression
                    .Parameters
                    .Zip(arguments, (parameter, argument) => new { Parameter = parameter, Argument = argument })
-                   .Aggregate(this._expression.Body, (state, pair) => state.Override(pair.Parameter, pair.Argument));
+                   .Aggregate(this.expression.Body, (state, pair) => state.Override(pair.Parameter, pair.Argument));
     }
 }
 

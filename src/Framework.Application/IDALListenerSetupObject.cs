@@ -5,5 +5,5 @@ namespace Framework.Application.DALListeners;
 public interface IDALListenerSetupObject
 {
     IDALListenerSetupObject Add<TListener>()
-        where TListener : class, IDALListener;
+        where TListener : class, IdalListener;
 }

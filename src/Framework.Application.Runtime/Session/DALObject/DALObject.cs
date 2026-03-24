@@ -1,11 +1,11 @@
 ﻿namespace Framework.Application.Session.DALObject;
 
-public record DALObject<T>(T @Object, long ApplyIndex) : IDALObject
+public record DalObject<T>(T @Object, long ApplyIndex) : IdalObject
     where T : class
 {
-    Type IDALObject.Type { get; } = typeof(T);
+    Type IdalObject.Type { get; } = typeof(T);
 
-    object IDALObject.Object => this.Object;
+    object IdalObject.Object => this.Object;
 }
 
-public record DALObject(object Object, Type Type, long ApplyIndex) : IDALObject;
+public record DalObject(object Object, Type Type, long ApplyIndex) : IdalObject;

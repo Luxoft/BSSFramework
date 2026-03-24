@@ -2,8 +2,8 @@
 
 namespace Framework.Application.DALExceptions;
 
-public class UniqueViolationConstraintDALException(UniqueConstraint args, IDalValidationIdentitySource validationIdentitySource)
-    : DALException<UniqueConstraint>(args, GetMessage(args, validationIdentitySource))
+public class UniqueViolationConstraintDalException(UniqueConstraint args, IDalValidationIdentitySource validationIdentitySource)
+    : DalException<UniqueConstraint>(args, GetMessage(args, validationIdentitySource))
 {
     private static string GetMessage(UniqueConstraint constraint, IDalValidationIdentitySource validationIdentitySource)
     {

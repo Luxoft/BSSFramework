@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 
-namespace Framework.DomainDriven.Generation;
+namespace Framework.CodeGeneration;
 
 public static class RendererExtensions
 {

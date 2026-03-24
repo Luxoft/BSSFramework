@@ -3,15 +3,10 @@ using System.Runtime.Serialization;
 
 namespace Framework.Core;
 
-public class AnonymousTypeByPropertyWithSerializeBuilder<TMap, TMapMember> : AnonymousTypeByPropertyBuilder<TMap, TMapMember>
-        where TMap : class, ITypeMap<TMapMember>
-        where TMapMember : ITypeMapMember
+public class AnonymousTypeByPropertyWithSerializeBuilder<TMap, TMapMember>(IAnonymousTypeBuilderStorage storage) : AnonymousTypeByPropertyBuilder<TMap, TMapMember>(storage)
+    where TMap : class, ITypeMap<TMapMember>
+    where TMapMember : ITypeMapMember
 {
-    public AnonymousTypeByPropertyWithSerializeBuilder(IAnonymousTypeBuilderStorage storage)
-            : base(storage)
-    {
-    }
-
     protected override TypeBuilder DefineType(TMap typeMap)
     {
         var typeBuilder = base.DefineType(typeMap);

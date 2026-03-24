@@ -3,15 +3,9 @@ using System.Xml.Linq;
 
 namespace Framework.Core;
 
-public class XDocumentFileRenderer : IFileRenderer<XDocument, string>
+public class XDocumentFileRenderer(Func<StringBuilder, TextWriter> createWriter) : IFileRenderer<XDocument, string>
 {
-    private readonly Func<StringBuilder, TextWriter> _createWriter;
-
-
-    public XDocumentFileRenderer(Func<StringBuilder, TextWriter> createWriter)
-    {
-        this._createWriter = createWriter ?? throw new ArgumentNullException(nameof(createWriter));
-    }
+    private readonly Func<StringBuilder, TextWriter> _createWriter = createWriter ?? throw new ArgumentNullException(nameof(createWriter));
 
     public XDocumentFileRenderer(Encoding encoding)
             : this(sb => new EncodingStringWriter(sb, encoding))

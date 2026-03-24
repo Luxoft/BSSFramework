@@ -20,7 +20,7 @@ public class OverrideHashSetVisitor<TIdent> : ExpressionVisitor
 
     public class InternalStateVisitor : ExpressionVisitor
     {
-        private readonly IDictionaryCache<HashSet<TIdent>, Expression> _constCache =
+        private readonly IDictionaryCache<HashSet<TIdent>, Expression> constCache =
 
                 new DictionaryCache<HashSet<TIdent>, Expression>(source => Expression.Constant(source.ToList()));
 
@@ -31,7 +31,7 @@ public class OverrideHashSetVisitor<TIdent> : ExpressionVisitor
 
                           from hashSet in node.GetDeepMemberConstValue<HashSet<TIdent>>()
 
-                          select this._constCache[hashSet];
+                          select this.constCache[hashSet];
 
             return request.GetValueOrDefault(() => base.Visit(baseNode));
         }

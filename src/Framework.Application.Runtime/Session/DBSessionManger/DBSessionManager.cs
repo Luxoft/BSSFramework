@@ -2,20 +2,16 @@
 
 namespace Framework.Application.Session.DBSessionManger
 {
-    public class DBSessionManager : IDBSessionManager
+    public class DbSessionManager(ILazyObject<IDBSession> lazyDbSession) : IDBSessionManager
     {
-        private readonly ILazyObject<IDBSession> lazyDbSession;
-
-        public DBSessionManager(ILazyObject<IDBSession> lazyDbSession) => this.lazyDbSession = lazyDbSession;
-
         /// <summary>
         /// Tries to close existing DB session (if exists) and to flush events to DAL listeners
         /// </summary>
         public async Task TryCloseDbSessionAsync(CancellationToken cancellationToken = default)
         {
-            if (this.lazyDbSession.IsValueCreated)
+            if (lazyDbSession.IsValueCreated)
             {
-                await this.lazyDbSession.Value.CloseAsync(cancellationToken);
+                await lazyDbSession.Value.CloseAsync(cancellationToken);
             }
         }
 
@@ -24,9 +20,9 @@ namespace Framework.Application.Session.DBSessionManger
         /// </summary>
         public void TryFaultDbSession()
         {
-            if (this.lazyDbSession.IsValueCreated)
+            if (lazyDbSession.IsValueCreated)
             {
-                this.lazyDbSession.Value.AsFault();
+                lazyDbSession.Value.AsFault();
             }
         }
     }

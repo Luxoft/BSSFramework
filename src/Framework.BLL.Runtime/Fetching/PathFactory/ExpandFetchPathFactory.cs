@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 
+using Framework.BLL.Domain.Fetching;
 using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.Core;

@@ -5,6 +5,7 @@ using CommonFramework;
 
 using Framework.Application.Domain;
 using Framework.Core;
+using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,19 +15,8 @@ namespace Framework.BLL.BLL.Validation.Validators;
 /// Класс для проверки уникальности полей доменного объекта через запрос к БД.
 /// </summary>
 /// <seealso cref="IDynamicClassValidator" />
-public class UniqueGroupDatabaseValidator : IDynamicClassValidator
+public class UniqueGroupDatabaseValidator(string groupKey) : IDynamicClassValidator
 {
-    private readonly string groupKey;
-
-    /// <summary>
-    /// Создаёт экземпляр класса <see cref="UniqueGroupDatabaseValidator"/> class.
-    /// </summary>
-    /// <param name="groupKey">Ключ группы уникальности.</param>
-    public UniqueGroupDatabaseValidator(string groupKey)
-    {
-        this.groupKey = groupKey;
-    }
-
     /// <summary>
     /// Возвращает экземпляр валидатора..
     /// </summary>
@@ -52,7 +42,7 @@ public class UniqueGroupDatabaseValidator : IDynamicClassValidator
                                  domainObjectType,
                                  contexTypeData.IdentType);
 
-        var uniProperties = domainObjectType.GetUniqueElementPropeties(this.groupKey, true);
+        var uniProperties = domainObjectType.GetUniqueElementPropeties(groupKey, true);
 
         var propertyNames = uniProperties.GetUniqueElementString(false);
 

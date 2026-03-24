@@ -1,6 +1,6 @@
 ﻿namespace Framework.Application.Session.DALChanges;
 
-public class SessionFlushedEventArgs(DALChanges changes, IDBSession session) : DALChangesEventArgs(changes)
+public class SessionFlushedEventArgs(DalChanges changes, IDBSession session) : DalChangesEventArgs(changes)
 {
     public IDBSession Session { get; } = session;
 }

@@ -1,18 +1,11 @@
 ﻿namespace Framework.Core;
 
-public class PropertyEqualityComparer<T, TProperty> : EqualityComparer<T>
+public class PropertyEqualityComparer<T, TProperty>(Func<T, TProperty> getPropertyFunc) : EqualityComparer<T>
 {
-    private readonly Func<T, TProperty> getPropertyFunc;
-
-    public PropertyEqualityComparer(Func<T, TProperty> getPropertyFunc)
-    {
-        this.getPropertyFunc = getPropertyFunc;
-    }
-
     public override bool Equals(T x, T y)
     {
-        var xValue = this.getPropertyFunc(x);
-        var yValue = this.getPropertyFunc(y);
+        var xValue = getPropertyFunc(x);
+        var yValue = getPropertyFunc(y);
 
         return Equals(xValue, yValue);
     }

@@ -2,8 +2,9 @@
 
 using CommonFramework;
 
+using Framework.BLL.Domain.Extensions;
+using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.Core;
-using Framework.Persistent;
 
 namespace Framework.Projection.Lambda;
 

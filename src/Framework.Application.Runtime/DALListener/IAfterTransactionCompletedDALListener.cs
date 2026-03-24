@@ -1,3 +1,3 @@
 ﻿namespace Framework.Application.DALListener;
 
-public interface IAfterTransactionCompletedDALListener : IDALListener;
+public interface IAfterTransactionCompletedDalListener : IdalListener;

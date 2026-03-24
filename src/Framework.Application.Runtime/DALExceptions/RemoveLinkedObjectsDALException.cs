@@ -6,9 +6,9 @@ using CommonFramework;
 
 namespace Framework.Application.DALExceptions;
 
-public class RemoveLinkedObjectsDALException : DALException<LinkedObjects>
+public class RemoveLinkedObjectsDalException : DalException<LinkedObjects>
 {
-    public RemoveLinkedObjectsDALException(LinkedObjects args, string message)
+    public RemoveLinkedObjectsDalException(LinkedObjects args, string message)
             : base(args, message)
     {
     }

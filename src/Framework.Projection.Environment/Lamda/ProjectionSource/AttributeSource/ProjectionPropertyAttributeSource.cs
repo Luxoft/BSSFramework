@@ -3,10 +3,9 @@ using CommonFramework.Maybe;
 
 using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.Extensions;
+using Framework.BLL.Domain.Persistent.Attributes;
+using Framework.BLL.Domain.Serialization;
 using Framework.Core;
-using Framework.DomainDriven.Serialization;
-using Framework.Persistent;
-using Framework.Persistent.Mapping;
 
 namespace Framework.Projection.Lambda;
 

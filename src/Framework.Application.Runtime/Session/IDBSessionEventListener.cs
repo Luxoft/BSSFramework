@@ -2,11 +2,11 @@
 
 namespace Framework.Application.Session;
 
-public interface IDBSessionEventListener
+public interface IdbSessionEventListener
 {
-    Task OnFlushed(DALChangesEventArgs eventArgs, CancellationToken cancellationToken);
+    Task OnFlushed(DalChangesEventArgs eventArgs, CancellationToken cancellationToken);
 
-    Task OnBeforeTransactionCompleted(DALChangesEventArgs eventArgs, CancellationToken cancellationToken);
+    Task OnBeforeTransactionCompleted(DalChangesEventArgs eventArgs, CancellationToken cancellationToken);
 
-    Task OnAfterTransactionCompleted(DALChangesEventArgs eventArgs, CancellationToken cancellationToken);
+    Task OnAfterTransactionCompleted(DalChangesEventArgs eventArgs, CancellationToken cancellationToken);
 }

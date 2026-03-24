@@ -9,15 +9,15 @@ public static class TrackingPropertyExtensions
     {
         var request = from currentValue in trackingProperty.CurrentValue
 
-                      from previusValue in trackingProperty.PreviusValue
+                      from previousValue in trackingProperty.PreviousValue
 
                       select new MergeResult<T, T>
                              {
-                                     AddingItems = currentValue.Except(previusValue).ToList(),
+                                     AddingItems = currentValue.Except(previousValue).ToList(),
 
-                                     RemovingItems = previusValue.Except(currentValue).ToList(),
+                                     RemovingItems = previousValue.Except(currentValue).ToList(),
 
-                                     CombineItems = (from prev in previusValue
+                                     CombineItems = (from prev in previousValue
                                                      join next in currentValue on prev equals next
                                                      select ValueTuple.Create(prev, next)).ToList()
                              };

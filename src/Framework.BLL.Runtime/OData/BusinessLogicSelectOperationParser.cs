@@ -2,6 +2,7 @@
 
 using CommonFramework;
 
+using Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
 using Framework.Core.Serialization;
 using Framework.OData;
 
@@ -18,9 +19,7 @@ public class BusinessLogicSelectOperationParser : SelectOperationParser
 
     protected override Exception GetParsingError(string input)
     {
-        return base.GetParsingError(input).Message.Pipe(baseMessage =>
-
-                                                                new Exceptions.BusinessLogicException(baseMessage));
+        return base.GetParsingError(input).Message.Pipe(baseMessage => new BusinessLogicException(baseMessage));
     }
 
 

@@ -12,9 +12,7 @@ namespace Framework.BLL.BLL.Default;
 
 public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent> :
 
-        IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>,
-
-        ITrackingServiceContainer<TPersistentDomainObjectBase>
+        IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
@@ -47,27 +45,19 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>
     protected DefaultBLLBaseContext(
             IServiceProvider serviceProvider,
             IEventOperationSender operationSender,
-            ITrackingService<TPersistentDomainObjectBase> trackingService,
             IStandardExpressionBuilder standardExpressionBuilder,
-            IValidator validator,
             IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory)
     {
         this.ServiceProvider = serviceProvider;
         this.OperationSender = operationSender;
-        this.TrackingService = trackingService;
 
         this.StandardExpressionBuilder = standardExpressionBuilder ?? throw new ArgumentNullException(nameof(standardExpressionBuilder));
-        this.Validator = validator;
         this.HierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory ?? throw new ArgumentNullException(nameof(hierarchicalObjectExpanderFactory));
 
         this.SelectOperationParser = BusinessLogicSelectOperationParser.CachedDefault;
     }
 
-    public IValidator Validator { get; }
-
     public IServiceProvider ServiceProvider { get; }
-
-    public ITrackingService<TPersistentDomainObjectBase> TrackingService { get; }
 
     public IEventOperationSender OperationSender { get; }
 
@@ -93,11 +83,9 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent,
     protected DefaultBLLBaseContext(
             IServiceProvider serviceProvider,
             IEventOperationSender operationSender,
-            ITrackingService<TPersistentDomainObjectBase> trackingService,
             IStandardExpressionBuilder standardExpressionBuilder,
-            IValidator validator,
             IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory)
-            : base(serviceProvider, operationSender, trackingService, standardExpressionBuilder, validator, hierarchicalObjectExpanderFactory)
+            : base(serviceProvider, operationSender, standardExpressionBuilder, hierarchicalObjectExpanderFactory)
     {
     }
 

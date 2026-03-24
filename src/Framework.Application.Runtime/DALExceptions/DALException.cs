@@ -1,8 +1,8 @@
 ﻿namespace Framework.Application.DALExceptions;
 
-public abstract class DALException : Exception
+public abstract class DalException : Exception
 {
-    protected DALException(string message)
+    protected DalException(string message)
             : base(message)
     {
 

@@ -1,6 +1,6 @@
 ﻿namespace Framework.Application.Session.DALChanges;
 
-public class DALChangesEventArgs(DALChanges changes) : EventArgs
+public class DalChangesEventArgs(DalChanges changes) : EventArgs
 {
-    public DALChanges Changes { get; } = changes;
+    public DalChanges Changes { get; } = changes;
 }

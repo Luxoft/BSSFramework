@@ -3,20 +3,20 @@ using Framework.Application.Session.DALChanges;
 
 namespace Framework.Application.Session;
 
-public class DefaultDBSessionEventListener(
+public class DefaultDbSessionEventListener(
     IInitializeManager initializeManager,
-    IEnumerable<IFlushedDALListener> flushedDalListener,
-    IEnumerable<IBeforeTransactionCompletedDALListener> beforeTransactionCompletedDalListener,
-    IEnumerable<IAfterTransactionCompletedDALListener> afterTransactionCompletedDalListener)
-    : IDBSessionEventListener
+    IEnumerable<IFlushedDalListener> flushedDalListener,
+    IEnumerable<IBeforeTransactionCompletedDalListener> beforeTransactionCompletedDalListener,
+    IEnumerable<IAfterTransactionCompletedDalListener> afterTransactionCompletedDalListener)
+    : IdbSessionEventListener
 {
-    private readonly IReadOnlyCollection<IFlushedDALListener> flushedDalListener = flushedDalListener.ToArray();
+    private readonly IReadOnlyCollection<IFlushedDalListener> flushedDalListener = flushedDalListener.ToArray();
 
-    private readonly IReadOnlyCollection<IBeforeTransactionCompletedDALListener> beforeTransactionCompletedDalListener = beforeTransactionCompletedDalListener.ToArray();
+    private readonly IReadOnlyCollection<IBeforeTransactionCompletedDalListener> beforeTransactionCompletedDalListener = beforeTransactionCompletedDalListener.ToArray();
 
-    private readonly IReadOnlyCollection<IAfterTransactionCompletedDALListener> afterTransactionCompletedDalListener = afterTransactionCompletedDalListener.ToArray();
+    private readonly IReadOnlyCollection<IAfterTransactionCompletedDalListener> afterTransactionCompletedDalListener = afterTransactionCompletedDalListener.ToArray();
 
-    public async Task OnFlushed(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
+    public async Task OnFlushed(DalChangesEventArgs eventArgs, CancellationToken cancellationToken)
     {
         if (initializeManager.IsInitialize)
         {
@@ -29,7 +29,7 @@ public class DefaultDBSessionEventListener(
         }
     }
 
-    public async Task OnBeforeTransactionCompleted(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
+    public async Task OnBeforeTransactionCompleted(DalChangesEventArgs eventArgs, CancellationToken cancellationToken)
     {
         if (initializeManager.IsInitialize)
         {
@@ -42,7 +42,7 @@ public class DefaultDBSessionEventListener(
         }
     }
 
-    public async Task OnAfterTransactionCompleted(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
+    public async Task OnAfterTransactionCompleted(DalChangesEventArgs eventArgs, CancellationToken cancellationToken)
     {
         if (initializeManager.IsInitialize)
         {

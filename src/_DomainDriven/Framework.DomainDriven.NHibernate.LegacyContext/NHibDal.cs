@@ -95,7 +95,7 @@ public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
         this.GetAuditReader().GetRevisions(typeof(TDomainObject), id, maxRevision).ToList();
 
     public long? GetPreviousRevision(TIdent id, long maxRevision) =>
-        this.GetAuditReader().GetPreviusRevision(typeof(TDomainObject), id, maxRevision);
+        this.GetAuditReader().GetPreviousRevision(typeof(TDomainObject), id, maxRevision);
 
     public long GetCurrentRevision() => this.GetAuditReader().GetCurrentRevision<AuditRevisionEntity>(false).Id;
 

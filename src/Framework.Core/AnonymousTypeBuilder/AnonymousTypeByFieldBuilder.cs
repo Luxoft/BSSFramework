@@ -6,16 +6,10 @@ using CommonFramework;
 
 namespace Framework.Core;
 
-public class AnonymousTypeByFieldBuilder<TMap, TMapMember> : AnonymousTypeByMemberBuilder<TMap, TMapMember, FieldBuilder>
-        where TMap : class, ITypeMap<TMapMember>
-        where TMapMember : ITypeMapMember
+public class AnonymousTypeByFieldBuilder<TMap, TMapMember>(IAnonymousTypeBuilderStorage storage) : AnonymousTypeByMemberBuilder<TMap, TMapMember, FieldBuilder>(storage)
+    where TMap : class, ITypeMap<TMapMember>
+    where TMapMember : ITypeMapMember
 {
-    public AnonymousTypeByFieldBuilder(IAnonymousTypeBuilderStorage storage) : base(storage)
-    {
-
-    }
-
-
     protected override FieldBuilder ImplementMember(TypeBuilder typeBuilder, TMapMember member)
     {
         return typeBuilder.DefineField(member.Name, member.Type, FieldAttributes.Public);

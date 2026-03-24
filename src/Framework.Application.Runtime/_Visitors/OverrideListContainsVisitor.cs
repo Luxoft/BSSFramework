@@ -11,24 +11,12 @@ using ExpressionHelper = CommonFramework.ExpressionHelper;
 
 namespace Framework.Application._Visitors;
 
-public class OverrideListContainsVisitor<TIdent> : ExpressionVisitor
+public class OverrideListContainsVisitor<TIdent>(PropertyInfo idProperty) : ExpressionVisitor
 {
     private static readonly MethodInfo VisitListCallMethod =
             new Func<MethodCallExpression, List<IIdentityObject<TIdent>>, Maybe<Expression>>(VisitListCall).Method.GetGenericMethodDefinition();
 
     private static readonly ConcurrentDictionary<PropertyInfo, OverrideListContainsVisitor<TIdent>> Cache = new ConcurrentDictionary<PropertyInfo, OverrideListContainsVisitor<TIdent>>();
-
-    private readonly PropertyInfo idProperty;
-
-    private OverrideListContainsVisitor(PropertyInfo idProperty)
-    {
-        if (idProperty == null)
-        {
-            throw new ArgumentNullException(nameof(idProperty));
-        }
-
-        this.idProperty = idProperty;
-    }
 
     /// <summary> Returns <see cref="OverrideListContainsVisitor{TIdent}"/> for specified <paramref name="property"/>
     /// </summary>
@@ -41,7 +29,7 @@ public class OverrideListContainsVisitor<TIdent> : ExpressionVisitor
 
     protected override Expression VisitMethodCall(MethodCallExpression node)
     {
-        var idPropertyDeclaringType = this.idProperty.DeclaringType;
+        var idPropertyDeclaringType = idProperty.DeclaringType;
 
         // TODO gtsaplin: it's too complicated code, refactor
         var request = from obj in node.Object.ToMaybe()

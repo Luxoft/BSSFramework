@@ -29,11 +29,11 @@ public class LinkedObjects
     }
 }
 
-public abstract class DALException<T> : DALException
+public abstract class DalException<T> : DalException
 {
     private readonly T args;
 
-    protected DALException(T args, string message) : base(message)
+    protected DalException(T args, string message) : base(message)
     {
         this.args = args;
     }

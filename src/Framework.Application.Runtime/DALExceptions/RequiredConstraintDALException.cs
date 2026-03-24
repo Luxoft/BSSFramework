@@ -1,7 +1,7 @@
 ﻿namespace Framework.Application.DALExceptions;
 
-public class RequiredConstraintDALException(DomainObjectInfo domainObjectInfo, string requiredPropertyName)
-    : DALException<DomainObjectInfo>(domainObjectInfo, GetMessage(domainObjectInfo, requiredPropertyName))
+public class RequiredConstraintDalException(DomainObjectInfo domainObjectInfo, string requiredPropertyName)
+    : DalException<DomainObjectInfo>(domainObjectInfo, GetMessage(domainObjectInfo, requiredPropertyName))
 {
     private static string GetMessage(DomainObjectInfo domainObjectInfo, string requiredPropertyName)
     {

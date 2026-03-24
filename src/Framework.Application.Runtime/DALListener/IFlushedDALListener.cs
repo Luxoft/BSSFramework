@@ -1,3 +1,3 @@
 ﻿namespace Framework.Application.DALListener;
 
-public interface IFlushedDALListener : IDALListener;
+public interface IFlushedDalListener : IdalListener;

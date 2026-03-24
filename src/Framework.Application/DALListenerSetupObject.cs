@@ -13,7 +13,7 @@ public class DALListenerSetupObject : IDALListenerSetupObject
     public IReadOnlyList<Action<IServiceCollection>> InitActions => this.initActions;
 
     public IDALListenerSetupObject Add<TListener>()
-        where TListener : class, IDALListener
+        where TListener : class, IdalListener
     {
         this.initActions.Add(this.AddListener<TListener>);
 
@@ -21,15 +21,15 @@ public class DALListenerSetupObject : IDALListenerSetupObject
     }
 
     private void AddListener<TListener>(IServiceCollection services)
-        where TListener : class, IDALListener
+        where TListener : class, IdalListener
     {
         services.AddScoped<TListener>();
 
         var result = new[]
                      {
-                         typeof(IAfterTransactionCompletedDALListener),
-                         typeof(IBeforeTransactionCompletedDALListener),
-                         typeof(IFlushedDALListener)
+                         typeof(IAfterTransactionCompletedDalListener),
+                         typeof(IBeforeTransactionCompletedDalListener),
+                         typeof(IFlushedDalListener)
                      }.ToArray(interfaceType => this.TryAddCastService<TListener>(services, interfaceType));
 
         this.TryAddCastService<TListener>(services, typeof(IEventOperationReceiver));
@@ -41,7 +41,7 @@ public class DALListenerSetupObject : IDALListenerSetupObject
     }
 
     private bool TryAddCastService<TListener>(IServiceCollection services, Type targetServiceType)
-        where TListener : class, IDALListener
+        where TListener : class, IdalListener
     {
         if (targetServiceType.IsAssignableFrom(typeof(TListener)))
         {
@@ -56,7 +56,7 @@ public class DALListenerSetupObject : IDALListenerSetupObject
     }
 
     private void AddService<TService, TListener>(IServiceCollection services)
-        where TListener : class, IDALListener, TService
+        where TListener : class, IdalListener, TService
         where TService : class =>
         services.AddScopedFromLazyInterfaceImplement<TService, TListener>(false);
 }

@@ -12,7 +12,7 @@ namespace Framework.DomainDriven.DBGenerator;
 /// </summary>
 public class DatabaseScriptGenerator(
     DatabaseScriptGeneratorMode databaseGeneratorMode = DatabaseScriptGeneratorMode.None,
-    string previusPostfix = "_previousVersion",
+    string previousPostfix = "_previousVersion",
     ICollection<string> ignoredIndexes = null,
     IDataTypeComparer dataTypeComparer = null)
     : IDatabaseScriptGenerator
@@ -38,7 +38,7 @@ public class DatabaseScriptGenerator(
             domainTypesLocal,
             databaseGeneratorMode,
             this._dataTypeComparer,
-            previusPostfix,
+            previousPostfix,
             ignoredIndexes);
 
         var dictionary = GetScriptGeneratorStrategies(databaseScriptGeneratorInfo)

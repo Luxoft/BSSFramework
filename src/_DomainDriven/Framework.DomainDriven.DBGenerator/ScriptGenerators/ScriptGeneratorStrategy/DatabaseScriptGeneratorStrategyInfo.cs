@@ -17,7 +17,7 @@ public struct DatabaseScriptGeneratorStrategyInfo
 
     public readonly IDataTypeComparer DataTypeComparer;
 
-    public readonly string PreviusPostfix;
+    public readonly string PreviousPostfix;
 
     public readonly IList<Tuple<Table, Column, string>> AddedColumns;
 
@@ -32,14 +32,14 @@ public struct DatabaseScriptGeneratorStrategyInfo
         IEnumerable<DomainTypeMetadata> domainTypesLocal,
         DatabaseScriptGeneratorMode databaseGeneratorMode,
         IDataTypeComparer dataTypeComparer,
-        string previusPostfix,
+        string previousPostfix,
         ICollection<string> ignoredIndexes)
     {
         this.DomainTypesLocal = domainTypesLocal;
         this.Context = context;
         this.DatabaseGeneratorMode = databaseGeneratorMode;
         this.DataTypeComparer = dataTypeComparer;
-        this.PreviusPostfix = previusPostfix;
+        this.PreviousPostfix = previousPostfix;
 
         this.AddedColumns = new List<Tuple<Table, Column, string>>();
         this.RemovableColumns = new List<Column>();

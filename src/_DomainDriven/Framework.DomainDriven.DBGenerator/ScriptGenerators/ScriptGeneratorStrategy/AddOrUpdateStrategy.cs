@@ -16,7 +16,7 @@ namespace Framework.DomainDriven.DBGenerator.ScriptGenerators.ScriptGeneratorStr
 /// <summary>
 /// Создает таблицы и колонки в этих таблицах для всех доменных типов
 /// </summary>
-/// <remarks>Если установлен флаг DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript и в доменном объекте поменялся тип колонки, то колонка будет переименовано с постфиксом '_previusVersion' и в скрипт допишется строка update {0} set [{1}]=[{2}].
+/// <remarks>Если установлен флаг DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript и в доменном объекте поменялся тип колонки, то колонка будет переименовано с постфиксом '_previousVersion' и в скрипт допишется строка update {0} set [{1}]=[{2}].
 /// Созданные колонки добавляются в parameter.AddedColumns</remarks>
 internal class AddOrUpdateStrategy : ScriptGeneratorStrategyBase
 {
@@ -87,7 +87,7 @@ internal class AddOrUpdateStrategy : ScriptGeneratorStrategyBase
                     column.UnbindDefault();
                 }
 
-                column.Rename(column.Name + this.Parameter.PreviusPostfix);
+                column.Rename(column.Name + this.Parameter.PreviousPostfix);
 
                 column.Alter();
 

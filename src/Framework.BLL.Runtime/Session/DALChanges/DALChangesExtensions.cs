@@ -5,15 +5,15 @@ namespace Framework.BLL.Session.DALChanges;
 
 public static class DALChangesExtensions
 {
-    public static ModificationType ToModificationType(this DALObjectChangeType changeType)
+    public static ModificationType ToModificationType(this DalObjectChangeType changeType)
     {
         switch (changeType)
         {
-            case DALObjectChangeType.Created:
-            case DALObjectChangeType.Updated:
+            case DalObjectChangeType.Created:
+            case DalObjectChangeType.Updated:
                 return ModificationType.Save;
 
-            case DALObjectChangeType.Removed:
+            case DalObjectChangeType.Removed:
                 return ModificationType.Remove;
 
             default:

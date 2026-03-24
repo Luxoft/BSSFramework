@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Collections.Immutable;
+using System.Linq.Expressions;
 
 using CommonFramework;
 
@@ -32,13 +33,13 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
     private const int MaxItemsInSql = 2000;
 
     public TDomainObject? GetById(TIdent id, IdCheckMode idCheckMode, FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None) =>
-            idCheckMode switch
-            {
-                    IdCheckMode.DontCheck => this.GetById(id, false, fetchRule, lockRole),
-                    IdCheckMode.CheckAll => this.GetById(id, true, fetchRule, lockRole),
-                    IdCheckMode.SkipEmpty => id.IsDefault() ? null : this.GetById(id, true, fetchRule, lockRole),
-                    _ => throw new ArgumentOutOfRangeException(nameof(idCheckMode))
-            };
+        idCheckMode switch
+        {
+            IdCheckMode.DontCheck => this.GetById(id, false, fetchRule, lockRole),
+            IdCheckMode.CheckAll => this.GetById(id, true, fetchRule, lockRole),
+            IdCheckMode.SkipEmpty => id.IsDefault() ? null : this.GetById(id, true, fetchRule, lockRole),
+            _ => throw new ArgumentOutOfRangeException(nameof(idCheckMode))
+        };
 
     public TDomainObject? GetById(TIdent id, IdCheckMode idCheckMode, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
         this.GetById(id, idCheckMode, buildFetchRule.ToFetchRule());
@@ -50,7 +51,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
         var request = from t in typeof(TDomainObject).Assembly.GetTypes()
                       where t != typeof(TDomainObject) && !t.IsAbstract && !t.IsGenericTypeDefinition && typeof(TDomainObject).IsAssignableFrom(t)
                       let nestedDomainObject =
-                              t.IsInstanceOfType(domainObject) ? domainObject : method.MakeGenericMethod(t).Invoke<TDomainObject>(this, [domainObject])
+                          t.IsInstanceOfType(domainObject) ? domainObject : method.MakeGenericMethod(t).Invoke<TDomainObject>(this, [domainObject])
                       where nestedDomainObject != null
                       select nestedDomainObject;
 
@@ -59,12 +60,12 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
 
     /// <inheritdoc />
     public virtual List<HierarchicalNode<TDomainObject, TIdent>> GetTree(FetchRule<TDomainObject>? fetchRule = null) =>
-            this.GetTree(this.GetFullList(fetchRule), _ => this.GetSecureQueryable().Select(domainObject => domainObject.Id), this.ExpandQueryableWithParents);
+        this.GetTree([.. this.GetSecureQueryable(fetchRule)], _ => this.GetSecureQueryable().Select(domainObject => domainObject.Id), this.ExpandQueryableWithParents);
 
     /// <inheritdoc />
     public virtual SelectOperationResult<HierarchicalNode<TDomainObject, TIdent>> GetTreeByOData(
-            SelectOperation<TDomainObject> selectOperation,
-            FetchRule<TDomainObject>? fetchRule = null)
+        SelectOperation<TDomainObject> selectOperation,
+        FetchRule<TDomainObject>? fetchRule = null)
     {
         if (selectOperation == null)
         {
@@ -79,11 +80,11 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
     }
 
     private List<HierarchicalNode<TDomainObject, TIdent>> GetTree<TIdentCollection>(
-            List<TDomainObject> startProjections,
-            Func<IEnumerable<TDomainObject>, TIdentCollection> identsSelector,
-            Func<TIdentCollection, HierarchicalExpandType, Dictionary<TIdent, TIdent>> parentsExpander,
-            FetchRule<TDomainObject>? fetchRule = null)
-            where TIdentCollection : IEnumerable<TIdent>
+        ImmutableArray<TDomainObject> startProjections,
+        Func<IEnumerable<TDomainObject>, TIdentCollection> identsSelector,
+        Func<TIdentCollection, HierarchicalExpandType, Dictionary<TIdent, TIdent>> parentsExpander,
+        FetchRule<TDomainObject>? fetchRule = null)
+        where TIdentCollection : IEnumerable<TIdent>
     {
         if (startProjections == null)
         {
@@ -104,13 +105,12 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
 
         return startProjections.Select(item => new { Item = item, OnlyView = false })
                                .Concat(parents.Select(item => new { Item = item, OnlyView = true }))
-                               .ToList(
-                                   pair => new HierarchicalNode<TDomainObject, TIdent>(
+                               .ToList(pair => new HierarchicalNode<TDomainObject, TIdent>(
 
-                                       Item: pair.Item,
-                                       OnlyView: pair.OnlyView,
-                                       ParentId: allIdentDict[pair.Item.Id]
-                                       ));
+                                           Item: pair.Item,
+                                           OnlyView: pair.OnlyView,
+                                           ParentId: allIdentDict[pair.Item.Id]
+                                           ));
     }
 
     private Dictionary<TIdent, TIdent> ExpandEnumerableWithParents(IEnumerable<TIdent> projectionsIdents, HierarchicalExpandType parentExpandMode)
@@ -129,7 +129,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
     }
 
     public List<TDomainObject> GetListByIdents<TIdentity>(IEnumerable<TIdentity> idents, FetchRule<TDomainObject>? fetchRule = null)
-            where TIdentity : IIdentityObject<TIdent>
+        where TIdentity : IIdentityObject<TIdent>
     {
         return this.GetListByIdents(idents.Select(ident => ident.Id), fetchRule);
     }
@@ -163,8 +163,8 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
         this.GetListByIdents(baseIdents, buildFetchRule.ToFetchRule());
 
     public override SelectOperationResult<TDomainObject> GetObjectsByOData(
-            SelectOperation selectOperation,
-            FetchRule<TDomainObject>? fetchRule = null)
+        SelectOperation selectOperation,
+        FetchRule<TDomainObject>? fetchRule = null)
     {
         var typedSelectOperation = this.Context.StandardExpressionBuilder.ToTyped<TDomainObject>(selectOperation);
 
@@ -177,7 +177,9 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
     /// <remarks>
     /// Метод пока что не используется и это походу проблема #IADFRAME-943
     /// </remarks>
-    public override SelectOperationResult<TProjection> GetObjectsByOData<TProjection>(SelectOperation<TProjection> selectOperation, Expression<Func<TDomainObject, TProjection>> projectionSelector)
+    public override SelectOperationResult<TProjection> GetObjectsByOData<TProjection>(
+        SelectOperation<TProjection> selectOperation,
+        Expression<Func<TDomainObject, TProjection>> projectionSelector)
     {
         if (selectOperation == null)
         {
@@ -217,8 +219,8 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
     }
 
     public override SelectOperationResult<TDomainObject> GetObjectsByOData(
-            SelectOperation<TDomainObject> selectOperation,
-            FetchRule<TDomainObject>? fetchRule = null)
+        SelectOperation<TDomainObject> selectOperation,
+        FetchRule<TDomainObject>? fetchRule = null)
     {
         if (selectOperation == null)
         {
@@ -238,9 +240,9 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
             }
 
             var idents =
-                    selection
-                            .Skip(selectOperation.SkipCount)
-                            .Take(selectOperation.TakeCount);
+                selection
+                    .Skip(selectOperation.SkipCount)
+                    .Take(selectOperation.TakeCount);
 
             var result = this.GetListByIdentsNoSecurable(idents, fetchRule);
 
@@ -297,9 +299,9 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
     }
 
     protected List<TProjection> GetListByIdentsNoSecurable<TProjection>(
-            IEnumerable<TIdent> baseIdents,
-            Expression<Func<TDomainObject, TProjection>> projectionSelector,
-            FetchRule<TDomainObject>? fetchRule = null)
+        IEnumerable<TIdent> baseIdents,
+        Expression<Func<TDomainObject, TProjection>> projectionSelector,
+        FetchRule<TDomainObject>? fetchRule = null)
     {
         if (baseIdents == null) throw new ArgumentNullException(nameof(baseIdents));
 
@@ -308,8 +310,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
         var uniqueIdents = idents.Distinct().ToList();
 
         var uniqueResult = uniqueIdents.Split(MaxItemsInSql)
-                                       .SelectMany(
-                                                   path => this.GetUnsecureQueryable(fetchRule)
+                                       .SelectMany(path => this.GetUnsecureQueryable(fetchRule)
                                                                .Where(v => path.Contains(v.Id))
                                                                .Select(projectionSelector))
                                        .ToList();
@@ -361,6 +362,6 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
     }
 
     private TDomainObject? GetNested<TNestedDomainObject>(TDomainObject domainObject)
-            where TNestedDomainObject : class, TDomainObject =>
-            this.Context.Logics.Default.Create<TNestedDomainObject>().GetById(domainObject.Id);
+        where TNestedDomainObject : class, TDomainObject =>
+        this.Context.Logics.Default.Create<TNestedDomainObject>().GetById(domainObject.Id);
 }

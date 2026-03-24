@@ -107,11 +107,11 @@ internal class ChangeIndexesStrategy : ScriptGeneratorStrategyBase
         var table = this.Parameter.Context.GetOrCreateTable(domainTypeMetadata.DomainType);
         var removableColumns = this.Parameter.RemovableColumns.Where(z => z.Parent == table).ToList();
 
-        var previusIndexies = table.Indexes.Cast<Index>()
-                                   .Where(z => z.IndexedColumns.Cast<IndexedColumn>().Any(q => q.Name.EndsWith(this.Parameter.PreviusPostfix)))
+        var previousIndexies = table.Indexes.Cast<Index>()
+                                   .Where(z => z.IndexedColumns.Cast<IndexedColumn>().Any(q => q.Name.EndsWith(this.Parameter.PreviousPostfix)))
                                    .ToList();
 
-        foreach (var previousIndex in previusIndexies)
+        foreach (var previousIndex in previousIndexies)
         {
             var newIndex = new Index(table, previousIndex.Name);
 
@@ -120,7 +120,7 @@ internal class ChangeIndexesStrategy : ScriptGeneratorStrategyBase
 
             foreach (var column in previousIndex.IndexedColumns.Cast<IndexedColumn>())
             {
-                var endIndex = column.Name.IndexOf(this.Parameter.PreviusPostfix);
+                var endIndex = column.Name.IndexOf(this.Parameter.PreviousPostfix);
                 var actualColumnName = endIndex == -1
                                                ? column.Name
                                                : new string(column.Name.Take(endIndex).ToArray());
@@ -148,7 +148,7 @@ internal class ChangeIndexesStrategy : ScriptGeneratorStrategyBase
 
             foreach (var value in indexedColumn)
             {
-                var oldNameIndex = value.Name.IndexOf(this.Parameter.PreviusPostfix);
+                var oldNameIndex = value.Name.IndexOf(this.Parameter.PreviousPostfix);
                 var index = value.Parent;
 
                 index.IndexedColumns.Remove(value);

@@ -1,6 +1,6 @@
 ﻿namespace Framework.Application.Session.DBSessionManger;
 
-public static class DBSessionManagerExtensions
+public static class DbSessionManagerExtensions
 {
     public static async Task<T> EvaluateAsync<T>(this IDBSessionManager dbSessionManager, Func<Task<T>> getResult, CancellationToken cancellationToken = default)
     {

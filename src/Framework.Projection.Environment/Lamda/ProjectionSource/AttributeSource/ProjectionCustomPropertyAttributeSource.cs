@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven;
+﻿using Framework.BLL.Domain.Fetching;
 
 namespace Framework.Projection.Lambda;
 

@@ -371,7 +371,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         return this.dal.GetObjectRevisions(identity, period);
     }
 
-    public virtual long? GetPreviusVersion(TIdent id, long maxRevisionNumber)
+    public virtual long? GetPreviousVersion(TIdent id, long maxRevisionNumber)
     {
         return this.dal.GetPreviousRevision(id, maxRevisionNumber);
     }

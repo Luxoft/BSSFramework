@@ -2,7 +2,7 @@
 
 using Framework.CodeDom;
 
-namespace Framework.DomainDriven.Generation;
+namespace Framework.CodeGeneration;
 
 public interface ICodeFile : IRenderingFile<CodeNamespace>
 {

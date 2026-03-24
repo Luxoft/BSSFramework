@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-using SecuritySystem;
+﻿using SecuritySystem;
 
 namespace SampleSystem.Domain;
 
-[Table(nameof(BusinessUnit), Schema = "app")]
+[System.ComponentModel.DataAnnotations.Schema.Table(nameof(BusinessUnit), Schema = "app")]
 public class BusinessUnit : ISecurityContext
 {
     public Guid Id { get; set; }

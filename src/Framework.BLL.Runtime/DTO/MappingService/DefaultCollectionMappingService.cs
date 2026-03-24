@@ -1,4 +1,6 @@
-﻿using Framework.Application.Domain;
+﻿using CommonFramework;
+
+using Framework.Application.Domain;
 using Framework.Core;
 
 namespace Framework.BLL.DTO.MappingService;

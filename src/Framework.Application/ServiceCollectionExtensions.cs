@@ -86,7 +86,7 @@ public static class ServiceCollectionExtensions
 
         private IServiceCollection RegisterEvaluators()
         {
-            services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
+            services.AddSingleton<IDBSessionEvaluator, DbSessionEvaluator>();
             services.AddSingleton(typeof(IServiceEvaluator<>), typeof(ServiceEvaluator<>));
 
             return services;

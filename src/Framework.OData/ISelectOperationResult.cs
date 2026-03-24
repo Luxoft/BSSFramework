@@ -9,5 +9,5 @@ public interface ISelectOperationResult
 
 public interface ISelectOperationResult<out T> : ISelectOperationResult
 {
-    IEnumerable<T> Items { get; }
+    IReadOnlyList<T> Items { get; }
 }

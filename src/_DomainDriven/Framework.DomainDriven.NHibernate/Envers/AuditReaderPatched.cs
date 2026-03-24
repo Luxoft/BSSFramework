@@ -101,7 +101,7 @@ public class AuditReaderPatched : AuditReader, IAuditReaderPatched
         return resultList.ToList();
     }
 
-    public long? GetPreviusRevision(System.Type cls, object primaryKey, long maxRevisions)
+    public long? GetPreviousRevision(System.Type cls, object primaryKey, long maxRevisions)
     {
         ArgumentsTools.CheckNotNull(primaryKey, "Primary key");
         var entityName = cls.FullName;

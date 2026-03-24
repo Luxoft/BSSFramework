@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 using CommonFramework;
 
 using Framework.Application.Domain;
+using Framework.Validation;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.BLL.BLL.Validation.Validators;
 
@@ -11,9 +13,9 @@ namespace Framework.BLL.BLL.Validation.Validators;
 /// /// <summary>
 /// Класс для проверки уникальности полей доменного объекта через запрос к БД.
 /// </summary>
-/// <seealso cref="IDynamicClassValidator" />
+/// <seealso cref="Framework.Validation.IDynamicClassValidator" />
 /// </summary>
-/// <seealso cref="IClassValidator{TDomainObject}" />
+/// <seealso cref="Framework.Validation.IClassValidator" />
 public class UniqueGroupDatabaseValidator<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent> : IClassValidator<TDomainObject>
         where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
@@ -50,11 +52,6 @@ public class UniqueGroupDatabaseValidator<TBLLContext, TPersistentDomainObjectBa
         this.propertyName = propertyName;
     }
 
-    /// <summary>
-    /// Возвращает результат проверки.
-    /// </summary>
-    /// <param name="validationContext">Контекст проверки.</param>
-    /// <returns>Экземпляр <see cref="ValidationResult"/>.</returns>
     public ValidationResult GetValidationResult(IClassValidationContext<TDomainObject> validationContext)
     {
         var context = validationContext.ServiceProvider.GetRequiredService<TBLLContext>();

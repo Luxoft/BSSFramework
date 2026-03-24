@@ -1,8 +1,8 @@
 ﻿namespace Framework.Application.DALExceptions;
 
-public class ArifmeticOverflowDALException : DALException<string>
+public class ArifmeticOverflowDalException : DalException<string>
 {
-    public ArifmeticOverflowDALException(string args, string message) : base(args, message)
+    public ArifmeticOverflowDalException(string args, string message) : base(args, message)
     {
     }
 }

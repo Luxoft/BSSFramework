@@ -11,6 +11,7 @@ using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.BLL.Domain.Serialization.Extensions;
 using Framework.BLL.Fetching.PathFactory._Extensions;
 using Framework.Core;
+using Framework.Persistent.Mapping;
 
 namespace Framework.BLL.Fetching.PathFactory;
 
@@ -41,12 +42,10 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
                    .Pipe(node => this.GetPaths(node));
     }
 
-
     protected virtual PropertyLoadNode ExpandNode(PropertyLoadNode node)
     {
         return node;
     }
-
 
     protected virtual bool IsTransferType(Type type)
     {
@@ -118,7 +117,7 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
     }
 
 
-    protected virtual PropertyLoadNode GetLoadNode(Type domainType, ViewDTOType maxDTOType, int recurseLevel = 0, Func<PropertyInfo, bool> subPropertyFilter = null)
+    protected virtual PropertyLoadNode GetLoadNode(Type domainType, ViewDTOType maxDTOType, int recurseLevel = 0, Func<PropertyInfo, bool>? subPropertyFilter = null)
     {
         var subNodesRequest = from property in domainType.GetSerializationProperties()
 

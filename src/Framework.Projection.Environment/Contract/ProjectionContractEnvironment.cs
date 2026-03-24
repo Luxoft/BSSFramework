@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.Metadata;
 using Framework.Projection.Environment;
 
 namespace Framework.Projection.Contract;

@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Framework.Restriction;
 
 using Framework.BLL.Domain.DirectMode;
 

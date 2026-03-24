@@ -111,18 +111,18 @@ public class NHibObjectStatesService : IObjectStateService
                         .Where(z => isModifiedPropertyFunc(z.Item2))
                         .Select(z =>
                         {
-                            var previusState = oldState[z.Item2];
+                            var previousState = oldState[z.Item2];
                             var currentValue = currentState[z.Item2];
 
                             if (persister.PropertyTypes[z.Item2].IsCollectionType && currentValue is IPersistentCollection)
                             {
-                                previusState = ((IPersistentCollection)currentValue).StoredSnapshot;
+                                previousState = ((IPersistentCollection)currentValue).StoredSnapshot;
                             }
 
                             return new ObjectState(
                                 z.Item1,
                                 currentValue,
-                                previusState,
+                                previousState,
                                 true);
                         });
     }

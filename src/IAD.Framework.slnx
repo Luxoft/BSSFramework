@@ -150,6 +150,8 @@
   <Project Path="Framework.QueryLanguage/Framework.QueryLanguage.csproj" />
   <Project Path="Framework.Restriction/Framework.Restriction.csproj" />
   <Project Path="Framework.StateMachine/Framework.StateMachine.csproj" />
+  <Project Path="Framework.Tracking.Abstractions/Framework.Tracking.Abstractions.csproj" />
+  <Project Path="Framework.Tracking/Framework.Tracking.csproj" />
   <Project Path="Framework.UnitTesting/Framework.UnitTesting.csproj" />
   <Project Path="Framework.Validation.Abstractions/Framework.Validation.Abstractions.csproj" />
   <Project Path="Framework.Validation.Tests.Unit/Framework.Validation.Tests.Unit.csproj" />

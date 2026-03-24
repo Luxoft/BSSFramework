@@ -1,5 +1,7 @@
 ﻿using System.Data.SqlTypes;
 
+using Framework.Core;
+
 namespace Framework.BLL;
 
 public static class AvailableValuesHelper

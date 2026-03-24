@@ -1,6 +1,6 @@
 ﻿
 
-namespace Framework.DomainDriven.Generation;
+namespace Framework.CodeGeneration.Checkout;
 
 public interface ICheckOutService
 {

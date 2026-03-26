@@ -1,4 +1,6 @@
 ﻿using System.Reflection;
+
+using Framework.Application.Domain.Attributes;
 using Framework.BLL.Domain.Attributes;
 using Framework.Core;
 

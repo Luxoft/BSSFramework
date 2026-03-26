@@ -2,7 +2,7 @@
 
 using CommonFramework;
 
-using Framework.BLL.Domain.Persistent.Extensions;
+using Framework.Application.Domain.Attributes;
 using Framework.Core;
 
 namespace Framework.Validation;

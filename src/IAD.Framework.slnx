@@ -18,8 +18,9 @@
   </Folder>
   <Folder Name="/CodeGeneration/">
     <Project Path="Framework.CodeDom/Framework.CodeDom.csproj" />
-    <Project Path="Framework.CodeGeneration.Domain/Framework.CodeGeneration.Domain.csproj" />
+    <Project Path="Framework.CodeGeneration.BLLCoreGenerator/Framework.CodeGeneration.BLLCoreGenerator.csproj" />
     <Project Path="Framework.CodeGeneration/Framework.CodeGeneration.csproj" />
+    <Project Path="Framework.FileGeneration/Framework.FileGeneration.csproj" />
   </Folder>
   <Folder Name="/Configuration/">
     <Project Path="_Configuration/Framework.Configuration.BLL.Core.Tests.Unit/Framework.Configuration.BLL.Core.Tests.Unit.csproj" />
@@ -43,13 +44,16 @@
     <Project Path="Framework.Configurator.ApplicationVariable/Framework.Configurator.ApplicationVariable.csproj" />
     <Project Path="Framework.Configurator.Events/Framework.Configurator.Events.csproj" />
   </Folder>
+  <Folder Name="/Database/">
+    <Project Path="Framework.Database.Domain/Framework.Database.Domain.csproj" />
+    <Project Path="Framework.Database.Metadata/Framework.Database.Metadata.csproj" />
+  </Folder>
   <Folder Name="/DomainDriven/">
     <Project Path="_DomainDriven/Framework.DomainDriven.DAL.Sql/Framework.DomainDriven.DAL.Sql.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.DBGenerator.Tests.Unit/Framework.DomainDriven.DBGenerator.Tests.Unit.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.DBGenerator/Framework.DomainDriven.DBGenerator.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.EntityFramework/Framework.DomainDriven.EntityFramework.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.Jobs/Framework.DomainDriven.Jobs.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.Metadata/Framework.DomainDriven.Metadata.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.NHibernate.DALGenerator/Framework.DomainDriven.NHibernate.DALGenerator.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.NHibernate.LegacyContext/Framework.DomainDriven.NHibernate.LegacyContext.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.NHibernate/Framework.DomainDriven.NHibernate.csproj" />
@@ -61,15 +65,12 @@
     <Project Path="_DomainDriven/Framework.DomainDriven.Setup.Legacy/Framework.DomainDriven.Setup.Legacy.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.Setup/Framework.DomainDriven.Setup.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.Tests.Unit/Framework.DomainDriven.Tests.Unit.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.Tracking.LegacyValidators/Framework.DomainDriven.Tracking.LegacyValidators.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.WebApiGenerator.NetCore/Framework.DomainDriven.WebApiGenerator.NetCore.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.WebApiNetCore.LegacyContext/Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.WebApiNetCore.Swagger/Framework.DomainDriven.WebApiNetCore.Swagger.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.WebApiNetCore/Framework.DomainDriven.WebApiNetCore.csproj" />
   </Folder>
   <Folder Name="/DomainDriven/Generators/">
-    <Project Path="_DomainDriven/Framework.DomainDriven.BLLCoreGenerator/Framework.DomainDriven.BLLCoreGenerator.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.BLLGenerator/Framework.DomainDriven.BLLGenerator.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.ProjectionGenerator/Framework.DomainDriven.ProjectionGenerator.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.ServiceModelGenerator/Framework.DomainDriven.ServiceModelGenerator.csproj" />
   </Folder>
@@ -79,8 +80,8 @@
     <Project Path="_DomainDriven/Framework.DomainDriven.DTOGenerator/Framework.DomainDriven.DTOGenerator.csproj" />
   </Folder>
   <Folder Name="/Projection/">
-    <Project Path="Framework.Projection.Environment/Framework.Projection.Environment.csproj" />
-    <Project Path="Framework.Projection/Framework.Projection.csproj" />
+    <Project Path="Framework.Projection.Abstractions/Framework.Projection.Abstractions.csproj" />
+    <Project Path="Framework.Projection.Runtime/Framework.Projection.Runtime.csproj" />
   </Folder>
   <Folder Name="/SampleSystem/">
     <Project Path="_SampleSystem/SampleSystem.AuditDomain/SampleSystem.AuditDomain.csproj" />
@@ -145,12 +146,11 @@
   <Project Path="Framework.OData.Tests.Unit/Framework.OData.Tests.Unit.csproj" />
   <Project Path="Framework.OData/Framework.OData.csproj" />
   <Project Path="Framework.Parsing/Framework.Parsing.csproj" />
-  <Project Path="Framework.Persistent.Mapping.Audit/Framework.Persistent.Mapping.Audit.csproj" />
-  <Project Path="Framework.Persistent.Mapping/Framework.Persistent.Mapping.csproj" />
   <Project Path="Framework.QueryLanguage/Framework.QueryLanguage.csproj" />
   <Project Path="Framework.Restriction/Framework.Restriction.csproj" />
   <Project Path="Framework.StateMachine/Framework.StateMachine.csproj" />
   <Project Path="Framework.Tracking.Abstractions/Framework.Tracking.Abstractions.csproj" />
+  <Project Path="Framework.Tracking.Validation/Framework.Tracking.Validation.csproj" />
   <Project Path="Framework.Tracking/Framework.Tracking.csproj" />
   <Project Path="Framework.UnitTesting/Framework.UnitTesting.csproj" />
   <Project Path="Framework.Validation.Abstractions/Framework.Validation.Abstractions.csproj" />

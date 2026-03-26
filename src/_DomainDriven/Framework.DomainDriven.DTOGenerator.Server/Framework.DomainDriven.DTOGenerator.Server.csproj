@@ -8,7 +8,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framework.DomainDriven.BLLCoreGenerator\Framework.DomainDriven.BLLCoreGenerator.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.DTOGenerator\Framework.DomainDriven.DTOGenerator.csproj" />
   </ItemGroup>
 

@@ -12,8 +12,4 @@
     <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Framework.DomainDriven.Metadata\Framework.DomainDriven.Metadata.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -2,6 +2,7 @@
 
 using CommonFramework.Maybe;
 
+using Framework.Application.Domain.Attributes;
 using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.Core;
 

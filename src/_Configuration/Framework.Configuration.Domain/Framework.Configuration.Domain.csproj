@@ -9,8 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.Persistent.Mapping.Audit\Framework.Persistent.Mapping.Audit.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Tracking.LegacyValidators\Framework.DomainDriven.Tracking.LegacyValidators.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.Events\Framework.Events.csproj" />
   </ItemGroup>
 

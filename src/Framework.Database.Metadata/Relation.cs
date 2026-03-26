@@ -1,0 +1,7 @@
+﻿namespace Framework.Database.Metadata;
+
+public struct Relation
+{
+    public ReferenceTypeFieldMetadata ReferenceTypeFieldMetadata;
+    public ListTypeFieldMetadata ListTypeFieldMetadata;
+}

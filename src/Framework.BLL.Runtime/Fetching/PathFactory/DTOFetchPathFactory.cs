@@ -4,6 +4,7 @@ using System.Reflection;
 
 using CommonFramework;
 
+using Framework.Application.Domain.Attributes;
 using Framework.BLL.Domain.Dto;
 using Framework.BLL.Domain.Dto.Extensions;
 using Framework.BLL.Domain.Extensions;
@@ -11,7 +12,7 @@ using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.BLL.Domain.Serialization.Extensions;
 using Framework.BLL.Fetching.PathFactory._Extensions;
 using Framework.Core;
-using Framework.Persistent.Mapping;
+using Framework.Database.Domain;
 
 namespace Framework.BLL.Fetching.PathFactory;
 

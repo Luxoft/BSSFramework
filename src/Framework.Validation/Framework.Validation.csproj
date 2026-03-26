@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.Application.Domain\Framework.Application.Domain.csproj" />
-    <ProjectReference Include="..\Framework.BLL.Domain\Framework.BLL.Domain.csproj" />
     <ProjectReference Include="..\Framework.Restriction\Framework.Restriction.csproj" />
     <ProjectReference Include="..\Framework.Validation.Abstractions\Framework.Validation.Abstractions.csproj" />
   </ItemGroup>

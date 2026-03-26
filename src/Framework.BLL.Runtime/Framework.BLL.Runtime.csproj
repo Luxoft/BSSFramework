@@ -12,7 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Framework.Application.Runtime\Framework.Application.Runtime.csproj" />
     <ProjectReference Include="..\Framework.BLL.Abstractions\Framework.BLL.Abstractions.csproj" />
-    <ProjectReference Include="..\Framework.Persistent.Mapping\Framework.Persistent.Mapping.csproj" />
+    <ProjectReference Include="..\Framework.Database.Domain\Framework.Database.Domain.csproj" />
     <ProjectReference Include="..\Framework.Tracking.Abstractions\Framework.Tracking.Abstractions.csproj" />
     <ProjectReference Include="..\Framework.Validation\Framework.Validation.csproj" />
   </ItemGroup>

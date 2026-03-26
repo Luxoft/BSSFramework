@@ -3,7 +3,7 @@ using System.Reflection;
 
 using CommonFramework;
 
-using Framework.BLL.Domain.Persistent.Extensions;
+using Framework.Application.Domain.Attributes;
 using Framework.Core.Visitors;
 
 namespace Framework.Validation;

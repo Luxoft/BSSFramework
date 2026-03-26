@@ -1,24 +1,25 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
-using Framework.CodeGeneration.Checkout;
 using Framework.Core;
+using Framework.FileGeneration;
+using Framework.FileGeneration.Checkout;
 
 namespace Framework.CodeGeneration.Extensions;
 
 public static class FileGeneratorExtensions
 {
-    public static IEnumerable<FileInfo> Generate<TRenderData>(this IFileGenerator<IRenderingFile<TRenderData>, IFileRenderer<TRenderData, string>> generator, string path, ICheckOutService checkOutService = null)
+    public static IEnumerable<GeneratedFileInfo> Generate<TRenderData>(this IFileGenerator<IRenderingFile<TRenderData>, IFileRenderer<TRenderData, string>> generator, string path, ICheckOutService? checkOutService = null)
     {
         if (generator == null) throw new ArgumentNullException(nameof(generator));
         if (path == null) throw new ArgumentNullException(nameof(path));
 
         return generator.GetFileGenerators()
-                        .Select(fileFactory => new FileInfo(fileFactory.Filename + "." + generator.Renderer.FileExtension, generator.Renderer.Render(fileFactory)).Save(path, checkOutService))
+                        .Select(fileFactory => new GeneratedFileInfo(fileFactory.Filename + "." + generator.Renderer.FileExtension, generator.Renderer.Render(fileFactory)).WithSave(path, checkOutService))
                         .ToList();
     }
 
-    private static FileInfo GetSingle(this IFileGenerator<ICodeFile, CodeDomRenderer> generator, string filename, bool parallel = true)
+    private static GeneratedFileInfo GetSingle(this IFileGenerator<ICodeFile, CodeDomRenderer> generator, string filename, bool parallel = true)
     {
         var renderedNamespaces = parallel
                                          ? generator.GetFileGenerators().AsParallel().AsOrdered().Select(file => file.GetRenderData())
@@ -37,19 +38,19 @@ public static class FileGeneratorExtensions
 
         var compileUnit = new CodeCompileUnit().Self(unit => unit.Namespaces.AddRange(codeNamespaces.ToArray()));
 
-        return new FileInfo(filename + "." + generator.Renderer.FileExtension, generator.Renderer.Render(compileUnit));
+        return new GeneratedFileInfo(filename + "." + generator.Renderer.FileExtension, generator.Renderer.Render(compileUnit));
     }
 
-    public static FileInfo GenerateSingle(this IFileGenerator<ICodeFile, CodeDomRenderer> generator, string path, string filename, ICheckOutService checkOutService = null, bool parallel = true)
+    public static GeneratedFileInfo GenerateSingle(this IFileGenerator<ICodeFile, CodeDomRenderer> generator, string path, string filename, ICheckOutService? checkOutService = null, bool parallel = true)
     {
         if (generator == null) throw new ArgumentNullException(nameof(generator));
         if (path == null) throw new ArgumentNullException(nameof(path));
         if (filename == null) throw new ArgumentNullException(nameof(filename));
 
-        return generator.GetSingle(filename, parallel).Save(path, checkOutService);
+        return generator.GetSingle(filename, parallel).WithSave(path, checkOutService);
     }
 
-    private static IEnumerable<FileInfo> GetGroupedFiles(this IFileGenerator<ICodeFile, CodeDomRenderer> generator, Func<CodeTypeDeclaration, string> getFileNameFunc, bool parallel = true)
+    private static IEnumerable<GeneratedFileInfo> GetGroupedFiles(this IFileGenerator<ICodeFile, CodeDomRenderer> generator, Func<CodeTypeDeclaration, string> getFileNameFunc, bool parallel = true)
     {
         if (generator == null) throw new ArgumentNullException(nameof(generator));
         if (getFileNameFunc == null) throw new ArgumentNullException(nameof(getFileNameFunc));
@@ -77,17 +78,17 @@ public static class FileGeneratorExtensions
 
                let compileUnit = new CodeCompileUnit().Self(unit => unit.Namespaces.AddRange(codeNamespaces.ToArray()))
 
-               select new FileInfo(typeGroup.Key + "." + generator.Renderer.FileExtension, generator.Renderer.Render(compileUnit));
+               select new GeneratedFileInfo(typeGroup.Key + "." + generator.Renderer.FileExtension, generator.Renderer.Render(compileUnit));
     }
 
-    public static IEnumerable<FileInfo> GenerateGroup(this IFileGenerator<ICodeFile, CodeDomRenderer> generator, string path, Func<CodeTypeDeclaration, string> getFileNameFunc, ICheckOutService checkOutService = null, bool parallel = true)
+    public static IEnumerable<GeneratedFileInfo> GenerateGroup(this IFileGenerator<ICodeFile, CodeDomRenderer> generator, string path, Func<CodeTypeDeclaration, string> getFileNameFunc, ICheckOutService? checkOutService = null, bool parallel = true)
     {
         return generator.GetGroupedFiles(getFileNameFunc, parallel)
-                        .Select(f => f.Save(path, checkOutService))
+                        .Select(f => f.WithSave(path, checkOutService))
                         .ToList();
     }
 
-    public static IEnumerable<FileInfo> GeneratePair(this IFileGenerator<ICodeFile, CodeDomRenderer> generator, string path, string mainFilename, string interfaceFileName, ICheckOutService checkOutService = null, bool parallel = true)
+    public static IEnumerable<GeneratedFileInfo> GeneratePair(this IFileGenerator<ICodeFile, CodeDomRenderer> generator, string path, string mainFilename, string interfaceFileName, ICheckOutService? checkOutService = null, bool parallel = true)
     {
         return generator.GenerateGroup(path, delc => delc.IsInterface ? interfaceFileName : mainFilename, checkOutService, parallel);
     }

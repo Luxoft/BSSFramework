@@ -4,19 +4,14 @@ namespace Framework.CodeGeneration.Extensions;
 
 public static class CodeTypeDeclarationExtensions
 {
-    public static string GetQueryServiceFacadeFileNameFunc(this CodeTypeDeclaration typeDecl, string systemName)
+    public static CodeTypeReference WithGenerateInfo<TFileType>(this CodeTypeReference typeDecl, Type? domainType, TFileType fileType)
     {
-        var suffix = ".FacadeQuery";
-        if (typeDecl.IsInterface)
-        {
-            suffix = ".FacadeQuery.Interface";
-        }
-        else if (typeDecl.Name.EndsWith("Facade"))
-        {
-            suffix = ".FacadeQuery.Impl";
-        }
+        if (typeDecl == null) throw new ArgumentNullException(nameof(typeDecl));
 
-        return systemName + suffix + ".Generated";
+        typeDecl.UserData["DomainType"] = domainType;
+        typeDecl.UserData["FileType"] = fileType;
+
+        return typeDecl;
     }
 
     public static string GetServiceFacadeFileNameFunc(this CodeTypeDeclaration typeDecl, string systemName)
@@ -126,23 +121,9 @@ public static class CodeTypeDeclarationExtensions
         {
             suffix = ".IdentityDTO";
         }
-        if (typeDecl.Name.Contains("ProjectionDTO"))
-        {
-            suffix = ".ProjectionDTO";
-        }
         if (typeDecl.Name.Contains("DTOMappingService"))
         {
             suffix = ".DTOMappingService" + (typeDecl.IsInterface ? ".Contract" : "");
-        }
-
-        if (typeDecl.Name.Contains("ServerDTOMappingService"))
-        {
-            suffix = ".ServerDTOMappingService" + (typeDecl.IsInterface ? ".Contract" : "");
-        }
-
-        if (typeDecl.Name.Contains("ClientDTOMappingService"))
-        {
-            suffix = ".ClientDTOMappingService" + (typeDecl.IsInterface ? ".Contract" : "");
         }
 
         return systemName + suffix + ".Generated";

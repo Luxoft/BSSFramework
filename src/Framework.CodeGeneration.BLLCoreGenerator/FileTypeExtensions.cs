@@ -2,7 +2,7 @@
 
 using Framework.CodeGeneration.FileFactory;
 
-namespace Framework.CodeGeneration.BLLCoreGenerator.FileType;
+namespace Framework.CodeGeneration.BLLCoreGenerator;
 
 public static class FileTypeExtensions
 {

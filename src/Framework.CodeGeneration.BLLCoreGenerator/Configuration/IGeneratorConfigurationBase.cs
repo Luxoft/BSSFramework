@@ -6,13 +6,11 @@ using Framework.CodeGeneration.Configuration;
 
 namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 
-public interface IGeneratorConfigurationBase<out TEnvironment> : IGeneratorConfigurationBase, IGeneratorConfiguration<TEnvironment, FileType.FileType>
-        where TEnvironment : IGenerationEnvironmentBase
-{
-}
+public interface IGeneratorConfigurationBase<out TEnvironment> : IGeneratorConfigurationBase, IGeneratorConfiguration<TEnvironment, FileType>
+    where TEnvironment : IGenerationEnvironmentBase;
 
 #pragma warning disable S100 // Methods and properties should be named in camel case
-public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTypeReferenceService<FileType.FileType>
+public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTypeReferenceService<FileType>
 {
     CodeTypeReference ActualRootSecurityServiceInterfaceType { get; }
 

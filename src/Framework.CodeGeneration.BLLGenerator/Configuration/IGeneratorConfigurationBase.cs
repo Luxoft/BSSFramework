@@ -9,12 +9,12 @@ using Framework.CodeGeneration.Configuration;
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 
-public interface IGeneratorConfigurationBase<out TEnvironment> : IGeneratorConfigurationBase, IGeneratorConfiguration<TEnvironment, FileType.FileType>
+public interface IGeneratorConfigurationBase<out TEnvironment> : IGeneratorConfigurationBase, IGeneratorConfiguration<TEnvironment, FileType>
         where TEnvironment : IGenerationEnvironmentBase
 {
 }
 
-public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTypeReferenceService<FileType.FileType>
+public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTypeReferenceService<FileType>
 {
     Type OperationContextType { get; }
 

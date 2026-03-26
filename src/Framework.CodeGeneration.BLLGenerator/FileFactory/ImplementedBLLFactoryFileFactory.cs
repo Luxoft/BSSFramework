@@ -14,7 +14,7 @@ namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 public class ImplementedBLLFactoryFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
     where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public override FileType.FileType FileType => BLLGenerator.FileType.FileType.ImplementedBLLFactory;
+    public override FileType FileType => FileType.ImplementedBLLFactory;
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
     {

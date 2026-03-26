@@ -1,4 +1,4 @@
-﻿namespace Framework.CodeGeneration.BLLCoreGenerator.FileType;
+﻿namespace Framework.CodeGeneration.BLLCoreGenerator;
 
 public enum FileType
 {

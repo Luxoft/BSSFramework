@@ -9,7 +9,7 @@ namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 public class ValidatorFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
     where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public override FileType.FileType FileType => BLLGenerator.FileType.FileType.Validator;
+    public override FileType FileType => FileType.Validator;
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
     {
@@ -23,8 +23,8 @@ public class ValidatorFileFactory<TConfiguration>(TConfiguration configuration) 
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
-        yield return this.Configuration.GetCodeTypeReference(this.DomainType, BLLGenerator.FileType.FileType.ValidatorBase);
-        yield return this.Configuration.GetCodeTypeReference(this.DomainType, BLLGenerator.FileType.FileType.ValidatorInterface);
+        yield return this.Configuration.GetCodeTypeReference(this.DomainType, FileType.ValidatorBase);
+        yield return this.Configuration.GetCodeTypeReference(this.DomainType, FileType.ValidatorInterface);
     }
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
@@ -36,7 +36,7 @@ public class ValidatorFileFactory<TConfiguration>(TConfiguration configuration) 
 
         {
             var contextParameter = this.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference.ToParameterDeclarationExpression("context");
-            var cacheParameter = this.Configuration.GetCodeTypeReference(null, BLLGenerator.FileType.FileType.ValidatorCompileCache).ToParameterDeclarationExpression("cache");
+            var cacheParameter = this.Configuration.GetCodeTypeReference(null, FileType.ValidatorCompileCache).ToParameterDeclarationExpression("cache");
 
             yield return new CodeConstructor
                          {

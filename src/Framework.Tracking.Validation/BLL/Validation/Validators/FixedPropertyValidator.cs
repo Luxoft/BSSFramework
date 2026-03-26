@@ -4,12 +4,13 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.Application.Domain;
-using Framework.Persistent;
+using Framework.BLL.Domain.Extensions;
+using Framework.DomainDriven.Tracking;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.DomainDriven.Tracking.LegacyValidators;
+namespace Framework.Tracking.Validation.BLL.Validation.Validators;
 
 /// <summary>
 /// Валидатор проверки неизменяемости свойства

@@ -19,6 +19,7 @@
   <Folder Name="/CodeGeneration/">
     <Project Path="Framework.CodeDom/Framework.CodeDom.csproj" />
     <Project Path="Framework.CodeGeneration.BLLCoreGenerator/Framework.CodeGeneration.BLLCoreGenerator.csproj" />
+    <Project Path="Framework.CodeGeneration.BLLGenerator/Framework.CodeGeneration.BLLGenerator.csproj" />
     <Project Path="Framework.CodeGeneration/Framework.CodeGeneration.csproj" />
     <Project Path="Framework.FileGeneration/Framework.FileGeneration.csproj" />
   </Folder>

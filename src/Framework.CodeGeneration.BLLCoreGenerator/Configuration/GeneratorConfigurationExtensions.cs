@@ -35,7 +35,7 @@ public static class GeneratorConfigurationExtensions
 
                           from prop in securityRuleType.GetProperties(BindingFlags.Static | BindingFlags.Public)
 
-                          where GetSecurityRule(prop) == securityRule
+                          where TryGetSecurityRule(prop) == securityRule
 
                           select securityRuleType.ToTypeReferenceExpression().ToPropertyReference(prop);
 
@@ -43,16 +43,15 @@ public static class GeneratorConfigurationExtensions
         }
     }
 
-    private static SecurityRule GetSecurityRule(PropertyInfo property)
-    {
-        return property.GetValue(null) switch
+    private static SecurityRule? TryGetSecurityRule(PropertyInfo property) =>
+
+        property.GetValue(null) switch
         {
             SecurityOperation securityOperation => securityOperation,
             SecurityRole securityRole => securityRole,
             SecurityRule securityRule => securityRule,
             _ => null
         };
-    }
 
     public static CodeTypeDeclaration GetServiceProviderContainerCodeTypeDeclaration(this IGeneratorConfigurationBase configuration, string typeName, bool asAbstract, CodeTypeReference baseType)
     {

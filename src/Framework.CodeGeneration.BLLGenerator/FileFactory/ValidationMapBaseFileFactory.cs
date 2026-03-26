@@ -15,7 +15,7 @@ namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
     where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public override FileType.FileType FileType { get; } = BLLGenerator.FileType.FileType.ValidationMapBase;
+    public override FileType FileType { get; } = FileType.ValidationMapBase;
 
     protected virtual string ExternalClassValidatorsMethodName { get; } = "GetExternalClassValidators";
 

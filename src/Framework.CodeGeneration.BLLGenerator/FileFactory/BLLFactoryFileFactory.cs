@@ -10,12 +10,12 @@ namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 public class BLLFactoryFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : FileFactory<TConfiguration>(configuration, domainType)
     where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public override FileType.FileType FileType => BLLGenerator.FileType.FileType.BLLFactory;
+    public override FileType FileType => FileType.BLLFactory;
 
 
     public CodeTypeReference BLLInterfaceRef => this.Configuration.Environment.BLLCore.GetCodeTypeReference(this.DomainType, BLLCoreGenerator.FileType.BLLInterface);
 
-    public CodeTypeReference BLLRef => this.Configuration.GetCodeTypeReference(this.DomainType, BLLGenerator.FileType.FileType.BLL);
+    public CodeTypeReference BLLRef => this.Configuration.GetCodeTypeReference(this.DomainType, FileType.BLL);
 
     public CodeTypeReference BLLFactoryInterfaceRef => this.Configuration.Environment.BLLCore.GetCodeTypeReference(this.DomainType, BLLCoreGenerator.FileType.BLLFactoryInterface);
 
@@ -27,7 +27,7 @@ public class BLLFactoryFileFactory<TConfiguration>(TConfiguration configuration,
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
     {
-        return this.Configuration.Environment.BLLCore.GetBLLContextContainerCodeTypeDeclaration(this.Name, false, this.GetBaseReference());
+        return this.Configuration.GetBLLContextContainerCodeTypeDeclaration(this.Name, false, this.GetBaseReference());
     }
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()

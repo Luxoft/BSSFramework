@@ -17,7 +17,7 @@ public class BLLFactoryInterfaceFileFactory<TConfiguration> : FileFactory<TConfi
     }
 
 
-    public override FileType.FileType FileType => BLLCoreGenerator.FileType.FileType.BLLFactoryInterface;
+    public override FileType FileType => FileType.BLLFactoryInterface;
 
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
@@ -34,7 +34,7 @@ public class BLLFactoryInterfaceFileFactory<TConfiguration> : FileFactory<TConfi
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
-        var bllInterfaceTypeRef = this.Configuration.GetCodeTypeReference(this.DomainType, BLLCoreGenerator.FileType.FileType.BLLInterface);
+        var bllInterfaceTypeRef = this.Configuration.GetCodeTypeReference(this.DomainType, FileType.BLLInterface);
 
         yield return typeof(ISecurityBLLFactory<,>).ToTypeReference(bllInterfaceTypeRef, this.DomainType.ToTypeReference());
     }

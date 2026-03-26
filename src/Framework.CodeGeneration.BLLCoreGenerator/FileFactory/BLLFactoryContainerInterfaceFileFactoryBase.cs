@@ -1,5 +1,4 @@
 ﻿using System.CodeDom;
-
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 using Framework.CodeGeneration.BLLCoreGenerator.FileFactory.__Base;
 
@@ -15,7 +14,7 @@ public class BLLFactoryContainerInterfaceFileFactoryBase<TConfiguration> : FileF
     }
 
 
-    public override FileType.FileType FileType => BLLCoreGenerator.FileType.FileType.BLLFactoryContainerInterface;
+    public override FileType FileType => FileType.BLLFactoryContainerInterface;
 
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
@@ -39,7 +38,7 @@ public class BLLFactoryContainerInterfaceFileFactoryBase<TConfiguration> : FileF
             yield return new CodeMemberProperty
                          {
                                  Name = domainType.Name,
-                                 Type = this.Configuration.GetCodeTypeReference(domainType, BLLCoreGenerator.FileType.FileType.BLLInterface),
+                                 Type = this.Configuration.GetCodeTypeReference(domainType, FileType.BLLInterface),
                                  HasGet = true
                          };
         }

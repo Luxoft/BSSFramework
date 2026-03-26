@@ -17,7 +17,7 @@ using Framework.Projection;
 #pragma warning disable S100 // Methods and properties should be named in camel case
 namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 
-public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<TEnvironment, FileType.FileType>, IGeneratorConfigurationBase<TEnvironment>
+public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<TEnvironment, FileType>, IGeneratorConfigurationBase<TEnvironment>
         where TEnvironment : class, IGenerationEnvironmentBase
 {
     private readonly Lazy<ReadOnlyCollection<Type>> lazyBLLDomainTypes;
@@ -50,21 +50,21 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public virtual string IntegrationSaveMethodName { get; } = "IntegrationSave";
 
-    protected virtual ICodeFileFactoryHeader<FileType.FileType> BLLContextInterfaceFileFactoryHeader =>
+    protected virtual ICodeFileFactoryHeader<FileType> BLLContextInterfaceFileFactoryHeader =>
 
-            new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.BLLContextInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}BLLContext");
+            new CodeFileFactoryHeader<FileType>(FileType.BLLContextInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}BLLContext");
 
-    protected virtual ICodeFileFactoryHeader<FileType.FileType> BLLInterfaceFileFactoryHeader { get; } =
+    protected virtual ICodeFileFactoryHeader<FileType> BLLInterfaceFileFactoryHeader { get; } =
 
-        new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.BLLInterface, string.Empty, domainType => $"I{domainType.Name}BLL");
+        new CodeFileFactoryHeader<FileType>(FileType.BLLInterface, string.Empty, domainType => $"I{domainType.Name}BLL");
 
-    protected virtual ICodeFileFactoryHeader<FileType.FileType> BLLFactoryInterfaceFileFactoryHeader { get; } =
+    protected virtual ICodeFileFactoryHeader<FileType> BLLFactoryInterfaceFileFactoryHeader { get; } =
 
-        new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.BLLFactoryInterface, string.Empty, domainType => $"I{domainType.Name}BLLFactory");
+        new CodeFileFactoryHeader<FileType>(FileType.BLLFactoryInterface, string.Empty, domainType => $"I{domainType.Name}BLLFactory");
 
-    protected virtual ICodeFileFactoryHeader<FileType.FileType> BLLFactoryContainerInterfaceFileFactoryHeader =>
+    protected virtual ICodeFileFactoryHeader<FileType> BLLFactoryContainerInterfaceFileFactoryHeader =>
 
-            new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.BLLFactoryContainerInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}BLLFactoryContainer");
+            new CodeFileFactoryHeader<FileType>(FileType.BLLFactoryContainerInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}BLLFactoryContainer");
 
 
 
@@ -102,7 +102,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         return new BLLFactoryContainerInterfaceGeneratorConfiguration<GeneratorConfigurationBase<TEnvironment>>(this);
     }
 
-    protected override IEnumerable<ICodeFileFactoryHeader<FileType.FileType>> GetFileFactoryHeaders()
+    protected override IEnumerable<ICodeFileFactoryHeader<FileType>> GetFileFactoryHeaders()
     {
         return new[]
                {
@@ -114,9 +114,9 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
                };
     }
 
-    public CodeTypeReference BLLContextInterfaceTypeReference => this.GetCodeTypeReference(null, FileType.FileType.BLLContextInterface);
+    public CodeTypeReference BLLContextInterfaceTypeReference => this.GetCodeTypeReference(null, FileType.BLLContextInterface);
 
-    public CodeTypeReference BLLFactoryInterfaceTypeReference => this.GetCodeTypeReference(null, FileType.FileType.BLLFactoryContainerInterface);
+    public CodeTypeReference BLLFactoryInterfaceTypeReference => this.GetCodeTypeReference(null, FileType.BLLFactoryContainerInterface);
 
 
     public virtual Type FilterModelType { get; }

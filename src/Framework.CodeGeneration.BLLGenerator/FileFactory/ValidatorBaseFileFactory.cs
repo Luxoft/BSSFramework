@@ -1,6 +1,7 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
+using Framework.BLL.Validation;
 using Framework.CodeDom;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.CodeGeneration.BLLGenerator.FileFactory.__Base;
@@ -11,7 +12,7 @@ namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 public class ValidatorBaseFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
     where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public override FileType.FileType FileType => BLLGenerator.FileType.FileType.ValidatorBase;
+    public override FileType FileType => FileType.ValidatorBase;
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
     {

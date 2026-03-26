@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 
-namespace Framework.DomainDriven.Tracking.LegacyValidators;
+namespace Framework.Tracking.Validation.BLL.Validation.Validators;
 
 public interface IPersistentDomainObjectBaseTypeResolver : ITypeResolver<Type>
 {

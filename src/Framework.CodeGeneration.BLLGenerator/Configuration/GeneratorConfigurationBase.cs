@@ -17,7 +17,7 @@ using Framework.Validation;
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 
-public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<TEnvironment, FileType.FileType>, IGeneratorConfigurationBase<TEnvironment>
+public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<TEnvironment, FileType>, IGeneratorConfigurationBase<TEnvironment>
         where TEnvironment : class, IGenerationEnvironmentBase
 {
 
@@ -147,51 +147,51 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         return new BLLFactoryContainerGeneratorConfiguration<GeneratorConfigurationBase<TEnvironment>>(this);
     }
 
-    protected virtual ICodeFileFactoryHeader<FileType.FileType> SecurityDomainBLLBaseFileFactoryHeader { get; } =
+    protected virtual ICodeFileFactoryHeader<FileType> SecurityDomainBLLBaseFileFactoryHeader { get; } =
 
-        new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.SecurityDomainBLLBase, string.Empty, _ => FileType.FileType.SecurityDomainBLLBase);
+        new CodeFileFactoryHeader<FileType>(FileType.SecurityDomainBLLBase, string.Empty, _ => FileType.SecurityDomainBLLBase);
 
-    protected virtual ICodeFileFactoryHeader<FileType.FileType> ValidatorBaseFileFactoryHeader =>
+    protected virtual ICodeFileFactoryHeader<FileType> ValidatorBaseFileFactoryHeader =>
 
-        new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.ValidatorBase, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.FileType.ValidatorBase}");
+        new CodeFileFactoryHeader<FileType>(FileType.ValidatorBase, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.ValidatorBase}");
 
-    protected virtual ICodeFileFactoryHeader<FileType.FileType> ValidatorCompileCacheFileFactoryHeader =>
+    protected virtual ICodeFileFactoryHeader<FileType> ValidatorCompileCacheFileFactoryHeader =>
 
-        new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.ValidatorCompileCache, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.FileType.ValidatorCompileCache}");
+        new CodeFileFactoryHeader<FileType>(FileType.ValidatorCompileCache, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.ValidatorCompileCache}");
 
-    protected virtual ICodeFileFactoryHeader<FileType.FileType> MainDTOFetchRuleExpanderFileFactoryHeader =>
+    protected virtual ICodeFileFactoryHeader<FileType> MainDTOFetchRuleExpanderFileFactoryHeader =>
 
-        new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.MainDTOFetchRuleExpander, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.FileType.MainDTOFetchRuleExpander}");
+        new CodeFileFactoryHeader<FileType>(FileType.MainDTOFetchRuleExpander, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.MainDTOFetchRuleExpander}");
 
-    protected virtual ICodeFileFactoryHeader<FileType.FileType> MainDTOFetchRuleExpanderBaseFileFactoryHeader =>
+    protected virtual ICodeFileFactoryHeader<FileType> MainDTOFetchRuleExpanderBaseFileFactoryHeader =>
 
-        new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.MainDTOFetchRuleExpanderBase, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.FileType.MainDTOFetchRuleExpanderBase}");
+        new CodeFileFactoryHeader<FileType>(FileType.MainDTOFetchRuleExpanderBase, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.MainDTOFetchRuleExpanderBase}");
 
-    protected virtual ICodeFileFactoryHeader<FileType.FileType> ValidationMapFileFactoryHeader =>
+    protected virtual ICodeFileFactoryHeader<FileType> ValidationMapFileFactoryHeader =>
 
-        new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.ValidationMap, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.FileType.ValidationMap}");
+        new CodeFileFactoryHeader<FileType>(FileType.ValidationMap, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.ValidationMap}");
 
-    protected virtual ICodeFileFactoryHeader<FileType.FileType> ValidationMapBaseFileFactoryHeader =>
+    protected virtual ICodeFileFactoryHeader<FileType> ValidationMapBaseFileFactoryHeader =>
 
-        new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.ValidationMapBase, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.FileType.ValidationMapBase}");
+        new CodeFileFactoryHeader<FileType>(FileType.ValidationMapBase, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.ValidationMapBase}");
 
-    protected virtual ICodeFileFactoryHeader<FileType.FileType> ValidatorFileFactoryHeader =>
+    protected virtual ICodeFileFactoryHeader<FileType> ValidatorFileFactoryHeader =>
 
-        new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.Validator, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.FileType.Validator}");
+        new CodeFileFactoryHeader<FileType>(FileType.Validator, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.Validator}");
 
-    protected virtual ICodeFileFactoryHeader<FileType.FileType> ValidatorInterfaceFileFactoryHeader =>
+    protected virtual ICodeFileFactoryHeader<FileType> ValidatorInterfaceFileFactoryHeader =>
 
-        new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.ValidatorInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}{FileType.FileType.Validator}");
+        new CodeFileFactoryHeader<FileType>(FileType.ValidatorInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}{FileType.Validator}");
 
     public CodeTypeReference SecurityDomainBLLBaseTypeReference => this.GetSecurityDomainBLLBaseTypeReference(null);
 
     public CodeTypeReference GetSecurityDomainBLLBaseTypeReference(Type? type)
     {
-        return this.GetCodeTypeReference(type, FileType.FileType.SecurityDomainBLLBase);
+        return this.GetCodeTypeReference(type, FileType.SecurityDomainBLLBase);
     }
 
 
-    protected override IEnumerable<ICodeFileFactoryHeader<FileType.FileType>> GetFileFactoryHeaders()
+    protected override IEnumerable<ICodeFileFactoryHeader<FileType>> GetFileFactoryHeaders()
     {
         yield return this.ValidationMapBaseFileFactoryHeader;
         yield return this.ValidationMapFileFactoryHeader;
@@ -207,16 +207,16 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
         yield return this.SecurityDomainBLLBaseFileFactoryHeader;
 
-        yield return new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.BLLContext, "", _ => this.Environment.TargetSystemName + FileType.FileType.BLLContext);
+        yield return new CodeFileFactoryHeader<FileType>(FileType.BLLContext, "", _ => this.Environment.TargetSystemName + FileType.BLLContext);
 
-        yield return new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.BLL, "", domainType => domainType!.Name + FileType.FileType.BLL);
+        yield return new CodeFileFactoryHeader<FileType>(FileType.BLL, "", domainType => domainType!.Name + FileType.BLL);
 
-        yield return new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.BLLFactory, "", domainType => domainType!.Name + FileType.FileType.BLLFactory);
+        yield return new CodeFileFactoryHeader<FileType>(FileType.BLLFactory, "", domainType => domainType!.Name + FileType.BLLFactory);
 
-        yield return new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.DefaultBLLFactory, "", _ => this.Environment.TargetSystemName + FileType.FileType.DefaultBLLFactory);
+        yield return new CodeFileFactoryHeader<FileType>(FileType.DefaultBLLFactory, "", _ => this.Environment.TargetSystemName + FileType.DefaultBLLFactory);
 
-        yield return new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.ImplementedBLLFactory, "", _ => this.Environment.TargetSystemName + FileType.FileType.ImplementedBLLFactory);
+        yield return new CodeFileFactoryHeader<FileType>(FileType.ImplementedBLLFactory, "", _ => this.Environment.TargetSystemName + FileType.ImplementedBLLFactory);
 
-        yield return new CodeFileFactoryHeader<FileType.FileType>(FileType.FileType.BLLFactoryContainer, "", _ => this.Environment.TargetSystemName + FileType.FileType.BLLFactoryContainer);
+        yield return new CodeFileFactoryHeader<FileType>(FileType.BLLFactoryContainer, "", _ => this.Environment.TargetSystemName + FileType.BLLFactoryContainer);
     }
 }

@@ -30,7 +30,7 @@ public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguratio
     }
 
 
-    public override FileType.FileType FileType => BLLCoreGenerator.FileType.FileType.BLLInterface;
+    public override FileType FileType => FileType.BLLInterface;
 
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()

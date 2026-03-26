@@ -12,8 +12,9 @@ using Framework.CodeDom;
 using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DomainMetadata;
 using Framework.Core;
-using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Restriction;
+using Framework.Tracking.Validation.BLL.Validation.Attributes;
+using Framework.Tracking.Validation.BLL.Validation.Validators;
 using Framework.Validation;
 
 using ValidatorPairExpr = System.Collections.Generic.KeyValuePair<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
@@ -371,9 +372,9 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
     {
         if (attribute == null) throw new ArgumentNullException(nameof(attribute));
 
-        var identType = property.DeclaringType!.GetIdentType();
+        var identType = property.DeclaringType!.GetIdentType()!;
 
-        var validatorType = typeof(FixedPropertyValidator<,,,>).MakeGenericType(property.ReflectedType, property.PropertyType, identType, this.Configuration.Environment.PersistentDomainObjectBaseType);
+        var validatorType = typeof(FixedPropertyValidator<,,,>).MakeGenericType(property.ReflectedType!, property.PropertyType, identType, this.Configuration.Environment.PersistentDomainObjectBaseType);
 
         var propertyExprLambda = new CodeParameterDeclarationExpression { Name = "source" }.Pipe(p => new CodeLambdaExpression
         {

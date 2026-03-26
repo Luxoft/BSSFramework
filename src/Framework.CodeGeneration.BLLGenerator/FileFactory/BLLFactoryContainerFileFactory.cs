@@ -1,11 +1,13 @@
 ﻿using System.CodeDom;
 
+using CommonFramework;
 using CommonFramework.DependencyInjection;
 
 using Framework.BLL;
 using Framework.CodeDom;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.CodeGeneration.DomainMetadata;
+using Framework.Core;
 
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
@@ -14,7 +16,7 @@ public class BLLFactoryContainerFileFactory<TConfiguration>(TConfiguration confi
 {
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
     {
-        return this.Configuration.Environment.BLLCore.GetBLLContextContainerCodeTypeDeclaration(this.Name, false);
+        return this.Configuration.GetBLLContextContainerCodeTypeDeclaration(this.Name, false);
     }
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
@@ -85,8 +87,8 @@ public class BLLFactoryContainerFileFactory<TConfiguration>(TConfiguration confi
 
         var fileTypes = new[]
                         {
-                                new { FileType = BLLGenerator.FileType.FileType.DefaultBLLFactory, Type = this.Configuration.Environment.BLLCore.SecurityBLLFactoryType },
-                                new { FileType = BLLGenerator.FileType.FileType.ImplementedBLLFactory, Type = this.Configuration.Environment.BLLCore.SecurityBLLFactoryType }
+                                new { FileType = BLLGenerator.FileType.DefaultBLLFactory, Type = this.Configuration.Environment.BLLCore.SecurityBLLFactoryType },
+                                new { FileType = BLLGenerator.FileType.ImplementedBLLFactory, Type = this.Configuration.Environment.BLLCore.SecurityBLLFactoryType }
                         };
 
         foreach (var pair in fileTypes)
@@ -137,7 +139,7 @@ public class BLLFactoryContainerFileFactory<TConfiguration>(TConfiguration confi
     {
         var factoryDecl = this.Configuration.Environment.BLLCore.GetCodeTypeReference(domainType, BLLCoreGenerator.FileType.BLLFactoryInterface);
 
-        var factoryImpl = this.Configuration.GetCodeTypeReference(domainType, BLLGenerator.FileType.FileType.BLLFactory);
+        var factoryImpl = this.Configuration.GetCodeTypeReference(domainType, BLLGenerator.FileType.BLLFactory);
 
         var addScopedMethod = typeof(Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions).ToTypeReferenceExpression()
                                                                         .ToMethodReferenceExpression(

@@ -10,7 +10,7 @@ namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 public class ValidatorCompileCacheFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
     where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public override FileType.FileType FileType => BLLGenerator.FileType.FileType.ValidatorCompileCache;
+    public override FileType FileType => FileType.ValidatorCompileCache;
 
     public override CodeTypeReference BaseReference { get; } = typeof(ValidatorCompileCache).ToTypeReference();
 
@@ -27,7 +27,7 @@ public class ValidatorCompileCacheFileFactory<TConfiguration>(TConfiguration con
     protected override IEnumerable<CodeTypeMember> GetMembers()
     {
         var validationMapParam =
-                this.Configuration.GetCodeTypeReference(this.DomainType, BLLGenerator.FileType.FileType.ValidationMap)
+                this.Configuration.GetCodeTypeReference(this.DomainType, FileType.ValidationMap)
                     .ToParameterDeclarationExpression("validationMap");
 
         yield return new CodeConstructor

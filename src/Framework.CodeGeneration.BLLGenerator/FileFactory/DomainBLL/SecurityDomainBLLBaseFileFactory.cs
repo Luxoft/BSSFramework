@@ -12,7 +12,7 @@ namespace Framework.CodeGeneration.BLLGenerator.FileFactory.DomainBLL;
 public class SecurityDomainBLLBaseFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
     where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public override FileType.FileType FileType => BLLGenerator.FileType.FileType.SecurityDomainBLLBase;
+    public override FileType FileType => FileType.SecurityDomainBLLBase;
 
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()

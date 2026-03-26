@@ -5,12 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.BLL.Runtime\Framework.BLL.Runtime.csproj" />
-    <ProjectReference Include="..\..\Framework.CodeGeneration.BLLCoreGenerator\Framework.CodeGeneration.BLLCoreGenerator.csproj" />
+    <ProjectReference Include="..\Framework.BLL.Runtime\Framework.BLL.Runtime.csproj" />
+    <ProjectReference Include="..\Framework.CodeGeneration.BLLCoreGenerator\Framework.CodeGeneration.BLLCoreGenerator.csproj" />
+    <ProjectReference Include="..\Framework.Tracking.Validation\Framework.Tracking.Validation.csproj" />
   </ItemGroup>
 
 </Project>

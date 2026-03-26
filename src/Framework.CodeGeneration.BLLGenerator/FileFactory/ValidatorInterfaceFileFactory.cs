@@ -10,7 +10,7 @@ namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 public class ValidatorInterfaceFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
     where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public override FileType.FileType FileType => BLLGenerator.FileType.FileType.ValidatorInterface;
+    public override FileType FileType => FileType.ValidatorInterface;
 
     public override CodeTypeReference BaseReference { get; } = typeof(IValidator).ToTypeReference();
 

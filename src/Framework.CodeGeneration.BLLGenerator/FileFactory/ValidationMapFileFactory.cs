@@ -9,7 +9,7 @@ namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 public class ValidationMapFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
     where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public override FileType.FileType FileType => BLLGenerator.FileType.FileType.ValidationMap;
+    public override FileType FileType => FileType.ValidationMap;
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
     {
@@ -23,7 +23,7 @@ public class ValidationMapFileFactory<TConfiguration>(TConfiguration configurati
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
-        yield return this.Configuration.GetCodeTypeReference(this.DomainType, BLLGenerator.FileType.FileType.ValidationMapBase);
+        yield return this.Configuration.GetCodeTypeReference(this.DomainType, FileType.ValidationMapBase);
     }
 
     protected override IEnumerable<CodeTypeMember> GetMembers()

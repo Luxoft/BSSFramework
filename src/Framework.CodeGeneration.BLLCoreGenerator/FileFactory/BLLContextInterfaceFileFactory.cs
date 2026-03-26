@@ -12,7 +12,7 @@ namespace Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
 public class BLLContextInterfaceFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
     where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public override FileType.FileType FileType => BLLCoreGenerator.FileType.FileType.BLLContextInterface;
+    public override FileType FileType => FileType.BLLContextInterface;
 
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
@@ -33,7 +33,7 @@ public class BLLContextInterfaceFileFactory<TConfiguration>(TConfiguration confi
         yield return new CodeTypeReference(typeof(IAccessDeniedExceptionServiceContainer));
 
         yield return new CodeTypeReference(typeof(ISecurityServiceContainer<>)) { TypeArguments = { securityServiceFieldTypeRef } };
-        yield return typeof(IBLLFactoryContainerContext<>).ToTypeReference(this.Configuration.GetCodeTypeReference(null, BLLCoreGenerator.FileType.FileType.BLLFactoryContainerInterface));
+        yield return typeof(IBLLFactoryContainerContext<>).ToTypeReference(this.Configuration.GetCodeTypeReference(null, FileType.BLLFactoryContainerInterface));
     }
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
@@ -42,7 +42,7 @@ public class BLLContextInterfaceFileFactory<TConfiguration>(TConfiguration confi
                      {
                              Name = "Logics",
                              Attributes = MemberAttributes.New,
-                             Type = this.Configuration.GetCodeTypeReference(null, BLLCoreGenerator.FileType.FileType.BLLFactoryContainerInterface),
+                             Type = this.Configuration.GetCodeTypeReference(null, FileType.BLLFactoryContainerInterface),
                              HasGet = true
                      };
     }

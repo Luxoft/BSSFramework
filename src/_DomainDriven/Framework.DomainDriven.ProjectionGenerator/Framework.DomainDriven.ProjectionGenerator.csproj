@@ -1,5 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <PackageId>Luxoft.Framework.DomainDriven.ProjectionGenerator</PackageId>
-  </PropertyGroup>
-</Project>

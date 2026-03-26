@@ -23,6 +23,9 @@
     <Project Path="Framework.CodeGeneration/Framework.CodeGeneration.csproj" />
     <Project Path="Framework.FileGeneration/Framework.FileGeneration.csproj" />
   </Folder>
+  <Folder Name="/CodeGeneration/DTO/">
+    <Project Path="Framework.CodeGeneration.DTOGenerator/Framework.CodeGeneration.DTOGenerator.csproj" />
+  </Folder>
   <Folder Name="/Configuration/">
     <Project Path="_Configuration/Framework.Configuration.BLL.Core.Tests.Unit/Framework.Configuration.BLL.Core.Tests.Unit.csproj" />
     <Project Path="_Configuration/Framework.Configuration.BLL.Core/Framework.Configuration.BLL.Core.csproj" />
@@ -70,15 +73,6 @@
     <Project Path="_DomainDriven/Framework.DomainDriven.WebApiNetCore.LegacyContext/Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.WebApiNetCore.Swagger/Framework.DomainDriven.WebApiNetCore.Swagger.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.WebApiNetCore/Framework.DomainDriven.WebApiNetCore.csproj" />
-  </Folder>
-  <Folder Name="/DomainDriven/Generators/">
-    <Project Path="_DomainDriven/Framework.DomainDriven.ProjectionGenerator/Framework.DomainDriven.ProjectionGenerator.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.ServiceModelGenerator/Framework.DomainDriven.ServiceModelGenerator.csproj" />
-  </Folder>
-  <Folder Name="/DomainDriven/Generators/DTO/">
-    <Project Path="_DomainDriven/Framework.DomainDriven.DTOGenerator.Audit/Framework.DomainDriven.DTOGenerator.Audit.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.DTOGenerator.Server/Framework.DomainDriven.DTOGenerator.Server.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.DTOGenerator/Framework.DomainDriven.DTOGenerator.csproj" />
   </Folder>
   <Folder Name="/Projection/">
     <Project Path="Framework.Projection.Abstractions/Framework.Projection.Abstractions.csproj" />

@@ -19,10 +19,7 @@ public class BLLFactoryContainerFileFactory<TConfiguration>(TConfiguration confi
         return this.Configuration.GetBLLContextContainerCodeTypeDeclaration(this.Name, false);
     }
 
-    protected override IEnumerable<CodeTypeReference> GetBaseTypes()
-    {
-        return base.GetBaseTypes().Concat([typeof(IBLLFactoryInitializer).ToTypeReference()]);
-    }
+    protected override IEnumerable<CodeTypeReference> GetBaseTypes() => [.. base.GetBaseTypes(), typeof(IBLLFactoryInitializer).ToTypeReference()];
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
     {

@@ -4,7 +4,7 @@ using CommonFramework;
 
 using Framework.Application.Repository;
 using Framework.BLL;
-using Framework.BLL.DTOMapping;
+using Framework.BLL.DTOMapping.Services;
 using Framework.CodeDom;
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Extensions;

@@ -1,7 +1,5 @@
-﻿using Framework.DomainDriven.Generation.Domain;
+﻿using Framework.CodeGeneration.DomainMetadata;
 
-namespace Framework.DomainDriven.ProjectionGenerator;
+namespace Framework.CodeGeneration.ProjectionGenerator.Configuration;
 
-public interface IGenerationEnvironmentBase : IGenerationEnvironment
-{
-}
+public interface IGenerationEnvironmentBase : IGenerationEnvironment;

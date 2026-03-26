@@ -1,4 +1,4 @@
-﻿namespace Framework.BLL.DTOMapping;
+﻿namespace Framework.BLL.DTOMapping.Services;
 
 public class IgnoreCollectionMappingService<TSource, TTarget> : ICollectionMappingService<TSource, TTarget>
 {

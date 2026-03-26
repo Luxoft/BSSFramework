@@ -3,34 +3,26 @@ using System.Runtime.Serialization;
 
 using CommonFramework;
 
+using Framework.BLL.Domain.DAL.Revisions;
+using Framework.BLL.Domain.Serialization;
+using Framework.BLL.DTOMapping.Domain;
 using Framework.CodeDom;
+using Framework.CodeGeneration.Configuration;
+using Framework.CodeGeneration.Configuration._Container;
+using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
+using Framework.CodeGeneration.DTOGenerator.FileType;
 using Framework.Core;
-using Framework.DomainDriven.DAL.Revisions;
-using Framework.DomainDriven.Generation;
-using Framework.DomainDriven.Generation.Domain;
-using Framework.DomainDriven.Serialization;
-using Framework.DomainDriven.ServiceModel.Subscriptions;
-using Framework.Persistent.Mapping;
+using Framework.Database.Domain;
 using Framework.Projection;
 
-namespace Framework.DomainDriven.DTOGenerator.Audit;
+namespace Framework.CodeGeneration.DTOGenerator.Audit;
 
-public class AuditDTOModelFileGenerator : AuditDTOModelFileGenerator<IAuditDTOGeneratorConfigurationBase<IAuditDTOGenerationEnvironmentBase>>
+public class AuditDTOModelFileGenerator(IAuditDTOGeneratorConfigurationBase<IAuditDTOGenerationEnvironmentBase> configuration)
+    : AuditDTOModelFileGenerator<IAuditDTOGeneratorConfigurationBase<IAuditDTOGenerationEnvironmentBase>>(configuration);
+
+public class AuditDTOModelFileGenerator<TConfiguration>(TConfiguration configuration) : CodeFileGenerator<TConfiguration>(configuration)
+    where TConfiguration : class, IAuditDTOGeneratorConfigurationBase<IAuditDTOGenerationEnvironmentBase>
 {
-    public AuditDTOModelFileGenerator(IAuditDTOGeneratorConfigurationBase<IAuditDTOGenerationEnvironmentBase> configuration)
-            : base(configuration)
-    {
-    }
-}
-
-public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TConfiguration>
-        where TConfiguration : class, IAuditDTOGeneratorConfigurationBase<IAuditDTOGenerationEnvironmentBase>
-{
-    public AuditDTOModelFileGenerator(TConfiguration configuration)
-            : base(configuration)
-    {
-    }
-
     protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {
         yield return new AuditFileFactory(this.Configuration, this.GetCodeNamespace());
@@ -41,12 +33,7 @@ public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TCon
     {
         return new CodeNamespace(this.Configuration.Namespace)
                {
-                       Types =
-                       {
-                               this.GetRootPropertyRevisionDTO(),
-                               this.GetPropertyRevisionDTO(),
-                               this.GetPropertyRevisionDTOBase(),
-                       },
+                   Types = { this.GetRootPropertyRevisionDTO(), this.GetPropertyRevisionDTO(), this.GetPropertyRevisionDTOBase(), },
                };
     }
 
@@ -57,10 +44,10 @@ public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TCon
                        .Self(z => z.TypeArguments.Add(this.Configuration.PropertyRevisionTypeName));
 
         return new CodeTypeDeclaration(this.Configuration.DomainObjectPropertiesRevisionDTOTypeName)
-               {
-                       CustomAttributes = new CodeAttributeDeclarationCollection(new[] { new CodeAttributeDeclaration(typeof(DataContractAttribute).FullName) }),
-               }
-                .Self(z => z.BaseTypes.Add(baseType));
+            {
+                CustomAttributes = new CodeAttributeDeclarationCollection(new[] { new CodeAttributeDeclaration(typeof(DataContractAttribute).FullName) }),
+            }
+            .Self(z => z.BaseTypes.Add(baseType));
     }
 
     private CodeTypeDeclaration GetPropertyRevisionDTOBase()
@@ -68,10 +55,10 @@ public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TCon
         var baseType = new CodeTypeReference(typeof(PropertyRevisionDTOBase));
         return new CodeTypeDeclaration(this.Configuration.PropertyRevisionTypeName)
                {
-                       CustomAttributes = new CodeAttributeDeclarationCollection(this.GetCustomerAttributeNames().ToArray()),
+                   CustomAttributes = new CodeAttributeDeclarationCollection(this.GetCustomerAttributeNames().ToArray()),
                }
                .Self(z => z.BaseTypes.Add(baseType))
-               .Self(z => z.Members.AddRange(GetPropertyRevisionsCodeConstructor().ToArray()));
+               .Self(z => z.Members.AddRange([.. GetPropertyRevisionsCodeConstructor()]));
     }
 
     private IEnumerable<CodeAttributeDeclaration> GetCustomerAttributeNames()
@@ -116,19 +103,19 @@ public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TCon
     {
         if (this.Configuration.IsDomainObject(propertyType))
         {
-            if (this.Configuration.Environment.ServerDTO.GeneratePolicy.Used(propertyType, FileType.SimpleDTO))
+            if (this.Configuration.Environment.ServerDTO.GeneratePolicy.Used(propertyType, BaseFileType.SimpleDTO))
             {
-                var result = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(propertyType, FileType.SimpleDTO);
+                var result = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(propertyType, BaseFileType.SimpleDTO);
 
                 yield return result;
             }
         }
         else if (propertyType.IsCollection()
-                 && this.Configuration.IsDomainObject(propertyType.GetCollectionOrArrayElementType()))
+                 && this.Configuration.IsDomainObject(propertyType.GetCollectionOrArrayElementType()!))
         {
-            if (this.Configuration.Environment.ServerDTO.GeneratePolicy.Used(propertyType.GetCollectionOrArrayElementType(), FileType.SimpleDTO))
+            if (this.Configuration.Environment.ServerDTO.GeneratePolicy.Used(propertyType.GetCollectionOrArrayElementType()!, BaseFileType.SimpleDTO))
             {
-                var type = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(propertyType.GetCollectionOrArrayElementType(), FileType.SimpleDTO);
+                var type = this.Configuration.Environment.ServerDTO.GetCodeTypeReference(propertyType.GetCollectionOrArrayElementType(), BaseFileType.SimpleDTO);
                 var result = new CodeTypeReference(propertyType.GetGenericTypeDefinition()).Self(z => z.TypeArguments.Add(type));
 
                 yield return result;
@@ -144,10 +131,7 @@ public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TCon
 
     private CodeTypeDeclaration GetPropertyRevisionDTO()
     {
-        var field = new CodeMemberField("TValue", "value")
-                    {
-                        Attributes = MemberAttributes.Private,
-                    };
+        var field = new CodeMemberField("TValue", "value") { Attributes = MemberAttributes.Private, };
 
         var fieldExpr = new CodeThisReferenceExpression().ToFieldReference(field);
 
@@ -163,14 +147,11 @@ public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TCon
 
         return new CodeTypeDeclaration(this.Configuration.PropertyRevisionTypeName)
                {
-                       CustomAttributes = new CodeAttributeDeclarationCollection(new[]
-                                                                                 {
-                                                                                         new CodeAttributeDeclaration(typeof (DataContractAttribute).FullName),
-                                                                                 }),
+                   CustomAttributes = new CodeAttributeDeclarationCollection(new[] { new CodeAttributeDeclaration(typeof(DataContractAttribute).FullName), }),
                }
                .Self(z => z.BaseTypes.Add(this.Configuration.PropertyRevisionTypeName))
                .Self(z => z.TypeParameters.Add("TValue"))
-               .Self(z => z.Members.AddRange(GetPropertyRevisionsCodeConstructor().ToArray()))
+               .Self(z => z.Members.AddRange([.. GetPropertyRevisionsCodeConstructor()]))
                .Self(z => z.Members.Add(field))
                .Self(z => z.Members.Add(property));
     }
@@ -178,29 +159,18 @@ public class AuditDTOModelFileGenerator<TConfiguration> : CodeFileGenerator<TCon
     private static IEnumerable<CodeConstructor> GetPropertyRevisionsCodeConstructor()
     {
         yield return
-                new CodeConstructor()
-                        .Self(z => z.Attributes = MemberAttributes.Public)
-                        .Self(z => z.Parameters.Add(new CodeParameterDeclarationExpression(typeof(RevisionInfoBase), "info")))
-                        .Self(q => q.BaseConstructorArgs.Add(new CodeVariableReferenceExpression("info")));
+            new CodeConstructor()
+                .Self(z => z.Attributes = MemberAttributes.Public)
+                .Self(z => z.Parameters.Add(new CodeParameterDeclarationExpression(typeof(RevisionInfoBase), "info")))
+                .Self(q => q.BaseConstructorArgs.Add(new CodeVariableReferenceExpression("info")));
         yield return new CodeConstructor().Self(z => z.Attributes = MemberAttributes.Public);
     }
 
-    private class AuditFileFactory : GeneratorConfigurationContainer<TConfiguration>, ICodeFile
+    private class AuditFileFactory(TConfiguration configuration, CodeNamespace codeNamespace) : GeneratorConfigurationContainer<TConfiguration>(configuration), ICodeFile
     {
-        private readonly CodeNamespace _codeNamespace;
-
-        public AuditFileFactory(TConfiguration configuration, CodeNamespace codeNamespace)
-                : base(configuration)
-        {
-            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            if (codeNamespace == null) throw new ArgumentNullException(nameof(codeNamespace));
-
-            this._codeNamespace = codeNamespace;
-        }
-
         public CodeNamespace GetRenderData()
         {
-            return this._codeNamespace;
+            return codeNamespace;
         }
 
         public string Filename => this.Configuration.PropertyRevisionTypeName;

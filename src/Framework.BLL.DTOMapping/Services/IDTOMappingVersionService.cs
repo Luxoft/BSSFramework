@@ -1,6 +1,6 @@
 ﻿using Framework.BLL.Domain.IdentityObject;
 
-namespace Framework.BLL.DTOMapping;
+namespace Framework.BLL.DTOMapping.Services;
 
 public interface IDTOMappingVersionService<in TAuditPersistentDomainObjectBase, TVersion>
 {

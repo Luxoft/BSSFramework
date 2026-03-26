@@ -2,7 +2,7 @@
 using Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
 using Framework.BLL.Domain.IdentityObject;
 
-namespace Framework.BLL.DTOMapping;
+namespace Framework.BLL.DTOMapping.Services;
 
 public class DTOMappingVersionService<TBLLContext, TAuditPersistentDomainObjectBase, TIdent, TVersion>(TBLLContext context)
     : BLLContextContainer<TBLLContext>(context), IDTOMappingVersionService<TAuditPersistentDomainObjectBase, TVersion>

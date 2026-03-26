@@ -3,7 +3,7 @@ using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.IdentityObject;
 using Framework.BLL.Domain.MergeItemData;
 
-namespace Framework.BLL.DTOMapping;
+namespace Framework.BLL.DTOMapping.Services;
 
 public class DefaultUpdateCollectionMappingService<TSource, TSourceIdentity, TTarget, TIdent>(Func<TSource, TTarget> createAndMapDetail, Action<TTarget> removeDetail)
     : IUpdateCollectionMappingService<TSource, TSourceIdentity, TTarget>

@@ -6,7 +6,7 @@ using CommonFramework;
 
 using Framework.BLL;
 using Framework.BLL.Domain.Dto.MappingObject;
-using Framework.BLL.DTOMapping;
+using Framework.BLL.DTOMapping.Services;
 using Framework.CodeDom;
 using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;

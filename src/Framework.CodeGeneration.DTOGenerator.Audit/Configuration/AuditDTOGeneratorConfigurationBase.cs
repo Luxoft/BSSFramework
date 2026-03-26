@@ -1,15 +1,11 @@
-﻿using Framework.DomainDriven.Generation.Domain;
+﻿using Framework.CodeGeneration.Configuration;
 
-namespace Framework.DomainDriven.DTOGenerator.Audit;
+namespace Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
 
-public abstract class AuditDTOGeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<TEnvironment>, IAuditDTOGeneratorConfigurationBase<TEnvironment>
-        where TEnvironment : class, IAuditDTOGenerationEnvironmentBase
+public abstract class AuditDTOGeneratorConfigurationBase<TEnvironment>(TEnvironment environment)
+    : GeneratorConfiguration<TEnvironment>(environment), IAuditDTOGeneratorConfigurationBase<TEnvironment>
+    where TEnvironment : class, IAuditDTOGenerationEnvironmentBase
 {
-    protected AuditDTOGeneratorConfigurationBase(TEnvironment environment)
-            : base(environment)
-    {
-    }
-
     public virtual string DomainObjectPropertiesRevisionDTOFullTypeName => $"{this.Namespace}.{this.DomainObjectPropertiesRevisionDTOTypeName}";
 
     public virtual string DomainObjectPropertiesRevisionDTOTypeName => $"{this.DomainObjectPropertyRevisionsDTOPrefixName}DomainObjectPropertiesRevision{this.DomainObjectPropertyRevisionsDTOPostfixName}DTO";

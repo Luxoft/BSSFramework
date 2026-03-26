@@ -1,8 +1,9 @@
 ﻿using System.Runtime.Serialization;
-using Framework.DomainDriven.DAL.Revisions;
-using Framework.Persistent;
 
-namespace Framework.DomainDriven.ServiceModel.Subscriptions;
+using Framework.BLL.Domain.DAL.Revisions;
+using Framework.BLL.Domain.IdentityObject;
+
+namespace Framework.BLL.DTOMapping.Domain;
 
 [DataContract]
 public class TypeInfoDescriptionDTO : IDomainType

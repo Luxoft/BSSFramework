@@ -3,14 +3,18 @@ using System.Reflection;
 
 using CommonFramework;
 
+using Framework.BLL.Domain.Persistent.Attributes;
+using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.CodeDom;
+using Framework.CodeGeneration.Configuration;
+using Framework.CodeGeneration.FileFactory;
+using Framework.CodeGeneration.ProjectionGenerator._Extensions;
+using Framework.CodeGeneration.ProjectionGenerator.Configuration;
 using Framework.Core;
-using Framework.DomainDriven.Generation.Domain;
-using Framework.Persistent;
-using Framework.Persistent.Mapping;
+using Framework.Database.Domain;
 using Framework.Projection;
 
-namespace Framework.DomainDriven.ProjectionGenerator;
+namespace Framework.CodeGeneration.ProjectionGenerator.FileFactory;
 
 public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfiguration, FileType>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>

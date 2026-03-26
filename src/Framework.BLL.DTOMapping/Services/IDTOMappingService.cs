@@ -1,6 +1,6 @@
 ﻿using Framework.Application.Repository;
 
-namespace Framework.BLL.DTOMapping;
+namespace Framework.BLL.DTOMapping.Services;
 
 public interface IDTOMappingService<in TPersistentDomainObjectBase, in TIdent>
 {

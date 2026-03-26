@@ -1,3 +1,5 @@
-﻿namespace Framework.DomainDriven.DTOGenerator.Audit;
+﻿using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 
-public interface IAuditDTOGenerationEnvironmentBase : Server.IServerGenerationEnvironmentBase, Server.IGeneratorConfigurationContainer;
+namespace Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
+
+public interface IAuditDTOGenerationEnvironmentBase : IServerGenerationEnvironmentBase, Server.Configuration.IGeneratorConfigurationContainer;

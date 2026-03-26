@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
 
+using Framework.CodeGeneration.DomainMetadata;
 using Framework.Core;
-using Framework.DomainDriven.Generation.Domain;
 using Framework.Projection;
 
-namespace Framework.DomainDriven.ProjectionGenerator;
+namespace Framework.CodeGeneration.ProjectionGenerator._Extensions;
 
 internal static class DomainMetadataExtensions
 {

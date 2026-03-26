@@ -3,18 +3,21 @@ using System.Reflection;
 
 using CommonFramework;
 
+using Framework.BLL.Domain.Attributes;
+using Framework.BLL.Domain.Dto;
+using Framework.BLL.Domain.Extensions;
+using Framework.BLL.Domain.Fetching;
+using Framework.BLL.Domain.Persistent.Attributes;
+using Framework.BLL.Domain.Serialization;
+using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Serialization;
-using Framework.Persistent;
-using Framework.Persistent.Mapping;
+using Framework.Database.Domain;
 using Framework.Projection;
-using Framework.Security;
-using SecuritySystem;
-using Framework.Transfering;
 
-namespace Framework.DomainDriven.ProjectionGenerator;
+using SecuritySystem;
+
+namespace Framework.CodeGeneration.ProjectionGenerator._Extensions;
 
 internal static class CodeDomExtensions
 {

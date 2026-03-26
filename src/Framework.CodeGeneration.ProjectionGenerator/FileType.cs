@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.ProjectionGenerator;
+﻿namespace Framework.CodeGeneration.ProjectionGenerator;
 
 /// <summary>
 /// Тип проекции

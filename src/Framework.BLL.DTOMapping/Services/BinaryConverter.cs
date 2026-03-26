@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Framework.BLL.DTOMapping.BinaryConverter;
+namespace Framework.BLL.DTOMapping.Services;
 
 public class BinaryConverter : IBinaryConverter
 {

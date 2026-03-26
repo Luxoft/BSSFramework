@@ -1,11 +1,9 @@
-﻿using Framework.DomainDriven.Generation.Domain;
+﻿using Framework.CodeGeneration.Configuration;
 
-namespace Framework.DomainDriven.DTOGenerator.Audit;
+namespace Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
 
 public interface IAuditDTOGeneratorConfigurationBase<out TEnvironment> : IAuditDTOGeneratorConfigurationBase, IGeneratorConfiguration<TEnvironment>
-        where TEnvironment : IAuditDTOGenerationEnvironmentBase
-{
-}
+    where TEnvironment : IAuditDTOGenerationEnvironmentBase;
 
 public interface IAuditDTOGeneratorConfigurationBase : IGeneratorConfiguration
 {

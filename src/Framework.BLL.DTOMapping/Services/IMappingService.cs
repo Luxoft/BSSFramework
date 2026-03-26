@@ -1,4 +1,4 @@
-﻿namespace Framework.BLL.DTOMapping;
+﻿namespace Framework.BLL.DTOMapping.Services;
 
 public interface IMappingService<in TSource, in TTarget>
 {

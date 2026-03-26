@@ -1,4 +1,4 @@
-﻿namespace Framework.BLL.DTOMapping.BinaryConverter;
+﻿namespace Framework.BLL.DTOMapping.Services;
 
 public interface IBinaryConverter
 {

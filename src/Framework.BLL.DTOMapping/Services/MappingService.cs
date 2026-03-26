@@ -1,14 +1,12 @@
 ﻿using Framework.Application.Domain;
 using Framework.Application.Repository;
 using Framework.BLL.Domain.IdentityObject;
-using Framework.BLL.DTOMapping.BinaryConverter;
-
 using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem;
 using SecuritySystem.DomainServices;
 
-namespace Framework.BLL.DTOMapping;
+namespace Framework.BLL.DTOMapping.Services;
 
 public abstract class DTOMappingService<TBLLContext, TPersistentDomainObjectBase, TAuditPersistentDomainObjectBase, TIdent, TVersion>(TBLLContext context)
     : BLLContextContainer<TBLLContext>(context), IDTOMappingService<TPersistentDomainObjectBase, TIdent>
@@ -19,7 +17,7 @@ public abstract class DTOMappingService<TBLLContext, TPersistentDomainObjectBase
 {
     public virtual IDTOMappingVersionService<TAuditPersistentDomainObjectBase, TVersion> VersionService { get; } = new DTOMappingVersionService<TBLLContext, TAuditPersistentDomainObjectBase, TIdent, TVersion>(context);
 
-    public virtual IBinaryConverter BinaryConverter { get; } = new BinaryConverter.BinaryConverter();
+    public virtual IBinaryConverter BinaryConverter { get; } = new BinaryConverter();
 
     protected bool HasAccess<TDomainObject>(TDomainObject domainObject, SecurityRule securityRule)
     {

@@ -1,25 +1,15 @@
-﻿using Framework.DomainDriven.Generation;
-using Framework.DomainDriven.Generation.Domain;
+﻿using Framework.CodeGeneration.ProjectionGenerator._Extensions;
+using Framework.CodeGeneration.ProjectionGenerator.Configuration;
+using Framework.CodeGeneration.ProjectionGenerator.FileFactory;
 
-namespace Framework.DomainDriven.ProjectionGenerator;
+namespace Framework.CodeGeneration.ProjectionGenerator;
 
-public class ProjectionFileGenerator : ProjectionFileGenerator<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>
+public class ProjectionFileGenerator(IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
+    : ProjectionFileGenerator<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>(configuration);
+
+public class ProjectionFileGenerator<TConfiguration>(TConfiguration configuration) : CodeFileGenerator<TConfiguration>(configuration)
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public ProjectionFileGenerator(IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
-            : base(configuration)
-    {
-    }
-}
-
-public class ProjectionFileGenerator<TConfiguration> : CodeFileGenerator<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
-{
-    public ProjectionFileGenerator(TConfiguration configuration)
-            : base(configuration)
-    {
-    }
-
-
     protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {
         foreach (var projectionType in this.Configuration.DomainTypes)

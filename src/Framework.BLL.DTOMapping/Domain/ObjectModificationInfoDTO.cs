@@ -1,9 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using Framework.Core;
-using Framework.DomainDriven.DAL.Revisions;
-using Framework.Persistent;
 
-namespace Framework.DomainDriven.ServiceModel.Subscriptions;
+using Framework.BLL.Domain;
+using Framework.BLL.Domain.DAL.Revisions;
+using Framework.Core;
+
+namespace Framework.BLL.DTOMapping.Domain;
 
 [DataContract(Name = "ObjectModificationInfoDTO{0}")]
 public class ObjectModificationInfoDTO<TIdent>

@@ -1,14 +1,12 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
-using Framework.DomainDriven.Generation.Domain;
+using Framework.CodeGeneration.Configuration;
 
-namespace Framework.DomainDriven.ProjectionGenerator;
+namespace Framework.CodeGeneration.ProjectionGenerator.Configuration;
 
 public interface IGeneratorConfigurationBase<out TEnvironment> : IGeneratorConfigurationBase, IGeneratorConfiguration<TEnvironment, FileType>
-        where TEnvironment : IGenerationEnvironmentBase
-{
-}
+    where TEnvironment : IGenerationEnvironmentBase;
 
 public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTypeReferenceService<FileType>
 {

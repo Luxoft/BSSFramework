@@ -1,7 +1,8 @@
 ﻿using System.Runtime.Serialization;
-using Framework.DomainDriven.DAL.Revisions;
 
-namespace Framework.DomainDriven.ServiceModel.Subscriptions;
+using Framework.BLL.Domain.DAL.Revisions;
+
+namespace Framework.BLL.DTOMapping.Domain;
 
 [DataContract(Name = "DomainObjectRevisionInfoDTO{0}")]
 public class DomainObjectRevisionInfoDTO<TIdent> : PropertyRevisionDTOBase

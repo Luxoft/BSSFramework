@@ -1,8 +1,8 @@
 ﻿using System.Runtime.Serialization;
-using Framework.DomainDriven.DAL.Revisions;
-using Framework.DomainDriven.ServiceModel.Subscriptions;
 
-namespace Framework.DomainDriven.ServiceModel.IAD;
+using Framework.BLL.Domain.DAL.Revisions;
+
+namespace Framework.BLL.DTOMapping.Domain;
 
 [DataContract]
 public class DefaultDomainObjectRevisionDTO : DomainObjectRevisionDTO<Guid>

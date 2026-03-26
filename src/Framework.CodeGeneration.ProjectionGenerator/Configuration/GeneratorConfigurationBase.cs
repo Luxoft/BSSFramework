@@ -1,16 +1,19 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
+using Framework.BLL.Domain.Attributes;
+using Framework.BLL.Domain.Fetching;
+using Framework.BLL.Domain.Persistent.Attributes;
+using Framework.BLL.Domain.Serialization;
+using Framework.BLL.Domain.ServiceRole;
+using Framework.CodeGeneration.Configuration;
+using Framework.CodeGeneration.FileFactory;
+using Framework.CodeGeneration.ProjectionGenerator._Extensions;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Generation.Domain;
-using Framework.DomainDriven.Serialization;
-using Framework.Persistent;
-using Framework.Persistent.Mapping;
+using Framework.Database.Domain;
 using Framework.Projection;
-using Framework.Security;
 
-namespace Framework.DomainDriven.ProjectionGenerator;
+namespace Framework.CodeGeneration.ProjectionGenerator.Configuration;
 
 public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<TEnvironment, FileType>, IGeneratorConfigurationBase<TEnvironment>
         where TEnvironment : class, IGenerationEnvironmentBase

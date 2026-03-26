@@ -3,9 +3,13 @@
   <PropertyGroup>
     <PackageId>Luxoft.Framework.CodeGeneration.DTOGenerator.Audit</PackageId>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
-  
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.CodeGeneration.DTOGenerator.Server\Framework.CodeGeneration.DTOGenerator.Server.csproj" />
+  </ItemGroup>
+
 </Project>

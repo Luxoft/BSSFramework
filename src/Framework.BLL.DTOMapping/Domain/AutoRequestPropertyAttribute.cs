@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.ServiceModel.IAD;
+﻿namespace Framework.BLL.DTOMapping.Domain;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class AutoRequestPropertyAttribute : Attribute

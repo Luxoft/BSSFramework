@@ -1,8 +1,8 @@
 ﻿using System.Runtime.Serialization;
 
-using Framework.DomainDriven.DAL.Revisions;
+using Framework.BLL.Domain.DAL.Revisions;
 
-namespace Framework.DomainDriven.ServiceModel.Subscriptions;
+namespace Framework.BLL.DTOMapping.Domain;
 
 [DataContract]
 public class PropertyRevisionDTOBase

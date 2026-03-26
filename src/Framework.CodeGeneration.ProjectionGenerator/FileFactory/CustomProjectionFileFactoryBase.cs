@@ -2,21 +2,18 @@
 using System.Reflection;
 
 using Framework.CodeDom;
+using Framework.CodeGeneration.FileFactory;
+using Framework.CodeGeneration.ProjectionGenerator._Extensions;
+using Framework.CodeGeneration.ProjectionGenerator.Configuration;
 using Framework.Core;
-using Framework.DomainDriven.Generation.Domain;
 using Framework.Projection;
 
-namespace Framework.DomainDriven.ProjectionGenerator;
+namespace Framework.CodeGeneration.ProjectionGenerator.FileFactory;
 
-public class CustomProjectionFileFactoryBase<TConfiguration> : CodeFileFactory<TConfiguration, FileType>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+public class CustomProjectionFileFactoryBase<TConfiguration>(TConfiguration configuration, Type domainType)
+    : CodeFileFactory<TConfiguration, FileType>(configuration, domainType)
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public CustomProjectionFileFactoryBase(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
-    {
-    }
-
-
     public override FileType FileType { get; } = FileType.CustomProjectionBase;
 
     public override CodeTypeReference BaseReference => this.DomainType.BaseType.ToTypeReference(); // this.Configuration.Environment.GetProjectionBaseType(this.DomainType).ToTypeReference();

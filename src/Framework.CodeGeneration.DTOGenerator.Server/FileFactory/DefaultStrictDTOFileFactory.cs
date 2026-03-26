@@ -5,10 +5,26 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.CodeDom;
+using Framework.CodeGeneration.Configuration;
+using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
+using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
+using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Extensions;
+using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.FileFactory.ClientMapping;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner._Security;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.MainToStrict;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.Server.Members.MapToDomainObject;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.ExpandMaybe;
 using Framework.Core;
-using Framework.DomainDriven.Generation.Domain;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
 
 public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfiguration, DTOFileType>, IClientMappingServiceExternalMethodGenerator
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
@@ -23,7 +39,7 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
 
     public override IPropertyCodeTypeReferenceService CodeTypeReferenceService { get; }
 
-    public override DTOFileType FileType { get; } = DTOGenerator.FileType.StrictDTO;
+    public override DTOFileType FileType { get; } = BaseFileType.StrictDTO;
 
 
     protected override bool HasMapToDomainObjectMethod => this.Configuration.MapToDomainRole.HasFlag(ClientDTORole.Strict);
@@ -86,7 +102,7 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         {
             yield return this.GetIdentityObjectTypeRef();
 
-            if (this.Configuration.GeneratePolicy.Used(this.DomainType, DTOGenerator.FileType.IdentityDTO))
+            if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
             {
                 yield return this.GetIdentityObjectContainerTypeReference();
             }
@@ -121,7 +137,7 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
 
         if (this.IsPersistent())
         {
-            if (this.Configuration.GeneratePolicy.Used(this.DomainType, DTOGenerator.FileType.IdentityDTO))
+            if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
             {
                 yield return this.GetIdentityObjectContainerImplementation();
             }

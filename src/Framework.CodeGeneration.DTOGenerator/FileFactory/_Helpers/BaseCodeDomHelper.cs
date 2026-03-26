@@ -67,14 +67,14 @@ public static class BaseCodeDomHelper
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
-        yield return FileType.FileType.RichDTO;
-        yield return FileType.FileType.FullDTO;
-        yield return FileType.FileType.SimpleDTO;
+        yield return BaseFileType.RichDTO;
+        yield return BaseFileType.FullDTO;
+        yield return BaseFileType.SimpleDTO;
 
         if (source.IsPersistent())
         {
-            yield return FileType.FileType.BaseAuditPersistentDTO;
-            yield return FileType.FileType.BasePersistentDTO;
+            yield return BaseFileType.BaseAuditPersistentDTO;
+            yield return BaseFileType.BasePersistentDTO;
         }
     }
 
@@ -108,7 +108,7 @@ public static class BaseCodeDomHelper
         }
         else
         {
-            var mappingServiceParameter = new CodeParameterDeclarationExpression(source.Configuration.GetCodeTypeReference(null, FileType.FileType.ClientDTOMappingServiceInterface), "mappingService");
+            var mappingServiceParameter = new CodeParameterDeclarationExpression(source.Configuration.GetCodeTypeReference(null, BaseFileType.ClientDTOMappingServiceInterface), "mappingService");
             var mappingServiceParameterRefExpr = mappingServiceParameter.ToVariableReferenceExpression();
 
             var mapName = $"Map{sourceFileType.ShortName}To{source.FileType.ShortName}For{source.DomainType.Name}";
@@ -170,7 +170,7 @@ public static class BaseCodeDomHelper
         }
         else
         {
-            var mappingServiceParameter = new CodeParameterDeclarationExpression(fileFactory.Configuration.GetCodeTypeReference(null, FileType.FileType.ClientDTOMappingServiceInterface), "mappingService");
+            var mappingServiceParameter = new CodeParameterDeclarationExpression(fileFactory.Configuration.GetCodeTypeReference(null, BaseFileType.ClientDTOMappingServiceInterface), "mappingService");
             var mappingServiceParameterRefExpr = mappingServiceParameter.ToVariableReferenceExpression();
 
             return new CodeConstructor
@@ -208,7 +208,7 @@ public static class BaseCodeDomHelper
         }
         else
         {
-            var mappingServiceParameter = new CodeParameterDeclarationExpression(fileFactory.Configuration.GetCodeTypeReference(null, FileType.FileType.ClientDTOMappingServiceInterface), "mappingService");
+            var mappingServiceParameter = new CodeParameterDeclarationExpression(fileFactory.Configuration.GetCodeTypeReference(null, BaseFileType.ClientDTOMappingServiceInterface), "mappingService");
             var mappingServiceParameterRefExpr = mappingServiceParameter.ToVariableReferenceExpression();
 
             return new CodeConstructor
@@ -230,7 +230,7 @@ public static class BaseCodeDomHelper
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
-        return typeof(IIdentityObjectContainer<>).ToTypeReference(fileFactory.Configuration.GetCodeTypeReference(fileFactory.DomainType.GetProjectionSourceTypeOrSelf(), FileType.FileType.IdentityDTO));
+        return typeof(IIdentityObjectContainer<>).ToTypeReference(fileFactory.Configuration.GetCodeTypeReference(fileFactory.DomainType.GetProjectionSourceTypeOrSelf(), BaseFileType.IdentityDTO));
     }
 
     public static CodeTypeReference GetIdentityObjectTypeReference<TConfiguration>(this IFileFactory<TConfiguration> fileFactory)
@@ -246,7 +246,7 @@ public static class BaseCodeDomHelper
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
-        var identityRef = fileFactory.Configuration.GetCodeTypeReference(fileFactory.DomainType.GetProjectionSourceTypeOrSelf(), FileType.FileType.IdentityDTO);
+        var identityRef = fileFactory.Configuration.GetCodeTypeReference(fileFactory.DomainType.GetProjectionSourceTypeOrSelf(), BaseFileType.IdentityDTO);
         var identityImplRef = typeof(IIdentityObjectContainer<>).ToTypeReference(identityRef);
 
         return new CodeMemberProperty
@@ -285,7 +285,7 @@ public static class BaseCodeDomHelper
     }
 
 
-    public static CodeTypeMember GenerateConvertMethod<TConfiguration>(this IFileFactory<TConfiguration, MainDTOFileType> fileFactory, FileType.FileType fileType)
+    public static CodeTypeMember GenerateConvertMethod<TConfiguration>(this IFileFactory<TConfiguration, MainDTOFileType> fileFactory, BaseFileType fileType)
             where TConfiguration : IGeneratorConfigurationBase<IGenerationEnvironmentBase>
     {
 
@@ -296,7 +296,7 @@ public static class BaseCodeDomHelper
 
         return new CodeMemberMethod
                {
-                       Attributes = fileType != FileType.FileType.StrictDTO ? MemberAttributes.Public | MemberAttributes.Final | MemberAttributes.New
+                       Attributes = fileType != BaseFileType.StrictDTO ? MemberAttributes.Public | MemberAttributes.Final | MemberAttributes.New
                                             : fileFactory.FileType.ToMapToDomainObjectMemberAttributes(),
 
                        Name = "To" + fileType.Name.SkipLast("DTO", true),

@@ -1,30 +1,11 @@
-﻿using Framework.DomainDriven.Serialization;
+﻿using Framework.BLL.Domain.Serialization;
+using Framework.CodeGeneration.DTOGenerator.FileType;
 using Framework.Events;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileType;
 
-public class DomainOperationEventDTOFileType : DTOFileType, IEquatable<DomainOperationEventDTOFileType>
+public record DomainOperationEventDTOFileType(EventOperation EventOperation) : DTOFileType("OperationEventDTO", DTORole.Event)
 {
-    public readonly EventOperation EventOperation;
-
-
-    public DomainOperationEventDTOFileType(EventOperation domainObjectEvent)
-        : base("OperationEventDTO", DTORole.Event)
-    {
-        this.EventOperation = domainObjectEvent ?? throw new ArgumentNullException(nameof(domainObjectEvent));
-    }
-
-
-    public override bool Equals(FileType other)
-    {
-        return this.Equals(other as DomainOperationEventDTOFileType);
-    }
-
-    public virtual bool Equals(DomainOperationEventDTOFileType other)
-    {
-        return base.Equals(other) && this.EventOperation == other.EventOperation;
-    }
-
     public override string ToString()
     {
         return $"{this.Name} ({this.EventOperation.Name})";

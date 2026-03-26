@@ -1,20 +1,19 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
+using Framework.Application.Domain.Attributes;
 using Framework.CodeDom;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security._Base;
 using Framework.Core;
-using Framework.Persistent;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.SecurityToDomainObject;
 
-public abstract class MaybeSecurityToDomainObjectPropertyAssigner<TConfiguration> : SecurityServerPropertyAssigner<TConfiguration>
+public abstract class MaybeSecurityToDomainObjectPropertyAssigner<TConfiguration>(IPropertyAssigner<TConfiguration> innerAssigner)
+    : SecurityServerPropertyAssigner<TConfiguration>(innerAssigner)
     where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    protected MaybeSecurityToDomainObjectPropertyAssigner(IPropertyAssigner<TConfiguration> innerAssigner)
-        : base(innerAssigner)
-    {
-    }
-
     protected abstract CodeStatement GetSecurityAssignStatementInternal(PropertyInfo property, CodeExpression justValueRefExpr, CodeStatement innerAssignStatement);
 
     protected sealed override CodeStatement GetSecurityAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef)

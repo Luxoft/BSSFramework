@@ -8,19 +8,15 @@ using Framework.CodeDom;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
+using Framework.CodeGeneration.DTOGenerator.FileType;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
 using Framework.Core;
 
 namespace Framework.CodeGeneration.DTOGenerator.PropertyAssigner.MainToStrict;
 
-public class MainToStrictPropertyAssigner<TConfiguration> : PropertyAssigner<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+public class MainToStrictPropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> source) : PropertyAssigner<TConfiguration>(source)
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public MainToStrictPropertyAssigner(IDTOSource<TConfiguration> source)
-            : base(source)
-    {
-    }
-
     public override CodeStatement GetAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
@@ -31,7 +27,7 @@ public class MainToStrictPropertyAssigner<TConfiguration> : PropertyAssigner<TCo
         {
             if (this.Configuration.IsPersistentObject(property.PropertyType) && !property.IsDetail())
             {
-                var identityTypeRef = this.Configuration.GetCodeTypeReference(property.PropertyType, DTOGenerator.FileType.FileType.IdentityDTO);
+                var identityTypeRef = this.Configuration.GetCodeTypeReference(property.PropertyType, BaseFileType.IdentityDTO);
 
                 return new CodeNotNullConditionStatement(sourcePropertyRef)
                        {
@@ -97,10 +93,10 @@ public class MainToStrictPropertyAssigner<TConfiguration> : PropertyAssigner<TCo
             {
                 var paramRef = param.ToVariableReferenceExpression();
 
-                var body = elementFileType == DTOGenerator.FileType.FileType.StrictDTO
+                var body = elementFileType == BaseFileType.StrictDTO
 
                                    ? (CodeExpression)this.Configuration
-                                                         .GetCodeTypeReference(elementType, DTOGenerator.FileType.FileType.StrictDTO)
+                                                         .GetCodeTypeReference(elementType, BaseFileType.StrictDTO)
                                                          .ToObjectCreateExpression(paramRef)
 
                                    : paramRef.ToPropertyReference(this.Configuration.DTOIdentityPropertyName);

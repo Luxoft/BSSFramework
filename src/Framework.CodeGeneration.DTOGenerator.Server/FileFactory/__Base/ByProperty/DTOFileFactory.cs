@@ -4,12 +4,22 @@ using System.Runtime.Serialization;
 
 using CommonFramework;
 
+using Framework.Application.Domain.Attributes;
+using Framework.BLL.Domain.Dto.MappingObject;
+using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.CodeDom;
+using Framework.CodeGeneration.DomainMetadata;
+using Framework.CodeGeneration.DTOGenerator.Extensions;
+using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Mapping;
+using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 using Framework.Core;
-using Framework.DomainDriven.Generation.Domain;
-using Framework.Persistent;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
 
 public interface IDTOFileFactory<out TConfiguration, out TFileType> : IFileFactory<TConfiguration, TFileType>, IDTOSource<TConfiguration>, IServerMappingServiceExternalMethodGenerator
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
@@ -17,16 +27,11 @@ public interface IDTOFileFactory<out TConfiguration, out TFileType> : IFileFacto
 {
 }
 
-public abstract class DTOFileFactory<TConfiguration, TFileType> : FileFactory<TConfiguration, TFileType>, IDTOFileFactory<TConfiguration, TFileType>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
-        where TFileType : DTOFileType
+public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration configuration, Type domainType)
+    : FileFactory<TConfiguration, TFileType>(configuration, domainType), IDTOFileFactory<TConfiguration, TFileType>
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TFileType : DTOFileType
 {
-    protected DTOFileFactory(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
-    {
-    }
-
-
     protected virtual IPropertyAssigner? MapDomainObjectToMappingObjectPropertyAssigner { get; }
 
     protected virtual IPropertyAssigner? MapMappingObjectToDomainObjectPropertyAssigner { get; }

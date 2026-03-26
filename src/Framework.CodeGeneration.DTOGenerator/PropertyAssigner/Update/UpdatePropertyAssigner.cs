@@ -9,19 +9,15 @@ using Framework.BLL.Domain.Extensions;
 using Framework.CodeDom;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
+using Framework.CodeGeneration.DTOGenerator.FileType;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
 using Framework.Core;
 
 namespace Framework.CodeGeneration.DTOGenerator.PropertyAssigner.Update;
 
-public class UpdatePropertyAssigner<TConfiguration> : PropertyAssigner<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+public class UpdatePropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> source) : PropertyAssigner<TConfiguration>(source)
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public UpdatePropertyAssigner(IDTOSource<TConfiguration> source)
-            : base(source)
-    {
-    }
-
     public CodeExpression MappingServiceRefExpr => new CodeThisReferenceExpression();
 
     public override CodeStatement GetAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef)
@@ -66,7 +62,7 @@ public class UpdatePropertyAssigner<TConfiguration> : PropertyAssigner<TConfigur
 
         var targetElementTypeRef = this.Configuration.GetCodeTypeReference(elementType, targetElementFileType);
 
-        var sourceElementFileType = this.Configuration.GetLayerCodeTypeReferenceService(DTOGenerator.FileType.FileType.StrictDTO).GetCollectionFileType(property);
+        var sourceElementFileType = this.Configuration.GetLayerCodeTypeReferenceService(BaseFileType.StrictDTO).GetCollectionFileType(property);
 
         var sourceElementTypeRef = this.Configuration.GetCodeTypeReference(elementType, sourceElementFileType);
 

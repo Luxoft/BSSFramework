@@ -7,4 +7,10 @@
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.BLL.DTOMapping\Framework.BLL.DTOMapping.csproj" />
+    <ProjectReference Include="..\Framework.CodeGeneration.DTOGenerator\Framework.CodeGeneration.DTOGenerator.csproj" />
+    <ProjectReference Include="..\Framework.CodeGeneration.BLLCoreGenerator\Framework.CodeGeneration.BLLCoreGenerator.csproj" />
+  </ItemGroup>
+
 </Project>

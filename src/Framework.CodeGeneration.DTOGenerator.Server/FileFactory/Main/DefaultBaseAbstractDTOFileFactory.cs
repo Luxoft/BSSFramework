@@ -1,15 +1,15 @@
-﻿namespace Framework.DomainDriven.DTOGenerator.Server;
+﻿using Framework.CodeGeneration.DTOGenerator.FileType;
 
-public class DefaultBaseAbstractDTOFileFactory<TConfiguration> : MainDTOFileFactory<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main.Base;
+
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main;
+
+public class DefaultBaseAbstractDTOFileFactory<TConfiguration>(TConfiguration configuration)
+    : MainDTOFileFactory<TConfiguration>(configuration, configuration.Environment.DomainObjectBaseType)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public DefaultBaseAbstractDTOFileFactory(TConfiguration configuration)
-            : base(configuration, configuration.Environment.DomainObjectBaseType)
-    {
-    }
-
-
-    public override MainDTOFileType FileType { get; } = DTOGenerator.FileType.BaseAbstractDTO;
+    public override MainDTOFileType FileType { get; } = BaseFileType.BaseAbstractDTO;
 
 
     //protected override System.Collections.Generic.IEnumerable<CodeTypeMember> GetMembers()

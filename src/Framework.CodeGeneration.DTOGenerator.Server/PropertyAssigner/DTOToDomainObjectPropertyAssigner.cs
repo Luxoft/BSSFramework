@@ -3,23 +3,24 @@ using System.Reflection;
 
 using CommonFramework;
 
+using Framework.Application.Domain.Attributes;
+using Framework.BLL.Domain.MasterDetails;
+using Framework.BLL.Domain.Serialization;
+using Framework.BLL.Domain.Serialization.Extensions;
 using Framework.CodeDom;
+using Framework.CodeGeneration.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Extensions;
+using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.__Base;
 using Framework.Core;
-using Framework.DomainDriven.Generation.Domain;
-using Framework.DomainDriven.Serialization;
-using Framework.Persistent;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 
-public class DTOToDomainObjectPropertyAssigner<TConfiguration> : ServerPropertyAssigner<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> source) : ServerPropertyAssigner<TConfiguration>(source)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public DTOToDomainObjectPropertyAssigner(IDTOSource<TConfiguration> source)
-            : base(source)
-    {
-    }
-
-
     public override CodeStatement GetAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));

@@ -1,17 +1,17 @@
 ﻿using System.CodeDom;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.FileType;
 
-public class DefaultVisualDTOFileFactory<TConfiguration> : MainDTOFileFactory<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main.Base;
+
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main;
+
+public class DefaultVisualDTOFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : MainDTOFileFactory<TConfiguration>(configuration, domainType)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public DefaultVisualDTOFileFactory(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
-    {
-    }
-
-
-    public override MainDTOFileType FileType { get; } = DTOGenerator.FileType.VisualDTO;
+    public override MainDTOFileType FileType { get; } = BaseFileType.VisualDTO;
 
     protected override bool ConvertToStrict { get; } = false;
 
@@ -23,7 +23,7 @@ public class DefaultVisualDTOFileFactory<TConfiguration> : MainDTOFileFactory<TC
             yield return baseType;
         }
 
-        if (this.Configuration.GeneratePolicy.Used(this.DomainType, DTOGenerator.FileType.IdentityDTO))
+        if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
         {
             yield return this.GetIdentityObjectContainerTypeReference();
         }
@@ -36,7 +36,7 @@ public class DefaultVisualDTOFileFactory<TConfiguration> : MainDTOFileFactory<TC
             yield return baseMember;
         }
 
-        if (this.Configuration.GeneratePolicy.Used(this.DomainType, DTOGenerator.FileType.IdentityDTO))
+        if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
         {
             yield return this.GetIdentityObjectContainerImplementation();
         }

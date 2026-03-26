@@ -1,18 +1,19 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
+using Framework.CodeGeneration.DTOGenerator.FileFactory;
+using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
 
-public class DefaultServerIdentityDTOFileFactory<TConfiguration> : DefaultIdentityDTOFileFactory<TConfiguration>, IDTOFileFactory<TConfiguration, DTOFileType>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+public class DefaultServerIdentityDTOFileFactory<TConfiguration>(TConfiguration configuration, Type domainType)
+    : DefaultIdentityDTOFileFactory<TConfiguration>(configuration, domainType), IDTOFileFactory<TConfiguration, DTOFileType>
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public DefaultServerIdentityDTOFileFactory(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
-    {
-    }
-
-
     public IEnumerable<CodeMemberMethod> GetServerMappingServiceInterfaceMethods()
     {
         yield return this.GetMappingServiceInterfaceToDomainObjectMethod();

@@ -1,7 +1,5 @@
 ﻿using Framework.Application.Domain;
-using Framework.BLL.AccessDeniedExceptionService;
-using Framework.BLL.BLL.Default;
-using Framework.BLL.Context;
+using Framework.BLL.Default;
 using Framework.Events;
 using Framework.QueryLanguage;
 

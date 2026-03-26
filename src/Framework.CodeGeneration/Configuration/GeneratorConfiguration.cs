@@ -15,9 +15,9 @@ namespace Framework.CodeGeneration.Configuration;
 public abstract class GeneratorConfiguration<TEnvironment> : IGeneratorConfiguration<TEnvironment>
         where TEnvironment : class, IGenerationEnvironment
 {
-    private readonly Lazy<ReadOnlyCollection<Type>> _domainTypesLazy;
+    private readonly Lazy<ReadOnlyCollection<Type>> domainTypesLazy;
 
-    private readonly Lazy<string> _defaultNamespaceLazy;
+    private readonly Lazy<string?> defaultNamespaceLazy;
 
     protected GeneratorConfiguration(TEnvironment environment)
     {
@@ -25,9 +25,9 @@ public abstract class GeneratorConfiguration<TEnvironment> : IGeneratorConfigura
 
         this.Environment = environment;
 
-        this._domainTypesLazy = LazyHelper.Create(() => this.GetDomainTypes().OrderBy(x => x.FullName).ToReadOnlyCollection());
+        this.domainTypesLazy = LazyHelper.Create(() => this.GetDomainTypes().OrderBy(x => x.FullName).ToReadOnlyCollection());
 
-        this._defaultNamespaceLazy = LazyHelper.Create(() =>
+        this.defaultNamespaceLazy = LazyHelper.Create(() =>
                                                        {
                                                            var request = from prefix in this.Environment.PersistentDomainObjectBaseType.GetNamespacePrefix().ToMaybe()
                                                                          from postfix in this.NamespacePostfix.ToMaybe()
@@ -39,9 +39,9 @@ public abstract class GeneratorConfiguration<TEnvironment> : IGeneratorConfigura
 
     public TEnvironment Environment { get; }
 
-    public virtual string Namespace => this._defaultNamespaceLazy.Value;
+    public virtual string Namespace => this.defaultNamespaceLazy.Value;
 
-    public IReadOnlyCollection<Type> DomainTypes => this._domainTypesLazy.Value;
+    public IReadOnlyCollection<Type> DomainTypes => this.domainTypesLazy.Value;
 
     protected abstract string NamespacePostfix { get; }
 
@@ -52,14 +52,14 @@ public abstract class GeneratorConfiguration<TEnvironment> : IGeneratorConfigura
 }
 
 public abstract class GeneratorConfiguration<TEnvironment, TFileType> : GeneratorConfiguration<TEnvironment>, IGeneratorConfiguration<TEnvironment, TFileType>
-        where TEnvironment : class, IGenerationEnvironment
+    where TEnvironment : class, IGenerationEnvironment
 {
-    private readonly Lazy<IReadOnlyDictionary<TFileType, ICodeFileFactoryHeader<TFileType>>> _fileFactoryHeadersLazy;
+    private readonly Lazy<IReadOnlyDictionary<TFileType, ICodeFileFactoryHeader<TFileType>>> fileFactoryHeadersLazy;
 
     protected GeneratorConfiguration(TEnvironment environment)
-            : base(environment)
+        : base(environment)
     {
-        this._fileFactoryHeadersLazy = LazyHelper.Create(() => this.GetFileFactoryHeaders().ToReadOnlyDictionaryI(header => header.Type));
+        this.fileFactoryHeadersLazy = LazyHelper.Create(() => this.GetFileFactoryHeaders().ToReadOnlyDictionaryI(header => header.Type));
     }
 
     public virtual Type ExceptionType { get; } = typeof(BusinessLogicException);
@@ -71,7 +71,7 @@ public abstract class GeneratorConfiguration<TEnvironment, TFileType> : Generato
 
     public virtual ICodeFileFactoryHeader? GetFileFactoryHeader(TFileType fileType, bool raiseIfNotFound = true)
     {
-        var res = this._fileFactoryHeadersLazy.Value.GetValueOrDefault(fileType);
+        var res = this.fileFactoryHeadersLazy.Value.GetValueOrDefault(fileType);
 
         if (res == null && raiseIfNotFound)
         {

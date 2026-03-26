@@ -1,4 +1,5 @@
-﻿using Framework.CodeGeneration.DTOGenerator.FileType;
+﻿
+using Framework.CodeGeneration.DTOGenerator.FileType;
 using Framework.CodeGeneration.DTOGenerator.Map;
 using Framework.CodeGeneration.GeneratePolicy;
 
@@ -42,15 +43,15 @@ public class DependencyGeneratePolicy : CachedGeneratePolicy<RoleFileType>
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        if (fileType == FileType.FileType.BaseAbstractDTO)
+        if (fileType == BaseFileType.BaseAbstractDTO)
         {
-            return true;// this._maps.Any(map => (map.FileType == FileType.BasePersistentDTO || map.FileType == FileType.BaseVisualDTO) && this.Used(map.DomainType, map.FileType));
+            return true;// this._maps.Any(map => (map.FileType == BaseFileType.BasePersistentDTO || map.FileType == BaseFileType.BaseVisualDTO) && this.Used(map.DomainType, map.FileType));
         }
-        else if (fileType == FileType.FileType.BasePersistentDTO)
+        else if (fileType == BaseFileType.BasePersistentDTO)
         {
             return true;
         }
-        else if (fileType == FileType.FileType.BaseAuditPersistentDTO)
+        else if (fileType == BaseFileType.BaseAuditPersistentDTO)
         {
             return true;
         }
@@ -58,40 +59,40 @@ public class DependencyGeneratePolicy : CachedGeneratePolicy<RoleFileType>
         {
             return true;
         }
-        else if (fileType == FileType.FileType.ProjectionDTO)
+        else if (fileType == BaseFileType.ProjectionDTO)
         {
-            return this.IsUsedProperty(FileType.FileType.ProjectionDTO, domainType, fileType);
+            return this.IsUsedProperty(BaseFileType.ProjectionDTO, domainType, fileType);
         }
-        else if (fileType == FileType.FileType.StrictDTO)
+        else if (fileType == BaseFileType.StrictDTO)
         {
-            return this.IsUsedProperty(FileType.FileType.StrictDTO, domainType, fileType, true)
-                   || this.Used(domainType, FileType.FileType.UpdateDTO);
+            return this.IsUsedProperty(BaseFileType.StrictDTO, domainType, fileType, true)
+                   || this.Used(domainType, BaseFileType.UpdateDTO);
         }
-        else if (fileType == FileType.FileType.UpdateDTO)
+        else if (fileType == BaseFileType.UpdateDTO)
         {
-            return this.IsUsedProperty(FileType.FileType.UpdateDTO, domainType, fileType, true);
+            return this.IsUsedProperty(BaseFileType.UpdateDTO, domainType, fileType, true);
         }
-        else if (fileType == FileType.FileType.IdentityDTO)
+        else if (fileType == BaseFileType.IdentityDTO)
         {
-            return this.IsUsedProperty(FileType.FileType.StrictDTO, domainType, fileType, false)
-                   || this.IsUsedProperty(FileType.FileType.UpdateDTO, domainType, fileType, false)
-                   || this.IsUsedProperty(FileType.FileType.UpdateDTO, domainType, FileType.FileType.UpdateDTO, true);
+            return this.IsUsedProperty(BaseFileType.StrictDTO, domainType, fileType, false)
+                   || this.IsUsedProperty(BaseFileType.UpdateDTO, domainType, fileType, false)
+                   || this.IsUsedProperty(BaseFileType.UpdateDTO, domainType, BaseFileType.UpdateDTO, true);
         }
-        else if (fileType == FileType.FileType.RichDTO)
+        else if (fileType == BaseFileType.RichDTO)
         {
-            return this.IsUsedProperty(FileType.FileType.RichDTO, domainType, fileType, true);
+            return this.IsUsedProperty(BaseFileType.RichDTO, domainType, fileType, true);
         }
-        else if (fileType == FileType.FileType.FullDTO)
+        else if (fileType == BaseFileType.FullDTO)
         {
-            return this.Used(domainType, FileType.FileType.RichDTO);
+            return this.Used(domainType, BaseFileType.RichDTO);
         }
-        else if (fileType == FileType.FileType.SimpleDTO)
+        else if (fileType == BaseFileType.SimpleDTO)
         {
-            return this.Used(domainType, FileType.FileType.FullDTO)
+            return this.Used(domainType, BaseFileType.FullDTO)
 
-                   || this.IsUsedProperty(FileType.FileType.RichDTO, domainType, fileType, false)
+                   || this.IsUsedProperty(BaseFileType.RichDTO, domainType, fileType, false)
 
-                   || this.IsUsedProperty(FileType.FileType.FullDTO, domainType, fileType, false);
+                   || this.IsUsedProperty(BaseFileType.FullDTO, domainType, fileType, false);
         }
         else
         {

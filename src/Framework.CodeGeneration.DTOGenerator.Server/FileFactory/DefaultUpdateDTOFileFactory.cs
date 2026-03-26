@@ -6,13 +6,29 @@ using System.Runtime.Serialization;
 using CommonFramework;
 using CommonFramework.Maybe;
 
+using Framework.Application.Domain.Attributes;
+using Framework.BLL.Domain.Dto;
+using Framework.BLL.Domain.Extensions;
+using Framework.BLL.Domain.IdentityObject;
 using Framework.CodeDom;
+using Framework.CodeGeneration.Configuration;
+using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
+using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
+using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Extensions;
+using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.FileFactory.ClientMapping;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.Update;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.Server.Members.MapToDomainObject;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 using Framework.Core;
-using Framework.DomainDriven.Generation.Domain;
-using Framework.Persistent;
-using Framework.Transfering;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
 
 public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfiguration, DTOFileType>, IClientMappingServiceExternalMethodGenerator
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
@@ -24,7 +40,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
     }
 
 
-    public override DTOFileType FileType { get; } = DTOGenerator.FileType.UpdateDTO;
+    public override DTOFileType FileType { get; } = BaseFileType.UpdateDTO;
 
     protected override bool HasMapToDomainObjectMethod => this.Configuration.MapToDomainRole.HasFlag(ClientDTORole.Update);
 
@@ -111,7 +127,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         {
             yield return this.GetIdentityObjectTypeRef();
 
-            if (this.Configuration.GeneratePolicy.Used(this.DomainType, DTOGenerator.FileType.IdentityDTO))
+            if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
             {
                 yield return this.GetIdentityObjectContainerTypeReference();
             }
@@ -153,7 +169,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
 
         if (this.IsPersistent())
         {
-            if (this.Configuration.GeneratePolicy.Used(this.DomainType, DTOGenerator.FileType.IdentityDTO))
+            if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
             {
                 yield return this.GetIdentityObjectContainerImplementation();
             }
@@ -245,7 +261,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         var targetParameter = this.CurrentReference.ToParameterDeclarationExpression("target");
         var targetParameterRefExpr = targetParameter.ToVariableReferenceExpression();
 
-        var currentSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, DTOGenerator.FileType.StrictDTO).ToParameterDeclarationExpression("currentSource");
+        var currentSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, BaseFileType.StrictDTO).ToParameterDeclarationExpression("currentSource");
         var currentSourceParameterRefExpr = currentSourceParameter.ToVariableReferenceExpression();
 
         {
@@ -262,7 +278,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         }
 
         {
-            var baseSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, DTOGenerator.FileType.StrictDTO).ToParameterDeclarationExpression("baseSource");
+            var baseSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, BaseFileType.StrictDTO).ToParameterDeclarationExpression("baseSource");
             var baseSourceParameterRefExpr = baseSourceParameter.ToVariableReferenceExpression();
 
             var propertyAssigner = new DiffUpdatePropertyAssigner<TConfiguration>(this);
@@ -284,7 +300,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
     {
         var targetParameter = this.CurrentReference.ToParameterDeclarationExpression("target");
 
-        var currentSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, DTOGenerator.FileType.StrictDTO).ToParameterDeclarationExpression("currentSource");
+        var currentSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, BaseFileType.StrictDTO).ToParameterDeclarationExpression("currentSource");
 
         {
             yield return new CodeMemberMethod
@@ -295,7 +311,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         }
 
         {
-            var baseSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, DTOGenerator.FileType.StrictDTO).ToParameterDeclarationExpression("baseSource");
+            var baseSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, BaseFileType.StrictDTO).ToParameterDeclarationExpression("baseSource");
 
             yield return new CodeMemberMethod
                          {

@@ -4,18 +4,16 @@ using System.Reflection;
 using CommonFramework.Maybe;
 
 using Framework.CodeDom;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security._Base;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.DomainObjectToSecurity;
 
-public abstract class DomainObjectToSecurityPropertyAssignerBase<TConfiguration> : SecurityServerPropertyAssigner<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+public abstract class DomainObjectToSecurityPropertyAssignerBase<TConfiguration>(IPropertyAssigner<TConfiguration> innerAssigner)
+    : SecurityServerPropertyAssigner<TConfiguration>(innerAssigner)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    protected DomainObjectToSecurityPropertyAssignerBase(IPropertyAssigner<TConfiguration> innerAssigner)
-            : base(innerAssigner)
-    {
-    }
-
-
     protected abstract CodeExpression GetCondition(PropertyInfo property, bool isEdit);
 
 

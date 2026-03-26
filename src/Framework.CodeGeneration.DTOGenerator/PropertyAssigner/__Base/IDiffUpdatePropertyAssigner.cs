@@ -11,7 +11,7 @@ public interface IDiffUpdatePropertyAssigner : IDTOSource
     CodeStatement GetAssignStatement(PropertyInfo property, CodeExpression baseSourcePropertyRef, CodeExpression currentSourcePropertyRef, CodeExpression targetPropertyRef);
 }
 
-public interface IIDiffUpdatePropertyAssigner<out TConfiguration> : IDTOSource<TConfiguration>, IDiffUpdatePropertyAssigner
+public interface IiDiffUpdatePropertyAssigner<out TConfiguration> : IDTOSource<TConfiguration>, IDiffUpdatePropertyAssigner
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
 }

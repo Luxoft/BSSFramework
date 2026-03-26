@@ -3,7 +3,20 @@ using System.Reflection;
 
 using CommonFramework;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
+using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
+using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.Server.Members.MapToDomainObject;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
+
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main.Base;
 
 public abstract class MainDTOFileFactory<TConfiguration> : DTOFileFactory<TConfiguration, MainDTOFileType>
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
@@ -20,7 +33,7 @@ public abstract class MainDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
     public override IPropertyCodeTypeReferenceService CodeTypeReferenceService { get; }
 
 
-    public override CodeTypeReference BaseReference => this.BaseType.Maybe(baseType => this.Configuration.GetCodeTypeReference(this.DomainType, baseType));
+    public override CodeTypeReference? BaseReference => this.BaseType.Maybe(baseType => this.Configuration.GetCodeTypeReference(this.DomainType, baseType));
 
 
     protected override IPropertyAssigner MapDomainObjectToMappingObjectPropertyAssigner => this.Configuration.PropertyAssignerConfigurator.GetDomainObjectToSecurityPropertyAssigner(new DomainObjectToDTOPropertyAssigner<TConfiguration>(this));
@@ -85,9 +98,9 @@ public abstract class MainDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         {
             if (this.ConvertToStrict)
             {
-                if (this.Configuration.GeneratePolicy.Used(this.DomainType, DTOGenerator.FileType.StrictDTO))
+                if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.StrictDTO))
                 {
-                    yield return this.GenerateConvertMethod(DTOGenerator.FileType.StrictDTO);
+                    yield return this.GenerateConvertMethod(BaseFileType.StrictDTO);
                 }
             }
 

@@ -1,18 +1,19 @@
 ﻿using System.Reflection;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
+using Framework.CodeGeneration.DTOGenerator.FileType;
 
-public class CryptCodeTypeReferenceService<TConfiguration> : DynamicCodeTypeReferenceService<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+
+namespace Framework.CodeGeneration.DTOGenerator.Server.CodeTypeReferenceService;
+
+public class CryptCodeTypeReferenceService<TConfiguration>(
+    TConfiguration configuration,
+    RoleFileType referenceFileType,
+    RoleFileType collectionFileType)
+    : DynamicCodeTypeReferenceService<TConfiguration>(configuration, referenceFileType, collectionFileType)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public CryptCodeTypeReferenceService(
-            TConfiguration configuration,
-            RoleFileType referenceFileType,
-            RoleFileType collectionFileType)
-            : base(configuration, referenceFileType, collectionFileType)
-    {
-    }
-
     public override bool IsOptional(PropertyInfo property)
     {
         return false;

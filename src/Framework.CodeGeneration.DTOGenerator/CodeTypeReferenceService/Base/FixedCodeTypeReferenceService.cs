@@ -8,11 +8,11 @@ namespace Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 public class FixedCodeTypeReferenceService<TConfiguration> : LayerCodeTypeReferenceService<TConfiguration>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    private readonly RoleFileType _referenceFileType;
+    private readonly RoleFileType referenceFileType;
 
-    private readonly RoleFileType _collectionFileType;
+    private readonly RoleFileType collectionFileType;
 
-    private readonly bool _enabledSecurity;
+    private readonly bool enabledSecurity;
 
 
     public FixedCodeTypeReferenceService(TConfiguration configuration, RoleFileType referenceFileType, RoleFileType collectionFileType, bool enabledSecurity = true)
@@ -21,24 +21,24 @@ public class FixedCodeTypeReferenceService<TConfiguration> : LayerCodeTypeRefere
         if (referenceFileType == null) throw new ArgumentNullException(nameof(referenceFileType));
         if (collectionFileType == null) throw new ArgumentNullException(nameof(collectionFileType));
 
-        this._referenceFileType = referenceFileType;
-        this._collectionFileType = collectionFileType;
-        this._enabledSecurity = enabledSecurity;
+        this.referenceFileType = referenceFileType;
+        this.collectionFileType = collectionFileType;
+        this.enabledSecurity = enabledSecurity;
     }
 
 
     public override bool IsOptional(PropertyInfo property)
     {
-        return this._enabledSecurity && base.IsOptional(property);
+        return this.enabledSecurity && base.IsOptional(property);
     }
 
     public override RoleFileType GetReferenceFileType(PropertyInfo _)
     {
-        return this._referenceFileType;
+        return this.referenceFileType;
     }
 
     public override RoleFileType GetCollectionFileType(PropertyInfo _)
     {
-        return this._collectionFileType;
+        return this.collectionFileType;
     }
 }

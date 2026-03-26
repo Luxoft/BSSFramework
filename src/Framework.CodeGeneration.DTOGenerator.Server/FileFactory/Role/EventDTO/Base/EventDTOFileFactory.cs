@@ -1,4 +1,10 @@
-﻿namespace Framework.DomainDriven.DTOGenerator.Server;
+﻿using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
+using Framework.CodeGeneration.DTOGenerator.Server.CodeTypeReferenceService;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role._Base;
+using Framework.CodeGeneration.DTOGenerator.Server.FileType;
+
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.EventDTO.Base;
 
 public abstract class EventDTOFileFactory<TConfiguration> : RoleDTOFileFactory<TConfiguration>
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>

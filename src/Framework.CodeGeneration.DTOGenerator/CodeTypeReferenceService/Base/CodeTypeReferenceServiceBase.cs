@@ -7,22 +7,10 @@ using Framework.CodeGeneration.DTOGenerator.FileType;
 
 namespace Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 
-public interface ICodeTypeReferenceService
+public abstract class CodeTypeReferenceService<TConfiguration>(TConfiguration configuration)
+    : GeneratorConfigurationContainer<TConfiguration>(configuration), ICodeTypeReferenceService
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    CodeTypeReference GetCodeTypeReferenceByType(Type type);
-
-    RoleFileType GetFileType(PropertyInfo property);
-}
-
-public abstract class CodeTypeReferenceService<TConfiguration> : GeneratorConfigurationContainer<TConfiguration>, ICodeTypeReferenceService
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
-{
-    protected CodeTypeReferenceService(TConfiguration configuration)
-            : base(configuration)
-    {
-    }
-
-
     public virtual CodeTypeReference GetCodeTypeReferenceByType(Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));

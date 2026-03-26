@@ -6,15 +6,16 @@ using CommonFramework;
 
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.CodeGeneration.DTOGenerator.FileType;
 using Framework.CodeGeneration.FileFactory;
 
 namespace Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 
 public abstract class FileFactory<TConfiguration, TFileType> : CodeFileFactory<TConfiguration, TFileType>, IFileFactory<TConfiguration, TFileType>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
-        where TFileType : FileType.FileType
+        where TFileType : BaseFileType
 {
-    protected FileFactory(TConfiguration configuration, Type domainType)
+    protected FileFactory(TConfiguration configuration, Type? domainType)
             : base(configuration, domainType)
     {
         this.CodeTypeReferenceService = new PropertyCodeTypeReferenceService<TConfiguration>(this.Configuration);

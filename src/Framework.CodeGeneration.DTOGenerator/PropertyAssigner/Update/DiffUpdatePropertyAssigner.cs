@@ -30,15 +30,15 @@ public class DiffUpdatePropertyAssigner<TConfiguration> : GeneratorConfiguration
     {
         this.DomainType = domainType ?? throw new ArgumentNullException(nameof(domainType));
 
-        this.UpdateCodeTypeReferenceService = this.Configuration.GetLayerCodeTypeReferenceService(DTOGenerator.FileType.FileType.UpdateDTO);
+        this.UpdateCodeTypeReferenceService = this.Configuration.GetLayerCodeTypeReferenceService(BaseFileType.UpdateDTO);
 
-        this.StrictCodeTypeReferenceService = this.Configuration.GetLayerCodeTypeReferenceService(DTOGenerator.FileType.FileType.StrictDTO);
+        this.StrictCodeTypeReferenceService = this.Configuration.GetLayerCodeTypeReferenceService(BaseFileType.StrictDTO);
     }
 
 
     public Type DomainType { get; }
 
-    public DTOFileType FileType { get; } = DTOGenerator.FileType.FileType.UpdateDTO;
+    public DTOFileType FileType { get; } = BaseFileType.UpdateDTO;
 
     protected ILayerCodeTypeReferenceService UpdateCodeTypeReferenceService { get; }
 

@@ -1,10 +1,12 @@
-using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Generation.Domain;
-using Framework.Projection;
-using Framework.Transfering;
+﻿using Framework.BLL.Domain.Dto;
+using Framework.BLL.Domain.ServiceRole;
+using Framework.CodeGeneration.DTOGenerator.FileType;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+using Framework.CodeGeneration.GeneratePolicy;
+using Framework.Core;
+using Framework.Projection;
+
+namespace Framework.CodeGeneration.DTOGenerator.Server.GeneratePolicy;
 
 public class AttributeGeneratePolicy : IGeneratePolicy<RoleFileType>
 {
@@ -18,37 +20,37 @@ public class AttributeGeneratePolicy : IGeneratePolicy<RoleFileType>
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        if (fileType == FileType.StrictDTO)
+        if (fileType == BaseFileType.StrictDTO)
         {
             return domainType.HasAttribute<BLLSaveRoleAttribute>(attr => attr.SaveType.HasFlag(BLLSaveType.Save));
         }
-        else if (fileType == FileType.UpdateDTO)
+        else if (fileType == BaseFileType.UpdateDTO)
         {
             return domainType.HasAttribute<BLLSaveRoleAttribute>(attr => attr.SaveType.HasFlag(BLLSaveType.Update));
         }
-        else if (fileType == FileType.RichDTO)
+        else if (fileType == BaseFileType.RichDTO)
         {
             return domainType.HasAttribute<BLLViewRoleAttribute>(attr => attr.All.Contains(MainDTOType.RichDTO));
         }
-        else if (fileType == FileType.FullDTO)
+        else if (fileType == BaseFileType.FullDTO)
         {
             return domainType.HasAttribute<BLLViewRoleAttribute>(attr => attr.All.Contains(MainDTOType.FullDTO));
         }
-        else if (fileType == FileType.SimpleDTO)
+        else if (fileType == BaseFileType.SimpleDTO)
         {
             return domainType.HasAttribute<BLLViewRoleAttribute>(attr => attr.All.Contains(MainDTOType.SimpleDTO));
         }
-        else if (fileType == FileType.VisualDTO)
+        else if (fileType == BaseFileType.VisualDTO)
         {
             return domainType.HasAttribute<BLLViewRoleAttribute>(attr => attr.All.Contains(MainDTOType.VisualDTO));
         }
-        else if (fileType == FileType.IdentityDTO)
+        else if (fileType == BaseFileType.IdentityDTO)
         {
             return domainType.HasAttribute<BLLSaveRoleAttribute>()
                    || domainType.HasAttribute<BLLRemoveRoleAttribute>()
                    || domainType.HasAttribute<BLLViewRoleAttribute>();
         }
-        else if (fileType == FileType.ProjectionDTO)
+        else if (fileType == BaseFileType.ProjectionDTO)
         {
             return domainType.IsProjection();
         }

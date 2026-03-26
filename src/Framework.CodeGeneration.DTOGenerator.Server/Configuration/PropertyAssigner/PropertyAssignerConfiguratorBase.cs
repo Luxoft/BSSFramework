@@ -1,19 +1,20 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
-using Framework.DomainDriven.Generation.Domain;
+using Framework.CodeGeneration.Configuration._Container;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.DomainObjectToSecurity;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.ExpandMaybe;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.SecurityToDomainObject.Strict;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.SecurityToDomainObject.Update;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.Configuration.PropertyAssigner;
 
-public abstract class PropertyAssignerConfiguratorBase<TConfiguration> : GeneratorConfigurationContainer<TConfiguration>, IPropertyAssignerConfigurator
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+public abstract class PropertyAssignerConfiguratorBase<TConfiguration>(TConfiguration configuration)
+    : GeneratorConfigurationContainer<TConfiguration>(configuration), IPropertyAssignerConfigurator
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    protected PropertyAssignerConfiguratorBase(TConfiguration configuration)
-            : base(configuration)
-    {
-    }
-
-
     protected abstract CodeExpression GetPropertyHasAccessCondition(IServerPropertyAssigner propertyAssigner, PropertyInfo property, bool isEdit);
 
 
@@ -46,77 +47,57 @@ public abstract class PropertyAssignerConfiguratorBase<TConfiguration> : Generat
     }
 
 
-    private class DomainObjectToSecurityPropertyAssigner : DomainObjectToSecurityPropertyAssignerBase<TConfiguration>
+    private class DomainObjectToSecurityPropertyAssigner(
+        IPropertyAssigner<TConfiguration> innerAssigner,
+        PropertyAssignerConfiguratorBase<TConfiguration> propertyAssignerConfigurator)
+        : DomainObjectToSecurityPropertyAssignerBase<TConfiguration>(innerAssigner)
     {
-        private readonly PropertyAssignerConfiguratorBase<TConfiguration> _propertyAssignerConfigurator;
-
-
-        public DomainObjectToSecurityPropertyAssigner(IPropertyAssigner<TConfiguration> innerAssigner, PropertyAssignerConfiguratorBase<TConfiguration> propertyAssignerConfigurator)
-                : base(innerAssigner)
-        {
-            this._propertyAssignerConfigurator = propertyAssignerConfigurator ?? throw new ArgumentNullException(nameof(propertyAssignerConfigurator));
-        }
-
+        private readonly PropertyAssignerConfiguratorBase<TConfiguration> propertyAssignerConfigurator = propertyAssignerConfigurator ?? throw new ArgumentNullException(nameof(propertyAssignerConfigurator));
 
         protected override CodeExpression GetCondition(PropertyInfo property, bool isEdit)
         {
-            return this._propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, isEdit);
+            return this.propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, isEdit);
         }
     }
 
-    private class UpdateToDomainObjectPropertyAssigner : UpdateToDomainObjectPropertyAssignerBase<TConfiguration>
+    private class UpdateToDomainObjectPropertyAssigner(
+        IPropertyAssigner<TConfiguration> innerAssigner,
+        PropertyAssignerConfiguratorBase<TConfiguration> propertyAssignerConfigurator)
+        : UpdateToDomainObjectPropertyAssignerBase<TConfiguration>(innerAssigner, propertyAssignerConfigurator.Configuration)
     {
-        private readonly PropertyAssignerConfiguratorBase<TConfiguration> _propertyAssignerConfigurator;
-
-
-        public UpdateToDomainObjectPropertyAssigner(IPropertyAssigner<TConfiguration> innerAssigner, PropertyAssignerConfiguratorBase<TConfiguration> propertyAssignerConfigurator)
-                : base(innerAssigner, propertyAssignerConfigurator.Configuration)
-        {
-            this._propertyAssignerConfigurator = propertyAssignerConfigurator ?? throw new ArgumentNullException(nameof(propertyAssignerConfigurator));
-        }
-
+        private readonly PropertyAssignerConfiguratorBase<TConfiguration> propertyAssignerConfigurator = propertyAssignerConfigurator ?? throw new ArgumentNullException(nameof(propertyAssignerConfigurator));
 
         protected override CodeExpression GetCondition(PropertyInfo property)
         {
-            return this._propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, true);
+            return this.propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, true);
         }
     }
 
 
-    private class StrictToDomainObjectPropertyAssigner : StrictToDomainObjectPropertyAssignerBase<TConfiguration>
+    private class StrictToDomainObjectPropertyAssigner(
+        IPropertyAssigner<TConfiguration> innerAssigner,
+        PropertyAssignerConfiguratorBase<TConfiguration> propertyAssignerConfigurator)
+        : StrictToDomainObjectPropertyAssignerBase<TConfiguration>(innerAssigner)
     {
-        private readonly PropertyAssignerConfiguratorBase<TConfiguration> _propertyAssignerConfigurator;
-
-
-        public StrictToDomainObjectPropertyAssigner(IPropertyAssigner<TConfiguration> innerAssigner, PropertyAssignerConfiguratorBase<TConfiguration> propertyAssignerConfigurator)
-                : base(innerAssigner)
-        {
-            this._propertyAssignerConfigurator = propertyAssignerConfigurator ?? throw new ArgumentNullException(nameof(propertyAssignerConfigurator));
-        }
-
+        private readonly PropertyAssignerConfiguratorBase<TConfiguration> propertyAssignerConfigurator = propertyAssignerConfigurator ?? throw new ArgumentNullException(nameof(propertyAssignerConfigurator));
 
         protected override CodeExpression GetCondition(PropertyInfo property)
         {
-            return this._propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, true);
+            return this.propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, true);
         }
     }
 
 
-    private class ExpandMaybeSecurityToDomainObjectPropertyAssigner : ExpandMaybeSecurityToDomainObjectPropertyAssignerBase<TConfiguration>
+    private class ExpandMaybeSecurityToDomainObjectPropertyAssigner(
+        IPropertyAssigner<TConfiguration> innerAssigner,
+        PropertyAssignerConfiguratorBase<TConfiguration> propertyAssignerConfigurator)
+        : ExpandMaybeSecurityToDomainObjectPropertyAssignerBase<TConfiguration>(innerAssigner)
     {
-        private readonly PropertyAssignerConfiguratorBase<TConfiguration> _propertyAssignerConfigurator;
-
-
-        public ExpandMaybeSecurityToDomainObjectPropertyAssigner(IPropertyAssigner<TConfiguration> innerAssigner, PropertyAssignerConfiguratorBase<TConfiguration> propertyAssignerConfigurator)
-                : base(innerAssigner)
-        {
-            this._propertyAssignerConfigurator = propertyAssignerConfigurator ?? throw new ArgumentNullException(nameof(propertyAssignerConfigurator));
-        }
-
+        private readonly PropertyAssignerConfiguratorBase<TConfiguration> propertyAssignerConfigurator = propertyAssignerConfigurator ?? throw new ArgumentNullException(nameof(propertyAssignerConfigurator));
 
         protected override CodeExpression GetCondition(PropertyInfo property)
         {
-            return this._propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, true);
+            return this.propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, true);
         }
     }
 }

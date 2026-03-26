@@ -5,54 +5,43 @@ using Framework.CodeGeneration.GeneratePolicy;
 
 namespace Framework.CodeGeneration.DTOGenerator.GeneratePolicy;
 
-public class DTORoleGeneratePolicy : IGeneratePolicy<RoleFileType>
+public class DTORoleGeneratePolicy(DTORole filter, ClientDTORole clientFilter = ClientDTORole.Main | ClientDTORole.Strict | ClientDTORole.Projection)
+    : IGeneratePolicy<RoleFileType>
 {
-    private readonly DTORole _filter;
-
-    private readonly ClientDTORole _clientFilter;
-
-
-    public DTORoleGeneratePolicy(DTORole filter, ClientDTORole clientFilter = ClientDTORole.Main | ClientDTORole.Strict | ClientDTORole.Projection)
-    {
-        this._filter = filter;
-        this._clientFilter = clientFilter;
-    }
-
-
     public bool Used(Type domainType, RoleFileType fileType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        if (fileType is IMainDTOFileType)
+        if (fileType is MainDTOFileType)
         {
-            if (!this._clientFilter.HasFlag(ClientDTORole.Main))
+            if (!clientFilter.HasFlag(ClientDTORole.Main))
             {
                 return false;
             }
         }
-        else if (fileType == FileType.FileType.StrictDTO)
+        else if (fileType == BaseFileType.StrictDTO)
         {
-            if (!this._clientFilter.HasFlag(ClientDTORole.Strict))
+            if (!clientFilter.HasFlag(ClientDTORole.Strict))
             {
                 return false;
             }
         }
-        else if (fileType == FileType.FileType.UpdateDTO)
+        else if (fileType == BaseFileType.UpdateDTO)
         {
-            if (!this._clientFilter.HasFlag(ClientDTORole.Update))
+            if (!clientFilter.HasFlag(ClientDTORole.Update))
             {
                 return false;
             }
         }
-        else if (fileType == FileType.FileType.ProjectionDTO)
+        else if (fileType == BaseFileType.ProjectionDTO)
         {
-            if (!this._clientFilter.HasFlag(ClientDTORole.Projection))
+            if (!clientFilter.HasFlag(ClientDTORole.Projection))
             {
                 return false;
             }
         }
 
-        return this._filter.HasFlag(fileType.Role);
+        return filter.HasFlag(fileType.Role);
     }
 }

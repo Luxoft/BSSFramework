@@ -1,6 +1,6 @@
 ﻿using System.CodeDom;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Mapping;
 
 public interface IServerMappingServiceExternalMethodGenerator
 {

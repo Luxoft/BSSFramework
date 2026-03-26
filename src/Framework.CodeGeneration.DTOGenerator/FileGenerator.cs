@@ -8,16 +8,9 @@ using Framework.Projection;
 
 namespace Framework.CodeGeneration.DTOGenerator;
 
-public abstract class FileGenerator<TConfiguration> : CodeFileGenerator<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+public abstract class FileGenerator<TConfiguration>(TConfiguration configuration) : CodeFileGenerator<TConfiguration>(configuration)
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    protected FileGenerator(TConfiguration configuration)
-            : base(configuration)
-    {
-    }
-
-
-
     protected virtual ICodeFileFactory<DTOFileType> GetIdentityDTOFileFactory(Type domainType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));

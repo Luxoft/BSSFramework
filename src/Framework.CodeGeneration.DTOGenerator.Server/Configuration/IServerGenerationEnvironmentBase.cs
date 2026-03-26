@@ -1,3 +1,5 @@
-﻿namespace Framework.DomainDriven.DTOGenerator.Server;
+﻿using Framework.CodeGeneration.DTOGenerator.Configuration;
 
-public interface IServerGenerationEnvironmentBase : IGenerationEnvironmentBase, BLLCoreGenerator.IGeneratorConfigurationContainer;
+namespace Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+
+public interface IServerGenerationEnvironmentBase : IGenerationEnvironmentBase, BLLCoreGenerator.Configuration.IGeneratorConfigurationContainer;

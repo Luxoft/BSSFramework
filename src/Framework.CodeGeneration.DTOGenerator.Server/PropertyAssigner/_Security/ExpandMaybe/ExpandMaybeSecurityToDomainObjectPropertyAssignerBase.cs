@@ -1,20 +1,18 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
+using Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
 using Framework.CodeDom;
-using Framework.Exceptions;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security._Base;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.ExpandMaybe;
 
-public abstract class ExpandMaybeSecurityToDomainObjectPropertyAssignerBase<TConfiguration> : SecurityServerPropertyAssigner<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+public abstract class ExpandMaybeSecurityToDomainObjectPropertyAssignerBase<TConfiguration>(IPropertyAssigner<TConfiguration> innerAssigner)
+    : SecurityServerPropertyAssigner<TConfiguration>(innerAssigner)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    protected ExpandMaybeSecurityToDomainObjectPropertyAssignerBase(IPropertyAssigner<TConfiguration> innerAssigner)
-            : base(innerAssigner)
-    {
-    }
-
-
     protected abstract CodeExpression GetCondition(PropertyInfo property);
 
     protected override CodeStatement GetSecurityAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef)

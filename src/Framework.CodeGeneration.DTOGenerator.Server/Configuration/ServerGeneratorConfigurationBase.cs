@@ -5,70 +5,86 @@ using System.Reflection;
 using CommonFramework;
 using CommonFramework.DictionaryCache;
 
+using Framework.Application.Domain.Attributes;
+using Framework.BLL.Domain.Attributes;
+using Framework.BLL.Domain.Dto;
+using Framework.BLL.Domain.IdentityObject;
+using Framework.BLL.Domain.Serialization;
+using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom;
+using Framework.CodeGeneration.Configuration;
+using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
+using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.Map;
+using Framework.CodeGeneration.DTOGenerator.Server.CodeTypeReferenceService;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration.PropertyAssigner;
+using Framework.CodeGeneration.DTOGenerator.Server.FileType;
+using Framework.CodeGeneration.FileFactory;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Generation.Domain;
-using Framework.DomainDriven.Serialization;
 using Framework.Events;
-using Framework.Persistent;
 using Framework.Projection;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 
 public abstract class ServerGeneratorConfigurationBase<TEnvironment> : GeneratorConfigurationBase<TEnvironment>, IServerGeneratorConfigurationBase<TEnvironment>
-        where TEnvironment : class, IServerGenerationEnvironmentBase
+    where TEnvironment : class, IServerGenerationEnvironmentBase
 {
-    private readonly Lazy<ReadOnlyCollection<DTOFileType>> _lazyLambdaConvertTypes;
+    private readonly Lazy<ReadOnlyCollection<DTOFileType>> lazyLambdaConvertTypes;
 
-    private readonly IDictionaryCache<Tuple<Type, DTOFileType, bool>, ReadOnlyCollection<Type>> _domainTypeDetailsCache;
+    private readonly IDictionaryCache<Tuple<Type, DTOFileType, bool>, ReadOnlyCollection<Type>> domainTypeDetailsCache;
 
-    private readonly IDictionaryCache<Tuple<Type, DTOFileType, bool>, ReadOnlyCollection<Type>> _domainTypeMastersCache;
+    private readonly IDictionaryCache<Tuple<Type, DTOFileType, bool>, ReadOnlyCollection<Type>> domainTypeMastersCache;
 
 
     protected ServerGeneratorConfigurationBase(TEnvironment environment)
-            : base(environment)
+        : base(environment)
     {
-        this._lazyLambdaConvertTypes = LazyHelper.Create(() => this.GetLambdaConvertTypes().ToReadOnlyCollection());
+        this.lazyLambdaConvertTypes = LazyHelper.Create(() => this.GetLambdaConvertTypes().ToReadOnlyCollection());
 
 
         this.PropertyAssignerConfigurator = LazyInterfaceImplementHelper.CreateProxy(this.GetPropertyAssignerConfigurator);
 
 
-        this._domainTypeDetailsCache = new DictionaryCache<Tuple<Type, DTOFileType, bool>, ReadOnlyCollection<Type>>(t => t.Pipe((domainType, fileType, isWritable) =>
-                                                                                                                                     {
-                                                                                                                                         var request = from property in this.GetDomainTypeProperties(domainType, fileType, isWritable)
+        this.domainTypeDetailsCache = new DictionaryCache<Tuple<Type, DTOFileType, bool>, ReadOnlyCollection<Type>>(t => t.Pipe((domainType, fileType, isWritable) =>
+        {
+            var request = from property in this.GetDomainTypeProperties(domainType, fileType, isWritable)
 
-                                                                                                                                                       where this.IsCollectionProperty(property) || (property.IsDetail() && this.IsReferenceProperty(property))
+                          where this.IsCollectionProperty(property) || (property.IsDetail() && this.IsReferenceProperty(property))
 
-                                                                                                                                                       let elementType = property.PropertyType.GetCollectionElementType() ?? property.PropertyType
+                          let elementType = property.PropertyType.GetCollectionElementType() ?? property.PropertyType
 
-                                                                                                                                                       where this.IsPersistentObject(elementType)
+                          where this.IsPersistentObject(elementType)
 
-                                                                                                                                                       select elementType;
+                          select elementType;
 
-                                                                                                                                         return request.ToReadOnlyCollection();
-                                                                                                                                     })).WithLock();
+            return request.ToReadOnlyCollection();
+        })).WithLock();
 
-        this._domainTypeMastersCache = new DictionaryCache<Tuple<Type, DTOFileType, bool>, ReadOnlyCollection<Type>>(t => t.Pipe((domainType, fileType, isWritable) =>
-                                                                                                                                     {
-                                                                                                                                         var request = from masterDomainType in this.DomainTypes
+        this.domainTypeMastersCache = new DictionaryCache<Tuple<Type, DTOFileType, bool>, ReadOnlyCollection<Type>>(t => t.Pipe((domainType, fileType, isWritable) =>
+        {
+            var request = from masterDomainType in this.DomainTypes
 
-                                                                                                                                                       where !masterDomainType.IsProjection()
+                          where !masterDomainType.IsProjection()
 
-                                                                                                                                                       where this.GetDomainTypeDetails(masterDomainType, fileType, isWritable).Contains(domainType)
+                          where this.GetDomainTypeDetails(masterDomainType, fileType, isWritable).Contains(domainType)
 
-                                                                                                                                                       select masterDomainType;
+                          select masterDomainType;
 
-                                                                                                                                         return request.ToReadOnlyCollection<Type>();
-                                                                                                                                     })).WithLock();
+            return request.ToReadOnlyCollection<Type>();
+        })).WithLock();
 
 
-        this.ServerDTOMappingServiceInterfaceFileFactoryHeader = ServerFileType.ServerDTOMappingServiceInterface.ToHeader("", _ => "I" + this.Environment.TargetSystemName + "DTOMappingService");
+        this.ServerDTOMappingServiceInterfaceFileFactoryHeader =
+            ServerFileType.ServerDTOMappingServiceInterface.ToHeader("", _ => "I" + this.Environment.TargetSystemName + "DTOMappingService");
 
-        this.ServerPrimitiveDTOMappingServiceFileFactoryHeader = ServerFileType.ServerPrimitiveDTOMappingService.ToHeader("", _ => this.Environment.TargetSystemName + ServerFileType.ServerPrimitiveDTOMappingService);
+        this.ServerPrimitiveDTOMappingServiceFileFactoryHeader = ServerFileType.ServerPrimitiveDTOMappingService.ToHeader(
+            "",
+            _ => this.Environment.TargetSystemName + ServerFileType.ServerPrimitiveDTOMappingService);
 
-        this.ServerPrimitiveDTOMappingServiceBaseFileFactoryHeader = ServerFileType.ServerPrimitiveDTOMappingServiceBase.ToHeader("", _ => this.Environment.TargetSystemName + ServerFileType.ServerPrimitiveDTOMappingServiceBase);
+        this.ServerPrimitiveDTOMappingServiceBaseFileFactoryHeader = ServerFileType.ServerPrimitiveDTOMappingServiceBase.ToHeader(
+            "",
+            _ => this.Environment.TargetSystemName + ServerFileType.ServerPrimitiveDTOMappingServiceBase);
 
 
         this.VersionType = this.Environment.AuditPersistentDomainObjectBaseType.GetInterfaceImplementationArgument(typeof(IVersionObject<>)) ?? typeof(Ignore);
@@ -101,23 +117,28 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
     public PropertyInfo VersionProperty { get; }
 
 
-    protected virtual ICodeFileFactoryHeader<FileType> LambdaHelperFileFactoryHeader { get; } = ServerFileType.LambdaHelper.ToHeader(@"Helpers\", _ => ServerFileType.LambdaHelper.Name);
+    protected virtual ICodeFileFactoryHeader<BaseFileType> LambdaHelperFileFactoryHeader { get; } =
+        ServerFileType.LambdaHelper.ToHeader(@"Helpers\", _ => ServerFileType.LambdaHelper.Name);
 
-    protected virtual ICodeFileFactoryHeader<FileType> ServerDTOMappingServiceInterfaceFileFactoryHeader { get; }
+    protected virtual ICodeFileFactoryHeader<BaseFileType> ServerDTOMappingServiceInterfaceFileFactoryHeader { get; }
 
-    protected virtual ICodeFileFactoryHeader<FileType> ServerPrimitiveDTOMappingServiceFileFactoryHeader { get; }
+    protected virtual ICodeFileFactoryHeader<BaseFileType> ServerPrimitiveDTOMappingServiceFileFactoryHeader { get; }
 
-    protected virtual ICodeFileFactoryHeader<FileType> ServerPrimitiveDTOMappingServiceBaseFileFactoryHeader { get; }
+    protected virtual ICodeFileFactoryHeader<BaseFileType> ServerPrimitiveDTOMappingServiceBaseFileFactoryHeader { get; }
 
     protected virtual ICodeFileFactoryHeader<RoleFileType> BaseEventDTOFileFactoryHeader { get; } = ServerFileType.BaseEventDTO.ToHeader("", _ => "EventDTOBase");
 
-    protected virtual ICodeFileFactoryHeader<DTOFileType> SimpleEventDTOFileFactoryHeader { get; } = ServerFileType.SimpleEventDTO.ToHeader(@"SimpleEventDTO\", domainType => domainType.Name + "EventSimpleDTO");
+    protected virtual ICodeFileFactoryHeader<DTOFileType> SimpleEventDTOFileFactoryHeader { get; } =
+        ServerFileType.SimpleEventDTO.ToHeader(@"SimpleEventDTO\", domainType => domainType.Name + "EventSimpleDTO");
 
-    protected virtual ICodeFileFactoryHeader<FileType> RichEventDTOFileFactoryHeader { get; } = ServerFileType.RichEventDTO.ToHeader(@"RichEventDTO\", domainType => domainType.Name + "EventRichDTO");
+    protected virtual ICodeFileFactoryHeader<BaseFileType> RichEventDTOFileFactoryHeader { get; } =
+        ServerFileType.RichEventDTO.ToHeader(@"RichEventDTO\", domainType => domainType.Name + "EventRichDTO");
 
-    protected virtual ICodeFileFactoryHeader<FileType> SimpleIntegrationDTOFileFactoryHeader { get; } = ServerFileType.SimpleIntegrationDTO.ToHeader(@"SimpleIntegrationDTO\", domainType => domainType.Name + "IntegrationSimpleDTO");
+    protected virtual ICodeFileFactoryHeader<BaseFileType> SimpleIntegrationDTOFileFactoryHeader { get; } =
+        ServerFileType.SimpleIntegrationDTO.ToHeader(@"SimpleIntegrationDTO\", domainType => domainType.Name + "IntegrationSimpleDTO");
 
-    protected virtual ICodeFileFactoryHeader<FileType> RichIntegrationDTOFileFactoryHeader { get; } = ServerFileType.RichIntegrationDTO.ToHeader(@"RichIntegrationDTO\", domainType => domainType.Name + "IntegrationRichDTO");
+    protected virtual ICodeFileFactoryHeader<BaseFileType> RichIntegrationDTOFileFactoryHeader { get; } =
+        ServerFileType.RichIntegrationDTO.ToHeader(@"RichIntegrationDTO\", domainType => domainType.Name + "IntegrationRichDTO");
 
 
     //public virtual DTORole GeneratingRole { get; } = DTORole.All;
@@ -127,7 +148,7 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
 
     public CodeTypeReference BLLContextTypeReference => this.Environment.BLLCore.BLLContextInterfaceTypeReference;
 
-    public ReadOnlyCollection<DTOFileType> LambdaConvertTypes => this._lazyLambdaConvertTypes.Value;
+    public ReadOnlyCollection<DTOFileType> LambdaConvertTypes => this.lazyLambdaConvertTypes.Value;
 
 
 
@@ -177,7 +198,7 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
         }
     }
 
-    public CodeMethodReferenceExpression GetConvertToDTOMethod(Type domainType, FileType fileType)
+    public CodeMethodReferenceExpression GetConvertToDTOMethod(Type domainType, BaseFileType fileType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
@@ -185,7 +206,7 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
         return new CodeMethodReferenceExpression(this.GetCodeTypeReference(null, ServerFileType.LambdaHelper).ToTypeReferenceExpression(), "To" + fileType.Name);
     }
 
-    public CodeMethodReferenceExpression GetConvertToDTOListMethod(Type domainType, FileType fileType)
+    public CodeMethodReferenceExpression GetConvertToDTOListMethod(Type domainType, BaseFileType fileType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
@@ -207,14 +228,14 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
         }
         else
         {
-            return this.GetAllowCreateAttributeType(fileType).Maybe(allowCreateAttr =>
+            return this.TryGetAllowCreateAttributeType(fileType).Maybe(allowCreateAttr =>
 
-                                                                            elementType.GetCustomAttributes(allowCreateAttr, true)
-                                                                                       .OfType<IAllowCreateAttribute>().Any(attr => attr.AllowCreate));
+                                                                        elementType.GetCustomAttributes(allowCreateAttr, true)
+                                                                                   .OfType<IAllowCreateAttribute>().Any(attr => attr.AllowCreate));
         }
     }
 
-    public Type GetAllowCreateAttributeType(DTOFileType fileType)
+    public Type? TryGetAllowCreateAttributeType(DTOFileType fileType)
     {
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
@@ -222,7 +243,7 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
         {
             return typeof(BLLIntegrationSaveRoleAttribute);
         }
-        else if (fileType == FileType.StrictDTO || fileType == FileType.UpdateDTO || fileType is MainDTOFileType)
+        else if (fileType == BaseFileType.StrictDTO || fileType == BaseFileType.UpdateDTO || fileType is MainDTOFileType)
         {
             return typeof(BLLSaveRoleAttribute);
         }
@@ -235,18 +256,18 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
     public virtual CodeAttributeDeclaration GetDTOFileAttribute(Type domainType, RoleFileType fileType)
     {
         var baseAttr = new CodeAttributeDeclaration(
-                                                    typeof(DTOFileTypeAttribute).ToTypeReference(),
-                                                    domainType.ToTypeOfExpression().ToAttributeArgument(),
-                                                    fileType.Name.ToPrimitiveExpression().ToAttributeArgument(),
-                                                    fileType.Role.ToPrimitiveExpression().ToAttributeArgument());
+            typeof(DTOFileTypeAttribute).ToTypeReference(),
+            domainType.ToTypeOfExpression().ToAttributeArgument(),
+            fileType.Name.ToPrimitiveExpression().ToAttributeArgument(),
+            fileType.Role.ToPrimitiveExpression().ToAttributeArgument());
 
-        this.GetDTOFileAttributeExternalData(domainType, fileType)
+        this.TryGetDTOFileAttributeExternalData(domainType, fileType)
             .MaybeString(externalData => baseAttr.Arguments.Add(new CodeAttributeArgument(nameof(DTOFileTypeAttribute.ExternalData), externalData.ToPrimitiveExpression())));
 
         return baseAttr;
     }
 
-    protected virtual string GetDTOFileAttributeExternalData(Type domainType, RoleFileType fileType)
+    protected virtual string? TryGetDTOFileAttributeExternalData(Type domainType, RoleFileType fileType)
     {
         switch (fileType)
         {
@@ -258,7 +279,7 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
         }
     }
 
-    public override ICodeFileFactoryHeader GetFileFactoryHeader(FileType fileType, bool raiseIfNotFound = true)
+    public override ICodeFileFactoryHeader GetFileFactoryHeader(BaseFileType fileType, bool raiseIfNotFound = true)
     {
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
@@ -266,7 +287,10 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
         {
             var eventFileType = fileType as DomainOperationEventDTOFileType;
 
-            return new CodeFileFactoryHeader<DomainOperationEventDTOFileType>(eventFileType, "EventOperation", domainType => $"{domainType.Name}{eventFileType.EventOperation.Name}{DTORole.Event}DTO");
+            return new CodeFileFactoryHeader<DomainOperationEventDTOFileType>(
+                eventFileType,
+                "EventOperation",
+                domainType => $"{domainType.Name}{eventFileType.EventOperation.Name}{DTORole.Event}DTO");
         }
         else
         {
@@ -285,10 +309,10 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
         }
 
         var clientFileType = baseFileType == ServerFileType.SimpleEventDTO || baseFileType == ServerFileType.SimpleIntegrationDTO
-                                     ? FileType.SimpleDTO
-                                     : baseFileType == ServerFileType.RichEventDTO || baseFileType == ServerFileType.RichIntegrationDTO
-                                             ? FileType.RichDTO
-                                             : null;
+                                 ? BaseFileType.SimpleDTO
+                                 : baseFileType == ServerFileType.RichEventDTO || baseFileType == ServerFileType.RichIntegrationDTO
+                                     ? BaseFileType.RichDTO
+                                     : null;
 
         if (clientFileType != null)
         {
@@ -300,25 +324,21 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
         return base.GetInternalDomainTypeProperties(domainType, baseFileType);
     }
 
-    protected override IEnumerable<ICodeFileFactoryHeader<FileType>> GetFileFactoryHeaders()
+    protected override IEnumerable<ICodeFileFactoryHeader<BaseFileType>> GetFileFactoryHeaders()
     {
-        return base.GetFileFactoryHeaders().Concat(new[]
-                                                   {
-                                                           this.BaseEventDTOFileFactoryHeader,
-
-                                                           this.SimpleEventDTOFileFactoryHeader,
-                                                           this.RichEventDTOFileFactoryHeader,
-
-                                                           this.SimpleIntegrationDTOFileFactoryHeader,
-                                                           this.RichIntegrationDTOFileFactoryHeader,
-
-                                                           this.LambdaHelperFileFactoryHeader,
-
-                                                           this.ServerDTOMappingServiceInterfaceFileFactoryHeader,
-
-                                                           this.ServerPrimitiveDTOMappingServiceBaseFileFactoryHeader,
-                                                           this.ServerPrimitiveDTOMappingServiceFileFactoryHeader,
-                                                   });
+        return base.GetFileFactoryHeaders().Concat(
+            new[]
+            {
+                this.BaseEventDTOFileFactoryHeader,
+                this.SimpleEventDTOFileFactoryHeader,
+                this.RichEventDTOFileFactoryHeader,
+                this.SimpleIntegrationDTOFileFactoryHeader,
+                this.RichIntegrationDTOFileFactoryHeader,
+                this.LambdaHelperFileFactoryHeader,
+                this.ServerDTOMappingServiceInterfaceFileFactoryHeader,
+                this.ServerPrimitiveDTOMappingServiceBaseFileFactoryHeader,
+                this.ServerPrimitiveDTOMappingServiceFileFactoryHeader,
+            });
     }
 
     protected virtual IPropertyAssignerConfigurator GetPropertyAssignerConfigurator()
@@ -334,18 +354,18 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
     {
         return
         [
-            FileType.IdentityDTO,
-                       FileType.VisualDTO,
-                       FileType.SimpleDTO,
-                       FileType.FullDTO,
-                       FileType.RichDTO,
+            BaseFileType.IdentityDTO,
+            BaseFileType.VisualDTO,
+            BaseFileType.SimpleDTO,
+            BaseFileType.FullDTO,
+            BaseFileType.RichDTO,
 
-                       FileType.ProjectionDTO,
+            BaseFileType.ProjectionDTO,
 
-                       ServerFileType.SimpleEventDTO,
-                       ServerFileType.RichEventDTO,
-                       ServerFileType.SimpleIntegrationDTO,
-                       ServerFileType.RichIntegrationDTO
+            ServerFileType.SimpleEventDTO,
+            ServerFileType.RichEventDTO,
+            ServerFileType.SimpleIntegrationDTO,
+            ServerFileType.RichIntegrationDTO
         ];
     }
 
@@ -355,7 +375,7 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        return this._domainTypeMastersCache.GetValue(domainType, fileType, isWritable);
+        return this.domainTypeMastersCache.GetValue(domainType, fileType, isWritable);
     }
 
 
@@ -364,6 +384,6 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        return this._domainTypeDetailsCache.GetValue(domainType, fileType, isWritable);
+        return this.domainTypeDetailsCache.GetValue(domainType, fileType, isWritable);
     }
 }

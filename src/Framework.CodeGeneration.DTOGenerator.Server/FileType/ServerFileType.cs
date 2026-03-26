@@ -1,27 +1,28 @@
-﻿using Framework.DomainDriven.Serialization;
+﻿using Framework.BLL.Domain.Serialization;
+using Framework.CodeGeneration.DTOGenerator.FileType;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileType;
 
 public static class ServerFileType
 {
-    public static readonly DTOFileType BaseEventDTO = new DTOFileType(() => BaseEventDTO, DTORole.Event);
+    public static DTOFileType BaseEventDTO { get; } = new(nameof(BaseEventDTO), DTORole.Event);
 
 
-    public static readonly DTOFileType SimpleEventDTO = new DTOFileType(() => SimpleEventDTO, DTORole.Event);
+    public static DTOFileType SimpleEventDTO { get; } = new(nameof(SimpleEventDTO), DTORole.Event);
 
-    public static readonly DTOFileType RichEventDTO = new DTOFileType(() => RichEventDTO, DTORole.Event);
-
-
-    public static readonly DTOFileType SimpleIntegrationDTO = new DTOFileType(() => SimpleIntegrationDTO, DTORole.Integration);
-
-    public static readonly DTOFileType RichIntegrationDTO = new DTOFileType(() => RichIntegrationDTO, DTORole.Integration);
+    public static DTOFileType RichEventDTO { get; } = new(nameof(RichEventDTO), DTORole.Event);
 
 
-    public static readonly FileType LambdaHelper = new FileType(() => LambdaHelper);
+    public static DTOFileType SimpleIntegrationDTO { get; } = new(nameof(SimpleIntegrationDTO), DTORole.Integration);
 
-    public static readonly FileType ServerDTOMappingServiceInterface = new FileType(() => ServerDTOMappingServiceInterface);
+    public static DTOFileType RichIntegrationDTO { get; } = new(nameof(RichIntegrationDTO), DTORole.Integration);
 
-    public static readonly FileType ServerPrimitiveDTOMappingService = new FileType(() => ServerPrimitiveDTOMappingService);
 
-    public static readonly FileType ServerPrimitiveDTOMappingServiceBase = new FileType(() => ServerPrimitiveDTOMappingServiceBase);
+    public static BaseFileType LambdaHelper { get; } = new(nameof(LambdaHelper));
+
+    public static BaseFileType ServerDTOMappingServiceInterface { get; } = new(nameof(ServerDTOMappingServiceInterface));
+
+    public static BaseFileType ServerPrimitiveDTOMappingService { get; } = new(nameof(ServerPrimitiveDTOMappingService));
+
+    public static BaseFileType ServerPrimitiveDTOMappingServiceBase { get; } = new(nameof(ServerPrimitiveDTOMappingServiceBase));
 }

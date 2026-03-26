@@ -7,11 +7,11 @@ namespace Framework.CodeGeneration.DTOGenerator.FileType;
 public static class FileTypeExtensions
 {
     public static ICodeFileFactoryHeader<TFileType> ToHeader<TFileType>(this TFileType fileType)
-            where TFileType : FileType
+            where TFileType : BaseFileType
     {
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        if (fileType == FileType.ProjectionDTO)
+        if (fileType == BaseFileType.ProjectionDTO)
         {
             return new CodeFileFactoryHeader<TFileType>(fileType, fileType + @"\", domainType => domainType.Name.SkipLast("Projection", false) + fileType);
         }
@@ -22,7 +22,7 @@ public static class FileTypeExtensions
     }
 
     public static ICodeFileFactoryHeader<TFileType> ToHeader<TFileType>(this TFileType fileType, string relativePath, Func<Type, string> getTypeNameFunc)
-            where TFileType : FileType
+            where TFileType : BaseFileType
     {
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 

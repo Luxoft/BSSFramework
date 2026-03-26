@@ -1,6 +1,4 @@
 ﻿using System.Linq.Expressions;
-
-using Framework.BLL.AccessDeniedExceptionService;
 using Framework.DomainDriven.Tracking;
 
 using SecuritySystem.Providers;

@@ -1,9 +1,13 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
-using Framework.DomainDriven.Generation;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
+using Framework.CodeGeneration.MethodGenerator;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.Members.MapToDomainObject;
 
 public class BaseMapToDomainObjectMethodFactory<TConfiguration, TFileFactory, TFileType> : IMethodGenerator
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>

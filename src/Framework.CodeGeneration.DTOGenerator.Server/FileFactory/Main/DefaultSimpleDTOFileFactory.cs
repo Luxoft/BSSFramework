@@ -2,20 +2,21 @@
 using System.Reflection;
 
 using Framework.CodeDom;
+using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Extensions;
+using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main.Base;
 using Framework.Core;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main;
 
-public class DefaultSimpleDTOFileFactory<TConfiguration> : MainDTOFileFactory<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+public class DefaultSimpleDTOFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : MainDTOFileFactory<TConfiguration>(configuration, domainType)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public DefaultSimpleDTOFileFactory(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
-    {
-    }
-
-
-    public override MainDTOFileType FileType { get; } = DTOGenerator.FileType.SimpleDTO;
+    public override MainDTOFileType FileType { get; } = BaseFileType.SimpleDTO;
 
     public sealed override CodeTypeReference BaseReference => this.IsPersistent() ? this.Configuration.GetBaseAuditPersistentReference() : this.Configuration.GetBaseAbstractReference();
 
@@ -33,7 +34,7 @@ public class DefaultSimpleDTOFileFactory<TConfiguration> : MainDTOFileFactory<TC
 
         if (this.IsPersistent())
         {
-            if (this.Configuration.GeneratePolicy.Used(this.DomainType, DTOGenerator.FileType.IdentityDTO))
+            if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
             {
                 yield return this.GetIdentityObjectContainerTypeReference();
             }
@@ -49,7 +50,7 @@ public class DefaultSimpleDTOFileFactory<TConfiguration> : MainDTOFileFactory<TC
 
         if (this.IsPersistent())
         {
-            if (this.Configuration.GeneratePolicy.Used(this.DomainType, DTOGenerator.FileType.IdentityDTO))
+            if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
             {
                 yield return this.GetIdentityObjectContainerImplementation();
             }

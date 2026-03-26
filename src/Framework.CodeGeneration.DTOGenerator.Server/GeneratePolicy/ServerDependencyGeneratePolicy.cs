@@ -1,14 +1,15 @@
-using Framework.DomainDriven.Generation.Domain;
+﻿using Framework.CodeGeneration.DTOGenerator.FileType;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+using Framework.CodeGeneration.DTOGenerator.GeneratePolicy;
+using Framework.CodeGeneration.DTOGenerator.Map;
+using Framework.CodeGeneration.DTOGenerator.Server.FileType;
+using Framework.CodeGeneration.GeneratePolicy;
 
-public class ServerDependencyGeneratePolicy : DependencyGeneratePolicy
+namespace Framework.CodeGeneration.DTOGenerator.Server.GeneratePolicy;
+
+public class ServerDependencyGeneratePolicy(IGeneratePolicy<RoleFileType> baseGeneratePolicy, IEnumerable<GenerateTypeMap> maps)
+    : DependencyGeneratePolicy(baseGeneratePolicy, maps)
 {
-    public ServerDependencyGeneratePolicy(IGeneratePolicy<RoleFileType> baseGeneratePolicy, IEnumerable<GenerateTypeMap> maps)
-            : base(baseGeneratePolicy, maps)
-    {
-    }
-
     protected override bool InternalUsed(Type domainType, RoleFileType fileType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));

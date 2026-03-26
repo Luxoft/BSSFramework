@@ -1,21 +1,18 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
-using Framework.Security;
-
 using CommonFramework;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+using Framework.BLL.Domain.Attributes;
+using Framework.BLL.Domain.Extensions;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.__Base;
 
-public class PropertyAssignerConfigurator<TConfiguration> : PropertyAssignerConfiguratorBase<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+namespace Framework.CodeGeneration.DTOGenerator.Server.Configuration.PropertyAssigner;
+
+public class PropertyAssignerConfigurator<TConfiguration>(TConfiguration configuration) : PropertyAssignerConfiguratorBase<TConfiguration>(configuration)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public PropertyAssignerConfigurator(TConfiguration configuration)
-            : base(configuration)
-    {
-    }
-
-
     protected override CodeExpression GetPropertyHasAccessCondition(IServerPropertyAssigner propertyAssigner, PropertyInfo property, bool isEdit)
     {
         if (propertyAssigner == null) throw new ArgumentNullException(nameof(propertyAssigner));

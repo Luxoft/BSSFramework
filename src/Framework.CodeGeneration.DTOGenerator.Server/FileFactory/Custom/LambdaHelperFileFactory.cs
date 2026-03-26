@@ -3,24 +3,24 @@ using System.Reflection;
 
 using CommonFramework;
 
+using Framework.BLL.Domain.Serialization.Extensions;
 using Framework.CodeDom;
+using Framework.CodeGeneration.Configuration;
+using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 using Framework.Core;
-using Framework.DomainDriven.Generation.Domain;
-using Framework.DomainDriven.Serialization;
 using Framework.Projection;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Custom;
 
-public class LambdaHelperFileFactory<TConfiguration> : FileFactory<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>, FileType>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+public class LambdaHelperFileFactory<TConfiguration>(TConfiguration configuration)
+    : FileFactory<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>, BaseFileType>(configuration, null)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public LambdaHelperFileFactory(TConfiguration configuration)
-            : base(configuration, null)
-    {
-    }
-
-
-    public override FileType FileType { get; } = ServerFileType.LambdaHelper;
+    public override BaseFileType FileType { get; } = ServerFileType.LambdaHelper;
 
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
@@ -48,20 +48,20 @@ public class LambdaHelperFileFactory<TConfiguration> : FileFactory<IServerGenera
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        if (fileType == FileType.ProjectionDTO || domainType.IsProjection())
+        if (fileType == BaseFileType.ProjectionDTO || domainType.IsProjection())
         {
-            if (fileType != FileType.ProjectionDTO || !domainType.IsProjection())
+            if (fileType != BaseFileType.ProjectionDTO || !domainType.IsProjection())
             {
                 return false;
             }
         }
 
-        if (fileType == FileType.IdentityDTO && !this.Configuration.IsPersistentObject(domainType))
+        if (fileType == BaseFileType.IdentityDTO && !this.Configuration.IsPersistentObject(domainType))
         {
             return false;
         }
 
-        if (fileType == FileType.VisualDTO && !domainType.HasVisualIdentityProperties())
+        if (fileType == BaseFileType.VisualDTO && !domainType.HasVisualIdentityProperties())
         {
             return false;
         }
@@ -81,7 +81,7 @@ public class LambdaHelperFileFactory<TConfiguration> : FileFactory<IServerGenera
     }
 
 
-    private CodeMemberMethod GetConvertToDTOMethod(Type domainType, FileType fileType)
+    private CodeMemberMethod GetConvertToDTOMethod(Type domainType, BaseFileType fileType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 
@@ -131,7 +131,7 @@ public class LambdaHelperFileFactory<TConfiguration> : FileFactory<IServerGenera
         }
     }
 
-    private CodeMemberMethod GetConvertToDTOListMethod(Type domainType, FileType fileType)
+    private CodeMemberMethod GetConvertToDTOListMethod(Type domainType, BaseFileType fileType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 

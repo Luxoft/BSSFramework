@@ -3,25 +3,21 @@ using System.Reflection;
 
 using CommonFramework.Maybe;
 
+using Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
+using Framework.BLL.Domain.Extensions;
 using Framework.CodeDom;
-using Framework.Exceptions;
-using Framework.Security;
+using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.SecurityToDomainObject.Update;
 
-public abstract class UpdateToDomainObjectPropertyAssignerBase<TConfiguration> : MaybeSecurityToDomainObjectPropertyAssigner<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+public abstract class UpdateToDomainObjectPropertyAssignerBase<TConfiguration>(
+    IPropertyAssigner<TConfiguration> innerAssigner,
+    IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
+    : MaybeSecurityToDomainObjectPropertyAssigner<TConfiguration>(innerAssigner)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    private readonly IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration;
-
-    protected UpdateToDomainObjectPropertyAssignerBase(IPropertyAssigner<TConfiguration> innerAssigner, IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
-            : base(innerAssigner)
-    {
-        this.configuration = configuration;
-    }
-
-
-
     protected override bool IsMaybeProperty(PropertyInfo property)
     {
         return !this.CodeTypeReferenceService.IsCollection(property);
@@ -35,7 +31,7 @@ public abstract class UpdateToDomainObjectPropertyAssignerBase<TConfiguration> :
         if (justValueRefExpr == null) throw new ArgumentNullException(nameof(justValueRefExpr));
         if (innerAssignStatement == null) throw new ArgumentNullException(nameof(innerAssignStatement));
 
-        var editAttr = this.configuration.Environment.ExtendedMetadata.GetProperty(property).GetEditDomainObjectAttribute();
+        var editAttr = configuration.Environment.ExtendedMetadata.GetProperty(property).GetEditDomainObjectAttribute();
 
         return new CodeConditionStatement(justValueRefExpr.ToPropertyReference(nameof(Maybe<>.HasValue)))
                {

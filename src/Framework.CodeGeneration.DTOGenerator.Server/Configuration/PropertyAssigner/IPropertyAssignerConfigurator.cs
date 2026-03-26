@@ -1,4 +1,6 @@
-﻿namespace Framework.DomainDriven.DTOGenerator.Server;
+﻿using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+
+namespace Framework.CodeGeneration.DTOGenerator.Server.Configuration.PropertyAssigner;
 
 public interface IPropertyAssignerConfigurator
 {

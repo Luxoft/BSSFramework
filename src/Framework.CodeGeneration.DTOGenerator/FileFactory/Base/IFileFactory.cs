@@ -1,13 +1,14 @@
 ﻿using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.CodeGeneration.DTOGenerator.FileType;
 using Framework.CodeGeneration.FileFactory;
 
 namespace Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 
 public interface IFileFactory<out TConfiguration, out TFileType> : IFileFactory<TConfiguration>, ICodeFileFactory<TFileType>
         where TConfiguration : IGeneratorConfigurationBase<IGenerationEnvironmentBase>
-        where TFileType : FileType.FileType
+        where TFileType : BaseFileType
 {
 }
 

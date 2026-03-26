@@ -1,6 +1,5 @@
 ﻿using System.CodeDom;
-
-using Framework.BLL.BLL;
+using Framework.BLL;
 using Framework.CodeDom;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.CodeGeneration.BLLGenerator.FileFactory.__Base;

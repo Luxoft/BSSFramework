@@ -17,9 +17,9 @@ public static class CodeFileExtensions
 
     private class VisitedCodeFile : ICodeFile
     {
-        private readonly ICodeFile _baseCodeFile;
+        private readonly ICodeFile baseCodeFile;
 
-        private readonly CodeDomVisitor _visitor;
+        private readonly CodeDomVisitor visitor;
 
 
         public VisitedCodeFile(ICodeFile baseCodeFile, CodeDomVisitor visitor)
@@ -27,20 +27,20 @@ public static class CodeFileExtensions
             if (baseCodeFile == null) throw new ArgumentNullException(nameof(baseCodeFile));
             if (visitor == null) throw new ArgumentNullException(nameof(visitor));
 
-            this._baseCodeFile = baseCodeFile;
-            this._visitor = visitor;
+            this.baseCodeFile = baseCodeFile;
+            this.visitor = visitor;
         }
 
 
         public string Filename
         {
-            get { return this._baseCodeFile.Filename; }
+            get { return this.baseCodeFile.Filename; }
         }
 
 
         public CodeNamespace GetRenderData()
         {
-            return this._visitor.VisitNamespace(this._baseCodeFile.GetRenderData());
+            return this.visitor.VisitNamespace(this.baseCodeFile.GetRenderData());
         }
     }
 }

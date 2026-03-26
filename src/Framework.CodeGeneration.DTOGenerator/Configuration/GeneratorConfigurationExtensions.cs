@@ -39,7 +39,7 @@ public static class GeneratorConfigurationExtensions
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 
-        return from parentType in dtoFileType.GetNestedTypes()
+        return from parentType in configuration.GetNestedTypes(dtoFileType)
 
                where configuration.GeneratePolicy.Used(domainType, parentType)
 
@@ -65,21 +65,21 @@ public static class GeneratorConfigurationExtensions
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-        return configuration.GetCodeTypeReference(configuration.Environment.DomainObjectBaseType, FileType.FileType.BaseAbstractDTO);
+        return configuration.GetCodeTypeReference(configuration.Environment.DomainObjectBaseType, BaseFileType.BaseAbstractDTO);
     }
 
     public static CodeTypeReference GetBasePersistentReference(this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-        return configuration.GetCodeTypeReference(configuration.Environment.PersistentDomainObjectBaseType, FileType.FileType.BasePersistentDTO);
+        return configuration.GetCodeTypeReference(configuration.Environment.PersistentDomainObjectBaseType, BaseFileType.BasePersistentDTO);
     }
 
     public static CodeTypeReference GetBaseAuditPersistentReference(this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-        return configuration.GetCodeTypeReference(configuration.Environment.AuditPersistentDomainObjectBaseType, FileType.FileType.BaseAuditPersistentDTO);
+        return configuration.GetCodeTypeReference(configuration.Environment.AuditPersistentDomainObjectBaseType, BaseFileType.BaseAuditPersistentDTO);
     }
 
     public static CodeTypeReference GetCodeTypeReference(this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration, Type domainType, MainDTOType dtoType)

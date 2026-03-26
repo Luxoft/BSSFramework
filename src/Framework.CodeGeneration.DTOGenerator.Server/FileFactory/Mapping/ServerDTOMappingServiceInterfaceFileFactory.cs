@@ -3,15 +3,20 @@ using System.Collections.ObjectModel;
 
 using CommonFramework;
 
+using Framework.BLL.DTOMapping;
 using Framework.CodeDom;
-using Framework.DomainDriven.Generation.Domain;
+using Framework.CodeGeneration.DomainMetadata;
+using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Mapping;
 
-public class ServerDTOMappingServiceInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguration, FileType>
+public class ServerDTOMappingServiceInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguration, BaseFileType>
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    private readonly ReadOnlyCollection<IServerMappingServiceExternalMethodGenerator> _externalGenerators;
+    private readonly ReadOnlyCollection<IServerMappingServiceExternalMethodGenerator> externalGenerators;
 
 
     public ServerDTOMappingServiceInterfaceFileFactory(TConfiguration configuration, IEnumerable<IServerMappingServiceExternalMethodGenerator> externalGenerators)
@@ -19,11 +24,11 @@ public class ServerDTOMappingServiceInterfaceFileFactory<TConfiguration> : FileF
     {
         if (externalGenerators == null) throw new ArgumentNullException(nameof(externalGenerators));
 
-        this._externalGenerators = externalGenerators.ToReadOnlyCollection();
+        this.externalGenerators = externalGenerators.ToReadOnlyCollection();
     }
 
 
-    public override FileType FileType { get; } = ServerFileType.ServerDTOMappingServiceInterface;
+    public override BaseFileType FileType { get; } = ServerFileType.ServerDTOMappingServiceInterface;
 
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
@@ -46,7 +51,7 @@ public class ServerDTOMappingServiceInterfaceFileFactory<TConfiguration> : FileF
             yield return member;
         }
 
-        foreach (var fieldFileFactory in this._externalGenerators)
+        foreach (var fieldFileFactory in this.externalGenerators)
         {
             foreach (var method in fieldFileFactory.GetServerMappingServiceInterfaceMethods())
             {

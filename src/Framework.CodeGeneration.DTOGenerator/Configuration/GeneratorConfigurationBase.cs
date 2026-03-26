@@ -26,7 +26,7 @@ using Framework.Projection;
 
 namespace Framework.CodeGeneration.DTOGenerator.Configuration;
 
-public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<TEnvironment, FileType.FileType>, IGeneratorConfigurationBase<TEnvironment>
+public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<TEnvironment, BaseFileType>, IGeneratorConfigurationBase<TEnvironment>
         where TEnvironment : class, IGenerationEnvironmentBase
 {
     private readonly IDictionaryCache<Tuple<Type, DTOFileType>, ReadOnlyCollection<PropertyInfo>> domainTypePropertiesCache;
@@ -45,11 +45,11 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         this.GeneratePolicy = LazyInterfaceImplementHelper.CreateProxy(this.CreateGeneratePolicy);
 
 
-        this.ClientDTOMappingServiceInterfaceFileFactoryHeader = FileType.FileType.ClientDTOMappingServiceInterface.ToHeader("", _ => $"I{this.Environment.TargetSystemName}ClientDTOMappingService");
+        this.ClientDTOMappingServiceInterfaceFileFactoryHeader = BaseFileType.ClientDTOMappingServiceInterface.ToHeader("", _ => $"I{this.Environment.TargetSystemName}ClientDTOMappingService");
 
-        this.ClientPrimitiveDTOMappingServiceFactoryHeader = FileType.FileType.ClientPrimitiveDTOMappingService.ToHeader("", _ => this.Environment.TargetSystemName + FileType.FileType.ClientPrimitiveDTOMappingService);
+        this.ClientPrimitiveDTOMappingServiceFactoryHeader = BaseFileType.ClientPrimitiveDTOMappingService.ToHeader("", _ => this.Environment.TargetSystemName + BaseFileType.ClientPrimitiveDTOMappingService);
 
-        this.ClientPrimitiveDTOMappingServiceBaseFactoryHeader = FileType.FileType.ClientPrimitiveDTOMappingServiceBase.ToHeader("", _ => this.Environment.TargetSystemName + FileType.FileType.ClientPrimitiveDTOMappingServiceBase);
+        this.ClientPrimitiveDTOMappingServiceBaseFactoryHeader = BaseFileType.ClientPrimitiveDTOMappingServiceBase.ToHeader("", _ => this.Environment.TargetSystemName + BaseFileType.ClientPrimitiveDTOMappingServiceBase);
     }
 
     public IGeneratePolicy<RoleFileType> GeneratePolicy { get; }
@@ -77,39 +77,53 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     protected override string NamespacePostfix { get; } = "Generated.DTO";
 
 
-    protected virtual ICodeFileFactoryHeader<DTOFileType> IdentityDTOFileFactoryHeader { get; } = FileType.FileType.IdentityDTO.ToHeader();
+    protected virtual ICodeFileFactoryHeader<DTOFileType> IdentityDTOFileFactoryHeader { get; } = BaseFileType.IdentityDTO.ToHeader();
 
-    protected virtual ICodeFileFactoryHeader<DTOFileType> StrictDTOFileFactoryHeader { get; } = FileType.FileType.StrictDTO.ToHeader();
+    protected virtual ICodeFileFactoryHeader<DTOFileType> StrictDTOFileFactoryHeader { get; } = BaseFileType.StrictDTO.ToHeader();
 
-    protected virtual ICodeFileFactoryHeader<DTOFileType> UpdateDTOFileFactoryHeader { get; } = FileType.FileType.UpdateDTO.ToHeader();
+    protected virtual ICodeFileFactoryHeader<DTOFileType> UpdateDTOFileFactoryHeader { get; } = BaseFileType.UpdateDTO.ToHeader();
 
     protected virtual ICodeFileFactoryHeader<DTOFileType> ProjectionDTOFileFactoryHeader { get; } =
 
-        FileType.FileType.ProjectionDTO.ToHeader($@"{FileType.FileType.ProjectionDTO}\", domainType => domainType.Name.SkipLast("Projection", false) + FileType.FileType.ProjectionDTO);
+        BaseFileType.ProjectionDTO.ToHeader($@"{BaseFileType.ProjectionDTO}\", domainType => domainType.Name.SkipLast("Projection", false) + BaseFileType.ProjectionDTO);
 
 
-    protected virtual ICodeFileFactoryHeader<MainDTOFileType> BaseAbstractDTOFileFactoryHeader { get; } = FileType.FileType.BaseAbstractDTO.ToHeader(string.Empty, _ => FileType.FileType.BaseAbstractDTO.Name);
+    protected virtual ICodeFileFactoryHeader<MainDTOFileType> BaseAbstractDTOFileFactoryHeader { get; } = BaseFileType.BaseAbstractDTO.ToHeader(string.Empty, _ => BaseFileType.BaseAbstractDTO.Name);
 
-    protected virtual ICodeFileFactoryHeader<MainDTOFileType> BasePersistentDTOFileFactoryHeader { get; } = FileType.FileType.BasePersistentDTO.ToHeader(string.Empty, _ => FileType.FileType.BasePersistentDTO.Name);
+    protected virtual ICodeFileFactoryHeader<MainDTOFileType> BasePersistentDTOFileFactoryHeader { get; } = BaseFileType.BasePersistentDTO.ToHeader(string.Empty, _ => BaseFileType.BasePersistentDTO.Name);
 
-    protected virtual ICodeFileFactoryHeader<MainDTOFileType> BaseAuditPersistentDTOFileFactoryHeader { get; } = FileType.FileType.BaseAuditPersistentDTO.ToHeader(string.Empty, _ => FileType.FileType.BaseAuditPersistentDTO.Name);
-
-
-    protected virtual ICodeFileFactoryHeader<MainDTOFileType> VisualDTOFileFactoryHeader { get; } = FileType.FileType.VisualDTO.ToHeader();
+    protected virtual ICodeFileFactoryHeader<MainDTOFileType> BaseAuditPersistentDTOFileFactoryHeader { get; } = BaseFileType.BaseAuditPersistentDTO.ToHeader(string.Empty, _ => BaseFileType.BaseAuditPersistentDTO.Name);
 
 
-    protected virtual ICodeFileFactoryHeader<MainDTOFileType> SimpleDTOFileFactoryHeader { get; } = FileType.FileType.SimpleDTO.ToHeader();
+    protected virtual ICodeFileFactoryHeader<MainDTOFileType> VisualDTOFileFactoryHeader { get; } = BaseFileType.VisualDTO.ToHeader();
 
-    protected virtual ICodeFileFactoryHeader<MainDTOFileType> FullDTOFileFactoryHeader { get; } = FileType.FileType.FullDTO.ToHeader();
 
-    protected virtual ICodeFileFactoryHeader<MainDTOFileType> RichDTOFileFactoryHeader { get; } = FileType.FileType.RichDTO.ToHeader();
+    protected virtual ICodeFileFactoryHeader<MainDTOFileType> SimpleDTOFileFactoryHeader { get; } = BaseFileType.SimpleDTO.ToHeader();
 
-    protected virtual ICodeFileFactoryHeader<FileType.FileType> ClientDTOMappingServiceInterfaceFileFactoryHeader { get; }
+    protected virtual ICodeFileFactoryHeader<MainDTOFileType> FullDTOFileFactoryHeader { get; } = BaseFileType.FullDTO.ToHeader();
 
-    protected virtual ICodeFileFactoryHeader<FileType.FileType> ClientPrimitiveDTOMappingServiceBaseFactoryHeader { get; }
+    protected virtual ICodeFileFactoryHeader<MainDTOFileType> RichDTOFileFactoryHeader { get; } = BaseFileType.RichDTO.ToHeader();
 
-    protected virtual ICodeFileFactoryHeader<FileType.FileType> ClientPrimitiveDTOMappingServiceFactoryHeader { get; }
+    protected virtual ICodeFileFactoryHeader<BaseFileType> ClientDTOMappingServiceInterfaceFileFactoryHeader { get; }
 
+    protected virtual ICodeFileFactoryHeader<BaseFileType> ClientPrimitiveDTOMappingServiceBaseFactoryHeader { get; }
+
+    protected virtual ICodeFileFactoryHeader<BaseFileType> ClientPrimitiveDTOMappingServiceFactoryHeader { get; }
+
+
+
+
+    //public static IEnumerable<MainDTOFileType> GetNestedTypes(this MainDTOFileType fileType, ImmutableArray<MainDTOFileType> mainDtoTypes)
+    //{
+    //    if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+
+    //    return fileType.GetAllElements(ft => ft.NestedType, true);
+    //}
+
+    public IEnumerable<MainDTOFileType> GetNestedTypes(MainDTOFileType fileType)
+    {
+        throw new NotImplementedException();
+    }
 
     public virtual bool ForceGenerateProperties(Type domainType, DTOFileType fileType)
     {
@@ -138,7 +152,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         {
             var withoutIdentity = baseProperties.Where(prop => !this.IsIdentityProperty(prop));
 
-            if (fileType == FileType.FileType.StrictDTO || fileType == FileType.FileType.UpdateDTO)
+            if (fileType == BaseFileType.StrictDTO || fileType == BaseFileType.UpdateDTO)
             {
                 return withoutIdentity;
             }
@@ -160,39 +174,39 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public virtual IEnumerable<GenerateTypeMap> GetTypeMaps()
     {
-        yield return this.GetTypeMap(this.Environment.DomainObjectBaseType, FileType.FileType.BaseAbstractDTO);
+        yield return this.GetTypeMap(this.Environment.DomainObjectBaseType, BaseFileType.BaseAbstractDTO);
 
-        yield return this.GetTypeMap(this.Environment.PersistentDomainObjectBaseType, FileType.FileType.BasePersistentDTO);
+        yield return this.GetTypeMap(this.Environment.PersistentDomainObjectBaseType, BaseFileType.BasePersistentDTO);
 
-        yield return this.GetTypeMap(this.Environment.AuditPersistentDomainObjectBaseType, FileType.FileType.BaseAuditPersistentDTO);
+        yield return this.GetTypeMap(this.Environment.AuditPersistentDomainObjectBaseType, BaseFileType.BaseAuditPersistentDTO);
 
         foreach (var domainType in this.DomainTypes)
         {
             if (domainType.IsProjection())
             {
-                yield return this.GetTypeMap(domainType, FileType.FileType.ProjectionDTO);
+                yield return this.GetTypeMap(domainType, BaseFileType.ProjectionDTO);
             }
             else
             {
                 if (this.IsPersistentObject(domainType))
                 {
-                    yield return this.GetTypeMap(domainType, FileType.FileType.IdentityDTO);
+                    yield return this.GetTypeMap(domainType, BaseFileType.IdentityDTO);
                 }
 
                 if (domainType.HasVisualIdentityProperties())
                 {
-                    yield return this.GetTypeMap(domainType, FileType.FileType.VisualDTO);
+                    yield return this.GetTypeMap(domainType, BaseFileType.VisualDTO);
                 }
 
-                yield return this.GetTypeMap(domainType, FileType.FileType.SimpleDTO);
+                yield return this.GetTypeMap(domainType, BaseFileType.SimpleDTO);
 
-                yield return this.GetTypeMap(domainType, FileType.FileType.FullDTO);
+                yield return this.GetTypeMap(domainType, BaseFileType.FullDTO);
 
-                yield return this.GetTypeMap(domainType, FileType.FileType.RichDTO);
+                yield return this.GetTypeMap(domainType, BaseFileType.RichDTO);
 
-                yield return this.GetTypeMap(domainType, FileType.FileType.StrictDTO);
+                yield return this.GetTypeMap(domainType, BaseFileType.StrictDTO);
 
-                yield return this.GetTypeMap(domainType, FileType.FileType.UpdateDTO);
+                yield return this.GetTypeMap(domainType, BaseFileType.UpdateDTO);
             }
         }
     }
@@ -234,15 +248,15 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     {
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        if (fileType == FileType.FileType.ProjectionDTO)
+        if (fileType == BaseFileType.ProjectionDTO)
         {
             return new ProjectionCodeTypeReferenceService<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>(this);
         }
-        else if (fileType == FileType.FileType.StrictDTO)
+        else if (fileType == BaseFileType.StrictDTO)
         {
             return new StrictCodeTypeReferenceService<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>(this);
         }
-        else if (fileType == FileType.FileType.UpdateDTO)
+        else if (fileType == BaseFileType.UpdateDTO)
         {
             return new UpdateCodeTypeReferenceService<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>(this);
         }
@@ -258,7 +272,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public CodeExpression GetDefaultClientDTOMappingServiceExpression()
     {
-        return this.GetCodeTypeReference(null, FileType.FileType.ClientPrimitiveDTOMappingService).ToTypeReferenceExpression().ToPropertyReference("Default");
+        return this.GetCodeTypeReference(null, BaseFileType.ClientPrimitiveDTOMappingService).ToTypeReferenceExpression().ToPropertyReference("Default");
     }
 
     public virtual CodeExpression GetCreateUpdateDTOExpression(
@@ -310,27 +324,27 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         var serializationProperties = domainType.GetSerializationProperties(role);
 
 
-        if (fileType == FileType.FileType.BaseAbstractDTO)
+        if (fileType == BaseFileType.BaseAbstractDTO)
         {
             return serializationProperties.Where(this.Environment.IsDomainObjectBaseProperty);
         }
-        else if (fileType == FileType.FileType.BasePersistentDTO || fileType == FileType.FileType.IdentityDTO)
+        else if (fileType == BaseFileType.BasePersistentDTO || fileType == BaseFileType.IdentityDTO)
         {
             return serializationProperties.Where(this.Environment.IsPersistentDomainObjectBaseProperty);
         }
-        else if (fileType == FileType.FileType.BaseAuditPersistentDTO)
+        else if (fileType == BaseFileType.BaseAuditPersistentDTO)
         {
             return serializationProperties.Where(this.Environment.IsAuditPersistentDomainObjectBaseProperty);
         }
-        else if (fileType == FileType.FileType.VisualDTO)
+        else if (fileType == BaseFileType.VisualDTO)
         {
-            return from property in this.GetDomainTypeProperties(domainType, FileType.FileType.SimpleDTO)
+            return from property in this.GetDomainTypeProperties(domainType, BaseFileType.SimpleDTO)
 
                    where property.IsVisualIdentity() && property.PropertyType == typeof(string)
 
                    select property;
         }
-        else if (fileType == FileType.FileType.SimpleDTO)
+        else if (fileType == BaseFileType.SimpleDTO)
         {
             return from property in serializationProperties
 
@@ -344,7 +358,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
                    select property;
         }
-        else if (fileType == FileType.FileType.FullDTO)
+        else if (fileType == BaseFileType.FullDTO)
         {
             return from property in serializationProperties
 
@@ -356,7 +370,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
                    select property;
         }
-        else if (fileType == FileType.FileType.RichDTO)
+        else if (fileType == BaseFileType.RichDTO)
         {
             return from property in serializationProperties
 
@@ -368,7 +382,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
                    select property;
         }
-        else if (fileType == FileType.FileType.StrictDTO || fileType == FileType.FileType.UpdateDTO)
+        else if (fileType == BaseFileType.StrictDTO || fileType == BaseFileType.UpdateDTO)
         {
             return from property in serializationProperties
 
@@ -376,7 +390,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
                    select property;
         }
-        else if (fileType == FileType.FileType.ProjectionDTO)
+        else if (fileType == BaseFileType.ProjectionDTO)
         {
             return from property in serializationProperties
 
@@ -401,7 +415,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         return this.Environment.GetDefaultDomainTypes(false).Concat(this.ProjectionTypes);
     }
 
-    protected override IEnumerable<ICodeFileFactoryHeader<FileType.FileType>> GetFileFactoryHeaders()
+    protected override IEnumerable<ICodeFileFactoryHeader<BaseFileType>> GetFileFactoryHeaders()
     {
         yield return this.BaseAbstractDTOFileFactoryHeader;
         yield return this.BasePersistentDTOFileFactoryHeader;

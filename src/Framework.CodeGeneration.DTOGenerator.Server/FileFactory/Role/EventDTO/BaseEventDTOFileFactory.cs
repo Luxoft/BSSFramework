@@ -1,19 +1,18 @@
 ﻿using System.CodeDom;
 using System.Reflection;
-
+using Framework.CodeGeneration.DTOGenerator.Extensions;
+using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 using Framework.Projection;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.EventDTO;
 
-public class DefaultBaseEventDTOFileFactory<TConfiguration> : FileFactory<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>, DTOFileType>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+public class DefaultBaseEventDTOFileFactory<TConfiguration>(TConfiguration configuration)
+    : FileFactory<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>, DTOFileType>(configuration, configuration.Environment.PersistentDomainObjectBaseType)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public DefaultBaseEventDTOFileFactory(TConfiguration configuration)
-            : base(configuration, configuration.Environment.PersistentDomainObjectBaseType)
-    {
-    }
-
-
     public override DTOFileType FileType { get; } = ServerFileType.BaseEventDTO;
 
 

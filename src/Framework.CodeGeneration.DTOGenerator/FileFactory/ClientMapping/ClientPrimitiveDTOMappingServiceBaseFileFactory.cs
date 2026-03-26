@@ -8,24 +8,25 @@ using Framework.BLL.Domain.ClientMappingService;
 using Framework.CodeDom;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
+using Framework.CodeGeneration.DTOGenerator.FileType;
 
 namespace Framework.CodeGeneration.DTOGenerator.FileFactory.ClientMapping;
 
-public class ClientPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : FileFactory<TConfiguration, FileType.FileType>
+public class ClientPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : FileFactory<TConfiguration, BaseFileType>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    private readonly ReadOnlyCollection<IClientMappingServiceExternalMethodGenerator> _externalGenerators;
+    private readonly ReadOnlyCollection<IClientMappingServiceExternalMethodGenerator> externalGenerators;
 
     public ClientPrimitiveDTOMappingServiceBaseFileFactory(TConfiguration configuration, IEnumerable<IClientMappingServiceExternalMethodGenerator> externalGenerators)
             : base(configuration, null)
     {
         if (externalGenerators == null) throw new ArgumentNullException(nameof(externalGenerators));
 
-        this._externalGenerators = externalGenerators.ToReadOnlyCollection();
+        this.externalGenerators = externalGenerators.ToReadOnlyCollection();
     }
 
 
-    public override FileType.FileType FileType { get; } = DTOGenerator.FileType.FileType.ClientPrimitiveDTOMappingServiceBase;
+    public override BaseFileType FileType { get; } = BaseFileType.ClientPrimitiveDTOMappingServiceBase;
 
     public override CodeTypeReference BaseReference => typeof(ClientDTOMappingServiceBase).ToTypeReference();
 
@@ -36,7 +37,7 @@ public class ClientPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : F
             yield return baseType;
         }
 
-        yield return this.Configuration.GetCodeTypeReference(null, DTOGenerator.FileType.FileType.ClientDTOMappingServiceInterface);
+        yield return this.Configuration.GetCodeTypeReference(null, BaseFileType.ClientDTOMappingServiceInterface);
     }
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
@@ -57,7 +58,7 @@ public class ClientPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : F
         }
 
 
-        foreach (var fieldFileFactory in this._externalGenerators)
+        foreach (var fieldFileFactory in this.externalGenerators)
         {
             foreach (var method in fieldFileFactory.GetClientMappingServiceMethods())
             {

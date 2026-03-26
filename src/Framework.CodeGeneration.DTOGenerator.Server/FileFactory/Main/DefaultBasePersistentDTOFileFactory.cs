@@ -2,20 +2,22 @@
 using System.Runtime.Serialization;
 
 using Framework.CodeDom;
-using Framework.DomainDriven.Generation.Domain;
+using Framework.CodeGeneration.DomainMetadata;
+using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Extensions;
+using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.FileType;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main.Base;
 
-public class DefaultBasePersistentDTOFileFactory<TConfiguration> : MainDTOFileFactory<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main;
+
+public class DefaultBasePersistentDTOFileFactory<TConfiguration>(TConfiguration configuration)
+    : MainDTOFileFactory<TConfiguration>(configuration, configuration.Environment.PersistentDomainObjectBaseType)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public DefaultBasePersistentDTOFileFactory(TConfiguration configuration)
-            : base(configuration, configuration.Environment.PersistentDomainObjectBaseType)
-    {
-    }
-
-
-    public override MainDTOFileType FileType { get; } = DTOGenerator.FileType.BasePersistentDTO;
+    public override MainDTOFileType FileType { get; } = BaseFileType.BasePersistentDTO;
 
 
     protected override bool ConvertToStrict { get; } = false;

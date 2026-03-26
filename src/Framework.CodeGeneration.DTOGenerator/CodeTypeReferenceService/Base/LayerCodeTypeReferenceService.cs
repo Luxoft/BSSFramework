@@ -18,15 +18,10 @@ public interface ILayerCodeTypeReferenceService : IPropertyCodeTypeReferenceServ
     RoleFileType GetCollectionFileType(PropertyInfo property);
 }
 
-public abstract class LayerCodeTypeReferenceService<TConfiguration> : PropertyCodeTypeReferenceService<TConfiguration>, ILayerCodeTypeReferenceService
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+public abstract class LayerCodeTypeReferenceService<TConfiguration>(TConfiguration configuration)
+    : PropertyCodeTypeReferenceService<TConfiguration>(configuration), ILayerCodeTypeReferenceService
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    protected LayerCodeTypeReferenceService(TConfiguration configuration)
-            : base(configuration)
-    {
-    }
-
-
     public virtual Type CollectionType => this.Configuration.CollectionType;
 
 
@@ -55,7 +50,7 @@ public abstract class LayerCodeTypeReferenceService<TConfiguration> : PropertyCo
         }
     }
 
-    protected virtual CodeTypeReference GetCollectionCodeTypeReference(Type elementType, FileType.FileType elementFileType)
+    protected virtual CodeTypeReference GetCollectionCodeTypeReference(Type elementType, BaseFileType elementFileType)
     {
         return this.Configuration.GetCodeTypeReference(elementType, elementFileType).ToCollectionReference(this.CollectionType);
     }

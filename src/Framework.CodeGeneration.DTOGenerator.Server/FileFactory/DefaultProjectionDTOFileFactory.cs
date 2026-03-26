@@ -1,11 +1,23 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
-using Framework.DomainDriven.Generation.Domain;
-using Framework.DomainDriven.Serialization;
+using Framework.BLL.Domain.Serialization;
+using Framework.BLL.Domain.Serialization.Extensions;
+using Framework.CodeGeneration.Configuration;
+using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
+using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
+using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Extensions;
+using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 using Framework.Projection;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
 
 public class DefaultProjectionDTOFileFactory<TConfiguration> : DTOFileFactory<TConfiguration, DTOFileType>
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
@@ -26,7 +38,7 @@ public class DefaultProjectionDTOFileFactory<TConfiguration> : DTOFileFactory<TC
 
     public override IPropertyCodeTypeReferenceService CodeTypeReferenceService { get; }
 
-    public override DTOFileType FileType { get; } = DTOGenerator.FileType.ProjectionDTO;
+    public override DTOFileType FileType { get; } = BaseFileType.ProjectionDTO;
 
     public override CodeTypeReference BaseReference =>
 
@@ -55,7 +67,7 @@ public class DefaultProjectionDTOFileFactory<TConfiguration> : DTOFileFactory<TC
 
         if (this.IsPersistent)
         {
-            if (this.Configuration.GeneratePolicy.Used(this.sourceType, DTOGenerator.FileType.IdentityDTO))
+            if (this.Configuration.GeneratePolicy.Used(this.sourceType, BaseFileType.IdentityDTO))
             {
                 yield return this.GetIdentityObjectContainerTypeReference();
             }
@@ -71,7 +83,7 @@ public class DefaultProjectionDTOFileFactory<TConfiguration> : DTOFileFactory<TC
 
         if (this.IsPersistent)
         {
-            if (this.Configuration.GeneratePolicy.Used(this.sourceType, DTOGenerator.FileType.IdentityDTO))
+            if (this.Configuration.GeneratePolicy.Used(this.sourceType, BaseFileType.IdentityDTO))
             {
                 yield return this.GetIdentityObjectContainerImplementation();
             }

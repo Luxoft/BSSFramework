@@ -15,7 +15,7 @@ namespace Framework.CodeGeneration.DTOGenerator.PropertyAssigner._Security;
 public class SecurityToSecurityPropertyAssigner<TConfiguration> : MaybePropertyAssigner<TConfiguration>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    private readonly IPropertyCodeTypeReferenceService _sourceTypeReferenceService;
+    private readonly IPropertyCodeTypeReferenceService sourceTypeReferenceService;
 
 
     public SecurityToSecurityPropertyAssigner(IPropertyAssigner<TConfiguration> innerAssigner, IPropertyCodeTypeReferenceService sourceTypeReferenceService)
@@ -23,7 +23,7 @@ public class SecurityToSecurityPropertyAssigner<TConfiguration> : MaybePropertyA
     {
         if (sourceTypeReferenceService == null) throw new ArgumentNullException(nameof(sourceTypeReferenceService));
 
-        this._sourceTypeReferenceService = sourceTypeReferenceService;
+        this.sourceTypeReferenceService = sourceTypeReferenceService;
     }
 
 

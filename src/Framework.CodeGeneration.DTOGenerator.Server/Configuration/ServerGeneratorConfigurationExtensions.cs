@@ -1,9 +1,9 @@
-using System.CodeDom;
+﻿using System.CodeDom;
+
+using Framework.BLL.Domain.IdentityObject;
 using Framework.CodeDom;
 
-using Framework.Persistent;
-
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 
 public static class ServerGeneratorConfigurationExtensions
 {

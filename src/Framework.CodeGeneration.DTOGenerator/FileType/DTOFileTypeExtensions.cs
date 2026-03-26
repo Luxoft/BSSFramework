@@ -35,12 +35,4 @@ public static class DTOFileTypeExtensions
         return fileType.GetBaseType() == null ? MemberAttributes.Public
                        : (MemberAttributes.Public | MemberAttributes.Override);
     }
-
-
-    public static IEnumerable<MainDTOFileType> GetNestedTypes(this MainDTOFileType fileType)
-    {
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
-
-        return fileType.GetAllElements(ft => ft.NestedType, true);
-    }
 }

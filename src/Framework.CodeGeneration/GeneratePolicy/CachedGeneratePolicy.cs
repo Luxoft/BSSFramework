@@ -6,9 +6,9 @@ namespace Framework.CodeGeneration.GeneratePolicy;
 
 public class CachedGeneratePolicy<TIdent> : IGeneratePolicy<TIdent>
 {
-    private readonly IGeneratePolicy<TIdent> _baseGeneratePolicy;
+    private readonly IGeneratePolicy<TIdent> baseGeneratePolicy;
 
-    private readonly IDictionaryCache<Tuple<Type, TIdent>, bool> _cache;
+    private readonly IDictionaryCache<Tuple<Type, TIdent>, bool> cache;
 
 
 
@@ -16,9 +16,9 @@ public class CachedGeneratePolicy<TIdent> : IGeneratePolicy<TIdent>
     {
         if (baseGeneratePolicy == null) throw new ArgumentNullException(nameof(baseGeneratePolicy));
 
-        this._baseGeneratePolicy = baseGeneratePolicy;
+        this.baseGeneratePolicy = baseGeneratePolicy;
 
-        this._cache = new DictionaryCache<Tuple<Type, TIdent>, bool>(t => t.Pipe(this.InternalUsed)).WithLock();
+        this.cache = new DictionaryCache<Tuple<Type, TIdent>, bool>(t => t.Pipe(this.InternalUsed)).WithLock();
     }
 
 
@@ -28,7 +28,7 @@ public class CachedGeneratePolicy<TIdent> : IGeneratePolicy<TIdent>
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        return this._cache.GetValue(domainType, fileType);
+        return this.cache.GetValue(domainType, fileType);
     }
 
 
@@ -37,6 +37,6 @@ public class CachedGeneratePolicy<TIdent> : IGeneratePolicy<TIdent>
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        return this._baseGeneratePolicy.Used(domainType, fileType);
+        return this.baseGeneratePolicy.Used(domainType, fileType);
     }
 }

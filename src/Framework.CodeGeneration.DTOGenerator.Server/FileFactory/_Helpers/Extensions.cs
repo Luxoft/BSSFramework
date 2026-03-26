@@ -2,11 +2,12 @@
 
 using CommonFramework;
 
+using Framework.BLL.Domain.Attributes;
+using Framework.BLL.Domain.Serialization;
+using Framework.BLL.Domain.Serialization.Extensions;
 using Framework.Core;
-using Framework.DomainDriven.Serialization;
-using Framework.Persistent;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
 
 public static class Extensions
 {

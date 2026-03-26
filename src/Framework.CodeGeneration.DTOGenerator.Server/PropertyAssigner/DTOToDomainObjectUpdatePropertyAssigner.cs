@@ -1,9 +1,11 @@
 ﻿using System.CodeDom;
 
+using Framework.BLL.Domain.Dto;
 using Framework.CodeDom;
-using Framework.Transfering;
+using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 
 public class DTOToDomainObjectUpdatePropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> source) : DTOToDomainObjectPropertyAssigner<TConfiguration>(source)
     where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>

@@ -5,25 +5,17 @@ using CommonFramework;
 
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
+using Framework.CodeGeneration.DTOGenerator.FileType;
 
 namespace Framework.CodeGeneration.DTOGenerator.FileFactory.ClientMapping;
 
-public class ClientDTOMappingServiceInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguration, FileType.FileType>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+public class ClientDTOMappingServiceInterfaceFileFactory<TConfiguration>(TConfiguration configuration, IEnumerable<IClientMappingServiceExternalMethodGenerator> externalGenerators)
+    : FileFactory<TConfiguration, BaseFileType>(configuration, null)
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    private readonly ReadOnlyCollection<IClientMappingServiceExternalMethodGenerator> _externalGenerators;
+    private readonly ReadOnlyCollection<IClientMappingServiceExternalMethodGenerator> externalGenerators = externalGenerators.ToReadOnlyCollection();
 
-
-    public ClientDTOMappingServiceInterfaceFileFactory(TConfiguration configuration, IEnumerable<IClientMappingServiceExternalMethodGenerator> externalGenerators)
-            : base(configuration, null)
-    {
-        if (externalGenerators == null) throw new ArgumentNullException(nameof(externalGenerators));
-
-        this._externalGenerators = externalGenerators.ToReadOnlyCollection();
-    }
-
-
-    public override FileType.FileType FileType { get; } = DTOGenerator.FileType.FileType.ClientDTOMappingServiceInterface;
+    public override BaseFileType FileType { get; } = BaseFileType.ClientDTOMappingServiceInterface;
 
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
@@ -43,7 +35,7 @@ public class ClientDTOMappingServiceInterfaceFileFactory<TConfiguration> : FileF
             yield return member;
         }
 
-        foreach (var fieldFileFactory in this._externalGenerators)
+        foreach (var fieldFileFactory in this.externalGenerators)
         {
             foreach (var method in fieldFileFactory.GetClientMappingServiceInterfaceMethods())
             {

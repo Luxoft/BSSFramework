@@ -5,8 +5,6 @@ using CommonFramework;
 using CommonFramework.Maybe;
 
 using Framework.Application.Domain;
-using Framework.BLL.BLL.Validation.Attributes;
-using Framework.BLL.BLL.Validation.Validators;
 using Framework.BLL.Domain.Extensions;
 using Framework.CodeDom;
 using Framework.CodeGeneration.Configuration._Container;
@@ -19,6 +17,7 @@ using Framework.Validation;
 
 using ValidatorPairExpr = System.Collections.Generic.KeyValuePair<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
 using ValidatorExpr = System.Collections.Generic.IReadOnlyDictionary<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
+using Framework.BLL.Validation;
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 

@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 using System.Reflection;
-
-using Framework.BLL.BLL;
+using Framework.BLL;
 using Framework.CodeDom;
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;

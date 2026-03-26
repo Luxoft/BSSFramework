@@ -1,14 +1,15 @@
-﻿namespace Framework.DomainDriven.DTOGenerator.Server;
+﻿using Framework.CodeGeneration.DTOGenerator.Extensions;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.IntegrationDTO.Base;
+using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 
-public class DefaultSimpleIntegrationDTOFileFactory<TConfiguration> : IntegrationDTOFileFactory<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.IntegrationDTO;
+
+public class DefaultSimpleIntegrationDTOFileFactory<TConfiguration>(TConfiguration configuration, Type domainType)
+    : IntegrationDTOFileFactory<TConfiguration>(configuration, domainType)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public DefaultSimpleIntegrationDTOFileFactory(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
-    {
-    }
-
-
     public override DTOFileType FileType { get; } = ServerFileType.SimpleIntegrationDTO;
 
     protected override bool HasToDomainObjectMethod => this.IsPersistent();

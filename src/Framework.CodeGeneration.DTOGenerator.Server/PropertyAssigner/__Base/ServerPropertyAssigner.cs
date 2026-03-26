@@ -1,8 +1,12 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
+using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.__Base;
 
 public interface IServerPropertyAssigner : IPropertyAssigner
 {
@@ -14,15 +18,9 @@ public interface IServerPropertyAssigner : IPropertyAssigner
 }
 
 
-public abstract class ServerPropertyAssigner<TConfiguration> : PropertyAssigner<TConfiguration>, IServerPropertyAssigner
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+public abstract class ServerPropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> source) : PropertyAssigner<TConfiguration>(source), IServerPropertyAssigner
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    protected ServerPropertyAssigner(IDTOSource<TConfiguration> source)
-            : base(source)
-    {
-    }
-
-
     public CodeExpression MappingServiceRefExpr => new CodeThisReferenceExpression();
 
     public CodeExpression ContextRef => this.MappingServiceRefExpr.ToPropertyReference("Context");

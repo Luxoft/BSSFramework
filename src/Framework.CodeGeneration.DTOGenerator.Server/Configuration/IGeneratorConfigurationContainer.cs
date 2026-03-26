@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.DTOGenerator.Server;
+﻿namespace Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 
 public interface IGeneratorConfigurationContainer
 {

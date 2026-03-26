@@ -12,12 +12,12 @@ public abstract class MethodGenerator : IMethodGenerator, IMethodGeneratorInfo
     private static readonly CodeMemberMethod DefaultMethod = new CodeMemberMethod();
 
 
-    private readonly Lazy<ReadOnlyCollection<CodeParameterDeclarationExpression>> _lazyParameters;
+    private readonly Lazy<ReadOnlyCollection<CodeParameterDeclarationExpression>> lazyParameters;
 
 
     protected MethodGenerator()
     {
-        this._lazyParameters = LazyHelper.Create(() => this.GetParameters().ToReadOnlyCollection());
+        this.lazyParameters = LazyHelper.Create(() => this.GetParameters().ToReadOnlyCollection());
     }
 
 
@@ -32,7 +32,7 @@ public abstract class MethodGenerator : IMethodGenerator, IMethodGeneratorInfo
 
     public ReadOnlyCollection<CodeParameterDeclarationExpression> Parameters
     {
-        get { return this._lazyParameters.Value; }
+        get { return this.lazyParameters.Value; }
     }
 
 

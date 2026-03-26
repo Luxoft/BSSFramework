@@ -1,11 +1,13 @@
-﻿namespace Framework.DomainDriven.DTOGenerator.Server;
+﻿using Framework.CodeGeneration.DTOGenerator.FileType;
+
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileType;
 
 public static class FileTypeExtensions
 {
-    public static bool NeedMappingServiceForConvert(this FileType fileType)
+    public static bool NeedMappingServiceForConvert(this BaseFileType fileType)
     {
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        return fileType != FileType.IdentityDTO;
+        return fileType != BaseFileType.IdentityDTO;
     }
 }

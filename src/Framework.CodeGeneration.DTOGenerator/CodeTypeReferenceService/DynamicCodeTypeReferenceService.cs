@@ -13,9 +13,9 @@ namespace Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
 public class DynamicCodeTypeReferenceService<TConfiguration> : LayerCodeTypeReferenceService<TConfiguration>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    private readonly RoleFileType _referenceFileType;
+    private readonly RoleFileType referenceFileType;
 
-    private readonly RoleFileType _detailFileType;
+    private readonly RoleFileType detailFileType;
 
 
     public DynamicCodeTypeReferenceService(TConfiguration configuration, RoleFileType referenceFileType, RoleFileType detailFileType)
@@ -24,8 +24,8 @@ public class DynamicCodeTypeReferenceService<TConfiguration> : LayerCodeTypeRefe
         if (referenceFileType == null) throw new ArgumentNullException(nameof(referenceFileType));
         if (detailFileType == null) throw new ArgumentNullException(nameof(detailFileType));
 
-        this._referenceFileType = referenceFileType;
-        this._detailFileType = detailFileType;
+        this.referenceFileType = referenceFileType;
+        this.detailFileType = detailFileType;
     }
 
 
@@ -33,7 +33,7 @@ public class DynamicCodeTypeReferenceService<TConfiguration> : LayerCodeTypeRefe
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        return property.IsDetail() ? this._detailFileType : this._referenceFileType;
+        return property.IsDetail() ? this.detailFileType : this.referenceFileType;
     }
 
 
@@ -41,22 +41,22 @@ public class DynamicCodeTypeReferenceService<TConfiguration> : LayerCodeTypeRefe
     {
         if (property.IsDetail())
         {
-            return this._detailFileType;
+            return this.detailFileType;
         }
 
         if (property.IsNotDetail())
         {
-            return this._referenceFileType;
+            return this.referenceFileType;
         }
 
         if (!this.DomainTypeIsPersistent(property) && this.Configuration.IsPersistentObject(property.PropertyType.GetCollectionElementType()))
         {
             if (!property.IsDetail())
             {
-                return this._referenceFileType;
+                return this.referenceFileType;
             }
         }
 
-        return this._detailFileType;
+        return this.detailFileType;
     }
 }

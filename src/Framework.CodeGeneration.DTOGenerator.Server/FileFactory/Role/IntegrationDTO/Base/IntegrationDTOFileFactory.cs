@@ -1,8 +1,19 @@
 ﻿using System.CodeDom;
 
-using Framework.DomainDriven.Generation.Domain;
+using Framework.CodeGeneration.Configuration;
+using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
+using Framework.CodeGeneration.DTOGenerator.Extensions;
+using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.Server.CodeTypeReferenceService;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role._Base;
+using Framework.CodeGeneration.DTOGenerator.Server.FileType;
+using Framework.CodeGeneration.DTOGenerator.Server.Members.MapToDomainObject;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.IntegrationDTO.Base;
 
 public abstract class IntegrationDTOFileFactory<TConfiguration> : RoleDTOFileFactory<TConfiguration>
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
@@ -48,7 +59,7 @@ public abstract class IntegrationDTOFileFactory<TConfiguration> : RoleDTOFileFac
 
         if (this.IsPersistent())
         {
-            if (this.Configuration.GeneratePolicy.Used(this.DomainType, DTOGenerator.FileType.IdentityDTO))
+            if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
             {
                 yield return this.GetIdentityObjectContainerImplementation();
             }

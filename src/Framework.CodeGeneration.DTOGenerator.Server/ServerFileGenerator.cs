@@ -1,27 +1,24 @@
-﻿using Framework.DomainDriven.Generation;
-using Framework.DomainDriven.Generation.Domain;
-using Framework.DomainDriven.Serialization;
+﻿using Framework.BLL.Domain.Serialization.Extensions;
+using Framework.CodeGeneration.Configuration;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Custom;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Mapping;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.EventDTO;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.IntegrationDTO;
+using Framework.CodeGeneration.FileFactory;
 using Framework.Projection;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server;
 
-public class ServerFileGenerator : ServerFileGenerator<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>>
+public class ServerFileGenerator(IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase> configuration)
+    : ServerFileGenerator<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>>(configuration);
+
+public class ServerFileGenerator<TConfiguration>(TConfiguration configuration) : FileGenerator<TConfiguration>(configuration)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public ServerFileGenerator(IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase> configuration)
-            : base(configuration)
-    {
-    }
-}
-
-public class ServerFileGenerator<TConfiguration> : FileGenerator<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
-{
-    public ServerFileGenerator(TConfiguration configuration)
-            : base(configuration)
-    {
-    }
-
-
     protected override ICodeFileFactory<DTOFileType> GetIdentityDTOFileFactory(Type domainType)
     {
         return new DefaultServerIdentityDTOFileFactory<TConfiguration>(this.Configuration, domainType);

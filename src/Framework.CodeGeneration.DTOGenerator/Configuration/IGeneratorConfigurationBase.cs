@@ -9,12 +9,10 @@ using Framework.CodeGeneration.GeneratePolicy;
 
 namespace Framework.CodeGeneration.DTOGenerator.Configuration;
 
-public interface IGeneratorConfigurationBase<out TEnvironment> : IGeneratorConfigurationBase, IGeneratorConfiguration<TEnvironment, FileType.FileType>
-        where TEnvironment : IGenerationEnvironmentBase
-{
-}
+public interface IGeneratorConfigurationBase<out TEnvironment> : IGeneratorConfigurationBase, IGeneratorConfiguration<TEnvironment, BaseFileType>
+    where TEnvironment : IGenerationEnvironmentBase;
 
-public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTypeReferenceService<FileType.FileType>
+public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTypeReferenceService<BaseFileType>
 {
     IGeneratePolicy<RoleFileType> GeneratePolicy { get; }
 
@@ -36,6 +34,8 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     string DTOEmptyPropertyName { get; }
 
+    IEnumerable<MainDTOFileType> GetNestedTypes(MainDTOFileType fileType);
+
 
     bool ForceGenerateProperties(Type domainType, DTOFileType fileType);
 
@@ -52,10 +52,10 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
     CodeExpression GetDefaultClientDTOMappingServiceExpression();
 
     CodeExpression GetCreateUpdateDTOExpression(
-            Type domainType,
-            CodeExpression currentStrictSource,
-            CodeExpression baseStrictSource,
-            CodeExpression mappingService);
+        Type domainType,
+        CodeExpression currentStrictSource,
+        CodeExpression baseStrictSource,
+        CodeExpression mappingService);
 
     //GenerateTypeMap GetTypeMap(Type domainType, DTOFileType fileType);
 }

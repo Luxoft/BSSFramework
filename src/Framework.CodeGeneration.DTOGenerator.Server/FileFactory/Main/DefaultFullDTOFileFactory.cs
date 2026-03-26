@@ -1,13 +1,12 @@
-﻿namespace Framework.DomainDriven.DTOGenerator.Server;
+﻿using Framework.CodeGeneration.DTOGenerator.FileType;
 
-public class DefaultFullDTOFileFactory<TConfiguration> : MainDTOFileFactory<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main.Base;
+
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main;
+
+public class DefaultFullDTOFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : MainDTOFileFactory<TConfiguration>(configuration, domainType)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public DefaultFullDTOFileFactory(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
-    {
-
-    }
-
-    public override MainDTOFileType FileType { get; } = DTOGenerator.FileType.FullDTO;
+    public override MainDTOFileType FileType { get; } = BaseFileType.FullDTO;
 }

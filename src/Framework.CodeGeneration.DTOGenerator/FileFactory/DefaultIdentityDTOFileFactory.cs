@@ -13,16 +13,10 @@ using Framework.Core;
 
 namespace Framework.CodeGeneration.DTOGenerator.FileFactory;
 
-public class DefaultIdentityDTOFileFactory<TConfiguration> : FileFactory<TConfiguration, DTOFileType>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : FileFactory<TConfiguration, DTOFileType>(configuration, domainType)
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public DefaultIdentityDTOFileFactory(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
-    {
-    }
-
-
-    public override DTOFileType FileType { get; } = DTOGenerator.FileType.FileType.IdentityDTO;
+    public override DTOFileType FileType { get; } = BaseFileType.IdentityDTO;
 
     public string IdPropertyName => this.Configuration.Environment.IdentityProperty.Name;
 
@@ -96,9 +90,9 @@ public class DefaultIdentityDTOFileFactory<TConfiguration> : FileFactory<TConfig
                          };
         }
 
-        if (this.Configuration.GeneratePolicy.Used(this.DomainType, DTOGenerator.FileType.FileType.SimpleDTO))
+        if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.SimpleDTO))
         {
-            var sourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, DTOGenerator.FileType.FileType.SimpleDTO).ToParameterDeclarationExpression("source");
+            var sourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, BaseFileType.SimpleDTO).ToParameterDeclarationExpression("source");
 
             var sourceParameterRef = sourceParameter.ToVariableReferenceExpression();
 

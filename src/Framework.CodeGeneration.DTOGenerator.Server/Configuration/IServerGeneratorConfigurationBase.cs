@@ -2,9 +2,12 @@
 using System.Collections.ObjectModel;
 using System.Reflection;
 
+using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration.PropertyAssigner;
 using Framework.Events;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 
 public interface IServerGeneratorConfigurationBase<out TEnvironmentBase> : IServerGeneratorConfigurationBase, IGeneratorConfigurationBase<TEnvironmentBase>
         where TEnvironmentBase : IServerGenerationEnvironmentBase
@@ -16,7 +19,6 @@ public interface IServerGeneratorConfigurationBase : IGeneratorConfigurationBase
     bool UseRemoveMappingExtension { get; }
 
     IPropertyAssignerConfigurator PropertyAssignerConfigurator { get; }
-
 
     IDomainObjectEventMetadata DomainObjectEventMetadata { get; }
 
@@ -47,16 +49,16 @@ public interface IServerGeneratorConfigurationBase : IGeneratorConfigurationBase
     PropertyInfo VersionProperty { get; }
 
 
-    CodeMethodReferenceExpression GetConvertToDTOMethod(Type domainType, FileType fileType);
+    CodeMethodReferenceExpression GetConvertToDTOMethod(Type domainType, BaseFileType fileType);
 
-    CodeMethodReferenceExpression GetConvertToDTOListMethod(Type domainType, FileType fileType);
+    CodeMethodReferenceExpression GetConvertToDTOListMethod(Type domainType, BaseFileType fileType);
 
     IEnumerable<Type> GetDomainTypeMasters(Type domainType, DTOFileType fileType, bool isWritable);
 
 
     bool CanCreateDomainObject(PropertyInfo property, Type elementType, DTOFileType fileType);
 
-    Type GetAllowCreateAttributeType(DTOFileType fileType);
+    Type? TryGetAllowCreateAttributeType(DTOFileType fileType);
 
     CodeAttributeDeclaration GetDTOFileAttribute(Type domainType, RoleFileType fileType);
 }

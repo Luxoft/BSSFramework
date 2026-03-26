@@ -3,20 +3,17 @@ using System.Reflection;
 
 using CommonFramework.Maybe;
 
+using Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
 using Framework.CodeDom;
-using Framework.Exceptions;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.SecurityToDomainObject.Strict;
 
-public abstract class StrictToDomainObjectPropertyAssignerBase<TConfiguration> : MaybeSecurityToDomainObjectPropertyAssigner<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+public abstract class StrictToDomainObjectPropertyAssignerBase<TConfiguration>(IPropertyAssigner<TConfiguration> innerAssigner)
+    : MaybeSecurityToDomainObjectPropertyAssigner<TConfiguration>(innerAssigner)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    protected StrictToDomainObjectPropertyAssignerBase(IPropertyAssigner<TConfiguration> innerAssigner)
-            : base(innerAssigner)
-    {
-    }
-
-
     protected abstract CodeExpression GetCondition(PropertyInfo property);
 
     protected override CodeStatement GetSecurityAssignStatementInternal(PropertyInfo property, CodeExpression justValueRefExpr, CodeStatement innerAssignStatement)

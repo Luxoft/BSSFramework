@@ -19,15 +19,10 @@ public interface IPropertyCodeTypeReferenceService : ICodeTypeReferenceService
     CodeTypeReference GetCodeTypeReference(PropertyInfo property, bool withOptional = false);
 }
 
-public class PropertyCodeTypeReferenceService<TConfiguration> : CodeTypeReferenceService<TConfiguration>, IPropertyCodeTypeReferenceService
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+public class PropertyCodeTypeReferenceService<TConfiguration>(TConfiguration configuration)
+    : CodeTypeReferenceService<TConfiguration>(configuration), IPropertyCodeTypeReferenceService
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public PropertyCodeTypeReferenceService(TConfiguration configuration)
-            : base(configuration)
-    {
-    }
-
-
     public virtual bool IsOptional(PropertyInfo property)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));

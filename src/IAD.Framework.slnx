@@ -24,6 +24,7 @@
     <Project Path="Framework.FileGeneration/Framework.FileGeneration.csproj" />
   </Folder>
   <Folder Name="/CodeGeneration/DTO/">
+    <Project Path="Framework.CodeGeneration.DTOGenerator.Server/Framework.CodeGeneration.DTOGenerator.Server.csproj" />
     <Project Path="Framework.CodeGeneration.DTOGenerator/Framework.CodeGeneration.DTOGenerator.csproj" />
   </Folder>
   <Folder Name="/Configuration/">
@@ -119,6 +120,7 @@
   <Folder Name="/_BLL/">
     <Project Path="Framework.BLL.Abstractions/Framework.BLL.Abstractions.csproj" />
     <Project Path="Framework.BLL.Domain/Framework.BLL.Domain.csproj" />
+    <Project Path="Framework.BLL.DTOMapping/Framework.BLL.DTOMapping.csproj" />
     <Project Path="Framework.BLL.Runtime/Framework.BLL.Runtime.csproj" />
     <Project Path="Framework.BLL/Framework.BLL.csproj" />
   </Folder>

@@ -7,15 +7,9 @@ using Framework.CodeGeneration.DTOGenerator.FileType;
 
 namespace Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
 
-public class ProjectionCodeTypeReferenceService<TConfiguration> : MainCodeTypeReferenceService<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+public class ProjectionCodeTypeReferenceService<TConfiguration>(TConfiguration configuration) : MainCodeTypeReferenceService<TConfiguration>(configuration)
+    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public ProjectionCodeTypeReferenceService(TConfiguration configuration)
-            : base(configuration)
-    {
-    }
-
-
     public override Type CollectionType => this.Configuration.ClientEditCollectionType;
 
 
@@ -25,7 +19,7 @@ public class ProjectionCodeTypeReferenceService<TConfiguration> : MainCodeTypeRe
 
         if (this.Configuration.ProjectionTypes.Contains(property.PropertyType))
         {
-            return FileType.FileType.ProjectionDTO;
+            return BaseFileType.ProjectionDTO;
         }
         else
         {
@@ -39,7 +33,7 @@ public class ProjectionCodeTypeReferenceService<TConfiguration> : MainCodeTypeRe
 
         if (this.Configuration.ProjectionTypes.Contains(property.PropertyType.GetCollectionElementType()))
         {
-            return FileType.FileType.ProjectionDTO;
+            return BaseFileType.ProjectionDTO;
         }
         else
         {

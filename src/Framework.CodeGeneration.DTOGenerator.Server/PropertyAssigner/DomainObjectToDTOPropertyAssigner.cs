@@ -4,19 +4,17 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.CodeDom;
+using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileType;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.__Base;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 
-public class DomainObjectToDTOPropertyAssigner<TConfiguration> : ServerPropertyAssigner<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+public class DomainObjectToDTOPropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> source) : ServerPropertyAssigner<TConfiguration>(source)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public DomainObjectToDTOPropertyAssigner(IDTOSource<TConfiguration> source)
-            : base(source)
-    {
-    }
-
-
-
     public override CodeStatement GetAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));

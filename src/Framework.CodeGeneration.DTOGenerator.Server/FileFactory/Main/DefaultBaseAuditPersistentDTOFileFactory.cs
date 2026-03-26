@@ -1,13 +1,13 @@
-﻿namespace Framework.DomainDriven.DTOGenerator.Server;
+﻿using Framework.CodeGeneration.DTOGenerator.FileType;
 
-public class DefaultBaseAuditPersistentDTOFileFactory<TConfiguration> : MainDTOFileFactory<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main.Base;
+
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main;
+
+public class DefaultBaseAuditPersistentDTOFileFactory<TConfiguration>(TConfiguration configuration)
+    : MainDTOFileFactory<TConfiguration>(configuration, configuration.Environment.AuditPersistentDomainObjectBaseType)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public DefaultBaseAuditPersistentDTOFileFactory(TConfiguration configuration)
-            : base(configuration, configuration.Environment.AuditPersistentDomainObjectBaseType)
-    {
-    }
-
-
-    public override MainDTOFileType FileType { get; } = DTOGenerator.FileType.BaseAuditPersistentDTO;
+    public override MainDTOFileType FileType { get; } = BaseFileType.BaseAuditPersistentDTO;
 }

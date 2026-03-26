@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 
 using Framework.BLL;
-using Framework.BLL.AccessDeniedExceptionService;
 using Framework.BLL.Services;
 using Framework.CodeDom;
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration;

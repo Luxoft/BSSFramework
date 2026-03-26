@@ -2,10 +2,14 @@
 using System.Reflection;
 
 using Framework.CodeDom;
+using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Mapping;
 
-public class ServerPrimitiveDTOMappingServiceFileFactory<TConfiguration> : FileFactory<TConfiguration, FileType>
+public class ServerPrimitiveDTOMappingServiceFileFactory<TConfiguration> : FileFactory<TConfiguration, BaseFileType>
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
     public ServerPrimitiveDTOMappingServiceFileFactory(TConfiguration configuration)
@@ -15,7 +19,7 @@ public class ServerPrimitiveDTOMappingServiceFileFactory<TConfiguration> : FileF
     }
 
 
-    public override FileType FileType { get; } = ServerFileType.ServerPrimitiveDTOMappingService;
+    public override BaseFileType FileType { get; } = ServerFileType.ServerPrimitiveDTOMappingService;
 
 
     public override CodeTypeReference BaseReference { get; }

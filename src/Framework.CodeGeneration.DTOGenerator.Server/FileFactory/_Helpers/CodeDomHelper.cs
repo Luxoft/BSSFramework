@@ -2,13 +2,23 @@
 
 using CommonFramework;
 
+using Framework.Application.Repository;
+using Framework.BLL;
+using Framework.BLL.DTOMapping;
 using Framework.CodeDom;
+using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Extensions;
+using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
+using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
+using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 using Framework.Core;
-using Framework.DomainDriven.BLLCoreGenerator;
-using Framework.DomainDriven.Lock;
+
 using SecuritySystem;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
 
 internal static class CodeDomHelper
 {
@@ -44,7 +54,7 @@ internal static class CodeDomHelper
                        }
                }.Self(decl =>
                       {
-                          if (fileFactory.FileType == FileType.ProjectionDTO || (fileFactory.FileType as MainDTOFileType).Maybe(fileType => fileType.BaseType != null))
+                          if (fileFactory.FileType == BaseFileType.ProjectionDTO || (fileFactory.FileType as MainDTOFileType).Maybe(fileType => fileType.BaseType != null))
                           {
                               decl.BaseConstructorArgs.AddRange(new CodeExpression[]
                                                                 {
@@ -250,7 +260,7 @@ internal static class CodeDomHelper
 
         var fileType = (fileFactory as IDTOSource).FileType;
 
-        if (fileType == FileType.IdentityDTO || fileType == FileType.SimpleDTO || fileType == ServerFileType.SimpleIntegrationDTO)
+        if (fileType == BaseFileType.IdentityDTO || fileType == BaseFileType.SimpleDTO || fileType == ServerFileType.SimpleIntegrationDTO)
         {
             if (fileType == ServerFileType.SimpleIntegrationDTO && fileFactory.DomainType.IsIntegrationVersion())
             {

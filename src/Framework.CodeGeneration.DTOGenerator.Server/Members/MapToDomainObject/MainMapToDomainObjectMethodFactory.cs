@@ -1,19 +1,18 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
+using Framework.CodeGeneration.DTOGenerator.FileType;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
 
-public class MainMapToDomainObjectMethodFactory<TConfiguration, TFileFactory> : BaseMapToDomainObjectMethodFactory<TConfiguration, TFileFactory, MainDTOFileType>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
-        where TFileFactory : DTOFileFactory<TConfiguration, MainDTOFileType>
+namespace Framework.CodeGeneration.DTOGenerator.Server.Members.MapToDomainObject;
+
+public class MainMapToDomainObjectMethodFactory<TConfiguration, TFileFactory>(TFileFactory fileFactory)
+    : BaseMapToDomainObjectMethodFactory<TConfiguration, TFileFactory, MainDTOFileType>(fileFactory)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TFileFactory : DTOFileFactory<TConfiguration, MainDTOFileType>
 {
-    public MainMapToDomainObjectMethodFactory(TFileFactory fileFactory)
-            : base(fileFactory)
-    {
-    }
-
-
     protected override MemberAttributes MemberAttributes => this.FileFactory.FileType.ToMapToDomainObjectMemberAttributes();
 
 

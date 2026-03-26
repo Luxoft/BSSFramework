@@ -4,21 +4,25 @@ using System.Reflection;
 using CommonFramework.Maybe;
 
 using Framework.CodeDom;
+using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner._Security.Base;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.Core;
 
-namespace Framework.DomainDriven.DTOGenerator.Server;
+namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.ExpandMaybe;
 
 public class ExpandMaybeSecurityToSecurityPropertyAssigner<TConfiguration>  : MaybePropertyAssigner<TConfiguration>
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    private readonly IPropertyCodeTypeReferenceService _sourceTypeReferenceService;
+    private readonly IPropertyCodeTypeReferenceService sourceTypeReferenceService;
 
     public ExpandMaybeSecurityToSecurityPropertyAssigner(IPropertyAssigner<TConfiguration> innerAssigner, IPropertyCodeTypeReferenceService sourceTypeReferenceService)
             : base(innerAssigner)
     {
         if (sourceTypeReferenceService == null) throw new ArgumentNullException(nameof(sourceTypeReferenceService));
 
-        this._sourceTypeReferenceService = sourceTypeReferenceService;
+        this.sourceTypeReferenceService = sourceTypeReferenceService;
     }
 
 

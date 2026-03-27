@@ -1,12 +1,9 @@
-﻿
-
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Text.Json;
 
 using Framework.Core;
 
-
-namespace Framework.DomainDriven.WebApiNetCore.JsonConverter;
+namespace Framework.Infrastructure.JsonConverter;
 
 public class PeriodJsonConverter : JsonConverter<Period>
 {

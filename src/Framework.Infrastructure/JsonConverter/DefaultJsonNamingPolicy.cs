@@ -2,7 +2,7 @@
 
 using System.Text.Json;
 
-namespace Framework.DomainDriven.WebApiNetCore.JsonConverter;
+namespace Framework.Infrastructure.JsonConverter;
 
 public class DefaultJsonNamingPolicy : JsonNamingPolicy
 {

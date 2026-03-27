@@ -7,7 +7,10 @@ using Microsoft.Extensions.Logging;
 
 namespace Framework.Application.Jobs;
 
-public class JobMiddlewareFactory(IServiceProvider serviceProvider, ApplicationDefaultUserAuthenticationServiceSettings applicationDefaultUserAuthenticationServiceSettings, JobImpersonateData? jobImpersonateData = null) : IJobMiddlewareFactory
+public class JobMiddlewareFactory(
+    IServiceProvider serviceProvider,
+    ApplicationDefaultUserAuthenticationServiceSettings applicationDefaultUserAuthenticationServiceSettings,
+    JobImpersonateData? jobImpersonateData = null) : IJobMiddlewareFactory
 {
     public IScopedEvaluatorMiddleware Create<TJob>(bool withRootLogging) => this.GetMiddlewares<TJob>(withRootLogging).Aggregate();
 
@@ -15,7 +18,7 @@ public class JobMiddlewareFactory(IServiceProvider serviceProvider, ApplicationD
     {
         yield return new TryCloseSessionEvaluatorMiddleware(serviceProvider.GetRequiredService<IDBSessionManager>());
 
-        yield return new ImpersonateEvaluatorMiddleware(serviceProvider, jobImpersonateData?.RunAs ?? applicationDefaultUserAuthenticationServiceSettings.Name);
+        yield return new ImpersonateEvaluatorMiddleware(serviceProvider, jobImpersonateData?.RunAs ?? applicationDefaultUserAuthenticationServiceSettings.UserName);
 
         if (withRootLogging)
         {

@@ -2,8 +2,7 @@
 using System.Reflection;
 
 using CommonFramework.Maybe;
-
-using Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
+using Framework.BLL.Domain.Exceptions;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;

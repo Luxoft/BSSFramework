@@ -3,7 +3,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Controllers;
 
-namespace Framework.DomainDriven.WebApiNetCore;
+namespace Framework.Infrastructure.Middleware;
 
 public class WebApiCurrentMethodResolver : IWebApiCurrentMethodResolver
 {

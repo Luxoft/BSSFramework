@@ -3,8 +3,7 @@ using System.Collections.ObjectModel;
 
 using CommonFramework;
 using CommonFramework.Maybe;
-
-using Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
+using Framework.BLL.Domain.Exceptions;
 using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.Extensions;
 using Framework.CodeGeneration.FileFactory;

@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Framework.Infrastructure.WebApiExceptionExpander;
 
-namespace Framework.DomainDriven.WebApiNetCore;
+using Microsoft.AspNetCore.Http;
+
+namespace Framework.Infrastructure.Middleware;
 
 public class WebApiExceptionExpanderMiddleware
 {

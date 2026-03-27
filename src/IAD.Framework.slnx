@@ -163,7 +163,6 @@
   <Project Path="Framework.Tracking.Validation/Framework.Tracking.Validation.csproj" />
   <Project Path="Framework.Tracking/Framework.Tracking.csproj" />
   <Project Path="Framework.UnitTesting/Framework.UnitTesting.csproj" />
-  <Project Path="Framework.WebApi.Utils/Framework.WebApi.Utils.csproj" />
   <Project Path="_DomainDriven/Framework.Events.Legacy/Framework.Events.Legacy.csproj" />
   <Project Path="_DomainDriven/Framework.FinancialYear.Tests.Unit/Framework.FinancialYear.Tests.Unit.csproj" />
   <Project Path="_DomainDriven/Framework.Notification.Abstract/Framework.Notification.Abstract.csproj" />

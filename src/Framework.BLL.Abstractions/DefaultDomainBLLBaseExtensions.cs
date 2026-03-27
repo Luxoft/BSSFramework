@@ -3,8 +3,7 @@
 using CommonFramework;
 
 using Framework.Application.Domain;
-using Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
-using Framework.BLL.Domain.Exceptions.BusinessLogic.NotFound;
+using Framework.BLL.Domain.Exceptions;
 using Framework.BLL.Domain.IdentityObject;
 using Framework.BLL.Domain.Persistent.IdentityObject;
 using Framework.Core;

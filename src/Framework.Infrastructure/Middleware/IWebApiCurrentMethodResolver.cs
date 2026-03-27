@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Framework.DomainDriven.WebApiNetCore;
+namespace Framework.Infrastructure.Middleware;
 
 public interface IWebApiCurrentMethodResolver
 {

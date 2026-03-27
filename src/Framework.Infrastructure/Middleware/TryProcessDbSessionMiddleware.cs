@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Framework.Database;
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.DomainDriven.WebApiNetCore;
+namespace Framework.Infrastructure.Middleware;
 
 public class TryProcessDbSessionMiddleware
 {

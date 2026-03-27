@@ -3,12 +3,11 @@ using System.Net.Mime;
 
 using Framework.Core;
 
+using Microsoft.AspNetCore.Mvc;
 
 using SecuritySystem;
 
-using Microsoft.AspNetCore.Mvc;
-
-namespace Framework.DomainDriven.WebApiNetCore.Integration;
+namespace Framework.Infrastructure.Integration;
 
 [Obsolete("Will be removed in v19")]
 public abstract class IntegrationSchemaControllerBase : ControllerBase

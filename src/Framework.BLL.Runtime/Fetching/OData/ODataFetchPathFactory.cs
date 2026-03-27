@@ -13,8 +13,7 @@ public class ODataFetchPathFactory(Type persistentDomainObjectBase) : IFetchPath
         if (startDomainType == null) throw new ArgumentNullException(nameof(startDomainType));
         if (selectOperation == null) throw new ArgumentNullException(nameof(selectOperation));
 
-        var allResults = selectOperation.Expands.SelectMany(
-                                                            z => this.PreGetLoadPaths(startDomainType, z.GetPropertyPath().ToArray(pair => pair.Item1)))
+        var allResults = selectOperation.Expands.SelectMany(z => this.PreGetLoadPaths(startDomainType, z.GetPropertyPath().ToArray(pair => pair.Item1)))
                                         .ToList();
 
         var results = allResults.Distinct((arg1, arg2) => arg1.SequenceEqual(arg2)).ToList();

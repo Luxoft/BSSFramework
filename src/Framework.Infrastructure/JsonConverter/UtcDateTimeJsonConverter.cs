@@ -1,7 +1,7 @@
-﻿using System.Text.Json.Serialization;
-using System.Text.Json;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
-namespace Framework.DomainDriven.WebApiNetCore.JsonConverter;
+namespace Framework.Infrastructure.JsonConverter;
 
 public class UtcDateTimeJsonConverter : JsonConverter<DateTime>
 {

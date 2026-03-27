@@ -1,11 +1,10 @@
 ﻿using System.Reflection;
 
 using CommonFramework;
-using CommonFramework.Maybe;
 
-using Framework.Core;
+using Framework.Database;
 
-namespace Framework.DomainDriven.WebApiNetCore;
+namespace Framework.Infrastructure.Middleware;
 
 public class WebApiDBSessionModeResolver : IWebApiDBSessionModeResolver
 {

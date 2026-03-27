@@ -1,12 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Framework.Infrastructure.WebApiExceptionExpander;
 
-namespace Framework.DomainDriven.WebApiNetCore;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Framework.Infrastructure.Middleware;
 
 public static class MiddlewareDependencyInjectionExtensions
 {
     public static IServiceCollection RegisterMiddlewareServices(this IServiceCollection services)
     {
-        services.AddScoped<IWebApiExceptionExpander, WebApiExceptionExpander>();
+        services.AddScoped<IWebApiExceptionExpander, WebApiExceptionExpander.WebApiExceptionExpander>();
 
         services.AddScoped<IWebApiDBSessionModeResolver, WebApiDBSessionModeResolver>();
         services.AddScoped<IWebApiCurrentMethodResolver, WebApiCurrentMethodResolver>();

@@ -1,6 +1,6 @@
 ﻿namespace Framework.Infrastructure.DependencyInjection;
 
-public interface IBssFrameworkSettingsBase<out TSelf>
+public interface IBssFrameworkBuilderBase<out TSelf>
 {
     TSelf AddExtensions(IBssFrameworkExtension extension);
 

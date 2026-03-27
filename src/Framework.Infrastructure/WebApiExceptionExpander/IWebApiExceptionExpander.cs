@@ -1,6 +1,6 @@
-﻿using Framework.Exceptions;
+﻿using Framework.Core;
 
-namespace Framework.DomainDriven.WebApiNetCore;
+namespace Framework.Infrastructure.WebApiExceptionExpander;
 
 /// <summary>
 /// Handle and wrap exception for user UI

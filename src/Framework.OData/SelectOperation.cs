@@ -64,13 +64,4 @@ public record SelectOperation(
         0,
 
         int.MaxValue);
-
-
-    #region IDynamicSelectOperation Members
-
-    IEnumerable<LambdaExpression> IDynamicSelectOperation.Expands { get { return this.Expands; } }
-
-    IEnumerable<LambdaExpression> IDynamicSelectOperation.Selects { get { return this.Selects; } }
-
-    #endregion
 }

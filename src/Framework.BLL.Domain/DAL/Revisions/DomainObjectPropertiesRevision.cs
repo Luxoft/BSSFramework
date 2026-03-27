@@ -9,5 +9,5 @@ public class DomainObjectPropertyRevisions<TIdent>(TIdent identity, string prope
 public class DomainObjectPropertyRevisionsBase<TIdent>(TIdent identity, string propertyName)
     : DomainObjectRevisionBase<TIdent, RevisionInfoBase>(identity), IDomainObjectPropertyRevisionBase<TIdent, RevisionInfoBase>
 {
-    public string PropertyName { get; private set; } = propertyName;
+    public string PropertyName { get; } = propertyName;
 }

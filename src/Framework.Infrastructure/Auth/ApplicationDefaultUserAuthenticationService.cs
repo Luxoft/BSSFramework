@@ -1,13 +1,14 @@
-﻿using Framework.Core.Auth;
-using Framework.DomainDriven.Auth;
+﻿using Framework.Application.Auth;
+using Framework.Core.Auth;
+
 using Microsoft.AspNetCore.Http;
 
 namespace Framework.Infrastructure.Auth;
 
 public class ApplicationDefaultUserAuthenticationService(
     IHttpContextAccessor httpContextAccessor,
-    IApplicationDefaultUserAuthenticationServiceSettings settings)
+    ApplicationDefaultUserAuthenticationServiceSettings settings)
     : IDefaultUserAuthenticationService
 {
-    public string GetUserName() => httpContextAccessor.HttpContext?.User.Identity?.Name ?? settings.DefaultValue;
+    public string GetUserName() => httpContextAccessor.HttpContext?.User.Identity?.Name ?? settings.UserName;
 }

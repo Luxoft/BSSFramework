@@ -1,8 +1,8 @@
-using System.IO.Compression;
+﻿using System.IO.Compression;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace Framework.DomainDriven.WebApiNetCore.Integration;
+namespace Framework.Infrastructure.Integration;
 
 [Obsolete("Use IEventXsdExporter2")]
 public class EventXsdExporter

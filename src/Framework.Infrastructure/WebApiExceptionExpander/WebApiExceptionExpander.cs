@@ -1,9 +1,13 @@
-﻿using Framework.Core;
-using Framework.DomainDriven.DALExceptions;
-using Framework.Exceptions;
+﻿using System.Security;
+
+using Framework.Application.Services;
+using Framework.Core;
+using Framework.Database;
+using Framework.Database.DALExceptions;
+
 using SecuritySystem;
 
-namespace Framework.DomainDriven.WebApiNetCore;
+namespace Framework.Infrastructure.WebApiExceptionExpander;
 
 public class WebApiExceptionExpander(IExceptionExpander exceptionExpander) : IWebApiExceptionExpander
 {
@@ -17,12 +21,12 @@ public class WebApiExceptionExpander(IExceptionExpander exceptionExpander) : IWe
     }
 
     /// <summary>
-    ///     Get Internal Server Exception
+    /// Get Internal Server Exception
     /// </summary>
     protected virtual Exception GetInternalServerException(Exception exception) => new InternalServerException(InternalServerException.DefaultMessage, exception);
 
     /// <summary>
-    ///     Is Handled Exception
+    /// Is Handled Exception
     /// </summary>
     protected virtual bool IsHandledException(Exception exception)
     {

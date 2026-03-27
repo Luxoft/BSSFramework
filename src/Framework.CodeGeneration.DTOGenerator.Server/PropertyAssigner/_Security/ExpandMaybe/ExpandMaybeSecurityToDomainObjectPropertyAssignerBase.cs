@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 using System.Reflection;
-
-using Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
+using Framework.BLL.Domain.Exceptions;
 using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;

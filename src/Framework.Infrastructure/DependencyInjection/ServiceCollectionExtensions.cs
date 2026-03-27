@@ -1,6 +1,8 @@
-﻿using Framework.DomainDriven.WebApiNetCore;
-using Framework.DomainDriven.WebApiNetCore.Integration;
+﻿using Framework.Application.DependencyInjection;
 using Framework.Infrastructure.Auth;
+using Framework.Infrastructure.Integration;
+using Framework.Infrastructure.Middleware;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Infrastructure.DependencyInjection;
@@ -9,7 +11,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddBssFramework(this IServiceCollection services, Action<IBssFrameworkSettings>? setupAction)
     {
-        services.RegisterGenericServices();
+        services.AddGenericApplicationServices();
         services.RegisterDefaultUserAuthenticationServices();
         services.RegisterWebApiGenericServices();
 

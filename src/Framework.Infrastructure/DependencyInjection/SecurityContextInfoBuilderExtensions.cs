@@ -1,8 +1,11 @@
 ﻿using System.Linq.Expressions;
 
+using CommonFramework.DependencyInjection;
+
 using HierarchicalExpand;
 
 using SecuritySystem;
+using SecuritySystem.DependencyInjection;
 
 namespace Framework.Infrastructure.DependencyInjection;
 

@@ -1,4 +1,4 @@
-namespace Framework.DomainDriven.WebApiNetCore.Integration;
+﻿namespace Framework.Infrastructure.Integration;
 
 public interface IEventXsdExporter2
 {

@@ -2,7 +2,7 @@
 
 using CommonFramework;
 
-using Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
+using Framework.BLL.Domain.Exceptions;
 using Framework.Core.Serialization;
 using Framework.OData;
 

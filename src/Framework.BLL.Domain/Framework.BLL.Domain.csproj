@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Framework.Restriction\Framework.Restriction.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Exceptions\BusinessLogic\" />
+  </ItemGroup>
+
 </Project>

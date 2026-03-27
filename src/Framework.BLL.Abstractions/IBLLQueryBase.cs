@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
-
-using Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
+using Framework.BLL.Domain.Exceptions;
 using Framework.BLL.Domain.Models;
 using Framework.Database;
 using Framework.OData;

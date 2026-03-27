@@ -1,6 +1,4 @@
-﻿using Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
-
-namespace Framework.BLL.Domain.Exceptions.BusinessLogic.NotFound;
+﻿namespace Framework.BLL.Domain.Exceptions;
 
 public class ObjectByNameNotFoundException : BusinessLogicException
 {

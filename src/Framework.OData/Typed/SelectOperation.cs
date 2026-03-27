@@ -62,8 +62,4 @@ public record SelectOperation<TDomainObject>(
 
 
     public static readonly SelectOperation<TDomainObject> Default = new(_ => true, [], 0, int.MaxValue);
-
-    IEnumerable<Framework.QueryLanguage.LambdaExpression> IDynamicSelectOperation.Expands => this.Expands;
-
-    IEnumerable<Framework.QueryLanguage.LambdaExpression> IDynamicSelectOperation.Selects => this.Selects;
 }

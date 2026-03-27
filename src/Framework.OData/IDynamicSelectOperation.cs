@@ -1,10 +1,12 @@
-﻿using Framework.QueryLanguage;
+﻿using System.Collections.Immutable;
+
+using Framework.QueryLanguage;
 
 namespace Framework.OData;
 
 public interface IDynamicSelectOperation
 {
-    IEnumerable<LambdaExpression> Expands { get; }
+    ImmutableArray<LambdaExpression> Expands { get; }
 
-    IEnumerable<LambdaExpression> Selects { get; }
+    ImmutableArray<LambdaExpression> Selects { get; }
 }

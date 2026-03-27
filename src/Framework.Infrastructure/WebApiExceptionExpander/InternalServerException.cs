@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.WebApiNetCore;
+﻿namespace Framework.Infrastructure.WebApiExceptionExpander;
 
 /// <summary>
 /// IAD Framework Internal Server Exception

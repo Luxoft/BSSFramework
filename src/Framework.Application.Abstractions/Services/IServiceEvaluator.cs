@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 
-namespace Framework.BLL.Services;
+namespace Framework.Application.Services;
 
 /// <summary>
 /// Сервис обработки исключений в рамках скоупа

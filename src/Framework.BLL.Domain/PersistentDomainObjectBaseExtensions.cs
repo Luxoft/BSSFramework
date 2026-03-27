@@ -5,7 +5,7 @@ using CommonFramework;
 using CommonFramework.Maybe;
 
 using Framework.Application.Domain;
-using Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
+using Framework.BLL.Domain.Exceptions;
 using Framework.Core;
 
 namespace Framework.BLL.Domain;

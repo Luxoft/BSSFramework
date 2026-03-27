@@ -7,7 +7,7 @@ using SecuritySystem.DependencyInjection;
 
 namespace Framework.Infrastructure.DependencyInjection;
 
-public interface IBssFrameworkSettings : IBssFrameworkSettingsBase<IBssFrameworkSettings>
+public interface IBssFrameworkSettings : IBssFrameworkBuilderBase<IBssFrameworkSettings>
 {
     bool RegisterDenormalizeHierarchicalDALListener { get; set; }
 

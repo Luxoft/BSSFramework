@@ -3,21 +3,20 @@
 using CommonFramework;
 using CommonFramework.Maybe;
 
+using Framework.Application.Services;
 using Framework.BLL.Domain.Exceptions;
-using Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
-using Framework.BLL.Domain.Exceptions.Extensions;
 using Framework.Core;
 
 namespace Framework.BLL.Services;
 
 public class ExceptionExpander : IExceptionExpander
 {
-    private static readonly MethodInfo ProcessAggregateExceptionMethod = typeof(ExceptionExpander).GetMethod(nameof(ProcessAggregateException), BindingFlags.NonPublic | BindingFlags.Instance, true)!;
-
+    private static readonly MethodInfo ProcessAggregateExceptionMethod =
+        typeof(ExceptionExpander).GetMethod(nameof(ProcessAggregateException), BindingFlags.NonPublic | BindingFlags.Instance, true)!;
 
     protected virtual Exception ProcessAggregateException<TCurrentException, TInnerException>(TCurrentException currentException)
-            where TCurrentException : Exception, IAggregateException<TInnerException>
-            where TInnerException : Exception
+        where TCurrentException : Exception, IAggregateException<TInnerException>
+        where TInnerException : Exception
     {
         var innerExceptions = currentException.InnerExceptions.Select(this.Process).ToList();
 
@@ -48,7 +47,7 @@ public class ExceptionExpander : IExceptionExpander
     }
 
     protected class WrappedAggregateException(Exception baseAggregateException, IEnumerable<Exception> innerExceptions, string? lineSeparator = null)
-        : BusinessLogicException(baseAggregateException, innerExceptions.Join(lineSeparator ?? Environment.NewLine, exception => exception.Message))
+        : BusinessLogicException(innerExceptions.Join(lineSeparator ?? Environment.NewLine, exception => exception.Message), baseAggregateException)
     {
         private readonly Exception baseAggregateException = baseAggregateException ?? throw new ArgumentNullException(nameof(baseAggregateException));
 

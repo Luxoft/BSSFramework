@@ -1,4 +1,6 @@
-﻿namespace Framework.DomainDriven.WebApiNetCore;
+﻿using Framework.Database;
+
+namespace Framework.Infrastructure.Middleware;
 
 public interface IWebApiDBSessionModeResolver
 {

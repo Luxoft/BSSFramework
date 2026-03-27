@@ -1,4 +1,4 @@
-﻿namespace Framework.Application.ScopedEvaluate;
+﻿namespace Framework.Application.Middleware;
 
 public interface IScopedEvaluatorMiddleware
 {

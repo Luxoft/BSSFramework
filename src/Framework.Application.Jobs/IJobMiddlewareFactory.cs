@@ -1,6 +1,6 @@
-﻿using Framework.DomainDriven.ScopedEvaluate;
+﻿using Framework.Application.Middleware;
 
-namespace Framework.DomainDriven.Jobs;
+namespace Framework.Application.Jobs;
 
 public interface IJobMiddlewareFactory
 {

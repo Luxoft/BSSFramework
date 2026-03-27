@@ -1,12 +1,10 @@
-﻿
-
-using System.Data;
+﻿using System.Data;
 using System.Reflection;
 
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
-namespace Framework.DomainDriven.NHibernate;
+namespace Framework.Database.NHibernate.Setup;
 
 public record DefaultConfigurationInitializerSettings
 {

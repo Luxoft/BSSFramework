@@ -1,8 +1,8 @@
-﻿using Framework.DomainDriven.ScopedEvaluate;
+﻿using Framework.Application.Middleware;
 
 using Microsoft.Extensions.Logging;
 
-namespace Framework.DomainDriven.Jobs;
+namespace Framework.Application.Jobs;
 
 public class JobLoggingMiddleware<TJob>(ILogger<TJob> logger) : IScopedEvaluatorMiddleware
 {

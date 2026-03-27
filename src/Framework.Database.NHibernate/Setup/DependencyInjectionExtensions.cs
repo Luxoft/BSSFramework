@@ -3,10 +3,6 @@
 using CommonFramework.DependencyInjection;
 
 using Framework.Core;
-using Framework.DependencyInjection;
-using Framework.DomainDriven._Visitors;
-using Framework.DomainDriven.DALExceptions;
-using Framework.DomainDriven.NHibernate.Audit;
 
 using GenericQueryable.NHibernate;
 
@@ -14,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using NHibernate;
 
-namespace Framework.DomainDriven.NHibernate;
+namespace Framework.Database.NHibernate.Setup;
 
 public static class DependencyInjectionExtensions
 {

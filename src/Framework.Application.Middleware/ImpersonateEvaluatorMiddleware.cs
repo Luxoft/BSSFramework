@@ -1,11 +1,9 @@
-﻿using Framework.Application.ScopedEvaluate;
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem.Credential;
 using SecuritySystem.Services;
 
-namespace Framework.Application.ServiceEvaluator;
+namespace Framework.Application.Middleware;
 
 public class ImpersonateEvaluatorMiddleware(IServiceProvider scopedServiceProvider, UserCredential? customUserCredential) : IScopedEvaluatorMiddleware
 {

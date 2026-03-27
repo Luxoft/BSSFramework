@@ -6,7 +6,7 @@ using FluentNHibernate.Cfg.Db;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.DomainDriven.NHibernate;
+namespace Framework.Database.NHibernate.Setup;
 
 public class NHibernateSetupObject : INHibernateSetupObject
 {

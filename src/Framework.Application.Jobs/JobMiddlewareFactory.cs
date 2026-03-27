@@ -1,17 +1,15 @@
-﻿using Framework.DomainDriven.Auth;
-using Framework.DomainDriven.ScopedEvaluate;
+﻿using Framework.Application.Auth;
+using Framework.Application.Middleware;
+using Framework.Application.Session;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Framework.DomainDriven.Jobs;
+namespace Framework.Application.Jobs;
 
-public class JobMiddlewareFactory(IServiceProvider serviceProvider, IApplicationDefaultUserAuthenticationServiceSettings applicationDefaultUserAuthenticationServiceSettings, JobImpersonateData? jobImpersonateData = null) : IJobMiddlewareFactory
+public class JobMiddlewareFactory(IServiceProvider serviceProvider, ApplicationDefaultUserAuthenticationServiceSettings applicationDefaultUserAuthenticationServiceSettings, JobImpersonateData? jobImpersonateData = null) : IJobMiddlewareFactory
 {
-    public IScopedEvaluatorMiddleware Create<TJob>(bool withRootLogging)
-    {
-        return this.GetMiddlewares<TJob>(withRootLogging).Aggregate();
-    }
+    public IScopedEvaluatorMiddleware Create<TJob>(bool withRootLogging) => this.GetMiddlewares<TJob>(withRootLogging).Aggregate();
 
     protected virtual IEnumerable<IScopedEvaluatorMiddleware> GetMiddlewares<TService>(bool withRootLogging)
     {

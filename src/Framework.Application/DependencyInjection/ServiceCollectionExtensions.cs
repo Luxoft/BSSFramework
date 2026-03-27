@@ -1,7 +1,5 @@
 ﻿using Framework.Application._Visitors.ExpressionVisitorContainer;
 using Framework.Application._Visitors.Specific;
-using Framework.Application.DALListeners;
-using Framework.Application.Lock;
 using Framework.Application.Repository;
 using Framework.Application.Repository.Default;
 using Framework.Application.Repository.Generic;
@@ -21,7 +19,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 using SecuritySystem;
 
-namespace Framework.DomainDriven.ApplicationCore;
+namespace Framework.Application.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {

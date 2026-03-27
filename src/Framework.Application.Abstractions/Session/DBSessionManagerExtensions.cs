@@ -1,4 +1,4 @@
-﻿namespace Framework.Application.Session.DBSessionManger;
+﻿namespace Framework.Application.Session;
 
 public static class DbSessionManagerExtensions
 {

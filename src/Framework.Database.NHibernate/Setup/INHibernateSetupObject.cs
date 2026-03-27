@@ -4,7 +4,7 @@ using System.Reflection;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
-namespace Framework.DomainDriven.NHibernate;
+namespace Framework.Database.NHibernate.Setup;
 
 public interface INHibernateSetupObject
 {

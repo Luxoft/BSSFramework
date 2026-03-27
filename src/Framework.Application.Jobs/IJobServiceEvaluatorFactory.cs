@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.Jobs;
+﻿namespace Framework.Application.Jobs;
 
 public interface IJobServiceEvaluatorFactory
 {

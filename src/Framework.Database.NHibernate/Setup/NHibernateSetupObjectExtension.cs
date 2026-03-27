@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.DomainDriven.NHibernate;
+namespace Framework.Database.NHibernate.Setup;
 
 public class NHibernateSetupObjectExtension(Action<IServiceCollection> setupAction) : INHibernateSetupObjectExtension
 {

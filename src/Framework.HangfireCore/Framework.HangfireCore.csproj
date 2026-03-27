@@ -14,8 +14,4 @@
     <PackageReference Include="Microsoft.Data.SqlClient" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.Jobs\Framework.DomainDriven.Jobs.csproj" />
-  </ItemGroup>
-
 </Project>

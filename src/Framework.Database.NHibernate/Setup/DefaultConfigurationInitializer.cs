@@ -9,7 +9,7 @@ using NHibernate.Cfg;
 
 using Environment = NHibernate.Cfg.Environment;
 
-namespace Framework.DomainDriven.NHibernate;
+namespace Framework.Database.NHibernate.Setup;
 
 public class DefaultConfigurationInitializer(
     IDefaultConnectionStringSource defaultConnectionStringSource,

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.DomainDriven.Jobs;
+namespace Framework.Application.Jobs;
 
 public class JobServiceEvaluator<TService>(IServiceProvider rootServiceProvider, JobServiceEvaluatorSettings? settings = null)
     : IJobServiceEvaluator<TService>

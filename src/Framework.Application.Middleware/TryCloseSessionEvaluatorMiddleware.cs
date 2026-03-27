@@ -1,6 +1,6 @@
-﻿using Framework.Application.ScopedEvaluate;
+﻿using Framework.Application.Session;
 
-namespace Framework.Application.Session.DBSessionManger;
+namespace Framework.Application.Middleware;
 
 public class TryCloseSessionEvaluatorMiddleware(IDBSessionManager dbSessionManager) : IScopedEvaluatorMiddleware
 {

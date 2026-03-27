@@ -57,7 +57,6 @@
     <Project Path="_DomainDriven/Framework.DomainDriven.DBGenerator.Tests.Unit/Framework.DomainDriven.DBGenerator.Tests.Unit.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.DBGenerator/Framework.DomainDriven.DBGenerator.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.EntityFramework/Framework.DomainDriven.EntityFramework.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.Jobs/Framework.DomainDriven.Jobs.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.NHibernate.DALGenerator/Framework.DomainDriven.NHibernate.DALGenerator.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.NHibernate.LegacyContext/Framework.DomainDriven.NHibernate.LegacyContext.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.ServiceModel.IAD.DTO/Framework.DomainDriven.ServiceModel.IAD.DTO.csproj" />
@@ -111,6 +110,8 @@
   <Folder Name="/_Application/">
     <Project Path="Framework.Application.Abstractions/Framework.Application.Abstractions.csproj" />
     <Project Path="Framework.Application.Domain/Framework.Application.Domain.csproj" />
+    <Project Path="Framework.Application.Jobs/Framework.Application.Jobs.csproj" />
+    <Project Path="Framework.Application.Middleware/Framework.Application.Middleware.csproj" />
     <Project Path="Framework.Application.Runtime/Framework.Application.Runtime.csproj" />
     <Project Path="Framework.Application/Framework.Application.csproj" />
   </Folder>

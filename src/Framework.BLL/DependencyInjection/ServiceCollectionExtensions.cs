@@ -11,7 +11,7 @@ using GenericQueryable.Fetching;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.BLL.Setup;
+namespace Framework.BLL.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {

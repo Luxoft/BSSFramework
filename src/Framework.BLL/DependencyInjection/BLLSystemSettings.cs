@@ -2,7 +2,7 @@
 
 using Framework.Core;
 
-namespace Framework.BLL.Setup;
+namespace Framework.BLL.DependencyInjection;
 
 public class BLLSystemSettings
 {

@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 
-namespace Framework.Application.Lock;
+using Framework.Application.Lock;
+
+namespace Framework.Application.DependencyInjection;
 
 public interface IGenericNamedLockSetup
 {

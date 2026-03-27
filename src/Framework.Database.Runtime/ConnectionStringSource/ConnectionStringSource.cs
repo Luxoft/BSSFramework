@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Framework.Application.ConnectionStringSource;
+namespace Framework.Database.ConnectionStringSource;
 
 public class ConnectionStringSource(IConfiguration configuration, string name)
 {

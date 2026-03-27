@@ -1,6 +1,6 @@
 ﻿using Framework.Application.Domain;
-using Framework.Application.Repository;
 using Framework.BLL.Domain.Persistent;
+using Framework.Database;
 using Framework.OData;
 
 using GenericQueryable.Fetching;

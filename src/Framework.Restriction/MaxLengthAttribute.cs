@@ -1,19 +1,7 @@
 ﻿namespace Framework.Restriction;
 
 [AttributeUsage(AttributeTargets.Property)]
-public class MaxLengthAttribute : Attribute, IRestrictionAttribute
+public class MaxLengthAttribute(int value = int.MaxValue) : Attribute, IRestrictionAttribute
 {
-    public MaxLengthAttribute()
-            : this(int.MaxValue)
-    {
-
-    }
-
-    public MaxLengthAttribute(int value)
-    {
-        this.Value = value;
-    }
-
-
-    public int Value { get; private set; }
+    public int Value { get; } = value;
 }

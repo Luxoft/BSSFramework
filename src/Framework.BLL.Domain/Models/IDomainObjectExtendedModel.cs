@@ -1,5 +1,5 @@
-﻿using Framework.Application.Domain.Attributes;
-using Framework.BLL.Domain.DirectMode;
+﻿using Framework.BLL.Domain.DirectMode;
+using Framework.Relations;
 using Framework.Restriction;
 
 namespace Framework.BLL.Domain.Models;

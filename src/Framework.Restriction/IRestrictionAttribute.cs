@@ -1,6 +1,3 @@
 ﻿namespace Framework.Restriction;
 
-public interface IRestrictionAttribute
-{
-
-}
+public interface IRestrictionAttribute;

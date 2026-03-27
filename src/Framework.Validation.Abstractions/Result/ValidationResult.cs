@@ -11,18 +11,18 @@ namespace Framework.Validation;
 public class ValidationResult
 {
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly Lazy<ReadOnlyCollection<ValidationExceptionBase>> _lazyErrors;
+    private readonly Lazy<ReadOnlyCollection<ValidationExceptionBase>> lazyErrors;
 
     internal ValidationResult(IEnumerable<ValidationExceptionBase> errors)
     {
         if (errors == null) throw new ArgumentNullException(nameof(errors));
 
-        this._lazyErrors = LazyHelper.Create(() => errors.ToReadOnlyCollection());
+        this.lazyErrors = LazyHelper.Create(() => errors.ToReadOnlyCollection());
     }
 
     public ReadOnlyCollection<ValidationExceptionBase> Errors
     {
-        get { return this._lazyErrors.Value; }
+        get { return this.lazyErrors.Value; }
     }
 
     public bool HasErrors

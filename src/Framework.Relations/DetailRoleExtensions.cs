@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
 
-namespace Framework.Database.Attributes;
+using Framework.Core;
+
+namespace Framework.Relations;
 
 public static class DetailRoleExtensions
 {
@@ -13,4 +15,11 @@ public static class DetailRoleExtensions
          ?? propertyInfo.DeclaringType!.GetCustomAttribute<DetailRoleAttribute>(false))
         is { } detailRoleAttr
         && detailRoleAttr.HasValue(value);
+
+    public static bool IsMaster(this PropertyInfo propertyInfo)
+    {
+        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
+
+        return propertyInfo.HasAttribute<IsMasterAttribute>();
+    }
 }

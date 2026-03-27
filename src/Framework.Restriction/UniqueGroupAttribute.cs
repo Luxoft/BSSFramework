@@ -7,37 +7,21 @@
 /// <seealso cref="System.Attribute" />
 /// <seealso cref="Framework.Restriction.IUniqueAttribute" />
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class, AllowMultiple = true)]
-public class UniqueGroupAttribute : Attribute, IUniqueAttribute
+public class UniqueGroupAttribute(string? key = null) : Attribute, IUniqueAttribute
 {
-    /// <summary>
-    ///     Создаёт экземпляр класса <see cref="UniqueGroupAttribute" />.
-    /// </summary>
-    public UniqueGroupAttribute()
-    {
-    }
-
-    /// <summary>
-    ///     Создаёт экземпляр класса <see cref="UniqueGroupAttribute" />.
-    /// </summary>
-    /// <param name="key">Строковый ключ группы.</param>
-    public UniqueGroupAttribute(string key)
-    {
-        this.Key = key;
-    }
-
     /// <summary>
     ///     Возвращает строковый ключ группы.
     /// </summary>
     /// <value>
     ///     Строковый ключ группы.
     /// </value>
-    public string Key { get; }
+    public string? Key { get; } = key;
 
     /// <summary>
     ///     Получает или возвращает флаг, указывающий на необходимость проверки уникальности путем запроса к БД.
     /// </summary>
     /// <value>
-    ///     <c>true</c> если еобходимо проверять уникальность путем запроса к БД; в противном случае, <c>false</c>.
+    ///     <c>true</c> если необходимо проверять уникальность путем запроса к БД; в противном случае, <c>false</c>.
     /// </value>
     public bool UseDbEvaluation { get; set; }
 }

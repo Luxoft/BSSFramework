@@ -1,6 +1,8 @@
 ﻿using Framework.Application.Domain;
 using Framework.Application.Repository;
 using Framework.BLL.Domain.IdentityObject;
+using Framework.Database;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem;

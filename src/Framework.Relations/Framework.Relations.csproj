@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.Restriction</PackageId>
+    <PackageId>Luxoft.Framework.Relations</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

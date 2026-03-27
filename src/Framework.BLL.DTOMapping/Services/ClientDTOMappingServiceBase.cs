@@ -6,22 +6,22 @@ using Framework.BLL.Domain.IdentityObject;
 using Framework.BLL.Domain.MergeItemData;
 using Framework.Core;
 
-namespace Framework.BLL.Domain.ClientMappingService;
+namespace Framework.BLL.DTOMapping.Services;
 
 public abstract class ClientDTOMappingServiceBase
 {
-    protected ClientDTOMappingServiceBase()
-    {
-    }
-
-    protected virtual List<UpdateItemData<TTarget, TIdentity>> ExtractUpdateDataFromSingle<TSource, TIdentity, TTarget>(IEnumerable<TSource> currentSource, Func<TSource, TTarget> getTargetFromSingle)
-            where TSource : class, IIdentityObjectContainer<TIdentity>
+    protected virtual List<UpdateItemData<TTarget, TIdentity>> ExtractUpdateDataFromSingle<TSource, TIdentity, TTarget>(
+        IEnumerable<TSource> currentSource,
+        Func<TSource, TTarget> getTargetFromSingle)
+        where TSource : class, IIdentityObjectContainer<TIdentity>
     {
         return currentSource.ToList(item => UpdateItemData.CreateSave<TTarget, TIdentity>(getTargetFromSingle(item)));
     }
 
-    protected virtual List<UpdateItemData<TTarget, TIdentity>> ExtractSecurityUpdateDataFromSingle<TSource, TIdentity, TTarget>(Maybe<List<TSource>> currentSource, Func<TSource, TTarget> getTargetFromSingle)
-            where TSource : class, IIdentityObjectContainer<TIdentity>
+    protected virtual List<UpdateItemData<TTarget, TIdentity>> ExtractSecurityUpdateDataFromSingle<TSource, TIdentity, TTarget>(
+        Maybe<List<TSource>> currentSource,
+        Func<TSource, TTarget> getTargetFromSingle)
+        where TSource : class, IIdentityObjectContainer<TIdentity>
     {
         var tryCurrentSourceValue = currentSource.GetValueOrDefault();
 
@@ -35,14 +35,25 @@ public abstract class ClientDTOMappingServiceBase
         }
     }
 
-    protected virtual List<UpdateItemData<TTarget, TIdentity>> ExtractUpdateDataL<TSource, TIdentity, TTarget>(IEnumerable<TSource> currentSource, IEnumerable<TSource> baseSource, Func<TSource, TSource, TTarget> getTargetFromPair, Func<TSource, TTarget> getTargetFromSingle)
-            where TSource : class, IIdentityObjectContainer<TIdentity>
+    protected virtual List<UpdateItemData<TTarget, TIdentity>> ExtractUpdateDataL<TSource, TIdentity, TTarget>(
+        IEnumerable<TSource> currentSource,
+        IEnumerable<TSource> baseSource,
+        Func<TSource, TSource, TTarget> getTargetFromPair,
+        Func<TSource, TTarget> getTargetFromSingle)
+        where TSource : class, IIdentityObjectContainer<TIdentity>
     {
-        return currentSource.ExtractUpdateData(baseSource, (currentSourceItem, baseSourceItem) => baseSourceItem == null ? getTargetFromSingle(currentSourceItem) : getTargetFromPair(currentSourceItem, baseSourceItem), v => v.Identity).ToList();
+        return currentSource.ExtractUpdateData(
+            baseSource,
+            (currentSourceItem, baseSourceItem) => baseSourceItem == null ? getTargetFromSingle(currentSourceItem) : getTargetFromPair(currentSourceItem, baseSourceItem),
+            v => v.Identity).ToList();
     }
 
-    protected virtual List<UpdateItemData<TTarget, TIdentity>> ExtractSecurityUpdateDataL<TSource, TIdentity, TTarget>(Maybe<List<TSource>> currentSource, Maybe<List<TSource>> baseSource,  Func<TSource, TSource, TTarget> getTargetFromPair, Func<TSource, TTarget> getTargetFromSingle)
-            where TSource : class, IIdentityObjectContainer<TIdentity>
+    protected virtual List<UpdateItemData<TTarget, TIdentity>> ExtractSecurityUpdateDataL<TSource, TIdentity, TTarget>(
+        Maybe<List<TSource>> currentSource,
+        Maybe<List<TSource>> baseSource,
+        Func<TSource, TSource, TTarget> getTargetFromPair,
+        Func<TSource, TTarget> getTargetFromSingle)
+        where TSource : class, IIdentityObjectContainer<TIdentity>
     {
         var tryCurrentSourceValue = currentSource.GetValueOrDefault();
 

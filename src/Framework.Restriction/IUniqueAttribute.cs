@@ -2,5 +2,5 @@
 
 public interface IUniqueAttribute : IRestrictionAttribute
 {
-    string Key { get; }
+    string? Key { get; }
 }

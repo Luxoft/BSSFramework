@@ -1,4 +1,4 @@
-﻿namespace Framework.Database.Attributes;
+﻿namespace Framework.Relations;
 
 public enum DetailRole
 {

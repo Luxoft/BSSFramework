@@ -3,8 +3,8 @@ using System.Reflection;
 
 using CommonFramework;
 
-using Framework.Application.Domain.Attributes;
 using Framework.Core.Visitors;
+using Framework.Relations;
 
 namespace Framework.Validation;
 
@@ -139,32 +139,25 @@ public class SinglePropertyValidationMap<TSource, TProperty>(
 /// <typeparam name="TSource">Валидируемый тип</typeparam>
 /// <typeparam name="TProperty">Тип свойства</typeparam>
 /// <typeparam name="TElement">Тип элемента коллекции</typeparam>
-public class CollectionPropertyValidationMap<TSource, TProperty, TElement> : PropertyValidationMap<TSource, TProperty>,
-                                                                             ICollectionPropertyValidationMap<TSource, TProperty, TElement>
-
-        where TProperty : IEnumerable<TElement>
+public class CollectionPropertyValidationMap<TSource, TProperty, TElement>(
+    PropertyInfo property,
+    IClassValidationMap<TSource> reflectedTypeMap,
+    IEnumerable<IPropertyValidator<TSource, TProperty>> validators,
+    IClassValidationMap<TElement> propertyElementTypeMap)
+    : PropertyValidationMap<TSource, TProperty>(property, reflectedTypeMap, validators),
+      ICollectionPropertyValidationMap<TSource, TProperty, TElement>
+    where TProperty : IEnumerable<TElement>
 {
     public CollectionPropertyValidationMap(Expression<Func<TSource, TProperty>> propertyExpr, IClassValidationMap<TSource> reflectedTypeMap, IEnumerable<IPropertyValidator<TSource, TProperty>> validators, IClassValidationMap<TElement> propertyElementTypeMap)
             : this(propertyExpr.UpdateBody(FixPropertySourceVisitor.Value).GetProperty(), reflectedTypeMap, validators, propertyElementTypeMap)
     {
     }
 
-    public CollectionPropertyValidationMap(PropertyInfo property, IClassValidationMap<TSource> reflectedTypeMap, IEnumerable<IPropertyValidator<TSource, TProperty>> validators, IClassValidationMap<TElement> propertyElementTypeMap)
-            : base(property, reflectedTypeMap, validators)
-    {
-        if (propertyElementTypeMap == null) throw new ArgumentNullException(nameof(propertyElementTypeMap));
-
-        this.PropertyElementTypeMap = propertyElementTypeMap;
-        this.IsDetail = !property.IsNotDetail();
-    }
-
-
     public override bool IsCollection { get; } = true;
 
-    public override bool IsDetail { get; }
+    public override bool IsDetail { get; } = !property.IsNotDetail();
 
-    public IClassValidationMap<TElement> PropertyElementTypeMap { get; }
-
+    public IClassValidationMap<TElement> PropertyElementTypeMap { get; } = propertyElementTypeMap;
 
     protected override IClassValidationMap BasePropertyTypeMap => this.PropertyElementTypeMap;
 

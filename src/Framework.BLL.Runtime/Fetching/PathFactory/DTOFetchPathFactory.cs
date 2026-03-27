@@ -11,7 +11,8 @@ using Framework.BLL.Domain.Serialization.Extensions;
 using Framework.BLL.Fetching.PathFactory._Extensions;
 using Framework.Core;
 using Framework.Database.Attributes;
-using Framework.Database.Domain;
+using Framework.Database.Mapping;
+using Framework.Relations;
 
 namespace Framework.BLL.Fetching.PathFactory;
 

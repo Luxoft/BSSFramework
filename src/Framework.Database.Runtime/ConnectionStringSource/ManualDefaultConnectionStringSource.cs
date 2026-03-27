@@ -1,4 +1,4 @@
-﻿namespace Framework.Application.ConnectionStringSource;
+﻿namespace Framework.Database.ConnectionStringSource;
 
 public class ManualDefaultConnectionStringSource(string connectionString) : IDefaultConnectionStringSource
 {

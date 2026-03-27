@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 
-namespace Framework.Database.Session;
+namespace Framework.Database;
 
 public static class DbSessionEvaluatorExtensions
 {

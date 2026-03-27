@@ -1,6 +1,6 @@
-﻿using Framework.Application.Domain;
-using Framework.BLL.Domain.Persistent.IdentityObject;
-using Framework.Core;
+﻿using Framework.Core;
+using Framework.Database;
+
 using ExpressionHelper = CommonFramework.ExpressionHelper;
 
 namespace Framework.BLL.Domain.IdentityObject;

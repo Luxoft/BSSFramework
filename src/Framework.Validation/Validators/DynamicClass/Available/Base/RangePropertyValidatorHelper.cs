@@ -1,7 +1,5 @@
 ﻿using Framework.Core;
 
-using Framework.Core.Range;
-
 namespace Framework.Validation;
 
 public static class RangePropertyValidatorHelper

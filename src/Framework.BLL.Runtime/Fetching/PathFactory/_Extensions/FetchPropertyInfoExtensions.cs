@@ -5,6 +5,7 @@ using Framework.BLL.Domain.DTO.Extensions;
 using Framework.BLL.Domain.Extensions;
 using Framework.Core;
 using Framework.Database.Attributes;
+using Framework.Relations;
 
 namespace Framework.BLL.Fetching.PathFactory._Extensions;
 

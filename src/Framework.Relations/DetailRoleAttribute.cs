@@ -1,4 +1,4 @@
-﻿namespace Framework.Database.Attributes;
+﻿namespace Framework.Relations;
 
 /// <summary>
 /// Признак, является ли свойство деталью объекта

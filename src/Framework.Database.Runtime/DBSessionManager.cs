@@ -1,6 +1,6 @@
 ﻿using Framework.Core.LazyObject;
 
-namespace Framework.Database.Session
+namespace Framework.Database
 {
     public class DBSessionManager(ILazyObject<IDBSession> lazyDbSession) : IDBSessionManager
     {

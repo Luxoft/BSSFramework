@@ -131,6 +131,10 @@
     <Project Path="Framework.Database.Runtime/Framework.Database.Runtime.csproj" />
     <Project Path="Framework.Database/Framework.Database.csproj" />
   </Folder>
+  <Folder Name="/_Domain/">
+    <Project Path="Framework.Relations/Framework.Relations.csproj" />
+    <Project Path="Framework.Restriction/Framework.Restriction.csproj" />
+  </Folder>
 
   <Folder Name="/__SolutionItems/">
     <File Path="__SolutionItems/CommonAssemblyInfo.cs" />
@@ -151,7 +155,6 @@
   <Project Path="Framework.OData/Framework.OData.csproj" />
   <Project Path="Framework.Parsing/Framework.Parsing.csproj" />
   <Project Path="Framework.QueryLanguage/Framework.QueryLanguage.csproj" />
-  <Project Path="Framework.Restriction/Framework.Restriction.csproj" />
   <Project Path="Framework.StateMachine/Framework.StateMachine.csproj" />
   <Project Path="Framework.Tracking.Abstractions/Framework.Tracking.Abstractions.csproj" />
   <Project Path="Framework.Tracking.Validation/Framework.Tracking.Validation.csproj" />

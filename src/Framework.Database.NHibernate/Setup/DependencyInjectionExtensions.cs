@@ -7,7 +7,6 @@ using Framework.Database.DALExceptions;
 using Framework.Database.ExpressionVisitorContainer;
 using Framework.Database.NHibernate.Audit;
 using Framework.Database.NHibernate.Sessions;
-using Framework.Database.Session;
 
 using GenericQueryable.NHibernate;
 

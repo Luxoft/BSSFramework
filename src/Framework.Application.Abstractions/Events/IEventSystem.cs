@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 
-namespace Framework.Events;
+namespace Framework.Application.Events;
 
 public interface IEventSystem
 {

@@ -1,6 +1,6 @@
 ﻿using Framework.Application.Domain;
+using Framework.Application.Events;
 using Framework.BLL.Default;
-using Framework.Events;
 using Framework.QueryLanguage;
 
 using HierarchicalExpand;

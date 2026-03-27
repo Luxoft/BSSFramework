@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Runtime.Serialization;
 
+using Framework.Application.Events;
 using Framework.CodeDom;
 using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;

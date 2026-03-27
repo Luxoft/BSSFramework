@@ -1,4 +1,5 @@
-﻿using Framework.BLL.Domain.Serialization;
+﻿using Framework.Application.Events;
+using Framework.BLL.Domain.Serialization;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.Events;
 

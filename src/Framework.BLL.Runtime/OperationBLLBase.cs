@@ -1,4 +1,4 @@
-﻿using Framework.Events;
+﻿using Framework.Application.Events;
 
 namespace Framework.BLL;
 

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Reflection;
 
+using Framework.Application.Events;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration.PropertyAssigner;

@@ -1,7 +1,7 @@
 ﻿using Framework.Application.Domain;
+using Framework.Application.Events;
 using Framework.BLL.OData;
 using Framework.Core.Serialization;
-using Framework.Events;
 using Framework.OData;
 using Framework.QueryLanguage;
 

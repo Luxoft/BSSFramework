@@ -9,8 +9,4 @@
     <PackageReference Include="IvAt.SecuritySystem.Configurator" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\_DomainDriven\Framework.Events\Framework.Events.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -18,7 +18,6 @@
     <ProjectReference Include="..\Framework.Application.Domain\Framework.Application.Domain.csproj" />
     <ProjectReference Include="..\Framework.BLL.Domain\Framework.BLL.Domain.csproj" />
     <ProjectReference Include="..\Framework.OData\Framework.OData.csproj" />
-    <ProjectReference Include="..\_DomainDriven\Framework.Events\Framework.Events.csproj" />
   </ItemGroup>
 
 </Project>

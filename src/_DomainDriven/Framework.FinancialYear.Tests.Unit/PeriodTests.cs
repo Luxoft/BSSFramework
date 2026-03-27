@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
 
-using Framework.FinancialYear;
+using Framework.Application.FinancialYear;
 
 using NUnit.Framework;
 
-namespace Framework.Core.Tests.Unit;
+namespace Framework.FinancialYear.Tests.Unit;
 
 // MethodUnderTest_Scenario_Behavior
 [TestFixture]

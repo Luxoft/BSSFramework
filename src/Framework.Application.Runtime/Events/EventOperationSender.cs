@@ -1,4 +1,4 @@
-﻿namespace Framework.Events;
+﻿namespace Framework.Application.Events;
 
 public class EventOperationSender(IEnumerable<IEventOperationReceiver> receivers) : IEventOperationSender
 {

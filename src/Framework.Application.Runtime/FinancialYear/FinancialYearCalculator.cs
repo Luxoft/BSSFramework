@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 
-namespace Framework.FinancialYear;
+namespace Framework.Application.FinancialYear;
 
 public class FinancialYearCalculator (FinancialYearServiceSettings settings) : IFinancialYearCalculator
 {

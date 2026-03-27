@@ -1,5 +1,8 @@
 ﻿using Framework.Application._Visitors.ExpressionVisitorContainer;
 using Framework.Application._Visitors.Specific;
+using Framework.Application.Events;
+using Framework.Application.FinancialYear;
+using Framework.Application.Jobs;
 using Framework.Application.Repository;
 using Framework.Application.Repository.Default;
 using Framework.Application.Repository.Generic;
@@ -10,9 +13,7 @@ using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.ApplicationCore.DALListeners;
 using Framework.DomainDriven.Jobs;
 using Framework.DomainDriven.Repository;
-using Framework.Events;
 using Framework.Exceptions;
-using Framework.FinancialYear;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;

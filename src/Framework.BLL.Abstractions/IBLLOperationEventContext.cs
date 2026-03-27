@@ -1,4 +1,5 @@
-﻿using Framework.Events;
+﻿using Framework.Application.Events;
+using Framework.Events;
 
 namespace Framework.BLL;
 

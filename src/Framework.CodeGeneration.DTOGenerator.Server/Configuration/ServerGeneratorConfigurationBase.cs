@@ -6,6 +6,7 @@ using CommonFramework;
 using CommonFramework.DictionaryCache;
 
 using Framework.Application.Domain.Attributes;
+using Framework.Application.Events;
 using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.IdentityObject;

@@ -1,6 +1,6 @@
 ﻿using CommonFramework;
 
-namespace Framework.Events;
+namespace Framework.Application.Events;
 
 public static class EventOperationSenderExtensions
 {

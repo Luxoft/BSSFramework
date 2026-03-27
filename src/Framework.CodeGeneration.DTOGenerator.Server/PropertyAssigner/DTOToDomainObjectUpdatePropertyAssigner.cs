@@ -1,6 +1,6 @@
 ﻿using System.CodeDom;
 
-using Framework.BLL.Domain.Dto;
+using Framework.BLL.Domain.DTO;
 using Framework.CodeDom;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;

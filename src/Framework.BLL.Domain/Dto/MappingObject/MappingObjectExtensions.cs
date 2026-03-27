@@ -1,4 +1,4 @@
-﻿namespace Framework.BLL.Domain.Dto.MappingObject;
+﻿namespace Framework.BLL.Domain.DTO.MappingObject;
 
 public static class MappingObjectExtensions
 {

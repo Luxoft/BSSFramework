@@ -3,7 +3,7 @@ using CommonFramework.Maybe;
 
 using Framework.Core;
 
-namespace Framework.BLL.Domain.Dto.Extensions;
+namespace Framework.BLL.Domain.DTO.Extensions;
 
 public static class TypeExtensions
 {

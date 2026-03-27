@@ -4,7 +4,7 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.BLL.Domain.Attributes;
-using Framework.BLL.Domain.Dto;
+using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.Fetching;
 using Framework.BLL.Domain.Persistent.Attributes;

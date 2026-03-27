@@ -1,5 +1,4 @@
 ﻿using Framework.Application.Domain;
-
 using SecuritySystem.Providers;
 
 namespace Framework.BLL;

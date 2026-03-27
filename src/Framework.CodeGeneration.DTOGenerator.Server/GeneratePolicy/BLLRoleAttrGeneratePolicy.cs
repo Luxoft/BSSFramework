@@ -1,7 +1,6 @@
-﻿using Framework.BLL.Domain.Dto;
+﻿using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.ServiceRole;
-using Framework.CodeGeneration.DTOGenerator.FileType;
-
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.GeneratePolicy;
 using Framework.Core;
 using Framework.Projection;

@@ -4,7 +4,7 @@ using System.Reflection;
 using Framework.CodeDom;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 
 namespace Framework.CodeGeneration.DTOGenerator.FileFactory.ClientMapping;
 

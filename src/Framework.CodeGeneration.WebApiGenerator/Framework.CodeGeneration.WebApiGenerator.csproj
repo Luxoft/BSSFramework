@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.CodeGeneration.WebApiGenerator</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.BLL.ServiceModel\Framework.BLL.ServiceModel.csproj" />
+    <ProjectReference Include="..\Framework.CodeGeneration.DTOGenerator.Audit\Framework.CodeGeneration.DTOGenerator.Audit.csproj" />
+  </ItemGroup>
+
+</Project>

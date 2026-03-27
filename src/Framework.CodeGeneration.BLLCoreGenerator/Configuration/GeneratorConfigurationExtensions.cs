@@ -1,9 +1,4 @@
-﻿using CommonFramework;
-
-using System.CodeDom;
-using System.Reflection;
-
-using Framework.CodeDom;
+﻿using System.Reflection;
 
 using SecuritySystem;
 
@@ -11,39 +6,7 @@ namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 
 public static class GeneratorConfigurationExtensions
 {
-    public static CodeExpression GetSecurityCodeExpression(
-        this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration,
-        SecurityRule securityRule)
-    {
-        if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-
-        if (securityRule is SecurityRule.ModeSecurityRule)
-        {
-            return typeof(SecurityRule).ToTypeReferenceExpression().ToPropertyReference(securityRule.ToString());
-        }
-        else if (securityRule is DomainSecurityRule.DomainModeSecurityRule domainModeSecurityRule)
-        {
-            return configuration.GetSecurityCodeExpression(domainModeSecurityRule.Mode).ToMethodReferenceExpression("ToDomain", [domainModeSecurityRule.DomainType]).ToMethodInvokeExpression();
-        }
-        else if (securityRule is DomainSecurityRule.NonExpandedRolesSecurityRule)
-        {
-            return typeof(SecurityRole).ToTypeReferenceExpression().ToPropertyReference(securityRule.ToString());
-        }
-        else
-        {
-            var request = from securityRuleType in configuration.Environment.SecurityRuleTypeList
-
-                          from prop in securityRuleType.GetProperties(BindingFlags.Static | BindingFlags.Public)
-
-                          where TryGetSecurityRule(prop) == securityRule
-
-                          select securityRuleType.ToTypeReferenceExpression().ToPropertyReference(prop);
-
-            return request.Single(() => new Exception($"Security rule '{securityRule}' not found"));
-        }
-    }
-
-    private static SecurityRule? TryGetSecurityRule(PropertyInfo property) =>
+    public static SecurityRule? TryGetSecurityRule(this PropertyInfo property) =>
 
         property.GetValue(null) switch
         {
@@ -52,34 +15,4 @@ public static class GeneratorConfigurationExtensions
             SecurityRule securityRule => securityRule,
             _ => null
         };
-
-    public static CodeTypeDeclaration GetServiceProviderContainerCodeTypeDeclaration(this IGeneratorConfigurationBase configuration, string typeName, bool asAbstract, CodeTypeReference baseType)
-    {
-        if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-        if (typeName == null) throw new ArgumentNullException(nameof(typeName));
-
-        var parameter = typeof(IServiceProvider).ToTypeReference().ToParameterDeclarationExpression("serviceProvider");
-        var parameterRefExpr = parameter.ToVariableReferenceExpression();
-
-        return new CodeTypeDeclaration
-               {
-                   Name = typeName,
-                   TypeAttributes = asAbstract ? (TypeAttributes.Public | TypeAttributes.Abstract) : TypeAttributes.Public,
-                   IsPartial = true,
-                   Members =
-                   {
-                       new CodeConstructor
-                       {
-                           Attributes = asAbstract ? MemberAttributes.Family : MemberAttributes.Public,
-                           Parameters = { parameter },
-                           BaseConstructorArgs = { parameterRefExpr }
-                       }
-                   },
-
-                   BaseTypes =
-                   {
-                       baseType
-                   }
-               };
-    }
 }

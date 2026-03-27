@@ -1,6 +1,6 @@
 ﻿using Framework.BLL.Domain.Serialization.Extensions;
 using Framework.CodeGeneration.Configuration;
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Custom;

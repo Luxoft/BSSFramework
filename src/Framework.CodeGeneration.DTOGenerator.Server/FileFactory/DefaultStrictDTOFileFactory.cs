@@ -12,7 +12,7 @@ using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.ClientMapping;
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner._Security;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.MainToStrict;

@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 
 using Framework.Application.Domain.Attributes;
-using Framework.BLL.Domain.Dto;
-using Framework.BLL.Domain.Dto.Extensions;
+using Framework.BLL.Domain.DTO;
+using Framework.BLL.Domain.DTO.Extensions;
 using Framework.BLL.Domain.Extensions;
 using Framework.Core;
 

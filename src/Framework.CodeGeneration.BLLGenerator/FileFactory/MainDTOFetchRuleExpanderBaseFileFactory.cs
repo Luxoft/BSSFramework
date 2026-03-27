@@ -2,7 +2,7 @@
 using System.Reflection;
 
 using Framework.BLL;
-using Framework.BLL.Domain.Dto;
+using Framework.BLL.Domain.DTO;
 using Framework.CodeDom;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.CodeGeneration.BLLGenerator.FileFactory.__Base;

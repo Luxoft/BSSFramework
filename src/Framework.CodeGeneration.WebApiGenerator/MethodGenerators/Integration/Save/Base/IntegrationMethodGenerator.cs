@@ -1,0 +1,37 @@
+﻿using System.CodeDom;
+using Framework.BLL;
+using Framework.BLL.Domain.ServiceRole.Base;
+using Framework.CodeDom;
+using Framework.CodeGeneration.WebApiGenerator.Configuration._Base;
+using Framework.CodeGeneration.WebApiGenerator.Configuration.Integration;
+using Framework.CodeGeneration.WebApiGenerator.Extensions;
+using Framework.CodeGeneration.WebApiGenerator.MethodGenerators._Base;
+
+using SecuritySystem;
+
+namespace Framework.CodeGeneration.WebApiGenerator.MethodGenerators.Integration.Save.Base;
+
+public abstract class IntegrationMethodGenerator<TConfiguration, TBLLRoleAttribute> : MethodGenerator<TConfiguration, TBLLRoleAttribute>
+    where TConfiguration : class, IIntegrationGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TBLLRoleAttribute : BLLServiceRoleAttribute
+{
+    protected IntegrationMethodGenerator(TConfiguration configuration, Type domainType)
+        : base(configuration, domainType)
+    {
+    }
+
+
+    protected sealed override bool RequiredSecurity { get; } = false;
+
+    protected override bool IsEdit { get; } = true;
+
+
+    protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
+    {
+        yield return evaluateDataExpr.GetContext()
+                                     .ToPropertyReference(nameof(IAuthorizationBLLContextContainer<>.Authorization))
+                                     .ToPropertyReference(nameof(SecuritySystem))
+                                     .ToMethodInvokeExpression(nameof(ISecuritySystem.CheckAccessAsync), this.Configuration.IntegrationSecurityRule)
+                                     .ToExpressionStatement();
+    }
+}

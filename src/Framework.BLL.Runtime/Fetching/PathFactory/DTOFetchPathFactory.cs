@@ -5,8 +5,8 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.Application.Domain.Attributes;
-using Framework.BLL.Domain.Dto;
-using Framework.BLL.Domain.Dto.Extensions;
+using Framework.BLL.Domain.DTO;
+using Framework.BLL.Domain.DTO.Extensions;
 using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.BLL.Domain.Serialization.Extensions;

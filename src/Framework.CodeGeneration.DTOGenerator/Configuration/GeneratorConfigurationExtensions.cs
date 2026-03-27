@@ -5,11 +5,11 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.Application.Domain.Attributes;
-using Framework.BLL.Domain.Dto;
+using Framework.BLL.Domain.DTO;
 using Framework.CodeDom;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Extensions;
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.Core;
 
 namespace Framework.CodeGeneration.DTOGenerator.Configuration;

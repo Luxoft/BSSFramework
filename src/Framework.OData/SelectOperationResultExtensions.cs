@@ -9,7 +9,6 @@ public static class SelectOperationResultExtensions
         return new SelectOperationResult<T>(items, totalCount);
     }
 
-
     public static SelectOperationResult<TResult> Select<TSource, TResult>(this SelectOperationResult<TSource> source, Func<TSource, TResult> selector)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));

@@ -4,12 +4,11 @@ using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
 using Framework.CodeGeneration.DTOGenerator.Server.CodeTypeReferenceService;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role._Base;
-using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 using Framework.CodeGeneration.DTOGenerator.Server.Members.MapToDomainObject;
 using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 

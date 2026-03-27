@@ -1,7 +1,7 @@
 ﻿using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.FileFactory;
 
 namespace Framework.CodeGeneration.DTOGenerator.FileFactory.Base;

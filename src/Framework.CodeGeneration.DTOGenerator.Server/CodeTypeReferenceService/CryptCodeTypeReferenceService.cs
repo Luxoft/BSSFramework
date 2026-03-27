@@ -1,8 +1,7 @@
 ﻿using System.Reflection;
 
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
-using Framework.CodeGeneration.DTOGenerator.FileType;
-
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.CodeTypeReferenceService;

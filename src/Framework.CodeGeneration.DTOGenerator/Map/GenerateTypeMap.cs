@@ -1,6 +1,6 @@
 ﻿
 
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 
 namespace Framework.CodeGeneration.DTOGenerator.Map;
 

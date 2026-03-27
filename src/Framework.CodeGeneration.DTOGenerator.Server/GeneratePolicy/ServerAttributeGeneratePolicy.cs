@@ -1,6 +1,5 @@
 ﻿using Framework.BLL.Domain.ServiceRole;
-using Framework.CodeGeneration.DTOGenerator.FileType;
-
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 using Framework.Core;

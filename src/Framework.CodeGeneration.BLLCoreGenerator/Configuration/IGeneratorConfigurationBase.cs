@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration.BLLFactoryContainer;
 using Framework.CodeGeneration.Configuration;
+using SecuritySystem;
 
 namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 
@@ -65,5 +66,6 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
     string IntegrationSaveMethodName { get; }
 
     CodeExpression GetSecurityService(CodeExpression contextExpression);
+    CodeExpression GetSecurityCodeExpression(SecurityRule securityRule);
 }
 #pragma warning restore S100 // Methods and properties should be named in camel case

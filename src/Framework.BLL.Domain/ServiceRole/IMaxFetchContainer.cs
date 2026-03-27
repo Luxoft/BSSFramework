@@ -1,4 +1,4 @@
-﻿using Framework.BLL.Domain.Dto;
+﻿using Framework.BLL.Domain.DTO;
 
 namespace Framework.BLL.Domain.ServiceRole;
 

@@ -10,7 +10,7 @@ using Framework.CodeDom;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.Core;
 using Framework.Database.Domain;
 using Framework.Projection;

@@ -20,12 +20,13 @@
     <Project Path="Framework.CodeDom/Framework.CodeDom.csproj" />
     <Project Path="Framework.CodeGeneration.BLLCoreGenerator/Framework.CodeGeneration.BLLCoreGenerator.csproj" />
     <Project Path="Framework.CodeGeneration.BLLGenerator/Framework.CodeGeneration.BLLGenerator.csproj" />
-    <Project Path="Framework.CodeGeneration.DTOGenerator.Audit/Framework.CodeGeneration.DTOGenerator.Audit.csproj" />
     <Project Path="Framework.CodeGeneration.ProjectionGenerator/Framework.CodeGeneration.ProjectionGenerator.csproj" />
+    <Project Path="Framework.CodeGeneration.WebApiGenerator/Framework.CodeGeneration.WebApiGenerator.csproj" />
     <Project Path="Framework.CodeGeneration/Framework.CodeGeneration.csproj" />
     <Project Path="Framework.FileGeneration/Framework.FileGeneration.csproj" />
   </Folder>
   <Folder Name="/CodeGeneration/DTO/">
+    <Project Path="Framework.CodeGeneration.DTOGenerator.Audit/Framework.CodeGeneration.DTOGenerator.Audit.csproj" />
     <Project Path="Framework.CodeGeneration.DTOGenerator.Server/Framework.CodeGeneration.DTOGenerator.Server.csproj" />
     <Project Path="Framework.CodeGeneration.DTOGenerator/Framework.CodeGeneration.DTOGenerator.csproj" />
   </Folder>
@@ -67,7 +68,6 @@
     <Project Path="_DomainDriven/Framework.DomainDriven.ServiceModel.IAD.DTO/Framework.DomainDriven.ServiceModel.IAD.DTO.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.ServiceModel.IAD.LegacyContext/Framework.DomainDriven.ServiceModel.IAD.LegacyContext.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.ServiceModel.Tests.Unit/Framework.DomainDriven.ServiceModel.Tests.Unit.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.ServiceModel/Framework.DomainDriven.ServiceModel.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.Setup.Abstract/Framework.DomainDriven.Setup.Abstract.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.Setup.Legacy/Framework.DomainDriven.Setup.Legacy.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.Setup/Framework.DomainDriven.Setup.csproj" />
@@ -124,6 +124,7 @@
     <Project Path="Framework.BLL.Domain/Framework.BLL.Domain.csproj" />
     <Project Path="Framework.BLL.DTOMapping/Framework.BLL.DTOMapping.csproj" />
     <Project Path="Framework.BLL.Runtime/Framework.BLL.Runtime.csproj" />
+    <Project Path="Framework.BLL.ServiceModel/Framework.BLL.ServiceModel.csproj" />
     <Project Path="Framework.BLL/Framework.BLL.csproj" />
   </Folder>
 

@@ -1,6 +1,6 @@
 ﻿using Framework.BLL.Domain.Serialization;
 
-namespace Framework.BLL.Domain.Dto;
+namespace Framework.BLL.Domain.DTO;
 
 /// <summary>
 /// Атрибут сгенерированного типа

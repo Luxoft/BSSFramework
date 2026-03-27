@@ -6,7 +6,7 @@ using CommonFramework;
 using CommonFramework.DictionaryCache;
 
 using Framework.Application.Domain.Attributes;
-using Framework.BLL.Domain.Dto;
+using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.Serialization.Extensions;
@@ -16,7 +16,7 @@ using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Extensions;
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.GeneratePolicy;
 using Framework.CodeGeneration.DTOGenerator.Map;
 using Framework.CodeGeneration.FileFactory;

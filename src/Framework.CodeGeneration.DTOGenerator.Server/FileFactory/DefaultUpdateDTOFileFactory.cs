@@ -7,7 +7,7 @@ using CommonFramework;
 using CommonFramework.Maybe;
 
 using Framework.Application.Domain.Attributes;
-using Framework.BLL.Domain.Dto;
+using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.IdentityObject;
 using Framework.CodeDom;
@@ -18,7 +18,7 @@ using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.ClientMapping;
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.Update;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;

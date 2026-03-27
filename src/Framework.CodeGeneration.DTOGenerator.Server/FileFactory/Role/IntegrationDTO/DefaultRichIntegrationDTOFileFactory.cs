@@ -1,11 +1,10 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeGeneration.Configuration;
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.IntegrationDTO.Base;
-using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.IntegrationDTO;
 

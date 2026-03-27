@@ -1,5 +1,6 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
+using System.Reflection;
 
 using CommonFramework;
 
@@ -13,6 +14,7 @@ using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.FileFactory;
 using Framework.Core;
 using Framework.Projection;
+using SecuritySystem;
 
 #pragma warning disable S100 // Methods and properties should be named in camel case
 namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;
@@ -112,6 +114,35 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
                        this.BLLFactoryInterfaceFileFactoryHeader,
                        this.BLLFactoryContainerInterfaceFileFactoryHeader
                };
+    }
+
+
+    public CodeExpression GetSecurityCodeExpression(SecurityRule securityRule)
+    {
+        if (securityRule is SecurityRule.ModeSecurityRule)
+        {
+            return typeof(SecurityRule).ToTypeReferenceExpression().ToPropertyReference(securityRule.ToString());
+        }
+        else if (securityRule is DomainSecurityRule.DomainModeSecurityRule domainModeSecurityRule)
+        {
+            return this.GetSecurityCodeExpression(domainModeSecurityRule.Mode).ToMethodReferenceExpression("ToDomain", [domainModeSecurityRule.DomainType]).ToMethodInvokeExpression();
+        }
+        else if (securityRule is DomainSecurityRule.NonExpandedRolesSecurityRule)
+        {
+            return typeof(SecurityRole).ToTypeReferenceExpression().ToPropertyReference(securityRule.ToString());
+        }
+        else
+        {
+            var request = from securityRuleType in this.Environment.SecurityRuleTypeList
+
+                          from prop in securityRuleType.GetProperties(BindingFlags.Static | BindingFlags.Public)
+
+                          where prop.TryGetSecurityRule() == securityRule
+
+                          select securityRuleType.ToTypeReferenceExpression().ToPropertyReference(prop);
+
+            return request.Single(() => new Exception($"Security rule '{securityRule}' not found"));
+        }
     }
 
     public CodeTypeReference BLLContextInterfaceTypeReference => this.GetCodeTypeReference(null, FileType.BLLContextInterface);

@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Reflection;
 
-using Framework.BLL.Domain.Dto;
+using Framework.BLL.Domain.DTO;
 using Framework.BLL.Fetching;
 using Framework.CodeGeneration.BLLGenerator.Configuration.BLLFactoryContainer;
 using Framework.CodeGeneration.Configuration;

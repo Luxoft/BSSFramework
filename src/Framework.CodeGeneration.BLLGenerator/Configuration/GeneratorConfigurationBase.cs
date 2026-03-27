@@ -4,7 +4,7 @@ using System.Reflection;
 
 using CommonFramework;
 
-using Framework.BLL.Domain.Dto;
+using Framework.BLL.Domain.DTO;
 using Framework.BLL.Fetching;
 using Framework.BLL.Fetching.PathFactory;
 using Framework.CodeGeneration.BLLGenerator.Configuration.BLLFactoryContainer;

@@ -3,7 +3,7 @@ using System.Reflection;
 
 using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 
 namespace Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 

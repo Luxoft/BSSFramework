@@ -1,5 +1,4 @@
-﻿
-using Framework.CodeGeneration.DTOGenerator.FileType;
+﻿using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Map;
 using Framework.CodeGeneration.GeneratePolicy;
 

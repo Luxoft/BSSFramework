@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.BLL.ServiceModel</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.BLL.DTOMapping\Framework.BLL.DTOMapping.csproj" />
+    <ProjectReference Include="..\Framework.Validation.Abstractions\Framework.Validation.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -9,11 +9,10 @@ using Framework.CodeDom;
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
-using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 using Framework.Core;
 
 using SecuritySystem;

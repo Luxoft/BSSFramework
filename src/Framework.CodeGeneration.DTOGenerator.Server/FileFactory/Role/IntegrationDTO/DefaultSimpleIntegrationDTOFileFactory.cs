@@ -1,8 +1,7 @@
 ﻿using Framework.CodeGeneration.DTOGenerator.Extensions;
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.IntegrationDTO.Base;
-using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.IntegrationDTO;
 

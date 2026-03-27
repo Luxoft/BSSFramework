@@ -6,7 +6,7 @@ using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 
 namespace Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
 

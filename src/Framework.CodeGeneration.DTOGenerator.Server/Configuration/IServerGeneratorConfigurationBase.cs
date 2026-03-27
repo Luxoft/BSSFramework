@@ -3,16 +3,14 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 
 using Framework.CodeGeneration.DTOGenerator.Configuration;
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration.PropertyAssigner;
 using Framework.Events;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 
 public interface IServerGeneratorConfigurationBase<out TEnvironmentBase> : IServerGeneratorConfigurationBase, IGeneratorConfigurationBase<TEnvironmentBase>
-        where TEnvironmentBase : IServerGenerationEnvironmentBase
-{
-}
+    where TEnvironmentBase : IServerGenerationEnvironmentBase;
 
 public interface IServerGeneratorConfigurationBase : IGeneratorConfigurationBase
 {

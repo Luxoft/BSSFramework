@@ -1,6 +1,6 @@
 ﻿using Framework.Application.Domain;
 
-namespace Framework.BLL.Domain.Dto.MappingObject;
+namespace Framework.BLL.Domain.DTO.MappingObject;
 
 public interface IMappingObject<in TMappingService, in TDomainObject>
 {

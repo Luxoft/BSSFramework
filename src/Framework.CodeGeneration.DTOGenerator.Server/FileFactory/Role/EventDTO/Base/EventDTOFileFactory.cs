@@ -2,7 +2,6 @@
 using Framework.CodeGeneration.DTOGenerator.Server.CodeTypeReferenceService;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role._Base;
-using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.EventDTO.Base;
 

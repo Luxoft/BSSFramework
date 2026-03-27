@@ -1,6 +1,6 @@
 ﻿using Framework.BLL.Domain.Serialization;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.GeneratePolicy;
 
 namespace Framework.CodeGeneration.DTOGenerator.GeneratePolicy;

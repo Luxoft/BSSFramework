@@ -2,7 +2,7 @@
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.ClientMapping;
-using Framework.CodeGeneration.DTOGenerator.FileType;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.FileFactory;
 using Framework.Projection;
 

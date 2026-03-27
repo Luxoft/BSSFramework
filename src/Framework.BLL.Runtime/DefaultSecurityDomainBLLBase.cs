@@ -3,7 +3,6 @@ using CommonFramework.Maybe;
 
 using Framework.Application.Domain;
 using Framework.BLL.Default;
-
 using SecuritySystem.Providers;
 
 namespace Framework.BLL

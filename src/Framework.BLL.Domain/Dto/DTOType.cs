@@ -1,4 +1,4 @@
-﻿namespace Framework.BLL.Domain.Dto;
+﻿namespace Framework.BLL.Domain.DTO;
 
 public enum DTOType
 {

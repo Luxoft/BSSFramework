@@ -1,31 +1,14 @@
-﻿using Framework.Core;
+﻿using System.Data.SqlTypes;
+
+using CommonFramework;
+
+using Framework.Core;
 
 namespace Framework.BLL.Validation;
 
-public class AvailableValues :
-        IRangeContainer<decimal>,
-        IRangeContainer<DateTime>,
-        ISizeContainer<string>
+public record AvailableValues(Range<decimal> DecimalRange, Range<DateTime> DateTimeRange, int DefaultMaxStringSize)
+    : IRangeContainer<decimal>, IRangeContainer<DateTime>, ISizeContainer<string>
 {
-    public AvailableValues(Range<decimal> decimalAvailableValues, Range<DateTime> dateTimeAvailableValues, int defaultMaxStringSize)
-    {
-        if (decimalAvailableValues == null) throw new ArgumentNullException(nameof(decimalAvailableValues));
-        if (dateTimeAvailableValues == null) throw new ArgumentNullException(nameof(dateTimeAvailableValues));
-        if (defaultMaxStringSize < 0) throw new ArgumentOutOfRangeException(nameof(defaultMaxStringSize));
-
-        this.DecimalRange = decimalAvailableValues;
-        this.DateTimeRange = dateTimeAvailableValues;
-        this.DefaultMaxStringSize = defaultMaxStringSize;
-    }
-
-
-    public Range<decimal> DecimalRange { get; }
-
-    public Range<DateTime> DateTimeRange { get; }
-
-    public int DefaultMaxStringSize { get; }
-
-
     Range<decimal> IRangeContainer<decimal>.Range => this.DecimalRange;
 
     Range<DateTime> IRangeContainer<DateTime>.Range => this.DateTimeRange;
@@ -33,4 +16,12 @@ public class AvailableValues :
     int ISizeContainer<string>.Size => this.DefaultMaxStringSize;
 
     public static readonly AvailableValues Infinity = new AvailableValues(Range<decimal>.Infinity, Range<DateTime>.Infinity, int.MaxValue);
+
+    public static readonly AvailableValues Default =
+        ((decimal)Math.Pow(10, 15) - 1M)
+        .Pipe(decimalLimit =>
+                  new AvailableValues(
+                      new Range<decimal>(-decimalLimit, decimalLimit),
+                      new Range<DateTime>(SqlDateTime.MinValue.Value, SqlDateTime.MaxValue.Value),
+                      byte.MaxValue));
 }

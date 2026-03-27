@@ -133,6 +133,11 @@
     <Project Path="Framework.Projection.Abstractions/Framework.Projection.Abstractions.csproj" />
     <Project Path="Framework.Projection.Runtime/Framework.Projection.Runtime.csproj" />
   </Folder>
+  <Folder Name="/_Validation/">
+    <Project Path="Framework.Validation.Abstractions/Framework.Validation.Abstractions.csproj" />
+    <Project Path="Framework.Validation.Tests.Unit/Framework.Validation.Tests.Unit.csproj" />
+    <Project Path="Framework.Validation/Framework.Validation.csproj" />
+  </Folder>
 
   <Folder Name="/__SolutionItems/">
     <File Path="__SolutionItems/CommonAssemblyInfo.cs" />
@@ -158,9 +163,6 @@
   <Project Path="Framework.Tracking.Validation/Framework.Tracking.Validation.csproj" />
   <Project Path="Framework.Tracking/Framework.Tracking.csproj" />
   <Project Path="Framework.UnitTesting/Framework.UnitTesting.csproj" />
-  <Project Path="Framework.Validation.Abstractions/Framework.Validation.Abstractions.csproj" />
-  <Project Path="Framework.Validation.Tests.Unit/Framework.Validation.Tests.Unit.csproj" />
-  <Project Path="Framework.Validation/Framework.Validation.csproj" />
   <Project Path="Framework.WebApi.Utils/Framework.WebApi.Utils.csproj" />
   <Project Path="_DomainDriven/Framework.Events.Legacy/Framework.Events.Legacy.csproj" />
   <Project Path="_DomainDriven/Framework.FinancialYear.Tests.Unit/Framework.FinancialYear.Tests.Unit.csproj" />

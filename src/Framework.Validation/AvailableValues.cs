@@ -4,45 +4,23 @@ using CommonFramework;
 
 namespace Framework.Validation;
 
-public interface IAvailableValues
+public class AvailableValues(object source) : IAvailableValues
 {
-    Range<T> GetAvailableRange<T>();
+    public Range<T> GetAvailableRange<T>() =>
 
-    int GetAvailableSize<T>();
-}
+        (source as IRangeContainer<T>)?.Range ?? throw new InvalidOperationException($"Range for {typeof(T).Name} not found");
+
+    public int GetAvailableSize<T>() => (source as ISizeContainer<T>).Maybe(c => c.Size);
+
+    public static IAvailableValues Empty { get; } = new AvailableValues(new object());
+
+    public static IAvailableValues Infinity { get; } = new InfinityAvailableValues();
 
 
-public class AvailableValues : IAvailableValues
-{
-    private readonly object source;
-
-
-    protected AvailableValues()
+    private class InfinityAvailableValues : IAvailableValues
     {
+        public Range<T> GetAvailableRange<T>() => Range<T>.Infinity;
 
-    }
-
-    public AvailableValues(object source)
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
-        this.source = source;
-    }
-
-
-    public virtual Range<T> GetAvailableRange<T>() => (this.source as IRangeContainer<T>).Maybe(c => c.Range);
-
-    public virtual int GetAvailableSize<T>() => (this.source as ISizeContainer<T>).Maybe(c => c.Size);
-
-    public static readonly AvailableValues Empty = new AvailableValues(new object());
-
-    public static readonly AvailableValues Infinity = new InfinityAvailableValues();
-
-
-    private class InfinityAvailableValues : AvailableValues
-    {
-        public override Range<T> GetAvailableRange<T>() => Range<T>.Infinity;
-
-        public override int GetAvailableSize<T>() => int.MaxValue;
+        public int GetAvailableSize<T>() => int.MaxValue;
     }
 }

@@ -1,7 +1,5 @@
 ﻿using FluentAssertions;
 
-using Framework.DomainDriven;
-
 using NUnit.Framework;
 
 using NSubstitute;
@@ -11,7 +9,9 @@ namespace Framework.Validation.Tests.Unit;
 [TestFixture]
 public class RangePropertyValidatorTests
 {
-    private IPropertyValidationContext<DomainObject, decimal> context;
+    private IPropertyValidationContext<DomainObject, decimal> context = null!;
+
+    private readonly Framework.BLL.Validation.AvailableValues availableValues = Framework.BLL.Validation.AvailableValues.Default;
 
     [SetUp]
     public void Init()
@@ -33,7 +33,7 @@ public class RangePropertyValidatorTests
     public void GetValidationResult_DecimalValidatorMaxPositiveValue_Success()
     {
         // Arrange
-        var validator = RangePropertyValidatorHelper.Decimal.Create<DomainObject>(AvailableValuesHelper.AvailableValues.DecimalRange);
+        var validator = RangePropertyValidatorHelper.Decimal.Create<DomainObject>(this.availableValues.DecimalRange);
         this.context.Source.Returns(new DomainObject());
         this.context.Value.Returns(999999999999999M);
 
@@ -48,7 +48,7 @@ public class RangePropertyValidatorTests
     public void GetValidationResult_DecimalValidatorMaxNegativeValue_Success()
     {
         // Arrange
-        var validator = RangePropertyValidatorHelper.Decimal.Create<DomainObject>(AvailableValuesHelper.AvailableValues.DecimalRange);
+        var validator = RangePropertyValidatorHelper.Decimal.Create<DomainObject>(this.availableValues.DecimalRange);
         this.context.Source.Returns(new DomainObject());
         this.context.Value.Returns(-999999999999999M);
 
@@ -63,7 +63,7 @@ public class RangePropertyValidatorTests
     public void GetValidationResult_DecimalValidatorMaxPositiveValuePlusOne_Failure()
     {
         // Arrange
-        var validator = RangePropertyValidatorHelper.Decimal.Create<DomainObject>(AvailableValuesHelper.AvailableValues.DecimalRange);
+        var validator = RangePropertyValidatorHelper.Decimal.Create<DomainObject>(this.availableValues.DecimalRange);
         this.context.Source.Returns(new DomainObject());
         this.context.Value.Returns(1000000000000000M);
 
@@ -78,7 +78,7 @@ public class RangePropertyValidatorTests
     public void GetValidationResult_DecimalValidatorMaxNegativeValueMinusOne_Failure()
     {
         // Arrange
-        var validator = RangePropertyValidatorHelper.Decimal.Create<DomainObject>(AvailableValuesHelper.AvailableValues.DecimalRange);
+        var validator = RangePropertyValidatorHelper.Decimal.Create<DomainObject>(this.availableValues.DecimalRange);
         this.context.Source.Returns(new DomainObject());
         this.context.Value.Returns(-1000000000000000M);
 

@@ -2,8 +2,12 @@
 
 using CommonFramework.DependencyInjection;
 
-using Framework.Core;
 using Framework.Core.LazyObject;
+using Framework.Database.DALExceptions;
+using Framework.Database.ExpressionVisitorContainer;
+using Framework.Database.NHibernate.Audit;
+using Framework.Database.NHibernate.Sessions;
+using Framework.Database.Session;
 
 using GenericQueryable.NHibernate;
 
@@ -26,7 +30,9 @@ public static class DependencyInjectionExtensions
         services.AddSingleton(typeof(IDomainObjectSaveStrategy<>), typeof(DomainObjectSaveStrategy<>));
         services.BindServiceProxy(typeof(IDomainObjectSaveStrategy<>), typeof(DomainObjectSaveStrategyServiceProxyBinder<>));
 
-        services.AddScoped<IDBSessionSettings, DBSessionSettings>();
+        services.AddSingleton(DBSessionSettings.Default);
+
+        services.AddScoped<IAuditPropertyFactory, AuditPropertyFactory>();
 
         services.AddNHibernateGenericQueryable();
 

@@ -1,7 +1,7 @@
 ﻿// ReSharper disable once CheckNamespace
 namespace Framework.Core;
 
-public interface IPeriodObject
+public interface PeriodObject
 {
     Period Period
     {
@@ -9,7 +9,7 @@ public interface IPeriodObject
     }
 }
 
-public interface IMutablePeriodObject : IPeriodObject
+public interface IMutablePeriodObject : PeriodObject
 {
     new Period Period
     {

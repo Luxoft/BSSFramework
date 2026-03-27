@@ -12,10 +12,7 @@ internal class Visitor : ExpressionVisitor
 {
     private readonly Immutable<IAuditCriterion> criterion = new();
 
-    public IAuditCriterion Criterion
-    {
-        get { return this.criterion.Value; }
-    }
+    public IAuditCriterion Criterion => this.criterion.Value;
 
     public static IAuditCriterion GetCriterion(Expression expression)
     {
@@ -77,13 +74,7 @@ internal class Visitor : ExpressionVisitor
         return node;
     }
 
-    private void VisitBinaryExpression(BinaryExpression expr, Func<IAuditCriterion, IAuditCriterion, IAuditCriterion> evaluateFunc)
-    {
-        this.criterion.Value = evaluateFunc(expr.Left.ToCriterion(), expr.Right.ToCriterion());
-    }
+    private void VisitBinaryExpression(BinaryExpression expr, Func<IAuditCriterion, IAuditCriterion, IAuditCriterion> evaluateFunc) => this.criterion.Value = evaluateFunc(expr.Left.ToCriterion(), expr.Right.ToCriterion());
 
-    protected override Expression VisitUnary(UnaryExpression node)
-    {
-        return node;
-    }
+    protected override Expression VisitUnary(UnaryExpression node) => node;
 }

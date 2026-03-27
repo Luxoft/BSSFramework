@@ -26,7 +26,7 @@ public static class PeriodObjectExtensions
     }
 
     public static T GetNewest<T> (this IEnumerable<T> source)
-            where T : IPeriodObject
+            where T : PeriodObject
     {
         var request = from item in source
                       orderby item.Period descending
@@ -36,7 +36,7 @@ public static class PeriodObjectExtensions
     }
 
     public static T GetForDate<T>(this IEnumerable<T> source, DateTime date)
-            where T : IPeriodObject
+            where T : PeriodObject
     {
         var request = from item in source
                       where item.Period.Contains(date)
@@ -46,7 +46,7 @@ public static class PeriodObjectExtensions
     }
 
     public static IEnumerable<T> OrderByPeriod<T> (this IEnumerable<T> source)
-            where T : IPeriodObject
+            where T : PeriodObject
     {
         var request = from item in source
                       orderby item.Period
@@ -56,7 +56,7 @@ public static class PeriodObjectExtensions
     }
 
     public static IEnumerable<Period> GetPeriods<TItem>(this IEnumerable<TItem> source)
-            where TItem : IPeriodObject =>
+            where TItem : PeriodObject =>
         from item in source
         select item.Period into period
         orderby period

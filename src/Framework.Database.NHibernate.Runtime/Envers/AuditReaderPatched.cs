@@ -21,10 +21,7 @@ public class AuditReaderPatched(AuditConfiguration verCfg, ISession session, ISe
 
     public bool IsEmpty => false;
 
-    public IReadOnlyList<T> FindObjects<T>(IEnumerable<object> primaryKeys, long revision)
-    {
-        return primaryKeys.Select(z => this.Find<T>(z, revision)).Where(z => null != z).ToList();
-    }
+    public IReadOnlyList<T> FindObjects<T>(IEnumerable<object> primaryKeys, long revision) => primaryKeys.Select(z => this.Find<T>(z, revision)).Where(z => null != z).ToList();
 
     public IEnumerable<TIdentity> GetIdentsBy<TDomainObject, TIdentity>(IAuditCriterion criterion)
     {
@@ -124,10 +121,7 @@ public class AuditReaderPatched(AuditConfiguration verCfg, ISession session, ISe
         return null;
     }
 
-    public AuditQueryCreatorPatched CreatePatchedQuery()
-    {
-        return new AuditQueryCreatorPatched(this.verCfg, this);
-    }
+    public AuditQueryCreatorPatched CreatePatchedQuery() => new(this.verCfg, this);
 
     /// <summary>
     /// Gets the maximum audit revision.

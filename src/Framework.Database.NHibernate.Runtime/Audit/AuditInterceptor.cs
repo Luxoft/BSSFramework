@@ -1,5 +1,4 @@
-﻿using Framework.Application.Domain;
-using Framework.Database.AuditProperty;
+﻿using Framework.Database.AuditProperty;
 
 using NHibernate;
 using NHibernate.Type;

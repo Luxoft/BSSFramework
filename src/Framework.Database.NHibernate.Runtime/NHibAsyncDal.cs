@@ -1,11 +1,8 @@
 ﻿using CommonFramework;
+using CommonFramework.IdentitySource;
 
-using Framework.Application._Visitors.ExpressionVisitorContainer;
-using Framework.Application.DAL;
-using Framework.Application.Domain;
-using Framework.Application.Repository;
-using Framework.Application.Session;
 using Framework.Core;
+using Framework.Database.ExpressionVisitorContainer;
 using Framework.Database.NHibernate.Sessions;
 
 using GenericQueryable.NHibernate;
@@ -16,12 +13,12 @@ using NHibernate;
 namespace Framework.Database.NHibernate;
 
 public class NHibAsyncDal<TDomainObject, TIdent>(
-    InHibSession session,
-    IDomainObjectSaveStrategy<TDomainObject> saveStrategy,
+    INHibSession session,
     IExpressionVisitorContainer expressionVisitorContainer,
-    IGenericQueryableExecutor genericQueryableExecutor)
+    IGenericQueryableExecutor genericQueryableExecutor,
+    IIdentityInfo<TDomainObject, TIdent> identityInfo)
     : IAsyncDal<TDomainObject, TIdent>
-    where TDomainObject : class, IIdentityObject<TIdent>
+    where TDomainObject : class
     where TIdent : notnull
 {
     private ISession NativeSession => session.NativeSession;
@@ -51,7 +48,17 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
     {
         this.CheckWrite();
 
-        await saveStrategy.SaveAsync(session.NativeSession, domainObject, cancellationToken);
+        if (!session.NativeSession.Contains(domainObject))
+        {
+            var id = identityInfo.Id.Getter(domainObject);
+
+            if (!EqualityComparer<TIdent>.Default.Equals(id, default))
+            {
+                await session.NativeSession.SaveAsync(domainObject, id, cancellationToken);
+            }
+        }
+
+        await session.NativeSession.SaveOrUpdateAsync(domainObject, cancellationToken);
     }
 
     public async Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken = default)

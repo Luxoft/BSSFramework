@@ -4,7 +4,6 @@ using System.Runtime.Serialization;
 
 using CommonFramework;
 
-using Framework.Application.Domain.Attributes;
 using Framework.BLL.Domain.DTO.MappingObject;
 using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.CodeDom;
@@ -18,6 +17,7 @@ using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Mapping;
 using Framework.Core;
+using Framework.Database.Attributes;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
 

@@ -11,17 +11,15 @@ public class SqlExceptionConverter : ISQLExceptionConverter
 
     #region ISQLExceptionConverter Members
 
-    public Exception Convert(AdoExceptionContextInfo exceptionInfo)
-    {
+    public Exception Convert(AdoExceptionContextInfo exceptionInfo) =>
         /*
          * So far I know we don't have something similar to "X/Open-compliant SQLState" in .NET
          * This mean that each Dialect must have its own ISQLExceptionConverter, overriding BuildSQLExceptionConverter method,
          * and its own IViolatedConstraintNameExtracter if needed.
          * The System.Data.Common.DbException, of .NET2.0, don't give us something applicable to all dialects.
          */
-        return HandledNonSpecificException(exceptionInfo.SqlException, exceptionInfo.Message, exceptionInfo.Sql,
-                                           ValueTuple.Create(exceptionInfo.EntityName, exceptionInfo.EntityId));
-    }
+        HandledNonSpecificException(exceptionInfo.SqlException, exceptionInfo.Message, exceptionInfo.Sql,
+                                    ValueTuple.Create(exceptionInfo.EntityName, exceptionInfo.EntityId));
 
     #endregion
 
@@ -32,8 +30,6 @@ public class SqlExceptionConverter : ISQLExceptionConverter
     /// <param name="create"> </param>
     /// <returns> The converted exception; should <b>never</b> be null. </returns>
     public static ADOException HandledNonSpecificException(Exception sqlException, string message, string sql,
-                                                           ValueTuple<string, object> unTypedObjectInfo)
-    {
-        return new HandledGenericAdoException(message, sqlException, sql, unTypedObjectInfo);
-    }
+                                                           ValueTuple<string, object> unTypedObjectInfo) =>
+        new HandledGenericAdoException(message, sqlException, sql, unTypedObjectInfo);
 }

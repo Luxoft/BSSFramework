@@ -6,7 +6,7 @@ using CommonFramework;
 namespace Framework.Core;
 
 [DataContract(Namespace = "")]
-public partial struct Period : IEquatable<Period>, IComparable<Period>, IComparable, IPeriod<Period>
+public partial struct Period : IEquatable<Period>, IComparable<Period>, IComparable
 {
     private DateTime startDate;
 
@@ -159,14 +159,14 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
     /// </remarks>
     /// <param name="otherPeriod">Период, из которого извлекаются даты, входящие также в указанный период</param>
     /// <returns>Новый период представляющий собой пересечение дат заданных двух периодов. Если пересечение дат нету, то период будет пустым</returns>
-    public Period Intersect(IPeriod otherPeriod) => new(this.StartDate.Max(otherPeriod.StartDate), this.EndDate.UnsafeOperation(otherPeriod.EndDate, (d1, d2) => d1.Min(d2)));
+    public Period Intersect(Period otherPeriod) => new(this.StartDate.Max(otherPeriod.StartDate), this.EndDate.UnsafeOperation(otherPeriod.EndDate, (d1, d2) => d1.Min(d2)));
 
     /// <summary>
     /// Возвращает новый период, который является пересечением текущего периода с переданным в качестве параметра периода <see cref="target"/>
     /// </summary>
     /// <param name="target">Период, из которого извлекаются даты, входящие также в указанный период</param>
     /// <returns>Новый период представляющий собой пересечение дат заданных двух периодов. Если пересечение дат нету, то период будет пустым</returns>
-    public Period NativeIntersect(IPeriod target)
+    public Period NativeIntersect(Period target)
     {
         var result = new Period(
                                 target.NativeStartDate > this.NativeStartDate ? target.NativeStartDate : this.NativeStartDate,
@@ -181,7 +181,7 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>
-    public bool IsIntersectedExcludeZeroDuration(IPeriod target)
+    public bool IsIntersectedExcludeZeroDuration(Period target)
     {
         var intersect = this.Intersect(target);
 
@@ -198,7 +198,7 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
     /// </summary>
     /// <param name="target">Период, с которым проверяется пересечение</param>
     /// <returns>true, если дата начала или дата окончания переданного периода содержатся в указанном периоде, в противном случае — false</returns>
-    public bool IsNativeIntersected(IPeriod target)
+    public bool IsNativeIntersected(Period target)
     {
         var nativeIntersectedResult = this.NativeIntersect(target);
         var empty = Empty;

@@ -2,8 +2,8 @@
 
 using CommonFramework;
 
-using Framework.Application.Domain.Attributes;
 using Framework.Core;
+using Framework.Database.Attributes;
 using Framework.Restriction;
 
 namespace Framework.Database.Metadata;

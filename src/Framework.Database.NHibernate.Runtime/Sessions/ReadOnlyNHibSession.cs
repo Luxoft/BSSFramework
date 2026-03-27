@@ -1,7 +1,5 @@
 ﻿using System.Data;
 
-using Framework.Application.Session;
-
 using NHibernate;
 
 namespace Framework.Database.NHibernate.Sessions;
@@ -34,10 +32,7 @@ public class ReadOnlyNHibSession : NHibSessionBase
     {
     }
 
-    public override void AsWritable()
-    {
-        throw new InvalidOperationException("Readonly session already created");
-    }
+    public override void AsWritable() => throw new InvalidOperationException("Readonly session already created");
 
     public override async Task CloseAsync(CancellationToken cancellationToken = default)
     {
@@ -59,8 +54,5 @@ public class ReadOnlyNHibSession : NHibSessionBase
 
     public override IDbTransaction Transaction { get; } = null;
 
-    public override async Task FlushAsync(CancellationToken cancellationToken = default)
-    {
-        throw new InvalidOperationException();
-    }
+    public override async Task FlushAsync(CancellationToken cancellationToken = default) => throw new InvalidOperationException();
 }

@@ -1,5 +1,5 @@
-﻿using Framework.Application.Domain.Attributes;
-using Framework.Database.Domain;
+﻿using Framework.Database.Attributes;
+using Framework.Database.Mapping;
 
 namespace Framework.Database.Metadata;
 

@@ -1,6 +1,7 @@
 ﻿using CommonFramework;
 
 using Framework.Application.Repository;
+using Framework.Database;
 
 using GenericQueryable;
 

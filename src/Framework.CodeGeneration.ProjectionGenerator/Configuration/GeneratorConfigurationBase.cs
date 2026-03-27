@@ -10,7 +10,7 @@ using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.FileFactory;
 using Framework.CodeGeneration.ProjectionGenerator._Extensions;
 using Framework.Core;
-using Framework.Database.Domain;
+using Framework.Database.Mapping;
 using Framework.Projection;
 
 namespace Framework.CodeGeneration.ProjectionGenerator.Configuration;

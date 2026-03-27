@@ -5,7 +5,7 @@ using CommonFramework;
 
 using Framework.Core;
 using Framework.Core.TypeResolving.TypeSource;
-using Framework.Database.Domain;
+using Framework.Database.Mapping;
 using Framework.DomainDriven.Metadata;
 
 namespace Framework.Database.Metadata;

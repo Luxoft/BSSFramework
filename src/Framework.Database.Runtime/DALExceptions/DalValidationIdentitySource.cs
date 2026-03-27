@@ -1,7 +1,5 @@
 ﻿using System.Reflection;
 
-using Framework.Application.DALExceptions;
-
 namespace Framework.Database.DALExceptions;
 
 public class DalValidationIdentitySource : IDalValidationIdentitySource

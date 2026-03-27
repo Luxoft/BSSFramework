@@ -1,18 +1,6 @@
-﻿using Framework.Application.Session;
-using Framework.Database.AuditProperty;
+﻿namespace Framework.Database.NHibernate;
 
-using SecuritySystem.Services;
-
-namespace Framework.Database.NHibernate;
-
-public class DBSessionSettings(
-    IRawUserAuthenticationService userAuthenticationService,
-    TimeProvider timeProvider)
-    : IdbSessionSettings
+public record DBSessionSettings(DBSessionMode DefaultSessionMode)
 {
-    public DBSessionMode DefaultSessionMode { get; } = DBSessionMode.Write;
-
-    public AuditPropertyPair GetCreateAuditProperty() => AuditPropertyPair.GetCreateAuditProperty(userAuthenticationService, timeProvider);
-
-    public AuditPropertyPair GetModifyAuditProperty() => AuditPropertyPair.GetModifyAuditProperty(userAuthenticationService, timeProvider);
+    public static DBSessionSettings Default { get; } = new(DBSessionMode.Write);
 }

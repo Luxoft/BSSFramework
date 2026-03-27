@@ -2,7 +2,6 @@
 
 using CommonFramework;
 
-using Framework.Application.Session;
 using Framework.Database.NHibernate.DAL.Revisions;
 using Framework.Database.NHibernate.Envers;
 
@@ -10,7 +9,7 @@ using NHibernate;
 
 namespace Framework.Database.NHibernate.Sessions;
 
-public abstract class NHibSessionBase : InHibSession
+public abstract class NHibSessionBase : INHibSession
 {
     private Lazy<IAuditReaderPatched> LazyAuditReader { get; }
 
@@ -37,16 +36,10 @@ public abstract class NHibSessionBase : InHibSession
     public abstract Task FlushAsync(CancellationToken cancellationToken = default);
 
     /// <inheritdoc />
-    public long GetCurrentRevision()
-    {
-        return this.AuditReader.GetCurrentRevision<AuditRevisionEntity>(false).Id;
-    }
+    public long GetCurrentRevision() => this.AuditReader.GetCurrentRevision<AuditRevisionEntity>(false).Id;
 
     /// <inheritdoc />
-    public long GetMaxRevision()
-    {
-        return this.AuditReader.GetMaxRevision();
-    }
+    public long GetMaxRevision() => this.AuditReader.GetMaxRevision();
 
     public abstract void AsFault();
 
@@ -58,8 +51,5 @@ public abstract class NHibSessionBase : InHibSession
 
     public abstract Task CloseAsync(CancellationToken cancellationToken = default);
 
-    public async ValueTask DisposeAsync()
-    {
-        await this.CloseAsync();
-    }
+    public async ValueTask DisposeAsync() => await this.CloseAsync();
 }

@@ -3,7 +3,6 @@ using System.Reflection;
 
 using CommonFramework;
 
-using Framework.Application.Domain.Attributes;
 using Framework.BLL.Domain.MasterDetails;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.Serialization.Extensions;
@@ -17,6 +16,7 @@ using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.__Base;
 using Framework.Core;
+using Framework.Database.Attributes;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 

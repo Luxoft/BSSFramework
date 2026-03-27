@@ -19,10 +19,7 @@ public struct TableDescription : IEquatable<TableDescription>
         this.Catalog = catalog;
     }
 
-    public bool Equals(TableDescription other)
-    {
-        return string.Equals(this.ToString(), other.ToString(), StringComparison.InvariantCultureIgnoreCase);
-    }
+    public bool Equals(TableDescription other) => string.Equals(this.ToString(), other.ToString(), StringComparison.InvariantCultureIgnoreCase);
 
     public override string ToString()
     {
@@ -38,14 +35,9 @@ public struct TableDescription : IEquatable<TableDescription>
         builder.Append(this.Name).Append(')');
         return builder.ToString();
     }
-    public override bool Equals(object obj)
-    {
-        return string.Equals(this.ToString(), obj.ToString());
-    }
-    public override int GetHashCode()
-    {
-        return this.ToString().GetHashCode();
-    }
+    public override bool Equals(object obj) => string.Equals(this.ToString(), obj.ToString());
+
+    public override int GetHashCode() => this.ToString().GetHashCode();
 }
 
 public class ExceptionProcessingContext
@@ -68,23 +60,15 @@ public class ExceptionProcessingContext
                 .ToDictionary(z => z.Key, z => (IReadOnlyList<PersistentClass>)z.ToList());
     }
 
-    public TableDescription CreateTableDescription(Table table)
-    {
-        return this.CreateTableDescription(table.Catalog, table.Schema, table.Name);
-    }
+    public TableDescription CreateTableDescription(Table table) => this.CreateTableDescription(table.Catalog, table.Schema, table.Name);
 
-    public TableDescription CreateTableDescription(string initialCatalog, string schema, string tableName)
-    {
-        return new TableDescription(
-                                    string.IsNullOrWhiteSpace(initialCatalog) ? this.defaultSchemaDescription.InitialCatalog : this.TryRemoveSymbols(initialCatalog),
-                                    string.IsNullOrWhiteSpace(schema) ? string.Empty : this.TryRemoveSymbols(schema.ToLower()),
-                                    this.TryRemoveSymbols(tableName.ToLower()));
-    }
+    public TableDescription CreateTableDescription(string initialCatalog, string schema, string tableName) =>
+        new(
+            string.IsNullOrWhiteSpace(initialCatalog) ? this.defaultSchemaDescription.InitialCatalog : this.TryRemoveSymbols(initialCatalog),
+            string.IsNullOrWhiteSpace(schema) ? string.Empty : this.TryRemoveSymbols(schema.ToLower()),
+            this.TryRemoveSymbols(tableName.ToLower()));
 
-    public ICollection<PersistentClass> NhibernatePersistentClass
-    {
-        get { return this.nhibernatePersistentClass; }
-    }
+    public ICollection<PersistentClass> NhibernatePersistentClass => this.nhibernatePersistentClass;
 
     public IEnumerable<PersistentClass> GetPersistentClass(TableDescription tableDescription)
     {
@@ -105,19 +89,18 @@ public class ExceptionProcessingContext
         return result;
     }
 
-    private string TryRemoveSymbols(string value)
-    {
-        return this.removingSymbols.Aggregate(value, (prev, symbol) =>
-                                                      {
-                                                          var index = prev.IndexOf(symbol);
-                                                          var length = symbol.Length;
-                                                          if (-1 != index)
-                                                          {
-                                                              return prev.Remove(index, length);
-                                                          }
-                                                          return prev;
-                                                      });
-    }
+    private string TryRemoveSymbols(string value) =>
+        this.removingSymbols.Aggregate(value, (prev, symbol) =>
+        {
+            var index = prev.IndexOf(symbol);
+            var length = symbol.Length;
+            if (-1 != index)
+            {
+                return prev.Remove(index, length);
+            }
+            return prev;
+        });
+
     public struct TableDescription : IEquatable<TableDescription>
     {
         public string Schema { get; private set; }
@@ -150,17 +133,10 @@ public class ExceptionProcessingContext
                                                 string.Equals(propertyFunc(localThis), propertyFunc(other), StringComparison.InvariantCultureIgnoreCase));
         }
 
-        public override string ToString()
-        {
-            return string.Join(".", new[]{this.Catalog, this.Schema, this.Name}.Where(z=>null != z));
-        }
-        public override bool Equals(object obj)
-        {
-            return string.Equals(this.ToString(), obj.ToString());
-        }
-        public override int GetHashCode()
-        {
-            return this.ToString().GetHashCode();
-        }
+        public override string ToString() => string.Join(".", new[]{this.Catalog, this.Schema, this.Name}.Where(z=>null != z));
+
+        public override bool Equals(object obj) => string.Equals(this.ToString(), obj.ToString());
+
+        public override int GetHashCode() => this.ToString().GetHashCode();
     }
 }

@@ -1,16 +1,13 @@
 ﻿using CommonFramework.DependencyInjection;
 
-using Framework.Application._Visitors.ExpressionVisitorContainer;
-using Framework.Application._Visitors.Specific;
 using Framework.Application.Events;
 using Framework.Application.FinancialYear;
 using Framework.Application.Jobs;
 using Framework.Application.Repository;
 using Framework.Application.Repository.Default;
 using Framework.Application.Repository.Generic;
-using Framework.Application.ServiceEvaluator;
-using Framework.Application.Session;
-using Framework.Application.Session.DBSession;
+using Framework.Database;
+using Framework.Database.ExpressionVisitorContainer;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -23,6 +20,9 @@ public static class ServiceCollectionExtensions
 {
     extension(IServiceCollection services)
     {
+        public IServiceCollection RegisterListeners(Action<IDALListenerBuilder> setupAction) =>
+            services.Initialize<DALListenerBuilder>(setupAction);
+
         public IServiceCollection AddNamedLocks(Action<IGenericNamedLockBuilder> setupAction) =>
             services.Initialize<GenericNamedLockBuilder>(setupAction);
 
@@ -33,8 +33,9 @@ public static class ServiceCollectionExtensions
             services.RegisterFinancialYearServices();
             services.RegisterRepository();
             services.RegisterEvaluators();
-            services.RegistryGenericDatabaseVisitors();
             services.RegisterJobs();
+
+            services.AddSingleton<IDBSessionEvaluator, DbSessionEvaluator>();
 
             services.AddScoped<IEventOperationSender, EventOperationSender>();
 
@@ -66,7 +67,6 @@ public static class ServiceCollectionExtensions
 
         private IServiceCollection RegisterEvaluators()
         {
-            services.AddSingleton<IDBSessionEvaluator, DbSessionEvaluator>();
             services.AddSingleton(typeof(IServiceEvaluator<>), typeof(ServiceEvaluator<>));
 
             return services;
@@ -77,20 +77,6 @@ public static class ServiceCollectionExtensions
             services.AddSingleton<IJobServiceEvaluatorFactory, JobServiceEvaluatorFactory>();
             services.AddSingleton(typeof(IJobServiceEvaluator<>), typeof(JobServiceEvaluator<>));
             services.AddScoped<IJobMiddlewareFactory, JobMiddlewareFactory>();
-
-            return services;
-        }
-
-        private IServiceCollection RegistryGenericDatabaseVisitors()
-        {
-            services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
-            services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPeriodItem>();
-            services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDefaultItem>();
-            services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerMathItem>();
-
-            services.AddSingleton<IIdPropertyResolver, IdPropertyResolver>();
-
-            services.AddScoped<IExpressionVisitorContainer, ExpressionVisitorAggregator>();
 
             return services;
         }

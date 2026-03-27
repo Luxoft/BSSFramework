@@ -10,16 +10,11 @@ public abstract class RevisionEntityListener<T>(IAuditRevisionUserAuthentication
 {
     protected IAuditRevisionUserAuthenticationService AuditRevisionUserAuthenticationService {get; } = auditRevisionUserAuthenticationService ?? throw new ArgumentNullException(nameof(auditRevisionUserAuthenticationService));
 
-    public void NewRevision(object revisionEntity)
-    {
-        this.ProcessNewRevision((T)revisionEntity);
-    }
+    public void NewRevision(object revisionEntity) => this.ProcessNewRevision((T)revisionEntity);
 
     public void EntityChanged(Type entityClass, string entityName, object entityId, RevisionType revisionType,
-                              object revisionEntity)
-    {
+                              object revisionEntity) =>
         this.ProcessEntityChanged(entityClass, entityId, revisionType, (T)revisionEntity);
-    }
 
     protected abstract void ProcessNewRevision(T revisionEntity);
 

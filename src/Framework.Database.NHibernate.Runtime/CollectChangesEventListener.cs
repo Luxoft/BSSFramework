@@ -10,29 +10,11 @@ internal class CollectChangesEventListener : IPostDeleteEventListener, IPostInse
 
     private int counter;
 
-    public IEnumerable<IDALObject> InsertedObjects
-    {
-        get
-        {
-            return this.insertedObjects;
-        }
-    }
+    public IEnumerable<IDALObject> InsertedObjects => this.insertedObjects;
 
-    public IEnumerable<IDALObject> RemovedObjects
-    {
-        get
-        {
-            return this.removedObjects;
-        }
-    }
+    public IEnumerable<IDALObject> RemovedObjects => this.removedObjects;
 
-    public IEnumerable<IDALObject> UpdatedObjects
-    {
-        get
-        {
-            return this.updatedObjects;
-        }
-    }
+    public IEnumerable<IDALObject> UpdatedObjects => this.updatedObjects;
 
     public void Clear()
     {
@@ -48,15 +30,9 @@ internal class CollectChangesEventListener : IPostDeleteEventListener, IPostInse
         return result;
     }
 
-    public bool HasAny()
-    {
-        return this.insertedObjects.Any() || this.removedObjects.Any() || this.updatedObjects.Any();
-    }
+    public bool HasAny() => this.insertedObjects.Any() || this.removedObjects.Any() || this.updatedObjects.Any();
 
-    public async Task OnPostDeleteAsync(PostDeleteEvent @event, CancellationToken cancellationToken)
-    {
-        this.OnPostDelete(@event);
-    }
+    public async Task OnPostDeleteAsync(PostDeleteEvent @event, CancellationToken cancellationToken) => this.OnPostDelete(@event);
 
     public void OnPostDelete(PostDeleteEvent @event)
     {
@@ -67,10 +43,7 @@ internal class CollectChangesEventListener : IPostDeleteEventListener, IPostInse
         this.removedObjects.Add(@event.ToDALObjects(this.counter++));
     }
 
-    public async Task OnPostInsertAsync(PostInsertEvent @event, CancellationToken cancellationToken)
-    {
-        this.OnPostInsert(@event);
-    }
+    public async Task OnPostInsertAsync(PostInsertEvent @event, CancellationToken cancellationToken) => this.OnPostInsert(@event);
 
     public void OnPostInsert(PostInsertEvent @event)
     {
@@ -82,10 +55,7 @@ internal class CollectChangesEventListener : IPostDeleteEventListener, IPostInse
         this.insertedObjects.Add(@event.ToDALObjects(this.counter++));
     }
 
-    public async Task OnPostUpdateAsync(PostUpdateEvent @event, CancellationToken cancellationToken)
-    {
-        this.OnPostUpdate(@event);
-    }
+    public async Task OnPostUpdateAsync(PostUpdateEvent @event, CancellationToken cancellationToken) => this.OnPostUpdate(@event);
 
     public void OnPostUpdate(PostUpdateEvent @event)
     {

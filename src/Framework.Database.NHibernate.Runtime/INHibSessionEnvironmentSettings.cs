@@ -1,6 +1,6 @@
 ﻿namespace Framework.Database.NHibernate;
 
-public interface InHibSessionEnvironmentSettings
+public interface INHibSessionEnvironmentSettings
 {
     TimeSpan TransactionTimeout { get; }
 }

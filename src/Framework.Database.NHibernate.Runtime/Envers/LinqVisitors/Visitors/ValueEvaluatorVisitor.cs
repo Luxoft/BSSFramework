@@ -6,10 +6,7 @@ internal class ValueEvaluatorVisitor : ExpressionVisitor
 {
     private readonly Immutable<string> result = new();
 
-    public string EvaluatedValue
-    {
-        get { return this.result.Value; }
-    }
+    public string EvaluatedValue => this.result.Value;
 
     protected override Expression VisitConstant(ConstantExpression node)
     {

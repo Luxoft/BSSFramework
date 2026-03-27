@@ -4,10 +4,7 @@ namespace Framework.Database.NHibernate._MappingSettings;
 
 public static class MappingSettingsExtensions
 {
-    public static MappingSettings AddInitializer(this MappingSettings mappingSettings, IConfigurationInitializer initializer)
-    {
-        return mappingSettings with { Initializer = mappingSettings.Initializer.Add(initializer) };
-    }
+    public static MappingSettings AddInitializer(this MappingSettings mappingSettings, IConfigurationInitializer initializer) => mappingSettings with { Initializer = mappingSettings.Initializer.Add(initializer) };
 
     public static bool IsAudited(this MappingSettings mappingSettings)
     {

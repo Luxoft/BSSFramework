@@ -17,10 +17,7 @@ public class AddHoursGenerator : BaseHqlGeneratorForMethod
     /// <summary>
     /// Creates new generator instance
     /// </summary>
-    public AddHoursGenerator()
-    {
-        this.SupportedMethods = [ReflectionHelper.GetMethodDefinition<DateTime?>(d => d.Value.AddHours(0))];
-    }
+    public AddHoursGenerator() => this.SupportedMethods = [ReflectionHelper.GetMethodDefinition<DateTime?>(d => d.Value.AddHours(0))];
 
     /// <summary>
     /// Creates new <see cref="HqlTreeNode"/> node that represents AddHours method call
@@ -30,8 +27,6 @@ public class AddHoursGenerator : BaseHqlGeneratorForMethod
             Expression targetObject,
             ReadOnlyCollection<Expression> arguments,
             HqlTreeBuilder treeBuilder,
-            IHqlExpressionVisitor visitor)
-    {
-        return treeBuilder.MethodCall("AddHours", visitor.Visit(targetObject).AsExpression(), visitor.Visit(arguments[0]).AsExpression());
-    }
+            IHqlExpressionVisitor visitor) =>
+        treeBuilder.MethodCall("AddHours", visitor.Visit(targetObject).AsExpression(), visitor.Visit(arguments[0]).AsExpression());
 }

@@ -2,9 +2,9 @@
 
 using CommonFramework;
 
-using Framework.Application.Domain.Attributes;
 using Framework.Core;
-using Framework.Database.Domain;
+using Framework.Database.Attributes;
+using Framework.Database.Mapping;
 
 namespace Framework.Database.NHibernate._MappingSettings;
 
@@ -18,23 +18,14 @@ public class DefaultAuditTypeFilter : IAuditTypeFilter
         new AuditPropertyFilterService<DetailRoleAttribute>(z => z.Role == DetailRole.No)
     ];
 
-    public bool IsAuditedType(Type type)
-    {
-        return this.filters.All(z => z.IsAuditedType(type));
-    }
+    public bool IsAuditedType(Type type) => this.filters.All(z => z.IsAuditedType(type));
 
-    public bool IsAuditedProperty(Type type, PropertyInfo propertyInfo)
-    {
-        return this.filters.All(z => z.IsAuditedProperty(type, propertyInfo));
-    }
+    public bool IsAuditedProperty(Type type, PropertyInfo propertyInfo) => this.filters.All(z => z.IsAuditedProperty(type, propertyInfo));
 
     private class AuditTypeFilterService<TAttribute> : IAuditTypeFilter
         where TAttribute : Attribute
     {
-        public bool IsAuditedType(Type type)
-        {
-            return !type.HasAttribute<TAttribute>();
-        }
+        public bool IsAuditedType(Type type) => !type.HasAttribute<TAttribute>();
 
         public bool IsAuditedProperty(Type type, PropertyInfo propertyInfo)
         {
@@ -53,10 +44,7 @@ public class DefaultAuditTypeFilter : IAuditTypeFilter
 
         }
 
-        public bool IsAuditedType(Type type)
-        {
-            return true;
-        }
+        public bool IsAuditedType(Type type) => true;
 
         public bool IsAuditedProperty(Type type, PropertyInfo propertyInfo)
         {

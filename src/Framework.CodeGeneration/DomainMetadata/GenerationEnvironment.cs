@@ -10,6 +10,7 @@ using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.BLL.Domain.Persistent.IdentityObject;
 using Framework.Core;
 using Framework.Core.TypeResolving.TypeSource;
+using Framework.Database;
 using Framework.FileGeneration.Extensions;
 using Framework.Projection;
 using Framework.Projection.Contract;

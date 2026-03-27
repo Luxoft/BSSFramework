@@ -1,6 +1,6 @@
 ﻿using CommonFramework.GenericRepository;
 
-using Framework.Application.DAL;
+using Framework.Database;
 
 using Microsoft.Extensions.DependencyInjection;
 

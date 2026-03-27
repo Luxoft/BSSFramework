@@ -11,18 +11,9 @@ public class AuditRevisionEntityListener<TAuditRevisionEntity>(IAuditRevisionUse
     : RevisionEntityListener<TAuditRevisionEntity>(auditRevisionUserAuthenticationService)
     where TAuditRevisionEntity : AuditRevisionEntity
 {
-    protected override void ProcessNewRevision(TAuditRevisionEntity revisionEntity)
-    {
-        this.SetAuthor(revisionEntity);
-    }
+    protected override void ProcessNewRevision(TAuditRevisionEntity revisionEntity) => this.SetAuthor(revisionEntity);
 
-    protected override void ProcessEntityChanged(Type entityClass, object entityId, RevisionType revisionType, TAuditRevisionEntity revisionEntity)
-    {
-        this.SetAuthor(revisionEntity);
-    }
+    protected override void ProcessEntityChanged(Type entityClass, object entityId, RevisionType revisionType, TAuditRevisionEntity revisionEntity) => this.SetAuthor(revisionEntity);
 
-    private void SetAuthor(TAuditRevisionEntity revisionEntity)
-    {
-        revisionEntity.Author = this.AuditRevisionUserAuthenticationService.GetUserName();
-    }
+    private void SetAuthor(TAuditRevisionEntity revisionEntity) => revisionEntity.Author = this.AuditRevisionUserAuthenticationService.GetUserName();
 }

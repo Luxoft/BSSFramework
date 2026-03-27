@@ -13,7 +13,7 @@ using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.Core;
-using Framework.Database.Domain;
+using Framework.Database.Mapping;
 using Framework.Projection;
 
 using SecuritySystem;

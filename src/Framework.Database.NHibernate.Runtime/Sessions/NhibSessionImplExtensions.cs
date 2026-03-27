@@ -21,13 +21,7 @@ internal static class NhibSessionImplExtensions
     /// </summary>
     /// <param name="source"></param>
     /// <param name="listeners"></param>
-    internal static void OverrideListeners(this SessionImpl source, EventListeners listeners)
-    {
-        ListenersField.SetValue(source, listeners);
-    }
+    internal static void OverrideListeners(this SessionImpl source, EventListeners listeners) => ListenersField.SetValue(source, listeners);
 
-    internal static void OverrideInterceptor(this SessionImpl source, IInterceptor interceptor)
-    {
-        SetInterceptorAction(source, interceptor);
-    }
+    internal static void OverrideInterceptor(this SessionImpl source, IInterceptor interceptor) => SetInterceptorAction(source, interceptor);
 }

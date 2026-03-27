@@ -10,21 +10,12 @@ public class AuditQueryCreatorPatched(AuditConfiguration auditCfg, IAuditReaderI
     private readonly AuditConfiguration auditCfg = auditCfg;
     private readonly IAuditReaderImplementor auditReaderImplementor = auditReaderImplementor;
 
-    public IAuditQuery ForProjectingRevisionsOfEntity<T>(bool selectEntitiesOnly, bool selectDeletedEntities)
-    {
-        return new RevisionsOfEntityProjectionQuery<T>(this.auditCfg, this.auditReaderImplementor, selectEntitiesOnly, selectDeletedEntities);
-    }
+    public IAuditQuery ForProjectingRevisionsOfEntity<T>(bool selectEntitiesOnly, bool selectDeletedEntities) => new RevisionsOfEntityProjectionQuery<T>(this.auditCfg, this.auditReaderImplementor, selectEntitiesOnly, selectDeletedEntities);
 
     /// <summary>
     /// without materialized entity objects
     /// </summary>
-    public IEntityAuditQuery<IIdentityRevisionEntityInfo<TRevisionInfo, TIdentity>> ForHistoryOf<TEntity, TRevisionInfo, TIdentity>(bool includeDeleted)
-    {
-        return new HistoryQueryOptimized<TEntity, TRevisionInfo, TIdentity>(this.auditCfg, this.auditReaderImplementor, includeDeleted);
-    }
+    public IEntityAuditQuery<IIdentityRevisionEntityInfo<TRevisionInfo, TIdentity>> ForHistoryOf<TEntity, TRevisionInfo, TIdentity>(bool includeDeleted) => new HistoryQueryOptimized<TEntity, TRevisionInfo, TIdentity>(this.auditCfg, this.auditReaderImplementor, includeDeleted);
 
-    public RevisionsOfEntityQuery CreateRevisionEntityQuery()
-    {
-        return new RevisionsOfEntityQuery(this.auditCfg, this.auditReaderImplementor, this.auditCfg.AuditEntCfg.RevisionInfoEntityFullClassName(), true, false);
-    }
+    public RevisionsOfEntityQuery CreateRevisionEntityQuery() => new(this.auditCfg, this.auditReaderImplementor, this.auditCfg.AuditEntCfg.RevisionInfoEntityFullClassName(), true, false);
 }

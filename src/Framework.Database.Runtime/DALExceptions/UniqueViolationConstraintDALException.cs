@@ -1,7 +1,5 @@
 ﻿using CommonFramework;
 
-using Framework.Application.DALExceptions;
-
 namespace Framework.Database.DALExceptions;
 
 public class UniqueViolationConstraintDALException(UniqueConstraint args, IDalValidationIdentitySource validationIdentitySource)

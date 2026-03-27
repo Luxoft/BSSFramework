@@ -34,11 +34,9 @@ public record MappingSettings<TPersistentDomainObjectBase>(
     {
     }
 
-    private static IReadOnlyList<Type> GetDefaultTypes()
-    {
-        return typeof(TPersistentDomainObjectBase).Assembly
-                                                  .GetTypes()
-                                                  .Where(typeof(TPersistentDomainObjectBase).IsAssignableFrom)
-                                                  .ToList();
-    }
+    private static IReadOnlyList<Type> GetDefaultTypes() =>
+        typeof(TPersistentDomainObjectBase).Assembly
+                                           .GetTypes()
+                                           .Where(typeof(TPersistentDomainObjectBase).IsAssignableFrom)
+                                           .ToList();
 }

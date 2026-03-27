@@ -1,4 +1,6 @@
-﻿namespace Framework.Application.Repository;
+﻿using Framework.Database;
+
+namespace Framework.Application.Repository;
 
 public interface IGenericRepository<TDomainObject, in TIdent>
 {

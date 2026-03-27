@@ -10,8 +10,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framework.Application.Abstractions\Framework.Application.Abstractions.csproj" />
-    <ProjectReference Include="..\Framework.Application.Domain\Framework.Application.Domain.csproj" />
+    <PackageReference Include="IvAt.SecuritySystem.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Database.Abstractions\Framework.Database.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

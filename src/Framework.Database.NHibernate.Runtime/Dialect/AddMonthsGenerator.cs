@@ -17,10 +17,7 @@ public class AddMonthsGenerator : BaseHqlGeneratorForMethod
     /// <summary>
     /// Creates new generator instance
     /// </summary>
-    public AddMonthsGenerator()
-    {
-        this.SupportedMethods = [ReflectionHelper.GetMethodDefinition<DateTime?>(d => d.Value.AddMonths(0))];
-    }
+    public AddMonthsGenerator() => this.SupportedMethods = [ReflectionHelper.GetMethodDefinition<DateTime?>(d => d.Value.AddMonths(0))];
 
     /// <summary>
     /// Creates new <see cref="HqlTreeNode"/> node that represents AddMonths method call
@@ -30,8 +27,6 @@ public class AddMonthsGenerator : BaseHqlGeneratorForMethod
             Expression targetObject,
             ReadOnlyCollection<Expression> arguments,
             HqlTreeBuilder treeBuilder,
-            IHqlExpressionVisitor visitor)
-    {
-        return treeBuilder.MethodCall("AddMonths", visitor.Visit(targetObject).AsExpression(), visitor.Visit(arguments[0]).AsExpression());
-    }
+            IHqlExpressionVisitor visitor) =>
+        treeBuilder.MethodCall("AddMonths", visitor.Visit(targetObject).AsExpression(), visitor.Visit(arguments[0]).AsExpression());
 }

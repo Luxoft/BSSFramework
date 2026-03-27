@@ -1,4 +1,5 @@
-﻿using Framework.Application.ServiceEvaluator;
+﻿using Framework.Application;
+using Framework.Application.ServiceEvaluator;
 using Framework.Application.Session;
 using Framework.BLL.ServiceModel.Service;
 using Framework.Core;

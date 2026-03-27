@@ -5,7 +5,6 @@ using System.Reflection;
 using CommonFramework;
 using CommonFramework.DictionaryCache;
 
-using Framework.Application.Domain.Attributes;
 using Framework.Application.Events;
 using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.DTO;
@@ -24,6 +23,7 @@ using Framework.CodeGeneration.DTOGenerator.Server.Configuration.PropertyAssigne
 using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 using Framework.CodeGeneration.FileFactory;
 using Framework.Core;
+using Framework.Database.Attributes;
 using Framework.Events;
 using Framework.Projection;
 

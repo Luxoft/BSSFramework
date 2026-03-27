@@ -122,7 +122,9 @@
     <Project Path="Framework.BLL/Framework.BLL.csproj" />
   </Folder>
   <Folder Name="/_Database/">
+    <Project Path="Framework.Database.Abstractions/Framework.Database.Abstractions.csproj" />
     <Project Path="Framework.Database.Domain/Framework.Database.Domain.csproj" />
+    <Project Path="Framework.Database.Mapping/Framework.Database.Mapping.csproj" />
     <Project Path="Framework.Database.Metadata/Framework.Database.Metadata.csproj" />
     <Project Path="Framework.Database.NHibernate.Runtime/Framework.Database.NHibernate.Runtime.csproj" />
     <Project Path="Framework.Database.NHibernate/Framework.Database.NHibernate.csproj" />

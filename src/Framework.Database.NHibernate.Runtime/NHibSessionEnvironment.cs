@@ -1,5 +1,4 @@
-﻿using Framework.Application.DALExceptions;
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Database.NHibernate._MappingSettings;
 using Framework.Database.NHibernate.Audit;
 using Framework.Database.NHibernate.SqlExceptionProcessors;
@@ -21,7 +20,7 @@ public class NHibSessionEnvironment : IDisposable
             IEnumerable<MappingSettings> mappingSettings,
             IEnumerable<IConfigurationInitializer> initializers,
             IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService,
-            InHibSessionEnvironmentSettings settings,
+            INHibSessionEnvironmentSettings settings,
             IDalValidationIdentitySource dalValidationIdentitySource)
     {
         var cachedMappingSettings = (mappingSettings ?? throw new ArgumentNullException(nameof(mappingSettings))).ToList();

@@ -1,4 +1,4 @@
-﻿using Framework.Application.Auth;
+﻿using Framework.Core.Auth;
 
 namespace Framework.Database.NHibernate.Audit;
 

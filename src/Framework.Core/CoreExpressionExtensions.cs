@@ -205,7 +205,7 @@ public static class CoreExpressionExtensions
                     "get_Item",
                     StringComparison.InvariantCultureIgnoreCase))
             {
-                return $"{leftPath.MaybeString(z => z)}[{string.Join(",", methodCallExpression.Arguments.Select(z => ToPath(z)))}]";
+                return $"{leftPath.MaybeString(z => z)}[{string.Join(",", methodCallExpression.Arguments.Select(z => z.ToPath()))}]";
             }
 
             return

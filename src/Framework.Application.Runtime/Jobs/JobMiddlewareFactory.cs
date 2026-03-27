@@ -1,6 +1,6 @@
 ﻿using Framework.Application.Auth;
 using Framework.Application.Middleware;
-using Framework.Application.Session;
+using Framework.Database;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

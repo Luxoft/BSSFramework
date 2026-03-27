@@ -6,7 +6,6 @@ using System.Runtime.Serialization;
 using CommonFramework;
 using CommonFramework.Maybe;
 
-using Framework.Application.Domain.Attributes;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.IdentityObject;
@@ -29,6 +28,7 @@ using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
 using Framework.CodeGeneration.DTOGenerator.Server.Members.MapToDomainObject;
 using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 using Framework.Core;
+using Framework.Database.Attributes;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
 

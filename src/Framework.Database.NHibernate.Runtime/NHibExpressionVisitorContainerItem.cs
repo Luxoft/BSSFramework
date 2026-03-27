@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.Application._Visitors.ExpressionVisitorContainer;
+using Framework.Database.ExpressionVisitorContainer;
 
 namespace Framework.Database.NHibernate;
 

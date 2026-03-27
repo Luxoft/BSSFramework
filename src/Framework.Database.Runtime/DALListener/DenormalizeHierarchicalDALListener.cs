@@ -1,78 +1,69 @@
-﻿using CommonFramework;
+﻿//using CommonFramework;
 
-using Framework.Application.Lock;
-using Framework.Application.Repository;
-using Framework.Core;
+//using Framework.Core;
 
-using HierarchicalExpand;
-using HierarchicalExpand.Denormalization;
+//namespace Framework.Database.DALListener;
 
-using Microsoft.Extensions.DependencyInjection;
+//public class DenormalizeHierarchicalDalListener(
+//    IServiceProvider serviceProvider,
+//    IEnumerable<FullAncestorLinkInfo> hierarchicalInfoList,
+//    INamedLockSource namedLockSource,
+//    INamedLockService namedLockService)
+//    : IBeforeTransactionCompletedDalListener
+//{
+//    private readonly IReadOnlyDictionary<Type, FullAncestorLinkInfo> hierarchicalInfoTypes = hierarchicalInfoList.ToDictionary(h => h.DomainObjectType);
 
-using SecuritySystem;
+//    public async Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
+//    {
+//        foreach (var typeGroup in eventArgs.Changes.GroupByType())
+//        {
+//            var domainType = typeGroup.Key;
 
-namespace Framework.Database.DALListener;
+//            if (this.hierarchicalInfoTypes.TryGetValue(domainType, out var hierarchicalInfo))
+//            {
+//                var values = typeGroup.Value.ToChangeTypeDict().Partial(
+//                    pair => pair.Value == DALObjectChangeType.Created || pair.Value == DALObjectChangeType.Updated,
+//                    (modified, removing) => new { Modified = modified, Removing = removing });
 
-public class DenormalizeHierarchicalDalListener(
-    IServiceProvider serviceProvider,
-    IEnumerable<FullAncestorLinkInfo> hierarchicalInfoList,
-    INamedLockSource namedLockSource,
-    INamedLockService namedLockService)
-    : IBeforeTransactionCompletedDalListener
-{
-    private readonly IReadOnlyDictionary<Type, FullAncestorLinkInfo> hierarchicalInfoTypes = hierarchicalInfoList.ToDictionary(h => h.DomainObjectType);
+//                var method =
+//                    new Func<ISecurityContext[], ISecurityContext[], FullAncestorLinkInfo<ISecurityContext>, CancellationToken, Task>(this.Process).CreateGenericMethod(domainType);
 
-    public async Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
-    {
-        foreach (var typeGroup in eventArgs.Changes.GroupByType())
-        {
-            var domainType = typeGroup.Key;
+//                await method.Invoke<Task>(
+//                    this,
+//                    [
+//                        values.Modified.Select(z => z.Key).ToArray(domainType),
+//                        values.Removing.Select(z => z.Key).ToArray(domainType),
+//                        hierarchicalInfo,
+//                        cancellationToken
+//                    ]);
+//            }
+//        }
+//    }
 
-            if (this.hierarchicalInfoTypes.TryGetValue(domainType, out var hierarchicalInfo))
-            {
-                var values = typeGroup.Value.ToChangeTypeDict().Partial(
-                    pair => pair.Value == DALObjectChangeType.Created || pair.Value == DALObjectChangeType.Updated,
-                    (modified, removing) => new { Modified = modified, Removing = removing });
+//    private async Task Process<TDomainObject>(
+//        TDomainObject[] modified,
+//        TDomainObject[] removing,
+//        FullAncestorLinkInfo<TDomainObject> fullAncestorLinkInfo,
+//        CancellationToken cancellationToken)
+//        where TDomainObject : class
+//    {
+//        await this.LockChanges(fullAncestorLinkInfo, cancellationToken);
 
-                var method =
-                    new Func<ISecurityContext[], ISecurityContext[], FullAncestorLinkInfo<ISecurityContext>, CancellationToken, Task>(this.Process).CreateGenericMethod(domainType);
+//        if (serviceProvider.GetService(typeof(DeepLevelInfo<>).MakeGenericType(typeof(TDomainObject))) != null)
+//        {
+//            await serviceProvider.GetRequiredService<IDeepLevelDenormalizer<TDomainObject>>().UpdateDeepLevels(modified, cancellationToken);
+//        }
 
-                await method.Invoke<Task>(
-                    this,
-                    [
-                        values.Modified.Select(z => z.Key).ToArray(domainType),
-                        values.Removing.Select(z => z.Key).ToArray(domainType),
-                        hierarchicalInfo,
-                        cancellationToken
-                    ]);
-            }
-        }
-    }
+//        await serviceProvider.GetRequiredService<IAncestorDenormalizer<TDomainObject>>().SyncAsync(modified, removing, cancellationToken);
+//    }
 
-    private async Task Process<TDomainObject>(
-        TDomainObject[] modified,
-        TDomainObject[] removing,
-        FullAncestorLinkInfo<TDomainObject> fullAncestorLinkInfo,
-        CancellationToken cancellationToken)
-        where TDomainObject : class
-    {
-        await this.LockChanges(fullAncestorLinkInfo, cancellationToken);
+//    private async Task LockChanges(FullAncestorLinkInfo fullAncestorLinkInfo, CancellationToken cancellationToken)
+//    {
+//        var domainObjectAncestorLinkType = fullAncestorLinkInfo.DirectedLinkType;
 
-        if (serviceProvider.GetService(typeof(DeepLevelInfo<>).MakeGenericType(typeof(TDomainObject))) != null)
-        {
-            await serviceProvider.GetRequiredService<IDeepLevelDenormalizer<TDomainObject>>().UpdateDeepLevels(modified, cancellationToken);
-        }
+//        var namedLock = namedLockSource.NamedLocks.Where(nl => nl.DomainType == domainObjectAncestorLinkType)
+//                                       .Single(() => new ArgumentException($"System must have namedLock for {domainObjectAncestorLinkType.Name} global lock "));
 
-        await serviceProvider.GetRequiredService<IAncestorDenormalizer<TDomainObject>>().SyncAsync(modified, removing, cancellationToken);
-    }
-
-    private async Task LockChanges(FullAncestorLinkInfo fullAncestorLinkInfo, CancellationToken cancellationToken)
-    {
-        var domainObjectAncestorLinkType = fullAncestorLinkInfo.DirectedLinkType;
-
-        var namedLock = namedLockSource.NamedLocks.Where(nl => nl.DomainType == domainObjectAncestorLinkType)
-                                       .Single(() => new ArgumentException($"System must have namedLock for {domainObjectAncestorLinkType.Name} global lock "));
-
-        await namedLockService.LockAsync(namedLock, LockRole.Update, cancellationToken);
-    }
-}
+//        await namedLockService.LockAsync(namedLock, LockRole.Update, cancellationToken);
+//    }
+//}

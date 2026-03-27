@@ -11,15 +11,9 @@ public class AuditEntityService : IAuditAttributeService
 
     private readonly Dictionary<Type, string> typeToAuditTableSchemaDictionary = new();
 
-    public void Register(Type type, bool isAudited)
-    {
-        this.isAuditedDict.Add(type, isAudited);
-    }
+    public void Register(Type type, bool isAudited) => this.isAuditedDict.Add(type, isAudited);
 
-    public void Register(Type type, string auditTableSchema)
-    {
-        this.typeToAuditTableSchemaDictionary.Add(type, auditTableSchema);
-    }
+    public void Register(Type type, string auditTableSchema) => this.typeToAuditTableSchemaDictionary.Add(type, auditTableSchema);
 
     public void Register(Property property, bool isAudited)
     {

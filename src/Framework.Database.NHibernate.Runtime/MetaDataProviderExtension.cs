@@ -7,10 +7,7 @@ namespace Framework.Database.NHibernate;
 
 public static class MetaDataProviderExtension
 {
-    public static IMetaDataProvider Combine(this IEnumerable<IMetaDataProvider> providers)
-    {
-        return new MetaDataProviderComposite(providers);
-    }
+    public static IMetaDataProvider Combine(this IEnumerable<IMetaDataProvider> providers) => new MetaDataProviderComposite(providers);
 
     private class MetaDataProviderComposite : IMetaDataProvider
     {

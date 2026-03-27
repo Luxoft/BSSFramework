@@ -5,8 +5,5 @@ namespace Framework.Database.NHibernate.Envers;
 
 public class RevisionNumberFieldPropertyName : IPropertyNameGetter
 {
-    public string Get(AuditConfiguration auditCfg)
-    {
-        return "id";
-    }
+    public string Get(AuditConfiguration auditCfg) => "id";
 }

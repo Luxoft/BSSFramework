@@ -2,11 +2,11 @@
 
 using CommonFramework;
 
-using Framework.Application.Domain.Attributes;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
+using Framework.Database.Attributes;
 
 namespace Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
 

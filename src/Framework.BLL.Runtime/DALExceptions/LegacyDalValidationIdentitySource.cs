@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-using Framework.Application.DALExceptions;
+using Framework.Database;
 using Framework.Validation;
 
 namespace Framework.BLL.DALExceptions;

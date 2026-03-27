@@ -26,8 +26,5 @@ public class HandledGenericAdoException : ADOException
         this.EntityId = unTypeObjectInfo.Item2;
     }
 
-    public Microsoft.Data.SqlClient.SqlException SqlException
-    {
-        get { return (Microsoft.Data.SqlClient.SqlException) this.InnerException; }
-    }
+    public Microsoft.Data.SqlClient.SqlException SqlException => (Microsoft.Data.SqlClient.SqlException) this.InnerException;
 }

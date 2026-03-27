@@ -1,6 +1,5 @@
 ﻿using System.Data;
 
-using Framework.Application.Session;
 using Framework.Core;
 using Framework.Database.AuditProperty;
 using Framework.Database.NHibernate.Audit;
@@ -31,13 +30,13 @@ public class WriteNHibSession : NHibSessionBase
     private bool closed;
 
     public WriteNHibSession(NHibSessionEnvironment environment,
-                            IdbSessionSettings settings,
+                            IAuditPropertyFactory auditPropertyFactory,
                             IEnumerable<IDBSessionEventListener> eventListeners)
             : base(environment, DBSessionMode.Write)
     {
         this.eventListeners = eventListeners.ToArray();
-        this.modifyAuditProperties = settings.GetModifyAuditProperty();
-        this.createAuditProperties = settings.GetCreateAuditProperty();
+        this.modifyAuditProperties = auditPropertyFactory.GetModifyAuditProperty();
+        this.createAuditProperties = auditPropertyFactory.GetCreateAuditProperty();
         this.collectChangedEventListener = new CollectChangesEventListener();
 
         this.NativeSession = this.Environment.InternalSessionFactory.OpenSession();
@@ -74,15 +73,9 @@ public class WriteNHibSession : NHibSessionBase
         eventListeners.PostInsertEventListeners = eventListeners.PostInsertEventListeners.Concat([this.collectChangedEventListener]).ToArray();
     }
 
-    public override void AsFault()
-    {
-        this.manualFault = true;
-    }
+    public override void AsFault() => this.manualFault = true;
 
-    public override void AsReadOnly()
-    {
-        throw new InvalidOperationException("Writable session already created");
-    }
+    public override void AsReadOnly() => throw new InvalidOperationException("Writable session already created");
 
     public override void AsWritable()
     {
@@ -129,10 +122,7 @@ public class WriteNHibSession : NHibSessionBase
         return dbCommand.Transaction!;
     }
 
-    public override async Task FlushAsync(CancellationToken cancellationToken = default)
-    {
-        await this.FlushAsync(false, cancellationToken);
-    }
+    public override async Task FlushAsync(CancellationToken cancellationToken = default) => await this.FlushAsync(false, cancellationToken);
 
     private async Task FlushAsync(bool withCompleteTransaction, CancellationToken cancellationToken)
     {

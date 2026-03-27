@@ -9,12 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.CommonFramework.DependencyInjection" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Framework.Database.Runtime\Framework.Database.Runtime.csproj" />
-    <ProjectReference Include="..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
   </ItemGroup>
 
 </Project>

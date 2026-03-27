@@ -1,8 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 
 using Framework.Database.DALExceptions;
-using Framework.Database.Domain;
 using Framework.Core;
+using Framework.Database.Mapping;
 
 namespace Framework.Database.NHibernate.SqlExceptionProcessors;
 

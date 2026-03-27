@@ -4,6 +4,8 @@ using System.Reflection;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
+using Framework.Database.NHibernate._MappingSettings;
+
 namespace Framework.Database.NHibernate.Setup;
 
 public interface INHibernateSetupObject

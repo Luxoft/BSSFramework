@@ -1,14 +1,12 @@
 ﻿using System.Collections;
 using System.Linq.Expressions;
 
-using Framework.Application.Domain;
-
 using SecuritySystem.Services;
 
 namespace Framework.Database.AuditProperty;
 
 public class AuditPropertyPair<TDomainObject>(
-    IAuditProperty<TDomainObject, string> authorAudit,
+    IAuditProperty<TDomainObject, string?> authorAudit,
     IAuditProperty<TDomainObject, DateTime?> dateAudit)
     : IEnumerable<IAuditProperty>
 {
@@ -34,7 +32,7 @@ public class AuditPropertyPair : AuditPropertyPair<IAuditObject>
     public AuditPropertyPair(
         IRawUserAuthenticationService userAuthenticationService,
         TimeProvider timeProvider,
-        Expression<Func<IAuditObject, string>> authorPropertyExpr,
+        Expression<Func<IAuditObject, string?>> authorPropertyExpr,
         Expression<Func<IAuditObject, DateTime?>> datePropertyExpr)
         : base(authorPropertyExpr, datePropertyExpr, userAuthenticationService, timeProvider)
     {

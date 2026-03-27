@@ -13,6 +13,7 @@ using Framework.CodeGeneration.WebApiGenerator.Extensions;
 
 using Framework.CodeGeneration.WebApiGenerator.MethodGenerators.Integration.Save.ByModel._Base;
 using Framework.Core;
+using Framework.Database;
 
 namespace Framework.CodeGeneration.WebApiGenerator.MethodGenerators.Integration.Save;
 

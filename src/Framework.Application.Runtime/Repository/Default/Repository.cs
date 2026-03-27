@@ -1,5 +1,5 @@
-﻿using Framework.Application.DAL;
-using Framework.Application.Repository.Generic;
+﻿using Framework.Application.Repository.Generic;
+using Framework.Database;
 
 using SecuritySystem.AccessDenied;
 using SecuritySystem.Providers;

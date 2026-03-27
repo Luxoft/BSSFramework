@@ -16,6 +16,7 @@ using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
 using Framework.Core;
+using Framework.Database;
 
 using SecuritySystem;
 

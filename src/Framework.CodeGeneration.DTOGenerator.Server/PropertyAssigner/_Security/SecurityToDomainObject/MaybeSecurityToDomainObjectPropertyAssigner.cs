@@ -1,13 +1,13 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
-using Framework.Application.Domain.Attributes;
 using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security._Base;
 using Framework.Core;
+using Framework.Database.Attributes;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.SecurityToDomainObject;
 

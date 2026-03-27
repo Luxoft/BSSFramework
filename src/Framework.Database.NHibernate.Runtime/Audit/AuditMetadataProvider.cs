@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.Database.Domain;
+using Framework.Database.Mapping;
 using Framework.Database.NHibernate._MappingSettings;
 using Framework.Database.NHibernate.DAL.Revisions;
 

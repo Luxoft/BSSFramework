@@ -4,7 +4,7 @@ using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.BLL.Domain.ServiceRole.Base;
-using Framework.Database.Domain;
+using Framework.Database.Mapping;
 using Framework.Validation;
 
 namespace Framework.Projection.Lambda.ProjectionSource.AttributeSource;

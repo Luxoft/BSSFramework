@@ -4,8 +4,6 @@ using System.Text.RegularExpressions;
 
 using CommonFramework;
 
-using Framework.Application.DALExceptions;
-
 namespace Framework.Database.DALExceptions;
 
 public struct UniqueConstraint

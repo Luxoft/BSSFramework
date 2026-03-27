@@ -1,39 +1,38 @@
 ﻿using System.Data;
 
-using Framework.Application.Session;
 using Framework.Database.NHibernate.Envers;
 
 using NHibernate;
 
 namespace Framework.Database.NHibernate.Sessions;
 
-public class NHibSession : InHibSession
+public class NHibSession : INHibSession
 {
-    private DBSessionMode? sessionMode;
+    private DBSessionMode? customSessionMode;
 
-    private readonly Lazy<InHibSession> lazyInnerSession;
+    private readonly Lazy<INHibSession> lazyInnerSession;
 
-    public NHibSession(NHibSessionEnvironment environment, IdbSessionSettings settings, IEnumerable<IDBSessionEventListener> eventListeners)
-    {
-        if (environment == null) throw new ArgumentNullException(nameof(environment));
-
-        this.lazyInnerSession = new Lazy<InHibSession>(() =>
+    public NHibSession(
+        NHibSessionEnvironment environment,
+        DBSessionSettings settings,
+        IAuditPropertyFactory auditPropertyFactory,
+        IEnumerable<IDBSessionEventListener> eventListeners) =>
+        this.lazyInnerSession = new Lazy<INHibSession>(() =>
         {
-            switch (this.sessionMode ?? settings.DefaultSessionMode)
+            switch (this.customSessionMode ?? settings.DefaultSessionMode)
             {
                 case DBSessionMode.Read:
                     return new ReadOnlyNHibSession(environment);
 
                 case DBSessionMode.Write:
-                    return new WriteNHibSession(environment, settings, eventListeners);
+                    return new WriteNHibSession(environment, auditPropertyFactory, eventListeners);
 
                 default:
                     throw new InvalidOperationException();
             }
         });
-    }
 
-    public virtual IDBSession InnerSession => this.lazyInnerSession.Value;
+    public IDBSession InnerSession => this.lazyInnerSession.Value;
 
     public IAuditReaderPatched AuditReader => this.lazyInnerSession.Value.AuditReader;
 
@@ -43,10 +42,7 @@ public class NHibSession : InHibSession
 
     public IDbTransaction Transaction => this.InnerSession.Transaction;
 
-    public async Task FlushAsync(CancellationToken cancellationToken = default)
-    {
-        await this.InnerSession.FlushAsync(cancellationToken);
-    }
+    public Task FlushAsync(CancellationToken cancellationToken) => this.InnerSession.FlushAsync(cancellationToken);
 
     public long GetCurrentRevision() => this.InnerSession.GetCurrentRevision();
 
@@ -54,21 +50,15 @@ public class NHibSession : InHibSession
 
     public long GetMaxRevision() => this.InnerSession.GetMaxRevision();
 
-    public void AsReadOnly()
-    {
-        this.ApplySessionMode(DBSessionMode.Read);
-    }
+    public void AsReadOnly() => this.ApplySessionMode(DBSessionMode.Read);
 
-    public void AsWritable()
-    {
-        this.ApplySessionMode(DBSessionMode.Write);
-    }
+    public void AsWritable() => this.ApplySessionMode(DBSessionMode.Write);
 
     private void ApplySessionMode(DBSessionMode applySessionMode)
     {
         if (!this.lazyInnerSession.IsValueCreated)
         {
-            this.sessionMode = applySessionMode;
+            this.customSessionMode = applySessionMode;
         }
         else if (this.SessionMode != applySessionMode)
         {

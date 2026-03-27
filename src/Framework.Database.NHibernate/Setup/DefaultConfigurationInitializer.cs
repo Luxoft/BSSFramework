@@ -4,6 +4,9 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
 using Framework.Core;
+using Framework.Database.NHibernate._MappingSettings;
+using Framework.Database.NHibernate.Dialect;
+using Framework.Database.NHibernate.Fix2100;
 
 using NHibernate.Cfg;
 

@@ -1,6 +1,4 @@
-﻿using Framework.Application.Repository;
-
-using NHibernate;
+﻿using NHibernate;
 
 namespace Framework.Database.NHibernate;
 

@@ -61,8 +61,8 @@ public static class MonthFormatter
     /// </summary>
     /// <param name="period">Период, который начинается и заканчивается в одинаковом году </param>
     /// <returns>Строка, содержащая римские номера месяцев начало и конца периода и год на дату начала периода</returns>
-    public static string GetMonthAndYearStrRoman<T>(T period) where T : IPeriod =>
+    public static string GetMonthAndYearStrRoman(Period period)  =>
         period.IsWithinOneMonth
-            ? GetMonthAndYearStrRoman(period.StartDate)
+            ? period.StartDate.GetMonthAndYearStrRoman()
             : $"{RomanMonths[period.StartDate.Month - 1]}-{RomanMonths[period.EndDateValue.Month - 1]}'{period.StartDate:yy}";
 }

@@ -13,7 +13,7 @@ using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.Core;
-using Framework.Database.Domain;
+using Framework.Database.Mapping;
 using Framework.Projection;
 
 namespace Framework.CodeGeneration.DTOGenerator.Audit;

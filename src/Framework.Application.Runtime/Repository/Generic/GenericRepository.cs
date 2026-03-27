@@ -1,6 +1,6 @@
 ﻿using CommonFramework;
 
-using Framework.Application.DAL;
+using Framework.Database;
 
 using SecuritySystem.AccessDenied;
 using SecuritySystem.Providers;

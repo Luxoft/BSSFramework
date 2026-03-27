@@ -1,6 +1,5 @@
 ﻿using System.Text.RegularExpressions;
 
-using Framework.Application.DALExceptions;
 using Framework.Database.DALExceptions;
 
 namespace Framework.Database.NHibernate.SqlExceptionProcessors;

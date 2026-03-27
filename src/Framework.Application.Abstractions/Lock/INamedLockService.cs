@@ -1,4 +1,5 @@
 ﻿using Framework.Application.Repository;
+using Framework.Database;
 
 namespace Framework.Application.Lock;
 

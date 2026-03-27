@@ -3,7 +3,6 @@ using System.Reflection;
 
 using CommonFramework;
 
-using Framework.Application.Domain.Attributes;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Extensions;
 using Framework.CodeDom;
@@ -14,6 +13,7 @@ using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
 using Framework.Core;
+using Framework.Database.Attributes;
 
 namespace Framework.CodeGeneration.DTOGenerator.PropertyAssigner.Update;
 

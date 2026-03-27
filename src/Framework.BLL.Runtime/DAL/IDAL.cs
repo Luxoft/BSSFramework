@@ -1,5 +1,6 @@
 ﻿using Framework.Application.Repository;
 using Framework.BLL.DAL.Revisions;
+using Framework.Database;
 
 using GenericQueryable.Fetching;
 

@@ -45,14 +45,8 @@ internal partial class AuditPropertiesSetter
             return this.Type == other?.Type;
         }
 
-        public override int GetHashCode()
-        {
-            return this.Type.GetHashCode();
-        }
+        public override int GetHashCode() => this.Type.GetHashCode();
 
-        public override string ToString()
-        {
-            return this.Type.ToString();
-        }
+        public override string ToString() => this.Type.ToString();
     }
 }

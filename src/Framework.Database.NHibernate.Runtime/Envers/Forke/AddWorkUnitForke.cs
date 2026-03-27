@@ -25,17 +25,12 @@ public class AddWorkUnitForke : AbstractAuditWorkUnit
     }
 
     private AddWorkUnitForke(ISessionImplementor sessionImplementor, string entityName, AuditConfiguration verCfg,
-                             object id, IDictionary<string, object> data) : base(sessionImplementor, entityName, verCfg, id, RevisionType.Added)
-    {
+                             object id, IDictionary<string, object> data) : base(sessionImplementor, entityName, verCfg, id, RevisionType.Added) =>
         this.data = data;
-    }
 
     internal object[] State { get; }
 
-    public override bool ContainsWork()
-    {
-        return true;
-    }
+    public override bool ContainsWork() => true;
 
     public override IDictionary<string, object> GenerateData(object revisionData)
     {
@@ -43,20 +38,11 @@ public class AddWorkUnitForke : AbstractAuditWorkUnit
         return this.data;
     }
 
-    public override IAuditWorkUnit Merge(AddWorkUnit second)
-    {
-        return second;
-    }
+    public override IAuditWorkUnit Merge(AddWorkUnit second) => second;
 
-    public override IAuditWorkUnit Merge(ModWorkUnit second)
-    {
-        return new AddWorkUnitForke(this.SessionImplementor, this.EntityName, this.VerCfg, this.EntityId, this.MergeModifiedFlags(this.data, second.Data));
-    }
+    public override IAuditWorkUnit Merge(ModWorkUnit second) => new AddWorkUnitForke(this.SessionImplementor, this.EntityName, this.VerCfg, this.EntityId, this.MergeModifiedFlags(this.data, second.Data));
 
-    public override IAuditWorkUnit Merge(DelWorkUnit second)
-    {
-        return null;
-    }
+    public override IAuditWorkUnit Merge(DelWorkUnit second) => null;
 
     public override IAuditWorkUnit Merge(CollectionChangeWorkUnit second)
     {
@@ -64,15 +50,9 @@ public class AddWorkUnitForke : AbstractAuditWorkUnit
         return this;
     }
 
-    public override IAuditWorkUnit Merge(FakeBidirectionalRelationWorkUnit second)
-    {
-        return FakeBidirectionalRelationWorkUnit.Merge(second, this, second.NestedWorkUnit);
-    }
+    public override IAuditWorkUnit Merge(FakeBidirectionalRelationWorkUnit second) => FakeBidirectionalRelationWorkUnit.Merge(second, this, second.NestedWorkUnit);
 
-    public override IAuditWorkUnit Dispatch(IWorkUnitMergeVisitor first)
-    {
-        return first.Merge(new AddWorkUnit(this.SessionImplementor, this.EntityName, this.VerCfg, this.EntityId, this.entityPersister, this.State));
-    }
+    public override IAuditWorkUnit Dispatch(IWorkUnitMergeVisitor first) => first.Merge(new AddWorkUnit(this.SessionImplementor, this.EntityName, this.VerCfg, this.EntityId, this.entityPersister, this.State));
 
     private IDictionary<string, object> MergeModifiedFlags(IDictionary<string, object> lhs, IDictionary<string, object> rhs)
     {

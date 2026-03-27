@@ -1,7 +1,7 @@
 ﻿using CommonFramework;
 
 using Framework.Core;
-using Framework.Database.Domain;
+using Framework.Database.Mapping;
 
 namespace Framework.Database.Metadata;
 

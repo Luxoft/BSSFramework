@@ -8,6 +8,7 @@ using Framework.BLL.Domain.Exceptions.BusinessLogic.Extensions;
 using Framework.BLL.Domain.Exceptions.BusinessLogic.NotFound;
 using Framework.BLL.Domain.Persistent;
 using Framework.Core;
+using Framework.Database;
 using Framework.OData;
 
 using GenericQueryable;

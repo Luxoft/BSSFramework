@@ -1,4 +1,4 @@
-﻿using Framework.Application.DAL;
+﻿using Framework.Database;
 
 using SecuritySystem;
 using SecuritySystem.AccessDenied;

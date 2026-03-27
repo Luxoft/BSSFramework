@@ -8,10 +8,7 @@ internal class AuditPropertyEvalutor : ExpressionVisitor
 {
     private readonly Immutable<global::NHibernate.Envers.Query.Criteria.AuditProperty> result = new();
 
-    public global::NHibernate.Envers.Query.Criteria.AuditProperty AuditProperty
-    {
-        get { return this.result.Value; }
-    }
+    public global::NHibernate.Envers.Query.Criteria.AuditProperty AuditProperty => this.result.Value;
 
     protected override Expression VisitMember(MemberExpression node)
     {

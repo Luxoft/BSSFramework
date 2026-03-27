@@ -13,7 +13,7 @@ using Framework.CodeGeneration.FileFactory;
 using Framework.CodeGeneration.ProjectionGenerator._Extensions;
 using Framework.CodeGeneration.ProjectionGenerator.Configuration;
 using Framework.Core;
-using Framework.Database.Domain;
+using Framework.Database.Mapping;
 using Framework.Projection;
 
 namespace Framework.CodeGeneration.ProjectionGenerator.FileFactory;

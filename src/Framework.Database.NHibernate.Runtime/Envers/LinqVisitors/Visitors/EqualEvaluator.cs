@@ -7,15 +7,9 @@ internal class EqualEvaluator : ExpressionVisitor
     private readonly Immutable<string> value = new();
     private readonly Immutable<global::NHibernate.Envers.Query.Criteria.AuditProperty> property = new();
 
-    public string Value
-    {
-        get { return this.value.Value; }
-    }
+    public string Value => this.value.Value;
 
-    public global::NHibernate.Envers.Query.Criteria.AuditProperty Property
-    {
-        get { return this.property.Value; }
-    }
+    public global::NHibernate.Envers.Query.Criteria.AuditProperty Property => this.property.Value;
 
     protected override Expression VisitConstant(ConstantExpression node)
     {

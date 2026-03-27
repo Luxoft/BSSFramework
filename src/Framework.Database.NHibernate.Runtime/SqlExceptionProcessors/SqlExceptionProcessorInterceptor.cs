@@ -1,5 +1,4 @@
-﻿using Framework.Application.DALExceptions;
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Core.StringParse;
 
 using NHibernate;
@@ -88,14 +87,9 @@ internal class SqlExceptionProcessorInterceptor : IExceptionProcessor
         }
     }
 
-    private Exception InternalProcess(GenericADOException exception)
-    {
-        return new Exception(
+    private Exception InternalProcess(GenericADOException exception) =>
+        new(
             $"UnHandled ado exception. Please use 'property name=\"sql_exception_converter\">{typeof(SqlExceptionConverter).FullName}, {typeof(SqlExceptionConverter).Assembly.FullName}</property>' in application config file");
-    }
 
-    private Exception InternalProcess(StaleObjectStateException exception)
-    {
-        return new StaleDomainObjectStateException(this.cfg.GetClassMapping(exception.EntityName).MappedClass, exception.Identifier, exception);
-    }
+    private Exception InternalProcess(StaleObjectStateException exception) => new StaleDomainObjectStateException(this.cfg.GetClassMapping(exception.EntityName).MappedClass, exception.Identifier, exception);
 }

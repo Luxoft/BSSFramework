@@ -7,7 +7,7 @@ using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.Core;
 using Framework.Core.ReflectionImpl;
-using Framework.Database.Domain;
+using Framework.Database.Mapping;
 using Framework.Projection._ImplType;
 using Framework.Validation;
 

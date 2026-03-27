@@ -3,7 +3,7 @@ using CommonFramework.DictionaryCache;
 
 using Framework.Core;
 
-namespace Framework.Projection;
+namespace Framework.Projection._Extensions;
 
 internal static class CachedTypeExtensions
 {

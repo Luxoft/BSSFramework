@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Database.Runtime</PackageId>
+    <RootNamespace>Framework.Database</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Application.Abstractions\Framework.Application.Abstractions.csproj" />
+    <ProjectReference Include="..\Framework.Application.Domain\Framework.Application.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

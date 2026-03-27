@@ -4,7 +4,7 @@ using CommonFramework;
 
 using Framework.Core.Visitors;
 
-namespace Framework.Projection.Environment;
+namespace Framework.Projection.ExtendedMetadata;
 
 public class DomainTypeExtendedMetadataBuilder<TDomainType> : IDomainTypeExtendedMetadataBuilder<TDomainType>, IDomainTypeExtendedMetadata
 {

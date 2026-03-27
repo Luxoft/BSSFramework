@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Framework.Projection.Environment;
+namespace Framework.Projection.ExtendedMetadata;
 
 public class PropertyExtendedMetadataBuilder : IPropertyExtendedMetadataBuilder, IPropertyExtendedMetadata
 {

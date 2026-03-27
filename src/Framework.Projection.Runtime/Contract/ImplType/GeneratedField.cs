@@ -1,8 +1,9 @@
 ﻿using CommonFramework;
 
 using Framework.Core;
+using Framework.Projection._Extensions;
 
-namespace Framework.Projection.Contract;
+namespace Framework.Projection.Contract.ImplType;
 
 internal class GeneratedField : BaseFieldInfoImpl
 {

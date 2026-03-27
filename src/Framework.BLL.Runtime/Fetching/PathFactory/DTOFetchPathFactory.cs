@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Reflection;
 
 using CommonFramework;
@@ -36,7 +35,7 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
     public IEnumerable<PropertyPath> Create(Type startDomainType, ViewDTOType dtoType)
     {
         if (startDomainType == null) throw new ArgumentNullException(nameof(startDomainType));
-        if (!Enum.IsDefined(typeof(ViewDTOType), dtoType)) throw new InvalidEnumArgumentException(nameof(dtoType), (int) dtoType, typeof(ViewDTOType));
+        if (!Enum.IsDefined(typeof(ViewDTOType), dtoType)) throw new ArgumentOutOfRangeException(nameof(dtoType));
 
         return this.GetLoadNode(startDomainType, dtoType)
                    .Pipe(node => this.ExpandNode(node))

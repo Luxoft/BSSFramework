@@ -8,4 +8,9 @@
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.BLL.Runtime\Framework.BLL.Runtime.csproj" />
+    <ProjectReference Include="..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
+  </ItemGroup>
+
 </Project>

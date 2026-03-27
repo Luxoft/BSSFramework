@@ -10,7 +10,6 @@ using Framework.CodeGeneration.WebApiGenerator.MethodGenerators.Integration.Save
 using Framework.CodeGeneration.WebApiGenerator.MethodGenerators.Integration.Save.ByModel;
 using Framework.Projection;
 
-
 using SecuritySystem;
 
 namespace Framework.CodeGeneration.WebApiGenerator.Configuration.Integration;

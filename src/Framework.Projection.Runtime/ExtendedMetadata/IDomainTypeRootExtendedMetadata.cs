@@ -2,7 +2,7 @@
 
 using Framework.Core;
 
-namespace Framework.Projection.Environment;
+namespace Framework.Projection.ExtendedMetadata;
 
 public interface IDomainTypeRootExtendedMetadata
 {

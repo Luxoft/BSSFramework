@@ -1,4 +1,4 @@
-﻿namespace Framework.Projection.Environment;
+﻿namespace Framework.Projection.ExtendedMetadata;
 
 public interface IAttributesExtendedMetadata
 {

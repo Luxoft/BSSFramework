@@ -7,9 +7,10 @@ using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.Core;
 using Framework.Database.Domain;
+using Framework.Projection._ImplType;
 using Framework.Validation;
 
-namespace Framework.Projection.Contract;
+namespace Framework.Projection.Contract.ImplType;
 
 internal class GeneratedType : BaseTypeImpl
 {

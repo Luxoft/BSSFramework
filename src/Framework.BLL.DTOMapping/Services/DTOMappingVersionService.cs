@@ -1,4 +1,5 @@
-﻿using Framework.Application.Domain;
+﻿using Framework.Application.DALExceptions;
+using Framework.Application.Domain;
 using Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
 using Framework.BLL.Domain.IdentityObject;
 
@@ -17,7 +18,7 @@ public class DTOMappingVersionService<TBLLContext, TAuditPersistentDomainObjectB
 
         if (!mappingObjectVersion.Equals(domainObject.Version))
         {
-            throw new StaleDomainObjectStateException(new Exception("Mapping Exception"), typeof(TDomainObject), domainObject.Id);
+            throw new StaleDomainObjectStateException(typeof(TDomainObject), domainObject.Id!, new Exception("Mapping Exception"));
         }
 
         return mappingObjectVersion;

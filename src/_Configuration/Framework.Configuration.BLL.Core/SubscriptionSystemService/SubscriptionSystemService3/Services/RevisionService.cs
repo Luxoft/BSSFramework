@@ -88,7 +88,7 @@ public class RevisionService<T>
 
         var result = group
                      .Where(kvp => this.subscriptionResolver.IsActiveSubscriptionForTypeExists(kvp.Key))
-                     .SelectMany(this.ProcessDalChanges);
+                     .SelectMany(this.ProcessDALChanges);
 
         return result;
     }
@@ -157,7 +157,7 @@ public class RevisionService<T>
         return result;
     }
 
-    private IEnumerable<ObjectModificationInfo<Guid>> ProcessDalChanges(
+    private IEnumerable<ObjectModificationInfo<Guid>> ProcessDALChanges(
             KeyValuePair<Type, DALChanges<object>> groupItem)
     {
         var revisionNumber = this.revisionBll.GetCurrentRevision();

@@ -1,4 +1,5 @@
-﻿using Framework.BLL.Domain.Persistent.IdentityObject;
+﻿using Framework.Application.Domain;
+using Framework.BLL.Domain.Persistent.IdentityObject;
 using Framework.Core;
 using ExpressionHelper = CommonFramework.ExpressionHelper;
 

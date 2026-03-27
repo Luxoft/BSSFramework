@@ -8,8 +8,8 @@ namespace Framework.Application._Visitors;
 public class OverrideMethodInfoVisitor : ExpressionVisitor
 {
     private readonly MethodInfo methodInfo;
-    private readonly LambdaExpression expression;
 
+    private readonly LambdaExpression expression;
 
     public OverrideMethodInfoVisitor(MethodInfo methodInfo, LambdaExpression expression)
     {
@@ -49,12 +49,6 @@ public class OverrideMethodInfoVisitor : ExpressionVisitor
     }
 }
 
-public class OverrideMethodInfoVisitor<TDelegate> : OverrideMethodInfoVisitor
-//where TDelegate : Delegate
-{
-    public OverrideMethodInfoVisitor(TDelegate func, Expression<TDelegate> expression)
-            : base(((Delegate)(object)func).Method, expression)
-    {
+public class OverrideMethodInfoVisitor<TDelegate>(TDelegate func, Expression<TDelegate> expression) : OverrideMethodInfoVisitor(((Delegate)(object)func).Method, expression);
 
-    }
-}
+    //where TDelegate : Delegate

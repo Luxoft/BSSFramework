@@ -1,5 +1,4 @@
 ﻿using System.CodeDom;
-using System.ComponentModel;
 using System.Reflection;
 
 using CommonFramework;
@@ -34,7 +33,10 @@ public static class GeneratorConfigurationExtensions
 
 
 
-    public static IEnumerable<CodeAttributeDeclaration> GetKnownTypesAttributes(this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration, MainDTOFileType dtoFileType, Type domainType)
+    public static IEnumerable<CodeAttributeDeclaration> GetKnownTypesAttributes(
+        this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration,
+        MainDTOFileType dtoFileType,
+        Type domainType)
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
@@ -86,7 +88,7 @@ public static class GeneratorConfigurationExtensions
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (!Enum.IsDefined(typeof(MainDTOType), dtoType)) throw new InvalidEnumArgumentException(nameof(dtoType), (int)dtoType, typeof(MainDTOType));
+        if (!Enum.IsDefined(typeof(MainDTOType), dtoType)) throw new ArgumentOutOfRangeException(nameof(dtoType));
 
         return configuration.GetCodeTypeReference(domainType, dtoType);
     }
@@ -95,7 +97,7 @@ public static class GeneratorConfigurationExtensions
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (!Enum.IsDefined(typeof(DTOType), dtoType)) throw new InvalidEnumArgumentException(nameof(dtoType), (int)dtoType, typeof(DTOType));
+        if (!Enum.IsDefined(typeof(MainDTOType), dtoType)) throw new ArgumentOutOfRangeException(nameof(dtoType));
 
         return configuration.GetCodeTypeReference(domainType, dtoType);
     }

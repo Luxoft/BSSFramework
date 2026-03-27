@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 using Framework.Database.Metadata;
-using Framework.Projection.Environment;
+using Framework.Projection.ExtendedMetadata;
 
 namespace Framework.Projection.Contract;
 

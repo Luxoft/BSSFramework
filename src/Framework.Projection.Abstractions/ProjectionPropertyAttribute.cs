@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Framework.Projection;
+﻿namespace Framework.Projection;
 
 /// <summary>
 /// Атрибут марркировки свойсва проекции
@@ -10,7 +8,7 @@ public class ProjectionPropertyAttribute : Attribute
 {
     public ProjectionPropertyAttribute(ProjectionPropertyRole role)
     {
-        if (!Enum.IsDefined(typeof(ProjectionPropertyRole), role)) throw new InvalidEnumArgumentException(nameof(role), (int)role, typeof(ProjectionPropertyRole));
+        if (!Enum.IsDefined(typeof(ProjectionPropertyRole), role)) throw new ArgumentOutOfRangeException(nameof(role));
 
         this.Role = role;
     }

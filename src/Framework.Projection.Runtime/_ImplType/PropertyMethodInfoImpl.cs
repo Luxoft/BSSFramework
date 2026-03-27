@@ -2,7 +2,7 @@
 
 using Framework.Core;
 
-namespace Framework.Projection;
+namespace Framework.Projection._ImplType;
 
 internal class PropertyMethodInfoImpl : BaseMethodInfoImpl
 {

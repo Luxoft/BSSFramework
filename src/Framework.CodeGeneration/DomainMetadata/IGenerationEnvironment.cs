@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 using Framework.Projection;
-using Framework.Projection.Environment;
+using Framework.Projection.ExtendedMetadata;
 
 namespace Framework.CodeGeneration.DomainMetadata;
 

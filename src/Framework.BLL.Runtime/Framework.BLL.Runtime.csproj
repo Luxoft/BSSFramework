@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Framework.Validation\Framework.Validation.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Session\" />
+  </ItemGroup>
+
 </Project>

@@ -3,8 +3,10 @@
 using CommonFramework;
 
 using Framework.Core;
+using Framework.Projection._Extensions;
+using Framework.Projection._ImplType;
 
-namespace Framework.Projection.Contract;
+namespace Framework.Projection.Contract.ImplType;
 
 internal class GeneratedProperty : BasePropertyInfoImpl
 {

@@ -2,13 +2,13 @@
 
 using CommonFramework;
 
-namespace Framework.Projection.Environment;
+namespace Framework.Projection.ExtendedMetadata;
 
 public class DomainTypeRootExtendedMetadataBuilder : IDomainTypeRootExtendedMetadata
 {
     private readonly Dictionary<Type, IDomainTypeExtendedMetadata> types = new();
 
-    private readonly Lazy<Dictionary<PropertyInfo, IPropertyExtendedMetadata>> properties = new();
+    private readonly Lazy<Dictionary<PropertyInfo, IPropertyExtendedMetadata>> properties;
 
     public DomainTypeRootExtendedMetadataBuilder()
     {

@@ -7,6 +7,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Framework.DomainDriven.DAL.Sql\Framework.DomainDriven.DAL.Sql.csproj" />
-    <ProjectReference Include="..\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
   </ItemGroup>
 </Project>

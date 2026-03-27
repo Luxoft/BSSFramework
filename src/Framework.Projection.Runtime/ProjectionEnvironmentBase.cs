@@ -3,7 +3,7 @@
 using CommonFramework;
 
 using Framework.Core;
-using Framework.Projection.Environment;
+using Framework.Projection.ExtendedMetadata;
 
 namespace Framework.Projection;
 

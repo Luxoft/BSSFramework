@@ -1,0 +1,28 @@
+﻿using NHibernate.Envers;
+
+namespace Framework.Database.NHibernate.Audit;
+
+/// <summary>
+/// Base Typed Implement of IEntityTrackingRevisionListener
+/// </summary>
+/// <typeparam name="T"></typeparam>
+public abstract class RevisionEntityListener<T>(IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService) : IEntityTrackingRevisionListener
+{
+    protected IAuditRevisionUserAuthenticationService AuditRevisionUserAuthenticationService {get; } = auditRevisionUserAuthenticationService ?? throw new ArgumentNullException(nameof(auditRevisionUserAuthenticationService));
+
+    public void NewRevision(object revisionEntity)
+    {
+        this.ProcessNewRevision((T)revisionEntity);
+    }
+
+    public void EntityChanged(Type entityClass, string entityName, object entityId, RevisionType revisionType,
+                              object revisionEntity)
+    {
+        this.ProcessEntityChanged(entityClass, entityId, revisionType, (T)revisionEntity);
+    }
+
+    protected abstract void ProcessNewRevision(T revisionEntity);
+
+    protected abstract void ProcessEntityChanged(Type entityClass, object entityId, RevisionType revisionType,
+                                                 T revisionEntity);
+}

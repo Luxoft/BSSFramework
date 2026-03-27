@@ -4,14 +4,9 @@ using Framework.Core;
 
 namespace Framework.Application._Visitors.ExpressionVisitorContainer;
 
-public class ExpressionVisitorAggregator : IExpressionVisitorContainer
+public class ExpressionVisitorAggregator(IEnumerable<IExpressionVisitorContainerItem> items) : IExpressionVisitorContainer
 {
-    private readonly IExpressionVisitorContainerItem[] items;
-
-    public ExpressionVisitorAggregator(IEnumerable<IExpressionVisitorContainerItem> items)
-    {
-        this.items = items.ToArray();
-    }
+    private readonly IExpressionVisitorContainerItem[] items = items.ToArray();
 
     public ExpressionVisitor Visitor => this.items.SelectMany(item => item.GetVisitors()).ToComposite();
 }

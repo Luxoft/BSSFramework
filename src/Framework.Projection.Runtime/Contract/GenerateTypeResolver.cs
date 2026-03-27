@@ -1,4 +1,5 @@
-using Framework.Core;
+﻿using Framework.Core;
+using Framework.Projection.Contract.ImplType;
 
 namespace Framework.Projection.Contract;
 

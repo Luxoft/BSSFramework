@@ -20,7 +20,7 @@ public class ExpandPathVisitor : ExpressionVisitor
 
                            let implementedProperty = memberPair.Item1.GetImplementedProperty(property)
 
-                           from expandPath in Maybe.ToMaybe<PropertyPath>(implementedProperty.GetExpandPath())
+                           from expandPath in implementedProperty.GetExpandPath().ToMaybe()
 
                            select expandPath;
 

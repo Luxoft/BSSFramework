@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Framework.Projection;
+﻿namespace Framework.Projection;
 
 /// <summary>
 /// Атрибут указывающий, что данный тип является проекцией
@@ -14,9 +12,9 @@ public class ProjectionAttribute : Attribute
     /// <param name="sourceType">Исходный тип, по которому строилась проекция</param>
     /// <param name="role">Роль проекции</param>
     /// <param name="contractType">Контракт, по которому строилась проекция</param>
-    public ProjectionAttribute(Type sourceType, ProjectionRole role, Type contractType = null)
+    public ProjectionAttribute(Type sourceType, ProjectionRole role, Type? contractType = null)
     {
-        if (!Enum.IsDefined(typeof(ProjectionRole), role)) { throw new InvalidEnumArgumentException(nameof(role), (int)role, typeof(ProjectionRole)); }
+        if (!Enum.IsDefined(typeof(ProjectionRole), role)) throw new ArgumentOutOfRangeException(nameof(role));
 
         this.SourceType = sourceType ?? throw new ArgumentNullException(nameof(sourceType));
         this.Role = role;
@@ -36,5 +34,5 @@ public class ProjectionAttribute : Attribute
     /// <summary>
     /// Контракт, по которому строилась проекция
     /// </summary>
-    public Type ContractType { get; }
+    public Type? ContractType { get; }
 }

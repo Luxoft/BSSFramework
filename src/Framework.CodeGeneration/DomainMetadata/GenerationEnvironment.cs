@@ -12,8 +12,9 @@ using Framework.Core;
 using Framework.FileGeneration.Extensions;
 using Framework.Projection;
 using Framework.Projection.Contract;
-using Framework.Projection.Environment;
+using Framework.Projection.ExtendedMetadata;
 using Framework.Projection.Lambda;
+using Framework.Projection.Lambda.ProjectionSource._Base;
 
 using Microsoft.Extensions.DependencyInjection;
 

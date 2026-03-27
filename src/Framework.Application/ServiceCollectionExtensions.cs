@@ -1,6 +1,7 @@
 ﻿using Framework.Application._Visitors.ExpressionVisitorContainer;
 using Framework.Application._Visitors.Specific;
 using Framework.Application.DALListeners;
+using Framework.Application.Lock;
 using Framework.Application.Repository;
 using Framework.Application.Repository.Default;
 using Framework.Application.Repository.Generic;
@@ -105,5 +106,16 @@ public static class ServiceCollectionExtensions
 
             return services;
         }
+    }
+
+    public static IServiceCollection RegisterNamedLocks(this IServiceCollection services, Action<IGenericNamedLockSetup> setupAction)
+    {
+        var setup = new GenericNamedLockSetup();
+
+        setupAction(setup);
+
+        setup.Initialize(services);
+
+        return services;
     }
 }

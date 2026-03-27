@@ -11,15 +11,15 @@ public class FixDomainObjectEventRevisionNumberDALListener(IConfigurationBLLCont
     {
         if (eventArgs == null) throw new ArgumentNullException(nameof(eventArgs));
 
-        var eventDalChanges = eventArgs.Changes.GetSubset(typeof(DomainObjectEvent));
+        var eventDALChanges = eventArgs.Changes.GetSubset(typeof(DomainObjectEvent));
 
-        if (!eventDalChanges.IsEmpty)
+        if (!eventDALChanges.IsEmpty)
         {
             var revisionNumber = this.Context.GetCurrentRevision();
 
             var domainObjectEventBLL = this.Context.Logics.DomainObjectEvent;
 
-            var request = from dalObject in eventDalChanges.CreatedItems
+            var request = from dalObject in eventDALChanges.CreatedItems
 
                           let eventObject = (DomainObjectEvent)dalObject.Object
 

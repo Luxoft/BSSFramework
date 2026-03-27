@@ -8,8 +8,4 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -1,0 +1,47 @@
+﻿using CommonFramework;
+
+using NHibernate.Cfg;
+using NHibernate.Envers.Configuration.Store;
+
+namespace Framework.Database.NHibernate;
+
+public static class MetaDataProviderExtension
+{
+    public static IMetaDataProvider Combine(this IEnumerable<IMetaDataProvider> providers)
+    {
+        return new MetaDataProviderComposite(providers);
+    }
+
+    private class MetaDataProviderComposite : IMetaDataProvider
+    {
+        private readonly IReadOnlyList<IMetaDataProvider> providers;
+
+        public MetaDataProviderComposite(IEnumerable<IMetaDataProvider> providers)
+        {
+            if (providers == null)
+            {
+                throw new ArgumentNullException(nameof(providers));
+            }
+
+            this.providers = providers.ToList();
+        }
+
+        public IDictionary<Type, IEntityMeta> CreateMetaData(Configuration nhibConfiguration)
+        {
+            var selected = this.providers.Select(z => z.CreateMetaData(nhibConfiguration));
+            return selected.Aggregate(
+                                      (Dictionary<Type, IEntityMeta>)(new Dictionary<Type, IEntityMeta>()),
+                                      (left, right) =>
+                                      {
+                                          right.Foreach(pair =>
+                                                        {
+                                                            if (!left.ContainsKey(pair.Key))
+                                                            {
+                                                                left.Add(pair.Key, pair.Value);
+                                                            }
+                                                        });
+                                          return left;
+                                      });
+        }
+    }
+}

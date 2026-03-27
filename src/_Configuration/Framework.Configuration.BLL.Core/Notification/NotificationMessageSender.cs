@@ -1,4 +1,5 @@
 ﻿using Framework.Core;
+using Framework.Core.MessageSender;
 using Framework.Notification.DTO;
 
 namespace Framework.Configuration.BLL.Notification;

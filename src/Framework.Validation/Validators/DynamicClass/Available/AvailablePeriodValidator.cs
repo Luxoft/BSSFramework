@@ -1,5 +1,7 @@
 ﻿using Framework.Core;
 
+using Framework.Core.Range;
+
 namespace Framework.Validation;
 
 public class AvailablePeriodValidator : RangeClassValidator<Period, DateTime>

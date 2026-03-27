@@ -1,4 +1,4 @@
-﻿namespace Framework.CodeDom;
+﻿namespace Framework.CodeDom.Extensions;
 
 internal static class ExtendRenderConst
 {

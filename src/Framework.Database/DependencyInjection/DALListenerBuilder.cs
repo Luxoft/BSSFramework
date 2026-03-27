@@ -1,16 +1,19 @@
 ﻿using CommonFramework;
-using Framework.Application.DALListener;
+using CommonFramework.DependencyInjection;
+
+using Framework.Application.Events;
+using Framework.Database.DALListener;
+using Framework.DependencyInjection;
+
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.Application.DependencyInjection;
+namespace Framework.Database.DependencyInjection;
 
-public class DALListenerSetupObject : IDALListenerSetupObject
+public class DALListenerBuilder : IDALListenerBuilder, IServiceInitializer
 {
     private readonly List<Action<IServiceCollection>> initActions = [];
 
-    public IReadOnlyList<Action<IServiceCollection>> InitActions => this.initActions;
-
-    public IDALListenerSetupObject Add<TListener>()
+    public IDALListenerBuilder Add<TListener>()
         where TListener : class, IDALListener
     {
         this.initActions.Add(this.AddListener<TListener>);
@@ -18,17 +21,22 @@ public class DALListenerSetupObject : IDALListenerSetupObject
         return this;
     }
 
+    public void Initialize(IServiceCollection services)
+    {
+        foreach (var setupObjectInitAction in this.initActions)
+        {
+            setupObjectInitAction(services);
+        }
+    }
+
     private void AddListener<TListener>(IServiceCollection services)
         where TListener : class, IDALListener
     {
         services.AddScoped<TListener>();
 
-        var result = new[]
-                     {
-                         typeof(IAfterTransactionCompletedDalListener),
-                         typeof(IBeforeTransactionCompletedDalListener),
-                         typeof(IFlushedDalListener)
-                     }.ToArray(interfaceType => this.TryAddCastService<TListener>(services, interfaceType));
+        var result = new[] { typeof(IAfterTransactionCompletedDalListener), typeof(IBeforeTransactionCompletedDalListener), typeof(IFlushedDalListener) }
+                     .Select(interfaceType => this.TryAddCastService<TListener>(services, interfaceType))
+                     .ToArray();
 
         this.TryAddCastService<TListener>(services, typeof(IEventOperationReceiver));
 

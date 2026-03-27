@@ -127,6 +127,7 @@
     <Project Path="Framework.Database.NHibernate.Runtime/Framework.Database.NHibernate.Runtime.csproj" />
     <Project Path="Framework.Database.NHibernate/Framework.Database.NHibernate.csproj" />
     <Project Path="Framework.Database.Runtime/Framework.Database.Runtime.csproj" />
+    <Project Path="Framework.Database/Framework.Database.csproj" />
   </Folder>
 
   <Folder Name="/__SolutionItems/">

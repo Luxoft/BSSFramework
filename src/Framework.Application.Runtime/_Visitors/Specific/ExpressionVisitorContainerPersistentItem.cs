@@ -10,12 +10,10 @@ namespace Framework.Application._Visitors.Specific;
 
 public class ExpressionVisitorContainerPersistentItem : IExpressionVisitorContainerItem
 {
-    public IEnumerable<ExpressionVisitor> GetVisitors()
-    {
-        return new[]
-               {
-                       typeof(IVisualIdentityObject),
-                       typeof(IIdentityObject<>)
-               }.ToReadOnlyCollection(type => new OverrideCallInterfacePropertiesVisitor(type));
-    }
+    public IEnumerable<ExpressionVisitor> GetVisitors() =>
+        new[]
+        {
+            typeof(IVisualIdentityObject),
+            typeof(IIdentityObject<>)
+        }.ToReadOnlyCollection(type => new OverrideCallInterfacePropertiesVisitor(type));
 }

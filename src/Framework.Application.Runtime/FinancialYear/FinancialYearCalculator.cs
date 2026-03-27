@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 
+
 namespace Framework.Application.FinancialYear;
 
 public class FinancialYearCalculator (FinancialYearServiceSettings settings) : IFinancialYearCalculator
@@ -17,10 +18,7 @@ public class FinancialYearCalculator (FinancialYearServiceSettings settings) : I
                    : new Period(currentYearFinDate.SubtractYear(), currentYearFinDate.SubtractDay());
     }
 
-    public Period GetFinancialYearPeriod(int year)
-    {
-        return this.GetFinancialYearPeriod(new DateTime(year, settings.StartMonth, 1));
-    }
+    public Period GetFinancialYearPeriod(int year) => this.GetFinancialYearPeriod(new DateTime(year, settings.StartMonth, 1));
 
     public int GetFinancialYear(int year, int month)
     {
@@ -37,8 +35,5 @@ public class FinancialYearCalculator (FinancialYearServiceSettings settings) : I
         return month >= settings.StartMonth ? year + 1 : year;
     }
 
-    public bool IsStartFinancialYearDate(DateTime dateTime)
-    {
-        return dateTime.Day == 1 && dateTime.Month == settings.StartMonth;
-    }
+    public bool IsStartFinancialYearDate(DateTime dateTime) => dateTime.Day == 1 && dateTime.Month == settings.StartMonth;
 }

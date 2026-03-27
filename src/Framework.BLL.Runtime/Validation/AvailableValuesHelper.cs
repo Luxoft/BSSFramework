@@ -1,6 +1,7 @@
 ﻿using System.Data.SqlTypes;
 
 using Framework.Core;
+using Framework.Core.Range;
 
 namespace Framework.BLL.Validation;
 

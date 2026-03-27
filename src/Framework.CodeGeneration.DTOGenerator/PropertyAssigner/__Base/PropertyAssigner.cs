@@ -2,6 +2,7 @@
 using System.Reflection;
 
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Configuration;

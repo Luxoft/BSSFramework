@@ -5,6 +5,8 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.CodeDom;
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.CodeGeneration.BLLGenerator.FileFactory.__Base;
 using Framework.Core;

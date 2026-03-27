@@ -8,6 +8,7 @@ using Framework.BLL;
 using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.BLL.Services;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration.BLLFactoryContainer;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DomainMetadata;

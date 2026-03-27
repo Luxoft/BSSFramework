@@ -6,6 +6,8 @@ using Framework.Application.Repository;
 using Framework.BLL;
 using Framework.BLL.DTOMapping.Services;
 using Framework.CodeDom;
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;

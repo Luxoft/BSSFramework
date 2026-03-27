@@ -35,8 +35,5 @@ public class StringParser
 
     }
 
-    public StringParseResult Evaluate(string inputString)
-    {
-        return new StringParseResult(new Regex(this._regexPatternBuilder.ToString()).Match(inputString));
-    }
+    public StringParseResult Evaluate(string inputString) => new(new Regex(this._regexPatternBuilder.ToString()).Match(inputString));
 }

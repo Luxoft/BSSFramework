@@ -1,5 +1,6 @@
 ﻿using Framework.Configuration.Domain;
 using Framework.Core;
+using Framework.Core.TryResult.Base;
 using Framework.DomainDriven;
 using Framework.DomainDriven.DAL.Revisions;
 

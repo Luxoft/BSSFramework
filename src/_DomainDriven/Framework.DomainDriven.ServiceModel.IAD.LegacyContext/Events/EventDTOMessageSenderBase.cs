@@ -1,6 +1,7 @@
 ﻿using CommonFramework;
 
 using Framework.Core;
+using Framework.Core.MessageSender;
 using Framework.Events;
 using Framework.Events.Legacy;
 

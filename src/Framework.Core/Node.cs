@@ -20,20 +20,11 @@ public class Node<T> : IEnumerable<T>
     public IEnumerable<Node<T>> Children { get; internal set; }
 
 
-    public override string ToString()
-    {
-        return this.Value == null ? "{null}" : this.Value.ToString();
-    }
+    public override string ToString() => this.Value == null ? "{null}" : this.Value.ToString();
 
-    public IEnumerator<T> GetEnumerator()
-    {
-        return this.GetAllElements(v => v.Children).Select(node => node.Value).GetEnumerator();
-    }
+    public IEnumerator<T> GetEnumerator() => this.GetAllElements(v => v.Children).Select(node => node.Value).GetEnumerator();
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return this.GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 }
 
 public class NodeP<T> : Node<T>
@@ -46,8 +37,8 @@ public class NodeP<T> : Node<T>
 
     public new IEnumerable<NodeP<T>> Children
     {
-        get { return (IEnumerable<NodeP<T>>) base.Children; }
-        internal set { base.Children = value; }
+        get => (IEnumerable<NodeP<T>>) base.Children;
+        internal set => base.Children = value;
     }
 
     public NodeP<T> Parent { get; internal set; }

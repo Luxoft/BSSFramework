@@ -4,7 +4,7 @@ using System.Reflection.Emit;
 
 using CommonFramework;
 
-namespace Framework.Core;
+namespace Framework.Core.AnonymousTypeBuilder;
 
 public class AnonymousTypeByPropertyBuilder<TMap, TMapMember>(IAnonymousTypeBuilderStorage storage) : AnonymousTypeByMemberBuilder<TMap, TMapMember, PropertyBuilder>(storage)
     where TMap : class, ITypeMap<TMapMember>
@@ -46,8 +46,5 @@ public class AnonymousTypeByPropertyBuilder<TMap, TMapMember>(IAnonymousTypeBuil
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private static readonly Lazy<AnonymousTypeByPropertyBuilder<TMap, TMapMember>> LazyDefault = LazyHelper.Create(() => new AnonymousTypeByPropertyBuilder<TMap, TMapMember>(new AnonymousTypeBuilderStorage("DefaultByProperty_" + typeof(TMap).Name)));
 
-    public static AnonymousTypeByPropertyBuilder<TMap, TMapMember> Default
-    {
-        get { return LazyDefault.Value; }
-    }
+    public static AnonymousTypeByPropertyBuilder<TMap, TMapMember> Default => LazyDefault.Value;
 }

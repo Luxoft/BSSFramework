@@ -3,6 +3,7 @@
 using CommonFramework;
 
 using Framework.Core;
+using Framework.Core.TypeResolving.TypeSource;
 using Framework.Projection.ExtendedMetadata;
 
 namespace Framework.Projection;

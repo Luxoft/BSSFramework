@@ -1,4 +1,5 @@
 ﻿using Framework.Core;
+
 using Framework.DomainDriven;
 
 using SampleSystem.IntegrationTests.__Support.TestData;

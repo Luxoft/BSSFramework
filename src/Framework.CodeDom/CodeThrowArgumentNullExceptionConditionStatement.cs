@@ -1,14 +1,11 @@
 ﻿using System.CodeDom;
 
+using Framework.CodeDom.Extensions;
+
 namespace Framework.CodeDom;
 
-public class CodeThrowArgumentNullExceptionConditionStatement : CodeConditionStatement
-{
-    public CodeThrowArgumentNullExceptionConditionStatement(CodeParameterDeclarationExpression parameter)
-            : base(new CodeIsNullExpression(parameter.ToVariableReferenceExpression()),
-                   new CodeThrowExceptionStatement(typeof(ArgumentNullException).ToTypeReference()
-                                                                                .ToObjectCreateExpression(new CodePrimitiveExpression(parameter.Name))))
-    {
-
-    }
-}
+public class CodeThrowArgumentNullExceptionConditionStatement(CodeParameterDeclarationExpression parameter) : CodeConditionStatement(
+    new CodeIsNullExpression(parameter.ToVariableReferenceExpression()),
+    new CodeThrowExceptionStatement(
+        typeof(ArgumentNullException).ToTypeReference()
+                                     .ToObjectCreateExpression(new CodePrimitiveExpression(parameter.Name))));

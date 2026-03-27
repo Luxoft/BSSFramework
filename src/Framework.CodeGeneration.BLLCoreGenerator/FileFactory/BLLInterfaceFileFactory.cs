@@ -5,6 +5,7 @@ using Framework.BLL.Domain.DirectMode;
 using Framework.BLL.Domain.Models;
 using Framework.BLL.Domain.Persistent;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.FileFactory.__Base;

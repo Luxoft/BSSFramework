@@ -68,10 +68,7 @@ public class FuncFactory<T> : IFactory<T>
     }
 
 
-    public T Create()
-    {
-        return this._createFunc();
-    }
+    public T Create() => this._createFunc();
 }
 
 public class FuncFactory<TArg, TResult> : IFactory<TArg, TResult>
@@ -85,10 +82,7 @@ public class FuncFactory<TArg, TResult> : IFactory<TArg, TResult>
         this._createFunc = createFunc;
     }
 
-    public TResult Create(TArg arg)
-    {
-        return this._createFunc(arg);
-    }
+    public TResult Create(TArg arg) => this._createFunc(arg);
 }
 
 public class FuncFactory<TArg1, TArg2, TResult> : IFactory<TArg1, TArg2, TResult>
@@ -102,8 +96,5 @@ public class FuncFactory<TArg1, TArg2, TResult> : IFactory<TArg1, TArg2, TResult
         this._createFunc = createFunc;
     }
 
-    public TResult Create(TArg1 arg1, TArg2 arg2)
-    {
-        return this._createFunc(arg1, arg2);
-    }
+    public TResult Create(TArg1 arg1, TArg2 arg2) => this._createFunc(arg1, arg2);
 }

@@ -5,6 +5,8 @@ using CommonFramework;
 using Framework.BLL.Domain.DTO.Extensions;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom;
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.WebApiGenerator.Configuration._Base;
 
 using Framework.CodeGeneration.WebApiGenerator.MethodGenerators.Main.Save.Base;

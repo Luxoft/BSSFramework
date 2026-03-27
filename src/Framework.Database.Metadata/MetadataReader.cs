@@ -4,6 +4,7 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.Core;
+using Framework.Core.TypeResolving.TypeSource;
 using Framework.Database.Domain;
 using Framework.DomainDriven.Metadata;
 

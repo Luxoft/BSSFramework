@@ -9,6 +9,7 @@ using Framework.BLL.Domain.Exceptions.Extensions;
 using Framework.Core;
 
 namespace Framework.BLL.Services;
+
 public class ExceptionExpander : IExceptionExpander
 {
     private static readonly MethodInfo ProcessAggregateExceptionMethod = typeof(ExceptionExpander).GetMethod(nameof(ProcessAggregateException), BindingFlags.NonPublic | BindingFlags.Instance, true)!;
@@ -38,21 +39,19 @@ public class ExceptionExpander : IExceptionExpander
 
         return targetInvocationRequest
                .Or(() => from innerExceptionType in exception.GetType().GetAggregateExceptionInnerExceptionType().ToMaybe()
-                         select (Exception)ProcessAggregateExceptionMethod.MakeGenericMethod(exception.GetType(), innerExceptionType).Invoke(this,
+
+                         select ProcessAggregateExceptionMethod.MakeGenericMethod(exception.GetType(), innerExceptionType).Invoke<Exception>(
+                             this,
                              [exception]))
+
                .GetValueOrDefault(exception);
     }
 
-    protected class WrappedAggregateException : BusinessLogicException
+    protected class WrappedAggregateException(Exception baseAggregateException, IEnumerable<Exception> innerExceptions, string? lineSeparator = null)
+        : BusinessLogicException(baseAggregateException, innerExceptions.Join(lineSeparator ?? Environment.NewLine, exception => exception.Message))
     {
-        private readonly Exception baseAggregateException;
+        private readonly Exception baseAggregateException = baseAggregateException ?? throw new ArgumentNullException(nameof(baseAggregateException));
 
-        public WrappedAggregateException(Exception baseAggregateException, IEnumerable<Exception> innerExceptions, string lineSeparator = null)
-                : base(baseAggregateException, innerExceptions.Join(lineSeparator ?? Environment.NewLine, exception => exception.Message))
-        {
-            this.baseAggregateException = baseAggregateException ?? throw new ArgumentNullException(nameof(baseAggregateException));
-        }
-
-        public override string StackTrace => this.baseAggregateException.StackTrace;
+        public override string? StackTrace => this.baseAggregateException.StackTrace;
     }
 }

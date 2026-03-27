@@ -4,6 +4,7 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 

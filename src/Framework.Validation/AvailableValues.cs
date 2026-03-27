@@ -2,6 +2,8 @@
 
 using CommonFramework;
 
+using Framework.Core.Range;
+
 namespace Framework.Validation;
 
 public interface IAvailableValues

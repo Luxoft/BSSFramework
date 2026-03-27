@@ -36,33 +36,24 @@ public static class NullableExtensions
     }
 
     public static T? Or<T>(this T? v1, T v2)
-            where T : struct
-    {
-        return v1.ToMaybe().Or(v2).ToNullable();
-    }
+            where T : struct =>
+        v1.ToMaybe().Or(v2).ToNullable();
 
     public static T? Or<T>(this T? v1, Func<T?> getV2)
-            where T : struct
-    {
-        return v1.ToMaybe().Or(() => getV2().ToMaybe()).ToNullable();
-    }
+            where T : struct =>
+        v1.ToMaybe().Or(() => getV2().ToMaybe()).ToNullable();
 
     public static T? UnsafeOperation<T>(this T? v1, T? v2, Func<T, T, T> selector)
-            where T : struct
-    {
-        return v1.HasValue ? v2.HasValue ? selector(v1.Value, v2.Value)
-                                     : v1
-                       : v2;
-    }
+            where T : struct =>
+        v1.HasValue ? v2.HasValue ? selector(v1.Value, v2.Value)
+                          : v1
+            : v2;
 
     public static T? ToNullable<T>(this Maybe<T> value)
-        where T : struct
-    {
-        return value.Match(v => v, () => default(T?));
-    }
+        where T : struct =>
+        value.Match(v => v, () => default(T?));
+
     public static Maybe<TResult> Or<TSource, TResult>(this Maybe<TSource> v1, TResult v2)
-        where TSource : TResult
-    {
-        return v1.HasValue ? v1.Select(v => (TResult)v) : Maybe.Return(v2);
-    }
+        where TSource : TResult =>
+        v1.HasValue ? v1.Select(v => (TResult)v) : Maybe.Return(v2);
 }

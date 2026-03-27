@@ -3,6 +3,7 @@
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
+using Framework.Core.MessageSender;
 using Framework.Notification.New;
 
 namespace SampleSystem.BLL;

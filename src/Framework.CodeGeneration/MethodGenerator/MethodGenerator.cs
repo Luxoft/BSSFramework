@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using CommonFramework;
 
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 
 namespace Framework.CodeGeneration.MethodGenerator;
 

@@ -3,6 +3,7 @@ using System.Reflection;
 
 using Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security._Base;

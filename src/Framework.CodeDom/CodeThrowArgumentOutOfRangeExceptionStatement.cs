@@ -1,14 +1,12 @@
 ﻿using System.CodeDom;
 
+using Framework.CodeDom.Extensions;
+
 namespace Framework.CodeDom;
 
-public class CodeThrowArgumentOutOfRangeExceptionStatement : CodeThrowExceptionStatement
+public class CodeThrowArgumentOutOfRangeExceptionStatement(string parameterName) : CodeThrowExceptionStatement(
+    typeof(ArgumentOutOfRangeException).ToTypeReference().ToObjectCreateExpression(new CodePrimitiveExpression(parameterName)))
 {
-    public CodeThrowArgumentOutOfRangeExceptionStatement(string parameterName)
-            : base(typeof(ArgumentOutOfRangeException).ToTypeReference().ToObjectCreateExpression(new CodePrimitiveExpression(parameterName)))
-    {
-    }
-
     public CodeThrowArgumentOutOfRangeExceptionStatement(CodeParameterDeclarationExpression parameter)
             : this(parameter.Name)
     {

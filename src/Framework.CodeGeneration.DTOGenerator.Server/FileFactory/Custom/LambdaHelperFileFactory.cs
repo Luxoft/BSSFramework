@@ -5,6 +5,8 @@ using CommonFramework;
 
 using Framework.BLL.Domain.Serialization.Extensions;
 using Framework.CodeDom;
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;

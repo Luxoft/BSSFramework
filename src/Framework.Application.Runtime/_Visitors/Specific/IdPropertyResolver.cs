@@ -6,8 +6,5 @@ namespace Framework.Application._Visitors.Specific;
 
 public class IdPropertyResolver : IIdPropertyResolver
 {
-    public PropertyInfo Resolve(Type persistentDomainObjectBase)
-    {
-        return persistentDomainObjectBase.GetProperty("Id", () => new Exception("Id property not found"));
-    }
+    public PropertyInfo Resolve(Type persistentDomainObjectBase) => persistentDomainObjectBase.GetProperty("Id", () => new Exception("Id property not found"))!;
 }

@@ -1,5 +1,5 @@
 ﻿using Framework.Application.DALExceptions;
-using Framework.Application.Services;
+using Framework.Core;
 using Framework.Database.NHibernate._MappingSettings;
 using Framework.Database.NHibernate.Audit;
 using Framework.Database.NHibernate.SqlExceptionProcessors;

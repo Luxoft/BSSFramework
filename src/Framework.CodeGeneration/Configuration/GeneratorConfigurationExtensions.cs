@@ -3,6 +3,7 @@ using System.Reflection;
 
 using Framework.Application.Domain;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DomainMetadata;
 
 namespace Framework.CodeGeneration.Configuration;

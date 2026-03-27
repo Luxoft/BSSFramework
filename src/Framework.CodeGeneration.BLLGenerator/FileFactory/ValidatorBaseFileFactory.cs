@@ -3,6 +3,7 @@ using System.Reflection;
 
 using Framework.BLL.Validation;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.CodeGeneration.BLLGenerator.FileFactory.__Base;
 using Framework.Validation;

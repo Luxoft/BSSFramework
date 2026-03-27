@@ -2,6 +2,7 @@
 
 using Framework.Configuration.BLL;
 using Framework.Core;
+using Framework.Core.TypeResolving;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;

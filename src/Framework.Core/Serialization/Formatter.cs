@@ -13,8 +13,5 @@ public class Formatter<TValue, TResult> : IFormatter<TValue, TResult>
     }
 
 
-    public virtual TResult Format(TValue value)
-    {
-        return this._formatFunc(value);
-    }
+    public virtual TResult Format(TValue value) => this._formatFunc(value);
 }

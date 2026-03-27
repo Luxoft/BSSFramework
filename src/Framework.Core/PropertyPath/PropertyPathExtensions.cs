@@ -3,6 +3,7 @@ using System.Reflection;
 
 using CommonFramework;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Core;
 
 public static class PropertyPathExtensions

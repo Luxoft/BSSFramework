@@ -1,4 +1,5 @@
 ﻿using Framework.Core;
+using Framework.Core.LazyObject;
 
 namespace Framework.Application.Session.DBSessionManger
 {

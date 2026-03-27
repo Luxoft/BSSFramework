@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 
+
 namespace Framework.Projection.Lambda.ProjectionSource.AutoProjection;
 
 internal static class PropertyNodeValueExtensions

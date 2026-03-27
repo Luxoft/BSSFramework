@@ -7,6 +7,7 @@ using Framework.BLL.Domain.DAL.Revisions;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.DTOMapping.Domain;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;

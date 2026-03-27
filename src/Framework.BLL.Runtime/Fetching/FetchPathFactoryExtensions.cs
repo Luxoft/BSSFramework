@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 
+
 namespace Framework.BLL.Fetching;
 
 public static class FetchPathFactoryExtensions

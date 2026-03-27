@@ -3,6 +3,7 @@
 using CommonFramework;
 
 using Framework.Core;
+
 using Framework.Projection.Lambda._Extensions;
 
 namespace Framework.Projection.Lambda;

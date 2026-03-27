@@ -1,5 +1,6 @@
 ﻿using Framework.Configuration.Generated.DTO;
 using Framework.Core;
+using Framework.Core.TryResult.Extensions;
 using Framework.DomainDriven;
 
 using Microsoft.AspNetCore.Mvc;

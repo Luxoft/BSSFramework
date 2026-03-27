@@ -6,9 +6,10 @@ using System.Reflection;
 using CommonFramework;
 using CommonFramework.Maybe;
 
+using Framework.CodeDom.Extend;
 using Framework.Core;
 
-namespace Framework.CodeDom;
+namespace Framework.CodeDom.Extensions;
 
 public static class CodeTypeReferenceExtensions
 {

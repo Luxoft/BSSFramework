@@ -9,8 +9,6 @@ namespace Framework.Application;
 public class DalQueryableSource(IServiceProvider serviceProvider) : IQueryableSource
 {
     public IQueryable<TDomainObject> GetQueryable<TDomainObject>()
-        where TDomainObject : class
-    {
-        return serviceProvider.GetRequiredService<IAsyncDal<TDomainObject, Guid>>().GetQueryable();
-    }
+        where TDomainObject : class =>
+        serviceProvider.GetRequiredService<IAsyncDal<TDomainObject, Guid>>().GetQueryable();
 }

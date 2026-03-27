@@ -4,6 +4,7 @@ using System.Reflection;
 using CommonFramework.Maybe;
 
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;

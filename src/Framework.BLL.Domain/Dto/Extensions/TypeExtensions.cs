@@ -2,6 +2,7 @@
 using CommonFramework.Maybe;
 
 using Framework.Core;
+using Framework.Core.Helpers;
 
 namespace Framework.BLL.Domain.DTO.Extensions;
 

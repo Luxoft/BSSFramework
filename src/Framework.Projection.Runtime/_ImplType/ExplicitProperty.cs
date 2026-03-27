@@ -5,6 +5,8 @@ using CommonFramework;
 using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.Core;
 
+using Framework.Core.ReflectionImpl;
+
 namespace Framework.Projection._ImplType;
 
 internal class ExplicitProperty : BasePropertyInfoImpl

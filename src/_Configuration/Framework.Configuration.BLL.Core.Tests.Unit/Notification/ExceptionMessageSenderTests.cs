@@ -9,6 +9,7 @@ using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
+using Framework.Core.MessageSender;
 using Framework.Notification.New;
 using Framework.UnitTesting;
 using Framework.Validation;

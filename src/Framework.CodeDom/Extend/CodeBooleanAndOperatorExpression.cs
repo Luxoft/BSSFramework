@@ -1,19 +1,7 @@
 ﻿using System.CodeDom;
 
-namespace Framework.CodeDom;
+namespace Framework.CodeDom.Extend;
 
-public class CodeBooleanAndOperatorExpression : CodeBinaryOperatorCollectionExpression
-{
-    public CodeBooleanAndOperatorExpression(params CodeExpression[] operations)
-            : base(CodeBinaryOperatorType.BooleanAnd, operations)
-    {
-    }
-}
+public class CodeBooleanAndOperatorExpression(params CodeExpression[] operations) : CodeBinaryOperatorCollectionExpression(CodeBinaryOperatorType.BooleanAnd, operations);
 
-public class CodeBooleanOrOperatorExpression : CodeBinaryOperatorCollectionExpression
-{
-    public CodeBooleanOrOperatorExpression(params CodeExpression[] operations)
-            : base(CodeBinaryOperatorType.BooleanOr, operations)
-    {
-    }
-}
+public class CodeBooleanOrOperatorExpression(params CodeExpression[] operations) : CodeBinaryOperatorCollectionExpression(CodeBinaryOperatorType.BooleanOr, operations);

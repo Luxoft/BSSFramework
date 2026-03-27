@@ -1,6 +1,7 @@
 ﻿using CommonFramework.DependencyInjection;
 
 using Framework.Core;
+using Framework.Core.MessageSender;
 using Framework.NotificationCore.Jobs;
 using Framework.NotificationCore.Senders;
 using Framework.NotificationCore.Services;

@@ -3,6 +3,7 @@
 using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.Core;
+using Framework.Core.MessageSender;
 using Framework.Notification.DTO;
 using Framework.NotificationCore.Services;
 using Framework.NotificationCore.Settings;

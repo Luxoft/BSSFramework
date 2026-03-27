@@ -7,6 +7,8 @@ using Framework.DomainDriven.Tracking;
 
 using Framework.Notification;
 using Framework.Configuration.Domain;
+using Framework.Core.MessageSender;
+using Framework.Core.TypeResolving;
 using Framework.DomainDriven.Lock;
 using Framework.Events;
 using Framework.Persistent;

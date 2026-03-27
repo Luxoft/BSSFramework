@@ -2,6 +2,7 @@
 
 using Framework.BLL.ServiceModel.Service;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.FileFactory;
 using Framework.CodeGeneration.GeneratePolicy;

@@ -6,7 +6,7 @@ using CommonFramework;
 
 using Framework.Core;
 
-namespace Framework.CodeDom;
+namespace Framework.CodeDom.Extensions;
 
 public static class EnumerableExtensions
 {
@@ -141,18 +141,11 @@ public static class EnumerableExtensions
     }
 
 
-    public static IEnumerable<T> ToCache<T>(this IEnumerable<T> source)
-    {
-        return LazyHelper.Create<IEnumerable<T>>(source.ToList).Unwrap();
-    }
+    public static IEnumerable<T> ToCache<T>(this IEnumerable<T> source) => LazyHelper.Create<IEnumerable<T>>(source.ToList).Unwrap();
 
     public static Lazy<TCollection> ToLazyCache<T, TCollection>(this IEnumerable<T> source, Func<IEnumerable<T>, TCollection> createFunc)
-            where TCollection : IEnumerable<T>
-    {
-        return LazyHelper.Create<TCollection>(() => createFunc(source));
-    }
-
-
+            where TCollection : IEnumerable<T> =>
+        LazyHelper.Create<TCollection>(() => createFunc(source));
 
     private static T[] ToArrayExceptNull<T>(this IEnumerable source, Func<T, T> selector)
             where T : class

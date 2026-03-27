@@ -6,6 +6,8 @@ using CommonFramework;
 using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.CodeDom;
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.FileFactory;
 using Framework.CodeGeneration.ProjectionGenerator._Extensions;

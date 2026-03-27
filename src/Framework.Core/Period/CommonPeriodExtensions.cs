@@ -2,6 +2,7 @@
 
 using CommonFramework;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Core;
 
 /// <summary>
@@ -19,10 +20,8 @@ public static class CommonPeriodExtensions
     /// <param name="target">Период, с которым проверяется пересечение</param>
     /// <returns>true, если дата начала и дата окончания переданного периода содержатся в указанном периоде, в противном случае — false</returns>
     public static bool Contains<T>(this T period, T target)
-            where T : struct, IPeriod
-    {
-        return period.Contains(target.StartDate) && period.Contains(target.EndDateValue);
-    }
+            where T : struct, IPeriod =>
+        period.Contains(target.StartDate) && period.Contains(target.EndDateValue);
 
     /// <summary>
     /// Возвращает значение, указывающее, содержит ли указанный период <see cref="period"/> значение даты <see cref="date"/> переданной в качестве параметра
@@ -34,16 +33,12 @@ public static class CommonPeriodExtensions
     /// <param name="date">Дата, которую нужно проверить на вхождение в период</param>
     /// <returns>true, если дата содержится в периоде, в противном случае — false</returns>
     public static bool Contains<T>(this T period, DateTime date)
-            where T : struct, IPeriod
-    {
-        return period.StartDate <= date && (period.EndDate == null || date <= period.EndDateValue);
-    }
+            where T : struct, IPeriod =>
+        period.StartDate <= date && (period.EndDate == null || date <= period.EndDateValue);
 
     public static bool Contains<T>(this T? period, DateTime? date)
-            where T : struct, IPeriod
-    {
-        return period.HasValue && period.Value.StartDate <= date && (period.Value.EndDate == null || date <= period.Value.EndDateValue);
-    }
+            where T : struct, IPeriod =>
+        period.HasValue && period.Value.StartDate <= date && (period.Value.EndDate == null || date <= period.Value.EndDateValue);
 
     /// <summary>
     /// Возвращает значение, указывающее, содержит ли указанный период <see cref="period"/> значение даты <see cref="date"/> переданной в качестве параметра
@@ -55,10 +50,8 @@ public static class CommonPeriodExtensions
     /// <param name="date">Дата, которую нужно проверить на вхождение в период</param>
     /// <returns>true, если дата не является null и дата содержится в периоде, в противном случае — false</returns>
     public static bool ContainsExt<T>(this T period, DateTime? date)
-            where T : struct, IPeriod
-    {
-        return date.MaybeNullable(v => period.Contains(v));
-    }
+            where T : struct, IPeriod =>
+        date.MaybeNullable(v => period.Contains(v));
 
     /// <summary>
     /// Возвращает значение, указывающее, содержит ли указанный период <see cref="period"/> значение даты <see cref="date"/> переданной в качестве параметра
@@ -66,10 +59,7 @@ public static class CommonPeriodExtensions
     /// <param name="period">Период, в котором проверяется дата</param>
     /// <param name="date">Дата, которую нужно проверить на вхождение в период</param>
     /// <returns>true, если дата содержится в периоде, в противном случае — false</returns>
-    public static bool NativeContains<T>(this T period, DateTime date) where T : IPeriod
-    {
-        return period.NativeStartDate <= date && (period.NativeEndDate == null || date <= period.NativeEndDateValue);
-    }
+    public static bool NativeContains<T>(this T period, DateTime date) where T : IPeriod => period.NativeStartDate <= date && (period.NativeEndDate == null || date <= period.NativeEndDateValue);
 
     /// <summary>
     /// Возвращает значение, указывающее, содержит ли указанный период <see cref="period"/> значение даты <see cref="date"/> переданной в качестве параметра
@@ -77,10 +67,7 @@ public static class CommonPeriodExtensions
     /// <param name="period">Период, в котором проверяется дата</param>
     /// <param name="date">Дата, которую нужно проверить на вхождение в период</param>
     /// <returns>true, если дата не является null и дата содержится в периоде, в противном случае — false</returns>
-    public static bool NativeContains<T>(this T period, DateTime? date) where T : IPeriod
-    {
-        return date.MaybeNullable(z => period.NativeContains(z));
-    }
+    public static bool NativeContains<T>(this T period, DateTime? date) where T : IPeriod => date.MaybeNullable(z => period.NativeContains(z));
 
     /// <summary>
     /// Возвращает значение, указывающее, содержит ли указанный период <see cref="period"/>, без учета даты окончания периода, значение даты <see cref="date"/> переданной в качестве параметра
@@ -91,10 +78,7 @@ public static class CommonPeriodExtensions
     /// <param name="period">Период, в котором проверяется дата</param>
     /// <param name="date">Дата, которую нужно проверить на вхождение в период</param>
     /// <returns>true, если дата содержится в периоде и не равна дате окончания периода, в противном случае — false</returns>
-    public static bool ContainsWithoutEndDate<T>(this T period, DateTime date) where T : IPeriod
-    {
-        return period.StartDate <= date && (period.EndDate == null || date < period.EndDateValue);
-    }
+    public static bool ContainsWithoutEndDate<T>(this T period, DateTime date) where T : IPeriod => period.StartDate <= date && (period.EndDate == null || date < period.EndDateValue);
 
     /// <summary>
     /// Возвращает список дат в периоде, выравненный по рабочей части недели
@@ -235,41 +219,31 @@ public static class CommonPeriodExtensions
     /// Преобразует дату начала периода в строковое представление месяца и года в предложном падеже для Российского стандарта
     /// </summary>
     /// <returns>Строка, содержащая полное имя месяца и год в предложном падеже</returns>
-    public static string GetInMonthAndYearStrRus<T>(this T period) where T : IPeriod
-    {
-        return period.StartDate.GetInMonthAndYearStrRus();
-    }
+    public static string GetInMonthAndYearStrRus<T>(this T period) where T : IPeriod => period.StartDate.GetInMonthAndYearStrRus();
 
     /// <summary>
     /// Преобразует дату начала и конца периода в строковое описание интервала представленый месяцами и годом для Российского стандарта
     /// </summary>
     /// <returns>Строка, содержащая содержащая имя месяца и год если период в одном месяце, иначе содержащяя имя начального и конечного месяца с годом</returns>
-    public static string GetMonthAndYearStrRus<T>(this T period) where T : IPeriod
-    {
-        return period.IsWithinOneMonth
-                       ? period.StartDate.GetMonthAndYearStrRus()
-                       : $"{period.StartDate.GetMonthAndYearStrRus()} - {period.EndDateValue.GetMonthAndYearStrRus()}";
-    }
+    public static string GetMonthAndYearStrRus<T>(this T period) where T : IPeriod =>
+        period.IsWithinOneMonth
+            ? period.StartDate.GetMonthAndYearStrRus()
+            : $"{period.StartDate.GetMonthAndYearStrRus()} - {period.EndDateValue.GetMonthAndYearStrRus()}";
 
     /// <summary>
     /// Преобразует дату начала и конца периода в строковое описание интервала представленый месяцами и годом
     /// </summary>
     /// <returns>Строка, содержащая содержащая имя месяца и год если период в одном месяце, иначе содержащяя имя начального и конечного месяца с годом</returns>
-    public static string GetMonthAndYearStr<T>(this T period) where T : IPeriod
-    {
-        return period.IsWithinOneMonth
-                       ? period.StartDate.GetMonthAndYearStr()
-                       : $"{period.StartDate.GetMonthAndYearStr()} - {period.EndDateValue.GetMonthAndYearStr()}";
-    }
+    public static string GetMonthAndYearStr<T>(this T period) where T : IPeriod =>
+        period.IsWithinOneMonth
+            ? period.StartDate.GetMonthAndYearStr()
+            : $"{period.StartDate.GetMonthAndYearStr()} - {period.EndDateValue.GetMonthAndYearStr()}";
 
     /// <summary>
     /// Возвращает неделю года, к которой относится дата начала периода для текущего стандарта
     /// </summary>
     /// <returns>Положительное целое число, представляющее неделю года, к которой относится дата начала периода для текущего стандарта</returns>
-    public static int GetWeekNumber<T>(this T period) where T : IPeriod
-    {
-        return period.GetWeekNumber(Thread.CurrentThread.CurrentCulture.Name);
-    }
+    public static int GetWeekNumber<T>(this T period) where T : IPeriod => period.GetWeekNumber(Thread.CurrentThread.CurrentCulture.Name);
 
     /// <summary>
     /// Возвращает неделю года, к которой относится дата начала периода для <see cref="isoCultureName"/> стандарта
@@ -331,10 +305,7 @@ public static class CommonPeriodExtensions
     /// Преобразует дату начала и конца периода в строковое описание интервала представленый месяцами и годом для Римского стандарта
     /// </summary>
     /// <returns>Строка, содержащая содержащая римский номер месяца и год если период в одном месяце, иначе содержащяя римские номера начального и конечного месяца с годом</returns>
-    public static string GetMonthAndYearStrRoman<T>(this T period) where T : IPeriod
-    {
-        return MonthFormatter.GetMonthAndYearStrRoman(period);
-    }
+    public static string GetMonthAndYearStrRoman<T>(this T period) where T : IPeriod => MonthFormatter.GetMonthAndYearStrRoman(period);
 
     /// <summary>
     /// Возвращает формат даты для <see cref="cultureinfo"/> региональных параметров содержащий только месяц и год
@@ -373,8 +344,5 @@ public static class CommonPeriodExtensions
 
     #endregion
 
-    private static string ProressYear<T>(this T period, string result, bool addStartDateYear) where T : IPeriod
-    {
-        return addStartDateYear ? $"{result} ({period.StartDate:yyyy})" : result;
-    }
+    private static string ProressYear<T>(this T period, string result, bool addStartDateYear) where T : IPeriod => addStartDateYear ? $"{result} ({period.StartDate:yyyy})" : result;
 }

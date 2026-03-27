@@ -1,5 +1,5 @@
 ﻿using Framework.Application.DALExceptions;
-using Framework.Application.Services;
+using Framework.Core;
 using Framework.Core.StringParse;
 
 using NHibernate;

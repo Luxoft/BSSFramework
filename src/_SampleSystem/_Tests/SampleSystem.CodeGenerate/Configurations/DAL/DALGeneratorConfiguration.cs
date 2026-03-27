@@ -1,4 +1,5 @@
 ﻿using Framework.Core;
+using Framework.Core.TypeResolving.TypeSource;
 using Framework.DomainDriven.Metadata;
 
 namespace SampleSystem.CodeGenerate;

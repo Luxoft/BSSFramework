@@ -2,11 +2,4 @@
 
 namespace Framework.CodeDom;
 
-public class CodeNegateExpression : CodeValueEqualityOperatorExpression
-{
-    public CodeNegateExpression(CodeExpression value)
-            : base(value, new CodePrimitiveExpression(false))
-    {
-
-    }
-}
+public class CodeNegateExpression(CodeExpression value) : CodeValueEqualityOperatorExpression(value, new CodePrimitiveExpression(false));

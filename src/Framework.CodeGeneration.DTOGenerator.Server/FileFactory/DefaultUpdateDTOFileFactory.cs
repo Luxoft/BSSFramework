@@ -11,6 +11,8 @@ using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.IdentityObject;
 using Framework.CodeDom;
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;

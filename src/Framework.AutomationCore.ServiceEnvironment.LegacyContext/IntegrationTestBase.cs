@@ -3,6 +3,7 @@
 using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.Core;
+using Framework.Core.Helpers;
 using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.ServiceModel.Subscriptions;

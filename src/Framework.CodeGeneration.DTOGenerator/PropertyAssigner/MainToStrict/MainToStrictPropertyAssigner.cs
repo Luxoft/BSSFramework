@@ -5,6 +5,8 @@ using CommonFramework;
 
 using Framework.Application.Domain.Attributes;
 using Framework.CodeDom;
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;

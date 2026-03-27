@@ -5,6 +5,8 @@ using CommonFramework;
 
 using Framework.BLL.DTOMapping.Domain;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
+using Framework.CodeDom.Rendering;
 using Framework.Core;
 using Framework.FileGeneration;
 

@@ -1,4 +1,4 @@
-﻿namespace Framework.Core;
+﻿namespace Framework.Core.TypeResolving.TypeSource;
 
 /// <summary>
 /// Источник типов

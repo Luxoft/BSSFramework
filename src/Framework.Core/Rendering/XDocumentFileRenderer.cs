@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Xml.Linq;
 
-namespace Framework.Core;
+namespace Framework.Core.Rendering;
 
 public class XDocumentFileRenderer(Func<StringBuilder, TextWriter> createWriter) : IFileRenderer<XDocument, string>
 {

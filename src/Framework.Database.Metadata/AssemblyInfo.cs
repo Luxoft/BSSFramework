@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-using Framework.Core;
+using Framework.Core.TypeResolving.TypeSource;
 
 namespace Framework.Database.Metadata;
 

@@ -6,6 +6,7 @@ using CommonFramework;
 using Framework.Application.Domain.Attributes;
 using Framework.BLL.Domain.MergeItemData;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Configuration;

@@ -2,6 +2,7 @@
 
 using Framework.Configuration.BLL;
 using Framework.Core;
+using Framework.Core.Helpers;
 using Framework.Events.Legacy;
 using Framework.Persistent;
 

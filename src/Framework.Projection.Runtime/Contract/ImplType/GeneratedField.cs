@@ -1,6 +1,7 @@
 ﻿using CommonFramework;
 
 using Framework.Core;
+using Framework.Core.ReflectionImpl;
 using Framework.Projection._Extensions;
 
 namespace Framework.Projection.Contract.ImplType;

@@ -7,13 +7,7 @@ public class StringParseResult
 {
     private readonly Match _math;
 
-    internal StringParseResult(Match math)
-    {
-        this._math = math;
-    }
+    internal StringParseResult(Match math) => this._math = math;
 
-    public string GetResultFor(MatchResultDescription mathResultDescription)
-    {
-        return this._math.Groups[mathResultDescription.ResultIndex].Value;
-    }
+    public string GetResultFor(MatchResultDescription mathResultDescription) => this._math.Groups[mathResultDescription.ResultIndex].Value;
 }

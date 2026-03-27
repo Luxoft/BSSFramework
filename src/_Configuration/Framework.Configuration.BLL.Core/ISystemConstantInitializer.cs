@@ -1,6 +1,7 @@
 ﻿using CommonFramework;
 using Framework.Configuration.Domain;
 using Framework.Core;
+using Framework.Core.TryResult.Base;
 using Framework.DomainDriven.DAL.Revisions;
 
 namespace Framework.Configuration.BLL;

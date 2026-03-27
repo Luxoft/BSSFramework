@@ -2,6 +2,7 @@
 
 using CommonFramework;
 
+using Framework.BLL.Services;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.Tracking;
@@ -15,6 +16,11 @@ namespace Framework.BLL.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
+    public static IServiceCollection AddBLL(IServiceCollection services)
+    {
+        return services.AddSingleton<IExceptionExpander, ExceptionExpander>();
+    }
+
     public static IServiceCollection RegisterBLLSystem<TBLLContextDecl, TBLLContextImpl>(
         this IServiceCollection services,
         Action<BLLSystemSettings>? setupAction = null)

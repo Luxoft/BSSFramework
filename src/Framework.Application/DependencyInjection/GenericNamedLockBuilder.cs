@@ -1,16 +1,20 @@
 ﻿using System.Linq.Expressions;
+
+using CommonFramework.DependencyInjection;
+
 using Framework.Application.Lock;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Application.DependencyInjection;
 
-public class GenericNamedLockSetup : IGenericNamedLockSetup
+public class GenericNamedLockBuilder : IGenericNamedLockBuilder, IServiceInitializer
 {
     private Action<IServiceCollection>? mainInitAction;
 
     private readonly List<Action<IServiceCollection>> elementsInitAction = [];
 
-    public IGenericNamedLockSetup SetNameLockType<TGenericNamedLock>(Expression<Func<TGenericNamedLock, string>> namePath)
+    public IGenericNamedLockBuilder SetNameLockType<TGenericNamedLock>(Expression<Func<TGenericNamedLock, string>> namePath)
         where TGenericNamedLock : new()
     {
         this.mainInitAction = services => services.AddScoped<INamedLockService, NamedLockService<TGenericNamedLock>>()
@@ -21,7 +25,7 @@ public class GenericNamedLockSetup : IGenericNamedLockSetup
         return this;
     }
 
-    public IGenericNamedLockSetup AddContainer(Type containerType)
+    public IGenericNamedLockBuilder AddContainer(Type containerType)
     {
         this.elementsInitAction.Add(
             sc => sc.AddKeyedSingleton<INamedLockSource>(RootNamedLockSource.ElementsKey, new NamedLockTypeContainerSource(containerType)));
@@ -29,7 +33,7 @@ public class GenericNamedLockSetup : IGenericNamedLockSetup
         return this;
     }
 
-    public IGenericNamedLockSetup AddManual(NamedLock namedLock)
+    public IGenericNamedLockBuilder AddManual(NamedLock namedLock)
     {
         this.elementsInitAction.Add(
             sc => sc.AddKeyedSingleton<INamedLockSource>(RootNamedLockSource.ElementsKey, new ManualNamedLockSource(namedLock)));

@@ -5,6 +5,7 @@ using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
 using Framework.Core;
+using Framework.Core.TypeResolving;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.Events;

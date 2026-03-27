@@ -2,11 +2,4 @@
 
 namespace Framework.CodeDom;
 
-public class CodeValueEqualityOperatorExpression : CodeBinaryOperatorExpression
-{
-    public CodeValueEqualityOperatorExpression(CodeExpression left, CodeExpression right)
-            : base (left, CodeBinaryOperatorType.ValueEquality, right)
-    {
-
-    }
-}
+public class CodeValueEqualityOperatorExpression(CodeExpression left, CodeExpression right) : CodeBinaryOperatorExpression(left, CodeBinaryOperatorType.ValueEquality, right);

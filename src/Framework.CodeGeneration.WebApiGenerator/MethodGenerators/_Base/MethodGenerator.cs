@@ -7,6 +7,8 @@ using Framework.Application.Session;
 using Framework.BLL;
 using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.CodeDom;
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.WebApiGenerator._Legacy;

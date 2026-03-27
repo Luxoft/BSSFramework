@@ -1,6 +1,7 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;

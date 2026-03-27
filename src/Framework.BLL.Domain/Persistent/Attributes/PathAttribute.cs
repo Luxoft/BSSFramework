@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 
+
 namespace Framework.BLL.Domain.Persistent.Attributes;
 
 /// <summary>

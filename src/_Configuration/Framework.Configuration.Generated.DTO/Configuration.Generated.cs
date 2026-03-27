@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
+
 namespace Framework.Configuration.Generated.DTO
 {
     
@@ -7432,7 +7434,7 @@ namespace Framework.Configuration.Generated.DTO
         
         private bool _isRoot;
         
-        private Framework.Core.Period _period = Framework.Core.Period.Eternity;
+        private Period _period = Period.Eternity;
         
         public ExceptionMessageRootFilterModelSimpleDTO()
         {
@@ -7458,7 +7460,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period
+        public Period Period
         {
             get
             {
@@ -7548,7 +7550,7 @@ namespace Framework.Configuration.Generated.DTO
         
         private bool _isRoot;
         
-        private Framework.Core.Period _period;
+        private Period _period;
         
         public ExceptionMessageRootFilterModelStrictDTO()
         {
@@ -7612,7 +7614,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period
+        public Period Period
         {
             get
             {

@@ -1,4 +1,5 @@
 ﻿using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.GeneratePolicy;

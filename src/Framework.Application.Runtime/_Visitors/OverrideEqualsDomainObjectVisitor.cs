@@ -26,10 +26,7 @@ public class OverrideEqualsDomainObjectVisitor<TIdent> : ExpressionVisitor
     /// </summary>
     /// <param name="property">Property to get ExpressionVisitor for</param>
     /// <returns>Expression Visitor</returns>
-    public static OverrideEqualsDomainObjectVisitor<TIdent> GetOrCreate(PropertyInfo property)
-    {
-        return Cache.GetOrAdd(property, pInfo => new OverrideEqualsDomainObjectVisitor<TIdent>(pInfo));
-    }
+    public static OverrideEqualsDomainObjectVisitor<TIdent> GetOrCreate(PropertyInfo property) => Cache.GetOrAdd(property, pInfo => new OverrideEqualsDomainObjectVisitor<TIdent>(pInfo));
 
     protected override Expression VisitBinary(BinaryExpression node)
     {

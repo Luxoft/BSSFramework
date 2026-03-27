@@ -1,6 +1,7 @@
 ﻿using CommonFramework;
 
 using Framework.Core;
+using Framework.Core.Rendering;
 using Framework.FileGeneration;
 
 namespace Framework.CodeGeneration.Rendering;

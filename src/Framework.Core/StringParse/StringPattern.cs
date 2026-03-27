@@ -14,25 +14,14 @@ public class StringPattern
     public StringPattern()
     {
     }
-    public string Start
-    {
-        get { return this._start; }
-    }
-    public string End
-    {
-        get { return this._end ?? this._defaultEnd; }
-    }
+    public string Start => this._start;
 
-    public string AfterThatWorlds
-    {
-        get { return this._afterThatWorlds; }
-    }
+    public string End => this._end ?? this._defaultEnd;
 
+    public string AfterThatWorlds => this._afterThatWorlds;
 
-    public StringPattern WithStart(char start)
-    {
-        return this.WithStart(new string(new[] { start }));
-    }
+    public StringPattern WithStart(char start) => this.WithStart(new string(new[] { start }));
+
     public StringPattern WithStart(string start)
     {
         this.SetValue(start, () => this._start, value => this._start = value, MethodBase.GetCurrentMethod());

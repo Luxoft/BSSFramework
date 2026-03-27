@@ -5,6 +5,7 @@ using CommonFramework;
 
 using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.Core;
+
 using Framework.Database.Domain.Extensions;
 
 namespace Framework.Projection.Lambda;

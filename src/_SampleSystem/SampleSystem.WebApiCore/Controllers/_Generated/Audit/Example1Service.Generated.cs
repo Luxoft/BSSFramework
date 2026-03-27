@@ -1,4 +1,6 @@
-﻿namespace SampleSystem.WebApiCore.Controllers.Audit
+﻿
+
+namespace SampleSystem.WebApiCore.Controllers.Audit
 {
     
     
@@ -13,13 +15,13 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetExample1PropertyRevisionByDateRange(GetExample1PropertyRevisionByDateRangeAutoRequest getExample1PropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getExample1PropertyRevisionByDateRangeAutoRequest.Period;
+            Period? period = getExample1PropertyRevisionByDateRangeAutoRequest.Period;
             string propertyName = getExample1PropertyRevisionByDateRangeAutoRequest.PropertyName;
             SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity = getExample1PropertyRevisionByDateRangeAutoRequest.Example1Identity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetExample1PropertyRevisionByDateRangeInternal(example1Identity, propertyName, period, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetExample1PropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity, string propertyName, Framework.Core.Period? period, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetExample1PropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.Example1IdentityDTO example1Identity, string propertyName, Period? period, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IExample1BLL bll = evaluateData.Context.Logics.Example1Factory.Create(SecuritySystem.SecurityRule.View);
             return new Framework.DomainDriven.ServiceModel.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.DomainDriven.BLL.Security.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.Example1>(example1Identity.Id, propertyName, period);
@@ -121,7 +123,7 @@
         
         private string propertyName;
         
-        private Framework.Core.Period? period;
+        private Period? period;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
@@ -153,7 +155,7 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public virtual Framework.Core.Period? Period
+        public virtual Period? Period
         {
             get
             {

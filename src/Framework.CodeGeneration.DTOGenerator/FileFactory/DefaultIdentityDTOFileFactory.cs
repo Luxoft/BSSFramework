@@ -3,6 +3,8 @@ using System.Reflection;
 using System.Runtime.Serialization;
 
 using Framework.CodeDom;
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.DTOGenerator.Configuration;

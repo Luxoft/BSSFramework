@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Framework.Core;
+namespace Framework.Core.TypeResolving.TypeSource;
 
 public class TypeSource : ITypeSource
 {
@@ -47,12 +47,7 @@ public class TypeSource : ITypeSource
 
 
 
-    public IEnumerable<Type> GetTypes()
-    {
-        return this._types;
-    }
-
-
+    public IEnumerable<Type> GetTypes() => this._types;
 
     public static TypeSource FromSample(Type sampleType)
     {
@@ -61,11 +56,7 @@ public class TypeSource : ITypeSource
         return new TypeSource(sampleType.Assembly);
     }
 
-    public static TypeSource FromSample<T>()
-    {
-        return FromSample(typeof(T));
-    }
-
+    public static TypeSource FromSample<T>() => FromSample(typeof(T));
 
     public static readonly TypeSource CurrentDomain = new TypeSource(AppDomain.CurrentDomain);
 }

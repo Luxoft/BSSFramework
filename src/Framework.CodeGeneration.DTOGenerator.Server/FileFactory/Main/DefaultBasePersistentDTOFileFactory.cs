@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Extensions;

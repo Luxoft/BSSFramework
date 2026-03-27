@@ -1,8 +1,9 @@
-﻿namespace Framework.Core;
+﻿// ReSharper disable once CheckNamespace
+namespace Framework.Core;
 
 public static class PeriodItemCollectionContainerExtensions
 {
-    public static TItem GetNewestItem<TItem> (this IPeriodItemCollectionContainer<TItem> source)
+    public static TItem? GetNewestItem<TItem> (this IPeriodItemCollectionContainer<TItem> source)
             where TItem : IPeriodObject
     {
         var request = from item in source.Items
@@ -13,9 +14,7 @@ public static class PeriodItemCollectionContainerExtensions
     }
 
 
-    public static TItem SingleOrDefault<TItem> (this IPeriodItemCollectionContainer<TItem> source, DateTime selectedDate)
-            where TItem : class, IPeriodObject
-    {
-        return source.Items.SingleOrDefault (item => item.Period.Contains (selectedDate));
-    }
+    public static TItem? SingleOrDefault<TItem> (this IPeriodItemCollectionContainer<TItem> source, DateTime selectedDate)
+            where TItem : class, IPeriodObject =>
+        source.Items.SingleOrDefault (item => item.Period.Contains (selectedDate));
 }

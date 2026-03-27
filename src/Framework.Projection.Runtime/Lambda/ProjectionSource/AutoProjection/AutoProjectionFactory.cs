@@ -2,6 +2,7 @@
 
 using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.Core;
+
 using Framework.Projection.Lambda.ProjectionBuilder;
 
 namespace Framework.Projection.Lambda.ProjectionSource.AutoProjection;

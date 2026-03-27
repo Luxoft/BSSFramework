@@ -3,6 +3,7 @@
 using Framework.BLL.Domain.DAL.Revisions;
 using Framework.Core;
 
+
 namespace Framework.BLL;
 
 public interface IRevisionBLL<TDomainObject, TIdent>

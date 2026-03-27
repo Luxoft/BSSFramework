@@ -1,6 +1,7 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory;
 using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;

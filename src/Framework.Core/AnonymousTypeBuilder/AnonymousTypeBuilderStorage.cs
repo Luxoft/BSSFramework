@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Reflection.Emit;
 
-namespace Framework.Core;
+namespace Framework.Core.AnonymousTypeBuilder;
 
 public class AnonymousTypeBuilderStorage : IAnonymousTypeBuilderStorage
 {

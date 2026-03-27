@@ -1,4 +1,4 @@
-﻿namespace Framework.Application.Services;
+﻿namespace Framework.Core;
 
 /// <summary>
 /// Сервис для раскрытия шаблонных исключений

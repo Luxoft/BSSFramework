@@ -3,7 +3,7 @@ using System.Reflection.Emit;
 
 using CommonFramework;
 
-namespace Framework.Core;
+namespace Framework.Core.AnonymousTypeBuilder;
 
 public abstract class AnonymousTypeByMemberBuilder<TMap, TMapMember, TMemberBuilder> : IAnonymousTypeBuilder<TMap>
         where TMap : class, ITypeMap<TMapMember>

@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.Configuration.Domain;
+using Framework.Core.TryResult.Base;
 
 namespace Framework.Configuration.BLL;
 

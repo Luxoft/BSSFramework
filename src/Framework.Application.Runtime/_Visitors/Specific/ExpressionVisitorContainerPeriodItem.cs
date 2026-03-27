@@ -5,6 +5,7 @@ using CommonFramework;
 using Framework.Application._Visitors.ExpressionVisitorContainer;
 using Framework.Core;
 
+
 namespace Framework.Application._Visitors.Specific;
 
 public class ExpressionVisitorContainerPeriodItem : IExpressionVisitorContainerItem

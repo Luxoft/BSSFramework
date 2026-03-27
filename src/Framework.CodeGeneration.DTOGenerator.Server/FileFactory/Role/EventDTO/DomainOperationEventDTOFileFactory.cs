@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 
 using Framework.Application.Events;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;

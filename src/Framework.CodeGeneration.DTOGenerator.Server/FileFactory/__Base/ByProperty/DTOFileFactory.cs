@@ -8,6 +8,7 @@ using Framework.Application.Domain.Attributes;
 using Framework.BLL.Domain.DTO.MappingObject;
 using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.DTOGenerator.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;

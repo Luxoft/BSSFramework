@@ -1,7 +1,7 @@
 ﻿using System.Reflection.Emit;
 using System.Runtime.Serialization;
 
-namespace Framework.Core;
+namespace Framework.Core.AnonymousTypeBuilder;
 
 public class AnonymousTypeByPropertyWithSerializeBuilder<TMap, TMapMember>(IAnonymousTypeBuilderStorage storage) : AnonymousTypeByPropertyBuilder<TMap, TMapMember>(storage)
     where TMap : class, ITypeMap<TMapMember>
@@ -25,13 +25,7 @@ public class AnonymousTypeByPropertyWithSerializeBuilder<TMap, TMapMember>(IAnon
         return propertyBuilder;
     }
 
-    protected virtual CustomAttributeBuilder GetDataContractAttribute(TMap typeMap)
-    {
-        return new CustomAttributeBuilder(typeof(DataContractAttribute).GetConstructor(Type.EmptyTypes), []);
-    }
+    protected virtual CustomAttributeBuilder GetDataContractAttribute(TMap typeMap) => new(typeof(DataContractAttribute).GetConstructor(Type.EmptyTypes), []);
 
-    protected virtual CustomAttributeBuilder GetDataMemberAttribute(TMapMember member)
-    {
-        return new CustomAttributeBuilder(typeof (DataMemberAttribute).GetConstructor(Type.EmptyTypes), []);
-    }
+    protected virtual CustomAttributeBuilder GetDataMemberAttribute(TMapMember member) => new(typeof (DataMemberAttribute).GetConstructor(Type.EmptyTypes), []);
 }

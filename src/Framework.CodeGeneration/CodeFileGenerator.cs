@@ -1,4 +1,5 @@
 ﻿using Framework.CodeDom;
+using Framework.CodeDom.Rendering;
 using Framework.CodeGeneration.Configuration._Container;
 using Framework.FileGeneration;
 

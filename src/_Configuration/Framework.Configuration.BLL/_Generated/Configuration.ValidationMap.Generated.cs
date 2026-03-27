@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
+
 namespace Framework.Configuration.BLL
 {
     
@@ -561,14 +563,14 @@ namespace Framework.Configuration.BLL
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ExceptionMessage, string>(source => source.StackTrace, currentClass, this.GetExceptionMessage_StackTraceValidators(), this.GetClassMap<string>(true));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ExceptionMessageRootFilterModel, Framework.Core.Period>> GetExceptionMessageRootFilterModel_PeriodValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ExceptionMessageRootFilterModel, Period>> GetExceptionMessageRootFilterModel_PeriodValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<Framework.Configuration.Domain.ExceptionMessageRootFilterModel>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.ExceptionMessageRootFilterModel>> GetExceptionMessageRootFilterModelProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.ExceptionMessageRootFilterModel> currentClass)
         {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ExceptionMessageRootFilterModel, Framework.Core.Period>(source => source.Period, currentClass, this.GetExceptionMessageRootFilterModel_PeriodValidators(), this.GetClassMap<Framework.Core.Period>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ExceptionMessageRootFilterModel, Period>(source => source.Period, currentClass, this.GetExceptionMessageRootFilterModel_PeriodValidators(), this.GetClassMap<Period>(true));
         }
         
         protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.ExceptionMessageRootFilterModel> GetExceptionMessageRootFilterModelValidationMap()

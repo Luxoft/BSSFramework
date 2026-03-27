@@ -1,6 +1,7 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 
 namespace Framework.CodeGeneration.WebApiGenerator.Extensions;
 

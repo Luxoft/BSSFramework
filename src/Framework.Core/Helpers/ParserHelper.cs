@@ -4,29 +4,21 @@ using System.Reflection;
 using CommonFramework;
 using CommonFramework.ExpressionEvaluate;
 using CommonFramework.Maybe;
+
 using static CommonFramework.Maybe.Maybe;
 
-namespace Framework.Core.Serialization;
+namespace Framework.Core.Helpers;
 
 public static class ParserHelper
 {
-    public static T Parse<T>(string value)
-    {
-        return GetParseFunc<T>()(value);
-    }
+    public static T Parse<T>(string value) => GetParseFunc<T>()(value);
 
-    public static Maybe<T> TryParse<T>(string value)
-    {
-        return GetTryParseFunc<T>()(value);
-    }
+    public static Maybe<T> TryParse<T>(string value) => GetTryParseFunc<T>()(value);
 
-
-    public static LambdaExpression GetParseExpression(Type type, bool raiseError = true)
-    {
-        return new Func<bool, Expression<Func<string, object>>>(GetParseExpression<object>)
-               .CreateGenericMethod(type)
-               .Invoke<LambdaExpression>(null, raiseError);
-    }
+    public static LambdaExpression GetParseExpression(Type type, bool raiseError = true) =>
+        new Func<bool, Expression<Func<string, object>>>(GetParseExpression<object>)
+            .CreateGenericMethod(type)
+            .Invoke<LambdaExpression>(null, raiseError);
 
     public static Expression<Func<string, T>> GetParseExpression<T>(bool raiseError = true)
     {
@@ -40,12 +32,10 @@ public static class ParserHelper
         return expr;
     }
 
-    public static Delegate GetParseFunc(Type type, bool raiseError = true)
-    {
-        return new Func<bool, Func<string, object>>(GetParseFunc<object>)
-               .CreateGenericMethod(type)
-               .Invoke<Delegate>(null, raiseError);
-    }
+    public static Delegate GetParseFunc(Type type, bool raiseError = true) =>
+        new Func<bool, Func<string, object>>(GetParseFunc<object>)
+            .CreateGenericMethod(type)
+            .Invoke<Delegate>(null, raiseError);
 
     public static Func<string, T> GetParseFunc<T>(bool raiseError = true)
     {
@@ -60,12 +50,10 @@ public static class ParserHelper
     }
 
 
-    public static LambdaExpression GetTryParseExpression(Type type, bool raiseError = true)
-    {
-        return new Func<bool, Expression<Func<string, Maybe<object>>>>(GetTryParseExpression<object>)
-               .CreateGenericMethod(type)
-               .Invoke<LambdaExpression>(null, raiseError);
-    }
+    public static LambdaExpression GetTryParseExpression(Type type, bool raiseError = true) =>
+        new Func<bool, Expression<Func<string, Maybe<object>>>>(GetTryParseExpression<object>)
+            .CreateGenericMethod(type)
+            .Invoke<LambdaExpression>(null, raiseError);
 
     public static Expression<Func<string, Maybe<T>>> GetTryParseExpression<T>(bool raiseError = true)
     {
@@ -79,12 +67,10 @@ public static class ParserHelper
         return expr;
     }
 
-    public static Delegate? GetTryParseFunc(Type type, bool raiseError = true)
-    {
-        return new Func<bool, Func<string, Maybe<object>>>(GetTryParseFunc<object>)
-               .CreateGenericMethod(type)
-               .Invoke<Delegate>(null, raiseError);
-    }
+    public static Delegate? GetTryParseFunc(Type type, bool raiseError = true) =>
+        new Func<bool, Func<string, Maybe<object>>>(GetTryParseFunc<object>)
+            .CreateGenericMethod(type)
+            .Invoke<Delegate>(null, raiseError);
 
     public static Func<string, Maybe<T>>? GetTryParseFunc<T>(bool raiseError = true)
     {

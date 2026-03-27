@@ -1,6 +1,6 @@
 ﻿using System.CodeDom;
 
-namespace Framework.CodeDom;
+namespace Framework.CodeDom.Extend;
 
 public class CodeBinaryOperatorCollectionExpression : CodeExpression
 {

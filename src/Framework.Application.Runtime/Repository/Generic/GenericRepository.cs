@@ -51,8 +51,5 @@ public class GenericRepository<TDomainObject, TIdent>(
     public async Task RefreshAsync(TDomainObject domainObject, CancellationToken cancellationToken) =>
         await dal.RefreshAsync(domainObject, cancellationToken);
 
-    public async Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken cancellationToken)
-    {
-        await dal.LockAsync(domainObject, lockRole, cancellationToken);
-    }
+    public async Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken cancellationToken) => await dal.LockAsync(domainObject, lockRole, cancellationToken);
 }

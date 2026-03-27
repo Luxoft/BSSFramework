@@ -2,7 +2,7 @@
 
 using CommonFramework;
 
-namespace Framework.Core;
+namespace Framework.Core.AnonymousTypeBuilder;
 
 public class TypeMap(string name, IEnumerable<TypeMapMember> members) : TypeMap<TypeMapMember>(name, members), IEquatable<TypeMap>, ISwitchNameObject<TypeMap>
 {
@@ -12,16 +12,9 @@ public class TypeMap(string name, IEnumerable<TypeMapMember> members) : TypeMap<
 
     }
 
-    public new TypeMap SwitchName(string newName)
-    {
-        return new TypeMap(newName, this.Members);
-    }
+    public new TypeMap SwitchName(string newName) => new(newName, this.Members);
 
-
-    public bool Equals(TypeMap other)
-    {
-        return base.Equals(other);
-    }
+    public bool Equals(TypeMap other) => base.Equals(other);
 }
 
 public class TypeMap<TMember> : ITypeMap<TMember>, IEquatable<TypeMap<TMember>>, ISwitchNameObject<TypeMap<TMember>>
@@ -44,28 +37,13 @@ public class TypeMap<TMember> : ITypeMap<TMember>, IEquatable<TypeMap<TMember>>,
     public ReadOnlyCollection<TMember> Members { get; private set; }
 
 
-    public override int GetHashCode()
-    {
-        return this.Name.GetHashCode() ^ this.Members.Count;
-    }
+    public override int GetHashCode() => this.Name.GetHashCode() ^ this.Members.Count;
 
-    public bool Equals(TypeMap<TMember> other)
-    {
-        return other != null && this.Name == other.Name && this.Members.SequenceEqual(other.Members);
-    }
+    public bool Equals(TypeMap<TMember> other) => other != null && this.Name == other.Name && this.Members.SequenceEqual(other.Members);
 
-    public TypeMap<TMember> SwitchName(string newName)
-    {
-        return new TypeMap<TMember>(newName, this.Members);
-    }
+    public TypeMap<TMember> SwitchName(string newName) => new(newName, this.Members);
 
-    public override bool Equals(object obj)
-    {
-        return this.Equals(obj as TypeMap<TMember>);
-    }
+    public override bool Equals(object obj) => this.Equals(obj as TypeMap<TMember>);
 
-    IEnumerable<TMember> ITypeMap<TMember>.Members
-    {
-        get { return this.Members; }
-    }
+    IEnumerable<TMember> ITypeMap<TMember>.Members => this.Members;
 }

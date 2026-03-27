@@ -1,4 +1,6 @@
-﻿namespace SampleSystem.WebApiCore.Controllers.Audit
+﻿
+
+namespace SampleSystem.WebApiCore.Controllers.Audit
 {
     
     
@@ -31,13 +33,13 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocationPropertyRevisionByDateRange(GetLocationPropertyRevisionByDateRangeAutoRequest getLocationPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getLocationPropertyRevisionByDateRangeAutoRequest.Period;
+            Period? period = getLocationPropertyRevisionByDateRangeAutoRequest.Period;
             string propertyName = getLocationPropertyRevisionByDateRangeAutoRequest.PropertyName;
             SampleSystem.Generated.DTO.LocationIdentityDTO locationIdentity = getLocationPropertyRevisionByDateRangeAutoRequest.LocationIdentity;
             return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetLocationPropertyRevisionByDateRangeInternal(locationIdentity, propertyName, period, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocationPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.LocationIdentityDTO locationIdentity, string propertyName, Framework.Core.Period? period, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocationPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.LocationIdentityDTO locationIdentity, string propertyName, Period? period, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocationBLL bll = evaluateData.Context.Logics.LocationFactory.Create(SecuritySystem.SecurityRule.View);
             return new Framework.DomainDriven.ServiceModel.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.DomainDriven.BLL.Security.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.Location>(locationIdentity.Id, propertyName, period);
@@ -177,7 +179,7 @@
         
         private string propertyName;
         
-        private Framework.Core.Period? period;
+        private Period? period;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
@@ -209,7 +211,7 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public virtual Framework.Core.Period? Period
+        public virtual Period? Period
         {
             get
             {

@@ -1,12 +1,12 @@
 ﻿using System.CodeDom;
 
-namespace Framework.CodeDom;
+namespace Framework.CodeDom.Extend;
 
 public class CodeLambdaExpression : CodeExpression
 {
-    private CodeStatementCollection _statements;
+    private CodeStatementCollection statements;
 
-    private CodeParameterDeclarationExpressionCollection _parameters;
+    private CodeParameterDeclarationExpressionCollection parameters;
 
 
     public CodeLambdaExpression()
@@ -18,13 +18,13 @@ public class CodeLambdaExpression : CodeExpression
 
     public CodeStatementCollection Statements
     {
-        get { return this._statements; }
-        set { this._statements = value ?? new CodeStatementCollection(); }
+        get => this.statements;
+        set => this.statements = value ?? new CodeStatementCollection();
     }
 
     public CodeParameterDeclarationExpressionCollection Parameters
     {
-        get { return this._parameters; }
-        set { this._parameters = value ?? new CodeParameterDeclarationExpressionCollection(); }
+        get => this.parameters;
+        set => this.parameters = value ?? new CodeParameterDeclarationExpressionCollection();
     }
 }

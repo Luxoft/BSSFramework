@@ -3,6 +3,8 @@ using System.Reflection.Emit;
 
 using CommonFramework;
 
+using Framework.Core.AnonymousTypeBuilder;
+
 namespace Framework.Core;
 
 /// <summary>
@@ -33,10 +35,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public Func<Func<T>, T> GetCreateProxyFunc<T>()
-    {
-        return (Func<Func<T>, T>)this.GetCreateProxyFunc(typeof(T));
-    }
+    public Func<Func<T>, T> GetCreateProxyFunc<T>() => (Func<Func<T>, T>)this.GetCreateProxyFunc(typeof(T));
 
     /// <summary>
     /// Получение фабричной функции для создания прокси-типа

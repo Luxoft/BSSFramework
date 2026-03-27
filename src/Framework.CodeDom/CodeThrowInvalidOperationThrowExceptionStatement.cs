@@ -1,12 +1,8 @@
 ﻿using System.CodeDom;
 
+using Framework.CodeDom.Extensions;
+
 namespace Framework.CodeDom;
 
-public class CodeThrowInvalidOperationThrowExceptionStatement : CodeThrowExceptionStatement
-{
-    public CodeThrowInvalidOperationThrowExceptionStatement(string message)
-            : base(typeof(InvalidOperationException).ToTypeReference().ToObjectCreateExpression(new CodePrimitiveExpression(message)))
-    {
-
-    }
-}
+public class CodeThrowInvalidOperationThrowExceptionStatement(string message)
+    : CodeThrowExceptionStatement(typeof(InvalidOperationException).ToTypeReference().ToObjectCreateExpression(new CodePrimitiveExpression(message)));

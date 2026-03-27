@@ -1,4 +1,5 @@
-﻿namespace Framework.Core;
+﻿// ReSharper disable once CheckNamespace
+namespace Framework.Core;
 
 public interface IPeriod
 {

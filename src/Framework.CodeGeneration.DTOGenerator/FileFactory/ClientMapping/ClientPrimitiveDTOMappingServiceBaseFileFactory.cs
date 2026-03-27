@@ -6,6 +6,7 @@ using CommonFramework;
 
 using Framework.BLL.Domain.ClientMappingService;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;

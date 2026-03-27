@@ -1,5 +1,6 @@
 ﻿using Framework.Configuration.BLL;
 using Framework.Core;
+using Framework.Core.TypeResolving;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.Persistent;

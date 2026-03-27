@@ -1,20 +1,16 @@
 ﻿using System.CodeDom;
 using System.CodeDom.Compiler;
 
-using Framework.Core;
-
 using CommonFramework;
 
-namespace Framework.CodeDom;
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
+using Framework.Core;
 
-public class CSharpCodeDomRenderer : CodeDomProviderRenderer
+namespace Framework.CodeDom.Rendering;
+
+public class CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOptions? options = null) : CodeDomProviderRenderer(provider, options)
 {
-    public CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOptions options = null)
-            : base(provider, options)
-    {
-    }
-
-
     protected override string Render(CodeBinaryOperatorType @operator)
     {
         var temp = this.Render(new CodeBinaryOperatorExpression { Left = 0.ToPrimitiveExpression(), Right = 0.ToPrimitiveExpression(), Operator = @operator })
@@ -27,23 +23,13 @@ public class CSharpCodeDomRenderer : CodeDomProviderRenderer
     }
 
 
-    protected override CodeDomVisitor CreateVisitor()
-    {
-        return new CSharpExpandExtendExpressionsVisitor(this);
-    }
+    protected override CodeDomVisitor CreateVisitor() => new CSharpExpandExtendExpressionsVisitor(this);
 
-
-    private class CSharpExpandExtendExpressionsVisitor : ExpandExtendExpressionsVisitor
+    private class CSharpExpandExtendExpressionsVisitor(CodeDomProviderRenderer renderer) : ExpandExtendExpressionsVisitor(renderer)
     {
         private static readonly CodeTypeReference VoidType = typeof(void).ToTypeReference();
 
         private bool skipOptimizeValueNotEquality;
-
-        public CSharpExpandExtendExpressionsVisitor(CodeDomProviderRenderer renderer)
-                : base(renderer)
-        {
-        }
-
 
         private string DeepOffset => new string(' ', this.Deep * 4);
 

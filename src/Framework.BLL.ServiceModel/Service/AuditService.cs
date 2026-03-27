@@ -9,6 +9,8 @@ using Framework.BLL.Domain.Extensions;
 using Framework.BLL.DTOMapping.Domain;
 using Framework.BLL.Services;
 using Framework.Core;
+
+using Framework.Core.TypeResolving;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;

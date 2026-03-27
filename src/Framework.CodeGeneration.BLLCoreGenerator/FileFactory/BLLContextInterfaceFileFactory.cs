@@ -3,6 +3,7 @@
 using Framework.BLL;
 using Framework.BLL.Services;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 using Framework.CodeGeneration.BLLCoreGenerator.FileFactory.__Base;
 

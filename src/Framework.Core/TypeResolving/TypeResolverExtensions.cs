@@ -1,6 +1,6 @@
 ﻿using CommonFramework;
 
-namespace Framework.Core;
+namespace Framework.Core.TypeResolving;
 
 public static class TypeResolverExtensions
 {

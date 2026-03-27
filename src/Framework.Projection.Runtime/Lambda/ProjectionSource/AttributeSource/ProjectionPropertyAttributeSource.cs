@@ -6,6 +6,7 @@ using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.BLL.Domain.Serialization;
 using Framework.Core;
+
 using Framework.Database.Domain;
 
 namespace Framework.Projection.Lambda.ProjectionSource.AttributeSource;

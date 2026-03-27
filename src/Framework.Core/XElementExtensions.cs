@@ -4,14 +4,10 @@ namespace Framework.Core;
 
 public static class XElementExtensions
 {
-    public static XElement CreateElement(this XElement source, string name)
-    {
-        return source.CreateElement(XName.Get(name));
-    }
-    public static void CreateElement(this XElement source, XElement element)
-    {
-        source.Add(element);
-    }
+    public static XElement CreateElement(this XElement source, string name) => source.CreateElement(XName.Get(name));
+
+    public static void CreateElement(this XElement source, XElement element) => source.Add(element);
+
     public static XElement CreateElement(this XElement source, XName xName)
     {
         var newElement = new XElement(xName);
@@ -19,10 +15,8 @@ public static class XElementExtensions
         return newElement;
     }
 
-    public static XElement WithAttribute(this XElement source, string name, object value)
-    {
-        return source.WithAttribute(XName.Get(name), value);
-    }
+    public static XElement WithAttribute(this XElement source, string name, object value) => source.WithAttribute(XName.Get(name), value);
+
     public static XElement MaybeWithAttribute(this XElement source, string name, object value)
     {
         if (null != value)

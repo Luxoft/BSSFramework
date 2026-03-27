@@ -1,4 +1,4 @@
-namespace Framework.CodeDom
+namespace Framework.CodeDom.Extensions
 {
     /// <summary>
     /// Äîïîëíèòåëüíàÿ ìàðêèðîâêà îáúåêòîâ ãåíåðàöèè

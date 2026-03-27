@@ -1,11 +1,13 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
 using Framework.CodeGeneration.WebApiGenerator.Configuration.Audit;
 
 using Framework.CodeGeneration.WebApiGenerator.MethodGenerators.Audit._Base;
 using Framework.Core;
+
 
 namespace Framework.CodeGeneration.WebApiGenerator.MethodGenerators.Audit;
 

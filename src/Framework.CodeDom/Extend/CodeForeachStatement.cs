@@ -1,6 +1,6 @@
 ﻿using System.CodeDom;
 
-namespace Framework.CodeDom;
+namespace Framework.CodeDom.Extend;
 
 public class CodeForeachStatement : CodeStatement
 {
@@ -10,14 +10,14 @@ public class CodeForeachStatement : CodeStatement
 
     public CodeStatementCollection Statements
     {
-        get { return this.statements; }
-        set { this.statements = value ?? new CodeStatementCollection(); }
+        get => this.statements;
+        set => this.statements = value ?? new CodeStatementCollection();
     }
 
     public CodeParameterDeclarationExpression Iterator
     {
-        get { return this.iterator; }
-        set { this.iterator = value ?? new CodeParameterDeclarationExpression(); }
+        get => this.iterator;
+        set => this.iterator = value ?? new CodeParameterDeclarationExpression();
     }
 
     public CodeExpression Source { get; set; }

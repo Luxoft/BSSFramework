@@ -1,6 +1,8 @@
 ﻿using CommonFramework;
 
-namespace Framework.Core;
+using Framework.Core.TypeResolving.TypeSource;
+
+namespace Framework.Core.TypeResolving;
 
 public class TypeResolverHelper
 {
@@ -21,11 +23,7 @@ public class TypeResolverHelper
                                             ()     => typeSource.GetTypes());
     }
 
-    public static ITypeResolver<T> Create<T>(Func<T, Type> resolveFunc, Func<IEnumerable<Type>> getSourceTypesFunc)
-    {
-        return new FuncTypeResolver<T>(resolveFunc, getSourceTypesFunc);
-    }
-
+    public static ITypeResolver<T> Create<T>(Func<T, Type> resolveFunc, Func<IEnumerable<Type>> getSourceTypesFunc) => new FuncTypeResolver<T>(resolveFunc, getSourceTypesFunc);
 
     public static ITypeResolver<string> CreateDefault(ITypeSource typeSource)
     {
@@ -34,7 +32,7 @@ public class TypeResolverHelper
         return Create(typeSource, TypeSearchMode.Both).WithCache().WithLock();
     }
 
-    public static readonly ITypeResolver<string> Base = new TypeSource(typeof(object).Assembly, typeof(Ignore).Assembly).ToDefaultTypeResolver();
+    public static readonly ITypeResolver<string> Base = new TypeSource.TypeSource(typeof(object).Assembly, typeof(Ignore).Assembly).ToDefaultTypeResolver();
 
 
     private class FuncTypeResolver<T> : ITypeResolver<T>
@@ -54,14 +52,8 @@ public class TypeResolverHelper
         }
 
 
-        public Type Resolve(T identity)
-        {
-            return this._resolveFunc(identity);
-        }
+        public Type Resolve(T identity) => this._resolveFunc(identity);
 
-        public IEnumerable<Type> GetTypes()
-        {
-            return this._getSourceTypesFunc();
-        }
+        public IEnumerable<Type> GetTypes() => this._getSourceTypesFunc();
     }
 }

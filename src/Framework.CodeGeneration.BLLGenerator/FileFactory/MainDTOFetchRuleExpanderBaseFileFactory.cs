@@ -4,9 +4,13 @@ using System.Reflection;
 using Framework.BLL;
 using Framework.BLL.Domain.DTO;
 using Framework.CodeDom;
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.CodeGeneration.BLLGenerator.FileFactory.__Base;
 using Framework.Core;
+using Framework.Core.Helpers;
+
 using Framework.Projection;
 
 using GenericQueryable.Fetching;

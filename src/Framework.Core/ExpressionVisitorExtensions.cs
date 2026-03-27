@@ -44,10 +44,7 @@ public static class ExpressionVisitorExtensions
     {
         private readonly IReadOnlyCollection<ExpressionVisitor> visitors = visitors ?? throw new ArgumentNullException(nameof(visitors));
 
-        public override Expression Visit(Expression node)
-        {
-            return node.UpdateBase(this.visitors);
-        }
+        public override Expression Visit(Expression node) => node.UpdateBase(this.visitors);
     }
 
     private class CyclicExpressionVisitor : ExpressionVisitor

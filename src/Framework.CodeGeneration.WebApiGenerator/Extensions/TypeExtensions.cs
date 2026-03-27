@@ -1,6 +1,7 @@
 ﻿using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Serialization.Extensions;
 using Framework.Core;
+using Framework.Core.Helpers;
 using Framework.Projection;
 
 namespace Framework.CodeGeneration.WebApiGenerator.Extensions;

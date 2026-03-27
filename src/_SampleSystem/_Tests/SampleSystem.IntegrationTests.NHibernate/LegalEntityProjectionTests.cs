@@ -3,6 +3,7 @@
 using CommonFramework;
 
 using Framework.Core;
+
 using Framework.DomainDriven.BLL;
 
 using SampleSystem.Domain;

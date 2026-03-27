@@ -2,6 +2,7 @@
 using System.Reflection;
 
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
@@ -9,6 +10,7 @@ using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main.Base;
 using Framework.Core;
+
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main;
 

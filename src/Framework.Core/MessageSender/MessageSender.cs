@@ -1,4 +1,4 @@
-﻿namespace Framework.Core;
+﻿namespace Framework.Core.MessageSender;
 
 public abstract class MessageSender<TMessage> : IMessageSender<TMessage>
 {
@@ -39,9 +39,6 @@ public abstract class MessageSender<TMessage> : IMessageSender<TMessage>
 
         }
 
-        public override async Task SendAsync(TMessage message, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+        public override async Task SendAsync(TMessage message, CancellationToken cancellationToken) => throw new NotImplementedException();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.Generated.DTO;
 using Framework.Core;
+
 using Framework.Events;
 
 using SampleSystem.IntegrationTests.__Support.TestData;

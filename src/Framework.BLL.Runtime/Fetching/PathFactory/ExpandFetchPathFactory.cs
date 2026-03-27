@@ -5,6 +5,7 @@ using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.Core;
 
+
 namespace Framework.BLL.Fetching.PathFactory;
 
 public class ExpandFetchPathFactory(Type persistentDomainObjectBase, int maxRecurseLevel = 1) : DTOFetchPathFactory(persistentDomainObjectBase, maxRecurseLevel)

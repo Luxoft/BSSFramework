@@ -7,6 +7,8 @@ using Framework.Application.Domain.Attributes;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Extensions;
 using Framework.CodeDom;
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Configuration;

@@ -20,11 +20,10 @@ internal class OverrideIdEqualsMethodVisitor<TIdent> : ExpressionVisitor
     /// </summary>
     /// <param name="property">Property to get ExpressionVisitor for (not used, included for compatibility)</param>
     /// <returns>Expression Visitor</returns>
-    public static OverrideIdEqualsMethodVisitor<TIdent> GetOrCreate(PropertyInfo property)
-    {
+    public static OverrideIdEqualsMethodVisitor<TIdent> GetOrCreate(PropertyInfo property) =>
+
         // HACK gtsaplin: property included for compatibility
-        return Instance;
-    }
+        Instance;
 
     protected override Expression VisitMethodCall(MethodCallExpression node)
     {

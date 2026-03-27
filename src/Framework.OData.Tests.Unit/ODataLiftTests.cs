@@ -1,4 +1,5 @@
 ﻿using Framework.Core;
+
 using Framework.QueryLanguage;
 using NUnit.Framework;
 

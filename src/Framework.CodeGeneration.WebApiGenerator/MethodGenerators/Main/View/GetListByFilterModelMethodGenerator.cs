@@ -7,6 +7,7 @@ using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.DTO.Extensions;
 using Framework.BLL.Domain.Extensions;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.WebApiGenerator.Configuration._Base;
 using Framework.CodeGeneration.WebApiGenerator.Extensions;

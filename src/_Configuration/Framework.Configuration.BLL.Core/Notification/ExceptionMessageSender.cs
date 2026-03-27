@@ -1,6 +1,7 @@
 ﻿using System.Net.Mail;
 
 using Framework.Core;
+using Framework.Core.MessageSender;
 using Framework.DomainDriven.BLL;
 using Framework.Validation;
 
@@ -12,7 +13,7 @@ namespace Framework.Configuration.BLL.Notification;
 /// Базовый класс для рассылки уведомлений по исключениям.
 /// </summary>
 /// <seealso cref="DomainDriven.BLL.BLLContextContainer{IConfigurationBLLContext}" />
-/// <seealso cref="Framework.Core.IMessageSender{Exception}" />
+/// <seealso cref="IMessageSender{Exception}" />
 public class ExceptionMessageSender : BLLContextContainer<IConfigurationBLLContext>, IMessageSender<Exception>
 {
     private readonly IMessageSender<Framework.Notification.New.Message> messageSender;

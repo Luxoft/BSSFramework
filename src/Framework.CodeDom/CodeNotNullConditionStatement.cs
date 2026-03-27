@@ -2,11 +2,4 @@
 
 namespace Framework.CodeDom;
 
-public class CodeNotNullConditionStatement : CodeConditionStatement
-{
-    public CodeNotNullConditionStatement (CodeExpression expression)
-            : base(new CodeIsNotNullExpression(expression))
-    {
-
-    }
-}
+public class CodeNotNullConditionStatement(CodeExpression expression) : CodeConditionStatement(new CodeIsNotNullExpression(expression));

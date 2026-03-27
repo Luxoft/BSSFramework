@@ -1,7 +1,7 @@
 ﻿using CommonFramework;
 using CommonFramework.DictionaryCache;
 
-namespace Framework.Core;
+namespace Framework.Core.AnonymousTypeBuilder;
 
 public static class AnonymousTypeBuilderExtensions
 {
@@ -83,9 +83,6 @@ public static class AnonymousTypeBuilderExtensions
             this._func = func;
         }
 
-        public Type GetAnonymousType(TMap typeMap)
-        {
-            return this._func(typeMap);
-        }
+        public Type GetAnonymousType(TMap typeMap) => this._func(typeMap);
     }
 }

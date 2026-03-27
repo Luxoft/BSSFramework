@@ -1,4 +1,6 @@
 ﻿using Framework.Core;
+using Framework.Core.ReflectionImpl;
+using Framework.Core.TypeResolving.TypeSource;
 
 namespace Framework.Projection;
 

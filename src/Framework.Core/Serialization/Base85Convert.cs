@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Framework.Core;
+namespace Framework.Core.Serialization;
 
 /// <summary>
 /// Converts between binary data and an Ascii85-encoded string.

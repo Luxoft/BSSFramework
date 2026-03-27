@@ -5,6 +5,7 @@ using CommonFramework;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.DTO.Extensions;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.WebApiGenerator.Configuration._Base;
 using Framework.CodeGeneration.WebApiGenerator.Configuration.Main;
 using Framework.CodeGeneration.WebApiGenerator.Extensions;

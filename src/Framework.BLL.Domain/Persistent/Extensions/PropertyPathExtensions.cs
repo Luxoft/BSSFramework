@@ -8,6 +8,7 @@ using CommonFramework.Maybe;
 using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.Core;
 
+
 namespace Framework.BLL.Domain.Persistent.Extensions;
 
 public static class PropertyPathExtensions

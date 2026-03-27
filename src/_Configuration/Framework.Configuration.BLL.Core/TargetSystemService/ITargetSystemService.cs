@@ -1,6 +1,7 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
 using Framework.Configuration.Domain;
+using Framework.Core.TypeResolving;
 
 namespace Framework.Configuration.BLL;
 

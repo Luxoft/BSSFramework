@@ -2,10 +2,4 @@
 
 namespace Framework.CodeDom;
 
-public class CodeIsNotNullExpression : CodeNegateExpression
-{
-    public CodeIsNotNullExpression(CodeExpression value) : base(new CodeIsNullExpression(value))
-    {
-
-    }
-}
+public class CodeIsNotNullExpression(CodeExpression value) : CodeNegateExpression(new CodeIsNullExpression(value));

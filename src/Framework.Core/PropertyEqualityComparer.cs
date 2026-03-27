@@ -10,8 +10,5 @@ public class PropertyEqualityComparer<T, TProperty>(Func<T, TProperty> getProper
         return Equals(xValue, yValue);
     }
 
-    public override int GetHashCode(T obj)
-    {
-        return 0;
-    }
+    public override int GetHashCode(T obj) => 0;
 }

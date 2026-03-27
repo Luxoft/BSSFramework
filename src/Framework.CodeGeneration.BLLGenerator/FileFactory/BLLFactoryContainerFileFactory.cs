@@ -5,6 +5,7 @@ using CommonFramework.DependencyInjection;
 
 using Framework.BLL;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.CodeGeneration.DomainMetadata;
 using Framework.Core;

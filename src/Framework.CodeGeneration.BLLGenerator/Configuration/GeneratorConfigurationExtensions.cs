@@ -2,6 +2,7 @@
 using System.Reflection;
 using Framework.BLL;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 

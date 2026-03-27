@@ -1,4 +1,5 @@
-﻿namespace Framework.Core;
+﻿// ReSharper disable once CheckNamespace
+namespace Framework.Core;
 
 /// <summary>
 /// Методы расширения для периода
@@ -14,15 +15,9 @@ public static class PeriodExtensions
     /// <param name="period">Период, в котором проверяется пересечение</param>
     /// <param name="target">Период, с которым проверяется пересечение</param>
     /// <returns>true, если дата начала или дата окончания переданного периода содержатся в указанном периоде, в противном случае — false</returns>
-    public static bool IsIntersected(this Period period, Period target)
-    {
-        return !period.Intersect(target).IsEmpty;
-    }
+    public static bool IsIntersected(this Period period, Period target) => !period.Intersect(target).IsEmpty;
 
-    public static bool IsIntersected(this Period? period, Period? target)
-    {
-        return period.HasValue && target.HasValue && period.Value.IsIntersected(target.Value);
-    }
+    public static bool IsIntersected(this Period? period, Period? target) => period.HasValue && target.HasValue && period.Value.IsIntersected(target.Value);
 
     /// <summary>
     /// Возвращает новый период являющийся суммой переданных периодов <see cref="periods"/>

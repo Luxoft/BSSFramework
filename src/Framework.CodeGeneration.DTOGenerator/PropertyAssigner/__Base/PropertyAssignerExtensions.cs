@@ -2,6 +2,7 @@
 using System.Reflection;
 
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 
 namespace Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;

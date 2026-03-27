@@ -22,21 +22,11 @@ public class OverrideMethodInfoVisitor : ExpressionVisitor
     }
 
 
-    protected override Expression VisitUnary(UnaryExpression node)
-    {
-        return node.Method == this.methodInfo ? this.GetExpressionByArgs([node.Operand]) : base.VisitUnary(node);
-    }
+    protected override Expression VisitUnary(UnaryExpression node) => node.Method == this.methodInfo ? this.GetExpressionByArgs([node.Operand]) : base.VisitUnary(node);
 
-    protected override Expression VisitBinary(BinaryExpression node)
-    {
-        return node.Method == this.methodInfo ? this.GetExpressionByArgs([node.Left, node.Right]) : base.VisitBinary(node);
-    }
+    protected override Expression VisitBinary(BinaryExpression node) => node.Method == this.methodInfo ? this.GetExpressionByArgs([node.Left, node.Right]) : base.VisitBinary(node);
 
-    protected override Expression VisitMethodCall(MethodCallExpression node)
-    {
-        return node.Method == this.methodInfo ? this.GetExpressionByArgs(node.Arguments) : base.VisitMethodCall(node);
-    }
-
+    protected override Expression VisitMethodCall(MethodCallExpression node) => node.Method == this.methodInfo ? this.GetExpressionByArgs(node.Arguments) : base.VisitMethodCall(node);
 
     private Expression GetExpressionByArgs(IEnumerable<Expression> arguments)
     {

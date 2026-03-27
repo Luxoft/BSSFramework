@@ -38,10 +38,8 @@ public static class CustomAttributeProviderExtensions
     }
 
     public static IEnumerable<T> GetCustomAttributes<T>(this ICustomAttributeProvider source)
-        where T : Attribute
-    {
-        return source.GetCustomAttributes<T>(_ => true);
-    }
+        where T : Attribute =>
+        source.GetCustomAttributes<T>(_ => true);
 
     public static bool HasAttribute<T>(this ICustomAttributeProvider source, Func<T, bool> predicate)
         where T : Attribute

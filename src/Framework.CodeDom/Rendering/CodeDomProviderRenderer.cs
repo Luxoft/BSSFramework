@@ -4,54 +4,38 @@ using System.Text;
 
 using CommonFramework;
 
-namespace Framework.CodeDom;
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
 
-public abstract class CodeDomProviderRenderer : CodeDomRenderer
+namespace Framework.CodeDom.Rendering;
+
+public abstract class CodeDomProviderRenderer(CodeDomProvider provider, CodeGeneratorOptions? options = null) : CodeDomRenderer
 {
-    private readonly CodeDomProvider _provider;
+    private readonly CodeDomProvider provider = provider ?? throw new ArgumentNullException(nameof(provider));
 
-    private readonly CodeGeneratorOptions _options;
+    private readonly CodeGeneratorOptions options = options ?? new CodeGeneratorOptions { BlankLinesBetweenMembers = true, BracingStyle = "C" };
 
-
-    protected CodeDomProviderRenderer(CodeDomProvider provider, CodeGeneratorOptions options = null)
-    {
-        this._provider = provider ?? throw new ArgumentNullException(nameof(provider));
-        this._options = options ?? new CodeGeneratorOptions { BlankLinesBetweenMembers = true, BracingStyle = "C" };
-    }
+    public override string FileExtension => this.provider.FileExtension;
 
 
-    public override string FileExtension => this._provider.FileExtension;
+    public override string Render(CodeExpression codeExpression) => this.Render(codeExpression, this.CreateVisitor());
 
+    public override string Render(CodeNamespace codeNamespace) =>
+        this.Render(codeNamespace, this.CreateVisitor())
+            .Pipe(this.WithoutRuntimeVersion);
 
-    public override string Render(CodeExpression codeExpression)
-    {
-        return this.Render(codeExpression, this.CreateVisitor());
-    }
+    public override string Render(CodeCompileUnit compileUnit) =>
+        this.Render(compileUnit, this.CreateVisitor())
+            .Pipe(this.WithoutRuntimeVersion);
 
-    public override string Render(CodeNamespace codeNamespace)
-    {
-        return this.Render(codeNamespace, this.CreateVisitor())
-                   .Pipe(this.WithoutRuntimeVersion);
-    }
-
-    public override string Render(CodeCompileUnit compileUnit)
-    {
-        return this.Render(compileUnit, this.CreateVisitor())
-                   .Pipe(this.WithoutRuntimeVersion);
-    }
-
-    public override string Render(CodeStatement statement)
-    {
-        return this.Render(statement, this.CreateVisitor());
-    }
-
+    public override string Render(CodeStatement statement) => this.Render(statement, this.CreateVisitor());
 
     protected string Render(CodeExpression codeExpression, CodeDomVisitor normalizeVisitor)
     {
         if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
         if (normalizeVisitor == null) throw new ArgumentNullException(nameof(normalizeVisitor));
 
-        return this.Render(writer => this._provider.GenerateCodeFromExpression(normalizeVisitor.VisitExpression(codeExpression), writer, this._options));
+        return this.Render(writer => this.provider.GenerateCodeFromExpression(normalizeVisitor.VisitExpression(codeExpression), writer, this.options));
     }
 
     protected string Render(CodeNamespace codeNamespace, CodeDomVisitor normalizeVisitor)
@@ -59,7 +43,7 @@ public abstract class CodeDomProviderRenderer : CodeDomRenderer
         if (codeNamespace == null) throw new ArgumentNullException(nameof(codeNamespace));
         if (normalizeVisitor == null) throw new ArgumentNullException(nameof(normalizeVisitor));
 
-        return this.Render(writer => this._provider.GenerateCodeFromNamespace(normalizeVisitor.VisitNamespace(codeNamespace), writer, this._options));
+        return this.Render(writer => this.provider.GenerateCodeFromNamespace(normalizeVisitor.VisitNamespace(codeNamespace), writer, this.options));
     }
 
     protected string Render(CodeCompileUnit compileUnit, CodeDomVisitor normalizeVisitor)
@@ -67,7 +51,7 @@ public abstract class CodeDomProviderRenderer : CodeDomRenderer
         if (compileUnit == null) throw new ArgumentNullException(nameof(compileUnit));
         if (normalizeVisitor == null) throw new ArgumentNullException(nameof(normalizeVisitor));
 
-        return this.Render(writer => this._provider.GenerateCodeFromCompileUnit(normalizeVisitor.VisitCompileUnit(compileUnit), writer, this._options));
+        return this.Render(writer => this.provider.GenerateCodeFromCompileUnit(normalizeVisitor.VisitCompileUnit(compileUnit), writer, this.options));
     }
 
     protected string Render(CodeStatement statement, CodeDomVisitor normalizeVisitor)
@@ -75,7 +59,7 @@ public abstract class CodeDomProviderRenderer : CodeDomRenderer
         if (statement == null) throw new ArgumentNullException(nameof(statement));
         if (normalizeVisitor == null) throw new ArgumentNullException(nameof(normalizeVisitor));
 
-        return this.Render(writer => this._provider.GenerateCodeFromStatement(normalizeVisitor.VisitStatement(statement), writer, this._options));
+        return this.Render(writer => this.provider.GenerateCodeFromStatement(normalizeVisitor.VisitStatement(statement), writer, this.options));
     }
 
     protected abstract CodeDomVisitor CreateVisitor();
@@ -118,30 +102,23 @@ public abstract class CodeDomProviderRenderer : CodeDomRenderer
     }
 
 
-    protected abstract class ExpandExtendExpressionsVisitor : CodeDomVisitor
+    protected abstract class ExpandExtendExpressionsVisitor(CodeDomProviderRenderer renderer) : CodeDomVisitor
     {
-        protected readonly CodeDomProviderRenderer Renderer;
-
-
-        protected ExpandExtendExpressionsVisitor(CodeDomProviderRenderer renderer)
-        {
-            this.Renderer = renderer ?? throw new ArgumentNullException(nameof(renderer));
-        }
-
+        protected readonly CodeDomProviderRenderer Renderer = renderer ?? throw new ArgumentNullException(nameof(renderer));
 
         public override CodeStatement VisitStatement(CodeStatement codeStatement)
         {
-            if (codeStatement is CodeMethodYieldBreakStatement)
+            if (codeStatement is CodeMethodYieldBreakStatement statement)
             {
-                return this.NormalizeStatement(codeStatement as CodeMethodYieldBreakStatement);
+                return this.NormalizeStatement(statement);
             }
-            else if (codeStatement is CodeMethodYieldReturnStatement)
+            else if (codeStatement is CodeMethodYieldReturnStatement returnStatement)
             {
-                return this.NormalizeStatement(codeStatement as CodeMethodYieldReturnStatement);
+                return this.NormalizeStatement(returnStatement);
             }
-            else if (codeStatement is CodeForeachStatement)
+            else if (codeStatement is CodeForeachStatement foreachStatement)
             {
-                return this.NormalizeStatement(codeStatement as CodeForeachStatement);
+                return this.NormalizeStatement(foreachStatement);
             }
             else
             {
@@ -151,21 +128,21 @@ public abstract class CodeDomProviderRenderer : CodeDomRenderer
 
         public override CodeExpression VisitExpression(CodeExpression codeExpression)
         {
-            if (codeExpression is CodeMaybePropertyReferenceExpression)
+            if (codeExpression is CodeMaybePropertyReferenceExpression expression)
             {
-                return this.NormalizeExpression(codeExpression as CodeMaybePropertyReferenceExpression);
+                return this.NormalizeExpression(expression);
             }
-            else if (codeExpression is CodeLambdaExpression)
+            else if (codeExpression is CodeLambdaExpression lambdaExpression)
             {
-                return this.NormalizeExpression(codeExpression as CodeLambdaExpression);
+                return this.NormalizeExpression(lambdaExpression);
             }
-            else if (codeExpression is CodeBinaryOperatorCollectionExpression)
+            else if (codeExpression is CodeBinaryOperatorCollectionExpression collectionExpression)
             {
-                return this.NormalizeExpression(codeExpression as CodeBinaryOperatorCollectionExpression);
+                return this.NormalizeExpression(collectionExpression);
             }
-            else if (codeExpression is CodeNameofExpression)
+            else if (codeExpression is CodeNameofExpression nameofExpression)
             {
-                return this.NormalizeExpression(codeExpression as CodeNameofExpression);
+                return this.NormalizeExpression(nameofExpression);
             }
             else
             {
@@ -213,10 +190,7 @@ public abstract class CodeDomProviderRenderer : CodeDomRenderer
             }
         }
 
-        protected virtual CodeTypeReference NormalizeNullableCodeTypeReference(CodeTypeReference codeTypeReference)
-        {
-            return codeTypeReference;
-        }
+        protected virtual CodeTypeReference NormalizeNullableCodeTypeReference(CodeTypeReference codeTypeReference) => codeTypeReference;
 
         protected abstract CodeTypeDeclaration NormalizeStaticClass(CodeTypeDeclaration decl);
 

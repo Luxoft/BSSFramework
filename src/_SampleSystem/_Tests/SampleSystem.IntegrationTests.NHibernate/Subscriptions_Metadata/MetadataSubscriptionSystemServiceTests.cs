@@ -3,6 +3,7 @@
 using Automation.ServiceEnvironment;
 
 using Framework.Core;
+using Framework.Core.TryResult.Extensions;
 using Framework.DomainDriven.BLL;
 using Framework.Notification.DTO;
 

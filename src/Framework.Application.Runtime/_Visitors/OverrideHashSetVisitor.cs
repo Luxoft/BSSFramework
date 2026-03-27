@@ -13,10 +13,7 @@ public class OverrideHashSetVisitor<TIdent> : ExpressionVisitor
 
     }
 
-    public override Expression Visit(Expression node)
-    {
-        return new InternalStateVisitor().Visit(node);
-    }
+    public override Expression Visit(Expression node) => new InternalStateVisitor().Visit(node);
 
     public class InternalStateVisitor : ExpressionVisitor
     {

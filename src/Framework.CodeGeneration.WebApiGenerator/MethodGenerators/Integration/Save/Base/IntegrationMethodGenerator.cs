@@ -2,6 +2,7 @@
 using Framework.BLL;
 using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.WebApiGenerator.Configuration._Base;
 using Framework.CodeGeneration.WebApiGenerator.Configuration.Integration;
 using Framework.CodeGeneration.WebApiGenerator.Extensions;

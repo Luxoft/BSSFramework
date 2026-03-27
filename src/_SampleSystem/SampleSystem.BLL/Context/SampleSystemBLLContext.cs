@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.Core;
+using Framework.Core.TypeResolving;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;

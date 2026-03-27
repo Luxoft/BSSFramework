@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven;
+﻿
+using Framework.DomainDriven;
 using Framework.OData;
 using Framework.Persistent;
 using Framework.Transfering;
@@ -45,7 +46,7 @@ public partial class BusinessUnitController
     }
 
     [HttpPost]
-    public List<HierarchicalNode<BusinessUnitFullDTO, Guid>> TestPeriod(Framework.Core.Period period)
+    public List<HierarchicalNode<BusinessUnitFullDTO, Guid>> TestPeriod(Period period)
     {
         return null;
     }

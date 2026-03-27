@@ -2,6 +2,7 @@
 
 using Framework.BLL.Domain.DTO;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.WebApiGenerator.Configuration._Base;
 
 namespace Framework.CodeGeneration.WebApiGenerator.MethodGenerators.Main.View._Base;

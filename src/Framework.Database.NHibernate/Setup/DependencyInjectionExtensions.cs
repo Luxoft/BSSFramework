@@ -3,6 +3,7 @@
 using CommonFramework.DependencyInjection;
 
 using Framework.Core;
+using Framework.Core.LazyObject;
 
 using GenericQueryable.NHibernate;
 

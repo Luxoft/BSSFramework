@@ -2,6 +2,7 @@
 
 using Framework.BLL.Domain.DTO;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.WebApiGenerator.Configuration._Base;
 using Framework.CodeGeneration.WebApiGenerator.Configuration.FileStore;

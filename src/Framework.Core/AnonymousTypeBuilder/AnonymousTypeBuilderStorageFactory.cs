@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 
-namespace Framework.Core;
+namespace Framework.Core.AnonymousTypeBuilder;
 
 /// <summary>
 /// Фабрика создания <see cref="AnonymousTypeBuilderStorage"/>. Кэширует создаваемые значения
@@ -9,10 +9,8 @@ public class AnonymousTypeBuilderStorageFactory
 {
     private static readonly ConcurrentDictionary<string, IAnonymousTypeBuilderStorage> ConcurrentDictionary = new ConcurrentDictionary<string, IAnonymousTypeBuilderStorage>();
 
-    public IAnonymousTypeBuilderStorage Create(string assemblyBuilderName)
-    {
-        return ConcurrentDictionary.GetOrAdd(
-                                                                                assemblyBuilderName,
-                                                                                builderName => new AnonymousTypeBuilderStorage(builderName));
-    }
+    public IAnonymousTypeBuilderStorage Create(string assemblyBuilderName) =>
+        ConcurrentDictionary.GetOrAdd(
+            assemblyBuilderName,
+            builderName => new AnonymousTypeBuilderStorage(builderName));
 }

@@ -1,6 +1,8 @@
 ﻿using CommonFramework.RelativePath.DependencyInjection;
 
 using Framework.Core;
+using Framework.Core.TypeResolving;
+using Framework.Core.TypeResolving.TypeSource;
 using Framework.DependencyInjection;
 using Framework.WebApi.Utils.SL;
 

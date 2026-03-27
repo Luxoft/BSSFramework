@@ -2,6 +2,8 @@
 
 using CommonFramework;
 
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
 using Framework.Core;
 
 namespace Framework.CodeDom;
@@ -201,9 +203,9 @@ public abstract class CodeDomVisitor
     {
         if (codeMemberMethod == null) throw new ArgumentNullException(nameof(codeMemberMethod));
 
-        if (codeMemberMethod is CodeConstructor)
+        if (codeMemberMethod is CodeConstructor method)
         {
-            return this.VisitConstructor(codeMemberMethod as CodeConstructor);
+            return this.VisitConstructor(method);
         }
         else
         {
@@ -282,37 +284,37 @@ public abstract class CodeDomVisitor
     {
         if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
 
-        if (codeExpression is CodeCastExpression)
+        if (codeExpression is CodeCastExpression expression)
         {
-            return this.VisitCastExpression(codeExpression as CodeCastExpression);
+            return this.VisitCastExpression(expression);
         }
-        if (codeExpression is CodeObjectCreateExpression)
+        if (codeExpression is CodeObjectCreateExpression createExpression)
         {
-            return this.VisitObjectCreateExpression(codeExpression as CodeObjectCreateExpression);
+            return this.VisitObjectCreateExpression(createExpression);
         }
-        else if (codeExpression is CodeMethodInvokeExpression)
+        else if (codeExpression is CodeMethodInvokeExpression invokeExpression)
         {
-            return this.VisitMethodInvokeExpression(codeExpression as CodeMethodInvokeExpression);
+            return this.VisitMethodInvokeExpression(invokeExpression);
         }
-        else if (codeExpression is CodeParameterDeclarationExpression)
+        else if (codeExpression is CodeParameterDeclarationExpression declarationExpression)
         {
-            return this.VisitParameterDeclarationExpression(codeExpression as CodeParameterDeclarationExpression);
+            return this.VisitParameterDeclarationExpression(declarationExpression);
         }
-        else if (codeExpression is CodeBinaryOperatorExpression)
+        else if (codeExpression is CodeBinaryOperatorExpression operatorExpression)
         {
-            return this.VisitBinaryOperatorExpression(codeExpression as CodeBinaryOperatorExpression);
+            return this.VisitBinaryOperatorExpression(operatorExpression);
         }
-        else if (codeExpression is CodeThisReferenceExpression)
+        else if (codeExpression is CodeThisReferenceExpression referenceExpression)
         {
-            return this.VisitThisReferenceExpression(codeExpression as CodeThisReferenceExpression);
+            return this.VisitThisReferenceExpression(referenceExpression);
         }
-        else if (codeExpression is CodeTypeReferenceExpression)
+        else if (codeExpression is CodeTypeReferenceExpression typeReferenceExpression)
         {
-            return this.VisitTypeReferenceExpression(codeExpression as CodeTypeReferenceExpression);
+            return this.VisitTypeReferenceExpression(typeReferenceExpression);
         }
-        else if(codeExpression is CodeLambdaExpression)
+        else if(codeExpression is CodeLambdaExpression lambdaExpression)
         {
-            return this.VisitLambdaExpression(codeExpression as CodeLambdaExpression);
+            return this.VisitLambdaExpression(lambdaExpression);
         }
         else
         {
@@ -320,15 +322,13 @@ public abstract class CodeDomVisitor
         }
     }
 
-    public virtual CodeExpression VisitLambdaExpression(CodeLambdaExpression codeExpression)
-    {
-        return new CodeLambdaExpression
-               {
-                       Parameters =
-                               this.VisitParameterDeclarationExpressionCollection(codeExpression.Parameters),
-                       Statements = this.VisitStatementCollection(codeExpression.Statements),
-               }.WithCopyUserDataFrom(codeExpression);
-    }
+    public virtual CodeExpression VisitLambdaExpression(CodeLambdaExpression codeExpression) =>
+        new CodeLambdaExpression
+        {
+            Parameters =
+                this.VisitParameterDeclarationExpressionCollection(codeExpression.Parameters),
+            Statements = this.VisitStatementCollection(codeExpression.Statements),
+        }.WithCopyUserDataFrom(codeExpression);
 
     public virtual CodeExpression VisitThisReferenceExpression(CodeThisReferenceExpression codeExpression)
     {
@@ -399,25 +399,25 @@ public abstract class CodeDomVisitor
     {
         if (codeStatement == null) throw new ArgumentNullException(nameof(codeStatement));
 
-        if (codeStatement is CodeExpressionStatement)
+        if (codeStatement is CodeExpressionStatement statement)
         {
-            return this.VisitExpressionStatement(codeStatement as CodeExpressionStatement);
+            return this.VisitExpressionStatement(statement);
         }
-        else if (codeStatement is CodeVariableDeclarationStatement)
+        else if (codeStatement is CodeVariableDeclarationStatement declarationStatement)
         {
-            return this.VisitVariableDeclarationStatement(codeStatement as CodeVariableDeclarationStatement);
+            return this.VisitVariableDeclarationStatement(declarationStatement);
         }
-        else if (codeStatement is CodeConditionStatement)
+        else if (codeStatement is CodeConditionStatement conditionStatement)
         {
-            return this.VisitConditionStatement(codeStatement as CodeConditionStatement);
+            return this.VisitConditionStatement(conditionStatement);
         }
-        else if (codeStatement is CodeAssignStatement)
+        else if (codeStatement is CodeAssignStatement assignStatement)
         {
-            return this.VisitAssignStatement(codeStatement as CodeAssignStatement);
+            return this.VisitAssignStatement(assignStatement);
         }
-        else if (codeStatement is CodeMethodReturnStatement)
+        else if (codeStatement is CodeMethodReturnStatement returnStatement)
         {
-            return this.VisitMethodReturnStatement(codeStatement as CodeMethodReturnStatement);
+            return this.VisitMethodReturnStatement(returnStatement);
         }
         else
         {

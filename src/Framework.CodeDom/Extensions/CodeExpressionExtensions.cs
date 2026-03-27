@@ -3,16 +3,14 @@ using System.Reflection;
 
 using CommonFramework;
 
+using Framework.CodeDom.Extend;
 using Framework.Core;
 
-namespace Framework.CodeDom;
+namespace Framework.CodeDom.Extensions;
 
 public static class CodeExpressionExtensions
 {
-    public static bool IsPrimitiveValue<T>(this CodeExpression expression, T value)
-    {
-        return (expression as CodePrimitiveExpression).Maybe(expr => (expr.Value is T) && EqualityComparer<T>.Default.Equals((T)expr.Value, value));
-    }
+    public static bool IsPrimitiveValue<T>(this CodeExpression expression, T value) => (expression as CodePrimitiveExpression).Maybe(expr => (expr.Value is T argValue) && EqualityComparer<T>.Default.Equals(argValue, value));
 
     public static CodeExpression ToAsCastExpression(this CodeExpression expression, CodeTypeReference targetType)
     {

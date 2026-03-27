@@ -2,6 +2,8 @@
 
 using Framework.Configuration.Domain;
 using Framework.Core;
+using Framework.Core.TypeResolving;
+using Framework.Core.TypeResolving.TypeSource;
 using Framework.Events;
 
 namespace Framework.Configuration.BLL;

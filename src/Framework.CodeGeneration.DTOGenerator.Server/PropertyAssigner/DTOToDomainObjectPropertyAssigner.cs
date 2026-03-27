@@ -8,6 +8,8 @@ using Framework.BLL.Domain.MasterDetails;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.Serialization.Extensions;
 using Framework.CodeDom;
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Extensions;

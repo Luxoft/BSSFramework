@@ -5,6 +5,7 @@ using FluentAssertions;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 using Framework.Core;
+using Framework.Core.MessageSender;
 using Framework.DomainDriven.BLL;
 using Framework.Notification;
 using Framework.UnitTesting;

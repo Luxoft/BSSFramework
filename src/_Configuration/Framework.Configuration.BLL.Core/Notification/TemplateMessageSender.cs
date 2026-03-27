@@ -8,6 +8,8 @@ using Framework.Persistent;
 
 using CommonFramework;
 
+using Framework.Core.MessageSender;
+
 namespace Framework.Configuration.BLL.Notification;
 
 public class TemplateMessageSender(

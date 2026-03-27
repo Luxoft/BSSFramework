@@ -4,6 +4,7 @@ using Framework.Authorization.Domain;
 using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.Core;
+using Framework.Core.TryResult.Base;
 using Framework.DomainDriven.DAL.Revisions;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers;

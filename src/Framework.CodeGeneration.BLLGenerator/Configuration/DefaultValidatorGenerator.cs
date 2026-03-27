@@ -18,6 +18,9 @@ using Framework.Validation;
 using ValidatorPairExpr = System.Collections.Generic.KeyValuePair<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
 using ValidatorExpr = System.Collections.Generic.IReadOnlyDictionary<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
 using Framework.BLL.Validation;
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
+
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 

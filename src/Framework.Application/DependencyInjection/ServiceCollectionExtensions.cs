@@ -1,4 +1,6 @@
-﻿using Framework.Application._Visitors.ExpressionVisitorContainer;
+﻿using CommonFramework.DependencyInjection;
+
+using Framework.Application._Visitors.ExpressionVisitorContainer;
 using Framework.Application._Visitors.Specific;
 using Framework.Application.Events;
 using Framework.Application.FinancialYear;
@@ -9,11 +11,6 @@ using Framework.Application.Repository.Generic;
 using Framework.Application.ServiceEvaluator;
 using Framework.Application.Session;
 using Framework.Application.Session.DBSession;
-using Framework.DomainDriven._Visitors;
-using Framework.DomainDriven.ApplicationCore.DALListeners;
-using Framework.DomainDriven.Jobs;
-using Framework.DomainDriven.Repository;
-using Framework.Exceptions;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -26,37 +23,20 @@ public static class ServiceCollectionExtensions
 {
     extension(IServiceCollection services)
     {
-        public IServiceCollection RegisterGenericServices()
+        public IServiceCollection AddNamedLocks(Action<IGenericNamedLockBuilder> setupAction) =>
+            services.Initialize<GenericNamedLockBuilder>(setupAction);
+
+        public IServiceCollection AddGenericApplicationServices()
         {
             services.TryAddSingleton(TimeProvider.System);
-
-            services.AddSingleton<IExceptionExpander, ExceptionExpander>();
 
             services.RegisterFinancialYearServices();
             services.RegisterRepository();
             services.RegisterEvaluators();
             services.RegistryGenericDatabaseVisitors();
+            services.RegisterJobs();
 
-            services.AddSingleton<IInitializeManager, InitializeManager>();
             services.AddScoped<IEventOperationSender, EventOperationSender>();
-
-            services.AddSingleton<IJobServiceEvaluatorFactory, JobServiceEvaluatorFactory>();
-            services.AddSingleton(typeof(IJobServiceEvaluator<>), typeof(JobServiceEvaluator<>));
-            services.AddScoped<IJobMiddlewareFactory, JobMiddlewareFactory>();
-
-            return services;
-        }
-
-        public IServiceCollection RegisterListeners(Action<IDALListenerSetupObject> setup)
-        {
-            var setupObject = new DALListenerSetupObject();
-
-            setup(setupObject);
-
-            foreach (var setupObjectInitAction in setupObject.InitActions)
-            {
-                setupObjectInitAction(services);
-            }
 
             return services;
         }
@@ -92,6 +72,15 @@ public static class ServiceCollectionExtensions
             return services;
         }
 
+        private IServiceCollection RegisterJobs()
+        {
+            services.AddSingleton<IJobServiceEvaluatorFactory, JobServiceEvaluatorFactory>();
+            services.AddSingleton(typeof(IJobServiceEvaluator<>), typeof(JobServiceEvaluator<>));
+            services.AddScoped<IJobMiddlewareFactory, JobMiddlewareFactory>();
+
+            return services;
+        }
+
         private IServiceCollection RegistryGenericDatabaseVisitors()
         {
             services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
@@ -105,16 +94,5 @@ public static class ServiceCollectionExtensions
 
             return services;
         }
-    }
-
-    public static IServiceCollection RegisterNamedLocks(this IServiceCollection services, Action<IGenericNamedLockSetup> setupAction)
-    {
-        var setup = new GenericNamedLockSetup();
-
-        setupAction(setup);
-
-        setup.Initialize(services);
-
-        return services;
     }
 }

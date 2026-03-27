@@ -1,5 +1,6 @@
 ﻿using Framework.Configuration.BLL;
 using Framework.Core;
+using Framework.Core.TryResult.Extensions;
 using Framework.Notification;
 
 namespace Framework.NotificationCore.Jobs;

@@ -5,6 +5,7 @@ using System.Text.Json;
 
 using Framework.Core;
 
+
 namespace Framework.DomainDriven.WebApiNetCore.JsonConverter;
 
 public class PeriodJsonConverter : JsonConverter<Period>

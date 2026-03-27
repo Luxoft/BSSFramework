@@ -1,4 +1,4 @@
-﻿namespace Framework.Core;
+﻿namespace Framework.Core.TypeResolving;
 
 [Flags]
 public enum TypeSearchMode
@@ -12,10 +12,7 @@ public enum TypeSearchMode
 
 public static class TypeSearchModeExtensions
 {
-    public static Func<Type, string, bool> ToFilter(this TypeSearchMode searchMode)
-    {
-        return (type, ident) => searchMode.ToFilters().Any(f => f(type, ident));
-    }
+    public static Func<Type, string, bool> ToFilter(this TypeSearchMode searchMode) => (type, ident) => searchMode.ToFilters().Any(f => f(type, ident));
 
     private static IEnumerable<Func<Type, string, bool>> ToFilters(this TypeSearchMode searchMode)
     {

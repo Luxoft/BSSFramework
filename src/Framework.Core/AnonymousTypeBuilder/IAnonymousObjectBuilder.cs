@@ -1,4 +1,4 @@
-﻿namespace Framework.Core;
+﻿namespace Framework.Core.AnonymousTypeBuilder;
 
 public interface IAnonymousObjectBuilder<in TSource>
 {

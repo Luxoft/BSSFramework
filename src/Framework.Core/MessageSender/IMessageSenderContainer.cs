@@ -1,4 +1,4 @@
-﻿namespace Framework.Core;
+﻿namespace Framework.Core.MessageSender;
 
 public interface IMessageSenderContainer<in TMessage>
 {

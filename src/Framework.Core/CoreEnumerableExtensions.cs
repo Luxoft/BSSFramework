@@ -83,10 +83,7 @@ public static class CoreEnumerableExtensions
         return key.ToKeyValuePair(values).ToGroup();
     }
 
-    public static IGrouping<TKey, TElement> ToGroup<TKey, TElement>(this KeyValuePair<TKey, IEnumerable<TElement>> pair)
-    {
-        return new PairGrouping<TKey, TElement>(pair.Value.ToList(), pair.Key);
-    }
+    public static IGrouping<TKey, TElement> ToGroup<TKey, TElement>(this KeyValuePair<TKey, IEnumerable<TElement>> pair) => new PairGrouping<TKey, TElement>(pair.Value.ToList(), pair.Key);
 
     public static IEnumerable<T> IfEmpty<T>(this IEnumerable<T> source, Func<IEnumerable<T>> func)
     {
@@ -177,10 +174,7 @@ public static class CoreEnumerableExtensions
     }
 
 
-    public static IEnumerable<T> Distinct<T>(this IEnumerable<T> source, Func<T, T, bool> equalsFunc, Func<T, int>? getHashFunc = null)
-    {
-        return source.Distinct(new EqualityComparerImpl<T>(equalsFunc, getHashFunc));
-    }
+    public static IEnumerable<T> Distinct<T>(this IEnumerable<T> source, Func<T, T, bool> equalsFunc, Func<T, int>? getHashFunc = null) => source.Distinct(new EqualityComparerImpl<T>(equalsFunc, getHashFunc));
 
     public static void Merge<T, TSource, TKey>(
         this IEnumerable<T> source,
@@ -249,15 +243,9 @@ public static class CoreEnumerableExtensions
         return new Stack<T>(source);
     }
 
-    public static IEnumerable<T> Distinct<T, TProperty>(this IEnumerable<T> source, Func<T, TProperty> getPropertyFunc)
-    {
-        return source.Distinct(new PropertyEqualityComparer<T, TProperty>(getPropertyFunc));
-    }
+    public static IEnumerable<T> Distinct<T, TProperty>(this IEnumerable<T> source, Func<T, TProperty> getPropertyFunc) => source.Distinct(new PropertyEqualityComparer<T, TProperty>(getPropertyFunc));
 
-    public static T Aggregate<T>(this IEnumerable<Func<T, T>> source, T startElement)
-    {
-        return source.Aggregate(startElement, (v, f) => f(v));
-    }
+    public static T Aggregate<T>(this IEnumerable<Func<T, T>> source, T startElement) => source.Aggregate(startElement, (v, f) => f(v));
 
     public static TResult Partial<TSource, TResult>(
         this IEnumerable<TSource> source,

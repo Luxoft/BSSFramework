@@ -2,11 +2,11 @@
 
 using CommonFramework.DictionaryCache;
 
-using Framework.Core;
+using Framework.Core.Rendering;
 
 using Microsoft.CSharp;
 
-namespace Framework.CodeDom;
+namespace Framework.CodeDom.Rendering;
 
 public abstract class CodeDomRenderer :
         IFileRenderer<CodeExpression, string>,
@@ -17,11 +17,7 @@ public abstract class CodeDomRenderer :
     internal readonly IDictionaryCache<CodeBinaryOperatorType, string> BinaryOperators;
 
 
-    protected CodeDomRenderer()
-    {
-        this.BinaryOperators = new DictionaryCache<CodeBinaryOperatorType, string>(this.Render).WithLock();
-    }
-
+    protected CodeDomRenderer() => this.BinaryOperators = new DictionaryCache<CodeBinaryOperatorType, string>(this.Render).WithLock();
 
     public abstract string FileExtension { get; }
 

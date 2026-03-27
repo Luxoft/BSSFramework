@@ -10,6 +10,7 @@ using CommonFramework.DependencyInjection;
 
 using Framework.Configuration.BLL;
 using Framework.Core;
+using Framework.Core.MessageSender;
 using Framework.Notification.DTO;
 
 using Microsoft.Extensions.Configuration;

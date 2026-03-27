@@ -12,6 +12,7 @@ using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
 using Framework.Configuration.Generated.DTO;
 using Framework.Core;
+using Framework.Core.MessageSender;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Lock;

@@ -5,6 +5,7 @@ using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.Models;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.WebApiGenerator.Configuration._Base;
 using Framework.CodeGeneration.WebApiGenerator.Extensions;

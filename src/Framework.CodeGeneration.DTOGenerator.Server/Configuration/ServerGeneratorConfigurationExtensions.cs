@@ -2,6 +2,7 @@
 
 using Framework.BLL.Domain.IdentityObject;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 

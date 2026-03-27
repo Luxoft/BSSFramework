@@ -2,6 +2,7 @@
 using System.Reflection;
 
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.FileFactory;
 using Framework.CodeGeneration.ProjectionGenerator._Extensions;
 using Framework.CodeGeneration.ProjectionGenerator.Configuration;

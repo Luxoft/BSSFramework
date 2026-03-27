@@ -2,6 +2,7 @@
 
 using Framework.BLL.Domain.DTO;
 using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 

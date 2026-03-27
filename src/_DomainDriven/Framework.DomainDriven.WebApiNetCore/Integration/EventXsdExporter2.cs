@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 using Framework.Core;
 
+
 namespace Framework.DomainDriven.WebApiNetCore.Integration;
 
 public class EventXsdExporter2 : IEventXsdExporter2

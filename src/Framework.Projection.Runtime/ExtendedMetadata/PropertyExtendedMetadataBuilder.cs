@@ -2,16 +2,11 @@
 
 namespace Framework.Projection.ExtendedMetadata;
 
-public class PropertyExtendedMetadataBuilder : IPropertyExtendedMetadataBuilder, IPropertyExtendedMetadata
+public class PropertyExtendedMetadataBuilder(PropertyInfo property) : IPropertyExtendedMetadataBuilder, IPropertyExtendedMetadata
 {
     private readonly List<Attribute> attributes = new ();
 
-    public PropertyExtendedMetadataBuilder(PropertyInfo property)
-    {
-        this.Property = property;
-    }
-
-    public PropertyInfo Property { get; }
+    public PropertyInfo Property { get; } = property;
 
     public IReadOnlyList<Attribute> Attributes => this.attributes;
 

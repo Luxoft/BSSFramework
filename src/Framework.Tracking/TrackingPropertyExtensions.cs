@@ -1,7 +1,7 @@
 ﻿using CommonFramework;
 using CommonFramework.Maybe;
 
-namespace Framework.DomainDriven.Tracking;
+namespace Framework.Tracking;
 
 public static class TrackingPropertyExtensions
 {

@@ -11,7 +11,6 @@ using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.IdentityObject;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
-using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
@@ -24,8 +23,8 @@ using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 using Framework.CodeGeneration.FileFactory;
 using Framework.Core;
 using Framework.Database.Attributes;
-using Framework.Events;
 using Framework.Projection;
+using Framework.Relations;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 

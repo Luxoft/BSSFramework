@@ -1,6 +1,7 @@
-﻿using Framework.Configurator.Interfaces;
+﻿using Framework.Application.Events;
+using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
-using Framework.Events;
+
 using SecuritySystem;
 
 using Microsoft.AspNetCore.Http;

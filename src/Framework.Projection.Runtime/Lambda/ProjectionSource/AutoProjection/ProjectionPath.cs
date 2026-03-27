@@ -3,15 +3,9 @@
 
 namespace Framework.Projection.Lambda.ProjectionSource.AutoProjection;
 
-internal class ProjectionPath
+internal class ProjectionPath(PropertyPath propertyPath, LastProjectionProperty lastProperty)
 {
-    public ProjectionPath(PropertyPath propertyPath, LastProjectionProperty lastProperty)
-    {
-        this.PropertyPath = propertyPath ?? throw new ArgumentNullException(nameof(propertyPath));
-        this.LastProperty = lastProperty ?? throw new ArgumentNullException(nameof(lastProperty));
-    }
+    public PropertyPath PropertyPath { get; } = propertyPath ?? throw new ArgumentNullException(nameof(propertyPath));
 
-    public PropertyPath PropertyPath { get; }
-
-    public LastProjectionProperty LastProperty { get; }
+    public LastProjectionProperty LastProperty { get; } = lastProperty ?? throw new ArgumentNullException(nameof(lastProperty));
 }

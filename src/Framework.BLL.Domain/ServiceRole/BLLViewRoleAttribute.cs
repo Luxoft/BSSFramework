@@ -22,14 +22,14 @@ public class BLLViewRoleAttribute : BLLViewRoleBaseAttribute
 
     public MainDTOType MaxSingle
     {
-        get { return this.Single.OrderByDescending(v => v).First(); }
-        set { this.Single = Values.TakeWhile(v => v <= value).ToArray(); }
+        get => this.Single.OrderByDescending(v => v).First();
+        set => this.Single = Values.TakeWhile(v => v <= value).ToArray();
     }
 
     public MainDTOType MaxCollection
     {
-        get { return this.Collection.OrderByDescending(v => v).First(); }
-        set { this.Collection = Values.TakeWhile(v => v <= value).ToArray(); }
+        get => this.Collection.OrderByDescending(v => v).First();
+        set => this.Collection = Values.TakeWhile(v => v <= value).ToArray();
     }
 
     public IReadOnlyList<MainDTOType> Single { get; set; }
@@ -40,7 +40,7 @@ public class BLLViewRoleAttribute : BLLViewRoleBaseAttribute
 
     public MainDTOType Max
     {
-        get { return this.All.Concat(new MainDTOType[] { 0 }).Max(); }
+        get => this.All.Concat(new MainDTOType[] { 0 }).Max();
         set
         {
             this.MaxSingle = value;

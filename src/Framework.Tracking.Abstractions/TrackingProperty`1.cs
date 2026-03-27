@@ -2,7 +2,7 @@
 
 using CommonFramework.Maybe;
 
-namespace Framework.DomainDriven.Tracking;
+namespace Framework.Tracking;
 
 /// <summary>
 /// Defines property changes

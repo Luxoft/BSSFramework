@@ -11,8 +11,5 @@ public static class BusinessLogicExceptionExtensions
         return new BusinessLogicAggregateException(source);
     }
 
-    public static BusinessLogicAggregateException Aggregate(this IEnumerable<Exception> exceptions)
-    {
-        return exceptions.Select(ex => ex as BusinessLogicException ?? new BusinessLogicException(ex, ex.Message)).Aggregate();
-    }
+    public static BusinessLogicAggregateException Aggregate(this IEnumerable<Exception> exceptions) => exceptions.Select(ex => ex as BusinessLogicException ?? new BusinessLogicException(ex, ex.Message)).Aggregate();
 }

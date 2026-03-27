@@ -1,15 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 using CommonFramework;
 
 using Framework.Application.Domain;
-using Framework.Application.Repository;
 using Framework.BLL.DAL;
 using Framework.BLL.Domain.DAL.Revisions;
 using Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
-using Framework.BLL.Domain.Extensions;
-using Framework.BLL.Domain.MasterDetails;
 using Framework.BLL.Domain.Models;
 using Framework.Core;
 using Framework.Database;
@@ -94,49 +90,6 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     public abstract SelectOperationResult<TProjection> GetObjectsByOData<TProjection>(
         SelectOperation<TProjection> selectOperation,
         Expression<Func<TDomainObject, TProjection>> projectionSelector);
-
-    protected void SaveWithoutCascade(TDomainObject domainObject)
-    {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
-
-        var actions = CascadeActionHelper.Actions.ToArray(f => f(domainObject));
-
-        actions.Foreach(pair => pair.Item1());
-
-        try
-        {
-            this.InternalSave(domainObject);
-        }
-        finally
-        {
-            actions.Foreach(pair => pair.Item2());
-        }
-    }
-
-    protected void InsertWithoutCascade(TDomainObject domainObject)
-    {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
-
-        this.InsertWithoutCascade(domainObject, domainObject.Id);
-    }
-
-    protected void InsertWithoutCascade(TDomainObject domainObject, TIdent id)
-    {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
-
-        var actions = CascadeActionHelper.Actions.ToArray(f => f(domainObject));
-
-        actions.Foreach(pair => pair.Item1());
-
-        try
-        {
-            this.InternalSave(domainObject, id);
-        }
-        finally
-        {
-            actions.Foreach(pair => pair.Item2());
-        }
-    }
 
     /// <summary>
     /// Return the persistent instance of the given entity class with the given identifier,
@@ -426,29 +379,4 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
 
     #endregion
 
-    private static class CascadeActionHelper
-    {
-        public static readonly ReadOnlyCollection<Func<TDomainObject, Tuple<Action, Action>>> Actions = typeof(TDomainObject)
-            .GetDetailTypes()
-            .Select(GetActions)
-            .ToReadOnlyCollection();
-
-        private static Func<TDomainObject, Tuple<Action, Action>> GetActions(Type detaiType)
-        {
-            return new Func<Func<IMaster<TDomainObject>, Tuple<Action, Action>>>(GetActions<IMaster<TDomainObject>, TDomainObject>)
-                   .CreateGenericMethod(typeof(TDomainObject), detaiType)
-                   .Invoke<Func<TDomainObject, Tuple<Action, Action>>>(null);
-        }
-
-        private static Func<TMaster, Tuple<Action, Action>> GetActions<TMaster, TDetail>()
-            where TMaster : IMaster<TDetail>
-        {
-            return domainObject =>
-                   {
-                       var details = domainObject.Details.ToArray();
-
-                       return new Tuple<Action, Action>(() => domainObject.Details.Clear(), () => domainObject.Details.AddRange(details));
-                   };
-        }
-    }
 }

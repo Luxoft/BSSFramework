@@ -4,7 +4,8 @@ using Framework.Core;
 using Framework.Core.TypeResolving;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.Tracking;
+using Framework.Tracking;
+
 using GenericQueryable.Fetching;
 using SampleSystem.Domain;
 using SecuritySystem.SecurityAccessor;

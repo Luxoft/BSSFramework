@@ -5,7 +5,7 @@ using CommonFramework;
 using Framework.BLL.Services;
 using Framework.Core;
 using Framework.DependencyInjection;
-using Framework.DomainDriven.Tracking;
+using Framework.Tracking;
 using Framework.Validation;
 
 using GenericQueryable.Fetching;

@@ -2,13 +2,7 @@
 
 namespace Framework.BLL.Mode.Attr;
 
-public class BLLSecurityModeAttribute : Attribute
+public class BLLSecurityModeAttribute(SecurityRule securityRule) : Attribute
 {
-    public BLLSecurityModeAttribute(SecurityRule securityRule)
-    {
-        this.SecurityMode = securityRule;
-    }
-
-
-    public SecurityRule SecurityMode { get; private set; }
+    public SecurityRule SecurityMode { get; private set; } = securityRule;
 }

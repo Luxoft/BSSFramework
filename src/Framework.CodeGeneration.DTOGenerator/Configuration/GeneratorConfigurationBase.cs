@@ -9,7 +9,6 @@ using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.Serialization.Extensions;
-using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DomainMetadata;
@@ -22,8 +21,8 @@ using Framework.CodeGeneration.DTOGenerator.Map;
 using Framework.CodeGeneration.FileFactory;
 using Framework.CodeGeneration.GeneratePolicy;
 using Framework.Core;
-using Framework.Database.Attributes;
 using Framework.Projection;
+using Framework.Relations;
 
 namespace Framework.CodeGeneration.DTOGenerator.Configuration;
 

@@ -4,7 +4,6 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.BLL.Domain.Serialization.Extensions;
-using Framework.CodeDom;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;

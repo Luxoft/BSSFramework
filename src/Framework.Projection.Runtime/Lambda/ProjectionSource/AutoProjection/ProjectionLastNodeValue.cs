@@ -2,13 +2,7 @@
 
 namespace Framework.Projection.Lambda.ProjectionSource.AutoProjection;
 
-internal class ProjectionLastNodeValue : ProjectionNodeValue
+internal class ProjectionLastNodeValue(PropertyInfo property, LastProjectionProperty lastProperty) : ProjectionNodeValue(property)
 {
-    public ProjectionLastNodeValue(PropertyInfo property, LastProjectionProperty lastProperty)
-            : base(property)
-    {
-        this.LastProperty = lastProperty ?? throw new ArgumentNullException(nameof(lastProperty));
-    }
-
-    public LastProjectionProperty LastProperty { get; }
+    public LastProjectionProperty LastProperty { get; } = lastProperty ?? throw new ArgumentNullException(nameof(lastProperty));
 }

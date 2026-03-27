@@ -25,10 +25,7 @@ public class ModelRole : IEquatable<ModelRole>
     public DirectMode.DirectMode DirectMode { get; }
 
 
-    public override string ToString()
-    {
-        return this.Name;
-    }
+    public override string ToString() => this.Name;
 
     public bool Equals(ModelRole other)
     {

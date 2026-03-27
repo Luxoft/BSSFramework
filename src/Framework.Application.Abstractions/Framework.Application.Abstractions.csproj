@@ -19,8 +19,4 @@
     <ProjectReference Include="..\Framework.Database.Domain\Framework.Database.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="_Visitors\" />
-  </ItemGroup>
-
 </Project>

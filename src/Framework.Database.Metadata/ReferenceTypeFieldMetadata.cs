@@ -1,5 +1,6 @@
 ﻿using Framework.Database.Attributes;
 using Framework.Database.Mapping;
+using Framework.Relations;
 
 namespace Framework.Database.Metadata;
 

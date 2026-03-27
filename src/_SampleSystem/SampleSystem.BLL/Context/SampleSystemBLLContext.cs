@@ -3,9 +3,9 @@ using Framework.Core;
 using Framework.Core.TypeResolving;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.Tracking;
 using Framework.Events;
 using Framework.QueryLanguage;
+using Framework.Tracking;
 
 using GenericQueryable.Fetching;
 

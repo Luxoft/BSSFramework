@@ -3,7 +3,6 @@ using System.Reflection;
 using System.Runtime.Serialization;
 
 using Framework.Application.Events;
-using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
@@ -11,7 +10,6 @@ using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
 using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 using Framework.Core;
-using Framework.Events;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.EventDTO;
 

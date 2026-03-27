@@ -8,15 +8,8 @@ using Framework.OData;
 
 namespace Framework.BLL.OData;
 
-public class BusinessLogicSelectOperationParser : SelectOperationParser
+public class BusinessLogicSelectOperationParser(NumberFormatInfo numberFormatInfo) : SelectOperationParser(numberFormatInfo)
 {
-    public BusinessLogicSelectOperationParser(NumberFormatInfo numberFormatInfo)
-            : base(numberFormatInfo)
-    {
-
-    }
-
-
     protected override Exception GetParsingError(string input)
     {
         return base.GetParsingError(input).Message.Pipe(baseMessage => new BusinessLogicException(baseMessage));

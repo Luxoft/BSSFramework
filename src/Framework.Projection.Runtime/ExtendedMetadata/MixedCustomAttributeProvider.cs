@@ -2,35 +2,26 @@
 
 namespace Framework.Projection.ExtendedMetadata;
 
-public class MixedCustomAttributeProvider : ICustomAttributeProvider
+public class MixedCustomAttributeProvider(ICustomAttributeProvider baseProvider, IAttributesExtendedMetadata attributesExtendedMetadata)
+    : ICustomAttributeProvider
 {
-    private readonly ICustomAttributeProvider baseProvider;
-
-    private readonly IAttributesExtendedMetadata attributesExtendedMetadata;
-
-    public MixedCustomAttributeProvider(ICustomAttributeProvider baseProvider, IAttributesExtendedMetadata attributesExtendedMetadata)
-    {
-        this.baseProvider = baseProvider;
-        this.attributesExtendedMetadata = attributesExtendedMetadata;
-    }
-
     public object[] GetCustomAttributes(bool inherit)
     {
-        return this.baseProvider.GetCustomAttributes(inherit).Cast<Attribute>()
-                   .Concat(this.attributesExtendedMetadata.Attributes)
+        return baseProvider.GetCustomAttributes(inherit).Cast<Attribute>()
+                   .Concat(attributesExtendedMetadata.Attributes)
                    .ToArray();
     }
 
     public object[] GetCustomAttributes(Type attributeType, bool inherit)
     {
-        return this.baseProvider.GetCustomAttributes(attributeType, inherit).Cast<Attribute>()
-                   .Concat(this.attributesExtendedMetadata.Attributes.Where(attr => attributeType.IsAssignableFrom(attr.GetType())))
+        return baseProvider.GetCustomAttributes(attributeType, inherit).Cast<Attribute>()
+                   .Concat(attributesExtendedMetadata.Attributes.Where(attr => attributeType.IsAssignableFrom(attr.GetType())))
                    .ToArray();
     }
 
     public bool IsDefined(Type attributeType, bool inherit)
     {
-        return this.baseProvider.IsDefined(attributeType, inherit)
-               || this.attributesExtendedMetadata.Attributes.Any(attr => attributeType.IsAssignableFrom(attr.GetType()));
+        return baseProvider.IsDefined(attributeType, inherit)
+               || attributesExtendedMetadata.Attributes.Any(attr => attributeType.IsAssignableFrom(attr.GetType()));
     }
 }

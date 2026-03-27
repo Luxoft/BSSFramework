@@ -2,6 +2,4 @@
 
 namespace Framework.Configurator.Interfaces;
 
-public interface IGetDomainTypesHandler : IHandler
-{
-}
+public interface IGetDomainTypesHandler : IHandler;

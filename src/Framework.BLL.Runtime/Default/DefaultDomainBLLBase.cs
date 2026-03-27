@@ -3,7 +3,6 @@ using System.Linq.Expressions;
 
 using CommonFramework;
 using Framework.Application.Domain;
-using Framework.Application.Repository;
 using Framework.BLL.Domain.Exceptions.BusinessLogic.Extensions;
 using Framework.BLL.Domain.Exceptions.BusinessLogic.NotFound;
 using Framework.BLL.Domain.Persistent;

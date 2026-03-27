@@ -11,12 +11,12 @@ using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Lock;
-using Framework.DomainDriven.Tracking;
 using Framework.Events;
 using Framework.Exceptions;
 using Framework.Notification;
 using Framework.Persistent;
 using Framework.QueryLanguage;
+using Framework.Tracking;
 
 using Microsoft.Extensions.DependencyInjection;
 

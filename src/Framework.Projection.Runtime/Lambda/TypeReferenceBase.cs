@@ -27,17 +27,12 @@ public abstract class TypeReferenceBase
     /// <summary>
     /// Фиксированный тип
     /// </summary>
-    public class FixedTypeReference : TypeReferenceBase
+    public class FixedTypeReference(Type propertyType) : TypeReferenceBase
     {
-        public FixedTypeReference(Type propertyType)
-        {
-            this.PropertyType = propertyType ?? throw new ArgumentNullException(nameof(propertyType));
-        }
-
         /// <summary>
         /// Тип свойства
         /// </summary>
-        public Type PropertyType { get; }
+        public Type PropertyType { get; } = propertyType ?? throw new ArgumentNullException(nameof(propertyType));
 
         public override string ToString()
         {

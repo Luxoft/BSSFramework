@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Setup.Abstract\Framework.DomainDriven.Setup.Abstract.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
   </ItemGroup>
 

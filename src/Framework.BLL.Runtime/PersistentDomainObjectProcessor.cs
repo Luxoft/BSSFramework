@@ -1,19 +1,13 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
+
 using Framework.Core.TypeResolving;
 
 namespace Framework.BLL;
 
-public abstract class PersistentDomainObjectProcessor<TBLLContext, TPersistentDomainObjectBase, TResult> : BLLContextContainer<TBLLContext>
-
-        where TBLLContext : class
-        where TPersistentDomainObjectBase : class
+public abstract class PersistentDomainObjectProcessor<TBLLContext, TPersistentDomainObjectBase, TResult>(TBLLContext context) : BLLContextContainer<TBLLContext>(context)
+    where TBLLContext : class
+    where TPersistentDomainObjectBase : class
 {
-    protected PersistentDomainObjectProcessor(TBLLContext context) : base(context)
-    {
-
-    }
-
-
     protected abstract ITypeResolver<string> TypeResolver { get; }
 
 
@@ -29,23 +23,15 @@ public abstract class PersistentDomainObjectProcessor<TBLLContext, TPersistentDo
 
         var genericMethod = new Func<TResult>(this.Process<TPersistentDomainObjectBase>).Method.GetGenericMethodDefinition();
 
-        return (TResult)genericMethod.MakeGenericMethod(new[] { domainType }).Invoke(this, []);
+        return genericMethod.MakeGenericMethod(domainType).Invoke<TResult>(this, []);
     }
 }
 
-public abstract class PersistentDomainObjectProcessor<TBLLContext, TPersistentDomainObjectBase> :
-        BLLContextContainer<TBLLContext>
-
-        where TBLLContext : class
-        where TPersistentDomainObjectBase : class
+public abstract class PersistentDomainObjectProcessor<TBLLContext, TPersistentDomainObjectBase>(TBLLContext context) :
+    BLLContextContainer<TBLLContext>(context)
+    where TBLLContext : class
+    where TPersistentDomainObjectBase : class
 {
-    protected PersistentDomainObjectProcessor(TBLLContext context)
-            : base(context)
-    {
-
-    }
-
-
     protected abstract ITypeResolver<string> TypeResolver { get; }
 
 
@@ -65,36 +51,22 @@ public abstract class PersistentDomainObjectProcessor<TBLLContext, TPersistentDo
 }
 
 
-public abstract class TypeResolverDomainObjectProcessor<TBLLContext, TPersistentDomainObjectBase, TResult> : PersistentDomainObjectProcessor<TBLLContext, TPersistentDomainObjectBase, TResult>
-
-        where TBLLContext : class, ITypeResolverContainer<string>
-        where TPersistentDomainObjectBase : class
+public abstract class TypeResolverDomainObjectProcessor<TBLLContext, TPersistentDomainObjectBase, TResult>(TBLLContext context)
+    : PersistentDomainObjectProcessor<TBLLContext, TPersistentDomainObjectBase, TResult>(context)
+    where TBLLContext : class, ITypeResolverContainer<string>
+    where TPersistentDomainObjectBase : class
 {
-    protected TypeResolverDomainObjectProcessor(TBLLContext context)
-            : base(context)
-    {
-
-    }
-
-
     protected override ITypeResolver<string> TypeResolver
     {
         get { return this.Context.TypeResolver; }
     }
 }
 
-public abstract class TypeResolverDomainObjectProcessor<TBLLContext, TPersistentDomainObjectBase> : PersistentDomainObjectProcessor<TBLLContext, TPersistentDomainObjectBase>
-
-        where TBLLContext : class, ITypeResolverContainer<string>
-        where TPersistentDomainObjectBase : class
+public abstract class TypeResolverDomainObjectProcessor<TBLLContext, TPersistentDomainObjectBase>(TBLLContext context)
+    : PersistentDomainObjectProcessor<TBLLContext, TPersistentDomainObjectBase>(context)
+    where TBLLContext : class, ITypeResolverContainer<string>
+    where TPersistentDomainObjectBase : class
 {
-    protected TypeResolverDomainObjectProcessor(TBLLContext context)
-            : base(context)
-    {
-
-    }
-
-
     protected override ITypeResolver<string> TypeResolver
     {
         get { return this.Context.TypeResolver; }

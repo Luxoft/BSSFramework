@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Framework.BLL.ServiceModel\Framework.BLL.ServiceModel.csproj" />
     <ProjectReference Include="..\Framework.CodeGeneration.DTOGenerator.Audit\Framework.CodeGeneration.DTOGenerator.Audit.csproj" />
+    <ProjectReference Include="..\Framework.CodeGeneration.ServiceModelGenerator\Framework.CodeGeneration.ServiceModelGenerator.csproj" />
   </ItemGroup>
 
 </Project>

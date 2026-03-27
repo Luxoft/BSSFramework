@@ -2,7 +2,7 @@
 
 using Framework.Core;
 
-namespace Framework.DomainDriven.Tracking;
+namespace Framework.Tracking;
 
 public record struct ObjectState(string PropertyName, object? CurrentValue, object? PreviousValue, bool IsModified)
 {

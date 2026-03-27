@@ -1,4 +1,6 @@
-﻿namespace Framework.DomainDriven.Tracking;
+﻿using System.Collections.Concurrent;
+
+namespace Framework.Tracking;
 
 /// <summary>
 /// Internal helper that helps creation result
@@ -15,7 +17,7 @@ internal static class TrackingResult
         var allProperties =
             typeof(TDomainObject).GetProperties()
                                  .Where(persistentInfoService.IsPersistent)
-                                 .Select(z => new { Type = z.PropertyType, Value = z.GetValue(source, new object[0]), Name = z.Name })
+                                 .Select(z => new { Type = z.PropertyType, Value = z.GetValue(source, []), Name = z.Name })
                                  .Where(z => mode == GetChangesMode.Default || !Equals(z.Value, GetDefault(z.Type)))
                                  .Select(z => new TrackingProperty(z.Name, null, z.Value))
                                  .ToList();

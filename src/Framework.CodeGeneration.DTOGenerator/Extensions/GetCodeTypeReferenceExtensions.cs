@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 using System.Runtime.Serialization;
 
-using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 
 namespace Framework.CodeGeneration.DTOGenerator.Extensions;

@@ -29,6 +29,7 @@ using Framework.CodeGeneration.DTOGenerator.Server.Members.MapToDomainObject;
 using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 using Framework.Core;
 using Framework.Database.Attributes;
+using Framework.Relations;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
 

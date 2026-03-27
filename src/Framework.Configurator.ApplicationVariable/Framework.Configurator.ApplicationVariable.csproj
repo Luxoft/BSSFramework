@@ -9,4 +9,8 @@
     <PackageReference Include="IvAt.SecuritySystem.Configurator" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Application.Abstractions\Framework.Application.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>

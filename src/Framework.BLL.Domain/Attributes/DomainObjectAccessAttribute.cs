@@ -17,11 +17,7 @@ public class DomainObjectAccessAttribute : Attribute
     {
     }
 
-    protected DomainObjectAccessAttribute(SecurityRule securityRule)
-    {
-        this.SecurityRule = securityRule;
-    }
-
+    protected DomainObjectAccessAttribute(SecurityRule securityRule) => this.SecurityRule = securityRule;
 
     public SecurityRule SecurityRule { get; }
 }

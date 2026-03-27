@@ -15,7 +15,7 @@ public class JobMiddlewareFactory(IServiceProvider serviceProvider, ApplicationD
     {
         yield return new TryCloseSessionEvaluatorMiddleware(serviceProvider.GetRequiredService<IDBSessionManager>());
 
-        yield return new ImpersonateEvaluatorMiddleware(serviceProvider, jobImpersonateData?.RunAs ?? applicationDefaultUserAuthenticationServiceSettings.DefaultValue);
+        yield return new ImpersonateEvaluatorMiddleware(serviceProvider, jobImpersonateData?.RunAs ?? applicationDefaultUserAuthenticationServiceSettings.Name);
 
         if (withRootLogging)
         {

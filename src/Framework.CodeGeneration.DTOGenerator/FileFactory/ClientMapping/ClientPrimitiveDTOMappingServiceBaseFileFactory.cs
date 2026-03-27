@@ -4,8 +4,7 @@ using System.Reflection;
 
 using CommonFramework;
 
-using Framework.BLL.Domain.ClientMappingService;
-using Framework.CodeDom;
+using Framework.BLL.DTOMapping.Services;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;

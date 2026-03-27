@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 
 using CommonFramework;
 using Framework.BLL.DTOMapping.Services;
-using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;

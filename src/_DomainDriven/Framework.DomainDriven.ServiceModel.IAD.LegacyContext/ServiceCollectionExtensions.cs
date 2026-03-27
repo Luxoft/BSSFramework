@@ -18,12 +18,12 @@ using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.Setup;
-using Framework.DomainDriven.Tracking;
 using Framework.Events;
 using Framework.Events.Legacy;
 using Framework.Projection;
 using Framework.QueryLanguage;
 using Framework.Security;
+using Framework.Tracking;
 
 using Microsoft.Extensions.DependencyInjection;
 

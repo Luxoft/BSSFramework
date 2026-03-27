@@ -2,7 +2,7 @@
 namespace Framework.Core;
 
 public interface PeriodItemCollectionContainer<out T>
-        where T : PeriodObject
+        where T : IPeriodObject
 {
     IEnumerable<T> Items { get; }
 }

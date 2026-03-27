@@ -8,4 +8,10 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework.BLL.Domain\Framework.BLL.Domain.csproj" />
+    <ProjectReference Include="..\..\Framework.Database.Mapping\Framework.Database.Mapping.csproj" />
+    <ProjectReference Include="..\..\Framework.Tracking.Validation\Framework.Tracking.Validation.csproj" />
+  </ItemGroup>
+
 </Project>

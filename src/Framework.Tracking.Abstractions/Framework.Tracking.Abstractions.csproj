@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Tracking.Abstractions</PackageId>
+    <RootNamespace>Framework.Tracking</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

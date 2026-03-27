@@ -4,7 +4,7 @@ namespace Framework.Core;
 public static class PeriodItemCollectionContainerExtensions
 {
     public static TItem? GetNewestItem<TItem> (this PeriodItemCollectionContainer<TItem> source)
-            where TItem : PeriodObject
+            where TItem : IPeriodObject
     {
         var request = from item in source.Items
                       orderby item.Period descending
@@ -14,6 +14,6 @@ public static class PeriodItemCollectionContainerExtensions
     }
 
     public static TItem? SingleOrDefault<TItem> (this PeriodItemCollectionContainer<TItem> source, DateTime selectedDate)
-            where TItem : class, PeriodObject =>
+            where TItem : class, IPeriodObject =>
         source.Items.SingleOrDefault (item => item.Period.Contains (selectedDate));
 }

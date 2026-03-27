@@ -9,6 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Framework.Database.Mapping\Framework.Database.Mapping.csproj" />
+    <ProjectReference Include="..\Framework.Relations\Framework.Relations.csproj" />
     <ProjectReference Include="..\Framework.Tracking.Abstractions\Framework.Tracking.Abstractions.csproj" />
   </ItemGroup>
 

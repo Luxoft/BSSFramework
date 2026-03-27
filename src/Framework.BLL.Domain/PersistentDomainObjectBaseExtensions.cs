@@ -12,10 +12,7 @@ namespace Framework.BLL.Domain;
 
 public static class PersistentDomainObjectBaseExtensions
 {
-    public static TIdent? TryGetId<TIdent>(this IIdentityObject<TIdent> source)
-    {
-        return source.Maybe(v => v.Id);
-    }
+    public static TIdent? TryGetId<TIdent>(this IIdentityObject<TIdent> source) => source.Maybe(v => v.Id);
 
     /// <summary>
     /// Sets value one time.

@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Framework.DomainDriven.Tracking;
+namespace Framework.Tracking;
 
 /// <summary>
 /// Represents tracking service. Tracking service helps track domain object changes during DB session
@@ -66,6 +66,6 @@ public class TrackingService<TPersistentDomainObjectBase>(IObjectStateService ob
     private IEnumerable<ObjectState> GetModifiedObjectStates<TDomainObject>(TDomainObject value)
             where TDomainObject : TPersistentDomainObjectBase
     {
-        return objectStatesService.GetModifiedObjectStates(value) ?? Enumerable.Empty<ObjectState>();
+        return objectStatesService.GetModifiedObjectStates(value) ?? [];
     }
 }

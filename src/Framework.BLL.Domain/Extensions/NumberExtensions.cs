@@ -8,20 +8,12 @@ public static class NumberExtensions
 
     public const int PercentRoundDecimals = 2;
 
-    public static bool IsEqualsMoney(this decimal value1, decimal value2)
-    {
-        return (value1 - value2).IsNullMoney();
-    }
+    public static bool IsEqualsMoney(this decimal value1, decimal value2) => (value1 - value2).IsNullMoney();
 
-    public static bool IsNullMoney(this decimal value)
-    {
-        return Math.Abs(value).RoundMoney() == 0;
-    }
+    public static bool IsNullMoney(this decimal value) => Math.Abs(value).RoundMoney() == 0;
 
-    public static decimal RoundMoney(this decimal value)
-    {
-        return decimal.Round(value, MoneyRoundDecimals);
-    }
+    public static decimal RoundMoney(this decimal value) => decimal.Round(value, MoneyRoundDecimals);
+
     public static decimal? RoundMoney(this decimal? value)
     {
         if (value == null)
@@ -31,20 +23,15 @@ public static class NumberExtensions
         return decimal.Round(value.Value, MoneyRoundDecimals);
     }
 
-    public static decimal RoundCoeff(this decimal value)
-    {
-        return decimal.Round(value, CoeffRoundDecimals);
-    }
+    public static decimal RoundCoeff(this decimal value) => decimal.Round(value, CoeffRoundDecimals);
 
     //public static double RoundCoeff(this double value)
     //{
     //    return Math.Round(value, CoeffRoundDecimals);
     //}
 
-    public static decimal RoundPercent(this decimal value)
-    {
-        return decimal.Round(value, PercentRoundDecimals);
-    }
+    public static decimal RoundPercent(this decimal value) => decimal.Round(value, PercentRoundDecimals);
+
     public static decimal? RoundPercent(this decimal? value)
     {
         if (value == null)
@@ -55,8 +42,5 @@ public static class NumberExtensions
     }
 
 
-    public static decimal AwayFromZeroRound (this decimal value, int rank)
-    {
-        return decimal.Round(value, rank, MidpointRounding.AwayFromZero);
-    }
+    public static decimal AwayFromZeroRound (this decimal value, int rank) => decimal.Round(value, rank, MidpointRounding.AwayFromZero);
 }

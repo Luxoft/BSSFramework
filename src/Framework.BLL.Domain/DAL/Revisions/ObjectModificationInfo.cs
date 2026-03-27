@@ -30,10 +30,7 @@ public class TypeInfoDescription : IDomainType
     public string Name { get; set; }
 
 
-    public override string ToString()
-    {
-        return string.IsNullOrWhiteSpace(this.NameSpace) ? this.Name : $"{this.NameSpace}.{this.Name}";
-    }
+    public override string ToString() => string.IsNullOrWhiteSpace(this.NameSpace) ? this.Name : $"{this.NameSpace}.{this.Name}";
 }
 
 public class ObjectModificationInfo<TIdent>

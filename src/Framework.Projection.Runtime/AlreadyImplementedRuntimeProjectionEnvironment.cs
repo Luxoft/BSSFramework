@@ -26,18 +26,11 @@ public class AlreadyImplementedRuntimeProjectionEnvironment : IProjectionEnviron
 
     public bool UseDependencySecurity { get; }
 
-    private class AlreadyImplementedAssemblyInfo : IAssemblyInfo
+    private class AlreadyImplementedAssemblyInfo(IAssemblyInfo baseAssembly) : IAssemblyInfo
     {
-        private readonly IAssemblyInfo baseAssembly;
-
-        public AlreadyImplementedAssemblyInfo(IAssemblyInfo baseAssembly)
-        {
-            this.baseAssembly = baseAssembly;
-        }
-
         public IEnumerable<Type> GetTypes()
         {
-            foreach (var baseType in this.baseAssembly.GetTypes())
+            foreach (var baseType in baseAssembly.GetTypes())
             {
                 if (baseType is BaseTypeImpl genType)
                 {
@@ -50,8 +43,8 @@ public class AlreadyImplementedRuntimeProjectionEnvironment : IProjectionEnviron
             }
         }
 
-        public string Name => this.baseAssembly.Name;
+        public string Name => baseAssembly.Name;
 
-        public string FullName => this.baseAssembly.FullName;
+        public string FullName => baseAssembly.FullName;
     }
 }

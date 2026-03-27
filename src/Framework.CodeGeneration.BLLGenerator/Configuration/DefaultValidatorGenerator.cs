@@ -11,8 +11,6 @@ using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DomainMetadata;
 using Framework.Core;
 using Framework.Restriction;
-using Framework.Tracking.Validation.BLL.Validation.Attributes;
-using Framework.Tracking.Validation.BLL.Validation.Validators;
 using Framework.Validation;
 
 using ValidatorPairExpr = System.Collections.Generic.KeyValuePair<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
@@ -20,6 +18,7 @@ using ValidatorExpr = System.Collections.Generic.IReadOnlyDictionary<System.Code
 using Framework.BLL.Validation;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
+using Framework.Tracking.Validation;
 
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;

@@ -1,5 +1,5 @@
-﻿using Framework.Configurator.Interfaces;
-using Framework.Events;
+﻿using Framework.Application.Events;
+using Framework.Configurator.Interfaces;
 
 using Microsoft.AspNetCore.Http;
 

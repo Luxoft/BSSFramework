@@ -1,7 +1,7 @@
-﻿using Framework.DomainDriven.Serialization;
-using Framework.DomainDriven.Tracking.LegacyValidators;
-using Framework.Persistent;
+﻿using Framework.BLL.Domain.MasterDetails;
+using Framework.BLL.Domain.Serialization;
 using Framework.Restriction;
+using Framework.Tracking.Validation.BLL.Validation.Attributes;
 
 namespace Framework.Authorization.Domain;
 

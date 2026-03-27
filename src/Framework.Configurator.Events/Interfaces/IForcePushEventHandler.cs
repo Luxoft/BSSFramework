@@ -2,6 +2,4 @@
 
 namespace Framework.Configurator.Interfaces;
 
-public interface IForcePushEventHandler : IHandler
-{
-}
+public interface IForcePushEventHandler : IHandler;

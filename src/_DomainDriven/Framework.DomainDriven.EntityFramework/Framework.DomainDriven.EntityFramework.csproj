@@ -18,8 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
-
-    <ProjectReference Include="..\Framework.DomainDriven.Setup.Abstract\Framework.DomainDriven.Setup.Abstract.csproj" />
   </ItemGroup>
 
 </Project>

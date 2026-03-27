@@ -2,23 +2,11 @@
 
 public abstract class RevisionInfoBase(AuditRevisionType revisionType, string author, DateTime date, long revisionNumber)
 {
-    public AuditRevisionType RevisionType
-    {
-        get { return revisionType; }
-    }
+    public AuditRevisionType RevisionType => revisionType;
 
-    public string Author
-    {
-        get { return author; }
-    }
+    public string Author => author;
 
-    public DateTime Date
-    {
-        get { return date; }
-    }
+    public DateTime Date => date;
 
-    public long RevisionNumber
-    {
-        get { return revisionNumber; }
-    }
+    public long RevisionNumber => revisionNumber;
 }

@@ -1,8 +1,6 @@
-﻿using Framework.CodeGeneration.DomainMetadata;
+﻿namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 
-namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;
-
-public interface IGeneratorConfigurationContainer : IGenerationEnvironment
+public interface IGeneratorConfigurationContainer
 {
     IGeneratorConfigurationBase<IGenerationEnvironmentBase> BLLCore { get; }
 }

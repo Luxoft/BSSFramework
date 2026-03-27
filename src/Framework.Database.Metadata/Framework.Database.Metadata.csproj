@@ -9,9 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framework.Core\Framework.Core.csproj" />
     <ProjectReference Include="..\Framework.Database.Domain\Framework.Database.Domain.csproj" />
     <ProjectReference Include="..\Framework.Database.Mapping\Framework.Database.Mapping.csproj" />
+    <ProjectReference Include="..\Framework.Relations\Framework.Relations.csproj" />
   </ItemGroup>
 
 </Project>

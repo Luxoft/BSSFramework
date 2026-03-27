@@ -7,17 +7,12 @@ using Framework.Projection.Lambda.ProjectionBuilder;
 
 namespace Framework.Projection.Lambda.ProjectionSource.AutoProjection;
 
-internal class AutoProjectionFactory : IFactory<ProjectionBuilder.ProjectionBuilder>
+internal class AutoProjectionFactory(ProjectionLambdaEnvironment environment, ProjectionBuilder.ProjectionBuilder baseProjection)
+    : IFactory<ProjectionBuilder.ProjectionBuilder>
 {
-    private readonly ProjectionLambdaEnvironment environment;
+    private readonly ProjectionLambdaEnvironment environment = environment ?? throw new ArgumentNullException(nameof(environment));
 
-    private readonly ProjectionBuilder.ProjectionBuilder baseProjection;
-
-    public AutoProjectionFactory(ProjectionLambdaEnvironment environment, ProjectionBuilder.ProjectionBuilder baseProjection)
-    {
-        this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
-        this.baseProjection = baseProjection ?? throw new ArgumentNullException(nameof(baseProjection));
-    }
+    private readonly ProjectionBuilder.ProjectionBuilder baseProjection = baseProjection ?? throw new ArgumentNullException(nameof(baseProjection));
 
     public ProjectionBuilder.ProjectionBuilder Create()
     {

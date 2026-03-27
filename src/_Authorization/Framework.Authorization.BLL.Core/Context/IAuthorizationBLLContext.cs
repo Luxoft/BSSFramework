@@ -2,7 +2,7 @@
 
 using Framework.Core;
 using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.Tracking;
+using Framework.Tracking;
 
 using SecuritySystem;
 using SecuritySystem.AvailableSecurity;

@@ -2,14 +2,9 @@
 
 namespace Framework.Projection.Lambda.ProjectionSource;
 
-internal class LinkAllProjectionSource : IProjectionSource
+internal class LinkAllProjectionSource(IProjectionSource baseSource) : IProjectionSource
 {
-    private readonly IProjectionSource baseSource;
-
-    public LinkAllProjectionSource(IProjectionSource baseSource)
-    {
-        this.baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
-    }
+    private readonly IProjectionSource baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
 
     public IEnumerable<IProjection> GetProjections()
     {

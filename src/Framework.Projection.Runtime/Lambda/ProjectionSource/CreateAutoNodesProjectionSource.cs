@@ -4,17 +4,11 @@ using Framework.Projection.Lambda.ProjectionSource.AutoProjection;
 
 namespace Framework.Projection.Lambda.ProjectionSource;
 
-internal class CreateAutoNodesProjectionSource : IProjectionSource
+internal class CreateAutoNodesProjectionSource(IProjectionSource baseSource, ProjectionLambdaEnvironment environment) : IProjectionSource
 {
-    private readonly IProjectionSource baseSource;
+    private readonly IProjectionSource baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
 
-    private readonly ProjectionLambdaEnvironment environment;
-
-    public CreateAutoNodesProjectionSource(IProjectionSource baseSource, ProjectionLambdaEnvironment environment)
-    {
-        this.baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
-        this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
-    }
+    private readonly ProjectionLambdaEnvironment environment = environment ?? throw new ArgumentNullException(nameof(environment));
 
     public IEnumerable<IProjection> GetProjections()
     {

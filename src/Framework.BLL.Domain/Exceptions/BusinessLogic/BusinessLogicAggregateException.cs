@@ -13,11 +13,8 @@ public class BusinessLogicAggregateException : BusinessLogicException, IAggregat
     }
 
     public BusinessLogicAggregateException(BusinessLogicException[] innerExceptions)
-            : base (innerExceptions.Join(Environment.NewLine, ex => ex.Message))
-    {
+            : base (innerExceptions.Join(Environment.NewLine, ex => ex.Message)) =>
         this.InnerExceptions = innerExceptions.ToReadOnlyCollection();
-    }
-
 
     public System.Collections.ObjectModel.ReadOnlyCollection<BusinessLogicException> InnerExceptions
     {

@@ -6,10 +6,7 @@ namespace Framework.BLL.Domain.Exceptions.BusinessLogic._Base;
 
 public class BusinessLogicException : ServiceFacadeException
 {
-    public static BusinessLogicException Create<T>(string format, Expression<Func<T, object>> expression)
-    {
-        return new BusinessLogicException(format, expression.ToPath());
-    }
+    public static BusinessLogicException Create<T>(string format, Expression<Func<T, object>> expression) => new(format, expression.ToPath());
 
     public BusinessLogicException(Exception innerException, string format, params object[] args)
             : base(innerException, format, args)
@@ -44,23 +41,16 @@ public class BusinessLogicException : ServiceFacadeException
 public class BusinessLogicException<TDetail> : BusinessLogicException, IDetailException<TDetail>
 {
     public BusinessLogicException(TDetail detail, Exception innerException, string message)
-            : base(innerException, message)
-    {
+            : base(innerException, message) =>
         this.Detail = detail;
-    }
 
     public BusinessLogicException(TDetail detail, string format, params object[] args)
-            : base(format, args)
-    {
+            : base(format, args) =>
         this.Detail = detail;
-    }
 
     public BusinessLogicException(TDetail detail, string message)
-            : base(message)
-    {
+            : base(message) =>
         this.Detail = detail;
-    }
-
 
     public TDetail Detail { get; private set; }
 }

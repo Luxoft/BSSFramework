@@ -2,28 +2,19 @@
 using CommonFramework.Maybe;
 
 using Framework.Core;
-using Framework.Database.Attributes;
 using Framework.Database.Mapping;
 using Framework.Projection.Lambda._Extensions;
 using Framework.Projection.Lambda.ProjectionBuilder;
 using Framework.Projection.Lambda.ProjectionSource._Base;
+using Framework.Relations;
 
 namespace Framework.Projection.Lambda.ProjectionSource;
 
-internal class InjectMissedParentsProjectionSource : IProjectionSource
+internal class InjectMissedParentsProjectionSource(IProjectionSource baseSource) : IProjectionSource
 {
-    private readonly IProjectionSource baseSource;
-
-
-    public InjectMissedParentsProjectionSource(IProjectionSource baseSource)
-    {
-        this.baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
-    }
-
-
     public IEnumerable<IProjection> GetProjections()
     {
-        var builders = this.baseSource.GetProjections().ToBuilders();
+        var builders = baseSource.GetProjections().ToBuilders();
 
         var missedParentRequest = from projection in builders
 

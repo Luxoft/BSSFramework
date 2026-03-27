@@ -5,7 +5,6 @@ using CommonFramework;
 
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Extensions;
-using Framework.CodeDom;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
@@ -13,7 +12,7 @@ using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
 using Framework.Core;
-using Framework.Database.Attributes;
+using Framework.Relations;
 
 namespace Framework.CodeGeneration.DTOGenerator.PropertyAssigner.Update;
 

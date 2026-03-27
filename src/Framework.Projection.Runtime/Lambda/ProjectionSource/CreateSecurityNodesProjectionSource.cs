@@ -9,18 +9,11 @@ using Framework.Projection.Lambda.ProjectionSource._Base;
 
 namespace Framework.Projection.Lambda.ProjectionSource;
 
-internal class CreateSecurityNodesProjectionSource : IProjectionSource
+internal class CreateSecurityNodesProjectionSource(IProjectionSource baseSource, ProjectionLambdaEnvironment environment) : IProjectionSource
 {
-    private readonly IProjectionSource baseSource;
+    private readonly IProjectionSource baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
 
-    private readonly ProjectionLambdaEnvironment environment;
-
-
-    public CreateSecurityNodesProjectionSource(IProjectionSource baseSource, ProjectionLambdaEnvironment environment)
-    {
-        this.baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
-        this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
-    }
+    private readonly ProjectionLambdaEnvironment environment = environment ?? throw new ArgumentNullException(nameof(environment));
 
     public IEnumerable<IProjection> GetProjections()
     {

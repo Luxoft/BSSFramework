@@ -9,10 +9,7 @@ public class DirectModeAttribute : Attribute
     /// Конструктор
     /// </summary>
     /// <param name="directMode">Параметры управления генерацией по модели</param>
-    public DirectModeAttribute(DirectMode directMode)
-    {
-        this.DirectMode = directMode;
-    }
+    public DirectModeAttribute(DirectMode directMode) => this.DirectMode = directMode;
 
     /// <summary>
     /// Параметры управления генерацией по модели

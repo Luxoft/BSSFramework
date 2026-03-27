@@ -1,9 +1,7 @@
-﻿using System.Reflection;
-using CommonFramework;
+﻿using CommonFramework;
 
 using Framework.Application.Domain;
 using Framework.BLL.Domain.Attributes;
-using Framework.BLL.Domain.MasterDetails;
 using Framework.Core;
 
 using SecuritySystem;
@@ -12,23 +10,6 @@ namespace Framework.BLL.Domain.Extensions;
 
 public static class TypeExtensions
 {
-    public static IEnumerable<Type> GetDetailTypes(this Type type)
-    {
-        return type.GetInterfaces()
-                   .Select(i => i.GetInterfaceImplementationArgument(typeof(IMaster<>)))
-                   .Where(detailType => detailType != null)
-                   .Select(v => v!);
-    }
-
-    public static IEnumerable<PropertyInfo> GetDetailProperties(this Type type)
-    {
-        return from detailType in type.GetDetailTypes()
-
-               join property in type.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public) on detailType equals property.PropertyType.GetCollectionElementType() into propertyGroup
-
-               select propertyGroup.Count() == 1 ? propertyGroup.Single() : propertyGroup.Single(property => property.HasPrivateField());
-    }
-
     public static Type? GetIdentType(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
@@ -57,7 +38,6 @@ public static class TypeExtensions
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(name));
-
         }
     }
 

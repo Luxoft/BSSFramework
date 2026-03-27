@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.Tracking;
+﻿namespace Framework.Tracking;
 
 public interface ITrackingServiceContainer<in TPersistentDomainObjectBase>
 {

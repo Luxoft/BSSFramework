@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Infrastructure.Legacy</PackageId>
+  </PropertyGroup>
+
+</Project>

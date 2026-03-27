@@ -19,14 +19,9 @@ public static class ProjectionSourceExtensions
         return new CompositeProjectionSource(sources);
     }
 
-    private class CompositeProjectionSource : IProjectionSource
+    private class CompositeProjectionSource(IEnumerable<IProjectionSource> sources) : IProjectionSource
     {
-        private readonly IReadOnlyCollection<IProjectionSource> sources;
-
-        public CompositeProjectionSource(IEnumerable<IProjectionSource> sources)
-        {
-            this.sources = (sources ?? throw new ArgumentNullException(nameof(sources))).ToArray();
-        }
+        private readonly IReadOnlyCollection<IProjectionSource> sources = (sources ?? throw new ArgumentNullException(nameof(sources))).ToArray();
 
         public IEnumerable<IProjection> GetProjections()
         {

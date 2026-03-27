@@ -2,12 +2,7 @@
 
 namespace Framework.Projection.Lambda.ProjectionSource.AutoProjection;
 
-internal class ProjectionNodeValue
+internal class ProjectionNodeValue(PropertyInfo property)
 {
-    public ProjectionNodeValue(PropertyInfo property)
-    {
-        this.Property = property ?? throw new ArgumentNullException(nameof(property));
-    }
-
-    public PropertyInfo Property { get; }
+    public PropertyInfo Property { get; } = property ?? throw new ArgumentNullException(nameof(property));
 }

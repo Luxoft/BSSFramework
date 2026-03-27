@@ -2,9 +2,9 @@
 
 using CommonFramework.Maybe;
 
-namespace Framework.DomainDriven.Tracking;
+namespace Framework.Tracking;
 
-public struct TrackingProperty
+public readonly struct TrackingProperty
 {
     private readonly string propertyName;
 

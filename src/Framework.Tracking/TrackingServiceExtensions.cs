@@ -4,10 +4,9 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.Core;
+using Framework.Relations;
 
-using Framework.Persistent;
-
-namespace Framework.DomainDriven.Tracking;
+namespace Framework.Tracking;
 
 public static class TrackingServiceExtensions
 {
@@ -130,7 +129,7 @@ public static class TrackingServiceExtensions
 
         if (targetType.IsAssignableFrom(detailType))
         {
-            yield return new PropertyPath(new[] { propertyInfo });
+            yield return new PropertyPath([propertyInfo]);
         }
         else
         {

@@ -21,8 +21,5 @@ public static class TypeExtensions
     }
 
 
-    public static string ExtractSystemName(this Type type)
-    {
-        return type.Namespace!.Split('.').Skip("Framework", false).First();
-    }
+    public static string ExtractSystemName(this Type type) => type.Namespace!.Split('.').Skip("Framework", false).First();
 }

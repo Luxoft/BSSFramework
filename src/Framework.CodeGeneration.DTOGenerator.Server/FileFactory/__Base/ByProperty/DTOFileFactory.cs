@@ -6,7 +6,6 @@ using CommonFramework;
 
 using Framework.BLL.Domain.DTO.MappingObject;
 using Framework.BLL.Domain.Persistent.Attributes;
-using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.DTOGenerator.Extensions;

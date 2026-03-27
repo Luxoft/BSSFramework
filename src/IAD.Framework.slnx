@@ -16,20 +16,6 @@
     <Project Path="_Authorization/Framework.Authorization.TestGenerate/Framework.Authorization.TestGenerate.csproj" />
     <Project Path="_Authorization/Framework.Authorization.WebApiGenerate/Framework.Authorization.WebApiGenerate.csproj" />
   </Folder>
-  <Folder Name="/CodeGeneration/">
-    <Project Path="Framework.CodeDom/Framework.CodeDom.csproj" />
-    <Project Path="Framework.CodeGeneration.BLLCoreGenerator/Framework.CodeGeneration.BLLCoreGenerator.csproj" />
-    <Project Path="Framework.CodeGeneration.BLLGenerator/Framework.CodeGeneration.BLLGenerator.csproj" />
-    <Project Path="Framework.CodeGeneration.ProjectionGenerator/Framework.CodeGeneration.ProjectionGenerator.csproj" />
-    <Project Path="Framework.CodeGeneration.WebApiGenerator/Framework.CodeGeneration.WebApiGenerator.csproj" />
-    <Project Path="Framework.CodeGeneration/Framework.CodeGeneration.csproj" />
-    <Project Path="Framework.FileGeneration/Framework.FileGeneration.csproj" />
-  </Folder>
-  <Folder Name="/CodeGeneration/DTO/">
-    <Project Path="Framework.CodeGeneration.DTOGenerator.Audit/Framework.CodeGeneration.DTOGenerator.Audit.csproj" />
-    <Project Path="Framework.CodeGeneration.DTOGenerator.Server/Framework.CodeGeneration.DTOGenerator.Server.csproj" />
-    <Project Path="Framework.CodeGeneration.DTOGenerator/Framework.CodeGeneration.DTOGenerator.csproj" />
-  </Folder>
   <Folder Name="/Configuration/">
     <Project Path="_Configuration/Framework.Configuration.BLL.Core.Tests.Unit/Framework.Configuration.BLL.Core.Tests.Unit.csproj" />
     <Project Path="_Configuration/Framework.Configuration.BLL.Core/Framework.Configuration.BLL.Core.csproj" />
@@ -48,10 +34,6 @@
     <Project Path="_Configuration/Framework.Configuration.TestGenerate/Framework.Configuration.TestGenerate.csproj" />
     <Project Path="_Configuration/Framework.Configuration.WebApiGenerate/Framework.Configuration.WebApiGenerate.csproj" />
   </Folder>
-  <Folder Name="/Configurator/">
-    <Project Path="Framework.Configurator.ApplicationVariable/Framework.Configurator.ApplicationVariable.csproj" />
-    <Project Path="Framework.Configurator.Events/Framework.Configurator.Events.csproj" />
-  </Folder>
   <Folder Name="/DomainDriven/">
     <Project Path="_DomainDriven/Framework.DomainDriven.DAL.Sql/Framework.DomainDriven.DAL.Sql.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.DBGenerator.Tests.Unit/Framework.DomainDriven.DBGenerator.Tests.Unit.csproj" />
@@ -59,21 +41,9 @@
     <Project Path="_DomainDriven/Framework.DomainDriven.EntityFramework/Framework.DomainDriven.EntityFramework.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.NHibernate.DALGenerator/Framework.DomainDriven.NHibernate.DALGenerator.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.NHibernate.LegacyContext/Framework.DomainDriven.NHibernate.LegacyContext.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.ServiceModel.IAD.DTO/Framework.DomainDriven.ServiceModel.IAD.DTO.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.ServiceModel.IAD.LegacyContext/Framework.DomainDriven.ServiceModel.IAD.LegacyContext.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.ServiceModel.Tests.Unit/Framework.DomainDriven.ServiceModel.Tests.Unit.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.Setup.Abstract/Framework.DomainDriven.Setup.Abstract.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.Setup.Legacy/Framework.DomainDriven.Setup.Legacy.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.Setup/Framework.DomainDriven.Setup.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.Tests.Unit/Framework.DomainDriven.Tests.Unit.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.WebApiGenerator.NetCore/Framework.DomainDriven.WebApiGenerator.NetCore.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.WebApiNetCore.LegacyContext/Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.WebApiNetCore.Swagger/Framework.DomainDriven.WebApiNetCore.Swagger.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.WebApiNetCore/Framework.DomainDriven.WebApiNetCore.csproj" />
-  </Folder>
-  <Folder Name="/Projection/">
-    <Project Path="Framework.Projection.Abstractions/Framework.Projection.Abstractions.csproj" />
-    <Project Path="Framework.Projection.Runtime/Framework.Projection.Runtime.csproj" />
   </Folder>
   <Folder Name="/SampleSystem/">
     <Project Path="_SampleSystem/SampleSystem.AuditDomain/SampleSystem.AuditDomain.csproj" />
@@ -121,6 +91,25 @@
     <Project Path="Framework.BLL.ServiceModel/Framework.BLL.ServiceModel.csproj" />
     <Project Path="Framework.BLL/Framework.BLL.csproj" />
   </Folder>
+  <Folder Name="/_CodeGeneration/">
+    <Project Path="Framework.CodeDom/Framework.CodeDom.csproj" />
+    <Project Path="Framework.CodeGeneration.BLLCoreGenerator/Framework.CodeGeneration.BLLCoreGenerator.csproj" />
+    <Project Path="Framework.CodeGeneration.BLLGenerator/Framework.CodeGeneration.BLLGenerator.csproj" />
+    <Project Path="Framework.CodeGeneration.ProjectionGenerator/Framework.CodeGeneration.ProjectionGenerator.csproj" />
+    <Project Path="Framework.CodeGeneration.ServiceModelGenerator/Framework.CodeGeneration.ServiceModelGenerator.csproj" />
+    <Project Path="Framework.CodeGeneration.WebApiGenerator/Framework.CodeGeneration.WebApiGenerator.csproj" />
+    <Project Path="Framework.CodeGeneration/Framework.CodeGeneration.csproj" />
+    <Project Path="Framework.FileGeneration/Framework.FileGeneration.csproj" />
+  </Folder>
+  <Folder Name="/_CodeGeneration/DTO/">
+    <Project Path="Framework.CodeGeneration.DTOGenerator.Audit/Framework.CodeGeneration.DTOGenerator.Audit.csproj" />
+    <Project Path="Framework.CodeGeneration.DTOGenerator.Server/Framework.CodeGeneration.DTOGenerator.Server.csproj" />
+    <Project Path="Framework.CodeGeneration.DTOGenerator/Framework.CodeGeneration.DTOGenerator.csproj" />
+  </Folder>
+  <Folder Name="/_Configurator/">
+    <Project Path="Framework.Configurator.ApplicationVariable/Framework.Configurator.ApplicationVariable.csproj" />
+    <Project Path="Framework.Configurator.Events/Framework.Configurator.Events.csproj" />
+  </Folder>
   <Folder Name="/_Database/">
     <Project Path="Framework.Database.Abstractions/Framework.Database.Abstractions.csproj" />
     <Project Path="Framework.Database.Domain/Framework.Database.Domain.csproj" />
@@ -134,6 +123,15 @@
   <Folder Name="/_Domain/">
     <Project Path="Framework.Relations/Framework.Relations.csproj" />
     <Project Path="Framework.Restriction/Framework.Restriction.csproj" />
+  </Folder>
+  <Folder Name="/_Infrastructure/">
+    <Project Path="Framework.Infrastructure.Abstractions/Framework.Infrastructure.Abstractions.csproj" />
+    <Project Path="Framework.Infrastructure.Legacy/Framework.Infrastructure.Legacy.csproj" />
+    <Project Path="Framework.Infrastructure/Framework.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/_Projection/">
+    <Project Path="Framework.Projection.Abstractions/Framework.Projection.Abstractions.csproj" />
+    <Project Path="Framework.Projection.Runtime/Framework.Projection.Runtime.csproj" />
   </Folder>
 
   <Folder Name="/__SolutionItems/">

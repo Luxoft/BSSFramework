@@ -1,4 +1,4 @@
-﻿using Framework.BLL.Domain.MasterDetails;
+﻿using Framework.Relations;
 
 namespace Framework.BLL.Domain.DAL.Revisions;
 

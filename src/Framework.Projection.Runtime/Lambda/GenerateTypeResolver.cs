@@ -4,18 +4,11 @@ using Framework.Projection.Lambda.ImplType;
 
 namespace Framework.Projection.Lambda;
 
-internal class GenerateTypeResolver : ITypeResolver<IProjection>
+internal class GenerateTypeResolver(ProjectionLambdaEnvironment environment) : ITypeResolver<IProjection>
 {
-    private readonly ProjectionLambdaEnvironment environment;
+    private readonly ProjectionLambdaEnvironment environment = environment ?? throw new ArgumentNullException(nameof(environment));
 
     private readonly Dictionary<IProjection, GeneratedType> generateTypes = new Dictionary<IProjection, GeneratedType>();
-
-
-    public GenerateTypeResolver(ProjectionLambdaEnvironment environment)
-    {
-        this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
-    }
-
 
     public Type Resolve(IProjection projection)
     {

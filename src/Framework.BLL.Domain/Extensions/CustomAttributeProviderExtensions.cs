@@ -47,38 +47,22 @@ public static class CustomAttributeProviderExtensions
         return res;
     }
 
-    public static ViewDomainObjectAttribute? GetViewDomainObjectAttribute(this ICustomAttributeProvider source)
-    {
-        return source.GetCustomAttribute<ViewDomainObjectAttribute>();
-    }
+    public static ViewDomainObjectAttribute? GetViewDomainObjectAttribute(this ICustomAttributeProvider source) => source.GetCustomAttribute<ViewDomainObjectAttribute>();
 
-    public static EditDomainObjectAttribute? GetEditDomainObjectAttribute(this ICustomAttributeProvider source)
-    {
-        return source.GetCustomAttribute<EditDomainObjectAttribute>();
-    }
+    public static EditDomainObjectAttribute? GetEditDomainObjectAttribute(this ICustomAttributeProvider source) => source.GetCustomAttribute<EditDomainObjectAttribute>();
 
-    public static DomainObjectAccessAttribute? GetDomainObjectAccessAttribute(this ICustomAttributeProvider source)
-    {
-        return source.GetCustomAttribute<DomainObjectAccessAttribute>();
-    }
+    public static DomainObjectAccessAttribute? GetDomainObjectAccessAttribute(this ICustomAttributeProvider source) => source.GetCustomAttribute<DomainObjectAccessAttribute>();
 
-    public static DomainObjectAccessAttribute? GetDomainObjectAccessAttribute(this ICustomAttributeProvider source, bool isEdit)
-    {
-        return isEdit ? source.GetEditDomainObjectAttribute() : source.GetViewDomainObjectAttribute();
-    }
+    public static DomainObjectAccessAttribute? GetDomainObjectAccessAttribute(this ICustomAttributeProvider source, bool isEdit) => isEdit ? source.GetEditDomainObjectAttribute() : source.GetViewDomainObjectAttribute();
 
-    public static IEnumerable<DomainObjectAccessAttribute> GetDomainObjectAccessAttributes(this ICustomAttributeProvider source)
-    {
-        return from flag in new[] { true, false }
+    public static IEnumerable<DomainObjectAccessAttribute> GetDomainObjectAccessAttributes(this ICustomAttributeProvider source) =>
+        from flag in new[] { true, false }
 
-               let attr = source.GetDomainObjectAccessAttribute(flag)
+        let attr = source.GetDomainObjectAccessAttribute(flag)
 
-               where attr != null
+        where attr != null
 
-               select attr;
-    }
-
-
+        select attr;
 
     public static bool IsSecurity(this ICustomAttributeProvider source)
     {

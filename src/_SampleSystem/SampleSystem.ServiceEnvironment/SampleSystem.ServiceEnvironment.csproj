@@ -13,8 +13,6 @@
     <ProjectReference Include="..\..\Framework.WebApi.Utils\Framework.WebApi.Utils.csproj" />
 
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Environment\Framework.Authorization.Environment.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Setup.Legacy\Framework.DomainDriven.Setup.Legacy.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.WebApiNetCore.LegacyContext\Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj" />
 
     <ProjectReference Include="..\SampleSystem.AuditDomain\SampleSystem.AuditDomain.csproj" />
     <ProjectReference Include="..\SampleSystem.BLL\SampleSystem.BLL.csproj" />

@@ -4,7 +4,6 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.BLL.Domain.Extensions;
-using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Configuration;

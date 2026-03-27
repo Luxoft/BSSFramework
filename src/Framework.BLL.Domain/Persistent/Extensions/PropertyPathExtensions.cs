@@ -26,39 +26,35 @@ public static class PropertyPathExtensions
                     .Invoke<IDictionaryCache<PropertyInfo, ReadOnlyCollection<PropertyPath>>>(null)).WithLock();
 
     private static IDictionaryCache<Tuple<PropertyInfo, bool>, PropertyPath?> GetInternalSingleCache<TAttribute>()
-            where TAttribute : Attribute, IPathAttribute
-    {
-        return new DictionaryCache<Tuple<PropertyInfo, bool>, PropertyPath?>((propertyPair, cache) =>
-                                                                            {
-                                                                                var property = propertyPair.Item1;
+            where TAttribute : Attribute, IPathAttribute =>
+        new DictionaryCache<Tuple<PropertyInfo, bool>, PropertyPath?>((propertyPair, cache) =>
+        {
+            var property = propertyPair.Item1;
 
-                                                                                var recurse = propertyPair.Item2;
+            var recurse = propertyPair.Item2;
 
-                                                                                var pathRequest = from pathAttribute in property.GetCustomAttribute<TAttribute>().ToMaybe()
+            var pathRequest = from pathAttribute in property.GetCustomAttribute<TAttribute>().ToMaybe()
 
-                                                                                    let basePath = property.ReflectedType!.GetPropertyPath(pathAttribute.Path)
+                              let basePath = property.ReflectedType!.GetPropertyPath(pathAttribute.Path)
 
-                                                                                    select recurse && !basePath.SequenceEqual([property]) ? new PropertyPath(basePath.SelectMany(prop => (IEnumerable<PropertyInfo>)cache.GetValue(prop, true) ??
-                                                                                    [
-                                                                                        prop
-                                                                                    ])) : basePath;
+                              select recurse && !basePath.SequenceEqual([property]) ? new PropertyPath(basePath.SelectMany(prop => (IEnumerable<PropertyInfo>)cache.GetValue(prop, true) ??
+                              [
+                                  prop
+                              ])) : basePath;
 
-                                                                                return pathRequest.GetValueOrDefault();
-                                                                            }).WithLock();
-    }
+            return pathRequest.GetValueOrDefault();
+        }).WithLock();
 
     private static IDictionaryCache<PropertyInfo, ReadOnlyCollection<PropertyPath>> GetInternalManyCache<TAttribute>()
-            where TAttribute : Attribute, IPathAttribute
-    {
-        return new DictionaryCache<PropertyInfo, ReadOnlyCollection<PropertyPath>>(property =>
-                                                                                   {
-                                                                                       var pathsRequest = from pathAttribute in property.GetCustomAttributes<TAttribute>()
+            where TAttribute : Attribute, IPathAttribute =>
+        new DictionaryCache<PropertyInfo, ReadOnlyCollection<PropertyPath>>(property =>
+        {
+            var pathsRequest = from pathAttribute in property.GetCustomAttributes<TAttribute>()
 
-                                                                                           select property.ReflectedType!.GetPropertyPath(pathAttribute.Path);
+                               select property.ReflectedType!.GetPropertyPath(pathAttribute.Path);
 
-                                                                                       return pathsRequest.ToReadOnlyCollection();
-                                                                                   }).WithLock();
-    }
+            return pathsRequest.ToReadOnlyCollection();
+        }).WithLock();
 
     extension(Type domainObjectType)
     {

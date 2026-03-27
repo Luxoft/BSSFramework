@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 
 using Framework.Application.Domain;
-using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DomainMetadata;

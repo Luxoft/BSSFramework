@@ -1,14 +1,8 @@
 ﻿namespace Framework.Projection.Lambda.ProjectionSource.AutoProjection;
 
-internal class LastProjectionProperty
+internal class LastProjectionProperty(string propertyName, ProjectionBuilder.ProjectionBuilder elementProjection)
 {
-    public LastProjectionProperty(string propertyName, ProjectionBuilder.ProjectionBuilder elementProjection)
-    {
-        this.PropertyName = propertyName ?? throw new ArgumentNullException(nameof(propertyName));
-        this.ElementProjection = elementProjection;
-    }
+    public string PropertyName { get; } = propertyName ?? throw new ArgumentNullException(nameof(propertyName));
 
-    public string PropertyName { get; }
-
-    public ProjectionBuilder.ProjectionBuilder ElementProjection { get; }
+    public ProjectionBuilder.ProjectionBuilder ElementProjection { get; } = elementProjection;
 }

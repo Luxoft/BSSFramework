@@ -1,4 +1,4 @@
-﻿using Framework.BLL.Domain.MasterDetails;
+﻿using Framework.Relations;
 
 namespace Framework.BLL.Domain.DAL.Revisions;
 
@@ -16,10 +16,7 @@ public class PropertyRevision<TIdent, TProperty> : RevisionInfoBase, IDetail<Dom
         this.master.AddDetail(this);
     }
 
-    public TProperty Value
-    {
-        get { return this.value; }
-    }
+    public TProperty Value => this.value;
 
-    DomainObjectPropertyRevisions<TIdent, TProperty> IDetail<DomainObjectPropertyRevisions<TIdent, TProperty>>.Master { get { return this.master; } }
+    DomainObjectPropertyRevisions<TIdent, TProperty> IDetail<DomainObjectPropertyRevisions<TIdent, TProperty>>.Master => this.master;
 }

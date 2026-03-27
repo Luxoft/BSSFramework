@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Framework.BLL.DTOMapping\Framework.BLL.DTOMapping.csproj" />
     <ProjectReference Include="..\Framework.CodeGeneration\Framework.CodeGeneration.csproj" />
   </ItemGroup>
 

@@ -4,7 +4,6 @@ using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
 using Framework.Core;
 using Framework.Database;
-using Framework.Database.Attr;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 
@@ -35,5 +34,5 @@ public abstract class ModelMethodGenerator<TConfiguration, TBLLRoleAttribute> : 
 
     protected sealed override DBSessionMode SessionMode =>
 
-            this.ModelType.GetCustomAttribute<DbSessionModeAttribute>().Maybe(attr => attr.SessionMode, () => base.SessionMode);
+            this.ModelType.GetCustomAttribute<DBSessionModeAttribute>().Maybe(attr => attr.SessionMode, () => base.SessionMode);
 }

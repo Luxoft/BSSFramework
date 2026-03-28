@@ -5,18 +5,11 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 
 namespace Framework.Infrastructure.Middleware;
 
-public class WebApiCurrentMethodResolver : IWebApiCurrentMethodResolver
+public class WebApiCurrentMethodResolver(IHttpContextAccessor httpContextAccessor) : IWebApiCurrentMethodResolver
 {
-    private readonly IHttpContextAccessor httpContextAccessor;
-
-    public WebApiCurrentMethodResolver(IHttpContextAccessor httpContextAccessor)
+    public MethodInfo? TryGetCurrentMethod()
     {
-        this.httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
-    }
-
-    public MethodInfo? GetCurrentMethod()
-    {
-        var endPoint = this.httpContextAccessor?.HttpContext?.GetEndpoint();
+        var endPoint = httpContextAccessor.HttpContext?.GetEndpoint();
 
         return endPoint?.Metadata.GetMetadata<ControllerActionDescriptor>()?.MethodInfo;
     }

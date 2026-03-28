@@ -14,7 +14,7 @@ using SecuritySystem;
 
 namespace Framework.Infrastructure.DALListener;
 
-public class DenormalizeHierarchicalDalListener(
+public class DenormalizeHierarchicalDALListener(
     IServiceProvider serviceProvider,
     IEnumerable<FullAncestorLinkInfo> hierarchicalInfoList,
     INamedLockSource namedLockSource,

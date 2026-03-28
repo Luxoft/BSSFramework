@@ -1,23 +1,21 @@
-﻿using System.Security;
+﻿using System.Collections.Concurrent;
 
 using Framework.Application.Services;
 using Framework.Core;
-using Framework.Database;
-using Framework.Database.DALExceptions;
-
-using SecuritySystem;
 
 namespace Framework.Infrastructure.WebApiExceptionExpander;
 
-public class WebApiExceptionExpander(IExceptionExpander exceptionExpander) : IWebApiExceptionExpander
+public class WebApiExceptionExpander(WebApiExceptionExpanderSettings settings, IExceptionExpander exceptionExpander) : IWebApiExceptionExpander
 {
+    private readonly ConcurrentDictionary<Type, bool> isHandledExceptionCache = [];
+
     public Exception Process(Exception baseException)
     {
         var exception = exceptionExpander.Process(baseException);
 
         return this.IsHandledException(exception)
-                       ? exception
-                       : this.GetInternalServerException(exception);
+                   ? exception
+                   : this.GetInternalServerException(exception);
     }
 
     /// <summary>
@@ -28,25 +26,7 @@ public class WebApiExceptionExpander(IExceptionExpander exceptionExpander) : IWe
     /// <summary>
     /// Is Handled Exception
     /// </summary>
-    protected virtual bool IsHandledException(Exception exception)
-    {
-        if (exception == null) { throw new ArgumentNullException(nameof(exception)); }
-
-        var exceptionType = exception.GetType();
-
-        var expectedExceptions = new[]
-                                 {
-                                         typeof(BusinessLogicException),
-                                         typeof(IntegrationException),
-                                         typeof(SecurityException),
-                                         typeof(Validation.ValidationException),
-                                         typeof(DALException),
-                                         typeof(StaleDomainObjectStateException),
-                                         typeof(SecuritySystemException),
-                                         typeof(FluentValidation.ValidationException)
-
-                                 };
-
-        return exceptionType.IsAssignableToAny(expectedExceptions);
-    }
+    protected virtual bool IsHandledException(Exception exception) => this.isHandledExceptionCache.GetOrAdd(
+        exception.GetType(),
+        exceptionType => exceptionType.IsAssignableToAny(settings.HandledTypes));
 }

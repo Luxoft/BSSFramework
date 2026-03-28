@@ -14,7 +14,7 @@ public class TryProcessDbSessionMiddleware
         this.next = next;
     }
 
-    public async Task Invoke(HttpContext context, IDBSessionManager dbSessionManager, IWebApiDBSessionModeResolver sessionModeResolver)
+    public async Task Invoke(HttpContext context, IDBSessionManager dbSessionManager, IWebApiCurrentDBSessionModeResolver sessionModeResolver)
     {
         await dbSessionManager.EvaluateAsync(
             async () =>

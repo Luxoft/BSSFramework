@@ -5,6 +5,7 @@ using CommonFramework;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Models;
 using Framework.BLL.Domain.ServiceRole;
+
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Server;
@@ -15,7 +16,6 @@ using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save.Base;
 using Framework.Core;
 using Framework.Database;
-using Framework.Database.Attr;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save.ByModel;
 
@@ -48,7 +48,7 @@ public class IntegrationSaveModelMethodGenerator<TConfiguration> : IntegrationMe
 
     protected sealed override DBSessionMode SessionMode =>
 
-            this.modelType.GetCustomAttribute<DbSessionModeAttribute>().Maybe(attr => attr.SessionMode, () => base.SessionMode);
+            this.modelType.GetCustomAttribute<DBSessionModeAttribute>().Maybe(attr => attr.SessionMode, () => base.SessionMode);
 
 
     protected override string GetComment() => $"Save {this.DomainType.Name} by model {this.modelType.Name}";

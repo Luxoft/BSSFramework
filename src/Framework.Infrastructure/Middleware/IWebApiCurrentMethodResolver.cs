@@ -4,5 +4,5 @@ namespace Framework.Infrastructure.Middleware;
 
 public interface IWebApiCurrentMethodResolver
 {
-    MethodInfo? GetCurrentMethod();
+    MethodInfo? TryGetCurrentMethod();
 }

@@ -1,33 +1,27 @@
-﻿using System.Reflection;
+﻿using System.Collections.Concurrent;
+using System.Reflection;
 
-using CommonFramework;
+using CommonFramework.Maybe;
 
+using Framework.Core;
 using Framework.Database;
 
 namespace Framework.Infrastructure.Middleware;
 
 public class WebApiDBSessionModeResolver : IWebApiDBSessionModeResolver
 {
-    private readonly IWebApiCurrentMethodResolver methodResolver;
+    private readonly ConcurrentDictionary<MethodInfo, DBSessionMode?> cache = [];
 
-    public WebApiDBSessionModeResolver(IWebApiCurrentMethodResolver methodResolver)
-    {
-        this.methodResolver = methodResolver;
-    }
+    public DBSessionMode? GetSessionMode(MethodInfo methodInfo) =>
+        this.cache.GetOrAdd(
+            methodInfo,
+            _ =>
+            {
+                var attrs = new[] { methodInfo.GetCustomAttribute<DBSessionModeAttribute>(), methodInfo.ReflectedType!.GetCustomAttribute<DBSessionModeAttribute>() };
 
-    public DBSessionMode? GetSessionMode()
-    {
-        var currentMethod = this.methodResolver.GetCurrentMethod();
-
-        var attrs = new[]
-        {
-            currentMethod.Maybe(m => m.GetCustomAttribute<DBSessionModeAttribute>()),
-            currentMethod.Maybe(m => m.ReflectedType.GetCustomAttribute<DBSessionModeAttribute>())
-        };
-
-        return attrs.FirstOrDefault(attr => attr != null)
-                    .ToMaybe()
-                    .Select(attr => attr.SessionMode)
-                    .ToNullable();
-    }
+                return attrs.FirstOrDefault(attr => attr != null)
+                            .ToMaybe()
+                            .Select(attr => attr.SessionMode)
+                            .ToNullable();
+            });
 }

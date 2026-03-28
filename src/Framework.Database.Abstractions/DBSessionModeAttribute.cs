@@ -1,7 +1,7 @@
-﻿namespace Framework.Database.Attr;
+﻿namespace Framework.Database;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-public class DbSessionModeAttribute(DBSessionMode sessionMode) : Attribute
+public class DBSessionModeAttribute(DBSessionMode sessionMode) : Attribute
 {
     public DBSessionMode SessionMode { get; } = sessionMode;
 }

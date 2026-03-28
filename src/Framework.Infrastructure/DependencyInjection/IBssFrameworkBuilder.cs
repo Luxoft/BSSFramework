@@ -7,20 +7,20 @@ using SecuritySystem.DependencyInjection;
 
 namespace Framework.Infrastructure.DependencyInjection;
 
-public interface IBssFrameworkSettings : IBssFrameworkBuilderBase<IBssFrameworkSettings>
+public interface IBssFrameworkBuilder : IBssFrameworkBuilderBase<IBssFrameworkBuilder>
 {
     bool RegisterDenormalizeHierarchicalDALListener { get; set; }
 
-    IBssFrameworkSettings AddSecuritySystem(Action<ISecuritySystemBuilder> setupAction);
+    IBssFrameworkBuilder AddSecuritySystem(Action<ISecuritySystemBuilder> setupAction);
 
-    IBssFrameworkSettings AddNamedLocks(Action<IGenericNamedLockBuilder> setupAction);
+    IBssFrameworkBuilder AddNamedLocks(Action<IGenericNamedLockBuilder> setupAction);
 
-    IBssFrameworkSettings AddListener<TListener>()
+    IBssFrameworkBuilder AddListener<TListener>()
         where TListener : class, IDALListener;
 
-    IBssFrameworkSettings SetDomainObjectEventMetadata<T>()
+    IBssFrameworkBuilder SetDomainObjectEventMetadata<T>()
         where T : IDomainObjectEventMetadata;
 
-    IBssFrameworkSettings AddQueryVisitors<TExpressionVisitorContainerItem>(bool scoped = false)
+    IBssFrameworkBuilder AddQueryVisitors<TExpressionVisitorContainerItem>(bool scoped = false)
         where TExpressionVisitorContainerItem : class, IExpressionVisitorContainerItem;
 }

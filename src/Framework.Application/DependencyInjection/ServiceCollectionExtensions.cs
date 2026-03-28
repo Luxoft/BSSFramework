@@ -20,7 +20,7 @@ public static class ServiceCollectionExtensions
 {
     extension(IServiceCollection services)
     {
-        public IServiceCollection RegisterListeners(Action<IDALListenerBuilder> setupAction) =>
+        public IServiceCollection AddListeners(Action<IDALListenerBuilder> setupAction) =>
             services.Initialize<DALListenerBuilder>(setupAction);
 
         public IServiceCollection AddNamedLocks(Action<IGenericNamedLockBuilder> setupAction) =>

@@ -4,6 +4,7 @@
     <Project Path="Application/Framework.Application.Abstractions/Framework.Application.Abstractions.csproj" />
     <Project Path="Application/Framework.Application.Domain/Framework.Application.Domain.csproj" />
     <Project Path="Application/Framework.Application.Runtime/Framework.Application.Runtime.csproj" />
+    <Project Path="Application/Framework.Application.Tests/Framework.Application.Tests.csproj" />
     <Project Path="Application/Framework.Application/Framework.Application.csproj" />
   </Folder>
   <Folder Name="/AutomationCore/">
@@ -190,7 +191,6 @@
   <Project Path="Framework.HangfireCore/Framework.HangfireCore.csproj" />
   <Project Path="Framework.NotificationCore/Framework.NotificationCore.csproj" />
   <Project Path="Framework.Parsing/Framework.Parsing.csproj" />
-  <Project Path="_DomainDriven/Framework.FinancialYear.Tests.Unit/Framework.FinancialYear.Tests.Unit.csproj" />
   <Project Path="_DomainDriven/Framework.Notification.Abstract/Framework.Notification.Abstract.csproj" />
   <Project Path="_DomainDriven/Framework.Notification.DTO/Framework.Notification.DTO.csproj" />
   <Project Path="_DomainDriven/Framework.Notification/Framework.Notification.csproj" />

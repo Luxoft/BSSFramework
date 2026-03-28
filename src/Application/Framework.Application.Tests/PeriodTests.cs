@@ -4,7 +4,7 @@ using Framework.Application.FinancialYear;
 
 using NUnit.Framework;
 
-namespace Framework.FinancialYear.Tests.Unit;
+namespace Framework.Application.Tests;
 
 // MethodUnderTest_Scenario_Behavior
 [TestFixture]

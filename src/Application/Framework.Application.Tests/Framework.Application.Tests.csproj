@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Framework.Application.Runtime\Framework.Application.Runtime.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,9 +4,10 @@ using SecuritySystem.GeneralPermission.Validation;
 
 namespace Framework.Authorization.Environment;
 
-public interface IAuthorizationSystemSettings
+public interface IAuthorizationSystemBuilder
 {
     bool RegisterRunAsManager { get; set; }
-    IAuthorizationSystemSettings SetUniquePermissionComparer<TComparer>()
+
+    IAuthorizationSystemBuilder SetUniquePermissionComparer<TComparer>()
         where TComparer : class, IPermissionEqualityComparer<Permission, PermissionRestriction>;
 }

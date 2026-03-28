@@ -4,10 +4,10 @@ namespace Framework.Authorization.WebApiGenerate;
 
 public class WebApiGenerationEnvironment : ServerGenerationEnvironment
 {
-    public readonly MainSLControllerConfiguration MainSLController;
+    public readonly MainControllerConfiguration MainController;
 
     public WebApiGenerationEnvironment()
     {
-        this.MainSLController = new MainSLControllerConfiguration(this);
+        this.MainController = new MainControllerConfiguration(this);
     }
 }

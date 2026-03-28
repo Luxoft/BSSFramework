@@ -1,10 +1,11 @@
 ﻿using CommonFramework;
+using CommonFramework.DependencyInjection;
 using CommonFramework.RelativePath.DependencyInjection;
 
+using Framework.Application;
 using Framework.Authorization.Domain;
 using Framework.Authorization.Environment.Security;
 using Framework.Core;
-using Framework.DomainDriven;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,21 +14,18 @@ using SecuritySystem.DependencyInjection;
 using SecuritySystem.ExternalSystem.ApplicationSecurity;
 using SecuritySystem.GeneralPermission.DependencyInjection;
 using SecuritySystem.GeneralPermission.Validation;
-using SecuritySystem.Notification;
 using SecuritySystem.Notification.DependencyInjection;
 using SecuritySystem.UserSource;
 
 namespace Framework.Authorization.Environment;
 
-public class AuthorizationSystemSettings : IAuthorizationSystemSettings
+public class AuthorizationSystemBuilder : IAuthorizationSystemBuilder, IServiceInitializer<ISecuritySystemBuilder>
 {
-    private Type notificationPermissionExtractorType = typeof(NotificationPermissionExtractor<>);
-
     private Type? uniquePermissionComparerType;
 
     public bool RegisterRunAsManager { get; set; } = true;
 
-    public IAuthorizationSystemSettings SetUniquePermissionComparer<TComparer>()
+    public IAuthorizationSystemBuilder SetUniquePermissionComparer<TComparer>()
         where TComparer : class, IPermissionEqualityComparer<Permission, PermissionRestriction>
     {
         this.uniquePermissionComparerType = typeof(TComparer);

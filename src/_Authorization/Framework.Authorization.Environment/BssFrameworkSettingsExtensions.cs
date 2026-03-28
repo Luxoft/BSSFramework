@@ -1,19 +1,11 @@
-﻿using SecuritySystem.DependencyInjection;
+﻿using CommonFramework.DependencyInjection;
+
+using SecuritySystem.DependencyInjection;
 
 namespace Framework.Authorization.Environment;
 
 public static class BssFrameworkSettingsExtensions
 {
-    public static ISecuritySystemBuilder AddAuthorizationSystem(
-        this ISecuritySystemBuilder settings,
-        Action<IAuthorizationSystemSettings>? setup = null)
-    {
-        var authSettings = new AuthorizationSystemSettings();
-
-        setup?.Invoke(authSettings);
-
-        authSettings.Initialize(settings);
-
-        return settings;
-    }
+    public static ISecuritySystemBuilder AddAuthorizationSystem(this ISecuritySystemBuilder securitySystemBuilder, Action<IAuthorizationSystemBuilder>? setupAction = null) =>
+        securitySystemBuilder.Initialize<ISecuritySystemBuilder, AuthorizationSystemBuilder>(setupAction);
 }

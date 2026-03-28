@@ -15,11 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BLL\Framework.BLL.Abstractions\Framework.BLL.Abstractions.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Domain.Models\Framework.Authorization.Domain.Models.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="_Generated\" />
   </ItemGroup>
 
 </Project>

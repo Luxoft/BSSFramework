@@ -1,4 +1,6 @@
-﻿namespace Framework.Events.Legacy;
+﻿using Framework.Application.Events;
+
+namespace Framework.BLL.Events.SubscriptionManager;
 
 public interface IDomainOperationSerializeData<out TDomainObject>
 {

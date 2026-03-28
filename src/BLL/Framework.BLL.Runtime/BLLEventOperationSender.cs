@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Framework.Application.Events;
 
-namespace Framework.Events.Legacy;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Framework.BLL;
 
 public class BLLEventOperationSender([FromKeyedServices("BLL")] IEnumerable<IEventOperationReceiver> receivers) : IEventOperationSender
 {

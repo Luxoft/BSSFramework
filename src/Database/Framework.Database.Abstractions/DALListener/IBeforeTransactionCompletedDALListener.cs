@@ -1,3 +1,3 @@
 ﻿namespace Framework.Database.DALListener;
 
-public interface IBeforeTransactionCompletedDalListener : IDALListener;
+public interface IBeforeTransactionCompletedDALListener : IDALListener;

@@ -19,7 +19,7 @@ public class DenormalizeHierarchicalDALListener(
     IEnumerable<FullAncestorLinkInfo> hierarchicalInfoList,
     INamedLockSource namedLockSource,
     INamedLockService namedLockService)
-    : IBeforeTransactionCompletedDalListener
+    : IBeforeTransactionCompletedDALListener
 {
     private readonly IReadOnlyDictionary<Type, FullAncestorLinkInfo> hierarchicalInfoTypes = hierarchicalInfoList.ToDictionary(h => h.DomainObjectType);
 

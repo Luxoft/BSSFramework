@@ -1,8 +1,10 @@
 ﻿using CommonFramework;
 
+using Framework.Application.Events;
+
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.Events.Legacy;
+namespace Framework.BLL.Events.SubscriptionManager;
 
 /// <summary>
 /// Класс для описания правил подписок на доменные евенты

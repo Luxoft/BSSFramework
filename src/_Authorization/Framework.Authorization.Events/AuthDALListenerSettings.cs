@@ -1,5 +1,5 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.Events;
+using Framework.BLL.Events;
 
 namespace Framework.Authorization.Events;
 
@@ -17,7 +17,7 @@ public static class AuthDALListenerSettings
             Dependencies =
             [
                 TypeEventDependency.FromSaveAndRemove<PermissionRestriction, Permission>(z => z.Permission),
-                               TypeEventDependency.FromSaveAndRemove<Permission, Principal>(z => z.Principal)
+                TypeEventDependency.FromSaveAndRemove<Permission, Principal>(z => z.Principal)
             ]
         };
 }

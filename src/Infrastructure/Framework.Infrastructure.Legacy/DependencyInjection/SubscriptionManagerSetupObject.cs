@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Framework.Application.Events;
 
-namespace Framework.Events.Legacy;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Framework.Infrastructure.DependencyInjection;
 
 public class SubscriptionManagerSetupObject : ISubscriptionManagerSetupObject
 {

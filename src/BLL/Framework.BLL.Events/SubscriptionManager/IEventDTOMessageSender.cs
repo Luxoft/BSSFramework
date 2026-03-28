@@ -1,9 +1,7 @@
-﻿using Framework.Core;
+﻿using Framework.Core.MessageSender;
 
-namespace Framework.Events.Legacy;
+namespace Framework.BLL.Events.SubscriptionManager;
 
 public interface IEventDTOMessageSender<in TPersistentDomainObjectBase> : IMessageSender<
     IDomainOperationSerializeData<TPersistentDomainObjectBase>>
-    where TPersistentDomainObjectBase : class
-{
-}
+    where TPersistentDomainObjectBase : class;

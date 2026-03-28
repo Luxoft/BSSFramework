@@ -18,6 +18,20 @@ public static class ServiceCollectionExtensions
 {
     extension(IServiceCollection services)
     {
+        public IServiceCollection RegisterSubscriptionManagers(Action<ISubscriptionManagerSetupObject> setup)
+        {
+            var setupObject = new SubscriptionManagerSetupObject();
+
+            setup(setupObject);
+
+            foreach (var setupObjectInitAction in setupObject.InitActions)
+            {
+                setupObjectInitAction(services);
+            }
+
+            return services;
+        }
+
         public IServiceCollection RegisterContextEvaluators(bool useSingleCall = false)
         {
             services.AddScoped(

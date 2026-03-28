@@ -1,7 +1,10 @@
-﻿using Framework.Core;
-using Framework.DomainDriven;
+﻿using Framework.Application.Events;
+using Framework.BLL.Events.SubscriptionManager;
+using Framework.Core;
+using Framework.Database;
+using Framework.Database.DALListener;
 
-namespace Framework.Events.Legacy;
+namespace Framework.BLL.Events;
 
 /// <summary>
 /// Базовый класс для DAL-евентов

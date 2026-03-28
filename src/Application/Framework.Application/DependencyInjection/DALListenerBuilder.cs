@@ -34,7 +34,7 @@ public class DALListenerBuilder : IDALListenerBuilder, IServiceInitializer
     {
         services.AddScoped<TListener>();
 
-        var result = new[] { typeof(IAfterTransactionCompletedDalListener), typeof(IBeforeTransactionCompletedDalListener), typeof(IFlushedDalListener) }
+        var result = new[] { typeof(IAfterTransactionCompletedDALListener), typeof(IBeforeTransactionCompletedDALListener), typeof(IFlushedDALListener) }
                      .Select(interfaceType => this.TryAddCastService<TListener>(services, interfaceType))
                      .ToArray();
 

@@ -1,4 +1,4 @@
-﻿namespace Framework.Events;
+﻿namespace Framework.BLL.Events;
 
 public class EventDALListenerSettings<TPersistentDomainObjectBase>
 {

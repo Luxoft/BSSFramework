@@ -4,16 +4,16 @@ namespace Framework.Database;
 
 public class DefaultDBSessionEventListener(
     IInitializeManager initializeManager,
-    IEnumerable<IFlushedDalListener> flushedDalListener,
-    IEnumerable<IBeforeTransactionCompletedDalListener> beforeTransactionCompletedDalListener,
-    IEnumerable<IAfterTransactionCompletedDalListener> afterTransactionCompletedDalListener)
+    IEnumerable<IFlushedDALListener> flushedDALListener,
+    IEnumerable<IBeforeTransactionCompletedDALListener> beforeTransactionCompletedDALListener,
+    IEnumerable<IAfterTransactionCompletedDALListener> afterTransactionCompletedDALListener)
     : IDBSessionEventListener
 {
-    private readonly IReadOnlyCollection<IFlushedDalListener> flushedDalListener = flushedDalListener.ToArray();
+    private readonly IReadOnlyCollection<IFlushedDALListener> flushedDALListener = flushedDALListener.ToArray();
 
-    private readonly IReadOnlyCollection<IBeforeTransactionCompletedDalListener> beforeTransactionCompletedDalListener = beforeTransactionCompletedDalListener.ToArray();
+    private readonly IReadOnlyCollection<IBeforeTransactionCompletedDALListener> beforeTransactionCompletedDALListener = beforeTransactionCompletedDALListener.ToArray();
 
-    private readonly IReadOnlyCollection<IAfterTransactionCompletedDalListener> afterTransactionCompletedDalListener = afterTransactionCompletedDalListener.ToArray();
+    private readonly IReadOnlyCollection<IAfterTransactionCompletedDALListener> afterTransactionCompletedDALListener = afterTransactionCompletedDALListener.ToArray();
 
     public async Task OnFlushed(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
     {
@@ -22,7 +22,7 @@ public class DefaultDBSessionEventListener(
             return;
         }
 
-        foreach (var listener in this.flushedDalListener)
+        foreach (var listener in this.flushedDALListener)
         {
             await listener.Process(eventArgs, cancellationToken);
         }
@@ -35,7 +35,7 @@ public class DefaultDBSessionEventListener(
             return;
         }
 
-        foreach (var listener in this.beforeTransactionCompletedDalListener)
+        foreach (var listener in this.beforeTransactionCompletedDALListener)
         {
             await listener.Process(eventArgs, cancellationToken);
         }
@@ -48,7 +48,7 @@ public class DefaultDBSessionEventListener(
             return;
         }
 
-        foreach (var listener in this.afterTransactionCompletedDalListener)
+        foreach (var listener in this.afterTransactionCompletedDALListener)
         {
             await listener.Process(eventArgs, cancellationToken);
         }

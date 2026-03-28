@@ -22,6 +22,7 @@
     <ProjectReference Include="..\Framework.Database.Domain\Framework.Database.Domain.csproj" />
     <ProjectReference Include="..\Framework.Database.Mapping\Framework.Database.Mapping.csproj" />
     <ProjectReference Include="..\Framework.Database.Runtime\Framework.Database.Runtime.csproj" />
+
     <ProjectReference Include="..\..\Domain\Framework.Relations\Framework.Relations.csproj" />
   </ItemGroup>
 

@@ -1,7 +1,8 @@
 ﻿using System.Text.RegularExpressions;
+
 using Microsoft.SqlServer.Management.Smo;
 
-namespace Automation.Utils.DatabaseUtils;
+namespace Framework.AutomationCore.Utils.DatabaseUtils;
 
 public static partial class CoreDatabaseUtil
 {

@@ -1,6 +1,8 @@
-﻿using SecuritySystem.Credential;
+﻿using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
 
-namespace Automation.ServiceEnvironment;
+using SecuritySystem.Credential;
+
+namespace Framework.AutomationCore.ServiceEnvironment.WebApi;
 
 public abstract class IntegrationWebApiBase(IServiceProvider rootServiceProvider) : WebApiBase(rootServiceProvider)
 {

@@ -1,4 +1,4 @@
-﻿namespace Automation;
+﻿namespace Framework.AutomationCore.ServiceProviderPool;
 
 public interface IServiceProviderPool
 {

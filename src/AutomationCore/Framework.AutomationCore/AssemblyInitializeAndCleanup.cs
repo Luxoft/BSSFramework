@@ -1,10 +1,10 @@
-﻿using Automation.Settings;
-using Automation.Utils.DatabaseUtils;
+﻿using Framework.AutomationCore.Settings;
+using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace Automation;
+namespace Framework.AutomationCore;
 
 public class AssemblyInitializeAndCleanup(
     Func<IServiceProvider> getServiceProviderAction,

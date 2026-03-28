@@ -16,6 +16,7 @@
     <ProjectReference Include="..\Framework.Database.Metadata\Framework.Database.Metadata.csproj" />
     <ProjectReference Include="..\Framework.Database.NHibernate.Runtime\Framework.Database.NHibernate.Runtime.csproj" />
     <ProjectReference Include="..\Framework.Database.SqlMapper\Framework.Database.SqlMapper.csproj" />
+
     <ProjectReference Include="..\..\Projection\Framework.Projection.Domain\Framework.Projection.Domain.csproj" />
   </ItemGroup>
 

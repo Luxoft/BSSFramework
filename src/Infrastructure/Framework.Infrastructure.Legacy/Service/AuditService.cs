@@ -4,13 +4,13 @@ using CommonFramework;
 
 using Framework.Application.Domain;
 using Framework.BLL;
-using Framework.BLL.Domain.DAL.Revisions;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Extensions;
 using Framework.BLL.DTOMapping.Domain;
 using Framework.BLL.Services;
 using Framework.Core;
 using Framework.Core.TypeResolving;
+using Framework.Database.Domain;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -89,7 +89,7 @@ public class AuditService<TIdent, TBllContext, TBllFactoryContainer, TRootSecuri
         }
         else
         {
-            result.RevisionInfos = propertyChanged.RevisionInfos.Select(z => this.CreateGenericProperptyRevisionDto(z, z.Value)).ToList();
+            result.RevisionInfos = propertyChanged.RevisionInfos.Select(z => this.CreateGenericPropertyRevisionDto(z, z.Value)).ToList();
         }
 
         return result;
@@ -107,17 +107,17 @@ public class AuditService<TIdent, TBllContext, TBllFactoryContainer, TRootSecuri
     {
         if (null == propertyRevision.Value)
         {
-            return this.CreateGenericProperptyRevisionDto(propertyRevision, default(TDtoProperty));
+            return this.CreateGenericPropertyRevisionDto(propertyRevision, default(TDtoProperty));
         }
 
         var dtoPropertyValue =
                 (TDtoProperty)
                 Activator.CreateInstance(typeof(TDtoProperty), bllContext, propertyRevision.Value)!;
 
-        return this.CreateGenericProperptyRevisionDto(propertyRevision, dtoPropertyValue);
+        return this.CreateGenericPropertyRevisionDto(propertyRevision, dtoPropertyValue);
     }
 
-    private TPropertyRevisionDto CreateGenericProperptyRevisionDto<TValue>(RevisionInfoBase propertyRevisionInfo, TValue value)
+    private TPropertyRevisionDto CreateGenericPropertyRevisionDto<TValue>(RevisionInfoBase propertyRevisionInfo, TValue value)
     {
         var genericType = GenericTPropertyRevisionDtoType.Value.MakeGenericType(typeof(TValue));
 

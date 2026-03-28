@@ -3,16 +3,15 @@ using System.Runtime.Serialization;
 
 using CommonFramework;
 
-using Framework.BLL.Domain.DAL.Revisions;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.DTOMapping.Domain;
-using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.Core;
+using Framework.Database.Domain;
 using Framework.Database.Mapping;
 using Framework.Projection;
 

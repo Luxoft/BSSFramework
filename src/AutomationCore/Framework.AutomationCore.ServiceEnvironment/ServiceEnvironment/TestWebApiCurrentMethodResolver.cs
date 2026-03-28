@@ -1,14 +1,14 @@
 ﻿using System.Reflection;
 
-using Framework.DomainDriven.WebApiNetCore;
+using Framework.Infrastructure.Middleware;
 
-namespace Automation.ServiceEnvironment;
+namespace Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
 
 public class TestWebApiCurrentMethodResolver : IWebApiCurrentMethodResolver
 {
-    private MethodInfo currentMethod;
+    private MethodInfo? currentMethod;
 
-    public MethodInfo GetCurrentMethod()
+    public MethodInfo? TryGetCurrentMethod()
     {
         return this.currentMethod;
     }

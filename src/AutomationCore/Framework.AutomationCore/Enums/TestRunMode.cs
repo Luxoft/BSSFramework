@@ -1,4 +1,4 @@
-﻿namespace Automation.Enums;
+﻿namespace Framework.AutomationCore.Enums;
 
 public enum TestRunMode
 {

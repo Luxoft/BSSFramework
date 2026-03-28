@@ -1,15 +1,13 @@
-﻿using Automation.Enums;
-using Automation.ServiceEnvironment.Services;
-using Automation.Utils.DatabaseUtils;
+﻿using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment.Services;
 
 using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem.Testing;
 
-namespace Automation.ServiceEnvironment;
+namespace Framework.AutomationCore.ServiceEnvironment;
 
 public abstract class IntegrationTestBase(IServiceProviderPool rootServiceProviderPool)
-    : RootServiceProviderContainer(rootServiceProviderPool.Get())
+    : RootServiceProviderContainer.RootServiceProviderContainer(rootServiceProviderPool.Get())
 {
     public virtual void Initialize()
     {

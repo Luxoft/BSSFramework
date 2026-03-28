@@ -4,6 +4,7 @@ using System.Reflection;
 using CommonFramework;
 using Framework.Application.Domain;
 using Framework.Core;
+using Framework.Restriction;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -41,7 +42,7 @@ public class UniqueGroupDatabaseValidator(string? groupKey) : IDynamicClassValid
                 domainObjectType,
                 contextTypeData.IdentType);
 
-        var uniProperties = domainObjectType.GetUniqueElementPropeties(groupKey, true);
+        var uniProperties = domainObjectType.GetUniqueElementProperties(groupKey, true);
 
         var propertyNames = uniProperties.GetUniqueElementString(false);
 

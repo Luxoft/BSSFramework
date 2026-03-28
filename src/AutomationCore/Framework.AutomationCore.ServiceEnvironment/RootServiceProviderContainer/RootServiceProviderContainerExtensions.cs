@@ -1,14 +1,10 @@
 ﻿using System.Linq.Expressions;
 
-using Automation.ServiceEnvironment.Services;
-using Automation.Settings;
-using Automation.Utils.DatabaseUtils.Interfaces;
+using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment.Services;
 
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
-namespace Automation.ServiceEnvironment;
+namespace Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
 
 public static class RootServiceProviderContainerExtensions
 {

@@ -1,9 +1,11 @@
 ﻿using System.Reflection;
+
 using Dapper;
 using Dapper.Contrib.Extensions;
+
 using Microsoft.Data.SqlClient;
 
-namespace Automation.Helpers;
+namespace Framework.AutomationCore.Helpers;
 
 public static class DatabaseHelper
 {

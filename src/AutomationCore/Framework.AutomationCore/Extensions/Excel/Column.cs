@@ -1,4 +1,4 @@
-﻿namespace Automation.Extensions.Excel;
+﻿namespace Framework.AutomationCore.Extensions.Excel;
 
 [AttributeUsage(AttributeTargets.All)]
 public class Column : Attribute

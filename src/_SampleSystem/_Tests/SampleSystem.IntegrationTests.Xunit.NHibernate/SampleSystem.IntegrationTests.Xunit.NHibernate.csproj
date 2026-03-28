@@ -19,8 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Framework.AutomationCore.Xunit\Framework.AutomationCore.Xunit.csproj" />
-      <ProjectReference Include="..\SampleSystem.IntegrationTests.NHibernate\SampleSystem.IntegrationTests.NHibernate.csproj" />
+
     </ItemGroup>
 
   <ItemGroup>

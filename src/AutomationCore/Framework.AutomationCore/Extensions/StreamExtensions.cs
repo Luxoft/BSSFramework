@@ -1,4 +1,4 @@
-﻿namespace Automation.Extensions;
+﻿namespace Framework.AutomationCore.Extensions;
 
 public static class StreamExtensions
 {

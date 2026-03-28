@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Automation.Utils;
+namespace Framework.AutomationCore.Utils;
 
 public static class TextRandomizer
 {

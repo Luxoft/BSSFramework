@@ -1,6 +1,4 @@
-﻿using Automation.Utils.DatabaseUtils.Interfaces;
-
-namespace Automation.Utils.DatabaseUtils;
+﻿namespace Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
 public interface ITestDatabaseGenerator
 {

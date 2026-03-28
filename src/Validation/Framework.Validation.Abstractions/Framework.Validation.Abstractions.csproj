@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.Core\Framework.Core.csproj" />
+    <ProjectReference Include="..\Framework.Validation.Domain\Framework.Validation.Domain.csproj" />
   </ItemGroup>
 
 </Project>

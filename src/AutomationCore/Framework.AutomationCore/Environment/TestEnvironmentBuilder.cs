@@ -1,16 +1,17 @@
-﻿using Automation.Extensions;
-using Automation.Settings;
-using Automation.Utils.DatabaseUtils;
-using Automation.Utils.DatabaseUtils.Interfaces;
+﻿using CommonFramework.DependencyInjection;
 
-using CommonFramework.DependencyInjection;
+using Framework.AutomationCore.Extensions;
+using Framework.AutomationCore.ServiceProviderPool;
+using Framework.AutomationCore.Settings;
+using Framework.AutomationCore.Utils.DatabaseUtils;
+using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
-namespace Automation;
+namespace Framework.AutomationCore.Environment;
 
 public class TestEnvironmentBuilder
 {
@@ -38,7 +39,7 @@ public class TestEnvironmentBuilder
         this.withConfiguration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile(settingsFileName, false)
-            .AddJsonFile($@"{Environment.MachineName}.{settingsFileName}", true)
+            .AddJsonFile($@"{System.Environment.MachineName}.{settingsFileName}", true)
             .AddEnvironmentVariables(environmentVariablesPrefix)
             .Build();
 
@@ -121,7 +122,7 @@ public class TestEnvironmentBuilder
         Action<IServiceProvider> serviceProviderAfterBuildAction,
         Type databaseGenerator,
         Action<AutomationFrameworkSettings> settingsAction) =>
-            new ServiceProviderPool(
+            new ServiceProviderPool.ServiceProviderPool(
                 () => this.ServiceProviderGenerationFunc(
                     serviceProviderBuildFunc,
                     serviceProviderAfterBuildAction,

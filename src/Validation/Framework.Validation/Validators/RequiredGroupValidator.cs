@@ -28,7 +28,7 @@ public class RequiredGroupValidator : DynamicClassValidator
     {
         if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
-        var uniProperties = typeof(TSource).GetUniqueElementPropeties(this.groupKey, true);
+        var uniProperties = typeof(TSource).GetUniqueElementProperties(this.groupKey, true);
 
         var uniqueElementString = uniProperties.GetUniqueElementString(false);
 

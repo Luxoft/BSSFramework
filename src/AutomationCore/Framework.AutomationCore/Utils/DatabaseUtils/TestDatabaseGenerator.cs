@@ -1,10 +1,10 @@
-﻿using Automation.Settings;
-using Automation.Utils.DatabaseUtils.Interfaces;
+﻿using Framework.AutomationCore.Settings;
+using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
 using Microsoft.Extensions.Options;
 using Microsoft.SqlServer.Management.Smo;
 
-namespace Automation.Utils.DatabaseUtils;
+namespace Framework.AutomationCore.Utils.DatabaseUtils;
 
 public abstract class TestDatabaseGenerator(
     IDatabaseContext databaseContext,
@@ -59,7 +59,7 @@ public abstract class TestDatabaseGenerator(
 
     public virtual void CheckServerAllowed()
     {
-        if (this.DatabaseContext.Server.NetName.Equals(Environment.MachineName, StringComparison.InvariantCultureIgnoreCase))
+        if (this.DatabaseContext.Server.NetName.Equals(System.Environment.MachineName, StringComparison.InvariantCultureIgnoreCase))
         {
             return;
         }

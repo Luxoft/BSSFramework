@@ -1,15 +1,17 @@
 ﻿using System.Collections.Specialized;
 using System.Data;
 using System.Text.RegularExpressions;
-using Automation.Utils.DatabaseUtils.Interfaces;
 
 using CommonFramework;
 
+using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
+
 using MartinCostello.SqlLocalDb;
+
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Management.Smo;
 
-namespace Automation.Utils.DatabaseUtils;
+namespace Framework.AutomationCore.Utils.DatabaseUtils;
 
 public static partial class CoreDatabaseUtil
 {

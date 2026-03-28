@@ -1,8 +1,7 @@
 ﻿using System.Runtime.Serialization;
 
-using Framework.BLL.Domain;
-using Framework.BLL.Domain.DAL.Revisions;
 using Framework.Core;
+using Framework.Database.Domain;
 
 namespace Framework.BLL.DTOMapping.Domain;
 
@@ -26,7 +25,7 @@ public class ObjectModificationInfoDTO<TIdent>
     {
         this.ModificationType = source.ModificationType;
         this.Identity = source.Identity;
-        this.TypeInfoDescription = new TypeInfoDescriptionDTO(source.TypeInfo);
+        this.TypeInfoDescription = new TypeInfoDescriptionDTO { Name = source.TypeInfo.Name, NameSpace = source.TypeInfo.NameSpace };
         this.Revision = source.Revision;
     }
 

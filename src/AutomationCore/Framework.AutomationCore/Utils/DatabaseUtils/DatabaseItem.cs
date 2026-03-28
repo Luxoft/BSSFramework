@@ -1,7 +1,8 @@
-﻿using Automation.Utils.DatabaseUtils.Interfaces;
+﻿using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
+
 using Microsoft.Data.SqlClient;
 
-namespace Automation.Utils.DatabaseUtils;
+namespace Framework.AutomationCore.Utils.DatabaseUtils;
 
 public class DatabaseItem : IDatabaseItem
 {
@@ -61,9 +62,9 @@ public class DatabaseItem : IDatabaseItem
 
     private string ToCopyLogPath(string initialCatalog) => this.ToWorkPath(this.CopyLogFile(initialCatalog));
 
-    private string CopyDataFile(string initialCatalog) =>$"{Environment.UserName}_{initialCatalog}.mdf";
+    private string CopyDataFile(string initialCatalog) =>$"{System.Environment.UserName}_{initialCatalog}.mdf";
 
-    private string CopyLogFile(string initialCatalog) => $"{Environment.UserName}_{initialCatalog}_log.ldf";
+    private string CopyLogFile(string initialCatalog) => $"{System.Environment.UserName}_{initialCatalog}_log.ldf";
 
     private static string SourceDataFile(string fileName) => $"{fileName}.mdf";
 

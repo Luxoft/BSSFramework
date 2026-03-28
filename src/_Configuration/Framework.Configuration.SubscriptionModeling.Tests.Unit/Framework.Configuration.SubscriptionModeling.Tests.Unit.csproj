@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.UnitTesting\Framework.UnitTesting.csproj" />
     <ProjectReference Include="..\Framework.Configuration.SubscriptionModeling\Framework.Configuration.SubscriptionModeling.csproj" />
   </ItemGroup>
 

@@ -1,8 +1,7 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.BLL.Domain.DAL.Revisions;
 using Framework.Core;
-
+using Framework.Database.Domain;
 
 namespace Framework.BLL;
 

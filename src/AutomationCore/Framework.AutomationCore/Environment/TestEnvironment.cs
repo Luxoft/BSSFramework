@@ -1,4 +1,6 @@
-﻿namespace Automation;
+﻿using Framework.AutomationCore.ServiceProviderPool;
+
+namespace Framework.AutomationCore.Environment;
 
 public class TestEnvironment
 {

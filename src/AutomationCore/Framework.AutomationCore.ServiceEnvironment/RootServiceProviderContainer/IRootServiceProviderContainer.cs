@@ -1,4 +1,4 @@
-﻿namespace Automation.ServiceEnvironment;
+﻿namespace Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
 
 public interface IRootServiceProviderContainer
 {

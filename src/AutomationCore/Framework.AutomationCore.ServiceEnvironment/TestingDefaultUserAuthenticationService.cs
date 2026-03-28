@@ -1,10 +1,7 @@
-﻿using Framework.DomainDriven;
-using Framework.DomainDriven.Auth;
-
-using SecuritySystem;
+﻿using SecuritySystem;
 using SecuritySystem.Testing;
 
-namespace Automation.ServiceEnvironment;
+namespace Framework.AutomationCore.ServiceEnvironment;
 
 public class TestingDefaultUserAuthenticationService(
     RootImpersonateServiceState rootImpersonateServiceState,

@@ -1,10 +1,11 @@
 ﻿using System.Diagnostics;
 
-using Automation.Enums;
-using Automation.Settings;
-using Automation.Utils.DatabaseUtils;
+using Framework.AutomationCore.Enums;
+using Framework.AutomationCore.Settings;
+using Framework.AutomationCore.Utils.DatabaseUtils;
+using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
-namespace Automation;
+namespace Framework.AutomationCore;
 
 public class AssemblyInitializeAndCleanupBase
 {

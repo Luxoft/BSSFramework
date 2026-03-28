@@ -1,13 +1,10 @@
-﻿using Automation.Settings;
-using Automation.Utils.DatabaseUtils.Interfaces;
+﻿using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
 
-using Framework.FinancialYear;
-using SecuritySystem.Credential;
-
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Automation.ServiceEnvironment;
+using SecuritySystem.Credential;
+
+namespace Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
 
 public abstract class RootServiceProviderContainer(IServiceProvider rootServiceProvider) : IRootServiceProviderContainer
 {

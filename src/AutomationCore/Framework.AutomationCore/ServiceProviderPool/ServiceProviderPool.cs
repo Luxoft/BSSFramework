@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 
-namespace Automation;
+namespace Framework.AutomationCore.ServiceProviderPool;
 
 public class ServiceProviderPool : IServiceProviderPool
 {
@@ -15,7 +15,7 @@ public class ServiceProviderPool : IServiceProviderPool
         if (this.enableLimiter)
         {
             this.semaphore = parallelExecutionEnabled
-                ? new SemaphoreSlim(Environment.ProcessorCount, Environment.ProcessorCount)
+                ? new SemaphoreSlim(System.Environment.ProcessorCount, System.Environment.ProcessorCount)
                 : new SemaphoreSlim(1, 1);
         }
 

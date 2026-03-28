@@ -1,8 +1,8 @@
-﻿using Automation.Utils.DatabaseUtils.Interfaces;
+﻿using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
 using Microsoft.Extensions.Configuration;
 
-namespace Automation.Extensions;
+namespace Framework.AutomationCore.Extensions;
 
 public static class ConfigurationExtensions
 {

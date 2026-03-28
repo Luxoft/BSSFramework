@@ -1,6 +1,6 @@
-﻿using Automation.Enums;
+﻿using Framework.AutomationCore.Enums;
 
-namespace Automation.Settings;
+namespace Framework.AutomationCore.Settings;
 
 public class AutomationFrameworkSettings
 {

@@ -5,6 +5,7 @@ using CommonFramework;
 
 using Framework.Application.Domain;
 using Framework.Core;
+using Framework.Restriction;
 
 namespace Framework.Validation;
 
@@ -15,9 +16,9 @@ public class UniqueCollectionValidator(string groupKey) : IDynamicPropertyValida
         if (property == null) throw new ArgumentNullException(nameof(property));
         if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
-        var elementType = property.PropertyType.GetCollectionElementType();
+        var elementType = property.PropertyType.GetCollectionElementType()!;
 
-        var uniProperties = property.GetUniqueElementPropeties(groupKey, true);
+        var uniProperties = property.GetUniqueElementProperties(groupKey, true);
 
         var groupElementType = typeof(Tuple<>).Assembly
                                               .GetType(typeof(Tuple<>).FullName!.SkipLast("1", true) + uniProperties.Length, true)!
@@ -47,7 +48,7 @@ public class UniqueCollectionValidator(string groupKey) : IDynamicPropertyValida
 
         var getGroupElementExpr = Expression.Lambda(newExpr, elementParameter);
 
-        var internalPropertyValidatorType = typeof(UniqueCollectionValidator<,,,>).MakeGenericType(property.ReflectedType, property.PropertyType, elementType, groupElementType);
+        var internalPropertyValidatorType = typeof(UniqueCollectionValidator<,,,>).MakeGenericType(property.ReflectedType!, property.PropertyType, elementType, groupElementType);
 
         var internalPropertyValidatorTypeCtor = internalPropertyValidatorType.GetConstructors().Single();
 

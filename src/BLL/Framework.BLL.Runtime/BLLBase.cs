@@ -3,12 +3,11 @@
 using CommonFramework;
 
 using Framework.Application.Domain;
-using Framework.BLL.DAL;
-using Framework.BLL.Domain.DAL.Revisions;
 using Framework.BLL.Domain.Exceptions;
 using Framework.BLL.Domain.Models;
 using Framework.Core;
 using Framework.Database;
+using Framework.Database.Domain;
 using Framework.OData;
 
 using GenericQueryable;

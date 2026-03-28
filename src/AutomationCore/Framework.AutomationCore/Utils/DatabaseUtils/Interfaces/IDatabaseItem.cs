@@ -1,4 +1,4 @@
-namespace Automation.Utils.DatabaseUtils.Interfaces;
+﻿namespace Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
 public interface IDatabaseItem
 {

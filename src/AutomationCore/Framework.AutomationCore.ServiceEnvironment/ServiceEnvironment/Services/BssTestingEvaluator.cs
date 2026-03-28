@@ -1,9 +1,7 @@
-﻿using Framework.DomainDriven;
-
-using SecuritySystem.Credential;
+﻿using SecuritySystem.Credential;
 using SecuritySystem.Testing;
 
-namespace Automation.ServiceEnvironment.Services;
+namespace Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment.Services;
 
 public class BssTestingEvaluator<TService>(IServiceEvaluator<TService> serviceEvaluator) : ITestingEvaluator<TService>
     where TService : notnull

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-using Framework.BLL.Domain.DAL.Revisions;
+using Framework.Database.Domain;
 
 namespace Framework.BLL.DTOMapping.Domain;
 

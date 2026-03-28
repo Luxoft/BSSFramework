@@ -1,24 +1,16 @@
 ﻿using System.Reflection;
 
-using Automation.ServiceEnvironment.Services;
-using Automation.Settings;
-
-using CommonFramework;
 using CommonFramework.DependencyInjection;
 
-using Framework.DomainDriven.Auth;
-using Framework.DomainDriven.Jobs;
-using Framework.DomainDriven.WebApiNetCore;
+using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment.Services;
 
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
 using SecuritySystem.Credential;
 using SecuritySystem.Testing;
 using SecuritySystem.Testing.DependencyInjection;
 
-namespace Automation.ServiceEnvironment;
+namespace Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
 
 public static class ServiceProviderExtensions
 {

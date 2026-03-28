@@ -1,15 +1,16 @@
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
-using Automation.Settings;
-using Automation.Utils.DatabaseUtils.Interfaces;
+using Framework.AutomationCore.Settings;
+using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
+
 using SqlConnection = Microsoft.Data.SqlClient.SqlConnection;
 
-namespace Automation.Utils.DatabaseUtils;
+namespace Framework.AutomationCore.Utils.DatabaseUtils;
 
 public class DatabaseContext : IDatabaseContext
 {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 
-namespace Automation.Extensions;
+namespace Framework.AutomationCore.Extensions;
 
 public static class ObjectExtensions
 {

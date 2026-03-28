@@ -335,7 +335,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
         var elementType = property.PropertyType.GetCollectionElementType();
 
-        var uniProperties = property.GetUniqueElementPropeties(attribute.GroupKey, true);
+        var uniProperties = property.GetUniqueElementProperties(attribute.GroupKey, true);
 
         var groupElementType = typeof(Tuple<>).Assembly
                                               .GetType(typeof(Tuple<>).FullName.SkipLast("1", true) + uniProperties.Length, true)
@@ -471,7 +471,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
     {
         if (attribute == null) throw new ArgumentNullException(nameof(attribute));
 
-        var uniProperties = this.DomainType.GetUniqueElementPropeties(attribute.GroupKey, true);
+        var uniProperties = this.DomainType.GetUniqueElementProperties(attribute.GroupKey, true);
         var uniqueElementString = uniProperties.GetUniqueElementString(false);
 
         var internalValidatorType = typeof(UniqueGroupDatabaseValidator<,,,>).ToTypeReference(
@@ -492,7 +492,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
     {
         if (attribute == null) throw new ArgumentNullException(nameof(attribute));
 
-        var uniProperties = this.DomainType.GetUniqueElementPropeties(attribute.GroupKey, true);
+        var uniProperties = this.DomainType.GetUniqueElementProperties(attribute.GroupKey, true);
 
         var uniqueElementString = uniProperties.GetUniqueElementString(false);
 

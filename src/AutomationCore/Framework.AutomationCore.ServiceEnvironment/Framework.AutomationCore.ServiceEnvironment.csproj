@@ -12,4 +12,8 @@
     <PackageReference Include="IvAt.SecuritySystem.Testing" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure\Framework.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

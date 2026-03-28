@@ -1,6 +1,4 @@
-﻿using Framework.Exceptions;
-
-namespace Framework.DomainDriven.WebApiNetCore;
+﻿namespace Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
 
 /// <inheritdoc />
 public class TestWebApiExceptionExpander : IWebApiExceptionExpander

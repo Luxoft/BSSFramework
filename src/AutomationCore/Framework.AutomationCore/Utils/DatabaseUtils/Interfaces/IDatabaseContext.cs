@@ -1,6 +1,6 @@
-using Microsoft.SqlServer.Management.Smo;
+﻿using Microsoft.SqlServer.Management.Smo;
 
-namespace Automation.Utils.DatabaseUtils.Interfaces;
+namespace Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
 public interface IDatabaseContext
 {

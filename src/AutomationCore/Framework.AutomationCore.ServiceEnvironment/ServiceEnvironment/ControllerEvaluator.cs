@@ -3,20 +3,12 @@
 using CommonFramework;
 using CommonFramework.Visitor;
 
-using Framework.Core;
-using Framework.DomainDriven;
-using Framework.DomainDriven.WebApiNetCore;
-
-using SecuritySystem.Credential;
-using SecuritySystem.Services;
-
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
+using SecuritySystem.Credential;
 using SecuritySystem.Testing;
 
-namespace Automation.ServiceEnvironment;
+namespace Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
 
 public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvider, UserCredential? customUserCredential = null)
     where TController : ControllerBase

@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.ServiceModel.Tests.Unit;
+﻿namespace Framework.Tracking.Tests;
 
 public class PersistentDomainObject
 {

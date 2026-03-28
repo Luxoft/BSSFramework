@@ -60,6 +60,7 @@
     <Project Path="Database/Framework.Database.SqlMapper/Framework.Database.SqlMapper.csproj" />
     <Project Path="Database/Framework.Database/Framework.Database.csproj" />
     <Project Path="Database/Framework.Tracking.Abstractions/Framework.Tracking.Abstractions.csproj" />
+    <Project Path="Database/Framework.Tracking.Tests/Framework.Tracking.Tests.csproj" />
     <Project Path="Database/Framework.Tracking.Validation/Framework.Tracking.Validation.csproj" />
     <Project Path="Database/Framework.Tracking/Framework.Tracking.csproj" />
   </Folder>
@@ -70,7 +71,6 @@
   </Folder>
   
   <Folder Name="/DomainDriven/">
-    <Project Path="_DomainDriven/Framework.DomainDriven.ServiceModel.Tests.Unit/Framework.DomainDriven.ServiceModel.Tests.Unit.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.WebApiNetCore.Swagger/Framework.DomainDriven.WebApiNetCore.Swagger.csproj" />
   </Folder>
   

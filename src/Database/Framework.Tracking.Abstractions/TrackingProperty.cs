@@ -4,34 +4,11 @@ using CommonFramework.Maybe;
 
 namespace Framework.Tracking;
 
-public readonly struct TrackingProperty
+public readonly record struct TrackingProperty(string PropertyName, object? PreviousValue, object? CurrentValue)
 {
-    private readonly string propertyName;
+    public string LowPropertyName { get; } = PropertyName.ToLower(CultureInfo.InvariantCulture);
 
-    private readonly string lowPropertyName;
-
-    private readonly object previousValue;
-
-    private readonly object currentValue;
-
-    internal TrackingProperty(string propertyName, object previousValue, object currentValue)
-            : this()
-    {
-        this.propertyName = propertyName;
-        this.previousValue = previousValue;
-        this.currentValue = currentValue;
-        this.lowPropertyName = propertyName.ToLower(CultureInfo.InvariantCulture);
-    }
-
-    public string PropertyName => this.propertyName;
-
-    public string LowPropertyName => this.lowPropertyName;
-
-    public object PreviousValue => this.previousValue;
-
-    public object CurrentValue => this.currentValue;
-
-    public static TrackingProperty<T> Create<T>(string propertyName, object previousValue, object currentValue)
+    public static TrackingProperty<T> Create<T>(string propertyName, object? previousValue, object? currentValue)
     {
         if (typeof(T).IsClass)
         {

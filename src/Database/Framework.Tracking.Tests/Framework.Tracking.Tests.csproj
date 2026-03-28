@@ -12,4 +12,8 @@
     <PackageReference Include="NUnit3TestAdapter" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Tracking\Framework.Tracking.csproj" />
+  </ItemGroup>
+
 </Project>

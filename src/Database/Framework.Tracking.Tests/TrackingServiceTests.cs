@@ -1,12 +1,10 @@
 ﻿using FluentAssertions;
 
-using Framework.DomainDriven.Tracking;
-
 using NSubstitute;
 
 using NUnit.Framework;
 
-namespace Framework.DomainDriven.ServiceModel.Tests.Unit;
+namespace Framework.Tracking.Tests;
 
 [TestFixture]
 public class TrackingServiceTests
@@ -15,7 +13,7 @@ public class TrackingServiceTests
 
     private TrackingService<PersistentDomainObject> trackingService;
 
-    private IPersistentInfoService persistentInfoService = new PersistentInfoService();
+    private readonly IPersistentInfoService persistentInfoService = new PersistentInfoService();
 
     [SetUp]
     public void Initialize()

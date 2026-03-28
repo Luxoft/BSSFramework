@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Framework.BLL.DTOMapping.MappingObject;
+
 namespace Framework.Authorization.Generated.DTO
 {
     
@@ -1492,7 +1494,7 @@ namespace Framework.Authorization.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class BusinessRoleStrictDTO : Framework.BLL.Domain.DTO.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.BusinessRole, System.Guid>, Framework.BLL.Domain.DTO.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.BusinessRole>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO>
+    public partial class BusinessRoleStrictDTO : IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.BusinessRole, System.Guid>, IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.BusinessRole>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO>
     {
         
         private System.Guid _id;
@@ -2034,7 +2036,7 @@ namespace Framework.Authorization.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.ChangePermissionDelegatesModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class ChangePermissionDelegatesModelStrictDTO : Framework.BLL.Domain.DTO.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.ChangePermissionDelegatesModel>, Framework.BLL.Domain.DTO.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.ChangePermissionDelegatesModel>
+    public partial class ChangePermissionDelegatesModelStrictDTO : IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.ChangePermissionDelegatesModel>, IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.ChangePermissionDelegatesModel>
     {
         
         private Framework.Authorization.Generated.DTO.PermissionIdentityDTO _delegateFromPermission;
@@ -2344,7 +2346,7 @@ namespace Framework.Authorization.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DelegateToItemModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class DelegateToItemModelStrictDTO : Framework.BLL.Domain.DTO.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.DelegateToItemModel>, Framework.BLL.Domain.DTO.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.DelegateToItemModel>
+    public partial class DelegateToItemModelStrictDTO : IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.DelegateToItemModel>, IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.DelegateToItemModel>
     {
         
         private Framework.Authorization.Generated.DTO.PermissionStrictDTO _permission;
@@ -2728,7 +2730,7 @@ namespace Framework.Authorization.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class PermissionStrictDTO : Framework.BLL.Domain.DTO.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Permission, System.Guid>, Framework.BLL.Domain.DTO.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Permission>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionIdentityDTO>
+    public partial class PermissionStrictDTO : IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Permission, System.Guid>, IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Permission>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionIdentityDTO>
     {
         
         private string _comment;
@@ -3375,7 +3377,7 @@ namespace Framework.Authorization.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionDirectFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class PermissionDirectFilterModelStrictDTO : Framework.BLL.Domain.DTO.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionDirectFilterModel>, Framework.BLL.Domain.DTO.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionDirectFilterModel>
+    public partial class PermissionDirectFilterModelStrictDTO : IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionDirectFilterModel>, IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionDirectFilterModel>
     {
         
         private System.Guid _securityContextId;
@@ -3774,7 +3776,7 @@ namespace Framework.Authorization.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class PermissionRestrictionStrictDTO : Framework.BLL.Domain.DTO.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionRestriction, System.Guid>, Framework.BLL.Domain.DTO.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionRestriction>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO>
+    public partial class PermissionRestrictionStrictDTO : IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionRestriction, System.Guid>, IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionRestriction>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO>
     {
         
         private System.Guid _id;
@@ -4400,7 +4402,7 @@ namespace Framework.Authorization.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class PrincipalStrictDTO : Framework.BLL.Domain.DTO.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Principal, System.Guid>, Framework.BLL.Domain.DTO.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Principal>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PrincipalIdentityDTO>
+    public partial class PrincipalStrictDTO : IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Principal, System.Guid>, IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Principal>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PrincipalIdentityDTO>
     {
         
         private System.Guid _id;
@@ -5011,7 +5013,7 @@ namespace Framework.Authorization.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class SecurityContextTypeStrictDTO : Framework.BLL.Domain.DTO.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.SecurityContextType, System.Guid>, Framework.BLL.Domain.DTO.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.SecurityContextType>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO>
+    public partial class SecurityContextTypeStrictDTO : IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.SecurityContextType, System.Guid>, IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.SecurityContextType>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO>
     {
         
         private System.Guid _id;
@@ -5523,7 +5525,7 @@ namespace Framework.Authorization.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class UpdatePermissionDelegatesModelStrictDTO : Framework.BLL.Domain.DTO.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.UpdatePermissionDelegatesModel>, Framework.BLL.Domain.DTO.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.UpdatePermissionDelegatesModel>
+    public partial class UpdatePermissionDelegatesModelStrictDTO : IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.UpdatePermissionDelegatesModel>, IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.UpdatePermissionDelegatesModel>
     {
         
         private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.DelegateToItemModelStrictDTO> _addItems = new System.Collections.Generic.List<Framework.Authorization.Generated.DTO.DelegateToItemModelStrictDTO>();
@@ -7004,7 +7006,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         protected virtual void MapToDomainObject<TMappingObject, TDomainObject>(TMappingObject mappingObject, TDomainObject domainObject)
-            where TMappingObject : Framework.BLL.Domain.DTO.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject>
+            where TMappingObject : IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject>
             where TDomainObject : Framework.Authorization.Domain.DomainObjectBase
         {
             mappingObject.MapToDomainObject(this, domainObject);
@@ -7103,7 +7105,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         protected virtual TDomainObject ToDomainObject<TMappingObject, TDomainObject>(TMappingObject mappingObject)
-            where TMappingObject : Framework.BLL.Domain.DTO.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject, System.Guid>
+            where TMappingObject : IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject, System.Guid>
             where TDomainObject : Framework.Authorization.Domain.PersistentDomainObjectBase
         {
             TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.BLL.IdCheckMode.CheckAll);
@@ -7112,7 +7114,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         protected virtual TDomainObject ToDomainObject<TMappingObject, TDomainObject>(TMappingObject mappingObject, System.Func<TDomainObject> createFunc)
-            where TMappingObject : Framework.BLL.Domain.DTO.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject, System.Guid>
+            where TMappingObject : IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject, System.Guid>
             where TDomainObject : Framework.Authorization.Domain.PersistentDomainObjectBase
         {
             TDomainObject domainObject = this.GetByIdOrCreate<TDomainObject>(mappingObject.Id, createFunc);
@@ -7121,7 +7123,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         protected virtual TDomainObject ToDomainObjectBase<TMappingObject, TDomainObject>(TMappingObject mappingObject)
-            where TMappingObject : Framework.BLL.Domain.DTO.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject>
+            where TMappingObject : IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject>
             where TDomainObject : Framework.Authorization.Domain.DomainObjectBase, new ()
         {
             TDomainObject domainObject = new TDomainObject();

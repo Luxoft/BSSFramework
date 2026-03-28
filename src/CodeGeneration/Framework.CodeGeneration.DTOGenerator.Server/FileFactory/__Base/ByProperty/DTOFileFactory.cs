@@ -4,8 +4,8 @@ using System.Runtime.Serialization;
 
 using CommonFramework;
 
-using Framework.BLL.Domain.DTO.MappingObject;
 using Framework.BLL.Domain.Persistent.Attributes;
+using Framework.BLL.DTOMapping.MappingObject;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.DTOGenerator.Extensions;

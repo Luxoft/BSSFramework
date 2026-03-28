@@ -1,6 +1,6 @@
 ﻿using Framework.Authorization.TestGenerate;
 
-namespace Framework.Authorization.WebApiGenerate;
+namespace Framework.Authorization.WebApiGenerate.Configurations;
 
 public class WebApiGenerationEnvironment : ServerGenerationEnvironment
 {

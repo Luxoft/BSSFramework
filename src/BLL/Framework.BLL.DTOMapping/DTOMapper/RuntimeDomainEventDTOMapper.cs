@@ -1,4 +1,6 @@
-﻿namespace Framework.Events.Legacy;
+﻿using Framework.Application.Events;
+
+namespace Framework.BLL.DTOMapping.DTOMapper;
 
 public class RuntimeDomainEventDTOMapper<TPersistentDomainObjectBase, TMappingService, TEventDTOBase>(
     TMappingService mappingService,
@@ -6,8 +8,6 @@ public class RuntimeDomainEventDTOMapper<TPersistentDomainObjectBase, TMappingSe
     : IDomainEventDTOMapper<TPersistentDomainObjectBase>
 {
     public virtual object Convert<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
-        where TDomainObject : TPersistentDomainObjectBase
-    {
-        return converter.Convert(mappingService, domainObject, domainObjectEvent);
-    }
+        where TDomainObject : TPersistentDomainObjectBase =>
+        converter.Convert(mappingService, domainObject, domainObjectEvent);
 }

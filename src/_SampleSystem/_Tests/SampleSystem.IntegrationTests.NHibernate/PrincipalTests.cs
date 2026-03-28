@@ -67,7 +67,7 @@ public class PrincipalTests : TestBase
 
         var role = this.GetAuthControllerEvaluator().Evaluate(c => c.GetVisualBusinessRoleByName(SecurityRole.Administrator.Name)).Identity;
 
-        var saveRequest = new AuthSLJsonController.SavePermissionAutoRequest(new PrincipalIdentityDTO(principalId), new PermissionStrictDTO
+        var saveRequest = new AuthMainController.SavePermissionAutoRequest(new PrincipalIdentityDTO(principalId), new PermissionStrictDTO
                                                                                  {
                                                                                          Role = role,
                                                                                          Period = Period.Eternity

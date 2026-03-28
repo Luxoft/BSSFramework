@@ -9,9 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Legacy\Framework.Infrastructure.Legacy.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Generated.DTO\Framework.Authorization.Generated.DTO.csproj" />
-
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD.LegacyContext\Framework.DomainDriven.ServiceModel.IAD.LegacyContext.csproj" />
   </ItemGroup>
 
 </Project>

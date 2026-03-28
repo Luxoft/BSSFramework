@@ -30,8 +30,5 @@ public class TypeInfoDescriptionDTO : IDomainType
         typeInfoDescription.NameSpace = this.NameSpace;
     }
 
-    public override string ToString()
-    {
-        return $"Name: {this.Name}, NameSpace: {this.NameSpace}";
-    }
+    public override string ToString() => $"Name: {this.Name}, NameSpace: {this.NameSpace}";
 }

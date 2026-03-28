@@ -1,4 +1,6 @@
-﻿namespace Framework.Events.Legacy;
+﻿using Framework.Application.Events;
+
+namespace Framework.BLL.DTOMapping.DTOMapper;
 
 public interface IDomainEventDTOMapper<in TPersistentDomainObjectBase>
 {

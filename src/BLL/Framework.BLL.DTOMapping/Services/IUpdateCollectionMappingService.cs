@@ -1,4 +1,4 @@
-﻿using Framework.BLL.Domain.MergeItemData;
+﻿using Framework.BLL.DTOMapping.MergeItemData;
 
 namespace Framework.BLL.DTOMapping.Services;
 

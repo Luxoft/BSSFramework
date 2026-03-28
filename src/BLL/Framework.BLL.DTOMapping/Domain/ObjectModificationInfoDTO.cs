@@ -43,8 +43,5 @@ public class ObjectModificationInfoDTO<TIdent>
         source.Revision = this.Revision;
     }
 
-    public override string ToString()
-    {
-        return $"Identity: {this.Identity}, ModificationType: {this.ModificationType}, Revision: {this.Revision}, TypeInfoDescription: {this.TypeInfoDescription}";
-    }
+    public override string ToString() => $"Identity: {this.Identity}, ModificationType: {this.ModificationType}, Revision: {this.Revision}, TypeInfoDescription: {this.TypeInfoDescription}";
 }

@@ -1,6 +1,4 @@
-﻿using Framework.DomainDriven.ServiceModel.Subscriptions;
-
-namespace Framework.DomainDriven.ServiceModel.IAD;
+﻿namespace Framework.Infrastructure.SubscriptionService;
 
 /// <summary>
 /// Костыль для выноса всех зависимостей от WCF из сборки Framework.DomainDriven.ServiceModel.IAD

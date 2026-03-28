@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Framework.BLL.Domain.MergeItemData;
+namespace Framework.BLL.DTOMapping.MergeItemData;
 
 /// <summary>
 /// Удаление элемента из коллекции
@@ -14,10 +14,7 @@ public class RemoveItemData<TValue, TIdentity> : UpdateItemData<TValue, TIdentit
     /// Конструктор
     /// </summary>
     /// <param name="identity">Идентификатор удаляемого элемента</param>
-    public RemoveItemData(TIdentity identity)
-    {
-        this.Identity = identity;
-    }
+    public RemoveItemData(TIdentity identity) => this.Identity = identity;
 
     /// <summary>
     /// Идентификатор удаляемого элемента

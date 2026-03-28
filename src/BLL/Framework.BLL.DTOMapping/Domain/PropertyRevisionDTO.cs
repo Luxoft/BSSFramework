@@ -40,11 +40,7 @@ public class PropertyRevisionDTO<TIdent> : PropertyRevisionDTOBase
 
     }
 
-    public PropertyRevisionDTO(PropertyRevision<TIdent, string> source) : base(source)
-    {
-        this.Value = source.Value;
-
-    }
+    public PropertyRevisionDTO(PropertyRevision<TIdent, string> source) : base(source) => this.Value = source.Value;
 }
 
 [DataContract(Name = "PropertyRevisionDTO{0}{1}")]
@@ -65,8 +61,6 @@ public class PropertyRevisionDTO<TValue, TIdent> : PropertyRevisionDTOBase
     }
 
     public PropertyRevisionDTO(PropertyRevision<TIdent, TValue> source)
-            : base(source)
-    {
+            : base(source) =>
         this.Value = source.Value;
-    }
 }

@@ -20,6 +20,7 @@
     <PackageVersion Include="IvAt.GenericQueryable.EntityFramework" Version="3.0.5" />
     <PackageVersion Include="IvAt.GenericQueryable.NHibernate" Version="3.0.5" />
     <PackageVersion Include="IvAt.GenericQueryable.Runtime" Version="3.0.5" />
+    <PackageVersion Include="IvAt.HierarchicalExpand.Runtime" Version="3.0.4" />
     <PackageVersion Include="IvAt.SecuritySystem" Version="3.0.7" />
     <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="3.0.7" />
     <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="3.0.7" />
@@ -27,6 +28,7 @@
     <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission.Abstractions" Version="3.0.7" />
     <PackageVersion Include="IvAt.SecuritySystem.Notification" Version="3.0.7" />
     <PackageVersion Include="IvAt.SecuritySystem.Notification.Abstractions" Version="3.0.7" />
+    <PackageVersion Include="IvAt.SecuritySystem.Runtime" Version="3.0.7" />
     <PackageVersion Include="IvAt.SecuritySystem.Testing" Version="3.0.7" />
     <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="3.0.7" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="1.6.7" />

@@ -4,7 +4,7 @@ using HierarchicalExpand;
 
 using SecuritySystem;
 
-namespace Framework.DomainDriven.ServiceModel.IAD;
+namespace Framework.Infrastructure;
 
 public class ProjectionSecurityContextInfoSource(
     IServiceProxyFactory serviceProxyFactory,

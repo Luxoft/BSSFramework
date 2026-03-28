@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Framework.BLL.Domain.MergeItemData;
+namespace Framework.BLL.DTOMapping.MergeItemData;
 
 /// <summary>
 /// Создание или обновление элемента
@@ -14,10 +14,7 @@ public class SaveItemData<TValue, TIdentity> : UpdateItemData<TValue, TIdentity>
     /// Конструктор
     /// </summary>
     /// <param name="value">Сохраняемый элемент</param>
-    public SaveItemData(TValue value)
-    {
-        this.Value = value;
-    }
+    public SaveItemData(TValue value) => this.Value = value;
 
     /// <summary>
     /// Сохраняемый элемент

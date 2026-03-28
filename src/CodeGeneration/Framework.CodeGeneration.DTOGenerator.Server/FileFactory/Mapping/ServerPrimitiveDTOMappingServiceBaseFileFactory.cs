@@ -5,7 +5,7 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.BLL;
-using Framework.BLL.Domain.DTO.MappingObject;
+using Framework.BLL.DTOMapping.MappingObject;
 using Framework.BLL.DTOMapping.Services;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DomainMetadata;

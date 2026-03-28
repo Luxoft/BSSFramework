@@ -1,7 +1,8 @@
 ﻿using Framework.Application.Domain;
 using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.IdentityObject;
-using Framework.BLL.Domain.MergeItemData;
+using Framework.BLL.DTOMapping.Extensions;
+using Framework.BLL.DTOMapping.MergeItemData;
 
 namespace Framework.BLL.DTOMapping.Services;
 
@@ -14,31 +15,15 @@ public class DefaultUpdateCollectionMappingService<TSource, TSourceIdentity, TTa
     private readonly Func<TSource, TTarget> createAndMapDetail = createAndMapDetail ?? throw new ArgumentNullException(nameof(createAndMapDetail));
     private readonly Action<TTarget> removeDetail = removeDetail ?? throw new ArgumentNullException(nameof(removeDetail));
 
-    protected virtual TTarget AddDetail(TSource source)
-    {
-        return this.createAndMapDetail(source);
-    }
+    protected virtual TTarget AddDetail(TSource source) => this.createAndMapDetail(source);
 
-    protected virtual void RemoveDetail(TTarget target)
-    {
-        this.removeDetail(target);
-    }
+    protected virtual void RemoveDetail(TTarget target) => this.removeDetail(target);
 
-    protected virtual TIdent GetSourceId(TSource source)
-    {
-        return this.GetSourceIdentityId(source.Identity);
-    }
+    protected virtual TIdent GetSourceId(TSource source) => this.GetSourceIdentityId(source.Identity);
 
-    protected virtual TIdent GetSourceIdentityId(TSourceIdentity sourceIdentity)
-    {
-        return sourceIdentity.Id;
-    }
+    protected virtual TIdent GetSourceIdentityId(TSourceIdentity sourceIdentity) => sourceIdentity.Id;
 
-    protected virtual TIdent GetTargetId(TTarget target)
-    {
-        return target.Id;
-    }
-
+    protected virtual TIdent GetTargetId(TTarget target) => target.Id;
 
     public void Map(IEnumerable<UpdateItemData<TSource, TSourceIdentity>> sourceItems, IEnumerable<TTarget> targetItems)
     {

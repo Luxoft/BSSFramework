@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.ServiceModel.IAD;
+﻿namespace Framework.Infrastructure.LocalDBEvents;
 
 public class LocalDBEventMessageSenderSettings<TPersistentDomainObjectBase>
 {

@@ -9,6 +9,7 @@ using CommonFramework.Maybe;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.IdentityObject;
+using Framework.BLL.DTOMapping.Extensions;
 using Framework.CodeDom;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;

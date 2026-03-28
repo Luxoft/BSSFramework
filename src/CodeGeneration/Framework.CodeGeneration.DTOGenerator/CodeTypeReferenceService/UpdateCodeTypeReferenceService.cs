@@ -3,7 +3,7 @@ using System.Reflection;
 
 using CommonFramework;
 
-using Framework.BLL.Domain.MergeItemData;
+using Framework.BLL.DTOMapping.MergeItemData;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;

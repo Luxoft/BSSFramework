@@ -10,26 +10,13 @@ public class DefaultCollectionMappingService<TSource, TTarget, TIdent>(Func<TSou
     where TSource : IIdentityObject<TIdent>
     where TTarget : class, IIdentityObject<TIdent>
 {
-    protected virtual TTarget AddDetail(TSource source)
-    {
-        return createAndMapDetail(source);
-    }
+    protected virtual TTarget AddDetail(TSource source) => createAndMapDetail(source);
 
-    protected virtual void RemoveDetail(TTarget target)
-    {
-        removeDetail(target);
-    }
+    protected virtual void RemoveDetail(TTarget target) => removeDetail(target);
 
-    protected virtual TIdent GetSourceId(TSource source)
-    {
-        return source.Id;
-    }
+    protected virtual TIdent GetSourceId(TSource source) => source.Id;
 
-    protected virtual TIdent GetTargetId(TTarget target)
-    {
-        return target.Id;
-    }
-
+    protected virtual TIdent GetTargetId(TTarget target) => target.Id;
 
     public void Map(IEnumerable<TSource> source, IEnumerable<TTarget> target)
     {

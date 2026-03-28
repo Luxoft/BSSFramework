@@ -1,11 +1,8 @@
 ﻿using CommonFramework;
 
-using Framework.Core;
 using Framework.Core.MessageSender;
-using Framework.Events;
-using Framework.Events.Legacy;
 
-namespace Framework.DomainDriven.ServiceModel.IAD;
+namespace Framework.Infrastructure.LocalDBEvents;
 
 /// <summary>
 /// Класс для отправки доменных евентов

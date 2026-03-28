@@ -9,10 +9,7 @@ public class BinaryConverter : IBinaryConverter
     }
 
 
-    protected virtual Encoding Encoding
-    {
-        get { return Encoding.Unicode; }
-    }
+    protected virtual Encoding Encoding => Encoding.Unicode;
 
     private void CheckData(byte[] data, int expectedSize)
     {
@@ -32,41 +29,19 @@ public class BinaryConverter : IBinaryConverter
         return this.Encoding.GetBytes(value);
     }
 
-    public virtual byte[] GetBytes(short value)
-    {
-        return BitConverter.GetBytes(value);
-    }
+    public virtual byte[] GetBytes(short value) => BitConverter.GetBytes(value);
 
-    public virtual byte[] GetBytes(int value)
-    {
-        return BitConverter.GetBytes(value);
-    }
+    public virtual byte[] GetBytes(int value) => BitConverter.GetBytes(value);
 
-    public virtual byte[] GetBytes(long value)
-    {
-        return BitConverter.GetBytes(value);
-    }
+    public virtual byte[] GetBytes(long value) => BitConverter.GetBytes(value);
 
-    public byte[] GetBytes(float value)
-    {
-        return BitConverter.GetBytes(value);
-    }
+    public byte[] GetBytes(float value) => BitConverter.GetBytes(value);
 
-    public byte[] GetBytes(double value)
-    {
-        return BitConverter.GetBytes(value);
-    }
+    public byte[] GetBytes(double value) => BitConverter.GetBytes(value);
 
-    public byte[] GetBytes(decimal value)
-    {
-        throw new NotSupportedException();
-    }
+    public byte[] GetBytes(decimal value) => throw new NotSupportedException();
 
-    public byte[] GetBytes(bool value)
-    {
-        return BitConverter.GetBytes(value);
-    }
-
+    public byte[] GetBytes(bool value) => BitConverter.GetBytes(value);
 
     public string GetString(byte[] data)
     {
@@ -113,10 +88,7 @@ public class BinaryConverter : IBinaryConverter
         return BitConverter.ToDouble(data, 0);
     }
 
-    public decimal GetDecimal(byte[] data)
-    {
-        throw new NotSupportedException();
-    }
+    public decimal GetDecimal(byte[] data) => throw new NotSupportedException();
 
     public bool GetBoolean(byte[] data)
     {

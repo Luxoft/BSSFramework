@@ -6,6 +6,7 @@ using Framework.ApplicationVariable;
 using Framework.Authorization.BLL;
 using Framework.Authorization.Events;
 using Framework.Authorization.Generated.DTO;
+using Framework.BLL.DTOMapping.DTOMapper;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
@@ -35,10 +36,11 @@ using SecuritySystem.DomainServices.DependencySecurity;
 using HierarchicalExpand;
 
 using SecuritySystem.SecurityRuleInfo;
+using Framework.DomainDriven.ServiceModel.IAD;
 
-namespace Framework.DomainDriven.ServiceModel.IAD;
+namespace Framework.Infrastructure.DependencyInjection;
 
-public static class ServiceCollectionExtensions
+public static class ServiceCollectionExtensions2
 {
     extension(IServiceCollection services)
     {
@@ -114,31 +116,6 @@ public static class ServiceCollectionExtensions
                    .AddScoped<IMessageSender<Notification.DTO.NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>();
         }
 
-        public IServiceCollection RegisterProjectionDomainSecurityServices(Assembly assembly)
-        {
-            var projectionsRequest = from type in assembly.GetTypes()
-
-                                     let projectionAttr = type.GetCustomAttribute<ProjectionAttribute>()
-
-                                     where projectionAttr != null && type.HasAttribute<DependencySecurityAttribute>()
-
-                                     select new { DomainType = type, projectionAttr.SourceType, CustomViewSecurityRule = (DomainSecurityRule?)type.GetViewSecurityRule() };
-
-            foreach (var pair in projectionsRequest)
-            {
-                services.AddScoped(
-                    typeof(IDomainSecurityService<>).MakeGenericType(pair.DomainType),
-                    typeof(UntypedDependencyDomainSecurityService<,>).MakeGenericType(pair.DomainType, pair.SourceType));
-
-                if (pair.CustomViewSecurityRule != null)
-                {
-                    services.AddSingleton(
-                        new DomainModeSecurityRuleInfo(SecurityRule.View.ToDomain(pair.DomainType), pair.CustomViewSecurityRule));
-                }
-            }
-
-            return services;
-        }
 
         private IServiceCollection RegisterConfigurationNamedLocks()
         {

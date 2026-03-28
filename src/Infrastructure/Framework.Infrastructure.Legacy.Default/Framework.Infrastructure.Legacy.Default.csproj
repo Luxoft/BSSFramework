@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.Infrastructure.Legacy</PackageId>
+    <PackageId>Luxoft.Framework.Infrastructure.Legacy.Default</PackageId>
     <RootNamespace>Framework.Infrastructure</RootNamespace>
   </PropertyGroup>
 
@@ -11,13 +11,11 @@
 
   <ItemGroup>
     <PackageReference Include="IvAt.HierarchicalExpand.Runtime" />
-    <PackageReference Include="IvAt.SecuritySystem" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\BLL\Framework.BLL.DTOMapping\Framework.BLL.DTOMapping.csproj" />
     <ProjectReference Include="..\..\Database\Framework.Database.Abstractions\Framework.Database.Abstractions.csproj" />
-    <ProjectReference Include="..\..\Projection\Framework.Projection.Domain\Framework.Projection.Domain.csproj" />
     <ProjectReference Include="..\..\Validation\Framework.Validation.Abstractions\Framework.Validation.Abstractions.csproj" />
   </ItemGroup>
 

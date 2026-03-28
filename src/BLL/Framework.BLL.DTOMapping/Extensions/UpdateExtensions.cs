@@ -1,10 +1,11 @@
 ﻿using CommonFramework;
 using CommonFramework.Maybe;
+
 using Framework.BLL.Domain.IdentityObject;
-using Framework.BLL.Domain.MergeItemData;
+using Framework.BLL.DTOMapping.MergeItemData;
 using Framework.Core;
 
-namespace Framework.BLL.Domain.Extensions;
+namespace Framework.BLL.DTOMapping.Extensions;
 
 public static class UpdateExtensions
 {

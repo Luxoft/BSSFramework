@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Framework.BLL.Domain.MergeItemData;
+namespace Framework.BLL.DTOMapping.MergeItemData;
 
 /// <summary>
 /// Данные по изменению объектв в коллекции
@@ -14,13 +14,7 @@ public abstract class UpdateItemData<TValue, TIdentity>
 
 public static class UpdateItemData
 {
-    public static UpdateItemData<TValue, TIdentity> CreateSave<TValue, TIdentity>(TValue value)
-    {
-        return new SaveItemData<TValue, TIdentity>(value);
-    }
+    public static UpdateItemData<TValue, TIdentity> CreateSave<TValue, TIdentity>(TValue value) => new SaveItemData<TValue, TIdentity>(value);
 
-    public static UpdateItemData<TValue, TIdentity> CreateRemove<TValue, TIdentity>(TIdentity identity)
-    {
-        return new RemoveItemData<TValue, TIdentity>(identity);
-    }
+    public static UpdateItemData<TValue, TIdentity> CreateRemove<TValue, TIdentity>(TIdentity identity) => new RemoveItemData<TValue, TIdentity>(identity);
 }

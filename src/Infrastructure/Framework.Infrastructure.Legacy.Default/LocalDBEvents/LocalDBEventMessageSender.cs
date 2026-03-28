@@ -1,12 +1,7 @@
-﻿using CommonFramework;
-
-using Framework.Configuration.BLL;
-using Framework.Core;
+﻿using Framework.BLL.DTOMapping.DTOMapper;
 using Framework.Core.Helpers;
-using Framework.Events.Legacy;
-using Framework.Persistent;
 
-namespace Framework.DomainDriven.ServiceModel.IAD;
+namespace Framework.Infrastructure.LocalDBEvents;
 
 /// <summary>
 /// Класс для отправки доменных евентов в локальную бд

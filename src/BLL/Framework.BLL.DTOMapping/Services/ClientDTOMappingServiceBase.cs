@@ -3,7 +3,8 @@
 using Framework.BLL.Domain.Exceptions;
 using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.IdentityObject;
-using Framework.BLL.Domain.MergeItemData;
+using Framework.BLL.DTOMapping.Extensions;
+using Framework.BLL.DTOMapping.MergeItemData;
 using Framework.Core;
 
 namespace Framework.BLL.DTOMapping.Services;
@@ -13,10 +14,8 @@ public abstract class ClientDTOMappingServiceBase
     protected virtual List<UpdateItemData<TTarget, TIdentity>> ExtractUpdateDataFromSingle<TSource, TIdentity, TTarget>(
         IEnumerable<TSource> currentSource,
         Func<TSource, TTarget> getTargetFromSingle)
-        where TSource : class, IIdentityObjectContainer<TIdentity>
-    {
-        return currentSource.ToList(item => UpdateItemData.CreateSave<TTarget, TIdentity>(getTargetFromSingle(item)));
-    }
+        where TSource : class, IIdentityObjectContainer<TIdentity> =>
+        currentSource.ToList(item => UpdateItemData.CreateSave<TTarget, TIdentity>(getTargetFromSingle(item)));
 
     protected virtual List<UpdateItemData<TTarget, TIdentity>> ExtractSecurityUpdateDataFromSingle<TSource, TIdentity, TTarget>(
         Maybe<List<TSource>> currentSource,
@@ -40,13 +39,11 @@ public abstract class ClientDTOMappingServiceBase
         IEnumerable<TSource> baseSource,
         Func<TSource, TSource, TTarget> getTargetFromPair,
         Func<TSource, TTarget> getTargetFromSingle)
-        where TSource : class, IIdentityObjectContainer<TIdentity>
-    {
-        return currentSource.ExtractUpdateData(
+        where TSource : class, IIdentityObjectContainer<TIdentity> =>
+        currentSource.ExtractUpdateData(
             baseSource,
             (currentSourceItem, baseSourceItem) => baseSourceItem == null ? getTargetFromSingle(currentSourceItem) : getTargetFromPair(currentSourceItem, baseSourceItem),
             v => v.Identity).ToList();
-    }
 
     protected virtual List<UpdateItemData<TTarget, TIdentity>> ExtractSecurityUpdateDataL<TSource, TIdentity, TTarget>(
         Maybe<List<TSource>> currentSource,

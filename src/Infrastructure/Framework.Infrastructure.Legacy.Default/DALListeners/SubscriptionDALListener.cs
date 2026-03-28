@@ -1,7 +1,6 @@
-﻿using Framework.Configuration.BLL;
-using Framework.DomainDriven.ServiceModel.Subscriptions;
+﻿using Framework.Infrastructure.SubscriptionService;
 
-namespace Framework.DomainDriven.ServiceModel.IAD;
+namespace Framework.Infrastructure.DALListeners;
 
 public class SubscriptionDALListener(IConfigurationBLLContext configurationBllContext, IStandardSubscriptionService subscriptionService)
     : IBeforeTransactionCompletedDALListener

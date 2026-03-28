@@ -2,7 +2,7 @@
 
 using HierarchicalExpand;
 
-namespace Framework.DomainDriven.ServiceModel.IAD;
+namespace Framework.Infrastructure;
 
 public class ProjectionActualDomainTypeResolver : IActualDomainTypeResolver
 {

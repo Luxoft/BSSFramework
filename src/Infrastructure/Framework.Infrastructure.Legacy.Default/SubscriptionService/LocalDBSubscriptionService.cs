@@ -1,9 +1,4 @@
-﻿using Framework.Configuration.BLL;
-using Framework.Configuration.Domain;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.ServiceModel.Subscriptions;
-
-namespace Framework.DomainDriven.ServiceModel.IAD;
+﻿namespace Framework.Infrastructure.SubscriptionService;
 
 /// <summary>
 /// Сервис для сохрания модификаций в локальную бд http://readthedocs/docs/iad-framework/en/master/KB/integrations/EventDTO.html

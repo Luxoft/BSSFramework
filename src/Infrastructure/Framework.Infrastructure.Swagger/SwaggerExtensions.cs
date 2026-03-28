@@ -2,7 +2,7 @@
 
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Framework.DomainDriven.WebApiNetCore.Swagger;
+namespace Framework.Infrastructure.Swagger;
 
 public static class SwaggerExtensions
 {

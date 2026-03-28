@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.DomainDriven.WebApiNetCore.Swagger</PackageId>
+    <PackageId>Luxoft.Framework.Infrastructure.Swagger</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

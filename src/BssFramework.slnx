@@ -70,14 +70,11 @@
     <Project Path="Domain/Framework.Restriction/Framework.Restriction.csproj" />
   </Folder>
   
-  <Folder Name="/DomainDriven/">
-    <Project Path="_DomainDriven/Framework.DomainDriven.WebApiNetCore.Swagger/Framework.DomainDriven.WebApiNetCore.Swagger.csproj" />
-  </Folder>
-  
   <Folder Name="/Infrastructure/">
     <Project Path="Infrastructure/Framework.Infrastructure.Abstractions/Framework.Infrastructure.Abstractions.csproj" />
     <Project Path="Infrastructure/Framework.Infrastructure.Legacy.Default/Framework.Infrastructure.Legacy.Default.csproj" />
     <Project Path="Infrastructure/Framework.Infrastructure.Legacy/Framework.Infrastructure.Legacy.csproj" />
+    <Project Path="Infrastructure/Framework.Infrastructure.Swagger/Framework.Infrastructure.Swagger.csproj" />
     <Project Path="Infrastructure/Framework.Infrastructure/Framework.Infrastructure.csproj" />
   </Folder>
   

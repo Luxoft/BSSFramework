@@ -16,8 +16,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.WebApiNetCore.Swagger\Framework.DomainDriven.WebApiNetCore.Swagger.csproj" />
-  </ItemGroup>
-
 </Project>

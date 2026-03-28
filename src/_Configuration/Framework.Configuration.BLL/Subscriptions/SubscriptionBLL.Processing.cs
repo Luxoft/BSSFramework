@@ -9,7 +9,7 @@ namespace Framework.Configuration.BLL;
 
 public partial class SubscriptionBLL
 {
-    public IList<ITryResult<Subscription>> Process(ObjectModificationInfo<Guid> changedObjectInfo)
+    public List<ITryResult<Subscription>> Process(ObjectModificationInfo<Guid> changedObjectInfo)
     {
         if (changedObjectInfo == null)
         {
@@ -35,7 +35,7 @@ public partial class SubscriptionBLL
         }
     }
 
-    public IList<ITryResult<Subscription>> ProcessChangedObjectUntyped(object previous, object current, Type type)
+    public List<ITryResult<Subscription>> ProcessChangedObjectUntyped(object previous, object current, Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 

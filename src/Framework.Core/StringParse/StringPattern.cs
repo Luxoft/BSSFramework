@@ -5,36 +5,36 @@ namespace Framework.Core.StringParse;
 [Obsolete("v10 This method will be protected in future")]
 public class StringPattern
 {
-    private readonly string _defaultEnd = "$";
-    private string _start;
-    private string _end;
+    private readonly string defaultEnd = "$";
+    private string start;
+    private string end;
 
-    private string _afterThatWorlds;
+    private string afterThatWorlds;
 
     public StringPattern()
     {
     }
-    public string Start => this._start;
+    public string Start => this.start;
 
-    public string End => this._end ?? this._defaultEnd;
+    public string End => this.end ?? this.defaultEnd;
 
-    public string AfterThatWorlds => this._afterThatWorlds;
+    public string AfterThatWorlds => this.afterThatWorlds;
 
     public StringPattern WithStart(char start) => this.WithStart(new string(new[] { start }));
 
     public StringPattern WithStart(string start)
     {
-        this.SetValue(start, () => this._start, value => this._start = value, MethodBase.GetCurrentMethod());
+        this.SetValue(start, () => this.start, value => this.start = value, MethodBase.GetCurrentMethod());
         return this;
     }
     public StringPattern WithEnd(string end)
     {
-        this.SetValue(end, () => this._end, value => this._end = value, MethodBase.GetCurrentMethod());
+        this.SetValue(end, () => this.end, value => this.end = value, MethodBase.GetCurrentMethod());
         return this;
     }
     public StringPattern WithAfterThatWords(string words)
     {
-        this.SetValue(words, () => this._afterThatWorlds, value => this._afterThatWorlds = value, MethodBase.GetCurrentMethod());
+        this.SetValue(words, () => this.afterThatWorlds, value => this.afterThatWorlds = value, MethodBase.GetCurrentMethod());
         return this;
     }
 

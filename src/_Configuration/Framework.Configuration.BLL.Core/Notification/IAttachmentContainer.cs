@@ -5,5 +5,5 @@ using Framework.Notification.DTO;
 
 public interface IAttachmentContainer
 {
-    IList<NotificationAttachmentDTO> Attachments { get; set; }
+    List<NotificationAttachmentDTO> Attachments { get; set; }
 }

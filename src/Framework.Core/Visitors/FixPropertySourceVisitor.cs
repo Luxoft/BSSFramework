@@ -10,7 +10,7 @@ namespace Framework.Core.Visitors;
 /// </summary>
 public class FixPropertySourceVisitor : ExpressionVisitor
 {
-    public static readonly FixPropertySourceVisitor Value = new FixPropertySourceVisitor();
+    public static readonly FixPropertySourceVisitor Value = new();
 
 
     private FixPropertySourceVisitor()

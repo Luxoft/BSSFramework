@@ -3,9 +3,9 @@
 public class ScriptResult
 {
     private readonly SmoObjectActionType _smoObjectActionType;
-    private readonly IList<string> _scripts;
+    private readonly List<string> _scripts;
 
-    public ScriptResult(SmoObjectActionType smoObjectActionType, IList<string> scripts)
+    public ScriptResult(SmoObjectActionType smoObjectActionType, List<string> scripts)
     {
         if (scripts == null) throw new ArgumentNullException(nameof(scripts));
         this._smoObjectActionType = smoObjectActionType;
@@ -17,7 +17,7 @@ public class ScriptResult
         get { return this._smoObjectActionType; }
     }
 
-    public IList<string> Scripts
+    public List<string> Scripts
     {
         get { return this._scripts; }
     }

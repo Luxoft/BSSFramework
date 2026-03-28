@@ -11,7 +11,7 @@ public class InlineTypeFieldMetadata : FieldMetadata
 {
     private readonly InlineTypeFieldMetadata _parent;
 
-    private readonly IList<PrimitiveTypeFieldMetadata> _primitiveMetadataCollection;
+    private readonly List<PrimitiveTypeFieldMetadata> _primitiveMetadataCollection;
     private readonly List<InlineTypeFieldMetadata> _children;
 
     private readonly List<ReferenceTypeFieldMetadata> referenceTypes;
@@ -83,7 +83,7 @@ public class InlineTypeFieldMetadata : FieldMetadata
         get { return this._parent; }
     }
 
-    public IList<PrimitiveTypeFieldMetadata> PrimitiveMetadataCollection
+    public List<PrimitiveTypeFieldMetadata> PrimitiveMetadataCollection
     {
         get { return this._primitiveMetadataCollection; }
     }

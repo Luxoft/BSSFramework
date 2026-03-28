@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-using Framework.BLL.Domain.MasterDetails;
+using Framework.Relations;
 using Framework.Restriction;
 
 namespace Framework.Authorization.Domain;

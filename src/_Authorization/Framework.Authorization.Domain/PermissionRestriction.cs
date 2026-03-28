@@ -1,7 +1,7 @@
-﻿using Framework.BLL.Domain.MasterDetails;
-using Framework.BLL.Domain.Serialization;
+﻿using Framework.BLL.Domain.Serialization;
+using Framework.Relations;
 using Framework.Restriction;
-using Framework.Tracking.Validation.BLL.Validation.Attributes;
+using Framework.Tracking.Validation;
 
 namespace Framework.Authorization.Domain;
 

@@ -1,9 +1,23 @@
-﻿namespace Framework.BLL.Domain.Exceptions;
+﻿using CommonFramework;
+
+namespace Framework.BLL.Domain.Exceptions;
 
 public static class BusinessLogicExceptionExtensions
 {
-    public static BusinessLogicAggregateException Aggregate(this IEnumerable<BusinessLogicException> source) => new([..source]);
+    public static BusinessLogicException Aggregate(this IEnumerable<BusinessLogicException> source)
+    {
+        var innerExceptions = source.ToArray();
 
-    public static BusinessLogicAggregateException Aggregate(this IEnumerable<Exception> exceptions) =>
+        if (innerExceptions.Length == 1)
+        {
+            return innerExceptions[0];
+        }
+        else
+        {
+            return new BusinessLogicException(innerExceptions.Join(Environment.NewLine, ex => ex.Message), new AggregateException(innerExceptions.Cast<Exception>()));
+        }
+    }
+
+    public static BusinessLogicException Aggregate(this IEnumerable<Exception> exceptions) =>
         exceptions.Select(ex => ex as BusinessLogicException ?? new BusinessLogicException(ex.Message, ex)).Aggregate();
 }

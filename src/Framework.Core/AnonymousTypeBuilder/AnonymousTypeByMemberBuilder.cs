@@ -9,16 +9,16 @@ public abstract class AnonymousTypeByMemberBuilder<TMap, TMapMember, TMemberBuil
         where TMap : class, ITypeMap<TMapMember>
         where TMapMember: ITypeMapMember
 {
-    private readonly IAnonymousTypeBuilderStorage _storage;
+    private readonly IAnonymousTypeBuilderStorage storage;
 
-    private readonly Dictionary<Type, Type> _typeBuilderCache = new Dictionary<Type, Type>();
+    private readonly Dictionary<Type, Type> typeBuilderCache = new();
 
 
     protected AnonymousTypeByMemberBuilder(IAnonymousTypeBuilderStorage storage)
     {
         if (storage == null) throw new ArgumentNullException(nameof(storage));
 
-        this._storage = storage;
+        this.storage = storage;
     }
 
 
@@ -26,7 +26,7 @@ public abstract class AnonymousTypeByMemberBuilder<TMap, TMapMember, TMemberBuil
     {
         if (typeMap == null) throw new ArgumentNullException(nameof(typeMap));
 
-        return this._storage.ModuleBuilder.DefineType(typeMap.Name, TypeAttributes.Class | TypeAttributes.Public);
+        return this.storage.ModuleBuilder.DefineType(typeMap.Name, TypeAttributes.Class | TypeAttributes.Public);
     }
 
 
@@ -48,7 +48,7 @@ public abstract class AnonymousTypeByMemberBuilder<TMap, TMapMember, TMemberBuil
 
         var membersRequest = from member in typeMap.Members
 
-                             let memberType = this._typeBuilderCache.GetValueOrDefault(member.Type, () => member.Type)
+                             let memberType = this.typeBuilderCache.GetValueOrDefault(member.Type, () => member.Type)
 
                              select this.ImplementMember(typeBuilder, member);
 
@@ -56,7 +56,7 @@ public abstract class AnonymousTypeByMemberBuilder<TMap, TMapMember, TMemberBuil
 
         var type = typeBuilder.CreateTypeInfo();
 
-        this._typeBuilderCache.Add(type, typeBuilder);
+        this.typeBuilderCache.Add(type, typeBuilder);
 
         return type;
     }

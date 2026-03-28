@@ -23,13 +23,13 @@ namespace Framework.Database.NHibernate.Audit;
 internal class AuditMetadataProvider<TAuditRevisionEntity> : IMetaDataProvider
     where TAuditRevisionEntity : AuditRevisionEntity
 {
-    private IList<Type> filledTypes;
+    private List<Type> filledTypes;
 
     private readonly string auditTableSuffix;
 
     private readonly IEntityTrackingRevisionListener entityTrackingRevisionListener;
 
-    private readonly IList<MappingSettings> mappingSettings;
+    private readonly IReadOnlyList<MappingSettings> mappingSettings;
 
     private readonly string auditEntityRevisionSchema;
 
@@ -42,7 +42,7 @@ internal class AuditMetadataProvider<TAuditRevisionEntity> : IMetaDataProvider
     /// <param name="auditTableSuffix">The audit table suffix.</param>
     /// <param name="entityTrackingRevisionListener">The entity tracking revision listener.</param>
     public AuditMetadataProvider(
-        IList<MappingSettings> mappingSettings,
+        IReadOnlyList<MappingSettings> mappingSettings,
         string auditEntityRevisionSchema,
         string auditTableSuffix,
         IEntityTrackingRevisionListener entityTrackingRevisionListener)

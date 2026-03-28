@@ -11,7 +11,7 @@ public class DomainTypeMetadata
     private readonly AssemblyMetadata assemblyMetadata;
     private readonly List<FieldMetadata> fields;
     private readonly List<DomainTypeMetadata> children;
-    private readonly Lazy<IList<UniqueIndexMetadata>> indexUniqueMetadataLazy;
+    private readonly Lazy<List<UniqueIndexMetadata>> indexUniqueMetadataLazy;
     private bool isCollected;
     private DomainTypeMetadata parent;
 
@@ -24,7 +24,7 @@ public class DomainTypeMetadata
         this.fields = [];
         this.children = [];
 
-        this.indexUniqueMetadataLazy = new Lazy<IList<UniqueIndexMetadata>>(this.CreateUniqueIndexMetadata);
+        this.indexUniqueMetadataLazy = new Lazy<List<UniqueIndexMetadata>>(this.CreateUniqueIndexMetadata);
     }
 
     public DomainTypeMetadata Parent => this.parent;
@@ -99,7 +99,7 @@ public class DomainTypeMetadata
         }
     }
 
-    private IList<UniqueIndexMetadata> CreateUniqueIndexMetadata()
+    private List<UniqueIndexMetadata> CreateUniqueIndexMetadata()
     {
         if (!this.isCollected)
         {

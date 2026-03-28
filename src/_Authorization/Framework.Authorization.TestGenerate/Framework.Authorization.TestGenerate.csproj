@@ -15,7 +15,5 @@
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.NHibernate.DALGenerator\Framework.DomainDriven.NHibernate.DALGenerator.csproj" />
 
     <ProjectReference Include="..\Framework.Authorization.Domain.Models\Framework.Authorization.Domain.Models.csproj" />
-
-    <ProjectReference Include="..\Framework.Authorization.Generated.DAL.NHibernate\Framework.Authorization.Generated.DAL.NHibernate.csproj" />
   </ItemGroup>
 </Project>

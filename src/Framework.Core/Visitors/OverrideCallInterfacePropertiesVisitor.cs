@@ -4,18 +4,18 @@ namespace Framework.Core.Visitors;
 
 public class OverrideCallInterfacePropertiesVisitor : ExpressionVisitor
 {
-    private readonly ExpressionVisitor _internalVisitor;
+    private readonly ExpressionVisitor internalVisitor;
 
 
     public OverrideCallInterfacePropertiesVisitor(Type interfaceType)
     {
         if (interfaceType == null) throw new ArgumentNullException(nameof(interfaceType));
 
-        this._internalVisitor = interfaceType.GetProperties()
+        this.internalVisitor = interfaceType.GetProperties()
                                              .Select(property => new OverrideCallInterfacePropertyVisitor(property))
                                              .ToComposite();
     }
 
 
-    public override Expression? Visit(Expression? node) => this._internalVisitor.Visit(node);
+    public override Expression? Visit(Expression? node) => this.internalVisitor.Visit(node);
 }

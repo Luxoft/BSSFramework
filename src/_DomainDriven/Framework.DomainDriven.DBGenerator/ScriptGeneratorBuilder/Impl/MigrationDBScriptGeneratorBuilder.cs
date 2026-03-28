@@ -11,7 +11,7 @@ namespace Framework.DomainDriven.DBGenerator;
 
 internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuilder
 {
-    private IList<IMigrationScriptReader> _readers = new List<IMigrationScriptReader>();
+    private List<IMigrationScriptReader> _readers = new List<IMigrationScriptReader>();
     private string _tableName = "ExecutedScripts";
 
     public bool IsFreezed { get; internal set; }
@@ -163,7 +163,7 @@ internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuil
             }
         }
 
-        private IList<MigrationDbScriptHeader> GetExecutedMigrationScripts(IDatabaseScriptGeneratorContext context)
+        private List<MigrationDbScriptHeader> GetExecutedMigrationScripts(IDatabaseScriptGeneratorContext context)
         {
             var result = new List<MigrationDbScriptHeader>();
             using (var connection = context.SqlDatabaseFactory.Server.ConnectionContext.SqlConnectionObject)

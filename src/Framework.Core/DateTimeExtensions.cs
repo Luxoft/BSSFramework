@@ -47,7 +47,7 @@ public static class DateTimeExtensions
 
     public static Period ToYear(this DateTime dateTime) => Period.FromYear(dateTime.Year);
 
-    public static bool LessOrEqualIgnoreTime(this DateTime? _this, DateTime date) => _this < date.AddDay();
+    public static bool LessOrEqualIgnoreTime(this DateTime? @this, DateTime date) => @this < date.AddDay();
 
     public static int GetQuarter(this DateTime dateTime) => dateTime.Month / 3 + (dateTime.Month % 3 == 0 ? 0 : 1);
 

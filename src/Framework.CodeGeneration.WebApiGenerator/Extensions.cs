@@ -54,7 +54,7 @@ public static class Extensions
 
     internal static CodeNamespace CombineMethods(
             this CodeNamespace targetNamespace,
-            IList<CodeNamespace> addedNamespaces,
+            List<CodeNamespace> addedNamespaces,
             string suffix)
     {
         var targetType = targetNamespace.Types.Cast<CodeTypeDeclaration>().Single(() => new Exception($"Expected one type in generated namespace. Namespace:{targetNamespace.Name}"));

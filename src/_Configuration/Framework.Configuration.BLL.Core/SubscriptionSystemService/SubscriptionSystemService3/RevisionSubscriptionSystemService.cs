@@ -65,9 +65,9 @@ public class RevisionSubscriptionSystemService<TBLLContext, T> : SubscriptionSys
     /// Выполняет рассылку уведомлений по всем подпискам, привязанным к типу изменяемого доменного объекта.
     /// </summary>
     /// <param name="changedObjectInfo">Данные об изменяемом доменном объекте.</param>
-    /// <returns>Экземпляр <see cref="IList{ITryResult}"/>.</returns>
+    /// <returns>Экземпляр <see cref="List{ITryResult}"/>.</returns>
     /// <exception cref="ArgumentNullException">Аргумент changedObjectInfo равен null.</exception>
-    public IList<ITryResult<Subscription>> Process(ObjectModificationInfo<Guid> changedObjectInfo)
+    public List<ITryResult<Subscription>> Process(ObjectModificationInfo<Guid> changedObjectInfo)
     {
         if (changedObjectInfo == null)
         {
@@ -80,9 +80,9 @@ public class RevisionSubscriptionSystemService<TBLLContext, T> : SubscriptionSys
             var domainObjectType = facade.GetDomainObjectType(changedObjectInfo.TypeInfo);
 
             var @delegate =
-                    (Func<ObjectModificationInfo<Guid>, IList<ITryResult<Subscription>>>)this.ProcessTyped<T>;
+                    (Func<ObjectModificationInfo<Guid>, List<ITryResult<Subscription>>>)this.ProcessTyped<T>;
             var method = @delegate.CreateGenericMethod(domainObjectType);
-            var result = (IList<ITryResult<Subscription>>)method.Invoke(this, new object[] { changedObjectInfo });
+            var result = (List<ITryResult<Subscription>>)method.Invoke(this, new object[] { changedObjectInfo });
 
             return result;
         }
@@ -96,7 +96,7 @@ public class RevisionSubscriptionSystemService<TBLLContext, T> : SubscriptionSys
         }
     }
 
-    private IList<ITryResult<Subscription>> ProcessTyped<TDomainObject>(
+    private List<ITryResult<Subscription>> ProcessTyped<TDomainObject>(
             ObjectModificationInfo<Guid> info)
             where TDomainObject : class, T
     {

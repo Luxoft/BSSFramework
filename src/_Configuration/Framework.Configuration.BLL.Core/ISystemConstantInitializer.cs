@@ -10,9 +10,9 @@ public interface ISystemConstantInitializer : IInitializer;
 
 public interface ISubscriptionBLL
 {
-    IList<ITryResult<Subscription>> Process(ObjectModificationInfo<Guid> changedObjectInfo);
+    List<ITryResult<Subscription>> Process(ObjectModificationInfo<Guid> changedObjectInfo);
 
-    IList<ITryResult<Subscription>> ProcessChangedObjectUntyped(object previous, object current, Type type);
+    List<ITryResult<Subscription>> ProcessChangedObjectUntyped(object previous, object current, Type type);
 
     SubscriptionRecipientInfo GetRecipientsUntyped(Type type, object previous, object current, string subscriptionCode);
 

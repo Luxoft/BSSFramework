@@ -29,7 +29,7 @@ public static class DatabaseScriptGeneratorExtension
 
     public class CompositeMigrationScriptReader : IMigrationScriptReader
     {
-        private readonly IList<IMigrationScriptReader> _readers;
+        private readonly List<IMigrationScriptReader> _readers;
 
         public CompositeMigrationScriptReader(IEnumerable<IMigrationScriptReader> readers)
         {
@@ -45,9 +45,9 @@ public static class DatabaseScriptGeneratorExtension
 
     class CompositeDatabaseScriptGenerator : IDatabaseScriptGenerator
     {
-        private readonly IList<IDatabaseScriptGenerator> _services;
+        private readonly List<IDatabaseScriptGenerator> _services;
 
-        public CompositeDatabaseScriptGenerator(IList<IDatabaseScriptGenerator> services)
+        public CompositeDatabaseScriptGenerator(List<IDatabaseScriptGenerator> services)
         {
             this._services = services;
         }

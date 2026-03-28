@@ -19,9 +19,9 @@ public struct DatabaseScriptGeneratorStrategyInfo
 
     public readonly string PreviousPostfix;
 
-    public readonly IList<Tuple<Table, Column, string>> AddedColumns;
+    public readonly List<Tuple<Table, Column, string>> AddedColumns;
 
-    public readonly IList<Column> RemovableColumns;
+    public readonly List<Column> RemovableColumns;
 
     public readonly IReadOnlyDictionary<Type, DomainTypeMetadata> TypeToDomainTypeMetadataDictionary;
 

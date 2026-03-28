@@ -6,10 +6,7 @@ namespace Framework.Infrastructure.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
-    extension(IServiceCollection services)
-    {
-        public IServiceCollection AddBssFramework(Action<IBssFrameworkBuilder> setupAction) =>
+    public static IServiceCollection AddBssFramework(this IServiceCollection services, Action<IBssFrameworkBuilder> setupAction) =>
 
-            services.Initialize<BssFrameworkBuilder>(setupAction);
-    }
+        services.Initialize<BssFrameworkBuilder>(setupAction);
 }

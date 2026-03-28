@@ -141,7 +141,7 @@ public sealed class SubscriptionSystemServiceTests : TestFixtureBase
     {
         // Arrange
         var versions = this.Fixture.Create<DomainObjectVersions<string>>();
-        var expectedResult = Substitute.For<IList<ITryResult<Subscription>>>();
+        var expectedResult = Substitute.For<List<ITryResult<Subscription>>>();
 
         this.notificationService
             .NotifyDomainObjectChanged(versions)

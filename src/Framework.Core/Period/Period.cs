@@ -351,14 +351,14 @@ public partial struct Period : IDeserializationCallback
     /// <summary>
     /// Предоставляет экземпляр бесконечного периода
     /// </summary>
-    public static readonly Period Eternity = new Period(DateTime.MinValue.ToSqlDateTime(),
-                                                        DateTime.MaxValue.ToSqlDateTime());
+    public static readonly Period Eternity = new(DateTime.MinValue.ToSqlDateTime(),
+                                                 DateTime.MaxValue.ToSqlDateTime());
 
     /// <summary>
     /// Предоставляет экземпляр пустого периода
     /// </summary>
-    public static readonly Period Empty = new Period(DateTime.MaxValue.ToSqlDateTime(),
-                                                     DateTime.MinValue.ToSqlDateTime());
+    public static readonly Period Empty = new(DateTime.MaxValue.ToSqlDateTime(),
+                                              DateTime.MinValue.ToSqlDateTime());
 
     #endregion
 }

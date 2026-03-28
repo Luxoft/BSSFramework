@@ -10,7 +10,7 @@ namespace Framework.Database.NHibernate.Audit;
 
 public static class Extensions
 {
-    public static IAuditAttributeService GetAuditAttributeService(this IList<MappingSettings> mappingSettings, IEnumerable<PersistentClass> persistentClasses)
+    public static IAuditAttributeService GetAuditAttributeService(this IReadOnlyList<MappingSettings> mappingSettings, IEnumerable<PersistentClass> persistentClasses)
     {
         var monitoriableTypes = mappingSettings
                                 .Select(z => new { MappingSettings = z, Filter = z.AuditTypeFilter })
@@ -32,11 +32,11 @@ public static class Extensions
 
         mappingSettings.Foreach(z =>
                                 {
-                                    auditService.Register((Type)z.PersistentDomainObjectBaseType, true);
+                                    auditService.Register(z.PersistentDomainObjectBaseType, true);
 
-                                    var order = Enumerable.OrderBy<Type, string>(z.Types, q => q.Name).ToList();
+                                    var order = z.Types.OrderBy<Type, string>(q => q.Name).ToList();
 
-                                    z.Types.Foreach(q => auditService.Register((Type)q, (string)z.AuditDatabase.Schema));
+                                    z.Types.Foreach(q => auditService.Register(q, z.AuditDatabase.Schema));
                                 });
 
         foreach (var pair in filteredClassMappings)

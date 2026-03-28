@@ -8,7 +8,7 @@ namespace Framework.Configuration.BLL;
 
 public interface IRevisionSubscriptionSystemService : ISubscriptionSystemService
 {
-    IList<ITryResult<Subscription>> Process(ObjectModificationInfo<Guid> changedObjectInfo);
+    List<ITryResult<Subscription>> Process(ObjectModificationInfo<Guid> changedObjectInfo);
 
     IEnumerable<ObjectModificationInfo<Guid>> GetObjectModifications(DALChanges changes);
 }

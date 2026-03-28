@@ -5,7 +5,7 @@ namespace Framework.DomainDriven.DBGenerator;
 
 abstract class DatabaseScriptGeneratorContainer
 {
-    private readonly IList<IDatabaseScriptGenerator> _generators;
+    private readonly List<IDatabaseScriptGenerator> _generators;
     private bool _isComplete;
     protected readonly MigrationDBScriptGeneratorBuilder _migrationDbScriptGeneratorBuilder;
 

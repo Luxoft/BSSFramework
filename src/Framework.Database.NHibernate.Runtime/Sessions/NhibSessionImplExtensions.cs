@@ -10,7 +10,7 @@ namespace Framework.Database.NHibernate.Sessions;
 
 internal static class NhibSessionImplExtensions
 {
-    private static readonly FieldInfo ListenersField = typeof(SessionImpl).GetField("listeners", BindingFlags.Instance | BindingFlags.NonPublic);
+    private static readonly FieldInfo ListenersField = typeof(SessionImpl).GetField("listeners", BindingFlags.Instance | BindingFlags.NonPublic)!;
 
     private static readonly Action<SessionImpl, IInterceptor> SetInterceptorAction = ExpressionHelper.Create((SessionImpl s) => s.Interceptor).GetProperty().GetSetValueAction<SessionImpl, IInterceptor>();
 

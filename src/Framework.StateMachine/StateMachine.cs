@@ -12,11 +12,11 @@ public class StateMachine : StateMachine<State>
 public class StateMachine<TState>
 {
     private TState _currentState;
-    private readonly Dictionary<TState, IList<ActionDescription<TState>>> _stateToRegisterEventTypes;
+    private readonly Dictionary<TState, List<ActionDescription<TState>>> _stateToRegisterEventTypes;
 
     public StateMachine(TState initialState)
     {
-        this._stateToRegisterEventTypes = new Dictionary<TState, IList<ActionDescription<TState>>>();
+        this._stateToRegisterEventTypes = new Dictionary<TState, List<ActionDescription<TState>>>();
         this._currentState = initialState;
     }
 
@@ -34,7 +34,7 @@ public class StateMachine<TState>
     /// <param name="action"></param>
     public void RegisterState<T>(TState initialState, Func<T, bool> action, TState targetState, params Action[] postActions)
     {
-        IList<ActionDescription<TState>> eventTypes;
+        List<ActionDescription<TState>> eventTypes;
         if (!this._stateToRegisterEventTypes.TryGetValue(initialState, out eventTypes))
         {
             eventTypes = new List<ActionDescription<TState>>();
@@ -59,7 +59,7 @@ public class StateMachine<TState>
 
     public void ProcessEvent<T>(T @event)
     {
-        IList<ActionDescription<TState>> eventTypes;
+        List<ActionDescription<TState>> eventTypes;
         if (!this._stateToRegisterEventTypes.TryGetValue(this._currentState, out eventTypes))
         {
             return;

@@ -57,7 +57,7 @@ public sealed class RevisionSubscriptionSystemServiceTests : TestFixtureBase
         // Arrange
         var modifications = this.Fixture.Create<ObjectModificationInfo<Guid>>();
         var versions = this.Fixture.Create<DomainObjectVersions<IdentityObject>>();
-        var expectedResult = this.CreateStub<IList<ITryResult<Subscription>>>();
+        var expectedResult = this.CreateStub<List<ITryResult<Subscription>>>();
 
         this.configurationContextFacade
             .GetDomainObjectType(modifications.TypeInfo)

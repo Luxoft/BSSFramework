@@ -251,7 +251,7 @@ public static class CoreEnumerableExtensions
         this IEnumerable<TSource> source,
         Func<TSource, bool> firstResultPredicate,
         Func<TSource, bool> secondResultPredicate,
-        Func<List<TSource>, List<TSource>, IList<TSource>, TResult> selector)
+        Func<List<TSource>, List<TSource>, List<TSource>, TResult> selector)
     {
         var l1 = new List<TSource>();
         var l2 = new List<TSource>();
@@ -466,7 +466,7 @@ public static class CoreEnumerableExtensions
         }
     }
 
-    private class PairGrouping<TKey, TElement>(IList<TElement> list, TKey key)
+    private class PairGrouping<TKey, TElement>(List<TElement> list, TKey key)
         : ReadOnlyCollection<TElement>(list), IGrouping<TKey, TElement>
     {
         public TKey Key { get; private set; } = key;

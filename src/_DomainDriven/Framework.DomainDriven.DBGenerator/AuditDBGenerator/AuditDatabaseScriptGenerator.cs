@@ -27,7 +27,7 @@ namespace Framework.DomainDriven.NHibernate;
 
 public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 {
-    private readonly IList<MappingSettings> mappingSettings;
+    private readonly List<MappingSettings> mappingSettings;
 
     private readonly string auditTablePostFix;
 
@@ -143,7 +143,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
         return generateContext;
     }
 
-    private IList<string> GetScripts(AuditGenerateContext generateContext)
+    private List<string> GetScripts(AuditGenerateContext generateContext)
     {
         var sqlScript = new List<string>();
         var alsoCreatedTable = new HashSet<string>();

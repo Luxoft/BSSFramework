@@ -36,7 +36,7 @@ internal class GeneratedProperty : BasePropertyInfoImpl
                                                   {
                                                       var elementType = contractProperty.PropertyType.GetCollectionElementTypeOrSelf();
 
-                                                      var elementProjectionType = (GeneratedType)this.environment.ContractTypeResolver.Resolve(elementType);
+                                                      var elementProjectionType = (GeneratedType)this.environment.ContractTypeResolver.TryResolve(elementType);
 
                                                       var propertyProjectionType = elementProjectionType.Maybe(type => contractProperty.PropertyType.IsCollection() ? typeof(IEnumerable<>).CachedMakeGenericType(type) : type);
 

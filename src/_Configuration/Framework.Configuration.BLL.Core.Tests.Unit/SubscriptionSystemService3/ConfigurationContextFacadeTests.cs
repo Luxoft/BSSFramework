@@ -161,7 +161,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
         var domainType = this.Fixture.Create<DomainType>();
 
         this.domainTypeResolver
-            .Resolve(domainType)
+            .TryResolve(domainType)
             .Returns(domainObjectType);
 
         // Act
@@ -185,7 +185,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
             .Returns(domainType);
 
         this.domainTypeResolver
-            .Resolve(domainType)
+            .TryResolve(domainType)
             .Returns(domainObjectType);
 
         // Act
@@ -201,7 +201,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     {
         // Arrange
         this.domainTypeResolver
-            .Resolve(Arg.Any<DomainType>())
+            .TryResolve(Arg.Any<DomainType>())
             .Returns(default(Type));
 
         // Act

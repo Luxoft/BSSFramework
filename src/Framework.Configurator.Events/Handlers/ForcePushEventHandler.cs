@@ -23,7 +23,7 @@ public class ForcePushEventHandler([WithoutRunAs] ISecuritySystem securitySystem
 
         await eventSystem.ForceEventAsync(
             new EventModel(
-                eventSystem.TypeResolver.Resolve(body.DomainTypeFullName),
+                eventSystem.TypeResolver.TryResolve(body.DomainTypeFullName),
                 body.Ids.Split(',').Select(i => new Guid(i)).ToList(),
                 new EventOperation(body.OperationName),
                 body.Revision),

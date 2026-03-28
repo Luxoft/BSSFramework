@@ -244,31 +244,31 @@ public static class CoreExpressionExtensions
 
     private class NodeExpressionVisitor : ExpressionVisitor
     {
-        private readonly Expression _startNode;
+        private readonly Expression startNode;
 
-        private readonly List<NodeExpressionVisitor> ChildVisitors = [];
+        private readonly List<NodeExpressionVisitor> childVisitors = [];
 
         public NodeExpressionVisitor(Expression startNode)
         {
             if (startNode == null) throw new ArgumentNullException(nameof(startNode));
 
-            this._startNode = startNode;
+            this.startNode = startNode;
         }
 
         public override Expression? Visit(Expression? node)
         {
-            if (node == null || node == this._startNode)
+            if (node == null || node == this.startNode)
             {
                 return base.Visit(node);
             }
             else
             {
                 var childVisitor = new NodeExpressionVisitor(node);
-                this.ChildVisitors.Add(childVisitor);
+                this.childVisitors.Add(childVisitor);
                 return childVisitor.Visit(node);
             }
         }
 
-        public Node<Expression> ToNode() => new(this._startNode, this.ChildVisitors.Select(child => child.ToNode()));
+        public Node<Expression> ToNode() => new(this.startNode, this.childVisitors.Select(child => child.ToNode()));
     }
 }

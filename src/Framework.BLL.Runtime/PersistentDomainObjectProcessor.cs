@@ -19,7 +19,7 @@ public abstract class PersistentDomainObjectProcessor<TBLLContext, TPersistentDo
     {
         if (name == null) throw new ArgumentNullException(nameof(name));
 
-        var domainType = this.TypeResolver.Resolve(name, true);
+        var domainType = this.TypeResolver.Resolve(name);
 
         var genericMethod = new Func<TResult>(this.Process<TPersistentDomainObjectBase>).Method.GetGenericMethodDefinition();
 
@@ -42,11 +42,11 @@ public abstract class PersistentDomainObjectProcessor<TBLLContext, TPersistentDo
     {
         if (name == null) throw new ArgumentNullException(nameof(name));
 
-        var domainType = this.TypeResolver.Resolve(name, true);
+        var domainType = this.TypeResolver.Resolve(name);
 
         var genericMethod = new Action(this.Process<TPersistentDomainObjectBase>).Method.GetGenericMethodDefinition();
 
-        genericMethod.MakeGenericMethod(new[] { domainType }).Invoke(this, []);
+        genericMethod.MakeGenericMethod(domainType).Invoke(this, []);
     }
 }
 

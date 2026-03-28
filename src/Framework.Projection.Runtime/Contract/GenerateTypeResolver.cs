@@ -1,5 +1,4 @@
-﻿using Framework.Core;
-using Framework.Core.TypeResolving;
+﻿using Framework.Core.TypeResolving;
 using Framework.Core.TypeResolving.TypeSource;
 using Framework.Projection.Contract.ImplType;
 
@@ -16,15 +15,12 @@ internal class GenerateTypeResolver : ITypeResolver<Type>
 
     public GenerateTypeResolver(ProjectionContractEnvironment environment, ITypeSource typeSource)
     {
-        if (environment == null) throw new ArgumentNullException(nameof(environment));
-        if (typeSource == null) throw new ArgumentNullException(nameof(typeSource));
-
         this.environment = environment;
 
         this.projectionContracts = typeSource.GetTypes().Where(type => type.HasAttribute<ProjectionContractAttribute>()).ToHashSet();
     }
 
-    public Type Resolve(Type contractType)
+    public Type TryResolve(Type contractType)
     {
         if (contractType == null) throw new ArgumentNullException(nameof(contractType));
 

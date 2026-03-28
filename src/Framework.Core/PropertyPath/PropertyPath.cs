@@ -8,7 +8,7 @@ using CommonFramework;
 namespace Framework.Core;
 
 [DebuggerDisplay("{DebuggerDisplay}")]
-public class PropertyPath(IList<PropertyInfo> list) : ReadOnlyCollection<PropertyInfo>(list), IEquatable<PropertyPath>
+public class PropertyPath(List<PropertyInfo> list) : ReadOnlyCollection<PropertyInfo>(list), IEquatable<PropertyPath>
 {
     public PropertyPath(IEnumerable<PropertyInfo> list)
         : this(list.ToList())

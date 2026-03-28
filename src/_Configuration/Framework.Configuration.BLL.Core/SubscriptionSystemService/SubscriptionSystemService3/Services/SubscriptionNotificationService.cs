@@ -58,11 +58,11 @@ public class SubscriptionNotificationService<TBLLContext>
     /// <typeparam name="T">Тип доменного объекта.</typeparam>
     /// <param name="versions">Версии доменного объекта.</param>
     /// <returns>
-    ///     Экземпляр <see cref="IList{ITryResult}"/>, содержащий ошибки, произошедшие во время исполнения.
+    ///     Экземпляр <see cref="List{ITryResult}"/>, содержащий ошибки, произошедшие во время исполнения.
     ///     Если ошибок не было, возвращается пустой список.
     /// </returns>
     /// <exception cref="ArgumentNullException">Аргумент versions равен null.</exception>
-    public virtual IList<ITryResult<Subscription>> NotifyDomainObjectChanged<T>(
+    public virtual List<ITryResult<Subscription>> NotifyDomainObjectChanged<T>(
             DomainObjectVersions<T> versions)
             where T : class
     {

@@ -8,7 +8,7 @@ using NHibernate.Impl;
 
 namespace Framework.Database.NHibernate.SqlExceptionProcessors;
 
-internal class SqlExceptionProcessorInterceptor : IExceptionProcessor
+internal class SqlExceptionProcessorInterceptor : IExceptionExpander
 {
     private readonly Configuration cfg;
 
@@ -21,8 +21,6 @@ internal class SqlExceptionProcessorInterceptor : IExceptionProcessor
 
     internal SqlExceptionProcessorInterceptor(ISessionFactory factory, Configuration cfg, IDalValidationIdentitySource dalValidationIdentitySource)
     {
-        if (factory == null) throw new ArgumentNullException(nameof(factory));
-        if (cfg == null) throw new ArgumentNullException(nameof(cfg));
 
 
         this.cfg = cfg;
@@ -41,15 +39,6 @@ internal class SqlExceptionProcessorInterceptor : IExceptionProcessor
         this.context = new ExceptionProcessingContext(cfg.ClassMappings, new SchemaDescription(defaultInitialCatalog, defaultDataSourceName));
     }
 
-
-    //internal SqlExceptionProcessorInterceptor(ICollection<PersistentClass> classMappings, SchemaDescription defaultSettings)
-    //{
-    //    _processors = GetProcessors().ToDictionary(z => z.ErrorNumber);
-
-    //    _context = new ExceptionProcessingContext(classMappings, defaultSettings);
-    //}
-
-
     private IEnumerable<ISqlExceptionProcessor> GetProcessors()
     {
         yield return new RemoveLinkedObjectSqlProcessor();
@@ -59,19 +48,14 @@ internal class SqlExceptionProcessorInterceptor : IExceptionProcessor
     }
 
 
-    public Exception Process(Exception exception)
-    {
-        if (exception == null) throw new ArgumentNullException(nameof(exception));
-
-        return exception switch
+    public Exception? TryExpand(Exception exception) =>
+        exception switch
         {
             HandledGenericAdoException adoException => this.InternalProcess(adoException),
             GenericADOException genericAdoException => this.InternalProcess(genericAdoException),
             StaleObjectStateException stateException => this.InternalProcess(stateException),
-            _ => exception
+            _ => null
         };
-    }
-
 
     private Exception InternalProcess(HandledGenericAdoException exception)
     {

@@ -12,11 +12,11 @@ namespace Framework.CodeGeneration.WebApiGenerator;
 
 public class WebApiNetCoreCompositeGeneratorConfiguration : IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    private readonly IList<IGeneratorConfigurationBase<IGenerationEnvironmentBase>> source;
+    private readonly List<IGeneratorConfigurationBase<IGenerationEnvironmentBase>> source;
 
     public WebApiNetCoreCompositeGeneratorConfiguration(
             IGenerationEnvironmentBase environment,
-            IList<IGeneratorConfigurationBase<IGenerationEnvironmentBase>> source,
+            List<IGeneratorConfigurationBase<IGenerationEnvironmentBase>> source,
             string? nameSpace = null)
     {
         this.Environment = environment;

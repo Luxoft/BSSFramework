@@ -7,7 +7,7 @@ public class UniqueIndexMetadata
 {
     private readonly DomainTypeMetadata _domainTypeMetadata;
     private readonly string _name;
-    private readonly IList<FieldMetadata> _fields;
+    private readonly List<FieldMetadata> _fields;
 
     internal UniqueIndexMetadata(DomainTypeMetadata domainTypeMetadata, string name, IEnumerable<FieldMetadata> fields)
     {

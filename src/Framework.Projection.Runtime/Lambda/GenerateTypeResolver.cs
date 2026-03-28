@@ -10,7 +10,7 @@ internal class GenerateTypeResolver(ProjectionLambdaEnvironment environment) : I
 
     private readonly Dictionary<IProjection, GeneratedType> generateTypes = new Dictionary<IProjection, GeneratedType>();
 
-    public Type Resolve(IProjection projection)
+    public Type TryResolve(IProjection projection)
     {
         if (projection == null) throw new ArgumentNullException(nameof(projection));
 

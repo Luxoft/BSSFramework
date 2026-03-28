@@ -78,7 +78,7 @@ public class AuditService<TIdent, TBllContext, TBllFactoryContainer, TRootSecuri
         {
             var typeResolver = bllContext.ServiceProvider.GetRequiredKeyedService<ITypeResolver<string>>("DTO");
 
-            var dtoType = typeResolver.Resolve(typeof(TProperty).Name + MainDTOType.SimpleDTO, true);
+            var dtoType = typeResolver.Resolve(typeof(TProperty).Name + MainDTOType.SimpleDTO);
 
             var method =
                     ((Func<PropertyRevision<TIdent, TProperty>, TPropertyRevisionDto>)

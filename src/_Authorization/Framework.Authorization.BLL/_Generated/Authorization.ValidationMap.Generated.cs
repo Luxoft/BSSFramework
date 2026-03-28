@@ -73,16 +73,16 @@ namespace Framework.Authorization.BLL
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.ChangePermissionDelegatesModel, Framework.Authorization.Domain.Permission>(Framework.Restriction.RequiredMode.Default);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.ChangePermissionDelegatesModel, System.Collections.Generic.IList<Framework.Authorization.Domain.DelegateToItemModel>>> GetChangePermissionDelegatesModel_ItemsValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.ChangePermissionDelegatesModel, System.Collections.Generic.List<Framework.Authorization.Domain.DelegateToItemModel>>> GetChangePermissionDelegatesModel_ItemsValidators()
         {
-            yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.ChangePermissionDelegatesModel, System.Collections.Generic.IList<Framework.Authorization.Domain.DelegateToItemModel>>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Authorization.Domain.ChangePermissionDelegatesModel, System.Collections.Generic.IList<Framework.Authorization.Domain.DelegateToItemModel>, Framework.Authorization.Domain.DelegateToItemModel>();
+            yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.ChangePermissionDelegatesModel, System.Collections.Generic.List<Framework.Authorization.Domain.DelegateToItemModel>>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.Validation.DeepCollectionValidator<Framework.Authorization.Domain.ChangePermissionDelegatesModel, System.Collections.Generic.List<Framework.Authorization.Domain.DelegateToItemModel>, Framework.Authorization.Domain.DelegateToItemModel>();
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Authorization.Domain.ChangePermissionDelegatesModel>> GetChangePermissionDelegatesModelProperties(Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.ChangePermissionDelegatesModel> currentClass)
         {
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.ChangePermissionDelegatesModel, Framework.Authorization.Domain.Permission>(source => source.DelegateFromPermission, currentClass, this.GetChangePermissionDelegatesModel_DelegateFromPermissionValidators(), this.GetClassMap<Framework.Authorization.Domain.Permission>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Authorization.Domain.ChangePermissionDelegatesModel, System.Collections.Generic.IList<Framework.Authorization.Domain.DelegateToItemModel>, Framework.Authorization.Domain.DelegateToItemModel>(source => source.Items, currentClass, this.GetChangePermissionDelegatesModel_ItemsValidators(), this.GetClassMap<Framework.Authorization.Domain.DelegateToItemModel>(true));
+            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Authorization.Domain.ChangePermissionDelegatesModel, System.Collections.Generic.List<Framework.Authorization.Domain.DelegateToItemModel>, Framework.Authorization.Domain.DelegateToItemModel>(source => source.Items, currentClass, this.GetChangePermissionDelegatesModel_ItemsValidators(), this.GetClassMap<Framework.Authorization.Domain.DelegateToItemModel>(true));
         }
         
         protected virtual Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.ChangePermissionDelegatesModel> GetChangePermissionDelegatesModelValidationMap()
@@ -375,10 +375,10 @@ namespace Framework.Authorization.BLL
             return new Framework.Validation.ClassValidationMap<Framework.Authorization.Domain.SecurityContextType>(this.GetSecurityContextTypeProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.IList<Framework.Authorization.Domain.DelegateToItemModel>>> GetUpdatePermissionDelegatesModel_AddItemsValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.List<Framework.Authorization.Domain.DelegateToItemModel>>> GetUpdatePermissionDelegatesModel_AddItemsValidators()
         {
-            yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.IList<Framework.Authorization.Domain.DelegateToItemModel>>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.IList<Framework.Authorization.Domain.DelegateToItemModel>, Framework.Authorization.Domain.DelegateToItemModel>();
+            yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.List<Framework.Authorization.Domain.DelegateToItemModel>>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.Validation.DeepCollectionValidator<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.List<Framework.Authorization.Domain.DelegateToItemModel>, Framework.Authorization.Domain.DelegateToItemModel>();
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, Framework.Authorization.Domain.Permission>> GetUpdatePermissionDelegatesModel_DelegateFromPermissionValidators()
@@ -386,17 +386,17 @@ namespace Framework.Authorization.BLL
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, Framework.Authorization.Domain.Permission>(Framework.Restriction.RequiredMode.Default);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.IList<Framework.Authorization.Domain.Permission>>> GetUpdatePermissionDelegatesModel_RemoveItemsValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.List<Framework.Authorization.Domain.Permission>>> GetUpdatePermissionDelegatesModel_RemoveItemsValidators()
         {
-            yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.IList<Framework.Authorization.Domain.Permission>>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.IList<Framework.Authorization.Domain.Permission>, Framework.Authorization.Domain.Permission>();
+            yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.List<Framework.Authorization.Domain.Permission>>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.Validation.DeepCollectionValidator<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.List<Framework.Authorization.Domain.Permission>, Framework.Authorization.Domain.Permission>();
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Authorization.Domain.UpdatePermissionDelegatesModel>> GetUpdatePermissionDelegatesModelProperties(Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.UpdatePermissionDelegatesModel> currentClass)
         {
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.IList<Framework.Authorization.Domain.DelegateToItemModel>, Framework.Authorization.Domain.DelegateToItemModel>(source => source.AddItems, currentClass, this.GetUpdatePermissionDelegatesModel_AddItemsValidators(), this.GetClassMap<Framework.Authorization.Domain.DelegateToItemModel>(true));
+            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.List<Framework.Authorization.Domain.DelegateToItemModel>, Framework.Authorization.Domain.DelegateToItemModel>(source => source.AddItems, currentClass, this.GetUpdatePermissionDelegatesModel_AddItemsValidators(), this.GetClassMap<Framework.Authorization.Domain.DelegateToItemModel>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, Framework.Authorization.Domain.Permission>(source => source.DelegateFromPermission, currentClass, this.GetUpdatePermissionDelegatesModel_DelegateFromPermissionValidators(), this.GetClassMap<Framework.Authorization.Domain.Permission>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.IList<Framework.Authorization.Domain.Permission>, Framework.Authorization.Domain.Permission>(source => source.RemoveItems, currentClass, this.GetUpdatePermissionDelegatesModel_RemoveItemsValidators(), this.GetClassMap<Framework.Authorization.Domain.Permission>(true));
+            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Authorization.Domain.UpdatePermissionDelegatesModel, System.Collections.Generic.List<Framework.Authorization.Domain.Permission>, Framework.Authorization.Domain.Permission>(source => source.RemoveItems, currentClass, this.GetUpdatePermissionDelegatesModel_RemoveItemsValidators(), this.GetClassMap<Framework.Authorization.Domain.Permission>(true));
         }
         
         protected virtual Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.UpdatePermissionDelegatesModel> GetUpdatePermissionDelegatesModelValidationMap()

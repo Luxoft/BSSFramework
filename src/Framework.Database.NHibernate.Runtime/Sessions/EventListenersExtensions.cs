@@ -4,6 +4,12 @@ namespace Framework.Database.NHibernate.Sessions;
 
 public static class EventListenersExtensions
 {
+    /// <summary>
+    /// TODO: Try use ShallowCopy
+    /// </summary>
+    /// <param name="eventListeners"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
     internal static EventListeners Clone(this EventListeners eventListeners)
     {
         if (eventListeners == null) throw new ArgumentNullException(nameof(eventListeners));

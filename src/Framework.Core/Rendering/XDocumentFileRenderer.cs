@@ -5,14 +5,12 @@ namespace Framework.Core.Rendering;
 
 public class XDocumentFileRenderer(Func<StringBuilder, TextWriter> createWriter) : IFileRenderer<XDocument, string>
 {
-    private readonly Func<StringBuilder, TextWriter> _createWriter = createWriter ?? throw new ArgumentNullException(nameof(createWriter));
+    private readonly Func<StringBuilder, TextWriter> createWriter = createWriter ?? throw new ArgumentNullException(nameof(createWriter));
 
     public XDocumentFileRenderer(Encoding encoding)
             : this(sb => new EncodingStringWriter(sb, encoding))
     {
-        if (encoding == null) throw new ArgumentNullException(nameof(encoding));
     }
-
 
     public string FileExtension => "xml";
 
@@ -22,7 +20,7 @@ public class XDocumentFileRenderer(Func<StringBuilder, TextWriter> createWriter)
         if (document == null) throw new ArgumentNullException(nameof(document));
 
         var sb = new StringBuilder();
-        using (var writer = this._createWriter(sb))
+        using (var writer = this.createWriter(sb))
         {
             document.Save(writer);
             writer.Flush();
@@ -32,5 +30,5 @@ public class XDocumentFileRenderer(Func<StringBuilder, TextWriter> createWriter)
     }
 
 
-    public static readonly XDocumentFileRenderer Default = new XDocumentFileRenderer(Encoding.UTF8);
+    public static readonly XDocumentFileRenderer Default = new(Encoding.UTF8);
 }

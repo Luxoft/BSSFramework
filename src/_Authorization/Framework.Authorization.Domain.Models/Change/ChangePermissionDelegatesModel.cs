@@ -15,7 +15,7 @@ public class ChangePermissionDelegatesModel : DomainObjectBase
     public Permission DelegateFromPermission { get; set; }
 
     [Restriction.Required]
-    public IList<DelegateToItemModel> Items { get; set; }
+    public List<DelegateToItemModel> Items { get; set; }
 
     public void Merge(UpdatePermissionDelegatesModel updatePermissionDelegatesModel)
     {

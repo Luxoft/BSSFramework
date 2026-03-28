@@ -1,4 +1,7 @@
-﻿using CommonFramework;
+﻿using System.Collections.Concurrent;
+using System.Collections.Immutable;
+
+using CommonFramework;
 
 using Framework.Core.TypeResolving.TypeSource;
 
@@ -7,53 +10,37 @@ namespace Framework.Core.TypeResolving;
 public class TypeResolverHelper
 {
     public static ITypeResolver<T> Create<T>(IReadOnlyDictionary<T, Type> dict)
-    {
-        if (dict == null) throw new ArgumentNullException(nameof(dict));
-
-        return Create<T>(dict.GetValueOrDefault, () => dict.Values);
-    }
+        where T : notnull => Create<T>(dict.GetValueOrDefault, dict.Values);
 
     public static ITypeResolver<string> Create(ITypeSource typeSource, TypeSearchMode searchMode)
     {
-        if (typeSource == null) throw new ArgumentNullException(nameof(typeSource));
-
         var filter = searchMode.ToFilter();
 
-        return new FuncTypeResolver<string>(ident => typeSource.GetTypes().FirstOrDefault(type => filter(type, ident)),
-                                            ()     => typeSource.GetTypes());
+        return new FuncTypeResolver<string>(
+            ident => typeSource.Types.FirstOrDefault(type => filter(type, ident)),
+            () => typeSource.Types);
     }
 
-    public static ITypeResolver<T> Create<T>(Func<T, Type> resolveFunc, Func<IEnumerable<Type>> getSourceTypesFunc) => new FuncTypeResolver<T>(resolveFunc, getSourceTypesFunc);
+    public static ITypeResolver<T> Create<T>(Func<T, Type?> resolveFunc, IEnumerable<Type> sourceTypes)
+        where T : notnull =>
+        Create(resolveFunc, [.. sourceTypes]);
 
-    public static ITypeResolver<string> CreateDefault(ITypeSource typeSource)
+    public static ITypeResolver<T> Create<T>(Func<T, Type?> resolveFunc, ImmutableHashSet<Type> sourceTypes)
+        where T : notnull =>
+        new FuncTypeResolver<T>(resolveFunc, () => sourceTypes);
+
+    public static ITypeResolver<string> CreateDefault(ITypeSource typeSource) => Create(typeSource, TypeSearchMode.Both);
+
+    public static ITypeResolver<string> Base { get; } = new TypeSource.TypeSource([typeof(object).Assembly, typeof(Ignore).Assembly]).ToDefaultTypeResolver();
+
+
+    private class FuncTypeResolver<T>(Func<T, Type?> resolveFunc, Func<ImmutableHashSet<Type>> getSourceTypesFunc) : ITypeResolver<T>
+        where T : notnull
     {
-        if (typeSource == null) throw new ArgumentNullException(nameof(typeSource));
+        private readonly ConcurrentDictionary<T, Type?> cache = [];
 
-        return Create(typeSource, TypeSearchMode.Both).WithCache().WithLock();
-    }
+        public Type? TryResolve(T identity) => this.cache.GetOrAdd(identity, _ => resolveFunc(identity));
 
-    public static readonly ITypeResolver<string> Base = new TypeSource.TypeSource(typeof(object).Assembly, typeof(Ignore).Assembly).ToDefaultTypeResolver();
-
-
-    private class FuncTypeResolver<T> : ITypeResolver<T>
-    {
-        private readonly Func<T, Type> _resolveFunc;
-
-        private readonly Func<IEnumerable<Type>> _getSourceTypesFunc;
-
-
-        public FuncTypeResolver(Func<T, Type> resolveFunc, Func<IEnumerable<Type>> getSourceTypesFunc)
-        {
-            if (resolveFunc == null) throw new ArgumentNullException(nameof(resolveFunc));
-            if (getSourceTypesFunc == null) throw new ArgumentNullException(nameof(getSourceTypesFunc));
-
-            this._resolveFunc = resolveFunc;
-            this._getSourceTypesFunc = getSourceTypesFunc;
-        }
-
-
-        public Type Resolve(T identity) => this._resolveFunc(identity);
-
-        public IEnumerable<Type> GetTypes() => this._getSourceTypesFunc();
+        public ImmutableHashSet<Type> Types => getSourceTypesFunc();
     }
 }

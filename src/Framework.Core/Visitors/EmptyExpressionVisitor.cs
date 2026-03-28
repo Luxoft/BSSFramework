@@ -8,5 +8,5 @@ public class EmptyExpressionVisitor : ExpressionVisitor
     {
     }
 
-    public static readonly EmptyExpressionVisitor Value = new EmptyExpressionVisitor();
+    public static readonly EmptyExpressionVisitor Value = new();
 }

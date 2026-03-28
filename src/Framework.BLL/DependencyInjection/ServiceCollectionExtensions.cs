@@ -16,9 +16,9 @@ namespace Framework.BLL.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddBLL(IServiceCollection services)
+    public static IServiceCollection AddGenericBLLServices(IServiceCollection services)
     {
-        return services.AddSingleton<IExceptionExpander, ExceptionExpander>();
+        return services.AddSingleton<IExceptionExpander, TargetInvocationExceptionExpander>();
     }
 
     public static IServiceCollection RegisterBLLSystem<TBLLContextDecl, TBLLContextImpl>(

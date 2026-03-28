@@ -90,11 +90,11 @@ public partial class ConfigurationBLLContext
                                                                    {
                                                                        if (domainType.TargetSystem.IsBase)
                                                                        {
-                                                                           return TypeResolverHelper.Base.Resolve(domainType.FullTypeName);
+                                                                           return TypeResolverHelper.Base.TryResolve(domainType.FullTypeName);
                                                                        }
                                                                        else
                                                                        {
-                                                                           return this.GetTargetSystemService(domainType.TargetSystem).TypeResolver.Resolve(domainType);
+                                                                           return this.GetTargetSystemService(domainType.TargetSystem).TypeResolver.TryResolve(domainType);
                                                                        }
                                                                    },
                                                                    () => this.GetTargetSystemServices().SelectMany(tss => tss.TypeResolver.GetTypes()).Concat(TypeResolverHelper.Base.GetTypes())).WithCache().WithLock();

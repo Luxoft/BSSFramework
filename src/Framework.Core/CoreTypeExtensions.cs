@@ -583,21 +583,21 @@ public static class CoreTypeExtensions
         return method;
     }
 
-    private static readonly Dictionary<Type, int> SignedTypeSetPriority = new Dictionary<Type, int>
+    private static readonly Dictionary<Type, int> SignedTypeSetPriority = new()
                                                                           {
                                                                                   { typeof(short), 0 },
                                                                                   { typeof(int), 1 },
                                                                                   { typeof(long), 2 },
                                                                           };
 
-    private static readonly Dictionary<Type, int> UnsignedTypeSetPriority = new Dictionary<Type, int>
+    private static readonly Dictionary<Type, int> UnsignedTypeSetPriority = new()
                                                                             {
                                                                                     { typeof(ushort), 0 },
                                                                                     { typeof(uint), 1 },
                                                                                     { typeof(ulong), 2 },
                                                                             };
 
-    private static readonly Dictionary<Type, int> FloatTypeSetPriority = new Dictionary<Type, int>
+    private static readonly Dictionary<Type, int> FloatTypeSetPriority = new()
                                                                          {
                                                                                  { typeof(float), 0 },
                                                                                  { typeof(double), 1 },

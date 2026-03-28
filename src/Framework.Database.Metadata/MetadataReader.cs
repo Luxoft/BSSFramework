@@ -12,7 +12,7 @@ namespace Framework.Database.Metadata;
 
 internal static class Extensions
 {
-    internal static IList<FieldInfo> GetCurrentAndUpAbstractTypeFields(this Type type)
+    internal static List<FieldInfo> GetCurrentAndUpAbstractTypeFields(this Type type)
     {
         var allTypes = new[] { type }
                        .Concat(type.BaseType.Maybe(z => z.GetAllElements(q => q.BaseType)

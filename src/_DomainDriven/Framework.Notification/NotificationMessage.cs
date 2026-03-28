@@ -6,5 +6,5 @@ public class NotificationMessage
 
     public string Body;
 
-    public IList<string> Receivers;
+    public List<string> Receivers;
 }

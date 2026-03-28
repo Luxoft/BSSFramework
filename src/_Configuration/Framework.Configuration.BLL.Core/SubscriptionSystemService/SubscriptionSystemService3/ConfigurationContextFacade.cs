@@ -133,7 +133,7 @@ public class ConfigurationContextFacade
             throw new ArgumentNullException(nameof(domainType));
         }
 
-        var result = this.context.ComplexDomainTypeResolver.Resolve(domainType);
+        var result = this.context.ComplexDomainTypeResolver.TryResolve(domainType);
 
         if (result == null)
         {

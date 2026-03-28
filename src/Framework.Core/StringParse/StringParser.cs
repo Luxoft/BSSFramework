@@ -6,8 +6,8 @@ namespace Framework.Core.StringParse;
 [Obsolete("v10 This method will be protected in future")]
 public class StringParser
 {
-    private readonly StringBuilder _regexPatternBuilder = new();
-    private int _resultCount;
+    private readonly StringBuilder regexPatternBuilder = new();
+    private int resultCount;
 
     public MatchResultDescription Add(StringPattern pattern)
     {
@@ -16,18 +16,18 @@ public class StringParser
         {
             var joinedSeparator = string.Format(@"\s+");
             var joinAfterThatWordsParameter = string.Join(joinedSeparator, pattern.AfterThatWorlds.Split(' '));
-            this._regexPatternBuilder.AppendFormat(@".*?{0}\s*", joinAfterThatWordsParameter);
+            this.regexPatternBuilder.AppendFormat(@".*?{0}\s*", joinAfterThatWordsParameter);
         }
         if (!string.IsNullOrWhiteSpace(pattern.Start))
         {
-            this._regexPatternBuilder.Append(pattern.Start);
+            this.regexPatternBuilder.Append(pattern.Start);
         }
-        this._regexPatternBuilder.Append("(.*?)");
+        this.regexPatternBuilder.Append("(.*?)");
         if (null != pattern.End)
         {
-            this._regexPatternBuilder.Append(pattern.End);
+            this.regexPatternBuilder.Append(pattern.End);
         }
-        return new MatchResultDescription(++this._resultCount);
+        return new MatchResultDescription(++this.resultCount);
     }
 
     private void Validate(StringPattern pattern)
@@ -35,5 +35,5 @@ public class StringParser
 
     }
 
-    public StringParseResult Evaluate(string inputString) => new(new Regex(this._regexPatternBuilder.ToString()).Match(inputString));
+    public StringParseResult Evaluate(string inputString) => new(new Regex(this.regexPatternBuilder.ToString()).Match(inputString));
 }

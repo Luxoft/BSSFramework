@@ -64,7 +64,7 @@ public class NHibObjectStatesService : IObjectStateService
 
             if (propertyType.IsCollectionType)
             {
-                IList<object> currentCollection = null;
+                List<object> currentCollection = null;
                 object unTypedStateCollection = currentState[index];
 
                 if (unTypedStateCollection is IPersistentCollection)
@@ -95,7 +95,7 @@ public class NHibObjectStatesService : IObjectStateService
                 }
                 else
                 {
-                    currentCollection = (currentState[index] as IList<object>) ?? (((IEnumerable)currentState[index]).Cast<object>().ToList());
+                    currentCollection = (currentState[index] as List<object>) ?? (((IEnumerable)currentState[index]).Cast<object>().ToList());
                 }
 
                 return currentCollection

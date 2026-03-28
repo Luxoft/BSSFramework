@@ -21,7 +21,7 @@ public class FixedPropertyValidator : IDynamicPropertyValidator
 
         var persistentDomainObjectBaseTypeResolver = serviceProvider.GetRequiredService<IPersistentDomainObjectBaseTypeResolver>();
 
-        var persistentDomainObjectBaseType = persistentDomainObjectBaseTypeResolver.Resolve(property.ReflectedType!);
+        var persistentDomainObjectBaseType = persistentDomainObjectBaseTypeResolver.TryResolve(property.ReflectedType!);
 
         var validatorType = typeof(FixedPropertyValidator<,,,>)
             .MakeGenericType(property.ReflectedType!, property.PropertyType, identType, persistentDomainObjectBaseType);

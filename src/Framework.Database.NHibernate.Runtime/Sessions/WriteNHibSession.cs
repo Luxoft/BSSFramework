@@ -29,10 +29,11 @@ public class WriteNHibSession : NHibSessionBase
 
     private bool closed;
 
-    public WriteNHibSession(NHibSessionEnvironment environment,
-                            IAuditPropertyFactory auditPropertyFactory,
-                            IEnumerable<IDBSessionEventListener> eventListeners)
-            : base(environment, DBSessionMode.Write)
+    public WriteNHibSession(
+        NHibSessionEnvironment environment,
+        IAuditPropertyFactory auditPropertyFactory,
+        IEnumerable<IDBSessionEventListener> eventListeners)
+        : base(environment, DBSessionMode.Write)
     {
         this.eventListeners = eventListeners.ToArray();
         this.modifyAuditProperties = auditPropertyFactory.GetModifyAuditProperty();
@@ -66,11 +67,11 @@ public class WriteNHibSession : NHibSessionBase
         sessionImpl.OverrideInterceptor(new AuditInterceptor(this.createAuditProperties, this.modifyAuditProperties));
     }
 
-    private void InjectListeners(EventListeners eventListeners)
+    private void InjectListeners(EventListeners newSessionEventListeners)
     {
-        eventListeners.PostDeleteEventListeners = eventListeners.PostDeleteEventListeners.Concat([this.collectChangedEventListener]).ToArray();
-        eventListeners.PostUpdateEventListeners = eventListeners.PostUpdateEventListeners.Concat([this.collectChangedEventListener]).ToArray();
-        eventListeners.PostInsertEventListeners = eventListeners.PostInsertEventListeners.Concat([this.collectChangedEventListener]).ToArray();
+        newSessionEventListeners.PostDeleteEventListeners = newSessionEventListeners.PostDeleteEventListeners.Concat([this.collectChangedEventListener]).ToArray();
+        newSessionEventListeners.PostUpdateEventListeners = newSessionEventListeners.PostUpdateEventListeners.Concat([this.collectChangedEventListener]).ToArray();
+        newSessionEventListeners.PostInsertEventListeners = newSessionEventListeners.PostInsertEventListeners.Concat([this.collectChangedEventListener]).ToArray();
     }
 
     public override void AsFault() => this.manualFault = true;
@@ -90,7 +91,7 @@ public class WriteNHibSession : NHibSessionBase
 
         this.closed = true;
 
-       using (this.NativeSession)
+        using (this.NativeSession)
         {
             using (this.nhibTransaction)
             {
@@ -154,7 +155,7 @@ public class WriteNHibSession : NHibSessionBase
                         cancellationToken.ThrowIfCancellationRequested();
 
                         await eventListener.OnFlushed(changedEventArgs, cancellationToken);
-                    };
+                    }
                 }
             } while (true);
 
@@ -173,8 +174,8 @@ public class WriteNHibSession : NHibSessionBase
                 await this.NativeSession.FlushAsync(cancellationToken);
 
                 var afterTransactionCompletedChangeState =
-                        new[] { beforeTransactionCompletedChangeState, this.collectChangedEventListener.EvictChanges() }
-                                .Composite();
+                    new[] { beforeTransactionCompletedChangeState, this.collectChangedEventListener.EvictChanges() }
+                        .Composite();
 
                 // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
                 foreach (var eventListener in this.eventListeners)
@@ -184,7 +185,8 @@ public class WriteNHibSession : NHibSessionBase
                     await eventListener.OnAfterTransactionCompleted(new DALChangesEventArgs(afterTransactionCompletedChangeState), cancellationToken);
                 }
 
-                await this.NativeSession.FlushAsync(cancellationToken); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
+                await this.NativeSession.FlushAsync(
+                    cancellationToken); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
 
                 if (this.collectChangedEventListener.HasAny())
                 {
@@ -192,17 +194,17 @@ public class WriteNHibSession : NHibSessionBase
                 }
             }
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            var result = this.Environment.ExceptionProcessor.Process(e);
+            var expandedException = this.Environment.InternalExceptionExpander.Expand(ex);
 
-            if (result == e)
+            if (expandedException == ex)
             {
                 throw;
             }
             else
             {
-                throw result;
+                throw expandedException;
             }
         }
     }

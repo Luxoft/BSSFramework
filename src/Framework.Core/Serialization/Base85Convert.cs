@@ -73,7 +73,7 @@ internal static class Base85Convert
                     // handle "z" block specially
                     DecodeValue(stream, value, 0);
                 }
-                else if (ch < c_firstCharacter || ch > c_lastCharacter)
+                else if (ch < CFirstCharacter || ch > CLastCharacter)
                 {
                     throw new FormatException($"Invalid character '{ch}' in Ascii85 block.");
                 }
@@ -82,7 +82,7 @@ internal static class Base85Convert
                     // build a 32-bit value from the input characters
                     try
                     {
-                        checked { value += (uint)(s_powersOf85[count] * (ch - c_firstCharacter)); }
+                        checked { value += (uint)(SPowersOf85[count] * (ch - CFirstCharacter)); }
                     }
                     catch (OverflowException ex)
                     {
@@ -112,7 +112,7 @@ internal static class Base85Convert
                 {
                     try
                     {
-                        checked { value += 84 * s_powersOf85[padding]; }
+                        checked { value += 84 * SPowersOf85[padding]; }
                     }
                     catch (OverflowException ex)
                     {
@@ -133,7 +133,7 @@ internal static class Base85Convert
 
         for (int index = 4; index >= 0; index--)
         {
-            encoded[index] = (char)((value % 85) + c_firstCharacter);
+            encoded[index] = (char)((value % 85) + CFirstCharacter);
             value /= 85;
         }
 
@@ -159,8 +159,8 @@ internal static class Base85Convert
     }
 
     // the first and last characters used in the Ascii85 encoding character set
-    const char c_firstCharacter = '!';
-    const char c_lastCharacter = 'u';
+    const char CFirstCharacter = '!';
+    const char CLastCharacter = 'u';
 
-    static readonly uint[] s_powersOf85 = [85u * 85u * 85u * 85u, 85u * 85u * 85u, 85u * 85u, 85u, 1];
+    static readonly uint[] SPowersOf85 = [85u * 85u * 85u * 85u, 85u * 85u * 85u, 85u * 85u, 85u, 1];
 }

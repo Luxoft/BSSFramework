@@ -2,7 +2,7 @@
 
 namespace Framework.Database;
 
-public class DefaultDbSessionEventListener(
+public class DefaultDBSessionEventListener(
     IInitializeManager initializeManager,
     IEnumerable<IFlushedDalListener> flushedDalListener,
     IEnumerable<IBeforeTransactionCompletedDalListener> beforeTransactionCompletedDalListener,

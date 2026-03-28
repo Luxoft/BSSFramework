@@ -67,7 +67,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLL
         if (operation == null) throw new ArgumentNullException(nameof(operation));
         if (domainObjectId.IsDefault()) throw new ArgumentOutOfRangeException(nameof(domainObjectId));
 
-        var domainType = this.TypeResolver.Resolve(operation.DomainType);
+        var domainType = this.TypeResolver.TryResolve(operation.DomainType);
 
         new Action<string, long?, Guid>(this.ForceEvent<TPersistentDomainObjectBase>)
             .CreateGenericMethod(domainType)

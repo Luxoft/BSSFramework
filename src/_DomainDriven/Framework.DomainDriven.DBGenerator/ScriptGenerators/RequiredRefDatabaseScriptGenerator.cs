@@ -81,7 +81,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
         context.SqlDatabaseFactory.Server.ConnectionContext.CapturedSql.Add("------------------------------End RequiredRef-----------------------");
     }
 
-    private IList<View> GetRemovableViews(RequiredRefContext refContext)
+    private List<View> GetRemovableViews(RequiredRefContext refContext)
     {
         var viewToDeepDictionary = new Dictionary<View, Lazy<int>>();
 

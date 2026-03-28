@@ -8,7 +8,7 @@ public interface IAuditDBScriptGeneratorBuilder : IConfigurable
 
     IAuditDBScriptGeneratorBuilder WithMappingSettings(MappingSettings mappingSettings);
 
-    IAuditDBScriptGeneratorBuilder WithMappingSettings(IList<MappingSettings> mappingSettings);
+    IAuditDBScriptGeneratorBuilder WithMappingSettings(List<MappingSettings> mappingSettings);
 
     /// <summary>
     /// Настройка, предотвращающая удаление временной БД, предназначенной для накатывания схемы.

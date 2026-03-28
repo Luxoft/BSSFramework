@@ -7,7 +7,6 @@ using CommonFramework.DependencyInjection;
 
 using Framework.Application.Domain;
 using Framework.BLL.Domain.Persistent.Extensions;
-using Framework.BLL.Domain.Persistent.IdentityObject;
 using Framework.Core;
 using Framework.Core.TypeResolving.TypeSource;
 using Framework.Database;
@@ -73,10 +72,7 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
 
     public virtual IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } = new DomainTypeRootExtendedMetadataBuilder();
 
-    public virtual bool IsHierarchical(Type type)
-    {
-        return false;
-    }
+    public virtual bool IsHierarchical(Type type) => false;
 
     public ReadOnlyCollection<Assembly> DomainObjectAssemblies => this.domainObjectAssemblies.Value;
 

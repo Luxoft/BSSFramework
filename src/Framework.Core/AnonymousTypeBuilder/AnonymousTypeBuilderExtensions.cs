@@ -73,16 +73,16 @@ public static class AnonymousTypeBuilderExtensions
 
     private class FuncAnonymousTypeBuilder<TMap> : IAnonymousTypeBuilder<TMap>
     {
-        private readonly Func<TMap, Type> _func;
+        private readonly Func<TMap, Type> func;
 
 
         public FuncAnonymousTypeBuilder(Func<TMap, Type> func)
         {
             if (func == null) throw new ArgumentNullException(nameof(func));
 
-            this._func = func;
+            this.func = func;
         }
 
-        public Type GetAnonymousType(TMap typeMap) => this._func(typeMap);
+        public Type GetAnonymousType(TMap typeMap) => this.func(typeMap);
     }
 }

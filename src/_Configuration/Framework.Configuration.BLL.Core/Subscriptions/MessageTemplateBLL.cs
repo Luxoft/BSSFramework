@@ -90,9 +90,9 @@ public class MessageTemplateBLL : BLLContextContainer<IConfigurationBLLContext>
             object rootObject,
             Dictionary<string, object> variables,
             MailAddress sender,
-            IList<TargetEmail> recipients,
-            IList<TargetEmail> copyRecipients,
-            IList<TargetEmail> replyTo,
+            List<TargetEmail> recipients,
+            List<TargetEmail> copyRecipients,
+            List<TargetEmail> replyTo,
             IEnumerable<MAttachment> attachments)
     {
         var result = this.BeginCreateMailMessage(
@@ -124,9 +124,9 @@ public class MessageTemplateBLL : BLLContextContainer<IConfigurationBLLContext>
             string subject,
             string body,
             MailAddress sender,
-            IList<TargetEmail> recipients,
-            IList<TargetEmail> copyRecipients,
-            IList<TargetEmail> replyTo,
+            List<TargetEmail> recipients,
+            List<TargetEmail> copyRecipients,
+            List<TargetEmail> replyTo,
             IEnumerable<MAttachment> attachments)
     {
         var result = new MailMessage
@@ -200,9 +200,9 @@ public class MessageTemplateBLL : BLLContextContainer<IConfigurationBLLContext>
             object rootObject,
             Dictionary<string, object> variables,
             MailAddress sender,
-            IList<TargetEmail> recipients,
-            IList<TargetEmail> copyRecipients,
-            IList<TargetEmail> replyTo,
+            List<TargetEmail> recipients,
+            List<TargetEmail> copyRecipients,
+            List<TargetEmail> replyTo,
             IEnumerable<MAttachment> attachments)
     {
         var subjectAndBody = this.GetMailMessageSubjectAndBody(

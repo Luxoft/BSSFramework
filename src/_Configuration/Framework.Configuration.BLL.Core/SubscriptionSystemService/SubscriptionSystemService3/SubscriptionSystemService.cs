@@ -78,7 +78,7 @@ public class SubscriptionSystemService<TBLLContext> : ISubscriptionSystemService
     /// <param name="prev">Предыдущая версия доменного объекта.</param>
     /// <param name="next">Текущая версия доменного объекта.</param>
     /// <param name="type">Тип доменного объекта.</param>
-    /// <returns>Экземпляр <see cref="IList{ITryResult}"/>.</returns>
+    /// <returns>Экземпляр <see cref="List{ITryResult}"/>.</returns>
     /// <exception cref="ArgumentNullException">Аргумент
     /// prev
     /// или
@@ -86,7 +86,7 @@ public class SubscriptionSystemService<TBLLContext> : ISubscriptionSystemService
     /// или
     /// type равен null.
     /// </exception>
-    public IList<ITryResult<Subscription>> ProcessChangedObjectUntyped(
+    public List<ITryResult<Subscription>> ProcessChangedObjectUntyped(
             object prev,
             object next,
             Type type)
@@ -96,9 +96,9 @@ public class SubscriptionSystemService<TBLLContext> : ISubscriptionSystemService
             throw new ArgumentNullException(nameof(type));
         }
 
-        var @delegate = (Func<object, object, IList<ITryResult<Subscription>>>)this.ProcessChangedObjectTyped;
+        var @delegate = (Func<object, object, List<ITryResult<Subscription>>>)this.ProcessChangedObjectTyped;
         var method = @delegate.CreateGenericMethod(type);
-        var result = (IList<ITryResult<Subscription>>)method.Invoke(this, [prev, next]);
+        var result = (List<ITryResult<Subscription>>)method.Invoke(this, [prev, next]);
 
         return result;
     }
@@ -125,7 +125,7 @@ public class SubscriptionSystemService<TBLLContext> : ISubscriptionSystemService
         return result;
     }
 
-    private IList<ITryResult<Subscription>> ProcessChangedObjectTyped<TDomainObject>(
+    private List<ITryResult<Subscription>> ProcessChangedObjectTyped<TDomainObject>(
             TDomainObject prev,
             TDomainObject next)
             where TDomainObject : class

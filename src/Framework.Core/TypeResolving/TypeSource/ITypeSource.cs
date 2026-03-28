@@ -1,4 +1,6 @@
-﻿namespace Framework.Core.TypeResolving.TypeSource;
+﻿using System.Collections.Immutable;
+
+namespace Framework.Core.TypeResolving.TypeSource;
 
 /// <summary>
 /// Источник типов
@@ -9,5 +11,5 @@ public interface ITypeSource
     /// Получение типов
     /// </summary>
     /// <returns></returns>
-    IEnumerable<Type> GetTypes();
+    ImmutableHashSet<Type> Types { get; }
 }

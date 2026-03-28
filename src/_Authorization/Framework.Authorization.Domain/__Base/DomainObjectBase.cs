@@ -1,4 +1,6 @@
-﻿namespace Framework.Authorization.Domain;
+﻿using Framework.Validation;
+
+namespace Framework.Authorization.Domain;
 
 /// <summary>
 /// Базовый доменный объект

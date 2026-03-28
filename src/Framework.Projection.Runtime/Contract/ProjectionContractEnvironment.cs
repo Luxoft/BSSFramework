@@ -24,7 +24,7 @@ public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
 
         this.ContractTypeResolver = generateTypeResolver;
 
-        return TypeResolverHelper.Create(generateTypeResolver.projectionContracts.ToDictionary(type => type, generateTypeResolver.Resolve));
+        return TypeResolverHelper.Create(generateTypeResolver.projectionContracts.ToDictionary(type => type, generateTypeResolver.TryResolve));
     }
 
 

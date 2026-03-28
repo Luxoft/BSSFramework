@@ -46,7 +46,7 @@ public class NHibSessionEnvironment : IDisposable
 
             this.InternalSessionFactory = this.cfg.BuildSessionFactory();
 
-            this.ExceptionProcessor = new SqlExceptionProcessorInterceptor(this.InternalSessionFactory, this.cfg, dalValidationIdentitySource);
+            this.InternalExceptionExpander = new SqlExceptionProcessorInterceptor(this.InternalSessionFactory, this.cfg, dalValidationIdentitySource);
         }
         catch (Exception ex)
         {
@@ -60,7 +60,7 @@ public class NHibSessionEnvironment : IDisposable
 
     internal HashSet<Type> RegisteredTypes { get; }
 
-    internal IExceptionProcessor ExceptionProcessor { get; }
+    internal IExceptionExpander InternalExceptionExpander { get; }
 
     public Configuration Configuration => this.cfg;
 

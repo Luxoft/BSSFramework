@@ -55,7 +55,7 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
                                            .GetProjections()
                                            .ToList();
 
-        return TypeResolverHelper.Create(this.projections.ToDictionary(projection => projection, generateTypeResolver.Resolve));
+        return TypeResolverHelper.Create(this.projections.ToDictionary(projection => projection, generateTypeResolver.TryResolve));
     }
 
     public Type GetProjectionTypeByRole(Type sourceType, ProjectionRole role)
@@ -64,14 +64,14 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
         if (!Enum.IsDefined(typeof(ProjectionRole), role))
             throw new InvalidEnumArgumentException(nameof(role), (int)role, typeof(ProjectionRole));
 
-        return this.ProjectionTypeResolver.Resolve(this.projections.GetProjectionByRole(sourceType, role));
+        return this.ProjectionTypeResolver.TryResolve(this.projections.GetProjectionByRole(sourceType, role));
     }
 
     public Type GetSecurityProjectionType(Type sourceType)
     {
         if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
 
-        return this.ProjectionTypeResolver.Resolve(this.projections.GetSecurityProjection(sourceType));
+        return this.ProjectionTypeResolver.TryResolve(this.projections.GetSecurityProjection(sourceType));
     }
 
     /// <summary>
@@ -106,7 +106,7 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
                 }
 
                 var elementProjectionType =
-                    (GeneratedType)buildTypeRef.ElementProjection.Maybe(v => this.ProjectionTypeResolver.Resolve(v, true));
+                    (GeneratedType?)buildTypeRef.ElementProjection.Maybe(v => this.ProjectionTypeResolver.Resolve(v));
 
                 var elementType = elementProjectionType ?? buildTypeRef.ElementType;
 

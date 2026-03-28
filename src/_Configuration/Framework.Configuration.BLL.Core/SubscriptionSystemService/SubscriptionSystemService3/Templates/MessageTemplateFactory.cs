@@ -115,7 +115,7 @@ public class MessageTemplateFactory<TBLLContext>
         return result;
     }
 
-    private IEnumerable<MessageTemplateNotification> FilterTemplates(IList<MessageTemplateNotification> templates)
+    private IEnumerable<MessageTemplateNotification> FilterTemplates(List<MessageTemplateNotification> templates)
     {
         var logger = this.GetLogger();
         logger.LogDebug("Remove excess message templates. Incoming templates: {templates}", templates.Select(t => t.MessageTemplateCode).Join(", "));

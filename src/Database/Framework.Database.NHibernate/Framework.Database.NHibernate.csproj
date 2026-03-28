@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Database.NHibernate</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Database.NHibernate.Runtime\Framework.Database.NHibernate.Runtime.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Abstractions\Framework.Infrastructure.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

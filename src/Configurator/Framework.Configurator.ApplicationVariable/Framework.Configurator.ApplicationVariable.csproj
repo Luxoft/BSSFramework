@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Configurator.ApplicationVariable</PackageId>
+    <RootNamespace>Framework.Configurator</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IvAt.SecuritySystem.Configurator" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\Framework.Application.Abstractions\Framework.Application.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

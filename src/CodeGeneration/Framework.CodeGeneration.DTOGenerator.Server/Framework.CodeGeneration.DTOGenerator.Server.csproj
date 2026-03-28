@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.CodeGeneration.DTOGenerator.Server</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.CodeGeneration.DTOGenerator\Framework.CodeGeneration.DTOGenerator.csproj" />
+    <ProjectReference Include="..\Framework.CodeGeneration.BLLCoreGenerator\Framework.CodeGeneration.BLLCoreGenerator.csproj" />
+
+    <ProjectReference Include="..\..\Application\Framework.Application.Runtime\Framework.Application.Runtime.csproj" />
+    <ProjectReference Include="..\..\BLL\Framework.BLL.DTOMapping\Framework.BLL.DTOMapping.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -81,13 +81,13 @@ public class BaseTypeImpl : Type
     /// Попытка извлечь реально скомпилированный тип по свойству AssemblyQualifiedName
     /// </summary>
     /// <returns></returns>
-    public Type TryGetRealType()
+    public Type? TryGetRealType()
     {
         try
         {
             return GetType(this.AssemblyQualifiedName);
         }
-        catch (Exception e)
+        catch
         {
             return null;
         }

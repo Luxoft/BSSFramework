@@ -17,7 +17,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\_Authorization\Framework.Authorization.TestGenerate\Framework.Authorization.TestGenerate.csproj" />
     <ProjectReference Include="..\..\..\_Configuration\Framework.Configuration.TestGenerate\Framework.Configuration.TestGenerate.csproj" />
-    <ProjectReference Include="..\..\..\_DomainDriven\Framework.DomainDriven.NHibernate.DALGenerator\Framework.DomainDriven.NHibernate.DALGenerator.csproj" />
 
     <ProjectReference Include="..\..\SampleSystem.Domain.ManualProjections\SampleSystem.Domain.ManualProjections.csproj" />
     <ProjectReference Include="..\..\SampleSystem.Domain.Models\SampleSystem.Domain.Models.csproj" />

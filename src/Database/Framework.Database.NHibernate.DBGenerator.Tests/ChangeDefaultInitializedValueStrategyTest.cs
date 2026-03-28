@@ -1,13 +1,14 @@
-﻿using Framework.DomainDriven.DBGenerator;
-using Framework.DomainDriven.DBGenerator.ScriptGenerators.ScriptGeneratorStrategy;
-using Framework.Persistent;
+﻿using Framework.Database.Attributes;
+using Framework.Database.Metadata;
+using Framework.Database.NHibernate.DBGenerator.ScriptGenerators.ScriptGeneratorStrategy;
+using Framework.Database.NHibernate.DBGenerator.Tests.Support;
 
 using Microsoft.SqlServer.Management.Smo;
 
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
-namespace DBGenerator.Tests.Unit;
+namespace Framework.Database.NHibernate.DBGenerator.Tests;
 
 [TestFixture]
 public class ChangeDefaultInitializedValueStrategyTest
@@ -16,9 +17,9 @@ public class ChangeDefaultInitializedValueStrategyTest
     public void Execute_NotAddedNewFields_OnlyTemplateScriptGenerated()
     {
         // Arrange
-        var databaseScriptGeneratorStrategeInfo = this.CreateDatabaseScriptGeneratorStrategeInfo([]);
+        var databaseScriptGeneratorStrategyInfo = this.CreateDatabaseScriptGeneratorStrategyInfo([]);
 
-        var changeDefaultInitializedValueStrategy = new ChangeDefaultInitializedValueStrategy(databaseScriptGeneratorStrategeInfo);
+        var changeDefaultInitializedValueStrategy = new ChangeDefaultInitializedValueStrategy(databaseScriptGeneratorStrategyInfo);
 
         // Act
         var resultScript = changeDefaultInitializedValueStrategy.Execute()();
@@ -35,13 +36,13 @@ public class ChangeDefaultInitializedValueStrategyTest
         var domainTypeMetadata = new DomainTypeMetadata(typeof(object), new AssemblyMetadata(typeof(object)));
         domainTypeMetadata.AddFields([new PrimitiveTypeFieldMetadata("test", typeof(string), [], domainTypeMetadata, false)]);
 
-        var databaseScriptGeneratorStrategeInfo = this.CreateDatabaseScriptGeneratorStrategeInfo([domainTypeMetadata]);
+        var databaseScriptGeneratorStrategyInfo = this.CreateDatabaseScriptGeneratorStrategyInfo([domainTypeMetadata]);
 
         var table = new Table { Name = "Object" };
         var column = new Column { Name = "test" };
-        databaseScriptGeneratorStrategeInfo.AddedColumns.Add(new Tuple<Table, Column, string>(table, column, "0"));
+        databaseScriptGeneratorStrategyInfo.AddedColumns.Add(new Tuple<Table, Column, string>(table, column, "0"));
 
-        var changeDefaultInitializedValueStrategy = new ChangeDefaultInitializedValueStrategy(databaseScriptGeneratorStrategeInfo);
+        var changeDefaultInitializedValueStrategy = new ChangeDefaultInitializedValueStrategy(databaseScriptGeneratorStrategyInfo);
 
         // Act
         var resultScript = changeDefaultInitializedValueStrategy.Execute()();
@@ -58,13 +59,13 @@ public class ChangeDefaultInitializedValueStrategyTest
         var domainTypeMetadata = new DomainTypeMetadata(typeof(object), new AssemblyMetadata(typeof(object)));
         domainTypeMetadata.AddFields([new PrimitiveTypeFieldMetadata("test", typeof(string), new[] { new VersionAttribute() }, domainTypeMetadata, false)]);
 
-        var databaseScriptGeneratorStrategeInfo = this.CreateDatabaseScriptGeneratorStrategeInfo([domainTypeMetadata]);
+        var databaseScriptGeneratorStrategyInfo = this.CreateDatabaseScriptGeneratorStrategyInfo([domainTypeMetadata]);
 
         var table = new Table { Name = "Object" };
         var column = new Column { Name = "test" };
-        databaseScriptGeneratorStrategeInfo.AddedColumns.Add(new Tuple<Table, Column, string>(table, column, "0"));
+        databaseScriptGeneratorStrategyInfo.AddedColumns.Add(new Tuple<Table, Column, string>(table, column, "0"));
 
-        var changeDefaultInitializedValueStrategy = new ChangeDefaultInitializedValueStrategy(databaseScriptGeneratorStrategeInfo);
+        var changeDefaultInitializedValueStrategy = new ChangeDefaultInitializedValueStrategy(databaseScriptGeneratorStrategyInfo);
 
         // Act
         var resultScript = changeDefaultInitializedValueStrategy.Execute()();
@@ -75,12 +76,12 @@ public class ChangeDefaultInitializedValueStrategyTest
         ClassicAssert.AreEqual("update Object set [test]=0\r\n", clippedScript.Single());
     }
 
-    private DatabaseScriptGeneratorStrategyInfo CreateDatabaseScriptGeneratorStrategeInfo(IEnumerable<DomainTypeMetadata> domainTypeMetadata)
+    private DatabaseScriptGeneratorStrategyInfo CreateDatabaseScriptGeneratorStrategyInfo(IEnumerable<DomainTypeMetadata> domainTypeMetadata)
     {
         var scriptGeneratorContext = new DatabaseScriptGeneratorContextMockBuilder();
         var databaseScriptGeneratorContext = scriptGeneratorContext.DatabaseScriptGeneratorContext;
 
-        var databaseScriptGeneratorStrategeInfo = new DatabaseScriptGeneratorStrategyInfo(
+        var databaseScriptGeneratorStrategyInfo = new DatabaseScriptGeneratorStrategyInfo(
          databaseScriptGeneratorContext,
          domainTypeMetadata,
          DatabaseScriptGeneratorMode.None,
@@ -88,7 +89,7 @@ public class ChangeDefaultInitializedValueStrategyTest
          string.Empty,
          new List<string>());
 
-        return databaseScriptGeneratorStrategeInfo;
+        return databaseScriptGeneratorStrategyInfo;
     }
 
     private static IEnumerable<string> SkipDefaultTemplate(IEnumerable<string> script)

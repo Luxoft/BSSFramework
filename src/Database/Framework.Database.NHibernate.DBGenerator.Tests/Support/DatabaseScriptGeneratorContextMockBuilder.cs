@@ -1,19 +1,18 @@
-﻿using Framework.DomainDriven;
-using Framework.DomainDriven.DBGenerator;
-using Framework.DomainDriven.DBGenerator.Contracts;
-using Framework.DomainDriven.DBGenerator.ScriptGenerators.Support;
+﻿using Framework.Database.Metadata;
+using Framework.Database.NHibernate.DBGenerator.Contracts;
+using Framework.Database.NHibernate.DBGenerator.ScriptGenerators.Support;
 
 using Microsoft.SqlServer.Management.Smo;
 
 using NSubstitute;
 
-namespace DBGenerator.Tests.Unit;
+namespace Framework.Database.NHibernate.DBGenerator.Tests.Support;
 
 public class DatabaseScriptGeneratorContextMockBuilder
 {
     public DatabaseScriptGeneratorContextMockBuilder()
     {
-        this.MainDaraBase = new Database();
+        this.MainDaraBase = new Microsoft.SqlServer.Management.Smo.Database();
         this.MainServer = new Server();
 
         this.DatabaseScriptGeneratorContext = Substitute.For<IDatabaseScriptGeneratorContext>();
@@ -35,7 +34,7 @@ public class DatabaseScriptGeneratorContextMockBuilder
 
     public ISqlDatabaseFactory SqlDatabaseFactory { get; private set; }
 
-    public Database MainDaraBase { get; private set; }
+    public Microsoft.SqlServer.Management.Smo.Database MainDaraBase { get; private set; }
 
     public Server MainServer { get; private set; }
 }

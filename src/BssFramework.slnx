@@ -51,6 +51,7 @@
     <Project Path="Database/Framework.Database.Mapping/Framework.Database.Mapping.csproj" />
     <Project Path="Database/Framework.Database.Metadata/Framework.Database.Metadata.csproj" />
     <Project Path="Database/Framework.Database.NHibernate.DALGenerator/Framework.Database.NHibernate.DALGenerator.csproj" />
+    <Project Path="Database/Framework.Database.NHibernate.DBGenerator.Tests/Framework.Database.NHibernate.DBGenerator.Tests.csproj" />
     <Project Path="Database/Framework.Database.NHibernate.DBGenerator/Framework.Database.NHibernate.DBGenerator.csproj" />
     <Project Path="Database/Framework.Database.NHibernate.Legacy/Framework.Database.NHibernate.Legacy.csproj" />
     <Project Path="Database/Framework.Database.NHibernate.Runtime/Framework.Database.NHibernate.Runtime.csproj" />
@@ -69,7 +70,6 @@
   </Folder>
   
   <Folder Name="/DomainDriven/">
-    <Project Path="_DomainDriven/Framework.DomainDriven.DBGenerator.Tests.Unit/Framework.DomainDriven.DBGenerator.Tests.Unit.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.ServiceModel.Tests.Unit/Framework.DomainDriven.ServiceModel.Tests.Unit.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.WebApiNetCore.Swagger/Framework.DomainDriven.WebApiNetCore.Swagger.csproj" />
   </Folder>

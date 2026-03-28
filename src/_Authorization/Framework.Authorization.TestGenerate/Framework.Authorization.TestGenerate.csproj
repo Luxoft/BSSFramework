@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Authorization.TestGenerate</PackageId>
   </PropertyGroup>
@@ -11,8 +11,8 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.DBGenerator\Framework.DomainDriven.DBGenerator.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.NHibernate.DALGenerator\Framework.DomainDriven.NHibernate.DALGenerator.csproj" />
+    <ProjectReference Include="..\..\Framework.Database.NHibernate.Runtime\Framework.Database.NHibernate.Runtime.csproj" />
+    <ProjectReference Include="..\..\Framework.Projection.Runtime\Framework.Projection.Runtime.csproj" />
 
     <ProjectReference Include="..\Framework.Authorization.Domain.Models\Framework.Authorization.Domain.Models.csproj" />
   </ItemGroup>

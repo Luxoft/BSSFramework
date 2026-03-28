@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.D:\Projects\BSSFramework\src\Framework.Database.NHibernate.DBGenerator</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Database.Metadata\Framework.Database.Metadata.csproj" />
+    <ProjectReference Include="..\Framework.Database.NHibernate.Runtime\Framework.Database.NHibernate.Runtime.csproj" />
+    <ProjectReference Include="..\Framework.Database.SqlMapper\Framework.Database.SqlMapper.csproj" />
+    <ProjectReference Include="..\Framework.Projection.Domain\Framework.Projection.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

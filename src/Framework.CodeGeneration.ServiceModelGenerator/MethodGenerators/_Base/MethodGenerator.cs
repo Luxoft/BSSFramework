@@ -44,7 +44,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
     protected abstract bool IsEdit { get; }
 
     protected virtual TBLLRoleAttribute Attribute => this.Configuration.Environment.ExtendedMetadata.GetCustomAttribute<TBLLRoleAttribute>(this.DomainType)
-                                                         .FromMaybe(() => $"Attr {typeof(TBLLRoleAttribute)} not found for type {this.DomainType?.FullName}");// ?? this.GetDefaultAttribute();
+                                                         .FromMaybe(() => $"Attr {typeof(TBLLRoleAttribute)} not found for type {this.DomainType.FullName}");// ?? this.GetDefaultAttribute();
 
     protected virtual DBSessionMode DefaultSessionMode => this.IsEdit ? DBSessionMode.Write : DBSessionMode.Read;
 

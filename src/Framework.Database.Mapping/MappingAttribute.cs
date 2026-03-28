@@ -13,7 +13,14 @@ public class MappingAttribute : Attribute
         get;
         set;
     }
+
     public bool IsOneToOne
+    {
+        get;
+        set;
+    }
+
+    public bool IsUnique
     {
         get;
         set;

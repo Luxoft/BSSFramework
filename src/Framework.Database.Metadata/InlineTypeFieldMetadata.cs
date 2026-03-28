@@ -3,7 +3,6 @@ using System.Runtime.CompilerServices;
 
 using CommonFramework;
 using Framework.Core;
-using Framework.DomainDriven.Metadata;
 
 namespace Framework.Database.Metadata;
 

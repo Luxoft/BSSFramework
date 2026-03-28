@@ -6,7 +6,6 @@ using CommonFramework;
 using Framework.Core;
 using Framework.Core.TypeResolving.TypeSource;
 using Framework.Database.Mapping;
-using Framework.DomainDriven.Metadata;
 
 namespace Framework.Database.Metadata;
 
@@ -150,7 +149,7 @@ public static class MetadataReader
 
     public static AssemblyMetadata GetAssemblyMetadata(Type persistentDomainObjectBase, params IAssemblyInfo[] assemblies)
     {
-        var allTypes = assemblies.SelectMany(z => z.GetTypes()).ToArray();
+        var allTypes = assemblies.SelectMany(z => z.Types).ToArray();
 
         var result = new AssemblyMetadata(persistentDomainObjectBase);
         var typesToProcess = allTypes
@@ -185,9 +184,9 @@ public static class MetadataReader
                              .Select(t => domainTypeMetadataCreator4DeepFields(t, typeMetadata.AssemblyMetadata))
                              .Where(d => null != d).ToList();
 
-            foreach (var curentChild in subClasses)
+            foreach (var currentChild in subClasses)
             {
-                typeMetadata.AddChildren(curentChild);
+                typeMetadata.AddChildren(currentChild);
             }
 
             typeMetadata.EndDeclaration();

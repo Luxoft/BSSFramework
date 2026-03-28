@@ -35,9 +35,7 @@
     <Project Path="_Configuration/Framework.Configuration.WebApiGenerate/Framework.Configuration.WebApiGenerate.csproj" />
   </Folder>
   <Folder Name="/DomainDriven/">
-    <Project Path="_DomainDriven/Framework.DomainDriven.DAL.Sql/Framework.DomainDriven.DAL.Sql.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.DBGenerator.Tests.Unit/Framework.DomainDriven.DBGenerator.Tests.Unit.csproj" />
-    <Project Path="_DomainDriven/Framework.DomainDriven.DBGenerator/Framework.DomainDriven.DBGenerator.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.EntityFramework/Framework.DomainDriven.EntityFramework.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.NHibernate.DALGenerator/Framework.DomainDriven.NHibernate.DALGenerator.csproj" />
     <Project Path="_DomainDriven/Framework.DomainDriven.NHibernate.LegacyContext/Framework.DomainDriven.NHibernate.LegacyContext.csproj" />
@@ -116,9 +114,11 @@
     <Project Path="Framework.Database.Mapping/Framework.Database.Mapping.csproj" />
     <Project Path="Framework.Database.Metadata/Framework.Database.Metadata.csproj" />
     <Project Path="Framework.Database.NHibernate.DALGenerator/Framework.Database.NHibernate.DALGenerator.csproj" />
+    <Project Path="Framework.Database.NHibernate.DBGenerator/Framework.Database.NHibernate.DBGenerator.csproj" />
     <Project Path="Framework.Database.NHibernate.Runtime/Framework.Database.NHibernate.Runtime.csproj" />
     <Project Path="Framework.Database.NHibernate/Framework.Database.NHibernate.csproj" />
     <Project Path="Framework.Database.Runtime/Framework.Database.Runtime.csproj" />
+    <Project Path="Framework.Database.SqlMapper/Framework.Database.SqlMapper.csproj" />
     <Project Path="Framework.Database/Framework.Database.csproj" />
   </Folder>
   <Folder Name="/_Domain/">
@@ -132,6 +132,7 @@
   </Folder>
   <Folder Name="/_Projection/">
     <Project Path="Framework.Projection.Abstractions/Framework.Projection.Abstractions.csproj" />
+    <Project Path="Framework.Projection.Domain/Framework.Projection.Domain.csproj" />
     <Project Path="Framework.Projection.Runtime/Framework.Projection.Runtime.csproj" />
   </Folder>
   <Folder Name="/_Validation/">

@@ -1,5 +1,4 @@
 ﻿using Framework.DomainDriven;
-using Framework.DomainDriven.NHibernate;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;

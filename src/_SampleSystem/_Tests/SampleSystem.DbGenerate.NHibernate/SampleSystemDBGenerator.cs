@@ -1,7 +1,7 @@
-﻿using Framework.DomainDriven.DBGenerator;
-using Framework.DomainDriven.Metadata;
-using Framework.DomainDriven.NHibernate;
-using Framework.Persistent.Mapping;
+﻿using Framework.Database.Mapping;
+using Framework.Database.Metadata;
+using Framework.Database.NHibernate._MappingSettings;
+using Framework.DomainDriven.DBGenerator;
 
 namespace SampleSystem.DbGenerate;
 

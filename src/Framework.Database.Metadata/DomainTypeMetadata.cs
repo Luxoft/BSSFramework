@@ -27,7 +27,7 @@ public class DomainTypeMetadata
         this.indexUniqueMetadataLazy = new Lazy<List<UniqueIndexMetadata>>(this.CreateUniqueIndexMetadata);
     }
 
-    public DomainTypeMetadata Parent => this.parent;
+    public DomainTypeMetadata? Parent => this.parent;
 
     public AssemblyMetadata AssemblyMetadata => this.assemblyMetadata;
 

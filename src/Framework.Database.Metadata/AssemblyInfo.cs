@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Immutable;
+using System.Reflection;
 
 using Framework.Core.TypeResolving.TypeSource;
 
@@ -24,17 +25,14 @@ public class AssemblyInfo : IAssemblyInfo
     public string FullName { get; }
 
 
-    public IEnumerable<Type> GetTypes()
-    {
-        return this.typeSource.GetTypes();
-    }
+    public ImmutableHashSet<Type> Types => this.typeSource.Types;
 
-    public static AssemblyInfo Create(Assembly assembly, Func<Type, bool> typeFilter = null)
+    public static AssemblyInfo Create(Assembly assembly, Func<Type, bool>? typeFilter = null)
     {
         if (assembly == null) throw new ArgumentNullException(nameof(assembly));
 
-        var typeSource = typeFilter == null ? new TypeSource(assembly) : new TypeSource(assembly.GetTypes().Where(typeFilter).ToArray());
+        var typeSource = typeFilter == null ? new TypeSource([assembly]) : new TypeSource([..assembly.GetTypes().Where(typeFilter)]);
 
-        return new AssemblyInfo(assembly.GetName().Name, assembly.FullName, typeSource);
+        return new AssemblyInfo(assembly.GetName().Name!, assembly.FullName!, typeSource);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Framework.DomainDriven;
 using Framework.DomainDriven.DBGenerator;
 using Framework.DomainDriven.DBGenerator.Contracts;
-using Framework.DomainDriven.Metadata;
+using Framework.DomainDriven.DBGenerator.ScriptGenerators.Support;
 
 using Microsoft.SqlServer.Management.Smo;
 

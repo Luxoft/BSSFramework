@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-using Framework.Persistent;
+using Framework.Application.Domain;
 
 namespace Framework.Authorization.Generated.DTO;
 

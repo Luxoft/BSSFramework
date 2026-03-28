@@ -1,4 +1,6 @@
 ﻿using System.CodeDom;
+using System.Collections.Concurrent;
+using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Reflection;
 
@@ -30,6 +32,10 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         where TEnvironment : class, IGenerationEnvironmentBase
 {
     private readonly IDictionaryCache<Tuple<Type, DTOFileType>, ReadOnlyCollection<PropertyInfo>> domainTypePropertiesCache;
+
+    private static readonly ImmutableArray<MainDTOFileType> MainDTOFileTypes = [..typeof(BaseFileType).GetStaticPropertyValueList<MainDTOFileType>()];
+
+    private static readonly ConcurrentDictionary<MainDTOFileType, ImmutableArray<MainDTOFileType>> NestedMainTypesCache = [];
 
     protected GeneratorConfigurationBase(TEnvironment environment)
             : base(environment)
@@ -111,18 +117,16 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     protected virtual ICodeFileFactoryHeader<BaseFileType> ClientPrimitiveDTOMappingServiceFactoryHeader { get; }
 
 
-
-
-    //public static IEnumerable<MainDTOFileType> GetNestedTypes(this MainDTOFileType fileType, ImmutableArray<MainDTOFileType> mainDtoTypes)
-    //{
-    //    if (fileType == null) throw new ArgumentNullException(nameof(fileType));
-
-    //    return fileType.GetAllElements(ft => ft.NestedType, true);
-    //}
-
     public IEnumerable<MainDTOFileType> GetNestedTypes(MainDTOFileType fileType)
     {
-        throw new NotImplementedException();
+        return NestedMainTypesCache.GetOrAdd(
+            fileType,
+            _ =>
+            {
+                var children = MainDTOFileTypes.Where(dtoType => dtoType.BaseType == fileType);
+
+                return [..children.GetAllElements(this.GetNestedTypes)];
+            });
     }
 
     public virtual bool ForceGenerateProperties(Type domainType, DTOFileType fileType)

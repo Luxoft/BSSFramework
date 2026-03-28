@@ -6,8 +6,5 @@ namespace Framework.CodeGeneration.DTOGenerator.Server.FileType;
 
 public record DomainOperationEventDTOFileType(EventOperation EventOperation) : DTOFileType("OperationEventDTO", DTORole.Event)
 {
-    public override string ToString()
-    {
-        return $"{this.Name} ({this.EventOperation.Name})";
-    }
+    protected override string InternalToString() => $"{this.Name} ({this.EventOperation.Name})";
 }

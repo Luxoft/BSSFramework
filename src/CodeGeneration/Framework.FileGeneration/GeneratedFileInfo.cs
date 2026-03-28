@@ -32,7 +32,7 @@ public record GeneratedFileInfo(string RelativePath, string Content)
         {
             prevContent = File.ReadAllText(absolutePath, usingEncoding);
 
-            if (this.PrevContent != this.Content)
+            if (prevContent != this.Content)
             {
                 state = State.Modified;
                 this.InternalSave(absolutePath, checkOutService, usingEncoding);

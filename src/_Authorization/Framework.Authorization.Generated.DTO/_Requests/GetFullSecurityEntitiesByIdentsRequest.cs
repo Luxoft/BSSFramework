@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-using Framework.DomainDriven.ServiceModel.IAD;
+using Framework.BLL.DTOMapping.Domain;
 
 namespace Framework.Authorization.Generated.DTO;
 

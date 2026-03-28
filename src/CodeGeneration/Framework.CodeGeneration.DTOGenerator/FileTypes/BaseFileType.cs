@@ -42,7 +42,9 @@ public record BaseFileType(string Name)
 
     public static RoleFileType ClientPrimitiveDTOMappingService { get; } = new(nameof(ClientPrimitiveDTOMappingService), DTORole.Client);
 
-    public override string ToString() => this.Name;
+    public sealed override string ToString() => this.InternalToString();
+
+    protected virtual string InternalToString() => this.Name;
 
     public static implicit operator BaseFileType(DTOType dtoType)
     {

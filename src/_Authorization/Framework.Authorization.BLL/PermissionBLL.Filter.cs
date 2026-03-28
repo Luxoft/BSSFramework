@@ -1,5 +1,5 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.DomainDriven;
+using Framework.BLL.Domain.Models;
 using Framework.Validation;
 
 using GenericQueryable.Fetching;

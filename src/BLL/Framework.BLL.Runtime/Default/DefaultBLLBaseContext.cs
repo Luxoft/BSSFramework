@@ -11,9 +11,9 @@ namespace Framework.BLL.Default;
 
 public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent> :
 
-        IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
+    IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
 
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="DefaultBLLBaseContext&lt;TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer&gt;" /> class.
@@ -42,10 +42,10 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>
     /// or
     /// timeProvider</exception>
     protected DefaultBLLBaseContext(
-            IServiceProvider serviceProvider,
-            IEventOperationSender operationSender,
-            IStandardExpressionBuilder standardExpressionBuilder,
-            IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory)
+        IServiceProvider serviceProvider,
+        IEventOperationSender operationSender,
+        IStandardExpressionBuilder standardExpressionBuilder,
+        IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory)
     {
         this.ServiceProvider = serviceProvider;
         this.OperationSender = operationSender;
@@ -68,23 +68,24 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>
 
     protected abstract IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>> BaseLogics { get; }
 
-    IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>> IBLLFactoryContainerContext<IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>>.Logics => this.BaseLogics;
+    IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>
+        IBLLFactoryContainerContext<IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>>.Logics => this.BaseLogics;
 }
 
 public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer> : DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>,
 
-    IBLLFactoryContainerContext<TBLLFactoryContainer>
+                                                                                                         IBLLFactoryContainerContext<TBLLFactoryContainer>
 
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TBLLFactoryContainer : IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+    where TBLLFactoryContainer : IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>
 {
     /// <inheritdoc />
     protected DefaultBLLBaseContext(
-            IServiceProvider serviceProvider,
-            IEventOperationSender operationSender,
-            IStandardExpressionBuilder standardExpressionBuilder,
-            IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory)
-            : base(serviceProvider, operationSender, standardExpressionBuilder, hierarchicalObjectExpanderFactory)
+        IServiceProvider serviceProvider,
+        IEventOperationSender operationSender,
+        IStandardExpressionBuilder standardExpressionBuilder,
+        IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory)
+        : base(serviceProvider, operationSender, standardExpressionBuilder, hierarchicalObjectExpanderFactory)
     {
     }
 

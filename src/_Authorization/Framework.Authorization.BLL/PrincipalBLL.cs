@@ -1,5 +1,5 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.Exceptions;
+using Framework.BLL.Domain.Exceptions;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;

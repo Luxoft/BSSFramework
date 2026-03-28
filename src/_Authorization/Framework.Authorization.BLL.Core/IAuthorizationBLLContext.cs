@@ -1,7 +1,7 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.BLL;
 using Framework.Core.TypeResolving;
-using Framework.Tracking;
+using Framework.Validation;
 
 using SecuritySystem;
 using SecuritySystem.AvailableSecurity;
@@ -16,10 +16,10 @@ public partial interface IAuthorizationBLLContext :
 
     ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>,
 
-    ITrackingServiceContainer<PersistentDomainObjectBase>,
-
     ITypeResolverContainer<string>
 {
+    IValidator Validator { get; }
+
     IPrincipalValidator<Principal, Permission, PermissionRestriction> PrincipalValidator { get; }
 
     ICurrentUserSource<Principal> CurrentPrincipalSource { get; }

@@ -1,12 +1,12 @@
 ﻿using CommonFramework.DictionaryCache;
 
+using Framework.Application.Events;
 using Framework.Authorization.Domain;
-using Framework.Core;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL.Security;
+using Framework.BLL;
+using Framework.BLL.Services;
+using Framework.Core.TypeResolving;
 using Framework.QueryLanguage;
-using Framework.Events;
-using Framework.Tracking;
+using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,11 +26,10 @@ namespace Framework.Authorization.BLL;
 public partial class AuthorizationBLLContext(
     IServiceProvider serviceProvider,
     [FromKeyedServices("BLL")] IEventOperationSender operationSender,
-    ITrackingService<PersistentDomainObjectBase> trackingService,
     IAccessDeniedExceptionService accessDeniedExceptionService,
     IStandardExpressionBuilder standardExpressionBuilder,
-    IAuthorizationValidator validator,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
+    IAuthorizationValidator validator,
     TimeProvider timeProvider,
     IRootSecurityService securityService,
     IAuthorizationBLLFactoryContainer logics,
@@ -49,16 +48,14 @@ public partial class AuthorizationBLLContext(
     : SecurityBLLBaseContext<PersistentDomainObjectBase, Guid, IAuthorizationBLLFactoryContainer>(
         serviceProvider,
         operationSender,
-        trackingService,
         accessDeniedExceptionService,
         standardExpressionBuilder,
-        validator,
         hierarchicalObjectExpanderFactory)
 {
     private readonly IDictionaryCache<Type, SecurityContextType> securityContextTypeCache = new DictionaryCache<Type, SecurityContextType>(
         securityContextType => logics.SecurityContextType.GetById(
             (Guid)securityContextInfoSource.GetSecurityContextInfo(securityContextType).Identity.GetId(),
-            true)).WithLock();
+            true)!).WithLock();
 
     public ITypeResolver<string> TypeResolver { get; } = settings.TypeResolver;
 
@@ -68,7 +65,9 @@ public partial class AuthorizationBLLContext(
 
     public ISecuritySystem SecuritySystem { get; } = securitySystem;
 
-    public IPrincipalValidator<Principal, Permission, PermissionRestriction> PrincipalValidator { get; } = principalValidator;  
+    public IValidator Validator { get; } = validator;
+
+    public IPrincipalValidator<Principal, Permission, PermissionRestriction> PrincipalValidator { get; } = principalValidator;
 
     public ICurrentUserSource<Principal> CurrentPrincipalSource { get; } = currentPrincipalSource;
 

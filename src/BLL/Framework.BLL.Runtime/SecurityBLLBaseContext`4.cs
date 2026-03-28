@@ -18,14 +18,13 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
     IAccessDeniedExceptionService accessDeniedExceptionService,
     IStandardExpressionBuilder standardExpressionBuilder,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory)
-    :
-        DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer>(
-        serviceProvider,
-        operationSender,
-        standardExpressionBuilder,
-        hierarchicalObjectExpanderFactory),
-        IAccessDeniedExceptionServiceContainer,
-        ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>
+    : DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer>(
+      serviceProvider,
+      operationSender,
+      standardExpressionBuilder,
+      hierarchicalObjectExpanderFactory),
+      IAccessDeniedExceptionServiceContainer,
+      ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TBLLFactoryContainer : IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>
 {

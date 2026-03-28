@@ -1,8 +1,8 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
+using Framework.BLL.Domain.Models;
 using Framework.Core;
-using Framework.DomainDriven;
 
 using SecuritySystem.ExternalSystem.SecurityContextStorage;
 

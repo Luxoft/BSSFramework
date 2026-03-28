@@ -11,14 +11,15 @@ using Framework.Infrastructure.Service;
 namespace Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
 
 public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<TEnvironment, FileType>, IGeneratorConfigurationBase<TEnvironment>
-        where TEnvironment : class, IGenerationEnvironmentBase
+    where TEnvironment : class, IGenerationEnvironmentBase
 {
     protected GeneratorConfigurationBase(TEnvironment environment)
-            : base(environment)
+        : base(environment)
     {
         this.EvaluateDataTypeReference =
-                typeof(EvaluatedData<,>).ToTypeReference(this.Environment.BLLCore.BLLContextInterfaceTypeReference,
-                                                         this.Environment.ServerDTO.GetCodeTypeReference(null, DTOGenerator.Server.ServerFileType.ServerDTOMappingServiceInterface));
+            typeof(EvaluatedData<,>).ToTypeReference(
+                this.Environment.BLLCore.BLLContextInterfaceTypeReference,
+                this.Environment.ServerDTO.GetCodeTypeReference(null, DTOGenerator.Server.ServerFileType.ServerDTOMappingServiceInterface));
 
         this.GeneratePolicy = new DefaultServiceGeneratePolicy(this.Environment);
     }
@@ -30,7 +31,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     protected virtual ICodeFileFactoryHeader<FileType> ImplementServiceFileFactoryHeader { get; } =
 
-        new CodeFileFactoryHeader<FileType>(FileType.Implement, @"Implement\", domainType => domainType.Name + "Service");
+        new CodeFileFactoryHeader<FileType>(FileType.Implement, @"Implement\", domainType => domainType!.Name + "Service");
 
 
     public virtual CodeTypeReference EvaluateDataTypeReference { get; }
@@ -46,12 +47,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public abstract IEnumerable<IServiceMethodGenerator> GetMethodGenerators(Type domainType);
 
-    public bool HasMethods(Type domainType)
-    {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
-        return this.GetActualMethodGenerators(domainType).Any();
-    }
+    public bool HasMethods(Type domainType) => this.GetActualMethodGenerators(domainType).Any();
 
     public virtual IEnumerable<IServiceMethodGenerator> GetAccumMethodGenerators()
     {

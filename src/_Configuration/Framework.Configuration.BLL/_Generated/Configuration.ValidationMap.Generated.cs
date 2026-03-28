@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
-
 namespace Framework.Configuration.BLL
 {
     
@@ -67,160 +65,6 @@ namespace Framework.Configuration.BLL
         protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.CodeFirstSubscription> GetCodeFirstSubscriptionValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.CodeFirstSubscription>(this.GetCodeFirstSubscriptionProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettings, string>> GetControlSettings_AccountNameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.ControlSettings>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettings, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettings>>> GetControlSettings_ChildrenValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.ControlSettings, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettings>, Framework.Configuration.Domain.ControlSettings>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettings, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParam>>> GetControlSettings_ControlSettingsParamsValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.ControlSettings, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParam>, Framework.Configuration.Domain.ControlSettingsParam>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettings, System.DateTime?>> GetControlSettings_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.ControlSettings>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettings, string>> GetControlSettings_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.ControlSettings>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettings, string>> GetControlSettings_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.ControlSettings>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettings, System.DateTime?>> GetControlSettings_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.ControlSettings>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettings, string>> GetControlSettings_NameValidators()
-        {
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.ControlSettings, string>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.ControlSettings>(2147483647);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettings, Framework.Configuration.Domain.ControlSettings>> GetControlSettings_ParentValidators()
-        {
-            yield return new Framework.DomainDriven.Tracking.LegacyValidators.FixedPropertyValidator<Framework.Configuration.Domain.ControlSettings, Framework.Configuration.Domain.ControlSettings, System.Guid, Framework.Configuration.Domain.PersistentDomainObjectBase>(source => source.Parent);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettingsParam, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParamValue>>> GetControlSettingsParam_ControlSettingsParamValuesValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.ControlSettingsParam, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParamValue>, Framework.Configuration.Domain.ControlSettingsParamValue>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettingsParam, System.DateTime?>> GetControlSettingsParam_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.ControlSettingsParam>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettingsParam, string>> GetControlSettingsParam_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.ControlSettingsParam>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettingsParam, string>> GetControlSettingsParam_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.ControlSettingsParam>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettingsParam, System.DateTime?>> GetControlSettingsParam_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.ControlSettingsParam>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.ControlSettingsParam>> GetControlSettingsParamProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.ControlSettingsParam> currentClass)
-        {
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Configuration.Domain.ControlSettingsParam, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParamValue>, Framework.Configuration.Domain.ControlSettingsParamValue>(source => source.ControlSettingsParamValues, currentClass, this.GetControlSettingsParam_ControlSettingsParamValuesValidators(), this.GetClassMap<Framework.Configuration.Domain.ControlSettingsParamValue>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettingsParam, System.DateTime?>(source => source.CreateDate, currentClass, this.GetControlSettingsParam_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettingsParam, string>(source => source.CreatedBy, currentClass, this.GetControlSettingsParam_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettingsParam, string>(source => source.ModifiedBy, currentClass, this.GetControlSettingsParam_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettingsParam, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetControlSettingsParam_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.ControlSettingsParam> GetControlSettingsParamValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.ControlSettingsParam>(this.GetControlSettingsParamProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettingsParamValue, System.DateTime?>> GetControlSettingsParamValue_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.ControlSettingsParamValue>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettingsParamValue, string>> GetControlSettingsParamValue_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.ControlSettingsParamValue>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettingsParamValue, string>> GetControlSettingsParamValue_CultureValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.ControlSettingsParamValue>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettingsParamValue, string>> GetControlSettingsParamValue_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.ControlSettingsParamValue>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettingsParamValue, System.DateTime?>> GetControlSettingsParamValue_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.ControlSettingsParamValue>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettingsParamValue, string>> GetControlSettingsParamValue_ValueTypeNameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.ControlSettingsParamValue>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettingsParamValue, string>> GetControlSettingsParamValue_ValueValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.ControlSettingsParamValue>(2147483647);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.ControlSettingsParamValue>> GetControlSettingsParamValueProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.ControlSettingsParamValue> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettingsParamValue, System.DateTime?>(source => source.CreateDate, currentClass, this.GetControlSettingsParamValue_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettingsParamValue, string>(source => source.CreatedBy, currentClass, this.GetControlSettingsParamValue_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettingsParamValue, string>(source => source.Culture, currentClass, this.GetControlSettingsParamValue_CultureValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettingsParamValue, string>(source => source.ModifiedBy, currentClass, this.GetControlSettingsParamValue_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettingsParamValue, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetControlSettingsParamValue_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettingsParamValue, string>(source => source.Value, currentClass, this.GetControlSettingsParamValue_ValueValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettingsParamValue, string>(source => source.ValueTypeName, currentClass, this.GetControlSettingsParamValue_ValueTypeNameValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.ControlSettingsParamValue> GetControlSettingsParamValueValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.ControlSettingsParamValue>(this.GetControlSettingsParamValueProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.ControlSettings>> GetControlSettingsProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.ControlSettings> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettings, string>(source => source.AccountName, currentClass, this.GetControlSettings_AccountNameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Configuration.Domain.ControlSettings, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettings>, Framework.Configuration.Domain.ControlSettings>(source => source.Children, currentClass, this.GetControlSettings_ChildrenValidators(), this.GetClassMap<Framework.Configuration.Domain.ControlSettings>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Configuration.Domain.ControlSettings, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParam>, Framework.Configuration.Domain.ControlSettingsParam>(source => source.ControlSettingsParams, currentClass, this.GetControlSettings_ControlSettingsParamsValidators(), this.GetClassMap<Framework.Configuration.Domain.ControlSettingsParam>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettings, System.DateTime?>(source => source.CreateDate, currentClass, this.GetControlSettings_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettings, string>(source => source.CreatedBy, currentClass, this.GetControlSettings_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettings, string>(source => source.ModifiedBy, currentClass, this.GetControlSettings_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettings, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetControlSettings_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettings, string>(source => source.Name, currentClass, this.GetControlSettings_NameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ControlSettings, Framework.Configuration.Domain.ControlSettings>(source => source.Parent, currentClass, this.GetControlSettings_ParentValidators(), this.GetClassMap<Framework.Configuration.Domain.ControlSettings>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.ControlSettings> GetControlSettingsValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.ControlSettings>(this.GetControlSettingsProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.DomainObjectEvent, System.DateTime?>> GetDomainObjectEvent_CreateDateValidators()
@@ -511,78 +355,6 @@ namespace Framework.Configuration.BLL
             return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.DomainType>(this.GetDomainTypeProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ExceptionMessage, System.DateTime?>> GetExceptionMessage_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.ExceptionMessage>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ExceptionMessage, string>> GetExceptionMessage_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.ExceptionMessage>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ExceptionMessage, Framework.Configuration.Domain.ExceptionMessage>> GetExceptionMessage_InnerExceptionValidators()
-        {
-            yield return new Framework.Validation.DeepSingleValidator<Framework.Configuration.Domain.ExceptionMessage, Framework.Configuration.Domain.ExceptionMessage>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ExceptionMessage, string>> GetExceptionMessage_MessageTypeValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.ExceptionMessage>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ExceptionMessage, string>> GetExceptionMessage_MessageValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.ExceptionMessage>(2147483647);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ExceptionMessage, string>> GetExceptionMessage_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.ExceptionMessage>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ExceptionMessage, System.DateTime?>> GetExceptionMessage_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.ExceptionMessage>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ExceptionMessage, string>> GetExceptionMessage_StackTraceValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.ExceptionMessage>(2147483647);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.ExceptionMessage>> GetExceptionMessageProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.ExceptionMessage> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ExceptionMessage, System.DateTime?>(source => source.CreateDate, currentClass, this.GetExceptionMessage_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ExceptionMessage, string>(source => source.CreatedBy, currentClass, this.GetExceptionMessage_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ExceptionMessage, Framework.Configuration.Domain.ExceptionMessage>(source => source.InnerException, currentClass, this.GetExceptionMessage_InnerExceptionValidators(), this.GetClassMap<Framework.Configuration.Domain.ExceptionMessage>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ExceptionMessage, string>(source => source.Message, currentClass, this.GetExceptionMessage_MessageValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ExceptionMessage, string>(source => source.MessageType, currentClass, this.GetExceptionMessage_MessageTypeValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ExceptionMessage, string>(source => source.ModifiedBy, currentClass, this.GetExceptionMessage_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ExceptionMessage, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetExceptionMessage_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ExceptionMessage, string>(source => source.StackTrace, currentClass, this.GetExceptionMessage_StackTraceValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ExceptionMessageRootFilterModel, Period>> GetExceptionMessageRootFilterModel_PeriodValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<Framework.Configuration.Domain.ExceptionMessageRootFilterModel>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.ExceptionMessageRootFilterModel>> GetExceptionMessageRootFilterModelProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.ExceptionMessageRootFilterModel> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ExceptionMessageRootFilterModel, Period>(source => source.Period, currentClass, this.GetExceptionMessageRootFilterModel_PeriodValidators(), this.GetClassMap<Period>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.ExceptionMessageRootFilterModel> GetExceptionMessageRootFilterModelValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.ExceptionMessageRootFilterModel>(this.GetExceptionMessageRootFilterModelProperties);
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.ExceptionMessage> GetExceptionMessageValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.ExceptionMessage>(this.GetExceptionMessageProperties);
-        }
-        
         protected override Framework.Validation.IClassValidationMap<TSource> GetInternalClassMap<TSource>()
         {
             if ((typeof(TSource) == typeof(Framework.Configuration.Domain.CodeFirstSubscription)))
@@ -592,18 +364,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetCodeFirstSubscriptionRootFilterModelValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.ControlSettings)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetControlSettingsValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.ControlSettingsParam)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetControlSettingsParamValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.ControlSettingsParamValue)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetControlSettingsParamValueValidationMap()));
             }
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.DomainObjectEvent)))
             {
@@ -632,14 +392,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.DomainTypeRootFilterModel)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetDomainTypeRootFilterModelValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.ExceptionMessage)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetExceptionMessageValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.ExceptionMessageRootFilterModel)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetExceptionMessageRootFilterModelValidationMap()));
             }
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.QueueProcessingState)))
             {

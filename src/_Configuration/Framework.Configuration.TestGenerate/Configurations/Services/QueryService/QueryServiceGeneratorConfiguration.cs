@@ -1,12 +1,5 @@
 ﻿using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Query;
-using Framework.DomainDriven.ServiceModelGenerator;
 
-namespace Framework.Configuration.TestGenerate;
+namespace Framework.Configuration.TestGenerate.Configurations.Services.QueryService;
 
-public class QueryServiceGeneratorConfiguration : QueryGeneratorConfigurationBase<ServerGenerationEnvironment>
-{
-    public QueryServiceGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
-    {
-    }
-}
+public class QueryServiceGeneratorConfiguration(ServerGenerationEnvironment environment) : QueryGeneratorConfigurationBase<ServerGenerationEnvironment>(environment);

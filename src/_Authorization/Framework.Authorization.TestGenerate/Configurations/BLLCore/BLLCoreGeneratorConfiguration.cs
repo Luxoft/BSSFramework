@@ -1,7 +1,7 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 
-namespace Framework.Authorization.TestGenerate;
+namespace Framework.Authorization.TestGenerate.Configurations.BLLCore;
 
 public class BLLCoreGeneratorConfiguration(ServerGenerationEnvironment environment) : GeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {

@@ -1,11 +1,10 @@
 ﻿using Framework.BLL.Domain.Serialization;
-
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.GeneratePolicy;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.GeneratePolicy;
 
-namespace Framework.Authorization.TestGenerate;
+namespace Framework.Authorization.TestGenerate.Configurations.DTO;
 
 public class ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environment) : ServerGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {

@@ -1,4 +1,5 @@
-﻿using Framework.Authorization.TestGenerate;
+﻿using Framework.Authorization.TestGenerate.Configurations;
+using Framework.Authorization.TestGenerate.Configurations.Services.Main;
 
 namespace Framework.Authorization.WebApiGenerate.Configurations;
 

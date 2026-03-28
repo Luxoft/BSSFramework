@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
-
 namespace Framework.Configuration.Generated.DTO
 {
     
@@ -17,12 +15,6 @@ namespace Framework.Configuration.Generated.DTO
     {
         
         void MapBaseAuditPersistentToStrictForCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
-        
-        void MapBaseAuditPersistentToStrictForControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
-        
-        void MapBaseAuditPersistentToStrictForControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
-        
-        void MapBaseAuditPersistentToStrictForControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
         void MapBaseAuditPersistentToStrictForDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
@@ -34,8 +26,6 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapBaseAuditPersistentToStrictForDomainTypeEventOperation(Framework.Configuration.Generated.DTO.DomainTypeEventOperationStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
-        void MapBaseAuditPersistentToStrictForExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
-        
         void MapBaseAuditPersistentToStrictForSentMessage(Framework.Configuration.Generated.DTO.SentMessageStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
         void MapBaseAuditPersistentToStrictForSequence(Framework.Configuration.Generated.DTO.SequenceStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
@@ -46,12 +36,6 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapBasePersistentToStrictForCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
         
-        void MapBasePersistentToStrictForControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
-        
-        void MapBasePersistentToStrictForControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
-        
-        void MapBasePersistentToStrictForControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
-        
         void MapBasePersistentToStrictForDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapBasePersistentToStrictForDomainObjectModification(Framework.Configuration.Generated.DTO.DomainObjectModificationStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
@@ -61,8 +45,6 @@ namespace Framework.Configuration.Generated.DTO
         void MapBasePersistentToStrictForDomainType(Framework.Configuration.Generated.DTO.DomainTypeStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapBasePersistentToStrictForDomainTypeEventOperation(Framework.Configuration.Generated.DTO.DomainTypeEventOperationStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
-        
-        void MapBasePersistentToStrictForExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapBasePersistentToStrictForSentMessage(Framework.Configuration.Generated.DTO.SentMessageStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
         
@@ -75,12 +57,6 @@ namespace Framework.Configuration.Generated.DTO
         void MapFullToStrictForCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO target, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO currentSource);
         
         void MapFullToStrictForCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO currentSource);
-        
-        void MapFullToStrictForControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsFullDTO currentSource);
-        
-        void MapFullToStrictForControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsParamFullDTO currentSource);
-        
-        void MapFullToStrictForControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsParamValueFullDTO currentSource);
         
         void MapFullToStrictForDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventStrictDTO target, Framework.Configuration.Generated.DTO.DomainObjectEventFullDTO currentSource);
         
@@ -95,10 +71,6 @@ namespace Framework.Configuration.Generated.DTO
         void MapFullToStrictForDomainTypeEventOperation(Framework.Configuration.Generated.DTO.DomainTypeEventOperationStrictDTO target, Framework.Configuration.Generated.DTO.DomainTypeEventOperationFullDTO currentSource);
         
         void MapFullToStrictForDomainTypeRootFilterModel(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelFullDTO currentSource);
-        
-        void MapFullToStrictForExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO currentSource);
-        
-        void MapFullToStrictForExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO currentSource);
         
         void MapFullToStrictForQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateStrictDTO target, Framework.Configuration.Generated.DTO.QueueProcessingStateFullDTO currentSource);
         
@@ -122,12 +94,6 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapRichToStrictForCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO currentSource);
         
-        void MapRichToStrictForControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsRichDTO currentSource);
-        
-        void MapRichToStrictForControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO currentSource);
-        
-        void MapRichToStrictForControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO currentSource);
-        
         void MapRichToStrictForDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventStrictDTO target, Framework.Configuration.Generated.DTO.DomainObjectEventRichDTO currentSource);
         
         void MapRichToStrictForDomainObjectModification(Framework.Configuration.Generated.DTO.DomainObjectModificationStrictDTO target, Framework.Configuration.Generated.DTO.DomainObjectModificationRichDTO currentSource);
@@ -141,10 +107,6 @@ namespace Framework.Configuration.Generated.DTO
         void MapRichToStrictForDomainTypeEventOperation(Framework.Configuration.Generated.DTO.DomainTypeEventOperationStrictDTO target, Framework.Configuration.Generated.DTO.DomainTypeEventOperationRichDTO currentSource);
         
         void MapRichToStrictForDomainTypeRootFilterModel(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelRichDTO currentSource);
-        
-        void MapRichToStrictForExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO currentSource);
-        
-        void MapRichToStrictForExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO currentSource);
         
         void MapRichToStrictForQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateStrictDTO target, Framework.Configuration.Generated.DTO.QueueProcessingStateRichDTO currentSource);
         
@@ -168,12 +130,6 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapSimpleToStrictForCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO currentSource);
         
-        void MapSimpleToStrictForControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO currentSource);
-        
-        void MapSimpleToStrictForControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO currentSource);
-        
-        void MapSimpleToStrictForControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsParamValueSimpleDTO currentSource);
-        
         void MapSimpleToStrictForDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventStrictDTO target, Framework.Configuration.Generated.DTO.DomainObjectEventSimpleDTO currentSource);
         
         void MapSimpleToStrictForDomainObjectModification(Framework.Configuration.Generated.DTO.DomainObjectModificationStrictDTO target, Framework.Configuration.Generated.DTO.DomainObjectModificationSimpleDTO currentSource);
@@ -187,10 +143,6 @@ namespace Framework.Configuration.Generated.DTO
         void MapSimpleToStrictForDomainTypeEventOperation(Framework.Configuration.Generated.DTO.DomainTypeEventOperationStrictDTO target, Framework.Configuration.Generated.DTO.DomainTypeEventOperationSimpleDTO currentSource);
         
         void MapSimpleToStrictForDomainTypeRootFilterModel(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelSimpleDTO currentSource);
-        
-        void MapSimpleToStrictForExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO currentSource);
-        
-        void MapSimpleToStrictForExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO currentSource);
         
         void MapSimpleToStrictForQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateStrictDTO target, Framework.Configuration.Generated.DTO.QueueProcessingStateSimpleDTO currentSource);
         
@@ -211,7 +163,7 @@ namespace Framework.Configuration.Generated.DTO
         void MapSimpleToStrictForTargetSystemRootFilterModel(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelSimpleDTO currentSource);
     }
     
-    public abstract partial class ConfigurationClientPrimitiveDTOMappingServiceBase : Framework.Persistent.ClientDTOMappingServiceBase, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService
+    public abstract partial class ConfigurationClientPrimitiveDTOMappingServiceBase : Framework.BLL.DTOMapping.Services.ClientDTOMappingServiceBase, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService
     {
         
         public virtual void MapBaseAuditPersistentToStrictForCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source)
@@ -225,42 +177,6 @@ namespace Framework.Configuration.Generated.DTO
                 throw new System.ArgumentNullException("target");
             }
             target.Active = source.Active;
-        }
-        
-        public virtual void MapBaseAuditPersistentToStrictForControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapBaseAuditPersistentToStrictForControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapBaseAuditPersistentToStrictForControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
         }
         
         public virtual void MapBaseAuditPersistentToStrictForDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source)
@@ -323,18 +239,6 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        public virtual void MapBaseAuditPersistentToStrictForExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
         public virtual void MapBaseAuditPersistentToStrictForSentMessage(Framework.Configuration.Generated.DTO.SentMessageStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source)
         {
             if (object.ReferenceEquals(source, null))
@@ -384,45 +288,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public virtual void MapBasePersistentToStrictForCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.Id = source.Id;
-        }
-        
-        public virtual void MapBasePersistentToStrictForControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.Id = source.Id;
-        }
-        
-        public virtual void MapBasePersistentToStrictForControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.Id = source.Id;
-        }
-        
-        public virtual void MapBasePersistentToStrictForControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -500,19 +365,6 @@ namespace Framework.Configuration.Generated.DTO
             target.Id = source.Id;
         }
         
-        public virtual void MapBasePersistentToStrictForExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.Id = source.Id;
-        }
-        
         public virtual void MapBasePersistentToStrictForSentMessage(Framework.Configuration.Generated.DTO.SentMessageStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO source)
         {
             if (object.ReferenceEquals(source, null))
@@ -578,50 +430,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public virtual void MapFullToStrictForCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapFullToStrictForControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsFullDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            if (!object.ReferenceEquals(source.Parent, null))
-            {
-                target.Parent = source.Parent.Identity;
-            }
-            else
-            {
-                target.Parent = default(Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO);
-            }
-        }
-        
-        public virtual void MapFullToStrictForControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsParamFullDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapFullToStrictForControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsParamValueFullDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -746,30 +554,6 @@ namespace Framework.Configuration.Generated.DTO
             else
             {
                 target.TargetSystem = default(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO);
-            }
-        }
-        
-        public virtual void MapFullToStrictForExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapFullToStrictForExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
             }
         }
         
@@ -905,54 +689,6 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        public virtual void MapRichToStrictForControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsRichDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            if (!object.ReferenceEquals(source.Children, null))
-            {
-                target.Children = Framework.Core.CoreEnumerableExtensions.ToList(source.Children, controlSettings => new Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO(controlSettings));
-            }
-            if (!object.ReferenceEquals(source.ControlSettingsParams, null))
-            {
-                target.ControlSettingsParams = Framework.Core.CoreEnumerableExtensions.ToList(source.ControlSettingsParams, controlSettingsParam => new Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO(controlSettingsParam));
-            }
-        }
-        
-        public virtual void MapRichToStrictForControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            if (!object.ReferenceEquals(source.ControlSettingsParamValues, null))
-            {
-                target.ControlSettingsParamValues = Framework.Core.CoreEnumerableExtensions.ToList(source.ControlSettingsParamValues, controlSettingsParamValue => new Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO(controlSettingsParamValue));
-            }
-        }
-        
-        public virtual void MapRichToStrictForControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
         public virtual void MapRichToStrictForDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventStrictDTO target, Framework.Configuration.Generated.DTO.DomainObjectEventRichDTO source)
         {
             if (object.ReferenceEquals(source, null))
@@ -1027,38 +763,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public virtual void MapRichToStrictForDomainTypeRootFilterModel(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelRichDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapRichToStrictForExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            if (!object.ReferenceEquals(source.InnerException, null))
-            {
-                target.InnerException = new Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO(source.InnerException);
-            }
-            else
-            {
-                target.InnerException = null;
-            }
-        }
-        
-        public virtual void MapRichToStrictForExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -1202,48 +906,6 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        public virtual void MapSimpleToStrictForControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.Name = source.Name;
-            target.Type = source.Type;
-        }
-        
-        public virtual void MapSimpleToStrictForControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.Type = source.Type;
-        }
-        
-        public virtual void MapSimpleToStrictForControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO target, Framework.Configuration.Generated.DTO.ControlSettingsParamValueSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.Culture = source.Culture;
-            target.Value = source.Value;
-            target.ValueTypeName = source.ValueTypeName;
-        }
-        
         public virtual void MapSimpleToStrictForDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventStrictDTO target, Framework.Configuration.Generated.DTO.DomainObjectEventSimpleDTO source)
         {
             if (object.ReferenceEquals(source, null))
@@ -1341,35 +1003,6 @@ namespace Framework.Configuration.Generated.DTO
             {
                 throw new System.ArgumentNullException("target");
             }
-        }
-        
-        public virtual void MapSimpleToStrictForExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.Message = source.Message;
-            target.MessageType = source.MessageType;
-            target.StackTrace = source.StackTrace;
-        }
-        
-        public virtual void MapSimpleToStrictForExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.IsRoot = source.IsRoot;
-            target.Period = source.Period;
         }
         
         public virtual void MapSimpleToStrictForQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateStrictDTO target, Framework.Configuration.Generated.DTO.QueueProcessingStateSimpleDTO source)
@@ -1506,9 +1139,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscription), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscription), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class CodeFirstSubscriptionIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    public class CodeFirstSubscriptionIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private static Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO(System.Guid.Empty);
@@ -1568,7 +1201,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -1612,327 +1245,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ControlSettings), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectEvent), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class ControlSettingsIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
-    {
-        
-        private static Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public ControlSettingsIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public ControlSettingsIdentityDTO(Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public ControlSettingsIdentityDTO(Framework.Configuration.Domain.ControlSettings domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public ControlSettingsIdentityDTO()
-        {
-        }
-        
-        public ControlSettingsIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO Empty
-        {
-            get
-            {
-                return Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO identity1, Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO identity1, Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO identity2)
-        {
-            return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO)) && identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO) == other.GetType()) && this.Equals(((Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO)(other)));
-        }
-        
-        public bool Equals(Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO other)
-        {
-            return !object.ReferenceEquals(other, null) && (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public Framework.Configuration.Domain.ControlSettings ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToControlSettings(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ControlSettingsParam), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class ControlSettingsParamIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
-    {
-        
-        private static Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public ControlSettingsParamIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public ControlSettingsParamIdentityDTO(Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public ControlSettingsParamIdentityDTO(Framework.Configuration.Domain.ControlSettingsParam domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public ControlSettingsParamIdentityDTO()
-        {
-        }
-        
-        public ControlSettingsParamIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO Empty
-        {
-            get
-            {
-                return Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO identity1, Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO identity1, Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO identity2)
-        {
-            return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO)) && identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO) == other.GetType()) && this.Equals(((Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO)(other)));
-        }
-        
-        public bool Equals(Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO other)
-        {
-            return !object.ReferenceEquals(other, null) && (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public Framework.Configuration.Domain.ControlSettingsParam ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToControlSettingsParam(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ControlSettingsParamValue), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class ControlSettingsParamValueIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
-    {
-        
-        private static Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public ControlSettingsParamValueIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public ControlSettingsParamValueIdentityDTO(Framework.Configuration.Generated.DTO.ControlSettingsParamValueSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public ControlSettingsParamValueIdentityDTO(Framework.Configuration.Domain.ControlSettingsParamValue domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public ControlSettingsParamValueIdentityDTO()
-        {
-        }
-        
-        public ControlSettingsParamValueIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO Empty
-        {
-            get
-            {
-                return Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO identity1, Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO identity1, Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO identity2)
-        {
-            return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO)) && identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO) == other.GetType()) && this.Equals(((Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO)(other)));
-        }
-        
-        public bool Equals(Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO other)
-        {
-            return !object.ReferenceEquals(other, null) && (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public Framework.Configuration.Domain.ControlSettingsParamValue ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToControlSettingsParamValue(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectEvent), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class DomainObjectEventIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    public class DomainObjectEventIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private static Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO(System.Guid.Empty);
@@ -1992,7 +1307,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -2036,9 +1351,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectModification), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectModification), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class DomainObjectModificationIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.DomainObjectModificationIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    public class DomainObjectModificationIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.DomainObjectModificationIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private static Framework.Configuration.Generated.DTO.DomainObjectModificationIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.DomainObjectModificationIdentityDTO(System.Guid.Empty);
@@ -2098,7 +1413,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -2142,9 +1457,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectNotification), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectNotification), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class DomainObjectNotificationIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    public class DomainObjectNotificationIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private static Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO(System.Guid.Empty);
@@ -2204,7 +1519,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -2248,9 +1563,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainType), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainType), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class DomainTypeIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    public class DomainTypeIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private static Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO(System.Guid.Empty);
@@ -2310,7 +1625,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -2354,9 +1669,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventOperation), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventOperation), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class DomainTypeEventOperationIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    public class DomainTypeEventOperationIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private static Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO(System.Guid.Empty);
@@ -2416,7 +1731,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -2460,115 +1775,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ExceptionMessage), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SentMessage), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class ExceptionMessageIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
-    {
-        
-        private static Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public ExceptionMessageIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public ExceptionMessageIdentityDTO(Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public ExceptionMessageIdentityDTO(Framework.Configuration.Domain.ExceptionMessage domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public ExceptionMessageIdentityDTO()
-        {
-        }
-        
-        public ExceptionMessageIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO Empty
-        {
-            get
-            {
-                return Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO identity1, Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO identity1, Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO identity2)
-        {
-            return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO)) && identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO) == other.GetType()) && this.Equals(((Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO)(other)));
-        }
-        
-        public bool Equals(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO other)
-        {
-            return !object.ReferenceEquals(other, null) && (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public Framework.Configuration.Domain.ExceptionMessage ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToExceptionMessage(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SentMessage), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class SentMessageIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.SentMessageIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    public class SentMessageIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.SentMessageIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private static Framework.Configuration.Generated.DTO.SentMessageIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.SentMessageIdentityDTO(System.Guid.Empty);
@@ -2628,7 +1837,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -2672,9 +1881,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Sequence), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Sequence), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class SequenceIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.SequenceIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    public class SequenceIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.SequenceIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private static Framework.Configuration.Generated.DTO.SequenceIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.SequenceIdentityDTO(System.Guid.Empty);
@@ -2734,7 +1943,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -2778,9 +1987,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstant), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstant), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class SystemConstantIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    public class SystemConstantIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private static Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO(System.Guid.Empty);
@@ -2840,7 +2049,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -2884,9 +2093,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystem), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystem), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class TargetSystemIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    public class TargetSystemIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private static Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO(System.Guid.Empty);
@@ -2946,7 +2155,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -2990,7 +2199,7 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectBase), "BaseAbstractDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectBase), "BaseAbstractDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     public abstract partial class BaseAbstractDTO
     {
@@ -3005,9 +2214,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.PersistentDomainObjectBase), "BasePersistentDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.PersistentDomainObjectBase), "BasePersistentDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public abstract partial class BasePersistentDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.Persistent.IIdentityObject<System.Guid>
+    public abstract partial class BasePersistentDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private System.Guid _id;
@@ -3035,7 +2244,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -3053,7 +2262,7 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.AuditPersistentDomainObjectBase), "BaseAuditPersistentDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.AuditPersistentDomainObjectBase), "BaseAuditPersistentDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     public abstract partial class BaseAuditPersistentDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO
     {
@@ -3144,11 +2353,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscription), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscription), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO))]
-    public partial class CodeFirstSubscriptionSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO>
+    public partial class CodeFirstSubscriptionSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO>
     {
         
         private string _code;
@@ -3206,10 +2415,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscription), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscription), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO))]
-    public partial class CodeFirstSubscriptionFullDTO : Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>
+    public partial class CodeFirstSubscriptionFullDTO : Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>
     {
         
         private Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO _domainType;
@@ -3249,9 +2458,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscription), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscription), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class CodeFirstSubscriptionRichDTO : Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription>
+    public partial class CodeFirstSubscriptionRichDTO : Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription>
     {
         
         public CodeFirstSubscriptionRichDTO()
@@ -3281,9 +2490,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscription), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscription), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class CodeFirstSubscriptionStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO>
+    public partial class CodeFirstSubscriptionStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO>
     {
         
         private bool _active = true;
@@ -3394,7 +2603,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -3422,11 +2631,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO))]
-    public partial class CodeFirstSubscriptionRootFilterModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>
+    public partial class CodeFirstSubscriptionRootFilterModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>
     {
         
         public CodeFirstSubscriptionRootFilterModelSimpleDTO()
@@ -3450,10 +2659,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO))]
-    public partial class CodeFirstSubscriptionRootFilterModelFullDTO : Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>
+    public partial class CodeFirstSubscriptionRootFilterModelFullDTO : Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>
     {
         
         public CodeFirstSubscriptionRootFilterModelFullDTO()
@@ -3478,9 +2687,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class CodeFirstSubscriptionRootFilterModelRichDTO : Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>
+    public partial class CodeFirstSubscriptionRootFilterModelRichDTO : Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>
     {
         
         public CodeFirstSubscriptionRootFilterModelRichDTO()
@@ -3510,9 +2719,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class CodeFirstSubscriptionRootFilterModelStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>
+    public partial class CodeFirstSubscriptionRootFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>
     {
         
         public CodeFirstSubscriptionRootFilterModelStrictDTO()
@@ -3574,1100 +2783,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ControlSettings), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class ControlSettingsVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettings, System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO>
-    {
-        
-        private string _name;
-        
-        public ControlSettingsVisualDTO()
-        {
-        }
-        
-        public ControlSettingsVisualDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettings domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapControlSettings(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO Identity
-        {
-            get
-            {
-                return new Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-        
-        public virtual void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettings domainObject)
-        {
-            mappingService.MapControlSettings(this, domainObject);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ControlSettings), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ControlSettingsFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ControlSettingsRichDTO))]
-    public partial class ControlSettingsSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettings, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettings>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO>
-    {
-        
-        private string _accountName;
-        
-        private string _name;
-        
-        private Framework.Configuration.Domain.ControlSettingsType _type;
-        
-        public ControlSettingsSimpleDTO()
-        {
-        }
-        
-        public ControlSettingsSimpleDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettings domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapControlSettings(domainObject, this);
-        }
-        
-        public ControlSettingsSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AccountName
-        {
-            get
-            {
-                return this._accountName;
-            }
-            set
-            {
-                this._accountName = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO Identity
-        {
-            get
-            {
-                return new Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Domain.ControlSettingsType Type
-        {
-            get
-            {
-                return this._type;
-            }
-            set
-            {
-                this._type = value;
-            }
-        }
-        
-        public virtual void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettings domainObject)
-        {
-            mappingService.MapControlSettings(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.ControlSettings ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToControlSettings(this);
-        }
-        
-        public virtual Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ControlSettings), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ControlSettingsRichDTO))]
-    public partial class ControlSettingsFullDTO : Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettings, System.Guid>
-    {
-        
-        private Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO _parent;
-        
-        public ControlSettingsFullDTO()
-        {
-        }
-        
-        public ControlSettingsFullDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettings domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapControlSettings(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO Parent
-        {
-            get
-            {
-                return this._parent;
-            }
-            set
-            {
-                this._parent = value;
-            }
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettings domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapControlSettings(this, domainObject);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ControlSettings), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class ControlSettingsRichDTO : Framework.Configuration.Generated.DTO.ControlSettingsFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettings, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettings>
-    {
-        
-        private System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsRichDTO> _children = new System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsRichDTO>();
-        
-        private System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO> _controlSettingsParams = new System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO>();
-        
-        public ControlSettingsRichDTO()
-        {
-        }
-        
-        public ControlSettingsRichDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettings domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapControlSettings(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsRichDTO> Children
-        {
-            get
-            {
-                return this._children;
-            }
-            set
-            {
-                this._children = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO> ControlSettingsParams
-        {
-            get
-            {
-                return this._controlSettingsParams;
-            }
-            set
-            {
-                this._controlSettingsParams = value;
-            }
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettings domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapControlSettings(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.ControlSettings ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToControlSettings(this);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ControlSettings), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class ControlSettingsStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettings, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettings>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO>
-    {
-        
-        private System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO> _children = new System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO>();
-        
-        private System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO> _controlSettingsParams = new System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO>();
-        
-        private System.Guid _id;
-        
-        private string _name;
-        
-        private Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO _parent;
-        
-        private Framework.Configuration.Domain.ControlSettingsType _type;
-        
-        public ControlSettingsStrictDTO()
-        {
-        }
-        
-        public ControlSettingsStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsRichDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.ControlSettingsFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForControlSettings(this, source);
-        }
-        
-        public ControlSettingsStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsRichDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public ControlSettingsStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsFullDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForControlSettings(this, source);
-        }
-        
-        public ControlSettingsStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsFullDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public ControlSettingsStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForControlSettings(this, source);
-        }
-        
-        public ControlSettingsStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private ControlSettingsStrictDTO(Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.BasePersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBaseAuditPersistentToStrictForControlSettings(this, source);
-        }
-        
-        private ControlSettingsStrictDTO(Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private ControlSettingsStrictDTO(Framework.Configuration.Generated.DTO.BasePersistentDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBasePersistentToStrictForControlSettings(this, source);
-        }
-        
-        private ControlSettingsStrictDTO(Framework.Configuration.Generated.DTO.BasePersistentDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO> Children
-        {
-            get
-            {
-                return this._children;
-            }
-            set
-            {
-                this._children = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO> ControlSettingsParams
-        {
-            get
-            {
-                return this._controlSettingsParams;
-            }
-            set
-            {
-                this._controlSettingsParams = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO Identity
-        {
-            get
-            {
-                return new Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO Parent
-        {
-            get
-            {
-                return this._parent;
-            }
-            set
-            {
-                this._parent = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Domain.ControlSettingsType Type
-        {
-            get
-            {
-                return this._type;
-            }
-            set
-            {
-                this._type = value;
-            }
-        }
-        
-        public void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettings domainObject)
-        {
-            mappingService.MapControlSettings(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.ControlSettings ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToControlSettings(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ControlSettingsParam), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ControlSettingsParamFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO))]
-    public partial class ControlSettingsParamSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettingsParam, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettingsParam>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO>
-    {
-        
-        private Framework.Configuration.Domain.ControlSettingParamType _type;
-        
-        public ControlSettingsParamSimpleDTO()
-        {
-        }
-        
-        public ControlSettingsParamSimpleDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettingsParam domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapControlSettingsParam(domainObject, this);
-        }
-        
-        public ControlSettingsParamSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO Identity
-        {
-            get
-            {
-                return new Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Domain.ControlSettingParamType Type
-        {
-            get
-            {
-                return this._type;
-            }
-            set
-            {
-                this._type = value;
-            }
-        }
-        
-        public virtual void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettingsParam domainObject)
-        {
-            mappingService.MapControlSettingsParam(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.ControlSettingsParam ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToControlSettingsParam(this);
-        }
-        
-        public virtual Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ControlSettingsParam), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO))]
-    public partial class ControlSettingsParamFullDTO : Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettingsParam, System.Guid>
-    {
-        
-        private Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO _controlSettings;
-        
-        public ControlSettingsParamFullDTO()
-        {
-        }
-        
-        public ControlSettingsParamFullDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettingsParam domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapControlSettingsParam(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO ControlSettings
-        {
-            get
-            {
-                return this._controlSettings;
-            }
-            set
-            {
-                this._controlSettings = value;
-            }
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettingsParam domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapControlSettingsParam(this, domainObject);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ControlSettingsParam), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class ControlSettingsParamRichDTO : Framework.Configuration.Generated.DTO.ControlSettingsParamFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettingsParam, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettingsParam>
-    {
-        
-        private System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO> _controlSettingsParamValues = new System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO>();
-        
-        public ControlSettingsParamRichDTO()
-        {
-        }
-        
-        public ControlSettingsParamRichDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettingsParam domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapControlSettingsParam(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO> ControlSettingsParamValues
-        {
-            get
-            {
-                return this._controlSettingsParamValues;
-            }
-            set
-            {
-                this._controlSettingsParamValues = value;
-            }
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettingsParam domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapControlSettingsParam(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.ControlSettingsParam ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToControlSettingsParam(this);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ControlSettingsParam), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class ControlSettingsParamStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettingsParam, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettingsParam>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO>
-    {
-        
-        private System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO> _controlSettingsParamValues = new System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO>();
-        
-        private System.Guid _id;
-        
-        private Framework.Configuration.Domain.ControlSettingParamType _type;
-        
-        public ControlSettingsParamStrictDTO()
-        {
-        }
-        
-        public ControlSettingsParamStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.ControlSettingsParamFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForControlSettingsParam(this, source);
-        }
-        
-        public ControlSettingsParamStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public ControlSettingsParamStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsParamFullDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForControlSettingsParam(this, source);
-        }
-        
-        public ControlSettingsParamStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsParamFullDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public ControlSettingsParamStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForControlSettingsParam(this, source);
-        }
-        
-        public ControlSettingsParamStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private ControlSettingsParamStrictDTO(Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.BasePersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBaseAuditPersistentToStrictForControlSettingsParam(this, source);
-        }
-        
-        private ControlSettingsParamStrictDTO(Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private ControlSettingsParamStrictDTO(Framework.Configuration.Generated.DTO.BasePersistentDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBasePersistentToStrictForControlSettingsParam(this, source);
-        }
-        
-        private ControlSettingsParamStrictDTO(Framework.Configuration.Generated.DTO.BasePersistentDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO> ControlSettingsParamValues
-        {
-            get
-            {
-                return this._controlSettingsParamValues;
-            }
-            set
-            {
-                this._controlSettingsParamValues = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO Identity
-        {
-            get
-            {
-                return new Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Domain.ControlSettingParamType Type
-        {
-            get
-            {
-                return this._type;
-            }
-            set
-            {
-                this._type = value;
-            }
-        }
-        
-        public void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettingsParam domainObject)
-        {
-            mappingService.MapControlSettingsParam(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.ControlSettingsParam ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToControlSettingsParam(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ControlSettingsParamValue), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ControlSettingsParamValueFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO))]
-    public partial class ControlSettingsParamValueSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettingsParamValue, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettingsParamValue>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO>
-    {
-        
-        private string _culture;
-        
-        private string _value;
-        
-        private string _valueTypeName;
-        
-        public ControlSettingsParamValueSimpleDTO()
-        {
-        }
-        
-        public ControlSettingsParamValueSimpleDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettingsParamValue domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapControlSettingsParamValue(domainObject, this);
-        }
-        
-        public ControlSettingsParamValueSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Culture
-        {
-            get
-            {
-                return this._culture;
-            }
-            set
-            {
-                this._culture = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO Identity
-        {
-            get
-            {
-                return new Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this._value;
-            }
-            set
-            {
-                this._value = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ValueTypeName
-        {
-            get
-            {
-                return this._valueTypeName;
-            }
-            set
-            {
-                this._valueTypeName = value;
-            }
-        }
-        
-        public virtual void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettingsParamValue domainObject)
-        {
-            mappingService.MapControlSettingsParamValue(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.ControlSettingsParamValue ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToControlSettingsParamValue(this);
-        }
-        
-        public virtual Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ControlSettingsParamValue), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO))]
-    public partial class ControlSettingsParamValueFullDTO : Framework.Configuration.Generated.DTO.ControlSettingsParamValueSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettingsParamValue, System.Guid>
-    {
-        
-        private Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO _controlSettingsParam;
-        
-        public ControlSettingsParamValueFullDTO()
-        {
-        }
-        
-        public ControlSettingsParamValueFullDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettingsParamValue domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapControlSettingsParamValue(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO ControlSettingsParam
-        {
-            get
-            {
-                return this._controlSettingsParam;
-            }
-            set
-            {
-                this._controlSettingsParam = value;
-            }
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettingsParamValue domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapControlSettingsParamValue(this, domainObject);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ControlSettingsParamValue), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class ControlSettingsParamValueRichDTO : Framework.Configuration.Generated.DTO.ControlSettingsParamValueFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettingsParamValue, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettingsParamValue>
-    {
-        
-        public ControlSettingsParamValueRichDTO()
-        {
-        }
-        
-        public ControlSettingsParamValueRichDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettingsParamValue domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapControlSettingsParamValue(domainObject, this);
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettingsParamValue domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapControlSettingsParamValue(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.ControlSettingsParamValue ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToControlSettingsParamValue(this);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ControlSettingsParamValue), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class ControlSettingsParamValueStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettingsParamValue, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ControlSettingsParamValue>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO>
-    {
-        
-        private string _culture;
-        
-        private System.Guid _id;
-        
-        private string _value;
-        
-        private string _valueTypeName;
-        
-        public ControlSettingsParamValueStrictDTO()
-        {
-        }
-        
-        public ControlSettingsParamValueStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.ControlSettingsParamValueFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForControlSettingsParamValue(this, source);
-        }
-        
-        public ControlSettingsParamValueStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public ControlSettingsParamValueStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsParamValueFullDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.ControlSettingsParamValueSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForControlSettingsParamValue(this, source);
-        }
-        
-        public ControlSettingsParamValueStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsParamValueFullDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public ControlSettingsParamValueStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsParamValueSimpleDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForControlSettingsParamValue(this, source);
-        }
-        
-        public ControlSettingsParamValueStrictDTO(Framework.Configuration.Generated.DTO.ControlSettingsParamValueSimpleDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private ControlSettingsParamValueStrictDTO(Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.BasePersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBaseAuditPersistentToStrictForControlSettingsParamValue(this, source);
-        }
-        
-        private ControlSettingsParamValueStrictDTO(Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private ControlSettingsParamValueStrictDTO(Framework.Configuration.Generated.DTO.BasePersistentDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBasePersistentToStrictForControlSettingsParamValue(this, source);
-        }
-        
-        private ControlSettingsParamValueStrictDTO(Framework.Configuration.Generated.DTO.BasePersistentDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Culture
-        {
-            get
-            {
-                return this._culture;
-            }
-            set
-            {
-                this._culture = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO Identity
-        {
-            get
-            {
-                return new Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this._value;
-            }
-            set
-            {
-                this._value = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ValueTypeName
-        {
-            get
-            {
-                return this._valueTypeName;
-            }
-            set
-            {
-                this._valueTypeName = value;
-            }
-        }
-        
-        public void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ControlSettingsParamValue domainObject)
-        {
-            mappingService.MapControlSettingsParamValue(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.ControlSettingsParamValue ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToControlSettingsParamValue(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectEvent), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectEvent), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainObjectEventFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainObjectEventRichDTO))]
-    public partial class DomainObjectEventSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectEvent>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO>
+    public partial class DomainObjectEventSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectEvent>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO>
     {
         
         private System.Guid _domainObjectId;
@@ -4845,10 +2965,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectEvent), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectEvent), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainObjectEventRichDTO))]
-    public partial class DomainObjectEventFullDTO : Framework.Configuration.Generated.DTO.DomainObjectEventSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>
+    public partial class DomainObjectEventFullDTO : Framework.Configuration.Generated.DTO.DomainObjectEventSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>
     {
         
         private Framework.Configuration.Generated.DTO.DomainTypeEventOperationSimpleDTO _operation;
@@ -4888,9 +3008,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectEvent), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectEvent), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainObjectEventRichDTO : Framework.Configuration.Generated.DTO.DomainObjectEventFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectEvent>
+    public partial class DomainObjectEventRichDTO : Framework.Configuration.Generated.DTO.DomainObjectEventFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectEvent>
     {
         
         public DomainObjectEventRichDTO()
@@ -4925,9 +3045,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectEvent), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectEvent), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainObjectEventStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectEvent>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO>
+    public partial class DomainObjectEventStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectEvent>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO>
     {
         
         private System.Guid _domainObjectId;
@@ -5050,7 +3170,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -5161,11 +3281,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectModification), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectModification), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainObjectModificationFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainObjectModificationRichDTO))]
-    public partial class DomainObjectModificationSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectModification, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectModification>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainObjectModificationIdentityDTO>
+    public partial class DomainObjectModificationSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectModification, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectModification>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainObjectModificationIdentityDTO>
     {
         
         private System.Guid _domainObjectId;
@@ -5174,7 +3294,7 @@ namespace Framework.Configuration.Generated.DTO
         
         private long _revision;
         
-        private Framework.Persistent.ModificationType _type;
+        private Framework.Database.Domain.ModificationType _type;
         
         private long _version;
         
@@ -5242,7 +3362,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Persistent.ModificationType Type
+        public Framework.Database.Domain.ModificationType Type
         {
             get
             {
@@ -5283,10 +3403,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectModification), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectModification), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainObjectModificationRichDTO))]
-    public partial class DomainObjectModificationFullDTO : Framework.Configuration.Generated.DTO.DomainObjectModificationSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectModification, System.Guid>
+    public partial class DomainObjectModificationFullDTO : Framework.Configuration.Generated.DTO.DomainObjectModificationSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectModification, System.Guid>
     {
         
         private Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO _domainType;
@@ -5326,9 +3446,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectModification), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectModification), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainObjectModificationRichDTO : Framework.Configuration.Generated.DTO.DomainObjectModificationFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectModification, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectModification>
+    public partial class DomainObjectModificationRichDTO : Framework.Configuration.Generated.DTO.DomainObjectModificationFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectModification, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectModification>
     {
         
         public DomainObjectModificationRichDTO()
@@ -5363,9 +3483,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectModification), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectModification), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainObjectModificationStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectModification, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectModification>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainObjectModificationIdentityDTO>
+    public partial class DomainObjectModificationStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectModification, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectModification>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainObjectModificationIdentityDTO>
     {
         
         private System.Guid _domainObjectId;
@@ -5378,7 +3498,7 @@ namespace Framework.Configuration.Generated.DTO
         
         private long _revision;
         
-        private Framework.Persistent.ModificationType _type;
+        private Framework.Database.Domain.ModificationType _type;
         
         private long _version;
         
@@ -5499,7 +3619,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -5543,7 +3663,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Persistent.ModificationType Type
+        public Framework.Database.Domain.ModificationType Type
         {
             get
             {
@@ -5584,11 +3704,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectNotification), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectNotification), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainObjectNotificationFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainObjectNotificationRichDTO))]
-    public partial class DomainObjectNotificationSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectNotification, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectNotification>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO>
+    public partial class DomainObjectNotificationSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectNotification, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectNotification>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO>
     {
         
         private string _hostName;
@@ -5706,10 +3826,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectNotification), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectNotification), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainObjectNotificationRichDTO))]
-    public partial class DomainObjectNotificationFullDTO : Framework.Configuration.Generated.DTO.DomainObjectNotificationSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectNotification, System.Guid>
+    public partial class DomainObjectNotificationFullDTO : Framework.Configuration.Generated.DTO.DomainObjectNotificationSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectNotification, System.Guid>
     {
         
         public DomainObjectNotificationFullDTO()
@@ -5734,9 +3854,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectNotification), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectNotification), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainObjectNotificationRichDTO : Framework.Configuration.Generated.DTO.DomainObjectNotificationFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectNotification, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectNotification>
+    public partial class DomainObjectNotificationRichDTO : Framework.Configuration.Generated.DTO.DomainObjectNotificationFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectNotification, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectNotification>
     {
         
         public DomainObjectNotificationRichDTO()
@@ -5771,9 +3891,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectNotification), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainObjectNotification), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainObjectNotificationStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectNotification, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectNotification>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO>
+    public partial class DomainObjectNotificationStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectNotification, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectNotification>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO>
     {
         
         private System.Guid _id;
@@ -5873,7 +3993,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -5932,9 +4052,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainType), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainType), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainTypeVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType, System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO>
+    public partial class DomainTypeVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType, System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO>
     {
         
         private string _name;
@@ -5977,11 +4097,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainType), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainType), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainTypeFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainTypeRichDTO))]
-    public partial class DomainTypeSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO>
+    public partial class DomainTypeSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO>
     {
         
         private string _fullTypeName;
@@ -6069,10 +4189,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainType), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainType), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainTypeRichDTO))]
-    public partial class DomainTypeFullDTO : Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType, System.Guid>
+    public partial class DomainTypeFullDTO : Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType, System.Guid>
     {
         
         private Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO _targetSystem;
@@ -6112,9 +4232,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainType), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainType), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainTypeRichDTO : Framework.Configuration.Generated.DTO.DomainTypeFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType>
+    public partial class DomainTypeRichDTO : Framework.Configuration.Generated.DTO.DomainTypeFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType>
     {
         
         private System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeEventOperationRichDTO> _eventOperations = new System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeEventOperationRichDTO>();
@@ -6159,9 +4279,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainType), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainType), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainTypeStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO>
+    public partial class DomainTypeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO>
     {
         
         private System.Guid _id;
@@ -6257,7 +4377,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -6285,11 +4405,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventModel), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainTypeEventModelFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainTypeEventModelRichDTO))]
-    public partial class DomainTypeEventModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventModel>
+    public partial class DomainTypeEventModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventModel>
     {
         
         private long? _revision;
@@ -6328,10 +4448,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventModel), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainTypeEventModelRichDTO))]
-    public partial class DomainTypeEventModelFullDTO : Framework.Configuration.Generated.DTO.DomainTypeEventModelSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventModel>
+    public partial class DomainTypeEventModelFullDTO : Framework.Configuration.Generated.DTO.DomainTypeEventModelSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventModel>
     {
         
         private Framework.Configuration.Generated.DTO.DomainTypeEventOperationSimpleDTO _operation;
@@ -6371,9 +4491,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventModel), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainTypeEventModelRichDTO : Framework.Configuration.Generated.DTO.DomainTypeEventModelFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventModel>
+    public partial class DomainTypeEventModelRichDTO : Framework.Configuration.Generated.DTO.DomainTypeEventModelFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventModel>
     {
         
         private System.Collections.Generic.List<System.Guid> _domainObjectIdents = new System.Collections.Generic.List<System.Guid>();
@@ -6418,9 +4538,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventModel), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainTypeEventModelStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventModel>
+    public partial class DomainTypeEventModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventModel>
     {
         
         private System.Collections.Generic.List<System.Guid> _domainObjectIdents = new System.Collections.Generic.List<System.Guid>();
@@ -6527,9 +4647,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventOperation), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventOperation), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainTypeEventOperationVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation, System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO>
+    public partial class DomainTypeEventOperationVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation, System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO>
     {
         
         private string _name;
@@ -6572,11 +4692,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventOperation), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventOperation), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainTypeEventOperationFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainTypeEventOperationRichDTO))]
-    public partial class DomainTypeEventOperationSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO>
+    public partial class DomainTypeEventOperationSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO>
     {
         
         private string _name;
@@ -6634,10 +4754,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventOperation), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventOperation), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainTypeEventOperationRichDTO))]
-    public partial class DomainTypeEventOperationFullDTO : Framework.Configuration.Generated.DTO.DomainTypeEventOperationSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation, System.Guid>
+    public partial class DomainTypeEventOperationFullDTO : Framework.Configuration.Generated.DTO.DomainTypeEventOperationSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation, System.Guid>
     {
         
         private Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO _domainType;
@@ -6677,9 +4797,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventOperation), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventOperation), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainTypeEventOperationRichDTO : Framework.Configuration.Generated.DTO.DomainTypeEventOperationFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation>
+    public partial class DomainTypeEventOperationRichDTO : Framework.Configuration.Generated.DTO.DomainTypeEventOperationFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation>
     {
         
         public DomainTypeEventOperationRichDTO()
@@ -6709,9 +4829,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventOperation), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeEventOperation), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainTypeEventOperationStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO>
+    public partial class DomainTypeEventOperationStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO>
     {
         
         private System.Guid _id;
@@ -6809,7 +4929,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -6850,11 +4970,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeRootFilterModel), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeRootFilterModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelRichDTO))]
-    public partial class DomainTypeRootFilterModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeRootFilterModel>
+    public partial class DomainTypeRootFilterModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeRootFilterModel>
     {
         
         public DomainTypeRootFilterModelSimpleDTO()
@@ -6878,10 +4998,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeRootFilterModel), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeRootFilterModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelRichDTO))]
-    public partial class DomainTypeRootFilterModelFullDTO : Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeRootFilterModel>
+    public partial class DomainTypeRootFilterModelFullDTO : Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeRootFilterModel>
     {
         
         private Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO _targetSystem;
@@ -6921,9 +5041,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeRootFilterModel), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeRootFilterModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainTypeRootFilterModelRichDTO : Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeRootFilterModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeRootFilterModel>
+    public partial class DomainTypeRootFilterModelRichDTO : Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeRootFilterModel>
     {
         
         public DomainTypeRootFilterModelRichDTO()
@@ -6953,9 +5073,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeRootFilterModel), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainTypeRootFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainTypeRootFilterModelStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeRootFilterModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeRootFilterModel>
+    public partial class DomainTypeRootFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeRootFilterModel>
     {
         
         private Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO _targetSystem;
@@ -7032,616 +5152,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ExceptionMessage), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO))]
-    public partial class ExceptionMessageSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExceptionMessage, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExceptionMessage>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO>
-    {
-        
-        private bool _isClient;
-        
-        private bool _isRoot;
-        
-        private string _message;
-        
-        private string _messageType;
-        
-        private string _stackTrace;
-        
-        public ExceptionMessageSimpleDTO()
-        {
-        }
-        
-        public ExceptionMessageSimpleDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExceptionMessage domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapExceptionMessage(domainObject, this);
-        }
-        
-        public ExceptionMessageSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO Identity
-        {
-            get
-            {
-                return new Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsClient
-        {
-            get
-            {
-                return this._isClient;
-            }
-            set
-            {
-                this._isClient = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsRoot
-        {
-            get
-            {
-                return this._isRoot;
-            }
-            set
-            {
-                this._isRoot = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message
-        {
-            get
-            {
-                return this._message;
-            }
-            set
-            {
-                this._message = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string MessageType
-        {
-            get
-            {
-                return this._messageType;
-            }
-            set
-            {
-                this._messageType = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StackTrace
-        {
-            get
-            {
-                return this._stackTrace;
-            }
-            set
-            {
-                this._stackTrace = value;
-            }
-        }
-        
-        public virtual void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExceptionMessage domainObject)
-        {
-            mappingService.MapExceptionMessage(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.ExceptionMessage ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToExceptionMessage(this);
-        }
-        
-        public virtual Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ExceptionMessage), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO))]
-    public partial class ExceptionMessageFullDTO : Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExceptionMessage, System.Guid>
-    {
-        
-        public ExceptionMessageFullDTO()
-        {
-        }
-        
-        public ExceptionMessageFullDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExceptionMessage domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapExceptionMessage(domainObject, this);
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExceptionMessage domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapExceptionMessage(this, domainObject);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ExceptionMessage), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class ExceptionMessageRichDTO : Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExceptionMessage, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExceptionMessage>
-    {
-        
-        private Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO _innerException;
-        
-        public ExceptionMessageRichDTO()
-        {
-        }
-        
-        public ExceptionMessageRichDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExceptionMessage domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapExceptionMessage(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO InnerException
-        {
-            get
-            {
-                return this._innerException;
-            }
-            set
-            {
-                this._innerException = value;
-            }
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExceptionMessage domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapExceptionMessage(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.ExceptionMessage ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToExceptionMessage(this);
-        }
-        
-        public Framework.Configuration.Domain.ExceptionMessage ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, bool allowCreate)
-        {
-            return mappingService.ToExceptionMessage(this, allowCreate);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ExceptionMessage), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class ExceptionMessageStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExceptionMessage, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExceptionMessage>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO>
-    {
-        
-        private System.Guid _id;
-        
-        private Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO _innerException;
-        
-        private string _message;
-        
-        private string _messageType;
-        
-        private string _stackTrace;
-        
-        public ExceptionMessageStrictDTO()
-        {
-        }
-        
-        public ExceptionMessageStrictDTO(Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForExceptionMessage(this, source);
-        }
-        
-        public ExceptionMessageStrictDTO(Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public ExceptionMessageStrictDTO(Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForExceptionMessage(this, source);
-        }
-        
-        public ExceptionMessageStrictDTO(Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public ExceptionMessageStrictDTO(Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForExceptionMessage(this, source);
-        }
-        
-        public ExceptionMessageStrictDTO(Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private ExceptionMessageStrictDTO(Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.BasePersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBaseAuditPersistentToStrictForExceptionMessage(this, source);
-        }
-        
-        private ExceptionMessageStrictDTO(Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private ExceptionMessageStrictDTO(Framework.Configuration.Generated.DTO.BasePersistentDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBasePersistentToStrictForExceptionMessage(this, source);
-        }
-        
-        private ExceptionMessageStrictDTO(Framework.Configuration.Generated.DTO.BasePersistentDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO Identity
-        {
-            get
-            {
-                return new Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO InnerException
-        {
-            get
-            {
-                return this._innerException;
-            }
-            set
-            {
-                this._innerException = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message
-        {
-            get
-            {
-                return this._message;
-            }
-            set
-            {
-                this._message = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string MessageType
-        {
-            get
-            {
-                return this._messageType;
-            }
-            set
-            {
-                this._messageType = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StackTrace
-        {
-            get
-            {
-                return this._stackTrace;
-            }
-            set
-            {
-                this._stackTrace = value;
-            }
-        }
-        
-        public void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExceptionMessage domainObject)
-        {
-            mappingService.MapExceptionMessage(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.ExceptionMessage ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToExceptionMessage(this);
-        }
-        
-        public Framework.Configuration.Domain.ExceptionMessage ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, bool allowCreate)
-        {
-            return mappingService.ToExceptionMessage(this, allowCreate);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ExceptionMessageRootFilterModel), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO))]
-    public partial class ExceptionMessageRootFilterModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExceptionMessageRootFilterModel>
-    {
-        
-        private bool _isRoot;
-        
-        private Period _period = Period.Eternity;
-        
-        public ExceptionMessageRootFilterModelSimpleDTO()
-        {
-        }
-        
-        public ExceptionMessageRootFilterModelSimpleDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapExceptionMessageRootFilterModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsRoot
-        {
-            get
-            {
-                return this._isRoot;
-            }
-            set
-            {
-                this._isRoot = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
-        {
-            get
-            {
-                return this._period;
-            }
-            set
-            {
-                this._period = value;
-            }
-        }
-        
-        public virtual void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject)
-        {
-            mappingService.MapExceptionMessageRootFilterModel(this, domainObject);
-        }
-        
-        public virtual Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ExceptionMessageRootFilterModel), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO))]
-    public partial class ExceptionMessageRootFilterModelFullDTO : Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExceptionMessageRootFilterModel>
-    {
-        
-        public ExceptionMessageRootFilterModelFullDTO()
-        {
-        }
-        
-        public ExceptionMessageRootFilterModelFullDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapExceptionMessageRootFilterModel(domainObject, this);
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapExceptionMessageRootFilterModel(this, domainObject);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ExceptionMessageRootFilterModel), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class ExceptionMessageRootFilterModelRichDTO : Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExceptionMessageRootFilterModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExceptionMessageRootFilterModel>
-    {
-        
-        public ExceptionMessageRootFilterModelRichDTO()
-        {
-        }
-        
-        public ExceptionMessageRootFilterModelRichDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapExceptionMessageRootFilterModel(domainObject, this);
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapExceptionMessageRootFilterModel(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.ExceptionMessageRootFilterModel ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToExceptionMessageRootFilterModel(this);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ExceptionMessageRootFilterModel), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class ExceptionMessageRootFilterModelStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExceptionMessageRootFilterModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExceptionMessageRootFilterModel>
-    {
-        
-        private bool _isRoot;
-        
-        private Period _period;
-        
-        public ExceptionMessageRootFilterModelStrictDTO()
-        {
-        }
-        
-        public ExceptionMessageRootFilterModelStrictDTO(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForExceptionMessageRootFilterModel(this, source);
-        }
-        
-        public ExceptionMessageRootFilterModelStrictDTO(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public ExceptionMessageRootFilterModelStrictDTO(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForExceptionMessageRootFilterModel(this, source);
-        }
-        
-        public ExceptionMessageRootFilterModelStrictDTO(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public ExceptionMessageRootFilterModelStrictDTO(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForExceptionMessageRootFilterModel(this, source);
-        }
-        
-        public ExceptionMessageRootFilterModelStrictDTO(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsRoot
-        {
-            get
-            {
-                return this._isRoot;
-            }
-            set
-            {
-                this._isRoot = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
-        {
-            get
-            {
-                return this._period;
-            }
-            set
-            {
-                this._period = value;
-            }
-        }
-        
-        public void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject)
-        {
-            mappingService.MapExceptionMessageRootFilterModel(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.ExceptionMessageRootFilterModel ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToExceptionMessageRootFilterModel(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.QueueProcessingState), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.QueueProcessingState), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.QueueProcessingStateFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.QueueProcessingStateRichDTO))]
-    public partial class QueueProcessingStateSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.QueueProcessingState>
+    public partial class QueueProcessingStateSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.QueueProcessingState>
     {
         
         private System.DateTime? _lastProcessedItemDateTime;
@@ -7695,10 +5210,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.QueueProcessingState), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.QueueProcessingState), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.QueueProcessingStateRichDTO))]
-    public partial class QueueProcessingStateFullDTO : Framework.Configuration.Generated.DTO.QueueProcessingStateSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.QueueProcessingState>
+    public partial class QueueProcessingStateFullDTO : Framework.Configuration.Generated.DTO.QueueProcessingStateSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.QueueProcessingState>
     {
         
         public QueueProcessingStateFullDTO()
@@ -7723,9 +5238,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.QueueProcessingState), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.QueueProcessingState), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class QueueProcessingStateRichDTO : Framework.Configuration.Generated.DTO.QueueProcessingStateFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.QueueProcessingState>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.QueueProcessingState>
+    public partial class QueueProcessingStateRichDTO : Framework.Configuration.Generated.DTO.QueueProcessingStateFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.QueueProcessingState>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.QueueProcessingState>
     {
         
         public QueueProcessingStateRichDTO()
@@ -7755,9 +5270,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.QueueProcessingState), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.QueueProcessingState), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class QueueProcessingStateStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.QueueProcessingState>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.QueueProcessingState>
+    public partial class QueueProcessingStateStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.QueueProcessingState>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.QueueProcessingState>
     {
         
         private System.DateTime? _lastProcessedItemDateTime;
@@ -7849,11 +5364,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SentMessage), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SentMessage), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SentMessageFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SentMessageRichDTO))]
-    public partial class SentMessageSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SentMessage, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SentMessage>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SentMessageIdentityDTO>
+    public partial class SentMessageSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SentMessage, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SentMessage>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SentMessageIdentityDTO>
     {
         
         private string _comment;
@@ -8046,10 +5561,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SentMessage), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SentMessage), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SentMessageRichDTO))]
-    public partial class SentMessageFullDTO : Framework.Configuration.Generated.DTO.SentMessageSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SentMessage, System.Guid>
+    public partial class SentMessageFullDTO : Framework.Configuration.Generated.DTO.SentMessageSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SentMessage, System.Guid>
     {
         
         public SentMessageFullDTO()
@@ -8074,9 +5589,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SentMessage), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SentMessage), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class SentMessageRichDTO : Framework.Configuration.Generated.DTO.SentMessageFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SentMessage, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SentMessage>
+    public partial class SentMessageRichDTO : Framework.Configuration.Generated.DTO.SentMessageFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SentMessage, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SentMessage>
     {
         
         public SentMessageRichDTO()
@@ -8106,9 +5621,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SentMessage), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SentMessage), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class SentMessageStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SentMessage, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SentMessage>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SentMessageIdentityDTO>
+    public partial class SentMessageStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SentMessage, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SentMessage>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SentMessageIdentityDTO>
     {
         
         private System.Guid _id;
@@ -8204,7 +5719,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -8232,9 +5747,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Sequence), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Sequence), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class SequenceVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence, System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SequenceIdentityDTO>
+    public partial class SequenceVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence, System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SequenceIdentityDTO>
     {
         
         private string _name;
@@ -8277,11 +5792,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Sequence), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Sequence), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SequenceFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SequenceRichDTO))]
-    public partial class SequenceSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SequenceIdentityDTO>
+    public partial class SequenceSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SequenceIdentityDTO>
     {
         
         private string _name;
@@ -8354,10 +5869,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Sequence), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Sequence), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SequenceRichDTO))]
-    public partial class SequenceFullDTO : Framework.Configuration.Generated.DTO.SequenceSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence, System.Guid>
+    public partial class SequenceFullDTO : Framework.Configuration.Generated.DTO.SequenceSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence, System.Guid>
     {
         
         public SequenceFullDTO()
@@ -8382,9 +5897,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Sequence), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Sequence), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class SequenceRichDTO : Framework.Configuration.Generated.DTO.SequenceFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence>
+    public partial class SequenceRichDTO : Framework.Configuration.Generated.DTO.SequenceFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence>
     {
         
         public SequenceRichDTO()
@@ -8419,9 +5934,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Sequence), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Sequence), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class SequenceStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SequenceIdentityDTO>
+    public partial class SequenceStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SequenceIdentityDTO>
     {
         
         private System.Guid _id;
@@ -8521,7 +6036,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -8580,11 +6095,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SequenceCreateModel), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SequenceCreateModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SequenceCreateModelFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SequenceCreateModelRichDTO))]
-    public partial class SequenceCreateModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceCreateModel>
+    public partial class SequenceCreateModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceCreateModel>
     {
         
         public SequenceCreateModelSimpleDTO()
@@ -8608,10 +6123,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SequenceCreateModel), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SequenceCreateModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SequenceCreateModelRichDTO))]
-    public partial class SequenceCreateModelFullDTO : Framework.Configuration.Generated.DTO.SequenceCreateModelSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceCreateModel>
+    public partial class SequenceCreateModelFullDTO : Framework.Configuration.Generated.DTO.SequenceCreateModelSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceCreateModel>
     {
         
         public SequenceCreateModelFullDTO()
@@ -8636,9 +6151,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SequenceCreateModel), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SequenceCreateModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class SequenceCreateModelRichDTO : Framework.Configuration.Generated.DTO.SequenceCreateModelFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceCreateModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceCreateModel>
+    public partial class SequenceCreateModelRichDTO : Framework.Configuration.Generated.DTO.SequenceCreateModelFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceCreateModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceCreateModel>
     {
         
         public SequenceCreateModelRichDTO()
@@ -8668,9 +6183,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SequenceCreateModel), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SequenceCreateModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class SequenceCreateModelStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceCreateModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceCreateModel>
+    public partial class SequenceCreateModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceCreateModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceCreateModel>
     {
         
         public SequenceCreateModelStrictDTO()
@@ -8732,11 +6247,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SequenceRootFilterModel), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SequenceRootFilterModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SequenceRootFilterModelFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SequenceRootFilterModelRichDTO))]
-    public partial class SequenceRootFilterModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceRootFilterModel>
+    public partial class SequenceRootFilterModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceRootFilterModel>
     {
         
         public SequenceRootFilterModelSimpleDTO()
@@ -8760,10 +6275,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SequenceRootFilterModel), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SequenceRootFilterModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SequenceRootFilterModelRichDTO))]
-    public partial class SequenceRootFilterModelFullDTO : Framework.Configuration.Generated.DTO.SequenceRootFilterModelSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceRootFilterModel>
+    public partial class SequenceRootFilterModelFullDTO : Framework.Configuration.Generated.DTO.SequenceRootFilterModelSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceRootFilterModel>
     {
         
         public SequenceRootFilterModelFullDTO()
@@ -8788,9 +6303,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SequenceRootFilterModel), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SequenceRootFilterModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class SequenceRootFilterModelRichDTO : Framework.Configuration.Generated.DTO.SequenceRootFilterModelFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceRootFilterModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceRootFilterModel>
+    public partial class SequenceRootFilterModelRichDTO : Framework.Configuration.Generated.DTO.SequenceRootFilterModelFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceRootFilterModel>
     {
         
         public SequenceRootFilterModelRichDTO()
@@ -8820,9 +6335,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SequenceRootFilterModel), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SequenceRootFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class SequenceRootFilterModelStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceRootFilterModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceRootFilterModel>
+    public partial class SequenceRootFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SequenceRootFilterModel>
     {
         
         public SequenceRootFilterModelStrictDTO()
@@ -8884,9 +6399,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstant), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstant), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class SystemConstantVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant, System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO>
+    public partial class SystemConstantVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant, System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO>
     {
         
         private string _code;
@@ -8929,11 +6444,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstant), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstant), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SystemConstantFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SystemConstantRichDTO))]
-    public partial class SystemConstantSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO>
+    public partial class SystemConstantSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO>
     {
         
         private string _code;
@@ -9036,10 +6551,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstant), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstant), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SystemConstantRichDTO))]
-    public partial class SystemConstantFullDTO : Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant, System.Guid>
+    public partial class SystemConstantFullDTO : Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant, System.Guid>
     {
         
         private Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO _type;
@@ -9079,9 +6594,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstant), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstant), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class SystemConstantRichDTO : Framework.Configuration.Generated.DTO.SystemConstantFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant>
+    public partial class SystemConstantRichDTO : Framework.Configuration.Generated.DTO.SystemConstantFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant>
     {
         
         public SystemConstantRichDTO()
@@ -9116,9 +6631,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstant), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstant), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class SystemConstantStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO>
+    public partial class SystemConstantStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO>
     {
         
         private string _description;
@@ -9231,7 +6746,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -9277,11 +6792,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstantRootFilterModel), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstantRootFilterModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelRichDTO))]
-    public partial class SystemConstantRootFilterModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstantRootFilterModel>
+    public partial class SystemConstantRootFilterModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstantRootFilterModel>
     {
         
         public SystemConstantRootFilterModelSimpleDTO()
@@ -9305,10 +6820,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstantRootFilterModel), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstantRootFilterModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelRichDTO))]
-    public partial class SystemConstantRootFilterModelFullDTO : Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstantRootFilterModel>
+    public partial class SystemConstantRootFilterModelFullDTO : Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstantRootFilterModel>
     {
         
         public SystemConstantRootFilterModelFullDTO()
@@ -9333,9 +6848,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstantRootFilterModel), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstantRootFilterModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class SystemConstantRootFilterModelRichDTO : Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstantRootFilterModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstantRootFilterModel>
+    public partial class SystemConstantRootFilterModelRichDTO : Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstantRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstantRootFilterModel>
     {
         
         public SystemConstantRootFilterModelRichDTO()
@@ -9365,9 +6880,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstantRootFilterModel), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstantRootFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class SystemConstantRootFilterModelStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstantRootFilterModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstantRootFilterModel>
+    public partial class SystemConstantRootFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstantRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstantRootFilterModel>
     {
         
         public SystemConstantRootFilterModelStrictDTO()
@@ -9429,9 +6944,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystem), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystem), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class TargetSystemVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystem, System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO>
+    public partial class TargetSystemVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystem, System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO>
     {
         
         private string _name;
@@ -9474,11 +6989,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystem), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystem), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.TargetSystemFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.TargetSystemRichDTO))]
-    public partial class TargetSystemSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystem, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystem>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO>
+    public partial class TargetSystemSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystem, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystem>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO>
     {
         
         private bool _isBase;
@@ -9596,10 +7111,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystem), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystem), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.TargetSystemRichDTO))]
-    public partial class TargetSystemFullDTO : Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystem, System.Guid>
+    public partial class TargetSystemFullDTO : Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystem, System.Guid>
     {
         
         public TargetSystemFullDTO()
@@ -9624,9 +7139,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystem), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystem), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class TargetSystemRichDTO : Framework.Configuration.Generated.DTO.TargetSystemFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystem, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystem>
+    public partial class TargetSystemRichDTO : Framework.Configuration.Generated.DTO.TargetSystemFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystem, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystem>
     {
         
         private System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeRichDTO> _domainTypes = new System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeRichDTO>();
@@ -9671,9 +7186,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystem), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystem), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class TargetSystemStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystem, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystem>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO>
+    public partial class TargetSystemStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystem, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystem>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO>
     {
         
         private System.Guid _id;
@@ -9773,7 +7288,7 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -9827,11 +7342,11 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystemRootFilterModel), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystemRootFilterModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelRichDTO))]
-    public partial class TargetSystemRootFilterModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystemRootFilterModel>
+    public partial class TargetSystemRootFilterModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystemRootFilterModel>
     {
         
         private bool? _isMain;
@@ -9900,10 +7415,10 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystemRootFilterModel), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystemRootFilterModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelRichDTO))]
-    public partial class TargetSystemRootFilterModelFullDTO : Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystemRootFilterModel>
+    public partial class TargetSystemRootFilterModelFullDTO : Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystemRootFilterModel>
     {
         
         public TargetSystemRootFilterModelFullDTO()
@@ -9928,9 +7443,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystemRootFilterModel), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystemRootFilterModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class TargetSystemRootFilterModelRichDTO : Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystemRootFilterModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystemRootFilterModel>
+    public partial class TargetSystemRootFilterModelRichDTO : Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystemRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystemRootFilterModel>
     {
         
         public TargetSystemRootFilterModelRichDTO()
@@ -9960,9 +7475,9 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystemRootFilterModel), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystemRootFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class TargetSystemRootFilterModelStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystemRootFilterModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystemRootFilterModel>
+    public partial class TargetSystemRootFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystemRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystemRootFilterModel>
     {
         
         private bool? _isMain;
@@ -10084,21 +7599,6 @@ namespace Framework.Configuration.Generated.DTO
             return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO(mappingService, domainObject);
         }
         
-        public static Framework.Configuration.Generated.DTO.ControlSettingsFullDTO ToFullDTO(this Framework.Configuration.Domain.ControlSettings domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsFullDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ControlSettingsParamFullDTO ToFullDTO(this Framework.Configuration.Domain.ControlSettingsParam domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsParamFullDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ControlSettingsParamValueFullDTO ToFullDTO(this Framework.Configuration.Domain.ControlSettingsParamValue domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsParamValueFullDTO(mappingService, domainObject);
-        }
-        
         public static Framework.Configuration.Generated.DTO.DomainObjectEventFullDTO ToFullDTO(this Framework.Configuration.Domain.DomainObjectEvent domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.DomainObjectEventFullDTO(mappingService, domainObject);
@@ -10132,16 +7632,6 @@ namespace Framework.Configuration.Generated.DTO
         public static Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelFullDTO ToFullDTO(this Framework.Configuration.Domain.DomainTypeRootFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelFullDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO ToFullDTO(this Framework.Configuration.Domain.ExceptionMessage domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO ToFullDTO(this Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO(mappingService, domainObject);
         }
         
         public static Framework.Configuration.Generated.DTO.QueueProcessingStateFullDTO ToFullDTO(this Framework.Configuration.Domain.QueueProcessingState domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -10199,21 +7689,6 @@ namespace Framework.Configuration.Generated.DTO
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettings> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParam> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamValueFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParamValue> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
-        }
-        
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectEventFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectEvent> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
@@ -10245,16 +7720,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainTypeRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ExceptionMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ExceptionMessageRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
@@ -10309,21 +7774,6 @@ namespace Framework.Configuration.Generated.DTO
             return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO(domainObject);
         }
         
-        public static Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO ToIdentityDTO(this Framework.Configuration.Domain.ControlSettings domainObject)
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO(domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO ToIdentityDTO(this Framework.Configuration.Domain.ControlSettingsParam domainObject)
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO(domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO ToIdentityDTO(this Framework.Configuration.Domain.ControlSettingsParamValue domainObject)
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO(domainObject);
-        }
-        
         public static Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO ToIdentityDTO(this Framework.Configuration.Domain.DomainObjectEvent domainObject)
         {
             return new Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO(domainObject);
@@ -10347,11 +7797,6 @@ namespace Framework.Configuration.Generated.DTO
         public static Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO ToIdentityDTO(this Framework.Configuration.Domain.DomainTypeEventOperation domainObject)
         {
             return new Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO(domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO ToIdentityDTO(this Framework.Configuration.Domain.ExceptionMessage domainObject)
-        {
-            return new Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO(domainObject);
         }
         
         public static Framework.Configuration.Generated.DTO.SentMessageIdentityDTO ToIdentityDTO(this Framework.Configuration.Domain.SentMessage domainObject)
@@ -10379,21 +7824,6 @@ namespace Framework.Configuration.Generated.DTO
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettings> domainObjects)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParam> domainObjects)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParamValue> domainObjects)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
-        }
-        
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectEvent> domainObjects)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
@@ -10415,11 +7845,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainTypeEventOperation> domainObjects)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ExceptionMessage> domainObjects)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
@@ -10452,21 +7877,6 @@ namespace Framework.Configuration.Generated.DTO
         public static Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO ToRichDTO(this Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ControlSettingsRichDTO ToRichDTO(this Framework.Configuration.Domain.ControlSettings domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsRichDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO ToRichDTO(this Framework.Configuration.Domain.ControlSettingsParam domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO ToRichDTO(this Framework.Configuration.Domain.ControlSettingsParamValue domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO(mappingService, domainObject);
         }
         
         public static Framework.Configuration.Generated.DTO.DomainObjectEventRichDTO ToRichDTO(this Framework.Configuration.Domain.DomainObjectEvent domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -10502,16 +7912,6 @@ namespace Framework.Configuration.Generated.DTO
         public static Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelRichDTO ToRichDTO(this Framework.Configuration.Domain.DomainTypeRootFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelRichDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO ToRichDTO(this Framework.Configuration.Domain.ExceptionMessage domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO ToRichDTO(this Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO(mappingService, domainObject);
         }
         
         public static Framework.Configuration.Generated.DTO.QueueProcessingStateRichDTO ToRichDTO(this Framework.Configuration.Domain.QueueProcessingState domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -10569,21 +7969,6 @@ namespace Framework.Configuration.Generated.DTO
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettings> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParam> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParamValue> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
-        }
-        
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectEventRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectEvent> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
@@ -10615,16 +8000,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainTypeRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ExceptionMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ExceptionMessageRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
@@ -10684,21 +8059,6 @@ namespace Framework.Configuration.Generated.DTO
             return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO(mappingService, domainObject);
         }
         
-        public static Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.ControlSettings domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.ControlSettingsParam domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ControlSettingsParamValueSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.ControlSettingsParamValue domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsParamValueSimpleDTO(mappingService, domainObject);
-        }
-        
         public static Framework.Configuration.Generated.DTO.DomainObjectEventSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.DomainObjectEvent domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.DomainObjectEventSimpleDTO(mappingService, domainObject);
@@ -10732,16 +8092,6 @@ namespace Framework.Configuration.Generated.DTO
         public static Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.DomainTypeRootFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelSimpleDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.ExceptionMessage domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO(mappingService, domainObject);
         }
         
         public static Framework.Configuration.Generated.DTO.QueueProcessingStateSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.QueueProcessingState domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -10799,21 +8149,6 @@ namespace Framework.Configuration.Generated.DTO
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettings> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParam> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsParamValueSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParamValue> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
-        }
-        
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectEventSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectEvent> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
@@ -10845,16 +8180,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainTypeRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ExceptionMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ExceptionMessageRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
@@ -10904,11 +8229,6 @@ namespace Framework.Configuration.Generated.DTO
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
-        public static Framework.Configuration.Generated.DTO.ControlSettingsVisualDTO ToVisualDTO(this Framework.Configuration.Domain.ControlSettings domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ControlSettingsVisualDTO(mappingService, domainObject);
-        }
-        
         public static Framework.Configuration.Generated.DTO.DomainTypeVisualDTO ToVisualDTO(this Framework.Configuration.Domain.DomainType domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.DomainTypeVisualDTO(mappingService, domainObject);
@@ -10932,11 +8252,6 @@ namespace Framework.Configuration.Generated.DTO
         public static Framework.Configuration.Generated.DTO.TargetSystemVisualDTO ToVisualDTO(this Framework.Configuration.Domain.TargetSystem domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.TargetSystemVisualDTO(mappingService, domainObject);
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ControlSettingsVisualDTO> ToVisualDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettings> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeVisualDTO> ToVisualDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainType> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -10966,7 +8281,7 @@ namespace Framework.Configuration.Generated.DTO
     }
     #endregion
     
-    public partial interface IConfigurationDTOMappingService : Framework.DomainDriven.IDTOMappingService<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>
+    public partial interface IConfigurationDTOMappingService : Framework.BLL.DTOMapping.Services.IDTOMappingService<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>
     {
         
         void MapAuditPersistentDomainObjectBase(Framework.Configuration.Domain.AuditPersistentDomainObjectBase domainObject, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO mappingObject);
@@ -10998,52 +8313,6 @@ namespace Framework.Configuration.Generated.DTO
         void MapCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject);
         
         void MapCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject);
-        
-        void MapControlSettings(Framework.Configuration.Domain.ControlSettings domainObject, Framework.Configuration.Generated.DTO.ControlSettingsVisualDTO mappingObject);
-        
-        void MapControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsVisualDTO mappingObject, Framework.Configuration.Domain.ControlSettings domainObject);
-        
-        void MapControlSettings(Framework.Configuration.Domain.ControlSettings domainObject, Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO mappingObject);
-        
-        void MapControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO mappingObject, Framework.Configuration.Domain.ControlSettings domainObject);
-        
-        void MapControlSettings(Framework.Configuration.Domain.ControlSettings domainObject, Framework.Configuration.Generated.DTO.ControlSettingsFullDTO mappingObject);
-        
-        void MapControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsFullDTO mappingObject, Framework.Configuration.Domain.ControlSettings domainObject);
-        
-        void MapControlSettings(Framework.Configuration.Domain.ControlSettings domainObject, Framework.Configuration.Generated.DTO.ControlSettingsRichDTO mappingObject);
-        
-        void MapControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsRichDTO mappingObject, Framework.Configuration.Domain.ControlSettings domainObject);
-        
-        void MapControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO mappingObject, Framework.Configuration.Domain.ControlSettings domainObject);
-        
-        void MapControlSettingsParam(Framework.Configuration.Domain.ControlSettingsParam domainObject, Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO mappingObject);
-        
-        void MapControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO mappingObject, Framework.Configuration.Domain.ControlSettingsParam domainObject);
-        
-        void MapControlSettingsParam(Framework.Configuration.Domain.ControlSettingsParam domainObject, Framework.Configuration.Generated.DTO.ControlSettingsParamFullDTO mappingObject);
-        
-        void MapControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamFullDTO mappingObject, Framework.Configuration.Domain.ControlSettingsParam domainObject);
-        
-        void MapControlSettingsParam(Framework.Configuration.Domain.ControlSettingsParam domainObject, Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO mappingObject);
-        
-        void MapControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO mappingObject, Framework.Configuration.Domain.ControlSettingsParam domainObject);
-        
-        void MapControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO mappingObject, Framework.Configuration.Domain.ControlSettingsParam domainObject);
-        
-        void MapControlSettingsParamValue(Framework.Configuration.Domain.ControlSettingsParamValue domainObject, Framework.Configuration.Generated.DTO.ControlSettingsParamValueSimpleDTO mappingObject);
-        
-        void MapControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueSimpleDTO mappingObject, Framework.Configuration.Domain.ControlSettingsParamValue domainObject);
-        
-        void MapControlSettingsParamValue(Framework.Configuration.Domain.ControlSettingsParamValue domainObject, Framework.Configuration.Generated.DTO.ControlSettingsParamValueFullDTO mappingObject);
-        
-        void MapControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueFullDTO mappingObject, Framework.Configuration.Domain.ControlSettingsParamValue domainObject);
-        
-        void MapControlSettingsParamValue(Framework.Configuration.Domain.ControlSettingsParamValue domainObject, Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO mappingObject);
-        
-        void MapControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO mappingObject, Framework.Configuration.Domain.ControlSettingsParamValue domainObject);
-        
-        void MapControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO mappingObject, Framework.Configuration.Domain.ControlSettingsParamValue domainObject);
         
         void MapDomainObjectBase(Framework.Configuration.Domain.DomainObjectBase domainObject, Framework.Configuration.Generated.DTO.BaseAbstractDTO mappingObject);
         
@@ -11152,34 +8421,6 @@ namespace Framework.Configuration.Generated.DTO
         void MapDomainTypeRootFilterModel(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelRichDTO mappingObject, Framework.Configuration.Domain.DomainTypeRootFilterModel domainObject);
         
         void MapDomainTypeRootFilterModel(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO mappingObject, Framework.Configuration.Domain.DomainTypeRootFilterModel domainObject);
-        
-        void MapExceptionMessage(Framework.Configuration.Domain.ExceptionMessage domainObject, Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO mappingObject);
-        
-        void MapExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO mappingObject, Framework.Configuration.Domain.ExceptionMessage domainObject);
-        
-        void MapExceptionMessage(Framework.Configuration.Domain.ExceptionMessage domainObject, Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO mappingObject);
-        
-        void MapExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO mappingObject, Framework.Configuration.Domain.ExceptionMessage domainObject);
-        
-        void MapExceptionMessage(Framework.Configuration.Domain.ExceptionMessage domainObject, Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO mappingObject);
-        
-        void MapExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO mappingObject, Framework.Configuration.Domain.ExceptionMessage domainObject);
-        
-        void MapExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO mappingObject, Framework.Configuration.Domain.ExceptionMessage domainObject);
-        
-        void MapExceptionMessageRootFilterModel(Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO mappingObject);
-        
-        void MapExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO mappingObject, Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject);
-        
-        void MapExceptionMessageRootFilterModel(Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO mappingObject);
-        
-        void MapExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO mappingObject, Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject);
-        
-        void MapExceptionMessageRootFilterModel(Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO mappingObject);
-        
-        void MapExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO mappingObject, Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject);
-        
-        void MapExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO mappingObject, Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject);
         
         void MapPersistentDomainObjectBase(Framework.Configuration.Domain.PersistentDomainObjectBase domainObject, Framework.Configuration.Generated.DTO.BasePersistentDTO mappingObject);
         
@@ -11333,36 +8574,6 @@ namespace Framework.Configuration.Generated.DTO
         
         Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel ToCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO codeFirstSubscriptionRootFilterModelStrictDTO);
         
-        Framework.Configuration.Domain.ControlSettings ToControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO controlSettingsIdentityDTO);
-        
-        Framework.Configuration.Domain.ControlSettings ToControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO controlSettingsSimpleDTO);
-        
-        Framework.Configuration.Domain.ControlSettings ToControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsRichDTO controlSettingsRichDTO);
-        
-        Framework.Configuration.Domain.ControlSettings ToControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO controlSettingsStrictDTO);
-        
-        Framework.Configuration.Domain.ControlSettings ToControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO controlSettingsStrictDTO, Framework.Configuration.Domain.ControlSettings master);
-        
-        Framework.Configuration.Domain.ControlSettingsParam ToControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO controlSettingsParamIdentityDTO);
-        
-        Framework.Configuration.Domain.ControlSettingsParam ToControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO controlSettingsParamSimpleDTO);
-        
-        Framework.Configuration.Domain.ControlSettingsParam ToControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO controlSettingsParamRichDTO);
-        
-        Framework.Configuration.Domain.ControlSettingsParam ToControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO controlSettingsParamStrictDTO);
-        
-        Framework.Configuration.Domain.ControlSettingsParam ToControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO controlSettingsParamStrictDTO, Framework.Configuration.Domain.ControlSettings master);
-        
-        Framework.Configuration.Domain.ControlSettingsParamValue ToControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO controlSettingsParamValueIdentityDTO);
-        
-        Framework.Configuration.Domain.ControlSettingsParamValue ToControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueSimpleDTO controlSettingsParamValueSimpleDTO);
-        
-        Framework.Configuration.Domain.ControlSettingsParamValue ToControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO controlSettingsParamValueRichDTO);
-        
-        Framework.Configuration.Domain.ControlSettingsParamValue ToControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO controlSettingsParamValueStrictDTO);
-        
-        Framework.Configuration.Domain.ControlSettingsParamValue ToControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO controlSettingsParamValueStrictDTO, Framework.Configuration.Domain.ControlSettingsParam master);
-        
         Framework.Configuration.Domain.DomainObjectEvent ToDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO domainObjectEventIdentityDTO);
         
         Framework.Configuration.Domain.DomainObjectEvent ToDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventSimpleDTO domainObjectEventSimpleDTO);
@@ -11422,24 +8633,6 @@ namespace Framework.Configuration.Generated.DTO
         Framework.Configuration.Domain.DomainTypeRootFilterModel ToDomainTypeRootFilterModel(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelRichDTO domainTypeRootFilterModelRichDTO);
         
         Framework.Configuration.Domain.DomainTypeRootFilterModel ToDomainTypeRootFilterModel(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO domainTypeRootFilterModelStrictDTO);
-        
-        Framework.Configuration.Domain.ExceptionMessage ToExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdentityDTO);
-        
-        Framework.Configuration.Domain.ExceptionMessage ToExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO exceptionMessageSimpleDTO);
-        
-        Framework.Configuration.Domain.ExceptionMessage ToExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO exceptionMessageRichDTO);
-        
-        Framework.Configuration.Domain.ExceptionMessage ToExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO exceptionMessageRichDTO, bool allowCreate);
-        
-        Framework.Configuration.Domain.ExceptionMessage ToExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO exceptionMessageStrictDTO);
-        
-        Framework.Configuration.Domain.ExceptionMessage ToExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO exceptionMessageStrictDTO, bool allowCreate);
-        
-        Framework.Configuration.Domain.ExceptionMessage ToExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO exceptionMessageStrictDTO, Framework.Configuration.Domain.ExceptionMessage master);
-        
-        Framework.Configuration.Domain.ExceptionMessageRootFilterModel ToExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO exceptionMessageRootFilterModelRichDTO);
-        
-        Framework.Configuration.Domain.ExceptionMessageRootFilterModel ToExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO exceptionMessageRootFilterModelStrictDTO);
         
         Framework.Configuration.Domain.QueueProcessingState ToQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateRichDTO queueProcessingStateRichDTO);
         
@@ -11502,7 +8695,7 @@ namespace Framework.Configuration.Generated.DTO
         Framework.Configuration.Domain.TargetSystemRootFilterModel ToTargetSystemRootFilterModel(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO targetSystemRootFilterModelStrictDTO);
     }
     
-    public abstract partial class ConfigurationServerPrimitiveDTOMappingServiceBase : Framework.DomainDriven.DTOMappingService<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.AuditPersistentDomainObjectBase, System.Guid, long>, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService
+    public abstract partial class ConfigurationServerPrimitiveDTOMappingServiceBase : Framework.BLL.DTOMapping.Services.DTOMappingService<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.AuditPersistentDomainObjectBase, System.Guid, long>, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService
     {
         
         protected ConfigurationServerPrimitiveDTOMappingServiceBase(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
@@ -11583,182 +8776,6 @@ namespace Framework.Configuration.Generated.DTO
         
         public virtual void MapCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject)
         {
-        }
-        
-        public virtual void MapControlSettings(Framework.Configuration.Domain.ControlSettings domainObject, Framework.Configuration.Generated.DTO.ControlSettingsVisualDTO mappingObject)
-        {
-            mappingObject.Name = domainObject.Name;
-        }
-        
-        public virtual void MapControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsVisualDTO mappingObject, Framework.Configuration.Domain.ControlSettings domainObject)
-        {
-            domainObject.Name = mappingObject.Name;
-        }
-        
-        public virtual void MapControlSettings(Framework.Configuration.Domain.ControlSettings domainObject, Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO mappingObject)
-        {
-            mappingObject.AccountName = domainObject.AccountName;
-            mappingObject.Name = domainObject.Name;
-            mappingObject.Type = domainObject.Type;
-        }
-        
-        public virtual void MapControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO mappingObject, Framework.Configuration.Domain.ControlSettings domainObject)
-        {
-            domainObject.Name = mappingObject.Name;
-            domainObject.Type = mappingObject.Type;
-        }
-        
-        public virtual void MapControlSettings(Framework.Configuration.Domain.ControlSettings domainObject, Framework.Configuration.Generated.DTO.ControlSettingsFullDTO mappingObject)
-        {
-            if (!object.ReferenceEquals(domainObject.Parent, null))
-            {
-                mappingObject.Parent = Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.Parent, this);
-            }
-            else
-            {
-                mappingObject.Parent = null;
-            }
-        }
-        
-        public virtual void MapControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsFullDTO mappingObject, Framework.Configuration.Domain.ControlSettings domainObject)
-        {
-            if (!object.Equals(mappingObject.Parent, default(Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO)))
-            {
-                domainObject.Parent = this.ToControlSettings(mappingObject.Parent);
-            }
-            else
-            {
-                domainObject.Parent = null;
-            }
-        }
-        
-        public virtual void MapControlSettings(Framework.Configuration.Domain.ControlSettings domainObject, Framework.Configuration.Generated.DTO.ControlSettingsRichDTO mappingObject)
-        {
-            mappingObject.Children = Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.Children, this);
-            mappingObject.ControlSettingsParams = Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.ControlSettingsParams, this);
-        }
-        
-        public virtual void MapControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsRichDTO mappingObject, Framework.Configuration.Domain.ControlSettings domainObject)
-        {
-            if (!object.ReferenceEquals(mappingObject.ControlSettingsParams, null))
-            {
-                this.GetCollectionMappingService<Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO, Framework.Configuration.Domain.ControlSettingsParam>(detailDTO => this.ToControlSettingsParam(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<Framework.Configuration.Domain.ControlSettings, Framework.Configuration.Domain.ControlSettingsParam>(domainObject, detail)).Map(mappingObject.ControlSettingsParams, domainObject.ControlSettingsParams);
-            }
-        }
-        
-        public virtual void MapControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO mappingObject, Framework.Configuration.Domain.ControlSettings domainObject)
-        {
-            if (!object.ReferenceEquals(mappingObject.Children, null))
-            {
-                this.GetCollectionMappingService<Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO, Framework.Configuration.Domain.ControlSettings>(detailDTO => this.ToControlSettings(detailDTO.Identity), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<Framework.Configuration.Domain.ControlSettings, Framework.Configuration.Domain.ControlSettings>(domainObject, detail)).Map(mappingObject.Children, domainObject.Children);
-            }
-            if (!object.ReferenceEquals(mappingObject.ControlSettingsParams, null))
-            {
-                this.GetCollectionMappingService<Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO, Framework.Configuration.Domain.ControlSettingsParam>(detailDTO => this.ToControlSettingsParam(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<Framework.Configuration.Domain.ControlSettings, Framework.Configuration.Domain.ControlSettingsParam>(domainObject, detail)).Map(mappingObject.ControlSettingsParams, domainObject.ControlSettingsParams);
-            }
-            domainObject.Name = mappingObject.Name;
-            if (!object.Equals(mappingObject.Parent, default(Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO)))
-            {
-                domainObject.Parent = this.ToControlSettings(mappingObject.Parent);
-            }
-            else
-            {
-                domainObject.Parent = null;
-            }
-            domainObject.Type = mappingObject.Type;
-        }
-        
-        public virtual void MapControlSettingsParam(Framework.Configuration.Domain.ControlSettingsParam domainObject, Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO mappingObject)
-        {
-            mappingObject.Type = domainObject.Type;
-        }
-        
-        public virtual void MapControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO mappingObject, Framework.Configuration.Domain.ControlSettingsParam domainObject)
-        {
-            domainObject.Type = mappingObject.Type;
-        }
-        
-        public virtual void MapControlSettingsParam(Framework.Configuration.Domain.ControlSettingsParam domainObject, Framework.Configuration.Generated.DTO.ControlSettingsParamFullDTO mappingObject)
-        {
-            if (!object.ReferenceEquals(domainObject.ControlSettings, null))
-            {
-                mappingObject.ControlSettings = Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.ControlSettings, this);
-            }
-            else
-            {
-                mappingObject.ControlSettings = null;
-            }
-        }
-        
-        public virtual void MapControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamFullDTO mappingObject, Framework.Configuration.Domain.ControlSettingsParam domainObject)
-        {
-        }
-        
-        public virtual void MapControlSettingsParam(Framework.Configuration.Domain.ControlSettingsParam domainObject, Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO mappingObject)
-        {
-            mappingObject.ControlSettingsParamValues = Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.ControlSettingsParamValues, this);
-        }
-        
-        public virtual void MapControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO mappingObject, Framework.Configuration.Domain.ControlSettingsParam domainObject)
-        {
-            if (!object.ReferenceEquals(mappingObject.ControlSettingsParamValues, null))
-            {
-                this.GetCollectionMappingService<Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO, Framework.Configuration.Domain.ControlSettingsParamValue>(detailDTO => this.ToControlSettingsParamValue(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<Framework.Configuration.Domain.ControlSettingsParam, Framework.Configuration.Domain.ControlSettingsParamValue>(domainObject, detail)).Map(mappingObject.ControlSettingsParamValues, domainObject.ControlSettingsParamValues);
-            }
-        }
-        
-        public virtual void MapControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO mappingObject, Framework.Configuration.Domain.ControlSettingsParam domainObject)
-        {
-            if (!object.ReferenceEquals(mappingObject.ControlSettingsParamValues, null))
-            {
-                this.GetCollectionMappingService<Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO, Framework.Configuration.Domain.ControlSettingsParamValue>(detailDTO => this.ToControlSettingsParamValue(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<Framework.Configuration.Domain.ControlSettingsParam, Framework.Configuration.Domain.ControlSettingsParamValue>(domainObject, detail)).Map(mappingObject.ControlSettingsParamValues, domainObject.ControlSettingsParamValues);
-            }
-            domainObject.Type = mappingObject.Type;
-        }
-        
-        public virtual void MapControlSettingsParamValue(Framework.Configuration.Domain.ControlSettingsParamValue domainObject, Framework.Configuration.Generated.DTO.ControlSettingsParamValueSimpleDTO mappingObject)
-        {
-            mappingObject.Culture = domainObject.Culture;
-            mappingObject.Value = domainObject.Value;
-            mappingObject.ValueTypeName = domainObject.ValueTypeName;
-        }
-        
-        public virtual void MapControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueSimpleDTO mappingObject, Framework.Configuration.Domain.ControlSettingsParamValue domainObject)
-        {
-            domainObject.Culture = mappingObject.Culture;
-            domainObject.Value = mappingObject.Value;
-            domainObject.ValueTypeName = mappingObject.ValueTypeName;
-        }
-        
-        public virtual void MapControlSettingsParamValue(Framework.Configuration.Domain.ControlSettingsParamValue domainObject, Framework.Configuration.Generated.DTO.ControlSettingsParamValueFullDTO mappingObject)
-        {
-            if (!object.ReferenceEquals(domainObject.ControlSettingsParam, null))
-            {
-                mappingObject.ControlSettingsParam = Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.ControlSettingsParam, this);
-            }
-            else
-            {
-                mappingObject.ControlSettingsParam = null;
-            }
-        }
-        
-        public virtual void MapControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueFullDTO mappingObject, Framework.Configuration.Domain.ControlSettingsParamValue domainObject)
-        {
-        }
-        
-        public virtual void MapControlSettingsParamValue(Framework.Configuration.Domain.ControlSettingsParamValue domainObject, Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO mappingObject, Framework.Configuration.Domain.ControlSettingsParamValue domainObject)
-        {
-        }
-        
-        public virtual void MapControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO mappingObject, Framework.Configuration.Domain.ControlSettingsParamValue domainObject)
-        {
-            domainObject.Culture = mappingObject.Culture;
-            domainObject.Value = mappingObject.Value;
-            domainObject.ValueTypeName = mappingObject.ValueTypeName;
         }
         
         public virtual void MapDomainObjectBase(Framework.Configuration.Domain.DomainObjectBase domainObject, Framework.Configuration.Generated.DTO.BaseAbstractDTO mappingObject)
@@ -12150,103 +9167,6 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        public virtual void MapExceptionMessage(Framework.Configuration.Domain.ExceptionMessage domainObject, Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO mappingObject)
-        {
-            mappingObject.IsClient = domainObject.IsClient;
-            mappingObject.IsRoot = domainObject.IsRoot;
-            mappingObject.Message = domainObject.Message;
-            mappingObject.MessageType = domainObject.MessageType;
-            mappingObject.StackTrace = domainObject.StackTrace;
-        }
-        
-        public virtual void MapExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO mappingObject, Framework.Configuration.Domain.ExceptionMessage domainObject)
-        {
-            domainObject.Message = mappingObject.Message;
-            domainObject.MessageType = mappingObject.MessageType;
-            domainObject.StackTrace = mappingObject.StackTrace;
-        }
-        
-        public virtual void MapExceptionMessage(Framework.Configuration.Domain.ExceptionMessage domainObject, Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO mappingObject, Framework.Configuration.Domain.ExceptionMessage domainObject)
-        {
-        }
-        
-        public virtual void MapExceptionMessage(Framework.Configuration.Domain.ExceptionMessage domainObject, Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO mappingObject)
-        {
-            if (!object.ReferenceEquals(domainObject.InnerException, null))
-            {
-                mappingObject.InnerException = Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject.InnerException, this);
-            }
-            else
-            {
-                mappingObject.InnerException = null;
-            }
-        }
-        
-        public virtual void MapExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO mappingObject, Framework.Configuration.Domain.ExceptionMessage domainObject)
-        {
-            if (!object.Equals(mappingObject.InnerException, default(Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO)))
-            {
-                domainObject.InnerException = this.ToExceptionMessage(mappingObject.InnerException, domainObject);
-            }
-            else
-            {
-                domainObject.InnerException = null;
-            }
-        }
-        
-        public virtual void MapExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO mappingObject, Framework.Configuration.Domain.ExceptionMessage domainObject)
-        {
-            if (!object.Equals(mappingObject.InnerException, default(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO)))
-            {
-                domainObject.InnerException = this.ToExceptionMessage(mappingObject.InnerException, domainObject);
-            }
-            else
-            {
-                domainObject.InnerException = null;
-            }
-            domainObject.Message = mappingObject.Message;
-            domainObject.MessageType = mappingObject.MessageType;
-            domainObject.StackTrace = mappingObject.StackTrace;
-        }
-        
-        public virtual void MapExceptionMessageRootFilterModel(Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO mappingObject)
-        {
-            mappingObject.IsRoot = domainObject.IsRoot;
-            mappingObject.Period = domainObject.Period;
-        }
-        
-        public virtual void MapExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO mappingObject, Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject)
-        {
-            domainObject.IsRoot = mappingObject.IsRoot;
-            domainObject.Period = mappingObject.Period;
-        }
-        
-        public virtual void MapExceptionMessageRootFilterModel(Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO mappingObject, Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject)
-        {
-        }
-        
-        public virtual void MapExceptionMessageRootFilterModel(Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO mappingObject, Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject)
-        {
-        }
-        
-        public virtual void MapExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO mappingObject, Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject)
-        {
-            domainObject.IsRoot = mappingObject.IsRoot;
-            domainObject.Period = mappingObject.Period;
-        }
-        
         public virtual void MapPersistentDomainObjectBase(Framework.Configuration.Domain.PersistentDomainObjectBase domainObject, Framework.Configuration.Generated.DTO.BasePersistentDTO mappingObject)
         {
             mappingObject.Id = domainObject.Id;
@@ -12591,7 +9511,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         protected virtual void MapToDomainObject<TMappingObject, TDomainObject>(TMappingObject mappingObject, TDomainObject domainObject)
-            where TMappingObject : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, TDomainObject>
+            where TMappingObject : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, TDomainObject>
             where TDomainObject : Framework.Configuration.Domain.DomainObjectBase
         {
             mappingObject.MapToDomainObject(this, domainObject);
@@ -12627,102 +9547,17 @@ namespace Framework.Configuration.Generated.DTO
             return this.ToDomainObjectBase<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>(codeFirstSubscriptionRootFilterModelStrictDTO);
         }
         
-        public virtual Framework.Configuration.Domain.ControlSettings ToControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO controlSettingsIdentityDTO)
-        {
-            return this.GetById<Framework.Configuration.Domain.ControlSettings>(controlSettingsIdentityDTO.Id);
-        }
-        
-        public virtual Framework.Configuration.Domain.ControlSettings ToControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsSimpleDTO controlSettingsSimpleDTO)
-        {
-            return this.GetById<Framework.Configuration.Domain.ControlSettings>(controlSettingsSimpleDTO.Id);
-        }
-        
-        public virtual Framework.Configuration.Domain.ControlSettings ToControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsRichDTO controlSettingsRichDTO)
-        {
-            return this.ToDomainObject<Framework.Configuration.Generated.DTO.ControlSettingsRichDTO, Framework.Configuration.Domain.ControlSettings>(controlSettingsRichDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.ControlSettings ToControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO controlSettingsStrictDTO)
-        {
-            return this.ToDomainObject<Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO, Framework.Configuration.Domain.ControlSettings>(controlSettingsStrictDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.ControlSettings ToControlSettings(Framework.Configuration.Generated.DTO.ControlSettingsStrictDTO controlSettingsStrictDTO, Framework.Configuration.Domain.ControlSettings controlSettings)
-        {
-            return this.ToDomainObject(controlSettingsStrictDTO, () => new Framework.Configuration.Domain.ControlSettings(controlSettings));
-        }
-        
-        public virtual Framework.Configuration.Domain.ControlSettingsParam ToControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamIdentityDTO controlSettingsParamIdentityDTO)
-        {
-            return this.GetById<Framework.Configuration.Domain.ControlSettingsParam>(controlSettingsParamIdentityDTO.Id);
-        }
-        
-        public virtual Framework.Configuration.Domain.ControlSettingsParam ToControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamSimpleDTO controlSettingsParamSimpleDTO)
-        {
-            return this.GetById<Framework.Configuration.Domain.ControlSettingsParam>(controlSettingsParamSimpleDTO.Id);
-        }
-        
-        public virtual Framework.Configuration.Domain.ControlSettingsParam ToControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO controlSettingsParamRichDTO)
-        {
-            return this.ToDomainObject<Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO, Framework.Configuration.Domain.ControlSettingsParam>(controlSettingsParamRichDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.ControlSettingsParam ToControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamRichDTO controlSettingsParamRichDTO, Framework.Configuration.Domain.ControlSettings controlSettings)
-        {
-            return this.ToDomainObject(controlSettingsParamRichDTO, () => new Framework.Configuration.Domain.ControlSettingsParam(controlSettings));
-        }
-        
-        public virtual Framework.Configuration.Domain.ControlSettingsParam ToControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO controlSettingsParamStrictDTO)
-        {
-            return this.ToDomainObject<Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO, Framework.Configuration.Domain.ControlSettingsParam>(controlSettingsParamStrictDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.ControlSettingsParam ToControlSettingsParam(Framework.Configuration.Generated.DTO.ControlSettingsParamStrictDTO controlSettingsParamStrictDTO, Framework.Configuration.Domain.ControlSettings controlSettings)
-        {
-            return this.ToDomainObject(controlSettingsParamStrictDTO, () => new Framework.Configuration.Domain.ControlSettingsParam(controlSettings));
-        }
-        
-        public virtual Framework.Configuration.Domain.ControlSettingsParamValue ToControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueIdentityDTO controlSettingsParamValueIdentityDTO)
-        {
-            return this.GetById<Framework.Configuration.Domain.ControlSettingsParamValue>(controlSettingsParamValueIdentityDTO.Id);
-        }
-        
-        public virtual Framework.Configuration.Domain.ControlSettingsParamValue ToControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueSimpleDTO controlSettingsParamValueSimpleDTO)
-        {
-            return this.GetById<Framework.Configuration.Domain.ControlSettingsParamValue>(controlSettingsParamValueSimpleDTO.Id);
-        }
-        
-        public virtual Framework.Configuration.Domain.ControlSettingsParamValue ToControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO controlSettingsParamValueRichDTO)
-        {
-            return this.ToDomainObject<Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO, Framework.Configuration.Domain.ControlSettingsParamValue>(controlSettingsParamValueRichDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.ControlSettingsParamValue ToControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueRichDTO controlSettingsParamValueRichDTO, Framework.Configuration.Domain.ControlSettingsParam controlSettingsParam)
-        {
-            return this.ToDomainObject(controlSettingsParamValueRichDTO, () => new Framework.Configuration.Domain.ControlSettingsParamValue(controlSettingsParam));
-        }
-        
-        public virtual Framework.Configuration.Domain.ControlSettingsParamValue ToControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO controlSettingsParamValueStrictDTO)
-        {
-            return this.ToDomainObject<Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO, Framework.Configuration.Domain.ControlSettingsParamValue>(controlSettingsParamValueStrictDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.ControlSettingsParamValue ToControlSettingsParamValue(Framework.Configuration.Generated.DTO.ControlSettingsParamValueStrictDTO controlSettingsParamValueStrictDTO, Framework.Configuration.Domain.ControlSettingsParam controlSettingsParam)
-        {
-            return this.ToDomainObject(controlSettingsParamValueStrictDTO, () => new Framework.Configuration.Domain.ControlSettingsParamValue(controlSettingsParam));
-        }
-        
         protected virtual TDomainObject ToDomainObject<TMappingObject, TDomainObject>(TMappingObject mappingObject)
-            where TMappingObject : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, TDomainObject, System.Guid>
+            where TMappingObject : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, TDomainObject, System.Guid>
             where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
         {
-            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.DomainDriven.IdCheckMode.CheckAll);
+            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.BLL.IdCheckMode.CheckAll);
             this.MapToDomainObject(mappingObject, domainObject);
             return domainObject;
         }
         
         protected virtual TDomainObject ToDomainObject<TMappingObject, TDomainObject>(TMappingObject mappingObject, System.Func<TDomainObject> createFunc)
-            where TMappingObject : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, TDomainObject, System.Guid>
+            where TMappingObject : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, TDomainObject, System.Guid>
             where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
         {
             TDomainObject domainObject = this.GetByIdOrCreate<TDomainObject>(mappingObject.Id, createFunc);
@@ -12731,7 +9566,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         protected virtual TDomainObject ToDomainObjectBase<TMappingObject, TDomainObject>(TMappingObject mappingObject)
-            where TMappingObject : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, TDomainObject>
+            where TMappingObject : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, TDomainObject>
             where TDomainObject : Framework.Configuration.Domain.DomainObjectBase, new ()
         {
             TDomainObject domainObject = new TDomainObject();
@@ -12929,70 +9764,6 @@ namespace Framework.Configuration.Generated.DTO
         public virtual Framework.Configuration.Domain.DomainTypeRootFilterModel ToDomainTypeRootFilterModel(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO domainTypeRootFilterModelStrictDTO)
         {
             return this.ToDomainObjectBase<Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO, Framework.Configuration.Domain.DomainTypeRootFilterModel>(domainTypeRootFilterModelStrictDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.ExceptionMessage ToExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdentityDTO)
-        {
-            return this.GetById<Framework.Configuration.Domain.ExceptionMessage>(exceptionMessageIdentityDTO.Id);
-        }
-        
-        public virtual Framework.Configuration.Domain.ExceptionMessage ToExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO exceptionMessageSimpleDTO)
-        {
-            return this.GetById<Framework.Configuration.Domain.ExceptionMessage>(exceptionMessageSimpleDTO.Id);
-        }
-        
-        public virtual Framework.Configuration.Domain.ExceptionMessage ToExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO exceptionMessageRichDTO)
-        {
-            return this.ToDomainObject<Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO, Framework.Configuration.Domain.ExceptionMessage>(exceptionMessageRichDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.ExceptionMessage ToExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO exceptionMessageRichDTO, bool allowCreate)
-        {
-            if (allowCreate)
-            {
-                return this.ToDomainObject(exceptionMessageRichDTO, () => new Framework.Configuration.Domain.ExceptionMessage());
-            }
-            else
-            {
-                return this.ToExceptionMessage(exceptionMessageRichDTO);
-            }
-        }
-        
-        public virtual Framework.Configuration.Domain.ExceptionMessage ToExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO exceptionMessageRichDTO, Framework.Configuration.Domain.ExceptionMessage exceptionMessage)
-        {
-            return this.ToDomainObject(exceptionMessageRichDTO, () => new Framework.Configuration.Domain.ExceptionMessage(exceptionMessage));
-        }
-        
-        public virtual Framework.Configuration.Domain.ExceptionMessage ToExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO exceptionMessageStrictDTO)
-        {
-            return this.ToDomainObject<Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO, Framework.Configuration.Domain.ExceptionMessage>(exceptionMessageStrictDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.ExceptionMessage ToExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO exceptionMessageStrictDTO, bool allowCreate)
-        {
-            if (allowCreate)
-            {
-                return this.ToDomainObject(exceptionMessageStrictDTO, () => new Framework.Configuration.Domain.ExceptionMessage());
-            }
-            else
-            {
-                return this.ToExceptionMessage(exceptionMessageStrictDTO);
-            }
-        }
-        
-        public virtual Framework.Configuration.Domain.ExceptionMessage ToExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO exceptionMessageStrictDTO, Framework.Configuration.Domain.ExceptionMessage exceptionMessage)
-        {
-            return this.ToDomainObject(exceptionMessageStrictDTO, () => new Framework.Configuration.Domain.ExceptionMessage(exceptionMessage));
-        }
-        
-        public virtual Framework.Configuration.Domain.ExceptionMessageRootFilterModel ToExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO exceptionMessageRootFilterModelRichDTO)
-        {
-            return this.ToDomainObjectBase<Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO, Framework.Configuration.Domain.ExceptionMessageRootFilterModel>(exceptionMessageRootFilterModelRichDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.ExceptionMessageRootFilterModel ToExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO exceptionMessageRootFilterModelStrictDTO)
-        {
-            return this.ToDomainObjectBase<Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO, Framework.Configuration.Domain.ExceptionMessageRootFilterModel>(exceptionMessageRootFilterModelStrictDTO);
         }
         
         public virtual Framework.Configuration.Domain.QueueProcessingState ToQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateRichDTO queueProcessingStateRichDTO)

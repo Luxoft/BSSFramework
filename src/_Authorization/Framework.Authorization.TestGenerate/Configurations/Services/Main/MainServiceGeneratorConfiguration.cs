@@ -1,6 +1,6 @@
 ﻿using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Main;
 
-namespace Framework.Authorization.TestGenerate;
+namespace Framework.Authorization.TestGenerate.Configurations.Services.Main;
 
 public class MainServiceGeneratorConfiguration(ServerGenerationEnvironment environment) :
     MainGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)

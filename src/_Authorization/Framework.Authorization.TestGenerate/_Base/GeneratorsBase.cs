@@ -1,7 +1,7 @@
 ﻿using Framework.Core;
 using Framework.FileGeneration.Checkout;
 
-namespace Framework.Authorization.TestGenerate;
+namespace Framework.Authorization.TestGenerate._Base;
 
 public abstract class GeneratorsBase
 {

@@ -1,4 +1,10 @@
 ﻿using Framework.Authorization.Domain;
+using Framework.Authorization.TestGenerate.Configurations._Base;
+using Framework.Authorization.TestGenerate.Configurations.BLL;
+using Framework.Authorization.TestGenerate.Configurations.BLLCore;
+using Framework.Authorization.TestGenerate.Configurations.DTO;
+using Framework.Authorization.TestGenerate.Configurations.Services.Main;
+using Framework.Authorization.TestGenerate.Configurations.Services.QueryService;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
@@ -7,7 +13,7 @@ using Framework.Database;
 using Framework.Database.NHibernate._MappingSettings;
 using Framework.Projection.ExtendedMetadata;
 
-namespace Framework.Authorization.TestGenerate;
+namespace Framework.Authorization.TestGenerate.Configurations;
 
 public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
 {

@@ -4,20 +4,11 @@ using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.GeneratePolicy;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.GeneratePolicy;
-using Framework.DomainDriven.DTOGenerator;
-using Framework.DomainDriven.DTOGenerator.Server;
-using Framework.DomainDriven.Generation.Domain;
-using Framework.DomainDriven.Serialization;
 
-namespace Framework.Configuration.TestGenerate;
+namespace Framework.Configuration.TestGenerate.Configurations.DTO;
 
-public class ServerDTOGeneratorConfiguration : ServerGeneratorConfigurationBase<ServerGenerationEnvironment>
+public class ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environment) : ServerGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {
-    public ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
-    {
-    }
-
     public override ClientDTORole MapToDomainRole { get; } = ClientDTORole.All;
 
     public override string DataContractNamespace => this.Environment.DTODataContractNamespace;
@@ -28,8 +19,5 @@ public class ServerDTOGeneratorConfiguration : ServerGeneratorConfigurationBase<
 
     public override bool IdentityIsReference { get; } = true;
 
-    protected override IGeneratePolicy<RoleFileType> CreateGeneratePolicy()
-    {
-        return new DTORoleGeneratePolicy(DTORole.Client);
-    }
+    protected override IGeneratePolicy<RoleFileType> CreateGeneratePolicy() => new DTORoleGeneratePolicy(DTORole.Client);
 }

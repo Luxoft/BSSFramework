@@ -129,7 +129,7 @@ public partial class ServerGenerators
 
     public IEnumerable<FileInfo> GenerateAuthWebApiNetCoreTest()
     {
-        var e = new Framework.Authorization.TestGenerate.ServerGenerationEnvironment(new DatabaseName("$", "$"));
+        var e = new Framework.Authorization.TestGenerate.Configurations.ServerGenerationEnvironment(new DatabaseName("$", "$"));
 
         var configurators =
             new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<
@@ -150,7 +150,7 @@ public partial class ServerGenerators
 
     public IEnumerable<FileInfo> GenerateConfigurationWebApiNetCoreTest()
     {
-        var e = new Framework.Configuration.TestGenerate.ServerGenerationEnvironment(new DatabaseName("$", "$"));
+        var e = new Framework.Configuration.TestGenerate.Configurations.ServerGenerationEnvironment(new DatabaseName("$", "$"));
 
         var configurators =
             new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<

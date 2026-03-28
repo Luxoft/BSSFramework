@@ -1,4 +1,7 @@
-﻿namespace Framework.Authorization.TestGenerate;
+﻿using Framework.Authorization.TestGenerate._Base;
+using Framework.Authorization.TestGenerate.Configurations;
+
+namespace Framework.Authorization.TestGenerate;
 
 public partial class ServerGenerators(ServerGenerationEnvironment environment) : GeneratorsBase
 {

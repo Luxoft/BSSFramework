@@ -1,5 +1,5 @@
 ﻿using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Query;
 
-namespace Framework.Authorization.TestGenerate;
+namespace Framework.Authorization.TestGenerate.Configurations.Services.QueryService;
 
 public class QueryServiceGeneratorConfiguration(ServerGenerationEnvironment environment) : QueryGeneratorConfigurationBase<ServerGenerationEnvironment>(environment);

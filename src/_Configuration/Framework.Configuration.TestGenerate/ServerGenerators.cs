@@ -1,4 +1,7 @@
-﻿using Framework.DomainDriven.BLLCoreGenerator;
+﻿using Framework.CodeGeneration.BLLCoreGenerator;
+using Framework.CodeGeneration.BLLGenerator;
+using Framework.CodeGeneration.DTOGenerator.Server;
+using Framework.DomainDriven.BLLCoreGenerator;
 using Framework.DomainDriven.BLLGenerator;
 using Framework.DomainDriven.DTOGenerator.Server;
 using Framework.DomainDriven.Generation;

@@ -1,11 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Configuration.Generated.DAL.NHibernate</PackageId>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Framework.Configuration.Domain\Framework.Configuration.Domain.csproj" />
+
+    <ProjectReference Include="..\..\Database\Framework.Database.NHibernate.Runtime\Framework.Database.NHibernate.Runtime.csproj" />
   </ItemGroup>
+
 </Project>

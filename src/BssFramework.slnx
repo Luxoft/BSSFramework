@@ -163,6 +163,7 @@
     <Project Path="_Configuration/Framework.Configuration.BLL/Framework.Configuration.BLL.csproj" />
     <Project Path="_Configuration/Framework.Configuration.Domain.Models/Framework.Configuration.Domain.Models.csproj" />
     <Project Path="_Configuration/Framework.Configuration.Domain/Framework.Configuration.Domain.csproj" />
+    <Project Path="_Configuration/Framework.Configuration.Environment/Framework.Configuration.Environment.csproj" />
     <Project Path="_Configuration/Framework.Configuration.SubscriptionModeling.Tests.Unit/Framework.Configuration.SubscriptionModeling.Tests.Unit.csproj" />
     <Project Path="_Configuration/Framework.Configuration.SubscriptionModeling/Framework.Configuration.SubscriptionModeling.csproj" />
     <Project Path="_Configuration/Framework.Configuration.WebApi/Framework.Configuration.WebApi.csproj" />

@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven.DTOGenerator.Audit;
+﻿using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
+using Framework.DomainDriven.DTOGenerator.Audit;
 
 namespace Framework.Configuration.TestGenerate;
 

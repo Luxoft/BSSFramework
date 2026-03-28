@@ -1,6 +1,6 @@
-﻿using Framework.DomainDriven.Lock;
+﻿using Framework.Application.Lock;
 
-namespace Framework.Configuration.Domain;
+namespace Framework.Configuration.Environment;
 
 public static class ConfigurationNamedLock
 {

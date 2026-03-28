@@ -1,8 +1,14 @@
-﻿using Framework.DomainDriven;
+﻿using Framework.BLL.Domain.Serialization;
+using Framework.BLL.Domain.ServiceRole;
+using Framework.BLL.Domain.ServiceRole.Base;
+using Framework.DomainDriven;
 using Framework.Configuration.Domain;
+using Framework.Database;
+using Framework.Database.NHibernate._MappingSettings;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Projection.Environment;
+using Framework.Projection.ExtendedMetadata;
 
 namespace Framework.Configuration.TestGenerate;
 
@@ -18,8 +24,6 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
     public readonly MainServiceGeneratorConfiguration MainService;
 
     public readonly QueryServiceGeneratorConfiguration QueryService;
-
-    public readonly DALGeneratorConfiguration DAL;
 
     public readonly AuditServiceGeneratorConfiguration AuditService;
 

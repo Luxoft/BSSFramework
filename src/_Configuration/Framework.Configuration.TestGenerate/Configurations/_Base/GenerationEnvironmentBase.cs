@@ -1,4 +1,5 @@
-﻿using Framework.Configuration.Domain;
+﻿using Framework.CodeGeneration.DomainMetadata;
+using Framework.Configuration.Domain;
 using Framework.DomainDriven.Generation.Domain;
 using SecuritySystem;
 

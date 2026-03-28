@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.Generation;
+using Framework.FileGeneration.Checkout;
 
 namespace Framework.Configuration.TestGenerate;
 

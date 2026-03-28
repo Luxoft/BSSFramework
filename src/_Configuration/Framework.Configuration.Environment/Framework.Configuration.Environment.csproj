@@ -1,15 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.Configuration.Domain.Models</PackageId>
+    <PackageId>Luxoft.Framework.Configuration.Environment</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Framework.Configuration.Domain\Framework.Configuration.Domain.csproj" />
   </ItemGroup>
 
 </Project>

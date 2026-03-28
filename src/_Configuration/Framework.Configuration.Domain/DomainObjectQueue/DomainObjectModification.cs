@@ -1,5 +1,7 @@
-﻿using Framework.Persistent;
-using Framework.Persistent.Mapping;
+﻿using Framework.BLL.Domain.IdentityObject;
+using Framework.Database.Attributes;
+using Framework.Database.Domain;
+using Framework.Database.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;

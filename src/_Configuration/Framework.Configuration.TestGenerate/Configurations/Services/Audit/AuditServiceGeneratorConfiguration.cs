@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven.ServiceModelGenerator;
+﻿using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Audit;
+using Framework.DomainDriven.ServiceModelGenerator;
 
 namespace Framework.Configuration.TestGenerate;
 

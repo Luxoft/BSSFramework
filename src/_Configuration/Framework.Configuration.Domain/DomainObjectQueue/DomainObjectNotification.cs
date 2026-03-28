@@ -1,4 +1,4 @@
-﻿using Framework.Persistent.Mapping;
+﻿using Framework.Database.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;

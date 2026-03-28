@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 
+using Framework.BLL.Domain.Serialization;
 using Framework.Core;
-using Framework.DomainDriven.Serialization;
-using Framework.Persistent;
-using Framework.Persistent.Mapping;
+using Framework.Database;
+using Framework.Database.Mapping;
 
 namespace Framework.Configuration.Domain;
 

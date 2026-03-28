@@ -9,6 +9,7 @@ using Framework.Core;
 using Framework.Database;
 using Framework.Database.Domain;
 using Framework.OData;
+using Framework.OData.Typed;
 
 using GenericQueryable;
 using GenericQueryable.Fetching;

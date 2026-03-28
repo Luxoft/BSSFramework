@@ -11,6 +11,7 @@ using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.FileFactory.__Base;
 using Framework.CodeGeneration.DomainMetadata;
 using Framework.Core;
+using Framework.OData.Typed;
 using Framework.Projection;
 
 using GenericQueryable.Fetching;
@@ -209,7 +210,7 @@ public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguratio
                                      ReturnType = typeof(OData.SelectOperationResult<>).MakeGenericType(this.DomainType).ToTypeReference(),
                                      Parameters =
                                      {
-                                             typeof(OData.SelectOperation<>).ToTypeReference(this.DomainType).ToParameterDeclarationExpression("selectOperation"),
+                                             typeof(SelectOperation<>).ToTypeReference(this.DomainType).ToParameterDeclarationExpression("selectOperation"),
                                              contextFilterModelType.ToTypeReference().ToParameterDeclarationExpression("filter"),
                                              typeof(FetchRule<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
                                      }
@@ -296,7 +297,7 @@ public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguratio
                                      ReturnType = typeof(OData.SelectOperationResult<>).MakeGenericType(this.DomainType).ToTypeReference(),
                                      Parameters =
                                      {
-                                             typeof(OData.SelectOperation<>).ToTypeReference(this.DomainType).ToParameterDeclarationExpression("selectOperation"),
+                                             typeof(SelectOperation<>).ToTypeReference(this.DomainType).ToParameterDeclarationExpression("selectOperation"),
                                              filterModelType.ToTypeReference().ToParameterDeclarationExpression("filter"),
                                              typeof(FetchRule<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
                                      }
@@ -313,7 +314,7 @@ public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguratio
                                          ReturnType = typeof(OData.SelectOperationResult<>).MakeGenericType(typeof(HierarchicalNode<,>).MakeGenericType(this.DomainType, this.Configuration.Environment.GetIdentityType())).ToTypeReference(),
                                          Parameters =
                                          {
-                                                 typeof(OData.SelectOperation<>).ToTypeReference(this.DomainType).ToParameterDeclarationExpression("selectOperation"),
+                                                 typeof(SelectOperation<>).ToTypeReference(this.DomainType).ToParameterDeclarationExpression("selectOperation"),
                                                  filterModelType.ToTypeReference().ToParameterDeclarationExpression("filter"),
                                                  typeof(FetchRule<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
                                          }

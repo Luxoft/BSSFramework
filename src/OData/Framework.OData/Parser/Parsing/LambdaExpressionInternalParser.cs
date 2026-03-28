@@ -5,14 +5,17 @@ using CommonFramework;
 using CommonFramework.Maybe;
 
 using Framework.Core;
+using Framework.OData.QueryLanguage;
+using Framework.OData.QueryLanguage.Constant;
+using Framework.OData.QueryLanguage.Constant.Base;
+using Framework.OData.QueryLanguage.Operations;
 using Framework.Parsing;
-using Framework.QueryLanguage;
 
-using ExpressionParser = Framework.Parsing.Parser<string, Framework.QueryLanguage.Expression>;
-using MapFunc = System.Func<Framework.QueryLanguage.Expression, Framework.QueryLanguage.Expression>;
-using ExpressionMapParser = Framework.Parsing.Parser<string, System.Func<Framework.QueryLanguage.Expression, Framework.QueryLanguage.Expression>>;
+using ExpressionParser = Framework.Parsing.Parser<string, Framework.OData.QueryLanguage.Expression>;
+using MapFunc = System.Func<Framework.OData.QueryLanguage.Expression, Framework.OData.QueryLanguage.Expression>;
+using ExpressionMapParser = Framework.Parsing.Parser<string, System.Func<Framework.OData.QueryLanguage.Expression, Framework.OData.QueryLanguage.Expression>>;
 
-namespace Framework.OData;
+namespace Framework.OData.Parser.Parsing;
 
 internal class LambdaExpressionInternalParser : CharParsers
 {
@@ -49,39 +52,28 @@ internal class LambdaExpressionInternalParser : CharParsers
 
 
 
-    private ExpressionParser BracketsRootParser { get { return this.BetweenBrackets(this.RootBodyParser); } }
+    private ExpressionParser BracketsRootParser => this.BetweenBrackets(this.RootBodyParser);
 
-    public ExpressionParser RootBodyParser { get { return this.MainParser.Pipe(this.InnerRootBodyParser); } }
+    public ExpressionParser RootBodyParser => this.MainParser.Pipe(this.InnerRootBodyParser);
 
-    private ExpressionParser MainParser { get { return this.GetMainParser((expression, _) => expression); } }
+    private ExpressionParser MainParser => this.GetMainParser((expression, _) => expression);
 
-
-    private Parser<string, TResult> GetMainParser<TResult>(Func<Expression, bool, TResult> resultSelector)
-    {
-        return this.OneOfMany(
+    private Parser<string, TResult> GetMainParser<TResult>(Func<Expression, bool, TResult> resultSelector) =>
+        this.OneOfMany(
             this.GetLazy(() => this.BracketsRootParser.Select(res => resultSelector(res, true))),
             this.GetLazy(() => this.UnaryExpressionParser.Select(res => resultSelector(res, false))),
             this.GetLazy(() => this.OtherExpressionParser.Select(res => resultSelector(res, false))));
-    }
 
-    private LambdaExpressionInternalParser GetSubParser(ParameterExpression subParameter)
-    {
-        return new LambdaExpressionInternalParser(
+    private LambdaExpressionInternalParser GetSubParser(ParameterExpression subParameter) =>
+        new(
             this.numberFormatInfo,
             this.rootParameter,
             subParameter,
             this.usedParameters.Concat([subParameter]).ToReadOnlyCollection());
-    }
 
-
-    private ExpressionMapParser InnerRootBodyParser
-    {
-        get
-        {
-            return this.PreSpaces(this.BinaryExpressionParser.Compose(this.GetLazy(() => this.InnerRootBodyParser)))
-                       .Or(this.GetIdentity<Expression>());
-        }
-    }
+    private ExpressionMapParser InnerRootBodyParser =>
+        this.PreSpaces(this.BinaryExpressionParser.Compose(this.GetLazy(() => this.InnerRootBodyParser)))
+            .Or(this.GetIdentity<Expression>());
 
     private ExpressionParser UnaryExpressionParser
     {
@@ -155,108 +147,72 @@ internal class LambdaExpressionInternalParser : CharParsers
 
 
 
-    private ExpressionParser OtherExpressionParser { get { return this.PreSpaces(this.InnerOtherExpressionParser); } }
+    private ExpressionParser OtherExpressionParser => this.PreSpaces(this.InnerOtherExpressionParser);
 
-    private ExpressionParser InnerOtherExpressionParser
-    {
-        get
-        {
-            return this.StringMethodExpressionParser
-                       .Or(() => this.CollectionMethodExpressionParser)
-                       .Or(() => this.GuidConstantExpressionParser)
-                       .Or(() => this.DateTimeConstantExpressionParser)
-                       .Or(() => this.BooleanConstantExpressionParser)
-                       .Or(() => this.DecimalConstantExpressionParser)
-                       .Or(() => this.Int32ConstantExpressionParser)
-                       .Or(() => this.Int64ConstantExpressionParser)
-                       .Or(() => this.StringConstantExpressionParser)
-                       .Or(() => this.NullConstantExpressionParser)
-                       .Or(() => this.StringConstantExpressionParser)
-                       .Or(() => this.DateTimePropertyParser)
-                       .Or(() => this.LengthPropertyParser)
-                       .Or(() => this.PropertyExpressionParser);
-        }
-    }
+    private ExpressionParser InnerOtherExpressionParser =>
+        this.StringMethodExpressionParser
+            .Or(() => this.CollectionMethodExpressionParser)
+            .Or(() => this.GuidConstantExpressionParser)
+            .Or(() => this.DateTimeConstantExpressionParser)
+            .Or(() => this.BooleanConstantExpressionParser)
+            .Or(() => this.DecimalConstantExpressionParser)
+            .Or(() => this.Int32ConstantExpressionParser)
+            .Or(() => this.Int64ConstantExpressionParser)
+            .Or(() => this.StringConstantExpressionParser)
+            .Or(() => this.NullConstantExpressionParser)
+            .Or(() => this.StringConstantExpressionParser)
+            .Or(() => this.DateTimePropertyParser)
+            .Or(() => this.LengthPropertyParser)
+            .Or(() => this.PropertyExpressionParser);
 
-    private ExpressionParser StringMethodExpressionParser
-    {
-        get
-        {
-            return from methodType in this.StringMethodExpressionTypeParser
+    private ExpressionParser StringMethodExpressionParser =>
+        from methodType in this.StringMethodExpressionTypeParser
 
-                   from result in
-                       this.BetweenBrackets(
-                           from arg1 in this.RootBodyParser
+        from result in
+            this.BetweenBrackets(
+                from arg1 in this.RootBodyParser
 
-                           from _ in this.PreSpaces(this.Char(','))
+                from _ in this.PreSpaces(this.Char(','))
 
-                           from arg2 in this.RootBodyParser
+                from arg2 in this.RootBodyParser
 
-                           select methodType == MethodExpressionType.StringContains
+                select methodType == MethodExpressionType.StringContains
 
-                                      ? new MethodExpression(arg2, methodType, [arg1])
+                           ? new MethodExpression(arg2, methodType, [arg1])
 
-                                      : new MethodExpression(arg1, methodType, [arg2]))
+                           : new MethodExpression(arg1, methodType, [arg2]))
 
-                   select result;
-        }
-    }
+        select result;
 
-    private ExpressionParser GuidConstantExpressionParser
-    {
-        get
-        {
-            return from value in this.Between(this.GuidParser, this.StringIgnoreCase("guid'"), this.Char('\''))
-                   select new GuidConstantExpression(value);
-        }
-    }
+    private ExpressionParser GuidConstantExpressionParser =>
+        from value in this.Between(this.GuidParser, this.StringIgnoreCase("guid'"), this.Char('\''))
+        select new GuidConstantExpression(value);
 
-    private Parser<string, DateTimeConstantExpression> DateTimeConstantExpressionParser
-    {
-        get
-        {
-            return from _ in this.StringIgnoreCase("datetime'")
-                   from dateStr in this.TakeTo("'")
-                   from res in this.CatchParser(() => DateTime.Parse(dateStr))
-                   select new DateTimeConstantExpression(res);
-        }
-    }
+    private Parser<string, DateTimeConstantExpression> DateTimeConstantExpressionParser =>
+        from _ in this.StringIgnoreCase("datetime'")
+        from dateStr in this.TakeTo("'")
+        from res in this.CatchParser(() => DateTime.Parse(dateStr))
+        select new DateTimeConstantExpression(res);
 
+    private ExpressionParser BooleanConstantExpressionParser =>
+        (this.StringIgnoreCase(bool.TrueString).Select(_ => BooleanConstantExpression.True))
+        .Or(() => this.StringIgnoreCase(bool.FalseString).Select(_ => BooleanConstantExpression.False));
 
-    private ExpressionParser BooleanConstantExpressionParser
-    {
-        get
-        {
-            return (this.StringIgnoreCase(bool.TrueString).Select(_ => BooleanConstantExpression.True))
-                .Or(() => this.StringIgnoreCase(bool.FalseString).Select(_ => BooleanConstantExpression.False));
-        }
-    }
+    private ExpressionParser StringConstantExpressionParser =>
+        from _ in this.Char('\'')
 
-    private ExpressionParser StringConstantExpressionParser
-    {
-        get
-        {
-            return from _ in this.Char('\'')
+        from value in this.Many(this.EscapeCharParser.Or(() => this.Char(c => c != '\'')))
 
-                   from value in this.Many(this.EscapeCharParser.Or(() => this.Char(c => c != '\'')))
+        from __ in this.Char('\'')
 
-                   from __ in this.Char('\'')
+        select new StringConstantExpression(new string(value));
 
-                   select new StringConstantExpression(new string(value));
-        }
-    }
+    private Parser<string, char> EscapeCharParser =>
+        from ___ in this.Char(EscapeChar)
 
-    private Parser<string, char> EscapeCharParser
-    {
-        get
-        {
-            return from ___ in this.Char(EscapeChar)
+        from c in this.OneOfMany(PostEscapeChars.Select(this.Char))
 
-                   from c in this.OneOfMany(PostEscapeChars.Select(this.Char))
-
-                   select c;
-        }
-    }
+        select c;
 
     public ExpressionParser PropertyPathParser
     {
@@ -287,164 +243,103 @@ internal class LambdaExpressionInternalParser : CharParsers
         }
     }
 
-    private ExpressionParser PropertyExpressionParser
-    {
-        get
-        {
-            return from startParameterInfo in this.PropertyStartParameterExpressionParser
+    private ExpressionParser PropertyExpressionParser =>
+        from startParameterInfo in this.PropertyStartParameterExpressionParser
 
-                   from parameterNames in
-                       startParameterInfo.Item2
-                           ? this.Many(
-                               from _ in this.BetweenSpaces(this.Char('/'))
-                               from parameterName in this.Variable
-                               select parameterName)
-                           : this.SepBy(this.PreSpaces(this.Variable), this.Char('/'))
+        from parameterNames in
+            startParameterInfo.Item2
+                ? this.Many(
+                    from _ in this.BetweenSpaces(this.Char('/'))
+                    from parameterName in this.Variable
+                    select parameterName)
+                : this.SepBy(this.PreSpaces(this.Variable), this.Char('/'))
 
-                   where startParameterInfo.Item2 || parameterNames.Any()
+        where startParameterInfo.Item2 || parameterNames.Any()
 
-                   select parameterNames.Aggregate((Expression)startParameterInfo.Item1, (expr, parameterName) => new PropertyExpression(expr, parameterName));
-        }
-    }
+        select parameterNames.Aggregate((Expression)startParameterInfo.Item1, (expr, parameterName) => new PropertyExpression(expr, parameterName));
 
-    private Parser<string, Tuple<ParameterExpression, bool>> PropertyStartParameterExpressionParser
-    {
-        get
-        {
-            return this.StringIgnoreCase("it").Or(() => this.StringIgnoreCase("this")).Select(_ => Tuple.Create(this.currentParameter, true))
+    private Parser<string, Tuple<ParameterExpression, bool>> PropertyStartParameterExpressionParser =>
+        this.StringIgnoreCase("it").Or(() => this.StringIgnoreCase("this")).Select(_ => Tuple.Create(this.currentParameter, true))
 
-                       .Or(() => from startElementName in this.PreSpaces(this.Variable)
+            .Or(() => from startElementName in this.PreSpaces(this.Variable)
 
-                                 let startElementParameter = new ParameterExpression(startElementName)
+                      let startElementParameter = new ParameterExpression(startElementName)
 
-                                 where this.usedParameters.Contains(startElementParameter)
+                      where this.usedParameters.Contains(startElementParameter)
 
-                                 select Tuple.Create(startElementParameter, true))
+                      select Tuple.Create(startElementParameter, true))
 
-                       .Or(() => this.Return(Tuple.Create(this.currentParameter, false)));
-        }
-    }
+            .Or(() => this.Return(Tuple.Create(this.currentParameter, false)));
 
-    private ExpressionParser CollectionMethodExpressionParser
-    {
-        get
-        {
-            return from collectionMethodType in this.CollectionMethodExpressionTypeParser
+    private ExpressionParser CollectionMethodExpressionParser =>
+        from collectionMethodType in this.CollectionMethodExpressionTypeParser
 
-                   from result in
-                       this.BetweenBrackets(
-                           from source in this.RootBodyParser
+        from result in
+            this.BetweenBrackets(
+                from source in this.RootBodyParser
 
-                           from subParameter in this.PreSpaces(this.Variable).Select(aliasName => new ParameterExpression(aliasName))
-                                                    .Or(() => this.Return(
-                                                            this.GenerateAnonymousParameterExpression(
-                                                                (source as PropertyExpression).Maybe(propExpr => propExpr.PropertyName.FromPluralize()) ?? "collection")))
+                from subParameter in this.PreSpaces(this.Variable).Select(aliasName => new ParameterExpression(aliasName))
+                                         .Or(() => this.Return(
+                                                 this.GenerateAnonymousParameterExpression(
+                                                     (source as PropertyExpression).Maybe(propExpr => propExpr.PropertyName.FromPluralize()) ?? "collection")))
 
-                           from _ in this.PreSpaces(this.Char(','))
+                from _ in this.PreSpaces(this.Char(','))
 
-                           from bodyExpr in this.GetSubParser(subParameter).RootBodyParser
+                from bodyExpr in this.GetSubParser(subParameter).RootBodyParser
 
-                           let arg = new LambdaExpression(bodyExpr, [subParameter])
+                let arg = new LambdaExpression(bodyExpr, [subParameter])
 
-                           select new MethodExpression(source, collectionMethodType, [arg]))
+                select new MethodExpression(source, collectionMethodType, [arg]))
 
-                   select result;
-        }
-    }
+        select result;
 
-    private ExpressionParser DateTimePropertyParser
-    {
-        get
-        {
-            return this.OneOfMany(
-                DateTimeProperties.Select(propertyName => from _ in this.StringIgnoreCase(propertyName)
-                                                          from source in this.BetweenBrackets(this.RootBodyParser)
-                                                          select new PropertyExpression(source, propertyName.ToStartUpperCase())));
-        }
-    }
+    private ExpressionParser DateTimePropertyParser =>
+        this.OneOfMany(
+            DateTimeProperties.Select(propertyName => from _ in this.StringIgnoreCase(propertyName)
+                                                      from source in this.BetweenBrackets(this.RootBodyParser)
+                                                      select new PropertyExpression(source, propertyName.ToStartUpperCase())));
 
-    private ExpressionParser LengthPropertyParser
-    {
-        get
-        {
-            return from body in this.Pre(this.BetweenBrackets(this.RootBodyParser), this.StringIgnoreCase("length"))
+    private ExpressionParser LengthPropertyParser =>
+        from body in this.Pre(this.BetweenBrackets(this.RootBodyParser), this.StringIgnoreCase("length"))
 
-                   select new PropertyExpression(body, "Length");
-        }
-    }
+        select new PropertyExpression(body, "Length");
 
+    private ExpressionParser DecimalConstantExpressionParser =>
+        from isNegate in this.TryChar('-')
+        from numberText in this.Many1(this.Digit.Or(this.Char(CultureInfo.InvariantCulture.NumberFormat.CurrencyDecimalSeparator.Contains)))
+        from _ in this.Char('m', 'M')
+        from result in this.CatchParser(() => decimal.Parse((isNegate ? "-" : string.Empty) + new string(numberText), CultureInfo.InvariantCulture.NumberFormat))
+        select new DecimalConstantExpression(result);
 
+    private ExpressionParser Int32ConstantExpressionParser =>
+        from value in this.Int32Parser
+        select new Int32ConstantExpression(value);
 
-    private ExpressionParser DecimalConstantExpressionParser
-    {
-        get
-        {
-            return from isNegate in this.TryChar('-')
-                   from numberText in this.Many1(this.Digit.Or(this.Char(CultureInfo.InvariantCulture.NumberFormat.CurrencyDecimalSeparator.Contains)))
-                   from _ in this.Char('m', 'M')
-                   from result in this.CatchParser(() => decimal.Parse((isNegate ? "-" : string.Empty) + new string(numberText), CultureInfo.InvariantCulture.NumberFormat))
-                   select new DecimalConstantExpression(result);
-        }
-    }
+    private ExpressionParser Int64ConstantExpressionParser =>
+        from value in this.Int64Parser
+        select new Int64ConstantExpression(value);
 
-    private ExpressionParser Int32ConstantExpressionParser
-    {
-        get
-        {
-            return from value in this.Int32Parser
-                   select new Int32ConstantExpression(value);
-        }
-    }
+    private ExpressionParser NullConstantExpressionParser =>
+        from _ in this.StringIgnoreCase("null")
+        select NullConstantExpression.Value;
 
-    private ExpressionParser Int64ConstantExpressionParser
-    {
-        get
-        {
-            return from value in this.Int64Parser
-                   select new Int64ConstantExpression(value);
-        }
-    }
+    private Parser<string, MethodExpressionType> StringMethodExpressionTypeParser => this.FromDictionary(StringMethodExpressions, this.StringIgnoreCase);
 
-    private ExpressionParser NullConstantExpressionParser
-    {
-        get
-        {
-            return from _ in this.StringIgnoreCase("null")
-                   select NullConstantExpression.Value;
-        }
-    }
+    private Parser<string, MethodExpressionType> CollectionMethodExpressionTypeParser => this.FromDictionary(CollectionMethodExpressions, this.StringIgnoreCase);
 
+    private Parser<string, UnaryOperation> UnaryOperationParser =>
+        from operation in this.FromDictionary(UnaryOperations, this.StringIgnoreCase)
 
+        from _ in this.TestNo(this.Word1)
 
-    private Parser<string, MethodExpressionType> StringMethodExpressionTypeParser { get { return this.FromDictionary(StringMethodExpressions, this.StringIgnoreCase); } }
+        select operation;
 
-    private Parser<string, MethodExpressionType> CollectionMethodExpressionTypeParser { get { return this.FromDictionary(CollectionMethodExpressions, this.StringIgnoreCase); } }
+    private Parser<string, BinaryOperation> BinaryOperationParser =>
+        from operation in this.FromDictionary(BinaryOperations, this.StringIgnoreCase)
 
+        from _ in this.TestNo(this.Word1)
 
-    private Parser<string, UnaryOperation> UnaryOperationParser
-    {
-        get
-        {
-            return from operation in this.FromDictionary(UnaryOperations, this.StringIgnoreCase)
-
-                   from _ in this.TestNo(this.Word1)
-
-                   select operation;
-        }
-    }
-
-    private Parser<string, BinaryOperation> BinaryOperationParser
-    {
-        get
-        {
-            return from operation in this.FromDictionary(BinaryOperations, this.StringIgnoreCase)
-
-                   from _ in this.TestNo(this.Word1)
-
-                   select operation;
-        }
-    }
-
+        select operation;
 
     private ParameterExpression GenerateAnonymousParameterExpression(string baseName)
     {

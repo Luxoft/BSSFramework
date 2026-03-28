@@ -1,6 +1,5 @@
 ﻿using System.Collections.Concurrent;
 
-using Framework.Application.Services;
 using Framework.Core;
 
 namespace Framework.Infrastructure.WebApiExceptionExpander;
@@ -9,14 +8,14 @@ public class WebApiExceptionExpander(WebApiExceptionExpanderSettings settings, I
 {
     private readonly ConcurrentDictionary<Type, bool> isHandledExceptionCache = [];
 
-    public Exception Process(Exception baseException)
+    public Exception? TryExpand(Exception baseException)
     {
-        var exception = exceptionExpander.Process(baseException);
+        var exception = exceptionExpander.Expand(baseException);
 
-        return this.IsHandledException(exception)
-                   ? exception
-                   : this.GetInternalServerException(exception);
+        return this.IsHandledException(exception) ? exception : null;
     }
+
+    public Exception Expand(Exception baseException) => this.TryExpand(baseException) ?? this.GetInternalServerException(baseException);
 
     /// <summary>
     /// Get Internal Server Exception

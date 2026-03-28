@@ -1,6 +1,8 @@
 ﻿using System.Collections.Immutable;
 
-using Framework.QueryLanguage;
+using Framework.OData.Parser;
+using Framework.OData.QueryLanguage;
+using Framework.OData.QueryLanguage.Constant;
 
 namespace Framework.OData;
 
@@ -29,39 +31,15 @@ public record SelectOperation(
             && this.SkipCount == other.SkipCount
             && this.TakeCount == other.TakeCount);
 
-    public override int GetHashCode()
-    {
-        return this.Orders.Length ^ this.Expands.Length ^ this.Selects.Length ^ this.SkipCount ^ this.TakeCount;
-    }
+    public override int GetHashCode() => this.Orders.Length ^ this.Expands.Length ^ this.Selects.Length ^ this.SkipCount ^ this.TakeCount;
 
-    public static SelectOperation CreateFilter<TSource>(System.Linq.Expressions.Expression<Func<TSource, bool>> filter)
-    {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
+    public static SelectOperation CreateFilter<TSource>(System.Linq.Expressions.Expression<Func<TSource, bool>> filter) => CreateFilter((System.Linq.Expressions.LambdaExpression)filter);
 
-        return CreateFilter((System.Linq.Expressions.LambdaExpression)filter);
-    }
+    public static SelectOperation CreateFilter(System.Linq.Expressions.LambdaExpression filter) => new(new LambdaExpression(filter), Default.Orders, Default.SkipCount, Default.TakeCount);
 
-    public static SelectOperation CreateFilter(System.Linq.Expressions.LambdaExpression filter)
-    {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
+    public static SelectOperation Parse(string text) => SelectOperationParser.Default.Parse(text);
 
-        return new SelectOperation(new LambdaExpression(filter), Default.Orders, Default.SkipCount, Default.TakeCount);
-    }
+    public static SelectOperation Default { get; } =
 
-
-    public static SelectOperation Parse(string text)
-    {
-        return SelectOperationParser.Default.Parse(text);
-    }
-
-
-    public static readonly SelectOperation Default = new(
-
-        new LambdaExpression(BooleanConstantExpression.True, [ParameterExpression.Default]),
-
-        [],
-
-        0,
-
-        int.MaxValue);
+        new(new LambdaExpression(BooleanConstantExpression.True, [ParameterExpression.Default]), [], 0, int.MaxValue);
 }

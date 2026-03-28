@@ -105,7 +105,7 @@ public class BssFrameworkBuilder : IBssFrameworkBuilder, IServiceInitializer
 
         services.AddSingleton<IEventXsdExporter2, EventXsdExporter2>();
 
-        services.AddScoped<IWebApiExceptionExpander, WebApiExceptionExpander.WebApiExceptionExpander>();
+        services.AddSingleton<IWebApiExceptionExpander, WebApiExceptionExpander.WebApiExceptionExpander>();
         services.AddSingleton(WebApiExceptionExpanderSettings.Default);
 
         services.AddScoped<IWebApiCurrentDBSessionModeResolver, WebApiCurrentDBSessionModeResolver>();

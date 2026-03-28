@@ -7,6 +7,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.Parsing\Framework.Parsing.csproj" />
-    <ProjectReference Include="..\Framework.QueryLanguage\Framework.QueryLanguage.csproj" />
+    <ProjectReference Include="..\Framework.OData.QueryLanguage\Framework.OData.QueryLanguage.csproj" />
   </ItemGroup>
 </Project>

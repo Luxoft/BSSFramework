@@ -3,7 +3,7 @@ using Framework.Application.Events;
 using Framework.BLL.OData;
 using Framework.Core.Serialization;
 using Framework.OData;
-using Framework.QueryLanguage;
+using Framework.OData.QueryLanguage.StandardExpressionBuilder;
 
 using HierarchicalExpand;
 

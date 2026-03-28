@@ -15,7 +15,7 @@ using Framework.Events;
 using Framework.Exceptions;
 using Framework.Notification;
 using Framework.Persistent;
-using Framework.QueryLanguage;
+using Framework.OData.QueryLanguage;
 using Framework.Tracking;
 
 using Microsoft.Extensions.DependencyInjection;

@@ -4,20 +4,13 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Infrastructure.Middleware;
 
-public class WebApiExceptionExpanderMiddleware
+public class WebApiExceptionExpanderMiddleware(RequestDelegate next)
 {
-    private readonly RequestDelegate next;
-
-    public WebApiExceptionExpanderMiddleware(RequestDelegate next)
-    {
-        this.next = next;
-    }
-
     public async Task Invoke(HttpContext context, IWebApiExceptionExpander exceptionExpander)
     {
         try
         {
-            await this.next(context);
+            await next(context);
         }
         catch (TaskCanceledException)
         {
@@ -25,7 +18,7 @@ public class WebApiExceptionExpanderMiddleware
         }
         catch (Exception ex)
         {
-            var processedEx = exceptionExpander.Process(ex);
+            var processedEx = exceptionExpander.Expand(ex);
 
             if (processedEx != ex)
             {

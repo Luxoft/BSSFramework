@@ -10,25 +10,15 @@ using SecuritySystem;
 namespace Framework.Infrastructure.Integration;
 
 [Obsolete("Will be removed in v19")]
-public abstract class IntegrationSchemaControllerBase : ControllerBase
+public abstract class IntegrationSchemaControllerBase(
+    ISecuritySystem securitySystem,
+    TimeProvider timeProvider,
+    IEventXsdExporter2 eventXsdExporter)
+    : ControllerBase
 {
-    private readonly TimeProvider timeProvider;
-
-    private readonly IEventXsdExporter2 eventXsdExporter;
-
-    private readonly ISecuritySystem securitySystem;
+    private readonly TimeProvider timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
 
     private const string AuthIntegrationNamespace = "http://authorization.luxoft.com/IntegrationEvent";
-
-    protected IntegrationSchemaControllerBase(
-        ISecuritySystem securitySystem,
-        TimeProvider timeProvider,
-        IEventXsdExporter2 eventXsdExporter)
-    {
-        this.securitySystem = securitySystem;
-        this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
-        this.eventXsdExporter = eventXsdExporter;
-    }
 
     [HttpGet]
     [Route("DownloadKnownTypesWsdl")]
@@ -37,9 +27,9 @@ public abstract class IntegrationSchemaControllerBase : ControllerBase
 
     private async Task<IActionResult> DownloadKnownTypesWsdl(string xsdNamespace, IReadOnlyCollection<Type> eventTypes, CancellationToken cancellationToken)
     {
-        await this.securitySystem.CheckAccessAsync(SecurityRole.SystemIntegration, cancellationToken);
+        await securitySystem.CheckAccessAsync(SecurityRole.SystemIntegration, cancellationToken);
 
-        var content = this.eventXsdExporter.Export(xsdNamespace, "IntegrationEvent", eventTypes);
+        var content = eventXsdExporter.Export(xsdNamespace, "IntegrationEvent", eventTypes);
 
         var contentType = MediaTypeNames.Application.Octet;
 

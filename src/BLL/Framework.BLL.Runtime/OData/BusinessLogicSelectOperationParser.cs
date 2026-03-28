@@ -5,6 +5,7 @@ using CommonFramework;
 using Framework.BLL.Domain.Exceptions;
 using Framework.Core.Serialization;
 using Framework.OData;
+using Framework.OData.Parser;
 
 namespace Framework.BLL.OData;
 

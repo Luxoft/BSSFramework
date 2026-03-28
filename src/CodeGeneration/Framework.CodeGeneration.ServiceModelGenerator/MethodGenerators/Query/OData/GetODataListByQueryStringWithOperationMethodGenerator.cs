@@ -13,6 +13,7 @@ using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View.
 using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.OData;
+using Framework.OData.Typed;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Query.OData;
 

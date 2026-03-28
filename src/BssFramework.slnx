@@ -113,9 +113,9 @@
   </Folder>
   
   <Folder Name="/OData/">
-    <Project Path="OData/Framework.OData.Tests.Unit/Framework.OData.Tests.Unit.csproj" />
+    <Project Path="OData/Framework.OData.QueryLanguage/Framework.OData.QueryLanguage.csproj" />
+    <Project Path="OData/Framework.OData.Tests/Framework.OData.Tests.csproj" />
     <Project Path="OData/Framework.OData/Framework.OData.csproj" />
-    <Project Path="OData/Framework.QueryLanguage/Framework.QueryLanguage.csproj" />
   </Folder>
   <Folder Name="/_SampleSystem/" />
   

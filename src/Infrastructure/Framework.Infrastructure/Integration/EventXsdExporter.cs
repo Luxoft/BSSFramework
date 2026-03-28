@@ -5,18 +5,8 @@ using System.Xml.Serialization;
 namespace Framework.Infrastructure.Integration;
 
 [Obsolete("Use IEventXsdExporter2")]
-public class EventXsdExporter
+public class EventXsdExporter(string xsdNamespace, IEnumerable<Type> types)
 {
-    private readonly string xsdNamespace;
-
-    private readonly IEnumerable<Type> types;
-
-    public EventXsdExporter(string xsdNamespace, IEnumerable<Type> types)
-    {
-        this.xsdNamespace = xsdNamespace;
-        this.types = types;
-    }
-
     public Stream Export()
     {
         var schemas = this.ExportTypes();
@@ -30,11 +20,11 @@ public class EventXsdExporter
 
         var exporter = new XmlSchemaExporter(schemas);
 
-        var importer = new XmlReflectionImporter(this.xsdNamespace);
+        var importer = new XmlReflectionImporter(xsdNamespace);
 
-        foreach (var type in this.types)
+        foreach (var type in types)
         {
-            var mapping = importer.ImportTypeMapping(type, this.xsdNamespace);
+            var mapping = importer.ImportTypeMapping(type, xsdNamespace);
 
             exporter.ExportTypeMapping(mapping);
         }

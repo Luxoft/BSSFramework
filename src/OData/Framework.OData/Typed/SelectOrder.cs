@@ -2,7 +2,7 @@
 
 using CommonFramework;
 
-namespace Framework.OData;
+namespace Framework.OData.Typed;
 
 public record SelectOrder<TDomainObject, TOrderKey>(Expression<Func<TDomainObject, TOrderKey>> Path) : SelectOrder<TDomainObject>
 {

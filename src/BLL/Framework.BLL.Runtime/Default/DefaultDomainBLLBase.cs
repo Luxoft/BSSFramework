@@ -9,6 +9,7 @@ using Framework.BLL.Domain.Persistent;
 using Framework.Core;
 using Framework.Database;
 using Framework.OData;
+using Framework.OData.Typed;
 
 using GenericQueryable;
 using GenericQueryable.Fetching;

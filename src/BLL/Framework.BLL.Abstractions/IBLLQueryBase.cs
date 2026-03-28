@@ -3,6 +3,7 @@ using Framework.BLL.Domain.Exceptions;
 using Framework.BLL.Domain.Models;
 using Framework.Database;
 using Framework.OData;
+using Framework.OData.Typed;
 
 using GenericQueryable.Fetching;
 

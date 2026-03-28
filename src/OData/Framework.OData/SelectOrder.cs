@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-using Framework.QueryLanguage;
+﻿using Framework.OData.QueryLanguage;
 
 namespace Framework.OData;
 

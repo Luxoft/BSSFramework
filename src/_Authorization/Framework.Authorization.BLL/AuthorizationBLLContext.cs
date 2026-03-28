@@ -5,7 +5,7 @@ using Framework.Authorization.Domain;
 using Framework.BLL;
 using Framework.BLL.Services;
 using Framework.Core.TypeResolving;
-using Framework.QueryLanguage;
+using Framework.OData.QueryLanguage;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;

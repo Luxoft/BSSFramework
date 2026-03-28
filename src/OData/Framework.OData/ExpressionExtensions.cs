@@ -1,6 +1,6 @@
 ﻿using CommonFramework;
 
-using Framework.QueryLanguage;
+using Framework.OData.QueryLanguage;
 
 namespace Framework.OData;
 

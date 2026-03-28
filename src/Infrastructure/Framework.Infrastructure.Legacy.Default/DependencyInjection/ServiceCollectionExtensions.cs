@@ -22,7 +22,7 @@ using Framework.DomainDriven.Setup;
 using Framework.Events;
 using Framework.Events.Legacy;
 using Framework.Projection;
-using Framework.QueryLanguage;
+using Framework.OData.QueryLanguage;
 using Framework.Security;
 using Framework.Tracking;
 

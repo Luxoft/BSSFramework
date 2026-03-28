@@ -15,6 +15,7 @@ using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View.
 using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.OData;
+using Framework.OData.Typed;
 
 using SelectOperationResultExtensions = Framework.BLL.OData.SelectOperationResultExtensions;
 

@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.OData;
+using Framework.OData.Typed;
 
 using GenericQueryable.Fetching;
 

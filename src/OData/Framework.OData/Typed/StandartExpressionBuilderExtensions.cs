@@ -1,8 +1,8 @@
 ﻿using CommonFramework;
 
-using Framework.QueryLanguage;
+using Framework.OData.QueryLanguage.StandardExpressionBuilder;
 
-namespace Framework.OData;
+namespace Framework.OData.Typed;
 
 public static class StandardExpressionBuilderExtensions
 {
@@ -33,9 +33,7 @@ public static class StandardExpressionBuilderExtensions
                .Invoke<SelectOrder<TDomainObject>>(null, standardExpressionBuilder, selectOrder);
     }
 
-    private static SelectOrder<TDomainObject, TOrderKey> ToTypedOrder<TDomainObject, TOrderKey>(this IStandardExpressionBuilder standardExpressionBuilder, SelectOrder selectOrder)
-    {
-        return new SelectOrder<TDomainObject, TOrderKey>(
-               standardExpressionBuilder.ToStandardExpression<Func<TDomainObject, TOrderKey>>(selectOrder.Path)) { OrderType = selectOrder.OrderType };
-    }
+    private static SelectOrder<TDomainObject, TOrderKey> ToTypedOrder<TDomainObject, TOrderKey>(this IStandardExpressionBuilder standardExpressionBuilder, SelectOrder selectOrder) =>
+        new(
+        standardExpressionBuilder.ToStandardExpression<Func<TDomainObject, TOrderKey>>(selectOrder.Path)) { OrderType = selectOrder.OrderType };
 }

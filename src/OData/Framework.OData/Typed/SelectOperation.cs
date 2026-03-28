@@ -5,7 +5,7 @@ using CommonFramework;
 
 using Framework.Core;
 
-namespace Framework.OData;
+namespace Framework.OData.Typed;
 
 public record SelectOperation<TDomainObject>(
     Expression<Func<TDomainObject, bool>> Filter,
@@ -15,9 +15,9 @@ public record SelectOperation<TDomainObject>(
 {
     public bool HasPaging => this.SkipCount != 0 || this.TakeCount != 0;
 
-    public ImmutableArray<Framework.QueryLanguage.LambdaExpression> Expands { get; init; } = [];
+    public ImmutableArray<Framework.OData.QueryLanguage.LambdaExpression> Expands { get; init; } = [];
 
-    public ImmutableArray<Framework.QueryLanguage.LambdaExpression> Selects { get; init; } = [];
+    public ImmutableArray<Framework.OData.QueryLanguage.LambdaExpression> Selects { get; init; } = [];
 
     public SelectOperation<TDomainObject> WithoutPaging() => this.HasPaging ? this with { SkipCount = 0, TakeCount = 0 } : this;
 

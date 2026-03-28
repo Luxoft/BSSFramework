@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Framework.OData.Typed;
+
 namespace SampleSystem.BLL
 {
     
@@ -805,7 +807,7 @@ namespace SampleSystem.BLL
     public partial interface IBusinessUnitProgramClassBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.BusinessUnitProgramClass, System.Guid>
     {
         
-        Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.BusinessUnitProgramClass> GetObjectsByOData(Framework.OData.SelectOperation<SampleSystem.Domain.Projections.BusinessUnitProgramClass> selectOperation, SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel filter, GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.BusinessUnitProgramClass> fetchs);
+        Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.BusinessUnitProgramClass> GetObjectsByOData(SelectOperation<SampleSystem.Domain.Projections.BusinessUnitProgramClass> selectOperation, SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel filter, GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.BusinessUnitProgramClass> fetchs);
     }
     
     public partial interface IBusinessUnitProgramClassBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitProgramClassBLL, SampleSystem.Domain.Projections.BusinessUnitProgramClass>
@@ -823,7 +825,7 @@ namespace SampleSystem.BLL
     public partial interface ITestBusinessUnitBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestBusinessUnit, System.Guid>
     {
         
-        Framework.OData.SelectOperationResult<Framework.Persistent.HierarchicalNode<SampleSystem.Domain.Projections.TestBusinessUnit, System.Guid>> GetTreeByOData(Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestBusinessUnit> selectOperation, SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel filter, GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestBusinessUnit> fetchs);
+        Framework.OData.SelectOperationResult<Framework.Persistent.HierarchicalNode<SampleSystem.Domain.Projections.TestBusinessUnit, System.Guid>> GetTreeByOData(SelectOperation<SampleSystem.Domain.Projections.TestBusinessUnit> selectOperation, SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel filter, GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestBusinessUnit> fetchs);
     }
     
     public partial interface ITestBusinessUnitBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestBusinessUnitBLL, SampleSystem.Domain.Projections.TestBusinessUnit>
@@ -855,7 +857,7 @@ namespace SampleSystem.BLL
         
         SampleSystem.Domain.Projections.TestEmployee GetObjectBy(SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel filter, GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestEmployee> fetchs);
         
-        Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.TestEmployee> GetObjectsByOData(Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestEmployee> selectOperation, SampleSystem.Domain.TestEmployeeFilter filter, GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestEmployee> fetchs);
+        Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.TestEmployee> GetObjectsByOData(SelectOperation<SampleSystem.Domain.Projections.TestEmployee> selectOperation, SampleSystem.Domain.TestEmployeeFilter filter, GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestEmployee> fetchs);
     }
     
     public partial interface ITestEmployeeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestEmployeeBLL, SampleSystem.Domain.Projections.TestEmployee>

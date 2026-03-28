@@ -9,6 +9,7 @@ using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View._Base;
 using Framework.OData;
+using Framework.OData.Typed;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Query.OData.Base;
 

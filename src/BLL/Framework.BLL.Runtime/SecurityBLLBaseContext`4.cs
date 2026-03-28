@@ -1,7 +1,7 @@
 ﻿using Framework.Application.Domain;
 using Framework.Application.Events;
 using Framework.BLL.Default;
-using Framework.QueryLanguage;
+using Framework.OData.QueryLanguage.StandardExpressionBuilder;
 
 using HierarchicalExpand;
 

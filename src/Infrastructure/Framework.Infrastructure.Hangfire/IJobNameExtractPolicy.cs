@@ -1,4 +1,4 @@
-﻿namespace Framework.HangfireCore;
+﻿namespace Framework.Infrastructure.Hangfire;
 
 public interface IJobNameExtractPolicy
 {

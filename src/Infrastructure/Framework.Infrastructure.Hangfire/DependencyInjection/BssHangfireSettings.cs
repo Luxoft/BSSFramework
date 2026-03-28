@@ -2,8 +2,8 @@
 
 using CommonFramework;
 
+using Framework.Application.Jobs;
 using Framework.Core;
-using Framework.DomainDriven.Jobs;
 
 using Hangfire;
 using Hangfire.Common;
@@ -13,11 +13,11 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.HangfireCore;
+namespace Framework.Infrastructure.Hangfire.DependencyInjection;
 
 public class BssHangfireSettings : IBssHangfireSettings
 {
-    private Func<IConfiguration, string> getConnectionStringFunc = default!;
+    private Func<IConfiguration, string> getConnectionStringFunc = null!;
 
     private readonly List<Action<IServiceCollection>> registerServicesActions = [];
 
@@ -47,16 +47,9 @@ public class BssHangfireSettings : IBssHangfireSettings
 
     public JobTiming[] JobTimings { get; set; } = [];
 
-    public string GetDisplayName(Job job)
-    {
-        return this.jobNames[job.Method];
-    }
+    public string GetDisplayName(Job job) => this.jobNames[job.Method];
 
-
-    public BssHangfireSettings()
-    {
-        this.SetConnectionStringName("DefaultConnection");
-    }
+    public BssHangfireSettings() => this.SetConnectionStringName("DefaultConnection");
 
     public IBssHangfireSettings SetJobNameExtractPolicy(IJobNameExtractPolicy policy)
     {

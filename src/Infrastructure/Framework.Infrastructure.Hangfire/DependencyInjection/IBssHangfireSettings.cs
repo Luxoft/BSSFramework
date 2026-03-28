@@ -1,9 +1,9 @@
-﻿using Framework.DomainDriven.Jobs;
+﻿using Framework.Application.Jobs;
 
 using Hangfire;
 using Hangfire.SqlServer;
 
-namespace Framework.HangfireCore;
+namespace Framework.Infrastructure.Hangfire.DependencyInjection;
 
 public interface IBssHangfireSettings
 {

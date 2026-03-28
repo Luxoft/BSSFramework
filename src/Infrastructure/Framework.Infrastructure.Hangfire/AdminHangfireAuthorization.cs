@@ -1,10 +1,10 @@
-﻿using SecuritySystem;
-
-using Hangfire.Dashboard;
+﻿using Hangfire.Dashboard;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.HangfireCore;
+using SecuritySystem;
+
+namespace Framework.Infrastructure.Hangfire;
 
 public class AdminHangfireAuthorization(DomainSecurityRule.RoleBaseSecurityRule securityRule) : IDashboardAuthorizationFilter
 {

@@ -74,6 +74,7 @@
   
   <Folder Name="/Infrastructure/">
     <Project Path="Infrastructure/Framework.Infrastructure.Abstractions/Framework.Infrastructure.Abstractions.csproj" />
+    <Project Path="Infrastructure/Framework.Infrastructure.Hangfire/Framework.Infrastructure.Hangfire.csproj" />
     <Project Path="Infrastructure/Framework.Infrastructure.Legacy.Default/Framework.Infrastructure.Legacy.Default.csproj" />
     <Project Path="Infrastructure/Framework.Infrastructure.Legacy/Framework.Infrastructure.Legacy.csproj" />
     <Project Path="Infrastructure/Framework.Infrastructure.Swagger/Framework.Infrastructure.Swagger.csproj" />
@@ -188,7 +189,6 @@
   <Project Path="Framework.DependencyInjection/Framework.DependencyInjection.csproj" />
   <Project Path="Framework.ExpressionParsers.Tests.Unit/Framework.ExpressionParsers.Tests.Unit.csproj" />
   <Project Path="Framework.ExpressionParsers/Framework.ExpressionParsers.csproj" />
-  <Project Path="Framework.HangfireCore/Framework.HangfireCore.csproj" />
   <Project Path="Framework.NotificationCore/Framework.NotificationCore.csproj" />
   <Project Path="Framework.Parsing/Framework.Parsing.csproj" />
   <Project Path="_DomainDriven/Framework.Notification.Abstract/Framework.Notification.Abstract.csproj" />

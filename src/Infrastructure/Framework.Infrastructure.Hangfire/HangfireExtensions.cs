@@ -1,4 +1,4 @@
-﻿using SecuritySystem;
+﻿using Framework.Infrastructure.Hangfire.DependencyInjection;
 
 using Hangfire;
 
@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.HangfireCore;
+using SecuritySystem;
+
+namespace Framework.Infrastructure.Hangfire;
 
 public static class HangfireExtensions
 {

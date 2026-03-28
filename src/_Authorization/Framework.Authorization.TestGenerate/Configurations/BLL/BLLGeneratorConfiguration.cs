@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.BLLGenerator;
+﻿using Framework.CodeGeneration.BLLGenerator.Configuration;
 
 namespace Framework.Authorization.TestGenerate;
 

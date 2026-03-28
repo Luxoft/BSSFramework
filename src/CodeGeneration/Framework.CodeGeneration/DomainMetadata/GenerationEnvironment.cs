@@ -19,6 +19,8 @@ using Framework.Projection.Lambda.ProjectionSource._Base;
 
 using Microsoft.Extensions.DependencyInjection;
 
+using SecuritySystem;
+
 namespace Framework.CodeGeneration.DomainMetadata;
 
 public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomainObjectBase, TAuditPersistentDomainObjectBase, TIdent> : IGenerationEnvironment
@@ -66,7 +68,7 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
 
     protected virtual string ProjectionNamespace => $"{this.PersistentDomainObjectBaseType.GetNamespacePrefix()}.Domain.Projections";
 
-    public virtual IReadOnlyList<Type> SecurityRuleTypeList { get; } = new List<Type>();
+    public virtual IReadOnlyList<Type> SecurityRuleTypeList { get; } = [typeof(SecurityRole)];
 
     public IReadOnlyCollection<IProjectionEnvironment> ProjectionEnvironments { get; }
 

@@ -1,13 +1,9 @@
-﻿using Framework.DomainDriven.ServiceModelGenerator;
+﻿using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Main;
 
 namespace Framework.Authorization.TestGenerate;
 
-public class MainServiceGeneratorConfiguration : MainGeneratorConfigurationBase<ServerGenerationEnvironment>
+public class MainServiceGeneratorConfiguration(ServerGenerationEnvironment environment) :
+    MainGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {
-    public MainServiceGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
-    {
-    }
-
     public override string ImplementClassName { get; } = "AuthFacade";
 }

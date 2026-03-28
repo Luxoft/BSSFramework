@@ -4,7 +4,7 @@ using System.Reflection;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
-namespace Framework.Database.NHibernate.DependencyInjection;
+namespace Framework.Database.NHibernate._MappingSettings;
 
 public record DefaultConfigurationInitializerSettings
 {

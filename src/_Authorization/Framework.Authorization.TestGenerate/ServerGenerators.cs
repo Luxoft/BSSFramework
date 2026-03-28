@@ -1,9 +1,8 @@
-﻿using Framework.DomainDriven.BLLCoreGenerator;
-using Framework.DomainDriven.BLLGenerator;
-using Framework.DomainDriven.DTOGenerator.Server;
-using Framework.DomainDriven.Generation;
-
-using FileInfo = Framework.DomainDriven.Generation.FileInfo;
+﻿using Framework.CodeGeneration.BLLCoreGenerator;
+using Framework.CodeGeneration.BLLGenerator;
+using Framework.CodeGeneration.DTOGenerator.Server;
+using Framework.CodeGeneration.Extensions;
+using Framework.FileGeneration;
 
 namespace Framework.Authorization.TestGenerate;
 
@@ -16,7 +15,7 @@ public partial class ServerGenerators
         this.GenerateMain().ToList();
     }
 
-    public IEnumerable<FileInfo> GenerateMain()
+    public IEnumerable<GeneratedFileInfo> GenerateMain()
     {
         return this.GenerateBLLCore()
                    .Concat(this.GenerateBLL())
@@ -29,7 +28,7 @@ public partial class ServerGenerators
         this.GenerateBLLCore().ToList();
     }
 
-    private IEnumerable<FileInfo> GenerateBLLCore()
+    private IEnumerable<GeneratedFileInfo> GenerateBLLCore()
     {
         var generator = new BLLCoreFileGenerator(this.Environment.BLLCore);
 
@@ -42,7 +41,7 @@ public partial class ServerGenerators
         this.GenerateBLL().ToList();
     }
 
-    private IEnumerable<FileInfo> GenerateBLL()
+    private IEnumerable<GeneratedFileInfo> GenerateBLL()
     {
         var generator = new BLLFileGenerator(this.Environment.BLL);
 
@@ -61,7 +60,7 @@ public partial class ServerGenerators
         this.GenerateServerDTO().ToList();
     }
 
-    private IEnumerable<FileInfo> GenerateServerDTO()
+    private IEnumerable<GeneratedFileInfo> GenerateServerDTO()
     {
         var generator = new ServerFileGenerator(this.Environment.ServerDTO);
 

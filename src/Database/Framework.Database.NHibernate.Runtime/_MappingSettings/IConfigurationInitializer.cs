@@ -1,6 +1,4 @@
-﻿
-
-using NHibernate.Cfg;
+﻿using NHibernate.Cfg;
 
 namespace Framework.Database.NHibernate._MappingSettings;
 

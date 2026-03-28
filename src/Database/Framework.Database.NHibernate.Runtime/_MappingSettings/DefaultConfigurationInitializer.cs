@@ -4,7 +4,6 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
 using Framework.Core;
-using Framework.Database.NHibernate._MappingSettings;
 using Framework.Database.NHibernate.Dialect;
 using Framework.Database.NHibernate.Fix2100;
 
@@ -12,7 +11,7 @@ using NHibernate.Cfg;
 
 using Environment = NHibernate.Cfg.Environment;
 
-namespace Framework.Database.NHibernate.DependencyInjection;
+namespace Framework.Database.NHibernate._MappingSettings;
 
 public class DefaultConfigurationInitializer(
     IDefaultConnectionStringSource defaultConnectionStringSource,

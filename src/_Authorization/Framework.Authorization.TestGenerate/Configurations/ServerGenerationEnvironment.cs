@@ -5,12 +5,7 @@ using Framework.BLL.Domain.ServiceRole;
 using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.Database;
 using Framework.Database.NHibernate._MappingSettings;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Serialization;
-using Framework.Projection.Environment;
 using Framework.Projection.ExtendedMetadata;
-using Framework.Transfering;
 
 namespace Framework.Authorization.TestGenerate;
 
@@ -25,8 +20,6 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
     public readonly MainServiceGeneratorConfiguration MainService;
 
     public readonly QueryServiceGeneratorConfiguration QueryService;
-
-    public readonly DALGeneratorConfiguration DAL;
 
     public ServerGenerationEnvironment()
         : this(new DatabaseName("", "auth"))
@@ -44,8 +37,6 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
         this.MainService = new MainServiceGeneratorConfiguration(this);
 
         this.QueryService = new QueryServiceGeneratorConfiguration(this);
-
-        this.DAL = new DALGeneratorConfiguration(this);
 
         this.DatabaseName = databaseName ?? throw new ArgumentNullException(nameof(databaseName));
     }

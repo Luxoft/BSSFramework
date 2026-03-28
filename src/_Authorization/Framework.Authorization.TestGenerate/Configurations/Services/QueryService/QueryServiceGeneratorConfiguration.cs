@@ -1,11 +1,5 @@
-﻿using Framework.DomainDriven.ServiceModelGenerator;
+﻿using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Query;
 
 namespace Framework.Authorization.TestGenerate;
 
-public class QueryServiceGeneratorConfiguration : QueryGeneratorConfigurationBase<ServerGenerationEnvironment>
-{
-    public QueryServiceGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
-    {
-    }
-}
+public class QueryServiceGeneratorConfiguration(ServerGenerationEnvironment environment) : QueryGeneratorConfigurationBase<ServerGenerationEnvironment>(environment);

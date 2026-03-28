@@ -1,19 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Authorization.TestGenerate</PackageId>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="MSTest.TestAdapter" />
     <PackageReference Include="MSTest.TestFramework" />
   </ItemGroup>
+
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Framework.Database.NHibernate.Runtime\Framework.Database.NHibernate.Runtime.csproj" />
-    <ProjectReference Include="..\..\Framework.Projection.Runtime\Framework.Projection.Runtime.csproj" />
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\CodeGeneration\Framework.CodeGeneration.ServiceModelGenerator\Framework.CodeGeneration.ServiceModelGenerator.csproj" />
+    <ProjectReference Include="..\..\Database\Framework.Database.NHibernate.DBGenerator\Framework.Database.NHibernate.DBGenerator.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Domain.Models\Framework.Authorization.Domain.Models.csproj" />
+    <ProjectReference Include="..\Framework.Authorization.Generated.DAL.NHibernate\Framework.Authorization.Generated.DAL.NHibernate.csproj" />
+
+    <ProjectReference Include="..\..\CodeGeneration\Framework.CodeGeneration.BLLGenerator\Framework.CodeGeneration.BLLGenerator.csproj" />
+    <ProjectReference Include="..\..\Projection\Framework.Projection.Runtime\Framework.Projection.Runtime.csproj" />
   </ItemGroup>
 </Project>

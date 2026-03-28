@@ -3,7 +3,7 @@ using FluentNHibernate.Conventions.AcceptanceCriteria;
 using FluentNHibernate.Conventions.Inspections;
 using FluentNHibernate.Conventions.Instances;
 
-namespace Framework.Database.NHibernate.DependencyInjection;
+namespace Framework.Database.NHibernate._MappingSettings;
 
 public sealed class ComponentConvention : IComponentConvention, IComponentConventionAcceptance
 {

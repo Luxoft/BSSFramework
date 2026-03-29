@@ -35,7 +35,7 @@ public class BssFrameworkBuilder : IBssFrameworkBuilder, IServiceInitializer
         {
             s.SetQueryableSource<DalQueryableSource>();
             s.SetGenericRepository<DalGenericRepository>();
-            s.SetRawCurrentUser<ApplicationRawCurrentUser>();
+            s.SetDefaultCurrentUser<ApplicationDefaultCurrentUser>();
 
             setupAction(s);
         }));
@@ -101,7 +101,6 @@ public class BssFrameworkBuilder : IBssFrameworkBuilder, IServiceInitializer
         }
 
         services.AddSingleton(ApplicationDefaultCurrentUserSettings.Default);
-        services.AddKeyedSingleton<ICurrentUser, ApplicationDefaultCurrentUser>(ICurrentUser.DefaultKey);
 
         services.AddSingleton<IEventXsdExporter2, EventXsdExporter2>();
 

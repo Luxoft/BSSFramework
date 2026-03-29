@@ -8,7 +8,7 @@ using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemSe
 using Framework.Configuration.Domain;
 using Framework.Subscriptions.Domain;
 
-using SecuritySystem.Notification;
+using SecuritySystem.Notification.Domain;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 

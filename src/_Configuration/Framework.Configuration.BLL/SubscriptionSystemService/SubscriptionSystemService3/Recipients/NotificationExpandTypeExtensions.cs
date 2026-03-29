@@ -1,4 +1,4 @@
-﻿using SecuritySystem.Notification;
+﻿using SecuritySystem.Notification.Domain;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 

@@ -49,7 +49,7 @@ public class TargetSystemInitializer(
 
             if (!isBase)
             {
-                context.EventOperationSource.GetEventOperations(newItem.Type).Foreach(value => _ = new DomainTypeEventOperation(newDomainType, value));
+                context.EventOperationSource.GetEventOperations(newItem.Type).Foreach(value => _ = new DomainTypeEventOperation(newDomainType) { Name = value.Name });
             }
 
             context.Logics.DomainType.Insert(newDomainType);
@@ -71,7 +71,7 @@ public class TargetSystemInitializer(
                 {
                     domainType.RemoveDetails(mergeEventResult.RemovingItems);
 
-                    mergeEventResult.AddingItems.Foreach(value => _ = new DomainTypeEventOperation(domainType, value));
+                    mergeEventResult.AddingItems.Foreach(value => _ = new DomainTypeEventOperation(domainType) { Name = value.Name });
                 }
 
                 bll.Save(targetSystem);

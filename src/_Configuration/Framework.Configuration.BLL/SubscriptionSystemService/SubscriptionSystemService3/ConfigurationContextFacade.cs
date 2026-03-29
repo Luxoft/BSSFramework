@@ -10,7 +10,7 @@ using Framework.Notification.Domain;
 using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem;
-using SecuritySystem.Notification;
+using SecuritySystem.Notification.Domain;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3;
 

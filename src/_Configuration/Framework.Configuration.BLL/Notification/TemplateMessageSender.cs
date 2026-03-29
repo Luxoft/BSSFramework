@@ -4,7 +4,6 @@ using Framework.Notification.DTO;
 using CommonFramework;
 
 using Framework.Application.Domain;
-using Framework.Configuration.BLL.Subscriptions;
 using Framework.Core.MessageSender;
 using Framework.Notification.Domain;
 using Framework.Subscriptions.Domain;

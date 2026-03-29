@@ -1,7 +1,7 @@
 ﻿using Framework.Application.Domain;
 using Framework.Restriction;
 
-using SecuritySystem.Notification;
+using SecuritySystem.Notification.Domain;
 
 namespace Framework.Configuration.Domain;
 

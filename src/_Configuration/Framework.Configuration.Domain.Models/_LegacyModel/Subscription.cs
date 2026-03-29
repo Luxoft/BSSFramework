@@ -11,7 +11,7 @@ using Framework.Restriction;
 using Framework.Subscriptions.Domain;
 using Framework.Validation;
 
-using SecuritySystem.Notification;
+using SecuritySystem.Notification.Domain;
 
 namespace Framework.Configuration.Domain;
 

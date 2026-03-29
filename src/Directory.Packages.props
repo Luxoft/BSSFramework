@@ -25,12 +25,12 @@
     <PackageVersion Include="IvAt.SecuritySystem" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="$(IvAt)" />
-    <PackageVersion Include="IvAt.SecuritySystem.Domain" Version="3.1.2" />
+    <PackageVersion Include="IvAt.SecuritySystem.Domain" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission.Abstractions" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.Notification" Version="$(IvAt)" />
-    <PackageVersion Include="IvAt.SecuritySystem.Notification.Abstractions" Version="3.1.1" />
-    <PackageVersion Include="IvAt.SecuritySystem.Notification.Domain" Version="3.1.2" />
+    <PackageVersion Include="IvAt.SecuritySystem.Notification.Abstractions" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.SecuritySystem.Notification.Domain" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.Runtime" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.Testing" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="$(IvAt)" />

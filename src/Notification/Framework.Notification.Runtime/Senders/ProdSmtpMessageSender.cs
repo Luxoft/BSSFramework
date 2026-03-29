@@ -1,22 +1,27 @@
 ﻿using System.Net.Mail;
 
-using CommonFramework;
-
-using Framework.Configuration.BLL;
+using Framework.Notification.Domain;
 using Framework.Notification.DTO;
-using Framework.Notification.New;
-using Framework.NotificationCore.Services;
-using Framework.NotificationCore.Settings;
+using Framework.Notification.Services;
+using Framework.Notification.Settings;
 
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
-namespace Framework.NotificationCore.Senders
+namespace Framework.Notification.Senders
 {
-    internal class ProdSmtpMessageSender(SmtpSettings settings, IRewriteReceiversService rewriteReceiversService, ILogger<SmtpNotificationMessageSender> logger)
-        : ISmtpMessageSender
+    public class ProdSmtpMessageSender(
+        ISmtpClientFactory smtpClientFactory,
+        IOptionsSnapshot<SmtpSettings> settings,
+        IRewriteReceiversService rewriteReceiversService,
+        ILogger<SmtpNotificationMessageSender> logger) : ISmtpMessageSender
     {
-        public async Task SendAsync(SmtpClient client, NotificationEventDTO message, CancellationToken cancellationToken) =>
+        public async Task SendAsync(NotificationEventDTO message, CancellationToken cancellationToken)
+        {
+            using var client = smtpClientFactory.CreateSmtpClient();
+
             await client.SendMailAsync(this.ToMailMessage(message), cancellationToken);
+        }
 
         protected virtual MailMessage ToMailMessage(NotificationEventDTO dto)
         {
@@ -25,12 +30,12 @@ namespace Framework.NotificationCore.Senders
                 throw new ArgumentNullException(nameof(dto));
             }
 
-            if (dto.Targets.All(x => x.Type != NotificationTargetTypes.To))
+            if (dto.Targets.All(x => x.Type != ReceiverRole.To))
             {
                 this.SetSupportTeamAsReceiver(dto);
             }
 
-            var mailMessage = dto.ToMessage().ToMailMessage();
+            var mailMessage = dto.ToDomain().ToMailMessage();
             this.TryRunRewriteRules(dto, mailMessage);
 
             return mailMessage;
@@ -38,11 +43,6 @@ namespace Framework.NotificationCore.Senders
 
         private void TryRunRewriteRules(NotificationEventDTO dto, MailMessage mailMessage)
         {
-            if (rewriteReceiversService == null)
-            {
-                return;
-            }
-
             rewriteReceiversService.RewriteToRecipients(mailMessage, dto);
             rewriteReceiversService.RewriteCopyRecipients(mailMessage, dto);
             rewriteReceiversService.RewriteReplyTo(mailMessage, dto);
@@ -50,7 +50,7 @@ namespace Framework.NotificationCore.Senders
 
         private void SetSupportTeamAsReceiver(NotificationEventDTO dto)
         {
-            if (settings.DefaultReceiverEmails == null)
+            if (settings.Value.DefaultReceiverEmails == null)
             {
                 return;
             }
@@ -60,8 +60,7 @@ namespace Framework.NotificationCore.Senders
                 dto.TechnicalInformation.MessageTemplateCode);
 
             dto.Targets.AddRange(
-                settings.DefaultReceiverEmails.Select(
-                    x => new NotificationTargetDTO { Type = NotificationTargetTypes.To, Name = x }));
+                settings.Value.DefaultReceiverEmails.Select(x => new NotificationTargetDTO { Type = ReceiverRole.To, Name = x }));
         }
     }
 }

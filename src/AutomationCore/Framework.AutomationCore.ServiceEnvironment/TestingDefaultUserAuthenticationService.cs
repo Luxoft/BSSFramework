@@ -1,14 +1,18 @@
-﻿using SecuritySystem;
+﻿using CommonFramework.Auth;
+
+using Framework.Application;
+using Framework.Database;
+
 using SecuritySystem.Testing;
 
 namespace Framework.AutomationCore.ServiceEnvironment;
 
-public class TestingDefaultUserAuthenticationService(
+public class TestingDefaultCurrentUser(
     RootImpersonateServiceState rootImpersonateServiceState,
     TestRootUserInfo testRootUserInfo,
-    IServiceEvaluator<ICurrentUser> currentUserEvaluator) : IDefaultUserAuthenticationService
+    IServiceEvaluator<ICurrentUser> currentUserEvaluator) : ICurrentUser
 {
-    public string GetUserName() =>
+    public string Name =>
 
         rootImpersonateServiceState.CustomUserCredential == null
             ? testRootUserInfo.Name

@@ -1,25 +1,13 @@
-﻿namespace Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
+﻿using Framework.Core;
+using Framework.Infrastructure.WebApiExceptionExpander;
+
+namespace Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
 
 /// <inheritdoc />
-public class TestWebApiExceptionExpander : IWebApiExceptionExpander
+public class TestWebApiExceptionExpander(IExceptionExpander exceptionExpander) : IWebApiExceptionExpander
 {
-    private readonly IExceptionExpander exceptionExpander;
-
-    public TestWebApiExceptionExpander(IExceptionExpander exceptionExpander)
-    {
-        this.exceptionExpander = exceptionExpander ?? throw new ArgumentNullException(nameof(exceptionExpander));
-    }
+    private readonly IExceptionExpander exceptionExpander = exceptionExpander ?? throw new ArgumentNullException(nameof(exceptionExpander));
 
     /// <inheritdoc />
-    public Exception Process(Exception baseException)
-    {
-        var expandedException = this.exceptionExpander.Process(baseException);
-
-        if (expandedException == baseException)
-        {
-            return baseException;
-        }
-
-        return expandedException;
-    }
+    public Exception? TryExpand(Exception baseException) => this.exceptionExpander.TryExpand(baseException);
 }

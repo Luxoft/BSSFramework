@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure\Framework.Infrastructure.csproj" />
+    <ProjectReference Include="..\Framework.AutomationCore\Framework.AutomationCore.csproj" />
   </ItemGroup>
 
 </Project>

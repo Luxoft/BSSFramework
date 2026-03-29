@@ -6,10 +6,8 @@ namespace Framework.Database.NHibernate.Audit;
 /// Base Typed Implement of IEntityTrackingRevisionListener
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public abstract class RevisionEntityListener<T>(IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService) : IEntityTrackingRevisionListener
+public abstract class RevisionEntityListener<T> : IEntityTrackingRevisionListener
 {
-    protected IAuditRevisionUserAuthenticationService AuditRevisionUserAuthenticationService {get; } = auditRevisionUserAuthenticationService ?? throw new ArgumentNullException(nameof(auditRevisionUserAuthenticationService));
-
     public void NewRevision(object revisionEntity) => this.ProcessNewRevision((T)revisionEntity);
 
     public void EntityChanged(Type entityClass, string entityName, object entityId, RevisionType revisionType,

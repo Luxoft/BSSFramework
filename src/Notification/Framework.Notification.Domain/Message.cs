@@ -1,5 +1,5 @@
 ﻿using System.Collections.Immutable;
-using System.Collections.ObjectModel;
+using System.Data;
 using System.Net.Mail;
 
 using CommonFramework;
@@ -10,22 +10,17 @@ namespace Framework.Notification.Domain;
 
 public class Message
 {
-    public Message(string sender, IEnumerable<string> receivers, string subject, string body, bool isBodyHtml, IEnumerable<Attachment> attachments)
-            : this(sender.ToMailAddress(), receivers.ToReceiverAddresses(), subject, body, isBodyHtml, attachments)
-    {
-    }
-
-    public Message(string sender, IEnumerable<ReceiverAddressInfo> receivers, string subject, string body, bool isBodyHtml, IEnumerable<Attachment> attachments)
-            : this(sender.ToMailAddress(), receivers, subject, body, isBodyHtml, attachments)
+    public Message(string sender, IEnumerable<NotificationTarget> receivers, string subject, string body, bool isBodyHtml, IEnumerable<Attachment> attachments)
+            : this(new MailAddress(sender), receivers, subject, body, isBodyHtml, attachments)
     {
     }
 
     public Message(MailAddress sender, IEnumerable<string> receivers, string subject, string body, bool isBodyHtml, IEnumerable<Attachment> attachments)
-            : this(sender, receivers.ToReceiverAddresses(), subject, body, isBodyHtml, attachments)
+            : this(sender, receivers.Select(receiver => new NotificationTarget(receiver, ReceiverRole.To)), subject, body, isBodyHtml, attachments)
     {
     }
 
-    public Message(MailAddress sender, IEnumerable<ReceiverAddressInfo> receivers, string subject, string body, bool isBodyHtml, IEnumerable<Attachment> attachments)
+    public Message(MailAddress sender, IEnumerable<NotificationTarget> receivers, string subject, string body, bool isBodyHtml, IEnumerable<Attachment> attachments)
     {
         if (sender == null) throw new ArgumentNullException(nameof(sender));
         if (subject == null) throw new ArgumentNullException(nameof(subject));
@@ -50,7 +45,7 @@ public class Message
 
     public MailAddress Sender { get; }
 
-    public ImmutableArray<ReceiverAddressInfo> Receivers { get; }
+    public ImmutableArray<NotificationTarget> Receivers { get; }
 
     public string Subject { get; }
 
@@ -69,4 +64,17 @@ public class Message
     }
 
     private string ReplaceUnsupportedCharactersForSubject(string subject) => subject.Replace(Environment.NewLine, " ").Replace('\r', ' ').Replace('\n', ' ');
+
+    public MailMessage ToMailMessage()
+    {
+        var mailMessage = new MailMessage { Subject = this.Subject, Body = this.Body, From = this.Sender, IsBodyHtml = this.IsBodyHtml };
+
+        mailMessage.To.AddRange(this.Receivers.Where(r => r.Role == ReceiverRole.To).Select(info => info.MailAddress));
+        mailMessage.CC.AddRange(this.Receivers.Where(r => r.Role == ReceiverRole.Copy).Select(info => info.MailAddress));
+        mailMessage.ReplyToList.AddRange(this.Receivers.Where(r => r.Role == ReceiverRole.ReplyTo).Select(info => info.MailAddress));
+
+        mailMessage.Attachments.AddRange(this.Attachments.Select(a => a.ToMailAttachment()));
+
+        return mailMessage;
+    }
 }

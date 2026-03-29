@@ -2,45 +2,39 @@
 
 using CommonFramework;
 
+using Framework.Notification.Domain;
 using Framework.Notification.DTO;
-using Framework.NotificationCore.Extensions;
-using Framework.NotificationCore.Settings;
+using Framework.Notification.Extensions;
+using Framework.Notification.Settings;
 
 using Microsoft.Extensions.Options;
 
-namespace Framework.NotificationCore.Services;
+namespace Framework.Notification.Services;
 
-public class RewriteReceiversService : IRewriteReceiversService
+public class RewriteReceiversService(IOptionsSnapshot<RewriteReceiversSettings> settings) : IRewriteReceiversService
 {
-    private readonly RewriteReceiversSettings settings;
-
-    public RewriteReceiversService(IOptions<RewriteReceiversSettings> settings)
-    {
-        this.settings = settings.Value;
-    }
-
     public virtual void RewriteToRecipients(MailMessage message, NotificationEventDTO dto)
     {
-        var recipients = this.GetRecipients(dto, NotificationTargetTypes.To);
+        var recipients = this.GetRecipients(dto, ReceiverRole.To);
         message.To.Clear();
         message.To.AddRange(recipients);
     }
 
     public virtual void RewriteCopyRecipients(MailMessage message, NotificationEventDTO dto)
     {
-        var recipients = this.GetRecipients(dto, NotificationTargetTypes.Copy);
+        var recipients = this.GetRecipients(dto, ReceiverRole.Copy);
         message.CC.Clear();
         message.CC.AddRange(recipients);
     }
 
     public void RewriteReplyTo(MailMessage message, NotificationEventDTO dto)
     {
-        var recipients = this.GetRecipients(dto, NotificationTargetTypes.ReplyTo);
+        var recipients = this.GetRecipients(dto, ReceiverRole.ReplyTo);
         message.ReplyToList.Clear();
         message.ReplyToList.AddRange(recipients);
     }
 
-    private IEnumerable<MailAddress> GetRecipients(NotificationEventDTO dto, NotificationTargetTypes type) => dto.Targets
+    private IEnumerable<MailAddress> GetRecipients(NotificationEventDTO dto, ReceiverRole type) => dto.Targets
             .Where(z => z.Type == type)
             .Select(z =>
                     {

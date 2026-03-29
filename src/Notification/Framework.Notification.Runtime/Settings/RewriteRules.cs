@@ -1,4 +1,4 @@
-﻿namespace Framework.NotificationCore.Settings;
+﻿namespace Framework.Notification.Settings;
 
 public class RewriteRules
 {

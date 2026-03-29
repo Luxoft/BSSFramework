@@ -1,10 +1,19 @@
 ﻿using System.Reflection;
 
+using CommonFramework;
+using CommonFramework.Auth;
 using CommonFramework.DependencyInjection;
 
+using Framework.Application.Jobs;
 using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment.Services;
+using Framework.AutomationCore.Settings;
+using Framework.Infrastructure.Middleware;
+using Framework.Infrastructure.WebApiExceptionExpander;
 
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
 using SecuritySystem.Credential;
 using SecuritySystem.Testing;
@@ -74,7 +83,7 @@ public static class ServiceProviderExtensions
 
                            .AddSingleton(typeof(ControllerEvaluator<>))
 
-                           .ReplaceSingleton<IDefaultUserAuthenticationService, TestingDefaultUserAuthenticationService>()
+                           .Replace(ServiceDescriptor.KeyedSingleton<ICurrentUser, TestingDefaultCurrentUser>(ICurrentUser.DefaultKey))
 
                            .AddSecuritySystemTesting(b => b.SetEvaluator(typeof(BssTestingEvaluator<>))
                                                            .SetTestRootUserInfo(sp => sp.GetRequiredService<IOptions<AutomationFrameworkSettings>>()

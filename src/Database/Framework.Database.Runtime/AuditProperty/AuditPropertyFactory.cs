@@ -1,12 +1,12 @@
-﻿using SecuritySystem.Services;
+﻿using CommonFramework.Auth;
 
 namespace Framework.Database.AuditProperty;
 
 public class AuditPropertyFactory(
-    IRawUserAuthenticationService userAuthenticationService,
+    ICurrentUser currentUser,
     TimeProvider timeProvider) : IAuditPropertyFactory
 {
-    public AuditPropertyPair GetCreateAuditProperty() => AuditPropertyPair.GetCreateAuditProperty(userAuthenticationService, timeProvider);
+    public AuditPropertyPair GetCreateAuditProperty() => AuditPropertyPair.GetCreateAuditProperty(currentUser, timeProvider);
 
-    public AuditPropertyPair GetModifyAuditProperty() => AuditPropertyPair.GetModifyAuditProperty(userAuthenticationService, timeProvider);
+    public AuditPropertyPair GetModifyAuditProperty() => AuditPropertyPair.GetModifyAuditProperty(currentUser, timeProvider);
 }

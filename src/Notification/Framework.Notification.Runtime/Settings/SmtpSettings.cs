@@ -1,4 +1,4 @@
-﻿namespace Framework.NotificationCore.Settings;
+﻿namespace Framework.Notification.Settings;
 
 public class SmtpSettings
 {
@@ -16,10 +16,10 @@ public class SmtpSettings
     /// <summary>
     /// Ящик, на который будут перенаправлены нотификации без получателей (те нотификации, которые без получателей впринципе разрешены)
     /// </summary>
-    public string[] DefaultReceiverEmails { get; set; }
+    public string[]? DefaultReceiverEmails { get; set; }
 
     /// <summary>
     /// Тестовый ящик, на который будут перенаправлены нотификации тестовых стендов (которые !environment.IsProduction())
     /// </summary>
-    public string[] TestEmails { get; set; }
+    public string[]? TestEmails { get; set; }
 }

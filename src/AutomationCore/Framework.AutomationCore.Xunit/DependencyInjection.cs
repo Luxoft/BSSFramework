@@ -1,12 +1,12 @@
-﻿using Automation.ServiceEnvironment;
-using Automation.Settings;
-using Automation.Xunit.ServiceEnvironment;
+﻿using Bss.Testing.Xunit.Interfaces;
 
-using Bss.Testing.Xunit.Interfaces;
+using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
+using Framework.AutomationCore.Settings;
+using Framework.AutomationCore.Xunit.ServiceEnvironment;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Automation.Xunit;
+namespace Framework.AutomationCore.Xunit;
 
 public static class DependencyInjection
 {

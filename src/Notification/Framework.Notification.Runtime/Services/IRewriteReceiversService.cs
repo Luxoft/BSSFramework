@@ -1,7 +1,8 @@
 ﻿using System.Net.Mail;
+
 using Framework.Notification.DTO;
 
-namespace Framework.NotificationCore.Services;
+namespace Framework.Notification.Services;
 
 public interface IRewriteReceiversService
 {

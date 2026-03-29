@@ -1,4 +1,4 @@
-﻿using Framework.Core;
+﻿using CommonFramework;
 
 namespace Framework.Application.Middleware;
 
@@ -11,7 +11,26 @@ public static class ScopedEvaluatorMiddlewareExtensions
         public IScopedEvaluatorMiddleware With(IScopedEvaluatorMiddleware otherMiddleware) => new WithMiddleware(middleware, otherMiddleware);
     }
 
-    public static IScopedEvaluatorMiddleware Aggregate(this IEnumerable<IScopedEvaluatorMiddleware> middlewareList) => middlewareList.Aggregate((IScopedEvaluatorMiddleware)new EmptyMiddleware(), (m1, m2) => m1.With(m2));
+    public static IScopedEvaluatorMiddleware Aggregate(this IEnumerable<IScopedEvaluatorMiddleware> middlewareList)
+    {
+        using var enumerator = middlewareList.GetEnumerator();
+
+        if (enumerator.MoveNext())
+        {
+            var result = enumerator.Current;
+
+            while (enumerator.MoveNext())
+            {
+                result = result.With(enumerator.Current);
+            }
+
+            return result;
+        }
+        else
+        {
+            return new EmptyMiddleware();
+        }
+    }
 
     private class EmptyMiddleware : IScopedEvaluatorMiddleware
     {

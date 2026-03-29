@@ -1,5 +1,4 @@
-﻿using Framework.Application.Auth;
-using Framework.Application.Middleware;
+﻿using Framework.Application.Middleware;
 using Framework.Database;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -9,7 +8,6 @@ namespace Framework.Application.Jobs;
 
 public class JobMiddlewareFactory(
     IServiceProvider serviceProvider,
-    ApplicationDefaultUserAuthenticationServiceSettings applicationDefaultUserAuthenticationServiceSettings,
     JobImpersonateData? jobImpersonateData = null) : IJobMiddlewareFactory
 {
     public IScopedEvaluatorMiddleware Create<TJob>(bool withRootLogging) => this.GetMiddlewares<TJob>(withRootLogging).Aggregate();
@@ -18,7 +16,10 @@ public class JobMiddlewareFactory(
     {
         yield return new TryCloseSessionEvaluatorMiddleware(serviceProvider.GetRequiredService<IDBSessionManager>());
 
-        yield return new ImpersonateEvaluatorMiddleware(serviceProvider, jobImpersonateData?.RunAs ?? applicationDefaultUserAuthenticationServiceSettings.UserName);
+        if (jobImpersonateData?.RunAs != null)
+        {
+            yield return new ImpersonateEvaluatorMiddleware(serviceProvider, jobImpersonateData?.RunAs);
+        }
 
         if (withRootLogging)
         {

@@ -1,14 +1,14 @@
-﻿using Framework.Database.AuditProperty;
+﻿using CommonFramework.Auth;
 
-using SecuritySystem.Services;
+using Framework.Database.AuditProperty;
 
 namespace Framework.Database.NHibernate;
 
 public class AuditPropertyFactory(
-    IRawUserAuthenticationService userAuthenticationService,
+    ICurrentUser currentUser,
     TimeProvider timeProvider) : IAuditPropertyFactory
 {
-    public AuditPropertyPair GetCreateAuditProperty() => AuditPropertyPair.GetCreateAuditProperty(userAuthenticationService, timeProvider);
+    public AuditPropertyPair GetCreateAuditProperty() => AuditPropertyPair.GetCreateAuditProperty(currentUser, timeProvider);
 
-    public AuditPropertyPair GetModifyAuditProperty() => AuditPropertyPair.GetModifyAuditProperty(userAuthenticationService, timeProvider);
+    public AuditPropertyPair GetModifyAuditProperty() => AuditPropertyPair.GetModifyAuditProperty(currentUser, timeProvider);
 }

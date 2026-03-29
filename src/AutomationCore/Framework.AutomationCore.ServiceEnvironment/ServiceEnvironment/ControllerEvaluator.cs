@@ -3,9 +3,17 @@
 using CommonFramework;
 using CommonFramework.Visitor;
 
+using Framework.Core;
+using Framework.Database;
+using Framework.Infrastructure.Middleware;
+using Framework.Infrastructure.WebApiExceptionExpander;
+
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem.Credential;
+using SecuritySystem.Services;
 using SecuritySystem.Testing;
 
 namespace Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
@@ -51,7 +59,7 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
 
         await new WebApiInvoker(c, context => InvokeController(context, func))
               .WithMiddleware(next => new ImpersonateMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, customUserCredential))
-              .WithMiddleware(next => new TryProcessDbSessionMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IDBSessionManager>(), httpContext.RequestServices.GetRequiredService<IWebApiDBSessionModeResolver>()))
+              .WithMiddleware(next => new TryProcessDbSessionMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IDBSessionManager>(), httpContext.RequestServices.GetRequiredService<IWebApiCurrentDBSessionModeResolver>()))
               .WithMiddleware(next => new InitCurrentMethodMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, invokeExpr))
               .WithMiddleware(next => new WebApiExceptionExpanderMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IWebApiExceptionExpander>()))
               .Invoke();

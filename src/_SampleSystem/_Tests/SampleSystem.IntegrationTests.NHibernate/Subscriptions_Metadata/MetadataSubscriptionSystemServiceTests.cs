@@ -41,7 +41,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         // Assert
         errors.Should().HaveCount(0);
         expectedNotifications.Should().HaveCount(1);
-        expectedNotifications.Single().Targets.Single(z => z.Type == NotificationTargetTypes.ReplyTo).Name.Should().Be("replayTo@luxoft.com");
+        expectedNotifications.Single().Targets.Single(z => z.Type == ReceiverRole.ReplyTo).Name.Should().Be("replayTo@luxoft.com");
     }
 
     [TestMethod]
@@ -66,7 +66,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         expectedNotifications.Should().HaveCount(1);
         expectedNotifications.Single().Message.Message.Should().BeEquivalentTo(message);
         expectedNotifications.Single()
-                             .Targets.Any(z => z.Type == NotificationTargetTypes.ReplyTo)
+                             .Targets.Any(z => z.Type == ReceiverRole.ReplyTo)
                              .Should()
                              .BeFalse();
     }

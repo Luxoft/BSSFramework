@@ -1,5 +1,7 @@
 ﻿using System.Runtime.Serialization;
 
+using Framework.Notification.Domain;
+
 namespace Framework.Notification.DTO;
 
 [DataContract]
@@ -19,4 +21,7 @@ public class NotificationAttachmentDTO
 
     [DataMember]
     public bool IsInline { get; set; }
+
+
+    public Attachment ToDomain() => new(this.Content, this.Name) { ContentId = this.ContentId, IsInline = this.IsInline };
 }

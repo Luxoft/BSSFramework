@@ -1,10 +1,10 @@
-﻿using CommonFramework.DependencyInjection;
+﻿using CommonFramework.Auth;
+using CommonFramework.DependencyInjection;
 
 using Framework.Application;
 using Framework.Application.Auth;
 using Framework.Application.DependencyInjection;
 using Framework.Application.Events;
-using Framework.Core.Auth;
 using Framework.Database.DALListener;
 using Framework.Database.ExpressionVisitorContainer;
 using Framework.Infrastructure.Auth;
@@ -35,7 +35,7 @@ public class BssFrameworkBuilder : IBssFrameworkBuilder, IServiceInitializer
         {
             s.SetQueryableSource<DalQueryableSource>();
             s.SetGenericRepository<DalGenericRepository>();
-            s.SetRawUserAuthenticationService<ApplicationUserAuthenticationService>();
+            s.SetRawCurrentUser<ApplicationRawCurrentUser>();
 
             setupAction(s);
         }));
@@ -100,8 +100,8 @@ public class BssFrameworkBuilder : IBssFrameworkBuilder, IServiceInitializer
             this.AddListener<DenormalizeHierarchicalDALListener>();
         }
 
-        services.AddSingleton(ApplicationDefaultUserAuthenticationServiceSettings.Default);
-        services.AddSingleton<IDefaultUserAuthenticationService, ApplicationDefaultUserAuthenticationService>();
+        services.AddSingleton(ApplicationDefaultCurrentUserSettings.Default);
+        services.AddKeyedSingleton<ICurrentUser, ApplicationDefaultCurrentUser>(ICurrentUser.DefaultKey);
 
         services.AddSingleton<IEventXsdExporter2, EventXsdExporter2>();
 

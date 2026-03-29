@@ -1,17 +1,17 @@
-﻿using Automation.Extensions;
-using Automation.Settings;
-using Automation.Utils.DatabaseUtils;
-using Automation.Utils.DatabaseUtils.Interfaces;
-using Automation.Xunit.ServiceProviderPool;
+﻿using Bss.Testing.Xunit.Interfaces;
 
-using Bss.Testing.Xunit.Interfaces;
+using Framework.AutomationCore.Extensions;
+using Framework.AutomationCore.Settings;
+using Framework.AutomationCore.Utils.DatabaseUtils;
+using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
+using Framework.AutomationCore.Xunit.ServiceProviderPool;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
-namespace Automation.Xunit;
+namespace Framework.AutomationCore.Xunit;
 
 public abstract class AutomationCoreFrameworkInitializer : IFrameworkInitializer
 {

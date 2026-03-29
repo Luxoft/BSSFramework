@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 
 using CommonFramework;
+using CommonFramework.Auth;
 
 using Framework.Core;
 using Framework.Database.Mapping;
@@ -256,7 +257,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
             ms.Initializer.Initialize(cfg);
         }
 
-        cfg.InitializeAudit(overrideMappingSettings, LazyInterfaceImplementHelper.CreateNotImplemented<IAuditRevisionUserAuthenticationService>());
+        cfg.InitializeAudit(overrideMappingSettings, LazyInterfaceImplementHelper.CreateNotImplemented<ICurrentUser>());
 
         SchemaMetadataUpdater.QuoteTableAndColumns(cfg, global::NHibernate.Dialect.Dialect.GetDialect(cfg.Properties));
 

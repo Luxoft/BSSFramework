@@ -12,4 +12,7 @@ public class NotificationTargetDTO
 
     [DataMember]
     public string Name { get; set; }
+
+
+    public NotificationTarget ToDomain() => new(this.Name, this.Type);
 }

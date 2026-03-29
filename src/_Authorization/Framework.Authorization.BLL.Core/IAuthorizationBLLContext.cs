@@ -1,4 +1,6 @@
-﻿using Framework.Authorization.Domain;
+﻿using CommonFramework.Auth;
+
+using Framework.Authorization.Domain;
 using Framework.BLL;
 using Framework.Core.TypeResolving;
 using Framework.Validation;

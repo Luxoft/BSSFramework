@@ -2,7 +2,7 @@
 
 using Bss.Testing.Xunit.Interfaces;
 
-namespace Automation.Xunit.ServiceProviderPool;
+namespace Framework.AutomationCore.Xunit.ServiceProviderPool;
 
 public class DiServiceProviderPool(ServiceProviderPoolFunc createServiceProviderFunc) : ITestServiceProviderPool
 {

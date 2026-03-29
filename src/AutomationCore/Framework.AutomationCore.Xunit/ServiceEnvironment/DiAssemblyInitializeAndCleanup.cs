@@ -1,11 +1,11 @@
-using Automation.Settings;
-using Automation.Utils.DatabaseUtils;
+﻿using Bss.Testing.Xunit.Interfaces;
 
-using Bss.Testing.Xunit.Interfaces;
+using Framework.AutomationCore.Settings;
+using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
 using Microsoft.Extensions.Options;
 
-namespace Automation.Xunit.ServiceEnvironment;
+namespace Framework.AutomationCore.Xunit.ServiceEnvironment;
 
 public class DiAssemblyInitializeAndCleanup(
     IOptions<AutomationFrameworkSettings> settings,

@@ -1,9 +1,12 @@
-﻿using Framework.Core;
+﻿using CommonFramework.Auth;
+using Framework.Core;
 using Framework.Database.NHibernate._MappingSettings;
 using Framework.Database.NHibernate.Audit;
 using Framework.Database.NHibernate.SqlExceptionProcessors;
 
 using GenericQueryable.NHibernate;
+
+using Microsoft.Extensions.DependencyInjection;
 
 using NHibernate;
 using NHibernate.Cfg;
@@ -19,7 +22,7 @@ public class NHibSessionEnvironment : IDisposable
     public NHibSessionEnvironment(
             IEnumerable<MappingSettings> mappingSettings,
             IEnumerable<IConfigurationInitializer> initializers,
-            IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService,
+            [FromKeyedServices(ICurrentUser.DefaultKey)]ICurrentUser defaultCurrentUser,
             INHibSessionEnvironmentSettings settings,
             IDalValidationIdentitySource dalValidationIdentitySource)
     {
@@ -40,7 +43,7 @@ public class NHibSessionEnvironment : IDisposable
 
             this.Configuration.SessionFactory().ParsingLinqThrough<VisitedNHibQueryProvider>();
 
-            this.cfg.InitializeAudit(cachedMappingSettings, auditRevisionUserAuthenticationService);
+            this.cfg.InitializeAudit(cachedMappingSettings, defaultCurrentUser);
 
             SchemaMetadataUpdater.QuoteTableAndColumns(this.cfg, global::NHibernate.Dialect.Dialect.GetDialect(this.cfg.Properties));
 

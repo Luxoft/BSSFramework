@@ -1,16 +1,12 @@
-﻿using CommonFramework.DependencyInjection;
+﻿using Framework.Core.MessageSender;
+using Framework.Notification.Jobs;
+using Framework.Notification.Senders;
+using Framework.Notification.Services;
+using Framework.Notification.Settings;
 
-using Framework.Core;
-using Framework.Core.MessageSender;
-using Framework.NotificationCore.Jobs;
-using Framework.NotificationCore.Senders;
-using Framework.NotificationCore.Services;
-using Framework.NotificationCore.Settings;
-
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.DependencyInjection;
+namespace Framework.Notification.Extensions;
 
 public static class NotificationSenderExtensions
 {

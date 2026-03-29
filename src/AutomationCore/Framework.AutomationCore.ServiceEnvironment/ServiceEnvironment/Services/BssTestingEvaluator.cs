@@ -1,4 +1,7 @@
-﻿using SecuritySystem.Credential;
+﻿using Framework.Application;
+using Framework.Database;
+
+using SecuritySystem.Credential;
 using SecuritySystem.Testing;
 
 namespace Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment.Services;

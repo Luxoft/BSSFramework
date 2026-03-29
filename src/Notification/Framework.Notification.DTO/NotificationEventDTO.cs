@@ -36,7 +36,7 @@ public class NotificationEventDTO
     {
         var mailMessage = notification.Message;
         var technicalInformation = notification.TechnicalInformation;
-        this.From = mailMessage.From.Address;
+        this.From = mailMessage.From!.Address;
         this.FromName = mailMessage.From.DisplayName;
 
         this.Targets = mailMessage
@@ -47,11 +47,7 @@ public class NotificationEventDTO
                        .ToList();
         this.Subject = mailMessage.Subject;
 
-        this.Message = new NotificationMessage()
-        {
-            IsBodyHtml = mailMessage.IsBodyHtml,
-            Message = mailMessage.Body
-        };
+        this.Message = new NotificationMessage() { IsBodyHtml = mailMessage.IsBodyHtml, Message = mailMessage.Body };
 
         this.Attachments = mailMessage.Attachments.Select(z =>
         {
@@ -60,15 +56,24 @@ public class NotificationEventDTO
             var content = ms.ToArray();
 
             return new NotificationAttachmentDTO
-            {
-                Content = content,
-                Extension = z.ContentType.Name,
-                Name = z.Name,
-                ContentId = z.ContentId,
-                IsInline = z.ContentDisposition.Inline
-            };
+                   {
+                       Content = content,
+                       Extension = z.ContentType.Name,
+                       Name = z.Name!,
+                       ContentId = z.ContentId,
+                       IsInline = z.ContentDisposition!.Inline
+                   };
         }).ToList();
 
         this.TechnicalInformation = new NotificationTechnicalInformationDTO(technicalInformation);
     }
+
+    public Message ToDomain() =>
+        new(
+            this.From,
+            this.Targets.Select(t => t.ToDomain()),
+            this.Subject,
+            this.Message.Message,
+            this.Message.IsBodyHtml,
+            this.Attachments.Select(a => a.ToDomain()));
 }

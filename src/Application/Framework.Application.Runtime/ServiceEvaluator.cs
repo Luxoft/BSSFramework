@@ -17,12 +17,18 @@ public class ServiceEvaluator<TService>(IServiceProvider rootServiceProvider) : 
     {
         await using var scope = rootServiceProvider.CreateAsyncScope();
 
-        var sessionMiddleware = new SessionEvaluatorMiddleware(scope.ServiceProvider, sessionMode);
-
-        var impersonateMiddleware = new ImpersonateEvaluatorMiddleware(scope.ServiceProvider, userCredential);
-
-        return await sessionMiddleware
-                     .With(impersonateMiddleware)
+        return await GetMiddlewares(scope.ServiceProvider, sessionMode, userCredential)
+                     .Aggregate()
                      .EvaluateAsync(async () => await getResult(scope.ServiceProvider.GetRequiredService<TService>()));
+    }
+
+    private static IEnumerable<IScopedEvaluatorMiddleware> GetMiddlewares(IServiceProvider serviceProvider, DBSessionMode sessionMode, UserCredential? userCredential)
+    {
+        yield return new SessionEvaluatorMiddleware(serviceProvider, sessionMode);
+
+        if (userCredential != null)
+        {
+            yield return new ImpersonateEvaluatorMiddleware(serviceProvider, userCredential);
+        }
     }
 }

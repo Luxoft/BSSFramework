@@ -1,15 +1,15 @@
-﻿using Automation.ServiceEnvironment;
-using Automation.ServiceEnvironment.Services;
-using Automation.Settings;
-using Automation.Utils.DatabaseUtils.Interfaces;
+﻿using Bss.Testing.Xunit.Interfaces;
 
-using Bss.Testing.Xunit.Interfaces;
+using Framework.AutomationCore.ServiceEnvironment;
+using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment.Services;
+using Framework.AutomationCore.Settings;
+using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
 using Microsoft.Extensions.Options;
 
 using SecuritySystem.Testing;
 
-namespace Automation.Xunit.ServiceEnvironment;
+namespace Framework.AutomationCore.Xunit.ServiceEnvironment;
 
 public class DiTestInitializeAndCleanup(
     IOptions<AutomationFrameworkSettings> settings,

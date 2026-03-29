@@ -1,10 +1,8 @@
-﻿using System.Net.Mail;
-
-using Framework.Notification.DTO;
+﻿using Framework.Notification.DTO;
 
 namespace Framework.Notification;
 
-internal interface ISmtpMessageSender
+public interface ISmtpMessageSender
 {
-    Task SendAsync(SmtpClient client, NotificationEventDTO message, CancellationToken cancellationToken);
+    Task SendAsync(NotificationEventDTO message, CancellationToken cancellationToken = default);
 }

@@ -3,22 +3,24 @@
 using CommonFramework;
 
 using Framework.Notification.DTO;
-using Framework.NotificationCore.Extensions;
-using Framework.NotificationCore.Services;
-using Framework.NotificationCore.Settings;
+using Framework.Notification.Extensions;
+using Framework.Notification.Services;
+using Framework.Notification.Settings;
 
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
-namespace Framework.NotificationCore.Senders;
+namespace Framework.Notification.Senders;
 
 /// <summary>
 /// логика для тестовых стендов - письма перенаправляются на тестовый почтовый ящик, а исходные адресаты записываются в тело письма
 /// </summary>
 internal class TestSmtpMessageSender(
-    SmtpSettings settings,
+    ISmtpClientFactory smtpClientFactory,
+    IOptionsSnapshot<SmtpSettings> settings,
     IRewriteReceiversService rewriteReceiversService,
     ILogger<SmtpNotificationMessageSender> logger)
-    : ProdSmtpMessageSender(settings, rewriteReceiversService, logger)
+    : ProdSmtpMessageSender(smtpClientFactory, settings, rewriteReceiversService, logger)
 {
     protected override MailMessage ToMailMessage(NotificationEventDTO dto)
     {
@@ -38,9 +40,9 @@ internal class TestSmtpMessageSender(
         message.Bcc.Clear();
         message.ReplyToList.Clear();
 
-        if (settings.TestEmails.Any())
+        if (settings.Value.TestEmails.Any())
         {
-            message.To.AddRange(RecipientsHelper.ToRecipients(settings.TestEmails));
+            message.To.AddRange(RecipientsHelper.ToRecipients(settings.Value.TestEmails));
         }
     }
 

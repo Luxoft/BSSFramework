@@ -3,22 +3,25 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Copyright>Luxoft 2009-2026</Copyright>
-    <Authors>Luxoft BSS</Authors>
+
+    <MinClientVersion>3.6</MinClientVersion>
+    <IsPackable>true</IsPackable>
+
     <RepositoryUrl>https://github.com/Luxoft/BSSFramework</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://www.nuget.org/profiles/Luxoft</PackageProjectUrl>
-    <IsPackable>true</IsPackable>
-    <MinClientVersion>3.6</MinClientVersion>
 
-    <Nullable>enable</Nullable>
+    <Copyright>Luxoft 2009-2026</Copyright>
+    <Authors>Luxoft BSS</Authors>
+
   </PropertyGroup>
 
   <!-- PDB settings -->
   <PropertyGroup>
 
-          <LangVersion>latest</LangVersion>
+    <LangVersion>latest</LangVersion>
     <!-- Include PDB into DLL -->
     <DebugType>embedded</DebugType>
     <DebugSymbols>true</DebugSymbols>

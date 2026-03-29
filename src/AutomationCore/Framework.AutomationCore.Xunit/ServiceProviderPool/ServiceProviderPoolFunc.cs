@@ -1,4 +1,4 @@
-﻿namespace Automation.Xunit.ServiceProviderPool;
+﻿namespace Framework.AutomationCore.Xunit.ServiceProviderPool;
 
 public class ServiceProviderPoolFunc(Func<IServiceProvider> func)
 {

@@ -2,6 +2,7 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
+    <IvAt>3.1.0.0</IvAt>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="AutoFixture" Version="4.18.1" />
@@ -11,26 +12,27 @@
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="Dapper" Version="2.1.72" />
     <PackageVersion Include="Dapper.Contrib" Version="2.0.78" />
-    <PackageVersion Include="IvAt.CommonFramework" Version="3.0.5" />
-    <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="3.0.5" />
-    <PackageVersion Include="IvAt.CommonFramework.GenericRepository" Version="3.0.5" />
-    <PackageVersion Include="IvAt.CommonFramework.IdentitySource.Abstractions" Version="3.0.5" />
-    <PackageVersion Include="IvAt.GenericQueryable" Version="3.0.5" />
-    <PackageVersion Include="IvAt.GenericQueryable.Abstractions" Version="3.0.5" />
-    <PackageVersion Include="IvAt.GenericQueryable.EntityFramework" Version="3.0.5" />
-    <PackageVersion Include="IvAt.GenericQueryable.NHibernate" Version="3.0.5" />
-    <PackageVersion Include="IvAt.GenericQueryable.Runtime" Version="3.0.5" />
-    <PackageVersion Include="IvAt.HierarchicalExpand.Runtime" Version="3.0.4" />
-    <PackageVersion Include="IvAt.SecuritySystem" Version="3.0.7" />
-    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="3.0.7" />
-    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="3.0.7" />
-    <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission" Version="3.0.7" />
-    <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission.Abstractions" Version="3.0.7" />
-    <PackageVersion Include="IvAt.SecuritySystem.Notification" Version="3.0.7" />
-    <PackageVersion Include="IvAt.SecuritySystem.Notification.Abstractions" Version="3.0.7" />
-    <PackageVersion Include="IvAt.SecuritySystem.Runtime" Version="3.0.7" />
-    <PackageVersion Include="IvAt.SecuritySystem.Testing" Version="3.0.7" />
-    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="3.0.7" />
+
+    <PackageVersion Include="IvAt.CommonFramework" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.CommonFramework.GenericRepository" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.CommonFramework.IdentitySource.Abstractions" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.GenericQueryable" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.GenericQueryable.Abstractions" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.GenericQueryable.EntityFramework" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.GenericQueryable.NHibernate" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.GenericQueryable.Runtime" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.HierarchicalExpand.Runtime" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.SecuritySystem" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.SecuritySystem.Configurator" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission.Abstractions" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.SecuritySystem.Notification" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.SecuritySystem.Notification.Abstractions" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.SecuritySystem.Runtime" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.SecuritySystem.Testing" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="$(IvAt)" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="1.6.7" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Middlewares" Version="1.6.7" />
     <PackageVersion Include="Luxoft.Bss.Platform.Events" Version="1.6.7" />

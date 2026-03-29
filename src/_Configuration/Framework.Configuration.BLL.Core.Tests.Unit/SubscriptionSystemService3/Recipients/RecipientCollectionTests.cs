@@ -74,7 +74,7 @@ public sealed class RecipientCollectionTests : TestFixtureBase
         var expected = new RecipientCollection([recipient1, recipient2]);
 
         // Act
-        var mergeResult = left.Merge(right, RecepientsMergeMode.Union);
+        var mergeResult = left.Merge(right, RecipientsMergeMode.Union);
 
         // Assert
         mergeResult.Should().BeEquivalentTo(expected);
@@ -92,7 +92,7 @@ public sealed class RecipientCollectionTests : TestFixtureBase
         var expected = new RecipientCollection([recipient1]);
 
         // Act
-        var mergeResult = left.Merge(right, RecepientsMergeMode.Intersect);
+        var mergeResult = left.Merge(right, RecipientsMergeMode.Intersect);
 
         // Assert
         mergeResult.Should().BeEquivalentTo(expected);
@@ -110,7 +110,7 @@ public sealed class RecipientCollectionTests : TestFixtureBase
         var expected = new RecipientCollection([recipient1]);
 
         // Act
-        var mergeResult = left.Merge(right, RecepientsMergeMode.LeftExceptRight);
+        var mergeResult = left.Merge(right, RecipientsMergeMode.LeftExceptRight);
 
         // Assert
         mergeResult.Should().BeEquivalentTo(expected);
@@ -128,7 +128,7 @@ public sealed class RecipientCollectionTests : TestFixtureBase
         var expected = new RecipientCollection([recipient2]);
 
         // Act
-        var mergeResult = left.Merge(right, RecepientsMergeMode.RightExceptLeft);
+        var mergeResult = left.Merge(right, RecipientsMergeMode.RightExceptLeft);
 
         // Assert
         mergeResult.Should().BeEquivalentTo(expected);

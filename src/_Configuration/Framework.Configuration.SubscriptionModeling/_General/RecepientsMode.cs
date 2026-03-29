@@ -1,12 +1,12 @@
-﻿namespace Framework.Configuration;
+﻿namespace Framework.Configuration.SubscriptionModeling._General;
 
 /// <summary>
 /// Перечисление принципов комбинации адресатов рассылки
 /// </summary>
 /// <remarks>
-/// Recepients Mode объясняет, как система должна получить рецепиентов в случае, когда оба типа заполнены
+/// Recipients Mode объясняет, как система должна получить рецепиентов в случае, когда оба типа заполнены
 /// </remarks>
-public enum RecepientsSelectorMode
+public enum RecipientsSelectorMode
 {
     /// <summary>
     /// Oбъединение "Business Roles" и "Generation"

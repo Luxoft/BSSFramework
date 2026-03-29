@@ -2,11 +2,7 @@
 
 public static class MissingParsingMethodExceptionExtensions
 {
-    internal static Exception ToMissingParsingMethodException(this Type obj, string message, int position, string methodName, IEnumerable<Type> tryArgs)
-    {
-        return new MissingParsingMethodException(message, position, obj, methodName, tryArgs);
-    }
-
+    internal static Exception ToMissingParsingMethodException(this Type obj, string message, int position, string methodName, IEnumerable<Type> tryArgs) => new MissingParsingMethodException(message, position, obj, methodName, tryArgs);
 
     public static Type? GetArgumentType<TDelegate, TArg>(this INativeExpressionParser nativeExpression, string expression)
     {

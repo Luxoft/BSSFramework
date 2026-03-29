@@ -1,8 +1,4 @@
-﻿using Framework.Core;
-
-using CommonFramework;
-
-namespace Framework.Configuration;
+﻿namespace Framework.Configuration.SubscriptionModeling._General;
 
 /// <summary>
 /// Тип подписки.

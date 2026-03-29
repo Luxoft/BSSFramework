@@ -1,29 +1,29 @@
 ﻿using Framework.Notification;
 
-namespace Framework.Configuration.SubscriptionModeling;
+namespace Framework.Configuration.SubscriptionModeling._General;
 
 public static class EmployeeExtensions
 {
-    public static IEnumerable<IEmployee> GetMergeResult(this IEnumerable<IEmployee> recepientsByRoles, IEnumerable<IEmployee> recipientsByGeneration, RecepientsSelectorMode mode)
+    public static IEnumerable<IEmployee> GetMergeResult(this IEnumerable<IEmployee> recipientsByRoles, IEnumerable<IEmployee> recipientsByGeneration, RecipientsSelectorMode mode)
     {
-        if (recepientsByRoles == null) throw new ArgumentNullException(nameof(recepientsByRoles));
+        if (recipientsByRoles == null) throw new ArgumentNullException(nameof(recipientsByRoles));
         if (recipientsByGeneration == null) throw new ArgumentNullException(nameof(recipientsByGeneration));
 
         var employeeComparer = EmployeeEqualityComparer.EMail;
 
         switch (mode)
         {
-            case RecepientsSelectorMode.Union:
-                return recepientsByRoles.Union(recipientsByGeneration, employeeComparer);
+            case RecipientsSelectorMode.Union:
+                return recipientsByRoles.Union(recipientsByGeneration, employeeComparer);
 
-            case RecepientsSelectorMode.Intersect:
-                return recepientsByRoles.Intersect(recipientsByGeneration, employeeComparer);
+            case RecipientsSelectorMode.Intersect:
+                return recipientsByRoles.Intersect(recipientsByGeneration, employeeComparer);
 
-            case RecepientsSelectorMode.RolesExceptGeneration:
-                return recepientsByRoles.Except(recipientsByGeneration, employeeComparer);
+            case RecipientsSelectorMode.RolesExceptGeneration:
+                return recipientsByRoles.Except(recipientsByGeneration, employeeComparer);
 
-            case RecepientsSelectorMode.GenerationExceptRoles:
-                return recipientsByGeneration.Except(recepientsByRoles, employeeComparer);
+            case RecipientsSelectorMode.GenerationExceptRoles:
+                return recipientsByGeneration.Except(recipientsByRoles, employeeComparer);
 
             default:
                 throw new ArgumentOutOfRangeException(mode.ToString());

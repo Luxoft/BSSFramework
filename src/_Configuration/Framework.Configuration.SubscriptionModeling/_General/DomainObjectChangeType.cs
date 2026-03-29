@@ -1,4 +1,4 @@
-﻿namespace Framework.Configuration.Core;
+﻿namespace Framework.Configuration.SubscriptionModeling._General;
 
 /// <summary>
 /// Тип изменения, произошедшего с доменным объектом.

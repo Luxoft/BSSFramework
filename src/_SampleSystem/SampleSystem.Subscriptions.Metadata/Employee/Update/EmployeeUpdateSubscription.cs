@@ -18,7 +18,7 @@ public sealed class EmployeeUpdateSubscription
         this.CopyGenerationLambda = new CopyGenerationLambda();
 
         this.SecurityItemSourceLambdas = [new SecurityItemSourceLambda()];
-        this.RecepientsSelectorMode = Framework.Configuration.RecepientsSelectorMode.Union;
+        this.RecipientsSelectorMode = Framework.Configuration.RecipientsSelectorMode.Union;
         this.SendIndividualLetters = true;
         this.ExcludeCurrentUser = true;
         this.IncludeAttachments = false;

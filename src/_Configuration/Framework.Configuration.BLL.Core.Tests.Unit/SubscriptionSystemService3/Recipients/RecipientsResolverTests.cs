@@ -57,7 +57,7 @@ public sealed class RecipientsResolverTests : TestFixtureBase
 
         var subscription = this.Fixture
                                .Build<Subscription>()
-                               .With(s => s.RecepientsMode, RecepientsSelectorMode.Union)
+                               .With(s => s.RecipientsMode, RecipientsSelectorMode.Union)
                                .Create();
 
         var versions = this.Fixture.Create<DomainObjectVersions<string>>();
@@ -99,7 +99,7 @@ public sealed class RecipientsResolverTests : TestFixtureBase
         var subscription = this.Fixture
                                .Build<Subscription>()
                                .With(s => s.ExcludeCurrentUser, true)
-                               .With(s => s.RecepientsMode, RecepientsSelectorMode.Union)
+                               .With(s => s.RecipientsMode, RecipientsSelectorMode.Union)
                                .Create();
 
         var emailContainer1 = this.CreateStub<ICurrentUserEmailContainer>();
@@ -141,7 +141,7 @@ public sealed class RecipientsResolverTests : TestFixtureBase
 
         var subscription = this.Fixture
                                .Build<Subscription>()
-                               .With(s => s.RecepientsMode, RecepientsSelectorMode.Union)
+                               .With(s => s.RecipientsMode, RecipientsSelectorMode.Union)
                                .Create();
 
         var versions = this.Fixture.Create<DomainObjectVersions<string>>();

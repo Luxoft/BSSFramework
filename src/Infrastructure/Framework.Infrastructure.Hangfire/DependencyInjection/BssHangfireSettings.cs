@@ -116,7 +116,7 @@ public class BssHangfireSettings : IBssHangfireSettings
                 var jobName = jobSettings?.Name ?? this.jobNameExtractPolicy.GetName(typeof(TJob));
 
                 var cronTiming = jobSettings?.CronTiming
-                                 ?? this.JobTimings.Where(jt => jt.Name == jobName).Select(jt => jt.Schedule).SingleOrDefault()
+                                 ?? this.JobTimings.Where(jt => jt.Name == jobName).Select(jt => jt.Scchedule).SingleOrDefault()
                                  ?? throw new Exception($"{nameof(JobTiming)} for job '{jobName}' not found");
 
                 var job = Job.FromExpression(ExpressionHelper.Create((MiddlewareJob<TJob, TArg> job) => job.ExecuteAsync(default!)));

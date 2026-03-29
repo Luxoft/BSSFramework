@@ -110,7 +110,7 @@ public class RecipientsResolver<TBLLContext>
     {
         var mergeResult = rolesRecipients.Merge(
                                                 generationResult.RecipientsBag.To,
-                                                (RecepientsMergeMode)subscription.RecepientsMode);
+                                                (RecipientsMergeMode)subscription.RecipientsMode);
 
         var to = this.ExcludeCurrentUser(
                                          subscription,

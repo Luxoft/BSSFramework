@@ -1,4 +1,4 @@
-﻿using Framework.Configuration.Core;
+﻿using Framework.Configuration.SubscriptionModeling._General;
 
 using SecuritySystem.Notification;
 

@@ -1,6 +1,6 @@
 ﻿using Framework.Notification;
 
-namespace Framework.Configuration.SubscriptionModeling;
+namespace Framework.Configuration.SubscriptionModeling._General;
 
 public abstract class EmployeeEqualityComparer : IEqualityComparer<IEmployee>
 {

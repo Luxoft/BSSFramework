@@ -3,17 +3,17 @@
 /// <summary>
 /// Перечисление, указывающее способ слияния списков получателей уведомлений.
 /// </summary>
-public enum RecepientsMergeMode
+public enum RecipientsMergeMode
 {
     /// <summary>Объединение списков</summary>
-    Union = RecepientsSelectorMode.Union,
+    Union = RecipientsSelectorMode.Union,
 
     /// <summary>Пересечение списков</summary>
-    Intersect = RecepientsSelectorMode.Intersect,
+    Intersect = RecipientsSelectorMode.Intersect,
 
     /// <summary>Левый список за исключением получателей, указанных в правом списке.</summary>
-    LeftExceptRight = RecepientsSelectorMode.RolesExceptGeneration,
+    LeftExceptRight = RecipientsSelectorMode.RolesExceptGeneration,
 
     /// <summary>Правый список за исключением получателей, указанных в левом списке.</summary>
-    RightExceptLeft = RecepientsSelectorMode.GenerationExceptRoles
+    RightExceptLeft = RecipientsSelectorMode.GenerationExceptRoles
 }

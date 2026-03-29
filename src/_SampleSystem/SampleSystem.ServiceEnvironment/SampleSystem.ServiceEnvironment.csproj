@@ -17,8 +17,6 @@
     <ProjectReference Include="..\SampleSystem.Events\SampleSystem.Events.csproj" />
     <ProjectReference Include="..\SampleSystem.Security\SampleSystem.Security.csproj" />
     <ProjectReference Include="..\SampleSystem.Subscriptions.Metadata\SampleSystem.Subscriptions.Metadata.csproj" />
-
-    <ProjectReference Include="..\..\Framework.NotificationCore\Framework.NotificationCore.csproj" />
   </ItemGroup>
 
 </Project>

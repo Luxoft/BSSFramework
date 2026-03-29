@@ -42,17 +42,17 @@ public sealed class RecipientCollection : IEnumerable<Recipient>
     ///     переданной в аргументе other.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">Аргумент mode содержит недопустимое значение.</exception>
-    public RecipientCollection Merge(RecipientCollection other, RecepientsMergeMode mode)
+    public RecipientCollection Merge(RecipientCollection other, RecipientsMergeMode mode)
     {
         switch (mode)
         {
-            case RecepientsMergeMode.Union:
+            case RecipientsMergeMode.Union:
                 return new RecipientCollection(this.Union(other, Comparer));
-            case RecepientsMergeMode.Intersect:
+            case RecipientsMergeMode.Intersect:
                 return new RecipientCollection(this.Intersect(other, Comparer));
-            case RecepientsMergeMode.LeftExceptRight:
+            case RecipientsMergeMode.LeftExceptRight:
                 return new RecipientCollection(this.Except(other, Comparer));
-            case RecepientsMergeMode.RightExceptLeft:
+            case RecipientsMergeMode.RightExceptLeft:
                 return new RecipientCollection(other.Except(this, Comparer));
         }
 

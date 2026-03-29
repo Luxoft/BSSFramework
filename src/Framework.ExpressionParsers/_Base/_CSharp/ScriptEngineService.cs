@@ -148,10 +148,7 @@ public class ScriptEngineService
 
     }
 
-    private string GetGenericTypeName(Type source)
-    {
-        return $"{source.Namespace}.{new string(source.Name.SkipLast(2).ToArray())}";
-    }
+    private string GetGenericTypeName(Type source) => $"{source.Namespace}.{new string(source.Name.SkipLast(2).ToArray())}";
 
     private IEnumerable<string> GetParametersNames(string expression)
     {

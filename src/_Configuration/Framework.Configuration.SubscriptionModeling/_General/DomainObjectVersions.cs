@@ -1,11 +1,11 @@
-﻿namespace Framework.Configuration.Core;
+﻿namespace Framework.Configuration.SubscriptionModeling._General;
 
 /// <summary>
 /// Контейнер версий доменного объекта.
 /// </summary>
 /// <typeparam name="T">Тип доменного объекта</typeparam>
 public sealed class DomainObjectVersions<T> : IDomainObjectVersions
-        where T : class
+    where T : class
 {
     /// <summary>
     /// Создаёт экземпляр класса <see cref="DomainObjectVersions{T}"/>.
@@ -108,8 +108,7 @@ public sealed class DomainObjectVersions<T> : IDomainObjectVersions
     {
         unchecked
         {
-            return (EqualityComparer<T>.Default.GetHashCode(this.Current) * 397) ^
-                   EqualityComparer<T>.Default.GetHashCode(this.Previous);
+            return (EqualityComparer<T>.Default.GetHashCode(this.Current) * 397) ^ EqualityComparer<T>.Default.GetHashCode(this.Previous);
         }
     }
 
@@ -128,7 +127,6 @@ public sealed class DomainObjectVersions<T> : IDomainObjectVersions
 
     private bool Equals(DomainObjectVersions<T> other)
     {
-        return EqualityComparer<T>.Default.Equals(this.Current, other.Current) &&
-               EqualityComparer<T>.Default.Equals(this.Previous, other.Previous);
+        return EqualityComparer<T>.Default.Equals(this.Current, other.Current) && EqualityComparer<T>.Default.Equals(this.Previous, other.Previous);
     }
 }

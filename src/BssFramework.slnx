@@ -111,6 +111,12 @@
     <Project Path="Validation/Framework.Validation.Tests.Unit/Framework.Validation.Tests.Unit.csproj" />
     <Project Path="Validation/Framework.Validation/Framework.Validation.csproj" />
   </Folder>
+  <Folder Name="/Notification/">
+    <Project Path="Notification/Framework.Notification.Abstractions/Framework.Notification.Abstractions.csproj" />
+    <Project Path="Notification/Framework.Notification.Domain/Framework.Notification.Domain.csproj" />
+    <Project Path="Notification/Framework.Notification.DTO/Framework.Notification.DTO.csproj" />
+    <Project Path="Notification/Framework.Notification.Runtime/Framework.Notification.Runtime.csproj" />
+  </Folder>
   
   <Folder Name="/OData/">
     <Project Path="OData/Framework.OData.QueryLanguage/Framework.OData.QueryLanguage.csproj" />
@@ -189,10 +195,6 @@
   <Project Path="Framework.DependencyInjection/Framework.DependencyInjection.csproj" />
   <Project Path="Framework.ExpressionParsers.Tests.Unit/Framework.ExpressionParsers.Tests.Unit.csproj" />
   <Project Path="Framework.ExpressionParsers/Framework.ExpressionParsers.csproj" />
-  <Project Path="Framework.NotificationCore/Framework.NotificationCore.csproj" />
   <Project Path="Framework.Parsing/Framework.Parsing.csproj" />
-  <Project Path="_DomainDriven/Framework.Notification.Abstract/Framework.Notification.Abstract.csproj" />
-  <Project Path="_DomainDriven/Framework.Notification.DTO/Framework.Notification.DTO.csproj" />
-  <Project Path="_DomainDriven/Framework.Notification/Framework.Notification.csproj" />
 
 </Solution>

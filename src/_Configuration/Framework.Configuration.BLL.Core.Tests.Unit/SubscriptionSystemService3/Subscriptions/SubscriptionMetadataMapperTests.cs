@@ -61,7 +61,7 @@ public sealed class SubscriptionMetadataMapperTests : TestFixtureBase
         subscription.IncludeAttachments.Should().Be(metadata.IncludeAttachments);
         subscription.AllowEmptyListOfRecipients.Should().Be(metadata.AllowEmptyListOfRecipients);
         subscription.RazorMessageTemplateType.Should().Be(metadata.MessageTemplateType);
-        subscription.RecepientsMode.Should().Be(metadata.RecepientsSelectorMode);
+        subscription.RecipientsMode.Should().Be(metadata.RecipientsSelectorMode);
         subscription.SecurityItems.Should().HaveCount(1);
         subscription.MetadataSourceType.Should().Be(metadata.GetType());
 

@@ -5,19 +5,13 @@ using CommonFramework.ExpressionEvaluate;
 
 using Framework.Core;
 
-using Framework.Exceptions;
-
 namespace Framework.ExpressionParsers;
 
 public abstract class ExpressionParser<TDelegate>(INativeExpressionParser parser)
     : ExpressionParser<TDelegate, Expression<TDelegate>>(parser, expr => LambdaCompileCache.GetFunc(expr))
     where TDelegate : class
 {
-    protected override Expression<TDelegate> GetInternalExpression(string value)
-    {
-        return this.Parser.Parse<TDelegate>(value);
-    }
-
+    protected override Expression<TDelegate> GetInternalExpression(string value) => this.Parser.Parse<TDelegate>(value);
 
     private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.None);
 }
@@ -29,9 +23,9 @@ public abstract class ExpressionParser<TDelegate, TExpression> : NativeExpressio
         where TDelegate : class
         where TExpression : LambdaExpression
 {
-    private readonly IDictionaryCache<string, TExpression> _expressionCache;
+    private readonly IDictionaryCache<string, TExpression> expressionCache;
 
-    private readonly IDictionaryCache<string, TDelegate> _delegateCache;
+    private readonly IDictionaryCache<string, TDelegate> delegateCache;
 
 
     protected ExpressionParser(INativeExpressionParser parser, Func<TExpression, TDelegate> compileFunc)
@@ -40,26 +34,19 @@ public abstract class ExpressionParser<TDelegate, TExpression> : NativeExpressio
         if (parser == null) throw new ArgumentNullException(nameof(parser));
         if (compileFunc == null) throw new ArgumentNullException(nameof(compileFunc));
 
-        this._expressionCache = new DictionaryCache<string, TExpression>(this.GetInternalExpression).WithLock();
-        this._delegateCache = new DictionaryCache<string, TDelegate>(str => compileFunc(this._expressionCache[str])).WithLock();
+        this.expressionCache = new DictionaryCache<string, TExpression>(this.GetInternalExpression).WithLock();
+        this.delegateCache = new DictionaryCache<string, TDelegate>(str => compileFunc(this.expressionCache[str])).WithLock();
     }
 
 
-    public Type ExpressionType
-    {
-        get { return typeof(TDelegate); }
-    }
+    public Type ExpressionType => typeof(TDelegate);
 
-    public virtual string ExpectedFormat
-    {
-        get { return $"\"{this.ExpressionType.ToCSharpShortName()}\""; }
-    }
-
+    public virtual string ExpectedFormat => $"\"{this.ExpressionType.ToCSharpShortName()}\"";
 
     protected abstract TExpression GetInternalExpression(string value);
 
 
-    protected TResult TryWrapOperation<TResult>(string value, bool wrapError, Func<TResult> getResult)
+    protected TResult TryWrapOperation<TResult>(string value, Func<TResult> getResult)
     {
         if (value == null) throw new ArgumentNullException(nameof(value));
         if (getResult == null) throw new ArgumentNullException(nameof(getResult));
@@ -70,30 +57,14 @@ public abstract class ExpressionParser<TDelegate, TExpression> : NativeExpressio
         }
         catch (Exception ex)
         {
-            if (wrapError)
-            {
-                throw new BusinessLogicException(ex, $"Can't parse value: \"{value}\". Expected format: {this.ExpectedFormat}");
-            }
-            else
-            {
-                throw;
-            }
+            throw new ArgumentException($"Can't parse value: \"{value}\". Expected format: {this.ExpectedFormat}", nameof(value), ex);
         }
     }
 
 
-    public TExpression GetExpression(string value, bool wrapError = true)
-    {
-        return this.TryWrapOperation(value, wrapError, () => this._expressionCache[value]);
-    }
+    public TExpression GetExpression(string value) => this.TryWrapOperation(value, () => this.expressionCache[value]);
 
-    public TDelegate GetDelegate(string value, bool wrapError = true)
-    {
-        return this.TryWrapOperation(value, wrapError, () => this._delegateCache[value]);
-    }
+    public TDelegate GetDelegate(string value) => this.TryWrapOperation(value, () => this.delegateCache[value]);
 
-    public virtual void Validate(string source)
-    {
-        this.GetExpression(source);
-    }
+    public virtual void Validate(string source) => this.GetExpression(source);
 }

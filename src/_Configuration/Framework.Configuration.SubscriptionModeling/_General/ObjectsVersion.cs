@@ -3,7 +3,7 @@
 using Framework.Core;
 using Framework.Notification;
 
-namespace Framework.Configuration;
+namespace Framework.Configuration.SubscriptionModeling._General;
 
 public class ObjectsVersion : IObjectsVersion
 {

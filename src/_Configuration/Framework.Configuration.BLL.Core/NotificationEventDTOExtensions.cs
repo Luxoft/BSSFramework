@@ -32,7 +32,7 @@ public static class NotificationEventDTOExtensions
 
         return new Message(
                            notification.From,
-                           notification.Targets.Select(t => new ReceiverAddress(t.Name, (ReceiverRole)t.Type)),
+                           notification.Targets.Select(t => new ReceiverAddressInfo(t.Name, (ReceiverRole)t.Type)),
                            notification.Subject,
                            notification.Message.Message,
                            notification.Message.IsBodyHtml,

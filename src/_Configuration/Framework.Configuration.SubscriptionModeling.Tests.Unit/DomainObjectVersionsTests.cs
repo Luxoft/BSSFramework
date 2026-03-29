@@ -2,7 +2,7 @@
 
 using FluentAssertions;
 
-using Framework.Configuration.Core;
+using Framework.Configuration.SubscriptionModeling._General;
 using Framework.UnitTesting;
 using NUnit.Framework;
 
@@ -78,7 +78,7 @@ public sealed class DomainObjectVersionsTests : TestFixtureBase
     public void ChangeType_Get_CorrectComputedChangeType(
             object previous,
             object current,
-            Framework.Configuration.Core.DomainObjectChangeType expectedChangeType)
+            _General.DomainObjectChangeType expectedChangeType)
     {
         // Arrange
         var versions = new DomainObjectVersions<object>(previous, current);

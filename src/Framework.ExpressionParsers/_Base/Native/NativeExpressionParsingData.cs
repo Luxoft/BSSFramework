@@ -1,11 +1,3 @@
-﻿using Framework.Core.Serialization;
+﻿namespace Framework.ExpressionParsers;
 
-namespace Framework.ExpressionParsers;
-
-public class NativeExpressionParsingData : ParsingData<MethodTypeInfo, string>
-{
-    public NativeExpressionParsingData(MethodTypeInfo parsingInfo, string parsingValue) : base(parsingInfo, parsingValue)
-    {
-
-    }
-}
+public record NativeExpressionParsingData(MethodTypeInfo ParsingInfo, string ParsingValue);

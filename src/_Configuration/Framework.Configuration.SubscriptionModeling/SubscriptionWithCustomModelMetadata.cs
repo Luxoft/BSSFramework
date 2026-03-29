@@ -1,5 +1,6 @@
 ﻿using System.Net.Mail;
 
+using Framework.Configuration.SubscriptionModeling._General;
 using Framework.Notification;
 using SecuritySystem;
 
@@ -80,7 +81,7 @@ public abstract class SubscriptionWithCustomModelMetadata<TContext, TDomainObjec
     public virtual IEnumerable<SecurityRole> SubBusinessRoles { get; protected set; } = new List<SecurityRole>();
 
     /// <inheritdoc />
-    public virtual RecepientsSelectorMode RecepientsSelectorMode { get; protected set; } = RecepientsSelectorMode.Union;
+    public virtual RecipientsSelectorMode RecipientsSelectorMode { get; protected set; } = RecipientsSelectorMode.Union;
 
     /// <inheritdoc />
     public virtual bool SendIndividualLetters { get; protected set; } = false;

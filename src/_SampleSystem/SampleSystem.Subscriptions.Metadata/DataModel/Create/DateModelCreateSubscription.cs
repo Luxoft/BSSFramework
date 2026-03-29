@@ -9,7 +9,7 @@ public sealed class DateModelCreateSubscription : SubscriptionMetadataBase<DateM
         this.SenderEmail = "DateModelCreateSampleSystem@luxoft.com";
         this.ConditionLambda = new ConditionLambda();
         this.GenerationLambda = new GenerationLambda();
-        this.RecepientsSelectorMode = Framework.Configuration.RecepientsSelectorMode.Union;
+        this.RecipientsSelectorMode = Framework.Configuration.RecipientsSelectorMode.Union;
         this.SubBusinessRoleIds = Enumerable.Empty<Guid>();
         this.SendIndividualLetters = true;
     this.ExcludeCurrentUser = true;

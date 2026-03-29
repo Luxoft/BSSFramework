@@ -12,9 +12,9 @@ public interface IExpressionParser
 public interface IExpressionParser<in TSource, out TDelegate, out TExpression> : IExpressionParser
         where TExpression : LambdaExpression
 {
-    TDelegate GetDelegate(TSource source, bool wrapError = true);
+    TDelegate GetDelegate(TSource source);
 
-    TExpression GetExpression(TSource source, bool wrapError = true);
+    TExpression GetExpression(TSource source);
 
     void Validate(TSource source);
 }

@@ -1,4 +1,6 @@
-﻿using SecuritySystem;
+﻿using Framework.Configuration.SubscriptionModeling._General;
+
+using SecuritySystem;
 
 namespace Framework.Configuration.SubscriptionModeling;
 
@@ -94,7 +96,7 @@ public interface ISubscriptionMetadata
     /// <value>
     ///     Способ комбинации адресатов рассылки по SubBusinessRoles и Generation..
     /// </value>
-    RecepientsSelectorMode RecepientsSelectorMode { get; }
+    RecipientsSelectorMode RecipientsSelectorMode { get; }
 
     /// <summary>
     ///     Получает тип расширения прав по дереву.

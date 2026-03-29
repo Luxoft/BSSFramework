@@ -2,7 +2,10 @@
 
 using CommonFramework.Maybe;
 
+using Framework.BLL.Domain.Attributes;
+using Framework.BLL.Domain.Serialization;
 using Framework.Core;
+using Framework.Database.Mapping;
 using Framework.DomainDriven.Serialization;
 using Framework.Notification;
 using Framework.Persistent;
@@ -50,7 +53,7 @@ public class Subscription : ISubscription
 
     private NotificationExpandType? dynamicSourceExpandType;
 
-    private RecepientsSelectorMode recepientsMode;
+    private RecipientsSelectorMode recipientsMode;
 
     private bool allowEmptyListOfRecipients;
 
@@ -283,10 +286,10 @@ public class Subscription : ISubscription
     /// <summary>
     /// Cпособ комбинации адресатов рассылки по SubBusinessRoles и Generation
     /// </summary>
-    public virtual RecepientsSelectorMode RecepientsMode
+    public virtual RecipientsSelectorMode RecipientsMode
     {
-        get { return this.recepientsMode; }
-        set { this.recepientsMode = value; }
+        get { return this.recipientsMode; }
+        set { this.recipientsMode = value; }
     }
 
     /// <summary>

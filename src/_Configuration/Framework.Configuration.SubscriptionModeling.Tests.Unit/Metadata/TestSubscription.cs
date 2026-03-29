@@ -1,4 +1,5 @@
-﻿using Framework.Notification;
+﻿using Framework.Configuration.SubscriptionModeling._General;
+using Framework.Notification;
 using SecuritySystem;
 
 namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;
@@ -29,8 +30,8 @@ internal sealed class TestSubscription : SubscriptionWithCustomModelMetadata<obj
         get { return this.securityItemSourceLambdas; }
     }
 
-    public override RecepientsSelectorMode RecepientsSelectorMode { get; protected set; } =
-        RecepientsSelectorMode.RolesExceptGeneration;
+    public override RecipientsSelectorMode RecipientsSelectorMode { get; protected set; } =
+        RecipientsSelectorMode.RolesExceptGeneration;
 
     public override IEnumerable<SecurityRole> SubBusinessRoles { get; protected set; } = [SecurityRole.Administrator];
 

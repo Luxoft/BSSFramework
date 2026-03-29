@@ -15,15 +15,10 @@ namespace Framework.ExpressionParsers;
 internal static class MicrosoftCSharpExpressionParserImplement
 {
     #region source not used
-    internal static Type CreateClass(params DynamicProperty[] properties)
-    {
-        return ExpressionParserService.ClassFactory.Instance.GetDynamicClass(properties);
-    }
+    internal static Type CreateClass(params DynamicProperty[] properties) => ExpressionParserService.ClassFactory.Instance.GetDynamicClass(properties);
 
-    internal static Type CreateClass(IEnumerable<DynamicProperty> properties)
-    {
-        return ExpressionParserService.ClassFactory.Instance.GetDynamicClass(properties);
-    }
+    internal static Type CreateClass(IEnumerable<DynamicProperty> properties) => ExpressionParserService.ClassFactory.Instance.GetDynamicClass(properties);
+
     internal abstract class DynamicClass
     {
         public override string ToString()
@@ -59,15 +54,9 @@ internal static class MicrosoftCSharpExpressionParserImplement
             this.type = type;
         }
 
-        public string Name
-        {
-            get { return this.name; }
-        }
+        public string Name => this.name;
 
-        public Type Type
-        {
-            get { return this.type; }
-        }
+        public Type Type => this.type;
     }
     #endregion
 
@@ -82,35 +71,29 @@ internal static class MicrosoftCSharpExpressionParserImplement
 
         internal class Signature : IEquatable<Signature>
         {
-            public DynamicProperty[] properties;
-            public int hashCode;
+            public DynamicProperty[] Properties;
+            public int HashCode;
 
             public Signature(IEnumerable<DynamicProperty> properties)
             {
-                this.properties = properties.ToArray();
-                this.hashCode = 0;
+                this.Properties = properties.ToArray();
+                this.HashCode = 0;
                 foreach (DynamicProperty p in properties)
                 {
-                    this.hashCode ^= p.Name.GetHashCode() ^ p.Type.GetHashCode();
+                    this.HashCode ^= p.Name.GetHashCode() ^ p.Type.GetHashCode();
                 }
             }
 
-            public override int GetHashCode()
-            {
-                return this.hashCode;
-            }
+            public override int GetHashCode() => this.HashCode;
 
-            public override bool Equals(object obj)
-            {
-                return obj is Signature ? this.Equals((Signature)obj) : false;
-            }
+            public override bool Equals(object obj) => obj is Signature ? this.Equals((Signature)obj) : false;
 
             public bool Equals(Signature other)
             {
-                if (this.properties.Length != other.properties.Length) return false;
-                for (int i = 0; i < this.properties.Length; i++)
+                if (this.Properties.Length != other.Properties.Length) return false;
+                for (int i = 0; i < this.Properties.Length; i++)
                 {
-                    if (this.properties[i].Name != other.properties[i].Name || this.properties[i].Type != other.properties[i].Type) return false;
+                    if (this.Properties[i].Name != other.Properties[i].Name || this.Properties[i].Type != other.Properties[i].Type) return false;
                 }
                 return true;
             }
@@ -122,10 +105,10 @@ internal static class MicrosoftCSharpExpressionParserImplement
 
             static ClassFactory() { }  // Trigger lazy initialization of static fields
 
-            readonly ModuleBuilder _module;
-            readonly Dictionary<Signature, Type> _classes;
-            int _classCount;
-            readonly ReaderWriterLock _rwLock;
+            readonly ModuleBuilder module;
+            readonly Dictionary<Signature, Type> classes;
+            int classCount;
+            readonly ReaderWriterLock rwLock;
 
             private ClassFactory()
             {
@@ -136,7 +119,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
 #endif
                 try
                 {
-                    this._module = assembly.DefineDynamicModule("Module");
+                    this.module = assembly.DefineDynamicModule("Module");
                 }
                 finally
                 {
@@ -144,48 +127,48 @@ internal static class MicrosoftCSharpExpressionParserImplement
                 PermissionSet.RevertAssert();
 #endif
                 }
-                this._classes = new Dictionary<Signature, Type>();
-                this._rwLock = new ReaderWriterLock();
+                this.classes = new Dictionary<Signature, Type>();
+                this.rwLock = new ReaderWriterLock();
             }
 
             public Type GetDynamicClass(IEnumerable<DynamicProperty> properties)
             {
-                this._rwLock.AcquireReaderLock(Timeout.Infinite);
+                this.rwLock.AcquireReaderLock(Timeout.Infinite);
                 try
                 {
                     Signature signature = new Signature(properties);
                     Type type;
-                    if (!this._classes.TryGetValue(signature, out type))
+                    if (!this.classes.TryGetValue(signature, out type))
                     {
-                        type = this.CreateDynamicClass(signature.properties);
-                        this._classes.Add(signature, type);
+                        type = this.CreateDynamicClass(signature.Properties);
+                        this.classes.Add(signature, type);
                     }
                     return type;
                 }
                 finally
                 {
-                    this._rwLock.ReleaseReaderLock();
+                    this.rwLock.ReleaseReaderLock();
                 }
             }
 
             Type CreateDynamicClass(DynamicProperty[] properties)
             {
-                LockCookie cookie = this._rwLock.UpgradeToWriterLock(Timeout.Infinite);
+                LockCookie cookie = this.rwLock.UpgradeToWriterLock(Timeout.Infinite);
                 try
                 {
-                    string typeName = "DynamicClass" + (this._classCount + 1);
+                    string typeName = "DynamicClass" + (this.classCount + 1);
 #if ENABLE_LINQ_PARTIAL_TRUST
                 new ReflectionPermission(PermissionState.Unrestricted).Assert();
 #endif
                     try
                     {
-                        TypeBuilder tb = this._module.DefineType(typeName, TypeAttributes.Class |
+                        TypeBuilder tb = this.module.DefineType(typeName, TypeAttributes.Class |
                                                                            TypeAttributes.Public, typeof(DynamicClass));
                         FieldInfo[] fields = this.GenerateProperties(tb, properties);
                         this.GenerateEquals(tb, fields);
                         this.GenerateGetHashCode(tb, fields);
                         Type result = tb.CreateTypeInfo();
-                        this._classCount++;
+                        this.classCount++;
                         return result;
                     }
                     finally
@@ -197,7 +180,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
                 }
                 finally
                 {
-                    this._rwLock.DowngradeFromWriterLock(ref cookie);
+                    this.rwLock.DowngradeFromWriterLock(ref cookie);
                 }
             }
 
@@ -303,14 +286,9 @@ internal static class MicrosoftCSharpExpressionParserImplement
                 return new SimpleResult(methodInfo);
             }
 
-            public static FindMethodsResult CreateMulty(int count)
-            {
-                return new MultyResult(count);
-            }
-            public static FindMethodsResult CreateNone()
-            {
-                return NoneResult.Instance;
-            }
+            public static FindMethodsResult CreateMulty(int count) => new MultyResult(count);
+
+            public static FindMethodsResult CreateNone() => NoneResult.Instance;
 
             public abstract int Count { get; }
 
@@ -321,25 +299,12 @@ internal static class MicrosoftCSharpExpressionParserImplement
                 {
                 }
 
-                public override int Count
-                {
-                    get { return 0; }
-                }
+                public override int Count => 0;
             }
 
-            public abstract class SuccessedResult : FindMethodsResult
+            public abstract class SuccessedResult(MethodInfo methodInfo) : FindMethodsResult
             {
-                private readonly MethodInfo _methodInfo;
-
-                protected SuccessedResult(MethodInfo methodInfo)
-                {
-                    this._methodInfo = methodInfo;
-                }
-
-                public MethodInfo MethodInfo
-                {
-                    get { return this._methodInfo; }
-                }
+                public MethodInfo MethodInfo => methodInfo;
             }
             public class SimpleResult : SuccessedResult
             {
@@ -349,66 +314,44 @@ internal static class MicrosoftCSharpExpressionParserImplement
                 {
                 }
 
-                public override int Count
-                {
-                    get { return 1; }
-                }
-
+                public override int Count => 1;
             }
             public class MultyResult : FindMethodsResult
             {
-                private readonly int _count;
+                private readonly int count;
 
-                internal MultyResult(int count)
-                {
-                    this._count = count;
-                }
+                internal MultyResult(int count) => this.count = count;
 
-                public override int Count
-                {
-                    get { return this._count; }
-                }
+                public override int Count => this.count;
             }
             public class ExtensionResult : SuccessedResult
             {
-                private readonly Type _declareType;
-                private readonly Type _genericType;
+                private readonly Type declareType;
+                private readonly Type genericType;
 
 
                 internal ExtensionResult(MethodInfo methodInfo, Type declareType, Type genericType)
                         : base(methodInfo)
                 {
-                    this._declareType = declareType;
-                    this._genericType = genericType;
+                    this.declareType = declareType;
+                    this.genericType = genericType;
                 }
 
-                public override int Count
-                {
-                    get { return 1; }
-                }
+                public override int Count => 1;
 
-                public Type DeclareType
-                {
-                    get { return this._declareType; }
-                }
+                public Type DeclareType => this.declareType;
 
-                public Type GenericType
-                {
-                    get { return this._genericType; }
-                }
+                public Type GenericType => this.genericType;
             }
 
-            public static FindMethodsResult CreateExtension(Type declareType, MethodInfo methodInfo, Type genericType)
-            {
-                return new ExtensionResult(methodInfo, declareType, genericType);
-            }
+            public static FindMethodsResult CreateExtension(Type declareType, MethodInfo methodInfo, Type genericType) => new ExtensionResult(methodInfo, declareType, genericType);
         }
 
         struct Token
         {
-            public TokenId id;
-            public string text;
-            public int pos;
+            public TokenId Id;
+            public string Text;
+            public int Pos;
         }
 
         enum TokenId
@@ -524,7 +467,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
 
         #endregion
 
-        static readonly Type[] predefinedTypes =
+        static readonly Type[] PredefinedTypes =
         [
             typeof(object),
                                                          typeof(bool),
@@ -548,27 +491,27 @@ internal static class MicrosoftCSharpExpressionParserImplement
                                                          typeof(Convert)
         ];
 
-        static readonly Expression trueLiteral = Expression.Constant(true);
-        static readonly Expression falseLiteral = Expression.Constant(false);
-        static readonly Expression nullLiteral = Expression.Constant(null);
+        static readonly Expression TrueLiteral = Expression.Constant(true);
+        static readonly Expression FalseLiteral = Expression.Constant(false);
+        static readonly Expression NullLiteral = Expression.Constant(null);
 
-        static readonly string keywordIt = "it";
-        static readonly string keywordIif = "iif";
-        static readonly string keywordNew = "new";
+        static readonly string KeywordIt = "it";
+        static readonly string KeywordIif = "iif";
+        static readonly string KeywordNew = "new";
 
         static Dictionary<string, object> keywords;
 
         readonly Dictionary<string, object> symbols;
-        IDictionary<string, object> _externals;
+        IDictionary<string, object> externals;
         readonly Dictionary<Expression, string> literals;
 
-        ParameterExpression _inputParameter;
+        ParameterExpression inputParameter;
 
-        readonly string _text;
-        int _textPos;
-        readonly int _textLen;
-        private char _currentChar;
-        Token _token;
+        readonly string text;
+        int textPos;
+        readonly int textLen;
+        private char currentChar;
+        Token token;
 
         public ExpressionParserService(ParameterExpression[] parameters, string expression, object[] values)
         {
@@ -584,8 +527,8 @@ internal static class MicrosoftCSharpExpressionParserImplement
             {
                 this.ProcessValues(values);
             }
-            this._text = expression;
-            this._textLen = this._text.Length;
+            this.text = expression;
+            this.textLen = this.text.Length;
             this.SetTextPos(0);
             this.NextToken();
         }
@@ -598,7 +541,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
             }
             if (parameters.Length == 1 && string.IsNullOrEmpty(parameters[0].Name))
             {
-                this._inputParameter = parameters[0];
+                this.inputParameter = parameters[0];
             }
         }
 
@@ -609,7 +552,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
                 object value = values[i];
                 if (i == values.Length - 1 && value is IDictionary<string, object>)
                 {
-                    this._externals = (IDictionary<string, object>)value;
+                    this.externals = (IDictionary<string, object>)value;
                 }
                 else
                 {
@@ -629,7 +572,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
 
         public Expression Parse(Type resultType)
         {
-            var exprPos = this._token.pos;
+            var exprPos = this.token.Pos;
             var expr = this.ParseExpression();
             if (resultType != null && (expr = this.PromoteExpression(expr, resultType, true)) == null)
             {
@@ -657,7 +600,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
                     ascending = false;
                 }
                 orderings.Add(new DynamicOrdering { Selector = expr, Ascending = ascending });
-                if (this._token.id != TokenId.Comma) break;
+                if (this.token.Id != TokenId.Comma) break;
                 this.NextToken();
             }
             this.ValidateToken(TokenId.End, ExpressionParsersResources.SyntaxError);
@@ -668,9 +611,9 @@ internal static class MicrosoftCSharpExpressionParserImplement
         // ?: operator
         Expression ParseExpression()
         {
-            int errorPos = this._token.pos;
+            int errorPos = this.token.Pos;
             Expression expr = this.ParseLogicalOr();
-            if (this._token.id == TokenId.Question)
+            if (this.token.Id == TokenId.Question)
             {
                 this.NextToken();
                 Expression expr1 = this.ParseExpression();
@@ -686,12 +629,12 @@ internal static class MicrosoftCSharpExpressionParserImplement
         Expression ParseLogicalOr()
         {
             Expression left = this.ParseLogicalAnd();
-            while (this._token.id == TokenId.DoubleBar || this.TokenIdentifierIs("or"))
+            while (this.token.Id == TokenId.DoubleBar || this.TokenIdentifierIs("or"))
             {
-                Token op = this._token;
+                Token op = this.token;
                 this.NextToken();
                 Expression right = this.ParseLogicalAnd();
-                this.CheckAndPromoteOperands(typeof(ILogicalSignatures), op.text, ref left, ref right, op.pos);
+                this.CheckAndPromoteOperands(typeof(ILogicalSignatures), op.Text, ref left, ref right, op.Pos);
                 left = Expression.OrElse(left, right);
             }
             return left;
@@ -701,12 +644,12 @@ internal static class MicrosoftCSharpExpressionParserImplement
         Expression ParseLogicalAnd()
         {
             Expression left = this.ParseComparison();
-            while (this._token.id == TokenId.DoubleAmphersand || this.TokenIdentifierIs("and"))
+            while (this.token.Id == TokenId.DoubleAmphersand || this.TokenIdentifierIs("and"))
             {
-                Token op = this._token;
+                Token op = this.token;
                 this.NextToken();
                 Expression right = this.ParseComparison();
-                this.CheckAndPromoteOperands(typeof(ILogicalSignatures), op.text, ref left, ref right, op.pos);
+                this.CheckAndPromoteOperands(typeof(ILogicalSignatures), op.Text, ref left, ref right, op.Pos);
                 left = Expression.AndAlso(left, right);
             }
             return left;
@@ -716,13 +659,13 @@ internal static class MicrosoftCSharpExpressionParserImplement
         Expression ParseComparison()
         {
             Expression left = this.ParseAdditive();
-            while (this._token.id == TokenId.Equal || this._token.id == TokenId.DoubleEqual || this._token.id == TokenId.ExclamationEqual || this._token.id == TokenId.LessGreater || this._token.id == TokenId.GreaterThan || this._token.id == TokenId.GreaterThanEqual || this._token.id == TokenId.LessThan || this._token.id == TokenId.LessThanEqual)
+            while (this.token.Id == TokenId.Equal || this.token.Id == TokenId.DoubleEqual || this.token.Id == TokenId.ExclamationEqual || this.token.Id == TokenId.LessGreater || this.token.Id == TokenId.GreaterThan || this.token.Id == TokenId.GreaterThanEqual || this.token.Id == TokenId.LessThan || this.token.Id == TokenId.LessThanEqual)
             {
-                Token op = this._token;
+                Token op = this.token;
                 this.NextToken();
                 Expression right = this.ParseAdditive();
-                bool isEquality = op.id == TokenId.Equal || op.id == TokenId.DoubleEqual ||
-                                  op.id == TokenId.ExclamationEqual || op.id == TokenId.LessGreater;
+                bool isEquality = op.Id == TokenId.Equal || op.Id == TokenId.DoubleEqual ||
+                                  op.Id == TokenId.ExclamationEqual || op.Id == TokenId.LessGreater;
                 if (isEquality && !left.Type.IsValueType && !right.Type.IsValueType)
                 {
                     if (left.Type != right.Type)
@@ -737,7 +680,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
                         }
                         else
                         {
-                            throw this.IncompatibleOperandsError(op.text, left, right, op.pos);
+                            throw this.IncompatibleOperandsError(op.Text, left, right, op.Pos);
                         }
                     }
                 }
@@ -756,16 +699,16 @@ internal static class MicrosoftCSharpExpressionParserImplement
                         }
                         else
                         {
-                            throw this.IncompatibleOperandsError(op.text, left, right, op.pos);
+                            throw this.IncompatibleOperandsError(op.Text, left, right, op.Pos);
                         }
                     }
                 }
                 else
                 {
                     this.CheckAndPromoteOperands(isEquality ? typeof(IEqualitySignatures) : typeof(IRelationalSignatures),
-                                                 op.text, ref left, ref right, op.pos);
+                                                 op.Text, ref left, ref right, op.Pos);
                 }
-                switch (op.id)
+                switch (op.Id)
                 {
                     case TokenId.Equal:
                     case TokenId.DoubleEqual:
@@ -796,21 +739,21 @@ internal static class MicrosoftCSharpExpressionParserImplement
         Expression ParseAdditive()
         {
             Expression left = this.ParseMultiplicative();
-            while (this._token.id == TokenId.Plus || this._token.id == TokenId.Minus || this._token.id == TokenId.Amphersand)
+            while (this.token.Id == TokenId.Plus || this.token.Id == TokenId.Minus || this.token.Id == TokenId.Amphersand)
             {
-                Token op = this._token;
+                Token op = this.token;
                 this.NextToken();
                 Expression right = this.ParseMultiplicative();
-                switch (op.id)
+                switch (op.Id)
                 {
                     case TokenId.Plus:
                         if (left.Type == typeof(string) || right.Type == typeof(string))
                             goto case TokenId.Amphersand;
-                        this.CheckAndPromoteOperands(typeof(IAddSignatures), op.text, ref left, ref right, op.pos);
+                        this.CheckAndPromoteOperands(typeof(IAddSignatures), op.Text, ref left, ref right, op.Pos);
                         left = this.GenerateAdd(left, right);
                         break;
                     case TokenId.Minus:
-                        this.CheckAndPromoteOperands(typeof(ISubtractSignatures), op.text, ref left, ref right, op.pos);
+                        this.CheckAndPromoteOperands(typeof(ISubtractSignatures), op.Text, ref left, ref right, op.Pos);
                         left = this.GenerateSubtract(left, right);
                         break;
                     case TokenId.Amphersand:
@@ -825,13 +768,13 @@ internal static class MicrosoftCSharpExpressionParserImplement
         Expression ParseMultiplicative()
         {
             Expression left = this.ParseUnary();
-            while (this._token.id == TokenId.Asterisk || this._token.id == TokenId.Slash || this._token.id == TokenId.Percent || this.TokenIdentifierIs("mod"))
+            while (this.token.Id == TokenId.Asterisk || this.token.Id == TokenId.Slash || this.token.Id == TokenId.Percent || this.TokenIdentifierIs("mod"))
             {
-                Token op = this._token;
+                Token op = this.token;
                 this.NextToken();
                 Expression right = this.ParseUnary();
-                this.CheckAndPromoteOperands(typeof(IArithmeticSignatures), op.text, ref left, ref right, op.pos);
-                switch (op.id)
+                this.CheckAndPromoteOperands(typeof(IArithmeticSignatures), op.Text, ref left, ref right, op.Pos);
+                switch (op.Id)
                 {
                     case TokenId.Asterisk:
                         left = Expression.Multiply(left, right);
@@ -851,25 +794,25 @@ internal static class MicrosoftCSharpExpressionParserImplement
         // -, !, not unary operators
         Expression ParseUnary()
         {
-            if (this._token.id == TokenId.Minus || this._token.id == TokenId.Exclamation || this.TokenIdentifierIs("not"))
+            if (this.token.Id == TokenId.Minus || this.token.Id == TokenId.Exclamation || this.TokenIdentifierIs("not"))
             {
-                Token op = this._token;
+                Token op = this.token;
                 this.NextToken();
-                if (op.id == TokenId.Minus && (this._token.id == TokenId.IntegerLiteral || this._token.id == TokenId.RealLiteral))
+                if (op.Id == TokenId.Minus && (this.token.Id == TokenId.IntegerLiteral || this.token.Id == TokenId.RealLiteral))
                 {
-                    this._token.text = "-" + this._token.text;
-                    this._token.pos = op.pos;
+                    this.token.Text = "-" + this.token.Text;
+                    this.token.Pos = op.Pos;
                     return this.ParsePrimary();
                 }
                 Expression expr = this.ParseUnary();
-                if (op.id == TokenId.Minus)
+                if (op.Id == TokenId.Minus)
                 {
-                    this.CheckAndPromoteOperand(typeof(INegationSignatures), op.text, ref expr, op.pos);
+                    this.CheckAndPromoteOperand(typeof(INegationSignatures), op.Text, ref expr, op.Pos);
                     expr = Expression.Negate(expr);
                 }
                 else
                 {
-                    this.CheckAndPromoteOperand(typeof(INotSignatures), op.text, ref expr, op.pos);
+                    this.CheckAndPromoteOperand(typeof(INotSignatures), op.Text, ref expr, op.Pos);
                     expr = Expression.Not(expr);
                 }
                 return expr;
@@ -882,12 +825,12 @@ internal static class MicrosoftCSharpExpressionParserImplement
             Expression expr = this.ParsePrimaryStart();
             while (true)
             {
-                if (this._token.id == TokenId.Dot)
+                if (this.token.Id == TokenId.Dot)
                 {
                     this.NextToken();
                     expr = this.ParseMemberAccess(null, expr);
                 }
-                else if (this._token.id == TokenId.OpenBracket)
+                else if (this.token.Id == TokenId.OpenBracket)
                 {
                     expr = this.ParseElementAccess(expr);
                 }
@@ -901,7 +844,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
 
         Expression ParsePrimaryStart()
         {
-            switch (this._token.id)
+            switch (this.token.Id)
             {
                 case TokenId.Identifier:
                     return this.ParseIdentifier();
@@ -921,8 +864,8 @@ internal static class MicrosoftCSharpExpressionParserImplement
         Expression ParseStringLiteral()
         {
             this.ValidateToken(TokenId.StringLiteral);
-            char quote = this._token.text[0];
-            string s = this._token.text.Substring(1, this._token.text.Length - 2);
+            char quote = this.token.Text[0];
+            string s = this.token.Text.Substring(1, this.token.Text.Length - 2);
             int start = 0;
             while (true)
             {
@@ -945,7 +888,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
         Expression ParseIntegerLiteral()
         {
             this.ValidateToken(TokenId.IntegerLiteral);
-            string text = this._token.text;
+            string text = this.token.Text;
             if (text[0] != '-')
             {
                 ulong value;
@@ -972,7 +915,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
         Expression ParseRealLiteral()
         {
             this.ValidateToken(TokenId.RealLiteral);
-            string text = this._token.text;
+            string text = this.token.Text;
             object value = null;
             char last = text[text.Length - 1];
             if (last == 'F' || last == 'f')
@@ -1020,16 +963,16 @@ internal static class MicrosoftCSharpExpressionParserImplement
         {
             this.ValidateToken(TokenId.Identifier);
             object value;
-            if (keywords.TryGetValue(this._token.text, out value))
+            if (keywords.TryGetValue(this.token.Text, out value))
             {
                 if (value is Type) return this.ParseTypeAccess((Type)value);
-                if (value == (object)keywordIt) return this.ParseIt();
-                if (value == (object)keywordIif) return this.ParseIif();
-                if (value == (object)keywordNew) return this.ParseNew();
+                if (value == (object)KeywordIt) return this.ParseIt();
+                if (value == (object)KeywordIif) return this.ParseIif();
+                if (value == (object)KeywordNew) return this.ParseNew();
                 this.NextToken();
                 return (Expression)value;
             }
-            if (this.symbols.TryGetValue(this._token.text, out value) || this._externals != null && this._externals.TryGetValue(this._token.text, out value))
+            if (this.symbols.TryGetValue(this.token.Text, out value) || this.externals != null && this.externals.TryGetValue(this.token.Text, out value))
             {
                 var expr = value as Expression;
                 if (expr == null)
@@ -1047,27 +990,27 @@ internal static class MicrosoftCSharpExpressionParserImplement
                 this.NextToken();
                 return expr;
             }
-            if (this._inputParameter != null)
+            if (this.inputParameter != null)
             {
-                return this.ParseMemberAccess(null, this._inputParameter);
+                return this.ParseMemberAccess(null, this.inputParameter);
             }
 
-            throw this.ParseError(ExpressionParsersResources.UnknownIdentifier, this._token.text);
+            throw this.ParseError(ExpressionParsersResources.UnknownIdentifier, this.token.Text);
         }
 
         Expression ParseIt()
         {
-            if (this._inputParameter == null)
+            if (this.inputParameter == null)
             {
                 throw this.ParseError(ExpressionParsersResources.NoItInScope);
             }
             this.NextToken();
-            return this._inputParameter;
+            return this.inputParameter;
         }
 
         Expression ParseIif()
         {
-            int errorPos = this._token.pos;
+            int errorPos = this.token.Pos;
             this.NextToken();
             Expression[] args = this.ParseArgumentList();
             if (args.Length != 3)
@@ -1081,21 +1024,21 @@ internal static class MicrosoftCSharpExpressionParserImplement
                 throw this.ParseError(errorPos, ExpressionParsersResources.FirstExprMustBeBool);
             if (expr1.Type != expr2.Type)
             {
-                Expression expr1as2 = expr2 != nullLiteral ? this.PromoteExpression(expr1, expr2.Type, true) : null;
-                Expression expr2as1 = expr1 != nullLiteral ? this.PromoteExpression(expr2, expr1.Type, true) : null;
-                if (expr1as2 != null && expr2as1 == null)
+                Expression expr1As2 = expr2 != NullLiteral ? this.PromoteExpression(expr1, expr2.Type, true) : null;
+                Expression expr2As1 = expr1 != NullLiteral ? this.PromoteExpression(expr2, expr1.Type, true) : null;
+                if (expr1As2 != null && expr2As1 == null)
                 {
-                    expr1 = expr1as2;
+                    expr1 = expr1As2;
                 }
-                else if (expr2as1 != null && expr1as2 == null)
+                else if (expr2As1 != null && expr1As2 == null)
                 {
-                    expr2 = expr2as1;
+                    expr2 = expr2As1;
                 }
                 else
                 {
-                    string type1 = expr1 != nullLiteral ? expr1.Type.Name : "null";
-                    string type2 = expr2 != nullLiteral ? expr2.Type.Name : "null";
-                    if (expr1as2 != null && expr2as1 != null)
+                    string type1 = expr1 != NullLiteral ? expr1.Type.Name : "null";
+                    string type2 = expr2 != NullLiteral ? expr2.Type.Name : "null";
+                    if (expr1As2 != null && expr2As1 != null)
                         throw this.ParseError(errorPos, ExpressionParsersResources.BothTypesConvertToOther, type1, type2);
                     throw this.ParseError(errorPos, ExpressionParsersResources.NeitherTypeConvertsToOther, type1, type2);
                 }
@@ -1130,7 +1073,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
             var expressions = new List<Expression>();
             while (true)
             {
-                int exprPos = this._token.pos;
+                int exprPos = this.token.Pos;
                 Expression expr = this.ParseExpression();
                 string propName;
                 if (this.TokenIdentifierIs("as"))
@@ -1150,7 +1093,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
                 }
                 expressions.Add(expr);
                 properties.Add(new DynamicProperty(propName, expr.Type));
-                if (this._token.id != TokenId.Comma) break;
+                if (this.token.Id != TokenId.Comma) break;
                 this.NextToken();
             }
             this.ValidateToken(TokenId.CloseParen, ExpressionParsersResources.CloseParenOrCommaExpected);
@@ -1166,7 +1109,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
 
         Expression ParseExpressionInvocation(LambdaExpression lambda)
         {
-            int errorPos = this._token.pos;
+            int errorPos = this.token.Pos;
             this.NextToken();
             var args = this.ParseArgumentList();
             if (!(this.FindMethod(lambda.Type, "Invoke", false, args) is FindMethodsResult.SimpleResult))
@@ -1178,16 +1121,16 @@ internal static class MicrosoftCSharpExpressionParserImplement
 
         Expression ParseTypeAccess(Type type)
         {
-            int errorPos = this._token.pos;
+            int errorPos = this.token.Pos;
             this.NextToken();
-            if (this._token.id == TokenId.Question)
+            if (this.token.Id == TokenId.Question)
             {
                 if (!type.IsValueType || IsNullableType(type))
                     throw this.ParseError(errorPos, ExpressionParsersResources.TypeHasNoNullableForm, GetTypeName(type));
                 type = typeof(Nullable<>).MakeGenericType(type);
                 this.NextToken();
             }
-            if (this._token.id == TokenId.OpenParen)
+            if (this.token.Id == TokenId.OpenParen)
             {
                 Expression[] args = this.ParseArgumentList();
                 var result = this.FindBestMethod(type.GetConstructors(), args);
@@ -1236,10 +1179,10 @@ internal static class MicrosoftCSharpExpressionParserImplement
             {
                 type = instance.Type;
             }
-            var errorPos = this._token.pos;
+            var errorPos = this.token.Pos;
             var id = this.GetIdentifier();
             this.NextToken();
-            if (this._token.id == TokenId.OpenParen)
+            if (this.token.Id == TokenId.OpenParen)
             {
                 #region original
                 //if (instance != null && type != typeof(string))
@@ -1332,7 +1275,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
         {
             this.ValidateToken(TokenId.OpenParen, ExpressionParsersResources.OpenParenExpected);
             this.NextToken();
-            Expression[] args = this._token.id != TokenId.CloseParen ? this.ParseArguments() : [];
+            Expression[] args = this.token.Id != TokenId.CloseParen ? this.ParseArguments() : [];
             this.ValidateToken(TokenId.CloseParen, ExpressionParsersResources.CloseParenOrCommaExpected);
             this.NextToken();
             return args;
@@ -1344,7 +1287,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
             while (true)
             {
                 argList.Add(this.ParseExpression());
-                if (this._token.id != TokenId.Comma) break;
+                if (this.token.Id != TokenId.Comma) break;
                 this.NextToken();
             }
             return argList.ToArray();
@@ -1352,7 +1295,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
 
         Expression ParseElementAccess(Expression expr)
         {
-            int errorPos = this._token.pos;
+            int errorPos = this.token.Pos;
             this.ValidateToken(TokenId.OpenBracket, ExpressionParsersResources.OpenParenExpected);
             this.NextToken();
             Expression[] args = this.ParseArguments();
@@ -1386,19 +1329,13 @@ internal static class MicrosoftCSharpExpressionParserImplement
 
         static bool IsPredefinedType(Type type)
         {
-            foreach (Type t in predefinedTypes) if (t == type) return true;
+            foreach (Type t in PredefinedTypes) if (t == type) return true;
             return false;
         }
 
-        static bool IsNullableType(Type type)
-        {
-            return type.IsGenericTypeImplementation(typeof(Nullable<>));
-        }
+        static bool IsNullableType(Type type) => type.IsGenericTypeImplementation(typeof(Nullable<>));
 
-        static Type GetNonNullableType(Type type)
-        {
-            return IsNullableType(type) ? type.GetGenericArguments()[0] : type;
-        }
+        static Type GetNonNullableType(Type type) => IsNullableType(type) ? type.GetGenericArguments()[0] : type;
 
         static string GetTypeName(Type type)
         {
@@ -1408,20 +1345,11 @@ internal static class MicrosoftCSharpExpressionParserImplement
             return s;
         }
 
-        static bool IsNumericType(Type type)
-        {
-            return GetNumericTypeKind(type) != 0;
-        }
+        static bool IsNumericType(Type type) => GetNumericTypeKind(type) != 0;
 
-        static bool IsSignedIntegralType(Type type)
-        {
-            return GetNumericTypeKind(type) == 2;
-        }
+        static bool IsSignedIntegralType(Type type) => GetNumericTypeKind(type) == 2;
 
-        static bool IsUnsignedIntegralType(Type type)
-        {
-            return GetNumericTypeKind(type) == 3;
-        }
+        static bool IsUnsignedIntegralType(Type type) => GetNumericTypeKind(type) == 3;
 
         static int GetNumericTypeKind(Type type)
         {
@@ -1449,10 +1377,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
             }
         }
 
-        static bool IsEnumType(Type type)
-        {
-            return GetNonNullableType(type).IsEnum;
-        }
+        static bool IsEnumType(Type type) => GetNonNullableType(type).IsEnum;
 
         void CheckAndPromoteOperand(Type signatures, string opName, ref Expression expr, int errorPos)
         {
@@ -1475,11 +1400,9 @@ internal static class MicrosoftCSharpExpressionParserImplement
             right = args[1];
         }
 
-        Exception IncompatibleOperandsError(string opName, Expression left, Expression right, int pos)
-        {
-            return this.ParseError(pos, ExpressionParsersResources.IncompatibleOperands,
-                                   opName, GetTypeName(left.Type), GetTypeName(right.Type));
-        }
+        Exception IncompatibleOperandsError(string opName, Expression left, Expression right, int pos) =>
+            this.ParseError(pos, ExpressionParsersResources.IncompatibleOperands,
+                            opName, GetTypeName(left.Type), GetTypeName(right.Type));
 
         MemberInfo FindPropertyOrField(Type type, string memberName, bool staticAccess)
         {
@@ -1641,7 +1564,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
             if (expr is ConstantExpression)
             {
                 ConstantExpression ce = (ConstantExpression)expr;
-                if (ce == nullLiteral)
+                if (ce == NullLiteral)
                 {
                     if (!type.IsValueType || IsNullableType(type))
                         return Expression.Constant(null, type);
@@ -1897,24 +1820,18 @@ internal static class MicrosoftCSharpExpressionParserImplement
             if (t1 == t2) return 0;
             if (s == t1) return 1;
             if (s == t2) return -1;
-            bool t1t2 = IsCompatibleWith(t1, t2);
-            bool t2t1 = IsCompatibleWith(t2, t1);
-            if (t1t2 && !t2t1) return 1;
-            if (t2t1 && !t1t2) return -1;
+            bool t1T2 = IsCompatibleWith(t1, t2);
+            bool t2T1 = IsCompatibleWith(t2, t1);
+            if (t1T2 && !t2T1) return 1;
+            if (t2T1 && !t1T2) return -1;
             if (IsSignedIntegralType(t1) && IsUnsignedIntegralType(t2)) return 1;
             if (IsSignedIntegralType(t2) && IsUnsignedIntegralType(t1)) return -1;
             return 0;
         }
 
-        Expression GenerateEqual(Expression left, Expression right)
-        {
-            return Expression.Equal(left, right);
-        }
+        Expression GenerateEqual(Expression left, Expression right) => Expression.Equal(left, right);
 
-        Expression GenerateNotEqual(Expression left, Expression right)
-        {
-            return Expression.NotEqual(left, right);
-        }
+        Expression GenerateNotEqual(Expression left, Expression right) => Expression.NotEqual(left, right);
 
         Expression GenerateGreaterThan(Expression left, Expression right)
         {
@@ -1969,54 +1886,43 @@ internal static class MicrosoftCSharpExpressionParserImplement
             return Expression.Add(left, right);
         }
 
-        Expression GenerateSubtract(Expression left, Expression right)
-        {
-            return Expression.Subtract(left, right);
-        }
+        Expression GenerateSubtract(Expression left, Expression right) => Expression.Subtract(left, right);
 
-        Expression GenerateStringConcat(Expression left, Expression right)
-        {
-            return Expression.Call(
-                                   null,
-                                   typeof(string).GetMethod("Concat", [typeof(object), typeof(object)]),
-                                   [left, right]);
-        }
+        Expression GenerateStringConcat(Expression left, Expression right) =>
+            Expression.Call(
+                null,
+                typeof(string).GetMethod("Concat", [typeof(object), typeof(object)]),
+                [left, right]);
 
-        MethodInfo GetStaticMethod(string methodName, Expression left, Expression right)
-        {
-            return left.Type.GetMethod(methodName, [left.Type, right.Type]);
-        }
+        MethodInfo GetStaticMethod(string methodName, Expression left, Expression right) => left.Type.GetMethod(methodName, [left.Type, right.Type]);
 
-        Expression GenerateStaticMethodCall(string methodName, Expression left, Expression right)
-        {
-            return Expression.Call(null, this.GetStaticMethod(methodName, left, right), [left, right]);
-        }
+        Expression GenerateStaticMethodCall(string methodName, Expression left, Expression right) => Expression.Call(null, this.GetStaticMethod(methodName, left, right), [left, right]);
 
         void SetTextPos(int pos)
         {
-            this._textPos = pos;
-            this._currentChar = this._textPos < this._textLen ? this._text[this._textPos] : '\0';
+            this.textPos = pos;
+            this.currentChar = this.textPos < this.textLen ? this.text[this.textPos] : '\0';
         }
 
         void NextChar()
         {
-            if (this._textPos < this._textLen) this._textPos++;
-            this._currentChar = this._textPos < this._textLen ? this._text[this._textPos] : '\0';
+            if (this.textPos < this.textLen) this.textPos++;
+            this.currentChar = this.textPos < this.textLen ? this.text[this.textPos] : '\0';
         }
 
         void NextToken()
         {
-            while (char.IsWhiteSpace(this._currentChar))
+            while (char.IsWhiteSpace(this.currentChar))
             {
                 this.NextChar();
             }
             TokenId t;
-            int tokenPos = this._textPos;
-            switch (this._currentChar)
+            int tokenPos = this.textPos;
+            switch (this.currentChar)
             {
                 case '!':
                     this.NextChar();
-                    if (this._currentChar == '=')
+                    if (this.currentChar == '=')
                     {
                         this.NextChar();
                         t = TokenId.ExclamationEqual;
@@ -2032,7 +1938,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
                     break;
                 case '&':
                     this.NextChar();
-                    if (this._currentChar == '&')
+                    if (this.currentChar == '&')
                     {
                         this.NextChar();
                         t = TokenId.DoubleAmphersand;
@@ -2080,12 +1986,12 @@ internal static class MicrosoftCSharpExpressionParserImplement
                     break;
                 case '<':
                     this.NextChar();
-                    if (this._currentChar == '=')
+                    if (this.currentChar == '=')
                     {
                         this.NextChar();
                         t = TokenId.LessThanEqual;
                     }
-                    else if (this._currentChar == '>')
+                    else if (this.currentChar == '>')
                     {
                         this.NextChar();
                         t = TokenId.LessGreater;
@@ -2097,7 +2003,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
                     break;
                 case '=':
                     this.NextChar();
-                    if (this._currentChar == '=')
+                    if (this.currentChar == '=')
                     {
                         this.NextChar();
                         t = TokenId.DoubleEqual;
@@ -2109,7 +2015,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
                     break;
                 case '>':
                     this.NextChar();
-                    if (this._currentChar == '=')
+                    if (this.currentChar == '=')
                     {
                         this.NextChar();
                         t = TokenId.GreaterThanEqual;
@@ -2133,7 +2039,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
                     break;
                 case '|':
                     this.NextChar();
-                    if (this._currentChar == '|')
+                    if (this.currentChar == '|')
                     {
                         this.NextChar();
                         t = TokenId.DoubleBar;
@@ -2145,40 +2051,40 @@ internal static class MicrosoftCSharpExpressionParserImplement
                     break;
                 case '"':
                 case '\'':
-                    char quote = this._currentChar;
+                    char quote = this.currentChar;
                     do
                     {
                         this.NextChar();
-                        while (this._textPos < this._textLen && this._currentChar != quote)
+                        while (this.textPos < this.textLen && this.currentChar != quote)
                         {
                             this.NextChar();
                         }
-                        if (this._textPos == this._textLen)
+                        if (this.textPos == this.textLen)
                         {
-                            throw this.ParseError(this._textPos, ExpressionParsersResources.UnterminatedStringLiteral);
+                            throw this.ParseError(this.textPos, ExpressionParsersResources.UnterminatedStringLiteral);
                         }
                         this.NextChar();
-                    } while (this._currentChar == quote);
+                    } while (this.currentChar == quote);
                     t = TokenId.StringLiteral;
                     break;
                 default:
-                    if (char.IsLetter(this._currentChar) || this._currentChar == '@' || this._currentChar == '_')
+                    if (char.IsLetter(this.currentChar) || this.currentChar == '@' || this.currentChar == '_')
                     {
                         do
                         {
                             this.NextChar();
-                        } while (char.IsLetterOrDigit(this._currentChar) || this._currentChar == '_');
+                        } while (char.IsLetterOrDigit(this.currentChar) || this.currentChar == '_');
                         t = TokenId.Identifier;
                         break;
                     }
-                    if (char.IsDigit(this._currentChar))
+                    if (char.IsDigit(this.currentChar))
                     {
                         t = TokenId.IntegerLiteral;
                         do
                         {
                             this.NextChar();
-                        } while (char.IsDigit(this._currentChar));
-                        if (this._currentChar == '.')
+                        } while (char.IsDigit(this.currentChar));
+                        if (this.currentChar == '.')
                         {
                             t = TokenId.RealLiteral;
                             this.NextChar();
@@ -2186,43 +2092,40 @@ internal static class MicrosoftCSharpExpressionParserImplement
                             do
                             {
                                 this.NextChar();
-                            } while (char.IsDigit(this._currentChar));
+                            } while (char.IsDigit(this.currentChar));
                         }
-                        if (this._currentChar == 'E' || this._currentChar == 'e')
+                        if (this.currentChar == 'E' || this.currentChar == 'e')
                         {
                             t = TokenId.RealLiteral;
                             this.NextChar();
-                            if (this._currentChar == '+' || this._currentChar == '-') this.NextChar();
+                            if (this.currentChar == '+' || this.currentChar == '-') this.NextChar();
                             this.ValidateDigit();
                             do
                             {
                                 this.NextChar();
-                            } while (char.IsDigit(this._currentChar));
+                            } while (char.IsDigit(this.currentChar));
                         }
-                        if (this._currentChar == 'F' || this._currentChar == 'f') this.NextChar();
+                        if (this.currentChar == 'F' || this.currentChar == 'f') this.NextChar();
                         break;
                     }
-                    if (this._textPos == this._textLen)
+                    if (this.textPos == this.textLen)
                     {
                         t = TokenId.End;
                         break;
                     }
-                    throw this.ParseError(this._textPos, ExpressionParsersResources.InvalidCharacter, this._currentChar);
+                    throw this.ParseError(this.textPos, ExpressionParsersResources.InvalidCharacter, this.currentChar);
             }
-            this._token.id = t;
-            this._token.text = this._text.Substring(tokenPos, this._textPos - tokenPos);
-            this._token.pos = tokenPos;
+            this.token.Id = t;
+            this.token.Text = this.text.Substring(tokenPos, this.textPos - tokenPos);
+            this.token.Pos = tokenPos;
         }
 
-        bool TokenIdentifierIs(string id)
-        {
-            return this._token.id == TokenId.Identifier && string.Equals(id, this._token.text, StringComparison.OrdinalIgnoreCase);
-        }
+        bool TokenIdentifierIs(string id) => this.token.Id == TokenId.Identifier && string.Equals(id, this.token.Text, StringComparison.OrdinalIgnoreCase);
 
         string GetIdentifier()
         {
             this.ValidateToken(TokenId.Identifier, ExpressionParsersResources.IdentifierExpected);
-            string id = this._token.text;
+            string id = this.token.Text;
             if (id.Length > 1 && id[0] == '@')
             {
                 id = id.Substring(1);
@@ -2232,12 +2135,12 @@ internal static class MicrosoftCSharpExpressionParserImplement
 
         void ValidateDigit()
         {
-            if (!char.IsDigit(this._currentChar)) throw this.ParseError(this._textPos, ExpressionParsersResources.DigitExpected);
+            if (!char.IsDigit(this.currentChar)) throw this.ParseError(this.textPos, ExpressionParsersResources.DigitExpected);
         }
 
         void ValidateToken(TokenId t, string errorMessage)
         {
-            if (this._token.id != t)
+            if (this.token.Id != t)
             {
                 throw this.ParseError(errorMessage);
             }
@@ -2245,36 +2148,28 @@ internal static class MicrosoftCSharpExpressionParserImplement
 
         void ValidateToken(TokenId t)
         {
-            if (this._token.id != t)
+            if (this.token.Id != t)
             {
                 throw this.ParseError(ExpressionParsersResources.SyntaxError);
             }
         }
 
-        Exception ParseError(string format, params object[] args)
-        {
-            return this.ParseError(this._token.pos, format, args);
-        }
+        Exception ParseError(string format, params object[] args) => this.ParseError(this.token.Pos, format, args);
 
-        Exception ParseError(int pos, string format, params object[] args)
-        {
-            return new ParseException(string.Format(CultureInfo.CurrentCulture, format, args), pos);
-        }
-
-
+        Exception ParseError(int pos, string format, params object[] args) => new ParseException(string.Format(CultureInfo.CurrentCulture, format, args), pos);
 
         static Dictionary<string, object> CreateKeywords()
         {
             var d = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
                     {
-                            {"true", trueLiteral},
-                            {"false", falseLiteral},
-                            {"null", nullLiteral},
-                            {keywordIt, keywordIt},
-                            {keywordIif, keywordIif},
-                            {keywordNew, keywordNew}
+                            {"true", TrueLiteral},
+                            {"false", FalseLiteral},
+                            {"null", NullLiteral},
+                            {KeywordIt, KeywordIt},
+                            {KeywordIif, KeywordIif},
+                            {KeywordNew, KeywordNew}
                     };
-            foreach (var type in predefinedTypes)
+            foreach (var type in PredefinedTypes)
             {
                 d.Add(type.Name, type);
             }

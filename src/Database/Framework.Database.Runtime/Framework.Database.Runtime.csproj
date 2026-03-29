@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.Database.Abstractions\Framework.Database.Abstractions.csproj" />
+    <ProjectReference Include="..\Framework.Database.Mapping\Framework.Database.Mapping.csproj" />
   </ItemGroup>
 
 </Project>

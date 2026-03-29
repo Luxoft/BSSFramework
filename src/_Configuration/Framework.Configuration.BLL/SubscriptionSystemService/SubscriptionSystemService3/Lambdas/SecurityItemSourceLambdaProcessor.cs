@@ -2,7 +2,7 @@
 using Framework.Configuration.Domain;
 using Framework.Subscriptions.Domain;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Lambdas;
 
 /// <summary>
 /// Процессор лямбда-выражения типа "SecurityItem".

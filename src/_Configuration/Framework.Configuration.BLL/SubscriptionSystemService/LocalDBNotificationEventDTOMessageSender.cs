@@ -6,7 +6,7 @@ using Framework.Notification.DTO;
 
 using SecuritySystem.Attributes;
 
-namespace Framework.Configuration.BLL;
+namespace Framework.Configuration.BLL.SubscriptionSystemService;
 
 /// <summary>
 /// Sender для отправки нотификакий в локальную бд

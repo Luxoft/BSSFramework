@@ -1,6 +1,6 @@
 ﻿using Framework.Notification.Domain;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Templates;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Templates;
 
 internal sealed class ExcessTemplatesFilterCc : ExcessTemplatesFilterBase
 {

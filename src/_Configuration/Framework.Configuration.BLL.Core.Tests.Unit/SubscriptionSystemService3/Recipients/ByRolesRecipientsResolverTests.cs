@@ -6,9 +6,9 @@ using AutoFixture.Idioms;
 using FluentAssertions;
 
 using Framework.Authorization.Domain;
-using Framework.Configuration.BLL.SubscriptionSystemService3;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Lambdas;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven;

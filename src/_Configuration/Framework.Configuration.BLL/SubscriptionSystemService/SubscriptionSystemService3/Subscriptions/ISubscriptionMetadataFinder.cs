@@ -1,6 +1,6 @@
 ﻿using Framework.Subscriptions;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 
 /// <summary>
 /// Производит поиск Code first моделей подписок.

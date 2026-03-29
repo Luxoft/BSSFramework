@@ -2,7 +2,7 @@
 
 using FluentAssertions;
 
-using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.UnitTesting;

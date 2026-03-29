@@ -14,6 +14,7 @@ using Framework.Configuration.Domain;
 using Framework.Configuration.Generated.DTO;
 using Framework.Core;
 using Framework.Core.MessageSender;
+using Framework.Database;
 using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Lock;
@@ -24,7 +25,6 @@ using Framework.Events.Legacy;
 using Framework.Projection;
 using Framework.OData.QueryLanguage;
 using Framework.Security;
-using Framework.Tracking;
 
 using Microsoft.Extensions.DependencyInjection;
 

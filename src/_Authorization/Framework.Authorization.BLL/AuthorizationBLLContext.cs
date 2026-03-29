@@ -1,11 +1,12 @@
-﻿using CommonFramework.DictionaryCache;
+﻿using CommonFramework.Auth;
+using CommonFramework.DictionaryCache;
 
 using Framework.Application.Events;
 using Framework.Authorization.Domain;
 using Framework.BLL;
 using Framework.BLL.Services;
 using Framework.Core.TypeResolving;
-using Framework.OData.QueryLanguage;
+using Framework.OData.QueryLanguage.StandardExpressionBuilder;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;

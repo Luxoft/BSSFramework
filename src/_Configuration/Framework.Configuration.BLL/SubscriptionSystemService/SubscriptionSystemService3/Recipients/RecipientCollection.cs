@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 
 /// <summary>
 /// Коллекция получателей уведомлений по подписке.

@@ -1,15 +1,16 @@
 ﻿#pragma warning disable SA1600 // ElementsMustBeDocumented. Internal type does not require inline documentation by convention.
+
 using System.Collections.Immutable;
 using System.Reflection;
 
 using Framework.Application.Domain;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.Domain;
 using Framework.Subscriptions.Domain;
 
 using SecuritySystem.Notification;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 
 internal sealed class ByRolesRecipientsResolverTyped<TBLLContext> : ByRolesRecipientsResolverBase<TBLLContext>
         where TBLLContext : class

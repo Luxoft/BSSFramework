@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Framework.Tracking;
+namespace Framework.Database;
 
 public interface IPersistentInfoService
 {

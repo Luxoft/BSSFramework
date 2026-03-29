@@ -1,5 +1,7 @@
 ﻿using System.Collections.Concurrent;
 
+using Framework.Database;
+
 namespace Framework.Tracking;
 
 /// <summary>

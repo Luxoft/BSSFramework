@@ -1,6 +1,6 @@
 ﻿using SecuritySystem.Notification;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 
 public static class NotificationExpandTypeExtensions
 {

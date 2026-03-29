@@ -1,9 +1,9 @@
-﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Templates;
+﻿using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Lambdas;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Templates;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
 
 /// <summary>
 /// Фабрика служб, используемых системой подписок, уведомлений и версий доменных объектов.

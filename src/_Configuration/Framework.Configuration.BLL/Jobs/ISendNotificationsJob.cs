@@ -1,5 +1,5 @@
 ﻿using Framework.Application.Jobs;
 
-namespace Framework.Notification.Jobs;
+namespace Framework.Configuration.BLL.Jobs;
 
 public interface ISendNotificationsJob : IJob;

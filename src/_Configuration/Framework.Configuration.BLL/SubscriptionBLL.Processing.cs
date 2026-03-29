@@ -2,7 +2,7 @@
 using Framework.Core;
 using Framework.Database.Domain;
 
-namespace Framework.Configuration.BLL;
+namespace Framework.Configuration.BLL.Subscriptions;
 
 public partial class SubscriptionBLL
 {

@@ -1,7 +1,7 @@
 ﻿using Framework.Configuration.Domain;
 using Framework.Subscriptions.Domain;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 
 /// <summary>
 /// Базовый класс, определяющий контракт типа, предназначенного для поиска подписок.

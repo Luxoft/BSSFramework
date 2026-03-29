@@ -5,7 +5,7 @@ using Framework.Subscriptions.Domain;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 
 /// <summary>
 ///     Компонент для поиска описаний подписок типа <see cref="ISubscriptionMetadata" />,

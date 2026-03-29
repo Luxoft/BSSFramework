@@ -3,7 +3,7 @@ using Framework.Subscriptions.Domain;
 
 using NativeAttachment = System.Net.Mail.Attachment;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Lambdas;
 
 /// <summary>
 /// Процессор лямбда-выражения типа "Attachment".

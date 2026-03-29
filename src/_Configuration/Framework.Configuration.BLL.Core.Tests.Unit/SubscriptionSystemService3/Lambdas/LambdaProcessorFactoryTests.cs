@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
+
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Lambdas;
 using Framework.UnitTesting;
 using NUnit.Framework;
 

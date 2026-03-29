@@ -1,6 +1,6 @@
 ﻿using Framework.Application.Domain;
 using Framework.BLL;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 using Framework.Core;
 using Framework.Database;
 using Framework.Database.Domain;
@@ -9,7 +9,7 @@ using Framework.Subscriptions.Domain;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
 
 /// <summary>
 ///     Служба для поиска версий доменного объекта и связанной с версиями информации.

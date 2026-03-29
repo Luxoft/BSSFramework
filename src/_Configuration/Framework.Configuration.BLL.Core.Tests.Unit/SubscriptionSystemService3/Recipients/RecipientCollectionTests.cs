@@ -1,7 +1,8 @@
 ﻿using AutoFixture;
 
 using FluentAssertions;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 using Framework.UnitTesting;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;

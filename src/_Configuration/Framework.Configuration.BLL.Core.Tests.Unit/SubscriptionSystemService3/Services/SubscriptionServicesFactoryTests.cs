@@ -2,8 +2,9 @@
 using AutoFixture.Idioms;
 
 using FluentAssertions;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
+
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Lambdas;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
 using Framework.Core;
 using Framework.Core.MessageSender;
 using Framework.DomainDriven.BLL;

@@ -1,8 +1,4 @@
-﻿using Framework.Core;
-
-using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
-
-namespace Framework.Notification.Jobs;
+﻿namespace Framework.Configuration.BLL.Jobs;
 
 public class SendNotificationsJob(IConfigurationBLLContext context)
     : ISendNotificationsJob

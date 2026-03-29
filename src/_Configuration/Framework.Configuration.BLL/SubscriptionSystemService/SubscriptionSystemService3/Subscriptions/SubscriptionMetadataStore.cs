@@ -2,7 +2,7 @@
 
 using Framework.Subscriptions;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 
 /// <summary>
 ///     Хранилище описаний подписок.

@@ -1,15 +1,14 @@
-﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+﻿using CommonFramework;
+
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
+using Framework.Subscriptions.Domain;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-using CommonFramework;
-
-using Framework.Subscriptions.Domain;
-
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
 
 /// <summary>
 /// Служба поиска подписки и информации о получателях уведомлений по подписке.

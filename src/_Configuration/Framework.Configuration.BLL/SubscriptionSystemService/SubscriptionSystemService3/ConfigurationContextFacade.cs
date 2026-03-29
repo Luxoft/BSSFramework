@@ -1,18 +1,18 @@
 ﻿using System.Collections.Immutable;
 
 using Framework.Authorization.Domain;
+using Framework.BLL.Domain.IdentityObject;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Database.Domain;
 using Framework.Notification.Domain;
 
-using SecuritySystem;
-
 using Microsoft.Extensions.DependencyInjection;
 
+using SecuritySystem;
 using SecuritySystem.Notification;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3;
 
 /// <summary>
 ///     Фасад контекста конфигурации. Упрощает доступ к методам объектов контекста конфигурации.
@@ -111,7 +111,8 @@ public class ConfigurationContextFacade
             throw new ArgumentNullException(nameof(description));
         }
 
-        var domainType = this.context.GetDomainType(description);
+        var domainType = this.context.GetDomainType(new MemoryDomainType(description.Name, description.NameSpace));
+
         var result = this.GetDomainObjectType(domainType);
 
         return result;

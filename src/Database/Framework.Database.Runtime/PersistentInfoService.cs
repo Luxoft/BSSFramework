@@ -4,7 +4,7 @@ using Framework.Core;
 using Framework.Database.Mapping;
 using Framework.Database.Mapping.Extensions;
 
-namespace Framework.Tracking;
+namespace Framework.Database;
 
 public class PersistentInfoService : IPersistentInfoService
 {

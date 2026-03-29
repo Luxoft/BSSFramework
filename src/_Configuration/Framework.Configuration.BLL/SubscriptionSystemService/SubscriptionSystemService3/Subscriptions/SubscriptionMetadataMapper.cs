@@ -3,7 +3,7 @@ using Framework.Subscriptions;
 
 using DomainObjectChangeType = Framework.Subscriptions.Domain.DomainObjectChangeType;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 
 /// <summary>
 ///     Преобразователь экземпляров типа <see cref="Framework.Subscriptions.ISubscriptionMetadata" />.

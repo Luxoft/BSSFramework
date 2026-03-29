@@ -4,5 +4,5 @@ namespace Framework.Configuration.BLL;
 
 public partial class ConfigurationBLLFactoryContainer
 {
-    public ISubscriptionBLL Subscription => this.Context.ServiceProvider.GetRequiredService<ISubscriptionBLL>();
+    public ISubscriptionBLL Subscription => ServiceProviderServiceExtensions.GetRequiredService<ISubscriptionBLL>(this.Context.ServiceProvider);
 }

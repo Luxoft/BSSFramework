@@ -1,4 +1,6 @@
-﻿using CommonFramework;
+﻿using System.Collections.Immutable;
+
+using CommonFramework;
 
 using Framework.Application.Events;
 using Framework.Configuration.BLL.TargetSystemService;
@@ -20,9 +22,9 @@ public class ConfigurationEventSystem(IConfigurationBLLContext context, IEnumera
                .ToHashSet()
                .Pipe(
                    dbDomainTypes =>
-                       targetSystems.SelectMany(ts => ts.TypeResolverS.GetTypes())
+                       targetSystems.SelectMany(ts => ts.TypeResolverS.Types)
                                     .Where(t => dbDomainTypes.Contains(t.FullName!)))
-               .Pipe(domainTypes => TypeResolverHelper.Create(new TypeSource(domainTypes), TypeSearchMode.Both));
+               .Pipe(domainTypes => TypeResolverHelper.Create(new TypeSource(domainTypes.ToImmutableHashSet()), TypeSearchMode.Both));
 
     public IDomainObjectEventMetadata DomainObjectEventMetadata { get; } = domainObjectEventMetadata;
 

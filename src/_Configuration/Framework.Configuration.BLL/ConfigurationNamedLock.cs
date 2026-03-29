@@ -1,6 +1,7 @@
 ﻿using Framework.Application.Lock;
+using Framework.Configuration.Domain;
 
-namespace Framework.Configuration.Environment;
+namespace Framework.Configuration.BLL;
 
 public static class ConfigurationNamedLock
 {

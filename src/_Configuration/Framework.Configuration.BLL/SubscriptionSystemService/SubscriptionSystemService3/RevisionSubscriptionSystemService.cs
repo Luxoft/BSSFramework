@@ -3,13 +3,13 @@
 using CommonFramework;
 
 using Framework.Application.Domain;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Database;
 using Framework.Database.Domain;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3;
 
 /// <summary>
 /// Предназначен для выполнения операций, связанных с подписками и версиями доменных объектов.

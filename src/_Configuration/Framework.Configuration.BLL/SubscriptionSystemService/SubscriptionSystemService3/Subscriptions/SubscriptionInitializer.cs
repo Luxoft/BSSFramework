@@ -2,10 +2,11 @@
 
 using Framework.Application.Repository;
 using Framework.Configuration.Domain;
+using Framework.Database;
 
 using SecuritySystem.Attributes;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 
 public class SubscriptionInitializer(
     [DisabledSecurity] IRepository<CodeFirstSubscription> subscriptionRepository,

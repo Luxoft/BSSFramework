@@ -2,9 +2,9 @@
 
 using Framework.Application.Domain;
 using Framework.BLL;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
 
 /// <summary>
 /// Типизированная фабрика служб, используемых системой подписок, уведомлений и версий доменных объектов.

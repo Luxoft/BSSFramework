@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3;
 
 /// <summary>
 /// Исключение, бросаемое системой обработки подписок и нотификаций.

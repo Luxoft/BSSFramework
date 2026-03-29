@@ -1,10 +1,10 @@
-﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
+﻿using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.Domain;
 using Framework.Subscriptions.Domain;
 
 using Attachment = System.Net.Mail.Attachment;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
 
 public class AttachmentsResolver<TBLLContext>
         where TBLLContext : class

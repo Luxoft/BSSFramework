@@ -2,14 +2,14 @@
 
 using System.Collections.Immutable;
 
-using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.Domain;
 using Framework.Notification.Domain;
 using Framework.Subscriptions.Domain;
 
 using SecuritySystem;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 
 internal class ByRolesRecipientsResolverBase<TBLLContext>
         where TBLLContext : class

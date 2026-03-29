@@ -7,8 +7,8 @@ using FluentAssertions;
 
 using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
-using Framework.Configuration.BLL.SubscriptionSystemService3;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.TypeResolving;

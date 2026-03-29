@@ -1,13 +1,12 @@
-﻿using Framework.Configuration.Domain;
+﻿using CommonFramework;
+
+using Framework.Configuration.Domain;
+using Framework.Subscriptions.Domain;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-using CommonFramework;
-
-using Framework.Subscriptions.Domain;
-
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 
 /// <summary>
 /// Компонент для поиска всех возможных получателей уведомлений по подписке.

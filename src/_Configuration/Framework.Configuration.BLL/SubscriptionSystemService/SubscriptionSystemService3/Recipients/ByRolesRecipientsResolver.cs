@@ -1,8 +1,8 @@
-﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
+﻿using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.Domain;
 using Framework.Subscriptions.Domain;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 
 /// <summary>
 /// Компонент для поиска получателей уведомлений, указанных в подписке как набор ролей.

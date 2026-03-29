@@ -1,4 +1,4 @@
-﻿namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+﻿namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 
 /// <summary>
 /// Контейнер списков получателей уведомлений по подписке.

@@ -1,6 +1,6 @@
 ﻿using Framework.Subscriptions.Domain;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 
 /// <summary>
 ///     Результат вызова <see cref="RecipientsResolver.Resolve{T}" />

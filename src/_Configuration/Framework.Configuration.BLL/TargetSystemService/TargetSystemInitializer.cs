@@ -3,13 +3,12 @@
 using Framework.BLL;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Extensions;
-using Framework.Configuration.BLL.TargetSystemService;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Database;
 using Framework.Relations;
 
-namespace Framework.Configuration.BLL;
+namespace Framework.Configuration.BLL.TargetSystemService;
 
 public class TargetSystemInitializer(
     IConfigurationBLLContext context,

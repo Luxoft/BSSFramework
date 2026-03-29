@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 
+using Framework.Database;
+
 namespace Framework.Tracking;
 
 /// <summary>

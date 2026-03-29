@@ -1,7 +1,7 @@
 ﻿using CommonFramework;
 
-using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
 using Framework.Configuration.Domain;
 using Framework.Notification.Domain;
 using Framework.Subscriptions.Domain;
@@ -9,7 +9,7 @@ using Framework.Subscriptions.Domain;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Templates;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Templates;
 
 /// <summary>
 ///     Фабрика, предназначенная для создания шаблонов уведомлений.

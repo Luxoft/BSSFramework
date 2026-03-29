@@ -4,15 +4,14 @@ using Framework.Application.Domain;
 using Framework.Application.Events;
 using Framework.BLL;
 using Framework.BLL.Services;
-using Framework.Configuration.BLL.SubscriptionSystemService3;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.Configuration.BLL.TargetSystemService;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.TypeResolving;
 
-namespace Framework.Configuration.BLL;
+namespace Framework.Configuration.BLL.TargetSystemService;
 
 public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<IConfigurationBLLContext>, ITargetSystemService
 
@@ -46,7 +45,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLL
 
         this.lazyTargetSystem = LazyHelper.Create(() => context.Logics.TargetSystem.GetByName(this.Name, true));
 
-        this.TypeResolver = this.TypeResolverS.OverrideInput((DomainType domainType) => domainType.FullTypeName).WithCache().WithLock();
+        this.TypeResolver = this.TypeResolverS.OverrideInput((DomainType domainType) => domainType.FullTypeName);
     }
 
     public string Name { get; }

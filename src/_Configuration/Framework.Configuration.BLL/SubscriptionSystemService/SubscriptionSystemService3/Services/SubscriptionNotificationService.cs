@@ -1,5 +1,5 @@
-﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Templates;
+﻿using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Templates;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.MessageSender;
@@ -9,7 +9,7 @@ using Framework.Subscriptions.Domain;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services;
+namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
 
 /// <summary>
 /// Служба рассылки уведомлений по подпискам и изменениям доменных объектов.

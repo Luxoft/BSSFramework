@@ -1,22 +1,22 @@
 ﻿using System.Net.Mail;
 
+using Framework.BLL;
 using Framework.Core;
 using Framework.Core.MessageSender;
-using Framework.DomainDriven.BLL;
 using Framework.Validation;
 
-using Attachment = Framework.Notification.New.Attachment;
+using Attachment = Framework.Notification.Domain.Attachment;
 
 namespace Framework.Configuration.BLL.Notification;
 
 /// <summary>
 /// Базовый класс для рассылки уведомлений по исключениям.
 /// </summary>
-/// <seealso cref="DomainDriven.BLL.BLLContextContainer{IConfigurationBLLContext}" />
+/// <seealso cref="BLLContextContainer{TBLLContext}" />
 /// <seealso cref="IMessageSender{Exception}" />
 public class ExceptionMessageSender : BLLContextContainer<IConfigurationBLLContext>, IMessageSender<Exception>
 {
-    private readonly IMessageSender<Framework.Notification.New.Message> messageSender;
+    private readonly IMessageSender<Framework.Notification.Domain.Message> messageSender;
     private readonly MailAddress fromAddress;
     private readonly string[] receivers;
 
@@ -42,7 +42,7 @@ public class ExceptionMessageSender : BLLContextContainer<IConfigurationBLLConte
     /// </exception>
     public ExceptionMessageSender(
             IConfigurationBLLContext context,
-            IMessageSender<Framework.Notification.New.Message> messageSender,
+            IMessageSender<Framework.Notification.Domain.Message> messageSender,
             MailAddress fromAddress,
             IEnumerable<string> toAddresses)
             : base(context)
@@ -87,7 +87,7 @@ public class ExceptionMessageSender : BLLContextContainer<IConfigurationBLLConte
         var subject = $"Exception ({userLogin}) - {exceptionName} - {messagePart}";
         var body = exception.ToFormattedString();
 
-        var message = new Framework.Notification.New.Message(
+        var message = new Framework.Notification.Domain.Message(
                                                              this.fromAddress,
                                                              this.receivers,
                                                              subject,

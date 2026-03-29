@@ -1,5 +1,5 @@
-﻿using Framework.Configuration.Domain;
-using Framework.DomainDriven.BLL;
+﻿using Framework.BLL;
+using Framework.Configuration.Domain;
 
 namespace Framework.Configuration.BLL;
 

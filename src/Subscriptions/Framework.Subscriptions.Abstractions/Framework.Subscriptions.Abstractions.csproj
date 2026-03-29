@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.Configuration.Domain.Models</PackageId>
+    <PackageId>Luxoft.Framework.Subscriptions.Abstractions</PackageId>
+    <RootNamespace>Framework.Subscriptions</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,13 +10,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.SecuritySystem.Notification.Abstractions" />
+    <PackageReference Include="IvAt.SecuritySystem.Domain" />
+    <PackageReference Include="IvAt.SecuritySystem.Notification.Domain" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Notification\Framework.Notification.Domain\Framework.Notification.Domain.csproj" />
-    <ProjectReference Include="..\..\Subscriptions\Framework.Subscriptions.Domain\Framework.Subscriptions.Domain.csproj" />
-    <ProjectReference Include="..\Framework.Configuration.Domain\Framework.Configuration.Domain.csproj" />
+    <ProjectReference Include="..\Framework.Subscriptions.Domain\Framework.Subscriptions.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -104,6 +104,10 @@
     <Project Path="_SampleSystem/SampleSystem.WebApiCore.NHibernate/SampleSystem.WebApiCore.NHibernate.csproj" />
     <Project Path="_SampleSystem/SampleSystem.WebApiCore/SampleSystem.WebApiCore.csproj" />
   </Folder>
+  <Folder Name="/Subscriptions/">
+    <Project Path="Subscriptions/Framework.Subscriptions.Abstractions/Framework.Subscriptions.Abstractions.csproj" />
+    <Project Path="Subscriptions/Framework.Subscriptions.Domain/Framework.Subscriptions.Domain.csproj" />
+  </Folder>
   
   <Folder Name="/Validation/">
     <Project Path="Validation/Framework.Validation.Abstractions/Framework.Validation.Abstractions.csproj" />
@@ -116,6 +120,7 @@
     <Project Path="Notification/Framework.Notification.Domain/Framework.Notification.Domain.csproj" />
     <Project Path="Notification/Framework.Notification.DTO/Framework.Notification.DTO.csproj" />
     <Project Path="Notification/Framework.Notification.Runtime/Framework.Notification.Runtime.csproj" />
+    <Project Path="Notification/Framework.Notification/Framework.Notification.csproj" />
   </Folder>
   
   <Folder Name="/OData/">
@@ -171,7 +176,6 @@
     <Project Path="_Configuration/Framework.Configuration.Domain/Framework.Configuration.Domain.csproj" />
     <Project Path="_Configuration/Framework.Configuration.Environment/Framework.Configuration.Environment.csproj" />
     <Project Path="_Configuration/Framework.Configuration.SubscriptionModeling.Tests.Unit/Framework.Configuration.SubscriptionModeling.Tests.Unit.csproj" />
-    <Project Path="_Configuration/Framework.Configuration.SubscriptionModeling/Framework.Configuration.SubscriptionModeling.csproj" />
     <Project Path="_Configuration/Framework.Configuration.WebApi/Framework.Configuration.WebApi.csproj" />
   </Folder>
   

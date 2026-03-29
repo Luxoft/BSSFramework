@@ -1,5 +1,5 @@
-﻿using Framework.Core;
-using Framework.Persistent;
+﻿using Framework.Application.Domain;
+using Framework.BLL.Domain.IdentityObject;
 using Framework.Configuration.Domain;
 using Framework.Core.TypeResolving;
 

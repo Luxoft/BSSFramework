@@ -1,5 +1,6 @@
-﻿using Framework.DomainDriven.Repository;
+﻿using Framework.Application.Repository;
 using Framework.Notification;
+using Framework.Notification.Domain;
 
 using SecuritySystem.Attributes;
 

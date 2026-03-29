@@ -1,4 +1,4 @@
-﻿using Framework.ApplicationVariable;
+﻿using Framework.Application.ApplicationVariable;
 
 namespace Framework.Configuration.BLL;
 

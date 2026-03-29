@@ -1,5 +1,5 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.Metadata;
+using Framework.Core.TypeResolving.TypeSource;
 
 namespace SampleSystem.CodeGenerate;
 
@@ -33,9 +33,6 @@ public class DALGeneratorConfiguration : Framework.DomainDriven.NHibernate.DALGe
 
     private (Type fromType, string propertyName)[] GetIgnoreFields()
     {
-        return new (Type fromType, string propertyName)[0]
-               {
-
-               };
+        return [];
     }
 }

@@ -1,6 +1,7 @@
-﻿using Framework.Configuration.BLL;
-using Framework.DomainDriven;
+﻿using Framework.DomainDriven;
 using Framework.DomainDriven.Lock;
+
+using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
 namespace Framework.Configuration.Generated.DTO;
 

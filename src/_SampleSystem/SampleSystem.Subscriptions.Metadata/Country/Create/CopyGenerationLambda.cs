@@ -21,6 +21,6 @@ public sealed class CopyGenerationLambda : GenerationLambdaBase<Domain.Country>
             ISampleSystemBLLContext context,
             DomainObjectVersions<Domain.Country> versions)
     {
-        return new[] { new NotificationMessageGenerationInfo("tester@luxoft.com", versions.Current, versions.Previous) };
+        return [new NotificationMessageGenerationInfo("tester@luxoft.com", versions.Current, versions.Previous)];
     }
 }

@@ -1,11 +1,13 @@
 ﻿using AutoFixture;
 using AutoFixture.Idioms;
 using FluentAssertions;
-using Framework.Configuration.BLL.SubscriptionSystemService3;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
+
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Core;
+using Framework.Core.TryResult.Base;
 using Framework.UnitTesting;
 using NUnit.Framework;
 using NSubstitute;
@@ -140,7 +142,7 @@ public sealed class SubscriptionSystemServiceTests : TestFixtureBase
     {
         // Arrange
         var versions = this.Fixture.Create<DomainObjectVersions<string>>();
-        var expectedResult = Substitute.For<IList<ITryResult<Subscription>>>();
+        var expectedResult = Substitute.For<List<ITryResult<Subscription>>>();
 
         this.notificationService
             .NotifyDomainObjectChanged(versions)

@@ -1,6 +1,7 @@
-﻿namespace Framework.Core;
+﻿// ReSharper disable once CheckNamespace
+namespace Framework.Core;
 
-public interface IPeriodItemCollectionContainer<out T>
+public interface PeriodItemCollectionContainer<out T>
         where T : IPeriodObject
 {
     IEnumerable<T> Items { get; }

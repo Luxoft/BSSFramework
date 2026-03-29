@@ -17,8 +17,8 @@ public sealed class AttachmentSubscription
         this.ConditionLambda = new ConditionLambda();
         this.GenerationLambda = new GenerationLambda();
         this.CopyGenerationLambda = new CopyGenerationLambda();
-        this.SecurityItemSourceLambdas = new[] { new SecurityItemSourceLambda() };
-        this.RecepientsSelectorMode = Framework.Configuration.RecepientsSelectorMode.Union;
+        this.SecurityItemSourceLambdas = [new SecurityItemSourceLambda()];
+        this.RecipientsSelectorMode = Framework.Configuration.RecipientsSelectorMode.Union;
         this.IncludeAttachments = true;
         this.AttachmentLambda = new AttachmentLambda();
     }

@@ -26,7 +26,7 @@ public class ScriptEngineService
     public T Execute<T>(string script, params Type[] typeParameters)
     {
         var types = typeParameters
-                    .SelectMany(z => z.IsGenericType ? z.GetGenericArguments().Concat(new[] { z }) : new[] { z })
+                    .SelectMany(z => z.IsGenericType ? z.GetGenericArguments().Concat([z]) : [z])
                     .Distinct()
                     .ToList();
 
@@ -52,7 +52,7 @@ public class ScriptEngineService
 
         var assembliNames =
                 types
-                        .SelectMany(z => z.Assembly.GetReferencedAssemblies().Concat(new[] { z.Assembly.GetName() })).Distinct().ToArray();
+                        .SelectMany(z => z.Assembly.GetReferencedAssemblies().Concat([z.Assembly.GetName()])).Distinct().ToArray();
 
         var assemblyPaths = assembliNames.Select(Assembly.Load).ToList();
 
@@ -79,7 +79,7 @@ public class ScriptEngineService
 
 
         var methodType =
-                $"{this.GetGenericTypeName(typeof(Func<>))}<{string.Join(",", expressionParameters.Select(z => z.Type).Concat(new[] { resultType }).Select(t => t.ToCSharpFullName()))}>";
+                $"{this.GetGenericTypeName(typeof(Func<>))}<{string.Join(",", expressionParameters.Select(z => z.Type).Concat([resultType]).Select(t => t.ToCSharpFullName()))}>";
 
         var methodName = "Execute";
         var typeName = "ExpressionParser";
@@ -113,7 +113,7 @@ public class ScriptEngineService
         var type = compileResult.CompiledAssembly.GetType($"{namespaceName}.{typeName}");
 
         var method = type.GetMethod(methodName);
-        var result = (T)method.Invoke(null, new object[0]);
+        var result = (T)method.Invoke(null, []);
         return result;
     }
 
@@ -148,10 +148,7 @@ public class ScriptEngineService
 
     }
 
-    private string GetGenericTypeName(Type source)
-    {
-        return $"{source.Namespace}.{new string(source.Name.SkipLast(2).ToArray())}";
-    }
+    private string GetGenericTypeName(Type source) => $"{source.Namespace}.{new string(source.Name.SkipLast(2).ToArray())}";
 
     private IEnumerable<string> GetParametersNames(string expression)
     {

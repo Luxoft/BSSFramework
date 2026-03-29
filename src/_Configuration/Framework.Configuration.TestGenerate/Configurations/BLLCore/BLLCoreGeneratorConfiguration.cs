@@ -1,8 +1,7 @@
-﻿using Framework.Configuration.Domain;
+﻿using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
+using Framework.Configuration.Domain;
 
-using Framework.DomainDriven.BLLCoreGenerator;
-
-namespace Framework.Configuration.TestGenerate;
+namespace Framework.Configuration.TestGenerate.Configurations.BLLCore;
 
 public partial class BLLCoreGeneratorConfiguration(ServerGenerationEnvironment environment)
     : GeneratorConfigurationBase<ServerGenerationEnvironment>(environment)

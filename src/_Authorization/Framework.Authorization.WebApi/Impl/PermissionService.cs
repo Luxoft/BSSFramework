@@ -1,12 +1,13 @@
 ﻿using Framework.Authorization.Generated.DTO;
-using Framework.DomainDriven;
+using Framework.Database;
+
 using SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 
 namespace Framework.Authorization.WebApi;
 
-public partial class AuthSLJsonController
+public partial class AuthMainController
 {
     [HttpPost]
     public void ChangeDelegatePermissions([FromForm] ChangePermissionDelegatesModelStrictDTO changePermissionDelegatesModelStrictDTO)

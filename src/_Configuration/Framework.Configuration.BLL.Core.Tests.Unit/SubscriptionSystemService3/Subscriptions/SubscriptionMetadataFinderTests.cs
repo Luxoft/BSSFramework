@@ -4,7 +4,7 @@ using CommonFramework.DependencyInjection;
 using FluentAssertions;
 
 using Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Subscriptions.Metadata;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 
 using Microsoft.Extensions.DependencyInjection;
 

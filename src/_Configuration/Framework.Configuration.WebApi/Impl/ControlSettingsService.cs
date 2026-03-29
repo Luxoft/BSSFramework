@@ -1,14 +1,14 @@
 ﻿using CommonFramework;
 
 using Framework.Core;
-
-using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.Configuration.Generated.DTO;
 using Framework.DomainDriven;
 using Framework.Persistent;
 
 using Microsoft.AspNetCore.Mvc;
+
+using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
 namespace Framework.Configuration.WebApi;
 

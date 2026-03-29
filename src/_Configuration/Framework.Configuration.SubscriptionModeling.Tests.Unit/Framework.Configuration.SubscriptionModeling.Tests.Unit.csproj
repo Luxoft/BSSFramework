@@ -16,9 +16,4 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Framework.UnitTesting\Framework.UnitTesting.csproj" />
-    <ProjectReference Include="..\Framework.Configuration.SubscriptionModeling\Framework.Configuration.SubscriptionModeling.csproj" />
-  </ItemGroup>
-
 </Project>

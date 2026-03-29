@@ -43,7 +43,7 @@ internal static class CompileReferenceExtensions
                 {
                     foreach (var argType in type.GetGenericArguments())
                     {
-                        graph.FillCompileReferencedTypes(new[] { argType });
+                        graph.FillCompileReferencedTypes([argType]);
                     }
                 }
 
@@ -51,7 +51,7 @@ internal static class CompileReferenceExtensions
                 {
                     foreach (var interfaceType in type.GetInterfaces())
                     {
-                        graph.FillCompileReferencedTypes(new[] { interfaceType });
+                        graph.FillCompileReferencedTypes([interfaceType]);
                     }
                 }
                 else if (type.IsClass)
@@ -63,7 +63,7 @@ internal static class CompileReferenceExtensions
 
                     foreach (var interfaceType in type.GetInterfaces())
                     {
-                        graph.FillCompileReferencedTypes(new[] { interfaceType });
+                        graph.FillCompileReferencedTypes([interfaceType]);
                     }
                 }
             }

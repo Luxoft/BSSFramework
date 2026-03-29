@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.Generated.DTO;
 using Framework.Core;
+using Framework.Core.TypeResolving.TypeSource;
 using Framework.DomainDriven.WebApiNetCore.Integration;
 using SecuritySystem;
 

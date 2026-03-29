@@ -9,7 +9,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IvAt.CommonFramework.DependencyInjection" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Framework.Authorization.BLL.Core\Framework.Authorization.BLL.Core.csproj" />
+
+    <ProjectReference Include="..\..\BLL\Framework.BLL.Runtime\Framework.BLL.Runtime.csproj" />
   </ItemGroup>
 
 </Project>

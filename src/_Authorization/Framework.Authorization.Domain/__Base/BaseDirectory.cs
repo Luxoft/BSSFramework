@@ -1,5 +1,6 @@
-﻿using Framework.Core;
-using Framework.Persistent;
+﻿using Framework.Application.Domain;
+using Framework.BLL.Domain.Attributes;
+using Framework.Core;
 using Framework.Restriction;
 
 namespace Framework.Authorization.Domain;

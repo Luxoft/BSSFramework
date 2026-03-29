@@ -9,6 +9,7 @@ using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
+using Framework.Core.MessageSender;
 using Framework.Notification.New;
 using Framework.UnitTesting;
 using Framework.Validation;
@@ -24,7 +25,7 @@ public sealed class ExceptionMessageSenderTests : TestFixtureBase
 {
     private static readonly MailAddress FromAddress = new MailAddress("support@luxoft.com");
 
-    private static readonly string[] ToAddresses = { "user@luxoft.com" };
+    private static readonly string[] ToAddresses = ["user@luxoft.com"];
 
     private IAuthorizationBLLContext authorizationBLLContext;
 

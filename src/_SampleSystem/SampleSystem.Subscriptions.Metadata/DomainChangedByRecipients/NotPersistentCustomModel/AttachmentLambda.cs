@@ -19,9 +19,9 @@ public sealed class AttachmentLambda : AttachmentLambdaBase<CustomNotificationMo
             ISampleSystemBLLContext context,
             DomainObjectVersions<CustomNotificationModel> versions)
     {
-        return new[]
-               {
-                       new System.Net.Mail.Attachment(new MemoryStream(Encoding.UTF8.GetBytes("Hello world!")), AttachmentName)
-               };
+        return
+        [
+            new System.Net.Mail.Attachment(new MemoryStream(Encoding.UTF8.GetBytes("Hello world!")), AttachmentName)
+        ];
     }
 }

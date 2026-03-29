@@ -37,7 +37,7 @@ public static class CoreTypeExtensions
 
         var rankDelegateType = Type.GetType(rankDelegateTypeName)!;
 
-        return rankDelegateType.MakeGenericType(resultType == typeof(void) ? parameterTypes : parameterTypes.Concat(new[] { resultType }).ToArray());
+        return rankDelegateType.MakeGenericType(resultType == typeof(void) ? parameterTypes : parameterTypes.Concat([resultType]).ToArray());
     }
 
     public static bool HasDefaultConstructor(this Type type)
@@ -47,10 +47,7 @@ public static class CoreTypeExtensions
         return type.GetConstructor(Type.EmptyTypes) != null;
     }
 
-    public static IEnumerable<Type> GetReferencedTypes(this IEnumerable<Type> types)
-    {
-        return types.GetReferencedTypes(_ => true);
-    }
+    public static IEnumerable<Type> GetReferencedTypes(this IEnumerable<Type> types) => types.GetReferencedTypes(_ => true);
 
     public static Type GetTopDeclaringType(this PropertyInfo property)
     {
@@ -84,7 +81,7 @@ public static class CoreTypeExtensions
 
         if (source.IsCollection())
         {
-            return new FieldInfo[0];
+            return Array.Empty<FieldInfo>();
         }
 
         var currentType = source;
@@ -181,10 +178,8 @@ public static class CoreTypeExtensions
         }
     }
 
-    public static Type? GetCollectionOrArrayElementType(this Type type)
-    {
-        return type.GetCollectionElementType() ?? type.GetArrayGenericType();
-    }
+    public static Type? GetCollectionOrArrayElementType(this Type type) => type.GetCollectionElementType() ?? type.GetArrayGenericType();
+
     public static Type? GetArrayGenericType(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
@@ -192,11 +187,7 @@ public static class CoreTypeExtensions
         return type.IsArray ? type.GetElementType() : null;
     }
 
-    public static Type GetCollectionOrArrayElementTypeOrSelf(this Type type)
-    {
-        return type.GetCollectionOrArrayElementType() ?? type;
-    }
-
+    public static Type GetCollectionOrArrayElementTypeOrSelf(this Type type) => type.GetCollectionOrArrayElementType() ?? type;
 
     public static bool IsCollection(this Type type, Func<Type?, bool> elementTypeFilter)
     {
@@ -305,16 +296,14 @@ public static class CoreTypeExtensions
         return property;
     }
 
-    public static IEnumerable<T> GetStaticPropertyValueList<T>(this Type type, Func<string, bool>? filter = null)
-    {
-        return from prop in type.GetProperties(BindingFlags.Static | BindingFlags.Public)
+    public static IEnumerable<T> GetStaticPropertyValueList<T>(this Type type, Func<string, bool>? filter = null) =>
+        from prop in type.GetProperties(BindingFlags.Static | BindingFlags.Public)
 
-               where filter == null || filter(prop.Name)
+        where filter == null || filter(prop.Name)
 
-               where typeof(T).IsAssignableFrom(prop.PropertyType)
+        where typeof(T).IsAssignableFrom(prop.PropertyType)
 
-               select (T)prop.GetValue(null)!;
-    }
+        select (T)prop.GetValue(null)!;
 
     public static PropertyInfo? GetProperty(this Type type, string propertyName, bool raiseIfNotFound)
     {
@@ -594,29 +583,26 @@ public static class CoreTypeExtensions
         return method;
     }
 
-    private static readonly Dictionary<Type, int> SignedTypeSetPriority = new Dictionary<Type, int>
+    private static readonly Dictionary<Type, int> SignedTypeSetPriority = new()
                                                                           {
                                                                                   { typeof(short), 0 },
                                                                                   { typeof(int), 1 },
                                                                                   { typeof(long), 2 },
                                                                           };
 
-    private static readonly Dictionary<Type, int> UnsignedTypeSetPriority = new Dictionary<Type, int>
+    private static readonly Dictionary<Type, int> UnsignedTypeSetPriority = new()
                                                                             {
                                                                                     { typeof(ushort), 0 },
                                                                                     { typeof(uint), 1 },
                                                                                     { typeof(ulong), 2 },
                                                                             };
 
-    private static readonly Dictionary<Type, int> FloatTypeSetPriority = new Dictionary<Type, int>
+    private static readonly Dictionary<Type, int> FloatTypeSetPriority = new()
                                                                          {
                                                                                  { typeof(float), 0 },
                                                                                  { typeof(double), 1 },
                                                                                  { typeof(decimal), 2 },
                                                                          };
 
-    private static readonly List<Dictionary<Type, int>> TypeSetsPriority = new List<Dictionary<Type, int>>
-                                                                           {
-                                                                                   SignedTypeSetPriority, UnsignedTypeSetPriority, FloatTypeSetPriority
-                                                                           };
+    private static readonly List<Dictionary<Type, int>> TypeSetsPriority = [SignedTypeSetPriority, UnsignedTypeSetPriority, FloatTypeSetPriority];
 }

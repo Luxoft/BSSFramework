@@ -7,10 +7,11 @@ using FluentAssertions;
 
 using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
-using Framework.Configuration.BLL.SubscriptionSystemService3;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.Domain;
 using Framework.Core;
+using Framework.Core.TypeResolving;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.Notification;
 using Framework.UnitTesting;
@@ -54,13 +55,13 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
 
         this.authorizationContext = this.CreateStub<IAuthorizationBLLContext>();
         this.authorizationContext.Logics.Returns(authorizationLogics);
-        this.authorizationContext.NotificationPrincipalExtractor.Returns(this.notificationPrincipalExtractor);
 
         this.context = this.Fixture.RegisterStub<IConfigurationBLLContext>();
         this.context.EmployeeSource.Returns(this.employeeSource);
         this.context.Logics.Returns(configurationLogics);
         this.context.Authorization.Returns(this.authorizationContext);
         this.context.ComplexDomainTypeResolver.Returns(this.domainTypeResolver);
+        this.context.NotificationPrincipalExtractor.Returns(this.notificationPrincipalExtractor);
     }
 
     [Test]
@@ -80,7 +81,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     public void ConvertPrincipals_Call_Employee()
     {
         // Arrange
-        var employees = new RecipientCollection(new[] { new Recipient("ivanov", "ivanov@ya.ru") });
+        var employees = new RecipientCollection([new Recipient("ivanov", "ivanov@ya.ru")]);
         var principals = new[] { new Principal { Name = "ivanov" }, new Principal { Name = "petrov" } };
 
         this.employeeSource.GetQueryable().Returns(employees.AsQueryable());
@@ -160,7 +161,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
         var domainType = this.Fixture.Create<DomainType>();
 
         this.domainTypeResolver
-            .Resolve(domainType)
+            .TryResolve(domainType)
             .Returns(domainObjectType);
 
         // Act
@@ -184,7 +185,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
             .Returns(domainType);
 
         this.domainTypeResolver
-            .Resolve(domainType)
+            .TryResolve(domainType)
             .Returns(domainObjectType);
 
         // Act
@@ -200,7 +201,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     {
         // Arrange
         this.domainTypeResolver
-            .Resolve(Arg.Any<DomainType>())
+            .TryResolve(Arg.Any<DomainType>())
             .Returns(default(Type));
 
         // Act

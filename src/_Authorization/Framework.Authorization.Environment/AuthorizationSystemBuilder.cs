@@ -1,0 +1,103 @@
+﻿using CommonFramework;
+using CommonFramework.DependencyInjection;
+using CommonFramework.RelativePath.DependencyInjection;
+
+using Framework.Application;
+using Framework.Authorization.Domain;
+using Framework.Authorization.Environment.Security;
+using Framework.Core;
+
+using Microsoft.Extensions.DependencyInjection;
+
+using SecuritySystem;
+using SecuritySystem.DependencyInjection;
+using SecuritySystem.ExternalSystem.ApplicationSecurity;
+using SecuritySystem.GeneralPermission.DependencyInjection;
+using SecuritySystem.GeneralPermission.Validation;
+using SecuritySystem.Notification.DependencyInjection;
+using SecuritySystem.UserSource;
+
+namespace Framework.Authorization.Environment;
+
+public class AuthorizationSystemBuilder : IAuthorizationSystemBuilder, IServiceInitializer<ISecuritySystemBuilder>
+{
+    private Type? uniquePermissionComparerType;
+
+    public bool RegisterRunAsManager { get; set; } = true;
+
+    public IAuthorizationSystemBuilder SetUniquePermissionComparer<TComparer>()
+        where TComparer : class, IPermissionEqualityComparer<Permission, PermissionRestriction>
+    {
+        this.uniquePermissionComparerType = typeof(TComparer);
+
+        return this;
+    }
+
+    public void Initialize(ISecuritySystemBuilder settings)
+    {
+        var securityAdministratorRule = ApplicationSecurityRule.SecurityAdministrator;
+        var principalViewSecurityRule = securityAdministratorRule.Or(DomainSecurityRule.CurrentUser);
+        var delegatedFromSecurityRule = new DomainSecurityRule.CurrentUserSecurityRule(nameof(Permission.DelegatedFrom));
+
+        settings.AddExtensions(sc => sc.AddScoped<IDalGenericInterceptor<Permission>, MasterDetailDalGenericInterceptor<Permission, Principal>>()
+                                       .AddScoped<IDalGenericInterceptor<PermissionRestriction>, MasterDetailDalGenericInterceptor<PermissionRestriction, Permission>>())
+
+                .AddUserSource<Principal>(usb =>
+                {
+                    usb.SetMissedService<CreateVirtualMissedUserService<Principal>>();
+
+                    if (this.RegisterRunAsManager)
+                    {
+                        usb.SetRunAs(p => p.RunAs);
+                    }
+                })
+                .AddRunAsValidator<ExistsOtherwiseUsersRunAsValidator<Principal>>()
+
+                .AddGeneralPermission(
+                    p => p.Principal,
+                    p => p.Role,
+                    (PermissionRestriction pr) => pr.Permission,
+                    pr => pr.SecurityContextType,
+                    pr => pr.SecurityContextId,
+                    b => b
+                         .SetSecurityRoleDescription(sr => sr.Description)
+                         .SetPermissionPeriod(
+                             new PropertyAccessors<Permission, DateTime?>(
+                                 v => v.Period.StartDate,
+                                 v => v.Period.StartDate,
+                                 (permission, startDate) => permission.Period = new Period(startDate ?? DateTime.MinValue, permission.Period.EndDate)),
+                             new PropertyAccessors<Permission, DateTime?>(
+                                 v => v.Period.EndDate,
+                                 v => v.Period.EndDate,
+                                 (permission, endDate) => permission.Period = new Period(permission.Period.StartDate, endDate)))
+                         .SetPermissionComment(v => v.Comment)
+                         .SetPermissionDelegation(p => p.DelegatedFrom))
+
+                .AddDomainSecurity<Principal>(b => b.SetView(principalViewSecurityRule)
+                                                    .SetEdit(securityAdministratorRule))
+
+                .AddDomainSecurity<Permission>(b => b.SetView(principalViewSecurityRule.Or(delegatedFromSecurityRule))
+                                                     .SetEdit(securityAdministratorRule.Or(delegatedFromSecurityRule)))
+
+                .AddDomainSecurity<BusinessRole>(b => b.SetView(securityAdministratorRule.Or(AuthorizationSecurityRule.AvailableBusinessRole))
+                                                       .SetEdit(securityAdministratorRule))
+
+                .AddDomainSecurity<SecurityContextType>(b => b.SetView(SecurityRule.Disabled))
+
+                .AddNotification()
+
+                .AddExtensions(services =>
+                {
+                    if (this.uniquePermissionComparerType != null)
+                    {
+                        services.AddScoped(typeof(IPermissionEqualityComparer<Permission, PermissionRestriction>), this.uniquePermissionComparerType);
+                    }
+
+                    services.AddRelativeDomainPath((Permission permission) => permission.Principal)
+                            .AddRelativeDomainPath((Permission permission) => permission.DelegatedFrom!.Principal, nameof(Permission.DelegatedFrom))
+
+                            .AddRelativeDomainPath((BusinessRole businessRole) => businessRole)
+                            .AddScoped(typeof(AvailableBusinessRoleSecurityProvider<>));
+                });
+    }
+}

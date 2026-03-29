@@ -4,14 +4,14 @@ namespace Framework.ExpressionParsers;
 
 public class CSharpNativeExpressionParser : INativeExpressionParser
 {
-    private readonly INativeBodyExpressionParser _parser;
+    private readonly INativeBodyExpressionParser parser;
 
 
     public CSharpNativeExpressionParser(INativeBodyExpressionParser parser)
     {
         if (parser == null) throw new ArgumentNullException(nameof(parser));
 
-        this._parser = parser;
+        this.parser = parser;
     }
 
 
@@ -117,12 +117,7 @@ public class CSharpNativeExpressionParser : INativeExpressionParser
     }
 
 
-    private LambdaExpression ParseExpression(ParameterExpression[] parameters, Type returnType, string expression)
-    {
-        return (LambdaExpression)this._parser.Parse(parameters, returnType, expression);
-    }
-
-
+    private LambdaExpression ParseExpression(ParameterExpression[] parameters, Type returnType, string expression) => (LambdaExpression)this.parser.Parse(parameters, returnType, expression);
 
     /// <summary>
     /// Parse only primitive types

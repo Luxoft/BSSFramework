@@ -4,12 +4,17 @@
     <PackageId>Luxoft.Framework.Configuration.BLL</PackageId>
   </PropertyGroup>
 
-
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IvAt.CommonFramework.DependencyInjection" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BLL\Framework.BLL.Runtime\Framework.BLL.Runtime.csproj" />
+    <ProjectReference Include="..\..\Subscriptions\Framework.Subscriptions.Abstractions\Framework.Subscriptions.Abstractions.csproj" />
     <ProjectReference Include="..\Framework.Configuration.BLL.Core\Framework.Configuration.BLL.Core.csproj" />
   </ItemGroup>
 

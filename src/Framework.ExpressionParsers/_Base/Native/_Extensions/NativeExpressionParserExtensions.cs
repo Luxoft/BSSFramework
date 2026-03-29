@@ -25,27 +25,24 @@ public static class NativeExpressionParserExtensions
         return (Expression<TDelegate>)expressionParserFactory.Parse(new NativeExpressionParsingData(new MethodTypeInfo(invokeMethod), expression));
     }
 
-    public static INativeExpressionParser ToSafeComposite(this INativeExpressionParser[] innerParsers)
-    {
-        return new TryFaultMixedExpressionParserFactory(innerParsers);
-    }
+    public static INativeExpressionParser ToSafeComposite(this INativeExpressionParser[] innerParsers) => new TryFaultMixedExpressionParserFactory(innerParsers);
 
     private class TryFaultMixedExpressionParserFactory : INativeExpressionParser
     {
-        private readonly INativeExpressionParser[] _innerParsers;
+        private readonly INativeExpressionParser[] innerParsers;
 
 
         public TryFaultMixedExpressionParserFactory(INativeExpressionParser[] innerParsers)
         {
             if (innerParsers == null) throw new ArgumentNullException(nameof(innerParsers));
 
-            this._innerParsers = innerParsers;
+            this.innerParsers = innerParsers;
         }
 
 
         public LambdaExpression Parse(NativeExpressionParsingData input)
         {
-            var preResult = this._innerParsers.ToArray(factory => LazyHelper.Create(() => TryResult.Catch(() => factory.Parse(input))));
+            var preResult = this.innerParsers.ToArray(factory => LazyHelper.Create(() => TryResult.Catch(() => factory.Parse(input))));
 
 
             var firstSucces = preResult.FirstOrDefault(v => v.Value.IsSuccess());

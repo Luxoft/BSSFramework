@@ -12,7 +12,7 @@ public class PropertyFullTextContainsGenerator : BaseHqlGeneratorForMethod
 {
     public PropertyFullTextContainsGenerator()
     {
-        this.SupportedMethods = new[] { DialectExtensions.GetPropetyFullTextContainsMethodInfo() };
+        this.SupportedMethods = [DialectExtensions.GetPropetyFullTextContainsMethodInfo()];
     }
 
     public override HqlTreeNode BuildHql(

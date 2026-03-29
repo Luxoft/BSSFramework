@@ -1,0 +1,46 @@
+﻿using Framework.BLL.Domain.Persistent.Extensions;
+
+using Framework.Core;
+
+using Framework.OData;
+
+namespace Framework.BLL.Fetching.OData;
+
+public class ODataFetchPathFactory(Type persistentDomainObjectBase) : IFetchPathFactory<SelectOperation>
+{
+    public IEnumerable<PropertyPath> Create(Type startDomainType, SelectOperation selectOperation)
+    {
+        if (startDomainType == null) throw new ArgumentNullException(nameof(startDomainType));
+        if (selectOperation == null) throw new ArgumentNullException(nameof(selectOperation));
+
+        var allResults = selectOperation.Expands.SelectMany(z => this.PreGetLoadPaths(startDomainType, z.GetPropertyPath().ToArray(pair => pair.Item1)))
+                                        .ToList();
+
+        var results = allResults.Distinct((arg1, arg2) => arg1.SequenceEqual(arg2)).ToList();
+
+        return results;
+
+        //foreach (var expand in selectOperation.Expands)
+        //{
+        //    foreach (var path in this.PreGetLoadPaths(this._startDomainType, expand.GetPropertyPath().ToArray(pair => pair.Item1)))
+        //    {
+        //         yield return path;
+        //    }
+        //}
+
+        //yield break;
+    }
+
+    private IEnumerable<PropertyPath> PreGetLoadPaths(Type domainType, string[] propertyPath)
+    {
+        if (propertyPath.Any())
+        {
+            var property = domainType.GetProperty(propertyPath.First(), StringComparison.CurrentCultureIgnoreCase, true);
+
+            if (persistentDomainObjectBase.IsAssignableFrom(property.PropertyType))
+            {
+                yield return property.GetExpandPathOrSelf();
+            }
+        }
+    }
+}

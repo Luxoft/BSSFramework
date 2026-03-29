@@ -21,6 +21,6 @@ public sealed class GenerationLambda : GenerationLambdaBase<Domain.Employee>
             ISampleSystemBLLContext context,
             DomainObjectVersions<Domain.Employee> versions)
     {
-        return new[] { new NotificationMessageGenerationInfo("tester@luxoft.com", versions.Previous, versions.Current) };
+        return [new NotificationMessageGenerationInfo("tester@luxoft.com", versions.Previous, versions.Current)];
     }
 }

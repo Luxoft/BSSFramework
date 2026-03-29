@@ -19,10 +19,8 @@ public static class CoreFuncExtensions
     }
 
     public static TInterface ToLazyInterfaceImplement<TInterface, TImplement>(this Func<TImplement> getValueFunc)
-        where TImplement : TInterface
-    {
-        return LazyInterfaceImplementHelper<TInterface>.CreateProxy(() => getValueFunc());
-    }
+        where TImplement : TInterface =>
+        LazyInterfaceImplementHelper<TInterface>.CreateProxy(() => getValueFunc());
 
     public static Func<TArg, TResult> WithCache<TArg, TResult>(this Func<TArg, TResult> func, IEqualityComparer<TArg>? equalityComparer = null)
         where TArg : notnull

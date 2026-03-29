@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.SecuritySystem.GeneralPermission" />
+    <PackageReference Include="IvAt.SecuritySystem.GeneralPermission.Abstractions" />
     <PackageReference Include="IvAt.SecuritySystem.Notification.Abstractions" />
   </ItemGroup>
 
@@ -16,10 +16,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.Authorization.Domain.Models\Framework.Authorization.Domain.Models.csproj" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="_Generated\" />
+    <ProjectReference Include="..\..\BLL\Framework.BLL.Abstractions\Framework.BLL.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

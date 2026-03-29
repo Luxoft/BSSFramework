@@ -1,10 +1,19 @@
 ﻿using System.Reflection;
 
+using Framework.Application.Events;
+using Framework.BLL.Domain.Serialization;
+using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
+using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
+using Framework.CodeGeneration.DTOGenerator.GeneratePolicy;
+using Framework.CodeGeneration.DTOGenerator.Map;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.FileFactory;
+using Framework.CodeGeneration.GeneratePolicy;
 using Framework.DomainDriven.DTOGenerator;
 using Framework.DomainDriven.DTOGenerator.Server;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.Serialization;
-using Framework.Events;
 
 using SampleSystem.Domain;
 

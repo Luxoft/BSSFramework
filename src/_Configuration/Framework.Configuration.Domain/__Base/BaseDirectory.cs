@@ -1,5 +1,6 @@
-﻿using Framework.Core;
-using Framework.Persistent;
+﻿using Framework.Application.Domain;
+using Framework.BLL.Domain.Attributes;
+using Framework.Core;
 using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;
@@ -9,7 +10,6 @@ namespace Framework.Configuration.Domain;
 /// </summary>
 public abstract class BaseDirectory : AuditPersistentDomainObjectBase, IVisualIdentityObject
 {
-
     private string name;
 
     /// <summary>

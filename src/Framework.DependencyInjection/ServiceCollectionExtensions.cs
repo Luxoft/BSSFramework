@@ -1,6 +1,7 @@
 ﻿using CommonFramework;
 
 using Framework.Core;
+using Framework.Core.LazyObject;
 
 using Microsoft.Extensions.DependencyInjection;
 

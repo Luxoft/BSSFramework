@@ -1,11 +1,11 @@
 ﻿using Framework.Authorization.Generated.DTO;
-using Framework.DomainDriven;
+using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
 
 namespace Framework.Authorization.WebApi;
 
-public partial class AuthSLJsonController
+public partial class AuthMainController
 {
     [HttpPost]
     public void RunAsUser([FromForm] PrincipalIdentityDTO principal)

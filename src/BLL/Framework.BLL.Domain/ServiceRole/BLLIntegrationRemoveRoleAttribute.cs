@@ -1,0 +1,14 @@
+﻿using Framework.BLL.Domain.ServiceRole.Base;
+
+namespace Framework.BLL.Domain.ServiceRole;
+
+/// <summary>
+/// Атрибут для удаления объекта через интеграцию
+/// </summary>
+public class BLLIntegrationRemoveRoleAttribute : BLLServiceRoleAttribute, ICountTypeContainer
+{
+    /// <summary>
+    /// Удаление единственного объекта и/или коллекции объектов
+    /// </summary>
+    public CountType CountType { get; set; } = CountType.Single;
+}

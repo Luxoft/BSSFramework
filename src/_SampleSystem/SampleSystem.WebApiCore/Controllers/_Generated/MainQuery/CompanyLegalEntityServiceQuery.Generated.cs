@@ -20,7 +20,7 @@
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.CompanyLegalEntity> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.CompanyLegalEntity>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
+            Framework.OData.SelectOperation<SampleSystem.Domain.CompanyLegalEntity> typedSelectOperation = Framework.OData.StandardExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.CompanyLegalEntity>(evaluateData.Context.StandardExpressionBuilder, selectOperation);
             Framework.OData.SelectOperationResult<SampleSystem.Domain.CompanyLegalEntity> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.FullDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
@@ -38,7 +38,7 @@
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.CompanyLegalEntity> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.CompanyLegalEntity>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
+            Framework.OData.SelectOperation<SampleSystem.Domain.CompanyLegalEntity> typedSelectOperation = Framework.OData.StandardExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.CompanyLegalEntity>(evaluateData.Context.StandardExpressionBuilder, selectOperation);
             Framework.OData.SelectOperationResult<SampleSystem.Domain.CompanyLegalEntity> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
@@ -56,7 +56,7 @@
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.CompanyLegalEntity> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.CompanyLegalEntity>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
+            Framework.OData.SelectOperation<SampleSystem.Domain.CompanyLegalEntity> typedSelectOperation = Framework.OData.StandardExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.CompanyLegalEntity>(evaluateData.Context.StandardExpressionBuilder, selectOperation);
             Framework.OData.SelectOperationResult<SampleSystem.Domain.CompanyLegalEntity> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.VisualDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
@@ -74,7 +74,7 @@
         {
             SampleSystem.BLL.ICustomCompanyLegalEntityBLL bll = evaluateData.Context.Logics.CustomCompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.Projections.CustomCompanyLegalEntity> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
+            Framework.OData.SelectOperation<SampleSystem.Domain.Projections.CustomCompanyLegalEntity> typedSelectOperation = Framework.OData.StandardExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>(evaluateData.Context.StandardExpressionBuilder, selectOperation);
             Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.CustomCompanyLegalEntity> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>(Framework.Transfering.ViewDTOType.ProjectionDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.CustomCompanyLegalEntityProjectionDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }

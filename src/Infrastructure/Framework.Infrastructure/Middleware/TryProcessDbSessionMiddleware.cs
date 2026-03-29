@@ -1,0 +1,36 @@
+﻿using Framework.Database;
+
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Framework.Infrastructure.Middleware;
+
+public class TryProcessDbSessionMiddleware(RequestDelegate next)
+{
+    public async Task Invoke(HttpContext context, IDBSessionManager dbSessionManager, IWebApiCurrentDBSessionModeResolver sessionModeResolver) =>
+        await dbSessionManager.EvaluateAsync(
+            async () =>
+            {
+                var sessionMode = sessionModeResolver.GetSessionMode();
+
+                if (sessionMode != null)
+                {
+                    var dbSession = context.RequestServices.GetRequiredService<IDBSession>();
+
+                    switch (sessionMode)
+                    {
+                        case DBSessionMode.Read:
+                            dbSession.AsReadOnly();
+                            break;
+
+                        case DBSessionMode.Write:
+                            dbSession.AsWritable();
+                            break;
+
+                    }
+                }
+
+                await next(context);
+            },
+            context.RequestAborted);
+}

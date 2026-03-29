@@ -1,7 +1,6 @@
-﻿using Framework.Configuration.Domain;
+﻿using Framework.BLL.Domain.Exceptions;
+using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.Exceptions;
-using Framework.Validation;
 
 namespace Framework.Configuration.BLL;
 
@@ -20,7 +19,7 @@ public partial class DomainTypeBLL
     {
         if (path == null) throw new ArgumentNullException(nameof(path));
 
-        var blocks = path.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+        var blocks = path.Split(['/'], StringSplitOptions.RemoveEmptyEntries);
 
         if (blocks.Length == 1)
         {

@@ -3,8 +3,8 @@ using AutoFixture.Idioms;
 
 using FluentAssertions;
 using Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Subscriptions.Metadata;
-using Framework.Configuration.BLL.SubscriptionSystemService3;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
 using Framework.Configuration.SubscriptionModeling;
 using Framework.UnitTesting;
@@ -61,7 +61,7 @@ public sealed class SubscriptionMetadataMapperTests : TestFixtureBase
         subscription.IncludeAttachments.Should().Be(metadata.IncludeAttachments);
         subscription.AllowEmptyListOfRecipients.Should().Be(metadata.AllowEmptyListOfRecipients);
         subscription.RazorMessageTemplateType.Should().Be(metadata.MessageTemplateType);
-        subscription.RecepientsMode.Should().Be(metadata.RecepientsSelectorMode);
+        subscription.RecipientsMode.Should().Be(metadata.RecipientsSelectorMode);
         subscription.SecurityItems.Should().HaveCount(1);
         subscription.MetadataSourceType.Should().Be(metadata.GetType());
 

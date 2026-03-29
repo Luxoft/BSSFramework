@@ -6,9 +6,9 @@ using AutoFixture.Idioms;
 using FluentAssertions;
 
 using Framework.Authorization.Domain;
-using Framework.Configuration.BLL.SubscriptionSystemService3;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Lambdas;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven;
@@ -101,7 +101,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
         var securityType = typeof(object);
 
         var principals = new[] { this.Fixture.Create<Principal>() };
-        var employees = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
+        var employees = new RecipientCollection([this.Fixture.Create<Recipient>()]);
 
         var subscription = this.Fixture
                                .Build<Subscription>()
@@ -150,7 +150,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
         var businessRoleIds = new[] { businessRole.SecurityRole };
 
         var principals = new[] { this.Fixture.Create<Principal>() };
-        var employees = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
+        var employees = new RecipientCollection([this.Fixture.Create<Recipient>()]);
 
         var subscription = this.Fixture
                                .Build<Subscription>()
@@ -205,7 +205,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
         var identityObject = this.Fixture.Create<IdentityObject>();
 
         var principals = new[] { this.Fixture.Create<Principal>() };
-        var employees = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
+        var employees = new RecipientCollection([this.Fixture.Create<Recipient>()]);
 
 
         ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
@@ -219,7 +219,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
 
         this.securityItemSourceLambdaProcessor
             .Invoke<string, IdentityObject>(securityItem, versions)
-            .Returns(new[] { identityObject });
+            .Returns([identityObject]);
 
         this.configurationContextFacade
             .ConvertPrincipals(principals)
@@ -251,7 +251,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
         var identityObject = this.Fixture.Create<IdentityObject>();
 
         var principals = new[] { this.Fixture.Create<Principal>() };
-        var employees = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
+        var employees = new RecipientCollection([this.Fixture.Create<Recipient>()]);
 
         var subscription = this.Fixture
                                .Build<Subscription>()
@@ -278,7 +278,7 @@ public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
 
         this.securityItemSourceLambdaProcessor
             .Invoke<string, IdentityObject>(securityItem, versions)
-            .Returns(new[] { identityObject });
+            .Returns([identityObject]);
 
         this.configurationContextFacade
             .ConvertPrincipals(principals)

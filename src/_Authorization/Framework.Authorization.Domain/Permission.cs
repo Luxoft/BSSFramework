@@ -1,9 +1,9 @@
-﻿using Framework.Core;
-using Framework.DomainDriven.Serialization;
-using Framework.DomainDriven.Tracking.LegacyValidators;
-using Framework.Persistent;
-using Framework.Persistent.Mapping;
+﻿using Framework.BLL.Domain.Serialization;
+using Framework.Core;
+using Framework.Database.Mapping;
+using Framework.Relations;
 using Framework.Restriction;
+using Framework.Tracking.Validation;
 
 namespace Framework.Authorization.Domain;
 

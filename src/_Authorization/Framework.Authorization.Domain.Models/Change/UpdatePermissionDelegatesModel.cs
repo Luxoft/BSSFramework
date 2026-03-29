@@ -12,8 +12,8 @@ public class UpdatePermissionDelegatesModel : DomainObjectBase
     public Permission DelegateFromPermission { get; set; }
 
     [Restriction.Required]
-    public IList<DelegateToItemModel> AddItems { get; set; }
+    public List<DelegateToItemModel> AddItems { get; set; }
 
     [Restriction.Required]
-    public IList<Permission> RemoveItems { get; set; }
+    public List<Permission> RemoveItems { get; set; }
 }

@@ -1,4 +1,5 @@
 ﻿using Framework.OData;
+using Framework.OData.Typed;
 
 using GenericQueryable.Fetching;
 
@@ -26,7 +27,7 @@ public partial class TestEmployeeBLL
     /// </summary>
     /// <param name="filter">The filter.</param>
     /// <param name="fetchs">The fetchs.</param>
-    /// <returns>IList&lt;TestEmployee&gt;.</returns>
+    /// <returns>List&lt;TestEmployee&gt;.</returns>
     /// <exception cref="NotImplementedException"></exception>
     public List<TestEmployee> GetListBy(EmployeeFilterModel filter, FetchRule<TestEmployee> fetchs)
         => throw new NotImplementedException();

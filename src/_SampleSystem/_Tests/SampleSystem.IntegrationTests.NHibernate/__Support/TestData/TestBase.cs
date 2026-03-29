@@ -38,9 +38,9 @@ public class TestBase : IntegrationTestBase<ISampleSystemBLLContext>
         base.Cleanup();
     }
 
-    protected ControllerEvaluator<AuthSLJsonController> GetAuthControllerEvaluator(string? principalName = null)
+    protected ControllerEvaluator<AuthMainController> GetAuthControllerEvaluator(string? principalName = null)
     {
-        return this.GetControllerEvaluator<AuthSLJsonController>(principalName);
+        return this.GetControllerEvaluator<AuthMainController>(principalName);
     }
 
     protected ControllerEvaluator<ConfigSLJsonController> GetConfigurationControllerEvaluator(string? principalName = null)

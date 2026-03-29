@@ -1,23 +1,19 @@
-﻿namespace Framework.Configuration.TestGenerate;
+﻿namespace Framework.Configuration.TestGenerate.Configurations;
 
 public partial class ServerGenerationEnvironment :
 
-    DomainDriven.BLLCoreGenerator.IGenerationEnvironmentBase,
+    CodeGeneration.BLLCoreGenerator.Configuration.IGenerationEnvironmentBase,
 
-    DomainDriven.BLLGenerator.IGenerationEnvironmentBase,
+    CodeGeneration.BLLGenerator.Configuration.IGenerationEnvironmentBase,
 
-    Framework.DomainDriven.NHibernate.DALGenerator.IGenerationEnvironmentBase,
+    CodeGeneration.DTOGenerator.Server.Configuration.IServerGenerationEnvironmentBase,
 
-    DomainDriven.DTOGenerator.Audit.IAuditDTOGenerationEnvironmentBase,
+    CodeGeneration.ServiceModelGenerator.Configuration._Base.IGenerationEnvironmentBase
 
-    DomainDriven.ServiceModelGenerator.IAuditGenerationEnvironmentBase
 {
-    DomainDriven.BLLCoreGenerator.IGeneratorConfigurationBase<DomainDriven.BLLCoreGenerator.IGenerationEnvironmentBase>
-        DomainDriven.BLLCoreGenerator.IGeneratorConfigurationContainer.BLLCore => this.BLLCore;
+    CodeGeneration.BLLCoreGenerator.Configuration.IGeneratorConfigurationBase<CodeGeneration.BLLCoreGenerator.Configuration.IGenerationEnvironmentBase>
+        CodeGeneration.BLLCoreGenerator.Configuration.IGeneratorConfigurationContainer.BLLCore => this.BLLCore;
 
-    DomainDriven.DTOGenerator.Server.IServerGeneratorConfigurationBase<DomainDriven.DTOGenerator.Server.IServerGenerationEnvironmentBase>
-        DomainDriven.DTOGenerator.Server.IGeneratorConfigurationContainer.ServerDTO => this.ServerDTO;
-
-    DomainDriven.DTOGenerator.Audit.IAuditDTOGeneratorConfigurationBase<DomainDriven.DTOGenerator.Audit.IAuditDTOGenerationEnvironmentBase>
-        DomainDriven.DTOGenerator.Audit.IGeneratorConfigurationContainer.AuditDTO => this.AuditDTO;
+    CodeGeneration.DTOGenerator.Server.Configuration.IServerGeneratorConfigurationBase<CodeGeneration.DTOGenerator.Server.Configuration.IServerGenerationEnvironmentBase>
+        CodeGeneration.DTOGenerator.Server.Configuration.IGeneratorConfigurationContainer.ServerDTO => this.ServerDTO;
 }

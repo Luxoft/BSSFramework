@@ -9,11 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.Persistent.Mapping.Audit\Framework.Persistent.Mapping.Audit.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Serialization\Framework.DomainDriven.Serialization.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Tracking.LegacyValidators\Framework.DomainDriven.Tracking.LegacyValidators.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.Events\Framework.Events.csproj" />
+    <ProjectReference Include="..\..\BLL\Framework.BLL.Domain\Framework.BLL.Domain.csproj" />
+    <ProjectReference Include="..\..\Database\Framework.Database.Legacy.Domain\Framework.Database.Legacy.Domain.csproj" />
+    <ProjectReference Include="..\..\Database\Framework.Database.Mapping\Framework.Database.Mapping.csproj" />
+    <ProjectReference Include="..\..\Database\Framework.Tracking.Validation\Framework.Tracking.Validation.csproj" />
   </ItemGroup>
 
 </Project>

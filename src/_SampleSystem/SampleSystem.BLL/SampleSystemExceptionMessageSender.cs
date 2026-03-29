@@ -1,9 +1,10 @@
 ﻿using System.Net.Mail;
-
-using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
+using Framework.Core.MessageSender;
 using Framework.Notification.New;
+
+using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
 namespace SampleSystem.BLL;
 
@@ -38,6 +39,6 @@ public sealed class SampleSystemExceptionMessageSender : ExceptionMessageSender
     /// <inheritdoc />
     protected override IEnumerable<Type> GetExceptTypes()
     {
-        return new[] { typeof(SampleSystemException) };
+        return [typeof(SampleSystemException)];
     }
 }

@@ -29,18 +29,9 @@ public class MethodTypeInfo : IEquatable<MethodTypeInfo>
     public Type ReturnType { get; private set; }
 
 
-    public override bool Equals(object obj)
-    {
-        return this.Equals(obj as MethodTypeInfo);
-    }
+    public override bool Equals(object obj) => this.Equals(obj as MethodTypeInfo);
 
-    public override int GetHashCode()
-    {
-        return this.ReturnType.GetHashCode();
-    }
+    public override int GetHashCode() => this.ReturnType.GetHashCode();
 
-    public bool Equals(MethodTypeInfo other)
-    {
-        return other != null && this.InputTypes.SequenceEqual(other.InputTypes) && this.ReturnType == other.ReturnType;
-    }
+    public bool Equals(MethodTypeInfo other) => other != null && this.InputTypes.SequenceEqual(other.InputTypes) && this.ReturnType == other.ReturnType;
 }

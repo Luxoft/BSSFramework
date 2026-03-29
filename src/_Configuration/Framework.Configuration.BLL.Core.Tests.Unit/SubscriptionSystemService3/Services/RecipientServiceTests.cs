@@ -2,10 +2,11 @@
 using AutoFixture.Idioms;
 
 using FluentAssertions;
-using Framework.Configuration.BLL.SubscriptionSystemService3;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.UnitTesting;
@@ -52,9 +53,9 @@ public class RecipientServiceTests : TestFixtureBase
         var recipient = this.Fixture.Create<Recipient>();
 
         var bag = new RecipientsBag(
-                                    new RecipientCollection(new[] { recipient }),
-                                    new RecipientCollection(new[] { this.Fixture.Create<Recipient>() }),
-                                    new RecipientCollection(new[] { this.Fixture.Create<Recipient>() }));
+                                    new RecipientCollection([recipient]),
+                                    new RecipientCollection([this.Fixture.Create<Recipient>()]),
+                                    new RecipientCollection([this.Fixture.Create<Recipient>()]));
 
         var resolverResult = new RecipientsResolverResult(
                                                           bag,
@@ -66,7 +67,7 @@ public class RecipientServiceTests : TestFixtureBase
 
         this.recipientsResolver
             .Resolve(subscription, versions)
-            .Returns(new[] { resolverResult });
+            .Returns([resolverResult]);
 
         // Act
         var service = this.Fixture.Create<RecipientService<ITestBLLContext>>();

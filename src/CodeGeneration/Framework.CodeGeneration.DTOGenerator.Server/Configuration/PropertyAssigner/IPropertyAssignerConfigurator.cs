@@ -1,0 +1,12 @@
+﻿using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+
+namespace Framework.CodeGeneration.DTOGenerator.Server.Configuration.PropertyAssigner;
+
+public interface IPropertyAssignerConfigurator
+{
+    IPropertyAssigner GetStrictSecurityToDomainObjectPropertyAssigner(IPropertyAssigner innerAssigner);
+
+    IPropertyAssigner GetUpdateSecurityToDomainObjectPropertyAssigner(IPropertyAssigner innerAssigner);
+
+    IPropertyAssigner GetDomainObjectToSecurityPropertyAssigner(IPropertyAssigner innerAssigner);
+}

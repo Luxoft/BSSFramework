@@ -1,4 +1,5 @@
 ﻿using Framework.OData;
+using Framework.OData.Typed;
 using Framework.Persistent;
 
 using GenericQueryable.Fetching;

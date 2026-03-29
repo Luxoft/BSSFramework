@@ -1,5 +1,5 @@
-﻿using Framework.Persistent;
-using Framework.DomainDriven.Serialization;
+﻿using Framework.Application.Domain;
+using Framework.BLL.Domain.Serialization;
 using Framework.Core;
 
 namespace Framework.Configuration.Domain;

@@ -1,7 +1,8 @@
 ﻿using AutoFixture;
 
 using FluentAssertions;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Templates;
+
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Templates;
 using Framework.UnitTesting;
 using NUnit.Framework;
 

@@ -1,13 +1,13 @@
-﻿using Framework.Authorization.TestGenerate;
+﻿using Framework.Authorization.TestGenerate.Configurations;
 
-namespace Framework.Authorization.WebApiGenerate;
+namespace Framework.Authorization.WebApiGenerate.Configurations;
 
 public class WebApiGenerationEnvironment : ServerGenerationEnvironment
 {
-    public readonly MainSLControllerConfiguration MainSLController;
+    public readonly MainControllerConfiguration MainController;
 
     public WebApiGenerationEnvironment()
     {
-        this.MainSLController = new MainSLControllerConfiguration(this);
+        this.MainController = new MainControllerConfiguration(this);
     }
 }

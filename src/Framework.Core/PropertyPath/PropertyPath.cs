@@ -4,26 +4,22 @@ using System.Reflection;
 
 using CommonFramework;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Core;
 
 [DebuggerDisplay("{DebuggerDisplay}")]
-public class PropertyPath : ReadOnlyCollection<PropertyInfo>, IEquatable<PropertyPath>
+public class PropertyPath(List<PropertyInfo> list) : ReadOnlyCollection<PropertyInfo>(list), IEquatable<PropertyPath>
 {
     public PropertyPath(IEnumerable<PropertyInfo> list)
         : this(list.ToList())
     {
     }
 
-    public PropertyPath(IList<PropertyInfo> list)
-        : base(list)
-    {
-        //TODO: add path validate
-    }
+    //TODO: add path validate
 
+    private string DebuggerDisplay => this.ToString();
 
-    private string DebuggerDisplay { get { return this.ToString(); } }
-
-    public bool IsEmpty { get { return !this.Any(); } }
+    public bool IsEmpty => !this.Any();
 
     public PropertyInfo Head
     {
@@ -56,52 +52,23 @@ public class PropertyPath : ReadOnlyCollection<PropertyInfo>, IEquatable<Propert
     }
 
 
-    public override string ToString()
-    {
-        return this.Join(".", prop => prop.Name);
-    }
+    public override string ToString() => this.Join(".", prop => prop.Name);
 
+    public bool Equals(PropertyPath? other) => other is not null && this.SequenceEqual(other);
 
-    public bool Equals(PropertyPath? other)
-    {
-        return other is not null && this.SequenceEqual(other);
-    }
+    public override bool Equals(object? obj) => this.Equals(obj as PropertyPath);
 
-    public override bool Equals(object? obj)
-    {
-        return this.Equals(obj as PropertyPath);
-    }
+    public override int GetHashCode() => this.Count;
 
-    public override int GetHashCode()
-    {
-        return this.Count;
-    }
+    public bool StartsWith(PropertyPath otherPath) => this.Count >= otherPath.Count && this.Take(otherPath.Count).SequenceEqual(otherPath);
 
-    public bool StartsWith(PropertyPath otherPath)
-    {
-        return this.Count >= otherPath.Count && this.Take(otherPath.Count).SequenceEqual(otherPath);
-    }
+    public static PropertyPath operator +(PropertyInfo propertyInfo, PropertyPath path) => new[] { propertyInfo }.Concat(path).ToPropertyPath();
 
+    public static PropertyPath operator +(PropertyPath path, PropertyInfo propertyInfo) => path.Concat([propertyInfo]).ToPropertyPath();
 
-    public static PropertyPath operator +(PropertyInfo propertyInfo, PropertyPath path)
-    {
-        return new[] { propertyInfo }.Concat(path).ToPropertyPath();
-    }
+    public static bool operator ==(PropertyPath path1, PropertyPath path2) => ReferenceEquals(path1, path2) || (!ReferenceEquals(path1, null) && path1.Equals(path2));
 
-    public static PropertyPath operator +(PropertyPath path, PropertyInfo propertyInfo)
-    {
-        return path.Concat(new[] { propertyInfo }).ToPropertyPath();
-    }
-
-    public static bool operator ==(PropertyPath path1, PropertyPath path2)
-    {
-        return ReferenceEquals(path1, path2) || (!ReferenceEquals(path1, null) && path1.Equals(path2));
-    }
-
-    public static bool operator !=(PropertyPath path1, PropertyPath path2)
-    {
-        return !(path1 == path2);
-    }
+    public static bool operator !=(PropertyPath path1, PropertyPath path2) => !(path1 == path2);
 
     public new static PropertyPath Empty { get; } = new([]);
 

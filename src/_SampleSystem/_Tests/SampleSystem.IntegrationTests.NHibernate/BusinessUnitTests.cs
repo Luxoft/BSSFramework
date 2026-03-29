@@ -2,6 +2,7 @@
 using Automation.Utils;
 
 using Framework.Core;
+
 using Framework.DomainDriven;
 using Framework.Persistent;
 

@@ -12,9 +12,9 @@ internal sealed class ObjectChangingSubscription : SubscriptionMetadata<object, 
         this.ConditionLambda = new ConditionLambda();
         this.GenerationLambda = new GenerationLambda();
         this.CopyGenerationLambda = new CopyGenerationLambda();
-        this.SecurityItemSourceLambdas = new[] { new SecurityItemSourceLambda() };
-        this.RecepientsSelectorMode = RecepientsSelectorMode.RolesExceptGeneration;
-        this.SubBusinessRoles = new[] { SecurityRole.Administrator };
+        this.SecurityItemSourceLambdas = [new SecurityItemSourceLambda()];
+        this.RecipientsSelectorMode = RecipientsSelectorMode.RolesExceptGeneration;
+        this.SubBusinessRoles = [SecurityRole.Administrator];
         this.SendIndividualLetters = true;
         this.ExcludeCurrentUser = true;
         this.IncludeAttachments = true;

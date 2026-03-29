@@ -1,7 +1,8 @@
 ﻿using AutoFixture;
 
 using FluentAssertions;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 using Framework.UnitTesting;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -30,7 +31,7 @@ public sealed class RecipientCollectionTests : TestFixtureBase
         var recipient = this.Fixture.Create<Recipient>();
 
         // Act
-        var collection = new RecipientCollection(new[] { recipient });
+        var collection = new RecipientCollection([recipient]);
 
         // Assert
         collection.Should().HaveCount(1);
@@ -43,7 +44,7 @@ public sealed class RecipientCollectionTests : TestFixtureBase
         var recipient = new Recipient("login", null);
 
         // Act
-        var collection = new RecipientCollection(new[] { recipient });
+        var collection = new RecipientCollection([recipient]);
 
         // Assert
         collection.Should().HaveCount(0);
@@ -56,7 +57,7 @@ public sealed class RecipientCollectionTests : TestFixtureBase
         var recipient = new Recipient("login", string.Empty);
 
         // Act
-        var collection = new RecipientCollection(new[] { recipient });
+        var collection = new RecipientCollection([recipient]);
 
         // Assert
         collection.Should().HaveCount(0);
@@ -69,12 +70,12 @@ public sealed class RecipientCollectionTests : TestFixtureBase
         var recipient1 = new Recipient("ivanov", "ivanov@ya.ru");
         var recipient2 = new Recipient("petrov", "petrov@ya.ru");
 
-        var left = new RecipientCollection(new[] {recipient1});
-        var right = new RecipientCollection(new[] {recipient2});
-        var expected = new RecipientCollection(new[] { recipient1, recipient2});
+        var left = new RecipientCollection([recipient1]);
+        var right = new RecipientCollection([recipient2]);
+        var expected = new RecipientCollection([recipient1, recipient2]);
 
         // Act
-        var mergeResult = left.Merge(right, RecepientsMergeMode.Union);
+        var mergeResult = left.Merge(right, RecipientsMergeMode.Union);
 
         // Assert
         mergeResult.Should().BeEquivalentTo(expected);
@@ -87,12 +88,12 @@ public sealed class RecipientCollectionTests : TestFixtureBase
         var recipient1 = new Recipient("ivanov", "ivanov@ya.ru");
         var recipient2 = new Recipient("petrov", "petrov@ya.ru");
 
-        var left = new RecipientCollection(new[] { recipient1 });
-        var right = new RecipientCollection(new[] { recipient1, recipient2 });
-        var expected = new RecipientCollection(new[] { recipient1 });
+        var left = new RecipientCollection([recipient1]);
+        var right = new RecipientCollection([recipient1, recipient2]);
+        var expected = new RecipientCollection([recipient1]);
 
         // Act
-        var mergeResult = left.Merge(right, RecepientsMergeMode.Intersect);
+        var mergeResult = left.Merge(right, RecipientsMergeMode.Intersect);
 
         // Assert
         mergeResult.Should().BeEquivalentTo(expected);
@@ -105,12 +106,12 @@ public sealed class RecipientCollectionTests : TestFixtureBase
         var recipient1 = new Recipient("ivanov", "ivanov@ya.ru");
         var recipient2 = new Recipient("petrov", "petrov@ya.ru");
 
-        var left = new RecipientCollection(new[] { recipient1 });
-        var right = new RecipientCollection(new[] { recipient2 });
-        var expected = new RecipientCollection(new[] { recipient1 });
+        var left = new RecipientCollection([recipient1]);
+        var right = new RecipientCollection([recipient2]);
+        var expected = new RecipientCollection([recipient1]);
 
         // Act
-        var mergeResult = left.Merge(right, RecepientsMergeMode.LeftExceptRight);
+        var mergeResult = left.Merge(right, RecipientsMergeMode.LeftExceptRight);
 
         // Assert
         mergeResult.Should().BeEquivalentTo(expected);
@@ -123,12 +124,12 @@ public sealed class RecipientCollectionTests : TestFixtureBase
         var recipient1 = new Recipient("ivanov", "ivanov@ya.ru");
         var recipient2 = new Recipient("petrov", "petrov@ya.ru");
 
-        var left = new RecipientCollection(new[] { recipient1 });
-        var right = new RecipientCollection(new[] { recipient2 });
-        var expected = new RecipientCollection(new[] { recipient2 });
+        var left = new RecipientCollection([recipient1]);
+        var right = new RecipientCollection([recipient2]);
+        var expected = new RecipientCollection([recipient2]);
 
         // Act
-        var mergeResult = left.Merge(right, RecepientsMergeMode.RightExceptLeft);
+        var mergeResult = left.Merge(right, RecipientsMergeMode.RightExceptLeft);
 
         // Assert
         mergeResult.Should().BeEquivalentTo(expected);

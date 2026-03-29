@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven;
+﻿
+using Framework.DomainDriven;
 using Framework.OData;
 using Framework.Persistent;
 using Framework.Transfering;
@@ -34,7 +35,7 @@ public partial class BusinessUnitController
                              {
                                  var bll = evaluateData.Context.Logics.BusinessUnit;
                                  var selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-                                 var typedSelectOperation = evaluateData.Context.StandartExpressionBuilder.ToTyped<BusinessUnit>(selectOperation);
+                                 var typedSelectOperation = evaluateData.Context.StandardExpressionBuilder.ToTyped<BusinessUnit>(selectOperation);
 
                                  var odataTree = bll.GetTreeByOData(
                                                                     typedSelectOperation,
@@ -45,7 +46,7 @@ public partial class BusinessUnitController
     }
 
     [HttpPost]
-    public List<HierarchicalNode<BusinessUnitFullDTO, Guid>> TestPeriod(Framework.Core.Period period)
+    public List<HierarchicalNode<BusinessUnitFullDTO, Guid>> TestPeriod(Period period)
     {
         return null;
     }

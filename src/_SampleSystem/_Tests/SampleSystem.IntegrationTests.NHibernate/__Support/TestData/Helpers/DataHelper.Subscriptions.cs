@@ -4,6 +4,7 @@ using Framework.Authorization.Domain;
 using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.Core;
+using Framework.Core.TryResult.Base;
 using Framework.DomainDriven.DAL.Revisions;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers;
@@ -50,7 +51,7 @@ public partial class DataHelper
                                  });
     }
 
-    public IList<ITryResult<Subscription>> ProcessChangedObjectUntyped(
+    public List<ITryResult<Subscription>> ProcessChangedObjectUntyped(
             Type domainObjectType,
             object prev,
             object next)
@@ -68,7 +69,7 @@ public partial class DataHelper
                                   });
     }
 
-    public IList<ITryResult<Subscription>> ProcessChangedObjectInfo(ObjectModificationInfo<Guid> changedObjectInfo)
+    public List<ITryResult<Subscription>> ProcessChangedObjectInfo(ObjectModificationInfo<Guid> changedObjectInfo)
     {
         return this.EvaluateWrite(context =>
                                   {

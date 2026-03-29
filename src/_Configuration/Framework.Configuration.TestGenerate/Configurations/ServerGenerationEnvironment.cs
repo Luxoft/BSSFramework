@@ -1,11 +1,17 @@
-﻿using Framework.DomainDriven;
-using Framework.DomainDriven.NHibernate;
+﻿using Framework.BLL.Domain.ServiceRole;
+using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.Configuration.Domain;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Serialization;
-using Framework.Projection.Environment;
+using Framework.Configuration.TestGenerate.Configurations._Base;
+using Framework.Configuration.TestGenerate.Configurations.BLL;
+using Framework.Configuration.TestGenerate.Configurations.BLLCore;
+using Framework.Configuration.TestGenerate.Configurations.DTO;
+using Framework.Configuration.TestGenerate.Configurations.Services.Main;
+using Framework.Configuration.TestGenerate.Configurations.Services.QueryService;
+using Framework.Database;
+using Framework.Database.NHibernate._MappingSettings;
+using Framework.Projection.ExtendedMetadata;
 
-namespace Framework.Configuration.TestGenerate;
+namespace Framework.Configuration.TestGenerate.Configurations;
 
 public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
 {
@@ -13,16 +19,9 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
 
     public readonly BLLGeneratorConfiguration BLL;
 
-
-    public readonly AuditDTOGeneratorConfiguration AuditDTO;
-
     public readonly MainServiceGeneratorConfiguration MainService;
 
     public readonly QueryServiceGeneratorConfiguration QueryService;
-
-    public readonly DALGeneratorConfiguration DAL;
-
-    public readonly AuditServiceGeneratorConfiguration AuditService;
 
     public readonly ServerDTOGeneratorConfiguration ServerDTO;
 
@@ -43,12 +42,6 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
 
         this.QueryService = new QueryServiceGeneratorConfiguration(this);
 
-        this.DAL = new DALGeneratorConfiguration(this);
-
-        this.AuditService = new AuditServiceGeneratorConfiguration(this);
-
-        this.AuditDTO = new AuditDTOGeneratorConfiguration(this);
-
         this.DatabaseName = databaseName;
     }
 
@@ -56,10 +49,7 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
 
     public MappingSettings MappingSettings => this.GetMappingSettings(this.DatabaseName);
 
-    public MappingSettings GetMappingSettings(DatabaseName dbName)
-    {
-        return new MappingSettings<PersistentDomainObjectBase>(dbName);
-    }
+    public MappingSettings GetMappingSettings(DatabaseName dbName) => new MappingSettings<PersistentDomainObjectBase>(dbName);
 
     public override IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } =
 
@@ -74,10 +64,6 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
 
             .Add<DomainObjectModification>(tb =>
                                                tb.AddAttribute(new BLLRoleAttribute()))
-
-            .Add<ExceptionMessage>(tb =>
-                                       tb.AddAttribute(new BLLViewRoleAttribute())
-                                         .AddAttribute(new BLLSaveRoleAttribute { CustomImplementation = true }))
 
             .Add<SentMessage>(tb =>
                                   tb.AddAttribute(new BLLRoleAttribute()))
@@ -100,11 +86,7 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
                                  tb.AddAttribute(new BLLViewRoleAttribute()))
 
             .Add<DomainObjectNotification>(tb =>
-                                               tb.AddAttribute(new BLLRoleAttribute()))
+                                               tb.AddAttribute(new BLLRoleAttribute()));
 
-            .Add<ControlSettings>(tb =>
-                                      tb.AddAttribute(new BLLRoleAttribute())
-                                        .AddProperty(v => v.Children, pb => pb.AddAttribute(new AutoMappingAttribute(false))));
-
-    public static readonly ServerGenerationEnvironment Default = new ();
+    public static readonly ServerGenerationEnvironment Default = new();
 }

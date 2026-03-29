@@ -1,6 +1,5 @@
-﻿using Framework.Events;
-using Framework.Persistent;
-using Framework.Persistent.Mapping;
+﻿using Framework.Database.Mapping;
+using Framework.Relations;
 
 namespace Framework.Configuration.Domain;
 
@@ -26,19 +25,6 @@ public class DomainTypeEventOperation : BaseDirectory, IDetail<DomainType>
 
         this.domainType = domainType;
         this.domainType.AddDetail(this);
-    }
-
-    /// <summary>
-    /// Конструктор
-    /// </summary>
-    /// <param name="domainType">Доменный тип</param>
-    /// <param name="operation">Операция</param>
-    public DomainTypeEventOperation(DomainType domainType, EventOperation operation)
-            : this(domainType)
-    {
-        if (operation == null) throw new ArgumentNullException(nameof(operation));
-
-        this.Name = operation.Name;
     }
 
     /// <summary>

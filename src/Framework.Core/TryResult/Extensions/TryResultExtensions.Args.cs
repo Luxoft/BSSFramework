@@ -1,4 +1,5 @@
-﻿namespace Framework.Core;
+﻿// ReSharper disable once CheckNamespace
+namespace Framework.Core;
 
 public static partial class TryResultExtensions
 {
@@ -103,13 +104,7 @@ public static partial class TryResultExtensions
         return source is IFaultResult<TArgs, TResult>;
     }
 
-    public static IEnumerable<Exception> GetErrors<TArgs, TResult>(this IEnumerable<ITryResult<TArgs, TResult>> source)
-    {
-        return source.OfType<IFaultResult<TArgs, TResult>>().Select(z => z.Error);
-    }
+    public static IEnumerable<Exception> GetErrors<TArgs, TResult>(this IEnumerable<ITryResult<TArgs, TResult>> source) => source.OfType<IFaultResult<TArgs, TResult>>().Select(z => z.Error);
 
-    public static IEnumerable<TResult> GetResults<TArgs, TResult>(this IEnumerable<ITryResult<TArgs, TResult>> source)
-    {
-        return source.OfType<ISuccessResult<TArgs, TResult>>().Select(z => z.Result);
-    }
+    public static IEnumerable<TResult> GetResults<TArgs, TResult>(this IEnumerable<ITryResult<TArgs, TResult>> source) => source.OfType<ISuccessResult<TArgs, TResult>>().Select(z => z.Result);
 }

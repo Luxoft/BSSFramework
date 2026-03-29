@@ -1,13 +1,16 @@
 ﻿using Framework.Authorization.BLL;
-using Framework.Configuration.BLL;
 using Framework.Core;
+using Framework.Core.TypeResolving;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.Tracking;
+using Framework.Tracking;
+
 using GenericQueryable.Fetching;
 using SampleSystem.Domain;
 using SecuritySystem.SecurityAccessor;
 using SecuritySystem.UserSource;
+
+using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
 namespace SampleSystem.BLL;
 

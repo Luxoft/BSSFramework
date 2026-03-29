@@ -1,0 +1,37 @@
+﻿using Framework.Application.Jobs;
+
+using Hangfire;
+using Hangfire.SqlServer;
+
+namespace Framework.Infrastructure.Hangfire.DependencyInjection;
+
+public interface IBssHangfireSettings
+{
+    IBssHangfireSettings SetJobNameExtractPolicy(IJobNameExtractPolicy policy);
+
+    /// <summary>
+    /// Автоматическая регистрация job-ов в scope (по умолчанию уже регистрируюся)
+    /// </summary>
+    /// <param name="enabled"></param>
+    /// <returns></returns>
+    IBssHangfireSettings RegisterRegisterAsServices(bool enabled);
+
+    IBssHangfireSettings SetConnectionString(string connectionString);
+
+    IBssHangfireSettings SetConnectionStringName(string connectionStringName);
+
+    IBssHangfireSettings WithGlobalConfiguration(Action<IGlobalConfiguration> globalConfigurationAction);
+
+    IBssHangfireSettings WithSqlServerStorageOptions(Action<SqlServerStorageOptions> setupOptions);
+
+    IBssHangfireSettings AddJob<TJob>(JobSettings? jobSettings = null)
+        where TJob : class, IJob =>
+        this.AddJob<TJob, CancellationToken>((job, cancellationToken) => job.ExecuteAsync(cancellationToken), jobSettings);
+
+    IBssHangfireSettings AddJob<TJob>(Func<TJob, CancellationToken, Task> executeAction, JobSettings? jobSettings = null)
+        where TJob : class =>
+        this.AddJob<TJob, CancellationToken>(executeAction, jobSettings);
+
+    IBssHangfireSettings AddJob<TJob, TArg>(Func<TJob, TArg, Task> executeAction, JobSettings? jobSettings = null)
+        where TJob : class;
+}

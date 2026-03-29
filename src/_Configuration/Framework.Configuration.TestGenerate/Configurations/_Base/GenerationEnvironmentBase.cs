@@ -1,8 +1,9 @@
-﻿using Framework.Configuration.Domain;
-using Framework.DomainDriven.Generation.Domain;
+﻿using Framework.CodeGeneration.DomainMetadata;
+using Framework.Configuration.Domain;
+
 using SecuritySystem;
 
-namespace Framework.Configuration.TestGenerate;
+namespace Framework.Configuration.TestGenerate.Configurations._Base;
 
 public abstract class GenerationEnvironmentBase()
     : GenerationEnvironment<DomainObjectBase, PersistentDomainObjectBase, AuditPersistentDomainObjectBase, Guid>(v => v.Id, typeof(DomainObjectFilterModel<>).Assembly)

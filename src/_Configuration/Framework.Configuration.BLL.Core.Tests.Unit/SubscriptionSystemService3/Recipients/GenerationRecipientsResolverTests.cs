@@ -3,8 +3,8 @@ using AutoFixture.Idioms;
 
 using FluentAssertions;
 
-using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Lambdas;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Notification;
@@ -62,9 +62,9 @@ public sealed class GenerationRecipientsResolverTests : TestFixtureBase
         var replyTo = new NotificationMessageGenerationInfo(replayToRecipient, versions.Current, versions.Previous);
 
 
-        this.toProcessor.Invoke(subscription, versions).Returns(new[] { infoTo });
-        this.ccProcessor.Invoke(subscription, versions).Returns(new[] { infoCc });
-        this.replayToProcessor.Invoke(subscription, versions).Returns(new[] { replyTo });
+        this.toProcessor.Invoke(subscription, versions).Returns([infoTo]);
+        this.ccProcessor.Invoke(subscription, versions).Returns([infoCc]);
+        this.replayToProcessor.Invoke(subscription, versions).Returns([replyTo]);
 
         // Act
         var resolver = this.Fixture.Create<GenerationRecipientsResolver<ITestBLLContext>>();
@@ -76,7 +76,7 @@ public sealed class GenerationRecipientsResolverTests : TestFixtureBase
         // Assert
         toResult.RecipientsBag.To.First().Email.Should().Be(toRecipient.Email);
         ccResult.RecipientsBag.Cc.First().Email.Should().Be(ccRecipient.Email);
-        replayToResult.Should().BeEquivalentTo(new[] { replayToRecipient });
+        replayToResult.Should().BeEquivalentTo([replayToRecipient]);
     }
 
     [Test]
@@ -93,9 +93,9 @@ public sealed class GenerationRecipientsResolverTests : TestFixtureBase
         var infoCc = new NotificationMessageGenerationInfo(ccRecipient, versions.Current, versions.Previous);
 
 
-        this.toProcessor.Invoke(subscription, versions).Returns(new[] { infoTo });
-        this.ccProcessor.Invoke(subscription, versions).Returns(new[] { infoCc });
-        this.replayToProcessor.Invoke(subscription, versions).Returns(new NotificationMessageGenerationInfo[0]);
+        this.toProcessor.Invoke(subscription, versions).Returns([infoTo]);
+        this.ccProcessor.Invoke(subscription, versions).Returns([infoCc]);
+        this.replayToProcessor.Invoke(subscription, versions).Returns(Array.Empty<NotificationMessageGenerationInfo>());
 
         // Act
         var resolver = this.Fixture.Create<GenerationRecipientsResolver<ITestBLLContext>>();

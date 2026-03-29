@@ -1,5 +1,5 @@
 ﻿using Framework.Core;
-using Framework.Persistent;
+using Framework.Database;
 
 namespace Framework.Authorization.Domain;
 

@@ -2,11 +2,13 @@
 using AutoFixture.Idioms;
 
 using FluentAssertions;
-using Framework.Configuration.BLL.SubscriptionSystemService3;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
+
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Core;
+using Framework.Core.TryResult.Base;
 using Framework.DomainDriven;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.UnitTesting;
@@ -56,7 +58,7 @@ public sealed class RevisionSubscriptionSystemServiceTests : TestFixtureBase
         // Arrange
         var modifications = this.Fixture.Create<ObjectModificationInfo<Guid>>();
         var versions = this.Fixture.Create<DomainObjectVersions<IdentityObject>>();
-        var expectedResult = this.CreateStub<IList<ITryResult<Subscription>>>();
+        var expectedResult = this.CreateStub<List<ITryResult<Subscription>>>();
 
         this.configurationContextFacade
             .GetDomainObjectType(modifications.TypeInfo)

@@ -17,7 +17,7 @@ public class EventDALListenerTests : TestBase
         var action = () => this.EvaluateAsync(
             DBSessionMode.Write,
             ctx => ctx.OperationSender.Send(
-                ctx.Logics.Employee.GetCurrent(),
+                ctx.CurrentEmployeeSource.CurrentUser,
                 SampleSystemEventOperation.CustomAction,
                 CancellationToken.None));
 

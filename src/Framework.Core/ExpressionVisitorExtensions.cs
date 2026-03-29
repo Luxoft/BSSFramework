@@ -40,19 +40,11 @@ public static class ExpressionVisitorExtensions
         return new CyclicExpressionVisitor(visitors);
     }
 
-    private class CompositeExpressionVisitor : ExpressionVisitor
+    private class CompositeExpressionVisitor(ExpressionVisitor[] visitors) : ExpressionVisitor
     {
-        private readonly IReadOnlyCollection<ExpressionVisitor> visitors;
+        private readonly IReadOnlyCollection<ExpressionVisitor> visitors = visitors ?? throw new ArgumentNullException(nameof(visitors));
 
-        public CompositeExpressionVisitor(ExpressionVisitor[] visitors)
-        {
-            this.visitors = visitors ?? throw new ArgumentNullException(nameof(visitors));
-        }
-
-        public override Expression Visit(Expression node)
-        {
-            return node.UpdateBase(this.visitors);
-        }
+        public override Expression Visit(Expression node) => node.UpdateBase(this.visitors);
     }
 
     private class CyclicExpressionVisitor : ExpressionVisitor

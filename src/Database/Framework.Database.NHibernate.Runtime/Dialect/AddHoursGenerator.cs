@@ -1,0 +1,32 @@
+﻿using System.Collections.ObjectModel;
+using System.Linq.Expressions;
+using System.Reflection;
+
+using NHibernate.Hql.Ast;
+using NHibernate.Linq;
+using NHibernate.Linq.Functions;
+using NHibernate.Linq.Visitors;
+
+namespace Framework.Database.NHibernate.Dialect;
+
+/// <summary>
+/// Represents DateTime.AddHours method to SQL nHibernate mapping
+/// </summary>
+public class AddHoursGenerator : BaseHqlGeneratorForMethod
+{
+    /// <summary>
+    /// Creates new generator instance
+    /// </summary>
+    public AddHoursGenerator() => this.SupportedMethods = [ReflectionHelper.GetMethodDefinition<DateTime?>(d => d.Value.AddHours(0))];
+
+    /// <summary>
+    /// Creates new <see cref="HqlTreeNode"/> node that represents AddHours method call
+    /// </summary>
+    public override HqlTreeNode BuildHql(
+            MethodInfo method,
+            Expression targetObject,
+            ReadOnlyCollection<Expression> arguments,
+            HqlTreeBuilder treeBuilder,
+            IHqlExpressionVisitor visitor) =>
+        treeBuilder.MethodCall("AddHours", visitor.Visit(targetObject).AsExpression(), visitor.Visit(arguments[0]).AsExpression());
+}

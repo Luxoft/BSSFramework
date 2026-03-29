@@ -1,25 +1,10 @@
-﻿namespace Framework.Core;
+﻿namespace Framework.Core.AnonymousTypeBuilder;
 
-public class TypeMapMember : TypeMapMemberBase, IEquatable<TypeMapMember>
+public class TypeMapMember(string name, Type type) : TypeMapMemberBase(name, type), IEquatable<TypeMapMember>
 {
-    public TypeMapMember(string name, Type type) : base(name, type)
-    {
+    public override int GetHashCode() => this.Name.GetHashCode() ^ this.Type.GetHashCode();
 
-    }
+    public bool Equals(TypeMapMember other) => other != null && this.Name == other.Name && this.Type == other.Type;
 
-    public override int GetHashCode()
-    {
-        return this.Name.GetHashCode() ^ this.Type.GetHashCode();
-    }
-
-    public bool Equals(TypeMapMember other)
-    {
-        return other != null && this.Name == other.Name && this.Type == other.Type;
-    }
-
-
-    public override bool Equals(object obj)
-    {
-        return this.Equals(obj as TypeMapMember);
-    }
+    public override bool Equals(object obj) => this.Equals(obj as TypeMapMember);
 }

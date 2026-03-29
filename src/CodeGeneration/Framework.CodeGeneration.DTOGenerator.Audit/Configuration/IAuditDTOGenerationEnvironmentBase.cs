@@ -1,0 +1,5 @@
+﻿using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+
+namespace Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
+
+public interface IAuditDTOGenerationEnvironmentBase : IServerGenerationEnvironmentBase, Server.Configuration.IGeneratorConfigurationContainer;

@@ -1,0 +1,50 @@
+﻿using System.Linq.Expressions;
+using System.Reflection;
+
+using CommonFramework;
+using Framework.Application.Domain;
+using Framework.BLL.Domain.Extensions;
+using Framework.Validation;
+
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Framework.Tracking.Validation;
+
+/// <summary>
+/// Валидатор проверки неизменяемости свойства
+/// </summary>
+public class FixedPropertyValidator : IDynamicPropertyValidator
+{
+    public IPropertyValidator GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
+    {
+        var identType = property.DeclaringType!.GetIdentType()!;
+
+        var persistentDomainObjectBaseTypeResolver = serviceProvider.GetRequiredService<IPersistentDomainObjectBaseTypeResolver>();
+
+        var persistentDomainObjectBaseType = persistentDomainObjectBaseTypeResolver.TryResolve(property.ReflectedType!);
+
+        var validatorType = typeof(FixedPropertyValidator<,,,>)
+            .MakeGenericType(property.ReflectedType!, property.PropertyType, identType, persistentDomainObjectBaseType);
+
+        return serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<IPropertyValidator>(validatorType, property.ToGetLambdaExpression());
+    }
+}
+
+/// <summary>
+/// Валидатор проверки неизменяемости свойства
+/// </summary>
+public class FixedPropertyValidator<TSource, TProperty, TIdent, TPersistentDomainObjectBase>(Expression<Func<TSource, TProperty>> propertyPath)
+    : IPropertyValidator<TSource, TProperty>
+    where TSource : TPersistentDomainObjectBase
+    where TPersistentDomainObjectBase : IIdentityObject<TIdent>
+{
+    public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> validationContext)
+    {
+        var trackingService = validationContext.ServiceProvider.GetRequiredService<ITrackingService<TPersistentDomainObjectBase>>();
+
+        return ValidationResult.FromCondition(
+            trackingService.GetPersistentState(validationContext.Source) == PersistentLifeObjectState.NotPersistent
+            || !trackingService.GetChanges(validationContext.Source).HasChange(propertyPath),
+            () => $"{validationContext.GetPropertyName()} field in {validationContext.GetPropertyTypeName()} can't be changed");
+    }
+}

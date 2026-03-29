@@ -1,5 +1,5 @@
-﻿using Framework.DomainDriven;
-using Framework.Persistent;
+﻿using Framework.Application;
+using Framework.Relations;
 
 namespace Framework.Authorization.Environment;
 

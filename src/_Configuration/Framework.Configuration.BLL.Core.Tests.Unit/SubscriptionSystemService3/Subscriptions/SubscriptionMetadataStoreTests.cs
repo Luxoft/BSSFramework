@@ -3,7 +3,7 @@ using AutoFixture.Idioms;
 
 using FluentAssertions;
 using Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Subscriptions.Metadata;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.SubscriptionModeling;
 using Framework.UnitTesting;
 using NUnit.Framework;
@@ -25,7 +25,7 @@ public sealed class SubscriptionMetadataStoreTests : TestFixtureBase
         this.subscriptionMetadataFinder = this.Fixture.RegisterStub<ISubscriptionMetadataFinder>();
         this.subscriptionMetadataFinder
             .Find()
-            .Returns(new[] { this.metadata });
+            .Returns([this.metadata]);
     }
 
     [Test]
@@ -75,7 +75,7 @@ public sealed class SubscriptionMetadataStoreTests : TestFixtureBase
         subscription.SetSenderName(null);
 
         var finder = Substitute.For<ISubscriptionMetadataFinder>();
-        finder.Find().Returns(new[] { subscription });
+        finder.Find().Returns([subscription]);
 
         // Act
         Action call = () => new SubscriptionMetadataStore(finder);

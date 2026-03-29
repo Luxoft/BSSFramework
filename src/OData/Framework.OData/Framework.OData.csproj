@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.OData</PackageId>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework.Parsing\Framework.Parsing.csproj" />
+    <ProjectReference Include="..\Framework.OData.QueryLanguage\Framework.OData.QueryLanguage.csproj" />
+  </ItemGroup>
+</Project>

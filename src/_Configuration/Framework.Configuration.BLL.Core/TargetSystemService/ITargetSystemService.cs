@@ -1,8 +1,9 @@
-﻿using Framework.Core;
-using Framework.Persistent;
+﻿using Framework.Application.Domain;
+using Framework.BLL.Domain.IdentityObject;
 using Framework.Configuration.Domain;
+using Framework.Core.TypeResolving;
 
-namespace Framework.Configuration.BLL;
+namespace Framework.Configuration.BLL.TargetSystemService;
 
 public interface ITargetSystemService : ITypeResolverContainer<DomainType>, ITargetSystemElement<TargetSystem>, IVisualIdentityObject
 {

@@ -1,0 +1,38 @@
+﻿using System.CodeDom;
+
+using Framework.BLL;
+using Framework.BLL.Domain.DTO;
+using Framework.BLL.Domain.DTO.Extensions;
+using Framework.CodeDom.Extensions;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Query.OData.Base;
+using Framework.Core.Serialization;
+using Framework.OData;
+
+namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Query.OData;
+
+public class GetODataListByQueryStringMethodGenerator<TConfiguration> : GetByODataQueryMethodGeneratorBase<TConfiguration>
+        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+{
+    public GetODataListByQueryStringMethodGenerator(TConfiguration configuration, Type domainType, ViewDTOType dtoType)
+            : base(configuration, domainType, dtoType) =>
+        this.Identity = new MethodIdentity(MethodIdentityType.GetODataListByQueryString, this.DTOType);
+
+    public override MethodIdentity Identity { get; }
+
+    protected override string Name => this.CreateName(true, "ODataQueryString");
+
+
+    protected override string GetComment() => $"Get {this.DomainType.GetPluralizedDomainName()} ({this.DTOType}) by odata string";
+
+    protected override IEnumerable<CodeParameterDeclarationExpression> GetParameters()
+    {
+        yield return typeof(string).ToTypeReference().ToParameterDeclarationExpression("odataQueryString");
+    }
+
+
+    protected override CodeExpression GetSelectOperationExpression(CodeExpression evaluateDataExpr) =>
+        evaluateDataExpr.GetContext().ToPropertyReference((IODataBLLContext c) => c.SelectOperationParser)
+                        .ToMethodInvokeExpression((IParser<string, SelectOperation> parser) => parser.Parse(null), this.Parameter.ToVariableReferenceExpression());
+}

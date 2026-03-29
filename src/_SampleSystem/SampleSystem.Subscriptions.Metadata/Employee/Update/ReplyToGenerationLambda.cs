@@ -21,6 +21,6 @@ public sealed class ReplyToGenerationLambda : GenerationLambdaBase<Domain.Employ
             ISampleSystemBLLContext context,
             DomainObjectVersions<Domain.Employee> versions)
     {
-        return new[] { new NotificationMessageGenerationInfo("replayTo@luxoft.com", versions.Previous, versions.Current) };
+        return [new NotificationMessageGenerationInfo("replayTo@luxoft.com", versions.Previous, versions.Current)];
     }
 }

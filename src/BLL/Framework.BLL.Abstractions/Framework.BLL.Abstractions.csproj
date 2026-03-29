@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.BLL.Abstractions</PackageId>
+    <RootNamespace>Framework.BLL</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IvAt.SecuritySystem.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Database\Framework.Database.Legacy.Domain\Framework.Database.Legacy.Domain.csproj" />
+    <ProjectReference Include="..\Framework.BLL.Domain\Framework.BLL.Domain.csproj" />
+
+    <ProjectReference Include="..\..\Application\Framework.Application.Abstractions\Framework.Application.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Application\Framework.Application.Domain\Framework.Application.Domain.csproj" />
+    <ProjectReference Include="..\..\OData\Framework.OData\Framework.OData.csproj" />
+  </ItemGroup>
+
+</Project>

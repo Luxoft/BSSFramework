@@ -14,14 +14,7 @@ public interface INativeExpressionParserContainer
     INativeExpressionParser Parser { get; }
 }
 
-public abstract class NativeExpressionParserContainer : INativeExpressionParserContainer
+public abstract class NativeExpressionParserContainer(INativeExpressionParser parser) : INativeExpressionParserContainer
 {
-    protected NativeExpressionParserContainer(INativeExpressionParser parser)
-    {
-        if (parser == null) throw new ArgumentNullException(nameof(parser));
-
-        this.Parser = parser;
-    }
-
-    public INativeExpressionParser Parser { get; private set; }
+    public INativeExpressionParser Parser { get; private set; } = parser;
 }

@@ -20,7 +20,7 @@
         {
             SampleSystem.BLL.IEmployeeSpecializationBLL bll = evaluateData.Context.Logics.EmployeeSpecializationFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.EmployeeSpecialization> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.EmployeeSpecialization>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
+            Framework.OData.SelectOperation<SampleSystem.Domain.EmployeeSpecialization> typedSelectOperation = Framework.OData.StandardExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.EmployeeSpecialization>(evaluateData.Context.StandardExpressionBuilder, selectOperation);
             Framework.OData.SelectOperationResult<SampleSystem.Domain.EmployeeSpecialization> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeeSpecialization>(Framework.Transfering.ViewDTOType.FullDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.EmployeeSpecializationFullDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
@@ -38,7 +38,7 @@
         {
             SampleSystem.BLL.IEmployeeSpecializationBLL bll = evaluateData.Context.Logics.EmployeeSpecializationFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.EmployeeSpecialization> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.EmployeeSpecialization>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
+            Framework.OData.SelectOperation<SampleSystem.Domain.EmployeeSpecialization> typedSelectOperation = Framework.OData.StandardExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.EmployeeSpecialization>(evaluateData.Context.StandardExpressionBuilder, selectOperation);
             Framework.OData.SelectOperationResult<SampleSystem.Domain.EmployeeSpecialization> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeeSpecialization>(Framework.Transfering.ViewDTOType.SimpleDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.EmployeeSpecializationSimpleDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
@@ -56,7 +56,7 @@
         {
             SampleSystem.BLL.IEmployeeSpecializationBLL bll = evaluateData.Context.Logics.EmployeeSpecializationFactory.Create(SecuritySystem.SecurityRule.View);
             Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.EmployeeSpecialization> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.EmployeeSpecialization>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
+            Framework.OData.SelectOperation<SampleSystem.Domain.EmployeeSpecialization> typedSelectOperation = Framework.OData.StandardExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.EmployeeSpecialization>(evaluateData.Context.StandardExpressionBuilder, selectOperation);
             Framework.OData.SelectOperationResult<SampleSystem.Domain.EmployeeSpecialization> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeeSpecialization>(Framework.Transfering.ViewDTOType.VisualDTO));
             return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.EmployeeSpecializationVisualDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }

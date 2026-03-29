@@ -19,14 +19,14 @@ public class ParserTableRow<TInput, TValue>
 
 public abstract class Parsers<TInput>
 {
-    protected Parser<TInput, TResult> OfTable<T1, T2, T3, T4, T5, T6, TSepearator, TResult> (
+    protected Parser<TInput, TResult> OfTable<T1, T2, T3, T4, T5, T6, TSeparator, TResult> (
             ParserTableRow<TInput, T1> p1,
             ParserTableRow<TInput, T2> p2,
             ParserTableRow<TInput, T3> p3,
             ParserTableRow<TInput, T4> p4,
             ParserTableRow<TInput, T5> p5,
             ParserTableRow<TInput, T6> p6,
-            Parser<TInput, TSepearator> separator,
+            Parser<TInput, TSeparator> separator,
             Func<T1, T2, T3, T4, T5, T6, TResult> resultSelector)
     {
         var table = new Dictionary<string, Parser<TInput, object>>
@@ -40,19 +40,19 @@ public abstract class Parsers<TInput>
                     };
 
 
-        return from proccessResult in this.SubOfTable(table, separator)
+        return from processResult in this.SubOfTable(table, separator)
 
-               let v1 = (T1)DictionaryExtensions.GetValueOrDefault(proccessResult, "p1", () => p1.GetDefaultValue())
+               let v1 = (T1)processResult.GetValueOrDefault("p1", () => p1.GetDefaultValue())
 
-               let v2 = (T2)DictionaryExtensions.GetValueOrDefault(proccessResult, "p2", () => p2.GetDefaultValue())
+               let v2 = (T2)processResult.GetValueOrDefault("p2", () => p2.GetDefaultValue())
 
-               let v3 = (T3)DictionaryExtensions.GetValueOrDefault(proccessResult, "p3", () => p3.GetDefaultValue())
+               let v3 = (T3)processResult.GetValueOrDefault("p3", () => p3.GetDefaultValue())
 
-               let v4 = (T4)DictionaryExtensions.GetValueOrDefault(proccessResult, "p4", () => p4.GetDefaultValue())
+               let v4 = (T4)processResult.GetValueOrDefault("p4", () => p4.GetDefaultValue())
 
-               let v5 = (T5)DictionaryExtensions.GetValueOrDefault(proccessResult, "p5", () => p5.GetDefaultValue())
+               let v5 = (T5)processResult.GetValueOrDefault("p5", () => p5.GetDefaultValue())
 
-               let v6 = (T6)DictionaryExtensions.GetValueOrDefault(proccessResult, "p6", () => p6.GetDefaultValue())
+               let v6 = (T6)processResult.GetValueOrDefault("p6", () => p6.GetDefaultValue())
 
                select resultSelector(v1, v2, v3, v4, v5, v6);
     }
@@ -122,7 +122,7 @@ public abstract class Parsers<TInput>
 
     public Parser<TInput, TValue[]> Many<TValue>(Parser<TInput, TValue> parser)
     {
-        return this.Many1(parser).Or(this.Return(new TValue[0]));
+        return this.Many1(parser).Or(this.Return(Array.Empty<TValue>()));
     }
 
     public Parser<TInput, TValue[]> Many1<TValue>(Parser<TInput, TValue> parser)
@@ -205,7 +205,7 @@ public abstract class Parsers<TInput>
 
     public Parser<TInput, TValue[]> SepBy<TValue, TSeparator>(Parser<TInput, TValue> parser, Parser<TInput, TSeparator> separatorParser)
     {
-        return this.SepBy1(parser, separatorParser).Or(this.Return(new TValue[0]));
+        return this.SepBy1(parser, separatorParser).Or(this.Return(Array.Empty<TValue>()));
     }
 
     public Parser<TInput, TValue> Pre<TValue, TOpen>(Parser<TInput, TValue> parser, Parser<TInput, TOpen> openParser)

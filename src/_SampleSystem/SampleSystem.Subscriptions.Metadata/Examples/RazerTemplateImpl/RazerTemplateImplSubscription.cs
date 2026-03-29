@@ -16,6 +16,6 @@ public sealed class RazerTemplateImplSubscription
         this.ConditionLambda = new ConditionLambda();
         this.GenerationLambda = new GenerationLambda();
         this.CopyGenerationLambda = new CopyGenerationLambda();
-        this.SecurityItemSourceLambdas = new[] { new SecurityItemSourceLambda() };
+        this.SecurityItemSourceLambdas = [new SecurityItemSourceLambda()];
     }
 }

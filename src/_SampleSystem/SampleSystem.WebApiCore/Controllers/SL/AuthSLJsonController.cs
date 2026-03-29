@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SampleSystem.WebApiCore.Controllers;
 
-public class AuthSLJsonController : Framework.Authorization.WebApi.AuthSLJsonController
+public class AuthMainController : Framework.Authorization.WebApi.AuthMainController
 {
     [HttpPost]
     public PermissionIdentityDTO SavePermission(SavePermissionAutoRequest savePermissionAutoRequest)

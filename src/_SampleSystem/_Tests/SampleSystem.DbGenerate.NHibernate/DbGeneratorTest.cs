@@ -113,7 +113,7 @@ public class DbGeneratorTest
 
         Console.WriteLine("------ start Utilities");
         var resultScript = new Framework.Configuration.TestGenerate.ServerGenerators(
-                new Framework.Configuration.TestGenerate.ServerGenerationEnvironment(new DatabaseName("Configuration")))
+                new Framework.Configuration.TestGenerate.Configurations.ServerGenerationEnvironment(new DatabaseName("Configuration")))
             .GenerateDB(
                 serverName,
                 mainDatabaseName,

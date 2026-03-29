@@ -2,13 +2,17 @@
 using AutoFixture.Idioms;
 
 using FluentAssertions;
-using Framework.Configuration.BLL.SubscriptionSystemService3;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Templates;
+
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Templates;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Core;
+using Framework.Core.MessageSender;
+using Framework.Core.TryResult.Base;
+using Framework.Core.TryResult.Extensions;
 using Framework.Notification;
 using Framework.UnitTesting;
 using NUnit.Framework;
@@ -54,7 +58,7 @@ public sealed class NotificationServiceTests : TestFixtureBase
 
         var subscriptions = this.Fixture.CreateMany<Subscription>(1).ToList();
 
-        var template = new MessageTemplateNotification("test", this, this.GetType(), new string[0], new string[0], new string[0], null);
+        var template = new MessageTemplateNotification("test", this, this.GetType(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), null);
 
         await this.templateSender.SendAsync(template);
 
@@ -81,7 +85,7 @@ public sealed class NotificationServiceTests : TestFixtureBase
         var subscriptions = this.Fixture.CreateMany<Subscription>(1).ToList();
         var subscription = subscriptions.Single();
 
-        var template = new MessageTemplateNotification("test", this, this.GetType(), new string[0], new string[0], new string[0], null, subscription);
+        var template = new MessageTemplateNotification("test", this, this.GetType(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), null, subscription);
 
         this.templateFactory.Create(Arg.Is<List<Subscription>>(v => v.SequenceEqual(subscriptions)), versions).Returns(new List<MessageTemplateNotification> { template });
 

@@ -2,10 +2,11 @@
 
 using CommonFramework;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Core;
 
 [DataContract(Namespace = "")]
-public partial struct Period : IEquatable<Period>, IComparable<Period>, IComparable, IPeriod<Period>
+public partial struct Period : IEquatable<Period>, IComparable<Period>, IComparable
 {
     private DateTime startDate;
 
@@ -53,40 +54,22 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
     }
 
     [IgnoreDataMember]
-    public TimeSpan Duration
-    {
-        get { return this.EndDateValue - this.StartDate; }
-    }
+    public TimeSpan Duration => this.EndDateValue - this.StartDate;
 
     [IgnoreDataMember]
-    public bool IsEmpty
-    {
-        get { return this.StartDate > this.EndDateValue; }
-    }
+    public bool IsEmpty => this.StartDate > this.EndDateValue;
 
     [IgnoreDataMember]
-    public bool IsWithinOneMonth
-    {
-        get { return this.StartDate.Month == this.EndDateValue.Month && this.StartDate.Year == this.EndDateValue.Year; }
-    }
+    public bool IsWithinOneMonth => this.StartDate.Month == this.EndDateValue.Month && this.StartDate.Year == this.EndDateValue.Year;
 
     [IgnoreDataMember]
-    public bool IsMonth
-    {
-        get { return this.StartDate.ToStartMonthDate() == this.StartDate && this.EndDateValue == this.StartDate.ToEndMonthDate(); }
-    }
+    public bool IsMonth => this.StartDate.ToStartMonthDate() == this.StartDate && this.EndDateValue == this.StartDate.ToEndMonthDate();
 
     #region Public.Method
 
-    public bool Equals(Period other)
-    {
-        return this.StartDate == other.StartDate && this.EndDate == other.EndDate;
-    }
+    public bool Equals(Period other) => this.StartDate == other.StartDate && this.EndDate == other.EndDate;
 
-    public int CompareTo(object other)
-    {
-        return this.CompareTo((Period)other);
-    }
+    public int CompareTo(object other) => this.CompareTo((Period)other);
 
     public int CompareTo(Period other)
     {
@@ -95,38 +78,23 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
         return startDateCompare == 0 ? this.EndDateValue.CompareTo(other.EndDateValue) : startDateCompare;
     }
 
-    public override bool Equals(object obj)
-    {
-        return obj is Period && this.Equals((Period)obj);
-    }
+    public override bool Equals(object obj) => obj is Period && this.Equals((Period)obj);
 
-    public override int GetHashCode()
-    {
-        return this.StartDate.GetHashCode() ^ this.EndDate.GetHashCode();
-    }
+    public override int GetHashCode() => this.StartDate.GetHashCode() ^ this.EndDate.GetHashCode();
 
-    public override string ToString()
-    {
-        return this.ToDisplayName(true);
-    }
+    public override string ToString() => this.ToDisplayName(true);
 
     /// <summary>
     /// Используя текущий период возвращает новый период, который начинается с первого дня начального месяца периода и заканчивается последним днем конечного месяца периода
     /// </summary>
     /// <returns>Новый период, который начинается и заканчивается в первом и последнем дне граничных месяцев</returns>
-    public Period RoundByMouths()
-    {
-        return new Period(this.StartDate.ToStartMonthDate(), this.EndDate.MaybeNullableToNullable(d => d.ToEndMonthDate()));
-    }
+    public Period RoundByMouths() => new(this.StartDate.ToStartMonthDate(), this.EndDate.MaybeNullableToNullable(d => d.ToEndMonthDate()));
 
     /// <summary>
     /// Используя текущий период возвращает новый период, дата начала и конца (при возможности) которого имеет значение времени 00:00:00
     /// </summary>
     /// <returns></returns>
-    public Period Round()
-    {
-        return new Period(this.StartDate.Date, this.EndDate.MaybeNullableToNullable(d => d.Date));
-    }
+    public Period Round() => new(this.StartDate.Date, this.EndDate.MaybeNullableToNullable(d => d.Date));
 
     /// <summary>
     /// Для всех дней содержащихся в периоде создается новый период длинною в один этот день
@@ -144,10 +112,7 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
     /// Для всех недель содержащихся в периоде создается новый период длинною в одину эту неделю, последняя неделя может быть не полной
     /// </summary>
     /// <returns>Перечисление всех периодов длинною в одину неделю, которые находятся в переданном временном интервале</returns>
-    public IEnumerable<Period> SplitToWeeks(DayOfWeek firstDay = DayOfWeek.Monday)
-    {
-        return this.SplitToWeeksInternal(firstDay).OrderBy(v => v);
-    }
+    public IEnumerable<Period> SplitToWeeks(DayOfWeek firstDay = DayOfWeek.Monday) => this.SplitToWeeksInternal(firstDay).OrderBy(v => v);
 
     /// <summary>
     /// Для всех месяцев содержащихся в периоде создается новый период длинною в одинин этот месяц, последний месяц может быть не полном
@@ -194,17 +159,14 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
     /// </remarks>
     /// <param name="otherPeriod">Период, из которого извлекаются даты, входящие также в указанный период</param>
     /// <returns>Новый период представляющий собой пересечение дат заданных двух периодов. Если пересечение дат нету, то период будет пустым</returns>
-    public Period Intersect(IPeriod otherPeriod)
-    {
-        return new Period(this.StartDate.Max(otherPeriod.StartDate), this.EndDate.UnsafeOperation(otherPeriod.EndDate, (d1, d2) => d1.Min(d2)));
-    }
+    public Period Intersect(Period otherPeriod) => new(this.StartDate.Max(otherPeriod.StartDate), this.EndDate.UnsafeOperation(otherPeriod.EndDate, (d1, d2) => d1.Min(d2)));
 
     /// <summary>
     /// Возвращает новый период, который является пересечением текущего периода с переданным в качестве параметра периода <see cref="target"/>
     /// </summary>
     /// <param name="target">Период, из которого извлекаются даты, входящие также в указанный период</param>
     /// <returns>Новый период представляющий собой пересечение дат заданных двух периодов. Если пересечение дат нету, то период будет пустым</returns>
-    public Period NativeIntersect(IPeriod target)
+    public Period NativeIntersect(Period target)
     {
         var result = new Period(
                                 target.NativeStartDate > this.NativeStartDate ? target.NativeStartDate : this.NativeStartDate,
@@ -219,7 +181,7 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>
-    public bool IsIntersectedExcludeZeroDuration(IPeriod target)
+    public bool IsIntersectedExcludeZeroDuration(Period target)
     {
         var intersect = this.Intersect(target);
 
@@ -236,7 +198,7 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
     /// </summary>
     /// <param name="target">Период, с которым проверяется пересечение</param>
     /// <returns>true, если дата начала или дата окончания переданного периода содержатся в указанном периоде, в противном случае — false</returns>
-    public bool IsNativeIntersected(IPeriod target)
+    public bool IsNativeIntersected(Period target)
     {
         var nativeIntersectedResult = this.NativeIntersect(target);
         var empty = Empty;
@@ -279,21 +241,11 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
         return new Period(startDate, endDate);
     }
 
-    public static Period operator +(Period p1, Period p2)
-    {
-        return new Period(p1.StartDate.Min(p2.StartDate), p1.EndDateValue.Max(p2.EndDateValue));
-    }
+    public static Period operator +(Period p1, Period p2) => new(p1.StartDate.Min(p2.StartDate), p1.EndDateValue.Max(p2.EndDateValue));
 
-    public static bool operator ==(Period p1, Period p2)
-    {
-        return p1.Equals(p2);
-    }
+    public static bool operator ==(Period p1, Period p2) => p1.Equals(p2);
 
-    public static bool operator !=(Period p1, Period p2)
-    {
-        return !p1.Equals(p2);
-    }
-
+    public static bool operator !=(Period p1, Period p2) => !p1.Equals(p2);
 
     public static Period FromYear(int year)
     {
@@ -354,8 +306,8 @@ public partial struct Period : IDeserializationCallback
     [DataMember]
     public DateTime StartDate
     {
-        get { return this.startDate.ToSqlDateTime(); }
-        set { this.startDate = value.ToSqlDateTime(); }
+        get => this.startDate.ToSqlDateTime();
+        set => this.startDate = value.ToSqlDateTime();
     }
 
     /// <summary>
@@ -364,46 +316,33 @@ public partial struct Period : IDeserializationCallback
     [DataMember]
     public DateTime? EndDate
     {
-        get { return this.endDate.ToSqlDateTime(); }
-        set { this.endDate = value.ToSqlDateTime(); }
+        get => this.endDate.ToSqlDateTime();
+        set => this.endDate = value.ToSqlDateTime();
     }
 
     /// <summary>
     /// Если <see cref="EndDate"/> не задана, то возвращает максимальную дату, иначе дату окончания периода с учетом ограничей sql базы данных
     /// </summary>
     [IgnoreDataMember]
-    public DateTime EndDateValue
-    {
-        get { return this.endDate == null ? Eternity.EndDateValue : this.endDate.Value.ToSqlDateTime(); }
-    }
+    public DateTime EndDateValue => this.endDate == null ? Eternity.EndDateValue : this.endDate.Value.ToSqlDateTime();
 
     /// <summary>
     /// Дата начала периода
     /// </summary>
     [IgnoreDataMember]
-    public DateTime NativeStartDate
-    {
-        get { return this.startDate; }
-    }
+    public DateTime NativeStartDate => this.startDate;
 
     /// <summary>
     /// Дата окончания периода
     /// </summary>
     [IgnoreDataMember]
-    public DateTime? NativeEndDate
-    {
-        get { return this.endDate; }
-    }
+    public DateTime? NativeEndDate => this.endDate;
 
     /// <summary>
     /// Если <see cref="EndDate"/> не задана, то возвращает максимальную дату, иначе дату окончания периода
     /// </summary>
     [IgnoreDataMember]
-    public DateTime NativeEndDateValue
-    {
-        get { return this.endDate == null ? Eternity.NativeEndDateValue : this.endDate.Value; }
-    }
-
+    public DateTime NativeEndDateValue => this.endDate == null ? Eternity.NativeEndDateValue : this.endDate.Value;
 
     #endregion
 
@@ -412,14 +351,14 @@ public partial struct Period : IDeserializationCallback
     /// <summary>
     /// Предоставляет экземпляр бесконечного периода
     /// </summary>
-    public static readonly Period Eternity = new Period(DateTime.MinValue.ToSqlDateTime(),
-                                                        DateTime.MaxValue.ToSqlDateTime());
+    public static readonly Period Eternity = new(DateTime.MinValue.ToSqlDateTime(),
+                                                 DateTime.MaxValue.ToSqlDateTime());
 
     /// <summary>
     /// Предоставляет экземпляр пустого периода
     /// </summary>
-    public static readonly Period Empty = new Period(DateTime.MaxValue.ToSqlDateTime(),
-                                                     DateTime.MinValue.ToSqlDateTime());
+    public static readonly Period Empty = new(DateTime.MaxValue.ToSqlDateTime(),
+                                              DateTime.MinValue.ToSqlDateTime());
 
     #endregion
 }

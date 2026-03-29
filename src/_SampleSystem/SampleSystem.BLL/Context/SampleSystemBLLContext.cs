@@ -1,10 +1,11 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.Core;
+using Framework.Core.TypeResolving;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.Tracking;
 using Framework.Events;
-using Framework.QueryLanguage;
+using Framework.OData.QueryLanguage;
+using Framework.Tracking;
 
 using GenericQueryable.Fetching;
 
@@ -19,6 +20,7 @@ using HierarchicalExpand;
 
 using SecuritySystem.AccessDenied;
 using SecuritySystem.UserSource;
+using Framework.Configuration.BLL;
 
 namespace SampleSystem.BLL;
 
@@ -27,13 +29,13 @@ public partial class SampleSystemBLLContext(
     [FromKeyedServices("BLL")] IEventOperationSender operationSender,
     ITrackingService<PersistentDomainObjectBase> trackingService,
     IAccessDeniedExceptionService accessDeniedExceptionService,
-    IStandartExpressionBuilder standartExpressionBuilder,
+    IStandardExpressionBuilder standardExpressionBuilder,
     ISampleSystemValidator validator,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
     IRootSecurityService securityService,
     ISampleSystemBLLFactoryContainer logics,
     IAuthorizationBLLContext authorization,
-    Framework.Configuration.BLL.IConfigurationBLLContext configuration,
+    IConfigurationBLLContext configuration,
     BLLContextSettings<PersistentDomainObjectBase> settings,
     ISecurityAccessorResolver securityAccessorResolver,
     ICurrentUserSource<Employee> currentEmployeeSource,
@@ -44,7 +46,7 @@ public partial class SampleSystemBLLContext(
         operationSender,
         trackingService,
         accessDeniedExceptionService,
-        standartExpressionBuilder,
+        standardExpressionBuilder,
         validator,
         hierarchicalObjectExpanderFactory)
 {
@@ -60,12 +62,7 @@ public partial class SampleSystemBLLContext(
 
     public ICurrentUserSource<Employee> CurrentEmployeeSource { get; } = currentEmployeeSource;
 
-    public Framework.Configuration.BLL.IConfigurationBLLContext Configuration { get; } = configuration;
+    public IConfigurationBLLContext Configuration { get; } = configuration;
 
     public ITypeResolver<string> TypeResolver { get; } = settings.TypeResolver;
-
-    public override bool AllowVirtualPropertyInOdata(Type domainType)
-    {
-        return base.AllowVirtualPropertyInOdata(domainType) || domainType == typeof(BusinessUnitProgramClass);
-    }
 }

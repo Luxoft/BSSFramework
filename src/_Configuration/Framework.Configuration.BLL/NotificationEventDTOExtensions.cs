@@ -1,8 +1,6 @@
 ﻿using Framework.Notification.DTO;
-using Framework.Notification.New;
 using Framework.Configuration.Domain;
-
-using Attachment = Framework.Notification.New.Attachment;
+using Framework.Notification.Domain;
 
 namespace Framework.Configuration.BLL;
 

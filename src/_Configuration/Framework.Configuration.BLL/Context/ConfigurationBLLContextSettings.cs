@@ -1,8 +1,7 @@
-﻿using Framework.Configuration.Domain;
-using Framework.Core;
+﻿using Framework.BLL;
+using Framework.Configuration.Domain;
 using Framework.Core.Serialization;
 using Framework.Core.TypeResolving;
-using Framework.DomainDriven;
 
 namespace Framework.Configuration.BLL;
 

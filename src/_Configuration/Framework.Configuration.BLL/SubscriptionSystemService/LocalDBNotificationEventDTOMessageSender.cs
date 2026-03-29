@@ -1,8 +1,7 @@
-﻿using Framework.Configuration.Domain;
-using Framework.Core;
+﻿using Framework.Application.Repository;
+using Framework.Configuration.Domain;
 using Framework.Core.Helpers;
 using Framework.Core.MessageSender;
-using Framework.DomainDriven.Repository;
 using Framework.Notification.DTO;
 
 using SecuritySystem.Attributes;

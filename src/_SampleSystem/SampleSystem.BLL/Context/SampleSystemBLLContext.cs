@@ -20,6 +20,7 @@ using HierarchicalExpand;
 
 using SecuritySystem.AccessDenied;
 using SecuritySystem.UserSource;
+using Framework.Configuration.BLL;
 
 namespace SampleSystem.BLL;
 
@@ -34,7 +35,7 @@ public partial class SampleSystemBLLContext(
     IRootSecurityService securityService,
     ISampleSystemBLLFactoryContainer logics,
     IAuthorizationBLLContext authorization,
-    Framework.Configuration.BLL.IConfigurationBLLContext configuration,
+    IConfigurationBLLContext configuration,
     BLLContextSettings<PersistentDomainObjectBase> settings,
     ISecurityAccessorResolver securityAccessorResolver,
     ICurrentUserSource<Employee> currentEmployeeSource,
@@ -61,7 +62,7 @@ public partial class SampleSystemBLLContext(
 
     public ICurrentUserSource<Employee> CurrentEmployeeSource { get; } = currentEmployeeSource;
 
-    public Framework.Configuration.BLL.IConfigurationBLLContext Configuration { get; } = configuration;
+    public IConfigurationBLLContext Configuration { get; } = configuration;
 
     public ITypeResolver<string> TypeResolver { get; } = settings.TypeResolver;
 }

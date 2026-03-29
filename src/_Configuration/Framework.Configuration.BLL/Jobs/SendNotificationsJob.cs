@@ -1,15 +1,14 @@
-﻿namespace Framework.Notification.Jobs;
+﻿using Framework.Core;
 
-public class SendNotificationsJob(IConfigurationBLLContext context, IExceptionStorage exceptionStorage = null)
+using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
+
+namespace Framework.Notification.Jobs;
+
+public class SendNotificationsJob(IConfigurationBLLContext context)
     : ISendNotificationsJob
 {
     public async Task ExecuteAsync(CancellationToken cancellationToken)
     {
-        var result = context.Logics.DomainObjectModification.Process();
-
-        if (exceptionStorage != null)
-        {
-            result.Match(_ => { }, exceptionStorage.Save);
-        }
+        context.Logics.DomainObjectModification.Process();
     }
 }

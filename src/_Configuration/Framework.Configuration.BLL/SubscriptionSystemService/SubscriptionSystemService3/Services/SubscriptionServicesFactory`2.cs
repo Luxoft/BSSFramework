@@ -1,8 +1,8 @@
 ﻿using CommonFramework;
 
+using Framework.Application.Domain;
+using Framework.BLL;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.DomainDriven.BLL;
-using Framework.Persistent;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 

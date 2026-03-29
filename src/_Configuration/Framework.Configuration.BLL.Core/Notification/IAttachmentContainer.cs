@@ -1,7 +1,6 @@
-﻿namespace Framework.Configuration.BLL;
+﻿using Framework.Notification.DTO;
 
-using System.Collections.Generic;
-using Framework.Notification.DTO;
+namespace Framework.Configuration.BLL.Notification;
 
 public interface IAttachmentContainer
 {

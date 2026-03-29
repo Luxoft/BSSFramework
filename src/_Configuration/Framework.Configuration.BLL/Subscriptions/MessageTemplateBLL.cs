@@ -5,12 +5,13 @@ using System.Text.RegularExpressions;
 
 using CommonFramework;
 
-using Framework.Configuration.Core;
+using Framework.BLL;
+using Framework.Configuration.BLL.Notification;
 using Framework.Configuration.Domain;
-using Framework.Configuration.SubscriptionModeling;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.Notification;
+using Framework.Notification.Domain;
+using Framework.Subscriptions;
+using Framework.Subscriptions.Domain;
 
 using Microsoft.Extensions.DependencyInjection;
 

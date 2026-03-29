@@ -1,10 +1,9 @@
 ﻿using CommonFramework;
 
 using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
-using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.Core.TryResult.Base;
+using Framework.Subscriptions.Domain;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3;
 

@@ -1,7 +1,8 @@
 ﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
-using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
-using Framework.Notification;
+using Framework.Notification.Domain;
+using Framework.Subscriptions;
+using Framework.Subscriptions.Domain;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 

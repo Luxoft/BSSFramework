@@ -3,8 +3,8 @@
 using Framework.Authorization.Domain;
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.DomainDriven.DAL.Revisions;
-using Framework.Notification;
+using Framework.Database.Domain;
+using Framework.Notification.Domain;
 
 using SecuritySystem;
 

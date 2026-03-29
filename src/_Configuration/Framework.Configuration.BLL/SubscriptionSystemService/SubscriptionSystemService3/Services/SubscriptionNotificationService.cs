@@ -1,13 +1,10 @@
 ﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Templates;
-using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.MessageSender;
-using Framework.Core.TryResult;
-using Framework.Core.TryResult.Base;
-using Framework.Core.TryResult.Extensions;
-using Framework.Notification;
+using Framework.Notification.Domain;
+using Framework.Subscriptions.Domain;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

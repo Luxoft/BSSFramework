@@ -4,11 +4,12 @@ using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
 using Framework.BLL;
 using Framework.BLL.Domain.IdentityObject;
-using Framework.Core.Serialization;
-using Framework.Notification;
+using Framework.Configuration.BLL.TargetSystemService;
 using Framework.Configuration.Domain;
 using Framework.Core.MessageSender;
+using Framework.Core.Serialization;
 using Framework.Core.TypeResolving;
+using Framework.Notification;
 using Framework.Notification.Domain;
 using Framework.Tracking;
 

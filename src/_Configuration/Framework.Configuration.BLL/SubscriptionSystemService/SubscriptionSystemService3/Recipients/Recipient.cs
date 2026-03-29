@@ -1,4 +1,4 @@
-﻿using Framework.Notification;
+﻿using Framework.Notification.Domain;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 

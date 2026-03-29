@@ -1,21 +1,24 @@
 ﻿using CommonFramework;
 using CommonFramework.DictionaryCache;
 
+using Framework.Application.Events;
+using Framework.Application.Lock;
 using Framework.Authorization.BLL;
+using Framework.BLL;
+using Framework.BLL.Domain.Exceptions;
+using Framework.BLL.Domain.Extensions;
+using Framework.BLL.Domain.IdentityObject;
+using Framework.BLL.Services;
+using Framework.Configuration.BLL.TargetSystemService;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.MessageSender;
 using Framework.Core.Serialization;
 using Framework.Core.TypeResolving;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.Lock;
-using Framework.Events;
-using Framework.Exceptions;
+using Framework.Database;
 using Framework.Notification;
-using Framework.Persistent;
-using Framework.OData.QueryLanguage;
+using Framework.Notification.Domain;
+using Framework.OData.QueryLanguage.StandardExpressionBuilder;
 using Framework.Tracking;
 
 using Microsoft.Extensions.DependencyInjection;

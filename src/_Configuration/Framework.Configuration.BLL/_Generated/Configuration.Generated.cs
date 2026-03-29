@@ -11,7 +11,7 @@ namespace Framework.Configuration.BLL
 {
     
     
-    public partial class ConfigurationBLLContext : Framework.BLL.SecurityBLLBaseContext<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid, Framework.Configuration.BLL.IConfigurationBLLFactoryContainer>, Framework.BLL.IBLLFactoryContainerContext<Framework.BLL.IBLLFactoryContainer<Framework.BLL.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>>>, Framework.Configuration.BLL.IConfigurationBLLContext
+    public partial class ConfigurationBLLContext : Framework.BLL.SecurityBLLBaseContext<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid, IConfigurationBLLFactoryContainer>, Framework.BLL.IBLLFactoryContainerContext<Framework.BLL.IBLLFactoryContainer<Framework.BLL.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>>>, IConfigurationBLLContext
     {
         
         Framework.BLL.IBLLFactoryContainer<Framework.BLL.IDefaultBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>> Framework.BLL.IBLLFactoryContainerContext<Framework.BLL.IBLLFactoryContainer<Framework.BLL.IDefaultBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>>>.Logics
@@ -31,91 +31,91 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class CodeFirstSubscriptionBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.CodeFirstSubscription>, Framework.Configuration.BLL.ICodeFirstSubscriptionBLL
+    public partial class CodeFirstSubscriptionBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.CodeFirstSubscription>, ICodeFirstSubscriptionBLL
     {
         
-        public CodeFirstSubscriptionBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.CodeFirstSubscription> securityProvider) : 
+        public CodeFirstSubscriptionBLL(IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.CodeFirstSubscription> securityProvider) : 
                 base(context, securityProvider)
         {
         }
     }
     
-    public partial class CodeFirstSubscriptionBLLFactory : Framework.BLL.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.ICodeFirstSubscriptionBLL, Framework.Configuration.BLL.CodeFirstSubscriptionBLL, Framework.Configuration.Domain.CodeFirstSubscription>, Framework.Configuration.BLL.ICodeFirstSubscriptionBLLFactory
+    public partial class CodeFirstSubscriptionBLLFactory : Framework.BLL.SecurityBLLFactory<IConfigurationBLLContext, ICodeFirstSubscriptionBLL, Framework.Configuration.BLL.CodeFirstSubscriptionBLL, Framework.Configuration.Domain.CodeFirstSubscription>, Framework.Configuration.BLL.ICodeFirstSubscriptionBLLFactory
     {
         
-        public CodeFirstSubscriptionBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
+        public CodeFirstSubscriptionBLLFactory(IConfigurationBLLContext context) : 
                 base(context)
         {
         }
     }
     
-    public partial class DomainObjectEventBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectEvent>, Framework.Configuration.BLL.IDomainObjectEventBLL
+    public partial class DomainObjectEventBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectEvent>, IDomainObjectEventBLL
     {
         
-        public DomainObjectEventBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.DomainObjectEvent> securityProvider) : 
+        public DomainObjectEventBLL(IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.DomainObjectEvent> securityProvider) : 
                 base(context, securityProvider)
         {
         }
     }
     
-    public partial class DomainObjectEventBLLFactory : Framework.BLL.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.IDomainObjectEventBLL, Framework.Configuration.BLL.DomainObjectEventBLL, Framework.Configuration.Domain.DomainObjectEvent>, Framework.Configuration.BLL.IDomainObjectEventBLLFactory
+    public partial class DomainObjectEventBLLFactory : Framework.BLL.SecurityBLLFactory<IConfigurationBLLContext, IDomainObjectEventBLL, Framework.Configuration.BLL.DomainObjectEventBLL, Framework.Configuration.Domain.DomainObjectEvent>, Framework.Configuration.BLL.IDomainObjectEventBLLFactory
     {
         
-        public DomainObjectEventBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
+        public DomainObjectEventBLLFactory(IConfigurationBLLContext context) : 
                 base(context)
         {
         }
     }
     
-    public partial class DomainObjectModificationBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectModification>, Framework.Configuration.BLL.IDomainObjectModificationBLL
+    public partial class DomainObjectModificationBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectModification>, IDomainObjectModificationBLL
     {
         
-        public DomainObjectModificationBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.DomainObjectModification> securityProvider) : 
+        public DomainObjectModificationBLL(IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.DomainObjectModification> securityProvider) : 
                 base(context, securityProvider)
         {
         }
     }
     
-    public partial class DomainObjectModificationBLLFactory : Framework.BLL.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.IDomainObjectModificationBLL, Framework.Configuration.BLL.DomainObjectModificationBLL, Framework.Configuration.Domain.DomainObjectModification>, Framework.Configuration.BLL.IDomainObjectModificationBLLFactory
+    public partial class DomainObjectModificationBLLFactory : Framework.BLL.SecurityBLLFactory<IConfigurationBLLContext, IDomainObjectModificationBLL, Framework.Configuration.BLL.DomainObjectModificationBLL, Framework.Configuration.Domain.DomainObjectModification>, Framework.Configuration.BLL.IDomainObjectModificationBLLFactory
     {
         
-        public DomainObjectModificationBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
+        public DomainObjectModificationBLLFactory(IConfigurationBLLContext context) : 
                 base(context)
         {
         }
     }
     
-    public partial class DomainObjectNotificationBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectNotification>, Framework.Configuration.BLL.IDomainObjectNotificationBLL
+    public partial class DomainObjectNotificationBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectNotification>, IDomainObjectNotificationBLL
     {
         
-        public DomainObjectNotificationBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.DomainObjectNotification> securityProvider) : 
+        public DomainObjectNotificationBLL(IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.DomainObjectNotification> securityProvider) : 
                 base(context, securityProvider)
         {
         }
     }
     
-    public partial class DomainObjectNotificationBLLFactory : Framework.BLL.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.IDomainObjectNotificationBLL, Framework.Configuration.BLL.DomainObjectNotificationBLL, Framework.Configuration.Domain.DomainObjectNotification>, Framework.Configuration.BLL.IDomainObjectNotificationBLLFactory
+    public partial class DomainObjectNotificationBLLFactory : Framework.BLL.SecurityBLLFactory<IConfigurationBLLContext, IDomainObjectNotificationBLL, Framework.Configuration.BLL.DomainObjectNotificationBLL, Framework.Configuration.Domain.DomainObjectNotification>, Framework.Configuration.BLL.IDomainObjectNotificationBLLFactory
     {
         
-        public DomainObjectNotificationBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
+        public DomainObjectNotificationBLLFactory(IConfigurationBLLContext context) : 
                 base(context)
         {
         }
     }
     
-    public partial class DomainTypeBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainType>, Framework.Configuration.BLL.IDomainTypeBLL
+    public partial class DomainTypeBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainType>, IDomainTypeBLL
     {
         
-        public DomainTypeBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.DomainType> securityProvider) : 
+        public DomainTypeBLL(IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.DomainType> securityProvider) : 
                 base(context, securityProvider)
         {
         }
     }
     
-    public partial class DomainTypeBLLFactory : Framework.BLL.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.IDomainTypeBLL, Framework.Configuration.BLL.DomainTypeBLL, Framework.Configuration.Domain.DomainType>, Framework.Configuration.BLL.IDomainTypeBLLFactory
+    public partial class DomainTypeBLLFactory : Framework.BLL.SecurityBLLFactory<IConfigurationBLLContext, IDomainTypeBLL, Framework.Configuration.BLL.DomainTypeBLL, Framework.Configuration.Domain.DomainType>, Framework.Configuration.BLL.IDomainTypeBLLFactory
     {
         
-        public DomainTypeBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
+        public DomainTypeBLLFactory(IConfigurationBLLContext context) : 
                 base(context)
         {
         }
@@ -124,52 +124,52 @@ namespace Framework.Configuration.BLL
     public partial class SentMessageBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SentMessage>, Framework.Configuration.BLL.ISentMessageBLL
     {
         
-        public SentMessageBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.SentMessage> securityProvider) : 
+        public SentMessageBLL(IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.SentMessage> securityProvider) : 
                 base(context, securityProvider)
         {
         }
     }
     
-    public partial class SentMessageBLLFactory : Framework.BLL.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.ISentMessageBLL, Framework.Configuration.BLL.SentMessageBLL, Framework.Configuration.Domain.SentMessage>, Framework.Configuration.BLL.ISentMessageBLLFactory
+    public partial class SentMessageBLLFactory : Framework.BLL.SecurityBLLFactory<IConfigurationBLLContext, Framework.Configuration.BLL.ISentMessageBLL, Framework.Configuration.BLL.SentMessageBLL, Framework.Configuration.Domain.SentMessage>, Framework.Configuration.BLL.ISentMessageBLLFactory
     {
         
-        public SentMessageBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
+        public SentMessageBLLFactory(IConfigurationBLLContext context) : 
                 base(context)
         {
         }
     }
     
-    public partial class SequenceBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.Sequence>, Framework.Configuration.BLL.ISequenceBLL
+    public partial class SequenceBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.Sequence>, ISequenceBLL
     {
         
-        public SequenceBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.Sequence> securityProvider) : 
+        public SequenceBLL(IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.Sequence> securityProvider) : 
                 base(context, securityProvider)
         {
         }
     }
     
-    public partial class SequenceBLLFactory : Framework.BLL.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.ISequenceBLL, Framework.Configuration.BLL.SequenceBLL, Framework.Configuration.Domain.Sequence>, Framework.Configuration.BLL.ISequenceBLLFactory
+    public partial class SequenceBLLFactory : Framework.BLL.SecurityBLLFactory<IConfigurationBLLContext, ISequenceBLL, Framework.Configuration.BLL.SequenceBLL, Framework.Configuration.Domain.Sequence>, Framework.Configuration.BLL.ISequenceBLLFactory
     {
         
-        public SequenceBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
+        public SequenceBLLFactory(IConfigurationBLLContext context) : 
                 base(context)
         {
         }
     }
     
-    public partial class SystemConstantBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SystemConstant>, Framework.Configuration.BLL.ISystemConstantBLL
+    public partial class SystemConstantBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SystemConstant>, ISystemConstantBLL
     {
         
-        public SystemConstantBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.SystemConstant> securityProvider) : 
+        public SystemConstantBLL(IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.SystemConstant> securityProvider) : 
                 base(context, securityProvider)
         {
         }
     }
     
-    public partial class SystemConstantBLLFactory : Framework.BLL.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.ISystemConstantBLL, Framework.Configuration.BLL.SystemConstantBLL, Framework.Configuration.Domain.SystemConstant>, Framework.Configuration.BLL.ISystemConstantBLLFactory
+    public partial class SystemConstantBLLFactory : Framework.BLL.SecurityBLLFactory<IConfigurationBLLContext, ISystemConstantBLL, Framework.Configuration.BLL.SystemConstantBLL, Framework.Configuration.Domain.SystemConstant>, Framework.Configuration.BLL.ISystemConstantBLLFactory
     {
         
-        public SystemConstantBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
+        public SystemConstantBLLFactory(IConfigurationBLLContext context) : 
                 base(context)
         {
         }
@@ -178,52 +178,52 @@ namespace Framework.Configuration.BLL
     public partial class TargetSystemBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.TargetSystem>, Framework.Configuration.BLL.ITargetSystemBLL
     {
         
-        public TargetSystemBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.TargetSystem> securityProvider) : 
+        public TargetSystemBLL(IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.TargetSystem> securityProvider) : 
                 base(context, securityProvider)
         {
         }
     }
     
-    public partial class TargetSystemBLLFactory : Framework.BLL.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.ITargetSystemBLL, Framework.Configuration.BLL.TargetSystemBLL, Framework.Configuration.Domain.TargetSystem>, Framework.Configuration.BLL.ITargetSystemBLLFactory
+    public partial class TargetSystemBLLFactory : Framework.BLL.SecurityBLLFactory<IConfigurationBLLContext, Framework.Configuration.BLL.ITargetSystemBLL, Framework.Configuration.BLL.TargetSystemBLL, Framework.Configuration.Domain.TargetSystem>, Framework.Configuration.BLL.ITargetSystemBLLFactory
     {
         
-        public TargetSystemBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
+        public TargetSystemBLLFactory(IConfigurationBLLContext context) : 
                 base(context)
         {
         }
     }
     
-    public partial class ConfigurationBLLFactoryContainer : Framework.BLL.BLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>, Framework.Configuration.BLL.IConfigurationBLLFactoryContainer, Framework.BLL.IBLLFactoryInitializer
+    public partial class ConfigurationBLLFactoryContainer : Framework.BLL.BLLContextContainer<IConfigurationBLLContext>, IConfigurationBLLFactoryContainer, Framework.BLL.IBLLFactoryInitializer
     {
         
-        private Framework.Configuration.BLL.ICodeFirstSubscriptionBLL codeFirstSubscriptionBLL;
+        private ICodeFirstSubscriptionBLL codeFirstSubscriptionBLL;
         
         private Framework.Configuration.BLL.ConfigurationDefaultBLLFactory defaultBLLFactory;
         
-        private Framework.Configuration.BLL.IDomainObjectEventBLL domainObjectEventBLL;
+        private IDomainObjectEventBLL domainObjectEventBLL;
         
-        private Framework.Configuration.BLL.IDomainObjectModificationBLL domainObjectModificationBLL;
+        private IDomainObjectModificationBLL domainObjectModificationBLL;
         
-        private Framework.Configuration.BLL.IDomainObjectNotificationBLL domainObjectNotificationBLL;
+        private IDomainObjectNotificationBLL domainObjectNotificationBLL;
         
-        private Framework.Configuration.BLL.IDomainTypeBLL domainTypeBLL;
+        private IDomainTypeBLL domainTypeBLL;
         
         private Framework.Configuration.BLL.ConfigurationImplementedBLLFactory implementedBLLFactory;
         
         private Framework.Configuration.BLL.ISentMessageBLL sentMessageBLL;
         
-        private Framework.Configuration.BLL.ISequenceBLL sequenceBLL;
+        private ISequenceBLL sequenceBLL;
         
-        private Framework.Configuration.BLL.ISystemConstantBLL systemConstantBLL;
+        private ISystemConstantBLL systemConstantBLL;
         
         private Framework.Configuration.BLL.ITargetSystemBLL targetSystemBLL;
         
-        public ConfigurationBLLFactoryContainer(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
+        public ConfigurationBLLFactoryContainer(IConfigurationBLLContext context) : 
                 base(context)
         {
         }
         
-        public Framework.Configuration.BLL.ICodeFirstSubscriptionBLL CodeFirstSubscription
+        public ICodeFirstSubscriptionBLL CodeFirstSubscription
         {
             get
             {
@@ -255,7 +255,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        public Framework.Configuration.BLL.IDomainObjectEventBLL DomainObjectEvent
+        public IDomainObjectEventBLL DomainObjectEvent
         {
             get
             {
@@ -275,7 +275,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        public Framework.Configuration.BLL.IDomainObjectModificationBLL DomainObjectModification
+        public IDomainObjectModificationBLL DomainObjectModification
         {
             get
             {
@@ -295,7 +295,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        public Framework.Configuration.BLL.IDomainObjectNotificationBLL DomainObjectNotification
+        public IDomainObjectNotificationBLL DomainObjectNotification
         {
             get
             {
@@ -315,7 +315,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        public Framework.Configuration.BLL.IDomainTypeBLL DomainType
+        public IDomainTypeBLL DomainType
         {
             get
             {
@@ -367,7 +367,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        public Framework.Configuration.BLL.ISequenceBLL Sequence
+        public ISequenceBLL Sequence
         {
             get
             {
@@ -387,7 +387,7 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        public Framework.Configuration.BLL.ISystemConstantBLL SystemConstant
+        public ISystemConstantBLL SystemConstant
         {
             get
             {
@@ -450,10 +450,10 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class ConfigurationDefaultBLLFactory : Framework.BLL.DefaultSecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>, Framework.BLL.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>
+    public partial class ConfigurationDefaultBLLFactory : Framework.BLL.DefaultSecurityBLLFactory<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>, Framework.BLL.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>
     {
         
-        public ConfigurationDefaultBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
+        public ConfigurationDefaultBLLFactory(IConfigurationBLLContext context) : 
                 base(context)
         {
         }
@@ -464,10 +464,10 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class ConfigurationImplementedBLLFactory : Framework.BLL.ImplementedSecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>, Framework.BLL.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>
+    public partial class ConfigurationImplementedBLLFactory : Framework.BLL.ImplementedSecurityBLLFactory<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>, Framework.BLL.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>
     {
         
-        public ConfigurationImplementedBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
+        public ConfigurationImplementedBLLFactory(IConfigurationBLLContext context) : 
                 base(context)
         {
         }
@@ -478,11 +478,11 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class SecurityDomainBLLBase<TDomainObject> : Framework.BLL.DefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
+    public partial class SecurityDomainBLLBase<TDomainObject> : Framework.BLL.DefaultSecurityDomainBLLBase<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
         where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
     {
         
-        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider) : 
+        public SecurityDomainBLLBase(IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider) : 
                 base(context, securityProvider)
         {
         }

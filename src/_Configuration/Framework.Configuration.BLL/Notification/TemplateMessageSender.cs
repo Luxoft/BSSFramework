@@ -6,6 +6,7 @@ using CommonFramework;
 using Framework.Application.Domain;
 using Framework.Core.MessageSender;
 using Framework.Notification.Domain;
+using Framework.Subscriptions.Domain;
 
 namespace Framework.Configuration.BLL.Notification;
 
@@ -38,7 +39,7 @@ public class TemplateMessageSender(
         await notificationEventSender.SendAsync(new NotificationEventDTO(notification), cancellationToken);
     }
 
-    private Framework.Notification.Notification CreateNotification(MessageTemplateNotification message)
+    private Framework.Notification.Domain.Notification CreateNotification(MessageTemplateNotification message)
     {
         var messageTemplate = new MessageTemplate();
 
@@ -66,6 +67,6 @@ public class TemplateMessageSender(
                                                                         message.ContextObjectType.Name,
                                                                         (message.ContextObject as IIdentityObject<Guid> ?? (message.ContextObject as IDomainObjectVersions).Maybe(ver => ver.Current ?? ver.Previous) as IIdentityObject<Guid>).MaybeToNullable(obj => obj.Id));
 
-        return new Framework.Notification.Notification(technicalInformation, mailMessage);
+        return new Framework.Notification.Domain.Notification(technicalInformation, mailMessage);
     }
 }

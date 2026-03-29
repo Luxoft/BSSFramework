@@ -2,9 +2,8 @@
 using System.Collections.Immutable;
 
 using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
-using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
-using Framework.DomainDriven;
+using Framework.Subscriptions.Domain;
 
 using HierarchicalExpand;
 

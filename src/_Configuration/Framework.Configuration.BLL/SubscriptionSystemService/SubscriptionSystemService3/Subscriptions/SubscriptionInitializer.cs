@@ -1,7 +1,7 @@
 ﻿using CommonFramework;
 
+using Framework.Application.Repository;
 using Framework.Configuration.Domain;
-using Framework.DomainDriven.Repository;
 
 using SecuritySystem.Attributes;
 

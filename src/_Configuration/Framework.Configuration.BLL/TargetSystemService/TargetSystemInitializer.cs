@@ -1,12 +1,13 @@
 ﻿using CommonFramework;
 
+using Framework.BLL;
+using Framework.BLL.Domain.DTO;
+using Framework.BLL.Domain.Extensions;
+using Framework.Configuration.BLL.TargetSystemService;
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Lock;
-using Framework.Persistent;
-using Framework.Transfering;
+using Framework.Database;
+using Framework.Relations;
 
 namespace Framework.Configuration.BLL;
 

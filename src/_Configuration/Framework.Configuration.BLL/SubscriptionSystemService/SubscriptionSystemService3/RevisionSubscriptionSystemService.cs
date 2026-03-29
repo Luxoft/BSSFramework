@@ -2,14 +2,12 @@
 
 using CommonFramework;
 
+using Framework.Application.Domain;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.Core.TryResult;
-using Framework.Core.TryResult.Base;
-using Framework.DomainDriven;
-using Framework.DomainDriven.DAL.Revisions;
-using Framework.Persistent;
+using Framework.Database;
+using Framework.Database.Domain;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3;
 

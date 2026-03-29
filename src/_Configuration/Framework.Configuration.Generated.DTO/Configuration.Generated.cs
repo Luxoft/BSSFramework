@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Framework.Configuration.BLL;
+
 namespace Framework.Configuration.Generated.DTO
 {
     
@@ -8695,10 +8697,10 @@ namespace Framework.Configuration.Generated.DTO
         Framework.Configuration.Domain.TargetSystemRootFilterModel ToTargetSystemRootFilterModel(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO targetSystemRootFilterModelStrictDTO);
     }
     
-    public abstract partial class ConfigurationServerPrimitiveDTOMappingServiceBase : Framework.BLL.DTOMapping.Services.DTOMappingService<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.AuditPersistentDomainObjectBase, System.Guid, long>, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService
+    public abstract partial class ConfigurationServerPrimitiveDTOMappingServiceBase : Framework.BLL.DTOMapping.Services.DTOMappingService<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.AuditPersistentDomainObjectBase, System.Guid, long>, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService
     {
         
-        protected ConfigurationServerPrimitiveDTOMappingServiceBase(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
+        protected ConfigurationServerPrimitiveDTOMappingServiceBase(IConfigurationBLLContext context) : 
                 base(context)
         {
         }
@@ -9948,7 +9950,7 @@ namespace Framework.Configuration.Generated.DTO
     public partial class ConfigurationServerPrimitiveDTOMappingService : Framework.Configuration.Generated.DTO.ConfigurationServerPrimitiveDTOMappingServiceBase
     {
         
-        public ConfigurationServerPrimitiveDTOMappingService(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
+        public ConfigurationServerPrimitiveDTOMappingService(IConfigurationBLLContext context) : 
                 base(context)
         {
         }

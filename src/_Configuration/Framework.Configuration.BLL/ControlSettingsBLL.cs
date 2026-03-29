@@ -1,7 +1,4 @@
-﻿using Framework.Persistent;
-using Framework.Configuration.Domain;
-
-using GenericQueryable;
+﻿using GenericQueryable;
 using GenericQueryable.Fetching;
 
 namespace Framework.Configuration.BLL;

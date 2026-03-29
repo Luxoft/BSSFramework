@@ -1,6 +1,6 @@
-﻿using Framework.Configuration.Core;
-using Framework.Configuration.Domain;
-using Framework.Notification;
+﻿using Framework.Configuration.Domain;
+using Framework.Subscriptions;
+using Framework.Subscriptions.Domain;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 

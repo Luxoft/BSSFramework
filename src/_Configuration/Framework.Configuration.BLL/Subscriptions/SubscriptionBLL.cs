@@ -1,5 +1,4 @@
 ﻿using CommonFramework;
-
 using Framework.Configuration.Domain;
 
 namespace Framework.Configuration.BLL;

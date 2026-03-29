@@ -2,10 +2,10 @@
 using System.Collections.Immutable;
 using System.Reflection;
 
+using Framework.Application.Domain;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
-using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
-using Framework.Persistent;
+using Framework.Subscriptions.Domain;
 
 using SecuritySystem.Notification;
 

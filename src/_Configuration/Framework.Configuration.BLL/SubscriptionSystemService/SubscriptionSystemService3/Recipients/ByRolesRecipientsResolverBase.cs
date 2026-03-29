@@ -3,9 +3,10 @@
 using System.Collections.Immutable;
 
 using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
-using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
-using Framework.Notification;
+using Framework.Notification.Domain;
+using Framework.Subscriptions.Domain;
+
 using SecuritySystem;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;

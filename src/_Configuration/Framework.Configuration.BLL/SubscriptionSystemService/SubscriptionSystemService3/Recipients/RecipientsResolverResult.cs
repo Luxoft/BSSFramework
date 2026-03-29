@@ -1,4 +1,4 @@
-﻿using Framework.Configuration.Core;
+﻿using Framework.Subscriptions.Domain;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 

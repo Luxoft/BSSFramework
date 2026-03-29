@@ -1,9 +1,7 @@
 ﻿using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.Core.TryResult;
-using Framework.Core.TryResult.Base;
-using Framework.DomainDriven.DAL.Revisions;
-using Framework.DomainDriven.Lock;
+using Framework.Database;
+using Framework.Database.Domain;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

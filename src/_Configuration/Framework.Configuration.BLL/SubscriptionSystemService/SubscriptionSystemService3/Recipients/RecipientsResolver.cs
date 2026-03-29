@@ -1,10 +1,11 @@
-﻿using Framework.Configuration.Core;
-using Framework.Configuration.Domain;
+﻿using Framework.Configuration.Domain;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 using CommonFramework;
+
+using Framework.Subscriptions.Domain;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 

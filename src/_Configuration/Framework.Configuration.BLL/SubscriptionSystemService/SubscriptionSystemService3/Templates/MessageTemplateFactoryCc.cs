@@ -1,7 +1,7 @@
 ﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
-using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
-using Framework.Notification;
+using Framework.Notification.Domain;
+using Framework.Subscriptions.Domain;
 
 using Attachment = System.Net.Mail.Attachment;
 

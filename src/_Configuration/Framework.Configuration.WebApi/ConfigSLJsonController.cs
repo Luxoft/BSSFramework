@@ -1,9 +1,10 @@
-﻿using Framework.Configuration.BLL;
-using Framework.Configuration.Generated.DTO;
+﻿using Framework.Configuration.Generated.DTO;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.WebApi.Utils.SL;
 
 using Microsoft.AspNetCore.Mvc;
+
+using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
 namespace Framework.Configuration.WebApi;
 

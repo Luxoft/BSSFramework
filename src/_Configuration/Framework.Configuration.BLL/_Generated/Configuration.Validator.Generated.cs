@@ -20,10 +20,10 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public abstract partial class ConfigurationValidatorBase : Framework.BLL.Validation.BLLContextHandlerValidator<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Validation.OperationContextBase>
+    public abstract partial class ConfigurationValidatorBase : Framework.BLL.Validation.BLLContextHandlerValidator<IConfigurationBLLContext, Framework.Validation.OperationContextBase>
     {
         
-        public ConfigurationValidatorBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
+        public ConfigurationValidatorBase(IConfigurationBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
                 base(context, cache)
         {
             base.RegisterHandler<Framework.Configuration.Domain.CodeFirstSubscription>(this.GetCodeFirstSubscriptionValidationResult);
@@ -140,7 +140,7 @@ namespace Framework.Configuration.BLL
     public partial class ConfigurationValidator : Framework.Configuration.BLL.ConfigurationValidatorBase, Framework.Configuration.BLL.IConfigurationValidator
     {
         
-        public ConfigurationValidator(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.Configuration.BLL.ConfigurationValidatorCompileCache cache) : 
+        public ConfigurationValidator(IConfigurationBLLContext context, Framework.Configuration.BLL.ConfigurationValidatorCompileCache cache) : 
                 base(context, cache)
         {
         }

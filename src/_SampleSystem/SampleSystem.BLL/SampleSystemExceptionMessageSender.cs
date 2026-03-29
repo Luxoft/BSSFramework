@@ -1,10 +1,10 @@
 ﻿using System.Net.Mail;
-
-using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
 using Framework.Core.MessageSender;
 using Framework.Notification.New;
+
+using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
 namespace SampleSystem.BLL;
 

@@ -1,10 +1,12 @@
 ﻿using Framework.Configuration.Domain;
-using Framework.Configuration.SubscriptionModeling;
+using Framework.Subscriptions;
+
+using DomainObjectChangeType = Framework.Subscriptions.Domain.DomainObjectChangeType;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 
 /// <summary>
-///     Преобразователь экземпляров типа <see cref="ISubscriptionMetadata" />.
+///     Преобразователь экземпляров типа <see cref="Framework.Subscriptions.ISubscriptionMetadata" />.
 ///     в экземпляры типа <see cref="Subscription" />.
 /// </summary>
 public class SubscriptionMetadataMapper
@@ -44,7 +46,7 @@ public class SubscriptionMetadataMapper
     }
 
     /// <summary>
-    ///     Преобразует экземпляр типа <see cref="ISubscriptionMetadata" /> (Code first subscription)
+    ///     Преобразует экземпляр типа <see cref="Framework.Subscriptions.ISubscriptionMetadata" /> (Code first subscription)
     ///     в экземпляр типа <see cref="Subscription" />.
     /// </summary>
     /// <param name="metadata">Описание подписки.</param>

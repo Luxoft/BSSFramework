@@ -1,6 +1,6 @@
-﻿using Framework.ApplicationVariable;
+﻿using Framework.Application.ApplicationVariable;
+using Framework.BLL;
 using Framework.Configuration.Domain;
-using Framework.DomainDriven.BLL;
 
 namespace Framework.Configuration.BLL;
 

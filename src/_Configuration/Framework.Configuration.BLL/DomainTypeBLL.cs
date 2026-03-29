@@ -1,7 +1,6 @@
-﻿using Framework.Configuration.Domain;
+﻿using Framework.BLL.Domain.Exceptions;
+using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.Exceptions;
-using Framework.Validation;
 
 namespace Framework.Configuration.BLL;
 

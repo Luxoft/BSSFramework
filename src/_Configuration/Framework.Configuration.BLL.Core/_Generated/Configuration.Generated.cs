@@ -11,10 +11,10 @@ namespace Framework.Configuration.BLL
 {
     
     
-    public partial interface IConfigurationBLLContext : Framework.BLL.IAccessDeniedExceptionServiceContainer, Framework.BLL.Services.ISecurityServiceContainer<Framework.BLL.Services.IRootSecurityService>, Framework.BLL.IBLLFactoryContainerContext<Framework.Configuration.BLL.IConfigurationBLLFactoryContainer>
+    public partial interface IConfigurationBLLContext : Framework.BLL.IAccessDeniedExceptionServiceContainer, Framework.BLL.Services.ISecurityServiceContainer<Framework.BLL.Services.IRootSecurityService>, Framework.BLL.IBLLFactoryContainerContext<IConfigurationBLLFactoryContainer>
     {
         
-        new Framework.Configuration.BLL.IConfigurationBLLFactoryContainer Logics
+        new IConfigurationBLLFactoryContainer Logics
         {
             get;
         }
@@ -22,8 +22,8 @@ namespace Framework.Configuration.BLL
     
     public partial interface IConfigurationBLLFactoryContainer : Framework.BLL.IBLLFactoryContainer<Framework.BLL.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>>
     {
-        
-        Framework.Configuration.BLL.ICodeFirstSubscriptionBLL CodeFirstSubscription
+
+        ICodeFirstSubscriptionBLL CodeFirstSubscription
         {
             get;
         }
@@ -32,8 +32,8 @@ namespace Framework.Configuration.BLL
         {
             get;
         }
-        
-        Framework.Configuration.BLL.IDomainObjectEventBLL DomainObjectEvent
+
+        IDomainObjectEventBLL DomainObjectEvent
         {
             get;
         }
@@ -42,8 +42,8 @@ namespace Framework.Configuration.BLL
         {
             get;
         }
-        
-        Framework.Configuration.BLL.IDomainObjectModificationBLL DomainObjectModification
+
+        IDomainObjectModificationBLL DomainObjectModification
         {
             get;
         }
@@ -53,7 +53,7 @@ namespace Framework.Configuration.BLL
             get;
         }
         
-        Framework.Configuration.BLL.IDomainObjectNotificationBLL DomainObjectNotification
+        IDomainObjectNotificationBLL DomainObjectNotification
         {
             get;
         }
@@ -62,8 +62,8 @@ namespace Framework.Configuration.BLL
         {
             get;
         }
-        
-        Framework.Configuration.BLL.IDomainTypeBLL DomainType
+
+        IDomainTypeBLL DomainType
         {
             get;
         }
@@ -82,8 +82,8 @@ namespace Framework.Configuration.BLL
         {
             get;
         }
-        
-        Framework.Configuration.BLL.ISequenceBLL Sequence
+
+        ISequenceBLL Sequence
         {
             get;
         }
@@ -92,8 +92,8 @@ namespace Framework.Configuration.BLL
         {
             get;
         }
-        
-        Framework.Configuration.BLL.ISystemConstantBLL SystemConstant
+
+        ISystemConstantBLL SystemConstant
         {
             get;
         }
@@ -114,47 +114,47 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial interface ICodeFirstSubscriptionBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>
+    public partial interface ICodeFirstSubscriptionBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>
     {
     }
     
-    public partial interface ICodeFirstSubscriptionBLLFactory : Framework.BLL.ISecurityBLLFactory<Framework.Configuration.BLL.ICodeFirstSubscriptionBLL, Framework.Configuration.Domain.CodeFirstSubscription>
+    public partial interface ICodeFirstSubscriptionBLLFactory : Framework.BLL.ISecurityBLLFactory<ICodeFirstSubscriptionBLL, Framework.Configuration.Domain.CodeFirstSubscription>
     {
     }
     
-    public partial interface IDomainObjectEventBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>
+    public partial interface IDomainObjectEventBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>
     {
     }
     
-    public partial interface IDomainObjectEventBLLFactory : Framework.BLL.ISecurityBLLFactory<Framework.Configuration.BLL.IDomainObjectEventBLL, Framework.Configuration.Domain.DomainObjectEvent>
+    public partial interface IDomainObjectEventBLLFactory : Framework.BLL.ISecurityBLLFactory<IDomainObjectEventBLL, Framework.Configuration.Domain.DomainObjectEvent>
     {
     }
     
-    public partial interface IDomainObjectModificationBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectModification, System.Guid>
+    public partial interface IDomainObjectModificationBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectModification, System.Guid>
     {
     }
     
-    public partial interface IDomainObjectModificationBLLFactory : Framework.BLL.ISecurityBLLFactory<Framework.Configuration.BLL.IDomainObjectModificationBLL, Framework.Configuration.Domain.DomainObjectModification>
+    public partial interface IDomainObjectModificationBLLFactory : Framework.BLL.ISecurityBLLFactory<IDomainObjectModificationBLL, Framework.Configuration.Domain.DomainObjectModification>
     {
     }
     
-    public partial interface IDomainObjectNotificationBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectNotification, System.Guid>
+    public partial interface IDomainObjectNotificationBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectNotification, System.Guid>
     {
     }
     
-    public partial interface IDomainObjectNotificationBLLFactory : Framework.BLL.ISecurityBLLFactory<Framework.Configuration.BLL.IDomainObjectNotificationBLL, Framework.Configuration.Domain.DomainObjectNotification>
+    public partial interface IDomainObjectNotificationBLLFactory : Framework.BLL.ISecurityBLLFactory<IDomainObjectNotificationBLL, Framework.Configuration.Domain.DomainObjectNotification>
     {
     }
     
-    public partial interface IDomainTypeBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainType, System.Guid>
+    public partial interface IDomainTypeBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainType, System.Guid>
     {
     }
     
-    public partial interface IDomainTypeBLLFactory : Framework.BLL.ISecurityBLLFactory<Framework.Configuration.BLL.IDomainTypeBLL, Framework.Configuration.Domain.DomainType>
+    public partial interface IDomainTypeBLLFactory : Framework.BLL.ISecurityBLLFactory<IDomainTypeBLL, Framework.Configuration.Domain.DomainType>
     {
     }
     
-    public partial interface ISentMessageBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.SentMessage, System.Guid>
+    public partial interface ISentMessageBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.SentMessage, System.Guid>
     {
     }
     
@@ -162,25 +162,25 @@ namespace Framework.Configuration.BLL
     {
     }
     
-    public partial interface ISequenceBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.Sequence, System.Guid>
+    public partial interface ISequenceBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.Sequence, System.Guid>
     {
         
         Framework.Configuration.Domain.Sequence Create(Framework.Configuration.Domain.SequenceCreateModel createModel);
     }
     
-    public partial interface ISequenceBLLFactory : Framework.BLL.ISecurityBLLFactory<Framework.Configuration.BLL.ISequenceBLL, Framework.Configuration.Domain.Sequence>
+    public partial interface ISequenceBLLFactory : Framework.BLL.ISecurityBLLFactory<ISequenceBLL, Framework.Configuration.Domain.Sequence>
     {
     }
     
-    public partial interface ISystemConstantBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.SystemConstant, System.Guid>
+    public partial interface ISystemConstantBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.SystemConstant, System.Guid>
     {
     }
     
-    public partial interface ISystemConstantBLLFactory : Framework.BLL.ISecurityBLLFactory<Framework.Configuration.BLL.ISystemConstantBLL, Framework.Configuration.Domain.SystemConstant>
+    public partial interface ISystemConstantBLLFactory : Framework.BLL.ISecurityBLLFactory<ISystemConstantBLL, Framework.Configuration.Domain.SystemConstant>
     {
     }
     
-    public partial interface ITargetSystemBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.TargetSystem, System.Guid>
+    public partial interface ITargetSystemBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.TargetSystem, System.Guid>
     {
     }
     

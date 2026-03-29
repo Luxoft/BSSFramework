@@ -1,15 +1,16 @@
 ﻿using CommonFramework;
 
+using Framework.Application.Domain;
+using Framework.Application.Events;
+using Framework.BLL;
+using Framework.BLL.Services;
 using Framework.Configuration.BLL.SubscriptionSystemService3;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+using Framework.Configuration.BLL.TargetSystemService;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.TypeResolving;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
-using Framework.Events;
-using Framework.Persistent;
 
 namespace Framework.Configuration.BLL;
 

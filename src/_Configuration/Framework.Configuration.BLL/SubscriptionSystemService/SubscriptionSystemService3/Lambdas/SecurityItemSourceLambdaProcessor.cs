@@ -1,6 +1,6 @@
-﻿using Framework.Configuration.Core;
+﻿using Framework.Application.Domain;
 using Framework.Configuration.Domain;
-using Framework.Persistent;
+using Framework.Subscriptions.Domain;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 

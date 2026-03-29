@@ -1,10 +1,10 @@
-﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.Configuration.Core;
+﻿using Framework.Application.Domain;
+using Framework.BLL;
+using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Core;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.DAL.Revisions;
-using Framework.Persistent;
+using Framework.Database;
+using Framework.Database.Domain;
+using Framework.Subscriptions.Domain;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

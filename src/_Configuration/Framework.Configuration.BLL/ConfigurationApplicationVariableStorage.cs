@@ -1,8 +1,8 @@
 ﻿using CommonFramework;
 
-using Framework.ApplicationVariable;
+using Framework.Application.ApplicationVariable;
+using Framework.Application.Repository;
 using Framework.Configuration.Domain;
-using Framework.DomainDriven.Repository;
 
 using GenericQueryable;
 

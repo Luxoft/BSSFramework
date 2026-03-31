@@ -349,7 +349,7 @@ namespace SampleSystem.Generated.DTO
         void MapSimpleToStrictForTestImmutableObj(SampleSystem.Generated.DTO.TestImmutableObjStrictDTO target, SampleSystem.Generated.DTO.TestImmutableObjSimpleDTO currentSource);
     }
     
-    public abstract partial class SampleSystemClientPrimitiveDTOMappingServiceBase : Framework.Persistent.ClientDTOMappingServiceBase, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService
+    public abstract partial class SampleSystemClientPrimitiveDTOMappingServiceBase : Framework.BLL.DTOMapping.Services.ClientDTOMappingServiceBase, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService
     {
         
         public virtual void MapBaseAuditPersistentToStrictForAddress(SampleSystem.Generated.DTO.AddressStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO source)

@@ -6,13 +6,11 @@ using Framework.Authorization.TestGenerate.Configurations;
 using Framework.BLL.Domain.Serialization;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator;
-using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Audit;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.Extensions;
 using Framework.CodeGeneration.ProjectionGenerator;
 using Framework.CodeGeneration.ServiceModelGenerator.AutoRequest;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.WebApiGenerator;
 using Framework.Configuration.TestGenerate.Configurations;
 using Framework.Database;
@@ -22,8 +20,6 @@ using Framework.FileGeneration;
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.CodeGenerate.ServerDTO;
-
-using FileType = Framework.CodeGeneration.BLLGenerator.FileType;
 
 namespace SampleSystem.CodeGenerate;
 

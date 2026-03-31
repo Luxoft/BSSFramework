@@ -11,7 +11,7 @@ namespace SampleSystem.Generated.DTO
 {
     
     
-    public partial interface ISampleSystemDTOMappingService : Framework.DomainDriven.IDTOMappingService<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>
+    public partial interface ISampleSystemDTOMappingService : Framework.BLL.DTOMapping.Services.IDTOMappingService<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>
     {
         
         void MapAddress(SampleSystem.Domain.Address domainObject, SampleSystem.Generated.DTO.AddressSimpleDTO mappingObject);
@@ -1285,7 +1285,7 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 ToWorkingCalendar1676(SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676IdentityDTO);
     }
     
-    public abstract partial class SampleSystemServerPrimitiveDTOMappingServiceBase : Framework.DomainDriven.DTOMappingService<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.AuditPersistentDomainObjectBase, System.Guid, long>, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService
+    public abstract partial class SampleSystemServerPrimitiveDTOMappingServiceBase : Framework.BLL.DTOMapping.Services.DTOMappingService<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.AuditPersistentDomainObjectBase, System.Guid, long>, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService
     {
         
         protected SampleSystemServerPrimitiveDTOMappingServiceBase(SampleSystem.BLL.ISampleSystemBLLContext context) : 
@@ -1514,7 +1514,7 @@ namespace SampleSystem.Generated.DTO
             domainObject.AllowedForFilterRole = mappingObject.AllowedForFilterRole;
             if (!object.ReferenceEquals(mappingObject.BusinessUnitEmployeeRoles, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleStrictDTO, SampleSystem.Domain.BusinessUnitEmployeeRole>(detailDTO => this.ToBusinessUnitEmployeeRole(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.BusinessUnit, SampleSystem.Domain.BusinessUnitEmployeeRole>(domainObject, detail)).Map(mappingObject.BusinessUnitEmployeeRoles, domainObject.BusinessUnitEmployeeRoles);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleStrictDTO, SampleSystem.Domain.BusinessUnitEmployeeRole>(detailDTO => this.ToBusinessUnitEmployeeRole(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.BusinessUnit, SampleSystem.Domain.BusinessUnitEmployeeRole>(domainObject, detail)).Map(mappingObject.BusinessUnitEmployeeRoles, domainObject.BusinessUnitEmployeeRoles);
             }
             if (!object.Equals(mappingObject.BusinessUnitForRent, default(SampleSystem.Generated.DTO.BusinessUnitIdentityDTO)))
             {
@@ -1534,11 +1534,11 @@ namespace SampleSystem.Generated.DTO
             domainObject.LeastProjectStartDate = mappingObject.LeastProjectStartDate;
             if (!object.ReferenceEquals(mappingObject.ManagementUnits, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>(detailDTO => this.ToManagementUnitAndBusinessUnitLink(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.BusinessUnit, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>(domainObject, detail)).Map(mappingObject.ManagementUnits, domainObject.ManagementUnits);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>(detailDTO => this.ToManagementUnitAndBusinessUnitLink(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.BusinessUnit, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>(domainObject, detail)).Map(mappingObject.ManagementUnits, domainObject.ManagementUnits);
             }
             if (!object.ReferenceEquals(mappingObject.ManagerCommissions, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkStrictDTO, SampleSystem.Domain.BusinessUnitManagerCommissionLink>(detailDTO => this.ToBusinessUnitManagerCommissionLink(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.BusinessUnit, SampleSystem.Domain.BusinessUnitManagerCommissionLink>(domainObject, detail)).Map(mappingObject.ManagerCommissions, domainObject.ManagerCommissions);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkStrictDTO, SampleSystem.Domain.BusinessUnitManagerCommissionLink>(detailDTO => this.ToBusinessUnitManagerCommissionLink(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.BusinessUnit, SampleSystem.Domain.BusinessUnitManagerCommissionLink>(domainObject, detail)).Map(mappingObject.ManagerCommissions, domainObject.ManagerCommissions);
             }
             domainObject.Name = mappingObject.Name;
             domainObject.NewBusinessStatusLeft = mappingObject.NewBusinessStatusLeft;
@@ -2134,11 +2134,11 @@ namespace SampleSystem.Generated.DTO
             domainObject.NeedVertical = mappingObject.NeedVertical;
             if (!object.ReferenceEquals(mappingObject.PossibleFinancialProjectTypes, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeStrictDTO, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType>(detailDTO => this.ToBusinessUnitTypeLinkWithPossibleFinancialProjectType(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.BusinessUnitType, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType>(domainObject, detail)).Map(mappingObject.PossibleFinancialProjectTypes, domainObject.PossibleFinancialProjectTypes);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeStrictDTO, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType>(detailDTO => this.ToBusinessUnitTypeLinkWithPossibleFinancialProjectType(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.BusinessUnitType, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType>(domainObject, detail)).Map(mappingObject.PossibleFinancialProjectTypes, domainObject.PossibleFinancialProjectTypes);
             }
             if (!object.ReferenceEquals(mappingObject.PossibleParents, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentStrictDTO, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent>(detailDTO => this.ToBusinessUnitTypeLinkWithPossibleParent(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.BusinessUnitType, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent>(domainObject, detail)).Map(mappingObject.PossibleParents, domainObject.PossibleParents);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentStrictDTO, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent>(detailDTO => this.ToBusinessUnitTypeLinkWithPossibleParent(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.BusinessUnitType, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent>(domainObject, detail)).Map(mappingObject.PossibleParents, domainObject.PossibleParents);
             }
             domainObject.PossibleStartDate = mappingObject.PossibleStartDate;
             domainObject.PossibleTransferDate = mappingObject.PossibleTransferDate;
@@ -2148,7 +2148,7 @@ namespace SampleSystem.Generated.DTO
             domainObject.TransferBOConfirm = mappingObject.TransferBOConfirm;
             if (!object.ReferenceEquals(mappingObject.TransferTo, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToStrictDTO, SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo>(detailDTO => this.ToBusinessUnitTypeLinkWithTransferTo(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.BusinessUnitType, SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo>(domainObject, detail)).Map(mappingObject.TransferTo, domainObject.TransferTo);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToStrictDTO, SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo>(detailDTO => this.ToBusinessUnitTypeLinkWithTransferTo(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.BusinessUnitType, SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo>(domainObject, detail)).Map(mappingObject.TransferTo, domainObject.TransferTo);
             }
         }
         
@@ -2537,7 +2537,7 @@ namespace SampleSystem.Generated.DTO
             domainObject.Active = mappingObject.Active;
             if (!object.ReferenceEquals(mappingObject.Addresses, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.AddressStrictDTO, SampleSystem.Domain.Address>(detailDTO => this.ToAddress(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.LegalEntityBase, SampleSystem.Domain.Address>(domainObject, detail)).Map(mappingObject.Addresses, domainObject.Addresses);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.AddressStrictDTO, SampleSystem.Domain.Address>(detailDTO => this.ToAddress(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.LegalEntityBase, SampleSystem.Domain.Address>(domainObject, detail)).Map(mappingObject.Addresses, domainObject.Addresses);
             }
             if (!object.Equals(mappingObject.BaseObj, default(SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO)))
             {
@@ -2945,13 +2945,13 @@ namespace SampleSystem.Generated.DTO
             domainObject.CanBePPM = mappingObject.CanBePPM;
             if (!object.ReferenceEquals(mappingObject.CellPhones, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.EmployeeCellPhoneStrictDTO, SampleSystem.Domain.EmployeeCellPhone>(detailDTO => this.ToEmployeeCellPhone(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeCellPhone>(domainObject, detail)).Map(mappingObject.CellPhones, domainObject.CellPhones);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.EmployeeCellPhoneStrictDTO, SampleSystem.Domain.EmployeeCellPhone>(detailDTO => this.ToEmployeeCellPhone(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeCellPhone>(domainObject, detail)).Map(mappingObject.CellPhones, domainObject.CellPhones);
             }
             domainObject.EducationDuration = mappingObject.EducationDuration;
             domainObject.Email = mappingObject.Email;
             if (!object.ReferenceEquals(mappingObject.EmployeeToEmployeeLinks, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkStrictDTO, SampleSystem.Domain.EmployeeToEmployeeLink>(detailDTO => this.ToEmployeeToEmployeeLink(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeToEmployeeLink>(domainObject, detail)).Map(mappingObject.EmployeeToEmployeeLinks, domainObject.EmployeeToEmployeeLinks);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkStrictDTO, SampleSystem.Domain.EmployeeToEmployeeLink>(detailDTO => this.ToEmployeeToEmployeeLink(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeToEmployeeLink>(domainObject, detail)).Map(mappingObject.EmployeeToEmployeeLinks, domainObject.EmployeeToEmployeeLinks);
             }
             domainObject.ExternalId = mappingObject.ExternalId;
             domainObject.Gender = mappingObject.Gender;
@@ -2998,7 +2998,7 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(mappingObject.Specializations, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(detailDTO => this.ToEmployeeAndEmployeeSpecializationLink(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(domainObject, detail)).Map(mappingObject.Specializations, domainObject.Specializations);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(detailDTO => this.ToEmployeeAndEmployeeSpecializationLink(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(domainObject, detail)).Map(mappingObject.Specializations, domainObject.Specializations);
             }
             if (!object.Equals(mappingObject.VacationApprover, default(SampleSystem.Generated.DTO.EmployeeIdentityDTO)))
             {
@@ -3018,7 +3018,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    throw new Framework.Exceptions.BusinessLogicException("Access for write to field \"Login\" denied");
+                    throw new Framework.BLL.Domain.Exceptions.BusinessLogicException("Access for write to field \"Login\" denied");
                 }
             }
             if (mappingObject.PersonalCellPhones.HasValue)
@@ -3027,12 +3027,12 @@ namespace SampleSystem.Generated.DTO
                 {
                     if (!object.ReferenceEquals(mappingObject.PersonalCellPhones.Value, null))
                     {
-                        this.GetCollectionMappingService<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO, SampleSystem.Domain.EmployeePersonalCellPhone>(detailDTO => this.ToEmployeePersonalCellPhone(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeePersonalCellPhone>(domainObject, detail)).Map(mappingObject.PersonalCellPhones.Value, domainObject.PersonalCellPhones);
+                        this.GetCollectionMappingService<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO, SampleSystem.Domain.EmployeePersonalCellPhone>(detailDTO => this.ToEmployeePersonalCellPhone(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeePersonalCellPhone>(domainObject, detail)).Map(mappingObject.PersonalCellPhones.Value, domainObject.PersonalCellPhones);
                     }
                 }
                 else
                 {
-                    throw new Framework.Exceptions.BusinessLogicException("Access for write to field \"PersonalCellPhones\" denied");
+                    throw new Framework.BLL.Domain.Exceptions.BusinessLogicException("Access for write to field \"PersonalCellPhones\" denied");
                 }
             }
             if (mappingObject.Position.HasValue)
@@ -3050,7 +3050,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    throw new Framework.Exceptions.BusinessLogicException("Access for write to field \"Position\" denied");
+                    throw new Framework.BLL.Domain.Exceptions.BusinessLogicException("Access for write to field \"Position\" denied");
                 }
             }
         }
@@ -3060,19 +3060,19 @@ namespace SampleSystem.Generated.DTO
             domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
             if (!object.ReferenceEquals(mappingObject.CellPhones, null))
             {
-                this.GetUpdateCollectionMappingService<SampleSystem.Generated.DTO.EmployeeCellPhoneUpdateDTO, SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO, SampleSystem.Domain.EmployeeCellPhone>(detailDTO => this.ToEmployeeCellPhone(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeCellPhone>(domainObject, detail)).Map(mappingObject.CellPhones, domainObject.CellPhones);
+                this.GetUpdateCollectionMappingService<SampleSystem.Generated.DTO.EmployeeCellPhoneUpdateDTO, SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO, SampleSystem.Domain.EmployeeCellPhone>(detailDTO => this.ToEmployeeCellPhone(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeCellPhone>(domainObject, detail)).Map(mappingObject.CellPhones, domainObject.CellPhones);
             }
             if (!object.ReferenceEquals(mappingObject.EmployeeToEmployeeLinks, null))
             {
-                this.GetUpdateCollectionMappingService<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkUpdateDTO, SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO, SampleSystem.Domain.EmployeeToEmployeeLink>(detailDTO => this.ToEmployeeToEmployeeLink(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeToEmployeeLink>(domainObject, detail)).Map(mappingObject.EmployeeToEmployeeLinks, domainObject.EmployeeToEmployeeLinks);
+                this.GetUpdateCollectionMappingService<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkUpdateDTO, SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO, SampleSystem.Domain.EmployeeToEmployeeLink>(detailDTO => this.ToEmployeeToEmployeeLink(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeToEmployeeLink>(domainObject, detail)).Map(mappingObject.EmployeeToEmployeeLinks, domainObject.EmployeeToEmployeeLinks);
             }
             if (!object.ReferenceEquals(mappingObject.PersonalCellPhones, null))
             {
-                this.GetUpdateCollectionMappingService<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneUpdateDTO, SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO, SampleSystem.Domain.EmployeePersonalCellPhone>(detailDTO => this.ToEmployeePersonalCellPhone(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeePersonalCellPhone>(domainObject, detail)).Map(mappingObject.PersonalCellPhones, domainObject.PersonalCellPhones);
+                this.GetUpdateCollectionMappingService<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneUpdateDTO, SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO, SampleSystem.Domain.EmployeePersonalCellPhone>(detailDTO => this.ToEmployeePersonalCellPhone(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeePersonalCellPhone>(domainObject, detail)).Map(mappingObject.PersonalCellPhones, domainObject.PersonalCellPhones);
             }
             if (!object.ReferenceEquals(mappingObject.Specializations, null))
             {
-                this.GetUpdateCollectionMappingService<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkUpdateDTO, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(detailDTO => this.ToEmployeeAndEmployeeSpecializationLink(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(domainObject, detail)).Map(mappingObject.Specializations, domainObject.Specializations);
+                this.GetUpdateCollectionMappingService<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkUpdateDTO, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(detailDTO => this.ToEmployeeAndEmployeeSpecializationLink(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(domainObject, detail)).Map(mappingObject.Specializations, domainObject.Specializations);
             }
             if (mappingObject.Age.HasValue)
             {
@@ -3122,7 +3122,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    throw new Framework.Exceptions.BusinessLogicException("Access for write to field \"Login\" denied");
+                    throw new Framework.BLL.Domain.Exceptions.BusinessLogicException("Access for write to field \"Login\" denied");
                 }
             }
             if (mappingObject.NameEng.HasValue)
@@ -3164,7 +3164,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    throw new Framework.Exceptions.BusinessLogicException("Access for write to field \"Position\" denied");
+                    throw new Framework.BLL.Domain.Exceptions.BusinessLogicException("Access for write to field \"Position\" denied");
                 }
             }
             if (mappingObject.Ppm.HasValue)
@@ -3376,13 +3376,13 @@ namespace SampleSystem.Generated.DTO
             domainObject.CanBePPM = mappingObject.CanBePPM;
             if (!object.ReferenceEquals(mappingObject.CellPhones, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.EmployeeCellPhoneIntegrationRichDTO, SampleSystem.Domain.EmployeeCellPhone>(detailDTO => this.ToEmployeeCellPhone(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeCellPhone>(domainObject, detail)).Map(mappingObject.CellPhones, domainObject.CellPhones);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.EmployeeCellPhoneIntegrationRichDTO, SampleSystem.Domain.EmployeeCellPhone>(detailDTO => this.ToEmployeeCellPhone(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeCellPhone>(domainObject, detail)).Map(mappingObject.CellPhones, domainObject.CellPhones);
             }
             domainObject.EducationDuration = mappingObject.EducationDuration;
             domainObject.Email = mappingObject.Email;
             if (!object.ReferenceEquals(mappingObject.EmployeeToEmployeeLinks, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIntegrationRichDTO, SampleSystem.Domain.EmployeeToEmployeeLink>(detailDTO => this.ToEmployeeToEmployeeLink(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeToEmployeeLink>(domainObject, detail)).Map(mappingObject.EmployeeToEmployeeLinks, domainObject.EmployeeToEmployeeLinks);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIntegrationRichDTO, SampleSystem.Domain.EmployeeToEmployeeLink>(detailDTO => this.ToEmployeeToEmployeeLink(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeToEmployeeLink>(domainObject, detail)).Map(mappingObject.EmployeeToEmployeeLinks, domainObject.EmployeeToEmployeeLinks);
             }
             domainObject.ExternalId = mappingObject.ExternalId;
             domainObject.Gender = mappingObject.Gender;
@@ -3438,7 +3438,7 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(mappingObject.Specializations, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIntegrationRichDTO, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(detailDTO => this.ToEmployeeAndEmployeeSpecializationLink(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(domainObject, detail)).Map(mappingObject.Specializations, domainObject.Specializations);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIntegrationRichDTO, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(detailDTO => this.ToEmployeeAndEmployeeSpecializationLink(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Employee, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(domainObject, detail)).Map(mappingObject.Specializations, domainObject.Specializations);
             }
             if (!object.Equals(mappingObject.VacationApprover, default(SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO)))
             {
@@ -4765,7 +4765,7 @@ namespace SampleSystem.Generated.DTO
             domainObject.Field2 = mappingObject.Field2;
             if (!object.ReferenceEquals(mappingObject.Items2, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.Example2StrictDTO, SampleSystem.Domain.Example2>(detailDTO => this.ToExample2(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Example1, SampleSystem.Domain.Example2>(domainObject, detail)).Map(mappingObject.Items2, domainObject.Items2);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.Example2StrictDTO, SampleSystem.Domain.Example2>(detailDTO => this.ToExample2(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Example1, SampleSystem.Domain.Example2>(domainObject, detail)).Map(mappingObject.Items2, domainObject.Items2);
             }
             if (mappingObject.Field3.HasValue)
             {
@@ -4775,7 +4775,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    throw new Framework.Exceptions.BusinessLogicException("Access for write to field \"Field3\" denied");
+                    throw new Framework.BLL.Domain.Exceptions.BusinessLogicException("Access for write to field \"Field3\" denied");
                 }
             }
         }
@@ -4785,7 +4785,7 @@ namespace SampleSystem.Generated.DTO
             domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
             if (!object.ReferenceEquals(mappingObject.Items2, null))
             {
-                this.GetUpdateCollectionMappingService<SampleSystem.Generated.DTO.Example2UpdateDTO, SampleSystem.Generated.DTO.Example2IdentityDTO, SampleSystem.Domain.Example2>(detailDTO => this.ToExample2(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Example1, SampleSystem.Domain.Example2>(domainObject, detail)).Map(mappingObject.Items2, domainObject.Items2);
+                this.GetUpdateCollectionMappingService<SampleSystem.Generated.DTO.Example2UpdateDTO, SampleSystem.Generated.DTO.Example2IdentityDTO, SampleSystem.Domain.Example2>(detailDTO => this.ToExample2(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.Example1, SampleSystem.Domain.Example2>(domainObject, detail)).Map(mappingObject.Items2, domainObject.Items2);
             }
             if (mappingObject.Field1.HasValue)
             {
@@ -4803,7 +4803,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    throw new Framework.Exceptions.BusinessLogicException("Access for write to field \"Field3\" denied");
+                    throw new Framework.BLL.Domain.Exceptions.BusinessLogicException("Access for write to field \"Field3\" denied");
                 }
             }
         }
@@ -5035,13 +5035,13 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(mappingObject.BusinessUnitHrDepartments, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentStrictDTO, SampleSystem.Domain.BusinessUnitHrDepartment>(detailDTO => this.ToBusinessUnitHrDepartment(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.HRDepartment, SampleSystem.Domain.BusinessUnitHrDepartment>(domainObject, detail)).Map(mappingObject.BusinessUnitHrDepartments, domainObject.BusinessUnitHrDepartments);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentStrictDTO, SampleSystem.Domain.BusinessUnitHrDepartment>(detailDTO => this.ToBusinessUnitHrDepartment(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.HRDepartment, SampleSystem.Domain.BusinessUnitHrDepartment>(domainObject, detail)).Map(mappingObject.BusinessUnitHrDepartments, domainObject.BusinessUnitHrDepartments);
             }
             domainObject.Code = mappingObject.Code;
             domainObject.CodeNative = mappingObject.CodeNative;
             if (!object.ReferenceEquals(mappingObject.EmployeePositions, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.HRDepartmentEmployeePositionStrictDTO, SampleSystem.Domain.HRDepartmentEmployeePosition>(detailDTO => this.ToHRDepartmentEmployeePosition(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.HRDepartment, SampleSystem.Domain.HRDepartmentEmployeePosition>(domainObject, detail)).Map(mappingObject.EmployeePositions, domainObject.EmployeePositions);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.HRDepartmentEmployeePositionStrictDTO, SampleSystem.Domain.HRDepartmentEmployeePosition>(detailDTO => this.ToHRDepartmentEmployeePosition(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.HRDepartment, SampleSystem.Domain.HRDepartmentEmployeePosition>(domainObject, detail)).Map(mappingObject.EmployeePositions, domainObject.EmployeePositions);
             }
             domainObject.ExternalId = mappingObject.ExternalId;
             if (!object.Equals(mappingObject.Head, default(SampleSystem.Generated.DTO.EmployeeIdentityDTO)))
@@ -5054,13 +5054,13 @@ namespace SampleSystem.Generated.DTO
             }
             if (!object.ReferenceEquals(mappingObject.HrDepartmentRoleEmployees, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeStrictDTO, SampleSystem.Domain.HRDepartmentRoleEmployee>(detailDTO => this.ToHRDepartmentRoleEmployee(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.HRDepartment, SampleSystem.Domain.HRDepartmentRoleEmployee>(domainObject, detail)).Map(mappingObject.HrDepartmentRoleEmployees, domainObject.HrDepartmentRoleEmployees);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeStrictDTO, SampleSystem.Domain.HRDepartmentRoleEmployee>(detailDTO => this.ToHRDepartmentRoleEmployee(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.HRDepartment, SampleSystem.Domain.HRDepartmentRoleEmployee>(domainObject, detail)).Map(mappingObject.HrDepartmentRoleEmployees, domainObject.HrDepartmentRoleEmployees);
             }
             domainObject.IsLegal = mappingObject.IsLegal;
             domainObject.IsProduction = mappingObject.IsProduction;
             if (!object.ReferenceEquals(mappingObject.ManagementUnits, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(detailDTO => this.ToManagementUnitAndHRDepartmentLink(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.HRDepartment, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(domainObject, detail)).Map(mappingObject.ManagementUnits, domainObject.ManagementUnits);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(detailDTO => this.ToManagementUnitAndHRDepartmentLink(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.HRDepartment, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(domainObject, detail)).Map(mappingObject.ManagementUnits, domainObject.ManagementUnits);
             }
             domainObject.Name = mappingObject.Name;
             domainObject.NameNative = mappingObject.NameNative;
@@ -5087,7 +5087,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    throw new Framework.Exceptions.BusinessLogicException("Access for write to field \"CompanyLegalEntity\" denied");
+                    throw new Framework.BLL.Domain.Exceptions.BusinessLogicException("Access for write to field \"CompanyLegalEntity\" denied");
                 }
             }
         }
@@ -6012,12 +6012,12 @@ namespace SampleSystem.Generated.DTO
             domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
             if (!object.ReferenceEquals(mappingObject.BusinessUnits, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>(detailDTO => this.ToManagementUnitAndBusinessUnitLink(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.ManagementUnit, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>(domainObject, detail)).Map(mappingObject.BusinessUnits, domainObject.BusinessUnits);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>(detailDTO => this.ToManagementUnitAndBusinessUnitLink(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.ManagementUnit, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>(domainObject, detail)).Map(mappingObject.BusinessUnits, domainObject.BusinessUnits);
             }
             domainObject.BusinessUnitStatus = mappingObject.BusinessUnitStatus;
             if (!object.ReferenceEquals(mappingObject.HRDepartments, null))
             {
-                this.GetCollectionMappingService<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(detailDTO => this.ToManagementUnitAndHRDepartmentLink(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.ManagementUnit, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(domainObject, detail)).Map(mappingObject.HRDepartments, domainObject.HRDepartments);
+                this.GetCollectionMappingService<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(detailDTO => this.ToManagementUnitAndHRDepartmentLink(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.ManagementUnit, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(domainObject, detail)).Map(mappingObject.HRDepartments, domainObject.HRDepartments);
             }
             domainObject.IsProduction = mappingObject.IsProduction;
             domainObject.Name = mappingObject.Name;
@@ -7675,7 +7675,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         protected virtual void MapToDomainObject<TMappingObject, TDomainObject>(TMappingObject mappingObject, TDomainObject domainObject)
-            where TMappingObject : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, TDomainObject>
+            where TMappingObject : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, TDomainObject>
             where TDomainObject : SampleSystem.Domain.DomainObjectBase
         {
             mappingObject.MapToDomainObject(this, domainObject);
@@ -8076,16 +8076,16 @@ namespace SampleSystem.Generated.DTO
         }
         
         protected virtual TDomainObject ToDomainObject<TMappingObject, TDomainObject>(TMappingObject mappingObject)
-            where TMappingObject : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, TDomainObject, System.Guid>
+            where TMappingObject : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, TDomainObject, System.Guid>
             where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
         {
-            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.DomainDriven.IdCheckMode.CheckAll);
+            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.BLL.IdCheckMode.CheckAll);
             this.MapToDomainObject(mappingObject, domainObject);
             return domainObject;
         }
         
         protected virtual TDomainObject ToDomainObject<TMappingObject, TDomainObject>(TMappingObject mappingObject, System.Func<TDomainObject> createFunc)
-            where TMappingObject : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, TDomainObject, System.Guid>
+            where TMappingObject : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, TDomainObject, System.Guid>
             where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
         {
             TDomainObject domainObject = this.GetByIdOrCreate<TDomainObject>(mappingObject.Id, createFunc);
@@ -8094,7 +8094,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         protected virtual TDomainObject ToDomainObjectBase<TMappingObject, TDomainObject>(TMappingObject mappingObject)
-            where TMappingObject : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, TDomainObject>
+            where TMappingObject : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, TDomainObject>
             where TDomainObject : SampleSystem.Domain.DomainObjectBase, new ()
         {
             TDomainObject domainObject = new TDomainObject();
@@ -8575,7 +8575,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 ToIntegrationVersionContainer1(SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationSimpleDTO integrationVersionContainer1SimpleIntegrationDTO)
         {
-            return this.GetById<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(integrationVersionContainer1SimpleIntegrationDTO.Id, Framework.DomainDriven.IdCheckMode.SkipEmpty, Framework.DomainDriven.Lock.LockRole.Update);
+            return this.GetById<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(integrationVersionContainer1SimpleIntegrationDTO.Id, Framework.BLL.IdCheckMode.SkipEmpty, Framework.Database.LockRole.Update);
         }
         
         public virtual SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel ToIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO integrationVersionContainer1CustomIntegrationSaveModelRichIntegrationDTO)

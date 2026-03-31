@@ -11,7 +11,7 @@ namespace SampleSystem.Domain.Projections
 {
     
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="BusinessUnit")]
+    [Framework.Database.Mapping.TableAttribute(Name="BusinessUnit")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.SecurityNode)]
     public partial class SecurityBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase, SecuritySystem.ISecurityContext, SampleSystem.Domain.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>
     {
@@ -20,7 +20,7 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.Persistent.ExpandPathAttribute("")]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("")]
         SampleSystem.Domain.Projections.SecurityBusinessUnit SampleSystem.Domain.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>.BusinessUnit
         {
             get
@@ -30,7 +30,7 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="Employee")]
+    [Framework.Database.Mapping.TableAttribute(Name="Employee")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee), Framework.Projection.ProjectionRole.SecurityNode)]
     public partial class SecurityEmployee : SampleSystem.Domain.PersistentDomainObjectBase, SecuritySystem.ISecurityContext, SampleSystem.Domain.IEmployeeSecurity<SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation>, SampleSystem.Domain.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>, SampleSystem.Domain.IDepartmentSecurityElement<SampleSystem.Domain.Projections.SecurityHRDepartment>, SampleSystem.Domain.IEmployeeSecurityElement<SampleSystem.Domain.Projections.SecurityEmployee, SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation>, SampleSystem.Domain.IEmployeeSecurityElement<SampleSystem.Domain.Projections.SecurityEmployee>
     {
@@ -45,7 +45,7 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.Persistent.ExpandPathAttribute("BusinessUnit_Security")]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("BusinessUnit_Security")]
         SampleSystem.Domain.Projections.SecurityBusinessUnit SampleSystem.Domain.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>.BusinessUnit
         {
             get
@@ -54,10 +54,10 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Security)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="coreBusinessUnitId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="coreBusinessUnitId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.SecurityBusinessUnit BusinessUnit_Security
         {
             get
@@ -66,7 +66,7 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.Persistent.ExpandPathAttribute("Department_Security")]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Department_Security")]
         SampleSystem.Domain.Projections.SecurityHRDepartment SampleSystem.Domain.IDepartmentSecurityElement<SampleSystem.Domain.Projections.SecurityHRDepartment>.Department
         {
             get
@@ -75,10 +75,10 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Security)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="hRDepartmentId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="hRDepartmentId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.SecurityHRDepartment Department_Security
         {
             get
@@ -87,7 +87,7 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.Persistent.ExpandPathAttribute("")]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("")]
         SampleSystem.Domain.Projections.SecurityEmployee SampleSystem.Domain.IEmployeeSecurityElement<SampleSystem.Domain.Projections.SecurityEmployee>.Employee
         {
             get
@@ -96,7 +96,7 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.Persistent.ExpandPathAttribute("Login_Security")]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Login_Security")]
         string SampleSystem.Domain.IEmployeeSecurity<SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation>.Login
         {
             get
@@ -105,11 +105,11 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.Security.ViewDomainObjectAttribute(typeof(SecuritySystem.SecurityRule), "View")]
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Attributes.ViewDomainObjectAttribute(typeof(SecuritySystem.SecurityRule), "View")]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Security)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="login")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="login")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Login_Security
         {
             get
@@ -119,7 +119,7 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="HRDepartment")]
+    [Framework.Database.Mapping.TableAttribute(Name="HRDepartment")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.HRDepartment), Framework.Projection.ProjectionRole.SecurityNode)]
     public partial class SecurityHRDepartment : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ILocationSecurityElement<SampleSystem.Domain.Projections.SecurityLocation>
     {
@@ -130,7 +130,7 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.Persistent.ExpandPathAttribute("Location_Security")]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Location_Security")]
         SampleSystem.Domain.Projections.SecurityLocation SampleSystem.Domain.ILocationSecurityElement<SampleSystem.Domain.Projections.SecurityLocation>.Location
         {
             get
@@ -139,10 +139,10 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Security)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="locationId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="locationId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.SecurityLocation Location_Security
         {
             get
@@ -152,7 +152,7 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="Location")]
+    [Framework.Database.Mapping.TableAttribute(Name="Location")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Location), Framework.Projection.ProjectionRole.SecurityNode)]
     public partial class SecurityLocation : SampleSystem.Domain.PersistentDomainObjectBase, SecuritySystem.ISecurityContext
     {
@@ -162,9 +162,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.DomainDriven.BLL.BLLProjectionViewRoleAttribute()]
-    [Framework.Persistent.Mapping.InlineBaseTypeMappingAttribute()]
-    [Framework.Persistent.Mapping.TableAttribute(Name="Employee")]
+    [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
+    [Framework.Database.Mapping.InlineBaseTypeMappingAttribute()]
+    [Framework.Database.Mapping.TableAttribute(Name="Employee")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee), Framework.Projection.ProjectionRole.Default)]
     [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.EmployeeFilterModel), Framework.Projection.ProjectionFilterTargets.Collection)]
     public partial class TestLegacyEmployee : SampleSystem.Domain.Projections.SecurityEmployee
@@ -178,10 +178,10 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.Security.ViewDomainObjectAttribute(typeof(SecuritySystem.SecurityRule), "View")]
+        [Framework.BLL.Domain.Attributes.ViewDomainObjectAttribute(typeof(SecuritySystem.SecurityRule), "View")]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="login")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="login")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Login
         {
             get
@@ -190,10 +190,10 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="roleId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="roleId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.TestLegacyEmployee_AutoProp_Role Role_Auto
         {
             get
@@ -203,8 +203,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.ExpandPathAttribute("Role_Auto.Id")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Role_Auto.Id")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual System.Guid? RoleId
         {
             get
@@ -214,8 +214,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.ExpandPathAttribute("Role_Auto.Name_Last_RoleName")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Role_Auto.Name_Last_RoleName")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string RoleName
         {
             get
@@ -225,7 +225,7 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="EmployeeRole")]
+    [Framework.Database.Mapping.TableAttribute(Name="EmployeeRole")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.EmployeeRole), Framework.Projection.ProjectionRole.AutoNode)]
     public partial class TestLegacyEmployee_AutoProp_Role : SampleSystem.Domain.PersistentDomainObjectBase
     {
@@ -236,10 +236,10 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.LastAutoNode)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="name")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="name")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Name_Last_RoleName
         {
             get

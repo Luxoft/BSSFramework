@@ -7,14 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
-
 namespace SampleSystem.Generated.DTO
 {
     
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    public class SampleSystemDomainObjectPropertiesRevisionDTO : Framework.DomainDriven.ServiceModel.Subscriptions.DomainObjectPropertiesRevisionDTO<System.Guid, SampleSystemPropertyRevisionDTO>
+    public class SampleSystemDomainObjectPropertiesRevisionDTO : Framework.BLL.DTOMapping.Domain.DomainObjectPropertiesRevisionDTO<System.Guid, SampleSystemPropertyRevisionDTO>
     {
     }
     
@@ -24,7 +22,7 @@ namespace SampleSystem.Generated.DTO
         
         private TValue value;
         
-        public SampleSystemPropertyRevisionDTO(Framework.DomainDriven.DAL.Revisions.RevisionInfoBase info) : 
+        public SampleSystemPropertyRevisionDTO(Framework.Database.Domain.RevisionInfoBase info) : 
                 base(info)
         {
         }
@@ -91,8 +89,8 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<System.Nullable<System.DateTime>>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<System.Nullable<SampleSystem.Domain.PossibleStartDate>>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<System.Nullable<int>>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<System.Nullable<Period>>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Period>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<System.Nullable<Framework.Core.Period>>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Period>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<SampleSystem.Domain.ProjectStatus>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<SampleSystem.Domain.RevenueDocumentAribaStatus>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<SampleSystem.Generated.DTO.SqlParserTestObjSimpleDTO>))]
@@ -101,10 +99,10 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO>))]
-    public class SampleSystemPropertyRevisionDTO : Framework.DomainDriven.ServiceModel.Subscriptions.PropertyRevisionDTOBase
+    public class SampleSystemPropertyRevisionDTO : Framework.BLL.DTOMapping.Domain.PropertyRevisionDTOBase
     {
         
-        public SampleSystemPropertyRevisionDTO(Framework.DomainDriven.DAL.Revisions.RevisionInfoBase info) : 
+        public SampleSystemPropertyRevisionDTO(Framework.Database.Domain.RevisionInfoBase info) : 
                 base(info)
         {
         }

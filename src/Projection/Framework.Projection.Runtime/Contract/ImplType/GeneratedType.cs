@@ -36,12 +36,10 @@ internal class GeneratedType : BaseTypeImpl
 
     public GeneratedType(ProjectionContractEnvironment environment, Type contractType, GenerateState generateState)
     {
-        if (contractType == null) throw new ArgumentNullException(nameof(contractType));
-
-        generateState.Add(contractType, this);
-
         this.environment = environment;
         this.ContractType = contractType;
+
+        generateState.Add(contractType, this);
 
         this.Name = contractType.Name.Skip("I", true);
 

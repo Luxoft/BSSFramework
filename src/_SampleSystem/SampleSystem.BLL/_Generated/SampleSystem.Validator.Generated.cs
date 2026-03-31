@@ -20,7 +20,7 @@ namespace SampleSystem.BLL
         }
     }
     
-    public abstract partial class SampleSystemValidatorBase : Framework.DomainDriven.BLL.BLLContextHandlerValidator<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.SampleSystemOperationContext>
+    public abstract partial class SampleSystemValidatorBase : Framework.BLL.Validation.BLLContextHandlerValidator<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.SampleSystemOperationContext>
     {
         
         public SampleSystemValidatorBase(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 

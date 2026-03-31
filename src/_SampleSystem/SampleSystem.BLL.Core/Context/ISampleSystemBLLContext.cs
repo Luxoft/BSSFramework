@@ -1,16 +1,15 @@
 ﻿using Framework.Authorization.BLL;
-using Framework.Core;
+using Framework.BLL;
+using Framework.Configuration.BLL;
 using Framework.Core.TypeResolving;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
 using Framework.Tracking;
 
 using GenericQueryable.Fetching;
+
 using SampleSystem.Domain;
+
 using SecuritySystem.SecurityAccessor;
 using SecuritySystem.UserSource;
-
-using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
 namespace SampleSystem.BLL;
 
@@ -20,9 +19,7 @@ public partial interface ISampleSystemBLLContext :
 
     ITrackingServiceContainer<PersistentDomainObjectBase>,
 
-    ITypeResolverContainer<string>,
-
-    IDefaultHierarchicalBLLContext<PersistentDomainObjectBase, Guid>
+    ITypeResolverContainer<string>
 {
     IFetchRuleExpander FetchRuleExpander { get; }
 

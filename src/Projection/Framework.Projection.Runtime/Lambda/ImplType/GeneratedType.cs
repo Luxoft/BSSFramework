@@ -38,12 +38,10 @@ internal class GeneratedType : BaseTypeImpl
 
     public GeneratedType(ProjectionLambdaEnvironment environment, IProjection projection, GenerateState generateState)
     {
-        if (projection == null) throw new ArgumentNullException(nameof(projection));
-
-        generateState.Add(projection, this);
-
         this.environment = environment;
         this.Projection = projection;
+
+        generateState.Add(projection, this);
 
         this.Name = projection.Name;
 

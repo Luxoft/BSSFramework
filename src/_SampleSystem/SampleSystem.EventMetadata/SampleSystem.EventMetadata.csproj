@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\Framework.Application.Runtime\Framework.Application.Runtime.csproj" />
+    <ProjectReference Include="..\SampleSystem.Domain\SampleSystem.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

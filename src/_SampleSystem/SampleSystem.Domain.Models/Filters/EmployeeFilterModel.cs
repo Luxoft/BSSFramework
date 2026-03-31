@@ -1,4 +1,4 @@
-﻿using Framework.Security;
+﻿using Framework.BLL.Domain.Attributes;
 
 namespace SampleSystem.Domain.Models.Filters;
 

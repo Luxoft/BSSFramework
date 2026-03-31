@@ -29,7 +29,7 @@ public class CurrentUserSourceTests : TestBase
             randomName,
             ctx =>
             {
-                var serv = ctx.ServiceProvider.GetRequiredService<IRawUserAuthenticationService>();
+                var serv = ctx.ServiceProvider.GetRequiredService<ICurrentUser>();
 
                 var cc = serv.GetUserName();
 

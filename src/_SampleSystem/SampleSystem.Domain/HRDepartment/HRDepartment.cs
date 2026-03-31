@@ -1,16 +1,11 @@
 ﻿using CommonFramework;
+using CommonFramework.Auth;
 
 using Framework.BLL.Domain.Fetching;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Serialization;
-using Framework.Persistent;
 using Framework.Relations;
 using Framework.Restriction;
-
-using SecuritySystem.Services;
 
 namespace SampleSystem.Domain;
 
@@ -188,9 +183,10 @@ public partial class HRDepartment :
         get { return this.Parent; }
     }
 
-    public virtual IEnumerable<HRDepartmentEmployeeRoleType> GetCurrentUserRoles(IRawUserAuthenticationService userAuthenticationService)
+    public virtual IEnumerable<HRDepartmentEmployeeRoleType> GetCurrentUserRoles(ICurrentUser currentUser)
     {
-        var currentUserName = userAuthenticationService.GetUserName().ToLower();
+        var currentUserName = currentUser.Name.ToLower();
+
         return this.hrDepartmentRoleEmployees
                    .Where(r =>
                                   string.Equals(r.Employee.Login.Maybe(z => z.ToLower()), currentUserName)
@@ -207,9 +203,9 @@ public partial class HRDepartment :
                     .Select(z => z.Employee);
     }
 
-    public virtual bool CurrentUserHasInspectorRoles(IRawUserAuthenticationService userAuthenticationService)
+    public virtual bool CurrentUserHasInspectorRoles(ICurrentUser currentUser)
     {
-        var inspectorRoleType = this.GetCurrentUserRoles(userAuthenticationService).FirstOrDefault(z => z == HRDepartmentEmployeeRoleType.Inspector);
+        var inspectorRoleType = this.GetCurrentUserRoles(currentUser).FirstOrDefault(z => z == HRDepartmentEmployeeRoleType.Inspector);
         return HRDepartmentEmployeeRoleType.None != inspectorRoleType;
     }
 }

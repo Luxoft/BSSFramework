@@ -1,5 +1,5 @@
 ﻿using Framework.Core;
-using Framework.Persistent.Mapping;
+using Framework.Database.Mapping;
 
 namespace SampleSystem.Domain;
 

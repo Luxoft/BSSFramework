@@ -1,7 +1,6 @@
 ﻿using Framework.Application.Domain;
 using Framework.Core;
-using Framework.Persistent;
-using Framework.Projection.Contract;
+using Framework.Projection;
 
 namespace SampleSystem.Domain;
 

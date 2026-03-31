@@ -95,6 +95,7 @@
     <Project Path="_SampleSystem/SampleSystem.Domain.ManualProjections/SampleSystem.Domain.ManualProjections.csproj" />
     <Project Path="_SampleSystem/SampleSystem.Domain.Models/SampleSystem.Domain.Models.csproj" />
     <Project Path="_SampleSystem/SampleSystem.Domain/SampleSystem.Domain.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.EventMetadata/SampleSystem.EventMetadata.csproj" />
     <Project Path="_SampleSystem/SampleSystem.Events/SampleSystem.Events.csproj" />
     <Project Path="_SampleSystem/SampleSystem.Security.Abstract/SampleSystem.Security.Abstract.csproj" />
     <Project Path="_SampleSystem/SampleSystem.Security/SampleSystem.Security.csproj" />

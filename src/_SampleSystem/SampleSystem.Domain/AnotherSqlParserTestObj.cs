@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-using Framework.Persistent.Mapping;
+﻿using Framework.Database.Mapping;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;

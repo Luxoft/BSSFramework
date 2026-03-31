@@ -1,9 +1,6 @@
 ﻿using Framework.BLL.Domain.Persistent.IdentityObject;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Serialization;
-using Framework.Persistent;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;

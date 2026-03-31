@@ -1,6 +1,6 @@
-﻿using Framework.Events;
+﻿using Framework.Application.Events;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.EventMetadata;
 
 public static class SampleSystemEventOperation
 {

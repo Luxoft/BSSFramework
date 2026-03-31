@@ -1,7 +1,5 @@
 ﻿using Framework.Application.Domain;
 using Framework.BLL.Domain.Serialization;
-using Framework.Persistent;
-using Framework.DomainDriven.Serialization;
 using Framework.Core;
 
 namespace SampleSystem.Domain;

@@ -1,6 +1,8 @@
-﻿using Framework.Events;
+﻿using Framework.Application.Events;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain;
+
+namespace SampleSystem.EventMetadata;
 
 public class SampleSystemDomainObjectEventMetadata : DomainObjectEventMetadata
 {

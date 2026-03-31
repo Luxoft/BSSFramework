@@ -16,7 +16,7 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 [ApiController]
 public class EmployeeAsyncController(
     IRepositoryFactory<Employee> employeeRepositoryFactory,
-    IRawUserAuthenticationService userAuthenticationService,
+    ICurrentUser currentUser,
     ISampleSystemDTOMappingService mappingService)
     : ControllerBase
 {
@@ -24,7 +24,7 @@ public class EmployeeAsyncController(
     [HttpPost]
     public async Task<EmployeeSimpleDTO> GetCurrentEmployee(CancellationToken cancellationToken)
     {
-        var userName = userAuthenticationService.GetUserName();
+        var userName = currentUser.GetUserName();
 
         var repository = employeeRepositoryFactory.Create();
 

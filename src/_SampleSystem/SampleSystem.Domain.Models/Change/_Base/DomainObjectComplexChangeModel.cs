@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven;
+﻿using Framework.BLL.Domain.DirectMode;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;

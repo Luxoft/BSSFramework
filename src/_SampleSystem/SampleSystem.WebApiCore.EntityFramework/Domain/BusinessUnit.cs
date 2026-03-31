@@ -2,7 +2,7 @@
 
 namespace SampleSystem.Domain;
 
-[System.ComponentModel.DataAnnotations.Schema.Table(nameof(BusinessUnit), Schema = "app")]
+[Table(nameof(BusinessUnit), Schema = "app")]
 public class BusinessUnit : ISecurityContext
 {
     public Guid Id { get; set; }

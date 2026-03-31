@@ -6,16 +6,12 @@ using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.Core;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Serialization;
-using Framework.Notification;
-using Framework.Persistent;
-using Framework.Persistent.Mapping;
+using Framework.Database.Mapping;
+using Framework.Notification.Domain;
 using Framework.Relations;
 using Framework.Restriction;
 using SecuritySystem;
-using Framework.Transfering;
+
 using Framework.Validation;
 
 using SampleSystem.Domain.Enums;

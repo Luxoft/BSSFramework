@@ -1,9 +1,6 @@
 ﻿using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Serialization;
-using Framework.Persistent;
 
 namespace SampleSystem.Domain.IntegrationVersions;
 

@@ -1,5 +1,4 @@
-﻿using Framework.Persistent;
-using Framework.Relations;
+﻿using Framework.Relations;
 
 namespace SampleSystem.Domain;
 

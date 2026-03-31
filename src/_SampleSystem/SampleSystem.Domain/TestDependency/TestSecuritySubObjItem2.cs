@@ -1,7 +1,5 @@
 ﻿using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.BLL.Domain.ServiceRole;
-using Framework.DomainDriven.BLL;
-using Framework.Persistent;
 using Framework.Relations;
 
 namespace SampleSystem.Domain;

@@ -1,8 +1,6 @@
 ﻿using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.ServiceRole;
-using Framework.DomainDriven.BLL;
 using Framework.Restriction;
-using Framework.Transfering;
 
 namespace SampleSystem.Domain;
 

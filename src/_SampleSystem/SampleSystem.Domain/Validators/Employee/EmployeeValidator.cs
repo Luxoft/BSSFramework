@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-using Framework.Validation;
+﻿using Framework.Validation;
 
 namespace SampleSystem.Domain.Validators.Employee;
 

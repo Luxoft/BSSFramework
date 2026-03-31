@@ -1,10 +1,11 @@
 ﻿using System.CodeDom;
 
+using CommonFramework;
+
 using Framework.BLL.Domain.DTO;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.FileStore;
-using Framework.Core;
 using Framework.Database;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.FileStore;

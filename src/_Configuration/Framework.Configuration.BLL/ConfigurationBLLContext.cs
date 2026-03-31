@@ -51,7 +51,7 @@ public partial class ConfigurationBLLContext
         [FromKeyedServices("BLL")] IEventOperationSender operationSender,
         ITrackingService<PersistentDomainObjectBase> trackingService,
         IAccessDeniedExceptionService accessDeniedExceptionService,
-        IStandardExpressionBuilder standardExpressionBuilder,
+        ISelectOperationParser selectOperationParser,
         IConfigurationValidator validator,
         IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
         IMessageSender<MessageTemplateNotification> subscriptionSender,
@@ -66,7 +66,7 @@ public partial class ConfigurationBLLContext
         ICurrentRevisionService currentRevisionService,
         ConfigurationBLLContextSettings settings,
         INotificationPrincipalExtractor<Principal> notificationPrincipalExtractor)
-        : base(serviceProvider, operationSender, accessDeniedExceptionService, standardExpressionBuilder, hierarchicalObjectExpanderFactory)
+        : base(serviceProvider, operationSender, accessDeniedExceptionService, selectOperationParser, hierarchicalObjectExpanderFactory)
     {
         this.TrackingService = trackingService;
         this.SubscriptionSender = subscriptionSender ?? throw new ArgumentNullException(nameof(subscriptionSender));

@@ -128,24 +128,6 @@ public static class CoreExpressionExtensions
                    .GetValue(() => new ArgumentException("not member expression", nameof(expr)));
     }
 
-    public static Expression ExtractBoxingValue(this Expression expression)
-    {
-        if (expression == null) throw new ArgumentNullException(nameof(expression));
-
-        return expression.GetConvertOperand().GetValueOrDefault(expression);
-    }
-
-    public static Maybe<Expression> GetConvertOperand(this Expression expression)
-    {
-        if (expression == null) throw new ArgumentNullException(nameof(expression));
-
-        return from unaryExpression in (expression as UnaryExpression).ToMaybe()
-
-               where expression.NodeType == ExpressionType.Convert
-
-               select unaryExpression.Operand;
-    }
-
     public static string ToPath(this Expression source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));

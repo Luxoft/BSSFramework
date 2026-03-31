@@ -1,7 +1,8 @@
 ﻿using System.Reflection;
 
+using CommonFramework;
+
 using Framework.BLL.Domain.Extensions;
-using Framework.Core;
 
 namespace Framework.BLL.Domain.Serialization.Extensions;
 

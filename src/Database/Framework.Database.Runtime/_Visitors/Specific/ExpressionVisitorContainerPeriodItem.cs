@@ -65,12 +65,12 @@ public class ExpressionVisitorContainerPeriodItem : IExpressionVisitorContainerI
 
         yield return new OverrideMethodInfoVisitor(
             typeof(Period).GetEqualityMethod()!,
-            CoreExpressionHelper.Create((Period period, Period otherPeriod) =>
+            ExpressionHelper.Create((Period period, Period otherPeriod) =>
                                             period.StartDate == otherPeriod.StartDate && period.EndDate == otherPeriod.EndDate));
 
         yield return new OverrideMethodInfoVisitor(
             typeof(Period).GetInequalityMethod()!,
-            CoreExpressionHelper.Create((Period period, Period otherPeriod) =>
+            ExpressionHelper.Create((Period period, Period otherPeriod) =>
                                             period.StartDate != otherPeriod.StartDate || period.EndDate != otherPeriod.EndDate));
     }
 }

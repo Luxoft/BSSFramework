@@ -24,8 +24,6 @@ public static class ServiceCollectionExtensions
     {
         var setupObject = new NHibernateSetupObject();
 
-        services.AddSingleton<IAuditRevisionUserAuthenticationService, AuditRevisionUserAuthenticationService>();
-
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
         services.AddSingleton(DBSessionSettings.Default);

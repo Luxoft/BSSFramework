@@ -8,13 +8,13 @@ using Framework.BLL.Domain.Models;
 using Framework.Core;
 using Framework.Database;
 using Framework.Database.Domain;
-using Framework.OData;
-using Framework.OData.Typed;
 
 using GenericQueryable;
 using GenericQueryable.Fetching;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using OData.Domain;
 
 namespace Framework.BLL;
 
@@ -87,10 +87,6 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         base.Remove(domainObject);
     }
 
-    public abstract SelectOperationResult<TProjection> GetObjectsByOData<TProjection>(
-        SelectOperation<TProjection> selectOperation,
-        Expression<Func<TDomainObject, TProjection>> projectionSelector);
-
     /// <summary>
     /// Return the persistent instance of the given entity class with the given identifier,
     /// assuming that the instance exists.
@@ -115,10 +111,6 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
 
     public List<TDomainObject> GetListBy(IDomainObjectFilterModel<TDomainObject> filter, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
         this.GetListBy(filter, buildFetchRule.ToFetchRule());
-
-    public abstract SelectOperationResult<TDomainObject> GetObjectsByOData(
-        SelectOperation selectOperation,
-        FetchRule<TDomainObject>? fetchRule = null);
 
     public abstract SelectOperationResult<TDomainObject> GetObjectsByOData(
         SelectOperation<TDomainObject> selectOperation,
@@ -179,12 +171,12 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         this.GetSecureQueryable(buildFetchRule.ToFetchRule());
 
     protected IQueryable<TDomainObject> GetSecureQueryable(
-        IQueryableProcessor<TDomainObject> baseProcessor,
+        IQueryableInjector<TDomainObject> queryableInjector,
         FetchRule<TDomainObject>? fetchRule = null)
     {
-        if (baseProcessor == null) throw new ArgumentNullException(nameof(baseProcessor));
+        if (queryableInjector == null) throw new ArgumentNullException(nameof(queryableInjector));
 
-        return this.GetSecureQueryable(fetchRule).Pipe(q => baseProcessor.Process(q));
+        return this.GetSecureQueryable(fetchRule).Pipe(queryableInjector.Inject);
     }
 
     /// <summary>

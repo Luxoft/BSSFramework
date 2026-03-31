@@ -2,6 +2,8 @@
 using System.Reflection;
 using System.Runtime.Serialization;
 
+using CommonFramework;
+
 using Framework.CodeDom;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;

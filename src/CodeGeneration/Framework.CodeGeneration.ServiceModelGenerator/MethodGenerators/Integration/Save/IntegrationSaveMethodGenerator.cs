@@ -1,5 +1,7 @@
 ﻿using System.CodeDom;
 
+using CommonFramework;
+
 using Framework.Application.Domain;
 using Framework.BLL;
 using Framework.BLL.Domain.DTO;
@@ -10,7 +12,6 @@ using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Integration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save.ByModel._Base;
-using Framework.Core;
 using Framework.Database;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save;

@@ -8,8 +8,8 @@ using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View._Base;
-using Framework.OData;
-using Framework.OData.Typed;
+
+using OData.Domain;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Query.OData.Base;
 
@@ -31,8 +31,6 @@ public abstract class GetByODataQueryWithFilterMethodGeneratorBase<TConfiguratio
 
     protected sealed override CodeTypeReference ReturnType { get; }
 
-    protected abstract CodeExpression GetSelectOperationExpression(CodeExpression evaluateDataExpr);
-
     protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
         var modelSecurityAttribute = this.FilterType.GetViewDomainObjectAttribute();
@@ -48,29 +46,18 @@ public abstract class GetByODataQueryWithFilterMethodGeneratorBase<TConfiguratio
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
-        var selectOperationDecl = typeof(SelectOperation).ToTypeReference().ToVariableDeclarationStatement("selectOperation", this.GetSelectOperationExpression(evaluateDataExpr));
-
-        var expressionBuilderExpr = evaluateDataExpr.GetContext().ToPropertyReference("StandardExpressionBuilder");
-
-        var typedSelectOperationDecl = typeof(SelectOperation<>).ToTypeReference(this.DomainType).ToVariableDeclarationStatement("typedSelectOperation",
-
-            expressionBuilderExpr.ToStaticMethodInvokeExpression(typeof(StandardExpressionBuilderExtensions).ToTypeReferenceExpression()
-                                                                         .ToMethodReferenceExpression("ToTyped", this.DomainType.ToTypeReference()),
-
-                                                                 selectOperationDecl.ToVariableReferenceExpression()));
+        var selectOperationDecl = typeof(SelectOperation<>).ToTypeReference(this.DomainType).ToVariableDeclarationStatement("selectOperation", this.GetSelectOperationExpression(evaluateDataExpr));
 
         var typedFilterDecl = this.FilterType.ToTypeReference().ToVariableDeclarationStatement("typedFilter",
             this.Parameters[1].ToVariableReferenceExpression().ToMethodInvokeExpression(this.Configuration.Environment.ServerDTO.ToDomainObjectMethodName, evaluateDataExpr.GetMappingService()));
 
         var preResultDecl = typeof(SelectOperationResult<>).MakeGenericType(this.DomainType).ToTypeReference().ToVariableDeclarationStatement("preResult",
-            bllRefExpr.ToMethodInvokeExpression("GetObjectsByOData", typedSelectOperationDecl.ToVariableReferenceExpression(), typedFilterDecl.ToVariableReferenceExpression(), this.GetFetchRule()));
+            bllRefExpr.ToMethodInvokeExpression("GetObjectsByOData", selectOperationDecl.ToVariableReferenceExpression(), typedFilterDecl.ToVariableReferenceExpression(), this.GetFetchRule()));
 
         var preResultDeclRefExpr = preResultDecl.ToVariableReferenceExpression();
 
 
         yield return selectOperationDecl;
-
-        yield return typedSelectOperationDecl;
 
         yield return typedFilterDecl;
 

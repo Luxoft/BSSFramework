@@ -2,10 +2,10 @@
 using Framework.BLL.Domain.Exceptions;
 using Framework.BLL.Domain.Models;
 using Framework.Database;
-using Framework.OData;
-using Framework.OData.Typed;
 
 using GenericQueryable.Fetching;
+
+using OData.Domain;
 
 namespace Framework.BLL;
 
@@ -42,9 +42,6 @@ public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObjec
     /// <returns></returns>
     IQueryable<TDomainObject> GetUnsecureQueryable(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
 
-
-    SelectOperationResult<TDomainObject> GetObjectsByOData(SelectOperation selectOperation, FetchRule<TDomainObject>? fetchRule = null);
-
     SelectOperationResult<TDomainObject> GetObjectsByOData(SelectOperation<TDomainObject> selectOperation, FetchRule<TDomainObject>? fetchRule = null);
 
     SelectOperationResult<TDomainObject> GetObjectsByOData(
@@ -68,11 +65,6 @@ public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObjec
     List<TDomainObject> GetListBy(Expression<Func<TDomainObject, bool>> filter, FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None);
 
     List<TDomainObject> GetListBy(Expression<Func<TDomainObject, bool>> filter, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
-
-
-    SelectOperationResult<TProjection> GetObjectsByOData<TProjection>(
-        SelectOperation<TProjection> selectOperation,
-        Expression<Func<TDomainObject, TProjection>> projectionSelector);
 
     /// <summary>
     /// Выполняет поиск доменного объекта по условию.

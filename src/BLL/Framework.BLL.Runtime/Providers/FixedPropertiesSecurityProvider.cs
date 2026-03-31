@@ -17,9 +17,9 @@ namespace Framework.BLL.Providers
     {
         public TBLLContext Context { get; } = context;
 
-        public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
+        public IQueryable<TDomainObject> Inject(IQueryable<TDomainObject> queryable)
         {
-            return baseSecurityProvider.InjectFilter(queryable);
+            return baseSecurityProvider.Inject(queryable);
         }
 
         public async ValueTask<bool> HasAccessAsync(TDomainObject domainObject, CancellationToken cancellationToken)

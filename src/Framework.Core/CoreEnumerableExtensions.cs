@@ -428,15 +428,6 @@ public static class CoreEnumerableExtensions
         }
     }
 
-    public static IEnumerable<T> CollectMaybe<T>(this IEnumerable<Maybe<T>> source)
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
-        return from item in source
-               where item.HasValue
-               select item.Value;
-    }
-
     public static TSource? SingleOrDefault<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, Func<Exception> manyExceptionHandler)
     {
         if (source == null)

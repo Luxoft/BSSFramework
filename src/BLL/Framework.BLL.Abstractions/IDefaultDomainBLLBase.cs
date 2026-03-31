@@ -1,10 +1,10 @@
 ﻿using Framework.Application.Domain;
 using Framework.BLL.Domain.Persistent;
 using Framework.Database;
-using Framework.OData;
-using Framework.OData.Typed;
 
 using GenericQueryable.Fetching;
+
+using OData.Domain;
 
 namespace Framework.BLL;
 

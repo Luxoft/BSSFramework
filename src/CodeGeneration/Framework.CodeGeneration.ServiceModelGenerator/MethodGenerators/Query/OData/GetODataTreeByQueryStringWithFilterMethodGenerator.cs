@@ -2,7 +2,6 @@
 
 using CommonFramework;
 
-using Framework.BLL;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.DTO.Extensions;
 using Framework.BLL.Domain.Persistent;
@@ -13,9 +12,8 @@ using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View._Base;
 using Framework.Core;
-using Framework.Core.Serialization;
-using Framework.OData;
-using Framework.OData.Typed;
+
+using OData.Domain;
 
 using SelectOperationResultExtensions = Framework.BLL.OData.SelectOperationResultExtensions;
 
@@ -73,24 +71,12 @@ public class GetODataTreeByQueryStringWithFilterMethodGenerator<TConfiguration> 
                     Statements = { param.ToVariableReferenceExpression().Pipe(source => this.ConvertToDTO(source, evaluateDataExpr.GetMappingService())) }
             });
 
-        var selectOperationExpr = evaluateDataExpr.GetContext().ToPropertyReference((IODataBLLContext c) => c.SelectOperationParser)
-                                                  .ToMethodInvokeExpression((IParser<string, SelectOperation> parser) => parser.Parse(null), this.Parameter.ToVariableReferenceExpression());
+        var selectOperationDecl = typeof(SelectOperation<>).ToTypeReference(this.DomainType)
+                                                           .ToVariableDeclarationStatement("selectOperation", this.GetSelectOperationExpression(evaluateDataExpr));
 
-        var selectOperationDecl = typeof(SelectOperation).ToTypeReference().ToVariableDeclarationStatement("selectOperation", selectOperationExpr);
-
-        var expressionBuilderExpr = evaluateDataExpr.GetContext().ToPropertyReference("StandardExpressionBuilder");
-
-        var typedSelectOperationDecl = typeof(SelectOperation<>).ToTypeReference(this.DomainType).ToVariableDeclarationStatement(
-         "typedSelectOperation",
-         expressionBuilderExpr.ToStaticMethodInvokeExpression(
-                                                              typeof(StandardExpressionBuilderExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression("ToTyped", this.DomainType.ToTypeReference()),
-                                                              selectOperationDecl.ToVariableReferenceExpression()));
-
-        var treeDecl = new CodeVariableDeclarationStatement("var", "odataTree", bllRefExpr.ToMethodReferenceExpression("GetTreeByOData").ToMethodInvokeExpression(typedSelectOperationDecl.ToVariableReferenceExpression(), typedFilterDeсl.ToVariableReferenceExpression(), this.GetFetchRule()));
+        var treeDecl = new CodeVariableDeclarationStatement("var", "odataTree", bllRefExpr.ToMethodReferenceExpression("GetTreeByOData").ToMethodInvokeExpression(selectOperationDecl.ToVariableReferenceExpression(), typedFilterDeсl.ToVariableReferenceExpression(), this.GetFetchRule()));
 
         yield return selectOperationDecl;
-
-        yield return typedSelectOperationDecl;
 
         yield return treeDecl;
 

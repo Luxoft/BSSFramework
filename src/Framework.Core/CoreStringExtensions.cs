@@ -181,12 +181,6 @@ public static class CoreStringExtensions
         return source.Any() ? char.ToUpper(source.First()) + source.Substring(1) : source;
     }
 
-    public static string ToStartLowerCase(this string source)
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
-        return source.Any() ? char.ToLower(source.First()) + source.Substring(1) : source;
-    }
 
     [Obsolete("v10 This method will be protected in future")]
     public static string? NullIfEmpty(this string? value) => string.IsNullOrWhiteSpace(value) ? null : value;
@@ -206,16 +200,6 @@ public static class CoreStringExtensions
         return source.SkipLastMaybe("y").Select(v => v + "ies")
                      .Or(() => source.SkipLastMaybe("ss").Select(v => v + "sses"))
                      .GetValueOrDefault(() => source + "s");
-    }
-
-    public static string FromPluralize(this string source)
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
-        return source.SkipLastMaybe("ies").Select(v => v + "y")
-                     .Or(() => source.SkipLastMaybe("sses"))
-                     .Or(() => source.SkipLastMaybe("s"))
-                     .GetValueOrDefault(source);
     }
 
     public static void MaybeString(this string source, Action<string> evaluate)

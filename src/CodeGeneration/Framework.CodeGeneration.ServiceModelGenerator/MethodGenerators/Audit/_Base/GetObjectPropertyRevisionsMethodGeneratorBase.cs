@@ -1,5 +1,7 @@
 ﻿using System.CodeDom;
 
+using CommonFramework;
+
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom.Extensions;

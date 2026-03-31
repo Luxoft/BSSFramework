@@ -2,16 +2,12 @@
 
 using CommonFramework;
 
-using Framework.BLL;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.DTO.Extensions;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
-using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Query.OData.Base;
 using Framework.Core;
-using Framework.Core.Serialization;
-using Framework.OData;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Query.OData;
 
@@ -41,9 +37,4 @@ public class GetODataListByQueryStringWithFilterMethodGenerator<TConfiguration> 
         yield return this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.FilterType, BLL.Domain.DTO.DTOType.StrictDTO)
                          .ToParameterDeclarationExpression("filter");
     }
-
-
-    protected override CodeExpression GetSelectOperationExpression(CodeExpression evaluateDataExpr) =>
-        evaluateDataExpr.GetContext().ToPropertyReference((IODataBLLContext c) => c.SelectOperationParser)
-                        .ToMethodInvokeExpression((IParser<string, SelectOperation> parser) => parser.Parse(null), this.Parameter.ToVariableReferenceExpression());
 }

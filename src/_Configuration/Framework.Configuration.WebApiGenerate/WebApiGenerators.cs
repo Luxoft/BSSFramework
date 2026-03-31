@@ -1,7 +1,6 @@
-﻿using Framework.DomainDriven.Generation;
-using Framework.DomainDriven.WebApiGenerator.NetCore.SingleController;
-
-using FileInfo = Framework.DomainDriven.Generation.FileInfo;
+﻿using Framework.CodeGeneration.Extensions;
+using Framework.CodeGeneration.WebApiGenerator.SingleController;
+using Framework.FileGeneration;
 
 namespace Framework.Configuration.WebApiGenerate;
 
@@ -9,25 +8,16 @@ namespace Framework.Configuration.WebApiGenerate;
 public partial class WebApiGenerators
 {
     [TestMethod]
-    public void GenerateMainTest()
-    {
-        this.GenerateMain().ToList();
-    }
+    public void GenerateMainTest() => this.GenerateMain().ToList();
 
-    public IEnumerable<FileInfo> GenerateMain()
-    {
-        return this.GenerateMainController();
-    }
+    public IEnumerable<GeneratedFileInfo> GenerateMain() => this.GenerateMainController();
 
     [TestMethod]
-    public void GenerateMainControllerTest()
-    {
-        this.GenerateMainController().ToList();
-    }
+    public void GenerateMainControllerTest() => this.GenerateMainController().ToList();
 
-    private IEnumerable<FileInfo> GenerateMainController()
+    private IEnumerable<GeneratedFileInfo> GenerateMainController()
     {
-        var generator = new SingleControllerCodeFileGenerator(this.Environment.MainSLController);
+        var generator = new SingleControllerCodeFileGenerator(this.Environment.MainController);
 
         var outputPath = Path.Combine(this.GeneratePath, "Framework.Configuration.WebApi");
 

@@ -2,6 +2,8 @@
 using System.Reflection;
 using System.Runtime.Serialization;
 
+using CommonFramework;
+
 using Framework.Application.Events;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
@@ -47,7 +49,7 @@ public class DefaultDomainOperationEventDTOFileFactory<TConfiguration> : DTOFile
 
     protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
     {
-        yield return this.Configuration.GetDTOFileAttribute(this.DomainType, this.FileType);
+        yield return this.Configuration.GetDTOFileAttribute(this.DomainType!, this.FileType);
         yield return this.GetDataContractCodeAttributeDeclaration(this.Configuration.EventDataContractNamespace);
     }
 
@@ -59,7 +61,7 @@ public class DefaultDomainOperationEventDTOFileFactory<TConfiguration> : DTOFile
         var field = new CodeMemberField
                     {
                         Type = fieldTypeRef,
-                        Name = this.DomainType.Name.ToStartLowerCase(),
+                        Name = this.DomainType!.Name.ToStartLowerCase(),
                         Attributes = MemberAttributes.Private,
                     };
 

@@ -2,7 +2,7 @@
 
 using Framework.Core;
 
-using Framework.OData;
+using OData.Domain;
 
 namespace Framework.BLL.Fetching.OData;
 

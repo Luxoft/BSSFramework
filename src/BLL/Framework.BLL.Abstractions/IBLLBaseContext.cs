@@ -2,6 +2,4 @@
 
 namespace Framework.BLL;
 
-public interface IBLLBaseContext : IBLLOperationEventContext,
-                                   IODataBLLContext,
-                                   IServiceProviderContainer;
+public interface IBLLBaseContext : IBLLOperationEventContext, IServiceProviderContainer;

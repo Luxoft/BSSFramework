@@ -6,7 +6,6 @@ using Framework.Authorization.Domain;
 using Framework.BLL;
 using Framework.BLL.Services;
 using Framework.Core.TypeResolving;
-using Framework.OData.QueryLanguage.StandardExpressionBuilder;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -28,7 +27,6 @@ public partial class AuthorizationBLLContext(
     IServiceProvider serviceProvider,
     [FromKeyedServices("BLL")] IEventOperationSender operationSender,
     IAccessDeniedExceptionService accessDeniedExceptionService,
-    IStandardExpressionBuilder standardExpressionBuilder,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
     IAuthorizationValidator validator,
     TimeProvider timeProvider,
@@ -50,7 +48,6 @@ public partial class AuthorizationBLLContext(
         serviceProvider,
         operationSender,
         accessDeniedExceptionService,
-        standardExpressionBuilder,
         hierarchicalObjectExpanderFactory)
 {
     private readonly IDictionaryCache<Type, SecurityContextType> securityContextTypeCache = new DictionaryCache<Type, SecurityContextType>(

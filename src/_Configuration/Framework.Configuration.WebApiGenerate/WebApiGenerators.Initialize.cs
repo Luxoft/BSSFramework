@@ -1,5 +1,4 @@
-﻿using Framework.Configuration.TestGenerate;
-using Framework.Configuration.TestGenerate._Base;
+﻿using Framework.Configuration.TestGenerate._Base;
 
 namespace Framework.Configuration.WebApiGenerate;
 

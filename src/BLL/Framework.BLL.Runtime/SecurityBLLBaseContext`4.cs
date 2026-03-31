@@ -1,7 +1,6 @@
 ﻿using Framework.Application.Domain;
 using Framework.Application.Events;
 using Framework.BLL.Default;
-using Framework.OData.QueryLanguage.StandardExpressionBuilder;
 
 using HierarchicalExpand;
 
@@ -16,12 +15,10 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
     IServiceProvider serviceProvider,
     IEventOperationSender operationSender,
     IAccessDeniedExceptionService accessDeniedExceptionService,
-    IStandardExpressionBuilder standardExpressionBuilder,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory)
     : DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer>(
       serviceProvider,
       operationSender,
-      standardExpressionBuilder,
       hierarchicalObjectExpanderFactory),
       IAccessDeniedExceptionServiceContainer,
       ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>

@@ -38,7 +38,7 @@ public class GenericRepository<TDomainObject, TIdent>(
     private Task CheckAccess(TDomainObject domainObject, CancellationToken cancellationToken) =>
         securityProvider.CheckAccessAsync(domainObject, accessDeniedExceptionService, cancellationToken);
 
-    public IQueryable<TDomainObject> GetQueryable() => dal.GetQueryable().Pipe(securityProvider.InjectFilter);
+    public IQueryable<TDomainObject> GetQueryable() => dal.GetQueryable().Pipe(securityProvider.Inject);
 
     public TDomainObject Load(TIdent id) => dal.Load(id);
 

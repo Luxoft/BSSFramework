@@ -29,7 +29,7 @@ public partial class SampleSystemBLLContext(
     [FromKeyedServices("BLL")] IEventOperationSender operationSender,
     ITrackingService<PersistentDomainObjectBase> trackingService,
     IAccessDeniedExceptionService accessDeniedExceptionService,
-    IStandardExpressionBuilder standardExpressionBuilder,
+    ISelectOperationParser selectOperationParser,
     ISampleSystemValidator validator,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
     IRootSecurityService securityService,
@@ -46,7 +46,7 @@ public partial class SampleSystemBLLContext(
         operationSender,
         trackingService,
         accessDeniedExceptionService,
-        standardExpressionBuilder,
+        selectOperationParser,
         validator,
         hierarchicalObjectExpanderFactory)
 {

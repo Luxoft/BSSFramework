@@ -1,20 +1,22 @@
 ﻿using System.CodeDom;
 
+using CommonFramework;
+
 using Framework.BLL;
 using Framework.BLL.Domain.DirectMode;
 using Framework.BLL.Domain.Models;
 using Framework.BLL.Domain.Persistent;
-using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.FileFactory.__Base;
 using Framework.CodeGeneration.DomainMetadata;
 using Framework.Core;
-using Framework.OData.Typed;
 using Framework.Projection;
 
 using GenericQueryable.Fetching;
+
+using OData.Domain;
 
 namespace Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
 
@@ -207,7 +209,7 @@ public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguratio
                 yield return new CodeMemberMethod
                              {
                                      Name = "GetObjectsByOData",
-                                     ReturnType = typeof(OData.SelectOperationResult<>).MakeGenericType(this.DomainType).ToTypeReference(),
+                                     ReturnType = typeof(SelectOperationResult<>).MakeGenericType(this.DomainType).ToTypeReference(),
                                      Parameters =
                                      {
                                              typeof(SelectOperation<>).ToTypeReference(this.DomainType).ToParameterDeclarationExpression("selectOperation"),
@@ -294,7 +296,7 @@ public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguratio
                 yield return new CodeMemberMethod
                              {
                                      Name = "GetObjectsByOData",
-                                     ReturnType = typeof(OData.SelectOperationResult<>).MakeGenericType(this.DomainType).ToTypeReference(),
+                                     ReturnType = typeof(SelectOperationResult<>).MakeGenericType(this.DomainType).ToTypeReference(),
                                      Parameters =
                                      {
                                              typeof(SelectOperation<>).ToTypeReference(this.DomainType).ToParameterDeclarationExpression("selectOperation"),
@@ -311,7 +313,7 @@ public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguratio
                     yield return new CodeMemberMethod
                                  {
                                          Name = "GetTreeByOData",
-                                         ReturnType = typeof(OData.SelectOperationResult<>).MakeGenericType(typeof(HierarchicalNode<,>).MakeGenericType(this.DomainType, this.Configuration.Environment.GetIdentityType())).ToTypeReference(),
+                                         ReturnType = typeof(SelectOperationResult<>).MakeGenericType(typeof(HierarchicalNode<,>).MakeGenericType(this.DomainType, this.Configuration.Environment.GetIdentityType())).ToTypeReference(),
                                          Parameters =
                                          {
                                                  typeof(SelectOperation<>).ToTypeReference(this.DomainType).ToParameterDeclarationExpression("selectOperation"),

@@ -122,12 +122,6 @@
     <Project Path="Notification/Framework.Notification.Runtime/Framework.Notification.Runtime.csproj" />
     <Project Path="Notification/Framework.Notification/Framework.Notification.csproj" />
   </Folder>
-  
-  <Folder Name="/OData/">
-    <Project Path="OData/Framework.OData.QueryLanguage/Framework.OData.QueryLanguage.csproj" />
-    <Project Path="OData/Framework.OData.Tests/Framework.OData.Tests.csproj" />
-    <Project Path="OData/Framework.OData/Framework.OData.csproj" />
-  </Folder>
   <Folder Name="/_SampleSystem/" />
   
   
@@ -199,6 +193,5 @@
   <Project Path="Framework.DependencyInjection/Framework.DependencyInjection.csproj" />
   <Project Path="Framework.ExpressionParsers.Tests.Unit/Framework.ExpressionParsers.Tests.Unit.csproj" />
   <Project Path="Framework.ExpressionParsers/Framework.ExpressionParsers.csproj" />
-  <Project Path="Framework.Parsing/Framework.Parsing.csproj" />
 
 </Solution>

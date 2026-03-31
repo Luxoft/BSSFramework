@@ -64,7 +64,7 @@ public static class ServiceCollectionExtensions2
 
             services.AddScoped(typeof(EvaluatedData<,>));
 
-            services.AddSingleton<IStandardExpressionBuilder, StandardExpressionBuilder>();
+            services.AddSingleton<ISelectOperationParser, StandardExpressionBuilder>();
 
             services.AddScoped<IStandardSubscriptionService, LocalDBSubscriptionService>();
 

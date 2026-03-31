@@ -1,14 +1,10 @@
 ﻿using System.CodeDom;
 
-using Framework.BLL;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.DTO.Extensions;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
-using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Query.OData.Base;
-using Framework.Core.Serialization;
-using Framework.OData;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Query.OData;
 
@@ -30,9 +26,4 @@ public class GetODataListByQueryStringMethodGenerator<TConfiguration> : GetByODa
     {
         yield return typeof(string).ToTypeReference().ToParameterDeclarationExpression("odataQueryString");
     }
-
-
-    protected override CodeExpression GetSelectOperationExpression(CodeExpression evaluateDataExpr) =>
-        evaluateDataExpr.GetContext().ToPropertyReference((IODataBLLContext c) => c.SelectOperationParser)
-                        .ToMethodInvokeExpression((IParser<string, SelectOperation> parser) => parser.Parse(null), this.Parameter.ToVariableReferenceExpression());
 }

@@ -8,8 +8,6 @@ using Framework.BLL.Domain.Exceptions;
 using Framework.BLL.Domain.Persistent;
 using Framework.Core;
 using Framework.Database;
-using Framework.OData;
-using Framework.OData.Typed;
 
 using GenericQueryable;
 using GenericQueryable.Fetching;
@@ -17,6 +15,8 @@ using GenericQueryable.Fetching;
 using HierarchicalExpand;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using OData.Domain;
 
 namespace Framework.BLL.Default;
 
@@ -160,62 +160,6 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
 
     public List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
         this.GetListByIdents(baseIdents, buildFetchRule.ToFetchRule());
-
-    public override SelectOperationResult<TDomainObject> GetObjectsByOData(
-        SelectOperation selectOperation,
-        FetchRule<TDomainObject>? fetchRule = null)
-    {
-        var typedSelectOperation = this.Context.StandardExpressionBuilder.ToTyped<TDomainObject>(selectOperation);
-
-        return this.GetObjectsByOData(typedSelectOperation, fetchRule);
-    }
-
-    /// <summary>
-    /// For Projections (reports)
-    /// </summary>
-    /// <remarks>
-    /// Метод пока что не используется и это походу проблема #IADFRAME-943
-    /// </remarks>
-    public override SelectOperationResult<TProjection> GetObjectsByOData<TProjection>(
-        SelectOperation<TProjection> selectOperation,
-        Expression<Func<TDomainObject, TProjection>> projectionSelector)
-    {
-        if (selectOperation == null)
-        {
-            throw new ArgumentNullException(nameof(selectOperation));
-        }
-
-        if (selectOperation.HasPaging)
-        {
-            var countQuery = this.GetSecureQueryable().Select(projectionSelector).Pipe(z => selectOperation.ToCountOperation().Process(z));
-
-            var selection = this.GetSecureQueryable()
-                                .Select(projectionSelector)
-                                .Pipe(z => selectOperation.WithoutPaging().Process(z))
-                                .Select(domainObject => ((IIdentityObject<TIdent>)domainObject).Id);
-
-            if (!selectOperation.Orders.Any())
-            {
-                selection = selection.OrderBy(x => x);
-            }
-
-            var idents = selection
-                         .Skip(selectOperation.SkipCount)
-                         .Take(selectOperation.TakeCount);
-
-            var result = this.GetListByIdentsNoSecurable(idents, projectionSelector);
-
-            var count = countQuery.Count();
-
-            return new SelectOperationResult<TProjection>(result, count);
-        }
-        else
-        {
-            var result = this.GetSecureQueryable().Select(projectionSelector).Pipe(selectOperation.Process);
-
-            return new SelectOperationResult<TProjection>(result);
-        }
-    }
 
     public override SelectOperationResult<TDomainObject> GetObjectsByOData(
         SelectOperation<TDomainObject> selectOperation,

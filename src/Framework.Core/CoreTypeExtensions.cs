@@ -406,20 +406,6 @@ public static class CoreTypeExtensions
         return nameSelector(type);
     }
 
-    public static Type GetNullableElementTypeOrSelf(this Type type)
-    {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-
-        return type.GetNullableElementType() ?? type;
-    }
-
-    public static bool IsNullable(this Type type)
-    {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-
-        return type.GetNullableElementType() != null;
-    }
-
     public static PropertyInfo GetImplementedProperty(this Type type, PropertyInfo property)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
@@ -511,47 +497,6 @@ public static class CoreTypeExtensions
         }
     }
 
-    public static Type? GetSuperSet(this Type type, Type otherType, bool safe)
-    {
-        var res = type.IsSubsetOf(otherType) ? otherType : otherType.IsSubsetOf(type) ? type : null;
-
-        return safe && res == null ? typeof(object) : res;
-    }
-
-    public static bool IsSubsetOf(this Type type, Type otherType)
-    {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-        if (otherType == null) throw new ArgumentNullException(nameof(otherType));
-
-        var oneSetTypesRequest = from set in TypeSetsPriority
-
-                                 select from p1 in set.GetMaybeValue(type)
-
-                                        from p2 in set.GetMaybeValue(otherType)
-
-                                        select p1 < p2;
-
-
-        var res = oneSetTypesRequest.CollectMaybe().ToArray();
-
-        if (res.Any())
-        {
-            return res.Single();
-        }
-
-        var isSubSetOfFloatRequest = FloatTypeSetPriority.ContainsKey(otherType)
-                                     && (SignedTypeSetPriority.ContainsKey(type) || UnsignedTypeSetPriority.ContainsKey(type));
-
-        return isSubSetOfFloatRequest;
-    }
-
-    public static IEnumerable<PropertyInfo> GetAllInterfaceProperties(this Type type)
-    {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-
-        return type.GetAllInterfaces().SelectMany(t => t.GetProperties());
-    }
-
     public static Type[]? GetInterfaceImplementationArguments(this Type type, Type interfaceType)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
@@ -582,27 +527,4 @@ public static class CoreTypeExtensions
 
         return method;
     }
-
-    private static readonly Dictionary<Type, int> SignedTypeSetPriority = new()
-                                                                          {
-                                                                                  { typeof(short), 0 },
-                                                                                  { typeof(int), 1 },
-                                                                                  { typeof(long), 2 },
-                                                                          };
-
-    private static readonly Dictionary<Type, int> UnsignedTypeSetPriority = new()
-                                                                            {
-                                                                                    { typeof(ushort), 0 },
-                                                                                    { typeof(uint), 1 },
-                                                                                    { typeof(ulong), 2 },
-                                                                            };
-
-    private static readonly Dictionary<Type, int> FloatTypeSetPriority = new()
-                                                                         {
-                                                                                 { typeof(float), 0 },
-                                                                                 { typeof(double), 1 },
-                                                                                 { typeof(decimal), 2 },
-                                                                         };
-
-    private static readonly List<Dictionary<Type, int>> TypeSetsPriority = [SignedTypeSetPriority, UnsignedTypeSetPriority, FloatTypeSetPriority];
 }

@@ -8,8 +8,11 @@ using Framework.BLL.Domain.DTO.Extensions;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 using Framework.Core;
+
+using OData;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View._Base;
 
@@ -39,6 +42,11 @@ public abstract class ViewMethodGenerator<TConfiguration>(TConfiguration configu
         return $"Get{this.GetDTOPrefix()}{this.DomainType.Name.Pipe(pluralize, s => s.ToPluralize())}{bodyPostfix}";
     }
 
+    protected CodeExpression GetSelectOperationExpression(CodeExpression evaluateDataExpr) =>
+        evaluateDataExpr.GetContext()
+                        .ToPropertyReference("SelectOperationParser")
+                        .ToMethodReferenceExpression(nameof(ISelectOperationParser.Parse), this.DomainType.ToTypeReference())
+                        .ToMethodInvokeExpression(this.Parameter.ToVariableReferenceExpression());
 
     protected virtual string GetDTOPrefix() => this.DTOType == ViewDTOType.ProjectionDTO ? string.Empty : this.DTOType.WithoutPostfix();
 

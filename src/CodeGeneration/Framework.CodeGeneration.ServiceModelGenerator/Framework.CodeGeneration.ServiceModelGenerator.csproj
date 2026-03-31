@@ -9,6 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IvAt.OData.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Legacy\Framework.Infrastructure.Legacy.csproj" />
     <ProjectReference Include="..\Framework.CodeGeneration.DTOGenerator.Audit\Framework.CodeGeneration.DTOGenerator.Audit.csproj" />
   </ItemGroup>

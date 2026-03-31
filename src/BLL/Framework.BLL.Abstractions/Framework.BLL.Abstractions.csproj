@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IvAt.OData.Domain" />
     <PackageReference Include="IvAt.SecuritySystem.Abstractions" />
   </ItemGroup>
 
@@ -19,7 +20,6 @@
 
     <ProjectReference Include="..\..\Application\Framework.Application.Abstractions\Framework.Application.Abstractions.csproj" />
     <ProjectReference Include="..\..\Application\Framework.Application.Domain\Framework.Application.Domain.csproj" />
-    <ProjectReference Include="..\..\OData\Framework.OData\Framework.OData.csproj" />
   </ItemGroup>
 
 </Project>

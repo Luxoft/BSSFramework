@@ -1,12 +1,13 @@
 ﻿using System.CodeDom;
 
+using CommonFramework;
+
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.BLL.DTOMapping.Domain;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Audit;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
-using Framework.Core;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Audit;
 

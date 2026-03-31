@@ -7,8 +7,6 @@ using SecuritySystem.Providers;
 
 namespace Framework.BLL
 {
-
-
     /// <summary>
     /// BLL с безопастностью
     /// </summary>
@@ -34,7 +32,7 @@ namespace Framework.BLL
 
         protected override IQueryable<TDomainObject> ProcessSecurity(IQueryable<TDomainObject> queryable)
         {
-            return base.ProcessSecurity(queryable).Pipe(q => this.SecurityProvider.InjectFilter(q));
+            return base.ProcessSecurity(queryable).Pipe(q => this.SecurityProvider.Inject(q));
         }
 
 

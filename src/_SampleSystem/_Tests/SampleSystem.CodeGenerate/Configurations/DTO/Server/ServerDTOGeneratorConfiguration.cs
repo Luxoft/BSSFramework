@@ -10,24 +10,13 @@ using Framework.CodeGeneration.DTOGenerator.Map;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.FileFactory;
 using Framework.CodeGeneration.GeneratePolicy;
-using Framework.DomainDriven.DTOGenerator;
-using Framework.DomainDriven.DTOGenerator.Server;
-using Framework.DomainDriven.Generation.Domain;
-using Framework.DomainDriven.Serialization;
-
-using SampleSystem.Domain;
 
 using ServiceModelGenerator = Framework.DomainDriven.ServiceModelGenerator;
 
 namespace SampleSystem.CodeGenerate.ServerDTO;
 
-public class ServerDTOGeneratorConfiguration : ServerGeneratorConfigurationBase<ServerGenerationEnvironment>
+public class ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environment) : ServerGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {
-    public ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
-    {
-    }
-
     public override string DataContractNamespace => this.Environment.DTODataContractNamespace;
 
     protected virtual ICodeFileFactoryHeader<MainDTOFileType> FullRefDTOFileFactoryHeader { get; } = SampleSystemFileType.FullRefDTO.ToHeader();

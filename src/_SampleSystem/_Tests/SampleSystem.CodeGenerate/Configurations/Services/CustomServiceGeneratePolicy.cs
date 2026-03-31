@@ -1,8 +1,9 @@
-﻿using Framework.DomainDriven;
-using Framework.DomainDriven.BLLCoreGenerator;
-using Framework.DomainDriven.Generation.Domain;
-using Framework.DomainDriven.ServiceModelGenerator;
-using Framework.Transfering;
+﻿using Framework.BLL.Domain.DirectMode;
+using Framework.BLL.Domain.DTO;
+using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
+using Framework.CodeGeneration.DomainMetadata;
+using Framework.CodeGeneration.ServiceModelGenerator;
+using Framework.CodeGeneration.ServiceModelGenerator.GeneratePolicy;
 
 using SampleSystem.Domain;
 

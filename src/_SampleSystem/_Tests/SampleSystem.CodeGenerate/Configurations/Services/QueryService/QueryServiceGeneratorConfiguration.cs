@@ -1,5 +1,6 @@
-﻿using Framework.DomainDriven.Generation.Domain;
-using Framework.DomainDriven.ServiceModelGenerator;
+﻿using Framework.CodeGeneration.GeneratePolicy;
+using Framework.CodeGeneration.ServiceModelGenerator;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Query;
 
 namespace SampleSystem.CodeGenerate;
 

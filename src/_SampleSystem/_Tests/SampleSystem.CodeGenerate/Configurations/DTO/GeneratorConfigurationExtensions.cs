@@ -1,7 +1,5 @@
 ﻿using System.Reflection;
 
-using Framework.DomainDriven.DTOGenerator;
-
 namespace SampleSystem.CodeGenerate;
 
 public static class GeneratorConfigurationExtensions

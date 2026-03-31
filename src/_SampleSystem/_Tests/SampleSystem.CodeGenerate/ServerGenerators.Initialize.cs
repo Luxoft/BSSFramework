@@ -1,16 +1,11 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.Generation;
+using Framework.FileGeneration.Checkout;
 
 namespace SampleSystem.CodeGenerate;
 
 public partial class ServerGenerators
 {
-    public ServerGenerators()
-    {
-        this.environment = new ServerGenerationEnvironment();
-    }
-
-    private readonly ServerGenerationEnvironment environment;
+    private readonly ServerGenerationEnvironment environment = new();
 
     private readonly string webApiNetCorePath = Path.Combine(TargetSystemPath, "SampleSystem.WebApiCore", @"Controllers/_Generated");
 

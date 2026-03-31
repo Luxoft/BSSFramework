@@ -1,22 +1,18 @@
 ﻿using System.CodeDom;
 
-using Framework.CodeDom;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLLCoreGenerator;
-using Framework.DomainDriven.Generation.Domain;
+using Framework.BLL.Domain.DirectMode;
+using Framework.CodeDom.Extensions;
+using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
+using Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
 
 namespace SampleSystem.CodeGenerate;
 
 /// <summary>
 /// Кастомный фабричный класс для BLL-интерфейсов к доменным объектам (пример расширения с добавленеим обработки ComplexChangeModelType)
 /// </summary>
-public class SampleSystemBLLInterfaceFileFactory : BLLInterfaceFileFactory<BLLCoreGeneratorConfiguration>
+public class SampleSystemBLLInterfaceFileFactory(BLLCoreGeneratorConfiguration configuration, Type domainType)
+    : BLLInterfaceFileFactory<BLLCoreGeneratorConfiguration>(configuration, domainType)
 {
-    public SampleSystemBLLInterfaceFileFactory(BLLCoreGeneratorConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
-    {
-    }
-
     protected override IEnumerable<CodeTypeMember> GetMembers()
     {
         foreach (var member in base.GetMembers())

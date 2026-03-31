@@ -87,25 +87,6 @@
     <Project Path="Projection/Framework.Projection.Domain/Framework.Projection.Domain.csproj" />
     <Project Path="Projection/Framework.Projection.Runtime/Framework.Projection.Runtime.csproj" />
   </Folder>
-  
-  <Folder Name="/SampleSystem/">
-    <Project Path="_SampleSystem/SampleSystem.AuditDomain/SampleSystem.AuditDomain.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.BLL.Core/SampleSystem.BLL.Core.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.BLL/SampleSystem.BLL.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.Domain.ManualProjections/SampleSystem.Domain.ManualProjections.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.Domain.Models/SampleSystem.Domain.Models.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.Domain/SampleSystem.Domain.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.EventMetadata/SampleSystem.EventMetadata.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.Events/SampleSystem.Events.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.Security.Abstract/SampleSystem.Security.Abstract.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.Security/SampleSystem.Security.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.ServiceEnvironment.NHibernate/SampleSystem.ServiceEnvironment.NHibernate.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.ServiceEnvironment/SampleSystem.ServiceEnvironment.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.Subscriptions.Metadata/SampleSystem.Subscriptions.Metadata.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.WebApiCore.EntityFramework/SampleSystem.WebApiCore.EntityFramework.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.WebApiCore.NHibernate/SampleSystem.WebApiCore.NHibernate.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.WebApiCore/SampleSystem.WebApiCore.csproj" />
-  </Folder>
   <Folder Name="/Subscriptions/">
     <Project Path="Subscriptions/Framework.Subscriptions.Abstractions/Framework.Subscriptions.Abstractions.csproj" />
     <Project Path="Subscriptions/Framework.Subscriptions.Domain/Framework.Subscriptions.Domain.csproj" />
@@ -123,25 +104,6 @@
     <Project Path="Notification/Framework.Notification.DTO/Framework.Notification.DTO.csproj" />
     <Project Path="Notification/Framework.Notification.Runtime/Framework.Notification.Runtime.csproj" />
     <Project Path="Notification/Framework.Notification/Framework.Notification.csproj" />
-  </Folder>
-  <Folder Name="/_SampleSystem/" />
-  
-  
-  <Folder Name="/_SampleSystem/GeneratedLayout/">
-    <Project Path="_SampleSystem/SampleSystem.AuditDAL.NHibernate/SampleSystem.AuditDAL.NHibernate.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.Domain.LegacyProjections/SampleSystem.Domain.LegacyProjections.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.Domain.Projections/SampleSystem.Domain.Projections.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.Generated.DAL.NHibernate/SampleSystem.Generated.DAL.NHibernate.csproj" />
-    <Project Path="_SampleSystem/SampleSystem.Generated.DTO/SampleSystem.Generated.DTO.csproj" />
-  </Folder>
-  
-  <Folder Name="/_SampleSystem/_Tests/">
-    <Project Path="_SampleSystem/_Tests/SampleSystem.CheckGenTests/SampleSystem.CheckGenTests.csproj" />
-    <Project Path="_SampleSystem/_Tests/SampleSystem.CodeGenerate/SampleSystem.CodeGenerate.csproj" />
-    <Project Path="_SampleSystem/_Tests/SampleSystem.DbGenerate.NHibernate/SampleSystem.DbGenerate.NHibernate.csproj" />
-    <Project Path="_SampleSystem/_Tests/SampleSystem.IntegrationTests.NHibernate/SampleSystem.IntegrationTests.NHibernate.csproj" />
-    <Project Path="_SampleSystem/_Tests/SampleSystem.IntegrationTests.Xunit.NHibernate/SampleSystem.IntegrationTests.Xunit.NHibernate.csproj" />
-    <Project Path="_SampleSystem/_Tests/SampleSystem.UnitTests/SampleSystem.UnitTests.csproj" />
   </Folder>
   
   <Folder Name="/_Authorization/">
@@ -184,6 +146,39 @@
   <Folder Name="/_Configuration/GeneratedTools/">
     <Project Path="_Configuration/Framework.Configuration.TestGenerate/Framework.Configuration.TestGenerate.csproj" />
     <Project Path="_Configuration/Framework.Configuration.WebApiGenerate/Framework.Configuration.WebApiGenerate.csproj" />
+  </Folder>
+  <Folder Name="/_SampleSystem/">
+    <Project Path="_SampleSystem/SampleSystem.AuditDomain/SampleSystem.AuditDomain.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.BLL.Core/SampleSystem.BLL.Core.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.BLL/SampleSystem.BLL.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Domain.ManualProjections/SampleSystem.Domain.ManualProjections.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Domain.Models/SampleSystem.Domain.Models.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Domain/SampleSystem.Domain.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.EventMetadata/SampleSystem.EventMetadata.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Events/SampleSystem.Events.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Security.Abstract/SampleSystem.Security.Abstract.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Security/SampleSystem.Security.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.ServiceEnvironment.NHibernate/SampleSystem.ServiceEnvironment.NHibernate.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.ServiceEnvironment/SampleSystem.ServiceEnvironment.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Subscriptions.Metadata/SampleSystem.Subscriptions.Metadata.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.WebApiCore.EntityFramework/SampleSystem.WebApiCore.EntityFramework.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.WebApiCore.NHibernate/SampleSystem.WebApiCore.NHibernate.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.WebApiCore/SampleSystem.WebApiCore.csproj" />
+  </Folder>
+  <Folder Name="/_SampleSystem/GeneratedLayout/">
+    <Project Path="_SampleSystem/SampleSystem.AuditDAL.NHibernate/SampleSystem.AuditDAL.NHibernate.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Domain.LegacyProjections/SampleSystem.Domain.LegacyProjections.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Domain.Projections/SampleSystem.Domain.Projections.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Generated.DAL.NHibernate/SampleSystem.Generated.DAL.NHibernate.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Generated.DTO/SampleSystem.Generated.DTO.csproj" />
+  </Folder>
+  <Folder Name="/_SampleSystem/_Tests/">
+    <Project Path="_SampleSystem/_Tests/SampleSystem.CheckGenTests/SampleSystem.CheckGenTests.csproj" />
+    <Project Path="_SampleSystem/_Tests/SampleSystem.CodeGenerate/SampleSystem.CodeGenerate.csproj" />
+    <Project Path="_SampleSystem/_Tests/SampleSystem.DbGenerate.NHibernate/SampleSystem.DbGenerate.NHibernate.csproj" />
+    <Project Path="_SampleSystem/_Tests/SampleSystem.IntegrationTests.NHibernate/SampleSystem.IntegrationTests.NHibernate.csproj" />
+    <Project Path="_SampleSystem/_Tests/SampleSystem.IntegrationTests.Xunit.NHibernate/SampleSystem.IntegrationTests.Xunit.NHibernate.csproj" />
+    <Project Path="_SampleSystem/_Tests/SampleSystem.UnitTests/SampleSystem.UnitTests.csproj" />
   </Folder>
 
   <Folder Name="/__SolutionItems/">

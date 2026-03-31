@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.ServiceModelGenerator;
+﻿using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Audit;
 using Framework.Projection;
 
 namespace SampleSystem.CodeGenerate.Configurations.Services.Audit;

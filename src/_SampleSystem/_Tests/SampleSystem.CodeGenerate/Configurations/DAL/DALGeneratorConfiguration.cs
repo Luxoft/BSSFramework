@@ -1,5 +1,5 @@
-﻿using Framework.Core;
-using Framework.Core.TypeResolving.TypeSource;
+﻿using Framework.Core.TypeResolving.TypeSource;
+using Framework.Database.Metadata;
 
 namespace SampleSystem.CodeGenerate;
 

@@ -1,14 +1,13 @@
 ﻿using System.Reflection;
 
-using Framework.DomainDriven.Generation.Domain;
+using Framework.BLL.Domain.Attributes;
+using Framework.CodeGeneration.DomainMetadata;
 using Framework.Projection;
-using Framework.Projection.Environment;
-using Framework.Security;
+using Framework.Projection.ExtendedMetadata;
 
 using SecuritySystem;
 
 using SampleSystem.Domain;
-using SampleSystem.Security;
 
 namespace SampleSystem.CodeGenerate;
 

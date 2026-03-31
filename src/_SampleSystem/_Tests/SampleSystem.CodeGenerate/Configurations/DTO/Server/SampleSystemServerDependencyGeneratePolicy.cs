@@ -1,18 +1,16 @@
-﻿using Framework.DomainDriven.DTOGenerator;
-using Framework.DomainDriven.DTOGenerator.Server;
-using Framework.DomainDriven.Generation.Domain;
+﻿using Framework.CodeGeneration.DTOGenerator.FileTypes;
+using Framework.CodeGeneration.DTOGenerator.Map;
+using Framework.CodeGeneration.DTOGenerator.Server;
+using Framework.CodeGeneration.DTOGenerator.Server.GeneratePolicy;
+using Framework.CodeGeneration.GeneratePolicy;
 
 using SampleSystem.Domain;
 
 namespace SampleSystem.CodeGenerate.ServerDTO;
 
-public class SampleSystemServerDependencyGeneratePolicy : ServerDependencyGeneratePolicy
+public class SampleSystemServerDependencyGeneratePolicy(IGeneratePolicy<RoleFileType> baseGeneratePolicy, IEnumerable<GenerateTypeMap> maps)
+    : ServerDependencyGeneratePolicy(baseGeneratePolicy, maps)
 {
-    public SampleSystemServerDependencyGeneratePolicy(IGeneratePolicy<RoleFileType> baseGeneratePolicy, IEnumerable<GenerateTypeMap> maps)
-            : base(baseGeneratePolicy, maps)
-    {
-    }
-
     protected override bool InternalUsed(Type domainType, RoleFileType fileType)
     {
         if (domainType == typeof(Insurance) && fileType == ServerFileType.SimpleEventDTO)

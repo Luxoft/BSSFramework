@@ -23,4 +23,5 @@
     <ProjectReference Include="..\..\Database\Framework.Database.NHibernate.DBGenerator\Framework.Database.NHibernate.DBGenerator.csproj" />
     <ProjectReference Include="..\..\Projection\Framework.Projection.Runtime\Framework.Projection.Runtime.csproj" />
   </ItemGroup>
+
 </Project>

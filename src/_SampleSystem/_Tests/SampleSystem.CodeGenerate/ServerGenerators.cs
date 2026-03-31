@@ -2,24 +2,19 @@
 
 using CommonFramework;
 
-using Framework.CodeDom;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLLGenerator;
-using Framework.DomainDriven.DTOGenerator;
-using Framework.DomainDriven.DTOGenerator.Audit;
-using Framework.DomainDriven.Generation;
-using Framework.DomainDriven.NHibernate.DALGenerator;
-using Framework.DomainDriven.ProjectionGenerator;
-using Framework.DomainDriven.Serialization;
-using Framework.DomainDriven.ServiceModelGenerator;
-using Framework.DomainDriven.WebApiGenerator.NetCore;
+using Framework.BLL.Domain.Serialization;
+using Framework.CodeDom.Extensions;
+using Framework.CodeGeneration.BLLGenerator;
+using Framework.CodeGeneration.DTOGenerator.Audit;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
+using Framework.CodeGeneration.Extensions;
+using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.CodeGenerate.ServerDTO;
 
 using FileInfo = Framework.DomainDriven.Generation.FileInfo;
-using FileType = Framework.DomainDriven.DTOGenerator.FileType;
 using IGenerationEnvironmentBase = Framework.DomainDriven.ServiceModelGenerator.IGenerationEnvironmentBase;
 
 namespace SampleSystem.CodeGenerate;

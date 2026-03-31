@@ -1,18 +1,13 @@
-﻿using Framework.DomainDriven.DTOGenerator;
-using Framework.DomainDriven.DTOGenerator.Server;
-using Framework.DomainDriven.Generation.Domain;
+﻿using Framework.CodeGeneration.DTOGenerator.FileTypes;
+using Framework.CodeGeneration.DTOGenerator.Server;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.FileFactory;
 
 namespace SampleSystem.CodeGenerate.ServerDTO;
 
-public class SampleSystemServerFileGenerator<TConfiguration> : ServerFileGenerator<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+public class SampleSystemServerFileGenerator<TConfiguration>(TConfiguration configuration) : ServerFileGenerator<TConfiguration>(configuration)
+    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public SampleSystemServerFileGenerator(TConfiguration configuration)
-            : base(configuration)
-    {
-    }
-
-
     protected override IEnumerable<ICodeFileFactory<DTOFileType>> GetDTOFileGenerators()
     {
         foreach (var fileGenerator in base.GetDTOFileGenerators())

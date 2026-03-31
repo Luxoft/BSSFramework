@@ -1,5 +1,5 @@
-﻿using Framework.DomainDriven.DTOGenerator;
-using Framework.DomainDriven.Generation.Domain;
+﻿using Framework.CodeGeneration.DTOGenerator.FileTypes;
+using Framework.CodeGeneration.GeneratePolicy;
 
 using SampleSystem.Domain;
 

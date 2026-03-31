@@ -1,12 +1,12 @@
-﻿using Framework.Core;
+﻿using Framework.BLL.Domain.Attributes;
+using Framework.Core;
 
 using Framework.Projection;
 using Framework.Projection.Lambda;
-using Framework.Security;
+using Framework.Projection.Lambda.ProjectionSource._Base;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Filters;
-using SampleSystem.Security;
 
 namespace SampleSystem.CodeGenerate;
 

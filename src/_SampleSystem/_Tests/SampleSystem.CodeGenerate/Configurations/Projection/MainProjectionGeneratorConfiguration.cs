@@ -1,7 +1,7 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
-using Framework.CodeDom;
+using Framework.CodeDom.Extensions;
 using Framework.Core;
 
 using SampleSystem.Domain;

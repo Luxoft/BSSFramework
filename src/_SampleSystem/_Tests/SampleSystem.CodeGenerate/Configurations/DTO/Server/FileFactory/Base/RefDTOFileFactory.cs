@@ -1,5 +1,6 @@
-﻿using Framework.DomainDriven.DTOGenerator;
-using Framework.DomainDriven.DTOGenerator.Server;
+﻿using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main.Base;
 
 namespace SampleSystem.CodeGenerate.ServerDTO;
 

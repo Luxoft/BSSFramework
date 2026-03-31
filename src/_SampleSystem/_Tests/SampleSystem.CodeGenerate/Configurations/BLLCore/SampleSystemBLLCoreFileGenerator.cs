@@ -1,18 +1,14 @@
-﻿using Framework.DomainDriven.BLLCoreGenerator;
-using Framework.DomainDriven.Generation;
-using Framework.DomainDriven.Generation.Domain;
+﻿using Framework.CodeGeneration;
+using Framework.CodeGeneration.BLLCoreGenerator;
+using Framework.CodeGeneration.FileFactory;
 
 namespace SampleSystem.CodeGenerate;
 
 /// <summary>
 /// Кастомный генератор BLL-core (пример с подменой стандартного BLLInterfaceFileFactory)
 /// </summary>
-public class SampleSystemBLLCoreFileGenerator : BLLCoreFileGenerator<BLLCoreGeneratorConfiguration>
+public class SampleSystemBLLCoreFileGenerator(BLLCoreGeneratorConfiguration configuration) : BLLCoreFileGenerator<BLLCoreGeneratorConfiguration>(configuration)
 {
-    public SampleSystemBLLCoreFileGenerator(BLLCoreGeneratorConfiguration configuration) : base(configuration)
-    {
-    }
-
     protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {
         foreach (var fileGenerator in base.GetInternalFileGenerators())

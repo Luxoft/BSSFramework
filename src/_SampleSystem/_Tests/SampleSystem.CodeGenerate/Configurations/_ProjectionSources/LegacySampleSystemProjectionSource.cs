@@ -1,5 +1,6 @@
 ﻿using Framework.Projection;
 using Framework.Projection.Lambda;
+using Framework.Projection.Lambda.ProjectionSource._Base;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Filters;

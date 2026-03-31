@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.ServiceModelGenerator;
+﻿using Framework.CodeGeneration.ServiceModelGenerator;
 
 namespace SampleSystem.CodeGenerate;
 

@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.DTOGenerator.Audit;
+﻿using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
 
 using SampleSystem.CodeGenerate.Configurations.Services.Audit;
 

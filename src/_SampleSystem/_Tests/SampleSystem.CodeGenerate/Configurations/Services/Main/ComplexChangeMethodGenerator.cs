@@ -2,14 +2,16 @@
 
 using CommonFramework;
 
-using Framework.CodeDom;
-using Framework.Core;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLLCoreGenerator;
-using Framework.DomainDriven.ServiceModelGenerator;
-using Framework.Security;
-using Framework.Transfering;
+using Framework.BLL.Domain.DTO;
+using Framework.BLL.Domain.Extensions;
+using Framework.BLL.Domain.Models;
+using Framework.BLL.Domain.ServiceRole;
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
+using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
+using Framework.CodeGeneration.ServiceModelGenerator;
+using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 
 using SampleSystem.Domain;
 

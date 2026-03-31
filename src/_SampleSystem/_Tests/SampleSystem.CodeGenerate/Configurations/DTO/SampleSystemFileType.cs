@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.DTOGenerator;
+﻿using Framework.CodeGeneration.DTOGenerator.FileTypes;
 
 namespace SampleSystem.CodeGenerate;
 

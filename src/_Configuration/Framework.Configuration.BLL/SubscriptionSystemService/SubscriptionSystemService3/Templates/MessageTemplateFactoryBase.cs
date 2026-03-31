@@ -10,36 +10,35 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSyst
 internal abstract class MessageTemplateFactoryBase
 {
     internal abstract IEnumerable<MessageTemplateNotification> Create<TSourceDomainObjectType, TModelObjectType>(
-            DomainObjectVersions<TModelObjectType> versions,
-            Subscription subscription,
-            RecipientsBag recipientsBag,
-            IEnumerable<Attachment> attachments)
-            where TModelObjectType : class
-            where TSourceDomainObjectType: class;
+        DomainObjectVersions<TModelObjectType> versions,
+        Subscription subscription,
+        RecipientsBag recipientsBag,
+        IEnumerable<Attachment> attachments)
+        where TModelObjectType : class
+        where TSourceDomainObjectType : class;
 
     protected MessageTemplateNotification CreateTemplate<TSourceDomainObjectType, TModelObjectType>(
-            DomainObjectVersions<TModelObjectType> versions,
-            Subscription subscription,
-            IEnumerable<string> to,
-            IEnumerable<string> cc,
-            IEnumerable<string> replyTo,
-            IEnumerable<Attachment> attachments)
-            where TModelObjectType : class
+        DomainObjectVersions<TModelObjectType> versions,
+        Subscription subscription,
+        IEnumerable<string> to,
+        IEnumerable<string> cc,
+        IEnumerable<string> replyTo,
+        IEnumerable<Attachment> attachments)
+        where TModelObjectType : class
     {
-        var template = new MessageTemplateNotification(
-                                                       subscription.MessageTemplate.Code,
-                                                       versions,
-                                                       versions.DomainObjectType,
-                                                       to,
-                                                       cc,
-                                                       replyTo,
-                                                       attachments,
-                                                       subscription,
-                                                       subscription.AllowEmptyListOfRecipients,
-                                                       typeof(TSourceDomainObjectType));
-
-        template.RazorMessageTemplateType = subscription.RazorMessageTemplateType;
-
-        return template;
+        return new MessageTemplateNotification
+               {
+                   MessageTemplateCode = subscription.RazorMessageTemplateType.Name,
+                   ContextObject = versions,
+                   ContextObjectType = versions.DomainObjectType,
+                   Receivers = [.. to],
+                   CopyReceivers = [.. cc],
+                   ReplyTo = [.. replyTo],
+                   Attachments = [..attachments],
+                   Subscription = subscription,
+                   SendWithEmptyListOfRecipients = subscription.AllowEmptyListOfRecipients,
+                   SourceContextObjectType = typeof(TSourceDomainObjectType),
+                   RazorMessageTemplateType = subscription.RazorMessageTemplateType
+               };
     }
 }

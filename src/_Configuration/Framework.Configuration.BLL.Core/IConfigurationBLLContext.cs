@@ -12,6 +12,7 @@ using Framework.Core.TypeResolving;
 using Framework.Notification;
 using Framework.Notification.Domain;
 using Framework.Tracking;
+using Framework.Validation;
 
 using SecuritySystem.Notification;
 
@@ -27,6 +28,8 @@ public partial interface IConfigurationBLLContext :
 
     ITrackingServiceContainer<PersistentDomainObjectBase>
 {
+    IValidator Validator { get; }
+
     INotificationPrincipalExtractor<Principal> NotificationPrincipalExtractor { get; }
 
     IDomainObjectEventMetadata EventOperationSource { get; }

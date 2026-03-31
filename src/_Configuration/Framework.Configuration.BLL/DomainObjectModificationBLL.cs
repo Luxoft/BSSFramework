@@ -14,10 +14,10 @@ public partial class DomainObjectModificationBLL
     {
         this.Context.NamedLockService.LockAsync(ConfigurationNamedLock.ProcessModifications, LockRole.Update).GetAwaiter().GetResult();
 
-        var modifications = Queryable.Where<DomainObjectModification>(this.Context.Logics.DomainObjectModification.GetUnsecureQueryable(), m => !m.Processed) // Add Order by time?
-                                     .Take(limit).ToList();
+        var modifications = this.Context.Logics.DomainObjectModification.GetUnsecureQueryable().Where(m => !m.Processed) // Add Order by time?
+                                .Take(limit).ToList();
 
-        var logger = ServiceProviderServiceExtensions.GetRequiredService<ILogger<DomainObjectModificationBLL>>(this.Context.ServiceProvider);
+        var logger = this.Context.ServiceProvider.GetRequiredService<ILogger<DomainObjectModificationBLL>>();
         logger.LogDebug("Found {Count} modifications", modifications.Count);
 
         var errors = new List<Exception>();
@@ -29,15 +29,14 @@ public partial class DomainObjectModificationBLL
                            Identity = modification.DomainObjectId,
                            ModificationType = modification.Type,
                            Revision = modification.Revision,
-                           TypeInfo = new TypeInfoDescription(modification.DomainType)
+                           TypeInfo = new TypeInfoDescription { Name = modification.DomainType.Name, NameSpace = modification.DomainType.NameSpace }
                        };
 
             logger.LogDebug("Process modification {DomainObjectId}", modification.DomainObjectId);
 
             foreach (var tryResult in this.Context.Logics.Subscription.Process(info))
             {
-                TryResultExtensions.Match<Subscription>(
-                    tryResult,
+                tryResult.Match(
                     _ => { },
                     ex =>
                     {
@@ -65,7 +64,7 @@ public partial class DomainObjectModificationBLL
     public QueueProcessingState GetProcessingState() =>
         new()
         {
-            UnprocessedCount = Queryable.Count<DomainObjectModification>(this.GetUnsecureQueryable(), mod => !mod.Processed),
-            LastProcessedItemDateTime = Queryable.Where<DomainObjectModification>(this.GetUnsecureQueryable(), mod => mod.Processed).Max(mod => mod.ModifyDate)
+            UnprocessedCount = this.GetUnsecureQueryable().Count(mod => !mod.Processed),
+            LastProcessedItemDateTime = this.GetUnsecureQueryable().Where<DomainObjectModification>(mod => mod.Processed).Max(mod => mod.ModifyDate)
         };
 }

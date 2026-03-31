@@ -8,7 +8,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSyst
 /// <seealso cref="IEnumerable{T}" />
 public sealed class RecipientCollection : IEnumerable<Recipient>
 {
-    private static readonly RecipientComparer Comparer = new RecipientComparer();
+    private static readonly RecipientComparer Comparer = new();
     private readonly List<Recipient> store = [];
 
     /// <summary>Создаёт экземпляр класса <see cref="RecipientCollection"/>.</summary>

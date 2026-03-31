@@ -4,35 +4,18 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSyst
 
 internal class ExcessTemplatesFilterBase
 {
-    private static readonly MessageTemplateNotificationComparer TemplateComparer =
-            new MessageTemplateNotificationComparer();
+    private static readonly MessageTemplateNotificationComparer TemplateComparer = new();
 
     protected ExcessTemplatesFilterBase()
     {
     }
 
     public static MessageTemplateNotification CopyTemplate(
-            MessageTemplateNotification template,
-            IEnumerable<string> toRecipients,
-            IEnumerable<string> ccRecipients,
-            IEnumerable<string> replyTo)
-    {
-        var result = new MessageTemplateNotification(
-                                                     template.MessageTemplateCode,
-                                                     template.ContextObject,
-                                                     template.ContextObjectType,
-                                                     toRecipients,
-                                                     ccRecipients,
-                                                     replyTo,
-                                                     template.Attachments,
-                                                     template.Subscription,
-                                                     template.SendWithEmptyListOfRecipients,
-                                                     template.SourceContextObjectType);
-
-        result.RazorMessageTemplateType = template.RazorMessageTemplateType;
-
-        return result;
-    }
+        MessageTemplateNotification template,
+        IEnumerable<string> toRecipients,
+        IEnumerable<string> ccRecipients,
+        IEnumerable<string> replyTo) =>
+        template with { Receivers = [.. toRecipients], CopyReceivers = [.. ccRecipients], ReplyTo = [.. replyTo] };
 
     public static IEnumerable<IGrouping<MessageTemplateNotification, MessageTemplateNotification>> CollapseTemplates(
             IEnumerable<MessageTemplateNotification> templates)
@@ -54,7 +37,7 @@ internal class ExcessTemplatesFilterBase
 
     private class MessageTemplateNotificationComparer : IEqualityComparer<MessageTemplateNotification>
     {
-        public bool Equals(MessageTemplateNotification x, MessageTemplateNotification y)
+        public bool Equals(MessageTemplateNotification? x, MessageTemplateNotification? y)
         {
             if (ReferenceEquals(x, y))
             {

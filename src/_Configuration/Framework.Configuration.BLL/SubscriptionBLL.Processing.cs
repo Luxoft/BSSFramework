@@ -1,4 +1,6 @@
-﻿using Framework.Configuration.Domain;
+﻿using Framework.BLL;
+using Framework.BLL.Domain.IdentityObject;
+using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Database.Domain;
 
@@ -15,11 +17,12 @@ public partial class SubscriptionBLL
 
         try
         {
-            var domainType = context.Logics.DomainType.GetByDomainType(changedObjectInfo.TypeInfo);
+            var domainType = context.Logics.DomainType.GetByDomainType(new MemoryDomainType(changedObjectInfo.TypeInfo.Name, changedObjectInfo.TypeInfo.NameSpace));
 
             if (!domainType.TargetSystem.IsRevision)
             {
-                throw new InvalidOperationException($"{nameof(SubscriptionBLL)}::{nameof(this.Process)}: For {nameof(DomainType)} \'{domainType.Name}\' in {nameof(TargetSystem)} \'{domainType.TargetSystem.Name}\' {nameof(TargetSystem.IsRevision)} false but must be true.");
+                throw new InvalidOperationException(
+                    $"{nameof(SubscriptionBLL)}::{nameof(this.Process)}: For {nameof(DomainType)} \'{domainType.Name}\' in {nameof(TargetSystem)} \'{domainType.TargetSystem.Name}\' {nameof(TargetSystem.IsRevision)} false but must be true.");
             }
 
             var subscriptionService = context.GetTargetSystemService(domainType.TargetSystem).SubscriptionService;

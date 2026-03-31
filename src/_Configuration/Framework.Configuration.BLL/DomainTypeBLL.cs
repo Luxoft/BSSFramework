@@ -1,6 +1,7 @@
 ﻿using Framework.BLL.Domain.Exceptions;
 using Framework.Configuration.Domain;
-using Framework.Core;
+using Framework.Core.TypeResolving;
+using Framework.Validation;
 
 namespace Framework.Configuration.BLL;
 
@@ -23,7 +24,7 @@ public partial class DomainTypeBLL
 
         if (blocks.Length == 1)
         {
-            var domainType = this.Context.GetTargetSystemServices().ToComposite(tss => tss.TypeResolverS).Resolve(blocks[0], true);
+            var domainType = this.Context.GetTargetSystemServices().Select(tss => tss.TypeResolverS).ToComposite().Resolve(blocks[0]);
 
             return this.Context.GetDomainType(domainType, true);
         }

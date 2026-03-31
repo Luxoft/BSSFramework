@@ -39,8 +39,7 @@ public class SubscriptionServicesFactory<TBLLContext>
         this.bllContext = bllContext ?? throw new ArgumentNullException(nameof(bllContext));
         this.subscriptionMetadataStore = subscriptionMetadataStore ?? throw new ArgumentNullException(nameof(subscriptionMetadataStore));
     }
-    private LambdaProcessorFactory<TBLLContext> CreateLambdaProcessorFactory() =>
-            new LambdaProcessorFactory<TBLLContext>(this.bllContext);
+    private LambdaProcessorFactory<TBLLContext> CreateLambdaProcessorFactory() => new(this.bllContext);
 
     protected ConditionCheckSubscriptionsResolver<TBLLContext> CreateSubscriptionsResolver()
     {
@@ -50,7 +49,7 @@ public class SubscriptionServicesFactory<TBLLContext>
                                                                     new SubscriptionMetadataSubscriptionResolver(
                                                                      new DomainObjectSubscriptionsResolver(contextFacade),
                                                                      this.subscriptionMetadataStore,
-                                                                     new SubscriptionMetadataMapper(contextFacade),
+                                                                     new SubscriptionMetadataMapper(),
                                                                      contextFacade),
                                                                     this.CreateLambdaProcessorFactory(),
                                                                     contextFacade);
@@ -69,7 +68,7 @@ public class SubscriptionServicesFactory<TBLLContext>
     /// Createa attachment resolver that resoleves attach lambdas into real attachments
     /// </summary>
     /// <returns>New resolver instance</returns>
-    private AttachmentsResolver<TBLLContext> CreateAttachmentsResolver() => new AttachmentsResolver<TBLLContext>(this.CreateLambdaProcessorFactory());
+    private AttachmentsResolver<TBLLContext> CreateAttachmentsResolver() => new(this.CreateLambdaProcessorFactory());
 
     /// <summary>Создаёт экземпляр службы рассылки уведомлений.</summary>
     /// <returns>Экземпляр службы рассылки уведомлений.</returns>

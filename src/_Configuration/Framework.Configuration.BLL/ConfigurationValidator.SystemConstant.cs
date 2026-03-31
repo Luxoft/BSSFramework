@@ -22,7 +22,7 @@ public partial class ConfigurationValidator
 
                                                  try
                                                  {
-                                                     SerializerFactoryExtensions.Validate(this.Context.SystemConstantSerializerFactory, domainType, source.Value);
+                                                     this.Context.SystemConstantSerializerFactory.Validate(domainType, source.Value);
                                                  }
                                                  catch (Exception ex)
                                                  {

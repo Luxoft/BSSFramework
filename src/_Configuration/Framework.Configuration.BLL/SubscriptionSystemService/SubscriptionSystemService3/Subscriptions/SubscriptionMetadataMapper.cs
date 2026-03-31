@@ -1,8 +1,6 @@
 ﻿using Framework.Configuration.Domain;
 using Framework.Subscriptions;
 
-using DomainObjectChangeType = Framework.Subscriptions.Domain.DomainObjectChangeType;
-
 namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 
 /// <summary>
@@ -11,8 +9,8 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSyst
 /// </summary>
 public class SubscriptionMetadataMapper
 {
-    private static readonly Dictionary<DomainObjectChangeType, Tuple<bool?, bool?>> Requirements = new Dictionary<DomainObjectChangeType, Tuple<bool?, bool?>>
-        {
+    private static readonly Dictionary<DomainObjectChangeType, Tuple<bool?, bool?>> Requirements = new()
+                                                                                                   {
                 { DomainObjectChangeType.Any, Tuple.Create<bool?, bool?>(null, null) },
 
                 { DomainObjectChangeType.Create, Tuple.Create<bool?, bool?>(false, true) },
@@ -25,25 +23,6 @@ public class SubscriptionMetadataMapper
 
                 { DomainObjectChangeType.UpdateOrDelete, Tuple.Create<bool?, bool?>(true, null) }
         };
-
-    private readonly ConfigurationContextFacade configurationContextFacade;
-
-    /// <summary>
-    ///     Создаёт экземпляр класса <see cref="SubscriptionMetadataMapper" />.
-    /// </summary>
-    /// <param name="configurationContextFacade">Фасад контекста конфигурации.</param>
-    /// <exception cref="System.ArgumentNullException">
-    ///     Аргумент <paramref name="configurationContextFacade" /> равен null.
-    /// </exception>
-    public SubscriptionMetadataMapper(ConfigurationContextFacade configurationContextFacade)
-    {
-        if (configurationContextFacade == null)
-        {
-            throw new ArgumentNullException(nameof(configurationContextFacade));
-        }
-
-        this.configurationContextFacade = configurationContextFacade;
-    }
 
     /// <summary>
     ///     Преобразует экземпляр типа <see cref="Framework.Subscriptions.ISubscriptionMetadata" /> (Code first subscription)
@@ -103,33 +82,25 @@ public class SubscriptionMetadataMapper
 
     private static void MapSecurityItems(ISubscriptionMetadata metadata, Subscription subscription)
     {
-        var lambdas = metadata.GetSecurityItemSourceLambdas();
-
-        if (lambdas == null)
+        foreach (var lambda in metadata.GetSecurityItemSourceLambdas())
         {
-            return;
-        }
+            var securityItem = new SubscriptionSecurityItem(subscription)
+                               {
+                                   Source = MapLambda(lambda), ExpandType = lambda.ExpandType
+                               };
 
-        foreach (var lambda in lambdas)
-        {
-            var securityItem = new SubscriptionSecurityItem(subscription);
-            securityItem.Source = MapLambda(lambda);
-            securityItem.ExpandType = lambda.ExpandType;
             securityItem.Source.AuthDomainType = lambda.AuthDomainType;
         }
     }
 
-    private static SubscriptionLambda MapLambda(ILambdaMetadata metadata)
+    private static SubscriptionLambda? MapLambda(ILambdaMetadata? metadata)
     {
         if (metadata == null)
         {
             return null;
         }
 
-        var lambda = new SubscriptionLambda();
-        lambda.FuncValue = metadata.Lambda;
-        lambda.MetadataSourceType = metadata.GetType();
-
+        var lambda = new SubscriptionLambda { FuncValue = metadata.Lambda, MetadataSourceType = metadata.GetType() };
 
         var requirements = Requirements[metadata.DomainObjectChangeType];
 

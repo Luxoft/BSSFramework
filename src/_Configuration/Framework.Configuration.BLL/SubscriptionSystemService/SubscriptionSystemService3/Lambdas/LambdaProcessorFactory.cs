@@ -7,7 +7,7 @@ public class LambdaProcessorFactory<TBLLContext>
         where TBLLContext : class
 {
     private static readonly Dictionary<Type, Func<TBLLContext, LambdaProcessor<TBLLContext>>> Processors =
-            new Dictionary<Type, Func<TBLLContext, LambdaProcessor<TBLLContext>>>
+            new()
             {
                     { typeof(ConditionLambdaProcessor<TBLLContext>), (c) => new ConditionLambdaProcessor<TBLLContext>(c) },
                     { typeof(GenerationLambdaProcessorTo<TBLLContext>), (c) => new GenerationLambdaProcessorTo<TBLLContext>(c) },

@@ -12,7 +12,7 @@ public class ByRolesRecipientsResolver<TBLLContext>
 {
     private static readonly Dictionary<SubscriptionSourceMode, Func<ConfigurationContextFacade, LambdaProcessorFactory<TBLLContext>, ByRolesRecipientsResolverBase<TBLLContext>>>
             Resolvers =
-                    new Dictionary<SubscriptionSourceMode, Func<ConfigurationContextFacade, LambdaProcessorFactory<TBLLContext>, ByRolesRecipientsResolverBase<TBLLContext>>>
+                    new()
                     {
                             { SubscriptionSourceMode.Dynamic, (cf, pf) => new ByRolesRecipientsResolverDynamic<TBLLContext>(cf, pf) },
                             { SubscriptionSourceMode.Typed, (cf, pf) => new ByRolesRecipientsResolverTyped<TBLLContext>(cf, pf) },

@@ -9,9 +9,9 @@ public partial class DomainObjectEventBLL
     {
         return new QueueProcessingState
                {
-                       UnprocessedCount = Queryable.Count<DomainObjectEvent>(this.GetUnsecureQueryable(), mod => mod.Status != QueueProgressStatus.Processed),
+                       UnprocessedCount = this.GetUnsecureQueryable().Count<DomainObjectEvent>(mod => mod.Status != QueueProgressStatus.Processed),
 
-                       LastProcessedItemDateTime = Queryable.Where<DomainObjectEvent>(this.GetUnsecureQueryable(), mod => mod.Status == QueueProgressStatus.Processed).Max(mod => mod.ProcessDate)
+                       LastProcessedItemDateTime = this.GetUnsecureQueryable().Where<DomainObjectEvent>(mod => mod.Status == QueueProgressStatus.Processed).Max(mod => mod.ProcessDate)
                };
     }
 }

@@ -43,8 +43,8 @@ public class TestBase : IntegrationTestBase<ISampleSystemBLLContext>
         return this.GetControllerEvaluator<AuthMainController>(principalName);
     }
 
-    protected ControllerEvaluator<ConfigSLJsonController> GetConfigurationControllerEvaluator(string? principalName = null)
+    protected ControllerEvaluator<ConfigMainController> GetConfigurationControllerEvaluator(string? principalName = null)
     {
-        return this.GetControllerEvaluator<ConfigSLJsonController>(principalName);
+        return this.GetControllerEvaluator<ConfigMainController>(principalName);
     }
 }

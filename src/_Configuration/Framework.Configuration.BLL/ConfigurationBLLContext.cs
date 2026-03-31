@@ -1,5 +1,6 @@
 ﻿using CommonFramework;
 using CommonFramework.DictionaryCache;
+
 using Framework.Application.Events;
 using Framework.Application.Lock;
 using Framework.Authorization.BLL;
@@ -18,8 +19,8 @@ using Framework.Core.TypeResolving;
 using Framework.Database;
 using Framework.Notification;
 using Framework.Notification.Domain;
-using Framework.OData.QueryLanguage.StandardExpressionBuilder;
 using Framework.Tracking;
+using Framework.Validation;
 
 using HierarchicalExpand;
 
@@ -51,7 +52,6 @@ public partial class ConfigurationBLLContext
         [FromKeyedServices("BLL")] IEventOperationSender operationSender,
         ITrackingService<PersistentDomainObjectBase> trackingService,
         IAccessDeniedExceptionService accessDeniedExceptionService,
-        ISelectOperationParser selectOperationParser,
         IConfigurationValidator validator,
         IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
         IMessageSender<MessageTemplateNotification> subscriptionSender,
@@ -66,9 +66,10 @@ public partial class ConfigurationBLLContext
         ICurrentRevisionService currentRevisionService,
         ConfigurationBLLContextSettings settings,
         INotificationPrincipalExtractor<Principal> notificationPrincipalExtractor)
-        : base(serviceProvider, operationSender, accessDeniedExceptionService, selectOperationParser, hierarchicalObjectExpanderFactory)
+        : base(serviceProvider, operationSender, accessDeniedExceptionService, hierarchicalObjectExpanderFactory)
     {
         this.TrackingService = trackingService;
+        this.Validator = validator;
         this.SubscriptionSender = subscriptionSender ?? throw new ArgumentNullException(nameof(subscriptionSender));
 
         this.SecurityService = securityService;
@@ -143,6 +144,8 @@ public partial class ConfigurationBLLContext
     public ITypeResolver<DomainType> ComplexDomainTypeResolver { get; }
 
     public override IConfigurationBLLFactoryContainer Logics { get; }
+
+    public IValidator Validator { get; }
 
     public INotificationPrincipalExtractor<Principal> NotificationPrincipalExtractor { get; }
 

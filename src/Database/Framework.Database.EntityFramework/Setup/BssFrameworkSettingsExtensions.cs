@@ -1,6 +1,6 @@
-﻿using Framework.DomainDriven.Setup;
+﻿using Framework.Infrastructure.DependencyInjection;
 
-namespace Framework.DomainDriven.EntityFramework;
+namespace Framework.Database.EntityFramework.Setup;
 
 public static class BssFrameworkSettingsExtensions
 {

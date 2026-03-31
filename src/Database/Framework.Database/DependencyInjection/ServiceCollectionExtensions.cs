@@ -1,4 +1,11 @@
-﻿using Framework.Database._Visitors.Specific;
+﻿using System.Data;
+
+using CommonFramework.DependencyInjection;
+
+using Framework.Database._Visitors.Specific;
+using Framework.Database.AuditProperty;
+using Framework.Database.ConnectionStringSource;
+using Framework.Database.DALExceptions;
 using Framework.Database.ExpressionVisitorContainer;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +18,16 @@ public static class ServiceCollectionExtensions
     {
         public IServiceCollection AddGenericDatabaseServices()
         {
+            services.AddSingleton<IDefaultConnectionStringSource, DefaultConnectionStringSource>();
+
+            services.AddSingleton<IDalValidationIdentitySource, DalValidationIdentitySource>();
+
+            services.AddScopedFrom<IDbTransaction, IDBSession>(session => session.Transaction);
+
+            services.AddSingleton(DBSessionSettings.Default);
+
+            services.AddScoped<IAuditPropertyFactory, AuditPropertyFactory>();
+
             services.AddSingleton<IInitializeManager, InitializeManager>();
 
             services.AddScoped<IDBSessionManager, DBSessionManager>();

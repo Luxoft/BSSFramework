@@ -48,6 +48,7 @@
   <Folder Name="/Database/">
     <Project Path="Database/Framework.Database.Abstractions/Framework.Database.Abstractions.csproj" />
     <Project Path="Database/Framework.Database.Domain/Framework.Database.Domain.csproj" />
+    <Project Path="Database/Framework.Database.EntityFramework/Framework.Database.EntityFramework.csproj" />
     <Project Path="Database/Framework.Database.Legacy.Abstractions/Framework.Database.Legacy.Abstractions.csproj" />
     <Project Path="Database/Framework.Database.Legacy.Domain/Framework.Database.Legacy.Domain.csproj" />
     <Project Path="Database/Framework.Database.Mapping/Framework.Database.Mapping.csproj" />
@@ -163,6 +164,7 @@
   </Folder>
   
   <Folder Name="/_Configuration/">
+    <File Path="Directory.Packages.props" />
     <Project Path="_Configuration/Framework.Configuration.BLL.Core.Tests.Unit/Framework.Configuration.BLL.Core.Tests.Unit.csproj" />
     <Project Path="_Configuration/Framework.Configuration.BLL.Core/Framework.Configuration.BLL.Core.csproj" />
     <Project Path="_Configuration/Framework.Configuration.BLL/Framework.Configuration.BLL.csproj" />

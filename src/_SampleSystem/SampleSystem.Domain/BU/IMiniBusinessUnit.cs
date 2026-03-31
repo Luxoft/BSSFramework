@@ -1,4 +1,5 @@
-﻿using Framework.Core;
+﻿using Framework.Application.Domain;
+using Framework.Core;
 using Framework.Persistent;
 using Framework.Projection.Contract;
 

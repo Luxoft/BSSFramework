@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.EntityFramework;
+﻿namespace Framework.Database.EntityFramework.Setup;
 
 public interface IEntityFrameworkSetupObject
 {

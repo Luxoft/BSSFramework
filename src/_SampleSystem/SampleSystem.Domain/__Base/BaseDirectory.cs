@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using Framework.Application.Domain;
+using Framework.BLL.Domain.Attributes;
+using Framework.Core;
 using Framework.Persistent;
 using Framework.Restriction;
 

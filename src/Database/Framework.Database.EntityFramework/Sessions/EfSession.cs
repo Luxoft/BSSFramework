@@ -2,7 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
-namespace Framework.DomainDriven.EntityFramework;
+namespace Framework.Database.EntityFramework.Sessions;
 
 public class EfSession : IEfSession
 {
@@ -10,7 +10,7 @@ public class EfSession : IEfSession
 
     private readonly Lazy<IEfSession> lazyInnerSession;
 
-    public EfSession(DbContext nativeSession, IDBSessionSettings settings, IEnumerable<IDBSessionEventListener> eventListeners)
+    public EfSession(DbContext nativeSession, DBSessionSettings settings, IEnumerable<IDBSessionEventListener> eventListeners)
     {
         this.lazyInnerSession = new Lazy<IEfSession>(() =>
         {
@@ -20,7 +20,7 @@ public class EfSession : IEfSession
                     return new ReadOnlyEfSession(nativeSession);
 
                 case DBSessionMode.Write:
-                    return new WriteEfSession(nativeSession, settings, eventListeners);
+                    return new WriteEfSession(nativeSession, eventListeners);
 
                 default:
                     throw new InvalidOperationException();

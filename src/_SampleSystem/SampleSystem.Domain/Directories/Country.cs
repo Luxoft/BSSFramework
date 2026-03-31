@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using Framework.BLL.Domain.Persistent.IdentityObject;
+using Framework.BLL.Domain.ServiceRole;
+using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Restriction;

@@ -2,7 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
-namespace Framework.DomainDriven.EntityFramework;
+namespace Framework.Database.EntityFramework.Sessions;
 
 public abstract class EfSessionBase(DbContext nativeSession, DBSessionMode sessionMode) : IEfSession
 {

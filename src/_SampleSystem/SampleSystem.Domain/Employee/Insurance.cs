@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 
 using Framework.Persistent;
+using Framework.Relations;
 
 namespace SampleSystem.Domain;
 

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.DomainDriven.EntityFramework</PackageId>
+    <PackageId>Luxoft.Framework.Database.EntityFramework</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +18,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Abstractions\Framework.Infrastructure.Abstractions.csproj" />
+    <ProjectReference Include="..\Framework.Database.Domain\Framework.Database.Domain.csproj" />
+    <ProjectReference Include="..\Framework.Database.Runtime\Framework.Database.Runtime.csproj" />
   </ItemGroup>
 
 </Project>

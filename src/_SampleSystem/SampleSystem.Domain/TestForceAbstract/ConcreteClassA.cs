@@ -1,4 +1,6 @@
-﻿using Framework.Persistent.Mapping;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+using Framework.Persistent.Mapping;
 
 namespace SampleSystem.Domain.TestForceAbstract;
 

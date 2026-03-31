@@ -1,18 +1,15 @@
-﻿using System.Data;
+﻿using CommonFramework.DependencyInjection;
 
-using CommonFramework.DependencyInjection;
-
-using Framework.Core;
 using Framework.Core.LazyObject;
+using Framework.Database.EntityFramework.Sessions;
 using Framework.DependencyInjection;
-using Framework.DomainDriven.DALExceptions;
 
 using GenericQueryable.DependencyInjection;
 using GenericQueryable.EntityFramework;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.DomainDriven.EntityFramework;
+namespace Framework.Database.EntityFramework.Setup;
 
 public static class DependencyInjectionExtensions
 {
@@ -24,7 +21,7 @@ public static class DependencyInjectionExtensions
 
         services.AddScoped(typeof(IAsyncDal<,>), typeof(EfAsyncDal<,>));
 
-        services.AddScoped<IDBSessionSettings, DBSessionSettings>();
+        services.AddScoped<DBSessionSettings>();
 
         services.AddGenericQueryable(v => v.SetFetchService<EfFetchService>().SetTargetMethodExtractor<EfTargetMethodExtractor>());
 
@@ -34,12 +31,7 @@ public static class DependencyInjectionExtensions
         services.AddScopedFrom((ILazyObject<IDBSession> lazyDbSession) => lazyDbSession.Value);
         services.AddScoped<IDBSessionManager, DBSessionManager>();
 
-        //services.AddScopedFrom<DbContext, IEfSession>(session => session.NativeSession);
-        services.AddScopedFrom<IDbTransaction, IDBSession>(session => session.Transaction);
-
         //services.AddSingleton<IEfSessionEnvironmentSettings, EfSessionEnvironmentSettings>();
-
-        services.AddSingleton<IDalValidationIdentitySource, DalValidationIdentitySource>();
 
         //services.AddSingleton<IDefaultConnectionStringSource, DefaultConnectionStringSource>();
 

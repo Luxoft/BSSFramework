@@ -3,7 +3,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Framework.DomainDriven.EntityFramework;
+namespace Framework.Database.EntityFramework.Sessions;
 
 public class ReadOnlyEfSession : EfSessionBase
 {

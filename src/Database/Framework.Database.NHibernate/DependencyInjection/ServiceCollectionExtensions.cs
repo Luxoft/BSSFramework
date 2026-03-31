@@ -26,10 +26,6 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
-        services.AddSingleton(DBSessionSettings.Default);
-
-        services.AddScoped<IAuditPropertyFactory, AuditPropertyFactory>();
-
         services.AddNHibernateGenericQueryable();
 
         //For close db session by middleware
@@ -39,15 +35,10 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IDBSessionManager, DBSessionManager>();
 
         services.AddScopedFrom<ISession, INHibSession>(session => session.NativeSession);
-        services.AddScopedFrom<IDbTransaction, IDBSession>(session => session.Transaction);
 
         services.AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>();
 
-        services.AddSingleton<IDalValidationIdentitySource, DalValidationIdentitySource>();
-
         services.AddSingleton<NHibSessionEnvironment>();
-
-        services.AddSingleton<IDefaultConnectionStringSource, DefaultConnectionStringSource>();
 
         setupAction(setupObject);
 

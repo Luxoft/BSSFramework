@@ -1,6 +1,7 @@
 ﻿using CommonFramework;
 
 using Framework.Persistent;
+using Framework.Relations;
 
 namespace SampleSystem.Domain;
 

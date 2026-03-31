@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven.BLL;
+﻿using Framework.BLL.Domain.ServiceRole.Base;
+using Framework.DomainDriven.BLL;
 using Framework.Restriction;
 using Framework.Validation;
 

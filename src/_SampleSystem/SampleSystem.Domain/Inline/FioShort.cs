@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
+using Framework.BLL.Domain.Serialization;
 using Framework.DomainDriven.Serialization;
 using Framework.Core;
 using Framework.Restriction;

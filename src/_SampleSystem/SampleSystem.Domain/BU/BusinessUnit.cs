@@ -1,9 +1,12 @@
 ﻿using CommonFramework;
 
+using Framework.BLL.Domain.Serialization;
+using Framework.BLL.Domain.ServiceRole;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
+using Framework.Relations;
 using Framework.Restriction;
 using Framework.Validation;
 

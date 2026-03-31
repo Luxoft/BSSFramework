@@ -1,4 +1,6 @@
-﻿using Framework.DomainDriven.BLL;
+﻿using Framework.BLL.Domain.Serialization;
+using Framework.BLL.Domain.ServiceRole;
+using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent.Mapping;
 

@@ -1,4 +1,5 @@
-﻿using Framework.Core;
+﻿using Framework.BLL.Domain.Persistent.IdentityObject;
+using Framework.Core;
 using Framework.Persistent;
 using Framework.Restriction;
 using Framework.Validation;

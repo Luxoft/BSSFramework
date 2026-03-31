@@ -1,5 +1,10 @@
 ﻿using CommonFramework;
 
+using Framework.BLL.Domain.DTO;
+using Framework.BLL.Domain.Fetching;
+using Framework.BLL.Domain.Persistent.Attributes;
+using Framework.BLL.Domain.Serialization;
+using Framework.BLL.Domain.ServiceRole;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
@@ -7,6 +12,7 @@ using Framework.DomainDriven.Serialization;
 using Framework.Notification;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
+using Framework.Relations;
 using Framework.Restriction;
 using SecuritySystem;
 using Framework.Transfering;

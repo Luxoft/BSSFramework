@@ -1,7 +1,9 @@
-﻿using Framework.Core;
+﻿using Framework.BLL.Domain.ServiceRole;
+using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
+using Framework.Relations;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;

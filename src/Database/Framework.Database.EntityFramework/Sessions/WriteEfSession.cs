@@ -1,21 +1,13 @@
 ﻿using System.Data;
 
-using Framework.DomainDriven.Audit;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Framework.DomainDriven.EntityFramework;
+namespace Framework.Database.EntityFramework.Sessions;
 
 public class WriteEfSession : EfSessionBase
 {
     private readonly IDBSessionEventListener[] eventListeners;
-
-
-    private readonly AuditPropertyPair modifyAuditProperties;
-
-
-    private readonly AuditPropertyPair createAuditProperties;
 
     private readonly RelationalTransaction efTransaction;
 
@@ -24,13 +16,10 @@ public class WriteEfSession : EfSessionBase
     private bool closed;
 
     public WriteEfSession(DbContext nativeSession,
-                          IDBSessionSettings settings,
                           IEnumerable<IDBSessionEventListener> eventListeners)
             : base(nativeSession, DBSessionMode.Write)
     {
         this.eventListeners = eventListeners.ToArray();
-        this.modifyAuditProperties = settings.GetModifyAuditProperty();
-        this.createAuditProperties = settings.GetCreateAuditProperty();
 
         this.efTransaction = (RelationalTransaction)this.NativeSession.Database.BeginTransaction();
         this.Transaction = this.efTransaction.GetDbTransaction();

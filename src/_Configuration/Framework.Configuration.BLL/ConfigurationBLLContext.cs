@@ -50,10 +50,10 @@ public partial class ConfigurationBLLContext
     public ConfigurationBLLContext(
         IServiceProvider serviceProvider,
         [FromKeyedServices("BLL")] IEventOperationSender operationSender,
-        ITrackingService<PersistentDomainObjectBase> trackingService,
         IAccessDeniedExceptionService accessDeniedExceptionService,
-        IConfigurationValidator validator,
         IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
+        ITrackingService<PersistentDomainObjectBase> trackingService,
+        IConfigurationValidator validator,
         IMessageSender<MessageTemplateNotification> subscriptionSender,
         IRootSecurityService securityService,
         IConfigurationBLLFactoryContainer logics,

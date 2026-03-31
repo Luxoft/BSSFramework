@@ -1,8 +1,8 @@
-﻿using Framework.OData;
-using Framework.OData.Typed;
-using Framework.Persistent;
+﻿using Framework.BLL.Domain.Persistent;
 
 using GenericQueryable.Fetching;
+
+using OData.Domain;
 
 using SampleSystem.Domain.Models.Filters;
 using SampleSystem.Domain.Projections;

@@ -1,6 +1,6 @@
-﻿using Framework.DomainDriven.Repository;
+﻿using Bss.Platform.Mediation.Abstractions;
 
-using MediatR;
+using Framework.Application.Repository;
 
 using SampleSystem.BLL._Command.CreateClassA.Integration;
 using SampleSystem.Domain.TestForceAbstract;

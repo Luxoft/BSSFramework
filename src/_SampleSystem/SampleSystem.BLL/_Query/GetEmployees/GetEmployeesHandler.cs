@@ -1,6 +1,6 @@
-﻿using SecuritySystem;
+﻿using Bss.Platform.Mediation.Abstractions;
 
-using MediatR;
+using SecuritySystem;
 
 namespace SampleSystem.BLL._Query.GetEmployees;
 

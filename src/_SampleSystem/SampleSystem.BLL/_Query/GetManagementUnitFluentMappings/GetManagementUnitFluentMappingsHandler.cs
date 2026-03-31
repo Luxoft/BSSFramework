@@ -1,11 +1,11 @@
-﻿using SecuritySystem;
+﻿using Bss.Platform.Mediation.Abstractions;
 
-using MediatR;
+using SecuritySystem;
 
 namespace SampleSystem.BLL._Query.GetManagementUnitFluentMappings;
 
 public class GetManagementUnitFluentMappingsHandler : IRequestHandler<GetManagementUnitFluentMappingsQuery,
-        GetManagementUnitFluentMappingsResponse[]>
+    GetManagementUnitFluentMappingsResponse[]>
 {
     private readonly IManagementUnitFluentMappingBLL managementUnitFluentMappingBll;
 

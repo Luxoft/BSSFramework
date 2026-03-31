@@ -1,10 +1,8 @@
-﻿using Framework.Authorization.BLL;
-using Framework.Core;
+﻿using Framework.Application.Events;
+using Framework.Authorization.BLL;
+using Framework.BLL;
+using Framework.BLL.Services;
 using Framework.Core.TypeResolving;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL.Security;
-using Framework.Events;
-using Framework.OData.QueryLanguage;
 using Framework.Tracking;
 
 using GenericQueryable.Fetching;
@@ -14,24 +12,26 @@ using SecuritySystem.SecurityAccessor;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
-using SampleSystem.Domain.Projections;
 
 using HierarchicalExpand;
 
 using SecuritySystem.AccessDenied;
 using SecuritySystem.UserSource;
 using Framework.Configuration.BLL;
+using Framework.Validation;
+
+using OData;
 
 namespace SampleSystem.BLL;
 
 public partial class SampleSystemBLLContext(
     IServiceProvider serviceProvider,
     [FromKeyedServices("BLL")] IEventOperationSender operationSender,
-    ITrackingService<PersistentDomainObjectBase> trackingService,
     IAccessDeniedExceptionService accessDeniedExceptionService,
+    IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
+    ITrackingService<PersistentDomainObjectBase> trackingService,
     ISelectOperationParser selectOperationParser,
     ISampleSystemValidator validator,
-    IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
     IRootSecurityService securityService,
     ISampleSystemBLLFactoryContainer logics,
     IAuthorizationBLLContext authorization,
@@ -39,15 +39,11 @@ public partial class SampleSystemBLLContext(
     BLLContextSettings<PersistentDomainObjectBase> settings,
     ISecurityAccessorResolver securityAccessorResolver,
     ICurrentUserSource<Employee> currentEmployeeSource,
-    [FromKeyedServices(RootFetchRuleExpander.Key)] IFetchRuleExpander fetchRuleExpander)
-    : SecurityBLLBaseContext<PersistentDomainObjectBase, Guid,
-        ISampleSystemBLLFactoryContainer>(
+    IFetchRuleExpander fetchRuleExpander)
+    : SecurityBLLBaseContext<PersistentDomainObjectBase, Guid, ISampleSystemBLLFactoryContainer>(
         serviceProvider,
         operationSender,
-        trackingService,
         accessDeniedExceptionService,
-        selectOperationParser,
-        validator,
         hierarchicalObjectExpanderFactory)
 {
     public IRootSecurityService SecurityService { get; } = securityService;
@@ -65,4 +61,10 @@ public partial class SampleSystemBLLContext(
     public IConfigurationBLLContext Configuration { get; } = configuration;
 
     public ITypeResolver<string> TypeResolver { get; } = settings.TypeResolver;
+
+    public ITrackingService<PersistentDomainObjectBase> TrackingService { get; } = trackingService;
+
+    public ISelectOperationParser SelectOperationParser { get; } = selectOperationParser;
+
+    public IValidator Validator { get; } = validator;
 }

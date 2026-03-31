@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿using Bss.Platform.Mediation.Abstractions;
 
 using SampleSystem.Domain;
 

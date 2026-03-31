@@ -3,6 +3,7 @@ using Framework.BLL;
 using Framework.Configuration.BLL;
 using Framework.Core.TypeResolving;
 using Framework.Tracking;
+using Framework.Validation;
 
 using GenericQueryable.Fetching;
 
@@ -28,4 +29,6 @@ public partial interface ISampleSystemBLLContext :
     IConfigurationBLLContext Configuration { get; }
 
     ISecurityAccessorResolver SecurityAccessorResolver { get; }
+
+    IValidator Validator { get; }
 }

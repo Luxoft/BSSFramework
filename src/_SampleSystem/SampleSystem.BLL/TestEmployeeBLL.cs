@@ -1,7 +1,6 @@
-﻿using Framework.OData;
-using Framework.OData.Typed;
+﻿using GenericQueryable.Fetching;
 
-using GenericQueryable.Fetching;
+using OData.Domain;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Filters;
@@ -38,8 +37,6 @@ public partial class TestEmployeeBLL
             FetchRule<TestEmployee> fetchs)
     {
         var nextSelectOperation = selectOperation.AddFilter(te => te.CoreBusinessUnit.Id == filter.BusinessUnit.Id);
-
-        var isVirtual = nextSelectOperation.IsVirtual;
 
         return this.GetObjectsByOData(nextSelectOperation, fetchs);
     }

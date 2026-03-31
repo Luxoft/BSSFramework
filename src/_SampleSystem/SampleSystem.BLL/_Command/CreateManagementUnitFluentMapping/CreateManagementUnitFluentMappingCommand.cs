@@ -1,7 +1,6 @@
-﻿using Framework.Core;
+﻿using Bss.Platform.Mediation.Abstractions;
 
-
-using MediatR;
+using Framework.Core;
 
 namespace SampleSystem.BLL._Command.CreateManagementUnitFluentMapping;
 

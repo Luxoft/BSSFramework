@@ -10,20 +10,13 @@ namespace Framework.BLL.Events;
 /// Базовый класс для DAL-евентов
 /// </summary>
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
-public class DependencyDetailEventDALListener<TPersistentDomainObjectBase> : IBeforeTransactionCompletedDALListener, IEventOperationReceiver
+public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
+    IEventDTOMessageSender<TPersistentDomainObjectBase> messageSender,
+    EventDALListenerSettings<TPersistentDomainObjectBase>? settings = null)
+    : IBeforeTransactionCompletedDALListener, IEventOperationReceiver
     where TPersistentDomainObjectBase : class
 {
-    private readonly IEventDTOMessageSender<TPersistentDomainObjectBase> messageSender;
-
-    private readonly EventDALListenerSettings<TPersistentDomainObjectBase> settings;
-
-    public DependencyDetailEventDALListener(
-        IEventDTOMessageSender<TPersistentDomainObjectBase> messageSender,
-        EventDALListenerSettings<TPersistentDomainObjectBase>? settings = null)
-    {
-        this.messageSender = messageSender;
-        this.settings = settings ?? new EventDALListenerSettings<TPersistentDomainObjectBase>();
-    }
+    private readonly EventDALListenerSettings<TPersistentDomainObjectBase> settings = settings ?? new EventDALListenerSettings<TPersistentDomainObjectBase>();
 
     /// <inheritdoc />
     public async Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
@@ -77,7 +70,7 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase> : IBe
                               DomainObject = domainObject, Operation = eventType, CustomDomainObjectType = domainObjectType
                           };
 
-            await this.messageSender.SendAsync(message, cancellationToken);
+            await messageSender.SendAsync(message, cancellationToken);
         }
     }
 

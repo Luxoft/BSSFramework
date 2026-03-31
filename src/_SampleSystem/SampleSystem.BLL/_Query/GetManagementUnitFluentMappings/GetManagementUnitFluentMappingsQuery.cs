@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿using Bss.Platform.Mediation.Abstractions;
 
 namespace SampleSystem.BLL._Query.GetManagementUnitFluentMappings;
 

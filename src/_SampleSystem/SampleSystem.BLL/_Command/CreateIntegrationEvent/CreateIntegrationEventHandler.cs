@@ -1,6 +1,5 @@
 ﻿using Bss.Platform.Events.Abstractions;
-
-using MediatR;
+using Bss.Platform.Mediation.Abstractions;
 
 using SampleSystem.BLL._Command.ProcessIntegrationEvent;
 using SampleSystem.Domain;

@@ -1,9 +1,9 @@
-﻿using Framework.DomainDriven.BLL;
-
-using GenericQueryable.Fetching;
+﻿using GenericQueryable.Fetching;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Filters;
+
+using Framework.BLL;
 
 namespace SampleSystem.BLL;
 

@@ -40,7 +40,7 @@
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="$(BssPlatform)" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Middlewares" Version="$(BssPlatform)" />
     <PackageVersion Include="Luxoft.Bss.Platform.Events" Version="$(BssPlatform)" />
-    <PackageVersion Include="Luxoft.Bss.Platform.Events.Abstractions" Version="$(BssPlatform)" />
+    <PackageVersion Include="Luxoft.Bss.Platform.Events.Abstractions" Version="1.6.7" />
     <PackageVersion Include="Luxoft.Bss.Platform.Logging" Version="$(BssPlatform)" />
     <PackageVersion Include="Luxoft.Bss.Testing.Xunit" Version="[1.0.2,)" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc" Version="2.3.9" />

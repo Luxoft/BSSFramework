@@ -4,7 +4,7 @@ using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 namespace Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
 
 public class BLLFactoryContainerInterfaceFileFactory<TConfiguration> : BLLFactoryContainerInterfaceFileFactoryBase<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IBLLCoreGeneratorConfiguration<IBLLCoreGenerationEnvironment>
 {
     public BLLFactoryContainerInterfaceFileFactory(TConfiguration configuration)
             : base(configuration)

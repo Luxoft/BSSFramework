@@ -1,6 +1,10 @@
 ﻿using System.Xml.Linq;
 
+using CommonFramework;
+
 using Framework.Core;
+using Framework.Database.Mapping;
+using Framework.Database.Metadata;
 
 namespace Framework.Database.NHibernate.DALGenerator._Internal;
 
@@ -18,10 +22,7 @@ internal static class XElementExtensions
         return source.WithAttribute("access", defaultAccess);
     }
 
-    public static XElement CreatePropertyElement(this XElement root)
-    {
-        return root.CreateElement("property");
-    }
+    public static XElement CreatePropertyElement(this XElement root) => root.CreateElement("property");
 
     private static string GetTableName(DomainTypeMetadata domainTypeMetadata)
     {
@@ -53,30 +54,15 @@ internal static class XElementExtensions
         return root;
     }
 
-    public static XElement CreatePropertyElementWithRootNamespace(this XElement root)
-    {
-        return root.CreateElementWithRootNamespaceHandled("property");
-    }
+    public static XElement CreatePropertyElementWithRootNamespace(this XElement root) => root.CreateElementWithRootNamespaceHandled("property");
 
-    public static XElement CreateManyToOnePropertyElement(this XElement root)
-    {
-        return root.CreateElement("many-to-one");
-    }
+    public static XElement CreateManyToOnePropertyElement(this XElement root) => root.CreateElement("many-to-one");
 
-    public static XElement CreateManyToOnePropertyElementWithRootNamespace(this XElement root)
-    {
-        return root.CreateElement("many-to-one");
-    }
+    public static XElement CreateManyToOnePropertyElementWithRootNamespace(this XElement root) => root.CreateElement("many-to-one");
 
-    public static XElement CreateKeyElement(this XElement root)
-    {
-        return root.CreateElement("key");
-    }
+    public static XElement CreateKeyElement(this XElement root) => root.CreateElement("key");
 
-    public static XElement WithClassAttribute(this XElement source, string className)
-    {
-        return source.WithAttribute("class", className);
-    }
+    public static XElement WithClassAttribute(this XElement source, string className) => source.WithAttribute("class", className);
 
     public static XElement WithImmutableAttribute(this XElement source)
     {
@@ -90,15 +76,9 @@ internal static class XElementExtensions
         return source;
     }
 
-    public static XElement WithPropertyRefAttribute(this XElement source, string propertyName)
-    {
-        return source.WithAttribute("property-ref", propertyName);
-    }
+    public static XElement WithPropertyRefAttribute(this XElement source, string propertyName) => source.WithAttribute("property-ref", propertyName);
 
-    public static XElement WithColumnAttribute(this XElement source, string columnName)
-    {
-        return source.WithAttribute("column", columnName);
-    }
+    public static XElement WithColumnAttribute(this XElement source, string columnName) => source.WithAttribute("column", columnName);
 
     public static XElement WithTryUniqueAttribute(this XElement source, FieldMetadata fieldMetadata)
     {
@@ -112,10 +92,7 @@ internal static class XElementExtensions
         return source;
     }
 
-    public static void WithUniqueKey(this XElement source, string uniqueKeys)
-    {
-        source.WithAttribute("unique-key", uniqueKeys);
-    }
+    public static void WithUniqueKey(this XElement source, string uniqueKeys) => source.WithAttribute("unique-key", uniqueKeys);
 
     public static string GetUniqueKeys(this FieldMetadata fieldMetadata)
     {
@@ -131,68 +108,29 @@ internal static class XElementExtensions
         return uniqueKeys;
     }
 
-    public static XElement WithColumnType(this XElement source, string columnType)
-    {
-        return source.WithAttribute("type", columnType);
-    }
+    public static XElement WithColumnType(this XElement source, string columnType) => source.WithAttribute("type", columnType);
 
-    public static XElement CreateOneToManyElement(this XElement root)
-    {
-        return root.CreateElement("one-to-many");
-    }
+    public static XElement CreateOneToManyElement(this XElement root) => root.CreateElement("one-to-many");
 
-    public static XElement CreateOneToManyElementWithRootNamespace(this XElement root)
-    {
-        return root.CreateElementWithRootNamespaceHandled("one-to-many");
-    }
+    public static XElement CreateOneToManyElementWithRootNamespace(this XElement root) => root.CreateElementWithRootNamespaceHandled("one-to-many");
 
-    public static XElement CreateOneToOneElementWithRootNamespace(this XElement root)
-    {
-        return root.CreateElementWithRootNamespaceHandled("one-to-one");
-    }
+    public static XElement CreateOneToOneElementWithRootNamespace(this XElement root) => root.CreateElementWithRootNamespaceHandled("one-to-one");
 
-    public static XElement CreateBagElement(this XElement root)
-    {
-        return root.CreateElement("bag");
-    }
+    public static XElement CreateBagElement(this XElement root) => root.CreateElement("bag");
 
-    public static XElement CreateVersionElement(this XElement root)
-    {
-        return root.CreateElement("version");
-    }
+    public static XElement CreateVersionElement(this XElement root) => root.CreateElement("version");
 
-    public static XElement CreateColumnElement(this XElement root)
-    {
-        return root.CreateElement("column");
-    }
+    public static XElement CreateColumnElement(this XElement root) => root.CreateElement("column");
 
-    public static XElement CreateBagElementWithRootNamespace(this XElement root)
-    {
-        return root.CreateElementWithRootNamespaceHandled("bag");
-    }
+    public static XElement CreateBagElementWithRootNamespace(this XElement root) => root.CreateElementWithRootNamespaceHandled("bag");
 
-    public static XElement CreateSetElementWithRootNamespace(this XElement root)
-    {
-        return root.CreateElementWithRootNamespaceHandled("set");
-    }
+    public static XElement CreateSetElementWithRootNamespace(this XElement root) => root.CreateElementWithRootNamespaceHandled("set");
 
-    public static XElement WithAllDeleteOrphanCascadeAttribute(this XElement source)
-    {
-        return source.WithCascadeAttribute("all-delete-orphan");
-    }
+    public static XElement WithAllDeleteOrphanCascadeAttribute(this XElement source) => source.WithCascadeAttribute("all-delete-orphan");
 
-    public static XElement WithCascadeAttribute(this XElement source, string cascadeValue)
-    {
-        return source.WithAttribute("cascade", cascadeValue);
-    }
+    public static XElement WithCascadeAttribute(this XElement source, string cascadeValue) => source.WithAttribute("cascade", cascadeValue);
 
-    public static XElement WithInverseAttribute(this XElement source, bool inverse)
-    {
-        return source.WithAttribute("inverse", inverse);
-    }
+    public static XElement WithInverseAttribute(this XElement source, bool inverse) => source.WithAttribute("inverse", inverse);
 
-    internal static XElement CreateElementWithRootNamespaceHandled(this XElement source, string name)
-    {
-        return source.CreateElement(name);
-    }
+    internal static XElement CreateElementWithRootNamespaceHandled(this XElement source, string name) => source.CreateElement(name);
 }

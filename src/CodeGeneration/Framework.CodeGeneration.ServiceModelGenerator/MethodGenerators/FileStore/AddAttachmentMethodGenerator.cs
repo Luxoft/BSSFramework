@@ -4,7 +4,7 @@ using CommonFramework;
 
 using Framework.BLL.Domain.DTO;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.FileStore;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.Database;
@@ -12,7 +12,7 @@ using Framework.Database;
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.FileStore;
 
 public class AddAttachmentMethodGenerator<TConfiguration>(TConfiguration configuration, Type domainType) : FileStoreMethodGeneratorBase<TConfiguration>(configuration, domainType)
-    where TConfiguration : class, IFileStoreGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IFileStoreGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     public override MethodIdentity Identity { get; } = MethodIdentityType.AddAttachment;
 

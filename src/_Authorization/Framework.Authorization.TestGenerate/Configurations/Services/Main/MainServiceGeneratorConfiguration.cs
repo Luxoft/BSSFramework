@@ -2,8 +2,8 @@
 
 namespace Framework.Authorization.TestGenerate.Configurations.Services.Main;
 
-public class MainServiceGeneratorConfiguration(ServerGenerationEnvironment environment) :
-    MainGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
+public class MainServiceGeneratorConfiguration(AuthorizationGenerationEnvironment environment) :
+    MainGeneratorConfigurationBase<AuthorizationGenerationEnvironment>(environment)
 {
     public override string ImplementClassName { get; } = "AuthFacade";
 }

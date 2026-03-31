@@ -5,16 +5,16 @@ using CommonFramework;
 
 using Framework.BLL.DTOMapping.MergeItemData;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
+using Framework.FileGeneration.Configuration;
 using Framework.Relations;
 
 namespace Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
 
 public class UpdateCodeTypeReferenceService<TConfiguration>(TConfiguration configuration) : LayerCodeTypeReferenceService<TConfiguration>(configuration)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     public override bool IsOptional(PropertyInfo property)
     {

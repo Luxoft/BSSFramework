@@ -6,14 +6,11 @@ namespace SampleSystem.CodeGenerate.ServerDTO;
 
 public abstract class RefDTOFileFactory<TConfiguration> : MainDTOFileFactory<TConfiguration>
 
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+        where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     protected RefDTOFileFactory(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
-    {
+            : base(configuration, domainType) =>
         this.CodeTypeReferenceService = new FullRefCodeTypeReferenceService<TConfiguration>(this.Configuration);
-    }
-
 
     public override IPropertyCodeTypeReferenceService CodeTypeReferenceService { get; }
 

@@ -10,8 +10,8 @@ using Framework.Projection;
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.EventDTO;
 
 public class DefaultBaseEventDTOFileFactory<TConfiguration>(TConfiguration configuration)
-    : FileFactory<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>, DTOFileType>(configuration, configuration.Environment.PersistentDomainObjectBaseType)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    : FileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, DTOFileType>(configuration, configuration.Environment.PersistentDomainObjectBaseType)
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public override DTOFileType FileType { get; } = ServerFileType.BaseEventDTO;
 

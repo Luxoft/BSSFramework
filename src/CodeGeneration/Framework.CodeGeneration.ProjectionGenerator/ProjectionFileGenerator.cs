@@ -4,11 +4,11 @@ using Framework.CodeGeneration.ProjectionGenerator.FileFactory;
 
 namespace Framework.CodeGeneration.ProjectionGenerator;
 
-public class ProjectionFileGenerator(IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
-    : ProjectionFileGenerator<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>(configuration);
+public class ProjectionFileGenerator(IProjectionGeneratorConfiguration<IProjectionGenerationEnvironment> configuration)
+    : ProjectionFileGenerator<IProjectionGeneratorConfiguration<IProjectionGenerationEnvironment>>(configuration);
 
 public class ProjectionFileGenerator<TConfiguration>(TConfiguration configuration) : CodeFileGenerator<TConfiguration>(configuration)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IProjectionGeneratorConfiguration<IProjectionGenerationEnvironment>
 {
     protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {

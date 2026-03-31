@@ -6,7 +6,7 @@ using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role._Base;
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.EventDTO.Base;
 
 public abstract class EventDTOFileFactory<TConfiguration> : RoleDTOFileFactory<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+        where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     protected EventDTOFileFactory(TConfiguration configuration, Type domainType)
             : base(configuration, domainType)

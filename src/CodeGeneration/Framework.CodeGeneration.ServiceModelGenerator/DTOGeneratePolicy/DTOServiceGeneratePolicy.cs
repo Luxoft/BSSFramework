@@ -1,14 +1,14 @@
 ﻿using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.GeneratePolicy;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.Core;
+using Framework.FileGeneration.Configuration;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.DTOGeneratePolicy;
 
 public class DTOServiceGeneratePolicy<TConfiguration> : GeneratorConfigurationContainer<TConfiguration>, IGeneratePolicy<RoleFileType>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     private readonly HashSet<Tuple<Type, RoleFileType>> cache;
 

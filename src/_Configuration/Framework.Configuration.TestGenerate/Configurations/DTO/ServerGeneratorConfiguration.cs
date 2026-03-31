@@ -7,7 +7,7 @@ using Framework.CodeGeneration.GeneratePolicy;
 
 namespace Framework.Configuration.TestGenerate.Configurations.DTO;
 
-public class ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environment) : ServerGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
+public class ServerDTOGeneratorConfiguration(ConfigurationGenerationEnvironment environment) : ServerDTOGeneratorConfigurationBase<ConfigurationGenerationEnvironment>(environment)
 {
     public override ClientDTORole MapToDomainRole { get; } = ClientDTORole.All;
 

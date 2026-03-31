@@ -55,5 +55,5 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
         this.AuditDTO = new AuditDTOGeneratorConfiguration(this);
     }
 
-    public IAuditDTOGeneratorConfigurationBase<IAuditDTOGenerationEnvironmentBase> AuditDTO { get; }
+    public IAuditDTOGeneratorConfiguration<IAuditDTOGenerationEnvironment> AuditDTO { get; }
 }

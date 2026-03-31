@@ -3,7 +3,7 @@
 using Framework.BLL;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.FileStore;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
@@ -14,7 +14,7 @@ namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.FileSt
 
 public abstract class FileStoreMethodGeneratorBase<TConfiguration>(TConfiguration configuration, Type domainType)
     : MethodGenerator<TConfiguration, BLLViewRoleAttribute>(configuration, domainType)
-    where TConfiguration : class, IFileStoreGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IFileStoreGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     protected override bool IsEdit { get; } = false;
 

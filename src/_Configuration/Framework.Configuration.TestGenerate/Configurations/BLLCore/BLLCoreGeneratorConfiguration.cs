@@ -3,8 +3,8 @@ using Framework.Configuration.Domain;
 
 namespace Framework.Configuration.TestGenerate.Configurations.BLLCore;
 
-public partial class BLLCoreGeneratorConfiguration(ServerGenerationEnvironment environment)
-    : GeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
+public partial class BLLCoreGeneratorConfiguration(ConfigurationGenerationEnvironment environment)
+    : BLLCoreGeneratorConfigurationBase<ConfigurationGenerationEnvironment>(environment)
 {
     public override Type FilterModelType { get; } = typeof(DomainObjectFilterModel<>);
 

@@ -3,8 +3,8 @@
 namespace Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
 
 public abstract class AuditDTOGeneratorConfigurationBase<TEnvironment>(TEnvironment environment)
-    : GeneratorConfiguration<TEnvironment>(environment), IAuditDTOGeneratorConfigurationBase<TEnvironment>
-    where TEnvironment : class, IAuditDTOGenerationEnvironmentBase
+    : CodeGeneratorConfiguration<TEnvironment>(environment), IAuditDTOGeneratorConfiguration<TEnvironment>
+    where TEnvironment : class, IAuditDTOGenerationEnvironment
 {
     public virtual string DomainObjectPropertiesRevisionDTOFullTypeName => $"{this.Namespace}.{this.DomainObjectPropertiesRevisionDTOTypeName}";
 

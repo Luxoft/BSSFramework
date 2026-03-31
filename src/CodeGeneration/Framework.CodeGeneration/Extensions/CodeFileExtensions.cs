@@ -32,15 +32,8 @@ public static class CodeFileExtensions
         }
 
 
-        public string Filename
-        {
-            get { return this.baseCodeFile.Filename; }
-        }
+        public string Filename => this.baseCodeFile.Filename;
 
-
-        public CodeNamespace GetRenderData()
-        {
-            return this.visitor.VisitNamespace(this.baseCodeFile.GetRenderData());
-        }
+        public CodeNamespace GetRenderData() => this.visitor.VisitNamespace(this.baseCodeFile.GetRenderData());
     }
 }

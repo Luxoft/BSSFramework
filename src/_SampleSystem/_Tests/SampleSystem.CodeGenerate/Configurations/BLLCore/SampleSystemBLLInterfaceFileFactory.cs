@@ -4,6 +4,7 @@ using Framework.BLL.Domain.DirectMode;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
+using Framework.FileGeneration.Configuration;
 
 namespace SampleSystem.CodeGenerate;
 

@@ -6,7 +6,7 @@ using Framework.CodeGeneration.FileFactory;
 namespace SampleSystem.CodeGenerate.ServerDTO;
 
 public class SampleSystemServerFileGenerator<TConfiguration>(TConfiguration configuration) : ServerFileGenerator<TConfiguration>(configuration)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     protected override IEnumerable<ICodeFileFactory<DTOFileType>> GetDTOFileGenerators()
     {

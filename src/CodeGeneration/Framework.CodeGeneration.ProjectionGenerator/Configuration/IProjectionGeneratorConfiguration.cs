@@ -1,0 +1,36 @@
+﻿using System.CodeDom;
+using System.Reflection;
+
+using Framework.CodeGeneration.Configuration;
+
+namespace Framework.CodeGeneration.ProjectionGenerator.Configuration;
+
+public interface IProjectionGeneratorConfiguration<out TEnvironment> : IProjectionGeneratorConfiguration, ICodeGeneratorConfiguration<TEnvironment, FileType>
+    where TEnvironment : IProjectionGenerationEnvironment;
+
+public interface IProjectionGeneratorConfiguration : ICodeGeneratorConfiguration, ICodeTypeReferenceService<FileType>
+{
+    /// <summary>
+    /// Генерировать set-акцессор для IsOneToOne-свойств
+    /// </summary>
+    bool OneToOneSetter { get; }
+
+    /// <summary>
+    /// Генерирование публичных конструкторов у проекций
+    /// </summary>
+    bool GeneratePublicCtors { get; }
+
+    /// <summary>
+    /// Получение генрируемых аттрибутов для проекционного типа
+    /// </summary>
+    /// <param name="domainType">Свойство</param>
+    /// <returns></returns>
+    IEnumerable<CodeAttributeDeclaration> GetDomainTypeAttributeDeclarations(Type domainType);
+
+    /// <summary>
+    /// Получение генрируемых аттрибутов для проекционного свойства
+    /// </summary>
+    /// <param name="property">Свойство</param>
+    /// <returns></returns>
+    IEnumerable<CodeAttributeDeclaration> GetPropertyAttributeDeclarations(PropertyInfo property);
+}

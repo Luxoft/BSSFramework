@@ -23,11 +23,8 @@ namespace SampleSystem.CodeGenerate;
 public class ComplexChangeMethodGenerator : ModelMethodGenerator<MainServiceGeneratorConfiguration, BLLSaveRoleAttribute>
 {
     public ComplexChangeMethodGenerator(MainServiceGeneratorConfiguration configuration, Type domainType, Type changeModel)
-            : base(configuration, domainType, changeModel)
-    {
+            : base(configuration, domainType, changeModel) =>
         this.Identity = new MethodIdentity(SampleSystemMethodIdentityType.ComplexChange, this.ModelType);
-    }
-
 
     public override MethodIdentity Identity { get; }
 
@@ -39,10 +36,7 @@ public class ComplexChangeMethodGenerator : ModelMethodGenerator<MainServiceGene
     protected override bool IsEdit { get; } = true;
 
 
-    protected override string GetComment()
-    {
-        return $"Change {this.DomainType.Name} by model ({this.ModelType.Name})";
-    }
+    protected override string GetComment() => $"Change {this.DomainType.Name} by model ({this.ModelType.Name})";
 
     protected override IEnumerable<CodeParameterDeclarationExpression> GetParameters()
     {

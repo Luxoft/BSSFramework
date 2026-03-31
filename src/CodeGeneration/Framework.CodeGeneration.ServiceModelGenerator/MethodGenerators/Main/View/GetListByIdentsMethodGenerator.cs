@@ -5,7 +5,7 @@ using CommonFramework;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.DTO.Extensions;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View._Base;
 using Framework.Projection;
@@ -13,7 +13,7 @@ using Framework.Projection;
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View;
 
 public class GetListByIdentsMethodGenerator<TConfiguration> : ViewCollectionMethodGenerator<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     public GetListByIdentsMethodGenerator(TConfiguration configuration, Type domainType, ViewDTOType dtoType)
             : base(configuration, domainType, dtoType) =>

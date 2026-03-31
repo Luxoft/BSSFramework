@@ -9,13 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.CommonFramework.DependencyInjection" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\Framework.CodeDom\Framework.CodeDom.csproj" />
     <ProjectReference Include="..\Framework.FileGeneration\Framework.FileGeneration.csproj" />
-    <ProjectReference Include="..\..\Projection\Framework.Projection.Runtime\Framework.Projection.Runtime.csproj" />
   </ItemGroup>
 
 </Project>

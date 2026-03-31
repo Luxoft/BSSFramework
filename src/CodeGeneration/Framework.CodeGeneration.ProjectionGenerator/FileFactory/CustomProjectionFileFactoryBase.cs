@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
-using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.FileFactory;
 using Framework.CodeGeneration.ProjectionGenerator._Extensions;
@@ -13,22 +12,20 @@ namespace Framework.CodeGeneration.ProjectionGenerator.FileFactory;
 
 public class CustomProjectionFileFactoryBase<TConfiguration>(TConfiguration configuration, Type domainType)
     : CodeFileFactory<TConfiguration, FileType>(configuration, domainType)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IProjectionGeneratorConfiguration<IProjectionGenerationEnvironment>
 {
     public override FileType FileType { get; } = FileType.CustomProjectionBase;
 
     public override CodeTypeReference BaseReference => this.DomainType.BaseType.ToTypeReference(); // this.Configuration.Environment.GetProjectionBaseType(this.DomainType).ToTypeReference();
 
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration
-               {
-                       Name = this.Name,
-                       TypeAttributes = TypeAttributes.Public | TypeAttributes.Abstract,
-                       IsPartial = true,
-               };
-    }
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new()
+        {
+            Name = this.Name,
+            TypeAttributes = TypeAttributes.Public | TypeAttributes.Abstract,
+            IsPartial = true,
+        };
 
     protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
     {
@@ -42,10 +39,7 @@ public class CustomProjectionFileFactoryBase<TConfiguration>(TConfiguration conf
         }
     }
 
-    private IEnumerable<PropertyInfo> GetProperties(bool includeBase)
-    {
-        return this.Configuration.Environment.GetProjectionProperties(this.DomainType, includeBase, true);
-    }
+    private IEnumerable<PropertyInfo> GetProperties(bool includeBase) => this.Configuration.Environment.GetProjectionProperties(this.DomainType, includeBase, true);
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
     {

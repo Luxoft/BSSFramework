@@ -1,10 +1,12 @@
 ﻿using System.Reflection;
 
+using Framework.CodeGeneration.BLLGenerator.Configuration;
+
 using SampleSystem.Domain;
 
 namespace SampleSystem.CodeGenerate;
 
-public class BLLGeneratorConfiguration(ServerGenerationEnvironment environment) : Framework.DomainDriven.BLLGenerator.GeneratorConfigurationBase<
+public class BLLGeneratorConfiguration(ServerGenerationEnvironment environment) : BLLGeneratorConfigurationBase<
     ServerGenerationEnvironment>(environment)
 {
     public override Type OperationContextType { get; } = typeof(SampleSystemOperationContext);
@@ -19,13 +21,7 @@ public class BLLGeneratorConfiguration(ServerGenerationEnvironment environment) 
             _ => base.GenerateBllConstructor(domainType)
         };
 
-    public override bool SquashPropertyValidators(PropertyInfo property)
-    {
-        return property != typeof(Employee).GetProperty(nameof(Employee.ExternalId));
-    }
+    public override bool SquashPropertyValidators(PropertyInfo property) => property != typeof(Employee).GetProperty(nameof(Employee.ExternalId));
 
-    public override bool GenerateDomainServiceConstructor(Type domainType)
-    {
-        return !new[] { typeof(Employee) }.Contains(domainType);
-    }
+    public override bool GenerateDomainServiceConstructor(Type domainType) => !new[] { typeof(Employee) }.Contains(domainType);
 }

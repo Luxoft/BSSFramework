@@ -7,19 +7,18 @@ using Framework.BLL;
 using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.ServiceModelGenerator._Legacy;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.Database;
-
+using Framework.FileGeneration.Configuration;
 using SecuritySystem;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 
 public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : GeneratorConfigurationContainer<TConfiguration>, IServiceMethodGenerator
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
         where TBLLRoleAttribute : BLLServiceRoleAttribute
 {
     private readonly Lazy<ReadOnlyCollection<CodeParameterDeclarationExpression>> lazyParameters;

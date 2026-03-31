@@ -6,22 +6,21 @@ using CommonFramework;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.DTOMapping.Domain;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.Configuration;
-using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.Core;
 using Framework.Database.Domain;
 using Framework.Database.Mapping;
+using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 
 namespace Framework.CodeGeneration.DTOGenerator.Audit;
 
-public class AuditDTOModelFileGenerator(IAuditDTOGeneratorConfigurationBase<IAuditDTOGenerationEnvironmentBase> configuration)
-    : AuditDTOModelFileGenerator<IAuditDTOGeneratorConfigurationBase<IAuditDTOGenerationEnvironmentBase>>(configuration);
+public class AuditDTOModelFileGenerator(IAuditDTOGeneratorConfiguration<IAuditDTOGenerationEnvironment> configuration)
+    : AuditDTOModelFileGenerator<IAuditDTOGeneratorConfiguration<IAuditDTOGenerationEnvironment>>(configuration);
 
 public class AuditDTOModelFileGenerator<TConfiguration>(TConfiguration configuration) : CodeFileGenerator<TConfiguration>(configuration)
-    where TConfiguration : class, IAuditDTOGeneratorConfigurationBase<IAuditDTOGenerationEnvironmentBase>
+    where TConfiguration : class, IAuditDTOGeneratorConfiguration<IAuditDTOGenerationEnvironment>
 {
     protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {

@@ -6,7 +6,7 @@ using Framework.CodeGeneration.GeneratePolicy;
 
 namespace Framework.Authorization.TestGenerate.Configurations.DTO;
 
-public class ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environment) : ServerGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
+public class ServerDTOGeneratorConfiguration(AuthorizationGenerationEnvironment environment) : ServerDTOGeneratorConfigurationBase<AuthorizationGenerationEnvironment>(environment)
 {
     public override string DataContractNamespace { get; } = "Auth";
 

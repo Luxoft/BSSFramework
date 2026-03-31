@@ -1,12 +1,11 @@
 ﻿using System.CodeDom;
-
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.FileFactory._Base;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.FileFactory;
 
 public class AccumImplementFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, typeof(object))
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     public override FileType FileType { get; } = FileType.Implement;
 
@@ -21,7 +20,7 @@ public class AccumImplementFileFactory<TConfiguration>(TConfiguration configurat
         };
 
     protected override IEnumerable<CodeTypeMember> GetMembers() =>
-        from methodGenerator in this.Configuration.GetAccumMethodGenerators()
+        from methodGenerator in this.Configuration.GetAccumulateMethodGenerators()
 
         from method in methodGenerator.GetFacadeMethods()
 

@@ -13,7 +13,6 @@ using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.Serialization.Extensions;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;
-using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Extensions;
@@ -23,13 +22,14 @@ using Framework.CodeGeneration.DTOGenerator.Map;
 using Framework.CodeGeneration.FileFactory;
 using Framework.CodeGeneration.GeneratePolicy;
 using Framework.Core;
+using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 using Framework.Relations;
 
 namespace Framework.CodeGeneration.DTOGenerator.Configuration;
 
-public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<TEnvironment, BaseFileType>, IGeneratorConfigurationBase<TEnvironment>
-        where TEnvironment : class, IGenerationEnvironmentBase
+public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGeneratorConfiguration<TEnvironment, BaseFileType>, IDTOGeneratorConfiguration<TEnvironment>
+        where TEnvironment : class, IDTOGenerationEnvironment
 {
     private readonly IDictionaryCache<Tuple<Type, DTOFileType>, ReadOnlyCollection<PropertyInfo>> domainTypePropertiesCache;
 
@@ -37,14 +37,14 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     private static readonly ConcurrentDictionary<MainDTOFileType, ImmutableArray<MainDTOFileType>> NestedMainTypesCache = [];
 
-    protected GeneratorConfigurationBase(TEnvironment environment)
+    protected DTOGeneratorConfigurationBase(TEnvironment environment)
             : base(environment)
     {
         this.domainTypePropertiesCache = new DictionaryCache<Tuple<Type, DTOFileType>, ReadOnlyCollection<PropertyInfo>>(t =>
 
                 t.Pipe(this.GetInternalDomainTypeProperties).OrderBy(prop => prop.Name).ToReadOnlyCollection()).WithLock();
 
-        this.DefaultCodeTypeReferenceService = new ConfigurationCodeTypeReferenceService<GeneratorConfigurationBase<TEnvironment>>(this);
+        this.DefaultCodeTypeReferenceService = new ConfigurationCodeTypeReferenceService<DTOGeneratorConfigurationBase<TEnvironment>>(this);
 
         this.ProjectionTypes = LazyInterfaceImplementHelper.CreateProxy(() => this.GetProjectionTypes().ToReadOnlyCollectionI());
 
@@ -254,19 +254,19 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
         if (fileType == BaseFileType.ProjectionDTO)
         {
-            return new ProjectionCodeTypeReferenceService<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>(this);
+            return new ProjectionCodeTypeReferenceService<IDTOGeneratorConfiguration<IDTOGenerationEnvironment>>(this);
         }
         else if (fileType == BaseFileType.StrictDTO)
         {
-            return new StrictCodeTypeReferenceService<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>(this);
+            return new StrictCodeTypeReferenceService<IDTOGeneratorConfiguration<IDTOGenerationEnvironment>>(this);
         }
         else if (fileType == BaseFileType.UpdateDTO)
         {
-            return new UpdateCodeTypeReferenceService<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>(this);
+            return new UpdateCodeTypeReferenceService<IDTOGeneratorConfiguration<IDTOGenerationEnvironment>>(this);
         }
         else if (fileType is MainDTOFileType)
         {
-            return new MainCodeTypeReferenceService<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>(this);
+            return new MainCodeTypeReferenceService<IDTOGeneratorConfiguration<IDTOGenerationEnvironment>>(this);
         }
         else
         {

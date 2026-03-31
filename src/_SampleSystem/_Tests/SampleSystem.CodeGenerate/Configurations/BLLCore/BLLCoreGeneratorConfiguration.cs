@@ -1,9 +1,11 @@
-﻿using SampleSystem.Domain;
+﻿using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
+
+using SampleSystem.Domain;
 
 namespace SampleSystem.CodeGenerate;
 
 public class BLLCoreGeneratorConfiguration(ServerGenerationEnvironment environment)
-    : Framework.DomainDriven.BLLCoreGenerator.GeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
+    : BLLCoreGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {
     public override Type FilterModelType { get; } = typeof(DomainObjectFilterModel<>);
 

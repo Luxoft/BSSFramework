@@ -2,16 +2,15 @@
 
 using Framework.Application.Domain;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.Configuration._Container;
-using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.FileGeneration.Configuration;
 
 namespace Framework.CodeGeneration.DTOGenerator.Extensions;
 
 public static class CodeDomExtensions
 {
-    public static CodeTypeReference GetIdentityObjectTypeRef<TConfiguration>(this IGeneratorConfigurationContainer<TConfiguration> fileFactory)
-            where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    public static CodeTypeReference GetIdentityObjectTypeRef<TConfiguration>(this IFileGeneratorConfigurationContainer<TConfiguration> fileFactory)
+            where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 

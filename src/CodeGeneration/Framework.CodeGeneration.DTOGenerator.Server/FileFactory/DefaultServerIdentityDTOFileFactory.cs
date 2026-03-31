@@ -13,7 +13,7 @@ namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
 
 public class DefaultServerIdentityDTOFileFactory<TConfiguration>(TConfiguration configuration, Type domainType)
     : DefaultIdentityDTOFileFactory<TConfiguration>(configuration, domainType), IDTOFileFactory<TConfiguration, DTOFileType>
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public IEnumerable<CodeMemberMethod> GetServerMappingServiceInterfaceMethods()
     {

@@ -1,13 +1,13 @@
-﻿using Framework.CodeGeneration.Configuration;
-using Framework.CodeGeneration.DTOGenerator.Configuration;
+﻿using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
+using Framework.FileGeneration.Configuration;
 
 namespace Framework.CodeGeneration.DTOGenerator.Extensions;
 
 public static class DTOSouceExtensions
 {
     public static bool IsPersistent<TConfiguration>(this IDTOSource<TConfiguration> source)
-            where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+            where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 

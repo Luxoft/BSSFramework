@@ -3,12 +3,12 @@ using Framework.Configuration.TestGenerate.Configurations;
 
 namespace Framework.Configuration.TestGenerate;
 
-public partial class ServerGenerators(ServerGenerationEnvironment environment) : GeneratorsBase
+public partial class ServerGenerators(ConfigurationGenerationEnvironment environment) : GeneratorsBase
 {
-    protected readonly ServerGenerationEnvironment Environment = environment ?? throw new ArgumentNullException(nameof(environment));
+    protected readonly ConfigurationGenerationEnvironment Environment = environment ?? throw new ArgumentNullException(nameof(environment));
 
     public ServerGenerators()
-            : this(ServerGenerationEnvironment.Default)
+            : this(ConfigurationGenerationEnvironment.Default)
     {
     }
 

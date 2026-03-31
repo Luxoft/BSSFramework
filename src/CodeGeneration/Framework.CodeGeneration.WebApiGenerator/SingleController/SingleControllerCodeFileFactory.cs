@@ -4,7 +4,7 @@ using Framework.CodeDom;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.FileFactory;
 
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Framework.CodeGeneration.WebApiGenerator.SingleController;
 
 public class SingleControllerCodeFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : ImplementFileFactory<TConfiguration>(configuration, domainType)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     public override FileType FileType { get; } = FileType.Implement;
 

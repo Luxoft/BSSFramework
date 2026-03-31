@@ -5,8 +5,8 @@ using CommonFramework;
 
 using Framework.BLL.Domain.Extensions;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.FileGeneration.Configuration;
 
 namespace Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 
@@ -21,7 +21,7 @@ public interface IPropertyCodeTypeReferenceService : ICodeTypeReferenceService
 
 public class PropertyCodeTypeReferenceService<TConfiguration>(TConfiguration configuration)
     : CodeTypeReferenceService<TConfiguration>(configuration), IPropertyCodeTypeReferenceService
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     public virtual bool IsOptional(PropertyInfo property)
     {

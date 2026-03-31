@@ -3,7 +3,6 @@ using System.Reflection;
 
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.Serialization.Extensions;
-using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
@@ -15,12 +14,13 @@ using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
 using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
+using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
 
 public class DefaultProjectionDTOFileFactory<TConfiguration> : DTOFileFactory<TConfiguration, DTOFileType>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+        where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     private readonly Type sourceType;
 

@@ -10,12 +10,13 @@ using Framework.CodeGeneration.DTOGenerator.Map;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.FileFactory;
 using Framework.CodeGeneration.GeneratePolicy;
+using Framework.CodeGeneration.ServiceModelGenerator.DTOGeneratePolicy;
 
-using ServiceModelGenerator = Framework.DomainDriven.ServiceModelGenerator;
+using SampleSystem.EventMetadata;
 
 namespace SampleSystem.CodeGenerate.ServerDTO;
 
-public class ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environment) : ServerGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
+public class ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environment) : ServerDTOGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {
     public override string DataContractNamespace => this.Environment.DTODataContractNamespace;
 
@@ -55,9 +56,9 @@ public class ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environ
     protected override IGeneratePolicy<RoleFileType> CreateGeneratePolicy()
     {
         var primitivePolicy = new SampleSystemExtGeneratePolicy()
-                              .Or(new ServiceModelGenerator.DTOServiceGeneratePolicy<MainServiceGeneratorConfiguration>(this.Environment.MainService))
-                              .Or(new ServiceModelGenerator.DTOServiceGeneratePolicy<QueryServiceGeneratorConfiguration>(this.Environment.QueryService))
-                              .Or(new ServiceModelGenerator.DTOServiceGeneratePolicy<IntegrationGeneratorConfiguration>(this.Environment.IntegrationService))
+                              .Or(new DTOServiceGeneratePolicy<MainServiceGeneratorConfiguration>(this.Environment.MainService))
+                              .Or(new DTOServiceGeneratePolicy<QueryServiceGeneratorConfiguration>(this.Environment.QueryService))
+                              .Or(new DTOServiceGeneratePolicy<IntegrationGeneratorConfiguration>(this.Environment.IntegrationService))
                               //.Or(new ServiceModelGenerator.DTOServiceGeneratePolicy<AuditServiceGeneratorConfiguration>(this.Environment.AuditService))
                               .Or(new DTORoleGeneratePolicy(DTORole.Event))
                               .Or(new DTORoleGeneratePolicy(DTORole.Client, ClientDTORole.Projection// | ClientDTORole.Update
@@ -67,14 +68,12 @@ public class ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environ
         return new SampleSystemServerDependencyGeneratePolicy(primitivePolicy, this.GetTypeMaps());
     }
 
-    protected override IEnumerable<ICodeFileFactoryHeader<FileType>> GetFileFactoryHeaders()
-    {
-        return base.GetFileFactoryHeaders().Concat(new[]
-                                                   {
-                                                           this.FullRefDTOFileFactoryHeader,
-                                                           this.SimpleRefFullDetailDTOFileFactoryHeader
-                                                   });
-    }
+    protected override IEnumerable<ICodeFileFactoryHeader<BaseFileType>> GetFileFactoryHeaders() =>
+        base.GetFileFactoryHeaders().Concat(new[]
+                                            {
+                                                this.FullRefDTOFileFactoryHeader,
+                                                this.SimpleRefFullDetailDTOFileFactoryHeader
+                                            });
 
     protected override IEnumerable<PropertyInfo> GetInternalDomainTypeProperties(Type domainType, DTOFileType fileType)
     {

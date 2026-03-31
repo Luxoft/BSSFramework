@@ -1,11 +1,10 @@
 ﻿using System.CodeDom;
-
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.Projection;
 
 namespace Framework.CodeGeneration.WebApiGenerator;
 
-public class WebApiNetCoreFileGenerator : CodeFileGenerator<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>
+public class WebApiNetCoreFileGenerator : CodeFileGenerator<IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>>
 {
     private readonly bool generateMainDomainObjectController;
 
@@ -18,7 +17,7 @@ public class WebApiNetCoreFileGenerator : CodeFileGenerator<IGeneratorConfigurat
     /// <param name="generateMainDomainObjectController">if set to <c>true</c> [generate main domain object controller] if projection exists.</param>
     /// <param name="additionalControllerAttributes">Add attributes to controller</param>
     public WebApiNetCoreFileGenerator(
-            IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration,
+            IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment> configuration,
             bool generateMainDomainObjectController = true,
             List<CodeAttributeDeclaration> additionalControllerAttributes = null)
             : base(configuration)
@@ -41,7 +40,7 @@ public class WebApiNetCoreFileGenerator : CodeFileGenerator<IGeneratorConfigurat
 
             foreach (var domainType in types)
             {
-                yield return new WebApiNetCoreFileFactory<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>(
+                yield return new WebApiNetCoreFileFactory<IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>>(
                  this.Configuration,
                  domainType,
                  this.additionalControllerAttributes);
@@ -50,7 +49,7 @@ public class WebApiNetCoreFileGenerator : CodeFileGenerator<IGeneratorConfigurat
 
         foreach (var domainType in domainTypes)
         {
-            yield return new WebApiNetCoreFileFactory<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>(
+            yield return new WebApiNetCoreFileFactory<IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>>(
              this.Configuration,
              domainType,
              this.additionalControllerAttributes);

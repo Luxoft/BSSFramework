@@ -11,7 +11,7 @@ using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View.
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Audit;
 
 public class GetObjectWithRevisionMethodGenerator<TConfiguration> : ViewMethodGenerator<TConfiguration>
-        where TConfiguration : class, IAuditGeneratorConfigurationBase<IAuditGenerationEnvironmentBase>
+        where TConfiguration : class, IAuditGeneratorConfiguration<IAuditGenerationEnvironment>
 {
     public GetObjectWithRevisionMethodGenerator(TConfiguration configuration, Type domainType, ViewDTOType dtoType)
             : base(configuration, domainType, dtoType) =>

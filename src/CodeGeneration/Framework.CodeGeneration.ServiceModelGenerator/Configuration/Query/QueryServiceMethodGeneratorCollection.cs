@@ -3,17 +3,15 @@
 using Framework.BLL.Domain.DirectMode;
 using Framework.BLL.Domain.DTO;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
-using Framework.CodeGeneration.Configuration._Container;
-using Framework.CodeGeneration.DomainMetadata;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Query.OData;
+using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.Configuration.Query;
 
 public class QueryServiceMethodGeneratorCollection<TConfiguration> : GeneratorConfigurationContainer<TConfiguration>, IEnumerable<IServiceMethodGenerator>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     private readonly Type domainType;
 

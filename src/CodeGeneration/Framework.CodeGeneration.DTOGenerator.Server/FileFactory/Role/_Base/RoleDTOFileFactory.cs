@@ -11,7 +11,7 @@ using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role._Base;
 
 public abstract class RoleDTOFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : DTOFileFactory<TConfiguration, DTOFileType>(configuration, domainType)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     protected abstract string DataContractNamespace { get; }
 

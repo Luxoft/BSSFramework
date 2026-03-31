@@ -19,7 +19,7 @@ public interface IServerPropertyAssigner : IPropertyAssigner
 
 
 public abstract class ServerPropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> source) : PropertyAssigner<TConfiguration>(source), IServerPropertyAssigner
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public CodeExpression MappingServiceRefExpr => new CodeThisReferenceExpression();
 

@@ -7,7 +7,7 @@ namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.Integrat
 
 public class DefaultSimpleIntegrationDTOFileFactory<TConfiguration>(TConfiguration configuration, Type domainType)
     : IntegrationDTOFileFactory<TConfiguration>(configuration, domainType)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public override DTOFileType FileType { get; } = ServerFileType.SimpleIntegrationDTO;
 

@@ -5,12 +5,12 @@ using CommonFramework;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Audit;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 using Framework.Core;
+using Framework.FileGeneration.Configuration;
 using Framework.Infrastructure.Service;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Audit._Base;
@@ -18,9 +18,9 @@ namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Audit.
 public abstract class GetObjectPropertyRevisionsMethodGeneratorBase<TConfiguration>(
     TConfiguration configuration,
     Type domainType,
-    IAuditDTOGeneratorConfigurationBase dtoConfiguration)
+    IAuditDTOGeneratorConfiguration dtoConfiguration)
     : MethodGenerator<TConfiguration, BLLViewRoleAttribute>(configuration, domainType)
-    where TConfiguration : class, IAuditGeneratorConfigurationBase<IAuditGenerationEnvironmentBase>
+    where TConfiguration : class, IAuditGeneratorConfiguration<IAuditGenerationEnvironment>
 {
     protected override CodeTypeReference ReturnType => new(dtoConfiguration.DomainObjectPropertiesRevisionDTOFullTypeName);
 

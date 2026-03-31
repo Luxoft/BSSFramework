@@ -6,20 +6,20 @@ using CommonFramework;
 using Framework.BLL.Domain.Serialization.Extensions;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
 using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 using Framework.Core;
+using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Custom;
 
 public class LambdaHelperFileFactory<TConfiguration>(TConfiguration configuration)
-    : FileFactory<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>, BaseFileType>(configuration, null)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    : FileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, BaseFileType>(configuration, null)
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public override BaseFileType FileType { get; } = ServerFileType.LambdaHelper;
 

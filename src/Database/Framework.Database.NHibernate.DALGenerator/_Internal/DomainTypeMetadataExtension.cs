@@ -1,11 +1,14 @@
-﻿namespace Framework.Database.NHibernate.DALGenerator._Internal;
+﻿using CommonFramework;
+
+using Framework.Database.Metadata;
+using Framework.Database.SqlMapper;
+
+namespace Framework.Database.NHibernate.DALGenerator._Internal;
 
 internal static class DomainTypeMetadataExtension
 {
-    public static IEnumerable<ReferenceTypeFieldMetadata> GetManyToOneReference(this DomainTypeMetadata domainTypeMetadata)
-    {
-        return domainTypeMetadata.ReferenceFields.Except(domainTypeMetadata.GetOneToOneReference());
-    }
+    public static IEnumerable<ReferenceTypeFieldMetadata> GetManyToOneReference(this DomainTypeMetadata domainTypeMetadata) => domainTypeMetadata.ReferenceFields.Except(domainTypeMetadata.GetOneToOneReference());
+
     public static IEnumerable<ReferenceTypeFieldMetadata> GetOneToOneReference( this DomainTypeMetadata domainTypeMetadata)
     {
         var referencies = domainTypeMetadata.ReferenceFields;
@@ -44,8 +47,5 @@ internal static class DomainTypeMetadataExtension
 
         //return identityField;
     }
-    public static string GetIdentityFieldName(this DomainTypeMetadata source, Func<DomainTypeMetadata, string> getIdentityFieldInBDFunc)
-    {
-        return source.GetIdentityField ().ToColumnName (z => getIdentityFieldInBDFunc (source));
-    }
+    public static string GetIdentityFieldName(this DomainTypeMetadata source, Func<DomainTypeMetadata, string> getIdentityFieldInBdFunc) => source.GetIdentityField ().ToColumnName (z => getIdentityFieldInBdFunc (source));
 }

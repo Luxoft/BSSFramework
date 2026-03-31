@@ -9,7 +9,7 @@ namespace Framework.CodeGeneration.DTOGenerator.Server.Members.MapToDomainObject
 
 public class MainMapToDomainObjectMethodFactory<TConfiguration, TFileFactory>(TFileFactory fileFactory)
     : BaseMapToDomainObjectMethodFactory<TConfiguration, TFileFactory, MainDTOFileType>(fileFactory)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
     where TFileFactory : DTOFileFactory<TConfiguration, MainDTOFileType>
 {
     protected override MemberAttributes MemberAttributes => this.FileFactory.FileType.ToMapToDomainObjectMemberAttributes();

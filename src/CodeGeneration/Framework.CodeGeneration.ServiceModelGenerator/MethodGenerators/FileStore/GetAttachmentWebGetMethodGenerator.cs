@@ -3,7 +3,7 @@
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.FileStoreAttachment;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
@@ -12,7 +12,7 @@ namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.FileSt
 
 public class GetAttachmentWebGetMethodGenerator<TConfiguration>(TConfiguration configuration, Type domainType)
     : MethodGenerator<TConfiguration, BLLViewRoleAttribute>(configuration, domainType)
-    where TConfiguration : class, IFileStoreAttachmentGeneratorConfigurationBase<IFileStoreAttachmentGenerationEnvironmentBase>
+    where TConfiguration : class, IFileStoreAttachmentGeneratorConfiguration<IFileStoreAttachmentGenerationEnvironment>
 {
     public override MethodIdentity Identity { get; } = MethodIdentityType.GetAttachment;
 

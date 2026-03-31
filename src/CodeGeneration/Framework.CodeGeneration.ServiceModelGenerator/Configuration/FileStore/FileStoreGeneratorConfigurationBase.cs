@@ -1,6 +1,4 @@
 ﻿using CommonFramework;
-
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.FileStore;
 
@@ -8,8 +6,8 @@ using SecuritySystem;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.Configuration.FileStore;
 
-public abstract class FileStoreGeneratorConfigurationBase<TEnvironment> : GeneratorConfigurationBase<TEnvironment>, IFileStoreGeneratorConfigurationBase<TEnvironment>
-        where TEnvironment : class, IGenerationEnvironmentBase
+public abstract class FileStoreGeneratorConfigurationBase<TEnvironment> : ServiceModelGeneratorBase<TEnvironment>, IFileStoreGeneratorConfiguration<TEnvironment>
+        where TEnvironment : class, IServiceModelGenerationEnvironment
 {
     private readonly Lazy<ILookup<Type, FileStoreBLLParameter>> dictionaryLazy;
 

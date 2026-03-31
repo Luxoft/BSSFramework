@@ -5,7 +5,7 @@ using CommonFramework;
 
 using Framework.CodeDom.Extensions;
 using Framework.CodeDom.Rendering;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.Core;
 using Framework.FileGeneration;
 using Framework.Projection;
@@ -43,9 +43,9 @@ public static class Extensions
         return source;
     }
 
-    public static IGeneratorConfigurationBase<IGenerationEnvironmentBase> ToWebApiNetCore(
-            this IGenerationEnvironmentBase environment,
-            IEnumerable<IGeneratorConfigurationBase<IGenerationEnvironmentBase>> source,
+    public static IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment> ToWebApiNetCore(
+            this IServiceModelGenerationEnvironment environment,
+            IEnumerable<IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>> source,
             string nameSpace = null) =>
             new WebApiNetCoreCompositeGeneratorConfiguration(environment, source.ToList(), nameSpace);
 

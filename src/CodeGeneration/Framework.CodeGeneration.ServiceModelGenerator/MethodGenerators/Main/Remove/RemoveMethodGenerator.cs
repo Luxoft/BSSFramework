@@ -3,13 +3,13 @@
 using CommonFramework;
 
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.Remove.Base;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.Remove;
 
 public class RemoveMethodGenerator<TConfiguration>(TConfiguration configuration, Type domainType) : BaseRemoveMethodGenerator<TConfiguration>(configuration, domainType)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     public override MethodIdentity Identity { get; } = MethodIdentityType.Remove;
 

@@ -1,15 +1,15 @@
-﻿using Framework.CodeGeneration.Configuration;
-using Framework.CodeGeneration.DTOGenerator.Configuration;
+﻿using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.ClientMapping;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.FileFactory;
+using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 
 namespace Framework.CodeGeneration.DTOGenerator;
 
 public abstract class FileGenerator<TConfiguration>(TConfiguration configuration) : CodeFileGenerator<TConfiguration>(configuration)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     protected virtual ICodeFileFactory<DTOFileType> GetIdentityDTOFileFactory(Type domainType)
     {

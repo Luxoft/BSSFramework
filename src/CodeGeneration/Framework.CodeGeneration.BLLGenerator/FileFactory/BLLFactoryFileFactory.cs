@@ -1,6 +1,5 @@
 ﻿using System.CodeDom;
 using Framework.BLL;
-using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.CodeGeneration.BLLGenerator.FileFactory.__Base;
@@ -8,7 +7,7 @@ using Framework.CodeGeneration.BLLGenerator.FileFactory.__Base;
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
 public class BLLFactoryFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : FileFactory<TConfiguration>(configuration, domainType)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
 {
     public override FileType FileType => FileType.BLLFactory;
 

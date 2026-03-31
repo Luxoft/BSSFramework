@@ -3,8 +3,8 @@ using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Serialization.Extensions;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
-using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.GeneratePolicy;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.Projection;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.GeneratePolicy;
@@ -12,7 +12,7 @@ namespace Framework.CodeGeneration.ServiceModelGenerator.GeneratePolicy;
 /// <summary>
 /// Стандартная политика для управления генерацией фасадных методов
 /// </summary>
-public class DefaultServiceGeneratePolicy(IGenerationEnvironment generationEnvironment) : IGeneratePolicy<MethodIdentity>
+public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment generationEnvironment) : IGeneratePolicy<MethodIdentity>
 {
     public virtual bool Used(Type domainType, MethodIdentity identity)
     {

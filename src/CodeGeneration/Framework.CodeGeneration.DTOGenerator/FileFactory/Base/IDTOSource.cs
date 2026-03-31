@@ -1,7 +1,7 @@
-﻿using Framework.CodeGeneration.Configuration._Container;
-using Framework.CodeGeneration.DTOGenerator.Configuration;
+﻿using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.FileFactory;
+using Framework.FileGeneration.Configuration;
 
 namespace Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 
@@ -10,8 +10,5 @@ public interface IDTOSource : IDomainTypeContainer//, IFileTypeSource<DTOFileTyp
     DTOFileType FileType { get; }
 }
 
-public interface IDTOSource<out TConfiguration> : IDTOSource, IGeneratorConfigurationContainer<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
-{
-
-}
+public interface IDTOSource<out TConfiguration> : IDTOSource, IFileGeneratorConfigurationContainer<TConfiguration>
+        where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>;

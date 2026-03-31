@@ -2,6 +2,7 @@
 using Framework.CodeGeneration.BLLGenerator;
 using Framework.CodeGeneration.DTOGenerator.Server;
 using Framework.CodeGeneration.Extensions;
+using Framework.CodeGeneration.WebApiGenerator.SingleController;
 using Framework.FileGeneration;
 
 namespace Framework.Configuration.TestGenerate;
@@ -15,7 +16,8 @@ public partial class ServerGenerators
     public IEnumerable<GeneratedFileInfo> GenerateMain() =>
         this.GenerateBLLCore()
             .Concat(this.GenerateBLL())
-            .Concat(this.GenerateServerDTO());
+            .Concat(this.GenerateServerDTO())
+            .Concat(this.GenerateMainController());
 
     [TestMethod]
     public void GenerateBLLCoreTest() => this.GenerateBLLCore().ToList();
@@ -51,5 +53,17 @@ public partial class ServerGenerators
                                               this.GeneratePath + @"/Framework.Configuration.Generated.DTO",
                                               "Configuration.Generated",
                                               this.CheckOutService);
+    }
+
+    [TestMethod]
+    public void GenerateMainControllerTest() => this.GenerateMainController().ToList();
+
+    private IEnumerable<GeneratedFileInfo> GenerateMainController()
+    {
+        var generator = new SingleControllerCodeFileGenerator(this.Environment.MainController);
+
+        var outputPath = Path.Combine(this.GeneratePath, "Framework.Configuration.WebApi");
+
+        yield return generator.GenerateSingle(outputPath, "Configuration.Generated", this.CheckOutService);
     }
 }

@@ -6,9 +6,6 @@ using CommonFramework.Maybe;
 
 using Framework.Application.Domain;
 using Framework.BLL.Domain.Extensions;
-using Framework.CodeDom;
-using Framework.CodeGeneration.Configuration._Container;
-using Framework.CodeGeneration.DomainMetadata;
 using Framework.Core;
 using Framework.Restriction;
 using Framework.Validation;
@@ -19,12 +16,13 @@ using Framework.BLL.Validation;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
 using Framework.Tracking.Validation;
+using Framework.FileGeneration.Configuration;
 
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 
 public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationContainer<TConfiguration>, IValidatorGenerator
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
 {
     protected readonly CodeExpression ValidatorMapExpr;
 

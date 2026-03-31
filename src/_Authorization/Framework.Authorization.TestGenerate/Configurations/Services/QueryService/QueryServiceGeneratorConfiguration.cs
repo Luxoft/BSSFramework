@@ -2,4 +2,4 @@
 
 namespace Framework.Authorization.TestGenerate.Configurations.Services.QueryService;
 
-public class QueryServiceGeneratorConfiguration(ServerGenerationEnvironment environment) : QueryGeneratorConfigurationBase<ServerGenerationEnvironment>(environment);
+public class QueryServiceGeneratorConfiguration(AuthorizationGenerationEnvironment environment) : QueryGeneratorConfigurationBase<AuthorizationGenerationEnvironment>(environment);

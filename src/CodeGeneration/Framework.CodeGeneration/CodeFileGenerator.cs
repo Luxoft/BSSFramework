@@ -1,6 +1,5 @@
-﻿using Framework.CodeDom;
-using Framework.CodeDom.Rendering;
-using Framework.CodeGeneration.Configuration._Container;
+﻿using Framework.CodeDom.Rendering;
+using Framework.CodeGeneration.Configuration;
 using Framework.FileGeneration;
 
 namespace Framework.CodeGeneration;
@@ -9,20 +8,13 @@ namespace Framework.CodeGeneration;
 /// Генератор cs-файлов с кодом
 /// </summary>
 /// <typeparam name="TConfiguration"></typeparam>
-public abstract class CodeFileGenerator<TConfiguration> : GeneratorConfigurationContainer<TConfiguration>, IFileGenerator<ICodeFile, CodeDomRenderer>
-        where TConfiguration : class
+public abstract class CodeFileGenerator<TConfiguration>(TConfiguration configuration)
+    : FileGenerator<TConfiguration, ICodeFile, CodeDomRenderer>(configuration), IFileGenerator<ICodeFile, CodeDomRenderer>
+    where TConfiguration : class, ICodeGeneratorConfiguration<ICodeGenerationEnvironment>
 {
-    protected CodeFileGenerator(TConfiguration configuration)
-            : base(configuration)
-    {
-    }
+    public override CodeDomRenderer Renderer { get; } = CodeDomRenderer.CSharp;
 
-    public virtual CodeDomRenderer Renderer { get; } = CodeDomRenderer.CSharp;
-
-    public IEnumerable<ICodeFile> GetFileGenerators()
-    {
-        return this.GetInternalFileGenerators();
-    }
+    public sealed override IEnumerable<ICodeFile> GetFileGenerators() => this.GetInternalFileGenerators();
 
     protected abstract IEnumerable<ICodeFile> GetInternalFileGenerators();
 }

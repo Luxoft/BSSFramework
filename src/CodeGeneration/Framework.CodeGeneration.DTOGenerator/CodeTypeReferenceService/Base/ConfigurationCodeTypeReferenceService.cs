@@ -6,7 +6,7 @@ using Framework.CodeGeneration.DTOGenerator.Configuration;
 namespace Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 
 public class ConfigurationCodeTypeReferenceService<TConfiguration>(TConfiguration configuration) : CodeTypeReferenceService<TConfiguration>(configuration)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     public override CodeTypeReference GetCodeTypeReferenceByType(Type type)
     {

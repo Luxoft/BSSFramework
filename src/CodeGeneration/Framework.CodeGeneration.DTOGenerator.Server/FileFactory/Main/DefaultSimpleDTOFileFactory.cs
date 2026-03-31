@@ -14,7 +14,7 @@ using Framework.Core;
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main;
 
 public class DefaultSimpleDTOFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : MainDTOFileFactory<TConfiguration>(configuration, domainType)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public override MainDTOFileType FileType { get; } = BaseFileType.SimpleDTO;
 

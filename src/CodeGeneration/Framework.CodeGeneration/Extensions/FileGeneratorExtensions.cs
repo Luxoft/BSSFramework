@@ -1,6 +1,5 @@
 ﻿using System.CodeDom;
 
-using Framework.CodeDom;
 using Framework.CodeDom.Rendering;
 using Framework.Core;
 using Framework.Core.Rendering;
@@ -83,15 +82,10 @@ public static class FileGeneratorExtensions
                select new GeneratedFileInfo(typeGroup.Key + "." + generator.Renderer.FileExtension, generator.Renderer.Render(compileUnit));
     }
 
-    public static IEnumerable<GeneratedFileInfo> GenerateGroup(this IFileGenerator<ICodeFile, CodeDomRenderer> generator, string path, Func<CodeTypeDeclaration, string> getFileNameFunc, ICheckOutService? checkOutService = null, bool parallel = true)
-    {
-        return generator.GetGroupedFiles(getFileNameFunc, parallel)
-                        .Select(f => f.WithSave(path, checkOutService))
-                        .ToList();
-    }
+    public static IEnumerable<GeneratedFileInfo> GenerateGroup(this IFileGenerator<ICodeFile, CodeDomRenderer> generator, string path, Func<CodeTypeDeclaration, string> getFileNameFunc, ICheckOutService? checkOutService = null, bool parallel = true) =>
+        generator.GetGroupedFiles(getFileNameFunc, parallel)
+                 .Select(f => f.WithSave(path, checkOutService))
+                 .ToList();
 
-    public static IEnumerable<GeneratedFileInfo> GeneratePair(this IFileGenerator<ICodeFile, CodeDomRenderer> generator, string path, string mainFilename, string interfaceFileName, ICheckOutService? checkOutService = null, bool parallel = true)
-    {
-        return generator.GenerateGroup(path, delc => delc.IsInterface ? interfaceFileName : mainFilename, checkOutService, parallel);
-    }
+    public static IEnumerable<GeneratedFileInfo> GeneratePair(this IFileGenerator<ICodeFile, CodeDomRenderer> generator, string path, string mainFilename, string interfaceFileName, ICheckOutService? checkOutService = null, bool parallel = true) => generator.GenerateGroup(path, delc => delc.IsInterface ? interfaceFileName : mainFilename, checkOutService, parallel);
 }

@@ -12,7 +12,7 @@ using Framework.CodeGeneration.FileFactory;
 namespace Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 
 public abstract class FileFactory<TConfiguration, TFileType> : CodeFileFactory<TConfiguration, TFileType>, IFileFactory<TConfiguration, TFileType>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
         where TFileType : BaseFileType
 {
     protected FileFactory(TConfiguration configuration, Type? domainType)

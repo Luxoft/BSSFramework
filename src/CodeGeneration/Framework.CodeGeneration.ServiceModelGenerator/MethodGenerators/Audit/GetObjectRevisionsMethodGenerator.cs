@@ -13,7 +13,7 @@ namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Audit;
 
 public class GetObjectRevisionsMethodGenerator<TConfiguration>(TConfiguration configuration, Type domainType)
     : MethodGenerator<TConfiguration, BLLViewRoleAttribute>(configuration, domainType)
-    where TConfiguration : class, IAuditGeneratorConfigurationBase<IAuditGenerationEnvironmentBase>
+    where TConfiguration : class, IAuditGeneratorConfiguration<IAuditGenerationEnvironment>
 {
     public override MethodIdentity Identity { get; } = MethodIdentityType.GetRevisions;
 

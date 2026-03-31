@@ -8,13 +8,13 @@ using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.IdentityObject;
 using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.FileFactory;
 using Framework.Core;
+using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 
 namespace Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
@@ -24,7 +24,7 @@ public static class BaseCodeDomHelper
     private const string SourceParameterName = "source";
 
     public static CodeConstructor GenerateDefaultConstructor<TConfiguration>(this IFileFactory<TConfiguration> fileFactory)
-            where TConfiguration : IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+            where TConfiguration : IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
@@ -35,7 +35,7 @@ public static class BaseCodeDomHelper
     }
 
     public static CodeMemberMethod GenerateIdConstructor<TConfiguration>(this IFileFactory<TConfiguration> fileFactory)
-            where TConfiguration : IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+            where TConfiguration : IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
@@ -55,7 +55,7 @@ public static class BaseCodeDomHelper
     }
 
     public static IEnumerable<CodeConstructor> GenerateStrictConstructors<TConfiguration>(this IDTOSource<TConfiguration> source)
-            where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+            where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
         return source.GetActualStrictConstructorFileTypes()
                      .Concat([default(MainDTOFileType)])
@@ -64,7 +64,7 @@ public static class BaseCodeDomHelper
     }
 
     public static IEnumerable<MainDTOFileType> GetStrictConstructorFileTypes<TConfiguration>(this IDTOSource<TConfiguration> source)
-            where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+            where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
@@ -80,7 +80,7 @@ public static class BaseCodeDomHelper
     }
 
     public static IEnumerable<MainDTOFileType> GetActualStrictConstructorFileTypes<TConfiguration>(this IDTOSource<TConfiguration> source)
-            where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+            where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
@@ -88,7 +88,7 @@ public static class BaseCodeDomHelper
     }
 
     private static CodeConstructor GenerateStrictConstructor<TConfiguration>(this IDTOSource<TConfiguration> source, MainDTOFileType sourceFileType, MainDTOFileType baseFileType, bool withoutMappingParameter)
-            where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+            where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (sourceFileType == null) throw new ArgumentNullException(nameof(sourceFileType));
@@ -147,7 +147,7 @@ public static class BaseCodeDomHelper
     public static CodeConstructor GenerateUpdateFromDiffStrictConstructor<TFileFactory>(
             this TFileFactory fileFactory,
             bool withoutMappingParameter)
-            where TFileFactory : class, IFileFactory<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>
+            where TFileFactory : class, IFileFactory<IDTOGeneratorConfiguration<IDTOGenerationEnvironment>>
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
@@ -189,7 +189,7 @@ public static class BaseCodeDomHelper
 
 
     public static CodeConstructor GenerateUpdateFromStrictConstructor<TFileFactory>(this TFileFactory fileFactory, bool withoutMappingParameter)
-            where TFileFactory : IFileFactory<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>
+            where TFileFactory : IFileFactory<IDTOGeneratorConfiguration<IDTOGenerationEnvironment>>
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
@@ -227,7 +227,7 @@ public static class BaseCodeDomHelper
 
 
     public static CodeTypeReference GetIdentityObjectContainerTypeReference<TConfiguration>(this IFileFactory<TConfiguration> fileFactory)
-            where TConfiguration : IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+            where TConfiguration : IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
@@ -235,7 +235,7 @@ public static class BaseCodeDomHelper
     }
 
     public static CodeTypeReference GetIdentityObjectTypeReference<TConfiguration>(this IFileFactory<TConfiguration> fileFactory)
-            where TConfiguration : IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+            where TConfiguration : IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
@@ -243,7 +243,7 @@ public static class BaseCodeDomHelper
     }
 
     public static CodeMemberProperty GetIdentityObjectContainerImplementation<TConfiguration>(this IFileFactory<TConfiguration> fileFactory, bool internalImplementation = false)
-            where TConfiguration : IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+            where TConfiguration : IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
@@ -265,7 +265,7 @@ public static class BaseCodeDomHelper
     }
 
     public static CodeMemberProperty GetIdentityObjectImplementation<TConfiguration>(this IFileFactory<TConfiguration> fileFactory, bool internalImplementation = false)
-            where TConfiguration : IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+            where TConfiguration : IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
@@ -287,7 +287,7 @@ public static class BaseCodeDomHelper
 
 
     public static CodeTypeMember GenerateConvertMethod<TConfiguration>(this IFileFactory<TConfiguration, MainDTOFileType> fileFactory, BaseFileType fileType)
-            where TConfiguration : IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+            where TConfiguration : IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
 
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));

@@ -2,4 +2,4 @@
 
 namespace Framework.Configuration.TestGenerate.Configurations.Services.QueryService;
 
-public class QueryServiceGeneratorConfiguration(ServerGenerationEnvironment environment) : QueryGeneratorConfigurationBase<ServerGenerationEnvironment>(environment);
+public class QueryServiceGeneratorConfiguration(ConfigurationGenerationEnvironment environment) : QueryGeneratorConfigurationBase<ConfigurationGenerationEnvironment>(environment);

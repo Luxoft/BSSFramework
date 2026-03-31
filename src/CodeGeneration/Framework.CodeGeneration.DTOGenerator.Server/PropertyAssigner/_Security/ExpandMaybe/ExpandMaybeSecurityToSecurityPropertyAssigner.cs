@@ -13,7 +13,7 @@ using Framework.Core;
 namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.ExpandMaybe;
 
 public class ExpandMaybeSecurityToSecurityPropertyAssigner<TConfiguration>  : MaybePropertyAssigner<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+        where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     private readonly IPropertyCodeTypeReferenceService sourceTypeReferenceService;
 

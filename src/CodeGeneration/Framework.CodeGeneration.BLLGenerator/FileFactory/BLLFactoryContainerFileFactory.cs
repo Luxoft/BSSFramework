@@ -4,16 +4,14 @@ using CommonFramework;
 using CommonFramework.DependencyInjection;
 
 using Framework.BLL;
-using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
-using Framework.CodeGeneration.DomainMetadata;
-using Framework.Core;
+using Framework.FileGeneration.Configuration;
 
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
 public class BLLFactoryContainerFileFactory<TConfiguration>(TConfiguration configuration) : BLLFactoryContainerFileFactoryBase<TConfiguration>(configuration)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
 {
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()
     {

@@ -8,17 +8,16 @@ using Framework.CodeDom;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;
-using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
-using Framework.Core;
+using Framework.FileGeneration.Configuration;
 
 namespace Framework.CodeGeneration.DTOGenerator.FileFactory;
 
 public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : FileFactory<TConfiguration, DTOFileType>(configuration, domainType)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     public override DTOFileType FileType { get; } = BaseFileType.IdentityDTO;
 

@@ -3,7 +3,7 @@ using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 
 namespace Framework.Authorization.TestGenerate.Configurations.BLLCore;
 
-public class BLLCoreGeneratorConfiguration(ServerGenerationEnvironment environment) : GeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
+public class BLLCoreGeneratorConfiguration(AuthorizationGenerationEnvironment environment) : BLLCoreGeneratorConfigurationBase<AuthorizationGenerationEnvironment>(environment)
 {
     public override Type ContextFilterModelType { get; } = typeof(DomainObjectContextFilterModel<>);
 

@@ -8,7 +8,7 @@ using Framework.BLL.Domain.Models;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 using Framework.Database;
@@ -16,7 +16,7 @@ using Framework.Database;
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main;
 
 public class GetChangeModelMethodGenerator<TConfiguration> : ModelMethodGenerator<TConfiguration, BLLViewRoleAttribute>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     public GetChangeModelMethodGenerator(TConfiguration configuration, Type domainType, Type changeModel)
             : base(configuration, domainType, changeModel) =>

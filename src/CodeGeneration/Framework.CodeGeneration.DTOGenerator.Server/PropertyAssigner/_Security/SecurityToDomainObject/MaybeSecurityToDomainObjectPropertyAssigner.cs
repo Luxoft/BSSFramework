@@ -12,7 +12,7 @@ namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Securit
 
 public abstract class MaybeSecurityToDomainObjectPropertyAssigner<TConfiguration>(IPropertyAssigner<TConfiguration> innerAssigner)
     : SecurityServerPropertyAssigner<TConfiguration>(innerAssigner)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     protected abstract CodeStatement GetSecurityAssignStatementInternal(PropertyInfo property, CodeExpression justValueRefExpr, CodeStatement innerAssignStatement);
 

@@ -11,7 +11,7 @@ public class CryptCodeTypeReferenceService<TConfiguration>(
     RoleFileType referenceFileType,
     RoleFileType collectionFileType)
     : DynamicCodeTypeReferenceService<TConfiguration>(configuration, referenceFileType, collectionFileType)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public override bool IsOptional(PropertyInfo property)
     {

@@ -1,15 +1,12 @@
-﻿using Framework.Core.TypeResolving.TypeSource;
+﻿using Framework.Core;
+using Framework.Core.TypeResolving.TypeSource;
 using Framework.Database.Metadata;
+using Framework.Database.NHibernate.DALGenerator.Configuration;
 
 namespace SampleSystem.CodeGenerate;
 
-public class DALGeneratorConfiguration : Framework.DomainDriven.NHibernate.DALGenerator.GeneratorConfigurationBase<ServerGenerationEnvironment>
+public class DALGeneratorConfiguration(ServerGenerationEnvironment environment) : DALGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {
-    public DALGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
-    {
-    }
-
     protected override AssemblyMetadata CreateAssemblyMetadata(IAssemblyInfo assembly)
     {
         var baseResult = base.CreateAssemblyMetadata(assembly);
@@ -31,8 +28,5 @@ public class DALGeneratorConfiguration : Framework.DomainDriven.NHibernate.DALGe
         return baseResult;
     }
 
-    private (Type fromType, string propertyName)[] GetIgnoreFields()
-    {
-        return [];
-    }
+    private (Type fromType, string propertyName)[] GetIgnoreFields() => [];
 }

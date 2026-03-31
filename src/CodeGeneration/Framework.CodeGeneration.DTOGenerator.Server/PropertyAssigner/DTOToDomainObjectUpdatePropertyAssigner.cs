@@ -8,7 +8,7 @@ using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 
 public class DTOToDomainObjectUpdatePropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> source) : DTOToDomainObjectPropertyAssigner<TConfiguration>(source)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     protected override CodeMethodReferenceExpression GetCollectionMappingMethodReferenceExpression(CodeTypeReference transferElementTypeRef, Type elementType)
     {

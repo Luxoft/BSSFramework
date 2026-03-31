@@ -1,5 +1,4 @@
 ﻿using Framework.BLL.Domain.Serialization.Extensions;
-using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
@@ -9,15 +8,16 @@ using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Mapping;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.EventDTO;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.IntegrationDTO;
 using Framework.CodeGeneration.FileFactory;
+using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server;
 
-public class ServerFileGenerator(IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase> configuration)
-    : ServerFileGenerator<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>>(configuration);
+public class ServerFileGenerator(IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment> configuration)
+    : ServerFileGenerator<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>>(configuration);
 
 public class ServerFileGenerator<TConfiguration>(TConfiguration configuration) : FileGenerator<TConfiguration>(configuration)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     protected override ICodeFileFactory<DTOFileType> GetIdentityDTOFileFactory(Type domainType)
     {

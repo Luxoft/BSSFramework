@@ -1,22 +1,23 @@
 ﻿using System.CodeDom;
+using System.Collections.Immutable;
 
 using CommonFramework;
 
 using Framework.CodeGeneration.FileFactory;
 using Framework.CodeGeneration.GeneratePolicy;
 using Framework.CodeGeneration.ServiceModelGenerator;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 
 namespace Framework.CodeGeneration.WebApiGenerator;
 
-public class WebApiNetCoreCompositeGeneratorConfiguration : IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+public class WebApiNetCoreCompositeGeneratorConfiguration : IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
-    private readonly List<IGeneratorConfigurationBase<IGenerationEnvironmentBase>> source;
+    private readonly List<IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>> source;
 
     public WebApiNetCoreCompositeGeneratorConfiguration(
-        IGenerationEnvironmentBase environment,
-        List<IGeneratorConfigurationBase<IGenerationEnvironmentBase>> source,
+        IServiceModelGenerationEnvironment environment,
+        List<IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>> source,
         string? nameSpace = null)
     {
         this.Environment = environment;
@@ -25,7 +26,7 @@ public class WebApiNetCoreCompositeGeneratorConfiguration : IGeneratorConfigurat
 
         this.Namespace = nameSpace ?? $"{this.Environment.TargetSystemName}.WebApi.Controllers";
 
-        this.DomainTypes = source.SelectMany(z => z.DomainTypes).Distinct().ToReadOnlyCollection();
+        this.DomainTypes = [.. source.SelectMany(z => z.DomainTypes).Distinct()];
 
         this.GeneratePolicy = source.Select(z => z.GeneratePolicy).All();
 
@@ -36,7 +37,7 @@ public class WebApiNetCoreCompositeGeneratorConfiguration : IGeneratorConfigurat
 
     public virtual string Namespace { get; }
 
-    public IReadOnlyCollection<Type> DomainTypes { get; }
+    public ImmutableArray<Type> DomainTypes { get; }
 
     public IGeneratePolicy<MethodIdentity> GeneratePolicy { get; }
 
@@ -46,7 +47,7 @@ public class WebApiNetCoreCompositeGeneratorConfiguration : IGeneratorConfigurat
 
     public bool UseRouteAction { get; }
 
-    public IGenerationEnvironmentBase Environment { get; }
+    public IServiceModelGenerationEnvironment Environment { get; }
 
     public string GetTypeName(Type domainType, FileType fileType) =>
             this.source.Select(z => z.GetTypeName(domainType, fileType)).FirstOrDefault(z => !string.IsNullOrWhiteSpace(z));
@@ -63,5 +64,5 @@ public class WebApiNetCoreCompositeGeneratorConfiguration : IGeneratorConfigurat
     public bool HasMethods(Type domainType) =>
             this.source.Any(z => z.HasMethods(domainType));
 
-    public IEnumerable<IServiceMethodGenerator> GetAccumMethodGenerators() => throw new NotImplementedException();
+    public IEnumerable<IServiceMethodGenerator> GetAccumulateMethodGenerators() => throw new NotImplementedException();
 }

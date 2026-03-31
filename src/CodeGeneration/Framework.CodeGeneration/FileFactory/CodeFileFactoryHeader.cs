@@ -23,13 +23,7 @@ public class CodeFileFactoryHeader<TFileType>(TFileType type, string relativePat
 
     public string RelativePath { get; } = relativePath;
 
-    public string GetName(Type? domainType)
-    {
-        return getNameFunc(domainType);
-    }
+    public string GetName(Type? domainType) => getNameFunc(domainType);
 
-    public override string ToString()
-    {
-        return $"Type:{this.Type}";
-    }
+    public override string ToString() => $"Type:{this.Type}";
 }

@@ -6,7 +6,7 @@ using Framework.Core;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.GeneratePolicy;
 
-public class ServerAttributeGeneratePolicy(IServerGeneratorConfigurationBase configuration) : AttributeGeneratePolicy
+public class ServerAttributeGeneratePolicy(IServerDTOGeneratorConfiguration configuration) : AttributeGeneratePolicy
 {
     public override bool Used(Type domainType, RoleFileType fileType)
     {

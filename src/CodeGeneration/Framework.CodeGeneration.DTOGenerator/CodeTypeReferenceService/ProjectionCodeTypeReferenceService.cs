@@ -8,7 +8,7 @@ using Framework.CodeGeneration.DTOGenerator.FileTypes;
 namespace Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
 
 public class ProjectionCodeTypeReferenceService<TConfiguration>(TConfiguration configuration) : MainCodeTypeReferenceService<TConfiguration>(configuration)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     public override Type CollectionType => this.Configuration.ClientEditCollectionType;
 

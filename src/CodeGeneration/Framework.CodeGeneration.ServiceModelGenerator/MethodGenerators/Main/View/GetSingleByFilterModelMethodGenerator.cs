@@ -6,7 +6,7 @@ using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.DTO.Extensions;
 using Framework.BLL.Domain.Extensions;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View._Base;
 using Framework.Core;
@@ -14,7 +14,7 @@ using Framework.Core;
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View;
 
 public class GetSingleByFilterModelMethodGenerator<TConfiguration> : ViewMethodGenerator<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     private readonly Type filterType;
 

@@ -1,21 +1,17 @@
-﻿using Framework.CodeGeneration.Configuration._Container;
-using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
+﻿using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.FileFactory;
+using Framework.FileGeneration.Configuration;
 
 namespace Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 
 public interface IFileFactory<out TConfiguration, out TFileType> : IFileFactory<TConfiguration>, ICodeFileFactory<TFileType>
-        where TConfiguration : IGeneratorConfigurationBase<IGenerationEnvironmentBase>
-        where TFileType : BaseFileType
-{
-}
+        where TConfiguration : IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
+        where TFileType : BaseFileType;
 
-public interface IFileFactory<out TConfiguration> : IFileFactory, IGeneratorConfigurationContainer<TConfiguration>
-        where TConfiguration : IGeneratorConfigurationBase<IGenerationEnvironmentBase>
-{
-}
+public interface IFileFactory<out TConfiguration> : IFileFactory, IFileGeneratorConfigurationContainer<TConfiguration>
+        where TConfiguration : IDTOGeneratorConfiguration<IDTOGenerationEnvironment>;
 
 public interface IFileFactory : ICodeFileFactory
 {

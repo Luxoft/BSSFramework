@@ -13,7 +13,7 @@ using Framework.Core;
 namespace Framework.CodeGeneration.DTOGenerator.PropertyAssigner._Security;
 
 public class SecurityToSecurityPropertyAssigner<TConfiguration> : MaybePropertyAssigner<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     private readonly IPropertyCodeTypeReferenceService sourceTypeReferenceService;
 

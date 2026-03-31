@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\CodeGeneration\Framework.CodeGeneration.WebApiGenerator\Framework.CodeGeneration.WebApiGenerator.csproj" />
     <ProjectReference Include="..\Framework.Configuration.Domain.Models\Framework.Configuration.Domain.Models.csproj" />
 
     <ProjectReference Include="..\..\CodeGeneration\Framework.CodeGeneration.ServiceModelGenerator\Framework.CodeGeneration.ServiceModelGenerator.csproj" />

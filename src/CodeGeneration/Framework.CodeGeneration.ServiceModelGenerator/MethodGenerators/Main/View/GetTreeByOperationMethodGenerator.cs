@@ -7,15 +7,15 @@ using Framework.BLL.Domain.DTO.Extensions;
 using Framework.BLL.Domain.Persistent;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.DomainMetadata;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View._Base;
+using Framework.FileGeneration.Configuration;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View;
 
 public class GetTreeByOperationMethodGenerator<TConfiguration> : ViewMethodGenerator<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     public GetTreeByOperationMethodGenerator(TConfiguration configuration, Type domainType, ViewDTOType dtoType)
             : base(configuration, domainType, dtoType)

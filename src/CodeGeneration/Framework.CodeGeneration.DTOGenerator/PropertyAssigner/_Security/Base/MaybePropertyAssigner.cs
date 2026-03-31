@@ -8,7 +8,7 @@ using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
 namespace Framework.CodeGeneration.DTOGenerator.PropertyAssigner._Security.Base;
 
 public abstract class MaybePropertyAssigner<TConfiguration> : PropertyAssigner<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     protected MaybePropertyAssigner(IPropertyAssigner<TConfiguration> innerAssigner)
             : base(innerAssigner)

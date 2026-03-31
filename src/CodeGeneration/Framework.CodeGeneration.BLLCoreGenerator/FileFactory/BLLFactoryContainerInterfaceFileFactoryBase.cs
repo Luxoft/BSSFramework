@@ -5,7 +5,7 @@ using Framework.CodeGeneration.BLLCoreGenerator.FileFactory.__Base;
 namespace Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
 
 public class BLLFactoryContainerInterfaceFileFactoryBase<TConfiguration> : FileFactory<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IBLLCoreGeneratorConfiguration<IBLLCoreGenerationEnvironment>
 {
     public BLLFactoryContainerInterfaceFileFactoryBase(TConfiguration configuration)
             : base(configuration, null)
@@ -17,19 +17,17 @@ public class BLLFactoryContainerInterfaceFileFactoryBase<TConfiguration> : FileF
     public override FileType FileType => FileType.BLLFactoryContainerInterface;
 
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration
-               {
-                       Name = this.Name,
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new()
+        {
+            Name = this.Name,
 
-                       Attributes = MemberAttributes.Public,
-                       IsPartial = true,
-                       IsInterface = true,
+            Attributes = MemberAttributes.Public,
+            IsPartial = true,
+            IsInterface = true,
 
-                       BaseTypes = { this.Configuration.SecurityBLLFactoryContainerType }
-               };
-    }
+            BaseTypes = { this.Configuration.SecurityBLLFactoryContainerType }
+        };
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
     {

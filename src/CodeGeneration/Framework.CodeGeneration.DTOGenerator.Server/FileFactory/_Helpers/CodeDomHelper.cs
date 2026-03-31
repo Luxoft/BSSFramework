@@ -24,7 +24,7 @@ internal static class CodeDomHelper
     private const string DomainObjectParameterNameBase = "domainObject";
 
 
-    public static CodeConstructor GenerateFromDomainObjectConstructor(this IFileFactory<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>, DTOFileType> fileFactory, IPropertyAssigner propertyAssigner)
+    public static CodeConstructor GenerateFromDomainObjectConstructor(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, DTOFileType> fileFactory, IPropertyAssigner propertyAssigner)
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
         if (propertyAssigner == null) throw new ArgumentNullException(nameof(propertyAssigner));
@@ -32,7 +32,7 @@ internal static class CodeDomHelper
         return fileFactory.GenerateFromDomainObjectConstructor(propertyAssigner, fileFactory.DomainType);
     }
 
-    public static CodeConstructor GenerateFromDomainObjectConstructor(this IFileFactory<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>, DTOFileType> fileFactory, IPropertyAssigner propertyAssigner, Type domainType)
+    public static CodeConstructor GenerateFromDomainObjectConstructor(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, DTOFileType> fileFactory, IPropertyAssigner propertyAssigner, Type domainType)
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
         if (propertyAssigner == null) throw new ArgumentNullException(nameof(propertyAssigner));
@@ -67,7 +67,7 @@ internal static class CodeDomHelper
 
 
     public static CodeExpression ToHasAccessMethod(
-        this IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase> configuration,
+        this IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment> configuration,
         CodeExpression contextRef,
         SecurityRule securityRule,
         Type domainType,
@@ -79,7 +79,7 @@ internal static class CodeDomHelper
                                       configuration.Environment.BLLCore.GetSecurityCodeExpression(securityRule));
     }
 
-    public static CodeParameterDeclarationExpression GetMappingServiceParameter(this IFileFactory<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>> fileFactory)
+    public static CodeParameterDeclarationExpression GetMappingServiceParameter(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>> fileFactory)
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
@@ -115,7 +115,7 @@ internal static class CodeDomHelper
     }
 
 
-    public static CodeMemberMethod GetToDomainObjectMethod(this IFileFactory<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>> fileFactory)
+    public static CodeMemberMethod GetToDomainObjectMethod(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>> fileFactory)
     {
         var mappingServiceParameter = fileFactory.GetMappingServiceParameter();
         var mappingServiceParameterRefExpr = mappingServiceParameter.ToVariableReferenceExpression();
@@ -135,7 +135,7 @@ internal static class CodeDomHelper
                };
     }
 
-    public static CodeMemberMethod GetToDomainObjectWithAllowCreateMethod(this IFileFactory<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>> fileFactory)
+    public static CodeMemberMethod GetToDomainObjectWithAllowCreateMethod(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>> fileFactory)
     {
         var mappingServiceParameter = fileFactory.GetMappingServiceParameter();
         var mappingServiceParameterRefExpr = mappingServiceParameter.ToVariableReferenceExpression();
@@ -214,7 +214,7 @@ internal static class CodeDomHelper
     }
 
     public static CodeMemberMethod GetMappingServiceToDomainObjectMethod<TConfiguration>(this IDTOFileFactory<TConfiguration, DTOFileType> fileFactory, Type masterType)
-            where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+            where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
         if (masterType == null) throw new ArgumentNullException(nameof(masterType));
@@ -253,7 +253,7 @@ internal static class CodeDomHelper
 
 
     public static CodeMemberMethod GetMappingServiceToDomainObjectMethod<TConfiguration>(this IDTOFileFactory<TConfiguration, DTOFileType> fileFactory)
-            where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+            where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
@@ -277,7 +277,7 @@ internal static class CodeDomHelper
         }
     }
 
-    private static CodeMemberMethod GetMappingServiceIdentityToDomainObjectMethod(this IFileFactory<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>, DTOFileType> fileFactory)
+    private static CodeMemberMethod GetMappingServiceIdentityToDomainObjectMethod(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, DTOFileType> fileFactory)
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
@@ -302,7 +302,7 @@ internal static class CodeDomHelper
                };
     }
 
-    private static CodeMemberMethod GetMappingServiceIdentityToIntegrationVersionDomainObjectMethod(this IFileFactory<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>, DTOFileType> fileFactory)
+    private static CodeMemberMethod GetMappingServiceIdentityToIntegrationVersionDomainObjectMethod(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, DTOFileType> fileFactory)
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
@@ -328,7 +328,7 @@ internal static class CodeDomHelper
     }
 
 
-    private static CodeMemberMethod GetMappingServiceUnpersistentToDomainObjectMethod(this IFileFactory<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>, DTOFileType> fileFactory)
+    private static CodeMemberMethod GetMappingServiceUnpersistentToDomainObjectMethod(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, DTOFileType> fileFactory)
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
@@ -355,7 +355,7 @@ internal static class CodeDomHelper
                };
     }
 
-    private static CodeMemberMethod GetMappingServicePersistentToDomainObjectMethod(this IFileFactory<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>, DTOFileType> fileFactory)
+    private static CodeMemberMethod GetMappingServicePersistentToDomainObjectMethod(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, DTOFileType> fileFactory)
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
@@ -383,7 +383,7 @@ internal static class CodeDomHelper
     }
 
 
-    public static CodeMemberMethod GetMappingServiceToDomainObjectWithAllowCreateMethod(this IFileFactory<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>, DTOFileType> fileFactory)
+    public static CodeMemberMethod GetMappingServiceToDomainObjectWithAllowCreateMethod(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, DTOFileType> fileFactory)
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 

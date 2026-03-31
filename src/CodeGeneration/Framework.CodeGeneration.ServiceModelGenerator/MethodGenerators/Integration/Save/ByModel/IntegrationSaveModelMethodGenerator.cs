@@ -10,7 +10,7 @@ using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Server;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Integration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save.Base;
@@ -20,7 +20,7 @@ using Framework.Database;
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save.ByModel;
 
 public class IntegrationSaveModelMethodGenerator<TConfiguration> : IntegrationMethodGenerator<TConfiguration, BLLIntegrationSaveRoleAttribute>
-        where TConfiguration : class, IIntegrationGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IIntegrationGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     private readonly Type modelType;
 

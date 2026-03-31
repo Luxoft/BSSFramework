@@ -3,12 +3,12 @@ using Framework.Authorization.TestGenerate.Configurations;
 
 namespace Framework.Authorization.TestGenerate;
 
-public partial class ServerGenerators(ServerGenerationEnvironment environment) : GeneratorsBase
+public partial class ServerGenerators(AuthorizationGenerationEnvironment environment) : GeneratorsBase
 {
-    protected readonly ServerGenerationEnvironment Environment = environment ?? throw new ArgumentNullException(nameof(environment));
+    protected readonly AuthorizationGenerationEnvironment Environment = environment ?? throw new ArgumentNullException(nameof(environment));
 
     public ServerGenerators()
-            : this(ServerGenerationEnvironment.Default)
+            : this(AuthorizationGenerationEnvironment.Default)
     {
     }
 

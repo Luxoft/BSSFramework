@@ -6,7 +6,7 @@ namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main;
 
 public class DefaultBaseAbstractDTOFileFactory<TConfiguration>(TConfiguration configuration)
     : MainDTOFileFactory<TConfiguration>(configuration, configuration.Environment.DomainObjectBaseType)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public override MainDTOFileType FileType { get; } = BaseFileType.BaseAbstractDTO;
 

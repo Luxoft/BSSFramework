@@ -5,7 +5,7 @@ using Framework.CodeGeneration.BLLGenerator.FileFactory.__Base;
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
 public abstract class BLLFactoryContainerFileFactoryBase<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
 {
     public override FileType FileType => FileType.BLLFactoryContainer;
 

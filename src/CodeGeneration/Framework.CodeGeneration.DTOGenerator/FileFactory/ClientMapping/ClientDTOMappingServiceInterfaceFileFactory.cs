@@ -11,7 +11,7 @@ namespace Framework.CodeGeneration.DTOGenerator.FileFactory.ClientMapping;
 
 public class ClientDTOMappingServiceInterfaceFileFactory<TConfiguration>(TConfiguration configuration, IEnumerable<IClientMappingServiceExternalMethodGenerator> externalGenerators)
     : FileFactory<TConfiguration, BaseFileType>(configuration, null)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     private readonly ReadOnlyCollection<IClientMappingServiceExternalMethodGenerator> externalGenerators = externalGenerators.ToReadOnlyCollection();
 

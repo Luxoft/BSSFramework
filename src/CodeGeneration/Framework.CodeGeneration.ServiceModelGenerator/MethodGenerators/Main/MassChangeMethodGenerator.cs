@@ -9,14 +9,14 @@ using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main;
 
 public class MassChangeMethodGenerator<TConfiguration> : ModelMethodGenerator<TConfiguration, BLLSaveRoleAttribute>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     public MassChangeMethodGenerator(TConfiguration configuration, Type domainType, Type changeModel)
             : base(configuration, domainType, changeModel) =>

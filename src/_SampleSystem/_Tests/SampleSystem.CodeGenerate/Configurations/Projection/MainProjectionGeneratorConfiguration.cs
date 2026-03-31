@@ -2,19 +2,16 @@
 using System.Reflection;
 
 using Framework.CodeDom.Extensions;
+using Framework.CodeGeneration.ProjectionGenerator.Configuration;
 using Framework.Core;
 
 using SampleSystem.Domain;
 
 namespace SampleSystem.CodeGenerate;
 
-public class MainProjectionGeneratorConfiguration : Framework.DomainDriven.ProjectionGenerator.GeneratorConfigurationBase<ServerGenerationEnvironment>
+public class MainProjectionGeneratorConfiguration(ServerGenerationEnvironment environment)
+    : ProjectionGeneratorConfigurationBase<ServerGenerationEnvironment>(environment, environment.MainProjectionEnvironment)
 {
-    public MainProjectionGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment, environment.MainProjectionEnvironment)
-    {
-    }
-
     public override IEnumerable<CodeAttributeDeclaration> GetDomainTypeAttributeDeclarations(Type domainType)
     {
         foreach (var baseAttr in base.GetDomainTypeAttributeDeclarations(domainType))

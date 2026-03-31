@@ -5,7 +5,7 @@ using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.EventDTO.Bas
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.EventDTO;
 
 public class DefaultSimpleEventDTOFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : EventDTOFileFactory<TConfiguration>(configuration, domainType)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public override DTOFileType FileType { get; } = ServerFileType.SimpleEventDTO;
 }

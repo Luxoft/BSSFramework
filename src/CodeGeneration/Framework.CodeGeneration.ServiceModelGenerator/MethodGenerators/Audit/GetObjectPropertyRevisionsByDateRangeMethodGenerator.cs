@@ -11,9 +11,9 @@ namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Audit;
 public class GetObjectPropertyRevisionsByDateRangeMethodGenerator<TConfiguration>(
     TConfiguration configuration,
     Type domainType,
-    IAuditDTOGeneratorConfigurationBase dtoConfiguration)
+    IAuditDTOGeneratorConfiguration dtoConfiguration)
     : GetObjectPropertyRevisionsMethodGeneratorBase<TConfiguration>(configuration, domainType, dtoConfiguration)
-    where TConfiguration : class, IAuditGeneratorConfigurationBase<IAuditGenerationEnvironmentBase>
+    where TConfiguration : class, IAuditGeneratorConfiguration<IAuditGenerationEnvironment>
 {
     public override MethodIdentity Identity { get; } = MethodIdentityType.GetPropertyRevisionByDateRange;
 

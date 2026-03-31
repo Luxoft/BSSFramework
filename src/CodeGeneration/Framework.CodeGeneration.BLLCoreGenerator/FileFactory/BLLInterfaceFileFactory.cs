@@ -10,8 +10,8 @@ using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.FileFactory.__Base;
-using Framework.CodeGeneration.DomainMetadata;
 using Framework.Core;
+using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 
 using GenericQueryable.Fetching;
@@ -25,7 +25,7 @@ namespace Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
 /// </summary>
 /// <typeparam name="TConfiguration"></typeparam>
 public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IBLLCoreGeneratorConfiguration<IBLLCoreGenerationEnvironment>
 {
     public BLLInterfaceFileFactory(TConfiguration configuration, Type domainType)
             : base(configuration, domainType)
@@ -37,28 +37,26 @@ public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguratio
     public override FileType FileType => FileType.BLLInterface;
 
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration
-               {
-                       Name = this.Name,
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new()
+        {
+            Name = this.Name,
 
-                       Attributes = MemberAttributes.Public,
-                       IsPartial = true,
-                       IsInterface = true,
+            Attributes = MemberAttributes.Public,
+            IsPartial = true,
+            IsInterface = true,
 
-                       BaseTypes =
-                       {
-                               typeof(IDefaultSecurityDomainBLLBase<,,,>)
-                               .ToTypeReference(
+            BaseTypes =
+            {
+                typeof(IDefaultSecurityDomainBLLBase<,,,>)
+                    .ToTypeReference(
 
-                                                this.Configuration.BLLContextInterfaceTypeReference,
-                                                this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
-                                                this.DomainType.ToTypeReference(),
-                                                this.Configuration.Environment.GetIdentityType().ToTypeReference()),
-                       },
-               };
-    }
+                        this.Configuration.BLLContextInterfaceTypeReference,
+                        this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
+                        this.DomainType.ToTypeReference(),
+                        this.Configuration.Environment.GetIdentityType().ToTypeReference()),
+            },
+        };
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
     {

@@ -1,6 +1,5 @@
 ﻿using System.CodeDom;
 
-using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.Core;
@@ -14,7 +13,7 @@ internal static class BaseCodeDomHelper
     private const string ContextParameterNameBase = "context";
 
     extension<TConfiguration>(FileFactory<TConfiguration> fileFactory)
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
     {
         public CodeParameterDeclarationExpression GetContextParameter()
         {

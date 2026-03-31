@@ -13,6 +13,4 @@ public interface IPropertyAssigner : IDTOSource
 
 
 public interface IPropertyAssigner<out TConfiguration> : IDTOSource<TConfiguration>, IPropertyAssigner
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
-{
-}
+        where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>;

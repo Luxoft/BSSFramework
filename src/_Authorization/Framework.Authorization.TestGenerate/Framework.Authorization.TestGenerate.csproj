@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\CodeGeneration\Framework.CodeGeneration.WebApiGenerator\Framework.CodeGeneration.WebApiGenerator.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Domain.Models\Framework.Authorization.Domain.Models.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Generated.DAL.NHibernate\Framework.Authorization.Generated.DAL.NHibernate.csproj" />
 

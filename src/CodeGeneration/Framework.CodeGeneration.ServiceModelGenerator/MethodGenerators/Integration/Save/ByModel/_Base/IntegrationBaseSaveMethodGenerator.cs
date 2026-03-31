@@ -2,14 +2,14 @@
 
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.ServiceRole;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Integration;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save.Base;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save.ByModel._Base;
 
 public abstract class IntegrationBaseSaveMethodGenerator<TConfiguration> : IntegrationMethodGenerator<TConfiguration, BLLIntegrationSaveRoleAttribute>
-        where TConfiguration : class, IIntegrationGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IIntegrationGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     protected readonly CodeTypeReference IdentTypeRef;
 

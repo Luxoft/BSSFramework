@@ -1,13 +1,13 @@
-﻿using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+﻿using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.FileFactory;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator;
 
-public class ServiceModelFileGenerator(IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
-    : ServiceModelFileGenerator<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>(configuration);
+public class ServiceModelFileGenerator(IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment> configuration)
+    : ServiceModelFileGenerator<IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>>(configuration);
 
 public class ServiceModelFileGenerator<TConfiguration>(TConfiguration configuration) : CodeFileGenerator<TConfiguration>(configuration)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {

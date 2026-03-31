@@ -1,5 +1,4 @@
-﻿using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
+﻿using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.FileStore;
 
 using SecuritySystem;
@@ -7,8 +6,8 @@ using SecuritySystem;
 namespace Framework.CodeGeneration.ServiceModelGenerator.Configuration.FileStoreAttachment;
 
 public abstract class FileStoreAttachmentGeneratorConfigurationBase<TEnvironment>(TEnvironment environment)
-    : GeneratorConfigurationBase<TEnvironment>(environment), IFileStoreAttachmentGeneratorConfigurationBase<TEnvironment>
-    where TEnvironment : class, IFileStoreAttachmentGenerationEnvironmentBase
+    : ServiceModelGeneratorBase<TEnvironment>(environment), IFileStoreAttachmentGeneratorConfiguration<TEnvironment>
+    where TEnvironment : class, IFileStoreAttachmentGenerationEnvironment
 {
     public override string ImplementClassName { get; } = "FileStoreAttachmentFacade";
 

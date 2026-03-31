@@ -2,4 +2,4 @@
 
 namespace Framework.Configuration.TestGenerate.Configurations.BLL;
 
-public class BLLGeneratorConfiguration(ServerGenerationEnvironment environment) : GeneratorConfigurationBase<ServerGenerationEnvironment>(environment);
+public class BLLGeneratorConfiguration(ConfigurationGenerationEnvironment environment) : BLLGeneratorConfigurationBase<ConfigurationGenerationEnvironment>(environment);

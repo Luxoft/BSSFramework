@@ -4,11 +4,11 @@ using Framework.CodeGeneration.BLLGenerator.FileFactory.DomainBLL;
 
 namespace Framework.CodeGeneration.BLLGenerator;
 
-public class BLLFileGenerator(IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
-    : BLLFileGenerator<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>(configuration);
+public class BLLFileGenerator(IBLLGeneratorConfiguration<IBLLGenerationEnvironment> configuration)
+    : BLLFileGenerator<IBLLGeneratorConfiguration<IBLLGenerationEnvironment>>(configuration);
 
 public class BLLFileGenerator<TConfiguration>(TConfiguration configuration) : CodeFileGenerator<TConfiguration>(configuration)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
 {
     protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {

@@ -4,12 +4,12 @@ using Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
 namespace Framework.CodeGeneration.BLLCoreGenerator;
 
 /// <inheritdoc />
-public class BLLCoreFileGenerator(IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
-    : BLLCoreFileGenerator<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>(configuration);
+public class BLLCoreFileGenerator(IBLLCoreGeneratorConfiguration<IBLLCoreGenerationEnvironment> configuration)
+    : BLLCoreFileGenerator<IBLLCoreGeneratorConfiguration<IBLLCoreGenerationEnvironment>>(configuration);
 
 /// <inheritdoc />
 public class BLLCoreFileGenerator<TConfiguration>(TConfiguration configuration) : CodeFileGenerator<TConfiguration>(configuration)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IBLLCoreGeneratorConfiguration<IBLLCoreGenerationEnvironment>
 {
     protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {

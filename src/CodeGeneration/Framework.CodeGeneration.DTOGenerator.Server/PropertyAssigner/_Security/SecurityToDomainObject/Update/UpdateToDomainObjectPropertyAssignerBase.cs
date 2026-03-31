@@ -13,9 +13,9 @@ namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Securit
 
 public abstract class UpdateToDomainObjectPropertyAssignerBase<TConfiguration>(
     IPropertyAssigner<TConfiguration> innerAssigner,
-    IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
+    IDTOGeneratorConfiguration<IDTOGenerationEnvironment> configuration)
     : MaybeSecurityToDomainObjectPropertyAssigner<TConfiguration>(innerAssigner)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     protected override bool IsMaybeProperty(PropertyInfo property)
     {

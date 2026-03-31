@@ -7,7 +7,7 @@ namespace Framework.CodeGeneration.DTOGenerator.PropertyAssigner._Security;
 public static class SecurityToSecurityPropertyAssignerExtensions
 {
     public static IPropertyAssigner WithSecurityToSecurity<TConfiguration>(this IPropertyAssigner<TConfiguration> innerAssigner, IPropertyCodeTypeReferenceService sourceTypeReferenceService)
-            where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+            where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
         if (innerAssigner == null) throw new ArgumentNullException(nameof(innerAssigner));
         if (sourceTypeReferenceService == null) throw new ArgumentNullException(nameof(sourceTypeReferenceService));

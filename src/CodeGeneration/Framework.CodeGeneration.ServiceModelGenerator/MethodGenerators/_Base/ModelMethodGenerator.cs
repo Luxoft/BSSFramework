@@ -1,7 +1,7 @@
 ﻿using CommonFramework;
 
 using Framework.BLL.Domain.ServiceRole.Base;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.Core;
 using Framework.Database;
 
@@ -13,7 +13,7 @@ namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 /// <typeparam name="TConfiguration"></typeparam>
 /// <typeparam name="TBLLRoleAttribute"></typeparam>
 public abstract class ModelMethodGenerator<TConfiguration, TBLLRoleAttribute> : MethodGenerator<TConfiguration, TBLLRoleAttribute>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
         where TBLLRoleAttribute : BLLServiceRoleAttribute, new()
 {
     protected readonly Type ModelType;

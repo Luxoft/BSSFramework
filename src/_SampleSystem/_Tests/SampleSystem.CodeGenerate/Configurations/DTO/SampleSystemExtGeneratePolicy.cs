@@ -9,12 +9,12 @@ public class SampleSystemExtGeneratePolicy : IGeneratePolicy<RoleFileType>
 {
     public bool Used(Type domainType, RoleFileType fileType)
     {
-        if ((fileType == FileType.FullDTO || fileType == FileType.RichDTO) && domainType == typeof(Employee))
+        if ((fileType == BaseFileType.FullDTO || fileType == BaseFileType.RichDTO) && domainType == typeof(Employee))
         {
             return true;
         }
 
-        if ((fileType == FileType.StrictDTO || fileType == FileType.SimpleDTO)
+        if ((fileType == BaseFileType.StrictDTO || fileType == BaseFileType.SimpleDTO)
             && new[] { typeof(TestDefaultFieldsMappingObj), typeof(NoSecurityObject) }.Contains(domainType))
         {
             return true;

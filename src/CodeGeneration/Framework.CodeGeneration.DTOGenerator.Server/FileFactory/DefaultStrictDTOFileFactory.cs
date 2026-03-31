@@ -6,7 +6,6 @@ using CommonFramework;
 
 using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
@@ -24,11 +23,12 @@ using Framework.CodeGeneration.DTOGenerator.Server.Members.MapToDomainObject;
 using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.ExpandMaybe;
 using Framework.Core;
+using Framework.FileGeneration.Configuration;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
 
 public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfiguration, DTOFileType>, IClientMappingServiceExternalMethodGenerator
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+        where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public DefaultStrictDTOFileFactory(TConfiguration configuration, Type domainType)
             : base(configuration, domainType)
@@ -110,7 +110,7 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
 
             if (this.Configuration.VersionProperty != null)
             {
-                yield return this.Configuration.GetVesionObjectCodeTypeReference();
+                yield return this.Configuration.GetVersionObjectCodeTypeReference();
             }
         }
     }

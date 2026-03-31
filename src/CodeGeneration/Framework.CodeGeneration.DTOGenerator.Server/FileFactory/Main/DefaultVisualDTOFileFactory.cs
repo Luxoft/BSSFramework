@@ -8,7 +8,7 @@ using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main.Base;
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main;
 
 public class DefaultVisualDTOFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : MainDTOFileFactory<TConfiguration>(configuration, domainType)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public override MainDTOFileType FileType { get; } = BaseFileType.VisualDTO;
 

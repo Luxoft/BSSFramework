@@ -1,5 +1,4 @@
-﻿using Framework.Core;
-using Framework.Core.Rendering;
+﻿using Framework.Core.Rendering;
 
 namespace Framework.FileGeneration;
 

@@ -14,7 +14,7 @@ using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.__Base;
 namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 
 public class DomainObjectToDTOPropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> source) : ServerPropertyAssigner<TConfiguration>(source)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public override CodeStatement GetAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef)
     {

@@ -5,7 +5,7 @@ using CommonFramework;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Persistent.IdentityObject;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View._Base;
 
@@ -13,7 +13,7 @@ namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.V
 
 public class GetSingleByCodeMethodGenerator<TConfiguration>(TConfiguration configuration, Type domainType, ViewDTOType dtoType)
     : ViewMethodGenerator<TConfiguration>(configuration, domainType, dtoType)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     public override MethodIdentity Identity { get; } = new(MethodIdentityType.GetSingleByCode, dtoType);
 

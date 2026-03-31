@@ -1,5 +1,0 @@
-﻿using Framework.CodeGeneration.DTOGenerator.Configuration;
-
-namespace Framework.CodeGeneration.DTOGenerator.Server.Configuration;
-
-public interface IServerGenerationEnvironmentBase : IGenerationEnvironmentBase, BLLCoreGenerator.Configuration.IGeneratorConfigurationContainer;

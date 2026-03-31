@@ -4,9 +4,9 @@ using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Audit._Bas
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Audit;
 
-public class GetObjectPropertyRevisionsMethodGenerator<TConfiguration>(TConfiguration configuration, Type domainType, IAuditDTOGeneratorConfigurationBase dtoConfiguration)
+public class GetObjectPropertyRevisionsMethodGenerator<TConfiguration>(TConfiguration configuration, Type domainType, IAuditDTOGeneratorConfiguration dtoConfiguration)
     : GetObjectPropertyRevisionsMethodGeneratorBase<TConfiguration>(configuration, domainType, dtoConfiguration)
-    where TConfiguration : class, IAuditGeneratorConfigurationBase<IAuditGenerationEnvironmentBase>
+    where TConfiguration : class, IAuditGeneratorConfiguration<IAuditGenerationEnvironment>
 {
     public override MethodIdentity Identity { get; } = MethodIdentityType.GetPropertyRevisions;
 

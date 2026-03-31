@@ -11,8 +11,5 @@ public class FuncGeneratePolicy<TIdent> : GeneratePolicy<TIdent>
         this.func = func;
     }
 
-    public override bool Used(Type type, TIdent fileType)
-    {
-        return this.func(type, fileType);
-    }
+    public override bool Used(Type type, TIdent fileType) => this.func(type, fileType);
 }

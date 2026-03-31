@@ -2,16 +2,16 @@
 
 using Framework.BLL.Domain.DTO;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.DomainMetadata;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.FileStore;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
+using Framework.FileGeneration.Configuration;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.FileStore;
 
 public class GetFileContainerMethodGenerator<TConfiguration>(TConfiguration configuration, Type domainType, Type targetDomainType)
     : FileStoreMethodGeneratorBase<TConfiguration>(configuration, domainType)
-    where TConfiguration : class, IFileStoreGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IFileStoreGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     public override MethodIdentity Identity { get; } = MethodIdentityType.GetFileContainer;
 

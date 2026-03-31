@@ -12,6 +12,4 @@ public interface IDiffUpdatePropertyAssigner : IDTOSource
 }
 
 public interface IiDiffUpdatePropertyAssigner<out TConfiguration> : IDTOSource<TConfiguration>, IDiffUpdatePropertyAssigner
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
-{
-}
+        where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>;

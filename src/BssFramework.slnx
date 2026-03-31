@@ -123,7 +123,6 @@
   
   <Folder Name="/_Authorization/GeneratedTools/">
     <Project Path="_Authorization/Framework.Authorization.TestGenerate/Framework.Authorization.TestGenerate.csproj" />
-    <Project Path="_Authorization/Framework.Authorization.WebApiGenerate/Framework.Authorization.WebApiGenerate.csproj" />
   </Folder>
   
   <Folder Name="/_Configuration/">
@@ -145,7 +144,6 @@
   
   <Folder Name="/_Configuration/GeneratedTools/">
     <Project Path="_Configuration/Framework.Configuration.TestGenerate/Framework.Configuration.TestGenerate.csproj" />
-    <Project Path="_Configuration/Framework.Configuration.WebApiGenerate/Framework.Configuration.WebApiGenerate.csproj" />
   </Folder>
   <Folder Name="/_SampleSystem/">
     <Project Path="_SampleSystem/SampleSystem.AuditDomain/SampleSystem.AuditDomain.csproj" />

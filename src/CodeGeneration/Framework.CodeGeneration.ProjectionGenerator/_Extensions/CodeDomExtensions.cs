@@ -10,7 +10,6 @@ using Framework.BLL.Domain.Fetching;
 using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
-using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.Core;
 using Framework.Database.Mapping;

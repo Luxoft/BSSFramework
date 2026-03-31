@@ -6,7 +6,7 @@ using Framework.CodeGeneration.DTOGenerator.FileTypes;
 namespace Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 
 public class FixedCodeTypeReferenceService<TConfiguration> : LayerCodeTypeReferenceService<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     private readonly RoleFileType referenceFileType;
 

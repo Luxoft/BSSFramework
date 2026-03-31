@@ -20,7 +20,7 @@ public interface ILayerCodeTypeReferenceService : IPropertyCodeTypeReferenceServ
 
 public abstract class LayerCodeTypeReferenceService<TConfiguration>(TConfiguration configuration)
     : PropertyCodeTypeReferenceService<TConfiguration>(configuration), ILayerCodeTypeReferenceService
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     public virtual Type CollectionType => this.Configuration.CollectionType;
 

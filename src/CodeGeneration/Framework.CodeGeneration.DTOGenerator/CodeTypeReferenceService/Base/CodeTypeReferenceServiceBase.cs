@@ -1,15 +1,15 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
-using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
+using Framework.FileGeneration.Configuration;
 
 namespace Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 
 public abstract class CodeTypeReferenceService<TConfiguration>(TConfiguration configuration)
     : GeneratorConfigurationContainer<TConfiguration>(configuration), ICodeTypeReferenceService
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     public virtual CodeTypeReference GetCodeTypeReferenceByType(Type type)
     {

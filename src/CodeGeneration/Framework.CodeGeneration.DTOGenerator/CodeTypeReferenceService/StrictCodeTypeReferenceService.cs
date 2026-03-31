@@ -2,16 +2,16 @@
 
 using CommonFramework;
 
-using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
+using Framework.FileGeneration.Configuration;
 using Framework.Relations;
 
 namespace Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
 
 public class StrictCodeTypeReferenceService<TConfiguration>(TConfiguration configuration) : LayerCodeTypeReferenceService<TConfiguration>(configuration)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     public override bool IsOptional(PropertyInfo property)
     {

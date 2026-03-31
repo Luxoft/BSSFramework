@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 using Framework.BLL;
-using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;
@@ -9,7 +8,7 @@ namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 public static class GeneratorConfigurationExtensions
 {
     public static CodeTypeDeclaration GetBLLContextContainerCodeTypeDeclaration(
-        this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration,
+        this IBLLGeneratorConfiguration<IBLLGenerationEnvironment> configuration,
         string typeName,
         bool asAbstract,
         CodeTypeReference? containerType = null)

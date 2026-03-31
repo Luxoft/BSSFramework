@@ -27,12 +27,12 @@ public class SampleSystemServerDependencyGeneratePolicy(IGeneratePolicy<RoleFile
         {
             return true;
         }
-        else if (fileType == FileType.SimpleDTO)
+        else if (fileType == BaseFileType.SimpleDTO)
         {
             return base.InternalUsed(domainType, fileType) || this.Used(domainType, SampleSystemFileType.FullRefDTO)
                                                            || this.IsUsedProperty(SampleSystemFileType.FullRefDTO, domainType, fileType);
         }
-        else if (fileType == FileType.FullDTO)
+        else if (fileType == BaseFileType.FullDTO)
         {
             return base.InternalUsed(domainType, fileType) || this.IsUsedProperty(SampleSystemFileType.FullRefDTO, domainType, fileType);
         }

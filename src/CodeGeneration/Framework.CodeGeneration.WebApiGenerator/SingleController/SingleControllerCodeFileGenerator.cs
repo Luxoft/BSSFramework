@@ -1,14 +1,14 @@
 ﻿using Framework.CodeGeneration.ServiceModelGenerator;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.FileFactory;
 
 namespace Framework.CodeGeneration.WebApiGenerator.SingleController;
 
-public class SingleControllerCodeFileGenerator(IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
-    : SingleControllerCodeFileGenerator<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>(configuration);
+public class SingleControllerCodeFileGenerator(IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment> configuration)
+    : SingleControllerCodeFileGenerator<IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>>(configuration);
 
 public class SingleControllerCodeFileGenerator<TConfiguration>(TConfiguration configuration) : ServiceModelFileGenerator<TConfiguration>(configuration)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {

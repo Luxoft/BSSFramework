@@ -4,8 +4,7 @@ using CommonFramework;
 
 using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
-
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Framework.CodeGeneration.WebApiGenerator;
@@ -15,7 +14,7 @@ public class WebApiNetCoreFileFactory<TConfiguration>(
     Type domainType,
     List<CodeAttributeDeclaration> additionalAttributes)
     : WebApiNetCoreFileFactoryBase<TConfiguration>(configuration, domainType)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     private readonly List<CodeAttributeDeclaration> additionalAttributes = additionalAttributes ?? [];
 

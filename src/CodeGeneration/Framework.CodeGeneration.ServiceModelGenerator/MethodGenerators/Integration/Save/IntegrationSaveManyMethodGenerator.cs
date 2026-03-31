@@ -6,7 +6,7 @@ using Framework.BLL.Domain.DTO.Extensions;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Integration;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save.ByModel._Base;
 using Framework.Core;
@@ -14,7 +14,7 @@ using Framework.Core;
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save;
 
 public class IntegrationSaveManyMethodGenerator<TConfiguration> : IntegrationBaseSaveMethodGenerator<TConfiguration>
-        where TConfiguration : class, IIntegrationGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IIntegrationGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     private readonly IntegrationSaveMethodGenerator<TConfiguration> singleSaveGenerator;
 

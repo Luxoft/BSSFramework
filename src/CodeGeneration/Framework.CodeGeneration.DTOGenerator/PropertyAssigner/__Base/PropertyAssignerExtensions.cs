@@ -20,7 +20,7 @@ public static class PropertyAssignerExtensions
     }
 
     public static IPropertyAssigner<TConfiguration> WithConfiguration<TConfiguration>(this IPropertyAssigner propertyAssigner, TConfiguration configuration)
-            where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+            where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
         if (propertyAssigner == null) throw new ArgumentNullException(nameof(propertyAssigner));
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
@@ -39,7 +39,7 @@ public static class PropertyAssignerExtensions
 
     private class ImplPropertyAssigner<TConfiguration>(TConfiguration configuration, IPropertyAssigner innerAssigner)
         : PropertyAssigner<TConfiguration>(configuration, innerAssigner.DomainType, innerAssigner.FileType)
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
         public override CodeStatement GetAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef)
         {

@@ -5,14 +5,14 @@ using CommonFramework;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.DTO.Extensions;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Query.OData.Base;
 using Framework.Core;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Query.OData;
 
 public class GetODataListByQueryStringWithFilterMethodGenerator<TConfiguration> : GetByODataQueryWithFilterMethodGeneratorBase<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     public GetODataListByQueryStringWithFilterMethodGenerator(TConfiguration configuration, Type domainType, ViewDTOType dtoType, Type filterType)
             : base(configuration, domainType, dtoType, filterType)

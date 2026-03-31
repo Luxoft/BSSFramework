@@ -2,6 +2,7 @@
 using Framework.CodeGeneration.BLLGenerator;
 using Framework.CodeGeneration.DTOGenerator.Server;
 using Framework.CodeGeneration.Extensions;
+using Framework.CodeGeneration.WebApiGenerator.SingleController;
 using Framework.FileGeneration;
 
 namespace Framework.Authorization.TestGenerate;
@@ -19,7 +20,8 @@ public partial class ServerGenerators
     {
         return this.GenerateBLLCore()
                    .Concat(this.GenerateBLL())
-                   .Concat(this.GenerateServerDTO());
+                   .Concat(this.GenerateServerDTO())
+                   .Concat(this.GenerateMainController());
     }
 
     [TestMethod]
@@ -68,5 +70,18 @@ public partial class ServerGenerators
                                               this.GeneratePath + @"/Framework.Authorization.Generated.DTO",
                                               "Authorization.Generated",
                                               this.CheckOutService);
+    }
+
+    [TestMethod]
+    public void GenerateMainControllerTest() => this.GenerateMainController().ToList();
+
+
+    private IEnumerable<GeneratedFileInfo> GenerateMainController()
+    {
+        var generator = new SingleControllerCodeFileGenerator(this.Environment.MainController);
+
+        var outputPath = Path.Combine(this.GeneratePath, "Framework.Authorization.WebApi");
+
+        yield return generator.GenerateSingle(outputPath, "Authorization.Generated", this.CheckOutService);
     }
 }

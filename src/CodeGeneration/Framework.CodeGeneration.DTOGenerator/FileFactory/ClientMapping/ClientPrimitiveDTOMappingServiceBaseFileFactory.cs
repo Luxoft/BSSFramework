@@ -13,7 +13,7 @@ using Framework.CodeGeneration.DTOGenerator.FileTypes;
 namespace Framework.CodeGeneration.DTOGenerator.FileFactory.ClientMapping;
 
 public class ClientPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : FileFactory<TConfiguration, BaseFileType>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     private readonly ReadOnlyCollection<IClientMappingServiceExternalMethodGenerator> externalGenerators;
 

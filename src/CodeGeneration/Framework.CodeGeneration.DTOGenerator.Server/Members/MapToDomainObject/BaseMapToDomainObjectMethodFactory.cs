@@ -10,7 +10,7 @@ using Framework.CodeGeneration.MethodGenerator;
 namespace Framework.CodeGeneration.DTOGenerator.Server.Members.MapToDomainObject;
 
 public class BaseMapToDomainObjectMethodFactory<TConfiguration, TFileFactory, TFileType> : IMethodGenerator
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+        where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
         where TFileFactory : DTOFileFactory<TConfiguration, TFileType>
         where TFileType : DTOFileType
 {
@@ -42,7 +42,7 @@ public class BaseMapToDomainObjectMethodFactory<TConfiguration, TFileFactory, TF
     }
 
 
-    public IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase> Configuration => this.FileFactory.Configuration;
+    public IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment> Configuration => this.FileFactory.Configuration;
 
     protected virtual MemberAttributes MemberAttributes { get; } = MemberAttributes.Public | MemberAttributes.Final;
 

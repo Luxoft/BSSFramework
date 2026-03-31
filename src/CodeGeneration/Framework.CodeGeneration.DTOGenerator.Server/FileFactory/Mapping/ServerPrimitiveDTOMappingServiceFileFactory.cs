@@ -9,7 +9,7 @@ using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Mapping;
 
 public class ServerPrimitiveDTOMappingServiceFileFactory<TConfiguration> : FileFactory<TConfiguration, BaseFileType>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+        where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public ServerPrimitiveDTOMappingServiceFileFactory(TConfiguration configuration)
             : base(configuration, null)

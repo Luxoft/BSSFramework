@@ -8,7 +8,7 @@ using Framework.BLL.Domain.DTO;
 using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Integration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save.ByModel._Base;
@@ -18,7 +18,7 @@ namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integr
 
 public class IntegrationSaveMethodGenerator<TConfiguration>(TConfiguration configuration, Type domainType)
     : IntegrationBaseSaveMethodGenerator<TConfiguration>(configuration, domainType)
-    where TConfiguration : class, IIntegrationGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IIntegrationGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     public override MethodIdentity Identity { get; } = MethodIdentityType.IntegrationSave;
 

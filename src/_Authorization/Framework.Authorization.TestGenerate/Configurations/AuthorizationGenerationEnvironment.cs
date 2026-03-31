@@ -1,0 +1,96 @@
+﻿using Framework.Authorization.Domain;
+using Framework.Authorization.TestGenerate.Configurations._Base;
+using Framework.Authorization.TestGenerate.Configurations.BLL;
+using Framework.Authorization.TestGenerate.Configurations.BLLCore;
+using Framework.Authorization.TestGenerate.Configurations.DTO;
+using Framework.Authorization.TestGenerate.Configurations.Services.Main;
+using Framework.Authorization.TestGenerate.Configurations.Services.QueryService;
+using Framework.Authorization.TestGenerate.Configurations.Services.WebApi;
+using Framework.BLL.Domain.DTO;
+using Framework.BLL.Domain.Serialization;
+using Framework.BLL.Domain.ServiceRole;
+using Framework.BLL.Domain.ServiceRole.Base;
+using Framework.Database;
+using Framework.Database.NHibernate._MappingSettings;
+using Framework.Projection.ExtendedMetadata;
+
+namespace Framework.Authorization.TestGenerate.Configurations;
+
+public partial class AuthorizationGenerationEnvironment : GenerationEnvironmentBase
+{
+    public readonly BLLCoreGeneratorConfiguration BLLCore;
+
+    public readonly BLLGeneratorConfiguration BLL;
+
+    public readonly ServerDTOGeneratorConfiguration ServerDTO;
+
+    public readonly MainServiceGeneratorConfiguration MainService;
+
+    public readonly QueryServiceGeneratorConfiguration QueryService;
+
+    public readonly MainControllerConfiguration MainController;
+
+    public AuthorizationGenerationEnvironment()
+        : this(new DatabaseName("", "auth"))
+    {
+    }
+
+    public AuthorizationGenerationEnvironment(DatabaseName databaseName)
+    {
+        this.BLLCore = new BLLCoreGeneratorConfiguration(this);
+
+        this.BLL = new BLLGeneratorConfiguration(this);
+
+        this.ServerDTO = new ServerDTOGeneratorConfiguration(this);
+
+        this.MainService = new MainServiceGeneratorConfiguration(this);
+
+        this.QueryService = new QueryServiceGeneratorConfiguration(this);
+
+        this.MainController = new MainControllerConfiguration(this);
+
+        this.DatabaseName = databaseName ?? throw new ArgumentNullException(nameof(databaseName));
+    }
+
+    /// <summary>
+    /// Свойства содержащиеся в MappingSettings
+    /// DatabaseName - Берётся из namespace'а сборки, которая сдержит тип PersistentDomainObjectBase (метод GetTargetSystemName);
+    /// Types - Список доменных объектов. Это все типы наследованные от PersistentDomainObjectBase той сборки, в которой содеержится PersistentDomainObjectBase.
+    /// </summary>
+    public MappingSettings MappingSettings => this.GetMappingSettings(this.DatabaseName, this.DatabaseName.ToDefaultAudit());
+
+
+    public DatabaseName DatabaseName { get; }
+
+
+    public MappingSettings GetMappingSettings(DatabaseName dbName, AuditDatabaseName dbAuditName)
+    {
+        return new MappingSettings<PersistentDomainObjectBase>(dbName, dbAuditName);
+    }
+
+    public override IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } =
+
+        new DomainTypeRootExtendedMetadataBuilder()
+
+            .Add<BusinessRole>(tb =>
+                                   tb.AddAttribute(new BLLViewRoleAttribute()))
+
+            .Add<Principal>(tb =>
+                                tb.AddAttribute(new BLLViewRoleAttribute())
+                                  .AddAttribute(new BLLSaveRoleAttribute())
+                                  .AddAttribute(new BLLRemoveRoleAttribute()))
+
+            .Add<Permission>(tb =>
+                                 tb.AddAttribute(new BLLViewRoleAttribute { MaxCollection = MainDTOType.RichDTO })
+                                   .AddAttribute(new BLLRemoveRoleAttribute()))
+
+            .Add<PermissionRestriction>(tb =>
+                                            tb.AddAttribute(new BLLRoleAttribute()))
+
+            .Add<SecurityContextType>(tb =>
+                                          tb.AddAttribute(new BLLViewRoleAttribute()))
+            .Add<DelegateToItemModel>(tb => tb.AddProperty(v => v.Permission,
+                                                           pb => pb.AddAttribute(new AutoMappingAttribute(false))));
+
+    public static readonly AuthorizationGenerationEnvironment Default = new();
+}

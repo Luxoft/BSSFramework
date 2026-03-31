@@ -8,15 +8,15 @@ using Framework.BLL;
 using Framework.BLL.DTOMapping.MappingObject;
 using Framework.BLL.DTOMapping.Services;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.DomainMetadata;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.FileGeneration.Configuration;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Mapping;
 
 public class ServerPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : FileFactory<TConfiguration, BaseFileType>
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     private readonly ReadOnlyCollection<IServerMappingServiceExternalMethodGenerator> externalGenerators;
 

@@ -1,11 +1,11 @@
 ﻿namespace Framework.FileGeneration;
 
-public interface IFileGenerator<out TFileFactory>
+public interface IFileGenerator<out TRenderingData>
 {
-    IEnumerable<TFileFactory> GetFileGenerators();
+    IEnumerable<TRenderingData> GetFileGenerators();
 }
 
-public interface IFileGenerator<out TFileFactory, out TRenderer> : IFileGenerator<TFileFactory>
+public interface IFileGenerator<out TRenderingData, out TRenderer> : IFileGenerator<TRenderingData>
 {
     TRenderer Renderer { get; }
 }

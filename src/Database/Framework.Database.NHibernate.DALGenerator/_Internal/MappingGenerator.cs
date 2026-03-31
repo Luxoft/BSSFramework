@@ -1,11 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Reflection;
 using System.Xml.Linq;
 
+using CommonFramework;
+
+using Framework.Core;
 using Framework.Core.TypeResolving.TypeSource;
+using Framework.Database.Mapping;
+using Framework.Database.Metadata;
+using Framework.Database.SqlMapper;
+using Framework.Restriction;
+
+using Microsoft.SqlServer.Management.Smo;
 
 namespace Framework.Database.NHibernate.DALGenerator._Internal;
 
-public class MappingGenerator : IMappingGenerator
+public class MappingGenerator(IGrouping<IAssemblyInfo, DomainTypeMetadata> assemblyGroup, IEscapeWordService escapeWordService, DatabaseName schema, bool useSmartUpdate)
+    : IMappingGenerator
 {
     private const string NHibernateNamespace = "nhibernate-mapping-2.2";
     private const string NHibernateMappingRootName = "hibernate-mapping";
@@ -15,21 +25,9 @@ public class MappingGenerator : IMappingGenerator
 
     private static readonly XNamespace RootNameNamespace = "urn:" + NHibernateNamespace;
 
-    private readonly IGrouping<IAssemblyInfo, DomainTypeMetadata> assemblyGroup;
+    private readonly IGrouping<IAssemblyInfo, DomainTypeMetadata> assemblyGroup = assemblyGroup ?? throw new ArgumentNullException(nameof(assemblyGroup));
 
-    private readonly IEscapeWordService escapeWordService;
-
-    private readonly DatabaseName schema;
-
-    private readonly bool useSmartUpdate;
-
-    public MappingGenerator(IGrouping<IAssemblyInfo, DomainTypeMetadata> assemblyGroup, IEscapeWordService escapeWordService, DatabaseName schema, bool useSmartUpdate)
-    {
-        this.assemblyGroup = assemblyGroup ?? throw new ArgumentNullException(nameof(assemblyGroup));
-        this.escapeWordService = escapeWordService;
-        this.schema = schema ?? throw new ArgumentNullException(nameof(schema));
-        this.useSmartUpdate = useSmartUpdate;
-    }
+    private readonly DatabaseName schema = schema ?? throw new ArgumentNullException(nameof(schema));
 
     public IAssemblyInfo Assembly => this.assemblyGroup.Key;
 
@@ -102,13 +100,11 @@ public class MappingGenerator : IMappingGenerator
         });
     }
 
-    protected virtual void GenerateMappingForChildrenTypes(DomainTypeMetadata domainTypeMetadata, XElement rootElement)
-    {
+    protected virtual void GenerateMappingForChildrenTypes(DomainTypeMetadata domainTypeMetadata, XElement rootElement) =>
         domainTypeMetadata.NotAbstractChildrenDomainTypes
                           .Where(z=>!z.IsInlineBaseType)
                           .OrderBy(x => x.DomainType.FullName)
                           .Foreach(z => this.GenerateMappingForChildType(z, rootElement));
-    }
 
     protected virtual void GenerateMappingForChildType(DomainTypeMetadata domainTypeMetadata, XElement rootElement)
     {
@@ -124,8 +120,7 @@ public class MappingGenerator : IMappingGenerator
         this.GenerateMappingForTypeAttributes(domainTypeMetadata, joinedSubclassElement, null);
     }
 
-    protected virtual void GenerateMappingForExternalTableColumns(DomainTypeMetadata domainTypeMetadata, XElement rootElement)
-    {
+    protected virtual void GenerateMappingForExternalTableColumns(DomainTypeMetadata domainTypeMetadata, XElement rootElement) =>
         domainTypeMetadata.Fields.GroupBy(field => field.ExternalTableName).Where(g => g.Key != null).Foreach(g =>
         {
             var joinedSubclassElement = rootElement
@@ -136,7 +131,6 @@ public class MappingGenerator : IMappingGenerator
 
             this.GenerateMappingForTypeAttributes(domainTypeMetadata, joinedSubclassElement, g.Key);
         });
-    }
 
     protected virtual void GenerateMappingForReferenceFields(DomainTypeMetadata domainTypeMetadata, XElement classTag, string externalTableName)
     {
@@ -190,13 +184,11 @@ public class MappingGenerator : IMappingGenerator
                                                classTag);
     }
 
-    protected virtual void GenerateMappingForPrimitiveFields(IEnumerable<PrimitiveTypeFieldMetadata> primitiveFields, XElement xmlTag)
-    {
+    protected virtual void GenerateMappingForPrimitiveFields(IEnumerable<PrimitiveTypeFieldMetadata> primitiveFields, XElement xmlTag) =>
         primitiveFields
-                .Where(z => !z.IsVersion)
-                .Where(z => !z.Name.ToLowerInvariant().Equals("id"))
-                .Foreach(z => this.GeneratePrimitivePropertyMapping(z, xmlTag));
-    }
+            .Where(z => !z.IsVersion)
+            .Where(z => !z.Name.ToLowerInvariant().Equals("id"))
+            .Foreach(z => this.GeneratePrimitivePropertyMapping(z, xmlTag));
 
     protected virtual void GenerateMappingForVersionField(DomainTypeMetadata domainTypeMetadata, XElement root, string externalTableName)
     {
@@ -230,14 +222,14 @@ public class MappingGenerator : IMappingGenerator
                                      new
                                      {
                                              SQLType = DataType.BigInt,
-                                             CLRTypeName = typeof(long).Name,
+                                             CLRTypeName = nameof(Int64),
                                              CLRType = typeof(long),
                                              GeneratedValue = "never"
                                      },
                                      new
                                      {
                                              SQLType = DataType.DateTime,
-                                             CLRTypeName = typeof(DateTime).Name,
+                                             CLRTypeName = nameof(DateTime),
                                              CLRType = typeof(DateTime),
                                              GeneratedValue = "always"
                                      }
@@ -302,7 +294,7 @@ public class MappingGenerator : IMappingGenerator
             classElement.WithSchemeActionNoneAttribute();
         }
 
-        if (this.useSmartUpdate || domainTypeMetadata.UseSmartUpdate)
+        if (useSmartUpdate || domainTypeMetadata.UseSmartUpdate)
         {
             classElement.WithDynamicUpdateElement(domainTypeMetadata);
         }
@@ -323,7 +315,7 @@ public class MappingGenerator : IMappingGenerator
         if (domainTypeMetadata.Fields.Any(z => z.IsVersion))
         {
             throw new Exception(
-                                $"Unsupported {typeof(OptimisticLockAttribute).Name} with versioned property. Type:{domainTypeMetadata.DomainType.Name}");
+                                $"Unsupported {nameof(OptimisticLockAttribute)} with versioned property. Type:{domainTypeMetadata.DomainType.Name}");
         }
 
         element
@@ -352,26 +344,24 @@ public class MappingGenerator : IMappingGenerator
     protected virtual string GetColumnName(FieldMetadata fieldMetadata)
     {
         var columnName = fieldMetadata.ToColumnName();
-        return this.escapeWordService.IsEscapeWord(columnName) ? $"[{columnName}]" : columnName;
+        return escapeWordService.IsEscapeWord(columnName) ? $"[{columnName}]" : columnName;
     }
 
-    protected virtual void GeneratePrimitivePropertyMapping(FieldMetadata fieldMetadata, XElement rootElement)
-    {
+    protected virtual void GeneratePrimitivePropertyMapping(FieldMetadata fieldMetadata, XElement rootElement) =>
         rootElement.CreatePropertyElementWithRootNamespace()
                    .WithLowNameAttribute(fieldMetadata.Name.ToPropertyName())
                    .WithColumnAttribute(this.GetColumnName(fieldMetadata))
                    .WithTryUniqueAttribute(fieldMetadata)
                    .Pipe(el =>
-                         {
-                             this.ProcessPrimitiveType(el, fieldMetadata.Type, fieldMetadata.GetReferencedProperty().GetCustomAttributes().ToList());
+                   {
+                       this.ProcessPrimitiveType(el, fieldMetadata.Type, fieldMetadata.GetReferencedProperty().GetCustomAttributes().ToList());
 
-                             this.TryProcessMappingPropertyAttribute(fieldMetadata, el);
+                       this.TryProcessMappingPropertyAttribute(fieldMetadata, el);
 
-                             return el;
-                         })
+                       return el;
+                   })
 
                    .WithPrivateAccessAttribute(fieldMetadata.Name);
-    }
 
     private void ProcessPrimitiveType(XElement el, Type fieldType, List<Attribute> attributes)
     {

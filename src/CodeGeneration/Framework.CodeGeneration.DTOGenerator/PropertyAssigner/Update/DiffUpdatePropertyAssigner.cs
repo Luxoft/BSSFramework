@@ -7,18 +7,18 @@ using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Extensions;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.Configuration._Container;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.FileGeneration.Configuration;
 using Framework.Relations;
 
 namespace Framework.CodeGeneration.DTOGenerator.PropertyAssigner.Update;
 
 public class DiffUpdatePropertyAssigner<TConfiguration> : GeneratorConfigurationContainer<TConfiguration>, IDiffUpdatePropertyAssigner
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+        where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     public DiffUpdatePropertyAssigner(IDTOSource<TConfiguration> source)
             : this(source.FromMaybe(() => new ArgumentOutOfRangeException(nameof(source))).Configuration, source.DomainType)

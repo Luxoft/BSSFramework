@@ -6,14 +6,14 @@ using Framework.BLL;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.Configuration._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main;
 
 public class UpdateMethodGenerator<TConfiguration>(TConfiguration configuration, Type domainType) : MethodGenerator<TConfiguration, BLLSaveRoleAttribute>(configuration, domainType)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
     public override MethodIdentity Identity { get; } = MethodIdentityType.Update;
 

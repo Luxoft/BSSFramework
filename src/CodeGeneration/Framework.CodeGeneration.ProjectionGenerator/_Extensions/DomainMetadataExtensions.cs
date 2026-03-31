@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
-using Framework.CodeGeneration.DomainMetadata;
 using Framework.Core;
+using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 
 namespace Framework.CodeGeneration.ProjectionGenerator._Extensions;
@@ -27,7 +27,7 @@ internal static class DomainMetadataExtensions
 
             if (customPropFilter == null || isCustom == customPropFilter)
             {
-                var isBaseProp = property.ReflectedType.IsAssignableFrom(domainType.BaseType);//.IsAssignableFrom() environment.IsDomainObjectBaseProperty(property) || environment.IsPersistentDomainObjectBaseProperty(property);
+                var isBaseProp = property.ReflectedType!.IsAssignableFrom(domainType.BaseType);//.IsAssignableFrom() environment.IsDomainObjectBaseProperty(property) || environment.IsPersistentDomainObjectBaseProperty(property);
 
                 if (includeBase || !isBaseProp)
                 {

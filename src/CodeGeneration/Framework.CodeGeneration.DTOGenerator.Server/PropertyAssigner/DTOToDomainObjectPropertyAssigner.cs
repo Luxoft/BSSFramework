@@ -8,7 +8,6 @@ using Framework.BLL.Domain.Serialization.Extensions;
 using Framework.CodeDom;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
@@ -16,12 +15,13 @@ using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.__Base;
 using Framework.Core;
 using Framework.Database.Attributes;
+using Framework.FileGeneration.Configuration;
 using Framework.Relations;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 
 public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> source) : ServerPropertyAssigner<TConfiguration>(source)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public override CodeStatement GetAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef)
     {

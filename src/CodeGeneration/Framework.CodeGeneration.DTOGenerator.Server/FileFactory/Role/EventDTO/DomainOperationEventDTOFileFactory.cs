@@ -11,12 +11,11 @@ using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
 using Framework.CodeGeneration.DTOGenerator.Server.FileType;
-using Framework.Core;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.EventDTO;
 
 public class DefaultDomainOperationEventDTOFileFactory<TConfiguration> : DTOFileFactory<TConfiguration, DomainOperationEventDTOFileType>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+        where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public DefaultDomainOperationEventDTOFileFactory(TConfiguration configuration, Type domainType, EventOperation domainObjectEvent)
             : base(configuration, domainType)

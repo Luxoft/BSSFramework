@@ -7,13 +7,11 @@ using CommonFramework;
 using CommonFramework.Maybe;
 
 using Framework.BLL.Domain.DTO;
-using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.IdentityObject;
 using Framework.BLL.DTOMapping.Extensions;
 using Framework.CodeDom;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
@@ -30,17 +28,18 @@ using Framework.CodeGeneration.DTOGenerator.Server.Members.MapToDomainObject;
 using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 using Framework.Core;
 using Framework.Database.Attributes;
+using Framework.FileGeneration.Configuration;
 using Framework.Relations;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
 
 public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfiguration, DTOFileType>, IClientMappingServiceExternalMethodGenerator
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+        where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public DefaultUpdateDTOFileFactory(TConfiguration configuration, Type domainType)
             : base(configuration, domainType)
     {
-        this.CodeTypeReferenceService = new UpdateCodeTypeReferenceService<IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>>(this.Configuration);
+        this.CodeTypeReferenceService = new UpdateCodeTypeReferenceService<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>>(this.Configuration);
     }
 
 
@@ -138,7 +137,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
 
             if (this.Configuration.VersionProperty != null)
             {
-                yield return this.Configuration.GetVesionObjectCodeTypeReference();
+                yield return this.Configuration.GetVersionObjectCodeTypeReference();
             }
         }
     }

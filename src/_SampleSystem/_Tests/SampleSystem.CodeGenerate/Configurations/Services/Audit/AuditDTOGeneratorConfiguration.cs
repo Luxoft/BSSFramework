@@ -10,8 +10,5 @@ public class AuditDTOGeneratorConfiguration(ServerGenerationEnvironment environm
 
     protected override string PropertyRevisionDTOPrefixName => "SampleSystem";
 
-    protected override IEnumerable<Type> GetDomainTypes()
-    {
-        return base.GetDomainTypes().Where(z => !TypeExtensions.IsProjection(z));
-    }
+    protected override IEnumerable<Type> GetDomainTypes() => base.GetDomainTypes().Where(z => !TypeExtensions.IsProjection(z));
 }

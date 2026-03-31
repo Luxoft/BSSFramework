@@ -2,7 +2,7 @@
 
 namespace Framework.Configuration.TestGenerate.Configurations.Services.Main;
 
-public class MainServiceGeneratorConfiguration(ServerGenerationEnvironment environment) : MainGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
+public class MainServiceGeneratorConfiguration(ConfigurationGenerationEnvironment environment) : MainGeneratorConfigurationBase<ConfigurationGenerationEnvironment>(environment)
 {
     public override string ImplementClassName { get; } = "ConfigurationFacade";
 }

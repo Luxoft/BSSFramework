@@ -7,17 +7,16 @@ using Framework.FileGeneration;
 
 namespace Framework.Database.NHibernate.DALGenerator;
 
-public class DALFileGenerator(IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
-    : DALFileGenerator<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>(configuration);
+public class DALFileGenerator(IDALGeneratorConfiguration<IDALGenerationEnvironment> configuration)
+    : DALFileGenerator<IDALGeneratorConfiguration<IDALGenerationEnvironment>>(configuration);
 
 public class DALFileGenerator<TConfiguration>(TConfiguration configuration)
-    : GeneratorConfigurationContainer<TConfiguration>(configuration), IFileGenerator<IRenderingFile<XDocument>, XDocumentFileRenderer>
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    : FileGenerator<TConfiguration, IRenderingFile<XDocument>, XDocumentFileRenderer>(configuration), IFileGenerator<IRenderingFile<XDocument>, XDocumentFileRenderer>
+    where TConfiguration : class, IDALGeneratorConfiguration<IDALGenerationEnvironment>
 {
-    public XDocumentFileRenderer Renderer => XDocumentFileRenderer.Default;
+    public override XDocumentFileRenderer Renderer => XDocumentFileRenderer.Default;
 
-
-    public IEnumerable<IRenderingFile<XDocument>> GetFileGenerators()
+    public override IEnumerable<IRenderingFile<XDocument>> GetFileGenerators()
     {
         foreach (var mappingGenerator in this.Configuration.GetMappingGenerators())
         {

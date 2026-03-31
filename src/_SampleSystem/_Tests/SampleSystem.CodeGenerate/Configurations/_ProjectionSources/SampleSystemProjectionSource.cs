@@ -7,6 +7,7 @@ using Framework.Projection.Lambda.ProjectionSource._Base;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Filters;
+using SampleSystem.Security;
 
 namespace SampleSystem.CodeGenerate;
 

@@ -17,7 +17,7 @@ using Framework.Relations;
 namespace Framework.CodeGeneration.DTOGenerator.PropertyAssigner.Update;
 
 public class UpdatePropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> source) : PropertyAssigner<TConfiguration>(source)
-    where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     public CodeExpression MappingServiceRefExpr => new CodeThisReferenceExpression();
 

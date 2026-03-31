@@ -11,7 +11,7 @@ namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Securit
 
 public abstract class SecurityServerPropertyAssigner<TConfiguration>(IPropertyAssigner<TConfiguration> innerAssigner)
     : MaybePropertyAssigner<TConfiguration>(innerAssigner), IServerPropertyAssigner
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public CodeExpression MappingServiceRefExpr => new CodeThisReferenceExpression();
 

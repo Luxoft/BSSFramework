@@ -15,7 +15,7 @@ using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.IntegrationDTO.Base;
 
 public abstract class IntegrationDTOFileFactory<TConfiguration> : RoleDTOFileFactory<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+        where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     protected IntegrationDTOFileFactory(TConfiguration configuration, Type domainType)
             : base(configuration, domainType)

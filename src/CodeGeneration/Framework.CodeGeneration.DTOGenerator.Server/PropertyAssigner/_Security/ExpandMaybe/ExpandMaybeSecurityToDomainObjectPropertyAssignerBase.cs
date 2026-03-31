@@ -11,7 +11,7 @@ namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Securit
 
 public abstract class ExpandMaybeSecurityToDomainObjectPropertyAssignerBase<TConfiguration>(IPropertyAssigner<TConfiguration> innerAssigner)
     : SecurityServerPropertyAssigner<TConfiguration>(innerAssigner)
-    where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     protected abstract CodeExpression GetCondition(PropertyInfo property);
 

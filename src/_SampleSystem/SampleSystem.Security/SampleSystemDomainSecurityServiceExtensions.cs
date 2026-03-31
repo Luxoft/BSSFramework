@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.ServiceModel.IAD;
+﻿using Framework.Infrastructure.DependencyInjection;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.EnversBug1676;

@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.Setup;
 
 using SecuritySystem;
 
@@ -21,24 +20,24 @@ public static class SampleSystemSecuritySystemExtensions
             return settings.AddSecurityContext<BusinessUnit>(
                                new Guid("263D2C60-7BCE-45D6-A0AF-A0830152353E"),
                                b => b.SetHierarchicalInfo(
-                                         v => v.Parent,
-                                         new AncestorLinkInfo<BusinessUnit, BusinessUnitAncestorLink>(link => link.Ancestor, link => link.Child),
-                                         new AncestorLinkInfo<BusinessUnit, BusinessUnitToAncestorChildView>(link => link.Source, link => link.ChildOrAncestor))
-                                     .SetDeepLevel(v => v.DeepLevel))
+                                   v => v.Parent,
+                                   new AncestorLinkInfo<BusinessUnit, BusinessUnitAncestorLink>(link => link.Ancestor, link => link.Child),
+                                   new AncestorLinkInfo<BusinessUnit, BusinessUnitToAncestorChildView>(link => link.Source, link => link.ChildOrAncestor),
+                                   v => v.DeepLevel))
                            .AddSecurityContext<Location>(
                                new Guid("4641395B-9079-448E-9CB8-A083015235A3"),
                                b => b.SetHierarchicalInfo(
-                                         v => v.Parent,
-                                         new AncestorLinkInfo<Location, LocationAncestorLink>(link => link.Ancestor, link => link.Child),
-                                         new AncestorLinkInfo<Location, LocationToAncestorChildView>(link => link.Source, link => link.ChildOrAncestor))
-                                     .SetDeepLevel(v => v.DeepLevel))
+                                   v => v.Parent,
+                                   new AncestorLinkInfo<Location, LocationAncestorLink>(link => link.Ancestor, link => link.Child),
+                                   new AncestorLinkInfo<Location, LocationToAncestorChildView>(link => link.Source, link => link.ChildOrAncestor),
+                                   v => v.DeepLevel))
                            .AddSecurityContext<ManagementUnit>(
                                new Guid("77E78AEF-9512-46E0-A33D-AAE58DC7E18C"),
                                b => b.SetHierarchicalInfo(
-                                         v => v.Parent,
-                                         new AncestorLinkInfo<ManagementUnit, ManagementUnitAncestorLink>(link => link.Ancestor, link => link.Child),
-                                         new AncestorLinkInfo<ManagementUnit, ManagementUnitToAncestorChildView>(link => link.Source, link => link.ChildOrAncestor))
-                                     .SetDeepLevel(v => v.DeepLevel))
+                                   v => v.Parent,
+                                   new AncestorLinkInfo<ManagementUnit, ManagementUnitAncestorLink>(link => link.Ancestor, link => link.Child),
+                                   new AncestorLinkInfo<ManagementUnit, ManagementUnitToAncestorChildView>(link => link.Source, link => link.ChildOrAncestor),
+                                   v => v.DeepLevel))
                            .AddSecurityContext<Employee>(
                                new Guid("B3F2536E-27C4-4B91-AE0B-0EE2FFD4465F"),
                                b => b.SetDisplayFunc(employee => employee.Login));

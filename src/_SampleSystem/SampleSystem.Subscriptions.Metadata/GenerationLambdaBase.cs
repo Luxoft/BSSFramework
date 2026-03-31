@@ -1,5 +1,4 @@
-﻿using Framework.Configuration.SubscriptionModeling;
-using Framework.Notification;
+﻿using Framework.Subscriptions;
 
 using SampleSystem.BLL;
 

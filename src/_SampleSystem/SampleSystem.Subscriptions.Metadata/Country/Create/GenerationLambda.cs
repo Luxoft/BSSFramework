@@ -1,5 +1,5 @@
-﻿using Framework.Configuration.Core;
-using Framework.Notification;
+﻿using Framework.Subscriptions;
+using Framework.Subscriptions.Domain;
 
 using SampleSystem.BLL;
 
@@ -13,7 +13,7 @@ public sealed class GenerationLambda : GenerationLambdaBase<Domain.Country>
     /// </summary>
     public GenerationLambda()
     {
-        this.DomainObjectChangeType = Framework.Configuration.SubscriptionModeling.DomainObjectChangeType.Create;
+        this.DomainObjectChangeType = Framework.Subscriptions.DomainObjectChangeType.Create;
         this.Lambda = this.GetRecipients;
     }
 

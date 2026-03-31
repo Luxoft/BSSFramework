@@ -1,8 +1,8 @@
-﻿using Framework.Configuration.SubscriptionModeling;
+﻿using Framework.Subscriptions;
 
 using SampleSystem.Domain;
 
-using SecuritySystem.Notification;
+using SecuritySystem.Notification.Domain;
 
 namespace SampleSystem.Subscriptions.Metadata.Employee.Update;
 

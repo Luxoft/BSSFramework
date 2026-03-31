@@ -13,7 +13,7 @@ public sealed class Subscription
         this.GenerationLambda = new GenerationLambda();
         this.ReplyToGenerationLambda = new ReplyToGenerationLambda();
         this.AttachmentLambda = new AttachmentLambda();
-        this.RecipientsSelectorMode = Framework.Configuration.RecipientsSelectorMode.Union;
+        this.RecipientsSelectorMode = Framework.Subscriptions.Domain.RecipientsSelectorMode.Union;
         this.SendIndividualLetters = true;
         this.ExcludeCurrentUser = true;
         this.IncludeAttachments = true;

@@ -15,7 +15,7 @@ namespace ASP
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Framework.Configuration.SubscriptionModeling;
+    using Framework.Subscriptions;
     using SampleSystem.Domain;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]

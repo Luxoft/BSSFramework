@@ -1,4 +1,4 @@
-﻿using Framework.Configuration.SubscriptionModeling;
+﻿using Framework.Subscriptions;
 using SecuritySystem;
 
 using SampleSystem.BLL;

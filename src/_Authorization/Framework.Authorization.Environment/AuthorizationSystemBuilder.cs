@@ -37,7 +37,7 @@ public class AuthorizationSystemBuilder : IAuthorizationSystemBuilder, IServiceI
     {
         var securityAdministratorRule = ApplicationSecurityRule.SecurityAdministrator;
         var principalViewSecurityRule = securityAdministratorRule.Or(DomainSecurityRule.CurrentUser);
-        var delegatedFromSecurityRule = new DomainSecurityRule.CurrentUserSecurityRule(nameof(Permission.DelegatedFrom));
+        var delegatedFromSecurityRule = new DomainSecurityRule.CurrentUserSecurityRule { RelativePathKey = nameof(Permission.DelegatedFrom) };
 
         settings.AddExtensions(sc => sc.AddScoped<IDalGenericInterceptor<Permission>, MasterDetailDalGenericInterceptor<Permission, Principal>>()
                                        .AddScoped<IDalGenericInterceptor<PermissionRestriction>, MasterDetailDalGenericInterceptor<PermissionRestriction, Permission>>())

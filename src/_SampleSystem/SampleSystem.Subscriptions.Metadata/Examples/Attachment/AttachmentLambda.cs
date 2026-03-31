@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-using Framework.Configuration.Core;
+using Framework.Subscriptions.Domain;
 
 using SampleSystem.BLL;
 
@@ -15,7 +15,7 @@ public sealed class AttachmentLambda : AttachmentLambdaBase<Domain.Employee>
     /// </summary>
     public AttachmentLambda()
     {
-        this.DomainObjectChangeType = Framework.Configuration.SubscriptionModeling.DomainObjectChangeType.Update;
+        this.DomainObjectChangeType = Framework.Subscriptions.DomainObjectChangeType.Update;
         this.Lambda = GetAttachments;
     }
 

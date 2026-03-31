@@ -1,5 +1,6 @@
-﻿using Framework.Configuration.Core;
-using Framework.Notification;
+﻿using Framework.Subscriptions;
+using Framework.Subscriptions.Domain;
+
 using SampleSystem.BLL;
 
 namespace SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
@@ -8,7 +9,7 @@ public sealed class ReplyToGenerationLambda : GenerationLambdaBase<Domain.Countr
 {
     public ReplyToGenerationLambda()
     {
-        this.DomainObjectChangeType = Framework.Configuration.SubscriptionModeling.DomainObjectChangeType.Update;
+        this.DomainObjectChangeType = Framework.Subscriptions.DomainObjectChangeType.Update;
         this.Lambda = this.GetRecipients;
     }
 

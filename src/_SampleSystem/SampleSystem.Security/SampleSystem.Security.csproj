@@ -14,6 +14,8 @@
 
   <ItemGroup>
 
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Legacy\Framework.Infrastructure.Legacy.csproj" />
+
     <ProjectReference Include="..\SampleSystem.Domain.LegacyProjections\SampleSystem.Domain.LegacyProjections.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.ManualProjections\SampleSystem.Domain.ManualProjections.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.Projections\SampleSystem.Domain.Projections.csproj" />

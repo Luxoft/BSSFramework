@@ -1,6 +1,6 @@
 ﻿using System.Net.Mail;
 
-using Framework.Configuration.SubscriptionModeling;
+using Framework.Subscriptions;
 
 using SampleSystem.BLL;
 

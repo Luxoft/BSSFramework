@@ -1,8 +1,7 @@
 ﻿@* Generator: Template
     DisableLinePragmas: true*@@{}
-@using Framework.Configuration.SubscriptionModeling
 @using SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel
-@inherits RazorTemplate<CustomNotificationModel>
+@inherits Framework.Subscriptions.RazorTemplate<CustomNotificationModel>
 @functions {
     public override string Subject => $"Country {Current.Country.Code} has been updated";
 }

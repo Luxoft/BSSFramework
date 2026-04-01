@@ -211,7 +211,11 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
 
     public TDomainObject? GetById(TIdent id, bool throwOnNotFound = false, FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None)
     {
-        var result = this.GetListBy(domainObject => domainObject.Id.Equals(id), fetchRule, lockRole).FirstOrDefault();
+        Expression<Func<TDomainObject, TIdent>> idPath = domainObject => domainObject.Id;
+
+        var filterExpr = idPath.Select(ExpressionHelper.GetEqualityWithExpr(id));
+
+        var result = this.GetListBy(filterExpr, fetchRule, lockRole).FirstOrDefault();
 
         if (result == null && throwOnNotFound)
         {

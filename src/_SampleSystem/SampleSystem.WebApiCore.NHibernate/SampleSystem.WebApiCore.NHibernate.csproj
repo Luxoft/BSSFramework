@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
+    <RootNamespace>SampleSystem.WebApiCore</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

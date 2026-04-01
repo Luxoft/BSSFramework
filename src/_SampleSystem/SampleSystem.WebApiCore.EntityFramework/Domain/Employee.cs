@@ -1,6 +1,8 @@
-﻿using Framework.Persistent;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SampleSystem.Domain;
+using Framework.Application.Domain;
+
+namespace SampleSystem.WebApiCore.Domain;
 
 [Table(nameof(Employee), Schema = "app")]
 public class Employee : IIdentityObject<Guid>

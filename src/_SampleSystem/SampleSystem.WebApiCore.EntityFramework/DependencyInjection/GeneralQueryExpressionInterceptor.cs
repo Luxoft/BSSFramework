@@ -1,10 +1,10 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.DomainDriven._Visitors;
+using Framework.Database.ExpressionVisitorContainer;
 
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace SampleSystem.ServiceEnvironment;
+namespace SampleSystem.WebApiCore.DependencyInjection;
 
 public class GeneralQueryExpressionInterceptor(IExpressionVisitorContainer expressionVisitorContainer) : IQueryExpressionInterceptor
 {

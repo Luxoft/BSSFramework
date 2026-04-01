@@ -1,4 +1,4 @@
-﻿namespace SampleSystem.Domain;
+﻿namespace SampleSystem.WebApiCore.Domain;
 
 public enum BusinessUnitEmployeeRoleType
 {

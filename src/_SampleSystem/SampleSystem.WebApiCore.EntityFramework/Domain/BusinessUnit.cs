@@ -1,6 +1,8 @@
-﻿using SecuritySystem;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SampleSystem.Domain;
+using SecuritySystem;
+
+namespace SampleSystem.WebApiCore.Domain;
 
 [Table(nameof(BusinessUnit), Schema = "app")]
 public class BusinessUnit : ISecurityContext

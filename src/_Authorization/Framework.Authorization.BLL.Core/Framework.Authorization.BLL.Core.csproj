@@ -6,12 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.SecuritySystem.GeneralPermission.Abstractions" />
-    <PackageReference Include="IvAt.SecuritySystem.Notification.Abstractions" />
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+    <PackageReference Include="IvAt.SecuritySystem.GeneralPermission.Abstractions" />
+    <PackageReference Include="IvAt.SecuritySystem.Notification.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>

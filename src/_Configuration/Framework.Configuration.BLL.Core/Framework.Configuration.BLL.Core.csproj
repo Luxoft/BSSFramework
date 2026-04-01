@@ -22,8 +22,4 @@
     <ProjectReference Include="..\..\BLL\Framework.BLL.Abstractions\Framework.BLL.Abstractions.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Logics\" />
-  </ItemGroup>
-
 </Project>

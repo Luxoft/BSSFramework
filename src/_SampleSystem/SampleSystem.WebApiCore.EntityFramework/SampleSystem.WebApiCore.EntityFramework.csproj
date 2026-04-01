@@ -2,11 +2,13 @@
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
+    <RootNamespace>SampleSystem.WebApiCore</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="IvAt.SecuritySystem.Configurator" />
     <PackageReference Include="IvAt.SecuritySystem.VirtualPermission" />
+
     <PackageReference Include="Luxoft.Bss.Platform.Api.Documentation" />
     <PackageReference Include="Luxoft.Bss.Platform.Api.Middlewares" />
     <PackageReference Include="Luxoft.Bss.Platform.Logging" />
@@ -14,6 +16,12 @@
 
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Database\Framework.Database.EntityFramework\Framework.Database.EntityFramework.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Swagger\Framework.Infrastructure.Swagger.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure\Framework.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

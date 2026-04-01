@@ -1,16 +1,15 @@
 ﻿using CommonFramework.DependencyInjection;
 
-using Framework.DomainDriven.EntityFramework;
-using Framework.DomainDriven.Setup;
+using Framework.Database.EntityFramework.Setup;
+using Framework.Infrastructure.DependencyInjection;
 
 using Microsoft.EntityFrameworkCore;
 
-using SampleSystem.Domain;
-using SampleSystem.Security;
+using SampleSystem.WebApiCore.Domain;
 
 using SecuritySystem;
 
-namespace SampleSystem.ServiceEnvironment;
+namespace SampleSystem.WebApiCore.DependencyInjection;
 
 public static class SampleSystemGeneralDependencyInjectionExtensions
 {
@@ -32,7 +31,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                                                   .AddVirtualPermissions()
                                                   .SetSecurityAdministratorRule(
                                                       DomainSecurityRule.AnyRole with { CustomCredential = new SecurityRuleCredential.AnyUserCredential() }))
-                       .AddEntityFramework(s => { });
+                       .AddEntityFramework(_ => { });
                })
                .AddScopedFrom<DbContext, AppDbContext>()
                .AddDbContext<AppDbContext>(o =>

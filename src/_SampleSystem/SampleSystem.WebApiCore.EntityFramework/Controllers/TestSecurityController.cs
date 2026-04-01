@@ -1,15 +1,15 @@
-﻿using Framework.DomainDriven.Repository;
+﻿using Framework.Application.Repository;
 
 using GenericQueryable;
+
+using Microsoft.AspNetCore.Mvc;
+
+using SampleSystem.WebApiCore.Domain;
 
 using SecuritySystem;
 using SecuritySystem.UserSource;
 
-using Microsoft.AspNetCore.Mvc;
-
-using SampleSystem.Domain;
-
-namespace SampleSystem.WebApiCore.Controllers.Main;
+namespace SampleSystem.WebApiCore.Controllers;
 
 [Route("api/[controller]/[action]")]
 [ApiController]

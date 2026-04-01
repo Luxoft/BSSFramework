@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Database\Framework.Database.NHibernate.Legacy\Framework.Database.NHibernate.Legacy.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Generated.DAL.NHibernate\Framework.Authorization.Generated.DAL.NHibernate.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.Generated.DAL.NHibernate\Framework.Configuration.Generated.DAL.NHibernate.csproj" />

@@ -1,10 +1,10 @@
-﻿using SecuritySystem;
+﻿using SampleSystem.WebApiCore.Domain;
+using SampleSystem.WebApiCore.Security;
 
-using SampleSystem.Domain;
-
+using SecuritySystem;
 using SecuritySystem.DependencyInjection;
 
-namespace SampleSystem.Security;
+namespace SampleSystem.WebApiCore.DependencyInjection;
 
 public static class SampleSystemDomainSecurityServiceExtensions
 {

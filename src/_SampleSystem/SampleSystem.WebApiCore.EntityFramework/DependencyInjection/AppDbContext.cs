@@ -1,12 +1,12 @@
-﻿using Framework.DomainDriven._Visitors;
+﻿using Framework.Database.ExpressionVisitorContainer;
 
 using GenericQueryable.EntityFramework;
 
 using Microsoft.EntityFrameworkCore;
 
-using SampleSystem.Domain;
+using SampleSystem.WebApiCore.Domain;
 
-namespace SampleSystem.ServiceEnvironment;
+namespace SampleSystem.WebApiCore.DependencyInjection;
 
 public class AppDbContext(DbContextOptions<AppDbContext> rootOptions, IExpressionVisitorContainer expressionVisitorContainer) : DbContext(rootOptions)
 {

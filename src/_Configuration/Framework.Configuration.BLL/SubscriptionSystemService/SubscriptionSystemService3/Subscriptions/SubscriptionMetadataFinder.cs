@@ -8,14 +8,12 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSyst
 public class SubscriptionMetadataFinder(IServiceProxyFactory serviceProxyFactory, IEnumerable<SubscriptionMetadataFinderAssemblyInfo> assemblyInfoList)
     : ISubscriptionMetadataFinder
 {
-    public IEnumerable<ISubscriptionMetadata> Find()
-    {
-        return from assemblyInfo in assemblyInfoList
+    public IEnumerable<ISubscriptionMetadata> Find() =>
+        from assemblyInfo in assemblyInfoList
 
-               from type in assemblyInfo.Assembly.GetTypes()
+        from type in assemblyInfo.Assembly.GetTypes()
 
-               where !type.IsAbstract && typeof(ISubscriptionMetadata).IsAssignableFrom(type)
+        where !type.IsAbstract && typeof(ISubscriptionMetadata).IsAssignableFrom(type)
 
-               select serviceProxyFactory.Create<ISubscriptionMetadata>(type);
-    }
+        select serviceProxyFactory.Create<ISubscriptionMetadata>(type);
 }

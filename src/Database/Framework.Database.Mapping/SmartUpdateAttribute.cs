@@ -5,6 +5,4 @@
 /// </summary>
 /// <seealso cref="System.Attribute" />
 [AttributeUsage(AttributeTargets.Class)]
-public class SmartUpdateAttribute : Attribute
-{
-}
+public class SmartUpdateAttribute : Attribute;

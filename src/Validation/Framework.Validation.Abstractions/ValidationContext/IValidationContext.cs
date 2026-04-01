@@ -5,17 +5,13 @@ namespace Framework.Validation;
 /// <summary>
 /// Контекст валидации
 /// </summary>
-public interface IValidationContext : IValidationContextBase, IServiceProviderContainer
-{
-}
+public interface IValidationContext : IValidationContextBase, IServiceProviderContainer;
 
 /// <summary>
 /// Контекст валидации
 /// </summary>
 /// <typeparam name="TSource">Тип объекта</typeparam>
-public interface IValidationContext<out TSource> : IValidationContextBase<TSource>, IValidationContext
-{
-}
+public interface IValidationContext<out TSource> : IValidationContextBase<TSource>, IValidationContext;
 
 /// <summary>
 /// Контекст валидации
@@ -23,6 +19,4 @@ public interface IValidationContext<out TSource> : IValidationContextBase<TSourc
 /// <typeparam name="TSource">Тип объекта</typeparam>
 /// <typeparam name="TValidationMap">Метаданные</typeparam>
 public interface IValidationContext<out TSource, out TValidationMap> : IValidationContext<TSource>, IValidationContextBase<TSource, TValidationMap>
-        where TValidationMap : class
-{
-}
+        where TValidationMap : class;

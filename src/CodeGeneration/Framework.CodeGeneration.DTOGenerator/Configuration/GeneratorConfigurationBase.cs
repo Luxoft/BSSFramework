@@ -117,9 +117,8 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
     protected virtual ICodeFileFactoryHeader<BaseFileType> ClientPrimitiveDTOMappingServiceFactoryHeader { get; }
 
 
-    public IEnumerable<MainDTOFileType> GetNestedTypes(MainDTOFileType fileType)
-    {
-        return NestedMainTypesCache.GetOrAdd(
+    public IEnumerable<MainDTOFileType> GetNestedTypes(MainDTOFileType fileType) =>
+        NestedMainTypesCache.GetOrAdd(
             fileType,
             _ =>
             {
@@ -127,7 +126,6 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
 
                 return [..children.GetAllElements(this.GetNestedTypes)];
             });
-    }
 
     public virtual bool ForceGenerateProperties(Type domainType, DTOFileType fileType)
     {
@@ -274,10 +272,7 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
         }
     }
 
-    public CodeExpression GetDefaultClientDTOMappingServiceExpression()
-    {
-        return this.GetCodeTypeReference(null, BaseFileType.ClientPrimitiveDTOMappingService).ToTypeReferenceExpression().ToPropertyReference("Default");
-    }
+    public CodeExpression GetDefaultClientDTOMappingServiceExpression() => this.GetCodeTypeReference(null, BaseFileType.ClientPrimitiveDTOMappingService).ToTypeReferenceExpression().ToPropertyReference("Default");
 
     public virtual CodeExpression GetCreateUpdateDTOExpression(
             Type domainType,
@@ -295,10 +290,7 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
         }
     }
 
-    protected virtual IGeneratePolicy<RoleFileType> CreateGeneratePolicy()
-    {
-        return new DTORoleGeneratePolicy(DTORole.All);
-    }
+    protected virtual IGeneratePolicy<RoleFileType> CreateGeneratePolicy() => new DTORoleGeneratePolicy(DTORole.All);
 
     protected virtual IEnumerable<PropertyInfo> GetInternalDomainTypeProperties(Type domainType, DTOFileType fileType)
     {
@@ -414,10 +406,7 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
     /// Возвращает список доменных типов.
     /// </summary>
     /// <returns>Экземпляр <see cref="IEnumerable{Type}"/></returns>
-    protected override IEnumerable<Type> GetDomainTypes()
-    {
-        return this.Environment.GetDefaultDomainTypes(false).Concat(this.ProjectionTypes);
-    }
+    protected override IEnumerable<Type> GetDomainTypes() => this.Environment.GetDefaultDomainTypes(false).Concat(this.ProjectionTypes);
 
     protected override IEnumerable<ICodeFileFactoryHeader<BaseFileType>> GetFileFactoryHeaders()
     {
@@ -443,10 +432,8 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
         yield return this.ClientPrimitiveDTOMappingServiceFactoryHeader;
     }
 
-    protected virtual IEnumerable<Type> GetProjectionTypes()
-    {
-        return this.Environment.ProjectionEnvironments
-                   .SelectMany(projectionEnvironment => projectionEnvironment.Assembly.Types)
-                   .Where(type => type.HasAttribute<ProjectionAttribute>(attr => attr.Role == ProjectionRole.Default));
-    }
+    protected virtual IEnumerable<Type> GetProjectionTypes() =>
+        this.Environment.ProjectionEnvironments
+            .SelectMany(projectionEnvironment => projectionEnvironment.Assembly.Types)
+            .Where(type => type.HasAttribute<ProjectionAttribute>(attr => attr.Role == ProjectionRole.Default));
 }

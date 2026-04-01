@@ -32,9 +32,8 @@ public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
         Type domainObjectBaseType,
         Type persistentDomainObjectBaseType,
         string @namespace,
-        bool useDependencySecurity = true)
-    {
-        return new DefaultProjectionContractEnvironment(
+        bool useDependencySecurity = true) =>
+        new DefaultProjectionContractEnvironment(
             extendedMetadata,
             typeSource,
             assemblyName,
@@ -43,7 +42,6 @@ public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
             persistentDomainObjectBaseType,
             @namespace,
             useDependencySecurity);
-    }
 
     private class DefaultProjectionContractEnvironment : ProjectionContractEnvironment
     {

@@ -2,6 +2,4 @@
 
 namespace Framework.CodeDom.Extend;
 
-public class CodeMethodYieldBreakStatement : CodeStatement
-{
-}
+public class CodeMethodYieldBreakStatement : CodeStatement;

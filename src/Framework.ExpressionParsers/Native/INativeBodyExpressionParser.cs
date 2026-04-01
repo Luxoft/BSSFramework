@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Framework.ExpressionParsers;
+namespace Framework.ExpressionParsers.Native;
 
 public interface INativeBodyExpressionParser
 {

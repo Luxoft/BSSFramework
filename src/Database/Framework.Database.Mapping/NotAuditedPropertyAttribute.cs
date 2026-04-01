@@ -1,6 +1,4 @@
 ﻿namespace Framework.Database.Mapping;
 
 [AttributeUsage(AttributeTargets.Property)]
-public class NotAuditedPropertyAttribute : Attribute
-{
-}
+public class NotAuditedPropertyAttribute : Attribute;

@@ -12,6 +12,4 @@ namespace Framework.Authorization.Domain;
 [AvailablePeriodValidator]
 [AvailableDateTimeValidator]
 [DefaultStringMaxLengthValidator]
-public abstract class DomainObjectBase
-{
-}
+public abstract class DomainObjectBase;

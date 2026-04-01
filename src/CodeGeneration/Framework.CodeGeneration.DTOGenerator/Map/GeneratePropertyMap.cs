@@ -31,8 +31,5 @@ public class GeneratePropertyMap
 
     public RoleFileType ElementFileType { get; }
 
-    public override string ToString()
-    {
-        return $"Name: {this.Property.Name} | ElementFileType: {this.ElementFileType} | ElementType: {this.ElementType}";
-    }
+    public override string ToString() => $"Name: {this.Property.Name} | ElementFileType: {this.ElementFileType} | ElementType: {this.ElementType}";
 }

@@ -19,20 +19,20 @@ public class RoleRoleDegreeLink : AuditPersistentDomainObjectBase
     [CustomName("Seniority")]
     public virtual EmployeeRoleDegree RoleDegree
     {
-        get { return this.roleDegree; }
-        set { this.roleDegree = value; }
+        get => this.roleDegree;
+        set => this.roleDegree = value;
     }
 
     [UniqueElement("UniLink")]
     public virtual EmployeeRole Role
     {
-        get { return this.role; }
-        set { this.role = value; }
+        get => this.role;
+        set => this.role = value;
     }
 
     public virtual EmployeeRole AnotherRole
     {
-        get { return this.anotherRole; }
-        set { this.anotherRole = value;  }
+        get => this.anotherRole;
+        set => this.anotherRole = value;
     }
 }

@@ -24,16 +24,9 @@ namespace Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
 /// Фабричный класс для BLL-интерфейсов к доменным объектам
 /// </summary>
 /// <typeparam name="TConfiguration"></typeparam>
-public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguration>
-        where TConfiguration : class, IBLLCoreGeneratorConfiguration<IBLLCoreGenerationEnvironment>
+public class BLLInterfaceFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : FileFactory<TConfiguration>(configuration, domainType)
+    where TConfiguration : class, IBLLCoreGeneratorConfiguration<IBLLCoreGenerationEnvironment>
 {
-    public BLLInterfaceFileFactory(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
-    {
-
-    }
-
-
     public override FileType FileType => FileType.BLLInterface;
 
 

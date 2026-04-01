@@ -7,8 +7,5 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 public class AuthenticationController : ControllerBase
 {
     [HttpGet]
-    public bool IsAuthenticated()
-    {
-        return this.HttpContext.User.Identity!.IsAuthenticated;
-    }
+    public bool IsAuthenticated() => this.HttpContext.User.Identity!.IsAuthenticated;
 }

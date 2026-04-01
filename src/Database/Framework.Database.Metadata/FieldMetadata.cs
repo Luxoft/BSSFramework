@@ -8,45 +8,17 @@ using Framework.Database.Mapping;
 
 namespace Framework.Database.Metadata;
 
-public abstract class FieldMetadata
+public abstract class FieldMetadata(string name, Type type, IEnumerable<Attribute> attributes, DomainTypeMetadata domainTypeMetadata)
 {
-    private readonly string name;
-    private readonly Type type;
-    private readonly IEnumerable<Attribute> attributes;
-    private readonly DomainTypeMetadata domainTypeMetadata;
+    public DomainTypeMetadata DomainTypeMetadata => domainTypeMetadata;
 
-    protected FieldMetadata(string name, Type type, IEnumerable<Attribute> attributes, DomainTypeMetadata domainTypeMetadata)
-    {
-        this.name = name;
-        this.domainTypeMetadata = domainTypeMetadata;
-        this.type = type;
-        this.attributes = attributes;
-    }
+    public string Name => name;
 
-    public DomainTypeMetadata DomainTypeMetadata
-    {
-        get { return this.domainTypeMetadata; }
-    }
+    public Type Type => type;
 
-    public string Name
-    {
-        get { return this.name; }
-    }
-    public Type Type
-    {
-        get { return this.type; }
-    }
-    public IEnumerable<Attribute> Attributes
-    {
-        get { return this.attributes; }
-    }
-    public bool IsVersion
-    {
-        get
-        {
-            return this.Attributes.Any(q => q is VersionAttribute);
-        }
-    }
+    public IEnumerable<Attribute> Attributes => attributes;
+
+    public bool IsVersion => this.Attributes.Any(q => q is VersionAttribute);
 
     public string ExternalTableName => this.Attributes.OfType<MappingAttribute>().SingleOrDefault().Maybe(attr => attr.ExternalTableName);
 

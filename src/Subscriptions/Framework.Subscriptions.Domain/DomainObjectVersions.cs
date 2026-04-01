@@ -82,10 +82,7 @@ public sealed class DomainObjectVersions<T> : IDomainObjectVersions
     object? IDomainObjectVersions.Current => this.Current;
 
     /// <inheritdoc/>
-    public override string ToString()
-    {
-        return $"DomainObjectType: {this.DomainObjectType}, Previous: {this.Previous}, Current: {this.Current}";
-    }
+    public override string ToString() => $"DomainObjectType: {this.DomainObjectType}, Previous: {this.Previous}, Current: {this.Current}";
 
     /// <inheritdoc/>
     public override bool Equals(object? obj)
@@ -125,8 +122,5 @@ public sealed class DomainObjectVersions<T> : IDomainObjectVersions
         return previousType ?? currentType ?? typeof(T);
     }
 
-    private bool Equals(DomainObjectVersions<T> other)
-    {
-        return EqualityComparer<T>.Default.Equals(this.Current, other.Current) && EqualityComparer<T>.Default.Equals(this.Previous, other.Previous);
-    }
+    private bool Equals(DomainObjectVersions<T> other) => EqualityComparer<T>.Default.Equals(this.Current, other.Current) && EqualityComparer<T>.Default.Equals(this.Previous, other.Previous);
 }

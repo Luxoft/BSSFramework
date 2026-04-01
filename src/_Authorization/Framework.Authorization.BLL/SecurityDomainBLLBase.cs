@@ -11,10 +11,7 @@ public partial class SecurityDomainBLLBase<TDomainObject>
         this.Validate(domainObject, OperationContextBase.Save);
     }
 
-    protected virtual void Validate(TDomainObject domainObject, OperationContextBase operationContext)
-    {
-        this.Context.Validator.Validate(domainObject, (int)operationContext);
-    }
+    protected virtual void Validate(TDomainObject domainObject, OperationContextBase operationContext) => this.Context.Validator.Validate(domainObject, (int)operationContext);
 
     protected void Save(TDomainObject domainObject, bool validate)
     {

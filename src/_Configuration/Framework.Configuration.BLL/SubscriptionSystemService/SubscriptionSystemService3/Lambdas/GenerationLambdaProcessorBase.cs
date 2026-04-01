@@ -81,8 +81,6 @@ public abstract class GenerationLambdaProcessorBase<TBLLContext> : LambdaProcess
     private IEnumerable<NotificationMessageGenerationInfo> InvokeInternal<T>(
             Subscription subscription,
             DomainObjectVersions<T> versions)
-            where T : class
-    {
-        return this.InvokeWithTypedContext(subscription, versions);
-    }
+            where T : class =>
+        this.InvokeWithTypedContext(subscription, versions);
 }

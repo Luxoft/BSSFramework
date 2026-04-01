@@ -18,13 +18,8 @@ using MAttachment = System.Net.Mail.Attachment;
 
 namespace Framework.Configuration.BLL;
 
-public class MessageTemplateBLL : BLLContextContainer<IConfigurationBLLContext>
+public class MessageTemplateBLL(IConfigurationBLLContext context) : BLLContextContainer<IConfigurationBLLContext>(context)
 {
-    public MessageTemplateBLL(IConfigurationBLLContext context)
-            : base(context)
-    {
-    }
-
     public MailMessage CreateMailMessage(
             MessageTemplate messageTemplate,
             bool includeAttachments,
@@ -32,19 +27,17 @@ public class MessageTemplateBLL : BLLContextContainer<IConfigurationBLLContext>
             MailAddress sender,
             IEnumerable<string> targetEmails,
             IEnumerable<string> carbonCopyEmails,
-            IEnumerable<string> replyTo)
-    {
-        return this.CreateMailMessage(
-                                      includeAttachments,
-                                      messageTemplate,
-                                      rootObject,
-                                      new Dictionary<string, object>(),
-                                      sender,
-                                      targetEmails.ToList(z => new TargetEmail(z)),
-                                      carbonCopyEmails.ToList(z => new TargetEmail(z, TargetEmailType.Copy)),
-                                      replyTo.ToList(z => new TargetEmail(z, TargetEmailType.ReplyTo)),
-                                      new List<MAttachment>(0));
-    }
+            IEnumerable<string> replyTo) =>
+        this.CreateMailMessage(
+            includeAttachments,
+            messageTemplate,
+            rootObject,
+            new Dictionary<string, object>(),
+            sender,
+            targetEmails.ToList(z => new TargetEmail(z)),
+            carbonCopyEmails.ToList(z => new TargetEmail(z, TargetEmailType.Copy)),
+            replyTo.ToList(z => new TargetEmail(z, TargetEmailType.ReplyTo)),
+            new List<MAttachment>(0));
 
     /// <inheritdoc />
     public MailMessage CreateMailMessage(
@@ -56,20 +49,18 @@ public class MessageTemplateBLL : BLLContextContainer<IConfigurationBLLContext>
             IEnumerable<string> targetEmails,
             IEnumerable<string> carbonCopyEmails,
             IEnumerable<string> replyTo,
-            IEnumerable<MAttachment> attachments)
-    {
-        return this.BeginCreateMailMessage(
-                                           includeAttachments,
-                                           messageTemplateNotification,
-                                           messageTemplate,
-                                           rootObject,
-                                           new Dictionary<string, object>(),
-                                           sender,
-                                           targetEmails.ToList(z => new TargetEmail(z)),
-                                           carbonCopyEmails.ToList(z => new TargetEmail(z, TargetEmailType.Copy)),
-                                           replyTo.ToList(z => new TargetEmail(z, TargetEmailType.ReplyTo)),
-                                           attachments);
-    }
+            IEnumerable<MAttachment> attachments) =>
+        this.BeginCreateMailMessage(
+            includeAttachments,
+            messageTemplateNotification,
+            messageTemplate,
+            rootObject,
+            new Dictionary<string, object>(),
+            sender,
+            targetEmails.ToList(z => new TargetEmail(z)),
+            carbonCopyEmails.ToList(z => new TargetEmail(z, TargetEmailType.Copy)),
+            replyTo.ToList(z => new TargetEmail(z, TargetEmailType.ReplyTo)),
+            attachments);
 
     /// <summary>
     /// Creates e-mail message

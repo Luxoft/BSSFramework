@@ -10,12 +10,10 @@ namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 public class DTOToDomainObjectUpdatePropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> source) : DTOToDomainObjectPropertyAssigner<TConfiguration>(source)
     where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
-    protected override CodeMethodReferenceExpression GetCollectionMappingMethodReferenceExpression(CodeTypeReference transferElementTypeRef, Type elementType)
-    {
-        return this.MappingServiceRefExpr.ToMethodReferenceExpression(
-                                                                      "GetUpdateCollectionMappingService",
-                                                                      transferElementTypeRef,
-                                                                      this.Configuration.GetCodeTypeReference(elementType, DTOType.IdentityDTO),
-                                                                      elementType.ToTypeReference());
-    }
+    protected override CodeMethodReferenceExpression GetCollectionMappingMethodReferenceExpression(CodeTypeReference transferElementTypeRef, Type elementType) =>
+        this.MappingServiceRefExpr.ToMethodReferenceExpression(
+            "GetUpdateCollectionMappingService",
+            transferElementTypeRef,
+            this.Configuration.GetCodeTypeReference(elementType, DTOType.IdentityDTO),
+            elementType.ToTypeReference());
 }

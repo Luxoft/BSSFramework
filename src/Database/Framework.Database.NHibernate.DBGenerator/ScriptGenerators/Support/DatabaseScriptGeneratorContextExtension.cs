@@ -7,15 +7,9 @@ namespace Framework.Database.NHibernate.DBGenerator.ScriptGenerators.Support;
 
 public static class DatabaseScriptGeneratorContextExtension
 {
-    public static Microsoft.SqlServer.Management.Smo.Database GetMainDatabase(this IDatabaseScriptGeneratorContext context)
-    {
-        return context.SqlDatabaseFactory.GetOrCreateDatabase(context.DatabaseName);
-    }
+    public static Microsoft.SqlServer.Management.Smo.Database GetMainDatabase(this IDatabaseScriptGeneratorContext context) => context.SqlDatabaseFactory.GetOrCreateDatabase(context.DatabaseName);
 
-    public static Server GetServer(this IDatabaseScriptGeneratorContext context)
-    {
-        return context.SqlDatabaseFactory.Server;
-    }
+    public static Server GetServer(this IDatabaseScriptGeneratorContext context) => context.SqlDatabaseFactory.Server;
 
     public static Table GetTable(this IDatabaseScriptGeneratorContext context, Type type)
     {

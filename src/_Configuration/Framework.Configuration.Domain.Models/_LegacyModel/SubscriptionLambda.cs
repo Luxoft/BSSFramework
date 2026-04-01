@@ -17,14 +17,14 @@ public class SubscriptionLambda
     /// <value>Делегат, исполняющий лямбду.</value>
     public virtual Func<object, object, object> FuncValue
     {
-        get { return this.funcValue; }
-        set { this.funcValue = value; }
+        get => this.funcValue;
+        set => this.funcValue = value;
     }
 
     public virtual Type AuthDomainType
     {
-        get { return this.authDomainType; }
-        set { this.authDomainType = value; }
+        get => this.authDomainType;
+        set => this.authDomainType = value;
     }
 
     /// <summary>
@@ -35,8 +35,8 @@ public class SubscriptionLambda
     /// </value>
     public virtual Type MetadataSourceType
     {
-        get { return this.metadataSourceType; }
-        set { this.metadataSourceType = value; }
+        get => this.metadataSourceType;
+        set => this.metadataSourceType = value;
     }
     public virtual bool? RequiredModePrev { get; set; }
 
@@ -52,8 +52,5 @@ public class SubscriptionLambda
     /// </remarks>
     public virtual bool? RequiredModeNext { get; set; }
 
-    public virtual SubscriptionType ProcessType
-    {
-        get { return SubscriptionTypeHelper.GetSubscriptionType(this.RequiredModePrev, this.RequiredModeNext); }
-    }
+    public virtual SubscriptionType ProcessType => SubscriptionTypeHelper.GetSubscriptionType(this.RequiredModePrev, this.RequiredModeNext);
 }

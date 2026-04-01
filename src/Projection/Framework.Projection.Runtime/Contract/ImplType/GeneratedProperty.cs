@@ -53,33 +53,15 @@ internal class GeneratedProperty : BasePropertyInfoImpl
 
     public override string Name => this.ContractProperty.Name;
 
-    public override object[] GetCustomAttributes(Type attributeType, bool inherit)
-    {
-        return (object[])new[] { this.ContractProperty, this.sourceProperty }.SelectMany(prop => prop.GetCustomAttributes(attributeType, inherit)).ToArray(attributeType);
-    }
+    public override object[] GetCustomAttributes(Type attributeType, bool inherit) => (object[])new[] { this.ContractProperty, this.sourceProperty }.SelectMany(prop => prop.GetCustomAttributes(attributeType, inherit)).ToArray(attributeType);
 
-    public override object[] GetCustomAttributes(bool inherit)
-    {
-        return new[] { this.ContractProperty, this.sourceProperty }.SelectMany(prop => prop.GetCustomAttributes(inherit)).Cast<Attribute>().ToArray();
-    }
+    public override object[] GetCustomAttributes(bool inherit) => new[] { this.ContractProperty, this.sourceProperty }.SelectMany(prop => prop.GetCustomAttributes(inherit)).Cast<Attribute>().ToArray();
 
-    public override ParameterInfo[] GetIndexParameters()
-    {
-        return this.ContractProperty.GetIndexParameters();
-    }
+    public override ParameterInfo[] GetIndexParameters() => this.ContractProperty.GetIndexParameters();
 
-    public override MethodInfo GetGetMethod(bool nonPublic)
-    {
-        return new PropertyMethodInfoImpl();
-    }
+    public override MethodInfo GetGetMethod(bool nonPublic) => new PropertyMethodInfoImpl();
 
-    public override MethodInfo GetSetMethod(bool nonPublic)
-    {
-        return null;//new PropertyMethodInfoImpl();
-    }
+    public override MethodInfo GetSetMethod(bool nonPublic) => null; //new PropertyMethodInfoImpl();
 
-    public override string ToString()
-    {
-        return $"GeneratedProperty: {this.Name}";
-    }
+    public override string ToString() => $"GeneratedProperty: {this.Name}";
 }

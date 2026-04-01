@@ -11,13 +11,13 @@ public class TestRestrictionObject : AuditPersistentDomainObjectBase
 
     public virtual bool RestrictionHandler
     {
-        get { return this.restrictionHandler; }
-        set { this.restrictionHandler = value; }
+        get => this.restrictionHandler;
+        set => this.restrictionHandler = value;
     }
 
     public virtual BusinessUnit BusinessUnit
     {
-        get { return this.businessUnit; }
-        set { this.businessUnit = value; }
+        get => this.businessUnit;
+        set => this.businessUnit = value;
     }
 }

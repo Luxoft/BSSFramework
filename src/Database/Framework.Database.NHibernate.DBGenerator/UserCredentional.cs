@@ -3,14 +3,9 @@
 [Obsolete("This type was renamed. Use UserCredential instead")]
 public class UserCredentional
 {
-    public static UserCredentional CreateDefault()
-    {
-        return new UserCredentional(null, null);
-    }
-    public static UserCredentional Create(string name, string password)
-    {
-        return new UserCredentional(name, password);
-    }
+    public static UserCredentional CreateDefault() => new(null, null);
+
+    public static UserCredentional Create(string name, string password) => new(name, password);
 
     private readonly string name;
     private readonly string password;
@@ -28,11 +23,9 @@ public class UserCredentional
         this.password = password;
     }
 
-    public bool IsDefault
-    {
-        get { return null == this.password && null == this.name; }
-    }
-    public virtual string UserName { get { return this.name; } }
-    public virtual string Password{get { return this.password; }}
+    public bool IsDefault => null == this.password && null == this.name;
 
+    public virtual string UserName => this.name;
+
+    public virtual string Password => this.password;
 }

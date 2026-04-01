@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
+using Framework.ExpressionParsers.Native;
 
-namespace Framework.ExpressionParsers;
+namespace Framework.ExpressionParsers._CSharp;
 
 internal class MicrosoftCSharpExpressionParser : INativeBodyExpressionParser
 {

@@ -29,18 +29,15 @@ public class EmployeeCellPhoneBase : AuditPersistentDomainObjectBase, IDetail<Em
         this.employee = employee;
     }
 
-    public virtual Employee Employee
-    {
-        get { return this.employee; }
-    }
+    public virtual Employee Employee => this.employee;
 
     [Required]
     [NumberAlphabetValidator]
     [MaxLength(3)]
     public virtual string CountryCode
     {
-        get { return this.countryCode.TrimNull(); }
-        set { this.countryCode = value.TrimNull(); }
+        get => this.countryCode.TrimNull();
+        set => this.countryCode = value.TrimNull();
     }
 
     [Required]
@@ -48,8 +45,8 @@ public class EmployeeCellPhoneBase : AuditPersistentDomainObjectBase, IDetail<Em
     [MaxLength(5)]
     public virtual string CityCode
     {
-        get { return this.cityCode.TrimNull(); }
-        set { this.cityCode = value.TrimNull(); }
+        get => this.cityCode.TrimNull();
+        set => this.cityCode = value.TrimNull();
     }
 
     [Required]
@@ -57,8 +54,8 @@ public class EmployeeCellPhoneBase : AuditPersistentDomainObjectBase, IDetail<Em
     [MaxLength(7)]
     public virtual string Number
     {
-        get { return this.number.TrimNull(); }
-        set { this.number = value.TrimNull(); }
+        get => this.number.TrimNull();
+        set => this.number = value.TrimNull();
     }
 
     [Required]
@@ -66,12 +63,9 @@ public class EmployeeCellPhoneBase : AuditPersistentDomainObjectBase, IDetail<Em
     [MaxLength(18)]
     public virtual string FullNumber
     {
-        get { return this.fullNumber.TrimNull(); }
-        protected internal set { this.fullNumber = value.TrimNull(); }
+        get => this.fullNumber.TrimNull();
+        protected internal set => this.fullNumber = value.TrimNull();
     }
 
-    Employee IDetail<Employee>.Master
-    {
-        get { return this.employee; }
-    }
+    Employee IDetail<Employee>.Master => this.employee;
 }

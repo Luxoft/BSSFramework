@@ -244,10 +244,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
         }
     }
 
-    private void ApplyRequered(RequiredRefContext context, Table table, string columnName)
-    {
-        this.ApplyRequered(context, table, [columnName]);
-    }
+    private void ApplyRequered(RequiredRefContext context, Table table, string columnName) => this.ApplyRequered(context, table, [columnName]);
 
     private void ApplyRequered(RequiredRefContext refContext, Table table, IEnumerable<string> columnNames)
     {
@@ -296,44 +293,20 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
 
         private readonly HashSet<View> expectedRemovableViews = [];
 
-        public IDatabaseScriptGeneratorContext Context
-        {
-            get { return contex; }
-        }
+        public IDatabaseScriptGeneratorContext Context => contex;
 
-        public IEnumerable<Index> RecreateIndexies
-        {
-            get { return this.recreateIndexies; }
-        }
+        public IEnumerable<Index> RecreateIndexies => this.recreateIndexies;
 
-        public IEnumerable<Column> RequeredColumns
-        {
-            get { return this.requeredColumns; }
-        }
+        public IEnumerable<Column> RequeredColumns => this.requeredColumns;
 
-        public IEnumerable<View> RecreateViews
-        {
-            get { return this.expectedRemovableViews; }
-        }
+        public IEnumerable<View> RecreateViews => this.expectedRemovableViews;
 
-        public void Add(IEnumerable<Index> indexed)
-        {
-            this.recreateIndexies.AddRange(indexed);
-        }
+        public void Add(IEnumerable<Index> indexed) => this.recreateIndexies.AddRange(indexed);
 
-        public void Add(IEnumerable<Column> columns)
-        {
-            this.requeredColumns.AddRange(columns);
-        }
+        public void Add(IEnumerable<Column> columns) => this.requeredColumns.AddRange(columns);
 
-        public void Add(IEnumerable<View> views)
-        {
-            this.expectedRemovableViews.AddRange(views);
-        }
+        public void Add(IEnumerable<View> views) => this.expectedRemovableViews.AddRange(views);
 
-        public void Add(View view)
-        {
-            this.Add([view]);
-        }
+        public void Add(View view) => this.Add([view]);
     }
 }

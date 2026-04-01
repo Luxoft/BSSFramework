@@ -12,24 +12,19 @@ public class ClientPrimitiveDTOMappingServiceFileFactory<TConfiguration> : FileF
         where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     public ClientPrimitiveDTOMappingServiceFileFactory(TConfiguration configuration)
-            : base(configuration, null)
-    {
+            : base(configuration, null) =>
         this.BaseReference = this.Configuration.GetCodeTypeReference(null, BaseFileType.ClientPrimitiveDTOMappingServiceBase);
-    }
-
 
     public override BaseFileType FileType { get; } = BaseFileType.ClientPrimitiveDTOMappingService;
 
     public override CodeTypeReference BaseReference { get; }
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration(this.Name)
-               {
-                       TypeAttributes = TypeAttributes.Public,
-                       IsPartial = true
-               };
-    }
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new(this.Name)
+        {
+            TypeAttributes = TypeAttributes.Public,
+            IsPartial = true
+        };
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
     {

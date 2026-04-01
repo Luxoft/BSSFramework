@@ -31,14 +31,11 @@ public class MappingAttribute : Attribute
     /// </summary>
     public CascadeMode CascadeMode
     {
-        get { return this.actualCascadeMode ?? CascadeMode.Auto; }
-        set { this.actualCascadeMode = value; }
+        get => this.actualCascadeMode ?? CascadeMode.Auto;
+        set => this.actualCascadeMode = value;
     }
 
-    public CascadeMode? GetActualCascadeMode()
-    {
-        return this.actualCascadeMode;
-    }
+    public CascadeMode? GetActualCascadeMode() => this.actualCascadeMode;
 
     /// <summary>
     /// Имя из сторонней таблицы которая join-тся по id и из которой берётся данная колонка

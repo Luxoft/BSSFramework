@@ -64,16 +64,14 @@ public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration config
         return new CodeThisReferenceExpression().ToPropertyReference(forceProp ? "_" + this.IdPropertyName.ToStartLowerCase() : this.IdPropertyName);
     }
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration(this.Name)
-               {
-                       IsClass = this.Configuration.IdentityIsReference,
-                       IsStruct = !this.Configuration.IdentityIsReference,
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new(this.Name)
+        {
+            IsClass = this.Configuration.IdentityIsReference,
+            IsStruct = !this.Configuration.IdentityIsReference,
 
-                       TypeAttributes = TypeAttributes.Public,
-               };
-    }
+            TypeAttributes = TypeAttributes.Public,
+        };
 
     protected override IEnumerable<CodeConstructor> GetConstructors()
     {

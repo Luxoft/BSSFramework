@@ -57,30 +57,16 @@ public class BusinessUnitManagerCommissionLink : AuditPersistentDomainObjectBase
     [CustomName("Financial Business Unit")]
     public virtual BusinessUnit BusinessUnit
     {
-        get
-        {
-            return this.businessUnit;
-        }
-
-        set
-        {
-            this.SetValueSafe(x => x.businessUnit, value);
-        }
+        get => this.businessUnit;
+        set => this.SetValueSafe(x => x.businessUnit, value);
     }
 
     [Required]
     [UniqueElement]
     public virtual Employee Manager
     {
-        get
-        {
-            return this.manager;
-        }
-
-        set
-        {
-            this.manager = value;
-        }
+        get => this.manager;
+        set => this.manager = value;
     }
 
     [Percent]
@@ -88,34 +74,22 @@ public class BusinessUnitManagerCommissionLink : AuditPersistentDomainObjectBase
     [CustomName("Commission, %")]
     public virtual decimal Commission
     {
-        get { return this.commission; }
-        set { this.commission = value; }
+        get => this.commission;
+        set => this.commission = value;
     }
 
     public virtual Period Period
     {
-        get { return this.period; }
-        set { this.period = value; }
+        get => this.period;
+        set => this.period = value;
     }
 
     [UniqueElement]
     [ExpandPath("Period")]
     [CustomSerialization(CustomSerializationMode.Ignore)]
-    public virtual DateTime StartDate
-    {
-        get { return this.Period.StartDate; }
-    }
+    public virtual DateTime StartDate => this.Period.StartDate;
 
-    BusinessUnit IDetail<BusinessUnit>.Master
-    {
-        get
-        {
-            return this.BusinessUnit;
-        }
-    }
+    BusinessUnit IDetail<BusinessUnit>.Master => this.BusinessUnit;
 
-    public override string ToString()
-    {
-        return $"BusinessUnit: {this.BusinessUnit}, Manager: {this.Manager}, Period: {this.Period}";
-    }
+    public override string ToString() => $"BusinessUnit: {this.BusinessUnit}, Manager: {this.Manager}, Period: {this.Period}";
 }

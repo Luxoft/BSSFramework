@@ -164,10 +164,7 @@ public partial class ConfigurationBLLContext
     public IDomainObjectEventMetadata EventOperationSource { get; }
 
     /// <inheritdoc />
-    public long GetCurrentRevision()
-    {
-        return this.currentRevisionService.GetCurrentRevision();
-    }
+    public long GetCurrentRevision() => this.currentRevisionService.GetCurrentRevision();
 
     public ITargetSystemService GetTargetSystemService(TargetSystem targetSystem)
     {
@@ -195,13 +192,11 @@ public partial class ConfigurationBLLContext
         }
     }
 
-    public ITargetSystemService GetMainTargetSystemService()
-    {
-        return this.lazyTargetSystemServiceCache.Value.Values.Single(
+    public ITargetSystemService GetMainTargetSystemService() =>
+        this.lazyTargetSystemServiceCache.Value.Values.Single(
             service => service.TargetSystem.IsMain,
             () => new BusinessLogicException("Main Target System not found"),
             () => new BusinessLogicException("To many Main Target Systems"));
-    }
 
     public ITargetSystemService GetTargetSystemService(string name)
     {
@@ -210,20 +205,11 @@ public partial class ConfigurationBLLContext
         return this.lazyTargetSystemServiceCache.Value.Values.GetByName(name);
     }
 
-    public TargetSystemInfo GetTargetSystemInfo(Type domainType)
-    {
-        return this.targetSystemInfoDict[domainType];
-    }
+    public TargetSystemInfo GetTargetSystemInfo(Type domainType) => this.targetSystemInfoDict[domainType];
 
-    public DomainTypeInfo GetDomainTypeInfo(Type domainType)
-    {
-        return this.domainTypeInfoDict[domainType];
-    }
+    public DomainTypeInfo GetDomainTypeInfo(Type domainType) => this.domainTypeInfoDict[domainType];
 
-    public IEnumerable<ITargetSystemService> GetTargetSystemServices()
-    {
-        return this.lazyTargetSystemServiceCache.Value.Values;
-    }
+    public IEnumerable<ITargetSystemService> GetTargetSystemServices() => this.lazyTargetSystemServiceCache.Value.Values;
 
     public DomainType GetDomainType(Type type, bool throwOnNotFound)
     {

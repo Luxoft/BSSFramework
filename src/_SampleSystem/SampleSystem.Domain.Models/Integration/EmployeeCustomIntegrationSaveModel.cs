@@ -9,7 +9,7 @@ public class EmployeeCustomIntegrationSaveModel : DomainObjectIntegrationSaveMod
     [DetailRole(DetailRole.Yes)]
     public override Employee SavingObject
     {
-        get { return base.SavingObject; }
-        set { base.SavingObject = value; }
+        get => base.SavingObject;
+        set => base.SavingObject = value;
     }
 }

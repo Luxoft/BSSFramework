@@ -8,13 +8,7 @@ namespace Framework.Database;
 
 public class PersistentInfoService : IPersistentInfoService
 {
-    public bool IsPersistent(Type type)
-    {
-        return !type.HasAttribute<NotPersistentClassAttribute>();
-    }
+    public bool IsPersistent(Type type) => !type.HasAttribute<NotPersistentClassAttribute>();
 
-    public bool IsPersistent(PropertyInfo propertyInfo)
-    {
-        return propertyInfo.IsPersistent();
-    }
+    public bool IsPersistent(PropertyInfo propertyInfo) => propertyInfo.IsPersistent();
 }

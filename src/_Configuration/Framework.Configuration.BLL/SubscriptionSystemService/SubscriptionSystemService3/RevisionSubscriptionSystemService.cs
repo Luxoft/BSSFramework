@@ -113,13 +113,8 @@ public class RevisionSubscriptionSystemService<TBLLContext, T> : SubscriptionSys
     }
 
     private RevisionService<TDomainObject> CreateRevisionService<TDomainObject>()
-            where TDomainObject : class, T
-    {
-        return this.servicesFactory.CreateRevisionService<TDomainObject>();
-    }
+            where TDomainObject : class, T =>
+        this.servicesFactory.CreateRevisionService<TDomainObject>();
 
-    private ConfigurationContextFacade CreateConfigurationContextFacade()
-    {
-        return this.servicesFactory.CreateConfigurationContextFacade();
-    }
+    private ConfigurationContextFacade CreateConfigurationContextFacade() => this.servicesFactory.CreateConfigurationContextFacade();
 }

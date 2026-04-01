@@ -54,10 +54,7 @@ public class ServerPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : F
         yield return this.Configuration.GetCodeTypeReference(null, ServerFileType.ServerDTOMappingServiceInterface);
     }
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration(this.Name) { Attributes = MemberAttributes.Abstract, TypeAttributes = TypeAttributes.Public | TypeAttributes.Abstract, IsPartial = true, };
-    }
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() => new(this.Name) { Attributes = MemberAttributes.Abstract, TypeAttributes = TypeAttributes.Public | TypeAttributes.Abstract, IsPartial = true, };
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
     {

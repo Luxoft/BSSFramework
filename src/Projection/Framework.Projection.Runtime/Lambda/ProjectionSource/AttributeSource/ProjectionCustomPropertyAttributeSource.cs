@@ -18,14 +18,12 @@ public class ProjectionCustomPropertyAttributeSource : AttributeSourceBase<IProj
     }
 
 
-    protected override IEnumerable<Attribute> GetDefaultAttributes()
-    {
-        return new Attribute?[]
-               {
-                       this.TryCreateIgnoreFetchAttribute(),
-                       this.CreateProjectionPropertyAttribute()
-               }.Where(attr => attr != null).Select(v => v!).Concat(this.GetFetchPathAttributes());
-    }
+    protected override IEnumerable<Attribute> GetDefaultAttributes() =>
+        new Attribute?[]
+        {
+            this.TryCreateIgnoreFetchAttribute(),
+            this.CreateProjectionPropertyAttribute()
+        }.Where(attr => attr != null).Select(v => v!).Concat(this.GetFetchPathAttributes());
 
     protected virtual IgnoreFetchAttribute? TryCreateIgnoreFetchAttribute()
     {
@@ -39,10 +37,7 @@ public class ProjectionCustomPropertyAttributeSource : AttributeSourceBase<IProj
         }
     }
 
-    protected virtual ProjectionPropertyAttribute CreateProjectionPropertyAttribute()
-    {
-        return new ProjectionPropertyAttribute(ProjectionPropertyRole.Custom);
-    }
+    protected virtual ProjectionPropertyAttribute CreateProjectionPropertyAttribute() => new(ProjectionPropertyRole.Custom);
 
     private IEnumerable<FetchPathAttribute> GetFetchPathAttributes()
     {

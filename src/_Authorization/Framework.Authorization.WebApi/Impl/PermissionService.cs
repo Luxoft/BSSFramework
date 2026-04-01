@@ -28,18 +28,16 @@ public partial class AuthMainController
     }
 
     [HttpPost]
-    public IEnumerable<BusinessRoleVisualDTO> GetVisualBusinessRolesByPermission([FromForm] PermissionIdentityDTO permission)
-    {
-        return new[]
-               {
-                   this.Evaluate(
-                       DBSessionMode.Write,
-                       evaluateData =>
-                           evaluateData.Context.Logics.PermissionFactory
-                                       .Create(SecurityRule.View)
-                                       .GetById(permission.Id, true)
-                                       .Role
-                                       .ToVisualDTO(evaluateData.MappingService))
-               };
-    }
+    public IEnumerable<BusinessRoleVisualDTO> GetVisualBusinessRolesByPermission([FromForm] PermissionIdentityDTO permission) =>
+        new[]
+        {
+            this.Evaluate(
+                DBSessionMode.Write,
+                evaluateData =>
+                    evaluateData.Context.Logics.PermissionFactory
+                                .Create(SecurityRule.View)
+                                .GetById(permission.Id, true)
+                                .Role
+                                .ToVisualDTO(evaluateData.MappingService))
+        };
 }

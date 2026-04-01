@@ -52,70 +52,55 @@ public partial class HRDepartment :
     }
 
     [UniqueGroup]
-    public virtual IEnumerable<ManagementUnitAndHRDepartmentLink> ManagementUnits
-    {
-        get { return this.managementUnits; }
-    }
+    public virtual IEnumerable<ManagementUnitAndHRDepartmentLink> ManagementUnits => this.managementUnits;
 
     [Required]
     public override CompanyLegalEntity CompanyLegalEntity
     {
-        get { return base.CompanyLegalEntity; }
-        set { base.CompanyLegalEntity = value; }
+        get => base.CompanyLegalEntity;
+        set => base.CompanyLegalEntity = value;
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     [Required]
     public override Location Location
     {
-        get { return base.Location; }
-        set { base.Location = value; }
+        get => base.Location;
+        set => base.Location = value;
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Client | DTORole.Report)]
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event | DTORole.Integration)]
-    public virtual IEnumerable<HRDepartment> Children
-    {
-        get { return this.children; }
-    }
+    public virtual IEnumerable<HRDepartment> Children => this.children;
 
     public virtual HRDepartment Parent
     {
-        get { return this.parent; }
-        set { this.parent = value; }
+        get => this.parent;
+        set => this.parent = value;
     }
 
     public virtual Employee ApprovedBy
     {
-        get { return this.approvedBy; }
-        set { this.approvedBy = value; }
+        get => this.approvedBy;
+        set => this.approvedBy = value;
     }
 
     [CustomSerialization(CustomSerializationMode.Normal)]
     public override bool Active
     {
-        get { return base.Active; }
-        set { base.Active = value; }
+        get => base.Active;
+        set => base.Active = value;
     }
 
     [UniqueGroup]
-    public virtual IEnumerable<HRDepartmentRoleEmployee> HrDepartmentRoleEmployees
-    {
-        get { return this.hrDepartmentRoleEmployees; }
-    }
+    public virtual IEnumerable<HRDepartmentRoleEmployee> HrDepartmentRoleEmployees => this.hrDepartmentRoleEmployees;
 
     [Obsolete("Now HRDepartment linked to ManagementBusinessUnit")]
     [UniqueGroup]
-    public virtual IEnumerable<BusinessUnitHrDepartment> BusinessUnitHrDepartments
-    {
-        get { return this.businessUnitHrDepartments; }
-    }
+    public virtual IEnumerable<BusinessUnitHrDepartment> BusinessUnitHrDepartments => this.businessUnitHrDepartments;
 
     [UniqueGroup]
-    public virtual IEnumerable<HRDepartmentEmployeePosition> EmployeePositions
-    {
-        get { return this.employeePositions; }
-    }
+    public virtual IEnumerable<HRDepartmentEmployeePosition> EmployeePositions => this.employeePositions;
 
     [FetchPath("Location")]
     public virtual string LocationName
@@ -144,44 +129,17 @@ public partial class HRDepartment :
         }
     }
 
-    ICollection<HRDepartmentRoleEmployee> IMaster<HRDepartmentRoleEmployee>.Details
-    {
-        get
-        {
-            return (ICollection<HRDepartmentRoleEmployee>)this.HrDepartmentRoleEmployees;
-        }
-    }
+    ICollection<HRDepartmentRoleEmployee> IMaster<HRDepartmentRoleEmployee>.Details => (ICollection<HRDepartmentRoleEmployee>)this.HrDepartmentRoleEmployees;
 
-    ICollection<HRDepartmentEmployeePosition> IMaster<HRDepartmentEmployeePosition>.Details
-    {
-        get
-        {
-            return (ICollection<HRDepartmentEmployeePosition>)this.EmployeePositions;
-        }
-    }
+    ICollection<HRDepartmentEmployeePosition> IMaster<HRDepartmentEmployeePosition>.Details => (ICollection<HRDepartmentEmployeePosition>)this.EmployeePositions;
 
-    ICollection<ManagementUnitAndHRDepartmentLink> IMaster<ManagementUnitAndHRDepartmentLink>.Details
-    {
-        get
-        {
-            return (ICollection<ManagementUnitAndHRDepartmentLink>)this.ManagementUnits;
-        }
-    }
+    ICollection<ManagementUnitAndHRDepartmentLink> IMaster<ManagementUnitAndHRDepartmentLink>.Details => (ICollection<ManagementUnitAndHRDepartmentLink>)this.ManagementUnits;
 
-    ICollection<BusinessUnitHrDepartment> IMaster<BusinessUnitHrDepartment>.Details
-    {
-        get { return (ICollection<BusinessUnitHrDepartment>)this.BusinessUnitHrDepartments; }
-    }
+    ICollection<BusinessUnitHrDepartment> IMaster<BusinessUnitHrDepartment>.Details => (ICollection<BusinessUnitHrDepartment>)this.BusinessUnitHrDepartments;
 
-    ICollection<HRDepartment> IMaster<HRDepartment>.Details
-    {
-        get { return (ICollection<HRDepartment>)this.Children; }
-    }
+    ICollection<HRDepartment> IMaster<HRDepartment>.Details => (ICollection<HRDepartment>)this.Children;
 
-    HRDepartment IDetail<HRDepartment>.Master
-    {
-        get { return this.Parent; }
-    }
+    HRDepartment IDetail<HRDepartment>.Master => this.Parent;
 
     public virtual IEnumerable<HRDepartmentEmployeeRoleType> GetCurrentUserRoles(ICurrentUser currentUser)
     {
@@ -195,13 +153,10 @@ public partial class HRDepartment :
                    .Distinct();
     }
 
-    public virtual IEnumerable<Employee> GetHRInspectors()
-    {
-        return
-                this.hrDepartmentRoleEmployees
-                    .Where(z => z.HRDepartmentEmployeeRoleType == HRDepartmentEmployeeRoleType.Inspector)
-                    .Select(z => z.Employee);
-    }
+    public virtual IEnumerable<Employee> GetHRInspectors() =>
+        this.hrDepartmentRoleEmployees
+            .Where(z => z.HRDepartmentEmployeeRoleType == HRDepartmentEmployeeRoleType.Inspector)
+            .Select(z => z.Employee);
 
     public virtual bool CurrentUserHasInspectorRoles(ICurrentUser currentUser)
     {

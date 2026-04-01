@@ -14,8 +14,6 @@ public static class SecurityProviderExtensions
         params Expression<Func<TDomainObject, object>>[] allowedPropertiesForChangingExpressions)
 
         where TBLLContext : class, IAccessDeniedExceptionServiceContainer, ITrackingServiceContainer<TDomainObject>
-        where TDomainObject : class
-    {
-        return new FixedPropertiesSecurityProvider<TBLLContext, TDomainObject>(context, securityProvider, allowedPropertiesForChangingExpressions);
-    }
+        where TDomainObject : class =>
+        new FixedPropertiesSecurityProvider<TBLLContext, TDomainObject>(context, securityProvider, allowedPropertiesForChangingExpressions);
 }

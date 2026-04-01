@@ -26,20 +26,17 @@ public class BusinessUnitHrDepartment : AuditPersistentDomainObjectBase, IDetail
     [UniqueElement]
     public virtual BusinessUnit BusinessUnit
     {
-        get { return this.businessUnit; }
-        set { this.businessUnit = value; }
+        get => this.businessUnit;
+        set => this.businessUnit = value;
     }
 
     [Required]
     [UniqueElement]
     public virtual HRDepartment HRDepartment
     {
-        get { return this.hRDepartment; }
-        set { this.hRDepartment = value; }
+        get => this.hRDepartment;
+        set => this.hRDepartment = value;
     }
 
-    HRDepartment IDetail<HRDepartment>.Master
-    {
-        get { return this.hRDepartment; }
-    }
+    HRDepartment IDetail<HRDepartment>.Master => this.hRDepartment;
 }

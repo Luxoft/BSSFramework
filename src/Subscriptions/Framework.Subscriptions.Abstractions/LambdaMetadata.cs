@@ -21,15 +21,9 @@ public abstract class LambdaMetadata<TContext, TDomainObject, TResult> : ILambda
 
     /// <summary>Получает делегат, исполняющий лямбду.</summary>
     /// <value>Делегат, исполняющий лямбду.</value>
-    Func<object, object, object> ILambdaMetadata.Lambda
-    {
-        get
-        {
-            return
-                    (context, versions) =>
-                            this.Lambda((TContext)context, (DomainObjectVersions<TDomainObject>)versions);
-        }
-    }
+    Func<object, object, object> ILambdaMetadata.Lambda =>
+        (context, versions) =>
+            this.Lambda((TContext)context, (DomainObjectVersions<TDomainObject>)versions);
 
     public virtual DomainObjectChangeType DomainObjectChangeType { get; protected set; }
 

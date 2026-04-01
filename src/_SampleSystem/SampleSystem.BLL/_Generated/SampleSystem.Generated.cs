@@ -121,7 +121,7 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class CountryBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Country>, SampleSystem.BLL.ICountryBLL
+    public partial class CountryBLL : SampleSystem.BLL.ICountryBLL
     {
     }
     

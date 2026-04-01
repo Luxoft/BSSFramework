@@ -16,8 +16,5 @@ public sealed class GenerationLambda : GenerationLambdaBase<DateModel>
 
     private NotificationMessageGenerationInfo[] GetRecipients(
             ISampleSystemBLLContext context,
-            DomainObjectVersions<DateModel> versions)
-    {
-        return [new NotificationMessageGenerationInfo("tester@luxoft.com", versions.Previous, versions.Current)];
-    }
+            DomainObjectVersions<DateModel> versions) => [new NotificationMessageGenerationInfo("tester@luxoft.com", versions.Previous, versions.Current)];
 }

@@ -83,7 +83,7 @@ public static class TryResult
 
     private class SuccessResult<T>(T result) : ISuccessResult<T>
     {
-        public T Result { get; private set; } = result;
+        public T Result { get; } = result;
     }
 
     private class FaultResult<T> : IFaultResult<T>
@@ -95,14 +95,14 @@ public static class TryResult
             this.Error = error;
         }
 
-        public Exception Error { get; private set; }
+        public Exception Error { get; }
     }
 
     private class SuccessResult<TArgs, TResult>(TArgs args, TResult result) : ISuccessResult<TArgs, TResult>
     {
-        public TResult Result { get; private set; } = result;
+        public TResult Result { get; } = result;
 
-        public TArgs Args { get; private set; } = args;
+        public TArgs Args { get; } = args;
     }
 
     private class FaultResult<TArgs, TResult> : IFaultResult<TArgs, TResult>
@@ -115,8 +115,8 @@ public static class TryResult
             this.Args = args;
         }
 
-        public Exception Error { get; private set; }
+        public Exception Error { get; }
 
-        public TArgs Args { get; private set; }
+        public TArgs Args { get; }
     }
 }

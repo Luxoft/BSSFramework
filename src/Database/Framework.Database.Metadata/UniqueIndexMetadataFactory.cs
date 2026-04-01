@@ -19,15 +19,9 @@ public class UniqueIndexMetadataReader
         this._typeToMetadataDictionary = this._metadata.DomainTypes.SelectMany(z => new[] { z }.Concat(z.NotAbstractChildrenDomainTypes)).ToDictionary(z => z.DomainType);
     }
 
-    public IEnumerable<UniqueIndexMetadata> Read(DomainTypeMetadata domainTypeMetadata)
-    {
-        return this.GetFromTypeAttribute(domainTypeMetadata).Concat(this.ProcessPropertyAttribute(domainTypeMetadata));
-    }
+    public IEnumerable<UniqueIndexMetadata> Read(DomainTypeMetadata domainTypeMetadata) => this.GetFromTypeAttribute(domainTypeMetadata).Concat(this.ProcessPropertyAttribute(domainTypeMetadata));
 
-    public IEnumerable<UniqueIndexMetadata> ReadFromReferenceTo(DomainTypeMetadata domainTypeMetadata)
-    {
-        return this.ProcessPropertyAttribute(domainTypeMetadata);
-    }
+    public IEnumerable<UniqueIndexMetadata> ReadFromReferenceTo(DomainTypeMetadata domainTypeMetadata) => this.ProcessPropertyAttribute(domainTypeMetadata);
 
     private IEnumerable<UniqueIndexMetadata> GetFromTypeAttribute(DomainTypeMetadata domainTypeMetadata)
     {

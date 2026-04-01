@@ -50,11 +50,7 @@ public abstract class LayerCodeTypeReferenceService<TConfiguration>(TConfigurati
         }
     }
 
-    protected virtual CodeTypeReference GetCollectionCodeTypeReference(Type elementType, BaseFileType elementFileType)
-    {
-        return this.Configuration.GetCodeTypeReference(elementType, elementFileType).ToCollectionReference(this.CollectionType);
-    }
-
+    protected virtual CodeTypeReference GetCollectionCodeTypeReference(Type elementType, BaseFileType elementFileType) => this.Configuration.GetCodeTypeReference(elementType, elementFileType).ToCollectionReference(this.CollectionType);
 
     protected override CodeTypeReference GetCodeTypeReferenceByProperty(PropertyInfo property)
     {

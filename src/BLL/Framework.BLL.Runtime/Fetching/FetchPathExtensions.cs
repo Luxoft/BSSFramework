@@ -10,8 +10,5 @@ namespace Framework.BLL.Fetching;
 
 internal static class PropertyPathExtensions
 {
-    public static ReadOnlyCollection<PropertyPath> GetFetchPaths(this PropertyInfo property)
-    {
-        return property.GetPropertyPaths<FetchPathAttribute>();
-    }
+    public static ReadOnlyCollection<PropertyPath> GetFetchPaths(this PropertyInfo property) => property.GetPropertyPaths<FetchPathAttribute>();
 }

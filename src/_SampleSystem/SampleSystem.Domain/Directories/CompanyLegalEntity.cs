@@ -17,34 +17,34 @@ public class CompanyLegalEntity : LegalEntityBase, ICodeObject
 
     public virtual TestObjForNested CurrentObj
     {
-        get { return this.currentObj; }
-        set { this.currentObj = value; }
+        get => this.currentObj;
+        set => this.currentObj = value;
     }
 
     [Required]
     [MaxLength(100)]
     public virtual string Code
     {
-        get { return this.code; }
-        set { this.code = value; }
+        get => this.code;
+        set => this.code = value;
     }
 
     public virtual CompanyLegalEntity Parent
     {
-        get { return this.parent; }
-        set { this.parent = value; }
+        get => this.parent;
+        set => this.parent = value;
     }
 
     public virtual CompanyLegalEntityType Type
     {
-        get { return this.type; }
-        set { this.type = value; }
+        get => this.type;
+        set => this.type = value;
     }
 
     [CustomSerialization(CustomSerializationMode.Normal)]
     public override bool Active
     {
-        get { return base.Active; }
-        set { base.Active = value; }
+        get => base.Active;
+        set => base.Active = value;
     }
 }

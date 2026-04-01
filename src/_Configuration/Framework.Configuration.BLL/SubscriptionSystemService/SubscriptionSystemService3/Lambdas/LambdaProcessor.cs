@@ -21,10 +21,7 @@ public abstract class LambdaProcessor<TBLLContext>
     ///     или
     ///     parserFactory равен null.
     /// </exception>
-    protected LambdaProcessor(TBLLContext bllContext)
-    {
-        this.BllContext = bllContext ?? throw new ArgumentNullException(nameof(bllContext));
-    }
+    protected LambdaProcessor(TBLLContext bllContext) => this.BllContext = bllContext ?? throw new ArgumentNullException(nameof(bllContext));
 
     /// <summary>Возвращает имя лямбда-выражения.</summary>
     /// <value>Имя лямбда-выражения.</value>
@@ -131,12 +128,10 @@ public abstract class LambdaProcessor<TBLLContext>
         throw new InvalidOperationException(message);
     }
 
-    private static string GetSubscriptionCode(object value)
-    {
-        return (value as Subscription)?.Code ??
-               (value as SubscriptionSecurityItem)?.Subscription.Code ??
-               string.Empty;
-    }
+    private static string GetSubscriptionCode(object value) =>
+        (value as Subscription)?.Code ??
+        (value as SubscriptionSecurityItem)?.Subscription.Code ??
+        string.Empty;
 
     private static ComplianceFunctionsTable BuildComplianceFuncTable()
     {
@@ -156,7 +151,5 @@ public abstract class LambdaProcessor<TBLLContext>
         return table;
     }
 
-    private class ComplianceFunctionsTable : Dictionary<SubscriptionType, Func<DomainObjectChangeType, bool>>
-    {
-    }
+    private class ComplianceFunctionsTable : Dictionary<SubscriptionType, Func<DomainObjectChangeType, bool>>;
 }

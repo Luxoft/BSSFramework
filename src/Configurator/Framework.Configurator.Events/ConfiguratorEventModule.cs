@@ -18,9 +18,7 @@ public class ConfiguratorEventModule : IConfiguratorModule
         services.AddScoped<IForcePushEventHandler, ForcePushEventHandler>();
     }
 
-    public void MapApi(IEndpointRouteBuilder endpointsBuilder, string route)
-    {
+    public void MapApi(IEndpointRouteBuilder endpointsBuilder, string route) =>
         endpointsBuilder.Get<IGetDomainTypesHandler>($"{route}/api/domainTypes")
                         .Post<IForcePushEventHandler>(route + "/api/domainType/{domainTypeName}");
-    }
 }

@@ -27,18 +27,9 @@ public class FixedCodeTypeReferenceService<TConfiguration> : LayerCodeTypeRefere
     }
 
 
-    public override bool IsOptional(PropertyInfo property)
-    {
-        return this.enabledSecurity && base.IsOptional(property);
-    }
+    public override bool IsOptional(PropertyInfo property) => this.enabledSecurity && base.IsOptional(property);
 
-    public override RoleFileType GetReferenceFileType(PropertyInfo _)
-    {
-        return this.referenceFileType;
-    }
+    public override RoleFileType GetReferenceFileType(PropertyInfo _) => this.referenceFileType;
 
-    public override RoleFileType GetCollectionFileType(PropertyInfo _)
-    {
-        return this.collectionFileType;
-    }
+    public override RoleFileType GetCollectionFileType(PropertyInfo _) => this.collectionFileType;
 }

@@ -47,50 +47,35 @@ public class TargetSystem : BaseDirectory, IMaster<DomainType>
     /// </summary>
     [UniqueGroup]
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public virtual IEnumerable<DomainType> DomainTypes
-    {
-        get { return this.domainTypes; }
-    }
+    public virtual IEnumerable<DomainType> DomainTypes => this.domainTypes;
 
     /// <summary>
     /// Признак целевой системы, которая создана для типов, содержащихся в системных библиотеках
     /// </summary>
-    public virtual bool IsBase
-    {
-        get { return this.isBase; }
-    }
+    public virtual bool IsBase => this.isBase;
 
     /// <summary>
     /// Признак главной целевой системы
     /// </summary>
-    public virtual bool IsMain
-    {
-        get { return this.isMain; }
-    }
+    public virtual bool IsMain => this.isMain;
 
     /// <summary>
     /// Признак поддержки целевой системой ревизизи баз данных
     /// </summary>
-    public virtual bool IsRevision
-    {
-        get { return this.isRevision; }
-    }
+    public virtual bool IsRevision => this.isRevision;
 
     /// <summary>
     /// Признак того, что включен механизм подписки
     /// </summary>
     public virtual bool SubscriptionEnabled
     {
-        get { return this.subscriptionEnabled; }
-        set { this.subscriptionEnabled = value; }
+        get => this.subscriptionEnabled;
+        set => this.subscriptionEnabled = value;
     }
 
     #region IMaster<DomainType> Members
 
-    ICollection<DomainType> IMaster<DomainType>.Details
-    {
-        get { return (ICollection<DomainType>)this.DomainTypes; }
-    }
+    ICollection<DomainType> IMaster<DomainType>.Details => (ICollection<DomainType>)this.DomainTypes;
 
     #endregion
 }

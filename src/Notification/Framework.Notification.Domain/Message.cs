@@ -50,7 +50,7 @@ public class Message
 
     public string Body { get; }
 
-    public bool IsBodyHtml { get; private set; }
+    public bool IsBodyHtml { get; }
 
     public ImmutableArray<Attachment> Attachments { get; }
 

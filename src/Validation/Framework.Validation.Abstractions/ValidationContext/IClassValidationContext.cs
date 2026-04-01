@@ -1,8 +1,6 @@
 ﻿namespace Framework.Validation;
 
-public interface IClassValidationContext<out TSource> : IValidationContext<TSource, IClassValidationMap>
-{
-}
+public interface IClassValidationContext<out TSource> : IValidationContext<TSource, IClassValidationMap>;
 
 public static class ClassValidationContextExtensions
 {

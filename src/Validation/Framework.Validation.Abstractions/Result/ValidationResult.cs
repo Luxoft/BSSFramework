@@ -20,28 +20,17 @@ public class ValidationResult
         this.lazyErrors = LazyHelper.Create(() => errors.ToReadOnlyCollection());
     }
 
-    public ReadOnlyCollection<ValidationExceptionBase> Errors
-    {
-        get { return this.lazyErrors.Value; }
-    }
+    public ReadOnlyCollection<ValidationExceptionBase> Errors => this.lazyErrors.Value;
 
-    public bool HasErrors
-    {
-        get { return this.Errors.Any(); }
-    }
+    public bool HasErrors => this.Errors.Any();
 
-    public void TryThrow()
-    {
+    public void TryThrow() =>
         this.Errors.Match(
-                          () => { },
-                          ex => { throw ex; },
-                          exceptions => { throw new AggregateValidationException(exceptions); });
-    }
+            () => { },
+            ex => { throw ex; },
+            exceptions => { throw new AggregateValidationException(exceptions); });
 
-    public override string ToString()
-    {
-        return this.Errors.Select(z => z.Message).Join(Environment.NewLine);
-    }
+    public override string ToString() => this.Errors.Select(z => z.Message).Join(Environment.NewLine);
 
     public static ValidationResult FromCondition(bool isSuccess, Func<string> getErrorMessage)
     {
@@ -50,11 +39,9 @@ public class ValidationResult
         return FromCondition(isSuccess, () => new ValidationException(getErrorMessage()));
     }
 
-    public static ValidationResult FromMaybe(Maybe<string> maybeErrorMessage)
-    {
-        return maybeErrorMessage.Match(str => CreateError(new ValidationException(str)),
-                                       () => Success);
-    }
+    public static ValidationResult FromMaybe(Maybe<string> maybeErrorMessage) =>
+        maybeErrorMessage.Match(str => CreateError(new ValidationException(str)),
+                                () => Success);
 
     public static ValidationResult FromCondition(bool isSuccess, Func<ValidationExceptionBase> getError)
     {
@@ -79,10 +66,7 @@ public class ValidationResult
         }
     }
 
-    public static ValidationResult CreateError(string format, params object[] args)
-    {
-        return CreateError(string.Format(format, args));
-    }
+    public static ValidationResult CreateError(string format, params object[] args) => CreateError(string.Format(format, args));
 
     public static ValidationResult CreateError(string message)
     {
@@ -91,13 +75,11 @@ public class ValidationResult
         return new ValidationResult([new ValidationException(message)]);
     }
 
-    public static ValidationResult CreateError(object exceptionObject)
-    {
-        return (exceptionObject as string).ToMaybe().Select(CreateError)
-                                          .Or(() => (exceptionObject as ValidationExceptionBase).ToMaybe().Select(CreateError))
-                                          .Or(() => (exceptionObject as Exception).ToMaybe().Select(error => CreateError(new ValidationException(error.Message, error))))
-                                          .GetValue(() => new Exception("Invalid exceptionObject"));
-    }
+    public static ValidationResult CreateError(object exceptionObject) =>
+        (exceptionObject as string).ToMaybe().Select(CreateError)
+                                   .Or(() => (exceptionObject as ValidationExceptionBase).ToMaybe().Select(CreateError))
+                                   .Or(() => (exceptionObject as Exception).ToMaybe().Select(error => CreateError(new ValidationException(error.Message, error))))
+                                   .GetValue(() => new Exception("Invalid exceptionObject"));
 
     public static ValidationResult CreateError(ValidationExceptionBase exception)
     {

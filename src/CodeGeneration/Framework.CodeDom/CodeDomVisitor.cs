@@ -535,7 +535,5 @@ public abstract class CodeDomVisitor
     /// </summary>
     public static readonly CodeDomVisitor Identity = new CloneVisitor();
 
-    private class CloneVisitor : CodeDomVisitor
-    {
-    }
+    private class CloneVisitor : CodeDomVisitor;
 }

@@ -7,8 +7,5 @@ namespace SampleSystem.Security;
 public class SampleSystemClientDomainModeSecurityRuleSource(IEnumerable<DomainModeSecurityRuleInfo> domainModeSecurityRuleInfoList)
     : ClientDomainModeSecurityRuleSource(domainModeSecurityRuleInfoList)
 {
-    protected override bool Allowed(DomainModeSecurityRuleInfo info)
-    {
-        return base.Allowed(info) && typeof(PersistentDomainObjectBase).IsAssignableFrom(info.SecurityRule.DomainType);
-    }
+    protected override bool Allowed(DomainModeSecurityRuleInfo info) => base.Allowed(info) && typeof(PersistentDomainObjectBase).IsAssignableFrom(info.SecurityRule.DomainType);
 }

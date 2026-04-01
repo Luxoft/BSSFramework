@@ -8,13 +8,7 @@ public class ManagementUnitToAncestorChildView : AuditPersistentDomainObjectBase
     private ManagementUnit childOrAncestor;
     private ManagementUnit source;
 
-    public virtual ManagementUnit ChildOrAncestor
-    {
-        get { return this.childOrAncestor; }
-    }
+    public virtual ManagementUnit ChildOrAncestor => this.childOrAncestor;
 
-    public virtual ManagementUnit Source
-    {
-        get { return this.source; }
-    }
+    public virtual ManagementUnit Source => this.source;
 }

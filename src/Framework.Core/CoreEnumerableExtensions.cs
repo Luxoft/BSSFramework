@@ -459,6 +459,6 @@ public static class CoreEnumerableExtensions
     private class PairGrouping<TKey, TElement>(List<TElement> list, TKey key)
         : ReadOnlyCollection<TElement>(list), IGrouping<TKey, TElement>
     {
-        public TKey Key { get; private set; } = key;
+        public TKey Key { get; } = key;
     }
 }

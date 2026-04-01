@@ -9,11 +9,8 @@ public abstract class EventDTOFileFactory<TConfiguration> : RoleDTOFileFactory<T
         where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     protected EventDTOFileFactory(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
-    {
+            : base(configuration, domainType) =>
         this.CodeTypeReferenceService = new CryptCodeTypeReferenceService<TConfiguration>(this.Configuration, ServerFileType.SimpleEventDTO, ServerFileType.RichEventDTO);
-    }
-
 
     public override IPropertyCodeTypeReferenceService CodeTypeReferenceService { get; }
 

@@ -4,7 +4,7 @@ using CommonFramework;
 
 using Framework.Core;
 
-namespace Framework.ExpressionParsers;
+namespace Framework.ExpressionParsers._CSharp;
 
 internal static class CompileReferenceExtensions
 {

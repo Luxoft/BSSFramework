@@ -28,13 +28,11 @@ public class AuditDTOModelFileGenerator<TConfiguration>(TConfiguration configura
 
     }
 
-    private CodeNamespace GetCodeNamespace()
-    {
-        return new CodeNamespace(this.Configuration.Namespace)
-               {
-                   Types = { this.GetRootPropertyRevisionDTO(), this.GetPropertyRevisionDTO(), this.GetPropertyRevisionDTOBase(), },
-               };
-    }
+    private CodeNamespace GetCodeNamespace() =>
+        new(this.Configuration.Namespace)
+        {
+            Types = { this.GetRootPropertyRevisionDTO(), this.GetPropertyRevisionDTO(), this.GetPropertyRevisionDTOBase(), },
+        };
 
     private CodeTypeDeclaration GetRootPropertyRevisionDTO()
     {
@@ -167,10 +165,7 @@ public class AuditDTOModelFileGenerator<TConfiguration>(TConfiguration configura
 
     private class AuditFileFactory(TConfiguration configuration, CodeNamespace codeNamespace) : GeneratorConfigurationContainer<TConfiguration>(configuration), ICodeFile
     {
-        public CodeNamespace GetRenderData()
-        {
-            return codeNamespace;
-        }
+        public CodeNamespace GetRenderData() => codeNamespace;
 
         public string Filename => this.Configuration.PropertyRevisionTypeName;
     }

@@ -37,11 +37,8 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     public DefaultUpdateDTOFileFactory(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
-    {
+            : base(configuration, domainType) =>
         this.CodeTypeReferenceService = new UpdateCodeTypeReferenceService<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>>(this.Configuration);
-    }
-
 
     public override DTOFileType FileType { get; } = BaseFileType.UpdateDTO;
 
@@ -66,24 +63,19 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
     }
 
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration(this.Name)
-               {
-                       IsClass = true,
-                       IsPartial = true,
-                       Attributes = MemberAttributes.Public,
-                       BaseTypes = { typeof(IUpdateDTO) }
-               };
-    }
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new(this.Name)
+        {
+            IsClass = true,
+            IsPartial = true,
+            Attributes = MemberAttributes.Public,
+            BaseTypes = { typeof(IUpdateDTO) }
+        };
 
-
-    protected override CodeExpression GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property)
-    {
-        return this.CodeTypeReferenceService.IsOptional(property) ? this.CodeTypeReferenceService.GetCodeTypeReference(property).ToNothingValueExpression()
-               : property.PropertyType.IsCollection() ? (CodeExpression)new CodeObjectCreateExpression(codeTypeReference)
-               : property.GetCustomAttribute<DefaultValueAttribute>().Maybe(attr => attr.Value.ToDynamicPrimitiveExpression());
-    }
+    protected override CodeExpression GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property) =>
+        this.CodeTypeReferenceService.IsOptional(property) ? this.CodeTypeReferenceService.GetCodeTypeReference(property).ToNothingValueExpression()
+        : property.PropertyType.IsCollection() ? (CodeExpression)new CodeObjectCreateExpression(codeTypeReference)
+        : property.GetCustomAttribute<DefaultValueAttribute>().Maybe(attr => attr.Value.ToDynamicPrimitiveExpression());
 
     public override IEnumerable<CodeMemberMethod> GetServerMappingServiceInterfaceMethods()
     {

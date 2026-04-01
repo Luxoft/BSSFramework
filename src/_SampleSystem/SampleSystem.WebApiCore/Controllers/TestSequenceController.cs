@@ -6,16 +6,12 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class TestSequenceController : ControllerBase
+public class TestSequenceController(ISequenceBLLFactory sequenceBllFactory) : ControllerBase
 {
-    private readonly ISequenceBLLFactory sequenceBllFactory;
-
-    public TestSequenceController(ISequenceBLLFactory sequenceBllFactory) => this.sequenceBllFactory = sequenceBllFactory;
-
     [HttpPost]
     public long Check()
     {
-        var bll = this.sequenceBllFactory.Create();
+        var bll = sequenceBllFactory.Create();
 
         var nextNumber = bll.GetNextNumber("Test");
 

@@ -17,7 +17,7 @@ public class Principal : AuditPersistentDomainObjectBase
 
     public virtual string ExternalId
     {
-        get { return this.externalId; }
-        set { this.externalId = value.TrimNull(); }
+        get => this.externalId;
+        set => this.externalId = value.TrimNull();
     }
 }

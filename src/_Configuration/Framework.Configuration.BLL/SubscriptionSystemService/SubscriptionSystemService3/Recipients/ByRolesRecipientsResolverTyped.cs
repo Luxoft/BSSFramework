@@ -12,16 +12,12 @@ using SecuritySystem.Notification.Domain;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 
-internal sealed class ByRolesRecipientsResolverTyped<TBLLContext> : ByRolesRecipientsResolverBase<TBLLContext>
-        where TBLLContext : class
+internal sealed class ByRolesRecipientsResolverTyped<TBLLContext>(
+    ConfigurationContextFacade configurationContextFacade,
+    LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
+    : ByRolesRecipientsResolverBase<TBLLContext>(configurationContextFacade, lambdaProcessorFactory)
+    where TBLLContext : class
 {
-    public ByRolesRecipientsResolverTyped(
-            ConfigurationContextFacade configurationContextFacade,
-            LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
-            : base(configurationContextFacade, lambdaProcessorFactory)
-    {
-    }
-
     internal override RecipientCollection Resolve<T>(Subscription subscription, DomainObjectVersions<T> versions)
     {
         var businessRolesIds = this.GetBusinessRoles(subscription);
@@ -36,14 +32,12 @@ internal sealed class ByRolesRecipientsResolverTyped<TBLLContext> : ByRolesRecip
     private ImmutableArray<NotificationFilterGroup> GetNotificationFilterGroups<T>(
             Subscription subscription,
             DomainObjectVersions<T> versions)
-            where T : class
-    {
-        return [
-            ..subscription
-              .SecurityItems
-              .Select(securityItem => this.GetNotificationFilterGroup(versions, securityItem))
-        ];
-    }
+            where T : class =>
+    [
+        ..subscription
+          .SecurityItems
+          .Select(securityItem => this.GetNotificationFilterGroup(versions, securityItem))
+    ];
 
     private NotificationFilterGroup GetNotificationFilterGroup<T>(
             DomainObjectVersions<T> versions,

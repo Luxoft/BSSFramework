@@ -9,15 +9,13 @@ public class MainDTOFetchRuleExpanderFileFactory<TConfiguration>(TConfiguration 
 {
     public override FileType FileType => FileType.MainDTOFetchRuleExpander;
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration
-               {
-                       Name = this.Name,
-                       Attributes = MemberAttributes.Public,
-                       IsPartial = true,
-               };
-    }
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new()
+        {
+            Name = this.Name,
+            Attributes = MemberAttributes.Public,
+            IsPartial = true,
+        };
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {

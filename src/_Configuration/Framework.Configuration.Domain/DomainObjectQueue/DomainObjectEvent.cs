@@ -33,41 +33,41 @@ public class DomainObjectEvent : AuditPersistentDomainObjectBase
 
     public virtual DomainTypeEventOperation Operation
     {
-        get { return this.operation; }
-        set { this.operation = value; }
+        get => this.operation;
+        set => this.operation = value;
     }
 
     public virtual Guid DomainObjectId
     {
-        get { return this.domainObjectId; }
-        set { this.domainObjectId = value; }
+        get => this.domainObjectId;
+        set => this.domainObjectId = value;
     }
 
     public virtual long Revision
     {
-        get { return this.revision; }
-        set { this.revision = value; }
+        get => this.revision;
+        set => this.revision = value;
     }
 
     [MaxLength]
     public virtual string SerializeData
     {
-        get { return this.serializeData; }
-        set { this.serializeData = value; }
+        get => this.serializeData;
+        set => this.serializeData = value;
     }
 
     [MaxLength]
     public virtual string SerializeType
     {
-        get { return this.serializeType; }
-        set { this.serializeType = value; }
+        get => this.serializeType;
+        set => this.serializeType = value;
     }
 
     [Required]
     public virtual string QueueTag
     {
-        get { return this.queueTag; }
-        set { this.queueTag = value; }
+        get => this.queueTag;
+        set => this.queueTag = value;
     }
 
     public virtual QueueProgressStatus Status => this.status;
@@ -78,8 +78,8 @@ public class DomainObjectEvent : AuditPersistentDomainObjectBase
 
     public virtual int Size
     {
-        get { return this.size; }
-        set { this.size = value; }
+        get => this.size;
+        set => this.size = value;
     }
 
     ////[MappingProperty(CanInsert = false, CanUpdate = false)]

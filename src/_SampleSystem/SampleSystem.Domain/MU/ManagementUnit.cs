@@ -34,33 +34,27 @@ public class ManagementUnit :
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual int DeepLevel
     {
-        get { return this.deepLevel; }
-        set { this.deepLevel = value; }
+        get => this.deepLevel;
+        set => this.deepLevel = value;
     }
 
     public virtual Period Period
     {
-        get { return this.period; }
-        set { this.period = value; }
+        get => this.period;
+        set => this.period = value;
     }
 
     public virtual bool IsProduction
     {
-        get { return this.isProduction; }
-        set { this.isProduction = value; }
+        get => this.isProduction;
+        set => this.isProduction = value;
     }
 
     [UniqueGroup]
-    public virtual IEnumerable<ManagementUnitAndHRDepartmentLink> HRDepartments
-    {
-        get { return this.hRDepartments; }
-    }
+    public virtual IEnumerable<ManagementUnitAndHRDepartmentLink> HRDepartments => this.hRDepartments;
 
     [UniqueGroup]
-    public virtual IEnumerable<ManagementUnitAndBusinessUnitLink> BusinessUnits
-    {
-        get { return this.businessUnits; }
-    }
+    public virtual IEnumerable<ManagementUnitAndBusinessUnitLink> BusinessUnits => this.businessUnits;
 
     /// <summary>
     ///  Supposed to be set from dto only.
@@ -68,8 +62,8 @@ public class ManagementUnit :
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual ManagementUnit? Parent
     {
-        get { return this.parent; }
-        set { this.parent = value; }
+        get => this.parent;
+        set => this.parent = value;
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Client | DTORole.Report)]
@@ -82,13 +76,7 @@ public class ManagementUnit :
 
     ICollection<ManagementUnitAndBusinessUnitLink> IMaster<ManagementUnitAndBusinessUnitLink>.Details => (ICollection<ManagementUnitAndBusinessUnitLink>)this.BusinessUnits;
 
-    public static bool operator ==(ManagementUnit left, IUnit<ManagementUnit> right)
-    {
-        return Equals(left, right);
-    }
+    public static bool operator ==(ManagementUnit left, IUnit<ManagementUnit> right) => Equals(left, right);
 
-    public static bool operator !=(ManagementUnit left, IUnit<ManagementUnit> right)
-    {
-        return !Equals(left, right);
-    }
+    public static bool operator !=(ManagementUnit left, IUnit<ManagementUnit> right) => !Equals(left, right);
 }

@@ -9,6 +9,4 @@ namespace SampleSystem.Subscriptions.Metadata;
 public abstract class SecurityItemSourceLambdaBase<TDomainObject, TResult> :
         SecurityItemSourceLambdaMetadata<ISampleSystemBLLContext, TDomainObject, TResult>
         where TDomainObject : class
-        where TResult : ISecurityContext
-{
-}
+        where TResult : ISecurityContext;

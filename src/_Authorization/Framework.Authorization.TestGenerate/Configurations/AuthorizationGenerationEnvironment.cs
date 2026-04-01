@@ -63,10 +63,7 @@ public partial class AuthorizationGenerationEnvironment : GenerationEnvironmentB
     public DatabaseName DatabaseName { get; }
 
 
-    public MappingSettings GetMappingSettings(DatabaseName dbName, AuditDatabaseName dbAuditName)
-    {
-        return new MappingSettings<PersistentDomainObjectBase>(dbName, dbAuditName);
-    }
+    public MappingSettings GetMappingSettings(DatabaseName dbName, AuditDatabaseName dbAuditName) => new MappingSettings<PersistentDomainObjectBase>(dbName, dbAuditName);
 
     public override IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } =
 

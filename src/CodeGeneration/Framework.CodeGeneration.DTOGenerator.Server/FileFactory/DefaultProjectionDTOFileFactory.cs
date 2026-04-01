@@ -48,15 +48,13 @@ public class DefaultProjectionDTOFileFactory<TConfiguration> : DTOFileFactory<TC
 
     protected override IPropertyAssigner MapDomainObjectToMappingObjectPropertyAssigner => this.Configuration.PropertyAssignerConfigurator.GetDomainObjectToSecurityPropertyAssigner(new DomainObjectToDTOPropertyAssigner<TConfiguration>(this));
 
-    protected sealed override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration(this.Name)
-               {
-                       IsClass = true,
-                       IsPartial = true,
-                       TypeAttributes = TypeAttributes.Public
-               };
-    }
+    protected sealed override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new(this.Name)
+        {
+            IsClass = true,
+            IsPartial = true,
+            TypeAttributes = TypeAttributes.Public
+        };
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {

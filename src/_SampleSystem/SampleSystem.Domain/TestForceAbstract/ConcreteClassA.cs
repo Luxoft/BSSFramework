@@ -11,8 +11,8 @@ public class ConcreteClassA : ClassA
 
     public virtual int Age
     {
-        get { return this.age; }
-        set { this.age = value; }
+        get => this.age;
+        set => this.age = value;
     }
 
 }

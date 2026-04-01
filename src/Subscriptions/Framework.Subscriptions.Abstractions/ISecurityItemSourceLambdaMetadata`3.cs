@@ -10,6 +10,4 @@ namespace Framework.Subscriptions;
 /// <typeparam name="TResult">Тип возвращаемого выражением значения.</typeparam>
 /// <seealso cref="ISecurityItemSourceLambdaMetadata" />
 public interface ISecurityItemSourceLambdaMetadata<in TContext, in TDomainObject, out TResult> : ISecurityItemSourceLambdaMetadata
-        where TResult : ISecurityContext
-{
-}
+        where TResult : ISecurityContext;

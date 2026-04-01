@@ -7,6 +7,4 @@
 /// <see cref="NotPersistentFieldAttribute"/>
 /// </summary>
 [AttributeUsage(AttributeTargets.Class)]
-public class IgnoreHbmMappingAttribute : Attribute
-{
-}
+public class IgnoreHbmMappingAttribute : Attribute;

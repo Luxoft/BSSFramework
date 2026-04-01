@@ -18,9 +18,7 @@ public class ConfiguratorApplicationVariableModule : IConfiguratorModule
         services.AddScoped<IUpdateSystemConstantHandler, UpdateSystemConstantHandler>();
     }
 
-    public void MapApi(IEndpointRouteBuilder endpointsBuilder, string route)
-    {
+    public void MapApi(IEndpointRouteBuilder endpointsBuilder, string route) =>
         endpointsBuilder.Get<IGetSystemConstantsHandler>($"{route}/api/constants")
                         .Post<IUpdateSystemConstantHandler>(route + "/api/constant/{name}");
-    }
 }

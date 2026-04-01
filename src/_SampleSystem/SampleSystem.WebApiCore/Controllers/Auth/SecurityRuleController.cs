@@ -9,10 +9,8 @@ namespace Authorization.WebApi.Controllers;
 public class SecurityRuleController(IAvailableClientSecurityRuleSource availableClientSecurityRuleSource) : ControllerBase
 {
     [HttpGet]
-    public async Task<List<string>> GetSecurityRules(CancellationToken cancellationToken)
-    {
-        return await availableClientSecurityRuleSource.GetAvailableSecurityRules()
-                                                      .Select(sr => sr.Name)
-                                                      .ToListAsync(cancellationToken);
-    }
+    public async Task<List<string>> GetSecurityRules(CancellationToken cancellationToken) =>
+        await availableClientSecurityRuleSource.GetAvailableSecurityRules()
+                                               .Select(sr => sr.Name)
+                                               .ToListAsync(cancellationToken);
 }

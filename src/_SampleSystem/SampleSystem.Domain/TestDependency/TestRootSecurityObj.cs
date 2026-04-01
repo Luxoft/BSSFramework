@@ -18,20 +18,20 @@ public class TestRootSecurityObj : BaseDirectory, IMaster<TestSecurityObjItem>
 
     public virtual BusinessUnit BusinessUnit
     {
-        get { return this.businessUnit; }
-        set { this.businessUnit = value; }
+        get => this.businessUnit;
+        set => this.businessUnit = value;
     }
 
     public virtual ManagementUnitFluentMapping ManagementUnitFluentMapping
     {
-        get { return this.managementUnitFluentMapping; }
-        set { this.managementUnitFluentMapping = value; }
+        get => this.managementUnitFluentMapping;
+        set => this.managementUnitFluentMapping = value;
     }
 
     public virtual Location Location
     {
-        get { return this.location; }
-        set { this.location = value; }
+        get => this.location;
+        set => this.location = value;
     }
 
     ICollection<TestSecurityObjItem> IMaster<TestSecurityObjItem>.Details => (ICollection<TestSecurityObjItem>)this.Items;

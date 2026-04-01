@@ -9,15 +9,9 @@ public interface IDynamicValidator<in TInput, out TElementValidator>
     TElementValidator? GetValidator(TInput input, IServiceProvider serviceProvider);
 }
 
-public interface IDynamicPropertyValidatorBase : IDynamicValidator<PropertyInfo, IPropertyValidator>
-{
+public interface IDynamicPropertyValidatorBase : IDynamicValidator<PropertyInfo, IPropertyValidator>;
 
-}
-
-public interface IDynamicClassValidatorBase : IDynamicValidator<Type, IClassValidator>
-{
-
-}
+public interface IDynamicClassValidatorBase : IDynamicValidator<Type, IClassValidator>;
 
 public static class DynamicValidatorExtensions
 {

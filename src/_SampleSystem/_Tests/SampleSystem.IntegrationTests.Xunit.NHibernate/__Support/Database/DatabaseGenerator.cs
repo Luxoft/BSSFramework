@@ -20,15 +20,13 @@ public class DatabaseGenerator(
 {
     public override IEnumerable<string> TestServers => new List<string> { "." };
 
-    public override async Task GenerateDatabasesAsync()
-    {
+    public override async Task GenerateDatabasesAsync() =>
         new DbGeneratorTest().GenerateAllDB(
             this.DatabaseContext.Main.DataSource,
             mainDatabaseName: this.DatabaseContext.Main.DatabaseName,
             credential: DbUserCredential.Create(
                 this.DatabaseContext.Main.UserId,
                 this.DatabaseContext.Main.Password));
-    }
 
     public override async Task CheckTestDatabaseAsync()
     {

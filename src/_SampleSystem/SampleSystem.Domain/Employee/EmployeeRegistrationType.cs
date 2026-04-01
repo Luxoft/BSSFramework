@@ -11,7 +11,7 @@ public class EmployeeRegistrationType : BaseDirectory, IExternalSynchronizable
 
     public virtual long ExternalId
     {
-        get { return this.externalId; }
-        set { this.externalId = value; }
+        get => this.externalId;
+        set => this.externalId = value;
     }
 }

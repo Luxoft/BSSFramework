@@ -10,10 +10,7 @@ public class DomainTypeRootExtendedMetadataBuilder : IDomainTypeRootExtendedMeta
 
     private readonly Lazy<Dictionary<PropertyInfo, IPropertyExtendedMetadata>> properties;
 
-    public DomainTypeRootExtendedMetadataBuilder()
-    {
-        this.properties = LazyHelper.Create(() => this.types.SelectMany(t => t.Value.Properties).ToDictionary(prop => prop.Property));
-    }
+    public DomainTypeRootExtendedMetadataBuilder() => this.properties = LazyHelper.Create(() => this.types.SelectMany(t => t.Value.Properties).ToDictionary(prop => prop.Property));
 
     public virtual ICustomAttributeProvider GetType(Type type)
     {

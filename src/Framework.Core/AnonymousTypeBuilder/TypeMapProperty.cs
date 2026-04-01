@@ -11,7 +11,7 @@ public class TypeMapProperty : ITypeMapMember
         this.Property = property;
     }
 
-    public PropertyInfo Property { get; private set; }
+    public PropertyInfo Property { get; }
 
     public virtual string Name => this.Property.Name;
 

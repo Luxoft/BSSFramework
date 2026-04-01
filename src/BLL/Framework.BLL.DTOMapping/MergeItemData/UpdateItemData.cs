@@ -8,9 +8,7 @@ namespace Framework.BLL.DTOMapping.MergeItemData;
 /// <typeparam name="TValue">Элемент</typeparam>
 /// <typeparam name="TIdentity">Идент элемента</typeparam>
 [DataContract(Name = "UpdateItemData{0}Of{1}", Namespace = "Framework.Persistent")]
-public abstract class UpdateItemData<TValue, TIdentity>
-{
-}
+public abstract class UpdateItemData<TValue, TIdentity>;
 
 public static class UpdateItemData
 {

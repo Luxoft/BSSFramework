@@ -49,35 +49,15 @@ internal class GeneratedProperty : BasePropertyInfoImpl
     public override string Name => this.projectionProperty.Name;
 
 
-    public override object[] GetCustomAttributes(Type attributeType, bool inherit)
-    {
-        return (object[])this.projectionProperty.Attributes.Where(attributeType.IsInstanceOfType).ToArray(attributeType);
-    }
+    public override object[] GetCustomAttributes(Type attributeType, bool inherit) => (object[])this.projectionProperty.Attributes.Where(attributeType.IsInstanceOfType).ToArray(attributeType);
 
-    public override object[] GetCustomAttributes(bool inherit)
-    {
-        return this.projectionProperty.Attributes.ToArray();
-    }
+    public override object[] GetCustomAttributes(bool inherit) => this.projectionProperty.Attributes.ToArray();
 
+    public override ParameterInfo[] GetIndexParameters() => new ParameterInfo[0]; // this.sourceProperty.GetIndexParameters();
 
+    public override MethodInfo GetGetMethod(bool nonPublic) => this.getMethod;
 
-    public override ParameterInfo[] GetIndexParameters()
-    {
-        return new ParameterInfo[0];// this.sourceProperty.GetIndexParameters();
-    }
+    public override MethodInfo GetSetMethod(bool nonPublic) => null; //new PropertyMethodInfoImpl();
 
-    public override MethodInfo GetGetMethod(bool nonPublic)
-    {
-        return this.getMethod;
-    }
-
-    public override MethodInfo GetSetMethod(bool nonPublic)
-    {
-        return null;//new PropertyMethodInfoImpl();
-    }
-
-    public override string ToString()
-    {
-        return $"GeneratedProperty: {this.Name}";
-    }
+    public override string ToString() => $"GeneratedProperty: {this.Name}";
 }

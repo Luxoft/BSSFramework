@@ -56,10 +56,7 @@ public abstract class TypeResolverDomainObjectProcessor<TBLLContext, TPersistent
     where TBLLContext : class, ITypeResolverContainer<string>
     where TPersistentDomainObjectBase : class
 {
-    protected override ITypeResolver<string> TypeResolver
-    {
-        get { return this.Context.TypeResolver; }
-    }
+    protected override ITypeResolver<string> TypeResolver => this.Context.TypeResolver;
 }
 
 public abstract class TypeResolverDomainObjectProcessor<TBLLContext, TPersistentDomainObjectBase>(TBLLContext context)
@@ -67,8 +64,5 @@ public abstract class TypeResolverDomainObjectProcessor<TBLLContext, TPersistent
     where TBLLContext : class, ITypeResolverContainer<string>
     where TPersistentDomainObjectBase : class
 {
-    protected override ITypeResolver<string> TypeResolver
-    {
-        get { return this.Context.TypeResolver; }
-    }
+    protected override ITypeResolver<string> TypeResolver => this.Context.TypeResolver;
 }

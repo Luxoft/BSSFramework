@@ -19,7 +19,7 @@ public class Sequence : BaseDirectory
     [Int64ValueValidator(Min = 0)]
     public virtual long Number
     {
-        get { return this.number; }
-        set { this.number = value; }
+        get => this.number;
+        set => this.number = value;
     }
 }

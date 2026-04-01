@@ -24,21 +24,19 @@ internal abstract class MessageTemplateFactoryBase
         IEnumerable<string> cc,
         IEnumerable<string> replyTo,
         IEnumerable<Attachment> attachments)
-        where TModelObjectType : class
-    {
-        return new MessageTemplateNotification
-               {
-                   MessageTemplateCode = subscription.RazorMessageTemplateType.Name,
-                   ContextObject = versions,
-                   ContextObjectType = versions.DomainObjectType,
-                   Receivers = [.. to],
-                   CopyReceivers = [.. cc],
-                   ReplyTo = [.. replyTo],
-                   Attachments = [..attachments],
-                   Subscription = subscription,
-                   SendWithEmptyListOfRecipients = subscription.AllowEmptyListOfRecipients,
-                   SourceContextObjectType = typeof(TSourceDomainObjectType),
-                   RazorMessageTemplateType = subscription.RazorMessageTemplateType
-               };
-    }
+        where TModelObjectType : class =>
+        new()
+        {
+            MessageTemplateCode = subscription.RazorMessageTemplateType.Name,
+            ContextObject = versions,
+            ContextObjectType = versions.DomainObjectType,
+            Receivers = [.. to],
+            CopyReceivers = [.. cc],
+            ReplyTo = [.. replyTo],
+            Attachments = [..attachments],
+            Subscription = subscription,
+            SendWithEmptyListOfRecipients = subscription.AllowEmptyListOfRecipients,
+            SourceContextObjectType = typeof(TSourceDomainObjectType),
+            RazorMessageTemplateType = subscription.RazorMessageTemplateType
+        };
 }

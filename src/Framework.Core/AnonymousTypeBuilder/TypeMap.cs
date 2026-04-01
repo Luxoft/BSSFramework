@@ -32,9 +32,9 @@ public class TypeMap<TMember> : ITypeMap<TMember>, IEquatable<TypeMap<TMember>>,
 
 
 
-    public string Name { get; private set; }
+    public string Name { get; }
 
-    public ReadOnlyCollection<TMember> Members { get; private set; }
+    public ReadOnlyCollection<TMember> Members { get; }
 
 
     public override int GetHashCode() => this.Name.GetHashCode() ^ this.Members.Count;

@@ -26,8 +26,6 @@ internal sealed class ExcessTemplatesFilterCc : ExcessTemplatesFilterBase
     }
 
     private static MessageTemplateNotification FindCommonTemplate(
-            IEnumerable<MessageTemplateNotification> templates)
-    {
-        return templates.OrderByDescending(t => t.Subscription.IncludeAttachments).First();
-    }
+            IEnumerable<MessageTemplateNotification> templates) =>
+        templates.OrderByDescending(t => t.Subscription.IncludeAttachments).First();
 }

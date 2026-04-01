@@ -33,28 +33,22 @@ public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>
     {
     }
 
-    public virtual Employee Employee
-    {
-        get { return this.employee; }
-    }
+    public virtual Employee Employee => this.employee;
 
     [Required]
     public virtual string ContentType
     {
-        get { return this.contentType.TrimNull(); }
-        protected internal set { this.contentType = value.TrimNull(); }
+        get => this.contentType.TrimNull();
+        protected internal set => this.contentType = value.TrimNull();
     }
 
-    public virtual bool IsDefault
-    {
-        get { return this.Type == EmployeePhotoType.Default; }
-    }
+    public virtual bool IsDefault => this.Type == EmployeePhotoType.Default;
 
     [UniqueElement]
     public virtual EmployeePhotoType Type
     {
-        get { return this.type; }
-        protected internal set { this.type = value; }
+        get => this.type;
+        protected internal set => this.type = value;
     }
 
     [Mapping(ColumnName = "Photo")]
@@ -62,12 +56,9 @@ public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>
     [Required]
     public virtual byte[] Data
     {
-        get { return this.data; }
-        set { this.data = value; }
+        get => this.data;
+        set => this.data = value;
     }
 
-    Employee IDetail<Employee>.Master
-    {
-        get { return this.Employee; }
-    }
+    Employee IDetail<Employee>.Master => this.Employee;
 }

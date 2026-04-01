@@ -4,8 +4,5 @@ namespace Framework.Database.NHibernate;
 
 public static class NHibernateSetupObjectExtensions
 {
-    public static INHibernateSetupObject AddLegacyDatabaseSettings(this INHibernateSetupObject setupObject)
-    {
-        return setupObject.AddExtension(new NHibernateSetupObjectExtension(services => services.AddLegacyDatabaseSettings()));
-    }
+    public static INHibernateSetupObject AddLegacyDatabaseSettings(this INHibernateSetupObject setupObject) => setupObject.AddExtension(new NHibernateSetupObjectExtension(services => services.AddLegacyDatabaseSettings()));
 }

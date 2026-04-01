@@ -2,7 +2,4 @@
 
 namespace Framework.Core.ReflectionImpl;
 
-public class BaseModuleImpl : Module
-{
-
-}
+public class BaseModuleImpl : Module;

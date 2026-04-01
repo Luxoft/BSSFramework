@@ -14,10 +14,8 @@ internal sealed class ExcessTemplatesFilterTo : ExcessTemplatesFilterBase
     }
 
     private static IEnumerable<MessageTemplateNotification> ProcessTemplatesGroup(
-            IGrouping<MessageTemplateNotification, MessageTemplateNotification> group)
-    {
-        return CreateTemplates(group.ToList());
-    }
+            IGrouping<MessageTemplateNotification, MessageTemplateNotification> group) =>
+        CreateTemplates(group.ToList());
 
     private static IEnumerable<MessageTemplateNotification> CreateTemplates(
             IReadOnlyCollection<MessageTemplateNotification> templates)
@@ -53,11 +51,9 @@ internal sealed class ExcessTemplatesFilterTo : ExcessTemplatesFilterBase
     }
 
     private static MessageTemplateNotification FindCommonTemplate(
-            IEnumerable<MessageTemplateNotification> templates)
-    {
-        return templates
-               .OrderByDescending(t => t.Subscription.SendIndividualLetters)
-               .ThenByDescending(t => t.Subscription.IncludeAttachments)
-               .First();
-    }
+            IEnumerable<MessageTemplateNotification> templates) =>
+        templates
+            .OrderByDescending(t => t.Subscription.SendIndividualLetters)
+            .ThenByDescending(t => t.Subscription.IncludeAttachments)
+            .First();
 }

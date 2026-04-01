@@ -29,15 +29,13 @@ public class ServerDTOMappingServiceInterfaceFileFactory<TConfiguration> : FileF
     public override BaseFileType FileType { get; } = ServerFileType.ServerDTOMappingServiceInterface;
 
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration(this.Name)
-               {
-                       Attributes = MemberAttributes.Public,
-                       IsPartial = true,
-                       IsInterface = true,
-               };
-    }
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new(this.Name)
+        {
+            Attributes = MemberAttributes.Public,
+            IsPartial = true,
+            IsInterface = true,
+        };
 
     public override CodeTypeReference BaseReference => typeof(IDTOMappingService<,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(), this.Configuration.Environment.GetIdentityType().ToTypeReference());
 

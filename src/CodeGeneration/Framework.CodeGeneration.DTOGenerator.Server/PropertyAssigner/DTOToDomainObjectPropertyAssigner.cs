@@ -186,13 +186,11 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
         return sourcePropertyRef.ToAssignStatement(targetPropertyRef);
     }
 
-    protected virtual CodeMethodReferenceExpression GetCollectionMappingMethodReferenceExpression(CodeTypeReference transferElementTypeRef, Type elementType)
-    {
-        return this.MappingServiceRefExpr.ToMethodReferenceExpression(
-                                                                      "GetCollectionMappingService",
-                                                                      transferElementTypeRef,
-                                                                      elementType.ToTypeReference());
-    }
+    protected virtual CodeMethodReferenceExpression GetCollectionMappingMethodReferenceExpression(CodeTypeReference transferElementTypeRef, Type elementType) =>
+        this.MappingServiceRefExpr.ToMethodReferenceExpression(
+            "GetCollectionMappingService",
+            transferElementTypeRef,
+            elementType.ToTypeReference());
 
     private CodeStatement GetFixReferenceMappingStatement(PropertyInfo property, CodeExpression sourcePropertyRef,
                                                           CodeExpression targetPropertyRef)

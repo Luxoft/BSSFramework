@@ -72,25 +72,13 @@ public class InlineTypeFieldMetadata : FieldMetadata
                                                                        .Concat(z.GetAttributes(z.DeclaringType)), this.DomainTypeMetadata, z.Name.ToLower() == "id"));
     }
 
-    public bool IsComposite
-    {
-        get { return this._children.Any(); }
-    }
+    public bool IsComposite => this._children.Any();
 
-    public InlineTypeFieldMetadata Parent
-    {
-        get { return this._parent; }
-    }
+    public InlineTypeFieldMetadata Parent => this._parent;
 
-    public List<PrimitiveTypeFieldMetadata> PrimitiveMetadataCollection
-    {
-        get { return this._primitiveMetadataCollection; }
-    }
+    public List<PrimitiveTypeFieldMetadata> PrimitiveMetadataCollection => this._primitiveMetadataCollection;
 
-    public List<InlineTypeFieldMetadata> Children
-    {
-        get { return this._children; }
-    }
+    public List<InlineTypeFieldMetadata> Children => this._children;
 
     public List<ReferenceTypeFieldMetadata> ReferenceTypes => this.referenceTypes;
 }

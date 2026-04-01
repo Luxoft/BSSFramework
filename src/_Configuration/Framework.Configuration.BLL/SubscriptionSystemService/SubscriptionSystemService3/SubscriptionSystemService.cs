@@ -106,10 +106,7 @@ public class SubscriptionSystemService<TBLLContext> : ISubscriptionSystemService
     /// Создаёт экземпляр службы уведомлений.
     /// </summary>
     /// <returns>Экземпляр <see cref="SubscriptionNotificationService"/>.</returns>
-    protected SubscriptionNotificationService<TBLLContext> CreateNotificationService()
-    {
-        return this.servicesFactory.CreateNotificationService();
-    }
+    protected SubscriptionNotificationService<TBLLContext> CreateNotificationService() => this.servicesFactory.CreateNotificationService();
 
     private SubscriptionRecipientInfo GetRecipientsTyped<TDomainObject>(
             TDomainObject? prev,
@@ -136,8 +133,5 @@ public class SubscriptionSystemService<TBLLContext> : ISubscriptionSystemService
         return result;
     }
 
-    private RecipientService<TBLLContext> CreateRecipientService()
-    {
-        return this.servicesFactory.CreateRecipientService();
-    }
+    private RecipientService<TBLLContext> CreateRecipientService() => this.servicesFactory.CreateRecipientService();
 }

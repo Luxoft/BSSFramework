@@ -15,13 +15,7 @@ internal static class DbGeneratorExtensions
         indexNames.Foreach(z => z.Drop());
     }
 
-    public static IEnumerable<FieldMetadata> GetPersistentFields(this DomainTypeMetadata source)
-    {
-        return source.Fields.Where(z => !(z.Attributes.OfType<MappingAttribute>().Any(q => q.IsOneToOne)));
-    }
+    public static IEnumerable<FieldMetadata> GetPersistentFields(this DomainTypeMetadata source) => source.Fields.Where(z => !(z.Attributes.OfType<MappingAttribute>().Any(q => q.IsOneToOne)));
 
-    public static IEnumerable<ReferenceTypeFieldMetadata> GetPersistentReferenceFields(this DomainTypeMetadata source)
-    {
-        return source.ReferenceFields.Where(z => !(z.Attributes.OfType<MappingAttribute>().Any(q => q.IsOneToOne)));
-    }
+    public static IEnumerable<ReferenceTypeFieldMetadata> GetPersistentReferenceFields(this DomainTypeMetadata source) => source.ReferenceFields.Where(z => !(z.Attributes.OfType<MappingAttribute>().Any(q => q.IsOneToOne)));
 }

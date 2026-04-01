@@ -3,10 +3,4 @@
 namespace Framework.BLL.Domain.Attributes.Round;
 
 [AttributeUsage(AttributeTargets.Property)]
-public class CoeffAttribute : RoundDecimalAttribute
-{
-    public CoeffAttribute() : base(NumberExtensions.CoeffRoundDecimals)
-    {
-
-    }
-}
+public class CoeffAttribute() : RoundDecimalAttribute(NumberExtensions.CoeffRoundDecimals);

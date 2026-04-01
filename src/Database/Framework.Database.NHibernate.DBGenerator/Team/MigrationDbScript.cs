@@ -8,42 +8,16 @@ public struct MigrationDbScript(
     string fileVersion,
     Lazy<string> scriptLazy)
 {
-    private readonly MigrationDbScriptHeader header = new(name, scheme, fileVersion);
-
     public MigrationDbScript(string name, bool runAlways, ApplyMigrationDbScriptMode applyCustomScriptMode, string scheme, string version, string script)
             : this(name, runAlways, applyCustomScriptMode, scheme, version, new Lazy<string>(() => script))
     {
     }
 
-    public ApplyMigrationDbScriptMode ApplyCustomScriptMode
-    {
-        get
-        {
-            return applyCustomScriptMode;
-        }
-    }
+    public ApplyMigrationDbScriptMode ApplyCustomScriptMode => applyCustomScriptMode;
 
-    public MigrationDbScriptHeader Header
-    {
-        get
-        {
-            return this.header;
-        }
-    }
+    public MigrationDbScriptHeader Header { get; } = new(name, scheme, fileVersion);
 
-    public bool RunAlways
-    {
-        get
-        {
-            return runAlways;
-        }
-    }
+    public bool RunAlways => runAlways;
 
-    public string Script
-    {
-        get
-        {
-            return scriptLazy.Value;
-        }
-    }
+    public string Script => scriptLazy.Value;
 }

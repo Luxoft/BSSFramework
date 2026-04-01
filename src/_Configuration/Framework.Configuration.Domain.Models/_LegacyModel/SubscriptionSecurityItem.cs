@@ -35,8 +35,8 @@ public class SubscriptionSecurityItem : IIdentityObject<Guid>
     [Required]
     public virtual SubscriptionLambda Source
     {
-        get { return this.source; }
-        set { this.source = value; }
+        get => this.source;
+        set => this.source = value;
     }
 
     /// <summary>
@@ -44,8 +44,8 @@ public class SubscriptionSecurityItem : IIdentityObject<Guid>
     /// </summary>
     public virtual NotificationExpandType ExpandType
     {
-        get { return this.expandType; }
-        set { this.expandType = value; }
+        get => this.expandType;
+        set => this.expandType = value;
     }
 
     Guid IIdentityObject<Guid>.Id => Guid.Empty;

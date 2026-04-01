@@ -29,16 +29,12 @@ public abstract class EventsSubscriptionManager<TPersistentDomainObjectBase> : I
     public abstract void Subscribe();
 
     protected void SubscribeForSaveOperation<TDomainObject>()
-        where TDomainObject : class, TPersistentDomainObjectBase
-    {
+        where TDomainObject : class, TPersistentDomainObjectBase =>
         this.Subscribe<TDomainObject>(EventOperation.Save);
-    }
 
     protected void SubscribeForSaveAndRemoveOperation<TDomainObject>()
-        where TDomainObject : class, TPersistentDomainObjectBase
-    {
+        where TDomainObject : class, TPersistentDomainObjectBase =>
         this.Subscribe<TDomainObject>(EventOperation.Save, EventOperation.Remove);
-    }
 
     protected void Subscribe<TDomainObject>(EventOperation mainEventOperation, params EventOperation[] otherEventOperations)
         where TDomainObject : class, TPersistentDomainObjectBase

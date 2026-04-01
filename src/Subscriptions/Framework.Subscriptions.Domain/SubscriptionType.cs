@@ -56,10 +56,7 @@ public static class SubscriptionTypeHelper
                                                                                                { Tuple.Create<bool?, bool?>(false, true ),                                                       SubscriptionType.Create },
                                                                                        };
 
-    public static SubscriptionType GetSubscriptionType(bool? requiredModePrev, bool? requiredModeNext)
-    {
-        return Matrix.GetValueOrDefault(Tuple.Create(requiredModePrev, requiredModeNext));
-    }
+    public static SubscriptionType GetSubscriptionType(bool? requiredModePrev, bool? requiredModeNext) => Matrix.GetValueOrDefault(Tuple.Create(requiredModePrev, requiredModeNext));
 
     public static string ToFormattedProcessString(this SubscriptionType type)
     {

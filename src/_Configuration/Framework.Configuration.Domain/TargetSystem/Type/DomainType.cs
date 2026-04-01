@@ -38,10 +38,7 @@ public class DomainType : BaseDirectory, ITargetSystemElement<TargetSystem>, IDe
     /// <summary>
     /// Целевая система
     /// </summary>
-    public virtual TargetSystem TargetSystem
-    {
-        get { return this.targetSystem; }
-    }
+    public virtual TargetSystem TargetSystem => this.targetSystem;
 
     /// <summary>
     /// Операции доменного типа
@@ -56,8 +53,8 @@ public class DomainType : BaseDirectory, ITargetSystemElement<TargetSystem>, IDe
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public override string Name
     {
-        get { return base.Name; }
-        set { base.Name = value; }
+        get => base.Name;
+        set => base.Name = value;
     }
 
     /// <summary>
@@ -67,34 +64,23 @@ public class DomainType : BaseDirectory, ITargetSystemElement<TargetSystem>, IDe
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual string NameSpace
     {
-        get { return this.nameSpace.TrimNull(); }
-        set { this.nameSpace = value.TrimNull(); }
+        get => this.nameSpace.TrimNull();
+        set => this.nameSpace = value.TrimNull();
     }
 
     /// <summary>
     /// Полное имя типа
     /// </summary>
-    public virtual string FullTypeName
-    {
-        get
-        {
-            return string.IsNullOrEmpty(this.NameSpace)
-                           ? this.Name
-                           : $"{this.NameSpace}.{this.Name}";
-        }
-    }
+    public virtual string FullTypeName =>
+        string.IsNullOrEmpty(this.NameSpace)
+            ? this.Name
+            : $"{this.NameSpace}.{this.Name}";
 
     #region IDetail<TargetSystem> Members
 
-    TargetSystem IDetail<TargetSystem>.Master
-    {
-        get { return this.TargetSystem; }
-    }
+    TargetSystem IDetail<TargetSystem>.Master => this.TargetSystem;
 
     #endregion
 
-    ICollection<DomainTypeEventOperation> IMaster<DomainTypeEventOperation>.Details
-    {
-        get { return (ICollection<DomainTypeEventOperation>)this.EventOperations; }
-    }
+    ICollection<DomainTypeEventOperation> IMaster<DomainTypeEventOperation>.Details => (ICollection<DomainTypeEventOperation>)this.EventOperations;
 }

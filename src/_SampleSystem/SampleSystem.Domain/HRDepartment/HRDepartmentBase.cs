@@ -23,20 +23,20 @@ public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable,
 
     public virtual Location Location
     {
-        get { return this.location; }
-        set { this.location = value; }
+        get => this.location;
+        set => this.location = value;
     }
 
     public virtual bool IsProduction
     {
-        get { return this.isProduction; }
-        set { this.isProduction = value; }
+        get => this.isProduction;
+        set => this.isProduction = value;
     }
 
     public virtual bool IsLegal
     {
-        get { return this.isLegal; }
-        set { this.isLegal = value; }
+        get => this.isLegal;
+        set => this.isLegal = value;
     }
 
     [RequiredValidator(OperationContext = (int)(SampleSystemOperationContext.Request | SampleSystemOperationContext.Register))]
@@ -45,15 +45,15 @@ public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable,
     [UniqueElement("Uni_NameNative")]
     public virtual CompanyLegalEntity CompanyLegalEntity
     {
-        get { return this.companyLegalEntity; }
-        set { this.companyLegalEntity = value; }
+        get => this.companyLegalEntity;
+        set => this.companyLegalEntity = value;
     }
 
     [UniqueElement("Uni_Name")]
     public override string Name
     {
-        get { return base.Name; }
-        set { base.Name = value; }
+        get => base.Name;
+        set => base.Name = value;
     }
 
     [RequiredValidator(OperationContext = (int)(SampleSystemOperationContext.Request | SampleSystemOperationContext.Register))]
@@ -62,8 +62,8 @@ public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable,
     [UniqueElement("Uni_Code")]
     public virtual string Code
     {
-        get { return this.code.TrimNull(); }
-        set { this.code = value.TrimNull(); }
+        get => this.code.TrimNull();
+        set => this.code = value.TrimNull();
     }
 
     [RequiredValidator(OperationContext = (int)(SampleSystemOperationContext.Request | SampleSystemOperationContext.Register))]
@@ -72,8 +72,8 @@ public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable,
     [UniqueElement("Uni_CodeNative")]
     public virtual string CodeNative
     {
-        get { return this.codeNative.TrimNull(); }
-        set { this.codeNative = value.TrimNull(); }
+        get => this.codeNative.TrimNull();
+        set => this.codeNative = value.TrimNull();
     }
 
     [RequiredValidator(OperationContext = (int)(SampleSystemOperationContext.Request | SampleSystemOperationContext.Register))]
@@ -82,21 +82,21 @@ public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable,
     [UniqueElement("Uni_NameNative")]
     public virtual string NameNative
     {
-        get { return this.nameNative.TrimNull(); }
-        set { this.nameNative = value.TrimNull(); }
+        get => this.nameNative.TrimNull();
+        set => this.nameNative = value.TrimNull();
     }
 
     [Required]
     [CustomName("Head of Department")]
     public virtual Employee Head
     {
-        get { return this.head; }
-        set { this.head = value; }
+        get => this.head;
+        set => this.head = value;
     }
 
     public virtual long ExternalId
     {
-        get { return this.externalId; }
-        set { this.externalId = value; }
+        get => this.externalId;
+        set => this.externalId = value;
     }
 }

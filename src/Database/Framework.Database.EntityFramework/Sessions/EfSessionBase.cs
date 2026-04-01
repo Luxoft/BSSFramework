@@ -17,16 +17,10 @@ public abstract class EfSessionBase(DbContext nativeSession, DBSessionMode sessi
     public abstract Task FlushAsync(CancellationToken cancellationToken = default);
 
     /// <inheritdoc />
-    public long GetCurrentRevision()
-    {
-        throw new NotImplementedException("EF");
-    }
+    public long GetCurrentRevision() => throw new NotImplementedException("EF");
 
     /// <inheritdoc />
-    public long GetMaxRevision()
-    {
-        throw new NotImplementedException("EF");
-    }
+    public long GetMaxRevision() => throw new NotImplementedException("EF");
 
     public abstract void AsFault();
 
@@ -38,8 +32,5 @@ public abstract class EfSessionBase(DbContext nativeSession, DBSessionMode sessi
 
     public abstract Task CloseAsync(CancellationToken cancellationToken = default);
 
-    public async ValueTask DisposeAsync()
-    {
-        await this.CloseAsync();
-    }
+    public async ValueTask DisposeAsync() => await this.CloseAsync();
 }

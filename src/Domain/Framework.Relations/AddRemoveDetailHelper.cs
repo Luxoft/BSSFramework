@@ -58,10 +58,8 @@ public static class AddRemoveDetailHelper
 
     public static void RemoveDetails<TMaster, TChild>(this TMaster master, IEnumerable<TChild> childs)
             where TMaster : class, IMaster<TChild>
-            where TChild : class, IDetail<TMaster>
-    {
+            where TChild : class, IDetail<TMaster> =>
         childs.Foreach(master.RemoveDetail);
-    }
 
     /// <summary>
     /// Удаление детали без валидации мастера

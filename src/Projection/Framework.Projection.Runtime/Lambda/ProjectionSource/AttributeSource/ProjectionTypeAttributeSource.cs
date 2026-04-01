@@ -22,11 +22,8 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
     /// <param name="environment">Окружение</param>
     /// <param name="projection">Тип на основе которого строится проекция</param>
     public ProjectionTypeAttributeSource(ProjectionLambdaEnvironment environment, IProjection projection)
-            : base(environment, projection)
-    {
+            : base(environment, projection) =>
         this.isPersistent = environment.PersistentDomainObjectBaseType.IsAssignableFrom(this.SourceType);
-    }
-
 
     /// <summary>
     /// Тип на основе которого строится проекция
@@ -57,15 +54,13 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
                          .Concat(this.GetDomainObjectAccessAttributes());
     }
 
-    private IEnumerable<Attribute> GetSourceTypeAttributes()
-    {
-        return this.SourceType.GetCustomAttributes().Where(attr =>
-                                                                   !(attr is TableAttribute)
-                                                                   && !(attr is BLLRoleAttribute)
-                                                                   && !(attr is ClassValidatorAttribute)
-                                                                   && !(attr is DomainObjectAccessAttribute)
-                                                                   && !(attr is DependencySecurityAttribute));
-    }
+    private IEnumerable<Attribute> GetSourceTypeAttributes() =>
+        this.SourceType.GetCustomAttributes().Where(attr =>
+                                                        !(attr is TableAttribute)
+                                                        && !(attr is BLLRoleAttribute)
+                                                        && !(attr is ClassValidatorAttribute)
+                                                        && !(attr is DomainObjectAccessAttribute)
+                                                        && !(attr is DependencySecurityAttribute));
 
     private IEnumerable<Attribute> GetDomainObjectAccessAttributes()
     {
@@ -114,8 +109,5 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
         return result;
     }
 
-    private ProjectionAttribute CreateProjectionAttribute()
-    {
-        return new ProjectionAttribute(this.SourceType, this.ProjectionValue.Role);
-    }
+    private ProjectionAttribute CreateProjectionAttribute() => new(this.SourceType, this.ProjectionValue.Role);
 }

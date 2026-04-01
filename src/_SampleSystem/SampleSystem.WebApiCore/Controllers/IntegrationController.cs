@@ -12,16 +12,12 @@ namespace SampleSystem.WebApiCore.Controllers;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class IntegrationController : IntegrationSchemaControllerBase
+public class IntegrationController(
+    ISecuritySystem securitySystem,
+    TimeProvider timeProvider,
+    IEventXsdExporter2 eventXsdExporter)
+    : IntegrationSchemaControllerBase(securitySystem, timeProvider, eventXsdExporter)
 {
-    public IntegrationController(
-        ISecuritySystem securitySystem,
-        TimeProvider timeProvider,
-        IEventXsdExporter2 eventXsdExporter)
-        : base(securitySystem, timeProvider, eventXsdExporter)
-    {
-    }
-
     protected override string IntegrationNamespace => "http://sampleSystem.example.com/integrationEvent";
 
     protected override IReadOnlyCollection<Type> GetEventDTOTypes() =>

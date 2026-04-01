@@ -23,13 +23,7 @@ public class DatabaseScriptResultDecorator : IDatabaseScriptResult
         this.resultSelector = resultSelector;
     }
 
-    public IEnumerable<string> this[ApplyMigrationDbScriptMode mode]
-    {
-        get
-        {
-            return this.source[mode].Select(z => this.resultSelector(z));
-        }
-    }
+    public IEnumerable<string> this[ApplyMigrationDbScriptMode mode] => this.source[mode].Select(z => this.resultSelector(z));
 
     public IEnumerable<IEnumerable<string>> GetResults()
     {
@@ -39,13 +33,7 @@ public class DatabaseScriptResultDecorator : IDatabaseScriptResult
         }
     }
 
-    public string ToNewLinesCombined()
-    {
-        return this.resultSelector(this.source.ToNewLinesCombined());
-    }
+    public string ToNewLinesCombined() => this.resultSelector(this.source.ToNewLinesCombined());
 
-    public IDatabaseScriptResult Evaluate()
-    {
-        return this.source.Evaluate();
-    }
+    public IDatabaseScriptResult Evaluate() => this.source.Evaluate();
 }

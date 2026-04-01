@@ -27,12 +27,10 @@ public class UpdateCodeTypeReferenceService<TConfiguration>(TConfiguration confi
         return !isIdOrVersion && !isCollection;
     }
 
-    public override RoleFileType GetReferenceFileType(PropertyInfo property)
-    {
-        return !property.IsDetail() && this.Configuration.IsPersistentObject(property.PropertyType)
-                       ? BaseFileType.IdentityDTO
-                       : BaseFileType.UpdateDTO;
-    }
+    public override RoleFileType GetReferenceFileType(PropertyInfo property) =>
+        !property.IsDetail() && this.Configuration.IsPersistentObject(property.PropertyType)
+            ? BaseFileType.IdentityDTO
+            : BaseFileType.UpdateDTO;
 
     public override RoleFileType GetCollectionFileType(PropertyInfo property)
     {

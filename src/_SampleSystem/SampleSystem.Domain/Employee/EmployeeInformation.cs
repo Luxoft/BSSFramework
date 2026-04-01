@@ -12,7 +12,7 @@ public class EmployeeInformation : Information
     [MaxLength(50)]
     public virtual string PersonalEmail
     {
-        get { return this.personalEmail.TrimNull(); }
-        set { this.personalEmail = value.TrimNull(); }
+        get => this.personalEmail.TrimNull();
+        set => this.personalEmail = value.TrimNull();
     }
 }

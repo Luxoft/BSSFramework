@@ -30,15 +30,9 @@ public class WriteEfSession : EfSessionBase
     public override IDbTransaction Transaction { get; }
 
 
-    public override void AsFault()
-    {
-        this.manualFault = true;
-    }
+    public override void AsFault() => this.manualFault = true;
 
-    public override void AsReadOnly()
-    {
-        throw new InvalidOperationException("Writable session already created");
-    }
+    public override void AsReadOnly() => throw new InvalidOperationException("Writable session already created");
 
     public override void AsWritable()
     {
@@ -74,10 +68,7 @@ public class WriteEfSession : EfSessionBase
         }
     }
 
-    public override async Task FlushAsync(CancellationToken cancellationToken = default)
-    {
-        await this.FlushAsync(false, cancellationToken);
-    }
+    public override async Task FlushAsync(CancellationToken cancellationToken = default) => await this.FlushAsync(false, cancellationToken);
 
     private async Task FlushAsync(bool withCompleteTransaction, CancellationToken cancellationToken)
     {

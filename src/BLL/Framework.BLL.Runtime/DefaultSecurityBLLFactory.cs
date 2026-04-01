@@ -12,17 +12,13 @@ public abstract class DefaultSecurityBLLFactory<TBLLContext, TPersistentDomainOb
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
     public virtual IDefaultDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>()
-        where TDomainObject : class, TPersistentDomainObjectBase
-    {
-        return this.Create<TDomainObject>(SecurityRule.Disabled);
-    }
+        where TDomainObject : class, TPersistentDomainObjectBase =>
+        this.Create<TDomainObject>(SecurityRule.Disabled);
 
     public virtual IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(
         SecurityRule securityRule)
-        where TDomainObject : class, TPersistentDomainObjectBase
-    {
-        return this.Create(this.Context.SecurityService.GetSecurityProvider<TDomainObject>(securityRule));
-    }
+        where TDomainObject : class, TPersistentDomainObjectBase =>
+        this.Create(this.Context.SecurityService.GetSecurityProvider<TDomainObject>(securityRule));
 
     public abstract IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(
         ISecurityProvider<TDomainObject> securityProvider)

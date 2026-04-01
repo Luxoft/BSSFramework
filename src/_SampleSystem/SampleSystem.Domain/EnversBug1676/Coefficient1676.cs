@@ -8,13 +8,13 @@ public class Coefficient1676 : AuditPersistentDomainObjectBase
 
     public virtual Location1676 Location
     {
-        get { return this.location; }
-        set { this.location = value; }
+        get => this.location;
+        set => this.location = value;
     }
 
     public virtual decimal NormCoefficient
     {
-        get { return this.normCoefficient; }
-        set { this.normCoefficient = value; }
+        get => this.normCoefficient;
+        set => this.normCoefficient = value;
     }
 }

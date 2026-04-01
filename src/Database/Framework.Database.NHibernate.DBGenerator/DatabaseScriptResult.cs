@@ -7,10 +7,7 @@ namespace Framework.Database.NHibernate.DBGenerator;
 
 public static class DatabaseScriptResultFactory
 {
-    public static IDatabaseScriptResult Create(Dictionary<ApplyMigrationDbScriptMode, Lazy<IEnumerable<string>>> dictionary)
-    {
-        return new LazyDatabaseScriptResult(dictionary);
-    }
+    public static IDatabaseScriptResult Create(Dictionary<ApplyMigrationDbScriptMode, Lazy<IEnumerable<string>>> dictionary) => new LazyDatabaseScriptResult(dictionary);
 
     struct EvaluatedDatabaseScriptResult : IDatabaseScriptResult
     {
@@ -40,20 +37,11 @@ public static class DatabaseScriptResultFactory
             }
         }
 
-        public IEnumerable<IEnumerable<string>> GetResults()
-        {
-            return this.dictionary.OrderBy(z => (int)z.Key).Select(z => z.Value);
-        }
+        public IEnumerable<IEnumerable<string>> GetResults() => this.dictionary.OrderBy(z => (int)z.Key).Select(z => z.Value);
 
-        public string ToNewLinesCombined()
-        {
-            return this.GetResults().Select(z => z.Join(Environment.NewLine)).Join(Environment.NewLine);
-        }
+        public string ToNewLinesCombined() => this.GetResults().Select(z => z.Join(Environment.NewLine)).Join(Environment.NewLine);
 
-        public IDatabaseScriptResult Evaluate()
-        {
-            return this;
-        }
+        public IDatabaseScriptResult Evaluate() => this;
     }
 
     struct LazyDatabaseScriptResult : IDatabaseScriptResult
@@ -84,10 +72,7 @@ public static class DatabaseScriptResultFactory
             }
         }
 
-        public IEnumerable<IEnumerable<string>> GetResults()
-        {
-            return this.dictionary.OrderBy(z => (int)z.Key).Select(z => z.Value.Value);
-        }
+        public IEnumerable<IEnumerable<string>> GetResults() => this.dictionary.OrderBy(z => (int)z.Key).Select(z => z.Value.Value);
 
         public string ToNewLinesCombined()
         {
@@ -95,10 +80,7 @@ public static class DatabaseScriptResultFactory
             return tempResult.Join(Environment.NewLine);
         }
 
-        public IDatabaseScriptResult Evaluate()
-        {
-            return new EvaluatedDatabaseScriptResult(this);
-        }
+        public IDatabaseScriptResult Evaluate() => new EvaluatedDatabaseScriptResult(this);
     }
 
     public static IDatabaseScriptResult Combine(this IEnumerable<IDatabaseScriptResult> source)
@@ -108,10 +90,7 @@ public static class DatabaseScriptResultFactory
         return Create(dict);
     }
 
-    private static IOrderedEnumerable<ApplyMigrationDbScriptMode> GetSortedModes()
-    {
-        return Enum.GetValues(typeof(ApplyMigrationDbScriptMode)).OfType<ApplyMigrationDbScriptMode>().OrderBy(z => z);
-    }
+    private static IOrderedEnumerable<ApplyMigrationDbScriptMode> GetSortedModes() => Enum.GetValues(typeof(ApplyMigrationDbScriptMode)).OfType<ApplyMigrationDbScriptMode>().OrderBy(z => z);
 
     public static IDatabaseScriptResult CreateEvaluated(IDatabaseScriptResult generateScript)
     {

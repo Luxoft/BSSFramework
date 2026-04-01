@@ -66,18 +66,16 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
     private PropertyPath CompositeTail { get; }
 
     /// <inheritdoc />
-    protected override IEnumerable<Attribute> GetDefaultAttributes()
-    {
-        return new Attribute?[]
-               {
-                       this.TryCreateExpandPathAttributes(),
-                       this.TryCreateCustomSerializationAttribute(),
-                       this.CreateProjectionPropertyAttribute(),
-                       this.TryCreateMappingAttribute(),
-                       this.CreateMappingPropertyAttribute(),
-                       this.TryCreateViewAccessAttribute()
-               }.Where(attr => attr != null).Select(v => v!);
-    }
+    protected override IEnumerable<Attribute> GetDefaultAttributes() =>
+        new Attribute?[]
+        {
+            this.TryCreateExpandPathAttributes(),
+            this.TryCreateCustomSerializationAttribute(),
+            this.CreateProjectionPropertyAttribute(),
+            this.TryCreateMappingAttribute(),
+            this.CreateMappingPropertyAttribute(),
+            this.TryCreateViewAccessAttribute()
+        }.Where(attr => attr != null).Select(v => v!);
 
     protected virtual ExpandPathAttribute? TryCreateExpandPathAttributes()
     {
@@ -125,26 +123,17 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
         }
     }
 
-    protected virtual ProjectionPropertyAttribute CreateProjectionPropertyAttribute()
-    {
-        return new ProjectionPropertyAttribute(this.ProjectionValue.Role);
-    }
+    protected virtual ProjectionPropertyAttribute CreateProjectionPropertyAttribute() => new(this.ProjectionValue.Role);
 
-    protected virtual DomainObjectAccessAttribute? TryCreateViewAccessAttribute()
-    {
-        return this.ProjectionValue
-                   .Path
-                   .SelectMany(prop => this.Environment.ExtendedMetadata.GetProperty(prop).GetDomainObjectAccessAttributes())
-                   .Where(attr => !(attr is EditDomainObjectAttribute))
-                   .SingleMaybe()
-                   .GetValueOrDefault();
-    }
+    protected virtual DomainObjectAccessAttribute? TryCreateViewAccessAttribute() =>
+        this.ProjectionValue
+            .Path
+            .SelectMany(prop => this.Environment.ExtendedMetadata.GetProperty(prop).GetDomainObjectAccessAttributes())
+            .Where(attr => !(attr is EditDomainObjectAttribute))
+            .SingleMaybe()
+            .GetValueOrDefault();
 
-
-    private MappingPropertyAttribute CreateMappingPropertyAttribute()
-    {
-        return new MappingPropertyAttribute() { CanInsert = false, CanUpdate = false };
-    }
+    private MappingPropertyAttribute CreateMappingPropertyAttribute() => new() { CanInsert = false, CanUpdate = false };
 
     protected virtual MappingAttribute? TryCreateMappingAttribute()
     {

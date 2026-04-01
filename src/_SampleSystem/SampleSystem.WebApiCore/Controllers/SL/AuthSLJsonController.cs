@@ -13,29 +13,25 @@ namespace SampleSystem.WebApiCore.Controllers;
 public class AuthMainController : Framework.Authorization.WebApi.AuthMainController
 {
     [HttpPost]
-    public PermissionIdentityDTO SavePermission(SavePermissionAutoRequest savePermissionAutoRequest)
-    {
-        return this.Evaluate(DBSessionMode.Write, evaluateData =>
-                                                  {
-                                                      var principalIdent = savePermissionAutoRequest.PrincipalIdent;
-                                                      var permissionDTO = savePermissionAutoRequest.PermissionDTO;
+    public PermissionIdentityDTO SavePermission(SavePermissionAutoRequest savePermissionAutoRequest) =>
+        this.Evaluate(DBSessionMode.Write, evaluateData =>
+        {
+            var principalIdent = savePermissionAutoRequest.PrincipalIdent;
+            var permissionDTO = savePermissionAutoRequest.PermissionDTO;
 
-                                                      var principalBLL = evaluateData.Context.Logics.PrincipalFactory.Create(SecurityRule.Edit);
-                                                      var permissionBLL = evaluateData.Context.Logics.PermissionFactory.Create(SecurityRule.Edit);
+            var principalBLL = evaluateData.Context.Logics.PrincipalFactory.Create(SecurityRule.Edit);
+            var permissionBLL = evaluateData.Context.Logics.PermissionFactory.Create(SecurityRule.Edit);
 
-                                                      var principal = principalBLL.GetById(principalIdent.Id, true);
+            var principal = principalBLL.GetById(principalIdent.Id, true);
 
-                                                      var permission = permissionBLL.GetById(permissionDTO.Id, IdCheckMode.SkipEmpty) ?? new Permission(principal);
+            var permission = permissionBLL.GetById(permissionDTO.Id, IdCheckMode.SkipEmpty) ?? new Permission(principal);
 
-                                                      permissionDTO.MapToDomainObject(evaluateData.MappingService, permission);
+            permissionDTO.MapToDomainObject(evaluateData.MappingService, permission);
 
-                                                      permissionBLL.Save(permission);
+            permissionBLL.Save(permission);
 
-                                                      return permission.ToIdentityDTO();
-                                                  });
-    }
-
-
+            return permission.ToIdentityDTO();
+        });
 
     [System.Runtime.Serialization.DataContractAttribute]
     [AutoRequest]

@@ -71,67 +71,63 @@ public partial class BusinessUnit :
 
     public virtual bool AllowedForFilterRole
     {
-        get { return this.allowedForFilterRole; }
-        set { this.allowedForFilterRole = value; }
+        get => this.allowedForFilterRole;
+        set => this.allowedForFilterRole = value;
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual int DeepLevel
     {
-        get { return this.deepLevel; }
-        set { this.deepLevel = value; }
+        get => this.deepLevel;
+        set => this.deepLevel = value;
     }
 
     public virtual DateTime? LastBusinessUnitHasNoLinkedProjectsWarningCheckDate
     {
-        get { return this.lastBusinessUnitHasNoLinkedProjectsWarningCheckDate; }
-        protected internal set { this.lastBusinessUnitHasNoLinkedProjectsWarningCheckDate = value; }
+        get => this.lastBusinessUnitHasNoLinkedProjectsWarningCheckDate;
+        protected internal set => this.lastBusinessUnitHasNoLinkedProjectsWarningCheckDate = value;
     }
 
     public virtual bool NeedSendBusinessUnitHasNoLinkedProjectsWarning
     {
-        get { return this.needSendBusinessUnitHasNoLinkedProjectsWarning; }
-        protected internal set { this.needSendBusinessUnitHasNoLinkedProjectsWarning = value; }
+        get => this.needSendBusinessUnitHasNoLinkedProjectsWarning;
+        protected internal set => this.needSendBusinessUnitHasNoLinkedProjectsWarning = value;
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual BusinessUnitType? BusinessUnitType
     {
-        get { return this.businessUnitType; }
-        set { this.businessUnitType = value; }
+        get => this.businessUnitType;
+        set => this.businessUnitType = value;
     }
 
     public virtual decimal Commission
     {
-        get { return this.commission; }
-        set { this.commission = value; }
+        get => this.commission;
+        set => this.commission = value;
     }
 
     public virtual BusinessUnitOptions Options
     {
-        get { return this.options; }
-        set { this.options = value; }
+        get => this.options;
+        set => this.options = value;
     }
 
     public virtual bool IsNewBusiness
     {
-        get { return this.isNewBusiness; }
-        set { this.isNewBusiness = value; }
+        get => this.isNewBusiness;
+        set => this.isNewBusiness = value;
     }
 
     public virtual bool IsProduction
     {
-        get { return this.isProduction; }
-        set { this.isProduction = value; }
+        get => this.isProduction;
+        set => this.isProduction = value;
     }
 
     public virtual bool IsSpecialCommission
     {
-        get
-        {
-            return this.options.HasFlag(BusinessUnitOptions.IsSpecialCommission);
-        }
-
+        get => this.options.HasFlag(BusinessUnitOptions.IsSpecialCommission);
         set
         {
             if (this.IsSpecialCommission != value)
@@ -143,11 +139,7 @@ public partial class BusinessUnit :
 
     public virtual bool IsPool
     {
-        get
-        {
-            return this.options.HasFlag(BusinessUnitOptions.IsResourcePool);
-        }
-
+        get => this.options.HasFlag(BusinessUnitOptions.IsResourcePool);
         set
         {
             if (this.IsPool != value)
@@ -159,54 +151,48 @@ public partial class BusinessUnit :
 
     public virtual BusinessUnit BusinessUnitForRent
     {
-        get { return this.businessUnitForRent; }
-        set { this.businessUnitForRent = value; }
+        get => this.businessUnitForRent;
+        set => this.businessUnitForRent = value;
     }
 
-    public virtual IEnumerable<BusinessUnitEmployeeRole> BusinessUnitEmployeeRoles
-    {
-        get { return this.businessUnitEmployeeRoles; }
-    }
+    public virtual IEnumerable<BusinessUnitEmployeeRole> BusinessUnitEmployeeRoles => this.businessUnitEmployeeRoles;
 
     [UniqueGroup]
     [PropertyValidationMode(PropertyValidationMode.Auto, PropertyValidationMode.Disabled)]
-    public virtual IEnumerable<BusinessUnitManagerCommissionLink> ManagerCommissions
-    {
-        get { return this.managerCommissions; }
-    }
+    public virtual IEnumerable<BusinessUnitManagerCommissionLink> ManagerCommissions => this.managerCommissions;
 
     /// <summary>
     /// #IAD-20872
     /// </summary>
     public virtual DateTime? LeastProjectStartDate
     {
-        get { return this.leastProjectStartDate; }
-        set { this.leastProjectStartDate = value; }
+        get => this.leastProjectStartDate;
+        set => this.leastProjectStartDate = value;
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual Period Period
     {
-        get { return this.period; }
-        set { this.period = value; }
+        get => this.period;
+        set => this.period = value;
     }
 
     public virtual int Rank
     {
-        get { return this.rank; }
-        set { this.rank = value; }
+        get => this.rank;
+        set => this.rank = value;
     }
 
     public virtual DateTime? FirstNewBusinessStatusMonth
     {
-        get { return this.firstNewBusinessStatusMonth; }
-        set { this.firstNewBusinessStatusMonth = value; }
+        get => this.firstNewBusinessStatusMonth;
+        set => this.firstNewBusinessStatusMonth = value;
     }
 
     public virtual int NewBusinessStatusLeft
     {
-        get { return this.newBusinessStatusLeft; }
-        set { this.newBusinessStatusLeft = value; }
+        get => this.newBusinessStatusLeft;
+        set => this.newBusinessStatusLeft = value;
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
@@ -243,147 +229,84 @@ public partial class BusinessUnit :
 
     public virtual string ProjectStartMailList
     {
-        get { return this.projectStartMailList; }
-        set { this.projectStartMailList = value; }
+        get => this.projectStartMailList;
+        set => this.projectStartMailList = value;
     }
 
     #region ForEventDTO
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual BusinessUnit AccountOrDivision
-    {
-        get
-        {
-            return
-                    this.GetParentByTypeIds(new List<Guid>
-                                            {
-                                                    BusinessUnitType.AccountTypeId,
-                                                    BusinessUnitType.DivisionTypeId
-                                            });
-        }
-    }
+    public virtual BusinessUnit AccountOrDivision =>
+        this.GetParentByTypeIds(new List<Guid>
+                                {
+                                    BusinessUnitType.AccountTypeId,
+                                    BusinessUnitType.DivisionTypeId
+                                });
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual BusinessUnit LobOrService
-    {
-        get
-        {
-            return
-                    this.GetParentByTypeIds(new List<Guid>
-                                            {
-                                                    BusinessUnitType.LobTypeId,
-                                                    BusinessUnitType.ServiceTypeId
-                                            });
-        }
-    }
+    public virtual BusinessUnit LobOrService =>
+        this.GetParentByTypeIds(new List<Guid>
+                                {
+                                    BusinessUnitType.LobTypeId,
+                                    BusinessUnitType.ServiceTypeId
+                                });
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual BusinessUnit Account
-    {
-        get
-        {
-            return
-                    this.GetParentByTypeIds(new List<Guid>
-                                            {
-                                                    BusinessUnitType.AccountTypeId,
-                                            });
-        }
-    }
+    public virtual BusinessUnit Account =>
+        this.GetParentByTypeIds(new List<Guid>
+                                {
+                                    BusinessUnitType.AccountTypeId,
+                                });
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual BusinessUnit Program
-    {
-        get
-        {
-            return
-                    this.GetParentByTypeIds(new List<Guid>
-                                            {
-                                                    BusinessUnitType.ProgramTypeId,
-                                            });
-        }
-    }
+    public virtual BusinessUnit Program =>
+        this.GetParentByTypeIds(new List<Guid>
+                                {
+                                    BusinessUnitType.ProgramTypeId,
+                                });
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual BusinessUnit Lob
-    {
-        get
-        {
-            return
-                    this.GetParentByTypeIds(new List<Guid>
-                                            {
-                                                    BusinessUnitType.LobTypeId,
-                                            });
-        }
-    }
+    public virtual BusinessUnit Lob =>
+        this.GetParentByTypeIds(new List<Guid>
+                                {
+                                    BusinessUnitType.LobTypeId,
+                                });
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual string AccountOrDivisionName
-    {
-        get { return this.AccountOrDivision.Maybe(z => z.Name); }
-    }
+    public virtual string AccountOrDivisionName => this.AccountOrDivision.Maybe(z => z.Name);
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual string LobOrServiceName
-    {
-        get { return this.LobOrService.Maybe(z => z.Name); }
-    }
+    public virtual string LobOrServiceName => this.LobOrService.Maybe(z => z.Name);
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual string ProgramName
-    {
-        get { return this.Program.Maybe(z => z.Name); }
-    }
+    public virtual string ProgramName => this.Program.Maybe(z => z.Name);
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual string AccountName
-    {
-        get { return this.Account.Maybe(z => z.Name); }
-    }
+    public virtual string AccountName => this.Account.Maybe(z => z.Name);
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Integration)]
-    public virtual string LobName
-    {
-        get { return this.Lob.Maybe(z => z.Name); }
-    }
+    public virtual string LobName => this.Lob.Maybe(z => z.Name);
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual Guid AccountOrDivisionId
-    {
-        get { return this.AccountOrDivision.Maybe(z => z.Id); }
-    }
+    public virtual Guid AccountOrDivisionId => this.AccountOrDivision.Maybe(z => z.Id);
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual Guid LobOrServiceId
-    {
-        get { return this.LobOrService.Maybe(z => z.Id); }
-    }
+    public virtual Guid LobOrServiceId => this.LobOrService.Maybe(z => z.Id);
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual Guid AccountId
-    {
-        get { return this.Account.Maybe(z => z.Id); }
-    }
+    public virtual Guid AccountId => this.Account.Maybe(z => z.Id);
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual Guid LobId
-    {
-        get { return this.Lob.Maybe(z => z.Id); }
-    }
+    public virtual Guid LobId => this.Lob.Maybe(z => z.Id);
 
     #endregion
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Integration | DTORole.Event)]
     [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Client)]
-    public virtual IEnumerable<BusinessUnit> Children
-    {
-        get { return this.children; }
-    }
+    public virtual IEnumerable<BusinessUnit> Children => this.children;
 
     [CustomSerialization(CustomSerializationMode.Ignore)]
-    public virtual IEnumerable<Project> Projects
-    {
-        get { return this.projects; }
-    }
+    public virtual IEnumerable<Project> Projects => this.projects;
 
     /// <summary>
     /// Supposed to be set from dto only.
@@ -392,76 +315,32 @@ public partial class BusinessUnit :
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual BusinessUnit? Parent
     {
-        get { return this.parent; }
-        set { this.parent = value; }
+        get => this.parent;
+        set => this.parent = value;
     }
 
-    BusinessUnit IUnit<BusinessUnit>.CurrentObject
-    {
-        get
-        {
-            return this;
-        }
-    }
+    BusinessUnit IUnit<BusinessUnit>.CurrentObject => this;
 
-    ICollection<BusinessUnitEmployeeRole> IMaster<BusinessUnitEmployeeRole>.Details
-    {
-        get
-        {
-            return (ICollection<BusinessUnitEmployeeRole>)this.BusinessUnitEmployeeRoles;
-        }
-    }
+    ICollection<BusinessUnitEmployeeRole> IMaster<BusinessUnitEmployeeRole>.Details => (ICollection<BusinessUnitEmployeeRole>)this.BusinessUnitEmployeeRoles;
 
-    ICollection<ManagementUnitAndBusinessUnitLink> IMaster<ManagementUnitAndBusinessUnitLink>.Details
-    {
-        get
-        {
-            return (ICollection<ManagementUnitAndBusinessUnitLink>)this.ManagementUnits;
-        }
-    }
+    ICollection<ManagementUnitAndBusinessUnitLink> IMaster<ManagementUnitAndBusinessUnitLink>.Details => (ICollection<ManagementUnitAndBusinessUnitLink>)this.ManagementUnits;
 
-    ICollection<BusinessUnitManagerCommissionLink> IMaster<BusinessUnitManagerCommissionLink>.Details
-    {
-        get
-        {
-            return (ICollection<BusinessUnitManagerCommissionLink>)this.ManagerCommissions;
-        }
-    }
+    ICollection<BusinessUnitManagerCommissionLink> IMaster<BusinessUnitManagerCommissionLink>.Details => (ICollection<BusinessUnitManagerCommissionLink>)this.ManagerCommissions;
 
-    ICollection<BusinessUnit> IMaster<BusinessUnit>.Details
-    {
-        get { return (ICollection<BusinessUnit>)this.Children; }
-    }
+    ICollection<BusinessUnit> IMaster<BusinessUnit>.Details => (ICollection<BusinessUnit>)this.Children;
 
-    BusinessUnit IDetail<BusinessUnit>.Master
-    {
-        get { return this.Parent; }
-    }
+    BusinessUnit IDetail<BusinessUnit>.Master => this.Parent;
 
-    ICollection<Project> IMaster<Project>.Details
-    {
-        get { return (ICollection<Project>)this.Projects; }
-    }
+    ICollection<Project> IMaster<Project>.Details => (ICollection<Project>)this.Projects;
 
-    public static bool operator ==(BusinessUnit left, IUnit<BusinessUnit> right)
-    {
-        return Equals(left, right);
-    }
+    public static bool operator ==(BusinessUnit left, IUnit<BusinessUnit> right) => Equals(left, right);
 
-    public static bool operator !=(BusinessUnit left, IUnit<BusinessUnit> right)
-    {
-        return !Equals(left, right);
-    }
+    public static bool operator !=(BusinessUnit left, IUnit<BusinessUnit> right) => !Equals(left, right);
 
-    public override string ToString()
-    {
-        return $"{base.ToString()}";
-    }
+    public override string ToString() => $"{base.ToString()}";
 
-    public virtual BusinessUnit? GetParentByTypeIds(IEnumerable<Guid> businessUnitTypesIds)
-    {
-        return businessUnitTypesIds.Contains(this.BusinessUnitType.Maybe(v => v.Id))
-                       ? this
-                       : this.Parent.Maybe(z => z.GetParentByTypeIds(businessUnitTypesIds));
-    }
+    public virtual BusinessUnit? GetParentByTypeIds(IEnumerable<Guid> businessUnitTypesIds) =>
+        businessUnitTypesIds.Contains(this.BusinessUnitType.Maybe(v => v.Id))
+            ? this
+            : this.Parent.Maybe(z => z.GetParentByTypeIds(businessUnitTypesIds));
 }

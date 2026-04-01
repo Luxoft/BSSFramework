@@ -34,10 +34,7 @@ public abstract class ProjectionEnvironmentBase : IProjectionEnvironment
     /// <inheritdoc />
     public abstract bool UseDependencySecurity { get; }
 
-    protected virtual PropertyInfo GetIdentityProperty()
-    {
-        return this.PersistentDomainObjectBaseType.GetProperty("Id", true)!;
-    }
+    protected virtual PropertyInfo GetIdentityProperty() => this.PersistentDomainObjectBaseType.GetProperty("Id", true)!;
 
     /// <summary>
     /// Проверка на то, что свойство является Id-ом

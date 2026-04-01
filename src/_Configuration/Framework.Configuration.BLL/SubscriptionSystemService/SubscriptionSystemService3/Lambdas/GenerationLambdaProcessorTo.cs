@@ -20,8 +20,5 @@ public class GenerationLambdaProcessorTo<TBLLContext> : GenerationLambdaProcesso
     protected override string LambdaName => "Generation";
 
     /// <inheritdoc/>
-    protected override SubscriptionLambda GetSubscriptionLambda(Subscription subscription)
-    {
-        return subscription.Generation;
-    }
+    protected override SubscriptionLambda GetSubscriptionLambda(Subscription subscription) => subscription.Generation;
 }

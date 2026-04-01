@@ -24,28 +24,22 @@ public class BusinessUnitEmployeeRole : AuditPersistentDomainObjectBase, IDetail
     }
 
     [Required]
-    public virtual BusinessUnit BusinessUnit
-    {
-        get { return this.businessUnit; }
-    }
+    public virtual BusinessUnit BusinessUnit => this.businessUnit;
 
     [Required]
     public virtual Employee Employee
     {
-        get { return this.employee; }
-        set { this.employee = value; }
+        get => this.employee;
+        set => this.employee = value;
     }
 
     public virtual BusinessUnitEmployeeRoleType Role
     {
-        get { return this.role; }
-        set { this.role = value; }
+        get => this.role;
+        set => this.role = value;
     }
 
-    BusinessUnit IDetail<BusinessUnit>.Master
-    {
-        get { return this.businessUnit; }
-    }
+    BusinessUnit IDetail<BusinessUnit>.Master => this.businessUnit;
 
     public static BusinessUnitEmployeeRole Create(
             BusinessUnit businessUnit,

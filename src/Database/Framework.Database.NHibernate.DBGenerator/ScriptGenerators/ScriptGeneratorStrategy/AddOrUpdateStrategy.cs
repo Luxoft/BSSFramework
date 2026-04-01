@@ -22,13 +22,7 @@ internal class AddOrUpdateStrategy(DatabaseScriptGeneratorStrategyInfo parameter
     /// <summary>
     /// Мод применяемого миграционого скрипта
     /// </summary>
-    public override ApplyMigrationDbScriptMode ApplyMigrationDbScriptMode
-    {
-        get
-        {
-            return ApplyMigrationDbScriptMode.AddOrUpdate;
-        }
-    }
+    public override ApplyMigrationDbScriptMode ApplyMigrationDbScriptMode => ApplyMigrationDbScriptMode.AddOrUpdate;
 
     /// <summary>
     /// Модификации базы данных по определенной стратегии

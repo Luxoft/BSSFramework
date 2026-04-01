@@ -1,8 +1,7 @@
 ﻿using System.Reflection;
-
 using Framework.Core;
 
-namespace Framework.ExpressionParsers;
+namespace Framework.ExpressionParsers.Native;
 
 public class MethodTypeInfo : IEquatable<MethodTypeInfo>
 {
@@ -24,9 +23,9 @@ public class MethodTypeInfo : IEquatable<MethodTypeInfo>
     }
 
 
-    public Type[] InputTypes { get; private set; }
+    public Type[] InputTypes { get; }
 
-    public Type ReturnType { get; private set; }
+    public Type ReturnType { get; }
 
 
     public override bool Equals(object obj) => this.Equals(obj as MethodTypeInfo);

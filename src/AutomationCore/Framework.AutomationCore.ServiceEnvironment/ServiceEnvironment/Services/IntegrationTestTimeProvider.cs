@@ -11,8 +11,5 @@ public class IntegrationTestTimeProvider : TimeProvider
 
     public override DateTimeOffset GetUtcNow() => DateTimeOffset.UtcNow + this.offset;
 
-    public virtual void SetCurrentDateTime(DateTime dateTime)
-    {
-        this.offset = dateTime - DateTimeOffset.UtcNow;
-    }
+    public virtual void SetCurrentDateTime(DateTime dateTime) => this.offset = dateTime - DateTimeOffset.UtcNow;
 }

@@ -14,10 +14,7 @@ class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
 
     private bool removeSchemaDatabase = true;
 
-    public IAuditDBScriptGeneratorBuilder WithAudit(MappingSettings mappingSettings, string auditTablePostfix = "audit")
-    {
-        return this.WithAudit([mappingSettings], auditTablePostfix);
-    }
+    public IAuditDBScriptGeneratorBuilder WithAudit(MappingSettings mappingSettings, string auditTablePostfix = "audit") => this.WithAudit([mappingSettings], auditTablePostfix);
 
     public IAuditDBScriptGeneratorBuilder WithAudit(IEnumerable<MappingSettings> mappingSettings, string auditPostfix = "audit")
     {
@@ -41,10 +38,7 @@ class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
         return this;
     }
 
-    public IAuditDBScriptGeneratorBuilder WithMappingSettings(MappingSettings mappingSettings)
-    {
-        return this.WithMappingSettings([mappingSettings]);
-    }
+    public IAuditDBScriptGeneratorBuilder WithMappingSettings(MappingSettings mappingSettings) => this.WithMappingSettings([mappingSettings]);
 
     public IAuditDBScriptGeneratorBuilder WithMappingSettings(List<MappingSettings> mappingSettings)
     {

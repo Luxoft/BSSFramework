@@ -1,11 +1,10 @@
 ﻿using FluentAssertions;
-using Framework.Validation.Tests.Unit;
 
 using NSubstitute;
 
 using NUnit.Framework;
 
-namespace Framework.Validation.Test;
+namespace Framework.Validation.Tests;
 
 [TestFixture]
 public class MaxStringLengthValidatorTest

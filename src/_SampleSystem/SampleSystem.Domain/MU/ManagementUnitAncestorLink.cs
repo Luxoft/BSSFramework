@@ -10,14 +10,14 @@ public class ManagementUnitAncestorLink : AuditPersistentDomainObjectBase
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual ManagementUnit Ancestor
     {
-        get { return this.ancestor; }
-        set { this.ancestor = value; }
+        get => this.ancestor;
+        set => this.ancestor = value;
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual ManagementUnit Child
     {
-        get { return this.child; }
-        set { this.child = value; }
+        get => this.child;
+        set => this.child = value;
     }
 }

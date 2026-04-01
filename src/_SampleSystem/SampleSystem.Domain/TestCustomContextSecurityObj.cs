@@ -3,6 +3,4 @@
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-public class TestCustomContextSecurityObj : BaseDirectory
-{
-}
+public class TestCustomContextSecurityObj : BaseDirectory;

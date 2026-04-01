@@ -227,10 +227,7 @@ public class SubscriptionNotificationService<TBLLContext>
         return results.ToList();
     }
 
-    private IEnumerable<ITryResult<Subscription>> GetFaults<T>(ITryResult<T> tryResult)
-    {
-        return this.GetFaults([tryResult]);
-    }
+    private IEnumerable<ITryResult<Subscription>> GetFaults<T>(ITryResult<T> tryResult) => this.GetFaults([tryResult]);
 
     private ILogger<SubscriptionNotificationService<TBLLContext>> GetLogger() =>
         this._configurationContextFacade.ServiceProvider.GetRequiredService<ILogger<SubscriptionNotificationService<TBLLContext>>>();

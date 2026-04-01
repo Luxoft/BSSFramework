@@ -23,9 +23,6 @@ public static class ProjectionSourceExtensions
     {
         private readonly IReadOnlyCollection<IProjectionSource> sources = (sources ?? throw new ArgumentNullException(nameof(sources))).ToArray();
 
-        public IEnumerable<IProjection> GetProjections()
-        {
-            return this.sources.SelectMany(p => p.GetProjections());
-        }
+        public IEnumerable<IProjection> GetProjections() => this.sources.SelectMany(p => p.GetProjections());
     }
 }

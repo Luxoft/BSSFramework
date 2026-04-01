@@ -23,15 +23,13 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
 
     protected virtual string ExternalPropertyValidatorsMethodName { get; } = "GetExternalPropertyValidators";
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration
-               {
-                   Name = this.Name,
-                   TypeAttributes = TypeAttributes.Public | TypeAttributes.Abstract,
-                   IsPartial = true,
-               };
-    }
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new()
+        {
+            Name = this.Name,
+            TypeAttributes = TypeAttributes.Public | TypeAttributes.Abstract,
+            IsPartial = true,
+        };
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
@@ -118,24 +116,17 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
         yield return this.GetInternalClassMapMethod(defaultValidatorMapField);
     }
 
-    private bool IsEmptyClassMap(Type domainType, IValidatorGenerator domainTypeValidatorGenerator)
-    {
-        return domainTypeValidatorGenerator.PropertyValidators.All(this.SkipPropertyGeneration) && this.SkipClassValidatorsGeneration(domainType, domainTypeValidatorGenerator.ClassValidators);
-    }
+    private bool IsEmptyClassMap(Type domainType, IValidatorGenerator domainTypeValidatorGenerator) => domainTypeValidatorGenerator.PropertyValidators.All(this.SkipPropertyGeneration) && this.SkipClassValidatorsGeneration(domainType, domainTypeValidatorGenerator.ClassValidators);
 
-    private bool SkipPropertyGeneration(KeyValuePair<PropertyInfo, IReadOnlyDictionary<CodeExpression, IValidationData>> propertyValidatorPair)
-    {
-        return this.Configuration.SquashPropertyValidators(propertyValidatorPair.Key)
-               && !this.Configuration.GenerateExternalPropertyValidators
-               && propertyValidatorPair.Value.IsEmpty();
-    }
+    private bool SkipPropertyGeneration(KeyValuePair<PropertyInfo, IReadOnlyDictionary<CodeExpression, IValidationData>> propertyValidatorPair) =>
+        this.Configuration.SquashPropertyValidators(propertyValidatorPair.Key)
+        && !this.Configuration.GenerateExternalPropertyValidators
+        && propertyValidatorPair.Value.IsEmpty();
 
-    private bool SkipClassValidatorsGeneration(Type domainType, IReadOnlyDictionary<CodeExpression, IValidationData> classValidatorPair)
-    {
-        return this.Configuration.SquashClassValidators(domainType)
-               && !this.Configuration.GenerateExternalClassValidators
-               && classValidatorPair.IsEmpty();
-    }
+    private bool SkipClassValidatorsGeneration(Type domainType, IReadOnlyDictionary<CodeExpression, IValidationData> classValidatorPair) =>
+        this.Configuration.SquashClassValidators(domainType)
+        && !this.Configuration.GenerateExternalClassValidators
+        && classValidatorPair.IsEmpty();
 
     private CodeMemberMethod GetInternalClassMapMethod(CodeMemberField defaultValidatorMapField)
     {

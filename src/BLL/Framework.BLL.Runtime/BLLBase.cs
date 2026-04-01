@@ -29,17 +29,12 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     private readonly IDAL<TDomainObject, TIdent> dal;
 
     protected BLLBase(TBLLContext context)
-        : base(context)
-    {
+        : base(context) =>
         this.dal = this.Context.ServiceProvider.GetRequiredService<IDAL<TDomainObject, TIdent>>();
-    }
 
     #region Private.Method
 
-    protected virtual IQueryable<TDomainObject> ProcessSecurity(IQueryable<TDomainObject> queryable)
-    {
-        return queryable;
-    }
+    protected virtual IQueryable<TDomainObject> ProcessSecurity(IQueryable<TDomainObject> queryable) => queryable;
 
     #endregion
 
@@ -59,10 +54,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         base.Save(domainObject);
     }
 
-    public override void Save(TDomainObject domainObject)
-    {
-        this.InternalSave(domainObject);
-    }
+    public override void Save(TDomainObject domainObject) => this.InternalSave(domainObject);
 
     public virtual void Insert(TDomainObject domainObject, TIdent id)
     {
@@ -98,10 +90,8 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     public List<TDomainObject> GetListBy(
         Expression<Func<TDomainObject, bool>> filter,
         FetchRule<TDomainObject>? fetchRule = null,
-        LockRole lockRole = LockRole.None)
-    {
-        return ((IEnumerable<TDomainObject>)this.GetSecureQueryable(fetchRule, lockRole).Where(filter)).Distinct().ToList();
-    }
+        LockRole lockRole = LockRole.None) =>
+        ((IEnumerable<TDomainObject>)this.GetSecureQueryable(fetchRule, lockRole).Where(filter)).Distinct().ToList();
 
     public List<TDomainObject> GetListBy(Expression<Func<TDomainObject, bool>> filter, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
         this.GetListBy(filter, buildFetchRule.ToFetchRule());
@@ -132,10 +122,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         FetchRule<TDomainObject>? fetchRule = null) =>
         this.GetObjectsByOData(selectOperation, filter.ToFilterExpression(), fetchRule);
 
-    public List<TDomainObject> GetFullList(FetchRule<TDomainObject>? fetchRule = null)
-    {
-        return this.GetSecureQueryable(fetchRule).ToList();
-    }
+    public List<TDomainObject> GetFullList(FetchRule<TDomainObject>? fetchRule = null) => this.GetSecureQueryable(fetchRule).ToList();
 
     public List<TDomainObject> GetFullList(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
         this.GetFullList(buildFetchRule.ToFetchRule());
@@ -151,10 +138,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     /// <param name="lockRole">Тип блокировки</param>
     /// <param name="fetchRule">Подгружаемые свойства</param>
     /// <returns></returns>
-    public IQueryable<TDomainObject> GetUnsecureQueryable(FetchRule<TDomainObject>? fetchRule, LockRole lockRole = LockRole.None)
-    {
-        return this.dal.GetQueryable(lockRole, fetchRule);
-    }
+    public IQueryable<TDomainObject> GetUnsecureQueryable(FetchRule<TDomainObject>? fetchRule, LockRole lockRole = LockRole.None) => this.dal.GetQueryable(lockRole, fetchRule);
 
     /// <summary>
     /// Получение IQueryable с учётом безопасности
@@ -162,10 +146,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     /// <param name="lockRole">Тип блокировки</param>
     /// <param name="fetchRule">Подгружаемые свойства</param>
     /// <returns></returns>
-    public IQueryable<TDomainObject> GetSecureQueryable(FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None)
-    {
-        return this.ProcessSecurity(this.GetUnsecureQueryable(fetchRule, lockRole));
-    }
+    public IQueryable<TDomainObject> GetSecureQueryable(FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None) => this.ProcessSecurity(this.GetUnsecureQueryable(fetchRule, lockRole));
 
     public IQueryable<TDomainObject> GetSecureQueryable(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule) =>
         this.GetSecureQueryable(buildFetchRule.ToFetchRule());
@@ -221,19 +202,15 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         LockRole lockRole,
         Expression<Func<TDomainObject, bool>> filter,
         FetchRule<TDomainObject>? fetchRule = null,
-        bool throwOnNotFound = false)
-    {
-        return this.GetObjectBy(lockRole, filter, throwOnNotFound, fetchRule);
-    }
+        bool throwOnNotFound = false) =>
+        this.GetObjectBy(lockRole, filter, throwOnNotFound, fetchRule);
 
     /// <inheritdoc />
     public TDomainObject? GetObjectBy(
         Expression<Func<TDomainObject, bool>> filter,
         bool throwOnNotFound = false,
-        FetchRule<TDomainObject>? fetchRule = null)
-    {
-        return this.GetObjectBy(LockRole.None, filter, throwOnNotFound, fetchRule);
-    }
+        FetchRule<TDomainObject>? fetchRule = null) =>
+        this.GetObjectBy(LockRole.None, filter, throwOnNotFound, fetchRule);
 
     public TDomainObject? GetObjectBy(
         Expression<Func<TDomainObject, bool>> filter,
@@ -270,30 +247,18 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         return result;
     }
 
-    public virtual void Lock(TDomainObject domainObject, LockRole lockRole)
-    {
-        this.dal.Lock(domainObject, lockRole);
-    }
+    public virtual void Lock(TDomainObject domainObject, LockRole lockRole) => this.dal.Lock(domainObject, lockRole);
 
     /// <summary>
     /// Re-read the state of the given instance from the underlying database.
     /// </summary>
-    public virtual void Refresh(TDomainObject domainObject)
-    {
-        this.dal.Refresh(domainObject);
-    }
+    public virtual void Refresh(TDomainObject domainObject) => this.dal.Refresh(domainObject);
 
     #region Revision
 
-    public virtual TDomainObject GetObjectByRevision(TIdent id, long revision)
-    {
-        return this.dal.GetObjectByRevision(id, revision);
-    }
+    public virtual TDomainObject GetObjectByRevision(TIdent id, long revision) => this.dal.GetObjectByRevision(id, revision);
 
-    public virtual long? GetPreviousRevision(TIdent id, long maxRevision)
-    {
-        return this.dal.GetPreviousRevision(id, maxRevision);
-    }
+    public virtual long? GetPreviousRevision(TIdent id, long maxRevision) => this.dal.GetPreviousRevision(id, maxRevision);
 
     public virtual TDomainObject GetObjectsByPrevRevision(TIdent id)
     {
@@ -306,68 +271,41 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         return this.GetObjectByRevision(id, revision);
     }
 
-    public virtual IEnumerable<TDomainObject> GetObjectsByRevision(IEnumerable<TIdent> idCollection, long revision)
-    {
-        return this.dal.GetObjectsByRevision(idCollection, revision);
-    }
+    public virtual IEnumerable<TDomainObject> GetObjectsByRevision(IEnumerable<TIdent> idCollection, long revision) => this.dal.GetObjectsByRevision(idCollection, revision);
 
-    public virtual DomainObjectRevision<TIdent> GetObjectRevisions(TIdent identity, Period? period = null)
-    {
-        return this.dal.GetObjectRevisions(identity, period);
-    }
+    public virtual DomainObjectRevision<TIdent> GetObjectRevisions(TIdent identity, Period? period = null) => this.dal.GetObjectRevisions(identity, period);
 
-    public virtual long? GetPreviousVersion(TIdent id, long maxRevisionNumber)
-    {
-        return this.dal.GetPreviousRevision(id, maxRevisionNumber);
-    }
+    public virtual long? GetPreviousVersion(TIdent id, long maxRevisionNumber) => this.dal.GetPreviousRevision(id, maxRevisionNumber);
 
-    public virtual IEnumerable<long> GetRevisions(TIdent id)
-    {
-        return this.dal.GetRevisions(id);
-    }
+    public virtual IEnumerable<long> GetRevisions(TIdent id) => this.dal.GetRevisions(id);
 
-    public virtual IReadOnlyList<Tuple<TDomainObject, long>> GetDomainObjectRevisions(TIdent id, int takeCount)
-    {
-        return this.dal.GetDomainObjectRevisions<TDomainObject>(id, takeCount);
-    }
+    public virtual IReadOnlyList<Tuple<TDomainObject, long>> GetDomainObjectRevisions(TIdent id, int takeCount) => this.dal.GetDomainObjectRevisions<TDomainObject>(id, takeCount);
 
     public virtual DomainObjectPropertyRevisions<TIdent, TProperty> GetPropertyChanges<TProperty>(
         TIdent id,
         Expression<Func<TDomainObject, TProperty>> propertyExpression,
-        Period? period = null)
-    {
-        return this.dal.GetPropertyRevisions(id, propertyExpression, period);
-    }
+        Period? period = null) =>
+        this.dal.GetPropertyRevisions(id, propertyExpression, period);
 
     public virtual DomainObjectPropertyRevisions<TIdent, TProperty> GetPropertyChanges<TProperty>(
         TIdent id,
         string propertyName,
-        Period? period = null)
-    {
-        return this.dal.GetPropertyRevisions<TProperty>(id, propertyName, period);
-    }
+        Period? period = null) =>
+        this.dal.GetPropertyRevisions<TProperty>(id, propertyName, period);
 
     public virtual IDomainObjectPropertyRevisionBase<TIdent, RevisionInfoBase> GetUnTypedPropertyChanges(
         TIdent id,
         string propertyName,
-        Period? period = null)
-    {
-        return this.dal.GetUntypedPropertyRevisions(id, propertyName, period);
-    }
+        Period? period = null) =>
+        this.dal.GetUntypedPropertyRevisions(id, propertyName, period);
 
-    public IEnumerable<TIdent> GetIdentiesWithHistory(Expression<Func<TDomainObject, bool>> expression)
-    {
-        return this.dal.GetIdentiesWithHistory(expression);
-    }
+    public IEnumerable<TIdent> GetIdentiesWithHistory(Expression<Func<TDomainObject, bool>> expression) => this.dal.GetIdentiesWithHistory(expression);
 
     /// <summary>
     /// Get current revision. Actual info only after flush
     /// </summary>
     /// <returns></returns>
-    public long GetCurrentRevision()
-    {
-        return this.dal.GetCurrentRevision();
-    }
+    public long GetCurrentRevision() => this.dal.GetCurrentRevision();
 
     #endregion
 

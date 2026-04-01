@@ -4,19 +4,16 @@ using System.Runtime.Loader;
 using CommonFramework;
 
 using Framework.Core;
+using Framework.ExpressionParsers.Native;
+using Framework.ExpressionParsers.Native._Exceptions;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace Framework.ExpressionParsers;
+namespace Framework.ExpressionParsers._CSharp;
 
 public class RoslynCSharpExpressionParser : INativeBodyExpressionParser
 {
-    public RoslynCSharpExpressionParser()
-    {
-    }
-
-
     public Expression Parse(ParameterExpression[] parameters, Type returnType, string expression)
     {
         if (parameters == null) throw new ArgumentNullException(nameof(parameters));
@@ -46,7 +43,7 @@ public class RoslynCSharpExpressionParser : INativeBodyExpressionParser
                          .ToCSharpFullName();
 
         var methodName = "GetExpression";
-        var typeName = nameof(ExpressionParser<object>);
+        var typeName = nameof(ExpressionParser<>);
         var namespaceName = "Generated";
 
 

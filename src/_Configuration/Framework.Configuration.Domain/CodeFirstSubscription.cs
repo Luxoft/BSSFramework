@@ -56,7 +56,7 @@ public class CodeFirstSubscription : AuditPersistentDomainObjectBase, ICodeObjec
     [CustomSerialization(CustomSerializationMode.Normal)]
     public override bool Active
     {
-        get { return base.Active; }
-        set { base.Active = value; }
+        get => base.Active;
+        set => base.Active = value;
     }
 }

@@ -6,7 +6,4 @@ public interface IValidatorContainer<out TValidator>
     TValidator Validator { get; }
 }
 
-public interface IValidatorContainer : IValidatorContainer<IValidator>
-{
-
-}
+public interface IValidatorContainer : IValidatorContainer<IValidator>;

@@ -14,16 +14,12 @@ using SecuritySystem.Notification.Domain;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 
-internal sealed class ByRolesRecipientsResolverDynamic<TBLLContext> : ByRolesRecipientsResolverBase<TBLLContext>
+internal sealed class ByRolesRecipientsResolverDynamic<TBLLContext>(
+    ConfigurationContextFacade configurationContextFacade,
+    LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
+    : ByRolesRecipientsResolverBase<TBLLContext>(configurationContextFacade, lambdaProcessorFactory)
     where TBLLContext : class
 {
-    public ByRolesRecipientsResolverDynamic(
-        ConfigurationContextFacade configurationContextFacade,
-        LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
-        : base(configurationContextFacade, lambdaProcessorFactory)
-    {
-    }
-
     internal override RecipientCollection Resolve<T>(Subscription subscription, DomainObjectVersions<T> versions)
     {
         if (subscription.SourceMode != SubscriptionSourceMode.Dynamic)

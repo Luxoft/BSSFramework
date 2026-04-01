@@ -29,21 +29,13 @@ public class GenerateTypeMap
     /// <param name="elementFileType">Тип DTO свойства</param>
     /// <param name="isDetail">Свойство является деталью</param>
     /// <returns></returns>
-    public bool UsedDetailRole(Type elementType, RoleFileType elementFileType, bool? isDetail)
-    {
-        return this.GetNotSelfProperties().Any(prop =>
-                                                       prop.ElementType == elementType
-                                                       && (elementFileType == null || prop.ElementFileType == null || prop.ElementFileType == elementFileType)
-                                                       && (isDetail == null || prop.IsDetail == isDetail.Value));
-    }
+    public bool UsedDetailRole(Type elementType, RoleFileType elementFileType, bool? isDetail) =>
+        this.GetNotSelfProperties().Any(prop =>
+                                            prop.ElementType == elementType
+                                            && (elementFileType == null || prop.ElementFileType == null || prop.ElementFileType == elementFileType)
+                                            && (isDetail == null || prop.IsDetail == isDetail.Value));
 
-    private IEnumerable<GeneratePropertyMap> GetNotSelfProperties()
-    {
-        return this.Properties.Where(prop => prop.ElementType != this.DomainType || prop.ElementFileType != this.FileType);
-    }
+    private IEnumerable<GeneratePropertyMap> GetNotSelfProperties() => this.Properties.Where(prop => prop.ElementType != this.DomainType || prop.ElementFileType != this.FileType);
 
-    public override string ToString()
-    {
-        return $"DomainType: {this.DomainType.Name} | FileType: {this.FileType}";
-    }
+    public override string ToString() => $"DomainType: {this.DomainType.Name} | FileType: {this.FileType}";
 }

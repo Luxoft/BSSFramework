@@ -27,10 +27,7 @@ internal static class TrackingResult
         return new TrackingResult<TDomainObject>(allProperties);
     }
 
-    private static object GetDefault(Type type)
-    {
-        return ThreadsafeMemoize<Type, object>(t => t.IsValueType ? Activator.CreateInstance(t) : null)(type);
-    }
+    private static object GetDefault(Type type) => ThreadsafeMemoize<Type, object>(t => t.IsValueType ? Activator.CreateInstance(t) : null)(type);
 
     private static Func<TArg, TResult> ThreadsafeMemoize<TArg, TResult>(this Func<TArg, TResult> func)
     {

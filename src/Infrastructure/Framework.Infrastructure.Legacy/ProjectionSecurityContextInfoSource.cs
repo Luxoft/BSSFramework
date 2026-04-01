@@ -12,8 +12,5 @@ public class ProjectionSecurityContextInfoSource(
     IActualDomainTypeResolver actualDomainTypeResolver)
     : SecurityContextInfoSource(serviceProxyFactory, securityContextInfoList)
 {
-    public override SecurityContextInfo GetSecurityContextInfo(Type type)
-    {
-        return base.GetSecurityContextInfo(actualDomainTypeResolver.Resolve(type));
-    }
+    public override SecurityContextInfo GetSecurityContextInfo(Type type) => base.GetSecurityContextInfo(actualDomainTypeResolver.Resolve(type));
 }

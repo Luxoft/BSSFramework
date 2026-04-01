@@ -14,8 +14,5 @@ public class ServerDTOGeneratorConfiguration(AuthorizationGenerationEnvironment 
 
     public override bool IdentityIsReference { get; } = true;
 
-    protected override IGeneratePolicy<RoleFileType> CreateGeneratePolicy()
-    {
-        return new DTORoleGeneratePolicy(DTORole.Client | DTORole.Event).Or(new DTORoleGeneratePolicy(DTORole.Event));
-    }
+    protected override IGeneratePolicy<RoleFileType> CreateGeneratePolicy() => new DTORoleGeneratePolicy(DTORole.Client | DTORole.Event).Or(new DTORoleGeneratePolicy(DTORole.Event));
 }

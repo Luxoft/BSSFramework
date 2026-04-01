@@ -1,55 +1,39 @@
 ﻿using System.Linq.Expressions;
 
 using CommonFramework;
-
 using Framework.Core;
 
-namespace Framework.ExpressionParsers;
+namespace Framework.ExpressionParsers.Native;
 
 public static class NativeExpressionParserExtensions
 {
     public static Expression<TDelegate> Parse<TDelegate>(this INativeExpressionParser expressionParserFactory, string expression)
+        where TDelegate : Delegate
     {
         if (expressionParserFactory == null) throw new ArgumentNullException(nameof(expressionParserFactory));
         if (expression == null) throw new ArgumentNullException(nameof(expression));
 
         var delegateType = typeof(TDelegate);
 
-        if (!typeof(Delegate).IsAssignableFrom(delegateType))
-        {
-            throw new ArgumentOutOfRangeException("TDelegate");
-        }
-
-        var invokeMethod = delegateType.GetMethod("Invoke");
+        var invokeMethod = delegateType.GetMethod("Invoke")!;
 
         return (Expression<TDelegate>)expressionParserFactory.Parse(new NativeExpressionParsingData(new MethodTypeInfo(invokeMethod), expression));
     }
 
     public static INativeExpressionParser ToSafeComposite(this INativeExpressionParser[] innerParsers) => new TryFaultMixedExpressionParserFactory(innerParsers);
 
-    private class TryFaultMixedExpressionParserFactory : INativeExpressionParser
+    private class TryFaultMixedExpressionParserFactory(INativeExpressionParser[] innerParsers) : INativeExpressionParser
     {
-        private readonly INativeExpressionParser[] innerParsers;
-
-
-        public TryFaultMixedExpressionParserFactory(INativeExpressionParser[] innerParsers)
-        {
-            if (innerParsers == null) throw new ArgumentNullException(nameof(innerParsers));
-
-            this.innerParsers = innerParsers;
-        }
-
-
         public LambdaExpression Parse(NativeExpressionParsingData input)
         {
-            var preResult = this.innerParsers.ToArray(factory => LazyHelper.Create(() => TryResult.Catch(() => factory.Parse(input))));
+            var preResult = innerParsers.ToArray(factory => LazyHelper.Create(() => TryResult.Catch(() => factory.Parse(input))));
 
 
-            var firstSucces = preResult.FirstOrDefault(v => v.Value.IsSuccess());
+            var firstSuccess = preResult.FirstOrDefault(v => v.Value.IsSuccess());
 
-            if (firstSucces != null)
+            if (firstSuccess != null)
             {
-                return firstSucces.Value.GetValue();
+                return firstSuccess.Value.GetValue();
             }
 
             var errors = preResult.Select(v => v.Value).GetErrors();

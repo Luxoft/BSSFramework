@@ -17,20 +17,11 @@ public class UniqueIndexMetadata
         this._fields = fields.ToList();
     }
 
-    public string Name
-    {
-        get { return this._name; }
-    }
+    public string Name => this._name;
 
-    public IEnumerable<FieldMetadata> Fields
-    {
-        get { return this._fields; }
-    }
+    public IEnumerable<FieldMetadata> Fields => this._fields;
 
-    public override int GetHashCode()
-    {
-        return this._name != null ? this._name.GetHashCode() : 0;
-    }
+    public override int GetHashCode() => this._name != null ? this._name.GetHashCode() : 0;
 
     public string FriendlyName
     {
@@ -44,15 +35,9 @@ public class UniqueIndexMetadata
         }
     }
 
-    protected bool Equals(UniqueIndexMetadata other)
-    {
-        return string.Equals(this._name, other._name) && this.Equals(this._fields, other._fields);
-    }
+    protected bool Equals(UniqueIndexMetadata other) => string.Equals(this._name, other._name) && this.Equals(this._fields, other._fields);
 
-    private bool Equals(IEnumerable<FieldMetadata> arg1, IEnumerable<FieldMetadata> arg2)
-    {
-        return arg1.OrderBy(z => z.Name).SequenceEqual(arg2.OrderBy(z => z.Name));
-    }
+    private bool Equals(IEnumerable<FieldMetadata> arg1, IEnumerable<FieldMetadata> arg2) => arg1.OrderBy(z => z.Name).SequenceEqual(arg2.OrderBy(z => z.Name));
 
     public override bool Equals(object obj)
     {

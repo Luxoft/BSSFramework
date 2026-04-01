@@ -7,13 +7,7 @@ public class EmptyObjectStateService : IObjectStateService
         yield break;
     }
 
-    public bool IsNew(object entity)
-    {
-        return false;
-    }
+    public bool IsNew(object entity) => false;
 
-    public bool IsRemoving(object entity)
-    {
-        return false;
-    }
+    public bool IsRemoving(object entity) => false;
 }

@@ -17,8 +17,7 @@ public class DefaultConfigurationInitializer(
     IDefaultConnectionStringSource defaultConnectionStringSource,
     DefaultConfigurationInitializerSettings settings) : IConfigurationInitializer
 {
-    public void Initialize(Configuration cfg)
-    {
+    public void Initialize(Configuration cfg) =>
         Fluently
             .Configure(cfg)
             .Database(
@@ -58,5 +57,4 @@ public class DefaultConfigurationInitializer(
                     }
                 })
             .BuildConfiguration();
-    }
 }

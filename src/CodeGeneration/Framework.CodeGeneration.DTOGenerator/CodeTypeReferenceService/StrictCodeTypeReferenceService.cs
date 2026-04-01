@@ -13,17 +13,12 @@ namespace Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
 public class StrictCodeTypeReferenceService<TConfiguration>(TConfiguration configuration) : LayerCodeTypeReferenceService<TConfiguration>(configuration)
     where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
-    public override bool IsOptional(PropertyInfo property)
-    {
-        return !this.Configuration.ExpandStrictMaybeToDefault && base.IsOptional(property);
-    }
+    public override bool IsOptional(PropertyInfo property) => !this.Configuration.ExpandStrictMaybeToDefault && base.IsOptional(property);
 
-    public override RoleFileType GetReferenceFileType(PropertyInfo property)
-    {
-        return !property.IsDetail() && this.Configuration.IsPersistentObject(property.PropertyType)
-                       ? BaseFileType.IdentityDTO
-                       : BaseFileType.StrictDTO;
-    }
+    public override RoleFileType GetReferenceFileType(PropertyInfo property) =>
+        !property.IsDetail() && this.Configuration.IsPersistentObject(property.PropertyType)
+            ? BaseFileType.IdentityDTO
+            : BaseFileType.StrictDTO;
 
     public override RoleFileType GetCollectionFileType(PropertyInfo property)
     {

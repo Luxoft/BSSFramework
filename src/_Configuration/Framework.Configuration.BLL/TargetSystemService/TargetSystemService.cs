@@ -87,10 +87,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLL
         this.eventOperationSender.Send(domainObject, domainObjectEvent, CancellationToken.None).GetAwaiter().GetResult();
     }
 
-    public bool IsAssignable(Type domainType)
-    {
-        return typeof(TPersistentDomainObjectBase).IsAssignableFrom(domainType);
-    }
+    public bool IsAssignable(Type domainType) => typeof(TPersistentDomainObjectBase).IsAssignableFrom(domainType);
 
     private IRevisionSubscriptionSystemService GetSubscriptionService(
             SubscriptionMetadataStore subscriptionMetadataStore)

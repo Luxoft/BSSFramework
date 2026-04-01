@@ -13,16 +13,14 @@ public class BLLContextFileFactory<TConfiguration>(TConfiguration configuration)
 {
     public override FileType FileType => FileType.BLLContext;
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration
-               {
-                       Name = this.Name,
-                       Attributes = MemberAttributes.Public,
-                       IsPartial = true,
-                       IsClass = true,
-               };
-    }
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new()
+        {
+            Name = this.Name,
+            Attributes = MemberAttributes.Public,
+            IsPartial = true,
+            IsClass = true,
+        };
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {

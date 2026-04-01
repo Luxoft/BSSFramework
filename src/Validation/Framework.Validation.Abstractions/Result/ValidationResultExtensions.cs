@@ -21,17 +21,9 @@ public static class ValidationResultExtensions
     }
 
 
-    public static ValidationResult ToValidationResult<TSource, TResult>(this MergeResult<TSource, TResult> mergeResult, Func<IEnumerable<TResult>, ValidationResult> addedItemsValidateFunc, Func<IEnumerable<TSource>, ValidationResult> removedItemsValidateFunc)
-    {
-        return addedItemsValidateFunc(mergeResult.AddingItems) + removedItemsValidateFunc(mergeResult.RemovingItems);
-    }
+    public static ValidationResult ToValidationResult<TSource, TResult>(this MergeResult<TSource, TResult> mergeResult, Func<IEnumerable<TResult>, ValidationResult> addedItemsValidateFunc, Func<IEnumerable<TSource>, ValidationResult> removedItemsValidateFunc) => addedItemsValidateFunc(mergeResult.AddingItems) + removedItemsValidateFunc(mergeResult.RemovingItems);
 
-    public static ValidationResult ToValidationResult<T>(this ITryResult<T> tryResult)
-    {
-        return tryResult.Match(_ => ValidationResult.Success, ValidationResult.CreateError);
-    }
-
-
+    public static ValidationResult ToValidationResult<T>(this ITryResult<T> tryResult) => tryResult.Match(_ => ValidationResult.Success, ValidationResult.CreateError);
 
     internal static ValidationResult Apply(this ValidationResult validationResult, ICustomErrorData errorData)
     {

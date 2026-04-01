@@ -5,7 +5,4 @@
 /// Как независимый объект. т.е. иерархия не соблюдается.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class)]
-public class InlineBaseTypeMappingAttribute : Attribute
-{
-
-}
+public class InlineBaseTypeMappingAttribute : Attribute;

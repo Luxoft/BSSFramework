@@ -12,9 +12,7 @@ namespace Framework.Core.Serialization;
 /// <typeparam name="TSerializedValue">Тип сериализованного значения</typeparam>
 /// <typeparam name="TValue">Сериализуемый тип</typeparam>
 public interface ISerializer<TSerializedValue, TValue> :
-        IParser<TSerializedValue, TValue>, IFormatter<TValue, TSerializedValue>
-{
-}
+        IParser<TSerializedValue, TValue>, IFormatter<TValue, TSerializedValue>;
 
 /// <summary>
 /// Сериализатор

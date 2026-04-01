@@ -1,21 +1,12 @@
 ﻿using System.Linq.Expressions;
 
-namespace Framework.ExpressionParsers;
+using Framework.ExpressionParsers.Native;
+using Framework.ExpressionParsers.Native._Exceptions;
 
-public class CSharpNativeExpressionParser : INativeExpressionParser
+namespace Framework.ExpressionParsers._CSharp;
+
+public class CSharpNativeExpressionParser(INativeBodyExpressionParser parser) : INativeExpressionParser
 {
-    private readonly INativeBodyExpressionParser parser;
-
-
-    public CSharpNativeExpressionParser(INativeBodyExpressionParser parser)
-    {
-        if (parser == null) throw new ArgumentNullException(nameof(parser));
-
-        this.parser = parser;
-    }
-
-
-
     public LambdaExpression Parse(NativeExpressionParsingData input)
     {
         if (input == null) throw new ArgumentNullException(nameof(input));
@@ -28,6 +19,7 @@ public class CSharpNativeExpressionParser : INativeExpressionParser
         var parameterNames = this.GetParametersNames(expression).ToList();
         var expressionParameters = this.GetInputFuncParameters(parameterNames, funcMethodInfo).ToArray();
         var separateStartIndex = expression.IndexOf("=>");
+
         if (-1 != separateStartIndex)
         {
             expressionBody = new string(expression.Skip(separateStartIndex + 2).ToArray());
@@ -117,7 +109,7 @@ public class CSharpNativeExpressionParser : INativeExpressionParser
     }
 
 
-    private LambdaExpression ParseExpression(ParameterExpression[] parameters, Type returnType, string expression) => (LambdaExpression)this.parser.Parse(parameters, returnType, expression);
+    private LambdaExpression ParseExpression(ParameterExpression[] parameters, Type returnType, string expression) => (LambdaExpression)parser.Parse(parameters, returnType, expression);
 
     /// <summary>
     /// Parse only primitive types

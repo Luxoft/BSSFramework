@@ -35,10 +35,7 @@ public abstract class RazorTemplate<TDomainObject> : IRazorTemplate
     /// </summary>
     public IServiceProvider ServiceProvider { get; set; } = null!;
 
-    protected TextWriter Output
-    {
-        get { return this.output; }
-    }
+    protected TextWriter Output => this.output;
 
     /// <inheritdoc />
     public abstract void Execute();

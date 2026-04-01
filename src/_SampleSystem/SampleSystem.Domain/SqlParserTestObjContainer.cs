@@ -13,7 +13,7 @@ public class SqlParserTestObjContainer : AuditPersistentDomainObjectBase
 
     public virtual SqlParserTestObj IncludedObject
     {
-        get { return this.includedObject; }
-        set { this.includedObject = value; }
+        get => this.includedObject;
+        set => this.includedObject = value;
     }
 }

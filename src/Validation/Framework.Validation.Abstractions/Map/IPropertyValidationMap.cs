@@ -60,9 +60,7 @@ public interface IPropertyValidationMap<in TSource> : IPropertyValidationMap
 /// </summary>
 /// <typeparam name="TSource">Валидируемый тип</typeparam>
 /// <typeparam name="TProperty">Тип свойства</typeparam>
-public interface IPropertyValidationMap<in TSource, in TProperty> : IPropertyValidationMap<TSource>, IValidatorCollection<IPropertyValidator<TSource, TProperty>>
-{
-}
+public interface IPropertyValidationMap<in TSource, in TProperty> : IPropertyValidationMap<TSource>, IValidatorCollection<IPropertyValidator<TSource, TProperty>>;
 
 /// <summary>
 /// Метаданные валидируемого одиночного-свойства

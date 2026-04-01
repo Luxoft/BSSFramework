@@ -41,10 +41,7 @@ public class TestAsyncController(
 
     [DBSessionMode(DBSessionMode.Read)]
     [HttpPost]
-    public async Task<LocationIdentityDTO> AsyncSaveLocationWithWriteException(LocationStrictDTO locationStrictDTO, CancellationToken cancellationToken = default)
-    {
-        return await this.AsyncSaveLocation(locationStrictDTO, cancellationToken);
-    }
+    public async Task<LocationIdentityDTO> AsyncSaveLocationWithWriteException(LocationStrictDTO locationStrictDTO, CancellationToken cancellationToken = default) => await this.AsyncSaveLocation(locationStrictDTO, cancellationToken);
 
     [HttpGet]
     public async Task<int> TestDelay(CancellationToken cancellationToken = default)

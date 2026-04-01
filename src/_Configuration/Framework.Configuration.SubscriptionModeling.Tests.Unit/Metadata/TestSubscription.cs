@@ -26,10 +26,8 @@ internal sealed class TestSubscription : SubscriptionWithCustomModelMetadata<obj
             CopyGenerationLambda => this.copyGenerationLambda;
 
     public override IEnumerable<ISecurityItemSourceLambdaMetadata<object, object, ISecurityContext>>
-            SecurityItemSourceLambdas
-    {
-        get { return this.securityItemSourceLambdas; }
-    }
+            SecurityItemSourceLambdas =>
+        this.securityItemSourceLambdas;
 
     public override RecipientsSelectorMode RecipientsSelectorMode { get; protected set; } =
         RecipientsSelectorMode.RolesExceptGeneration;
@@ -44,36 +42,21 @@ internal sealed class TestSubscription : SubscriptionWithCustomModelMetadata<obj
 
     public override bool AllowEmptyListOfRecipients { get; protected set; } = true;
 
-    internal void SetSenderName(string senderName)
-    {
-        this.senderName = senderName;
-    }
+    internal void SetSenderName(string senderName) => this.senderName = senderName;
 
-    internal void SetSenderEmail(string senderEmail)
-    {
-        this.senderEmail = senderEmail;
-    }
+    internal void SetSenderEmail(string senderEmail) => this.senderEmail = senderEmail;
 
-    internal void SetConditionLambda(LambdaMetadata<object, object, bool> lambda)
-    {
-        this.conditionLambda = lambda;
-    }
+    internal void SetConditionLambda(LambdaMetadata<object, object, bool> lambda) => this.conditionLambda = lambda;
 
     internal void SetGenerationLambda(
-            LambdaMetadata<object, object, IEnumerable<NotificationMessageGenerationInfo>> lambda)
-    {
+            LambdaMetadata<object, object, IEnumerable<NotificationMessageGenerationInfo>> lambda) =>
         this.generationLambda = lambda;
-    }
 
     internal void SetCopyGenerationLambda(
-            LambdaMetadata<object, object, IEnumerable<NotificationMessageGenerationInfo>> lambda)
-    {
+            LambdaMetadata<object, object, IEnumerable<NotificationMessageGenerationInfo>> lambda) =>
         this.copyGenerationLambda = lambda;
-    }
 
     internal void SetSecurityItemSourceLambdas(
-            params ISecurityItemSourceLambdaMetadata<object, object, ISecurityContext>[] lamdas)
-    {
+            params ISecurityItemSourceLambdaMetadata<object, object, ISecurityContext>[] lamdas) =>
         this.securityItemSourceLambdas = lamdas;
-    }
 }

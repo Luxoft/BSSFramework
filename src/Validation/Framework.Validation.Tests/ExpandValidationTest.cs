@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using NUnit.Framework;
 
-namespace Framework.Validation.Tests.Unit;
+namespace Framework.Validation.Tests;
 
 [TestFixture]
 public class ExpandValidationTest

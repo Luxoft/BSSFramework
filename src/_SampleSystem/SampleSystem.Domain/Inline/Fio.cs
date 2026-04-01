@@ -17,52 +17,28 @@ public class Fio : FioShort, ICloneable
     [DataMember]
     public string MiddleName
     {
-        get { return this.middleName.TrimNull(); }
-        set { this.middleName = value.TrimNull(); }
+        get => this.middleName.TrimNull();
+        set => this.middleName = value.TrimNull();
     }
 
     [DataMember]
-    public override string FullName
-    {
-        get { return $"{base.FullName} {this.MiddleName}"; }
-    }
+    public override string FullName => $"{base.FullName} {this.MiddleName}";
 
-    public new Fio Clone()
-    {
-        return this.MemberwiseClone() as Fio;
-    }
+    public new Fio Clone() => this.MemberwiseClone() as Fio;
 
-    object ICloneable.Clone()
-    {
-        return this.Clone();
-    }
+    object ICloneable.Clone() => this.Clone();
 
+    public override bool Equals(object obj) => this.Equals(obj as FioShort);
 
-    public override bool Equals(object obj)
-    {
-        return this.Equals(obj as FioShort);
-    }
+    public override int GetHashCode() => 0;
 
-    public override int GetHashCode()
-    {
-        return 0;
-    }
+    public bool Equals(Fio other) =>
+        other != null
+        && this.FirstName == other.FirstName
+        && this.LastName == other.LastName
+        && this.MiddleName == other.MiddleName;
 
-    public bool Equals(Fio other)
-    {
-        return other != null
-               && this.FirstName == other.FirstName
-               && this.LastName == other.LastName
-               && this.MiddleName == other.MiddleName;
-    }
+    public static bool operator ==(Fio v1, Fio v2) => ReferenceEquals(v1, v2) || (!ReferenceEquals(v1, null) && v1.Equals(v2));
 
-    public static bool operator ==(Fio v1, Fio v2)
-    {
-        return ReferenceEquals(v1, v2) || (!ReferenceEquals(v1, null) && v1.Equals(v2));
-    }
-
-    public static bool operator !=(Fio v1, Fio v2)
-    {
-        return !(v1 == v2);
-    }
+    public static bool operator !=(Fio v1, Fio v2) => !(v1 == v2);
 }

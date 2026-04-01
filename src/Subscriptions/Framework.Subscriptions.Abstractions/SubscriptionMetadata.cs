@@ -11,6 +11,4 @@
 [Obsolete("Use SubscriptionWithCustomModelMetadata")]
 public abstract class SubscriptionMetadata<TContext, TDomainObject, TTemplate> : SubscriptionWithCustomModelMetadata<TContext, TDomainObject, TDomainObject, TTemplate>
         where TDomainObject : class
-        where TTemplate : IRazorTemplate
-{
-}
+        where TTemplate : IRazorTemplate;

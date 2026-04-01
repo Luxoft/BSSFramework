@@ -5,10 +5,8 @@ namespace SampleSystem.Domain;
 public class EmployeePersonalCellPhone : EmployeeCellPhoneBase
 {
     public EmployeePersonalCellPhone(Employee employee)
-            : base(employee)
-    {
+            : base(employee) =>
         this.Employee.AddDetail(this);
-    }
 
     protected EmployeePersonalCellPhone()
     {

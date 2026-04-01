@@ -22,9 +22,7 @@ namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProp
 
 public interface IDTOFileFactory<out TConfiguration, out TFileType> : IFileFactory<TConfiguration, TFileType>, IDTOSource<TConfiguration>, IServerMappingServiceExternalMethodGenerator
         where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
-        where TFileType : DTOFileType
-{
-}
+        where TFileType : DTOFileType;
 
 public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration configuration, Type domainType)
     : FileFactory<TConfiguration, TFileType>(configuration, domainType), IDTOFileFactory<TConfiguration, TFileType>
@@ -43,11 +41,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
     protected virtual bool AllowCreate { get; } = true;
 
 
-    public IEnumerable<PropertyInfo> GetProperties(bool isWritable)
-    {
-        return this.Configuration.GetDomainTypeProperties(this.DomainType, this.FileType, isWritable);
-    }
-
+    public IEnumerable<PropertyInfo> GetProperties(bool isWritable) => this.Configuration.GetDomainTypeProperties(this.DomainType, this.FileType, isWritable);
 
     public virtual IEnumerable<CodeMemberMethod> GetServerMappingServiceInterfaceMethods()
     {
@@ -244,15 +238,12 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
     }
 
 
-    private IEnumerable<CodeTypeMember> CreatePropertyMembers()
-    {
-        return from sourceProperty in this.GetProperties(false)
+    private IEnumerable<CodeTypeMember> CreatePropertyMembers() =>
+        from sourceProperty in this.GetProperties(false)
 
-               from member in this.CreatePropertyMember(sourceProperty)
+        from member in this.CreatePropertyMember(sourceProperty)
 
-               select member;
-    }
-
+        select member;
 
     protected virtual CodeMemberField CreateFieldMember(PropertyInfo property, string fieldName)
     {
@@ -269,12 +260,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
                };
     }
 
-    protected virtual CodeExpression GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property)
-    {
-        return null;
-    }
-
-
+    protected virtual CodeExpression GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property) => null;
 
     protected virtual CodeMemberProperty CreatePropertyMember(PropertyInfo sourceProperty, CodeMemberField fieldMember)
     {
@@ -321,28 +307,26 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
     }
 
 
-    protected CodeTypeReference GetMappingObjectReference()
-    {
-        return this.IsPersistent() ?
+    protected CodeTypeReference GetMappingObjectReference() =>
+        this.IsPersistent() ?
 
-                       new CodeTypeReference(typeof(IMappingObject<,,>))
-                       {
-                               TypeArguments =
-                               {
-                                       this.Configuration.DTOMappingServiceInterfaceTypeReference,
-                                       this.DomainType,
-                                       this.Configuration.Environment.GetIdentityType()
-                               }
-                       }
-                       : new CodeTypeReference(typeof(IMappingObject<,>))
-                         {
-                                 TypeArguments =
-                                 {
-                                         this.Configuration.DTOMappingServiceInterfaceTypeReference,
-                                         this.DomainType
-                                 }
-                         };
-    }
+            new CodeTypeReference(typeof(IMappingObject<,,>))
+            {
+                TypeArguments =
+                {
+                    this.Configuration.DTOMappingServiceInterfaceTypeReference,
+                    this.DomainType,
+                    this.Configuration.Environment.GetIdentityType()
+                }
+            }
+            : new CodeTypeReference(typeof(IMappingObject<,>))
+              {
+                  TypeArguments =
+                  {
+                      this.Configuration.DTOMappingServiceInterfaceTypeReference,
+                      this.DomainType
+                  }
+              };
 
     DTOFileType IDTOSource.FileType => this.FileType;
     //DTOFileType IFileTypeSource<DTOFileType>.FileType => this.FileType;

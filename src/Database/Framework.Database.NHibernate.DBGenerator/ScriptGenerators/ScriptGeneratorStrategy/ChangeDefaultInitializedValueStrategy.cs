@@ -17,7 +17,7 @@ public class ChangeDefaultInitializedValueStrategy(DatabaseScriptGeneratorStrate
     /// <summary>
     /// Мод применяемого миграционого скрипта
     /// </summary>
-    public override ApplyMigrationDbScriptMode ApplyMigrationDbScriptMode { get { return ApplyMigrationDbScriptMode.ChangeDefaultValue; } }
+    public override ApplyMigrationDbScriptMode ApplyMigrationDbScriptMode => ApplyMigrationDbScriptMode.ChangeDefaultValue;
 
     /// <summary>
     /// Модификации базы данных по определенной стратегии

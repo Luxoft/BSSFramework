@@ -38,8 +38,8 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual Permission Permission
     {
-        get { return this.permission; }
-        set { this.permission = value; }
+        get => this.permission;
+        set => this.permission = value;
     }
 
     /// <summary>

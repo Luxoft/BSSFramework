@@ -28,35 +28,15 @@ public class BusinessUnitTypeLinkWithPossibleParent :
     [IsMaster]
     public virtual BusinessUnitType BusinessUnitType
     {
-        get
-        {
-            return this.businessUnitType;
-        }
-
-        set
-        {
-            this.businessUnitType = value;
-        }
+        get => this.businessUnitType;
+        set => this.businessUnitType = value;
     }
 
     public virtual BusinessUnitType PossibleParent
     {
-        get
-        {
-            return this.possibleParent;
-        }
-
-        set
-        {
-            this.possibleParent = value;
-        }
+        get => this.possibleParent;
+        set => this.possibleParent = value;
     }
 
-    BusinessUnitType IDetail<BusinessUnitType>.Master
-    {
-        get
-        {
-            return this.businessUnitType;
-        }
-    }
+    BusinessUnitType IDetail<BusinessUnitType>.Master => this.businessUnitType;
 }

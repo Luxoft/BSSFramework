@@ -64,17 +64,13 @@ public static class DefaultDomainBLLBaseExtensions
 
     public static TDomainObject? GetByName<TPersistentDomainObjectBase, TDomainObject, TIdent>(this IDefaultDomainBLLQueryBase<TPersistentDomainObjectBase, TDomainObject, TIdent> bll, string name, bool throwOnNotFound, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule)
             where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-            where TDomainObject : class, TPersistentDomainObjectBase, IVisualIdentityObject
-    {
-        return bll.GetByName(name, throwOnNotFound, buildFetchRule.ToFetchRule());
-    }
+            where TDomainObject : class, TPersistentDomainObjectBase, IVisualIdentityObject =>
+        bll.GetByName(name, throwOnNotFound, buildFetchRule.ToFetchRule());
 
     public static TDomainObject? GetByName<TPersistentDomainObjectBase, TDomainObject, TIdent>(this IDefaultDomainBLLQueryBase<TPersistentDomainObjectBase, TDomainObject, TIdent> bll, string name, bool throwOnNotFound = false)
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase, IVisualIdentityObject
-    {
-        return bll.GetByName(name, throwOnNotFound, FetchRule<TDomainObject>.Empty);
-    }
+        where TDomainObject : class, TPersistentDomainObjectBase, IVisualIdentityObject =>
+        bll.GetByName(name, throwOnNotFound, FetchRule<TDomainObject>.Empty);
 
     public static TDomainObject? GetByCode<TPersistentDomainObjectBase, TDomainObject, TIdent, TCode>(this IDefaultDomainBLLQueryBase<TPersistentDomainObjectBase, TDomainObject, TIdent> bll, TCode code, bool throwOnNotFound, FetchRule<TDomainObject> fetchRule)
             where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
@@ -96,19 +92,15 @@ public static class DefaultDomainBLLBaseExtensions
 
     public static TDomainObject? GetByCode<TPersistentDomainObjectBase, TDomainObject, TIdent, TCode>(this IDefaultDomainBLLQueryBase<TPersistentDomainObjectBase, TDomainObject, TIdent> bll, TCode code, bool throwOnNotFound, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule)
             where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-            where TDomainObject : class, TPersistentDomainObjectBase, ICodeObject<TCode>
-    {
-        return bll.GetByCode(code, throwOnNotFound, buildFetchRule.ToFetchRule());
-    }
+            where TDomainObject : class, TPersistentDomainObjectBase, ICodeObject<TCode> =>
+        bll.GetByCode(code, throwOnNotFound, buildFetchRule.ToFetchRule());
 
     public static TDomainObject? GetByCode<TPersistentDomainObjectBase, TDomainObject, TIdent, TCode>(
         this IDefaultDomainBLLQueryBase<TPersistentDomainObjectBase, TDomainObject, TIdent> bll,
         TCode code, bool throwOnNotFound = false)
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase, ICodeObject<TCode>
-    {
-        return bll.GetByCode(code, throwOnNotFound, FetchRule<TDomainObject>.Empty);
-    }
+        where TDomainObject : class, TPersistentDomainObjectBase, ICodeObject<TCode> =>
+        bll.GetByCode(code, throwOnNotFound, FetchRule<TDomainObject>.Empty);
 
     public static TDomainObject? GetByDomainType<TDomainObject>(this IBLLQueryBase<TDomainObject> bll, IDomainType domainType, bool throwOnNotFound = true)
             where TDomainObject : class, IDomainType

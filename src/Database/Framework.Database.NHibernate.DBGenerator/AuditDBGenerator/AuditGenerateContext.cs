@@ -10,29 +10,35 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace Framework.Database.NHibernate.DBGenerator.AuditDBGenerator;
 
-struct AuditGenerateContext
+internal struct AuditGenerateContext
 {
-    private readonly IDatabaseScriptGeneratorContext context;
-
-
     public string AuditScheme { get; private set; }
+
     public List<PersistentClass> PersistentClasses { get; private set; }
+
     public DatabaseMetadata AuditDatabaseMetadata { get; private set; }
-    public DatabaseMetadata OriginalDatabaseMetadata { get; private set; }
+
+    public DatabaseMetadata OriginalDatabaseMetadata { get; }
+
     public global::NHibernate.Dialect.Dialect Dialect { get; private set; }
+
     public IMapping Mapping { get; private set; }
+
     public string DefaultCatalog { get; private set; }
+
     public Configuration Configuration { get; private set; }
+
     public DbConnection Connection { get; private set; }
-    public ManagedProviderConnectionHelper AuditConnectionHelper { get; private set; }
-    public ManagedProviderConnectionHelper OriginalConnectionHelper { get; private set; }
-    public DbConnection OriginalConnection { get; private set; }
+
+    public ManagedProviderConnectionHelper AuditConnectionHelper { get; }
+
+    public ManagedProviderConnectionHelper OriginalConnectionHelper { get; }
+
+    public DbConnection OriginalConnection { get; }
+
     public List<MappingSettings> MappingSettings { get; private set; }
 
-    public IDatabaseScriptGeneratorContext Context
-    {
-        get { return this.context; }
-    }
+    public IDatabaseScriptGeneratorContext Context { get; }
 
     public AuditGenerateContext(
             List<PersistentClass> auditClassMappings,
@@ -45,12 +51,8 @@ struct AuditGenerateContext
             List<MappingSettings> metadataProviders,
             IDatabaseScriptGeneratorContext context) : this()
     {
-        this.context = context;
+        this.Context = context;
         this.MappingSettings = metadataProviders;
-        if (auditScheme == null)
-        {
-            throw new ArgumentNullException(nameof(auditScheme));
-        }
 
         this.AuditScheme = auditScheme;
         this.PersistentClasses = auditClassMappings;

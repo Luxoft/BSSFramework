@@ -13,12 +13,10 @@ internal sealed class MessageTemplateFactoryTo : MessageTemplateFactoryBase
             DomainObjectVersions<TModelObjectType> versions,
             Subscription subscription,
             RecipientsBag recipientsBag,
-            IEnumerable<Attachment> attachments)
-    {
-        return subscription.SendIndividualLetters
-                       ? this.CreateTemplatesForEach<TSourceDomainObjectType, TModelObjectType>(versions, subscription, recipientsBag.To, recipientsBag.ReplyTo, attachments)
-                       : this.CreateOneTemplateForAll<TSourceDomainObjectType, TModelObjectType>(versions, subscription, recipientsBag.To, recipientsBag.ReplyTo, attachments);
-    }
+            IEnumerable<Attachment> attachments) =>
+        subscription.SendIndividualLetters
+            ? this.CreateTemplatesForEach<TSourceDomainObjectType, TModelObjectType>(versions, subscription, recipientsBag.To, recipientsBag.ReplyTo, attachments)
+            : this.CreateOneTemplateForAll<TSourceDomainObjectType, TModelObjectType>(versions, subscription, recipientsBag.To, recipientsBag.ReplyTo, attachments);
 
     private IEnumerable<MessageTemplateNotification> CreateTemplatesForEach<TSourceDomainObjectType, TModelObjectType>(
             DomainObjectVersions<TModelObjectType> domainObjectVersions,

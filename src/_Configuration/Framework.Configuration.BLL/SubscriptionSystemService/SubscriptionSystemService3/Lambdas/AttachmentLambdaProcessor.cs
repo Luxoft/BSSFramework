@@ -9,14 +9,9 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSyst
 /// Процессор лямбда-выражения типа "Attachment".
 /// </summary>
 /// <seealso cref="LambdaProcessor" />
-public class AttachmentLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLContext>
-        where TBLLContext : class
+public class AttachmentLambdaProcessor<TBLLContext>(TBLLContext bllContext) : LambdaProcessor<TBLLContext>(bllContext)
+    where TBLLContext : class
 {
-    public AttachmentLambdaProcessor(TBLLContext bllContext)
-            : base(bllContext)
-    {
-    }
-
     protected override string LambdaName => "Attachment";
 
     public virtual IEnumerable<NativeAttachment> Invoke<T>(

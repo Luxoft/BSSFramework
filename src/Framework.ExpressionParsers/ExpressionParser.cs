@@ -1,43 +1,40 @@
-﻿using System.Linq.Expressions;
+﻿using System.Collections.Concurrent;
+using System.Linq.Expressions;
 
-using CommonFramework.DictionaryCache;
 using CommonFramework.ExpressionEvaluate;
 
 using Framework.Core;
+using Framework.ExpressionParsers._CSharp;
+using Framework.ExpressionParsers.Native;
 
 namespace Framework.ExpressionParsers;
 
-public abstract class ExpressionParser<TDelegate>(INativeExpressionParser parser)
-    : ExpressionParser<TDelegate, Expression<TDelegate>>(parser, expr => LambdaCompileCache.GetFunc(expr))
-    where TDelegate : class
+public class ExpressionParser<TDelegate>(INativeExpressionParser parser, ILambdaCompileCache lambdaCompileCache)
+    : ExpressionParser<TDelegate, Expression<TDelegate>>
+    where TDelegate : Delegate
 {
-    protected override Expression<TDelegate> GetInternalExpression(string value) => this.Parser.Parse<TDelegate>(value);
-
-    private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.None);
-}
-
-public abstract class ExpressionParser<TDelegate, TExpression> : NativeExpressionParserContainer,
-
-                                                                 IExpressionParser<string, TDelegate, TExpression>
-
-        where TDelegate : class
-        where TExpression : LambdaExpression
-{
-    private readonly IDictionaryCache<string, TExpression> expressionCache;
-
-    private readonly IDictionaryCache<string, TDelegate> delegateCache;
-
-
-    protected ExpressionParser(INativeExpressionParser parser, Func<TExpression, TDelegate> compileFunc)
-            : base (parser)
+    public ExpressionParser(INativeExpressionParser parser)
+        : this(parser, new LambdaCompileCache(LambdaCompileMode.None))
     {
-        if (parser == null) throw new ArgumentNullException(nameof(parser));
-        if (compileFunc == null) throw new ArgumentNullException(nameof(compileFunc));
-
-        this.expressionCache = new DictionaryCache<string, TExpression>(this.GetInternalExpression).WithLock();
-        this.delegateCache = new DictionaryCache<string, TDelegate>(str => compileFunc(this.expressionCache[str])).WithLock();
     }
 
+    public ExpressionParser()
+        : this(CSharpNativeExpressionParser.Compile)
+    {
+    }
+
+    protected override Expression<TDelegate> GetInternalExpression(string value) => parser.Parse<TDelegate>(value);
+
+    protected override TDelegate CompileExpression(Expression<TDelegate> expression) => lambdaCompileCache.GetFunc(expression);
+}
+
+public abstract class ExpressionParser<TDelegate, TExpression> : IExpressionParser<string, TDelegate, TExpression>
+    where TDelegate : Delegate
+    where TExpression : LambdaExpression
+{
+    private readonly ConcurrentDictionary<string, TExpression> expressionCache = [];
+
+    private readonly ConcurrentDictionary<string, TDelegate> delegateCache = [];
 
     public Type ExpressionType => typeof(TDelegate);
 
@@ -45,26 +42,25 @@ public abstract class ExpressionParser<TDelegate, TExpression> : NativeExpressio
 
     protected abstract TExpression GetInternalExpression(string value);
 
+    protected abstract TDelegate CompileExpression(TExpression expression);
 
-    protected TResult TryWrapOperation<TResult>(string value, Func<TResult> getResult)
-    {
-        if (value == null) throw new ArgumentNullException(nameof(value));
-        if (getResult == null) throw new ArgumentNullException(nameof(getResult));
+    public TExpression GetExpression(string value) =>
+        this.expressionCache.GetOrAdd(
+            value,
+            _ =>
+            {
+                try
+                {
+                    return this.GetInternalExpression(value);
+                }
+                catch (Exception ex)
+                {
+                    throw new ExpressionParingException($"Can't parse value: \"{value}\". Expected format: {this.ExpectedFormat}", ex);
+                }
+            });
 
-        try
-        {
-            return getResult();
-        }
-        catch (Exception ex)
-        {
-            throw new ArgumentException($"Can't parse value: \"{value}\". Expected format: {this.ExpectedFormat}", nameof(value), ex);
-        }
-    }
-
-
-    public TExpression GetExpression(string value) => this.TryWrapOperation(value, () => this.expressionCache[value]);
-
-    public TDelegate GetDelegate(string value) => this.TryWrapOperation(value, () => this.delegateCache[value]);
+    public TDelegate GetDelegate(string value) =>
+        this.delegateCache.GetOrAdd(value, _ => this.CompileExpression(this.GetExpression(value)));
 
     public virtual void Validate(string source) => this.GetExpression(source);
 }

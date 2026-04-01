@@ -281,27 +281,21 @@ public class Projection<TDomainObject> : IProjection
     /// <param name="getName">Получение имени проекции</param>
     /// <param name="bllView">Генерация BLL и фасадных методов</param>
     /// <returns></returns>
-    public Projection<TDomainObject> OverrideHeader(Expression<Func<Projection<TDomainObject>>> getName, bool? bllView = null)
-    {
-        return this.OverrideHeader(getName.GetInstanceMemberName(), bllView);
-    }
-
+    public Projection<TDomainObject> OverrideHeader(Expression<Func<Projection<TDomainObject>>> getName, bool? bllView = null) => this.OverrideHeader(getName.GetInstanceMemberName(), bllView);
 
     /// <summary>
     /// Добавление всех свойств из другой проекции, кроме заголовков
     /// </summary>
     /// <param name="propertiesSource"></param>
     /// <returns></returns>
-    public Projection<TDomainObject> AddSource(Projection<TDomainObject> propertiesSource)
-    {
-        return new Projection<TDomainObject>(
-                                             this.Name,
-                                             this.BLLView,
-                                             this.properties.Concat(propertiesSource.properties),
-                                             this.filterAttributes.Concat(propertiesSource.filterAttributes),
-                                             this.customProperties.Concat(propertiesSource.customProperties),
-                                             this.projectionAttributes.Concat(propertiesSource.projectionAttributes));
-    }
+    public Projection<TDomainObject> AddSource(Projection<TDomainObject> propertiesSource) =>
+        new(
+            this.Name,
+            this.BLLView,
+            this.properties.Concat(propertiesSource.properties),
+            this.filterAttributes.Concat(propertiesSource.filterAttributes),
+            this.customProperties.Concat(propertiesSource.customProperties),
+            this.projectionAttributes.Concat(propertiesSource.projectionAttributes));
 
     /// <summary>
     /// Добавление фильтра, по которому выгружаюстя проекционные объекты
@@ -322,10 +316,7 @@ public class Projection<TDomainObject> : IProjection
     /// <typeparam name="TFilter">Тип фильтра</typeparam>
     /// <param name="target">Применимость фильтра</param>
     /// <returns></returns>
-    public Projection<TDomainObject> Filter<TFilter>(ProjectionFilterTargets target = ProjectionFilterTargets.OData)
-    {
-        return this.Filter(typeof(TFilter), target);
-    }
+    public Projection<TDomainObject> Filter<TFilter>(ProjectionFilterTargets target = ProjectionFilterTargets.OData) => this.Filter(typeof(TFilter), target);
 
     /// <summary>
     /// Добавление пользовательского атрибута

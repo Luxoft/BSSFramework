@@ -10,10 +10,8 @@ namespace Framework.AutomationCore.Xunit;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddXunitIntegrationTests(this IServiceCollection services, Action<AutomationFrameworkSettings>? setup = null)
-    {
-        return services
-               .AddSingleton<ITestInitializeAndCleanup, DiTestInitializeAndCleanup>()
-               .AddIntegrationTests(setup);
-    }
+    public static IServiceCollection AddXunitIntegrationTests(this IServiceCollection services, Action<AutomationFrameworkSettings>? setup = null) =>
+        services
+            .AddSingleton<ITestInitializeAndCleanup, DiTestInitializeAndCleanup>()
+            .AddIntegrationTests(setup);
 }

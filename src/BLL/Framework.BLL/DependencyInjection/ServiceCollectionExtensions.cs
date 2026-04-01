@@ -133,13 +133,7 @@ public static class ServiceCollectionExtensions
     }
 
 
-    private static Type GetSingleCtorParameterTypeImpl(this Type type, Type implType)
-    {
-        return type.GetSingleCtorParameterTypes().Single(implType.IsAssignableFrom);
-    }
+    private static Type GetSingleCtorParameterTypeImpl(this Type type, Type implType) => type.GetSingleCtorParameterTypes().Single(implType.IsAssignableFrom);
 
-    private static IEnumerable<Type> GetSingleCtorParameterTypes(this Type type)
-    {
-        return type.GetConstructors().Single().GetParameters().Select(p => p.ParameterType);
-    }
+    private static IEnumerable<Type> GetSingleCtorParameterTypes(this Type type) => type.GetConstructors().Single().GetParameters().Select(p => p.ParameterType);
 }

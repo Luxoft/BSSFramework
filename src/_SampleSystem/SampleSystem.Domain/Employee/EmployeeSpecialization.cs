@@ -5,6 +5,4 @@ namespace SampleSystem.Domain;
 
 [BLLViewRole]
 [UniqueGroup]
-public class EmployeeSpecialization : BaseDirectory
-{
-}
+public class EmployeeSpecialization : BaseDirectory;

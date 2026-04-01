@@ -121,8 +121,5 @@ public class SubscriptionServicesFactory<TBLLContext>
     /// Создаёт экземпляр фасада контекста конфигурации.
     /// </summary>
     /// <returns>Экземпляр фасада контекста конфигурации.</returns>
-    public virtual ConfigurationContextFacade CreateConfigurationContextFacade()
-    {
-        return new ConfigurationContextFacade(this.configurationContext);
-    }
+    public virtual ConfigurationContextFacade CreateConfigurationContextFacade() => new(this.configurationContext);
 }

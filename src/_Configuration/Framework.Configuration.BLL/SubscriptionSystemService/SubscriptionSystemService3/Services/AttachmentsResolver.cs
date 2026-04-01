@@ -6,16 +6,9 @@ using Attachment = System.Net.Mail.Attachment;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
 
-public class AttachmentsResolver<TBLLContext>
-        where TBLLContext : class
+public class AttachmentsResolver<TBLLContext>(LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
+    where TBLLContext : class
 {
-    private readonly LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory;
-
-    public AttachmentsResolver(LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
-    {
-        this.lambdaProcessorFactory = lambdaProcessorFactory;
-    }
-
     public virtual IEnumerable<Attachment> Resolve<T>(
             Subscription subscription,
             DomainObjectVersions<T> versions)
@@ -31,7 +24,7 @@ public class AttachmentsResolver<TBLLContext>
             throw new ArgumentNullException(nameof(versions));
         }
 
-        var lambdaProcessor = this.lambdaProcessorFactory.Create<AttachmentLambdaProcessor<TBLLContext>>();
+        var lambdaProcessor = lambdaProcessorFactory.Create<AttachmentLambdaProcessor<TBLLContext>>();
 
         return lambdaProcessor.Invoke(subscription, versions).ToArray();
     }

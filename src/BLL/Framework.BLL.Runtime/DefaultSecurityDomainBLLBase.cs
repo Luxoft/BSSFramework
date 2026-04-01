@@ -30,11 +30,7 @@ namespace Framework.BLL
         public ISecurityProvider<TDomainObject> SecurityProvider { get; }
 
 
-        protected override IQueryable<TDomainObject> ProcessSecurity(IQueryable<TDomainObject> queryable)
-        {
-            return base.ProcessSecurity(queryable).Pipe(q => this.SecurityProvider.Inject(q));
-        }
-
+        protected override IQueryable<TDomainObject> ProcessSecurity(IQueryable<TDomainObject> queryable) => base.ProcessSecurity(queryable).Pipe(q => this.SecurityProvider.Inject(q));
 
         public virtual void CheckAccess(TDomainObject domainObject)
         {
@@ -43,11 +39,7 @@ namespace Framework.BLL
             this.SecurityProvider.CheckAccessAsync(domainObject, this.Context.AccessDeniedExceptionService).GetAwaiter().GetResult();
         }
 
-        protected virtual void CheckInsertAccess(TDomainObject domainObject, TIdent id)
-        {
-            this.CheckAccess(domainObject);
-        }
-
+        protected virtual void CheckInsertAccess(TDomainObject domainObject, TIdent id) => this.CheckAccess(domainObject);
 
         public override void Save(TDomainObject domainObject)
         {

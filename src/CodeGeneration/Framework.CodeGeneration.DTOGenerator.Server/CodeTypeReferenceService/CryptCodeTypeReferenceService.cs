@@ -13,8 +13,5 @@ public class CryptCodeTypeReferenceService<TConfiguration>(
     : DynamicCodeTypeReferenceService<TConfiguration>(configuration, referenceFileType, collectionFileType)
     where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
-    public override bool IsOptional(PropertyInfo property)
-    {
-        return false;
-    }
+    public override bool IsOptional(PropertyInfo property) => false;
 }

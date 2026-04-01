@@ -16,8 +16,8 @@ public class IMRequest : Information
     [MaxLength(50)]
     public virtual string Message
     {
-        get { return this.message.TrimNull(); }
-        set { this.message = value.TrimNull(); }
+        get => this.message.TrimNull();
+        set => this.message = value.TrimNull();
     }
 
     [DetailRole(true)]

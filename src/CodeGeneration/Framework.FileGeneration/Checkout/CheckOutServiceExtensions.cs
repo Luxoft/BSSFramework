@@ -2,10 +2,7 @@
 
 public static class CheckOutServiceExtensions
 {
-    public static ICheckOutService WithTrace(this ICheckOutService baseCheckOutService)
-    {
-        return new TraceCheckOutService(baseCheckOutService);
-    }
+    public static ICheckOutService WithTrace(this ICheckOutService baseCheckOutService) => new TraceCheckOutService(baseCheckOutService);
 
     private class TraceCheckOutService : CheckOutService
     {

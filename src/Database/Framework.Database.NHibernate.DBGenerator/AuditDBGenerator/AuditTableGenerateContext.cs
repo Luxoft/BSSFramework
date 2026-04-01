@@ -53,8 +53,5 @@ class AuditTableGenerateContext(
         return this.Dialect.Qualify(usedCatalog, usedSchema, quotedName);
     }
 
-    private string GetQuotedName(string value)
-    {
-        return this.Table.IsQuoted ? this.Dialect.QuoteForTableName(value) : value;
-    }
+    private string GetQuotedName(string value) => this.Table.IsQuoted ? this.Dialect.QuoteForTableName(value) : value;
 }

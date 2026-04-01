@@ -14,8 +14,6 @@ public partial class TestBusinessUnitBLL
     public SelectOperationResult<HierarchicalNode<TestBusinessUnit, Guid>> GetTreeByOData(
             SelectOperation<TestBusinessUnit> selectOperation,
             HierarchicalBusinessUnitFilterModel filter,
-            FetchRule<TestBusinessUnit> fetchs)
-    {
-        return this.GetTreeByOData(selectOperation, fetchs);
-    }
+            FetchRule<TestBusinessUnit> fetchs) =>
+        this.GetTreeByOData(selectOperation, fetchs);
 }

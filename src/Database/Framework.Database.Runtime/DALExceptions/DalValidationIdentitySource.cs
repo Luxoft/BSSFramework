@@ -4,13 +4,7 @@ namespace Framework.Database.DALExceptions;
 
 public class DalValidationIdentitySource : IDalValidationIdentitySource
 {
-    public string GetTypeValidationName(Type type)
-    {
-        return type.Name;
-    }
+    public string GetTypeValidationName(Type type) => type.Name;
 
-    public string GetPropertyValidationName(PropertyInfo property)
-    {
-        return property.Name;
-    }
+    public string GetPropertyValidationName(PropertyInfo property) => property.Name;
 }

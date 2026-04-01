@@ -54,10 +54,7 @@ public abstract class PropertyAssignerConfiguratorBase<TConfiguration>(TConfigur
     {
         private readonly PropertyAssignerConfiguratorBase<TConfiguration> propertyAssignerConfigurator = propertyAssignerConfigurator ?? throw new ArgumentNullException(nameof(propertyAssignerConfigurator));
 
-        protected override CodeExpression GetCondition(PropertyInfo property, bool isEdit)
-        {
-            return this.propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, isEdit);
-        }
+        protected override CodeExpression GetCondition(PropertyInfo property, bool isEdit) => this.propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, isEdit);
     }
 
     private class UpdateToDomainObjectPropertyAssigner(
@@ -67,10 +64,7 @@ public abstract class PropertyAssignerConfiguratorBase<TConfiguration>(TConfigur
     {
         private readonly PropertyAssignerConfiguratorBase<TConfiguration> propertyAssignerConfigurator = propertyAssignerConfigurator ?? throw new ArgumentNullException(nameof(propertyAssignerConfigurator));
 
-        protected override CodeExpression GetCondition(PropertyInfo property)
-        {
-            return this.propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, true);
-        }
+        protected override CodeExpression GetCondition(PropertyInfo property) => this.propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, true);
     }
 
 
@@ -81,10 +75,7 @@ public abstract class PropertyAssignerConfiguratorBase<TConfiguration>(TConfigur
     {
         private readonly PropertyAssignerConfiguratorBase<TConfiguration> propertyAssignerConfigurator = propertyAssignerConfigurator ?? throw new ArgumentNullException(nameof(propertyAssignerConfigurator));
 
-        protected override CodeExpression GetCondition(PropertyInfo property)
-        {
-            return this.propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, true);
-        }
+        protected override CodeExpression GetCondition(PropertyInfo property) => this.propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, true);
     }
 
 
@@ -95,9 +86,6 @@ public abstract class PropertyAssignerConfiguratorBase<TConfiguration>(TConfigur
     {
         private readonly PropertyAssignerConfiguratorBase<TConfiguration> propertyAssignerConfigurator = propertyAssignerConfigurator ?? throw new ArgumentNullException(nameof(propertyAssignerConfigurator));
 
-        protected override CodeExpression GetCondition(PropertyInfo property)
-        {
-            return this.propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, true);
-        }
+        protected override CodeExpression GetCondition(PropertyInfo property) => this.propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, true);
     }
 }

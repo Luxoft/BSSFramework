@@ -141,55 +141,25 @@ internal class GeneratedType : BaseTypeImpl
         }
     }
 
-    protected override bool IsArrayImpl()
-    {
-        return false;
-    }
+    protected override bool IsArrayImpl() => false;
 
-    protected override bool HasElementTypeImpl()
-    {
-        return false;
-    }
+    protected override bool HasElementTypeImpl() => false;
 
-    protected override bool IsPointerImpl()
-    {
-        return false;
-    }
+    protected override bool IsPointerImpl() => false;
 
-    protected override bool IsByRefImpl()
-    {
-        return false;
-    }
+    protected override bool IsByRefImpl() => false;
 
-    public override bool IsAssignableFrom(Type c)
-    {
-        return this.Equals(c);
-    }
+    public override bool IsAssignableFrom(Type c) => this.Equals(c);
 
-    public override object[] GetCustomAttributes(Type attributeType, bool inherit)
-    {
-        return (object[])this.customAttributes.Where(attributeType.IsInstanceOfType).ToArray(attributeType);
-    }
+    public override object[] GetCustomAttributes(Type attributeType, bool inherit) => (object[])this.customAttributes.Where(attributeType.IsInstanceOfType).ToArray(attributeType);
 
-    public override object[] GetCustomAttributes(bool inherit)
-    {
-        return this.customAttributes;
-    }
+    public override object[] GetCustomAttributes(bool inherit) => this.customAttributes;
 
-    protected override TypeAttributes GetAttributeFlagsImpl()
-    {
-        return TypeAttributes.BeforeFieldInit;
-    }
+    protected override TypeAttributes GetAttributeFlagsImpl() => TypeAttributes.BeforeFieldInit;
 
-    protected override bool IsPrimitiveImpl()
-    {
-        return false;
-    }
+    protected override bool IsPrimitiveImpl() => false;
 
-    public override FieldInfo GetField(string name, BindingFlags bindingAttr)
-    {
-        return this.GetFields(bindingAttr).SingleOrDefault(f => f.Name == name);
-    }
+    public override FieldInfo GetField(string name, BindingFlags bindingAttr) => this.GetFields(bindingAttr).SingleOrDefault(f => f.Name == name);
 
     public override FieldInfo[] GetFields(BindingFlags bindingAttr)
     {
@@ -203,10 +173,7 @@ internal class GeneratedType : BaseTypeImpl
         }
     }
 
-    public override PropertyInfo[] GetProperties(BindingFlags bindingAttr)
-    {
-        return this.GetInternalProperties(bindingAttr).SelectMany().ToArray();
-    }
+    public override PropertyInfo[] GetProperties(BindingFlags bindingAttr) => this.GetInternalProperties(bindingAttr).SelectMany().ToArray();
 
     private IEnumerable<IEnumerable<PropertyInfo>> GetInternalProperties(BindingFlags bindingAttr)
     {
@@ -228,14 +195,12 @@ internal class GeneratedType : BaseTypeImpl
         }
     }
 
-    protected override PropertyInfo GetPropertyImpl(string name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers)
-    {
-        return this.generatedProperties.SingleOrDefault(prop => prop.Name == name)
+    protected override PropertyInfo GetPropertyImpl(string name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers) =>
+        this.generatedProperties.SingleOrDefault(prop => prop.Name == name)
 
-               ?? this.generatedCustomProperties.SingleOrDefault(prop => prop.Name == name)
+        ?? this.generatedCustomProperties.SingleOrDefault(prop => prop.Name == name)
 
-               ?? this.BaseType.GetProperty(name, bindingAttr);
-    }
+        ?? this.BaseType.GetProperty(name, bindingAttr);
 
     public override InterfaceMapping GetInterfaceMap(Type interfaceType)
     {
@@ -254,15 +219,9 @@ internal class GeneratedType : BaseTypeImpl
                };
     }
 
-    public override bool Equals(Type o)
-    {
-        return ReferenceEquals(this, o);
-    }
+    public override bool Equals(Type o) => ReferenceEquals(this, o);
 
-    public override int GetHashCode()
-    {
-        return this.FullName.GetHashCode();
-    }
+    public override int GetHashCode() => this.FullName.GetHashCode();
 
     private IEnumerable<GeneratedProperty> GetGeneratedProperties()
     {

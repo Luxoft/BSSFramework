@@ -24,15 +24,13 @@ public abstract class ScriptGeneratorStrategyBase(DatabaseScriptGeneratorStrateg
     /// Генерирует SQL скрипт по алгоритму реализованному в конкретной стратегии
     /// </summary>
     /// <returns>Функция возвращающая коллекцию SQL команд</returns>
-    public Func<IEnumerable<string>> Execute()
-    {
-        return () =>
-               {
-                   this.ExecuteStart();
-                   this.ExecuteBase();
-                   return this.ExecuteEnd();
-               };
-    }
+    public Func<IEnumerable<string>> Execute() =>
+        () =>
+        {
+            this.ExecuteStart();
+            this.ExecuteBase();
+            return this.ExecuteEnd();
+        };
 
     /// <summary>
     /// Модификации базы данных по определенной стратегии

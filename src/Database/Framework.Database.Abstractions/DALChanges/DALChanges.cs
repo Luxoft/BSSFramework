@@ -96,19 +96,9 @@ public class DALChanges : DALChanges<IDALObject>
                                                   });
     }
 
-    public DALChanges GetSubset(Type type)
-    {
-        return this.subsetCache[type];
-    }
+    public DALChanges GetSubset(Type type) => this.subsetCache[type];
 
+    public Dictionary<Type, DALChanges<IDALObject>> GroupDALObjectByType() => this.lazyGroupDALObjectByType.Value;
 
-    public Dictionary<Type, DALChanges<IDALObject>> GroupDALObjectByType()
-    {
-        return this.lazyGroupDALObjectByType.Value;
-    }
-
-    public Dictionary<Type, DALChanges<object>> GroupByType()
-    {
-        return this.lazyGroupByType.Value;
-    }
+    public Dictionary<Type, DALChanges<object>> GroupByType() => this.lazyGroupByType.Value;
 }

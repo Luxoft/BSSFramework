@@ -11,15 +11,13 @@ public class ValidatorFileFactory<TConfiguration>(TConfiguration configuration) 
 {
     public override FileType FileType => FileType.Validator;
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration
-               {
-                       Name = this.Name,
-                       Attributes = MemberAttributes.Public,
-                       IsPartial = true,
-               };
-    }
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new()
+        {
+            Name = this.Name,
+            Attributes = MemberAttributes.Public,
+            IsPartial = true,
+        };
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {

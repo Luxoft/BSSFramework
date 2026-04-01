@@ -325,9 +325,8 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
         return base.GetInternalDomainTypeProperties(domainType, baseFileType);
     }
 
-    protected override IEnumerable<ICodeFileFactoryHeader<BaseFileType>> GetFileFactoryHeaders()
-    {
-        return base.GetFileFactoryHeaders().Concat(
+    protected override IEnumerable<ICodeFileFactoryHeader<BaseFileType>> GetFileFactoryHeaders() =>
+        base.GetFileFactoryHeaders().Concat(
             new[]
             {
                 this.BaseEventDTOFileFactoryHeader,
@@ -340,36 +339,28 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
                 this.ServerPrimitiveDTOMappingServiceBaseFileFactoryHeader,
                 this.ServerPrimitiveDTOMappingServiceFileFactoryHeader,
             });
-    }
 
-    protected virtual IPropertyAssignerConfigurator GetPropertyAssignerConfigurator()
-    {
-        return new PropertyAssignerConfigurator<ServerDTOGeneratorConfigurationBase<TEnvironment>>(this);
-    }
+    protected virtual IPropertyAssignerConfigurator GetPropertyAssignerConfigurator() => new PropertyAssignerConfigurator<ServerDTOGeneratorConfigurationBase<TEnvironment>>(this);
 
     /// <summary>
     /// Возвращает типы преобразователей DTO.
     /// </summary>
     /// <returns><see cref="IEnumerable{DTOFileType}"/>.</returns>
-    protected virtual IEnumerable<DTOFileType> GetLambdaConvertTypes()
-    {
-        return
-        [
-            BaseFileType.IdentityDTO,
-            BaseFileType.VisualDTO,
-            BaseFileType.SimpleDTO,
-            BaseFileType.FullDTO,
-            BaseFileType.RichDTO,
+    protected virtual IEnumerable<DTOFileType> GetLambdaConvertTypes() =>
+    [
+        BaseFileType.IdentityDTO,
+        BaseFileType.VisualDTO,
+        BaseFileType.SimpleDTO,
+        BaseFileType.FullDTO,
+        BaseFileType.RichDTO,
 
-            BaseFileType.ProjectionDTO,
+        BaseFileType.ProjectionDTO,
 
-            ServerFileType.SimpleEventDTO,
-            ServerFileType.RichEventDTO,
-            ServerFileType.SimpleIntegrationDTO,
-            ServerFileType.RichIntegrationDTO
-        ];
-    }
-
+        ServerFileType.SimpleEventDTO,
+        ServerFileType.RichEventDTO,
+        ServerFileType.SimpleIntegrationDTO,
+        ServerFileType.RichIntegrationDTO
+    ];
 
     public IEnumerable<Type> GetDomainTypeMasters(Type domainType, DTOFileType fileType, bool isWritable)
     {

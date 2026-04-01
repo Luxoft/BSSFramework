@@ -19,10 +19,7 @@ public class ServerFileGenerator(IServerDTOGeneratorConfiguration<IServerDTOGene
 public class ServerFileGenerator<TConfiguration>(TConfiguration configuration) : FileGenerator<TConfiguration>(configuration)
     where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
-    protected override ICodeFileFactory<DTOFileType> GetIdentityDTOFileFactory(Type domainType)
-    {
-        return new DefaultServerIdentityDTOFileFactory<TConfiguration>(this.Configuration, domainType);
-    }
+    protected override ICodeFileFactory<DTOFileType> GetIdentityDTOFileFactory(Type domainType) => new DefaultServerIdentityDTOFileFactory<TConfiguration>(this.Configuration, domainType);
 
     protected virtual ICodeFileFactory<DTOFileType> GetVisualDTOFileFactory(Type domainType)
     {

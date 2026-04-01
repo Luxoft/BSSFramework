@@ -5,16 +5,12 @@ using Framework.Subscriptions.Domain;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Recipients;
 
-internal sealed class ByRolesRecipientsResolverNonContext<TBLLContext> : ByRolesRecipientsResolverBase<TBLLContext>
-        where TBLLContext : class
+internal sealed class ByRolesRecipientsResolverNonContext<TBLLContext>(
+    ConfigurationContextFacade configurationContextFacade,
+    LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
+    : ByRolesRecipientsResolverBase<TBLLContext>(configurationContextFacade, lambdaProcessorFactory)
+    where TBLLContext : class
 {
-    public ByRolesRecipientsResolverNonContext(
-            ConfigurationContextFacade configurationContextFacade,
-            LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
-            : base(configurationContextFacade, lambdaProcessorFactory)
-    {
-    }
-
     internal override RecipientCollection Resolve<T>(Subscription subscription, DomainObjectVersions<T> versions)
     {
         if (subscription.SourceMode != SubscriptionSourceMode.NonContext)

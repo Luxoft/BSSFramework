@@ -14,16 +14,9 @@ public class AggregateValidationException : ValidationExceptionBase
     }
 
 
-    public ReadOnlyCollection<ValidationExceptionBase> InnerExceptions { get; private set; }
+    public ReadOnlyCollection<ValidationExceptionBase> InnerExceptions { get; }
 
-    public override string Message
-    {
-        get { return this.InnerExceptions.Join(Environment.NewLine, x => x.Message); }
-    }
+    public override string Message => this.InnerExceptions.Join(Environment.NewLine, x => x.Message);
 
-
-    public override string ToString()
-    {
-        return new AggregateException(this.InnerExceptions).ToString();
-    }
+    public override string ToString() => new AggregateException(this.InnerExceptions).ToString();
 }

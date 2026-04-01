@@ -7,7 +7,10 @@ using System.Text;
 
 using CommonFramework;
 
-namespace Framework.ExpressionParsers;
+using Framework.ExpressionParsers.Native;
+using Framework.ExpressionParsers.Native._Exceptions;
+
+namespace Framework.ExpressionParsers._CSharp;
 
 /// <summary>
 /// Base on source of MS Dynamic Query Library from 2008 sdk

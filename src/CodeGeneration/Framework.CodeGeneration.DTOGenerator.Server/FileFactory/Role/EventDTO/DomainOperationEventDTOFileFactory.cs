@@ -35,16 +35,13 @@ public class DefaultDomainOperationEventDTOFileFactory<TConfiguration> : DTOFile
     protected override bool HasToDomainObjectMethod { get; }
 
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration(this.Name)
-               {
-                       IsClass = true,
-                       IsPartial = true,
-                       TypeAttributes = TypeAttributes.Public
-               };
-    }
-
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new(this.Name)
+        {
+            IsClass = true,
+            IsPartial = true,
+            TypeAttributes = TypeAttributes.Public
+        };
 
     protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
     {

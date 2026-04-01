@@ -1,30 +1,15 @@
 ﻿namespace Framework.Database.Metadata;
 
-public class PrimitiveTypeFieldMetadata : FieldMetadata
+public class PrimitiveTypeFieldMetadata(
+    string name,
+    Type type,
+    IEnumerable<Attribute> attributes,
+    DomainTypeMetadata domainTypeMetadata,
+    bool isIdentity,
+    bool isCollection = false)
+    : FieldMetadata(name, type, attributes, domainTypeMetadata)
 {
-    private readonly bool _isIdentity;
-    private readonly bool _isCollection;
+    public bool IsCollection => isCollection;
 
-    public PrimitiveTypeFieldMetadata(
-            string name,
-            Type type,
-            IEnumerable<Attribute> attributes,
-            DomainTypeMetadata domainTypeMetadata,
-            bool isIdentity,
-            bool isCollection = false)
-            : base(name, type, attributes, domainTypeMetadata)
-    {
-        this._isIdentity = isIdentity;
-        this._isCollection = isCollection;
-    }
-
-    public bool IsCollection
-    {
-        get { return this._isCollection; }
-    }
-
-    public bool IsIdentity
-    {
-        get { return this._isIdentity; }
-    }
+    public bool IsIdentity => isIdentity;
 }

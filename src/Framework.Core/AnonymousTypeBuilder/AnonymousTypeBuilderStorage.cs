@@ -22,5 +22,5 @@ public class AnonymousTypeBuilderStorage : IAnonymousTypeBuilderStorage
     {
     }
 
-    public ModuleBuilder ModuleBuilder { get; private set; }
+    public ModuleBuilder ModuleBuilder { get; }
 }

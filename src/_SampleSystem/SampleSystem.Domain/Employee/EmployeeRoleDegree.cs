@@ -5,6 +5,4 @@ namespace SampleSystem.Domain;
 
 [BLLViewRole]
 [UniqueGroup]
-public class EmployeeRoleDegree : BaseDirectory
-{
-}
+public class EmployeeRoleDegree : BaseDirectory;

@@ -105,36 +105,21 @@ public abstract class SubscriptionWithCustomModelMetadata<TContext, TDomainObjec
     public Type MessageTemplateType { get; } = typeof(TTemplate);
 
     /// <inheritdoc />
-    public ILambdaMetadata GetConditionLambda()
-    {
-        return this.ConditionLambda;
-    }
+    public ILambdaMetadata GetConditionLambda() => this.ConditionLambda;
 
     /// <inheritdoc />
-    public ILambdaMetadata GetGenerationLambda()
-    {
-        return this.GenerationLambda;
-    }
+    public ILambdaMetadata GetGenerationLambda() => this.GenerationLambda;
 
     /// <inheritdoc />
-    public ILambdaMetadata GetAttachmentLambda()
-    {
-        return this.AttachmentLambda;
-    }
+    public ILambdaMetadata GetAttachmentLambda() => this.AttachmentLambda;
 
     /// <inheritdoc />
-    public ILambdaMetadata GetCopyGenerationLambda()
-    {
-        return this.CopyGenerationLambda;
-    }
+    public ILambdaMetadata GetCopyGenerationLambda() => this.CopyGenerationLambda;
 
     public ILambdaMetadata GetReplyToGenerationLambda() => this.ReplyToGenerationLambda;
 
     /// <inheritdoc />
-    public IEnumerable<ISecurityItemSourceLambdaMetadata> GetSecurityItemSourceLambdas()
-    {
-        return this.SecurityItemSourceLambdas;
-    }
+    public IEnumerable<ISecurityItemSourceLambdaMetadata> GetSecurityItemSourceLambdas() => this.SecurityItemSourceLambdas;
 
     /// <inheritdoc />
     public void Validate()

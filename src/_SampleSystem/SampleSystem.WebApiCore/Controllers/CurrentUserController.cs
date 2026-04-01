@@ -9,8 +9,5 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 public class CurrentUserController(ICurrentUser currentUser) : ControllerBase
 {
     [HttpGet]
-    public string GetCurrentUserName()
-    {
-        return currentUser.Name;
-    }
+    public string GetCurrentUserName() => currentUser.Name;
 }

@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Framework.Core;
+namespace Framework.ExpressionParsers;
 
 public interface IExpressionParser
 {
@@ -20,7 +20,4 @@ public interface IExpressionParser<in TSource, out TDelegate, out TExpression> :
 }
 
 public interface IExpressionParser<in TSource, TDelegate> : IExpressionParser<TSource, TDelegate, Expression<TDelegate>>
-        where TDelegate : class
-{
-
-}
+        where TDelegate : Delegate;

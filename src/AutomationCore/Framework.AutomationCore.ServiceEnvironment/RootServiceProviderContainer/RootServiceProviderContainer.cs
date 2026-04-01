@@ -23,8 +23,6 @@ public abstract class RootServiceProviderContainer(IServiceProvider rootServiceP
     public IDatabaseContext DatabaseContext => this.GetDatabaseContext();
 
     public virtual ControllerEvaluator<TController> GetControllerEvaluator<TController>(UserCredential? userCredential = null)
-            where TController : ControllerBase
-    {
-        return this.RootServiceProvider.GetDefaultControllerEvaluator<TController>(userCredential);
-    }
+            where TController : ControllerBase =>
+        this.RootServiceProvider.GetDefaultControllerEvaluator<TController>(userCredential);
 }

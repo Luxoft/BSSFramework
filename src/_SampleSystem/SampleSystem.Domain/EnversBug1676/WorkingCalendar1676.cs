@@ -7,10 +7,7 @@ public class WorkingCalendar1676 : BaseDirectory
 {
     private readonly Location1676 location;
 
-    public WorkingCalendar1676(Location1676 location)
-    {
-        this.location = location ?? throw new ArgumentNullException(nameof(location));
-    }
+    public WorkingCalendar1676(Location1676 location) => this.location = location ?? throw new ArgumentNullException(nameof(location));
 
     protected WorkingCalendar1676()
     {

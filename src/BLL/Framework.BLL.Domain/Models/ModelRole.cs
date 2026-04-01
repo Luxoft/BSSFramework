@@ -7,23 +7,16 @@ namespace Framework.BLL.Domain.Models;
 /// <summary>
 /// Роль модели в системе
 /// </summary>
-public class ModelRole : IEquatable<ModelRole>
+public class ModelRole(string name, DirectMode.DirectMode directMode) : IEquatable<ModelRole>
 {
     public ModelRole(Expression<Func<ModelRole>> getNameExpr, DirectMode.DirectMode directMode)
             : this(getNameExpr.GetStaticMemberName(), directMode)
     {
     }
 
-    public ModelRole(string name, DirectMode.DirectMode directMode)
-    {
-        this.Name = name;
-        this.DirectMode = directMode;
-    }
+    public string Name { get; } = name;
 
-    public string Name { get; }
-
-    public DirectMode.DirectMode DirectMode { get; }
-
+    public DirectMode.DirectMode DirectMode { get; } = directMode;
 
     public override string ToString() => this.Name;
 

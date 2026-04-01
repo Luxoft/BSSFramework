@@ -25,21 +25,15 @@ public class NotificationMessageGenerationInfo(ImmutableArray<IEmployee> recipie
 
     private class DefaultEmployee : IEmployee
     {
-        private DefaultEmployee(string email)
-        {
-            this.Email = email;
-        }
+        private DefaultEmployee(string email) => this.Email = email;
 
-
-        public string Email { get; private set; }
+        public string Email { get; }
 
         public string Login { get; private set; }
 
-        public static IEnumerable<DefaultEmployee> CreateMany(string emails)
-        {
-            return from email in emails.TrimNull().Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries)
+        public static IEnumerable<DefaultEmployee> CreateMany(string emails) =>
+            from email in emails.TrimNull().Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries)
 
-                   select new DefaultEmployee(email.Trim());
-        }
+            select new DefaultEmployee(email.Trim());
     }
 }

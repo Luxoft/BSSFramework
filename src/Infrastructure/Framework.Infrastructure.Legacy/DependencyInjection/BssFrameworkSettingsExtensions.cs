@@ -11,26 +11,16 @@ public static class BssFrameworkSettingsExtensions
     extension(IBssFrameworkBuilder builder)
     {
         public IBssFrameworkBuilder AddSubscriptionManager<TSubscriptionManager>()
-            where TSubscriptionManager : class, IEventOperationReceiver
-        {
-            return builder.AddServices(services => services.AddSubscriptionManagers(setup => setup.Add<TSubscriptionManager>()));
-        }
+            where TSubscriptionManager : class, IEventOperationReceiver =>
+            builder.AddServices(services => services.AddSubscriptionManagers(setup => setup.Add<TSubscriptionManager>()));
 
-        public IBssFrameworkBuilder AddLegacyGenericServices()
-        {
-            return builder.AddServices(services => services.AddLegacyGenericServices());
-        }
+        public IBssFrameworkBuilder AddLegacyGenericServices() => builder.AddServices(services => services.AddLegacyGenericServices());
 
-        public IBssFrameworkBuilder AddContextEvaluators()
-        {
-            return builder.AddServices(services => services.AddContextEvaluators());
-        }
+        public IBssFrameworkBuilder AddContextEvaluators() => builder.AddServices(services => services.AddContextEvaluators());
 
         public IBssFrameworkBuilder AddBLLSystem<TBLLContextDecl, TBLLContextImpl>(Action<BLLSystemSettings>? setupAction = null)
-            where TBLLContextImpl : TBLLContextDecl
-        {
-            return builder.AddServices(services => services.AddBLLSystem<TBLLContextDecl, TBLLContextImpl>(setupAction));
-        }
+            where TBLLContextImpl : TBLLContextDecl =>
+            builder.AddServices(services => services.AddBLLSystem<TBLLContextDecl, TBLLContextImpl>(setupAction));
 
         public IBssFrameworkBuilder SetDTOMapping<TDTOMappingService, TDTOMappingServiceImpl, TPersistentDomainObjectBase, TEventDTOBase>()
             where TDTOMappingService : class

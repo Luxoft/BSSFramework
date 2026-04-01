@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
 
-using NUnit.Framework;
-
 using NSubstitute;
 
-namespace Framework.Validation.Test;
+using NUnit.Framework;
+
+namespace Framework.Validation.Tests;
 
 [TestFixture]
 public class SignValueValidatorTest

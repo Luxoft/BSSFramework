@@ -17,8 +17,5 @@ internal sealed class SecurityItemSourceSourceLambda : SecurityItemSourceLambdaM
 
     public override NotificationExpandType ExpandType { get; protected set; } = NotificationExpandType.Direct;
 
-    internal void SetFunc(Func<object, DomainObjectVersions<object>, IEnumerable<ManagementUnit>> lambda)
-    {
-        this.Lambda = lambda;
-    }
+    internal void SetFunc(Func<object, DomainObjectVersions<object>, IEnumerable<ManagementUnit>> lambda) => this.Lambda = lambda;
 }

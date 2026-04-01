@@ -36,18 +36,11 @@ internal class ByRolesRecipientsResolverBase<TBLLContext>
 
     protected LambdaProcessorFactory<TBLLContext> LambdaProcessorFactory { get; }
 
-    internal virtual RecipientCollection Resolve<T>(
-            Subscription subscription,
-            DomainObjectVersions<T> versions)
-            where T : class
-    {
-        return new RecipientCollection();
-    }
+    internal virtual RecipientCollection Resolve<T>(Subscription subscription, DomainObjectVersions<T> versions)
+        where T : class =>
+        new();
 
-    protected Recipient CreateRecipient(IEmployee employee)
-    {
-        return new Recipient(employee.Login, employee.Email);
-    }
+    protected Recipient CreateRecipient(IEmployee employee) => new(employee.Login, employee.Email);
 
     protected ImmutableArray<SecurityRole> GetBusinessRoles(Subscription subscription)
     {

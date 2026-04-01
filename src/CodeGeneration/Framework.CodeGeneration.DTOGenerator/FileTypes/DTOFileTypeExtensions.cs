@@ -14,10 +14,7 @@ public static class DTOFileTypeExtensions
     }
 
 
-    public static bool HasBaseType(this MainDTOFileType fileType, bool exceptAbstract = true)
-    {
-        return fileType.GetBaseType(exceptAbstract) != null;
-    }
+    public static bool HasBaseType(this MainDTOFileType fileType, bool exceptAbstract = true) => fileType.GetBaseType(exceptAbstract) != null;
 
     public static IEnumerable<MainDTOFileType> GetBaseTypes(this MainDTOFileType fileType, bool exceptAbstract = true)
     {

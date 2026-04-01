@@ -30,10 +30,7 @@ public class PropertyCodeTypeReferenceService<TConfiguration>(TConfiguration con
         return this.Configuration.Environment.ExtendedMetadata.GetProperty(property).IsSecurity();
     }
 
-    public virtual bool IsCollection(PropertyInfo property)
-    {
-        return property.PropertyType.GetCollectionElementType().Maybe(this.IsDomainType);
-    }
+    public virtual bool IsCollection(PropertyInfo property) => property.PropertyType.GetCollectionElementType().Maybe(this.IsDomainType);
 
     public CodeTypeReference GetCodeTypeReference(PropertyInfo property, bool withOptional = false)
     {
@@ -51,10 +48,7 @@ public class PropertyCodeTypeReferenceService<TConfiguration>(TConfiguration con
         return this.Configuration.DomainTypes.Contains(type);
     }
 
-    protected bool DomainTypeIsPersistent(PropertyInfo propertyInfo)
-    {
-        return this.Configuration.IsPersistentObject(propertyInfo.ReflectedType);
-    }
+    protected bool DomainTypeIsPersistent(PropertyInfo propertyInfo) => this.Configuration.IsPersistentObject(propertyInfo.ReflectedType);
 
     protected virtual CodeTypeReference GetCodeTypeReferenceByProperty(PropertyInfo property)
     {

@@ -21,14 +21,12 @@ namespace Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
 public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvider, UserCredential? customUserCredential = null)
     where TController : ControllerBase
 {
-    public void Evaluate(Expression<Action<TController>> actionExpr)
-    {
+    public void Evaluate(Expression<Action<TController>> actionExpr) =>
         this.InternalEvaluateAsync<object?>(actionExpr, async c =>
         {
             actionExpr.Compile().Invoke(c);
             return default;
         }).GetAwaiter().GetResult();
-    }
 
     public T Evaluate<T>(Expression<Func<TController, T>> funcExpr)
     {
@@ -37,19 +35,14 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
         return this.InternalEvaluateAsync(funcExpr, async c => funcExpr.Compile().Invoke(c)).GetAwaiter().GetResult();
     }
 
-    public async Task EvaluateAsync(Expression<Func<TController, Task>> actionExpr)
-    {
+    public async Task EvaluateAsync(Expression<Func<TController, Task>> actionExpr) =>
         await this.InternalEvaluateAsync<object?>(actionExpr, async c =>
         {
             await actionExpr.Compile().Invoke(c);
             return default;
         });
-    }
 
-    public async Task<T> EvaluateAsync<T>(Expression<Func<TController, Task<T>>> funcExpr)
-    {
-        return await this.InternalEvaluateAsync(funcExpr, funcExpr.Compile());
-    }
+    public async Task<T> EvaluateAsync<T>(Expression<Func<TController, Task<T>>> funcExpr) => await this.InternalEvaluateAsync(funcExpr, funcExpr.Compile());
 
     private async Task<T> InternalEvaluateAsync<T>(LambdaExpression invokeExpr, Func<TController, Task<T>> func)
     {
@@ -78,10 +71,7 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
         context.Items["Result"] = res;
     }
 
-    public ControllerEvaluator<TController> WithImpersonate(UserCredential newCustomUserCredential)
-    {
-        return new ControllerEvaluator<TController>(rootServiceProvider, newCustomUserCredential);
-    }
+    public ControllerEvaluator<TController> WithImpersonate(UserCredential newCustomUserCredential) => new(rootServiceProvider, newCustomUserCredential);
 
     private class ImpersonateMiddleware(RequestDelegate next)
     {
@@ -116,14 +106,8 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
 
     private class WebApiInvoker(HttpContext context, RequestDelegate next)
     {
-        public WebApiInvoker WithMiddleware<TMiddleware>(Func<RequestDelegate, TMiddleware> createFunc, Func<TMiddleware, HttpContext, Task> invokeDelegate)
-        {
-            return new WebApiInvoker(context, c => invokeDelegate(createFunc(next), c));
-        }
+        public WebApiInvoker WithMiddleware<TMiddleware>(Func<RequestDelegate, TMiddleware> createFunc, Func<TMiddleware, HttpContext, Task> invokeDelegate) => new(context, c => invokeDelegate(createFunc(next), c));
 
-        public async Task Invoke()
-        {
-            await next(context);
-        }
+        public async Task Invoke() => await next(context);
     }
 }

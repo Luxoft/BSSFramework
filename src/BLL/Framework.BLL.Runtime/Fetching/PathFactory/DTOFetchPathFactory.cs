@@ -42,10 +42,7 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
                    .Pipe(node => this.GetPaths(node));
     }
 
-    protected virtual PropertyLoadNode ExpandNode(PropertyLoadNode node)
-    {
-        return node;
-    }
+    protected virtual PropertyLoadNode ExpandNode(PropertyLoadNode node) => node;
 
     protected virtual bool IsTransferType(Type type)
     {
@@ -197,11 +194,11 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
         }
 
 
-        public Type DomainType { get; private set; }
+        public Type DomainType { get; }
 
-        public IReadOnlyDictionary<PropertyInfo, PropertyLoadNode> Properties { get; private set; }
+        public IReadOnlyDictionary<PropertyInfo, PropertyLoadNode> Properties { get; }
 
-        public ReadOnlyCollection<PropertyInfo> PrimitiveProperties { get; private set; }
+        public ReadOnlyCollection<PropertyInfo> PrimitiveProperties { get; }
 
 
         public PropertyLoadNode WhereP(Func<PropertyInfo, bool> propertyFilter, bool recurse)

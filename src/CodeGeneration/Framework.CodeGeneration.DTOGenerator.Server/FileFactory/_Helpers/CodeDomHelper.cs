@@ -71,13 +71,11 @@ internal static class CodeDomHelper
         CodeExpression contextRef,
         SecurityRule securityRule,
         Type domainType,
-        CodeParameterDeclarationExpression domainObjectParameter)
-    {
-        return new CodeThisReferenceExpression()
+        CodeParameterDeclarationExpression domainObjectParameter) =>
+        new CodeThisReferenceExpression()
             .ToMethodInvokeExpression("HasAccess",
                                       domainObjectParameter.ToVariableReferenceExpression(),
                                       configuration.Environment.BLLCore.GetSecurityCodeExpression(securityRule));
-    }
 
     public static CodeParameterDeclarationExpression GetMappingServiceParameter(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>> fileFactory)
     {

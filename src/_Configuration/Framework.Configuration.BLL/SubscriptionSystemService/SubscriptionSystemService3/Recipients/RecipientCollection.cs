@@ -60,27 +60,15 @@ public sealed class RecipientCollection : IEnumerable<Recipient>
     }
 
     /// <inheritdoc/>
-    public IEnumerator<Recipient> GetEnumerator()
-    {
-        return this.store.GetEnumerator();
-    }
+    public IEnumerator<Recipient> GetEnumerator() => this.store.GetEnumerator();
 
     /// <inheritdoc/>
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return this.GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 
     private class RecipientComparer : IEqualityComparer<Recipient>
     {
-        public bool Equals(Recipient x, Recipient y)
-        {
-            return string.Equals(x.Email, y.Email, StringComparison.OrdinalIgnoreCase);
-        }
+        public bool Equals(Recipient x, Recipient y) => string.Equals(x.Email, y.Email, StringComparison.OrdinalIgnoreCase);
 
-        public int GetHashCode(Recipient obj)
-        {
-            return obj.GetHashCode();
-        }
+        public int GetHashCode(Recipient obj) => obj.GetHashCode();
     }
 }

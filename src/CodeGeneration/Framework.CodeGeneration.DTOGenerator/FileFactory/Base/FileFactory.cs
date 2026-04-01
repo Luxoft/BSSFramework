@@ -16,11 +16,8 @@ public abstract class FileFactory<TConfiguration, TFileType> : CodeFileFactory<T
         where TFileType : BaseFileType
 {
     protected FileFactory(TConfiguration configuration, Type? domainType)
-            : base(configuration, domainType)
-    {
+            : base(configuration, domainType) =>
         this.CodeTypeReferenceService = new PropertyCodeTypeReferenceService<TConfiguration>(this.Configuration);
-    }
-
 
     public string FileTypeName => this.FileType.Name;
 

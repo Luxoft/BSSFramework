@@ -3,6 +3,4 @@
 /// <summary>
 /// Маркер объектов отправляющих евенты в интеграцию
 /// </summary>
-public class BLLEventRoleAttribute : Attribute
-{
-}
+public class BLLEventRoleAttribute : Attribute;

@@ -45,13 +45,11 @@ public class DefaultBaseEventDTOFileFactory<TConfiguration>(TConfiguration confi
         yield return this.Configuration.GetDTOFileAttribute(this.DomainType, this.FileType);
     }
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration(this.Name)
-               {
-                       IsClass = true,
-                       IsPartial = true,
-                       TypeAttributes = TypeAttributes.Public | TypeAttributes.Abstract
-               };
-    }
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new(this.Name)
+        {
+            IsClass = true,
+            IsPartial = true,
+            TypeAttributes = TypeAttributes.Public | TypeAttributes.Abstract
+        };
 }

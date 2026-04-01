@@ -1,9 +1,7 @@
 ﻿namespace Framework.BLL.Domain.Attributes;
 
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class)]
-public class CreateRoleAttribute : Attribute
+public class CreateRoleAttribute(bool value) : Attribute
 {
-    public CreateRoleAttribute(bool value) => this.Value = value;
-
-    public bool Value { get; private set; }
+    public bool Value { get; private set; } = value;
 }

@@ -17,16 +17,11 @@ namespace Framework.BLL.Providers
     {
         public TBLLContext Context { get; } = context;
 
-        public IQueryable<TDomainObject> Inject(IQueryable<TDomainObject> queryable)
-        {
-            return baseSecurityProvider.Inject(queryable);
-        }
+        public IQueryable<TDomainObject> Inject(IQueryable<TDomainObject> queryable) => baseSecurityProvider.Inject(queryable);
 
-        public async ValueTask<bool> HasAccessAsync(TDomainObject domainObject, CancellationToken cancellationToken)
-        {
-            return await baseSecurityProvider.HasAccessAsync(domainObject, cancellationToken)
-                   && !this.Context.TrackingService.GetChanges(domainObject).GetUnexpectedChangedProprties(allowedPropertiesForChangingExpressions).Any();
-        }
+        public async ValueTask<bool> HasAccessAsync(TDomainObject domainObject, CancellationToken cancellationToken) =>
+            await baseSecurityProvider.HasAccessAsync(domainObject, cancellationToken)
+            && !this.Context.TrackingService.GetChanges(domainObject).GetUnexpectedChangedProprties(allowedPropertiesForChangingExpressions).Any();
 
         public ValueTask<SecurityAccessorData> GetAccessorDataAsync(TDomainObject domainObject, CancellationToken cancellationToken) =>
             baseSecurityProvider.GetAccessorDataAsync(domainObject, cancellationToken);

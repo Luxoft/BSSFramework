@@ -22,8 +22,5 @@ public class BLLSystemSettings
 
     public Type? FetchRuleExpanderType { get; set; }
 
-    public T GetSafe<T>(Expression<Func<BLLSystemSettings, T?>> expr, T? defaultValue = default)
-    {
-        return expr.Compile().Invoke(this) ?? defaultValue ?? throw new Exception($"{expr.GetMemberName()} not initialized");
-    }
+    public T GetSafe<T>(Expression<Func<BLLSystemSettings, T?>> expr, T? defaultValue = default) => expr.Compile().Invoke(this) ?? defaultValue ?? throw new Exception($"{expr.GetMemberName()} not initialized");
 }

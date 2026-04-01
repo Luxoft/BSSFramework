@@ -3,33 +3,16 @@ using Framework.Relations;
 
 namespace Framework.Database.Metadata;
 
-public class ReferenceTypeFieldMetadata : FieldMetadata
+public class ReferenceTypeFieldMetadata(string name, Type type, IEnumerable<Attribute> attributes, DomainTypeMetadata domainTypeMetadata)
+    : FieldMetadata(name, type, attributes, domainTypeMetadata)
 {
-    public ReferenceTypeFieldMetadata (string name, Type type, IEnumerable<Attribute> attributes, DomainTypeMetadata domainTypeMetadata)
-            : base (name, type, attributes, domainTypeMetadata)
-    {
+    public Type ToType => this.Type;
 
-    }
+    public Type FromType => this.DomainTypeMetadata.DomainType;
 
-    public Type ToType
-    {
-        get { return this.Type; }
-    }
+    public bool IsMasterReference => this.Attributes.OfType<IsMasterAttribute>().Any();
 
-    public Type FromType
-    {
-        get { return this.DomainTypeMetadata.DomainType; }
-    }
-
-    public bool IsMasterReference
-    {
-        get { return this.Attributes.OfType<IsMasterAttribute>().Any(); }
-    }
-
-    public bool IsOneToOneReference
-    {
-        get { return this.Attributes.OfType<MappingAttribute>().Any(attribute => attribute.IsOneToOne); }
-    }
+    public bool IsOneToOneReference => this.Attributes.OfType<MappingAttribute>().Any(attribute => attribute.IsOneToOne);
 
     public CascadeMode CascadeMode
     {

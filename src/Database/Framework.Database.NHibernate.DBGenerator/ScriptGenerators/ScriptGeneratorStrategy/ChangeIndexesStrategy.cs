@@ -19,18 +19,9 @@ internal class ChangeIndexesStrategy(DatabaseScriptGeneratorStrategyInfo paramet
     /// <summary>
     /// Мод применяемого миграционого скрипта
     /// </summary>
-    public override ApplyMigrationDbScriptMode ApplyMigrationDbScriptMode
-    {
-        get
-        {
-            return ApplyMigrationDbScriptMode.ChangeIndexies;
-        }
-    }
+    public override ApplyMigrationDbScriptMode ApplyMigrationDbScriptMode => ApplyMigrationDbScriptMode.ChangeIndexies;
 
-    private static bool IsSameByName(Index index, string indexName)
-    {
-        return index.Name.Equals(indexName, StringComparison.CurrentCultureIgnoreCase);
-    }
+    private static bool IsSameByName(Index index, string indexName) => index.Name.Equals(indexName, StringComparison.CurrentCultureIgnoreCase);
 
     private static bool IsSameByColumns(Index index, IndexKeyType newIndexKeyType, IEnumerable<string> columnNames)
     {
@@ -40,13 +31,11 @@ internal class ChangeIndexesStrategy(DatabaseScriptGeneratorStrategyInfo paramet
         return (isMoreSpecific || isSameType) && GetExistingIndexColumns(index).SequenceEqual(columnNames);
     }
 
-    private static IOrderedEnumerable<string> GetExistingIndexColumns(Index index)
-    {
-        return index.IndexedColumns
-                    .Where(x => !x.IsIncluded)
-                    .Select(column => column.Name)
-                    .OrderBy(q => q);
-    }
+    private static IOrderedEnumerable<string> GetExistingIndexColumns(Index index) =>
+        index.IndexedColumns
+             .Where(x => !x.IsIncluded)
+             .Select(column => column.Name)
+             .OrderBy(q => q);
 
     private static void CreateNewIndex(Table table, string indexName, IndexKeyType indexKeyType, IEnumerable<string> columnNames)
     {

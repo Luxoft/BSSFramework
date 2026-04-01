@@ -17,9 +17,7 @@ public interface IEmployeeSecurityElement<out TEmployee, out TBusinessUnit, out 
         where TEmployee : IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, ISecurityContext
         where TBusinessUnit : ISecurityContext
         where TDepartment : ILocationSecurityElement<TLocation>
-        where TLocation : ISecurityContext
-{
-}
+        where TLocation : ISecurityContext;
 
 [SecurityNode]
 public interface IEmployeeSecurity<out TBusinessUnit, out TDepartment, out TLocation> : IBusinessUnitSecurityElement<TBusinessUnit>, IDepartmentSecurityElement<TDepartment>

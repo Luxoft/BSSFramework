@@ -13,10 +13,7 @@ namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 public class BLLFactoryContainerFileFactory<TConfiguration>(TConfiguration configuration) : BLLFactoryContainerFileFactoryBase<TConfiguration>(configuration)
     where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
 {
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return this.Configuration.GetBLLContextContainerCodeTypeDeclaration(this.Name, false);
-    }
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() => this.Configuration.GetBLLContextContainerCodeTypeDeclaration(this.Name, false);
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes() => [.. base.GetBaseTypes(), typeof(IBLLFactoryInitializer).ToTypeReference()];
 

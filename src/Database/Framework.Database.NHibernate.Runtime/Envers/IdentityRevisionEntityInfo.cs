@@ -5,9 +5,9 @@ namespace Framework.Database.NHibernate.Envers;
 public class IdentityRevisionEntityInfo<TRevisionEntity, TIdentity>(TRevisionEntity revisionEntity, TIdentity identity, RevisionType operation)
     : IIdentityRevisionEntityInfo<TRevisionEntity, TIdentity>
 {
-    public TIdentity Identity { get; private set; } = identity;
+    public TIdentity Identity { get; } = identity;
 
-    public TRevisionEntity RevisionEntity { get; private set; } = revisionEntity;
+    public TRevisionEntity RevisionEntity { get; } = revisionEntity;
 
-    public RevisionType Operation { get; private set; } = operation;
+    public RevisionType Operation { get; } = operation;
 }

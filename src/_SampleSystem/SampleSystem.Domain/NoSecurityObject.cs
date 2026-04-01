@@ -1,5 +1,3 @@
 ﻿namespace SampleSystem.Domain;
 
-public class NoSecurityObject : AuditPersistentDomainObjectBase
-{
-}
+public class NoSecurityObject : AuditPersistentDomainObjectBase;

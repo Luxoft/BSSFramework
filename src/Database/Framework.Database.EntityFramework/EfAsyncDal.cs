@@ -16,10 +16,7 @@ public class EfAsyncDal<TDomainObject, TIdent>(
 {
     private DbContext NativeSession => session.NativeSession;
 
-    public IQueryable<TDomainObject> GetQueryable()
-    {
-        return this.NativeSession.Set<TDomainObject>();
-    }
+    public IQueryable<TDomainObject> GetQueryable() => this.NativeSession.Set<TDomainObject>();
 
     public TDomainObject Load(TIdent id) => this.LoadAsync(id).GetAwaiter().GetResult();
 

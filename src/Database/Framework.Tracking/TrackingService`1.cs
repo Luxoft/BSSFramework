@@ -27,12 +27,10 @@ public class TrackingService<TPersistentDomainObjectBase>(IObjectStateService ob
 
     /// <inheritdoc />
     public PersistentLifeObjectState GetPersistentState<TDomainObject>(TDomainObject value)
-            where TDomainObject : TPersistentDomainObjectBase
-    {
-        return objectStatesService.IsNew(value)
-                       ? PersistentLifeObjectState.NotPersistent
-                       : objectStatesService.IsRemoving(value) ? PersistentLifeObjectState.MarkAsRemoved : PersistentLifeObjectState.Persistent;
-    }
+            where TDomainObject : TPersistentDomainObjectBase =>
+        objectStatesService.IsNew(value)
+            ? PersistentLifeObjectState.NotPersistent
+            : objectStatesService.IsRemoving(value) ? PersistentLifeObjectState.MarkAsRemoved : PersistentLifeObjectState.Persistent;
 
     /// <inheritdoc />
     public ChangingLifeObjectState GetChangingState<TDomainObject>(TDomainObject value)
@@ -66,8 +64,6 @@ public class TrackingService<TPersistentDomainObjectBase>(IObjectStateService ob
 
 
     private IEnumerable<ObjectState> GetModifiedObjectStates<TDomainObject>(TDomainObject value)
-            where TDomainObject : TPersistentDomainObjectBase
-    {
-        return objectStatesService.GetModifiedObjectStates(value) ?? [];
-    }
+            where TDomainObject : TPersistentDomainObjectBase =>
+        objectStatesService.GetModifiedObjectStates(value) ?? [];
 }

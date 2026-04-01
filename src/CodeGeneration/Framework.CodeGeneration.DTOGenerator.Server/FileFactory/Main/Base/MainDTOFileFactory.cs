@@ -21,11 +21,8 @@ public abstract class MainDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     protected MainDTOFileFactory(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
-    {
+            : base(configuration, domainType) =>
         this.CodeTypeReferenceService = new MainCodeTypeReferenceService<TConfiguration>(this.Configuration);
-    }
-
 
     public virtual MainDTOFileType BaseType => this.FileType.GetBaseType(false);
 
@@ -60,15 +57,13 @@ public abstract class MainDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
     protected virtual bool ConvertToStrict { get; } = true;
 
 
-    protected sealed override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration(this.Name)
-               {
-                       IsClass = true,
-                       IsPartial = true,
-                       TypeAttributes = this.FileType.IsAbstract ? TypeAttributes.Abstract | TypeAttributes.Public : TypeAttributes.Public
-               };
-    }
+    protected sealed override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new(this.Name)
+        {
+            IsClass = true,
+            IsPartial = true,
+            TypeAttributes = this.FileType.IsAbstract ? TypeAttributes.Abstract | TypeAttributes.Public : TypeAttributes.Public
+        };
 
     protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
     {

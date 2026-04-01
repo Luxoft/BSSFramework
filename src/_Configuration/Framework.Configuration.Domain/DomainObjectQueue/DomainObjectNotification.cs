@@ -23,8 +23,8 @@ public class DomainObjectNotification : AuditPersistentDomainObjectBase
     [MaxLength]
     public virtual string SerializeData
     {
-        get { return this.serializeData; }
-        set { this.serializeData = value; }
+        get => this.serializeData;
+        set => this.serializeData = value;
     }
 
     public virtual QueueProgressStatus Status => this.status;
@@ -35,7 +35,7 @@ public class DomainObjectNotification : AuditPersistentDomainObjectBase
 
     public virtual int Size
     {
-        get { return this.size; }
-        set { this.size = value; }
+        get => this.size;
+        set => this.size = value;
     }
 }

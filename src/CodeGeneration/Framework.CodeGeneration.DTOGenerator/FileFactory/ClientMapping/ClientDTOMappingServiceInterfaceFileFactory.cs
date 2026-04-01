@@ -18,15 +18,13 @@ public class ClientDTOMappingServiceInterfaceFileFactory<TConfiguration>(TConfig
     public override BaseFileType FileType { get; } = BaseFileType.ClientDTOMappingServiceInterface;
 
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration(this.Name)
-               {
-                       Attributes = MemberAttributes.Public,
-                       IsPartial = true,
-                       IsInterface = true,
-               };
-    }
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new(this.Name)
+        {
+            Attributes = MemberAttributes.Public,
+            IsPartial = true,
+            IsInterface = true,
+        };
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
     {

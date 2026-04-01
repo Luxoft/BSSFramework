@@ -13,8 +13,5 @@ internal sealed class ConditionLambda : LambdaMetadata<object, object, bool>
         this.DomainObjectChangeType = DomainObjectChangeType.Update;
     }
 
-    internal void SetFunc(Func<object, DomainObjectVersions<object>, bool> func)
-    {
-        this.Lambda = func;
-    }
+    internal void SetFunc(Func<object, DomainObjectVersions<object>, bool> func) => this.Lambda = func;
 }

@@ -5,11 +5,8 @@ namespace Framework.Database.NHibernate.DBGenerator.ScriptGenerators.Support;
 
 public class IgnoreLink
 {
-    public static IgnoreLink CreateFromType<T>()
-    {
-        return new IgnoreLink(typeof(T));
+    public static IgnoreLink CreateFromType<T>() => new(typeof(T));
 
-    }
     public static IgnoreLink Create<T, TProperty>(Expression<Func<T, TProperty>> propertyExpression)
     {
         if (!(propertyExpression.Body is MemberExpression))
@@ -24,10 +21,8 @@ public class IgnoreLink
         return new IgnoreLink((PropertyInfo)member);
 
     }
-    public static IgnoreLink Create<T>(Expression<Func<T, object>> collectionExpression)
-    {
-        return Create<T, object>(collectionExpression);
-    }
+    public static IgnoreLink Create<T>(Expression<Func<T, object>> collectionExpression) => Create<T, object>(collectionExpression);
+
     public static IgnoreLink CreateMany<T>(Expression<Func<T, IEnumerable<object>>> collectionExpression)
     {
         if (!(collectionExpression.Body is MemberExpression))
@@ -49,10 +44,7 @@ public class IgnoreLink
         this.MemberInfo = propertyInfo;
     }
 
-    private IgnoreLink(Type fromType)
-    {
-        this.FromType = fromType;
-    }
+    private IgnoreLink(Type fromType) => this.FromType = fromType;
 
     public Type FromType { get; private set;}
 

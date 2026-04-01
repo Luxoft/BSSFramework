@@ -28,19 +28,16 @@ public class AvailableBusinessRoleSecurityProvider<TDomainObject>(
                                            ExpressionHelper.Create((BusinessRole businessRole) => permissionQ.Select(p => p.Role).Contains(businessRole)))
                                  .Pipe(toBusinessRolePathInfo.CreateCondition);
 
-    public override async ValueTask<SecurityAccessorData> GetAccessorDataAsync(TDomainObject domainObject, CancellationToken cancellationToken)
-    {
-        return (await toBusinessRolePathInfo
-                      .GetRelativeObjects(domainObject)
-                      .ToAsyncEnumerable()
-                      .Select(async (br, ct) => await this.GetAccessorData(br, ct))
-                      .ToListAsync(cancellationToken))
-            .Or();
-    }
+    public override async ValueTask<SecurityAccessorData> GetAccessorDataAsync(TDomainObject domainObject, CancellationToken cancellationToken) =>
+        (await toBusinessRolePathInfo
+               .GetRelativeObjects(domainObject)
+               .ToAsyncEnumerable()
+               .Select(async (br, ct) => await this.GetAccessorData(br, ct))
+               .ToListAsync(cancellationToken))
+        .Or();
 
-    private async Task<SecurityAccessorData> GetAccessorData(BusinessRole businessRole, CancellationToken cancellationToken)
-    {
-        return SecurityAccessorData.Return(
+    private async Task<SecurityAccessorData> GetAccessorData(BusinessRole businessRole, CancellationToken cancellationToken) =>
+        SecurityAccessorData.Return(
             await availablePermissionSource
                   .GetQueryable(DomainSecurityRule.AnyRole with { CustomCredential = new SecurityRuleCredential.AnyUserCredential() })
                   .Where(permission => permission.Role == businessRole)
@@ -48,5 +45,4 @@ public class AvailableBusinessRoleSecurityProvider<TDomainObject>(
                   .Distinct()
                   .Select(principal => principal.Name)
                   .GenericToListAsync(cancellationToken));
-    }
 }

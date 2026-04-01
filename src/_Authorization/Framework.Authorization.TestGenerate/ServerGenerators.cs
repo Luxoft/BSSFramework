@@ -11,24 +11,16 @@ namespace Framework.Authorization.TestGenerate;
 public partial class ServerGenerators
 {
     [TestMethod]
-    public void GenerateMainTest()
-    {
-        this.GenerateMain().ToList();
-    }
+    public void GenerateMainTest() => this.GenerateMain().ToList();
 
-    public IEnumerable<GeneratedFileInfo> GenerateMain()
-    {
-        return this.GenerateBLLCore()
-                   .Concat(this.GenerateBLL())
-                   .Concat(this.GenerateServerDTO())
-                   .Concat(this.GenerateMainController());
-    }
+    public IEnumerable<GeneratedFileInfo> GenerateMain() =>
+        this.GenerateBLLCore()
+            .Concat(this.GenerateBLL())
+            .Concat(this.GenerateServerDTO())
+            .Concat(this.GenerateMainController());
 
     [TestMethod]
-    public void GenerateBLLCoreTest()
-    {
-        this.GenerateBLLCore().ToList();
-    }
+    public void GenerateBLLCoreTest() => this.GenerateBLLCore().ToList();
 
     private IEnumerable<GeneratedFileInfo> GenerateBLLCore()
     {
@@ -38,10 +30,7 @@ public partial class ServerGenerators
     }
 
     [TestMethod]
-    public void GenerateBLLTest()
-    {
-        this.GenerateBLL().ToList();
-    }
+    public void GenerateBLLTest() => this.GenerateBLL().ToList();
 
     private IEnumerable<GeneratedFileInfo> GenerateBLL()
     {
@@ -57,10 +46,7 @@ public partial class ServerGenerators
     }
 
     [TestMethod]
-    public void GenerateServerDTOTest()
-    {
-        this.GenerateServerDTO().ToList();
-    }
+    public void GenerateServerDTOTest() => this.GenerateServerDTO().ToList();
 
     private IEnumerable<GeneratedFileInfo> GenerateServerDTO()
     {

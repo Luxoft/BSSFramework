@@ -6,13 +6,7 @@ namespace Framework.Projection._ImplType;
 
 internal class PropertyMethodInfoImpl(MethodInfo baseDefinition = null) : BaseMethodInfoImpl
 {
-    public override MethodInfo GetBaseDefinition()
-    {
-        return baseDefinition;
-    }
+    public override MethodInfo GetBaseDefinition() => baseDefinition;
 
-    public override bool Equals(object obj)
-    {
-        return ReferenceEquals(this, obj);
-    }
+    public override bool Equals(object obj) => ReferenceEquals(this, obj);
 }

@@ -18,13 +18,7 @@ internal class RemoveStrategy(DatabaseScriptGeneratorStrategyInfo parameter) : S
     /// <summary>
     /// Мод применяемого миграционого скрипта
     /// </summary>
-    public override ApplyMigrationDbScriptMode ApplyMigrationDbScriptMode
-    {
-        get
-        {
-            return ApplyMigrationDbScriptMode.Remove;
-        }
-    }
+    public override ApplyMigrationDbScriptMode ApplyMigrationDbScriptMode => ApplyMigrationDbScriptMode.Remove;
 
     /// <summary>
     /// Модификации базы данных по определенной стратегии
@@ -47,10 +41,7 @@ internal class RemoveStrategy(DatabaseScriptGeneratorStrategyInfo parameter) : S
         }
     }
 
-    private void RemoveColumns(Column removableColumn)
-    {
-        this.RemoveColumns(removableColumn.Parent as Table, [removableColumn]);
-    }
+    private void RemoveColumns(Column removableColumn) => this.RemoveColumns(removableColumn.Parent as Table, [removableColumn]);
 
     private void RemoveColumns(Table table, IEnumerable<Column> removableColums)
     {

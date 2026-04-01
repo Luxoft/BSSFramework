@@ -47,17 +47,14 @@ public class BaseMapToDomainObjectMethodFactory<TConfiguration, TFileFactory, TF
     protected virtual MemberAttributes MemberAttributes { get; } = MemberAttributes.Public | MemberAttributes.Final;
 
 
-    public CodeMemberMethod GetMethod()
-    {
-        return new CodeMemberMethod
-               {
-                       Attributes = this.MemberAttributes,
-                       Name = this.Configuration.MapToDomainObjectMethodName,
-                       Parameters = { this.MappingServiceParameter, this.TargetDomainParameter },
-                       Statements = { this.GetMapMethodCodeStatements().Composite() }
-               };
-    }
-
+    public CodeMemberMethod GetMethod() =>
+        new()
+        {
+            Attributes = this.MemberAttributes,
+            Name = this.Configuration.MapToDomainObjectMethodName,
+            Parameters = { this.MappingServiceParameter, this.TargetDomainParameter },
+            Statements = { this.GetMapMethodCodeStatements().Composite() }
+        };
 
     protected virtual IEnumerable<CodeStatement> GetMapMethodCodeStatements()
     {

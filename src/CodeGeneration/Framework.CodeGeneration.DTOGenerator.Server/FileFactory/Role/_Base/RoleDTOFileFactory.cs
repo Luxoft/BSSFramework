@@ -19,16 +19,14 @@ public abstract class RoleDTOFileFactory<TConfiguration>(TConfiguration configur
     protected override IPropertyAssigner MapDomainObjectToMappingObjectPropertyAssigner => new DomainObjectToDTOPropertyAssigner<TConfiguration>(this);
 
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration
-               {
-                       Name = this.Name,
-                       IsClass = true,
-                       IsPartial = true,
-                       TypeAttributes = TypeAttributes.Public
-               };
-    }
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new()
+        {
+            Name = this.Name,
+            IsClass = true,
+            IsPartial = true,
+            TypeAttributes = TypeAttributes.Public
+        };
 
     protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
     {

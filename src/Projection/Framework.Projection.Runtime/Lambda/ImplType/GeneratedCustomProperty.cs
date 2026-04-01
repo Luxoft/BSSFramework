@@ -44,28 +44,13 @@ internal class GeneratedCustomProperty : BasePropertyInfoImpl
     public override string Name => this.customProjectionProperty.Name;
 
 
-    public override object[] GetCustomAttributes(Type attributeType, bool inherit)
-    {
-        return (object[])this.customProjectionProperty.Attributes.Where(attributeType.IsInstanceOfType).ToArray(attributeType);
-    }
+    public override object[] GetCustomAttributes(Type attributeType, bool inherit) => (object[])this.customProjectionProperty.Attributes.Where(attributeType.IsInstanceOfType).ToArray(attributeType);
 
-    public override object[] GetCustomAttributes(bool inherit)
-    {
-        return this.customProjectionProperty.Attributes.ToArray();
-    }
+    public override object[] GetCustomAttributes(bool inherit) => this.customProjectionProperty.Attributes.ToArray();
 
-    public override ParameterInfo[] GetIndexParameters()
-    {
-        return new ParameterInfo[0];
-    }
+    public override ParameterInfo[] GetIndexParameters() => new ParameterInfo[0];
 
-    public override MethodInfo GetGetMethod(bool nonPublic)
-    {
-        return this.getMethod;
-    }
+    public override MethodInfo GetGetMethod(bool nonPublic) => this.getMethod;
 
-    public override MethodInfo GetSetMethod(bool nonPublic)
-    {
-        return this.setMethod;
-    }
+    public override MethodInfo GetSetMethod(bool nonPublic) => this.setMethod;
 }

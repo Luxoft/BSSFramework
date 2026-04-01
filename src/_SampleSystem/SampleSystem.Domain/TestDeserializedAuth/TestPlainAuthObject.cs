@@ -15,20 +15,17 @@ public class TestPlainAuthObject : BaseDirectory, IMaster<TestItemAuthObject>
 
     public virtual Location Location
     {
-        get { return this.location; }
-        set { this.location = value; }
+        get => this.location;
+        set => this.location = value;
     }
 
     public virtual Employee Employee
     {
-        get { return this.employee; }
-        set { this.employee = value; }
+        get => this.employee;
+        set => this.employee = value;
     }
 
-    public virtual IEnumerable<TestItemAuthObject> Items
-    {
-        get { return this.items; }
-    }
+    public virtual IEnumerable<TestItemAuthObject> Items => this.items;
 
     ICollection<TestItemAuthObject> IMaster<TestItemAuthObject>.Details => (ICollection<TestItemAuthObject>)this.Items;
 }

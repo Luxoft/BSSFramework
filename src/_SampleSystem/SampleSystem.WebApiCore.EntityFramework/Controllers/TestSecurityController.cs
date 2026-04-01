@@ -19,16 +19,10 @@ public class TestSecurityController(
     IRepositoryFactory<BusinessUnit> buRepositoryFactory) : ControllerBase
 {
     [HttpGet]
-    public User GetCurrentUser()
-    {
-        return currentUserSource.ToSimple().CurrentUser;
-    }
+    public User GetCurrentUser() => currentUserSource.ToSimple().CurrentUser;
 
     [HttpGet]
-    public EmployeeDto GetCurrentEmployee()
-    {
-        return new(currentUserSource.CurrentUser);
-    }
+    public EmployeeDto GetCurrentEmployee() => new(currentUserSource.CurrentUser);
 
     [HttpGet]
     public async Task<List<EmployeeDto>> GetSecurityEmployees(CancellationToken cancellationToken)

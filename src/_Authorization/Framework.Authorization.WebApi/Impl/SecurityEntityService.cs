@@ -13,9 +13,8 @@ public partial class AuthMainController
 {
     [HttpPost]
     public IEnumerable<SecurityContextData<Guid>> GetFullSecurityEntities(
-        [FromForm] SecurityContextTypeIdentityDTO securityContextTypeIdentity)
-    {
-        return this.Evaluate(
+        [FromForm] SecurityContextTypeIdentityDTO securityContextTypeIdentity) =>
+        this.Evaluate(
             DBSessionMode.Read,
             evaluateData =>
             {
@@ -28,12 +27,10 @@ public partial class AuthMainController
                                    .GetSecurityContexts()
                                    .ToList();
             });
-    }
 
     [HttpPost]
-    public IEnumerable<SecurityContextData<Guid>> GetFullSecurityEntitiesByIdents([FromForm] GetFullSecurityEntitiesByIdentsRequest request)
-    {
-        return this.Evaluate(
+    public IEnumerable<SecurityContextData<Guid>> GetFullSecurityEntitiesByIdents([FromForm] GetFullSecurityEntitiesByIdentsRequest request) =>
+        this.Evaluate(
             DBSessionMode.Read,
             evaluateData =>
             {
@@ -46,5 +43,4 @@ public partial class AuthMainController
                                    .GetSecurityContextsByIdents(request.SecurityEntities.Select(v => v.Id))
                                    .ToList();
             });
-    }
 }

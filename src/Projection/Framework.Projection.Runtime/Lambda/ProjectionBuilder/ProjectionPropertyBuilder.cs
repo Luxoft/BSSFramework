@@ -74,8 +74,5 @@ internal class ProjectionPropertyBuilder : IProjectionProperty
     TypeReferenceBase.BuildTypeReference IProjectionProperty.Type => new(this.ElementType, this.CollectionType, this.IsNullable, this.ElementProjection);
 
 
-    public override string ToString()
-    {
-        return this.Name;
-    }
+    public override string ToString() => this.Name;
 }

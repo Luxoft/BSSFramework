@@ -8,13 +8,13 @@ public class ClassAChild : PersistentDomainObjectBase
 
     public virtual ClassA Parent
     {
-        get { return this.parent; }
-        set { this.parent = value; }
+        get => this.parent;
+        set => this.parent = value;
     }
 
     public virtual bool IsFake
     {
-        get { return this.isFake; }
-        set { this.isFake = value; }
+        get => this.isFake;
+        set => this.isFake = value;
     }
 }

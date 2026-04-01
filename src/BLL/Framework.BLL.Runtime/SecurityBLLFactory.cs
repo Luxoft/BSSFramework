@@ -17,18 +17,9 @@ public abstract class SecurityBLLFactory<TBLLContext, TBLL, TBLLImpl, TDomainObj
     where TDomainObject : class
     where TBLLImpl : TBLL
 {
-    public TBLL Create()
-    {
-        return this.Create(SecurityRule.Disabled);
-    }
+    public TBLL Create() => this.Create(SecurityRule.Disabled);
 
-    public TBLL Create(SecurityRule securityRule)
-    {
-        return this.Create(this.Context.SecurityService.GetSecurityProvider<TDomainObject>(securityRule));
-    }
+    public TBLL Create(SecurityRule securityRule) => this.Create(this.Context.SecurityService.GetSecurityProvider<TDomainObject>(securityRule));
 
-    public virtual TBLL Create(ISecurityProvider<TDomainObject> securityProvider)
-    {
-        return this.Context.ServiceProvider.GetRequiredService<IServiceProxyFactory>().Create<TBLL, TBLLImpl>(securityProvider);
-    }
+    public virtual TBLL Create(ISecurityProvider<TDomainObject> securityProvider) => this.Context.ServiceProvider.GetRequiredService<IServiceProxyFactory>().Create<TBLL, TBLLImpl>(securityProvider);
 }

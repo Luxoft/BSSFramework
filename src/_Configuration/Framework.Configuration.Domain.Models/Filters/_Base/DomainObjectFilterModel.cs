@@ -7,8 +7,5 @@ namespace Framework.Configuration.Domain;
 public abstract class DomainObjectFilterModel<TDomainObject> : DomainObjectBase, IDomainObjectFilterModel<TDomainObject>
         where TDomainObject : PersistentDomainObjectBase
 {
-    public virtual Expression<Func<TDomainObject, bool>> ToFilterExpression()
-    {
-        return _ => true;
-    }
+    public virtual Expression<Func<TDomainObject, bool>> ToFilterExpression() => _ => true;
 }

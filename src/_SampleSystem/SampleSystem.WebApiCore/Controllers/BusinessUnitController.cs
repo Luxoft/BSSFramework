@@ -16,9 +16,8 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 public partial class BusinessUnitController
 {
     [HttpPost]
-    public List<HierarchicalNode<BusinessUnitFullDTO, Guid>> GetFullBusinessUnitsTree()
-    {
-        return this.Evaluate(
+    public List<HierarchicalNode<BusinessUnitFullDTO, Guid>> GetFullBusinessUnitsTree() =>
+        this.Evaluate(
             DBSessionMode.Read,
             evaluateData =>
             {
@@ -26,12 +25,10 @@ public partial class BusinessUnitController
                 var tree = bll.GetTree(new DTOFetchRule<BusinessUnit>(ViewDTOType.FullDTO));
                 return tree.ChangeItem(unit => unit.ToFullDTO(evaluateData.MappingService));
             });
-    }
 
     [HttpPost]
-    public SelectOperationResult<HierarchicalNode<BusinessUnitFullDTO, Guid>> GetFullBusinessUnitsTreeByOData(string odataQueryString)
-    {
-        return this.Evaluate(
+    public SelectOperationResult<HierarchicalNode<BusinessUnitFullDTO, Guid>> GetFullBusinessUnitsTreeByOData(string odataQueryString) =>
+        this.Evaluate(
             DBSessionMode.Read,
             evaluateData =>
             {
@@ -44,5 +41,4 @@ public partial class BusinessUnitController
 
                 return odataTree.ChangeItem(x => x.ToFullDTO(evaluateData.MappingService));
             });
-    }
 }

@@ -134,10 +134,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         }
     }
 
-    protected virtual bool HasDeepValidation(PropertyInfo property)
-    {
-        return property.HasDeepValidation();
-    }
+    protected virtual bool HasDeepValidation(PropertyInfo property) => property.HasDeepValidation();
 
     protected virtual bool IsManyPropertyDynamicClassAttribute(ClassValidatorAttribute attribute)
     {

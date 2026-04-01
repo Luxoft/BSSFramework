@@ -14,10 +14,7 @@ namespace Framework.Database.NHibernate.DBGenerator.ScriptGenerators;
 
 public class UniqueGroupDatabaseScriptGenerator(params IgnoreLink[] ignore) : PostDatabaseScriptGeneratorBase
 {
-    private static bool ByName(Index currentIndex, string indexName)
-    {
-        return string.Equals(indexName, currentIndex.Name, StringComparison.InvariantCultureIgnoreCase);
-    }
+    private static bool ByName(Index currentIndex, string indexName) => string.Equals(indexName, currentIndex.Name, StringComparison.InvariantCultureIgnoreCase);
 
     private static bool DifferentColumns(Index index, ICollection<string> columnNames)
     {

@@ -15,8 +15,6 @@ internal sealed class GenerationLambda :
     }
 
     internal void SetFunc(
-            Func<object, DomainObjectVersions<object>, IEnumerable<NotificationMessageGenerationInfo>> func)
-    {
+            Func<object, DomainObjectVersions<object>, IEnumerable<NotificationMessageGenerationInfo>> func) =>
         this.Lambda = func;
-    }
 }

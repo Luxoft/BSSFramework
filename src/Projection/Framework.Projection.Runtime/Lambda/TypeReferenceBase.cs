@@ -34,10 +34,7 @@ public abstract class TypeReferenceBase
         /// </summary>
         public Type PropertyType { get; } = propertyType ?? throw new ArgumentNullException(nameof(propertyType));
 
-        public override string ToString()
-        {
-            return this.PropertyType.ToString();
-        }
+        public override string ToString() => this.PropertyType.ToString();
 
         public override TypeReferenceBase TryOverrideElementProjection(Func<IProjection, IProjection> mapFunc)
         {
@@ -95,10 +92,7 @@ public abstract class TypeReferenceBase
         /// </summary>
         public IProjection ElementProjection { get; }
 
-        public override string ToString()
-        {
-            return $"ElementType = {this.ElementType}, IsCollection = {this.IsCollection} | IsNullable = {this.IsNullable} | ElementProjection = {this.ElementProjection}";
-        }
+        public override string ToString() => $"ElementType = {this.ElementType}, IsCollection = {this.IsCollection} | IsNullable = {this.IsNullable} | ElementProjection = {this.ElementProjection}";
 
         public override TypeReferenceBase TryOverrideElementProjection(Func<IProjection, IProjection> mapFunc)
         {

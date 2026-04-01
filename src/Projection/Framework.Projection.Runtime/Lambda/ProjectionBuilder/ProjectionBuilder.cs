@@ -14,11 +14,7 @@ internal class ProjectionBuilder : IProjection
         this.FilterAttributes = sourceProjection.FilterAttributes.ToList();
     }
 
-    public ProjectionBuilder(Type sourceType)
-    {
-        this.SourceType = sourceType ?? throw new ArgumentNullException(nameof(sourceType));
-    }
-
+    public ProjectionBuilder(Type sourceType) => this.SourceType = sourceType ?? throw new ArgumentNullException(nameof(sourceType));
 
     public Type SourceType { get; }
 
@@ -48,8 +44,5 @@ internal class ProjectionBuilder : IProjection
 
     IReadOnlyList<IProjectionCustomProperty> IProjection.CustomProperties => this.CustomProperties;
 
-    public override string ToString()
-    {
-        return this.Name;
-    }
+    public override string ToString() => this.Name;
 }

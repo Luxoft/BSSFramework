@@ -24,14 +24,12 @@ public class LambdaHelperFileFactory<TConfiguration>(TConfiguration configuratio
     public override BaseFileType FileType { get; } = ServerFileType.LambdaHelper;
 
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration
-               {
-                       TypeAttributes = TypeAttributes.Public,
-                       Name = this.Name
-               }.MarkAsStatic();
-    }
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new CodeTypeDeclaration
+        {
+            TypeAttributes = TypeAttributes.Public,
+            Name = this.Name
+        }.MarkAsStatic();
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
     {

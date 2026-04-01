@@ -10,8 +10,5 @@ class EmptyDatabaseScriptGenerator : IDatabaseScriptGenerator
     {
 
     }
-    public IDatabaseScriptResult GenerateScript(IDatabaseScriptGeneratorContext context)
-    {
-        return DatabaseScriptResultFactory.Create(new Dictionary<ApplyMigrationDbScriptMode, Lazy<IEnumerable<string>>>());
-    }
+    public IDatabaseScriptResult GenerateScript(IDatabaseScriptGeneratorContext context) => DatabaseScriptResultFactory.Create(new Dictionary<ApplyMigrationDbScriptMode, Lazy<IEnumerable<string>>>());
 }

@@ -14,14 +14,8 @@ public abstract class EmployeeEqualityComparer : IEqualityComparer<IEmployee>
 
     private class EmployeeByEMailComparer : EmployeeEqualityComparer
     {
-        public override bool Equals(IEmployee x, IEmployee y)
-        {
-            return string.Equals(x.Email, y.Email, StringComparison.InvariantCultureIgnoreCase);
-        }
+        public override bool Equals(IEmployee x, IEmployee y) => string.Equals(x.Email, y.Email, StringComparison.InvariantCultureIgnoreCase);
 
-        public override int GetHashCode(IEmployee obj)
-        {
-            return obj.Email.ToLower().GetHashCode();
-        }
+        public override int GetHashCode(IEmployee obj) => obj.Email.ToLower().GetHashCode();
     }
 }

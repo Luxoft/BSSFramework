@@ -18,22 +18,16 @@ internal class ExcessTemplatesFilterBase
         template with { Receivers = [.. toRecipients], CopyReceivers = [.. ccRecipients], ReplyTo = [.. replyTo] };
 
     public static IEnumerable<IGrouping<MessageTemplateNotification, MessageTemplateNotification>> CollapseTemplates(
-            IEnumerable<MessageTemplateNotification> templates)
-    {
-        return templates.GroupBy(t => t, TemplateComparer);
-    }
+            IEnumerable<MessageTemplateNotification> templates) =>
+        templates.GroupBy(t => t, TemplateComparer);
 
     public static IEnumerable<MessageTemplateNotification> GetTemplatesTo(
-            IEnumerable<MessageTemplateNotification> templates)
-    {
-        return templates.Where(t => !t.CopyReceivers.Any());
-    }
+            IEnumerable<MessageTemplateNotification> templates) =>
+        templates.Where(t => !t.CopyReceivers.Any());
 
     public static IEnumerable<MessageTemplateNotification> GetTemplatesCc(
-            IEnumerable<MessageTemplateNotification> templates)
-    {
-        return templates.Where(t => t.CopyReceivers.Any());
-    }
+            IEnumerable<MessageTemplateNotification> templates) =>
+        templates.Where(t => t.CopyReceivers.Any());
 
     private class MessageTemplateNotificationComparer : IEqualityComparer<MessageTemplateNotification>
     {

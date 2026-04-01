@@ -18,20 +18,20 @@ public class Example1 : AuditPersistentDomainObjectBase, IMaster<Example2>
 
     public virtual Guid Field1
     {
-        get { return this.field1; }
-        set { this.field1 = value; }
+        get => this.field1;
+        set => this.field1 = value;
     }
 
     public virtual Guid Field2
     {
-        get { return this.field2; }
-        set { this.field2 = value; }
+        get => this.field2;
+        set => this.field2 = value;
     }
 
     public virtual Guid Field3
     {
-        get { return this.field3; }
-        set { this.field3 = value; }
+        get => this.field3;
+        set => this.field3 = value;
     }
 
     ICollection<Example2> IMaster<Example2>.Details => (ICollection<Example2>)this.Items2;

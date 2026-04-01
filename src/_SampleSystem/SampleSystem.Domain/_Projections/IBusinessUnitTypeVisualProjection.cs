@@ -6,6 +6,4 @@ namespace SampleSystem.Domain;
 
 [BLLProjectionViewRole]
 [ProjectionContract(typeof(BusinessUnitType))]
-public interface IBusinessUnitTypeVisualProjection : IIdentityObject<Guid>, IVisualIdentityObject
-{
-}
+public interface IBusinessUnitTypeVisualProjection : IIdentityObject<Guid>, IVisualIdentityObject;

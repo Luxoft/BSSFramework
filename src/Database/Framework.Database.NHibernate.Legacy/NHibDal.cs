@@ -30,30 +30,15 @@ public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDom
 
     public TDomainObject GetById(TIdent id, LockRole lockRole) => this.NativeSession.Get<TDomainObject>(id, lockRole.ToLockMode());
 
-    public void Lock(TDomainObject domainObject, LockRole lockRole)
-    {
-        asyncDal.LockAsync(domainObject, lockRole).GetAwaiter().GetResult();
-    }
+    public void Lock(TDomainObject domainObject, LockRole lockRole) => asyncDal.LockAsync(domainObject, lockRole).GetAwaiter().GetResult();
 
-    public void Refresh(TDomainObject domainObject)
-    {
-        this.NativeSession.Refresh(domainObject);
-    }
+    public void Refresh(TDomainObject domainObject) => this.NativeSession.Refresh(domainObject);
 
-    public virtual void Save(TDomainObject domainObject)
-    {
-        asyncDal.SaveAsync(domainObject).GetAwaiter().GetResult();
-    }
+    public virtual void Save(TDomainObject domainObject) => asyncDal.SaveAsync(domainObject).GetAwaiter().GetResult();
 
-    public virtual void Insert(TDomainObject domainObject, TIdent id)
-    {
-        asyncDal.InsertAsync(domainObject, id).GetAwaiter().GetResult();
-    }
+    public virtual void Insert(TDomainObject domainObject, TIdent id) => asyncDal.InsertAsync(domainObject, id).GetAwaiter().GetResult();
 
-    public virtual void Remove(TDomainObject domainObject)
-    {
-        asyncDal.RemoveAsync(domainObject).GetAwaiter().GetResult();
-    }
+    public virtual void Remove(TDomainObject domainObject) => asyncDal.RemoveAsync(domainObject).GetAwaiter().GetResult();
 
     public IQueryable<TDomainObject> GetQueryable(LockRole lockRole, FetchRule<TDomainObject>? fetchRule = null)
     {

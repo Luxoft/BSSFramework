@@ -122,16 +122,11 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
                                 .ToDictionary(z => z.Key, z => z.Value);
     }
 
-    private Dictionary<TIdent, TIdent> ExpandQueryableWithParents(IQueryable<TIdent> projectionsIdents, HierarchicalExpandType parentExpandMode)
-    {
-        return this.Context.HierarchicalObjectExpanderFactory.Create<TIdent>(typeof(TDomainObject)).ExpandWithParents(projectionsIdents, parentExpandMode);
-    }
+    private Dictionary<TIdent, TIdent> ExpandQueryableWithParents(IQueryable<TIdent> projectionsIdents, HierarchicalExpandType parentExpandMode) => this.Context.HierarchicalObjectExpanderFactory.Create<TIdent>(typeof(TDomainObject)).ExpandWithParents(projectionsIdents, parentExpandMode);
 
     public List<TDomainObject> GetListByIdents<TIdentity>(IEnumerable<TIdentity> idents, FetchRule<TDomainObject>? fetchRule = null)
-        where TIdentity : IIdentityObject<TIdent>
-    {
-        return this.GetListByIdents(idents.Select(ident => ident.Id), fetchRule);
-    }
+        where TIdentity : IIdentityObject<TIdent> =>
+        this.GetListByIdents(idents.Select(ident => ident.Id), fetchRule);
 
     public List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, FetchRule<TDomainObject>? fetchRule = null)
     {
@@ -299,10 +294,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
         throw uniqueIdents.Except(uniqueResult.Select(v => v.Id)).Select(this.GetMissingObjectException).Aggregate();
     }
 
-    protected virtual Exception GetMissingObjectException(TIdent id)
-    {
-        return new ObjectByIdNotFoundException<TIdent>(typeof(TDomainObject), id);
-    }
+    protected virtual Exception GetMissingObjectException(TIdent id) => new ObjectByIdNotFoundException<TIdent>(typeof(TDomainObject), id);
 
     private TDomainObject? GetNested<TNestedDomainObject>(TDomainObject domainObject)
         where TNestedDomainObject : class, TDomainObject =>

@@ -10,8 +10,7 @@ public class EfSession : IEfSession
 
     private readonly Lazy<IEfSession> lazyInnerSession;
 
-    public EfSession(DbContext nativeSession, DBSessionSettings settings, IEnumerable<IDBSessionEventListener> eventListeners)
-    {
+    public EfSession(DbContext nativeSession, DBSessionSettings settings, IEnumerable<IDBSessionEventListener> eventListeners) =>
         this.lazyInnerSession = new Lazy<IEfSession>(() =>
         {
             switch (this.sessionMode ?? settings.DefaultSessionMode)
@@ -26,7 +25,6 @@ public class EfSession : IEfSession
                     throw new InvalidOperationException();
             }
         });
-    }
 
     public virtual IDBSession InnerSession => this.lazyInnerSession.Value;
 
@@ -36,10 +34,7 @@ public class EfSession : IEfSession
 
     public IDbTransaction Transaction => this.InnerSession.Transaction;
 
-    public async Task FlushAsync(CancellationToken cancellationToken = default)
-    {
-        await this.InnerSession.FlushAsync(cancellationToken);
-    }
+    public async Task FlushAsync(CancellationToken cancellationToken = default) => await this.InnerSession.FlushAsync(cancellationToken);
 
     public long GetCurrentRevision() => this.InnerSession.GetCurrentRevision();
 
@@ -47,15 +42,9 @@ public class EfSession : IEfSession
 
     public long GetMaxRevision() => this.InnerSession.GetMaxRevision();
 
-    public void AsReadOnly()
-    {
-        this.ApplySessionMode(DBSessionMode.Read);
-    }
+    public void AsReadOnly() => this.ApplySessionMode(DBSessionMode.Read);
 
-    public void AsWritable()
-    {
-        this.ApplySessionMode(DBSessionMode.Write);
-    }
+    public void AsWritable() => this.ApplySessionMode(DBSessionMode.Write);
 
     private void ApplySessionMode(DBSessionMode applySessionMode)
     {

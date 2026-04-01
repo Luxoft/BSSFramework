@@ -6,20 +6,14 @@
 /// <see href="confluence/display/IADFRAME/CustomSerializationAttribute"/>
 /// </summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct, AllowMultiple = true)]
-public class CustomSerializationAttribute : Attribute
+public class CustomSerializationAttribute(CustomSerializationMode mode, DTORole role) : Attribute
 {
-    public readonly CustomSerializationMode Mode;
+    public readonly CustomSerializationMode Mode = mode;
 
-    public readonly DTORole Role;
+    public readonly DTORole Role = role;
 
     public CustomSerializationAttribute(CustomSerializationMode mode)
             : this(mode, DTORole.All)
     {
-    }
-
-    public CustomSerializationAttribute(CustomSerializationMode mode, DTORole role)
-    {
-        this.Mode = mode;
-        this.Role = role;
     }
 }

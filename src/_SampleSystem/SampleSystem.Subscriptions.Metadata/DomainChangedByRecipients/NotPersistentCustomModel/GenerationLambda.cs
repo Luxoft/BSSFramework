@@ -15,14 +15,11 @@ public sealed class GenerationLambda : GenerationLambdaBase<Domain.Country>
 
     private NotificationMessageGenerationInfo[] GetRecipients(
             ISampleSystemBLLContext context,
-            DomainObjectVersions<Domain.Country> versions)
-    {
-        return
-        [
-            new NotificationMessageGenerationInfo(
-                                                             "tester@luxoft.com",
-                                                             new CustomNotificationModel(context, versions.Current),
-                                                             new CustomNotificationModel(context, versions.Previous))
-        ];
-    }
+            DomainObjectVersions<Domain.Country> versions) =>
+    [
+        new NotificationMessageGenerationInfo(
+            "tester@luxoft.com",
+            new CustomNotificationModel(context, versions.Current),
+            new CustomNotificationModel(context, versions.Previous))
+    ];
 }

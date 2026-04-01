@@ -14,49 +14,36 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class ImpersonateController : ControllerBase
+public class ImpersonateController(
+    IServiceEvaluator<IRepositoryFactory<NoSecurityObject>> serviceEvaluator,
+    IDBSessionEvaluator dbSessionEvaluator)
+    : ControllerBase
 {
-    private readonly IServiceEvaluator<IRepositoryFactory<NoSecurityObject>> serviceEvaluator;
+    [HttpPost]
+    public async Task<NoSecurityObjectIdentityDTO> TestSave(string impersonateLogin, CancellationToken cancellationToken = default) =>
+        await serviceEvaluator.EvaluateAsync(
+            DBSessionMode.Write,
+            impersonateLogin,
+            async repositoryFactory =>
+            {
+                var obj = new NoSecurityObject();
 
-    private readonly IDBSessionEvaluator dbSessionEvaluator;
+                await repositoryFactory.Create().SaveAsync(obj, cancellationToken);
 
-    public ImpersonateController(
-        IServiceEvaluator<IRepositoryFactory<NoSecurityObject>> serviceEvaluator,
-        IDBSessionEvaluator dbSessionEvaluator)
-    {
-        this.serviceEvaluator = serviceEvaluator;
-        this.dbSessionEvaluator = dbSessionEvaluator;
-    }
+                return obj.ToIdentityDTO();
+            });
 
     [HttpPost]
-    public async Task<NoSecurityObjectIdentityDTO> TestSave(string impersonateLogin, CancellationToken cancellationToken = default)
-    {
-        return await this.serviceEvaluator.EvaluateAsync(
-                   DBSessionMode.Write,
-                   impersonateLogin,
-                   async repositoryFactory =>
-                   {
-                       var obj = new NoSecurityObject();
+    public async Task<List<NoSecurityObjectSimpleDTO>> GetFullList(CancellationToken cancellationToken = default) =>
+        await dbSessionEvaluator.EvaluateAsync(
+            DBSessionMode.Read,
+            async serviceProvider =>
+            {
+                var repositoryFactory = serviceProvider.GetRequiredService<IRepositoryFactory<NoSecurityObject>>();
 
-                       await repositoryFactory.Create().SaveAsync(obj, cancellationToken);
+                var mappingService = serviceProvider.GetRequiredService<ISampleSystemDTOMappingService>();
+                var result = await repositoryFactory.Create().GetQueryable().GenericToListAsync(cancellationToken);
 
-                       return obj.ToIdentityDTO();
-                   });
-    }
-
-    [HttpPost]
-    public async Task<List<NoSecurityObjectSimpleDTO>> GetFullList(CancellationToken cancellationToken = default)
-    {
-        return await this.dbSessionEvaluator.EvaluateAsync(
-                   DBSessionMode.Read,
-                   async serviceProvider =>
-                   {
-                       var repositoryFactory = serviceProvider.GetRequiredService<IRepositoryFactory<NoSecurityObject>>();
-
-                       var mappingService = serviceProvider.GetRequiredService<ISampleSystemDTOMappingService>();
-                       var result = await repositoryFactory.Create().GetQueryable().GenericToListAsync(cancellationToken);
-
-                       return result.ToSimpleDTOList(mappingService);
-                   });
-    }
+                return result.ToSimpleDTOList(mappingService);
+            });
 }

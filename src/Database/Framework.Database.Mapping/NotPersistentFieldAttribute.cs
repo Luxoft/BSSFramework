@@ -1,7 +1,4 @@
 ﻿namespace Framework.Database.Mapping;
 
 [AttributeUsage (AttributeTargets.Field)]
-public class NotPersistentFieldAttribute : Attribute
-{
-
-}
+public class NotPersistentFieldAttribute : Attribute;

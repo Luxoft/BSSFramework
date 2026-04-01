@@ -13,21 +13,16 @@ namespace Framework.Database.NHibernate.DBGenerator.ScriptGeneratorBuilder.Impl;
 internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuilder
 {
     private List<IMigrationScriptReader> readers = new List<IMigrationScriptReader>();
-    private string tableName = "ExecutedScripts";
 
     public bool IsFreezed { get; internal set; }
 
-    public string TableName
-    {
-        get { return this.tableName; }
-        set { this.tableName = value; }
-    }
+    public string TableName { get; set; } = "ExecutedScripts";
 
     public IDatabaseScriptGenerator Build(DBGenerateScriptMode scriptMode)
     {
         var result = this.readers.Combine();
 
-        IDatabaseScriptGenerator scriptAdapter = new DatabaseScriptGeneratorAdapter(result, this.tableName);
+        IDatabaseScriptGenerator scriptAdapter = new DatabaseScriptGeneratorAdapter(result, this.TableName);
 
         return scriptAdapter;
     }
@@ -41,10 +36,7 @@ internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuil
         return this;
     }
 
-    public IMigrationScriptGeneratorBuilder WithDatabase(string databaseName)
-    {
-        return this;
-    }
+    public IMigrationScriptGeneratorBuilder WithDatabase(string databaseName) => this;
 
     public IMigrationScriptGeneratorBuilder WithFolder(string directoryPath)
     {
@@ -59,7 +51,7 @@ internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuil
     {
         this.ValidateConfigurate();
 
-        this.tableName = tableName;
+        this.TableName = tableName;
 
         return this;
     }
@@ -134,11 +126,9 @@ internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuil
             return DatabaseScriptResultFactory.Create(dictionary);
         }
 
-        private MigrationDbScript InjectDatabaseName(MigrationDbScript source, IDatabaseScriptGeneratorContext context)
-        {
-            return new MigrationDbScript(source.Header.Name, source.RunAlways, source.ApplyCustomScriptMode, source.Header.Scheme, source.Header.Version,
-                                         new Lazy<string>(() => source.Script.Replace("$Database", context.DatabaseName.Name)));
-        }
+        private MigrationDbScript InjectDatabaseName(MigrationDbScript source, IDatabaseScriptGeneratorContext context) =>
+            new(source.Header.Name, source.RunAlways, source.ApplyCustomScriptMode, source.Header.Scheme, source.Header.Version,
+                new Lazy<string>(() => source.Script.Replace("$Database", context.DatabaseName.Name)));
 
         private void Execute(string commandText, IDatabaseScriptGeneratorContext context)
         {
@@ -186,11 +176,7 @@ internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuil
             return result;
         }
 
-        private string GetInsertScript(MigrationDbScript migrationDbScript, IDatabaseScriptGeneratorContext context)
-        {
-            return
-                    $"INSERT INTO {context.DatabaseName.ToString()}.[{this.tableName}] ([name] ,[author] ,[date], [script], [version], [scheme]) VALUES ('{migrationDbScript.Header.Name}', system_user, GETDATE(), '{migrationDbScript.Script.Replace("'", "''")}','{migrationDbScript.Header.Version}','{migrationDbScript.Header.Scheme}')";
-        }
+        private string GetInsertScript(MigrationDbScript migrationDbScript, IDatabaseScriptGeneratorContext context) => $"INSERT INTO {context.DatabaseName.ToString()}.[{this.tableName}] ([name] ,[author] ,[date], [script], [version], [scheme]) VALUES ('{migrationDbScript.Header.Name}', system_user, GETDATE(), '{migrationDbScript.Script.Replace("'", "''")}','{migrationDbScript.Header.Version}','{migrationDbScript.Header.Scheme}')";
 
         private MigrationDbScript? TryCreateExecutionScriptTable(IDatabaseScriptGeneratorContext context)
         {

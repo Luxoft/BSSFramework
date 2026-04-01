@@ -18,6 +18,4 @@ public interface ISecurityBLLContext<out TAuthorizationBLLContext, in TPersisten
 
     IAuthorizationBLLContextContainer<TAuthorizationBLLContext>
 
-    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-{
-}
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>;

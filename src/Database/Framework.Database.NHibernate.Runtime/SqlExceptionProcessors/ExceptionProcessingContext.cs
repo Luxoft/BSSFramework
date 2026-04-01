@@ -4,11 +4,11 @@ using NHibernate.Mapping;
 
 namespace Framework.Database.NHibernate.SqlExceptionProcessors;
 
-public struct TableDescription : IEquatable<TableDescription>
+public readonly struct TableDescription : IEquatable<TableDescription>
 {
-    public string Schema { get; private set; }
-    public string Catalog { get; private set; }
-    public string Name { get; private set; }
+    public string Schema { get; }
+    public string Catalog { get; }
+    public string Name { get; }
 
 
     internal TableDescription(string catalog, string schema, string name)
@@ -103,9 +103,9 @@ public class ExceptionProcessingContext
 
     public struct TableDescription : IEquatable<TableDescription>
     {
-        public string Schema { get; private set; }
-        public string Catalog { get; private set; }
-        public string Name { get; private set; }
+        public string Schema { get; }
+        public string Catalog { get; }
+        public string Name { get; }
 
 
         internal TableDescription(string catalog, string schema, string name) : this()

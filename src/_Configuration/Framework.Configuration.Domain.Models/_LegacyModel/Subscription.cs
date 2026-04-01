@@ -89,8 +89,8 @@ public class Subscription : ISubscription
     /// </remarks>
     public virtual SubscriptionLambda Condition
     {
-        get { return this.condition; }
-        set { this.condition = value; }
+        get => this.condition;
+        set => this.condition = value;
     }
 
     /// <summary>
@@ -101,8 +101,8 @@ public class Subscription : ISubscription
     /// </remarks>
     public virtual SubscriptionLambda Generation
     {
-        get { return this.generation; }
-        set { this.generation = value; }
+        get => this.generation;
+        set => this.generation = value;
     }
 
     /// <summary>
@@ -113,8 +113,8 @@ public class Subscription : ISubscription
     /// </remarks>
     public virtual SubscriptionLambda CopyGeneration
     {
-        get { return this.copyGeneration; }
-        set { this.copyGeneration = value; }
+        get => this.copyGeneration;
+        set => this.copyGeneration = value;
     }
 
     /// <summary>
@@ -125,8 +125,8 @@ public class Subscription : ISubscription
     /// </remarks>
     public virtual SubscriptionLambda ReplyToGeneration
     {
-        get { return this.replyToGeneration; }
-        set { this.replyToGeneration = value; }
+        get => this.replyToGeneration;
+        set => this.replyToGeneration = value;
     }
 
 
@@ -139,8 +139,8 @@ public class Subscription : ISubscription
     /// </remarks>
     public virtual SubscriptionLambda Attachment
     {
-        get { return this.attachment; }
-        set { this.attachment = value; }
+        get => this.attachment;
+        set => this.attachment = value;
     }
 
     /// <summary>
@@ -152,8 +152,8 @@ public class Subscription : ISubscription
     [UniqueElement("DynamicSourceMode")]
     public virtual SubscriptionLambda DynamicSource
     {
-        get { return this.dynamicSource; }
-        set { this.dynamicSource = value; }
+        get => this.dynamicSource;
+        set => this.dynamicSource = value;
     }
 
     /// <summary>
@@ -163,8 +163,8 @@ public class Subscription : ISubscription
     [Mapping(ColumnName = "principalForRoleExpandType")]
     public virtual NotificationExpandType? DynamicSourceExpandType
     {
-        get { return this.dynamicSourceExpandType; }
-        set { this.dynamicSourceExpandType = value; }
+        get => this.dynamicSourceExpandType;
+        set => this.dynamicSourceExpandType = value;
     }
 
     /// <summary>
@@ -176,8 +176,8 @@ public class Subscription : ISubscription
     [VisualIdentity]
     public virtual string Code
     {
-        get { return this.code.TrimNull(); }
-        set { this.code = value.TrimNull(); }
+        get => this.code.TrimNull();
+        set => this.code = value.TrimNull();
     }
 
     /// <summary>
@@ -195,8 +195,8 @@ public class Subscription : ISubscription
     /// </summary>
     public virtual bool AllowEmptyListOfRecipients
     {
-        get { return this.allowEmptyListOfRecipients; }
-        set { this.allowEmptyListOfRecipients = value; }
+        get => this.allowEmptyListOfRecipients;
+        set => this.allowEmptyListOfRecipients = value;
     }
     /// <summary>
     /// Вычисляемое свойство результатов состояний работы с контекстами
@@ -236,8 +236,8 @@ public class Subscription : ISubscription
     [UniqueElement("Sender")]
     public virtual string SenderEmail
     {
-        get { return this.senderEmail.TrimNull(); }
-        set { this.senderEmail = value.TrimNull(); }
+        get => this.senderEmail.TrimNull();
+        set => this.senderEmail = value.TrimNull();
     }
 
     /// <summary>
@@ -247,8 +247,8 @@ public class Subscription : ISubscription
     [UniqueElement("Sender")]
     public virtual string SenderName
     {
-        get { return this.senderName.TrimNull(); }
-        set { this.senderName = value.TrimNull(); }
+        get => this.senderName.TrimNull();
+        set => this.senderName = value.TrimNull();
     }
 
     /// <summary>
@@ -256,8 +256,8 @@ public class Subscription : ISubscription
     /// </summary>
     public virtual bool IncludeAttachments
     {
-        get { return this.includeAttachments; }
-        set { this.includeAttachments = value; }
+        get => this.includeAttachments;
+        set => this.includeAttachments = value;
     }
 
     /// <summary>
@@ -268,8 +268,8 @@ public class Subscription : ISubscription
     /// </remarks>
     public virtual bool ExcludeCurrentUser
     {
-        get { return this.excludeCurrentUser; }
-        set { this.excludeCurrentUser = value; }
+        get => this.excludeCurrentUser;
+        set => this.excludeCurrentUser = value;
     }
 
     /// <summary>
@@ -277,8 +277,8 @@ public class Subscription : ISubscription
     /// </summary>
     public virtual bool SendIndividualLetters
     {
-        get { return this.sendIndividualLetters; }
-        set { this.sendIndividualLetters = value; }
+        get => this.sendIndividualLetters;
+        set => this.sendIndividualLetters = value;
     }
 
     /// <summary>
@@ -286,8 +286,8 @@ public class Subscription : ISubscription
     /// </summary>
     public virtual RecipientsSelectorMode RecipientsMode
     {
-        get { return this.recipientsMode; }
-        set { this.recipientsMode = value; }
+        get => this.recipientsMode;
+        set => this.recipientsMode = value;
     }
 
     /// <summary>
@@ -300,8 +300,8 @@ public class Subscription : ISubscription
     [PropertyValidationMode(false)]
     public virtual Type RazorMessageTemplateType
     {
-        get { return this.razorMessageTemplateType; }
-        set { this.razorMessageTemplateType = value; }
+        get => this.razorMessageTemplateType;
+        set => this.razorMessageTemplateType = value;
     }
 
     /// <summary>
@@ -314,18 +314,15 @@ public class Subscription : ISubscription
     [PropertyValidationMode(false)]
     public virtual Type MetadataSourceType
     {
-        get { return this.metadataSourceType; }
-        set { this.metadataSourceType = value; }
+        get => this.metadataSourceType;
+        set => this.metadataSourceType = value;
     }
 
     /// <summary>
     /// Получение списка всех лямбд
     /// </summary>
     /// <returns></returns>
-    public virtual IEnumerable<SubscriptionLambda> GetLambdas()
-    {
-        return this.GetLambdasInternal().Where(sl => sl != null).Distinct();
-    }
+    public virtual IEnumerable<SubscriptionLambda> GetLambdas() => this.GetLambdasInternal().Where(sl => sl != null).Distinct();
 
     private IEnumerable<SubscriptionLambda> GetLambdasInternal()
     {
@@ -339,10 +336,7 @@ public class Subscription : ISubscription
         }
     }
 
-    public override string ToString()
-    {
-        return !string.IsNullOrEmpty(this.Code) ? this.Code : this.MetadataSourceType?.ToString();
-    }
+    public override string ToString() => !string.IsNullOrEmpty(this.Code) ? this.Code : this.MetadataSourceType?.ToString();
 
     public MailAddress Sender
     {

@@ -24,11 +24,11 @@ public class ObjectsVersion : IObjectsVersion
     }
 
 
-    public object Previous { get; private set; }
+    public object Previous { get; }
 
-    public object Current { get; private set; }
+    public object Current { get; }
 
-    public IEnumerable<IEmployee> Recipients { get; private set; }
+    public IEnumerable<IEmployee> Recipients { get; }
 
 
     public IEnumerable<ObjectsVersion> SplitByRecipient()
@@ -46,15 +46,9 @@ public class ObjectsVersion : IObjectsVersion
     }
 
 
-    protected virtual ObjectsVersion OverrideRecipient(IEmployee recipient)
-    {
-        return new ObjectsVersion(this.Previous, this.Current, recipient);
-    }
+    protected virtual ObjectsVersion OverrideRecipient(IEmployee recipient) => new(this.Previous, this.Current, recipient);
 
-    public static ObjectsVersion CreateDynamic<T>(T previous, T current, params IEmployee[] recipients)
-    {
-        return CreateDynamic(previous, current, (IEnumerable<IEmployee>)recipients);
-    }
+    public static ObjectsVersion CreateDynamic<T>(T previous, T current, params IEmployee[] recipients) => CreateDynamic(previous, current, (IEnumerable<IEmployee>)recipients);
 
     public static ObjectsVersion CreateDynamic<T>(T previous, T current, IEnumerable<IEmployee> recipients)
     {
@@ -79,10 +73,7 @@ public class ObjectsVersion : IObjectsVersion
         }
     }
 
-    public static ObjectsVersion<T> Create<T>(T previous, T current, params IEmployee[] recipients)
-    {
-        return Create(previous, current, (IEnumerable<IEmployee>)recipients);
-    }
+    public static ObjectsVersion<T> Create<T>(T previous, T current, params IEmployee[] recipients) => Create(previous, current, (IEnumerable<IEmployee>)recipients);
 
     public static ObjectsVersion<T> Create<T>(T previous, T current, IEnumerable<IEmployee> recipients)
     {
@@ -95,34 +86,19 @@ public class ObjectsVersion : IObjectsVersion
     }
 }
 
-public class ObjectsVersion<T> : ObjectsVersion, IObjectsVersion<T>
+public class ObjectsVersion<T>(T previous, T current, IEnumerable<IEmployee> recipients) : ObjectsVersion(previous, current, recipients), IObjectsVersion<T>
 {
-    public ObjectsVersion(T previous, T current, IEnumerable<IEmployee> recipients)
-            : base(previous, current, recipients)
-    {
-    }
-
     public ObjectsVersion(T previous, T current, params IEmployee[] recipients)
             : this(previous, current, (IEnumerable<IEmployee>)recipients)
     {
     }
 
 
-    public new T Previous
-    {
-        get { return (T)base.Previous; }
-    }
+    public new T Previous => (T)base.Previous;
 
-    public new T Current
-    {
-        get { return (T)base.Current; }
-    }
+    public new T Current => (T)base.Current;
 
-
-    protected override ObjectsVersion OverrideRecipient(IEmployee recipient)
-    {
-        return new ObjectsVersion<T>(this.Previous, this.Current, recipient);
-    }
+    protected override ObjectsVersion OverrideRecipient(IEmployee recipient) => new ObjectsVersion<T>(this.Previous, this.Current, recipient);
 }
 
 public interface IObjectsVersion

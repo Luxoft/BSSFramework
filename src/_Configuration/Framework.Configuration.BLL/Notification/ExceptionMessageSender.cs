@@ -103,17 +103,11 @@ public class ExceptionMessageSender : BLLContextContainer<IConfigurationBLLConte
     /// </summary>
     /// <param name="exception">Исключение.</param>
     /// <returns>Флаг, определяющий разрешить или нет отправку уведомления по исключению.</returns>
-    protected virtual bool SkipSend(Exception exception)
-    {
-        return this.GetExceptTypes().Contains(exception.GetBaseException().GetType());
-    }
+    protected virtual bool SkipSend(Exception exception) => this.GetExceptTypes().Contains(exception.GetBaseException().GetType());
 
     /// <summary>
     /// Возвращает список типов Exception, исключаемых из рассылки.
     /// </summary>
     /// <returns>список типов Exception, исключаемых из рассылки.</returns>
-    protected virtual IEnumerable<Type> GetExceptTypes()
-    {
-        return this.exceptTypes;
-    }
+    protected virtual IEnumerable<Type> GetExceptTypes() => this.exceptTypes;
 }

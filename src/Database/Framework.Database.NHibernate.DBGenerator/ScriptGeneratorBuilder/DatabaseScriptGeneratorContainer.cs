@@ -12,11 +12,7 @@ abstract class DatabaseScriptGeneratorContainer
 
     public MigrationDBScriptGeneratorBuilder MigrationBuilder => this.MigrationDbScriptGeneratorBuilder;
 
-    public IDatabaseScriptGenerator GetCombined()
-    {
-        return this.generators.Combine();
-    }
-
+    public IDatabaseScriptGenerator GetCombined() => this.generators.Combine();
 
     protected void Register(IDatabaseScriptGenerator generator)
     {
@@ -25,10 +21,7 @@ abstract class DatabaseScriptGeneratorContainer
         this.generators.Add(generator);
     }
 
-    public void Freeze()
-    {
-        this.isComplete = true;
-    }
+    public void Freeze() => this.isComplete = true;
 
     public abstract IDatabaseScriptGenerator Build(DBGenerateScriptMode mode);
 

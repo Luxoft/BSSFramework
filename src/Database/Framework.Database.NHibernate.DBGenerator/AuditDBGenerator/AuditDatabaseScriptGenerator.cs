@@ -28,8 +28,6 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 {
     private readonly List<MappingSettings> mappingSettings;
 
-    private readonly string auditTablePostFix;
-
     public AuditDatabaseScriptGenerator(MappingSettings mappingSettings, string auditTablePostfix)
             : this([mappingSettings], auditTablePostfix)
     {
@@ -40,12 +38,12 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
     {
         if (mappingSettings == null) throw new ArgumentNullException(nameof(mappingSettings));
 
-        this.auditTablePostFix = auditTablePostfix;
+        this.AuditTablePostFix = auditTablePostfix;
 
         this.mappingSettings = mappingSettings.ToList();
     }
 
-    public string AuditTablePostFix => this.auditTablePostFix;
+    public string AuditTablePostFix { get; }
 
     public IDatabaseScriptResult GenerateScript(IDatabaseScriptGeneratorContext context)
     {
@@ -326,12 +324,9 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
         }
     }
 
-    private static IEnumerable<string> CreateIndexScript(AuditTableGenerateContext context)
-    {
-        return
-                context.Table.IndexIterator.Where(z => z.Table == null || context.TableInfo.GetIndexMetadata(z.Name) == null).Select(
-                 z => z.SqlCreateString(context.Dialect, context.Mapping, context.DefaultCatalog, null));
-    }
+    private static IEnumerable<string> CreateIndexScript(AuditTableGenerateContext context) =>
+        context.Table.IndexIterator.Where(z => z.Table == null || context.TableInfo.GetIndexMetadata(z.Name) == null).Select(
+            z => z.SqlCreateString(context.Dialect, context.Mapping, context.DefaultCatalog, null));
 
     private IEnumerable<string> GetIterateScripts(DatabaseMetadata databaseMetadata, Configuration cfg, global::NHibernate.Dialect.Dialect dialect)
     {

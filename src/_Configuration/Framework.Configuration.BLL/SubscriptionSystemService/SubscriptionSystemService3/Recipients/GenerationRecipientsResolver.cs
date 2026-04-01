@@ -130,8 +130,5 @@ public class GenerationRecipientsResolver<TBLLContext>
         return result;
     }
 
-    private Recipient CreateRecipient(IEmployee employee)
-    {
-        return new Recipient(employee.Login, employee.Email);
-    }
+    private Recipient CreateRecipient(IEmployee employee) => new(employee.Login, employee.Email);
 }

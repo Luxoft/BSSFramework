@@ -7,10 +7,7 @@ namespace Framework.Database.NHibernate.DBGenerator.AuditDBGenerator;
 
 public class MsSqlDataBaseSchemaExtended(DbConnection connection) : AbstractDataBaseSchema(connection)
 {
-    public override ITableMetadata GetTableMetadata(DataRow rs, bool extras)
-    {
-        return new MsSqlTableMetadataExtended(rs, this, extras);
-    }
+    public override ITableMetadata GetTableMetadata(DataRow rs, bool extras) => new MsSqlTableMetadataExtended(rs, this, extras);
 
     public class MsSqlTableMetadataExtended(DataRow rs, IDataBaseSchema meta, bool extras) : AbstractTableMetadata(rs, meta, extras)
     {
@@ -24,35 +21,17 @@ public class MsSqlDataBaseSchemaExtended(DbConnection connection) : AbstractData
             this.Name = Convert.ToString(rs["TABLE_NAME"]);
         }
 
-        protected override string GetConstraintName(DataRow rs)
-        {
-            return Convert.ToString(rs["CONSTRAINT_NAME"]);
-        }
+        protected override string GetConstraintName(DataRow rs) => Convert.ToString(rs["CONSTRAINT_NAME"]);
 
-        protected override string GetColumnName(DataRow rs)
-        {
-            return Convert.ToString(rs["COLUMN_NAME"]);
-        }
+        protected override string GetColumnName(DataRow rs) => Convert.ToString(rs["COLUMN_NAME"]);
 
-        protected override string GetIndexName(DataRow rs)
-        {
-            return Convert.ToString(rs["INDEX_NAME"]);
-        }
+        protected override string GetIndexName(DataRow rs) => Convert.ToString(rs["INDEX_NAME"]);
 
-        protected override IColumnMetadata GetColumnMetadata(DataRow rs)
-        {
-            return new MsSqlColumnMetadataExtended(rs);
-        }
+        protected override IColumnMetadata GetColumnMetadata(DataRow rs) => new MsSqlColumnMetadataExtended(rs);
 
-        protected override IForeignKeyMetadata GetForeignKeyMetadata(DataRow rs)
-        {
-            return new MsSqlForeignKeyMetadata(rs);
-        }
+        protected override IForeignKeyMetadata GetForeignKeyMetadata(DataRow rs) => new MsSqlForeignKeyMetadata(rs);
 
-        protected override IIndexMetadata GetIndexMetadata(DataRow rs)
-        {
-            return new MsSqlIndexMetadata(rs);
-        }
+        protected override IIndexMetadata GetIndexMetadata(DataRow rs) => new MsSqlIndexMetadata(rs);
     }
 
     public class MsSqlColumnMetadataExtended : AbstractColumnMetaData, IColumnMetadataExtended

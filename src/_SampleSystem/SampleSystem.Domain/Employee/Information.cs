@@ -13,7 +13,7 @@ public class Information : BaseDirectory
     [MaxLength(50)]
     public virtual string Email
     {
-        get { return this.email.TrimNull(); }
-        set { this.email = value.TrimNull(); }
+        get => this.email.TrimNull();
+        set => this.email = value.TrimNull();
     }
 }

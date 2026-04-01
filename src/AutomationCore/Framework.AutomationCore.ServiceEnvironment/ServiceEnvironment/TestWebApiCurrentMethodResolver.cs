@@ -8,13 +8,7 @@ public class TestWebApiCurrentMethodResolver : IWebApiCurrentMethodResolver
 {
     private MethodInfo? currentMethod;
 
-    public MethodInfo? TryGetCurrentMethod()
-    {
-        return this.currentMethod;
-    }
+    public MethodInfo? TryGetCurrentMethod() => this.currentMethod;
 
-    public void SetCurrentMethod(MethodInfo methodInfo)
-    {
-        this.currentMethod = methodInfo;
-    }
+    public void SetCurrentMethod(MethodInfo methodInfo) => this.currentMethod = methodInfo;
 }

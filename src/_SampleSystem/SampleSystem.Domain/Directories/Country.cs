@@ -16,42 +16,21 @@ public class Country : BaseDirectory, ICodeObject
     [Required]
     public virtual string Code
     {
-        get
-        {
-            return this.code.TrimNull();
-        }
-
-        set
-        {
-            this.code = value.TrimNull();
-        }
+        get => this.code.TrimNull();
+        set => this.code = value.TrimNull();
     }
 
     [Required]
     public virtual string NameNative
     {
-        get
-        {
-            return this.nameNative.TrimNull();
-        }
-
-        set
-        {
-            this.nameNative = value.TrimNull();
-        }
+        get => this.nameNative.TrimNull();
+        set => this.nameNative = value.TrimNull();
     }
 
     [Required]
     public virtual string Culture
     {
-        get
-        {
-            return this.culture.TrimNull();
-        }
-
-        set
-        {
-            this.culture = value.TrimNull();
-        }
+        get => this.culture.TrimNull();
+        set => this.culture = value.TrimNull();
     }
 }

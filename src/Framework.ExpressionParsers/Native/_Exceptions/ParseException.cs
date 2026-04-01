@@ -1,4 +1,6 @@
-﻿namespace Framework.ExpressionParsers;
+﻿using Framework.ExpressionParsers._CSharp;
+
+namespace Framework.ExpressionParsers.Native._Exceptions;
 
 public class ParseException(string message, int position) : Exception(message)
 {

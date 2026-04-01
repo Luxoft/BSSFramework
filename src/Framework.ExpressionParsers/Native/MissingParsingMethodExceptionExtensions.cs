@@ -1,10 +1,14 @@
-﻿namespace Framework.ExpressionParsers;
+﻿using Framework.ExpressionParsers._CSharp;
+using Framework.ExpressionParsers.Native._Exceptions;
+
+namespace Framework.ExpressionParsers.Native;
 
 public static class MissingParsingMethodExceptionExtensions
 {
     internal static Exception ToMissingParsingMethodException(this Type obj, string message, int position, string methodName, IEnumerable<Type> tryArgs) => new MissingParsingMethodException(message, position, obj, methodName, tryArgs);
 
     public static Type? GetArgumentType<TDelegate, TArg>(this INativeExpressionParser nativeExpression, string expression)
+        where TDelegate : Delegate
     {
         if (nativeExpression == null) throw new ArgumentNullException(nameof(nativeExpression));
 

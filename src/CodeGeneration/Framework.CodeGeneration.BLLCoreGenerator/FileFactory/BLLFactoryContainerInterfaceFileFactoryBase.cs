@@ -4,16 +4,9 @@ using Framework.CodeGeneration.BLLCoreGenerator.FileFactory.__Base;
 
 namespace Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
 
-public class BLLFactoryContainerInterfaceFileFactoryBase<TConfiguration> : FileFactory<TConfiguration>
-        where TConfiguration : class, IBLLCoreGeneratorConfiguration<IBLLCoreGenerationEnvironment>
+public class BLLFactoryContainerInterfaceFileFactoryBase<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
+    where TConfiguration : class, IBLLCoreGeneratorConfiguration<IBLLCoreGenerationEnvironment>
 {
-    public BLLFactoryContainerInterfaceFileFactoryBase(TConfiguration configuration)
-            : base(configuration, null)
-    {
-
-    }
-
-
     public override FileType FileType => FileType.BLLFactoryContainerInterface;
 
 

@@ -10,11 +10,7 @@ public class BLLContextHandlerValidator<TBLLContext, TOperationContext>(TBLLCont
 {
     private readonly Dictionary<Type, Delegate> handlers = [];
 
-    public sealed override ValidationResult GetValidationResult<TSource>(TSource source, TOperationContext operationContext, IValidationState ownerState = null)
-    {
-        return this.GetValidationResult(source, operationContext, ownerState, true);
-    }
-
+    public sealed override ValidationResult GetValidationResult<TSource>(TSource source, TOperationContext operationContext, IValidationState ownerState = null) => this.GetValidationResult(source, operationContext, ownerState, true);
 
     protected ValidationResult GetValidationResult<TSource>(TSource source, TOperationContext operationContext, IValidationState ownerState, bool useHandler)
     {
@@ -26,8 +22,5 @@ public class BLLContextHandlerValidator<TBLLContext, TOperationContext>(TBLLCont
     }
 
 
-    protected void RegisterHandler<TDomainObject>(Func<TDomainObject, TOperationContext, IValidationState, ValidationResult> func)
-    {
-        this.handlers.Add(typeof(TDomainObject), func);
-    }
+    protected void RegisterHandler<TDomainObject>(Func<TDomainObject, TOperationContext, IValidationState, ValidationResult> func) => this.handlers.Add(typeof(TDomainObject), func);
 }

@@ -53,10 +53,7 @@ internal class ExplicitProperty : BasePropertyInfoImpl
         return baseProp;
     }
 
-    public override object[] GetCustomAttributes(Type attributeType, bool inherit)
-    {
-        return (object[])this.GetInternalCustomAttributes(attributeType).SelectMany().ToArray(attributeType);
-    }
+    public override object[] GetCustomAttributes(Type attributeType, bool inherit) => (object[])this.GetInternalCustomAttributes(attributeType).SelectMany().ToArray(attributeType);
 
     private IEnumerable<IEnumerable<Attribute>> GetInternalCustomAttributes(Type attributeType)
     {
@@ -66,32 +63,20 @@ internal class ExplicitProperty : BasePropertyInfoImpl
         }
     }
 
-    public override object[] GetCustomAttributes(bool inherit)
-    {
-        return new Attribute[][]
-               {
-                       this.GetExpandPathAttributes().ToArray()
-               }.SelectMany().ToArray();
-    }
-
+    public override object[] GetCustomAttributes(bool inherit) =>
+        new Attribute[][]
+        {
+            this.GetExpandPathAttributes().ToArray()
+        }.SelectMany().ToArray();
 
     private IEnumerable<ExpandPathAttribute> GetExpandPathAttributes()
     {
         yield return this.customPropertyPath.Maybe(path => new ExpandPathAttribute(path)) ?? new ExpandPathAttribute(this.baseName);
     }
 
-    public override ParameterInfo[] GetIndexParameters()
-    {
-        return new ParameterInfo[0];// this.sourceProperty.GetIndexParameters();
-    }
+    public override ParameterInfo[] GetIndexParameters() => new ParameterInfo[0]; // this.sourceProperty.GetIndexParameters();
 
-    public override MethodInfo GetGetMethod(bool nonPublic)
-    {
-        return this.getMethod;
-    }
+    public override MethodInfo GetGetMethod(bool nonPublic) => this.getMethod;
 
-    public override MethodInfo GetSetMethod(bool nonPublic)
-    {
-        return null;//new PropertyMethodInfoImpl();
-    }
+    public override MethodInfo GetSetMethod(bool nonPublic) => null; //new PropertyMethodInfoImpl();
 }

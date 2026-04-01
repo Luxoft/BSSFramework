@@ -30,10 +30,7 @@ public static class TrackingServiceExtensions
     {
         public static readonly Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>> SourceFunc = GetSourceFunc();
 
-        private static Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>> GetSourceFunc()
-        {
-            return typeof(TDomainObject).GetPropertyPaths(typeof(TRemovedItem)).Select(GetSourceFunc).Sum();
-        }
+        private static Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>> GetSourceFunc() => typeof(TDomainObject).GetPropertyPaths(typeof(TRemovedItem)).Select(GetSourceFunc).Sum();
 
         private static Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>> GetSourceFunc(PropertyPath propertyPath)
         {

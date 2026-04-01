@@ -14,14 +14,12 @@ public class ValidatorInterfaceFileFactory<TConfiguration>(TConfiguration config
 
     public override CodeTypeReference BaseReference { get; } = typeof(IValidator).ToTypeReference();
 
-    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-    {
-        return new CodeTypeDeclaration
-               {
-                   Name = this.Name,
-                   Attributes = MemberAttributes.Public,
-                   IsPartial = true,
-                   IsInterface = true
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new()
+        {
+            Name = this.Name,
+            Attributes = MemberAttributes.Public,
+            IsPartial = true,
+            IsInterface = true
         };
-    }
 }

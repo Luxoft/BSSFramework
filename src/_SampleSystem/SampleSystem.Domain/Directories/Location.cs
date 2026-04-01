@@ -47,8 +47,8 @@ public class Location :
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual int DeepLevel
     {
-        get { return this.deepLevel; }
-        set { this.deepLevel = value; }
+        get => this.deepLevel;
+        set => this.deepLevel = value;
     }
 
     public virtual byte[] BinaryData
@@ -58,88 +58,63 @@ public class Location :
     }
 
     [FetchPath("Children")]
-    public virtual bool IsLeaf
-    {
-        get { return !this.Children.Any(); }
-    }
+    public virtual bool IsLeaf => !this.Children.Any();
 
     [FetchPath("Children")]
-    public virtual bool ContainsOnlyInactiveChildren
-    {
-        get { return this.Children.All(x => !x.Active); }
-    }
+    public virtual bool ContainsOnlyInactiveChildren => this.Children.All(x => !x.Active);
 
     public virtual Country? Country
     {
-        get { return this.country; }
-        set { this.country = value; }
+        get => this.country;
+        set => this.country = value;
     }
 
     [CustomSerialization(CustomSerializationMode.Ignore)]
-    public virtual Location Root
-    {
-        get { return this.Parent == null ? this : this.Parent.Root; }
-    }
+    public virtual Location Root => this.Parent == null ? this : this.Parent.Root;
 
     public virtual LocationType LocationType
     {
-        get { return this.locationType; }
-        set { this.locationType = value; }
+        get => this.locationType;
+        set => this.locationType = value;
     }
 
     public virtual bool IsFinancial
     {
-        get { return this.isFinancial; }
-        set { this.isFinancial = value; }
+        get => this.isFinancial;
+        set => this.isFinancial = value;
     }
 
     [Required]
     public virtual int CloseDate
     {
-        get { return this.closeDate; }
-        set { this.closeDate = value; }
+        get => this.closeDate;
+        set => this.closeDate = value;
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public virtual IEnumerable<Location> Children
-    {
-        get { return this.children; }
-    }
+    public virtual IEnumerable<Location> Children => this.children;
 
     public virtual Location? Parent
     {
-        get { return this.parent; }
-        set { this.parent = value; }
+        get => this.parent;
+        set => this.parent = value;
     }
 
     [Required]
     public virtual int Code
     {
-        get
-        {
-            return this.code;
-        }
-
-        set
-        {
-            this.code = value;
-        }
+        get => this.code;
+        set => this.code = value;
     }
 
     [CustomSerialization(CustomSerializationMode.Normal)]
     public override bool Active
     {
-        get { return base.Active; }
-        set { base.Active = value; }
+        get => base.Active;
+        set => base.Active = value;
     }
 
-    Location? IDetail<Location>.Master
-    {
-        get { return this.Parent; }
-    }
+    Location? IDetail<Location>.Master => this.Parent;
 
-    ICollection<Location> IMaster<Location>.Details
-    {
-        get { return (ICollection<Location>)this.Children; }
-    }
+    ICollection<Location> IMaster<Location>.Details => (ICollection<Location>)this.Children;
 }

@@ -49,15 +49,9 @@ public class DomainTypeMetadata
 
     public IEnumerable<InlineTypeFieldMetadata> InlineFields => this.Fields.OfType<InlineTypeFieldMetadata>();
 
-    public IEnumerable<DomainTypeMetadata> NotAbstractChildrenDomainTypes
-    {
-        get => this.children.Where(z => !z.DomainType.IsAbstract);
-    }
+    public IEnumerable<DomainTypeMetadata> NotAbstractChildrenDomainTypes => this.children.Where(z => !z.DomainType.IsAbstract);
 
-    public DomainTypeMetadata Root
-    {
-        get => this.GetAllElements(v => v.Parent).Last();
-    }
+    public DomainTypeMetadata Root => this.GetAllElements(v => v.Parent).Last();
 
     public IEnumerable<UniqueIndexMetadata> UniqueIndexes => this.indexUniqueMetadataLazy.Value;
 
@@ -76,10 +70,7 @@ public class DomainTypeMetadata
         this.fields.AddRange(fieldMetadatas);
     }
 
-    public void EndDeclaration()
-    {
-        this.isCollected = true;
-    }
+    public void EndDeclaration() => this.isCollected = true;
 
     public override string ToString() => this.type.Name;
 

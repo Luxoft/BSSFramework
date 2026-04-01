@@ -18,10 +18,7 @@ public class FileScriptReader : IMigrationScriptReader
         this.directoryPath = directoryPath;
     }
 
-    public IEnumerable<MigrationDbScript> Read()
-    {
-        return this.Read(this.directoryPath);
-    }
+    public IEnumerable<MigrationDbScript> Read() => this.Read(this.directoryPath);
 
     private IEnumerable<MigrationDbScript> Read(string folderPath)
     {

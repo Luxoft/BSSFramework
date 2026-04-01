@@ -190,9 +190,8 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
         Type domainObjectBaseType,
         Type persistentDomainObjectBaseType,
         string @namespace,
-        bool useDependencySecurity = true)
-    {
-        return new DefaultProjectionLambdaEnvironment(
+        bool useDependencySecurity = true) =>
+        new DefaultProjectionLambdaEnvironment(
             extendedMetadata,
             projectionSource,
             assemblyName,
@@ -201,5 +200,4 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
             persistentDomainObjectBaseType,
             @namespace,
             useDependencySecurity);
-    }
 }

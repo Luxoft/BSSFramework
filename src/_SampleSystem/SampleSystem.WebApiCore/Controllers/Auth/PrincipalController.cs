@@ -8,9 +8,7 @@ namespace Authorization.WebApi.Controllers;
 public partial class PrincipalController
 {
     [HttpPost]
-    public PrincipalFullDTO GetCurrentPrincipal()
-    {
-        return this.Evaluate(DBSessionMode.Read, evaluateData =>
-                                                         evaluateData.Context.Authorization.CurrentPrincipalSource.CurrentUser.ToFullDTO(evaluateData.MappingService));
-    }
+    public PrincipalFullDTO GetCurrentPrincipal() =>
+        this.Evaluate(DBSessionMode.Read, evaluateData =>
+                          evaluateData.Context.Authorization.CurrentPrincipalSource.CurrentUser.ToFullDTO(evaluateData.MappingService));
 }

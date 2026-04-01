@@ -15,7 +15,7 @@ public class MessageTemplate
     /// </summary>
     public virtual string Code
     {
-        get { return this.code.TrimNull(); }
-        set { this.code = value.TrimNull(); }
+        get => this.code.TrimNull();
+        set => this.code = value.TrimNull();
     }
 }

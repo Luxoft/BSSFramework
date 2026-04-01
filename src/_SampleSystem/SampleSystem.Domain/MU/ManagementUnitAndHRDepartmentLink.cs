@@ -33,10 +33,8 @@ public class ManagementUnitAndHRDepartmentLink :
     }
 
     public ManagementUnitAndHRDepartmentLink(ManagementUnit managementUnit, HRDepartment hRDepartment)
-            : this(managementUnit)
-    {
+            : this(managementUnit) =>
         this.hRDepartment = hRDepartment;
-    }
 
     public ManagementUnitAndHRDepartmentLink()
     {
@@ -45,64 +43,26 @@ public class ManagementUnitAndHRDepartmentLink :
     [UniqueElement]
     public virtual HRDepartment HRDepartment
     {
-        get
-        {
-            return this.hRDepartment;
-        }
-
-        set
-        {
-            this.hRDepartment = value;
-        }
+        get => this.hRDepartment;
+        set => this.hRDepartment = value;
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Event | DTORole.Integration)]
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client)]
     [ExpandPath("ManagementUnit.BusinessUnits")]
     [DetailRole(false)]
-    public virtual IEnumerable<BusinessUnit> LinkedBusinessUnits
-    {
-        get
-        {
-            return this.ManagementUnit.BusinessUnits.ToList(link => link.BusinessUnit);
-        }
-    }
+    public virtual IEnumerable<BusinessUnit> LinkedBusinessUnits => this.ManagementUnit.BusinessUnits.ToList(link => link.BusinessUnit);
 
     [UniqueElement]
     public virtual ManagementUnit ManagementUnit
     {
-        get
-        {
-            return this.managementUnit;
-        }
-
-        set
-        {
-            this.managementUnit = value;
-        }
+        get => this.managementUnit;
+        set => this.managementUnit = value;
     }
 
-    ManagementUnit IDetail<ManagementUnit>.Master
-    {
-        get
-        {
-            return this.managementUnit;
-        }
-    }
+    ManagementUnit IDetail<ManagementUnit>.Master => this.managementUnit;
 
-    HRDepartment IDetail<HRDepartment>.Master
-    {
-        get
-        {
-            return this.hRDepartment;
-        }
-    }
+    HRDepartment IDetail<HRDepartment>.Master => this.hRDepartment;
 
-    string IVisualIdentityObject.Name
-    {
-        get
-        {
-            return this.HRDepartment.Maybe(x => x.Name) + "-" + this.ManagementUnit.Maybe(x => x.Name);
-        }
-    }
+    string IVisualIdentityObject.Name => this.HRDepartment.Maybe(x => x.Name) + "-" + this.ManagementUnit.Maybe(x => x.Name);
 }

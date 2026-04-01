@@ -30,15 +30,15 @@ public class Project :
     [VisualIdentity]
     public virtual string Code
     {
-        get { return this.code.TrimNull(); }
-        set { this.code = value.TrimNull(); }
+        get => this.code.TrimNull();
+        set => this.code = value.TrimNull();
     }
 
     [RequiredValidator(OperationContext = (int)SampleSystemOperationContext.Save)]
     public virtual BusinessUnit BusinessUnit
     {
-        get { return this.businessUnit; }
-        set { this.businessUnit = value; }
+        get => this.businessUnit;
+        set => this.businessUnit = value;
     }
 
     public virtual ProjectStatus ProjectStatus
@@ -62,78 +62,51 @@ public class Project :
     [Required]
     public virtual DateTime? StartDate
     {
-        get { return this.startDate; }
-        set { this.SetValueSafe(v => v.startDate, value); }
+        get => this.startDate;
+        set => this.SetValueSafe(v => v.startDate, value);
     }
 
     public virtual DateTime? EndDate
     {
-        get { return this.endDate; }
-        set { this.endDate = value; }
+        get => this.endDate;
+        set => this.endDate = value;
     }
 
     [Required]
     public virtual DateTime? PlannedEndDate
     {
-        get { return this.plannedEndDate; }
-        set { this.plannedEndDate = value; }
+        get => this.plannedEndDate;
+        set => this.plannedEndDate = value;
     }
 
-    string IVisualIdentityObject.Name
-    {
-        get { return this.Code; }
-    }
+    string IVisualIdentityObject.Name => this.Code;
 
-    BusinessUnit IDetail<BusinessUnit>.Master
-    {
-        get { return this.BusinessUnit; }
-    }
+    BusinessUnit IDetail<BusinessUnit>.Master => this.BusinessUnit;
 
     /// <summary>
     /// For notifiactions
     /// </summary>
     /// <returns></returns>
-    public virtual string GetProjectTypeName()
-    {
-        throw new NotImplementedException();
-    }
+    public virtual string GetProjectTypeName() => throw new NotImplementedException();
 
     /// <summary>
     /// For Version
     /// </summary>
     /// <returns></returns>
-    public virtual ProjectVersionType GetProjectVersionType()
-    {
-        throw new NotImplementedException();
-    }
+    public virtual ProjectVersionType GetProjectVersionType() => throw new NotImplementedException();
 
-    public override string ToString()
-    {
-        return this.Code;
-    }
+    public override string ToString() => this.Code;
 
     /// <summary>
     /// For Version Hack!
     /// ProjectVersion must be generic!!!
     /// </summary>
     /// <returns></returns>
-    public virtual FinancialProjectType? GetFinancialProjectType()
-    {
-        return null;
-    }
+    public virtual FinancialProjectType? GetFinancialProjectType() => null;
 
-    public virtual IEnumerable<Project> GetLinks()
-    {
-        throw new NotImplementedException();
-    }
+    public virtual IEnumerable<Project> GetLinks() => throw new NotImplementedException();
 
-    public virtual IEnumerable<Project> GetLinksWithoutFinancialProject()
-    {
-        throw new NotImplementedException();
-    }
+    public virtual IEnumerable<Project> GetLinksWithoutFinancialProject() => throw new NotImplementedException();
 
-    public virtual DateTime GetCurrentDate()
-    {
-        return DateTime.Today;
-    }
+    public virtual DateTime GetCurrentDate() => DateTime.Today;
 }

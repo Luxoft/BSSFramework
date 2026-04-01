@@ -35,13 +35,7 @@ internal class GeneratedField : BaseFieldInfoImpl
     public override string Name { get; }
 
 
-    public override object[] GetCustomAttributes(Type attributeType, bool inherit)
-    {
-        return (object[])new object[0].ToArray(attributeType);
-    }
+    public override object[] GetCustomAttributes(Type attributeType, bool inherit) => (object[])new object[0].ToArray(attributeType);
 
-    public override bool IsDefined(Type attributeType, bool inherit)
-    {
-        return this.GetCustomAttributes(attributeType, inherit).Any();
-    }
+    public override bool IsDefined(Type attributeType, bool inherit) => this.GetCustomAttributes(attributeType, inherit).Any();
 }

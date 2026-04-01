@@ -21,10 +21,7 @@ public class AuditPropertyPair<TDomainObject>(
         yield return dateAudit;
     }
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return this.GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 }
 
 public class AuditPropertyPair : AuditPropertyPair<IAuditObject>

@@ -92,8 +92,5 @@ public class ChangeDefaultInitializedValueStrategyTest
         return databaseScriptGeneratorStrategyInfo;
     }
 
-    private static IEnumerable<string> SkipDefaultTemplate(IEnumerable<string> script)
-    {
-        return script.Where(x => x != "GO" && !x.StartsWith("-------------") && x != "use []" + Environment.NewLine && x != Environment.NewLine);
-    }
+    private static IEnumerable<string> SkipDefaultTemplate(IEnumerable<string> script) => script.Where(x => x != "GO" && !x.StartsWith("-------------") && x != "use []" + Environment.NewLine && x != Environment.NewLine);
 }

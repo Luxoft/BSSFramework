@@ -15,14 +15,14 @@ public class BusinessUnitAncestorLink : AuditPersistentDomainObjectBase
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual BusinessUnit Ancestor
     {
-        get { return this.ancestor; }
-        set { this.ancestor = value; }
+        get => this.ancestor;
+        set => this.ancestor = value;
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual BusinessUnit Child
     {
-        get { return this.child; }
-        set { this.child = value; }
+        get => this.child;
+        set => this.child = value;
     }
 }

@@ -14,53 +14,51 @@ namespace SampleSystem.ServiceEnvironment.DependencyInjection;
 
 public static class SampleSystemGeneralDependencyInjectionExtensions
 {
-    public static IServiceCollection AddGeneralDependencyInjection(this IServiceCollection services, IConfiguration configuration, Action<IBssFrameworkBuilder> setupAction)
-    {
-        return services
+    public static IServiceCollection AddGeneralDependencyInjection(this IServiceCollection services, IConfiguration configuration, Action<IBssFrameworkBuilder> setupAction) =>
+        services
 
-               .AddBssFramework(
-                   rootSettings =>
-                   {
-                       rootSettings
-                           .AddSecuritySystem(
-                               securitySettings =>
-                                   securitySettings
-                                       .AddSecurityContexts()
-                                       .AddDomainSecurityServices()
-                                       .AddSecurityRoles()
-                                       .AddSecurityRules()
-                                       .AddCustomSecurityOperations()
-                                       .SetClientDomainModeSecurityRuleSource<SampleSystemClientDomainModeSecurityRuleSource>()
-                                       .AddClientSecurityRuleInfoSource(typeof(SampleSystemSecurityGroup))
-                                       .AddUserSource<Employee>(usb => usb.SetFilter(employee => employee.Active))
-                                       .AddVirtualPermissions()
-                                       .SetSecurityAdministratorRule(SampleSystemSecurityRole.PermissionAdministrator)
+            .AddBssFramework(
+                rootSettings =>
+                {
+                    rootSettings
+                        .AddSecuritySystem(
+                            securitySettings =>
+                                securitySettings
+                                    .AddSecurityContexts()
+                                    .AddDomainSecurityServices()
+                                    .AddSecurityRoles()
+                                    .AddSecurityRules()
+                                    .AddCustomSecurityOperations()
+                                    .SetClientDomainModeSecurityRuleSource<SampleSystemClientDomainModeSecurityRuleSource>()
+                                    .AddClientSecurityRuleInfoSource(typeof(SampleSystemSecurityGroup))
+                                    .AddUserSource<Employee>(usb => usb.SetFilter(employee => employee.Active))
+                                    .AddVirtualPermissions()
+                                    .SetSecurityAdministratorRule(SampleSystemSecurityRole.PermissionAdministrator)
 
-                                       .AddAuthorizationSystem()
-                                       .AddConfigurationSecurity())
+                                    .AddAuthorizationSystem()
+                                    .AddConfigurationSecurity())
 
-                           .AddNamedLocks()
+                        .AddNamedLocks()
 
-                           .SetDomainObjectEventMetadata<SampleSystemDomainObjectEventMetadata>()
+                        .SetDomainObjectEventMetadata<SampleSystemDomainObjectEventMetadata>()
 
-                           .AddListeners()
+                        .AddListeners()
 
-                           //.AddQueryVisitors()
+                        //.AddQueryVisitors()
 
-                           // Legacy
+                        // Legacy
 
-                           .AddConfigurationSystemConstants()
-                           .AddConfigurationTargetSystems()
+                        .AddConfigurationSystemConstants()
+                        .AddConfigurationTargetSystems()
 
-                           .AddSubscriptionManagers()
-                           .AddLegacyGenericServices()
-                           .AddContextEvaluators()
-                           .AddBLLSystem()
+                        .AddSubscriptionManagers()
+                        .AddLegacyGenericServices()
+                        .AddContextEvaluators()
+                        .AddBLLSystem()
 
-                           .AddSupportLegacyServices()
-                           .Pipe(setupAction);
-                   })
+                        .AddSupportLegacyServices()
+                        .Pipe(setupAction);
+                })
 
-               .AddGeneralApplicationServices(configuration);
-    }
+            .AddGeneralApplicationServices(configuration);
 }

@@ -13,23 +13,19 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         bool registerImpl = true)
         where TServiceImplementation : class, TServiceInterface
-        where TServiceInterface : class
-    {
-        return services.Pipe(registerImpl, s => s.AddScoped<TServiceImplementation>())
-                       .AddScoped(sp => LazyInterfaceImplementHelper.CreateProxy<TServiceInterface>(
-                                      sp.GetRequiredService<TServiceImplementation>));
-    }
+        where TServiceInterface : class =>
+        services.Pipe(registerImpl, s => s.AddScoped<TServiceImplementation>())
+                .AddScoped(sp => LazyInterfaceImplementHelper.CreateProxy<TServiceInterface>(
+                               sp.GetRequiredService<TServiceImplementation>));
 
     public static IServiceCollection AddScopedFromLazyObject<TService, TServiceImplementation>(
         this IServiceCollection services,
         bool registerImpl = true)
         where TServiceImplementation : class, TService
-        where TService : class
-    {
-        return services.Pipe(registerImpl, s => s.AddScoped<TServiceImplementation>())
-                       .AddScoped<ILazyObject<TService>>(sp => new LazyObject<TService>(sp.GetRequiredService<TServiceImplementation>))
-                       .AddScoped(sp => sp.GetRequiredService<ILazyObject<TService>>().Value);
-    }
+        where TService : class =>
+        services.Pipe(registerImpl, s => s.AddScoped<TServiceImplementation>())
+                .AddScoped<ILazyObject<TService>>(sp => new LazyObject<TService>(sp.GetRequiredService<TServiceImplementation>))
+                .AddScoped(sp => sp.GetRequiredService<ILazyObject<TService>>().Value);
 
     public static IServiceCollection AddNotImplemented<TService>(this IServiceCollection services, string? message = null, bool isScoped = false)
         where TService : class

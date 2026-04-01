@@ -72,16 +72,10 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGenerato
     }
 
     /// <inheritdoc />
-    public virtual bool SquashClassValidators(Type domainType)
-    {
-        return true;
-    }
+    public virtual bool SquashClassValidators(Type domainType) => true;
 
     /// <inheritdoc />
-    public virtual bool SquashPropertyValidators(PropertyInfo property)
-    {
-        return true;
-    }
+    public virtual bool SquashPropertyValidators(PropertyInfo property) => true;
 
     public virtual bool GenerateDomainServiceConstructor(Type domainType)
     {
@@ -136,15 +130,9 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGenerato
         return true;
     }
 
-    protected override IEnumerable<Type> GetDomainTypes()
-    {
-        return this.Environment.BLLCore.BLLDomainTypes;
-    }
+    protected override IEnumerable<Type> GetDomainTypes() => this.Environment.BLLCore.BLLDomainTypes;
 
-    protected virtual IBLLFactoryContainerGeneratorConfiguration GetLogics()
-    {
-        return new BLLFactoryContainerGeneratorConfiguration<BLLGeneratorConfigurationBase<TEnvironment>>(this);
-    }
+    protected virtual IBLLFactoryContainerGeneratorConfiguration GetLogics() => new BLLFactoryContainerGeneratorConfiguration<BLLGeneratorConfigurationBase<TEnvironment>>(this);
 
     protected virtual ICodeFileFactoryHeader<FileType> SecurityDomainBLLBaseFileFactoryHeader { get; } =
 
@@ -184,11 +172,7 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGenerato
 
     public CodeTypeReference SecurityDomainBLLBaseTypeReference => this.GetSecurityDomainBLLBaseTypeReference(null);
 
-    public CodeTypeReference GetSecurityDomainBLLBaseTypeReference(Type? type)
-    {
-        return this.GetCodeTypeReference(type, FileType.SecurityDomainBLLBase);
-    }
-
+    public CodeTypeReference GetSecurityDomainBLLBaseTypeReference(Type? type) => this.GetCodeTypeReference(type, FileType.SecurityDomainBLLBase);
 
     protected override IEnumerable<ICodeFileFactoryHeader<FileType>> GetFileFactoryHeaders()
     {

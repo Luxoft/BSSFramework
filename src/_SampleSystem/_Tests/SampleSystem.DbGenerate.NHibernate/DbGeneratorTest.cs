@@ -156,19 +156,11 @@ public class DbGeneratorTest
 
         var connectionString = $"Data Source={serverName};Initial Catalog={dbName.Name};Application Name=SampleSystem";
 
-        return new SampleSystemMappingSettings(
-                initMappingAction,
-                dbName,
-                dbAuditName)
+        return new SampleSystemMappingSettings(initMappingAction, dbName, dbAuditName)
             .AddInitializer(
                 new DefaultConfigurationInitializer(
                     new ManualDefaultConnectionStringSource(connectionString),
-                    new DefaultConfigurationInitializerSettings
-                    {
-                        FluentAssemblyList =
-                        [
-                            typeof(SampleSystemMappingSettings).Assembly
-                        ]
-                    }));
+                    new DatabaseSettings(),
+                    new NHibernateSettings { FluentAssemblyList = [typeof(SampleSystemMappingSettings).Assembly] }));
     }
 }

@@ -9,8 +9,7 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>
     IServiceProvider serviceProvider,
     IEventOperationSender operationSender,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory)
-    :
-        IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
+    : IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
     public IServiceProvider ServiceProvider { get; } = serviceProvider;

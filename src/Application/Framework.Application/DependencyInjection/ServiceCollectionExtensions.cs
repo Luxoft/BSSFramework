@@ -19,11 +19,11 @@ public static class ServiceCollectionExtensions
 {
     extension(IServiceCollection services)
     {
-        public IServiceCollection AddListeners(Action<IDALListenerBuilder> setupAction) =>
-            services.Initialize<DALListenerBuilder>(setupAction);
+        public IServiceCollection AddListeners(Action<IDALListenerSetup> setupAction) =>
+            services.Initialize<DALListenerSetup>(setupAction);
 
-        public IServiceCollection AddNamedLocks(Action<IGenericNamedLockBuilder> setupAction) =>
-            services.Initialize<GenericNamedLockBuilder>(setupAction);
+        public IServiceCollection AddNamedLocks(Action<IGenericNamedLockSetup> setupAction) =>
+            services.Initialize<GenericNamedLockSetup>(setupAction);
 
         public IServiceCollection AddGenericApplicationServices()
         {

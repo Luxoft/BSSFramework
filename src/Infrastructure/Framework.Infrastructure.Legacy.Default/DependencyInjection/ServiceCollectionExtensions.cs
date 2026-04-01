@@ -23,6 +23,7 @@ using Framework.Database;
 using Framework.Infrastructure.LocalDBEvents;
 using Framework.Infrastructure.SubscriptionService;
 using Framework.Notification.Domain;
+using Framework.Notification.DTO;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -89,7 +90,7 @@ public static class ServiceCollectionExtensions
 
                 .AddScopedFrom<ICurrentRevisionService, IDBSession>()
                 .AddScoped<IMessageSender<MessageTemplateNotification>, TemplateMessageSender>()
-                .AddScoped<IMessageSender<Notification.DTO.NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>();
+                .AddScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>();
 
         private IServiceCollection AddConfigurationNamedLocks() =>
             services.AddKeyedSingleton<INamedLockSource>(
@@ -98,7 +99,7 @@ public static class ServiceCollectionExtensions
     }
 
 
-    public static ISecuritySystemBuilder AddConfigurationSecurity(this ISecuritySystemBuilder securitySystemSettings) =>
+    public static ISecuritySystemSetup AddConfigurationSecurity(this ISecuritySystemSetup securitySystemSettings) =>
         securitySystemSettings
             .AddDomainSecurity<Sequence>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
             .AddDomainSecurity<SystemConstant>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))

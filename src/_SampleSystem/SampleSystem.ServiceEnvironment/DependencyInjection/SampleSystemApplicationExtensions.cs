@@ -3,7 +3,6 @@
 using Framework.Core.TypeResolving;
 using Framework.Core.TypeResolving.TypeSource;
 using Framework.Infrastructure.DependencyInjection;
-using Framework.Notification.Extensions;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,8 +41,9 @@ public static class SampleSystemApplicationExtensions
         private IServiceCollection AddApplicationNotification(IConfiguration configuration)
         {
             services.AddNotificationJob();
-            services.AddSmtpNotification(configuration);
-            services.AddRewriteReceiversDependencies(configuration);
+
+            //services.AddSmtpNotification(configuration);
+            //services.AddRewriteReceiversDependencies(configuration);
 
             return services;
         }

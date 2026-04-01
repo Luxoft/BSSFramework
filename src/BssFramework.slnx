@@ -48,17 +48,10 @@
   <Folder Name="/Database/">
     <Project Path="Database/Framework.Database.Abstractions/Framework.Database.Abstractions.csproj" />
     <Project Path="Database/Framework.Database.Domain/Framework.Database.Domain.csproj" />
-    <Project Path="Database/Framework.Database.EntityFramework/Framework.Database.EntityFramework.csproj" />
     <Project Path="Database/Framework.Database.Legacy.Abstractions/Framework.Database.Legacy.Abstractions.csproj" />
     <Project Path="Database/Framework.Database.Legacy.Domain/Framework.Database.Legacy.Domain.csproj" />
     <Project Path="Database/Framework.Database.Mapping/Framework.Database.Mapping.csproj" />
     <Project Path="Database/Framework.Database.Metadata/Framework.Database.Metadata.csproj" />
-    <Project Path="Database/Framework.Database.NHibernate.DALGenerator/Framework.Database.NHibernate.DALGenerator.csproj" />
-    <Project Path="Database/Framework.Database.NHibernate.DBGenerator.Tests/Framework.Database.NHibernate.DBGenerator.Tests.csproj" />
-    <Project Path="Database/Framework.Database.NHibernate.DBGenerator/Framework.Database.NHibernate.DBGenerator.csproj" />
-    <Project Path="Database/Framework.Database.NHibernate.Legacy/Framework.Database.NHibernate.Legacy.csproj" />
-    <Project Path="Database/Framework.Database.NHibernate.Runtime/Framework.Database.NHibernate.Runtime.csproj" />
-    <Project Path="Database/Framework.Database.NHibernate/Framework.Database.NHibernate.csproj" />
     <Project Path="Database/Framework.Database.Runtime/Framework.Database.Runtime.csproj" />
     <Project Path="Database/Framework.Database.SqlMapper/Framework.Database.SqlMapper.csproj" />
     <Project Path="Database/Framework.Database/Framework.Database.csproj" />
@@ -66,6 +59,17 @@
     <Project Path="Database/Framework.Tracking.Tests/Framework.Tracking.Tests.csproj" />
     <Project Path="Database/Framework.Tracking.Validation/Framework.Tracking.Validation.csproj" />
     <Project Path="Database/Framework.Tracking/Framework.Tracking.csproj" />
+  </Folder>
+  <Folder Name="/Database/EntityFramework/">
+    <Project Path="Database/Framework.Database.EntityFramework/Framework.Database.EntityFramework.csproj" />
+  </Folder>
+  <Folder Name="/Database/NHibernate/">
+    <Project Path="Database/Framework.Database.NHibernate.DALGenerator/Framework.Database.NHibernate.DALGenerator.csproj" />
+    <Project Path="Database/Framework.Database.NHibernate.DBGenerator.Tests/Framework.Database.NHibernate.DBGenerator.Tests.csproj" />
+    <Project Path="Database/Framework.Database.NHibernate.DBGenerator/Framework.Database.NHibernate.DBGenerator.csproj" />
+    <Project Path="Database/Framework.Database.NHibernate.Legacy/Framework.Database.NHibernate.Legacy.csproj" />
+    <Project Path="Database/Framework.Database.NHibernate.Runtime/Framework.Database.NHibernate.Runtime.csproj" />
+    <Project Path="Database/Framework.Database.NHibernate/Framework.Database.NHibernate.csproj" />
   </Folder>
   
   <Folder Name="/Domain/">

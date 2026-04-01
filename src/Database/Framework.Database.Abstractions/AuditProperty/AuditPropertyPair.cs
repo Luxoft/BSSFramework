@@ -10,8 +10,8 @@ public class AuditPropertyPair<TDomainObject>(
     IAuditProperty<TDomainObject, DateTime?> dateAudit)
     : IEnumerable<IAuditProperty>
 {
-    public AuditPropertyPair(Expression<Func<TDomainObject, string>> authorPropertyExpr, Expression<Func<TDomainObject, DateTime?>> datePropertyExpr, ICurrentUser currentUser, TimeProvider timeProvider)
-            : this(new AuditProperty<TDomainObject, string>(authorPropertyExpr, () => currentUser.Name), new AuditProperty<TDomainObject, DateTime?>(datePropertyExpr, () => timeProvider.GetLocalNow().DateTime))
+    public AuditPropertyPair(Expression<Func<TDomainObject, string?>> authorPropertyExpr, Expression<Func<TDomainObject, DateTime?>> datePropertyExpr, ICurrentUser currentUser, TimeProvider timeProvider)
+            : this(new AuditProperty<TDomainObject, string?>(authorPropertyExpr, () => currentUser.Name), new AuditProperty<TDomainObject, DateTime?>(datePropertyExpr, () => timeProvider.GetLocalNow().DateTime))
     {
     }
 
@@ -35,7 +35,7 @@ public class AuditPropertyPair : AuditPropertyPair<IAuditObject>
     {
     }
 
-    public AuditPropertyPair(IAuditProperty<IAuditObject, string> authorAudit, IAuditProperty<IAuditObject, DateTime?> dateAudit)
+    public AuditPropertyPair(IAuditProperty<IAuditObject, string?> authorAudit, IAuditProperty<IAuditObject, DateTime?> dateAudit)
         : base(authorAudit, dateAudit)
     {
     }

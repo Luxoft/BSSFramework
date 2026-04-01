@@ -2,8 +2,8 @@
 
 namespace Framework.Application.DependencyInjection;
 
-public interface IDALListenerBuilder
+public interface IDALListenerSetup
 {
-    IDALListenerBuilder Add<TListener>()
+    IDALListenerSetup Add<TListener>()
         where TListener : class, IDALListener;
 }

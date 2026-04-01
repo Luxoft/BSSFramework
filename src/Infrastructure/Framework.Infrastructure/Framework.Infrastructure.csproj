@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Application\Framework.Application\Framework.Application.csproj" />
     <ProjectReference Include="..\..\Database\Framework.Database.Runtime\Framework.Database.Runtime.csproj" />
+    <ProjectReference Include="..\..\Database\Framework.Database\Framework.Database.csproj" />
     <ProjectReference Include="..\Framework.Infrastructure.Abstractions\Framework.Infrastructure.Abstractions.csproj" />
   </ItemGroup>
 

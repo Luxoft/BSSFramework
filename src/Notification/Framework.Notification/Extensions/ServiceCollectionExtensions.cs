@@ -1,4 +1,5 @@
 ﻿using Framework.Core.MessageSender;
+using Framework.Notification.DTO;
 using Framework.Notification.Settings;
 
 using Microsoft.Extensions.Configuration;
@@ -14,7 +15,7 @@ public static class ServiceCollectionExtensions
         {
             services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));
 
-            services.AddScoped<IMessageSender<Notification.DTO.NotificationEventDTO>, SmtpNotificationMessageSender>();
+            services.AddScoped<IMessageSender<NotificationEventDTO>, SmtpNotificationMessageSender>();
         }
 
         /// <summary>

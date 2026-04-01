@@ -9,11 +9,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Application.DependencyInjection;
 
-public class DALListenerBuilder : IDALListenerBuilder, IServiceInitializer
+public class DALListenerSetup : IDALListenerSetup, IServiceInitializer
 {
     private readonly List<Action<IServiceCollection>> initActions = [];
 
-    public IDALListenerBuilder Add<TListener>()
+    public IDALListenerSetup Add<TListener>()
         where TListener : class, IDALListener
     {
         this.initActions.Add(this.AddListener<TListener>);

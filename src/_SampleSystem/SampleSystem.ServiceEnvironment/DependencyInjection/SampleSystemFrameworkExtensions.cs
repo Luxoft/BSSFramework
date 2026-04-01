@@ -12,31 +12,31 @@ namespace SampleSystem.ServiceEnvironment.DependencyInjection;
 
 public static class SampleSystemFrameworkExtensions
 {
-    extension(IBssFrameworkBuilder settings)
+    extension(IBssFrameworkSetup settings)
     {
-        public IBssFrameworkBuilder AddNamedLocks() =>
+        public IBssFrameworkSetup AddNamedLocks() =>
             settings.AddNamedLocks(s => s
                                         .SetNameLockType<GenericNamedLock>(nl => nl.Name)
                                         .AddManual(typeof(BusinessUnitAncestorLink))
                                         .AddManual(typeof(ManagementUnitAncestorLink))
                                         .AddManual(typeof(LocationAncestorLink)));
 
-        public IBssFrameworkBuilder AddListeners() =>
+        public IBssFrameworkSetup AddListeners() =>
             settings.AddListener<SubscriptionDALListener>()
                     .AddListener<ExampleFaultDALListener>()
                     .AddListener<FixDomainObjectEventRevisionNumberDALListener>()
                     .AddListener<DependencyDetailEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>();
 
-        public IBssFrameworkBuilder AddSubscriptionManagers() =>
+        public IBssFrameworkSetup AddSubscriptionManagers() =>
             settings.AddSubscriptionManager<ExampleSampleSystemEventsSubscriptionManager>()
                     .AddSubscriptionManager<ExampleSampleSystemAribaEventsSubscriptionManager>();
 
-        public IBssFrameworkBuilder AddBLLSystem() => settings.AddBLLSystem<ISampleSystemBLLContext, SampleSystemBLLContext>();
+        public IBssFrameworkSetup AddBLLSystem() => settings.AddBLLSystem<ISampleSystemBLLContext, SampleSystemBLLContext>();
 
-        public IBssFrameworkBuilder AddConfigurationSystemConstants() =>
+        public IBssFrameworkSetup AddConfigurationSystemConstants() =>
             settings.AddSystemConstant(typeof(SampleSystemSystemConstant));
 
-        public IBssFrameworkBuilder AddConfigurationTargetSystems() =>
+        public IBssFrameworkSetup AddConfigurationTargetSystems() =>
             settings.AddConfigurationTargetSystems(tsSettings =>
                                                        tsSettings.AddTargetSystem<ISampleSystemBLLContext, PersistentDomainObjectBase>(
                                                            nameof(SampleSystem),
@@ -48,7 +48,7 @@ public static class SampleSystemFrameworkExtensions
                                                                new(typeof(Employee), new Guid("{AA46DA53-9B21-4DEC-9C70-720BDA1CB198}")),
                                                            ]));
 
-        public IBssFrameworkBuilder AddSupportLegacyServices() =>
+        public IBssFrameworkSetup AddSupportLegacyServices() =>
             settings.SetSubscriptionAssembly(typeof(EmployeeUpdateSubscription).Assembly)
                     .SetNotificationDefaultMailSenderContainer<SampleSystemDefaultMailSenderContainer>()
                     .SetNotificationEmployee<Employee>()

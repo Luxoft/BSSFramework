@@ -39,7 +39,7 @@ public partial class AuthorizationBLLContext(
     IAvailablePermissionSource<Permission> availablePermissionSource,
     IAvailableSecurityRoleSource availableSecurityRoleSource,
     ICurrentUserSource<Principal> currentPrincipalSource,
-    [FromKeyedServices("Root")] IPrincipalValidator<Principal, Permission, PermissionRestriction> principalValidator,
+    IPrincipalValidator<Principal, Permission, PermissionRestriction> principalValidator,
     ICurrentUser currentUser,
     ISecurityContextInfoSource securityContextInfoSource,
     BLLContextSettings<PersistentDomainObjectBase> settings,

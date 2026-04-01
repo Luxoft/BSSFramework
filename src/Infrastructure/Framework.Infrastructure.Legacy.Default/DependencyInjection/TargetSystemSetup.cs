@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Infrastructure.DependencyInjection;
 
-public class TargetSystemRootSettings : ITargetSystemRootSettings
+public class TargetSystemSetup : ITargetSystemSetup
 {
     private readonly List<Action<IServiceCollection>> registerActions = [];
 
@@ -21,7 +21,7 @@ public class TargetSystemRootSettings : ITargetSystemRootSettings
 
     public bool RegisterConfiguration { get; set; } = true;
 
-    public ITargetSystemRootSettings AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(
+    public ITargetSystemSetup AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(
         string name,
         Guid id,
         bool isMain,
@@ -41,7 +41,7 @@ public class TargetSystemRootSettings : ITargetSystemRootSettings
         return this.AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(info);
     }
 
-    public ITargetSystemRootSettings AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(TargetSystemInfo<TPersistentDomainObjectBase> info)
+    public ITargetSystemSetup AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(TargetSystemInfo<TPersistentDomainObjectBase> info)
         where TBLLContext : class, ITypeResolverContainer<string>,
         ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
@@ -53,7 +53,7 @@ public class TargetSystemRootSettings : ITargetSystemRootSettings
         return this;
     }
 
-    public ITargetSystemRootSettings AddTargetSystem<TPersistentDomainObjectBase>(TargetSystemInfo<TPersistentDomainObjectBase> info)
+    public ITargetSystemSetup AddTargetSystem<TPersistentDomainObjectBase>(TargetSystemInfo<TPersistentDomainObjectBase> info)
     {
         this.registerActions.Add(
             sc =>

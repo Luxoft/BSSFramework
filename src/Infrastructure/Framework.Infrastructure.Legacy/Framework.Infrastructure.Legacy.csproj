@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="IvAt.HierarchicalExpand.Runtime" />
+    <PackageReference Include="IvAt.OData" />
     <PackageReference Include="IvAt.SecuritySystem" />
   </ItemGroup>
 

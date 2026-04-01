@@ -1,35 +1,39 @@
-﻿using System.Data;
-using System.Reflection;
+﻿using System.Reflection;
+
+using CommonFramework.DependencyInjection;
 
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
-using Framework.Database.ConnectionStringSource;
+using Framework.Core.LazyObject;
+using Framework.Database.ExpressionVisitorContainer;
 using Framework.Database.NHibernate._MappingSettings;
+using Framework.Database.NHibernate.Sessions;
+using Framework.DependencyInjection;
+
+using GenericQueryable.NHibernate;
 
 using Microsoft.Extensions.DependencyInjection;
 
+using NHibernate;
+
 namespace Framework.Database.NHibernate.DependencyInjection;
 
-public class NHibernateSetupObject : INHibernateSetupObject
+public class NHibernateSetup : INHibernateSetup, IServiceInitializer
 {
-    private readonly List<INHibernateSetupObjectExtension> extensions = [];
+    private readonly List<INHibernateSetupExtension> extensions = [];
 
     private readonly List<Assembly> autoMappingAssemblies = [];
 
-    private DefaultConfigurationInitializerSettings settings = new();
+    private NHibernateSettings settings = new();
 
     private readonly List<Action<IServiceCollection>> initActions = [];
 
-    private string defaultConnectionStringName = "DefaultConnection";
-
     public bool AddDefaultInitializer { get; set; } = true;
-
-    public bool AddDefaultListener { get; set; } = true;
 
     public bool AutoAddFluentMapping { get; set; } = true;
 
-    public INHibernateSetupObject AddMapping<TMappingSettings>()
+    public INHibernateSetup AddMapping<TMappingSettings>()
         where TMappingSettings : MappingSettings
     {
         this.initActions.Add(services => services.AddSingleton<MappingSettings, TMappingSettings>());
@@ -39,7 +43,7 @@ public class NHibernateSetupObject : INHibernateSetupObject
         return this;
     }
 
-    public INHibernateSetupObject AddMapping(MappingSettings mapping)
+    public INHibernateSetup AddMapping(MappingSettings mapping)
     {
         this.initActions.Add(services => services.AddSingleton(mapping));
 
@@ -48,7 +52,7 @@ public class NHibernateSetupObject : INHibernateSetupObject
         return this;
     }
 
-    public INHibernateSetupObject AddInitializer<TInitializer>()
+    public INHibernateSetup AddInitializer<TInitializer>()
         where TInitializer : class, IConfigurationInitializer
     {
         this.initActions.Add(services => services.AddSingleton<IConfigurationInitializer, TInitializer>());
@@ -56,22 +60,14 @@ public class NHibernateSetupObject : INHibernateSetupObject
         return this;
     }
 
-    public INHibernateSetupObject AddEventListener<TEventListener>()
-        where TEventListener : class, IDBSessionEventListener
-    {
-        this.initActions.Add(services => services.AddScoped<IDBSessionEventListener, TEventListener>());
-
-        return this;
-    }
-
-    public INHibernateSetupObject AddFluentMapping(Assembly assembly)
+    public INHibernateSetup AddFluentMapping(Assembly assembly)
     {
         this.settings = this.settings with { FluentAssemblyList = this.settings.FluentAssemblyList.Union([assembly]).ToList() };
 
         return this;
     }
 
-    public INHibernateSetupObject WithRawMapping(Action<MappingConfiguration> initAction)
+    public INHibernateSetup WithRawMapping(Action<MappingConfiguration> initAction)
     {
         var prevAction = this.settings.RawMappingAction;
 
@@ -87,7 +83,7 @@ public class NHibernateSetupObject : INHibernateSetupObject
         return this;
     }
 
-    public INHibernateSetupObject WithRawDatabase(Action<MsSqlConfiguration> initAction)
+    public INHibernateSetup WithRawDatabase(Action<MsSqlConfiguration> initAction)
     {
         var prevAction = this.settings.RawDatabaseAction;
 
@@ -103,49 +99,21 @@ public class NHibernateSetupObject : INHibernateSetupObject
         return this;
     }
 
-    public INHibernateSetupObject SetIsolationLevel(IsolationLevel isolationLevel)
-    {
-        this.settings = this.settings with { IsolationLevel = isolationLevel };
-
-        return this;
-    }
-
-    public INHibernateSetupObject SetBatchSize(int batchSize)
-    {
-        this.settings = this.settings with { BatchSize = batchSize };
-
-        return this;
-    }
-
-    public INHibernateSetupObject SetComponentConvention(bool enabled)
+    public INHibernateSetup SetComponentConvention(bool enabled)
     {
         this.settings = this.settings with { ComponentConventionEnable = enabled };
 
         return this;
     }
 
-    public INHibernateSetupObject SetSqlTypesKeepDateTime(bool value)
+    public INHibernateSetup SetSqlTypesKeepDateTime(bool value)
     {
         this.settings = this.settings with { SqlTypesKeepDateTime = value };
 
         return this;
     }
 
-    public INHibernateSetupObject SetCommandTimeout(int timeout)
-    {
-        this.settings = this.settings with { CommandTimeout = timeout };
-
-        return this;
-    }
-
-    public INHibernateSetupObject SetDefaultConnectionStringName(string connectionStringName)
-    {
-        this.defaultConnectionStringName = connectionStringName;
-
-        return this;
-    }
-
-    public INHibernateSetupObject AddExtension(INHibernateSetupObjectExtension extension)
+    public INHibernateSetup AddExtension(INHibernateSetupExtension extension)
     {
         this.extensions.Add(extension);
 
@@ -154,12 +122,21 @@ public class NHibernateSetupObject : INHibernateSetupObject
 
     public void Initialize(IServiceCollection services)
     {
-        services.AddSingleton(new DefaultConnectionStringSettings(this.defaultConnectionStringName));
+        services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
-        if (this.AddDefaultListener)
-        {
-            this.AddEventListener<DefaultDBSessionEventListener>();
-        }
+        services.AddNHibernateGenericQueryable();
+
+        //For close db session by middleware
+        services.AddScopedFromLazyObject<INHibSession, NHibSession>();
+        services.AddScopedFrom<ILazyObject<IDBSession>, ILazyObject<INHibSession>>();
+
+        services.AddScopedFrom<ISession, INHibSession>(session => session.NativeSession);
+
+        services.AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>();
+
+        services.AddSingleton<NHibSessionEnvironment>();
+
+        services.AddSingleton<IExpressionVisitorContainerItem, NHibExpressionVisitorContainerItem>();
 
         if (this.AddDefaultInitializer)
         {

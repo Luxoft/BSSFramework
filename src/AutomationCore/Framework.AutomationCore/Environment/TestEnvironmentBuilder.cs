@@ -136,7 +136,7 @@ public class TestEnvironmentBuilder
             Func<IConfiguration, IServiceCollection, IServiceCollection> serviceProviderBuildFunc,
             Action<IServiceProvider> serviceProviderAfterBuildAction,
             IConfiguration rootConfiguration,
-            Type databaseGenerator,
+            Type databaseGeneratorType,
             Action<AutomationFrameworkSettings> settingsAction)
     {
         var settings = GetSettings(rootConfiguration, settingsAction);
@@ -148,8 +148,8 @@ public class TestEnvironmentBuilder
         serviceProviderBuildFunc.Invoke(cfg, environmentServices);
         environmentServices.TryAddSingleton(settings);
         environmentServices.TryAddSingleton<IDatabaseContext>(databaseContext);
-        environmentServices.AddSingleton<IConfiguration>(cfg)
-                           .AddSingleton(typeof(ITestDatabaseGenerator), databaseGenerator);
+        environmentServices.AddSingleton(cfg)
+                           .AddSingleton(typeof(ITestDatabaseGenerator), databaseGeneratorType);
 
         var environmentServiceProvider = this.BuildServiceProvider(environmentServices);
 

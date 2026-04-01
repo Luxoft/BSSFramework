@@ -1,4 +1,6 @@
-﻿namespace Framework.Database.AuditProperty;
+﻿using Framework.Database.AuditProperty;
+
+namespace Framework.Database;
 
 public interface IAuditPropertyFactory
 {

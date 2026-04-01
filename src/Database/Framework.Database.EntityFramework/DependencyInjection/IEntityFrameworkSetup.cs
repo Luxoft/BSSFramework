@@ -1,6 +1,6 @@
-﻿namespace Framework.Database.EntityFramework.Setup;
+﻿namespace Framework.Database.EntityFramework.DependencyInjection;
 
-public interface IEntityFrameworkSetupObject
+public interface IEntityFrameworkSetup
 {
     //bool AddDefaultListener { get; set; }
 

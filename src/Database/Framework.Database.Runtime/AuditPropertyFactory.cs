@@ -1,8 +1,7 @@
 ﻿using CommonFramework.Auth;
-
 using Framework.Database.AuditProperty;
 
-namespace Framework.Database.NHibernate;
+namespace Framework.Database;
 
 public class AuditPropertyFactory(
     ICurrentUser currentUser,

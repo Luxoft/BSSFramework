@@ -1,6 +1,6 @@
 ﻿using CommonFramework.DependencyInjection;
 
-using Framework.Database.EntityFramework.Setup;
+using Framework.Database.EntityFramework.DependencyInjection;
 using Framework.Infrastructure.DependencyInjection;
 
 using Microsoft.EntityFrameworkCore;

@@ -9,12 +9,12 @@ namespace SampleSystem.WebApiCore.DependencyInjection;
 
 public static class SampleSystemSecuritySystemExtensions
 {
-    public static ISecuritySystemBuilder AddSecurityContexts(this ISecuritySystemBuilder settings) =>
+    public static ISecuritySystemSetup AddSecurityContexts(this ISecuritySystemSetup settings) =>
         settings.AddSecurityContext<BusinessUnit>(
             new Guid("263D2C60-7BCE-45D6-A0AF-A0830152353E"),
             scb => scb.SetDisplayFunc(displayFunc: bu => bu.Name));
 
-    public static ISecuritySystemBuilder AddSecurityRoles(this ISecuritySystemBuilder settings) =>
+    public static ISecuritySystemSetup AddSecurityRoles(this ISecuritySystemSetup settings) =>
         settings
             .AddSecurityRole(
                 SampleSystemSecurityRole.SeManager,
@@ -24,7 +24,7 @@ public static class SampleSystemSecuritySystemExtensions
                 SecurityRole.Administrator,
                 new SecurityRoleInfo(new Guid("d9c1d2f0-0c2f-49ab-bb0b-de13a456169e")));
 
-    public static ISecuritySystemBuilder AddVirtualPermissions(this ISecuritySystemBuilder settings) =>
+    public static ISecuritySystemSetup AddVirtualPermissions(this ISecuritySystemSetup settings) =>
         settings.AddVirtualPermission<Employee, BusinessUnitEmployeeRole>(
             link => link.Employee,
             vpb => vpb.AddRestriction(link => link.BusinessUnit)

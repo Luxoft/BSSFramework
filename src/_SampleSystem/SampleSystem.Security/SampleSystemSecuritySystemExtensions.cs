@@ -13,9 +13,9 @@ namespace SampleSystem.Security;
 
 public static class SampleSystemSecuritySystemExtensions
 {
-    extension(ISecuritySystemBuilder settings)
+    extension(ISecuritySystemSetup settings)
     {
-        public ISecuritySystemBuilder AddSecurityContexts() =>
+        public ISecuritySystemSetup AddSecurityContexts() =>
             settings.AddSecurityContext<BusinessUnit>(
                         new Guid("263D2C60-7BCE-45D6-A0AF-A0830152353E"),
                         b => b.SetHierarchicalInfo(
@@ -41,7 +41,7 @@ public static class SampleSystemSecuritySystemExtensions
                         new Guid("B3F2536E-27C4-4B91-AE0B-0EE2FFD4465F"),
                         b => b.SetDisplayFunc(employee => employee.Login));
 
-        public ISecuritySystemBuilder AddSecurityRoles() =>
+        public ISecuritySystemSetup AddSecurityRoles() =>
             settings
                 .AddSecurityRole(
                     SampleSystemSecurityRole.SecretariatNotification,
@@ -125,7 +125,7 @@ public static class SampleSystemSecuritySystemExtensions
                         Operations = [..typeof(SampleSystemSecurityOperation).GetStaticPropertyValueList<SecurityOperation>()]
                     });
 
-        public ISecuritySystemBuilder AddSecurityRules()
+        public ISecuritySystemSetup AddSecurityRules()
         {
             DomainSecurityRule.NonExpandedRolesSecurityRule g = new[] { SecurityRole.Administrator, };
 
@@ -140,7 +140,7 @@ public static class SampleSystemSecuritySystemExtensions
                                new[] { g });
         }
 
-        public ISecuritySystemBuilder AddCustomSecurityOperations() =>
+        public ISecuritySystemSetup AddCustomSecurityOperations() =>
             settings.AddSecurityOperation(
                         SampleSystemSecurityOperation.BusinessUnitView,
                         new SecurityOperationInfo { CustomExpandType = HierarchicalExpandType.All })
@@ -149,7 +149,7 @@ public static class SampleSystemSecuritySystemExtensions
                         SampleSystemSecurityOperation.ManagementUnitView,
                         new SecurityOperationInfo { CustomExpandType = HierarchicalExpandType.All });
 
-        public ISecuritySystemBuilder AddVirtualPermissions() =>
+        public ISecuritySystemSetup AddVirtualPermissions() =>
             settings.AddVirtualPermission<Employee, BusinessUnitEmployeeRole>(
                 link => link.Employee,
                 vpb => vpb.AddRestriction(link => link.BusinessUnit)

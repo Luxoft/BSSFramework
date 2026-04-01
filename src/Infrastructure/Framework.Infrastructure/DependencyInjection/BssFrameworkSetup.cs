@@ -5,6 +5,7 @@ using Framework.Application.Auth;
 using Framework.Application.DependencyInjection;
 using Framework.Application.Events;
 using Framework.Database.DALListener;
+using Framework.Database.DependencyInjection;
 using Framework.Database.ExpressionVisitorContainer;
 using Framework.Infrastructure.Auth;
 using Framework.Infrastructure.DALListener;
@@ -18,8 +19,10 @@ using SecuritySystem.DependencyInjection;
 
 namespace Framework.Infrastructure.DependencyInjection;
 
-public class BssFrameworkBuilder : IBssFrameworkBuilder, IServiceInitializer
+public class BssFrameworkSetup : IBssFrameworkSetup, IServiceInitializer
 {
+    private Action<IDatabaseSetup>? databaseSetupAction;
+
     private readonly List<Action<IServiceCollection>> registerActions = [];
 
     private readonly List<IBssFrameworkExtension> extensions = [];
@@ -28,13 +31,16 @@ public class BssFrameworkBuilder : IBssFrameworkBuilder, IServiceInitializer
 
     public bool RegisterDenormalizeHierarchicalDALListener { get; set; } = true;
 
-    public IBssFrameworkBuilder AddSecuritySystem(Action<ISecuritySystemBuilder> setupAction)
+
+
+    public IBssFrameworkSetup AddSecuritySystem(Action<ISecuritySystemSetup> setupAction)
     {
         this.registerActions.Add(services => services.AddSecuritySystem(s =>
         {
             s.SetQueryableSource<DalQueryableSource>();
             s.SetGenericRepository<DalGenericRepository>();
             s.SetDefaultCurrentUser<ApplicationDefaultCurrentUser>();
+            s.SetDefaultCancellationTokenSource<ApplicationDefaultCancellationTokenSource>();
 
             setupAction(s);
         }));
@@ -42,14 +48,21 @@ public class BssFrameworkBuilder : IBssFrameworkBuilder, IServiceInitializer
         return this;
     }
 
-    public IBssFrameworkBuilder AddNamedLocks(Action<IGenericNamedLockBuilder> setupAction)
+    public IBssFrameworkSetup AddNamedLocks(Action<IGenericNamedLockSetup> setupAction)
     {
         this.registerActions.Add(services => services.AddNamedLocks(setupAction));
 
         return this;
     }
 
-    public IBssFrameworkBuilder AddListener<TListener>()
+    public IBssFrameworkSetup AddDatabase(Action<IDatabaseSetup> setupAction)
+    {
+        this.databaseSetupAction = setupAction;
+
+        return this;
+    }
+
+    public IBssFrameworkSetup AddListener<TListener>()
         where TListener : class, IDALListener
     {
         this.registerActions.Add(services => services.AddListeners(s => s.Add<TListener>()));
@@ -57,14 +70,14 @@ public class BssFrameworkBuilder : IBssFrameworkBuilder, IServiceInitializer
         return this;
     }
 
-    public IBssFrameworkBuilder AddExtensions(IBssFrameworkExtension extension)
+    public IBssFrameworkSetup AddExtensions(IBssFrameworkExtension extension)
     {
         this.extensions.Add(extension);
 
         return this;
     }
 
-    public IBssFrameworkBuilder SetDomainObjectEventMetadata<T>()
+    public IBssFrameworkSetup SetDomainObjectEventMetadata<T>()
         where T : IDomainObjectEventMetadata
     {
         this.domainObjectEventMetadataType = typeof(T);
@@ -72,7 +85,7 @@ public class BssFrameworkBuilder : IBssFrameworkBuilder, IServiceInitializer
         return this;
     }
 
-    public IBssFrameworkBuilder AddQueryVisitors<TExpressionVisitorContainerItem>(bool scoped = false)
+    public IBssFrameworkSetup AddQueryVisitors<TExpressionVisitorContainerItem>(bool scoped = false)
         where TExpressionVisitorContainerItem : class, IExpressionVisitorContainerItem
     {
         this.registerActions.Add(sc =>
@@ -112,6 +125,8 @@ public class BssFrameworkBuilder : IBssFrameworkBuilder, IServiceInitializer
         services.AddSingleton<IWebApiDBSessionModeResolver, WebApiDBSessionModeResolver>();
 
         services.AddScoped(typeof(IDomainObjectEventMetadata), this.domainObjectEventMetadataType);
+
+        services.AddGeneralDatabase(this.databaseSetupAction);
 
         this.registerActions.ForEach(a => a(services));
 

@@ -6,6 +6,6 @@ namespace SampleSystem.Security.Metadata;
 
 public class SampleSystemEmployeeCellPhoneDomainSecurityServiceMetadata : IDomainSecurityServiceMetadata<EmployeeCellPhone>
 {
-    public static void Setup(IDomainSecurityServiceBuilder<EmployeeCellPhone> builder) =>
-        builder.SetDependency(v => v.Employee);
+    public static void Setup(IDomainSecurityServiceSetup<EmployeeCellPhone> setup) =>
+        setup.SetDependency(v => v.Employee);
 }

@@ -15,7 +15,8 @@ namespace Framework.Database.NHibernate._MappingSettings;
 
 public class DefaultConfigurationInitializer(
     IDefaultConnectionStringSource defaultConnectionStringSource,
-    DefaultConfigurationInitializerSettings settings) : IConfigurationInitializer
+    DatabaseSettings databaseSettings,
+    NHibernateSettings nhibernateSettings) : IConfigurationInitializer
 {
     public void Initialize(Configuration cfg) =>
         Fluently
@@ -24,36 +25,36 @@ public class DefaultConfigurationInitializer(
                 MsSqlConfiguration.MsSql2012
                                   .Dialect<EnhancedMsSql2012Dialect>()
                                   .Driver<Fix2100SqlClientDriver>()
-                                  .PipeMaybe(settings.IsolationLevel, (f, v) => f.IsolationLevel(v))
-                                  .PipeMaybe(settings.BatchSize, (f, v) => f.AdoNetBatchSize(v))
+                                  .PipeMaybe(databaseSettings.IsolationLevel, (f, v) => f.IsolationLevel(v))
+                                  .PipeMaybe(databaseSettings.BatchSize, (f, v) => f.AdoNetBatchSize(v))
                                   .ConnectionString(defaultConnectionStringSource.ConnectionString)
-                                  .Self(settings.RawDatabaseAction))
+                                  .Self(nhibernateSettings.RawDatabaseAction))
             .Mappings(
                 m =>
                 {
-                    var conventions = settings.FluentAssemblyList.Distinct()
+                    var conventions = nhibernateSettings.FluentAssemblyList.Distinct()
                                               .Aggregate(m.FluentMappings, (fm, assembly) => fm.AddFromAssembly(assembly))
                                               .Conventions;
 
                     conventions.Add(new EnumConvention());
 
-                    if (settings.ComponentConventionEnable)
+                    if (nhibernateSettings.ComponentConventionEnable)
                     {
                         conventions.Add(new ComponentConvention());
                     }
 
-                    settings.RawMappingAction(m);
+                    nhibernateSettings.RawMappingAction(m);
                 })
             .ExposeConfiguration(
                 c =>
                 {
                     c.Properties.Add(Environment.LinqToHqlGeneratorsRegistry, typeof(EnhancedLinqToHqlGeneratorsRegistry).AssemblyQualifiedName);
                     c.Properties.Add(Environment.SqlExceptionConverter, typeof(SqlExceptionConverter).AssemblyQualifiedName);
-                    c.Properties.Add(Environment.CommandTimeout, settings.CommandTimeout.ToString());
+                    c.Properties.Add(Environment.CommandTimeout, databaseSettings.CommandTimeout.ToString());
 
-                    if (settings.SqlTypesKeepDateTime != null)
+                    if (nhibernateSettings.SqlTypesKeepDateTime != null)
                     {
-                        c.Properties.Add(Environment.SqlTypesKeepDateTime, settings.SqlTypesKeepDateTime.ToString());
+                        c.Properties.Add(Environment.SqlTypesKeepDateTime, nhibernateSettings.SqlTypesKeepDateTime.ToString());
                     }
                 })
             .BuildConfiguration();

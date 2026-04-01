@@ -19,6 +19,8 @@ using HierarchicalExpand;
 
 using Microsoft.Extensions.DependencyInjection;
 
+using OData.DependencyInjection;
+
 using SecuritySystem;
 using SecuritySystem.DomainServices;
 using SecuritySystem.DomainServices.DependencySecurity;
@@ -42,6 +44,8 @@ public static class ServiceCollectionExtensions
             services.ReplaceSingleton<ISecurityContextInfoSource, ProjectionSecurityContextInfoSource>();
 
             services.AddSingleton<IExceptionExpander, TargetInvocationExceptionExpander>();
+
+            services.AddOData();
 
             return services;
         }

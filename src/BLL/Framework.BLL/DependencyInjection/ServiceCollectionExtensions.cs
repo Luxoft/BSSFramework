@@ -4,7 +4,6 @@ using CommonFramework;
 
 using Framework.Core;
 using Framework.DependencyInjection;
-using Framework.Tracking;
 using Framework.Validation;
 
 using GenericQueryable.Fetching;
@@ -27,7 +26,6 @@ public static class ServiceCollectionExtensions
         return typeof(ServiceCollectionExtensions)
                .GetMethod(nameof(AddBLLSystemInternal), BindingFlags.NonPublic | BindingFlags.Static, true)!
                .MakeGenericMethod(
-               [
                    typeof(TBLLContextDecl),
                    typeof(TBLLContextImpl),
                    settings.GetSafe(v => v.ValidationMapType, typeof(IValidationMap)),
@@ -37,8 +35,7 @@ public static class ServiceCollectionExtensions
                    settings.GetSafe(v => v.FactoryContainerDeclType),
                    settings.GetSafe(v => v.FactoryContainerImplType),
                    settings.GetSafe(v => v.SettingsType),
-                   settings.GetSafe(v => v.FetchRuleExpanderType, typeof(IFetchRuleExpander))
-               ])
+                   settings.GetSafe(v => v.FetchRuleExpanderType, typeof(IFetchRuleExpander)))
                .Invoke<IServiceCollection>(null, [services]);
     }
 
@@ -79,7 +76,7 @@ public static class ServiceCollectionExtensions
 
         if (typeof(TFetchRuleExpander) != typeof(IFetchRuleExpander))
         {
-            services.AddSingleton<IFetchRuleExpander, TFetchRuleExpander>();
+            services.AddKeyedSingleton<IFetchRuleExpander, TFetchRuleExpander>(IFetchRuleExpander.ElementKey);
         }
 
         services.AddScoped<TValidatorDecl, TValidatorImpl>()
@@ -107,7 +104,7 @@ public static class ServiceCollectionExtensions
 
         var validationMapType = validatorCompileCacheType?.GetSingleCtorParameterTypeImpl(typeof(IValidationMap));
 
-        var persistentDomainObjectBaseType = typeof(TBLLContextDecl).GetInterfaceImplementationArgument(typeof(ITrackingServiceContainer<>))!;
+        var persistentDomainObjectBaseType = typeof(TBLLContextDecl).GetInterfaceImplementationArguments(typeof(IDefaultBLLContext<,>), args => args.First())!;
 
         var baseBllSettingType = typeof(BLLContextSettings<>).MakeGenericType(persistentDomainObjectBaseType);
 
@@ -127,7 +124,7 @@ public static class ServiceCollectionExtensions
 
         Type? GetImplType(Type baseType, bool required)
         {
-            return asmTypes.SingleOrDefault(t => t.IsClass && !t.IsAbstract && baseType.IsAssignableFrom(t))
+            return asmTypes.SingleOrDefault(t => t is { IsClass: true, IsAbstract: false } && baseType.IsAssignableFrom(t))!
                            .Pipe(required, res => res ?? throw new Exception($"Implement type for '{baseType}' not found"));
         }
     }

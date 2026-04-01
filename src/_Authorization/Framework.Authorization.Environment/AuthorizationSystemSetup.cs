@@ -19,13 +19,13 @@ using SecuritySystem.UserSource;
 
 namespace Framework.Authorization.Environment;
 
-public class AuthorizationSystemBuilder : IAuthorizationSystemBuilder, IServiceInitializer<ISecuritySystemBuilder>
+public class AuthorizationSystemSetup : IAuthorizationSystemSetup, IServiceInitializer<ISecuritySystemSetup>
 {
     private Type? uniquePermissionComparerType;
 
     public bool RegisterRunAsManager { get; set; } = true;
 
-    public IAuthorizationSystemBuilder SetUniquePermissionComparer<TComparer>()
+    public IAuthorizationSystemSetup SetUniquePermissionComparer<TComparer>()
         where TComparer : class, IPermissionEqualityComparer<Permission, PermissionRestriction>
     {
         this.uniquePermissionComparerType = typeof(TComparer);
@@ -33,7 +33,7 @@ public class AuthorizationSystemBuilder : IAuthorizationSystemBuilder, IServiceI
         return this;
     }
 
-    public void Initialize(ISecuritySystemBuilder settings)
+    public void Initialize(ISecuritySystemSetup settings)
     {
         var securityAdministratorRule = ApplicationSecurityRule.SecurityAdministrator;
         var principalViewSecurityRule = securityAdministratorRule.Or(DomainSecurityRule.CurrentUser);

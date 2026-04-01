@@ -8,7 +8,7 @@ namespace SampleSystem.WebApiCore.DependencyInjection;
 
 public static class SampleSystemDomainSecurityServiceExtensions
 {
-    public static ISecuritySystemBuilder AddDomainSecurityServices(this ISecuritySystemBuilder settings) =>
+    public static ISecuritySystemSetup AddDomainSecurityServices(this ISecuritySystemSetup settings) =>
         settings.AddDomainSecurity(
                     SampleSystemSecurityRole.SeManager,
                     SecurityPath<BusinessUnit>.Create(bu => bu))

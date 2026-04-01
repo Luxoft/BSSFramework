@@ -8,21 +8,21 @@ namespace Framework.Infrastructure.DependencyInjection;
 
 public static class BssFrameworkSettingsExtensions
 {
-    extension(IBssFrameworkBuilder builder)
+    extension(IBssFrameworkSetup builder)
     {
-        public IBssFrameworkBuilder AddSubscriptionManager<TSubscriptionManager>()
+        public IBssFrameworkSetup AddSubscriptionManager<TSubscriptionManager>()
             where TSubscriptionManager : class, IEventOperationReceiver =>
             builder.AddServices(services => services.AddSubscriptionManagers(setup => setup.Add<TSubscriptionManager>()));
 
-        public IBssFrameworkBuilder AddLegacyGenericServices() => builder.AddServices(services => services.AddLegacyGenericServices());
+        public IBssFrameworkSetup AddLegacyGenericServices() => builder.AddServices(services => services.AddLegacyGenericServices());
 
-        public IBssFrameworkBuilder AddContextEvaluators() => builder.AddServices(services => services.AddContextEvaluators());
+        public IBssFrameworkSetup AddContextEvaluators() => builder.AddServices(services => services.AddContextEvaluators());
 
-        public IBssFrameworkBuilder AddBLLSystem<TBLLContextDecl, TBLLContextImpl>(Action<BLLSystemSettings>? setupAction = null)
+        public IBssFrameworkSetup AddBLLSystem<TBLLContextDecl, TBLLContextImpl>(Action<BLLSystemSettings>? setupAction = null)
             where TBLLContextImpl : TBLLContextDecl =>
             builder.AddServices(services => services.AddBLLSystem<TBLLContextDecl, TBLLContextImpl>(setupAction));
 
-        public IBssFrameworkBuilder SetDTOMapping<TDTOMappingService, TDTOMappingServiceImpl, TPersistentDomainObjectBase, TEventDTOBase>()
+        public IBssFrameworkSetup SetDTOMapping<TDTOMappingService, TDTOMappingServiceImpl, TPersistentDomainObjectBase, TEventDTOBase>()
             where TDTOMappingService : class
             where TDTOMappingServiceImpl : class, TDTOMappingService =>
             builder.AddServices(services => services.AddScoped<TDTOMappingService, TDTOMappingServiceImpl>()

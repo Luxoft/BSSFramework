@@ -143,8 +143,6 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
 
     protected IProjectionEnvironment CreateDefaultProjectionLambdaEnvironment(IProjectionSource projectionSource, Action<CreateProjectionLambdaSetupParams>? setupAction = null)
     {
-        if (projectionSource == null) { throw new ArgumentNullException(nameof(projectionSource)); }
-
         var createParams = this.GetCreateProjectionLambdaSetupParams().Self(@params => setupAction?.Invoke(@params));
 
         return this.CreateDefaultProjectionLambdaEnvironment(projectionSource, createParams);

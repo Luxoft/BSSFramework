@@ -2,7 +2,7 @@
 
 namespace Framework.Database.NHibernate.DependencyInjection;
 
-public interface INHibernateSetupObjectExtension
+public interface INHibernateSetupExtension
 {
     public void AddServices(IServiceCollection services);
 }

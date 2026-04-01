@@ -6,7 +6,7 @@ using Framework.Core.TypeResolving;
 
 namespace Framework.Infrastructure.DependencyInjection;
 
-public interface ITargetSystemRootSettings
+public interface ITargetSystemSetup
 {
     bool RegisterBase { get; set; }
 
@@ -14,7 +14,7 @@ public interface ITargetSystemRootSettings
 
     bool RegisterConfiguration { get; set; }
 
-    ITargetSystemRootSettings AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(string name, Guid id, bool isMain, bool isRevision, IEnumerable<DomainTypeInfo> domainTypes)
+    ITargetSystemSetup AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(string name, Guid id, bool isMain, bool isRevision, IEnumerable<DomainTypeInfo> domainTypes)
         where TBLLContext : class, ITypeResolverContainer<string>,
         ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>;

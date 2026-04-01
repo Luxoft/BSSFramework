@@ -9,36 +9,24 @@ using GenericQueryable.EntityFramework;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.Database.EntityFramework.Setup;
+namespace Framework.Database.EntityFramework.DependencyInjection;
 
-public static class DependencyInjectionExtensions
+public class EntityFrameworkSetup : IEntityFrameworkSetup, IServiceInitializer
 {
-    public static IServiceCollection AddEntityFramework(this IServiceCollection services, Action<IEntityFrameworkSetupObject> setupAction)
+    public void Initialize(IServiceCollection services)
     {
-        var setupObject = new EntityFrameworkSetupObject();
-
         //services.AddSingleton<IAuditRevisionUserAuthenticationService, AuditRevisionUserAuthenticationService>();
 
         services.AddScoped(typeof(IAsyncDal<,>), typeof(EfAsyncDal<,>));
-
-        services.AddScoped<DBSessionSettings>();
 
         services.AddGenericQueryable(v => v.SetFetchService<EfFetchService>().SetTargetMethodExtractor<EfTargetMethodExtractor>());
 
         //For close db session by middleware
         services.AddScopedFromLazyObject<IEfSession, EfSession>();
         services.AddScopedFrom<ILazyObject<IDBSession>, ILazyObject<IEfSession>>();
-        services.AddScopedFrom((ILazyObject<IDBSession> lazyDbSession) => lazyDbSession.Value);
-        services.AddScoped<IDBSessionManager, DBSessionManager>();
 
         //services.AddSingleton<IEfSessionEnvironmentSettings, EfSessionEnvironmentSettings>();
 
         //services.AddSingleton<IDefaultConnectionStringSource, DefaultConnectionStringSource>();
-
-        setupAction(setupObject);
-
-        //setupObject.Initialize(services);
-
-        return services;
     }
 }

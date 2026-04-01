@@ -2,11 +2,11 @@
 
 namespace Framework.Database.NHibernate.DependencyInjection;
 
-public static class BssFrameworkSettingsExtensions
+public static class BssFrameworkSetupExtensions
 {
     public static TSelf AddNHibernate<TSelf>(
-        this IBssFrameworkBuilderBase<TSelf> settings,
-        Action<INHibernateSetupObject> setupAction) =>
+        this IBssFrameworkSetup<TSelf> settings,
+        Action<INHibernateSetup> setupAction) =>
 
         settings.AddExtensions(new BssFrameworkExtension(services => services.AddNHibernate(setupAction)));
 }

@@ -13,17 +13,17 @@ namespace Framework.Infrastructure.DependencyInjection;
 
 public static class BssFrameworkSettingsExtensions
 {
-    extension(IBssFrameworkBuilder builder)
+    extension(IBssFrameworkSetup builder)
     {
-        public IBssFrameworkBuilder AddSystemConstant(Type systemConstantContainerType) => builder.AddServices(services => services.AddSingleton(new SystemConstantInfo(systemConstantContainerType)));
+        public IBssFrameworkSetup AddSystemConstant(Type systemConstantContainerType) => builder.AddServices(services => services.AddSingleton(new SystemConstantInfo(systemConstantContainerType)));
 
-        public IBssFrameworkBuilder AddLegacyDefaultGenericServices() => builder.AddServices(services => services.AddLegacyDefaultGenericServices());
+        public IBssFrameworkSetup AddLegacyDefaultGenericServices() => builder.AddServices(services => services.AddLegacyDefaultGenericServices());
 
-        public IBssFrameworkBuilder AddConfigurationTargetSystems(Action<ITargetSystemRootSettings> setupAction) =>
+        public IBssFrameworkSetup AddConfigurationTargetSystems(Action<ITargetSystemSetup> setupAction) =>
             builder.AddServices(
                 services =>
                 {
-                    var tsSettings = new TargetSystemRootSettings();
+                    var tsSettings = new TargetSystemSetup();
 
                     setupAction.Invoke(tsSettings);
 
@@ -47,14 +47,14 @@ public static class BssFrameworkSettingsExtensions
                     tsSettings.Initialize(services);
                 });
 
-        public IBssFrameworkBuilder SetSubscriptionAssembly(Assembly assembly) =>
+        public IBssFrameworkSetup SetSubscriptionAssembly(Assembly assembly) =>
             builder.AddServices(services => services.AddSingleton(new SubscriptionMetadataFinderAssemblyInfo(assembly)));
 
-        public IBssFrameworkBuilder SetNotificationEmployee<TEmployee>()
+        public IBssFrameworkSetup SetNotificationEmployee<TEmployee>()
             where TEmployee : class, IEmployee =>
             builder.AddServices(services => services.AddScoped<IEmployeeSource, EmployeeSource<TEmployee>>());
 
-        public IBssFrameworkBuilder SetNotificationDefaultMailSenderContainer<TDefaultMailSenderContainer>()
+        public IBssFrameworkSetup SetNotificationDefaultMailSenderContainer<TDefaultMailSenderContainer>()
             where TDefaultMailSenderContainer : class, IDefaultMailSenderContainer =>
             builder.AddServices(services => services.AddSingleton<IDefaultMailSenderContainer, TDefaultMailSenderContainer>());
     }

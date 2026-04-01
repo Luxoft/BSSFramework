@@ -14,7 +14,7 @@ namespace SampleSystem.ServiceEnvironment.DependencyInjection;
 
 public static class SampleSystemGeneralDependencyInjectionExtensions
 {
-    public static IServiceCollection AddGeneralDependencyInjection(this IServiceCollection services, IConfiguration configuration, Action<IBssFrameworkBuilder> setupAction) =>
+    public static IServiceCollection AddGeneralDependencyInjection(this IServiceCollection services, IConfiguration configuration, Action<IBssFrameworkSetup> setupAction) =>
         services
 
             .AddBssFramework(
@@ -48,12 +48,14 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                         // Legacy
 
-                        .AddConfigurationSystemConstants()
-                        .AddConfigurationTargetSystems()
-
                         .AddSubscriptionManagers()
                         .AddLegacyGenericServices()
                         .AddContextEvaluators()
+
+                        .AddLegacyDefaultGenericServices()
+                        .AddConfigurationSystemConstants()
+                        .AddConfigurationTargetSystems()
+
                         .AddBLLSystem()
 
                         .AddSupportLegacyServices()

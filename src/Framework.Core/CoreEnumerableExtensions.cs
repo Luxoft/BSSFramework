@@ -6,6 +6,14 @@ namespace Framework.Core;
 
 public static class CoreEnumerableExtensions
 {
+    public static IEnumerable<T> FromLazy<T>(this Func<IEnumerable<T>> getSource)
+    {
+        foreach (var v in getSource())
+        {
+            yield return v;
+        }
+    }
+
     public static void Merge<TSource, TTarget, TKey>(
         this IEnumerable<TSource> source,
         IEnumerable<TTarget> target,

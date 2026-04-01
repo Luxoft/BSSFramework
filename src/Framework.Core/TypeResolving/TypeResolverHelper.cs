@@ -25,6 +25,10 @@ public class TypeResolverHelper
         where T : notnull =>
         Create(resolveFunc, [.. sourceTypes]);
 
+    public static ITypeResolver<T> Create<T>(Func<T, Type?> resolveFunc, Func<IEnumerable<Type>> getSourceTypes)
+        where T : notnull =>
+        new FuncTypeResolver<T>(resolveFunc, () => [.. getSourceTypes()]);
+
     public static ITypeResolver<T> Create<T>(Func<T, Type?> resolveFunc, ImmutableHashSet<Type> sourceTypes)
         where T : notnull =>
         new FuncTypeResolver<T>(resolveFunc, () => sourceTypes);

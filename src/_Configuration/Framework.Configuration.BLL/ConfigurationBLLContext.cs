@@ -111,7 +111,8 @@ public partial class ConfigurationBLLContext
                     return this.GetTargetSystemService(domainType.TargetSystem).TypeResolver.TryResolve(domainType);
                 }
             },
-            this.GetTargetSystemServices().SelectMany(tss => tss.TypeResolver.Types).Concat(TypeResolverHelper.Base.Types));
+
+            () => this.GetTargetSystemServices().SelectMany(tss => tss.TypeResolver.Types).Concat(TypeResolverHelper.Base.Types));
 
         this.TypeResolver = settings.TypeResolver;
 

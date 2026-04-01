@@ -53,7 +53,7 @@ public class InitializeAndCleanup
             .AddSingleton(new JobImpersonateData("sampleSystemTestJob"))
             .AddJobs([typeof(SampleJob).Assembly])
 
-            .AddControllers([typeof(EmployeeController).Assembly])
+            .AddTestControllers([typeof(EmployeeController).Assembly])
 
             .AddSingleton<DataHelper>()
 

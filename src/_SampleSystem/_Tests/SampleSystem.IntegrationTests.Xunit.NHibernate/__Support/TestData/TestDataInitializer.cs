@@ -1,6 +1,6 @@
-﻿using Automation.Extensions;
-using Automation.Settings;
-using Automation.Utils.DatabaseUtils.Interfaces;
+﻿using Framework.AutomationCore.Extensions;
+using Framework.AutomationCore.Settings;
+using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
 using SecuritySystem;
 using SecuritySystem.Services;

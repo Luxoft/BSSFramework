@@ -1,15 +1,13 @@
-﻿using Automation.ServiceEnvironment;
-using Automation.Utils.DatabaseUtils;
-using Automation.Xunit;
-using Automation.Xunit.ServiceEnvironment;
-
-using Bss.Platform.Events.Abstractions;
+﻿using Bss.Platform.Events.Abstractions;
 using Bss.Testing.Xunit.Interfaces;
 
 using CommonFramework.DependencyInjection;
 
-using Framework.Configuration.BLL;
-using Framework.Core;
+using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
+using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
+using Framework.AutomationCore.Xunit;
+using Framework.AutomationCore.Xunit.ServiceEnvironment;
+using Framework.Configuration.BLL.SubscriptionSystemService;
 using Framework.Core.MessageSender;
 using Framework.Notification.DTO;
 
@@ -21,7 +19,7 @@ using SampleSystem.IntegrationTests.__Support.Utils;
 using SampleSystem.IntegrationTests.Xunit.NHibernate.__Support.Database;
 using SampleSystem.IntegrationTests.Xunit.NHibernate.__Support.TestData;
 using SampleSystem.ServiceEnvironment;
-using SampleSystem.ServiceEnvironment.NHibernate;
+using SampleSystem.ServiceEnvironment.DependencyInjection;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 [assembly: CollectionBehavior(CollectionBehavior.CollectionPerClass)]
@@ -44,14 +42,14 @@ public class EnvironmentInitializer : AutomationCoreFrameworkInitializer
 
     public override IServiceProvider ConfigureTestEnvironment(IServiceCollection services, IConfiguration configuration) =>
         services
-            .RegisterGeneralDependencyInjection(configuration, s => s.AddExtensions(new SampleSystemNHibernateExtension()))
+            .AddGeneralDependencyInjection(configuration, s => s.AddExtensions(new SampleSystemNHibernateExtension()))
             .AddSingleton<SampleSystemInitializer>()
             .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
             .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()
-            .RegisterControllers([typeof(EmployeeController).Assembly])
+            .AddTestControllers([typeof(EmployeeController).Assembly])
             .AddSingleton<DataHelper>()
             .AddSingleton<TestDataInitializer>()
-            .ApplyXunitIntegrationTestServices()
+            .AddXunitIntegrationTests()
             .AddValidator<DuplicateServiceUsageValidator>()
             .Validate()
             .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });

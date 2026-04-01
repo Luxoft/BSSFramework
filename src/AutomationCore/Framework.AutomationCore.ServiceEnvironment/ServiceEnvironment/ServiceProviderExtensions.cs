@@ -42,7 +42,7 @@ public static class ServiceProviderExtensions
 
     extension(IServiceCollection services)
     {
-        public IServiceCollection AddControllers(
+        public IServiceCollection AddTestControllers(
             Assembly[] assemblies,
             params Type[] exceptControllers)
         {

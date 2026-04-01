@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 
 using CommonFramework;
+using CommonFramework.IdentitySource;
 
 using Framework.Application.Domain;
 using Framework.BLL.Domain.Exceptions;
@@ -29,14 +30,21 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     private readonly IDAL<TDomainObject, TIdent> dal;
 
     protected BLLBase(TBLLContext context)
-        : base(context) =>
+        : base(context)
+    {
         this.dal = this.Context.ServiceProvider.GetRequiredService<IDAL<TDomainObject, TIdent>>();
+
+        this.IdentityInfo = this.Context.ServiceProvider.GetRequiredService<IIdentityInfo<TDomainObject, TIdent>>();
+    }
+
+    protected IIdentityInfo<TDomainObject, TIdent> IdentityInfo { get; }
 
     #region Private.Method
 
     protected virtual IQueryable<TDomainObject> ProcessSecurity(IQueryable<TDomainObject> queryable) => queryable;
 
     #endregion
+
 
     private void InternalSave(TDomainObject domainObject, TIdent id = default(TIdent))
     {
@@ -66,7 +74,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         }
 
         var isSimpleSave = !domainObject.Id.IsDefault()
-                           && this.GetUnsecureQueryable().Select(z => z.Id).Any(d => d.Equals(domainObject.Id));
+                           && this.GetUnsecureQueryable().Any(this.IdentityInfo.CreateContainsFilter([domainObject.Id]));
 
         this.InternalSave(domainObject, isSimpleSave ? default! : id);
     }

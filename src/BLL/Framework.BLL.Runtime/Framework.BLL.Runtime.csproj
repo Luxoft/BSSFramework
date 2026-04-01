@@ -10,6 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IvAt.CommonFramework.IdentitySource.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Framework.BLL.Abstractions\Framework.BLL.Abstractions.csproj" />
 
     <ProjectReference Include="..\..\Database\Framework.Database.Legacy.Abstractions\Framework.Database.Legacy.Abstractions.csproj" />

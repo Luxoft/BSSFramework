@@ -74,7 +74,7 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
 
         services.AddScoped<IDBSessionManager, DBSessionManager>();
 
-        services.AddScoped<IExpressionVisitorContainer, ExpressionVisitorAggregator>();
+        services.AddSingleton<IExpressionVisitorContainer, ExpressionVisitorAggregator>();
 
         services.AddScoped<IPersistentInfoService, PersistentInfoService>();
 

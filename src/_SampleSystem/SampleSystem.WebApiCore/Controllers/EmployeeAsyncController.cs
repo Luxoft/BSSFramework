@@ -1,5 +1,7 @@
-﻿using Framework.DomainDriven;
-using Framework.DomainDriven.Repository;
+﻿using CommonFramework.Auth;
+
+using Framework.Application.Repository;
+using Framework.Database;
 
 using GenericQueryable;
 
@@ -7,8 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
-
-using SecuritySystem.Services;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
@@ -24,7 +24,7 @@ public class EmployeeAsyncController(
     [HttpPost]
     public async Task<EmployeeSimpleDTO> GetCurrentEmployee(CancellationToken cancellationToken)
     {
-        var userName = currentUser.GetUserName();
+        var userName = currentUser.Name;
 
         var repository = employeeRepositoryFactory.Create();
 

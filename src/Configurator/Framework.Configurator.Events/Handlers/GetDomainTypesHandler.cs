@@ -19,7 +19,7 @@ public class GetDomainTypesHandler([WithoutRunAs] ISecuritySystem securitySystem
         if (await securitySystem.HasAccessAsync(SecurityRole.Administrator, cancellationToken))
         {
             return eventSystem.TypeResolver
-                              .GetTypes()
+                              .Types
                               .OrderBy(t => t.AssemblyQualifiedName)
                               .ThenBy(t => t.Name)
                               .Select(t => new DomainTypeDto

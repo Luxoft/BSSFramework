@@ -1,10 +1,13 @@
-﻿
-using Framework.DomainDriven;
-using Framework.OData;
-using Framework.Persistent;
-using Framework.Transfering;
+﻿using Framework.BLL;
+using Framework.BLL.Domain.DTO;
+using Framework.BLL.Domain.Persistent;
+using Framework.BLL.OData;
+using Framework.Core;
+using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
+
+using OData.Domain;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
@@ -17,37 +20,30 @@ public partial class BusinessUnitController
     public List<HierarchicalNode<BusinessUnitFullDTO, Guid>> GetFullBusinessUnitsTree()
     {
         return this.Evaluate(
-                             DBSessionMode.Read,
-                             evaluateData =>
-                             {
-                                 var bll = evaluateData.Context.Logics.BusinessUnit;
-                                 var tree = bll.GetTree(new DTOFetchRule<BusinessUnit>(ViewDTOType.FullDTO));
-                                 return tree.ChangeItem(unit => unit.ToFullDTO(evaluateData.MappingService));
-                             });
+            DBSessionMode.Read,
+            evaluateData =>
+            {
+                var bll = evaluateData.Context.Logics.BusinessUnit;
+                var tree = bll.GetTree(new DTOFetchRule<BusinessUnit>(ViewDTOType.FullDTO));
+                return tree.ChangeItem(unit => unit.ToFullDTO(evaluateData.MappingService));
+            });
     }
 
     [HttpPost]
     public SelectOperationResult<HierarchicalNode<BusinessUnitFullDTO, Guid>> GetFullBusinessUnitsTreeByOData(string odataQueryString)
     {
         return this.Evaluate(
-                             DBSessionMode.Read,
-                             evaluateData =>
-                             {
-                                 var bll = evaluateData.Context.Logics.BusinessUnit;
-                                 var selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-                                 var typedSelectOperation = evaluateData.Context.StandardExpressionBuilder.ToTyped<BusinessUnit>(selectOperation);
+            DBSessionMode.Read,
+            evaluateData =>
+            {
+                var bll = evaluateData.Context.Logics.BusinessUnit;
+                var selectOperation = evaluateData.Context.SelectOperationParser.Parse<BusinessUnit>(odataQueryString);
 
-                                 var odataTree = bll.GetTreeByOData(
-                                                                    typedSelectOperation,
-                                                                    new DTOFetchRule<BusinessUnit>(ViewDTOType.FullDTO));
+                var odataTree = bll.GetTreeByOData(
+                    selectOperation,
+                    new DTOFetchRule<BusinessUnit>(ViewDTOType.FullDTO));
 
-                                 return odataTree.ChangeItem(x => x.ToFullDTO(evaluateData.MappingService));
-                             });
-    }
-
-    [HttpPost]
-    public List<HierarchicalNode<BusinessUnitFullDTO, Guid>> TestPeriod(Period period)
-    {
-        return null;
+                return odataTree.ChangeItem(x => x.ToFullDTO(evaluateData.MappingService));
+            });
     }
 }

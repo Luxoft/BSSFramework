@@ -1,7 +1,7 @@
-﻿using Framework.DomainDriven;
-using Framework.DomainDriven.WebApiNetCore;
+﻿using Bss.Platform.Mediation.Abstractions;
 
-using MediatR;
+using Framework.Database;
+using Framework.Infrastructure;
 
 using Microsoft.AspNetCore.Mvc;
 

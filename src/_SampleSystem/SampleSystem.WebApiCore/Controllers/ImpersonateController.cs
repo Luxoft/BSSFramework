@@ -1,5 +1,6 @@
-﻿using Framework.DomainDriven;
-using Framework.DomainDriven.Repository;
+﻿using Framework.Application;
+using Framework.Application.Repository;
+using Framework.Database;
 
 using GenericQueryable;
 

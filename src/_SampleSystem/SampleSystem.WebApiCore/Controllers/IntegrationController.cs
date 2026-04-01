@@ -1,12 +1,12 @@
 ﻿using Framework.Authorization.Generated.DTO;
-using Framework.Core;
 using Framework.Core.TypeResolving.TypeSource;
-using Framework.DomainDriven.WebApiNetCore.Integration;
-using SecuritySystem;
+using Framework.Infrastructure.Integration;
 
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.Generated.DTO;
+
+using SecuritySystem;
 
 namespace SampleSystem.WebApiCore.Controllers;
 
@@ -26,13 +26,13 @@ public class IntegrationController : IntegrationSchemaControllerBase
 
     protected override IReadOnlyCollection<Type> GetEventDTOTypes() =>
         TypeSource.FromSample(typeof(EmployeeSaveEventDTO))
-                  .GetTypes()
+                  .Types
                   .Where(z => typeof(Generated.DTO.EventDTOBase).IsAssignableFrom(z))
                   .ToList();
 
     protected override IReadOnlyCollection<Type> GetAuthEventDTOTypes() =>
         TypeSource.FromSample(typeof(PermissionSaveEventDTO))
-                  .GetTypes()
+                  .Types
                   .Where(z => typeof(Framework.Authorization.Generated.DTO.EventDTOBase).IsAssignableFrom(z))
                   .ToList();
 }

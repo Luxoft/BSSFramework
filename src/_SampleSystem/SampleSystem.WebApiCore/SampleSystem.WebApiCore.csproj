@@ -13,6 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Configurator\Framework.Configurator.ApplicationVariable\Framework.Configurator.ApplicationVariable.csproj" />
+    <ProjectReference Include="..\..\Configurator\Framework.Configurator.Events\Framework.Configurator.Events.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Swagger\Framework.Infrastructure.Swagger.csproj" />
+    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.WebApi\Framework.Authorization.WebApi.csproj" />
+    <ProjectReference Include="..\..\_Configuration\Framework.Configuration.WebApi\Framework.Configuration.WebApi.csproj" />
+    <ProjectReference Include="..\SampleSystem.ServiceEnvironment\SampleSystem.ServiceEnvironment.csproj" />
   </ItemGroup>
 
 </Project>

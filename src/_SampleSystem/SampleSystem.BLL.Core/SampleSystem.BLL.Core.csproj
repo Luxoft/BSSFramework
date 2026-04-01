@@ -13,4 +13,12 @@
     <ProjectReference Include="..\SampleSystem.Domain.Projections\SampleSystem.Domain.Projections.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Context\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IvAt.OData.Abstractions" />
+  </ItemGroup>
+
 </Project>

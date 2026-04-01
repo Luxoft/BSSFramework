@@ -1,5 +1,5 @@
-﻿using Framework.DomainDriven;
-using Framework.Persistent;
+﻿using Framework.Application.Domain;
+using Framework.Database;
 
 using Microsoft.Extensions.Logging;
 
@@ -9,11 +9,11 @@ namespace SampleSystem.WebApiCore.Services;
 
 public class SampleConfiguratorIntegrationEvents(ILogger<SampleConfiguratorIntegrationEvents> logger, ICurrentRevisionService currentRevisionService) : IConfiguratorIntegrationEvents
 {
-    public async Task PrincipalCreatedAsync(object principal, CancellationToken cancellationToken)
+    public Task PrincipalCreatedAsync(object principal, CancellationToken cancellationToken)
     {
-        var z = currentRevisionService.GetCurrentRevision();
-        
         logger.LogInformation("Principal with {Id} has been created", ((IIdentityObject<Guid>)principal).Id);
+
+        return Task.CompletedTask;
     }
 
     public Task PrincipalRemovedAsync(object principal, CancellationToken cancellationToken) => Task.CompletedTask;

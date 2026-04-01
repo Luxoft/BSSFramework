@@ -5,13 +5,13 @@ using Bss.Platform.Logging;
 
 using CommonFramework.DependencyInjection;
 
+using Framework.Configuration.BLL.Jobs;
 using Framework.Configurator;
-using Framework.DomainDriven.Setup;
-using Framework.DomainDriven.WebApiNetCore;
-using Framework.DomainDriven.WebApiNetCore.JsonConverter;
-using Framework.DomainDriven.WebApiNetCore.Swagger;
-using Framework.HangfireCore;
-using Framework.NotificationCore.Jobs;
+using Framework.Infrastructure.DependencyInjection;
+using Framework.Infrastructure.Hangfire;
+using Framework.Infrastructure.JsonConverter;
+using Framework.Infrastructure.Middleware;
+using Framework.Infrastructure.Swagger;
 
 using Hangfire;
 
@@ -24,7 +24,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 using SampleSystem.BLL._Command.CreateClassA.Integration;
-using SampleSystem.ServiceEnvironment;
+using SampleSystem.ServiceEnvironment.DependencyInjection;
 using SampleSystem.ServiceEnvironment.Jobs;
 using SampleSystem.WebApiCore.Services;
 
@@ -54,7 +54,7 @@ public static class GenericProgram
                .AddPlatformLogging();
 
         builder.Services
-               .RegisterGeneralDependencyInjection(builder.Configuration, s => s.AddExtensions(extension))
+               .AddGeneralDependencyInjection(builder.Configuration, s => s.AddExtensions(extension))
                .AddScoped<IConfiguratorIntegrationEvents, SampleConfiguratorIntegrationEvents>()
                .AddPlatformApiDocumentation(
                    builder.Environment,

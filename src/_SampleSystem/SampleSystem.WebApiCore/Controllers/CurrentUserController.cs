@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CommonFramework.Auth;
 
-using SecuritySystem;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 

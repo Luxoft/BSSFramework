@@ -1,9 +1,12 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
-using Framework.DomainDriven;
-using SecuritySystem;
+using Framework.BLL;
+using Framework.BLL.DTOMapping.Domain;
+using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
+
+using SecuritySystem;
 
 namespace SampleSystem.WebApiCore.Controllers;
 
@@ -34,8 +37,8 @@ public class AuthMainController : Framework.Authorization.WebApi.AuthMainControl
 
 
 
-    [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [System.Runtime.Serialization.DataContractAttribute]
+    [AutoRequest]
     public class SavePermissionAutoRequest
     {
         public SavePermissionAutoRequest()
@@ -49,12 +52,12 @@ public class AuthMainController : Framework.Authorization.WebApi.AuthMainControl
             this.PermissionDTO = permissionDTO;
         }
 
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex = 0)]
+        [System.Runtime.Serialization.DataMemberAttribute]
+        [AutoRequestProperty(OrderIndex = 0)]
         public PrincipalIdentityDTO PrincipalIdent { get; set; }
 
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex = 1)]
+        [System.Runtime.Serialization.DataMemberAttribute]
+        [AutoRequestProperty(OrderIndex = 1)]
         public PermissionStrictDTO PermissionDTO { get; set; }
     }
 }

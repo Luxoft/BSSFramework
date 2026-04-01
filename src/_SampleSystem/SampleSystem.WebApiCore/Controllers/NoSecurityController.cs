@@ -1,14 +1,14 @@
-﻿using Framework.DomainDriven;
-using Framework.DomainDriven.Repository;
+﻿using Framework.Application.Repository;
+using Framework.Database;
 
 using GenericQueryable;
-
-using SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
+
+using SecuritySystem;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 

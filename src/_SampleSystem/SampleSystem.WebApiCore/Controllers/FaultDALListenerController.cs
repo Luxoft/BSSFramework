@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 
-using Framework.DomainDriven;
-using Framework.DomainDriven.Repository;
+using Framework.Application.Repository;
+using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
 

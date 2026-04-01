@@ -1,9 +1,8 @@
 ﻿using Bss.Platform.Events.Abstractions;
 using Bss.Platform.Events.Interfaces;
+using Bss.Platform.Mediation.Abstractions;
 
-using Framework.DomainDriven;
-
-using MediatR;
+using Framework.Database;
 
 using Microsoft.Extensions.DependencyInjection;
 

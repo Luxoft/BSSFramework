@@ -7,6 +7,8 @@ using Framework.Validation;
 
 using GenericQueryable.Fetching;
 
+using OData;
+
 using SampleSystem.Domain;
 
 using SecuritySystem.SecurityAccessor;
@@ -31,4 +33,6 @@ public partial interface ISampleSystemBLLContext :
     ISecurityAccessorResolver SecurityAccessorResolver { get; }
 
     IValidator Validator { get; }
+
+    ISelectOperationParser SelectOperationParser { get; }
 }

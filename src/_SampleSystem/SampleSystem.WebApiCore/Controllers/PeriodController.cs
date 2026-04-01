@@ -1,6 +1,5 @@
 ﻿using Framework.Core;
 
-
 using Microsoft.AspNetCore.Mvc;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;

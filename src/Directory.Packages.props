@@ -14,7 +14,7 @@
     <PackageVersion Include="Dapper" Version="2.1.72" />
     <PackageVersion Include="Dapper.Contrib" Version="2.0.78" />
     <PackageVersion Include="IvAt.CommonFramework" Version="$(IvAt)" />
-    <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="3.1.3" />
+    <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.CommonFramework.GenericRepository" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.CommonFramework.IdentitySource.Abstractions" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.GenericQueryable" Version="$(IvAt)" />
@@ -23,7 +23,7 @@
     <PackageVersion Include="IvAt.GenericQueryable.NHibernate" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.GenericQueryable.Runtime" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.HierarchicalExpand.Runtime" Version="$(IvAt)" />
-    <PackageVersion Include="IvAt.OData.Abstractions" Version="3.1.3" />
+    <PackageVersion Include="IvAt.OData.Abstractions" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.OData.Domain" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.Abstractions" Version="$(IvAt)" />

@@ -1,6 +1,6 @@
-﻿using SecuritySystem.AvailableSecurity;
+﻿using Microsoft.AspNetCore.Mvc;
 
-using Microsoft.AspNetCore.Mvc;
+using SecuritySystem.AvailableSecurity;
 
 namespace Authorization.WebApi.Controllers;
 

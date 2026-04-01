@@ -1,16 +1,12 @@
 ﻿using Framework.Database.Mapping;
 using Framework.Database.Metadata;
 using Framework.Database.NHibernate._MappingSettings;
-using Framework.DomainDriven.DBGenerator;
+using Framework.Database.NHibernate.DBGenerator;
 
-namespace SampleSystem.DbGenerate;
+namespace SampleSystem.DbGenerate.NHibernate;
 
-public class SampleSystemDBGenerator : DBGenerator
+public class SampleSystemDBGenerator(MappingSettings settings) : DBGenerator(settings)
 {
-    public SampleSystemDBGenerator(MappingSettings settings) : base(settings)
-    {
-    }
-
     protected override void FilterMetadata(AssemblyMetadata metadata)
     {
         base.FilterMetadata(metadata);

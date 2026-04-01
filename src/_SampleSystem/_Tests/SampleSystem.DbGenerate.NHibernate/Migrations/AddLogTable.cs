@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace SampleSystem.DbMigrator;
+namespace SampleSystem.DbGenerate.NHibernate.Migrations;
 
 [Migration(2)]
 public class AddLogTable : Migration

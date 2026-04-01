@@ -1,21 +1,21 @@
-﻿using CommonFramework.DependencyInjection;
+﻿using CommonFramework.Auth;
+using CommonFramework.DependencyInjection;
 
 using Framework.Core;
+using Framework.Database;
+using Framework.Database.ConnectionStringSource;
+using Framework.Database.NHibernate;
 using Framework.DependencyInjection;
-using Framework.DomainDriven;
-using Framework.DomainDriven.Auth;
-using Framework.DomainDriven.NHibernate;
 
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 
 using NHibernate.Tool.hbm2ddl;
 
-using SampleSystem.DbMigrator;
+using SampleSystem.DbGenerate.NHibernate.Migrations;
 using SampleSystem.ServiceEnvironment.DependencyInjection;
-using SampleSystem.ServiceEnvironment.NHibernate;
 
-namespace SampleSystem.DbGenerate;
+namespace SampleSystem.DbGenerate.NHibernate;
 
 [TestClass]
 public class UseSchemeUpdateTest
@@ -49,13 +49,12 @@ public class UseSchemeUpdateTest
         var provider = new ServiceCollection()
                        .Self(new SampleSystemNHibernateExtension(false).AddServices)
                        .ReplaceSingleton<IDefaultConnectionStringSource>(new ManualDefaultConnectionStringSource(connectionString))
-                       .AddNotImplemented<IDefaultUserAuthenticationService>()
+                       .AddKeyedNotImplemented<ICurrentUser>(ICurrentUser.DefaultKey)
                        .Self(services => services.RemoveBy(sd => sd.Lifetime == ServiceLifetime.Scoped))
                        .BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true });
 
-        var dbSessionFactory = provider.GetService<NHibSessionEnvironment>();
+        using var dbSessionFactory = provider.GetRequiredService<NHibSessionEnvironment>();
         var cfg = dbSessionFactory.Configuration;
-
         var migrate = new SchemaUpdate(cfg);
 
         migrate.Execute(true, true);

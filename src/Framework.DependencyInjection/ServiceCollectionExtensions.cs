@@ -16,9 +16,8 @@ public static class ServiceCollectionExtensions
         where TServiceInterface : class
     {
         return services.Pipe(registerImpl, s => s.AddScoped<TServiceImplementation>())
-                       .AddScoped(
-                           sp => LazyInterfaceImplementHelper.CreateProxy<TServiceInterface>(
-                               sp.GetRequiredService<TServiceImplementation>));
+                       .AddScoped(sp => LazyInterfaceImplementHelper.CreateProxy<TServiceInterface>(
+                                      sp.GetRequiredService<TServiceImplementation>));
     }
 
     public static IServiceCollection AddScopedFromLazyObject<TService, TServiceImplementation>(
@@ -35,13 +34,25 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddNotImplemented<TService>(this IServiceCollection services, string? message = null, bool isScoped = false)
         where TService : class
     {
-        if (isScoped)
-        {
-            return services.AddScoped(typeof(TService), _ => LazyInterfaceImplementHelper.CreateNotImplemented<TService>(message));
-        }
-        else
-        {
-            return services.AddSingleton(typeof(TService), _ => LazyInterfaceImplementHelper.CreateNotImplemented<TService>(message));
-        }
+        services.Add(
+            new ServiceDescriptor(
+                typeof(TService),
+                _ => LazyInterfaceImplementHelper.CreateNotImplemented<TService>(message),
+                isScoped ? ServiceLifetime.Scoped : ServiceLifetime.Singleton));
+
+        return services;
+    }
+
+    public static IServiceCollection AddKeyedNotImplemented<TService>(this IServiceCollection services, object? serviceKey, string? message = null, bool isScoped = false)
+        where TService : class
+    {
+        services.Add(
+            new ServiceDescriptor(
+                typeof(TService),
+                serviceKey,
+                (_, _) => LazyInterfaceImplementHelper.CreateNotImplemented<TService>(message),
+                isScoped ? ServiceLifetime.Scoped : ServiceLifetime.Singleton));
+
+        return services;
     }
 }

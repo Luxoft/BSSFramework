@@ -2,25 +2,23 @@
 using Framework.Authorization.BLL;
 using Framework.BLL;
 using Framework.BLL.Services;
+using Framework.Configuration.BLL;
 using Framework.Core.TypeResolving;
 using Framework.Tracking;
+using Framework.Validation;
 
 using GenericQueryable.Fetching;
 
-using SecuritySystem.SecurityAccessor;
+using HierarchicalExpand;
 
 using Microsoft.Extensions.DependencyInjection;
 
+using OData;
 using SampleSystem.Domain;
 
-using HierarchicalExpand;
-
 using SecuritySystem.AccessDenied;
+using SecuritySystem.SecurityAccessor;
 using SecuritySystem.UserSource;
-using Framework.Configuration.BLL;
-using Framework.Validation;
-
-using OData;
 
 namespace SampleSystem.BLL;
 

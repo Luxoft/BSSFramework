@@ -1,7 +1,7 @@
-﻿using Bss.Platform.Mediation.Abstractions;
-
-using Framework.Database;
+﻿using Framework.Database;
 using Framework.Infrastructure;
+
+using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 

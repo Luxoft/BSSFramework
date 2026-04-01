@@ -23,7 +23,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-using SampleSystem.BLL._Command.CreateClassA.Integration;
+using SampleSystem.BLL._Command.CreateClassA.Intergation;
 using SampleSystem.ServiceEnvironment.DependencyInjection;
 using SampleSystem.ServiceEnvironment.Jobs;
 using SampleSystem.WebApiCore.Services;

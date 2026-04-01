@@ -7,7 +7,7 @@ namespace SampleSystem.BLL;
 public partial class CountryBLL(
     ISampleSystemBLLContext context,
     ISecurityProvider<Country> securityProvider)
-    : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Country>(context, securityProvider) 
+    : SecurityDomainBLLBase<Country>(context, securityProvider) 
 {
     // Manual BLL Constructor example. For configuration see BLLGeneratorConfiguration.cs
 }

@@ -1,11 +1,10 @@
-﻿using Bss.Platform.Mediation.Abstractions;
+﻿using Framework.Application.Repository;
 
-using Framework.Application.Repository;
+using MediatR;
 
-using SampleSystem.BLL._Command.CreateClassA.Integration;
 using SampleSystem.Domain.TestForceAbstract;
 
-namespace SampleSystem.BLL._Command.EmployeeAssistantLinked.Integration;
+namespace SampleSystem.BLL._Command.CreateClassA.Intergation;
 
 public record ClassACreatedEventHandler(IRepositoryFactory<ClassA> Repository) : INotificationHandler<ClassACreatedEvent>
 {

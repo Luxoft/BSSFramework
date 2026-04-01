@@ -1,4 +1,4 @@
-﻿using Bss.Platform.Mediation.Abstractions;
+﻿using MediatR;
 
 namespace SampleSystem.BLL._Query.GetEmployees;
 

@@ -1,9 +1,9 @@
-﻿using Bss.Platform.Mediation.Abstractions;
-
-using Framework.Application.Repository;
+﻿using Framework.Application.Repository;
 using Framework.Database;
 
 using GenericQueryable;
+
+using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 

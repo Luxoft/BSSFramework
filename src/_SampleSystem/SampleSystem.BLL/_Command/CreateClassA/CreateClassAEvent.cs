@@ -1,6 +1,6 @@
-﻿using Bss.Platform.Mediation.Abstractions;
+﻿using MediatR;
 
 namespace SampleSystem.BLL._Command.CreateClassA
 {
-    public record CreateClassAEvent(int value) : IRequest;
+    public record CreateClassAEvent(int Value) : IRequest;
 }

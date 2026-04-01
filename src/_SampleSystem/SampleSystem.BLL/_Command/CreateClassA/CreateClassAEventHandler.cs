@@ -1,9 +1,10 @@
 ﻿using Bss.Platform.Events.Abstractions;
-using Bss.Platform.Mediation.Abstractions;
 
 using Framework.Application.Repository;
 
-using SampleSystem.BLL._Command.CreateClassA.Integration;
+using MediatR;
+
+using SampleSystem.BLL._Command.CreateClassA.Intergation;
 using SampleSystem.Domain.TestForceAbstract;
 
 namespace SampleSystem.BLL._Command.CreateClassA;
@@ -13,7 +14,7 @@ public record CreateClassAEventHandler(IRepositoryFactory<ClassA> Repository, II
 {
     public async Task Handle(CreateClassAEvent request, CancellationToken cancellationToken)
     {
-        var classA = new ClassA { Value = request.value };
+        var classA = new ClassA { Value = request.Value };
         await this.Repository.Create().SaveAsync(classA, cancellationToken);
 
         await this.EventPublisher.PublishAsync(new ClassACreatedEvent(classA.Id), cancellationToken);

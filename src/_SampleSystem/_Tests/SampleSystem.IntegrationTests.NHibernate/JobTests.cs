@@ -1,6 +1,6 @@
-﻿using Automation.ServiceEnvironment;
-
-using Framework.DomainDriven;
+﻿using Framework.Application;
+using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
+using Framework.Database;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;

@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven;
+﻿using Framework.Application;
+using Framework.Database;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;

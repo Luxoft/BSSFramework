@@ -67,7 +67,7 @@ public static class ServiceProviderExtensions
             return services;
         }
 
-        public IServiceCollection ApplyIntegrationTestServices(Action<AutomationFrameworkSettings>? setup = null)
+        public IServiceCollection AddIntegrationTests(Action<AutomationFrameworkSettings>? setup = null)
         {
             if (setup != null)
             {

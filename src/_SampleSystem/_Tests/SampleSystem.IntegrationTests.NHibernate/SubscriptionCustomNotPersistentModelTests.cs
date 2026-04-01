@@ -1,6 +1,7 @@
 ﻿using ASP;
 
-using Framework.DomainDriven;
+using Framework.Application;
+using Framework.Database;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;

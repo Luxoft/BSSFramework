@@ -1,15 +1,12 @@
-﻿using Automation;
-
-using Automation.ServiceEnvironment;
-
-using Bss.Platform.Events.Abstractions;
+﻿using Bss.Platform.Events.Abstractions;
 
 using CommonFramework.DependencyInjection;
 
-using Framework.Configuration.BLL;
-using Framework.Core;
+using Framework.Application.Jobs;
+using Framework.AutomationCore.Environment;
+using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
+using Framework.Configuration.BLL.SubscriptionSystemService;
 using Framework.Core.MessageSender;
-using Framework.DomainDriven.Jobs;
 using Framework.Notification.DTO;
 
 using Microsoft.Extensions.Configuration;
@@ -19,8 +16,8 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.IntegrationTests.__Support.Utils;
 using SampleSystem.ServiceEnvironment;
+using SampleSystem.ServiceEnvironment.DependencyInjection;
 using SampleSystem.ServiceEnvironment.Jobs;
-using SampleSystem.ServiceEnvironment.NHibernate;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests.__Support;
@@ -42,27 +39,25 @@ public class InitializeAndCleanup
     public static async Task EnvironmentCleanup() =>
         await TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentCleanupAsync();
 
-    private static IServiceCollection GetServices(IConfiguration configuration, IServiceCollection services)
-    {
-        return services
-               .RegisterGeneralDependencyInjection(configuration, s => s.AddExtensions(new SampleSystemNHibernateExtension()))
+    private static IServiceCollection GetServices(IConfiguration configuration, IServiceCollection services) =>
+        services
+            .AddGeneralDependencyInjection(configuration, s => s.AddExtensions(new SampleSystemNHibernateExtension()))
 
-               .AddSingleton<SampleSystemInitializer>()
+            .AddSingleton<SampleSystemInitializer>()
 
-               .ApplyIntegrationTestServices()
+            .AddIntegrationTests()
 
-               .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
-               .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()
+            .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
+            .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()
 
-               .AddSingleton(new JobImpersonateData("sampleSystemTestJob"))
-               .RegisterJobs([typeof(SampleJob).Assembly])
+            .AddSingleton(new JobImpersonateData("sampleSystemTestJob"))
+            .AddJobs([typeof(SampleJob).Assembly])
 
-               .RegisterControllers([typeof(EmployeeController).Assembly])
+            .AddControllers([typeof(EmployeeController).Assembly])
 
-               .AddSingleton<DataHelper>()
+            .AddSingleton<DataHelper>()
 
-               .AddSingleton<TestDataInitializer>()
-               //.AddServiceProxyFactory(b => b.AddRedirect(typeof(RawPermissionConverter<,>), typeof(MyRawPermissionConverter<,>)))
-               ;
-    }
+            .AddSingleton<TestDataInitializer>();
+
+    //.AddServiceProxyFactory(b => b.AddRedirect(typeof(RawPermissionConverter<,>), typeof(MyRawPermissionConverter<,>)))
 }

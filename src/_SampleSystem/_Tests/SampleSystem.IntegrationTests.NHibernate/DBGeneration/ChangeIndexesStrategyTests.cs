@@ -1,9 +1,8 @@
-﻿using Microsoft.SqlServer.Management.Smo;
+﻿using Framework.Database.NHibernate.DBGenerator;
 
-using SampleSystem.DbGenerate;
+using Microsoft.SqlServer.Management.Smo;
 
-using Framework.DomainDriven.DBGenerator;
-
+using SampleSystem.DbGenerate.NHibernate;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 using Index = Microsoft.SqlServer.Management.Smo.Index;

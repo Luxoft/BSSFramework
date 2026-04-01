@@ -1,10 +1,10 @@
 ﻿using System.Linq.Expressions;
 
-using Automation.Utils;
-
 using CommonFramework;
 
-using Framework.DomainDriven;
+using Framework.Application;
+using Framework.AutomationCore.Utils;
+using Framework.Database;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;

@@ -1,12 +1,11 @@
-﻿using Automation.Settings;
-using Automation.Utils.DatabaseUtils;
-using Automation.Utils.DatabaseUtils.Interfaces;
-
-using Framework.DomainDriven.DBGenerator;
+﻿using Framework.AutomationCore.Settings;
+using Framework.AutomationCore.Utils.DatabaseUtils;
+using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
+using Framework.Database.NHibernate.DBGenerator;
 
 using Microsoft.Extensions.Options;
 
-using SampleSystem.DbGenerate;
+using SampleSystem.DbGenerate.NHibernate;
 using SampleSystem.IntegrationTests.__Support.FluentMigration;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
@@ -20,15 +19,13 @@ public class SampleSystemTestDatabaseGenerator(
 {
     public override IEnumerable<string> TestServers => new List<string> { "." };
 
-    public async override Task GenerateDatabasesAsync()
-    {
+    public async override Task GenerateDatabasesAsync() =>
         new DbGeneratorTest().GenerateAllDB(
             this.DatabaseContext.Main.DataSource,
             mainDatabaseName: this.DatabaseContext.Main.DatabaseName,
             credential: DbUserCredential.Create(
                 this.DatabaseContext.Main.UserId,
                 this.DatabaseContext.Main.Password));
-    }
 
     public override async Task CheckTestDatabaseAsync()
     {
@@ -39,10 +36,7 @@ public class SampleSystemTestDatabaseGenerator(
         }
     }
 
-    public override async Task GenerateTestDataAsync()
-    {
-        await testDataInitializer.InitializeAsync(default);
-    }
+    public override async Task GenerateTestDataAsync() => await testDataInitializer.InitializeAsync(default);
 
     public override void ExecuteInsertsForDatabases()
     {

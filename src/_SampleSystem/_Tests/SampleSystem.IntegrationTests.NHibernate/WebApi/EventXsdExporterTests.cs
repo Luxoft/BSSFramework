@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.WebApiNetCore.Integration;
+﻿using Framework.Infrastructure.Integration;
 
 namespace SampleSystem.IntegrationTests.WebApi;
 

@@ -1,15 +1,11 @@
-﻿using Automation.Utils;
-
-using Framework.DomainDriven;
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Framework.Application;
+using Framework.AutomationCore.Utils;
+using Framework.Database;
 
 using SecuritySystem.UserSource;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
-
-using SecuritySystem.Services;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -29,11 +25,8 @@ public class CurrentUserSourceTests : TestBase
             randomName,
             ctx =>
             {
-                var serv = ctx.ServiceProvider.GetRequiredService<ICurrentUser>();
-
-                var cc = serv.GetUserName();
-
                 var emp = ctx.CurrentEmployeeSource.CurrentUser;
+
                 return emp.Id;
             });
 

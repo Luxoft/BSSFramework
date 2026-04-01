@@ -10,10 +10,7 @@ namespace SampleSystem.IntegrationTests.NH;
 
 public class PropertyFullTextContainsGenerator : BaseHqlGeneratorForMethod
 {
-    public PropertyFullTextContainsGenerator()
-    {
-        this.SupportedMethods = [DialectExtensions.GetPropetyFullTextContainsMethodInfo()];
-    }
+    public PropertyFullTextContainsGenerator() => this.SupportedMethods = [DialectExtensions.GetPropetyFullTextContainsMethodInfo()];
 
     public override HqlTreeNode BuildHql(
             MethodInfo method,

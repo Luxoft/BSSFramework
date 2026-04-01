@@ -1,5 +1,6 @@
 ﻿using CommonFramework.Maybe;
 
+using Framework.BLL.DTOMapping.MergeItemData;
 using Framework.Core;
 
 using SampleSystem.Generated.DTO;
@@ -105,8 +106,8 @@ public class UpdateTests : TestBase
 
         var updateDTO = new Example1UpdateDTO(currentStrictDTO, baseStrictDTO);
 
-        var removedItems = updateDTO.Items2.OfType<Framework.Persistent.RemoveItemData<Example2UpdateDTO, Example2IdentityDTO>>().ToList();
-        var savedItems = updateDTO.Items2.OfType<Framework.Persistent.SaveItemData<Example2UpdateDTO, Example2IdentityDTO>>().ToList();
+        var removedItems = updateDTO.Items2.OfType<RemoveItemData<Example2UpdateDTO, Example2IdentityDTO>>().ToList();
+        var savedItems = updateDTO.Items2.OfType<SaveItemData<Example2UpdateDTO, Example2IdentityDTO>>().ToList();
 
         var resavedItems = savedItems.Where(item => !item.Value.Id.IsDefault()).ToList();
         var createdItems = savedItems.Where(item => item.Value.Id.IsDefault()).ToList();

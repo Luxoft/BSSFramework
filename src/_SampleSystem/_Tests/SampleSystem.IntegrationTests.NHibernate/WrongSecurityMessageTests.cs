@@ -1,6 +1,7 @@
-﻿using Automation.Utils;
+﻿using Framework.Application;
+using Framework.AutomationCore.Utils;
+using Framework.Database;
 
-using Framework.DomainDriven;
 using SecuritySystem;
 
 using SampleSystem.Domain;
@@ -19,28 +20,16 @@ public class WrongSecurityMessageTests : TestBase
     private static readonly Guid TestPrincipalId = Guid.NewGuid();
 
     [TestInitialize]
-    public void SetUp()
-    {
-        this.DataHelper.SaveEmployee(login: TestPrincipalName, id: TestPrincipalId);
-    }
+    public void SetUp() => this.DataHelper.SaveEmployee(login: TestPrincipalName, id: TestPrincipalId);
 
     [TestMethod]
-    public void UseWrongSecurityMode_ErrorMessageCorrected()
-    {
-        this.UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SecurityRule.Edit);
-    }
+    public void UseWrongSecurityMode_ErrorMessageCorrected() => this.UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SecurityRule.Edit);
 
     [TestMethod]
-    public void UseWrongSecurityOperation_ErrorMessageCorrected()
-    {
-        this.UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SampleSystemSecurityOperation.EmployeeEdit);
-    }
+    public void UseWrongSecurityOperation_ErrorMessageCorrected() => this.UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SampleSystemSecurityOperation.EmployeeEdit);
 
     [TestMethod]
-    public void UseWrongSecurityRole_ErrorMessageCorrected()
-    {
-        this.UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SampleSystemSecurityRole.SeManager);
-    }
+    public void UseWrongSecurityRole_ErrorMessageCorrected() => this.UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SampleSystemSecurityRole.SeManager);
 
     private void UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SecurityRule securityRule)
     {

@@ -1,9 +1,4 @@
-﻿namespace Automation.ServiceEnvironment;
+﻿namespace Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
 
-public abstract class RootServiceProviderContainer<TBLLContext> : RootServiceProviderContainer, IRootServiceProviderContainer<TBLLContext>
-{
-    protected RootServiceProviderContainer(IServiceProvider rootServiceProvider)
-        : base(rootServiceProvider)
-    {
-    }
-}
+public abstract class RootServiceProviderContainer<TBLLContext>(IServiceProvider rootServiceProvider)
+    : RootServiceProviderContainer(rootServiceProvider), IRootServiceProviderContainer<TBLLContext>;

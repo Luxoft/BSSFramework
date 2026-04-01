@@ -1,5 +1,5 @@
-﻿using Automation.ServiceEnvironment;
-
+﻿using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+using Framework.Notification.Domain;
 using Framework.Notification.DTO;
 
 using SampleSystem.IntegrationTests.__Support.TestData;

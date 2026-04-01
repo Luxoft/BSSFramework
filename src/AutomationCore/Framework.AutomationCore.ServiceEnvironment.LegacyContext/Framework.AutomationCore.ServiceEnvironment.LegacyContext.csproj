@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Luxoft.Framework.AutomationCore.ServiceEnvironment.LegacyContext</PackageId>
-    <RootNamespace>Framework.CoreAutomation.ServiceEnvironmen</RootNamespace>
+    <RootNamespace>Framework.AutomationCore.ServiceEnvironment</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +11,11 @@
 
   <ItemGroup>
 
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Legacy.Default\Framework.Infrastructure.Legacy.Default.csproj" />
+
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.WebApi\Framework.Authorization.WebApi.csproj" />
+
+    <ProjectReference Include="..\Framework.AutomationCore.ServiceEnvironment\Framework.AutomationCore.ServiceEnvironment.csproj" />
   </ItemGroup>
 
 </Project>

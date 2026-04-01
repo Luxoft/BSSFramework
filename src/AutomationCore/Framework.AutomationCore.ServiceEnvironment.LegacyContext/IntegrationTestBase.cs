@@ -1,19 +1,22 @@
 ﻿using CommonFramework;
 
+using Framework.Application;
+using Framework.Application.Repository;
+using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+using Framework.AutomationCore.ServiceProviderPool;
+using Framework.BLL.DTOMapping.Domain;
 using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.Helpers;
-using Framework.DomainDriven;
-using Framework.DomainDriven.Repository;
-using Framework.DomainDriven.ServiceModel.Subscriptions;
+using Framework.Database;
 using Framework.Notification.DTO;
 
 using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem.Credential;
 
-namespace Automation.ServiceEnvironment;
+namespace Framework.AutomationCore.ServiceEnvironment;
 
 public abstract class IntegrationTestBase<TBLLContext>(IServiceProviderPool rootServiceProviderPool)
     : IntegrationTestBase(rootServiceProviderPool), IRootServiceProviderContainer<TBLLContext>
@@ -26,26 +29,19 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProviderPool root
         this.RootServiceProvider.GetRequiredService<IServiceEvaluator<TBLLContext>>().EvaluateAsync(sessionMode, customUserCredential, getResult);
 
 
-    protected IConfigurationBLLContext GetConfigurationBLLContext(TBLLContext context)
-    {
-        return context.ServiceProvider.GetRequiredService<IConfigurationBLLContext>();
-    }
+    protected IConfigurationBLLContext GetConfigurationBLLContext(TBLLContext context) => context.ServiceProvider.GetRequiredService<IConfigurationBLLContext>();
 
     /// <summary>
     /// Отчистка списка нотифицаций
     /// </summary>
-    public override void ClearNotifications()
-    {
-        this.EvaluateWrite(context => this.GetConfigurationBLLContext(context).Logics.DomainObjectNotification.Pipe(bll => bll.GetFullList().ForEach(bll.Remove)));
-    }
+    public override void ClearNotifications() => this.EvaluateWrite(context => this.GetConfigurationBLLContext(context).Logics.DomainObjectNotification.Pipe(bll => bll.GetFullList().ForEach(bll.Remove)));
 
     /// <summary>
     /// Получение списка модификаций
     /// </summary>
     /// <returns></returns>
-    protected virtual List<ObjectModificationInfoDTO<Guid>> GetModifications()
-    {
-        return this.EvaluateRead(
+    protected virtual List<ObjectModificationInfoDTO<Guid>> GetModifications() =>
+        this.EvaluateRead(
             context =>
 
                 this.GetConfigurationBLLContext(context).Logics.DomainObjectModification.GetFullList()
@@ -57,15 +53,11 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProviderPool root
                                    Revision = mod.Revision,
                                    TypeInfoDescription = new TypeInfoDescriptionDTO(mod.DomainType)
                                }));
-    }
 
     /// <summary>
     /// Отчистка списка модификаций
     /// </summary>
-    protected virtual void ClearModifications()
-    {
-        this.EvaluateWrite(context => this.GetConfigurationBLLContext(context).Logics.DomainObjectModification.Pipe(bll => bll.GetFullList().ForEach(bll.Remove)));
-    }
+    protected virtual void ClearModifications() => this.EvaluateWrite(context => this.GetConfigurationBLLContext(context).Logics.DomainObjectModification.Pipe(bll => bll.GetFullList().ForEach(bll.Remove)));
 
     /// <summary>
     /// Отчистка интеграционных евентов
@@ -76,7 +68,7 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProviderPool root
 
         this.EvaluateWrite(context =>
         {
-            var bll = this.GetConfigurationBLLContext(context).Logics.Default.Create<Framework.Configuration.Domain.DomainObjectEvent>();
+            var bll = this.GetConfigurationBLLContext(context).Logics.Default.Create<DomainObjectEvent>();
 
             bll.GetFullList().ForEach(bll.Remove);
         });
@@ -103,10 +95,8 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProviderPool root
     /// Получение списка нотификаций
     /// </summary>
     /// <returns></returns>
-    protected virtual List<NotificationEventDTO> GetNotifications()
-    {
-        return this.EvaluateRead(
+    protected virtual List<NotificationEventDTO> GetNotifications() =>
+        this.EvaluateRead(
             context => this.GetConfigurationBLLContext(context).Logics.DomainObjectNotification.GetFullList()
-                .ToList(obj => DataContractSerializerHelper.Deserialize<NotificationEventDTO>(obj.SerializeData)));
-    }
+                           .ToList(obj => DataContractSerializerHelper.Deserialize<NotificationEventDTO>(obj.SerializeData)));
 }

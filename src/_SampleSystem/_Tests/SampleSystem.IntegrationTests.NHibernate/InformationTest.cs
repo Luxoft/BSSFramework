@@ -1,7 +1,7 @@
-﻿using SampleSystem.Domain;
+﻿using Framework.Application;
+using Framework.Database;
 
-using Framework.DomainDriven;
-
+using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 

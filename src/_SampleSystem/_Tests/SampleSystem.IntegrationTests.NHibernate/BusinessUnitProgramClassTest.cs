@@ -46,7 +46,7 @@ public class BusinessUnitProgramClassTest : TestBase
 
         // Assert
 
-        actualResult.Count.Should().Be(3);
+        actualResult.Length.Should().Be(3);
 
         var expectedResult = actualResult.OrderBy(z => z.VirtualValue).ToList();
 
@@ -72,7 +72,7 @@ public class BusinessUnitProgramClassTest : TestBase
                                                                     })).Items;
 
         // Assert
-        actualResult.Count.Should().Be(3);
+        actualResult.Length.Should().Be(3);
 
         actualResult.All(z => z.VirtualName.Contains(namePart)).Should().BeTrue();
 

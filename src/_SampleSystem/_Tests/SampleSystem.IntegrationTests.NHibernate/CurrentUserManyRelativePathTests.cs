@@ -1,6 +1,7 @@
-﻿using Automation.ServiceEnvironment;
+﻿using Framework.Application;
+using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+using Framework.Database;
 
-using Framework.DomainDriven;
 using SecuritySystem;
 
 using SampleSystem.Domain;

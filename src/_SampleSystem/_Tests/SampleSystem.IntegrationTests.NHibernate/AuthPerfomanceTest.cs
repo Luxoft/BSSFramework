@@ -1,5 +1,7 @@
-﻿using Framework.DomainDriven;
-using Framework.DomainDriven.Repository;
+﻿using Framework.Application;
+using Framework.Application.Repository;
+using Framework.Database;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
@@ -77,44 +79,42 @@ public class AuthPerformanceTest : TestBase
         this.AuthManager.For(PrincipalName).SetRole(request.ToArray());
     }
 
-    private async Task<int> GenerateAuthPerformanceObject()
-    {
-        return await this.RootServiceProvider.GetRequiredService<IDBSessionEvaluator>().EvaluateAsync(
-                   DBSessionMode.Write,
-                   async sp =>
-                   {
-                       var fbuRep = sp.GetRequiredService<IRepositoryFactory<BusinessUnit>>().Create();
-                       var mbuRep = sp.GetRequiredService<IRepositoryFactory<ManagementUnit>>().Create();
-                       var locRep = sp.GetRequiredService<IRepositoryFactory<Location>>().Create();
-                       var empRep = sp.GetRequiredService<IRepositoryFactory<Employee>>().Create();
-                       var testObjRep = sp.GetRequiredService<IRepositoryFactory<AuthPerformanceObject>>().Create();
+    private async Task<int> GenerateAuthPerformanceObject() =>
+        await this.RootServiceProvider.GetRequiredService<IDBSessionEvaluator>().EvaluateAsync(
+            DBSessionMode.Write,
+            async sp =>
+            {
+                var fbuRep = sp.GetRequiredService<IRepositoryFactory<BusinessUnit>>().Create();
+                var mbuRep = sp.GetRequiredService<IRepositoryFactory<ManagementUnit>>().Create();
+                var locRep = sp.GetRequiredService<IRepositoryFactory<Location>>().Create();
+                var empRep = sp.GetRequiredService<IRepositoryFactory<Employee>>().Create();
+                var testObjRep = sp.GetRequiredService<IRepositoryFactory<AuthPerformanceObject>>().Create();
 
-                       int count = 0;
-                       foreach (var fbu in this.fbuSource.Take(Size - 3))
-                       {
-                           foreach (var mbu in this.mbuSource.Take(Size - 3))
-                           {
-                               foreach (var loc in this.locationSource.Take(Size - 3))
-                               {
-                                   foreach (var emp in this.employeeSource)
-                                   {
-                                       var testObj = new AuthPerformanceObject
-                                                     {
-                                                         BusinessUnit = fbu == null ? null : await fbuRep.LoadAsync(fbu.Value.Id),
-                                                         ManagementUnit = mbu == null ? null : await mbuRep.LoadAsync(mbu.Value.Id),
-                                                         Location = loc == null ? null : await locRep.LoadAsync(loc.Value.Id),
-                                                         Employee = emp == null ? null : await empRep.LoadAsync(emp.Value.Id),
-                                                     };
+                int count = 0;
+                foreach (var fbu in this.fbuSource.Take(Size - 3))
+                {
+                    foreach (var mbu in this.mbuSource.Take(Size - 3))
+                    {
+                        foreach (var loc in this.locationSource.Take(Size - 3))
+                        {
+                            foreach (var emp in this.employeeSource)
+                            {
+                                var testObj = new AuthPerformanceObject
+                                              {
+                                                  BusinessUnit = fbu == null ? null : await fbuRep.LoadAsync(fbu.Value.Id),
+                                                  ManagementUnit = mbu == null ? null : await mbuRep.LoadAsync(mbu.Value.Id),
+                                                  Location = loc == null ? null : await locRep.LoadAsync(loc.Value.Id),
+                                                  Employee = emp == null ? null : await empRep.LoadAsync(emp.Value.Id),
+                                              };
 
-                                       await testObjRep.SaveAsync(testObj);
+                                await testObjRep.SaveAsync(testObj);
 
-                                       count++;
-                                   }
-                               }
-                           }
-                       }
+                                count++;
+                            }
+                        }
+                    }
+                }
 
-                       return count;
-                   });
-    }
+                return count;
+            });
 }

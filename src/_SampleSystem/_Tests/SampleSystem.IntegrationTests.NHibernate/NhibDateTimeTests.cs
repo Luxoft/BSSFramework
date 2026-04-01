@@ -1,4 +1,4 @@
-﻿using Automation.ServiceEnvironment;
+﻿using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
 
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
@@ -12,16 +12,10 @@ public class NhibDateTimeTests : TestBase
     private DateTime prevDateTime;
 
     [TestInitialize]
-    public void SetUp()
-    {
-        this.prevDateTime = this.TimeProvider.GetLocalNow().DateTime;
-    }
+    public void SetUp() => this.prevDateTime = this.TimeProvider.GetLocalNow().DateTime;
 
     [TestCleanup]
-    public void TestCleanup()
-    {
-        this.SetCurrentDateTime(this.prevDateTime);
-    }
+    public void TestCleanup() => this.SetCurrentDateTime(this.prevDateTime);
 
     [TestMethod]
     public void CreateObject_CreatedDateOverride()

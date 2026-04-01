@@ -1,11 +1,9 @@
 ﻿using System.Text;
 
-using Automation.ServiceEnvironment;
-
+using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+using Framework.BLL;
 using Framework.Core;
-using Framework.Core.TryResult.Extensions;
-using Framework.DomainDriven.BLL;
-using Framework.Notification.DTO;
+using Framework.Notification.Domain;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Custom;
@@ -20,10 +18,7 @@ namespace SampleSystem.IntegrationTests.Subscriptions_Metadata;
 public sealed class MetadataSubscriptionSystemServiceTests : TestBase
 {
     [TestInitialize]
-    public void SetUp()
-    {
-        this.GetNotifications().Clear();
-    }
+    public void SetUp() => this.GetNotifications().Clear();
 
     [TestMethod]
     public void SubscriptionFromMetadataShouldBeSent()

@@ -1,6 +1,6 @@
-﻿using Framework.Core;
-
-using Framework.DomainDriven;
+﻿using Framework.Application;
+using Framework.Core;
+using Framework.Database;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 

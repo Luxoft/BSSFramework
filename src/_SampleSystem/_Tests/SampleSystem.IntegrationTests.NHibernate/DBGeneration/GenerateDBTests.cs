@@ -1,6 +1,6 @@
-﻿using SampleSystem.DbGenerate;
-using Framework.DomainDriven.DBGenerator;
+﻿using Framework.Database.NHibernate.DBGenerator;
 
+using SampleSystem.DbGenerate.NHibernate;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;

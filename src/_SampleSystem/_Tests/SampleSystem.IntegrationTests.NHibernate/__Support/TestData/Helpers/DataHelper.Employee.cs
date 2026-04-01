@@ -1,6 +1,5 @@
-﻿using Automation.ServiceEnvironment;
-using Automation.Utils;
-
+﻿using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+using Framework.AutomationCore.Utils;
 using Framework.Core;
 
 
@@ -264,46 +263,40 @@ public partial class DataHelper
     }
 
 
-    public EmployeeSimpleDTO GetCurrentEmployee()
-    {
-        return this.EvaluateRead(
+    public EmployeeSimpleDTO GetCurrentEmployee() =>
+        this.EvaluateRead(
             context =>
                 context.ServiceProvider.GetRequiredService<ICurrentUserSource<Employee>>().CurrentUser
                        .ToSimpleDTO(context.ServiceProvider.GetRequiredService<ISampleSystemDTOMappingService>()));
-    }
 
-    public EmployeeSpecializationIdentityDTO SaveSpecialization(Guid? id = null, string name = null)
-    {
-        return this.EvaluateWrite(
-                                  context =>
-                                  {
-                                      var specialization = new EmployeeSpecialization
-                                                           {
-                                                                   Id = id ?? Guid.NewGuid(),
-                                                                   Name = name ?? TextRandomizer.UniqueString("EmployeeSpecialization")
-                                                           };
-
-                                      context.Logics.EmployeeSpecialization.Insert(specialization, specialization.Id);
-
-                                      return specialization.ToIdentityDTO();
-                                  });
-    }
-
-    public void SaveRoleRoleDegreeLink(EmployeeRoleIdentityDTO employeeRoleIdentity, EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity, Guid? id = null)
-    {
+    public EmployeeSpecializationIdentityDTO SaveSpecialization(Guid? id = null, string name = null) =>
         this.EvaluateWrite(
-                           context =>
-                           {
-                               var employeeRole = context.Logics.EmployeeRole.GetById(employeeRoleIdentity.Id, true);
-                               var employeeRoleDegree = context.Logics.EmployeeRoleDegree.GetById(employeeRoleDegreeIdentity.Id, true);
-                               var result = new RoleRoleDegreeLink
-                                            {
-                                                    Id = id ?? Guid.NewGuid(),
-                                                    Role = employeeRole,
-                                                    RoleDegree = employeeRoleDegree
-                                            };
+            context =>
+            {
+                var specialization = new EmployeeSpecialization
+                                     {
+                                         Id = id ?? Guid.NewGuid(),
+                                         Name = name ?? TextRandomizer.UniqueString("EmployeeSpecialization")
+                                     };
 
-                               context.Logics.RoleRoleDegreeLink.Insert(result, result.Id);
-                           });
-    }
+                context.Logics.EmployeeSpecialization.Insert(specialization, specialization.Id);
+
+                return specialization.ToIdentityDTO();
+            });
+
+    public void SaveRoleRoleDegreeLink(EmployeeRoleIdentityDTO employeeRoleIdentity, EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity, Guid? id = null) =>
+        this.EvaluateWrite(
+            context =>
+            {
+                var employeeRole = context.Logics.EmployeeRole.GetById(employeeRoleIdentity.Id, true);
+                var employeeRoleDegree = context.Logics.EmployeeRoleDegree.GetById(employeeRoleDegreeIdentity.Id, true);
+                var result = new RoleRoleDegreeLink
+                             {
+                                 Id = id ?? Guid.NewGuid(),
+                                 Role = employeeRole,
+                                 RoleDegree = employeeRoleDegree
+                             };
+
+                context.Logics.RoleRoleDegreeLink.Insert(result, result.Id);
+            });
 }

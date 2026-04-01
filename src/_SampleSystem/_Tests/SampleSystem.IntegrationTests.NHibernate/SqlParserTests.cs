@@ -1,6 +1,5 @@
-﻿using Automation.ServiceEnvironment;
-
-using Framework.DomainDriven.DALExceptions;
+﻿using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+using Framework.Database.DALExceptions;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;

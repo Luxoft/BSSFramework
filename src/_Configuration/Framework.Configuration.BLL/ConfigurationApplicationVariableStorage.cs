@@ -16,7 +16,7 @@ public class ConfigurationApplicationVariableStorage(
 {
     public async Task<T> GetValueAsync<T>(ApplicationVariable<T> variable, CancellationToken cancellationToken = default)
     {
-        var systemConstant = await systemConstantRepository.GetQueryable().GenericSingleAsync(sc => sc.Code == variable.Name, cancellationToken);
+        var systemConstant = await systemConstantRepository.GetQueryable().GenericSingleAsync(services => services.Code == variable.Name, cancellationToken);
 
         return context.SystemConstantSerializerFactory.Create<T>().Parse(systemConstant.Value);
     }
@@ -26,12 +26,12 @@ public class ConfigurationApplicationVariableStorage(
     {
         var dbList = await systemConstantRepository.GetQueryable().GenericToListAsync(cancellationToken);
 
-        return dbList.ToDictionary(sc => new ApplicationVariable(sc.Code) { Description = sc.Description }, sc => sc.Value);
+        return dbList.ToDictionary(sc => new ApplicationVariable(sc.Code) { Description = sc.Description }, services => services.Value);
     }
 
     public async Task UpdateVariableAsync(string variableName, string newRawValue, CancellationToken cancellationToken = default)
     {
-        var systemConstant = await systemConstantRepository.GetQueryable().GenericSingleAsync(sc => sc.Code == variableName, cancellationToken);
+        var systemConstant = await systemConstantRepository.GetQueryable().GenericSingleAsync(services => services.Code == variableName, cancellationToken);
 
         if (systemConstant.Value != newRawValue)
         {

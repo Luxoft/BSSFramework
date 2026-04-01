@@ -1,5 +1,5 @@
-﻿using Framework.Events;
-using Framework.Events.Legacy;
+﻿using Framework.Application.Events;
+using Framework.BLL.Events.SubscriptionManager;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;

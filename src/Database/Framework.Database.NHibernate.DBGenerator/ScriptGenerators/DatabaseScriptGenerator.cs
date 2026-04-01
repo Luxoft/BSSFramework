@@ -13,8 +13,8 @@ namespace Framework.Database.NHibernate.DBGenerator.ScriptGenerators;
 public class DatabaseScriptGenerator(
     DatabaseScriptGeneratorMode databaseGeneratorMode = DatabaseScriptGeneratorMode.None,
     string previousPostfix = "_previousVersion",
-    ICollection<string> ignoredIndexes = null,
-    IDataTypeComparer dataTypeComparer = null)
+    ICollection<string>? ignoredIndexes = null,
+    IDataTypeComparer? dataTypeComparer = null)
     : IDatabaseScriptGenerator
 {
     private readonly IDataTypeComparer dataTypeComparer = dataTypeComparer ?? new DataTypeComparer();

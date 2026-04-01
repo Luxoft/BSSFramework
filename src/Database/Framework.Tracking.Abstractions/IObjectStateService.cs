@@ -2,7 +2,7 @@
 
 public interface IObjectStateService
 {
-    IEnumerable<ObjectState> GetModifiedObjectStates(object value);
+    IEnumerable<ObjectState> GetModifiedObjectStates(object? value);
 
     bool IsNew(object entity);
 

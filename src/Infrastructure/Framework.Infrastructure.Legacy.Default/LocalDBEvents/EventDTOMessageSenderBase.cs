@@ -1,5 +1,7 @@
 ﻿using CommonFramework;
 
+using Framework.Application.Events;
+using Framework.BLL.Events.SubscriptionManager;
 using Framework.Core.MessageSender;
 
 namespace Framework.Infrastructure.LocalDBEvents;
@@ -19,8 +21,7 @@ public abstract class EventDTOMessageSenderBase<TPersistentDomainObjectBase> : I
         EventOperation operation,
         object? customSendObject,
         CancellationToken cancellationToken)
-        where TDomainObject : class, TPersistentDomainObjectBase
-    {
+        where TDomainObject : class, TPersistentDomainObjectBase =>
         await this.SendAsync(
             new DomainOperationSerializeData<TDomainObject>
             {
@@ -28,7 +29,6 @@ public abstract class EventDTOMessageSenderBase<TPersistentDomainObjectBase> : I
                 Operation = operation,
                 CustomSendObject = customSendObject
             }, cancellationToken);
-    }
 
     async Task IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>>.SendAsync(
         IDomainOperationSerializeData<TPersistentDomainObjectBase> domainObjectEventArgs,

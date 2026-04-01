@@ -39,7 +39,7 @@ public class AuthorizationSystemBuilder : IAuthorizationSystemBuilder, IServiceI
         var principalViewSecurityRule = securityAdministratorRule.Or(DomainSecurityRule.CurrentUser);
         var delegatedFromSecurityRule = new DomainSecurityRule.CurrentUserSecurityRule { RelativePathKey = nameof(Permission.DelegatedFrom) };
 
-        settings.AddExtensions(sc => sc.AddScoped<IDalGenericInterceptor<Permission>, MasterDetailDalGenericInterceptor<Permission, Principal>>()
+        settings.AddExtensions(services => services.AddScoped<IDalGenericInterceptor<Permission>, MasterDetailDalGenericInterceptor<Permission, Principal>>()
                                        .AddScoped<IDalGenericInterceptor<PermissionRestriction>, MasterDetailDalGenericInterceptor<PermissionRestriction, Permission>>())
 
                 .AddUserSource<Principal>(usb =>

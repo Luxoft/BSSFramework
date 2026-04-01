@@ -2,7 +2,6 @@
 
 using CommonFramework;
 
-using Framework.BLL.Services;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.Tracking;
@@ -16,12 +15,7 @@ namespace Framework.BLL.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddGenericBLLServices(IServiceCollection services)
-    {
-        return services.AddSingleton<IExceptionExpander, TargetInvocationExceptionExpander>();
-    }
-
-    public static IServiceCollection RegisterBLLSystem<TBLLContextDecl, TBLLContextImpl>(
+    public static IServiceCollection AddBLLSystem<TBLLContextDecl, TBLLContextImpl>(
         this IServiceCollection services,
         Action<BLLSystemSettings>? setupAction = null)
         where TBLLContextImpl : TBLLContextDecl
@@ -31,7 +25,7 @@ public static class ServiceCollectionExtensions
         setupAction?.Invoke(settings);
 
         return typeof(ServiceCollectionExtensions)
-               .GetMethod(nameof(RegisterBLLSystemInternal), BindingFlags.NonPublic | BindingFlags.Static, true)!
+               .GetMethod(nameof(AddBLLSystemInternal), BindingFlags.NonPublic | BindingFlags.Static, true)!
                .MakeGenericMethod(
                [
                    typeof(TBLLContextDecl),
@@ -48,7 +42,7 @@ public static class ServiceCollectionExtensions
                .Invoke<IServiceCollection>(null, [services]);
     }
 
-    private static IServiceCollection RegisterBLLSystemInternal<
+    private static IServiceCollection AddBLLSystemInternal<
         TBLLContextDecl,
         TBLLContextImpl,
         TValidationMap,

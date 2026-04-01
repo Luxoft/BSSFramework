@@ -10,7 +10,7 @@ namespace Framework.Database.NHibernate;
 
 public class NHibObjectStatesService(ISession session) : IObjectStateService
 {
-    public IEnumerable<ObjectState> GetModifiedObjectStates(object entity)
+    public IEnumerable<ObjectState> GetModifiedObjectStates(object? entity)
     {
         if (entity == null)
         {
@@ -55,12 +55,11 @@ public class NHibObjectStatesService(ISession session) : IObjectStateService
 
             if (propertyType.IsCollectionType)
             {
-                List<object> currentCollection = null;
-                object unTypedStateCollection = currentState[index];
+                List<object>? currentCollection;
+                var unTypedStateCollection = currentState[index];
 
                 if (unTypedStateCollection is IPersistentCollection)
                 {
-
                     var persistentCollection = (IPersistentCollection)currentState[index];
                     if (persistentCollection == null)
                     {

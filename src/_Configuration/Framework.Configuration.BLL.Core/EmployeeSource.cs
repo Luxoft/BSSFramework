@@ -6,15 +6,8 @@ using SecuritySystem.Attributes;
 
 namespace Framework.Configuration.BLL;
 
-public class EmployeeSource<TEmployee> : IEmployeeSource
+public class EmployeeSource<TEmployee>([DisabledSecurity] IRepository<TEmployee> employeeRepository) : IEmployeeSource
     where TEmployee : class, IEmployee
 {
-    private readonly IRepository<TEmployee> employeeRepository;
-
-    public EmployeeSource([DisabledSecurity] IRepository<TEmployee> employeeRepository)
-    {
-        this.employeeRepository = employeeRepository;
-    }
-
-    public IQueryable<IEmployee> GetQueryable() => this.employeeRepository.GetQueryable();
+    public IQueryable<IEmployee> GetQueryable() => employeeRepository.GetQueryable();
 }

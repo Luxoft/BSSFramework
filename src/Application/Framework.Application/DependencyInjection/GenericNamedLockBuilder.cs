@@ -28,7 +28,7 @@ public class GenericNamedLockBuilder : IGenericNamedLockBuilder, IServiceInitial
     public IGenericNamedLockBuilder AddContainer(Type containerType)
     {
         this.elementsInitAction.Add(
-            sc => sc.AddKeyedSingleton<INamedLockSource>(RootNamedLockSource.ElementsKey, new NamedLockTypeContainerSource(containerType)));
+            services => services.AddKeyedSingleton<INamedLockSource>(RootNamedLockSource.ElementsKey, new NamedLockTypeContainerSource(containerType)));
 
         return this;
     }
@@ -36,7 +36,7 @@ public class GenericNamedLockBuilder : IGenericNamedLockBuilder, IServiceInitial
     public IGenericNamedLockBuilder AddManual(NamedLock namedLock)
     {
         this.elementsInitAction.Add(
-            sc => sc.AddKeyedSingleton<INamedLockSource>(RootNamedLockSource.ElementsKey, new ManualNamedLockSource(namedLock)));
+            services => services.AddKeyedSingleton<INamedLockSource>(RootNamedLockSource.ElementsKey, new ManualNamedLockSource(namedLock)));
 
         return this;
     }

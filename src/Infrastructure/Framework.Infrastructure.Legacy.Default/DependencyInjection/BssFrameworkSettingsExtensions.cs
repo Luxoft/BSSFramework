@@ -1,101 +1,61 @@
-﻿//using System.Reflection;
+﻿using System.Reflection;
 
-//using Framework.Authorization.BLL;
-//using Framework.Configuration.BLL;
-//using Framework.Configuration.BLL.Notification;
-//using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-//using Framework.DomainDriven.ServiceModel.IAD;
-//using Framework.Events;
-//using Framework.Events.Legacy;
-//using Framework.Infrastructure.Legacy.DependencyInjection;
-//using Framework.Notification;
+using Framework.Authorization.BLL;
+using Framework.Configuration.BLL;
+using Framework.Configuration.BLL.Notification;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
+using Framework.Notification;
+using Framework.Notification.Domain;
 
-//using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 
-//namespace Framework.DomainDriven.Setup;
+namespace Framework.Infrastructure.DependencyInjection;
 
-//public static class BssFrameworkSettingsExtensions
-//{
-//    extension(IBssFrameworkSettings settings)
-//    {
-//        public IBssFrameworkSettings AddSystemConstant(Type systemConstantContainerType)
-//        {
-//            return settings.AddServices(sc => sc.AddSingleton(new SystemConstantInfo(systemConstantContainerType)));
-//        }
+public static class BssFrameworkSettingsExtensions
+{
+    extension(IBssFrameworkBuilder builder)
+    {
+        public IBssFrameworkBuilder AddSystemConstant(Type systemConstantContainerType) => builder.AddServices(services => services.AddSingleton(new SystemConstantInfo(systemConstantContainerType)));
 
-//        public IBssFrameworkSettings AddSubscriptionManager<TSubscriptionManager>()
-//            where TSubscriptionManager : class, IEventOperationReceiver
-//        {
-//            return settings.AddServices(sc => sc.RegisterSubscriptionManagers(setup => setup.Add<TSubscriptionManager>()));
-//        }
+        public IBssFrameworkBuilder AddLegacyDefaultGenericServices() => builder.AddServices(services => services.AddLegacyDefaultGenericServices());
 
-//        public IBssFrameworkSettings AddLegacyGenericServices()
-//        {
-//            return settings.AddServices(sc => sc.RegisterLegacyGenericServices());
-//        }
+        public IBssFrameworkBuilder AddConfigurationTargetSystems(Action<ITargetSystemRootSettings> setupAction) =>
+            builder.AddServices(
+                services =>
+                {
+                    var tsSettings = new TargetSystemRootSettings();
 
-//        public IBssFrameworkSettings AddContextEvaluators()
-//        {
-//            return settings.AddServices(sc => sc.RegisterContextEvaluators());
-//        }
+                    setupAction.Invoke(tsSettings);
 
-//        public IBssFrameworkSettings AddBLLSystem<TBLLContextDecl, TBLLContextImpl>(Action<BLLSystemSettings>? setupAction = null)
-//            where TBLLContextImpl : TBLLContextDecl
-//        {
-//            return settings.AddServices(sc => sc.RegisterBLLSystem<TBLLContextDecl, TBLLContextImpl>(setupAction));
-//        }
+                    if (tsSettings.RegisterBase)
+                    {
+                        tsSettings.AddTargetSystem(TargetSystemInfoHelper.Base);
+                    }
 
-//        public IBssFrameworkSettings AddConfigurationTargetSystems(Action<ITargetSystemRootSettings> setupAction)
-//        {
-//            return settings.AddServices(
-//                sc =>
-//                {
-//                    var tsSettings = new TargetSystemRootSettings();
+                    if (tsSettings.RegisterAuthorization)
+                    {
+                        tsSettings.AddTargetSystem<IAuthorizationBLLContext, Authorization.Domain.PersistentDomainObjectBase>(
+                            TargetSystemInfoHelper.Authorization);
+                    }
 
-//                    setupAction.Invoke(tsSettings);
+                    if (tsSettings.RegisterConfiguration)
+                    {
+                        tsSettings.AddTargetSystem<IConfigurationBLLContext, Configuration.Domain.PersistentDomainObjectBase>(
+                            TargetSystemInfoHelper.Configuration);
+                    }
 
-//                    if (tsSettings.RegisterBase)
-//                    {
-//                        tsSettings.AddTargetSystem(TargetSystemInfoHelper.Base);
-//                    }
+                    tsSettings.Initialize(services);
+                });
 
-//                    if (tsSettings.RegisterAuthorization)
-//                    {
-//                        tsSettings.AddTargetSystem<IAuthorizationBLLContext, Authorization.Domain.PersistentDomainObjectBase>(
-//                            TargetSystemInfoHelper.Authorization);
-//                    }
+        public IBssFrameworkBuilder SetSubscriptionAssembly(Assembly assembly) =>
+            builder.AddServices(services => services.AddSingleton(new SubscriptionMetadataFinderAssemblyInfo(assembly)));
 
-//                    if (tsSettings.RegisterConfiguration)
-//                    {
-//                        tsSettings.AddTargetSystem<IConfigurationBLLContext, Configuration.Domain.PersistentDomainObjectBase>(
-//                            TargetSystemInfoHelper.Configuration);
-//                    }
+        public IBssFrameworkBuilder SetNotificationEmployee<TEmployee>()
+            where TEmployee : class, IEmployee =>
+            builder.AddServices(services => services.AddScoped<IEmployeeSource, EmployeeSource<TEmployee>>());
 
-//                    tsSettings.Initialize(sc);
-//                });
-//        }
-
-//        public IBssFrameworkSettings SetSubscriptionAssembly(Assembly assembly) =>
-//            settings.AddServices(sc => sc.AddSingleton(new SubscriptionMetadataFinderAssemblyInfo(assembly)));
-
-//        public IBssFrameworkSettings SetNotificationEmployee<TEmployee>()
-//            where TEmployee : class, IEmployee =>
-//            settings.AddServices(sc => sc.AddScoped<IEmployeeSource, EmployeeSource<TEmployee>>());
-
-//        public IBssFrameworkSettings SetNotificationDefaultMailSenderContainer<TDefaultMailSenderContainer>()
-//            where TDefaultMailSenderContainer : class, IDefaultMailSenderContainer =>
-//            settings.AddServices(sc => sc.AddSingleton<IDefaultMailSenderContainer, TDefaultMailSenderContainer>());
-
-//        public IBssFrameworkSettings SetDTOMapping<TDTOMappingService, TDTOMappingServiceImpl, TPersistentDomainObjectBase, TEventDTOBase>()
-//            where TDTOMappingService : class
-//            where TDTOMappingServiceImpl : class, TDTOMappingService =>
-//            settings.AddServices(sc => sc.AddScoped<TDTOMappingService, TDTOMappingServiceImpl>()
-//                                         .AddScoped<IDomainEventDTOMapper<TPersistentDomainObjectBase>, RuntimeDomainEventDTOMapper<TPersistentDomainObjectBase,
-//                                             TDTOMappingService, TEventDTOBase>>());
-
-//        private IBssFrameworkSettings AddServices(Action<IServiceCollection> setupAction)
-//        {
-//            return settings.AddExtensions(new BssFrameworkExtension(setupAction));
-//        }
-//    }
-//}
+        public IBssFrameworkBuilder SetNotificationDefaultMailSenderContainer<TDefaultMailSenderContainer>()
+            where TDefaultMailSenderContainer : class, IDefaultMailSenderContainer =>
+            builder.AddServices(services => services.AddSingleton<IDefaultMailSenderContainer, TDefaultMailSenderContainer>());
+    }
+}

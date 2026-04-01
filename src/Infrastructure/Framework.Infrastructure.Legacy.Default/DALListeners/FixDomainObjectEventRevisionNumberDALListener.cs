@@ -1,4 +1,10 @@
-﻿namespace Framework.Infrastructure.DALListeners;
+﻿using Framework.BLL;
+using Framework.Configuration.BLL;
+using Framework.Configuration.Domain;
+using Framework.Database;
+using Framework.Database.DALListener;
+
+namespace Framework.Infrastructure.DALListeners;
 
 public class FixDomainObjectEventRevisionNumberDALListener(IConfigurationBLLContext context) : BLLContextContainer<IConfigurationBLLContext>(context),
                                                                                                IBeforeTransactionCompletedDALListener

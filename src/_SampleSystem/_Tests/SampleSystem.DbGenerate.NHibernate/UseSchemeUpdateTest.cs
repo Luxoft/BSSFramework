@@ -49,7 +49,7 @@ public class UseSchemeUpdateTest
                        .Self(new SampleSystemNHibernateExtension(false).AddServices)
                        .ReplaceSingleton<IDefaultConnectionStringSource>(new ManualDefaultConnectionStringSource(connectionString))
                        .AddNotImplemented<IDefaultUserAuthenticationService>()
-                       .Self(sc => sc.RemoveBy(sd => sd.Lifetime == ServiceLifetime.Scoped))
+                       .Self(services => services.RemoveBy(sd => sd.Lifetime == ServiceLifetime.Scoped))
                        .BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true });
 
         var dbSessionFactory = provider.GetService<NHibSessionEnvironment>();

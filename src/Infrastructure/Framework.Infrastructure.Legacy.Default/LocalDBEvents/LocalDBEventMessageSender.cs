@@ -1,4 +1,10 @@
-﻿using Framework.BLL.DTOMapping.DTOMapper;
+﻿using CommonFramework;
+
+using Framework.Application.Domain;
+using Framework.BLL.Domain.Extensions;
+using Framework.BLL.DTOMapping.DTOMapper;
+using Framework.BLL.Events.SubscriptionManager;
+using Framework.Configuration.BLL;
 using Framework.Core.Helpers;
 
 namespace Framework.Infrastructure.LocalDBEvents;

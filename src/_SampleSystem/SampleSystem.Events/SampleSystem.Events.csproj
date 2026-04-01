@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Legacy.Default\Framework.Infrastructure.Legacy.Default.csproj" />
     <ProjectReference Include="..\SampleSystem.Generated.DTO\SampleSystem.Generated.DTO.csproj" />
   </ItemGroup>
 

@@ -16,9 +16,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BLL\Framework.BLL.DTOMapping\Framework.BLL.DTOMapping.csproj" />
+    <ProjectReference Include="..\..\BLL\Framework.BLL\Framework.BLL.csproj" />
     <ProjectReference Include="..\..\Database\Framework.Database.Abstractions\Framework.Database.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Database\Framework.Tracking\Framework.Tracking.csproj" />
     <ProjectReference Include="..\..\Projection\Framework.Projection.Domain\Framework.Projection.Domain.csproj" />
     <ProjectReference Include="..\..\Validation\Framework.Validation.Abstractions\Framework.Validation.Abstractions.csproj" />
+    <ProjectReference Include="..\Framework.Infrastructure\Framework.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

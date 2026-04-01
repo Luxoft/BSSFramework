@@ -31,7 +31,7 @@ public class BssFrameworkBuilder : IBssFrameworkBuilder, IServiceInitializer
 
     public IBssFrameworkBuilder AddSecuritySystem(Action<ISecuritySystemBuilder> setupAction)
     {
-        this.registerActions.Add(sc => sc.AddSecuritySystem(s =>
+        this.registerActions.Add(services => services.AddSecuritySystem(s =>
         {
             s.SetQueryableSource<DalQueryableSource>();
             s.SetGenericRepository<DalGenericRepository>();
@@ -45,7 +45,7 @@ public class BssFrameworkBuilder : IBssFrameworkBuilder, IServiceInitializer
 
     public IBssFrameworkBuilder AddNamedLocks(Action<IGenericNamedLockBuilder> setupAction)
     {
-        this.registerActions.Add(sc => sc.AddNamedLocks(setupAction));
+        this.registerActions.Add(services => services.AddNamedLocks(setupAction));
 
         return this;
     }
@@ -53,7 +53,7 @@ public class BssFrameworkBuilder : IBssFrameworkBuilder, IServiceInitializer
     public IBssFrameworkBuilder AddListener<TListener>()
         where TListener : class, IDALListener
     {
-        this.registerActions.Add(sc => sc.AddListeners(s => s.Add<TListener>()));
+        this.registerActions.Add(services => services.AddListeners(s => s.Add<TListener>()));
 
         return this;
     }

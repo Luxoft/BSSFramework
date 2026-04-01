@@ -1,4 +1,6 @@
-﻿namespace Framework.Infrastructure.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace Framework.Infrastructure.DependencyInjection;
 
 public interface IBssFrameworkBuilderBase<out TSelf>
 {
@@ -7,4 +9,6 @@ public interface IBssFrameworkBuilderBase<out TSelf>
     TSelf AddExtensions<TBssFrameworkExtension>()
         where TBssFrameworkExtension : IBssFrameworkExtension, new() =>
         this.AddExtensions(new TBssFrameworkExtension());
+
+    TSelf AddServices(Action<IServiceCollection> setupAction) => this.AddExtensions(new BssFrameworkExtension(setupAction));
 }

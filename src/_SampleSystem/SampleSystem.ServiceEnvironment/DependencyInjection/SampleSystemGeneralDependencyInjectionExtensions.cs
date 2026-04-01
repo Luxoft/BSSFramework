@@ -1,20 +1,20 @@
 ﻿using CommonFramework;
 
 using Framework.Authorization.Environment;
-using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.DomainDriven.Setup;
+using Framework.Infrastructure.DependencyInjection;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
+using SampleSystem.EventMetadata;
 using SampleSystem.Security;
 
-namespace SampleSystem.ServiceEnvironment;
+namespace SampleSystem.ServiceEnvironment.DependencyInjection;
 
 public static class SampleSystemGeneralDependencyInjectionExtensions
 {
-    public static IServiceCollection RegisterGeneralDependencyInjection(this IServiceCollection services, IConfiguration configuration, Action<IBssFrameworkSettings> setupAction)
+    public static IServiceCollection AddGeneralDependencyInjection(this IServiceCollection services, IConfiguration configuration, Action<IBssFrameworkBuilder> setupAction)
     {
         return services
 
@@ -45,7 +45,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                            .AddListeners()
 
-                           .AddQueryVisitors()
+                           //.AddQueryVisitors()
 
                            // Legacy
 
@@ -57,10 +57,10 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                            .AddContextEvaluators()
                            .AddBLLSystem()
 
-                           .RegisterSupportLegacyServices()
+                           .AddSupportLegacyServices()
                            .Pipe(setupAction);
                    })
 
-               .RegisterGeneralApplicationServices(configuration);
+               .AddGeneralApplicationServices(configuration);
     }
 }

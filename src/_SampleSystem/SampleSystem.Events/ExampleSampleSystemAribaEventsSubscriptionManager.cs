@@ -1,4 +1,4 @@
-﻿using Framework.Events.Legacy;
+﻿using Framework.BLL.Events.SubscriptionManager;
 
 using SampleSystem.Domain;
 

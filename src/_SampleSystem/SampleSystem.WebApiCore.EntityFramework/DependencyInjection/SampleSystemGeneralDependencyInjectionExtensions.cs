@@ -14,7 +14,7 @@ namespace SampleSystem.ServiceEnvironment;
 
 public static class SampleSystemGeneralDependencyInjectionExtensions
 {
-    public static IServiceCollection RegisterGeneralDependencyInjection(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddGeneralDependencyInjection(this IServiceCollection services, IConfiguration configuration)
     {
         return services
 

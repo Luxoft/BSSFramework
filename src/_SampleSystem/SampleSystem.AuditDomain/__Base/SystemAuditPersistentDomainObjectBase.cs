@@ -1,5 +1,5 @@
-﻿using Framework.DomainDriven.DAL.Revisions;
-using Framework.Persistent;
+﻿using Framework.Application.Domain;
+using Framework.Database.Domain;
 
 namespace SampleSystem.AuditDomain
 {

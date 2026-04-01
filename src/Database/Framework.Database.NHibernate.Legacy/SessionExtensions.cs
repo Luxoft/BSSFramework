@@ -16,7 +16,7 @@ internal static class SessionExtensions
         return sessionImpl.Factory.GetEntityPersister(className);
     }
 
-    public static EntityEntry GetEntityEntry(this ISession session, object entity)
+    public static EntityEntry? GetEntityEntry(this ISession session, object entity)
     {
         var sessionImpl = session.GetSessionImplementation();
 

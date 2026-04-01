@@ -1,12 +1,24 @@
 ﻿using System.Reflection;
+
+using CommonFramework.DependencyInjection;
+
+using Framework.Application.Events;
+using Framework.BLL;
 using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.Extensions;
+using Framework.BLL.Services;
+using Framework.BLL.Validation;
 using Framework.Core;
 using Framework.Infrastructure.ApiControllerBaseEvaluator;
 using Framework.Infrastructure.ContextEvaluator;
+using Framework.Infrastructure.Service;
 using Framework.Projection;
+using Framework.Tracking;
+
+using HierarchicalExpand;
 
 using Microsoft.Extensions.DependencyInjection;
+
 using SecuritySystem;
 using SecuritySystem.DomainServices;
 using SecuritySystem.DomainServices.DependencySecurity;
@@ -18,7 +30,23 @@ public static class ServiceCollectionExtensions
 {
     extension(IServiceCollection services)
     {
-        public IServiceCollection RegisterSubscriptionManagers(Action<ISubscriptionManagerSetupObject> setup)
+        public IServiceCollection AddLegacyGenericServices()
+        {
+            services.AddScoped(typeof(EvaluatedData<,>));
+            services.AddKeyedScoped<IEventOperationSender, BLLEventOperationSender>("BLL");
+
+            services.AddSingleton(AvailableValuesHelper.AvailableValues.ToValidation());
+            services.AddScoped(typeof(ITrackingService<>), typeof(TrackingService<>));
+
+            services.ReplaceSingleton<IActualDomainTypeResolver, ProjectionActualDomainTypeResolver>();
+            services.ReplaceSingleton<ISecurityContextInfoSource, ProjectionSecurityContextInfoSource>();
+
+            services.AddSingleton<IExceptionExpander, TargetInvocationExceptionExpander>();
+
+            return services;
+        }
+
+        public IServiceCollection AddSubscriptionManagers(Action<ISubscriptionManagerSetupObject> setup)
         {
             var setupObject = new SubscriptionManagerSetupObject();
 
@@ -32,7 +60,7 @@ public static class ServiceCollectionExtensions
             return services;
         }
 
-        public IServiceCollection RegisterContextEvaluators(bool useSingleCall = false)
+        public IServiceCollection AddContextEvaluators(bool useSingleCall = false)
         {
             services.AddScoped(
                 typeof(IApiControllerBaseEvaluator<,>),
@@ -46,7 +74,7 @@ public static class ServiceCollectionExtensions
             return services;
         }
 
-        public IServiceCollection RegisterProjectionDomainSecurityServices(Assembly assembly)
+        public IServiceCollection AddProjectionDomainSecurityServices(Assembly assembly)
         {
             var projectionsRequest = from type in assembly.GetTypes()
 

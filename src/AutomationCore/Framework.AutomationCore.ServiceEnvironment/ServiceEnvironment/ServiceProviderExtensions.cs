@@ -42,7 +42,7 @@ public static class ServiceProviderExtensions
 
     extension(IServiceCollection services)
     {
-        public IServiceCollection RegisterControllers(
+        public IServiceCollection AddControllers(
             Assembly[] assemblies,
             params Type[] exceptControllers)
         {
@@ -56,7 +56,7 @@ public static class ServiceProviderExtensions
             return services;
         }
 
-        public IServiceCollection RegisterJobs(Assembly[] assemblies)
+        public IServiceCollection AddJobs(Assembly[] assemblies)
         {
             foreach (var controllerType in assemblies.SelectMany(a => a.GetTypes())
                                                      .Where(t => !t.IsAbstract && typeof(IJob).IsAssignableFrom(t)))

@@ -1,4 +1,9 @@
-﻿namespace Framework.Infrastructure.SubscriptionService;
+﻿using Framework.BLL;
+using Framework.BLL.DTOMapping.Domain;
+using Framework.Configuration.BLL;
+using Framework.Configuration.Domain;
+
+namespace Framework.Infrastructure.SubscriptionService;
 
 /// <summary>
 /// Сервис для сохрания модификаций в локальную бд http://readthedocs/docs/iad-framework/en/master/KB/integrations/EventDTO.html

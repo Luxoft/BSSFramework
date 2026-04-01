@@ -1,22 +1,21 @@
-﻿//using Framework.Configuration.BLL;
-//using Framework.Core;
-//using Framework.Core.TypeResolving;
-//using Framework.DomainDriven.BLL;
-//using Framework.DomainDriven.BLL.Security;
-//using Framework.Persistent;
+﻿using Framework.Application.Domain;
+using Framework.BLL;
+using Framework.BLL.Services;
+using Framework.Configuration.BLL.TargetSystemService;
+using Framework.Core.TypeResolving;
 
-//namespace Framework.DomainDriven.Setup;
+namespace Framework.Infrastructure.DependencyInjection;
 
-//public interface ITargetSystemRootSettings
-//{
-//    bool RegisterBase { get; set; }
+public interface ITargetSystemRootSettings
+{
+    bool RegisterBase { get; set; }
 
-//    bool RegisterAuthorization { get; set; }
+    bool RegisterAuthorization { get; set; }
 
-//    bool RegisterConfiguration { get; set; }
+    bool RegisterConfiguration { get; set; }
 
-//    ITargetSystemRootSettings AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(string name, Guid id, bool isMain, bool isRevision, IEnumerable<DomainTypeInfo> domainTypes)
-//        where TBLLContext : class, ITypeResolverContainer<string>,
-//        ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
-//        where TPersistentDomainObjectBase : class, IIdentityObject<Guid>;
-//}
+    ITargetSystemRootSettings AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(string name, Guid id, bool isMain, bool isRevision, IEnumerable<DomainTypeInfo> domainTypes)
+        where TBLLContext : class, ITypeResolverContainer<string>,
+        ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
+        where TPersistentDomainObjectBase : class, IIdentityObject<Guid>;
+}

@@ -34,7 +34,7 @@ public struct DatabaseScriptGeneratorStrategyInfo
         DatabaseScriptGeneratorMode databaseGeneratorMode,
         IDataTypeComparer dataTypeComparer,
         string previousPostfix,
-        ICollection<string> ignoredIndexes)
+        ICollection<string>? ignoredIndexes)
     {
         this.DomainTypesLocal = domainTypesLocal;
         this.Context = context;

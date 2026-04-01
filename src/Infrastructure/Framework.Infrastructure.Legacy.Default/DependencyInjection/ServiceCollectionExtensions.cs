@@ -1,50 +1,44 @@
-﻿using System.Reflection;
+﻿using CommonFramework.DependencyInjection;
 
-using CommonFramework.DependencyInjection;
-
-using Framework.ApplicationVariable;
+using Framework.Application.ApplicationVariable;
+using Framework.Application.Events;
+using Framework.Application.Lock;
 using Framework.Authorization.BLL;
 using Framework.Authorization.Events;
 using Framework.Authorization.Generated.DTO;
+using Framework.BLL.DependencyInjection;
 using Framework.BLL.DTOMapping.DTOMapper;
+using Framework.BLL.Events.SubscriptionManager;
+using Framework.BLL.Services;
 using Framework.Configuration.BLL;
+using Framework.Configuration.BLL.Jobs;
 using Framework.Configuration.BLL.Notification;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+using Framework.Configuration.BLL.Subscriptions;
+using Framework.Configuration.BLL.SubscriptionSystemService;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
 using Framework.Configuration.Generated.DTO;
-using Framework.Core;
 using Framework.Core.MessageSender;
 using Framework.Database;
-using Framework.DomainDriven._Visitors;
-using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.Lock;
-using Framework.DomainDriven.ServiceModel.Service;
-using Framework.DomainDriven.Setup;
-using Framework.Events;
-using Framework.Events.Legacy;
-using Framework.Projection;
-using Framework.OData.QueryLanguage;
-using Framework.Security;
+using Framework.Infrastructure.LocalDBEvents;
+using Framework.Infrastructure.SubscriptionService;
+using Framework.Notification.Domain;
 
 using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem;
+
 using SecuritySystem.DependencyInjection;
-using SecuritySystem.DomainServices;
-using SecuritySystem.DomainServices.DependencySecurity;
-
-using HierarchicalExpand;
-
-using SecuritySystem.SecurityRuleInfo;
-using Framework.DomainDriven.ServiceModel.IAD;
 
 namespace Framework.Infrastructure.DependencyInjection;
 
-public static class ServiceCollectionExtensions2
+public static class ServiceCollectionExtensions
 {
     extension(IServiceCollection services)
     {
-        public IServiceCollection RegisterLegacyGenericServices()
+        public IServiceCollection AddNotificationJob() => services.AddScoped<ISendNotificationsJob, SendNotificationsJob>();
+
+        public IServiceCollection AddLegacyDefaultGenericServices()
         {
             services.AddScoped<IApplicationVariableStorage, ConfigurationApplicationVariableStorage>();
             services.AddScoped<IEventSystem, ConfigurationEventSystem>();
@@ -60,27 +54,13 @@ public static class ServiceCollectionExtensions2
             services.AddScoped<IAuthorizationDTOMappingService, AuthorizationServerPrimitiveDTOMappingService>();
             services.AddScoped<IConfigurationDTOMappingService, ConfigurationServerPrimitiveDTOMappingService>();
 
-            services.AddKeyedScoped<IEventOperationSender, BLLEventOperationSender>("BLL");
-
-            services.AddScoped(typeof(EvaluatedData<,>));
-
-            services.AddSingleton<ISelectOperationParser, StandardExpressionBuilder>();
-
             services.AddScoped<IStandardSubscriptionService, LocalDBSubscriptionService>();
 
-            services.AddSingleton(AvailableValuesHelper.AvailableValues.ToValidation());
-
-            services.AddSingleton<IPersistentInfoService, PersistentInfoService>();
-
             services.AddScoped<IRootSecurityService, RootSecurityService>();
-            services.AddScoped(typeof(ITrackingService<>), typeof(TrackingService<>));
 
-            services.RegisterAuthorizationBLL();
-            services.RegisterConfigurationBLL();
-            services.RegisterConfigurationNamedLocks();
-
-            services.ReplaceSingleton<IActualDomainTypeResolver, ProjectionActualDomainTypeResolver>();
-            services.ReplaceSingleton<ISecurityContextInfoSource, ProjectionSecurityContextInfoSource>();
+            services.AddAuthorizationBLL();
+            services.AddConfigurationBLL();
+            services.AddConfigurationNamedLocks();
 
             services
                 .AddScoped<IDomainEventDTOMapper<Framework.Authorization.Domain.PersistentDomainObjectBase>,
@@ -93,47 +73,36 @@ public static class ServiceCollectionExtensions2
 
             services.AddSingleton(typeof(RuntimeDomainEventDTOConverter<,,>));
 
-            services
-                .AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<
-                    Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>();
+            //services
+            //    .AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<
+            //        Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>();
 
             return services;
         }
 
-        private IServiceCollection RegisterAuthorizationBLL()
-        {
-            return services.RegisterBLLSystem<IAuthorizationBLLContext, AuthorizationBLLContext>();
-        }
+        private IServiceCollection AddAuthorizationBLL() => services.AddBLLSystem<IAuthorizationBLLContext, AuthorizationBLLContext>();
 
-        private IServiceCollection RegisterConfigurationBLL()
-        {
-            return services
-                   .RegisterBLLSystem<IConfigurationBLLContext, ConfigurationBLLContext>()
-                   .AddScoped<ISubscriptionBLL, SubscriptionBLL>()
+        private IServiceCollection AddConfigurationBLL() =>
+            services
+                .AddBLLSystem<IConfigurationBLLContext, ConfigurationBLLContext>()
+                .AddScoped<ISubscriptionBLL, SubscriptionBLL>()
 
-                   .AddScopedFrom<ICurrentRevisionService, IDBSession>()
-                   .AddScoped<IMessageSender<Notification.MessageTemplateNotification>, TemplateMessageSender>()
-                   .AddScoped<IMessageSender<Notification.DTO.NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>();
-        }
+                .AddScopedFrom<ICurrentRevisionService, IDBSession>()
+                .AddScoped<IMessageSender<MessageTemplateNotification>, TemplateMessageSender>()
+                .AddScoped<IMessageSender<Notification.DTO.NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>();
 
-
-        private IServiceCollection RegisterConfigurationNamedLocks()
-        {
-            return services.AddKeyedSingleton<INamedLockSource>(
+        private IServiceCollection AddConfigurationNamedLocks() =>
+            services.AddKeyedSingleton<INamedLockSource>(
                 RootNamedLockSource.ElementsKey,
                 new NamedLockTypeContainerSource(typeof(ConfigurationNamedLock)));
-        }
     }
 
 
-    public static ISecuritySystemBuilder AddConfigurationSecurity(this ISecuritySystemBuilder securitySystemSettings)
-    {
-        return securitySystemSettings
-               .AddDomainSecurity<ExceptionMessage>(b => b.SetView(SecurityRole.Administrator))
-               .AddDomainSecurity<Sequence>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
-               .AddDomainSecurity<SystemConstant>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
-               .AddDomainSecurity<CodeFirstSubscription>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
-               .AddDomainSecurity<TargetSystem>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
-               .AddDomainSecurity<DomainType>(b => b.SetView(SecurityRule.Disabled));
-    }
+    public static ISecuritySystemBuilder AddConfigurationSecurity(this ISecuritySystemBuilder securitySystemSettings) =>
+        securitySystemSettings
+            .AddDomainSecurity<Sequence>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
+            .AddDomainSecurity<SystemConstant>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
+            .AddDomainSecurity<CodeFirstSubscription>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
+            .AddDomainSecurity<TargetSystem>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
+            .AddDomainSecurity<DomainType>(b => b.SetView(SecurityRule.Disabled));
 }

@@ -7,7 +7,6 @@ using Framework.Application.Repository;
 using Framework.Application.Repository.Default;
 using Framework.Application.Repository.Generic;
 using Framework.Database;
-using Framework.Database.ExpressionVisitorContainer;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -30,10 +29,10 @@ public static class ServiceCollectionExtensions
         {
             services.TryAddSingleton(TimeProvider.System);
 
-            services.RegisterFinancialYearServices();
-            services.RegisterRepository();
-            services.RegisterEvaluators();
-            services.RegisterJobs();
+            services.AddFinancialYearServices();
+            services.AddRepository();
+            services.AddEvaluators();
+            services.AddJobs();
 
             services.AddSingleton<IDBSessionEvaluator, DbSessionEvaluator>();
 
@@ -42,7 +41,7 @@ public static class ServiceCollectionExtensions
             return services;
         }
 
-        private IServiceCollection RegisterRepository()
+        private IServiceCollection AddRepository()
         {
             services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.Disabled), typeof(Repository<>));
             services.AddKeyedScoped(typeof(IRepository<>), nameof(SecurityRule.View), typeof(ViewRepository<>));
@@ -56,7 +55,7 @@ public static class ServiceCollectionExtensions
             return services;
         }
 
-        private IServiceCollection RegisterFinancialYearServices()
+        private IServiceCollection AddFinancialYearServices()
         {
             services.AddSingleton<IFinancialYearCalculator, FinancialYearCalculator>();
             services.AddSingleton<FinancialYearServiceSettings>();
@@ -65,14 +64,14 @@ public static class ServiceCollectionExtensions
             return services;
         }
 
-        private IServiceCollection RegisterEvaluators()
+        private IServiceCollection AddEvaluators()
         {
             services.AddSingleton(typeof(IServiceEvaluator<>), typeof(ServiceEvaluator<>));
 
             return services;
         }
 
-        private IServiceCollection RegisterJobs()
+        private IServiceCollection AddJobs()
         {
             services.AddSingleton<IJobServiceEvaluatorFactory, JobServiceEvaluatorFactory>();
             services.AddSingleton(typeof(IJobServiceEvaluator<>), typeof(JobServiceEvaluator<>));

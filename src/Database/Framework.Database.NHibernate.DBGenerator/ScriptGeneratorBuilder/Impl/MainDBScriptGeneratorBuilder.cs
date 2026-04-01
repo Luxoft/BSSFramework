@@ -13,8 +13,8 @@ class MainDBScriptGeneratorBuilder : DatabaseScriptGeneratorContainer, IMainDBSc
     public IMainDBScriptGeneratorBuilder WithMain(
         DatabaseScriptGeneratorMode mode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
         string previousColumnPostfix = "_previousVersion",
-        ICollection<string> ignoredIndexes = null,
-        IDataTypeComparer dataTypeComparer = null)
+        ICollection<string>? ignoredIndexes = null,
+        IDataTypeComparer? dataTypeComparer = null)
     {
         this.ValidateConfigurate();
 

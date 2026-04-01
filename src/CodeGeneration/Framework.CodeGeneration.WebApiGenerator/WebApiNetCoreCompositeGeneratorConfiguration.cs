@@ -1,8 +1,6 @@
 ﻿using System.CodeDom;
 using System.Collections.Immutable;
 
-using CommonFramework;
-
 using Framework.CodeGeneration.FileFactory;
 using Framework.CodeGeneration.GeneratePolicy;
 using Framework.CodeGeneration.ServiceModelGenerator;

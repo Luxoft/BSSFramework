@@ -10,8 +10,6 @@ using Framework.Database.SqlMapper;
 
 using Microsoft.SqlServer.Management.Smo;
 
-using Index = Microsoft.SqlServer.Management.Smo.Index;
-
 namespace Framework.Database.NHibernate.DBGenerator.ScriptGenerators.ScriptGeneratorStrategy;
 
 /// <summary>

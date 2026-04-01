@@ -4,8 +4,6 @@ using System.Reflection;
 using CommonFramework;
 using CommonFramework.Maybe;
 
-using Framework.Core;
-
 namespace Framework.Database._Visitors;
 
 public class OverrideHasFlagVisitor : ExpressionVisitor

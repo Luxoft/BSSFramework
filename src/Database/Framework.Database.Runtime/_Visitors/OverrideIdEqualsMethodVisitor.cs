@@ -3,8 +3,6 @@ using System.Reflection;
 
 using CommonFramework;
 
-using Framework.Core;
-
 namespace Framework.Database._Visitors;
 
 internal class OverrideIdEqualsMethodVisitor<TIdent> : ExpressionVisitor

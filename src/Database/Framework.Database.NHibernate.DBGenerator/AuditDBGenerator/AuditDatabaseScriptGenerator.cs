@@ -13,7 +13,6 @@ using Framework.Database.NHibernate.DBGenerator.Team;
 using Framework.Projection;
 
 using NHibernate.Cfg;
-using NHibernate.Dialect;
 using NHibernate.Dialect.Schema;
 using NHibernate.Envers.Configuration.Attributes;
 using NHibernate.Id;

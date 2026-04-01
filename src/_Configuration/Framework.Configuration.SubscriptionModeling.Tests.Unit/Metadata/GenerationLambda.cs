@@ -1,5 +1,7 @@
-﻿using Framework.Configuration.SubscriptionModeling._General;
-using Framework.Notification;
+﻿using Framework.Subscriptions;
+using Framework.Subscriptions.Domain;
+
+using DomainObjectChangeType = Framework.Subscriptions.DomainObjectChangeType;
 
 namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;
 

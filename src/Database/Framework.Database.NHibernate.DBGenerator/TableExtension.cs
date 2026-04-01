@@ -5,8 +5,6 @@ using Framework.Database.Metadata;
 
 using Microsoft.SqlServer.Management.Smo;
 
-using Index = Microsoft.SqlServer.Management.Smo.Index;
-
 namespace Framework.Database.NHibernate.DBGenerator;
 
 internal static class DbGeneratorExtensions

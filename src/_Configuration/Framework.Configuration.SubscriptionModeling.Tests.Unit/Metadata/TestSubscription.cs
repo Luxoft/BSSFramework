@@ -1,5 +1,6 @@
-﻿using Framework.Configuration.SubscriptionModeling._General;
-using Framework.Notification;
+﻿using Framework.Subscriptions;
+using Framework.Subscriptions.Domain;
+
 using SecuritySystem;
 
 namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;

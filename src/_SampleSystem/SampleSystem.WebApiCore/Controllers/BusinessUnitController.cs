@@ -2,7 +2,6 @@
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Persistent;
 using Framework.BLL.OData;
-using Framework.Core;
 using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;

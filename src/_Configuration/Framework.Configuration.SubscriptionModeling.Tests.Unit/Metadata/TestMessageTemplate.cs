@@ -1,4 +1,6 @@
-﻿namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;
+﻿using Framework.Subscriptions;
+
+namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;
 
 internal sealed class TestMessageTemplate : RazorTemplate<object>
 {

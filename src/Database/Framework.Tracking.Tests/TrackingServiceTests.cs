@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 
+using Framework.Database;
+
 using NSubstitute;
 
 using NUnit.Framework;

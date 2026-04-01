@@ -14,4 +14,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Database\Framework.Database.Runtime\Framework.Database.Runtime.csproj" />
+  </ItemGroup>
+
 </Project>

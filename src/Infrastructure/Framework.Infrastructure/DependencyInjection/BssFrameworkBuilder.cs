@@ -1,5 +1,4 @@
-﻿using CommonFramework.Auth;
-using CommonFramework.DependencyInjection;
+﻿using CommonFramework.DependencyInjection;
 
 using Framework.Application;
 using Framework.Application.Auth;

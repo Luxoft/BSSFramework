@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;
+using Framework.Subscriptions;
+
 using NUnit.Framework;
 
 namespace Framework.Configuration.SubscriptionModeling.Tests.Unit;

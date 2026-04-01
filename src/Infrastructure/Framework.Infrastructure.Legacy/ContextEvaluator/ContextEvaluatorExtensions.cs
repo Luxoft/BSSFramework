@@ -1,6 +1,5 @@
 ﻿using CommonFramework;
 
-using Framework.Core;
 using Framework.Database;
 using Framework.Infrastructure.Service;
 

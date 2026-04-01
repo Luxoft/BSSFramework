@@ -3,7 +3,6 @@
 using CommonFramework;
 
 using Framework.Core;
-using Framework.Database.Attributes;
 using Framework.Database.Mapping;
 using Framework.Relations;
 

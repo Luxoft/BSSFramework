@@ -1,12 +1,7 @@
-﻿using System.Data;
-
-using CommonFramework.DependencyInjection;
+﻿using CommonFramework.DependencyInjection;
 
 using Framework.Core.LazyObject;
-using Framework.Database.ConnectionStringSource;
-using Framework.Database.DALExceptions;
 using Framework.Database.ExpressionVisitorContainer;
-using Framework.Database.NHibernate.Audit;
 using Framework.Database.NHibernate.Sessions;
 using Framework.DependencyInjection;
 

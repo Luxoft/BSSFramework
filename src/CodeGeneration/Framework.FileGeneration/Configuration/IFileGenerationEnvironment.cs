@@ -2,8 +2,6 @@
 using Framework.Projection;
 using Framework.Projection.ExtendedMetadata;
 
-using SecuritySystem;
-
 namespace Framework.FileGeneration.Configuration;
 
 public interface IFileGenerationEnvironment : IDomainMetadata, IServiceProviderContainer

@@ -1,6 +1,5 @@
 ﻿using CommonFramework;
 
-using Framework.Core;
 using Framework.Notification.Domain;
 
 namespace Framework.Subscriptions.Domain;

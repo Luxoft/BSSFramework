@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.DomainDriven.BLLCoreGenerator</PackageId>
+    <PackageId>Luxoft.Framework.CodeGeneration.BLLCoreGenerator</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

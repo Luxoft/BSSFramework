@@ -3,7 +3,7 @@
 namespace Framework.Infrastructure.SubscriptionService;
 
 /// <summary>
-/// Костыль для выноса всех зависимостей от WCF из сборки Framework.DomainDriven.ServiceModel.IAD
+/// Костыль для выноса всех зависимостей от WCF
 /// Является копией интерфейса IDefaultActiveSubscriptionService
 /// </summary>
 public interface IStandardSubscriptionService

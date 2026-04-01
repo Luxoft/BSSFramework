@@ -246,7 +246,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 
         if (!overrideMappingSettings.Any())
         {
-            throw new ArgumentException("Framework.DomainDriven.Settings no has empty assemblyWithMapping");
+            throw new ArgumentException("Settings no has empty assemblyWithMapping");
         }
 
         foreach (var ms in overrideMappingSettings)

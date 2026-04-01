@@ -1,4 +1,5 @@
-﻿using SampleSystem.ServiceEnvironment.NHibernate;
+﻿using SampleSystem.ServiceEnvironment.DependencyInjection;
+using SampleSystem.ServiceEnvironment.NHibernate;
 
 namespace SampleSystem.WebApiCore;
 

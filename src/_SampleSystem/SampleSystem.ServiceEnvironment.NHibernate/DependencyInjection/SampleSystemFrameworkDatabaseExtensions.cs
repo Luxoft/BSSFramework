@@ -2,17 +2,17 @@
 
 using Framework.Authorization.Generated.DAL.NHibernate;
 using Framework.Configuration.Generated.DAL.NHibernate;
-using Framework.DomainDriven;
-using Framework.DomainDriven.NHibernate;
-using Framework.DomainDriven.NHibernate.LegacyContext;
-using Framework.DomainDriven.Setup;
+using Framework.Database;
+using Framework.Database.NHibernate;
+using Framework.Database.NHibernate.DependencyInjection;
+using Framework.Infrastructure.DependencyInjection;
 
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.AuditDAL.NHibernate;
 using SampleSystem.Generated.DAL.NHibernate;
 
-namespace SampleSystem.ServiceEnvironment.NHibernate;
+namespace SampleSystem.ServiceEnvironment.DependencyInjection;
 
 public class SampleSystemNHibernateExtension(bool includeTypedAudit) : IBssFrameworkExtension
 {

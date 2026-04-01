@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 
-using Framework.DomainDriven;
-using Framework.DomainDriven.NHibernate;
+using Framework.Database;
+using Framework.Database.NHibernate._MappingSettings;
 
 using SampleSystem.Domain;
 

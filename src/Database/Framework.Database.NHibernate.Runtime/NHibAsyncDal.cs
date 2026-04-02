@@ -1,8 +1,5 @@
 ﻿using CommonFramework;
 using CommonFramework.IdentitySource;
-
-using Framework.Core;
-using Framework.Database.ExpressionVisitorContainer;
 using Framework.Database.NHibernate.Sessions;
 
 using GenericQueryable.NHibernate;
@@ -27,8 +24,7 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
     {
         var queryable = this.NativeSession.Query<TDomainObject>();
 
-        var queryProvider = (queryable.Provider as VisitedNHibQueryProvider)
-                            .FromMaybe(() => "Register VisitedQueryProvider in Nhib configuration");
+        var queryProvider = (queryable.Provider as VisitedNHibQueryProvider).FromMaybe(() => "Register VisitedQueryProvider in Nhib configuration");
 
         queryProvider.Visitor = expressionVisitorContainer.Visitor;
         queryProvider.Executor = genericQueryableExecutor;
@@ -38,42 +34,56 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
 
     public TDomainObject Load(TIdent id) => this.NativeSession.Load<TDomainObject>(id);
 
-    public Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken = default) =>
+    public Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken) =>
         this.NativeSession.LoadAsync<TDomainObject>(id, cancellationToken);
 
-    public Task RefreshAsync(TDomainObject domainObject, CancellationToken cancellationToken = default) =>
+    public Task RefreshAsync(TDomainObject domainObject, CancellationToken cancellationToken) =>
         this.NativeSession.RefreshAsync(domainObject, cancellationToken);
 
     public async Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken)
     {
         this.CheckWrite();
 
+        await this.ActualSaveAsync(domainObject, cancellationToken);
+    }
+
+    private Task ActualSaveAsync(TDomainObject domainObject, CancellationToken cancellationToken)
+    {
         if (!session.NativeSession.Contains(domainObject))
         {
             var id = identityInfo.Id.Getter(domainObject);
 
             if (!EqualityComparer<TIdent>.Default.Equals(id, default))
             {
-                await session.NativeSession.SaveAsync(domainObject, id, cancellationToken);
+                return session.NativeSession.SaveAsync(domainObject, id, cancellationToken);
             }
         }
 
-        await session.NativeSession.SaveOrUpdateAsync(domainObject, cancellationToken);
+        return session.NativeSession.SaveOrUpdateAsync(domainObject, cancellationToken);
     }
 
-    public async Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken = default)
+    public async Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken)
     {
-        if (id.IsDefault())
-        {
-            throw new ArgumentOutOfRangeException(nameof(id), "The given identifier is not initialized");
-        }
-
         this.CheckWrite();
 
-        await this.NativeSession.SaveAsync(domainObject, id, cancellationToken);
+        await this.ActualInsertAsync(domainObject, id, cancellationToken);
     }
 
-    public async Task RemoveAsync(TDomainObject domainObject, CancellationToken cancellationToken = default)
+    public Task ActualInsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken)
+    {
+        this.CheckWrite();
+
+        if (EqualityComparer<TIdent>.Default.Equals(id, default))
+        {
+            return session.NativeSession.SaveOrUpdateAsync(domainObject, cancellationToken);
+        }
+        else
+        {
+            return this.NativeSession.SaveAsync(domainObject, id, cancellationToken);
+        }
+    }
+
+    public async Task RemoveAsync(TDomainObject domainObject, CancellationToken cancellationToken)
     {
         this.CheckWrite();
 

@@ -9,6 +9,7 @@ using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Services;
 using Framework.BLL.Validation;
 using Framework.Core;
+using Framework.Database;
 using Framework.Infrastructure.ApiControllerBaseEvaluator;
 using Framework.Infrastructure.ContextEvaluator;
 using Framework.Infrastructure.Service;
@@ -44,6 +45,8 @@ public static class ServiceCollectionExtensions
             services.ReplaceSingleton<ISecurityContextInfoSource, ProjectionSecurityContextInfoSource>();
 
             services.AddSingleton<IExceptionExpander, TargetInvocationExceptionExpander>();
+
+            services.AddKeyedSingleton<IExpressionVisitorContainer, ExpandPathVisitorContainer>(IExpressionVisitorContainer.ElementKey);
 
             services.AddOData();
 

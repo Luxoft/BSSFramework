@@ -30,6 +30,4 @@ public class FixNHibArrayContainsVisitor : ExpressionVisitor
 
         return base.Visit(node);
     }
-
-    public static readonly FixNHibArrayContainsVisitor Value = new();
 }

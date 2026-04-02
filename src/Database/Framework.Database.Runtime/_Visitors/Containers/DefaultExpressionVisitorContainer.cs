@@ -2,13 +2,11 @@
 
 using CommonFramework.Visitor;
 
-using Framework.Database.ExpressionVisitorContainer;
+namespace Framework.Database._Visitors.Containers;
 
-namespace Framework.Database._Visitors.Specific;
-
-public class ExpressionVisitorContainerDefaultItem : IExpressionVisitorContainerItem
+public class DefaultExpressionVisitorContainer : ExpressionVisitorAggregator
 {
-    public IEnumerable<ExpressionVisitor> GetVisitors()
+    protected override IEnumerable<ExpressionVisitor> GetVisitors()
     {
         yield return OptimizeBooleanLogicVisitor.Value;
         yield return SquashWhereQueryableVisitor.Value;

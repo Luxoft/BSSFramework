@@ -261,7 +261,7 @@ public partial class Employee :
     ////}
 
     [ExpandPath("HRDepartment.Location")]
-    public virtual Location Location => this.HRDepartment?.Location;
+    public virtual Location Location => this.HRDepartment.Location;
 
     [ExpandPath("HRDepartment.Location.Code")]
     public virtual int? LocationCode => this.Location?.Code;

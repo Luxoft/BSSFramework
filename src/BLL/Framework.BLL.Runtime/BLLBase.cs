@@ -46,23 +46,12 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     #endregion
 
 
-    private void InternalSave(TDomainObject domainObject, TIdent id = default(TIdent))
+    public override void Save(TDomainObject domainObject)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
-
-        if (id.IsDefault())
-        {
-            this.dal.Save(domainObject);
-        }
-        else
-        {
-            this.dal.Insert(domainObject, id);
-        }
+        this.dal.Save(domainObject);
 
         base.Save(domainObject);
     }
-
-    public override void Save(TDomainObject domainObject) => this.InternalSave(domainObject);
 
     public virtual void Insert(TDomainObject domainObject, TIdent id)
     {
@@ -73,10 +62,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
             throw new ArgumentOutOfRangeException(nameof(id));
         }
 
-        var isSimpleSave = !domainObject.Id.IsDefault()
-                           && this.GetUnsecureQueryable().Any(this.IdentityInfo.CreateContainsFilter([domainObject.Id]));
-
-        this.InternalSave(domainObject, isSimpleSave ? default! : id);
+        this.dal.Insert(domainObject, id);
     }
 
     public override void Remove(TDomainObject domainObject)

@@ -3,10 +3,9 @@
 using CommonFramework.DependencyInjection;
 
 using Framework.Core.LazyObject;
-using Framework.Database._Visitors.Specific;
+using Framework.Database._Visitors.Containers;
 using Framework.Database.ConnectionStringSource;
 using Framework.Database.DALExceptions;
-using Framework.Database.ExpressionVisitorContainer;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -74,8 +73,6 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
 
         services.AddScoped<IDBSessionManager, DBSessionManager>();
 
-        services.AddSingleton<IExpressionVisitorContainer, ExpressionVisitorAggregator>();
-
         services.AddScoped<IPersistentInfoService, PersistentInfoService>();
 
         //For close db session by middleware
@@ -100,12 +97,13 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
 
     private static IServiceCollection RegistryGenericDatabaseVisitors(IServiceCollection services)
     {
-        //services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
-        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPeriodItem>();
-        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDefaultItem>();
-        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerMathItem>();
+        services.AddSingleton<IExpressionVisitorContainer, RootExpressionVisitorContainer>();
 
-        services.AddSingleton<IIdPropertyResolver, IdPropertyResolver>();
+        //services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
+        services.AddKeyedSingleton<IExpressionVisitorContainer, PeriodExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey);
+        services.AddKeyedSingleton<IExpressionVisitorContainer, DefaultExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey);
+        services.AddKeyedSingleton<IExpressionVisitorContainer, MathExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey);
+        services.AddKeyedSingleton<IExpressionVisitorContainer, OverrideEqualsDomainObjectVisitorContainer>(IExpressionVisitorContainer.ElementKey);
 
         return services;
     }

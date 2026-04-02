@@ -1,8 +1,8 @@
 ﻿using Framework.Application.DependencyInjection;
 using Framework.Application.Events;
+using Framework.Database;
 using Framework.Database.DALListener;
 using Framework.Database.DependencyInjection;
-using Framework.Database.ExpressionVisitorContainer;
 
 using SecuritySystem.DependencyInjection;
 
@@ -24,6 +24,6 @@ public interface IBssFrameworkSetup : IBssFrameworkSetup<IBssFrameworkSetup>
     IBssFrameworkSetup SetDomainObjectEventMetadata<T>()
         where T : IDomainObjectEventMetadata;
 
-    IBssFrameworkSetup AddQueryVisitors<TExpressionVisitorContainerItem>(bool scoped = false)
-        where TExpressionVisitorContainerItem : class, IExpressionVisitorContainerItem;
+    IBssFrameworkSetup AddQueryVisitors<TExpressionVisitorContainer>()
+        where TExpressionVisitorContainer : class, IExpressionVisitorContainer;
 }

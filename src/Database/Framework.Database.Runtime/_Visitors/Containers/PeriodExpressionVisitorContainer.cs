@@ -3,13 +3,12 @@
 using CommonFramework;
 
 using Framework.Core;
-using Framework.Database.ExpressionVisitorContainer;
 
-namespace Framework.Database._Visitors.Specific;
+namespace Framework.Database._Visitors.Containers;
 
-public class ExpressionVisitorContainerPeriodItem : IExpressionVisitorContainerItem
+public class PeriodExpressionVisitorContainer : ExpressionVisitorAggregator
 {
-    public IEnumerable<ExpressionVisitor> GetVisitors()
+    protected override IEnumerable<ExpressionVisitor> GetVisitors()
     {
         yield return new OverrideMethodInfoVisitor<Func<Period, DateTime, bool>>(
             CommonPeriodExtensions.Contains,

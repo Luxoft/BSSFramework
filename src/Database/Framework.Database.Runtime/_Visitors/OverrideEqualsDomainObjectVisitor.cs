@@ -1,62 +1,50 @@
-﻿//using System.Collections.Concurrent;
-//using System.Linq.Expressions;
-//using System.Reflection;
+﻿using System.Collections.Concurrent;
+using System.Linq.Expressions;
 
-//using CommonFramework;
-//using CommonFramework.Maybe;
+using CommonFramework;
+using CommonFramework.IdentitySource;
+using CommonFramework.Maybe;
 
-//using Framework.Application.Domain;
+namespace Framework.Database._Visitors;
 
-//namespace Framework.Database._Visitors;
+public class OverrideEqualsDomainObjectVisitor(IServiceProxyFactory serviceProxyFactory, IIdentityInfoSource identityInfoSource) : ExpressionVisitor
+{
+    private readonly ConcurrentDictionary<Type, IOverrideEqualsDomainObjectMapper?> mapperCache = [];
 
-//public class OverrideEqualsDomainObjectVisitor<TIdent> : ExpressionVisitor
-//{
-//    private static readonly ConcurrentDictionary<PropertyInfo, OverrideEqualsDomainObjectVisitor<TIdent>> Cache = new ConcurrentDictionary<PropertyInfo, OverrideEqualsDomainObjectVisitor<TIdent>>();
+    protected override Expression VisitBinary(BinaryExpression baseNode)
+    {
+        var baseVisited = base.VisitBinary(baseNode);
 
-//    private readonly PropertyInfo idProperty;
+        var request = from node in (baseVisited as BinaryExpression).ToMaybe()
 
-//    private OverrideEqualsDomainObjectVisitor(PropertyInfo idProperty)
-//    {
-//        if (idProperty == null) throw new ArgumentNullException(nameof(idProperty));
+                      where node.Left.Type == node.Right.Type && node.NodeType == ExpressionType.Equal || node.NodeType == ExpressionType.NotEqual
 
-//        this.idProperty = idProperty;
-//    }
+                      from mapper in this.TryGetMapper(node.Left.Type).ToMaybe()
 
-//    /// <summary> Returns <see cref="OverrideEqualsDomainObjectVisitor{TIdent}"/> for specified <paramref name="property"/>
-//    /// </summary>
-//    /// <param name="property">Property to get ExpressionVisitor for</param>
-//    /// <returns>Expression Visitor</returns>
-//    public static OverrideEqualsDomainObjectVisitor<TIdent> GetOrCreate(PropertyInfo property) => Cache.GetOrAdd(property, pInfo => new OverrideEqualsDomainObjectVisitor<TIdent>(pInfo));
+                      from res in mapper.TryReplace(node)
 
-//    protected override Expression VisitBinary(BinaryExpression node)
-//    {
-//        var applyId = FuncHelper.Create((Expression expr) => Expression.Property(expr, this.idProperty));
-//        var idPropertyDeclaringType = this.idProperty.DeclaringType;
+                      select res;
 
-//        var request = from _ in Maybe.Return()
+        return request.GetValueOrDefault(baseVisited);
+    }
 
-//                      where node.NodeType == ExpressionType.Equal || node.NodeType == ExpressionType.NotEqual
+    private IOverrideEqualsDomainObjectMapper? TryGetMapper(Type domainType) =>
 
-//                      where idPropertyDeclaringType != null && (idPropertyDeclaringType.IsAssignableFrom(node.Left.Type) || idPropertyDeclaringType.IsAssignableFrom(node.Right.Type))
+        this.mapperCache.GetOrAdd(
+            domainType,
+            _ =>
+            {
+                if (identityInfoSource.TryGetIdentityInfo(domainType) is { } identityInfo)
+                {
+                    var innerServiceType = typeof(OverrideEqualsDomainObjectMapper<,>).MakeGenericType(identityInfo.DomainObjectType, identityInfo.IdentityType);
 
-//                      let left = this.Visit(node.Left)
+                    var innerService = serviceProxyFactory.Create<IOverrideEqualsDomainObjectMapper>(innerServiceType, identityInfo);
 
-//                      let right = this.Visit(node.Right)
-
-//                      from res in (from leftVal in left.GetMemberConstValue<IIdentityObject<TIdent>>()
-
-//                                   where !right.GetMemberConstValue().HasValue
-
-//                                   select Expression.MakeBinary(node.NodeType, Expression.Constant(leftVal.Id), applyId(right)))
-
-//                              .Or(() => from rightVal in right.GetMemberConstValue<IIdentityObject<TIdent>>()
-
-//                                        where !left.GetMemberConstValue().HasValue
-
-//                                        select Expression.MakeBinary(node.NodeType, applyId(left), Expression.Constant(rightVal.Id)))
-
-//                      select res;
-
-//        return request.GetValueOrDefault(() => base.VisitBinary(node));
-//    }
-//}
+                    return innerService;
+                }
+                else
+                {
+                    return null;
+                }
+            });
+}

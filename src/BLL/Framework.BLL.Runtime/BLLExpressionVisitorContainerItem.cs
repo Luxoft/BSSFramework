@@ -1,14 +1,11 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.BLL.Domain.Persistent.Visitors;
-using Framework.Database.ExpressionVisitorContainer;
+using Framework.Database;
 
 namespace Framework.BLL;
 
-public class BLLExpressionVisitorContainerItem : IExpressionVisitorContainerItem
+public class ExpandPathVisitorContainer : IExpressionVisitorContainer
 {
-    public IEnumerable<ExpressionVisitor> GetVisitors()
-    {
-        yield return ExpandPathVisitor.Value;
-    }
+    public ExpressionVisitor Visitor { get; } = ExpandPathVisitor.Value;
 }

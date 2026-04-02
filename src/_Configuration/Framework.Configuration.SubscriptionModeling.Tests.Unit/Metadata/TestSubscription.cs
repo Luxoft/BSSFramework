@@ -7,16 +7,16 @@ namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;
 
 internal sealed class TestSubscription : SubscriptionWithCustomModelMetadata<object, object, object, RazorTemplate<object>>
 {
-    private string senderName = "SampleSystem";
-    private string senderEmail = "SampleSystem@luxoft.com";
     private LambdaMetadata<object, object, bool> conditionLambda = new ConditionLambda();
     private LambdaMetadata<object, object, IEnumerable<NotificationMessageGenerationInfo>> generationLambda = new GenerationLambda();
     private LambdaMetadata<object, object, IEnumerable<NotificationMessageGenerationInfo>> copyGenerationLambda = new CopyGenerationLambda();
     private IEnumerable<ISecurityItemSourceLambdaMetadata<object, object, ISecurityContext>> securityItemSourceLambdas = [new SecurityItemSourceSourceLambda()];
 
-    public override string SenderName => this.senderName;
-
-    public override string SenderEmail => this.senderEmail;
+    public TestSubscription()
+    {
+        this.SenderName = "SampleSystem";
+        this.SenderEmail = "SampleSystem@luxoft.com";
+    }
 
     public override LambdaMetadata<object, object, bool> ConditionLambda => this.conditionLambda;
 
@@ -41,10 +41,6 @@ internal sealed class TestSubscription : SubscriptionWithCustomModelMetadata<obj
     public override bool IncludeAttachments { get; protected set; } = true;
 
     public override bool AllowEmptyListOfRecipients { get; protected set; } = true;
-
-    internal void SetSenderName(string senderName) => this.senderName = senderName;
-
-    internal void SetSenderEmail(string senderEmail) => this.senderEmail = senderEmail;
 
     internal void SetConditionLambda(LambdaMetadata<object, object, bool> lambda) => this.conditionLambda = lambda;
 

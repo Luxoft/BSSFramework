@@ -20,7 +20,7 @@ public abstract class SubscriptionWithCustomModelMetadata<TContext, TDomainObjec
         where TTemplate : IRazorTemplate
 {
     /// <inheritdoc />
-    public string Code => this.GetType().FullName;
+    public string Code => this.GetType().FullName!;
 
     /// <summary>
     ///     Получает экземпляр лямбда-выражения Condition.
@@ -28,7 +28,7 @@ public abstract class SubscriptionWithCustomModelMetadata<TContext, TDomainObjec
     /// <value>
     ///     Экземпляр лямбда-выражения Condition.
     /// </value>
-    public virtual LambdaMetadata<TContext, TDomainObject, bool> ConditionLambda { get; protected set; }
+    public virtual LambdaMetadata<TContext, TDomainObject, bool>? ConditionLambda { get; init; }
 
     /// <summary>
     ///     Получает экземпляр лямбда-выражения Generation.
@@ -36,7 +36,7 @@ public abstract class SubscriptionWithCustomModelMetadata<TContext, TDomainObjec
     /// <value>
     ///     Экземпляр лямбда-выражения Generation.
     /// </value>
-    public virtual LambdaMetadata<TContext, TDomainObject, IEnumerable<NotificationMessageGenerationInfo>> GenerationLambda { get; protected set; }
+    public virtual LambdaMetadata<TContext, TDomainObject, IEnumerable<NotificationMessageGenerationInfo>>? GenerationLambda { get; protected init; }
 
     /// <summary>
     ///     Получает экземпляр лямбда-выражения Generation.
@@ -44,7 +44,7 @@ public abstract class SubscriptionWithCustomModelMetadata<TContext, TDomainObjec
     /// <value>
     ///     Экземпляр лямбда-выражения Generation.
     /// </value>
-    public virtual LambdaMetadata<TContext, TDomainObject, IEnumerable<NotificationMessageGenerationInfo>> CopyGenerationLambda { get; protected set; }
+    public virtual LambdaMetadata<TContext, TDomainObject, IEnumerable<NotificationMessageGenerationInfo>>? CopyGenerationLambda { get; protected init; }
 
     /// <summary>
     ///     Получает экземпляр лямбда-выражения Generation для определение replyTo.
@@ -52,13 +52,13 @@ public abstract class SubscriptionWithCustomModelMetadata<TContext, TDomainObjec
     /// <value>
     ///     Экземпляр лямбда-выражения Generation.
     /// </value>
-    public virtual LambdaMetadata<TContext, TDomainObject, IEnumerable<NotificationMessageGenerationInfo>> ReplyToGenerationLambda { get; protected set; }
+    public virtual LambdaMetadata<TContext, TDomainObject, IEnumerable<NotificationMessageGenerationInfo>>? ReplyToGenerationLambda { get; protected init; }
 
 
     /// <summary>
     ///     Получает экземпляр лямбда-выражения Attachment.
     /// </summary>
-    public virtual LambdaMetadata<TContext, TCustomObject, IEnumerable<Attachment>> AttachmentLambda { get; protected set; }
+    public virtual LambdaMetadata<TContext, TCustomObject, IEnumerable<Attachment>>? AttachmentLambda { get; protected init; }
 
     /// <summary>
     ///     Получает коллекцию экземпляров лямбда-выражения SecurityItemSource.
@@ -67,15 +67,18 @@ public abstract class SubscriptionWithCustomModelMetadata<TContext, TDomainObjec
     ///     Коллекция экземпляров лямбда-выражения SecurityItemSource.
     /// </value>
     public virtual
-            IEnumerable<ISecurityItemSourceLambdaMetadata<TContext, TDomainObject, ISecurityContext>>
-            SecurityItemSourceLambdas
-    { get; protected set; }
+        IEnumerable<ISecurityItemSourceLambdaMetadata<TContext, TDomainObject, ISecurityContext>>
+        SecurityItemSourceLambdas
+    {
+        get;
+        protected set;
+    } = [];
 
     /// <inheritdoc />
-    public virtual string SenderName { get; protected set; }
+    public virtual string? SenderName { get; init; }
 
     /// <inheritdoc />
-    public virtual string SenderEmail { get; protected set; }
+    public virtual string? SenderEmail { get; init; }
 
     /// <inheritdoc />
     public virtual IEnumerable<SecurityRole> SubBusinessRoles { get; protected set; } = new List<SecurityRole>();
@@ -105,18 +108,18 @@ public abstract class SubscriptionWithCustomModelMetadata<TContext, TDomainObjec
     public Type MessageTemplateType { get; } = typeof(TTemplate);
 
     /// <inheritdoc />
-    public ILambdaMetadata GetConditionLambda() => this.ConditionLambda;
+    public ILambdaMetadata? GetConditionLambda() => this.ConditionLambda;
 
     /// <inheritdoc />
-    public ILambdaMetadata GetGenerationLambda() => this.GenerationLambda;
+    public ILambdaMetadata? GetGenerationLambda() => this.GenerationLambda;
 
     /// <inheritdoc />
-    public ILambdaMetadata GetAttachmentLambda() => this.AttachmentLambda;
+    public ILambdaMetadata? GetAttachmentLambda() => this.AttachmentLambda;
 
     /// <inheritdoc />
-    public ILambdaMetadata GetCopyGenerationLambda() => this.CopyGenerationLambda;
+    public ILambdaMetadata? GetCopyGenerationLambda() => this.CopyGenerationLambda;
 
-    public ILambdaMetadata GetReplyToGenerationLambda() => this.ReplyToGenerationLambda;
+    public ILambdaMetadata? GetReplyToGenerationLambda() => this.ReplyToGenerationLambda;
 
     /// <inheritdoc />
     public IEnumerable<ISecurityItemSourceLambdaMetadata> GetSecurityItemSourceLambdas() => this.SecurityItemSourceLambdas;
@@ -129,20 +132,17 @@ public abstract class SubscriptionWithCustomModelMetadata<TContext, TDomainObjec
 
         this.ValidateObject(this.ConditionLambda, nameof(this.ConditionLambda));
 
-        this.ConditionLambda.Validate();
+        this.ConditionLambda!.Validate();
         this.GenerationLambda?.Validate();
         this.CopyGenerationLambda?.Validate();
 
-        if (this.SecurityItemSourceLambdas != null)
+        foreach (var lambda in this.SecurityItemSourceLambdas)
         {
-            foreach (var lambda in this.SecurityItemSourceLambdas)
-            {
-                lambda.Validate();
-            }
+            lambda.Validate();
         }
     }
 
-    private void ValidateString(string propertyValue, string propertyName)
+    private void ValidateString(string? propertyValue, string propertyName)
     {
         if (string.IsNullOrWhiteSpace(propertyValue))
         {
@@ -150,7 +150,7 @@ public abstract class SubscriptionWithCustomModelMetadata<TContext, TDomainObjec
         }
     }
 
-    private void ValidateObject(object propertyValue, string propertyName)
+    private void ValidateObject(object? propertyValue, string propertyName)
     {
         if (propertyValue == null)
         {

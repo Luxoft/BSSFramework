@@ -117,31 +117,31 @@ public interface ISubscriptionMetadata
     ///     Возвращает экземпляр лямбда-выражения Condition.
     /// </summary>
     /// <returns>Экземпляр лямбда-выражения Condition.</returns>
-    ILambdaMetadata GetConditionLambda();
+    ILambdaMetadata? GetConditionLambda();
 
     /// <summary>
     ///     Возвращает экземпляр лямбда-выражения Generation.
     /// </summary>
     /// <returns>Экземпляр лямбда-выражения Generation.</returns>
-    ILambdaMetadata GetGenerationLambda();
+    ILambdaMetadata? GetGenerationLambda();
 
     /// <summary>
     ///     Возвращает экземпляр лямбда-выражения Attachment.
     /// </summary>
     /// <returns>Экземпляр лямбда-выражения Attachment.</returns>
-    ILambdaMetadata GetAttachmentLambda();
+    ILambdaMetadata? GetAttachmentLambda();
 
     /// <summary>
     ///     Возвращает экземпляр лямбда-выражения Generation.
     /// </summary>
     /// <returns>Экземпляр лямбда-выражения Generation.</returns>
-    ILambdaMetadata GetCopyGenerationLambda();
+    ILambdaMetadata? GetCopyGenerationLambda();
 
     /// <summary>
     ///     Возвращает экземпляр лямбда-выражения Generation для определение replyTo.
     /// </summary>
     /// <returns>Экземпляр лямбда-выражения Generation.</returns>
-    ILambdaMetadata GetReplyToGenerationLambda();
+    ILambdaMetadata? GetReplyToGenerationLambda();
 
 
     /// <summary>

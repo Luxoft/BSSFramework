@@ -17,6 +17,8 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
 
     private readonly List<Action<IServiceCollection>> initActions = [];
 
+    private string? defaultConnectionString;
+
     private string defaultConnectionStringName = "DefaultConnection";
 
     public bool AddDefaultListener { get; set; } = true;
@@ -50,6 +52,13 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
         return this;
     }
 
+    public IDatabaseSetup SetDefaultConnectionString(string connectionString)
+    {
+        this.defaultConnectionString = connectionString;
+
+        return this;
+    }
+
     public IDatabaseSetup SetDefaultConnectionStringName(string connectionStringName)
     {
         this.defaultConnectionStringName = connectionStringName;
@@ -59,8 +68,6 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
 
     public void Initialize(IServiceCollection services)
     {
-        services.AddSingleton<IDefaultConnectionStringSource, DefaultConnectionStringSource>();
-
         services.AddSingleton<IDalValidationIdentitySource, DalValidationIdentitySource>();
 
         services.AddScopedFrom<IDbTransaction, IDBSession>(session => session.Transaction);
@@ -80,7 +87,15 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
 
         services.AddSingleton(this.settings);
 
-        services.AddSingleton(new DefaultConnectionStringSettings(this.defaultConnectionStringName));
+        if (this.defaultConnectionString != null)
+        {
+            services.AddSingleton<IDefaultConnectionStringSource>(new ManualDefaultConnectionStringSource(this.defaultConnectionString));
+        }
+        else
+        {
+            services.AddSingleton(new DefaultConnectionStringSettings(this.defaultConnectionStringName));
+            services.AddSingleton<IDefaultConnectionStringSource, DefaultConnectionStringSource>();
+        }
 
         if (this.AddDefaultListener)
         {

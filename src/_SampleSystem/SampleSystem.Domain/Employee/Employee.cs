@@ -46,7 +46,7 @@ public partial class Employee :
     private readonly ICollection<EmployeeAndEmployeeSpecializationLink> specializations = new List<EmployeeAndEmployeeSpecializationLink>();
 
     private BusinessUnit? coreBusinessUnit;
-    private HRDepartment hRDepartment;
+    private HRDepartment? hRDepartment;
     private EmployeePosition position;
     private Employee ppm;
 
@@ -261,7 +261,7 @@ public partial class Employee :
     ////}
 
     [ExpandPath("HRDepartment.Location")]
-    public virtual Location Location => this.HRDepartment.Location;
+    public virtual Location Location => this.HRDepartment?.Location;
 
     [ExpandPath("HRDepartment.Location.Code")]
     public virtual int? LocationCode => this.Location?.Code;
@@ -284,7 +284,7 @@ public partial class Employee :
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public virtual HRDepartment HRDepartment
+    public virtual HRDepartment? HRDepartment
     {
         get => this.hRDepartment;
         set => this.hRDepartment = value;

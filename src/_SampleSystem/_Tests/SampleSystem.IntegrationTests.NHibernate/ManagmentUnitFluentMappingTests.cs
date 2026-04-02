@@ -25,7 +25,7 @@ public class ManagmentUnitFluentMappingTests : TestBase
                       DBSessionMode.Write,
                       c =>
                       {
-                          var employee = c.Logics.Employee.GetById(employeeId.Id);
+                          var employee = c.Logics.Employee.GetById(employeeId.Id)!;
                           var mu = new ManagementUnitFluentMapping
                                    {
                                            Name = "test",

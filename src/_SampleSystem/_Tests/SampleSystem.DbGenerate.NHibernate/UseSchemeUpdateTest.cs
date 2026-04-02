@@ -1,10 +1,13 @@
 ﻿using CommonFramework.Auth;
 using CommonFramework.DependencyInjection;
+using CommonFramework.IdentitySource.DependencyInjection;
 
 using Framework.Core;
 using Framework.Database;
 using Framework.Database.ConnectionStringSource;
+using Framework.Database.DependencyInjection;
 using Framework.Database.NHibernate;
+using Framework.Database.NHibernate.DependencyInjection;
 using Framework.DependencyInjection;
 
 using Microsoft.Data.SqlClient;
@@ -47,8 +50,10 @@ public class UseSchemeUpdateTest
         CheckDataBaseAndSchemeExists(connectionString);
 
         var provider = new ServiceCollection()
+                       .AddServiceProxyFactory()
+                       .AddIdentitySource()
+                       .AddGeneralDatabase(ds => ds.SetDefaultConnectionString(connectionString))
                        .Self(new SampleSystemNHibernateExtension(false).AddServices)
-                       .ReplaceSingleton<IDefaultConnectionStringSource>(new ManualDefaultConnectionStringSource(connectionString))
                        .AddKeyedNotImplemented<ICurrentUser>(ICurrentUser.DefaultKey)
                        .Self(services => services.RemoveBy(sd => sd.Lifetime == ServiceLifetime.Scoped))
                        .BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true });

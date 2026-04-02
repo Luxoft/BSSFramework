@@ -15,5 +15,7 @@ public interface IDatabaseSetup
 
     IDatabaseSetup SetCommandTimeout(int timeout);
 
+    IDatabaseSetup SetDefaultConnectionString(string connectionString);
+
     IDatabaseSetup SetDefaultConnectionStringName(string connectionStringName);
 }

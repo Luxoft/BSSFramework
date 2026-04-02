@@ -18,19 +18,12 @@ public class SubscriptionMetadataStore
     /// <exception cref="ArgumentNullException">
     ///     Аргумент <paramref name="subscriptionMetadataFinder" /> равен null.
     /// </exception>
-    public SubscriptionMetadataStore(ISubscriptionMetadataFinder subscriptionMetadataFinder)
-    {
-        if (subscriptionMetadataFinder == null)
-        {
-            throw new ArgumentNullException(nameof(subscriptionMetadataFinder));
-        }
-
+    public SubscriptionMetadataStore(ISubscriptionMetadataFinder subscriptionMetadataFinder) =>
         this.store = subscriptionMetadataFinder
                      .Find()
                      .EmptyIfNull()
                      .Select(m => { m.Validate(); return m; })
                      .ToLookup(m => m.DomainObjectType);
-    }
 
     /// <summary>
     ///     Возвращает все сохранённые в хранилище описания подписок по указанному типу доменного объекта.

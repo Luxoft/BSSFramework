@@ -13,8 +13,7 @@ public sealed class SubscriptionMetadataTests
     public void Validate_NullSenderName_Exception()
     {
         // Arrange
-        var subscription = new TestSubscription();
-        subscription.SetSenderName(null);
+        var subscription = new TestSubscription() { SenderName = null };
 
         // Act
         Action call = () => subscription.Validate();
@@ -28,8 +27,7 @@ public sealed class SubscriptionMetadataTests
     public void Validate_EmptySenderName_Exception()
     {
         // Arrange
-        var subscription = new TestSubscription();
-        subscription.SetSenderName(string.Empty);
+        var subscription = new TestSubscription() { SenderName = string.Empty };
 
         // Act
         Action call = () => subscription.Validate();
@@ -43,8 +41,7 @@ public sealed class SubscriptionMetadataTests
     public void Validate_WhiteSpaceSenderName_Exception()
     {
         // Arrange
-        var subscription = new TestSubscription();
-        subscription.SetSenderName(" ");
+        var subscription = new TestSubscription() { SenderName = " " };
 
         // Act
         Action call = () => subscription.Validate();
@@ -58,8 +55,7 @@ public sealed class SubscriptionMetadataTests
     public void Validate_NullSenderEmail_Exception()
     {
         // Arrange
-        var subscription = new TestSubscription();
-        subscription.SetSenderEmail(null);
+        var subscription = new TestSubscription() { SenderEmail = null };
 
         // Act
         Action call = () => subscription.Validate();
@@ -73,8 +69,7 @@ public sealed class SubscriptionMetadataTests
     public void Validate_EmptySenderEmail_Exception()
     {
         // Arrange
-        var subscription = new TestSubscription();
-        subscription.SetSenderEmail(string.Empty);
+        var subscription = new TestSubscription() { SenderEmail = string.Empty };
 
         // Act
         Action call = () => subscription.Validate();
@@ -88,8 +83,7 @@ public sealed class SubscriptionMetadataTests
     public void Validate_WhiteSpaceSenderEmail_Exception()
     {
         // Arrange
-        var subscription = new TestSubscription();
-        subscription.SetSenderEmail(" ");
+        var subscription = new TestSubscription() { SenderEmail = " " };
 
         // Act
         Action call = () => subscription.Validate();

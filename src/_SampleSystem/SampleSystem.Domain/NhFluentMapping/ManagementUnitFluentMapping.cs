@@ -15,7 +15,7 @@ public class ManagementUnitFluentMapping :
         IPeriodObject,
         ISecurityContext
 {
-    private readonly List<ManagementUnitFluentMapping> children = new List<ManagementUnitFluentMapping>();
+    private readonly ICollection<ManagementUnitFluentMapping> children = new List<ManagementUnitFluentMapping>();
 
     private ManagementUnitFluentMapping parent;
 

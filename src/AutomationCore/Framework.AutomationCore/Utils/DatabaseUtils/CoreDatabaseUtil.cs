@@ -171,7 +171,7 @@ public static partial class CoreDatabaseUtil
         }
         catch (Exception ex)
         {
-            SetModeMultiUser(server, database);
+            server.SetModeMultiUser(database);
             Console.WriteLine(ex.Message);
         }
     }

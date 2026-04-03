@@ -27,7 +27,7 @@ internal abstract class MessageTemplateFactoryBase
         where TModelObjectType : class =>
         new()
         {
-            MessageTemplateCode = subscription.RazorMessageTemplateType.Name,
+            MessageTemplateCode = subscription.RazorMessageTemplateType.FullName!,
             ContextObject = versions,
             ContextObjectType = versions.DomainObjectType,
             Receivers = [.. to],

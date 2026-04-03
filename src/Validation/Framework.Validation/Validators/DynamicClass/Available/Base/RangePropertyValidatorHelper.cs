@@ -4,7 +4,7 @@ namespace Framework.Validation;
 
 public static class RangePropertyValidatorHelper
 {
-    public static readonly RangePropertyValidatorInfo<DateTime, DateTime> DateTime = new RangePropertyValidatorInfo<DateTime, DateTime>((range, value) => CommonPeriodExtensions.Contains(range.ToPeriod(), value));
+    public static readonly RangePropertyValidatorInfo<DateTime, DateTime> DateTime = new RangePropertyValidatorInfo<DateTime, DateTime>((range, value) => range.ToPeriod().Contains(value));
 
     public static readonly RangePropertyValidatorInfo<DateTime, Period> Period = new RangePropertyValidatorInfo<DateTime, Period>((range, value) => range.ToPeriod().Contains(value));
 

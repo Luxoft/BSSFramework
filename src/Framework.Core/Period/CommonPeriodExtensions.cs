@@ -22,7 +22,8 @@ public static class CommonPeriodExtensions
         /// <param name="target">Период, с которым проверяется пересечение</param>
         /// <returns>true, если дата начала и дата окончания переданного периода содержатся в указанном периоде, в противном случае — false</returns>
         public bool Contains(Period target)
-            => Contains(period, target.StartDate) && Contains(period, target.EndDateValue);
+            =>
+                period.Contains(target.StartDate) && period.Contains(target.EndDateValue);
 
         /// <summary>
         /// Возвращает значение, указывающее, содержит ли указанный период <see cref="period"/> значение даты <see cref="date"/> переданной в качестве параметра
@@ -48,7 +49,7 @@ public static class CommonPeriodExtensions
         /// <param name="date">Дата, которую нужно проверить на вхождение в период</param>
         /// <returns>true, если дата не является null и дата содержится в периоде, в противном случае — false</returns>
         public bool ContainsExt(DateTime? date)
-            => date.MaybeNullable(v => Contains(period, v));
+            => date.MaybeNullable(v => period.Contains(v));
 
         /// <summary>
         /// Возвращает значение, указывающее, содержит ли указанный период <see cref="period"/> значение даты <see cref="date"/> переданной в качестве параметра
@@ -62,7 +63,7 @@ public static class CommonPeriodExtensions
         /// </summary>
         /// <param name="date">Дата, которую нужно проверить на вхождение в период</param>
         /// <returns>true, если дата не является null и дата содержится в периоде, в противном случае — false</returns>
-        public bool NativeContains(DateTime? date) => date.MaybeNullable(z => NativeContains(period, z));
+        public bool NativeContains(DateTime? date) => date.MaybeNullable(z => period.NativeContains(z));
 
         /// <summary>
         /// Возвращает значение, указывающее, содержит ли указанный период <see cref="period"/>, без учета даты окончания периода, значение даты <see cref="date"/> переданной в качестве параметра
@@ -146,22 +147,22 @@ public static class CommonPeriodExtensions
             {
                 var shortFormat = period.GetDayAndMonthDateFormat(cultureInfo);
 
-                return ProcessYear(period, $"{period.StartDate.ToString(shortFormat, cultureInfo)}-{period.EndDateValue.ToString(shortFormat, cultureInfo)}", displayYear);
+                return period.ProcessYear($"{period.StartDate.ToString(shortFormat, cultureInfo)}-{period.EndDateValue.ToString(shortFormat, cultureInfo)}", displayYear);
             }
 
             var monthStr = cultureInfo.DateTimeFormat.GetMonthName(period.StartDate.Month);
 
             if (period.StartDate.IsFirstMonthDate() && period.EndDateValue.IsLastMonthDate())
             {
-                return ProcessYear(period, monthStr, displayYear);
+                return period.ProcessYear(monthStr, displayYear);
             }
 
             if (period.StartDate.Day == period.EndDateValue.Day)
             {
-                return ProcessYear(period, $"{period.StartDate:dd} {monthStr}", displayYear);
+                return period.ProcessYear($"{period.StartDate:dd} {monthStr}", displayYear);
             }
 
-            return ProcessYear(period, $"{period.StartDate:dd}-{period.EndDateValue:dd} {monthStr}", displayYear);
+            return period.ProcessYear($"{period.StartDate:dd}-{period.EndDateValue:dd} {monthStr}", displayYear);
         }
 
         /// <summary>
@@ -188,22 +189,22 @@ public static class CommonPeriodExtensions
 
             if (period.StartDate.Month != period.EndDateValue.Month)
             {
-                return ProcessYear(period, $"{period.StartDate:dd.MM}-{period.EndDateValue:dd.MM}", displayYear);
+                return period.ProcessYear($"{period.StartDate:dd.MM}-{period.EndDateValue:dd.MM}", displayYear);
             }
 
             var monthStr = period.StartDate.GetMonthStr();
 
             if (period.StartDate.IsFirstMonthDate() && period.EndDateValue.IsLastMonthDate())
             {
-                return ProcessYear(period, monthStr, displayYear);
+                return period.ProcessYear(monthStr, displayYear);
             }
 
             if (period.StartDate.Day == period.EndDateValue.Day)
             {
-                return ProcessYear(period, $"{period.StartDate:dd} {monthStr}", displayYear);
+                return period.ProcessYear($"{period.StartDate:dd} {monthStr}", displayYear);
             }
 
-            return ProcessYear(period, $"{period.StartDate:dd}-{period.EndDateValue:dd} {monthStr}", displayYear);
+            return period.ProcessYear($"{period.StartDate:dd}-{period.EndDateValue:dd} {monthStr}", displayYear);
         }
 
         /// <summary>
@@ -283,7 +284,7 @@ public static class CommonPeriodExtensions
 
             if (period.StartDate.Year != period.EndDateValue.Year)
             {
-                return ToDisplayName(period, cultureInfo, true);
+                return period.ToDisplayName(cultureInfo, true);
             }
 
             var shortFormat = period.GetDayAndMonthDateFormat(cultureInfo);

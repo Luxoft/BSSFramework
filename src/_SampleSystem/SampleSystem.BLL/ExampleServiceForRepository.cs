@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.Repository;
+﻿using Framework.Application.Repository;
 
 using GenericQueryable;
 

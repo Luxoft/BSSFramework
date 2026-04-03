@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Infrastructure.Hangfire</PackageId><Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire.AspNetCore" />
+    <PackageReference Include="Hangfire.SqlServer" />
+    <PackageReference Include="IvAt.CommonFramework" />
+    <PackageReference Include="Microsoft.Data.SqlClient" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\Framework.Application.Abstractions\Framework.Application.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

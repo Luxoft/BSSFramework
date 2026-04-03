@@ -1,8 +1,9 @@
-﻿using Framework.Configuration.BLL;
-using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.Events.Legacy;
+﻿using Framework.BLL.DTOMapping.DTOMapper;
+using Framework.Infrastructure.LocalDBEvents;
 
 using SampleSystem.Domain;
+
+using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
 namespace SampleSystem.Events;
 

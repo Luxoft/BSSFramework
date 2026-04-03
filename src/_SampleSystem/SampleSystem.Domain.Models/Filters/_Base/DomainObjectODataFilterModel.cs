@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.DomainDriven;
+using Framework.BLL.Domain.Models;
 
 namespace SampleSystem.Domain;
 

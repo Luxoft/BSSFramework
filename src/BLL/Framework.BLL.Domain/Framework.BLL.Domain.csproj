@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.BLL.Domain</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IvAt.SecuritySystem.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\Framework.Application.Domain\Framework.Application.Domain.csproj" />
+    <ProjectReference Include="..\..\Database\Framework.Database.Domain\Framework.Database.Domain.csproj" />
+    <ProjectReference Include="..\..\Domain\Framework.Relations\Framework.Relations.csproj" />
+    <ProjectReference Include="..\..\Domain\Framework.Restriction\Framework.Restriction.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,10 @@
+﻿using Framework.Application.Events;
+using Framework.BLL.Domain.Serialization;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
+
+namespace Framework.CodeGeneration.DTOGenerator.Server.FileType;
+
+public record DomainOperationEventDTOFileType(EventOperation EventOperation) : DTOFileType("OperationEventDTO", DTORole.Event)
+{
+    protected override string InternalToString() => $"{this.Name} ({this.EventOperation.Name})";
+}

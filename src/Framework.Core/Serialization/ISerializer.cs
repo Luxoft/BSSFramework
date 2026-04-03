@@ -2,6 +2,8 @@
 
 using CommonFramework;
 
+using Framework.Core.Helpers;
+
 namespace Framework.Core.Serialization;
 
 /// <summary>
@@ -10,9 +12,7 @@ namespace Framework.Core.Serialization;
 /// <typeparam name="TSerializedValue">Тип сериализованного значения</typeparam>
 /// <typeparam name="TValue">Сериализуемый тип</typeparam>
 public interface ISerializer<TSerializedValue, TValue> :
-        IParser<TSerializedValue, TValue>, IFormatter<TValue, TSerializedValue>
-{
-}
+        IParser<TSerializedValue, TValue>, IFormatter<TValue, TSerializedValue>;
 
 /// <summary>
 /// Сериализатор
@@ -41,16 +41,9 @@ public class Serializer<TSerializedValue, TValue> : ISerializer<TSerializedValue
     }
 
 
-    public TValue Parse(TSerializedValue input)
-    {
-        return this.deserializeFunc(input);
-    }
+    public TValue Parse(TSerializedValue input) => this.deserializeFunc(input);
 
-    public TSerializedValue Format(TValue value)
-    {
-        return this.serializeFunc(value);
-    }
-
+    public TSerializedValue Format(TValue value) => this.serializeFunc(value);
 
     /// <summary>
     /// Сереализатор между типами по умолчанию

@@ -1,5 +1,5 @@
-﻿using Framework.Configuration.Core;
-using Framework.Notification;
+﻿using Framework.Subscriptions;
+using Framework.Subscriptions.Domain;
 
 using SampleSystem.BLL;
 
@@ -13,14 +13,11 @@ public sealed class GenerationLambda : GenerationLambdaBase<Domain.Employee>
     /// </summary>
     public GenerationLambda()
     {
-        this.DomainObjectChangeType = Framework.Configuration.SubscriptionModeling.DomainObjectChangeType.Update;
+        this.DomainObjectChangeType = Framework.Subscriptions.DomainObjectChangeType.Update;
         this.Lambda = this.GetRecipients;
     }
 
     private NotificationMessageGenerationInfo[] GetRecipients(
             ISampleSystemBLLContext context,
-            DomainObjectVersions<Domain.Employee> versions)
-    {
-        return new[] { new NotificationMessageGenerationInfo("tester@luxoft.com", versions.Previous, versions.Current) };
-    }
+            DomainObjectVersions<Domain.Employee> versions) => [new NotificationMessageGenerationInfo("tester@luxoft.com", versions.Previous, versions.Current)];
 }

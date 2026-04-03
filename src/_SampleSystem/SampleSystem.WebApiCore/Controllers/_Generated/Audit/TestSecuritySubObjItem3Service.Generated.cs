@@ -1,10 +1,14 @@
-﻿namespace SampleSystem.WebApiCore.Controllers.Audit
+﻿using Framework.Core;
+
+using SampleSystem.Generated.DTO;
+
+namespace SampleSystem.WebApiCore.Controllers.Audit
 {
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
     [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]/[action]")]
-    public partial class TestSecuritySubObjItem3Controller : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
+    public partial class TestSecuritySubObjItem3Controller : Framework.Infrastructure.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
         /// <summary>
@@ -15,10 +19,10 @@
         {
             long revision = getFullTestSecuritySubObjItem3WithRevisionAutoRequest.Revision;
             SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity = getFullTestSecuritySubObjItem3WithRevisionAutoRequest.TestSecuritySubObjItem3Identity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTestSecuritySubObjItem3WithRevisionInternal(testSecuritySubObjItem3Identity, revision, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullTestSecuritySubObjItem3WithRevisionInternal(testSecuritySubObjItem3Identity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3FullDTO GetFullTestSecuritySubObjItem3WithRevisionInternal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3FullDTO GetFullTestSecuritySubObjItem3WithRevisionInternal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = bll.GetObjectByRevision(testSecuritySubObjItem3Identity.Id, revision);
@@ -33,10 +37,10 @@
         {
             long revision = getRichTestSecuritySubObjItem3WithRevisionAutoRequest.Revision;
             SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity = getRichTestSecuritySubObjItem3WithRevisionAutoRequest.TestSecuritySubObjItem3Identity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichTestSecuritySubObjItem3WithRevisionInternal(testSecuritySubObjItem3Identity, revision, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichTestSecuritySubObjItem3WithRevisionInternal(testSecuritySubObjItem3Identity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3RichDTO GetRichTestSecuritySubObjItem3WithRevisionInternal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3RichDTO GetRichTestSecuritySubObjItem3WithRevisionInternal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = bll.GetObjectByRevision(testSecuritySubObjItem3Identity.Id, revision);
@@ -51,10 +55,10 @@
         {
             long revision = getSimpleTestSecuritySubObjItem3WithRevisionAutoRequest.Revision;
             SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity = getSimpleTestSecuritySubObjItem3WithRevisionAutoRequest.TestSecuritySubObjItem3Identity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTestSecuritySubObjItem3WithRevisionInternal(testSecuritySubObjItem3Identity, revision, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleTestSecuritySubObjItem3WithRevisionInternal(testSecuritySubObjItem3Identity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3SimpleDTO GetSimpleTestSecuritySubObjItem3WithRevisionInternal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3SimpleDTO GetSimpleTestSecuritySubObjItem3WithRevisionInternal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = bll.GetObjectByRevision(testSecuritySubObjItem3Identity.Id, revision);
@@ -67,16 +71,16 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestSecuritySubObjItem3PropertyRevisionByDateRange(GetTestSecuritySubObjItem3PropertyRevisionByDateRangeAutoRequest getTestSecuritySubObjItem3PropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getTestSecuritySubObjItem3PropertyRevisionByDateRangeAutoRequest.Period;
+            Period? period = getTestSecuritySubObjItem3PropertyRevisionByDateRangeAutoRequest.Period;
             string propertyName = getTestSecuritySubObjItem3PropertyRevisionByDateRangeAutoRequest.PropertyName;
             SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity = getTestSecuritySubObjItem3PropertyRevisionByDateRangeAutoRequest.TestSecuritySubObjItem3Identity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestSecuritySubObjItem3PropertyRevisionByDateRangeInternal(testSecuritySubObjItem3Identity, propertyName, period, evaluateData));
+            return this.Evaluate<SampleSystemDomainObjectPropertiesRevisionDTO>(Framework.Database.DBSessionMode.Read, evaluateData => this.GetTestSecuritySubObjItem3PropertyRevisionByDateRangeInternal(testSecuritySubObjItem3Identity, propertyName, period, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestSecuritySubObjItem3PropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, string propertyName, Framework.Core.Period? period, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestSecuritySubObjItem3PropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, string propertyName, Period? period, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
-            return new Framework.DomainDriven.ServiceModel.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.DomainDriven.BLL.Security.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.TestSecuritySubObjItem3>(testSecuritySubObjItem3Identity.Id, propertyName, period);
+            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.TestSecuritySubObjItem3>(testSecuritySubObjItem3Identity.Id, propertyName, period);
         }
         
         /// <summary>
@@ -87,28 +91,28 @@
         {
             string propertyName = getTestSecuritySubObjItem3PropertyRevisionsAutoRequest.PropertyName;
             SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity = getTestSecuritySubObjItem3PropertyRevisionsAutoRequest.TestSecuritySubObjItem3Identity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestSecuritySubObjItem3PropertyRevisionsInternal(testSecuritySubObjItem3Identity, propertyName, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetTestSecuritySubObjItem3PropertyRevisionsInternal(testSecuritySubObjItem3Identity, propertyName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestSecuritySubObjItem3PropertyRevisionsInternal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, string propertyName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestSecuritySubObjItem3PropertyRevisionsInternal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, string propertyName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
-            return new Framework.DomainDriven.ServiceModel.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.DomainDriven.BLL.Security.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.TestSecuritySubObjItem3>(testSecuritySubObjItem3Identity.Id, propertyName);
+            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.TestSecuritySubObjItem3>(testSecuritySubObjItem3Identity.Id, propertyName);
         }
         
         /// <summary>
         /// Get TestSecuritySubObjItem3 revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetTestSecuritySubObjItem3Revisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity)
+        public virtual Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO GetTestSecuritySubObjItem3Revisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestSecuritySubObjItem3RevisionsInternal(testSecuritySubObjItem3Identity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetTestSecuritySubObjItem3RevisionsInternal(testSecuritySubObjItem3Identity, evaluateData));
         }
         
-        protected virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetTestSecuritySubObjItem3RevisionsInternal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO GetTestSecuritySubObjItem3RevisionsInternal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
-            return new Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO(bll.GetObjectRevisions(testSecuritySubObjItem3Identity.Id));
+            return new Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO(bll.GetObjectRevisions(testSecuritySubObjItem3Identity.Id));
         }
         
         /// <summary>
@@ -119,10 +123,10 @@
         {
             long revision = getVisualTestSecuritySubObjItem3WithRevisionAutoRequest.Revision;
             SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity = getVisualTestSecuritySubObjItem3WithRevisionAutoRequest.TestSecuritySubObjItem3Identity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualTestSecuritySubObjItem3WithRevisionInternal(testSecuritySubObjItem3Identity, revision, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualTestSecuritySubObjItem3WithRevisionInternal(testSecuritySubObjItem3Identity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3VisualDTO GetVisualTestSecuritySubObjItem3WithRevisionInternal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3VisualDTO GetVisualTestSecuritySubObjItem3WithRevisionInternal(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3Identity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestSecuritySubObjItem3BLL bll = evaluateData.Context.Logics.TestSecuritySubObjItem3Factory.Create(SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.TestSecuritySubObjItem3 domainObject = bll.GetObjectByRevision(testSecuritySubObjItem3Identity.Id, revision);
@@ -131,7 +135,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetFullTestSecuritySubObjItem3WithRevisionAutoRequest
     {
         
@@ -140,7 +144,7 @@
         private long revision;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO TestSecuritySubObjItem3Identity
         {
             get
@@ -154,7 +158,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual long Revision
         {
             get
@@ -169,7 +173,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetRichTestSecuritySubObjItem3WithRevisionAutoRequest
     {
         
@@ -178,7 +182,7 @@
         private long revision;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO TestSecuritySubObjItem3Identity
         {
             get
@@ -192,7 +196,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual long Revision
         {
             get
@@ -207,7 +211,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetSimpleTestSecuritySubObjItem3WithRevisionAutoRequest
     {
         
@@ -216,7 +220,7 @@
         private long revision;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO TestSecuritySubObjItem3Identity
         {
             get
@@ -230,7 +234,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual long Revision
         {
             get
@@ -245,7 +249,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetTestSecuritySubObjItem3PropertyRevisionByDateRangeAutoRequest
     {
         
@@ -253,10 +257,10 @@
         
         private string propertyName;
         
-        private Framework.Core.Period? period;
+        private Period? period;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO TestSecuritySubObjItem3Identity
         {
             get
@@ -270,7 +274,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual string PropertyName
         {
             get
@@ -284,8 +288,8 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public virtual Framework.Core.Period? Period
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=2)]
+        public virtual Period? Period
         {
             get
             {
@@ -299,7 +303,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetTestSecuritySubObjItem3PropertyRevisionsAutoRequest
     {
         
@@ -308,7 +312,7 @@
         private string propertyName;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO TestSecuritySubObjItem3Identity
         {
             get
@@ -322,7 +326,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual string PropertyName
         {
             get
@@ -337,7 +341,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetVisualTestSecuritySubObjItem3WithRevisionAutoRequest
     {
         
@@ -346,7 +350,7 @@
         private long revision;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO TestSecuritySubObjItem3Identity
         {
             get
@@ -360,7 +364,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual long Revision
         {
             get

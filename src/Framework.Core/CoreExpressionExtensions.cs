@@ -2,7 +2,6 @@
 using System.Reflection;
 
 using CommonFramework;
-using CommonFramework.Maybe;
 
 namespace Framework.Core;
 
@@ -117,10 +116,8 @@ public static class CoreExpressionExtensions
 
 
     public static Expression<Func<TTo, TRetType>> Covariance<TTo, TFrom, TRetType>(this Expression<Func<TFrom, TRetType>> source)
-        where TTo : TFrom
-    {
-        return source.OverrideInput((TTo to) => (TFrom)to);
-    }
+        where TTo : TFrom =>
+        source.OverrideInput((TTo to) => to);
 
     public static string GetMemberName<TSource, TResult>(this Expression<Func<TSource, TResult>> expr)
     {
@@ -128,24 +125,6 @@ public static class CoreExpressionExtensions
 
         return expr.Body.GetMember().Select(member => member.Name)
                    .GetValue(() => new ArgumentException("not member expression", nameof(expr)));
-    }
-
-    public static Expression ExtractBoxingValue(this Expression expression)
-    {
-        if (expression == null) throw new ArgumentNullException(nameof(expression));
-
-        return expression.GetConvertOperand().GetValueOrDefault(expression);
-    }
-
-    public static Maybe<Expression> GetConvertOperand(this Expression expression)
-    {
-        if (expression == null) throw new ArgumentNullException(nameof(expression));
-
-        return from unaryExpression in (expression as UnaryExpression).ToMaybe()
-
-               where expression.NodeType == ExpressionType.Convert
-
-               select unaryExpression.Operand;
     }
 
     public static string ToPath(this Expression source)
@@ -207,7 +186,7 @@ public static class CoreExpressionExtensions
                     "get_Item",
                     StringComparison.InvariantCultureIgnoreCase))
             {
-                return $"{leftPath.MaybeString(z => z)}[{string.Join(",", methodCallExpression.Arguments.Select(z => ToPath(z)))}]";
+                return $"{leftPath.MaybeString(z => z)}[{string.Join(",", methodCallExpression.Arguments.Select(z => z.ToPath()))}]";
             }
 
             return
@@ -246,34 +225,31 @@ public static class CoreExpressionExtensions
 
     private class NodeExpressionVisitor : ExpressionVisitor
     {
-        private readonly Expression _startNode;
+        private readonly Expression startNode;
 
-        private readonly List<NodeExpressionVisitor> ChildVisitors = new List<NodeExpressionVisitor>();
+        private readonly List<NodeExpressionVisitor> childVisitors = [];
 
         public NodeExpressionVisitor(Expression startNode)
         {
             if (startNode == null) throw new ArgumentNullException(nameof(startNode));
 
-            this._startNode = startNode;
+            this.startNode = startNode;
         }
 
         public override Expression? Visit(Expression? node)
         {
-            if (node == null || node == this._startNode)
+            if (node == null || node == this.startNode)
             {
                 return base.Visit(node);
             }
             else
             {
                 var childVisitor = new NodeExpressionVisitor(node);
-                this.ChildVisitors.Add(childVisitor);
+                this.childVisitors.Add(childVisitor);
                 return childVisitor.Visit(node);
             }
         }
 
-        public Node<Expression> ToNode()
-        {
-            return new Node<Expression>(this._startNode, this.ChildVisitors.Select(child => child.ToNode()));
-        }
+        public Node<Expression> ToNode() => new(this.startNode, this.childVisitors.Select(child => child.ToNode()));
     }
 }

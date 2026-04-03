@@ -7,14 +7,11 @@
 
   <ItemGroup>
     <PackageReference Include="FluentMigrator" />
+    <PackageReference Include="FluentMigrator.Extensions.SqlServer" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="MSTest.TestAdapter" />
     <PackageReference Include="MSTest.TestFramework" />
     <PackageReference Include="FluentAssertions" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,9 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Framework.AutomationCore.ServiceEnvironment.LegacyContext\Framework.AutomationCore.ServiceEnvironment.LegacyContext.csproj" />
-    <ProjectReference Include="..\..\..\Framework.AutomationCore\Framework.AutomationCore.csproj" />
-    <ProjectReference Include="..\..\SampleSystem.WebApiCore\SampleSystem.WebApiCore.csproj" />
+    <ProjectReference Include="..\..\..\AutomationCore\Framework.AutomationCore.ServiceEnvironment.LegacyContext\Framework.AutomationCore.ServiceEnvironment.LegacyContext.csproj" />
+    <ProjectReference Include="..\..\SampleSystem.WebApiCore.NHibernate\SampleSystem.WebApiCore.NHibernate.csproj" />
     <ProjectReference Include="..\SampleSystem.DbGenerate.NHibernate\SampleSystem.DbGenerate.NHibernate.csproj" />
   </ItemGroup>
 

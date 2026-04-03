@@ -4,7 +4,7 @@ using FluentMigrator.Runner;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace SampleSystem.DbGenerate;
+namespace SampleSystem.DbGenerate.NHibernate;
 
 public class BssFluentMigrator
 {

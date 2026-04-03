@@ -1,4 +1,4 @@
-﻿using Framework.Persistent;
+﻿using Framework.Relations;
 
 namespace SampleSystem.Domain;
 
@@ -24,12 +24,12 @@ public class TestItemAuthObject : AuditPersistentDomainObjectBase, IDetail<TestP
 
     public virtual BusinessUnit BusinessUnit
     {
-        get { return this.businessUnit; }
-        set { this.businessUnit = value; }
+        get => this.businessUnit;
+        set => this.businessUnit = value;
     }
     public virtual ManagementUnit ManagementUnit
     {
-        get { return this.managementUnit; }
-        set { this.managementUnit = value; }
+        get => this.managementUnit;
+        set => this.managementUnit = value;
     }
 }

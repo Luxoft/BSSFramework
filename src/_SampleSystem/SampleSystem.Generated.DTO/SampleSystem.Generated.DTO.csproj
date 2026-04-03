@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-  <IsPackable>false</IsPackable>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
+
   <ItemGroup>
-    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel\Framework.DomainDriven.ServiceModel.csproj" />
+    <ProjectReference Include="..\..\BLL\Framework.BLL.DTOMapping\Framework.BLL.DTOMapping.csproj" />
     <ProjectReference Include="..\SampleSystem.BLL.Core\SampleSystem.BLL.Core.csproj" />
   </ItemGroup>
+
 </Project>

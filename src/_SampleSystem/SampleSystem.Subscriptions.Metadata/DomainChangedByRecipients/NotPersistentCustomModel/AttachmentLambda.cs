@@ -1,5 +1,7 @@
 ﻿using System.Text;
-using Framework.Configuration.Core;
+
+using Framework.Subscriptions.Domain;
+
 using SampleSystem.BLL;
 
 namespace SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
@@ -11,17 +13,14 @@ public sealed class AttachmentLambda : AttachmentLambdaBase<CustomNotificationMo
 
     public AttachmentLambda()
     {
-        this.DomainObjectChangeType = Framework.Configuration.SubscriptionModeling.DomainObjectChangeType.Update;
+        this.DomainObjectChangeType = Framework.Subscriptions.DomainObjectChangeType.Update;
         this.Lambda = GetAttachments;
     }
 
     private static System.Net.Mail.Attachment[] GetAttachments(
             ISampleSystemBLLContext context,
-            DomainObjectVersions<CustomNotificationModel> versions)
-    {
-        return new[]
-               {
-                       new System.Net.Mail.Attachment(new MemoryStream(Encoding.UTF8.GetBytes("Hello world!")), AttachmentName)
-               };
-    }
+            DomainObjectVersions<CustomNotificationModel> versions) =>
+    [
+        new System.Net.Mail.Attachment(new MemoryStream(Encoding.UTF8.GetBytes("Hello world!")), AttachmentName)
+    ];
 }

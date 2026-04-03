@@ -1,5 +1,5 @@
-﻿using Framework.DomainDriven.Serialization;
-using Framework.Persistent;
+﻿using Framework.BLL.Domain.Attributes;
+using Framework.BLL.Domain.Serialization;
 
 namespace SampleSystem.Domain.IntegrationVersions;
 

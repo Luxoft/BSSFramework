@@ -1,8 +1,8 @@
-﻿using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Serialization;
-using Framework.Persistent.Mapping;
+﻿using Framework.BLL.Domain.Attributes;
+using Framework.BLL.Domain.Serialization;
+using Framework.BLL.Domain.ServiceRole;
+using Framework.Database.Mapping;
 using Framework.Projection;
-using Framework.Security;
 
 namespace SampleSystem.Domain.ManualProjections;
 

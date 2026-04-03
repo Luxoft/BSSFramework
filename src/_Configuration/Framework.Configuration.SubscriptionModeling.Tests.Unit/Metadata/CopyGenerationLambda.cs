@@ -1,5 +1,7 @@
-﻿using Framework.Configuration.Core;
-using Framework.Notification;
+﻿using Framework.Subscriptions;
+using Framework.Subscriptions.Domain;
+
+using DomainObjectChangeType = Framework.Subscriptions.DomainObjectChangeType;
 
 namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;
 
@@ -12,8 +14,5 @@ internal sealed class CopyGenerationLambda :
         this.DomainObjectChangeType = DomainObjectChangeType.Update;
     }
 
-    internal void SetFunc(Func<object, DomainObjectVersions<object>, IEnumerable<NotificationMessageGenerationInfo>> func)
-    {
-        this.Lambda = func;
-    }
+    internal void SetFunc(Func<object, DomainObjectVersions<object>, IEnumerable<NotificationMessageGenerationInfo>> func) => this.Lambda = func;
 }

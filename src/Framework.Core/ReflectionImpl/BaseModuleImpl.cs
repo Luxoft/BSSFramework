@@ -1,8 +1,5 @@
 ﻿using System.Reflection;
 
-namespace Framework.Core;
+namespace Framework.Core.ReflectionImpl;
 
-public class BaseModuleImpl : Module
-{
-
-}
+public class BaseModuleImpl : Module;

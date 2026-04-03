@@ -1,7 +1,8 @@
-﻿using Framework.Core;
-using Framework.DomainDriven.Serialization;
-using Framework.Persistent;
-using Framework.Persistent.Mapping;
+﻿using Framework.BLL.Domain.Attributes;
+using Framework.BLL.Domain.Persistent.IdentityObject;
+using Framework.BLL.Domain.Serialization;
+using Framework.Core;
+using Framework.Database.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;
@@ -49,8 +50,8 @@ public class SystemConstant : AuditPersistentDomainObjectBase, ICodeObject
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual DomainType Type
     {
-        get { return this.type; }
-        set { this.type = value; }
+        get => this.type;
+        set => this.type = value;
     }
 
     /// <summary>
@@ -62,8 +63,8 @@ public class SystemConstant : AuditPersistentDomainObjectBase, ICodeObject
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual string Code
     {
-        get { return this.code.TrimNull(); }
-        set { this.code = value.TrimNull(); }
+        get => this.code.TrimNull();
+        set => this.code = value.TrimNull();
     }
 
     /// <summary>
@@ -72,8 +73,8 @@ public class SystemConstant : AuditPersistentDomainObjectBase, ICodeObject
     [MaxLength]
     public virtual string Value
     {
-        get { return this.value.TrimNull(); }
-        set { this.value = value.TrimNull(); }
+        get => this.value.TrimNull();
+        set => this.value = value.TrimNull();
     }
 
     /// <summary>
@@ -82,8 +83,8 @@ public class SystemConstant : AuditPersistentDomainObjectBase, ICodeObject
     [MaxLength]
     public virtual string Description
     {
-        get { return this.description.TrimNull(); }
-        set { this.description = value.TrimNull(); }
+        get => this.description.TrimNull();
+        set => this.description = value.TrimNull();
     }
 
     /// <summary>
@@ -92,12 +93,9 @@ public class SystemConstant : AuditPersistentDomainObjectBase, ICodeObject
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual bool IsManual
     {
-        get { return this.isManual; }
-        set { this.isManual = value; }
+        get => this.isManual;
+        set => this.isManual = value;
     }
 
-    public override string ToString()
-    {
-        return this.Code;
-    }
+    public override string ToString() => this.Code;
 }

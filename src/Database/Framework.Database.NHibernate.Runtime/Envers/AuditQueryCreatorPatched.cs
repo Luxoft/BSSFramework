@@ -1,0 +1,21 @@
+﻿using NHibernate.Envers.Configuration;
+using NHibernate.Envers.Query;
+using NHibernate.Envers.Query.Impl;
+using NHibernate.Envers.Reader;
+
+namespace Framework.Database.NHibernate.Envers;
+
+public class AuditQueryCreatorPatched(AuditConfiguration auditCfg, IAuditReaderImplementor auditReaderImplementor) : AuditQueryCreator(auditCfg, auditReaderImplementor)
+{
+    private readonly AuditConfiguration auditCfg = auditCfg;
+    private readonly IAuditReaderImplementor auditReaderImplementor = auditReaderImplementor;
+
+    public IAuditQuery ForProjectingRevisionsOfEntity<T>(bool selectEntitiesOnly, bool selectDeletedEntities) => new RevisionsOfEntityProjectionQuery<T>(this.auditCfg, this.auditReaderImplementor, selectEntitiesOnly, selectDeletedEntities);
+
+    /// <summary>
+    /// without materialized entity objects
+    /// </summary>
+    public IEntityAuditQuery<IIdentityRevisionEntityInfo<TRevisionInfo, TIdentity>> ForHistoryOf<TEntity, TRevisionInfo, TIdentity>(bool includeDeleted) => new HistoryQueryOptimized<TEntity, TRevisionInfo, TIdentity>(this.auditCfg, this.auditReaderImplementor, includeDeleted);
+
+    public RevisionsOfEntityQuery CreateRevisionEntityQuery() => new(this.auditCfg, this.auditReaderImplementor, this.auditCfg.AuditEntCfg.RevisionInfoEntityFullClassName(), true, false);
+}

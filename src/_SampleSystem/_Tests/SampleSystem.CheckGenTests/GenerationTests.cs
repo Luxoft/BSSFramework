@@ -1,4 +1,4 @@
-﻿using FileInfo = Framework.DomainDriven.Generation.FileInfo;
+﻿using Framework.FileGeneration;
 
 namespace SampleSystem.CheckGenTests;
 
@@ -44,10 +44,10 @@ public class GenerationTests
         ShouldBeNoNewAndModifiedFiles(generatedFiles);
     }
 
-    private static void ShouldBeNoNewAndModifiedFiles(IReadOnlyCollection<FileInfo> generatedFiles)
+    private static void ShouldBeNoNewAndModifiedFiles(IReadOnlyCollection<GeneratedFileInfo> generatedFiles)
     {
-        var changedFiles = generatedFiles.Where(x => x.FileState == FileInfo.State.Modified).ToList();
-        var newFiles = generatedFiles.Where(x => x.FileState == FileInfo.State.New).ToList();
+        var changedFiles = generatedFiles.Where(x => x.FileState == GeneratedFileInfo.State.Modified).ToList();
+        var newFiles = generatedFiles.Where(x => x.FileState == GeneratedFileInfo.State.New).ToList();
 
         if (changedFiles.Any() || newFiles.Any())
         {
@@ -60,7 +60,7 @@ Modified files are:
         }
     }
 
-    private static string GetAggregatedMessage(IReadOnlyCollection<FileInfo> source)
+    private static string GetAggregatedMessage(IReadOnlyCollection<GeneratedFileInfo> source)
         => source.Any()
                ? source.Select(x => "\t" + x.AbsolutePath).Aggregate((total, next) => total + Environment.NewLine + next)
                : string.Empty;

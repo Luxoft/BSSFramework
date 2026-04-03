@@ -1,5 +1,5 @@
-﻿using Framework.DomainDriven.BLL;
-using Framework.Persistent;
+﻿using Framework.BLL.Domain.ServiceRole;
+using Framework.Relations;
 
 namespace SampleSystem.Domain;
 
@@ -9,7 +9,7 @@ public class EmployeeCustomIntegrationSaveModel : DomainObjectIntegrationSaveMod
     [DetailRole(DetailRole.Yes)]
     public override Employee SavingObject
     {
-        get { return base.SavingObject; }
-        set { base.SavingObject = value; }
+        get => base.SavingObject;
+        set => base.SavingObject = value;
     }
 }

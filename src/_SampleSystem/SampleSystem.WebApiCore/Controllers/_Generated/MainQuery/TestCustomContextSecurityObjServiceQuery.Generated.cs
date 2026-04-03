@@ -4,79 +4,75 @@
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
     [Microsoft.AspNetCore.Mvc.RouteAttribute("mainQueryApi/[controller]/[action]")]
-    public partial class TestCustomContextSecurityObjQueryController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
+    public partial class TestCustomContextSecurityObjQueryController : Framework.Infrastructure.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
         /// <summary>
         /// Get TestCustomContextSecurityObjs (FullDTO) by odata string
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjFullDTO> GetFullTestCustomContextSecurityObjsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
+        public virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjFullDTO> GetFullTestCustomContextSecurityObjsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTestCustomContextSecurityObjsByODataQueryStringInternal(odataQueryString, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullTestCustomContextSecurityObjsByODataQueryStringInternal(odataQueryString, evaluateData));
         }
         
-        protected virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjFullDTO> GetFullTestCustomContextSecurityObjsByODataQueryStringInternal(string odataQueryString, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjFullDTO> GetFullTestCustomContextSecurityObjsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestCustomContextSecurityObjBLL bll = evaluateData.Context.Logics.TestCustomContextSecurityObjFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.TestCustomContextSecurityObj> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.TestCustomContextSecurityObj>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
-            Framework.OData.SelectOperationResult<SampleSystem.Domain.TestCustomContextSecurityObj> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestCustomContextSecurityObj>(Framework.Transfering.ViewDTOType.FullDTO));
-            return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjFullDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
+            OData.Domain.SelectOperation<SampleSystem.Domain.TestCustomContextSecurityObj> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.TestCustomContextSecurityObj>(odataQueryString);
+            OData.Domain.SelectOperationResult<SampleSystem.Domain.TestCustomContextSecurityObj> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.TestCustomContextSecurityObj>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjFullDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
         /// <summary>
         /// Get TestCustomContextSecurityObjs (SimpleDTO) by odata string
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjSimpleDTO> GetSimpleTestCustomContextSecurityObjsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
+        public virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjSimpleDTO> GetSimpleTestCustomContextSecurityObjsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTestCustomContextSecurityObjsByODataQueryStringInternal(odataQueryString, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleTestCustomContextSecurityObjsByODataQueryStringInternal(odataQueryString, evaluateData));
         }
         
-        protected virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjSimpleDTO> GetSimpleTestCustomContextSecurityObjsByODataQueryStringInternal(string odataQueryString, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjSimpleDTO> GetSimpleTestCustomContextSecurityObjsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestCustomContextSecurityObjBLL bll = evaluateData.Context.Logics.TestCustomContextSecurityObjFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.TestCustomContextSecurityObj> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.TestCustomContextSecurityObj>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
-            Framework.OData.SelectOperationResult<SampleSystem.Domain.TestCustomContextSecurityObj> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestCustomContextSecurityObj>(Framework.Transfering.ViewDTOType.SimpleDTO));
-            return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjSimpleDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
+            OData.Domain.SelectOperation<SampleSystem.Domain.TestCustomContextSecurityObj> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.TestCustomContextSecurityObj>(odataQueryString);
+            OData.Domain.SelectOperationResult<SampleSystem.Domain.TestCustomContextSecurityObj> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.TestCustomContextSecurityObj>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
+            return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjSimpleDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
         /// <summary>
         /// Get TestCustomContextSecurityObjs (VisualDTO) by odata string
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjVisualDTO> GetVisualTestCustomContextSecurityObjsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
+        public virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjVisualDTO> GetVisualTestCustomContextSecurityObjsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualTestCustomContextSecurityObjsByODataQueryStringInternal(odataQueryString, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualTestCustomContextSecurityObjsByODataQueryStringInternal(odataQueryString, evaluateData));
         }
         
-        protected virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjVisualDTO> GetVisualTestCustomContextSecurityObjsByODataQueryStringInternal(string odataQueryString, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjVisualDTO> GetVisualTestCustomContextSecurityObjsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestCustomContextSecurityObjBLL bll = evaluateData.Context.Logics.TestCustomContextSecurityObjFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.TestCustomContextSecurityObj> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.TestCustomContextSecurityObj>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
-            Framework.OData.SelectOperationResult<SampleSystem.Domain.TestCustomContextSecurityObj> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestCustomContextSecurityObj>(Framework.Transfering.ViewDTOType.VisualDTO));
-            return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjVisualDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
+            OData.Domain.SelectOperation<SampleSystem.Domain.TestCustomContextSecurityObj> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.TestCustomContextSecurityObj>(odataQueryString);
+            OData.Domain.SelectOperationResult<SampleSystem.Domain.TestCustomContextSecurityObj> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.TestCustomContextSecurityObj>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
+            return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjVisualDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
         /// <summary>
         /// Get TestCustomContextSecurityObjProjections (ProjectionDTO) by odata string
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjProjectionDTO> GetTestCustomContextSecurityObjProjectionsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
+        public virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjProjectionDTO> GetTestCustomContextSecurityObjProjectionsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestCustomContextSecurityObjProjectionsByODataQueryStringInternal(odataQueryString, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetTestCustomContextSecurityObjProjectionsByODataQueryStringInternal(odataQueryString, evaluateData));
         }
         
-        protected virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjProjectionDTO> GetTestCustomContextSecurityObjProjectionsByODataQueryStringInternal(string odataQueryString, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjProjectionDTO> GetTestCustomContextSecurityObjProjectionsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestCustomContextSecurityObjProjectionBLL bll = evaluateData.Context.Logics.TestCustomContextSecurityObjProjectionFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.OData.SelectOperation selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-            Framework.OData.SelectOperation<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection> typedSelectOperation = Framework.OData.StandartExpressionBuilderExtensions.ToTyped<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>(evaluateData.Context.StandartExpressionBuilder, selectOperation);
-            Framework.OData.SelectOperationResult<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection> preResult = bll.GetObjectsByOData(typedSelectOperation, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>(Framework.Transfering.ViewDTOType.ProjectionDTO));
-            return new Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjProjectionDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
+            OData.Domain.SelectOperation<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>(odataQueryString);
+            OData.Domain.SelectOperationResult<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>(Framework.BLL.Domain.DTO.ViewDTOType.ProjectionDTO));
+            return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestCustomContextSecurityObjProjectionDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
     }
 }

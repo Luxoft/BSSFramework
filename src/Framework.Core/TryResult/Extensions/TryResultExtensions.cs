@@ -1,5 +1,6 @@
-﻿using CommonFramework.Maybe;
+﻿using CommonFramework;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Core;
 
 public static partial class TryResultExtensions
@@ -36,11 +37,7 @@ public static partial class TryResultExtensions
         return source.SelectMany(selector, (_, res) => res);
     }
 
-    public static ITryResult<T> SelectMany<T>(this ITryResult<ITryResult<T>> value)
-    {
-        return value.Match(res => res, TryResult.CreateFault<T>);
-    }
-
+    public static ITryResult<T> SelectMany<T>(this ITryResult<ITryResult<T>> value) => value.Match(res => res, TryResult.CreateFault<T>);
 
     public static void Match<T>(this ITryResult<T> source, Action<T> successAction, Action<Exception> faultAction = null)
     {
@@ -169,35 +166,25 @@ public static partial class TryResultExtensions
         return source.Match(v => v, error => default(T));
     }
 
-    public static ITryResult<T> ToTryResult<T>(this Maybe<T> source)
-    {
-        return source.Match(TryResult.Return<T>, TryResult.CreateBreak<T>);
-    }
+    public static ITryResult<T> ToTryResult<T>(this Maybe<T> source) => source.Match(TryResult.Return<T>, TryResult.CreateBreak<T>);
 
-    public static IEnumerable<Exception> GetErrors<T>(this IEnumerable<ITryResult<T>> source)
-    {
-        return from tryRes in source
+    public static IEnumerable<Exception> GetErrors<T>(this IEnumerable<ITryResult<T>> source) =>
+        from tryRes in source
 
-               select tryRes.Match(_ => default(Exception), ex => ex) into ex
+        select tryRes.Match(_ => default(Exception), ex => ex) into ex
 
-               where ex != null
+        where ex != null
 
-               select ex;
+        select ex;
 
-    }
+    public static IEnumerable<T> GetResults<T>(this IEnumerable<ITryResult<T>> source) =>
+        from tryRes in source
 
-    public static IEnumerable<T> GetResults<T>(this IEnumerable<ITryResult<T>> source)
-    {
-        return from tryRes in source
+        select tryRes.Match(res => new { res }, _ => null) into resCont
 
-               select tryRes.Match(res => new { res }, _ => null) into resCont
+        where resCont != null
 
-               where resCont != null
-
-               select resCont.res;
-
-    }
-
+        select resCont.res;
 
     public static void TryFault<T>(this IEnumerable<ITryResult<T>> source)
     {

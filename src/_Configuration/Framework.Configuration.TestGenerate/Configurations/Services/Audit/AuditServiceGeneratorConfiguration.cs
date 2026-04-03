@@ -1,5 +1,0 @@
-﻿using Framework.DomainDriven.ServiceModelGenerator;
-
-namespace Framework.Configuration.TestGenerate;
-
-public class AuditServiceGeneratorConfiguration(ServerGenerationEnvironment environment) : AuditGeneratorConfigurationBase<ServerGenerationEnvironment>(environment);

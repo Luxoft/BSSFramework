@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven;
+﻿using Framework.Application;
+using Framework.Database;
 
 using GenericQueryable;
 
@@ -10,8 +11,7 @@ namespace SampleSystem.IntegrationTests;
 public class NHibFetchTests : TestBase
 {
     [TestMethod]
-    public void TestPropCollection_TestPassed()
-    {
+    public void TestPropCollection_TestPassed() =>
         this.Evaluate(
             DBSessionMode.Read,
             ctx =>
@@ -20,5 +20,4 @@ public class NHibFetchTests : TestBase
 
                 return;
             });
-    }
 }

@@ -1,8 +1,10 @@
-﻿using SampleSystem.Domain;
+﻿using Framework.Application;
+using Framework.Application.Repository;
+using Framework.BLL;
+using Framework.Database;
 
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Repository;
+using SampleSystem.Domain;
+
 using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +17,7 @@ namespace SampleSystem.IntegrationTests;
 public class SecurityRuleTests : TestBase
 {
     [TestMethod]
-    public void ApplyExceptRule_CurrentUserExcepted()
+    public async Task ApplyExceptRule_CurrentUserExcepted()
     {
         // Arrange
         var testSecurityRule = SecurityRole.Administrator.Except(DomainSecurityRule.CurrentUser);
@@ -24,16 +26,16 @@ public class SecurityRuleTests : TestBase
 
         var currentEmployeeId = this.DataHelper.GetCurrentEmployee().Id;
 
-        var testObjectIdents = this.Evaluate(
+        var testObjectIdents = await this.EvaluateAsync(
             DBSessionMode.Write,
-            ctx =>
+            async ctx =>
             {
                 var bll = ctx.Logics.Default.Create<TestExceptObject>();
 
                 var employeeRep = ctx.ServiceProvider.GetRequiredKeyedService<IRepository<Employee>>(nameof(SecurityRule.Disabled));
 
-                var testObj1 = new TestExceptObject { Employee = employeeRep.Load(testOtherEmployeeId) };
-                var testObj2 = new TestExceptObject { Employee = employeeRep.Load(currentEmployeeId) };
+                var testObj1 = new TestExceptObject { Employee = await employeeRep.LoadAsync(testOtherEmployeeId) };
+                var testObj2 = new TestExceptObject { Employee = await employeeRep.LoadAsync(currentEmployeeId) };
                 bll.Save([testObj1, testObj2]);
 
                 return new[] { testObj1.Id, testObj2.Id };
@@ -67,7 +69,7 @@ public class SecurityRuleTests : TestBase
                          {
                              var bll = ctx.Logics.EmployeeFactory.Create(testSecurityRule);
 
-                             bll.CheckAccess(ctx.Logics.Employee.GetCurrent());
+                             bll.CheckAccess(ctx.CurrentEmployeeSource.CurrentUser);
                          });
 
         // Assert

@@ -1,16 +1,17 @@
 ﻿using CommonFramework;
 
-using Framework.Configuration.BLL.SubscriptionSystemService3;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+using Framework.Application.Domain;
+using Framework.Application.Events;
+using Framework.BLL;
+using Framework.BLL.Services;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
+using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
-using Framework.Events;
-using Framework.Persistent;
+using Framework.Core.TypeResolving;
 
-namespace Framework.Configuration.BLL;
+namespace Framework.Configuration.BLL.TargetSystemService;
 
 public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<IConfigurationBLLContext>, ITargetSystemService
 
@@ -44,7 +45,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLL
 
         this.lazyTargetSystem = LazyHelper.Create(() => context.Logics.TargetSystem.GetByName(this.Name, true));
 
-        this.TypeResolver = this.TypeResolverS.OverrideInput((DomainType domainType) => domainType.FullTypeName).WithCache().WithLock();
+        this.TypeResolver = this.TypeResolverS.OverrideInput((DomainType domainType) => domainType.FullTypeName);
     }
 
     public string Name { get; }
@@ -66,11 +67,11 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLL
         if (operation == null) throw new ArgumentNullException(nameof(operation));
         if (domainObjectId.IsDefault()) throw new ArgumentOutOfRangeException(nameof(domainObjectId));
 
-        var domainType = this.TypeResolver.Resolve(operation.DomainType);
+        var domainType = this.TypeResolver.TryResolve(operation.DomainType);
 
         new Action<string, long?, Guid>(this.ForceEvent<TPersistentDomainObjectBase>)
             .CreateGenericMethod(domainType)
-            .Invoke(this, new object[] { operation.Name, revision, domainObjectId });
+            .Invoke(this, [operation.Name, revision, domainObjectId]);
     }
 
     private void ForceEvent<TDomainObject>(string operationName, long? revision, Guid domainObjectId)
@@ -86,10 +87,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLL
         this.eventOperationSender.Send(domainObject, domainObjectEvent, CancellationToken.None).GetAwaiter().GetResult();
     }
 
-    public bool IsAssignable(Type domainType)
-    {
-        return typeof(TPersistentDomainObjectBase).IsAssignableFrom(domainType);
-    }
+    public bool IsAssignable(Type domainType) => typeof(TPersistentDomainObjectBase).IsAssignableFrom(domainType);
 
     private IRevisionSubscriptionSystemService GetSubscriptionService(
             SubscriptionMetadataStore subscriptionMetadataStore)

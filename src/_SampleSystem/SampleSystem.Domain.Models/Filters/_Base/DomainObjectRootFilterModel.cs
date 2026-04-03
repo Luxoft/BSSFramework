@@ -5,8 +5,5 @@ namespace SampleSystem.Domain;
 public abstract class DomainObjectRootFilterModel<TDomainObject> : DomainObjectFilterModel<TDomainObject>
         where TDomainObject : PersistentDomainObjectBase
 {
-    public override Expression<Func<TDomainObject, bool>> ToFilterExpression()
-    {
-        return _ => true;
-    }
+    public override Expression<Func<TDomainObject, bool>> ToFilterExpression() => _ => true;
 }

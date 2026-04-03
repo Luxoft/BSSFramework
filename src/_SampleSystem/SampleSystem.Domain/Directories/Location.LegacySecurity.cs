@@ -1,4 +1,5 @@
-﻿using Framework.Security;
+﻿using Framework.BLL.Domain.Attributes;
+
 using SecuritySystem;
 
 namespace SampleSystem.Domain;

@@ -1,5 +1,8 @@
-﻿using Framework.DomainDriven.Generation.Domain;
-using Framework.DomainDriven.ServiceModelGenerator;
+﻿using Framework.CodeGeneration.GeneratePolicy;
+using Framework.CodeGeneration.ServiceModelGenerator;
+using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Main;
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
+using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 
 namespace SampleSystem.CodeGenerate;
@@ -10,10 +13,8 @@ namespace SampleSystem.CodeGenerate;
 public class MainServiceGeneratorConfiguration : MainGeneratorConfigurationBase<ServerGenerationEnvironment>
 {
     public MainServiceGeneratorConfiguration(ServerGenerationEnvironment environment)
-        : base(environment)
-    {
+        : base(environment) =>
         this.GeneratePolicy = new CustomServiceGeneratePolicy(this.Environment);
-    }
 
     public override IGeneratePolicy<MethodIdentity> GeneratePolicy { get; }
 

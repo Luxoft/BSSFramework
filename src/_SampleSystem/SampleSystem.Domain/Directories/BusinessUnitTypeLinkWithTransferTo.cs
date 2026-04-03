@@ -1,4 +1,4 @@
-﻿using Framework.Persistent;
+﻿using Framework.Relations;
 
 namespace SampleSystem.Domain;
 
@@ -28,35 +28,15 @@ public class BusinessUnitTypeLinkWithTransferTo :
     [IsMaster]
     public virtual BusinessUnitType BusinessUnitType
     {
-        get
-        {
-            return this.businessUnitType;
-        }
-
-        set
-        {
-            this.businessUnitType = value;
-        }
+        get => this.businessUnitType;
+        set => this.businessUnitType = value;
     }
 
     public virtual BusinessUnitType TransferTo
     {
-        get
-        {
-            return this.transferTo;
-        }
-
-        set
-        {
-            this.transferTo = value;
-        }
+        get => this.transferTo;
+        set => this.transferTo = value;
     }
 
-    BusinessUnitType IDetail<BusinessUnitType>.Master
-    {
-        get
-        {
-            return this.businessUnitType;
-        }
-    }
+    BusinessUnitType IDetail<BusinessUnitType>.Master => this.businessUnitType;
 }

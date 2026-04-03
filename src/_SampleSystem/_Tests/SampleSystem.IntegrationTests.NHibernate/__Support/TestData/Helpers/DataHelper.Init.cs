@@ -1,16 +1,11 @@
-﻿using Automation.ServiceEnvironment;
+﻿using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
 
 using SampleSystem.BLL;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 
-public partial class DataHelper : RootServiceProviderContainer<ISampleSystemBLLContext>
+public partial class DataHelper(IServiceProvider rootServiceProvider) : RootServiceProviderContainer<ISampleSystemBLLContext>(rootServiceProvider)
 {
-    public DataHelper(IServiceProvider rootServiceProvider)
-            : base(rootServiceProvider)
-    {
-    }
-
     private Guid GetGuid(Guid? id)
     {
         id = id ?? Guid.NewGuid();

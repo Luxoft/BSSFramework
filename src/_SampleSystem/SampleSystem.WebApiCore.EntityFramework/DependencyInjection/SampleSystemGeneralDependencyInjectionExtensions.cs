@@ -1,44 +1,41 @@
 ﻿using CommonFramework.DependencyInjection;
 
-using Framework.DomainDriven.EntityFramework;
-using Framework.DomainDriven.Setup;
+using Framework.Database.EntityFramework.DependencyInjection;
+using Framework.Infrastructure.DependencyInjection;
 
 using Microsoft.EntityFrameworkCore;
 
-using SampleSystem.Domain;
-using SampleSystem.Security;
+using SampleSystem.WebApiCore.Domain;
 
 using SecuritySystem;
 
-namespace SampleSystem.ServiceEnvironment;
+namespace SampleSystem.WebApiCore.DependencyInjection;
 
 public static class SampleSystemGeneralDependencyInjectionExtensions
 {
-    public static IServiceCollection RegisterGeneralDependencyInjection(this IServiceCollection services, IConfiguration configuration)
-    {
-        return services
+    public static IServiceCollection AddGeneralDependencyInjection(this IServiceCollection services, IConfiguration configuration) =>
+        services
 
-               .AddBssFramework(rootSettings =>
-               {
-                   rootSettings.RegisterDenormalizeHierarchicalDALListener = false;
+            .AddBssFramework(rootSettings =>
+            {
+                rootSettings.RegisterDenormalizeHierarchicalDALListener = false;
 
-                   rootSettings
-                       .AddSecuritySystem(securitySettings =>
-                                              securitySettings
-                                                  .AddSecurityContexts()
-                                                  .AddDomainSecurityServices()
-                                                  .AddSecurityRoles()
-                                                  .AddUserSource<Employee>(usb => usb.SetFilter(employee => employee.Active))
-                                                  .AddVirtualPermissions()
-                                                  .SetSecurityAdministratorRule(
-                                                      DomainSecurityRule.AnyRole with { CustomCredential = new SecurityRuleCredential.AnyUserCredential() }))
-                       .AddEntityFramework(s => { });
-               })
-               .AddScopedFrom<DbContext, AppDbContext>()
-               .AddDbContext<AppDbContext>(o =>
-                                               o.UseSqlServer(
-                                                   "Data Source=.;Initial Catalog=SampleSystem;Integrated Security=True;TrustServerCertificate=True"))
-               .AddHttpContextAccessor()
-               .AddLogging();
-    }
+                rootSettings
+                    .AddSecuritySystem(securitySettings =>
+                                           securitySettings
+                                               .AddSecurityContexts()
+                                               .AddDomainSecurityServices()
+                                               .AddSecurityRoles()
+                                               .AddUserSource<Employee>(usb => usb.SetFilter(employee => employee.Active))
+                                               .AddVirtualPermissions()
+                                               .SetSecurityAdministratorRule(
+                                                   DomainSecurityRule.AnyRole with { CustomCredential = new SecurityRuleCredential.AnyUserCredential() }))
+                    .AddEntityFramework(_ => { });
+            })
+            .AddScopedFrom<DbContext, AppDbContext>()
+            .AddDbContext<AppDbContext>(o =>
+                                            o.UseSqlServer(
+                                                "Data Source=.;Initial Catalog=SampleSystem;Integrated Security=True;TrustServerCertificate=True"))
+            .AddHttpContextAccessor()
+            .AddLogging();
 }

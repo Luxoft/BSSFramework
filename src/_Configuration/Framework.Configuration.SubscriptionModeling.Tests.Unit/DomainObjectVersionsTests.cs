@@ -1,28 +1,14 @@
-﻿using AutoFixture.Idioms;
+﻿using FluentAssertions;
 
-using FluentAssertions;
+using Framework.Subscriptions.Domain;
 
-using Framework.Configuration.Core;
-using Framework.UnitTesting;
 using NUnit.Framework;
 
 namespace Framework.Configuration.SubscriptionModeling.Tests.Unit;
 
 [TestFixture]
-public sealed class DomainObjectVersionsTests : TestFixtureBase
+public  class DomainObjectVersionsTests
 {
-    [Test]
-    public void Ctor_NotNullArguments_PropertiesInitialized()
-    {
-        // Arrange
-        var assertion = new ConstructorInitializedMemberAssertion(this.Fixture);
-
-        // Act
-
-        // Assert
-        assertion.Verify(typeof(DomainObjectVersions<string>).GetConstructors());
-    }
-
     [Test]
     public void DomainObjectType_PreviousNotNull_PreviousType()
     {
@@ -78,7 +64,7 @@ public sealed class DomainObjectVersionsTests : TestFixtureBase
     public void ChangeType_Get_CorrectComputedChangeType(
             object previous,
             object current,
-            Framework.Configuration.Core.DomainObjectChangeType expectedChangeType)
+            DomainObjectChangeType expectedChangeType)
     {
         // Arrange
         var versions = new DomainObjectVersions<object>(previous, current);

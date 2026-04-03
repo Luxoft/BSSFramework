@@ -1,21 +1,14 @@
-﻿using CommonFramework;
-
-using Framework.Core;
+﻿using Framework.Core;
 
 namespace Framework.Authorization.Domain;
 
 public class ChangePermissionDelegatesModel : DomainObjectBase
 {
-    public ChangePermissionDelegatesModel()
-    {
-        this.Items = new List<DelegateToItemModel>();
-    }
-
     [Restriction.Required]
     public Permission DelegateFromPermission { get; set; }
 
     [Restriction.Required]
-    public IList<DelegateToItemModel> Items { get; set; }
+    public List<DelegateToItemModel> Items { get; set; } = new();
 
     public void Merge(UpdatePermissionDelegatesModel updatePermissionDelegatesModel)
     {

@@ -2,9 +2,8 @@
 using System.Reflection;
 
 using CommonFramework;
-using CommonFramework.Maybe;
 
-namespace Framework.Core;
+namespace Framework.Core.Helpers;
 
 public static class EnumHelper
 {
@@ -28,16 +27,12 @@ public static class EnumHelper
     }
 
     public static TEnum Parse<TEnum>(string str)
-            where TEnum : struct, Enum
-    {
-        return Parse<TEnum>(str, true);
-    }
+            where TEnum : struct, Enum =>
+        Parse<TEnum>(str, true);
 
     public static TEnum Parse<TEnum>(string str, bool ignoreCase)
-            where TEnum : struct, Enum
-    {
-        return (TEnum)Enum.Parse(typeof(TEnum), str, ignoreCase);
-    }
+            where TEnum : struct, Enum =>
+        (TEnum)Enum.Parse(typeof(TEnum), str, ignoreCase);
 
     public static Maybe<TEnum> TryParse<TEnum>(string str)
             where TEnum : struct, Enum

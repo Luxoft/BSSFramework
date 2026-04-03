@@ -7,13 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Framework.Core;
+
 namespace SampleSystem.Domain.Projections
 {
     
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="BusinessUnit")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
+    [Framework.Database.Mapping.TableAttribute(Name="BusinessUnit")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
     public partial class BusinessUnitIdentity : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -31,25 +33,25 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.DomainDriven.IgnoreFetchAttribute()]
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
         public abstract string VirtualName
         {
             get;
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.DomainDriven.IgnoreFetchAttribute()]
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
         public abstract string VirtualValue
         {
             get;
         }
     }
     
-    [Framework.DomainDriven.BLL.BLLProjectionViewRoleAttribute()]
-    [Framework.Persistent.Mapping.TableAttribute(Name="BusinessUnit")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
+    [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
+    [Framework.Database.Mapping.TableAttribute(Name="BusinessUnit")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
     [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel), Framework.Projection.ProjectionFilterTargets.OData)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
     public partial class BusinessUnitProgramClass : SampleSystem.Domain.Projections.CustomBusinessUnitProgramClassBase
     {
         
@@ -65,10 +67,10 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="businessUnitTypeId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="businessUnitTypeId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.BusinessUnitProgramClass_AutoProp_BusinessUnitType BusinessUnitType_Auto
         {
             get
@@ -77,10 +79,10 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.ExpandPathAttribute("BusinessUnitType_Auto.Id")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("BusinessUnitType_Auto.Id")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual System.Guid? BusinessUnitTypeId
         {
             get
@@ -90,8 +92,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="isNewBusiness")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="isNewBusiness")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual bool IsNewBusiness
         {
             get
@@ -101,8 +103,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="name")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="name")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Name
         {
             get
@@ -111,10 +113,10 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="periodEndDate")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="periodEndDate")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual System.DateTime? PeriodEndDate
         {
             get
@@ -124,9 +126,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="BusinessUnitType")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnitType))]
+    [Framework.Database.Mapping.TableAttribute(Name="BusinessUnitType")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnitType), Framework.Projection.ProjectionRole.AutoNode)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnitType))]
     public partial class BusinessUnitProgramClass_AutoProp_BusinessUnitType : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -135,11 +137,11 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.DomainDriven.BLL.BLLProjectionViewRoleAttribute()]
-    [Framework.Persistent.Mapping.TableAttribute(Name="CompanyLegalEntity")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity))]
+    [Framework.BLL.Domain.Attributes.ViewDomainObjectAttribute(typeof(SampleSystem.Security.SampleSystemSecurityOperation), "BusinessUnitEdit")]
+    [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
+    [Framework.Database.Mapping.TableAttribute(Name="CompanyLegalEntity")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity))]
-    [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.Security.SampleSystemSecurityOperation), "BusinessUnitEdit")]
     [SampleSystem.Domain.ExampleCustomProjectionAttribute()]
     public partial class CustomCompanyLegalEntity : SampleSystem.Domain.PersistentDomainObjectBase
     {
@@ -163,8 +165,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="aribaStatusDescription", ExternalTableName="LegalEntityBase")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="aribaStatusDescription", ExternalTableName="LegalEntityBase")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string AribaStatusDescription
         {
             get
@@ -174,8 +176,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="aribaStatusType", ExternalTableName="LegalEntityBase")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="aribaStatusType", ExternalTableName="LegalEntityBase")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.AribaStatusType AribaStatusType
         {
             get
@@ -185,8 +187,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="baseObjId", ExternalTableName="LegalEntityBase")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="baseObjId", ExternalTableName="LegalEntityBase")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.CustomTestObjForNested BaseObj
         {
             get
@@ -195,10 +197,10 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.Security.SampleSystemSecurityOperation), "CompanyLegalEntityView")]
+        [Framework.BLL.Domain.Attributes.ViewDomainObjectAttribute(typeof(SampleSystem.Security.SampleSystemSecurityOperation), "CompanyLegalEntityView")]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="code")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="code")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Code
         {
             get
@@ -208,8 +210,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="currentObjId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="currentObjId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.CustomTestObjForNested CurrentObj
         {
             get
@@ -219,8 +221,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="name", ExternalTableName="LegalEntityBase")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="name", ExternalTableName="LegalEntityBase")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Name
         {
             get
@@ -230,8 +232,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="nameEnglish", ExternalTableName="LegalEntityBase")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="nameEnglish", ExternalTableName="LegalEntityBase")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string NameEnglish
         {
             get
@@ -241,9 +243,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="TestObjForNested")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.TestObjForNested))]
+    [Framework.Database.Mapping.TableAttribute(Name="TestObjForNested")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.TestObjForNested), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.TestObjForNested))]
     public partial class CustomTestObjForNested : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -256,8 +258,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="name", ExternalTableName="TestObjForNestedBase")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="name", ExternalTableName="TestObjForNestedBase")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Name
         {
             get
@@ -267,8 +269,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="periodStartDate", ExternalTableName="TestObjForNestedBase")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="periodStartDate", ExternalTableName="TestObjForNestedBase")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual System.DateTime PeriodStartDateXXX
         {
             get
@@ -278,9 +280,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="BusinessUnit")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
+    [Framework.Database.Mapping.TableAttribute(Name="BusinessUnit")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
     public partial class HerBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -293,8 +295,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="name")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="name")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Name
         {
             get
@@ -304,8 +306,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="parentId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="parentId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.HerBusinessUnit Parent
         {
             get
@@ -315,9 +317,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="BusinessUnitEmployeeRole")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnitEmployeeRole))]
+    [Framework.Database.Mapping.TableAttribute(Name="BusinessUnitEmployeeRole")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnitEmployeeRole), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnitEmployeeRole))]
     public partial class MiniBusinessUnitEmployeeRole : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -329,10 +331,10 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.MissedParent)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="businessUnitId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="businessUnitId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.TestBusinessUnit BusinessUnit
         {
             get
@@ -342,8 +344,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="employeeId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="employeeId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.VisualEmployee Employee
         {
             get
@@ -362,21 +364,21 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.DomainDriven.IgnoreFetchAttribute()]
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
         public abstract string[][] CalcMatrix
         {
             get;
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.DomainDriven.IgnoreFetchAttribute()]
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
         public abstract SampleSystem.Domain.Projections.TestBusinessUnitType CalcProjectionProp
         {
             get;
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.DomainDriven.IgnoreFetchAttribute()]
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
         public abstract string CalcProp
         {
             get;
@@ -384,25 +386,25 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.DomainDriven.FetchPathAttribute("BusinessUnitEmployeeRoles.Employee")]
+        [Framework.BLL.Domain.Fetching.FetchPathAttribute("BusinessUnitEmployeeRoles.Employee")]
         public abstract string Employees
         {
             get;
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.DomainDriven.IgnoreFetchAttribute()]
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
         public abstract string HerBusinessUnit_Full
         {
             get;
         }
     }
     
-    [Framework.DomainDriven.BLL.BLLProjectionViewRoleAttribute()]
-    [Framework.Persistent.Mapping.TableAttribute(Name="BusinessUnit")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
+    [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
+    [Framework.Database.Mapping.TableAttribute(Name="BusinessUnit")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
     [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel), Framework.Projection.ProjectionFilterTargets.ODataTree)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
     public partial class TestBusinessUnit : SampleSystem.Domain.Projections.CustomTestBusinessUnitBase
     {
         
@@ -420,9 +422,9 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Domain.Projections.MiniBusinessUnitEmployeeRole> BusinessUnitEmployeeRoles
         {
             get
@@ -431,10 +433,10 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="Id")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="Id")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.HerBusinessUnit Her
         {
             get
@@ -444,8 +446,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="name")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="name")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Name
         {
             get
@@ -454,10 +456,10 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="parentId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="parentId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.TestBusinessUnit_AutoProp_Parent Parent_Auto
         {
             get
@@ -467,8 +469,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.ExpandPathAttribute("Parent_Auto.PeriodStartDate_Last_ParentPeriodStartDate")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Parent_Auto.PeriodStartDate_Last_ParentPeriodStartDate")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual System.DateTime? ParentPeriodStartDate
         {
             get
@@ -478,8 +480,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="periodEndDate")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="periodEndDate")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual System.DateTime? PeriodEndDate
         {
             get
@@ -489,9 +491,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="BusinessUnit")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
+    [Framework.Database.Mapping.TableAttribute(Name="BusinessUnit")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.AutoNode)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
     public partial class TestBusinessUnit_AutoProp_Parent : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -501,10 +503,10 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.LastAutoNode)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="periodStartDate")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="periodStartDate")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual System.DateTime PeriodStartDate_Last_ParentPeriodStartDate
         {
             get
@@ -514,9 +516,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="BusinessUnitType")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnitType))]
+    [Framework.Database.Mapping.TableAttribute(Name="BusinessUnitType")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnitType), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnitType))]
     public partial class TestBusinessUnitType : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -526,10 +528,10 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="id")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="id")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public override System.Guid Id
         {
             get
@@ -539,8 +541,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="name")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="name")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Name
         {
             get
@@ -550,10 +552,10 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.DomainDriven.BLL.BLLProjectionViewRoleAttribute()]
-    [Framework.Persistent.Mapping.TableAttribute(Name="TestCustomContextSecurityObj")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.TestCustomContextSecurityObj))]
+    [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
+    [Framework.Database.Mapping.TableAttribute(Name="TestCustomContextSecurityObj")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.TestCustomContextSecurityObj), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.TestCustomContextSecurityObj))]
     public partial class TestCustomContextSecurityObjProjection : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -564,8 +566,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="name")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="name")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Name
         {
             get
@@ -575,10 +577,10 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.DomainDriven.BLL.BLLProjectionViewRoleAttribute()]
-    [Framework.Persistent.Mapping.TableAttribute(Name="HRDepartment")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.HRDepartment))]
+    [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
+    [Framework.Database.Mapping.TableAttribute(Name="HRDepartment")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.HRDepartment), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.HRDepartment))]
     public partial class TestDepartment : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -593,8 +595,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="locationId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="locationId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.TestLocation Location
         {
             get
@@ -603,10 +605,10 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="locationId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="locationId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.TestDepartment_AutoProp_Location Location_Auto
         {
             get
@@ -616,8 +618,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.ExpandPathAttribute("Location_Auto.BinaryData_Last_LocationBinaryData")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Location_Auto.BinaryData_Last_LocationBinaryData")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual byte[] LocationBinaryData
         {
             get
@@ -627,8 +629,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="name")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="name")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Name
         {
             get
@@ -638,9 +640,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="Location")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Location))]
+    [Framework.Database.Mapping.TableAttribute(Name="Location")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Location), Framework.Projection.ProjectionRole.AutoNode)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.Location))]
     public partial class TestDepartment_AutoProp_Location : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -650,10 +652,10 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.LastAutoNode)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="binaryData")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="binaryData")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual byte[] BinaryData_Last_LocationBinaryData
         {
             get
@@ -663,13 +665,13 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.DomainDriven.BLL.BLLProjectionViewRoleAttribute()]
-    [Framework.Persistent.Mapping.TableAttribute(Name="Employee")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee))]
+    [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
+    [Framework.Database.Mapping.TableAttribute(Name="Employee")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee), Framework.Projection.ProjectionRole.Default)]
     [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.TestEmployeeFilter), (Framework.Projection.ProjectionFilterTargets.Collection | Framework.Projection.ProjectionFilterTargets.OData))]
     [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.EmployeeFilterModel), Framework.Projection.ProjectionFilterTargets.Collection)]
     [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel), Framework.Projection.ProjectionFilterTargets.Single)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee))]
     public partial class TestEmployee : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -692,8 +694,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.ExpandPathAttribute("CoreBusinessUnit_Auto.PeriodEndDate_Last_BuEndDate")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("CoreBusinessUnit_Auto.PeriodEndDate_Last_BuEndDate")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual System.DateTime? BuEndDate
         {
             get
@@ -703,8 +705,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="coreBusinessUnitId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="coreBusinessUnitId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.BusinessUnitIdentity CoreBusinessUnit
         {
             get
@@ -713,10 +715,10 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="coreBusinessUnitId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="coreBusinessUnitId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.TestEmployee_AutoProp_CoreBusinessUnit CoreBusinessUnit_Auto
         {
             get
@@ -726,8 +728,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.ExpandPathAttribute("CoreBusinessUnit_Auto.Name_Last_CoreBusinessUnitName")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("CoreBusinessUnit_Auto.Name_Last_CoreBusinessUnitName")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string CoreBusinessUnitName
         {
             get
@@ -737,8 +739,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.ExpandPathAttribute("CoreBusinessUnit_Auto.Projects_Last_CoreBusinessUnitProjects")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("CoreBusinessUnit_Auto.Projects_Last_CoreBusinessUnitProjects")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Domain.Projections.VisualProject> CoreBusinessUnitProjects
         {
             get
@@ -747,10 +749,10 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.Security.ViewDomainObjectAttribute(typeof(SecuritySystem.SecurityRule), "View")]
+        [Framework.BLL.Domain.Attributes.ViewDomainObjectAttribute(typeof(SecuritySystem.SecurityRule), "View")]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="login")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="login")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Login
         {
             get
@@ -760,8 +762,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="nameEngFirstName")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="nameEngFirstName")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string NameEngFirstName
         {
             get
@@ -770,11 +772,11 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.Security.SampleSystemSecurityOperation), "EmployeePositionView")]
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Attributes.ViewDomainObjectAttribute(typeof(SampleSystem.Security.SampleSystemSecurityOperation), "EmployeePositionView")]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="positionId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="positionId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.TestEmployee_AutoProp_Position Position_Auto
         {
             get
@@ -783,10 +785,10 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.Security.SampleSystemSecurityOperation), "EmployeePositionView")]
+        [Framework.BLL.Domain.Attributes.ViewDomainObjectAttribute(typeof(SampleSystem.Security.SampleSystemSecurityOperation), "EmployeePositionView")]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.ExpandPathAttribute("Position_Auto.Name_Last_PositionName")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Position_Auto.Name_Last_PositionName")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string PositionName
         {
             get
@@ -795,10 +797,10 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="ppmId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="ppmId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.TestEmployee_AutoProp_Ppm Ppm_Auto
         {
             get
@@ -808,8 +810,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.ExpandPathAttribute("Ppm_Auto.NameNativeMiddleName_Last_PpmNameNativeMiddleName")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Ppm_Auto.NameNativeMiddleName_Last_PpmNameNativeMiddleName")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string PpmNameNativeMiddleName
         {
             get
@@ -818,10 +820,10 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="roleId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="roleId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.TestEmployee_AutoProp_Role Role_Auto
         {
             get
@@ -831,8 +833,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.ExpandPathAttribute("Role_Auto.Id")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Role_Auto.Id")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual System.Guid? RoleId
         {
             get
@@ -842,8 +844,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.ExpandPathAttribute("Role_Auto.Name_Last_RoleName")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Role_Auto.Name_Last_RoleName")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string RoleName
         {
             get
@@ -853,9 +855,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="BusinessUnit")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
+    [Framework.Database.Mapping.TableAttribute(Name="BusinessUnit")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.AutoNode)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
     public partial class TestEmployee_AutoProp_CoreBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -869,10 +871,10 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.LastAutoNode)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="name")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="name")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Name_Last_CoreBusinessUnitName
         {
             get
@@ -881,10 +883,10 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.LastAutoNode)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="periodEndDate")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="periodEndDate")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual System.DateTime? PeriodEndDate_Last_BuEndDate
         {
             get
@@ -893,9 +895,9 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.LastAutoNode)]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Domain.Projections.VisualProject> Projects_Last_CoreBusinessUnitProjects
         {
             get
@@ -905,9 +907,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="EmployeePosition")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.EmployeePosition))]
+    [Framework.Database.Mapping.TableAttribute(Name="EmployeePosition")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.EmployeePosition), Framework.Projection.ProjectionRole.AutoNode)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.EmployeePosition))]
     public partial class TestEmployee_AutoProp_Position : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -917,10 +919,10 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.LastAutoNode)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="name")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="name")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Name_Last_PositionName
         {
             get
@@ -930,9 +932,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="Employee")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee))]
+    [Framework.Database.Mapping.TableAttribute(Name="Employee")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee), Framework.Projection.ProjectionRole.AutoNode)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee))]
     public partial class TestEmployee_AutoProp_Ppm : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -942,10 +944,10 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.LastAutoNode)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="nameNativeMiddleName")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="nameNativeMiddleName")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string NameNativeMiddleName_Last_PpmNameNativeMiddleName
         {
             get
@@ -955,9 +957,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="EmployeeRole")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.EmployeeRole))]
+    [Framework.Database.Mapping.TableAttribute(Name="EmployeeRole")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.EmployeeRole), Framework.Projection.ProjectionRole.AutoNode)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.EmployeeRole))]
     public partial class TestEmployee_AutoProp_Role : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -967,10 +969,10 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.LastAutoNode)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="name")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="name")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Name_Last_RoleName
         {
             get
@@ -980,10 +982,10 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.DomainDriven.BLL.BLLProjectionViewRoleAttribute()]
-    [Framework.Persistent.Mapping.TableAttribute(Name="IMRequest")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.IMRequest))]
+    [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
+    [Framework.Database.Mapping.TableAttribute(Name="IMRequest")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.IMRequest), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.IMRequest))]
     public partial class TestIMRequest : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -996,8 +998,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="message")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="message")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Message
         {
             get
@@ -1007,8 +1009,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(IsOneToOne=true, CascadeMode=Framework.Persistent.Mapping.CascadeMode.Enabled)]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(IsOneToOne=true, CascadeMode=Framework.Database.Mapping.CascadeMode.Enabled)]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.TestIMRequestDetail OneToOneDetail
         {
             get
@@ -1022,9 +1024,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="IMRequestDetail")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.IMRequestDetail))]
+    [Framework.Database.Mapping.TableAttribute(Name="IMRequestDetail")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.IMRequestDetail), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.IMRequestDetail))]
     public partial class TestIMRequestDetail : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -1034,10 +1036,10 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.MissedParent)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="requestId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="requestId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.TestIMRequest Request
         {
             get
@@ -1047,10 +1049,10 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.DomainDriven.BLL.BLLProjectionViewRoleAttribute()]
-    [Framework.Persistent.Mapping.TableAttribute(Name="Location")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Location))]
+    [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
+    [Framework.Database.Mapping.TableAttribute(Name="Location")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Location), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.Location))]
     public partial class TestLocation : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -1063,8 +1065,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="name")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="name")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Name
         {
             get
@@ -1073,10 +1075,10 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.MissedParent)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="parentId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="parentId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.TestLocationCollectionProperties Parent
         {
             get
@@ -1095,38 +1097,38 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.DomainDriven.IgnoreFetchAttribute()]
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
         public abstract System.Guid[] Child_Identities
         {
             get;
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.DomainDriven.IgnoreFetchAttribute()]
-        public abstract Framework.Core.Period[] Child_Periods
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
+        public abstract Period[] Child_Periods
         {
             get;
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.DomainDriven.IgnoreFetchAttribute()]
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
         public abstract System.DateTime[] Date_Intervals
         {
             get;
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.DomainDriven.IgnoreFetchAttribute()]
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
         public abstract string[] Security_Codes
         {
             get;
         }
     }
     
-    [Framework.DomainDriven.BLL.BLLProjectionViewRoleAttribute()]
-    [Framework.Persistent.Mapping.TableAttribute(Name="Location")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Location))]
+    [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
+    [Framework.Database.Mapping.TableAttribute(Name="Location")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Location), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.Location))]
     public partial class TestLocationCollectionProperties : SampleSystem.Domain.Projections.CustomTestLocationCollectionPropertiesBase
     {
         
@@ -1139,7 +1141,7 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Domain.Projections.TestLocation> Children
         {
             get
@@ -1149,8 +1151,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="name")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="name")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Name
         {
             get
@@ -1160,10 +1162,10 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.DomainDriven.BLL.BLLProjectionViewRoleAttribute()]
-    [Framework.Persistent.Mapping.TableAttribute(Name="TestSecurityObjItem")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.TestSecurityObjItem))]
+    [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
+    [Framework.Database.Mapping.TableAttribute(Name="TestSecurityObjItem")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.TestSecurityObjItem), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.TestSecurityObjItem))]
     public partial class TestSecurityObjItemProjection : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -1174,8 +1176,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="name")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="name")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Name
         {
             get
@@ -1194,7 +1196,7 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.DomainDriven.IgnoreFetchAttribute()]
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
         public abstract System.Collections.Generic.List<SampleSystem.Domain.Projections.TestLocation> Locations
         {
             get;
@@ -1202,15 +1204,15 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.DomainDriven.IgnoreFetchAttribute()]
-        public abstract Framework.Core.Period[] PeriodArray
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
+        public abstract Period[] PeriodArray
         {
             get;
             set;
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.DomainDriven.IgnoreFetchAttribute()]
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
         public abstract SampleSystem.Domain.Projections.TestBusinessUnit TestBU
         {
             get;
@@ -1218,7 +1220,7 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.DomainDriven.IgnoreFetchAttribute()]
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
         public abstract string TestString
         {
             get;
@@ -1235,9 +1237,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="Employee")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee))]
+    [Framework.Database.Mapping.TableAttribute(Name="Employee")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee))]
     public partial class VisualEmployee : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -1249,10 +1251,10 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="nameEng")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="nameEng")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Inline.FioShort NameEng
         {
             get
@@ -1262,8 +1264,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="nameEngFirstName")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="nameEngFirstName")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string NameEngFirstName
         {
             get
@@ -1273,9 +1275,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Persistent.Mapping.TableAttribute(Name="Project")]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Project))]
+    [Framework.Database.Mapping.TableAttribute(Name="Project")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Project), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.Project))]
     public partial class VisualProject : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -1287,10 +1289,10 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.MissedParent)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="businessUnitId")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="businessUnitId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual SampleSystem.Domain.Projections.TestEmployee_AutoProp_CoreBusinessUnit BusinessUnit
         {
             get
@@ -1300,8 +1302,8 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="code")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="code")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual string Code
         {
             get

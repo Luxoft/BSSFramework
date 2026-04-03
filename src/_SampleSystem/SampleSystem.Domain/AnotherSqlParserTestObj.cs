@@ -1,4 +1,4 @@
-﻿using Framework.Persistent.Mapping;
+﻿using Framework.Database.Mapping;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;
@@ -14,14 +14,14 @@ public class AnotherSqlParserTestObj : AuditPersistentDomainObjectBase
 
     public virtual string NotNullColumn
     {
-        get { return this.notNullColumn; }
-        set { this.notNullColumn = value; }
+        get => this.notNullColumn;
+        set => this.notNullColumn = value;
     }
 
     [UniqueElement]
     public virtual string UniqueColumn
     {
-        get { return this.uniqueColumn; }
-        set { this.uniqueColumn = value; }
+        get => this.uniqueColumn;
+        set => this.uniqueColumn = value;
     }
 }

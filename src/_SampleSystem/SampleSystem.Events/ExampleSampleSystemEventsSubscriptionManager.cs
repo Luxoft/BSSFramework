@@ -1,5 +1,5 @@
-﻿using Framework.Events;
-using Framework.Events.Legacy;
+﻿using Framework.Application.Events;
+using Framework.BLL.Events.SubscriptionManager;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
@@ -11,8 +11,6 @@ public class ExampleSampleSystemEventsSubscriptionManager(
     ISampleSystemDTOMappingService mappingService)
     : EventsSubscriptionManager<PersistentDomainObjectBase>(messageSender)
 {
-    private readonly ISampleSystemDTOMappingService mappingService = mappingService ?? throw new ArgumentNullException(nameof(mappingService));
-
     public override void Subscribe()
     {
         this.SubscribeForSaveOperation<BusinessUnit>();
@@ -21,6 +19,6 @@ public class ExampleSampleSystemEventsSubscriptionManager(
 
         this.Subscribe<Employee>(
             (_, operation) => operation == EventOperation.Save,
-            (domainObject, _) => new EmployeeCustomEventModelSaveEventDTO(this.mappingService, new EmployeeCustomEventModel(domainObject)));
+            (domainObject, _) => new EmployeeCustomEventModelSaveEventDTO(mappingService, new EmployeeCustomEventModel(domainObject)));
     }
 }

@@ -7,13 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Framework.Core;
+
 namespace SampleSystem.Generated.DTO
 {
     
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "SimpleIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class BusinessUnitIntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnit>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class BusinessUnitIntegrationSimpleDTO : Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnit>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -62,7 +64,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Domain.BusinessUnitOptions _options;
         
-        private Framework.Core.Period _period;
+        private Period _period;
         
         private string _projectStartMailList;
         
@@ -207,7 +209,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -394,7 +396,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period
+        public Period Period
         {
             get
             {
@@ -443,9 +445,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity), "SimpleIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class CompanyLegalEntityIntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.CompanyLegalEntity>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class CompanyLegalEntityIntegrationSimpleDTO : Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.CompanyLegalEntity>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -557,7 +559,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -650,9 +652,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee), "RichIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeIntegrationRichDTO : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee, System.Guid>, Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class EmployeeIntegrationRichDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private string _accountName;
@@ -673,7 +675,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Generated.DTO.BusinessUnitIntegrationSimpleDTO _coreBusinessUnit;
         
-        private Framework.Core.Period? _coreBusinessUnitPeriod;
+        private Period? _coreBusinessUnitPeriod;
         
         private System.DateTime? _createDate;
         
@@ -681,7 +683,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _dismissDate;
         
-        private Framework.Core.Period _educationDuration;
+        private Period _educationDuration;
         
         private string _email;
         
@@ -751,7 +753,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime _validateVirtualProp;
         
-        private Framework.Core.Period _workPeriod;
+        private Period _workPeriod;
         
         public EmployeeIntegrationRichDTO()
         {
@@ -880,7 +882,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period? CoreBusinessUnitPeriod
+        public Period? CoreBusinessUnitPeriod
         {
             get
             {
@@ -932,7 +934,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period EducationDuration
+        public Period EducationDuration
         {
             get
             {
@@ -1035,7 +1037,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -1404,7 +1406,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period WorkPeriod
+        public Period WorkPeriod
         {
             get
             {
@@ -1432,9 +1434,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee), "SimpleIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeIntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class EmployeeIntegrationSimpleDTO : Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private string _accountName;
@@ -1449,7 +1451,7 @@ namespace SampleSystem.Generated.DTO
         
         private string _cellPhone;
         
-        private Framework.Core.Period? _coreBusinessUnitPeriod;
+        private Period? _coreBusinessUnitPeriod;
         
         private System.DateTime? _createDate;
         
@@ -1457,7 +1459,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _dismissDate;
         
-        private Framework.Core.Period _educationDuration;
+        private Period _educationDuration;
         
         private string _email;
         
@@ -1503,7 +1505,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime _validateVirtualProp;
         
-        private Framework.Core.Period _workPeriod;
+        private Period _workPeriod;
         
         public EmployeeIntegrationSimpleDTO()
         {
@@ -1593,7 +1595,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period? CoreBusinessUnitPeriod
+        public Period? CoreBusinessUnitPeriod
         {
             get
             {
@@ -1645,7 +1647,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period EducationDuration
+        public Period EducationDuration
         {
             get
             {
@@ -1722,7 +1724,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -1961,7 +1963,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period WorkPeriod
+        public Period WorkPeriod
         {
             get
             {
@@ -1984,9 +1986,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink), "RichIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeAndEmployeeSpecializationLinkIntegrationRichDTO : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink, System.Guid>, Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class EmployeeAndEmployeeSpecializationLinkIntegrationRichDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -2079,7 +2081,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -2146,9 +2148,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCellPhone), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCellPhone), "RichIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeCellPhoneIntegrationRichDTO : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCellPhone, System.Guid>, Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCellPhone>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class EmployeeCellPhoneIntegrationRichDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -2286,7 +2288,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -2353,9 +2355,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCustomIntegrationSaveModel), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCustomIntegrationSaveModel), "RichIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeCustomIntegrationSaveModelIntegrationRichDTO : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCustomIntegrationSaveModel>, Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCustomIntegrationSaveModel>
+    public partial class EmployeeCustomIntegrationSaveModelIntegrationRichDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCustomIntegrationSaveModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCustomIntegrationSaveModel>
     {
         
         private SampleSystem.Generated.DTO.EmployeeIntegrationRichDTO _savingObject;
@@ -2393,9 +2395,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePosition), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePosition), "SimpleIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeePositionIntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeePosition>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class EmployeePositionIntegrationSimpleDTO : Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeePosition>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -2503,7 +2505,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -2570,9 +2572,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRegistrationType), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRegistrationType), "SimpleIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeRegistrationTypeIntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeRegistrationType>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class EmployeeRegistrationTypeIntegrationSimpleDTO : Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeRegistrationType>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -2665,7 +2667,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -2732,9 +2734,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRole), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRole), "SimpleIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeRoleIntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeRole>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class EmployeeRoleIntegrationSimpleDTO : Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeRole>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -2812,7 +2814,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -2879,9 +2881,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRoleDegree), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRoleDegree), "SimpleIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeRoleDegreeIntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeRoleDegree>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class EmployeeRoleDegreeIntegrationSimpleDTO : Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeRoleDegree>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -2959,7 +2961,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -3026,9 +3028,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeSpecialization), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeSpecialization), "SimpleIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeSpecializationIntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeSpecialization>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class EmployeeSpecializationIntegrationSimpleDTO : Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeSpecialization>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -3106,7 +3108,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -3173,9 +3175,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeToEmployeeLink), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeToEmployeeLink), "RichIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeToEmployeeLinkIntegrationRichDTO : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeToEmployeeLink, System.Guid>, Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeToEmployeeLink>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class EmployeeToEmployeeLinkIntegrationRichDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeToEmployeeLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeToEmployeeLink>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -3270,7 +3272,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -3350,9 +3352,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment), "SimpleIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class HRDepartmentIntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartment>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class HRDepartmentIntegrationSimpleDTO : Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartment>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -3498,7 +3500,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -3617,9 +3619,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel), "RichIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel>, Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel>
+    public partial class IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel>
     {
         
         private string _customName;
@@ -3672,9 +3674,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1), "RichIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class IntegrationVersionContainer1IntegrationRichDTO : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1, System.Guid>, Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class IntegrationVersionContainer1IntegrationRichDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -3754,7 +3756,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -3839,9 +3841,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1), "SimpleIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class IntegrationVersionContainer1IntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class IntegrationVersionContainer1IntegrationSimpleDTO : Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -3921,7 +3923,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -4001,9 +4003,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2), "RichIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class IntegrationVersionContainer2IntegrationRichDTO : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2, System.Guid>, Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class IntegrationVersionContainer2IntegrationRichDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -4083,7 +4085,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -4168,9 +4170,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Location), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Location), "SimpleIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class LocationIntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Location>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class LocationIntegrationSimpleDTO : Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Location>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -4314,7 +4316,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -4420,9 +4422,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnit), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnit), "SimpleIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class ManagementUnitIntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnit>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class ManagementUnitIntegrationSimpleDTO : Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnit>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -4445,7 +4447,7 @@ namespace SampleSystem.Generated.DTO
         
         private string _name;
         
-        private Framework.Core.Period _period;
+        private Period _period;
         
         public ManagementUnitIntegrationSimpleDTO()
         {
@@ -4534,7 +4536,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -4604,7 +4606,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period
+        public Period Period
         {
             get
             {
@@ -4627,9 +4629,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestImmutableObj), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestImmutableObj), "RichIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class TestImmutableObjIntegrationRichDTO : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.TestImmutableObj, System.Guid>, Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.TestImmutableObj>, Framework.Persistent.IIdentityObject<System.Guid>
+    public partial class TestImmutableObjIntegrationRichDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.TestImmutableObj, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.TestImmutableObj>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private bool _active;
@@ -4709,7 +4711,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {

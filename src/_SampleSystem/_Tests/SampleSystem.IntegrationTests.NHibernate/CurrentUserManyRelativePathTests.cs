@@ -1,6 +1,7 @@
-﻿using Automation.ServiceEnvironment;
+﻿using Framework.Application;
+using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+using Framework.Database;
 
-using Framework.DomainDriven;
 using SecuritySystem;
 
 using SampleSystem.Domain;
@@ -48,8 +49,7 @@ public class CurrentUserManyRelativePathTests : TestBase
     public void TestManyRelativeEmployeeObject_FilterByEmployee_ObjectFound()
     {
         // Arrange
-
-        var currentUserId = this.EvaluateRead(ctx => ctx.Logics.Employee.GetCurrent().Id);
+        var currentUserId = this.EvaluateRead(ctx => ctx.CurrentEmployeeSource.CurrentUser.Id);
 
         Guid[] allTestIdents = [currentUserId, .. this.testEmployeeIdents];
 

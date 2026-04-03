@@ -1,4 +1,4 @@
-﻿using Framework.Persistent;
+﻿using Framework.Relations;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;
@@ -23,25 +23,19 @@ public class HRDepartmentRoleEmployee : AuditPersistentDomainObjectBase, IDetail
     [UniqueElement]
     public virtual Employee Employee
     {
-        get { return this.employee; }
-        set { this.employee = value; }
+        get => this.employee;
+        set => this.employee = value;
     }
 
-    public virtual HRDepartment HRDepartment
-    {
-        get { return this.hRDepartment; }
-    }
+    public virtual HRDepartment HRDepartment => this.hRDepartment;
 
     [UniqueElement]
     [Required]
     public virtual HRDepartmentEmployeeRoleType HRDepartmentEmployeeRoleType
     {
-        get { return this.hRDepartmentEmployeeRoleType; }
-        set { this.hRDepartmentEmployeeRoleType = value; }
+        get => this.hRDepartmentEmployeeRoleType;
+        set => this.hRDepartmentEmployeeRoleType = value;
     }
 
-    HRDepartment IDetail<HRDepartment>.Master
-    {
-        get { return this.hRDepartment; }
-    }
+    HRDepartment IDetail<HRDepartment>.Master => this.hRDepartment;
 }

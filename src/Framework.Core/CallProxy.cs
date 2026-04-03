@@ -1,13 +1,6 @@
 ﻿namespace Framework.Core;
 
-public class CallProxy<T>
+public class CallProxy<T>(Func<T> baseInstance)
 {
-    private readonly Func<T> func;
-
-    public CallProxy(Func<T> baseInstance)
-    {
-        this.func = baseInstance ?? throw new ArgumentNullException(nameof(baseInstance));
-    }
-
-    public T Value => this.func();
+    public T Value => baseInstance();
 }

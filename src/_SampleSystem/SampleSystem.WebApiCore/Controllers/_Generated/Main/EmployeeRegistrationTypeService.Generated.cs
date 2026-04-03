@@ -4,7 +4,7 @@
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
     [Microsoft.AspNetCore.Mvc.RouteAttribute("api/[controller]/[action]")]
-    public partial class EmployeeRegistrationTypeController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
+    public partial class EmployeeRegistrationTypeController : Framework.Infrastructure.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
         /// <summary>
@@ -13,7 +13,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeFullDTO GetFullEmployeeRegistrationType([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO employeeRegistrationTypeIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeeRegistrationTypeInternal(employeeRegistrationTypeIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullEmployeeRegistrationTypeInternal(employeeRegistrationTypeIdentity, evaluateData));
         }
         
         /// <summary>
@@ -22,20 +22,20 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeFullDTO GetFullEmployeeRegistrationTypeByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeeRegistrationTypeName)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeeRegistrationTypeByNameInternal(employeeRegistrationTypeName, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullEmployeeRegistrationTypeByNameInternal(employeeRegistrationTypeName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeFullDTO GetFullEmployeeRegistrationTypeByNameInternal(string employeeRegistrationTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeFullDTO GetFullEmployeeRegistrationTypeByNameInternal(string employeeRegistrationTypeName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRegistrationTypeBLL bll = evaluateData.Context.Logics.EmployeeRegistrationTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRegistrationType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeeRegistrationTypeName, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.EmployeeRegistrationType domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeeRegistrationTypeName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeFullDTO GetFullEmployeeRegistrationTypeInternal(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO employeeRegistrationTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeFullDTO GetFullEmployeeRegistrationTypeInternal(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO employeeRegistrationTypeIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRegistrationTypeBLL bll = evaluateData.Context.Logics.EmployeeRegistrationTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRegistrationType domainObject = bll.GetById(employeeRegistrationTypeIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.EmployeeRegistrationType domainObject = bll.GetById(employeeRegistrationTypeIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -45,7 +45,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeFullDTO> GetFullEmployeeRegistrationTypes()
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeeRegistrationTypesInternal(evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullEmployeeRegistrationTypesInternal(evaluateData));
         }
         
         /// <summary>
@@ -54,19 +54,19 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeFullDTO> GetFullEmployeeRegistrationTypesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO[] employeeRegistrationTypeIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeeRegistrationTypesByIdentsInternal(employeeRegistrationTypeIdents, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullEmployeeRegistrationTypesByIdentsInternal(employeeRegistrationTypeIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeFullDTO> GetFullEmployeeRegistrationTypesByIdentsInternal(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO[] employeeRegistrationTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeFullDTO> GetFullEmployeeRegistrationTypesByIdentsInternal(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO[] employeeRegistrationTypeIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRegistrationTypeBLL bll = evaluateData.Context.Logics.EmployeeRegistrationTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(employeeRegistrationTypeIdents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(employeeRegistrationTypeIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeFullDTO> GetFullEmployeeRegistrationTypesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeFullDTO> GetFullEmployeeRegistrationTypesInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRegistrationTypeBLL bll = evaluateData.Context.Logics.EmployeeRegistrationTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -75,7 +75,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeRichDTO GetRichEmployeeRegistrationType([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO employeeRegistrationTypeIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEmployeeRegistrationTypeInternal(employeeRegistrationTypeIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichEmployeeRegistrationTypeInternal(employeeRegistrationTypeIdentity, evaluateData));
         }
         
         /// <summary>
@@ -84,20 +84,20 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeRichDTO GetRichEmployeeRegistrationTypeByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeeRegistrationTypeName)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEmployeeRegistrationTypeByNameInternal(employeeRegistrationTypeName, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichEmployeeRegistrationTypeByNameInternal(employeeRegistrationTypeName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeRichDTO GetRichEmployeeRegistrationTypeByNameInternal(string employeeRegistrationTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeRichDTO GetRichEmployeeRegistrationTypeByNameInternal(string employeeRegistrationTypeName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRegistrationTypeBLL bll = evaluateData.Context.Logics.EmployeeRegistrationTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRegistrationType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeeRegistrationTypeName, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.EmployeeRegistrationType domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeeRegistrationTypeName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeRichDTO GetRichEmployeeRegistrationTypeInternal(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO employeeRegistrationTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeRichDTO GetRichEmployeeRegistrationTypeInternal(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO employeeRegistrationTypeIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRegistrationTypeBLL bll = evaluateData.Context.Logics.EmployeeRegistrationTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRegistrationType domainObject = bll.GetById(employeeRegistrationTypeIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.EmployeeRegistrationType domainObject = bll.GetById(employeeRegistrationTypeIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -107,7 +107,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO GetSimpleEmployeeRegistrationType([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO employeeRegistrationTypeIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeRegistrationTypeInternal(employeeRegistrationTypeIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeRegistrationTypeInternal(employeeRegistrationTypeIdentity, evaluateData));
         }
         
         /// <summary>
@@ -116,20 +116,20 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO GetSimpleEmployeeRegistrationTypeByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeeRegistrationTypeName)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeRegistrationTypeByNameInternal(employeeRegistrationTypeName, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeRegistrationTypeByNameInternal(employeeRegistrationTypeName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO GetSimpleEmployeeRegistrationTypeByNameInternal(string employeeRegistrationTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO GetSimpleEmployeeRegistrationTypeByNameInternal(string employeeRegistrationTypeName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRegistrationTypeBLL bll = evaluateData.Context.Logics.EmployeeRegistrationTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRegistrationType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeeRegistrationTypeName, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.EmployeeRegistrationType domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeeRegistrationTypeName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO GetSimpleEmployeeRegistrationTypeInternal(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO employeeRegistrationTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO GetSimpleEmployeeRegistrationTypeInternal(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO employeeRegistrationTypeIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRegistrationTypeBLL bll = evaluateData.Context.Logics.EmployeeRegistrationTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRegistrationType domainObject = bll.GetById(employeeRegistrationTypeIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.EmployeeRegistrationType domainObject = bll.GetById(employeeRegistrationTypeIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -139,7 +139,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO> GetSimpleEmployeeRegistrationTypes()
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeRegistrationTypesInternal(evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeRegistrationTypesInternal(evaluateData));
         }
         
         /// <summary>
@@ -148,19 +148,19 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO> GetSimpleEmployeeRegistrationTypesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO[] employeeRegistrationTypeIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeRegistrationTypesByIdentsInternal(employeeRegistrationTypeIdents, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeRegistrationTypesByIdentsInternal(employeeRegistrationTypeIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO> GetSimpleEmployeeRegistrationTypesByIdentsInternal(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO[] employeeRegistrationTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO> GetSimpleEmployeeRegistrationTypesByIdentsInternal(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO[] employeeRegistrationTypeIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRegistrationTypeBLL bll = evaluateData.Context.Logics.EmployeeRegistrationTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(employeeRegistrationTypeIdents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(employeeRegistrationTypeIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO> GetSimpleEmployeeRegistrationTypesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO> GetSimpleEmployeeRegistrationTypesInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRegistrationTypeBLL bll = evaluateData.Context.Logics.EmployeeRegistrationTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -169,7 +169,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeVisualDTO GetVisualEmployeeRegistrationType([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO employeeRegistrationTypeIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeRegistrationTypeInternal(employeeRegistrationTypeIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeRegistrationTypeInternal(employeeRegistrationTypeIdentity, evaluateData));
         }
         
         /// <summary>
@@ -178,20 +178,20 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeVisualDTO GetVisualEmployeeRegistrationTypeByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeeRegistrationTypeName)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeRegistrationTypeByNameInternal(employeeRegistrationTypeName, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeRegistrationTypeByNameInternal(employeeRegistrationTypeName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeVisualDTO GetVisualEmployeeRegistrationTypeByNameInternal(string employeeRegistrationTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeVisualDTO GetVisualEmployeeRegistrationTypeByNameInternal(string employeeRegistrationTypeName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRegistrationTypeBLL bll = evaluateData.Context.Logics.EmployeeRegistrationTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRegistrationType domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeeRegistrationTypeName, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.Transfering.ViewDTOType.VisualDTO));
+            SampleSystem.Domain.EmployeeRegistrationType domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeeRegistrationTypeName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeVisualDTO GetVisualEmployeeRegistrationTypeInternal(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO employeeRegistrationTypeIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.EmployeeRegistrationTypeVisualDTO GetVisualEmployeeRegistrationTypeInternal(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO employeeRegistrationTypeIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRegistrationTypeBLL bll = evaluateData.Context.Logics.EmployeeRegistrationTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRegistrationType domainObject = bll.GetById(employeeRegistrationTypeIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.Transfering.ViewDTOType.VisualDTO));
+            SampleSystem.Domain.EmployeeRegistrationType domainObject = bll.GetById(employeeRegistrationTypeIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -201,7 +201,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeVisualDTO> GetVisualEmployeeRegistrationTypes()
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeRegistrationTypesInternal(evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeRegistrationTypesInternal(evaluateData));
         }
         
         /// <summary>
@@ -210,19 +210,19 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeVisualDTO> GetVisualEmployeeRegistrationTypesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO[] employeeRegistrationTypeIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeRegistrationTypesByIdentsInternal(employeeRegistrationTypeIdents, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeRegistrationTypesByIdentsInternal(employeeRegistrationTypeIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeVisualDTO> GetVisualEmployeeRegistrationTypesByIdentsInternal(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO[] employeeRegistrationTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeVisualDTO> GetVisualEmployeeRegistrationTypesByIdentsInternal(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO[] employeeRegistrationTypeIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRegistrationTypeBLL bll = evaluateData.Context.Logics.EmployeeRegistrationTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(employeeRegistrationTypeIdents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(employeeRegistrationTypeIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeVisualDTO> GetVisualEmployeeRegistrationTypesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeVisualDTO> GetVisualEmployeeRegistrationTypesInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRegistrationTypeBLL bll = evaluateData.Context.Logics.EmployeeRegistrationTypeFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRegistrationType>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
     }
 }

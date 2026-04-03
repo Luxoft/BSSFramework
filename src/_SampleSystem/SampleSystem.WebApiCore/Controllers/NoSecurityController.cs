@@ -1,34 +1,26 @@
-﻿using Framework.DomainDriven;
-using Framework.DomainDriven.Repository;
+﻿using Framework.Application.Repository;
+using Framework.Database;
 
 using GenericQueryable;
-
-using SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 
+using SecuritySystem;
+
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class NoSecurityController : ControllerBase
+public class NoSecurityController(IRepositoryFactory<NoSecurityObject> repositoryFactory) : ControllerBase
 {
-    private readonly IRepositoryFactory<NoSecurityObject> repositoryFactory;
-
-    public NoSecurityController(IRepositoryFactory<NoSecurityObject> repositoryFactory)
-    {
-        this.repositoryFactory = repositoryFactory;
-    }
-
-
     [DBSessionMode(DBSessionMode.Write)]
     [HttpPost]
     public async Task<NoSecurityObjectIdentityDTO> TestFaultSave(CancellationToken cancellationToken = default)
     {
-        var repository = this.repositoryFactory.Create(SecurityRule.Edit);
+        var repository = repositoryFactory.Create(SecurityRule.Edit);
 
         var obj = new NoSecurityObject();
 
@@ -41,7 +33,7 @@ public class NoSecurityController : ControllerBase
     [HttpPost]
     public async Task<NoSecurityObjectIdentityDTO> TestSave(CancellationToken cancellationToken = default)
     {
-        var repository = this.repositoryFactory.Create();
+        var repository = repositoryFactory.Create();
 
         var obj = new NoSecurityObject();
 
@@ -54,7 +46,7 @@ public class NoSecurityController : ControllerBase
     [HttpPost]
     public async Task<List<NoSecurityObjectIdentityDTO>> GetFullList(CancellationToken cancellationToken = default)
     {
-        var repository = this.repositoryFactory.Create();
+        var repository = repositoryFactory.Create();
 
         var result = await repository.GetQueryable().GenericToListAsync(cancellationToken);
 

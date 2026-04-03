@@ -4,14 +4,14 @@ using Bss.Platform.Logging;
 
 using CommonFramework.DependencyInjection;
 
-using Framework.DomainDriven.WebApiNetCore;
-using Framework.DomainDriven.WebApiNetCore.JsonConverter;
-using Framework.DomainDriven.WebApiNetCore.Swagger;
+using Framework.Infrastructure.JsonConverter;
+using Framework.Infrastructure.Middleware;
+using Framework.Infrastructure.Swagger;
 
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Authorization;
 
-using SampleSystem.ServiceEnvironment;
+using SampleSystem.WebApiCore.DependencyInjection;
 
 using SecuritySystem.Configurator;
 
@@ -38,7 +38,7 @@ public static class Program
                .AddPlatformLogging();
 
         builder.Services
-               .RegisterGeneralDependencyInjection(builder.Configuration)
+               .AddGeneralDependencyInjection(builder.Configuration)
                .AddPlatformApiDocumentation(
                    builder.Environment,
                    "SampleSystem API",

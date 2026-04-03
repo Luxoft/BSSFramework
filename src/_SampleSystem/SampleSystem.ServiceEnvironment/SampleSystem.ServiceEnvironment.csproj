@@ -5,24 +5,31 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+    <PackageReference Include="MediatR" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.HangfireCore\Framework.HangfireCore.csproj" />
-    <ProjectReference Include="..\..\Framework.WebApi.Utils\Framework.WebApi.Utils.csproj" />
+
+    <ProjectReference Include="..\..\BLL\Framework.BLL\Framework.BLL.csproj" />
+
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Hangfire\Framework.Infrastructure.Hangfire.csproj" />
+
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Legacy.Default\Framework.Infrastructure.Legacy.Default.csproj" />
+
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Legacy\Framework.Infrastructure.Legacy.csproj" />
+
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure\Framework.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\Notification\Framework.Notification\Framework.Notification.csproj" />
 
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Environment\Framework.Authorization.Environment.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Setup.Legacy\Framework.DomainDriven.Setup.Legacy.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.WebApiNetCore.LegacyContext\Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj" />
 
     <ProjectReference Include="..\SampleSystem.AuditDomain\SampleSystem.AuditDomain.csproj" />
     <ProjectReference Include="..\SampleSystem.BLL\SampleSystem.BLL.csproj" />
+    <ProjectReference Include="..\SampleSystem.EventMetadata\SampleSystem.EventMetadata.csproj" />
     <ProjectReference Include="..\SampleSystem.Events\SampleSystem.Events.csproj" />
     <ProjectReference Include="..\SampleSystem.Security\SampleSystem.Security.csproj" />
     <ProjectReference Include="..\SampleSystem.Subscriptions.Metadata\SampleSystem.Subscriptions.Metadata.csproj" />
-
-    <ProjectReference Include="..\..\Framework.NotificationCore\Framework.NotificationCore.csproj" />
   </ItemGroup>
 
 </Project>

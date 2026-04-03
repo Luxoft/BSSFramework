@@ -1,10 +1,14 @@
-﻿namespace SampleSystem.WebApiCore.Controllers.Audit
+﻿using Framework.Core;
+
+using SampleSystem.Generated.DTO;
+
+namespace SampleSystem.WebApiCore.Controllers.Audit
 {
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
     [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]/[action]")]
-    public partial class ManagementUnitController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
+    public partial class ManagementUnitController : Framework.Infrastructure.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
         /// <summary>
@@ -15,10 +19,10 @@
         {
             long revision = getFullManagementUnitWithRevisionAutoRequest.Revision;
             SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity = getFullManagementUnitWithRevisionAutoRequest.ManagementUnitIdentity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullManagementUnitWithRevisionInternal(managementUnitIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullManagementUnitWithRevisionInternal(managementUnitIdentity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.ManagementUnitFullDTO GetFullManagementUnitWithRevisionInternal(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.ManagementUnitFullDTO GetFullManagementUnitWithRevisionInternal(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.ManagementUnit domainObject = bll.GetObjectByRevision(managementUnitIdentity.Id, revision);
@@ -31,16 +35,16 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetManagementUnitPropertyRevisionByDateRange(GetManagementUnitPropertyRevisionByDateRangeAutoRequest getManagementUnitPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getManagementUnitPropertyRevisionByDateRangeAutoRequest.Period;
+            Period? period = getManagementUnitPropertyRevisionByDateRangeAutoRequest.Period;
             string propertyName = getManagementUnitPropertyRevisionByDateRangeAutoRequest.PropertyName;
             SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity = getManagementUnitPropertyRevisionByDateRangeAutoRequest.ManagementUnitIdentity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetManagementUnitPropertyRevisionByDateRangeInternal(managementUnitIdentity, propertyName, period, evaluateData));
+            return this.Evaluate<SampleSystemDomainObjectPropertiesRevisionDTO>(Framework.Database.DBSessionMode.Read, evaluateData => this.GetManagementUnitPropertyRevisionByDateRangeInternal(managementUnitIdentity, propertyName, period, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetManagementUnitPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity, string propertyName, Framework.Core.Period? period, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetManagementUnitPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity, string propertyName, Period? period, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(SecuritySystem.SecurityRule.View);
-            return new Framework.DomainDriven.ServiceModel.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.DomainDriven.BLL.Security.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.ManagementUnit>(managementUnitIdentity.Id, propertyName, period);
+            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.ManagementUnit>(managementUnitIdentity.Id, propertyName, period);
         }
         
         /// <summary>
@@ -51,28 +55,28 @@
         {
             string propertyName = getManagementUnitPropertyRevisionsAutoRequest.PropertyName;
             SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity = getManagementUnitPropertyRevisionsAutoRequest.ManagementUnitIdentity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetManagementUnitPropertyRevisionsInternal(managementUnitIdentity, propertyName, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetManagementUnitPropertyRevisionsInternal(managementUnitIdentity, propertyName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetManagementUnitPropertyRevisionsInternal(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity, string propertyName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetManagementUnitPropertyRevisionsInternal(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity, string propertyName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(SecuritySystem.SecurityRule.View);
-            return new Framework.DomainDriven.ServiceModel.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.DomainDriven.BLL.Security.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.ManagementUnit>(managementUnitIdentity.Id, propertyName);
+            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.ManagementUnit>(managementUnitIdentity.Id, propertyName);
         }
         
         /// <summary>
         /// Get ManagementUnit revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetManagementUnitRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity)
+        public virtual Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO GetManagementUnitRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetManagementUnitRevisionsInternal(managementUnitIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetManagementUnitRevisionsInternal(managementUnitIdentity, evaluateData));
         }
         
-        protected virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetManagementUnitRevisionsInternal(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO GetManagementUnitRevisionsInternal(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(SecuritySystem.SecurityRule.View);
-            return new Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO(bll.GetObjectRevisions(managementUnitIdentity.Id));
+            return new Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO(bll.GetObjectRevisions(managementUnitIdentity.Id));
         }
         
         /// <summary>
@@ -83,10 +87,10 @@
         {
             long revision = getRichManagementUnitWithRevisionAutoRequest.Revision;
             SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity = getRichManagementUnitWithRevisionAutoRequest.ManagementUnitIdentity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichManagementUnitWithRevisionInternal(managementUnitIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichManagementUnitWithRevisionInternal(managementUnitIdentity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.ManagementUnitRichDTO GetRichManagementUnitWithRevisionInternal(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.ManagementUnitRichDTO GetRichManagementUnitWithRevisionInternal(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.ManagementUnit domainObject = bll.GetObjectByRevision(managementUnitIdentity.Id, revision);
@@ -101,10 +105,10 @@
         {
             long revision = getSimpleManagementUnitWithRevisionAutoRequest.Revision;
             SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity = getSimpleManagementUnitWithRevisionAutoRequest.ManagementUnitIdentity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleManagementUnitWithRevisionInternal(managementUnitIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleManagementUnitWithRevisionInternal(managementUnitIdentity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.ManagementUnitSimpleDTO GetSimpleManagementUnitWithRevisionInternal(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.ManagementUnitSimpleDTO GetSimpleManagementUnitWithRevisionInternal(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.ManagementUnit domainObject = bll.GetObjectByRevision(managementUnitIdentity.Id, revision);
@@ -119,10 +123,10 @@
         {
             long revision = getVisualManagementUnitWithRevisionAutoRequest.Revision;
             SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity = getVisualManagementUnitWithRevisionAutoRequest.ManagementUnitIdentity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualManagementUnitWithRevisionInternal(managementUnitIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualManagementUnitWithRevisionInternal(managementUnitIdentity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.ManagementUnitVisualDTO GetVisualManagementUnitWithRevisionInternal(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.ManagementUnitVisualDTO GetVisualManagementUnitWithRevisionInternal(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.ManagementUnit domainObject = bll.GetObjectByRevision(managementUnitIdentity.Id, revision);
@@ -131,7 +135,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetFullManagementUnitWithRevisionAutoRequest
     {
         
@@ -140,7 +144,7 @@
         private long revision;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.ManagementUnitIdentityDTO ManagementUnitIdentity
         {
             get
@@ -154,7 +158,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual long Revision
         {
             get
@@ -169,7 +173,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetManagementUnitPropertyRevisionByDateRangeAutoRequest
     {
         
@@ -177,10 +181,10 @@
         
         private string propertyName;
         
-        private Framework.Core.Period? period;
+        private Period? period;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.ManagementUnitIdentityDTO ManagementUnitIdentity
         {
             get
@@ -194,7 +198,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual string PropertyName
         {
             get
@@ -208,8 +212,8 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public virtual Framework.Core.Period? Period
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=2)]
+        public virtual Period? Period
         {
             get
             {
@@ -223,7 +227,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetManagementUnitPropertyRevisionsAutoRequest
     {
         
@@ -232,7 +236,7 @@
         private string propertyName;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.ManagementUnitIdentityDTO ManagementUnitIdentity
         {
             get
@@ -246,7 +250,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual string PropertyName
         {
             get
@@ -261,7 +265,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetRichManagementUnitWithRevisionAutoRequest
     {
         
@@ -270,7 +274,7 @@
         private long revision;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.ManagementUnitIdentityDTO ManagementUnitIdentity
         {
             get
@@ -284,7 +288,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual long Revision
         {
             get
@@ -299,7 +303,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetSimpleManagementUnitWithRevisionAutoRequest
     {
         
@@ -308,7 +312,7 @@
         private long revision;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.ManagementUnitIdentityDTO ManagementUnitIdentity
         {
             get
@@ -322,7 +326,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual long Revision
         {
             get
@@ -337,7 +341,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetVisualManagementUnitWithRevisionAutoRequest
     {
         
@@ -346,7 +350,7 @@
         private long revision;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.ManagementUnitIdentityDTO ManagementUnitIdentity
         {
             get
@@ -360,7 +364,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual long Revision
         {
             get

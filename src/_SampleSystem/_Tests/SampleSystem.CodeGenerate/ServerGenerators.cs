@@ -2,25 +2,24 @@
 
 using CommonFramework;
 
-using Framework.CodeDom;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLLGenerator;
-using Framework.DomainDriven.DTOGenerator;
-using Framework.DomainDriven.DTOGenerator.Audit;
-using Framework.DomainDriven.Generation;
-using Framework.DomainDriven.NHibernate.DALGenerator;
-using Framework.DomainDriven.ProjectionGenerator;
-using Framework.DomainDriven.Serialization;
-using Framework.DomainDriven.ServiceModelGenerator;
-using Framework.DomainDriven.WebApiGenerator.NetCore;
+using Framework.Authorization.TestGenerate.Configurations;
+using Framework.BLL.Domain.Serialization;
+using Framework.CodeDom.Extensions;
+using Framework.CodeGeneration.BLLGenerator;
+using Framework.CodeGeneration.DTOGenerator.Audit;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
+using Framework.CodeGeneration.Extensions;
+using Framework.CodeGeneration.ProjectionGenerator;
+using Framework.CodeGeneration.ServiceModelGenerator.AutoRequest;
+using Framework.CodeGeneration.WebApiGenerator;
+using Framework.Configuration.TestGenerate.Configurations;
+using Framework.Database;
+using Framework.Database.NHibernate.DALGenerator;
+using Framework.FileGeneration;
 
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.CodeGenerate.ServerDTO;
-
-using FileInfo = Framework.DomainDriven.Generation.FileInfo;
-using FileType = Framework.DomainDriven.DTOGenerator.FileType;
-using IGenerationEnvironmentBase = Framework.DomainDriven.ServiceModelGenerator.IGenerationEnvironmentBase;
 
 namespace SampleSystem.CodeGenerate;
 
@@ -30,7 +29,7 @@ public partial class ServerGenerators
     [TestMethod]
     public void GenerateMainTest() => this.GenerateMain().ToList();
 
-    public IEnumerable<FileInfo> GenerateMain() =>
+    public IEnumerable<GeneratedFileInfo> GenerateMain() =>
         this.GenerateMainProjections()
             .Concat(this.GenerateLegacyProjections())
             .Concat(this.GenerateBLLCore())
@@ -48,15 +47,11 @@ public partial class ServerGenerators
     [TestMethod]
     public void GenerateMainWebApiNetCoreTest() => this.GenerateMainWebApiNetCore().ToList();
 
-    public IEnumerable<FileInfo> GenerateMainWebApiNetCore()
+    public IEnumerable<GeneratedFileInfo> GenerateMainWebApiNetCore()
     {
-        var configurators =
-            new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<
-            IGenerationEnvironmentBase>[] { this.environment.MainService };
-
         var generator = new WebApiNetCoreFileGenerator(
             this.environment.ToWebApiNetCore(
-                configurators,
+                [this.environment.MainService],
                 "SampleSystem.WebApiCore.Controllers.Main"));
 
         return generator.DecorateProjectionsToRootControllerNetCore()
@@ -64,19 +59,15 @@ public partial class ServerGenerators
                         .Generate<CodeNamespace>(Path.Combine(this.webApiNetCorePath, "Main"));
     }
 
-    public IEnumerable<FileInfo> GenerateMainQueryWebApiNetCore()
+    public IEnumerable<GeneratedFileInfo> GenerateMainQueryWebApiNetCore()
     {
-        var configurators =
-            new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<
-            IGenerationEnvironmentBase>[] { this.environment.QueryService };
-
         var attr = new CodeAttributeDeclaration(
             typeof(RouteAttribute).ToTypeReference(),
             new CodeAttributeArgument(new CodePrimitiveExpression("mainQueryApi/[controller]/[action]")));
 
         var generator = new WebApiNetCoreFileGenerator(
             this.environment.ToWebApiNetCore(
-                configurators,
+                [this.environment.QueryService],
                 "SampleSystem.WebApiCore.Controllers.MainQuery"),
             additionalControllerAttributes: new[] { attr }.ToList());
 
@@ -85,19 +76,15 @@ public partial class ServerGenerators
                         .Generate<CodeNamespace>(Path.Combine(this.webApiNetCorePath, "MainQuery"));
     }
 
-    public IEnumerable<FileInfo> GenerateIntegrationWebApiNetCore()
+    public IEnumerable<GeneratedFileInfo> GenerateIntegrationWebApiNetCore()
     {
-        var configurators =
-            new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<
-            IGenerationEnvironmentBase>[] { this.environment.IntegrationService };
-
         var attr = new CodeAttributeDeclaration(
             typeof(RouteAttribute).ToTypeReference(),
             new CodeAttributeArgument(new CodePrimitiveExpression("integrationApi/[controller]/[action]")));
 
         var generator = new WebApiNetCoreFileGenerator(
             this.environment.ToWebApiNetCore(
-                configurators,
+                [this.environment.IntegrationService],
                 "SampleSystem.WebApiCore.Controllers.Integration"),
             additionalControllerAttributes: new[] { attr }.ToList());
 
@@ -106,19 +93,15 @@ public partial class ServerGenerators
                         .Generate<CodeNamespace>(Path.Combine(this.webApiNetCorePath, "Integration"));
     }
 
-    public IEnumerable<FileInfo> GenerateAuditWebApiNetCore()
+    public IEnumerable<GeneratedFileInfo> GenerateAuditWebApiNetCore()
     {
-        var configurators =
-            new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<
-            IGenerationEnvironmentBase>[] { this.environment.AuditService };
-
         var attr = new CodeAttributeDeclaration(
             typeof(RouteAttribute).ToTypeReference(),
             new CodeAttributeArgument(new CodePrimitiveExpression("mainAuditApi/[controller]/[action]")));
 
         var generator = new WebApiNetCoreFileGenerator(
             this.environment.ToWebApiNetCore(
-                configurators,
+                [this.environment.AuditService],
                 "SampleSystem.WebApiCore.Controllers.Audit"),
             additionalControllerAttributes: new[] { attr }.ToList());
 
@@ -127,20 +110,16 @@ public partial class ServerGenerators
                         .Generate<CodeNamespace>(Path.Combine(this.webApiNetCorePath, "Audit"));
     }
 
-    public IEnumerable<FileInfo> GenerateAuthWebApiNetCoreTest()
+    public IEnumerable<GeneratedFileInfo> GenerateAuthWebApiNetCoreTest()
     {
-        var e = new Framework.Authorization.TestGenerate.ServerGenerationEnvironment(new DatabaseName("$", "$"));
-
-        var configurators =
-            new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<
-            IGenerationEnvironmentBase>[] { e.MainService };
+        var e = new AuthorizationGenerationEnvironment(new DatabaseName("$", "$"));
 
         var attr = new CodeAttributeDeclaration(
             typeof(RouteAttribute).ToTypeReference(),
             new CodeAttributeArgument(new CodePrimitiveExpression("authApi/[controller]/[action]")));
 
         var generator = new WebApiNetCoreFileGenerator(
-            e.ToWebApiNetCore(configurators),
+            e.ToWebApiNetCore([e.MainService]),
             additionalControllerAttributes: new[] { attr }.ToList());
 
         return generator.DecorateProjectionsToRootControllerNetCore()
@@ -148,20 +127,16 @@ public partial class ServerGenerators
                         .Generate<CodeNamespace>(Path.Combine(this.webApiNetCorePath, "Auth"));
     }
 
-    public IEnumerable<FileInfo> GenerateConfigurationWebApiNetCoreTest()
+    public IEnumerable<GeneratedFileInfo> GenerateConfigurationWebApiNetCoreTest()
     {
-        var e = new Framework.Configuration.TestGenerate.ServerGenerationEnvironment(new DatabaseName("$", "$"));
-
-        var configurators =
-            new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<
-            IGenerationEnvironmentBase>[] { e.MainService };
+        var e = new ConfigurationGenerationEnvironment(new DatabaseName("$", "$"));
 
         var attr = new CodeAttributeDeclaration(
             typeof(RouteAttribute).ToTypeReference(),
             new CodeAttributeArgument(new CodePrimitiveExpression("configApi/[controller]/[action]")));
 
         var generator = new WebApiNetCoreFileGenerator(
-            e.ToWebApiNetCore(configurators),
+            e.ToWebApiNetCore([e.MainService]),
             additionalControllerAttributes: new[] { attr }.ToList());
 
         return generator.DecorateProjectionsToRootControllerNetCore()
@@ -172,7 +147,7 @@ public partial class ServerGenerators
     [TestMethod]
     public void GenerateMainProjectionsTest() => this.GenerateMainProjections().ToList();
 
-    private IEnumerable<FileInfo> GenerateMainProjections()
+    private IEnumerable<GeneratedFileInfo> GenerateMainProjections()
     {
         var generator = new ProjectionFileGenerator(this.environment.MainProjection);
 
@@ -186,7 +161,7 @@ public partial class ServerGenerators
     [TestMethod]
     public void GenerateLegacyProjectionsTest() => this.GenerateLegacyProjections().ToList();
 
-    private IEnumerable<FileInfo> GenerateLegacyProjections()
+    private IEnumerable<GeneratedFileInfo> GenerateLegacyProjections()
     {
         var generator = new ProjectionFileGenerator(this.environment.LegacyProjection);
 
@@ -204,7 +179,7 @@ public partial class ServerGenerators
     ///     Кастомная генерация BLL-слоя
     /// </summary>
     /// <returns></returns>
-    private IEnumerable<FileInfo> GenerateBLLCore()
+    private IEnumerable<GeneratedFileInfo> GenerateBLLCore()
     {
         var generator = new SampleSystemBLLCoreFileGenerator(this.environment.BLLCore);
 
@@ -218,7 +193,7 @@ public partial class ServerGenerators
     [TestMethod]
     public void GenerateBLLTest() => this.GenerateBLL().ToList();
 
-    private IEnumerable<FileInfo> GenerateBLL()
+    private IEnumerable<GeneratedFileInfo> GenerateBLL()
     {
         var generator = new BLLFileGenerator(this.environment.BLL);
 
@@ -234,7 +209,7 @@ public partial class ServerGenerators
     [TestMethod]
     public void GenerateServerDTOTest() => this.GenerateServerDTO().ToList();
 
-    private IEnumerable<FileInfo> GenerateServerDTO()
+    private IEnumerable<GeneratedFileInfo> GenerateServerDTO()
     {
         var generator =
             new SampleSystemServerFileGenerator<ServerDTOGeneratorConfiguration>(
@@ -246,14 +221,12 @@ public partial class ServerGenerators
                         ? "SampleSystemClientMappingService.Generated"
                         : decl.Name.Contains("DTOMappingService")
                             ? "SampleSystemMappingService.Generated"
-                            : (decl.UserData["FileType"] as DTOFileType).Maybe(
-                                type => type.Role == DTORole.Event)
+                            : (decl.UserData["FileType"] as DTOFileType).Maybe(type => type.Role == DTORole.Event)
                                 ? "SampleSystem.Event.Generated"
-                                : (decl.UserData["FileType"] as DTOFileType).Maybe(
-                                    type => type.Role == DTORole.Integration)
+                                : (decl.UserData["FileType"] as DTOFileType).Maybe(type => type.Role == DTORole.Integration)
                                     ? "SampleSystem.Integration.Generated"
                                     : (decl.UserData["FileType"] as DTOFileType)
-                                    .Maybe(type => type == FileType.ProjectionDTO)
+                                    .Maybe(type => type == BaseFileType.ProjectionDTO)
                                         ? "SampleSystem.Projections.Generated"
                                         : decl.Name.EndsWith("Helper")
                                             ? "SampleSystem.Helpers.Generated"
@@ -264,7 +237,7 @@ public partial class ServerGenerators
     [TestMethod]
     public void GenerateAuditDTOTest() => this.GenerateAuditDTO().ToList();
 
-    private IEnumerable<FileInfo> GenerateAuditDTO()
+    private IEnumerable<GeneratedFileInfo> GenerateAuditDTO()
     {
         var dtoGenerator = new AuditDTOModelFileGenerator(this.environment.AuditDTO);
 
@@ -280,7 +253,7 @@ public partial class ServerGenerators
     [TestMethod]
     public void GenerateDALTest() => this.GenerateDAL().ToList();
 
-    private IEnumerable<FileInfo> GenerateDAL()
+    private IEnumerable<GeneratedFileInfo> GenerateDAL()
     {
         var generator = new DALFileGenerator(this.environment.DAL);
 

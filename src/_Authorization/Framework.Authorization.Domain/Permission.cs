@@ -1,9 +1,9 @@
-﻿using Framework.Core;
-using Framework.DomainDriven.Serialization;
-using Framework.DomainDriven.Tracking.LegacyValidators;
-using Framework.Persistent;
-using Framework.Persistent.Mapping;
+﻿using Framework.BLL.Domain.Serialization;
+using Framework.Core;
+using Framework.Database.Mapping;
+using Framework.Relations;
 using Framework.Restriction;
+using Framework.Tracking.Validation;
 
 namespace Framework.Authorization.Domain;
 
@@ -91,8 +91,8 @@ public class Permission : AuditPersistentDomainObjectBase,
     [CustomSerialization(CustomSerializationMode.Ignore)]
     public virtual Permission? DelegatedFrom
     {
-        get { return this.delegatedFrom; }
-        set { this.delegatedFrom = value; }
+        get => this.delegatedFrom;
+        set => this.delegatedFrom = value;
     }
 
     /// <summary>
@@ -106,8 +106,8 @@ public class Permission : AuditPersistentDomainObjectBase,
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual Principal Principal
     {
-        get { return this.principal; }
-        set { this.principal = value; }
+        get => this.principal;
+        set => this.principal = value;
     }
 
     /// <summary>

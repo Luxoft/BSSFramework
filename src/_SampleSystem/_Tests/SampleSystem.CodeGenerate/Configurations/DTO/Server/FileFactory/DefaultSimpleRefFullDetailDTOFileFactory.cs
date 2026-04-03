@@ -1,16 +1,10 @@
-﻿using Framework.DomainDriven.DTOGenerator;
-using Framework.DomainDriven.DTOGenerator.Server;
+﻿using Framework.CodeGeneration.DTOGenerator.FileTypes;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 
 namespace SampleSystem.CodeGenerate.ServerDTO;
 
-public class DefaultSimpleRefFullDetailDTOFileFactory<TConfiguration> : RefDTOFileFactory<TConfiguration>
-        where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
+public class DefaultSimpleRefFullDetailDTOFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : RefDTOFileFactory<TConfiguration>(configuration, domainType)
+    where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
-    public DefaultSimpleRefFullDetailDTOFileFactory(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
-    {
-    }
-
-
     public override MainDTOFileType FileType { get; } = SampleSystemFileType.SimpleRefFullDetailDTO;
 }

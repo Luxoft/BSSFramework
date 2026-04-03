@@ -1,7 +1,8 @@
-﻿using Framework.Authorization.Domain;
+﻿using Framework.Application;
+using Framework.Authorization.Domain;
+using Framework.BLL;
 using Framework.Core;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
+using Framework.Database;
 
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;

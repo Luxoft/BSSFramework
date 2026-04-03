@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Database.Runtime</PackageId>
+    <RootNamespace>Framework.Database</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IvAt.CommonFramework.IdentitySource.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Database.Abstractions\Framework.Database.Abstractions.csproj" />
+    <ProjectReference Include="..\Framework.Database.Mapping\Framework.Database.Mapping.csproj" />
+  </ItemGroup>
+
+</Project>

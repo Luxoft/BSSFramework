@@ -1,4 +1,4 @@
-﻿namespace Framework.Configuration.BLL;
+﻿namespace Framework.Configuration.BLL.TargetSystemService;
 
 public abstract record TargetSystemInfo(string Name, Guid Id, bool IsMain, bool IsRevision, IReadOnlyList<DomainTypeInfo> DomainTypes);
 

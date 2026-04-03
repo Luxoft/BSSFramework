@@ -4,6 +4,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Database\Framework.Database.Legacy.Domain\Framework.Database.Legacy.Domain.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain\SampleSystem.Domain.csproj" />
   </ItemGroup>
 

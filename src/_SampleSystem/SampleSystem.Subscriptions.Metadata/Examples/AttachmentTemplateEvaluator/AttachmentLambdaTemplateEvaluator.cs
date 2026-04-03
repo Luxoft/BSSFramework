@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-using Framework.Configuration.Core;
+using Framework.Subscriptions.Domain;
 
 using SampleSystem.BLL;
 
@@ -15,7 +15,7 @@ public sealed class AttachmentLambdaTemplateEvaluator : AttachmentLambdaBase<Dom
     /// </summary>
     public AttachmentLambdaTemplateEvaluator()
     {
-        this.DomainObjectChangeType = Framework.Configuration.SubscriptionModeling.DomainObjectChangeType.Update;
+        this.DomainObjectChangeType = Framework.Subscriptions.DomainObjectChangeType.Update;
         this.Lambda = GetAttachments;
     }
 
@@ -25,6 +25,6 @@ public sealed class AttachmentLambdaTemplateEvaluator : AttachmentLambdaBase<Dom
     {
         var template = Encoding.UTF8.GetBytes($"Hello world! {versions.Current.NameNative}");
 
-        return new[] { new System.Net.Mail.Attachment(new MemoryStream(template), AttachmentName) };
+        return [new System.Net.Mail.Attachment(new MemoryStream(template), AttachmentName)];
     }
 }

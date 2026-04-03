@@ -1,20 +1,20 @@
 ﻿using CommonFramework;
 
 using Framework.Authorization.Generated.DTO;
-using Framework.DomainDriven;
+using Framework.Database;
+
 using SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 using Microsoft.AspNetCore.Mvc;
 
 namespace Framework.Authorization.WebApi;
 
-public partial class AuthSLJsonController
+public partial class AuthMainController
 {
     [HttpPost]
     public IEnumerable<SecurityContextData<Guid>> GetFullSecurityEntities(
-        [FromForm] SecurityContextTypeIdentityDTO securityContextTypeIdentity)
-    {
-        return this.Evaluate(
+        [FromForm] SecurityContextTypeIdentityDTO securityContextTypeIdentity) =>
+        this.Evaluate(
             DBSessionMode.Read,
             evaluateData =>
             {
@@ -27,12 +27,10 @@ public partial class AuthSLJsonController
                                    .GetSecurityContexts()
                                    .ToList();
             });
-    }
 
     [HttpPost]
-    public IEnumerable<SecurityContextData<Guid>> GetFullSecurityEntitiesByIdents([FromForm] GetFullSecurityEntitiesByIdentsRequest request)
-    {
-        return this.Evaluate(
+    public IEnumerable<SecurityContextData<Guid>> GetFullSecurityEntitiesByIdents([FromForm] GetFullSecurityEntitiesByIdentsRequest request) =>
+        this.Evaluate(
             DBSessionMode.Read,
             evaluateData =>
             {
@@ -45,5 +43,4 @@ public partial class AuthSLJsonController
                                    .GetSecurityContextsByIdents(request.SecurityEntities.Select(v => v.Id))
                                    .ToList();
             });
-    }
 }

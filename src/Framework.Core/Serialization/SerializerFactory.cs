@@ -10,9 +10,6 @@ public abstract class SerializerFactory : ISerializerFactory<string>
 
     public class DefaultSerializerFactory : SerializerFactory
     {
-        public override ISerializer<string, T> Create<T>()
-        {
-            return Serializer<string, T>.Default;
-        }
+        public override ISerializer<string, T> Create<T>() => Serializer<string, T>.Default;
     }
 }

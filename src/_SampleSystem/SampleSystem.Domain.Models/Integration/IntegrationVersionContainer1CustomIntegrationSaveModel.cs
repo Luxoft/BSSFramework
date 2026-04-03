@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.BLL;
+﻿using Framework.BLL.Domain.ServiceRole;
 
 using SampleSystem.Domain.IntegrationVersions;
 

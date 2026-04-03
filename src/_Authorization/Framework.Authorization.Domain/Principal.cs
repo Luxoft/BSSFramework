@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-using Framework.Persistent;
+using Framework.Relations;
 using Framework.Restriction;
 
 namespace Framework.Authorization.Domain;

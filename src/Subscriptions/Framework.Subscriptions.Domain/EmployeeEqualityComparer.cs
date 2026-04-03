@@ -1,0 +1,21 @@
+﻿using Framework.Notification.Domain;
+
+namespace Framework.Subscriptions.Domain;
+
+public abstract class EmployeeEqualityComparer : IEqualityComparer<IEmployee>
+{
+    public abstract bool Equals(IEmployee x, IEmployee y);
+
+    public abstract int GetHashCode(IEmployee obj);
+
+
+    public static readonly EmployeeEqualityComparer EMail = new EmployeeByEMailComparer();
+
+
+    private class EmployeeByEMailComparer : EmployeeEqualityComparer
+    {
+        public override bool Equals(IEmployee x, IEmployee y) => string.Equals(x.Email, y.Email, StringComparison.InvariantCultureIgnoreCase);
+
+        public override int GetHashCode(IEmployee obj) => obj.Email.ToLower().GetHashCode();
+    }
+}

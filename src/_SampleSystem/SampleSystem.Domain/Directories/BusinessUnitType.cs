@@ -1,5 +1,5 @@
-﻿using Framework.DomainDriven.BLL;
-using Framework.Persistent;
+﻿using Framework.BLL.Domain.ServiceRole;
+using Framework.Relations;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;
@@ -61,127 +61,109 @@ public partial class BusinessUnitType :
 
     public virtual PossibleStartDate? PossibleStartDate
     {
-        get { return this.possibleStartDate; }
-        set { this.possibleStartDate = value; }
+        get => this.possibleStartDate;
+        set => this.possibleStartDate = value;
     }
 
     public virtual PossibleStartDate? PossibleTransferDate
     {
-        get { return this.possibleTransferDate; }
-        set { this.possibleTransferDate = value; }
+        get => this.possibleTransferDate;
+        set => this.possibleTransferDate = value;
     }
 
     public virtual bool IsAdministrative
     {
-        get { return this.isAdministrative; }
-        set { this.isAdministrative = value; }
+        get => this.isAdministrative;
+        set => this.isAdministrative = value;
     }
 
     public virtual bool CanBeLinkedToDepartment
     {
-        get { return this.canBeLinkedToDepartment; }
-        set { this.canBeLinkedToDepartment = value; }
+        get => this.canBeLinkedToDepartment;
+        set => this.canBeLinkedToDepartment = value;
     }
 
     public virtual bool NeedVertical
     {
-        get { return this.needVertical; }
-        set { this.needVertical = value; }
+        get => this.needVertical;
+        set => this.needVertical = value;
     }
 
     public virtual bool CanBeResourcePool
     {
-        get { return this.canBeResourcePool; }
-        set { this.canBeResourcePool = value; }
+        get => this.canBeResourcePool;
+        set => this.canBeResourcePool = value;
     }
 
     public virtual bool PracticeAllowed
     {
-        get { return this.practiceAllowed; }
-        set { this.practiceAllowed = value; }
+        get => this.practiceAllowed;
+        set => this.practiceAllowed = value;
     }
 
     public virtual bool CanBeNewBusiness
     {
-        get { return this.canBeNewBusiness; }
-        set { this.canBeNewBusiness = value; }
+        get => this.canBeNewBusiness;
+        set => this.canBeNewBusiness = value;
     }
 
     public virtual bool CanBeIsSpecialCommission
     {
-        get { return this.canBeIsSpecialCommission; }
-        set { this.canBeIsSpecialCommission = value; }
+        get => this.canBeIsSpecialCommission;
+        set => this.canBeIsSpecialCommission = value;
     }
 
     public virtual bool BillingProjectAreNotAllowed
     {
-        get { return this.billingProjectAreNotAllowed; }
-        set { this.billingProjectAreNotAllowed = value; }
+        get => this.billingProjectAreNotAllowed;
+        set => this.billingProjectAreNotAllowed = value;
     }
 
     public virtual bool ProjectStartAllowed
     {
-        get { return this.projectStartAllowed; }
-        set { this.projectStartAllowed = value; }
+        get => this.projectStartAllowed;
+        set => this.projectStartAllowed = value;
     }
 
     public virtual bool StartBOConfirm
     {
-        get { return this.startBOConfirm; }
-        set { this.startBOConfirm = value; }
+        get => this.startBOConfirm;
+        set => this.startBOConfirm = value;
     }
 
     public virtual bool TransferBOConfirm
     {
-        get { return this.transferBOConfirm; }
-        set { this.transferBOConfirm = value; }
+        get => this.transferBOConfirm;
+        set => this.transferBOConfirm = value;
     }
 
     public virtual bool AdditionalStartConfirm
     {
-        get { return this.additionalStartConfirm; }
-        set { this.additionalStartConfirm = value; }
+        get => this.additionalStartConfirm;
+        set => this.additionalStartConfirm = value;
     }
 
     public virtual bool AdditionalTransferConfirm
     {
-        get { return this.additionalTransferConfirm; }
-        set { this.additionalTransferConfirm = value; }
+        get => this.additionalTransferConfirm;
+        set => this.additionalTransferConfirm = value;
     }
 
     public virtual bool CanBeLinkedToClient
     {
-        get { return this.canBeLinkedToClient; }
-        set { this.canBeLinkedToClient = value; }
+        get => this.canBeLinkedToClient;
+        set => this.canBeLinkedToClient = value;
     }
 
-    public virtual IEnumerable<BusinessUnitTypeLinkWithPossibleParent> PossibleParents
-    {
-        get { return this.possibleParents; }
-    }
+    public virtual IEnumerable<BusinessUnitTypeLinkWithPossibleParent> PossibleParents => this.possibleParents;
 
-    public virtual IEnumerable<BusinessUnitTypeLinkWithTransferTo> TransferTo
-    {
-        get { return this.transferTo; }
-    }
+    public virtual IEnumerable<BusinessUnitTypeLinkWithTransferTo> TransferTo => this.transferTo;
 
-    public virtual IEnumerable<BusinessUnitTypeLinkWithPossibleFinancialProjectType> PossibleFinancialProjectTypes
-    {
-        get { return this.possibleFinancialProjectTypes; }
-    }
+    public virtual IEnumerable<BusinessUnitTypeLinkWithPossibleFinancialProjectType> PossibleFinancialProjectTypes => this.possibleFinancialProjectTypes;
 
-    ICollection<BusinessUnitTypeLinkWithPossibleParent> IMaster<BusinessUnitTypeLinkWithPossibleParent>.Details
-    {
-        get { return (ICollection<BusinessUnitTypeLinkWithPossibleParent>)this.PossibleParents; }
-    }
+    ICollection<BusinessUnitTypeLinkWithPossibleParent> IMaster<BusinessUnitTypeLinkWithPossibleParent>.Details => (ICollection<BusinessUnitTypeLinkWithPossibleParent>)this.PossibleParents;
 
-    ICollection<BusinessUnitTypeLinkWithTransferTo> IMaster<BusinessUnitTypeLinkWithTransferTo>.Details
-    {
-        get { return (ICollection<BusinessUnitTypeLinkWithTransferTo>)this.TransferTo; }
-    }
+    ICollection<BusinessUnitTypeLinkWithTransferTo> IMaster<BusinessUnitTypeLinkWithTransferTo>.Details => (ICollection<BusinessUnitTypeLinkWithTransferTo>)this.TransferTo;
 
-    ICollection<BusinessUnitTypeLinkWithPossibleFinancialProjectType> IMaster<BusinessUnitTypeLinkWithPossibleFinancialProjectType>.Details
-    {
-        get { return (ICollection<BusinessUnitTypeLinkWithPossibleFinancialProjectType>)this.PossibleFinancialProjectTypes; }
-    }
+    ICollection<BusinessUnitTypeLinkWithPossibleFinancialProjectType> IMaster<BusinessUnitTypeLinkWithPossibleFinancialProjectType>.Details => (ICollection<BusinessUnitTypeLinkWithPossibleFinancialProjectType>)this.PossibleFinancialProjectTypes;
 }

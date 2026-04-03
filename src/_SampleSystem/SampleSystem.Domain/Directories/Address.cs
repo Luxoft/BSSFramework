@@ -1,5 +1,5 @@
 ﻿using Framework.Core;
-using Framework.Persistent;
+using Framework.Relations;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;
@@ -23,63 +23,55 @@ public class Address : AuditPersistentDomainObjectBase, IDetail<LegalEntityBase>
     }
 
     public Address(Guid id, LegalEntityBase legalEntity)
-            : this(legalEntity)
-    {
+            : this(legalEntity) =>
         this.Id = id;
-    }
 
     protected Address()
     {
     }
 
-    public virtual LegalEntityBase LegalEntity
-    {
-        get { return this.legalEntity; }
-    }
+    public virtual LegalEntityBase LegalEntity => this.legalEntity;
 
     [Required]
     public virtual Country CountryName
     {
-        get { return this.countryName; }
-        set { this.countryName = value; }
+        get => this.countryName;
+        set => this.countryName = value;
     }
 
     public virtual AddressType AddressType
     {
-        get { return this.addressType; }
-        set { this.addressType = value; }
+        get => this.addressType;
+        set => this.addressType = value;
     }
 
     [MaxLength(100)]
     public virtual string RegionName
     {
-        get { return this.regionName.TrimNull(); }
-        set { this.regionName = value.TrimNull(); }
+        get => this.regionName.TrimNull();
+        set => this.regionName = value.TrimNull();
     }
 
     [MaxLength(100)]
     public virtual string CityName
     {
-        get { return this.cityName.TrimNull(); }
-        set { this.cityName = value.TrimNull(); }
+        get => this.cityName.TrimNull();
+        set => this.cityName = value.TrimNull();
     }
 
     [MaxLength(100)]
     public virtual string Zip
     {
-        get { return this.zip.TrimNull(); }
-        set { this.zip = value.TrimNull(); }
+        get => this.zip.TrimNull();
+        set => this.zip = value.TrimNull();
     }
 
     [MaxLength(100)]
     public virtual string Street
     {
-        get { return this.street.TrimNull(); }
-        set { this.street = value.TrimNull(); }
+        get => this.street.TrimNull();
+        set => this.street = value.TrimNull();
     }
 
-    LegalEntityBase IDetail<LegalEntityBase>.Master
-    {
-        get { return this.LegalEntity; }
-    }
+    LegalEntityBase IDetail<LegalEntityBase>.Master => this.LegalEntity;
 }

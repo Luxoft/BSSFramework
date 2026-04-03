@@ -11,7 +11,7 @@ namespace Framework.Authorization.BLL
 {
     
     
-    public partial interface IAuthorizationBLLContext : Framework.DomainDriven.BLL.Security.IAccessDeniedExceptionServiceContainer, Framework.DomainDriven.BLL.Security.ISecurityServiceContainer<Framework.DomainDriven.BLL.Security.IRootSecurityService>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.Authorization.BLL.IAuthorizationBLLFactoryContainer>
+    public partial interface IAuthorizationBLLContext : Framework.BLL.IAccessDeniedExceptionServiceContainer, Framework.BLL.Services.ISecurityServiceContainer<Framework.BLL.Services.IRootSecurityService>, Framework.BLL.IBLLFactoryContainerContext<Framework.Authorization.BLL.IAuthorizationBLLFactoryContainer>
     {
         
         new Framework.Authorization.BLL.IAuthorizationBLLFactoryContainer Logics
@@ -20,7 +20,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial interface IAuthorizationBLLFactoryContainer : Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>>
+    public partial interface IAuthorizationBLLFactoryContainer : Framework.BLL.IBLLFactoryContainer<Framework.BLL.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>>
     {
         
         Framework.Authorization.BLL.IBusinessRoleBLL BusinessRole
@@ -74,45 +74,45 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial interface IBusinessRoleBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.BusinessRole, System.Guid>
+    public partial interface IBusinessRoleBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.BusinessRole, System.Guid>
     {
     }
     
-    public partial interface IBusinessRoleBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IBusinessRoleBLL, Framework.Authorization.Domain.BusinessRole>
+    public partial interface IBusinessRoleBLLFactory : Framework.BLL.ISecurityBLLFactory<Framework.Authorization.BLL.IBusinessRoleBLL, Framework.Authorization.Domain.BusinessRole>
     {
     }
     
-    public partial interface IPermissionBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Permission, System.Guid>
+    public partial interface IPermissionBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Permission, System.Guid>
     {
         
         System.Collections.Generic.List<Framework.Authorization.Domain.Permission> GetListBy(Framework.Authorization.Domain.PermissionDirectFilterModel filter, GenericQueryable.Fetching.FetchRule<Framework.Authorization.Domain.Permission> fetchs);
     }
     
-    public partial interface IPermissionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IPermissionBLL, Framework.Authorization.Domain.Permission>
+    public partial interface IPermissionBLLFactory : Framework.BLL.ISecurityBLLFactory<Framework.Authorization.BLL.IPermissionBLL, Framework.Authorization.Domain.Permission>
     {
     }
     
-    public partial interface IPermissionRestrictionBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.PermissionRestriction, System.Guid>
+    public partial interface IPermissionRestrictionBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.PermissionRestriction, System.Guid>
     {
     }
     
-    public partial interface IPermissionRestrictionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IPermissionRestrictionBLL, Framework.Authorization.Domain.PermissionRestriction>
+    public partial interface IPermissionRestrictionBLLFactory : Framework.BLL.ISecurityBLLFactory<Framework.Authorization.BLL.IPermissionRestrictionBLL, Framework.Authorization.Domain.PermissionRestriction>
     {
     }
     
-    public partial interface IPrincipalBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Principal, System.Guid>
+    public partial interface IPrincipalBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Principal, System.Guid>
     {
     }
     
-    public partial interface IPrincipalBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IPrincipalBLL, Framework.Authorization.Domain.Principal>
+    public partial interface IPrincipalBLLFactory : Framework.BLL.ISecurityBLLFactory<Framework.Authorization.BLL.IPrincipalBLL, Framework.Authorization.Domain.Principal>
     {
     }
     
-    public partial interface ISecurityContextTypeBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.SecurityContextType, System.Guid>
+    public partial interface ISecurityContextTypeBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.SecurityContextType, System.Guid>
     {
     }
     
-    public partial interface ISecurityContextTypeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.ISecurityContextTypeBLL, Framework.Authorization.Domain.SecurityContextType>
+    public partial interface ISecurityContextTypeBLLFactory : Framework.BLL.ISecurityBLLFactory<Framework.Authorization.BLL.ISecurityContextTypeBLL, Framework.Authorization.Domain.SecurityContextType>
     {
     }
 }

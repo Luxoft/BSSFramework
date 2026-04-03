@@ -1,8 +1,8 @@
 ﻿using CommonFramework.RelativePath.DependencyInjection;
 
-using Framework.Core;
-using Framework.DependencyInjection;
-using Framework.WebApi.Utils.SL;
+using Framework.Core.TypeResolving;
+using Framework.Core.TypeResolving.TypeSource;
+using Framework.Infrastructure.DependencyInjection;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,19 +12,19 @@ using SampleSystem.Domain;
 using SampleSystem.Events;
 using SampleSystem.Generated.DTO;
 
-namespace SampleSystem.ServiceEnvironment;
+namespace SampleSystem.ServiceEnvironment.DependencyInjection;
 
 public static class SampleSystemApplicationExtensions
 {
     extension(IServiceCollection services)
     {
-        public IServiceCollection RegisterGeneralApplicationServices(IConfiguration configuration) =>
+        public IServiceCollection AddGeneralApplicationServices(IConfiguration configuration) =>
             services.AddHttpContextAccessor()
                     .AddLogging()
                     .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<EmployeeBLL>())
-                    .RegisterSmtpNotification(configuration)
+                    .AddApplicationNotification(configuration)
                     .AddRelativePaths()
-                    .RegisterApplicationServices();
+                    .AddApplicationServices();
 
         private IServiceCollection AddRelativePaths() =>
             services.AddRelativeDomainPath((TestExceptObject v) => v.Employee)
@@ -32,18 +32,18 @@ public static class SampleSystemApplicationExtensions
                     .AddRelativeDomainPath((TestRelativeEmployeeObject v) => v.EmployeeRef2, nameof(TestRelativeEmployeeObject.EmployeeRef2))
                     .AddRelativeDomainPath((TestRelativeEmployeeParentObject v) => v.Children.Select(c => c.Employee));
 
-        private IServiceCollection RegisterApplicationServices() =>
+        private IServiceCollection AddApplicationServices() =>
             services.AddScoped<ExampleFaultDALListenerSettings>()
                     .AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>()
                     .AddScoped<SampleSystemCustomAribaLocalDBEventMessageSender>()
-                    .AddSingleton<ISlJsonCompatibilitySerializer, SlJsonCompatibilitySerializer>() // For SL
                     .AddKeyedSingleton("DTO", TypeResolverHelper.Create(TypeSource.FromSample<BusinessUnitSimpleDTO>(), TypeSearchMode.Both)); // For legacy audit
 
-        private IServiceCollection RegisterSmtpNotification(IConfiguration configuration)
+        private IServiceCollection AddApplicationNotification(IConfiguration configuration)
         {
-            services.RegisterNotificationJob();
-            services.RegisterNotificationSmtp(configuration);
-            services.RegisterRewriteReceiversDependencies(configuration);
+            services.AddNotificationJob();
+
+            //services.AddSmtpNotification(configuration);
+            //services.AddRewriteReceiversDependencies(configuration);
 
             return services;
         }

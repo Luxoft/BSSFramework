@@ -1,4 +1,4 @@
-﻿using Framework.Persistent.Mapping;
+﻿using Framework.Database.Mapping;
 
 namespace SampleSystem.Domain.TestForceAbstract;
 
@@ -11,12 +11,9 @@ public class ClassA : PersistentDomainObjectBase
 
     public virtual int Value
     {
-        get { return this.value; }
-        set { this.value = value; }
+        get => this.value;
+        set => this.value = value;
     }
 
-    public virtual IEnumerable<ClassAChild> Child
-    {
-        get { return this.child; }
-    }
+    public virtual IEnumerable<ClassAChild> Child => this.child;
 }

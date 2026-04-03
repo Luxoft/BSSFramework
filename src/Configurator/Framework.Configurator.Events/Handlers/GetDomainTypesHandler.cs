@@ -1,0 +1,40 @@
+﻿using Framework.Application.Events;
+using Framework.Configurator.Interfaces;
+using Framework.Configurator.Models;
+
+using SecuritySystem;
+
+using Microsoft.AspNetCore.Http;
+
+using SecuritySystem.Attributes;
+using SecuritySystem.Configurator.Handlers;
+
+namespace Framework.Configurator.Handlers;
+
+public class GetDomainTypesHandler([WithoutRunAs] ISecuritySystem securitySystem, IEventSystem eventSystem)
+    : BaseReadHandler, IGetDomainTypesHandler
+{
+    protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
+    {
+        if (await securitySystem.HasAccessAsync(SecurityRole.Administrator, cancellationToken))
+        {
+            return eventSystem.TypeResolver
+                              .Types
+                              .OrderBy(t => t.AssemblyQualifiedName)
+                              .ThenBy(t => t.Name)
+                              .Select(t => new DomainTypeDto
+                                           {
+                                               Name = t.Name,
+                                               FullName = t.FullName!,
+                                               Operations = eventSystem.DomainObjectEventMetadata.GetEventOperations(t)
+                                                                       .OrderBy(o => o.Name)
+                                                                       .ToList()
+                                           })
+                              .ToList();
+        }
+        else
+        {
+            return new List<DomainTypeDto>();
+        }
+    }
+}

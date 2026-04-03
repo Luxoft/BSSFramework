@@ -1,15 +1,9 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.DomainDriven.Generation.Domain;
-using SecuritySystem;
+using Framework.CodeGeneration.Configuration;
 
-namespace Framework.Authorization.TestGenerate;
+namespace Framework.Authorization.TestGenerate.Configurations._Base;
 
 public abstract class GenerationEnvironmentBase()
-    : GenerationEnvironment<DomainObjectBase, PersistentDomainObjectBase, AuditPersistentDomainObjectBase, Guid>(
+    : CodeGenerationEnvironment<DomainObjectBase, PersistentDomainObjectBase, AuditPersistentDomainObjectBase, Guid>(
         v => v.Id,
-        typeof(DomainObjectChangeModel<>).Assembly)
-{
-    public readonly string DTODataContractNamespace = "Auth";
-
-    public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = new[] { typeof(SecurityRole) };
-}
+        typeof(DomainObjectChangeModel<>).Assembly);

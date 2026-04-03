@@ -1,4 +1,5 @@
-﻿using Automation.ServiceEnvironment;
+﻿using Framework.AutomationCore.ServiceEnvironment;
+using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -27,24 +28,12 @@ public class TestBase : IntegrationTestBase<ISampleSystemBLLContext>
     protected RootAuthManager AuthManager => this.RootServiceProvider.GetRequiredService<RootAuthManager>();
 
     [TestInitialize]
-    public void TestBaseInitialize()
-    {
-        base.Initialize();
-    }
+    public void TestBaseInitialize() => base.Initialize();
 
     [TestCleanup]
-    public void BaseTestCleanup()
-    {
-        base.Cleanup();
-    }
+    public void BaseTestCleanup() => base.Cleanup();
 
-    protected ControllerEvaluator<AuthSLJsonController> GetAuthControllerEvaluator(string? principalName = null)
-    {
-        return this.GetControllerEvaluator<AuthSLJsonController>(principalName);
-    }
+    protected ControllerEvaluator<AuthMainController> GetAuthControllerEvaluator(string? principalName = null) => this.GetControllerEvaluator<AuthMainController>(principalName);
 
-    protected ControllerEvaluator<ConfigSLJsonController> GetConfigurationControllerEvaluator(string? principalName = null)
-    {
-        return this.GetControllerEvaluator<ConfigSLJsonController>(principalName);
-    }
+    protected ControllerEvaluator<ConfigMainController> GetConfigurationControllerEvaluator(string? principalName = null) => this.GetControllerEvaluator<ConfigMainController>(principalName);
 }

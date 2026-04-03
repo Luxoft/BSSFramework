@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.ExpressionParsers</PackageId>
   </PropertyGroup>
@@ -9,13 +10,10 @@
 
   <ItemGroup>
     <PackageReference Include="System.CodeDom" />
-    <PackageReference Include="System.Reflection.Emit" />
-
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
-    <PackageReference Include="System.Runtime.Loader" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framework.Persistent.LegacyContext\Framework.Persistent.LegacyContext.csproj" />
+    <ProjectReference Include="..\Framework.Core\Framework.Core.csproj" />
   </ItemGroup>
 </Project>

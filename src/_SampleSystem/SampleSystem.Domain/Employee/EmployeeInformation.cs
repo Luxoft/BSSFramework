@@ -1,5 +1,5 @@
-﻿using Framework.Core;
-using Framework.DomainDriven.BLL;
+﻿using Framework.BLL.Domain.ServiceRole;
+using Framework.Core;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;
@@ -12,7 +12,7 @@ public class EmployeeInformation : Information
     [MaxLength(50)]
     public virtual string PersonalEmail
     {
-        get { return this.personalEmail.TrimNull(); }
-        set { this.personalEmail = value.TrimNull(); }
+        get => this.personalEmail.TrimNull();
+        set => this.personalEmail = value.TrimNull();
     }
 }

@@ -1,4 +1,4 @@
-﻿using Automation.Settings;
+﻿using Framework.AutomationCore.Settings;
 
 using Microsoft.Extensions.Options;
 

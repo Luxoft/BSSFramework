@@ -1,15 +1,12 @@
-﻿using SecuritySystem;
+﻿using MediatR;
 
-using MediatR;
+using SecuritySystem;
 
 namespace SampleSystem.BLL._Query.GetEmployees;
 
-public class GetEmployeesHandler : IRequestHandler<GetEmployeesQuery, GetEmployeesResponse[]>
+public class GetEmployeesHandler(IEmployeeBLLFactory employeeBllFactory) : IRequestHandler<GetEmployeesQuery, GetEmployeesResponse[]>
 {
-    private readonly IEmployeeBLL employeeBll;
-
-    public GetEmployeesHandler(IEmployeeBLLFactory employeeBllFactory) =>
-            this.employeeBll = employeeBllFactory.Create(SecurityRule.View);
+    private readonly IEmployeeBLL employeeBll = employeeBllFactory.Create(SecurityRule.View);
 
     public async Task<GetEmployeesResponse[]> Handle(GetEmployeesQuery request, CancellationToken cancellationToken)
     {

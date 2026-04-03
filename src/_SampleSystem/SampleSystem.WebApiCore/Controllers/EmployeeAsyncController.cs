@@ -1,5 +1,7 @@
-﻿using Framework.DomainDriven;
-using Framework.DomainDriven.Repository;
+﻿using CommonFramework.Auth;
+
+using Framework.Application.Repository;
+using Framework.Database;
 
 using GenericQueryable;
 
@@ -8,15 +10,13 @@ using Microsoft.AspNetCore.Mvc;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 
-using SecuritySystem.Services;
-
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
 public class EmployeeAsyncController(
     IRepositoryFactory<Employee> employeeRepositoryFactory,
-    IRawUserAuthenticationService userAuthenticationService,
+    ICurrentUser currentUser,
     ISampleSystemDTOMappingService mappingService)
     : ControllerBase
 {
@@ -24,7 +24,7 @@ public class EmployeeAsyncController(
     [HttpPost]
     public async Task<EmployeeSimpleDTO> GetCurrentEmployee(CancellationToken cancellationToken)
     {
-        var userName = userAuthenticationService.GetUserName();
+        var userName = currentUser.Name;
 
         var repository = employeeRepositoryFactory.Create();
 

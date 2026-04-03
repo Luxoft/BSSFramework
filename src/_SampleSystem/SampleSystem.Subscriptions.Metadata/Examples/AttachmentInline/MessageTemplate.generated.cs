@@ -15,7 +15,7 @@ namespace ASP
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Framework.Configuration.SubscriptionModeling;
+    using Framework.Subscriptions;
     using SampleSystem.Domain;
     using SampleSystem.Subscriptions.Metadata.Examples.Attachment;
     using SampleSystem.Subscriptions.Metadata.Examples.AttachmentInline;

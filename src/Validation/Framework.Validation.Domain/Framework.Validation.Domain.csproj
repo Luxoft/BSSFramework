@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Validation.Domain</PackageId>
+    <RootNamespace>Framework.Validation</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Framework.Restriction\Framework.Restriction.csproj" />
+    <ProjectReference Include="..\..\Framework.Core\Framework.Core.csproj" />
+  </ItemGroup>
+
+</Project>

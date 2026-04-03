@@ -1,6 +1,6 @@
-﻿using Framework.OData;
+﻿using GenericQueryable.Fetching;
 
-using GenericQueryable.Fetching;
+using OData.Domain;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Filters;
@@ -26,7 +26,7 @@ public partial class TestEmployeeBLL
     /// </summary>
     /// <param name="filter">The filter.</param>
     /// <param name="fetchs">The fetchs.</param>
-    /// <returns>IList&lt;TestEmployee&gt;.</returns>
+    /// <returns>List&lt;TestEmployee&gt;.</returns>
     /// <exception cref="NotImplementedException"></exception>
     public List<TestEmployee> GetListBy(EmployeeFilterModel filter, FetchRule<TestEmployee> fetchs)
         => throw new NotImplementedException();
@@ -37,8 +37,6 @@ public partial class TestEmployeeBLL
             FetchRule<TestEmployee> fetchs)
     {
         var nextSelectOperation = selectOperation.AddFilter(te => te.CoreBusinessUnit.Id == filter.BusinessUnit.Id);
-
-        var isVirtual = nextSelectOperation.IsVirtual;
 
         return this.GetObjectsByOData(nextSelectOperation, fetchs);
     }

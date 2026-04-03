@@ -1,5 +1,5 @@
-﻿using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Tracking.LegacyValidators;
+﻿using Framework.BLL.Domain.ServiceRole;
+using Framework.Tracking.Validation;
 
 namespace SampleSystem.Domain;
 

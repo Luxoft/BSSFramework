@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.CodeGeneration.DTOGenerator</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.CodeGeneration\Framework.CodeGeneration.csproj" />
+
+    <ProjectReference Include="..\..\BLL\Framework.BLL.DTOMapping\Framework.BLL.DTOMapping.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Framework.Core;
+
 namespace Framework.Authorization.Generated.DTO
 {
     
@@ -89,7 +91,7 @@ namespace Framework.Authorization.Generated.DTO
         void MapSimpleToStrictForUpdatePermissionDelegatesModel(Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelStrictDTO target, Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelSimpleDTO currentSource);
     }
     
-    public abstract partial class AuthorizationClientPrimitiveDTOMappingServiceBase : Framework.Persistent.ClientDTOMappingServiceBase, Framework.Authorization.Generated.DTO.IAuthorizationClientDTOMappingService
+    public abstract partial class AuthorizationClientPrimitiveDTOMappingServiceBase : Framework.BLL.DTOMapping.Services.ClientDTOMappingServiceBase, Framework.Authorization.Generated.DTO.IAuthorizationClientDTOMappingService
     {
         
         public virtual void MapBaseAuditPersistentToStrictForBusinessRole(Framework.Authorization.Generated.DTO.BusinessRoleStrictDTO target, Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO source)
@@ -647,9 +649,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public class BusinessRoleIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    public class BusinessRoleIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private static Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO EmptyField = new Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO(System.Guid.Empty);
@@ -709,7 +711,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -753,9 +755,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public class PermissionIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.PermissionIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    public class PermissionIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.PermissionIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private static Framework.Authorization.Generated.DTO.PermissionIdentityDTO EmptyField = new Framework.Authorization.Generated.DTO.PermissionIdentityDTO(System.Guid.Empty);
@@ -815,7 +817,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -859,9 +861,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public class PermissionRestrictionIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    public class PermissionRestrictionIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private static Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO EmptyField = new Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO(System.Guid.Empty);
@@ -921,7 +923,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -965,9 +967,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public class PrincipalIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.PrincipalIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    public class PrincipalIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.PrincipalIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private static Framework.Authorization.Generated.DTO.PrincipalIdentityDTO EmptyField = new Framework.Authorization.Generated.DTO.PrincipalIdentityDTO(System.Guid.Empty);
@@ -1027,7 +1029,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -1071,9 +1073,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public class SecurityContextTypeIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    public class SecurityContextTypeIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private static Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO EmptyField = new Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO(System.Guid.Empty);
@@ -1133,7 +1135,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -1177,7 +1179,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DomainObjectBase), "BaseAbstractDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DomainObjectBase), "BaseAbstractDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public abstract partial class BaseAbstractDTO
     {
@@ -1192,9 +1194,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PersistentDomainObjectBase), "BasePersistentDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PersistentDomainObjectBase), "BasePersistentDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public abstract partial class BasePersistentDTO : Framework.Authorization.Generated.DTO.BaseAbstractDTO, Framework.Persistent.IIdentityObject<System.Guid>
+    public abstract partial class BasePersistentDTO : Framework.Authorization.Generated.DTO.BaseAbstractDTO, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
         private System.Guid _id;
@@ -1222,7 +1224,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -1240,7 +1242,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.AuditPersistentDomainObjectBase), "BaseAuditPersistentDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.AuditPersistentDomainObjectBase), "BaseAuditPersistentDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public abstract partial class BaseAuditPersistentDTO : Framework.Authorization.Generated.DTO.BasePersistentDTO
     {
@@ -1316,7 +1318,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PersistentDomainObjectBase), "BaseEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PersistentDomainObjectBase), "BaseEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.BusinessRoleSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.BusinessRoleRemoveEventDTO))]
@@ -1340,9 +1342,9 @@ namespace Framework.Authorization.Generated.DTO
     {
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class BusinessRoleVisualDTO : Framework.Authorization.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO>
+    public partial class BusinessRoleVisualDTO : Framework.Authorization.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO>
     {
         
         private string _name;
@@ -1380,11 +1382,11 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.BusinessRoleFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.BusinessRoleRichDTO))]
-    public partial class BusinessRoleSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO>
+    public partial class BusinessRoleSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO>
     {
         
         private string _description;
@@ -1447,7 +1449,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.BusinessRoleRichDTO))]
     public partial class BusinessRoleFullDTO : Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO
@@ -1469,7 +1471,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public partial class BusinessRoleRichDTO : Framework.Authorization.Generated.DTO.BusinessRoleFullDTO
     {
@@ -1490,9 +1492,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class BusinessRoleStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.BusinessRole, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.BusinessRole>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO>
+    public partial class BusinessRoleStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.BusinessRole, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.BusinessRole>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO>
     {
         
         private System.Guid _id;
@@ -1590,7 +1592,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -1636,7 +1638,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class BusinessRoleSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -1666,7 +1668,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class BusinessRoleRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -1696,7 +1698,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class BusinessRoleEventRichDTO
     {
@@ -1816,7 +1818,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "SimpleEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class BusinessRoleEventSimpleDTO
     {
@@ -1936,7 +1938,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.ChangePermissionDelegatesModel), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.ChangePermissionDelegatesModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.ChangePermissionDelegatesModelFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.ChangePermissionDelegatesModelRichDTO))]
@@ -1959,7 +1961,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.ChangePermissionDelegatesModel), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.ChangePermissionDelegatesModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.ChangePermissionDelegatesModelRichDTO))]
     public partial class ChangePermissionDelegatesModelFullDTO : Framework.Authorization.Generated.DTO.ChangePermissionDelegatesModelSimpleDTO
@@ -1996,7 +1998,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.ChangePermissionDelegatesModel), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.ChangePermissionDelegatesModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public partial class ChangePermissionDelegatesModelRichDTO : Framework.Authorization.Generated.DTO.ChangePermissionDelegatesModelFullDTO
     {
@@ -2032,9 +2034,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.ChangePermissionDelegatesModel), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.ChangePermissionDelegatesModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class ChangePermissionDelegatesModelStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.ChangePermissionDelegatesModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.ChangePermissionDelegatesModel>
+    public partial class ChangePermissionDelegatesModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.ChangePermissionDelegatesModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.ChangePermissionDelegatesModel>
     {
         
         private Framework.Authorization.Generated.DTO.PermissionIdentityDTO _delegateFromPermission;
@@ -2126,7 +2128,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.ChangePermissionDelegatesModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.ChangePermissionDelegatesModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class ChangePermissionDelegatesModelSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -2156,7 +2158,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.ChangePermissionDelegatesModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.ChangePermissionDelegatesModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class ChangePermissionDelegatesModelRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -2186,7 +2188,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.ChangePermissionDelegatesModel), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.ChangePermissionDelegatesModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class ChangePermissionDelegatesModelEventRichDTO
     {
@@ -2231,7 +2233,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.ChangePermissionDelegatesModel), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.ChangePermissionDelegatesModel), "SimpleEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class ChangePermissionDelegatesModelEventSimpleDTO
     {
@@ -2246,7 +2248,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DelegateToItemModel), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DelegateToItemModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.DelegateToItemModelFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.DelegateToItemModelRichDTO))]
@@ -2269,7 +2271,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DelegateToItemModel), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DelegateToItemModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.DelegateToItemModelRichDTO))]
     public partial class DelegateToItemModelFullDTO : Framework.Authorization.Generated.DTO.DelegateToItemModelSimpleDTO
@@ -2306,7 +2308,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DelegateToItemModel), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DelegateToItemModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public partial class DelegateToItemModelRichDTO : Framework.Authorization.Generated.DTO.DelegateToItemModelFullDTO
     {
@@ -2342,9 +2344,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DelegateToItemModel), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DelegateToItemModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class DelegateToItemModelStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.DelegateToItemModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.DelegateToItemModel>
+    public partial class DelegateToItemModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.DelegateToItemModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.DelegateToItemModel>
     {
         
         private Framework.Authorization.Generated.DTO.PermissionStrictDTO _permission;
@@ -2436,7 +2438,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DelegateToItemModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DelegateToItemModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class DelegateToItemModelSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -2466,7 +2468,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DelegateToItemModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DelegateToItemModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class DelegateToItemModelRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -2496,7 +2498,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DelegateToItemModel), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DelegateToItemModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class DelegateToItemModelEventRichDTO
     {
@@ -2541,7 +2543,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DelegateToItemModel), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.DelegateToItemModel), "SimpleEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class DelegateToItemModelEventSimpleDTO
     {
@@ -2556,16 +2558,16 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionRichDTO))]
-    public partial class PermissionSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionIdentityDTO>
+    public partial class PermissionSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionIdentityDTO>
     {
         
         private string _comment;
         
-        private Framework.Core.Period _period = Framework.Core.Period.Eternity;
+        private Period _period = Period.Eternity;
         
         public PermissionSimpleDTO()
         {
@@ -2605,7 +2607,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period
+        public Period Period
         {
             get
             {
@@ -2623,7 +2625,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionRichDTO))]
     public partial class PermissionFullDTO : Framework.Authorization.Generated.DTO.PermissionSimpleDTO
@@ -2675,7 +2677,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public partial class PermissionRichDTO : Framework.Authorization.Generated.DTO.PermissionFullDTO
     {
@@ -2726,16 +2728,16 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class PermissionStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Permission, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Permission>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionIdentityDTO>
+    public partial class PermissionStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Permission, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Permission>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionIdentityDTO>
     {
         
         private string _comment;
         
         private System.Guid _id;
         
-        private Framework.Core.Period _period;
+        private Period _period;
         
         private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO> _restrictions = new System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO>();
         
@@ -2845,7 +2847,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -2863,7 +2865,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period
+        public Period Period
         {
             get
             {
@@ -2917,7 +2919,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class PermissionSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -2947,7 +2949,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class PermissionRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -2977,7 +2979,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class PermissionEventRichDTO
     {
@@ -2994,7 +2996,7 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.DateTime? _modifyDate;
         
-        private Framework.Core.Period _period;
+        private Period _period;
         
         private Framework.Authorization.Generated.DTO.PrincipalEventSimpleDTO _principal;
         
@@ -3090,7 +3092,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period
+        public Period Period
         {
             get
             {
@@ -3142,7 +3144,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "SimpleEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class PermissionEventSimpleDTO
     {
@@ -3159,7 +3161,7 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.DateTime? _modifyDate;
         
-        private Framework.Core.Period _period;
+        private Period _period;
         
         public PermissionEventSimpleDTO()
         {
@@ -3249,7 +3251,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period
+        public Period Period
         {
             get
             {
@@ -3262,7 +3264,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionDirectFilterModel), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionDirectFilterModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionDirectFilterModelFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionDirectFilterModelRichDTO))]
@@ -3315,7 +3317,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionDirectFilterModel), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionDirectFilterModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionDirectFilterModelRichDTO))]
     public partial class PermissionDirectFilterModelFullDTO : Framework.Authorization.Generated.DTO.PermissionDirectFilterModelSimpleDTO
@@ -3352,7 +3354,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionDirectFilterModel), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionDirectFilterModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public partial class PermissionDirectFilterModelRichDTO : Framework.Authorization.Generated.DTO.PermissionDirectFilterModelFullDTO
     {
@@ -3373,9 +3375,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionDirectFilterModel), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionDirectFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class PermissionDirectFilterModelStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionDirectFilterModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionDirectFilterModel>
+    public partial class PermissionDirectFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionDirectFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionDirectFilterModel>
     {
         
         private System.Guid _securityContextId;
@@ -3482,7 +3484,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionDirectFilterModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionDirectFilterModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class PermissionDirectFilterModelSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -3512,7 +3514,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionDirectFilterModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionDirectFilterModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class PermissionDirectFilterModelRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -3542,7 +3544,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionDirectFilterModel), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionDirectFilterModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class PermissionDirectFilterModelEventRichDTO
     {
@@ -3602,7 +3604,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionDirectFilterModel), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionDirectFilterModel), "SimpleEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class PermissionDirectFilterModelEventSimpleDTO
     {
@@ -3647,11 +3649,11 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionRestrictionFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionRestrictionRichDTO))]
-    public partial class PermissionRestrictionSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO>
+    public partial class PermissionRestrictionSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO>
     {
         
         private System.Guid _securityContextId;
@@ -3699,7 +3701,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PermissionRestrictionRichDTO))]
     public partial class PermissionRestrictionFullDTO : Framework.Authorization.Generated.DTO.PermissionRestrictionSimpleDTO
@@ -3751,7 +3753,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public partial class PermissionRestrictionRichDTO : Framework.Authorization.Generated.DTO.PermissionRestrictionFullDTO
     {
@@ -3772,9 +3774,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class PermissionRestrictionStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionRestriction, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionRestriction>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO>
+    public partial class PermissionRestrictionStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionRestriction, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.PermissionRestriction>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO>
     {
         
         private System.Guid _id;
@@ -3874,7 +3876,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -3933,7 +3935,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class PermissionRestrictionSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -3963,7 +3965,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class PermissionRestrictionRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -3993,7 +3995,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class PermissionRestrictionEventRichDTO
     {
@@ -4128,7 +4130,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionRestriction), "SimpleEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class PermissionRestrictionEventSimpleDTO
     {
@@ -4233,9 +4235,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class PrincipalVisualDTO : Framework.Authorization.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PrincipalIdentityDTO>
+    public partial class PrincipalVisualDTO : Framework.Authorization.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PrincipalIdentityDTO>
     {
         
         private string _name;
@@ -4273,11 +4275,11 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PrincipalFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PrincipalRichDTO))]
-    public partial class PrincipalSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PrincipalIdentityDTO>
+    public partial class PrincipalSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PrincipalIdentityDTO>
     {
         
         private string _name;
@@ -4325,7 +4327,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.PrincipalRichDTO))]
     public partial class PrincipalFullDTO : Framework.Authorization.Generated.DTO.PrincipalSimpleDTO
@@ -4362,7 +4364,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public partial class PrincipalRichDTO : Framework.Authorization.Generated.DTO.PrincipalFullDTO
     {
@@ -4398,9 +4400,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class PrincipalStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Principal, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Principal>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PrincipalIdentityDTO>
+    public partial class PrincipalStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Principal, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Principal>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PrincipalIdentityDTO>
     {
         
         private System.Guid _id;
@@ -4502,7 +4504,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -4574,7 +4576,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class PrincipalSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -4604,7 +4606,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class PrincipalRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -4634,7 +4636,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class PrincipalEventRichDTO
     {
@@ -4769,7 +4771,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "SimpleEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class PrincipalEventSimpleDTO
     {
@@ -4874,9 +4876,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class SecurityContextTypeVisualDTO : Framework.Authorization.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO>
+    public partial class SecurityContextTypeVisualDTO : Framework.Authorization.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO>
     {
         
         private string _name;
@@ -4914,11 +4916,11 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.SecurityContextTypeRichDTO))]
-    public partial class SecurityContextTypeSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO>
+    public partial class SecurityContextTypeSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO>
     {
         
         private string _name;
@@ -4966,7 +4968,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.SecurityContextTypeRichDTO))]
     public partial class SecurityContextTypeFullDTO : Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO
@@ -4988,7 +4990,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public partial class SecurityContextTypeRichDTO : Framework.Authorization.Generated.DTO.SecurityContextTypeFullDTO
     {
@@ -5009,9 +5011,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class SecurityContextTypeStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.SecurityContextType, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.SecurityContextType>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO>
+    public partial class SecurityContextTypeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.SecurityContextType, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.SecurityContextType>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO>
     {
         
         private System.Guid _id;
@@ -5107,7 +5109,7 @@ namespace Framework.Authorization.Generated.DTO
             }
         }
         
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
         {
             get
             {
@@ -5140,7 +5142,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class SecurityContextTypeSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -5170,7 +5172,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class SecurityContextTypeRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -5200,7 +5202,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class SecurityContextTypeEventRichDTO
     {
@@ -5305,7 +5307,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.SecurityContextType), "SimpleEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class SecurityContextTypeEventSimpleDTO
     {
@@ -5410,7 +5412,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelRichDTO))]
@@ -5433,7 +5435,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelRichDTO))]
     public partial class UpdatePermissionDelegatesModelFullDTO : Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelSimpleDTO
@@ -5470,7 +5472,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public partial class UpdatePermissionDelegatesModelRichDTO : Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelFullDTO
     {
@@ -5521,9 +5523,9 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
-    public partial class UpdatePermissionDelegatesModelStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.UpdatePermissionDelegatesModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.UpdatePermissionDelegatesModel>
+    public partial class UpdatePermissionDelegatesModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.UpdatePermissionDelegatesModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.UpdatePermissionDelegatesModel>
     {
         
         private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.DelegateToItemModelStrictDTO> _addItems = new System.Collections.Generic.List<Framework.Authorization.Generated.DTO.DelegateToItemModelStrictDTO>();
@@ -5630,7 +5632,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class UpdatePermissionDelegatesModelSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -5660,7 +5662,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class UpdatePermissionDelegatesModelRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
@@ -5690,7 +5692,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class UpdatePermissionDelegatesModelEventRichDTO
     {
@@ -5750,7 +5752,7 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.UpdatePermissionDelegatesModel), "SimpleEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://authorization.luxoft.com/IntegrationEvent")]
     public partial class UpdatePermissionDelegatesModelEventSimpleDTO
     {
@@ -6302,7 +6304,7 @@ namespace Framework.Authorization.Generated.DTO
     }
     #endregion
     
-    public partial interface IAuthorizationDTOMappingService : Framework.DomainDriven.IDTOMappingService<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>
+    public partial interface IAuthorizationDTOMappingService : Framework.BLL.DTOMapping.Services.IDTOMappingService<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>
     {
         
         void MapAuditPersistentDomainObjectBase(Framework.Authorization.Domain.AuditPersistentDomainObjectBase domainObject, Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO mappingObject);
@@ -6468,7 +6470,7 @@ namespace Framework.Authorization.Generated.DTO
         Framework.Authorization.Domain.UpdatePermissionDelegatesModel ToUpdatePermissionDelegatesModel(Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelStrictDTO updatePermissionDelegatesModelStrictDTO);
     }
     
-    public abstract partial class AuthorizationServerPrimitiveDTOMappingServiceBase : Framework.DomainDriven.DTOMappingService<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.AuditPersistentDomainObjectBase, System.Guid, CommonFramework.Ignore>, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService
+    public abstract partial class AuthorizationServerPrimitiveDTOMappingServiceBase : Framework.BLL.DTOMapping.Services.DTOMappingService<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.AuditPersistentDomainObjectBase, System.Guid, CommonFramework.Ignore>, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService
     {
         
         protected AuthorizationServerPrimitiveDTOMappingServiceBase(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
@@ -6698,7 +6700,7 @@ namespace Framework.Authorization.Generated.DTO
             domainObject.Period = mappingObject.Period;
             if (!object.ReferenceEquals(mappingObject.Restrictions, null))
             {
-                this.GetCollectionMappingService<Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO, Framework.Authorization.Domain.PermissionRestriction>(detailDTO => this.ToPermissionRestriction(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<Framework.Authorization.Domain.Permission, Framework.Authorization.Domain.PermissionRestriction>(domainObject, detail)).Map(mappingObject.Restrictions, domainObject.Restrictions);
+                this.GetCollectionMappingService<Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO, Framework.Authorization.Domain.PermissionRestriction>(detailDTO => this.ToPermissionRestriction(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<Framework.Authorization.Domain.Permission, Framework.Authorization.Domain.PermissionRestriction>(domainObject, detail)).Map(mappingObject.Restrictions, domainObject.Restrictions);
             }
             if (!object.Equals(mappingObject.Role, default(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO)))
             {
@@ -6920,7 +6922,7 @@ namespace Framework.Authorization.Generated.DTO
             domainObject.Name = mappingObject.Name;
             if (!object.ReferenceEquals(mappingObject.Permissions, null))
             {
-                this.GetCollectionMappingService<Framework.Authorization.Generated.DTO.PermissionStrictDTO, Framework.Authorization.Domain.Permission>(detailDTO => this.ToPermission(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<Framework.Authorization.Domain.Principal, Framework.Authorization.Domain.Permission>(domainObject, detail)).Map(mappingObject.Permissions, domainObject.Permissions);
+                this.GetCollectionMappingService<Framework.Authorization.Generated.DTO.PermissionStrictDTO, Framework.Authorization.Domain.Permission>(detailDTO => this.ToPermission(detailDTO, domainObject), detail => Framework.Relations.AddRemoveDetailHelper.RemoveDetail<Framework.Authorization.Domain.Principal, Framework.Authorization.Domain.Permission>(domainObject, detail)).Map(mappingObject.Permissions, domainObject.Permissions);
             }
             if (!object.Equals(mappingObject.RunAs, default(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO)))
             {
@@ -7004,7 +7006,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         protected virtual void MapToDomainObject<TMappingObject, TDomainObject>(TMappingObject mappingObject, TDomainObject domainObject)
-            where TMappingObject : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject>
+            where TMappingObject : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject>
             where TDomainObject : Framework.Authorization.Domain.DomainObjectBase
         {
             mappingObject.MapToDomainObject(this, domainObject);
@@ -7103,16 +7105,16 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         protected virtual TDomainObject ToDomainObject<TMappingObject, TDomainObject>(TMappingObject mappingObject)
-            where TMappingObject : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject, System.Guid>
+            where TMappingObject : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject, System.Guid>
             where TDomainObject : Framework.Authorization.Domain.PersistentDomainObjectBase
         {
-            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.DomainDriven.IdCheckMode.CheckAll);
+            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.BLL.IdCheckMode.CheckAll);
             this.MapToDomainObject(mappingObject, domainObject);
             return domainObject;
         }
         
         protected virtual TDomainObject ToDomainObject<TMappingObject, TDomainObject>(TMappingObject mappingObject, System.Func<TDomainObject> createFunc)
-            where TMappingObject : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject, System.Guid>
+            where TMappingObject : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject, System.Guid>
             where TDomainObject : Framework.Authorization.Domain.PersistentDomainObjectBase
         {
             TDomainObject domainObject = this.GetByIdOrCreate<TDomainObject>(mappingObject.Id, createFunc);
@@ -7121,7 +7123,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         protected virtual TDomainObject ToDomainObjectBase<TMappingObject, TDomainObject>(TMappingObject mappingObject)
-            where TMappingObject : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject>
+            where TMappingObject : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject>
             where TDomainObject : Framework.Authorization.Domain.DomainObjectBase, new ()
         {
             TDomainObject domainObject = new TDomainObject();

@@ -1,0 +1,55 @@
+﻿using System.CodeDom;
+using System.Reflection;
+
+using Framework.CodeDom.Extensions;
+using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
+
+namespace Framework.CodeGeneration.DTOGenerator.FileFactory.ClientMapping;
+
+public class ClientPrimitiveDTOMappingServiceFileFactory<TConfiguration> : FileFactory<TConfiguration, BaseFileType>
+        where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
+{
+    public ClientPrimitiveDTOMappingServiceFileFactory(TConfiguration configuration)
+            : base(configuration, null) =>
+        this.BaseReference = this.Configuration.GetCodeTypeReference(null, BaseFileType.ClientPrimitiveDTOMappingServiceBase);
+
+    public override BaseFileType FileType { get; } = BaseFileType.ClientPrimitiveDTOMappingService;
+
+    public override CodeTypeReference BaseReference { get; }
+
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
+        new(this.Name)
+        {
+            TypeAttributes = TypeAttributes.Public,
+            IsPartial = true
+        };
+
+    protected override IEnumerable<CodeTypeMember> GetMembers()
+    {
+        var currentInstanceField = new CodeMemberField
+                                   {
+                                           Attributes = MemberAttributes.Private | MemberAttributes.Static,
+                                           Name = "_default",
+                                           Type = this.CurrentReference,
+                                           InitExpression = this.CurrentReference.ToObjectCreateExpression(),
+                                   };
+
+        yield return currentInstanceField;
+
+        yield return new CodeMemberProperty
+                     {
+                             Attributes = MemberAttributes.Public | MemberAttributes.Static,
+                             Type = this.CurrentReference,
+                             Name = "Default",
+                             HasGet = true,
+                             GetStatements =
+                             {
+                                     this.CurrentReference.ToTypeReferenceExpression()
+                                         .ToFieldReference(currentInstanceField)
+                                         .ToMethodReturnStatement()
+                             }
+                     };
+    }
+}

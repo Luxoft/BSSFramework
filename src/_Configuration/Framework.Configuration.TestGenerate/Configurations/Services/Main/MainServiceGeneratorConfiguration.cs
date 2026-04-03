@@ -1,15 +1,8 @@
-﻿using Framework.DomainDriven.ServiceModelGenerator;
+﻿using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Main;
 
+namespace Framework.Configuration.TestGenerate.Configurations.Services.Main;
 
-namespace Framework.Configuration.TestGenerate;
-
-public class MainServiceGeneratorConfiguration : MainGeneratorConfigurationBase<ServerGenerationEnvironment>
+public class MainServiceGeneratorConfiguration(ConfigurationGenerationEnvironment environment) : MainGeneratorConfigurationBase<ConfigurationGenerationEnvironment>(environment)
 {
-    public MainServiceGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
-    {
-    }
-
-
     public override string ImplementClassName { get; } = "ConfigurationFacade";
 }

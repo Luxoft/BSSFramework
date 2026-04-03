@@ -1,4 +1,4 @@
-﻿namespace Framework.Core;
+﻿namespace Framework.Core.AnonymousTypeBuilder;
 
 public class TypeMapMemberBase : ITypeMapMember
 {
@@ -12,13 +12,10 @@ public class TypeMapMemberBase : ITypeMapMember
     }
 
 
-    public string Name { get; private set; }
+    public string Name { get; }
 
-    public Type Type { get; private set; }
+    public Type Type { get; }
 
 
-    public override string ToString()
-    {
-        return this.Name;
-    }
+    public override string ToString() => this.Name;
 }

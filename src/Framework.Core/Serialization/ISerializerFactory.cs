@@ -27,7 +27,7 @@ public static class SerializerFactoryExtensions
         {
             new Action<ISerializerFactory<object>, object>(InternalValidate<object, object>)
                     .CreateGenericMethod(typeof(TSerializedValue), valueType)
-                    .Invoke(null, new object[] { serializerFactory, serializedValue });
+                    .Invoke(null, [serializerFactory, serializedValue]);
         }
         catch (TargetInvocationException ex)
         {

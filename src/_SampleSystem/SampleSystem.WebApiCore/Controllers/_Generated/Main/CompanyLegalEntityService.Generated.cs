@@ -4,7 +4,7 @@
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
     [Microsoft.AspNetCore.Mvc.RouteAttribute("api/[controller]/[action]")]
-    public partial class CompanyLegalEntityController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
+    public partial class CompanyLegalEntityController : Framework.Infrastructure.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
         /// <summary>
@@ -13,7 +13,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO> GetFullCompanyLegalEntities()
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCompanyLegalEntitiesInternal(evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullCompanyLegalEntitiesInternal(evaluateData));
         }
         
         /// <summary>
@@ -22,19 +22,19 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO> GetFullCompanyLegalEntitiesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO[] companyLegalEntityIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCompanyLegalEntitiesByIdentsInternal(companyLegalEntityIdents, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullCompanyLegalEntitiesByIdentsInternal(companyLegalEntityIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO> GetFullCompanyLegalEntitiesByIdentsInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO[] companyLegalEntityIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO> GetFullCompanyLegalEntitiesByIdentsInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO[] companyLegalEntityIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(companyLegalEntityIdents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(companyLegalEntityIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO> GetFullCompanyLegalEntitiesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO> GetFullCompanyLegalEntitiesInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -43,7 +43,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO GetFullCompanyLegalEntity([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCompanyLegalEntityInternal(companyLegalEntityIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullCompanyLegalEntityInternal(companyLegalEntityIdentity, evaluateData));
         }
         
         /// <summary>
@@ -52,13 +52,13 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO GetFullCompanyLegalEntityByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string companyLegalEntityCode)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCompanyLegalEntityByCodeInternal(companyLegalEntityCode, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullCompanyLegalEntityByCodeInternal(companyLegalEntityCode, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO GetFullCompanyLegalEntityByCodeInternal(string companyLegalEntityCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO GetFullCompanyLegalEntityByCodeInternal(string companyLegalEntityCode, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, companyLegalEntityCode, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, companyLegalEntityCode, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -68,20 +68,20 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO GetFullCompanyLegalEntityByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string companyLegalEntityName)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCompanyLegalEntityByNameInternal(companyLegalEntityName, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullCompanyLegalEntityByNameInternal(companyLegalEntityName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO GetFullCompanyLegalEntityByNameInternal(string companyLegalEntityName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO GetFullCompanyLegalEntityByNameInternal(string companyLegalEntityName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, companyLegalEntityName, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, companyLegalEntityName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO GetFullCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO GetFullCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.CompanyLegalEntity domainObject = bll.GetById(companyLegalEntityIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.CompanyLegalEntity domainObject = bll.GetById(companyLegalEntityIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -91,7 +91,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntityRichDTO GetRichCompanyLegalEntity([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichCompanyLegalEntityInternal(companyLegalEntityIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichCompanyLegalEntityInternal(companyLegalEntityIdentity, evaluateData));
         }
         
         /// <summary>
@@ -100,13 +100,13 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntityRichDTO GetRichCompanyLegalEntityByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string companyLegalEntityCode)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichCompanyLegalEntityByCodeInternal(companyLegalEntityCode, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichCompanyLegalEntityByCodeInternal(companyLegalEntityCode, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityRichDTO GetRichCompanyLegalEntityByCodeInternal(string companyLegalEntityCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityRichDTO GetRichCompanyLegalEntityByCodeInternal(string companyLegalEntityCode, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, companyLegalEntityCode, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, companyLegalEntityCode, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -116,20 +116,20 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntityRichDTO GetRichCompanyLegalEntityByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string companyLegalEntityName)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichCompanyLegalEntityByNameInternal(companyLegalEntityName, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichCompanyLegalEntityByNameInternal(companyLegalEntityName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityRichDTO GetRichCompanyLegalEntityByNameInternal(string companyLegalEntityName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityRichDTO GetRichCompanyLegalEntityByNameInternal(string companyLegalEntityName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, companyLegalEntityName, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, companyLegalEntityName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityRichDTO GetRichCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityRichDTO GetRichCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.CompanyLegalEntity domainObject = bll.GetById(companyLegalEntityIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.CompanyLegalEntity domainObject = bll.GetById(companyLegalEntityIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -139,7 +139,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO> GetSimpleCompanyLegalEntities()
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCompanyLegalEntitiesInternal(evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleCompanyLegalEntitiesInternal(evaluateData));
         }
         
         /// <summary>
@@ -148,19 +148,19 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO> GetSimpleCompanyLegalEntitiesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO[] companyLegalEntityIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCompanyLegalEntitiesByIdentsInternal(companyLegalEntityIdents, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleCompanyLegalEntitiesByIdentsInternal(companyLegalEntityIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO> GetSimpleCompanyLegalEntitiesByIdentsInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO[] companyLegalEntityIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO> GetSimpleCompanyLegalEntitiesByIdentsInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO[] companyLegalEntityIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(companyLegalEntityIdents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(companyLegalEntityIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO> GetSimpleCompanyLegalEntitiesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO> GetSimpleCompanyLegalEntitiesInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -169,7 +169,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO GetSimpleCompanyLegalEntity([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCompanyLegalEntityInternal(companyLegalEntityIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleCompanyLegalEntityInternal(companyLegalEntityIdentity, evaluateData));
         }
         
         /// <summary>
@@ -178,13 +178,13 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO GetSimpleCompanyLegalEntityByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string companyLegalEntityCode)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCompanyLegalEntityByCodeInternal(companyLegalEntityCode, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleCompanyLegalEntityByCodeInternal(companyLegalEntityCode, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO GetSimpleCompanyLegalEntityByCodeInternal(string companyLegalEntityCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO GetSimpleCompanyLegalEntityByCodeInternal(string companyLegalEntityCode, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, companyLegalEntityCode, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, companyLegalEntityCode, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -194,20 +194,20 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO GetSimpleCompanyLegalEntityByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string companyLegalEntityName)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCompanyLegalEntityByNameInternal(companyLegalEntityName, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleCompanyLegalEntityByNameInternal(companyLegalEntityName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO GetSimpleCompanyLegalEntityByNameInternal(string companyLegalEntityName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO GetSimpleCompanyLegalEntityByNameInternal(string companyLegalEntityName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, companyLegalEntityName, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, companyLegalEntityName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO GetSimpleCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO GetSimpleCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.CompanyLegalEntity domainObject = bll.GetById(companyLegalEntityIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.CompanyLegalEntity domainObject = bll.GetById(companyLegalEntityIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -217,7 +217,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO> GetVisualCompanyLegalEntities()
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualCompanyLegalEntitiesInternal(evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualCompanyLegalEntitiesInternal(evaluateData));
         }
         
         /// <summary>
@@ -226,19 +226,19 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO> GetVisualCompanyLegalEntitiesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO[] companyLegalEntityIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualCompanyLegalEntitiesByIdentsInternal(companyLegalEntityIdents, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualCompanyLegalEntitiesByIdentsInternal(companyLegalEntityIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO> GetVisualCompanyLegalEntitiesByIdentsInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO[] companyLegalEntityIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO> GetVisualCompanyLegalEntitiesByIdentsInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO[] companyLegalEntityIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(companyLegalEntityIdents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(companyLegalEntityIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO> GetVisualCompanyLegalEntitiesInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO> GetVisualCompanyLegalEntitiesInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -247,7 +247,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO GetVisualCompanyLegalEntity([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualCompanyLegalEntityInternal(companyLegalEntityIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualCompanyLegalEntityInternal(companyLegalEntityIdentity, evaluateData));
         }
         
         /// <summary>
@@ -256,13 +256,13 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO GetVisualCompanyLegalEntityByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string companyLegalEntityCode)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualCompanyLegalEntityByCodeInternal(companyLegalEntityCode, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualCompanyLegalEntityByCodeInternal(companyLegalEntityCode, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO GetVisualCompanyLegalEntityByCodeInternal(string companyLegalEntityCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO GetVisualCompanyLegalEntityByCodeInternal(string companyLegalEntityCode, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, companyLegalEntityCode, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.VisualDTO));
+            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, companyLegalEntityCode, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -272,20 +272,20 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO GetVisualCompanyLegalEntityByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string companyLegalEntityName)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualCompanyLegalEntityByNameInternal(companyLegalEntityName, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualCompanyLegalEntityByNameInternal(companyLegalEntityName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO GetVisualCompanyLegalEntityByNameInternal(string companyLegalEntityName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO GetVisualCompanyLegalEntityByNameInternal(string companyLegalEntityName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, companyLegalEntityName, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.VisualDTO));
+            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, companyLegalEntityName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO GetVisualCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityVisualDTO GetVisualCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.CompanyLegalEntity domainObject = bll.GetById(companyLegalEntityIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.Transfering.ViewDTOType.VisualDTO));
+            SampleSystem.Domain.CompanyLegalEntity domainObject = bll.GetById(companyLegalEntityIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.CompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -295,16 +295,16 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual void RemoveCompanyLegalEntity([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdent)
         {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.RemoveCompanyLegalEntityInternal(companyLegalEntityIdent, evaluateData));
+            this.Evaluate(Framework.Database.DBSessionMode.Write, evaluateData => this.RemoveCompanyLegalEntityInternal(companyLegalEntityIdent, evaluateData));
         }
         
-        protected virtual void RemoveCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdent, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual void RemoveCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdent, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.Edit);
             this.RemoveCompanyLegalEntityInternal(companyLegalEntityIdent, evaluateData, bll);
         }
         
-        protected virtual void RemoveCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdent, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData, SampleSystem.BLL.ICompanyLegalEntityBLL bll)
+        protected virtual void RemoveCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdent, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData, SampleSystem.BLL.ICompanyLegalEntityBLL bll)
         {
             SampleSystem.Domain.CompanyLegalEntity domainObject = bll.GetById(companyLegalEntityIdent.Id, true);
             bll.Remove(domainObject);
@@ -316,18 +316,18 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO SaveCompanyLegalEntity([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CompanyLegalEntityStrictDTO companyLegalEntityStrict)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SaveCompanyLegalEntityInternal(companyLegalEntityStrict, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Write, evaluateData => this.SaveCompanyLegalEntityInternal(companyLegalEntityStrict, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO SaveCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityStrictDTO companyLegalEntityStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO SaveCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityStrictDTO companyLegalEntityStrict, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICompanyLegalEntityBLL bll = evaluateData.Context.Logics.CompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.Edit);
             return this.SaveCompanyLegalEntityInternal(companyLegalEntityStrict, evaluateData, bll);
         }
         
-        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO SaveCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityStrictDTO companyLegalEntityStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData, SampleSystem.BLL.ICompanyLegalEntityBLL bll)
+        protected virtual SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO SaveCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityStrictDTO companyLegalEntityStrict, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData, SampleSystem.BLL.ICompanyLegalEntityBLL bll)
         {
-            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByIdOrCreate(bll, companyLegalEntityStrict.Id);
+            SampleSystem.Domain.CompanyLegalEntity domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByIdOrCreate(bll, companyLegalEntityStrict.Id);
             companyLegalEntityStrict.MapToDomainObject(evaluateData.MappingService, domainObject);
             bll.Save(domainObject);
             return SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject);
@@ -339,13 +339,13 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.CustomCompanyLegalEntityProjectionDTO GetCustomCompanyLegalEntity([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO customCompanyLegalEntityIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetCustomCompanyLegalEntityInternal(customCompanyLegalEntityIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetCustomCompanyLegalEntityInternal(customCompanyLegalEntityIdentity, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.CustomCompanyLegalEntityProjectionDTO GetCustomCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO customCompanyLegalEntityIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.CustomCompanyLegalEntityProjectionDTO GetCustomCompanyLegalEntityInternal(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO customCompanyLegalEntityIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICustomCompanyLegalEntityBLL bll = evaluateData.Context.Logics.CustomCompanyLegalEntityFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.Projections.CustomCompanyLegalEntity domainObject = bll.GetById(customCompanyLegalEntityIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>(Framework.Transfering.ViewDTOType.ProjectionDTO));
+            SampleSystem.Domain.Projections.CustomCompanyLegalEntity domainObject = bll.GetById(customCompanyLegalEntityIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>(Framework.BLL.Domain.DTO.ViewDTOType.ProjectionDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(domainObject, evaluateData.MappingService);
         }
     }

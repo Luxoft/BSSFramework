@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven;
+﻿using Framework.BLL.Domain.DirectMode;
+using Framework.BLL.Domain.Models;
 
 namespace Framework.Configuration.Domain;
 

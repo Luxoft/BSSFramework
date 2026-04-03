@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Authorization.Generated.DAL.NHibernate</PackageId>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
+
+    <ProjectReference Include="..\..\Database\Framework.Database.NHibernate.Runtime\Framework.Database.NHibernate.Runtime.csproj" />
   </ItemGroup>
 
 </Project>

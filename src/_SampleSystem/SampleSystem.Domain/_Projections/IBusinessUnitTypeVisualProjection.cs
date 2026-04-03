@@ -1,11 +1,9 @@
-﻿using Framework.DomainDriven.BLL;
-using Framework.Persistent;
-using Framework.Projection.Contract;
+﻿using Framework.Application.Domain;
+using Framework.BLL.Domain.ServiceRole;
+using Framework.Projection;
 
 namespace SampleSystem.Domain;
 
 [BLLProjectionViewRole]
 [ProjectionContract(typeof(BusinessUnitType))]
-public interface IBusinessUnitTypeVisualProjection : IIdentityObject<Guid>, IVisualIdentityObject
-{
-}
+public interface IBusinessUnitTypeVisualProjection : IIdentityObject<Guid>, IVisualIdentityObject;

@@ -1,0 +1,196 @@
+<Solution>
+  
+  <Folder Name="/Application/">
+    <Project Path="Application/Framework.Application.Abstractions/Framework.Application.Abstractions.csproj" />
+    <Project Path="Application/Framework.Application.Domain/Framework.Application.Domain.csproj" />
+    <Project Path="Application/Framework.Application.Runtime/Framework.Application.Runtime.csproj" />
+    <Project Path="Application/Framework.Application.Tests/Framework.Application.Tests.csproj" />
+    <Project Path="Application/Framework.Application/Framework.Application.csproj" />
+  </Folder>
+  <Folder Name="/AutomationCore/">
+    <Project Path="AutomationCore/Framework.AutomationCore.ServiceEnvironment.LegacyContext/Framework.AutomationCore.ServiceEnvironment.LegacyContext.csproj" />
+    <Project Path="AutomationCore/Framework.AutomationCore.ServiceEnvironment/Framework.AutomationCore.ServiceEnvironment.csproj" />
+    <Project Path="AutomationCore/Framework.AutomationCore.Xunit/Framework.AutomationCore.Xunit.csproj" />
+    <Project Path="AutomationCore/Framework.AutomationCore/Framework.AutomationCore.csproj" />
+  </Folder>
+  
+  <Folder Name="/BLL/">
+    <Project Path="BLL/Framework.BLL.Abstractions/Framework.BLL.Abstractions.csproj" />
+    <Project Path="BLL/Framework.BLL.Domain/Framework.BLL.Domain.csproj" />
+    <Project Path="BLL/Framework.BLL.DTOMapping/Framework.BLL.DTOMapping.csproj" />
+    <Project Path="BLL/Framework.BLL.Events/Framework.BLL.Events.csproj" />
+    <Project Path="BLL/Framework.BLL.Runtime/Framework.BLL.Runtime.csproj" />
+    <Project Path="BLL/Framework.BLL/Framework.BLL.csproj" />
+  </Folder>
+  
+  <Folder Name="/CodeGeneration/">
+    <Project Path="CodeGeneration/Framework.CodeDom/Framework.CodeDom.csproj" />
+    <Project Path="CodeGeneration/Framework.CodeGeneration.BLLCoreGenerator/Framework.CodeGeneration.BLLCoreGenerator.csproj" />
+    <Project Path="CodeGeneration/Framework.CodeGeneration.BLLGenerator/Framework.CodeGeneration.BLLGenerator.csproj" />
+    <Project Path="CodeGeneration/Framework.CodeGeneration.ProjectionGenerator/Framework.CodeGeneration.ProjectionGenerator.csproj" />
+    <Project Path="CodeGeneration/Framework.CodeGeneration.ServiceModelGenerator/Framework.CodeGeneration.ServiceModelGenerator.csproj" />
+    <Project Path="CodeGeneration/Framework.CodeGeneration.WebApiGenerator/Framework.CodeGeneration.WebApiGenerator.csproj" />
+    <Project Path="CodeGeneration/Framework.CodeGeneration/Framework.CodeGeneration.csproj" />
+    <Project Path="CodeGeneration/Framework.FileGeneration/Framework.FileGeneration.csproj" />
+  </Folder>
+  
+  <Folder Name="/CodeGeneration/DTO/">
+    <Project Path="CodeGeneration/Framework.CodeGeneration.DTOGenerator.Audit/Framework.CodeGeneration.DTOGenerator.Audit.csproj" />
+    <Project Path="CodeGeneration/Framework.CodeGeneration.DTOGenerator.Server/Framework.CodeGeneration.DTOGenerator.Server.csproj" />
+    <Project Path="CodeGeneration/Framework.CodeGeneration.DTOGenerator/Framework.CodeGeneration.DTOGenerator.csproj" />
+  </Folder>
+  
+  <Folder Name="/Configurator/">
+    <Project Path="Configurator/Framework.Configurator.ApplicationVariable/Framework.Configurator.ApplicationVariable.csproj" />
+    <Project Path="Configurator/Framework.Configurator.Events/Framework.Configurator.Events.csproj" />
+  </Folder>
+  
+  <Folder Name="/Database/">
+    <Project Path="Database/Framework.Database.Abstractions/Framework.Database.Abstractions.csproj" />
+    <Project Path="Database/Framework.Database.Domain/Framework.Database.Domain.csproj" />
+    <Project Path="Database/Framework.Database.Legacy.Abstractions/Framework.Database.Legacy.Abstractions.csproj" />
+    <Project Path="Database/Framework.Database.Legacy.Domain/Framework.Database.Legacy.Domain.csproj" />
+    <Project Path="Database/Framework.Database.Mapping/Framework.Database.Mapping.csproj" />
+    <Project Path="Database/Framework.Database.Metadata/Framework.Database.Metadata.csproj" />
+    <Project Path="Database/Framework.Database.Runtime/Framework.Database.Runtime.csproj" />
+    <Project Path="Database/Framework.Database.SqlMapper/Framework.Database.SqlMapper.csproj" />
+    <Project Path="Database/Framework.Database/Framework.Database.csproj" />
+    <Project Path="Database/Framework.Tracking.Abstractions/Framework.Tracking.Abstractions.csproj" />
+    <Project Path="Database/Framework.Tracking.Tests/Framework.Tracking.Tests.csproj" />
+    <Project Path="Database/Framework.Tracking.Validation/Framework.Tracking.Validation.csproj" />
+    <Project Path="Database/Framework.Tracking/Framework.Tracking.csproj" />
+  </Folder>
+  <Folder Name="/Database/EntityFramework/">
+    <Project Path="Database/Framework.Database.EntityFramework/Framework.Database.EntityFramework.csproj" />
+  </Folder>
+  <Folder Name="/Database/NHibernate/">
+    <Project Path="Database/Framework.Database.NHibernate.DALGenerator/Framework.Database.NHibernate.DALGenerator.csproj" />
+    <Project Path="Database/Framework.Database.NHibernate.DBGenerator.Tests/Framework.Database.NHibernate.DBGenerator.Tests.csproj" />
+    <Project Path="Database/Framework.Database.NHibernate.DBGenerator/Framework.Database.NHibernate.DBGenerator.csproj" />
+    <Project Path="Database/Framework.Database.NHibernate.Legacy/Framework.Database.NHibernate.Legacy.csproj" />
+    <Project Path="Database/Framework.Database.NHibernate.Runtime/Framework.Database.NHibernate.Runtime.csproj" />
+    <Project Path="Database/Framework.Database.NHibernate/Framework.Database.NHibernate.csproj" />
+  </Folder>
+  
+  <Folder Name="/Domain/">
+    <Project Path="Domain/Framework.Relations/Framework.Relations.csproj" />
+    <Project Path="Domain/Framework.Restriction/Framework.Restriction.csproj" />
+  </Folder>
+  
+  <Folder Name="/Infrastructure/">
+    <Project Path="Infrastructure/Framework.Infrastructure.Abstractions/Framework.Infrastructure.Abstractions.csproj" />
+    <Project Path="Infrastructure/Framework.Infrastructure.Hangfire/Framework.Infrastructure.Hangfire.csproj" />
+    <Project Path="Infrastructure/Framework.Infrastructure.Legacy.Default/Framework.Infrastructure.Legacy.Default.csproj" />
+    <Project Path="Infrastructure/Framework.Infrastructure.Legacy/Framework.Infrastructure.Legacy.csproj" />
+    <Project Path="Infrastructure/Framework.Infrastructure.Swagger/Framework.Infrastructure.Swagger.csproj" />
+    <Project Path="Infrastructure/Framework.Infrastructure/Framework.Infrastructure.csproj" />
+  </Folder>
+  
+  <Folder Name="/Projection/">
+    <Project Path="Projection/Framework.Projection.Abstractions/Framework.Projection.Abstractions.csproj" />
+    <Project Path="Projection/Framework.Projection.Domain/Framework.Projection.Domain.csproj" />
+    <Project Path="Projection/Framework.Projection.Runtime/Framework.Projection.Runtime.csproj" />
+  </Folder>
+  <Folder Name="/Subscriptions/">
+    <Project Path="Subscriptions/Framework.Subscriptions.Abstractions/Framework.Subscriptions.Abstractions.csproj" />
+    <Project Path="Subscriptions/Framework.Subscriptions.Domain/Framework.Subscriptions.Domain.csproj" />
+  </Folder>
+  
+  <Folder Name="/Validation/">
+    <Project Path="Validation/Framework.Validation.Abstractions/Framework.Validation.Abstractions.csproj" />
+    <Project Path="Validation/Framework.Validation.Domain/Framework.Validation.Domain.csproj" />
+    <Project Path="Validation/Framework.Validation.Tests/Framework.Validation.Tests.csproj" />
+    <Project Path="Validation/Framework.Validation/Framework.Validation.csproj" />
+  </Folder>
+  <Folder Name="/Notification/">
+    <Project Path="Notification/Framework.Notification.Abstractions/Framework.Notification.Abstractions.csproj" />
+    <Project Path="Notification/Framework.Notification.Domain/Framework.Notification.Domain.csproj" />
+    <Project Path="Notification/Framework.Notification.DTO/Framework.Notification.DTO.csproj" />
+    <Project Path="Notification/Framework.Notification.Runtime/Framework.Notification.Runtime.csproj" />
+    <Project Path="Notification/Framework.Notification/Framework.Notification.csproj" />
+  </Folder>
+  
+  <Folder Name="/_Authorization/">
+    <Project Path="_Authorization/Framework.Authorization.BLL.Core/Framework.Authorization.BLL.Core.csproj" />
+    <Project Path="_Authorization/Framework.Authorization.BLL/Framework.Authorization.BLL.csproj" />
+    <Project Path="_Authorization/Framework.Authorization.Domain.Models/Framework.Authorization.Domain.Models.csproj" />
+    <Project Path="_Authorization/Framework.Authorization.Domain/Framework.Authorization.Domain.csproj" />
+    <Project Path="_Authorization/Framework.Authorization.Environment/Framework.Authorization.Environment.csproj" />
+    <Project Path="_Authorization/Framework.Authorization.Events/Framework.Authorization.Events.csproj" />
+    <Project Path="_Authorization/Framework.Authorization.WebApi/Framework.Authorization.WebApi.csproj" />
+  </Folder>
+  
+  <Folder Name="/_Authorization/GeneratedLayout/">
+    <Project Path="_Authorization/Framework.Authorization.Generated.DAL.NHibernate/Framework.Authorization.Generated.DAL.NHibernate.csproj" />
+    <Project Path="_Authorization/Framework.Authorization.Generated.DTO/Framework.Authorization.Generated.DTO.csproj" />
+  </Folder>
+  
+  <Folder Name="/_Authorization/GeneratedTools/">
+    <Project Path="_Authorization/Framework.Authorization.TestGenerate/Framework.Authorization.TestGenerate.csproj" />
+  </Folder>
+  
+  <Folder Name="/_Configuration/">
+    <File Path="Directory.Packages.props" />
+    <Project Path="_Configuration/Framework.Configuration.BLL.Core/Framework.Configuration.BLL.Core.csproj" />
+    <Project Path="_Configuration/Framework.Configuration.BLL/Framework.Configuration.BLL.csproj" />
+    <Project Path="_Configuration/Framework.Configuration.Domain.Models/Framework.Configuration.Domain.Models.csproj" />
+    <Project Path="_Configuration/Framework.Configuration.Domain/Framework.Configuration.Domain.csproj" />
+    <Project Path="_Configuration/Framework.Configuration.Environment/Framework.Configuration.Environment.csproj" />
+    <Project Path="_Configuration/Framework.Configuration.SubscriptionModeling.Tests.Unit/Framework.Configuration.SubscriptionModeling.Tests.Unit.csproj" />
+    <Project Path="_Configuration/Framework.Configuration.WebApi/Framework.Configuration.WebApi.csproj" />
+  </Folder>
+  
+  <Folder Name="/_Configuration/GeneratedLayout/">
+    <Project Path="_Configuration/Framework.Configuration.Generated.DAL.NHibernate/Framework.Configuration.Generated.DAL.NHibernate.csproj" />
+    <Project Path="_Configuration/Framework.Configuration.Generated.DTO/Framework.Configuration.Generated.DTO.csproj" />
+  </Folder>
+  
+  <Folder Name="/_Configuration/GeneratedTools/">
+    <Project Path="_Configuration/Framework.Configuration.TestGenerate/Framework.Configuration.TestGenerate.csproj" />
+  </Folder>
+  <Folder Name="/_SampleSystem/">
+    <Project Path="_SampleSystem/SampleSystem.AuditDomain/SampleSystem.AuditDomain.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.BLL.Core/SampleSystem.BLL.Core.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.BLL/SampleSystem.BLL.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Domain.ManualProjections/SampleSystem.Domain.ManualProjections.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Domain.Models/SampleSystem.Domain.Models.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Domain/SampleSystem.Domain.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.EventMetadata/SampleSystem.EventMetadata.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Events/SampleSystem.Events.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Security.Abstract/SampleSystem.Security.Abstract.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Security/SampleSystem.Security.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.ServiceEnvironment.NHibernate/SampleSystem.ServiceEnvironment.NHibernate.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.ServiceEnvironment/SampleSystem.ServiceEnvironment.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Subscriptions.Metadata/SampleSystem.Subscriptions.Metadata.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.WebApiCore.EntityFramework/SampleSystem.WebApiCore.EntityFramework.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.WebApiCore.NHibernate/SampleSystem.WebApiCore.NHibernate.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.WebApiCore/SampleSystem.WebApiCore.csproj" />
+  </Folder>
+  <Folder Name="/_SampleSystem/GeneratedLayout/">
+    <Project Path="_SampleSystem/SampleSystem.AuditDAL.NHibernate/SampleSystem.AuditDAL.NHibernate.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Domain.LegacyProjections/SampleSystem.Domain.LegacyProjections.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Domain.Projections/SampleSystem.Domain.Projections.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Generated.DAL.NHibernate/SampleSystem.Generated.DAL.NHibernate.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Generated.DTO/SampleSystem.Generated.DTO.csproj" />
+  </Folder>
+  <Folder Name="/_SampleSystem/_Tests/">
+    <Project Path="_SampleSystem/_Tests/SampleSystem.CheckGenTests/SampleSystem.CheckGenTests.csproj" />
+    <Project Path="_SampleSystem/_Tests/SampleSystem.CodeGenerate/SampleSystem.CodeGenerate.csproj" />
+    <Project Path="_SampleSystem/_Tests/SampleSystem.DbGenerate.NHibernate/SampleSystem.DbGenerate.NHibernate.csproj" />
+    <Project Path="_SampleSystem/_Tests/SampleSystem.IntegrationTests.NHibernate/SampleSystem.IntegrationTests.NHibernate.csproj" />
+    <Project Path="_SampleSystem/_Tests/SampleSystem.IntegrationTests.Xunit.NHibernate/SampleSystem.IntegrationTests.Xunit.NHibernate.csproj" />
+    <Project Path="_SampleSystem/_Tests/SampleSystem.UnitTests/SampleSystem.UnitTests.csproj" />
+  </Folder>
+
+  <Folder Name="/__SolutionItems/">
+    <File Path="__SolutionItems/CommonAssemblyInfo.cs" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  
+  <Project Path="Framework.Core/Framework.Core.csproj" />
+  <Project Path="Framework.DependencyInjection/Framework.DependencyInjection.csproj" />
+  <Project Path="Framework.ExpressionParsers.Tests/Framework.ExpressionParsers.Tests.csproj" />
+  <Project Path="Framework.ExpressionParsers/Framework.ExpressionParsers.csproj" />
+
+</Solution>

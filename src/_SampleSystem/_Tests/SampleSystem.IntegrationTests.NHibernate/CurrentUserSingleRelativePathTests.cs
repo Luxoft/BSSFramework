@@ -1,5 +1,7 @@
-﻿using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
+﻿using Framework.Application;
+using Framework.Database;
+using Framework.BLL;
+
 using SecuritySystem;
 using SecuritySystem.UserSource;
 
@@ -16,8 +18,7 @@ public class CurrentUserSingleRelativePathTests : TestBase
     private Guid[] testObjectIdents;
 
     [TestInitialize]
-    public void Setup()
-    {
+    public void Setup() =>
         this.testObjectIdents = this.Evaluate(
             DBSessionMode.Write,
             ctx =>
@@ -32,14 +33,13 @@ public class CurrentUserSingleRelativePathTests : TestBase
 
                 return new[] { testObj1.Id, testObj2.Id };
             });
-    }
 
     [TestMethod]
     [DynamicData(nameof(TestRelativeEmployeeObject_FilterByPrimaryEmployeeRef_EmployeeBySecondaryRefMissed_Source), DynamicDataSourceType.Method)]
     public void TestRelativeEmployeeObject_FilterByEmployeeRef1_EmployeeRef2Missed(string propName, int expectedIndex)
     {
         // Arrange
-        var testSecurityRule = new DomainSecurityRule.CurrentUserSecurityRule(propName);
+        var testSecurityRule = new DomainSecurityRule.CurrentUserSecurityRule { RelativePathKey = propName };
 
         // Act
         var loadedObjects = this.Evaluate(
@@ -54,12 +54,9 @@ public class CurrentUserSingleRelativePathTests : TestBase
         loadedObjects.Should().BeEquivalentTo(new[] { this.testObjectIdents[expectedIndex] });
     }
 
-    private static IEnumerable<object[]> TestRelativeEmployeeObject_FilterByPrimaryEmployeeRef_EmployeeBySecondaryRefMissed_Source()
-    {
-        return
-        [
-            [nameof(TestRelativeEmployeeObject.EmployeeRef1), 0],
-            [nameof(TestRelativeEmployeeObject.EmployeeRef2), 1],
-        ];
-    }
+    private static IEnumerable<object[]> TestRelativeEmployeeObject_FilterByPrimaryEmployeeRef_EmployeeBySecondaryRefMissed_Source() =>
+    [
+        [nameof(TestRelativeEmployeeObject.EmployeeRef1), 0],
+        [nameof(TestRelativeEmployeeObject.EmployeeRef2), 1],
+    ];
 }

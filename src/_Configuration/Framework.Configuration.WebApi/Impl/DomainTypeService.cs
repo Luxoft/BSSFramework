@@ -1,23 +1,22 @@
 ﻿using Framework.Configuration.Generated.DTO;
-using Framework.DomainDriven;
+using Framework.Database;
+
 using SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 
 namespace Framework.Configuration.WebApi;
 
-public partial class ConfigSLJsonController
+public partial class ConfigMainController
 {
     [HttpPost]
-    public DomainTypeSimpleDTO GetSimpleDomainTypeByPath(string path)
-    {
-        return this.Evaluate(
+    public DomainTypeSimpleDTO GetSimpleDomainTypeByPath(string path) =>
+        this.Evaluate(
             DBSessionMode.Read,
             data =>
-                data.Context.Logics.DomainType // without security?
+                data.Context.Logics.DomainTypeFactory.Create(SecurityRole.Administrator)
                     .GetByPath(path)
                     .ToSimpleDTO(data.MappingService));
-    }
 
     [HttpPost]
     public void ForceDomainTypeEvent(DomainTypeEventModelStrictDTO domainTypeEventModel)

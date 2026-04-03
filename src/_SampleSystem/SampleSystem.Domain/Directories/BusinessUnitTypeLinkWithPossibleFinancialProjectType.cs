@@ -1,4 +1,4 @@
-﻿using Framework.Persistent;
+﻿using Framework.Relations;
 
 namespace SampleSystem.Domain;
 
@@ -28,35 +28,15 @@ public class BusinessUnitTypeLinkWithPossibleFinancialProjectType :
     [IsMaster]
     public virtual BusinessUnitType BusinessUnitType
     {
-        get
-        {
-            return this.businessUnitType;
-        }
-
-        set
-        {
-            this.businessUnitType = value;
-        }
+        get => this.businessUnitType;
+        set => this.businessUnitType = value;
     }
 
     public virtual FinancialProjectType FinancialProjectType
     {
-        get
-        {
-            return this.financialProjectType;
-        }
-
-        set
-        {
-            this.financialProjectType = value;
-        }
+        get => this.financialProjectType;
+        set => this.financialProjectType = value;
     }
 
-    BusinessUnitType IDetail<BusinessUnitType>.Master
-    {
-        get
-        {
-            return this.businessUnitType;
-        }
-    }
+    BusinessUnitType IDetail<BusinessUnitType>.Master => this.businessUnitType;
 }

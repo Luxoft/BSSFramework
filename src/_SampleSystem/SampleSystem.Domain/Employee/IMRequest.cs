@@ -1,7 +1,7 @@
-﻿using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.Persistent;
-using Framework.Persistent.Mapping;
+﻿using Framework.BLL.Domain.ServiceRole;
+using Framework.Core;
+using Framework.Database.Mapping;
+using Framework.Relations;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;
@@ -16,8 +16,8 @@ public class IMRequest : Information
     [MaxLength(50)]
     public virtual string Message
     {
-        get { return this.message.TrimNull(); }
-        set { this.message = value.TrimNull(); }
+        get => this.message.TrimNull();
+        set => this.message = value.TrimNull();
     }
 
     [DetailRole(true)]

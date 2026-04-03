@@ -4,7 +4,7 @@
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
     [Microsoft.AspNetCore.Mvc.RouteAttribute("api/[controller]/[action]")]
-    public partial class TestImmutableObjController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
+    public partial class TestImmutableObjController : Framework.Infrastructure.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
         /// <summary>
@@ -13,13 +13,13 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.TestImmutableObjFullDTO GetFullTestImmutableObj([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTestImmutableObjInternal(testImmutableObjIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullTestImmutableObjInternal(testImmutableObjIdentity, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.TestImmutableObjFullDTO GetFullTestImmutableObjInternal(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.TestImmutableObjFullDTO GetFullTestImmutableObjInternal(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestImmutableObjBLL bll = evaluateData.Context.Logics.TestImmutableObjFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.TestImmutableObj domainObject = bll.GetById(testImmutableObjIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestImmutableObj>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.TestImmutableObj domainObject = bll.GetById(testImmutableObjIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.TestImmutableObj>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -29,7 +29,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestImmutableObjFullDTO> GetFullTestImmutableObjs()
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTestImmutableObjsInternal(evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullTestImmutableObjsInternal(evaluateData));
         }
         
         /// <summary>
@@ -38,19 +38,19 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestImmutableObjFullDTO> GetFullTestImmutableObjsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO[] testImmutableObjIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTestImmutableObjsByIdentsInternal(testImmutableObjIdents, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullTestImmutableObjsByIdentsInternal(testImmutableObjIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestImmutableObjFullDTO> GetFullTestImmutableObjsByIdentsInternal(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO[] testImmutableObjIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestImmutableObjFullDTO> GetFullTestImmutableObjsByIdentsInternal(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO[] testImmutableObjIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestImmutableObjBLL bll = evaluateData.Context.Logics.TestImmutableObjFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(testImmutableObjIdents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestImmutableObj>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(testImmutableObjIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.TestImmutableObj>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestImmutableObjFullDTO> GetFullTestImmutableObjsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestImmutableObjFullDTO> GetFullTestImmutableObjsInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestImmutableObjBLL bll = evaluateData.Context.Logics.TestImmutableObjFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestImmutableObj>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.TestImmutableObj>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -59,13 +59,13 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.TestImmutableObjRichDTO GetRichTestImmutableObj([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichTestImmutableObjInternal(testImmutableObjIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichTestImmutableObjInternal(testImmutableObjIdentity, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.TestImmutableObjRichDTO GetRichTestImmutableObjInternal(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.TestImmutableObjRichDTO GetRichTestImmutableObjInternal(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestImmutableObjBLL bll = evaluateData.Context.Logics.TestImmutableObjFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.TestImmutableObj domainObject = bll.GetById(testImmutableObjIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestImmutableObj>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.TestImmutableObj domainObject = bll.GetById(testImmutableObjIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.TestImmutableObj>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -75,13 +75,13 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.TestImmutableObjSimpleDTO GetSimpleTestImmutableObj([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTestImmutableObjInternal(testImmutableObjIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleTestImmutableObjInternal(testImmutableObjIdentity, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.TestImmutableObjSimpleDTO GetSimpleTestImmutableObjInternal(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.TestImmutableObjSimpleDTO GetSimpleTestImmutableObjInternal(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestImmutableObjBLL bll = evaluateData.Context.Logics.TestImmutableObjFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.TestImmutableObj domainObject = bll.GetById(testImmutableObjIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestImmutableObj>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.TestImmutableObj domainObject = bll.GetById(testImmutableObjIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.TestImmutableObj>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -91,7 +91,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestImmutableObjSimpleDTO> GetSimpleTestImmutableObjs()
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTestImmutableObjsInternal(evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleTestImmutableObjsInternal(evaluateData));
         }
         
         /// <summary>
@@ -100,19 +100,19 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestImmutableObjSimpleDTO> GetSimpleTestImmutableObjsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO[] testImmutableObjIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTestImmutableObjsByIdentsInternal(testImmutableObjIdents, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleTestImmutableObjsByIdentsInternal(testImmutableObjIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestImmutableObjSimpleDTO> GetSimpleTestImmutableObjsByIdentsInternal(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO[] testImmutableObjIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestImmutableObjSimpleDTO> GetSimpleTestImmutableObjsByIdentsInternal(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO[] testImmutableObjIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestImmutableObjBLL bll = evaluateData.Context.Logics.TestImmutableObjFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(testImmutableObjIdents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestImmutableObj>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(testImmutableObjIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.TestImmutableObj>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestImmutableObjSimpleDTO> GetSimpleTestImmutableObjsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestImmutableObjSimpleDTO> GetSimpleTestImmutableObjsInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestImmutableObjBLL bll = evaluateData.Context.Logics.TestImmutableObjFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.TestImmutableObj>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.TestImmutableObj>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -121,18 +121,18 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO SaveTestImmutableObj([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestImmutableObjStrictDTO testImmutableObjStrict)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SaveTestImmutableObjInternal(testImmutableObjStrict, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Write, evaluateData => this.SaveTestImmutableObjInternal(testImmutableObjStrict, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO SaveTestImmutableObjInternal(SampleSystem.Generated.DTO.TestImmutableObjStrictDTO testImmutableObjStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO SaveTestImmutableObjInternal(SampleSystem.Generated.DTO.TestImmutableObjStrictDTO testImmutableObjStrict, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestImmutableObjBLL bll = evaluateData.Context.Logics.TestImmutableObjFactory.Create(SecuritySystem.SecurityRule.Edit);
             return this.SaveTestImmutableObjInternal(testImmutableObjStrict, evaluateData, bll);
         }
         
-        protected virtual SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO SaveTestImmutableObjInternal(SampleSystem.Generated.DTO.TestImmutableObjStrictDTO testImmutableObjStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData, SampleSystem.BLL.ITestImmutableObjBLL bll)
+        protected virtual SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO SaveTestImmutableObjInternal(SampleSystem.Generated.DTO.TestImmutableObjStrictDTO testImmutableObjStrict, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData, SampleSystem.BLL.ITestImmutableObjBLL bll)
         {
-            SampleSystem.Domain.TestImmutableObj domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByIdOrCreate(bll, testImmutableObjStrict.Id);
+            SampleSystem.Domain.TestImmutableObj domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByIdOrCreate(bll, testImmutableObjStrict.Id);
             testImmutableObjStrict.MapToDomainObject(evaluateData.MappingService, domainObject);
             bll.Save(domainObject);
             return SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject);

@@ -1,11 +1,12 @@
-﻿using Framework.DomainDriven;
+﻿using Framework.Application;
+using Framework.Database;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
-using SecuritySystem.Notification;
+using SecuritySystem.Notification.Domain;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -411,18 +412,15 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         result.Should().Contain(this.searchNotificationEmployeeLogin2);
     }
 
-    private string[] GetNotificationPrincipalsByRoles(params NotificationFilterGroup[] notificationFilterGroups)
-    {
-        return this.Evaluate(
+    private string[] GetNotificationPrincipalsByRoles(params NotificationFilterGroup[] notificationFilterGroups) =>
+        this.Evaluate(
             DBSessionMode.Read,
-            context => context.Authorization
+            context => context.Configuration
                               .NotificationPrincipalExtractor
-
                               .GetPrincipalsAsync([SampleSystemSecurityRole.SearchTestBusinessRole], [..notificationFilterGroups])
                               .ToListAsync()
                               .GetAwaiter()
                               .GetResult()
                               .Select(p => p.Name)
                               .ToArray());
-    }
 }

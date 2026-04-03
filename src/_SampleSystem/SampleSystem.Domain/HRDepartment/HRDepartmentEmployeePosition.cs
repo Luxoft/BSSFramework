@@ -1,4 +1,4 @@
-﻿using Framework.Persistent;
+﻿using Framework.Relations;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;
@@ -21,19 +21,16 @@ public class HRDepartmentEmployeePosition : AuditPersistentDomainObjectBase, IDe
     [UniqueElement]
     public virtual EmployeePosition EmployeePosition
     {
-        get { return this.employeePosition; }
-        set { this.employeePosition = value; }
+        get => this.employeePosition;
+        set => this.employeePosition = value;
     }
 
     [UniqueElement]
     public virtual HRDepartment HrDepartment
     {
-        get { return this.hrDepartment; }
-        set { this.hrDepartment = value; }
+        get => this.hrDepartment;
+        set => this.hrDepartment = value;
     }
 
-    HRDepartment IDetail<HRDepartment>.Master
-    {
-        get { return this.hrDepartment; }
-    }
+    HRDepartment IDetail<HRDepartment>.Master => this.hrDepartment;
 }

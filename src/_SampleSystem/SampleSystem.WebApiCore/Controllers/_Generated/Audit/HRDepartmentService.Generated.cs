@@ -1,10 +1,14 @@
-﻿namespace SampleSystem.WebApiCore.Controllers.Audit
+﻿using Framework.Core;
+
+using SampleSystem.Generated.DTO;
+
+namespace SampleSystem.WebApiCore.Controllers.Audit
 {
     
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
     [Microsoft.AspNetCore.Mvc.RouteAttribute("mainAuditApi/[controller]/[action]")]
-    public partial class HRDepartmentController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
+    public partial class HRDepartmentController : Framework.Infrastructure.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
         /// <summary>
@@ -15,10 +19,10 @@
         {
             long revision = getFullHRDepartmentWithRevisionAutoRequest.Revision;
             SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getFullHRDepartmentWithRevisionAutoRequest.HRDepartmentIdentity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullHRDepartmentWithRevisionInternal(hRDepartmentIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullHRDepartmentWithRevisionInternal(hRDepartmentIdentity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.HRDepartmentFullDTO GetFullHRDepartmentWithRevisionInternal(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.HRDepartmentFullDTO GetFullHRDepartmentWithRevisionInternal(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IHRDepartmentBLL bll = evaluateData.Context.Logics.HRDepartmentFactory.Create(SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.HRDepartment domainObject = bll.GetObjectByRevision(hRDepartmentIdentity.Id, revision);
@@ -31,16 +35,16 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetHRDepartmentPropertyRevisionByDateRange(GetHRDepartmentPropertyRevisionByDateRangeAutoRequest getHRDepartmentPropertyRevisionByDateRangeAutoRequest)
         {
-            Framework.Core.Period? period = getHRDepartmentPropertyRevisionByDateRangeAutoRequest.Period;
+            Period? period = getHRDepartmentPropertyRevisionByDateRangeAutoRequest.Period;
             string propertyName = getHRDepartmentPropertyRevisionByDateRangeAutoRequest.PropertyName;
             SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getHRDepartmentPropertyRevisionByDateRangeAutoRequest.HRDepartmentIdentity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetHRDepartmentPropertyRevisionByDateRangeInternal(hRDepartmentIdentity, propertyName, period, evaluateData));
+            return this.Evaluate<SampleSystemDomainObjectPropertiesRevisionDTO>(Framework.Database.DBSessionMode.Read, evaluateData => this.GetHRDepartmentPropertyRevisionByDateRangeInternal(hRDepartmentIdentity, propertyName, period, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetHRDepartmentPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity, string propertyName, Framework.Core.Period? period, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetHRDepartmentPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity, string propertyName, Period? period, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IHRDepartmentBLL bll = evaluateData.Context.Logics.HRDepartmentFactory.Create(SecuritySystem.SecurityRule.View);
-            return new Framework.DomainDriven.ServiceModel.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.DomainDriven.BLL.Security.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.HRDepartment>(hRDepartmentIdentity.Id, propertyName, period);
+            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.HRDepartment>(hRDepartmentIdentity.Id, propertyName, period);
         }
         
         /// <summary>
@@ -51,28 +55,28 @@
         {
             string propertyName = getHRDepartmentPropertyRevisionsAutoRequest.PropertyName;
             SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getHRDepartmentPropertyRevisionsAutoRequest.HRDepartmentIdentity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetHRDepartmentPropertyRevisionsInternal(hRDepartmentIdentity, propertyName, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetHRDepartmentPropertyRevisionsInternal(hRDepartmentIdentity, propertyName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetHRDepartmentPropertyRevisionsInternal(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity, string propertyName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetHRDepartmentPropertyRevisionsInternal(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity, string propertyName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IHRDepartmentBLL bll = evaluateData.Context.Logics.HRDepartmentFactory.Create(SecuritySystem.SecurityRule.View);
-            return new Framework.DomainDriven.ServiceModel.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.DomainDriven.BLL.Security.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.HRDepartment>(hRDepartmentIdentity.Id, propertyName);
+            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.HRDepartment>(hRDepartmentIdentity.Id, propertyName);
         }
         
         /// <summary>
         /// Get HRDepartment revisions
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetHRDepartmentRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity)
+        public virtual Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO GetHRDepartmentRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetHRDepartmentRevisionsInternal(hRDepartmentIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetHRDepartmentRevisionsInternal(hRDepartmentIdentity, evaluateData));
         }
         
-        protected virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetHRDepartmentRevisionsInternal(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO GetHRDepartmentRevisionsInternal(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IHRDepartmentBLL bll = evaluateData.Context.Logics.HRDepartmentFactory.Create(SecuritySystem.SecurityRule.View);
-            return new Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO(bll.GetObjectRevisions(hRDepartmentIdentity.Id));
+            return new Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO(bll.GetObjectRevisions(hRDepartmentIdentity.Id));
         }
         
         /// <summary>
@@ -83,10 +87,10 @@
         {
             long revision = getRichHRDepartmentWithRevisionAutoRequest.Revision;
             SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getRichHRDepartmentWithRevisionAutoRequest.HRDepartmentIdentity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichHRDepartmentWithRevisionInternal(hRDepartmentIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichHRDepartmentWithRevisionInternal(hRDepartmentIdentity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.HRDepartmentRichDTO GetRichHRDepartmentWithRevisionInternal(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.HRDepartmentRichDTO GetRichHRDepartmentWithRevisionInternal(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IHRDepartmentBLL bll = evaluateData.Context.Logics.HRDepartmentFactory.Create(SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.HRDepartment domainObject = bll.GetObjectByRevision(hRDepartmentIdentity.Id, revision);
@@ -101,10 +105,10 @@
         {
             long revision = getSimpleHRDepartmentWithRevisionAutoRequest.Revision;
             SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getSimpleHRDepartmentWithRevisionAutoRequest.HRDepartmentIdentity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleHRDepartmentWithRevisionInternal(hRDepartmentIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleHRDepartmentWithRevisionInternal(hRDepartmentIdentity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.HRDepartmentSimpleDTO GetSimpleHRDepartmentWithRevisionInternal(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.HRDepartmentSimpleDTO GetSimpleHRDepartmentWithRevisionInternal(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IHRDepartmentBLL bll = evaluateData.Context.Logics.HRDepartmentFactory.Create(SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.HRDepartment domainObject = bll.GetObjectByRevision(hRDepartmentIdentity.Id, revision);
@@ -119,10 +123,10 @@
         {
             long revision = getVisualHRDepartmentWithRevisionAutoRequest.Revision;
             SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity = getVisualHRDepartmentWithRevisionAutoRequest.HRDepartmentIdentity;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualHRDepartmentWithRevisionInternal(hRDepartmentIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualHRDepartmentWithRevisionInternal(hRDepartmentIdentity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.HRDepartmentVisualDTO GetVisualHRDepartmentWithRevisionInternal(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.HRDepartmentVisualDTO GetVisualHRDepartmentWithRevisionInternal(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IHRDepartmentBLL bll = evaluateData.Context.Logics.HRDepartmentFactory.Create(SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.HRDepartment domainObject = bll.GetObjectByRevision(hRDepartmentIdentity.Id, revision);
@@ -131,7 +135,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetFullHRDepartmentWithRevisionAutoRequest
     {
         
@@ -140,7 +144,7 @@
         private long revision;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.HRDepartmentIdentityDTO HRDepartmentIdentity
         {
             get
@@ -154,7 +158,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual long Revision
         {
             get
@@ -169,7 +173,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetHRDepartmentPropertyRevisionByDateRangeAutoRequest
     {
         
@@ -177,10 +181,10 @@
         
         private string propertyName;
         
-        private Framework.Core.Period? period;
+        private Period? period;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.HRDepartmentIdentityDTO HRDepartmentIdentity
         {
             get
@@ -194,7 +198,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual string PropertyName
         {
             get
@@ -208,8 +212,8 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public virtual Framework.Core.Period? Period
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=2)]
+        public virtual Period? Period
         {
             get
             {
@@ -223,7 +227,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetHRDepartmentPropertyRevisionsAutoRequest
     {
         
@@ -232,7 +236,7 @@
         private string propertyName;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.HRDepartmentIdentityDTO HRDepartmentIdentity
         {
             get
@@ -246,7 +250,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual string PropertyName
         {
             get
@@ -261,7 +265,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetRichHRDepartmentWithRevisionAutoRequest
     {
         
@@ -270,7 +274,7 @@
         private long revision;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.HRDepartmentIdentityDTO HRDepartmentIdentity
         {
             get
@@ -284,7 +288,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual long Revision
         {
             get
@@ -299,7 +303,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetSimpleHRDepartmentWithRevisionAutoRequest
     {
         
@@ -308,7 +312,7 @@
         private long revision;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.HRDepartmentIdentityDTO HRDepartmentIdentity
         {
             get
@@ -322,7 +326,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual long Revision
         {
             get
@@ -337,7 +341,7 @@
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
-    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    [Framework.BLL.DTOMapping.Domain.AutoRequestAttribute()]
     public partial class GetVisualHRDepartmentWithRevisionAutoRequest
     {
         
@@ -346,7 +350,7 @@
         private long revision;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
         public virtual SampleSystem.Generated.DTO.HRDepartmentIdentityDTO HRDepartmentIdentity
         {
             get
@@ -360,7 +364,7 @@
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=1)]
         public virtual long Revision
         {
             get

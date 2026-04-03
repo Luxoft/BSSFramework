@@ -1,9 +1,9 @@
-﻿using Framework.DomainDriven.BLLCoreGenerator;
-using Framework.DomainDriven.BLLGenerator;
-using Framework.DomainDriven.DTOGenerator.Server;
-using Framework.DomainDriven.Generation;
-
-using FileInfo = Framework.DomainDriven.Generation.FileInfo;
+﻿using Framework.CodeGeneration.BLLCoreGenerator;
+using Framework.CodeGeneration.BLLGenerator;
+using Framework.CodeGeneration.DTOGenerator.Server;
+using Framework.CodeGeneration.Extensions;
+using Framework.CodeGeneration.WebApiGenerator.SingleController;
+using Framework.FileGeneration;
 
 namespace Framework.Authorization.TestGenerate;
 
@@ -11,25 +11,18 @@ namespace Framework.Authorization.TestGenerate;
 public partial class ServerGenerators
 {
     [TestMethod]
-    public void GenerateMainTest()
-    {
-        this.GenerateMain().ToList();
-    }
+    public void GenerateMainTest() => this.GenerateMain().ToList();
 
-    public IEnumerable<FileInfo> GenerateMain()
-    {
-        return this.GenerateBLLCore()
-                   .Concat(this.GenerateBLL())
-                   .Concat(this.GenerateServerDTO());
-    }
+    public IEnumerable<GeneratedFileInfo> GenerateMain() =>
+        this.GenerateBLLCore()
+            .Concat(this.GenerateBLL())
+            .Concat(this.GenerateServerDTO())
+            .Concat(this.GenerateMainController());
 
     [TestMethod]
-    public void GenerateBLLCoreTest()
-    {
-        this.GenerateBLLCore().ToList();
-    }
+    public void GenerateBLLCoreTest() => this.GenerateBLLCore().ToList();
 
-    private IEnumerable<FileInfo> GenerateBLLCore()
+    private IEnumerable<GeneratedFileInfo> GenerateBLLCore()
     {
         var generator = new BLLCoreFileGenerator(this.Environment.BLLCore);
 
@@ -37,12 +30,9 @@ public partial class ServerGenerators
     }
 
     [TestMethod]
-    public void GenerateBLLTest()
-    {
-        this.GenerateBLL().ToList();
-    }
+    public void GenerateBLLTest() => this.GenerateBLL().ToList();
 
-    private IEnumerable<FileInfo> GenerateBLL()
+    private IEnumerable<GeneratedFileInfo> GenerateBLL()
     {
         var generator = new BLLFileGenerator(this.Environment.BLL);
 
@@ -56,12 +46,9 @@ public partial class ServerGenerators
     }
 
     [TestMethod]
-    public void GenerateServerDTOTest()
-    {
-        this.GenerateServerDTO().ToList();
-    }
+    public void GenerateServerDTOTest() => this.GenerateServerDTO().ToList();
 
-    private IEnumerable<FileInfo> GenerateServerDTO()
+    private IEnumerable<GeneratedFileInfo> GenerateServerDTO()
     {
         var generator = new ServerFileGenerator(this.Environment.ServerDTO);
 
@@ -69,5 +56,18 @@ public partial class ServerGenerators
                                               this.GeneratePath + @"/Framework.Authorization.Generated.DTO",
                                               "Authorization.Generated",
                                               this.CheckOutService);
+    }
+
+    [TestMethod]
+    public void GenerateMainControllerTest() => this.GenerateMainController().ToList();
+
+
+    private IEnumerable<GeneratedFileInfo> GenerateMainController()
+    {
+        var generator = new SingleControllerCodeFileGenerator(this.Environment.MainController);
+
+        var outputPath = Path.Combine(this.GeneratePath, "Framework.Authorization.WebApi");
+
+        yield return generator.GenerateSingle(outputPath, "Authorization.Generated", this.CheckOutService);
     }
 }

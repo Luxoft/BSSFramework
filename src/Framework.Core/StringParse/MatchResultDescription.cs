@@ -4,9 +4,5 @@
 public class MatchResultDescription
 {
     public int ResultIndex { get; private set; }
-    internal MatchResultDescription(int resultIndex)
-    {
-        this.ResultIndex = resultIndex;
-    }
-
+    internal MatchResultDescription(int resultIndex) => this.ResultIndex = resultIndex;
 }

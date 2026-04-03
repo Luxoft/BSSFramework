@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.BLL;
+﻿using Framework.BLL.Domain.ServiceRole;
 
 namespace SampleSystem.Domain;
 
@@ -15,23 +15,23 @@ public class TestPerformanceObject : BaseDirectory
 
     public virtual Location Location
     {
-        get { return this.location; }
-        set { this.location = value; }
+        get => this.location;
+        set => this.location = value;
     }
 
     public virtual Employee Employee
     {
-        get { return this.employee; }
-        set { this.employee = value; }
+        get => this.employee;
+        set => this.employee = value;
     }
     public virtual BusinessUnit BusinessUnit
     {
-        get { return this.businessUnit; }
-        set { this.businessUnit = value; }
+        get => this.businessUnit;
+        set => this.businessUnit = value;
     }
     public virtual ManagementUnit ManagementUnit
     {
-        get { return this.managementUnit; }
-        set { this.managementUnit = value; }
+        get => this.managementUnit;
+        set => this.managementUnit = value;
     }
 }

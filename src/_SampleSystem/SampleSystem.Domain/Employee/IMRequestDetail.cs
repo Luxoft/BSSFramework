@@ -11,10 +11,7 @@ public class IMRequestDetail : AuditPersistentDomainObjectBase
     {
     }
 
-    public IMRequestDetail(IMRequest request)
-    {
-        this.request = request;
-    }
+    public IMRequestDetail(IMRequest request) => this.request = request;
 
     public virtual IMRequest Request
     {

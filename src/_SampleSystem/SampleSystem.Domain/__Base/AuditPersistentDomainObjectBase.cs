@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel;
 
+using Framework.BLL.Domain.IdentityObject;
+using Framework.BLL.Domain.Serialization;
 using Framework.Core;
-using Framework.DomainDriven.Serialization;
-using Framework.Persistent;
+using Framework.Database;
+using Framework.Database.Attributes;
 
 namespace SampleSystem.Domain;
 
@@ -28,8 +30,8 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// </summary>
     public virtual DateTime? CreateDate
     {
-        get { return this.createDate; }
-        protected internal set { this.createDate = value; }
+        get => this.createDate;
+        protected internal set => this.createDate = value;
     }
 
     /// <summary>
@@ -37,8 +39,8 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// </summary>
     public virtual DateTime? ModifyDate
     {
-        get { return this.modifyDate; }
-        protected internal set { this.modifyDate = value; }
+        get => this.modifyDate;
+        protected internal set => this.modifyDate = value;
     }
 
     /// <summary>
@@ -46,8 +48,8 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// </summary>
     public virtual string? ModifiedBy
     {
-        get { return this.modifiedBy.TrimNull(); }
-        protected internal set { this.modifiedBy = value.TrimNull(); }
+        get => this.modifiedBy.TrimNull();
+        protected internal set => this.modifiedBy = value.TrimNull();
     }
 
     /// <summary>
@@ -55,8 +57,8 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// </summary>
     public virtual string? CreatedBy
     {
-        get { return this.createdBy.TrimNull(); }
-        protected internal set { this.createdBy = value.TrimNull(); }
+        get => this.createdBy.TrimNull();
+        protected internal set => this.createdBy = value.TrimNull();
     }
 
     /// <summary>
@@ -66,15 +68,15 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual bool Active
     {
-        get { return this.active; }
-        set { this.active = value; }
+        get => this.active;
+        set => this.active = value;
     }
 
     [Version]
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Integration)]
     public virtual long Version
     {
-        get { return this.version; }
-        set { this.version = value; }
+        get => this.version;
+        set => this.version = value;
     }
 }

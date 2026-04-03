@@ -1,17 +1,14 @@
-﻿using SecuritySystem;
+﻿using MediatR;
 
-using MediatR;
+using SecuritySystem;
 
 namespace SampleSystem.BLL._Query.GetManagementUnitFluentMappings;
 
-public class GetManagementUnitFluentMappingsHandler : IRequestHandler<GetManagementUnitFluentMappingsQuery,
+public class GetManagementUnitFluentMappingsHandler(IManagementUnitFluentMappingBLLFactory managementUnitFluentMappingBllFactory)
+    : IRequestHandler<GetManagementUnitFluentMappingsQuery,
         GetManagementUnitFluentMappingsResponse[]>
 {
-    private readonly IManagementUnitFluentMappingBLL managementUnitFluentMappingBll;
-
-    public GetManagementUnitFluentMappingsHandler(
-            IManagementUnitFluentMappingBLLFactory managementUnitFluentMappingBllFactory) =>
-            this.managementUnitFluentMappingBll = managementUnitFluentMappingBllFactory.Create(SecurityRule.View);
+    private readonly IManagementUnitFluentMappingBLL managementUnitFluentMappingBll = managementUnitFluentMappingBllFactory.Create(SecurityRule.View);
 
     public async Task<GetManagementUnitFluentMappingsResponse[]> Handle(
             GetManagementUnitFluentMappingsQuery request,

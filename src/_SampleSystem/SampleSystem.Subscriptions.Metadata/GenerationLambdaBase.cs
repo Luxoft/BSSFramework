@@ -1,5 +1,4 @@
-﻿using Framework.Configuration.SubscriptionModeling;
-using Framework.Notification;
+﻿using Framework.Subscriptions;
 
 using SampleSystem.BLL;
 
@@ -8,6 +7,4 @@ namespace SampleSystem.Subscriptions.Metadata;
 /// <inheritdoc />
 public abstract class GenerationLambdaBase<TDomainObject> :
         LambdaMetadata<ISampleSystemBLLContext, TDomainObject, IEnumerable<NotificationMessageGenerationInfo>>
-        where TDomainObject : class
-{
-}
+        where TDomainObject : class;

@@ -1,3 +1,0 @@
-﻿namespace Framework.DomainDriven.DTOGenerator.Audit;
-
-public interface IAuditDTOGenerationEnvironmentBase : Server.IServerGenerationEnvironmentBase, Server.IGeneratorConfigurationContainer;

@@ -4,7 +4,7 @@
     
     [Microsoft.AspNetCore.Mvc.ApiControllerAttribute()]
     [Microsoft.AspNetCore.Mvc.RouteAttribute("api/[controller]/[action]")]
-    public partial class EmployeePositionController : Framework.DomainDriven.WebApiNetCore.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
+    public partial class EmployeePositionController : Framework.Infrastructure.ApiControllerBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService>
     {
         
         /// <summary>
@@ -13,7 +13,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.EmployeePositionFullDTO GetFullEmployeePosition([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionInternal(employeePositionIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionInternal(employeePositionIdentity, evaluateData));
         }
         
         /// <summary>
@@ -22,20 +22,20 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.EmployeePositionFullDTO GetFullEmployeePositionByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeePositionName)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionByNameInternal(employeePositionName, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionByNameInternal(employeePositionName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.EmployeePositionFullDTO GetFullEmployeePositionByNameInternal(string employeePositionName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.EmployeePositionFullDTO GetFullEmployeePositionByNameInternal(string employeePositionName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeePosition domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeePositionName, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.EmployeePosition domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeePositionName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual SampleSystem.Generated.DTO.EmployeePositionFullDTO GetFullEmployeePositionInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.EmployeePositionFullDTO GetFullEmployeePositionInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeePosition domainObject = bll.GetById(employeePositionIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.EmployeePosition domainObject = bll.GetById(employeePositionIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -45,7 +45,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionFullDTO> GetFullEmployeePositions()
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionsInternal(evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionsInternal(evaluateData));
         }
         
         /// <summary>
@@ -54,19 +54,19 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionFullDTO> GetFullEmployeePositionsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeePositionIdentityDTO[] employeePositionIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionsByIdentsInternal(employeePositionIdents, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionsByIdentsInternal(employeePositionIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionFullDTO> GetFullEmployeePositionsByIdentsInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO[] employeePositionIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionFullDTO> GetFullEmployeePositionsByIdentsInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO[] employeePositionIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(employeePositionIdents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(employeePositionIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionFullDTO> GetFullEmployeePositionsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionFullDTO> GetFullEmployeePositionsInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -75,7 +75,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.EmployeePositionRichDTO GetRichEmployeePosition([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEmployeePositionInternal(employeePositionIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichEmployeePositionInternal(employeePositionIdentity, evaluateData));
         }
         
         /// <summary>
@@ -84,20 +84,20 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.EmployeePositionRichDTO GetRichEmployeePositionByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeePositionName)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEmployeePositionByNameInternal(employeePositionName, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichEmployeePositionByNameInternal(employeePositionName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.EmployeePositionRichDTO GetRichEmployeePositionByNameInternal(string employeePositionName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.EmployeePositionRichDTO GetRichEmployeePositionByNameInternal(string employeePositionName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeePosition domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeePositionName, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.EmployeePosition domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeePositionName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual SampleSystem.Generated.DTO.EmployeePositionRichDTO GetRichEmployeePositionInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.EmployeePositionRichDTO GetRichEmployeePositionInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeePosition domainObject = bll.GetById(employeePositionIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.Transfering.ViewDTOType.FullDTO));
+            SampleSystem.Domain.EmployeePosition domainObject = bll.GetById(employeePositionIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -107,7 +107,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.EmployeePositionSimpleDTO GetSimpleEmployeePosition([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionInternal(employeePositionIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionInternal(employeePositionIdentity, evaluateData));
         }
         
         /// <summary>
@@ -116,20 +116,20 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.EmployeePositionSimpleDTO GetSimpleEmployeePositionByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeePositionName)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionByNameInternal(employeePositionName, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionByNameInternal(employeePositionName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.EmployeePositionSimpleDTO GetSimpleEmployeePositionByNameInternal(string employeePositionName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.EmployeePositionSimpleDTO GetSimpleEmployeePositionByNameInternal(string employeePositionName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeePosition domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeePositionName, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.EmployeePosition domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeePositionName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual SampleSystem.Generated.DTO.EmployeePositionSimpleDTO GetSimpleEmployeePositionInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.EmployeePositionSimpleDTO GetSimpleEmployeePositionInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeePosition domainObject = bll.GetById(employeePositionIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.Transfering.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.EmployeePosition domainObject = bll.GetById(employeePositionIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -139,7 +139,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> GetSimpleEmployeePositions()
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionsInternal(evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionsInternal(evaluateData));
         }
         
         /// <summary>
@@ -148,19 +148,19 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> GetSimpleEmployeePositionsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeePositionIdentityDTO[] employeePositionIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionsByIdentsInternal(employeePositionIdents, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionsByIdentsInternal(employeePositionIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> GetSimpleEmployeePositionsByIdentsInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO[] employeePositionIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> GetSimpleEmployeePositionsByIdentsInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO[] employeePositionIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(employeePositionIdents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(employeePositionIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> GetSimpleEmployeePositionsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> GetSimpleEmployeePositionsInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -169,7 +169,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.EmployeePositionVisualDTO GetVisualEmployeePosition([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionInternal(employeePositionIdentity, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionInternal(employeePositionIdentity, evaluateData));
         }
         
         /// <summary>
@@ -178,20 +178,20 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.EmployeePositionVisualDTO GetVisualEmployeePositionByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeePositionName)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionByNameInternal(employeePositionName, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionByNameInternal(employeePositionName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.EmployeePositionVisualDTO GetVisualEmployeePositionByNameInternal(string employeePositionName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.EmployeePositionVisualDTO GetVisualEmployeePositionByNameInternal(string employeePositionName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeePosition domainObject = Framework.DomainDriven.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeePositionName, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.Transfering.ViewDTOType.VisualDTO));
+            SampleSystem.Domain.EmployeePosition domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeePositionName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual SampleSystem.Generated.DTO.EmployeePositionVisualDTO GetVisualEmployeePositionInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.EmployeePositionVisualDTO GetVisualEmployeePositionInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeePosition domainObject = bll.GetById(employeePositionIdentity.Id, true, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.Transfering.ViewDTOType.VisualDTO));
+            SampleSystem.Domain.EmployeePosition domainObject = bll.GetById(employeePositionIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -201,7 +201,7 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionVisualDTO> GetVisualEmployeePositions()
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionsInternal(evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionsInternal(evaluateData));
         }
         
         /// <summary>
@@ -210,19 +210,19 @@
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionVisualDTO> GetVisualEmployeePositionsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeePositionIdentityDTO[] employeePositionIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionsByIdentsInternal(employeePositionIdents, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionsByIdentsInternal(employeePositionIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionVisualDTO> GetVisualEmployeePositionsByIdentsInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO[] employeePositionIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionVisualDTO> GetVisualEmployeePositionsByIdentsInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO[] employeePositionIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(employeePositionIdents, new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(employeePositionIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionVisualDTO> GetVisualEmployeePositionsInternal(Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionVisualDTO> GetVisualEmployeePositionsInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.DomainDriven.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeePosition>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
     }
 }

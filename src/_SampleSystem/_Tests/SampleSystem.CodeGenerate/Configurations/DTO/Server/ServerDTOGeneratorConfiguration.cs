@@ -1,24 +1,23 @@
 ﻿using System.Reflection;
 
-using Framework.DomainDriven.DTOGenerator;
-using Framework.DomainDriven.DTOGenerator.Server;
-using Framework.DomainDriven.Generation.Domain;
-using Framework.DomainDriven.Serialization;
-using Framework.Events;
+using Framework.Application.Events;
+using Framework.BLL.Domain.Serialization;
+using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
+using Framework.CodeGeneration.DTOGenerator.Configuration;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
+using Framework.CodeGeneration.DTOGenerator.GeneratePolicy;
+using Framework.CodeGeneration.DTOGenerator.Map;
+using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.CodeGeneration.FileFactory;
+using Framework.CodeGeneration.GeneratePolicy;
+using Framework.CodeGeneration.ServiceModelGenerator.DTOGeneratePolicy;
 
-using SampleSystem.Domain;
-
-using ServiceModelGenerator = Framework.DomainDriven.ServiceModelGenerator;
+using SampleSystem.EventMetadata;
 
 namespace SampleSystem.CodeGenerate.ServerDTO;
 
-public class ServerDTOGeneratorConfiguration : ServerGeneratorConfigurationBase<ServerGenerationEnvironment>
+public class ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environment) : ServerDTOGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {
-    public ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
-    {
-    }
-
     public override string DataContractNamespace => this.Environment.DTODataContractNamespace;
 
     protected virtual ICodeFileFactoryHeader<MainDTOFileType> FullRefDTOFileFactoryHeader { get; } = SampleSystemFileType.FullRefDTO.ToHeader();
@@ -57,9 +56,9 @@ public class ServerDTOGeneratorConfiguration : ServerGeneratorConfigurationBase<
     protected override IGeneratePolicy<RoleFileType> CreateGeneratePolicy()
     {
         var primitivePolicy = new SampleSystemExtGeneratePolicy()
-                              .Or(new ServiceModelGenerator.DTOServiceGeneratePolicy<MainServiceGeneratorConfiguration>(this.Environment.MainService))
-                              .Or(new ServiceModelGenerator.DTOServiceGeneratePolicy<QueryServiceGeneratorConfiguration>(this.Environment.QueryService))
-                              .Or(new ServiceModelGenerator.DTOServiceGeneratePolicy<IntegrationGeneratorConfiguration>(this.Environment.IntegrationService))
+                              .Or(new DTOServiceGeneratePolicy<MainServiceGeneratorConfiguration>(this.Environment.MainService))
+                              .Or(new DTOServiceGeneratePolicy<QueryServiceGeneratorConfiguration>(this.Environment.QueryService))
+                              .Or(new DTOServiceGeneratePolicy<IntegrationGeneratorConfiguration>(this.Environment.IntegrationService))
                               //.Or(new ServiceModelGenerator.DTOServiceGeneratePolicy<AuditServiceGeneratorConfiguration>(this.Environment.AuditService))
                               .Or(new DTORoleGeneratePolicy(DTORole.Event))
                               .Or(new DTORoleGeneratePolicy(DTORole.Client, ClientDTORole.Projection// | ClientDTORole.Update
@@ -69,14 +68,12 @@ public class ServerDTOGeneratorConfiguration : ServerGeneratorConfigurationBase<
         return new SampleSystemServerDependencyGeneratePolicy(primitivePolicy, this.GetTypeMaps());
     }
 
-    protected override IEnumerable<ICodeFileFactoryHeader<FileType>> GetFileFactoryHeaders()
-    {
-        return base.GetFileFactoryHeaders().Concat(new[]
-                                                   {
-                                                           this.FullRefDTOFileFactoryHeader,
-                                                           this.SimpleRefFullDetailDTOFileFactoryHeader
-                                                   });
-    }
+    protected override IEnumerable<ICodeFileFactoryHeader<BaseFileType>> GetFileFactoryHeaders() =>
+        base.GetFileFactoryHeaders().Concat(new[]
+                                            {
+                                                this.FullRefDTOFileFactoryHeader,
+                                                this.SimpleRefFullDetailDTOFileFactoryHeader
+                                            });
 
     protected override IEnumerable<PropertyInfo> GetInternalDomainTypeProperties(Type domainType, DTOFileType fileType)
     {

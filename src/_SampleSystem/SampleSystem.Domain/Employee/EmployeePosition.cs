@@ -1,5 +1,5 @@
-﻿using Framework.Core;
-using Framework.DomainDriven.BLL;
+﻿using Framework.BLL.Domain.ServiceRole;
+using Framework.Core;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;
@@ -14,23 +14,23 @@ public class EmployeePosition : BaseDirectory, IExternalSynchronizable
 
     public virtual long ExternalId
     {
-        get { return this.externalId; }
-        set { this.externalId = value; }
+        get => this.externalId;
+        set => this.externalId = value;
     }
 
     [Required]
     [UniqueElement]
     public virtual Location Location
     {
-        get { return this.location; }
-        set { this.location = value; }
+        get => this.location;
+        set => this.location = value;
     }
 
     [Required]
     [UniqueElement]
     public virtual string EnglishName
     {
-        get { return this.englishName.TrimNull(); }
-        set { this.englishName = value.TrimNull(); }
+        get => this.englishName.TrimNull();
+        set => this.englishName = value.TrimNull();
     }
 }

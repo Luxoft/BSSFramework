@@ -1,17 +1,15 @@
-﻿namespace Framework.Configuration.TestGenerate;
+﻿using Framework.Configuration.TestGenerate._Base;
+using Framework.Configuration.TestGenerate.Configurations;
 
-public partial class ServerGenerators : GeneratorsBase
+namespace Framework.Configuration.TestGenerate;
+
+public partial class ServerGenerators(ConfigurationGenerationEnvironment environment) : GeneratorsBase
 {
-    protected readonly ServerGenerationEnvironment Environment;
+    protected readonly ConfigurationGenerationEnvironment Environment = environment ?? throw new ArgumentNullException(nameof(environment));
 
     public ServerGenerators()
-            : this(ServerGenerationEnvironment.Default)
+            : this(ConfigurationGenerationEnvironment.Default)
     {
-    }
-
-    public ServerGenerators(ServerGenerationEnvironment environment)
-    {
-        this.Environment = environment ?? throw new ArgumentNullException(nameof(environment));
     }
 
     protected override string GeneratePath => this.FrameworkPath + @"/src/_Configuration";

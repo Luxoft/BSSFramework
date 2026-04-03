@@ -1,13 +1,13 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.Generation;
+using Framework.FileGeneration.Checkout;
 
-namespace Framework.Configuration.TestGenerate;
+namespace Framework.Configuration.TestGenerate._Base;
 
 public abstract class GeneratorsBase
 {
-    protected ICheckOutService CheckOutService { get; } = Framework.DomainDriven.Generation.CheckOutService.Trace;
+    protected ICheckOutService CheckOutService { get; } = Framework.FileGeneration.Checkout.CheckOutService.Trace;
 
-    protected virtual string FrameworkPath { get; } = Environment.CurrentDirectory.Replace(@"\",@"/").TakeWhileNot(@"/src/", StringComparison.InvariantCultureIgnoreCase);
+    protected virtual string FrameworkPath { get; } = Environment.CurrentDirectory.Replace(@"\", @"/").TakeWhileNot(@"/src/", StringComparison.InvariantCultureIgnoreCase);
 
     protected abstract string GeneratePath { get; }
 }

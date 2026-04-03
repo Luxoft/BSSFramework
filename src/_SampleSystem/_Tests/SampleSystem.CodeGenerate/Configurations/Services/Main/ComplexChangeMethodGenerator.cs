@@ -2,14 +2,16 @@
 
 using CommonFramework;
 
-using Framework.CodeDom;
-using Framework.Core;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLLCoreGenerator;
-using Framework.DomainDriven.ServiceModelGenerator;
-using Framework.Security;
-using Framework.Transfering;
+using Framework.BLL.Domain.DTO;
+using Framework.BLL.Domain.Extensions;
+using Framework.BLL.Domain.Models;
+using Framework.BLL.Domain.ServiceRole;
+using Framework.CodeDom.Extend;
+using Framework.CodeDom.Extensions;
+using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
+using Framework.CodeGeneration.ServiceModelGenerator;
+using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 
 using SampleSystem.Domain;
 
@@ -21,11 +23,8 @@ namespace SampleSystem.CodeGenerate;
 public class ComplexChangeMethodGenerator : ModelMethodGenerator<MainServiceGeneratorConfiguration, BLLSaveRoleAttribute>
 {
     public ComplexChangeMethodGenerator(MainServiceGeneratorConfiguration configuration, Type domainType, Type changeModel)
-            : base(configuration, domainType, changeModel)
-    {
+            : base(configuration, domainType, changeModel) =>
         this.Identity = new MethodIdentity(SampleSystemMethodIdentityType.ComplexChange, this.ModelType);
-    }
-
 
     public override MethodIdentity Identity { get; }
 
@@ -37,10 +36,7 @@ public class ComplexChangeMethodGenerator : ModelMethodGenerator<MainServiceGene
     protected override bool IsEdit { get; } = true;
 
 
-    protected override string GetComment()
-    {
-        return $"Change {this.DomainType.Name} by model ({this.ModelType.Name})";
-    }
+    protected override string GetComment() => $"Change {this.DomainType.Name} by model ({this.ModelType.Name})";
 
     protected override IEnumerable<CodeParameterDeclarationExpression> GetParameters()
     {

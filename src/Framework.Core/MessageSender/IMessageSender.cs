@@ -1,4 +1,4 @@
-﻿namespace Framework.Core;
+﻿namespace Framework.Core.MessageSender;
 
 /// <summary>
 /// Represents message sender interface

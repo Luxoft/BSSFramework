@@ -1,13 +1,13 @@
 ﻿using Framework.Configuration.Generated.DTO;
 using Framework.Core;
-using Framework.DomainDriven;
+using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
 using SecuritySystem;
 
 namespace Framework.Configuration.WebApi;
 
-public partial class ConfigSLJsonController
+public partial class ConfigMainController
 {
     [HttpPost]
     public int ProcessModifications(int limit)

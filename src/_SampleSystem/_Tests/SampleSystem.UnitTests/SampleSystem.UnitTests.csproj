@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\_DomainDriven\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
+    <ProjectReference Include="..\..\..\Database\Framework.Database.Runtime\Framework.Database.Runtime.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,4 @@
 ﻿namespace SampleSystem.Domain;
 
 [AttributeUsage(AttributeTargets.Class)]
-public class ExampleCustomProjectionAttribute : Attribute
-{
-}
+public class ExampleCustomProjectionAttribute : Attribute;

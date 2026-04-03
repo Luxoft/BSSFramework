@@ -1,14 +1,14 @@
 ﻿using CommonFramework;
 
+using Framework.BLL;
+using Framework.BLL.Domain.DTO;
+using Framework.BLL.Domain.Extensions;
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Lock;
-using Framework.Persistent;
-using Framework.Transfering;
+using Framework.Database;
+using Framework.Relations;
 
-namespace Framework.Configuration.BLL;
+namespace Framework.Configuration.BLL.TargetSystemService;
 
 public class TargetSystemInitializer(
     IConfigurationBLLContext context,
@@ -49,7 +49,7 @@ public class TargetSystemInitializer(
 
             if (!isBase)
             {
-                context.EventOperationSource.GetEventOperations(newItem.Type).Foreach(value => _ = new DomainTypeEventOperation(newDomainType, value));
+                context.EventOperationSource.GetEventOperations(newItem.Type).Foreach(value => _ = new DomainTypeEventOperation(newDomainType) { Name = value.Name });
             }
 
             context.Logics.DomainType.Insert(newDomainType);
@@ -71,7 +71,7 @@ public class TargetSystemInitializer(
                 {
                     domainType.RemoveDetails(mergeEventResult.RemovingItems);
 
-                    mergeEventResult.AddingItems.Foreach(value => _ = new DomainTypeEventOperation(domainType, value));
+                    mergeEventResult.AddingItems.Foreach(value => _ = new DomainTypeEventOperation(domainType) { Name = value.Name });
                 }
 
                 bll.Save(targetSystem);

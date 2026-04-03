@@ -1,5 +1,5 @@
 ﻿using Framework.Core;
-using Framework.Persistent;
+using Framework.Database;
 
 namespace Framework.Authorization.Domain;
 
@@ -21,8 +21,8 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// </summary>
     public virtual DateTime? CreateDate
     {
-        get { return this.createDate; }
-        internal protected set { this.createDate = value; }
+        get => this.createDate;
+        internal protected set => this.createDate = value;
     }
 
     /// <summary>
@@ -30,8 +30,8 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// </summary>
     public virtual DateTime? ModifyDate
     {
-        get { return this.modifyDate; }
-        protected internal set { this.modifyDate = value; }
+        get => this.modifyDate;
+        protected internal set => this.modifyDate = value;
     }
 
     /// <summary>
@@ -39,8 +39,8 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// </summary>
     public virtual string? ModifiedBy
     {
-        get { return this.modifiedBy.TrimNull(); }
-        protected internal set { this.modifiedBy = value.TrimNull(); }
+        get => this.modifiedBy.TrimNull();
+        protected internal set => this.modifiedBy = value.TrimNull();
     }
 
     /// <summary>
@@ -48,7 +48,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// </summary>
     public virtual string? CreatedBy
     {
-        get { return this.createdBy.TrimNull(); }
-        internal protected set { this.createdBy = value.TrimNull(); }
+        get => this.createdBy.TrimNull();
+        internal protected set => this.createdBy = value.TrimNull();
     }
 }

@@ -1,4 +1,4 @@
-﻿using Framework.Persistent.Mapping;
+﻿using Framework.Database.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;
@@ -53,86 +53,55 @@ public class SentMessage : AuditPersistentDomainObjectBase
     /// <summary>
     /// ID доменного типа, на который зарегистрирована подписка
     /// </summary>
-    public virtual Guid? ContextObjectId
-    {
-        get { return this.contextObjectId; }
-    }
+    public virtual Guid? ContextObjectId => this.contextObjectId;
 
     /// <summary>
     /// Доменный тип, на который зарегистрирована подписка
     /// </summary>
-    public virtual string ContextObjectType
-    {
-        get { return this.contextObjectType; }
-    }
+    public virtual string ContextObjectType => this.contextObjectType;
 
     /// <summary>
     /// Дополнительный получатель в копии письма
     /// </summary>
     [MaxLength]
-    public virtual string Copy
-    {
-        get { return this.copy; }
-    }
+    public virtual string Copy => this.copy;
 
     /// <summary>
     /// Получатель(и) нотификации
     /// </summary>
     [MaxLength]
-    public virtual string To
-    {
-        get { return this.to; }
-    }
+    public virtual string To => this.to;
 
     /// <summary>
     /// Шаблон темы нотификации
     /// </summary>
     [MaxLength(1000)]
-    public virtual string Subject
-    {
-        get { return this.subject; }
-    }
+    public virtual string Subject => this.subject;
 
     /// <summary>
     /// Шаблон текста нотифкации
     /// </summary>
     [MaxLength]
-    public virtual string Message
-    {
-        get { return this.message; }
-    }
+    public virtual string Message => this.message;
 
     /// <summary>
     /// Название шаблона нотификации
     /// </summary>
-    public virtual string TemplateName
-    {
-        get { return this.templateName; }
-    }
+    public virtual string TemplateName => this.templateName;
 
     /// <summary>
     /// Комментарии
     /// </summary>
-    public virtual string Comment
-    {
-        get { return this.comment; }
-    }
+    public virtual string Comment => this.comment;
 
     /// <summary>
     /// Отправитель нотификации
     /// </summary>
-    public virtual string From
-    {
-        get { return this.from; }
-    }
+    public virtual string From => this.from;
 
     /// <summary>
     /// ReplyTo нотификации
     /// </summary>
     [MaxLength]
-    public virtual string ReplyTo
-    {
-        get { return this.replyTo; }
-    }
-
+    public virtual string ReplyTo => this.replyTo;
 }

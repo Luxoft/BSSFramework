@@ -2,6 +2,7 @@
 
 using SampleSystem.Domain;
 
+// ReSharper disable once CheckNamespace
 namespace SampleSystem.BLL;
 
 public partial class SampleSystemValidationMap

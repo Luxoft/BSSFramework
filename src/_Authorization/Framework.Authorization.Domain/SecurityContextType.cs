@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.Serialization;
+﻿using Framework.BLL.Domain.Serialization;
 
 namespace Framework.Authorization.Domain;
 
@@ -19,7 +19,7 @@ public class SecurityContextType : BaseDirectory
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public override string Name
     {
-        get { return base.Name; }
-        set { base.Name = value; }
+        get => base.Name;
+        set => base.Name = value;
     }
 }

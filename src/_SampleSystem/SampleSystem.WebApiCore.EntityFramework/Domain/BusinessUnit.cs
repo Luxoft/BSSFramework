@@ -2,7 +2,7 @@
 
 using SecuritySystem;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.WebApiCore.Domain;
 
 [Table(nameof(BusinessUnit), Schema = "app")]
 public class BusinessUnit : ISecurityContext

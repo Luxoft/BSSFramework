@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.WebApi;
 
-public partial class AuthSLJsonController
+public partial class AuthMainController
 {
     [HttpPost]
     public virtual async Task<List<string>> GetSecurityOperations(CancellationToken cancellationToken = default)

@@ -1,11 +1,12 @@
-﻿using Framework.DomainDriven;
-using Framework.DomainDriven.DBGenerator;
-using Framework.DomainDriven.NHibernate;
+﻿using Framework.Database;
+using Framework.Database.ConnectionStringSource;
+using Framework.Database.NHibernate._MappingSettings;
+using Framework.Database.NHibernate.DBGenerator;
 
 using SampleSystem.CodeGenerate;
 using SampleSystem.Generated.DAL.NHibernate;
 
-namespace SampleSystem.DbGenerate;
+namespace SampleSystem.DbGenerate.NHibernate;
 
 [TestClass]
 public class DbGeneratorTest
@@ -37,9 +38,9 @@ public class DbGeneratorTest
         string mainDatabaseName = nameof(SampleSystem),
         DatabaseScriptGeneratorMode generatorMode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
         DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnTargetDatabase,
-        ICollection<string> ignoredIndexes = null,
+        ICollection<string>? ignoredIndexes = null,
         bool skipFrameworkDatabases = false,
-        DbUserCredential credential = null,
+        DbUserCredential? credential = null,
         params string[] migrationScriptFolderPaths)
     {
         if (!skipFrameworkDatabases)
@@ -113,7 +114,7 @@ public class DbGeneratorTest
 
         Console.WriteLine("------ start Utilities");
         var resultScript = new Framework.Configuration.TestGenerate.ServerGenerators(
-                new Framework.Configuration.TestGenerate.ServerGenerationEnvironment(new DatabaseName("Configuration")))
+                new Framework.Configuration.TestGenerate.Configurations.ConfigurationGenerationEnvironment(new DatabaseName("Configuration")))
             .GenerateDB(
                 serverName,
                 mainDatabaseName,
@@ -133,9 +134,9 @@ public class DbGeneratorTest
         AuditDatabaseName auditDatabaseName,
         DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnCopySchemeDatabase,
         bool preserveSchemaDatabase = false,
-        DbUserCredential credential = null)
+        DbUserCredential? credential = null)
     {
-        string[] migrationScriptFolderPaths = null;
+        string[]? migrationScriptFolderPaths = null;
         var result = new Framework.Authorization.TestGenerate.ServerGenerators().GenerateDB(
             serverName,
             mainDatabaseName,
@@ -155,19 +156,11 @@ public class DbGeneratorTest
 
         var connectionString = $"Data Source={serverName};Initial Catalog={dbName.Name};Application Name=SampleSystem";
 
-        return new SampleSystemMappingSettings(
-                initMappingAction,
-                dbName,
-                dbAuditName)
+        return new SampleSystemMappingSettings(initMappingAction, dbName, dbAuditName)
             .AddInitializer(
                 new DefaultConfigurationInitializer(
                     new ManualDefaultConnectionStringSource(connectionString),
-                    new DefaultConfigurationInitializerSettings
-                    {
-                        FluentAssemblyList =
-                        [
-                            typeof(SampleSystemMappingSettings).Assembly
-                        ]
-                    }));
+                    new DatabaseSettings(),
+                    new NHibernateSettings { FluentAssemblyList = [typeof(SampleSystemMappingSettings).Assembly] }));
     }
 }

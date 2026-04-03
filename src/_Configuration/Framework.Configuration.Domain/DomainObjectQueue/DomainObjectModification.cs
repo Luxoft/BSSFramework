@@ -1,5 +1,7 @@
-﻿using Framework.Persistent;
-using Framework.Persistent.Mapping;
+﻿using Framework.BLL.Domain.IdentityObject;
+using Framework.Database.Attributes;
+using Framework.Database.Domain;
+using Framework.Database.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;
@@ -30,42 +32,42 @@ public class DomainObjectModification : AuditPersistentDomainObjectBase, IVersio
     [UniqueElement]
     public virtual DomainType DomainType
     {
-        get { return this.domainType; }
-        set { this.domainType = value; }
+        get => this.domainType;
+        set => this.domainType = value;
     }
 
     [Required]
     [UniqueElement]
     public virtual Guid DomainObjectId
     {
-        get { return this.domainObjectId; }
-        set { this.domainObjectId = value; }
+        get => this.domainObjectId;
+        set => this.domainObjectId = value;
     }
 
     [Required]
     [UniqueElement]
     public virtual long Revision
     {
-        get { return this.revision; }
-        set { this.revision = value; }
+        get => this.revision;
+        set => this.revision = value;
     }
 
     public virtual ModificationType Type
     {
-        get { return this.type; }
-        set { this.type = value; }
+        get => this.type;
+        set => this.type = value;
     }
 
     public virtual bool Processed
     {
-        get { return this.processed; }
-        set { this.processed = value; }
+        get => this.processed;
+        set => this.processed = value;
     }
 
     [Version]
     public virtual long Version
     {
-        get { return this.version; }
-        set { this.version = value; }
+        get => this.version;
+        set => this.version = value;
     }
 }

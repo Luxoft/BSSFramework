@@ -1,6 +1,9 @@
-﻿using Framework.Configuration.Core;
+﻿using Framework.Subscriptions;
+using Framework.Subscriptions.Domain;
 
-using SecuritySystem.Notification;
+using SecuritySystem.Notification.Domain;
+
+using DomainObjectChangeType = Framework.Subscriptions.DomainObjectChangeType;
 
 namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;
 
@@ -14,8 +17,5 @@ internal sealed class SecurityItemSourceSourceLambda : SecurityItemSourceLambdaM
 
     public override NotificationExpandType ExpandType { get; protected set; } = NotificationExpandType.Direct;
 
-    internal void SetFunc(Func<object, DomainObjectVersions<object>, IEnumerable<ManagementUnit>> lambda)
-    {
-        this.Lambda = lambda;
-    }
+    internal void SetFunc(Func<object, DomainObjectVersions<object>, IEnumerable<ManagementUnit>> lambda) => this.Lambda = lambda;
 }

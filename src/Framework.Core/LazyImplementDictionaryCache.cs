@@ -55,11 +55,8 @@ public class LazyImplementDictionaryCache<TKey, TValue>(
 
 
     private static Func<Func<TValue>, TValue> GetCreateProxyFunc<TProxyValue>()
-            where TProxyValue : TValue
-    {
-        return f => LazyInterfaceImplementHelper<TProxyValue>.CreateProxy(() => (TProxyValue)f());
-    }
-
+            where TProxyValue : TValue =>
+        f => LazyInterfaceImplementHelper<TProxyValue>.CreateProxy(() => (TProxyValue)f());
 
     IEnumerable<TValue> IDictionaryCache<TKey, TValue>.Values => this.dict.Values;
 }

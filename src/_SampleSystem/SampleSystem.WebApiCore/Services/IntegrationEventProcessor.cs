@@ -1,7 +1,7 @@
 ﻿using Bss.Platform.Events.Abstractions;
 using Bss.Platform.Events.Interfaces;
 
-using Framework.DomainDriven;
+using Framework.Database;
 
 using MediatR;
 

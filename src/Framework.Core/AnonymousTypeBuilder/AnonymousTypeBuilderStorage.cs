@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Reflection.Emit;
 
-namespace Framework.Core;
+namespace Framework.Core.AnonymousTypeBuilder;
 
 public class AnonymousTypeBuilderStorage : IAnonymousTypeBuilderStorage
 {
@@ -22,5 +22,5 @@ public class AnonymousTypeBuilderStorage : IAnonymousTypeBuilderStorage
     {
     }
 
-    public ModuleBuilder ModuleBuilder { get; private set; }
+    public ModuleBuilder ModuleBuilder { get; }
 }

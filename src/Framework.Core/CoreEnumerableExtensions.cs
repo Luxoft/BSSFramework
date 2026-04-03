@@ -1,12 +1,19 @@
 ﻿using System.Collections.ObjectModel;
 
 using CommonFramework;
-using CommonFramework.Maybe;
 
 namespace Framework.Core;
 
 public static class CoreEnumerableExtensions
 {
+    public static IEnumerable<T> FromLazy<T>(this Func<IEnumerable<T>> getSource)
+    {
+        foreach (var v in getSource())
+        {
+            yield return v;
+        }
+    }
+
     public static void Merge<TSource, TTarget, TKey>(
         this IEnumerable<TSource> source,
         IEnumerable<TTarget> target,
@@ -83,10 +90,7 @@ public static class CoreEnumerableExtensions
         return key.ToKeyValuePair(values).ToGroup();
     }
 
-    public static IGrouping<TKey, TElement> ToGroup<TKey, TElement>(this KeyValuePair<TKey, IEnumerable<TElement>> pair)
-    {
-        return new PairGrouping<TKey, TElement>(pair.Value.ToList(), pair.Key);
-    }
+    public static IGrouping<TKey, TElement> ToGroup<TKey, TElement>(this KeyValuePair<TKey, IEnumerable<TElement>> pair) => new PairGrouping<TKey, TElement>(pair.Value.ToList(), pair.Key);
 
     public static IEnumerable<T> IfEmpty<T>(this IEnumerable<T> source, Func<IEnumerable<T>> func)
     {
@@ -177,10 +181,7 @@ public static class CoreEnumerableExtensions
     }
 
 
-    public static IEnumerable<T> Distinct<T>(this IEnumerable<T> source, Func<T, T, bool> equalsFunc, Func<T, int>? getHashFunc = null)
-    {
-        return source.Distinct(new EqualityComparerImpl<T>(equalsFunc, getHashFunc));
-    }
+    public static IEnumerable<T> Distinct<T>(this IEnumerable<T> source, Func<T, T, bool> equalsFunc, Func<T, int>? getHashFunc = null) => source.Distinct(new EqualityComparerImpl<T>(equalsFunc, getHashFunc));
 
     public static void Merge<T, TSource, TKey>(
         this IEnumerable<T> source,
@@ -249,21 +250,15 @@ public static class CoreEnumerableExtensions
         return new Stack<T>(source);
     }
 
-    public static IEnumerable<T> Distinct<T, TProperty>(this IEnumerable<T> source, Func<T, TProperty> getPropertyFunc)
-    {
-        return source.Distinct(new PropertyEqualityComparer<T, TProperty>(getPropertyFunc));
-    }
+    public static IEnumerable<T> Distinct<T, TProperty>(this IEnumerable<T> source, Func<T, TProperty> getPropertyFunc) => source.Distinct(new PropertyEqualityComparer<T, TProperty>(getPropertyFunc));
 
-    public static T Aggregate<T>(this IEnumerable<Func<T, T>> source, T startElement)
-    {
-        return source.Aggregate(startElement, (v, f) => f(v));
-    }
+    public static T Aggregate<T>(this IEnumerable<Func<T, T>> source, T startElement) => source.Aggregate(startElement, (v, f) => f(v));
 
     public static TResult Partial<TSource, TResult>(
         this IEnumerable<TSource> source,
         Func<TSource, bool> firstResultPredicate,
         Func<TSource, bool> secondResultPredicate,
-        Func<List<TSource>, List<TSource>, IList<TSource>, TResult> selector)
+        Func<List<TSource>, List<TSource>, List<TSource>, TResult> selector)
     {
         var l1 = new List<TSource>();
         var l2 = new List<TSource>();
@@ -440,15 +435,6 @@ public static class CoreEnumerableExtensions
         }
     }
 
-    public static IEnumerable<T> CollectMaybe<T>(this IEnumerable<Maybe<T>> source)
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
-        return from item in source
-               where item.HasValue
-               select item.Value;
-    }
-
     public static TSource? SingleOrDefault<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, Func<Exception> manyExceptionHandler)
     {
         if (source == null)
@@ -478,9 +464,9 @@ public static class CoreEnumerableExtensions
         }
     }
 
-    private class PairGrouping<TKey, TElement>(IList<TElement> list, TKey key)
+    private class PairGrouping<TKey, TElement>(List<TElement> list, TKey key)
         : ReadOnlyCollection<TElement>(list), IGrouping<TKey, TElement>
     {
-        public TKey Key { get; private set; } = key;
+        public TKey Key { get; } = key;
     }
 }

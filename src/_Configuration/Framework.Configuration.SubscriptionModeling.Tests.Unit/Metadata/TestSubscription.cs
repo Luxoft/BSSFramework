@@ -1,20 +1,22 @@
-﻿using Framework.Notification;
+﻿using Framework.Subscriptions;
+using Framework.Subscriptions.Domain;
+
 using SecuritySystem;
 
 namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;
 
 internal sealed class TestSubscription : SubscriptionWithCustomModelMetadata<object, object, object, RazorTemplate<object>>
 {
-    private string senderName = "SampleSystem";
-    private string senderEmail = "SampleSystem@luxoft.com";
     private LambdaMetadata<object, object, bool> conditionLambda = new ConditionLambda();
     private LambdaMetadata<object, object, IEnumerable<NotificationMessageGenerationInfo>> generationLambda = new GenerationLambda();
     private LambdaMetadata<object, object, IEnumerable<NotificationMessageGenerationInfo>> copyGenerationLambda = new CopyGenerationLambda();
-    private IEnumerable<ISecurityItemSourceLambdaMetadata<object, object, ISecurityContext>> securityItemSourceLambdas = new[] { new SecurityItemSourceSourceLambda() };
+    private IEnumerable<ISecurityItemSourceLambdaMetadata<object, object, ISecurityContext>> securityItemSourceLambdas = [new SecurityItemSourceSourceLambda()];
 
-    public override string SenderName => this.senderName;
-
-    public override string SenderEmail => this.senderEmail;
+    public TestSubscription()
+    {
+        this.SenderName = "SampleSystem";
+        this.SenderEmail = "SampleSystem@luxoft.com";
+    }
 
     public override LambdaMetadata<object, object, bool> ConditionLambda => this.conditionLambda;
 
@@ -24,15 +26,13 @@ internal sealed class TestSubscription : SubscriptionWithCustomModelMetadata<obj
             CopyGenerationLambda => this.copyGenerationLambda;
 
     public override IEnumerable<ISecurityItemSourceLambdaMetadata<object, object, ISecurityContext>>
-            SecurityItemSourceLambdas
-    {
-        get { return this.securityItemSourceLambdas; }
-    }
+            SecurityItemSourceLambdas =>
+        this.securityItemSourceLambdas;
 
-    public override RecepientsSelectorMode RecepientsSelectorMode { get; protected set; } =
-        RecepientsSelectorMode.RolesExceptGeneration;
+    public override RecipientsSelectorMode RecipientsSelectorMode { get; protected set; } =
+        RecipientsSelectorMode.RolesExceptGeneration;
 
-    public override IEnumerable<SecurityRole> SubBusinessRoles { get; protected set; } = new[] { SecurityRole.Administrator };
+    public override IEnumerable<SecurityRole> SubBusinessRoles { get; protected set; } = [SecurityRole.Administrator];
 
     public override bool SendIndividualLetters { get; protected set; } = true;
 
@@ -42,36 +42,17 @@ internal sealed class TestSubscription : SubscriptionWithCustomModelMetadata<obj
 
     public override bool AllowEmptyListOfRecipients { get; protected set; } = true;
 
-    internal void SetSenderName(string senderName)
-    {
-        this.senderName = senderName;
-    }
-
-    internal void SetSenderEmail(string senderEmail)
-    {
-        this.senderEmail = senderEmail;
-    }
-
-    internal void SetConditionLambda(LambdaMetadata<object, object, bool> lambda)
-    {
-        this.conditionLambda = lambda;
-    }
+    internal void SetConditionLambda(LambdaMetadata<object, object, bool> lambda) => this.conditionLambda = lambda;
 
     internal void SetGenerationLambda(
-            LambdaMetadata<object, object, IEnumerable<NotificationMessageGenerationInfo>> lambda)
-    {
+            LambdaMetadata<object, object, IEnumerable<NotificationMessageGenerationInfo>> lambda) =>
         this.generationLambda = lambda;
-    }
 
     internal void SetCopyGenerationLambda(
-            LambdaMetadata<object, object, IEnumerable<NotificationMessageGenerationInfo>> lambda)
-    {
+            LambdaMetadata<object, object, IEnumerable<NotificationMessageGenerationInfo>> lambda) =>
         this.copyGenerationLambda = lambda;
-    }
 
     internal void SetSecurityItemSourceLambdas(
-            params ISecurityItemSourceLambdaMetadata<object, object, ISecurityContext>[] lamdas)
-    {
+            params ISecurityItemSourceLambdaMetadata<object, object, ISecurityContext>[] lamdas) =>
         this.securityItemSourceLambdas = lamdas;
-    }
 }

@@ -6,7 +6,7 @@ public abstract class CommonUnitBase : BaseDirectory
 
     public virtual BusinessUnitStatus BusinessUnitStatus
     {
-        get { return this.businessUnitStatus; }
-        set { this.businessUnitStatus = value; }
+        get => this.businessUnitStatus;
+        set => this.businessUnitStatus = value;
     }
 }

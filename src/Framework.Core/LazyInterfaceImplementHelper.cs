@@ -12,10 +12,7 @@ public static class LazyInterfaceImplementHelper
     /// </summary>
     /// <typeparam name="T">Тип интерфейса</typeparam>
     /// <returns></returns>
-    public static T CreateNotImplemented<T>(string? message = null)
-    {
-        return LazyInterfaceImplementHelper<T>.CreateProxy(() => { throw new NotImplementedException(message); });
-    }
+    public static T CreateNotImplemented<T>(string? message = null) => LazyInterfaceImplementHelper<T>.CreateProxy(() => throw new NotImplementedException(message));
 
     /// <summary>
     /// Создание адаптера
@@ -30,10 +27,7 @@ public static class LazyInterfaceImplementHelper
         return LazyInterfaceImplementHelper<T>.CreateProxy(func);
     }
 
-    public static T CreateCallProxy<T>(Func<T> func)
-    {
-        return LazyInterfaceImplementHelper<T>.CreateCallProxy(func);
-    }
+    public static T CreateCallProxy<T>(Func<T> func) => LazyInterfaceImplementHelper<T>.CreateCallProxy(func);
 }
 
 /// <summary>

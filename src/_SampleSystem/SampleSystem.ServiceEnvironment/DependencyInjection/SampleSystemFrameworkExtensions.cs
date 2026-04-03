@@ -1,7 +1,6 @@
-﻿using Framework.DomainDriven._Visitors;
-using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.DomainDriven.Setup;
-using Framework.Events.Legacy;
+﻿using Framework.BLL.Events;
+using Framework.Infrastructure.DALListeners;
+using Framework.Infrastructure.DependencyInjection;
 
 using SampleSystem.BLL;
 using SampleSystem.Domain;
@@ -9,35 +8,37 @@ using SampleSystem.Events;
 using SampleSystem.Generated.DTO;
 using SampleSystem.Subscriptions.Metadata.Employee.Update;
 
-namespace SampleSystem.ServiceEnvironment;
+using SampleSystemBLLContext = SampleSystem.BLL.SampleSystemBLLContext;
+
+namespace SampleSystem.ServiceEnvironment.DependencyInjection;
 
 public static class SampleSystemFrameworkExtensions
 {
-    extension(IBssFrameworkSettings settings)
+    extension(IBssFrameworkSetup settings)
     {
-        public IBssFrameworkSettings AddNamedLocks() =>
+        public IBssFrameworkSetup AddNamedLocks() =>
             settings.AddNamedLocks(s => s
                                         .SetNameLockType<GenericNamedLock>(nl => nl.Name)
                                         .AddManual(typeof(BusinessUnitAncestorLink))
                                         .AddManual(typeof(ManagementUnitAncestorLink))
                                         .AddManual(typeof(LocationAncestorLink)));
 
-        public IBssFrameworkSettings AddListeners() =>
+        public IBssFrameworkSetup AddListeners() =>
             settings.AddListener<SubscriptionDALListener>()
                     .AddListener<ExampleFaultDALListener>()
                     .AddListener<FixDomainObjectEventRevisionNumberDALListener>()
                     .AddListener<DependencyDetailEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>();
 
-        public IBssFrameworkSettings AddSubscriptionManagers() =>
+        public IBssFrameworkSetup AddSubscriptionManagers() =>
             settings.AddSubscriptionManager<ExampleSampleSystemEventsSubscriptionManager>()
                     .AddSubscriptionManager<ExampleSampleSystemAribaEventsSubscriptionManager>();
 
-        public IBssFrameworkSettings AddBLLSystem() => settings.AddBLLSystem<ISampleSystemBLLContext, SampleSystemBLLContext>();
+        public IBssFrameworkSetup AddBLLSystem() => settings.AddBLLSystem<ISampleSystemBLLContext, SampleSystemBLLContext>();
 
-        public IBssFrameworkSettings AddConfigurationSystemConstants() =>
+        public IBssFrameworkSetup AddConfigurationSystemConstants() =>
             settings.AddSystemConstant(typeof(SampleSystemSystemConstant));
 
-        public IBssFrameworkSettings AddConfigurationTargetSystems() =>
+        public IBssFrameworkSetup AddConfigurationTargetSystems() =>
             settings.AddConfigurationTargetSystems(tsSettings =>
                                                        tsSettings.AddTargetSystem<ISampleSystemBLLContext, PersistentDomainObjectBase>(
                                                            nameof(SampleSystem),
@@ -49,14 +50,14 @@ public static class SampleSystemFrameworkExtensions
                                                                new(typeof(Employee), new Guid("{AA46DA53-9B21-4DEC-9C70-720BDA1CB198}")),
                                                            ]));
 
-        public IBssFrameworkSettings RegisterSupportLegacyServices() =>
+        public IBssFrameworkSetup AddSupportLegacyServices() =>
             settings.SetSubscriptionAssembly(typeof(EmployeeUpdateSubscription).Assembly)
                     .SetNotificationDefaultMailSenderContainer<SampleSystemDefaultMailSenderContainer>()
                     .SetNotificationEmployee<Employee>()
                     .SetDTOMapping<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService, PersistentDomainObjectBase, EventDTOBase>();
 
-        public IBssFrameworkSettings AddQueryVisitors() =>
-            settings.AddQueryVisitors<ExpressionVisitorContainerDomainIdentItem<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
-                    .AddQueryVisitors<ExpressionVisitorContainerDomainIdentItem<PersistentDomainObjectBase, Guid>>();
+        //public IBssFrameworkBuilder AddQueryVisitors() =>
+        //    settings.AddQueryVisitors<ExpressionVisitorContainerDomainIdentItem<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
+        //            .AddQueryVisitors<ExpressionVisitorContainerDomainIdentItem<PersistentDomainObjectBase, Guid>>();
     }
 }

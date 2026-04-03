@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.CodeGeneration.ServiceModelGenerator</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IvAt.OData.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Legacy\Framework.Infrastructure.Legacy.csproj" />
+    <ProjectReference Include="..\Framework.CodeGeneration.DTOGenerator.Audit\Framework.CodeGeneration.DTOGenerator.Audit.csproj" />
+  </ItemGroup>
+
+</Project>

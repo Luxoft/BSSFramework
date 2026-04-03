@@ -1,9 +1,4 @@
 ﻿namespace SampleSystem.CodeGenerate;
 
-public class LegacyProjectionGeneratorConfiguration : Framework.DomainDriven.ProjectionGenerator.GeneratorConfigurationBase<ServerGenerationEnvironment>
-{
-    public LegacyProjectionGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment, environment.LegacyProjectionEnvironment)
-    {
-    }
-}
+public class LegacyProjectionGeneratorConfiguration(ServerGenerationEnvironment environment)
+    : Framework.CodeGeneration.ProjectionGenerator.Configuration.ProjectionGeneratorConfigurationBase<ServerGenerationEnvironment>(environment, environment.LegacyProjectionEnvironment);

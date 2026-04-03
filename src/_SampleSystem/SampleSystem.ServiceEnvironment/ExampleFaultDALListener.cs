@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven;
+﻿using Framework.Database;
+using Framework.Database.DALListener;
 
 namespace SampleSystem.ServiceEnvironment;
 

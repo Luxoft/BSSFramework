@@ -1,15 +1,11 @@
 ﻿using System.Linq.Expressions;
-
-using Framework.DomainDriven._Visitors;
+using Framework.Database;
 
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace SampleSystem.ServiceEnvironment;
+namespace SampleSystem.WebApiCore.DependencyInjection;
 
 public class GeneralQueryExpressionInterceptor(IExpressionVisitorContainer expressionVisitorContainer) : IQueryExpressionInterceptor
 {
-    public Expression QueryCompilationStarting(Expression queryExpression, QueryExpressionEventData eventData)
-    {
-        return expressionVisitorContainer.Visitor.Visit(queryExpression);
-    }
+    public Expression QueryCompilationStarting(Expression queryExpression, QueryExpressionEventData eventData) => expressionVisitorContainer.Visitor.Visit(queryExpression);
 }

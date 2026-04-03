@@ -1,0 +1,20 @@
+﻿using Bss.Testing.Xunit.Interfaces;
+
+using Framework.AutomationCore.ServiceEnvironment;
+using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment.Services;
+using Framework.AutomationCore.Settings;
+using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
+
+using Microsoft.Extensions.Options;
+
+using SecuritySystem.Testing;
+
+namespace Framework.AutomationCore.Xunit.ServiceEnvironment;
+
+public class DiTestInitializeAndCleanup(
+    IOptions<AutomationFrameworkSettings> settings,
+    IDatabaseContext databaseContext,
+    IntegrationTestTimeProvider timeProvider,
+    RootImpersonateServiceState rootImpersonateServiceState)
+    : TestInitializeAndCleanup(settings, databaseContext, timeProvider, rootImpersonateServiceState),
+      ITestInitializeAndCleanup;

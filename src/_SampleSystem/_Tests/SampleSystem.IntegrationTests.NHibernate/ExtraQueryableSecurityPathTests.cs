@@ -1,7 +1,8 @@
 ﻿using CommonFramework;
 
+using Framework.Application;
 using Framework.Core;
-using Framework.DomainDriven;
+using Framework.Database;
 
 using SecuritySystem;
 using SecuritySystem.Services;

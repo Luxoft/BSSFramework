@@ -1,4 +1,4 @@
-﻿using Framework.Persistent;
+﻿using Framework.Application.Domain;
 
 namespace SampleSystem.Domain;
 

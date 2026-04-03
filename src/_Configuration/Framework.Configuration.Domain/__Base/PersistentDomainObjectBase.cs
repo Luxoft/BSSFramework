@@ -1,5 +1,5 @@
-﻿using Framework.Persistent;
-using Framework.DomainDriven.Serialization;
+﻿using Framework.Application.Domain;
+using Framework.BLL.Domain.Serialization;
 using Framework.Core;
 
 namespace Framework.Configuration.Domain;
@@ -16,10 +16,8 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IEquatable<
     }
 
     protected PersistentDomainObjectBase(Guid id)
-            : this ()
-    {
+            : this () =>
         this.id = id;
-    }
 
     #endregion
 
@@ -29,8 +27,8 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IEquatable<
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual Guid Id
     {
-        get { return this.id; }
-        set { this.id = value; }
+        get => this.id;
+        set => this.id = value;
     }
 
     /// <summary>
@@ -39,28 +37,13 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IEquatable<
     [CustomSerialization(CustomSerializationMode.Ignore)]
     public virtual bool IsNew => this.Id == Guid.Empty;
 
-    public static bool operator ==(PersistentDomainObjectBase? a, PersistentDomainObjectBase? b)
-    {
-        return ReferenceEquals(a, b) || (!ReferenceEquals(a, null) && !ReferenceEquals(b, null) && a.Equals(b));
-    }
+    public static bool operator ==(PersistentDomainObjectBase? a, PersistentDomainObjectBase? b) => ReferenceEquals(a, b) || (!ReferenceEquals(a, null) && !ReferenceEquals(b, null) && a.Equals(b));
 
-    public static bool operator !=(PersistentDomainObjectBase? a, PersistentDomainObjectBase? b)
-    {
-        return !(a == b);
-    }
+    public static bool operator !=(PersistentDomainObjectBase? a, PersistentDomainObjectBase? b) => !(a == b);
 
-    public virtual bool Equals(PersistentDomainObjectBase? obj)
-    {
-        return ReferenceEquals(this, obj) || (!ReferenceEquals(obj, null) && this.Id == obj.Id && this.Id != Guid.Empty);
-    }
+    public virtual bool Equals(PersistentDomainObjectBase? obj) => ReferenceEquals(this, obj) || (!ReferenceEquals(obj, null) && this.Id == obj.Id && this.Id != Guid.Empty);
 
-    public override bool Equals(object? obj)
-    {
-        return this.Equals(obj as PersistentDomainObjectBase);
-    }
+    public override bool Equals(object? obj) => this.Equals(obj as PersistentDomainObjectBase);
 
-    public override int GetHashCode()
-    {
-        return this.Id.IsDefault() ? base.GetHashCode() : this.Id.GetHashCode();
-    }
+    public override int GetHashCode() => this.Id.IsDefault() ? base.GetHashCode() : this.Id.GetHashCode();
 }

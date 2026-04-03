@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Framework.Core;
+namespace Framework.Core.AnonymousTypeBuilder;
 
 public class TypeMapProperty : ITypeMapMember
 {
@@ -11,15 +11,9 @@ public class TypeMapProperty : ITypeMapMember
         this.Property = property;
     }
 
-    public PropertyInfo Property { get; private set; }
+    public PropertyInfo Property { get; }
 
-    public virtual string Name
-    {
-        get { return this.Property.Name; }
-    }
+    public virtual string Name => this.Property.Name;
 
-    public virtual Type Type
-    {
-        get { return this.Property.PropertyType; }
-    }
+    public virtual Type Type => this.Property.PropertyType;
 }

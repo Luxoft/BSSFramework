@@ -1,6 +1,6 @@
-﻿using Framework.Core;
-using Framework.DomainDriven.Serialization;
-using Framework.Persistent;
+﻿using Framework.BLL.Domain.Serialization;
+using Framework.Core;
+using Framework.Relations;
 using Framework.Restriction;
 
 namespace Framework.Authorization.Domain;

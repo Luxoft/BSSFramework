@@ -3,6 +3,8 @@ using System.Reflection.Emit;
 
 using CommonFramework;
 
+using Framework.Core.AnonymousTypeBuilder;
+
 namespace Framework.Core;
 
 /// <summary>
@@ -33,10 +35,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public Func<Func<T>, T> GetCreateProxyFunc<T>()
-    {
-        return (Func<Func<T>, T>)this.GetCreateProxyFunc(typeof(T));
-    }
+    public Func<Func<T>, T> GetCreateProxyFunc<T>() => (Func<Func<T>, T>)this.GetCreateProxyFunc(typeof(T));
 
     /// <summary>
     /// Получение фабричной функции для создания прокси-типа
@@ -71,7 +70,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
 
         var name = $"{sourceType.ToCSharpFullName()}_{this.baseType.Name}Proxy";
 
-        var typeBuilder = this.moduleBuilder.DefineType(name, TypeAttributes.Public | TypeAttributes.Class | TypeAttributes.Sealed, lazyType, new[] { sourceType });
+        var typeBuilder = this.moduleBuilder.DefineType(name, TypeAttributes.Public | TypeAttributes.Class | TypeAttributes.Sealed, lazyType, [sourceType]);
 
         var getInstanceMethod = lazyType.GetProperty("Value", true).GetGetMethod();
 
@@ -204,7 +203,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
             generator.Emit(OpCodes.Ret);
         }
 
-        var factoryMethodBuilder = typeBuilder.DefineMethod(CreateInstanceMethodName, MethodAttributes.Public | MethodAttributes.Static, sourceType, new[] { funcType });
+        var factoryMethodBuilder = typeBuilder.DefineMethod(CreateInstanceMethodName, MethodAttributes.Public | MethodAttributes.Static, sourceType, [funcType]);
         {
             var generator = factoryMethodBuilder.GetILGenerator();
 

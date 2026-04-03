@@ -2,7 +2,7 @@
 <hibernate-configuration xmlns="urn:nhibernate-configuration-2.2">
     <session-factory>
         <property name="connection.provider">NHibernate.Connection.DriverConnectionProvider</property>
-        <property name="dialect">Framework.DomainDriven.NHibernate.EnhancedMsSql2012Dialect, Framework.DomainDriven.NHibernate</property>
+        <property name="dialect">Framework.Database.NHibernate.Dialect.EnhancedMsSql2012Dialect, Framework.Database.NHibernate.Runtime</property>
         <property name="connection.driver_class">NHibernate.Driver.MicrosoftDataSqlClientDriver</property>
     </session-factory>
 </hibernate-configuration>

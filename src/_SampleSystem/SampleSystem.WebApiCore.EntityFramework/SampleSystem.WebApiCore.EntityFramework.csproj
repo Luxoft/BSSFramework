@@ -2,12 +2,13 @@
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-    <Nullable>enable</Nullable>
+    <RootNamespace>SampleSystem.WebApiCore</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="IvAt.SecuritySystem.Configurator" />
     <PackageReference Include="IvAt.SecuritySystem.VirtualPermission" />
+
     <PackageReference Include="Luxoft.Bss.Platform.Api.Documentation" />
     <PackageReference Include="Luxoft.Bss.Platform.Api.Middlewares" />
     <PackageReference Include="Luxoft.Bss.Platform.Logging" />
@@ -18,10 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.EntityFramework\Framework.DomainDriven.EntityFramework.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Setup\Framework.DomainDriven.Setup.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.WebApiNetCore.Swagger\Framework.DomainDriven.WebApiNetCore.Swagger.csproj" />
+    <ProjectReference Include="..\..\Database\Framework.Database.EntityFramework\Framework.Database.EntityFramework.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Swagger\Framework.Infrastructure.Swagger.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure\Framework.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

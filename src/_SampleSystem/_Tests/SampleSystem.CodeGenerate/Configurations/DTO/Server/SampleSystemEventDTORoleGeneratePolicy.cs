@@ -1,6 +1,6 @@
-using Framework.DomainDriven.DTOGenerator;
-using Framework.DomainDriven.Generation.Domain;
-using Framework.DomainDriven.Serialization;
+﻿using Framework.BLL.Domain.Serialization;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
+using Framework.CodeGeneration.GeneratePolicy;
 
 namespace SampleSystem.CodeGenerate.ServerDTO;
 

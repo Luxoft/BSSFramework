@@ -6,20 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.SecuritySystem.GeneralPermission" />
-    <PackageReference Include="IvAt.SecuritySystem.Notification.Abstractions" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framework.Authorization.Domain.Models\Framework.Authorization.Domain.Models.csproj" />
+    <PackageReference Include="IvAt.SecuritySystem.GeneralPermission.Abstractions" />
+    <PackageReference Include="IvAt.SecuritySystem.Notification.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="_Generated\" />
+    <ProjectReference Include="..\Framework.Authorization.Domain.Models\Framework.Authorization.Domain.Models.csproj" />
+
+    <ProjectReference Include="..\..\BLL\Framework.BLL.Abstractions\Framework.BLL.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

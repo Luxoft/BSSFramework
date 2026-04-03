@@ -1,7 +1,7 @@
-﻿using Framework.Configuration.Domain;
+﻿using Framework.BLL;
+using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Lock;
+using Framework.Database;
 
 namespace Framework.Configuration.BLL;
 

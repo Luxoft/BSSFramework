@@ -1,10 +1,8 @@
-﻿using Automation.ServiceEnvironment;
-using Automation.Utils;
-
-using Framework.Configuration.Domain;
-using Framework.Configuration.Generated.DTO;
+﻿using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
+using Framework.AutomationCore.Utils;
+using Framework.BLL;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
@@ -15,30 +13,6 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 
 public partial class DataHelper
 {
-    public ExceptionMessageIdentityDTO SaveExceptionMessage(
-            Guid? id = null,
-            string? message = null)
-    {
-        return this.EvaluateWrite(
-                                  context =>
-                                  {
-                                      var bll = context.Configuration.Logics.ExceptionMessage;
-                                      var exceptionMessage = bll.GetById(this.GetGuid(id));
-
-                                      if (exceptionMessage == null)
-                                      {
-                                          exceptionMessage = new ExceptionMessage()
-                                                             {
-                                                                     Message = message
-                                                             };
-
-                                          bll.Insert(exceptionMessage, this.GetGuid(id));
-                                      }
-
-                                      return exceptionMessage.ToIdentityDTO();
-                                  });
-    }
-
     public CountryIdentityDTO SaveCountry(
             Guid? id = null,
             string? name = null,
@@ -189,7 +163,7 @@ public partial class DataHelper
         var businessUnitTypeController = this.RootServiceProvider.GetDefaultControllerEvaluator<BusinessUnitTypeController>();
         var buTypeStrict = new BusinessUnitTypeStrictDTO(businessUnitTypeController.Evaluate(c => c.GetFullBusinessUnitType(type.ToIdentityDTO())));
 
-        possibleParents = possibleParents ?? new List<BusinessUnitTypeIdentityDTO>();
+        possibleParents = possibleParents ?? [];
         possibleParents.Add(type.ToIdentityDTO());
 
         var possibleParentsList =

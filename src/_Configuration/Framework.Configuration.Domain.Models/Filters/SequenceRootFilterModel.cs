@@ -1,6 +1,3 @@
 ﻿namespace Framework.Configuration.Domain;
 
-public class SequenceRootFilterModel : DomainObjectFilterModel<Sequence>
-{
-
-}
+public class SequenceRootFilterModel : DomainObjectFilterModel<Sequence>;

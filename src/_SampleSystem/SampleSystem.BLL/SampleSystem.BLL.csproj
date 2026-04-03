@@ -1,14 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+    <PackageReference Include="IvAt.OData.Abstractions" />
+
+    <PackageReference Include="Luxoft.Bss.Platform.Events.Abstractions" />
+
+    <PackageReference Include="IvAt.CommonFramework.DependencyInjection" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BLL\Framework.BLL\Framework.BLL.csproj" />
     <ProjectReference Include="..\SampleSystem.BLL.Core\SampleSystem.BLL.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Context\" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.DTOGenerator.Audit;
+﻿using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
 
 using SampleSystem.CodeGenerate.Configurations.Services.Audit;
 
@@ -55,5 +55,5 @@ public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
         this.AuditDTO = new AuditDTOGeneratorConfiguration(this);
     }
 
-    public IAuditDTOGeneratorConfigurationBase<IAuditDTOGenerationEnvironmentBase> AuditDTO { get; }
+    public IAuditDTOGeneratorConfiguration<IAuditDTOGenerationEnvironment> AuditDTO { get; }
 }

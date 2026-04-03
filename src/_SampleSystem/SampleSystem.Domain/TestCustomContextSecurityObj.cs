@@ -1,8 +1,6 @@
-﻿using Framework.DomainDriven.BLL;
+﻿using Framework.BLL.Domain.ServiceRole;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-public class TestCustomContextSecurityObj : BaseDirectory
-{
-}
+public class TestCustomContextSecurityObj : BaseDirectory;

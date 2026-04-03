@@ -4,17 +4,12 @@ using System.Reflection.Emit;
 
 using CommonFramework;
 
-namespace Framework.Core;
+namespace Framework.Core.AnonymousTypeBuilder;
 
-public class AnonymousTypeByPropertyBuilder<TMap, TMapMember> : AnonymousTypeByMemberBuilder<TMap, TMapMember, PropertyBuilder>
-        where TMap : class, ITypeMap<TMapMember>
-        where TMapMember : ITypeMapMember
+public class AnonymousTypeByPropertyBuilder<TMap, TMapMember>(IAnonymousTypeBuilderStorage storage) : AnonymousTypeByMemberBuilder<TMap, TMapMember, PropertyBuilder>(storage)
+    where TMap : class, ITypeMap<TMapMember>
+    where TMapMember : ITypeMapMember
 {
-    public AnonymousTypeByPropertyBuilder(IAnonymousTypeBuilderStorage storage) :
-            base(storage)
-    {
-    }
-
     protected override PropertyBuilder ImplementMember(TypeBuilder typeBuilder, TMapMember member)
     {
         var fieldBuilder = typeBuilder.DefineField("_" + member.Name, member.Type, FieldAttributes.Private);
@@ -33,7 +28,8 @@ public class AnonymousTypeByPropertyBuilder<TMap, TMapMember> : AnonymousTypeByM
         }
 
         {
-            var setMethod = typeBuilder.DefineMethod("set_" + member.Name, MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.HideBySig | MethodAttributes.SpecialName, typeof(void), new[] { member.Type });
+            var setMethod = typeBuilder.DefineMethod("set_" + member.Name, MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.HideBySig | MethodAttributes.SpecialName, typeof(void),
+                                                     [member.Type]);
 
             var ilGenerator = setMethod.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ldarg_0);
@@ -50,8 +46,5 @@ public class AnonymousTypeByPropertyBuilder<TMap, TMapMember> : AnonymousTypeByM
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private static readonly Lazy<AnonymousTypeByPropertyBuilder<TMap, TMapMember>> LazyDefault = LazyHelper.Create(() => new AnonymousTypeByPropertyBuilder<TMap, TMapMember>(new AnonymousTypeBuilderStorage("DefaultByProperty_" + typeof(TMap).Name)));
 
-    public static AnonymousTypeByPropertyBuilder<TMap, TMapMember> Default
-    {
-        get { return LazyDefault.Value; }
-    }
+    public static AnonymousTypeByPropertyBuilder<TMap, TMapMember> Default => LazyDefault.Value;
 }

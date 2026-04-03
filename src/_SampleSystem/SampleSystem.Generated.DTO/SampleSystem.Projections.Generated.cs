@@ -7,13 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Framework.Core;
+
 namespace SampleSystem.Generated.DTO
 {
     
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestManualEmployeeProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>
+    public partial class TestManualEmployeeProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>
     {
         
         private string _login;
@@ -51,9 +53,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.BusinessUnitIdentity), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.BusinessUnitIdentity), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitIdentityProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
+    public partial class BusinessUnitIdentityProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
     {
         
         public BusinessUnitIdentityProjectionDTO()
@@ -76,9 +78,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.BusinessUnitProgramClass), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.BusinessUnitProgramClass), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitProgramClassProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
+    public partial class BusinessUnitProgramClassProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
     {
         
         private bool _isNewBusiness;
@@ -161,9 +163,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.CustomCompanyLegalEntity), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.CustomCompanyLegalEntity), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class CustomCompanyLegalEntityProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>
+    public partial class CustomCompanyLegalEntityProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>
     {
         
         private string _aribaStatusDescription;
@@ -172,7 +174,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO _baseObj;
         
-        private CommonFramework.Maybe.Maybe<string> _code;
+        private CommonFramework.Maybe<string> _code;
         
         private SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO _currentObj;
         
@@ -230,7 +232,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe.Maybe<string> Code
+        public CommonFramework.Maybe<string> Code
         {
             get
             {
@@ -291,9 +293,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.CustomTestObjForNested), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.CustomTestObjForNested), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class CustomTestObjForNestedProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO>
+    public partial class CustomTestObjForNestedProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO>
     {
         
         private string _name;
@@ -346,9 +348,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.HerBusinessUnit), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.HerBusinessUnit), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class HerBusinessUnitProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
+    public partial class HerBusinessUnitProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
     {
         
         private string _name;
@@ -401,9 +403,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.MiniBusinessUnitEmployeeRole), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.MiniBusinessUnitEmployeeRole), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class MiniBusinessUnitEmployeeRoleProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleIdentityDTO>
+    public partial class MiniBusinessUnitEmployeeRoleProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleIdentityDTO>
     {
         
         private SampleSystem.Generated.DTO.VisualEmployeeProjectionDTO _employee;
@@ -441,9 +443,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestBusinessUnit), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestBusinessUnit), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestBusinessUnitProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
+    public partial class TestBusinessUnitProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
     {
         
         private string[][] _calcMatrix;
@@ -586,7 +588,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestBusinessUnitType), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestBusinessUnitType), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class TestBusinessUnitTypeProjectionDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
     {
@@ -617,9 +619,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestCustomContextSecurityObjProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO>
+    public partial class TestCustomContextSecurityObjProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO>
     {
         
         private string _name;
@@ -657,9 +659,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestDepartment), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestDepartment), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestDepartmentProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentIdentityDTO>
+    public partial class TestDepartmentProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentIdentityDTO>
     {
         
         private SampleSystem.Generated.DTO.TestLocationProjectionDTO _location;
@@ -727,9 +729,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestEmployee), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestEmployee), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestEmployeeProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>
+    public partial class TestEmployeeProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>
     {
         
         private System.DateTime? _buEndDate;
@@ -740,11 +742,11 @@ namespace SampleSystem.Generated.DTO
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.VisualProjectProjectionDTO> _coreBusinessUnitProjects;
         
-        private CommonFramework.Maybe.Maybe<string> _login;
+        private CommonFramework.Maybe<string> _login;
         
         private string _nameEngFirstName;
         
-        private CommonFramework.Maybe.Maybe<string> _positionName;
+        private CommonFramework.Maybe<string> _positionName;
         
         private string _ppmNameNativeMiddleName;
         
@@ -824,7 +826,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe.Maybe<string> Login
+        public CommonFramework.Maybe<string> Login
         {
             get
             {
@@ -850,7 +852,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe.Maybe<string> PositionName
+        public CommonFramework.Maybe<string> PositionName
         {
             get
             {
@@ -902,9 +904,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestIMRequest), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestIMRequest), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestIMRequestProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.IMRequestIdentityDTO>
+    public partial class TestIMRequestProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.IMRequestIdentityDTO>
     {
         
         private string _message;
@@ -957,9 +959,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestIMRequestDetail), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestIMRequestDetail), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestIMRequestDetailProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO>
+    public partial class TestIMRequestDetailProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO>
     {
         
         public TestIMRequestDetailProjectionDTO()
@@ -982,12 +984,12 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestLegacyEmployee), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestLegacyEmployee), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestLegacyEmployeeProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>
+    public partial class TestLegacyEmployeeProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>
     {
         
-        private CommonFramework.Maybe.Maybe<string> _login;
+        private CommonFramework.Maybe<string> _login;
         
         private System.Guid? _roleId;
         
@@ -1013,7 +1015,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe.Maybe<string> Login
+        public CommonFramework.Maybe<string> Login
         {
             get
             {
@@ -1052,9 +1054,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestLocation), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestLocation), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestLocationProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.LocationIdentityDTO>
+    public partial class TestLocationProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.LocationIdentityDTO>
     {
         
         private string _name;
@@ -1092,14 +1094,14 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestLocationCollectionProperties), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestLocationCollectionProperties), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestLocationCollectionPropertiesProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.LocationIdentityDTO>
+    public partial class TestLocationCollectionPropertiesProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.LocationIdentityDTO>
     {
         
         private System.Guid[] _child_Identities;
         
-        private Framework.Core.Period[] _child_Periods;
+        private Period[] _child_Periods;
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> _children;
         
@@ -1133,7 +1135,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period[] Child_Periods
+        public Period[] Child_Periods
         {
             get
             {
@@ -1207,9 +1209,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestSecurityObjItemProjection), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestSecurityObjItemProjection), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestSecurityObjItemProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO>
+    public partial class TestSecurityObjItemProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO>
     {
         
         private string _name;
@@ -1247,14 +1249,14 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.UnpersitentContainer), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.UnpersitentContainer), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class UnpersitentContainerProjectionDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
     {
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> _locations;
         
-        private Framework.Core.Period[] _periodArray;
+        private Period[] _periodArray;
         
         private SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO _testBU;
         
@@ -1284,7 +1286,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period[] PeriodArray
+        public Period[] PeriodArray
         {
             get
             {
@@ -1323,9 +1325,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.VisualEmployee), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.VisualEmployee), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class VisualEmployeeProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>
+    public partial class VisualEmployeeProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>
     {
         
         private string _nameEngFirstName;
@@ -1363,9 +1365,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.VisualProject), "ProjectionDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.VisualProject), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class VisualProjectProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.ProjectIdentityDTO>
+    public partial class VisualProjectProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ProjectIdentityDTO>
     {
         
         private string _code;

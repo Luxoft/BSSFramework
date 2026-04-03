@@ -1,17 +1,17 @@
 ﻿using System.Data.SqlTypes;
 
-using Automation.Utils.DatabaseUtils;
+using CommonFramework;
 
-using CommonFramework.Maybe;
+using Framework.Application;
+using Framework.Application.Events;
+using Framework.AutomationCore.Utils.DatabaseUtils;
 
 using SampleSystem.Domain;
 
 using Framework.Configuration.Generated.DTO;
-using Framework.DomainDriven;
-using Framework.DomainDriven.NHibernate;
-using Framework.Events;
-using Framework.OData;
-using Framework.Persistent;
+using Framework.Database;
+using Framework.Database.Domain;
+using Framework.Database.NHibernate.Sessions;
 
 using SecuritySystem;
 
@@ -316,8 +316,7 @@ public class EmployeeTests : TestBase
 
     [TestMethod]
     [Ignore]
-    public void EventListenerTest()
-    {
+    public void EventListenerTest() =>
         this.Evaluate(
             DBSessionMode.Write,
             bllContext =>
@@ -327,9 +326,6 @@ public class EmployeeTests : TestBase
                 var impl = writeNhibSession.NativeSession as SessionImpl;
                 return;
             });
-    }
-
-
 
     [TestMethod]
     public void ChangeEmployeeWithoutVersionInfo_RaisedStateException()
@@ -345,28 +341,6 @@ public class EmployeeTests : TestBase
 
         // Assert
         call.Should().Throw<Exception>().WithMessage($"Object '{nameof(Employee)}' was updated or deleted by another transaction");
-    }
-
-    [TestMethod]
-    public void CreateEmployeeFilter_IsNotVirtual()
-    {
-        // Arrange
-        var buIdentity = this.DataHelper.SaveBusinessUnit();
-
-        // Act
-        var isVirtualResult = this.Evaluate(
-            DBSessionMode.Read,
-            ctx =>
-            {
-                var filter = new TestEmployeeFilter { BusinessUnit = ctx.Logics.BusinessUnit.GetById(buIdentity.Id, true) };
-
-                var operation = SelectOperation<Employee>.Default.AddFilter(e => e.CoreBusinessUnit.Id == filter.BusinessUnit.Id);
-
-                return operation.IsVirtual;
-            });
-
-        // Assert
-        isVirtualResult.Should().Be(false);
     }
 
     [TestMethod]

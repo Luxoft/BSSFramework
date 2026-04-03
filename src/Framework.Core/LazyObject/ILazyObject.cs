@@ -1,4 +1,4 @@
-﻿namespace Framework.Core;
+﻿namespace Framework.Core.LazyObject;
 
 /// <summary>
 /// For same lazy object with covariant interface

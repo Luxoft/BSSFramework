@@ -1,5 +1,6 @@
-﻿using Framework.Configuration.BLL;
-using Framework.DomainDriven;
+﻿using Framework.Application;
+using Framework.Configuration.BLL;
+using Framework.Database;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 
@@ -102,19 +103,14 @@ public class SequenceBllTests : TestBase
         number2.Should().Be(3);
     }
 
-    private class SequenceBllMock : SequenceBLL
+    private class SequenceBllMock(
+        AutoResetEvent resetEvent,
+        IConfigurationBLLContext context)
+        : SequenceBLL(context, context.Logics.Sequence.SecurityProvider)
     {
-        private readonly AutoResetEvent resetEvent;
-
-        public SequenceBllMock(
-            AutoResetEvent resetEvent,
-            IConfigurationBLLContext context)
-            : base(context, context.Logics.Sequence.SecurityProvider) =>
-            this.resetEvent = resetEvent;
-
         protected override void LockSequence()
         {
-            this.resetEvent.Set();
+            resetEvent.Set();
             base.LockSequence();
         }
     }

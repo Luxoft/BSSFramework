@@ -1,8 +1,7 @@
-﻿using Automation.ServiceEnvironment;
-
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
+using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+using Framework.BLL;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;

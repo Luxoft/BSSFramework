@@ -1,5 +1,6 @@
-﻿using Framework.Core;
-using Framework.DomainDriven;
+﻿using Framework.Application;
+using Framework.Core;
+using Framework.Database;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
@@ -24,7 +25,7 @@ public class ManagmentUnitFluentMappingTests : TestBase
                       DBSessionMode.Write,
                       c =>
                       {
-                          var employee = c.Logics.Employee.GetById(employeeId.Id);
+                          var employee = c.Logics.Employee.GetById(employeeId.Id)!;
                           var mu = new ManagementUnitFluentMapping
                                    {
                                            Name = "test",

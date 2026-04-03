@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.BLL;
+﻿using Framework.BLL.Domain.ServiceRole;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;
@@ -11,7 +11,7 @@ public class EmployeeRegistrationType : BaseDirectory, IExternalSynchronizable
 
     public virtual long ExternalId
     {
-        get { return this.externalId; }
-        set { this.externalId = value; }
+        get => this.externalId;
+        set => this.externalId = value;
     }
 }

@@ -26,7 +26,7 @@ public class PrincipalTests : TestBase
         var permissionStrict = new PermissionStrictDTO { Role = businessRoleIdentity };
 
         // Act
-        var saveRequest = new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permissionStrict);
+        var saveRequest = new AuthMainController.SavePermissionAutoRequest(principalIdentity, permissionStrict);
         var permissionIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePermission(saveRequest));
 
         // Assert
@@ -47,10 +47,7 @@ public class PrincipalTests : TestBase
         var principalStrict = new PrincipalStrictDTO
                               {
                                       Name = Name,
-                                      Permissions = new List<PermissionStrictDTO>
-                                                    {
-                                                            new PermissionStrictDTO { Role = businessRoleIdentity }
-                                                    }
+                                      Permissions = [new PermissionStrictDTO { Role = businessRoleIdentity }]
                               };
 
         // Act
@@ -100,7 +97,7 @@ public class PrincipalTests : TestBase
 
         var permissionStrict = new PermissionStrictDTO { Role = businessRoleIdentity };
 
-        var saveRequest = new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permissionStrict);
+        var saveRequest = new AuthMainController.SavePermissionAutoRequest(principalIdentity, permissionStrict);
         var permissionIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePermission(saveRequest));
 
         var newPrincipalStrict = new PrincipalStrictDTO { Name = Name };
@@ -144,7 +141,7 @@ public class PrincipalTests : TestBase
 
         var permissionStrict = new PermissionStrictDTO { Role = businessRoleIdentity };
 
-        var saveRequest = new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permissionStrict);
+        var saveRequest = new AuthMainController.SavePermissionAutoRequest(principalIdentity, permissionStrict);
         var permissionIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePermission(saveRequest));
 
         // Act

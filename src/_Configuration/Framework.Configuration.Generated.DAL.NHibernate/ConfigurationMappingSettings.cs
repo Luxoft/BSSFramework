@@ -1,6 +1,6 @@
 ﻿using Framework.Configuration.Domain;
-using Framework.DomainDriven;
-using Framework.DomainDriven.NHibernate;
+using Framework.Database;
+using Framework.Database.NHibernate._MappingSettings;
 
 namespace Framework.Configuration.Generated.DAL.NHibernate;
 

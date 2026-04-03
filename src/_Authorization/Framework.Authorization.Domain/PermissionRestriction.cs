@@ -1,7 +1,7 @@
-﻿using Framework.DomainDriven.Serialization;
-using Framework.DomainDriven.Tracking.LegacyValidators;
-using Framework.Persistent;
+﻿using Framework.BLL.Domain.Serialization;
+using Framework.Relations;
 using Framework.Restriction;
+using Framework.Tracking.Validation;
 
 namespace Framework.Authorization.Domain;
 
@@ -38,8 +38,8 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual Permission Permission
     {
-        get { return this.permission; }
-        set { this.permission = value; }
+        get => this.permission;
+        set => this.permission = value;
     }
 
     /// <summary>

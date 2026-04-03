@@ -4,7 +4,7 @@ using System.Xml;
 
 using Framework.Core.Serialization;
 
-namespace Framework.Core;
+namespace Framework.Core.Helpers;
 
 public static class DataContractSerializerHelper
 {
@@ -68,8 +68,5 @@ public static class DataContractSerializerHelper
     }
 
 
-    public static ISerializer<string, T> GetSerializer<T>()
-    {
-        return new Serializer<string, T> (Deserialize<T>, value => Serialize(value));
-    }
+    public static ISerializer<string, T> GetSerializer<T>() => new Serializer<string, T> (Deserialize<T>, value => Serialize(value));
 }

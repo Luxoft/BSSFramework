@@ -1,7 +1,8 @@
-﻿using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Serialization;
-using Framework.Persistent.Mapping;
+﻿using Framework.BLL.Domain.Serialization;
+using Framework.BLL.Domain.ServiceRole.Base;
+using Framework.Core;
+using Framework.Database.Mapping;
+
 using SecuritySystem;
 
 namespace SampleSystem.Domain;
@@ -14,7 +15,7 @@ public class ManagementUnitFluentMapping :
         IPeriodObject,
         ISecurityContext
 {
-    private readonly IList<ManagementUnitFluentMapping> children = new List<ManagementUnitFluentMapping>();
+    private readonly ICollection<ManagementUnitFluentMapping> children = new List<ManagementUnitFluentMapping>();
 
     private ManagementUnitFluentMapping parent;
 

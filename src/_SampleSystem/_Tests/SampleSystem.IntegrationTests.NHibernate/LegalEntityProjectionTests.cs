@@ -1,9 +1,8 @@
-﻿using Automation.ServiceEnvironment;
+﻿using CommonFramework;
 
-using CommonFramework;
-
+using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+using Framework.BLL;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Projections;

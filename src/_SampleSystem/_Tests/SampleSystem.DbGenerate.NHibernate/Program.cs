@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace SampleSystem.DbGenerate;
+namespace SampleSystem.DbGenerate.NHibernate;
 
 public static class Program
 {

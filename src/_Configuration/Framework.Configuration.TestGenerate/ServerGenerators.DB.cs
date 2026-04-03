@@ -1,5 +1,5 @@
-﻿using Framework.DomainDriven;
-using Framework.DomainDriven.DBGenerator;
+﻿using Framework.Database;
+using Framework.Database.NHibernate.DBGenerator;
 
 namespace Framework.Configuration.TestGenerate;
 

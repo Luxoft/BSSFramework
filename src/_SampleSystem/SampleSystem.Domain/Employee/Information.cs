@@ -1,5 +1,5 @@
-﻿using Framework.Core;
-using Framework.DomainDriven.BLL;
+﻿using Framework.BLL.Domain.ServiceRole;
+using Framework.Core;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;
@@ -13,7 +13,7 @@ public class Information : BaseDirectory
     [MaxLength(50)]
     public virtual string Email
     {
-        get { return this.email.TrimNull(); }
-        set { this.email = value.TrimNull(); }
+        get => this.email.TrimNull();
+        set => this.email = value.TrimNull();
     }
 }

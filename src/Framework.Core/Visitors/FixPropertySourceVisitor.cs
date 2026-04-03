@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
-using CommonFramework.Maybe;
+using CommonFramework;
 
 namespace Framework.Core.Visitors;
 
@@ -10,7 +10,7 @@ namespace Framework.Core.Visitors;
 /// </summary>
 public class FixPropertySourceVisitor : ExpressionVisitor
 {
-    public static readonly FixPropertySourceVisitor Value = new FixPropertySourceVisitor();
+    public static readonly FixPropertySourceVisitor Value = new();
 
 
     private FixPropertySourceVisitor()

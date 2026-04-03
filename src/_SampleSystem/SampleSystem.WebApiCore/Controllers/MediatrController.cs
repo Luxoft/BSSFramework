@@ -1,5 +1,5 @@
-﻿using Framework.DomainDriven;
-using Framework.DomainDriven.WebApiNetCore;
+﻿using Framework.Database;
+using Framework.Infrastructure;
 
 using MediatR;
 

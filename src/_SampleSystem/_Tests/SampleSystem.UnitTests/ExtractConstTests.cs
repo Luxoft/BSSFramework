@@ -5,7 +5,7 @@ using CommonFramework;
 using FluentAssertions;
 
 using Framework.Core;
-using Framework.DomainDriven._Visitors;
+using Framework.Database._Visitors;
 
 using Xunit;
 

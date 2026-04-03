@@ -1,5 +1,4 @@
-﻿namespace Framework.Core;
+﻿// ReSharper disable once CheckNamespace
+namespace Framework.Core;
 
-public class BreakException : Exception
-{
-}
+public class BreakException : Exception;

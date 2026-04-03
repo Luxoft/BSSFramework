@@ -16,7 +16,7 @@ public sealed class CountryCreateSubscription
         this.ConditionLambda = new ConditionLambda();
         this.GenerationLambda = new GenerationLambda();
         this.CopyGenerationLambda = new CopyGenerationLambda();
-        this.RecepientsSelectorMode = Framework.Configuration.RecepientsSelectorMode.Union;
+        this.RecipientsSelectorMode = Framework.Subscriptions.Domain.RecipientsSelectorMode.Union;
         this.SendIndividualLetters = true;
         this.ExcludeCurrentUser = true;
         this.IncludeAttachments = false;

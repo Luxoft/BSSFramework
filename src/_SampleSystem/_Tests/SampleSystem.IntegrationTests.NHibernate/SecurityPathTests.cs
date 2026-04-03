@@ -1,4 +1,6 @@
-﻿using Framework.DomainDriven;
+﻿using Framework.Application;
+using Framework.Database;
+
 using SecuritySystem;
 using SecuritySystem.Services;
 using Microsoft.Extensions.DependencyInjection;

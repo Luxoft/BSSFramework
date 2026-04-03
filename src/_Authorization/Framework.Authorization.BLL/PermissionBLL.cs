@@ -1,9 +1,9 @@
 ﻿using CommonFramework;
 
 using Framework.Authorization.Domain;
+using Framework.BLL.Domain.Exceptions;
 using Framework.Core;
-using Framework.Exceptions;
-using Framework.Persistent;
+using Framework.Relations;
 using Framework.Validation;
 
 namespace Framework.Authorization.BLL;

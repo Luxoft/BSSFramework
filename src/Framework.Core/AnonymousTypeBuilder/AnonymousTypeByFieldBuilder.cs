@@ -4,29 +4,16 @@ using System.Reflection.Emit;
 
 using CommonFramework;
 
-namespace Framework.Core;
+namespace Framework.Core.AnonymousTypeBuilder;
 
-public class AnonymousTypeByFieldBuilder<TMap, TMapMember> : AnonymousTypeByMemberBuilder<TMap, TMapMember, FieldBuilder>
-        where TMap : class, ITypeMap<TMapMember>
-        where TMapMember : ITypeMapMember
+public class AnonymousTypeByFieldBuilder<TMap, TMapMember>(IAnonymousTypeBuilderStorage storage) : AnonymousTypeByMemberBuilder<TMap, TMapMember, FieldBuilder>(storage)
+    where TMap : class, ITypeMap<TMapMember>
+    where TMapMember : ITypeMapMember
 {
-    public AnonymousTypeByFieldBuilder(IAnonymousTypeBuilderStorage storage) : base(storage)
-    {
-
-    }
-
-
-    protected override FieldBuilder ImplementMember(TypeBuilder typeBuilder, TMapMember member)
-    {
-        return typeBuilder.DefineField(member.Name, member.Type, FieldAttributes.Public);
-    }
-
+    protected override FieldBuilder ImplementMember(TypeBuilder typeBuilder, TMapMember member) => typeBuilder.DefineField(member.Name, member.Type, FieldAttributes.Public);
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private static readonly Lazy<AnonymousTypeByFieldBuilder<TMap, TMapMember>> LazyDefault = LazyHelper.Create(() => new AnonymousTypeByFieldBuilder<TMap, TMapMember>(new AnonymousTypeBuilderStorage("DefaultByField_" + typeof(TMap).Name)));
 
-    public static AnonymousTypeByFieldBuilder<TMap, TMapMember> Default
-    {
-        get { return LazyDefault.Value; }
-    }
+    public static AnonymousTypeByFieldBuilder<TMap, TMapMember> Default => LazyDefault.Value;
 }

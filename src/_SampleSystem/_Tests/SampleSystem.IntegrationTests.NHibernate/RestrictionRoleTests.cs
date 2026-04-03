@@ -1,5 +1,7 @@
-﻿using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
+﻿using Framework.Application;
+using Framework.BLL;
+using Framework.Database;
+
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;

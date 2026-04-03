@@ -1,5 +1,6 @@
-﻿using Framework.Core;
-using Framework.Persistent;
+﻿using Framework.Application.Domain;
+using Framework.BLL.Domain.Attributes;
+using Framework.Core;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;
@@ -19,12 +20,9 @@ public abstract class BaseDirectory : AuditPersistentDomainObjectBase, IVisualId
     [UniqueElement]
     public virtual string Name
     {
-        get { return this.name.TrimNull(); }
-        set { this.name = value.TrimNull(); }
+        get => this.name.TrimNull();
+        set => this.name = value.TrimNull();
     }
 
-    public override string ToString()
-    {
-        return this.Name;
-    }
+    public override string ToString() => this.Name;
 }

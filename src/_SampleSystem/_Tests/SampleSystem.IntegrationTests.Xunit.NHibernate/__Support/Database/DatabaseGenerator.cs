@@ -1,13 +1,12 @@
-﻿using Automation.Settings;
-using Automation.Utils.DatabaseUtils;
-using Automation.Utils.DatabaseUtils.Interfaces;
-
-using Framework.DomainDriven.DBGenerator;
+﻿using Framework.AutomationCore.Settings;
+using Framework.AutomationCore.Utils.DatabaseUtils;
+using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
+using Framework.Database.NHibernate.DBGenerator;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
-using SampleSystem.DbGenerate;
+using SampleSystem.DbGenerate.NHibernate;
 using SampleSystem.IntegrationTests.__Support.FluentMigration;
 using SampleSystem.IntegrationTests.Xunit.NHibernate.__Support.TestData;
 
@@ -21,15 +20,13 @@ public class DatabaseGenerator(
 {
     public override IEnumerable<string> TestServers => new List<string> { "." };
 
-    public override async Task GenerateDatabasesAsync()
-    {
+    public override async Task GenerateDatabasesAsync() =>
         new DbGeneratorTest().GenerateAllDB(
             this.DatabaseContext.Main.DataSource,
             mainDatabaseName: this.DatabaseContext.Main.DatabaseName,
             credential: DbUserCredential.Create(
                 this.DatabaseContext.Main.UserId,
                 this.DatabaseContext.Main.Password));
-    }
 
     public override async Task CheckTestDatabaseAsync()
     {

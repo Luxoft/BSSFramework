@@ -1,11 +1,5 @@
-﻿using Framework.DomainDriven.BLLGenerator;
+﻿using Framework.CodeGeneration.BLLGenerator.Configuration;
 
-namespace Framework.Configuration.TestGenerate;
+namespace Framework.Configuration.TestGenerate.Configurations.BLL;
 
-public class BLLGeneratorConfiguration : GeneratorConfigurationBase<ServerGenerationEnvironment>
-{
-    public BLLGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
-    {
-    }
-}
+public class BLLGeneratorConfiguration(ConfigurationGenerationEnvironment environment) : BLLGeneratorConfigurationBase<ConfigurationGenerationEnvironment>(environment);

@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.DALExceptions;
+﻿using Framework.Database.DALExceptions;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 

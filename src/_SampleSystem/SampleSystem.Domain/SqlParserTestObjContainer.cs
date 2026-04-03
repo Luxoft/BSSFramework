@@ -1,6 +1,6 @@
-﻿using Framework.DomainDriven.BLL;
+﻿using Framework.BLL.Domain.DTO;
+using Framework.BLL.Domain.ServiceRole;
 using Framework.Restriction;
-using Framework.Transfering;
 
 namespace SampleSystem.Domain;
 
@@ -13,7 +13,7 @@ public class SqlParserTestObjContainer : AuditPersistentDomainObjectBase
 
     public virtual SqlParserTestObj IncludedObject
     {
-        get { return this.includedObject; }
-        set { this.includedObject = value; }
+        get => this.includedObject;
+        set => this.includedObject = value;
     }
 }

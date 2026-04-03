@@ -1,4 +1,5 @@
-﻿namespace Framework.Core;
+﻿// ReSharper disable once CheckNamespace
+namespace Framework.Core;
 
 public static class PeriodObjectExtensions
 {
@@ -55,11 +56,9 @@ public static class PeriodObjectExtensions
     }
 
     public static IEnumerable<Period> GetPeriods<TItem>(this IEnumerable<TItem> source)
-            where TItem : IPeriodObject
-    {
-        return from item in source
-               select item.Period into period
-               orderby period
-               select period;
-    }
+            where TItem : IPeriodObject =>
+        from item in source
+        select item.Period into period
+        orderby period
+        select period;
 }

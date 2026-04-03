@@ -58,7 +58,7 @@ public class ManagementUnitFluentMappingMap : ClassMap<ManagementUnitFluentMappi
   <key column="[parentId]" />
   <one-to-many class="SampleSystem.Domain.ManagementUnitFluentMapping" />
 </set>
-<component name="Period" class="Framework.Core.Period, Framework.Core" access="field.camelcase">
+<component name="Period" class="Framework.Core, Framework.Core" access="field.camelcase">
   <property name="EndDate" column="[periodendDate]" access="field.camelcase" type="timestamp" />
   <property name="StartDate" column="[periodstartDate]" access="field.camelcase" type="timestamp" />
 </component>

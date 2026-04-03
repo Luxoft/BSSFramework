@@ -1,9 +1,9 @@
-﻿using Automation.ServiceEnvironment;
-using Automation.Utils;
-
+﻿using Framework.Application;
+using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+using Framework.AutomationCore.Utils;
+using Framework.BLL.Domain.Persistent;
 using Framework.Core;
-using Framework.DomainDriven;
-using Framework.Persistent;
+using Framework.Database;
 
 using SecuritySystem;
 
@@ -70,7 +70,7 @@ public class BusinessUnitTests : TestBase
 
         // Assert
         businessUnitTree.TotalCount.Should().Be(2);
-        businessUnitTree.Items.Count.Should().Be(2);
+        businessUnitTree.Items.Length.Should().Be(2);
 
         businessUnitTree.Items.Should().Contain(node => node.Item.Name == DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME && !node.OnlyView);
         businessUnitTree.Items.Should()
@@ -94,7 +94,7 @@ public class BusinessUnitTests : TestBase
 
         // Assert
         businessUnitTree.TotalCount.Should().Be(0);
-        businessUnitTree.Items.Count.Should().Be(0);
+        businessUnitTree.Items.Length.Should().Be(0);
     }
 
     // Two test in one for performance reasons
@@ -146,7 +146,7 @@ public class BusinessUnitTests : TestBase
 
         // Assert
         businessUnitTree.TotalCount.Should().Be(ParentsCount + ExistedBusinessUnitsInDatabase);
-        businessUnitTree.Items.Count.Should().Be(ParentsCount + ExistedBusinessUnitsInDatabase);
+        businessUnitTree.Items.Length.Should().Be(ParentsCount + ExistedBusinessUnitsInDatabase);
     }
 
     private void TestGetFullBusinessUnitsTree()

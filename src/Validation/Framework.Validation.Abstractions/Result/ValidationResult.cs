@@ -1,0 +1,107 @@
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
+
+using CommonFramework;
+
+using Framework.Core;
+
+namespace Framework.Validation;
+
+public class ValidationResult
+{
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private readonly Lazy<ReadOnlyCollection<ValidationExceptionBase>> lazyErrors;
+
+    internal ValidationResult(IEnumerable<ValidationExceptionBase> errors)
+    {
+        if (errors == null) throw new ArgumentNullException(nameof(errors));
+
+        this.lazyErrors = LazyHelper.Create(() => errors.ToReadOnlyCollection());
+    }
+
+    public ReadOnlyCollection<ValidationExceptionBase> Errors => this.lazyErrors.Value;
+
+    public bool HasErrors => this.Errors.Any();
+
+    public void TryThrow() =>
+        this.Errors.Match(
+            () => { },
+            ex => { throw ex; },
+            exceptions => { throw new AggregateValidationException(exceptions); });
+
+    public override string ToString() => this.Errors.Select(z => z.Message).Join(Environment.NewLine);
+
+    public static ValidationResult FromCondition(bool isSuccess, Func<string> getErrorMessage)
+    {
+        if (getErrorMessage == null) throw new ArgumentNullException(nameof(getErrorMessage));
+
+        return FromCondition(isSuccess, () => new ValidationException(getErrorMessage()));
+    }
+
+    public static ValidationResult FromMaybe(Maybe<string> maybeErrorMessage) =>
+        maybeErrorMessage.Match(str => CreateError(new ValidationException(str)),
+                                () => Success);
+
+    public static ValidationResult FromCondition(bool isSuccess, Func<ValidationExceptionBase> getError)
+    {
+        if (getError == null) throw new ArgumentNullException(nameof(getError));
+
+        return isSuccess ? Success
+                       : CreateError(getError());
+    }
+
+    public static ValidationResult TryCatch(Action action)
+    {
+        if (action == null) throw new ArgumentNullException(nameof(action));
+
+        try
+        {
+            action();
+            return Success;
+        }
+        catch (Exception ex)
+        {
+            return CreateError(ex.Message);
+        }
+    }
+
+    public static ValidationResult CreateError(string format, params object[] args) => CreateError(string.Format(format, args));
+
+    public static ValidationResult CreateError(string message)
+    {
+        if (message == null) throw new ArgumentNullException(nameof(message));
+
+        return new ValidationResult([new ValidationException(message)]);
+    }
+
+    public static ValidationResult CreateError(object exceptionObject) =>
+        (exceptionObject as string).ToMaybe().Select(CreateError)
+                                   .Or(() => (exceptionObject as ValidationExceptionBase).ToMaybe().Select(CreateError))
+                                   .Or(() => (exceptionObject as Exception).ToMaybe().Select(error => CreateError(new ValidationException(error.Message, error))))
+                                   .GetValue(() => new Exception("Invalid exceptionObject"));
+
+    public static ValidationResult CreateError(ValidationExceptionBase exception)
+    {
+        if (exception == null) throw new ArgumentNullException(nameof(exception));
+
+        return new ValidationResult([exception]);
+    }
+
+    public static readonly ValidationResult Success = new(Array.Empty<ValidationExceptionBase>().ToReadOnlyCollection());
+
+    public static ValidationResult operator +(ValidationResult result1, ValidationResult result2)
+    {
+        if (!result1.HasErrors)
+        {
+            return result2;
+        }
+        else if (!result2.HasErrors)
+        {
+            return result1;
+        }
+        else
+        {
+            return new ValidationResult(result1.Errors.Union(result2.Errors));
+        }
+    }
+}

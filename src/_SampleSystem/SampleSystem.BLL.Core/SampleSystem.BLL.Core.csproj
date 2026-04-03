@@ -6,19 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.BLL.Core\Framework.Authorization.BLL.Core.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.BLL.Core\Framework.Configuration.BLL.Core.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL.Security\Framework.DomainDriven.BLL.Security.csproj" />
-    <ProjectReference Include="..\SampleSystem.Domain.Projections\SampleSystem.Domain.Projections.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.LegacyProjections\SampleSystem.Domain.LegacyProjections.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.ManualProjections\SampleSystem.Domain.ManualProjections.csproj" />
+    <ProjectReference Include="..\SampleSystem.Domain.Projections\SampleSystem.Domain.Projections.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Luxoft.Bss.Platform.Events.Abstractions" />
+    <PackageReference Include="IvAt.OData.Abstractions" />
   </ItemGroup>
 
 </Project>

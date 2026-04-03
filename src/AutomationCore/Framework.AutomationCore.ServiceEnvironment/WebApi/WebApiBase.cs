@@ -1,0 +1,3 @@
+﻿namespace Framework.AutomationCore.ServiceEnvironment.WebApi;
+
+public abstract class WebApiBase(IServiceProvider rootServiceProvider) : RootServiceProviderContainer.RootServiceProviderContainer(rootServiceProvider);

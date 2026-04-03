@@ -1,33 +1,19 @@
-﻿using Framework.DomainDriven.BLL;
-
-using GenericQueryable.Fetching;
+﻿using GenericQueryable.Fetching;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Filters;
+
+using Framework.BLL;
 
 namespace SampleSystem.BLL;
 
 public partial class EmployeeBLL
 {
-    public Employee GetCurrent()
-    {
-        return this.GetObjectBy(employee => employee.Login == this.Context.Authorization.CurrentUser.Name);
-    }
+    public Employee ChangeByEmail(EmployeeEmailChangeModel changeModel) => throw new NotImplementedException();
 
-    public Employee ChangeByEmail(EmployeeEmailChangeModel changeModel)
-    {
-        throw new NotImplementedException();
-    }
+    public EmployeeEmailChangeModel GetChangeByEmail(Employee employee) => throw new NotImplementedException();
 
-    public EmployeeEmailChangeModel GetChangeByEmail(Employee employee)
-    {
-        throw new NotImplementedException();
-    }
-
-    public List<Employee> GetListBy(EmployeeFilterModel filter, FetchRule<Employee> fetchs)
-    {
-        throw new NotImplementedException();
-    }
+    public List<Employee> GetListBy(EmployeeFilterModel filter, FetchRule<Employee> fetchs) => throw new NotImplementedException();
 
     public EmployeeEmailMassChangeModel GetMassChangeByEmail(List<Employee> employees)
     {
@@ -36,10 +22,7 @@ public partial class EmployeeBLL
         return new EmployeeEmailMassChangeModel { ChangingObjects = employees };
     }
 
-    public Employee IntegrationSave(EmployeeCustomIntegrationSaveModel integrationSaveModel)
-    {
-        throw new NotImplementedException();
-    }
+    public Employee IntegrationSave(EmployeeCustomIntegrationSaveModel integrationSaveModel) => throw new NotImplementedException();
 
     /// <summary>
     /// Изменением всем сотрудникам из модели email

@@ -1,99 +1,66 @@
-﻿using System.Linq.Expressions;
+﻿using System.Collections.Concurrent;
+using System.Linq.Expressions;
 
-using CommonFramework.DictionaryCache;
 using CommonFramework.ExpressionEvaluate;
 
 using Framework.Core;
-
-using Framework.Exceptions;
+using Framework.ExpressionParsers._CSharp;
+using Framework.ExpressionParsers.Native;
 
 namespace Framework.ExpressionParsers;
 
-public abstract class ExpressionParser<TDelegate>(INativeExpressionParser parser)
-    : ExpressionParser<TDelegate, Expression<TDelegate>>(parser, expr => LambdaCompileCache.GetFunc(expr))
-    where TDelegate : class
+public class ExpressionParser<TDelegate>(INativeExpressionParser parser, ILambdaCompileCache lambdaCompileCache)
+    : ExpressionParser<TDelegate, Expression<TDelegate>>
+    where TDelegate : Delegate
 {
-    protected override Expression<TDelegate> GetInternalExpression(string value)
+    public ExpressionParser(INativeExpressionParser parser)
+        : this(parser, new LambdaCompileCache(LambdaCompileMode.None))
     {
-        return this.Parser.Parse<TDelegate>(value);
     }
 
+    public ExpressionParser()
+        : this(CSharpNativeExpressionParser.Compile)
+    {
+    }
 
-    private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.None);
+    protected override Expression<TDelegate> GetInternalExpression(string value) => parser.Parse<TDelegate>(value);
+
+    protected override TDelegate CompileExpression(Expression<TDelegate> expression) => lambdaCompileCache.GetFunc(expression);
 }
 
-public abstract class ExpressionParser<TDelegate, TExpression> : NativeExpressionParserContainer,
-
-                                                                 IExpressionParser<string, TDelegate, TExpression>
-
-        where TDelegate : class
-        where TExpression : LambdaExpression
+public abstract class ExpressionParser<TDelegate, TExpression> : IExpressionParser<string, TDelegate, TExpression>
+    where TDelegate : Delegate
+    where TExpression : LambdaExpression
 {
-    private readonly IDictionaryCache<string, TExpression> _expressionCache;
+    private readonly ConcurrentDictionary<string, TExpression> expressionCache = [];
 
-    private readonly IDictionaryCache<string, TDelegate> _delegateCache;
+    private readonly ConcurrentDictionary<string, TDelegate> delegateCache = [];
 
+    public Type ExpressionType => typeof(TDelegate);
 
-    protected ExpressionParser(INativeExpressionParser parser, Func<TExpression, TDelegate> compileFunc)
-            : base (parser)
-    {
-        if (parser == null) throw new ArgumentNullException(nameof(parser));
-        if (compileFunc == null) throw new ArgumentNullException(nameof(compileFunc));
-
-        this._expressionCache = new DictionaryCache<string, TExpression>(this.GetInternalExpression).WithLock();
-        this._delegateCache = new DictionaryCache<string, TDelegate>(str => compileFunc(this._expressionCache[str])).WithLock();
-    }
-
-
-    public Type ExpressionType
-    {
-        get { return typeof(TDelegate); }
-    }
-
-    public virtual string ExpectedFormat
-    {
-        get { return $"\"{this.ExpressionType.ToCSharpShortName()}\""; }
-    }
-
+    public virtual string ExpectedFormat => $"\"{this.ExpressionType.ToCSharpShortName()}\"";
 
     protected abstract TExpression GetInternalExpression(string value);
 
+    protected abstract TDelegate CompileExpression(TExpression expression);
 
-    protected TResult TryWrapOperation<TResult>(string value, bool wrapError, Func<TResult> getResult)
-    {
-        if (value == null) throw new ArgumentNullException(nameof(value));
-        if (getResult == null) throw new ArgumentNullException(nameof(getResult));
-
-        try
-        {
-            return getResult();
-        }
-        catch (Exception ex)
-        {
-            if (wrapError)
+    public TExpression GetExpression(string value) =>
+        this.expressionCache.GetOrAdd(
+            value,
+            _ =>
             {
-                throw new BusinessLogicException(ex, $"Can't parse value: \"{value}\". Expected format: {this.ExpectedFormat}");
-            }
-            else
-            {
-                throw;
-            }
-        }
-    }
+                try
+                {
+                    return this.GetInternalExpression(value);
+                }
+                catch (Exception ex)
+                {
+                    throw new ExpressionParingException($"Can't parse value: \"{value}\". Expected format: {this.ExpectedFormat}", ex);
+                }
+            });
 
+    public TDelegate GetDelegate(string value) =>
+        this.delegateCache.GetOrAdd(value, _ => this.CompileExpression(this.GetExpression(value)));
 
-    public TExpression GetExpression(string value, bool wrapError = true)
-    {
-        return this.TryWrapOperation(value, wrapError, () => this._expressionCache[value]);
-    }
-
-    public TDelegate GetDelegate(string value, bool wrapError = true)
-    {
-        return this.TryWrapOperation(value, wrapError, () => this._delegateCache[value]);
-    }
-
-    public virtual void Validate(string source)
-    {
-        this.GetExpression(source);
-    }
+    public virtual void Validate(string source) => this.GetExpression(source);
 }

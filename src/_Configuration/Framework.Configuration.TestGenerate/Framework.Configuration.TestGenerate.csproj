@@ -1,21 +1,27 @@
 <Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Configuration.TestGenerate</PackageId>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="MSTest.TestAdapter" />
     <PackageReference Include="MSTest.TestFramework" />
   </ItemGroup>
+
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLLGenerator\Framework.DomainDriven.BLLGenerator.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.DBGenerator\Framework.DomainDriven.DBGenerator.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.NHibernate.DALGenerator\Framework.DomainDriven.NHibernate.DALGenerator.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModelGenerator\Framework.DomainDriven.ServiceModelGenerator.csproj" />
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\CodeGeneration\Framework.CodeGeneration.WebApiGenerator\Framework.CodeGeneration.WebApiGenerator.csproj" />
     <ProjectReference Include="..\Framework.Configuration.Domain.Models\Framework.Configuration.Domain.Models.csproj" />
+
+    <ProjectReference Include="..\..\CodeGeneration\Framework.CodeGeneration.ServiceModelGenerator\Framework.CodeGeneration.ServiceModelGenerator.csproj" />
+    <ProjectReference Include="..\..\CodeGeneration\Framework.CodeGeneration.BLLGenerator\Framework.CodeGeneration.BLLGenerator.csproj" />
+    <ProjectReference Include="..\..\Database\Framework.Database.NHibernate.DBGenerator\Framework.Database.NHibernate.DBGenerator.csproj" />
+    <ProjectReference Include="..\..\Projection\Framework.Projection.Runtime\Framework.Projection.Runtime.csproj" />
   </ItemGroup>
+
 </Project>

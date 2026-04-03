@@ -1,0 +1,23 @@
+﻿using Framework.Application.Events;
+
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Framework.Infrastructure.DependencyInjection;
+
+public class SubscriptionManagerSetupObject : ISubscriptionManagerSetupObject
+{
+    private readonly List<Action<IServiceCollection>> initActions = [];
+
+    public IReadOnlyList<Action<IServiceCollection>> InitActions => this.initActions;
+
+    public ISubscriptionManagerSetupObject Add<TSubscriptionManager>()
+        where TSubscriptionManager : class, IEventOperationReceiver
+    {
+        this.initActions.Add(
+            services =>
+                services.AddScoped<IEventOperationReceiver, TSubscriptionManager>()
+                        .AddKeyedScoped<IEventOperationReceiver, TSubscriptionManager>("BLL"));
+
+        return this;
+    }
+}

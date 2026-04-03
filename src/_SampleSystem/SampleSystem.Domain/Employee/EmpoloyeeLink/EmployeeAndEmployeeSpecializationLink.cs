@@ -1,6 +1,6 @@
 ﻿using CommonFramework;
 
-using Framework.Persistent;
+using Framework.Relations;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain;
@@ -17,10 +17,8 @@ public class EmployeeAndEmployeeSpecializationLink : AuditPersistentDomainObject
     }
 
     public EmployeeAndEmployeeSpecializationLink(Employee employee, EmployeeSpecialization specialization)
-            : this(employee)
-    {
+            : this(employee) =>
         this.specialization = specialization;
-    }
 
     protected EmployeeAndEmployeeSpecializationLink()
     {
@@ -30,20 +28,17 @@ public class EmployeeAndEmployeeSpecializationLink : AuditPersistentDomainObject
     [UniqueElement]
     public virtual EmployeeSpecialization Specialization
     {
-        get { return this.specialization; }
-        set { this.specialization = value; }
+        get => this.specialization;
+        set => this.specialization = value;
     }
 
     [Required]
     [UniqueElement]
     public virtual Employee Employee
     {
-        get { return this.employee; }
-        set { this.employee = value; }
+        get => this.employee;
+        set => this.employee = value;
     }
 
-    Employee IDetail<Employee>.Master
-    {
-        get { return this.Employee; }
-    }
+    Employee IDetail<Employee>.Master => this.Employee;
 }

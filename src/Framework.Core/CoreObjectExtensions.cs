@@ -37,10 +37,7 @@ public static class CoreObjectExtensions
         }
     }
 
-    public static bool IsDefault<T>(this T value)
-    {
-        return EqualityComparer<T>.Default.Equals(value, default(T));
-    }
+    public static bool IsDefault<T>(this T value) => EqualityComparer<T>.Default.Equals(value, default(T));
 
     public static IEnumerable<TSource> RepeatInfinity<TSource>(this TSource v)
     {
@@ -50,8 +47,5 @@ public static class CoreObjectExtensions
         }
     }
 
-    public static KeyValuePair<TKey, TValue> ToKeyValuePair<TKey, TValue>(this TKey key, TValue value)
-    {
-        return new KeyValuePair<TKey, TValue>(key, value);
-    }
+    public static KeyValuePair<TKey, TValue> ToKeyValuePair<TKey, TValue>(this TKey key, TValue value) => new(key, value);
 }

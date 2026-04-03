@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
 
+// ReSharper disable once CheckNamespace
 namespace SampleSystem.BLL;
 
 public class EmployeeExternalIdValidator : IPropertyValidator<Employee, long>

@@ -1,19 +1,13 @@
 ﻿using CommonFramework;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Core;
 
 public static class TryResult
 {
-    public static ITryResult<TResult> Return<TResult>(TResult result)
-    {
-        return new SuccessResult<TResult>(result);
-    }
+    public static ITryResult<TResult> Return<TResult>(TResult result) => new SuccessResult<TResult>(result);
 
-    public static ITryResult<TArgs, TResult> Return<TArgs, TResult>(TArgs args, TResult result)
-    {
-        return new SuccessResult<TArgs, TResult>(args, result);
-    }
-
+    public static ITryResult<TArgs, TResult> Return<TArgs, TResult>(TArgs args, TResult result) => new SuccessResult<TArgs, TResult>(args, result);
 
     public static ITryResult<TResult> CreateFault<TResult>(Exception error)
     {
@@ -30,16 +24,9 @@ public static class TryResult
     }
 
 
-    public static ITryResult<TResult> CreateBreak<TResult>()
-    {
-        return new FaultResult<TResult>(new BreakException());
-    }
+    public static ITryResult<TResult> CreateBreak<TResult>() => new FaultResult<TResult>(new BreakException());
 
-
-    public static ITryResult<Ignore> Return()
-    {
-        return Return(Ignore.Value);
-    }
+    public static ITryResult<Ignore> Return() => Return(Ignore.Value);
 
     public static ITryResult<Ignore> CreateFault(Exception error)
     {
@@ -48,16 +35,9 @@ public static class TryResult
         return CreateFault<Ignore>(error);
     }
 
-    public static ITryResult<Ignore> CreateBreak()
-    {
-        return CreateBreak<Ignore>();
-    }
+    public static ITryResult<Ignore> CreateBreak() => CreateBreak<Ignore>();
 
-
-    public static ITryResult<Ignore> Catch(Action tryGetResult)
-    {
-        return Catch<Ignore>(() => { tryGetResult(); return Ignore.Value; });
-    }
+    public static ITryResult<Ignore> Catch(Action tryGetResult) => Catch<Ignore>(() => { tryGetResult(); return Ignore.Value; });
 
     public static ITryResult<TResult> Catch<TResult>(Func<TResult> tryGetResult)
     {
@@ -71,10 +51,7 @@ public static class TryResult
         }
     }
 
-    public static ITryResult<TArgs, TResult> Catch<TArgs, TResult>(TArgs args, Func<TArgs, TResult> tryGetResult)
-    {
-        return Catch(args, tryGetResult, z => z);
-    }
+    public static ITryResult<TArgs, TResult> Catch<TArgs, TResult>(TArgs args, Func<TArgs, TResult> tryGetResult) => Catch(args, tryGetResult, z => z);
 
     public static ITryResult<TArgs, TResult> Catch<TArgs, TResult>(TArgs args, Func<TArgs, TResult> tryGetResult, Func<Exception, Exception> exceptionSelector)
     {
@@ -104,14 +81,9 @@ public static class TryResult
     }
 
 
-    private class SuccessResult<T> : ISuccessResult<T>
+    private class SuccessResult<T>(T result) : ISuccessResult<T>
     {
-        public SuccessResult(T result)
-        {
-            this.Result = result;
-        }
-
-        public T Result { get; private set; }
+        public T Result { get; } = result;
     }
 
     private class FaultResult<T> : IFaultResult<T>
@@ -123,20 +95,14 @@ public static class TryResult
             this.Error = error;
         }
 
-        public Exception Error { get; private set; }
+        public Exception Error { get; }
     }
 
-    private class SuccessResult<TArgs, TResult> : ISuccessResult<TArgs, TResult>
+    private class SuccessResult<TArgs, TResult>(TArgs args, TResult result) : ISuccessResult<TArgs, TResult>
     {
-        public SuccessResult(TArgs args, TResult result)
-        {
-            this.Result = result;
-            this.Args = args;
-        }
+        public TResult Result { get; } = result;
 
-        public TResult Result { get; private set; }
-
-        public TArgs Args { get; private set; }
+        public TArgs Args { get; } = args;
     }
 
     private class FaultResult<TArgs, TResult> : IFaultResult<TArgs, TResult>
@@ -149,8 +115,8 @@ public static class TryResult
             this.Args = args;
         }
 
-        public Exception Error { get; private set; }
+        public Exception Error { get; }
 
-        public TArgs Args { get; private set; }
+        public TArgs Args { get; }
     }
 }

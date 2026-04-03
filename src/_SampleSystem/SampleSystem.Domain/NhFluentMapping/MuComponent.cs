@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.Serialization;
+﻿using Framework.BLL.Domain.Serialization;
 
 namespace SampleSystem.Domain;
 

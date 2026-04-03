@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven;
+﻿using Framework.Application;
+using Framework.Database;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
@@ -13,8 +14,7 @@ public class VirtualPermissionTests : TestBase
 
 
     [TestInitialize]
-    public void SetUp()
-    {
+    public void SetUp() =>
         this.Datas = new[] { "testEmployeeLogin", "otherTestEmployeeLogin" }
                      .Select(
                          userLogin =>
@@ -45,7 +45,6 @@ public class VirtualPermissionTests : TestBase
                              return (userLogin, buId, employeeId);
                          })
                      .ToArray();
-    }
 
     [TestMethod]
     public void VirtualPermission_EmployeeWithLink_HasAccessByVirtualPermission()

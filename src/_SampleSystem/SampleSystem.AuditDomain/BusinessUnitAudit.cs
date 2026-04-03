@@ -1,6 +1,4 @@
 ﻿namespace SampleSystem.AuditDomain
 {
-    public class BusinessUnitAudit : SystemAuditPersistentDomainObjectBase
-    {
-    }
+    public class BusinessUnitAudit : SystemAuditPersistentDomainObjectBase;
 }

@@ -1,5 +1,5 @@
-﻿using Framework.Configuration.Core;
-using Framework.Notification;
+﻿using Framework.Subscriptions;
+using Framework.Subscriptions.Domain;
 
 using SampleSystem.BLL;
 
@@ -13,14 +13,11 @@ public sealed class CopyGenerationLambda : GenerationLambdaBase<Domain.Country>
     /// </summary>
     public CopyGenerationLambda()
     {
-        this.DomainObjectChangeType = Framework.Configuration.SubscriptionModeling.DomainObjectChangeType.Create;
+        this.DomainObjectChangeType = Framework.Subscriptions.DomainObjectChangeType.Create;
         this.Lambda = this.GetRecipients;
     }
 
     private NotificationMessageGenerationInfo[] GetRecipients(
             ISampleSystemBLLContext context,
-            DomainObjectVersions<Domain.Country> versions)
-    {
-        return new[] { new NotificationMessageGenerationInfo("tester@luxoft.com", versions.Current, versions.Previous) };
-    }
+            DomainObjectVersions<Domain.Country> versions) => [new NotificationMessageGenerationInfo("tester@luxoft.com", versions.Current, versions.Previous)];
 }

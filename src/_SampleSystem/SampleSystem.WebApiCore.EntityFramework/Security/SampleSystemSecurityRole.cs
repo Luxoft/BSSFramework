@@ -1,6 +1,6 @@
 ﻿using SecuritySystem;
 
-namespace SampleSystem.Security;
+namespace SampleSystem.WebApiCore.Security;
 
 public static class SampleSystemSecurityRole
 {

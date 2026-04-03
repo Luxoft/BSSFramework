@@ -20,7 +20,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public abstract partial class ConfigurationValidatorBase : Framework.DomainDriven.BLL.BLLContextHandlerValidator<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Validation.OperationContextBase>
+    public abstract partial class ConfigurationValidatorBase : Framework.BLL.Validation.BLLContextHandlerValidator<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Validation.OperationContextBase>
     {
         
         public ConfigurationValidatorBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
@@ -28,9 +28,6 @@ namespace Framework.Configuration.BLL
         {
             base.RegisterHandler<Framework.Configuration.Domain.CodeFirstSubscription>(this.GetCodeFirstSubscriptionValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>(this.GetCodeFirstSubscriptionRootFilterModelValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.ControlSettings>(this.GetControlSettingsValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.ControlSettingsParam>(this.GetControlSettingsParamValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.ControlSettingsParamValue>(this.GetControlSettingsParamValueValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.DomainObjectEvent>(this.GetDomainObjectEventValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.DomainObjectModification>(this.GetDomainObjectModificationValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.DomainObjectNotification>(this.GetDomainObjectNotificationValidationResult);
@@ -38,8 +35,6 @@ namespace Framework.Configuration.BLL
             base.RegisterHandler<Framework.Configuration.Domain.DomainTypeEventModel>(this.GetDomainTypeEventModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.DomainTypeEventOperation>(this.GetDomainTypeEventOperationValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.DomainTypeRootFilterModel>(this.GetDomainTypeRootFilterModelValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.ExceptionMessage>(this.GetExceptionMessageValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.ExceptionMessageRootFilterModel>(this.GetExceptionMessageRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.QueueProcessingState>(this.GetQueueProcessingStateValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.SentMessage>(this.GetSentMessageValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Sequence>(this.GetSequenceValidationResult);
@@ -57,21 +52,6 @@ namespace Framework.Configuration.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetCodeFirstSubscriptionValidationResult(Framework.Configuration.Domain.CodeFirstSubscription source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetControlSettingsParamValidationResult(Framework.Configuration.Domain.ControlSettingsParam source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetControlSettingsParamValueValidationResult(Framework.Configuration.Domain.ControlSettingsParamValue source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetControlSettingsValidationResult(Framework.Configuration.Domain.ControlSettings source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
@@ -107,16 +87,6 @@ namespace Framework.Configuration.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetDomainTypeValidationResult(Framework.Configuration.Domain.DomainType source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetExceptionMessageRootFilterModelValidationResult(Framework.Configuration.Domain.ExceptionMessageRootFilterModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetExceptionMessageValidationResult(Framework.Configuration.Domain.ExceptionMessage source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

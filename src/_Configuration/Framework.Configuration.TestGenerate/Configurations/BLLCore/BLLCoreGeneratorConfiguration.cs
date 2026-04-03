@@ -1,11 +1,10 @@
-﻿using Framework.Configuration.Domain;
+﻿using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
+using Framework.Configuration.Domain;
 
-using Framework.DomainDriven.BLLCoreGenerator;
+namespace Framework.Configuration.TestGenerate.Configurations.BLLCore;
 
-namespace Framework.Configuration.TestGenerate;
-
-public partial class BLLCoreGeneratorConfiguration(ServerGenerationEnvironment environment)
-    : GeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
+public partial class BLLCoreGeneratorConfiguration(ConfigurationGenerationEnvironment environment)
+    : BLLCoreGeneratorConfigurationBase<ConfigurationGenerationEnvironment>(environment)
 {
     public override Type FilterModelType { get; } = typeof(DomainObjectFilterModel<>);
 

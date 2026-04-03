@@ -1,19 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Configuration.BLL.Core</PackageId>
     <RootNamespace>Framework.Configuration.BLL</RootNamespace>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
-    <ProjectReference Include="..\..\Framework.ExpressionParsers\Framework.ExpressionParsers.csproj" />
-    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.BLL.Core\Framework.Authorization.BLL.Core.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.ApplicationVariable\Framework.ApplicationVariable.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.Events\Framework.Events.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.Notification.DTO\Framework.Notification.DTO.csproj" />
-    <ProjectReference Include="..\Framework.Configuration.Domain.Models\Framework.Configuration.Domain.Models.csproj" />
-    <ProjectReference Include="..\Framework.Configuration.SubscriptionModeling\Framework.Configuration.SubscriptionModeling.csproj" />
+    <PackageReference Include="IvAt.SecuritySystem.Notification.Abstractions" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Database\Framework.Database.Abstractions\Framework.Database.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Notification\Framework.Notification.Abstractions\Framework.Notification.Abstractions.csproj" />
+    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.BLL.Core\Framework.Authorization.BLL.Core.csproj" />
+    <ProjectReference Include="..\Framework.Configuration.Domain.Models\Framework.Configuration.Domain.Models.csproj" />
+
+    <ProjectReference Include="..\..\BLL\Framework.BLL.Abstractions\Framework.BLL.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>

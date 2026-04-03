@@ -1,4 +1,4 @@
-﻿namespace Framework.Core;
+﻿namespace Framework.Core.Helpers;
 
 public static class FileHelper
 {

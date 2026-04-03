@@ -1,6 +1,7 @@
-﻿using Framework.DomainDriven;
+﻿using Framework.Application;
+using Framework.Database;
 
-using SampleSystem.Domain;
+using SampleSystem.EventMetadata;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
@@ -9,7 +10,7 @@ namespace SampleSystem.IntegrationTests;
 public class EventDALListenerTests : TestBase
 {
     [TestMethod]
-    public void Employee_SendCustomEventOperation_ExceptionNotThrow()
+    public async Task Employee_SendCustomEventOperation_ExceptionNotThrow()
     {
         //Arrange
 
@@ -17,11 +18,11 @@ public class EventDALListenerTests : TestBase
         var action = () => this.EvaluateAsync(
             DBSessionMode.Write,
             ctx => ctx.OperationSender.Send(
-                ctx.Logics.Employee.GetCurrent(),
+                ctx.CurrentEmployeeSource.CurrentUser,
                 SampleSystemEventOperation.CustomAction,
                 CancellationToken.None));
 
         // Assert
-        action.Should().NotThrowAsync();
+        await action.Should().NotThrowAsync();
     }
 }

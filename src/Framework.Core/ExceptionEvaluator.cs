@@ -11,7 +11,7 @@ public static class ExceptionEvaluator
 
         using (var enumerator = source.GetEnumerator())
         {
-            return enumerator.Evaluate(selector, new Exception[0], getAggregateException);
+            return enumerator.Evaluate(selector, Array.Empty<Exception>(), getAggregateException);
         }
     }
 
@@ -25,7 +25,7 @@ public static class ExceptionEvaluator
             }
             catch (Exception ex)
             {
-                return source.Evaluate(selector, exceptions.Concat(new[] { ex }), getAggregateException);
+                return source.Evaluate(selector, exceptions.Concat([ex]), getAggregateException);
             }
         }
         else

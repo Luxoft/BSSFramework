@@ -1,7 +1,7 @@
 ﻿using CommonFramework;
 
 using Framework.Core;
-using Framework.DomainDriven.DAL.Revisions;
+using Framework.Database.Domain;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;

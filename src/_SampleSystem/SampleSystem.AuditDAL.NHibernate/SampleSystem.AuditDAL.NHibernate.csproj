@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
+    <ProjectReference Include="..\..\Database\Framework.Database.NHibernate.Runtime\Framework.Database.NHibernate.Runtime.csproj" />
     <ProjectReference Include="..\SampleSystem.AuditDomain\SampleSystem.AuditDomain.csproj" />
   </ItemGroup>
 

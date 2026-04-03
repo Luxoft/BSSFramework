@@ -1,11 +1,5 @@
-﻿using Framework.DomainDriven.ServiceModelGenerator;
+﻿using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Integration;
 
 namespace SampleSystem.CodeGenerate;
 
-public class IntegrationGeneratorConfiguration : IntegrationGeneratorConfigurationBase<ServerGenerationEnvironment>
-{
-    public IntegrationGeneratorConfiguration(ServerGenerationEnvironment environment)
-            : base(environment)
-    {
-    }
-}
+public class IntegrationGeneratorConfiguration(ServerGenerationEnvironment environment) : IntegrationGeneratorConfigurationBase<ServerGenerationEnvironment>(environment);

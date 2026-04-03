@@ -1,0 +1,43 @@
+﻿using Framework.Application.Events;
+using Framework.Configurator.Interfaces;
+
+using Microsoft.AspNetCore.Http;
+
+using SecuritySystem;
+using SecuritySystem.Attributes;
+using SecuritySystem.Configurator.Handlers;
+
+// ReSharper disable UnusedAutoPropertyAccessor.Local
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
+
+namespace Framework.Configurator.Handlers;
+
+public class ForcePushEventHandler([WithoutRunAs] ISecuritySystem securitySystem, IEventSystem eventSystem)
+    : BaseWriteHandler, IForcePushEventHandler
+{
+    public async Task Execute(HttpContext context, CancellationToken cancellationToken)
+    {
+        await securitySystem.CheckAccessAsync(SecurityRole.Administrator, cancellationToken);
+
+        var body = await this.ParseRequestBodyAsync<RequestBodyDto>(context);
+
+        await eventSystem.ForceEventAsync(
+            new EventModel(
+                eventSystem.TypeResolver.TryResolve(body.DomainTypeFullName),
+                body.Ids.Split(',').Select(i => new Guid(i)).ToList(),
+                new EventOperation(body.OperationName),
+                body.Revision),
+            cancellationToken);
+    }
+
+    private class RequestBodyDto
+    {
+        public string DomainTypeFullName { get; set; } = null!;
+
+        public string OperationName { get; set; } = null!;
+
+        public long? Revision { get; set; }
+
+        public string Ids { get; set; } = null!;
+    }
+}

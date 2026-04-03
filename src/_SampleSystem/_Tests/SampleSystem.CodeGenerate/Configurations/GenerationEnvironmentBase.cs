@@ -1,18 +1,21 @@
-﻿using System.Reflection;
+﻿using System.Collections.Immutable;
+using System.Reflection;
 
-using Framework.DomainDriven.Generation.Domain;
+using Framework.BLL.Domain.Attributes;
 using Framework.Projection;
-using Framework.Projection.Environment;
-using Framework.Security;
+using Framework.Projection.ExtendedMetadata;
 
 using SecuritySystem;
 
 using SampleSystem.Domain;
 using SampleSystem.Security;
+using Framework.CodeGeneration.Configuration;
+
+using SampleSystem.Domain.ManualProjections;
 
 namespace SampleSystem.CodeGenerate;
 
-public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainObjectBase, PersistentDomainObjectBase,
+public abstract class GenerationEnvironmentBase : CodeGenerationEnvironment<DomainObjectBase, PersistentDomainObjectBase,
     AuditPersistentDomainObjectBase, Guid>
 {
     public readonly IProjectionEnvironment MainProjectionEnvironment;
@@ -33,12 +36,9 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
 
     public override bool IsHierarchical(Type type) => new[] { typeof(BusinessUnit) }.Contains(type);
 
-    public override IReadOnlyList<Type> SecurityRuleTypeList { get; } = [typeof(SampleSystemSecurityOperation), typeof(SecurityRule)];
+    public override ImmutableArray<Type> SecurityRuleTypeList { get; } = [typeof(SampleSystemSecurityOperation), typeof(SecurityRule)];
 
-    protected override IEnumerable<Assembly> GetDomainObjectAssemblies()
-    {
-        return base.GetDomainObjectAssemblies().Concat([typeof(Employee).Assembly]);
-    }
+    protected override IEnumerable<Assembly> GetDomainObjectAssemblies() => base.GetDomainObjectAssemblies().Concat([typeof(Employee).Assembly]);
 
     protected override IEnumerable<IProjectionEnvironment> GetProjectionEnvironments()
     {
@@ -47,7 +47,7 @@ public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainOb
         yield return this.LegacyProjectionEnvironment;
 
         yield return this.CreateManualProjectionLambdaEnvironment(
-            typeof(Domain.ManualProjections.TestManualEmployeeProjection).Assembly);
+            typeof(TestManualEmployeeProjection).Assembly);
     }
 
     public override IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } =

@@ -1,5 +1,5 @@
-﻿using Framework.Core;
-using Framework.DomainDriven.BLL;
+﻿using Framework.BLL.Domain.ServiceRole;
+using Framework.Core;
 
 namespace SampleSystem.Domain;
 
@@ -17,7 +17,7 @@ public class Principal : AuditPersistentDomainObjectBase
 
     public virtual string ExternalId
     {
-        get { return this.externalId; }
-        set { this.externalId = value.TrimNull(); }
+        get => this.externalId;
+        set => this.externalId = value.TrimNull();
     }
 }

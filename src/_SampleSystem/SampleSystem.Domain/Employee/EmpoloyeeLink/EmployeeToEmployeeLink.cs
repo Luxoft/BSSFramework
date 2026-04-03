@@ -1,6 +1,6 @@
 ﻿using CommonFramework;
 
-using Framework.Persistent;
+using Framework.Relations;
 
 namespace SampleSystem.Domain;
 
@@ -17,42 +17,32 @@ public class EmployeeToEmployeeLink : AuditPersistentDomainObjectBase, IDetail<E
     }
 
     public EmployeeToEmployeeLink(Employee owner, Employee linkedEmployee)
-            : this(owner)
-    {
+            : this(owner) =>
         this.linkedEmployee = linkedEmployee;
-    }
 
     public EmployeeToEmployeeLink(Employee owner, Employee linkedEmployee, EmployeeLinkType employeeLinkType)
-            : this(owner, linkedEmployee)
-    {
+            : this(owner, linkedEmployee) =>
         this.employeeLinkType = employeeLinkType;
-    }
 
     protected EmployeeToEmployeeLink()
     {
     }
 
     [IsMaster]
-    public virtual Employee Owner
-    {
-        get { return this.owner; }
-    }
+    public virtual Employee Owner => this.owner;
 
     public virtual Employee LinkedEmployee
     {
-        get { return this.linkedEmployee; }
-        set { this.linkedEmployee = value; }
+        get => this.linkedEmployee;
+        set => this.linkedEmployee = value;
     }
 
     public virtual EmployeeLinkType EmployeeLinkType
     {
-        get { return this.employeeLinkType; }
-        set { this.employeeLinkType = value; }
+        get => this.employeeLinkType;
+        set => this.employeeLinkType = value;
     }
 
 
-    Employee IDetail<Employee>.Master
-    {
-        get { return this.owner; }
-    }
+    Employee IDetail<Employee>.Master => this.owner;
 }

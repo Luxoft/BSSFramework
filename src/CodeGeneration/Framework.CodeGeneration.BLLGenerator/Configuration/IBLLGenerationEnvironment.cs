@@ -1,0 +1,6 @@
+﻿using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
+using Framework.CodeGeneration.Configuration;
+
+namespace Framework.CodeGeneration.BLLGenerator.Configuration;
+
+public interface IBLLGenerationEnvironment : ICodeGenerationEnvironment, IBLLCoreGeneratorConfigurationContainer;

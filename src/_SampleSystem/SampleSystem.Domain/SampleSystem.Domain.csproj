@@ -2,19 +2,14 @@
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+    <ProjectReference Include="..\..\BLL\Framework.BLL.Domain\Framework.BLL.Domain.csproj" />
+    <ProjectReference Include="..\..\Database\Framework.Tracking.Validation\Framework.Tracking.Validation.csproj" />
+    <ProjectReference Include="..\..\Database\Framework.Database.Mapping\Framework.Database.Mapping.csproj" />
+    <ProjectReference Include="..\..\Notification\Framework.Notification.Domain\Framework.Notification.Domain.csproj" />
+    <ProjectReference Include="..\..\Projection\Framework.Projection.Domain\Framework.Projection.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Framework.Persistent.Mapping.Audit\Framework.Persistent.Mapping.Audit.csproj" />
-    <ProjectReference Include="..\..\Framework.Security.LegacyAttributes\Framework.Security.LegacyAttributes.csproj" />
-    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL\Framework.DomainDriven.BLL.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core.LegacyContext\Framework.DomainDriven.Core.LegacyContext.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.Notification.Abstract\Framework.Notification.Abstract.csproj" />
-  </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Linq.Expressions;
 
 using CommonFramework.DependencyInjection;
 
@@ -27,6 +28,21 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
         where TEventListener : class, IDBSessionEventListener
     {
         this.initActions.Add(services => services.AddScoped<IDBSessionEventListener, TEventListener>());
+
+        return this;
+    }
+
+    public IDatabaseSetup AddVisitorContainer<TExpressionVisitorContainer>()
+        where TExpressionVisitorContainer : class, IExpressionVisitorContainer
+    {
+        this.initActions.Add(sc => sc.AddKeyedSingleton<IExpressionVisitorContainer, TExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey));
+
+        return this;
+    }
+
+    public IDatabaseSetup AddVisitor(ExpressionVisitor expressionVisitor)
+    {
+        this.initActions.Add(sc => sc.AddKeyedSingleton<IExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey, new ExpressionVisitorContainer(expressionVisitor)));
 
         return this;
     }
@@ -117,7 +133,6 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
         //services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
         services.AddKeyedSingleton<IExpressionVisitorContainer, PeriodExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey);
         services.AddKeyedSingleton<IExpressionVisitorContainer, DefaultExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey);
-        services.AddKeyedSingleton<IExpressionVisitorContainer, MathExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey);
         services.AddKeyedSingleton<IExpressionVisitorContainer, OverrideEqualsDomainObjectVisitorContainer>(IExpressionVisitorContainer.ElementKey);
 
         return services;

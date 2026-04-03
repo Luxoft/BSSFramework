@@ -7,7 +7,6 @@ using CommonFramework.DictionaryCache;
 using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.Core;
 
-
 using BinaryExpression = System.Linq.Expressions.BinaryExpression;
 using Expression = System.Linq.Expressions.Expression;
 
@@ -27,13 +26,6 @@ public class ExpandPathVisitor : ExpressionVisitor
 
         return pathsRequest.GetValueOrDefault();
     }).WithLock();
-
-
-    private ExpandPathVisitor()
-    {
-
-    }
-
 
     protected override Expression VisitMember(MemberExpression node)
     {
@@ -70,8 +62,6 @@ public class ExpandPathVisitor : ExpressionVisitor
 
         return anyNullable ? success(args.ToList(this.Visit).ToList(arg => arg!.TryLiftToNullable())) : fault();
     }
-
-    public static readonly ExpandPathVisitor Value = new ExpandPathVisitor();
 
     private static readonly HashSet<ExpressionType> LiftableOperators = new[]
                                                                         {

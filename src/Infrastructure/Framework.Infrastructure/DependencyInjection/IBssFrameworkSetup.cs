@@ -23,7 +23,4 @@ public interface IBssFrameworkSetup : IBssFrameworkSetup<IBssFrameworkSetup>
 
     IBssFrameworkSetup SetDomainObjectEventMetadata<T>()
         where T : IDomainObjectEventMetadata;
-
-    IBssFrameworkSetup AddQueryVisitors<TExpressionVisitorContainer>()
-        where TExpressionVisitorContainer : class, IExpressionVisitorContainer;
 }

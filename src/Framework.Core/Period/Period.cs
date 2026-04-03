@@ -241,7 +241,7 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
         return new Period(startDate, endDate);
     }
 
-    public static Period operator +(Period p1, Period p2) => new(p1.StartDate.Min(p2.StartDate), p1.EndDateValue.Max(p2.EndDateValue));
+    public static Period operator +(Period p1, Period p2) => new(p1.StartDate.Min<DateTime>(p2.StartDate), p1.EndDateValue.Max<DateTime>(p2.EndDateValue));
 
     public static bool operator ==(Period p1, Period p2) => p1.Equals(p2);
 

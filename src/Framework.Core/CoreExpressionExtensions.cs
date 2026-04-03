@@ -117,7 +117,7 @@ public static class CoreExpressionExtensions
 
     public static Expression<Func<TTo, TRetType>> Covariance<TTo, TFrom, TRetType>(this Expression<Func<TFrom, TRetType>> source)
         where TTo : TFrom =>
-        source.OverrideInput((TTo to) => (TFrom)to);
+        source.OverrideInput((TTo to) => to);
 
     public static string GetMemberName<TSource, TResult>(this Expression<Func<TSource, TResult>> expr)
     {

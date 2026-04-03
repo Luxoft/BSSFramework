@@ -4,9 +4,9 @@ using Framework.Application;
 using Framework.Application.Auth;
 using Framework.Application.DependencyInjection;
 using Framework.Application.Events;
-using Framework.Database;
 using Framework.Database.DALListener;
 using Framework.Database.DependencyInjection;
+
 using Framework.Infrastructure.Auth;
 using Framework.Infrastructure.DALListener;
 using Framework.Infrastructure.Integration;
@@ -81,14 +81,6 @@ public class BssFrameworkSetup : IBssFrameworkSetup, IServiceInitializer
         where T : IDomainObjectEventMetadata
     {
         this.domainObjectEventMetadataType = typeof(T);
-
-        return this;
-    }
-
-    public IBssFrameworkSetup AddQueryVisitors<TExpressionVisitorContainer>()
-        where TExpressionVisitorContainer : class, IExpressionVisitorContainer
-    {
-        this.registerActions.Add(sc => sc.AddKeyedSingleton<IExpressionVisitorContainer, TExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey));
 
         return this;
     }

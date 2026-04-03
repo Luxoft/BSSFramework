@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Framework.Core;
+
 namespace Framework.Authorization.BLL
 {
     
@@ -186,7 +188,7 @@ namespace Framework.Authorization.BLL
             yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Authorization.Domain.Permission>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.Permission, Framework.Core.Period>> GetPermission_PeriodValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.Permission, Period>> GetPermission_PeriodValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<Framework.Authorization.Domain.Permission>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
@@ -232,7 +234,7 @@ namespace Framework.Authorization.BLL
             yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Authorization.Domain.Permission, System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.Permission>, Framework.Authorization.Domain.Permission>(source => source.DelegatedTo, currentClass, this.GetPermission_DelegatedToValidators(), this.GetClassMap<Framework.Authorization.Domain.Permission>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.Permission, string>(source => source.ModifiedBy, currentClass, this.GetPermission_ModifiedByValidators(), this.GetClassMap<string>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.Permission, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetPermission_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.Permission, Framework.Core.Period>(source => source.Period, currentClass, this.GetPermission_PeriodValidators(), this.GetClassMap<Framework.Core.Period>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.Permission, Period>(source => source.Period, currentClass, this.GetPermission_PeriodValidators(), this.GetClassMap<Period>(true));
             yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Authorization.Domain.Permission, System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.PermissionRestriction>, Framework.Authorization.Domain.PermissionRestriction>(source => source.Restrictions, currentClass, this.GetPermission_RestrictionsValidators(), this.GetClassMap<Framework.Authorization.Domain.PermissionRestriction>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.Permission, Framework.Authorization.Domain.BusinessRole>(source => source.Role, currentClass, this.GetPermission_RoleValidators(), this.GetClassMap<Framework.Authorization.Domain.BusinessRole>(true));
         }

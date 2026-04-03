@@ -56,18 +56,18 @@ public partial struct Period
     public string ToExtraShortString() => CommonPeriodExtensions.ToExtraShortString(this);
 
     /// <summary>
-    /// Преобразует дату начала и конца периода в короткое строковое описание интервала представленый месяцами и годом для <see cref="cultureinfo"/> региональных параметров
+    /// Преобразует дату начала и конца периода в короткое строковое описание интервала представленый месяцами и годом для <see cref="cultureInfo"/> региональных параметров
     /// </summary>
-    /// <param name="cultureinfo">Предоставляет сведения об определенном языке и региональных параметрах используемое для форматирование дат периода</param>
+    /// <param name="cultureInfo">Предоставляет сведения об определенном языке и региональных параметрах используемое для форматирование дат периода</param>
     /// <returns>Строка, содержащая содержащая номер месяца и год если период в одном месяце, иначе содержащяя намера начального и конечного месяца с годом</returns>
     [Obsolete("Only for reports. In plain code use CommonPeriodExtensions.ToExtraShortString instead")]
-    public string ToExtraShortString(CultureInfo cultureinfo) => CommonPeriodExtensions.ToExtraShortString(this, cultureinfo);
+    public string ToExtraShortString(CultureInfo cultureInfo) => CommonPeriodExtensions.ToExtraShortString(this, cultureInfo);
 
     /// <summary>
-    /// Возвращает формат даты для <see cref="cultureinfo"/> региональных параметров содержащий только месяц и год
+    /// Возвращает формат даты для <see cref="cultureInfo"/> региональных параметров содержащий только месяц и год
     /// </summary>
-    /// <param name="cultureinfo">Предоставляет сведения об определенном языке и региональных параметрах используемое для форматирование дат периода</param>
+    /// <param name="cultureInfo">Предоставляет сведения об определенном языке и региональных параметрах используемое для форматирование дат периода</param>
     /// <returns>Строка, представляющая формат даты, в указанных региональных параметрах, для вывода только месяца и года</returns>
     [Obsolete("Only for reports. In plain code use CommonPeriodExtensions.GetDayAndMonthDateFormat instead")]
-    public string GetDayAndMonthDateFormat(CultureInfo cultureinfo) => CommonPeriodExtensions.GetDayAndMonthDateFormat(this, cultureinfo);
+    public string GetDayAndMonthDateFormat(CultureInfo cultureInfo) => CommonPeriodExtensions.GetDayAndMonthDateFormat(this, cultureInfo);
 }

@@ -3,7 +3,7 @@ using System.Reflection;
 
 using CommonFramework;
 
-namespace Framework.Database._Visitors;
+namespace Framework.Core.Visitors;
 
 public class OverrideMethodInfoVisitor : ExpressionVisitor
 {

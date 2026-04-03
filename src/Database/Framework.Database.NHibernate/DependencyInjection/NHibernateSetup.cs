@@ -6,8 +6,10 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
 using Framework.Core.LazyObject;
+using Framework.Database._Visitors.Containers;
 using Framework.Database.NHibernate._MappingSettings;
 using Framework.Database.NHibernate.Sessions;
+using Framework.Database.NHibernate.Visitors;
 using Framework.DependencyInjection;
 
 using GenericQueryable.NHibernate;
@@ -135,7 +137,8 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
 
         services.AddSingleton<NHibSessionEnvironment>();
 
-        services.AddKeyedSingleton<IExpressionVisitorContainer, FixNHibArrayContainsVisitorContainer>(IExpressionVisitorContainer.ElementKey);
+        services.AddKeyedSingleton<IExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey, new ExpressionVisitorContainer(new FixNHibArrayContainsVisitor()));
+        services.AddKeyedSingleton<IExpressionVisitorContainer, MathExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey);
 
         if (this.AddDefaultInitializer)
         {

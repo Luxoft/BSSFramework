@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Framework.Core;
+
 namespace SampleSystem.BLL
 {
     
@@ -230,7 +232,7 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.RequiredValidator<SampleSystem.Domain.BusinessUnit, string>(Framework.Restriction.RequiredMode.Default);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.BusinessUnit, Framework.Core.Period>> GetBusinessUnit_PeriodValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.BusinessUnit, Period>> GetBusinessUnit_PeriodValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<SampleSystem.Domain.BusinessUnit>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
@@ -404,7 +406,7 @@ namespace SampleSystem.BLL
             yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.BusinessUnitManagerCommissionLink>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.BusinessUnitManagerCommissionLink, Framework.Core.Period>> GetBusinessUnitManagerCommissionLink_PeriodValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.BusinessUnitManagerCommissionLink, Period>> GetBusinessUnitManagerCommissionLink_PeriodValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<SampleSystem.Domain.BusinessUnitManagerCommissionLink>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
@@ -423,7 +425,7 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.BusinessUnitManagerCommissionLink, SampleSystem.Domain.Employee>(source => source.Manager, currentClass, this.GetBusinessUnitManagerCommissionLink_ManagerValidators(), this.GetClassMap<SampleSystem.Domain.Employee>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.BusinessUnitManagerCommissionLink, string>(source => source.ModifiedBy, currentClass, this.GetBusinessUnitManagerCommissionLink_ModifiedByValidators(), this.GetClassMap<string>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.BusinessUnitManagerCommissionLink, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetBusinessUnitManagerCommissionLink_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.BusinessUnitManagerCommissionLink, Framework.Core.Period>(source => source.Period, currentClass, this.GetBusinessUnitManagerCommissionLink_PeriodValidators(), this.GetClassMap<Framework.Core.Period>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.BusinessUnitManagerCommissionLink, Period>(source => source.Period, currentClass, this.GetBusinessUnitManagerCommissionLink_PeriodValidators(), this.GetClassMap<Period>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.BusinessUnitManagerCommissionLink, System.DateTime>(source => source.StartDate, currentClass, this.GetBusinessUnitManagerCommissionLink_StartDateValidators(), this.GetClassMap<System.DateTime>(true));
         }
         
@@ -462,7 +464,7 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.BusinessUnit, string>(source => source.ModifiedBy, currentClass, this.GetBusinessUnit_ModifiedByValidators(), this.GetClassMap<string>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.BusinessUnit, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetBusinessUnit_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.BusinessUnit, string>(source => source.Name, currentClass, this.GetBusinessUnit_NameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.BusinessUnit, Framework.Core.Period>(source => source.Period, currentClass, this.GetBusinessUnit_PeriodValidators(), this.GetClassMap<Framework.Core.Period>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.BusinessUnit, Period>(source => source.Period, currentClass, this.GetBusinessUnit_PeriodValidators(), this.GetClassMap<Period>(true));
             yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.BusinessUnit, System.Collections.Generic.IEnumerable<SampleSystem.Domain.Project>, SampleSystem.Domain.Project>(source => source.Projects, currentClass, this.GetBusinessUnit_ProjectsValidators(), this.GetClassMap<SampleSystem.Domain.Project>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.BusinessUnit, string>(source => source.ProjectStartMailList, currentClass, this.GetBusinessUnit_ProjectStartMailListValidators(), this.GetClassMap<string>(true));
         }
@@ -472,15 +474,15 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.DeepCollectionValidator<SampleSystem.Domain.BusinessUnitRootFilterModel, System.Collections.Generic.List<System.DateTime>, System.DateTime>();
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.BusinessUnitRootFilterModel, System.Collections.Generic.List<Framework.Core.Period>>> GetBusinessUnitRootFilterModel_ListPeriodsValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.BusinessUnitRootFilterModel, System.Collections.Generic.List<Period>>> GetBusinessUnitRootFilterModel_ListPeriodsValidators()
         {
-            yield return new Framework.Validation.DeepCollectionValidator<SampleSystem.Domain.BusinessUnitRootFilterModel, System.Collections.Generic.List<Framework.Core.Period>, Framework.Core.Period>();
+            yield return new Framework.Validation.DeepCollectionValidator<SampleSystem.Domain.BusinessUnitRootFilterModel, System.Collections.Generic.List<Period>, Period>();
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.BusinessUnitRootFilterModel>> GetBusinessUnitRootFilterModelProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.BusinessUnitRootFilterModel> currentClass)
         {
             yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.BusinessUnitRootFilterModel, System.Collections.Generic.List<System.DateTime>, System.DateTime>(source => source.ListDays, currentClass, this.GetBusinessUnitRootFilterModel_ListDaysValidators(), this.GetClassMap<System.DateTime>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.BusinessUnitRootFilterModel, System.Collections.Generic.List<Framework.Core.Period>, Framework.Core.Period>(source => source.ListPeriods, currentClass, this.GetBusinessUnitRootFilterModel_ListPeriodsValidators(), this.GetClassMap<Framework.Core.Period>(true));
+            yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.BusinessUnitRootFilterModel, System.Collections.Generic.List<Period>, Period>(source => source.ListPeriods, currentClass, this.GetBusinessUnitRootFilterModel_ListPeriodsValidators(), this.GetClassMap<Period>(true));
         }
         
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.BusinessUnitRootFilterModel> GetBusinessUnitRootFilterModelValidationMap()
@@ -941,7 +943,7 @@ namespace SampleSystem.BLL
             yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.Employee>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Employee, Framework.Core.Period>> GetEmployee_EducationDurationValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Employee, Period>> GetEmployee_EducationDurationValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<SampleSystem.Domain.Employee>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
@@ -1043,7 +1045,7 @@ namespace SampleSystem.BLL
             yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.Create<SampleSystem.Domain.Employee>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Employee, Framework.Core.Period>> GetEmployee_WorkPeriodValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Employee, Period>> GetEmployee_WorkPeriodValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<SampleSystem.Domain.Employee>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
@@ -1554,7 +1556,7 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, System.DateTime?>(source => source.CreateDate, currentClass, this.GetEmployee_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, string>(source => source.CreatedBy, currentClass, this.GetEmployee_CreatedByValidators(), this.GetClassMap<string>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, System.DateTime?>(source => source.DismissDate, currentClass, this.GetEmployee_DismissDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, Framework.Core.Period>(source => source.EducationDuration, currentClass, this.GetEmployee_EducationDurationValidators(), this.GetClassMap<Framework.Core.Period>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, Period>(source => source.EducationDuration, currentClass, this.GetEmployee_EducationDurationValidators(), this.GetClassMap<Period>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, string>(source => source.Email, currentClass, this.GetEmployee_EmailValidators(), this.GetClassMap<string>(true));
             yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.Employee, System.Collections.Generic.ICollection<SampleSystem.Domain.EmployeePhoto>, SampleSystem.Domain.EmployeePhoto>(source => source.EmployeePhotos, currentClass, this.GetEmployee_EmployeePhotosValidators(), this.GetClassMap<SampleSystem.Domain.EmployeePhoto>(true));
             yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.Employee, System.Collections.Generic.IEnumerable<SampleSystem.Domain.EmployeeToEmployeeLink>, SampleSystem.Domain.EmployeeToEmployeeLink>(source => source.EmployeeToEmployeeLinks, currentClass, this.GetEmployee_EmployeeToEmployeeLinksValidators(), this.GetClassMap<SampleSystem.Domain.EmployeeToEmployeeLink>(true));
@@ -1574,7 +1576,7 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, System.DateTime?>(source => source.PlannedHireDate, currentClass, this.GetEmployee_PlannedHireDateValidators(), this.GetClassMap<System.DateTime?>(true));
             yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.Employee, System.Collections.Generic.IEnumerable<SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(source => source.Specializations, currentClass, this.GetEmployee_SpecializationsValidators(), this.GetClassMap<SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, System.DateTime>(source => source.ValidateVirtualProp, currentClass, this.GetEmployee_ValidateVirtualPropValidators(), this.GetClassMap<System.DateTime>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, Framework.Core.Period>(source => source.WorkPeriod, currentClass, this.GetEmployee_WorkPeriodValidators(), this.GetClassMap<Framework.Core.Period>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Employee, Period>(source => source.WorkPeriod, currentClass, this.GetEmployee_WorkPeriodValidators(), this.GetClassMap<Period>(true));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.EmployeeRegistrationType, System.DateTime?>> GetEmployeeRegistrationType_CreateDateValidators()
@@ -3195,7 +3197,7 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.RequiredValidator<SampleSystem.Domain.ManagementUnit, string>(Framework.Restriction.RequiredMode.Default);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.ManagementUnit, Framework.Core.Period>> GetManagementUnit_PeriodValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.ManagementUnit, Period>> GetManagementUnit_PeriodValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<SampleSystem.Domain.ManagementUnit>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
@@ -3342,7 +3344,7 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.RequiredValidator<SampleSystem.Domain.ManagementUnitFluentMapping, string>(Framework.Restriction.RequiredMode.Default);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.ManagementUnitFluentMapping, Framework.Core.Period>> GetManagementUnitFluentMapping_PeriodValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.ManagementUnitFluentMapping, Period>> GetManagementUnitFluentMapping_PeriodValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<SampleSystem.Domain.ManagementUnitFluentMapping>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
@@ -3355,7 +3357,7 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ManagementUnitFluentMapping, string>(source => source.ModifiedBy, currentClass, this.GetManagementUnitFluentMapping_ModifiedByValidators(), this.GetClassMap<string>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ManagementUnitFluentMapping, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetManagementUnitFluentMapping_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ManagementUnitFluentMapping, string>(source => source.Name, currentClass, this.GetManagementUnitFluentMapping_NameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ManagementUnitFluentMapping, Framework.Core.Period>(source => source.Period, currentClass, this.GetManagementUnitFluentMapping_PeriodValidators(), this.GetClassMap<Framework.Core.Period>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ManagementUnitFluentMapping, Period>(source => source.Period, currentClass, this.GetManagementUnitFluentMapping_PeriodValidators(), this.GetClassMap<Period>(true));
         }
         
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.ManagementUnitFluentMapping> GetManagementUnitFluentMappingValidationMap()
@@ -3373,7 +3375,7 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ManagementUnit, string>(source => source.ModifiedBy, currentClass, this.GetManagementUnit_ModifiedByValidators(), this.GetClassMap<string>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ManagementUnit, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetManagementUnit_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ManagementUnit, string>(source => source.Name, currentClass, this.GetManagementUnit_NameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ManagementUnit, Framework.Core.Period>(source => source.Period, currentClass, this.GetManagementUnit_PeriodValidators(), this.GetClassMap<Framework.Core.Period>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ManagementUnit, Period>(source => source.Period, currentClass, this.GetManagementUnit_PeriodValidators(), this.GetClassMap<Period>(true));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.ManagementUnitToAncestorChildView, System.DateTime?>> GetManagementUnitToAncestorChildView_CreateDateValidators()
@@ -3585,26 +3587,26 @@ namespace SampleSystem.BLL
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.Project>(this.GetProjectProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.PureFluentMappingObject, Framework.Core.Period>> GetPureFluentMappingObject_Period123Validators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.PureFluentMappingObject, Period>> GetPureFluentMappingObject_Period123Validators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<SampleSystem.Domain.PureFluentMappingObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.PureFluentMappingObject, Framework.Core.Period>> GetPureFluentMappingObject_Period456Validators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.PureFluentMappingObject, Period>> GetPureFluentMappingObject_Period456Validators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<SampleSystem.Domain.PureFluentMappingObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.PureFluentMappingObject, Framework.Core.Period>> GetPureFluentMappingObject_PeriodValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.PureFluentMappingObject, Period>> GetPureFluentMappingObject_PeriodValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<SampleSystem.Domain.PureFluentMappingObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.PureFluentMappingObject>> GetPureFluentMappingObjectProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.PureFluentMappingObject> currentClass)
         {
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.PureFluentMappingObject, Framework.Core.Period>(source => source.Period, currentClass, this.GetPureFluentMappingObject_PeriodValidators(), this.GetClassMap<Framework.Core.Period>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.PureFluentMappingObject, Framework.Core.Period>(source => source.Period123, currentClass, this.GetPureFluentMappingObject_Period123Validators(), this.GetClassMap<Framework.Core.Period>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.PureFluentMappingObject, Framework.Core.Period>(source => source.Period456, currentClass, this.GetPureFluentMappingObject_Period456Validators(), this.GetClassMap<Framework.Core.Period>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.PureFluentMappingObject, Period>(source => source.Period, currentClass, this.GetPureFluentMappingObject_PeriodValidators(), this.GetClassMap<Period>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.PureFluentMappingObject, Period>(source => source.Period123, currentClass, this.GetPureFluentMappingObject_Period123Validators(), this.GetClassMap<Period>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.PureFluentMappingObject, Period>(source => source.Period456, currentClass, this.GetPureFluentMappingObject_Period456Validators(), this.GetClassMap<Period>(true));
         }
         
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.PureFluentMappingObject> GetPureFluentMappingObjectValidationMap()
@@ -3965,7 +3967,7 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.RequiredValidator<SampleSystem.Domain.TestObjForNested, string>(Framework.Restriction.RequiredMode.Default);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestObjForNested, Framework.Core.Period>> GetTestObjForNested_PeriodValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestObjForNested, Period>> GetTestObjForNested_PeriodValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<SampleSystem.Domain.TestObjForNested>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
@@ -3996,7 +3998,7 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.RequiredValidator<SampleSystem.Domain.TestObjForNestedBase, string>(Framework.Restriction.RequiredMode.Default);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestObjForNestedBase, Framework.Core.Period>> GetTestObjForNestedBase_PeriodValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestObjForNestedBase, Period>> GetTestObjForNestedBase_PeriodValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<SampleSystem.Domain.TestObjForNestedBase>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
@@ -4008,7 +4010,7 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestObjForNestedBase, string>(source => source.ModifiedBy, currentClass, this.GetTestObjForNestedBase_ModifiedByValidators(), this.GetClassMap<string>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestObjForNestedBase, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetTestObjForNestedBase_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestObjForNestedBase, string>(source => source.Name, currentClass, this.GetTestObjForNestedBase_NameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestObjForNestedBase, Framework.Core.Period>(source => source.Period, currentClass, this.GetTestObjForNestedBase_PeriodValidators(), this.GetClassMap<Framework.Core.Period>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestObjForNestedBase, Period>(source => source.Period, currentClass, this.GetTestObjForNestedBase_PeriodValidators(), this.GetClassMap<Period>(true));
         }
         
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestObjForNestedBase> GetTestObjForNestedBaseValidationMap()
@@ -4023,7 +4025,7 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestObjForNested, string>(source => source.ModifiedBy, currentClass, this.GetTestObjForNested_ModifiedByValidators(), this.GetClassMap<string>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestObjForNested, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetTestObjForNested_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestObjForNested, string>(source => source.Name, currentClass, this.GetTestObjForNested_NameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestObjForNested, Framework.Core.Period>(source => source.Period, currentClass, this.GetTestObjForNested_PeriodValidators(), this.GetClassMap<Framework.Core.Period>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestObjForNested, Period>(source => source.Period, currentClass, this.GetTestObjForNested_PeriodValidators(), this.GetClassMap<Period>(true));
         }
         
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestObjForNested> GetTestObjForNestedValidationMap()

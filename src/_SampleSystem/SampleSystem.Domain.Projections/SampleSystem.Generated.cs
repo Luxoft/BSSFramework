@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Framework.Core;
+
 namespace SampleSystem.Domain.Projections
 {
     
@@ -1103,7 +1105,7 @@ namespace SampleSystem.Domain.Projections
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
         [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
-        public abstract Framework.Core.Period[] Child_Periods
+        public abstract Period[] Child_Periods
         {
             get;
         }
@@ -1203,7 +1205,7 @@ namespace SampleSystem.Domain.Projections
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
         [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
-        public abstract Framework.Core.Period[] PeriodArray
+        public abstract Period[] PeriodArray
         {
             get;
             set;

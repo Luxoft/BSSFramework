@@ -3,7 +3,7 @@ using System.Reflection;
 
 using CommonFramework;
 
-namespace Framework.Database.NHibernate;
+namespace Framework.Database.NHibernate.Visitors;
 
 public class FixNHibArrayContainsVisitor : ExpressionVisitor
 {

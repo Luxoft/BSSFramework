@@ -3,7 +3,7 @@
 //using System.Reflection;
 
 //using CommonFramework;
-//using CommonFramework.Maybe;
+//using CommonFramework;
 
 //using Framework.Application.Domain;
 
@@ -30,7 +30,7 @@
 
 //        var request = from obj in node.Object.ToMaybe()
 
-//                      from value in obj.GetDeepMemberConstValue()
+//                      from value in obj.GetConstantValue()
 
 //                      let valueType = value.GetType()
 

@@ -2,7 +2,6 @@
 using System.Reflection;
 
 using CommonFramework;
-using CommonFramework.Maybe;
 
 using Framework.Core;
 
@@ -30,7 +29,7 @@ public class OverrideInstanceContainsIdentMethodVisitor<TIdent> : ExpressionVisi
 
                       where node.Method == this.containsMethod
 
-                      from hashSet in obj.GetDeepMemberConstValue<HashSet<TIdent>>()
+                      from hashSet in obj.GetConstantValue<HashSet<TIdent>>()
 
                       let list = hashSet.ToList()
 

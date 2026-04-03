@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-using CommonFramework.Maybe;
+using CommonFramework;
 
 namespace Framework.Database._Visitors;
 

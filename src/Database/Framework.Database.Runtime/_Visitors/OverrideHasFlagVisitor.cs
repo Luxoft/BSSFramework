@@ -2,7 +2,6 @@
 using System.Reflection;
 
 using CommonFramework;
-using CommonFramework.Maybe;
 
 namespace Framework.Database._Visitors;
 
@@ -23,7 +22,7 @@ public class OverrideHasFlagVisitor : ExpressionVisitor
 
                       where node.Method == EnumHasFlagMethod
 
-                      from argEnumConstValue in node.Arguments.Single().ExtractBoxingValue().GetDeepMemberConstValue()
+                      from argEnumConstValue in node.Arguments.Single().ExtractBoxingValue().GetConstantValue()
 
                       let underType = node.Object.Type.GetEnumUnderlyingType()
 

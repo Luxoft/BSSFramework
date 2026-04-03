@@ -2,7 +2,6 @@
 
 using CommonFramework;
 using CommonFramework.DictionaryCache;
-using CommonFramework.Maybe;
 
 namespace Framework.Database._Visitors;
 
@@ -22,11 +21,11 @@ public class OverrideHashSetVisitor<TIdent> : ExpressionVisitor
                 new DictionaryCache<HashSet<TIdent>, Expression>(source => Expression.Constant(source.ToList()));
 
 
-        public override Expression Visit(Expression baseNode)
+        public override Expression Visit(Expression? baseNode)
         {
             var request = from node in baseNode.ToMaybe()
 
-                          from hashSet in node.GetDeepMemberConstValue<HashSet<TIdent>>()
+                          from hashSet in node.GetConstantValue<HashSet<TIdent>>()
 
                           select this.constCache[hashSet];
 

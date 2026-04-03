@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlTypes;
 
-using CommonFramework.Maybe;
+using CommonFramework;
 
 using Framework.Application;
 using Framework.Application.Events;

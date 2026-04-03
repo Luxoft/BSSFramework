@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Reflection;
 
-using CommonFramework.Maybe;
+using CommonFramework;
 
 using Framework.Core;
 using Framework.Database;

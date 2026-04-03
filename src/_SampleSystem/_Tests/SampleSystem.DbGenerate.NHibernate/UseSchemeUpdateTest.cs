@@ -3,11 +3,8 @@ using CommonFramework.DependencyInjection;
 using CommonFramework.IdentitySource.DependencyInjection;
 
 using Framework.Core;
-using Framework.Database;
-using Framework.Database.ConnectionStringSource;
 using Framework.Database.DependencyInjection;
 using Framework.Database.NHibernate;
-using Framework.Database.NHibernate.DependencyInjection;
 using Framework.DependencyInjection;
 
 using Microsoft.Data.SqlClient;

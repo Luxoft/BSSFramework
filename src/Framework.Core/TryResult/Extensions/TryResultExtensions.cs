@@ -1,4 +1,4 @@
-﻿using CommonFramework.Maybe;
+﻿using CommonFramework;
 
 // ReSharper disable once CheckNamespace
 namespace Framework.Core;

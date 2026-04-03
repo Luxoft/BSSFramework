@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
 
 using CommonFramework;
-using CommonFramework.Maybe;
 
 using Framework.Core;
 
@@ -59,9 +58,9 @@ namespace Framework.Database._Visitors;
 
 //        private Maybe<Expression> ExtractConstList(Expression baseNode)
 //        {
-//            return from const1 in baseNode.GetMemberConstValue<IQueryable>()
+//            return from const1 in baseNode.GetConstantValue<IQueryable>()
 
-//                   from const2 in const1.Expression.GetMemberConstValue<IQueryable>()
+//                   from const2 in const1.Expression.GetConstantValue<IQueryable>()
 
 //                   where const1 == const2 // is AsQueryable
 
@@ -88,7 +87,7 @@ public class RestoreQueryableCallsVisitor : ExpressionVisitor
 
                       where node.Object == null && method.DeclaringType == typeof(Enumerable)
 
-                      from newSource in node.Arguments[0].GetDeepMemberConstValue<IQueryable>()
+                      from newSource in node.Arguments[0].GetConstantValue<IQueryable>()
 
                       let tail = node.Arguments.Skip(1).ToArray()
 

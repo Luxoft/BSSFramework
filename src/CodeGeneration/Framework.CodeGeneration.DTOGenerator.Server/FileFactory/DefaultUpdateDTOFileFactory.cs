@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Runtime.Serialization;
 
 using CommonFramework;
-using CommonFramework.Maybe;
 
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.IdentityObject;

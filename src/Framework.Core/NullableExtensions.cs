@@ -1,4 +1,4 @@
-﻿using CommonFramework.Maybe;
+﻿using CommonFramework;
 
 namespace Framework.Core;
 

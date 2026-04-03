@@ -1,6 +1,6 @@
 ﻿using System.Net.Mail;
 
-using CommonFramework.Maybe;
+using CommonFramework;
 
 using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.Serialization;

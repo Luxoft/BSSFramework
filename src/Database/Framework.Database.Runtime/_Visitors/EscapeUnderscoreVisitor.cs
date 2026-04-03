@@ -2,7 +2,6 @@
 using System.Reflection;
 
 using CommonFramework;
-using CommonFramework.Maybe;
 
 namespace Framework.Database._Visitors;
 
@@ -23,7 +22,7 @@ public class EscapeUnderscoreVisitor : ExpressionVisitor
 
                            where node.Method == StringContainsMethod
 
-                           from value in node.Arguments.Single().GetDeepMemberConstValue<string>()
+                           from value in node.Arguments.Single().GetConstantValue<string>()
 
                            where !value.Contains("[_]") && value.Contains("_")
 

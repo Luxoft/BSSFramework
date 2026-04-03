@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 
 using CommonFramework;
-using CommonFramework.Maybe;
 
 using Framework.BLL.Domain.Exceptions;
 using Framework.CodeGeneration.Extensions;

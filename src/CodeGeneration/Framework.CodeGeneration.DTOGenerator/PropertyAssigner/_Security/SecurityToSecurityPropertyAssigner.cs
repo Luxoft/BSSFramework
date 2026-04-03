@@ -1,7 +1,7 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
-using CommonFramework.Maybe;
+using CommonFramework;
 
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;

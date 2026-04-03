@@ -3,9 +3,6 @@ using System.Reflection;
 
 using CommonFramework;
 using CommonFramework.ExpressionEvaluate;
-using CommonFramework.Maybe;
-
-using static CommonFramework.Maybe.Maybe;
 
 namespace Framework.Core.Helpers;
 
@@ -147,9 +144,9 @@ public static class ParserHelper
             {
                 return typeof(T).GetMethod("TryParse", BindingFlags.Public | BindingFlags.Static, null, [typeof(string), typeof(T).MakeByRefType()], null).Maybe(tryParseMethod =>
                 {
-                    var tryParseDelType = typeof(TryMethod<,>).MakeGenericType(typeof(string), typeof(T));
+                    var tryParseDelType = typeof(Maybe.TryMethod<,>).MakeGenericType(typeof(string), typeof(T));
 
-                    var tryParseDel = (TryMethod<string, T>)Delegate.CreateDelegate(tryParseDelType, tryParseMethod);
+                    var tryParseDel = (Maybe.TryMethod<string, T>)Delegate.CreateDelegate(tryParseDelType, tryParseMethod);
 
                     var maybeDel = Maybe.OfTryMethod(tryParseDel);
 

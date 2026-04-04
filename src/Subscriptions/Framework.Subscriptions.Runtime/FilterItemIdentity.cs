@@ -1,3 +1,3 @@
-﻿namespace Framework.Configuration.BLL;
+﻿namespace Framework.Subscriptions;
 
 public record FilterItemIdentity(Type Type, Guid Id);

@@ -1,11 +1,6 @@
-﻿using Framework.BLL;
-using Framework.BLL.Domain.IdentityObject;
-using Framework.Configuration.Domain;
-using Framework.Core;
-using Framework.Database.Domain;
-using Framework.Subscriptions;
+﻿using Framework.Core;
 
-namespace Framework.Configuration.BLL.Subscriptions;
+namespace Framework.Subscriptions;
 
 public partial class SubscriptionBLL
 {

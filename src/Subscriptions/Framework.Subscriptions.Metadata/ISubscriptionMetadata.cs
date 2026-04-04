@@ -6,15 +6,14 @@ namespace Framework.Subscriptions.Metadata;
 
 /// <summary>
 ///     Определяет интерфейс экземпляра метаданных Code first подписки.
-/// TODO: rename to ICodeFirstSubscription
 /// </summary>
 public interface ISubscriptionMetadata
 {
     /// <summary>
-    ///     Получает код подписки.
+    ///     Получает имя подписки.
     /// </summary>
-    /// <value>Код подписки.</value>
-    string Code { get; }
+    /// <value>Имя подписки.</value>
+    string Name { get; }
 
     /// <summary>
     ///     Получает имя отправителя уведомления по подписке.

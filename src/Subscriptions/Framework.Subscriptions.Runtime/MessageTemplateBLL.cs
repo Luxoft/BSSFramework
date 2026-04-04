@@ -4,16 +4,13 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 using CommonFramework;
-using Framework.BLL;
-using Framework.Configuration.BLL.Notification;
+
 using Framework.Core;
 using Framework.Notification.Domain;
 
-using Microsoft.Extensions.DependencyInjection;
-
 using MAttachment = System.Net.Mail.Attachment;
 
-namespace Framework.Configuration.BLL;
+namespace Framework.Subscriptions;
 
 public class MessageTemplateBLL(IConfigurationBLLContext context) : BLLContextContainer<IConfigurationBLLContext>(context)
 {

@@ -1,9 +1,6 @@
-﻿using Framework.Configuration.Domain;
-using Framework.Core;
-using Framework.Database;
-using Framework.Database.Domain;
+﻿using Framework.Core;
 
-namespace Framework.Configuration.BLL;
+namespace Framework.Subscriptions;
 
 public interface IRevisionSubscriptionSystemService : ISubscriptionSystemService
 {

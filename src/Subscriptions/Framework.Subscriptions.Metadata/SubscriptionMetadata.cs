@@ -5,18 +5,25 @@ using SecuritySystem;
 
 namespace Framework.Subscriptions.Metadata;
 
-/// <summary>
-/// Базовый класс экземпляра метаданных Code first подписки для случая с переопределением доменной модели при генерации получателей.
-/// </summary>
-/// <typeparam name="TDomainObject">Тип доменного объекта.</typeparam>
-/// <typeparam name="TTemplate">Тип Razor шаблона.</typeparam>
-/// <seealso cref="ISubscriptionMetadata" />
-public abstract class SubscriptionMetadata<TDomainObject, TTemplate> : ISubscriptionMetadata
+
+public abstract class SubscriptionMetadata<TDomainObject, TMessageTemplate> : SubscriptionMetadata<TDomainObject, TDomainObject, TMessageTemplate>
     where TDomainObject : class
-    where TTemplate : IRazorTemplate
+    where TMessageTemplate : IMessageTemplate<TDomainObject>;
+
+public abstract class SubscriptionMetadata<TDomainObject, TRenderingObject, TMessageTemplate> : SubscriptionMetadata<TDomainObject>
+    where TDomainObject : class
+    where TMessageTemplate : IMessageTemplate<TRenderingObject>
 {
+    public sealed override Type MessageTemplateType { get; } = typeof(TMessageTemplate);
+}
+
+public abstract class SubscriptionMetadata<TDomainObject> : ISubscriptionMetadata
+    where TDomainObject : class
+{
+    public abstract Type MessageTemplateType { get; }
+
     /// <inheritdoc />
-    public string Code => this.GetType().FullName!;
+    public string Name => this.GetType().FullName!;
 
     /// <summary>
     ///     Получает экземпляр лямбда-выражения Condition.
@@ -90,9 +97,6 @@ public abstract class SubscriptionMetadata<TDomainObject, TTemplate> : ISubscrip
 
     /// <inheritdoc />
     public Type DomainObjectType { get; } = typeof(TDomainObject);
-
-    /// <inheritdoc />
-    public Type MessageTemplateType { get; } = typeof(TTemplate);
 
     /// <inheritdoc />
     public ILambdaMetadata? GetConditionLambda() => this.ConditionLambda;

@@ -1,9 +1,4 @@
-﻿using CommonFramework;
-
-using Framework.Configuration.Domain;
-using Framework.Subscriptions;
-
-namespace Framework.Configuration.BLL.Subscriptions;
+﻿namespace Framework.Subscriptions;
 
 public partial class SubscriptionBLL(IConfigurationBLLContext context) : ISubscriptionBLL
 {

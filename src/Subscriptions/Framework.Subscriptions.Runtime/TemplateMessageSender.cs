@@ -1,12 +1,10 @@
-﻿using Framework.Notification.DTO;
+﻿using CommonFramework;
 
-using CommonFramework;
-
-using Framework.Application.Domain;
 using Framework.Core;
 using Framework.Notification.Domain;
+using Framework.Subscriptions.Domain;
 
-namespace Framework.Configuration.BLL.Notification;
+namespace Framework.Subscriptions;
 
 public class TemplateMessageSender(
     IConfigurationBLLContext context,

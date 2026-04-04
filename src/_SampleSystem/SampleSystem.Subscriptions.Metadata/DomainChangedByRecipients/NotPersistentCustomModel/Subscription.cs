@@ -2,7 +2,7 @@
 
 namespace SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
 
-public sealed class Subscription : SubscriptionMetadata<Domain.Country,  _DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml>
+public sealed class Subscription : SubscriptionMetadata<Domain.Country, CustomNotificationModel, _DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml>
 {
     public Subscription()
     {

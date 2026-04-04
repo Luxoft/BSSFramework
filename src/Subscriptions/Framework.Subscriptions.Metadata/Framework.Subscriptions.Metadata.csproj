@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Subscriptions.Metadata</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IvAt.SecuritySystem.Domain" />
+    <PackageReference Include="IvAt.SecuritySystem.Notification.Domain" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework.Core\Framework.Core.csproj" />
+    <ProjectReference Include="..\Framework.Subscriptions.Domain\Framework.Subscriptions.Domain.csproj" />
+  </ItemGroup>
+
+  <!--<ItemGroup>
+    <ProjectReference Include="..\..\Notification\Framework.Notification.Domain\Framework.Notification.Domain.csproj" />
+    <ProjectReference Include="..\Framework.Subscriptions.Domain\Framework.Subscriptions.Domain.csproj" />
+  </ItemGroup>-->
+
+</Project>

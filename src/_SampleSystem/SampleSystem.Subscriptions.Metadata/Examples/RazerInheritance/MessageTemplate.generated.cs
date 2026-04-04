@@ -9,20 +9,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ASP
+namespace SampleSystem.Subscriptions.Metadata.Examples.RazerInheritance
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using SampleSystem.Domain;
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    public partial class _Examples_RazerInheritance_MessageTemplate_cshtml : LuxIM.Subscriptions.Metadata.LocalRazorTemplate<Employee>
+    public partial class _Examples_RazerInheritance_MessageTemplate_cshtml : LocalRazorTemplate<Domain.Employee>
     {
 #line hidden
 
-    public override string Subject => $"Employee {Current.NameNative} has been changed";
+    public override string Subject => $"Employee {this.Current.NameNative} has been changed";
 
         public override void Execute()
         {
@@ -35,15 +29,15 @@ namespace ASP
 
 
 
-WriteLiteral("<h2>Hi there!!!</h2>\nMy test employee Name: ");
+this.WriteLiteral("<h2>Hi there!!!</h2>\nMy test employee Name: ");
 
 
-                  Write(this.GetEmployeeName(Current));
+                  this.Write(this.GetEmployeeName(this.Current));
 
-WriteLiteral("\nDate: ");
+this.WriteLiteral("\nDate: ");
 
 
- Write(this.GetDateString(new DateTime(2015, 10, 21)));
+ this.Write(this.GetDateString(new DateTime(2015, 10, 21)));
 
 
         }

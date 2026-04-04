@@ -69,11 +69,11 @@ public class ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environ
     }
 
     protected override IEnumerable<ICodeFileFactoryHeader<BaseFileType>> GetFileFactoryHeaders() =>
-        base.GetFileFactoryHeaders().Concat(new[]
-                                            {
-                                                this.FullRefDTOFileFactoryHeader,
+        base.GetFileFactoryHeaders().Concat(
+        [
+            this.FullRefDTOFileFactoryHeader,
                                                 this.SimpleRefFullDetailDTOFileFactoryHeader
-                                            });
+        ]);
 
     protected override IEnumerable<PropertyInfo> GetInternalDomainTypeProperties(Type domainType, DTOFileType fileType)
     {

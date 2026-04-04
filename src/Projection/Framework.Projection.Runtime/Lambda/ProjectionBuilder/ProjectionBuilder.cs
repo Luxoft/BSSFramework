@@ -26,13 +26,13 @@ internal class ProjectionBuilder : IProjection
     public ProjectionRole Role { get; set; }
 
 
-    public List<ProjectionPropertyBuilder> Properties { get; set; } = new();
+    public List<ProjectionPropertyBuilder> Properties { get; set; } = [];
 
-    public List<ProjectionCustomPropertyBuilder> CustomProperties { get; } = new();
+    public List<ProjectionCustomPropertyBuilder> CustomProperties { get; } = [];
 
-    public List<Attribute> Attributes { get; set; } = new();
+    public List<Attribute> Attributes { get; set; } = [];
 
-    public List<ProjectionFilterAttribute> FilterAttributes { get; set; } = new();
+    public List<ProjectionFilterAttribute> FilterAttributes { get; set; } = [];
 
     public bool IgnoreIdSerialization { get; set; }
 

@@ -1,4 +1,4 @@
-﻿using ASP;
+﻿using Framework.Subscriptions.Metadata;
 
 using SampleSystem.Subscriptions.Metadata.Employee.Update;
 using SampleSystem.Subscriptions.Metadata.Examples.Attachment;
@@ -6,7 +6,7 @@ using SampleSystem.Subscriptions.Metadata.Examples.Attachment;
 namespace SampleSystem.Subscriptions.Metadata.Examples.AttachmentInline;
 
 public sealed class AttachmentInlineSubscription
-        : SubscriptionMetadataBase<Domain.Employee, _Examples_AttachmentInline_MessageTemplate_cshtml>
+        : SubscriptionMetadata<Domain.Employee, _Examples_AttachmentInline_MessageTemplate_cshtml>
 {
     /// <summary>
     /// Sample with inline attachment
@@ -19,7 +19,7 @@ public sealed class AttachmentInlineSubscription
         this.GenerationLambda = new GenerationLambda();
         this.CopyGenerationLambda = new CopyGenerationLambda();
         this.SecurityItemSourceLambdas = [new SecurityItemSourceLambda()];
-        this.RecipientsSelectorMode = Framework.Subscriptions.Domain.RecipientsSelectorMode.Union;
+        this.RecipientsSelectorMode = RecipientsSelectorMode.Union;
         this.IncludeAttachments = true;
         this.AttachmentLambda = new AttachmentLambda();
     }

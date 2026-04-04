@@ -1,13 +1,13 @@
-﻿using SampleSystem.Subscriptions.Metadata.Employee.Update;
-using SampleSystem.Subscriptions.Metadata.Examples.RazerTemplateImpl;
+﻿using Framework.Subscriptions.Metadata;
 
-namespace SampleSystem.Subscriptions.Metadata.Examples.RazerInheritance;
+using SampleSystem.Subscriptions.Metadata.Employee.Update;
+
+namespace SampleSystem.Subscriptions.Metadata.Examples.RazerTemplateImpl;
 
 /// <summary>
 /// Example for showing customizing of implementation of IRazerTemplate
 /// </summary>
-public sealed class RazerTemplateImplSubscription
-        : SubscriptionMetadataBase<Domain.Employee, RazorTemplateImpl>
+public sealed class RazerTemplateImplSubscription : SubscriptionMetadata<Domain.Employee, RazorTemplateImpl>
 {
     public RazerTemplateImplSubscription()
     {

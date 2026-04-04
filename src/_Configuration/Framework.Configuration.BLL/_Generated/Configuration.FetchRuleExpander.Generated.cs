@@ -17,11 +17,7 @@ namespace Framework.Configuration.BLL
         
         protected override GenericQueryable.Fetching.PropertyFetchRule<TDomainObject> TryExpand<TDomainObject>(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
-            if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.CodeFirstSubscription)))
-            {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetCodeFirstSubscriptionFetchRule(dtoType)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.DomainObjectEvent)))
+            if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.DomainObjectEvent)))
             {
                 return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetDomainObjectEventFetchRule(dtoType)))));
             }
@@ -52,30 +48,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.TargetSystem)))
             {
                 return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTargetSystemFetchRule(dtoType)))));
-            }
-            else
-            {
-                return null;
-            }
-        }
-        
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<Framework.Configuration.Domain.CodeFirstSubscription> TryGetCodeFirstSubscriptionFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
-        {
-            if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
-            {
-                return GenericQueryable.Fetching.FetchRule<Framework.Configuration.Domain.CodeFirstSubscription>.Empty;
-            }
-            else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
-            {
-                return GenericQueryable.Fetching.FetchRule<Framework.Configuration.Domain.CodeFirstSubscription>.Empty;
-            }
-            else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
-            {
-                return GenericQueryable.Fetching.FetchRule<Framework.Configuration.Domain.CodeFirstSubscription>.Empty;
-            }
-            else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
-            {
-                return GenericQueryable.Fetching.FetchRule<Framework.Configuration.Domain.CodeFirstSubscription>.Empty;
             }
             else
             {

@@ -85,7 +85,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
                 var expandHeadPathPrefix = this.ExpandPathHead.SkipLast(1).Select(prop => $"{prop.Name}_Auto");
                 var expandHeadPathPostfix = this.ExpandPathHead.Last().Name + "_Last_" + this.ProjectionValue.Name;
 
-                var expandHeadPath = expandHeadPathPrefix.Concat(new[] { expandHeadPathPostfix });
+                var expandHeadPath = expandHeadPathPrefix.Concat([expandHeadPathPostfix]);
 
                 var expandPath = expandHeadPath.Join(".");
 
@@ -99,7 +99,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
 
                 var postfix = isIdentityTail ? string.Empty : "_Last_" + this.ProjectionValue.Name;
 
-                var expandPath = expandHeadPath.Concat(new[] { this.CompositeTail.Concat(prop => prop.Name) }).Join(".") + postfix;
+                var expandPath = expandHeadPath.Concat([this.CompositeTail.Concat(prop => prop.Name)]).Join(".") + postfix;
 
                 return new ExpandPathAttribute(expandPath);
             }

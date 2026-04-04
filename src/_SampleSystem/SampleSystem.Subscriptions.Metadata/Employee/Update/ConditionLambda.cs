@@ -1,4 +1,5 @@
-﻿using Framework.Subscriptions;
+﻿using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Employee.Update;
 
@@ -11,6 +12,6 @@ public sealed class ConditionLambda : ConditionLambdaBase<Domain.Employee>
     public ConditionLambda()
     {
         this.DomainObjectChangeType = DomainObjectChangeType.Update;
-        this.Lambda = (context, versions) => true;
+        this.Lambda = (service, versions) => true;
     }
 }

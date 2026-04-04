@@ -18,6 +18,10 @@
 
   </PropertyGroup>
 
+  <PropertyGroup>
+    <NoWarn>CS9107</NoWarn>
+  </PropertyGroup>
+
   <!-- PDB settings -->
   <PropertyGroup>
 

@@ -51,7 +51,7 @@ public class SecurityRuleTests : TestBase
                       .Select(obj => obj.Id).ToList());
 
         // Assert
-        loadedObjects.Should().BeEquivalentTo(new[] { testObjectIdents[0] });
+        loadedObjects.Should().BeEquivalentTo([testObjectIdents[0]]);
     }
 
     [TestMethod]

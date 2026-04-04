@@ -7,7 +7,9 @@ namespace Framework.Configuration.BLL.TargetSystemService;
 
 public interface ITargetSystemService : ITypeResolverContainer<DomainType>, ITargetSystemElement<TargetSystem>, IVisualIdentityObject
 {
-    IRevisionSubscriptionSystemService SubscriptionService { get; }
+    Type PersistentDomainObjectBaseType { get; }
+
+    Type BLLContextType { get; }
 
     ITypeResolver<string> TypeResolverS { get; }
 

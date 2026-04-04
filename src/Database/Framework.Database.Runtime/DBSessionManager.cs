@@ -1,4 +1,4 @@
-﻿using Framework.Core.LazyObject;
+﻿using Framework.Core;
 
 namespace Framework.Database
 {

@@ -14,16 +14,16 @@ using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Jobs;
 using Framework.Configuration.BLL.Notification;
 using Framework.Configuration.BLL.Subscriptions;
-using Framework.Configuration.BLL.SubscriptionSystemService;
 using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
 using Framework.Configuration.Generated.DTO;
-using Framework.Core.MessageSender;
+using Framework.Core;
 using Framework.Database;
 using Framework.Infrastructure.LocalDBEvents;
 using Framework.Infrastructure.SubscriptionService;
 using Framework.Notification.Domain;
 using Framework.Notification.DTO;
+using Framework.Subscriptions;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -44,9 +44,7 @@ public static class ServiceCollectionExtensions
             services.AddScoped<IApplicationVariableStorage, ConfigurationApplicationVariableStorage>();
             services.AddScoped<IEventSystem, ConfigurationEventSystem>();
 
-            services.AddSingleton<SubscriptionMetadataStore>();
-            services.AddSingleton<ISubscriptionMetadataFinder, SubscriptionMetadataFinder>();
-            services.AddScoped<ISubscriptionInitializer, SubscriptionInitializer>();
+            services.AddScoped<IDomainObjectVersionsResolverFactory, DomainObjectVersionsResolverFactory>();
 
             services.AddScoped<ISystemConstantInitializer, SystemConstantInitializer>();
 

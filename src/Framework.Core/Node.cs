@@ -30,7 +30,7 @@ public class Node<T> : IEnumerable<T>
 public class NodeP<T> : Node<T>
 {
     internal NodeP(T value)
-            : base(value, Array.Empty<Node<T>>())
+            : base(value, [])
     {
 
     }

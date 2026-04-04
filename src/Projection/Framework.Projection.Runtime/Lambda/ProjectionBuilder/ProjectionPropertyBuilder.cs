@@ -38,7 +38,7 @@ internal class ProjectionPropertyBuilder : IProjectionProperty
         this.IsNullable = this.Expression.ReturnType.IsValueType && this.Path.HasReferenceResult();
         this.ElementType = this.Expression.ReturnType.GetNullableElementType() ?? this.Expression.ReturnType.GetCollectionElementTypeOrSelf();
         this.Name = this.Expression.ToPath().Replace(".", string.Empty) + namePostfix;
-        this.Attributes = new List<Attribute>();
+        this.Attributes = [];
     }
 
 

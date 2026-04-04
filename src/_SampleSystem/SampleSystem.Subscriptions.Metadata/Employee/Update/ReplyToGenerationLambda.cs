@@ -1,7 +1,5 @@
-﻿using Framework.Subscriptions;
-using Framework.Subscriptions.Domain;
-
-using SampleSystem.BLL;
+﻿using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Employee.Update;
 
@@ -13,11 +11,11 @@ public sealed class ReplyToGenerationLambda : GenerationLambdaBase<Domain.Employ
     /// </summary>
     public ReplyToGenerationLambda()
     {
-        this.DomainObjectChangeType = Framework.Subscriptions.DomainObjectChangeType.Update;
+        this.DomainObjectChangeType = DomainObjectChangeType.Update;
         this.Lambda = this.GetRecipients;
     }
 
     private NotificationMessageGenerationInfo[] GetRecipients(
-            ISampleSystemBLLContext context,
-            DomainObjectVersions<Domain.Employee> versions) => [new NotificationMessageGenerationInfo("replayTo@luxoft.com", versions.Previous, versions.Current)];
+        IServiceProvider _,
+        DomainObjectVersions<Domain.Employee> versions) => [new NotificationMessageGenerationInfo("replayTo@luxoft.com", versions.Previous, versions.Current)];
 }

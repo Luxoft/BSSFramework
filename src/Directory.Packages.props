@@ -16,7 +16,7 @@
     <PackageVersion Include="FluentMigrator.Extensions.SqlServer" Version="8.0.1" />
     <PackageVersion Include="IvAt.CommonFramework" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="$(IvAt)" />
-    <PackageVersion Include="IvAt.CommonFramework.GenericRepository" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.CommonFramework.GenericRepository" Version="3.2.2" />
     <PackageVersion Include="IvAt.CommonFramework.IdentitySource.Abstractions" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.GenericQueryable" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.GenericQueryable.Abstractions" Version="$(IvAt)" />

@@ -338,7 +338,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
                 return generator.SqlCreateStrings(dialect);
             }
         }
-        return Array.Empty<string>();
+        return [];
     }
 
     private static IEnumerable<string> CreateCreateOrAlterTableScripts(AuditTableGenerateContext context, bool createMode)

@@ -119,7 +119,7 @@ internal class GeneratedType : BaseTypeImpl
             }
             else
             {
-                yield return new[] { securityNodeInterface };
+                yield return [securityNodeInterface];
             }
         };
     }
@@ -169,7 +169,7 @@ internal class GeneratedType : BaseTypeImpl
         }
         else
         {
-            return new FieldInfo[0];
+            return [];
         }
     }
 

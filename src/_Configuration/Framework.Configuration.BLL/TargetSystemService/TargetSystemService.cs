@@ -4,9 +4,6 @@ using Framework.Application.Domain;
 using Framework.Application.Events;
 using Framework.BLL;
 using Framework.BLL.Services;
-using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3;
-using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
-using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.TypeResolving;
@@ -15,8 +12,8 @@ namespace Framework.Configuration.BLL.TargetSystemService;
 
 public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<IConfigurationBLLContext>, ITargetSystemService
 
-        where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
-        where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
+    where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
+    where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
 {
     private readonly IEventOperationSender eventOperationSender;
 
@@ -29,19 +26,16 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLL
     /// <param name="targetSystemContext">Контекст целевой системы.</param>
     /// <param name="subscriptionMetadataStore">Хранилище описаний подписок.</param>
     public TargetSystemService(
-            IConfigurationBLLContext context,
-            TBLLContext targetSystemContext,
-            TargetSystemInfo<TPersistentDomainObjectBase> targetSystemInfo,
-            IEventOperationSender eventOperationSender,
-            SubscriptionMetadataStore subscriptionMetadataStore)
-            : base(context)
+        IConfigurationBLLContext context,
+        TBLLContext targetSystemContext,
+        TargetSystemInfo<TPersistentDomainObjectBase> targetSystemInfo,
+        IEventOperationSender eventOperationSender)
+        : base(context)
     {
         this.Name = targetSystemInfo.Name;
 
         this.TargetSystemContext = targetSystemContext;
         this.eventOperationSender = eventOperationSender;
-
-        this.SubscriptionService = this.GetSubscriptionService(subscriptionMetadataStore);
 
         this.lazyTargetSystem = LazyHelper.Create(() => context.Logics.TargetSystem.GetByName(this.Name, true));
 
@@ -52,13 +46,13 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLL
 
     public TBLLContext TargetSystemContext { get; }
 
+    public Type BLLContextType { get; } = typeof(TBLLContext);
+
     public ITypeResolver<string> TypeResolverS => this.TargetSystemContext.TypeResolver;
 
     public ITypeResolver<DomainType> TypeResolver { get; }
 
     public TargetSystem TargetSystem => this.lazyTargetSystem.Value;
-
-    public IRevisionSubscriptionSystemService SubscriptionService { get; }
 
     public Type PersistentDomainObjectBaseType => typeof(TPersistentDomainObjectBase);
 
@@ -75,12 +69,13 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLL
     }
 
     private void ForceEvent<TDomainObject>(string operationName, long? revision, Guid domainObjectId)
-            where TDomainObject : class, TPersistentDomainObjectBase
+        where TDomainObject : class, TPersistentDomainObjectBase
     {
         var bll = this.TargetSystemContext.Logics.Default.Create<TDomainObject>();
 
-        var domainObject = revision == null ? bll.GetById(domainObjectId, true)
-                                   : bll.GetObjectByRevision(domainObjectId, revision.Value);
+        var domainObject = revision == null
+                               ? bll.GetById(domainObjectId, true)
+                               : bll.GetObjectByRevision(domainObjectId, revision.Value);
 
         var domainObjectEvent = new EventOperation(operationName);
 
@@ -88,16 +83,4 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLL
     }
 
     public bool IsAssignable(Type domainType) => typeof(TPersistentDomainObjectBase).IsAssignableFrom(domainType);
-
-    private IRevisionSubscriptionSystemService GetSubscriptionService(
-            SubscriptionMetadataStore subscriptionMetadataStore)
-    {
-        var subscriptionServicesFactory = new SubscriptionServicesFactory<TBLLContext, TPersistentDomainObjectBase>(
-            this.Context,
-            this.TargetSystemContext.Logics.Default,
-            this.TargetSystemContext,
-            subscriptionMetadataStore);
-
-        return new RevisionSubscriptionSystemService<TBLLContext, TPersistentDomainObjectBase>(subscriptionServicesFactory);
-    }
 }

@@ -2,10 +2,7 @@
 
 using Framework.BLL;
 using Framework.Core;
-using Framework.Core.MessageSender;
 using Framework.Validation;
-
-using Attachment = Framework.Notification.Domain.Attachment;
 
 namespace Framework.Configuration.BLL.Notification;
 
@@ -93,7 +90,7 @@ public class ExceptionMessageSender : BLLContextContainer<IConfigurationBLLConte
                                                              subject,
                                                              body,
                                                              false,
-                                                             Array.Empty<Attachment>());
+                                                             []);
 
         await this.messageSender.SendAsync(message, cancellationToken);
     }

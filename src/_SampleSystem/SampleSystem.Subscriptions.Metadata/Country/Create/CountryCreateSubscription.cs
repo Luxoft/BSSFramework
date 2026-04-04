@@ -1,10 +1,9 @@
-﻿using ASP;
+﻿using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Country.Create;
 
 /// <inheritdoc />
-public sealed class CountryCreateSubscription
-        : SubscriptionMetadataBase<Domain.Country, _Country_Create_MessageTemplate_cshtml>
+public sealed class CountryCreateSubscription : SubscriptionMetadata<Domain.Country, _Country_Create_MessageTemplate_cshtml>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="CountryCreateSubscription"/> class.
@@ -16,7 +15,7 @@ public sealed class CountryCreateSubscription
         this.ConditionLambda = new ConditionLambda();
         this.GenerationLambda = new GenerationLambda();
         this.CopyGenerationLambda = new CopyGenerationLambda();
-        this.RecipientsSelectorMode = Framework.Subscriptions.Domain.RecipientsSelectorMode.Union;
+        this.RecipientsSelectorMode = RecipientsSelectorMode.Union;
         this.SendIndividualLetters = true;
         this.ExcludeCurrentUser = true;
         this.IncludeAttachments = false;

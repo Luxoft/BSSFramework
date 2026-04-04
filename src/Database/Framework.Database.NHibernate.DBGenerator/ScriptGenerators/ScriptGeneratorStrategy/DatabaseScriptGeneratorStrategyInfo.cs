@@ -42,8 +42,8 @@ public struct DatabaseScriptGeneratorStrategyInfo
         this.DataTypeComparer = dataTypeComparer;
         this.PreviousPostfix = previousPostfix;
 
-        this.AddedColumns = new List<Tuple<Table, Column, string>>();
-        this.RemovableColumns = new List<Column>();
+        this.AddedColumns = [];
+        this.RemovableColumns = [];
 
         this.IgnoredIndexes = ignoredIndexes ?? new List<string>();
 

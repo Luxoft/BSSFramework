@@ -48,7 +48,7 @@ internal class GeneratedCustomProperty : BasePropertyInfoImpl
 
     public override object[] GetCustomAttributes(bool inherit) => this.customProjectionProperty.Attributes.ToArray();
 
-    public override ParameterInfo[] GetIndexParameters() => new ParameterInfo[0];
+    public override ParameterInfo[] GetIndexParameters() => [];
 
     public override MethodInfo GetGetMethod(bool nonPublic) => this.getMethod;
 

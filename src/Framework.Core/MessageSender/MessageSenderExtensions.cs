@@ -1,4 +1,5 @@
-﻿namespace Framework.Core.MessageSender;
+﻿// ReSharper disable once CheckNamespace
+namespace Framework.Core;
 
 public static class MessageSenderExtensions
 {

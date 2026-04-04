@@ -1,7 +1,7 @@
 ﻿namespace SampleSystem.Subscriptions.Metadata.DataModel.Create;
 
 /* TODO: Uncomment this after fixing #IADFRAME-1634
-public sealed class DateModelCreateSubscription : SubscriptionMetadataBase<DateModel, _DataModel_Create_MessageTemplate_cshtml>
+public sealed class DateModelCreateSubscription : SubscriptionMetadata<DateModel, _DataModel_Create_MessageTemplate_cshtml>
 {
     public DateModelCreateSubscription()
     {

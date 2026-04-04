@@ -80,7 +80,7 @@ public static class CoreTypeExtensions
 
         if (source.IsCollection())
         {
-            return Array.Empty<FieldInfo>();
+            return [];
         }
 
         var currentType = source;

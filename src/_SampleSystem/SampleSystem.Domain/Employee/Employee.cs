@@ -32,8 +32,8 @@ public partial class Employee :
         IMaster<EmployeeToEmployeeLink>,
         IMaster<EmployeeAndEmployeeSpecializationLink>,
         IMaster<EmployeePhoto>,
-        ISecurityContext,
-        IEmployee
+        ISecurityContext//,
+        //IEmployee
 {
     private readonly ICollection<EmployeePhoto> employeePhotos = new List<EmployeePhoto>();
 

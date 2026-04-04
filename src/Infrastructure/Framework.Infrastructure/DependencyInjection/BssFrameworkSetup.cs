@@ -1,4 +1,5 @@
-﻿using CommonFramework.DependencyInjection;
+﻿using CommonFramework;
+using CommonFramework.DependencyInjection;
 
 using Framework.Application;
 using Framework.Application.Auth;
@@ -87,6 +88,8 @@ public class BssFrameworkSetup : IBssFrameworkSetup, IServiceInitializer
 
     public void Initialize(IServiceCollection services)
     {
+        services.AddSingleton<ICultureSource>(CultureSource.CurrentCulture);
+
         services.AddGenericApplicationServices();
 
         if (this.RegisterDenormalizeHierarchicalDALListener)

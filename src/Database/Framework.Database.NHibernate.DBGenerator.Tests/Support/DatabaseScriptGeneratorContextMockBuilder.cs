@@ -24,7 +24,7 @@ public class DatabaseScriptGeneratorContextMockBuilder
         this.SqlDatabaseFactory.GetOrCreateDatabase(Arg.Any<DatabaseName>()).Returns(this.MainDaraBase);
 
         this.DatabaseScriptGeneratorContext.SqlDatabaseFactory.Returns(this.SqlDatabaseFactory);
-        this.DatabaseScriptGeneratorContext.AssemblyMetadata.Returns(new AssemblyMetadata(typeof(object)) { DomainTypes = Array.Empty<DomainTypeMetadata>() });
+        this.DatabaseScriptGeneratorContext.AssemblyMetadata.Returns(new AssemblyMetadata(typeof(object)) { DomainTypes = [] });
     }
 
     public IDatabaseScriptGeneratorContext DatabaseScriptGeneratorContext { get; }

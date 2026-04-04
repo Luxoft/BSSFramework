@@ -1,4 +1,4 @@
-﻿using Framework.Core.MessageSender;
+﻿using Framework.Core;
 using Framework.Notification.DTO;
 
 namespace Framework.Configuration.BLL.Notification;
@@ -8,7 +8,7 @@ public class NotificationMessageSender(IMessageSender<NotificationEventDTO> noti
 {
     public async Task SendAsync(Framework.Notification.Domain.Notification notification, CancellationToken cancellationToken)
     {
-        notification.Message.Sender = notification.Message.Sender ?? defaultMailSenderContainer.DefaultSender;
+        notification.Message.Sender ??= defaultMailSenderContainer.DefaultSender;
 
         await notificationEventSender.SendAsync(new NotificationEventDTO(notification), cancellationToken);
     }

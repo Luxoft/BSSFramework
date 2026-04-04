@@ -1,4 +1,5 @@
-﻿namespace Framework.Core.LazyObject;
+﻿// ReSharper disable once CheckNamespace
+namespace Framework.Core;
 
 /// <summary>
 /// For same lazy object with covariant interface

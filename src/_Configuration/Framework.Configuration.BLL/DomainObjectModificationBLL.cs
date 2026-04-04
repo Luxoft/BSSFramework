@@ -1,14 +1,25 @@
-﻿using Framework.Configuration.Domain;
+﻿using Framework.BLL;
+using Framework.BLL.Domain.IdentityObject;
+using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Database;
 using Framework.Database.Domain;
+using Framework.Subscriptions;
+using Framework.Subscriptions.Domain;
 
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+
+using SecuritySystem.Providers;
 
 namespace Framework.Configuration.BLL;
 
-public partial class DomainObjectModificationBLL
+public partial class DomainObjectModificationBLL(
+    IConfigurationBLLContext context,
+    ISecurityProvider<DomainObjectModification> securityProvider,
+    ISubscriptionService subscriptionService,
+    ILogger<DomainObjectModificationBLL> logger,
+    IDomainObjectVersionsResolverFactory domainObjectVersionsResolverFactory)
+    : SecurityDomainBLLBase<DomainObjectModification>(context, securityProvider)
 {
     public ITryResult<int> Process(int limit = 1000)
     {
@@ -17,7 +28,6 @@ public partial class DomainObjectModificationBLL
         var modifications = this.Context.Logics.DomainObjectModification.GetUnsecureQueryable().Where(m => !m.Processed) // Add Order by time?
                                 .Take(limit).ToList();
 
-        var logger = this.Context.ServiceProvider.GetRequiredService<ILogger<DomainObjectModificationBLL>>();
         logger.LogDebug("Found {Count} modifications", modifications.Count);
 
         var errors = new List<Exception>();
@@ -34,7 +44,9 @@ public partial class DomainObjectModificationBLL
 
             logger.LogDebug("Process modification {DomainObjectId}", modification.DomainObjectId);
 
-            foreach (var tryResult in this.Context.Logics.Subscription.Process(info))
+            var versions = this.GetDomainObjectVersions(info);
+
+            foreach (var tryResult in subscriptionService.Process(versions))
             {
                 tryResult.Match(
                     _ => { },
@@ -60,11 +72,20 @@ public partial class DomainObjectModificationBLL
         }
     }
 
+    private IDomainObjectVersions GetDomainObjectVersions(ObjectModificationInfo<Guid> modificationInfo)
+    {
+        var domainType = this.Context.Logics.DomainType.GetByDomainType(new MemoryDomainType(modificationInfo.TypeInfo.Name, modificationInfo.TypeInfo.NameSpace))!;
+
+        var domainObjectType = this.Context.ComplexDomainTypeResolver.Resolve(domainType);
+
+        return domainObjectVersionsResolverFactory.Create(domainObjectType).GetDomainObjectVersions(modificationInfo.Identity, modificationInfo.Revision);
+    }
+
     /// <inheritdoc />
     public QueueProcessingState GetProcessingState() =>
         new()
         {
             UnprocessedCount = this.GetUnsecureQueryable().Count(mod => !mod.Processed),
-            LastProcessedItemDateTime = this.GetUnsecureQueryable().Where<DomainObjectModification>(mod => mod.Processed).Max(mod => mod.ModifyDate)
+            LastProcessedItemDateTime = this.GetUnsecureQueryable().Where(mod => mod.Processed).Max(mod => mod.ModifyDate)
         };
 }

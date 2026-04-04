@@ -100,7 +100,7 @@ internal class CreateSecurityNodesProjectionSource(IProjectionSource baseSource,
         {
             if (securityTypes.Add(securityType))
             {
-                this.FillLinkedSecurityTypes(new[] { securityType }, securityTypes);
+                this.FillLinkedSecurityTypes([securityType], securityTypes);
             }
         }
     }
@@ -120,7 +120,7 @@ internal class CreateSecurityNodesProjectionSource(IProjectionSource baseSource,
                           select securityType;
 
 
-            return request.Concat(new[] { type });
+            return request.Concat([type]);
         }
         else
         {

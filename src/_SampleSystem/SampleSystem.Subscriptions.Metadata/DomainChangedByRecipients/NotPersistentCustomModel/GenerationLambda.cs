@@ -1,7 +1,5 @@
-﻿using Framework.Subscriptions;
-using Framework.Subscriptions.Domain;
-
-using SampleSystem.BLL;
+﻿using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
 
@@ -9,17 +7,17 @@ public sealed class GenerationLambda : GenerationLambdaBase<Domain.Country>
 {
     public GenerationLambda()
     {
-        this.DomainObjectChangeType = Framework.Subscriptions.DomainObjectChangeType.Update;
+        this.DomainObjectChangeType = DomainObjectChangeType.Update;
         this.Lambda = this.GetRecipients;
     }
 
     private NotificationMessageGenerationInfo[] GetRecipients(
-            ISampleSystemBLLContext context,
+            IServiceProvider service,
             DomainObjectVersions<Domain.Country> versions) =>
     [
-        new NotificationMessageGenerationInfo(
+        new(
             "tester@luxoft.com",
-            new CustomNotificationModel(context, versions.Current),
-            new CustomNotificationModel(context, versions.Previous))
+            new CustomNotificationModel(service, versions.Current),
+            new CustomNotificationModel(service, versions.Previous))
     ];
 }

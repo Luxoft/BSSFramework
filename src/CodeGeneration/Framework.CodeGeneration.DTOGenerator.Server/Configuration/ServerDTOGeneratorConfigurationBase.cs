@@ -306,7 +306,7 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
 
         if (baseFileType is DomainOperationEventDTOFileType || baseFileType == ServerFileType.BaseEventDTO)
         {
-            return Array.Empty<PropertyInfo>();
+            return [];
         }
 
         var clientFileType = baseFileType == ServerFileType.SimpleEventDTO || baseFileType == ServerFileType.SimpleIntegrationDTO
@@ -327,9 +327,8 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
 
     protected override IEnumerable<ICodeFileFactoryHeader<BaseFileType>> GetFileFactoryHeaders() =>
         base.GetFileFactoryHeaders().Concat(
-            new[]
-            {
-                this.BaseEventDTOFileFactoryHeader,
+        [
+            this.BaseEventDTOFileFactoryHeader,
                 this.SimpleEventDTOFileFactoryHeader,
                 this.RichEventDTOFileFactoryHeader,
                 this.SimpleIntegrationDTOFileFactoryHeader,
@@ -337,8 +336,8 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
                 this.LambdaHelperFileFactoryHeader,
                 this.ServerDTOMappingServiceInterfaceFileFactoryHeader,
                 this.ServerPrimitiveDTOMappingServiceBaseFileFactoryHeader,
-                this.ServerPrimitiveDTOMappingServiceFileFactoryHeader,
-            });
+                this.ServerPrimitiveDTOMappingServiceFileFactoryHeader
+        ]);
 
     protected virtual IPropertyAssignerConfigurator GetPropertyAssignerConfigurator() => new PropertyAssignerConfigurator<ServerDTOGeneratorConfigurationBase<TEnvironment>>(this);
 

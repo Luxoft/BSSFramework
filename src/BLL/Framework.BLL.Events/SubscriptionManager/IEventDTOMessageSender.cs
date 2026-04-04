@@ -1,4 +1,4 @@
-﻿using Framework.Core.MessageSender;
+﻿using Framework.Core;
 
 namespace Framework.BLL.Events.SubscriptionManager;
 

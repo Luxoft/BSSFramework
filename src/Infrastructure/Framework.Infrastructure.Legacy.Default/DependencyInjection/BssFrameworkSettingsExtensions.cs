@@ -6,6 +6,8 @@ using Framework.Configuration.BLL.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 using Framework.Notification;
 using Framework.Notification.Domain;
+using Framework.Subscriptions;
+using Framework.Subscriptions.Domain;
 
 using Microsoft.Extensions.DependencyInjection;
 

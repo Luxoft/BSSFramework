@@ -1,10 +1,10 @@
-﻿using ASP;
+﻿using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Employee.Update;
 
 /// <inheritdoc />
 public sealed class EmployeeUpdateSubscription
-        : SubscriptionMetadataBase<Domain.Employee, _Employee_Update_MessageTemplate_cshtml>
+        : SubscriptionMetadata<Domain.Employee, _Employee_Update_MessageTemplate_cshtml>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="EmployeeUpdateSubscription"/> class.
@@ -18,7 +18,7 @@ public sealed class EmployeeUpdateSubscription
         this.CopyGenerationLambda = new CopyGenerationLambda();
 
         this.SecurityItemSourceLambdas = [new SecurityItemSourceLambda()];
-        this.RecipientsSelectorMode = Framework.Subscriptions.Domain.RecipientsSelectorMode.Union;
+        this.RecipientsSelectorMode = RecipientsSelectorMode.Union;
         this.SendIndividualLetters = true;
         this.ExcludeCurrentUser = true;
         this.IncludeAttachments = false;

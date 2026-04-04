@@ -1,8 +1,6 @@
-﻿using Framework.Notification.DTO;
+﻿using Framework.Core;
+using Framework.Notification.DTO;
 
 namespace Framework.Notification;
 
-public interface ISmtpMessageSender
-{
-    Task SendAsync(NotificationEventDTO message, CancellationToken cancellationToken = default);
-}
+public interface ISmtpMessageSender : IMessageSender<NotificationEventDTO>;

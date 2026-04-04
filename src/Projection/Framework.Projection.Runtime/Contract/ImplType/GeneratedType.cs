@@ -142,7 +142,7 @@ internal class GeneratedType : BaseTypeImpl
         }
         else
         {
-            return new FieldInfo[0];
+            return [];
         }
     }
 

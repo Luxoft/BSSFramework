@@ -3,23 +3,20 @@ namespace Framework.Core;
 
 public static partial class TryResultExtensions
 {
-    public static void Match<TArgs, TResult>(this ITryResult<TArgs, TResult> source, Action<TArgs, TResult> successAction, Action<TArgs, Exception> faultAction = null)
+    public static void Match<TArgs, TResult>(this ITryResult<TArgs, TResult> source, Action<TArgs, TResult> successAction, Action<TArgs, Exception>? faultAction = null)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (successAction == null) throw new ArgumentNullException(nameof(successAction));
 
 
-        if (source is ISuccessResult<TArgs, TResult>)
+        if (source is ISuccessResult<TArgs, TResult> successResult)
         {
-            var successedResult = (source as ISuccessResult<TArgs, TResult>);
-
-            successAction(successedResult.Args, successedResult.Result);
+            successAction(successResult.Args, successResult.Result);
         }
-        else if (source is IFaultResult<TArgs, TResult>)
+        else if (source is IFaultResult<TArgs, TResult> faultResult)
         {
             if (faultAction != null)
             {
-                var faultResult = source as IFaultResult<TArgs, TResult>;
                 faultAction(faultResult.Args, faultResult.Error);
             }
         }
@@ -38,15 +35,12 @@ public static partial class TryResultExtensions
         if (successAction == null) throw new ArgumentNullException(nameof(successAction));
         if (getFaultResult == null) throw new ArgumentNullException(nameof(getFaultResult));
 
-        if (source is ISuccessResult<TArgs, TResult>)
+        if (source is ISuccessResult<TArgs, TResult> successResult)
         {
-            var successResult = (source as ISuccessResult<TArgs, TResult>);
-
             return successAction(successResult.Args, successResult.Result);
         }
-        else if (source is IFaultResult<TArgs, TResult>)
+        else if (source is IFaultResult<TArgs, TResult> faultResult)
         {
-            var faultResult = source as IFaultResult<TArgs, TResult>;
             return getFaultResult(faultResult.Args, faultResult.Error);
         }
         else

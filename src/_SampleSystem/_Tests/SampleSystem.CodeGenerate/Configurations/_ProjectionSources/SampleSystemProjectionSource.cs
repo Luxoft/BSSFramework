@@ -47,7 +47,7 @@ public class SampleSystemProjectionSource : ProjectionSource
                                 .CustomProperty<string>("HerBusinessUnit_Full") // Расчётное свойство типа "string"
 
                                 .Property(bu => bu.BusinessUnitEmployeeRoles, () => this.MiniBusinessUnitEmployeeRole, ignoreSerialization: true)
-                                .CustomProperty<string>("Employees", fetchs: new[] { "BusinessUnitEmployeeRoles.Employee" }) // Расчётное свойство типа "string" и подгрузка для него из базы "BusinessUnitEmployeeRoles.Employee"
+                                .CustomProperty<string>("Employees", fetchs: ["BusinessUnitEmployeeRoles.Employee"]) // Расчётное свойство типа "string" и подгрузка для него из базы "BusinessUnitEmployeeRoles.Employee"
 
                                 .CustomProperty<string>("CalcProp", writable: true) // Расчётное свойство типа "string" с разрешенной записью в него
                                 .CustomProperty<string[][]>("CalcMatrix") // Расчётное свойство типа "string[][]"
@@ -94,7 +94,8 @@ public class SampleSystemProjectionSource : ProjectionSource
         this.CustomCompanyLegalEntity = new Projection<CompanyLegalEntity>(() => this.CustomCompanyLegalEntity, true)
                                         .Attribute(new ExampleCustomProjectionAttribute()) // Добавлям кастомный атрибут в проекцию
                                         .Attribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.BusinessUnitEdit)) // Подменяем атрибут доступа проекции
-                                        .Property(legalEntity => legalEntity.Code, propertyAttributes: new Attribute[] { new ViewDomainObjectAttribute(SampleSystemSecurityOperation.CompanyLegalEntityView) }) // Добавляем свойство и атрибут доступа к нему
+                                        .Property(legalEntity => legalEntity.Code, propertyAttributes: [new ViewDomainObjectAttribute(SampleSystemSecurityOperation.CompanyLegalEntityView)
+                                                  ]) // Добавляем свойство и атрибут доступа к нему
                                         .Property(legalEntity => legalEntity.Name)
                                         .Property(legalEntity => legalEntity.NameEnglish)
                                         .Property(legalEntity => legalEntity.CurrentObj, () => this.CustomTestObjForNested)

@@ -5,8 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Subscriptions\Framework.Subscriptions.Abstractions\Framework.Subscriptions.Abstractions.csproj" />
-    <ProjectReference Include="..\SampleSystem.BLL.Core\SampleSystem.BLL.Core.csproj" />
+    <PackageReference Include="IvAt.CommonFramework.GenericRepository" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Subscriptions\Framework.Subscriptions.Metadata\Framework.Subscriptions.Metadata.csproj" />
+    <ProjectReference Include="..\SampleSystem.Domain.Models\SampleSystem.Domain.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>

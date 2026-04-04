@@ -2,7 +2,7 @@
 
 using Framework.Application.Events;
 using Framework.BLL.Events.SubscriptionManager;
-using Framework.Core.MessageSender;
+using Framework.Core;
 
 namespace Framework.Infrastructure.LocalDBEvents;
 

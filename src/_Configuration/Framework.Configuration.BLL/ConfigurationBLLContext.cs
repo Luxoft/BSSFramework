@@ -13,11 +13,9 @@ using Framework.BLL.Services;
 using Framework.Configuration.BLL.TargetSystemService;
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.Core.MessageSender;
 using Framework.Core.Serialization;
 using Framework.Core.TypeResolving;
 using Framework.Database;
-using Framework.Notification;
 using Framework.Notification.Domain;
 using Framework.Tracking;
 using Framework.Validation;
@@ -58,7 +56,6 @@ public partial class ConfigurationBLLContext
         IRootSecurityService securityService,
         IConfigurationBLLFactoryContainer logics,
         IAuthorizationBLLContext authorization,
-        IEmployeeSource employeeSource,
         IDomainObjectEventMetadata eventOperationSource,
         INamedLockService namedLockService,
         IEnumerable<ITargetSystemService> targetSystemServices,
@@ -77,7 +74,6 @@ public partial class ConfigurationBLLContext
 
         this.Authorization = authorization ?? throw new ArgumentNullException(nameof(authorization));
         this.NamedLockService = namedLockService;
-        this.EmployeeSource = employeeSource ?? throw new ArgumentNullException(nameof(employeeSource));
         this.EventOperationSource = eventOperationSource;
         this.currentRevisionService = currentRevisionService ?? throw new ArgumentNullException(nameof(currentRevisionService));
         this.NotificationPrincipalExtractor = notificationPrincipalExtractor;
@@ -160,8 +156,6 @@ public partial class ConfigurationBLLContext
 
     public INamedLockService NamedLockService { get; }
 
-    public IEmployeeSource EmployeeSource { get; }
-
     public IDomainObjectEventMetadata EventOperationSource { get; }
 
     /// <inheritdoc />
@@ -234,13 +228,6 @@ public partial class ConfigurationBLLContext
         }
 
         return domainType;
-    }
-
-    public ISubscriptionSystemService GetSubscriptionSystemService(Type domainType)
-    {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
-        return this.GetTargetSystemService(domainType, true).SubscriptionService;
     }
 
     private DomainType GetDomainType(ITargetSystemService targetService, Type type)

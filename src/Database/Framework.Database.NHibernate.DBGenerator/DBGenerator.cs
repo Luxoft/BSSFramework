@@ -55,8 +55,8 @@ public class DBGenerator(MappingSettings settings)
             ICollection<string>? ignoredIndexes = null,
             DbUserCredential? credentials = null)
     {
-        migrationScriptFolderPaths ??= Array.Empty<string>();
-        auditMigrationScriptFolderPaths ??= Array.Empty<string>();
+        migrationScriptFolderPaths ??= [];
+        auditMigrationScriptFolderPaths ??= [];
 
         var dbName = settings.Database;
 

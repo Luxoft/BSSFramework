@@ -1,4 +1,5 @@
-﻿using Framework.Subscriptions;
+﻿using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
 using SampleSystem.Domain.Models.Custom;
 
@@ -12,6 +13,6 @@ public sealed class ConditionLambda : ConditionLambdaBase<DateModel>
     public ConditionLambda()
     {
         this.DomainObjectChangeType = DomainObjectChangeType.Create;
-        this.Lambda = (context, versions) => true;
+        this.Lambda = (service, versions) => true;
     }
 }

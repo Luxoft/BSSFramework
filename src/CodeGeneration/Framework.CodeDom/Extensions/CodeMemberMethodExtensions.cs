@@ -85,7 +85,7 @@ public static class CodeMemberMethodExtensions
 
         if (!string.IsNullOrEmpty(comment))
         {
-            codeMemberMethod.Comments.AddComments(new[] { comment });
+            codeMemberMethod.Comments.AddComments([comment]);
         }
 
         return codeMemberMethod;
@@ -113,7 +113,7 @@ public static class CodeMemberMethodExtensions
 
         var statements = expressions.ToArray(expr => (CodeStatement)new CodeMethodYieldReturnStatement { Expression = expr });
 
-        codeMemberMethod.Statements.AddRange(statements.Any() || !autoBreak ? statements : new[] { new CodeMethodYieldBreakStatement() });
+        codeMemberMethod.Statements.AddRange(statements.Any() || !autoBreak ? statements : [new CodeMethodYieldBreakStatement()]);
 
         return codeMemberMethod;
     }

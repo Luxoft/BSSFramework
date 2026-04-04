@@ -1,4 +1,5 @@
 ﻿using System.Net.Mail;
+
 using Framework.Notification.DTO;
 
 namespace Framework.Notification;

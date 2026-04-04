@@ -6,7 +6,7 @@ namespace Framework.Database.NHibernate.DBGenerator.ScriptGeneratorBuilder;
 
 abstract class DatabaseScriptGeneratorContainer
 {
-    private readonly List<IDatabaseScriptGenerator> generators = new();
+    private readonly List<IDatabaseScriptGenerator> generators = [];
     private bool isComplete;
     protected readonly MigrationDBScriptGeneratorBuilder MigrationDbScriptGeneratorBuilder = new();
 

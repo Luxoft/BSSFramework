@@ -1,6 +1,4 @@
-﻿using Framework.Notification.Domain;
-
-namespace Framework.Subscriptions.Domain;
+﻿namespace Framework.Subscriptions.Domain;
 
 public abstract class EmployeeEqualityComparer : IEqualityComparer<IEmployee>
 {

@@ -1,4 +1,4 @@
-﻿using ASP;
+﻿using Framework.Subscriptions.Metadata;
 
 using SampleSystem.Subscriptions.Metadata.Employee.Update;
 
@@ -7,8 +7,7 @@ namespace SampleSystem.Subscriptions.Metadata.Examples.RazerInheritance;
 /// <summary>
 /// Example for showing customizing of inheritance of Razer
 /// </summary>
-public sealed class RazerInheritanceSubscription
-        : SubscriptionMetadataBase<Domain.Employee, _Examples_RazerInheritance_MessageTemplate_cshtml>
+public sealed class RazerInheritanceSubscription : SubscriptionMetadata<Domain.Employee, _Examples_RazerInheritance_MessageTemplate_cshtml>
 {
     public RazerInheritanceSubscription()
     {

@@ -1,11 +1,11 @@
-﻿using ASP;
+﻿using Framework.Subscriptions.Metadata;
 
 using SampleSystem.Subscriptions.Metadata.Employee.Update;
 
 namespace SampleSystem.Subscriptions.Metadata.Examples.AttachmentTemplateEvaluator;
 
 public sealed class AttachmentTemplateEvaluatorSubscription
-        : SubscriptionMetadataBase<Domain.Employee, _Examples_AttachmentTemplateEvaluator_MessageTemplate_cshtml>
+        : SubscriptionMetadata<Domain.Employee, _Examples_AttachmentTemplateEvaluator_MessageTemplate_cshtml>
 {
     /// <summary>
     /// Sample with template attachment
@@ -18,7 +18,7 @@ public sealed class AttachmentTemplateEvaluatorSubscription
         this.GenerationLambda = new GenerationLambda();
         this.CopyGenerationLambda = new CopyGenerationLambda();
         this.SecurityItemSourceLambdas = [new SecurityItemSourceLambda()];
-        this.RecipientsSelectorMode = Framework.Subscriptions.Domain.RecipientsSelectorMode.Union;
+        this.RecipientsSelectorMode = RecipientsSelectorMode.Union;
         this.IncludeAttachments = true;
         this.AttachmentLambda = new AttachmentLambdaTemplateEvaluator();
     }

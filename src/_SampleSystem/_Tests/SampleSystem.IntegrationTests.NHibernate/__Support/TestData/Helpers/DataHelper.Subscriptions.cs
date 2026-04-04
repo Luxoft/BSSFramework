@@ -4,6 +4,7 @@ using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Database.Domain;
+using Framework.Subscriptions;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 

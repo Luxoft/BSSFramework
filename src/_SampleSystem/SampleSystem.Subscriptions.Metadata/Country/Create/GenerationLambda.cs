@@ -1,7 +1,5 @@
-﻿using Framework.Subscriptions;
-using Framework.Subscriptions.Domain;
-
-using SampleSystem.BLL;
+﻿using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Country.Create;
 
@@ -13,11 +11,11 @@ public sealed class GenerationLambda : GenerationLambdaBase<Domain.Country>
     /// </summary>
     public GenerationLambda()
     {
-        this.DomainObjectChangeType = Framework.Subscriptions.DomainObjectChangeType.Create;
+        this.DomainObjectChangeType = DomainObjectChangeType.Create;
         this.Lambda = this.GetRecipients;
     }
 
     private NotificationMessageGenerationInfo[] GetRecipients(
-            ISampleSystemBLLContext context,
-            DomainObjectVersions<Domain.Country> versions) => [new NotificationMessageGenerationInfo("tester@luxoft.com", versions.Current, versions.Previous)];
+            IServiceProvider service,
+            DomainObjectVersions<Domain.Country> versions) => [new("tester@luxoft.com", versions.Current, versions.Previous)];
 }

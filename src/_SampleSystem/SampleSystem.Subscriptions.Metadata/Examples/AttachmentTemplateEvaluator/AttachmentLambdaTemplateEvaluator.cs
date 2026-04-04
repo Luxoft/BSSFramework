@@ -1,8 +1,7 @@
 ﻿using System.Text;
 
 using Framework.Subscriptions.Domain;
-
-using SampleSystem.BLL;
+using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Examples.AttachmentTemplateEvaluator;
 
@@ -15,12 +14,12 @@ public sealed class AttachmentLambdaTemplateEvaluator : AttachmentLambdaBase<Dom
     /// </summary>
     public AttachmentLambdaTemplateEvaluator()
     {
-        this.DomainObjectChangeType = Framework.Subscriptions.DomainObjectChangeType.Update;
+        this.DomainObjectChangeType = DomainObjectChangeType.Update;
         this.Lambda = GetAttachments;
     }
 
     private static System.Net.Mail.Attachment[] GetAttachments(
-            ISampleSystemBLLContext context,
+            IServiceProvider service,
             DomainObjectVersions<Domain.Employee> versions)
     {
         var template = Encoding.UTF8.GetBytes($"Hello world! {versions.Current.NameNative}");

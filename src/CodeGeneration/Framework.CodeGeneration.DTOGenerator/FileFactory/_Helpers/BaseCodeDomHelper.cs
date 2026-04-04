@@ -129,7 +129,7 @@ public static class BaseCodeDomHelper
                 {
                     var baseInterfaceSourceTypeRef = source.Configuration.GetCodeTypeReference(source.DomainType, baseFileType);
 
-                    constructor.ChainedConstructorArgs.AddRange(new CodeExpression[] { new CodeCastExpression(baseInterfaceSourceTypeRef, sourceTypeParameterRefExpr), mappingServiceParameterRefExpr});
+                    constructor.ChainedConstructorArgs.AddRange([new CodeCastExpression(baseInterfaceSourceTypeRef, sourceTypeParameterRefExpr), mappingServiceParameterRefExpr]);
                 }
             }
 

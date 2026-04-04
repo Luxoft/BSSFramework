@@ -14,8 +14,6 @@ namespace Framework.Configuration.Generated.DTO
     public partial interface IConfigurationClientDTOMappingService
     {
         
-        void MapBaseAuditPersistentToStrictForCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
-        
         void MapBaseAuditPersistentToStrictForDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
         void MapBaseAuditPersistentToStrictForDomainObjectModification(Framework.Configuration.Generated.DTO.DomainObjectModificationStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
@@ -34,8 +32,6 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapBaseAuditPersistentToStrictForTargetSystem(Framework.Configuration.Generated.DTO.TargetSystemStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
-        void MapBasePersistentToStrictForCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
-        
         void MapBasePersistentToStrictForDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapBasePersistentToStrictForDomainObjectModification(Framework.Configuration.Generated.DTO.DomainObjectModificationStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
@@ -53,10 +49,6 @@ namespace Framework.Configuration.Generated.DTO
         void MapBasePersistentToStrictForSystemConstant(Framework.Configuration.Generated.DTO.SystemConstantStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapBasePersistentToStrictForTargetSystem(Framework.Configuration.Generated.DTO.TargetSystemStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
-        
-        void MapFullToStrictForCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO target, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO currentSource);
-        
-        void MapFullToStrictForCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO currentSource);
         
         void MapFullToStrictForDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventStrictDTO target, Framework.Configuration.Generated.DTO.DomainObjectEventFullDTO currentSource);
         
@@ -90,10 +82,6 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapFullToStrictForTargetSystemRootFilterModel(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelFullDTO currentSource);
         
-        void MapRichToStrictForCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO target, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO currentSource);
-        
-        void MapRichToStrictForCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO currentSource);
-        
         void MapRichToStrictForDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventStrictDTO target, Framework.Configuration.Generated.DTO.DomainObjectEventRichDTO currentSource);
         
         void MapRichToStrictForDomainObjectModification(Framework.Configuration.Generated.DTO.DomainObjectModificationStrictDTO target, Framework.Configuration.Generated.DTO.DomainObjectModificationRichDTO currentSource);
@@ -125,10 +113,6 @@ namespace Framework.Configuration.Generated.DTO
         void MapRichToStrictForTargetSystem(Framework.Configuration.Generated.DTO.TargetSystemStrictDTO target, Framework.Configuration.Generated.DTO.TargetSystemRichDTO currentSource);
         
         void MapRichToStrictForTargetSystemRootFilterModel(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelRichDTO currentSource);
-        
-        void MapSimpleToStrictForCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO target, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO currentSource);
-        
-        void MapSimpleToStrictForCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO currentSource);
         
         void MapSimpleToStrictForDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventStrictDTO target, Framework.Configuration.Generated.DTO.DomainObjectEventSimpleDTO currentSource);
         
@@ -165,19 +149,6 @@ namespace Framework.Configuration.Generated.DTO
     
     public abstract partial class ConfigurationClientPrimitiveDTOMappingServiceBase : Framework.BLL.DTOMapping.Services.ClientDTOMappingServiceBase, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService
     {
-        
-        public virtual void MapBaseAuditPersistentToStrictForCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.Active = source.Active;
-        }
         
         public virtual void MapBaseAuditPersistentToStrictForDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source)
         {
@@ -285,19 +256,6 @@ namespace Framework.Configuration.Generated.DTO
             {
                 throw new System.ArgumentNullException("target");
             }
-        }
-        
-        public virtual void MapBasePersistentToStrictForCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.Id = source.Id;
         }
         
         public virtual void MapBasePersistentToStrictForDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO source)
@@ -415,30 +373,6 @@ namespace Framework.Configuration.Generated.DTO
                 throw new System.ArgumentNullException("target");
             }
             target.Id = source.Id;
-        }
-        
-        public virtual void MapFullToStrictForCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO target, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapFullToStrictForCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
         }
         
         public virtual void MapFullToStrictForDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventStrictDTO target, Framework.Configuration.Generated.DTO.DomainObjectEventFullDTO source)
@@ -665,30 +599,6 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        public virtual void MapRichToStrictForCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO target, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapRichToStrictForCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
         public virtual void MapRichToStrictForDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventStrictDTO target, Framework.Configuration.Generated.DTO.DomainObjectEventRichDTO source)
         {
             if (object.ReferenceEquals(source, null))
@@ -871,30 +781,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public virtual void MapRichToStrictForTargetSystemRootFilterModel(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelRichDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapSimpleToStrictForCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO target, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapSimpleToStrictForCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -1136,112 +1022,6 @@ namespace Framework.Configuration.Generated.DTO
             {
                 return Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService._default;
             }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscription), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class CodeFirstSubscriptionIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public CodeFirstSubscriptionIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public CodeFirstSubscriptionIdentityDTO(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public CodeFirstSubscriptionIdentityDTO(Framework.Configuration.Domain.CodeFirstSubscription domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public CodeFirstSubscriptionIdentityDTO()
-        {
-        }
-        
-        public CodeFirstSubscriptionIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO Empty
-        {
-            get
-            {
-                return Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO identity1, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO identity1, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO identity2)
-        {
-            return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO)) && identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO) == other.GetType()) && this.Equals(((Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO)(other)));
-        }
-        
-        public bool Equals(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO other)
-        {
-            return !object.ReferenceEquals(other, null) && (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public Framework.Configuration.Domain.CodeFirstSubscription ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToCodeFirstSubscription(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
         }
     }
     
@@ -2350,436 +2130,6 @@ namespace Framework.Configuration.Generated.DTO
             {
                 this._modifyDate = value;
             }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscription), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO))]
-    public partial class CodeFirstSubscriptionSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO>
-    {
-        
-        private string _code;
-        
-        public CodeFirstSubscriptionSimpleDTO()
-        {
-        }
-        
-        public CodeFirstSubscriptionSimpleDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.CodeFirstSubscription domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapCodeFirstSubscription(domainObject, this);
-        }
-        
-        public CodeFirstSubscriptionSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code
-        {
-            get
-            {
-                return this._code;
-            }
-            set
-            {
-                this._code = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO Identity
-        {
-            get
-            {
-                return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO(this.Id);
-            }
-        }
-        
-        public virtual void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.CodeFirstSubscription domainObject)
-        {
-            mappingService.MapCodeFirstSubscription(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.CodeFirstSubscription ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToCodeFirstSubscription(this);
-        }
-        
-        public virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscription), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO))]
-    public partial class CodeFirstSubscriptionFullDTO : Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>
-    {
-        
-        private Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO _domainType;
-        
-        public CodeFirstSubscriptionFullDTO()
-        {
-        }
-        
-        public CodeFirstSubscriptionFullDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.CodeFirstSubscription domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapCodeFirstSubscription(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO DomainType
-        {
-            get
-            {
-                return this._domainType;
-            }
-            set
-            {
-                this._domainType = value;
-            }
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.CodeFirstSubscription domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapCodeFirstSubscription(this, domainObject);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscription), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class CodeFirstSubscriptionRichDTO : Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription>
-    {
-        
-        public CodeFirstSubscriptionRichDTO()
-        {
-        }
-        
-        public CodeFirstSubscriptionRichDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.CodeFirstSubscription domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapCodeFirstSubscription(domainObject, this);
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.CodeFirstSubscription domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapCodeFirstSubscription(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.CodeFirstSubscription ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToCodeFirstSubscription(this);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscription), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class CodeFirstSubscriptionStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscription>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO>
-    {
-        
-        private bool _active = true;
-        
-        private System.Guid _id;
-        
-        public CodeFirstSubscriptionStrictDTO()
-        {
-        }
-        
-        public CodeFirstSubscriptionStrictDTO(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForCodeFirstSubscription(this, source);
-        }
-        
-        public CodeFirstSubscriptionStrictDTO(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public CodeFirstSubscriptionStrictDTO(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForCodeFirstSubscription(this, source);
-        }
-        
-        public CodeFirstSubscriptionStrictDTO(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public CodeFirstSubscriptionStrictDTO(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForCodeFirstSubscription(this, source);
-        }
-        
-        public CodeFirstSubscriptionStrictDTO(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private CodeFirstSubscriptionStrictDTO(Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.BasePersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBaseAuditPersistentToStrictForCodeFirstSubscription(this, source);
-        }
-        
-        private CodeFirstSubscriptionStrictDTO(Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private CodeFirstSubscriptionStrictDTO(Framework.Configuration.Generated.DTO.BasePersistentDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBasePersistentToStrictForCodeFirstSubscription(this, source);
-        }
-        
-        private CodeFirstSubscriptionStrictDTO(Framework.Configuration.Generated.DTO.BasePersistentDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO Identity
-        {
-            get
-            {
-                return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO(this.Id);
-            }
-        }
-        
-        public void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.CodeFirstSubscription domainObject)
-        {
-            mappingService.MapCodeFirstSubscription(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.CodeFirstSubscription ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToCodeFirstSubscription(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO))]
-    public partial class CodeFirstSubscriptionRootFilterModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>
-    {
-        
-        public CodeFirstSubscriptionRootFilterModelSimpleDTO()
-        {
-        }
-        
-        public CodeFirstSubscriptionRootFilterModelSimpleDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapCodeFirstSubscriptionRootFilterModel(domainObject, this);
-        }
-        
-        public virtual void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject)
-        {
-            mappingService.MapCodeFirstSubscriptionRootFilterModel(this, domainObject);
-        }
-        
-        public virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO))]
-    public partial class CodeFirstSubscriptionRootFilterModelFullDTO : Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>
-    {
-        
-        public CodeFirstSubscriptionRootFilterModelFullDTO()
-        {
-        }
-        
-        public CodeFirstSubscriptionRootFilterModelFullDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapCodeFirstSubscriptionRootFilterModel(domainObject, this);
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapCodeFirstSubscriptionRootFilterModel(this, domainObject);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class CodeFirstSubscriptionRootFilterModelRichDTO : Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>
-    {
-        
-        public CodeFirstSubscriptionRootFilterModelRichDTO()
-        {
-        }
-        
-        public CodeFirstSubscriptionRootFilterModelRichDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapCodeFirstSubscriptionRootFilterModel(domainObject, this);
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapCodeFirstSubscriptionRootFilterModel(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToCodeFirstSubscriptionRootFilterModel(this);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class CodeFirstSubscriptionRootFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>
-    {
-        
-        public CodeFirstSubscriptionRootFilterModelStrictDTO()
-        {
-        }
-        
-        public CodeFirstSubscriptionRootFilterModelStrictDTO(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForCodeFirstSubscriptionRootFilterModel(this, source);
-        }
-        
-        public CodeFirstSubscriptionRootFilterModelStrictDTO(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public CodeFirstSubscriptionRootFilterModelStrictDTO(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForCodeFirstSubscriptionRootFilterModel(this, source);
-        }
-        
-        public CodeFirstSubscriptionRootFilterModelStrictDTO(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public CodeFirstSubscriptionRootFilterModelStrictDTO(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForCodeFirstSubscriptionRootFilterModel(this, source);
-        }
-        
-        public CodeFirstSubscriptionRootFilterModelStrictDTO(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject)
-        {
-            mappingService.MapCodeFirstSubscriptionRootFilterModel(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToCodeFirstSubscriptionRootFilterModel(this);
         }
     }
     
@@ -7589,16 +6939,6 @@ namespace Framework.Configuration.Generated.DTO
     public class LambdaHelper
     {
         
-        public static Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO ToFullDTO(this Framework.Configuration.Domain.CodeFirstSubscription domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO ToFullDTO(this Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO(mappingService, domainObject);
-        }
-        
         public static Framework.Configuration.Generated.DTO.DomainObjectEventFullDTO ToFullDTO(this Framework.Configuration.Domain.DomainObjectEvent domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.DomainObjectEventFullDTO(mappingService, domainObject);
@@ -7677,16 +7017,6 @@ namespace Framework.Configuration.Generated.DTO
         public static Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelFullDTO ToFullDTO(this Framework.Configuration.Domain.TargetSystemRootFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelFullDTO(mappingService, domainObject);
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.CodeFirstSubscription> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectEventFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectEvent> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -7769,11 +7099,6 @@ namespace Framework.Configuration.Generated.DTO
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
-        public static Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO ToIdentityDTO(this Framework.Configuration.Domain.CodeFirstSubscription domainObject)
-        {
-            return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO(domainObject);
-        }
-        
         public static Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO ToIdentityDTO(this Framework.Configuration.Domain.DomainObjectEvent domainObject)
         {
             return new Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO(domainObject);
@@ -7819,11 +7144,6 @@ namespace Framework.Configuration.Generated.DTO
             return new Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO(domainObject);
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.CodeFirstSubscription> domainObjects)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
-        }
-        
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectEvent> domainObjects)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
@@ -7867,16 +7187,6 @@ namespace Framework.Configuration.Generated.DTO
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.TargetSystem> domainObjects)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
-        }
-        
-        public static Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO ToRichDTO(this Framework.Configuration.Domain.CodeFirstSubscription domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO ToRichDTO(this Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO(mappingService, domainObject);
         }
         
         public static Framework.Configuration.Generated.DTO.DomainObjectEventRichDTO ToRichDTO(this Framework.Configuration.Domain.DomainObjectEvent domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -7959,16 +7269,6 @@ namespace Framework.Configuration.Generated.DTO
             return new Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelRichDTO(mappingService, domainObject);
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.CodeFirstSubscription> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
-        }
-        
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectEventRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectEvent> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
@@ -8049,16 +7349,6 @@ namespace Framework.Configuration.Generated.DTO
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
-        public static Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.CodeFirstSubscription domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO(mappingService, domainObject);
-        }
-        
         public static Framework.Configuration.Generated.DTO.DomainObjectEventSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.DomainObjectEvent domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.DomainObjectEventSimpleDTO(mappingService, domainObject);
@@ -8137,16 +7427,6 @@ namespace Framework.Configuration.Generated.DTO
         public static Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.TargetSystemRootFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelSimpleDTO(mappingService, domainObject);
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.CodeFirstSubscription> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainObjectEventSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainObjectEvent> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -8285,34 +7565,6 @@ namespace Framework.Configuration.Generated.DTO
     {
         
         void MapAuditPersistentDomainObjectBase(Framework.Configuration.Domain.AuditPersistentDomainObjectBase domainObject, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO mappingObject);
-        
-        void MapCodeFirstSubscription(Framework.Configuration.Domain.CodeFirstSubscription domainObject, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO mappingObject);
-        
-        void MapCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscription domainObject);
-        
-        void MapCodeFirstSubscription(Framework.Configuration.Domain.CodeFirstSubscription domainObject, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO mappingObject);
-        
-        void MapCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscription domainObject);
-        
-        void MapCodeFirstSubscription(Framework.Configuration.Domain.CodeFirstSubscription domainObject, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO mappingObject);
-        
-        void MapCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscription domainObject);
-        
-        void MapCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscription domainObject);
-        
-        void MapCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO mappingObject);
-        
-        void MapCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject);
-        
-        void MapCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO mappingObject);
-        
-        void MapCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject);
-        
-        void MapCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO mappingObject);
-        
-        void MapCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject);
-        
-        void MapCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject);
         
         void MapDomainObjectBase(Framework.Configuration.Domain.DomainObjectBase domainObject, Framework.Configuration.Generated.DTO.BaseAbstractDTO mappingObject);
         
@@ -8562,18 +7814,6 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapTargetSystemRootFilterModel(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO mappingObject, Framework.Configuration.Domain.TargetSystemRootFilterModel domainObject);
         
-        Framework.Configuration.Domain.CodeFirstSubscription ToCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdentityDTO);
-        
-        Framework.Configuration.Domain.CodeFirstSubscription ToCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO codeFirstSubscriptionSimpleDTO);
-        
-        Framework.Configuration.Domain.CodeFirstSubscription ToCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO codeFirstSubscriptionRichDTO);
-        
-        Framework.Configuration.Domain.CodeFirstSubscription ToCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO codeFirstSubscriptionStrictDTO);
-        
-        Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel ToCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO codeFirstSubscriptionRootFilterModelRichDTO);
-        
-        Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel ToCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO codeFirstSubscriptionRootFilterModelStrictDTO);
-        
         Framework.Configuration.Domain.DomainObjectEvent ToDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO domainObjectEventIdentityDTO);
         
         Framework.Configuration.Domain.DomainObjectEvent ToDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventSimpleDTO domainObjectEventSimpleDTO);
@@ -8710,72 +7950,6 @@ namespace Framework.Configuration.Generated.DTO
             mappingObject.CreatedBy = domainObject.CreatedBy;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
-        }
-        
-        public virtual void MapCodeFirstSubscription(Framework.Configuration.Domain.CodeFirstSubscription domainObject, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO mappingObject)
-        {
-            mappingObject.Code = domainObject.Code;
-        }
-        
-        public virtual void MapCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscription domainObject)
-        {
-        }
-        
-        public virtual void MapCodeFirstSubscription(Framework.Configuration.Domain.CodeFirstSubscription domainObject, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO mappingObject)
-        {
-            if (!object.ReferenceEquals(domainObject.DomainType, null))
-            {
-                mappingObject.DomainType = Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.DomainType, this);
-            }
-            else
-            {
-                mappingObject.DomainType = null;
-            }
-        }
-        
-        public virtual void MapCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscription domainObject)
-        {
-        }
-        
-        public virtual void MapCodeFirstSubscription(Framework.Configuration.Domain.CodeFirstSubscription domainObject, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscription domainObject)
-        {
-        }
-        
-        public virtual void MapCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscription domainObject)
-        {
-            domainObject.Active = mappingObject.Active;
-        }
-        
-        public virtual void MapCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelSimpleDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject)
-        {
-        }
-        
-        public virtual void MapCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelFullDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject)
-        {
-        }
-        
-        public virtual void MapCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject)
-        {
-        }
-        
-        public virtual void MapCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO mappingObject, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel domainObject)
-        {
         }
         
         public virtual void MapDomainObjectBase(Framework.Configuration.Domain.DomainObjectBase domainObject, Framework.Configuration.Generated.DTO.BaseAbstractDTO mappingObject)
@@ -9515,36 +8689,6 @@ namespace Framework.Configuration.Generated.DTO
             where TDomainObject : Framework.Configuration.Domain.DomainObjectBase
         {
             mappingObject.MapToDomainObject(this, domainObject);
-        }
-        
-        public virtual Framework.Configuration.Domain.CodeFirstSubscription ToCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdentityDTO)
-        {
-            return this.GetById<Framework.Configuration.Domain.CodeFirstSubscription>(codeFirstSubscriptionIdentityDTO.Id);
-        }
-        
-        public virtual Framework.Configuration.Domain.CodeFirstSubscription ToCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO codeFirstSubscriptionSimpleDTO)
-        {
-            return this.GetById<Framework.Configuration.Domain.CodeFirstSubscription>(codeFirstSubscriptionSimpleDTO.Id);
-        }
-        
-        public virtual Framework.Configuration.Domain.CodeFirstSubscription ToCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO codeFirstSubscriptionRichDTO)
-        {
-            return this.ToDomainObject<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO, Framework.Configuration.Domain.CodeFirstSubscription>(codeFirstSubscriptionRichDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.CodeFirstSubscription ToCodeFirstSubscription(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO codeFirstSubscriptionStrictDTO)
-        {
-            return this.ToDomainObject<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO, Framework.Configuration.Domain.CodeFirstSubscription>(codeFirstSubscriptionStrictDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel ToCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO codeFirstSubscriptionRootFilterModelRichDTO)
-        {
-            return this.ToDomainObjectBase<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>(codeFirstSubscriptionRootFilterModelRichDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel ToCodeFirstSubscriptionRootFilterModel(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO codeFirstSubscriptionRootFilterModelStrictDTO)
-        {
-            return this.ToDomainObjectBase<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO, Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>(codeFirstSubscriptionRootFilterModelStrictDTO);
         }
         
         protected virtual TDomainObject ToDomainObject<TMappingObject, TDomainObject>(TMappingObject mappingObject)

@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 using CommonFramework.DependencyInjection;
 
-using Framework.Core.LazyObject;
+using Framework.Core;
 using Framework.Database._Visitors.Containers;
 using Framework.Database.ConnectionStringSource;
 using Framework.Database.DALExceptions;

@@ -1,4 +1,4 @@
-﻿using Framework.Core.MessageSender;
+﻿using Framework.Core;
 using Framework.Notification.DTO;
 
 using Microsoft.Extensions.Logging;

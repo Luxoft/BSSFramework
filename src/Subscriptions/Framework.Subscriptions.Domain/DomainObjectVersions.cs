@@ -3,16 +3,16 @@
 /// <summary>
 /// Контейнер версий доменного объекта.
 /// </summary>
-/// <typeparam name="T">Тип доменного объекта</typeparam>
-public sealed class DomainObjectVersions<T> : IDomainObjectVersions
-    where T : class
+/// <typeparam name="TDomainObject">Тип доменного объекта</typeparam>
+public sealed class DomainObjectVersions<TDomainObject> : IDomainObjectVersions
+    where TDomainObject : class
 {
     /// <summary>
     /// Создаёт экземпляр класса <see cref="DomainObjectVersions{T}"/>.
     /// </summary>
     /// <param name="previous">Предыдущая версия доменного объекта.</param>
     /// <param name="current">Текущая версия доменного объекта.</param>
-    public DomainObjectVersions(T? previous, T? current)
+    public DomainObjectVersions(TDomainObject? previous, TDomainObject? current)
     {
         if (previous == null && current == null)
         {
@@ -30,7 +30,7 @@ public sealed class DomainObjectVersions<T> : IDomainObjectVersions
     /// <value>
     /// Текущая версия доменного объекта.
     /// </value>
-    public T? Current { get; }
+    public TDomainObject? Current { get; }
 
     /// <summary>
     /// Возвращает предыдущую версию доменного объекта.
@@ -38,7 +38,7 @@ public sealed class DomainObjectVersions<T> : IDomainObjectVersions
     /// <value>
     /// Предыдущая версия доменного объекта.
     /// </value>
-    public T? Previous { get; }
+    public TDomainObject? Previous { get; }
 
     /// <summary>
     /// Реальный тип версий доменного объекта, сохранённый в этом экземпляре.
@@ -84,6 +84,9 @@ public sealed class DomainObjectVersions<T> : IDomainObjectVersions
     /// <inheritdoc/>
     public override string ToString() => $"DomainObjectType: {this.DomainObjectType}, Previous: {this.Previous}, Current: {this.Current}";
 
+    public DomainObjectVersions<TNewDomainObject> ChangeDomainObject<TNewDomainObject>(Func<TDomainObject, TNewDomainObject> selector)
+        where TNewDomainObject : class => new(this.Previous == null ? null : selector(this.Previous), this.Current == null ? null : selector(this.Current));
+
     /// <inheritdoc/>
     public override bool Equals(object? obj)
     {
@@ -97,7 +100,7 @@ public sealed class DomainObjectVersions<T> : IDomainObjectVersions
             return true;
         }
 
-        return obj is DomainObjectVersions<T> && this.Equals((DomainObjectVersions<T>)obj);
+        return obj is DomainObjectVersions<TDomainObject> && this.Equals((DomainObjectVersions<TDomainObject>)obj);
     }
 
     /// <inheritdoc/>
@@ -105,7 +108,7 @@ public sealed class DomainObjectVersions<T> : IDomainObjectVersions
     {
         unchecked
         {
-            return (EqualityComparer<T>.Default.GetHashCode(this.Current) * 397) ^ EqualityComparer<T>.Default.GetHashCode(this.Previous);
+            return (EqualityComparer<TDomainObject>.Default.GetHashCode(this.Current) * 397) ^ EqualityComparer<TDomainObject>.Default.GetHashCode(this.Previous);
         }
     }
 
@@ -119,8 +122,8 @@ public sealed class DomainObjectVersions<T> : IDomainObjectVersions
             return typeof(object);
         }
 
-        return previousType ?? currentType ?? typeof(T);
+        return previousType ?? currentType ?? typeof(TDomainObject);
     }
 
-    private bool Equals(DomainObjectVersions<T> other) => EqualityComparer<T>.Default.Equals(this.Current, other.Current) && EqualityComparer<T>.Default.Equals(this.Previous, other.Previous);
+    private bool Equals(DomainObjectVersions<TDomainObject> other) => EqualityComparer<TDomainObject>.Default.Equals(this.Current, other.Current) && EqualityComparer<TDomainObject>.Default.Equals(this.Previous, other.Previous);
 }

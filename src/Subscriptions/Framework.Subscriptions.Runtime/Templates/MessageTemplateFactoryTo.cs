@@ -1,0 +1,58 @@
+﻿using Framework.Notification.Domain;
+using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Recipients;
+
+using Attachment = System.Net.Mail.Attachment;
+
+namespace Framework.Subscriptions.Templates;
+
+internal sealed class MessageTemplateFactoryTo : MessageTemplateFactoryBase
+{
+    internal override IEnumerable<MessageTemplateNotification> Create<TSourceDomainObjectType, TModelObjectType>(
+            DomainObjectVersions<TModelObjectType> versions,
+            Subscription subscription,
+            RecipientsBag recipientsBag,
+            IEnumerable<Attachment> attachments) =>
+        subscription.SendIndividualLetters
+            ? this.CreateTemplatesForEach<TSourceDomainObjectType, TModelObjectType>(versions, subscription, recipientsBag.To, recipientsBag.ReplyTo, attachments)
+            : this.CreateOneTemplateForAll<TSourceDomainObjectType, TModelObjectType>(versions, subscription, recipientsBag.To, recipientsBag.ReplyTo, attachments);
+
+    private IEnumerable<MessageTemplateNotification> CreateTemplatesForEach<TSourceDomainObjectType, TModelObjectType>(
+            DomainObjectVersions<TModelObjectType> domainObjectVersions,
+            Subscription subscription,
+            RecipientCollection recipients,
+            RecipientCollection replyTo,
+            IEnumerable<Attachment> attachments)
+            where TModelObjectType : class
+    {
+        var result = recipients.Select(
+                                       recipient => this.CreateTemplate<TSourceDomainObjectType, TModelObjectType>(
+                                        domainObjectVersions,
+                                        subscription,
+                                        [recipient.Email],
+                                        [],
+                                        replyTo.Select(z=>z.Email),
+                                        attachments));
+
+        return result;
+    }
+
+    private IEnumerable<MessageTemplateNotification> CreateOneTemplateForAll<TSourceDomainObjectType, TModelObjectType>(
+            DomainObjectVersions<TModelObjectType> domainObjectVersions,
+            Subscription subscription,
+            RecipientCollection recipients,
+            RecipientCollection replyTo,
+            IEnumerable<Attachment> attachments)
+            where TModelObjectType : class
+    {
+        var result = this.CreateTemplate<TSourceDomainObjectType, TModelObjectType>(
+                                                                                    domainObjectVersions,
+                                                                                    subscription,
+                                                                                    recipients.Select(r => r.Email),
+                                                                                    [],
+                                                                                    replyTo.Select(z => z.Email),
+                                                                                    attachments);
+
+        yield return result;
+    }
+}

@@ -1,5 +1,4 @@
-﻿using Framework.Subscriptions.Domain;
-using Framework.Subscriptions.Metadata;
+﻿using Framework.Subscriptions.Metadata;
 
 using SampleSystem.Domain;
 
@@ -16,7 +15,6 @@ public sealed class SecurityItemSourceLambda : SecurityLambdaMetadata<Domain.Emp
     public SecurityItemSourceLambda()
     {
         this.ExpandType = NotificationExpandType.All;
-        this.DomainObjectChangeType = DomainObjectChangeType.Update;
         this.Lambda = (_, versions) => [];
     }
 }

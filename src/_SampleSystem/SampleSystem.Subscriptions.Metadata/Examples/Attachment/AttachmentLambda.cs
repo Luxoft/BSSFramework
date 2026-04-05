@@ -14,7 +14,6 @@ public sealed class AttachmentLambda : AttachmentLambdaBase<Domain.Employee>
     /// </summary>
     public AttachmentLambda()
     {
-        this.DomainObjectChangeType = DomainObjectChangeType.Update;
         this.Lambda = GetAttachments;
     }
 

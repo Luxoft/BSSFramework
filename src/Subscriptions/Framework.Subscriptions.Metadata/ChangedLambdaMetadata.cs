@@ -8,8 +8,6 @@ public class ChangedLambdaMetadata<TSourceDomainObject, TTargetDomainObject, TRe
     where TSourceDomainObject : class
     where TTargetDomainObject : class
 {
-    public sealed override DomainObjectChangeType DomainObjectChangeType { get; protected init; } = baseLambdaMetadata.DomainObjectChangeType;
-
     public sealed override Func<IServiceProvider, DomainObjectVersions<TSourceDomainObject>, TResult>? Lambda { get; protected init; } =
 
         (service, versions) => baseLambdaMetadata.Lambda!(service, versions.ChangeDomainObject(c => selector(service, c)));

@@ -4,7 +4,7 @@ using Framework.Subscriptions.Domain;
 
 namespace Framework.Subscriptions;
 
-public interface ISubscriptionService
+public interface IRootSubscriptionService
 {
-    IEnumerable<ITryResult<ISubscription>> Process(IDomainObjectVersions versions);
+    IEnumerable<ITryResult<ISubscription>> Process(IServiceProvider serviceProvider, IDomainObjectVersions versions);
 }

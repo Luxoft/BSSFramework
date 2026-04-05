@@ -1,5 +1,4 @@
-﻿using Framework.Subscriptions.Domain;
-using Framework.Subscriptions.Metadata;
+﻿using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Country.Create;
 
@@ -11,7 +10,6 @@ public sealed class ConditionLambda : ConditionLambdaBase<Domain.Country>
     /// </summary>
     public ConditionLambda()
     {
-        this.DomainObjectChangeType = DomainObjectChangeType.Create;
         this.Lambda = (service, versions) => true;
     }
 }

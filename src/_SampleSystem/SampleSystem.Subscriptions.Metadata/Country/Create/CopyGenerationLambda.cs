@@ -11,7 +11,6 @@ public sealed class CopyGenerationLambda : GenerationLambdaBase<Domain.Country>
     /// </summary>
     public CopyGenerationLambda()
     {
-        this.DomainObjectChangeType = DomainObjectChangeType.Create;
         this.Lambda = this.GetRecipients;
     }
 

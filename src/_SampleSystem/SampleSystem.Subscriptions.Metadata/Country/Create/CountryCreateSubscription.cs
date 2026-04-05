@@ -1,4 +1,5 @@
-﻿using Framework.Subscriptions.Metadata;
+﻿using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Country.Create;
 
@@ -10,6 +11,8 @@ public sealed class CountryCreateSubscription : SubscriptionMetadata<Domain.Coun
     /// </summary>
     public CountryCreateSubscription()
     {
+        this.DomainObjectChangeType = DomainObjectChangeType.Create;
+
         this.SenderName = "SampleSystem";
         this.SenderEmail = "SampleSystem@luxoft.com";
         this.ConditionLambda = new ConditionLambda();

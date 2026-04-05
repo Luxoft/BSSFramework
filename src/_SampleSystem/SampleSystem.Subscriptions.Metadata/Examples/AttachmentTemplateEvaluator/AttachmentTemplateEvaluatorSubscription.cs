@@ -1,4 +1,5 @@
-﻿using Framework.Subscriptions.Metadata;
+﻿using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
 using SampleSystem.Subscriptions.Metadata.Employee.Update;
 
@@ -12,6 +13,8 @@ public sealed class AttachmentTemplateEvaluatorSubscription
     /// </summary>
     public AttachmentTemplateEvaluatorSubscription()
     {
+        this.DomainObjectChangeType = DomainObjectChangeType.Update;
+
         this.SenderName = "SampleSystem";
         this.SenderEmail = "AttachmentTemplateEvaluator@luxoft.com";
         this.ConditionLambda = new ConditionLambda();

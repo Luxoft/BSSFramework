@@ -14,13 +14,9 @@ public sealed class DomainObjectVersions<TDomainObject> : IDomainObjectVersions
     /// <param name="current">Текущая версия доменного объекта.</param>
     public DomainObjectVersions(TDomainObject? previous, TDomainObject? current)
     {
-        if (previous == null && current == null)
-        {
-            throw new ArgumentException("both arguments (previous and current) can't be null");
-        }
-
         this.Current = current;
         this.Previous = previous;
+        this.ChangeType = this.GetChangeType();
         this.DomainObjectType = this.GetDomainObjectType();
     }
 
@@ -54,32 +50,7 @@ public sealed class DomainObjectVersions<TDomainObject> : IDomainObjectVersions
     /// <value>
     /// Тип изменения, произошедшего с доменным объектом.
     /// </value>
-    public DomainObjectChangeType ChangeType
-    {
-        get
-        {
-            if (this.Previous == null && this.Current != null)
-            {
-                return DomainObjectChangeType.Create;
-            }
-
-            if (this.Previous != null && this.Current != null)
-            {
-                return DomainObjectChangeType.Update;
-            }
-
-            if (this.Previous != null && this.Current == null)
-            {
-                return DomainObjectChangeType.Delete;
-            }
-
-            return DomainObjectChangeType.Unknown;
-        }
-    }
-
-    object? IDomainObjectVersions.Previous => this.Previous;
-
-    object? IDomainObjectVersions.Current => this.Current;
+    public DomainObjectChangeType ChangeType { get; }
 
     /// <inheritdoc/>
     public override string ToString() => $"DomainObjectType: {this.DomainObjectType}, Previous: {this.Previous}, Current: {this.Current}";
@@ -125,5 +96,30 @@ public sealed class DomainObjectVersions<TDomainObject> : IDomainObjectVersions
         return previousType ?? currentType ?? typeof(TDomainObject);
     }
 
+    private DomainObjectChangeType GetChangeType()
+    {
+        if (this.Previous == null && this.Current != null)
+        {
+            return DomainObjectChangeType.Create;
+        }
+        else if (this.Previous != null && this.Current != null)
+        {
+            return DomainObjectChangeType.Update;
+        }
+        else if (this.Previous != null && this.Current == null)
+        {
+            return DomainObjectChangeType.Delete;
+        }
+        else
+        {
+            throw new ArgumentException("both arguments (previous and current) can't be null");
+        }
+    }
+
     private bool Equals(DomainObjectVersions<TDomainObject> other) => EqualityComparer<TDomainObject>.Default.Equals(this.Current, other.Current) && EqualityComparer<TDomainObject>.Default.Equals(this.Previous, other.Previous);
+
+
+    object? IDomainObjectVersions.Previous => this.Previous;
+
+    object? IDomainObjectVersions.Current => this.Current;
 }

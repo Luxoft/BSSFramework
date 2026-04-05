@@ -11,7 +11,6 @@ public sealed class GenerationLambda : GenerationLambdaBase<Domain.Employee>
     /// </summary>
     public GenerationLambda()
     {
-        this.DomainObjectChangeType = DomainObjectChangeType.Update;
         this.Lambda = this.GetRecipients;
     }
 

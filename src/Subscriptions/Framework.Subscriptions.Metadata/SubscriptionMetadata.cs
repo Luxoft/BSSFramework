@@ -1,10 +1,11 @@
 ﻿using System.Collections.Immutable;
 using System.Net.Mail;
 
+using Framework.Subscriptions.Domain;
+
 using SecuritySystem;
 
 namespace Framework.Subscriptions.Metadata;
-
 
 public abstract class SubscriptionMetadata<TDomainObject, TMessageTemplate> : SubscriptionMetadata<TDomainObject, TDomainObject, TMessageTemplate>
     where TDomainObject : class
@@ -25,13 +26,15 @@ public abstract class SubscriptionMetadata<TDomainObject> : ISubscriptionMetadat
     /// <inheritdoc />
     public string Name => this.GetType().FullName!;
 
+    public virtual DomainObjectChangeType DomainObjectChangeType { get; protected init; } = DomainObjectChangeType.Any;
+
     /// <summary>
     ///     Получает экземпляр лямбда-выражения Condition.
     /// </summary>
     /// <value>
     ///     Экземпляр лямбда-выражения Condition.
     /// </value>
-    public virtual LambdaMetadata<TDomainObject, bool>? ConditionLambda { get; protected init; }
+    public virtual LambdaMetadata<TDomainObject, bool> ConditionLambda { get; protected init; } = LambdaMetadata<TDomainObject>.Create((service, versions) => true);
 
     /// <summary>
     ///     Получает экземпляр лямбда-выражения Generation.
@@ -99,7 +102,7 @@ public abstract class SubscriptionMetadata<TDomainObject> : ISubscriptionMetadat
     public Type DomainObjectType { get; } = typeof(TDomainObject);
 
     /// <inheritdoc />
-    public ILambdaMetadata? GetConditionLambda() => this.ConditionLambda;
+    public ILambdaMetadata GetConditionLambda() => this.ConditionLambda;
 
     /// <inheritdoc />
     public ILambdaMetadata? GetGenerationLambda() => this.GenerationLambda;

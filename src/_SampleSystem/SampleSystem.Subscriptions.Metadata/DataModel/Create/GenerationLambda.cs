@@ -9,7 +9,6 @@ public sealed class GenerationLambda : GenerationLambdaBase<DateModel>
 {
     public GenerationLambda()
     {
-        this.DomainObjectChangeType = DomainObjectChangeType.Create;
         this.Lambda = this.GetRecipients;
     }
 

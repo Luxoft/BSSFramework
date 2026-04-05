@@ -12,7 +12,6 @@ public sealed class AttachmentLambda : AttachmentLambdaBase<CustomNotificationMo
 
     public AttachmentLambda()
     {
-        this.DomainObjectChangeType = DomainObjectChangeType.Update;
         this.Lambda = GetAttachments;
     }
 

@@ -14,7 +14,6 @@ public sealed class AttachmentLambdaTemplateEvaluator : AttachmentLambdaBase<Dom
     /// </summary>
     public AttachmentLambdaTemplateEvaluator()
     {
-        this.DomainObjectChangeType = DomainObjectChangeType.Update;
         this.Lambda = GetAttachments;
     }
 

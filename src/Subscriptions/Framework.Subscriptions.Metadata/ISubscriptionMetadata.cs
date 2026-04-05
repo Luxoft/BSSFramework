@@ -108,7 +108,7 @@ public interface ISubscriptionMetadata
     ///     Возвращает экземпляр лямбда-выражения Condition.
     /// </summary>
     /// <returns>Экземпляр лямбда-выражения Condition.</returns>
-    ILambdaMetadata? GetConditionLambda();
+    ILambdaMetadata GetConditionLambda();
 
     /// <summary>
     ///     Возвращает экземпляр лямбда-выражения Generation.

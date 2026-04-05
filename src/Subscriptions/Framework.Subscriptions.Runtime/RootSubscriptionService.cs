@@ -15,15 +15,17 @@ public class RootSubscriptionService(IServiceProxyFactory serviceProxyFactory, I
                             .Select(changeType => (sm, changeType)))
 
             .GroupBy(pair => (pair.sm.DomainObjectType, pair.changeType), pair => pair.sm)
-            .Select(pair => (pair.Key, serviceProxyFactory.Create<IRootSubscriptionService>(typeof(RootSubscriptionService<>).MakeGenericType(pair.Key.DomainObjectType), pair)))
+            .Select(pair => (pair.Key, serviceProxyFactory.Create<IRootSubscriptionService>(typeof(RootSubscriptionService<,,>).MakeGenericType(pair.Key.DomainObjectType, pair.Key), pair)))
             .ToDictionary();
 
     public IEnumerable<ITryResult<ISubscriptionMetadataBase>> Process(IServiceProvider serviceProvider, IDomainObjectVersions versions) =>
         this.cache.TryGetValue((versions.DomainObjectType, versions.ChangeType), out var innerService) ? innerService.Process(serviceProvider, versions) : [];
 }
 
-public class RootSubscriptionService<TDomainObject>(IEnumerable<SubscriptionMetadata<TDomainObject>> subscriptionMetadataList) : IRootSubscriptionService
+public class RootSubscriptionService<TDomainObject, TSubscription, TMessageTemplate>(IEnumerable<SubscriptionMetadata<TDomainObject, TSubscription, TMessageTemplate>> subscriptionMetadataList) : IRootSubscriptionService
     where TDomainObject : class
+    where TSubscription : ISubscription<TDomainObject>
+    where TMessageTemplate : IMessageTemplate
 {
     public IEnumerable<ITryResult<ISubscriptionMetadataBase>> Process(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions)
     {
@@ -53,18 +55,6 @@ public class RootSubscriptionService<TDomainObject, TRenderingObject, TMessageTe
         throw new NotImplementedException();
     }
 
-    IEnumerable<ITryResult<ISubscription>> IRootSubscriptionService.Process(IServiceProvider serviceProvider, IDomainObjectVersions versions) =>
+    IEnumerable<ITryResult<ISubscriptionMetadataBase>> IRootSubscriptionService.Process(IServiceProvider serviceProvider, IDomainObjectVersions versions) =>
         this.Process(serviceProvider, (DomainObjectVersions<TDomainObject>)versions);
 }
-
-//public class SubscriptionService<TDomainObject>(IEnumerable<SubscriptionMetadata<TDomainObject>> subscriptionMetadataList) : IRootSubscriptionService
-//    where TDomainObject : class
-//{
-//    public IEnumerable<ITryResult<ISubscription>> Process(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions)
-//    {
-//        throw new NotImplementedException();
-//    }
-
-//    IEnumerable<ITryResult<ISubscription>> IRootSubscriptionService.Process(IServiceProvider serviceProvider, IDomainObjectVersions versions) =>
-//        this.Process(serviceProvider, (DomainObjectVersions<TDomainObject>)versions);
-//}

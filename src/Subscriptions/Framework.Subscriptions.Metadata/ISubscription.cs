@@ -19,5 +19,5 @@ public interface ISubscription<TDomainObject>
 
     IEnumerable<Attachment> GetAttachments(DomainObjectVersions<TDomainObject> versions) => [];
 
-    IEnumerable<NotificationFilterGroup> GetNotificationFilterGroups(DomainObjectVersions<TDomainObject> versions) => [];
+    IEnumerable<TypedNotificationFilterGroup> GetNotificationFilterGroups(DomainObjectVersions<TDomainObject> versions) => [];
 }

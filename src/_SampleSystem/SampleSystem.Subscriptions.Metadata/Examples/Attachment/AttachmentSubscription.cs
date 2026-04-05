@@ -3,10 +3,6 @@
 using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
 
-using SampleSystem.Domain;
-
-using SecuritySystem.Notification.Domain;
-
 namespace SampleSystem.Subscriptions.Metadata.Examples.Attachment;
 
 public class AttachmentSubscription : ISubscription<Domain.Employee>
@@ -21,14 +17,6 @@ public class AttachmentSubscription : ISubscription<Domain.Employee>
     public IEnumerable<NotificationMessageGenerationInfo> GetCopyTo(DomainObjectVersions<Domain.Employee> versions)
     {
         yield return new("tester@luxoft.com", versions.Previous, versions.Current);
-    }
-
-    public IEnumerable<NotificationFilterGroup> GetNotificationFilterGroups(DomainObjectVersions<Domain.Employee> versions)
-    {
-        yield return new TypedNotificationFilterGroup<ManagementUnit>
-                     {
-                         ExpandType = NotificationExpandType.All, SecurityContextList = [], SecurityContextType = typeof(ManagementUnit)
-                     };
     }
 
     public IEnumerable<System.Net.Mail.Attachment> GetAttachments(DomainObjectVersions<Domain.Employee> versions)

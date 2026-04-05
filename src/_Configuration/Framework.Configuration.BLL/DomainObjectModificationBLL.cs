@@ -16,7 +16,7 @@ namespace Framework.Configuration.BLL;
 public partial class DomainObjectModificationBLL(
     IConfigurationBLLContext context,
     ISecurityProvider<DomainObjectModification> securityProvider,
-    IRootSubscriptionService rootSubscriptionService,
+    ISubscriptionService subscriptionService,
     ILogger<DomainObjectModificationBLL> logger,
     IDomainObjectVersionsResolverFactory domainObjectVersionsResolverFactory)
     : SecurityDomainBLLBase<DomainObjectModification>(context, securityProvider)
@@ -46,7 +46,7 @@ public partial class DomainObjectModificationBLL(
 
             var versions = this.GetDomainObjectVersions(info);
 
-            foreach (var tryResult in rootSubscriptionService.Process(this.Context.ServiceProvider, versions))
+            foreach (var tryResult in subscriptionService.Process(versions))
             {
                 tryResult.Match(
                     _ => { },

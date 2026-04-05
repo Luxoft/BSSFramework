@@ -9,11 +9,11 @@ namespace SampleSystem.Subscriptions.Metadata.Employee.Update;
 
 public class EmployeeUpdateSubscription : ISubscription<Domain.Employee>
 {
-    public IEnumerable<NotificationFilterGroup> GetNotificationFilterGroups(DomainObjectVersions<Domain.Employee> versions)
+    public IEnumerable<TypedNotificationFilterGroup> GetTypedNotificationFilterGroups(DomainObjectVersions<Domain.Employee> versions)
     {
         yield return new TypedNotificationFilterGroup<ManagementUnit>
                      {
-                         ExpandType = NotificationExpandType.All, SecurityContextList = [], SecurityContextType = typeof(ManagementUnit)
+                         ExpandType = NotificationExpandType.All, SecurityContextList = []
                      };
     }
 

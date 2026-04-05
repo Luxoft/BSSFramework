@@ -3,7 +3,7 @@ using Framework.Subscriptions.Domain;
 
 namespace Framework.Subscriptions;
 
-public interface IRootSubscriptionService
+public interface ISubscriptionService
 {
-    IEnumerable<ITryResult<ISubscriptionMetadataBase>> Process(IServiceProvider serviceProvider, IDomainObjectVersions versions);
+    IEnumerable<ITryResult<ISubscriptionMetadataBase>> Process(IDomainObjectVersions versions);
 }

@@ -1,8 +1,8 @@
 ﻿@* Generator: Template
     DisableLinePragmas: true*@@{}
 @using SampleSystem.Domain
-@using SampleSystem.Subscriptions.Metadata.Examples.Attachment
+@using SampleSystem.Subscriptions.Metadata.Examples.AttachmentTemplateEvaluator
 @inherits Framework.Subscriptions.Metadata.RazorTemplate<Employee>
 @functions {
     public override string Subject => $"Employee {Current.NameNative} has been changed. Inline attach test";
-}<html><head><title></title></head><body>@Current.NameNative<br/><img src="@AttachmentLambda.AttachmentName"/></body></html>
+}<html><head><title></title></head><body>@Current.NameNative<br/><img src="@AttachmentTemplateEvaluatorSubscription.AttachmentName"/></body></html>

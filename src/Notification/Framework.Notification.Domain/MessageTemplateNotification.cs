@@ -20,8 +20,6 @@ public record MessageTemplateNotification
 
     public required ImmutableArray<System.Net.Mail.Attachment> Attachments { get; init; }
 
-    public required ISubscription? Subscription { get; init; }
-
     public required bool SendWithEmptyListOfRecipients { get; init; }
 
     public required Type? RazorMessageTemplateType { get; init; }

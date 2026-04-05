@@ -1,5 +1,4 @@
-﻿using Framework.Subscriptions;
-using Framework.Subscriptions.Metadata;
+﻿using Framework.Subscriptions.Metadata;
 
 #pragma warning disable 1591
 //------------------------------------------------------------------------------
@@ -12,42 +11,49 @@ using Framework.Subscriptions.Metadata;
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel
+namespace ASP
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Framework.Subscriptions;
+    using SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     public partial class _DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml : RazorTemplate<CustomNotificationModel>
     {
 #line hidden
 
-    public override string Subject => $"Country {this.Current.Country.Code} has been updated";
+        public override string Subject => $"Country {Current.Country.Code} has been updated";
 
         public override void Execute()
         {
 
 
 
-                                
 
 
 
 
 
-this.WriteLiteral("\n<html>\n    <head></head>\n    <body>\n    <p>Country with code: ");
+
+            WriteLiteral("\n<html>\n    <head></head>\n    <body>\n    <p>Country with code: ");
 
 
-                     this.Write(this.Current.Country.Code);
+            Write(Current.Country.Code);
 
-this.WriteLiteral(" was updated and has ");
-
-
-                                                               this.Write(this.Current.LocationsCount);
-
-this.WriteLiteral(" locations</p>\n    <img src=\"");
+            WriteLiteral(" was updated and has ");
 
 
-         this.Write(AttachmentLambda.AttachmentName);
+            Write(Current.LocationsCount);
 
-this.WriteLiteral("\"/>\n    </body>\n</html>\n");
+            WriteLiteral(" locations</p>\n    <img src=\"");
+
+
+            Write(SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel.Subscription.AttachmentName);
+
+            WriteLiteral("\"/>\n    </body>\n</html>\n");
 
 
         }

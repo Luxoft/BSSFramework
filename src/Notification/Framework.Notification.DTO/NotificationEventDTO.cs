@@ -41,7 +41,7 @@ public class NotificationEventDTO
 
         this.Targets = mailMessage
                        .To.Select(z => Tuple.Create(z.Address, ReceiverRole.To))
-                       .Concat(mailMessage.CC.Select(z => Tuple.Create(z.Address, ReceiverRole.Copy)))
+                       .Concat(mailMessage.CC.Select(z => Tuple.Create(z.Address, ReceiverRole.CopyTo)))
                        .Concat(mailMessage.ReplyToList.Select(z => Tuple.Create(z.Address, ReceiverRole.ReplyTo)))
                        .Select(z => new NotificationTargetDTO() { Name = z.Item1, Type = z.Item2 })
                        .ToList();

@@ -1,26 +1,31 @@
-﻿using Framework.Subscriptions.Metadata;
+﻿using System.Text;
 
-using SampleSystem.Subscriptions.Metadata.Employee.Update;
-using SampleSystem.Subscriptions.Metadata.Examples.Attachment;
+using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Examples.AttachmentInline;
 
-public sealed class AttachmentInlineSubscription
-        : SubscriptionMetadata<Domain.Employee, _Examples_AttachmentInline_MessageTemplate_cshtml>
+public class AttachmentInlineSubscription : ISubscription<Domain.Employee>
 {
-    /// <summary>
-    /// Sample with inline attachment
-    /// </summary>
-    public AttachmentInlineSubscription()
+    public const string AttachmentName = "test.txt";
+
+    public IEnumerable<NotificationMessageGenerationInfo> GetTo(DomainObjectVersions<Domain.Employee> versions)
     {
-        this.SenderName = "SampleSystem";
-        this.SenderEmail = "InlineAttach@luxoft.com";
-        this.ConditionLambda = new ConditionLambda();
-        this.GenerationLambda = new GenerationLambda();
-        this.CopyGenerationLambda = new CopyGenerationLambda();
-        this.SecurityItemSourceLambdas = [new SecurityItemSourceLambda()];
-        this.RecipientsSelectorMode = RecipientsSelectorMode.Union;
-        this.IncludeAttachments = true;
-        this.AttachmentLambda = new AttachmentLambda();
+        yield return new ("tester@luxoft.com", versions.Previous, versions.Current);
     }
+
+    public IEnumerable<NotificationMessageGenerationInfo> GetCopyTo(DomainObjectVersions<Domain.Employee> versions)
+    {
+        yield return new("tester@luxoft.com", versions.Previous, versions.Current);
+    }
+
+    public IEnumerable<System.Net.Mail.Attachment> GetAttachments(DomainObjectVersions<Domain.Employee> versions)
+    {
+        yield return new(new MemoryStream(Encoding.UTF8.GetBytes("Hello world!")), AttachmentName)
+                     {
+                         // If ContentId not set .NET generate new GUID https://github.com/Microsoft/referencesource/blob/master/System/net/System/Net/mail/Attachment.cs
+                         ContentId = "testId@luxoft.com"
+                     };
+    }
+
 }

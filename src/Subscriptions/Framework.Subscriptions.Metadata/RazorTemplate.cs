@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Subscriptions.Metadata;
 
-public abstract partial class RazorTemplate<TDomainObject> : IMessageTemplate<TDomainObject>
+public abstract partial class RazorTemplate<TRenderingObject> : IMessageTemplate<TRenderingObject>
 {
     private RenderingState? state;
 
@@ -18,7 +18,7 @@ public abstract partial class RazorTemplate<TDomainObject> : IMessageTemplate<TD
     /// <value>
     ///     Предыдущая версия доменного объекта.
     /// </value>
-    protected TDomainObject? Previous => this.State.Versions.Previous;
+    protected TRenderingObject? Previous => this.State.Versions.Previous;
 
     /// <summary>
     ///     Получает текущую версию доменного объекта.
@@ -26,7 +26,7 @@ public abstract partial class RazorTemplate<TDomainObject> : IMessageTemplate<TD
     /// <value>
     ///     Текущая версия доменного объекта.
     /// </value>
-    protected TDomainObject? Current => this.State.Versions.Current;
+    protected TRenderingObject? Current => this.State.Versions.Current;
 
     /// <summary>
     /// Контекст системы
@@ -40,7 +40,7 @@ public abstract partial class RazorTemplate<TDomainObject> : IMessageTemplate<TD
     public abstract string Subject { get; }
 
 
-    public (string Subject, string Body) Render(IServiceProvider serviceProvider, IObjectsVersion<TDomainObject> versions)
+    public (string Subject, string Body) Render(IServiceProvider serviceProvider, IObjectsVersion<TRenderingObject> versions)
     {
         this.state = new RenderingState(new StringWriter(), serviceProvider, versions);
 
@@ -49,5 +49,5 @@ public abstract partial class RazorTemplate<TDomainObject> : IMessageTemplate<TD
         return (this.Subject, this.State.Writer.ToString());
     }
 
-    protected record RenderingState(StringWriter Writer, IServiceProvider ServiceProvider, IObjectsVersion<TDomainObject> Versions);
+    protected record RenderingState(StringWriter Writer, IServiceProvider ServiceProvider, IObjectsVersion<TRenderingObject> Versions);
 }

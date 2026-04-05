@@ -9,14 +9,8 @@ namespace Framework.Subscriptions.Metadata;
 /// <summary>
 ///     Определяет интерфейс экземпляра метаданных Code first подписки.
 /// </summary>
-public interface ISubscriptionMetadata
+public interface ISubscriptionMetadata : ISubscriptionMetadataBase
 {
-    /// <summary>
-    ///     Получает имя подписки.
-    /// </summary>
-    /// <value>Имя подписки.</value>
-    string Name { get; }
-
     /// <summary>
     ///     Получает имя отправителя уведомления по подписке.
     /// </summary>
@@ -85,6 +79,8 @@ public interface ISubscriptionMetadata
     /// </value>
     Type MessageTemplateType { get; }
 
+    Type SubscriptionType { get; }
+
     /// <summary>
     ///     Получает способ комбинации адресатов рассылки по SubBusinessRoles и Generation.
     /// </summary>
@@ -107,40 +103,4 @@ public interface ISubscriptionMetadata
     ///     Идентификаторы бизнес-ролей..
     /// </value>
     ImmutableArray<SecurityRole> SecurityRoles { get; }
-
-    /// <summary>
-    ///     Возвращает экземпляр лямбда-выражения Condition.
-    /// </summary>
-    /// <returns>Экземпляр лямбда-выражения Condition.</returns>
-    ILambdaMetadata GetConditionLambda();
-
-    /// <summary>
-    ///     Возвращает экземпляр лямбда-выражения Generation.
-    /// </summary>
-    /// <returns>Экземпляр лямбда-выражения Generation.</returns>
-    ILambdaMetadata GetGenerationLambda();
-
-    /// <summary>
-    ///     Возвращает экземпляр лямбда-выражения Generation.
-    /// </summary>
-    /// <returns>Экземпляр лямбда-выражения Generation.</returns>
-    ILambdaMetadata GetCopyGenerationLambda();
-
-    /// <summary>
-    ///     Возвращает экземпляр лямбда-выражения Generation для определение replyTo.
-    /// </summary>
-    /// <returns>Экземпляр лямбда-выражения Generation.</returns>
-    ILambdaMetadata GetReplyToGenerationLambda();
-
-    /// <summary>
-    ///     Возвращает экземпляр лямбда-выражения Attachment.
-    /// </summary>
-    /// <returns>Экземпляр лямбда-выражения Attachment.</returns>
-    ILambdaMetadata GetAttachmentLambda();
-
-    /// <summary>
-    ///     Возвращает коллекцию экземпляров лямбда-выражения SecurityItemSource.
-    /// </summary>
-    /// <returns>Коллекция экземпляров SecurityItemSource.</returns>
-    IEnumerable<ISecurityItemSourceLambdaMetadata> GetSecurityItems();
 }

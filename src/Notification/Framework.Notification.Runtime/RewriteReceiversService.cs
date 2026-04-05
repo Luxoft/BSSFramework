@@ -21,7 +21,7 @@ public class RewriteReceiversService(IOptionsSnapshot<RewriteReceiversSettings> 
 
     public virtual void RewriteCopyRecipients(MailMessage message, NotificationEventDTO dto)
     {
-        var recipients = this.GetRecipients(dto, ReceiverRole.Copy);
+        var recipients = this.GetRecipients(dto, ReceiverRole.CopyTo);
         message.CC.Clear();
         message.CC.AddRange(recipients);
     }

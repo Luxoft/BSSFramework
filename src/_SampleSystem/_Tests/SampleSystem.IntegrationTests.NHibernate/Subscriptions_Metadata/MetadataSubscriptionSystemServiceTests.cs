@@ -1,7 +1,6 @@
 ﻿using System.Text;
 
 using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
-using Framework.BLL;
 using Framework.Core;
 using Framework.Notification.Domain;
 
@@ -9,7 +8,6 @@ using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Custom;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Subscriptions.Metadata.Employee.Update;
-using SampleSystem.Subscriptions.Metadata.Examples.Attachment;
 using SampleSystem.Subscriptions.Metadata.Examples.AttachmentTemplateEvaluator;
 
 namespace SampleSystem.IntegrationTests.Subscriptions_Metadata;
@@ -40,7 +38,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
     }
 
     [TestMethod]
-    public void RazerTemplateImpl_SubscriptionFromMetadataShouldBeSent()
+    public void RazorTemplateImpl_SubscriptionFromMetadataShouldBeSent()
     {
         // Arrange
         var employee = this.DataHelper.SaveEmployee("Chuck Norris");
@@ -51,7 +49,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         var errors = results.GetErrors().ToList();
 
         var expectedNotifications = this.GetNotifications()
-                                        .Where(n => n.From == "RazerTemplateImplSubscription@luxoft.com")
+                                        .Where(n => n.From == "RazorTemplateImplSubscription@luxoft.com")
                                         .ToList();
 
         this.LogError(errors);
@@ -78,7 +76,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         var errors = results.GetErrors().ToList();
 
         var expectedNotifications = this.GetNotifications()
-                                        .Where(n => n.From == "RazerInheritanceSubscription@luxoft.com")
+                                        .Where(n => n.From == "RazorInheritanceSubscription@luxoft.com")
                                         .ToList();
 
         // Assert

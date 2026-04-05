@@ -3,25 +3,15 @@ using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Country.Create;
 
-/// <inheritdoc />
-public sealed class CountryCreateSubscription : SubscriptionMetadata<Domain.Country, _Country_Create_MessageTemplate_cshtml>
+public class CountryCreateSubscription : ISubscription<Domain.Country>
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CountryCreateSubscription"/> class.
-    /// </summary>
-    public CountryCreateSubscription()
+    public IEnumerable<NotificationMessageGenerationInfo> GetTo(DomainObjectVersions<Domain.Country> versions)
     {
-        this.DomainObjectChangeType = DomainObjectChangeType.Create;
+        yield return new("tester@luxoft.com", versions.Current, versions.Previous);
+    }
 
-        this.SenderName = "SampleSystem";
-        this.SenderEmail = "SampleSystem@luxoft.com";
-        this.ConditionLambda = new ConditionLambda();
-        this.GenerationLambda = new GenerationLambda();
-        this.CopyGenerationLambda = new CopyGenerationLambda();
-        this.RecipientsSelectorMode = RecipientsSelectorMode.Union;
-        this.SendIndividualLetters = true;
-        this.ExcludeCurrentUser = true;
-        this.IncludeAttachments = false;
-        this.AllowEmptyListOfRecipients = false;
+    public IEnumerable<NotificationMessageGenerationInfo> GetCopyTo(DomainObjectVersions<Domain.Country> versions)
+    {
+        yield return new("tester@luxoft.com", versions.Current, versions.Previous);
     }
 }

@@ -1,24 +1,35 @@
-﻿using Framework.Subscriptions.Domain;
+﻿using System.Net.Mail;
+using System.Text;
+
+using CommonFramework.GenericRepository;
+
+using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
 
-public sealed class Subscription : SubscriptionMetadata<Domain.Country, CustomNotificationModel, _DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml>
+public class Subscription(IQueryableSource queryableSource) : ISubscription<Domain.Country>
 {
-    public Subscription()
+    public const string AttachmentName = "test.txt";
+
+    public IEnumerable<NotificationMessageGenerationInfo> GetTo(DomainObjectVersions<Domain.Country> versions)
     {
-        this.DomainObjectChangeType = DomainObjectChangeType.Update;
+        yield return new(
+            "tester@luxoft.com",
+            new CustomNotificationModel(queryableSource, versions.Current!),
+            new CustomNotificationModel(queryableSource, versions.Previous!));
+    }
 
-        this.SenderName = "SampleSystem";
-        this.SenderEmail = "SampleSystem@luxoft.com";
+    public IEnumerable<NotificationMessageGenerationInfo> GetReplyTo(DomainObjectVersions<Domain.Country> versions)
+    {
+        yield return new(
+            "replayTo@luxoft.com",
+            new CustomNotificationModel(queryableSource, versions.Current!),
+            new CustomNotificationModel(queryableSource, versions.Previous!));
+    }
 
-        this.GenerationLambda = new GenerationLambda();
-        this.ReplyToGenerationLambda = new ReplyToGenerationLambda();
-        this.AttachmentLambda = new AttachmentLambda().ChangeInput<Domain.Country>();
-        this.RecipientsSelectorMode = RecipientsSelectorMode.Union;
-        this.SendIndividualLetters = true;
-        this.ExcludeCurrentUser = true;
-        this.IncludeAttachments = true;
-        this.AllowEmptyListOfRecipients = false;
+    public IEnumerable<Attachment> GetAttachments(DomainObjectVersions<Domain.Country> versions)
+    {
+        yield return new(new MemoryStream(Encoding.UTF8.GetBytes("Hello world!")), AttachmentName);
     }
 }

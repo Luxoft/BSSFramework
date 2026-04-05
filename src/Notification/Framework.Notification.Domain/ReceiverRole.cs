@@ -4,7 +4,7 @@ public enum ReceiverRole
 {
     To,
 
-    Copy,
+    CopyTo,
 
     ReplyTo
 }

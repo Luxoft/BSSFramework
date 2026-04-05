@@ -69,7 +69,7 @@ public class Message
         var mailMessage = new MailMessage { Subject = this.Subject, Body = this.Body, From = this.Sender, IsBodyHtml = this.IsBodyHtml };
 
         mailMessage.To.AddRange(this.Receivers.Where(r => r.Role == ReceiverRole.To).Select(info => info.MailAddress));
-        mailMessage.CC.AddRange(this.Receivers.Where(r => r.Role == ReceiverRole.Copy).Select(info => info.MailAddress));
+        mailMessage.CC.AddRange(this.Receivers.Where(r => r.Role == ReceiverRole.CopyTo).Select(info => info.MailAddress));
         mailMessage.ReplyToList.AddRange(this.Receivers.Where(r => r.Role == ReceiverRole.ReplyTo).Select(info => info.MailAddress));
 
         mailMessage.Attachments.AddRange(this.Attachments.Select(a => a.ToMailAttachment()));

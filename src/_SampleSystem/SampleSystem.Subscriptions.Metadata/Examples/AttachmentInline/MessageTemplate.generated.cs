@@ -44,7 +44,7 @@ this.WriteLiteral("<html><head><title></title></head><body>");
 this.WriteLiteral("<br/><img src=\"");
 
 
-                                                                      this.Write(AttachmentLambda.AttachmentName);
+                                                                      this.Write(SampleSystem.Subscriptions.Metadata.Examples.AttachmentInline.AttachmentInlineSubscription.AttachmentName);
 
 this.WriteLiteral("\"/></body></html>");
 

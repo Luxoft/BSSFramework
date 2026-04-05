@@ -1,6 +1,6 @@
 ﻿namespace Framework.Subscriptions.Metadata;
 
-public abstract partial class RazorTemplate<TDomainObject>
+public abstract partial class RazorTemplate<TRenderingObject>
 {
     public abstract void Execute();
 

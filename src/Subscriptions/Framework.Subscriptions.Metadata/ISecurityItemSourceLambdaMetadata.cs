@@ -1,19 +1,12 @@
-﻿using SecuritySystem.Notification.Domain;
+﻿using System.Collections.Immutable;
+
+using SecuritySystem;
+using SecuritySystem.Notification.Domain;
 
 namespace Framework.Subscriptions.Metadata;
 
-/// <inheritdoc />
-public interface ISecurityItemSourceLambdaMetadata : ILambdaMetadata
+public record TypedNotificationFilterGroup<TSecurityContext> : NotificationFilterGroup
+    where TSecurityContext : ISecurityContext
 {
-    /// <summary>
-    ///     Получает тип расширения прав по дереву.
-    /// </summary>
-    /// <value>
-    ///     Тип расширения прав по дереву.
-    /// </value>
-    NotificationExpandType ExpandType { get; }
-
-    /// <summary>Получает тип доменного типа авторизации для типизированного контекста.</summary>
-    /// <value>Тип доменного типа авторизации для типизированного контекста.</value>
-    Type SecurityContextType { get; }
+    public required ImmutableArray<TSecurityContext> SecurityContextList { get; init; }
 }

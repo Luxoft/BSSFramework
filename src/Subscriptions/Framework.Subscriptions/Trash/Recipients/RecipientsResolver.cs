@@ -1,6 +1,7 @@
 ﻿using CommonFramework;
 
 using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -108,7 +109,7 @@ public class RecipientsResolver<TBLLContext>
     {
         var mergeResult = rolesRecipients.Merge(
                                                 generationResult.RecipientsBag.To,
-                                                (RecipientsMergeMode)subscription.RecipientsMode);
+                                                (RecipientsSelectorMode)subscription.RecipientsMode);
 
         var to = this.ExcludeCurrentUser(
                                          subscription,

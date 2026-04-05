@@ -1,4 +1,5 @@
 ﻿using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
 namespace Framework.Subscriptions.Lambdas;
 

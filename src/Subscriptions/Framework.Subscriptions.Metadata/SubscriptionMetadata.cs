@@ -34,7 +34,7 @@ public abstract class SubscriptionMetadata<TDomainObject> : ISubscriptionMetadat
     /// <value>
     ///     Экземпляр лямбда-выражения Condition.
     /// </value>
-    public virtual LambdaMetadata<TDomainObject, bool> ConditionLambda { get; protected init; } = LambdaMetadata<TDomainObject>.Create((service, versions) => true);
+    public virtual LambdaMetadata<TDomainObject, bool> ConditionLambda { get; protected init; } = LambdaMetadata<TDomainObject>.Create((_, _) => true);
 
     /// <summary>
     ///     Получает экземпляр лямбда-выражения Generation.
@@ -42,7 +42,8 @@ public abstract class SubscriptionMetadata<TDomainObject> : ISubscriptionMetadat
     /// <value>
     ///     Экземпляр лямбда-выражения Generation.
     /// </value>
-    public virtual LambdaMetadata<TDomainObject, IEnumerable<NotificationMessageGenerationInfo>>? GenerationLambda { get; protected init; }
+    public virtual LambdaMetadata<TDomainObject, IEnumerable<NotificationMessageGenerationInfo>> GenerationLambda { get; protected init; } =
+        LambdaMetadata<TDomainObject, NotificationMessageGenerationInfo>.EmptyCollection;
 
     /// <summary>
     ///     Получает экземпляр лямбда-выражения Generation.
@@ -50,7 +51,8 @@ public abstract class SubscriptionMetadata<TDomainObject> : ISubscriptionMetadat
     /// <value>
     ///     Экземпляр лямбда-выражения Generation.
     /// </value>
-    public virtual LambdaMetadata<TDomainObject, IEnumerable<NotificationMessageGenerationInfo>>? CopyGenerationLambda { get; protected init; }
+    public virtual LambdaMetadata<TDomainObject, IEnumerable<NotificationMessageGenerationInfo>> CopyGenerationLambda { get; protected init; } =
+        LambdaMetadata<TDomainObject, NotificationMessageGenerationInfo>.EmptyCollection;
 
     /// <summary>
     ///     Получает экземпляр лямбда-выражения Generation для определение replyTo.
@@ -58,13 +60,14 @@ public abstract class SubscriptionMetadata<TDomainObject> : ISubscriptionMetadat
     /// <value>
     ///     Экземпляр лямбда-выражения Generation.
     /// </value>
-    public virtual LambdaMetadata<TDomainObject, IEnumerable<NotificationMessageGenerationInfo>>? ReplyToGenerationLambda { get; protected init; }
-
+    public virtual LambdaMetadata<TDomainObject, IEnumerable<NotificationMessageGenerationInfo>> ReplyToGenerationLambda { get; protected init; } =
+        LambdaMetadata<TDomainObject, NotificationMessageGenerationInfo>.EmptyCollection;
 
     /// <summary>
     ///     Получает экземпляр лямбда-выражения Attachment.
     /// </summary>
-    public virtual LambdaMetadata<TDomainObject, IEnumerable<Attachment>>? AttachmentLambda { get; protected init; }
+    public virtual LambdaMetadata<TDomainObject, IEnumerable<Attachment>> AttachmentLambda { get; protected init; } =
+        LambdaMetadata<TDomainObject, Attachment>.EmptyCollection;
 
     /// <summary>
     ///     Получает коллекцию экземпляров лямбда-выражения SecurityItemSource.
@@ -105,15 +108,15 @@ public abstract class SubscriptionMetadata<TDomainObject> : ISubscriptionMetadat
     public ILambdaMetadata GetConditionLambda() => this.ConditionLambda;
 
     /// <inheritdoc />
-    public ILambdaMetadata? GetGenerationLambda() => this.GenerationLambda;
+    public ILambdaMetadata GetGenerationLambda() => this.GenerationLambda;
 
     /// <inheritdoc />
-    public ILambdaMetadata? GetAttachmentLambda() => this.AttachmentLambda;
+    public ILambdaMetadata GetCopyGenerationLambda() => this.CopyGenerationLambda;
+
+    public ILambdaMetadata GetReplyToGenerationLambda() => this.ReplyToGenerationLambda;
 
     /// <inheritdoc />
-    public ILambdaMetadata? GetCopyGenerationLambda() => this.CopyGenerationLambda;
-
-    public ILambdaMetadata? GetReplyToGenerationLambda() => this.ReplyToGenerationLambda;
+    public ILambdaMetadata GetAttachmentLambda() => this.AttachmentLambda;
 
     /// <inheritdoc />
     public IEnumerable<ISecurityItemSourceLambdaMetadata> GetSecurityItems() => this.SecurityItemSourceLambdas;

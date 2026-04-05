@@ -1,29 +1,21 @@
 ﻿using Framework.Subscriptions.Domain;
 
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Framework.Subscriptions.Metadata;
 
 public abstract class LambdaMetadata<TDomainObject, TResult> : ILambdaMetadata
     where TDomainObject : class
 {
-    public virtual Func<IServiceProvider, DomainObjectVersions<TDomainObject>, TResult>? Lambda { get; protected init; }
+    public virtual Func<IServiceProvider, DomainObjectVersions<TDomainObject>, TResult> Lambda { get; protected init; } = null!;
 
     public LambdaMetadata<TNewInputDomainObject, TResult> ChangeInput<TNewInputDomainObject>()
         where TNewInputDomainObject : class =>
-        new ChangedLambdaMetadata<TNewInputDomainObject, TDomainObject, TResult>(
-            this,
-            (sp, newDomainObject) => sp.GetRequiredService<IDomainObjectConverter<TNewInputDomainObject, TDomainObject>>().Convert(newDomainObject));
+        new ChangedLambdaMetadata<TNewInputDomainObject, TDomainObject, TResult>(this);
 
     public static implicit operator LambdaMetadata<TDomainObject, TResult>(Func<IServiceProvider, DomainObjectVersions<TDomainObject>, TResult> func) => new LambdaMetadataImplement<TDomainObject, TResult>(func);
 
-    Delegate? ILambdaMetadata.Lambda => this.Lambda;
-}
+    public static LambdaMetadata<TDomainObject, IEnumerable<TResult>> EmptyCollection { get; } = LambdaMetadata<TDomainObject>.Create((_, _) => Enumerable.Empty<TResult>());
 
-public class LambdaMetadataImplement<TDomainObject, TResult>(Func<IServiceProvider, DomainObjectVersions<TDomainObject>, TResult> func) : LambdaMetadata<TDomainObject, TResult>
-    where TDomainObject : class
-{
-    public override Func<IServiceProvider, DomainObjectVersions<TDomainObject>, TResult>? Lambda { get; protected init; } = func;
+    Delegate? ILambdaMetadata.Lambda => this.Lambda;
 }
 
 public static class LambdaMetadata<TDomainObject>

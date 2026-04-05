@@ -1,5 +1,7 @@
 ﻿using CommonFramework;
 
+using Framework.Subscriptions.Metadata;
+
 namespace Framework.Subscriptions.Subscriptions;
 
 /// <summary>

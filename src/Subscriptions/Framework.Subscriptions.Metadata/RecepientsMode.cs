@@ -8,23 +8,15 @@
 /// </remarks>
 public enum RecipientsSelectorMode
 {
-    /// <summary>
-    /// Объединение "Business Roles" и "Generation"
-    /// </summary>
+    /// <summary>Объединение списков</summary>
     Union,
 
-    /// <summary>
-    /// "Business Roles" исключает "Generation"
-    /// </summary>
-    RolesExceptGeneration,
+    /// <summary>Общее пересечение списков</summary>
+    Intersect,
 
-    /// <summary>
-    /// "Generation" исключает "Business Roles"
-    /// </summary>
-    GenerationExceptRoles,
+    /// <summary>Левый список за исключением получателей, указанных в правом списке.</summary>
+    LeftExceptRight,
 
-    /// <summary>
-    /// Пересечение "Business Roles" и "Generation"
-    /// </summary>
-    Intersect
+    /// <summary>Правый список за исключением получателей, указанных в левом списке.</summary>
+    RightExceptLeft
 }

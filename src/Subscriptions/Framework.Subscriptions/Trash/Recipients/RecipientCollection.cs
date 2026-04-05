@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 
+using Framework.Subscriptions.Metadata;
+
 namespace Framework.Subscriptions.Recipients;
 
 /// <summary>
@@ -42,17 +44,17 @@ public sealed class RecipientCollection : IEnumerable<Recipient>
     ///     переданной в аргументе other.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">Аргумент mode содержит недопустимое значение.</exception>
-    public RecipientCollection Merge(RecipientCollection other, RecipientsMergeMode mode)
+    public RecipientCollection Merge(RecipientCollection other, RecipientsSelectorMode mode)
     {
         switch (mode)
         {
-            case RecipientsMergeMode.Union:
+            case RecipientsSelectorMode.Union:
                 return new RecipientCollection(this.Union(other, Comparer));
-            case RecipientsMergeMode.Intersect:
+            case RecipientsSelectorMode.Intersect:
                 return new RecipientCollection(this.Intersect(other, Comparer));
-            case RecipientsMergeMode.LeftExceptRight:
+            case RecipientsSelectorMode.RolesExceptGeneration:
                 return new RecipientCollection(this.Except(other, Comparer));
-            case RecipientsMergeMode.RightExceptLeft:
+            case RecipientsSelectorMode.GenerationExceptRoles:
                 return new RecipientCollection(other.Except(this, Comparer));
         }
 

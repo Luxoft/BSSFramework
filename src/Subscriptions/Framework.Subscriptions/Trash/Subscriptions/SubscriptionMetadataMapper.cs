@@ -1,7 +1,10 @@
-﻿namespace Framework.Subscriptions.Subscriptions;
+﻿using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
+
+namespace Framework.Subscriptions.Subscriptions;
 
 /// <summary>
-///     Преобразователь экземпляров типа <see cref="Framework.Subscriptions.ISubscriptionMetadata" />.
+///     Преобразователь экземпляров типа <see cref="ISubscriptionMetadata" />.
 ///     в экземпляры типа <see cref="Subscription" />.
 /// </summary>
 public class SubscriptionMetadataMapper
@@ -22,7 +25,7 @@ public class SubscriptionMetadataMapper
         };
 
     /// <summary>
-    ///     Преобразует экземпляр типа <see cref="Framework.Subscriptions.ISubscriptionMetadata" /> (Code first subscription)
+    ///     Преобразует экземпляр типа <see cref="ISubscriptionMetadata" /> (Code first subscription)
     ///     в экземпляр типа <see cref="Subscription" />.
     /// </summary>
     /// <param name="metadata">Описание подписки.</param>

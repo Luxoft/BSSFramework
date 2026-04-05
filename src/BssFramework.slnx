@@ -96,6 +96,7 @@
     <Project Path="Subscriptions/Framework.Subscriptions.Domain/Framework.Subscriptions.Domain.csproj" />
     <Project Path="Subscriptions/Framework.Subscriptions.Metadata/Framework.Subscriptions.Metadata.csproj" />
     <Project Path="Subscriptions/Framework.Subscriptions.Runtime/Framework.Subscriptions.Runtime.csproj" />
+    <Project Path="Subscriptions/Framework.Subscriptions/Framework.Subscriptions.csproj" />
   </Folder>
   
   <Folder Name="/Validation/">

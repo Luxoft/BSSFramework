@@ -1,4 +1,6 @@
-﻿namespace Framework.Subscriptions.Subscriptions;
+﻿using Framework.Subscriptions.Metadata;
+
+namespace Framework.Subscriptions.Subscriptions;
 
 /// <summary>
 /// Производит поиск Code first моделей подписок.

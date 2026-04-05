@@ -19,10 +19,10 @@ public static class EmployeeExtensions
             case RecipientsSelectorMode.Intersect:
                 return recipientsByRoles.Intersect(recipientsByGeneration, employeeComparer);
 
-            case RecipientsSelectorMode.RolesExceptGeneration:
+            case RecipientsSelectorMode.LeftExceptRight:
                 return recipientsByRoles.Except(recipientsByGeneration, employeeComparer);
 
-            case RecipientsSelectorMode.GenerationExceptRoles:
+            case RecipientsSelectorMode.RightExceptLeft:
                 return recipientsByGeneration.Except(recipientsByRoles, employeeComparer);
 
             default:

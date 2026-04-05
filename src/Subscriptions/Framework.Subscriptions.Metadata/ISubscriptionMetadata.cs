@@ -1,5 +1,7 @@
 ﻿using System.Collections.Immutable;
 
+using Framework.Subscriptions.Domain;
+
 using SecuritySystem;
 
 namespace Framework.Subscriptions.Metadata;
@@ -73,6 +75,8 @@ public interface ISubscriptionMetadata
     /// </value>
     Type DomainObjectType { get; }
 
+    DomainObjectChangeType DomainObjectChangeType { get; }
+
     /// <summary>
     ///     Получает тип Razor шаблона уведомления.
     /// </summary>
@@ -114,26 +118,25 @@ public interface ISubscriptionMetadata
     ///     Возвращает экземпляр лямбда-выражения Generation.
     /// </summary>
     /// <returns>Экземпляр лямбда-выражения Generation.</returns>
-    ILambdaMetadata? GetGenerationLambda();
-
-    /// <summary>
-    ///     Возвращает экземпляр лямбда-выражения Attachment.
-    /// </summary>
-    /// <returns>Экземпляр лямбда-выражения Attachment.</returns>
-    ILambdaMetadata? GetAttachmentLambda();
+    ILambdaMetadata GetGenerationLambda();
 
     /// <summary>
     ///     Возвращает экземпляр лямбда-выражения Generation.
     /// </summary>
     /// <returns>Экземпляр лямбда-выражения Generation.</returns>
-    ILambdaMetadata? GetCopyGenerationLambda();
+    ILambdaMetadata GetCopyGenerationLambda();
 
     /// <summary>
     ///     Возвращает экземпляр лямбда-выражения Generation для определение replyTo.
     /// </summary>
     /// <returns>Экземпляр лямбда-выражения Generation.</returns>
-    ILambdaMetadata? GetReplyToGenerationLambda();
+    ILambdaMetadata GetReplyToGenerationLambda();
 
+    /// <summary>
+    ///     Возвращает экземпляр лямбда-выражения Attachment.
+    /// </summary>
+    /// <returns>Экземпляр лямбда-выражения Attachment.</returns>
+    ILambdaMetadata GetAttachmentLambda();
 
     /// <summary>
     ///     Возвращает коллекцию экземпляров лямбда-выражения SecurityItemSource.

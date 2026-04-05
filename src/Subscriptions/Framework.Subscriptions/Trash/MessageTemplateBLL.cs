@@ -7,6 +7,8 @@ using CommonFramework;
 
 using Framework.Core;
 using Framework.Notification.Domain;
+using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
 using MAttachment = System.Net.Mail.Attachment;
 
@@ -214,9 +216,9 @@ public class MessageTemplateBLL(IConfigurationBLLContext context) : BLLContextCo
             {
                 attachmentContainer = rootObject as IAttachmentContainer;
             }
-            else if (rootObject is ObjectsVersion)
+            else if (rootObject is RecipientObjectsVersion)
             {
-                var next = ((ObjectsVersion)rootObject).Current;
+                var next = ((RecipientObjectsVersion)rootObject).Current;
                 var container = next as IAttachmentContainer;
                 if (container != null)
                 {

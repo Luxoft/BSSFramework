@@ -1,34 +1,38 @@
 ﻿using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
 
-using SampleSystem.Domain;
-
-using SecuritySystem.Notification.Domain;
-
 namespace SampleSystem.Subscriptions.Metadata.Employee.Update;
 
-public class EmployeeUpdateSubscription : ISubscription<Domain.Employee>
+/// <inheritdoc />
+public class EmployeeUpdateSubscription : Subscription<Domain.Employee, _Employee_Update_MessageTemplate_cshtml>
 {
-    public IEnumerable<TypedNotificationFilterGroup> GetTypedNotificationFilterGroups(DomainObjectVersions<Domain.Employee> versions)
-    {
-        yield return new TypedNotificationFilterGroup<ManagementUnit>
-                     {
-                         ExpandType = NotificationExpandType.All, SecurityContextList = []
-                     };
-    }
+    public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
 
-    public IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(DomainObjectVersions<Domain.Employee> versions)
+    public override string SenderName { get; } = "SampleSystem";
+
+    public override string? SenderEmail { get; } = "SampleSystem@luxoft.com";
+
+
+    public override bool SendIndividualLetters { get; } = true;
+
+    public override bool ExcludeCurrentUser { get; } = true;
+
+    public override bool IncludeAttachments { get; } = false;
+
+    public override bool AllowEmptyListOfRecipients { get; } = false;
+
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
     {
         yield return new("tester@luxoft.com", versions);
     }
 
-    public IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetCopyTo(DomainObjectVersions<Domain.Employee> versions)
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetCopyTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
     {
         yield return new("tester@luxoft.com", versions);
     }
 
-    public IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetReplyTo(DomainObjectVersions<Domain.Employee> versions)
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetReplyTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
     {
-        yield return new ("replayTo@luxoft.com", versions);
+        yield return new("replayTo@luxoft.com", versions);
     }
 }

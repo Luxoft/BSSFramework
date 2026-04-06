@@ -1,7 +1,6 @@
 ﻿using CommonFramework;
 
 using Framework.Authorization.Environment;
-using Framework.Core.Visitors;
 using Framework.Infrastructure.DependencyInjection;
 
 using Microsoft.Extensions.Configuration;

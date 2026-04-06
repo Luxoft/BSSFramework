@@ -5,21 +5,27 @@ using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Examples.AttachmentInline;
 
-public class AttachmentInlineSubscription : ISubscription<Domain.Employee>
+public class AttachmentInlineSubscription : Subscription<Domain.Employee, _Examples_AttachmentInline_MessageTemplate_cshtml>
 {
     public const string AttachmentName = "test.txt";
 
-    public IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(DomainObjectVersions<Domain.Employee> versions)
-    {
-        yield return new ("tester@luxoft.com", versions);
-    }
+    public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
 
-    public IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetCopyTo(DomainObjectVersions<Domain.Employee> versions)
+    public override string? SenderName { get; } = "SampleSystem";
+
+    public override string? SenderEmail { get; } = "InlineAttach@luxoft.com";
+
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
     {
         yield return new("tester@luxoft.com", versions);
     }
 
-    public IEnumerable<System.Net.Mail.Attachment> GetAttachments(DomainObjectVersions<Domain.Employee> versions)
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetCopyTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
+    {
+        yield return new("tester@luxoft.com", versions);
+    }
+
+    public override IEnumerable<System.Net.Mail.Attachment> GetAttachments(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
     {
         yield return new(new MemoryStream(Encoding.UTF8.GetBytes("Hello world!")), AttachmentName)
                      {
@@ -27,5 +33,4 @@ public class AttachmentInlineSubscription : ISubscription<Domain.Employee>
                          ContentId = "testId@luxoft.com"
                      };
     }
-
 }

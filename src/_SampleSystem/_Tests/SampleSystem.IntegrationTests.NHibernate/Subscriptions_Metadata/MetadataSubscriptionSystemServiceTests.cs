@@ -8,7 +8,6 @@ using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Custom;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Subscriptions.Metadata.Employee.Update;
-using SampleSystem.Subscriptions.Metadata.Examples.AttachmentTemplateEvaluator;
 
 namespace SampleSystem.IntegrationTests.Subscriptions_Metadata;
 

@@ -28,7 +28,6 @@ public static class NativeExpressionParserExtensions
         {
             var preResult = innerParsers.ToArray(factory => LazyHelper.Create(() => TryResult.Catch(() => factory.Parse(input))));
 
-
             var firstSuccess = preResult.FirstOrDefault(v => v.Value.IsSuccess());
 
             if (firstSuccess != null)

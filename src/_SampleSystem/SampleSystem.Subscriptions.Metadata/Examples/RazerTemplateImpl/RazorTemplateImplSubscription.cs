@@ -3,14 +3,23 @@ using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Examples.RazerTemplateImpl;
 
-public class RazorTemplateImplSubscription : ISubscription<Domain.Employee>
+/// <summary>
+/// Example for showing customizing of implementation of IRazorTemplate
+/// </summary>
+public class RazorTemplateImplSubscription : Subscription<Domain.Employee, RazorTemplateImpl>
 {
-    public IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(DomainObjectVersions<Domain.Employee> versions)
+    public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
+
+    public override string? SenderName { get; } = "SampleSystem";
+
+    public override string? SenderEmail { get; } = "RazorTemplateImplSubscription@luxoft.com";
+
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
     {
         yield return new("tester@luxoft.com", versions);
     }
 
-    public IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetCopyTo(DomainObjectVersions<Domain.Employee> versions)
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetCopyTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
     {
         yield return new("tester@luxoft.com", versions);
     }

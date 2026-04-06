@@ -1,5 +1,4 @@
 ﻿using Framework.Subscriptions.Domain;
-using Framework.Subscriptions.Lambdas;
 
 using Attachment = System.Net.Mail.Attachment;
 

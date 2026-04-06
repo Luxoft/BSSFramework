@@ -4,7 +4,6 @@ using System.Collections.Immutable;
 using System.Reflection;
 
 using Framework.Subscriptions.Domain;
-using Framework.Subscriptions.Lambdas;
 
 using SecuritySystem.Notification.Domain;
 

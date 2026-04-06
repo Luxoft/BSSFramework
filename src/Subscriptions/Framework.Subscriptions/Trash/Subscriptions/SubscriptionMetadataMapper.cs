@@ -31,7 +31,7 @@ public class SubscriptionMetadataMapper
     /// <param name="metadata">Описание подписки.</param>
     /// <returns>Экземпляр <see cref="Subscription" />, созданный на основе описания</returns>
     /// <exception cref="System.ArgumentNullException">Параметр <paramref name="metadata" /> равен null.</exception>
-    public virtual Subscription Map(ISubscriptionMetadata metadata)
+    public virtual Subscription Map(ISubscription metadata)
     {
         if (metadata == null)
         {
@@ -67,7 +67,7 @@ public class SubscriptionMetadataMapper
         return subscription;
     }
 
-    private static void MapSubBusinessRoles(ISubscriptionMetadata metadata, Subscription subscription)
+    private static void MapSubBusinessRoles(ISubscription metadata, Subscription subscription)
     {
         if (metadata.SecurityRoles == null)
         {
@@ -80,7 +80,7 @@ public class SubscriptionMetadataMapper
         }
     }
 
-    private static void MapSecurityItems(ISubscriptionMetadata metadata, Subscription subscription)
+    private static void MapSecurityItems(ISubscription metadata, Subscription subscription)
     {
         foreach (var lambda in metadata.GetSecurityItems())
         {

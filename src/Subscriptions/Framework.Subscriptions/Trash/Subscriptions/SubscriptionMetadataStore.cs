@@ -9,7 +9,7 @@ namespace Framework.Subscriptions.Subscriptions;
 /// </summary>
 public class SubscriptionMetadataStore
 {
-    internal readonly ILookup<Type, ISubscriptionMetadata> store;
+    internal readonly ILookup<Type, ISubscription> store;
 
     /// <summary>
     ///     Создаёт экземпляр класса <see cref="SubscriptionMetadataStore" />.
@@ -36,7 +36,7 @@ public class SubscriptionMetadataStore
     /// <exception cref="ArgumentNullException">
     ///     Аргумент <paramref name="domainObjectType" /> равен null.
     /// </exception>
-    public virtual IEnumerable<ISubscriptionMetadata> Get(Type domainObjectType)
+    public virtual IEnumerable<ISubscription> Get(Type domainObjectType)
     {
         if (domainObjectType == null)
         {

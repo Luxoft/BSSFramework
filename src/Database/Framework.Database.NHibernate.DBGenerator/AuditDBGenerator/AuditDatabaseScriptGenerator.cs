@@ -19,7 +19,7 @@ using NHibernate.Id;
 using NHibernate.Mapping;
 using NHibernate.Tool.hbm2ddl;
 using NHibernate.Util;
-using Array = System.Array;
+
 using Environment = NHibernate.Cfg.Environment;
 
 namespace Framework.Database.NHibernate.DBGenerator.AuditDBGenerator;

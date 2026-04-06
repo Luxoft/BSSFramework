@@ -1,9 +1,4 @@
-﻿using Framework.Subscriptions;
-using Framework.Subscriptions.Domain;
-
-using SecuritySystem;
-
-namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;
+﻿namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;
 
 internal sealed class TestSubscription : SubscriptionWithCustomModelMetadata<object, object, object, RazorTemplate<object>>
 {

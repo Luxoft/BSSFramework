@@ -1,6 +1,4 @@
-﻿using Framework.Notification.Domain;
-using Framework.Subscriptions.Domain;
-using Framework.Subscriptions.Lambdas;
+﻿using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
 
 namespace Framework.Subscriptions.Recipients;

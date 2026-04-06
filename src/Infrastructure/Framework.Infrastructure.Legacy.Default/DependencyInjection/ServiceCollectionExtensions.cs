@@ -13,8 +13,6 @@ using Framework.BLL.Services;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Jobs;
 using Framework.Configuration.BLL.Notification;
-using Framework.Configuration.BLL.Subscriptions;
-using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
 using Framework.Configuration.Generated.DTO;
 using Framework.Core;
@@ -23,7 +21,6 @@ using Framework.Infrastructure.LocalDBEvents;
 using Framework.Infrastructure.SubscriptionService;
 using Framework.Notification.Domain;
 using Framework.Notification.DTO;
-using Framework.Subscriptions;
 
 using Microsoft.Extensions.DependencyInjection;
 

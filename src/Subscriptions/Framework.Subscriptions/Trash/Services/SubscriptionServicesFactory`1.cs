@@ -1,5 +1,4 @@
-﻿using Framework.Subscriptions.Lambdas;
-using Framework.Subscriptions.Recipients;
+﻿using Framework.Subscriptions.Recipients;
 using Framework.Subscriptions.Subscriptions;
 using Framework.Subscriptions.Templates;
 

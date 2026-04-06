@@ -2,7 +2,6 @@
 using System.Collections.Immutable;
 
 using Framework.Subscriptions.Domain;
-using Framework.Subscriptions.Lambdas;
 
 namespace Framework.Subscriptions.Recipients;
 

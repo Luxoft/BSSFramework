@@ -1,6 +1,5 @@
 ﻿using CommonFramework.DependencyInjection;
 
-using Framework.Core.LazyObject;
 using Framework.Database.EntityFramework.Sessions;
 using Framework.DependencyInjection;
 

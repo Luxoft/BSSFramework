@@ -1,6 +1,4 @@
-﻿using Framework.Notification.Domain;
-using Framework.Subscriptions.Domain;
-using Framework.Subscriptions.Recipients;
+﻿using Framework.Subscriptions.Domain;
 
 using Attachment = System.Net.Mail.Attachment;
 

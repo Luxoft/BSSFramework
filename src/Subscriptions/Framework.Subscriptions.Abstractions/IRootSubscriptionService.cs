@@ -5,5 +5,5 @@ namespace Framework.Subscriptions;
 
 public interface ISubscriptionMetadataService
 {
-    IEnumerable<ITryResult<ISubscriptionMetadataBase>> Process(Type domainType, DomainObjectChangeType domainObjectChangeType);
+    IEnumerable<ITryResult<SubscriptionHeader>> Process(Type domainType, DomainObjectChangeType domainObjectChangeType);
 }

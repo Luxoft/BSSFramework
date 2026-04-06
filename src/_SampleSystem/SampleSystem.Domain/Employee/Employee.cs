@@ -7,7 +7,6 @@ using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.Core;
 using Framework.Database.Mapping;
-using Framework.Notification.Domain;
 using Framework.Relations;
 using Framework.Restriction;
 using SecuritySystem;

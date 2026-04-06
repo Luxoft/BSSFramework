@@ -3,14 +3,23 @@ using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Examples.RazerInheritance;
 
-public class RazorInheritanceSubscription : ISubscription<Domain.Employee>
+/// <summary>
+/// Example for showing customizing of inheritance of Razor
+/// </summary>
+public class RazorInheritanceSubscription : Subscription<Domain.Employee, _Examples_RazorInheritance_MessageTemplate_cshtml>
 {
-    public IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(DomainObjectVersions<Domain.Employee> versions)
+    public override string SenderName { get; } = "SampleSystem";
+
+    public override string SenderEmail { get; } = "RazorInheritanceSubscription@luxoft.com";
+
+    public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
+
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
     {
         yield return new("tester@luxoft.com", versions);
     }
 
-    public IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetCopyTo(DomainObjectVersions<Domain.Employee> versions)
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetCopyTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
     {
         yield return new("tester@luxoft.com", versions);
     }

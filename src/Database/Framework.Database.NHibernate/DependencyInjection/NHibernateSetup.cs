@@ -5,7 +5,6 @@ using CommonFramework.DependencyInjection;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
-using Framework.Core.LazyObject;
 using Framework.Database._Visitors.Containers;
 using Framework.Database.NHibernate._MappingSettings;
 using Framework.Database.NHibernate.Sessions;

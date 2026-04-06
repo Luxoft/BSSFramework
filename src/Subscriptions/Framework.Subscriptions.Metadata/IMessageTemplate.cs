@@ -1,6 +1,9 @@
-﻿namespace Framework.Subscriptions.Metadata;
+﻿using Framework.Subscriptions.Domain;
 
-public interface IMessageTemplate<in TRenderingObject>
+namespace Framework.Subscriptions.Metadata;
+
+public interface IMessageTemplate<TRenderingObject>
+    where TRenderingObject : class
 {
-    (string Subject, string Body) Render(IServiceProvider serviceProvider, IObjectsVersion<TRenderingObject> versions);
+    (string Subject, string Body) Render(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions);
 }

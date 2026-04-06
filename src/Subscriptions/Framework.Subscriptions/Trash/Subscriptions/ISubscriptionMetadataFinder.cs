@@ -7,5 +7,5 @@ namespace Framework.Subscriptions.Subscriptions;
 /// </summary>
 public interface ISubscriptionMetadataFinder
 {
-    IEnumerable<ISubscriptionMetadata> Find();
+    IEnumerable<ISubscription> Find();
 }

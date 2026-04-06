@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.Notification.Domain;
 using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Subscriptions;
 using Framework.Subscriptions.Templates;

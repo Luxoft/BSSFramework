@@ -2,11 +2,14 @@
 
 using CommonFramework;
 
+using Framework.Subscriptions.Domain;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Subscriptions.Metadata;
 
 public abstract partial class RazorTemplate<TRenderingObject> : IMessageTemplate<TRenderingObject>
+    where TRenderingObject : class
 {
     private RenderingState? state;
 
@@ -40,7 +43,7 @@ public abstract partial class RazorTemplate<TRenderingObject> : IMessageTemplate
     public abstract string Subject { get; }
 
 
-    public (string Subject, string Body) Render(IServiceProvider serviceProvider, IObjectsVersion<TRenderingObject> versions)
+    public (string Subject, string Body) Render(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions)
     {
         this.state = new RenderingState(new StringWriter(), serviceProvider, versions);
 
@@ -49,5 +52,5 @@ public abstract partial class RazorTemplate<TRenderingObject> : IMessageTemplate
         return (this.Subject, this.State.Writer.ToString());
     }
 
-    protected record RenderingState(StringWriter Writer, IServiceProvider ServiceProvider, IObjectsVersion<TRenderingObject> Versions);
+    protected record RenderingState(StringWriter Writer, IServiceProvider ServiceProvider, DomainObjectVersions<TRenderingObject> Versions);
 }

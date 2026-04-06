@@ -2,7 +2,6 @@
 
 using Framework.Application.Lock;
 using Framework.Configuration.BLL;
-using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.BLL.TargetSystemService;
 using Framework.Database;
 

@@ -3,9 +3,6 @@
 using Framework.Authorization.BLL;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
-using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
-using Framework.Notification;
-using Framework.Notification.Domain;
 using Framework.Subscriptions;
 using Framework.Subscriptions.Domain;
 

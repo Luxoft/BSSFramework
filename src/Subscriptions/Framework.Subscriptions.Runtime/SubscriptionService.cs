@@ -1,13 +1,12 @@
 ﻿using Framework.Core;
-using Framework.Core.Rendering;
 using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
 
 namespace Framework.Subscriptions;
 
-public class SubscriptionService(IEnumerable<ISubscriptionMetadata> subscriptionMetadataList) : ISubscriptionService
+public class SubscriptionService(IEnumerable<ISubscription> subscriptionMetadataList) : ISubscriptionService
 {
-    public IEnumerable<ITryResult<ISubscriptionMetadataBase>> Process(IDomainObjectVersions versions)
+    public IEnumerable<ITryResult<SubscriptionHeader>> Process(IDomainObjectVersions versions)
     {
         var x1 = subscriptionMetadataList.Where(sm => sm.DomainObjectChangeType.HasFlag(versions.ChangeType) && sm.DomainObjectType == versions.DomainObjectType).ToList();
 
@@ -16,7 +15,7 @@ public class SubscriptionService(IEnumerable<ISubscriptionMetadata> subscription
         return [];
     }
 
-    private IEnumerable<ITryResult<ISubscriptionMetadataBase>> Process<TDomainObject>(DomainObjectVersions<TDomainObject> versions)
+    private IEnumerable<ITryResult<SubscriptionHeader>> Process<TDomainObject>(DomainObjectVersions<TDomainObject> versions)
         where TDomainObject : class
     {
         var x1 = subscriptionMetadataList.Where(sm => sm.DomainObjectChangeType.HasFlag(versions.ChangeType) && sm.DomainObjectType == versions.DomainObjectType).ToList();
@@ -27,30 +26,34 @@ public class SubscriptionService(IEnumerable<ISubscriptionMetadata> subscription
     }
 }
 
-public class SubscriptionService<TDomainObject, TSubscription, TMessageTemplate, TRenderingObject>(
-    SubscriptionMetadata<TDomainObject, TSubscription, TMessageTemplate> subscriptionMetadata,
-    IDomainObjectConverter<TDomainObject, TRenderingObject> renderingObjectConverter,
-    TSubscription subscription)
+public class SubscriptionService<TDomainObject, TRenderingObject>(IServiceProvider serviceProvider, ISubscription<TDomainObject, TRenderingObject> subscription)
     where TDomainObject : class
-    where TSubscription : ISubscription<TDomainObject>
-    where TMessageTemplate : IMessageTemplate<TRenderingObject>
+    where TRenderingObject : class
 {
-    public IEnumerable<ITryResult<ISubscriptionMetadataBase>> Process(DomainObjectVersions<TDomainObject> versions)
+    public IEnumerable<ITryResult<SubscriptionHeader>> Process(DomainObjectVersions<TDomainObject> versions)
     {
-        if (subscription.IsProcessed(versions))
+        yield return TryResult.Catch(() =>
         {
-            var to = subscription.GetTo(versions);
-            var copyTo = subscription.GetCopyTo(versions);
-            var replyTo = subscription.GetReplyTo(versions);
+            if (subscription.IsProcessed(serviceProvider, versions))
+            {
+                var to = subscription.GetTo(serviceProvider, versions);
+                var copyTo = subscription.GetCopyTo(serviceProvider, versions);
+                var replyTo = subscription.GetReplyTo(serviceProvider, versions);
 
-            return [];
-        }
+                return subscription.Header;
+            }
+            else
+            {
+                return null;
+            }
+        });
     }
 }
 
 
-public record SubscriptionFullInfo<TDomainObject>(
-    ISubscriptionMetadata SubscriptionMetadata,
-    ISubscription<TDomainObject> Subscription,
-    IMessageTemplate<TDomainObject> MessageTemplate)
-    where TDomainObject : class;
+//public record SubscriptionFullInfo<TDomainObject, TRenderingObject>(
+//    ISubscriptionMetadata Metadata,
+//    ISubscription<TDomainObject, TRenderingObject> Subscription,
+//    IMessageTemplate<TRenderingObject> MessageTemplate)
+//    where TDomainObject : class
+//    where TRenderingObject : class;

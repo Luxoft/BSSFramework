@@ -1,12 +1,9 @@
 ﻿using System.Collections.Immutable;
-using System.Security.Principal;
 
 using Framework.Core;
+using Framework.Notification.Domain;
 using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
-
-using SecuritySystem.Notification.Domain;
-using SecuritySystem.UserSource;
 
 namespace Framework.Subscriptions;
 
@@ -43,17 +40,29 @@ public class SubscriptionService<TDomainObject, TRenderingObject>(
     {
         if (subscription.IsProcessed(serviceProvider, versions))
         {
-            var to = subscription.GetTo(serviceProvider, versions);
-
+            var preTo = subscription.GetTo(serviceProvider, versions);
             var authTo = this.GetAuthTo(versions);
 
+            var resultTo = this.GetMergeResult(preTo, authTo);
             var copyTo = subscription.GetCopyTo(serviceProvider, versions);
             var replyTo = subscription.GetReplyTo(serviceProvider, versions);
 
+            var regrouped = this.ReGroup(resultTo, copyTo, replyTo);
 
             yield return TryResult.Return(subscription.Header);
         }
     }
+
+    private IEnumerable<NotificationMessageGenerationInfo<TRenderingObject, RecipientFullInfo>> ReGroup(
+        IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> to,
+        IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> copyTo,
+        IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> replyTo) =>
+
+        from g in new[] { to.GroupRecipients(RecipientRole.To), copyTo.GroupRecipients(RecipientRole.Copy), replyTo.GroupRecipients(RecipientRole.ReplyTo) }.RegroupRecipients()
+
+        let recipients = g.Select(pair => new RecipientFullInfo(pair.recipient, pair.tag))
+
+        select new NotificationMessageGenerationInfo<TRenderingObject, RecipientFullInfo>([.. recipients], g.Key);
 
     private IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetAuthTo(DomainObjectVersions<TDomainObject> versions)
     {
@@ -74,4 +83,18 @@ public class SubscriptionService<TDomainObject, TRenderingObject>(
             }
         }
     }
+
+    private IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetMergeResult(
+        IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> preTo,
+        IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> authTo) =>
+
+        from g in new[] { preTo.GroupRecipients(false), authTo.GroupRecipients(true) }.RegroupRecipients()
+
+        let resultRecipients = g.Partial(
+            pair => pair.tag,
+            (r1, r2) =>
+                r1.Select(pair => pair.recipient)
+                  .GetEmailMergeResult(r2.Select(pair => pair.recipient), subscription.RecipientMergeType))
+
+        select new NotificationMessageGenerationInfo<TRenderingObject>([.. resultRecipients], g.Key);
 }

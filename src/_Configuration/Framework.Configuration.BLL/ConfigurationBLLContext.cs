@@ -52,7 +52,6 @@ public partial class ConfigurationBLLContext
         IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
         ITrackingService<PersistentDomainObjectBase> trackingService,
         IConfigurationValidator validator,
-        IMessageSender<MessageTemplateNotification> subscriptionSender,
         IRootSecurityService securityService,
         IConfigurationBLLFactoryContainer logics,
         IAuthorizationBLLContext authorization,
@@ -67,7 +66,6 @@ public partial class ConfigurationBLLContext
     {
         this.TrackingService = trackingService;
         this.Validator = validator;
-        this.SubscriptionSender = subscriptionSender ?? throw new ArgumentNullException(nameof(subscriptionSender));
 
         this.SecurityService = securityService;
         this.Logics = logics;
@@ -132,8 +130,6 @@ public partial class ConfigurationBLLContext
 
     public ITrackingService<PersistentDomainObjectBase> TrackingService { get; }
 
-    public IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
-
     public IRootSecurityService SecurityService { get; }
 
     public ITypeResolver<string> TypeResolver { get; }
@@ -151,8 +147,6 @@ public partial class ConfigurationBLLContext
     public ISerializerFactory<string> SystemConstantSerializerFactory { get; }
 
     public ITypeResolver<string> SystemConstantTypeResolver { get; }
-
-    public bool SubscriptionEnabled => this.lazyTargetSystemServiceCache.Value.Values.Any(tss => tss.TargetSystem.SubscriptionEnabled);
 
     public INamedLockService NamedLockService { get; }
 

@@ -6,10 +6,8 @@ using Framework.BLL;
 using Framework.BLL.Domain.IdentityObject;
 using Framework.Configuration.BLL.TargetSystemService;
 using Framework.Configuration.Domain;
-using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.Core.TypeResolving;
-using Framework.Notification.Domain;
 using Framework.Tracking;
 using Framework.Validation;
 
@@ -34,10 +32,6 @@ public partial interface IConfigurationBLLContext :
     IDomainObjectEventMetadata EventOperationSource { get; }
 
     INamedLockService NamedLockService { get; }
-
-    IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
-
-    bool SubscriptionEnabled { get; }
 
     ISerializerFactory<string> SystemConstantSerializerFactory { get; }
 

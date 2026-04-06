@@ -14,12 +14,11 @@ public class SentMessageTests : TestBase
     {
         // Arrange
         var copy = "copyText10";
-        var targets = Enumerable.Range(1, 30).Select(x => new NotificationTargetDTO { Name = copy, Type = RecipientRole.CopyTo }).ToList();
+        var targets = Enumerable.Range(1, 30).Select(x => new NotificationTargetDTO { Name = copy, Type = RecipientRole.Copy }).ToList();
 
         var notification = new NotificationEventDTO
                            {
                                    Message = new NotificationMessage(),
-                                   TechnicalInformation = new NotificationTechnicalInformationDTO(),
                                    Targets = targets
                            };
 

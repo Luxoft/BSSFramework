@@ -4,26 +4,26 @@ namespace Framework.Subscriptions.Metadata;
 
 public static class EmployeeExtensions
 {
-    public static IEnumerable<IEmployee> GetMergeResult(this IEnumerable<IEmployee> recipientsByRoles, IEnumerable<IEmployee> recipientsByGeneration, RecipientMergeType mode)
+    public static IEnumerable<string> GetEmailMergeResult(this IEnumerable<string> recipientsByRoles, IEnumerable<string> recipientsByGeneration, RecipientMergeType mode)
     {
         if (recipientsByRoles == null) throw new ArgumentNullException(nameof(recipientsByRoles));
         if (recipientsByGeneration == null) throw new ArgumentNullException(nameof(recipientsByGeneration));
 
-        var employeeComparer = EmployeeEqualityComparer.EMail;
+        var emailComparer = StringComparer.CurrentCultureIgnoreCase;
 
         switch (mode)
         {
             case RecipientMergeType.Union:
-                return recipientsByRoles.Union(recipientsByGeneration, employeeComparer);
+                return recipientsByRoles.Union(recipientsByGeneration, emailComparer);
 
             case RecipientMergeType.Intersect:
-                return recipientsByRoles.Intersect(recipientsByGeneration, employeeComparer);
+                return recipientsByRoles.Intersect(recipientsByGeneration, emailComparer);
 
             case RecipientMergeType.LeftExceptRight:
-                return recipientsByRoles.Except(recipientsByGeneration, employeeComparer);
+                return recipientsByRoles.Except(recipientsByGeneration, emailComparer);
 
             case RecipientMergeType.RightExceptLeft:
-                return recipientsByGeneration.Except(recipientsByRoles, employeeComparer);
+                return recipientsByGeneration.Except(recipientsByRoles, emailComparer);
 
             default:
                 throw new ArgumentOutOfRangeException(mode.ToString());

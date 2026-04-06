@@ -23,8 +23,6 @@ public class TargetSystem : BaseDirectory, IMaster<DomainType>
 
     private readonly bool isRevision;
 
-    private bool subscriptionEnabled;
-
     /// <summary>
     /// Конструктор
     /// </summary>
@@ -63,15 +61,6 @@ public class TargetSystem : BaseDirectory, IMaster<DomainType>
     /// Признак поддержки целевой системой ревизизи баз данных
     /// </summary>
     public virtual bool IsRevision => this.isRevision;
-
-    /// <summary>
-    /// Признак того, что включен механизм подписки
-    /// </summary>
-    public virtual bool SubscriptionEnabled
-    {
-        get => this.subscriptionEnabled;
-        set => this.subscriptionEnabled = value;
-    }
 
     #region IMaster<DomainType> Members
 

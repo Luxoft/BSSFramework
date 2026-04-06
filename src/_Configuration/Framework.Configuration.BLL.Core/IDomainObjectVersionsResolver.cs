@@ -4,5 +4,5 @@ namespace Framework.Configuration.BLL;
 
 public interface IDomainObjectVersionsResolver
 {
-    IDomainObjectVersions GetDomainObjectVersions(Guid domainObjectId, long revisionNumber);
+    DomainObjectVersions GetDomainObjectVersions(Guid domainObjectId, long revisionNumber);
 }

@@ -992,7 +992,6 @@ namespace Framework.Configuration.Generated.DTO
                 throw new System.ArgumentNullException("target");
             }
             target.Name = source.Name;
-            target.SubscriptionEnabled = source.SubscriptionEnabled;
         }
         
         public virtual void MapSimpleToStrictForTargetSystemRootFilterModel(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelSimpleDTO source)
@@ -1007,7 +1006,6 @@ namespace Framework.Configuration.Generated.DTO
             }
             target.IsMain = source.IsMain;
             target.IsRevision = source.IsRevision;
-            target.SubscriptionEnabled = source.SubscriptionEnabled;
         }
     }
     
@@ -6354,8 +6352,6 @@ namespace Framework.Configuration.Generated.DTO
         
         private string _name;
         
-        private bool _subscriptionEnabled;
-        
         public TargetSystemSimpleDTO()
         {
         }
@@ -6429,19 +6425,6 @@ namespace Framework.Configuration.Generated.DTO
             set
             {
                 this._name = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool SubscriptionEnabled
-        {
-            get
-            {
-                return this._subscriptionEnabled;
-            }
-            set
-            {
-                this._subscriptionEnabled = value;
             }
         }
         
@@ -6544,8 +6527,6 @@ namespace Framework.Configuration.Generated.DTO
         private System.Guid _id;
         
         private string _name;
-        
-        private bool _subscriptionEnabled;
         
         public TargetSystemStrictDTO()
         {
@@ -6668,19 +6649,6 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool SubscriptionEnabled
-        {
-            get
-            {
-                return this._subscriptionEnabled;
-            }
-            set
-            {
-                this._subscriptionEnabled = value;
-            }
-        }
-        
         public void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.TargetSystem domainObject)
         {
             mappingService.MapTargetSystem(this, domainObject);
@@ -6702,8 +6670,6 @@ namespace Framework.Configuration.Generated.DTO
         private bool? _isMain;
         
         private bool? _isRevision;
-        
-        private bool? _subscriptionEnabled;
         
         public TargetSystemRootFilterModelSimpleDTO()
         {
@@ -6738,19 +6704,6 @@ namespace Framework.Configuration.Generated.DTO
             set
             {
                 this._isRevision = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool? SubscriptionEnabled
-        {
-            get
-            {
-                return this._subscriptionEnabled;
-            }
-            set
-            {
-                this._subscriptionEnabled = value;
             }
         }
         
@@ -6834,8 +6787,6 @@ namespace Framework.Configuration.Generated.DTO
         
         private bool? _isRevision;
         
-        private bool? _subscriptionEnabled;
-        
         public TargetSystemRootFilterModelStrictDTO()
         {
         }
@@ -6907,19 +6858,6 @@ namespace Framework.Configuration.Generated.DTO
             set
             {
                 this._isRevision = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool? SubscriptionEnabled
-        {
-            get
-            {
-                return this._subscriptionEnabled;
-            }
-            set
-            {
-                this._subscriptionEnabled = value;
             }
         }
         
@@ -8615,13 +8553,11 @@ namespace Framework.Configuration.Generated.DTO
             mappingObject.IsMain = domainObject.IsMain;
             mappingObject.IsRevision = domainObject.IsRevision;
             mappingObject.Name = domainObject.Name;
-            mappingObject.SubscriptionEnabled = domainObject.SubscriptionEnabled;
         }
         
         public virtual void MapTargetSystem(Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO mappingObject, Framework.Configuration.Domain.TargetSystem domainObject)
         {
             domainObject.Name = mappingObject.Name;
-            domainObject.SubscriptionEnabled = mappingObject.SubscriptionEnabled;
         }
         
         public virtual void MapTargetSystem(Framework.Configuration.Domain.TargetSystem domainObject, Framework.Configuration.Generated.DTO.TargetSystemFullDTO mappingObject)
@@ -8644,21 +8580,18 @@ namespace Framework.Configuration.Generated.DTO
         public virtual void MapTargetSystem(Framework.Configuration.Generated.DTO.TargetSystemStrictDTO mappingObject, Framework.Configuration.Domain.TargetSystem domainObject)
         {
             domainObject.Name = mappingObject.Name;
-            domainObject.SubscriptionEnabled = mappingObject.SubscriptionEnabled;
         }
         
         public virtual void MapTargetSystemRootFilterModel(Framework.Configuration.Domain.TargetSystemRootFilterModel domainObject, Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelSimpleDTO mappingObject)
         {
             mappingObject.IsMain = domainObject.IsMain;
             mappingObject.IsRevision = domainObject.IsRevision;
-            mappingObject.SubscriptionEnabled = domainObject.SubscriptionEnabled;
         }
         
         public virtual void MapTargetSystemRootFilterModel(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelSimpleDTO mappingObject, Framework.Configuration.Domain.TargetSystemRootFilterModel domainObject)
         {
             domainObject.IsMain = mappingObject.IsMain;
             domainObject.IsRevision = mappingObject.IsRevision;
-            domainObject.SubscriptionEnabled = mappingObject.SubscriptionEnabled;
         }
         
         public virtual void MapTargetSystemRootFilterModel(Framework.Configuration.Domain.TargetSystemRootFilterModel domainObject, Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelFullDTO mappingObject)
@@ -8681,7 +8614,6 @@ namespace Framework.Configuration.Generated.DTO
         {
             domainObject.IsMain = mappingObject.IsMain;
             domainObject.IsRevision = mappingObject.IsRevision;
-            domainObject.SubscriptionEnabled = mappingObject.SubscriptionEnabled;
         }
         
         protected virtual void MapToDomainObject<TMappingObject, TDomainObject>(TMappingObject mappingObject, TDomainObject domainObject)

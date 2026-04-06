@@ -18,7 +18,7 @@
 //            .Select(pair => (pair.Key, serviceProxyFactory.Create<IRootSubscriptionService>(typeof(RootSubscriptionService<,,>).MakeGenericType(pair.Key.DomainObjectType, pair.Key), pair)))
 //            .ToDictionary();
 
-//    public IEnumerable<ITryResult<ISubscriptionMetadataBase>> Process(IServiceProvider serviceProvider, IDomainObjectVersions versions) =>
+//    public IEnumerable<ITryResult<ISubscriptionMetadataBase>> Process(IServiceProvider serviceProvider, DomainObjectVersions versions) =>
 //        this.cache.TryGetValue((versions.DomainObjectType, versions.ChangeType), out var innerService) ? innerService.Process(serviceProvider, versions) : [];
 //}
 
@@ -35,7 +35,7 @@
 //        throw new NotImplementedException();
 //    }
 
-//    IEnumerable<ITryResult<ISubscriptionMetadataBase>> IRootSubscriptionService.Process(IServiceProvider serviceProvider, IDomainObjectVersions versions) =>
+//    IEnumerable<ITryResult<ISubscriptionMetadataBase>> IRootSubscriptionService.Process(IServiceProvider serviceProvider, DomainObjectVersions versions) =>
 //        this.Process(serviceProvider, (DomainObjectVersions<TDomainObject>)versions);
 //}
 
@@ -55,6 +55,6 @@
 //        throw new NotImplementedException();
 //    }
 
-//    IEnumerable<ITryResult<ISubscriptionMetadataBase>> IRootSubscriptionService.Process(IServiceProvider serviceProvider, IDomainObjectVersions versions) =>
+//    IEnumerable<ITryResult<ISubscriptionMetadataBase>> IRootSubscriptionService.Process(IServiceProvider serviceProvider, DomainObjectVersions versions) =>
 //        this.Process(serviceProvider, (DomainObjectVersions<TDomainObject>)versions);
 //}

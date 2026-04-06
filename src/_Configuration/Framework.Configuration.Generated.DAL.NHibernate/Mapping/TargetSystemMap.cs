@@ -11,7 +11,7 @@ public class TargetSystemMap : ConfigurationBaseMap<TargetSystem>
         this.Map(x => x.IsMain);
         this.Map(x => x.IsRevision);
         this.Map(x => x.Name).UniqueKey("UIX_nameTargetSystem").Not.Nullable();
-        this.Map(x => x.SubscriptionEnabled);
+
         this.HasMany(x => x.DomainTypes).AsSet().Inverse().Cascade.AllDeleteOrphan();
     }
 }

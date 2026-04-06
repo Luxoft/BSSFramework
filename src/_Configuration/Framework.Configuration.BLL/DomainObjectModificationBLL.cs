@@ -72,7 +72,7 @@ public partial class DomainObjectModificationBLL(
         }
     }
 
-    private IDomainObjectVersions GetDomainObjectVersions(ObjectModificationInfo<Guid> modificationInfo)
+    private DomainObjectVersions GetDomainObjectVersions(ObjectModificationInfo<Guid> modificationInfo)
     {
         var domainType = this.Context.Logics.DomainType.GetByDomainType(new MemoryDomainType(modificationInfo.TypeInfo.Name, modificationInfo.TypeInfo.NameSpace))!;
 

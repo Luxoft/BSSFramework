@@ -49,7 +49,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class DomainObjectModificationBLL : Framework.Configuration.BLL.IDomainObjectModificationBLL
+    public partial class DomainObjectModificationBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectModification>, Framework.Configuration.BLL.IDomainObjectModificationBLL
     {
     }
     

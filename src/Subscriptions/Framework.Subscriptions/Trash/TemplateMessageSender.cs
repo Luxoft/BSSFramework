@@ -60,7 +60,7 @@ public class TemplateMessageSender(
         var technicalInformation = new NotificationTechnicalInformation(
             message.MessageTemplateCode,
             message.ContextObjectType.Name,
-            (message.ContextObject as IIdentityObject<Guid> ?? (message.ContextObject as IDomainObjectVersions).Maybe(ver => ver.Current ?? ver.Previous) as IIdentityObject<Guid>)
+            (message.ContextObject as IIdentityObject<Guid> ?? (message.ContextObject as DomainObjectVersions).Maybe(ver => ver.Current ?? ver.Previous) as IIdentityObject<Guid>)
             .MaybeToNullable(obj => obj.Id));
 
         return new Framework.Notification.Domain.Notification(technicalInformation, mailMessage);

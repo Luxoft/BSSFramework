@@ -5,29 +5,17 @@ using Framework.Subscriptions.Domain;
 
 namespace Framework.Subscriptions.Metadata;
 
-public record NotificationMessageGenerationInfo<TRenderingObject>(ImmutableArray<IEmployee> Recipients, DomainObjectVersions<TRenderingObject> Versions)
+public record NotificationMessageGenerationInfo<TRenderingObject>(ImmutableHashSet<string> Recipients, DomainObjectVersions<TRenderingObject> Versions)
     where TRenderingObject : class
 {
     public NotificationMessageGenerationInfo(string emails, DomainObjectVersions<TRenderingObject> version)
-        : this([.. DefaultEmployee.CreateMany(emails)], version)
+        : this([.. CreateMany(emails)], version)
     {
     }
 
-    public NotificationMessageGenerationInfo(IEmployee? recipient, DomainObjectVersions<TRenderingObject> version)
-        : this([.. recipient.MaybeYield()], version)
-    {
-    }
+    private static IEnumerable<string> CreateMany(string emails) =>
 
-    private class DefaultEmployee(string email) : IEmployee
-    {
-        public string Email { get; } = email;
+        from email in emails.TrimNull().Split([',', ';'], StringSplitOptions.RemoveEmptyEntries)
 
-        public string Login => throw new NotImplementedException();
-
-        public static IEnumerable<DefaultEmployee> CreateMany(string emails) =>
-
-            from email in emails.TrimNull().Split([',', ';'], StringSplitOptions.RemoveEmptyEntries)
-
-            select new DefaultEmployee(email.Trim());
-    }
+        select email.Trim();
 }

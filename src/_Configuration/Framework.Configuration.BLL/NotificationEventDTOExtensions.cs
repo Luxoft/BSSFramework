@@ -15,11 +15,11 @@ public static class NotificationEventDTOExtensions
             string.Join(",", notification.Targets.Where(z => z.Type == RecipientRole.To).Select(z => z.Name)),
             notification.Subject,
             notification.Message.Message,
-            notification.TechnicalInformation.MessageTemplateCode,
+            "",
             string.Empty,
-            string.Join(",", notification.Targets.Where(z => z.Type == RecipientRole.CopyTo).Select(z => z.Name)),
-            notification.TechnicalInformation.ContextObjectType,
-            notification.TechnicalInformation.ContextObjectId,
+            string.Join(",", notification.Targets.Where(z => z.Type == RecipientRole.Copy).Select(z => z.Name)),
+            "",
+            null,
             string.Join(",", notification.Targets.Where(z => z.Type == RecipientRole.ReplyTo).Select(z => z.Name)));
     }
 }

@@ -16,8 +16,9 @@
     <PackageVersion Include="FluentMigrator.Extensions.SqlServer" Version="8.0.1" />
     <PackageVersion Include="IvAt.CommonFramework" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.CommonFramework.DependencyInjection" Version="$(IvAt)" />
-    <PackageVersion Include="IvAt.CommonFramework.GenericRepository" Version="3.2.2" />
+    <PackageVersion Include="IvAt.CommonFramework.GenericRepository" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.CommonFramework.IdentitySource.Abstractions" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.CommonFramework.VisualIdentitySource.Abstractions" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.GenericQueryable" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.GenericQueryable.Abstractions" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.GenericQueryable.EntityFramework" Version="$(IvAt)" />
@@ -34,7 +35,7 @@
     <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission.Abstractions" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.Notification" Version="$(IvAt)" />
-    <PackageVersion Include="IvAt.SecuritySystem.Notification.Abstractions" Version="3.2.2" />
+    <PackageVersion Include="IvAt.SecuritySystem.Notification.Abstractions" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.Notification.Domain" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.Runtime" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.Testing" Version="$(IvAt)" />

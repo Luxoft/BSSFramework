@@ -1,4 +1,6 @@
-﻿using CommonFramework.DependencyInjection;
+﻿using System.Net.Mail;
+
+using CommonFramework.DependencyInjection;
 
 using Framework.Application.ApplicationVariable;
 using Framework.Application.Events;
@@ -81,10 +83,9 @@ public static class ServiceCollectionExtensions
         private IServiceCollection AddConfigurationBLL() =>
             services
                 .AddBLLSystem<IConfigurationBLLContext, ConfigurationBLLContext>()
-                .AddScoped<ISubscriptionBLL, SubscriptionBLL>()
 
                 .AddScopedFrom<ICurrentRevisionService, IDBSession>()
-                .AddScoped<IMessageSender<MessageTemplateNotification>, TemplateMessageSender>()
+                .AddScoped<IMessageSender<MailMessage>, MailMessageSender>()
                 .AddScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>();
 
         private IServiceCollection AddConfigurationNamedLocks() =>
@@ -98,7 +99,6 @@ public static class ServiceCollectionExtensions
         securitySystemSettings
             .AddDomainSecurity<Sequence>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
             .AddDomainSecurity<SystemConstant>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
-            .AddDomainSecurity<CodeFirstSubscription>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
             .AddDomainSecurity<TargetSystem>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
             .AddDomainSecurity<DomainType>(b => b.SetView(SecurityRule.Disabled));
 }

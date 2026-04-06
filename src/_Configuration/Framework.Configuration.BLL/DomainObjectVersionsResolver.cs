@@ -17,7 +17,7 @@ public class DomainObjectVersionsResolver<TBLLContext, TDomainObject>(
 {
     private readonly IRevisionBLL<TDomainObject, Guid> revisionBll = context.Logics.Default.Create<TDomainObject>();
 
-    public IDomainObjectVersions GetDomainObjectVersions(Guid domainObjectId, long revisionNumber)
+    public DomainObjectVersions GetDomainObjectVersions(Guid domainObjectId, long revisionNumber)
     {
         var prev = this.GetPreviousDomainObjectByRevisionNumber(domainObjectId, revisionNumber);
         var next = this.GetDomainObjectByRevisionNumber(domainObjectId, revisionNumber);

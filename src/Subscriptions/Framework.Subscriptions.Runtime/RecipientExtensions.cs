@@ -1,8 +1,8 @@
-﻿using Framework.Subscriptions.Domain;
+﻿using Framework.Subscriptions.Metadata;
 
-namespace Framework.Subscriptions.Metadata;
+namespace Framework.Subscriptions;
 
-public static class EmployeeExtensions
+public static class RecipientExtensions
 {
     public static IEnumerable<string> GetEmailMergeResult(this IEnumerable<string> recipientsByRoles, IEnumerable<string> recipientsByGeneration, RecipientMergeType mode)
     {

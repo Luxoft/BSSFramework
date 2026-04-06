@@ -12,8 +12,7 @@ namespace Framework.Notification
     public class ProdSmtpMessageSender(
         ISmtpClientFactory smtpClientFactory,
         IOptionsSnapshot<SmtpSettings> settings,
-        IRewriteReceiversService rewriteReceiversService,
-        ILogger<SmtpNotificationMessageSender> logger) : ISmtpMessageSender
+        IRewriteReceiversService rewriteReceiversService) : ISmtpMessageSender
     {
         public async Task SendAsync(NotificationEventDTO message, CancellationToken cancellationToken)
         {
@@ -53,10 +52,6 @@ namespace Framework.Notification
             {
                 return;
             }
-
-            //logger.LogWarning(
-            //    "Recipients for notification {TemplateCode} were not found - notification was redirected to support",
-            //    dto.TechnicalInformation.MessageTemplateCode);
 
             dto.Targets.AddRange(
                 settings.Value.DefaultReceiverEmails.Select(x => new NotificationTargetDTO { Type = RecipientRole.To, Name = x }));

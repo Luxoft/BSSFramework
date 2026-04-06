@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Net.Mail;
 
 using Framework.Core;
 using Framework.Notification.Domain;
@@ -47,20 +48,35 @@ public class SubscriptionService<TDomainObject, TRenderingObject>(
             var copyTo = subscription.GetCopyTo(serviceProvider, versions);
             var replyTo = subscription.GetReplyTo(serviceProvider, versions);
 
-            var regrouped = this.ReGroup(resultTo, copyTo, replyTo);
+            var regrouped = ReGroup(resultTo, copyTo, replyTo);
 
             yield return TryResult.Return(subscription.Header);
         }
     }
 
-    private IEnumerable<NotificationMessageGenerationInfo<TRenderingObject, RecipientFullInfo>> ReGroup(
+    private Message ToMessage(NotificationMessageGenerationInfo<TRenderingObject, RecipientFullInfo> notificationMessageGenerationInfo)
+    {
+        var (subject, body) = subscription.GetMessage(serviceProvider, notificationMessageGenerationInfo.Versions);
+
+        var attachments = subscription.GetAttachments(serviceProvider, notificationMessageGenerationInfo.Versions);
+
+        return new Message
+        {
+                   Subject = subject,
+                   Body = body,
+                   From = new MailAddress(subscription.SenderEmail!, subscription.SenderName),
+                   To = {  }
+               };
+    }
+
+    private static IEnumerable<NotificationMessageGenerationInfo<TRenderingObject, RecipientFullInfo>> ReGroup(
         IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> to,
         IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> copyTo,
         IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> replyTo) =>
 
         from g in new[] { to.GroupRecipients(RecipientRole.To), copyTo.GroupRecipients(RecipientRole.Copy), replyTo.GroupRecipients(RecipientRole.ReplyTo) }.RegroupRecipients()
 
-        let recipients = g.Select(pair => new RecipientFullInfo(pair.recipient, pair.tag))
+        let recipients = g.Select(pair => new RecipientFullInfo(pair.Recipient, pair.Tag))
 
         select new NotificationMessageGenerationInfo<TRenderingObject, RecipientFullInfo>([.. recipients], g.Key);
 
@@ -91,10 +107,10 @@ public class SubscriptionService<TDomainObject, TRenderingObject>(
         from g in new[] { preTo.GroupRecipients(false), authTo.GroupRecipients(true) }.RegroupRecipients()
 
         let resultRecipients = g.Partial(
-            pair => pair.tag,
+            pair => pair.Tag,
             (r1, r2) =>
-                r1.Select(pair => pair.recipient)
-                  .GetEmailMergeResult(r2.Select(pair => pair.recipient), subscription.RecipientMergeType))
+                r1.Select(pair => pair.Recipient)
+                  .GetEmailMergeResult(r2.Select(pair => pair.Recipient), subscription.RecipientMergeType))
 
         select new NotificationMessageGenerationInfo<TRenderingObject>([.. resultRecipients], g.Key);
 }

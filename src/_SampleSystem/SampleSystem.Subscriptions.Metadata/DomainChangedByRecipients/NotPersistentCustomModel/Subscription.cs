@@ -43,7 +43,7 @@ public class Subscription : Subscription<Domain.Country, CustomNotificationModel
         yield return new("replayTo@luxoft.com", versions.ChangeDomainObject(c => this.ConvertToRenderingObject(serviceProvider, c)));
     }
 
-    public override IEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Country> versions)
+    public override IEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<CustomNotificationModel> versions)
     {
         yield return new(new MemoryStream(Encoding.UTF8.GetBytes("Hello world!")), AttachmentName);
     }

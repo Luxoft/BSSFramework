@@ -13,6 +13,8 @@ public static class ServiceCollectionExtensions
     {
         public void AddSmtpNotification(IConfiguration configuration)
         {
+            services.AddSingleton<ISubjectCleaner, SubjectCleaner>();
+
             services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));
 
             services.AddScoped<IMessageSender<NotificationEventDTO>, SmtpNotificationMessageSender>();

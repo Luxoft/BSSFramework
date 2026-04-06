@@ -20,11 +20,11 @@ public interface ISubscription<TDomainObject, TRenderingObject> : ISubscription<
 
     IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetReplyTo(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
 
-    IEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
-
     IEnumerable<NotificationFilterGroup> GetNotificationFilterGroups(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
 
     (string Subject, string Body) GetMessage(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions);
+
+    IEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions);
 }
 
 public interface ISubscription<TDomainObject> : ISubscription

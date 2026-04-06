@@ -1,10 +1,11 @@
 ﻿using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
-namespace Framework.Subscriptions.Metadata;
+namespace Framework.Subscriptions;
 
 public static class NotificationMessageGenerationInfoExtensions
 {
-    public static IEnumerable<IGrouping<DomainObjectVersions<TRenderingObject>, (TRecipient recipient, TTag tag)>>
+    public static IEnumerable<IGrouping<DomainObjectVersions<TRenderingObject>, (TRecipient Recipient, TTag Tag)>>
         GroupRecipients<TRenderingObject, TRecipient, TTag>(this IEnumerable<NotificationMessageGenerationInfo<TRenderingObject, TRecipient>> source, TTag tag)
 
         where TRenderingObject : class =>

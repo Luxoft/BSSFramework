@@ -54,10 +54,10 @@ public abstract class Subscription<TDomainObject, TRenderingObject, TMessageTemp
     public virtual IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetReplyTo(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions) =>
         [];
 
-    public virtual IEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions) => [];
-
     public virtual IEnumerable<NotificationFilterGroup> GetNotificationFilterGroups(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions) => [];
 
     public (string Subject, string Body) GetMessage(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions) =>
         serviceProvider.GetRequiredService<TMessageTemplate>().Render(serviceProvider, versions);
+
+    public virtual IEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions) => [];
 }

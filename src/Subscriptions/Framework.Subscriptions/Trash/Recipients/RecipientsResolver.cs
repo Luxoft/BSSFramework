@@ -105,11 +105,11 @@ public class RecipientsResolver<TBLLContext>
     private RecipientsResolverResult CreateResult(
             Subscription subscription,
             RecipientsResolverResult generationResult,
-            RecipientCollection rolesRecipients)
+            ImmutableArray<IEmployee> rolesRecipients)
     {
         var mergeResult = rolesRecipients.Merge(
                                                 generationResult.RecipientsBag.To,
-                                                (RecipientsSelectorMode)subscription.RecipientsMode);
+                                                (RecipientMergeType)subscription.RecipientsMode);
 
         var to = this.ExcludeCurrentUser(
                                          subscription,
@@ -136,15 +136,15 @@ public class RecipientsResolver<TBLLContext>
     private IEnumerable<RecipientsResolverResult> CreateResultsByGeneration(
             Subscription subscription,
             IEnumerable<RecipientsResolverResult> generationResults,
-            RecipientCollection rolesRecipients,
+            ImmutableArray<IEmployee> rolesRecipients,
             DomainObjectVersions<object> versions)
     {
         if (!generationResults.Any())
         {
             var bag = new RecipientsBag(
                                         this.ExcludeCurrentUser(subscription, versions, rolesRecipients),
-                                        new RecipientCollection(),
-                                        new RecipientCollection());
+                                        new ImmutableArray<IEmployee>(),
+                                        new ImmutableArray<IEmployee>());
 
             var result = new RecipientsResolverResult(bag, versions);
             return [result];
@@ -154,10 +154,10 @@ public class RecipientsResolver<TBLLContext>
         return results;
     }
 
-    private RecipientCollection ExcludeCurrentUser<T>(
+    private ImmutableArray<IEmployee> ExcludeCurrentUser<T>(
             Subscription subscription,
             DomainObjectVersions<T> versions,
-            RecipientCollection recipients)
+            ImmutableArray<IEmployee> recipients)
             where T : class
     {
         if (!subscription.ExcludeCurrentUser)
@@ -173,7 +173,7 @@ public class RecipientsResolver<TBLLContext>
                                  .Where(r => !string.Equals(r.Email, currentEmail, StringComparison.OrdinalIgnoreCase))
                                  .ToList();
 
-        return new RecipientCollection(filteredRecipients);
+        return new ImmutableArray<IEmployee>(filteredRecipients);
     }
 
     private ILogger<RecipientsResolver<TBLLContext>> GetLogger() =>

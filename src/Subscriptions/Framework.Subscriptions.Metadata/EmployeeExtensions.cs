@@ -4,7 +4,7 @@ namespace Framework.Subscriptions.Metadata;
 
 public static class EmployeeExtensions
 {
-    public static IEnumerable<IEmployee> GetMergeResult(this IEnumerable<IEmployee> recipientsByRoles, IEnumerable<IEmployee> recipientsByGeneration, RecipientsSelectorMode mode)
+    public static IEnumerable<IEmployee> GetMergeResult(this IEnumerable<IEmployee> recipientsByRoles, IEnumerable<IEmployee> recipientsByGeneration, RecipientMergeType mode)
     {
         if (recipientsByRoles == null) throw new ArgumentNullException(nameof(recipientsByRoles));
         if (recipientsByGeneration == null) throw new ArgumentNullException(nameof(recipientsByGeneration));
@@ -13,16 +13,16 @@ public static class EmployeeExtensions
 
         switch (mode)
         {
-            case RecipientsSelectorMode.Union:
+            case RecipientMergeType.Union:
                 return recipientsByRoles.Union(recipientsByGeneration, employeeComparer);
 
-            case RecipientsSelectorMode.Intersect:
+            case RecipientMergeType.Intersect:
                 return recipientsByRoles.Intersect(recipientsByGeneration, employeeComparer);
 
-            case RecipientsSelectorMode.LeftExceptRight:
+            case RecipientMergeType.LeftExceptRight:
                 return recipientsByRoles.Except(recipientsByGeneration, employeeComparer);
 
-            case RecipientsSelectorMode.RightExceptLeft:
+            case RecipientMergeType.RightExceptLeft:
                 return recipientsByGeneration.Except(recipientsByRoles, employeeComparer);
 
             default:

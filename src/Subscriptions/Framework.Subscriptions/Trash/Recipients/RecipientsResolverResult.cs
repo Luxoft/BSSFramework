@@ -1,4 +1,5 @@
 ﻿using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Old;
 
 namespace Framework.Subscriptions.Recipients;
 

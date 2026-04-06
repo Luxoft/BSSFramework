@@ -9,14 +9,14 @@ public class AttachmentInlineSubscription : ISubscription<Domain.Employee>
 {
     public const string AttachmentName = "test.txt";
 
-    public IEnumerable<NotificationMessageGenerationInfo> GetTo(DomainObjectVersions<Domain.Employee> versions)
+    public IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(DomainObjectVersions<Domain.Employee> versions)
     {
-        yield return new ("tester@luxoft.com", versions.Previous, versions.Current);
+        yield return new ("tester@luxoft.com", versions);
     }
 
-    public IEnumerable<NotificationMessageGenerationInfo> GetCopyTo(DomainObjectVersions<Domain.Employee> versions)
+    public IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetCopyTo(DomainObjectVersions<Domain.Employee> versions)
     {
-        yield return new("tester@luxoft.com", versions.Previous, versions.Current);
+        yield return new("tester@luxoft.com", versions);
     }
 
     public IEnumerable<System.Net.Mail.Attachment> GetAttachments(DomainObjectVersions<Domain.Employee> versions)

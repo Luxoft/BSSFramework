@@ -77,9 +77,9 @@ public class GenerationRecipientsResolver<TBLLContext>
     private static RecipientsResolverResult CreateResultFromGroup(
             IGrouping<DomainObjectVersions<object>, RecipientsResolverResult> group)
     {
-        var to = new RecipientCollection(@group.SelectMany(r => r.RecipientsBag.To));
-        var cc = new RecipientCollection(@group.SelectMany(r => r.RecipientsBag.Cc));
-        var replyTo = new RecipientCollection(@group.SelectMany(r => r.RecipientsBag.ReplyTo));
+        var to = new ImmutableArray<IEmployee>(@group.SelectMany(r => r.RecipientsBag.To));
+        var cc = new ImmutableArray<IEmployee>(@group.SelectMany(r => r.RecipientsBag.Cc));
+        var replyTo = new ImmutableArray<IEmployee>(@group.SelectMany(r => r.RecipientsBag.ReplyTo));
         var bag = new RecipientsBag(to, cc, replyTo);
         var result = new RecipientsResolverResult(bag, @group.Key);
 
@@ -105,7 +105,7 @@ public class GenerationRecipientsResolver<TBLLContext>
     {
         var recipients = info.Recipients.Select(this.CreateRecipient);
         var objectVersions = new DomainObjectVersions<object>(info.PreviousRoot, info.CurrentRoot);
-        var bag = new RecipientsBag(new RecipientCollection(), new RecipientCollection(recipients), new RecipientCollection());
+        var bag = new RecipientsBag(new ImmutableArray<IEmployee>(), new ImmutableArray<IEmployee>(recipients), new ImmutableArray<IEmployee>());
         var result = new RecipientsResolverResult(bag, objectVersions);
         return result;
     }
@@ -114,7 +114,7 @@ public class GenerationRecipientsResolver<TBLLContext>
     {
         var recipients = info.Recipients.Select(this.CreateRecipient);
         var objectVersions = new DomainObjectVersions<object>(info.PreviousRoot, info.CurrentRoot);
-        var bag = new RecipientsBag(new RecipientCollection(), new RecipientCollection(), new RecipientCollection(recipients));
+        var bag = new RecipientsBag(new ImmutableArray<IEmployee>(), new ImmutableArray<IEmployee>(), new ImmutableArray<IEmployee>(recipients));
         var result = new RecipientsResolverResult(bag, objectVersions);
         return result;
     }
@@ -124,7 +124,7 @@ public class GenerationRecipientsResolver<TBLLContext>
     {
         var recipients = info.Recipients.Select(this.CreateRecipient);
         var objectVersions = new DomainObjectVersions<object>(info.PreviousRoot, info.CurrentRoot);
-        var bag = new RecipientsBag(new RecipientCollection(recipients), new RecipientCollection(), new RecipientCollection());
+        var bag = new RecipientsBag(new ImmutableArray<IEmployee>(recipients), new ImmutableArray<IEmployee>(), new ImmutableArray<IEmployee>());
         var result = new RecipientsResolverResult(bag, objectVersions);
         return result;
     }

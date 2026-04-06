@@ -1,4 +1,5 @@
 ﻿using Framework.Core;
+using Framework.Core.Rendering;
 using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
 
@@ -25,3 +26,31 @@ public class SubscriptionService(IEnumerable<ISubscriptionMetadata> subscription
         return [];
     }
 }
+
+public class SubscriptionService<TDomainObject, TSubscription, TMessageTemplate, TRenderingObject>(
+    SubscriptionMetadata<TDomainObject, TSubscription, TMessageTemplate> subscriptionMetadata,
+    IDomainObjectConverter<TDomainObject, TRenderingObject> renderingObjectConverter,
+    TSubscription subscription)
+    where TDomainObject : class
+    where TSubscription : ISubscription<TDomainObject>
+    where TMessageTemplate : IMessageTemplate<TRenderingObject>
+{
+    public IEnumerable<ITryResult<ISubscriptionMetadataBase>> Process(DomainObjectVersions<TDomainObject> versions)
+    {
+        if (subscription.IsProcessed(versions))
+        {
+            var to = subscription.GetTo(versions);
+            var copyTo = subscription.GetCopyTo(versions);
+            var replyTo = subscription.GetReplyTo(versions);
+
+            return [];
+        }
+    }
+}
+
+
+public record SubscriptionFullInfo<TDomainObject>(
+    ISubscriptionMetadata SubscriptionMetadata,
+    ISubscription<TDomainObject> Subscription,
+    IMessageTemplate<TDomainObject> MessageTemplate)
+    where TDomainObject : class;

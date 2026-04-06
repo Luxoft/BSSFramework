@@ -6,10 +6,16 @@ using SecuritySystem;
 
 namespace Framework.Subscriptions.Metadata;
 
-public abstract class SubscriptionMetadata<TDomainObject, TSubscription, TMessageTemplate> : ISubscriptionMetadata
+public abstract class SubscriptionMetadata<TDomainObject, TSubscription, TMessageTemplate> : SubscriptionMetadata<TDomainObject, TDomainObject, TSubscription, TMessageTemplate>
     where TDomainObject : class
     where TSubscription : ISubscription<TDomainObject>
-    where TMessageTemplate : IMessageTemplate
+    where TMessageTemplate : IMessageTemplate<TDomainObject>;
+
+public abstract class SubscriptionMetadata<TDomainObject, TRenderingObject, TSubscription, TMessageTemplate> : ISubscriptionMetadata
+    where TDomainObject : class
+    where TRenderingObject : class
+    where TSubscription : ISubscription<TDomainObject, TRenderingObject>
+    where TMessageTemplate : IMessageTemplate<TRenderingObject>
 {
     /// <inheritdoc />
     public Type DomainObjectType { get; } = typeof(TDomainObject);
@@ -33,7 +39,7 @@ public abstract class SubscriptionMetadata<TDomainObject, TSubscription, TMessag
     public virtual ImmutableArray<SecurityRole> SecurityRoles { get; } = [];
 
     /// <inheritdoc />
-    public virtual RecipientsSelectorMode RecipientsSelectorMode { get; } = RecipientsSelectorMode.Union;
+    public virtual RecipientMergeType RecipientMergeType { get; } = RecipientMergeType.Union;
 
     /// <inheritdoc />
     public virtual bool SendIndividualLetters { get; } = false;

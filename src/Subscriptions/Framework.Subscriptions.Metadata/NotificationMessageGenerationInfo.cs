@@ -5,23 +5,18 @@ using Framework.Subscriptions.Domain;
 
 namespace Framework.Subscriptions.Metadata;
 
-public class NotificationMessageGenerationInfo(ImmutableArray<IEmployee> recipients, object? currentRoot, object? previousRoot)
+public record NotificationMessageGenerationInfo<TRenderingObject>(ImmutableArray<IEmployee> Recipients, DomainObjectVersions<TRenderingObject> Versions)
+    where TRenderingObject : class
 {
-    public NotificationMessageGenerationInfo(string emails, object? currentRoot, object? previousRoot)
-        : this([.. DefaultEmployee.CreateMany(emails)], currentRoot, previousRoot)
+    public NotificationMessageGenerationInfo(string emails, DomainObjectVersions<TRenderingObject> version)
+        : this([.. DefaultEmployee.CreateMany(emails)], version)
     {
     }
 
-    public NotificationMessageGenerationInfo(IEmployee? recipient, object? currentRoot, object? previousRoot)
-        : this([.. recipient.MaybeYield()], currentRoot, previousRoot)
+    public NotificationMessageGenerationInfo(IEmployee? recipient, DomainObjectVersions<TRenderingObject> version)
+        : this([.. recipient.MaybeYield()], version)
     {
     }
-
-    public ImmutableArray<IEmployee> Recipients { get; private set; } = [.. recipients ];
-
-    public object? CurrentRoot { get; private set; } = currentRoot;
-
-    public object? PreviousRoot { get; private set; } = previousRoot;
 
     private class DefaultEmployee(string email) : IEmployee
     {
@@ -30,6 +25,7 @@ public class NotificationMessageGenerationInfo(ImmutableArray<IEmployee> recipie
         public string Login => throw new NotImplementedException();
 
         public static IEnumerable<DefaultEmployee> CreateMany(string emails) =>
+
             from email in emails.TrimNull().Split([',', ';'], StringSplitOptions.RemoveEmptyEntries)
 
             select new DefaultEmployee(email.Trim());

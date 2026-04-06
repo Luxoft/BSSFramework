@@ -7,8 +7,8 @@ namespace SampleSystem.Subscriptions.Metadata.DataModel.Create;
 
 public class DateModelCreateSubscription : ISubscription<DateModel>
 {
-    public IEnumerable<NotificationMessageGenerationInfo> GetTo(DomainObjectVersions<DateModel> versions)
+    public IEnumerable<NotificationMessageGenerationInfo<DateModel>> GetTo(DomainObjectVersions<DateModel> versions)
     {
-        yield return new("tester@luxoft.com", versions.Previous, versions.Current);
+        yield return new("tester@luxoft.com", versions);
     }
 }

@@ -48,7 +48,7 @@ public class ByRolesRecipientsResolver<TBLLContext>
     /// или
     /// versions равен null.
     /// </exception>
-    public virtual RecipientCollection Resolve<T>(
+    public virtual ImmutableArray<IEmployee> Resolve<T>(
             Subscription subscription,
             DomainObjectVersions<T> versions)
             where T : class

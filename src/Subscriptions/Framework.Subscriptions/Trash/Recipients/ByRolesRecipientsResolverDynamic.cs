@@ -19,11 +19,11 @@ internal sealed class ByRolesRecipientsResolverDynamic<TBLLContext>(
     : ByRolesRecipientsResolverBase<TBLLContext>(configurationContextFacade, lambdaProcessorFactory)
     where TBLLContext : class
 {
-    internal override RecipientCollection Resolve<T>(Subscription subscription, DomainObjectVersions<T> versions)
+    internal override ImmutableArray<IEmployee> Resolve<T>(Subscription subscription, DomainObjectVersions<T> versions)
     {
         if (subscription.SourceMode != SubscriptionSourceMode.Dynamic)
         {
-            return new RecipientCollection();
+            return new ImmutableArray<IEmployee>();
         }
 
         var businessRolesIds = this.GetBusinessRoles(subscription);
@@ -34,7 +34,7 @@ internal sealed class ByRolesRecipientsResolverDynamic<TBLLContext>(
         var employees = this.ConfigurationContextFacade.ConvertPrincipals(principals);
         var recipients = employees.Select(this.CreateRecipient);
 
-        return new RecipientCollection(recipients);
+        return new ImmutableArray<IEmployee>(recipients);
     }
 
     private IEnumerable<FilterItemIdentity> GetFilterItemIdentities<T>(

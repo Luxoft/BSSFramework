@@ -6,7 +6,7 @@
 /// <remarks>
 /// Recipients Mode объясняет, как система должна получить рецепиентов в случае, когда оба типа заполнены
 /// </remarks>
-public enum RecipientsSelectorMode
+public enum RecipientMergeType
 {
     /// <summary>Объединение списков</summary>
     Union,

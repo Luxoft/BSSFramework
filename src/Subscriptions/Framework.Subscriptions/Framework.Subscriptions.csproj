@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Framework.Subscriptions.Abstractions\Framework.Subscriptions.Abstractions.csproj" />
     <ProjectReference Include="..\Framework.Subscriptions.Metadata\Framework.Subscriptions.Metadata.csproj" />
+    <ProjectReference Include="..\Framework.Subscriptions.Runtime\Framework.Subscriptions.Runtime.csproj" />
   </ItemGroup>
 
 </Project>

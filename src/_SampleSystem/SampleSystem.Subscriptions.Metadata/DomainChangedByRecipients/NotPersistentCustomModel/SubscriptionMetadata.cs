@@ -5,7 +5,7 @@ using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
 
-public class SubscriptionMetadata : SubscriptionMetadata<Domain.Country, Subscription, _DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml>
+public class SubscriptionMetadata : SubscriptionMetadata<Domain.Country, CustomNotificationModel, Subscription, _DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml>
 {
     public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
 

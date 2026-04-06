@@ -5,6 +5,7 @@ using System.Collections.Immutable;
 using Framework.Notification.Domain;
 using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Lambdas;
+using Framework.Subscriptions.Old;
 
 using SecuritySystem;
 
@@ -35,7 +36,7 @@ internal class ByRolesRecipientsResolverBase<TBLLContext>
 
     protected LambdaProcessorFactory<TBLLContext> LambdaProcessorFactory { get; }
 
-    internal virtual RecipientCollection Resolve<T>(Subscription subscription, DomainObjectVersions<T> versions)
+    internal virtual ImmutableArray<IEmployee> Resolve<T>(Subscription subscription, DomainObjectVersions<T> versions)
         where T : class =>
         new();
 

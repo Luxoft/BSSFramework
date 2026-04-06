@@ -29,8 +29,8 @@ internal sealed class TestSubscription : SubscriptionWithCustomModelMetadata<obj
             SecurityItemSourceLambdas =>
         this.securityItemSourceLambdas;
 
-    public override RecipientsSelectorMode RecipientsSelectorMode { get; protected set; } =
-        RecipientsSelectorMode.RolesExceptGeneration;
+    public override RecipientMergeType RecipientMergeType { get; protected set; } =
+        RecipientMergeType.RolesExceptGeneration;
 
     public override IEnumerable<SecurityRole> SubBusinessRoles { get; protected set; } = [SecurityRole.Administrator];
 

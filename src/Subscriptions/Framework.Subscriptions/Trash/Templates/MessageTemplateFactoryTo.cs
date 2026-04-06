@@ -20,8 +20,8 @@ internal sealed class MessageTemplateFactoryTo : MessageTemplateFactoryBase
     private IEnumerable<MessageTemplateNotification> CreateTemplatesForEach<TSourceDomainObjectType, TModelObjectType>(
             DomainObjectVersions<TModelObjectType> domainObjectVersions,
             Subscription subscription,
-            RecipientCollection recipients,
-            RecipientCollection replyTo,
+            ImmutableArray<IEmployee> recipients,
+            ImmutableArray<IEmployee> replyTo,
             IEnumerable<Attachment> attachments)
             where TModelObjectType : class
     {
@@ -40,8 +40,8 @@ internal sealed class MessageTemplateFactoryTo : MessageTemplateFactoryBase
     private IEnumerable<MessageTemplateNotification> CreateOneTemplateForAll<TSourceDomainObjectType, TModelObjectType>(
             DomainObjectVersions<TModelObjectType> domainObjectVersions,
             Subscription subscription,
-            RecipientCollection recipients,
-            RecipientCollection replyTo,
+            ImmutableArray<IEmployee> recipients,
+            ImmutableArray<IEmployee> replyTo,
             IEnumerable<Attachment> attachments)
             where TModelObjectType : class
     {

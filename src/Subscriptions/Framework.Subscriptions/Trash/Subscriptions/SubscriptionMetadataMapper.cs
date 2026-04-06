@@ -47,7 +47,7 @@ public class SubscriptionMetadataMapper
         subscription.IncludeAttachments = metadata.IncludeAttachments;
         subscription.AllowEmptyListOfRecipients = metadata.AllowEmptyListOfRecipients;
         subscription.RazorMessageTemplateType = metadata.MessageTemplateType;
-        subscription.RecipientsMode = metadata.RecipientsSelectorMode;
+        subscription.RecipientsMode = metadata.RecipientMergeType;
         subscription.MetadataSourceType = metadata.GetType();
 
         subscription.Condition = MapLambda(metadata.GetConditionLambda());

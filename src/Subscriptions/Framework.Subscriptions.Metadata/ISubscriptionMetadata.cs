@@ -87,7 +87,7 @@ public interface ISubscriptionMetadata : ISubscriptionMetadataBase
     /// <value>
     ///     Способ комбинации адресатов рассылки по SubBusinessRoles и Generation..
     /// </value>
-    RecipientsSelectorMode RecipientsSelectorMode { get; }
+    RecipientMergeType RecipientMergeType { get; }
 
     /// <summary>
     ///     Получает тип расширения прав по дереву.

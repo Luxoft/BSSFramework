@@ -8,11 +8,11 @@ namespace Framework.Notification.DTO;
 public class NotificationTargetDTO
 {
     [DataMember]
-    public ReceiverRole Type { get; set; }
+    public RecipientRole Type { get; set; }
 
     [DataMember]
     public string Name { get; set; }
 
 
-    public NotificationTarget ToDomain() => new(this.Name, this.Type);
+    public MailAddressRecipient ToDomain() => new(this.Name, this.Type);
 }

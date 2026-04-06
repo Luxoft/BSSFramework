@@ -4,6 +4,7 @@ using System.Net.Mail;
 using Framework.Subscriptions.Domain;
 
 using SecuritySystem;
+using SecuritySystem.Notification.Domain;
 
 namespace Framework.Subscriptions.Metadata;
 
@@ -21,7 +22,7 @@ public interface ISubscription<TDomainObject, TRenderingObject> : ISubscription<
 
     IEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
 
-    IEnumerable<TypedNotificationFilterGroup> GetNotificationFilterGroups(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
+    IEnumerable<NotificationFilterGroup> GetNotificationFilterGroups(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
 
     (string Subject, string Body) GetMessage(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions);
 }

@@ -9,30 +9,30 @@ namespace Framework.Notification.Domain;
 
 public class Message
 {
-    public Message(string sender, IEnumerable<NotificationTarget> receivers, string subject, string body, bool isBodyHtml, IEnumerable<Attachment> attachments)
-            : this(new MailAddress(sender), receivers, subject, body, isBodyHtml, attachments)
+    public Message(string sender, IEnumerable<MailAddressRecipient> recipients, string subject, string body, bool isBodyHtml, IEnumerable<Attachment> attachments)
+            : this(new MailAddress(sender), recipients, subject, body, isBodyHtml, attachments)
     {
     }
 
-    public Message(MailAddress sender, IEnumerable<string> receivers, string subject, string body, bool isBodyHtml, IEnumerable<Attachment> attachments)
-            : this(sender, receivers.Select(receiver => new NotificationTarget(receiver, ReceiverRole.To)), subject, body, isBodyHtml, attachments)
+    public Message(MailAddress sender, IEnumerable<string> recipients, string subject, string body, bool isBodyHtml, IEnumerable<Attachment> attachments)
+            : this(sender, recipients.Select(receiver => new MailAddressRecipient(receiver, RecipientRole.To)), subject, body, isBodyHtml, attachments)
     {
     }
 
-    public Message(MailAddress sender, IEnumerable<NotificationTarget> receivers, string subject, string body, bool isBodyHtml, IEnumerable<Attachment> attachments)
+    public Message(MailAddress sender, IEnumerable<MailAddressRecipient> recipients, string subject, string body, bool isBodyHtml, IEnumerable<Attachment> attachments)
     {
         if (sender == null) throw new ArgumentNullException(nameof(sender));
         if (subject == null) throw new ArgumentNullException(nameof(subject));
         if (body == null) throw new ArgumentNullException(nameof(body));
-        if (receivers == null) throw new ArgumentNullException(nameof(receivers));
+        if (recipients == null) throw new ArgumentNullException(nameof(recipients));
         if (attachments == null) throw new ArgumentNullException(nameof(attachments));
 
         this.Sender = sender;
-        this.Receivers = [..receivers];
+        this.Receivers = [..recipients];
 
         if (!this.Receivers.Any())
         {
-            throw new ArgumentException("Collection 'Receivers' is empty", nameof(receivers));
+            throw new ArgumentException("Collection 'Receivers' is empty", nameof(recipients));
         }
 
         this.Subject = this.CutSubjectOnRight(this.ReplaceUnsupportedCharactersForSubject(subject));
@@ -44,7 +44,7 @@ public class Message
 
     public MailAddress Sender { get; }
 
-    public ImmutableArray<NotificationTarget> Receivers { get; }
+    public ImmutableArray<MailAddressRecipient> Receivers { get; }
 
     public string Subject { get; }
 
@@ -68,9 +68,9 @@ public class Message
     {
         var mailMessage = new MailMessage { Subject = this.Subject, Body = this.Body, From = this.Sender, IsBodyHtml = this.IsBodyHtml };
 
-        mailMessage.To.AddRange(this.Receivers.Where(r => r.Role == ReceiverRole.To).Select(info => info.MailAddress));
-        mailMessage.CC.AddRange(this.Receivers.Where(r => r.Role == ReceiverRole.CopyTo).Select(info => info.MailAddress));
-        mailMessage.ReplyToList.AddRange(this.Receivers.Where(r => r.Role == ReceiverRole.ReplyTo).Select(info => info.MailAddress));
+        mailMessage.To.AddRange(this.Receivers.Where(r => r.Role == RecipientRole.To).Select(info => info.Address));
+        mailMessage.CC.AddRange(this.Receivers.Where(r => r.Role == RecipientRole.Copy).Select(info => info.Address));
+        mailMessage.ReplyToList.AddRange(this.Receivers.Where(r => r.Role == RecipientRole.ReplyTo).Select(info => info.Address));
 
         mailMessage.Attachments.AddRange(this.Attachments.Select(a => a.ToMailAttachment()));
 

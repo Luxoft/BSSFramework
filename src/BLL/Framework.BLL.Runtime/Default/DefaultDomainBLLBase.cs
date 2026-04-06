@@ -211,7 +211,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
 
     public TDomainObject? GetById(TIdent id, bool throwOnNotFound = false, FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None)
     {
-        var result = this.GetListBy(this.IdentityInfo.CreateContainsFilter([id]), fetchRule, lockRole).FirstOrDefault();
+        var result = this.GetListBy(this.IdentityInfo.CreateFilter(id), fetchRule, lockRole).FirstOrDefault();
 
         if (result == null && throwOnNotFound)
         {

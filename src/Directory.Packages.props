@@ -2,7 +2,7 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
-    <IvAt>3.2.2.0</IvAt>
+    <IvAt>3.2.3.0</IvAt>
     <BssPlatform>[1.6.2]</BssPlatform>
   </PropertyGroup>
   <ItemGroup>
@@ -34,7 +34,7 @@
     <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.GeneralPermission.Abstractions" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.Notification" Version="$(IvAt)" />
-    <PackageVersion Include="IvAt.SecuritySystem.Notification.Abstractions" Version="$(IvAt)" />
+    <PackageVersion Include="IvAt.SecuritySystem.Notification.Abstractions" Version="3.2.2" />
     <PackageVersion Include="IvAt.SecuritySystem.Notification.Domain" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.Runtime" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.Testing" Version="$(IvAt)" />

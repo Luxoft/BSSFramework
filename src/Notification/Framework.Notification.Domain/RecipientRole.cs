@@ -1,10 +1,10 @@
 ﻿namespace Framework.Notification.Domain;
 
-public enum ReceiverRole
+public enum RecipientRole
 {
     To,
 
-    CopyTo,
+    Copy,
 
     ReplyTo
 }

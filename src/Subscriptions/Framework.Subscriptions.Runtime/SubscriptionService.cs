@@ -2,6 +2,8 @@
 using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
 
+using SecuritySystem.Notification;
+
 namespace Framework.Subscriptions;
 
 public class SubscriptionService(IEnumerable<ISubscription> subscriptionMetadataList) : ISubscriptionService
@@ -26,27 +28,25 @@ public class SubscriptionService(IEnumerable<ISubscription> subscriptionMetadata
     }
 }
 
-public class SubscriptionService<TDomainObject, TRenderingObject>(IServiceProvider serviceProvider, ISubscription<TDomainObject, TRenderingObject> subscription)
+public class SubscriptionService<TDomainObject, TRenderingObject, TPrincipal>(
+    IServiceProvider serviceProvider,
+    ISubscription<TDomainObject, TRenderingObject> subscription,
+    INotificationPrincipalExtractor<TPrincipal> notificationPrincipalExtractor)
     where TDomainObject : class
     where TRenderingObject : class
 {
     public IEnumerable<ITryResult<SubscriptionHeader>> Process(DomainObjectVersions<TDomainObject> versions)
     {
-        yield return TryResult.Catch(() =>
+        if (subscription.IsProcessed(serviceProvider, versions))
         {
-            if (subscription.IsProcessed(serviceProvider, versions))
-            {
-                var to = subscription.GetTo(serviceProvider, versions);
-                var copyTo = subscription.GetCopyTo(serviceProvider, versions);
-                var replyTo = subscription.GetReplyTo(serviceProvider, versions);
+            var to = subscription.GetTo(serviceProvider, versions);
+            var copyTo = subscription.GetCopyTo(serviceProvider, versions);
+            var replyTo = subscription.GetReplyTo(serviceProvider, versions);
 
-                return subscription.Header;
-            }
-            else
-            {
-                return null;
-            }
-        });
+
+
+            yield return TryResult.Return(subscription.Header);
+        }
     }
 }
 

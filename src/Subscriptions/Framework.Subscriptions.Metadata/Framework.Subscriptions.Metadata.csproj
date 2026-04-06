@@ -9,12 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.SecuritySystem.Domain" />
     <PackageReference Include="IvAt.SecuritySystem.Notification.Domain" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.Core\Framework.Core.csproj" />
     <ProjectReference Include="..\Framework.Subscriptions.Domain\Framework.Subscriptions.Domain.csproj" />
   </ItemGroup>
 

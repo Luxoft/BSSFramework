@@ -10,6 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IvAt.SecuritySystem.Notification.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Framework.Subscriptions.Abstractions\Framework.Subscriptions.Abstractions.csproj" />
     <ProjectReference Include="..\Framework.Subscriptions.Metadata\Framework.Subscriptions.Metadata.csproj" />
   </ItemGroup>

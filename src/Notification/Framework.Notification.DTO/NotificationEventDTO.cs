@@ -25,24 +25,19 @@ public class NotificationEventDTO
     [DataMember]
     public NotificationMessage Message { get; set; }
 
-    [DataMember]
-    public NotificationTechnicalInformationDTO TechnicalInformation { get; set; }
-
     public NotificationEventDTO()
     {
     }
 
-    public NotificationEventDTO(Domain.Notification notification)
+    public NotificationEventDTO(System.Net.Mail.MailMessage mailMessage)
     {
-        var mailMessage = notification.Message;
-        var technicalInformation = notification.TechnicalInformation;
         this.From = mailMessage.From!.Address;
         this.FromName = mailMessage.From.DisplayName;
 
         this.Targets = mailMessage
-                       .To.Select(z => Tuple.Create(z.Address, ReceiverRole.To))
-                       .Concat(mailMessage.CC.Select(z => Tuple.Create(z.Address, ReceiverRole.CopyTo)))
-                       .Concat(mailMessage.ReplyToList.Select(z => Tuple.Create(z.Address, ReceiverRole.ReplyTo)))
+                       .To.Select(z => Tuple.Create(z.Address, RecipientRole.To))
+                       .Concat(mailMessage.CC.Select(z => Tuple.Create(z.Address, RecipientRole.Copy)))
+                       .Concat(mailMessage.ReplyToList.Select(z => Tuple.Create(z.Address, RecipientRole.ReplyTo)))
                        .Select(z => new NotificationTargetDTO() { Name = z.Item1, Type = z.Item2 })
                        .ToList();
         this.Subject = mailMessage.Subject;
@@ -64,8 +59,6 @@ public class NotificationEventDTO
                        IsInline = z.ContentDisposition!.Inline
                    };
         }).ToList();
-
-        this.TechnicalInformation = new NotificationTechnicalInformationDTO(technicalInformation);
     }
 
     public Message ToDomain() =>

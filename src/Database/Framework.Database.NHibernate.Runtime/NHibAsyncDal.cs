@@ -1,5 +1,6 @@
 ﻿using CommonFramework;
 using CommonFramework.IdentitySource;
+using Framework.Core;
 using Framework.Database.NHibernate.Sessions;
 
 using GenericQueryable.NHibernate;
@@ -64,6 +65,11 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
 
     public async Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken)
     {
+        if (identityInfo.Id.Getter(domainObject).IsDefault())
+        {
+            throw new ArgumentOutOfRangeException(nameof(id), "The given identifier is not initialized");
+        }
+
         this.CheckWrite();
 
         await this.ActualInsertAsync(domainObject, id, cancellationToken);

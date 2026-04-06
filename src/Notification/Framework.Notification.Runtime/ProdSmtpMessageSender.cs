@@ -1,4 +1,5 @@
 ﻿using System.Net.Mail;
+
 using Framework.Notification.Domain;
 using Framework.Notification.DTO;
 using Framework.Notification.Settings;
@@ -28,7 +29,7 @@ namespace Framework.Notification
                 throw new ArgumentNullException(nameof(dto));
             }
 
-            if (dto.Targets.All(x => x.Type != ReceiverRole.To))
+            if (dto.Targets.All(x => x.Type != RecipientRole.To))
             {
                 this.SetSupportTeamAsReceiver(dto);
             }
@@ -53,12 +54,12 @@ namespace Framework.Notification
                 return;
             }
 
-            logger.LogWarning(
-                "Recipients for notification {TemplateCode} were not found - notification was redirected to support",
-                dto.TechnicalInformation.MessageTemplateCode);
+            //logger.LogWarning(
+            //    "Recipients for notification {TemplateCode} were not found - notification was redirected to support",
+            //    dto.TechnicalInformation.MessageTemplateCode);
 
             dto.Targets.AddRange(
-                settings.Value.DefaultReceiverEmails.Select(x => new NotificationTargetDTO { Type = ReceiverRole.To, Name = x }));
+                settings.Value.DefaultReceiverEmails.Select(x => new NotificationTargetDTO { Type = RecipientRole.To, Name = x }));
         }
     }
 }

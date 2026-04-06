@@ -14,26 +14,26 @@ public class RewriteReceiversService(IOptionsSnapshot<RewriteReceiversSettings> 
 {
     public virtual void RewriteToRecipients(MailMessage message, NotificationEventDTO dto)
     {
-        var recipients = this.GetRecipients(dto, ReceiverRole.To);
+        var recipients = this.GetRecipients(dto, RecipientRole.To);
         message.To.Clear();
         message.To.AddRange(recipients);
     }
 
     public virtual void RewriteCopyRecipients(MailMessage message, NotificationEventDTO dto)
     {
-        var recipients = this.GetRecipients(dto, ReceiverRole.CopyTo);
+        var recipients = this.GetRecipients(dto, RecipientRole.Copy);
         message.CC.Clear();
         message.CC.AddRange(recipients);
     }
 
     public void RewriteReplyTo(MailMessage message, NotificationEventDTO dto)
     {
-        var recipients = this.GetRecipients(dto, ReceiverRole.ReplyTo);
+        var recipients = this.GetRecipients(dto, RecipientRole.ReplyTo);
         message.ReplyToList.Clear();
         message.ReplyToList.AddRange(recipients);
     }
 
-    private IEnumerable<MailAddress> GetRecipients(NotificationEventDTO dto, ReceiverRole type) => dto.Targets
+    private IEnumerable<MailAddress> GetRecipients(NotificationEventDTO dto, RecipientRole type) => dto.Targets
             .Where(z => z.Type == type)
             .Select(z =>
                     {

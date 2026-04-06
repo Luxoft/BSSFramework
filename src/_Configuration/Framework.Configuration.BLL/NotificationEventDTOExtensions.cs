@@ -12,14 +12,14 @@ public static class NotificationEventDTOExtensions
 
         return new SentMessage(
             notification.From,
-            string.Join(",", notification.Targets.Where(z => z.Type == ReceiverRole.To).Select(z => z.Name)),
+            string.Join(",", notification.Targets.Where(z => z.Type == RecipientRole.To).Select(z => z.Name)),
             notification.Subject,
             notification.Message.Message,
             notification.TechnicalInformation.MessageTemplateCode,
             string.Empty,
-            string.Join(",", notification.Targets.Where(z => z.Type == ReceiverRole.CopyTo).Select(z => z.Name)),
+            string.Join(",", notification.Targets.Where(z => z.Type == RecipientRole.CopyTo).Select(z => z.Name)),
             notification.TechnicalInformation.ContextObjectType,
             notification.TechnicalInformation.ContextObjectId,
-            string.Join(",", notification.Targets.Where(z => z.Type == ReceiverRole.ReplyTo).Select(z => z.Name)));
+            string.Join(",", notification.Targets.Where(z => z.Type == RecipientRole.ReplyTo).Select(z => z.Name)));
     }
 }

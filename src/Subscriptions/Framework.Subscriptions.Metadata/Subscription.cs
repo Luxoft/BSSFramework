@@ -6,6 +6,7 @@ using Framework.Subscriptions.Domain;
 using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem;
+using SecuritySystem.Notification.Domain;
 
 namespace Framework.Subscriptions.Metadata;
 
@@ -55,7 +56,7 @@ public abstract class Subscription<TDomainObject, TRenderingObject, TMessageTemp
 
     public virtual IEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions) => [];
 
-    public virtual IEnumerable<TypedNotificationFilterGroup> GetNotificationFilterGroups(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions) => [];
+    public virtual IEnumerable<NotificationFilterGroup> GetNotificationFilterGroups(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions) => [];
 
     public (string Subject, string Body) GetMessage(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions) =>
         serviceProvider.GetRequiredService<TMessageTemplate>().Render(serviceProvider, versions);

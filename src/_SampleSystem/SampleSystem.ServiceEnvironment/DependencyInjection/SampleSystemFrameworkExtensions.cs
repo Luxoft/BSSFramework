@@ -51,10 +51,7 @@ public static class SampleSystemFrameworkExtensions
                                                            ]));
 
         public IBssFrameworkSetup AddSupportLegacyServices() =>
-            settings.SetSubscriptionAssembly(typeof(EmployeeUpdateSubscription).Assembly)
-                    .SetNotificationDefaultMailSenderContainer<SampleSystemDefaultMailSenderContainer>()
-                    .SetNotificationEmployee<Employee>()
-                    .SetDTOMapping<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService, PersistentDomainObjectBase, EventDTOBase>();
+            settings.SetDTOMapping<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService, PersistentDomainObjectBase, EventDTOBase>();
 
         //public IBssFrameworkBuilder AddQueryVisitors() =>
         //    settings.AddQueryVisitors<ExpressionVisitorContainerDomainIdentItem<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()

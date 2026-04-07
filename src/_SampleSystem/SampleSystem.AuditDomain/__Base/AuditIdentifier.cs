@@ -1,14 +1,13 @@
-﻿namespace SampleSystem.AuditDomain
+﻿namespace SampleSystem.AuditDomain;
+
+public struct AuditIdentifier
 {
-    public struct AuditIdentifier
-    {
-        private long revNumber;
+    private long revNumber;
 
-        private Guid id;
+    private Guid id;
 
 
-        public long RevNumber => this.revNumber;
+    public long RevNumber => this.revNumber;
 
-        public Guid Id => this.id;
-    }
+    public Guid Id => this.id;
 }

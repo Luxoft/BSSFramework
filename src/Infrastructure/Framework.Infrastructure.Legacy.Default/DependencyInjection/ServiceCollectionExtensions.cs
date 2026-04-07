@@ -1,7 +1,5 @@
 ﻿using System.Net.Mail;
 
-using CommonFramework.DependencyInjection;
-
 using Framework.Application.ApplicationVariable;
 using Framework.Application.Events;
 using Framework.Application.Lock;
@@ -18,11 +16,8 @@ using Framework.Configuration.BLL.Notification;
 using Framework.Configuration.Domain;
 using Framework.Configuration.Generated.DTO;
 using Framework.Core;
-using Framework.Database;
 using Framework.Infrastructure.LocalDBEvents;
 using Framework.Infrastructure.SubscriptionService;
-using Framework.Notification.Domain;
-using Framework.Notification.DTO;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -52,7 +47,7 @@ public static class ServiceCollectionExtensions
             services.AddScoped<IAuthorizationDTOMappingService, AuthorizationServerPrimitiveDTOMappingService>();
             services.AddScoped<IConfigurationDTOMappingService, ConfigurationServerPrimitiveDTOMappingService>();
 
-            services.AddScoped<IStandardSubscriptionService, LocalDBSubscriptionService>();
+            services.AddScoped<IObjectModificationProcessor, LocalDbObjectModificationProcessor>();
 
             services.AddScoped<IRootSecurityService, RootSecurityService>();
 
@@ -84,9 +79,7 @@ public static class ServiceCollectionExtensions
             services
                 .AddBLLSystem<IConfigurationBLLContext, ConfigurationBLLContext>()
 
-                .AddScopedFrom<ICurrentRevisionService, IDBSession>()
-                .AddScoped<IMessageSender<MailMessage>, MailMessageSender>()
-                .AddScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>();
+                .AddScoped<IMessageSender<MailMessage>, LocalDbMailMessageSender>();
 
         private IServiceCollection AddConfigurationNamedLocks() =>
             services.AddKeyedSingleton<INamedLockSource>(

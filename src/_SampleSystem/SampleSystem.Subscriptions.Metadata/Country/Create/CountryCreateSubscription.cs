@@ -1,4 +1,6 @@
-﻿using Framework.Subscriptions.Domain;
+﻿using System.Net.Mail;
+
+using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Country.Create;
@@ -8,9 +10,7 @@ public class CountryCreateSubscription : Subscription<Domain.Country, _Country_C
 {
     public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Create;
 
-    public override string? SenderName { get; } = "SampleSystem";
-
-    public override string? SenderEmail { get; } = "SampleSystem@luxoft.com";
+    public override MailAddress Sender { get; } = new ("SampleSystem@luxoft.com", "SampleSystem");
 
     public override bool SendIndividualLetters { get; } = true;
 

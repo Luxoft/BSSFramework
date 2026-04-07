@@ -7,7 +7,6 @@ using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
 using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 using Framework.AutomationCore.Xunit;
 using Framework.AutomationCore.Xunit.ServiceEnvironment;
-using Framework.Configuration.BLL.Notification;
 using Framework.Core;
 using Framework.Notification.DTO;
 

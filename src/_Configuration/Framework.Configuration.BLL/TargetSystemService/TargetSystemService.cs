@@ -7,50 +7,32 @@ using Framework.BLL.Services;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.TypeResolving;
+using Framework.Database;
+using Framework.Database.Domain;
 
 namespace Framework.Configuration.BLL.TargetSystemService;
 
-public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<IConfigurationBLLContext>, ITargetSystemService
+public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
+    IConfigurationBLLContext context,
+    TBLLContext targetSystemContext,
+    TargetSystemInfo<TPersistentDomainObjectBase> targetSystemInfo,
+    IEventOperationSender eventOperationSender,
+    ICurrentRevisionService currentRevisionService) : ITargetSystemService
 
     where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
     where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
 {
-    private readonly IEventOperationSender eventOperationSender;
+    private readonly Lazy<TargetSystem> lazyTargetSystem = LazyHelper.Create(() => context.Logics.TargetSystem.GetByName(targetSystemInfo.Name, true)!);
 
-    private readonly Lazy<TargetSystem> lazyTargetSystem;
+    public string Name { get; } = targetSystemInfo.Name;
 
-    /// <summary>
-    /// Создаёт экземпляр класса <see cref="TargetSystemService{TBLLContext, TPersistentDomainObjectBase}" />.
-    /// </summary>
-    /// <param name="context">Контекст конфигурации.</param>
-    /// <param name="targetSystemContext">Контекст целевой системы.</param>
-    /// <param name="subscriptionMetadataStore">Хранилище описаний подписок.</param>
-    public TargetSystemService(
-        IConfigurationBLLContext context,
-        TBLLContext targetSystemContext,
-        TargetSystemInfo<TPersistentDomainObjectBase> targetSystemInfo,
-        IEventOperationSender eventOperationSender)
-        : base(context)
-    {
-        this.Name = targetSystemInfo.Name;
-
-        this.TargetSystemContext = targetSystemContext;
-        this.eventOperationSender = eventOperationSender;
-
-        this.lazyTargetSystem = LazyHelper.Create(() => context.Logics.TargetSystem.GetByName(this.Name, true));
-
-        this.TypeResolver = this.TypeResolverS.OverrideInput((DomainType domainType) => domainType.FullTypeName);
-    }
-
-    public string Name { get; }
-
-    public TBLLContext TargetSystemContext { get; }
+    public TBLLContext TargetSystemContext { get; } = targetSystemContext;
 
     public Type BLLContextType { get; } = typeof(TBLLContext);
 
     public ITypeResolver<string> TypeResolverS => this.TargetSystemContext.TypeResolver;
 
-    public ITypeResolver<DomainType> TypeResolver { get; }
+    public ITypeResolver<DomainType> TypeResolver { get; } = targetSystemContext.TypeResolver.OverrideInput((DomainType domainType) => domainType.FullTypeName);
 
     public TargetSystem TargetSystem => this.lazyTargetSystem.Value;
 
@@ -79,8 +61,33 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLL
 
         var domainObjectEvent = new EventOperation(operationName);
 
-        this.eventOperationSender.Send(domainObject, domainObjectEvent, CancellationToken.None).GetAwaiter().GetResult();
+        eventOperationSender.Send(domainObject, domainObjectEvent, CancellationToken.None).GetAwaiter().GetResult();
     }
 
     public bool IsAssignable(Type domainType) => typeof(TPersistentDomainObjectBase).IsAssignableFrom(domainType);
+
+    /// <summary>
+    ///     Возвращает данные об изменениях доменного объекта.
+    /// </summary>
+    /// <param name="changes">Описатель операций, проведенных над объектом в слое доступа к данным.</param>
+    /// <returns>Экземпляр <see cref="IEnumerable{ObjectModificationInfo}" />.</returns>
+    /// <exception cref="ArgumentNullException">Аргумент changes равен null.</exception>
+    public IEnumerable<ObjectModificationInfo<Guid>> GetObjectModifications(DALChanges changes)
+    {
+        var revisionNumber = currentRevisionService.GetCurrentRevision();
+
+        if (revisionNumber != 0)
+        {
+            foreach (var item in changes.GetSubset(typeof(TPersistentDomainObjectBase)).ToChangeTypeDict())
+            {
+                yield return new ObjectModificationInfo<Guid>
+                             {
+                                 Identity = ((TPersistentDomainObjectBase)item.Key.Object).Id,
+                                 Revision = revisionNumber,
+                                 ModificationType = item.Value.ToModificationType(),
+                                 TypeInfo = new TypeInfoDescription(item.Key.Type)
+                             };
+            }
+        }
+    }
 }

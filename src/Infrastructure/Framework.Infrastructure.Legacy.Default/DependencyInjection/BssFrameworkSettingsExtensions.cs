@@ -1,10 +1,5 @@
-﻿using System.Reflection;
-
-using Framework.Authorization.BLL;
+﻿using Framework.Authorization.BLL;
 using Framework.Configuration.BLL;
-using Framework.Configuration.BLL.Notification;
-using Framework.Subscriptions;
-using Framework.Subscriptions.Domain;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -45,16 +40,5 @@ public static class BssFrameworkSettingsExtensions
 
                     tsSettings.Initialize(services);
                 });
-
-        public IBssFrameworkSetup SetSubscriptionAssembly(Assembly assembly) =>
-            builder.AddServices(services => services.AddSingleton(new SubscriptionMetadataFinderAssemblyInfo(assembly)));
-
-        public IBssFrameworkSetup SetNotificationEmployee<TEmployee>()
-            where TEmployee : class, IEmployee =>
-            builder.AddServices(services => services.AddScoped<IEmployeeSource, EmployeeSource<TEmployee>>());
-
-        public IBssFrameworkSetup SetNotificationDefaultMailSenderContainer<TDefaultMailSenderContainer>()
-            where TDefaultMailSenderContainer : class, IDefaultMailSenderContainer =>
-            builder.AddServices(services => services.AddSingleton<IDefaultMailSenderContainer, TDefaultMailSenderContainer>());
     }
 }

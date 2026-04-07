@@ -1,6 +1,8 @@
 ﻿using System.Collections.Immutable;
 using System.Net.Mail;
 
+using CommonFramework;
+
 using Framework.Core;
 using Framework.Notification.Domain;
 using Framework.Subscriptions.Domain;
@@ -33,11 +35,25 @@ public class SubscriptionService(IEnumerable<ISubscription> subscriptionMetadata
 public class SubscriptionService<TDomainObject, TRenderingObject>(
     IServiceProvider serviceProvider,
     ISubscription<TDomainObject, TRenderingObject> subscription,
-    IEmployeeEmailExtractor employeeEmailExtractor)
+    IEmployeeEmailExtractor employeeEmailExtractor,
+    IMessageSender<MailMessage> mailMessageSender,
+    IDefaultCancellationTokenSource? defaultCancellationTokenSource = null)
     where TDomainObject : class
     where TRenderingObject : class
 {
     public IEnumerable<ITryResult<SubscriptionHeader>> Process(DomainObjectVersions<TDomainObject> versions)
+    {
+        var mailMessages = this.GetMailMessages(versions);
+
+        foreach (var mailMessage in mailMessages)
+        {
+            defaultCancellationTokenSource.RunSync(async ct => await mailMessageSender.SendAsync(mailMessage, ct));
+        }
+
+        yield return TryResult.Return(subscription.Header);
+    }
+
+    private IEnumerable<MailMessage> GetMailMessages(DomainObjectVersions<TDomainObject> versions)
     {
         if (subscription.IsProcessed(serviceProvider, versions))
         {
@@ -50,35 +66,40 @@ public class SubscriptionService<TDomainObject, TRenderingObject>(
 
             var regrouped = ReGroup(resultTo, copyTo, replyTo);
 
-            yield return TryResult.Return(subscription.Header);
+            return regrouped.Select(this.ToMailMessage);
+        }
+        else
+        {
+            return [];
         }
     }
 
-    private Message ToMessage(NotificationMessageGenerationInfo<TRenderingObject, RecipientFullInfo> notificationMessageGenerationInfo)
+    private MailMessage ToMailMessage(NotificationMessageGenerationInfo<TRenderingObject, MailAddressRecipient> notificationMessageGenerationInfo)
     {
         var (subject, body) = subscription.GetMessage(serviceProvider, notificationMessageGenerationInfo.Versions);
 
         var attachments = subscription.GetAttachments(serviceProvider, notificationMessageGenerationInfo.Versions);
 
-        return new Message
-        {
+        return new MailMessage
+               {
+                   Sender = subscription.Sender,
                    Subject = subject,
                    Body = body,
-                   From = new MailAddress(subscription.SenderEmail!, subscription.SenderName),
-                   To = {  }
+                   Recipients = [.. notificationMessageGenerationInfo.Recipients],
+                   AttachmentList = [.. attachments]
                };
     }
 
-    private static IEnumerable<NotificationMessageGenerationInfo<TRenderingObject, RecipientFullInfo>> ReGroup(
+    private static IEnumerable<NotificationMessageGenerationInfo<TRenderingObject, MailAddressRecipient>> ReGroup(
         IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> to,
         IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> copyTo,
         IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> replyTo) =>
 
         from g in new[] { to.GroupRecipients(RecipientRole.To), copyTo.GroupRecipients(RecipientRole.Copy), replyTo.GroupRecipients(RecipientRole.ReplyTo) }.RegroupRecipients()
 
-        let recipients = g.Select(pair => new RecipientFullInfo(pair.Recipient, pair.Tag))
+        let recipients = g.Select(pair => new MailAddressRecipient(pair.Recipient, pair.Tag))
 
-        select new NotificationMessageGenerationInfo<TRenderingObject, RecipientFullInfo>([.. recipients], g.Key);
+        select new NotificationMessageGenerationInfo<TRenderingObject, MailAddressRecipient>([.. recipients], g.Key);
 
     private IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetAuthTo(DomainObjectVersions<TDomainObject> versions)
     {

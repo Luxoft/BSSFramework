@@ -27,8 +27,6 @@ public class SampleSystemInitializer(
 
         await this.Initialize<ITargetSystemInitializer>(cancellationToken);
         await this.Initialize<ISystemConstantInitializer>(cancellationToken);
-
-        await this.Initialize<ISubscriptionInitializer>(cancellationToken);
     }
 
     private async Task Initialize<TInitializer>(CancellationToken cancellationToken)

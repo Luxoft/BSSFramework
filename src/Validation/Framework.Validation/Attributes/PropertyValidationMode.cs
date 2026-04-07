@@ -1,23 +1,22 @@
-namespace Framework.Validation
+﻿namespace Framework.Validation;
+
+/// <summary>
+/// Ðåæèì âàëèäàöèè ñâîéñòâà
+/// </summary>
+public enum PropertyValidationMode
 {
     /// <summary>
-    /// Ðåæèì âàëèäàöèè ñâîéñòâà
+    /// Âàëèäàöèÿ ïðèíóäèòåëüíî âûêëþ÷åíà
     /// </summary>
-    public enum PropertyValidationMode
-    {
-        /// <summary>
-        /// Âàëèäàöèÿ ïðèíóäèòåëüíî âûêëþ÷åíà
-        /// </summary>
-        Disabled,
+    Disabled,
 
-        /// <summary>
-        /// Ðåæèì âàëèäàöèè âûáèðàåòñÿ àâòîìàòè÷åñêè íà îñíîâå âíóòðåííèõ ïîëèòèê
-        /// </summary>
-        Auto,
+    /// <summary>
+    /// Ðåæèì âàëèäàöèè âûáèðàåòñÿ àâòîìàòè÷åñêè íà îñíîâå âíóòðåííèõ ïîëèòèê
+    /// </summary>
+    Auto,
 
-        /// <summary>
-        /// Âàëèäàöèÿ ïðèíóäèòåëüíî âêëþ÷åíà
-        /// </summary>
-        Enabled
-    }
+    /// <summary>
+    /// Âàëèäàöèÿ ïðèíóäèòåëüíî âêëþ÷åíà
+    /// </summary>
+    Enabled
 }

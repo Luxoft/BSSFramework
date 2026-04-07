@@ -5,7 +5,6 @@ using CommonFramework.DependencyInjection;
 using Framework.Application.Jobs;
 using Framework.AutomationCore.Environment;
 using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
-using Framework.Configuration.BLL.Notification;
 using Framework.Core;
 using Framework.Notification.DTO;
 

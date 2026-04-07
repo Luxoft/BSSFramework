@@ -1,60 +1,58 @@
 ﻿using System.Net.Mail;
 
+using CommonFramework;
+
+using Framework.Core;
 using Framework.Notification.Domain;
-using Framework.Notification.DTO;
 using Framework.Notification.Settings;
 
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Framework.Notification
+namespace Framework.Notification;
+
+public class ProdSmtpMessageSender(
+    ISmtpClientFactory smtpClientFactory,
+    IOptions<SmtpSettings> settings,
+    ILogger<ProdSmtpMessageSender> logger,
+    ISentMessageLogger? sentMessageLogger = null) : IMessageSender<MailMessage>
 {
-    public class ProdSmtpMessageSender(
-        ISmtpClientFactory smtpClientFactory,
-        IOptionsSnapshot<SmtpSettings> settings,
-        IRewriteReceiversService rewriteReceiversService) : ISmtpMessageSender
+    public async Task SendAsync(MailMessage baseMessage, CancellationToken cancellationToken)
     {
-        public async Task SendAsync(NotificationEventDTO message, CancellationToken cancellationToken)
+        try
         {
+            var actualMailMessage = this.GetActualMailMessage(baseMessage);
+
             using var client = smtpClientFactory.CreateSmtpClient();
 
-            await client.SendMailAsync(this.ToMailMessage(message), cancellationToken);
-        }
+            await client.SendMailAsync(actualMailMessage, cancellationToken);
 
-        protected virtual MailMessage ToMailMessage(NotificationEventDTO dto)
-        {
-            if (dto == null)
+            if (sentMessageLogger != null)
             {
-                throw new ArgumentNullException(nameof(dto));
+                await sentMessageLogger.LogAsync(actualMailMessage, cancellationToken);
             }
-
-            if (dto.Targets.All(x => x.Type != RecipientRole.To))
-            {
-                this.SetSupportTeamAsReceiver(dto);
-            }
-
-            var mailMessage = dto.ToDomain().ToMailMessage();
-            this.TryRunRewriteRules(dto, mailMessage);
-
-            return mailMessage;
         }
-
-        private void TryRunRewriteRules(NotificationEventDTO dto, MailMessage mailMessage)
+        catch (Exception e)
         {
-            rewriteReceiversService.RewriteToRecipients(mailMessage, dto);
-            rewriteReceiversService.RewriteCopyRecipients(mailMessage, dto);
-            rewriteReceiversService.RewriteReplyTo(mailMessage, dto);
+            logger.LogError(e, "Failed to send notification to smtp server");
+
+            throw;
         }
+    }
 
-        private void SetSupportTeamAsReceiver(NotificationEventDTO dto)
+    protected virtual MailMessage GetActualMailMessage(MailMessage baseMessage) => this.TryRedirectToSupport(baseMessage);
+
+    private MailMessage TryRedirectToSupport(MailMessage baseMessage)
+    {
+        if (baseMessage.To.Count == 0 && settings.Value.DefaultReceiverEmails != null)
         {
-            if (settings.Value.DefaultReceiverEmails == null)
-            {
-                return;
-            }
-
-            dto.Targets.AddRange(
-                settings.Value.DefaultReceiverEmails.Select(x => new NotificationTargetDTO { Type = RecipientRole.To, Name = x }));
+            var newMailMessage = baseMessage.Clone();
+            newMailMessage.To.AddRange(settings.Value.DefaultReceiverEmails.Select(x => new MailAddress(x)));
+            return newMailMessage;
+        }
+        else
+        {
+            return baseMessage;
         }
     }
 }

@@ -13,9 +13,7 @@ public class Subscription : Subscription<Domain.Country, CustomNotificationModel
 
     public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
 
-    public override string SenderEmail { get; } = "SampleSystem";
-
-    public override string SenderName { get; } = "SampleSystem@luxoft.com";
+    public override MailAddress Sender { get; } = new("SampleSystem@luxoft.com", "SampleSystem");
 
     public override bool AllowEmptyListOfRecipients { get; } = false;
 

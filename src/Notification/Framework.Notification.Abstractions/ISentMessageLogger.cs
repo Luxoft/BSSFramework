@@ -1,8 +1,8 @@
-﻿using Framework.Notification.DTO;
+﻿using System.Net.Mail;
 
 namespace Framework.Notification;
 
 public interface ISentMessageLogger
 {
-    Task LogAsync(NotificationEventDTO notificationEventDTO, CancellationToken cancellationToken = default);
+    Task LogAsync(MailMessage mailMessage, CancellationToken cancellationToken = default);
 }

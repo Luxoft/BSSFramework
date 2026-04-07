@@ -16,7 +16,6 @@ using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.Core.TypeResolving;
 using Framework.Database;
-using Framework.Notification.Domain;
 using Framework.Tracking;
 using Framework.Validation;
 

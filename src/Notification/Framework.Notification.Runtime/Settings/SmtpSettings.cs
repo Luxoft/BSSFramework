@@ -21,5 +21,5 @@ public class SmtpSettings
     /// <summary>
     /// Тестовый ящик, на который будут перенаправлены нотификации тестовых стендов (которые !environment.IsProduction())
     /// </summary>
-    public string[]? TestEmails { get; set; }
+    public required string[] TestEmails { get; set; }
 }

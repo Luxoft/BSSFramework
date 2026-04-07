@@ -1,6 +1,5 @@
 ﻿using MediatR;
 
-namespace SampleSystem.BLL._Command.CreateClassA
-{
-    public record CreateClassAEvent(int Value) : IRequest;
-}
+namespace SampleSystem.BLL._Command.CreateClassA;
+
+public record CreateClassAEvent(int Value) : IRequest;

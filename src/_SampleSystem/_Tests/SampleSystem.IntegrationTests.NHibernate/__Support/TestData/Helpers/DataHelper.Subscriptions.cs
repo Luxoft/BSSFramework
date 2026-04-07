@@ -3,6 +3,7 @@ using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Database.Domain;
+using Framework.Subscriptions.Domain;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 
@@ -24,25 +25,7 @@ public partial class DataHelper
             return result;
         });
 
-    public SubscriptionRecipientInfo GetRecipientsUntyped(
-            Type domainObjectType,
-            object prev,
-            object next,
-            string subscriptionCode) =>
-        this.EvaluateRead(context =>
-        {
-            var bll = context.Configuration.Logics.Subscription;
-
-            var result = bll.GetRecipientsUntyped(
-                domainObjectType,
-                prev,
-                next,
-                subscriptionCode);
-
-            return result;
-        });
-
-    public List<ITryResult<Subscription>> ProcessChangedObjectUntyped(
+    public List<ITryResult<SubscriptionHeader>> ProcessChangedObjectUntyped(
             Type domainObjectType,
             object prev,
             object next) =>
@@ -58,7 +41,7 @@ public partial class DataHelper
             return result;
         });
 
-    public List<ITryResult<Subscription>> ProcessChangedObjectInfo(ObjectModificationInfo<Guid> changedObjectInfo) =>
+    public List<ITryResult<SubscriptionHeader>> ProcessChangedObjectInfo(ObjectModificationInfo<Guid> changedObjectInfo) =>
         this.EvaluateWrite(context =>
         {
             var bll = context.Configuration.Logics.Subscription;

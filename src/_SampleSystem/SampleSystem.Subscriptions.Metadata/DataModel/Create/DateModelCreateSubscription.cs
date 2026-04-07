@@ -1,4 +1,6 @@
-﻿using Framework.Subscriptions.Domain;
+﻿using System.Net.Mail;
+
+using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
 
 using SampleSystem.Domain.Models.Custom;
@@ -9,9 +11,7 @@ public class DateModelCreateSubscription : Subscription<DateModel, _DataModel_Cr
 {
     public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Create;
 
-    public override string SenderName { get; } = "DateModelCreateSampleSystem";
-
-    public override string SenderEmail { get; } = "DateModelCreateSampleSystem@luxoft.com";
+    public override MailAddress Sender { get; } = new("DateModelCreateSampleSystem@luxoft.com", "DateModelCreateSampleSystem");
 
     public override bool SendIndividualLetters { get; } = true;
 

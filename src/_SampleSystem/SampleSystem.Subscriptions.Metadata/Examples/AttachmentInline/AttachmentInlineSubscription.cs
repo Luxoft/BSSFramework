@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Net.Mail;
+using System.Text;
 
 using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
@@ -11,9 +12,7 @@ public class AttachmentInlineSubscription : Subscription<Domain.Employee, _Examp
 
     public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
 
-    public override string? SenderName { get; } = "SampleSystem";
-
-    public override string? SenderEmail { get; } = "InlineAttach@luxoft.com";
+    public override MailAddress Sender { get; } = new ("InlineAttach@luxoft.com", "SampleSystem");
 
     public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
     {

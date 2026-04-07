@@ -33,19 +33,14 @@ public class TargetSystemInitializer(
         var targetSystem = bll.GetById(targetSystemInfo.Id, false, new DTOFetchRule<TargetSystem>(MainDTOType.RichDTO))
                            ?? new TargetSystem(isBase, targetSystemInfo.IsMain, targetSystemInfo.IsRevision)
                               {
-                                  Name = targetSystemInfo.Name, Id = targetSystemInfo.Id
+                                  Name = targetSystemInfo.Name, SubscriptionEnabled = !isBase, Id = targetSystemInfo.Id
                               }.Self(bll.Insert);
 
         var mergeResult = targetSystem.DomainTypes.GetMergeResult(targetSystemInfo.DomainTypes, t => t.Id, t => t.Id);
 
         foreach (var newItem in mergeResult.AddingItems)
         {
-            var newDomainType = new DomainType(targetSystem)
-            {
-                Id = newItem.Id,
-                Name = newItem.Type.Name,
-                NameSpace = newItem.Type.Namespace!
-            };
+            var newDomainType = new DomainType(targetSystem) { Id = newItem.Id, Name = newItem.Type.Name, NameSpace = newItem.Type.Namespace! };
 
             if (!isBase)
             {
@@ -60,7 +55,9 @@ public class TargetSystemInitializer(
             var changedName = domainType.Name != type.Name || domainType.NameSpace != type.Namespace;
 
             var mergeEventResult = domainType.EventOperations.GetMergeResult(
-                context.EventOperationSource.GetEventOperations(type), operation => operation.Name, value => value.ToString());
+                context.EventOperationSource.GetEventOperations(type),
+                operation => operation.Name,
+                value => value.ToString());
 
             if (changedName || (!isBase && !mergeEventResult.IsEmpty))
             {

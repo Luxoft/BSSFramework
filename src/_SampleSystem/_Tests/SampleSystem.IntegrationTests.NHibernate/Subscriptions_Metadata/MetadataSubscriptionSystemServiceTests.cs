@@ -84,30 +84,6 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         expectedNotifications.Single().Message.Message.Should().BeEquivalentTo(message);
     }
 
-    [TestMethod]
-    public void OnlyActiveCodeFirstSubscriptionShouldBeSent()
-    {
-        // Arrange
-        this.EvaluateWrite(context =>
-                           {
-                               var bll = context.Configuration.Logics.CodeFirstSubscription;
-                               var cfs = bll.GetByCode(new EmployeeUpdateSubscription().Code);
-                               cfs.Active = false;
-                               bll.Save(cfs);
-                           });
-
-        var employee = this.CreateEmployee();
-
-        // Act
-        this.DataHelper.ProcessChangedObjectUntyped(typeof(Employee), employee, employee);
-
-        var expectedNotifications = this.GetNotifications()
-                                        .Where(n => n.From == "SampleSystem@luxoft.com");
-
-        // Assert
-        expectedNotifications.Should().HaveCount(0);
-    }
-
     /// <summary>
     /// IADFRAME-1525 Сделать пример использования аттачей в CodeFirst подписках
     /// </summary>

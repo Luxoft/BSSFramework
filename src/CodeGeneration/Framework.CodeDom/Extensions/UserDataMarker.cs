@@ -1,18 +1,17 @@
-namespace Framework.CodeDom.Extensions
+﻿namespace Framework.CodeDom.Extensions;
+
+/// <summary>
+/// Äîïîëíèòåëüíàÿ ìàðêèðîâêà îáúåêòîâ ãåíåðàöèè
+/// </summary>
+internal enum UserDataMarker
 {
     /// <summary>
-    /// Äîïîëíèòåëüíàÿ ìàðêèðîâêà îáúåêòîâ ãåíåðàöèè
+    /// Òèï ÿâëÿåòñÿ ñòàòè÷åñêèì
     /// </summary>
-    internal enum UserDataMarker
-    {
-        /// <summary>
-        /// Òèï ÿâëÿåòñÿ ñòàòè÷åñêèì
-        /// </summary>
-        IsStatic,
+    IsStatic,
 
-        /// <summary>
-        /// Ìåòîä ÿâëÿåòñÿ ðàñøèðåíèåì
-        /// </summary>
-        IsExtension
-    }
+    /// <summary>
+    /// Ìåòîä ÿâëÿåòñÿ ðàñøèðåíèåì
+    /// </summary>
+    IsExtension
 }

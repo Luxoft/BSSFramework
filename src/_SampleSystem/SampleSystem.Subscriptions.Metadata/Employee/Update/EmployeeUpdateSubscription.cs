@@ -1,4 +1,6 @@
-﻿using Framework.Subscriptions.Domain;
+﻿using System.Net.Mail;
+
+using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Employee.Update;
@@ -8,10 +10,7 @@ public class EmployeeUpdateSubscription : Subscription<Domain.Employee, _Employe
 {
     public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
 
-    public override string SenderName { get; } = "SampleSystem";
-
-    public override string? SenderEmail { get; } = "SampleSystem@luxoft.com";
-
+    public override MailAddress Sender { get; } = new("SampleSystem@luxoft.com", "SampleSystem");
 
     public override bool SendIndividualLetters { get; } = true;
 

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Net.Mail;
+using System.Text;
 
 using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
@@ -11,9 +12,7 @@ public class AttachmentSubscription : Subscription<Domain.Employee, _Examples_At
 
     public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
 
-    public override string? SenderName { get; } = "SampleSystem";
-
-    public override string? SenderEmail { get; } = "Attachment@luxoft.com";
+    public override MailAddress Sender { get; } = new("Attachment@luxoft.com", "SampleSystem");
 
     public override bool IncludeAttachments { get; } = true;
 

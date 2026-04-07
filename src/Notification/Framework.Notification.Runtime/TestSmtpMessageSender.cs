@@ -2,7 +2,6 @@
 
 using CommonFramework;
 
-using Framework.Notification.DTO;
 using Framework.Notification.Extensions;
 using Framework.Notification.Settings;
 
@@ -14,23 +13,26 @@ namespace Framework.Notification;
 /// <summary>
 /// логика для тестовых стендов - письма перенаправляются на тестовый почтовый ящик, а исходные адресаты записываются в тело письма
 /// </summary>
-internal class TestSmtpMessageSender(
+public class TestSmtpMessageSender(
     ISmtpClientFactory smtpClientFactory,
-    IOptionsSnapshot<SmtpSettings> settings,
+    IOptions<SmtpSettings> settings,
+    ILogger<ProdSmtpMessageSender> logger,
     IRewriteReceiversService rewriteReceiversService,
-    ILogger<SmtpNotificationMessageSender> logger)
-    : ProdSmtpMessageSender(smtpClientFactory, settings, rewriteReceiversService, logger)
+    ISentMessageLogger? sentMessageLogger = null)
+    : ProdSmtpMessageSender(smtpClientFactory, settings, logger, sentMessageLogger)
 {
-    protected override MailMessage ToMailMessage(NotificationEventDTO dto)
+    protected override MailMessage GetActualMailMessage(MailMessage baseMessage)
     {
-        var message = base.ToMailMessage(dto);
+        var newMessage = base.GetActualMailMessage(baseMessage);
 
-        this.RedirectToTestAddress(message);
+        rewriteReceiversService.RewriteRecipients(newMessage);
 
-        return message;
+        this.AddRedirectToTestAddress(newMessage);
+
+        return newMessage;
     }
 
-    private void RedirectToTestAddress(MailMessage message)
+    private void AddRedirectToTestAddress(MailMessage message)
     {
         this.AddRecipientsToBody(message);
 
@@ -48,7 +50,7 @@ internal class TestSmtpMessageSender(
     private void AddRecipientsToBody(MailMessage message)
     {
         var originalReceivers =
-                $"From: {message.From.Address}<br>" +
+                $"From: {message.From!.Address}<br>" +
                 $"To: {message.To.Select(x => x.Address).Join("; ")}<br>" +
                 $"CC: {message.CC.Select(x => x.Address).Join("; ")}<br>" +
                 $"Reply To: {message.ReplyToList.Select(x => x.Address).Join("; ")}<br><br>";

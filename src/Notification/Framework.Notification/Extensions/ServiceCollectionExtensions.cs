@@ -1,5 +1,6 @@
-﻿using Framework.Core;
-using Framework.Notification.DTO;
+﻿using System.Net.Mail;
+
+using Framework.Core;
 using Framework.Notification.Settings;
 
 using Microsoft.Extensions.Configuration;
@@ -11,23 +12,24 @@ public static class ServiceCollectionExtensions
 {
     extension(IServiceCollection services)
     {
-        public void AddSmtpNotification(IConfiguration configuration)
+        public void AddSmtpNotification(IConfiguration configuration, bool isProd)
         {
+            services.AddSingleton<ISmtpClientFactory, SmtpClientFactory>();
             services.AddSingleton<ISubjectCleaner, SubjectCleaner>();
 
-            services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));
-
-            services.AddScoped<IMessageSender<NotificationEventDTO>, SmtpNotificationMessageSender>();
-        }
-
-        /// <summary>
-        /// Дефолтный сервис по подмене получателей нотификаций. Работает на основе конфигурации RewriteReceiversSettings
-        /// </summary>
-        public void AddRewriteReceiversDependencies(IConfiguration configuration)
-        {
-            services.Configure<RewriteReceiversSettings>(configuration.GetSection("RewriteReceiversSettings"));
-
             services.AddSingleton<IRewriteReceiversService, RewriteReceiversService>();
+
+            if (isProd)
+            {
+                services.AddScoped<IMessageSender<MailMessage>, ProdSmtpMessageSender>();
+            }
+            else
+            {
+                services.AddScoped<IMessageSender<MailMessage>, TestSmtpMessageSender>();
+            }
+
+            services.Configure<SmtpSettings>(configuration.GetSection(nameof(SmtpSettings)));
+            services.Configure<RewriteReceiversSettings>(configuration.GetSection(nameof(RewriteReceiversSettings)));
         }
     }
 }

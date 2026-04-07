@@ -1,4 +1,6 @@
-﻿using Framework.Subscriptions.Domain;
+﻿using System.Net.Mail;
+
+using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Examples.RazerInheritance;
@@ -8,9 +10,7 @@ namespace SampleSystem.Subscriptions.Metadata.Examples.RazerInheritance;
 /// </summary>
 public class RazorInheritanceSubscription : Subscription<Domain.Employee, _Examples_RazorInheritance_MessageTemplate_cshtml>
 {
-    public override string SenderName { get; } = "SampleSystem";
-
-    public override string SenderEmail { get; } = "RazorInheritanceSubscription@luxoft.com";
+    public override MailAddress Sender { get; } = new ("RazorInheritanceSubscription@luxoft.com", "SampleSystem");
 
     public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
 

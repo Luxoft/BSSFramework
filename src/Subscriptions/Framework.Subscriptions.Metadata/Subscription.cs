@@ -23,13 +23,11 @@ public abstract class Subscription<TDomainObject, TRenderingObject, TMessageTemp
     where TRenderingObject : class
     where TMessageTemplate : IMessageTemplate<TRenderingObject>
 {
-    public virtual bool IsProcessed(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions) => true;
+    public abstract DomainObjectChangeType DomainObjectChangeType { get; }
 
     public virtual SubscriptionHeader Header => new(this.GetType().FullName!);
 
-    public virtual string? SenderName { get; } = null;
-
-    public virtual string? SenderEmail { get; } = null;
+    public abstract MailAddress Sender { get; }
 
     public virtual bool SendIndividualLetters { get; } = false;
 
@@ -39,11 +37,11 @@ public abstract class Subscription<TDomainObject, TRenderingObject, TMessageTemp
 
     public virtual bool AllowEmptyListOfRecipients { get; } = false;
 
-    public abstract DomainObjectChangeType DomainObjectChangeType { get; }
-
     public virtual RecipientMergeType RecipientMergeType { get; } = RecipientMergeType.Union;
 
     public virtual ImmutableArray<SecurityRole> SecurityRoles { get; } = [];
+
+    public virtual bool IsProcessed(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions) => true;
 
     public abstract TRenderingObject ConvertToRenderingObject(IServiceProvider serviceProvider, TDomainObject domainObject);
 

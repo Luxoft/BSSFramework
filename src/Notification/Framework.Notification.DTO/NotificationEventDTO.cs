@@ -44,29 +44,6 @@ public class NotificationEventDTO
 
         this.Message = new NotificationMessage() { IsBodyHtml = mailMessage.IsBodyHtml, Message = mailMessage.Body };
 
-        this.Attachments = mailMessage.Attachments.Select(z =>
-        {
-            using var ms = new MemoryStream();
-            z.ContentStream.CopyTo(ms);
-            var content = ms.ToArray();
-
-            return new NotificationAttachmentDTO
-                   {
-                       Content = content,
-                       Extension = z.ContentType.Name,
-                       Name = z.Name!,
-                       ContentId = z.ContentId,
-                       IsInline = z.ContentDisposition!.Inline
-                   };
-        }).ToList();
+        this.Attachments = mailMessage.Attachments.Select(z => new NotificationAttachmentDTO(z)).ToList();
     }
-
-    public Message ToDomain() =>
-        new(
-            this.From,
-            this.Targets.Select(t => t.ToDomain()),
-            this.Subject,
-            this.Message.Message,
-            this.Message.IsBodyHtml,
-            this.Attachments.Select(a => a.ToDomain()));
 }

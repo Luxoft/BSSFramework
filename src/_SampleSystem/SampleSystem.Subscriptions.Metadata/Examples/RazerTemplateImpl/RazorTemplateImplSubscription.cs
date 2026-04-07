@@ -1,4 +1,6 @@
-﻿using Framework.Subscriptions.Domain;
+﻿using System.Net.Mail;
+
+using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Examples.RazerTemplateImpl;
@@ -10,9 +12,7 @@ public class RazorTemplateImplSubscription : Subscription<Domain.Employee, Razor
 {
     public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
 
-    public override string? SenderName { get; } = "SampleSystem";
-
-    public override string? SenderEmail { get; } = "RazorTemplateImplSubscription@luxoft.com";
+    public override MailAddress Sender { get; } = new("RazorTemplateImplSubscription@luxoft.com", "SampleSystem");
 
     public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
     {

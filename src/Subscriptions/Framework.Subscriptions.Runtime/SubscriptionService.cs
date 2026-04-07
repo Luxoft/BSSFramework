@@ -53,7 +53,7 @@ public class SubscriptionService<TDomainObject, TRenderingObject>(
         yield return TryResult.Return(subscription.Header);
     }
 
-    private IEnumerable<MailMessage> GetMailMessages(DomainObjectVersions<TDomainObject> versions)
+    private IEnumerable<Notification.Domain.Notification> GetMailMessages(DomainObjectVersions<TDomainObject> versions)
     {
         if (subscription.IsProcessed(serviceProvider, versions))
         {
@@ -66,7 +66,7 @@ public class SubscriptionService<TDomainObject, TRenderingObject>(
 
             var regrouped = ReGroup(resultTo, copyTo, replyTo);
 
-            return regrouped.Select(this.ToMailMessage);
+            return regrouped.Select(this.ToNotification);
         }
         else
         {
@@ -74,20 +74,28 @@ public class SubscriptionService<TDomainObject, TRenderingObject>(
         }
     }
 
-    private MailMessage ToMailMessage(NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient> notificationMessageGenerationInfo)
+    private Notification.Domain.Notification ToNotification(NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient> notificationMessageGenerationInfo)
     {
         var (subject, body) = subscription.GetMessage(serviceProvider, notificationMessageGenerationInfo.Versions);
 
         var attachments = subscription.GetAttachments(serviceProvider, notificationMessageGenerationInfo.Versions);
 
-        return new MailMessage
-               {
-                   Sender = subscription.Sender,
-                   Subject = subject,
-                   Body = body,
-                   Recipients = [.. notificationMessageGenerationInfo.Recipients],
-                   AttachmentList = [.. attachments]
-               };
+        var mailMessage = new MailMessage
+                          {
+                              Sender = subscription.Sender,
+                              Subject = subject,
+                              Body = body,
+                              Recipients = [.. notificationMessageGenerationInfo.Recipients],
+                              AttachmentList = [.. attachments]
+                          };
+
+        var notificationTechnicalInformation = new NotificationTechnicalInformation(
+            subscription.MessageTemplateCode,
+            typeof(TDomainObject).FullName!,
+
+            );
+
+        return new Notification.Domain.Notification()
     }
 
     private static IEnumerable<NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient>> ReGroup(

@@ -17,9 +17,4 @@
     <ProjectReference Include="..\Framework.Subscriptions.Domain\Framework.Subscriptions.Domain.csproj" />
   </ItemGroup>
 
-  <!--<ItemGroup>
-    <ProjectReference Include="..\..\Notification\Framework.Notification.Domain\Framework.Notification.Domain.csproj" />
-    <ProjectReference Include="..\Framework.Subscriptions.Domain\Framework.Subscriptions.Domain.csproj" />
-  </ItemGroup>-->
-
 </Project>

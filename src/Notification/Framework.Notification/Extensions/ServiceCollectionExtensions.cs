@@ -16,10 +16,14 @@ public static class ServiceCollectionExtensions
         public void AddSmtpNotification(IConfiguration configuration, bool isProd)
         {
             services.AddSingleton<IMailMessageModifier, HtmlMarkerMessageModifier>();
-            services.AddSingleton<IMailMessageModifier, RedirectToSupportMailMessageModifier>();
-            services.AddSingleton<IMailMessageModifier, RedirectToTestAddress>();
-            services.AddSingleton<IMailMessageModifier, RewriteReceiversMailMessageModifier>();
             services.AddSingleton<IMailMessageModifier, SubjectCleanerMailMessageModifier>();
+            services.AddSingleton<IMailMessageModifier, RedirectToSupportMailMessageModifier>();
+
+            if (!isProd)
+            {
+                services.AddSingleton<IMailMessageModifier, RedirectToTestAddress>();
+                services.AddSingleton<IMailMessageModifier, RewriteReceiversMailMessageModifier>();
+            }
 
             services.AddSingleton<ISmtpClientFactory, SmtpClientFactory>();
             services.AddSingleton<IMessageSender<MailMessage>, SmtpMessageSender>();

@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Framework.Core;
-
 namespace SampleSystem.Generated.DTO
 {
     
@@ -91,8 +89,8 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<System.Nullable<System.DateTime>>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<System.Nullable<SampleSystem.Domain.PossibleStartDate>>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<System.Nullable<int>>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<System.Nullable<Period>>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Period>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<System.Nullable<Framework.Core.Period>>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Period>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<SampleSystem.Domain.ProjectStatus>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<SampleSystem.Domain.RevenueDocumentAribaStatus>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<SampleSystem.Generated.DTO.SqlParserTestObjSimpleDTO>))]

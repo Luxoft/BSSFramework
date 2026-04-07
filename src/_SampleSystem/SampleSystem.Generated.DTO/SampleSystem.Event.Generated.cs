@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Framework.Core;
-
 namespace SampleSystem.Generated.DTO
 {
     
@@ -1105,7 +1103,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _parent;
         
-        private Period _period;
+        private Framework.Core.Period _period;
         
         private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _program;
         
@@ -1660,7 +1658,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
+        public Framework.Core.Period Period
         {
             get
             {
@@ -1805,7 +1803,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Domain.BusinessUnitOptions _options;
         
-        private Period _period;
+        private Framework.Core.Period _period;
         
         private string _programName;
         
@@ -2228,7 +2226,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
+        public Framework.Core.Period Period
         {
             get
             {
@@ -3021,7 +3019,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _modifyDate;
         
-        private Period _period;
+        private Framework.Core.Period _period;
         
         private long _version;
         
@@ -3152,7 +3150,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
+        public Framework.Core.Period Period
         {
             get
             {
@@ -3245,13 +3243,13 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime[] _arrayDays;
         
-        private Period[] _arrayPeriods;
+        private Framework.Core.Period[] _arrayPeriods;
         
         private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
         
         private System.Collections.Generic.List<System.DateTime> _listDays;
         
-        private System.Collections.Generic.List<Period> _listPeriods;
+        private System.Collections.Generic.List<Framework.Core.Period> _listPeriods;
         
         public BusinessUnitRootFilterModelEventRichDTO()
         {
@@ -3276,7 +3274,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period[] ArrayPeriods
+        public Framework.Core.Period[] ArrayPeriods
         {
             get
             {
@@ -3315,7 +3313,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Period> ListPeriods
+        public System.Collections.Generic.List<Framework.Core.Period> ListPeriods
         {
             get
             {
@@ -6036,7 +6034,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _coreBusinessUnit;
         
-        private Period? _coreBusinessUnitPeriod;
+        private Framework.Core.Period? _coreBusinessUnitPeriod;
         
         private System.DateTime? _createDate;
         
@@ -6044,7 +6042,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _dismissDate;
         
-        private Period _educationDuration;
+        private Framework.Core.Period _educationDuration;
         
         private string _email;
         
@@ -6116,7 +6114,7 @@ namespace SampleSystem.Generated.DTO
         
         private long _version;
         
-        private Period _workPeriod;
+        private Framework.Core.Period _workPeriod;
         
         public EmployeeEventRichDTO()
         {
@@ -6245,7 +6243,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period? CoreBusinessUnitPeriod
+        public Framework.Core.Period? CoreBusinessUnitPeriod
         {
             get
             {
@@ -6297,7 +6295,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period EducationDuration
+        public Framework.Core.Period EducationDuration
         {
             get
             {
@@ -6765,7 +6763,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period WorkPeriod
+        public Framework.Core.Period WorkPeriod
         {
             get
             {
@@ -6795,7 +6793,7 @@ namespace SampleSystem.Generated.DTO
         
         private string _cellPhone;
         
-        private Period? _coreBusinessUnitPeriod;
+        private Framework.Core.Period? _coreBusinessUnitPeriod;
         
         private System.DateTime? _createDate;
         
@@ -6803,7 +6801,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _dismissDate;
         
-        private Period _educationDuration;
+        private Framework.Core.Period _educationDuration;
         
         private string _email;
         
@@ -6851,7 +6849,7 @@ namespace SampleSystem.Generated.DTO
         
         private long _version;
         
-        private Period _workPeriod;
+        private Framework.Core.Period _workPeriod;
         
         public EmployeeEventSimpleDTO()
         {
@@ -6941,7 +6939,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period? CoreBusinessUnitPeriod
+        public Framework.Core.Period? CoreBusinessUnitPeriod
         {
             get
             {
@@ -6993,7 +6991,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period EducationDuration
+        public Framework.Core.Period EducationDuration
         {
             get
             {
@@ -7305,7 +7303,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period WorkPeriod
+        public Framework.Core.Period WorkPeriod
         {
             get
             {
@@ -17609,7 +17607,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _parent;
         
-        private Period _period;
+        private Framework.Core.Period _period;
         
         private long _version;
         
@@ -17792,7 +17790,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
+        public Framework.Core.Period Period
         {
             get
             {
@@ -17843,7 +17841,7 @@ namespace SampleSystem.Generated.DTO
         
         private string _name;
         
-        private Period _period;
+        private Framework.Core.Period _period;
         
         private long _version;
         
@@ -17987,7 +17985,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
+        public Framework.Core.Period Period
         {
             get
             {
@@ -18775,7 +18773,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventSimpleDTO _parent;
         
-        private Period _period;
+        private Framework.Core.Period _period;
         
         private long _version;
         
@@ -18932,7 +18930,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
+        public Framework.Core.Period Period
         {
             get
             {
@@ -18983,7 +18981,7 @@ namespace SampleSystem.Generated.DTO
         
         private string _name;
         
-        private Period _period;
+        private Framework.Core.Period _period;
         
         private long _version;
         
@@ -19127,7 +19125,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
+        public Framework.Core.Period Period
         {
             get
             {
@@ -20660,11 +20658,11 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid _id;
         
-        private Period _period;
+        private Framework.Core.Period _period;
         
-        private Period _period123;
+        private Framework.Core.Period _period123;
         
-        private Period _period456;
+        private Framework.Core.Period _period456;
         
         public PureFluentMappingObjectEventRichDTO()
         {
@@ -20689,7 +20687,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
+        public Framework.Core.Period Period
         {
             get
             {
@@ -20702,7 +20700,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period123
+        public Framework.Core.Period Period123
         {
             get
             {
@@ -20715,7 +20713,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period456
+        public Framework.Core.Period Period456
         {
             get
             {
@@ -23342,7 +23340,7 @@ namespace SampleSystem.Generated.DTO
         
         private string _name;
         
-        private Period _period;
+        private Framework.Core.Period _period;
         
         private long _version;
         
@@ -23447,7 +23445,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
+        public Framework.Core.Period Period
         {
             get
             {
@@ -23492,7 +23490,7 @@ namespace SampleSystem.Generated.DTO
         
         private string _name;
         
-        private Period _period;
+        private Framework.Core.Period _period;
         
         private long _version;
         
@@ -23597,7 +23595,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
+        public Framework.Core.Period Period
         {
             get
             {
@@ -23702,7 +23700,7 @@ namespace SampleSystem.Generated.DTO
         
         private string _name;
         
-        private Period _period;
+        private Framework.Core.Period _period;
         
         private long _version;
         
@@ -23807,7 +23805,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
+        public Framework.Core.Period Period
         {
             get
             {

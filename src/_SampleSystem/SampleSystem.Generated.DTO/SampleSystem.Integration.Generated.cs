@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Framework.Core;
-
 namespace SampleSystem.Generated.DTO
 {
     
@@ -64,7 +62,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Domain.BusinessUnitOptions _options;
         
-        private Period _period;
+        private Framework.Core.Period _period;
         
         private string _projectStartMailList;
         
@@ -396,7 +394,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
+        public Framework.Core.Period Period
         {
             get
             {
@@ -675,7 +673,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Generated.DTO.BusinessUnitIntegrationSimpleDTO _coreBusinessUnit;
         
-        private Period? _coreBusinessUnitPeriod;
+        private Framework.Core.Period? _coreBusinessUnitPeriod;
         
         private System.DateTime? _createDate;
         
@@ -683,7 +681,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _dismissDate;
         
-        private Period _educationDuration;
+        private Framework.Core.Period _educationDuration;
         
         private string _email;
         
@@ -753,7 +751,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime _validateVirtualProp;
         
-        private Period _workPeriod;
+        private Framework.Core.Period _workPeriod;
         
         public EmployeeIntegrationRichDTO()
         {
@@ -882,7 +880,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period? CoreBusinessUnitPeriod
+        public Framework.Core.Period? CoreBusinessUnitPeriod
         {
             get
             {
@@ -934,7 +932,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period EducationDuration
+        public Framework.Core.Period EducationDuration
         {
             get
             {
@@ -1406,7 +1404,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period WorkPeriod
+        public Framework.Core.Period WorkPeriod
         {
             get
             {
@@ -1451,7 +1449,7 @@ namespace SampleSystem.Generated.DTO
         
         private string _cellPhone;
         
-        private Period? _coreBusinessUnitPeriod;
+        private Framework.Core.Period? _coreBusinessUnitPeriod;
         
         private System.DateTime? _createDate;
         
@@ -1459,7 +1457,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _dismissDate;
         
-        private Period _educationDuration;
+        private Framework.Core.Period _educationDuration;
         
         private string _email;
         
@@ -1505,7 +1503,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime _validateVirtualProp;
         
-        private Period _workPeriod;
+        private Framework.Core.Period _workPeriod;
         
         public EmployeeIntegrationSimpleDTO()
         {
@@ -1595,7 +1593,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period? CoreBusinessUnitPeriod
+        public Framework.Core.Period? CoreBusinessUnitPeriod
         {
             get
             {
@@ -1647,7 +1645,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period EducationDuration
+        public Framework.Core.Period EducationDuration
         {
             get
             {
@@ -1963,7 +1961,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period WorkPeriod
+        public Framework.Core.Period WorkPeriod
         {
             get
             {
@@ -4447,7 +4445,7 @@ namespace SampleSystem.Generated.DTO
         
         private string _name;
         
-        private Period _period;
+        private Framework.Core.Period _period;
         
         public ManagementUnitIntegrationSimpleDTO()
         {
@@ -4606,7 +4604,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
+        public Framework.Core.Period Period
         {
             get
             {

@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.Subscriptions.Runtime</PackageId>
-    <RootNamespace>Framework.Subscriptions</RootNamespace>
+    <PackageId>Luxoft.Framework.Subscriptions</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

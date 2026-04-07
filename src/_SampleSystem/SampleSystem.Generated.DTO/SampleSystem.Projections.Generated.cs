@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Framework.Core;
-
 namespace SampleSystem.Generated.DTO
 {
     
@@ -1101,7 +1099,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid[] _child_Identities;
         
-        private Period[] _child_Periods;
+        private Framework.Core.Period[] _child_Periods;
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> _children;
         
@@ -1135,7 +1133,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period[] Child_Periods
+        public Framework.Core.Period[] Child_Periods
         {
             get
             {
@@ -1256,7 +1254,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> _locations;
         
-        private Period[] _periodArray;
+        private Framework.Core.Period[] _periodArray;
         
         private SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO _testBU;
         
@@ -1286,7 +1284,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period[] PeriodArray
+        public Framework.Core.Period[] PeriodArray
         {
             get
             {

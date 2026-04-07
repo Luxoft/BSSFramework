@@ -50,6 +50,9 @@ public interface ISubscription
 
     SubscriptionHeader Header { get; }
 
+    string MessageTemplateCode { get; }
+
+
     MailAddress Sender { get; }
 
     /// <summary>

@@ -74,7 +74,7 @@ public class SubscriptionService<TDomainObject, TRenderingObject>(
         }
     }
 
-    private MailMessage ToMailMessage(NotificationMessageGenerationInfo<TRenderingObject, MailAddressRecipient> notificationMessageGenerationInfo)
+    private MailMessage ToMailMessage(NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient> notificationMessageGenerationInfo)
     {
         var (subject, body) = subscription.GetMessage(serviceProvider, notificationMessageGenerationInfo.Versions);
 
@@ -90,16 +90,16 @@ public class SubscriptionService<TDomainObject, TRenderingObject>(
                };
     }
 
-    private static IEnumerable<NotificationMessageGenerationInfo<TRenderingObject, MailAddressRecipient>> ReGroup(
+    private static IEnumerable<NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient>> ReGroup(
         IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> to,
         IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> copyTo,
         IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> replyTo) =>
 
         from g in new[] { to.GroupRecipients(RecipientRole.To), copyTo.GroupRecipients(RecipientRole.Copy), replyTo.GroupRecipients(RecipientRole.ReplyTo) }.RegroupRecipients()
 
-        let recipients = g.Select(pair => new MailAddressRecipient(pair.Recipient, pair.Tag))
+        let recipients = g.Select(pair => new NotificationRecipient(pair.Recipient, pair.Tag))
 
-        select new NotificationMessageGenerationInfo<TRenderingObject, MailAddressRecipient>([.. recipients], g.Key);
+        select new NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient>([.. recipients], g.Key);
 
     private IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetAuthTo(DomainObjectVersions<TDomainObject> versions)
     {

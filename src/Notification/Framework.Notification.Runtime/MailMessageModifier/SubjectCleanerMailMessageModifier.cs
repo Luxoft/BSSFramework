@@ -1,9 +1,13 @@
-﻿using Framework.Core;
+﻿using System.Net.Mail;
 
-namespace Framework.Notification;
+using Framework.Core;
 
-public class SubjectCleaner : ISubjectCleaner
+namespace Framework.Notification.MailMessageModifier;
+
+public class SubjectCleanerMailMessageModifier : IMailMessageModifier
 {
+    public void Modify(MailMessage message) => message.Subject = this.Clean(message.Subject);
+
     public string Clean(string subject) => this.CutSubjectOnRight(this.ReplaceUnsupportedCharactersForSubject(subject));
 
     private string CutSubjectOnRight(string subject)

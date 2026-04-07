@@ -1,6 +1,6 @@
 ﻿using System.Net.Mail;
 
-namespace Framework.Notification.Extensions;
+namespace Framework.Notification.MailMessageModifier;
 
 internal static class RecipientsHelper
 {

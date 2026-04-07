@@ -80,8 +80,8 @@ public class BLLFactoryContainerFileFactory<TConfiguration>(TConfiguration confi
 
         var fileTypes = new[]
                         {
-                                new { FileType = BLLGenerator.FileType.DefaultBLLFactory, Type = this.Configuration.Environment.BLLCore.SecurityBLLFactoryType },
-                                new { FileType = BLLGenerator.FileType.ImplementedBLLFactory, Type = this.Configuration.Environment.BLLCore.SecurityBLLFactoryType }
+                                new { FileType = FileType.DefaultBLLFactory, Type = this.Configuration.Environment.BLLCore.SecurityBLLFactoryType },
+                                new { FileType = FileType.ImplementedBLLFactory, Type = this.Configuration.Environment.BLLCore.SecurityBLLFactoryType }
                         };
 
         foreach (var pair in fileTypes)
@@ -132,7 +132,7 @@ public class BLLFactoryContainerFileFactory<TConfiguration>(TConfiguration confi
     {
         var factoryDecl = this.Configuration.Environment.BLLCore.GetCodeTypeReference(domainType, BLLCoreGenerator.FileType.BLLFactoryInterface);
 
-        var factoryImpl = this.Configuration.GetCodeTypeReference(domainType, BLLGenerator.FileType.BLLFactory);
+        var factoryImpl = this.Configuration.GetCodeTypeReference(domainType, FileType.BLLFactory);
 
         var addScopedMethod = typeof(Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions).ToTypeReferenceExpression()
                                                                         .ToMethodReferenceExpression(

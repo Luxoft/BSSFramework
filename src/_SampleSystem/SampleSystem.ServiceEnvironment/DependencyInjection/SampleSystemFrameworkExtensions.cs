@@ -6,7 +6,6 @@ using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Events;
 using SampleSystem.Generated.DTO;
-using SampleSystem.Subscriptions.Metadata.Employee.Update;
 
 using SampleSystemBLLContext = SampleSystem.BLL.SampleSystemBLLContext;
 

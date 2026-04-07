@@ -1,13 +1,11 @@
 ﻿using System.Text;
 
-using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
 using Framework.Core;
 using Framework.Notification.Domain;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Custom;
 using SampleSystem.IntegrationTests.__Support.TestData;
-using SampleSystem.Subscriptions.Metadata.Employee.Update;
 
 namespace SampleSystem.IntegrationTests.Subscriptions_Metadata;
 
@@ -33,7 +31,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         // Assert
         errors.Should().HaveCount(0);
         expectedNotifications.Should().HaveCount(1);
-        expectedNotifications.Single().Targets.Single(z => z.Type == RecipientRole.ReplyTo).Name.Should().Be("replayTo@luxoft.com");
+        expectedNotifications.Single().Recipients.Single(z => z.Type == RecipientRole.ReplyTo).Name.Should().Be("replayTo@luxoft.com");
     }
 
     [TestMethod]
@@ -58,7 +56,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         expectedNotifications.Should().HaveCount(1);
         expectedNotifications.Single().Message.Message.Should().BeEquivalentTo(message);
         expectedNotifications.Single()
-                             .Targets.Any(z => z.Type == RecipientRole.ReplyTo)
+                             .Recipients.Any(z => z.Type == RecipientRole.ReplyTo)
                              .Should()
                              .BeFalse();
     }
@@ -105,7 +103,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         var notification = expectedNotifications.Single();
         var attachment = notification.Attachments.Single();
         attachment.Content.Should().BeEquivalentTo(content);
-        attachment.Name.Should().Be(AttachmentLambda.AttachmentName);
+        attachment.Name.Should().Be(SampleSystem.Subscriptions.Metadata.Examples.Attachment.AttachmentSubscription.AttachmentName);
     }
 
     /// <summary>
@@ -128,7 +126,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         var notification = expectedNotifications.Single();
         var attachment = notification.Attachments.Single();
         Encoding.UTF8.GetString(attachment.Content).Should().BeEquivalentTo(content);
-        attachment.Name.Should().Be(AttachmentLambdaTemplateEvaluator.AttachmentName);
+        attachment.Name.Should().Be(SampleSystem.Subscriptions.Metadata.Examples.AttachmentTemplateEvaluator.AttachmentTemplateEvaluatorSubscription.AttachmentName);
     }
 
     /// <summary>

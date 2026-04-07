@@ -1,6 +1,4 @@
-﻿using System.Net.Mail;
-
-using Framework.Application.ApplicationVariable;
+﻿using Framework.Application.ApplicationVariable;
 using Framework.Application.Events;
 using Framework.Application.Lock;
 using Framework.Authorization.BLL;
@@ -79,7 +77,7 @@ public static class ServiceCollectionExtensions
             services
                 .AddBLLSystem<IConfigurationBLLContext, ConfigurationBLLContext>()
 
-                .AddScoped<IMessageSender<MailMessage>, LocalDbMailMessageSender>();
+                .AddScoped<IMessageSender<Notification.Domain.Notification>, LocalDbNotificationMessageSender>();
 
         private IServiceCollection AddConfigurationNamedLocks() =>
             services.AddKeyedSingleton<INamedLockSource>(

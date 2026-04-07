@@ -27,6 +27,8 @@ public abstract class Subscription<TDomainObject, TRenderingObject, TMessageTemp
 
     public virtual SubscriptionHeader Header => new(this.GetType().FullName!);
 
+    public string MessageTemplateCode { get; } = typeof(TMessageTemplate).FullName!;
+
     public abstract MailAddress Sender { get; }
 
     public virtual bool SendIndividualLetters { get; } = false;
@@ -41,9 +43,12 @@ public abstract class Subscription<TDomainObject, TRenderingObject, TMessageTemp
 
     public virtual ImmutableArray<SecurityRole> SecurityRoles { get; } = [];
 
-    public virtual bool IsProcessed(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions) => true;
+    public (string Subject, string Body) GetMessage(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions) =>
+        serviceProvider.GetRequiredService<TMessageTemplate>().Render(serviceProvider, versions);
 
     public abstract TRenderingObject ConvertToRenderingObject(IServiceProvider serviceProvider, TDomainObject domainObject);
+
+    public virtual bool IsProcessed(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions) => true;
 
     public virtual IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetTo(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions) => [];
 
@@ -53,9 +58,6 @@ public abstract class Subscription<TDomainObject, TRenderingObject, TMessageTemp
         [];
 
     public virtual IEnumerable<NotificationFilterGroup> GetNotificationFilterGroups(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions) => [];
-
-    public (string Subject, string Body) GetMessage(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions) =>
-        serviceProvider.GetRequiredService<TMessageTemplate>().Render(serviceProvider, versions);
 
     public virtual IEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions) => [];
 }

@@ -1,6 +1,7 @@
 ﻿using System.Net.Mail;
 
 using Framework.Core;
+using Framework.Notification.MailMessageModifier;
 using Framework.Notification.Settings;
 
 using Microsoft.Extensions.Configuration;
@@ -14,19 +15,14 @@ public static class ServiceCollectionExtensions
     {
         public void AddSmtpNotification(IConfiguration configuration, bool isProd)
         {
+            services.AddSingleton<IMailMessageModifier, HtmlMarkerMessageModifier>();
+            services.AddSingleton<IMailMessageModifier, RedirectToSupportMailMessageModifier>();
+            services.AddSingleton<IMailMessageModifier, RedirectToTestAddress>();
+            services.AddSingleton<IMailMessageModifier, RewriteReceiversMailMessageModifier>();
+            services.AddSingleton<IMailMessageModifier, SubjectCleanerMailMessageModifier>();
+
             services.AddSingleton<ISmtpClientFactory, SmtpClientFactory>();
-            services.AddSingleton<ISubjectCleaner, SubjectCleaner>();
-
-            services.AddSingleton<IRewriteReceiversService, RewriteReceiversService>();
-
-            if (isProd)
-            {
-                services.AddScoped<IMessageSender<MailMessage>, ProdSmtpMessageSender>();
-            }
-            else
-            {
-                services.AddScoped<IMessageSender<MailMessage>, TestSmtpMessageSender>();
-            }
+            services.AddSingleton<IMessageSender<MailMessage>, SmtpMessageSender>();
 
             services.Configure<SmtpSettings>(configuration.GetSection(nameof(SmtpSettings)));
             services.Configure<RewriteReceiversSettings>(configuration.GetSection(nameof(RewriteReceiversSettings)));

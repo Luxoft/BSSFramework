@@ -9,13 +9,13 @@ public static class MailMessageExtensions
 {
     extension(MailMessage mailMessage)
     {
-        public ImmutableArray<MailAddressRecipient> Recipients
+        public ImmutableArray<NotificationRecipient> Recipients
         {
             get =>
             [
-                .. mailMessage.To.Select(v => new MailAddressRecipient(v, RecipientRole.To)),
-                .. mailMessage.CC.Select(v => new MailAddressRecipient(v, RecipientRole.Copy)),
-                .. mailMessage.ReplyToList.Select(v => new MailAddressRecipient(v, RecipientRole.ReplyTo))
+                .. mailMessage.To.Select(v => new NotificationRecipient(v, RecipientRole.To)),
+                .. mailMessage.CC.Select(v => new NotificationRecipient(v, RecipientRole.Copy)),
+                .. mailMessage.ReplyToList.Select(v => new NotificationRecipient(v, RecipientRole.ReplyTo))
             ];
             set
             {

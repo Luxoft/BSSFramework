@@ -2,9 +2,9 @@
 
 namespace Framework.Notification.Domain;
 
-public record MailAddressRecipient(MailAddress Address, RecipientRole Role)
+public record NotificationRecipient(MailAddress Address, RecipientRole Role)
 {
-    public MailAddressRecipient(string address, RecipientRole role)
+    public NotificationRecipient(string address, RecipientRole role)
         : this(new MailAddress(address), role)
     {
     }

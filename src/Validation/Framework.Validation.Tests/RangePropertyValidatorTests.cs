@@ -11,7 +11,7 @@ public class RangePropertyValidatorTests
 {
     private IPropertyValidationContext<DomainObject, decimal> context = null!;
 
-    private readonly Framework.BLL.Validation.AvailableValues availableValues = Framework.BLL.Validation.AvailableValues.Default;
+    private readonly Framework.BLL.Validation.AvailableValues availableValues = BLL.Validation.AvailableValues.Default;
 
     [SetUp]
     public void Init()

@@ -3,16 +3,15 @@
 using CommonFramework;
 
 using Framework.Notification.Domain;
-using Framework.Notification.Extensions;
 using Framework.Notification.Settings;
 
 using Microsoft.Extensions.Options;
 
-namespace Framework.Notification;
+namespace Framework.Notification.MailMessageModifier;
 
-public class RewriteReceiversService(IOptions<RewriteReceiversSettings> settings) : IRewriteReceiversService
+public class RewriteReceiversMailMessageModifier(IOptions<RewriteReceiversSettings> settings) : IMailMessageModifier
 {
-    public void RewriteRecipients(MailMessage message) =>
+    public void Modify(MailMessage message) =>
 
         message.Recipients =
         [

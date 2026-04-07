@@ -8,7 +8,7 @@ namespace Framework.Notification.DTO;
 public class NotificationEventDTO
 {
     [DataMember]
-    public List<NotificationTargetDTO> Targets { get; set; }
+    public List<NotificationRecipientDTO> Recipients { get; set; }
 
     [DataMember]
     public List<NotificationAttachmentDTO> Attachments { get; set; }
@@ -25,25 +25,27 @@ public class NotificationEventDTO
     [DataMember]
     public NotificationMessage Message { get; set; }
 
+    [DataMember]
+    public NotificationTechnicalInformationDTO TechnicalInformation { get; set; }
+
     public NotificationEventDTO()
     {
     }
 
-    public NotificationEventDTO(System.Net.Mail.MailMessage mailMessage)
+    public NotificationEventDTO(Domain.Notification notification)
     {
+        var mailMessage = notification.Message;
+
         this.From = mailMessage.From!.Address;
         this.FromName = mailMessage.From.DisplayName;
 
-        this.Targets = mailMessage
-                       .To.Select(z => Tuple.Create(z.Address, RecipientRole.To))
-                       .Concat(mailMessage.CC.Select(z => Tuple.Create(z.Address, RecipientRole.Copy)))
-                       .Concat(mailMessage.ReplyToList.Select(z => Tuple.Create(z.Address, RecipientRole.ReplyTo)))
-                       .Select(z => new NotificationTargetDTO() { Name = z.Item1, Type = z.Item2 })
-                       .ToList();
+        this.Recipients = mailMessage.Recipients.Select(mar => new NotificationRecipientDTO(mar)).ToList();
         this.Subject = mailMessage.Subject;
 
-        this.Message = new NotificationMessage() { IsBodyHtml = mailMessage.IsBodyHtml, Message = mailMessage.Body };
+        this.Message = new () { IsBodyHtml = mailMessage.IsBodyHtml, Message = mailMessage.Body };
 
         this.Attachments = mailMessage.Attachments.Select(z => new NotificationAttachmentDTO(z)).ToList();
+
+        this.TechnicalInformation = new (notification.TechnicalInformation);
     }
 }

@@ -7,8 +7,6 @@ using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
 using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 using Framework.AutomationCore.Xunit;
 using Framework.AutomationCore.Xunit.ServiceEnvironment;
-using Framework.Core;
-using Framework.Notification.DTO;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,7 +41,6 @@ public class EnvironmentInitializer : AutomationCoreFrameworkInitializer
         services
             .AddGeneralDependencyInjection(configuration, s => s.AddExtensions(new SampleSystemNHibernateExtension()))
             .AddSingleton<SampleSystemInitializer>()
-            .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
             .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()
             .AddTestControllers([typeof(EmployeeController).Assembly])
             .AddSingleton<DataHelper>()

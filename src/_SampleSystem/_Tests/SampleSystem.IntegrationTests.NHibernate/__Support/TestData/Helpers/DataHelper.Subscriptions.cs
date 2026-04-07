@@ -1,51 +1,22 @@
-﻿using Framework.Authorization.Domain;
-using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
-using Framework.Configuration.Domain;
+﻿using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
 using Framework.Core;
-using Framework.Database.Domain;
+using Framework.Subscriptions;
 using Framework.Subscriptions.Domain;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 
 public partial class DataHelper
 {
-    public DomainType GetDomainType(Type domainObjectType) =>
-        this.EvaluateRead(context =>
-        {
-            var bll = context.Configuration.Logics.DomainTypeFactory.Create();
-            var result = bll.GetByType(domainObjectType);
-            return result;
-        });
+    public List<ITryResult<SubscriptionHeader>> ProcessSubscription<T>(T? prev, T? next)
 
-    public SecurityContextType GetSecurityContextType(Type domainObjectType) =>
-        this.EvaluateRead(context =>
-        {
-            var bll = context.Authorization.Logics.SecurityContextType;
-            var result = bll.GetObjectBy(x => x.Name == domainObjectType.Name);
-            return result;
-        });
+        where T : class =>
 
-    public List<ITryResult<SubscriptionHeader>> ProcessChangedObjectUntyped(
-            Type domainObjectType,
-            object prev,
-            object next) =>
         this.EvaluateWrite(context =>
         {
-            var bll = context.Configuration.Logics.Subscription;
+            var subscriptionService = context.ServiceProvider.GetRequiredService<ISubscriptionService>();
 
-            var result = bll.ProcessChangedObjectUntyped(
-                prev,
-                next,
-                domainObjectType);
-
-            return result;
-        });
-
-    public List<ITryResult<SubscriptionHeader>> ProcessChangedObjectInfo(ObjectModificationInfo<Guid> changedObjectInfo) =>
-        this.EvaluateWrite(context =>
-        {
-            var bll = context.Configuration.Logics.Subscription;
-            var result = bll.Process(changedObjectInfo);
-            return result;
+            return subscriptionService.Process(new DomainObjectVersions<T>(prev, next)).ToList();
         });
 }

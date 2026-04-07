@@ -1,12 +1,8 @@
 ﻿using Bss.Platform.Events.Abstractions;
 
-using CommonFramework.DependencyInjection;
-
 using Framework.Application.Jobs;
 using Framework.AutomationCore.Environment;
 using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
-using Framework.Core;
-using Framework.Notification.DTO;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,7 +42,6 @@ public class InitializeAndCleanup
 
             .AddIntegrationTests()
 
-            .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
             .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()
 
             .AddSingleton(new JobImpersonateData("sampleSystemTestJob"))

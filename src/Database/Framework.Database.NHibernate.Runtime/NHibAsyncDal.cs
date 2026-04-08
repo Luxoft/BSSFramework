@@ -65,7 +65,7 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
 
     public async Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken)
     {
-        if (identityInfo.Id.Getter(domainObject).IsDefault())
+        if (id.IsDefault())
         {
             throw new ArgumentOutOfRangeException(nameof(id), "The given identifier is not initialized");
         }

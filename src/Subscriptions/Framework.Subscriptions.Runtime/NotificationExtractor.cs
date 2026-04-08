@@ -13,7 +13,7 @@ namespace Framework.Subscriptions;
 
 public class NotificationExtractor<TDomainObject, TRenderingObject>(
     IServiceProvider serviceProvider,
-    IIdentityInfo<TDomainObject> identityInfo,
+    IIdentityInfoSource identityInfoSource,
     ISubscription<TDomainObject, TRenderingObject> subscription,
     IEmployeeEmailExtractor employeeEmailExtractor) : INotificationExtractor
     where TDomainObject : class
@@ -26,7 +26,8 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
         var technicalInformation = new NotificationTechnicalInformation(
             subscription.MessageTemplateCode,
             typeof(TDomainObject).FullName!,
-            (typedVersions.Previous ?? typedVersions.Current).Maybe(v => identityInfo.GetId(v) as Guid?));
+            identityInfoSource.TryGetIdentityInfo<TDomainObject>()
+                              .Maybe(identityInfo => identityInfo.GetId(typedVersions.Previous ?? typedVersions.Current!) as Guid?));
 
         return from mailMessage in this.GetMailMessages(typedVersions)
 

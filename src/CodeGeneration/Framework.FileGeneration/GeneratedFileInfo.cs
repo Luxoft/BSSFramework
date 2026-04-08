@@ -32,7 +32,7 @@ public record GeneratedFileInfo(string RelativePath, string Content)
         {
             prevContent = File.ReadAllText(absolutePath, usingEncoding);
 
-            if (prevContent != this.Content)
+            if (prevContent.Replace("\r\n", "\n") != this.Content.Replace("\r\n", "\n"))
             {
                 state = State.Modified;
                 this.InternalSave(absolutePath, checkOutService, usingEncoding);

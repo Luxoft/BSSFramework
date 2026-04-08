@@ -8,7 +8,7 @@ public class XDocumentFileRenderer(Func<StringBuilder, TextWriter> createWriter)
     private readonly Func<StringBuilder, TextWriter> createWriter = createWriter ?? throw new ArgumentNullException(nameof(createWriter));
 
     public XDocumentFileRenderer(Encoding encoding)
-            : this(sb => new EncodingStringWriter(sb, encoding))
+        : this(sb => new EncodingStringWriter(sb, encoding))
     {
     }
 

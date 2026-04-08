@@ -73,7 +73,7 @@ public class ChangeDefaultInitializedValueStrategyTest
         // Assert
         var clippedScript = SkipDefaultTemplate(resultScript).ToList();
         ClassicAssert.AreEqual(1, clippedScript.Count);
-        ClassicAssert.AreEqual("update Object set [test]=0\r\n", clippedScript.Single());
+        ClassicAssert.AreEqual($"update Object set [test]=0{Environment.NewLine}", clippedScript.Single());
     }
 
     private DatabaseScriptGeneratorStrategyInfo CreateDatabaseScriptGeneratorStrategyInfo(IEnumerable<DomainTypeMetadata> domainTypeMetadata)

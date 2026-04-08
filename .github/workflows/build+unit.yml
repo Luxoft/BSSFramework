@@ -30,20 +30,16 @@ jobs:
       - name: Build
         working-directory: ./src
         run: |
-          dotnet build ./BssFramework.slnx --no-restore
+          dotnet build ./BssFramework.slnx --no-restore --verbosity minimal
 
       - name: Check Generation
         run: |
           dotnet test src/_SampleSystem/_Tests/SampleSystem.CheckGenTests --no-build --verbosity normal
 
       - name: Unit tests
-        run: |
-                  
-          dotnet test src/_SampleSystem/_Tests/SampleSystem.UnitTests --no-build --verbosity normal       
-          
-          dotnet test src/Framework.ExpressionParsers.Tests.Unit --no-build --verbosity normal        
-          dotnet test src/Validation/Framework.Validation.Tests.Unit --no-build --verbosity normal          
+        run: |  
+          dotnet test src/_SampleSystem/_Tests/SampleSystem.UnitTests --no-build --verbosity normal
+          dotnet test src/Framework.ExpressionParsers.Tests --no-build --verbosity normal
+          dotnet test src/Validation/Framework.Validation.Tests --no-build --verbosity normal
           dotnet test src/Application/Framework.Application.Tests --no-build --verbosity normal
-          
           dotnet test src/Database/Framework.Database.NHibernate.DBGenerator.Tests --no-build --verbosity normal
-          

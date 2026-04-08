@@ -1,13 +1,12 @@
-﻿namespace SampleSystem.AuditDomain
+﻿namespace SampleSystem.AuditDomain;
+
+public class SampleSystemAuditRevisionEntity : SystemAuditRevisionPersistentDomainObjectBase
 {
-    public class SampleSystemAuditRevisionEntity : SystemAuditRevisionPersistentDomainObjectBase
-    {
-        private string author;
+    private string author;
 
-        private DateTime revisionDate;
+    private DateTime revisionDate;
 
-        public virtual string Author => this.author;
+    public virtual string Author => this.author;
 
-        public virtual DateTime RevisionDate => this.revisionDate;
-    }
+    public virtual DateTime RevisionDate => this.revisionDate;
 }

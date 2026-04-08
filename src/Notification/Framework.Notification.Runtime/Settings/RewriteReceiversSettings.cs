@@ -5,5 +5,5 @@ public class RewriteReceiversSettings
     /// <summary>
     /// Way to rewrite receivers.
     /// </summary>
-    public RewriteRules[] RewriteRules { get; set; }
+    public required RewriteRules[] RewriteRules { get; set; }
 }

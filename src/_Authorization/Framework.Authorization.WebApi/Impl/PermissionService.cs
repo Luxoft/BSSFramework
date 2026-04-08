@@ -29,9 +29,8 @@ public partial class AuthMainController
 
     [HttpPost]
     public IEnumerable<BusinessRoleVisualDTO> GetVisualBusinessRolesByPermission([FromForm] PermissionIdentityDTO permission) =>
-        new[]
-        {
-            this.Evaluate(
+    [
+        this.Evaluate(
                 DBSessionMode.Write,
                 evaluateData =>
                     evaluateData.Context.Logics.PermissionFactory
@@ -39,5 +38,5 @@ public partial class AuthMainController
                                 .GetById(permission.Id, true)
                                 .Role
                                 .ToVisualDTO(evaluateData.MappingService))
-        };
+    ];
 }

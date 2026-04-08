@@ -1,52 +1,26 @@
 ﻿namespace Framework.Subscriptions.Domain;
 
+public abstract record DomainObjectVersions
+{
+    public abstract Type DomainObjectType { get; }
+
+    public abstract DomainObjectChangeType ChangeType { get; }
+}
+
 /// <summary>
 /// Контейнер версий доменного объекта.
 /// </summary>
-/// <typeparam name="T">Тип доменного объекта</typeparam>
-public sealed class DomainObjectVersions<T> : IDomainObjectVersions
-    where T : class
+/// <typeparam name="TDomainObject">Тип доменного объекта</typeparam>
+public record DomainObjectVersions<TDomainObject>(TDomainObject? Previous, TDomainObject? Current) : DomainObjectVersions
+    where TDomainObject : class
 {
     /// <summary>
-    /// Создаёт экземпляр класса <see cref="DomainObjectVersions{T}"/>.
-    /// </summary>
-    /// <param name="previous">Предыдущая версия доменного объекта.</param>
-    /// <param name="current">Текущая версия доменного объекта.</param>
-    public DomainObjectVersions(T? previous, T? current)
-    {
-        if (previous == null && current == null)
-        {
-            throw new ArgumentException("both arguments (previous and current) can't be null");
-        }
-
-        this.Current = current;
-        this.Previous = previous;
-        this.DomainObjectType = this.GetDomainObjectType();
-    }
-
-    /// <summary>
-    /// Возвращает текущую версию доменного объекта.
-    /// </summary>
-    /// <value>
-    /// Текущая версия доменного объекта.
-    /// </value>
-    public T? Current { get; }
-
-    /// <summary>
-    /// Возвращает предыдущую версию доменного объекта.
-    /// </summary>
-    /// <value>
-    /// Предыдущая версия доменного объекта.
-    /// </value>
-    public T? Previous { get; }
-
-    /// <summary>
-    /// Реальный тип версий доменного объекта, сохранённый в этом экземпляре.
+    /// Тип доменного объекта
     /// </summary>
     /// <value>
     /// Тип доменного объекта.
     /// </value>
-    public Type DomainObjectType { get; }
+    public override Type DomainObjectType { get; } = typeof(TDomainObject);
 
     /// <summary>
     /// Возвращает тип изменения, произошедшего с доменным объектом.
@@ -54,73 +28,31 @@ public sealed class DomainObjectVersions<T> : IDomainObjectVersions
     /// <value>
     /// Тип изменения, произошедшего с доменным объектом.
     /// </value>
-    public DomainObjectChangeType ChangeType
-    {
-        get
-        {
-            if (this.Previous == null && this.Current != null)
-            {
-                return DomainObjectChangeType.Create;
-            }
-
-            if (this.Previous != null && this.Current != null)
-            {
-                return DomainObjectChangeType.Update;
-            }
-
-            if (this.Previous != null && this.Current == null)
-            {
-                return DomainObjectChangeType.Delete;
-            }
-
-            return DomainObjectChangeType.Unknown;
-        }
-    }
-
-    object? IDomainObjectVersions.Previous => this.Previous;
-
-    object? IDomainObjectVersions.Current => this.Current;
+    public override DomainObjectChangeType ChangeType { get; } = GetChangeType(Previous, Current);
 
     /// <inheritdoc/>
     public override string ToString() => $"DomainObjectType: {this.DomainObjectType}, Previous: {this.Previous}, Current: {this.Current}";
 
-    /// <inheritdoc/>
-    public override bool Equals(object? obj)
+    public DomainObjectVersions<TNewDomainObject> ChangeDomainObject<TNewDomainObject>(Func<TDomainObject, TNewDomainObject> selector)
+        where TNewDomainObject : class => new(this.Previous == null ? null : selector(this.Previous), this.Current == null ? null : selector(this.Current));
+
+    private static DomainObjectChangeType GetChangeType(TDomainObject? previous, TDomainObject? current)
     {
-        if (ReferenceEquals(null, obj))
+        if (previous == null && current != null)
         {
-            return false;
+            return DomainObjectChangeType.Create;
         }
-
-        if (ReferenceEquals(this, obj))
+        else if (previous != null && current != null)
         {
-            return true;
+            return DomainObjectChangeType.Update;
         }
-
-        return obj is DomainObjectVersions<T> && this.Equals((DomainObjectVersions<T>)obj);
-    }
-
-    /// <inheritdoc/>
-    public override int GetHashCode()
-    {
-        unchecked
+        else if (previous != null && current == null)
         {
-            return (EqualityComparer<T>.Default.GetHashCode(this.Current) * 397) ^ EqualityComparer<T>.Default.GetHashCode(this.Previous);
+            return DomainObjectChangeType.Delete;
+        }
+        else
+        {
+            throw new ArgumentException("Both arguments (previous and current) can't be null");
         }
     }
-
-    private Type GetDomainObjectType()
-    {
-        var previousType = this.Previous?.GetType();
-        var currentType = this.Current?.GetType();
-
-        if (previousType != null && currentType != null && previousType != currentType)
-        {
-            return typeof(object);
-        }
-
-        return previousType ?? currentType ?? typeof(T);
-    }
-
-    private bool Equals(DomainObjectVersions<T> other) => EqualityComparer<T>.Default.Equals(this.Current, other.Current) && EqualityComparer<T>.Default.Equals(this.Previous, other.Previous);
 }

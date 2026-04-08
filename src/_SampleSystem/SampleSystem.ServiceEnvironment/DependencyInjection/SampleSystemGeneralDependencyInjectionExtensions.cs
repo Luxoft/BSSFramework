@@ -1,11 +1,12 @@
 ﻿using CommonFramework;
 
 using Framework.Authorization.Environment;
-using Framework.Core.Visitors;
 using Framework.Infrastructure.DependencyInjection;
+using Framework.Subscriptions.DependencyInjection;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 using SampleSystem.Domain;
 using SampleSystem.EventMetadata;
@@ -15,54 +16,57 @@ namespace SampleSystem.ServiceEnvironment.DependencyInjection;
 
 public static class SampleSystemGeneralDependencyInjectionExtensions
 {
-    public static IServiceCollection AddGeneralDependencyInjection(this IServiceCollection services, IConfiguration configuration, Action<IBssFrameworkSetup> setupAction) =>
+    public static IServiceCollection AddGeneralDependencyInjection(
+        this IServiceCollection services,
+        IConfiguration configuration,
+        IHostEnvironment hostEnvironment,
+        Action<IBssFrameworkSetup> setupAction) =>
         services
 
-            .AddBssFramework(
-                rootSettings =>
-                {
-                    rootSettings
-                        .AddSecuritySystem(
-                            securitySettings =>
-                                securitySettings
-                                    .AddSecurityContexts()
-                                    .AddDomainSecurityServices()
-                                    .AddSecurityRoles()
-                                    .AddSecurityRules()
-                                    .AddCustomSecurityOperations()
-                                    .SetClientDomainModeSecurityRuleSource<SampleSystemClientDomainModeSecurityRuleSource>()
-                                    .AddClientSecurityRuleInfoSource(typeof(SampleSystemSecurityGroup))
-                                    .AddUserSource<Employee>(usb => usb.SetFilter(employee => employee.Active))
-                                    .AddVirtualPermissions()
-                                    .SetSecurityAdministratorRule(SampleSystemSecurityRole.PermissionAdministrator)
+            .AddBssFramework(rootSettings =>
+            {
+                rootSettings
+                    .AddSecuritySystem(securitySettings =>
+                                           securitySettings
+                                               .AddSecurityContexts()
+                                               .AddDomainSecurityServices()
+                                               .AddSecurityRoles()
+                                               .AddSecurityRules()
+                                               .AddCustomSecurityOperations()
+                                               .SetClientDomainModeSecurityRuleSource<SampleSystemClientDomainModeSecurityRuleSource>()
+                                               .AddClientSecurityRuleInfoSource(typeof(SampleSystemSecurityGroup))
+                                               .AddUserSource<Employee>(usb => usb.SetFilter(employee => employee.Active))
+                                               .AddVirtualPermissions()
+                                               .SetSecurityAdministratorRule(SampleSystemSecurityRole.PermissionAdministrator)
 
-                                    .AddAuthorizationSystem()
-                                    .AddConfigurationSecurity())
+                                               .AddAuthorizationSystem()
+                                               .AddConfigurationSecurity())
 
-                        .AddNamedLocks()
+                    .AddNamedLocks()
 
-                        .SetDomainObjectEventMetadata<SampleSystemDomainObjectEventMetadata>()
+                    .SetDomainObjectEventMetadata<SampleSystemDomainObjectEventMetadata>()
 
-                        .AddListeners()
+                    .AddListeners()
 
+                    // Legacy
 
-                        //.AddQueryVisitors()
+                    .AddSubscriptions<IBssFrameworkSetup, Employee, Framework.Authorization.Domain.Principal>(
+                        e => e.Email,
+                        [typeof(SampleSystem.Subscriptions.Metadata.Employee.Update.EmployeeUpdateSubscription).Assembly])
 
-                        // Legacy
+                    .AddSubscriptionManagers()
+                    .AddLegacyGenericServices()
+                    .AddContextEvaluators()
 
-                        .AddSubscriptionManagers()
-                        .AddLegacyGenericServices()
-                        .AddContextEvaluators()
+                    .AddLegacyDefaultGenericServices()
+                    .AddConfigurationSystemConstants()
+                    .AddConfigurationTargetSystems()
 
-                        .AddLegacyDefaultGenericServices()
-                        .AddConfigurationSystemConstants()
-                        .AddConfigurationTargetSystems()
+                    .AddBLLSystem()
 
-                        .AddBLLSystem()
+                    .AddSupportLegacyServices()
+                    .Pipe(setupAction);
+            })
 
-                        .AddSupportLegacyServices()
-                        .Pipe(setupAction);
-                })
-
-            .AddGeneralApplicationServices(configuration);
+            .AddGeneralApplicationServices(configuration, hostEnvironment);
 }

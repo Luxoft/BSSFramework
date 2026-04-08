@@ -4,61 +4,39 @@ using Framework.Application.Domain;
 using Framework.Application.Events;
 using Framework.BLL;
 using Framework.BLL.Services;
-using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3;
-using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Services;
-using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.TypeResolving;
+using Framework.Database;
+using Framework.Database.Domain;
+using Framework.Subscriptions;
 
 namespace Framework.Configuration.BLL.TargetSystemService;
 
-public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<IConfigurationBLLContext>, ITargetSystemService
+public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
+    IConfigurationBLLContext context,
+    TBLLContext targetSystemContext,
+    TargetSystemInfo<TPersistentDomainObjectBase> targetSystemInfo,
+    IEventOperationSender eventOperationSender,
+    ISubscriptionResolver subscriptionResolver,
+    ICurrentRevisionService currentRevisionService) : ITargetSystemService
 
-        where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
-        where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
+    where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
+    where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
 {
-    private readonly IEventOperationSender eventOperationSender;
+    private readonly Lazy<TargetSystem> lazyTargetSystem = LazyHelper.Create(() => context.Logics.TargetSystem.GetByName(targetSystemInfo.Name, true)!);
 
-    private readonly Lazy<TargetSystem> lazyTargetSystem;
+    public string Name { get; } = targetSystemInfo.Name;
 
-    /// <summary>
-    /// Создаёт экземпляр класса <see cref="TargetSystemService{TBLLContext, TPersistentDomainObjectBase}" />.
-    /// </summary>
-    /// <param name="context">Контекст конфигурации.</param>
-    /// <param name="targetSystemContext">Контекст целевой системы.</param>
-    /// <param name="subscriptionMetadataStore">Хранилище описаний подписок.</param>
-    public TargetSystemService(
-            IConfigurationBLLContext context,
-            TBLLContext targetSystemContext,
-            TargetSystemInfo<TPersistentDomainObjectBase> targetSystemInfo,
-            IEventOperationSender eventOperationSender,
-            SubscriptionMetadataStore subscriptionMetadataStore)
-            : base(context)
-    {
-        this.Name = targetSystemInfo.Name;
+    public TBLLContext TargetSystemContext { get; } = targetSystemContext;
 
-        this.TargetSystemContext = targetSystemContext;
-        this.eventOperationSender = eventOperationSender;
-
-        this.SubscriptionService = this.GetSubscriptionService(subscriptionMetadataStore);
-
-        this.lazyTargetSystem = LazyHelper.Create(() => context.Logics.TargetSystem.GetByName(this.Name, true));
-
-        this.TypeResolver = this.TypeResolverS.OverrideInput((DomainType domainType) => domainType.FullTypeName);
-    }
-
-    public string Name { get; }
-
-    public TBLLContext TargetSystemContext { get; }
+    public Type BLLContextType { get; } = typeof(TBLLContext);
 
     public ITypeResolver<string> TypeResolverS => this.TargetSystemContext.TypeResolver;
 
-    public ITypeResolver<DomainType> TypeResolver { get; }
+    public ITypeResolver<DomainType> TypeResolver { get; } = targetSystemContext.TypeResolver.OverrideInput((DomainType domainType) => domainType.FullTypeName);
 
     public TargetSystem TargetSystem => this.lazyTargetSystem.Value;
-
-    public IRevisionSubscriptionSystemService SubscriptionService { get; }
 
     public Type PersistentDomainObjectBaseType => typeof(TPersistentDomainObjectBase);
 
@@ -75,29 +53,46 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLL
     }
 
     private void ForceEvent<TDomainObject>(string operationName, long? revision, Guid domainObjectId)
-            where TDomainObject : class, TPersistentDomainObjectBase
+        where TDomainObject : class, TPersistentDomainObjectBase
     {
         var bll = this.TargetSystemContext.Logics.Default.Create<TDomainObject>();
 
-        var domainObject = revision == null ? bll.GetById(domainObjectId, true)
-                                   : bll.GetObjectByRevision(domainObjectId, revision.Value);
+        var domainObject = revision == null
+                               ? bll.GetById(domainObjectId, true)
+                               : bll.GetObjectByRevision(domainObjectId, revision.Value);
 
         var domainObjectEvent = new EventOperation(operationName);
 
-        this.eventOperationSender.Send(domainObject, domainObjectEvent, CancellationToken.None).GetAwaiter().GetResult();
+        eventOperationSender.Send(domainObject, domainObjectEvent, CancellationToken.None).GetAwaiter().GetResult();
     }
 
     public bool IsAssignable(Type domainType) => typeof(TPersistentDomainObjectBase).IsAssignableFrom(domainType);
 
-    private IRevisionSubscriptionSystemService GetSubscriptionService(
-            SubscriptionMetadataStore subscriptionMetadataStore)
+    /// <summary>
+    ///     Возвращает данные об изменениях доменного объекта.
+    /// </summary>
+    /// <param name="changes">Описатель операций, проведенных над объектом в слое доступа к данным.</param>
+    /// <returns>Экземпляр <see cref="IEnumerable{ObjectModificationInfo}" />.</returns>
+    /// <exception cref="ArgumentNullException">Аргумент changes равен null.</exception>
+    public IEnumerable<ObjectModificationInfo<Guid>> GetObjectModifications(DALChanges changes)
     {
-        var subscriptionServicesFactory = new SubscriptionServicesFactory<TBLLContext, TPersistentDomainObjectBase>(
-            this.Context,
-            this.TargetSystemContext.Logics.Default,
-            this.TargetSystemContext,
-            subscriptionMetadataStore);
+        var revisionNumber = currentRevisionService.GetCurrentRevision();
 
-        return new RevisionSubscriptionSystemService<TBLLContext, TPersistentDomainObjectBase>(subscriptionServicesFactory);
+        if (revisionNumber != 0)
+        {
+            foreach (var item in changes.GetSubset(typeof(TPersistentDomainObjectBase)).ToChangeTypeDict())
+            {
+                if (subscriptionResolver.DomainTypes.Contains(item.Key.Type))
+                {
+                    yield return new ObjectModificationInfo<Guid>
+                                 {
+                                     Identity = ((TPersistentDomainObjectBase)item.Key.Object).Id,
+                                     Revision = revisionNumber,
+                                     ModificationType = item.Value.ToModificationType(),
+                                     TypeInfo = new TypeInfoDescription(item.Key.Type)
+                                 };
+                }
+            }
+        }
     }
 }

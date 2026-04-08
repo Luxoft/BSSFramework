@@ -41,12 +41,12 @@ public class SentMessage : AuditPersistentDomainObjectBase
         this.from = from;
         this.contextObjectId = contextObjectId;
         this.contextObjectType = contextObjectType;
-        this.copy = copy;
         this.comment = comment;
         this.templateName = templateName;
         this.message = message;
         this.subject = subject;
         this.to = to;
+        this.copy = copy;
         this.replyTo = replyTo;
     }
 

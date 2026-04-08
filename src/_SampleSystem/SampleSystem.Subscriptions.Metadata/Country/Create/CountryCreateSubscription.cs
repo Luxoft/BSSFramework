@@ -1,25 +1,26 @@
-﻿using ASP;
+﻿using System.Net.Mail;
+
+using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Country.Create;
 
 /// <inheritdoc />
-public sealed class CountryCreateSubscription
-        : SubscriptionMetadataBase<Domain.Country, _Country_Create_MessageTemplate_cshtml>
+public class CountryCreateSubscription : Subscription<Domain.Country, _Country_Create_MessageTemplate_cshtml>
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CountryCreateSubscription"/> class.
-    /// </summary>
-    public CountryCreateSubscription()
+    public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Create;
+
+    public override MailAddress Sender { get; } = new ("SampleSystem@luxoft.com", "SampleSystem");
+
+    public override bool InlineAttachments { get; } = false;
+
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Country>> GetTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Country> versions)
     {
-        this.SenderName = "SampleSystem";
-        this.SenderEmail = "SampleSystem@luxoft.com";
-        this.ConditionLambda = new ConditionLambda();
-        this.GenerationLambda = new GenerationLambda();
-        this.CopyGenerationLambda = new CopyGenerationLambda();
-        this.RecipientsSelectorMode = Framework.Subscriptions.Domain.RecipientsSelectorMode.Union;
-        this.SendIndividualLetters = true;
-        this.ExcludeCurrentUser = true;
-        this.IncludeAttachments = false;
-        this.AllowEmptyListOfRecipients = false;
+        yield return new("tester@luxoft.com", versions);
+    }
+
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Country>> GetCopyTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Country> versions)
+    {
+        yield return new("tester@luxoft.com", versions);
     }
 }

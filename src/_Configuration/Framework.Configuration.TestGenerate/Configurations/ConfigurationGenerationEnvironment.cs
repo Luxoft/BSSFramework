@@ -60,10 +60,6 @@ public partial class ConfigurationGenerationEnvironment : GenerationEnvironmentB
 
         new DomainTypeRootExtendedMetadataBuilder()
 
-            .Add<CodeFirstSubscription>(tb =>
-                                            tb.AddAttribute(new BLLViewRoleAttribute())
-                                              .AddAttribute(new BLLSaveRoleAttribute { AllowCreate = false }))
-
             .Add<DomainObjectEvent>(tb =>
                                         tb.AddAttribute(new BLLRoleAttribute()))
 

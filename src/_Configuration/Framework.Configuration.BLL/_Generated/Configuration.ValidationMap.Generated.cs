@@ -22,51 +22,6 @@ namespace Framework.Configuration.BLL
             this._defaultValidatorMap = new Framework.Validation.ValidationMap(serviceProvider);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.CodeFirstSubscription, string>> GetCodeFirstSubscription_CodeValidators()
-        {
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.CodeFirstSubscription, string>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.CodeFirstSubscription>(512);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.CodeFirstSubscription, System.DateTime?>> GetCodeFirstSubscription_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.CodeFirstSubscription>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.CodeFirstSubscription, string>> GetCodeFirstSubscription_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.CodeFirstSubscription>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.CodeFirstSubscription, string>> GetCodeFirstSubscription_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.CodeFirstSubscription>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.CodeFirstSubscription, System.DateTime?>> GetCodeFirstSubscription_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.CodeFirstSubscription>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.CodeFirstSubscription>> GetCodeFirstSubscriptionProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.CodeFirstSubscription> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.CodeFirstSubscription, string>(source => source.Code, currentClass, this.GetCodeFirstSubscription_CodeValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.CodeFirstSubscription, System.DateTime?>(source => source.CreateDate, currentClass, this.GetCodeFirstSubscription_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.CodeFirstSubscription, string>(source => source.CreatedBy, currentClass, this.GetCodeFirstSubscription_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.CodeFirstSubscription, string>(source => source.ModifiedBy, currentClass, this.GetCodeFirstSubscription_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.CodeFirstSubscription, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetCodeFirstSubscription_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel> GetCodeFirstSubscriptionRootFilterModelValidationMap()
-        {
-            return Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>.Empty;
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.CodeFirstSubscription> GetCodeFirstSubscriptionValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.CodeFirstSubscription>(this.GetCodeFirstSubscriptionProperties);
-        }
-        
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.DomainObjectEvent, System.DateTime?>> GetDomainObjectEvent_CreateDateValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.DomainObjectEvent>(this.AvailableValues.GetAvailableRange<System.DateTime>());
@@ -357,15 +312,7 @@ namespace Framework.Configuration.BLL
         
         protected override Framework.Validation.IClassValidationMap<TSource> GetInternalClassMap<TSource>()
         {
-            if ((typeof(TSource) == typeof(Framework.Configuration.Domain.CodeFirstSubscription)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetCodeFirstSubscriptionValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetCodeFirstSubscriptionRootFilterModelValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.DomainObjectEvent)))
+            if ((typeof(TSource) == typeof(Framework.Configuration.Domain.DomainObjectEvent)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetDomainObjectEventValidationMap()));
             }

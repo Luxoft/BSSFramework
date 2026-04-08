@@ -13,7 +13,7 @@ public static class CodePrimitiveExpressionExtensions
         if (value == null) throw new ArgumentNullException(nameof(value));
 
         return value.ToString()
-                    .Split(new[] { ", " }, StringSplitOptions.None)
+                    .Split([", "], StringSplitOptions.None)
                     .Select(flag => value.GetType().ToTypeReferenceExpression().ToFieldReference(flag))
                     .Aggregate<CodeExpression>((v1, v2) => new CodeBinaryOperatorExpression(v1, CodeBinaryOperatorType.BitwiseOr, v2));
     }

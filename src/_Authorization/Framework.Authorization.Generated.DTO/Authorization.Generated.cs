@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Framework.Core;
-
 namespace Framework.Authorization.Generated.DTO
 {
     
@@ -2567,7 +2565,7 @@ namespace Framework.Authorization.Generated.DTO
         
         private string _comment;
         
-        private Period _period = Period.Eternity;
+        private Framework.Core.Period _period = Framework.Core.Period.Eternity;
         
         public PermissionSimpleDTO()
         {
@@ -2607,7 +2605,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
+        public Framework.Core.Period Period
         {
             get
             {
@@ -2737,7 +2735,7 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.Guid _id;
         
-        private Period _period;
+        private Framework.Core.Period _period;
         
         private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO> _restrictions = new System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO>();
         
@@ -2865,7 +2863,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
+        public Framework.Core.Period Period
         {
             get
             {
@@ -2996,7 +2994,7 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.DateTime? _modifyDate;
         
-        private Period _period;
+        private Framework.Core.Period _period;
         
         private Framework.Authorization.Generated.DTO.PrincipalEventSimpleDTO _principal;
         
@@ -3092,7 +3090,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
+        public Framework.Core.Period Period
         {
             get
             {
@@ -3161,7 +3159,7 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.DateTime? _modifyDate;
         
-        private Period _period;
+        private Framework.Core.Period _period;
         
         public PermissionEventSimpleDTO()
         {
@@ -3251,7 +3249,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Period Period
+        public Framework.Core.Period Period
         {
             get
             {

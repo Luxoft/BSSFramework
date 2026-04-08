@@ -26,8 +26,6 @@ namespace Framework.Configuration.BLL
         public ConfigurationValidatorBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
                 base(context, cache)
         {
-            base.RegisterHandler<Framework.Configuration.Domain.CodeFirstSubscription>(this.GetCodeFirstSubscriptionValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>(this.GetCodeFirstSubscriptionRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.DomainObjectEvent>(this.GetDomainObjectEventValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.DomainObjectModification>(this.GetDomainObjectModificationValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.DomainObjectNotification>(this.GetDomainObjectNotificationValidationResult);
@@ -44,16 +42,6 @@ namespace Framework.Configuration.BLL
             base.RegisterHandler<Framework.Configuration.Domain.SystemConstantRootFilterModel>(this.GetSystemConstantRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.TargetSystem>(this.GetTargetSystemValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.TargetSystemRootFilterModel>(this.GetTargetSystemRootFilterModelValidationResult);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetCodeFirstSubscriptionRootFilterModelValidationResult(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetCodeFirstSubscriptionValidationResult(Framework.Configuration.Domain.CodeFirstSubscription source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
         protected virtual Framework.Validation.ValidationResult GetDomainObjectEventValidationResult(Framework.Configuration.Domain.DomainObjectEvent source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)

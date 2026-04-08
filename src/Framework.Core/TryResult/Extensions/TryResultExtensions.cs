@@ -171,7 +171,7 @@ public static partial class TryResultExtensions
     public static IEnumerable<Exception> GetErrors<T>(this IEnumerable<ITryResult<T>> source) =>
         from tryRes in source
 
-        select tryRes.Match(_ => default(Exception), ex => ex) into ex
+        select tryRes.Match(_ => null!, ex => ex) into ex
 
         where ex != null
 
@@ -180,7 +180,7 @@ public static partial class TryResultExtensions
     public static IEnumerable<T> GetResults<T>(this IEnumerable<ITryResult<T>> source) =>
         from tryRes in source
 
-        select tryRes.Match(res => new { res }, _ => null) into resCont
+        select tryRes.Match(res => new { res }, _ => null!) into resCont
 
         where resCont != null
 

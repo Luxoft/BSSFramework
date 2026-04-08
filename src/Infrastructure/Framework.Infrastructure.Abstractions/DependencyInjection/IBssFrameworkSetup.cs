@@ -3,6 +3,7 @@
 namespace Framework.Infrastructure.DependencyInjection;
 
 public interface IBssFrameworkSetup<out TSelf>
+    where TSelf : IBssFrameworkSetup<TSelf>
 {
     TSelf AddExtensions(IBssFrameworkExtension extension);
 

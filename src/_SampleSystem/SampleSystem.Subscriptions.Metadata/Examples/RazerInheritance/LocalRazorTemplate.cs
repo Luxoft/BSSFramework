@@ -1,16 +1,11 @@
-﻿using System.Globalization;
+﻿using Framework.Subscriptions.Metadata;
 
-using Framework.Subscriptions;
-
-using SampleSystem.Domain;
-
-namespace LuxIM.Subscriptions.Metadata;
+namespace SampleSystem.Subscriptions.Metadata.Examples.RazerInheritance;
 
 public abstract class LocalRazorTemplate<T> : RazorTemplate<T>
+    where T : class
 {
-    private static readonly CultureInfo CultureInfo = new CultureInfo("en-US");
+    protected string GetDateString(DateTime? dateTime) => dateTime.GetValueOrDefault().Date.ToString("dd MMM yyyy", this.Culture);
 
-    protected string GetDateString(DateTime? dateTime) => dateTime.GetValueOrDefault().Date.ToString("dd MMM yyyy", CultureInfo);
-
-    protected string GetEmployeeName(Employee employee) => employee.NameNative.FullName;
+    protected string GetEmployeeName(Domain.Employee employee) => employee.NameNative.FullName;
 }

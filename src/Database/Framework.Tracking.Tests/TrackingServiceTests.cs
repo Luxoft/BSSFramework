@@ -75,7 +75,7 @@ public class TrackingServiceTests
         var domainObject = new PersistentDomainObject();
         this.objectStateService.IsNew(domainObject).Returns(false);
         this.objectStateService.IsRemoving(domainObject).Returns(false);
-        this.objectStateService.GetModifiedObjectStates(domainObject).Returns(Enumerable.Empty<ObjectState>());
+        this.objectStateService.GetModifiedObjectStates(domainObject).Returns([]);
 
         // Act
         var result = this.trackingService.GetChanges(domainObject);
@@ -92,7 +92,7 @@ public class TrackingServiceTests
         var change = new ObjectState("Name", "2", "1", true);
         this.objectStateService.IsNew(domainObject).Returns(false);
         this.objectStateService.IsRemoving(domainObject).Returns(false);
-        this.objectStateService.GetModifiedObjectStates(domainObject).Returns(new[] { change });
+        this.objectStateService.GetModifiedObjectStates(domainObject).Returns([change]);
 
         // Act
         var result = this.trackingService.GetChanges(domainObject);
@@ -185,7 +185,7 @@ public class TrackingServiceTests
         var change = new ObjectState("Name", "2", "1", true);
         this.objectStateService.IsNew(domainObject).Returns(false);
         this.objectStateService.IsRemoving(domainObject).Returns(false);
-        this.objectStateService.GetModifiedObjectStates(domainObject).Returns(new[] { change });
+        this.objectStateService.GetModifiedObjectStates(domainObject).Returns([change]);
 
         // Act
         var result = this.trackingService.GetChangingState(domainObject);
@@ -201,7 +201,7 @@ public class TrackingServiceTests
         var domainObject = new PersistentDomainObject();
         this.objectStateService.IsNew(domainObject).Returns(false);
         this.objectStateService.IsRemoving(domainObject).Returns(false);
-        this.objectStateService.GetModifiedObjectStates(domainObject).Returns(Enumerable.Empty<ObjectState>());
+        this.objectStateService.GetModifiedObjectStates(domainObject).Returns([]);
 
         // Act
         var result = this.trackingService.GetChangingState(domainObject);
@@ -219,7 +219,7 @@ public class TrackingServiceTests
         var domainObject = new PersistentDomainObject { Name = CurrName };
         this.objectStateService.IsNew(domainObject).Returns(false);
         this.objectStateService.IsRemoving(domainObject).Returns(false);
-        this.objectStateService.GetModifiedObjectStates(domainObject).Returns(Enumerable.Empty<ObjectState>());
+        this.objectStateService.GetModifiedObjectStates(domainObject).Returns([]);
 
         // Act
         var result = this.trackingService.GetPrevValue(domainObject, x => x.Name, DefaultName);
@@ -239,7 +239,7 @@ public class TrackingServiceTests
         var change = new ObjectState("Name", CurrName, PrevName, true);
         this.objectStateService.IsNew(domainObject).Returns(false);
         this.objectStateService.IsRemoving(domainObject).Returns(false);
-        this.objectStateService.GetModifiedObjectStates(domainObject).Returns(new[] { change });
+        this.objectStateService.GetModifiedObjectStates(domainObject).Returns([change]);
 
         // Act
         var result = this.trackingService.GetPrevValue(domainObject, x => x.Name, DefaultName);
@@ -256,7 +256,7 @@ public class TrackingServiceTests
         var domainObject = new PersistentDomainObject { Name = CurrName };
         this.objectStateService.IsNew(domainObject).Returns(false);
         this.objectStateService.IsRemoving(domainObject).Returns(false);
-        this.objectStateService.GetModifiedObjectStates(domainObject).Returns(Enumerable.Empty<ObjectState>());
+        this.objectStateService.GetModifiedObjectStates(domainObject).Returns([]);
 
         // Act
         var result = this.trackingService.GetPrevOrCurrentValue(domainObject, x => x.Name);
@@ -275,7 +275,7 @@ public class TrackingServiceTests
         var change = new ObjectState("Name", CurrName, PrevName, true);
         this.objectStateService.IsNew(domainObject).Returns(false);
         this.objectStateService.IsRemoving(domainObject).Returns(false);
-        this.objectStateService.GetModifiedObjectStates(domainObject).Returns(new[] { change });
+        this.objectStateService.GetModifiedObjectStates(domainObject).Returns([change]);
 
         // Act
         var result = this.trackingService.GetPrevOrCurrentValue(domainObject, x => x.Name);

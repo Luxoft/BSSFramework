@@ -1,20 +1,22 @@
-﻿namespace SampleSystem.Subscriptions.Metadata.DataModel.Create;
+﻿using System.Net.Mail;
 
-/* TODO: Uncomment this after fixing #IADFRAME-1634
-public sealed class DateModelCreateSubscription : SubscriptionMetadataBase<DateModel, _DataModel_Create_MessageTemplate_cshtml>
+using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
+
+using SampleSystem.Domain.Models.Custom;
+
+namespace SampleSystem.Subscriptions.Metadata.DataModel.Create;
+
+public class DateModelCreateSubscription : Subscription<DateModel, _DataModel_Create_MessageTemplate_cshtml>
 {
-    public DateModelCreateSubscription()
+    public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Create;
+
+    public override MailAddress Sender { get; } = new("DateModelCreateSampleSystem@luxoft.com", "DateModelCreateSampleSystem");
+
+    public override bool InlineAttachments { get; } = false;
+
+    public override IEnumerable<NotificationMessageGenerationInfo<DateModel>> GetTo(IServiceProvider _, DomainObjectVersions<DateModel> versions)
     {
-        this.SenderName = "DateModelCreateSampleSystem";
-        this.SenderEmail = "DateModelCreateSampleSystem@luxoft.com";
-        this.ConditionLambda = new ConditionLambda();
-        this.GenerationLambda = new GenerationLambda();
-        this.RecipientsSelectorMode = Framework.Subscriptions.Domain.RecipientsSelectorMode.Union;
-        this.SubBusinessRoleIds = Enumerable.Empty<Guid>();
-        this.SendIndividualLetters = true;
-    this.ExcludeCurrentUser = true;
-    this.IncludeAttachments = false;
-    this.AllowEmptyListOfRecipients = false;
+        yield return new("tester@luxoft.com", versions);
+    }
 }
-}
-*/

@@ -1,28 +1,31 @@
-﻿using ASP;
+﻿using System.Net.Mail;
+
+using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Employee.Update;
 
 /// <inheritdoc />
-public sealed class EmployeeUpdateSubscription
-        : SubscriptionMetadataBase<Domain.Employee, _Employee_Update_MessageTemplate_cshtml>
+public class EmployeeUpdateSubscription : Subscription<Domain.Employee, _Employee_Update_MessageTemplate_cshtml>
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="EmployeeUpdateSubscription"/> class.
-    /// </summary>
-    public EmployeeUpdateSubscription()
-    {
-        this.SenderName = "SampleSystem";
-        this.SenderEmail = "SampleSystem@luxoft.com";
-        this.ConditionLambda = new ConditionLambda();
-        this.GenerationLambda = new GenerationLambda();
-        this.CopyGenerationLambda = new CopyGenerationLambda();
+    public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
 
-        this.SecurityItemSourceLambdas = [new SecurityItemSourceLambda()];
-        this.RecipientsSelectorMode = Framework.Subscriptions.Domain.RecipientsSelectorMode.Union;
-        this.SendIndividualLetters = true;
-        this.ExcludeCurrentUser = true;
-        this.IncludeAttachments = false;
-        this.AllowEmptyListOfRecipients = false;
-        this.ReplyToGenerationLambda = new ReplyToGenerationLambda();
+    public override MailAddress Sender { get; } = new("SampleSystem@luxoft.com", "SampleSystem");
+
+    public override bool InlineAttachments { get; } = false;
+
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
+    {
+        yield return new("tester@luxoft.com", versions);
+    }
+
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetCopyTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
+    {
+        yield return new("tester@luxoft.com", versions);
+    }
+
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetReplyTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
+    {
+        yield return new("replayTo@luxoft.com", versions);
     }
 }

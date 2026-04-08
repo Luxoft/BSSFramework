@@ -22,6 +22,8 @@
 
     <ProjectReference Include="..\..\Notification\Framework.Notification\Framework.Notification.csproj" />
 
+    <ProjectReference Include="..\..\Subscriptions\Framework.Subscriptions\Framework.Subscriptions.csproj" />
+
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Environment\Framework.Authorization.Environment.csproj" />
 
     <ProjectReference Include="..\SampleSystem.AuditDomain\SampleSystem.AuditDomain.csproj" />

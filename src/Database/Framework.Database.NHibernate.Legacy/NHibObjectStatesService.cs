@@ -14,12 +14,12 @@ public class NHibObjectStatesService(ISession session) : IObjectStateService
     {
         if (entity == null)
         {
-            return Array.Empty<ObjectState>();
+            return [];
         }
 
         if (session.DefaultReadOnly)
         {
-            return Array.Empty<ObjectState>();
+            return [];
         }
 
         var sessionImpl = session.GetSessionImplementation();
@@ -30,7 +30,7 @@ public class NHibObjectStatesService(ISession session) : IObjectStateService
 
         if (null == oldEntry)
         {
-            return Array.Empty<ObjectState>();
+            return [];
         }
 
         var persister = session.GetPersister(oldEntry);
@@ -89,7 +89,7 @@ public class NHibObjectStatesService(ISession session) : IObjectStateService
                 }
 
                 return currentCollection
-                       .SelectMany(z => session.GetEntityEntry(z) != null ? this.GetModifiedObjectStates(z) : new[] { new ObjectState(), })
+                       .SelectMany(z => session.GetEntityEntry(z) != null ? this.GetModifiedObjectStates(z) : [new ObjectState()])
                        .Any();
             }
 

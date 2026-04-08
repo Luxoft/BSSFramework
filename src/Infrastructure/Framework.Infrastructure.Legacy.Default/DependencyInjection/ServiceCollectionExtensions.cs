@@ -1,6 +1,4 @@
-﻿using CommonFramework.DependencyInjection;
-
-using Framework.Application.ApplicationVariable;
+﻿using Framework.Application.ApplicationVariable;
 using Framework.Application.Events;
 using Framework.Application.Lock;
 using Framework.Authorization.BLL;
@@ -13,17 +11,11 @@ using Framework.BLL.Services;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Jobs;
 using Framework.Configuration.BLL.Notification;
-using Framework.Configuration.BLL.Subscriptions;
-using Framework.Configuration.BLL.SubscriptionSystemService;
-using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
 using Framework.Configuration.Generated.DTO;
-using Framework.Core.MessageSender;
-using Framework.Database;
+using Framework.Core;
 using Framework.Infrastructure.LocalDBEvents;
 using Framework.Infrastructure.SubscriptionService;
-using Framework.Notification.Domain;
-using Framework.Notification.DTO;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -44,9 +36,7 @@ public static class ServiceCollectionExtensions
             services.AddScoped<IApplicationVariableStorage, ConfigurationApplicationVariableStorage>();
             services.AddScoped<IEventSystem, ConfigurationEventSystem>();
 
-            services.AddSingleton<SubscriptionMetadataStore>();
-            services.AddSingleton<ISubscriptionMetadataFinder, SubscriptionMetadataFinder>();
-            services.AddScoped<ISubscriptionInitializer, SubscriptionInitializer>();
+            services.AddScoped<IDomainObjectVersionsResolverFactory, DomainObjectVersionsResolverFactory>();
 
             services.AddScoped<ISystemConstantInitializer, SystemConstantInitializer>();
 
@@ -55,7 +45,7 @@ public static class ServiceCollectionExtensions
             services.AddScoped<IAuthorizationDTOMappingService, AuthorizationServerPrimitiveDTOMappingService>();
             services.AddScoped<IConfigurationDTOMappingService, ConfigurationServerPrimitiveDTOMappingService>();
 
-            services.AddScoped<IStandardSubscriptionService, LocalDBSubscriptionService>();
+            services.AddScoped<IObjectModificationProcessor, LocalDbObjectModificationProcessor>();
 
             services.AddScoped<IRootSecurityService, RootSecurityService>();
 
@@ -86,11 +76,8 @@ public static class ServiceCollectionExtensions
         private IServiceCollection AddConfigurationBLL() =>
             services
                 .AddBLLSystem<IConfigurationBLLContext, ConfigurationBLLContext>()
-                .AddScoped<ISubscriptionBLL, SubscriptionBLL>()
 
-                .AddScopedFrom<ICurrentRevisionService, IDBSession>()
-                .AddScoped<IMessageSender<MessageTemplateNotification>, TemplateMessageSender>()
-                .AddScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>();
+                .AddScoped<IMessageSender<Notification.Domain.Notification>, LocalDbNotificationMessageSender>();
 
         private IServiceCollection AddConfigurationNamedLocks() =>
             services.AddKeyedSingleton<INamedLockSource>(
@@ -103,7 +90,6 @@ public static class ServiceCollectionExtensions
         securitySystemSettings
             .AddDomainSecurity<Sequence>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
             .AddDomainSecurity<SystemConstant>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
-            .AddDomainSecurity<CodeFirstSubscription>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
             .AddDomainSecurity<TargetSystem>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
             .AddDomainSecurity<DomainType>(b => b.SetView(SecurityRule.Disabled));
 }

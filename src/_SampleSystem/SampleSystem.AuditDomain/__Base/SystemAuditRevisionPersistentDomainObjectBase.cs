@@ -1,15 +1,14 @@
 ﻿using Framework.Application.Domain;
 
-namespace SampleSystem.AuditDomain
+namespace SampleSystem.AuditDomain;
+
+public abstract class SystemAuditRevisionPersistentDomainObjectBase : IIdentityObject<long>
 {
-    public abstract class SystemAuditRevisionPersistentDomainObjectBase : IIdentityObject<long>
+    private long id;
+
+    protected SystemAuditRevisionPersistentDomainObjectBase()
     {
-        private long id;
-
-        protected SystemAuditRevisionPersistentDomainObjectBase()
-        {
-        }
-
-        public virtual long Id => this.id;
     }
+
+    public virtual long Id => this.id;
 }

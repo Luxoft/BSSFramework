@@ -42,7 +42,7 @@ public class AuditDTOModelFileGenerator<TConfiguration>(TConfiguration configura
 
         return new CodeTypeDeclaration(this.Configuration.DomainObjectPropertiesRevisionDTOTypeName)
             {
-                CustomAttributes = new CodeAttributeDeclarationCollection(new[] { new CodeAttributeDeclaration(typeof(DataContractAttribute).FullName) }),
+                CustomAttributes = new CodeAttributeDeclarationCollection([new CodeAttributeDeclaration(typeof(DataContractAttribute).FullName)]),
             }
             .Self(z => z.BaseTypes.Add(baseType));
     }
@@ -144,7 +144,7 @@ public class AuditDTOModelFileGenerator<TConfiguration>(TConfiguration configura
 
         return new CodeTypeDeclaration(this.Configuration.PropertyRevisionTypeName)
                {
-                   CustomAttributes = new CodeAttributeDeclarationCollection(new[] { new CodeAttributeDeclaration(typeof(DataContractAttribute).FullName), }),
+                   CustomAttributes = new CodeAttributeDeclarationCollection([new CodeAttributeDeclaration(typeof(DataContractAttribute).FullName)]),
                }
                .Self(z => z.BaseTypes.Add(this.Configuration.PropertyRevisionTypeName))
                .Self(z => z.TypeParameters.Add("TValue"))

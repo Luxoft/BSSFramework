@@ -31,24 +31,6 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class CodeFirstSubscriptionBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.CodeFirstSubscription>, Framework.Configuration.BLL.ICodeFirstSubscriptionBLL
-    {
-        
-        public CodeFirstSubscriptionBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.CodeFirstSubscription> securityProvider) : 
-                base(context, securityProvider)
-        {
-        }
-    }
-    
-    public partial class CodeFirstSubscriptionBLLFactory : Framework.BLL.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.ICodeFirstSubscriptionBLL, Framework.Configuration.BLL.CodeFirstSubscriptionBLL, Framework.Configuration.Domain.CodeFirstSubscription>, Framework.Configuration.BLL.ICodeFirstSubscriptionBLLFactory
-    {
-        
-        public CodeFirstSubscriptionBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
     public partial class DomainObjectEventBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectEvent>, Framework.Configuration.BLL.IDomainObjectEventBLL
     {
         
@@ -69,11 +51,6 @@ namespace Framework.Configuration.BLL
     
     public partial class DomainObjectModificationBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectModification>, Framework.Configuration.BLL.IDomainObjectModificationBLL
     {
-        
-        public DomainObjectModificationBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.DomainObjectModification> securityProvider) : 
-                base(context, securityProvider)
-        {
-        }
     }
     
     public partial class DomainObjectModificationBLLFactory : Framework.BLL.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.IDomainObjectModificationBLL, Framework.Configuration.BLL.DomainObjectModificationBLL, Framework.Configuration.Domain.DomainObjectModification>, Framework.Configuration.BLL.IDomainObjectModificationBLLFactory
@@ -196,8 +173,6 @@ namespace Framework.Configuration.BLL
     public partial class ConfigurationBLLFactoryContainer : Framework.BLL.BLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>, Framework.Configuration.BLL.IConfigurationBLLFactoryContainer, Framework.BLL.IBLLFactoryInitializer
     {
         
-        private Framework.Configuration.BLL.ICodeFirstSubscriptionBLL codeFirstSubscriptionBLL;
-        
         private Framework.Configuration.BLL.ConfigurationDefaultBLLFactory defaultBLLFactory;
         
         private Framework.Configuration.BLL.IDomainObjectEventBLL domainObjectEventBLL;
@@ -221,26 +196,6 @@ namespace Framework.Configuration.BLL
         public ConfigurationBLLFactoryContainer(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
                 base(context)
         {
-        }
-        
-        public Framework.Configuration.BLL.ICodeFirstSubscriptionBLL CodeFirstSubscription
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.codeFirstSubscriptionBLL, null))
-                {
-                    this.codeFirstSubscriptionBLL = this.CodeFirstSubscriptionFactory.Create();
-                }
-                return this.codeFirstSubscriptionBLL;
-            }
-        }
-        
-        public Framework.Configuration.BLL.ICodeFirstSubscriptionBLLFactory CodeFirstSubscriptionFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Configuration.BLL.ICodeFirstSubscriptionBLLFactory>(this.Context.ServiceProvider);
-            }
         }
         
         public Framework.BLL.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid> Default
@@ -429,8 +384,6 @@ namespace Framework.Configuration.BLL
         
         public static void RegisterBLLFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
         {
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ICodeFirstSubscriptionBLLFactory, Framework.Configuration.BLL.CodeFirstSubscriptionBLLFactory>(serviceCollection);
-            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>, Framework.Configuration.Domain.CodeFirstSubscription>, Framework.Configuration.BLL.ICodeFirstSubscriptionBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IDomainObjectEventBLLFactory, Framework.Configuration.BLL.DomainObjectEventBLLFactory>(serviceCollection);
             CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>, Framework.Configuration.Domain.DomainObjectEvent>, Framework.Configuration.BLL.IDomainObjectEventBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IDomainObjectModificationBLLFactory, Framework.Configuration.BLL.DomainObjectModificationBLLFactory>(serviceCollection);

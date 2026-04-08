@@ -118,7 +118,7 @@ public class Projection<TDomainObject> : IProjection
     {
         if (newProp == null) throw new ArgumentNullException(nameof(newProp));
 
-        return new Projection<TDomainObject>(this.Name, this.BLLView, this.properties.Concat(new[] { newProp }), this.filterAttributes, this.customProperties, this.projectionAttributes);
+        return new Projection<TDomainObject>(this.Name, this.BLLView, this.properties.Concat([newProp]), this.filterAttributes, this.customProperties, this.projectionAttributes);
     }
 
     /// <summary>
@@ -156,7 +156,8 @@ public class Projection<TDomainObject> : IProjection
                                              this.BLLView,
                                              this.properties,
                                              this.filterAttributes,
-                                             this.customProperties.Concat(new[] { new ProjectionCustomProperty<TProperty>(name, writable, getPropProjection, null, fetchs, propertyAttributes) }),
+                                             this.customProperties.Concat([new ProjectionCustomProperty<TProperty>(name, writable, getPropProjection, null, fetchs, propertyAttributes)
+                                                                          ]),
                                              this.projectionAttributes);
     }
 
@@ -223,7 +224,8 @@ public class Projection<TDomainObject> : IProjection
                                              this.BLLView,
                                              this.properties,
                                              this.filterAttributes,
-                                             this.customProperties.Concat(new[] { new ProjectionCustomProperty<TProperty>(name, writable, getPropProjection, collectionType, fetchs, propertyAttributes) }),
+                                             this.customProperties.Concat([new ProjectionCustomProperty<TProperty>(name, writable, getPropProjection, collectionType, fetchs, propertyAttributes)
+                                                                          ]),
                                              this.projectionAttributes);
     }
 
@@ -307,7 +309,7 @@ public class Projection<TDomainObject> : IProjection
     {
         if (filterType == null) throw new ArgumentNullException(nameof(filterType));
 
-        return new Projection<TDomainObject>(this.Name, this.BLLView, this.properties, this.filterAttributes.Concat(new[] { new ProjectionFilterAttribute(filterType, target) }), this.customProperties, this.projectionAttributes);
+        return new Projection<TDomainObject>(this.Name, this.BLLView, this.properties, this.filterAttributes.Concat([new ProjectionFilterAttribute(filterType, target)]), this.customProperties, this.projectionAttributes);
     }
 
     /// <summary>
@@ -327,7 +329,7 @@ public class Projection<TDomainObject> : IProjection
     {
         if (attribute == null) { throw new ArgumentNullException(nameof(attribute)); }
 
-        return new Projection<TDomainObject>(this.Name, this.BLLView, this.properties, this.filterAttributes, this.customProperties, this.projectionAttributes.Concat(new[] { attribute }));
+        return new Projection<TDomainObject>(this.Name, this.BLLView, this.properties, this.filterAttributes, this.customProperties, this.projectionAttributes.Concat([attribute]));
     }
 
 

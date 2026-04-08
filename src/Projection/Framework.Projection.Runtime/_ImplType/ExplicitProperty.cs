@@ -74,7 +74,7 @@ internal class ExplicitProperty : BasePropertyInfoImpl
         yield return this.customPropertyPath.Maybe(path => new ExpandPathAttribute(path)) ?? new ExpandPathAttribute(this.baseName);
     }
 
-    public override ParameterInfo[] GetIndexParameters() => new ParameterInfo[0]; // this.sourceProperty.GetIndexParameters();
+    public override ParameterInfo[] GetIndexParameters() => []; // this.sourceProperty.GetIndexParameters();
 
     public override MethodInfo GetGetMethod(bool nonPublic) => this.getMethod;
 

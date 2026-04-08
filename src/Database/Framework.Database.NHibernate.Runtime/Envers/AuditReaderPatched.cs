@@ -49,7 +49,7 @@ public class AuditReaderPatched(AuditConfiguration verCfg, ISession session, ISe
     /// <summary>
     /// modify by podzyuban
     /// </summary>
-    public IEnumerable<long> GetRevisions(System.Type cls, object primaryKey, long maxRevisions)
+    public IEnumerable<long> GetRevisions(Type cls, object primaryKey, long maxRevisions)
     {
         ArgumentsTools.CheckNotNull(primaryKey, "Primary key");
         var entityName = cls.FullName;
@@ -95,7 +95,7 @@ public class AuditReaderPatched(AuditConfiguration verCfg, ISession session, ISe
         return resultList.ToList();
     }
 
-    public long? GetPreviousRevision(System.Type cls, object primaryKey, long maxRevisions)
+    public long? GetPreviousRevision(Type cls, object primaryKey, long maxRevisions)
     {
         ArgumentsTools.CheckNotNull(primaryKey, "Primary key");
         var entityName = cls.FullName;

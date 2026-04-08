@@ -1,25 +1,35 @@
-﻿using ASP;
+﻿using System.Net.Mail;
+using System.Text;
 
-using SampleSystem.Subscriptions.Metadata.Employee.Update;
+using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Examples.Attachment;
 
-public sealed class AttachmentSubscription
-        : SubscriptionMetadataBase<Domain.Employee, _Examples_Attachment_MessageTemplate_cshtml>
+public class AttachmentSubscription : Subscription<Domain.Employee, _Examples_Attachment_MessageTemplate_cshtml>
 {
-    /// <summary>
-    /// Sample with inline attachment
-    /// </summary>
-    public AttachmentSubscription()
+    public const string AttachmentName = "test.txt";
+
+    public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
+
+    public override MailAddress Sender { get; } = new("Attachment@luxoft.com", "SampleSystem");
+
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
     {
-        this.SenderName = "SampleSystem";
-        this.SenderEmail = "Attachment@luxoft.com";
-        this.ConditionLambda = new ConditionLambda();
-        this.GenerationLambda = new GenerationLambda();
-        this.CopyGenerationLambda = new CopyGenerationLambda();
-        this.SecurityItemSourceLambdas = [new SecurityItemSourceLambda()];
-        this.RecipientsSelectorMode = Framework.Subscriptions.Domain.RecipientsSelectorMode.Union;
-        this.IncludeAttachments = true;
-        this.AttachmentLambda = new AttachmentLambda();
+        yield return new("tester@luxoft.com", versions);
+    }
+
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetCopyTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
+    {
+        yield return new("tester@luxoft.com", versions);
+    }
+
+    public override IEnumerable<System.Net.Mail.Attachment> GetAttachments(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
+    {
+        yield return new System.Net.Mail.Attachment(new MemoryStream(Encoding.UTF8.GetBytes("Hello world!")), AttachmentName)
+                     {
+                         // If ContentId not set .NET generate new GUID https://github.com/Microsoft/referencesource/blob/master/System/net/System/Net/mail/Attachment.cs
+                         ContentId = "testId@luxoft.com"
+                     };
     }
 }

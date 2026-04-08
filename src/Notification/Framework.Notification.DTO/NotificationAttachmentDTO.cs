@@ -1,7 +1,5 @@
 ﻿using System.Runtime.Serialization;
 
-using Framework.Notification.Domain;
-
 namespace Framework.Notification.DTO;
 
 [DataContract]
@@ -23,5 +21,16 @@ public class NotificationAttachmentDTO
     public bool IsInline { get; set; }
 
 
-    public Attachment ToDomain() => new(this.Content, this.Name) { ContentId = this.ContentId, IsInline = this.IsInline };
+    public NotificationAttachmentDTO(System.Net.Mail.Attachment attachment)
+    {
+        using var ms = new MemoryStream();
+        attachment.ContentStream.CopyTo(ms);
+        var content = ms.ToArray();
+
+        this.Content = content;
+        this.Extension = attachment.ContentType.Name;
+        this.Name = attachment.Name!;
+        this.ContentId = attachment.ContentId;
+        this.IsInline = attachment.ContentDisposition!.Inline;
+    }
 }

@@ -1,8 +1,4 @@
-﻿using Framework.Core;
-
-using SampleSystem.Generated.DTO;
-
-namespace SampleSystem.WebApiCore.Controllers.Audit
+﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
     
     
@@ -17,13 +13,13 @@ namespace SampleSystem.WebApiCore.Controllers.Audit
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeePropertyRevisionByDateRange(GetEmployeePropertyRevisionByDateRangeAutoRequest getEmployeePropertyRevisionByDateRangeAutoRequest)
         {
-            Period? period = getEmployeePropertyRevisionByDateRangeAutoRequest.Period;
+            Framework.Core.Period? period = getEmployeePropertyRevisionByDateRangeAutoRequest.Period;
             string propertyName = getEmployeePropertyRevisionByDateRangeAutoRequest.PropertyName;
             SampleSystem.Generated.DTO.EmployeeIdentityDTO employeeIdentity = getEmployeePropertyRevisionByDateRangeAutoRequest.EmployeeIdentity;
-            return this.Evaluate<SampleSystemDomainObjectPropertiesRevisionDTO>(Framework.Database.DBSessionMode.Read, evaluateData => this.GetEmployeePropertyRevisionByDateRangeInternal(employeeIdentity, propertyName, period, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetEmployeePropertyRevisionByDateRangeInternal(employeeIdentity, propertyName, period, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeePropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.EmployeeIdentityDTO employeeIdentity, string propertyName, Period? period, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeePropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.EmployeeIdentityDTO employeeIdentity, string propertyName, Framework.Core.Period? period, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.EmployeeFactory.Create(SecuritySystem.SecurityRule.View);
             return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.Employee>(employeeIdentity.Id, propertyName, period);
@@ -107,7 +103,7 @@ namespace SampleSystem.WebApiCore.Controllers.Audit
         
         private string propertyName;
         
-        private Period? period;
+        private Framework.Core.Period? period;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
@@ -139,7 +135,7 @@ namespace SampleSystem.WebApiCore.Controllers.Audit
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public virtual Period? Period
+        public virtual Framework.Core.Period? Period
         {
             get
             {

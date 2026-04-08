@@ -85,7 +85,7 @@ public class CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOption
 
                           let isComposite = conditionStatement.Maybe(c => c.FalseStatements.Count == 0 && c.Condition.IsPrimitiveValue(true))
 
-                          from CodeStatement result in isComposite ? conditionStatement.TrueStatements : new CodeStatementCollection(new[] { statement })
+                          from CodeStatement result in isComposite ? conditionStatement.TrueStatements : new CodeStatementCollection([statement])
 
                           select result;
 
@@ -188,7 +188,7 @@ public class CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOption
             var renderedIterator = statement.Iterator.FromMaybe(() => "Iterator not initialized")
                                             .Pipe(iterator => this.Renderer.Render(iterator.Type.BaseType == VoidType.BaseType ? new CodeParameterDeclarationExpression("var", iterator.Name) : iterator));
 
-            var body = new[] { $"{this.DeepOffset}{{" }.Concat(renderedStatements).Concat(new[] { $"{this.DeepOffset}}}" }).Concat(str => Environment.NewLine + str.SkipLast(Environment.NewLine, false));
+            var body = new[] { $"{this.DeepOffset}{{" }.Concat(renderedStatements).Concat([$"{this.DeepOffset}}}"]).Concat(str => Environment.NewLine + str.SkipLast(Environment.NewLine, false));
 
             return new CodeSnippetStatement($"{this.DeepOffset}foreach({renderedIterator} in {renderedSource}){body}");
         }
@@ -228,14 +228,14 @@ public class CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOption
 
                     if (returnExpr != null)
                     {
-                        return new[] { this.Renderer.Render(returnExpr) };
+                        return [this.Renderer.Render(returnExpr)];
                     }
                 }
                 else if (codeStatements[0] is CodeExpressionStatement)
                 {
                     var statExpr = (codeStatements[0] as CodeExpressionStatement).Expression;
 
-                    return new[] { this.Renderer.Render(statExpr) };
+                    return [this.Renderer.Render(statExpr)];
                 }
             }
 

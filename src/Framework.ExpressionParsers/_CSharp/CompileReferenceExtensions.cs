@@ -58,7 +58,7 @@ internal static class CompileReferenceExtensions
                 {
                     foreach (var t in type.GetAllElements(t => t.BaseType))
                     {
-                        graph.FillCompileReferencedTypes(new[] { t });
+                        graph.FillCompileReferencedTypes([t]);
                     }
 
                     foreach (var interfaceType in type.GetInterfaces())

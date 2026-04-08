@@ -6,11 +6,8 @@ using Framework.BLL;
 using Framework.BLL.Domain.IdentityObject;
 using Framework.Configuration.BLL.TargetSystemService;
 using Framework.Configuration.Domain;
-using Framework.Core.MessageSender;
 using Framework.Core.Serialization;
 using Framework.Core.TypeResolving;
-using Framework.Notification;
-using Framework.Notification.Domain;
 using Framework.Tracking;
 using Framework.Validation;
 
@@ -36,12 +33,6 @@ public partial interface IConfigurationBLLContext :
 
     INamedLockService NamedLockService { get; }
 
-    IEmployeeSource EmployeeSource { get; }
-
-    IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
-
-    bool SubscriptionEnabled { get; }
-
     ISerializerFactory<string> SystemConstantSerializerFactory { get; }
 
     ITypeResolver<string> SystemConstantTypeResolver { get; }
@@ -51,8 +42,6 @@ public partial interface IConfigurationBLLContext :
     DomainType? GetDomainType(Type type, bool throwOnNotFound);
 
     DomainType? GetDomainType(IDomainType type, bool throwOnNotFound = true);
-
-    ISubscriptionSystemService GetSubscriptionSystemService(Type domainType);
 
     ITargetSystemService GetTargetSystemService(TargetSystem targetSystem);
 

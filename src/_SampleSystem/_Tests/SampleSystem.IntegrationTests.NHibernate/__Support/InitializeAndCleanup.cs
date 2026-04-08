@@ -1,16 +1,12 @@
 ﻿using Bss.Platform.Events.Abstractions;
 
-using CommonFramework.DependencyInjection;
-
 using Framework.Application.Jobs;
 using Framework.AutomationCore.Environment;
 using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
-using Framework.Configuration.BLL.SubscriptionSystemService;
-using Framework.Core.MessageSender;
-using Framework.Notification.DTO;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting.Internal;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
@@ -41,13 +37,12 @@ public class InitializeAndCleanup
 
     private static IServiceCollection GetServices(IConfiguration configuration, IServiceCollection services) =>
         services
-            .AddGeneralDependencyInjection(configuration, s => s.AddExtensions(new SampleSystemNHibernateExtension()))
+            .AddGeneralDependencyInjection(configuration, new HostingEnvironment(), s => s.AddExtensions(new SampleSystemNHibernateExtension()))
 
             .AddSingleton<SampleSystemInitializer>()
 
             .AddIntegrationTests()
 
-            .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
             .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()
 
             .AddSingleton(new JobImpersonateData("sampleSystemTestJob"))
@@ -58,6 +53,4 @@ public class InitializeAndCleanup
             .AddSingleton<DataHelper>()
 
             .AddSingleton<TestDataInitializer>();
-
-    //.AddServiceProxyFactory(b => b.AddRedirect(typeof(RawPermissionConverter<,>), typeof(MyRawPermissionConverter<,>)))
 }

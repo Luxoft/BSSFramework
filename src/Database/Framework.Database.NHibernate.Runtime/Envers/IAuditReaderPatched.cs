@@ -16,12 +16,12 @@ public interface IAuditReaderPatched : IAuditReader
     /// <param name="primaryKey">Primary key of the entity.</param>
     /// <param name="maxRevisions">Not include</param>
     /// <returns></returns>
-    IEnumerable<long> GetRevisions(System.Type cls, object primaryKey, long maxRevisions);
+    IEnumerable<long> GetRevisions(Type cls, object primaryKey, long maxRevisions);
 
     IReadOnlyList<Tuple<T, long>> GetDomainObjectRevisions<T>(object primaryKey, int takeCount)
             where T : class;
 
-    long? GetPreviousRevision(System.Type cls, object primaryKey, long maxRevisions);
+    long? GetPreviousRevision(Type cls, object primaryKey, long maxRevisions);
 
     AuditQueryCreatorPatched CreatePatchedQuery();
 

@@ -1,22 +1,40 @@
-﻿using ASP;
+﻿using System.Net.Mail;
+using System.Text;
+
+using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
 
-public sealed class Subscription
-        : SubscriptionWithCustomModelMetadataBase<Domain.Country, CustomNotificationModel, _DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml>
+public class Subscription : Subscription<Domain.Country, CustomNotificationModel, ASP._DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml>
 {
-    public Subscription()
+
+    public const string AttachmentName = "test.txt";
+
+    public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
+
+    public override MailAddress Sender { get; } = new("SampleSystem@luxoft.com", "SampleSystem");
+
+    public override CustomNotificationModel ConvertToRenderingObject(
+        IServiceProvider serviceProvider,
+        Domain.Country domainObject) => new(serviceProvider, domainObject);
+
+    public override IEnumerable<NotificationMessageGenerationInfo<CustomNotificationModel>> GetTo(
+        IServiceProvider serviceProvider,
+        DomainObjectVersions<Domain.Country> versions)
     {
-        this.SenderName = "SampleSystem";
-        this.SenderEmail = "SampleSystem@luxoft.com";
-        this.ConditionLambda = new ConditionLambda();
-        this.GenerationLambda = new GenerationLambda();
-        this.ReplyToGenerationLambda = new ReplyToGenerationLambda();
-        this.AttachmentLambda = new AttachmentLambda();
-        this.RecipientsSelectorMode = Framework.Subscriptions.Domain.RecipientsSelectorMode.Union;
-        this.SendIndividualLetters = true;
-        this.ExcludeCurrentUser = true;
-        this.IncludeAttachments = true;
-        this.AllowEmptyListOfRecipients = false;
+        yield return new("tester@luxoft.com", versions.ChangeDomainObject(c => this.ConvertToRenderingObject(serviceProvider, c)));
+    }
+
+    public override IEnumerable<NotificationMessageGenerationInfo<CustomNotificationModel>> GetReplyTo(
+        IServiceProvider serviceProvider,
+        DomainObjectVersions<Domain.Country> versions)
+    {
+        yield return new("replayTo@luxoft.com", versions.ChangeDomainObject(c => this.ConvertToRenderingObject(serviceProvider, c)));
+    }
+
+    public override IEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<CustomNotificationModel> versions)
+    {
+        yield return new(new MemoryStream(Encoding.UTF8.GetBytes("Hello world!")), AttachmentName);
     }
 }

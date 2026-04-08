@@ -55,11 +55,11 @@ internal static class CodeDomHelper
                       {
                           if (fileFactory.FileType == BaseFileType.ProjectionDTO || (fileFactory.FileType as MainDTOFileType).Maybe(fileType => fileType.BaseType != null))
                           {
-                              decl.BaseConstructorArgs.AddRange(new CodeExpression[]
-                                                                {
-                                                                        mappingServiceParameterRefExpr,
+                              decl.BaseConstructorArgs.AddRange(
+                              [
+                                  mappingServiceParameterRefExpr,
                                                                         sourceDomainParameter.ToVariableReferenceExpression()
-                                                                });
+                              ]);
                           }
                       });
     }

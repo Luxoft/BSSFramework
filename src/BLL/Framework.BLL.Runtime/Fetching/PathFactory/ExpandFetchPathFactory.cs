@@ -67,7 +67,7 @@ public class ExpandFetchPathFactory(Type persistentDomainObjectBase, int maxRecu
                                             {
                                                     { property, this.ToLoadNode(nestedType, propertyPath.Tail) }
                                             },
-                                            Array.Empty<PropertyInfo>());
+                                            []);
             }
             else
             {
@@ -82,7 +82,7 @@ public class ExpandFetchPathFactory(Type persistentDomainObjectBase, int maxRecu
             return new PropertyLoadNode(
                                         domainType,
                                         new Dictionary<PropertyInfo, PropertyLoadNode>(),
-                                        Array.Empty<PropertyInfo>());
+                                        []);
         }
     }
 }

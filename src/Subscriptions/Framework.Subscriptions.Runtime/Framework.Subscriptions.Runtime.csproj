@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Subscriptions.Runtime</PackageId>
+    <RootNamespace>Framework.Subscriptions</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IvAt.CommonFramework.GenericRepository" />
+    <PackageReference Include="IvAt.CommonFramework.IdentitySource.Abstractions" />
+    <PackageReference Include="IvAt.CommonFramework.VisualIdentitySource.Abstractions" />
+    <PackageReference Include="IvAt.SecuritySystem.Notification.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Notification\Framework.Notification.Domain\Framework.Notification.Domain.csproj" />
+    <ProjectReference Include="..\Framework.Subscriptions.Abstractions\Framework.Subscriptions.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

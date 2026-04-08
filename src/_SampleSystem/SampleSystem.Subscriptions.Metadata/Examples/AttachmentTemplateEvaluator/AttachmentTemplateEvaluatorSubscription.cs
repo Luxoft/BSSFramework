@@ -1,25 +1,33 @@
-﻿using ASP;
+﻿using System.Net.Mail;
+using System.Text;
 
-using SampleSystem.Subscriptions.Metadata.Employee.Update;
+using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Examples.AttachmentTemplateEvaluator;
 
-public sealed class AttachmentTemplateEvaluatorSubscription
-        : SubscriptionMetadataBase<Domain.Employee, _Examples_AttachmentTemplateEvaluator_MessageTemplate_cshtml>
+public class AttachmentTemplateEvaluatorSubscription : Subscription<Domain.Employee, _Examples_AttachmentTemplateEvaluator_MessageTemplate_cshtml>
 {
-    /// <summary>
-    /// Sample with template attachment
-    /// </summary>
-    public AttachmentTemplateEvaluatorSubscription()
+    public const string AttachmentName = "report.html";
+
+    public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
+
+    public override MailAddress Sender { get; } = new("AttachmentTemplateEvaluator@luxoft.com", "SampleSystem");
+
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Employee> versions)
     {
-        this.SenderName = "SampleSystem";
-        this.SenderEmail = "AttachmentTemplateEvaluator@luxoft.com";
-        this.ConditionLambda = new ConditionLambda();
-        this.GenerationLambda = new GenerationLambda();
-        this.CopyGenerationLambda = new CopyGenerationLambda();
-        this.SecurityItemSourceLambdas = [new SecurityItemSourceLambda()];
-        this.RecipientsSelectorMode = Framework.Subscriptions.Domain.RecipientsSelectorMode.Union;
-        this.IncludeAttachments = true;
-        this.AttachmentLambda = new AttachmentLambdaTemplateEvaluator();
+        yield return new("tester@luxoft.com", versions);
+    }
+
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetCopyTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Employee> versions)
+    {
+        yield return new("tester@luxoft.com", versions);
+    }
+
+    public override IEnumerable<System.Net.Mail.Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Employee> versions)
+    {
+        var template = Encoding.UTF8.GetBytes($"Hello world! {versions.Current!.NameNative}");
+
+        yield return new System.Net.Mail.Attachment(new MemoryStream(template), AttachmentName);
     }
 }

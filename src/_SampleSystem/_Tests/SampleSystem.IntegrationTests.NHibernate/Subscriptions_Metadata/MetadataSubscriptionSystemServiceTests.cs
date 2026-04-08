@@ -1,16 +1,11 @@
 ﻿using System.Text;
 
-using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
-using Framework.BLL;
 using Framework.Core;
 using Framework.Notification.Domain;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Custom;
 using SampleSystem.IntegrationTests.__Support.TestData;
-using SampleSystem.Subscriptions.Metadata.Employee.Update;
-using SampleSystem.Subscriptions.Metadata.Examples.Attachment;
-using SampleSystem.Subscriptions.Metadata.Examples.AttachmentTemplateEvaluator;
 
 namespace SampleSystem.IntegrationTests.Subscriptions_Metadata;
 
@@ -27,7 +22,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         var employee = this.CreateEmployee();
 
         // Act
-        var results = this.DataHelper.ProcessChangedObjectUntyped(typeof(Employee), employee, employee);
+        var results = this.DataHelper.ProcessSubscription(employee, employee);
         var errors = results.GetErrors().ToList();
 
         var expectedNotifications = this.GetNotifications()
@@ -36,22 +31,22 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         // Assert
         errors.Should().HaveCount(0);
         expectedNotifications.Should().HaveCount(1);
-        expectedNotifications.Single().Targets.Single(z => z.Type == ReceiverRole.ReplyTo).Name.Should().Be("replayTo@luxoft.com");
+        expectedNotifications.Single().Recipients.Single(z => z.Type == RecipientRole.ReplyTo).Name.Should().Be("replayTo@luxoft.com");
     }
 
     [TestMethod]
-    public void RazerTemplateImpl_SubscriptionFromMetadataShouldBeSent()
+    public void RazorTemplateImpl_SubscriptionFromMetadataShouldBeSent()
     {
         // Arrange
         var employee = this.DataHelper.SaveEmployee("Chuck Norris");
         var message = @"String.Concat it is good choice for Chuck Norris.";
 
         // Act
-        var results = this.DataHelper.ProcessChangedObjectUntyped(typeof(Employee), employee, employee);
+        var results = this.DataHelper.ProcessSubscription(employee, employee);
         var errors = results.GetErrors().ToList();
 
         var expectedNotifications = this.GetNotifications()
-                                        .Where(n => n.From == "RazerTemplateImplSubscription@luxoft.com")
+                                        .Where(n => n.From == "RazorTemplateImplSubscription@luxoft.com")
                                         .ToList();
 
         this.LogError(errors);
@@ -61,7 +56,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         expectedNotifications.Should().HaveCount(1);
         expectedNotifications.Single().Message.Message.Should().BeEquivalentTo(message);
         expectedNotifications.Single()
-                             .Targets.Any(z => z.Type == ReceiverRole.ReplyTo)
+                             .Recipients.Any(z => z.Type == RecipientRole.ReplyTo)
                              .Should()
                              .BeFalse();
     }
@@ -74,41 +69,17 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         var message = $"<h2>Hi there!!!</h2>{Environment.NewLine}My test employee Name:  John Doe {Environment.NewLine}Date: 21 Oct 2015";
 
         // Act
-        var results = this.DataHelper.ProcessChangedObjectUntyped(typeof(Employee), employee, employee);
+        var results = this.DataHelper.ProcessSubscription(employee, employee);
         var errors = results.GetErrors().ToList();
 
         var expectedNotifications = this.GetNotifications()
-                                        .Where(n => n.From == "RazerInheritanceSubscription@luxoft.com")
+                                        .Where(n => n.From == "RazorInheritanceSubscription@luxoft.com")
                                         .ToList();
 
         // Assert
         errors.Should().HaveCount(0);
         expectedNotifications.Should().HaveCount(1);
         expectedNotifications.Single().Message.Message.Should().BeEquivalentTo(message);
-    }
-
-    [TestMethod]
-    public void OnlyActiveCodeFirstSubscriptionShouldBeSent()
-    {
-        // Arrange
-        this.EvaluateWrite(context =>
-                           {
-                               var bll = context.Configuration.Logics.CodeFirstSubscription;
-                               var cfs = bll.GetByCode(new EmployeeUpdateSubscription().Code);
-                               cfs.Active = false;
-                               bll.Save(cfs);
-                           });
-
-        var employee = this.CreateEmployee();
-
-        // Act
-        this.DataHelper.ProcessChangedObjectUntyped(typeof(Employee), employee, employee);
-
-        var expectedNotifications = this.GetNotifications()
-                                        .Where(n => n.From == "SampleSystem@luxoft.com");
-
-        // Assert
-        expectedNotifications.Should().HaveCount(0);
     }
 
     /// <summary>
@@ -123,7 +94,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         var content = Encoding.UTF8.GetBytes("Hello world!");
 
         // Act
-        this.DataHelper.ProcessChangedObjectUntyped(typeof(Employee), employee, employee);
+        this.DataHelper.ProcessSubscription(employee, employee);
 
         var expectedNotifications = this.GetNotifications()
                                         .Where(n => n.From == "Attachment@luxoft.com");
@@ -132,7 +103,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         var notification = expectedNotifications.Single();
         var attachment = notification.Attachments.Single();
         attachment.Content.Should().BeEquivalentTo(content);
-        attachment.Name.Should().Be(AttachmentLambda.AttachmentName);
+        attachment.Name.Should().Be(SampleSystem.Subscriptions.Metadata.Examples.Attachment.AttachmentSubscription.AttachmentName);
     }
 
     /// <summary>
@@ -147,7 +118,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         var content = "Hello world!  John Doe ";
 
         // Act
-        this.DataHelper.ProcessChangedObjectUntyped(typeof(Employee), employee, employee);
+        this.DataHelper.ProcessSubscription(employee, employee);
 
         var expectedNotifications = this.GetNotifications().Where(n => n.From == "AttachmentTemplateEvaluator@luxoft.com");
 
@@ -155,7 +126,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         var notification = expectedNotifications.Single();
         var attachment = notification.Attachments.Single();
         Encoding.UTF8.GetString(attachment.Content).Should().BeEquivalentTo(content);
-        attachment.Name.Should().Be(AttachmentLambdaTemplateEvaluator.AttachmentName);
+        attachment.Name.Should().Be(SampleSystem.Subscriptions.Metadata.Examples.AttachmentTemplateEvaluator.AttachmentTemplateEvaluatorSubscription.AttachmentName);
     }
 
     /// <summary>
@@ -170,7 +141,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         var messageTemplate = @"<html><head><title></title></head><body> John Doe <br/><img src=""cid:testId@luxoft.com""/></body></html>";
 
         // Act
-        this.DataHelper.ProcessChangedObjectUntyped(typeof(Employee), employee, employee);
+        this.DataHelper.ProcessSubscription(employee, employee);
 
         var expectedNotifications = this.GetNotifications()
                                         .Where(n => n.From == "InlineAttach@luxoft.com");
@@ -183,13 +154,12 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
     }
 
     [TestMethod]
-    [Ignore]
     public void DateModelCreateSubscriptionTest()
     {
         // Arrange
 
         // Act
-        this.DataHelper.ProcessChangedObjectUntyped(typeof(DateModel), null, new DateModel { Year = 2019 });
+        this.DataHelper.ProcessSubscription(null, new DateModel { Year = 2019 });
 
         var expectedNotifications = this.GetNotifications()
                                         .Where(n => n.From == "DateModelCreateSampleSystem@luxoft.com");

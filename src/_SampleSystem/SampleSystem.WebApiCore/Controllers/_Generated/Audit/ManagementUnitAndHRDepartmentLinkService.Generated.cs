@@ -1,8 +1,4 @@
-﻿using Framework.Core;
-
-using SampleSystem.Generated.DTO;
-
-namespace SampleSystem.WebApiCore.Controllers.Audit
+﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
     
     
@@ -35,13 +31,13 @@ namespace SampleSystem.WebApiCore.Controllers.Audit
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRange(GetManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest getManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest)
         {
-            Period? period = getManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest.Period;
+            Framework.Core.Period? period = getManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest.Period;
             string propertyName = getManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest.PropertyName;
             SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity = getManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeAutoRequest.ManagementUnitAndHRDepartmentLinkIdentity;
-            return this.Evaluate<SampleSystemDomainObjectPropertiesRevisionDTO>(Framework.Database.DBSessionMode.Read, evaluateData => this.GetManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeInternal(managementUnitAndHRDepartmentLinkIdentity, propertyName, period, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeInternal(managementUnitAndHRDepartmentLinkIdentity, propertyName, period, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity, string propertyName, Period? period, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetManagementUnitAndHRDepartmentLinkPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity, string propertyName, Framework.Core.Period? period, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL bll = evaluateData.Context.Logics.ManagementUnitAndHRDepartmentLinkFactory.Create(SecuritySystem.SecurityRule.View);
             return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(managementUnitAndHRDepartmentLinkIdentity.Id, propertyName, period);
@@ -163,7 +159,7 @@ namespace SampleSystem.WebApiCore.Controllers.Audit
         
         private string propertyName;
         
-        private Period? period;
+        private Framework.Core.Period? period;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
@@ -195,7 +191,7 @@ namespace SampleSystem.WebApiCore.Controllers.Audit
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public virtual Period? Period
+        public virtual Framework.Core.Period? Period
         {
             get
             {

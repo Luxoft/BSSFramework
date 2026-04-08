@@ -31,7 +31,7 @@ public class LegalEntityProjectionTests : TestBase
                                         var baseObj = new TestObjForNested { Name = baseObjName, Period = period };
                                         var nestedObj = new TestObjForNested { Name = nestedObjName, Period = period };
 
-                                        context.Logics.Default.Create<TestObjForNested>().Save(new[] { baseObj, nestedObj });
+                                        context.Logics.Default.Create<TestObjForNested>().Save([baseObj, nestedObj]);
 
                                         var legalEntity = new CompanyLegalEntity { Name = name, NameEnglish = nameEnglish, Code = code, BaseObj = baseObj, CurrentObj = nestedObj };
 

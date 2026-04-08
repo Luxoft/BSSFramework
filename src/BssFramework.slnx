@@ -94,6 +94,9 @@
   <Folder Name="/Subscriptions/">
     <Project Path="Subscriptions/Framework.Subscriptions.Abstractions/Framework.Subscriptions.Abstractions.csproj" />
     <Project Path="Subscriptions/Framework.Subscriptions.Domain/Framework.Subscriptions.Domain.csproj" />
+    <Project Path="Subscriptions/Framework.Subscriptions.Metadata/Framework.Subscriptions.Metadata.csproj" />
+    <Project Path="Subscriptions/Framework.Subscriptions.Runtime/Framework.Subscriptions.Runtime.csproj" />
+    <Project Path="Subscriptions/Framework.Subscriptions/Framework.Subscriptions.csproj" />
   </Folder>
   
   <Folder Name="/Validation/">
@@ -136,7 +139,6 @@
     <Project Path="_Configuration/Framework.Configuration.Domain.Models/Framework.Configuration.Domain.Models.csproj" />
     <Project Path="_Configuration/Framework.Configuration.Domain/Framework.Configuration.Domain.csproj" />
     <Project Path="_Configuration/Framework.Configuration.Environment/Framework.Configuration.Environment.csproj" />
-    <Project Path="_Configuration/Framework.Configuration.SubscriptionModeling.Tests.Unit/Framework.Configuration.SubscriptionModeling.Tests.Unit.csproj" />
     <Project Path="_Configuration/Framework.Configuration.WebApi/Framework.Configuration.WebApi.csproj" />
   </Folder>
   

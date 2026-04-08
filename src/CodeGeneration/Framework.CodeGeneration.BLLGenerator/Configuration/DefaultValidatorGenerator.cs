@@ -275,7 +275,8 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
                 if (validatorSourceType.IsAssignableFrom(this.DomainType) && validatorPropertyType.IsAssignableFrom(property.PropertyType))
                 {
-                    var methodRef = typeof(PropertyValidatorExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression("Unbox", new[] { this.DomainType, validatorSourceType, property.PropertyType, validatorPropertyType });
+                    var methodRef = typeof(PropertyValidatorExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression("Unbox", [this.DomainType, validatorSourceType, property.PropertyType, validatorPropertyType
+                    ]);
 
                     return expression.ToStaticMethodInvokeExpression(methodRef);
                 }
@@ -313,7 +314,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
                 if (validatorSourceType.IsAssignableFrom(this.DomainType))
                 {
-                    var methodRef = typeof(ClassValidatorExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression("Unbox", new[] { this.DomainType, validatorSourceType });
+                    var methodRef = typeof(ClassValidatorExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression("Unbox", [this.DomainType, validatorSourceType]);
 
                     return expression.ToStaticMethodInvokeExpression(methodRef);
                 }

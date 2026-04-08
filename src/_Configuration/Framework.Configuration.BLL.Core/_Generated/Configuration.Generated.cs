@@ -23,16 +23,6 @@ namespace Framework.Configuration.BLL
     public partial interface IConfigurationBLLFactoryContainer : Framework.BLL.IBLLFactoryContainer<Framework.BLL.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>>
     {
         
-        Framework.Configuration.BLL.ICodeFirstSubscriptionBLL CodeFirstSubscription
-        {
-            get;
-        }
-        
-        Framework.Configuration.BLL.ICodeFirstSubscriptionBLLFactory CodeFirstSubscriptionFactory
-        {
-            get;
-        }
-        
         Framework.Configuration.BLL.IDomainObjectEventBLL DomainObjectEvent
         {
             get;
@@ -112,14 +102,6 @@ namespace Framework.Configuration.BLL
         {
             get;
         }
-    }
-    
-    public partial interface ICodeFirstSubscriptionBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>
-    {
-    }
-    
-    public partial interface ICodeFirstSubscriptionBLLFactory : Framework.BLL.ISecurityBLLFactory<Framework.Configuration.BLL.ICodeFirstSubscriptionBLL, Framework.Configuration.Domain.CodeFirstSubscription>
-    {
     }
     
     public partial interface IDomainObjectEventBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>

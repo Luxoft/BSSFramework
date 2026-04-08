@@ -8,9 +8,9 @@ namespace Framework.Projection.ExtendedMetadata;
 
 public class DomainTypeExtendedMetadataBuilder<TDomainType> : IDomainTypeExtendedMetadataBuilder<TDomainType>, IDomainTypeExtendedMetadata
 {
-    private readonly List<Attribute> attributes = new ();
+    private readonly List<Attribute> attributes = [];
 
-    private readonly List<IPropertyExtendedMetadata> properties = new ();
+    private readonly List<IPropertyExtendedMetadata> properties = [];
 
 
     public Type DomainType { get; } = typeof(TDomainType);

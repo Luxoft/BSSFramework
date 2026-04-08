@@ -13,12 +13,9 @@ using Framework.BLL.Services;
 using Framework.Configuration.BLL.TargetSystemService;
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.Core.MessageSender;
 using Framework.Core.Serialization;
 using Framework.Core.TypeResolving;
 using Framework.Database;
-using Framework.Notification;
-using Framework.Notification.Domain;
 using Framework.Tracking;
 using Framework.Validation;
 
@@ -54,11 +51,9 @@ public partial class ConfigurationBLLContext
         IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
         ITrackingService<PersistentDomainObjectBase> trackingService,
         IConfigurationValidator validator,
-        IMessageSender<MessageTemplateNotification> subscriptionSender,
         IRootSecurityService securityService,
         IConfigurationBLLFactoryContainer logics,
         IAuthorizationBLLContext authorization,
-        IEmployeeSource employeeSource,
         IDomainObjectEventMetadata eventOperationSource,
         INamedLockService namedLockService,
         IEnumerable<ITargetSystemService> targetSystemServices,
@@ -70,14 +65,12 @@ public partial class ConfigurationBLLContext
     {
         this.TrackingService = trackingService;
         this.Validator = validator;
-        this.SubscriptionSender = subscriptionSender ?? throw new ArgumentNullException(nameof(subscriptionSender));
 
         this.SecurityService = securityService;
         this.Logics = logics;
 
         this.Authorization = authorization ?? throw new ArgumentNullException(nameof(authorization));
         this.NamedLockService = namedLockService;
-        this.EmployeeSource = employeeSource ?? throw new ArgumentNullException(nameof(employeeSource));
         this.EventOperationSource = eventOperationSource;
         this.currentRevisionService = currentRevisionService ?? throw new ArgumentNullException(nameof(currentRevisionService));
         this.NotificationPrincipalExtractor = notificationPrincipalExtractor;
@@ -136,8 +129,6 @@ public partial class ConfigurationBLLContext
 
     public ITrackingService<PersistentDomainObjectBase> TrackingService { get; }
 
-    public IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
-
     public IRootSecurityService SecurityService { get; }
 
     public ITypeResolver<string> TypeResolver { get; }
@@ -156,11 +147,7 @@ public partial class ConfigurationBLLContext
 
     public ITypeResolver<string> SystemConstantTypeResolver { get; }
 
-    public bool SubscriptionEnabled => this.lazyTargetSystemServiceCache.Value.Values.Any(tss => tss.TargetSystem.SubscriptionEnabled);
-
     public INamedLockService NamedLockService { get; }
-
-    public IEmployeeSource EmployeeSource { get; }
 
     public IDomainObjectEventMetadata EventOperationSource { get; }
 
@@ -234,13 +221,6 @@ public partial class ConfigurationBLLContext
         }
 
         return domainType;
-    }
-
-    public ISubscriptionSystemService GetSubscriptionSystemService(Type domainType)
-    {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
-        return this.GetTargetSystemService(domainType, true).SubscriptionService;
     }
 
     private DomainType GetDomainType(ITargetSystemService targetService, Type type)

@@ -65,7 +65,7 @@ internal class AuditMetadataProvider<TAuditRevisionEntity> : IMetaDataProvider
     /// </returns>
     public IDictionary<Type, IEntityMeta> CreateMetaData(Configuration nhConfiguration)
     {
-        this.filledTypes = new List<Type>();
+        this.filledTypes = [];
 
         var ret = new Dictionary<Type, IEntityMeta>();
 

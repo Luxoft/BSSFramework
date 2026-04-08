@@ -1,6 +1,5 @@
 ﻿using Framework.Application.DependencyInjection;
 using Framework.Application.Events;
-using Framework.Database;
 using Framework.Database.DALListener;
 using Framework.Database.DependencyInjection;
 

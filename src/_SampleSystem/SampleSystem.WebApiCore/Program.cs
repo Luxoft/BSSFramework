@@ -54,7 +54,7 @@ public static class GenericProgram
                .AddPlatformLogging();
 
         builder.Services
-               .AddGeneralDependencyInjection(builder.Configuration, s => s.AddExtensions(extension))
+               .AddGeneralDependencyInjection(builder.Configuration, builder.Environment, s => s.AddExtensions(extension))
                .AddScoped<IConfiguratorIntegrationEvents, SampleConfiguratorIntegrationEvents>()
                .AddPlatformApiDocumentation(
                    builder.Environment,

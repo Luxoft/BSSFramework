@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 using CommonFramework.DependencyInjection;
 
-using Framework.Core.LazyObject;
+using Framework.Core;
 using Framework.Database._Visitors.Containers;
 using Framework.Database.ConnectionStringSource;
 using Framework.Database.DALExceptions;
@@ -84,6 +84,8 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
 
     public void Initialize(IServiceCollection services)
     {
+        services.AddScopedFrom<ICurrentRevisionService, IDBSession>();
+
         services.AddSingleton<IDalValidationIdentitySource, DalValidationIdentitySource>();
 
         services.AddScopedFrom<IDbTransaction, IDBSession>(session => session.Transaction);

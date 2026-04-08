@@ -1,8 +1,4 @@
-﻿using Framework.Core;
-
-using SampleSystem.Generated.DTO;
-
-namespace SampleSystem.WebApiCore.Controllers.Audit
+﻿namespace SampleSystem.WebApiCore.Controllers.Audit
 {
     
     
@@ -35,13 +31,13 @@ namespace SampleSystem.WebApiCore.Controllers.Audit
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocation1676PropertyRevisionByDateRange(GetLocation1676PropertyRevisionByDateRangeAutoRequest getLocation1676PropertyRevisionByDateRangeAutoRequest)
         {
-            Period? period = getLocation1676PropertyRevisionByDateRangeAutoRequest.Period;
+            Framework.Core.Period? period = getLocation1676PropertyRevisionByDateRangeAutoRequest.Period;
             string propertyName = getLocation1676PropertyRevisionByDateRangeAutoRequest.PropertyName;
             SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getLocation1676PropertyRevisionByDateRangeAutoRequest.Location1676Identity;
-            return this.Evaluate<SampleSystemDomainObjectPropertiesRevisionDTO>(Framework.Database.DBSessionMode.Read, evaluateData => this.GetLocation1676PropertyRevisionByDateRangeInternal(location1676Identity, propertyName, period, evaluateData));
+            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetLocation1676PropertyRevisionByDateRangeInternal(location1676Identity, propertyName, period, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocation1676PropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, string propertyName, Period? period, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocation1676PropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, string propertyName, Framework.Core.Period? period, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(SecuritySystem.SecurityRule.View);
             return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.EnversBug1676.Location1676>(location1676Identity.Id, propertyName, period);
@@ -181,7 +177,7 @@ namespace SampleSystem.WebApiCore.Controllers.Audit
         
         private string propertyName;
         
-        private Period? period;
+        private Framework.Core.Period? period;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=0)]
@@ -213,7 +209,7 @@ namespace SampleSystem.WebApiCore.Controllers.Audit
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.BLL.DTOMapping.Domain.AutoRequestPropertyAttribute(OrderIndex=2)]
-        public virtual Period? Period
+        public virtual Framework.Core.Period? Period
         {
             get
             {

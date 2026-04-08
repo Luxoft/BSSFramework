@@ -121,7 +121,7 @@ public class NotificationCountryTests : TestBase
                                            {
                                                var fakeModification = new DomainObjectModification()
                                                                       {
-                                                                              DomainType = context.Configuration.GetDomainType(typeof(Country), true),
+                                                                              DomainType = context.Configuration.GetDomainType(typeof(Country), true)!,
                                                                               Type = ModificationType.Save,
                                                                               Revision = revision,
                                                                               DomainObjectId = domainObjectId
@@ -136,6 +136,6 @@ public class NotificationCountryTests : TestBase
         var call = new Action(() => configController.Evaluate(c => c.ProcessModifications(1000)));
 
         // Assert
-        call.Should().Throw<Exception>().WithMessage($"For DomainObject ({typeof(Country).Name}) [{domainObjectId}] both states (previous and current) can't be null. Revision: {revision}");
+        call.Should().Throw<ArgumentException>().WithMessage("both arguments (previous and current) can't be null");
     }
 }

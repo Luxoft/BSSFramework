@@ -14,12 +14,6 @@ public class TargetSystemRootFilterModel : DomainObjectMultiFilterModel<TargetSy
         get; set;
     }
 
-    public bool? SubscriptionEnabled
-    {
-        get; set;
-    }
-
-
     protected override IEnumerable<Expression<Func<TargetSystem, bool>>> ToFilterExpressionItems()
     {
         var isMain = this.IsMain;
@@ -34,13 +28,6 @@ public class TargetSystemRootFilterModel : DomainObjectMultiFilterModel<TargetSy
         if (isRevision != null)
         {
             yield return targetSystem => targetSystem.IsRevision == isRevision;
-        }
-
-        var subscriptionEnabled = this.SubscriptionEnabled;
-
-        if (subscriptionEnabled != null)
-        {
-            yield return targetSystem => targetSystem.SubscriptionEnabled == subscriptionEnabled;
         }
     }
 }

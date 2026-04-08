@@ -25,7 +25,7 @@ internal class ProjectionCustomPropertyBuilder : IProjectionCustomProperty
 
     public IReadOnlyList<string> Fetchs { get; set; } = new string[0];
 
-    public List<Attribute> Attributes { get; set; } = new();
+    public List<Attribute> Attributes { get; set; } = [];
 
 
     IReadOnlyList<Attribute> IProjectionAttributeProvider.Attributes => this.Attributes;

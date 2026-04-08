@@ -10,13 +10,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.SecuritySystem.Domain" />
     <PackageReference Include="IvAt.SecuritySystem.Notification.Domain" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Notification\Framework.Notification.Domain\Framework.Notification.Domain.csproj" />
     <ProjectReference Include="..\Framework.Subscriptions.Domain\Framework.Subscriptions.Domain.csproj" />
+    <ProjectReference Include="..\Framework.Subscriptions.Metadata\Framework.Subscriptions.Metadata.csproj" />
   </ItemGroup>
 
 </Project>

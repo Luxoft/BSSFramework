@@ -51,7 +51,7 @@ public class CurrentUserSingleRelativePathTests : TestBase
                       .Select(obj => obj.Id).ToList());
 
         // Assert
-        loadedObjects.Should().BeEquivalentTo(new[] { this.testObjectIdents[expectedIndex] });
+        loadedObjects.Should().BeEquivalentTo([this.testObjectIdents[expectedIndex]]);
     }
 
     private static IEnumerable<object[]> TestRelativeEmployeeObject_FilterByPrimaryEmployeeRef_EmployeeBySecondaryRefMissed_Source() =>

@@ -25,7 +25,7 @@ public class FileScriptReader : IMigrationScriptReader
         var directories = Directory.GetDirectories(folderPath);
         var orderedDirectories = directories.OrderBy(s => s).ToList();
 
-        IEnumerable<MigrationDbScript> results = Array.Empty<MigrationDbScript>();
+        IEnumerable<MigrationDbScript> results = [];
 
         if (orderedDirectories.Any())
         {

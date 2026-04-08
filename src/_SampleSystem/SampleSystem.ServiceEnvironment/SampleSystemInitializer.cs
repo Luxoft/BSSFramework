@@ -2,7 +2,6 @@
 
 using Framework.Application.Lock;
 using Framework.Configuration.BLL;
-using Framework.Configuration.BLL.SubscriptionSystemService.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.BLL.TargetSystemService;
 using Framework.Database;
 
@@ -28,8 +27,6 @@ public class SampleSystemInitializer(
 
         await this.Initialize<ITargetSystemInitializer>(cancellationToken);
         await this.Initialize<ISystemConstantInitializer>(cancellationToken);
-
-        await this.Initialize<ISubscriptionInitializer>(cancellationToken);
     }
 
     private async Task Initialize<TInitializer>(CancellationToken cancellationToken)

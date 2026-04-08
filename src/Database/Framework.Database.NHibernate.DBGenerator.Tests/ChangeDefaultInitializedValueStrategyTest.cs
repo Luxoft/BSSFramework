@@ -57,7 +57,7 @@ public class ChangeDefaultInitializedValueStrategyTest
     {
         // Arrange
         var domainTypeMetadata = new DomainTypeMetadata(typeof(object), new AssemblyMetadata(typeof(object)));
-        domainTypeMetadata.AddFields([new PrimitiveTypeFieldMetadata("test", typeof(string), new[] { new VersionAttribute() }, domainTypeMetadata, false)]);
+        domainTypeMetadata.AddFields([new PrimitiveTypeFieldMetadata("test", typeof(string), [new VersionAttribute()], domainTypeMetadata, false)]);
 
         var databaseScriptGeneratorStrategyInfo = this.CreateDatabaseScriptGeneratorStrategyInfo([domainTypeMetadata]);
 

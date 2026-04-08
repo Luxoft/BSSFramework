@@ -1,7 +1,7 @@
 ﻿@* Generator: Template
     DisableLinePragmas: true*@@{}
 @using SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel
-@inherits Framework.Subscriptions.RazorTemplate<CustomNotificationModel>
+@inherits Framework.Subscriptions.Metadata.RazorTemplate<CustomNotificationModel>
 @functions {
     public override string Subject => $"Country {Current.Country.Code} has been updated";
 }
@@ -9,6 +9,6 @@
     <head></head>
     <body>
     <p>Country with code: @Current.Country.Code was updated and has @Current.LocationsCount locations</p>
-    <img src="@AttachmentLambda.AttachmentName"/>
+    <img src="@Subscription.AttachmentName"/>
     </body>
 </html>

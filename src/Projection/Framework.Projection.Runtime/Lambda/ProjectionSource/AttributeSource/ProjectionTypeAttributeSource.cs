@@ -22,7 +22,7 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
     /// <param name="environment">Окружение</param>
     /// <param name="projection">Тип на основе которого строится проекция</param>
     public ProjectionTypeAttributeSource(ProjectionLambdaEnvironment environment, IProjection projection)
-            : base(environment, projection) =>
+        : base(environment, projection) =>
         this.isPersistent = environment.PersistentDomainObjectBaseType.IsAssignableFrom(this.SourceType);
 
     /// <summary>
@@ -43,10 +43,10 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
     {
         var attributes = new Attribute[]
                          {
-                                 this.TryCreateBLLProjectionViewRole(),
-                                 this.CreateTableAttribute(),
-                                 this.CreateInlineBaseTypeAttribute(),
-                                 this.CreateProjectionAttribute()
+                             this.TryCreateBLLProjectionViewRole(),
+                             this.CreateTableAttribute(),
+                             this.CreateInlineBaseTypeAttribute(),
+                             this.CreateProjectionAttribute()
                          }.Where(attr => attr != null);
 
         return attributes.Concat(this.ProjectionValue.FilterAttributes)

@@ -5,7 +5,7 @@ namespace Framework.Projection.Lambda._Extensions;
 internal static class ProjectionExtensions
 {
     public static T GetSecurityProjection<T>(this IEnumerable<T> source, Type arg)
-            where T : IProjection
+        where T : IProjection
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (arg == null) throw new ArgumentNullException(nameof(arg));
@@ -14,7 +14,7 @@ internal static class ProjectionExtensions
     }
 
     public static T GetProjectionByRole<T>(this IEnumerable<T> source, Type sourceType, ProjectionRole role)
-            where T : IProjection
+        where T : IProjection
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));

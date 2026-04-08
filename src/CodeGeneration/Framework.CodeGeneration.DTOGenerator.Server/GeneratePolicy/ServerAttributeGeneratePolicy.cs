@@ -6,16 +6,17 @@ using Framework.Core;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.GeneratePolicy;
 
-public class ServerAttributeGeneratePolicy(IServerDTOGeneratorConfiguration configuration) : AttributeGeneratePolicy
+public class ServerAttributeGeneratePolicy(IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment> configuration)
+    : AttributeGeneratePolicy(configuration.Environment.ExtendedMetadata)
 {
     public override bool Used(Type domainType, RoleFileType fileType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        if (fileType is DomainOperationEventDTOFileType)
+        if (fileType is DomainOperationEventDTOFileType domainOperationEventDTOFileType)
         {
-            var operation = (fileType as DomainOperationEventDTOFileType).EventOperation;
+            var operation = domainOperationEventDTOFileType.EventOperation;
 
             return configuration.DomainObjectEventMetadata.GetEventOperations(domainType).Contains(operation);
         }

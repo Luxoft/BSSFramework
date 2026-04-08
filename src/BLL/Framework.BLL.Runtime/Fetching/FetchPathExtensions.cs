@@ -5,7 +5,6 @@ using Framework.BLL.Domain.Fetching;
 using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.Core;
 
-
 namespace Framework.BLL.Fetching;
 
 internal static class PropertyPathExtensions

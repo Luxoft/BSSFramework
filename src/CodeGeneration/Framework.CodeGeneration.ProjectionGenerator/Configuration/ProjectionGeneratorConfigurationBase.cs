@@ -81,7 +81,7 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
 
 
         {
-            foreach (var projectionFilterAttribute in domainType.GetCustomAttributes<ProjectionFilterAttribute>())
+            foreach (var projectionFilterAttribute in this.Environment.ExtendedMetadata.GetType(domainType).GetCustomAttributes<ProjectionFilterAttribute>())
             {
                 yield return projectionFilterAttribute.ToAttributeDeclaration();
             }
@@ -147,7 +147,7 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
             yield return ignoreFetchAttribute.ToAttributeDeclaration();
         }
 
-        foreach (var fetchPathAttribute in property.GetCustomAttributes<FetchPathAttribute>())
+        foreach (var fetchPathAttribute in this.Environment.ExtendedMetadata.GetProperty(property).GetCustomAttributes<FetchPathAttribute>())
         {
             yield return fetchPathAttribute.ToAttributeDeclaration();
         }

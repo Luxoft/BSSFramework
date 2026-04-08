@@ -8,7 +8,7 @@ using Framework.Validation;
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
 public class ValidatorInterfaceFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
-    where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
+    where TConfiguration : class, IbllGeneratorConfiguration<IbllGenerationEnvironment>
 {
     public override FileType FileType => FileType.ValidatorInterface;
 

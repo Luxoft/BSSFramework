@@ -10,7 +10,7 @@ namespace SampleSystem.CodeGenerate;
 
 public partial class ServerGenerationEnvironment :
         IBLLCoreGenerationEnvironment,
-        IBLLGenerationEnvironment,
+        IbllGenerationEnvironment,
         IDALGenerationEnvironment,
         IProjectionGenerationEnvironment,
         IAuditGenerationEnvironment,

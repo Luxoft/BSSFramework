@@ -9,7 +9,7 @@ namespace Framework.Authorization.TestGenerate.Configurations;
 
         IBLLCoreGenerationEnvironment,
 
-        IBLLGenerationEnvironment,
+        IbllGenerationEnvironment,
 
         IServerDTOGenerationEnvironment,
 

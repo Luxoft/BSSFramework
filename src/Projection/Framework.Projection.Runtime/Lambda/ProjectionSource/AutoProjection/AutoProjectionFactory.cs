@@ -42,9 +42,9 @@ internal class AutoProjectionFactory(ProjectionLambdaEnvironment environment, Pr
 
         return new ProjectionBuilder.ProjectionBuilder(domainType)
                {
-                       Name = projectionName,
-                       Role = ProjectionRole.AutoNode,
-                       Properties = properties.ToList()
+                   Name = projectionName,
+                   Role = ProjectionRole.AutoNode,
+                   Properties = properties.ToList()
                };
     }
 
@@ -60,15 +60,15 @@ internal class AutoProjectionFactory(ProjectionLambdaEnvironment environment, Pr
         if (this.environment.IsPersistent(property.PropertyType) && node.Children.Any())
         {
             var elementProjection = this.InternalCreate(
-                                                        property.PropertyType.GetCollectionElementTypeOrSelf(),
-                                                        $"{projectionName}_AutoProp_{property.Name}",
-                                                        node.Children);
+                property.PropertyType.GetCollectionElementTypeOrSelf(),
+                $"{projectionName}_AutoProp_{property.Name}",
+                node.Children);
 
             yield return new ProjectionPropertyBuilder(property.ToGetLambdaExpression(domainType), "_Auto")
                          {
-                                 ElementProjection = elementProjection,
-                                 Role = ProjectionPropertyRole.AutoNode,
-                                 IgnoreSerialization = true
+                             ElementProjection = elementProjection,
+                             Role = ProjectionPropertyRole.AutoNode,
+                             IgnoreSerialization = true
                          };
         }
         else
@@ -79,9 +79,9 @@ internal class AutoProjectionFactory(ProjectionLambdaEnvironment environment, Pr
 
                 yield return new ProjectionPropertyBuilder(projectionPath.PropertyPath.ToLambdaExpression(domainType), $"_Last_{lastPropertyValue.PropertyName}")
                              {
-                                     Role = ProjectionPropertyRole.LastAutoNode,
-                                     IgnoreSerialization = true,
-                                     ElementProjection = lastPropertyValue.ElementProjection
+                                 Role = ProjectionPropertyRole.LastAutoNode,
+                                 IgnoreSerialization = true,
+                                 ElementProjection = lastPropertyValue.ElementProjection
                              };
             }
         }

@@ -18,7 +18,7 @@ using GenericQueryable.Fetching;
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
 public class MainDTOFetchRuleExpanderBaseFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
-    where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
+    where TConfiguration : class, IbllGeneratorConfiguration<IbllGenerationEnvironment>
 {
     public override FileType FileType => FileType.MainDTOFetchRuleExpanderBase;
 

@@ -3,7 +3,6 @@ using System.Reflection;
 
 using Framework.Core;
 
-
 namespace Framework.Projection.Lambda;
 
 /// <summary>

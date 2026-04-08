@@ -18,14 +18,14 @@ public class ProjectionCustomProperty<TProperty> : IProjectionCustomProperty
     /// <param name="getPropProjection">Проекция на тип свойства</param>
     /// <param name="fetchs">Дополнительная подгрузка свойств</param>
     /// <param name="attributes">Дополнительные атрибуты генерации</param>
-    public ProjectionCustomProperty(string name, bool writable = false, Func<Projection<TProperty>> getPropProjection = null, Type collectionType = null, IEnumerable<string> fetchs = null, IEnumerable<Attribute> attributes = null)
+    public ProjectionCustomProperty(string name, bool writable = false, Func<Projection<TProperty>>? getPropProjection = null, Type? collectionType = null, IEnumerable<string>? fetchs = null, IEnumerable<Attribute>? attributes = null)
     {
         if (string.IsNullOrWhiteSpace(name)) { throw new ArgumentException("Value cannot be null or whitespace.", nameof(name)); }
 
         this.Name = name;
         this.Writable = writable;
         this.lazyType = LazyHelper.Create(() => getPropProjection == null ? (TypeReferenceBase)new TypeReferenceBase.FixedTypeReference(collectionType.SafeMakeProjectionCollectionType(typeof(TProperty)))
-                                                        : new TypeReferenceBase.BuildTypeReference(typeof(TProperty), collectionType, false, getPropProjection()));
+                                                          : new TypeReferenceBase.BuildTypeReference(typeof(TProperty), collectionType, false, getPropProjection()));
 
         this.Fetchs = fetchs.EmptyIfNull().ToList();
         this.Attributes = attributes.EmptyIfNull().ToList();

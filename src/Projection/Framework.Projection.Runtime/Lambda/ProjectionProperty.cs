@@ -13,7 +13,7 @@ namespace Framework.Projection.Lambda;
 /// Проекционное свойство
 /// </summary>
 public abstract class ProjectionProperty<TExpression, TElement> : IProjectionProperty
-        where TExpression : LambdaExpression
+    where TExpression : LambdaExpression
 {
     private readonly Lazy<Projection<TElement>> lazyElementProjection;
 

@@ -16,8 +16,8 @@ using Framework.Validation;
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 
-public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGeneratorConfiguration<TEnvironment, FileType>, IBLLGeneratorConfiguration<TEnvironment>
-        where TEnvironment : class, IBLLGenerationEnvironment
+public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGeneratorConfiguration<TEnvironment, FileType>, IbllGeneratorConfiguration<TEnvironment>
+        where TEnvironment : class, IbllGenerationEnvironment
 {
 
     private readonly Lazy<ReadOnlyCollection<Type>> lazyValidationTypes;
@@ -84,7 +84,7 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGenerato
         return true;
     }
 
-    public virtual IBLLFactoryContainerGeneratorConfiguration Logics { get; }
+    public virtual IbllFactoryContainerGeneratorConfiguration Logics { get; }
 
     public virtual IFetchPathFactory<ViewDTOType> FetchPathFactory { get; }
 
@@ -114,7 +114,7 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGenerato
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (validatorMapExpr == null) throw new ArgumentNullException(nameof(validatorMapExpr));
 
-        return new DefaultValidatorGenerator<IBLLGeneratorConfiguration<TEnvironment>>(this, domainType, validatorMapExpr);
+        return new DefaultValidatorGenerator<IbllGeneratorConfiguration<TEnvironment>>(this, domainType, validatorMapExpr);
     }
 
     public virtual bool GenerateValidation { get; } = true;
@@ -132,7 +132,7 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGenerato
 
     protected override IEnumerable<Type> GetDomainTypes() => this.Environment.BLLCore.BLLDomainTypes;
 
-    protected virtual IBLLFactoryContainerGeneratorConfiguration GetLogics() => new BLLFactoryContainerGeneratorConfiguration<BLLGeneratorConfigurationBase<TEnvironment>>(this);
+    protected virtual IbllFactoryContainerGeneratorConfiguration GetLogics() => new BLLFactoryContainerGeneratorConfiguration<BLLGeneratorConfigurationBase<TEnvironment>>(this);
 
     protected virtual ICodeFileFactoryHeader<FileType> SecurityDomainBLLBaseFileFactoryHeader { get; } =
 

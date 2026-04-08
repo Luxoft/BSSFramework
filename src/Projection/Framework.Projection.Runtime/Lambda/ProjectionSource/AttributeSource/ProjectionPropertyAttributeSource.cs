@@ -20,7 +20,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
     /// <param name="environment">Окружение</param>
     /// <param name="projectionProperty">Свойство проекции</param>
     public ProjectionPropertyAttributeSource(ProjectionLambdaEnvironment environment, IProjectionProperty projectionProperty)
-            : base(environment, projectionProperty)
+        : base(environment, projectionProperty)
     {
         this.ExpandPathHead = this.ProjectionValue.Path.TakeWhile(prop => this.Environment.IsPersistent(prop.PropertyType)).ToPropertyPath();
 

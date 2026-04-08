@@ -2,30 +2,22 @@
 
 using Framework.Core.ReflectionImpl;
 using Framework.Core.TypeResolving.TypeSource;
+using Framework.Projection.ExtendedMetadata;
 
 namespace Framework.Projection;
 
 /// <summary>
 /// Для генерации подменяет проекции в памяти на реально скомпилированные проекции в сборке
 /// </summary>
-public class AlreadyImplementedRuntimeProjectionEnvironment : IProjectionEnvironment
+public class AlreadyImplementedRuntimeProjectionEnvironment(IProjectionEnvironment baseEnvironment) : IProjectionEnvironment
 {
-    private readonly IProjectionEnvironment baseEnvironment;
+    public string Namespace { get; } = baseEnvironment.Namespace;
 
-    public AlreadyImplementedRuntimeProjectionEnvironment(IProjectionEnvironment baseEnvironment)
-    {
-        this.baseEnvironment = baseEnvironment ?? throw new ArgumentNullException(nameof(baseEnvironment));
+    public IAssemblyInfo Assembly { get; } = new AlreadyImplementedAssemblyInfo(baseEnvironment.Assembly);
 
-        this.Namespace = this.baseEnvironment.Namespace;
-        this.Assembly = new AlreadyImplementedAssemblyInfo(this.baseEnvironment.Assembly);
-        this.UseDependencySecurity = this.baseEnvironment.UseDependencySecurity;
-    }
+    public bool UseDependencySecurity { get; } = baseEnvironment.UseDependencySecurity;
 
-    public string Namespace { get; }
-
-    public IAssemblyInfo Assembly { get; }
-
-    public bool UseDependencySecurity { get; }
+    public IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } = baseEnvironment.ExtendedMetadata;
 
     private class AlreadyImplementedAssemblyInfo(IAssemblyInfo baseAssembly) : IAssemblyInfo
     {

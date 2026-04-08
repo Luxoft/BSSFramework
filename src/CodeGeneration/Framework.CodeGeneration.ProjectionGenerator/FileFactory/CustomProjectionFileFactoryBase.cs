@@ -39,7 +39,7 @@ public class CustomProjectionFileFactoryBase<TConfiguration>(TConfiguration conf
         }
     }
 
-    private IEnumerable<PropertyInfo> GetProperties(bool includeBase) => this.Configuration.Environment.GetProjectionProperties(this.DomainType, includeBase, true);
+    private IEnumerable<PropertyInfo> GetProperties(bool includeBase) => this.Configuration.Environment.GetProjectionProperties(this.DomainType!, includeBase, true);
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
     {

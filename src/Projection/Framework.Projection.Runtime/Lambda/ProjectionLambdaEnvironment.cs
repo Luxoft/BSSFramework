@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Immutable;
+using System.ComponentModel;
 
 using CommonFramework;
 
@@ -20,7 +21,7 @@ namespace Framework.Projection.Lambda;
 /// </summary>
 public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
 {
-    private IReadOnlyList<IProjection> projections;
+    private ImmutableArray<IProjection> projections;
 
     /// <summary>
     /// Конструктор
@@ -43,19 +44,20 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
 
         this.ProjectionTypeResolver = generateTypeResolver;
 
-        this.projections = projectionSource.Pipe(v => new LinkAllProjectionSource(v))
-                                           .Pipe(v => new VerifyUniqueProjectionSource(v))
-                                           .Pipe(
-                                               v => this.UseDependencySecurity
-                                                        ? (IProjectionSource)v
-                                                        : new CreateSecurityNodesProjectionSource(v, this))
-                                           .Pipe(v => new CreateAutoNodesProjectionSource(v, this))
-                                           .Pipe(v => new InjectMissedParentsProjectionSource(v))
-                                           .Pipe(v => new InjectAttributesProjectionSource(v, this))
-                                           .GetProjections()
-                                           .ToList();
+        this.projections = [
+            ..projectionSource.Pipe(v => new LinkAllProjectionSource(v))
+                              .Pipe(v => new VerifyUniqueProjectionSource(v))
+                              .Pipe(
+                                  v => this.UseDependencySecurity
+                                           ? (IProjectionSource)v
+                                           : new CreateSecurityNodesProjectionSource(v, this))
+                              .Pipe(v => new CreateAutoNodesProjectionSource(v, this))
+                              .Pipe(v => new InjectMissedParentsProjectionSource(v))
+                              .Pipe(v => new InjectAttributesProjectionSource(v, this))
+                              .GetProjections()
+        ];
 
-        return TypeResolverHelper.Create(this.projections.ToDictionary(projection => projection, generateTypeResolver.TryResolve));
+        return TypeResolverHelper.Create(this.projections.ToDictionary(projection => projection, this.ProjectionTypeResolver.Resolve));
     }
 
     public Type GetProjectionTypeByRole(Type sourceType, ProjectionRole role)
@@ -64,10 +66,10 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
         if (!Enum.IsDefined(typeof(ProjectionRole), role))
             throw new InvalidEnumArgumentException(nameof(role), (int)role, typeof(ProjectionRole));
 
-        return this.ProjectionTypeResolver.TryResolve(this.projections.GetProjectionByRole(sourceType, role));
+        return this.ProjectionTypeResolver.Resolve(this.projections.GetProjectionByRole(sourceType, role));
     }
 
-    public Type GetSecurityProjectionType(Type sourceType)
+    public Type? GetSecurityProjectionType(Type sourceType)
     {
         if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
 

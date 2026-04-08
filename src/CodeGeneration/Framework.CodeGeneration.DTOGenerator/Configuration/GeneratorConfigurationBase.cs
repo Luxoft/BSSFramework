@@ -435,5 +435,5 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
     protected virtual IEnumerable<Type> GetProjectionTypes() =>
         this.Environment.ProjectionEnvironments
             .SelectMany(projectionEnvironment => projectionEnvironment.Assembly.Types)
-            .Where(type => type.HasAttribute<ProjectionAttribute>(attr => attr.Role == ProjectionRole.Default));
+            .Where(type => this.Environment.ExtendedMetadata.GetType(type).HasAttribute<ProjectionAttribute>(attr => attr.Role == ProjectionRole.Default));
 }

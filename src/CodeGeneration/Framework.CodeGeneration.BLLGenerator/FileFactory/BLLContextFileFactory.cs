@@ -9,7 +9,7 @@ using Framework.FileGeneration.Configuration;
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
 public class BLLContextFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
-    where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
+    where TConfiguration : class, IbllGeneratorConfiguration<IbllGenerationEnvironment>
 {
     public override FileType FileType => FileType.BLLContext;
 

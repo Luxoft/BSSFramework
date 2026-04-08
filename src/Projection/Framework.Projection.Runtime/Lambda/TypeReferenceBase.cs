@@ -13,10 +13,6 @@ namespace Framework.Projection.Lambda;
 /// </summary>
 public abstract class TypeReferenceBase
 {
-    protected TypeReferenceBase()
-    {
-    }
-
     /// <summary>
     /// Попытка заменить проекцию
     /// </summary>
@@ -49,7 +45,7 @@ public abstract class TypeReferenceBase
     /// </summary>
     public class BuildTypeReference : TypeReferenceBase
     {
-        public BuildTypeReference(Type elementType, Type collectionType, bool isNullable, IProjection elementProjection)
+        public BuildTypeReference(Type elementType, Type? collectionType, bool isNullable, IProjection? elementProjection)
         {
             this.ElementType = elementType ?? throw new ArgumentNullException(nameof(elementType));
             this.CollectionType = collectionType;
@@ -61,10 +57,9 @@ public abstract class TypeReferenceBase
         {
             if (expression == null) { throw new ArgumentNullException(nameof(expression)); }
 
-            this.CollectionType = expression.ReturnType.GetProjectionCollectionType();
-
-            this.IsNullable = expression.ReturnType.IsValueType && expression.ToPropertyPath().HasReferenceResult();
             this.ElementType = expression.ReturnType.GetNullableElementType() ?? expression.ReturnType.GetCollectionElementTypeOrSelf();
+            this.CollectionType = expression.ReturnType.GetProjectionCollectionType();
+            this.IsNullable = expression.ReturnType.IsValueType && expression.ToPropertyPath().HasReferenceResult();
         }
 
         /// <summary>
@@ -75,7 +70,7 @@ public abstract class TypeReferenceBase
         /// <summary>
         /// Тип коллекции
         /// </summary>
-        public Type CollectionType { get; }
+        public Type? CollectionType { get; }
 
         /// <summary>
         /// Свойство является коллекцией
@@ -90,7 +85,7 @@ public abstract class TypeReferenceBase
         /// <summary>
         /// Проекция на тип свойства
         /// </summary>
-        public IProjection ElementProjection { get; }
+        public IProjection? ElementProjection { get; }
 
         public override string ToString() => $"ElementType = {this.ElementType}, IsCollection = {this.IsCollection} | IsNullable = {this.IsNullable} | ElementProjection = {this.ElementProjection}";
 

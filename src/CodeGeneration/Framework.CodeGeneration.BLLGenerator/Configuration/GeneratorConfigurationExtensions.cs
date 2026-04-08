@@ -8,7 +8,7 @@ namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 public static class GeneratorConfigurationExtensions
 {
     public static CodeTypeDeclaration GetBLLContextContainerCodeTypeDeclaration(
-        this IBLLGeneratorConfiguration<IBLLGenerationEnvironment> configuration,
+        this IbllGeneratorConfiguration<IbllGenerationEnvironment> configuration,
         string typeName,
         bool asAbstract,
         CodeTypeReference? containerType = null)

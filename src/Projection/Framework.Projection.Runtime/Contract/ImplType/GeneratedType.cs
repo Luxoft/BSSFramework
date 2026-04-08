@@ -185,19 +185,19 @@ internal class GeneratedType : BaseTypeImpl
 
                       select new
                              {
-                                     InterfaceMethod = prop.ContractProperty.GetMethod,
+                                 InterfaceMethod = prop.ContractProperty.GetMethod,
 
-                                     ImplementMethod = implementProp.GetMethod
+                                 ImplementMethod = implementProp.GetMethod
                              };
 
         var methods = request.ToArray();
 
         return new InterfaceMapping
                {
-                       InterfaceType = interfaceType,
-                       TargetType = this,
-                       InterfaceMethods = methods.ToArray(pair => pair.InterfaceMethod),
-                       TargetMethods = methods.ToArray(pair => pair.ImplementMethod)
+                   InterfaceType = interfaceType,
+                   TargetType = this,
+                   InterfaceMethods = methods.ToArray(pair => pair.InterfaceMethod),
+                   TargetMethods = methods.ToArray(pair => pair.ImplementMethod)
                };
     }
 

@@ -17,7 +17,7 @@ internal class GeneratedCustomProperty : BasePropertyInfoImpl
 
     private readonly PropertyMethodInfoImpl getMethod = new();
 
-    private readonly PropertyMethodInfoImpl setMethod;
+    private readonly PropertyMethodInfoImpl? setMethod;
 
 
     public GeneratedCustomProperty(ProjectionLambdaEnvironment environment, IProjectionCustomProperty customProperty, GeneratedType reflectedType)
@@ -46,11 +46,11 @@ internal class GeneratedCustomProperty : BasePropertyInfoImpl
 
     public override object[] GetCustomAttributes(Type attributeType, bool inherit) => (object[])this.customProjectionProperty.Attributes.Where(attributeType.IsInstanceOfType).ToArray(attributeType);
 
-    public override object[] GetCustomAttributes(bool inherit) => this.customProjectionProperty.Attributes.ToArray();
+    public override object[] GetCustomAttributes(bool inherit) => this.customProjectionProperty.Attributes.ToArray<object>();
 
     public override ParameterInfo[] GetIndexParameters() => [];
 
     public override MethodInfo GetGetMethod(bool nonPublic) => this.getMethod;
 
-    public override MethodInfo GetSetMethod(bool nonPublic) => this.setMethod;
+    public override MethodInfo? GetSetMethod(bool nonPublic) => this.setMethod;
 }

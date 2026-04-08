@@ -31,11 +31,11 @@ internal class InjectMissedParentsProjectionSource(IProjectionSource baseSource)
 
                                   select new
                                          {
-                                                 Projection = elementProjection,
+                                             Projection = elementProjection,
 
-                                                 ParentProjection = projection,
+                                             ParentProjection = projection,
 
-                                                 ParentProperty = parentProperty
+                                             ParentProperty = parentProperty
                                          };
 
 
@@ -43,9 +43,9 @@ internal class InjectMissedParentsProjectionSource(IProjectionSource baseSource)
         {
             var newPropertyBuilder = new ProjectionPropertyBuilder(pair.ParentProperty.ToGetLambdaExpression(pair.Projection.SourceType))
                                      {
-                                             Role = ProjectionPropertyRole.MissedParent,
-                                             ElementProjection = pair.ParentProjection,
-                                             IgnoreSerialization = true
+                                         Role = ProjectionPropertyRole.MissedParent,
+                                         ElementProjection = pair.ParentProjection,
+                                         IgnoreSerialization = true
                                      };
 
             pair.Projection.Properties.Add(newPropertyBuilder);

@@ -13,6 +13,7 @@ using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.Database;
 using Framework.Database.NHibernate._MappingSettings;
 using Framework.Projection.ExtendedMetadata;
+using Framework.Validation;
 
 namespace Framework.Authorization.TestGenerate.Configurations;
 
@@ -69,8 +70,15 @@ public partial class AuthorizationGenerationEnvironment : GenerationEnvironmentB
 
         new DomainTypeRootExtendedMetadataBuilder()
 
+            .Add<DomainObjectBase>(tb => tb.AddAttribute<AvailableDecimalValidatorAttribute>()
+                                           .AddAttribute<AvailablePeriodValidatorAttribute>()
+                                           .AddAttribute<AvailableDateTimeValidatorAttribute>()
+                                           .AddAttribute<DefaultStringMaxLengthValidatorAttribute>())
+
             .Add<BusinessRole>(tb =>
-                                   tb.AddAttribute(new BLLViewRoleAttribute()))
+                                   tb.AddAttribute(new BLLViewRoleAttribute())
+                                     .AddProperty(v => v.Permissions, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.Ignore)))
+                                     .AddProperty(v => v.Description, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly))))
 
             .Add<Principal>(tb =>
                                 tb.AddAttribute(new BLLViewRoleAttribute())
@@ -86,8 +94,9 @@ public partial class AuthorizationGenerationEnvironment : GenerationEnvironmentB
 
             .Add<SecurityContextType>(tb =>
                                           tb.AddAttribute(new BLLViewRoleAttribute()))
-            .Add<DelegateToItemModel>(tb => tb.AddProperty(v => v.Permission,
-                                                           pb => pb.AddAttribute(new AutoMappingAttribute(false))));
+            .Add<DelegateToItemModel>(tb => tb.AddProperty(
+                                          v => v.Permission,
+                                          pb => pb.AddAttribute(new AutoMappingAttribute(false))));
 
     public static readonly AuthorizationGenerationEnvironment Default = new();
 }

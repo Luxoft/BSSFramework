@@ -7,7 +7,7 @@ namespace Framework.Projection.Lambda.ProjectionSource.AttributeSource;
 /// </summary>
 /// <typeparam name="TProjectionValue">Проекционный тип, содержащий атрибуты</typeparam>
 public abstract class AttributeSourceBase<TProjectionValue> : IAttributeSource
-        where TProjectionValue : class, IProjectionAttributeProvider
+    where TProjectionValue : class, IProjectionAttributeProvider
 {
     /// <summary>
     /// Конструктор

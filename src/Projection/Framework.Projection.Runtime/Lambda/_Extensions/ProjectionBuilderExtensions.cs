@@ -17,17 +17,17 @@ internal static class ProjectionBuilderExtensions
             foreach (var projectionProperty in projectionPair.Key.Properties)
             {
                 projectionPair.Value.Properties.Add(new ProjectionPropertyBuilder(projectionProperty)
-                                                    {
-                                                            ElementProjection = projectionProperty.Type.ElementProjection.Maybe(proj => builderDict[proj])
-                                                    });
+                                                          {
+                                                              ElementProjection = projectionProperty.Type.ElementProjection.Maybe(proj => builderDict[proj])
+                                                          });
             }
 
             foreach (var projectionProperty in projectionPair.Key.CustomProperties)
             {
                 projectionPair.Value.CustomProperties.Add(new ProjectionCustomPropertyBuilder(projectionProperty)
-                                                          {
-                                                                  Type = projectionProperty.Type.TryOverrideElementProjection(proj => builderDict[proj])
-                                                          });
+                                                                {
+                                                                    Type = projectionProperty.Type.TryOverrideElementProjection(proj => builderDict[proj])
+                                                                });
             }
         }
 

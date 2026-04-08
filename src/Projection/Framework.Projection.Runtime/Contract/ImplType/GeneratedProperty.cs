@@ -33,15 +33,15 @@ internal class GeneratedProperty : BasePropertyInfoImpl
         this.ReflectedType = reflectedType;
 
         this.lazyPropertyType = LazyHelper.Create(() =>
-                                                  {
-                                                      var elementType = contractProperty.PropertyType.GetCollectionElementTypeOrSelf();
+        {
+            var elementType = contractProperty.PropertyType.GetCollectionElementTypeOrSelf();
 
-                                                      var elementProjectionType = (GeneratedType)this.environment.ContractTypeResolver.TryResolve(elementType);
+            var elementProjectionType = (GeneratedType)this.environment.ContractTypeResolver.TryResolve(elementType);
 
-                                                      var propertyProjectionType = elementProjectionType.Maybe(type => contractProperty.PropertyType.IsCollection() ? typeof(IEnumerable<>).CachedMakeGenericType(type) : type);
+            var propertyProjectionType = elementProjectionType.Maybe(type => contractProperty.PropertyType.IsCollection() ? typeof(IEnumerable<>).CachedMakeGenericType(type) : type);
 
-                                                      return propertyProjectionType ?? contractProperty.PropertyType;
-                                                  });
+            return propertyProjectionType ?? contractProperty.PropertyType;
+        });
     }
 
 

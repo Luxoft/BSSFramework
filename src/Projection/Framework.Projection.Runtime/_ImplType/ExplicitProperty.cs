@@ -15,12 +15,12 @@ internal class ExplicitProperty : BasePropertyInfoImpl
 
     private readonly string baseName;
 
-    private readonly PropertyPath customPropertyPath;
+    private readonly PropertyPath? customPropertyPath;
 
     private readonly PropertyMethodInfoImpl getMethod = new();
 
 
-    public ExplicitProperty(PropertyInfo interfaceProp, Type reflectedType, string baseName, Type propertyType, PropertyPath customPropertyPath = null)
+    public ExplicitProperty(PropertyInfo interfaceProp, Type reflectedType, string baseName, Type propertyType, PropertyPath? customPropertyPath = null)
     {
         this.ReflectedType = reflectedType ?? throw new ArgumentNullException(nameof(reflectedType));
         this.InterfaceProp = this.GetGenericInterfaceProp(interfaceProp ?? throw new ArgumentNullException(nameof(interfaceProp)));
@@ -43,11 +43,11 @@ internal class ExplicitProperty : BasePropertyInfoImpl
     {
         if (baseProp == null) throw new ArgumentNullException(nameof(baseProp));
 
-        if (baseProp.ReflectedType.IsGenericType)
+        if (baseProp.ReflectedType!.IsGenericType)
         {
             var genericReflectedType = baseProp.ReflectedType.GetGenericTypeDefinition();
 
-            return genericReflectedType.GetProperty(baseProp.Name, true);
+            return genericReflectedType.GetProperty(baseProp.Name, true)!;
         }
 
         return baseProp;
@@ -64,10 +64,10 @@ internal class ExplicitProperty : BasePropertyInfoImpl
     }
 
     public override object[] GetCustomAttributes(bool inherit) =>
-        new Attribute[][]
+        new[]
         {
-            this.GetExpandPathAttributes().ToArray()
-        }.SelectMany().ToArray();
+            this.GetExpandPathAttributes().ToArray<Attribute>()
+        }.SelectMany().ToArray<object>();
 
     private IEnumerable<ExpandPathAttribute> GetExpandPathAttributes()
     {
@@ -78,5 +78,5 @@ internal class ExplicitProperty : BasePropertyInfoImpl
 
     public override MethodInfo GetGetMethod(bool nonPublic) => this.getMethod;
 
-    public override MethodInfo GetSetMethod(bool nonPublic) => null; //new PropertyMethodInfoImpl();
+    public override MethodInfo? GetSetMethod(bool nonPublic) => null; //new PropertyMethodInfoImpl();
 }

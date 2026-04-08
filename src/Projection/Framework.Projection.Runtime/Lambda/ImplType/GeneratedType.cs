@@ -80,8 +80,8 @@ internal class GeneratedType : BaseTypeImpl
 
     public override Type BaseType =>
 
-            this.isPersistent ? this.HasBaseSecurityType ? this.environment.GetSecurityProjectionType(this.SourceType) : this.environment.PersistentDomainObjectBaseType
-                    : this.environment.DomainObjectBaseType;
+        this.isPersistent ? this.HasBaseSecurityType ? this.environment.GetSecurityProjectionType(this.SourceType) : this.environment.PersistentDomainObjectBaseType
+            : this.environment.DomainObjectBaseType;
 
     public override Assembly Assembly { get; } = null;
 
@@ -112,8 +112,8 @@ internal class GeneratedType : BaseTypeImpl
 
                 var implementedSubInterfaces = wrappedSubInterfaces.ToArray(wrappedSubInterface =>
 
-                                                                                    wrappedSubInterface.IsGenericType ? wrappedSubInterface.GetGenericTypeDefinition().CachedMakeGenericType(wrappedSubInterface.GetGenericArguments().ToArray(wrappedArg => argDict[wrappedArg]))
-                                                                                            : wrappedSubInterface);
+                                                                                wrappedSubInterface.IsGenericType ? wrappedSubInterface.GetGenericTypeDefinition().CachedMakeGenericType(wrappedSubInterface.GetGenericArguments().ToArray(wrappedArg => argDict[wrappedArg]))
+                                                                                    : wrappedSubInterface);
 
                 yield return implementedSubInterfaces;
             }
@@ -133,8 +133,8 @@ internal class GeneratedType : BaseTypeImpl
                 var securityArgs = securityInterface.GetGenericArguments().ToArray(this.environment.GetSecurityProjectionType);
 
                 var projectionSecurityInterface = securityInterface.IsGenericType
-                                                          ? securityInterface.GetGenericTypeDefinition().CachedMakeGenericType(securityArgs)
-                                                          : securityInterface;
+                                                      ? securityInterface.GetGenericTypeDefinition().CachedMakeGenericType(securityArgs)
+                                                      : securityInterface;
 
                 yield return projectionSecurityInterface;
             }
@@ -212,10 +212,10 @@ internal class GeneratedType : BaseTypeImpl
 
         return new InterfaceMapping
                {
-                       InterfaceType = interfaceType,
-                       TargetType = this,
-                       InterfaceMethods = interfaceExplicitProperties.ToArray(prop => prop.InterfaceProp.GetMethod),
-                       TargetMethods = interfaceExplicitProperties.ToArray(prop => prop.GetMethod)
+                   InterfaceType = interfaceType,
+                   TargetType = this,
+                   InterfaceMethods = interfaceExplicitProperties.ToArray(prop => prop.InterfaceProp.GetMethod),
+                   TargetMethods = interfaceExplicitProperties.ToArray(prop => prop.GetMethod)
                };
     }
 
@@ -257,7 +257,7 @@ internal class GeneratedType : BaseTypeImpl
     private IEnumerable<ExplicitProperty> GetExplicitProperties()
     {
         var allInterfaceProperties = this.securityNodeInterfaces.SelectMany(genericSecurityInterface =>
-                                                                                    (genericSecurityInterface.IsGenericType ? genericSecurityInterface.GetGenericTypeDefinition() : genericSecurityInterface).GetAllInterfaceProperties()).Distinct().ToArray();
+                                                                                (genericSecurityInterface.IsGenericType ? genericSecurityInterface.GetGenericTypeDefinition() : genericSecurityInterface).GetAllInterfaceProperties()).Distinct().ToArray();
 
         var request = from generateProp in this.generatedProperties
 

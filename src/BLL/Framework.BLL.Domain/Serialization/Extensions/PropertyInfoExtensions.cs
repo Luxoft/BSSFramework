@@ -23,7 +23,7 @@ public static class PropertyInfoExtensions
     {
         if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
 
-        return propertyInfo.GetMode(dtoRole).Or(() => propertyInfo.DeclaringType.GetMode(dtoRole))
+        return propertyInfo.GetMode(dtoRole).Or(() => propertyInfo.DeclaringType!.GetMode(dtoRole))
                            .Or(CustomSerializationMode.Normal)
                            .Select(attrMode => attrMode == mode)
                            .GetValueOrDefault();

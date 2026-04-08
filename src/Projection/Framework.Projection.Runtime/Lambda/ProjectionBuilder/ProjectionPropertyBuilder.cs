@@ -29,7 +29,7 @@ internal class ProjectionPropertyBuilder : IProjectionProperty
         this.VirtualExplicitInterfaceProperty = projectionProperty.VirtualExplicitInterfaceProperty;
     }
 
-    public ProjectionPropertyBuilder(LambdaExpression path, string namePostfix = null)
+    public ProjectionPropertyBuilder(LambdaExpression path, string? namePostfix = null)
     {
         this.Expression = path ?? throw new ArgumentNullException(nameof(path));
         this.SourceType = path.Parameters.Single().Type;
@@ -48,7 +48,7 @@ internal class ProjectionPropertyBuilder : IProjectionProperty
 
     public PropertyPath Path { get; }
 
-    public Type CollectionType { get; }
+    public Type? CollectionType { get; }
 
     public bool IsCollection => this.CollectionType != null;
 
@@ -61,11 +61,11 @@ internal class ProjectionPropertyBuilder : IProjectionProperty
 
     public ProjectionPropertyRole Role { get; set; }
 
-    public ProjectionBuilder ElementProjection { get; set; }
+    public ProjectionBuilder? ElementProjection { get; set; }
 
     public bool IgnoreSerialization { get; set; }
 
-    public PropertyInfo VirtualExplicitInterfaceProperty { get; set; }
+    public PropertyInfo? VirtualExplicitInterfaceProperty { get; set; }
 
     public List<Attribute> Attributes { get; set; }
 

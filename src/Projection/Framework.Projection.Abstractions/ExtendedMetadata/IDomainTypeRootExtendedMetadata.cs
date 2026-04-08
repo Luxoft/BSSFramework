@@ -10,8 +10,11 @@ public interface IDomainTypeRootExtendedMetadata
 
     ICustomAttributeProvider GetProperty(PropertyInfo property);
 
-    TAttribute? GetCustomAttribute<TAttribute>(Type type)
-        where TAttribute : Attribute => this.GetType(type).GetCustomAttribute<TAttribute>();
+    TAttribute GetCustomAttribute<TAttribute>(Type type)
+        where TAttribute : Attribute => this.GetType(type).GetCustomAttribute<TAttribute>()!;
+
+    IEnumerable<TAttribute> GetCustomAttributes<TAttribute>(Type type)
+        where TAttribute : Attribute => this.GetType(type).GetCustomAttributes<TAttribute>();
 
     bool HasAttribute<TAttribute>(Type type)
         where TAttribute : Attribute

@@ -8,10 +8,10 @@ using Framework.CodeGeneration.Configuration;
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 
-public interface IBLLGeneratorConfiguration<out TEnvironment> : IBLLGeneratorConfiguration, ICodeGeneratorConfiguration<TEnvironment, FileType>
-        where TEnvironment : IBLLGenerationEnvironment;
+public interface IbllGeneratorConfiguration<out TEnvironment> : IbllGeneratorConfiguration, ICodeGeneratorConfiguration<TEnvironment, FileType>
+        where TEnvironment : IbllGenerationEnvironment;
 
-public interface IBLLGeneratorConfiguration : ICodeGeneratorConfiguration, ICodeTypeReferenceService<FileType>
+public interface IbllGeneratorConfiguration : ICodeGeneratorConfiguration, ICodeTypeReferenceService<FileType>
 {
     Type OperationContextType { get; }
 
@@ -47,7 +47,7 @@ public interface IBLLGeneratorConfiguration : ICodeGeneratorConfiguration, ICode
 
     IFetchPathFactory<ViewDTOType> FetchPathFactory { get; }
 
-    IBLLFactoryContainerGeneratorConfiguration Logics { get; }
+    IbllFactoryContainerGeneratorConfiguration Logics { get; }
 
     CodeTypeReference BLLContextTypeReference { get; }
 

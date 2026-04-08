@@ -1,4 +1,5 @@
 ﻿using Framework.Core.TypeResolving.TypeSource;
+using Framework.Projection.ExtendedMetadata;
 
 namespace Framework.Projection;
 
@@ -21,4 +22,6 @@ public interface IProjectionEnvironment
     /// Использование безопасности через атрибут `DependencySecurityAttribute`
     /// </summary>
     bool UseDependencySecurity { get; }
+
+    IDomainTypeRootExtendedMetadata ExtendedMetadata { get; }
 }

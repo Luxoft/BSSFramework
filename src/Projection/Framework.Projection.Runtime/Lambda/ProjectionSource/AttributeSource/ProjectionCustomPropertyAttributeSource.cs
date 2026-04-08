@@ -13,7 +13,7 @@ public class ProjectionCustomPropertyAttributeSource : AttributeSourceBase<IProj
     /// <param name="environment">Окружение</param>
     /// <param name="customProjectionProperty">Кастомное свойство проекции</param>
     public ProjectionCustomPropertyAttributeSource(ProjectionLambdaEnvironment environment, IProjectionCustomProperty customProjectionProperty)
-            : base(environment, customProjectionProperty)
+        : base(environment, customProjectionProperty)
     {
     }
 

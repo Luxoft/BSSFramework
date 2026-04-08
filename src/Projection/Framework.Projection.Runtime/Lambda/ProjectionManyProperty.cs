@@ -10,7 +10,7 @@ namespace Framework.Projection.Lambda;
 public class ProjectionManyProperty<TDomainObject, TElement> : ProjectionProperty<Expression<Func<TDomainObject, IEnumerable<TElement>>>, TElement>
 {
     public ProjectionManyProperty(Expression<Func<TDomainObject, IEnumerable<TElement>>> path, string name, Func<Projection<TElement>> getPropProjection, bool ignoreSerialization, IEnumerable<Attribute> attributes)
-            : base(path, name, getPropProjection, ignoreSerialization, attributes)
+        : base(path, name, getPropProjection, ignoreSerialization, attributes)
     {
         if (getPropProjection == null) throw new ArgumentNullException(nameof(getPropProjection));
     }

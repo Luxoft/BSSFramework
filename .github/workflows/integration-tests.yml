@@ -13,37 +13,46 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      sqlserver:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        env:
+          SA_PASSWORD: "P@ssw0rd"
+          ACCEPT_EULA: "Y"
+        ports:
+          - 1433:1433
+
     steps:
-      - run: git config --global core.autocrlf true
-      - uses: actions/checkout@v5
+      - name: Configure git
+        run: git config --global core.autocrlf true
+
+      - name: Checkout
+        uses: actions/checkout@v5
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: 10.0.x
+          dotnet-version: 8.0.x
 
-      - name: Set up SqlServer
+      - name: Wait for SQL Server
         run: |
-          sudo mkdir -p /var/opt/mssql/data;
-          sudo chmod -R 777 /var/opt/mssql/data;
-          sudo chown $(id -u ${USER}) /var/opt/mssql/data;
-          sudo docker run -u $(id -u ${USER}) -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=P@ssw0rd" -e "MSSQL_PID=Express" -v /var/opt/mssql/data:/var/opt/mssql/data -p 1433:1433 -d --name sqlexpress mcr.microsoft.com/mssql/server:2019-latest;
+          for i in {1..30}; do
+            nc -z localhost 1433 && echo "SQL Server is up" && exit 0
+            sleep 2
+          done
+          echo "SQL Server did not start in time"
+          exit 1
 
       - name: Restore dependencies
         working-directory: ./src
-        run: |
-          dotnet restore
+        run: dotnet restore
 
       - name: Build
         working-directory: ./src
-        run: |
-          dotnet build ./BssFramework.slnx --no-restore
+        run: dotnet build ./BssFramework.slnx --no-restore
 
       - name: NHibernate Integration Tests
-        run: |
-          dotnet test --blame src/_SampleSystem/_Tests/SampleSystem.IntegrationTests.NHibernate --no-build --verbosity normal;
-                
+        run: dotnet test src/_SampleSystem/_Tests/SampleSystem.IntegrationTests.NHibernate --no-build --verbosity normal
+
       - name: NHibernate Integration Tests Xunit
-        run: |
-          dotnet test --blame src/_SampleSystem/_Tests/SampleSystem.IntegrationTests.Xunit.NHibernate --no-build --verbosity normal;
-      
+        run: dotnet test src/_SampleSystem/_Tests/SampleSystem.IntegrationTests.Xunit.NHibernate --no-build --verbosity normal

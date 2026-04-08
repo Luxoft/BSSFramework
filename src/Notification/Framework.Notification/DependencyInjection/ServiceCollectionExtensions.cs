@@ -1,6 +1,7 @@
 ﻿using System.Net.Mail;
 
 using Framework.Core;
+using Framework.Infrastructure.DependencyInjection;
 using Framework.Notification.MailMessageModifier;
 using Framework.Notification.Settings;
 
@@ -11,6 +12,13 @@ namespace Framework.Notification.Extensions;
 
 public static class ServiceCollectionExtensions
 {
+    extension<TSelf>(IBssFrameworkSetup<TSelf> setup)
+        where TSelf : IBssFrameworkSetup<TSelf>
+    {
+        public TSelf AddSmtpNotification(IConfiguration configuration, bool isProd) =>
+            setup.AddServices(sc => sc.AddSmtpNotification(configuration, isProd));
+    }
+
     extension(IServiceCollection services)
     {
         public void AddSmtpNotification(IConfiguration configuration, bool isProd)

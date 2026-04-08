@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Abstractions\Framework.Infrastructure.Abstractions.csproj" />
     <ProjectReference Include="..\Framework.Notification.Runtime\Framework.Notification.Runtime.csproj" />
   </ItemGroup>
 

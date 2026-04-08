@@ -37,16 +37,15 @@ jobs:
             -v /var/opt/mssql:/var/opt/mssql \
             -p 1433:1433 \
             -d --name sqlexpress \
-            mcr.microsoft.com/mssql/server:2022-latest
+            mcr.microsoft.com/azure-sql-edge
 
       - name: Wait for SQL Server
         run: |
           for i in {1..30}; do
-            docker exec sqlexpress /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P P@ssw0rd -Q "SELECT 1" && exit 0
+            nc -z localhost 1433 && echo "SQL Server is up" && exit 0
             sleep 2
           done
-          echo "SQL Server did not start"
-          docker logs sqlexpress
+          echo "SQL Server did not start in time"
           exit 1
 
       - name: Restore dependencies

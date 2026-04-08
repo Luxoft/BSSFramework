@@ -13,8 +13,6 @@ public class DateModelCreateSubscription : Subscription<DateModel, _DataModel_Cr
 
     public override MailAddress Sender { get; } = new("DateModelCreateSampleSystem@luxoft.com", "DateModelCreateSampleSystem");
 
-    public override bool SendIndividualLetters { get; } = true;
-
     public override bool InlineAttachments { get; } = false;
 
     public override IEnumerable<NotificationMessageGenerationInfo<DateModel>> GetTo(IServiceProvider _, DomainObjectVersions<DateModel> versions)

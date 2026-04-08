@@ -15,8 +15,6 @@ public class Subscription : Subscription<Domain.Country, CustomNotificationModel
 
     public override MailAddress Sender { get; } = new("SampleSystem@luxoft.com", "SampleSystem");
 
-    public override bool SendIndividualLetters { get; } = true;
-
     public override CustomNotificationModel ConvertToRenderingObject(
         IServiceProvider serviceProvider,
         Domain.Country domainObject) => new(serviceProvider, domainObject);

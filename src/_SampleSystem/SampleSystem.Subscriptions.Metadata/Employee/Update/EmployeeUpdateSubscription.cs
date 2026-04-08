@@ -12,8 +12,6 @@ public class EmployeeUpdateSubscription : Subscription<Domain.Employee, _Employe
 
     public override MailAddress Sender { get; } = new("SampleSystem@luxoft.com", "SampleSystem");
 
-    public override bool SendIndividualLetters { get; } = true;
-
     public override bool InlineAttachments { get; } = false;
 
     public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)

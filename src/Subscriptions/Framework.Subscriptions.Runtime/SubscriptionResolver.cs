@@ -16,6 +16,8 @@ public class SubscriptionResolver(IEnumerable<ISubscription> subscriptions) : IS
             .GroupBy(pair => (pair.sm.DomainObjectType, pair.changeType), pair => pair.sm)
             .ToDictionary(pair => pair.Key, pair => pair.ToImmutableArray());
 
+    public ImmutableHashSet<Type> DomainTypes => field ??= [.. this.cache.Keys.Select(pair => pair.Item1)];
+
     public ImmutableArray<ISubscription> Resolve(Type domainType, DomainObjectChangeType domainObjectChangeType) =>
         this.cache.GetValueOrDefault((domainType, domainObjectChangeType), []);
 }

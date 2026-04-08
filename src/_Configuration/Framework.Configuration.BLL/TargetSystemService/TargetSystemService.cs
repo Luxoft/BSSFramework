@@ -9,6 +9,7 @@ using Framework.Core;
 using Framework.Core.TypeResolving;
 using Framework.Database;
 using Framework.Database.Domain;
+using Framework.Subscriptions;
 
 namespace Framework.Configuration.BLL.TargetSystemService;
 
@@ -17,6 +18,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
     TBLLContext targetSystemContext,
     TargetSystemInfo<TPersistentDomainObjectBase> targetSystemInfo,
     IEventOperationSender eventOperationSender,
+    ISubscriptionResolver subscriptionResolver,
     ICurrentRevisionService currentRevisionService) : ITargetSystemService
 
     where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
@@ -80,13 +82,16 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
         {
             foreach (var item in changes.GetSubset(typeof(TPersistentDomainObjectBase)).ToChangeTypeDict())
             {
-                yield return new ObjectModificationInfo<Guid>
-                             {
-                                 Identity = ((TPersistentDomainObjectBase)item.Key.Object).Id,
-                                 Revision = revisionNumber,
-                                 ModificationType = item.Value.ToModificationType(),
-                                 TypeInfo = new TypeInfoDescription(item.Key.Type)
-                             };
+                if (subscriptionResolver.DomainTypes.Contains(item.Key.Type))
+                {
+                    yield return new ObjectModificationInfo<Guid>
+                                 {
+                                     Identity = ((TPersistentDomainObjectBase)item.Key.Object).Id,
+                                     Revision = revisionNumber,
+                                     ModificationType = item.Value.ToModificationType(),
+                                     TypeInfo = new TypeInfoDescription(item.Key.Type)
+                                 };
+                }
             }
         }
     }

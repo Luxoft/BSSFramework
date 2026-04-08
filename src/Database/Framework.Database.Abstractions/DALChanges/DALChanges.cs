@@ -45,60 +45,66 @@ public class DALChanges : DALChanges<IDALObject>
 {
     private readonly IDictionaryCache<Type, DALChanges> subsetCache;
 
-    private readonly Lazy<Dictionary<Type, DALChanges<IDALObject>>> lazyGroupDALObjectByType;
+    private readonly Lazy<Dictionary<Type, DALChanges>> lazyGroupDALObjectByType;
 
     private readonly Lazy<Dictionary<Type, DALChanges<object>>> lazyGroupByType;
 
 
     public DALChanges(DALChanges<IDALObject> dalChanges)
-            : this(dalChanges.CreatedItems, dalChanges.UpdatedItems, dalChanges.RemovedItems)
+        : this(dalChanges.CreatedItems, dalChanges.UpdatedItems, dalChanges.RemovedItems)
     {
     }
 
     public DALChanges(IReadOnlyDictionary<IDALObject, DALObjectChangeType> dalChanges)
-            : this(
-                   dalChanges.Where(pair => pair.Value == DALObjectChangeType.Created).ToReadOnlyCollection(pair => pair.Key),
-                   dalChanges.Where(pair => pair.Value == DALObjectChangeType.Updated).ToReadOnlyCollection(pair => pair.Key),
-                   dalChanges.Where(pair => pair.Value == DALObjectChangeType.Removed).ToReadOnlyCollection(pair => pair.Key))
+        : this(
+            dalChanges.Where(pair => pair.Value == DALObjectChangeType.Created).ToReadOnlyCollection(pair => pair.Key),
+            dalChanges.Where(pair => pair.Value == DALObjectChangeType.Updated).ToReadOnlyCollection(pair => pair.Key),
+            dalChanges.Where(pair => pair.Value == DALObjectChangeType.Removed).ToReadOnlyCollection(pair => pair.Key))
     {
     }
 
     public DALChanges(IEnumerable<IDALObject> createdItems, IEnumerable<IDALObject> updatedItems, IEnumerable<IDALObject> removedItems)
-            : base(createdItems, updatedItems, removedItems)
+        : base(createdItems, updatedItems, removedItems)
     {
         this.subsetCache = new DictionaryCache<Type, DALChanges>(t => new DALChanges(this.Where(dalObject => t.IsAssignableFrom(dalObject.Type)))).WithLock();
 
         this.lazyGroupDALObjectByType = LazyHelper.Create(() =>
-                                                           {
-                                                               var plainValues = this.ToPlainValues();
+        {
+            var plainValues = this.ToPlainValues();
 
-                                                               var grouped = plainValues.GroupBy(z => z.Item1.Type);
+            var grouped = plainValues.GroupBy(z => z.Item1.Type);
 
-                                                               return grouped.ToDictionary(z => z.Key, q => q.Partial(z => z.Item2 == DALObjectChangeType.Created, z => z.Item2 == DALObjectChangeType.Updated, (cr, upd, rem) => new DALChanges<IDALObject>(cr.Select(e => e.Item1), upd.Select(e => e.Item1), rem.Select(e => e.Item1))));
-                                                           });
+            return grouped.ToDictionary(
+                z => z.Key,
+                q => q.Partial(
+                    z => z.Item2 == DALObjectChangeType.Created,
+                    z => z.Item2 == DALObjectChangeType.Updated,
+                    (cr, upd, rem) => new DALChanges(cr.Select(e => e.Item1), upd.Select(e => e.Item1), rem.Select(e => e.Item1))));
+        });
 
         this.lazyGroupByType = LazyHelper.Create(() =>
-                                                  {
-                                                      var request = from pair in this.ToChangeTypeDict()
+        {
+            var request = from pair in this.ToChangeTypeDict()
 
-                                                                    group new { pair.Key.Object, pair.Value } by pair.Key.Type into typeGroup
+                          group new { pair.Key.Object, pair.Value } by pair.Key.Type
+                          into typeGroup
 
-                                                                    select new
-                                                                           {
-                                                                                   typeGroup.Key,
-                                                                                   Value = new DALChanges<object>(
-                                                                                    typeGroup.Where(pair => pair.Value == DALObjectChangeType.Created).Select(pair => pair.Object),
-                                                                                    typeGroup.Where(pair => pair.Value == DALObjectChangeType.Updated).Select(pair => pair.Object),
-                                                                                    typeGroup.Where(pair => pair.Value == DALObjectChangeType.Removed).Select(pair => pair.Object))
-                                                                           };
+                          select new
+                                 {
+                                     typeGroup.Key,
+                                     Value = new DALChanges<object>(
+                                         typeGroup.Where(pair => pair.Value == DALObjectChangeType.Created).Select(pair => pair.Object),
+                                         typeGroup.Where(pair => pair.Value == DALObjectChangeType.Updated).Select(pair => pair.Object),
+                                         typeGroup.Where(pair => pair.Value == DALObjectChangeType.Removed).Select(pair => pair.Object))
+                                 };
 
-                                                      return request.ToDictionary(pair => pair.Key, pair => pair.Value);
-                                                  });
+            return request.ToDictionary(pair => pair.Key, pair => pair.Value);
+        });
     }
 
     public DALChanges GetSubset(Type type) => this.subsetCache[type];
 
-    public Dictionary<Type, DALChanges<IDALObject>> GroupDALObjectByType() => this.lazyGroupDALObjectByType.Value;
+    public Dictionary<Type, DALChanges> GroupDALObjectByType() => this.lazyGroupDALObjectByType.Value;
 
     public Dictionary<Type, DALChanges<object>> GroupByType() => this.lazyGroupByType.Value;
 }

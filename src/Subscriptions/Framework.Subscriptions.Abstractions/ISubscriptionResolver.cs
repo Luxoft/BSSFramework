@@ -7,5 +7,7 @@ namespace Framework.Subscriptions;
 
 public interface ISubscriptionResolver
 {
+    ImmutableHashSet<Type> DomainTypes { get; }
+
     ImmutableArray<ISubscription> Resolve(Type domainType, DomainObjectChangeType domainObjectChangeType);
 }

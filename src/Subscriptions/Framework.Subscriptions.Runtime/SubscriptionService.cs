@@ -1,7 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.Net.Mail;
-
-using CommonFramework;
+﻿using CommonFramework;
 
 using Framework.Core;
 using Framework.Subscriptions.Domain;

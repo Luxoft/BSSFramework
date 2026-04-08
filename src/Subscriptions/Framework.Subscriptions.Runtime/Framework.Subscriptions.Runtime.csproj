@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="IvAt.CommonFramework.GenericRepository" />
+    <PackageReference Include="IvAt.CommonFramework.IdentitySource.Abstractions" />
     <PackageReference Include="IvAt.CommonFramework.VisualIdentitySource.Abstractions" />
     <PackageReference Include="IvAt.SecuritySystem.Notification.Abstractions" />
   </ItemGroup>

@@ -6,6 +6,7 @@ using Framework.Infrastructure.DependencyInjection;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 using SampleSystem.BLL;
 using SampleSystem.Domain;
@@ -18,11 +19,12 @@ public static class SampleSystemApplicationExtensions
 {
     extension(IServiceCollection services)
     {
-        public IServiceCollection AddGeneralApplicationServices(IConfiguration configuration) =>
+        public IServiceCollection AddGeneralApplicationServices(IConfiguration configuration, IHostEnvironment hostEnvironment) =>
+
             services.AddHttpContextAccessor()
                     .AddLogging()
                     .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<EmployeeBLL>())
-                    .AddApplicationNotification(configuration)
+                    .AddApplicationNotification(configuration, hostEnvironment)
                     .AddRelativePaths()
                     .AddApplicationServices();
 
@@ -38,12 +40,11 @@ public static class SampleSystemApplicationExtensions
                     .AddScoped<SampleSystemCustomAribaLocalDBEventMessageSender>()
                     .AddKeyedSingleton("DTO", TypeResolverHelper.Create(TypeSource.FromSample<BusinessUnitSimpleDTO>(), TypeSearchMode.Both)); // For legacy audit
 
-        private IServiceCollection AddApplicationNotification(IConfiguration configuration)
+        private IServiceCollection AddApplicationNotification(IConfiguration configuration, IHostEnvironment hostEnvironment)
         {
             services.AddNotificationJob();
 
-            //services.AddSmtpNotification(configuration);
-            //services.AddRewriteReceiversDependencies(configuration);
+            //services.AddSmtpNotification(configuration, hostEnvironment.IsProduction());
 
             return services;
         }

@@ -8,10 +8,16 @@ using SecuritySystem.Notification.Domain;
 
 namespace Framework.Subscriptions.Metadata;
 
-public interface ISubscription<TDomainObject, TRenderingObject> : ISubscription<TDomainObject>
+public interface ISubscription<TDomainObject, TRenderingObject> : ISubscription
     where TDomainObject : class
     where TRenderingObject : class
 {
+    Type ISubscription.DomainObjectType => typeof(TDomainObject);
+
+    Type ISubscription.RenderingObjectType => typeof(TRenderingObject);
+
+    bool IsProcessed(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
+
     TRenderingObject ConvertToRenderingObject(IServiceProvider serviceProvider, TDomainObject domainObject);
 
     IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetTo(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
@@ -27,14 +33,6 @@ public interface ISubscription<TDomainObject, TRenderingObject> : ISubscription<
     IEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions);
 }
 
-public interface ISubscription<TDomainObject> : ISubscription
-    where TDomainObject : class
-{
-    Type ISubscription.DomainObjectType => typeof(TDomainObject);
-
-    bool IsProcessed(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
-}
-
 /// <summary>
 ///     Определяет интерфейс экземпляра метаданных Code first подписки.
 /// </summary>
@@ -47,6 +45,8 @@ public interface ISubscription
     ///     Тип доменного объекта.
     /// </value>
     Type DomainObjectType { get; }
+
+    Type RenderingObjectType { get; }
 
     SubscriptionHeader Header { get; }
 

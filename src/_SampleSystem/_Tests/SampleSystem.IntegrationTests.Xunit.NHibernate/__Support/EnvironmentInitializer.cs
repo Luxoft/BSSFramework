@@ -10,6 +10,7 @@ using Framework.AutomationCore.Xunit.ServiceEnvironment;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting.Internal;
 
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.IntegrationTests.__Support.Utils;
@@ -39,7 +40,7 @@ public class EnvironmentInitializer : AutomationCoreFrameworkInitializer
 
     public override IServiceProvider ConfigureTestEnvironment(IServiceCollection services, IConfiguration configuration) =>
         services
-            .AddGeneralDependencyInjection(configuration, s => s.AddExtensions(new SampleSystemNHibernateExtension()))
+            .AddGeneralDependencyInjection(configuration, new HostingEnvironment(), s => s.AddExtensions(new SampleSystemNHibernateExtension()))
             .AddSingleton<SampleSystemInitializer>()
             .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()
             .AddTestControllers([typeof(EmployeeController).Assembly])

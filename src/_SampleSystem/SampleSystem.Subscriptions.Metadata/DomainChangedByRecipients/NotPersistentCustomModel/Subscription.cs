@@ -15,11 +15,7 @@ public class Subscription : Subscription<Domain.Country, CustomNotificationModel
 
     public override MailAddress Sender { get; } = new("SampleSystem@luxoft.com", "SampleSystem");
 
-    public override bool AllowEmptyListOfRecipients { get; } = false;
-
     public override bool IncludeAttachments { get; } = true;
-
-    public override bool ExcludeCurrentUser { get; } = true;
 
     public override bool SendIndividualLetters { get; } = true;
 

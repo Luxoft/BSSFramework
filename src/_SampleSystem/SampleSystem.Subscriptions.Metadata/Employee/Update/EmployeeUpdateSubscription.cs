@@ -14,11 +14,7 @@ public class EmployeeUpdateSubscription : Subscription<Domain.Employee, _Employe
 
     public override bool SendIndividualLetters { get; } = true;
 
-    public override bool ExcludeCurrentUser { get; } = true;
-
     public override bool IncludeAttachments { get; } = false;
-
-    public override bool AllowEmptyListOfRecipients { get; } = false;
 
     public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(IServiceProvider _, DomainObjectVersions<Domain.Employee> versions)
     {

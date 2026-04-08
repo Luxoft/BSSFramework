@@ -64,30 +64,12 @@ public interface ISubscription
     bool SendIndividualLetters { get; }
 
     /// <summary>
-    ///     Получает признак исключения пользователя из текущей рассылки.
-    /// </summary>
-    /// <value>
-    ///     <c>true</c> если пользователя необходимо исключить; в противном случае, <c>false</c>.
-    /// </value>
-    bool ExcludeCurrentUser { get; }
-
-    /// <summary>
     ///     Получает признак того, что к письму необходимо прикрепить вложения из шаблона.
     /// </summary>
     /// <value>
     ///     <c>true</c> если необходимо прикрепить вложения; в противном случае, <c>false</c>.
     /// </value>
     bool IncludeAttachments { get; }
-
-    /// <summary>
-    ///     Получае признак того, что уведомление можно отправлять с пустым списком получателей
-    ///     (например, в случае тестирования).
-    /// </summary>
-    /// <value>
-    ///     <c>true</c> если уведомление можно отправлять с пустым списком получателей;
-    ///     в противном случае, <c>false</c>.
-    /// </value>
-    bool AllowEmptyListOfRecipients { get; }
 
     DomainObjectChangeType DomainObjectChangeType { get; }
 

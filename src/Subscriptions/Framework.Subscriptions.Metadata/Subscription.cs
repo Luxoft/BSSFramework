@@ -1,6 +1,8 @@
 ﻿using System.Collections.Immutable;
 using System.Net.Mail;
 
+using CommonFramework;
+
 using Framework.Subscriptions.Domain;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -33,18 +35,14 @@ public abstract class Subscription<TDomainObject, TRenderingObject, TMessageTemp
 
     public virtual bool SendIndividualLetters { get; } = false;
 
-    public virtual bool ExcludeCurrentUser { get; } = false;
-
     public virtual bool IncludeAttachments { get; } = true;
-
-    public virtual bool AllowEmptyListOfRecipients { get; } = false;
 
     public virtual RecipientMergeType RecipientMergeType { get; } = RecipientMergeType.Union;
 
     public virtual ImmutableArray<SecurityRole> SecurityRoles { get; } = [];
 
     public (string Subject, string Body) GetMessage(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions) =>
-        serviceProvider.GetRequiredService<TMessageTemplate>().Render(serviceProvider, versions);
+        serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<TMessageTemplate>().Render(serviceProvider, versions);
 
     public abstract TRenderingObject ConvertToRenderingObject(IServiceProvider serviceProvider, TDomainObject domainObject);
 

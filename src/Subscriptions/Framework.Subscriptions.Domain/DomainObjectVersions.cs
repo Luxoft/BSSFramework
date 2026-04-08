@@ -52,7 +52,7 @@ public record DomainObjectVersions<TDomainObject>(TDomainObject? Previous, TDoma
         }
         else
         {
-            throw new ArgumentException("both arguments (previous and current) can't be null");
+            throw new ArgumentException("Both arguments (previous and current) can't be null");
         }
     }
 }

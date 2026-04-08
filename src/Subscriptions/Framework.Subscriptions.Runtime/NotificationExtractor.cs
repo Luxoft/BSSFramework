@@ -61,7 +61,7 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
 
         return new MailMessage
                {
-                   Sender = subscription.Sender,
+                   From = subscription.Sender,
                    Subject = subject,
                    Body = body,
                    Recipients = [.. notificationMessageGenerationInfo.Recipients],

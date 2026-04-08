@@ -32,7 +32,7 @@ public record GeneratedFileInfo(string RelativePath, string Content)
         {
             prevContent = File.ReadAllText(absolutePath, usingEncoding);
 
-            if (prevContent != this.Content)
+            if (prevContent != this.Content.Replace("\r\n", "\n"))
             {
                 state = State.Modified;
                 this.InternalSave(absolutePath, checkOutService, usingEncoding);
@@ -57,7 +57,7 @@ public record GeneratedFileInfo(string RelativePath, string Content)
     {
         checkOutService?.CheckOutFile(absolutePath);
 
-        File.WriteAllText(absolutePath, this.Content, encoding);
+        File.WriteAllText(absolutePath, this.Content.Replace("\r\n", "\n"), encoding);
     }
 
     public enum State : byte

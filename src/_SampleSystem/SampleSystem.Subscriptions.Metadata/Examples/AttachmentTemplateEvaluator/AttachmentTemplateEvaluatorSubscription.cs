@@ -14,8 +14,6 @@ public class AttachmentTemplateEvaluatorSubscription : Subscription<Domain.Emplo
 
     public override MailAddress Sender { get; } = new("AttachmentTemplateEvaluator@luxoft.com", "SampleSystem");
 
-    public override bool IncludeAttachments { get; } = true;
-
     public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Employee> versions)
     {
         yield return new("tester@luxoft.com", versions);

@@ -69,7 +69,7 @@ public interface ISubscription
     /// <value>
     ///     <c>true</c> если необходимо прикрепить вложения; в противном случае, <c>false</c>.
     /// </value>
-    bool IncludeAttachments { get; }
+    bool InlineAttachments { get; }
 
     DomainObjectChangeType DomainObjectChangeType { get; }
 

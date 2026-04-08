@@ -14,7 +14,7 @@ public class CountryCreateSubscription : Subscription<Domain.Country, _Country_C
 
     public override bool SendIndividualLetters { get; } = true;
 
-    public override bool IncludeAttachments { get; } = false;
+    public override bool InlineAttachments { get; } = false;
 
     public override IEnumerable<NotificationMessageGenerationInfo<Domain.Country>> GetTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Country> versions)
     {

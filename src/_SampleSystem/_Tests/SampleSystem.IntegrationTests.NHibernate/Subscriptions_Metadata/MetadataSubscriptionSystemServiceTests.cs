@@ -154,7 +154,6 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
     }
 
     [TestMethod]
-    [Ignore]
     public void DateModelCreateSubscriptionTest()
     {
         // Arrange

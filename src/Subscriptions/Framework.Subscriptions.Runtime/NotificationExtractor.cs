@@ -59,14 +59,25 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
 
         var attachments = subscription.GetAttachments(serviceProvider, notificationMessageGenerationInfo.Versions);
 
-        return new MailMessage
-               {
-                   From = subscription.Sender,
-                   Subject = subject,
-                   Body = body,
-                   Recipients = [.. notificationMessageGenerationInfo.Recipients],
-                   AttachmentList = [.. attachments]
-               };
+        var mailMessage = new MailMessage
+                          {
+                              IsBodyHtml = true,
+                              From = subscription.Sender,
+                              Subject = subject,
+                              Body = body,
+                              Recipients = [.. notificationMessageGenerationInfo.Recipients],
+                              AttachmentList = [.. attachments]
+                          };
+
+        if (subscription.InlineAttachments)
+        {
+            foreach (var attachment in mailMessage.Attachments)
+            {
+                InlineAttachmentHelper.InlineAttachment(mailMessage, attachment);
+            }
+        }
+
+        return mailMessage;
     }
 
     private static IEnumerable<NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient>> ReGroup(
@@ -109,8 +120,8 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
         let resultRecipients = g.Partial(
             pair => pair.Tag,
             (r1, r2) =>
-                Enumerable.Select<(string Recipient, bool Tag), string>(r1, pair => pair.Recipient)
-                          .GetEmailMergeResult(Enumerable.Select<(string Recipient, bool Tag), string>(r2, pair => pair.Recipient), subscription.RecipientMergeType))
+                r1.Select<(string Recipient, bool Tag), string>(pair => pair.Recipient)
+                  .GetEmailMergeResult(r2.Select<(string Recipient, bool Tag), string>(pair => pair.Recipient), subscription.RecipientMergeType))
 
         select new NotificationMessageGenerationInfo<TRenderingObject>([.. resultRecipients], g.Key);
 }

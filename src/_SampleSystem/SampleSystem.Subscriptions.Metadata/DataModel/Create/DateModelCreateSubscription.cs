@@ -15,7 +15,7 @@ public class DateModelCreateSubscription : Subscription<DateModel, _DataModel_Cr
 
     public override bool SendIndividualLetters { get; } = true;
 
-    public override bool IncludeAttachments { get; } = false;
+    public override bool InlineAttachments { get; } = false;
 
     public override IEnumerable<NotificationMessageGenerationInfo<DateModel>> GetTo(IServiceProvider _, DomainObjectVersions<DateModel> versions)
     {

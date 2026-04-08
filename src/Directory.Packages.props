@@ -75,10 +75,10 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.5" />
     <PackageVersion Include="Microsoft.Extensions.Options" Version="10.0.5" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.5" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.3.0" />
-    <PackageVersion Include="Microsoft.SqlServer.SqlManagementObjects" Version="181.15.0" />
-    <PackageVersion Include="MSTest.TestAdapter" Version="4.1.0" />
-    <PackageVersion Include="MSTest.TestFramework" Version="4.1.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.4.0" />
+    <PackageVersion Include="Microsoft.SqlServer.SqlManagementObjects" Version="181.19.0" />
+    <PackageVersion Include="MSTest.TestAdapter" Version="4.2.1" />
+    <PackageVersion Include="MSTest.TestFramework" Version="4.2.1" />
     <PackageVersion Include="NHibernate" Version="5.6.0" />
     <PackageVersion Include="NHibernate.Envers" Version="5.6.0" />
     <PackageVersion Include="NSubstitute" Version="5.3.0" />

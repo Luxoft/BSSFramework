@@ -11,17 +11,13 @@ namespace Framework.CodeDom.Rendering;
 
 public class CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOptions? options = null) : CodeDomProviderRenderer(provider, options)
 {
-    protected override string Render(CodeBinaryOperatorType @operator)
-    {
-        var temp = this.Render(new CodeBinaryOperatorExpression { Left = 0.ToPrimitiveExpression(), Right = 0.ToPrimitiveExpression(), Operator = @operator })
-                       .SkipLast(Environment.NewLine)
-                       .Skip("(" + 0, true)
-                       .SkipLast(0 + ")", true)
-                       .Trim();
+    protected override string Render(CodeBinaryOperatorType @operator) =>
 
-        return temp;
-    }
-
+        this.Render(new CodeBinaryOperatorExpression { Left = 0.ToPrimitiveExpression(), Right = 0.ToPrimitiveExpression(), Operator = @operator })
+            .SkipLast(Environment.NewLine)
+            .Skip("(" + 0, true)
+            .SkipLast(0 + ")", true)
+            .Trim();
 
     protected override CodeDomVisitor CreateVisitor() => new CSharpExpandExtendExpressionsVisitor(this);
 

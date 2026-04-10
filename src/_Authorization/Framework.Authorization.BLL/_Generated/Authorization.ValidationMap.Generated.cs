@@ -358,6 +358,7 @@ namespace Framework.Authorization.BLL
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.SecurityContextType, string>> GetSecurityContextType_NameValidators()
         {
             yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Authorization.Domain.SecurityContextType>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.SecurityContextType, string>(Framework.Restriction.RequiredMode.Default);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Authorization.Domain.SecurityContextType>> GetSecurityContextTypeProperties(Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.SecurityContextType> currentClass)

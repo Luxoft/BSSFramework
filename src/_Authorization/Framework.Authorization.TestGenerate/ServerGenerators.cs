@@ -1,4 +1,7 @@
-﻿using Framework.CodeGeneration.BLLCoreGenerator;
+﻿using System.Reflection;
+
+using Framework.Authorization.Domain;
+using Framework.CodeGeneration.BLLCoreGenerator;
 using Framework.CodeGeneration.BLLGenerator;
 using Framework.CodeGeneration.DTOGenerator.Server;
 using Framework.CodeGeneration.Extensions;
@@ -11,7 +14,20 @@ namespace Framework.Authorization.TestGenerate;
 public partial class ServerGenerators
 {
     [TestMethod]
-    public void GenerateMainTest() => this.GenerateMain().ToList();
+    public void GenerateMainTest()
+    {
+        //var proxyType = this.Environment.MetadataProxyProvider.GetProxy(typeof(SecurityContextType)).Wrapped;
+
+        ////var proxyType = typeof(SecurityContextType);
+
+        //var prop = proxyType.GetProperty("Name")!;
+
+        //var attr = prop.GetCustomAttributes();
+
+        ////var attr2 = Attribute.GetCustomAttributes(prop);
+
+        this.GenerateMain().ToList();
+    }
 
     public IEnumerable<GeneratedFileInfo> GenerateMain() =>
         this.GenerateBLLCore()

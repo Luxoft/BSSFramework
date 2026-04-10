@@ -23,7 +23,14 @@ public class MetadataProxyProvider(IReadOnlyDictionary<MemberInfo, ImmutableArra
 
             var wrappedProperties = wrappedType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
 
-            return (T)(object)wrappedProperties.Single(prop => prop.Name == property.Name);
+            var prop = wrappedProperties.Single(prop => prop.Name == property.Name);
+
+            if (prop.Name == "Name")
+            {
+
+            }
+
+            return (T)(object)prop;
         }
         else
         {
@@ -31,7 +38,14 @@ public class MetadataProxyProvider(IReadOnlyDictionary<MemberInfo, ImmutableArra
         }
     }
 
-    protected override IEnumerable<object> GetCustomAttributes(MemberInfo member, IEnumerable<object> declaredAttributes) =>
+    protected override IEnumerable<object> GetCustomAttributes(MemberInfo member, IEnumerable<object> declaredAttributes)
+    {
+        var newAttributes = extendedAttributes.GetValueOrDefault(member, []);
 
-        [.. extendedAttributes.GetValueOrDefault(member, []), .. base.GetCustomAttributes(member, declaredAttributes)];
+        var baseAttributes = member is PropertyInfo prop
+                                 ? Attribute.GetCustomAttributes(prop)
+                                 : base.GetCustomAttributes(member, declaredAttributes);
+
+        return [.. newAttributes, .. baseAttributes];
+    }
 }

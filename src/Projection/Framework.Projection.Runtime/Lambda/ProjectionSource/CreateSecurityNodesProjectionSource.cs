@@ -59,7 +59,7 @@ internal class CreateSecurityNodesProjectionSource(ProjectionLambdaEnvironment e
 
                 var name = $"{interfaceProp.Name}_Security";
 
-                projection.Properties.Add(new ProjectionPropertyBuilder(implProp.ToGetLambdaExpression(sourceType))
+                projection.Properties.Add(new ProjectionPropertyBuilder(this.environment, implProp.ToGetLambdaExpression(sourceType))
                                                 {
                                                     Role = ProjectionPropertyRole.Security,
                                                     Name = name,

@@ -50,7 +50,7 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
                                              ? (IProjectionSource)v
                                              : new CreateSecurityNodesProjectionSource(this, v))
                               .Pipe(v => new CreateAutoNodesProjectionSource(this, v))
-                              .Pipe(v => new InjectMissedParentsProjectionSource(v))
+                              .Pipe(v => new InjectMissedParentsProjectionSource(this, v))
                               .Pipe(v => new InjectAttributesProjectionSource(this, v))
                               .GetProjections()
         ];

@@ -63,7 +63,7 @@ internal class AutoProjectionFactory(ProjectionLambdaEnvironment environment, Pr
                 $"{projectionName}_AutoProp_{property.Name}",
                 node.Children);
 
-            yield return new ProjectionPropertyBuilder(property.ToGetLambdaExpression(domainType), "_Auto")
+            yield return new ProjectionPropertyBuilder(this.environment, property.ToGetLambdaExpression(domainType), "_Auto")
                          {
                              ElementProjection = elementProjection,
                              Role = ProjectionPropertyRole.AutoNode,
@@ -76,7 +76,7 @@ internal class AutoProjectionFactory(ProjectionLambdaEnvironment environment, Pr
             {
                 var lastPropertyValue = projectionPath.LastProperty;
 
-                yield return new ProjectionPropertyBuilder(projectionPath.PropertyPath.ToLambdaExpression(domainType), $"_Last_{lastPropertyValue.PropertyName}")
+                yield return new ProjectionPropertyBuilder(this.environment, projectionPath.PropertyPath.ToLambdaExpression(domainType), $"_Last_{lastPropertyValue.PropertyName}")
                              {
                                  Role = ProjectionPropertyRole.LastAutoNode,
                                  IgnoreSerialization = true,

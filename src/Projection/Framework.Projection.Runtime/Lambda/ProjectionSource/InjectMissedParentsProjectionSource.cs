@@ -9,7 +9,7 @@ using Framework.Relations;
 
 namespace Framework.Projection.Lambda.ProjectionSource;
 
-internal class InjectMissedParentsProjectionSource(IProjectionSource baseSource) : IProjectionSource
+internal class InjectMissedParentsProjectionSource(ProjectionLambdaEnvironment environment, IProjectionSource baseSource) : IProjectionSource
 {
     public IEnumerable<IProjection> GetProjections()
     {
@@ -41,7 +41,7 @@ internal class InjectMissedParentsProjectionSource(IProjectionSource baseSource)
 
         foreach (var pair in missedParentRequest)
         {
-            var newPropertyBuilder = new ProjectionPropertyBuilder(pair.ParentProperty.ToGetLambdaExpression(pair.Projection.SourceType))
+            var newPropertyBuilder = new ProjectionPropertyBuilder(environment, pair.ParentProperty.ToGetLambdaExpression(pair.Projection.SourceType))
                                      {
                                          Role = ProjectionPropertyRole.MissedParent,
                                          ElementProjection = pair.ParentProjection,

@@ -29,9 +29,7 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGenerato
 
         this.Logics = LazyInterfaceImplementHelper.CreateProxy(this.GetLogics);
 
-        IFetchPathFactory<ViewDTOType> factory = new ExpandFetchPathFactory(this.Environment.PersistentDomainObjectBaseType);
-
-        this.FetchPathFactory = factory.WithCompress();
+        this.FetchPathFactory = LazyInterfaceImplementHelper.CreateProxy(this.CreateFetchPathFactory);
     }
 
     /// <inheritdoc />
@@ -86,7 +84,7 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGenerato
 
     public virtual IbllFactoryContainerGeneratorConfiguration Logics { get; }
 
-    public virtual IFetchPathFactory<ViewDTOType> FetchPathFactory { get; }
+    public IFetchPathFactory<ViewDTOType> FetchPathFactory { get; }
 
     public virtual bool GenerateDTOFetchRuleExpander => true;
 
@@ -94,6 +92,13 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGenerato
     public CodeTypeReference BLLContextTypeReference => this.Environment.BLLCore.BLLContextInterfaceTypeReference;
 
     protected override string NamespacePostfix { get; } = "BLL";
+
+    protected virtual IFetchPathFactory<ViewDTOType> CreateFetchPathFactory()
+    {
+        IFetchPathFactory<ViewDTOType> factory = new ExpandFetchPathFactory(this.Environment.MetadataProxyProvider.Wrap(this.Environment.PersistentDomainObjectBaseType));
+
+        return factory.WithCompress();
+    }
 
 
     /// <inheritdoc />

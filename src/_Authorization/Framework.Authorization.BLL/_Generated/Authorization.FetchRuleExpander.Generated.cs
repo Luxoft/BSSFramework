@@ -83,7 +83,7 @@ namespace Framework.Authorization.BLL
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<Framework.Authorization.Domain.Permission>.Create(v => v.DelegatedTo).ThenFetch(v => v.Principal).Fetch(v => v.DelegatedTo).ThenFetch(v => v.Restrictions).ThenFetch(v => v.SecurityContextType).Fetch(v => v.DelegatedTo).ThenFetch(v => v.Role).Fetch(v => v.Principal).Fetch(v => v.Restrictions).ThenFetch(v => v.SecurityContextType).Fetch(v => v.Role);
+                return GenericQueryable.Fetching.FetchRule<Framework.Authorization.Domain.Permission>.Create(v => v.Principal).Fetch(v => v.Role);
             }
             else
             {
@@ -131,7 +131,7 @@ namespace Framework.Authorization.BLL
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<Framework.Authorization.Domain.Principal>.Create(v => v.Permissions).ThenFetch(v => v.DelegatedTo).ThenFetch(v => v.Principal).Fetch(v => v.Permissions).ThenFetch(v => v.DelegatedTo).ThenFetch(v => v.Restrictions).ThenFetch(v => v.SecurityContextType).Fetch(v => v.Permissions).ThenFetch(v => v.DelegatedTo).ThenFetch(v => v.Role).Fetch(v => v.Permissions).ThenFetch(v => v.Restrictions).ThenFetch(v => v.SecurityContextType).Fetch(v => v.Permissions).ThenFetch(v => v.Role).Fetch(v => v.RunAs);
+                return GenericQueryable.Fetching.FetchRule<Framework.Authorization.Domain.Principal>.Create(v => v.RunAs);
             }
             else
             {

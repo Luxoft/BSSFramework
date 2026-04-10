@@ -10,11 +10,11 @@
 namespace Framework.Authorization.BLL
 {
     using GenericQueryable;
-    
-    
+
+
     public abstract partial class AuthorizationMainDTOFetchRuleExpanderBase : Framework.BLL.DTOFetchRuleExpander<Framework.Authorization.Domain.PersistentDomainObjectBase>
     {
-        
+
         protected override GenericQueryable.Fetching.PropertyFetchRule<TDomainObject> TryExpand<TDomainObject>(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.BusinessRole)))
@@ -42,7 +42,7 @@ namespace Framework.Authorization.BLL
                 return null;
             }
         }
-        
+
         protected virtual GenericQueryable.Fetching.PropertyFetchRule<Framework.Authorization.Domain.BusinessRole> TryGetBusinessRoleFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
@@ -66,7 +66,7 @@ namespace Framework.Authorization.BLL
                 return null;
             }
         }
-        
+
         protected virtual GenericQueryable.Fetching.PropertyFetchRule<Framework.Authorization.Domain.Permission> TryGetPermissionFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
@@ -83,14 +83,14 @@ namespace Framework.Authorization.BLL
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<Framework.Authorization.Domain.Permission>.Create(v => v.Principal).Fetch(v => v.Role);
+                return GenericQueryable.Fetching.FetchRule<Framework.Authorization.Domain.Permission>.Create(v => v.DelegatedTo).ThenFetch(v => v.Principal).Fetch(v => v.DelegatedTo).ThenFetch(v => v.Restrictions).ThenFetch(v => v.SecurityContextType).Fetch(v => v.DelegatedTo).ThenFetch(v => v.Role).Fetch(v => v.Principal).Fetch(v => v.Restrictions).ThenFetch(v => v.SecurityContextType).Fetch(v => v.Role);
             }
             else
             {
                 return null;
             }
         }
-        
+
         protected virtual GenericQueryable.Fetching.PropertyFetchRule<Framework.Authorization.Domain.PermissionRestriction> TryGetPermissionRestrictionFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
@@ -114,7 +114,7 @@ namespace Framework.Authorization.BLL
                 return null;
             }
         }
-        
+
         protected virtual GenericQueryable.Fetching.PropertyFetchRule<Framework.Authorization.Domain.Principal> TryGetPrincipalFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
@@ -131,14 +131,14 @@ namespace Framework.Authorization.BLL
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<Framework.Authorization.Domain.Principal>.Create(v => v.RunAs);
+                return GenericQueryable.Fetching.FetchRule<Framework.Authorization.Domain.Principal>.Create(v => v.Permissions).ThenFetch(v => v.DelegatedTo).ThenFetch(v => v.Principal).Fetch(v => v.Permissions).ThenFetch(v => v.DelegatedTo).ThenFetch(v => v.Restrictions).ThenFetch(v => v.SecurityContextType).Fetch(v => v.Permissions).ThenFetch(v => v.DelegatedTo).ThenFetch(v => v.Role).Fetch(v => v.Permissions).ThenFetch(v => v.Restrictions).ThenFetch(v => v.SecurityContextType).Fetch(v => v.Permissions).ThenFetch(v => v.Role).Fetch(v => v.RunAs);
             }
             else
             {
                 return null;
             }
         }
-        
+
         protected virtual GenericQueryable.Fetching.PropertyFetchRule<Framework.Authorization.Domain.SecurityContextType> TryGetSecurityContextTypeFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
@@ -163,7 +163,7 @@ namespace Framework.Authorization.BLL
             }
         }
     }
-    
+
     public partial class AuthorizationMainDTOFetchRuleExpander : Framework.Authorization.BLL.AuthorizationMainDTOFetchRuleExpanderBase
     {
     }

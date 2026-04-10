@@ -9,17 +9,15 @@ namespace Framework.Projection.Lambda.ProjectionSource.AutoProjection;
 internal class AutoProjectionFactory(ProjectionLambdaEnvironment environment, ProjectionBuilder.ProjectionBuilder baseProjection)
     : IFactory<ProjectionBuilder.ProjectionBuilder>
 {
-    private readonly ProjectionLambdaEnvironment environment = environment ?? throw new ArgumentNullException(nameof(environment));
-
-    private readonly ProjectionBuilder.ProjectionBuilder baseProjection = baseProjection ?? throw new ArgumentNullException(nameof(baseProjection));
-
     public ProjectionBuilder.ProjectionBuilder Create()
     {
-        var defaultProperties = this.baseProjection.Properties.Where(prop => prop.ElementProjection == null || prop.ElementProjection.Role == ProjectionRole.Default).ToList();
+        var defaultProperties = baseProjection.Properties.Where(prop => prop.ElementProjection == null || prop.ElementProjection.Role == ProjectionRole.Default).ToList();
 
-        var externalNodes = defaultProperties.Select(prop => new ProjectionPath(this.environment.PropertyPathService.WithExpand(prop.Path), new LastProjectionProperty(prop.Name, prop.ElementProjection!))).ToNodes();
+        var externalNodes = defaultProperties.Select(prop => new ProjectionPath(
+                                                         environment.PropertyPathService.WithExpand(prop.Path),
+                                                         new LastProjectionProperty(prop.Name, prop.ElementProjection!))).ToNodes();
 
-        return this.InternalCreate(this.baseProjection.SourceType, this.baseProjection.Name, externalNodes);
+        return this.InternalCreate(baseProjection.SourceType, baseProjection.Name, externalNodes);
     }
 
     private ProjectionBuilder.ProjectionBuilder InternalCreate(Type domainType, string projectionName, IEnumerable<Node<ProjectionNodeValue>> nodes)
@@ -33,18 +31,13 @@ internal class AutoProjectionFactory(ProjectionLambdaEnvironment environment, Pr
 
                          let property = propertyPair.Property
 
-                         where !this.environment.IsIdentityProperty(property)
+                         where !environment.IsIdentityProperty(property)
 
                          from projectionProperty in this.InternalCreateProperties(domainType, projectionName, node)
 
                          select projectionProperty;
 
-        return new ProjectionBuilder.ProjectionBuilder(domainType)
-               {
-                   Name = projectionName,
-                   Role = ProjectionRole.AutoNode,
-                   Properties = properties.ToList()
-               };
+        return new ProjectionBuilder.ProjectionBuilder(domainType) { Name = projectionName, Role = ProjectionRole.AutoNode, Properties = properties.ToList() };
     }
 
     private IEnumerable<ProjectionPropertyBuilder> InternalCreateProperties(Type domainType, string projectionName, Node<ProjectionNodeValue> node)
@@ -56,18 +49,16 @@ internal class AutoProjectionFactory(ProjectionLambdaEnvironment environment, Pr
         var property = node.Value.Property;
 
 
-        if (this.environment.IsPersistent(property.PropertyType) && node.Children.Any())
+        if (environment.IsPersistent(property.PropertyType) && node.Children.Any())
         {
             var elementProjection = this.InternalCreate(
                 property.PropertyType.GetCollectionElementTypeOrSelf(),
                 $"{projectionName}_AutoProp_{property.Name}",
                 node.Children);
 
-            yield return new ProjectionPropertyBuilder(this.environment, property.ToGetLambdaExpression(domainType), "_Auto")
+            yield return new ProjectionPropertyBuilder(environment, property.ToGetLambdaExpression(domainType), "_Auto")
                          {
-                             ElementProjection = elementProjection,
-                             Role = ProjectionPropertyRole.AutoNode,
-                             IgnoreSerialization = true
+                             ElementProjection = elementProjection, Role = ProjectionPropertyRole.AutoNode, IgnoreSerialization = true
                          };
         }
         else
@@ -76,11 +67,9 @@ internal class AutoProjectionFactory(ProjectionLambdaEnvironment environment, Pr
             {
                 var lastPropertyValue = projectionPath.LastProperty;
 
-                yield return new ProjectionPropertyBuilder(this.environment, projectionPath.PropertyPath.ToLambdaExpression(domainType), $"_Last_{lastPropertyValue.PropertyName}")
+                yield return new ProjectionPropertyBuilder(environment, projectionPath.PropertyPath.ToLambdaExpression(domainType), $"_Last_{lastPropertyValue.PropertyName}")
                              {
-                                 Role = ProjectionPropertyRole.LastAutoNode,
-                                 IgnoreSerialization = true,
-                                 ElementProjection = lastPropertyValue.ElementProjection
+                                 Role = ProjectionPropertyRole.LastAutoNode, IgnoreSerialization = true, ElementProjection = lastPropertyValue.ElementProjection
                              };
             }
         }

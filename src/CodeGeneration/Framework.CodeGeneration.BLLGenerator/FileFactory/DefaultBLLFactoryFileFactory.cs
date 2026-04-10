@@ -11,7 +11,7 @@ using SecuritySystem.Providers;
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
 public class DefaultBLLFactoryFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
-    where TConfiguration : class, IbllGeneratorConfiguration<IbllGenerationEnvironment>
+    where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
 {
     public override FileType FileType => FileType.DefaultBLLFactory;
 

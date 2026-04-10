@@ -20,7 +20,7 @@ using Framework.FileGeneration.Configuration;
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 
 public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationContainer<TConfiguration>, IValidatorGenerator
-    where TConfiguration : class, IbllGeneratorConfiguration<IbllGenerationEnvironment>
+    where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
 {
     protected readonly CodeExpression ValidatorMapExpr;
 

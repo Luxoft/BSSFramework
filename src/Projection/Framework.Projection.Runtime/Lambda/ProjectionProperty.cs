@@ -28,7 +28,7 @@ public abstract class ProjectionProperty<TExpression, TElement> : IProjectionPro
     {
         this.Expression = path ?? throw new ArgumentNullException(nameof(path));
         this.IgnoreSerialization = ignoreSerialization;
-        this.Path = this.Expression.ToPropertyPath().WithExpand();
+        this.Path = this.Expression.ToPropertyPath();
         this.Name = name ?? path.ToPath().Replace(".", "");
         this.IsNullable = typeof(TElement).IsValueType && this.Path.HasReferenceResult();
 
@@ -36,7 +36,6 @@ public abstract class ProjectionProperty<TExpression, TElement> : IProjectionPro
 
         this.lazyElementProjection = getPropProjection.Maybe(LazyHelper.Create);
 
-        this.Path.Where(prop => !prop.IsPersistent()).Foreach(prop => throw new Exception($"Projection property \"{prop.Name}\" of path \"{this.Expression}\" must be persistent"));
         this.Attributes = (attributes ?? throw new ArgumentNullException(nameof(attributes))).ToReadOnlyCollection();
     }
 

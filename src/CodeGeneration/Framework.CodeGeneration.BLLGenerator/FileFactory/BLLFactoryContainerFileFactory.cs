@@ -11,7 +11,7 @@ using Framework.FileGeneration.Configuration;
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
 public class BLLFactoryContainerFileFactory<TConfiguration>(TConfiguration configuration) : BLLFactoryContainerFileFactoryBase<TConfiguration>(configuration)
-    where TConfiguration : class, IbllGeneratorConfiguration<IbllGenerationEnvironment>
+    where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
 {
     protected override CodeTypeDeclaration GetCodeTypeDeclaration() => this.Configuration.GetBLLContextContainerCodeTypeDeclaration(this.Name, false);
 

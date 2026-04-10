@@ -1,3 +1,3 @@
 ﻿namespace Framework.Infrastructure.Service;
 
-public record EvaluatedData<TBllContext, TMappingService>(TBllContext Context, TMappingService MappingService);
+public record EvaluatedData<TBLLContext, TMappingService>(TBLLContext Context, TMappingService MappingService);

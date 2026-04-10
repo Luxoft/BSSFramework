@@ -7,6 +7,7 @@ using CommonFramework;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Fetching;
 using Framework.BLL.Fetching.PathFactory;
+using Framework.BLL.Services;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.FileFactory;
 using Framework.Core;
@@ -16,8 +17,8 @@ using Framework.Validation;
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 
-public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGeneratorConfiguration<TEnvironment, FileType>, IbllGeneratorConfiguration<TEnvironment>
-        where TEnvironment : class, IbllGenerationEnvironment
+public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGeneratorConfiguration<TEnvironment, FileType>, IBLLGeneratorConfiguration<TEnvironment>
+        where TEnvironment : class, IBLLGenerationEnvironment
 {
 
     private readonly Lazy<ReadOnlyCollection<Type>> lazyValidationTypes;
@@ -82,7 +83,7 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGenerato
         return true;
     }
 
-    public virtual IbllFactoryContainerGeneratorConfiguration Logics { get; }
+    public virtual IBLLFactoryContainerGeneratorConfiguration Logics { get; }
 
     public IFetchPathFactory<ViewDTOType> FetchPathFactory { get; }
 
@@ -95,7 +96,9 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGenerato
 
     protected virtual IFetchPathFactory<ViewDTOType> CreateFetchPathFactory()
     {
-        IFetchPathFactory<ViewDTOType> factory = new ExpandFetchPathFactory(this.Environment.MetadataProxyProvider.Wrap(this.Environment.PersistentDomainObjectBaseType));
+        IFetchPathFactory<ViewDTOType> factory = new ExpandFetchPathFactory(
+            new PropertyPathService(this.Environment.MetadataProxyProvider),
+            this.Environment.MetadataProxyProvider.Wrap(this.Environment.PersistentDomainObjectBaseType));
 
         return factory.WithCompress();
     }
@@ -119,7 +122,7 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGenerato
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (validatorMapExpr == null) throw new ArgumentNullException(nameof(validatorMapExpr));
 
-        return new DefaultValidatorGenerator<IbllGeneratorConfiguration<TEnvironment>>(this, domainType, validatorMapExpr);
+        return new DefaultValidatorGenerator<IBLLGeneratorConfiguration<TEnvironment>>(this, domainType, validatorMapExpr);
     }
 
     public virtual bool GenerateValidation { get; } = true;
@@ -137,7 +140,7 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGenerato
 
     protected override IEnumerable<Type> GetDomainTypes() => this.Environment.BLLCore.BLLDomainTypes;
 
-    protected virtual IbllFactoryContainerGeneratorConfiguration GetLogics() => new BLLFactoryContainerGeneratorConfiguration<BLLGeneratorConfigurationBase<TEnvironment>>(this);
+    protected virtual IBLLFactoryContainerGeneratorConfiguration GetLogics() => new BLLFactoryContainerGeneratorConfiguration<BLLGeneratorConfigurationBase<TEnvironment>>(this);
 
     protected virtual ICodeFileFactoryHeader<FileType> SecurityDomainBLLBaseFileFactoryHeader { get; } =
 

@@ -6,7 +6,7 @@ using CommonFramework;
 using CommonFramework.DependencyInjection;
 
 using Framework.Application.Domain;
-using Framework.BLL.Domain.Persistent.Extensions;
+using Framework.BLL.Services;
 using Framework.Core;
 using Framework.Core.TypeResolving.TypeSource;
 using Framework.Database;
@@ -129,21 +129,18 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
             this.ProjectionNamespace);
     }
 
-    protected IProjectionEnvironment CreateDefaultProjectionLambdaEnvironment(IProjectionSource projectionSource, CreateProjectionLambdaSetupParams createParams)
-    {
-        if (projectionSource == null) throw new ArgumentNullException(nameof(projectionSource));
-        if (createParams == null) throw new ArgumentNullException(nameof(createParams));
+    protected IProjectionEnvironment CreateDefaultProjectionLambdaEnvironment(IProjectionSource projectionSource, CreateProjectionLambdaSetupParams createParams) =>
 
-        return ProjectionLambdaEnvironment.Create(
-            this.MetadataProxyProvider,
+        new DefaultProjectionLambdaEnvironment(
             projectionSource,
+            this.MetadataProxyProvider,
+            new PropertyPathService(this.MetadataProxyProvider),
             createParams.AssemblyName,
             createParams.FullAssemblyName,
             this.DomainObjectBaseType,
             this.PersistentDomainObjectBaseType,
             this.ProjectionNamespace,
             createParams.UseDependencySecurity);
-    }
 
     protected IProjectionEnvironment CreateDefaultProjectionLambdaEnvironment(IProjectionSource projectionSource, Action<CreateProjectionLambdaSetupParams>? setupAction = null)
     {

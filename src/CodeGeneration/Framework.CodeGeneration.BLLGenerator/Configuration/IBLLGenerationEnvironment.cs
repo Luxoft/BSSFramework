@@ -3,4 +3,4 @@ using Framework.CodeGeneration.Configuration;
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 
-public interface IbllGenerationEnvironment : ICodeGenerationEnvironment, IBLLCoreGeneratorConfigurationContainer;
+public interface IBLLGenerationEnvironment : ICodeGenerationEnvironment, IBLLCoreGeneratorConfigurationContainer;

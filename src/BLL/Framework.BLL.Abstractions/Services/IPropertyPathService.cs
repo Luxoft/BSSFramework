@@ -8,7 +8,6 @@ namespace Framework.BLL.Services;
 
 public interface IPropertyPathService
 {
-
     PropertyPath? TryGetPropertyPath<TAttribute>(PropertyInfo property, bool recurse)
         where TAttribute : Attribute, IPathAttribute;
 

@@ -1,11 +1,12 @@
 ﻿using System.CodeDom;
+
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.CodeGeneration.BLLGenerator.FileFactory.__Base;
 
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
 public class MainDTOFetchRuleExpanderFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
-    where TConfiguration : class, IbllGeneratorConfiguration<IbllGenerationEnvironment>
+    where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
 {
     public override FileType FileType => FileType.MainDTOFetchRuleExpander;
 

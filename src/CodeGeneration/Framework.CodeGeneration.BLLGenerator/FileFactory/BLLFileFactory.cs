@@ -9,7 +9,7 @@ using SecuritySystem.Providers;
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
 public class BLLFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : FileFactory<TConfiguration>(configuration, domainType)
-    where TConfiguration : class, IbllGeneratorConfiguration<IbllGenerationEnvironment>
+    where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
 {
     public override FileType FileType => FileType.BLL;
 

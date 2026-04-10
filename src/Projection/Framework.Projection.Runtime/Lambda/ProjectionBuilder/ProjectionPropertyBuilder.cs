@@ -45,7 +45,7 @@ internal class ProjectionPropertyBuilder : IProjectionProperty
 
     public LambdaExpression Expression { get; }
 
-    public PropertyPath Path { get; }
+    public PropertyPath Path { get; set; }
 
     public Type? CollectionType { get; }
 

@@ -15,7 +15,7 @@ using Framework.Validation;
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
 public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
-    where TConfiguration : class, IbllGeneratorConfiguration<IbllGenerationEnvironment>
+    where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
 {
     public override FileType FileType { get; } = FileType.ValidationMapBase;
 

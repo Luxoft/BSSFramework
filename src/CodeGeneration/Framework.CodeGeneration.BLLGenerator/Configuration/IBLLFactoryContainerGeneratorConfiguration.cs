@@ -1,6 +1,6 @@
 ﻿namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 
-public interface IbllFactoryContainerGeneratorConfiguration
+public interface IBLLFactoryContainerGeneratorConfiguration
 {
     IEnumerable<ICodeFile> GetFileFactories();
 }

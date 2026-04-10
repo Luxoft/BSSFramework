@@ -14,7 +14,7 @@ public abstract class ProjectionEnvironmentBase : IProjectionEnvironment
 
     protected ProjectionEnvironmentBase(IMetadataProxyProvider metadataProxyProvider )
     {
-        this.MetadataProxyProvider = metadataProxyProvider ;
+        this.MetadataProxyProvider = metadataProxyProvider;
 
         this.lazyIdentityProperty = LazyHelper.Create(this.GetIdentityProperty);
     }

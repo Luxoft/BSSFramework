@@ -6,11 +6,9 @@ namespace Framework.Projection.Lambda.ProjectionSource;
 
 internal class VerifyUniqueProjectionSource(IProjectionSource baseSource) : IProjectionSource
 {
-    private readonly IProjectionSource baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
-
     public IEnumerable<IProjection> GetProjections()
     {
-        var projections = this.baseSource.GetProjections().ToList();
+        var projections = baseSource.GetProjections().ToList();
 
         var duplicateProjections = projections.GetDuplicates(new EqualityComparerImpl<IProjection>((proj1, proj2) => proj1.Name == proj2.Name)).ToList();
 

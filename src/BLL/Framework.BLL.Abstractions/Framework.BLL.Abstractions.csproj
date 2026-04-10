@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Database\Framework.Database.Legacy.Domain\Framework.Database.Legacy.Domain.csproj" />
+    <ProjectReference Include="..\..\ExtendedMetadata\Framework.ExtendedMetadata.Abstractions\Framework.ExtendedMetadata.Abstractions.csproj" />
     <ProjectReference Include="..\Framework.BLL.Domain\Framework.BLL.Domain.csproj" />
 
     <ProjectReference Include="..\..\Application\Framework.Application.Abstractions\Framework.Application.Abstractions.csproj" />

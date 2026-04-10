@@ -4,8 +4,8 @@ using Framework.FileGeneration.Configuration;
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 
 public class BLLFactoryContainerGeneratorConfiguration<TConfiguration>(TConfiguration configuration)
-    : GeneratorConfigurationContainer<TConfiguration>(configuration), IbllFactoryContainerGeneratorConfiguration
-    where TConfiguration : class, IbllGeneratorConfiguration<IbllGenerationEnvironment>
+    : GeneratorConfigurationContainer<TConfiguration>(configuration), IBLLFactoryContainerGeneratorConfiguration
+    where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
 {
     public IEnumerable<ICodeFile> GetFileFactories()
     {

@@ -13,7 +13,7 @@ internal static class BaseCodeDomHelper
     private const string ContextParameterNameBase = "context";
 
     extension<TConfiguration>(FileFactory<TConfiguration> fileFactory)
-        where TConfiguration : class, IbllGeneratorConfiguration<IbllGenerationEnvironment>
+        where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
     {
         public CodeParameterDeclarationExpression GetContextParameter()
         {

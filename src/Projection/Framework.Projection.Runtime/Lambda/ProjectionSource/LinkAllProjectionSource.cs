@@ -4,13 +4,11 @@ namespace Framework.Projection.Lambda.ProjectionSource;
 
 internal class LinkAllProjectionSource(IProjectionSource baseSource) : IProjectionSource
 {
-    private readonly IProjectionSource baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
-
     public IEnumerable<IProjection> GetProjections()
     {
         var graph = new HashSet<IProjection>();
 
-        foreach (var projection in this.baseSource.GetProjections())
+        foreach (var projection in baseSource.GetProjections())
         {
             this.FillProjectionsGraph(projection, graph);
         }

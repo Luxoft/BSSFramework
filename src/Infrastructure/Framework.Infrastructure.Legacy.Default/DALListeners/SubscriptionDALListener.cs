@@ -6,12 +6,12 @@ using Framework.Infrastructure.SubscriptionService;
 
 namespace Framework.Infrastructure.DALListeners;
 
-public class SubscriptionDALListener(IConfigurationBLLContext configurationBllContext, IObjectModificationProcessor subscriptionService)
+public class SubscriptionDALListener(IConfigurationBLLContext configurationBLLContext, IObjectModificationProcessor subscriptionService)
     : IBeforeTransactionCompletedDALListener
 {
     public async Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
     {
-        foreach (var targetSystemService in configurationBllContext.GetTargetSystemServices())
+        foreach (var targetSystemService in configurationBLLContext.GetTargetSystemServices())
         {
             if (targetSystemService.TargetSystem.SubscriptionEnabled)
             {

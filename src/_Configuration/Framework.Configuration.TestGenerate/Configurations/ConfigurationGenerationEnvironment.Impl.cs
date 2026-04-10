@@ -9,7 +9,7 @@ public partial class ConfigurationGenerationEnvironment :
 
     IBLLCoreGenerationEnvironment,
 
-    IbllGenerationEnvironment,
+    IBLLGenerationEnvironment,
 
     IServerDTOGenerationEnvironment,
 

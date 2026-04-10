@@ -8,7 +8,7 @@ using Framework.Core;
 
 namespace Framework.Projection.ExtendedMetadata;
 
-public class DomainTypeRootExtendedMetadataBuilder : IDomainTypeRootExtendedMetadata
+public class DomainTypeRootExtendedMetadataBuilder : IMetadataProxyProvider
 {
     private readonly Dictionary<Type, IDomainTypeExtendedMetadata> types = new();
 

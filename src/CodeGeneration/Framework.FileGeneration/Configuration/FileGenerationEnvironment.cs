@@ -10,10 +10,11 @@ using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.Core;
 using Framework.Core.TypeResolving.TypeSource;
 using Framework.Database;
+using Framework.ExtendedMetadata;
 using Framework.FileGeneration.Extensions;
 using Framework.Projection;
 using Framework.Projection.Contract;
-using Framework.Projection.ExtendedMetadata;
+using Framework.ExtendedMetadata;
 using Framework.Projection.Lambda;
 using Framework.Projection.Lambda.ProjectionSource._Base;
 
@@ -66,7 +67,7 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
 
     public IReadOnlyCollection<IProjectionEnvironment> ProjectionEnvironments { get; }
 
-    public virtual IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } = new DomainTypeRootExtendedMetadataBuilder();
+    public abstract IMetadataProxyProvider MetadataProxyProvider { get; }
 
     public ReadOnlyCollection<Assembly> DomainObjectAssemblies => this.domainObjectAssemblies.Value;
 
@@ -119,7 +120,7 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
         var fullAssemblyName = assemblyName + fullAssemblyNamePostfix;
 
         return ProjectionContractEnvironment.Create(
-            this.ExtendedMetadata,
+            this.MetadataProxyProvider,
             new TypeSource(this.GetDomainObjectAssemblies()),
             assemblyName,
             fullAssemblyName,

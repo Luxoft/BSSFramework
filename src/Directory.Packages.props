@@ -87,6 +87,7 @@
     <PackageVersion Include="NUnit3TestAdapter" Version="6.2.0" />
     <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="[7.2.0]" />
     <PackageVersion Include="System.CodeDom" Version="10.0.5" />
+    <PackageVersion Include="System.Reflection.Context" Version="10.0.5" />
     <PackageVersion Include="System.Reflection.Emit" Version="4.7.0" />
     <PackageVersion Include="System.Runtime.Loader" Version="4.3.0" />
     <PackageVersion Include="Unity" Version="5.11.10" />

@@ -16,12 +16,12 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
 {
     public virtual bool Used(Type domainType, MethodIdentity identity)
     {
-        var extendedMetadata = generationEnvironment.ExtendedMetadata;
+        var metadataProxyProvider  = generationEnvironment.ExtendedMetadata;
 
-        var allowedSingleDTO = () => extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType, attr => attr.Single.Contains((MainDTOType)identity.DTOType.Value));
-        var allowedCollectionDTO = () => extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType, attr => attr.Collection.Contains((MainDTOType)identity.DTOType.Value));
+        var allowedSingleDTO = () => metadataProxyProvider .HasAttribute<BLLViewRoleAttribute>(domainType, attr => attr.Single.Contains((MainDTOType)identity.DTOType.Value));
+        var allowedCollectionDTO = () => metadataProxyProvider .HasAttribute<BLLViewRoleAttribute>(domainType, attr => attr.Collection.Contains((MainDTOType)identity.DTOType.Value));
 
-        Func<ProjectionFilterTargets, bool> allowedProjectionFilter = target => extendedMetadata.HasAttribute<ProjectionFilterAttribute>(domainType, attr => attr.FilterType == identity.ModelType && attr.Target.HasFlag(target));
+        Func<ProjectionFilterTargets, bool> allowedProjectionFilter = target => metadataProxyProvider .HasAttribute<ProjectionFilterAttribute>(domainType, attr => attr.FilterType == identity.ModelType && attr.Target.HasFlag(target));
 
         if (identity.DTOType == ViewDTOType.VisualDTO && !domainType.HasVisualIdentityProperties())
         {
@@ -29,15 +29,15 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
         }
         else if (identity == MethodIdentityType.Save)
         {
-            return extendedMetadata.HasAttribute<BLLSaveRoleAttribute>(domainType, attr => attr.SaveType.HasFlag(BLLSaveType.Save) && attr.CountType.HasFlag(CountType.Single));
+            return metadataProxyProvider .HasAttribute<BLLSaveRoleAttribute>(domainType, attr => attr.SaveType.HasFlag(BLLSaveType.Save) && attr.CountType.HasFlag(CountType.Single));
         }
         else if (identity == MethodIdentityType.SaveMany)
         {
-            return extendedMetadata.HasAttribute<BLLSaveRoleAttribute>(domainType, attr => attr.SaveType.HasFlag(BLLSaveType.Save) && attr.CountType.HasFlag(CountType.Many));
+            return metadataProxyProvider .HasAttribute<BLLSaveRoleAttribute>(domainType, attr => attr.SaveType.HasFlag(BLLSaveType.Save) && attr.CountType.HasFlag(CountType.Many));
         }
         else if (identity == MethodIdentityType.Update)
         {
-            return extendedMetadata.HasAttribute<BLLSaveRoleAttribute>(domainType, attr => attr.SaveType.HasFlag(BLLSaveType.Update) && attr.CountType.HasFlag(CountType.Single));
+            return metadataProxyProvider .HasAttribute<BLLSaveRoleAttribute>(domainType, attr => attr.SaveType.HasFlag(BLLSaveType.Update) && attr.CountType.HasFlag(CountType.Single));
         }
         else if (identity == MethodIdentityType.GetWithExtended)
         {
@@ -49,17 +49,17 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
         }
         else if (identity == MethodIdentityType.Remove)
         {
-            return extendedMetadata.HasAttribute<BLLRemoveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Single));
+            return metadataProxyProvider .HasAttribute<BLLRemoveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Single));
         }
         else if (identity == MethodIdentityType.RemoveMany)
         {
-            return extendedMetadata.HasAttribute<BLLRemoveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Many));
+            return metadataProxyProvider .HasAttribute<BLLRemoveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Many));
         }
         else if (identity == MethodIdentityType.GetPropertyRevisions
                  || identity == MethodIdentityType.GetPropertyRevisionByDateRange
                  || identity == MethodIdentityType.GetRevisions)
         {
-            return extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType);
+            return metadataProxyProvider .HasAttribute<BLLViewRoleAttribute>(domainType);
         }
         else if (identity == MethodIdentityType.GetRevision)
         {
@@ -69,19 +69,19 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
                  || identity == MethodIdentityType.GetAttachment
                  || identity == MethodIdentityType.RemoveAttachment)
         {
-            return extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType);
+            return metadataProxyProvider .HasAttribute<BLLViewRoleAttribute>(domainType);
         }
         else if (identity == MethodIdentityType.GetFileContainer)
         {
-            return extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType);
+            return metadataProxyProvider .HasAttribute<BLLViewRoleAttribute>(domainType);
         }
         else if (identity == MethodIdentityType.IntegrationSave)
         {
-            return extendedMetadata.HasAttribute<BLLIntegrationSaveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Single));
+            return metadataProxyProvider .HasAttribute<BLLIntegrationSaveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Single));
         }
         else if (identity == MethodIdentityType.IntegrationSaveMany)
         {
-            return extendedMetadata.HasAttribute<BLLIntegrationSaveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Many));
+            return metadataProxyProvider .HasAttribute<BLLIntegrationSaveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Many));
         }
         else if (identity == MethodIdentityType.IntegrationSaveByModel)
         {
@@ -89,7 +89,7 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
         }
         else if (identity == MethodIdentityType.IntegrationRemove)
         {
-            return extendedMetadata.HasAttribute<BLLIntegrationRemoveRoleAttribute>(domainType);
+            return metadataProxyProvider .HasAttribute<BLLIntegrationRemoveRoleAttribute>(domainType);
         }
         else if (identity == MethodIdentityType.GetChangeModel || identity == MethodIdentityType.GetMassChangeModel)
         {

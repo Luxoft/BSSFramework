@@ -4,11 +4,11 @@ using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.GeneratePolicy;
 using Framework.Core;
 using Framework.Projection;
-using Framework.Projection.ExtendedMetadata;
+using Framework.ExtendedMetadata;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.GeneratePolicy;
 
-public class AttributeGeneratePolicy(IDomainTypeRootExtendedMetadata metadata) : IGeneratePolicy<RoleFileType>
+public class AttributeGeneratePolicy(IMetadataProxyProvider metadata) : IGeneratePolicy<RoleFileType>
 {
     public virtual bool Used(Type domainType, RoleFileType fileType)
     {

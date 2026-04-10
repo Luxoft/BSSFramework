@@ -2,7 +2,7 @@
 
 using Framework.Core.ReflectionImpl;
 using Framework.Core.TypeResolving.TypeSource;
-using Framework.Projection.ExtendedMetadata;
+using Framework.ExtendedMetadata;
 
 namespace Framework.Projection;
 
@@ -17,7 +17,7 @@ public class AlreadyImplementedRuntimeProjectionEnvironment(IProjectionEnvironme
 
     public bool UseDependencySecurity { get; } = baseEnvironment.UseDependencySecurity;
 
-    public IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } = baseEnvironment.ExtendedMetadata;
+    public IMetadataProxyProvider MetadataProxyProvider { get; } = baseEnvironment.MetadataProxyProvider;
 
     private class AlreadyImplementedAssemblyInfo(IAssemblyInfo baseAssembly) : IAssemblyInfo
     {

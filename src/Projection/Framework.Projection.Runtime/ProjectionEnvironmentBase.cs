@@ -4,7 +4,7 @@ using CommonFramework;
 
 using Framework.Core;
 using Framework.Core.TypeResolving.TypeSource;
-using Framework.Projection.ExtendedMetadata;
+using Framework.ExtendedMetadata;
 
 namespace Framework.Projection;
 
@@ -12,14 +12,14 @@ public abstract class ProjectionEnvironmentBase : IProjectionEnvironment
 {
     private readonly Lazy<PropertyInfo> lazyIdentityProperty;
 
-    protected ProjectionEnvironmentBase(IDomainTypeRootExtendedMetadata extendedMetadata)
+    protected ProjectionEnvironmentBase(IMetadataProxyProvider metadataProxyProvider )
     {
-        this.ExtendedMetadata = extendedMetadata;
+        this.MetadataProxyProvider = metadataProxyProvider ;
 
         this.lazyIdentityProperty = LazyHelper.Create(this.GetIdentityProperty);
     }
 
-    public IDomainTypeRootExtendedMetadata ExtendedMetadata { get; }
+    public IMetadataProxyProvider MetadataProxyProvider  { get; }
 
     public abstract string Namespace { get; }
 

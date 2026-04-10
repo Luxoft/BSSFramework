@@ -12,7 +12,7 @@ using Framework.BLL.Domain.ServiceRole;
 using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.Database;
 using Framework.Database.NHibernate._MappingSettings;
-using Framework.Projection.ExtendedMetadata;
+using Framework.ExtendedMetadata;
 using Framework.Validation;
 
 namespace Framework.Authorization.TestGenerate.Configurations;
@@ -66,7 +66,7 @@ public partial class AuthorizationGenerationEnvironment : GenerationEnvironmentB
 
     public MappingSettings GetMappingSettings(DatabaseName dbName, AuditDatabaseName dbAuditName) => new MappingSettings<PersistentDomainObjectBase>(dbName, dbAuditName);
 
-    public override IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } =
+    public override IMetadataProxyProvider MetadataProxyProvider  { get; } =
 
         new DomainTypeRootExtendedMetadataBuilder()
 

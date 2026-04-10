@@ -1,7 +1,7 @@
 ﻿using Framework.Core;
 using Framework.Core.TypeResolving.TypeSource;
 using Framework.Database.Metadata;
-using Framework.Projection.ExtendedMetadata;
+using Framework.ExtendedMetadata;
 using Framework.Projection.Lambda.ProjectionSource._Base;
 
 namespace Framework.Projection.Lambda;
@@ -9,7 +9,7 @@ namespace Framework.Projection.Lambda;
 public class DefaultProjectionLambdaEnvironment : ProjectionLambdaEnvironment
 {
     public DefaultProjectionLambdaEnvironment(
-        IDomainTypeRootExtendedMetadata extendedMetadata,
+        IMetadataProxyProvider metadataProxyProvider ,
         IProjectionSource projectionSource,
         string assemblyName,
         string assemblyFullName,
@@ -17,7 +17,7 @@ public class DefaultProjectionLambdaEnvironment : ProjectionLambdaEnvironment
         Type persistentDomainObjectBaseType,
         string @namespace,
         bool useDependencySecurity)
-        : base(extendedMetadata, projectionSource)
+        : base(metadataProxyProvider , projectionSource)
     {
         if (assemblyName == null)
         {

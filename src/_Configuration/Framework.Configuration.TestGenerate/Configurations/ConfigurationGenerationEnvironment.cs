@@ -10,7 +10,7 @@ using Framework.Configuration.TestGenerate.Configurations.Services.QueryService;
 using Framework.Configuration.TestGenerate.Configurations.Services.WebApi;
 using Framework.Database;
 using Framework.Database.NHibernate._MappingSettings;
-using Framework.Projection.ExtendedMetadata;
+using Framework.ExtendedMetadata;
 
 namespace Framework.Configuration.TestGenerate.Configurations;
 
@@ -56,7 +56,7 @@ public partial class ConfigurationGenerationEnvironment : GenerationEnvironmentB
 
     public MappingSettings GetMappingSettings(DatabaseName dbName) => new MappingSettings<PersistentDomainObjectBase>(dbName);
 
-    public override IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } =
+    public override IMetadataProxyProvider MetadataProxyProvider  { get; } =
 
         new DomainTypeRootExtendedMetadataBuilder()
 

@@ -2,14 +2,14 @@
 using Framework.Core.TypeResolving;
 using Framework.Core.TypeResolving.TypeSource;
 using Framework.Database.Metadata;
-using Framework.Projection.ExtendedMetadata;
+using Framework.ExtendedMetadata;
 
 namespace Framework.Projection.Contract;
 
 public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
 {
-    protected ProjectionContractEnvironment(IDomainTypeRootExtendedMetadata extendedMetadata, ITypeSource typeSource)
-        : base(extendedMetadata) =>
+    protected ProjectionContractEnvironment(IMetadataProxyProvider metadataProxyProvider , ITypeSource typeSource)
+        : base(metadataProxyProvider ) =>
         this.ContractTypeResolver = LazyInterfaceImplementHelper.CreateProxy(() => this.CreateContractTypeResolver(typeSource));
 
     public ITypeResolver<Type> ContractTypeResolver { get; private set; }
@@ -24,7 +24,7 @@ public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
 
 
     public static ProjectionContractEnvironment Create(
-        IDomainTypeRootExtendedMetadata extendedMetadata,
+        IMetadataProxyProvider metadataProxyProvider ,
         ITypeSource typeSource,
         string assemblyName,
         string assemblyFullName,
@@ -33,7 +33,7 @@ public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
         string @namespace,
         bool useDependencySecurity = true) =>
         new DefaultProjectionContractEnvironment(
-            extendedMetadata,
+            metadataProxyProvider ,
             typeSource,
             assemblyName,
             assemblyFullName,
@@ -45,7 +45,7 @@ public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
     private class DefaultProjectionContractEnvironment : ProjectionContractEnvironment
     {
         public DefaultProjectionContractEnvironment(
-            IDomainTypeRootExtendedMetadata extendedMetadata,
+            IMetadataProxyProvider metadataProxyProvider ,
             ITypeSource typeSource,
             string assemblyName,
             string assemblyFullName,
@@ -53,7 +53,7 @@ public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
             Type persistentDomainObjectBaseType,
             string @namespace,
             bool useDependencySecurity)
-            : base(extendedMetadata, typeSource)
+            : base(metadataProxyProvider , typeSource)
         {
             if (assemblyName == null)
             {

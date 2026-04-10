@@ -1,5 +1,5 @@
 ﻿using Framework.Core.TypeResolving.TypeSource;
-using Framework.Projection.ExtendedMetadata;
+using Framework.ExtendedMetadata;
 
 namespace Framework.Projection;
 
@@ -23,5 +23,5 @@ public interface IProjectionEnvironment
     /// </summary>
     bool UseDependencySecurity { get; }
 
-    IDomainTypeRootExtendedMetadata ExtendedMetadata { get; }
+    IMetadataProxyProvider MetadataProxyProvider { get; }
 }

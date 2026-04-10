@@ -3,7 +3,7 @@ using System.Reflection;
 
 using Framework.BLL.Domain.Attributes;
 using Framework.Projection;
-using Framework.Projection.ExtendedMetadata;
+using Framework.ExtendedMetadata;
 
 using SecuritySystem;
 
@@ -50,7 +50,7 @@ public abstract class GenerationEnvironmentBase : CodeGenerationEnvironment<Doma
             typeof(TestManualEmployeeProjection).Assembly);
     }
 
-    public override IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } =
+    public override IMetadataProxyProvider MetadataProxyProvider  { get; } =
 
         new DomainTypeRootExtendedMetadataBuilder()
             .Add<Employee>(

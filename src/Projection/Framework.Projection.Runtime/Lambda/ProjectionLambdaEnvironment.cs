@@ -6,7 +6,7 @@ using CommonFramework;
 using Framework.Core;
 using Framework.Core.TypeResolving;
 using Framework.Projection._Extensions;
-using Framework.Projection.ExtendedMetadata;
+using Framework.ExtendedMetadata;
 using Framework.Projection.Lambda._Extensions;
 using Framework.Projection.Lambda.Exceptions;
 using Framework.Projection.Lambda.ImplType;
@@ -27,8 +27,8 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
     /// Конструктор
     /// </summary>
     /// <param name="projectionSource">Источник проекций</param>
-    protected ProjectionLambdaEnvironment(IDomainTypeRootExtendedMetadata extendedMetadata, IProjectionSource projectionSource)
-        : base(extendedMetadata)
+    protected ProjectionLambdaEnvironment(IMetadataProxyProvider metadataProxyProvider , IProjectionSource projectionSource)
+        : base(metadataProxyProvider )
     {
         if (projectionSource == null) throw new ArgumentNullException(nameof(projectionSource));
 
@@ -185,7 +185,7 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
     }
 
     public static ProjectionLambdaEnvironment Create(
-        IDomainTypeRootExtendedMetadata extendedMetadata,
+        IMetadataProxyProvider metadataProxyProvider ,
         IProjectionSource projectionSource,
         string assemblyName,
         string assemblyFullName,
@@ -194,7 +194,7 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
         string @namespace,
         bool useDependencySecurity = true) =>
         new DefaultProjectionLambdaEnvironment(
-            extendedMetadata,
+            metadataProxyProvider ,
             projectionSource,
             assemblyName,
             assemblyFullName,

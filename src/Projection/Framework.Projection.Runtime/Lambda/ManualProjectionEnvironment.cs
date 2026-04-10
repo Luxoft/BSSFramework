@@ -2,11 +2,11 @@
 
 using Framework.Core.TypeResolving.TypeSource;
 using Framework.Database.Metadata;
-using Framework.Projection.ExtendedMetadata;
+using Framework.ExtendedMetadata;
 
 namespace Framework.Projection.Lambda;
 
-public class ManualProjectionEnvironment(Assembly assembly, Type persistentDomainObjectBaseType, IDomainTypeRootExtendedMetadata extendedMetadata) : IProjectionEnvironment
+public class ManualProjectionEnvironment(Assembly assembly, Type persistentDomainObjectBaseType, IMetadataProxyProvider metadataProxyProvider ) : IProjectionEnvironment
 {
     public string Namespace => throw new NotImplementedException("Single namespace not required");
 
@@ -14,5 +14,5 @@ public class ManualProjectionEnvironment(Assembly assembly, Type persistentDomai
 
     public bool UseDependencySecurity { get; } = true;
 
-    public IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } = extendedMetadata;
+    public IMetadataProxyProvider MetadataProxyProvider  { get; } = metadataProxyProvider ;
 }

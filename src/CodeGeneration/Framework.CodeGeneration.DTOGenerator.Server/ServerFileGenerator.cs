@@ -87,13 +87,15 @@ public class ServerFileGenerator<TConfiguration>(TConfiguration configuration) :
 
         foreach (var domainType in this.Configuration.DomainTypes)
         {
-            if (domainType.IsProjection())
+            var wrappedDomainType = this.Configuration.Environment.MetadataProxyProvider.Wrap(domainType);
+
+            if (wrappedDomainType.IsProjection())
             {
                 yield return new DefaultProjectionDTOFileFactory<TConfiguration>(this.Configuration, domainType);
             }
             else
             {
-                if (domainType.HasVisualIdentityProperties())
+                if (wrappedDomainType.HasVisualIdentityProperties())
                 {
                     yield return this.GetVisualDTOFileFactory(domainType);
                 }

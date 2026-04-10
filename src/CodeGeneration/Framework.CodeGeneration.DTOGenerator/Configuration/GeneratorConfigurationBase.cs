@@ -22,6 +22,7 @@ using Framework.CodeGeneration.DTOGenerator.Map;
 using Framework.CodeGeneration.FileFactory;
 using Framework.CodeGeneration.GeneratePolicy;
 using Framework.Core;
+using Framework.ExtendedMetadata;
 using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 using Framework.Relations;
@@ -184,7 +185,9 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
 
         foreach (var domainType in this.DomainTypes)
         {
-            if (domainType.IsProjection())
+            var wrappedDomainType = this.Environment.MetadataProxyProvider.Wrap(domainType);
+
+            if (wrappedDomainType.IsProjection())
             {
                 yield return this.GetTypeMap(domainType, BaseFileType.ProjectionDTO);
             }
@@ -195,7 +198,7 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
                     yield return this.GetTypeMap(domainType, BaseFileType.IdentityDTO);
                 }
 
-                if (domainType.HasVisualIdentityProperties())
+                if (wrappedDomainType.HasVisualIdentityProperties())
                 {
                     yield return this.GetTypeMap(domainType, BaseFileType.VisualDTO);
                 }
@@ -317,8 +320,11 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        var serializationProperties = domainType.GetSerializationProperties(role);
-
+        var serializationProperties = this.Environment
+                                          .MetadataProxyProvider
+                                          .Wrap(domainType)
+                                          .GetSerializationProperties(role)
+                                          .Select(prop => prop.GetUnderlyingSystemProperty());
 
         if (fileType == BaseFileType.BaseAbstractDTO)
         {

@@ -15,7 +15,7 @@ public abstract class QueryGeneratorConfigurationBase<TEnvironment>(TEnvironment
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 
-        foreach (var dtoType in domainType.GetViewDTOTypes())
+        foreach (var dtoType in this.Environment.MetadataProxyProvider.Wrap(domainType).GetViewDTOTypes())
         {
             foreach (var methodGenerator in new QueryServiceMethodGeneratorCollection<QueryGeneratorConfigurationBase<TEnvironment>>(this, domainType, dtoType))
             {

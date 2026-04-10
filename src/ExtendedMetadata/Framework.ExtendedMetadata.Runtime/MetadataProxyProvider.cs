@@ -25,11 +25,6 @@ public class MetadataProxyProvider(IReadOnlyDictionary<MemberInfo, ImmutableArra
 
             var prop = wrappedProperties.Single(prop => prop.Name == property.Name);
 
-            if (prop.Name == "Name")
-            {
-
-            }
-
             return (T)(object)prop;
         }
         else

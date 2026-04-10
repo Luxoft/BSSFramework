@@ -32,7 +32,7 @@ public abstract class MainGeneratorConfigurationBase<TEnvironment>(TEnvironment 
 
     public override IEnumerable<IServiceMethodGenerator> GetMethodGenerators(Type domainType)
     {
-        foreach (var dtoType in domainType.GetViewDTOTypes())
+        foreach (var dtoType in this.Environment.MetadataProxyProvider.Wrap(domainType).GetViewDTOTypes())
         {
             if (domainType.IsInterfaceImplementation(typeof(IVisualIdentityObject)))
             {

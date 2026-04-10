@@ -527,7 +527,6 @@ namespace Framework.Authorization.Generated.DTO
             {
                 throw new System.ArgumentNullException("target");
             }
-            target.Description = source.Description;
             target.Name = source.Name;
         }
         
@@ -1496,8 +1495,6 @@ namespace Framework.Authorization.Generated.DTO
     public partial class BusinessRoleStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.BusinessRole, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.BusinessRole>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO>
     {
         
-        private string _description;
-        
         private System.Guid _id;
         
         private string _name;
@@ -1578,19 +1575,6 @@ namespace Framework.Authorization.Generated.DTO
         private BusinessRoleStrictDTO(Framework.Authorization.Generated.DTO.BasePersistentDTO source) : 
                 this(source, Framework.Authorization.Generated.DTO.AuthorizationClientPrimitiveDTOMappingService.Default)
         {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Description
-        {
-            get
-            {
-                return this._description;
-            }
-            set
-            {
-                this._description = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -6521,7 +6505,6 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapBusinessRole(Framework.Authorization.Generated.DTO.BusinessRoleStrictDTO mappingObject, Framework.Authorization.Domain.BusinessRole domainObject)
         {
-            domainObject.Description = mappingObject.Description;
             domainObject.Name = mappingObject.Name;
         }
         

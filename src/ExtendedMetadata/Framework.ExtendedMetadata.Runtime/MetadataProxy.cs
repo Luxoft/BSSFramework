@@ -7,11 +7,13 @@ public class MetadataProxy<T>(T native, IMetadataProxyProvider provider) : IMeta
 {
     public T Native => native;
 
+    public T Wrapped => provider.Wrap(this.Native);
+
     public IMetadataProxyProvider Provider => provider;
 
-    public object[] GetCustomAttributes(bool inherit) => this.Native.GetCustomAttributes(inherit);
+    public object[] GetCustomAttributes(bool inherit) => this.Wrapped.GetCustomAttributes(inherit);
 
-    public object[] GetCustomAttributes(Type attributeType, bool inherit) => this.Native.GetCustomAttributes(attributeType, inherit);
+    public object[] GetCustomAttributes(Type attributeType, bool inherit) => this.Wrapped.GetCustomAttributes(attributeType, inherit);
 
-    public bool IsDefined(Type attributeType, bool inherit) => this.Native.IsDefined(attributeType, inherit);
+    public bool IsDefined(Type attributeType, bool inherit) => this.Wrapped.IsDefined(attributeType, inherit);
 }

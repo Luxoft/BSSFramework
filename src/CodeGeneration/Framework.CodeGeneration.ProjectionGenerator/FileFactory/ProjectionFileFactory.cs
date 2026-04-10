@@ -132,7 +132,7 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
 
                 genProp.CustomAttributes.AddRange(attributes);
 
-                if (this.Configuration.Environment.ExtendedMetadata.GetProperty(property).HasAttribute<MappingAttribute>(mappingAttr => mappingAttr.IsOneToOne) && this.Configuration.OneToOneSetter)
+                if (this.Configuration.Environment.MetadataProxyProvider.GetProxy(property).HasAttribute<MappingAttribute>(mappingAttr => mappingAttr.IsOneToOne) && this.Configuration.OneToOneSetter)
                 {
                     genProp.SetStatements.Add(new CodePropertySetValueReferenceExpression().ToAssignStatement(new CodeThisReferenceExpression().ToFieldReference(genField)));
                 }

@@ -7,7 +7,7 @@ using Framework.Core;
 namespace Framework.CodeGeneration.DTOGenerator.Server.GeneratePolicy;
 
 public class ServerAttributeGeneratePolicy(IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment> configuration)
-    : AttributeGeneratePolicy(configuration.Environment.ExtendedMetadata)
+    : AttributeGeneratePolicy(configuration.Environment.MetadataProxyProvider)
 {
     public override bool Used(Type domainType, RoleFileType fileType)
     {

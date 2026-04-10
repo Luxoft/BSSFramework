@@ -11,6 +11,7 @@ using Framework.Configuration.TestGenerate.Configurations.Services.WebApi;
 using Framework.Database;
 using Framework.Database.NHibernate._MappingSettings;
 using Framework.ExtendedMetadata;
+using Framework.ExtendedMetadata.Builder;
 
 namespace Framework.Configuration.TestGenerate.Configurations;
 
@@ -56,9 +57,9 @@ public partial class ConfigurationGenerationEnvironment : GenerationEnvironmentB
 
     public MappingSettings GetMappingSettings(DatabaseName dbName) => new MappingSettings<PersistentDomainObjectBase>(dbName);
 
-    public override IMetadataProxyProvider MetadataProxyProvider  { get; } =
+    public override IMetadataProxyProvider MetadataProxyProvider { get; } =
 
-        new DomainTypeRootExtendedMetadataBuilder()
+        new MetadataProxyProviderBuilder()
 
             .Add<DomainObjectEvent>(tb =>
                                         tb.AddAttribute(new BLLRoleAttribute()))
@@ -87,7 +88,8 @@ public partial class ConfigurationGenerationEnvironment : GenerationEnvironmentB
                                  tb.AddAttribute(new BLLViewRoleAttribute()))
 
             .Add<DomainObjectNotification>(tb =>
-                                               tb.AddAttribute(new BLLRoleAttribute()));
+                                               tb.AddAttribute(new BLLRoleAttribute()))
+            .Build();
 
     public static readonly ConfigurationGenerationEnvironment Default = new();
 }

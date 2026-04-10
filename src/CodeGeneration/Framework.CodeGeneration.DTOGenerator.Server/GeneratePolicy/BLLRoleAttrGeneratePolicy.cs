@@ -12,37 +12,37 @@ public class AttributeGeneratePolicy(IMetadataProxyProvider metadata) : IGenerat
 {
     public virtual bool Used(Type domainType, RoleFileType fileType)
     {
-        var domainTypeAttributeProvider = metadata.GetType(domainType);
+        var domainTypeProxy = metadata.GetProxy(domainType);
 
         if (fileType == BaseFileType.StrictDTO)
         {
-            return domainTypeAttributeProvider.HasAttribute<BLLSaveRoleAttribute>(attr => attr.SaveType.HasFlag(BLLSaveType.Save));
+            return domainTypeProxy.HasAttribute<BLLSaveRoleAttribute>(attr => attr.SaveType.HasFlag(BLLSaveType.Save));
         }
         else if (fileType == BaseFileType.UpdateDTO)
         {
-            return domainTypeAttributeProvider.HasAttribute<BLLSaveRoleAttribute>(attr => attr.SaveType.HasFlag(BLLSaveType.Update));
+            return domainTypeProxy.HasAttribute<BLLSaveRoleAttribute>(attr => attr.SaveType.HasFlag(BLLSaveType.Update));
         }
         else if (fileType == BaseFileType.RichDTO)
         {
-            return domainTypeAttributeProvider.HasAttribute<BLLViewRoleAttribute>(attr => attr.All.Contains(MainDTOType.RichDTO));
+            return domainTypeProxy.HasAttribute<BLLViewRoleAttribute>(attr => attr.All.Contains(MainDTOType.RichDTO));
         }
         else if (fileType == BaseFileType.FullDTO)
         {
-            return domainTypeAttributeProvider.HasAttribute<BLLViewRoleAttribute>(attr => attr.All.Contains(MainDTOType.FullDTO));
+            return domainTypeProxy.HasAttribute<BLLViewRoleAttribute>(attr => attr.All.Contains(MainDTOType.FullDTO));
         }
         else if (fileType == BaseFileType.SimpleDTO)
         {
-            return domainTypeAttributeProvider.HasAttribute<BLLViewRoleAttribute>(attr => attr.All.Contains(MainDTOType.SimpleDTO));
+            return domainTypeProxy.HasAttribute<BLLViewRoleAttribute>(attr => attr.All.Contains(MainDTOType.SimpleDTO));
         }
         else if (fileType == BaseFileType.VisualDTO)
         {
-            return domainTypeAttributeProvider.HasAttribute<BLLViewRoleAttribute>(attr => attr.All.Contains(MainDTOType.VisualDTO));
+            return domainTypeProxy.HasAttribute<BLLViewRoleAttribute>(attr => attr.All.Contains(MainDTOType.VisualDTO));
         }
         else if (fileType == BaseFileType.IdentityDTO)
         {
-            return domainTypeAttributeProvider.HasAttribute<BLLSaveRoleAttribute>()
-                   || domainTypeAttributeProvider.HasAttribute<BLLRemoveRoleAttribute>()
-                   || domainTypeAttributeProvider.HasAttribute<BLLViewRoleAttribute>();
+            return domainTypeProxy.HasAttribute<BLLSaveRoleAttribute>()
+                   || domainTypeProxy.HasAttribute<BLLRemoveRoleAttribute>()
+                   || domainTypeProxy.HasAttribute<BLLViewRoleAttribute>();
         }
         else if (fileType == BaseFileType.ProjectionDTO)
         {

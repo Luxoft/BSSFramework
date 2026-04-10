@@ -81,14 +81,14 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
 
 
         {
-            foreach (var projectionFilterAttribute in this.Environment.ExtendedMetadata.GetType(domainType).GetCustomAttributes<ProjectionFilterAttribute>())
+            foreach (var projectionFilterAttribute in this.Environment.MetadataProxyProvider.GetProxy(domainType).GetCustomAttributes<ProjectionFilterAttribute>())
             {
                 yield return projectionFilterAttribute.ToAttributeDeclaration();
             }
         }
 
         {
-            foreach (var securityAttribute in this.Environment.ExtendedMetadata.GetType(domainType).GetSecurityAttributes(this.Environment.SecurityRuleTypeList))
+            foreach (var securityAttribute in this.Environment.MetadataProxyProvider.GetProxy(domainType).GetSecurityAttributes(this.Environment.SecurityRuleTypeList))
             {
                 yield return securityAttribute;
             }
@@ -117,7 +117,7 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        foreach (var securityAttribute in this.Environment.ExtendedMetadata.GetProperty(property).GetSecurityAttributes(this.Environment.SecurityRuleTypeList))
+        foreach (var securityAttribute in this.Environment.MetadataProxyProvider.GetProxy(property).GetSecurityAttributes(this.Environment.SecurityRuleTypeList))
         {
             yield return securityAttribute;
         }
@@ -147,7 +147,7 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
             yield return ignoreFetchAttribute.ToAttributeDeclaration();
         }
 
-        foreach (var fetchPathAttribute in this.Environment.ExtendedMetadata.GetProperty(property).GetCustomAttributes<FetchPathAttribute>())
+        foreach (var fetchPathAttribute in this.Environment.MetadataProxyProvider.GetProxy(property).GetCustomAttributes<FetchPathAttribute>())
         {
             yield return fetchPathAttribute.ToAttributeDeclaration();
         }

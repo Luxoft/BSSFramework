@@ -14,7 +14,7 @@ using Framework.ExtendedMetadata;
 using Framework.FileGeneration.Extensions;
 using Framework.Projection;
 using Framework.Projection.Contract;
-using Framework.ExtendedMetadata;
+using Framework.ExtendedMetadata.Builder;
 using Framework.Projection.Lambda;
 using Framework.Projection.Lambda.ProjectionSource._Base;
 
@@ -67,7 +67,7 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
 
     public IReadOnlyCollection<IProjectionEnvironment> ProjectionEnvironments { get; }
 
-    public abstract IMetadataProxyProvider MetadataProxyProvider { get; }
+    public virtual IMetadataProxyProvider MetadataProxyProvider { get; } = new MetadataProxyProviderBuilder().Build();
 
     public ReadOnlyCollection<Assembly> DomainObjectAssemblies => this.domainObjectAssemblies.Value;
 
@@ -135,7 +135,7 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
         if (createParams == null) throw new ArgumentNullException(nameof(createParams));
 
         return ProjectionLambdaEnvironment.Create(
-            this.ExtendedMetadata,
+            this.MetadataProxyProvider,
             projectionSource,
             createParams.AssemblyName,
             createParams.FullAssemblyName,
@@ -169,6 +169,6 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
     {
         if (assembly == null) throw new ArgumentNullException(nameof(assembly));
 
-        return new ManualProjectionEnvironment(assembly, this.PersistentDomainObjectBaseType, this.ExtendedMetadata);
+        return new ManualProjectionEnvironment(assembly, this.PersistentDomainObjectBaseType, this.MetadataProxyProvider);
     }
 }

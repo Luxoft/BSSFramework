@@ -79,7 +79,6 @@
   <Folder Name="/ExtendedMetadata/">
     <Project Path="ExtendedMetadata/Framework.ExtendedMetadata.Abstractions/Framework.ExtendedMetadata.Abstractions.csproj" />
     <Project Path="ExtendedMetadata/Framework.ExtendedMetadata.Runtime/Framework.ExtendedMetadata.Runtime.csproj" />
-    <Project Path="ExtendedMetadata/Framework.ExtendedMetadata/Framework.ExtendedMetadata.csproj" />
   </Folder>
   
   <Folder Name="/Infrastructure/">

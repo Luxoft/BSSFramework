@@ -5,6 +5,7 @@ using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.GeneratePolicy;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
+using Framework.Core;
 using Framework.Projection;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.GeneratePolicy;
@@ -16,12 +17,12 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
 {
     public virtual bool Used(Type domainType, MethodIdentity identity)
     {
-        var metadataProxyProvider  = generationEnvironment.ExtendedMetadata;
+        var domainTypeProxy = generationEnvironment.MetadataProxyProvider.GetProxy(domainType);
 
-        var allowedSingleDTO = () => metadataProxyProvider .HasAttribute<BLLViewRoleAttribute>(domainType, attr => attr.Single.Contains((MainDTOType)identity.DTOType.Value));
-        var allowedCollectionDTO = () => metadataProxyProvider .HasAttribute<BLLViewRoleAttribute>(domainType, attr => attr.Collection.Contains((MainDTOType)identity.DTOType.Value));
+        var allowedSingleDTO = () => domainTypeProxy.HasAttribute<BLLViewRoleAttribute>(attr => attr.Single.Contains((MainDTOType)identity.DTOType!.Value));
+        var allowedCollectionDTO = () => domainTypeProxy.HasAttribute<BLLViewRoleAttribute>(attr => attr.Collection.Contains((MainDTOType)identity.DTOType!.Value));
 
-        Func<ProjectionFilterTargets, bool> allowedProjectionFilter = target => metadataProxyProvider .HasAttribute<ProjectionFilterAttribute>(domainType, attr => attr.FilterType == identity.ModelType && attr.Target.HasFlag(target));
+        Func<ProjectionFilterTargets, bool> allowedProjectionFilter = target => domainTypeProxy.HasAttribute<ProjectionFilterAttribute>(attr => attr.FilterType == identity.ModelType && attr.Target.HasFlag(target));
 
         if (identity.DTOType == ViewDTOType.VisualDTO && !domainType.HasVisualIdentityProperties())
         {
@@ -29,15 +30,15 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
         }
         else if (identity == MethodIdentityType.Save)
         {
-            return metadataProxyProvider .HasAttribute<BLLSaveRoleAttribute>(domainType, attr => attr.SaveType.HasFlag(BLLSaveType.Save) && attr.CountType.HasFlag(CountType.Single));
+            return domainTypeProxy.HasAttribute<BLLSaveRoleAttribute>(attr => attr.SaveType.HasFlag(BLLSaveType.Save) && attr.CountType.HasFlag(CountType.Single));
         }
         else if (identity == MethodIdentityType.SaveMany)
         {
-            return metadataProxyProvider .HasAttribute<BLLSaveRoleAttribute>(domainType, attr => attr.SaveType.HasFlag(BLLSaveType.Save) && attr.CountType.HasFlag(CountType.Many));
+            return domainTypeProxy.HasAttribute<BLLSaveRoleAttribute>(attr => attr.SaveType.HasFlag(BLLSaveType.Save) && attr.CountType.HasFlag(CountType.Many));
         }
         else if (identity == MethodIdentityType.Update)
         {
-            return metadataProxyProvider .HasAttribute<BLLSaveRoleAttribute>(domainType, attr => attr.SaveType.HasFlag(BLLSaveType.Update) && attr.CountType.HasFlag(CountType.Single));
+            return domainTypeProxy.HasAttribute<BLLSaveRoleAttribute>(attr => attr.SaveType.HasFlag(BLLSaveType.Update) && attr.CountType.HasFlag(CountType.Single));
         }
         else if (identity == MethodIdentityType.GetWithExtended)
         {
@@ -49,17 +50,17 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
         }
         else if (identity == MethodIdentityType.Remove)
         {
-            return metadataProxyProvider .HasAttribute<BLLRemoveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Single));
+            return domainTypeProxy.HasAttribute<BLLRemoveRoleAttribute>(attr => attr.CountType.HasFlag(CountType.Single));
         }
         else if (identity == MethodIdentityType.RemoveMany)
         {
-            return metadataProxyProvider .HasAttribute<BLLRemoveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Many));
+            return domainTypeProxy.HasAttribute<BLLRemoveRoleAttribute>(attr => attr.CountType.HasFlag(CountType.Many));
         }
         else if (identity == MethodIdentityType.GetPropertyRevisions
                  || identity == MethodIdentityType.GetPropertyRevisionByDateRange
                  || identity == MethodIdentityType.GetRevisions)
         {
-            return metadataProxyProvider .HasAttribute<BLLViewRoleAttribute>(domainType);
+            return domainTypeProxy.HasAttribute<BLLViewRoleAttribute>();
         }
         else if (identity == MethodIdentityType.GetRevision)
         {
@@ -69,19 +70,19 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
                  || identity == MethodIdentityType.GetAttachment
                  || identity == MethodIdentityType.RemoveAttachment)
         {
-            return metadataProxyProvider .HasAttribute<BLLViewRoleAttribute>(domainType);
+            return domainTypeProxy.HasAttribute<BLLViewRoleAttribute>();
         }
         else if (identity == MethodIdentityType.GetFileContainer)
         {
-            return metadataProxyProvider .HasAttribute<BLLViewRoleAttribute>(domainType);
+            return domainTypeProxy.HasAttribute<BLLViewRoleAttribute>();
         }
         else if (identity == MethodIdentityType.IntegrationSave)
         {
-            return metadataProxyProvider .HasAttribute<BLLIntegrationSaveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Single));
+            return domainTypeProxy.HasAttribute<BLLIntegrationSaveRoleAttribute>(attr => attr.CountType.HasFlag(CountType.Single));
         }
         else if (identity == MethodIdentityType.IntegrationSaveMany)
         {
-            return metadataProxyProvider .HasAttribute<BLLIntegrationSaveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Many));
+            return domainTypeProxy.HasAttribute<BLLIntegrationSaveRoleAttribute>(attr => attr.CountType.HasFlag(CountType.Many));
         }
         else if (identity == MethodIdentityType.IntegrationSaveByModel)
         {
@@ -89,7 +90,7 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
         }
         else if (identity == MethodIdentityType.IntegrationRemove)
         {
-            return metadataProxyProvider .HasAttribute<BLLIntegrationRemoveRoleAttribute>(domainType);
+            return domainTypeProxy.HasAttribute<BLLIntegrationRemoveRoleAttribute>();
         }
         else if (identity == MethodIdentityType.GetChangeModel || identity == MethodIdentityType.GetMassChangeModel)
         {

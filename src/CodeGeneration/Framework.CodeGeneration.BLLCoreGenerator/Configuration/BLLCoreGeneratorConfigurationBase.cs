@@ -81,9 +81,7 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
                               from type in projectionEnvironment.Assembly.Types
 
                               where this.IsPersistentObject(type)
-                                    && this.Environment.ExtendedMetadata.HasAttribute<ProjectionAttribute>(
-                                        type,
-                                        attr => attr.Role == ProjectionRole.Default)
+                                    && this.Environment.MetadataProxyProvider.GetProxy(type).HasAttribute<ProjectionAttribute>(attr => attr.Role == ProjectionRole.Default)
 
                               select type;
 
@@ -94,7 +92,7 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
 
         from domainType in this.DomainTypes
 
-        where this.Environment.ExtendedMetadata.HasAttribute<BLLRoleAttribute>(domainType)
+        where this.Environment.MetadataProxyProvider.GetProxy(domainType).HasAttribute<BLLRoleAttribute>()
 
         select domainType;
 

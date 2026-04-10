@@ -13,6 +13,7 @@ using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.Database;
 using Framework.Database.NHibernate._MappingSettings;
 using Framework.ExtendedMetadata;
+using Framework.ExtendedMetadata.Builder;
 using Framework.Validation;
 
 namespace Framework.Authorization.TestGenerate.Configurations;
@@ -66,9 +67,9 @@ public partial class AuthorizationGenerationEnvironment : GenerationEnvironmentB
 
     public MappingSettings GetMappingSettings(DatabaseName dbName, AuditDatabaseName dbAuditName) => new MappingSettings<PersistentDomainObjectBase>(dbName, dbAuditName);
 
-    public override IMetadataProxyProvider MetadataProxyProvider  { get; } =
+    public override IMetadataProxyProvider MetadataProxyProvider { get; } =
 
-        new DomainTypeRootExtendedMetadataBuilder()
+        new MetadataProxyProviderBuilder()
 
             .Add<DomainObjectBase>(tb => tb.AddAttribute<AvailableDecimalValidatorAttribute>()
                                            .AddAttribute<AvailablePeriodValidatorAttribute>()
@@ -96,7 +97,8 @@ public partial class AuthorizationGenerationEnvironment : GenerationEnvironmentB
                                           tb.AddAttribute(new BLLViewRoleAttribute()))
             .Add<DelegateToItemModel>(tb => tb.AddProperty(
                                           v => v.Permission,
-                                          pb => pb.AddAttribute(new AutoMappingAttribute(false))));
+                                          pb => pb.AddAttribute(new AutoMappingAttribute(false))))
+            .Build();
 
     public static readonly AuthorizationGenerationEnvironment Default = new();
 }

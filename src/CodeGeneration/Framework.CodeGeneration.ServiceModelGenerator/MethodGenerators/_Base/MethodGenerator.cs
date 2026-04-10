@@ -11,6 +11,7 @@ using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.ServiceModelGenerator._Legacy;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
+using Framework.Core;
 using Framework.Database;
 using Framework.FileGeneration.Configuration;
 using SecuritySystem;
@@ -42,7 +43,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
     protected abstract bool IsEdit { get; }
 
-    protected virtual TBLLRoleAttribute Attribute => this.Configuration.Environment.ExtendedMetadata.GetCustomAttribute<TBLLRoleAttribute>(this.DomainType)
+    protected virtual TBLLRoleAttribute Attribute => this.Configuration.Environment.MetadataProxyProvider.GetProxy(this.DomainType).GetCustomAttribute<TBLLRoleAttribute>()
                                                          .FromMaybe(() => $"Attr {typeof(TBLLRoleAttribute)} not found for type {this.DomainType.FullName}");// ?? this.GetDefaultAttribute();
 
     protected virtual DBSessionMode DefaultSessionMode => this.IsEdit ? DBSessionMode.Write : DBSessionMode.Read;

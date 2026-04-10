@@ -1,7 +1,6 @@
 ﻿using CommonFramework;
 
 using Framework.BLL.Domain.Extensions;
-using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.Core;
 using Framework.Projection.Lambda._Extensions;
 using Framework.Projection.Lambda.ProjectionBuilder;
@@ -9,7 +8,7 @@ using Framework.Projection.Lambda.ProjectionSource._Base;
 
 namespace Framework.Projection.Lambda.ProjectionSource;
 
-internal class CreateSecurityNodesProjectionSource(IProjectionSource baseSource, ProjectionLambdaEnvironment environment) : IProjectionSource
+internal class CreateSecurityNodesProjectionSource(ProjectionLambdaEnvironment environment, IProjectionSource baseSource) : IProjectionSource
 {
     private readonly IProjectionSource baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
 
@@ -56,7 +55,7 @@ internal class CreateSecurityNodesProjectionSource(IProjectionSource baseSource,
             {
                 var implProp = sourceType.GetImplementedProperty(interfaceProp);
 
-                var isExplicit = implProp.GetExpandPath().Maybe(path => path.IsEmpty);
+                var isExplicit = this.environment.PropertyPathService.TryGetExpandPath(implProp).Maybe(path => path.IsEmpty);
 
                 var name = $"{interfaceProp.Name}_Security";
 

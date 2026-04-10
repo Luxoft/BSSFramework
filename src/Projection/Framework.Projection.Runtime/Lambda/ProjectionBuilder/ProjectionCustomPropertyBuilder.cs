@@ -23,7 +23,7 @@ internal class ProjectionCustomPropertyBuilder : IProjectionCustomProperty
 
     public TypeReferenceBase Type { get; set; }
 
-    public IReadOnlyList<string> Fetchs { get; set; } = new string[0];
+    public IReadOnlyList<string> Fetchs { get; set; } = [];
 
     public List<Attribute> Attributes { get; set; } = [];
 

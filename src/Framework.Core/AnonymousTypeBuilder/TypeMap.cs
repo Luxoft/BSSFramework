@@ -39,7 +39,7 @@ public class TypeMap<TMember> : ITypeMap<TMember>, IEquatable<TypeMap<TMember>>,
 
     public override int GetHashCode() => this.Name.GetHashCode() ^ this.Members.Count;
 
-    public bool Equals(TypeMap<TMember> other) => other != null && this.Name == other.Name && this.Members.SequenceEqual(other.Members);
+    public bool Equals(TypeMap<TMember>? other) => other != null && this.Name == other.Name && this.Members.SequenceEqual(other.Members);
 
     public TypeMap<TMember> SwitchName(string newName) => new(newName, this.Members);
 

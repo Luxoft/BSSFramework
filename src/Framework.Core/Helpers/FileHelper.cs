@@ -27,7 +27,7 @@ public static class FileHelper
         }
     }
 
-    public static TResult TempProcess<TResult>(Func<string, TResult> getResult, string pureExtension = null, byte[] content = null)
+    public static TResult TempProcess<TResult>(Func<string, TResult> getResult, string pureExtension = null, byte[]? content = null)
     {
         if (getResult == null) throw new ArgumentNullException(nameof(getResult));
 

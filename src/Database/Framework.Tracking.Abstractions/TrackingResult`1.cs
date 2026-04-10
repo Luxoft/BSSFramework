@@ -19,7 +19,7 @@ public struct TrackingResult<TDomainObject> : IEnumerable<TrackingProperty>
     /// Creates new result instance
     /// </summary>
     /// <param name="modifiedProperties">Modified properties</param>
-    public TrackingResult(IEnumerable<TrackingProperty> modifiedProperties)
+    public TrackingResult(IEnumerable<TrackingProperty>? modifiedProperties)
             : this() =>
         this.properties = (modifiedProperties ?? []).ToList();
 

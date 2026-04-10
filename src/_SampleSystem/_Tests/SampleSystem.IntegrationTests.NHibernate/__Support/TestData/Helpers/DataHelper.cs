@@ -303,7 +303,7 @@ public partial class DataHelper
 
     public ManagementUnitIdentityDTO SaveManagementUnit(
             Guid? id = null,
-            string name = null,
+            string? name = null,
             ManagementUnitIdentityDTO? parent = null,
             bool parentIsNeeded = true,
             Period? period = null,
@@ -343,13 +343,13 @@ public partial class DataHelper
 
     public HRDepartmentIdentityDTO SaveHRDepartment(
             Guid? id = null,
-            string name = null,
-            string nameNative = null,
+            string? name = null,
+            string? nameNative = null,
             HRDepartmentIdentityDTO? parent = null,
             EmployeeIdentityDTO? employee = null,
             CompanyLegalEntityIdentityDTO? companyLegalEntity = null,
-            string code = null,
-            string codeNative = null,
+            string? code = null,
+            string? codeNative = null,
             LocationIdentityDTO? location = null,
             bool isLegal = true,
             bool isProduction = true,
@@ -409,10 +409,10 @@ public partial class DataHelper
 
     public CompanyLegalEntityIdentityDTO SaveCompanyLegalEntity(
             Guid? id = null,
-            string name = null,
+            string? name = null,
             CompanyLegalEntityIdentityDTO? parent = null,
-            string nameEnglish = null,
-            string code = null,
+            string? nameEnglish = null,
+            string? code = null,
             CompanyLegalEntityType? type = null,
             bool active = true)
     {
@@ -450,7 +450,7 @@ public partial class DataHelper
 
     }
 
-    public Employee SaveEmployee(string name, string login = null)
+    public Employee SaveEmployee(string name, string? login = null)
     {
         var result = this.EvaluateWrite(context =>
                                         {

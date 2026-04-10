@@ -48,7 +48,7 @@ public static class TypeExtensions
                                });
     }
 
-    public static string GetModelMethodName(this Type domainType, Type model, ModelRole modelRole, bool withDomainBody, string modelRoleCustomPrefix = null)
+    public static string GetModelMethodName(this Type domainType, Type model, ModelRole modelRole, bool withDomainBody, string? modelRoleCustomPrefix = null)
     {
         if (model == null) throw new ArgumentNullException(nameof(model));
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));

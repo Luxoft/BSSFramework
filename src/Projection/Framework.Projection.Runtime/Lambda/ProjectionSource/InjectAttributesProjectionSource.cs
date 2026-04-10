@@ -4,7 +4,7 @@ using Framework.Projection.Lambda.ProjectionSource._Base;
 
 namespace Framework.Projection.Lambda.ProjectionSource;
 
-internal class InjectAttributesProjectionSource(IProjectionSource baseSource, ProjectionLambdaEnvironment environment) : IProjectionSource
+internal class InjectAttributesProjectionSource(ProjectionLambdaEnvironment environment, IProjectionSource baseSource) : IProjectionSource
 {
     private readonly IProjectionSource baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
 

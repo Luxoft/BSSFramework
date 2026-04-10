@@ -98,7 +98,7 @@ internal static class CodeDomHelper
         return fileFactory.GetDomainObjectParameter(domainType);
     }
 
-    public static CodeParameterDeclarationExpression GetDomainObjectParameter(this IFileFactory fileFactory, Type domainType = null)
+    public static CodeParameterDeclarationExpression GetDomainObjectParameter(this IFileFactory fileFactory, Type? domainType = null)
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 

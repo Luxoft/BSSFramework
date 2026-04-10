@@ -85,7 +85,7 @@ public static class BaseCodeDomHelper
         return source.GetStrictConstructorFileTypes().Where(fileType => source.Configuration.GeneratePolicy.Used(source.DomainType, fileType));
     }
 
-    private static CodeConstructor GenerateStrictConstructor<TConfiguration>(this IDTOSource<TConfiguration> source, MainDTOFileType sourceFileType, MainDTOFileType baseFileType, bool withoutMappingParameter)
+    private static CodeConstructor GenerateStrictConstructor<TConfiguration>(this IDTOSource<TConfiguration> source, MainDTOFileType sourceFileType, MainDTOFileType? baseFileType, bool withoutMappingParameter)
             where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
         if (source == null) throw new ArgumentNullException(nameof(source));

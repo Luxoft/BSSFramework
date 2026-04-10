@@ -280,7 +280,7 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
     public virtual CodeExpression GetCreateUpdateDTOExpression(
             Type domainType,
             CodeExpression currentStrictSource,
-            CodeExpression baseStrictSource,
+            CodeExpression? baseStrictSource,
             CodeExpression mappingService)
     {
         if (baseStrictSource == null)

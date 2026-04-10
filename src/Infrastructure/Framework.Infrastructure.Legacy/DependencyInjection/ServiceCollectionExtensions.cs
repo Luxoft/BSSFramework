@@ -6,9 +6,9 @@ using Framework.Application.Events;
 using Framework.BLL;
 using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.Extensions;
-using Framework.BLL.Domain.Persistent.Visitors;
 using Framework.BLL.Services;
 using Framework.BLL.Validation;
+using Framework.BLL.Visitors;
 using Framework.Core;
 using Framework.Database;
 using Framework.Infrastructure.ApiControllerBaseEvaluator;
@@ -47,7 +47,7 @@ public static class ServiceCollectionExtensions
 
             services.AddSingleton<IExceptionExpander, TargetInvocationExceptionExpander>();
 
-            services.AddKeyedSingleton<IExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey, new ExpressionVisitorContainer(new ExpandPathVisitor()));
+            services.AddKeyedSingleton<IExpressionVisitorContainer, ExpandPathVisitorContainer>(IExpressionVisitorContainer.ElementKey);
 
             services.AddOData();
 

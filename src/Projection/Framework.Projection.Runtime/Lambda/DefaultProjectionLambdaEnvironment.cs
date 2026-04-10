@@ -1,4 +1,5 @@
-﻿using Framework.Core;
+﻿using Framework.BLL.Services;
+using Framework.Core;
 using Framework.Core.TypeResolving.TypeSource;
 using Framework.Database.Metadata;
 using Framework.ExtendedMetadata;
@@ -9,15 +10,16 @@ namespace Framework.Projection.Lambda;
 public class DefaultProjectionLambdaEnvironment : ProjectionLambdaEnvironment
 {
     public DefaultProjectionLambdaEnvironment(
-        IMetadataProxyProvider metadataProxyProvider ,
         IProjectionSource projectionSource,
+        IMetadataProxyProvider metadataProxyProvider,
+        IPropertyPathService propertyPathService,
         string assemblyName,
         string assemblyFullName,
         Type domainObjectBaseType,
         Type persistentDomainObjectBaseType,
         string @namespace,
-        bool useDependencySecurity)
-        : base(metadataProxyProvider , projectionSource)
+        bool useDependencySecurity = true)
+        : base(projectionSource, metadataProxyProvider, propertyPathService)
     {
         if (assemblyName == null)
         {

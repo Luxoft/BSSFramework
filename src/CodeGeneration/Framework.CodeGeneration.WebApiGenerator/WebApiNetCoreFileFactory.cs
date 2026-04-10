@@ -12,7 +12,7 @@ namespace Framework.CodeGeneration.WebApiGenerator;
 public class WebApiNetCoreFileFactory<TConfiguration>(
     TConfiguration configuration,
     Type domainType,
-    List<CodeAttributeDeclaration> additionalAttributes)
+    List<CodeAttributeDeclaration>? additionalAttributes)
     : WebApiNetCoreFileFactoryBase<TConfiguration>(configuration, domainType)
     where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {

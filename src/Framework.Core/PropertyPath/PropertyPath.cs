@@ -8,10 +8,15 @@ using CommonFramework;
 namespace Framework.Core;
 
 [DebuggerDisplay("{DebuggerDisplay}")]
-public class PropertyPath(List<PropertyInfo> list) : ReadOnlyCollection<PropertyInfo>(list), IEquatable<PropertyPath>
+public class PropertyPath(IEnumerable<PropertyInfo> properties) : ReadOnlyCollection<PropertyInfo>(properties.ToList()), IEquatable<PropertyPath>
 {
-    public PropertyPath(IEnumerable<PropertyInfo> list)
-        : this(list.ToList())
+    public PropertyPath(Type sourceType, IEnumerable<string> path)
+        : this(GetProperties(sourceType, path))
+    {
+    }
+
+    public PropertyPath(Type sourceType, string path)
+        : this(sourceType, path.Split('.'))
     {
     }
 
@@ -72,9 +77,10 @@ public class PropertyPath(List<PropertyInfo> list) : ReadOnlyCollection<Property
 
     public new static PropertyPath Empty { get; } = new([]);
 
-    public static PropertyPath Create(Type sourceType, string[] properties)
-    {
-        var typedProperties = properties.Scan(
+
+    private static IEnumerable<PropertyInfo> GetProperties(Type sourceType, IEnumerable<string> properties) =>
+
+        properties.Scan(
             default(PropertyInfo),
             (prevProperty, propertyName) =>
             {
@@ -82,7 +88,4 @@ public class PropertyPath(List<PropertyInfo> list) : ReadOnlyCollection<Property
 
                 return currentType.GetRequiredProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
             }).Skip(1).Select(v => v!);
-
-        return new PropertyPath(typedProperties);
-    }
 }

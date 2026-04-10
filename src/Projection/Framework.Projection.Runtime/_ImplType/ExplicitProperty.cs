@@ -36,7 +36,7 @@ internal class ExplicitProperty : BasePropertyInfoImpl
 
     public override Type DeclaringType => this.ReflectedType;
 
-    public override string Name => this.InterfaceProp.Name;// $"ExplicitProp_{this.baseProperty.Name}";
+    public override string Name => this.InterfaceProp.Name; // $"ExplicitProp_{this.baseProperty.Name}";
 
 
     private PropertyInfo GetGenericInterfaceProp(PropertyInfo baseProp)
@@ -64,14 +64,11 @@ internal class ExplicitProperty : BasePropertyInfoImpl
     }
 
     public override object[] GetCustomAttributes(bool inherit) =>
-        new[]
-        {
-            this.GetExpandPathAttributes().ToArray<Attribute>()
-        }.SelectMany().ToArray<object>();
+        new[] { this.GetExpandPathAttributes().ToArray<Attribute>() }.SelectMany().ToArray<object>();
 
     private IEnumerable<ExpandPathAttribute> GetExpandPathAttributes()
     {
-        yield return this.customPropertyPath.Maybe(path => new ExpandPathAttribute(path)) ?? new ExpandPathAttribute(this.baseName);
+        yield return this.customPropertyPath.Maybe(path => new ExpandPathAttribute(path.ToString())) ?? new ExpandPathAttribute(this.baseName);
     }
 
     public override ParameterInfo[] GetIndexParameters() => []; // this.sourceProperty.GetIndexParameters();

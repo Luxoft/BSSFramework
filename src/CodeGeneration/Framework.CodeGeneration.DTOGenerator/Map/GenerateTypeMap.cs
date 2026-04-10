@@ -29,7 +29,7 @@ public class GenerateTypeMap
     /// <param name="elementFileType">Тип DTO свойства</param>
     /// <param name="isDetail">Свойство является деталью</param>
     /// <returns></returns>
-    public bool UsedDetailRole(Type elementType, RoleFileType elementFileType, bool? isDetail) =>
+    public bool UsedDetailRole(Type elementType, RoleFileType? elementFileType, bool? isDetail) =>
         this.GetNotSelfProperties().Any(prop =>
                                             prop.ElementType == elementType
                                             && (elementFileType == null || prop.ElementFileType == null || prop.ElementFileType == elementFileType)

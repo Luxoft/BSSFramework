@@ -27,7 +27,7 @@ internal class InjectMissedParentsProjectionSource(IProjectionSource baseSource)
 
                                   let parentProperty = potentialParentProperties.Count == 1 ? potentialParentProperties.Single() : potentialParentProperties.Single(prop => prop.HasAttribute<IsMasterAttribute>(), () => new Exception($"Parent property from \"{elementProjection.SourceType}\" to type \"{projection.SourceType}\" not found"))
 
-                                  where !elementProjection.Properties.Select(prop => prop.Path).Contains(new PropertyPath(new[] { parentProperty }))
+                                  where !elementProjection.Properties.Select(prop => prop.Path).Contains(new PropertyPath([parentProperty]))
 
                                   select new
                                          {

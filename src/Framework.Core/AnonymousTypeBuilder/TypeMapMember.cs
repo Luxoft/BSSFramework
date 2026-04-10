@@ -4,7 +4,7 @@ public class TypeMapMember(string name, Type type) : TypeMapMemberBase(name, typ
 {
     public override int GetHashCode() => this.Name.GetHashCode() ^ this.Type.GetHashCode();
 
-    public bool Equals(TypeMapMember other) => other != null && this.Name == other.Name && this.Type == other.Type;
+    public bool Equals(TypeMapMember? other) => other != null && this.Name == other.Name && this.Type == other.Type;
 
     public override bool Equals(object obj) => this.Equals(obj as TypeMapMember);
 }

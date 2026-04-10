@@ -122,27 +122,27 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
             yield return securityAttribute;
         }
 
-        if (property.GetCustomAttribute<CustomSerializationAttribute>(attr => attr.Role.HasFlag(DTORole.Client)) is var customSerializationAttr && customSerializationAttr != null)
+        if (property.GetCustomAttribute<CustomSerializationAttribute>(attr => attr.Role.HasFlag(DTORole.Client)) is { } customSerializationAttr)
         {
             yield return customSerializationAttr.ToAttributeDeclaration();
         }
 
-        if (property.GetCustomAttribute<ProjectionPropertyAttribute>() is var projectionPropAttr && projectionPropAttr != null)
+        if (property.GetCustomAttribute<ProjectionPropertyAttribute>() is { } projectionPropAttr)
         {
             yield return projectionPropAttr.ToAttributeDeclaration();
         }
 
-        if (property.HasAttribute<ExpandPathAttribute>())
+        if (property.GetCustomAttribute<ExpandPathAttribute>() is {} expandPathAttribute)
         {
-            yield return property.GetCustomAttribute<ExpandPathAttribute>().ToAttributeDeclaration();
+            yield return expandPathAttribute.ToAttributeDeclaration();
         }
 
-        if (property.GetCustomAttribute<MappingAttribute>() is var mappingAttr && mappingAttr != null)
+        if (property.GetCustomAttribute<MappingAttribute>() is { } mappingAttr)
         {
             yield return mappingAttr.ToAttributeDeclaration();
         }
 
-        if (property.GetCustomAttribute<IgnoreFetchAttribute>() is var ignoreFetchAttribute && ignoreFetchAttribute != null)
+        if (property.GetCustomAttribute<IgnoreFetchAttribute>() is { } ignoreFetchAttribute)
         {
             yield return ignoreFetchAttribute.ToAttributeDeclaration();
         }
@@ -152,7 +152,7 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
             yield return fetchPathAttribute.ToAttributeDeclaration();
         }
 
-        if (property.GetCustomAttribute<MappingPropertyAttribute>() is var mappingPropertyAttribute && mappingPropertyAttribute != null)
+        if (property.GetCustomAttribute<MappingPropertyAttribute>() is { } mappingPropertyAttribute)
         {
             yield return mappingPropertyAttribute.ToAttributeDeclaration();
         }

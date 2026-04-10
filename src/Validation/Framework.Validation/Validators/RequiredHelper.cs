@@ -73,7 +73,7 @@ public static class RequiredHelper
         }
     }
 
-    private static bool IsValidClass<TValue>(TValue value, RequiredMode mode)
+    private static bool IsValidClass<TValue>(TValue? value, RequiredMode mode)
             where TValue : class
     {
         switch (mode)

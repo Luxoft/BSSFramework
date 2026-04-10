@@ -32,5 +32,5 @@ public class MethodTypeInfo : IEquatable<MethodTypeInfo>
 
     public override int GetHashCode() => this.ReturnType.GetHashCode();
 
-    public bool Equals(MethodTypeInfo other) => other != null && this.InputTypes.SequenceEqual(other.InputTypes) && this.ReturnType == other.ReturnType;
+    public bool Equals(MethodTypeInfo? other) => other != null && this.InputTypes.SequenceEqual(other.InputTypes) && this.ReturnType == other.ReturnType;
 }

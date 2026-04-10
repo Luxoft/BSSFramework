@@ -3,7 +3,6 @@ using System.Reflection;
 
 using CommonFramework;
 
-using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.Core;
 using Framework.Database.Mapping.Extensions;
 
@@ -15,7 +14,7 @@ namespace Framework.Projection.Lambda;
 public abstract class ProjectionProperty<TExpression, TElement> : IProjectionProperty
     where TExpression : LambdaExpression
 {
-    private readonly Lazy<Projection<TElement>> lazyElementProjection;
+    private readonly Lazy<Projection<TElement>>? lazyElementProjection;
 
     /// <summary>
     /// Конструктор
@@ -25,7 +24,7 @@ public abstract class ProjectionProperty<TExpression, TElement> : IProjectionPro
     /// <param name="getPropProjection">Тип проекции свойства</param>
     /// <param name="ignoreSerialization">Игноририрование сериализации</param>
     /// <param name="attributes">Дополнительные атрибуты свойства</param>
-    protected ProjectionProperty(TExpression path, string name, Func<Projection<TElement>> getPropProjection, bool ignoreSerialization, IEnumerable<Attribute> attributes)
+    protected ProjectionProperty(TExpression path, string? name, Func<Projection<TElement>>? getPropProjection, bool ignoreSerialization, IEnumerable<Attribute> attributes)
     {
         this.Expression = path ?? throw new ArgumentNullException(nameof(path));
         this.IgnoreSerialization = ignoreSerialization;
@@ -35,7 +34,7 @@ public abstract class ProjectionProperty<TExpression, TElement> : IProjectionPro
 
         this.ElementType = typeof(TElement).GetNullableElementTypeOrSelf();
 
-        this.lazyElementProjection = getPropProjection.Maybe(v => LazyHelper.Create(v));
+        this.lazyElementProjection = getPropProjection.Maybe(LazyHelper.Create);
 
         this.Path.Where(prop => !prop.IsPersistent()).Foreach(prop => throw new Exception($"Projection property \"{prop.Name}\" of path \"{this.Expression}\" must be persistent"));
         this.Attributes = (attributes ?? throw new ArgumentNullException(nameof(attributes))).ToReadOnlyCollection();
@@ -55,7 +54,7 @@ public abstract class ProjectionProperty<TExpression, TElement> : IProjectionPro
     /// <inheritdoc />
     public string Name { get; }
 
-    public IProjection ElementProjection => this.lazyElementProjection.Maybe(v => v.Value);
+    public IProjection? ElementProjection => this.lazyElementProjection.Maybe(v => v.Value);
 
     /// <inheritdoc />
     public abstract Type SourceType { get; }
@@ -68,7 +67,7 @@ public abstract class ProjectionProperty<TExpression, TElement> : IProjectionPro
     /// <summary>
     /// Тип коллекции
     /// </summary>
-    public abstract Type CollectionType { get; }
+    public abstract Type? CollectionType { get; }
 
     /// <summary>
     /// Свойство является коллекцией
@@ -90,5 +89,5 @@ public abstract class ProjectionProperty<TExpression, TElement> : IProjectionPro
 
     TypeReferenceBase.BuildTypeReference IProjectionProperty.Type => new(this.ElementType, this.CollectionType, this.IsNullable, this.ElementProjection);
 
-    PropertyInfo IProjectionProperty.VirtualExplicitInterfaceProperty { get; } = null;
+    PropertyInfo? IProjectionProperty.VirtualExplicitInterfaceProperty { get; } = null;
 }

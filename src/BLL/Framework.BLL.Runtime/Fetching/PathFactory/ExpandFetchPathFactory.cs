@@ -2,13 +2,14 @@
 
 using Framework.BLL.Domain.Fetching;
 using Framework.BLL.Domain.Persistent.Attributes;
-using Framework.BLL.Domain.Persistent.Extensions;
+using Framework.BLL.Extensions;
+using Framework.BLL.Services;
 using Framework.Core;
-
 
 namespace Framework.BLL.Fetching.PathFactory;
 
-public class ExpandFetchPathFactory(Type persistentDomainObjectBase, int maxRecurseLevel = 1) : DTOFetchPathFactory(persistentDomainObjectBase, maxRecurseLevel)
+public class ExpandFetchPathFactory(IPropertyPathService propertyPathService, Type persistentDomainObjectBase, int maxRecurseLevel = 1) :
+    DTOFetchPathFactory(persistentDomainObjectBase, maxRecurseLevel)
 {
     protected override PropertyLoadNode ExpandNode(PropertyLoadNode node)
     {
@@ -32,13 +33,11 @@ public class ExpandFetchPathFactory(Type persistentDomainObjectBase, int maxRecu
 
     private IEnumerable<PropertyPath> ExpandProperty(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-
-        var expandPath = property.GetExpandPath();
+        var expandPath = propertyPathService.TryGetExpandPath(property);
 
         if (expandPath is null)
         {
-            foreach (var fetchPath in property.GetFetchPaths())
+            foreach (var fetchPath in propertyPathService.GetPropertyPaths<FetchPathAttribute>(property))
             {
                 yield return fetchPath;
             }
@@ -62,27 +61,24 @@ public class ExpandFetchPathFactory(Type persistentDomainObjectBase, int maxRecu
             if (isTransferType)
             {
                 return new PropertyLoadNode(
-                                            domainType,
-                                            new Dictionary<PropertyInfo, PropertyLoadNode>
-                                            {
-                                                    { property, this.ToLoadNode(nestedType, propertyPath.Tail) }
-                                            },
-                                            []);
+                    domainType,
+                    new Dictionary<PropertyInfo, PropertyLoadNode> { { property, this.ToLoadNode(nestedType, propertyPath.Tail) } },
+                    []);
             }
             else
             {
                 return new PropertyLoadNode(
-                                            domainType,
-                                            new Dictionary<PropertyInfo, PropertyLoadNode>(),
-                                            [property]);
+                    domainType,
+                    new Dictionary<PropertyInfo, PropertyLoadNode>(),
+                    [property]);
             }
         }
         else
         {
             return new PropertyLoadNode(
-                                        domainType,
-                                        new Dictionary<PropertyInfo, PropertyLoadNode>(),
-                                        []);
+                domainType,
+                new Dictionary<PropertyInfo, PropertyLoadNode>(),
+                []);
         }
     }
 }

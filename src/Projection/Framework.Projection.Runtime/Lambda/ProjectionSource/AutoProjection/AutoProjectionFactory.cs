@@ -1,6 +1,5 @@
 ﻿using CommonFramework;
 
-using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.Core;
 
 using Framework.Projection.Lambda.ProjectionBuilder;
@@ -18,7 +17,7 @@ internal class AutoProjectionFactory(ProjectionLambdaEnvironment environment, Pr
     {
         var defaultProperties = this.baseProjection.Properties.Where(prop => prop.ElementProjection == null || prop.ElementProjection.Role == ProjectionRole.Default).ToList();
 
-        var externalNodes = defaultProperties.Select(prop => new ProjectionPath(prop.Path.WithExpand(), new LastProjectionProperty(prop.Name, prop.ElementProjection))).ToNodes();
+        var externalNodes = defaultProperties.Select(prop => new ProjectionPath(this.environment.PropertyPathService.WithExpand(prop.Path), new LastProjectionProperty(prop.Name, prop.ElementProjection!))).ToNodes();
 
         return this.InternalCreate(this.baseProjection.SourceType, this.baseProjection.Name, externalNodes);
     }

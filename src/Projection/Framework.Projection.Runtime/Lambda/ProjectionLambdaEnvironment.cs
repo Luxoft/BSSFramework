@@ -3,6 +3,7 @@ using System.ComponentModel;
 
 using CommonFramework;
 
+using Framework.BLL.Services;
 using Framework.Core;
 using Framework.Core.TypeResolving;
 using Framework.Projection._Extensions;
@@ -23,18 +24,15 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
 {
     private ImmutableArray<IProjection> projections;
 
-    /// <summary>
-    /// Конструктор
-    /// </summary>
-    /// <param name="projectionSource">Источник проекций</param>
-    protected ProjectionLambdaEnvironment(IMetadataProxyProvider metadataProxyProvider , IProjectionSource projectionSource)
-        : base(metadataProxyProvider )
+    protected ProjectionLambdaEnvironment(IProjectionSource projectionSource, IMetadataProxyProvider metadataProxyProvider, IPropertyPathService propertyPathService)
+        : base(metadataProxyProvider)
     {
-        if (projectionSource == null) throw new ArgumentNullException(nameof(projectionSource));
+        this.PropertyPathService = propertyPathService;
 
         this.ProjectionTypeResolver = LazyInterfaceImplementHelper.CreateProxy(() => this.CreateProjectionTypeResolver(projectionSource));
     }
 
+    public IPropertyPathService PropertyPathService { get; }
 
     public ITypeResolver<IProjection> ProjectionTypeResolver { get; private set; }
 
@@ -44,16 +42,16 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
 
         this.ProjectionTypeResolver = generateTypeResolver;
 
-        this.projections = [
+        this.projections =
+        [
             ..projectionSource.Pipe(v => new LinkAllProjectionSource(v))
                               .Pipe(v => new VerifyUniqueProjectionSource(v))
-                              .Pipe(
-                                  v => this.UseDependencySecurity
-                                           ? (IProjectionSource)v
-                                           : new CreateSecurityNodesProjectionSource(v, this))
-                              .Pipe(v => new CreateAutoNodesProjectionSource(v, this))
+                              .Pipe(v => this.UseDependencySecurity
+                                             ? (IProjectionSource)v
+                                             : new CreateSecurityNodesProjectionSource(this, v))
+                              .Pipe(v => new CreateAutoNodesProjectionSource(this, v))
                               .Pipe(v => new InjectMissedParentsProjectionSource(v))
-                              .Pipe(v => new InjectAttributesProjectionSource(v, this))
+                              .Pipe(v => new InjectAttributesProjectionSource(this, v))
                               .GetProjections()
         ];
 
@@ -183,23 +181,4 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
 
         return new ProjectionCustomPropertyAttributeSource(this, projectionCustomProperty);
     }
-
-    public static ProjectionLambdaEnvironment Create(
-        IMetadataProxyProvider metadataProxyProvider ,
-        IProjectionSource projectionSource,
-        string assemblyName,
-        string assemblyFullName,
-        Type domainObjectBaseType,
-        Type persistentDomainObjectBaseType,
-        string @namespace,
-        bool useDependencySecurity = true) =>
-        new DefaultProjectionLambdaEnvironment(
-            metadataProxyProvider ,
-            projectionSource,
-            assemblyName,
-            assemblyFullName,
-            domainObjectBaseType,
-            persistentDomainObjectBaseType,
-            @namespace,
-            useDependencySecurity);
 }

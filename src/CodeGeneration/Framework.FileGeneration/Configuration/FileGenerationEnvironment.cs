@@ -63,7 +63,7 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
 
     public Type AuditPersistentDomainObjectBaseType { get; }
 
-    public virtual string TargetSystemName => this.PersistentDomainObjectBaseType.ExtractSystemName();
+    public virtual string TargetSystemName => this.PersistentDomainObjectBaseType.Namespace!.Split('.').Skip("Framework").First();
 
     public IReadOnlyCollection<IProjectionEnvironment> ProjectionEnvironments { get; }
 

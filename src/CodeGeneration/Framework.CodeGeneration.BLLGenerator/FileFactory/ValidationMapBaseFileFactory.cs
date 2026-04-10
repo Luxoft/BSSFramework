@@ -329,7 +329,7 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
         return GetApplyValidatorDataFunc(codeExpression, validationData, extensionsClass).Aggregate(codeExpression, (state, f) => f(state));
     }
 
-    private static IEnumerable<Func<CodeExpression, CodeExpression>> GetApplyValidatorDataFunc(CodeExpression codeExpression, IValidationData validationData, Type extensionsClass)
+    private static IEnumerable<Func<CodeExpression, CodeExpression>> GetApplyValidatorDataFunc(CodeExpression codeExpression, IValidationData? validationData, Type extensionsClass)
     {
         if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
         if (extensionsClass == null) throw new ArgumentNullException(nameof(extensionsClass));

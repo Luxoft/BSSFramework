@@ -34,7 +34,7 @@ internal static class PropertyNodeValueExtensions
         {
             case ProjectionLastNodeValue lastValue:
 
-                yield return new ProjectionPath(new PropertyPath(new [] { property }), lastValue.LastProperty);
+                yield return new ProjectionPath(new PropertyPath([property]), lastValue.LastProperty);
                 break;
 
             default:

@@ -48,5 +48,5 @@ public interface IProjectionProperty : IProjectionAttributeProvider
     /// <summary>
     /// Виртуальное свойство интерфейса, которое имплементируется explicit-ом
     /// </summary>
-    PropertyInfo VirtualExplicitInterfaceProperty { get; }
+    PropertyInfo? VirtualExplicitInterfaceProperty { get; }
 }

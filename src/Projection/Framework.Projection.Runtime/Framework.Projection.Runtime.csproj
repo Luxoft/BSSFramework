@@ -10,10 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BLL\Framework.BLL.Abstractions\Framework.BLL.Abstractions.csproj" />
     <ProjectReference Include="..\Framework.Projection.Abstractions\Framework.Projection.Abstractions.csproj" />
     <ProjectReference Include="..\Framework.Projection.Domain\Framework.Projection.Domain.csproj" />
 
-    <ProjectReference Include="..\..\BLL\Framework.BLL.Domain\Framework.BLL.Domain.csproj" />
     <ProjectReference Include="..\..\Database\Framework.Database.Metadata\Framework.Database.Metadata.csproj" />
     <ProjectReference Include="..\..\Validation\Framework.Validation\Framework.Validation.csproj" />
   </ItemGroup>

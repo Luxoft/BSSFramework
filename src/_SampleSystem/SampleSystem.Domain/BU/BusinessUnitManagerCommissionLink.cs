@@ -85,7 +85,7 @@ public class BusinessUnitManagerCommissionLink : AuditPersistentDomainObjectBase
     }
 
     [UniqueElement]
-    [ExpandPath("Period")]
+    [ExpandPath(nameof(Period))]
     [CustomSerialization(CustomSerializationMode.Ignore)]
     public virtual DateTime StartDate => this.Period.StartDate;
 

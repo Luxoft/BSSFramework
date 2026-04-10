@@ -55,46 +55,17 @@ public static class FactoryExtensions
     }
 }
 
-public class FuncFactory<T> : IFactory<T>
+public class FuncFactory<T>(Func<T> createFunc) : IFactory<T>
 {
-    private readonly Func<T> createFunc;
-
-
-    public FuncFactory(Func<T> createFunc)
-    {
-        if (createFunc == null) throw new ArgumentNullException(nameof(createFunc));
-
-        this.createFunc = createFunc;
-    }
-
-
-    public T Create() => this.createFunc();
+    public T Create() => createFunc();
 }
 
-public class FuncFactory<TArg, TResult> : IFactory<TArg, TResult>
+public class FuncFactory<TArg, TResult>(Func<TArg, TResult> createFunc) : IFactory<TArg, TResult>
 {
-    private readonly Func<TArg, TResult> createFunc;
-
-    public FuncFactory(Func<TArg, TResult> createFunc)
-    {
-        if (createFunc == null) throw new ArgumentNullException(nameof(createFunc));
-
-        this.createFunc = createFunc;
-    }
-
-    public TResult Create(TArg arg) => this.createFunc(arg);
+    public TResult Create(TArg arg) => createFunc(arg);
 }
 
-public class FuncFactory<TArg1, TArg2, TResult> : IFactory<TArg1, TArg2, TResult>
+public class FuncFactory<TArg1, TArg2, TResult>(Func<TArg1, TArg2, TResult> createFunc) : IFactory<TArg1, TArg2, TResult>
 {
-    private readonly Func<TArg1, TArg2, TResult> createFunc;
-
-    public FuncFactory(Func<TArg1, TArg2, TResult> createFunc)
-    {
-        if (createFunc == null) throw new ArgumentNullException(nameof(createFunc));
-
-        this.createFunc = createFunc;
-    }
-
-    public TResult Create(TArg1 arg1, TArg2 arg2) => this.createFunc(arg1, arg2);
+    public TResult Create(TArg1 arg1, TArg2 arg2) => createFunc(arg1, arg2);
 }

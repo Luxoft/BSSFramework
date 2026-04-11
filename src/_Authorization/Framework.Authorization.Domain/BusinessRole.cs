@@ -19,7 +19,7 @@ public class BusinessRole : BaseDirectory
     /// Коллекция пермиссий принципалов, выданных по одной бизнес-роль
     /// </summary>
     [DetailRole(false)]
-    [CustomSerialization(CustomSerializationMode.Ignore)]
+    //[CustomSerialization(CustomSerializationMode.Ignore)]
     public virtual IEnumerable<Permission> Permissions => this.permissions;
 
     /// <summary>

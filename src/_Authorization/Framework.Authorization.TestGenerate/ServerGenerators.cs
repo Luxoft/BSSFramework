@@ -1,10 +1,4 @@
-﻿using System.Reflection;
-
-using CommonFramework;
-
-using Framework.Authorization.Domain;
-using Framework.BLL.Domain.Serialization.Extensions;
-using Framework.CodeGeneration.BLLCoreGenerator;
+﻿using Framework.CodeGeneration.BLLCoreGenerator;
 using Framework.CodeGeneration.BLLGenerator;
 using Framework.CodeGeneration.DTOGenerator.Server;
 using Framework.CodeGeneration.Extensions;
@@ -19,23 +13,6 @@ public partial class ServerGenerators
     [TestMethod]
     public void GenerateMainTest()
     {
-        var proxyType = this.Environment.MetadataProxyProvider.GetProxy(typeof(Principal)).Wrapped;
-
-        var prop = proxyType.GetProperty(nameof(Principal.Permissions))!;
-
-        var el = prop.PropertyType.UnderlyingSystemType.GetCollectionElementType();
-
-        //var proxyType = typeof(Principal);
-
-        //var prop = proxyType.GetProperty("Name")!;
-
-        //var attr = prop.GetCustomAttributes();
-
-        //var attr2 = Attribute.GetCustomAttributes(prop);
-
-        var propList = proxyType.GetSerializationProperties().ToList();
-
-
         this.GenerateMain().ToList();
     }
 

@@ -1,5 +1,4 @@
-﻿using Framework.BLL.Domain.Serialization;
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Database.Mapping;
 using Framework.Relations;
 using Framework.Restriction;
@@ -81,19 +80,12 @@ public class Permission : AuditPersistentDomainObjectBase,
     /// Коллекция пермиссий, которым данная пермиссия была делегирована
     /// </summary>
     [Mapping(CascadeMode = CascadeMode.Enabled)]
-    [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event)]
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual IEnumerable<Permission> DelegatedTo => this.delegatedTo;
 
     /// <summary>
     /// Пермиссия, от которой была делегирована данная пермиссия
     /// </summary>
-    [CustomSerialization(CustomSerializationMode.Ignore)]
-    public virtual Permission? DelegatedFrom
-    {
-        get => this.delegatedFrom;
-        set => this.delegatedFrom = value;
-    }
+    public virtual Permission? DelegatedFrom { get => this.delegatedFrom; set => this.delegatedFrom = value; }
 
     /// <summary>
     /// Период действия пермиссии
@@ -103,12 +95,7 @@ public class Permission : AuditPersistentDomainObjectBase,
     /// <summary>
     /// Приниципал, к которому относится данная пермиссия
     /// </summary>
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public virtual Principal Principal
-    {
-        get => this.principal;
-        set => this.principal = value;
-    }
+    public virtual Principal Principal { get => this.principal; set => this.principal = value; }
 
     /// <summary>
     /// Бизнес-роль, которую содержит пермиссия
@@ -129,5 +116,5 @@ public class Permission : AuditPersistentDomainObjectBase,
 
     ICollection<Permission> IMaster<Permission>.Details => (ICollection<Permission>)this.DelegatedTo;
 
-    Permission IDetail<Permission>.Master => this.DelegatedFrom;
+    Permission? IDetail<Permission>.Master => this.DelegatedFrom;
 }

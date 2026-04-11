@@ -80,7 +80,7 @@ public partial class AuthorizationGenerationEnvironment : GenerationEnvironmentB
                                    tb.AddAttribute(new BLLViewRoleAttribute())
                                      .AddProperty(v => v.Permissions, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.Ignore)))
                                      .AddProperty(v => v.Description, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
-                                     )
+                )
 
             .Add<Principal>(tb =>
                                 tb.AddAttribute(new BLLViewRoleAttribute())
@@ -89,13 +89,24 @@ public partial class AuthorizationGenerationEnvironment : GenerationEnvironmentB
 
             .Add<Permission>(tb =>
                                  tb.AddAttribute(new BLLViewRoleAttribute { MaxCollection = MainDTOType.RichDTO })
-                                   .AddAttribute(new BLLRemoveRoleAttribute()))
+                                   .AddAttribute(new BLLRemoveRoleAttribute())
+                                   .AddProperty(
+                                       v => v.DelegatedTo,
+                                       pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.Ignore, DTORole.Event))
+                                               .AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
+                                   .AddProperty(v => v.DelegatedFrom, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.Ignore)))
+                                   .AddProperty(v => v.Principal, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly))))
 
             .Add<PermissionRestriction>(tb =>
-                                            tb.AddAttribute(new BLLRoleAttribute()))
+                                            tb.AddAttribute(new BLLRoleAttribute())
+                                              .AddProperty(v => v.Permission, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
+                                              .AddProperty(
+                                                  v => v.SecurityContextType,
+                                                  pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.Ignore, DTORole.Integration))))
 
             .Add<SecurityContextType>(tb =>
-                                          tb.AddAttribute(new BLLViewRoleAttribute()))
+                                          tb.AddAttribute(new BLLViewRoleAttribute())
+                                            .AddProperty(v => v.Name, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly))))
             .Add<DelegateToItemModel>(tb => tb.AddProperty(
                                           v => v.Permission,
                                           pb => pb.AddAttribute(new AutoMappingAttribute(false))))

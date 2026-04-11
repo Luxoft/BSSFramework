@@ -1,5 +1,4 @@
-﻿using Framework.BLL.Domain.Serialization;
-using Framework.Relations;
+﻿using Framework.Relations;
 using Framework.Restriction;
 using Framework.Tracking.Validation;
 
@@ -35,7 +34,6 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
     /// <summary>
     /// Пермиссия по связке контекст+пермиссия
     /// </summary>
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual Permission Permission
     {
         get => this.permission;
@@ -45,7 +43,6 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
     /// <summary>
     /// Вычисляемый доменный тип по связке контекст+пермиссия
     /// </summary>
-    [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Integration)]
     [FixedPropertyValidator]
     [Required]
     [UniqueElement]

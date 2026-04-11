@@ -1,5 +1,4 @@
-﻿using Framework.BLL.Domain.Serialization;
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Relations;
 using Framework.Restriction;
 
@@ -19,7 +18,6 @@ public class BusinessRole : BaseDirectory
     /// Коллекция пермиссий принципалов, выданных по одной бизнес-роль
     /// </summary>
     [DetailRole(false)]
-    //[CustomSerialization(CustomSerializationMode.Ignore)]
     public virtual IEnumerable<Permission> Permissions => this.permissions;
 
     /// <summary>

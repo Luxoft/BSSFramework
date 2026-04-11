@@ -1,6 +1,4 @@
-﻿using Framework.BLL.Domain.Serialization;
-
-namespace Framework.Authorization.Domain;
+﻿namespace Framework.Authorization.Domain;
 
 /// <summary>
 /// Описание доменных типов, в контексте которых выдаются права пользователю
@@ -16,7 +14,6 @@ public class SecurityContextType : BaseDirectory
     /// <summary>
     /// Вычисляемое название доменного типа
     /// </summary>
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public override string Name
     {
         get => base.Name;

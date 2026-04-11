@@ -1,5 +1,4 @@
 ﻿using Framework.Application.Domain;
-using Framework.BLL.Domain.Serialization;
 using Framework.Core;
 
 namespace Framework.Authorization.Domain;
@@ -24,8 +23,6 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IEquatable<
     /// <summary>
     /// Признак того, что класс еще не сохранен в базе
     /// </summary>
-
-    [CustomSerialization(CustomSerializationMode.Ignore)]
     public virtual bool IsNew => this.Id == Guid.Empty;
 
     public static bool operator ==(PersistentDomainObjectBase? a, PersistentDomainObjectBase? b) => ReferenceEquals(a, b) || (!ReferenceEquals(a, null) && !ReferenceEquals(b, null) && a.Equals(b));

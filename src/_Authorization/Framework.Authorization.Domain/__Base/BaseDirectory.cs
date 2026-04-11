@@ -1,5 +1,4 @@
 ﻿using Framework.Application.Domain;
-using Framework.BLL.Domain.Attributes;
 using Framework.Core;
 using Framework.Restriction;
 
@@ -15,7 +14,6 @@ public abstract class BaseDirectory : AuditPersistentDomainObjectBase, IVisualId
     /// </summary>
     private string name;
 
-    [VisualIdentity]
     [Required]
     [UniqueElement]
     public virtual string Name

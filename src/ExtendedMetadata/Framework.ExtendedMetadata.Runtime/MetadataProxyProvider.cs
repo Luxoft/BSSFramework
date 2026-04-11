@@ -1,11 +1,16 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Concurrent;
+using System.Collections.Immutable;
 using System.Reflection;
 using System.Reflection.Context;
+
+using Framework.Core;
 
 namespace Framework.ExtendedMetadata;
 
 public class MetadataProxyProvider(IReadOnlyDictionary<MemberInfo, ImmutableArray<Attribute>> extendedAttributes) : CustomReflectionContext, IMetadataProxyProvider
 {
+    private readonly ConcurrentDictionary<MemberInfo, ImmutableArray<object>> cache = [];
+
     public IMetadataProxy<T> GetProxy<T>(T value)
         where T : ICustomAttributeProvider =>
         new MetadataProxy<T>(value, this);
@@ -33,14 +38,27 @@ public class MetadataProxyProvider(IReadOnlyDictionary<MemberInfo, ImmutableArra
         }
     }
 
-    protected override IEnumerable<object> GetCustomAttributes(MemberInfo member, IEnumerable<object> declaredAttributes)
-    {
-        var newAttributes = extendedAttributes.GetValueOrDefault(member, []);
+    protected override IEnumerable<object> GetCustomAttributes(MemberInfo member, IEnumerable<object> declaredAttributes) =>
 
-        var baseAttributes = member is PropertyInfo prop
-                                 ? Attribute.GetCustomAttributes(prop)
-                                 : base.GetCustomAttributes(member, declaredAttributes);
+        this.cache.GetOrAdd(
+            member,
+            _ =>
+            {
+                if (member is PropertyInfo prop)
+                {
+                    var baseAttributes = Attribute.GetCustomAttributes(prop);
 
-        return [.. newAttributes, .. baseAttributes];
-    }
+                    var newAttributes = prop.GetBaseProperties().SelectMany(p => extendedAttributes.GetValueOrDefault(p, [])).Distinct();
+
+                    return [.. newAttributes, .. baseAttributes];
+                }
+                else
+                {
+                    var baseAttributes = base.GetCustomAttributes(member, declaredAttributes);
+
+                    var newAttributes = extendedAttributes.GetValueOrDefault(member, []);
+
+                    return [.. newAttributes, .. baseAttributes];
+                }
+            });
 }

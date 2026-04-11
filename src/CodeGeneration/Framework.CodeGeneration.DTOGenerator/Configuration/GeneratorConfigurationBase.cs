@@ -342,7 +342,9 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
         {
             return from property in this.GetDomainTypeProperties(domainType, BaseFileType.SimpleDTO)
 
-                   where property.IsVisualIdentity() && property.PropertyType == typeof(string)
+                   where this.Environment
+                             .MetadataProxyProvider
+                             .Wrap(property).IsVisualIdentity() && property.PropertyType == typeof(string)
 
                    select property;
         }

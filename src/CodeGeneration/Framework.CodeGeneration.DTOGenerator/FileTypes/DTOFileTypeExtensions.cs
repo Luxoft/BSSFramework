@@ -6,7 +6,7 @@ namespace Framework.CodeGeneration.DTOGenerator.FileTypes;
 
 public static class DTOFileTypeExtensions
 {
-    public static MainDTOFileType GetBaseType(this MainDTOFileType fileType, bool exceptAbstract = true)
+    public static MainDTOFileType? GetBaseType(this MainDTOFileType fileType, bool exceptAbstract = true)
     {
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
@@ -29,7 +29,6 @@ public static class DTOFileTypeExtensions
     {
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        return fileType.GetBaseType() == null ? MemberAttributes.Public
-                       : (MemberAttributes.Public | MemberAttributes.Override);
+        return fileType.GetBaseType() == null ? MemberAttributes.Public : (MemberAttributes.Public | MemberAttributes.Override);
     }
 }

@@ -2,6 +2,7 @@
 
 using CommonFramework;
 using Framework.Authorization.Domain;
+using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.Serialization.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator;

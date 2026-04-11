@@ -51,6 +51,8 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
         this.lazyServiceProvider = LazyHelper.Create(this.BuildServiceProvider);
 
         this.ProjectionEnvironments = LazyInterfaceImplementHelper.CreateProxy(() => this.GetProjectionEnvironments().ToReadOnlyCollectionI());
+
+        this.PropertyPathService = LazyInterfaceImplementHelper.CreateProxy<IPropertyPathService>(() => new PropertyPathService(this.MetadataProxyProvider));
     }
 
     public IServiceProvider ServiceProvider => this.lazyServiceProvider.Value;
@@ -68,6 +70,8 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
     public IReadOnlyCollection<IProjectionEnvironment> ProjectionEnvironments { get; }
 
     public virtual IMetadataProxyProvider MetadataProxyProvider { get; } = new MetadataProxyProviderBuilder().Build();
+
+    public IPropertyPathService PropertyPathService { get; }
 
     public ReadOnlyCollection<Assembly> DomainObjectAssemblies => this.domainObjectAssemblies.Value;
 
@@ -134,7 +138,7 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
         new DefaultProjectionLambdaEnvironment(
             projectionSource,
             this.MetadataProxyProvider,
-            new PropertyPathService(this.MetadataProxyProvider),
+            this.PropertyPathService,
             createParams.AssemblyName,
             createParams.FullAssemblyName,
             this.DomainObjectBaseType,

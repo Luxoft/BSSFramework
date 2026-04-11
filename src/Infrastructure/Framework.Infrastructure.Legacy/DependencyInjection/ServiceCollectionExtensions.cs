@@ -36,6 +36,8 @@ public static class ServiceCollectionExtensions
     {
         public IServiceCollection AddLegacyGenericServices()
         {
+            services.AddSingleton<IPropertyPathService, PropertyPathService>();
+
             services.AddScoped(typeof(EvaluatedData<,>));
             services.AddKeyedScoped<IEventOperationSender, BLLEventOperationSender>("BLL");
 

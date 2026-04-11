@@ -97,7 +97,7 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGenerato
     protected virtual IFetchPathFactory<ViewDTOType> CreateFetchPathFactory()
     {
         IFetchPathFactory<ViewDTOType> factory = new ExpandFetchPathFactory(
-            new PropertyPathService(this.Environment.MetadataProxyProvider),
+            this.Environment.PropertyPathService,
             this.Environment.MetadataProxyProvider.Wrap(this.Environment.PersistentDomainObjectBaseType));
 
         return factory.WithCompress();

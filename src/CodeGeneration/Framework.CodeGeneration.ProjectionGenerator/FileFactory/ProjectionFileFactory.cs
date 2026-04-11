@@ -4,7 +4,6 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.BLL.Domain.Persistent.Attributes;
-using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.CodeDom;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
@@ -167,7 +166,7 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
 
         var expandPathAttr = property.GetCustomAttribute<ExpandPathAttribute>();
 
-        var propertyPath = property.GetExpandPath(false);
+        var propertyPath = this.Configuration.Environment.PropertyPathService.TryGetExpandPath(property)!;
 
         var getExpr = propertyPath.Aggregate(
 

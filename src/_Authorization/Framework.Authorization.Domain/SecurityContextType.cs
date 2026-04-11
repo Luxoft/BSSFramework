@@ -9,14 +9,4 @@
 /// <seealso cref="PermissionRestriction"/>
 /// Типы, в контексте которых выдаются права пользователю, записываются вручную на уровне SQL в базу конкретной системы
 /// </remarks>
-public class SecurityContextType : BaseDirectory
-{
-    /// <summary>
-    /// Вычисляемое название доменного типа
-    /// </summary>
-    public override string Name
-    {
-        get => base.Name;
-        set => base.Name = value;
-    }
-}
+public class SecurityContextType : BaseDirectory;

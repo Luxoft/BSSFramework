@@ -6,7 +6,7 @@ public static class PropertyInfoExtensions
 {
     public static PropertyInfo GetUnderlyingSystemProperty(this PropertyInfo property)
     {
-        var realType = property.DeclaringType!.UnderlyingSystemType;
+        var realType = property.ReflectedType!.UnderlyingSystemType;
 
         return realType.GetProperty(
                    property.Name,

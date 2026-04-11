@@ -388,7 +388,9 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
         {
             return from property in serializationProperties
 
-                   where this.Environment.MetadataProxyProvider.Wrap(property).IsWritable(role, true) || this.IsIdentityOrVersionProperty(property)
+                   let isWritable = this.Environment.MetadataProxyProvider.Wrap(property).IsWritable(role, true)
+
+                   where isWritable || this.IsIdentityOrVersionProperty(property)
 
                    select property;
         }

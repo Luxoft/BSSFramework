@@ -27,7 +27,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        var isFixReferencePropertyMode = property.IsFixReference(this.FileType.Role);
+        var isFixReferencePropertyMode = this.Configuration.Environment.MetadataProxyProvider.Wrap(property).IsFixReference(this.FileType.Role);
 
         var getToDomainObjectExpr =
             (CodeExpression expr, Type type, bool isDetail) =>

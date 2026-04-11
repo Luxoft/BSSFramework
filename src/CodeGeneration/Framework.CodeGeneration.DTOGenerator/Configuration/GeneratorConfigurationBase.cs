@@ -163,7 +163,7 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
             {
                 return from property in withoutIdentity
 
-                       where property.IsWritable(fileType.Role, false)
+                       where this.Environment.MetadataProxyProvider.Wrap(property).IsWritable(fileType.Role, false)
 
                        select property;
             }
@@ -388,7 +388,7 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
         {
             return from property in serializationProperties
 
-                   where property.IsWritable(role, true) || this.IsIdentityOrVersionProperty(property)
+                   where this.Environment.MetadataProxyProvider.Wrap(property).IsWritable(role, true) || this.IsIdentityOrVersionProperty(property)
 
                    select property;
         }

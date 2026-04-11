@@ -79,7 +79,7 @@ public partial class AuthorizationGenerationEnvironment : GenerationEnvironmentB
             .Add<BusinessRole>(tb =>
                                    tb.AddAttribute(new BLLViewRoleAttribute())
                                      //.AddProperty(v => v.Permissions, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.Ignore)))
-                                     //.AddProperty(v => v.Description, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
+                                     .AddProperty(v => v.Description, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
                                      )
 
             .Add<Principal>(tb =>

@@ -82,7 +82,7 @@ public class IntegrationSaveMethodGenerator<TConfiguration>(TConfiguration confi
                                           (!allowCreate).ToPrimitiveExpression()
                                   };
 
-        if (this.DomainType.IsIntegrationVersion())
+        if (this.Configuration.Environment.MetadataProxyProvider.Wrap(this.DomainType).IsIntegrationVersion())
         {
             getByIdMethodParams.Add(new CodePrimitiveExpression(null));
             getByIdMethodParams.Add(LockRole.Update.ToPrimitiveExpression());
@@ -121,7 +121,7 @@ public class IntegrationSaveMethodGenerator<TConfiguration>(TConfiguration confi
             CodeVariableReferenceExpression savingObject,
             CodeStatement[] logicCodeStatements)
     {
-        var integrationVersionProperty = this.DomainType.TryGetIntegrationVersionProperty();
+        var integrationVersionProperty = this.Configuration.Environment.MetadataProxyProvider.Wrap(this.DomainType).TryGetIntegrationVersionProperty();
 
         if (null != integrationVersionProperty)
         {

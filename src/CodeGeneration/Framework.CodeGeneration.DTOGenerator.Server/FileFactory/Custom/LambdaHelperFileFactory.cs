@@ -42,30 +42,29 @@ public class LambdaHelperFileFactory<TConfiguration>(TConfiguration configuratio
         return convertMethods;
     }
 
-    private bool CanLambdaConvert(Type domainType, DTOFileType fileType)
+    private bool CanLambdaConvert(Type baseDomainType, DTOFileType fileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (baseDomainType == null) throw new ArgumentNullException(nameof(baseDomainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        if (fileType == BaseFileType.ProjectionDTO || domainType.IsProjection())
-        {
-            if (fileType != BaseFileType.ProjectionDTO || !domainType.IsProjection())
-            {
-                return false;
-            }
-        }
+        var wrappedDomainType = this.Configuration.Environment.MetadataProxyProvider.Wrap(baseDomainType);
 
-        if (fileType == BaseFileType.IdentityDTO && !this.Configuration.IsPersistentObject(domainType))
+        if (fileType == BaseFileType.ProjectionDTO != wrappedDomainType.IsProjection())
         {
             return false;
         }
 
-        if (fileType == BaseFileType.VisualDTO && !domainType.HasVisualIdentityProperties())
+        if (fileType == BaseFileType.IdentityDTO && !this.Configuration.IsPersistentObject(baseDomainType))
         {
             return false;
         }
 
-        return this.Configuration.GeneratePolicy.Used(domainType, fileType);
+        if (fileType == BaseFileType.VisualDTO && !wrappedDomainType.HasVisualIdentityProperties())
+        {
+            return false;
+        }
+
+        return this.Configuration.GeneratePolicy.Used(baseDomainType, fileType);
     }
 
     private IEnumerable<CodeMemberMethod> GetConvertToDTOMethods(Type domainType)

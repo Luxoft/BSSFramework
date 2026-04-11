@@ -72,7 +72,7 @@ public class IntegrationSaveModelMethodGenerator<TConfiguration> : IntegrationMe
 
         yield return integrationSaveModelDecl;
 
-        var integrationVersionProperty = this.DomainType.TryGetIntegrationVersionProperty();
+        var integrationVersionProperty = this.Configuration.Environment.MetadataProxyProvider.Wrap(this.DomainType).TryGetIntegrationVersionProperty();
 
         if (null == integrationVersionProperty)
         {

@@ -259,7 +259,7 @@ internal static class CodeDomHelper
 
         if (fileType == BaseFileType.IdentityDTO || fileType == BaseFileType.SimpleDTO || fileType == ServerFileType.SimpleIntegrationDTO)
         {
-            if (fileType == ServerFileType.SimpleIntegrationDTO && fileFactory.DomainType.IsIntegrationVersion())
+            if (fileType == ServerFileType.SimpleIntegrationDTO && fileFactory.Configuration.Environment.MetadataProxyProvider.Wrap(fileFactory.DomainType!).IsIntegrationVersion())
             {
                 return fileFactory.GetMappingServiceIdentityToIntegrationVersionDomainObjectMethod();
             }

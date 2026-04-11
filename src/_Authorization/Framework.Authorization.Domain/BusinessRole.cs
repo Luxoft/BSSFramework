@@ -25,7 +25,6 @@ public class BusinessRole : BaseDirectory
     /// <summary>
     /// Описание бизнес-роли
     /// </summary>
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual string Description
     {
         get => this.description.TrimNull();

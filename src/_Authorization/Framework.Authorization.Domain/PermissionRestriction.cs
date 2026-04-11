@@ -1,6 +1,5 @@
 ﻿using Framework.Relations;
 using Framework.Restriction;
-using Framework.Tracking.Validation;
 
 namespace Framework.Authorization.Domain;
 
@@ -43,7 +42,6 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
     /// <summary>
     /// Вычисляемый доменный тип по связке контекст+пермиссия
     /// </summary>
-    [FixedPropertyValidator]
     [Required]
     [UniqueElement]
     public virtual SecurityContextType SecurityContextType
@@ -52,7 +50,6 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
         set => this.securityContextType = value;
     }
 
-    [FixedPropertyValidator]
     [Required]
     [UniqueElement]
     public virtual Guid SecurityContextId { get => this.securityContextId; set => this.securityContextId = value; }

@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BLL\Framework.BLL.Domain\Framework.BLL.Domain.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
   </ItemGroup>
 

@@ -15,7 +15,6 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IEquatable<
     /// <summary>
     /// ID доменного объекта
     /// </summary>
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual Guid Id
     {
         get => this.id;
@@ -25,6 +24,7 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IEquatable<
     /// <summary>
     /// Признак того, что класс еще не сохранен в базе
     /// </summary>
+
     [CustomSerialization(CustomSerializationMode.Ignore)]
     public virtual bool IsNew => this.Id == Guid.Empty;
 

@@ -2,7 +2,6 @@
 using Framework.Database.Mapping;
 using Framework.Relations;
 using Framework.Restriction;
-using Framework.Tracking.Validation;
 
 namespace Framework.Authorization.Domain;
 
@@ -101,7 +100,6 @@ public class Permission : AuditPersistentDomainObjectBase,
     /// Бизнес-роль, которую содержит пермиссия
     /// </summary>
     [Required]
-    [FixedPropertyValidator]
     public virtual BusinessRole Role { get => this.role; set => this.role = value; }
 
     /// <summary>

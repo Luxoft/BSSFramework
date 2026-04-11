@@ -15,16 +15,6 @@ namespace Framework.BLL;
 
 public static class DefaultDomainBLLBaseExtensions
 {
-    public static TDomainObject? GetById<TPersistentDomainObjectBase, TDomainObject>(this IDefaultDomainBLLQueryBase<TPersistentDomainObjectBase, TDomainObject, Guid> bll, string id)
-            where TDomainObject : class, TPersistentDomainObjectBase
-            where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
-    {
-        if (bll == null) throw new ArgumentNullException(nameof(bll));
-        if (string.IsNullOrWhiteSpace(id)) throw new ArgumentNullException(nameof(id));
-
-        return bll.GetById(Guid.Parse(id), true);
-    }
-
     public static TDomainObject? GetByIdOrCreate<TPersistentDomainObjectBase, TDomainObject, TIdent>(this IDefaultDomainBLLQueryBase<TPersistentDomainObjectBase, TDomainObject, TIdent> bll, TIdent id)
             where TDomainObject : class, TPersistentDomainObjectBase, new()
             where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>

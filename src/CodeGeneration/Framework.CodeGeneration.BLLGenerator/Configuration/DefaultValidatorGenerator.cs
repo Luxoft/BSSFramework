@@ -582,11 +582,11 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
             return request.ToDictionary(
                 property => property,
 
-                property => (CodeExpression)typeof(MaxLengthValidator.StringMaxLengthValidator<>)
-                                            .ToTypeReference(this.DomainType)
-                                            .ToObjectCreateExpression(
-                                                this.ValidatorMapExpr.ToPropertyReference("AvailableValues")
-                                                    .ToMethodReferenceExpression("GetAvailableSize", typeof(string).ToTypeReference()).ToMethodInvokeExpression()));
+                _ => (CodeExpression)typeof(MaxLengthValidator.StringMaxLengthValidator<>)
+                                     .ToTypeReference(this.DomainType)
+                                     .ToObjectCreateExpression(
+                                         this.ValidatorMapExpr.ToPropertyReference("AvailableValues")
+                                             .ToMethodReferenceExpression(nameof(IAvailableValues.GetAvailableSize), typeof(string).ToTypeReference()).ToMethodInvokeExpression()));
         }
         else if (attribute is AvailableDateTimeValidatorAttribute || attribute is AvailablePeriodValidatorAttribute || attribute is AvailableDecimalValidatorAttribute)
         {

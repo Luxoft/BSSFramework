@@ -1,5 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Reflection;
 using System.Reflection.Context;
 
@@ -9,7 +8,7 @@ namespace Framework.ExtendedMetadata;
 
 public class MetadataProxyProvider(IReadOnlyDictionary<MemberInfo, ImmutableArray<Attribute>> extendedAttributes) : CustomReflectionContext, IMetadataProxyProvider
 {
-    private readonly ConcurrentDictionary<MemberInfo, ImmutableArray<object>> cache = [];
+    //private readonly ConcurrentDictionary<MemberInfo, ImmutableArray<object>> cache = [];
 
     public IMetadataProxy<T> GetProxy<T>(T value)
         where T : ICustomAttributeProvider =>
@@ -38,15 +37,15 @@ public class MetadataProxyProvider(IReadOnlyDictionary<MemberInfo, ImmutableArra
         }
     }
 
-    protected override IEnumerable<object> GetCustomAttributes(MemberInfo member, IEnumerable<object> declaredAttributes) =>
+    protected override IEnumerable<object> GetCustomAttributes(MemberInfo member, IEnumerable<object> declaredAttributes) //=>
 
-        this.cache.GetOrAdd(
-            member,
-            _ =>
+        //this.cache.GetOrAdd(
+          //  member,
+            //_ =>
             {
                 if (member is PropertyInfo prop)
                 {
-                    var baseAttributes = Attribute.GetCustomAttributes(prop);
+                    var baseAttributes = prop.GetCustomAttributes();
 
                     var newAttributes = prop.GetBaseProperties().SelectMany(p => extendedAttributes.GetValueOrDefault(p, [])).Distinct();
 
@@ -60,5 +59,6 @@ public class MetadataProxyProvider(IReadOnlyDictionary<MemberInfo, ImmutableArra
 
                     return [.. newAttributes, .. baseAttributes];
                 }
-            });
+            }
+            //);
 }

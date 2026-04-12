@@ -12,14 +12,14 @@ public class DomainTypeEventModel : DomainObjectBase
     /// Вызываемая операция
     /// </summary>
     [Required]
-    public DomainTypeEventOperation Operation { get; set; }
+    public DomainTypeEventOperation Operation { get; set; } = null!;
 
     /// <summary>
     /// Идент объекта
     /// </summary>
     [Required]
     [AnyElementsValidator]
-    public List<Guid> DomainObjectIdents { get; set; }
+    public List<Guid> DomainObjectIdents { get; set; } = [];
 
     /// <summary>
     /// Ревизия

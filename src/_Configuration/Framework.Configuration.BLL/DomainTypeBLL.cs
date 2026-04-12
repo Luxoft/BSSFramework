@@ -7,41 +7,6 @@ namespace Framework.Configuration.BLL;
 
 public partial class DomainTypeBLL
 {
-    public DomainType GetByType(Type domainObjectType)
-    {
-        if (domainObjectType == null) throw new ArgumentNullException(nameof(domainObjectType));
-
-        var domainTypeInfo = this.Context.GetDomainTypeInfo(domainObjectType);
-
-        return this.GetById(domainTypeInfo.Id);
-    }
-
-    public DomainType GetByPath(string path)
-    {
-        if (path == null) throw new ArgumentNullException(nameof(path));
-
-        var blocks = path.Split(['/'], StringSplitOptions.RemoveEmptyEntries);
-
-        if (blocks.Length == 1)
-        {
-            var domainType = this.Context.GetTargetSystemServices().Select(tss => tss.TypeResolverS).ToComposite().Resolve(blocks[0]);
-
-            return this.Context.GetDomainType(domainType, true);
-        }
-        else if (blocks.Length == 2)
-        {
-            var targetSystemService = this.Context.GetTargetSystemService(blocks[0]);
-
-            var domainType = targetSystemService.TypeResolverS.Resolve(blocks[1]);
-
-            return this.Context.GetDomainType(domainType, true);
-        }
-        else
-        {
-            throw new ArgumentException("invalid block count", nameof(path));
-        }
-    }
-
     /// <inheritdoc />
     public void ForceEvent(DomainTypeEventModel eventModel)
     {

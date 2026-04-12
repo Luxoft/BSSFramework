@@ -1,26 +1,5 @@
-﻿namespace Framework.Database.Domain;
+﻿using Framework.Core;
 
-public class ObjectModificationInfo<TIdent>
-{
-    public ObjectModificationInfo()
-    {
+namespace Framework.Database.Domain;
 
-    }
-
-    public ObjectModificationInfo(TIdent identity, TypeInfoDescription typeInfo, ModificationType modificationType, long revision)
-    {
-        this.Identity = identity;
-        this.ModificationType = modificationType;
-        this.Revision = revision;
-        this.TypeInfo = typeInfo;
-    }
-
-
-    public ModificationType ModificationType { get; set; }
-
-    public TIdent Identity { get; set; }
-
-    public TypeInfoDescription TypeInfo { get; set; }
-
-    public long Revision { get; set; }
-}
+public record ObjectModificationInfo<TIdent>(TIdent Identity, TypeNameIdentity TypeInfo, ModificationType ModificationType, long Revision);

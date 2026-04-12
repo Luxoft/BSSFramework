@@ -25,7 +25,7 @@ namespace Framework.Authorization.BLL;
 
 public partial class AuthorizationBLLContext(
     IServiceProvider serviceProvider,
-    [FromKeyedServices("BLL")] IEventOperationSender operationSender,
+    [FromKeyedServices(nameof(BLL))] IEventOperationSender operationSender,
     IAccessDeniedExceptionService accessDeniedExceptionService,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
     IAuthorizationValidator validator,

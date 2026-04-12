@@ -1,7 +1,4 @@
-﻿using Framework.BLL.Domain.Attributes;
-using Framework.BLL.Domain.Persistent.IdentityObject;
-using Framework.BLL.Domain.Serialization;
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Database.Mapping;
 using Framework.Restriction;
 
@@ -12,7 +9,7 @@ namespace Framework.Configuration.Domain;
 /// </summary>
 [UniqueGroup]
 [NotAuditedClass]
-public class SystemConstant : AuditPersistentDomainObjectBase, ICodeObject
+public class SystemConstant : AuditPersistentDomainObjectBase
 {
     private DomainType type;
 
@@ -47,7 +44,6 @@ public class SystemConstant : AuditPersistentDomainObjectBase, ICodeObject
     /// Тип константы
     /// </summary>
     [Required]
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual DomainType Type
     {
         get => this.type;
@@ -58,9 +54,7 @@ public class SystemConstant : AuditPersistentDomainObjectBase, ICodeObject
     /// Уникальное имя константы
     /// </summary>
     [UniqueElement]
-    [VisualIdentity]
     [Required]
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual string Code
     {
         get => this.code.TrimNull();
@@ -90,7 +84,6 @@ public class SystemConstant : AuditPersistentDomainObjectBase, ICodeObject
     /// <summary>
     /// Признак изменения константы вручную
     /// </summary>
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual bool IsManual
     {
         get => this.isManual;

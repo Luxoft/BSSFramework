@@ -1,0 +1,13 @@
+﻿namespace Framework.Core;
+
+public record TypeNameIdentity
+{
+    public required string Name { get; init; }
+
+    public required string Namespace { get; init; }
+
+    public override string ToString() => string.IsNullOrWhiteSpace(this.Namespace) ? this.Name : $"{this.Namespace}.{this.Name}";
+
+
+    public static implicit operator TypeNameIdentity(Type type) => new() { Namespace = type.Namespace!, Name = type.Name };
+}

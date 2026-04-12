@@ -297,7 +297,7 @@ namespace Framework.Configuration.BLL
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.DomainType, string>(source => source.ModifiedBy, currentClass, this.GetDomainType_ModifiedByValidators(), this.GetClassMap<string>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.DomainType, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetDomainType_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.DomainType, string>(source => source.Name, currentClass, this.GetDomainType_NameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.DomainType, string>(source => source.NameSpace, currentClass, this.GetDomainType_NameSpaceValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.DomainType, string>(source => source.Namespace, currentClass, this.GetDomainType_NameSpaceValidators(), this.GetClassMap<string>(true));
         }
         
         protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.DomainTypeRootFilterModel> GetDomainTypeRootFilterModelValidationMap()
@@ -615,7 +615,7 @@ namespace Framework.Configuration.BLL
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.TargetSystem, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainType>>> GetTargetSystem_DomainTypesValidators()
         {
-            yield return new Framework.Validation.UniqueCollectionValidator<Framework.Configuration.Domain.TargetSystem, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainType>, Framework.Configuration.Domain.DomainType, System.Tuple<string, string>>(source => new System.Tuple<string, string>(Framework.Core.CoreStringExtensions.TrimNull(source.Name).ToLower(), Framework.Core.CoreStringExtensions.TrimNull(source.NameSpace).ToLower()), "Name, NameSpace");
+            yield return new Framework.Validation.UniqueCollectionValidator<Framework.Configuration.Domain.TargetSystem, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainType>, Framework.Configuration.Domain.DomainType, System.Tuple<string, string>>(source => new System.Tuple<string, string>(Framework.Core.CoreStringExtensions.TrimNull(source.Namespace).ToLower(), Framework.Core.CoreStringExtensions.TrimNull(source.Name).ToLower()), "Namespace, Name");
             yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.TargetSystem, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainType>, Framework.Configuration.Domain.DomainType>();
         }
         

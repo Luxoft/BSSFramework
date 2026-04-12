@@ -10,15 +10,6 @@ namespace Framework.Configuration.WebApi;
 public partial class ConfigMainController
 {
     [HttpPost]
-    public DomainTypeSimpleDTO GetSimpleDomainTypeByPath(string path) =>
-        this.Evaluate(
-            DBSessionMode.Read,
-            data =>
-                data.Context.Logics.DomainTypeFactory.Create(SecurityRole.Administrator)
-                    .GetByPath(path)
-                    .ToSimpleDTO(data.MappingService));
-
-    [HttpPost]
     public void ForceDomainTypeEvent(DomainTypeEventModelStrictDTO domainTypeEventModel)
     {
         if (domainTypeEventModel == null) throw new ArgumentNullException(nameof(domainTypeEventModel));

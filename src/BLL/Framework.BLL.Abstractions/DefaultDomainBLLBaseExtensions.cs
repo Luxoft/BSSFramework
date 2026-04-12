@@ -92,22 +92,6 @@ public static class DefaultDomainBLLBaseExtensions
         where TDomainObject : class, TPersistentDomainObjectBase, ICodeObject<TCode> =>
         bll.GetByCode(code, throwOnNotFound, FetchRule<TDomainObject>.Empty);
 
-    public static TDomainObject? GetByDomainType<TDomainObject>(this IBLLQueryBase<TDomainObject> bll, IDomainType domainType, bool throwOnNotFound = true)
-            where TDomainObject : class, IDomainType
-    {
-        if (bll == null) throw new ArgumentNullException(nameof(bll));
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
-        var result = bll.GetObjectBy(domainObject => domainObject.Name == domainType.Name && domainObject.NameSpace == domainType.NameSpace);
-
-        if (null == result && throwOnNotFound)
-        {
-            throw new BusinessLogicException($"{typeof(TDomainObject).Name} with name = {domainType.Name} and namespace = {domainType.NameSpace} not found");
-        }
-
-        return result;
-    }
-
     public static void Insert<TDomainObject, TIdent>(this IDefaultDomainBLLBase<TDomainObject, TIdent> bll, TDomainObject domainObject)
             where TDomainObject : class, IIdentityObject<TIdent>
     {

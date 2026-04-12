@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 
-using Framework.BLL.Domain.Serialization;
 using Framework.Core;
 using Framework.Database;
 using Framework.Database.Mapping;
@@ -12,8 +11,6 @@ namespace Framework.Configuration.Domain;
 /// </summary>
 public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBase, IAuditObject
 {
-    private bool active = true;
-
     private string? createdBy;
     private DateTime? createDate;
 
@@ -73,16 +70,5 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     {
         get => this.createdBy.TrimNull();
         internal protected set => this.createdBy = value.TrimNull();
-    }
-
-    /// <summary>
-    /// Признак активности доменного объекта
-    /// </summary>
-    [DefaultValue(true)]
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public virtual bool Active
-    {
-        get => this.active;
-        set => this.active = value;
     }
 }

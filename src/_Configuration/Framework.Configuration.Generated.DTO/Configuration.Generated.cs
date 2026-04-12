@@ -2046,8 +2046,6 @@ namespace Framework.Configuration.Generated.DTO
     public abstract partial class BaseAuditPersistentDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO
     {
         
-        private bool _active;
-        
         private System.DateTime? _createDate;
         
         private string _createdBy;
@@ -2064,19 +2062,6 @@ namespace Framework.Configuration.Generated.DTO
                 base(mappingService, domainObject)
         {
             mappingService.MapAuditPersistentDomainObjectBase(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -2643,7 +2628,7 @@ namespace Framework.Configuration.Generated.DTO
         
         private long _revision;
         
-        private Framework.Database.Domain.ModificationType _type;
+        private Framework.Database.ModificationType _type;
         
         private long _version;
         
@@ -2711,7 +2696,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Database.Domain.ModificationType Type
+        public Framework.Database.ModificationType Type
         {
             get
             {
@@ -2847,7 +2832,7 @@ namespace Framework.Configuration.Generated.DTO
         
         private long _revision;
         
-        private Framework.Database.Domain.ModificationType _type;
+        private Framework.Database.ModificationType _type;
         
         private long _version;
         
@@ -3012,7 +2997,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Database.Domain.ModificationType Type
+        public Framework.Database.ModificationType Type
         {
             get
             {
@@ -3510,7 +3495,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NameSpace
+        public string Namespace
         {
             get
             {
@@ -7914,7 +7899,6 @@ namespace Framework.Configuration.Generated.DTO
         
         public virtual void MapAuditPersistentDomainObjectBase(Framework.Configuration.Domain.AuditPersistentDomainObjectBase domainObject, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO mappingObject)
         {
-            mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
@@ -8115,7 +8099,7 @@ namespace Framework.Configuration.Generated.DTO
         {
             mappingObject.FullTypeName = domainObject.FullTypeName;
             mappingObject.Name = domainObject.Name;
-            mappingObject.NameSpace = domainObject.NameSpace;
+            mappingObject.Namespace = domainObject.Namespace;
         }
         
         public virtual void MapDomainType(Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO mappingObject, Framework.Configuration.Domain.DomainType domainObject)

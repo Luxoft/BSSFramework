@@ -11,6 +11,8 @@ using Microsoft.Extensions.Logging;
 
 using SecuritySystem.Providers;
 
+using TypeNameIdentity = Framework.Database.Domain.TypeNameIdentity;
+
 namespace Framework.Configuration.BLL;
 
 public partial class DomainObjectModificationBLL(
@@ -39,7 +41,7 @@ public partial class DomainObjectModificationBLL(
                            Identity = modification.DomainObjectId,
                            ModificationType = modification.Type,
                            Revision = modification.Revision,
-                           TypeInfo = new TypeInfoDescription { Name = modification.DomainType.Name, NameSpace = modification.DomainType.NameSpace }
+                           TypeInfo = new TypeNameIdentity { Name = modification.DomainType.Name, Namespace = modification.DomainType.Namespace }
                        };
 
             logger.LogDebug("Process modification {DomainObjectId}", modification.DomainObjectId);
@@ -74,9 +76,7 @@ public partial class DomainObjectModificationBLL(
 
     private DomainObjectVersions GetDomainObjectVersions(ObjectModificationInfo<Guid> modificationInfo)
     {
-        var domainType = this.Context.Logics.DomainType.GetByDomainType(new MemoryDomainType(modificationInfo.TypeInfo.Name, modificationInfo.TypeInfo.NameSpace))!;
-
-        var domainObjectType = this.Context.ComplexDomainTypeResolver.Resolve(domainType);
+        var domainObjectType = this.Context.ComplexDomainTypeResolver.Resolve(modificationInfo.TypeInfo);
 
         return domainObjectVersionsResolverFactory.Create(domainObjectType).GetDomainObjectVersions(modificationInfo.Identity, modificationInfo.Revision);
     }

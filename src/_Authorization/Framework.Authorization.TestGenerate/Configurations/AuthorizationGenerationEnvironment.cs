@@ -79,8 +79,7 @@ public partial class AuthorizationGenerationEnvironment : GenerationEnvironmentB
                                            .AddAttribute<DefaultStringMaxLengthValidatorAttribute>())
 
             .Add<PersistentDomainObjectBase>(tb => tb.AddProperty(v => v.Id, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
-                                                     .AddProperty(v => v.IsNew, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.Ignore)))
-                )
+                                                     .AddProperty(v => v.IsNew, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.Ignore))))
 
             .Add<BaseDirectory>(tb => tb.AddProperty(v => v.Name, pb => pb.AddAttribute(new VisualIdentityAttribute())))
 

@@ -34,7 +34,7 @@ public partial class ConfigurationBLLContext
 {
     private readonly Lazy<Dictionary<TargetSystem, ITargetSystemService>> lazyTargetSystemServiceCache;
 
-    private readonly IDictionaryCache<Type, DomainType> domainTypeCache;
+    private readonly IDictionaryCache<Type, DomainType?> domainTypeCache;
 
     private readonly IDictionaryCache<IDomainType, DomainType> domainTypeNameCache;
 
@@ -46,7 +46,7 @@ public partial class ConfigurationBLLContext
 
     public ConfigurationBLLContext(
         IServiceProvider serviceProvider,
-        [FromKeyedServices("BLL")] IEventOperationSender operationSender,
+        [FromKeyedServices(nameof(BLL))] IEventOperationSender operationSender,
         IAccessDeniedExceptionService accessDeniedExceptionService,
         IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
         ITrackingService<PersistentDomainObjectBase> trackingService,
@@ -69,7 +69,7 @@ public partial class ConfigurationBLLContext
         this.SecurityService = securityService;
         this.Logics = logics;
 
-        this.Authorization = authorization ?? throw new ArgumentNullException(nameof(authorization));
+        this.Authorization = authorization;
         this.NamedLockService = namedLockService;
         this.EventOperationSource = eventOperationSource;
         this.currentRevisionService = currentRevisionService ?? throw new ArgumentNullException(nameof(currentRevisionService));
@@ -77,35 +77,20 @@ public partial class ConfigurationBLLContext
 
         this.lazyTargetSystemServiceCache = LazyHelper.Create(() => targetSystemServices.ToDictionary(s => s.TargetSystem));
 
-        this.domainTypeCache = new DictionaryCache<Type, DomainType>(type =>
+        this.domainTypeCache = new DictionaryCache<Type, DomainType?>(type =>
 
-                                                                         this.GetTargetSystemService(type, false).Maybe(targetService => this.GetDomainType(targetService, type)))
+                                                                          this.GetTargetSystemService(type, false).Maybe(targetService => this.GetDomainType(targetService, type)))
             .WithLock();
 
         this.domainTypeNameCache = new DictionaryCache<IDomainType, DomainType>(
                 domainType => this.Logics.DomainType.GetByDomainType(domainType),
                 new EqualityComparerImpl<IDomainType>(
-                    (dt1, dt2) => dt1.Name == dt2.Name && dt1.NameSpace == dt2.NameSpace,
-                    dt => dt.Name.GetHashCode() ^ dt.NameSpace.GetHashCode()))
+                    (dt1, dt2) => dt1.Name == dt2.Name && dt1.Namespace == dt2.Namespace,
+                    dt => dt.Name.GetHashCode() ^ dt.Namespace.GetHashCode()))
             .WithLock();
 
         this.SystemConstantSerializerFactory = settings.SystemConstantSerializerFactory;
         this.SystemConstantTypeResolver = settings.SystemConstantTypeResolver;
-
-        this.ComplexDomainTypeResolver = TypeResolverHelper.Create(
-            (DomainType domainType) =>
-            {
-                if (domainType.TargetSystem.IsBase)
-                {
-                    return TypeResolverHelper.Base.TryResolve(domainType.FullTypeName);
-                }
-                else
-                {
-                    return this.GetTargetSystemService(domainType.TargetSystem).TypeResolver.TryResolve(domainType);
-                }
-            },
-
-            () => this.GetTargetSystemServices().SelectMany(tss => tss.TypeResolver.Types).Concat(TypeResolverHelper.Base.Types));
 
         this.TypeResolver = settings.TypeResolver;
 
@@ -133,7 +118,22 @@ public partial class ConfigurationBLLContext
 
     public ITypeResolver<string> TypeResolver { get; }
 
-    public ITypeResolver<DomainType> ComplexDomainTypeResolver { get; }
+    public ITypeResolver<DomainType> ComplexDomainTypeResolver =>
+        field ??= TypeResolverHelper.Create(
+            (DomainType domainType) =>
+            {
+                if (domainType.TargetSystem.IsBase)
+                {
+                    return TypeResolverHelper.Base.TryResolve(domainType.FullTypeName);
+                }
+                else
+                {
+                    return this.GetTargetSystemService(domainType.TargetSystem).TypeResolver.TryResolve(domainType);
+                }
+            },
+            () => this.GetTargetSystemServices().SelectMany(tss => tss.TypeResolver.Types)
+                      .Concat(TypeResolverHelper.Base.Types));
+
 
     public override IConfigurationBLLFactoryContainer Logics { get; }
 
@@ -153,6 +153,11 @@ public partial class ConfigurationBLLContext
 
     /// <inheritdoc />
     public long GetCurrentRevision() => this.currentRevisionService.GetCurrentRevision();
+
+    public DomainType GetDomainType(DomainTypeIdentity domainTypeIdentity)
+    {
+
+    }
 
     public ITargetSystemService GetTargetSystemService(TargetSystem targetSystem)
     {
@@ -199,7 +204,7 @@ public partial class ConfigurationBLLContext
 
     public IEnumerable<ITargetSystemService> GetTargetSystemServices() => this.lazyTargetSystemServiceCache.Value.Values;
 
-    public DomainType GetDomainType(Type type, bool throwOnNotFound)
+    public DomainType GetDomainType(Type type)
     {
         var domainType = this.domainTypeCache[type];
 
@@ -227,7 +232,7 @@ public partial class ConfigurationBLLContext
     {
         var domainTypes = this.Logics.DomainType.GetListBy(domainType => domainType.TargetSystem == targetService.TargetSystem
                                                                          && domainType.Name == type.Name
-                                                                         && domainType.NameSpace == type.Namespace);
+                                                                         && domainType.Namespace == type.Namespace);
 
         if (domainTypes.Count > 1)
         {

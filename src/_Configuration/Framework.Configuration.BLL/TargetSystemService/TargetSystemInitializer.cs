@@ -40,7 +40,7 @@ public class TargetSystemInitializer(
 
         foreach (var newItem in mergeResult.AddingItems)
         {
-            var newDomainType = new DomainType(targetSystem) { Id = newItem.Id, Name = newItem.Type.Name, NameSpace = newItem.Type.Namespace! };
+            var newDomainType = new DomainType(targetSystem) { Id = newItem.Id, Name = newItem.Type.Name, Namespace = newItem.Type.Namespace! };
 
             if (!isBase)
             {
@@ -52,7 +52,7 @@ public class TargetSystemInitializer(
 
         foreach (var (domainType, (type, _)) in mergeResult.CombineItems)
         {
-            var changedName = domainType.Name != type.Name || domainType.NameSpace != type.Namespace;
+            var changedName = domainType.Name != type.Name || domainType.Namespace != type.Namespace;
 
             var mergeEventResult = domainType.EventOperations.GetMergeResult(
                 context.EventOperationSource.GetEventOperations(type),
@@ -62,7 +62,7 @@ public class TargetSystemInitializer(
             if (changedName || (!isBase && !mergeEventResult.IsEmpty))
             {
                 domainType.Name = type.Name;
-                domainType.NameSpace = type.Namespace!;
+                domainType.Namespace = type.Namespace!;
 
                 if (!isBase)
                 {

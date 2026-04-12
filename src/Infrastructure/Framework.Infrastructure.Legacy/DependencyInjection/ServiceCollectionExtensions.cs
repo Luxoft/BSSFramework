@@ -39,7 +39,7 @@ public static class ServiceCollectionExtensions
             services.AddSingleton<IPropertyPathService, PropertyPathService>();
 
             services.AddScoped(typeof(EvaluatedData<,>));
-            services.AddKeyedScoped<IEventOperationSender, BLLEventOperationSender>("BLL");
+            services.AddKeyedScoped<IEventOperationSender, BLLEventOperationSender>(nameof(BLL));
 
             services.AddSingleton<Validation.IAvailableValues>(AvailableValuesHelper.AvailableValues.ToValidation());
             services.AddScoped(typeof(ITrackingService<>), typeof(TrackingService<>));

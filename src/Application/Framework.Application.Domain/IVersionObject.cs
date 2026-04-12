@@ -1,4 +1,4 @@
-﻿namespace Framework.BLL.Domain.IdentityObject;
+﻿namespace Framework.Application.Domain;
 
 public interface IVersionObject<out TVersion>
 {

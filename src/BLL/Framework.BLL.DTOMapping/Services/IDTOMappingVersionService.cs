@@ -1,9 +1,10 @@
-﻿using Framework.BLL.Domain.IdentityObject;
+﻿using Framework.Application.Domain;
+using Framework.BLL.Domain.IdentityObject;
 
 namespace Framework.BLL.DTOMapping.Services;
 
 public interface IDTOMappingVersionService<in TAuditPersistentDomainObjectBase, TVersion>
 {
     TVersion GetVersion<TDomainObject>(TVersion mappingObjectVersion, TDomainObject domainObject)
-            where TDomainObject : TAuditPersistentDomainObjectBase, IVersionObject<TVersion>;
+        where TDomainObject : TAuditPersistentDomainObjectBase, IVersionObject<TVersion>;
 }

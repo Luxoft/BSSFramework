@@ -1,5 +1,6 @@
 ﻿using System.CodeDom;
 
+using Framework.Application.Domain;
 using Framework.BLL.Domain.IdentityObject;
 using Framework.CodeDom.Extensions;
 

@@ -89,7 +89,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
                                      Identity = ((TPersistentDomainObjectBase)item.Key.Object).Id,
                                      Revision = revisionNumber,
                                      ModificationType = item.Value.ToModificationType(),
-                                     TypeInfo = new TypeInfoDescription(item.Key.Type)
+                                     TypeInfo = new TypeNameIdentity(item.Key.Type)
                                  };
                 }
             }

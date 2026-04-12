@@ -6,6 +6,7 @@ using Framework.BLL;
 using Framework.BLL.Domain.IdentityObject;
 using Framework.Configuration.BLL.TargetSystemService;
 using Framework.Configuration.Domain;
+using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.Core.TypeResolving;
 using Framework.Tracking;
@@ -37,23 +38,15 @@ public partial interface IConfigurationBLLContext :
 
     ITypeResolver<string> SystemConstantTypeResolver { get; }
 
-    ITypeResolver<DomainType> ComplexDomainTypeResolver { get; }
+    ITypeResolver<TypeNameIdentity> ComplexDomainTypeResolver { get; }
 
-    DomainType? GetDomainType(Type type, bool throwOnNotFound);
+    DomainType GetDomainType(Type type);
 
-    DomainType? GetDomainType(IDomainType type, bool throwOnNotFound = true);
+    DomainType? TryGetDomainType(Type type);
 
     ITargetSystemService GetTargetSystemService(TargetSystem targetSystem);
 
-    ITargetSystemService GetTargetSystemService(Type domainType, bool throwOnNotFound);
-
-    ITargetSystemService GetTargetSystemService(string name);
-
-    TargetSystemInfo GetTargetSystemInfo(Type domainType);
-
-    DomainTypeInfo GetDomainTypeInfo(Type domainType);
-
-    ITargetSystemService GetMainTargetSystemService();
+    ITargetSystemService GetTargetSystemService(Type domainObjectType);
 
     IEnumerable<ITargetSystemService> GetTargetSystemServices();
 

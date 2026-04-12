@@ -1,4 +1,5 @@
-﻿namespace Framework.Database.Domain;
+﻿// ReSharper disable once CheckNamespace
+namespace Framework.Database;
 
 public static class DALChangesExtensions
 {

@@ -1,5 +1,4 @@
 ﻿using Framework.Application;
-using Framework.Authorization.Domain;
 using Framework.Database;
 
 using Microsoft.Extensions.DependencyInjection;

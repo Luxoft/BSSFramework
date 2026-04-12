@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Database;
 using Framework.Database.Mapping;
 

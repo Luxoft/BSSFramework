@@ -1,6 +1,4 @@
-﻿using Framework.Core;
-
-namespace Framework.BLL.Domain.Persistent.Extensions;
+﻿namespace Framework.BLL.Domain.Persistent.Extensions;
 
 public static class TypeExtensions
 {

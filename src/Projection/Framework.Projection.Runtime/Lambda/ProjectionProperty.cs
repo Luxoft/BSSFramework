@@ -4,7 +4,6 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.Core;
-using Framework.Database.Mapping.Extensions;
 
 namespace Framework.Projection.Lambda;
 

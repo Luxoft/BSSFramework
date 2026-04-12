@@ -1,7 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
 using Framework.Core;
-using Framework.Database.Domain;
 
 namespace Framework.BLL.DTOMapping.Domain;
 

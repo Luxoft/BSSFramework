@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-using Framework.CodeGeneration.BLLCoreGenerator;
+﻿using Framework.CodeGeneration.BLLCoreGenerator;
 using Framework.CodeGeneration.BLLGenerator;
 using Framework.CodeGeneration.DTOGenerator.Server;
 using Framework.CodeGeneration.Extensions;

@@ -11,14 +11,14 @@ public static class TypeSearchModeExtensions
 
     private static IEnumerable<Func<Type, string, bool>> ToFilters(this TypeSearchMode searchMode)
     {
-        if (searchMode.HasFlag(TypeSearchMode.Name))
-        {
-            yield return (type, name) => type.Name == name;
-        }
-
         if (searchMode.HasFlag(TypeSearchMode.FullName))
         {
             yield return (type, fullName) => type.FullName == fullName;
+        }
+
+        if (searchMode.HasFlag(TypeSearchMode.Name))
+        {
+            yield return (type, name) => type.Name == name;
         }
     }
 }

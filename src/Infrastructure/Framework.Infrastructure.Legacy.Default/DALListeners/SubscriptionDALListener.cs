@@ -11,7 +11,7 @@ public class SubscriptionDALListener(IConfigurationBLLContext configurationBLLCo
 {
     public async Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
     {
-        foreach (var targetSystemService in configurationBLLContext.GetTargetSystemServices())
+        foreach (var targetSystemService in configurationBLLContext.TargetSystemServices.Values)
         {
             if (targetSystemService.TargetSystem.SubscriptionEnabled)
             {

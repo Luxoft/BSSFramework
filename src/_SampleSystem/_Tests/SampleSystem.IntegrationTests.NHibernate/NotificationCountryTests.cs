@@ -1,7 +1,6 @@
 ﻿using Framework.Application;
 using Framework.Configuration.Domain;
 using Framework.Database;
-using Framework.Database.Domain;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;

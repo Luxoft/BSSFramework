@@ -1,15 +1,13 @@
-﻿using System.Collections.Frozen;
+﻿using System.Collections.Concurrent;
+using System.Collections.Frozen;
 
 using CommonFramework;
-using CommonFramework.DictionaryCache;
 
 using Framework.Application.Events;
 using Framework.Application.Lock;
 using Framework.Authorization.BLL;
-using Framework.Authorization.Domain;
 using Framework.BLL;
 using Framework.BLL.Domain.Exceptions;
-using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.TargetSystem;
 using Framework.BLL.Services;
 using Framework.Configuration.BLL.TargetSystemService;
@@ -17,7 +15,6 @@ using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.Core.TypeResolving;
-using Framework.Database;
 using Framework.Tracking;
 using Framework.Validation;
 
@@ -45,18 +42,17 @@ public partial class ConfigurationBLLContext(
     IAuthorizationBLLContext authorization,
     IDomainObjectEventMetadata eventOperationSource,
     INamedLockService namedLockService,
-    IEnumerable<ITargetSystemService> targetSystemServices,
-    IEnumerable<TargetSystemInfo> targetSystemInfoList,
-    ICurrentRevisionService currentRevisionService,
-    [FromKeyedServices(nameof(SystemConstant))] ISerializerFactory<string> systemConstantSerializerFactory) : SecurityBLLBaseContext<PersistentDomainObjectBase, Guid, IConfigurationBLLFactoryContainer>(serviceProvider, operationSender, accessDeniedExceptionService, hierarchicalObjectExpanderFactory)
-{
-    private FrozenDictionary<TargetSystemInfo, ITargetSystemService> TargetSystemServices =>
-        field ??= this.Logics.TargetSystem.GetUnsecureQueryable().Select(ts =>
-        {
-            var
+    IEnumerable<PersistentTargetSystemInfo> targetSystemInfoList,
+    [FromKeyedServices(nameof(SystemConstant))]
+    ISerializerFactory<string> systemConstantSerializerFactory) :
 
-            return (ts, serviceProxyFactory.Create<ITargetSystemService>());
-        });
+    SecurityBLLBaseContext<PersistentDomainObjectBase, Guid, IConfigurationBLLFactoryContainer>(
+    serviceProvider,
+    operationSender,
+    accessDeniedExceptionService,
+    hierarchicalObjectExpanderFactory)
+{
+    private readonly ConcurrentDictionary<TypeNameIdentity, DomainType?> domainTypeCache = [];
 
     public ITrackingService<PersistentDomainObjectBase> TrackingService { get; } = trackingService;
 
@@ -77,80 +73,30 @@ public partial class ConfigurationBLLContext(
 
     public IDomainObjectEventMetadata EventOperationSource { get; } = eventOperationSource;
 
-    public DomainType GetDomainType(TypeNameIdentity typeNameIdentity)
-    {
+    public FrozenDictionary<PersistentTargetSystemInfo, ITargetSystemService> TargetSystemServices =>
 
-    }
+        field ??= targetSystemInfoList.Join(
+                                          this.Logics.TargetSystem.GetUnsecureQueryable(),
+                                          tsi => tsi.Id,
+                                          ts => ts.Id,
+                                          (tsi, ts) =>
+                                          {
+                                              var targetSystemServiceType = typeof(TargetSystemService<,>).MakeGenericType(tsi.BllContextType, tsi.PersistentDomainObjectBaseType);
 
-    public DomainType? TryGetDomainType(Type type)
-    {
+                                              return (tsi, serviceProxyFactory.Create<ITargetSystemService>(targetSystemServiceType, ts));
+                                          })
+                                      .ToFrozenDictionary(pair => pair.tsi, pair => pair.Item2);
 
-    }
 
-    public ITargetSystemService GetTargetSystemService(TargetSystem targetSystem)
-    {
-        if (targetSystem == null) throw new ArgumentNullException(nameof(targetSystem));
+    public DomainType? TryGetDomainType(TypeNameIdentity typeNameIdentity) =>
+        this.domainTypeCache.GetOrAdd(
+            typeNameIdentity,
+            _ => this.TargetSystemServices
+                     .Values
+                     .SelectMany(tss => tss.TargetSystem.DomainTypes)
+                     .SingleOrDefault(dt => dt.Namespace == typeNameIdentity.Namespace && dt.Name == typeNameIdentity.Name));
 
-        return this.TargetSystemServices.Values.Single(ts => ts.TargetSystem == targetSystem);
-    }
+    public DomainType GetDomainType(TypeNameIdentity typeNameIdentity) =>
 
-    public ITargetSystemService GetTargetSystemService(Type domainType) =>
-
-        this.lazyTargetSystemServiceCache.Value.Values.Single(
-            service => service.IsAssignable(domainType),
-            () => new BusinessLogicException($"Target System for type {domainType.Name} not found"),
-            () => new BusinessLogicException($"To many Target Systems for type {domainType.Name}"));
-
-    public ITargetSystemService GetTargetSystemService(string name)
-    {
-        if (name == null) throw new ArgumentNullException(nameof(name));
-
-        return this.lazyTargetSystemServiceCache.Value.Values.GetByName(name);
-    }
-
-    public TargetSystemInfo GetTargetSystemInfo(Type domainType) => this.targetSystemInfoDict[domainType];
-
-    public DomainTypeInfo GetDomainTypeInfo(Type domainType) => this.domainTypeInfoDict[domainType];
-
-    public IEnumerable<ITargetSystemService> GetTargetSystemServices() => this.lazyTargetSystemServiceCache.Value.Values;
-
-    public DomainType GetDomainType(Type type)
-    {
-        var domainType = this.domainTypeCache[type];
-
-        if (domainType == null && throwOnNotFound)
-        {
-            throw new BusinessLogicException("TargetSystem with domainType \"{0}\" not found", type.FullName);
-        }
-
-        return domainType;
-    }
-
-    public DomainType GetDomainType(IDomainType type, bool throwOnNotFound = true)
-    {
-        var domainType = this.domainTypeNameCache[type];
-
-        if (domainType == null && throwOnNotFound)
-        {
-            throw new BusinessLogicException($"DomainType \"{type}\" not found");
-        }
-
-        return domainType;
-    }
-
-    private DomainType GetDomainType(ITargetSystemService targetService, Type type)
-    {
-        var domainTypes = this.Logics.DomainType.GetListBy(domainType => domainType.TargetSystem == targetService.TargetSystem
-                                                                         && domainType.Name == type.Name
-                                                                         && domainType.Namespace == type.Namespace);
-
-        if (domainTypes.Count > 1)
-        {
-            var message =
-                $"Configuration database contains more than one record for domain type '{domainTypes.First().Name}' and target system '{targetService.TargetSystem.Name}'. Remove excess records and restart application.";
-            throw new Exception(message);
-        }
-
-        return domainTypes.SingleOrDefault();
-    }
+        this.TryGetDomainType(typeNameIdentity) ?? throw new BusinessLogicException("TargetSystem with domainType \"{0}\" not found", typeNameIdentity);
 }

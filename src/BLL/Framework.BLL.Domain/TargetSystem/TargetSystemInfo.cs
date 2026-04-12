@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 
+using Framework.Core;
 using Framework.Core.TypeResolving;
 using Framework.Core.TypeResolving.TypeSource;
 
@@ -13,7 +14,7 @@ public record TargetSystemInfo
 
     public required ImmutableArray<DomainTypeInfo> DomainTypes { get; init; }
 
-    public required ITypeResolver<string> TypeResolver { get; init; }
+    public required ITypeResolver<TypeNameIdentity> TypeResolver { get; init; }
 
     public static TargetSystemInfo Base { get; } = CreateBase();
 
@@ -31,12 +32,15 @@ public record TargetSystemInfo
                             { typeof(double), new("{68F69CA7-263B-4559-BD96-4A13A28823CC}") }
                         };
 
+        var tr = TypeResolverHelper.Create(new TypeSource([.. baseTypes.Keys]), TypeSearchMode.Both);
+
         return new TargetSystemInfo
                {
                    Name = nameof(Base),
                    Id = new("{E197EEA5-5750-4990-9A4B-6E9ACBC95FA0}"),
                    DomainTypes = [.. baseTypes.Select(pair => new DomainTypeInfo(pair.Key, pair.Value))],
                    TypeResolver = TypeResolverHelper.Create(new TypeSource([.. baseTypes.Keys]), TypeSearchMode.Both)
+                                                    .OverrideInput((string v) => (TypeNameIdentity)v)
                };
     }
 }

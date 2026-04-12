@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 
 using Framework.Application.Domain;
-using Framework.BLL.Domain.IdentityObject;
 using Framework.BLL.Domain.Serialization;
 using Framework.Core;
 using Framework.Database;

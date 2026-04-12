@@ -1,13 +1,5 @@
-﻿using System.Reflection;
-
-using CommonFramework;
-using Framework.Authorization.Domain;
-using Framework.BLL.Domain.Extensions;
-using Framework.BLL.Domain.Serialization;
-using Framework.BLL.Domain.Serialization.Extensions;
-using Framework.CodeGeneration.BLLCoreGenerator;
+﻿using Framework.CodeGeneration.BLLCoreGenerator;
 using Framework.CodeGeneration.BLLGenerator;
-using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server;
 using Framework.CodeGeneration.Extensions;
 using Framework.CodeGeneration.WebApiGenerator.SingleController;

@@ -10,7 +10,6 @@ using SampleSystem.Domain;
 
 using Framework.Configuration.Generated.DTO;
 using Framework.Database;
-using Framework.Database.Domain;
 using Framework.Database.NHibernate.Sessions;
 
 using SecuritySystem;

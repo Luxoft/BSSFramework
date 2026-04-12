@@ -1,42 +1,44 @@
-﻿using System.Collections.Immutable;
-
-using CommonFramework;
-
-using Framework.Application.Events;
-using Framework.BLL.Domain.TargetSystem;
-using Framework.Configuration.BLL.TargetSystemService;
+﻿using Framework.Application.Events;
+using Framework.BLL;
+using Framework.BLL.Domain.Exceptions;
 using Framework.Configuration.Domain;
+using Framework.Core;
 using Framework.Core.TypeResolving;
-using Framework.Core.TypeResolving.TypeSource;
+using Framework.Validation;
 
 namespace Framework.Configuration.BLL;
 
-public class ConfigurationEventSystem(IConfigurationBLLContext context, IEnumerable<PersistentTargetSystemInfo> targetSystemInfoList, IDomainObjectEventMetadata domainObjectEventMetadata)
+public class ConfigurationEventSystem(
+    IConfigurationBLLContext context,
+    ITargetSystemTypeResolverContainer targetSystemTypeResolverContainer,
+    IDomainObjectEventMetadata domainObjectEventMetadata)
     : IEventSystem
 {
-    public ITypeResolver<string> TypeResolver { get; } =
-
-        context.Logics
-               .DomainType
-               .GetUnsecureQueryable()
-               .Where(dt => dt.TargetSystem.IsRevision)
-               .Select(dt => dt.FullTypeName)
-               .ToHashSet()
-               .Pipe(dbDomainTypes =>
-                         targetSystems.SelectMany(ts => ts.TypeResolverS.Types)
-                                      .Where(t => dbDomainTypes.Contains(t.FullName!)))
-               .Pipe(domainTypes => TypeResolverHelper.Create(new TypeSource(domainTypes.ToImmutableHashSet()), TypeSearchMode.Both));
+    public ITypeResolver<TypeNameIdentity> TypeResolver { get; } = targetSystemTypeResolverContainer.TypeResolver;
 
     public IDomainObjectEventMetadata DomainObjectEventMetadata { get; } = domainObjectEventMetadata;
 
-    public async Task ForceEventAsync(EventModel eventModel, CancellationToken cancellationToken)
+    public Task ForceEventAsync(EventModel eventModel, CancellationToken cancellationToken) =>
+        this.ForceEventAsync(this.ToDomainTypeEventModel(eventModel), cancellationToken);
+
+    private async Task ForceEventAsync(DomainTypeEventModel eventModel, CancellationToken cancellationToken)
     {
-        var domainType = context.GetDomainType(eventModel.DomainType);
+        context.Validator.Validate(eventModel);
 
-        var operation = domainType.EventOperations.Single(op => op.Name == eventModel.EventOperation.Name);
+        var targetSystem = eventModel.Operation.DomainType.TargetSystem;
 
-        var localEventModel = new DomainTypeEventModel { Operation = operation, DomainObjectIdents = [.. eventModel.DomainObjectIdents], Revision = eventModel.Revision, };
+        if (!targetSystem.IsRevision)
+        {
+            throw new BusinessLogicException($"Target system \"{targetSystem.Name}\" must be revision");
+        }
 
-        context.Logics.DomainType.ForceEvent(localEventModel);
+        await context.TargetSystemServices.Values.Single(tss => tss.TargetSystem == targetSystem).ForceEventAsync(eventModel, cancellationToken);
+    }
+
+    private DomainTypeEventModel ToDomainTypeEventModel(EventModel eventModel)
+    {
+        var operation = context.GetDomainType(eventModel.DomainType).EventOperations.Single(op => op.Name == eventModel.EventOperation.Name);
+
+        return new DomainTypeEventModel { Operation = operation, DomainObjectIdents = [.. eventModel.DomainObjectIdents], Revision = eventModel.Revision, };
     }
 }

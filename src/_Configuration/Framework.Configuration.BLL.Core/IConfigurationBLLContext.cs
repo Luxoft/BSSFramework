@@ -1,7 +1,9 @@
-﻿using Framework.Application.Events;
+﻿using System.Collections.Frozen;
+using Framework.Application.Events;
 using Framework.Application.Lock;
 using Framework.Authorization.BLL;
 using Framework.BLL;
+using Framework.BLL.Domain.TargetSystem;
 using Framework.Configuration.BLL.TargetSystemService;
 using Framework.Configuration.Domain;
 using Framework.Core;
@@ -30,13 +32,9 @@ public partial interface IConfigurationBLLContext :
 
     ITypeResolver<TypeNameIdentity> TargetSystemTypeResolver { get; }
 
-    DomainType GetDomainType(Type type);
+    FrozenDictionary<PersistentTargetSystemInfo, ITargetSystemService> TargetSystemServices { get; }
 
-    DomainType? TryGetDomainType(Type type);
+    DomainType GetDomainType(TypeNameIdentity type);
 
-    ITargetSystemService GetTargetSystemService(TargetSystem targetSystem);
-
-    ITargetSystemService GetTargetSystemService(Type domainObjectType);
-
-    IEnumerable<ITargetSystemService> GetTargetSystemServices();
+    DomainType? TryGetDomainType(TypeNameIdentity type);
 }

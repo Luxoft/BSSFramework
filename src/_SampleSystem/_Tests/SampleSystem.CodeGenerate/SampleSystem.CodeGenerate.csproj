@@ -12,16 +12,14 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\CodeGeneration\Framework.CodeGeneration.ProjectionGenerator\Framework.CodeGeneration.ProjectionGenerator.csproj" />
     <ProjectReference Include="..\..\..\CodeGeneration\Framework.CodeGeneration.WebApiGenerator\Framework.CodeGeneration.WebApiGenerator.csproj" />
+    <ProjectReference Include="..\..\..\CodeGeneration\Framework.CodeGeneration.BLLGenerator\Framework.CodeGeneration.BLLGenerator.csproj" />
     <ProjectReference Include="..\..\..\Database\Framework.Database.NHibernate.DALGenerator\Framework.Database.NHibernate.DALGenerator.csproj" />
+
     <ProjectReference Include="..\..\..\_Authorization\Framework.Authorization.TestGenerate\Framework.Authorization.TestGenerate.csproj" />
     <ProjectReference Include="..\..\..\_Configuration\Framework.Configuration.TestGenerate\Framework.Configuration.TestGenerate.csproj" />
+
     <ProjectReference Include="..\..\SampleSystem.Domain.ManualProjections\SampleSystem.Domain.ManualProjections.csproj" />
     <ProjectReference Include="..\..\SampleSystem.Domain.Models\SampleSystem.Domain.Models.csproj" />
-
-    <ProjectReference Include="..\..\..\CodeGeneration\Framework.CodeGeneration.ServiceModelGenerator\Framework.CodeGeneration.ServiceModelGenerator.csproj" />
-    <ProjectReference Include="..\..\..\CodeGeneration\Framework.CodeGeneration.BLLGenerator\Framework.CodeGeneration.BLLGenerator.csproj" />
-    <ProjectReference Include="..\..\..\Database\Framework.Database.NHibernate.DBGenerator\Framework.Database.NHibernate.DBGenerator.csproj" />
-    <ProjectReference Include="..\..\..\Projection\Framework.Projection.Runtime\Framework.Projection.Runtime.csproj" />
     <ProjectReference Include="..\..\SampleSystem.EventMetadata\SampleSystem.EventMetadata.csproj" />
     <ProjectReference Include="..\..\SampleSystem.Security.Abstract\SampleSystem.Security.Abstract.csproj" />
   </ItemGroup>

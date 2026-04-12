@@ -1,4 +1,5 @@
 ﻿using Framework.Core;
+using Framework.Core.TypeResolving;
 using Framework.Database.Metadata;
 using Framework.Database.NHibernate.DALGenerator.Configuration;
 

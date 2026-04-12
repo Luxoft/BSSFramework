@@ -20,7 +20,8 @@ public partial class ConfigMainController
             {
                 evaluateData.Context.Authorization.SecuritySystem.CheckAccessAsync(SecurityRole.Administrator, this.HttpContext.RequestAborted).GetAwaiter().GetResult();
 
-                evaluateData.Context.Logics.DomainType.ForceEvent(domainTypeEventModel.ToDomainObject(evaluateData.MappingService));
+                evaluateData.Context.Logics.DomainType.ForceEventAsync(domainTypeEventModel.ToDomainObject(evaluateData.MappingService), this.HttpContext.RequestAborted)
+                            .GetAwaiter().GetResult();
             });
     }
 }

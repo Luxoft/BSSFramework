@@ -1,7 +1,7 @@
 ﻿using System.Collections.Immutable;
 
 using Framework.Core.ReflectionImpl;
-using Framework.Core.TypeResolving.TypeSource;
+using Framework.Core.TypeResolving;
 using Framework.ExtendedMetadata;
 
 namespace Framework.Projection;

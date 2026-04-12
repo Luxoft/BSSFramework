@@ -38,7 +38,7 @@ public class ConfigurationApplicationVariableStorage(
             systemConstant.Value = newRawValue;
             systemConstant.IsManual = true;
 
-            var type = context.SystemConstantTypeResolver.Resolve(systemConstant.Type.FullTypeName);
+            var type = context.TargetSystemTypeResolver.Resolve(systemConstant.Type.FullTypeName);
 
             await new Func<SystemConstant, CancellationToken, Task>(this.UpdateVariableAsync<object>)
                   .CreateGenericMethod(type)

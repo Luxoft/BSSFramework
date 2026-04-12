@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 
-namespace Framework.Core.TypeResolving.TypeSource;
+// ReSharper disable once CheckNamespace
+namespace Framework.Core.TypeResolving;
 
 /// <summary>
 /// Источник типов

@@ -8,7 +8,7 @@ using CommonFramework.DependencyInjection;
 using Framework.Application.Domain;
 using Framework.BLL.Services;
 using Framework.Core;
-using Framework.Core.TypeResolving.TypeSource;
+using Framework.Core.TypeResolving;
 using Framework.Database;
 using Framework.ExtendedMetadata;
 using Framework.FileGeneration.Extensions;

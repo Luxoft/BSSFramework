@@ -4,7 +4,6 @@ using System.Xml.Linq;
 using CommonFramework;
 
 using Framework.Core;
-using Framework.Core.TypeResolving.TypeSource;
 using Framework.Database.Mapping;
 using Framework.Database.Metadata;
 using Framework.Database.SqlMapper;

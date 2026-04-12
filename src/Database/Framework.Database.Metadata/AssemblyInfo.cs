@@ -1,7 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Reflection;
 
-using Framework.Core.TypeResolving.TypeSource;
+using Framework.Core.TypeResolving;
 
 namespace Framework.Database.Metadata;
 

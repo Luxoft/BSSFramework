@@ -1,4 +1,4 @@
-﻿using Framework.Core.TypeResolving.TypeSource;
+﻿using Framework.Core.TypeResolving;
 using Framework.ExtendedMetadata;
 
 namespace Framework.Projection;

@@ -215,7 +215,7 @@ namespace Framework.Configuration.BLL
             yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.DomainType>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.DomainType, string>> GetDomainType_NameSpaceValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.DomainType, string>> GetDomainType_NamespaceValidators()
         {
             yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.DomainType>(this.AvailableValues.GetAvailableSize<string>());
         }
@@ -297,7 +297,7 @@ namespace Framework.Configuration.BLL
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.DomainType, string>(source => source.ModifiedBy, currentClass, this.GetDomainType_ModifiedByValidators(), this.GetClassMap<string>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.DomainType, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetDomainType_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.DomainType, string>(source => source.Name, currentClass, this.GetDomainType_NameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.DomainType, string>(source => source.Namespace, currentClass, this.GetDomainType_NameSpaceValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.DomainType, string>(source => source.Namespace, currentClass, this.GetDomainType_NamespaceValidators(), this.GetClassMap<string>(true));
         }
         
         protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.DomainTypeRootFilterModel> GetDomainTypeRootFilterModelValidationMap()

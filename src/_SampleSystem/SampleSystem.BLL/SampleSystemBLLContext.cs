@@ -3,6 +3,7 @@ using Framework.Authorization.BLL;
 using Framework.BLL;
 using Framework.BLL.Services;
 using Framework.Configuration.BLL;
+using Framework.Core;
 using Framework.Core.TypeResolving;
 using Framework.Tracking;
 using Framework.Validation;
@@ -34,7 +35,6 @@ public partial class SampleSystemBLLContext(
     ISampleSystemBLLFactoryContainer logics,
     IAuthorizationBLLContext authorization,
     IConfigurationBLLContext configuration,
-    BLLContextSettings<PersistentDomainObjectBase> settings,
     ISecurityAccessorResolver securityAccessorResolver,
     ICurrentUserSource<Employee> currentEmployeeSource,
     IFetchRuleExpander fetchRuleExpander)
@@ -57,8 +57,6 @@ public partial class SampleSystemBLLContext(
     public ICurrentUserSource<Employee> CurrentEmployeeSource { get; } = currentEmployeeSource;
 
     public IConfigurationBLLContext Configuration { get; } = configuration;
-
-    public ITypeResolver<string> TypeResolver { get; } = settings.TypeResolver;
 
     public ITrackingService<PersistentDomainObjectBase> TrackingService { get; } = trackingService;
 

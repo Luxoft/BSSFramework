@@ -1,6 +1,4 @@
-﻿using Framework.Core;
-using Framework.Core.TypeResolving.TypeSource;
-using Framework.Database.Metadata;
+﻿using Framework.Database.Metadata;
 using Framework.Database.NHibernate.DALGenerator._Internal;
 
 using Framework.FileGeneration.Configuration;

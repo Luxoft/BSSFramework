@@ -3442,7 +3442,7 @@ namespace Framework.Configuration.Generated.DTO
         
         private string _name;
         
-        private string _nameSpace;
+        private string _namespace;
         
         public DomainTypeSimpleDTO()
         {
@@ -3499,11 +3499,11 @@ namespace Framework.Configuration.Generated.DTO
         {
             get
             {
-                return this._nameSpace;
+                return this._namespace;
             }
             set
             {
-                this._nameSpace = value;
+                this._namespace = value;
             }
         }
         

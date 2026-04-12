@@ -1,6 +1,6 @@
 ﻿using Framework.BLL.Services;
 using Framework.Core;
-using Framework.Core.TypeResolving.TypeSource;
+using Framework.Core.TypeResolving;
 using Framework.Database.Metadata;
 using Framework.ExtendedMetadata;
 using Framework.Projection.Lambda.ProjectionSource._Base;

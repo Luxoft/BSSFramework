@@ -76,7 +76,7 @@ public class AuditService<TIdent, TBLLContext, TBllFactoryContainer, TRootSecuri
 
         if (typeof(TPersistentObjectBase).IsAssignableFrom(typeof(TProperty)))
         {
-            var typeResolver = bllContext.ServiceProvider.GetRequiredKeyedService<ITypeResolver<string>>("DTO");
+            var typeResolver = bllContext.ServiceProvider.GetRequiredKeyedService<ITypeResolver<TypeNameIdentity>>("DTO");
 
             var dtoType = typeResolver.Resolve(typeof(TProperty).Name + MainDTOType.SimpleDTO);
 

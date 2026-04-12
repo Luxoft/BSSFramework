@@ -2,11 +2,9 @@
 
 using Framework.Authorization.Domain;
 using Framework.BLL;
-using Framework.Core.TypeResolving;
 using Framework.Validation;
 
 using SecuritySystem;
-using SecuritySystem.AvailableSecurity;
 using SecuritySystem.ExternalSystem.SecurityContextStorage;
 using SecuritySystem.GeneralPermission.Validation.Principal;
 using SecuritySystem.Services;
@@ -14,11 +12,7 @@ using SecuritySystem.UserSource;
 
 namespace Framework.Authorization.BLL;
 
-public partial interface IAuthorizationBLLContext :
-
-    ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>,
-
-    ITypeResolverContainer<string>
+public partial interface IAuthorizationBLLContext : ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>
 {
     IValidator Validator { get; }
 
@@ -31,14 +25,6 @@ public partial interface IAuthorizationBLLContext :
     IRunAsManager RunAsManager { get; }
 
     ISecuritySystem SecuritySystem { get; }
-
-    IAvailablePermissionSource<Permission> AvailablePermissionSource { get; }
-
-    IAvailableSecurityRoleSource AvailableSecurityRoleSource { get; }
-
-    IAvailableSecurityOperationSource AvailableSecurityOperationSource { get; }
-
-    TimeProvider TimeProvider { get; }
 
     ISecurityContextStorage SecurityContextStorage { get; }
 

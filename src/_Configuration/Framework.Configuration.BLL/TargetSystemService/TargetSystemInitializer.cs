@@ -2,7 +2,7 @@
 
 using Framework.BLL;
 using Framework.BLL.Domain.DTO;
-using Framework.BLL.Domain.Extensions;
+using Framework.BLL.Domain.TargetSystem;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Database;
@@ -26,12 +26,14 @@ public class TargetSystemInitializer(
 
     private void Register(TargetSystemInfo targetSystemInfo)
     {
+        var persistentTargetSystemInfo = targetSystemInfo as PersistentTargetSystemInfo;
+
         var bll = context.Logics.TargetSystem;
 
-        var isBase = targetSystemInfo.Id == PersistentHelper.BaseTargetSystemId;
+        var isBase = targetSystemInfo == TargetSystemInfo.Base;
 
         var targetSystem = bll.GetById(targetSystemInfo.Id, false, new DTOFetchRule<TargetSystem>(MainDTOType.RichDTO))
-                           ?? new TargetSystem(isBase, targetSystemInfo.IsMain, targetSystemInfo.IsRevision)
+                           ?? new TargetSystem(isBase, persistentTargetSystemInfo?.IsMain ?? false, persistentTargetSystemInfo?.IsRevision ?? false)
                               {
                                   Name = targetSystemInfo.Name, SubscriptionEnabled = !isBase, Id = targetSystemInfo.Id
                               }.Self(bll.Insert);

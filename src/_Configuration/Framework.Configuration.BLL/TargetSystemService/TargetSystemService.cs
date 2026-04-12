@@ -3,6 +3,7 @@
 using Framework.Application.Domain;
 using Framework.Application.Events;
 using Framework.BLL;
+using Framework.BLL.Domain.TargetSystem;
 using Framework.BLL.Services;
 using Framework.Configuration.Domain;
 using Framework.Core;
@@ -16,27 +17,17 @@ namespace Framework.Configuration.BLL.TargetSystemService;
 public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
     IConfigurationBLLContext context,
     TBLLContext targetSystemContext,
-    TargetSystemInfo<TPersistentDomainObjectBase> targetSystemInfo,
+    PersistentTargetSystemInfo targetSystemInfo,
     IEventOperationSender eventOperationSender,
     ISubscriptionResolver subscriptionResolver,
     ICurrentRevisionService currentRevisionService) : ITargetSystemService
 
-    where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
+    where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
     where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
 {
-    private readonly Lazy<TargetSystem> lazyTargetSystem = LazyHelper.Create(() => context.Logics.TargetSystem.GetByName(targetSystemInfo.Name, true)!);
+    public ITypeResolver<DomainType> TypeResolver { get; } = targetSystemInfo.TypeResolver.OverrideInput((DomainType domainType) => domainType.FullTypeName);
 
-    public string Name { get; } = targetSystemInfo.Name;
-
-    public TBLLContext TargetSystemContext { get; } = targetSystemContext;
-
-    public Type BLLContextType { get; } = typeof(TBLLContext);
-
-    public ITypeResolver<string> TypeResolverS => this.TargetSystemContext.TypeResolver;
-
-    public ITypeResolver<DomainType> TypeResolver { get; } = targetSystemContext.TypeResolver.OverrideInput((DomainType domainType) => domainType.FullTypeName);
-
-    public TargetSystem TargetSystem => this.lazyTargetSystem.Value;
+    public TargetSystem TargetSystem => field ??= context.Logics.TargetSystem.GetByName(targetSystemInfo.Name, true)!;
 
     public Type PersistentDomainObjectBaseType => typeof(TPersistentDomainObjectBase);
 
@@ -45,7 +36,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
         if (operation == null) throw new ArgumentNullException(nameof(operation));
         if (domainObjectId.IsDefault()) throw new ArgumentOutOfRangeException(nameof(domainObjectId));
 
-        var domainType = this.TypeResolver.TryResolve(operation.DomainType);
+        var domainType = this.TypeResolver.Resolve(operation.DomainType);
 
         new Action<string, long?, Guid>(this.ForceEvent<TPersistentDomainObjectBase>)
             .CreateGenericMethod(domainType)
@@ -55,7 +46,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
     private void ForceEvent<TDomainObject>(string operationName, long? revision, Guid domainObjectId)
         where TDomainObject : class, TPersistentDomainObjectBase
     {
-        var bll = this.TargetSystemContext.Logics.Default.Create<TDomainObject>();
+        var bll = targetSystemContext.Logics.Default.Create<TDomainObject>();
 
         var domainObject = revision == null
                                ? bll.GetById(domainObjectId, true)
@@ -84,13 +75,11 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
             {
                 if (subscriptionResolver.DomainTypes.Contains(item.Key.Type))
                 {
-                    yield return new ObjectModificationInfo<Guid>
-                                 {
-                                     Identity = ((TPersistentDomainObjectBase)item.Key.Object).Id,
-                                     Revision = revisionNumber,
-                                     ModificationType = item.Value.ToModificationType(),
-                                     TypeInfo = new TypeNameIdentity(item.Key.Type)
-                                 };
+                    yield return new ObjectModificationInfo<Guid>(
+                        Identity: ((TPersistentDomainObjectBase)item.Key.Object).Id,
+                        Revision: revisionNumber,
+                        ModificationType: item.Value.ToModificationType(),
+                        TypeInfo: item.Key.Type);
                 }
             }
         }

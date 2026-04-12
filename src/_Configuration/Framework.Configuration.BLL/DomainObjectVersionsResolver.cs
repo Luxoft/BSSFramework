@@ -1,7 +1,5 @@
 ﻿using Framework.Application.Domain;
 using Framework.BLL;
-using Framework.BLL.Services;
-using Framework.Core.TypeResolving;
 using Framework.Subscriptions.Domain;
 
 using Microsoft.Extensions.Logging;
@@ -12,7 +10,7 @@ public class DomainObjectVersionsResolver<TBLLContext, TDomainObject>(
     TBLLContext context,
     ILogger<DomainObjectVersionsResolver<TBLLContext, TDomainObject>> logger) : IDomainObjectVersionsResolver
 
-    where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TDomainObject, Guid>
+    where TBLLContext : IDefaultBLLContext<TDomainObject, Guid>
     where TDomainObject : class, IIdentityObject<Guid>
 {
     private readonly IRevisionBLL<TDomainObject, Guid> revisionBll = context.Logics.Default.Create<TDomainObject>();

@@ -6,7 +6,9 @@ using Framework.Database.DALListener;
 
 namespace Framework.Infrastructure.DALListeners;
 
-public class FixDomainObjectEventRevisionNumberDALListener(IConfigurationBLLContext context) : BLLContextContainer<IConfigurationBLLContext>(context),
+public class FixDomainObjectEventRevisionNumberDALListener(
+    IConfigurationBLLContext context,
+    ICurrentRevisionService currentRevisionService) : BLLContextContainer<IConfigurationBLLContext>(context),
                                                                                                IBeforeTransactionCompletedDALListener
 {
     public async Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
@@ -17,7 +19,7 @@ public class FixDomainObjectEventRevisionNumberDALListener(IConfigurationBLLCont
 
         if (!eventDALChanges.IsEmpty)
         {
-            var revisionNumber = this.Context.GetCurrentRevision();
+            var revisionNumber = currentRevisionService.GetCurrentRevision();
 
             var domainObjectEventBLL = this.Context.Logics.DomainObjectEvent;
 

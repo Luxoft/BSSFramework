@@ -8,7 +8,6 @@ using SecuritySystem.Attributes;
 using SecuritySystem.Configurator.Handlers;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
-// ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
 
 namespace Framework.Configurator.Handlers;
 
@@ -23,8 +22,8 @@ public class ForcePushEventHandler([WithoutRunAs] ISecuritySystem securitySystem
 
         await eventSystem.ForceEventAsync(
             new EventModel(
-                eventSystem.TypeResolver.TryResolve(body.DomainTypeFullName),
-                body.Ids.Split(',').Select(i => new Guid(i)).ToList(),
+                eventSystem.TypeResolver.Resolve(body.DomainTypeFullName),
+                [.. body.Ids.Split(',').Select(i => new Guid(i))],
                 new EventOperation(body.OperationName),
                 body.Revision),
             cancellationToken);

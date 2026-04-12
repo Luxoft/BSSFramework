@@ -1,6 +1,4 @@
-﻿using Framework.BLL;
-using Framework.BLL.Domain.IdentityObject;
-using Framework.Configuration.Domain;
+﻿using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Database;
 using Framework.Database.Domain;
@@ -10,8 +8,6 @@ using Framework.Subscriptions.Domain;
 using Microsoft.Extensions.Logging;
 
 using SecuritySystem.Providers;
-
-using TypeNameIdentity = Framework.Database.Domain.TypeNameIdentity;
 
 namespace Framework.Configuration.BLL;
 
@@ -36,13 +32,11 @@ public partial class DomainObjectModificationBLL(
 
         foreach (var modification in modifications)
         {
-            var info = new ObjectModificationInfo<Guid>
-                       {
-                           Identity = modification.DomainObjectId,
-                           ModificationType = modification.Type,
-                           Revision = modification.Revision,
-                           TypeInfo = new TypeNameIdentity { Name = modification.DomainType.Name, Namespace = modification.DomainType.Namespace }
-                       };
+            var info = new ObjectModificationInfo<Guid>(
+                Identity: modification.DomainObjectId,
+                ModificationType: modification.Type,
+                Revision: modification.Revision,
+                TypeInfo: new TypeNameIdentity { Name = modification.DomainType.Name, Namespace = modification.DomainType.Namespace });
 
             logger.LogDebug("Process modification {DomainObjectId}", modification.DomainObjectId);
 
@@ -76,7 +70,7 @@ public partial class DomainObjectModificationBLL(
 
     private DomainObjectVersions GetDomainObjectVersions(ObjectModificationInfo<Guid> modificationInfo)
     {
-        var domainObjectType = this.Context.ComplexDomainTypeResolver.Resolve(modificationInfo.TypeInfo);
+        var domainObjectType = this.Context.TargetSystemTypeResolver.Resolve(modificationInfo.TypeInfo);
 
         return domainObjectVersionsResolverFactory.Create(domainObjectType).GetDomainObjectVersions(modificationInfo.Identity, modificationInfo.Revision);
     }

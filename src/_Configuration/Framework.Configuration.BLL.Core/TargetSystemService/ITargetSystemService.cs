@@ -1,19 +1,12 @@
-﻿using Framework.Application.Domain;
-using Framework.BLL.Domain.IdentityObject;
-using Framework.Configuration.Domain;
-using Framework.Core.TypeResolving;
+﻿using Framework.Configuration.Domain;
 using Framework.Database;
 using Framework.Database.Domain;
 
 namespace Framework.Configuration.BLL.TargetSystemService;
 
-public interface ITargetSystemService : ITypeResolverContainer<DomainType>, ITargetSystemElement<TargetSystem>, IVisualIdentityObject
+public interface ITargetSystemService
 {
-    Type PersistentDomainObjectBaseType { get; }
-
-    Type BLLContextType { get; }
-
-    ITypeResolver<string> TypeResolverS { get; }
+    TargetSystem TargetSystem { get; }
 
     bool IsAssignable(Type domainType);
 

@@ -1,4 +1,6 @@
-﻿using CommonFramework;
+﻿using System.Collections.Frozen;
+
+using CommonFramework;
 using CommonFramework.DictionaryCache;
 
 using Framework.Application.Events;
@@ -8,7 +10,7 @@ using Framework.Authorization.Domain;
 using Framework.BLL;
 using Framework.BLL.Domain.Exceptions;
 using Framework.BLL.Domain.Extensions;
-using Framework.BLL.Domain.IdentityObject;
+using Framework.BLL.Domain.TargetSystem;
 using Framework.BLL.Services;
 using Framework.Configuration.BLL.TargetSystemService;
 using Framework.Configuration.Domain;
@@ -24,137 +26,63 @@ using HierarchicalExpand;
 using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem.AccessDenied;
-using SecuritySystem.Notification;
 
 using PersistentDomainObjectBase = Framework.Configuration.Domain.PersistentDomainObjectBase;
 
 namespace Framework.Configuration.BLL;
 
-public partial class ConfigurationBLLContext
+public partial class ConfigurationBLLContext(
+    IServiceProvider serviceProvider,
+    [FromKeyedServices(nameof(BLL))] IEventOperationSender operationSender,
+    IAccessDeniedExceptionService accessDeniedExceptionService,
+    IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
+    IServiceProxyFactory serviceProxyFactory,
+    ITargetSystemTypeResolverContainer targetSystemTypeResolverContainer,
+    ITrackingService<PersistentDomainObjectBase> trackingService,
+    IConfigurationValidator validator,
+    IRootSecurityService securityService,
+    IConfigurationBLLFactoryContainer logics,
+    IAuthorizationBLLContext authorization,
+    IDomainObjectEventMetadata eventOperationSource,
+    INamedLockService namedLockService,
+    IEnumerable<ITargetSystemService> targetSystemServices,
+    IEnumerable<TargetSystemInfo> targetSystemInfoList,
+    ICurrentRevisionService currentRevisionService,
+    [FromKeyedServices(nameof(SystemConstant))] ISerializerFactory<string> systemConstantSerializerFactory) : SecurityBLLBaseContext<PersistentDomainObjectBase, Guid, IConfigurationBLLFactoryContainer>(serviceProvider, operationSender, accessDeniedExceptionService, hierarchicalObjectExpanderFactory)
 {
-    private readonly Lazy<Dictionary<TargetSystem, ITargetSystemService>> lazyTargetSystemServiceCache;
+    private FrozenDictionary<TargetSystemInfo, ITargetSystemService> TargetSystemServices =>
+        field ??= this.Logics.TargetSystem.GetUnsecureQueryable().Select(ts =>
+        {
+            var
 
-    private readonly IDictionaryCache<Type, DomainType?> domainTypeCache;
+            return (ts, serviceProxyFactory.Create<ITargetSystemService>());
+        });
 
-    private readonly IDictionaryCache<IDomainType, DomainType> domainTypeNameCache;
+    public ITrackingService<PersistentDomainObjectBase> TrackingService { get; } = trackingService;
 
-    private readonly ICurrentRevisionService currentRevisionService;
+    public IRootSecurityService SecurityService { get; } = securityService;
 
-    private readonly IReadOnlyDictionary<Type, TargetSystemInfo> targetSystemInfoDict;
+    public ITypeResolver<TypeNameIdentity> TargetSystemTypeResolver => targetSystemTypeResolverContainer.TypeResolver;
 
-    private readonly IReadOnlyDictionary<Type, DomainTypeInfo> domainTypeInfoDict;
 
-    public ConfigurationBLLContext(
-        IServiceProvider serviceProvider,
-        [FromKeyedServices(nameof(BLL))] IEventOperationSender operationSender,
-        IAccessDeniedExceptionService accessDeniedExceptionService,
-        IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
-        ITrackingService<PersistentDomainObjectBase> trackingService,
-        IConfigurationValidator validator,
-        IRootSecurityService securityService,
-        IConfigurationBLLFactoryContainer logics,
-        IAuthorizationBLLContext authorization,
-        IDomainObjectEventMetadata eventOperationSource,
-        INamedLockService namedLockService,
-        IEnumerable<ITargetSystemService> targetSystemServices,
-        IEnumerable<TargetSystemInfo> targetSystemInfoList,
-        ICurrentRevisionService currentRevisionService,
-        ConfigurationBLLContextSettings settings,
-        INotificationPrincipalExtractor<Principal> notificationPrincipalExtractor)
-        : base(serviceProvider, operationSender, accessDeniedExceptionService, hierarchicalObjectExpanderFactory)
+    public override IConfigurationBLLFactoryContainer Logics { get; } = logics;
+
+    public IValidator Validator { get; } = validator;
+
+    public IAuthorizationBLLContext Authorization { get; } = authorization;
+
+    public ISerializerFactory<string> SystemConstantSerializerFactory { get; } = systemConstantSerializerFactory;
+
+    public INamedLockService NamedLockService { get; } = namedLockService;
+
+    public IDomainObjectEventMetadata EventOperationSource { get; } = eventOperationSource;
+
+    public DomainType GetDomainType(TypeNameIdentity typeNameIdentity)
     {
-        this.TrackingService = trackingService;
-        this.Validator = validator;
 
-        this.SecurityService = securityService;
-        this.Logics = logics;
-
-        this.Authorization = authorization;
-        this.NamedLockService = namedLockService;
-        this.EventOperationSource = eventOperationSource;
-        this.currentRevisionService = currentRevisionService ?? throw new ArgumentNullException(nameof(currentRevisionService));
-        this.NotificationPrincipalExtractor = notificationPrincipalExtractor;
-
-        this.lazyTargetSystemServiceCache = LazyHelper.Create(() => targetSystemServices.ToDictionary(s => s.TargetSystem));
-
-        this.domainTypeCache = new DictionaryCache<Type, DomainType?>(type =>
-
-                                                                          this.GetTargetSystemService(type, false).Maybe(targetService => this.GetDomainType(targetService, type)))
-            .WithLock();
-
-        this.domainTypeNameCache = new DictionaryCache<IDomainType, DomainType>(
-                domainType => this.Logics.DomainType.GetByDomainType(domainType),
-                new EqualityComparerImpl<IDomainType>(
-                    (dt1, dt2) => dt1.Name == dt2.Name && dt1.Namespace == dt2.Namespace,
-                    dt => dt.Name.GetHashCode() ^ dt.Namespace.GetHashCode()))
-            .WithLock();
-
-        this.SystemConstantSerializerFactory = settings.SystemConstantSerializerFactory;
-        this.SystemConstantTypeResolver = settings.SystemConstantTypeResolver;
-
-        this.TypeResolver = settings.TypeResolver;
-
-        var targetSystemInfoDictRequest = from targetSystemInfo in targetSystemInfoList
-
-                                          from domainType in targetSystemInfo.DomainTypes
-
-                                          select (domainType.Type, targetSystemInfo);
-
-        this.targetSystemInfoDict = targetSystemInfoDictRequest.ToDictionary();
-
-
-        var domainTypeInfoDictRequest = from targetSystemInfo in targetSystemInfoList
-
-                                        from domainType in targetSystemInfo.DomainTypes
-
-                                        select (domainType.Type, domainType);
-
-        this.domainTypeInfoDict = domainTypeInfoDictRequest.ToDictionary();
     }
 
-    public ITrackingService<PersistentDomainObjectBase> TrackingService { get; }
-
-    public IRootSecurityService SecurityService { get; }
-
-    public ITypeResolver<string> TypeResolver { get; }
-
-    public ITypeResolver<DomainType> ComplexDomainTypeResolver =>
-        field ??= TypeResolverHelper.Create(
-            (DomainType domainType) =>
-            {
-                if (domainType.TargetSystem.IsBase)
-                {
-                    return TypeResolverHelper.Base.TryResolve(domainType.FullTypeName);
-                }
-                else
-                {
-                    return this.GetTargetSystemService(domainType.TargetSystem).TypeResolver.TryResolve(domainType);
-                }
-            },
-            () => this.GetTargetSystemServices().SelectMany(tss => tss.TypeResolver.Types)
-                      .Concat(TypeResolverHelper.Base.Types));
-
-
-    public override IConfigurationBLLFactoryContainer Logics { get; }
-
-    public IValidator Validator { get; }
-
-    public INotificationPrincipalExtractor<Principal> NotificationPrincipalExtractor { get; }
-
-    public IAuthorizationBLLContext Authorization { get; }
-
-    public ISerializerFactory<string> SystemConstantSerializerFactory { get; }
-
-    public ITypeResolver<string> SystemConstantTypeResolver { get; }
-
-    public INamedLockService NamedLockService { get; }
-
-    public IDomainObjectEventMetadata EventOperationSource { get; }
-
-    /// <inheritdoc />
-    public long GetCurrentRevision() => this.currentRevisionService.GetCurrentRevision();
-
-    public DomainType GetDomainType(DomainTypeIdentity domainTypeIdentity)
+    public DomainType? TryGetDomainType(Type type)
     {
 
     }
@@ -163,33 +91,15 @@ public partial class ConfigurationBLLContext
     {
         if (targetSystem == null) throw new ArgumentNullException(nameof(targetSystem));
 
-        return this.lazyTargetSystemServiceCache.Value[targetSystem];
+        return this.TargetSystemServices.Values.Single(ts => ts.TargetSystem == targetSystem);
     }
 
-    public ITargetSystemService GetTargetSystemService(Type domainType, bool throwOnNotFound)
-    {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+    public ITargetSystemService GetTargetSystemService(Type domainType) =>
 
-        if (throwOnNotFound)
-        {
-            return this.lazyTargetSystemServiceCache.Value.Values.Single(
-                service => service.IsAssignable(domainType),
-                () => new BusinessLogicException($"Target System for type {domainType.Name} not found"),
-                () => new BusinessLogicException($"To many Target Systems for type {domainType.Name}"));
-        }
-        else
-        {
-            return this.lazyTargetSystemServiceCache.Value.Values.SingleOrDefault(
-                service => service.IsAssignable(domainType),
-                () => new BusinessLogicException($"Target System for type {domainType.Name} not found"));
-        }
-    }
-
-    public ITargetSystemService GetMainTargetSystemService() =>
         this.lazyTargetSystemServiceCache.Value.Values.Single(
-            service => service.TargetSystem.IsMain,
-            () => new BusinessLogicException("Main Target System not found"),
-            () => new BusinessLogicException("To many Main Target Systems"));
+            service => service.IsAssignable(domainType),
+            () => new BusinessLogicException($"Target System for type {domainType.Name} not found"),
+            () => new BusinessLogicException($"To many Target Systems for type {domainType.Name}"));
 
     public ITargetSystemService GetTargetSystemService(string name)
     {

@@ -5,7 +5,6 @@ using Framework.Application.Events;
 using Framework.Authorization.Domain;
 using Framework.BLL;
 using Framework.BLL.Services;
-using Framework.Core.TypeResolving;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -14,11 +13,9 @@ using HierarchicalExpand;
 
 using SecuritySystem;
 using SecuritySystem.Services;
-using SecuritySystem.AvailableSecurity;
 using SecuritySystem.ExternalSystem.SecurityContextStorage;
 using SecuritySystem.AccessDenied;
 using SecuritySystem.GeneralPermission.Validation.Principal;
-using SecuritySystem.Notification;
 using SecuritySystem.UserSource;
 
 namespace Framework.Authorization.BLL;
@@ -29,21 +26,15 @@ public partial class AuthorizationBLLContext(
     IAccessDeniedExceptionService accessDeniedExceptionService,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
     IAuthorizationValidator validator,
-    TimeProvider timeProvider,
     IRootSecurityService securityService,
     IAuthorizationBLLFactoryContainer logics,
     ISecurityContextStorage securityContextStorage,
-    INotificationPrincipalExtractor<Principal> notificationPrincipalExtractor,
     ISecuritySystem securitySystem,
     IRunAsManager runAsManager,
-    IAvailablePermissionSource<Permission> availablePermissionSource,
-    IAvailableSecurityRoleSource availableSecurityRoleSource,
     ICurrentUserSource<Principal> currentPrincipalSource,
     IPrincipalValidator<Principal, Permission, PermissionRestriction> principalValidator,
     ICurrentUser currentUser,
-    ISecurityContextInfoSource securityContextInfoSource,
-    BLLContextSettings<PersistentDomainObjectBase> settings,
-    IAvailableSecurityOperationSource availableSecurityOperationSource)
+    ISecurityContextInfoSource securityContextInfoSource)
     : SecurityBLLBaseContext<PersistentDomainObjectBase, Guid, IAuthorizationBLLFactoryContainer>(
         serviceProvider,
         operationSender,
@@ -55,11 +46,7 @@ public partial class AuthorizationBLLContext(
             (Guid)securityContextInfoSource.GetSecurityContextInfo(securityContextType).Identity.GetId(),
             true)!).WithLock();
 
-    public ITypeResolver<string> TypeResolver { get; } = settings.TypeResolver;
-
     public ISecurityContextInfoSource SecurityContextInfoSource { get; } = securityContextInfoSource;
-
-    public INotificationPrincipalExtractor<Principal> NotificationPrincipalExtractor { get; } = notificationPrincipalExtractor;
 
     public ISecuritySystem SecuritySystem { get; } = securitySystem;
 
@@ -73,19 +60,11 @@ public partial class AuthorizationBLLContext(
 
     public IRunAsManager RunAsManager { get; } = runAsManager;
 
-    public IAvailablePermissionSource<Permission> AvailablePermissionSource { get; } = availablePermissionSource;
-
-    public IAvailableSecurityRoleSource AvailableSecurityRoleSource { get; } = availableSecurityRoleSource;
-
-    public IAvailableSecurityOperationSource AvailableSecurityOperationSource { get; } = availableSecurityOperationSource;
-
     public IRootSecurityService SecurityService { get; } = securityService;
 
     public override IAuthorizationBLLFactoryContainer Logics { get; } = logics;
 
     public ISecurityContextStorage SecurityContextStorage { get; } = securityContextStorage;
-
-    public TimeProvider TimeProvider { get; } = timeProvider;
 
     public SecurityContextType GetSecurityContextType(Type type)
     {

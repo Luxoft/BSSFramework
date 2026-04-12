@@ -1,3 +1,5 @@
-﻿namespace Framework.Application.Events;
+﻿using System.Collections.Immutable;
 
-public record EventModel(Type DomainType, IReadOnlyList<Guid> DomainObjectIdents, EventOperation EventOperation, long? Revision);
+namespace Framework.Application.Events;
+
+public record EventModel(Type DomainType, ImmutableArray<Guid> DomainObjectIdents, EventOperation EventOperation, long? Revision);

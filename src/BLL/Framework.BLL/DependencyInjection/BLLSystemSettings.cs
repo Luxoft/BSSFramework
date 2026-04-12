@@ -18,8 +18,6 @@ public class BLLSystemSettings
 
     public required Type FactoryContainerImplType { get; set; }
 
-    public required Type SettingsType { get; set; }
-
     public Type? FetchRuleExpanderType { get; set; }
 
     public T GetSafe<T>(Expression<Func<BLLSystemSettings, T?>> expr, T? defaultValue = default) => expr.Compile().Invoke(this) ?? defaultValue ?? throw new Exception($"{expr.GetMemberName()} not initialized");

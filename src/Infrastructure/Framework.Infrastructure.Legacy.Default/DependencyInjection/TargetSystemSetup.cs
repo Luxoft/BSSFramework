@@ -2,9 +2,9 @@
 
 using Framework.Application.Domain;
 using Framework.BLL;
+using Framework.BLL.Domain.TargetSystem;
 using Framework.BLL.Services;
 using Framework.Configuration.BLL.TargetSystemService;
-using Framework.Core.TypeResolving;
 using Framework.DependencyInjection;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -27,11 +27,17 @@ public class TargetSystemSetup : ITargetSystemSetup
         bool isMain,
         bool isRevision,
         IEnumerable<DomainTypeInfo> domainTypes)
-        where TBLLContext : class, ITypeResolverContainer<string>,
+        where TBLLContext : class,
         ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
     {
-        var info = new TargetSystemInfo<TPersistentDomainObjectBase>(
+        var info = new PersistentTargetSystemInfo
+                   {
+                       PersistentDomainObjectBaseType = typeof(TPersistentDomainObjectBase),
+                       BllContextType = typeof(TPersistentDomainObjectBase),
+
+                   }
+
             name,
             id,
             isMain,

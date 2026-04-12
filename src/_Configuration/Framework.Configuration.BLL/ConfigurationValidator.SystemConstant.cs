@@ -18,7 +18,7 @@ public partial class ConfigurationValidator
         {
             return ValidationResult.TryCatch(() =>
             {
-                var type = this.Context.ComplexDomainTypeResolver.Resolve(source.Type);
+                var type = this.Context.TargetSystemTypeResolver.Resolve(source.Type);
 
                 try
                 {

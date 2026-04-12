@@ -34,7 +34,6 @@ public static class ServiceCollectionExtensions
                    settings.GetSafe(v => v.ValidatorImplType, typeof(SuccessValidator)),
                    settings.GetSafe(v => v.FactoryContainerDeclType),
                    settings.GetSafe(v => v.FactoryContainerImplType),
-                   settings.GetSafe(v => v.SettingsType),
                    settings.GetSafe(v => v.FetchRuleExpanderType, typeof(IFetchRuleExpander)))
                .Invoke<IServiceCollection>(null, [services]);
     }
@@ -92,21 +91,18 @@ public static class ServiceCollectionExtensions
     private static BLLSystemSettings ExtractSettings<TBLLContextDecl, TBLLContextImpl>()
         where TBLLContextImpl : TBLLContextDecl
     {
-        var asmTypes = new[] { typeof(TBLLContextDecl).Assembly, typeof(TBLLContextImpl).Assembly }.Distinct()
-            .SelectMany(assembly => assembly.GetTypes())
-            .ToList();
+        var asmTypes = new[] { typeof(TBLLContextDecl).Assembly, typeof(TBLLContextImpl).Assembly }
+                       .Distinct().SelectMany(assembly => assembly.GetTypes()).ToList();
 
         var validatorDeclType = typeof(TBLLContextImpl).GetSingleCtorParameterTypeImpl(typeof(IValidator));
 
-        var validatorImplType = GetImplType(validatorDeclType, false);
+        var validatorImplType = TryGetImplType(validatorDeclType);
 
         var validatorCompileCacheType = validatorImplType?.GetSingleCtorParameterTypeImpl(typeof(ValidatorCompileCache));
 
         var validationMapType = validatorCompileCacheType?.GetSingleCtorParameterTypeImpl(typeof(IValidationMap));
 
         var persistentDomainObjectBaseType = typeof(TBLLContextDecl).GetInterfaceImplementationArguments(typeof(IDefaultBLLContext<,>), args => args.First())!;
-
-        var baseBllSettingType = typeof(BLLContextSettings<>).MakeGenericType(persistentDomainObjectBaseType);
 
         var factoryContainerDeclType = typeof(TBLLContextImpl).GetSingleCtorParameterTypeImpl(typeof(IBLLFactoryContainer<object>));
 
@@ -116,17 +112,14 @@ public static class ServiceCollectionExtensions
                    ValidatorImplType = validatorImplType,
                    ValidatorCompileCacheType = validatorCompileCacheType,
                    ValidationMapType = validationMapType,
-                   SettingsType = GetImplType(baseBllSettingType, false) ?? baseBllSettingType,
                    FactoryContainerDeclType = factoryContainerDeclType,
-                   FactoryContainerImplType = GetImplType(factoryContainerDeclType, true)!,
-                   FetchRuleExpanderType = GetImplType(typeof(DTOFetchRuleExpander<>).MakeGenericType(persistentDomainObjectBaseType), false) ?? typeof(IFetchRuleExpander),
-        };
+                   FactoryContainerImplType = GetImplType(factoryContainerDeclType),
+                   FetchRuleExpanderType = TryGetImplType(typeof(DTOFetchRuleExpander<>).MakeGenericType(persistentDomainObjectBaseType)) ?? typeof(IFetchRuleExpander),
+               };
 
-        Type? GetImplType(Type baseType, bool required)
-        {
-            return asmTypes.SingleOrDefault(t => t is { IsClass: true, IsAbstract: false } && baseType.IsAssignableFrom(t))!
-                           .Pipe(required, res => res ?? throw new Exception($"Implement type for '{baseType}' not found"));
-        }
+        Type? TryGetImplType(Type baseType) => asmTypes.SingleOrDefault(t => t is { IsClass: true, IsAbstract: false } && baseType.IsAssignableFrom(t));
+
+        Type GetImplType(Type baseType) => TryGetImplType(baseType) ?? throw new Exception($"Implement type for '{baseType}' not found");
     }
 
 

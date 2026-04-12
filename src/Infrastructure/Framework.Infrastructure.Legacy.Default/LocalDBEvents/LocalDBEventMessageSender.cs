@@ -6,6 +6,7 @@ using Framework.BLL.DTOMapping.DTOMapper;
 using Framework.BLL.Events.SubscriptionManager;
 using Framework.Configuration.BLL;
 using Framework.Core.Helpers;
+using Framework.Database;
 
 namespace Framework.Infrastructure.LocalDBEvents;
 
@@ -16,6 +17,7 @@ namespace Framework.Infrastructure.LocalDBEvents;
 public class LocalDBEventMessageSender<TPersistentDomainObjectBase>(
     IDomainEventDTOMapper<TPersistentDomainObjectBase> eventDtoMapper,
     IConfigurationBLLContext configurationContext,
+    ICurrentRevisionService currentRevisionService,
     LocalDBEventMessageSenderSettings<TPersistentDomainObjectBase>? settings = null)
     : EventDTOMessageSenderBase<TPersistentDomainObjectBase>
     where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
@@ -24,8 +26,7 @@ public class LocalDBEventMessageSender<TPersistentDomainObjectBase>(
 
     public override async Task SendAsync<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs, CancellationToken cancellationToken)
     {
-        var dto = domainObjectEventArgs.CustomSendObject
-                  ?? eventDtoMapper.Convert(domainObjectEventArgs.DomainObject, domainObjectEventArgs.Operation);
+        var dto = domainObjectEventArgs.CustomSendObject ?? eventDtoMapper.Convert(domainObjectEventArgs.DomainObject, domainObjectEventArgs.Operation);
 
         var serializedData = DataContractSerializerHelper.Serialize(dto);
         var dbEvent = new Configuration.Domain.DomainObjectEvent
@@ -34,11 +35,11 @@ public class LocalDBEventMessageSender<TPersistentDomainObjectBase>(
             Size = serializedData.Length,
             SerializeType = dto.GetType().FullName!,
             DomainObjectId = domainObjectEventArgs.DomainObject.Id,
-            Revision = configurationContext.GetCurrentRevision(),
+            Revision = currentRevisionService.GetCurrentRevision(),
             QueueTag = this.settings.QueueTag
         };
 
-        configurationContext.GetDomainType(domainObjectEventArgs.DomainObjectType, false).Maybe(domainType =>
+        configurationContext.TryGetDomainType(domainObjectEventArgs.DomainObjectType).Maybe(domainType =>
         {
             dbEvent.Operation = domainType.EventOperations.GetByName(domainObjectEventArgs.Operation.ToString());
         });

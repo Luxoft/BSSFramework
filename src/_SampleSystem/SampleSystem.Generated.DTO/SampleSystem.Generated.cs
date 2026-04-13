@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Framework.Application.Domain;
-
 namespace SampleSystem.Generated.DTO
 {
     
@@ -8583,7 +8581,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Address), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class AddressStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Address, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Address>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.AddressIdentityDTO>, IVersionObject<long>
+    public partial class AddressStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Address, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Address>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.AddressIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Domain.AddressType _addressType;
@@ -8788,7 +8786,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -9362,7 +9360,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnit, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnit>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>, IVersionObject<long>
+    public partial class BusinessUnitStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnit, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnit>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private bool _allowedForFilterRole;
@@ -9760,7 +9758,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -9911,7 +9909,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitEmployeeRole), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitEmployeeRoleStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitEmployeeRole, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitEmployeeRole>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleIdentityDTO>, IVersionObject<long>
+    public partial class BusinessUnitEmployeeRoleStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitEmployeeRole, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitEmployeeRole>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.EmployeeIdentityDTO _employee;
@@ -10069,7 +10067,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -10200,7 +10198,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitHrDepartment), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitHrDepartmentStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitHrDepartment, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitHrDepartment>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO>, IVersionObject<long>
+    public partial class BusinessUnitHrDepartmentStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitHrDepartment, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitHrDepartment>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.BusinessUnitIdentityDTO _businessUnit;
@@ -10358,7 +10356,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -10524,7 +10522,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitManagerCommissionLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitManagerCommissionLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitManagerCommissionLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO>, IVersionObject<long>
+    public partial class BusinessUnitManagerCommissionLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitManagerCommissionLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitManagerCommissionLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.BusinessUnitIdentityDTO _businessUnit;
@@ -10712,7 +10710,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -11253,7 +11251,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitType), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitTypeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitType, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitType>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO>, IVersionObject<long>
+    public partial class BusinessUnitTypeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitType, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitType>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private bool _additionalStartConfirm;
@@ -11681,7 +11679,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -11817,7 +11815,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitTypeLinkWithPossibleFinancialProjectTypeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeIdentityDTO>, IVersionObject<long>
+    public partial class BusinessUnitTypeLinkWithPossibleFinancialProjectTypeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO _businessUnitType;
@@ -11975,7 +11973,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -12111,7 +12109,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitTypeLinkWithPossibleParentStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentIdentityDTO>, IVersionObject<long>
+    public partial class BusinessUnitTypeLinkWithPossibleParentStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO _businessUnitType;
@@ -12269,7 +12267,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -12405,7 +12403,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitTypeLinkWithTransferToStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToIdentityDTO>, IVersionObject<long>
+    public partial class BusinessUnitTypeLinkWithTransferToStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO _businessUnitType;
@@ -12563,7 +12561,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -12844,7 +12842,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class CompanyLegalEntityStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.CompanyLegalEntity, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.CompanyLegalEntity>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>, IVersionObject<long>
+    public partial class CompanyLegalEntityStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.CompanyLegalEntity, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.CompanyLegalEntity>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private bool _active = true;
@@ -13107,7 +13105,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -13313,7 +13311,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Country), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class CountryStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Country, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Country>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CountryIdentityDTO>, IVersionObject<long>
+    public partial class CountryStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Country, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Country>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CountryIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private string _code;
@@ -13501,7 +13499,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -14252,7 +14250,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>, IVersionObject<long>
+    public partial class EmployeeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private int _age;
@@ -14802,7 +14800,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -14841,7 +14839,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>, IVersionObject<long>
+    public partial class EmployeeUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private CommonFramework.Maybe<int> _age = CommonFramework.Maybe<int>.Nothing;
@@ -15354,7 +15352,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -15511,7 +15509,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeAndEmployeeSpecializationLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO>, IVersionObject<long>
+    public partial class EmployeeAndEmployeeSpecializationLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.EmployeeIdentityDTO _employee;
@@ -15669,7 +15667,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -15690,7 +15688,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeAndEmployeeSpecializationLinkUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO>, IVersionObject<long>
+    public partial class EmployeeAndEmployeeSpecializationLinkUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _employee = CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO>.Nothing;
@@ -15811,7 +15809,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -15991,7 +15989,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCellPhone), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeCellPhoneStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO>, IVersionObject<long>
+    public partial class EmployeeCellPhoneStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private string _cityCode;
@@ -16164,7 +16162,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -16185,7 +16183,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCellPhone), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeCellPhoneUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO>, IVersionObject<long>
+    public partial class EmployeeCellPhoneUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private CommonFramework.Maybe<string> _cityCode = CommonFramework.Maybe<string>.Nothing;
@@ -16321,7 +16319,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -17096,7 +17094,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePersonalCellPhone), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeePersonalCellPhoneStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeePersonalCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeePersonalCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO>, IVersionObject<long>
+    public partial class EmployeePersonalCellPhoneStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeePersonalCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeePersonalCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private string _cityCode;
@@ -17269,7 +17267,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -17290,7 +17288,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePersonalCellPhone), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeePersonalCellPhoneUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeePersonalCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeePersonalCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO>, IVersionObject<long>
+    public partial class EmployeePersonalCellPhoneUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeePersonalCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeePersonalCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private CommonFramework.Maybe<string> _cityCode = CommonFramework.Maybe<string>.Nothing;
@@ -17426,7 +17424,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -18396,7 +18394,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeToEmployeeLink), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeToEmployeeLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeToEmployeeLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeToEmployeeLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO>, IVersionObject<long>
+    public partial class EmployeeToEmployeeLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeToEmployeeLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeToEmployeeLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Domain.EmployeeLinkType _employeeLinkType;
@@ -18554,7 +18552,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -18575,7 +18573,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeToEmployeeLink), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeToEmployeeLinkUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeToEmployeeLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeToEmployeeLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO>, IVersionObject<long>
+    public partial class EmployeeToEmployeeLinkUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeToEmployeeLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeToEmployeeLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private CommonFramework.Maybe<SampleSystem.Domain.EmployeeLinkType> _employeeLinkType = CommonFramework.Maybe<SampleSystem.Domain.EmployeeLinkType>.Nothing;
@@ -18696,7 +18694,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -19131,7 +19129,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example1), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class Example1StrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example1, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example1>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example1IdentityDTO>, IVersionObject<long>
+    public partial class Example1StrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example1, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example1>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example1IdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private System.Guid _field1;
@@ -19319,7 +19317,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -19345,7 +19343,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example1), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class Example1UpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example1, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example1>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example1IdentityDTO>, IVersionObject<long>
+    public partial class Example1UpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example1, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example1>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example1IdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private CommonFramework.Maybe<System.Guid> _field1 = CommonFramework.Maybe<System.Guid>.Nothing;
@@ -19496,7 +19494,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -19652,7 +19650,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example2), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class Example2StrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example2, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example2>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example2IdentityDTO>, IVersionObject<long>
+    public partial class Example2StrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example2, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example2>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example2IdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private System.Guid _field1;
@@ -19810,7 +19808,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -19831,7 +19829,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example2), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class Example2UpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example2, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example2>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example2IdentityDTO>, IVersionObject<long>
+    public partial class Example2UpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example2, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example2>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example2IdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private CommonFramework.Maybe<System.Guid> _field1 = CommonFramework.Maybe<System.Guid>.Nothing;
@@ -19952,7 +19950,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -20382,7 +20380,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class HRDepartmentStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartment, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartment>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentIdentityDTO>, IVersionObject<long>
+    public partial class HRDepartmentStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartment, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartment>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private bool _active = true;
@@ -20750,7 +20748,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -20886,7 +20884,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartmentEmployeePosition), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class HRDepartmentEmployeePositionStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartmentEmployeePosition, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartmentEmployeePosition>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentEmployeePositionIdentityDTO>, IVersionObject<long>
+    public partial class HRDepartmentEmployeePositionStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartmentEmployeePosition, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartmentEmployeePosition>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentEmployeePositionIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.EmployeePositionIdentityDTO _employeePosition;
@@ -21044,7 +21042,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -21195,7 +21193,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartmentRoleEmployee), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class HRDepartmentRoleEmployeeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartmentRoleEmployee, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartmentRoleEmployee>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeIdentityDTO>, IVersionObject<long>
+    public partial class HRDepartmentRoleEmployeeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartmentRoleEmployee, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartmentRoleEmployee>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.EmployeeIdentityDTO _employee;
@@ -21353,7 +21351,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -22129,7 +22127,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Location), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class LocationStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Location, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Location>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.LocationIdentityDTO>, IVersionObject<long>
+    public partial class LocationStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Location, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Location>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.LocationIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private bool _active = true;
@@ -22392,7 +22390,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -22673,7 +22671,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnit), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class ManagementUnitStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnit, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnit>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ManagementUnitIdentityDTO>, IVersionObject<long>
+    public partial class ManagementUnitStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnit, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnit>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ManagementUnitIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO> _businessUnits = new System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO>();
@@ -22891,7 +22889,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -23042,7 +23040,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class ManagementUnitAndBusinessUnitLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkIdentityDTO>, IVersionObject<long>
+    public partial class ManagementUnitAndBusinessUnitLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.BusinessUnitIdentityDTO _businessUnit;
@@ -23215,7 +23213,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -23351,7 +23349,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class ManagementUnitAndHRDepartmentLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO>, IVersionObject<long>
+    public partial class ManagementUnitAndHRDepartmentLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.HRDepartmentIdentityDTO _hRDepartment;
@@ -23509,7 +23507,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -23785,7 +23783,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.NoSecurityObject), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class NoSecurityObjectStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.NoSecurityObject, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.NoSecurityObject>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO>, IVersionObject<long>
+    public partial class NoSecurityObjectStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.NoSecurityObject, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.NoSecurityObject>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private System.Guid _id;
@@ -23883,7 +23881,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -24004,7 +24002,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Principal), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class PrincipalStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Principal, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Principal>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.PrincipalIdentityDTO>, IVersionObject<long>
+    public partial class PrincipalStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Principal, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Principal>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.PrincipalIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private string _externalId;
@@ -24147,7 +24145,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -24260,7 +24258,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.SqlParserTestObj), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class SqlParserTestObjStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.SqlParserTestObj, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.SqlParserTestObj>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.SqlParserTestObjIdentityDTO>, IVersionObject<long>
+    public partial class SqlParserTestObjStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.SqlParserTestObj, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.SqlParserTestObj>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.SqlParserTestObjIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private System.Guid _id;
@@ -24403,7 +24401,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -24501,7 +24499,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.SqlParserTestObjContainer), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class SqlParserTestObjContainerStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.SqlParserTestObjContainer, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.SqlParserTestObjContainer>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO>, IVersionObject<long>
+    public partial class SqlParserTestObjContainerStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.SqlParserTestObjContainer, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.SqlParserTestObjContainer>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private System.Guid _id;
@@ -24629,7 +24627,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {
@@ -25095,7 +25093,7 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestImmutableObj), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestImmutableObjStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.TestImmutableObj, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.TestImmutableObj>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO>, IVersionObject<long>
+    public partial class TestImmutableObjStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.TestImmutableObj, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.TestImmutableObj>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private System.Guid _id;
@@ -25253,7 +25251,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        long IVersionObject<long>.Version
+        long Framework.Application.Domain.IVersionObject<long>.Version
         {
             get
             {

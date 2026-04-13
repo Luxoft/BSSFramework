@@ -34,7 +34,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
             {
                 var methodName = "To" + type.Name;
 
-                if (this.Configuration.Environment.MetadataProxyProvider.GetProxy(property).HasAttribute<AutoMappingAttribute>(attr => !attr.Enabled))
+                if (this.Configuration.Environment.MetadataProxyProvider.Wrap(property).HasAttribute<AutoMappingAttribute>(attr => !attr.Enabled))
                 {
                     if (this.Configuration.IsPersistentObject(type))
                     {

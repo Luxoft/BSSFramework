@@ -8,16 +8,18 @@ namespace Framework.ExtendedMetadata;
 
 public class MetadataProxyProvider(IReadOnlyDictionary<MemberInfo, ImmutableArray<Attribute>> extendedAttributes) : CustomReflectionContext, IMetadataProxyProvider
 {
-    //private readonly ConcurrentDictionary<MemberInfo, ImmutableArray<object>> cache = [];
-
-    public IMetadataProxy<T> GetProxy<T>(T value)
-        where T : ICustomAttributeProvider =>
-        new MetadataProxy<T>(value, this);
-
     public T Wrap<T>(T value)
-        where T : ICustomAttributeProvider
+        where T : class, ICustomAttributeProvider =>
+        this.TryWrap(value) ?? value;
+
+    public T? TryWrap<T>(T value)
+        where T : class, ICustomAttributeProvider
     {
-        if (value is Type type)
+        if (value is IWrappingObject { CanWrap: false })
+        {
+            return null;
+        }
+        else if (value is Type type)
         {
             return (T)(object)this.MapType(type.GetTypeInfo());
         }

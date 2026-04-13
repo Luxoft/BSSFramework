@@ -1,10 +1,11 @@
 ﻿using System.Reflection;
 
 using Framework.Core.ReflectionImpl;
+using Framework.ExtendedMetadata;
 
 namespace Framework.Projection._Extensions;
 
-internal class CollectionOfProjectionType : BaseTypeImpl
+internal class CollectionOfProjectionType : BaseTypeImpl, IWrappingObject
 {
     private readonly Type originalType;
 
@@ -19,6 +20,8 @@ internal class CollectionOfProjectionType : BaseTypeImpl
         this.elementType = this.originalType.GetGenericArguments().Single();
         this.checkCollectionBlankType = this.originalType.GetGenericTypeDefinition().MakeGenericType(typeof(object));
     }
+
+    public bool CanWrap => false;
 
     public override string Name => this.originalType.Name;
 

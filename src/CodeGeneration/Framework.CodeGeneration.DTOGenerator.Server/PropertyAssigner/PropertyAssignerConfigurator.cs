@@ -30,12 +30,12 @@ public class PropertyAssignerConfigurator<TConfiguration>(TConfiguration configu
 
         if (isEdit)
         {
-            return this.Configuration.Environment.MetadataProxyProvider.GetProxy(property).GetEditDomainObjectAttribute().FromMaybe(() => $"Edit operation for property \"{property.Name}\" in domainObject \"{propertyAssigner.DomainType.Name}\" not found");
+            return this.Configuration.Environment.MetadataProxyProvider.Wrap(property).GetEditDomainObjectAttribute().FromMaybe(() => $"Edit operation for property \"{property.Name}\" in domainObject \"{propertyAssigner.DomainType.Name}\" not found");
         }
         else
         {
-            return (this.Configuration.Environment.MetadataProxyProvider.GetProxy(property).GetViewDomainObjectAttribute()
-                 ?? this.Configuration.Environment.MetadataProxyProvider.GetProxy(propertyAssigner.DomainType).GetViewDomainObjectAttribute())
+            return (this.Configuration.Environment.MetadataProxyProvider.Wrap(property).GetViewDomainObjectAttribute()
+                 ?? this.Configuration.Environment.MetadataProxyProvider.Wrap(propertyAssigner.DomainType).GetViewDomainObjectAttribute())
 
                         .FromMaybe(() => $"View operation for property \"{property.Name}\" in domainObject \"{propertyAssigner.DomainType.Name}\" not found");
         }

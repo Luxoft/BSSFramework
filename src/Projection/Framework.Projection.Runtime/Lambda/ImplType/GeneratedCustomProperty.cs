@@ -3,11 +3,12 @@
 using CommonFramework;
 
 using Framework.Core.ReflectionImpl;
+using Framework.ExtendedMetadata;
 using Framework.Projection._ImplType;
 
 namespace Framework.Projection.Lambda.ImplType;
 
-internal class GeneratedCustomProperty : BasePropertyInfoImpl
+internal class GeneratedCustomProperty : BasePropertyInfoImpl, IWrappingObject
 {
     private readonly ProjectionLambdaEnvironment environment;
 
@@ -34,6 +35,7 @@ internal class GeneratedCustomProperty : BasePropertyInfoImpl
             this.setMethod = new PropertyMethodInfoImpl();
         }
     }
+    public bool CanWrap => false;
 
     public override Type PropertyType => this.lazyPropertyType.Value;
 

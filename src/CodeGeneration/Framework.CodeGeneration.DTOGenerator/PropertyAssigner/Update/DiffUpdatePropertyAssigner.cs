@@ -58,7 +58,7 @@ public class DiffUpdatePropertyAssigner<TConfiguration> : GeneratorConfiguration
         if (currentSourcePropertyRef == null) throw new ArgumentNullException(nameof(currentSourcePropertyRef));
         if (targetPropertyRef == null) throw new ArgumentNullException(nameof(targetPropertyRef));
 
-        var isSecurity = this.Configuration.Environment.MetadataProxyProvider.GetProxy(property).IsSecurity();
+        var isSecurity = this.Configuration.Environment.MetadataProxyProvider.Wrap(property).IsSecurity();
 
         if (this.Configuration.IsIdentityOrVersionProperty(property))
         {

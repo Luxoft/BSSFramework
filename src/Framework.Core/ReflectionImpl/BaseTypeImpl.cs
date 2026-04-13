@@ -42,7 +42,7 @@ public class BaseTypeImpl : Type
 
     public override MethodInfo[] GetMethods(BindingFlags bindingAttr) => throw new NotImplementedException();
 
-    public override FieldInfo GetField(string name, BindingFlags bindingAttr) => throw new NotImplementedException();
+    public override FieldInfo? GetField(string name, BindingFlags bindingAttr) => throw new NotImplementedException();
 
     public override FieldInfo[] GetFields(BindingFlags bindingAttr) => throw new NotImplementedException();
 
@@ -91,9 +91,9 @@ public class BaseTypeImpl : Type
 
     public override string Namespace => throw new NotImplementedException();
 
-    public override string AssemblyQualifiedName => throw new NotImplementedException();
+    public override string? AssemblyQualifiedName => throw new NotImplementedException();
 
-    public override Type BaseType => throw new NotImplementedException();
+    public override Type? BaseType => throw new NotImplementedException();
 
     public override object[] GetCustomAttributes(Type attributeType, bool inherit) => throw new NotImplementedException();
 

@@ -12,10 +12,6 @@ internal class ProjectionCustomPropertyBuilder : IProjectionCustomProperty
         this.Attributes = customProperty.Attributes.ToList();
     }
 
-    public ProjectionCustomPropertyBuilder()
-    {
-    }
-
 
     public string Name { get; set; }
 
@@ -23,9 +19,9 @@ internal class ProjectionCustomPropertyBuilder : IProjectionCustomProperty
 
     public TypeReferenceBase Type { get; set; }
 
-    public IReadOnlyList<string> Fetchs { get; set; } = [];
+    public IReadOnlyList<string> Fetchs { get; set; }
 
-    public List<Attribute> Attributes { get; set; } = [];
+    public List<Attribute> Attributes { get; set; }
 
 
     IReadOnlyList<Attribute> IProjectionAttributeProvider.Attributes => this.Attributes;

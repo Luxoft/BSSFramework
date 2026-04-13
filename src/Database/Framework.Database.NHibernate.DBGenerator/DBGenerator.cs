@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-using CommonFramework;
+﻿using CommonFramework;
 
 using Framework.Database.Metadata;
 using Framework.Database.NHibernate._MappingSettings;

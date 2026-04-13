@@ -68,7 +68,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
             yield return new ValidatorPairExpr(typeof(SelfClassValidator<>).ToTypeReference(this.DomainType).ToObjectCreateExpression(), null);
         }
 
-        foreach (var attr in this.Configuration.Environment.MetadataProxyProvider.GetProxy(this.DomainType).GetCustomAttributes<ClassValidatorAttribute>())
+        foreach (var attr in this.Configuration.Environment.MetadataProxyProvider.Wrap(this.DomainType).GetCustomAttributes<ClassValidatorAttribute>())
         {
             if (!this.IsManyPropertyDynamicClassAttribute(attr))
             {
@@ -108,7 +108,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
             yield return expandedClassValidator;
         }
 
-        var propMetadata = this.Configuration.Environment.MetadataProxyProvider.GetProxy(property);
+        var propMetadata = this.Configuration.Environment.MetadataProxyProvider.Wrap(property);
 
         foreach (var attr in propMetadata.TryGetRestrictionValidatorAttributes().Concat(propMetadata.GetCustomAttributes<PropertyValidatorAttribute>()))
         {
@@ -552,7 +552,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
     private IReadOnlyDictionary<PropertyInfo, ValidatorExpr> ConvertClassAttributes()
     {
-        var request = from attr in this.Configuration.Environment.MetadataProxyProvider.GetProxy(this.DomainType).GetCustomAttributes<ClassValidatorAttribute>()
+        var request = from attr in this.Configuration.Environment.MetadataProxyProvider.Wrap(this.DomainType).GetCustomAttributes<ClassValidatorAttribute>()
 
                       where this.IsManyPropertyDynamicClassAttribute(attr)
 

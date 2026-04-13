@@ -27,7 +27,7 @@ public class PropertyCodeTypeReferenceService<TConfiguration>(TConfiguration con
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        return this.Configuration.Environment.MetadataProxyProvider.GetProxy(property).IsSecurity();
+        return this.Configuration.Environment.MetadataProxyProvider.Wrap(property).IsSecurity();
     }
 
     public virtual bool IsCollection(PropertyInfo property) => property.PropertyType.GetCollectionElementType().Maybe(this.IsDomainType);

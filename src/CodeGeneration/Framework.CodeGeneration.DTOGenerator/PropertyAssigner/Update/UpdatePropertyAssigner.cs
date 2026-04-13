@@ -27,7 +27,7 @@ public class UpdatePropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> s
         if (sourcePropertyRef == null) throw new ArgumentNullException(nameof(sourcePropertyRef));
         if (targetPropertyRef == null) throw new ArgumentNullException(nameof(targetPropertyRef));
 
-        var isSecurity = this.Configuration.Environment.MetadataProxyProvider.GetProxy(property).IsSecurity();
+        var isSecurity = this.Configuration.Environment.MetadataProxyProvider.Wrap(property).IsSecurity();
 
         if (this.Configuration.IsCollectionProperty(property))
         {

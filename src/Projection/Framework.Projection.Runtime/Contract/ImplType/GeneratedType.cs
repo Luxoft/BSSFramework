@@ -8,12 +8,13 @@ using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.Core;
 using Framework.Core.ReflectionImpl;
 using Framework.Database.Mapping;
+using Framework.ExtendedMetadata;
 using Framework.Projection._ImplType;
 using Framework.Validation;
 
 namespace Framework.Projection.Contract.ImplType;
 
-internal class GeneratedType : BaseTypeImpl
+internal class GeneratedType : BaseTypeImpl, IWrappingObject
 {
     private readonly ProjectionContractEnvironment environment;
 
@@ -54,6 +55,7 @@ internal class GeneratedType : BaseTypeImpl
         this.customAttributes = this.GetCustomAttributes();
     }
 
+    public bool CanWrap => false;
 
     public override string FullName => $"{this.Namespace}.{this.Name}";
 
@@ -67,7 +69,7 @@ internal class GeneratedType : BaseTypeImpl
 
     public override Type BaseType => this.isPersistent ? this.environment.PersistentDomainObjectBaseType : this.environment.DomainObjectBaseType;
 
-    public override Assembly Assembly { get; } = null;
+    public override Assembly Assembly => this.environment.Assembly;
 
     public override Module Module { get; } = typeof(GeneratedType).Module;
 

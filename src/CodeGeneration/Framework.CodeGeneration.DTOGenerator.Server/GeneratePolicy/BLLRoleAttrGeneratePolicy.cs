@@ -12,7 +12,7 @@ public class AttributeGeneratePolicy(IMetadataProxyProvider metadata) : IGenerat
 {
     public virtual bool Used(Type domainType, RoleFileType fileType)
     {
-        var domainTypeProxy = metadata.GetProxy(domainType);
+        var domainTypeProxy = metadata.Wrap(domainType);
 
         if (fileType == BaseFileType.StrictDTO)
         {

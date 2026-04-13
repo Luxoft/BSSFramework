@@ -16,22 +16,6 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantInternal(systemConstantIdentity, evaluateData));
         }
         
-        /// <summary>
-        /// Get SystemConstant (FullDTO) by code
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        public virtual Framework.Configuration.Generated.DTO.SystemConstantFullDTO GetFullSystemConstantByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string systemConstantCode)
-        {
-            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantByCodeInternal(systemConstantCode, evaluateData));
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.SystemConstantFullDTO GetFullSystemConstantByCodeInternal(string systemConstantCode, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Configuration.Domain.SystemConstant domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, systemConstantCode, true, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.SystemConstant>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
-        }
-        
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantFullDTO GetFullSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(SecuritySystem.SecurityRule.View);
@@ -94,22 +78,6 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichSystemConstantInternal(systemConstantIdentity, evaluateData));
         }
         
-        /// <summary>
-        /// Get SystemConstant (RichDTO) by code
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        public virtual Framework.Configuration.Generated.DTO.SystemConstantRichDTO GetRichSystemConstantByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string systemConstantCode)
-        {
-            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichSystemConstantByCodeInternal(systemConstantCode, evaluateData));
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.SystemConstantRichDTO GetRichSystemConstantByCodeInternal(string systemConstantCode, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Configuration.Domain.SystemConstant domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, systemConstantCode, true, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.SystemConstant>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
-        }
-        
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantRichDTO GetRichSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(SecuritySystem.SecurityRule.View);
@@ -124,22 +92,6 @@
         public virtual Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO GetSimpleSystemConstant([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity)
         {
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantInternal(systemConstantIdentity, evaluateData));
-        }
-        
-        /// <summary>
-        /// Get SystemConstant (SimpleDTO) by code
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        public virtual Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO GetSimpleSystemConstantByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string systemConstantCode)
-        {
-            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantByCodeInternal(systemConstantCode, evaluateData));
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO GetSimpleSystemConstantByCodeInternal(string systemConstantCode, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Configuration.Domain.SystemConstant domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, systemConstantCode, true, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.SystemConstant>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO GetSimpleSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -202,22 +154,6 @@
         public virtual Framework.Configuration.Generated.DTO.SystemConstantVisualDTO GetVisualSystemConstant([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity)
         {
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantInternal(systemConstantIdentity, evaluateData));
-        }
-        
-        /// <summary>
-        /// Get SystemConstant (VisualDTO) by code
-        /// </summary>
-        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
-        public virtual Framework.Configuration.Generated.DTO.SystemConstantVisualDTO GetVisualSystemConstantByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string systemConstantCode)
-        {
-            return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantByCodeInternal(systemConstantCode, evaluateData));
-        }
-        
-        protected virtual Framework.Configuration.Generated.DTO.SystemConstantVisualDTO GetVisualSystemConstantByCodeInternal(string systemConstantCode, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
-        {
-            Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(SecuritySystem.SecurityRule.View);
-            Framework.Configuration.Domain.SystemConstant domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, systemConstantCode, true, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.SystemConstant>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
-            return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantVisualDTO GetVisualSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)

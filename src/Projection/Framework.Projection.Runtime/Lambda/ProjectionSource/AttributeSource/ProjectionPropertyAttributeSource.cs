@@ -127,7 +127,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
     protected virtual DomainObjectAccessAttribute? TryCreateViewAccessAttribute() =>
         this.ProjectionValue
             .Path
-            .SelectMany(prop => this.Environment.MetadataProxyProvider.GetProxy(prop).GetDomainObjectAccessAttributes())
+            .SelectMany(prop => this.Environment.MetadataProxyProvider.Wrap(prop).GetDomainObjectAccessAttributes())
             .Where(attr => !(attr is EditDomainObjectAttribute))
             .SingleMaybe()
             .GetValueOrDefault();

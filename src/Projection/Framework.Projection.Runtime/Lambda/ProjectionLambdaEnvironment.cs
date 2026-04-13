@@ -1,5 +1,4 @@
 ﻿using System.Collections.Immutable;
-using System.ComponentModel;
 
 using CommonFramework;
 
@@ -57,20 +56,9 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
         return TypeResolverHelper.Create(this.projections.ToDictionary(projection => projection, this.ProjectionTypeResolver.Resolve));
     }
 
-    public Type GetProjectionTypeByRole(Type sourceType, ProjectionRole role)
+    public Type GetSecurityProjectionType(Type sourceType)
     {
-        if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
-        if (!Enum.IsDefined(typeof(ProjectionRole), role))
-            throw new InvalidEnumArgumentException(nameof(role), (int)role, typeof(ProjectionRole));
-
-        return this.ProjectionTypeResolver.Resolve(this.projections.GetProjectionByRole(sourceType, role));
-    }
-
-    public Type? GetSecurityProjectionType(Type sourceType)
-    {
-        if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
-
-        return this.ProjectionTypeResolver.TryResolve(this.projections.GetSecurityProjection(sourceType));
+        return this.ProjectionTypeResolver.Resolve(this.projections.TryGetSecurityProjection(sourceType)!);
     }
 
     /// <summary>

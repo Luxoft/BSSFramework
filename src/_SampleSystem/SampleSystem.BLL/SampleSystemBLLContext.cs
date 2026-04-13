@@ -3,8 +3,6 @@ using Framework.Authorization.BLL;
 using Framework.BLL;
 using Framework.BLL.Services;
 using Framework.Configuration.BLL;
-using Framework.Core;
-using Framework.Core.TypeResolving;
 using Framework.Tracking;
 using Framework.Validation;
 
@@ -25,7 +23,7 @@ namespace SampleSystem.BLL;
 
 public partial class SampleSystemBLLContext(
     IServiceProvider serviceProvider,
-    [FromKeyedServices("BLL")] IEventOperationSender operationSender,
+    [FromKeyedServices(nameof(BLL))] IEventOperationSender operationSender,
     IAccessDeniedExceptionService accessDeniedExceptionService,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
     ITrackingService<PersistentDomainObjectBase> trackingService,

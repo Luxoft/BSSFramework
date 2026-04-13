@@ -4,9 +4,9 @@ namespace Framework.ExtendedMetadata;
 
 public interface IMetadataProxyProvider
 {
-    IMetadataProxy<T> GetProxy<T>(T value)
-        where T : ICustomAttributeProvider;
-
     T Wrap<T>(T value)
-        where T : ICustomAttributeProvider;
+        where T : class, ICustomAttributeProvider;
+
+    T? TryWrap<T>(T value)
+        where T : class, ICustomAttributeProvider;
 }

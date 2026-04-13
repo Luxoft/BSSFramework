@@ -1185,56 +1185,6 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.DomainObjectBase), Framework.Projection.ProjectionRole.Default)]
-    public abstract partial class CustomUnpersitentContainerBase : SampleSystem.Domain.DomainObjectBase
-    {
-        
-        protected CustomUnpersitentContainerBase()
-        {
-        }
-        
-        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
-        public abstract System.Collections.Generic.List<SampleSystem.Domain.Projections.TestLocation> Locations
-        {
-            get;
-            set;
-        }
-        
-        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
-        public abstract Framework.Core.Period[] PeriodArray
-        {
-            get;
-            set;
-        }
-        
-        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
-        public abstract SampleSystem.Domain.Projections.TestBusinessUnit TestBU
-        {
-            get;
-            set;
-        }
-        
-        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
-        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
-        public abstract string TestString
-        {
-            get;
-            set;
-        }
-    }
-    
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.DomainObjectBase), Framework.Projection.ProjectionRole.Default)]
-    public partial class UnpersitentContainer : SampleSystem.Domain.Projections.CustomUnpersitentContainerBase
-    {
-        
-        protected UnpersitentContainer()
-        {
-        }
-    }
-    
     [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee))]
     [Framework.Database.Mapping.TableAttribute(Name="Employee")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee), Framework.Projection.ProjectionRole.Default)]

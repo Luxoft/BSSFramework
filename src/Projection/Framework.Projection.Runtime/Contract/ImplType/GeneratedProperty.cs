@@ -4,12 +4,13 @@ using CommonFramework;
 
 using Framework.Core;
 using Framework.Core.ReflectionImpl;
+using Framework.ExtendedMetadata;
 using Framework.Projection._Extensions;
 using Framework.Projection._ImplType;
 
 namespace Framework.Projection.Contract.ImplType;
 
-internal class GeneratedProperty : BasePropertyInfoImpl
+internal class GeneratedProperty : BasePropertyInfoImpl, IWrappingObject
 {
     private readonly ProjectionContractEnvironment environment;
 
@@ -43,6 +44,8 @@ internal class GeneratedProperty : BasePropertyInfoImpl
             return propertyProjectionType ?? contractProperty.PropertyType;
         });
     }
+
+    public bool CanWrap => false;
 
 
     public override Type PropertyType => this.lazyPropertyType.Value;

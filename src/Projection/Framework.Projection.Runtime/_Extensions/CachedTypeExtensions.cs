@@ -5,7 +5,7 @@ using Framework.Core;
 
 namespace Framework.Projection._Extensions;
 
-internal static class CachedTypeExtensions
+public static class CachedTypeExtensions
 {
     private static readonly IDictionaryCache<(Type type, Type[] args), Type> MakeGenericTypeCache =
         new DictionaryCache<(Type type, Type[] args), Type>(

@@ -2,11 +2,12 @@
 
 using Framework.Core;
 using Framework.Core.ReflectionImpl;
+using Framework.ExtendedMetadata;
 using Framework.Projection._Extensions;
 
 namespace Framework.Projection.Contract.ImplType;
 
-internal class GeneratedField : BaseFieldInfoImpl
+internal class GeneratedField : BaseFieldInfoImpl, IWrappingObject
 {
     private readonly ProjectionContractEnvironment environment;
 
@@ -25,6 +26,8 @@ internal class GeneratedField : BaseFieldInfoImpl
 
         this.FieldType = this.property.PropertyType.IsCollection() ? typeof(ICollection<>).CachedMakeGenericType(this.property.PropertyType.GetCollectionElementType()) : this.property.PropertyType;
     }
+
+    public bool CanWrap => false;
 
     public override Type FieldType { get; }
 

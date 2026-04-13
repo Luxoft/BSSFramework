@@ -6,10 +6,11 @@ using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.Core;
 
 using Framework.Core.ReflectionImpl;
+using Framework.ExtendedMetadata;
 
 namespace Framework.Projection._ImplType;
 
-internal class ExplicitProperty : BasePropertyInfoImpl
+internal class ExplicitProperty : BasePropertyInfoImpl, IWrappingObject
 {
     internal readonly PropertyInfo InterfaceProp;
 
@@ -29,6 +30,7 @@ internal class ExplicitProperty : BasePropertyInfoImpl
         this.PropertyType = propertyType ?? throw new ArgumentNullException(nameof(propertyType));
     }
 
+    public bool CanWrap => false;
 
     public override Type PropertyType { get; }
 

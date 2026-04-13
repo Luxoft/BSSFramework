@@ -13,6 +13,7 @@ using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.Core;
 using Framework.Database;
 using Framework.FileGeneration.Configuration;
+
 using SecuritySystem;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
@@ -42,7 +43,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
     protected abstract bool IsEdit { get; }
 
-    protected virtual TBLLRoleAttribute Attribute => this.Configuration.Environment.MetadataProxyProvider.GetProxy(this.DomainType).GetCustomAttribute<TBLLRoleAttribute>()
+    protected virtual TBLLRoleAttribute Attribute => this.Configuration.Environment.MetadataProxyProvider.Wrap(this.DomainType).GetCustomAttribute<TBLLRoleAttribute>()
                                                          .FromMaybe(() =>
                                                                         $"Attr {typeof(TBLLRoleAttribute)} not found for type {this.DomainType.FullName}"); // ?? this.GetDefaultAttribute();
 

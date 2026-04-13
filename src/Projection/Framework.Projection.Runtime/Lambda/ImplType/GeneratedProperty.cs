@@ -3,11 +3,12 @@
 using CommonFramework;
 
 using Framework.Core.ReflectionImpl;
+using Framework.ExtendedMetadata;
 using Framework.Projection._ImplType;
 
 namespace Framework.Projection.Lambda.ImplType;
 
-internal class GeneratedProperty : BasePropertyInfoImpl
+internal class GeneratedProperty : BasePropertyInfoImpl, IWrappingObject
 {
     private readonly ProjectionLambdaEnvironment environment;
 
@@ -31,9 +32,12 @@ internal class GeneratedProperty : BasePropertyInfoImpl
 
         if (this.IsIdentity)
         {
-            this.getMethod = new PropertyMethodInfoImpl(this.environment.IdentityProperty.GetGetMethod());
+            this.getMethod = new PropertyMethodInfoImpl(this.environment.IdentityProperty.GetGetMethod()!);
         }
     }
+
+    public bool CanWrap => false;
+
 
     public bool IsIdentity => this.projectionProperty.Name == this.environment.IdentityProperty.Name;
 
@@ -51,13 +55,13 @@ internal class GeneratedProperty : BasePropertyInfoImpl
 
     public override object[] GetCustomAttributes(Type attributeType, bool inherit) => (object[])this.projectionProperty.Attributes.Where(attributeType.IsInstanceOfType).ToArray(attributeType);
 
-    public override object[] GetCustomAttributes(bool inherit) => this.projectionProperty.Attributes.ToArray();
+    public override object[] GetCustomAttributes(bool inherit) => this.projectionProperty.Attributes.ToArray<object>();
 
     public override ParameterInfo[] GetIndexParameters() => []; // this.sourceProperty.GetIndexParameters();
 
     public override MethodInfo GetGetMethod(bool nonPublic) => this.getMethod;
 
-    public override MethodInfo GetSetMethod(bool nonPublic) => null; //new PropertyMethodInfoImpl();
+    public override MethodInfo? GetSetMethod(bool nonPublic) => null; //new PropertyMethodInfoImpl();
 
     public override string ToString() => $"GeneratedProperty: {this.Name}";
 }

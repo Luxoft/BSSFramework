@@ -1,8 +1,6 @@
 ﻿using System.Reflection;
 
 using Framework.BLL.Services;
-using Framework.Core.TypeResolving;
-using Framework.Database.Metadata;
 using Framework.ExtendedMetadata;
 using Framework.Projection._ImplType;
 using Framework.Projection.Lambda.ProjectionSource._Base;

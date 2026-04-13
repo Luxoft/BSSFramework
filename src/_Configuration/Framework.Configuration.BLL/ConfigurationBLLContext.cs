@@ -1,5 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Frozen;
+﻿using System.Collections.Frozen;
 using System.Collections.Immutable;
 
 using CommonFramework;
@@ -53,8 +52,6 @@ public partial class ConfigurationBLLContext(
     accessDeniedExceptionService,
     hierarchicalObjectExpanderFactory)
 {
-    private readonly ConcurrentDictionary<TypeNameIdentity, DomainType?> domainTypeCache = [];
-
     public ITrackingService<PersistentDomainObjectBase> TrackingService { get; } = trackingService;
 
     public IRootSecurityService SecurityService { get; } = securityService;
@@ -74,8 +71,6 @@ public partial class ConfigurationBLLContext(
 
     public IDomainObjectEventMetadata EventOperationSource { get; } = eventOperationSource;
 
-    private ImmutableList<TargetSystem> TargetSystems => field ??= [..this.Logics.TargetSystem.GetUnsecureQueryable()];
-
     public FrozenDictionary<PersistentTargetSystemInfo, ITargetSystemService> TargetSystemServices =>
 
         field ??= targetSystemInfoList.Join(
@@ -90,13 +85,13 @@ public partial class ConfigurationBLLContext(
                                           })
                                       .ToFrozenDictionary(pair => pair.tsi, pair => pair.Item2);
 
+    private ImmutableList<TargetSystem> TargetSystems => field ??= [.. this.Logics.TargetSystem.GetUnsecureQueryable()];
 
-    public DomainType? TryGetDomainType(TypeNameIdentity typeNameIdentity) =>
-        this.domainTypeCache.GetOrAdd(
-            typeNameIdentity,
-            _ => this.TargetSystems
-                     .SelectMany(ts => ts.DomainTypes)
-                     .SingleOrDefault(dt => dt.Namespace == typeNameIdentity.Namespace && dt.Name == typeNameIdentity.Name));
+    private FrozenDictionary<TypeNameIdentity, DomainType> DomainTypeDict => field ??= this.TargetSystems
+                                                                                           .SelectMany(ts => ts.DomainTypes)
+                                                                                           .ToFrozenDictionary(dt => (TypeNameIdentity)dt);
+
+    public DomainType? TryGetDomainType(TypeNameIdentity typeNameIdentity) => this.DomainTypeDict.GetValueOrDefault(typeNameIdentity);
 
     public DomainType GetDomainType(TypeNameIdentity typeNameIdentity) =>
 

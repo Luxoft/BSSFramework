@@ -61,10 +61,6 @@ public static class ServiceCollectionExtensions
 
             services.AddSingleton(typeof(RuntimeDomainEventDTOConverter<,,>));
 
-            //services
-            //    .AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<
-            //        Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>();
-
             return services;
         }
 

@@ -10,7 +10,7 @@ public class DomainTypeMap : ConfigurationBaseMap<DomainType>
         this.Map(x => x.Name)
             .UniqueKey("UIX_name_nameSpace_targetSystemDomainType")
             .Not.Nullable();
-        this.Map(x => x.NameSpace)
+        this.Map(x => x.Namespace)
             .UniqueKey("UIX_name_nameSpace_targetSystemDomainType");
         this.References(x => x.TargetSystem).Column($"{nameof(DomainType.TargetSystem)}Id")
             .UniqueKey("UIX_name_nameSpace_targetSystemDomainType").Not.Nullable();

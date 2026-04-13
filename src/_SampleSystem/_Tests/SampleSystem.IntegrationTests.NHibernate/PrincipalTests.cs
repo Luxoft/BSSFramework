@@ -1,4 +1,5 @@
 ﻿using Framework.Application.Events;
+using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
 using Framework.Core;
 
@@ -36,7 +37,9 @@ public class PrincipalTests : TestBase
 
         var configFacade = this.GetConfigurationControllerEvaluator();
 
-        var domainTypeIdentity = configFacade.Evaluate(c => c.GetSimpleDomainTypeByPath("Authorization/Principal")).Identity;
+        var domainTypeIdentity = configFacade.Evaluate(c => c.GetSimpleDomainTypes())
+                                             .Single(dt => dt.Namespace == typeof(Principal).Namespace && dt.Name == nameof(Principal))
+                                             .Identity;
 
         var domainType = configFacade.Evaluate(c => c.GetRichDomainType(domainTypeIdentity));
 
@@ -75,7 +78,9 @@ public class PrincipalTests : TestBase
 
         var configFacade = this.GetConfigurationControllerEvaluator();
 
-        var domainTypeIdentity = configFacade.Evaluate(c => c.GetSimpleDomainTypeByPath("Authorization/Permission")).Identity;
+        var domainTypeIdentity = configFacade.Evaluate(c => c.GetSimpleDomainTypes())
+                                             .Single(dt => dt.Namespace == typeof(Permission).Namespace && dt.Name == nameof(Permission))
+                                             .Identity;
 
         var domainType = configFacade.Evaluate(c => c.GetRichDomainType(domainTypeIdentity));
 
@@ -95,28 +100,4 @@ public class PrincipalTests : TestBase
         this.GetIntegrationEvents<PermissionSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Permission.Id == permissionIdentity.Id);
         this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
     }
-
-    /// <summary>
-    /// #IADFRAME-1300
-    /// Если в основной системе есть объект Principal c полей ExternalId:string
-    /// То при генерации базы данных аудита получается PrincipalAudit.ExternalId : guid
-    /// Так как такая точно таблица и поле есть в Auth
-    /// </summary>
-    //[TestMethod]
-    //public void SaveDomainPrincipalWithCustomExternalId_PrincipalSavedAndCreateAuditRecord()
-    //{
-    //    // Arrange
-    //    var expected = StringUtil.RandomString("ExternalId_", 50);
-    //    var model = new PrincipalStrictDTO
-    //    {
-    //        ExternalId = expected
-    //    };
-
-    //    // Act
-    //    var principalId = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePrincipal(model);
-    //    var principal = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalId);
-
-    //    // Assert
-    //    principal.ExternalId.Should().Be(expected);
-    //}
 }

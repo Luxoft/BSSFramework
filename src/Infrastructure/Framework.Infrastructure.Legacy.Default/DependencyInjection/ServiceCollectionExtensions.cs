@@ -7,20 +7,19 @@ using Framework.Authorization.Generated.DTO;
 using Framework.BLL.DependencyInjection;
 using Framework.BLL.DTOMapping.DTOMapper;
 using Framework.BLL.Events.SubscriptionManager;
-using Framework.BLL.Services;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Jobs;
 using Framework.Configuration.BLL.Notification;
 using Framework.Configuration.Domain;
 using Framework.Configuration.Generated.DTO;
 using Framework.Core;
+using Framework.Core.Serialization;
 using Framework.Infrastructure.LocalDBEvents;
 using Framework.Infrastructure.SubscriptionService;
 
 using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem;
-
 using SecuritySystem.DependencyInjection;
 
 namespace Framework.Infrastructure.DependencyInjection;
@@ -47,8 +46,6 @@ public static class ServiceCollectionExtensions
 
             services.AddScoped<IObjectModificationProcessor, LocalDbObjectModificationProcessor>();
 
-            services.AddScoped<IRootSecurityService, RootSecurityService>();
-
             services.AddAuthorizationBLL();
             services.AddConfigurationBLL();
             services.AddConfigurationNamedLocks();
@@ -64,10 +61,6 @@ public static class ServiceCollectionExtensions
 
             services.AddSingleton(typeof(RuntimeDomainEventDTOConverter<,,>));
 
-            //services
-            //    .AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<
-            //        Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>();
-
             return services;
         }
 
@@ -76,6 +69,7 @@ public static class ServiceCollectionExtensions
         private IServiceCollection AddConfigurationBLL() =>
             services
                 .AddBLLSystem<IConfigurationBLLContext, ConfigurationBLLContext>()
+                .AddKeyedSingleton<ISerializerFactory<string>>(nameof(SystemConstant), SerializerFactory.Default)
 
                 .AddScoped<IMessageSender<Notification.Domain.Notification>, LocalDbNotificationMessageSender>();
 

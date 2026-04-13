@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+
 using Framework.Core;
 using Framework.Projection;
 
@@ -30,7 +31,7 @@ public static class DomainMetadataBaseExtensions
                select type;
     }
 
-    public static IEnumerable<Type> GetModelTypes(this IDomainMetadata domainMetadata, Type domainType, Type modelType)
+    public static IEnumerable<Type> GetModelTypes(this IDomainMetadata domainMetadata, Type domainType, Type? modelType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 

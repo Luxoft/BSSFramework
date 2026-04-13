@@ -4,12 +4,13 @@ using CommonFramework;
 
 using Framework.Core;
 using Framework.Core.ReflectionImpl;
+using Framework.ExtendedMetadata;
 using Framework.Projection._Extensions;
 using Framework.Projection._ImplType;
 
 namespace Framework.Projection.Contract.ImplType;
 
-internal class GeneratedProperty : BasePropertyInfoImpl
+internal class GeneratedProperty : BasePropertyInfoImpl, IWrappingObject
 {
     private readonly ProjectionContractEnvironment environment;
 
@@ -33,16 +34,18 @@ internal class GeneratedProperty : BasePropertyInfoImpl
         this.ReflectedType = reflectedType;
 
         this.lazyPropertyType = LazyHelper.Create(() =>
-                                                  {
-                                                      var elementType = contractProperty.PropertyType.GetCollectionElementTypeOrSelf();
+        {
+            var elementType = contractProperty.PropertyType.GetCollectionElementTypeOrSelf();
 
-                                                      var elementProjectionType = (GeneratedType)this.environment.ContractTypeResolver.TryResolve(elementType);
+            var elementProjectionType = (GeneratedType?)this.environment.ContractTypeResolver.TryResolve(elementType);
 
-                                                      var propertyProjectionType = elementProjectionType.Maybe(type => contractProperty.PropertyType.IsCollection() ? typeof(IEnumerable<>).CachedMakeGenericType(type) : type);
+            var propertyProjectionType = elementProjectionType.Maybe(type => contractProperty.PropertyType.IsCollection() ? typeof(IEnumerable<>).CachedMakeGenericType(type) : type);
 
-                                                      return propertyProjectionType ?? contractProperty.PropertyType;
-                                                  });
+            return propertyProjectionType ?? contractProperty.PropertyType;
+        });
     }
+
+    public bool CanWrap => false;
 
 
     public override Type PropertyType => this.lazyPropertyType.Value;
@@ -53,15 +56,15 @@ internal class GeneratedProperty : BasePropertyInfoImpl
 
     public override string Name => this.ContractProperty.Name;
 
-    public override object[] GetCustomAttributes(Type attributeType, bool inherit) => (object[])new[] { this.ContractProperty, this.sourceProperty }.SelectMany(prop => prop.GetCustomAttributes(attributeType, inherit)).ToArray(attributeType);
+    public override object[] GetCustomAttributes(Type attributeType, bool inherit) => (object[])new[] { this.ContractProperty, this.environment.MetadataProxyProvider.Wrap(this.sourceProperty) }.SelectMany(prop => prop.GetCustomAttributes(attributeType, inherit)).ToArray(attributeType);
 
-    public override object[] GetCustomAttributes(bool inherit) => new[] { this.ContractProperty, this.sourceProperty }.SelectMany(prop => prop.GetCustomAttributes(inherit)).Cast<Attribute>().ToArray();
+    public override object[] GetCustomAttributes(bool inherit) => new[] { this.ContractProperty, this.environment.MetadataProxyProvider.Wrap(this.sourceProperty) }.SelectMany(prop => prop.GetCustomAttributes(inherit)).ToArray();
 
     public override ParameterInfo[] GetIndexParameters() => this.ContractProperty.GetIndexParameters();
 
     public override MethodInfo GetGetMethod(bool nonPublic) => new PropertyMethodInfoImpl();
 
-    public override MethodInfo GetSetMethod(bool nonPublic) => null; //new PropertyMethodInfoImpl();
+    public override MethodInfo? GetSetMethod(bool nonPublic) => null;
 
     public override string ToString() => $"GeneratedProperty: {this.Name}";
 }

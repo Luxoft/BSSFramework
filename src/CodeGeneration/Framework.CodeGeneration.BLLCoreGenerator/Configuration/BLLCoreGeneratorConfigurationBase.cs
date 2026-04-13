@@ -78,12 +78,10 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
     {
         var projectionTypes = from projectionEnvironment in this.Environment.ProjectionEnvironments
 
-                              from type in projectionEnvironment.Assembly.Types
+                              from type in projectionEnvironment.Assembly.GetTypes()
 
                               where this.IsPersistentObject(type)
-                                    && this.Environment.ExtendedMetadata.HasAttribute<ProjectionAttribute>(
-                                        type,
-                                        attr => attr.Role == ProjectionRole.Default)
+                                    && this.Environment.MetadataProxyProvider.Wrap(type).HasAttribute<ProjectionAttribute>(attr => attr.Role == ProjectionRole.Default)
 
                               select type;
 
@@ -94,7 +92,7 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
 
         from domainType in this.DomainTypes
 
-        where this.Environment.ExtendedMetadata.HasAttribute<BLLRoleAttribute>(domainType)
+        where this.Environment.MetadataProxyProvider.Wrap(domainType).HasAttribute<BLLRoleAttribute>()
 
         select domainType;
 
@@ -142,27 +140,27 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
     public CodeTypeReference BLLFactoryInterfaceTypeReference => this.GetCodeTypeReference(null, FileType.BLLFactoryContainerInterface);
 
 
-    public virtual Type? FilterModelType { get; }
+    public virtual Type? FilterModelType { get; } = null;
 
-    public virtual Type? ODataFilterModelType { get; }
+    public virtual Type? ODataFilterModelType { get; } = null;
 
-    public virtual Type? ContextFilterModelType { get; }
+    public virtual Type? ContextFilterModelType { get; } = null;
 
-    public virtual Type? ODataContextFilterModelType { get; }
+    public virtual Type? ODataContextFilterModelType { get; } = null;
 
-    public virtual Type? CreateModelType { get; }
+    public virtual Type? CreateModelType { get; } = null;
 
-    public virtual Type? FormatModelType { get; }
-
-    /// <inheritdoc />
-    public virtual Type? ChangeModelType { get; }
+    public virtual Type? FormatModelType { get; } = null;
 
     /// <inheritdoc />
-    public virtual Type? MassChangeModelType { get; }
+    public virtual Type? ChangeModelType { get; } = null;
 
-    public virtual Type? ExtendedModelType { get; }
+    /// <inheritdoc />
+    public virtual Type? MassChangeModelType { get; } = null;
 
-    public virtual Type? IntegrationSaveModelType { get; }
+    public virtual Type? ExtendedModelType { get; } = null;
+
+    public virtual Type? IntegrationSaveModelType { get; } = null;
 
     public virtual CodeExpression GetSecurityService(CodeExpression contextExpr) => contextExpr.ToPropertyReference(nameof(ISecurityServiceContainer<>.SecurityService));
 }

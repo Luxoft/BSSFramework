@@ -3,7 +3,6 @@ using System.Reflection;
 
 using CommonFramework;
 
-using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.Core;
 
 using Framework.Projection.Lambda._Extensions;
@@ -29,11 +28,11 @@ internal class ProjectionPropertyBuilder : IProjectionProperty
         this.VirtualExplicitInterfaceProperty = projectionProperty.VirtualExplicitInterfaceProperty;
     }
 
-    public ProjectionPropertyBuilder(LambdaExpression path, string namePostfix = null)
+    public ProjectionPropertyBuilder(ProjectionLambdaEnvironment environment, LambdaExpression path, string? namePostfix = null)
     {
         this.Expression = path ?? throw new ArgumentNullException(nameof(path));
         this.SourceType = path.Parameters.Single().Type;
-        this.Path = path.ToPropertyPath().WithExpand();
+        this.Path = environment.PropertyPathService.WithExpand(path.ToPropertyPath());
         this.CollectionType = this.Expression.ReturnType.GetProjectionCollectionType();
         this.IsNullable = this.Expression.ReturnType.IsValueType && this.Path.HasReferenceResult();
         this.ElementType = this.Expression.ReturnType.GetNullableElementType() ?? this.Expression.ReturnType.GetCollectionElementTypeOrSelf();
@@ -46,9 +45,9 @@ internal class ProjectionPropertyBuilder : IProjectionProperty
 
     public LambdaExpression Expression { get; }
 
-    public PropertyPath Path { get; }
+    public PropertyPath Path { get; set; }
 
-    public Type CollectionType { get; }
+    public Type? CollectionType { get; }
 
     public bool IsCollection => this.CollectionType != null;
 
@@ -61,11 +60,11 @@ internal class ProjectionPropertyBuilder : IProjectionProperty
 
     public ProjectionPropertyRole Role { get; set; }
 
-    public ProjectionBuilder ElementProjection { get; set; }
+    public ProjectionBuilder? ElementProjection { get; set; }
 
     public bool IgnoreSerialization { get; set; }
 
-    public PropertyInfo VirtualExplicitInterfaceProperty { get; set; }
+    public PropertyInfo? VirtualExplicitInterfaceProperty { get; set; }
 
     public List<Attribute> Attributes { get; set; }
 

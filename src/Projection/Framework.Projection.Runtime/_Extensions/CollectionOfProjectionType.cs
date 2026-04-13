@@ -1,14 +1,16 @@
 ﻿using System.Reflection;
 
 using Framework.Core.ReflectionImpl;
+using Framework.ExtendedMetadata;
 
 namespace Framework.Projection._Extensions;
 
-internal class CollectionOfProjectionType : BaseTypeImpl
+internal class CollectionOfProjectionType : BaseTypeImpl, IWrappingObject
 {
     private readonly Type originalType;
 
     private readonly Type checkCollectionBlankType;
+
     private readonly Type elementType;
 
     public CollectionOfProjectionType(Type originalType)
@@ -19,25 +21,27 @@ internal class CollectionOfProjectionType : BaseTypeImpl
         this.checkCollectionBlankType = this.originalType.GetGenericTypeDefinition().MakeGenericType(typeof(object));
     }
 
+    public bool CanWrap => false;
+
     public override string Name => this.originalType.Name;
 
-    public override string Namespace => this.originalType.Namespace;
+    public override string Namespace => this.originalType.Namespace!;
 
-    public override string FullName => this.originalType.FullName;
+    public override string FullName => this.originalType.FullName!;
 
     public override Assembly Assembly => this.originalType.Assembly;
 
-    public override Type BaseType => this.originalType.BaseType;
+    public override Type? BaseType => this.originalType.BaseType;
 
-    public override string AssemblyQualifiedName => this.originalType.AssemblyQualifiedName;
+    public override string? AssemblyQualifiedName => this.originalType.AssemblyQualifiedName;
 
     public override bool ContainsGenericParameters => this.originalType.ContainsGenericParameters;
 
     public override IEnumerable<CustomAttributeData> CustomAttributes => this.originalType.CustomAttributes;
 
-    public override MethodBase DeclaringMethod => this.originalType.DeclaringMethod;
+    public override MethodBase? DeclaringMethod => this.originalType.DeclaringMethod;
 
-    public override Type DeclaringType => this.originalType.DeclaringType;
+    public override Type? DeclaringType => this.originalType.DeclaringType;
 
     public override bool IsGenericType => this.originalType.IsGenericType;
 
@@ -59,9 +63,9 @@ internal class CollectionOfProjectionType : BaseTypeImpl
 
     protected override TypeAttributes GetAttributeFlagsImpl() => this.originalType.Attributes;
 
-    public override bool IsAssignableFrom(Type targetType)
+    public override bool IsAssignableFrom(Type? targetType)
     {
-        if (targetType.IsGenericType)
+        if (targetType?.IsGenericType == true)
         {
             var targetElementTypes = targetType.GetGenericArguments();
 
@@ -76,4 +80,6 @@ internal class CollectionOfProjectionType : BaseTypeImpl
 
         return false;
     }
+
+    protected override PropertyInfo? GetPropertyImpl(string name, BindingFlags bindingAttr, Binder? binder, Type? returnType, Type[]? types, ParameterModifier[]? modifiers) => null;
 }

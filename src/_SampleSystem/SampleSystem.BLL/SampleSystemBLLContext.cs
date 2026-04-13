@@ -3,11 +3,8 @@ using Framework.Authorization.BLL;
 using Framework.BLL;
 using Framework.BLL.Services;
 using Framework.Configuration.BLL;
-using Framework.Core.TypeResolving;
 using Framework.Tracking;
 using Framework.Validation;
-
-using GenericQueryable.Fetching;
 
 using HierarchicalExpand;
 
@@ -24,7 +21,7 @@ namespace SampleSystem.BLL;
 
 public partial class SampleSystemBLLContext(
     IServiceProvider serviceProvider,
-    [FromKeyedServices("BLL")] IEventOperationSender operationSender,
+    [FromKeyedServices(nameof(BLL))] IEventOperationSender operationSender,
     IAccessDeniedExceptionService accessDeniedExceptionService,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
     ITrackingService<PersistentDomainObjectBase> trackingService,
@@ -34,10 +31,8 @@ public partial class SampleSystemBLLContext(
     ISampleSystemBLLFactoryContainer logics,
     IAuthorizationBLLContext authorization,
     IConfigurationBLLContext configuration,
-    BLLContextSettings<PersistentDomainObjectBase> settings,
     ISecurityAccessorResolver securityAccessorResolver,
-    ICurrentUserSource<Employee> currentEmployeeSource,
-    IFetchRuleExpander fetchRuleExpander)
+    ICurrentUserSource<Employee> currentEmployeeSource)
     : SecurityBLLBaseContext<PersistentDomainObjectBase, Guid, ISampleSystemBLLFactoryContainer>(
         serviceProvider,
         operationSender,
@@ -52,13 +47,9 @@ public partial class SampleSystemBLLContext(
 
     public IAuthorizationBLLContext Authorization { get; } = authorization;
 
-    public IFetchRuleExpander FetchRuleExpander { get; } = fetchRuleExpander;
-
     public ICurrentUserSource<Employee> CurrentEmployeeSource { get; } = currentEmployeeSource;
 
     public IConfigurationBLLContext Configuration { get; } = configuration;
-
-    public ITypeResolver<string> TypeResolver { get; } = settings.TypeResolver;
 
     public ITrackingService<PersistentDomainObjectBase> TrackingService { get; } = trackingService;
 

@@ -1,6 +1,7 @@
-﻿using Framework.Core;
+﻿using Framework.BLL.Services;
+using Framework.Core;
+using Framework.ExtendedMetadata;
 using Framework.Projection;
-using Framework.Projection.ExtendedMetadata;
 
 namespace Framework.FileGeneration.Configuration;
 
@@ -10,5 +11,7 @@ public interface IFileGenerationEnvironment : IDomainMetadata, IServiceProviderC
 
     IReadOnlyCollection<IProjectionEnvironment> ProjectionEnvironments { get; }
 
-    IDomainTypeRootExtendedMetadata ExtendedMetadata { get; }
+    IMetadataProxyProvider MetadataProxyProvider { get; }
+
+    IPropertyPathService PropertyPathService { get; }
 }

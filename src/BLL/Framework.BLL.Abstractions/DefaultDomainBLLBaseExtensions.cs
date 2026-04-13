@@ -4,7 +4,6 @@ using CommonFramework;
 
 using Framework.Application.Domain;
 using Framework.BLL.Domain.Exceptions;
-using Framework.BLL.Domain.IdentityObject;
 using Framework.BLL.Domain.Persistent.IdentityObject;
 using Framework.Core;
 
@@ -15,16 +14,6 @@ namespace Framework.BLL;
 
 public static class DefaultDomainBLLBaseExtensions
 {
-    public static TDomainObject? GetById<TPersistentDomainObjectBase, TDomainObject>(this IDefaultDomainBLLQueryBase<TPersistentDomainObjectBase, TDomainObject, Guid> bll, string id)
-            where TDomainObject : class, TPersistentDomainObjectBase
-            where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
-    {
-        if (bll == null) throw new ArgumentNullException(nameof(bll));
-        if (string.IsNullOrWhiteSpace(id)) throw new ArgumentNullException(nameof(id));
-
-        return bll.GetById(Guid.Parse(id), true);
-    }
-
     public static TDomainObject? GetByIdOrCreate<TPersistentDomainObjectBase, TDomainObject, TIdent>(this IDefaultDomainBLLQueryBase<TPersistentDomainObjectBase, TDomainObject, TIdent> bll, TIdent id)
             where TDomainObject : class, TPersistentDomainObjectBase, new()
             where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
@@ -101,22 +90,6 @@ public static class DefaultDomainBLLBaseExtensions
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase, ICodeObject<TCode> =>
         bll.GetByCode(code, throwOnNotFound, FetchRule<TDomainObject>.Empty);
-
-    public static TDomainObject? GetByDomainType<TDomainObject>(this IBLLQueryBase<TDomainObject> bll, IDomainType domainType, bool throwOnNotFound = true)
-            where TDomainObject : class, IDomainType
-    {
-        if (bll == null) throw new ArgumentNullException(nameof(bll));
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
-        var result = bll.GetObjectBy(domainObject => domainObject.Name == domainType.Name && domainObject.NameSpace == domainType.NameSpace);
-
-        if (null == result && throwOnNotFound)
-        {
-            throw new BusinessLogicException($"{typeof(TDomainObject).Name} with name = {domainType.Name} and namespace = {domainType.NameSpace} not found");
-        }
-
-        return result;
-    }
 
     public static void Insert<TDomainObject, TIdent>(this IDefaultDomainBLLBase<TDomainObject, TIdent> bll, TDomainObject domainObject)
             where TDomainObject : class, IIdentityObject<TIdent>

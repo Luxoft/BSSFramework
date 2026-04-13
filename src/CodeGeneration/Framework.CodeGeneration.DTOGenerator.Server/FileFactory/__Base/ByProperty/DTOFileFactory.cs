@@ -41,18 +41,18 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
     protected virtual bool AllowCreate { get; } = true;
 
 
-    public IEnumerable<PropertyInfo> GetProperties(bool isWritable) => this.Configuration.GetDomainTypeProperties(this.DomainType, this.FileType, isWritable);
+    public IEnumerable<PropertyInfo> GetProperties(bool isWritable) => this.Configuration.GetDomainTypeProperties(this.DomainType!, this.FileType, isWritable);
 
     public virtual IEnumerable<CodeMemberMethod> GetServerMappingServiceInterfaceMethods()
     {
-        var domainTypeRef = this.DomainType.ToTypeReference();
+        var domainTypeRef = this.DomainType!.ToTypeReference();
         var mappingTypeRef = this.CurrentReference;
 
         if (this.MapDomainObjectToMappingObjectPropertyAssigner != null)
         {
             yield return new CodeMemberMethod
                          {
-                                 Name = "Map" + this.DomainType.Name,
+                                 Name = "Map" + this.DomainType!.Name,
                                  ReturnType = typeof(void).ToTypeReference(),
                                  Parameters =
                                  {

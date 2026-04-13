@@ -9,8 +9,8 @@ namespace Framework.Projection.Lambda;
 /// <typeparam name="TElement">Тип элемента</typeparam>
 public class ProjectionSingleProperty<TDomainObject, TElement>(
     Expression<Func<TDomainObject, TElement>> path,
-    string name,
-    Func<Projection<TElement>> getPropProjection,
+    string? name,
+    Func<Projection<TElement>>? getPropProjection,
     bool ignoreSerialization,
     IEnumerable<Attribute> attributes)
     : ProjectionProperty<Expression<Func<TDomainObject, TElement>>, TElement>(path, name, getPropProjection, ignoreSerialization, attributes)
@@ -19,5 +19,5 @@ public class ProjectionSingleProperty<TDomainObject, TElement>(
     public override Type SourceType { get; } = typeof(TDomainObject);
 
     /// <inheritdoc />
-    public override Type CollectionType { get; } = null;
+    public override Type? CollectionType { get; } = null;
 }

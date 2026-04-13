@@ -1,7 +1,6 @@
 ﻿using CommonFramework.RelativePath.DependencyInjection;
 
 using Framework.Core.TypeResolving;
-using Framework.Core.TypeResolving.TypeSource;
 using Framework.Infrastructure.DependencyInjection;
 
 using Microsoft.Extensions.Configuration;

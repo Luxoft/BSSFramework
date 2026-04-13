@@ -51,7 +51,7 @@ internal sealed partial class AuditPropertiesSetter
         return setAction(state);
     }
 
-    private static Func<object[], bool> GetSetAuditAction<TDomainObject, TPropertyDomainObject, TProperty>(string[] propertyNames, IAuditProperty<TPropertyDomainObject, TProperty> auditProperty)
+    private static Func<object[], bool> GetSetAuditAction<TDomainObject, TPropertyDomainObject, TProperty>(string[]? propertyNames, IAuditProperty<TPropertyDomainObject, TProperty>? auditProperty)
             where TDomainObject : TPropertyDomainObject
     {
         if (propertyNames?.Any() == false || auditProperty?.PropertyExpr == null)
@@ -84,7 +84,7 @@ internal sealed partial class AuditPropertiesSetter
                };
     }
 
-    private static int? GetPropertyIndex(IReadOnlyList<string> source, string propertyName)
+    private static int? GetPropertyIndex(IReadOnlyList<string>? source, string propertyName)
     {
         if (source == null || string.IsNullOrEmpty(propertyName))
         {

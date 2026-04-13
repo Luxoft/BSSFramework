@@ -79,16 +79,15 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
             }
         }
 
-
         {
-            foreach (var projectionFilterAttribute in domainType.GetCustomAttributes<ProjectionFilterAttribute>())
+            foreach (var projectionFilterAttribute in this.Environment.MetadataProxyProvider.Wrap(domainType).GetCustomAttributes<ProjectionFilterAttribute>())
             {
                 yield return projectionFilterAttribute.ToAttributeDeclaration();
             }
         }
 
         {
-            foreach (var securityAttribute in this.Environment.ExtendedMetadata.GetType(domainType).GetSecurityAttributes(this.Environment.SecurityRuleTypeList))
+            foreach (var securityAttribute in this.Environment.MetadataProxyProvider.Wrap(domainType).GetSecurityAttributes(this.Environment.SecurityRuleTypeList))
             {
                 yield return securityAttribute;
             }
@@ -117,48 +116,48 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        foreach (var securityAttribute in this.Environment.ExtendedMetadata.GetProperty(property).GetSecurityAttributes(this.Environment.SecurityRuleTypeList))
+        foreach (var securityAttribute in this.Environment.MetadataProxyProvider.Wrap(property).GetSecurityAttributes(this.Environment.SecurityRuleTypeList))
         {
             yield return securityAttribute;
         }
 
-        if (property.GetCustomAttribute<CustomSerializationAttribute>(attr => attr.Role.HasFlag(DTORole.Client)) is var customSerializationAttr && customSerializationAttr != null)
+        if (property.GetCustomAttribute<CustomSerializationAttribute>(attr => attr.Role.HasFlag(DTORole.Client)) is { } customSerializationAttr)
         {
             yield return customSerializationAttr.ToAttributeDeclaration();
         }
 
-        if (property.GetCustomAttribute<ProjectionPropertyAttribute>() is var projectionPropAttr && projectionPropAttr != null)
+        if (property.GetCustomAttribute<ProjectionPropertyAttribute>() is { } projectionPropAttr)
         {
             yield return projectionPropAttr.ToAttributeDeclaration();
         }
 
-        if (property.HasAttribute<ExpandPathAttribute>())
+        if (property.GetCustomAttribute<ExpandPathAttribute>() is { } expandPathAttribute)
         {
-            yield return property.GetCustomAttribute<ExpandPathAttribute>().ToAttributeDeclaration();
+            yield return expandPathAttribute.ToAttributeDeclaration();
         }
 
-        if (property.GetCustomAttribute<MappingAttribute>() is var mappingAttr && mappingAttr != null)
+        if (property.GetCustomAttribute<MappingAttribute>() is { } mappingAttr)
         {
             yield return mappingAttr.ToAttributeDeclaration();
         }
 
-        if (property.GetCustomAttribute<IgnoreFetchAttribute>() is var ignoreFetchAttribute && ignoreFetchAttribute != null)
+        if (property.GetCustomAttribute<IgnoreFetchAttribute>() is { } ignoreFetchAttribute)
         {
             yield return ignoreFetchAttribute.ToAttributeDeclaration();
         }
 
-        foreach (var fetchPathAttribute in property.GetCustomAttributes<FetchPathAttribute>())
+        foreach (var fetchPathAttribute in this.Environment.MetadataProxyProvider.Wrap(property).GetCustomAttributes<FetchPathAttribute>())
         {
             yield return fetchPathAttribute.ToAttributeDeclaration();
         }
 
-        if (property.GetCustomAttribute<MappingPropertyAttribute>() is var mappingPropertyAttribute && mappingPropertyAttribute != null)
+        if (property.GetCustomAttribute<MappingPropertyAttribute>() is { } mappingPropertyAttribute)
         {
             yield return mappingPropertyAttribute.ToAttributeDeclaration();
         }
     }
 
-    protected override IEnumerable<Type> GetDomainTypes() => this.projectionEnvironment.Assembly.Types;
+    protected override IEnumerable<Type> GetDomainTypes() => this.projectionEnvironment.Assembly.GetTypes().Where(this.Environment.DomainObjectBaseType.IsAssignableFrom);
 
     protected override IEnumerable<ICodeFileFactoryHeader<FileType>> GetFileFactoryHeaders()
     {

@@ -1,11 +1,8 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.BLL;
 using Framework.Configuration.BLL;
-using Framework.Core.TypeResolving;
 using Framework.Tracking;
 using Framework.Validation;
-
-using GenericQueryable.Fetching;
 
 using OData;
 
@@ -20,12 +17,8 @@ public partial interface ISampleSystemBLLContext :
 
     ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>,
 
-    ITrackingServiceContainer<PersistentDomainObjectBase>,
-
-    ITypeResolverContainer<string>
+    ITrackingServiceContainer<PersistentDomainObjectBase>
 {
-    IFetchRuleExpander FetchRuleExpander { get; }
-
     ICurrentUserSource<Employee> CurrentEmployeeSource { get; }
 
     IConfigurationBLLContext Configuration { get; }

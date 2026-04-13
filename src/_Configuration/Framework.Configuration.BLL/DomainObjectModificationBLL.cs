@@ -1,6 +1,4 @@
-﻿using Framework.BLL;
-using Framework.BLL.Domain.IdentityObject;
-using Framework.Configuration.Domain;
+﻿using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Database;
 using Framework.Database.Domain;
@@ -34,13 +32,11 @@ public partial class DomainObjectModificationBLL(
 
         foreach (var modification in modifications)
         {
-            var info = new ObjectModificationInfo<Guid>
-                       {
-                           Identity = modification.DomainObjectId,
-                           ModificationType = modification.Type,
-                           Revision = modification.Revision,
-                           TypeInfo = new TypeInfoDescription { Name = modification.DomainType.Name, NameSpace = modification.DomainType.NameSpace }
-                       };
+            var info = new ObjectModificationInfo<Guid>(
+                Identity: modification.DomainObjectId,
+                ModificationType: modification.Type,
+                Revision: modification.Revision,
+                TypeInfo: new TypeNameIdentity { Name = modification.DomainType.Name, Namespace = modification.DomainType.Namespace });
 
             logger.LogDebug("Process modification {DomainObjectId}", modification.DomainObjectId);
 
@@ -74,9 +70,7 @@ public partial class DomainObjectModificationBLL(
 
     private DomainObjectVersions GetDomainObjectVersions(ObjectModificationInfo<Guid> modificationInfo)
     {
-        var domainType = this.Context.Logics.DomainType.GetByDomainType(new MemoryDomainType(modificationInfo.TypeInfo.Name, modificationInfo.TypeInfo.NameSpace))!;
-
-        var domainObjectType = this.Context.ComplexDomainTypeResolver.Resolve(domainType);
+        var domainObjectType = this.Context.TargetSystemTypeResolver.Resolve(modificationInfo.TypeInfo);
 
         return domainObjectVersionsResolverFactory.Create(domainObjectType).GetDomainObjectVersions(modificationInfo.Identity, modificationInfo.Revision);
     }

@@ -1,5 +1,4 @@
 ﻿using Framework.Application.ApplicationVariable;
-using Framework.BLL;
 using Framework.Configuration.Domain;
 
 namespace Framework.Configuration.BLL;
@@ -22,11 +21,10 @@ public partial class SystemConstantBLL
     {
         if (applicationVariable == null) throw new ArgumentNullException(nameof(applicationVariable));
 
-        var systemConstant = this.GetByCode(applicationVariable.Name, true)!;
+        var systemConstant = this.GetObjectBy(sc => sc.Code == applicationVariable.Name, true)!;
 
         var serializer = this.Context.SystemConstantSerializerFactory.Create<T>();
 
         return serializer.Parse(systemConstant.Value);
     }
-
 }

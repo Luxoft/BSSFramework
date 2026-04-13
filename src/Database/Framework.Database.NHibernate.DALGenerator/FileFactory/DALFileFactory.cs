@@ -11,7 +11,7 @@ public class DALFileFactory<TConfiguration>(TConfiguration configuration, IMappi
     : GeneratorConfigurationContainer<TConfiguration>(configuration), IRenderingFile<XDocument>
     where TConfiguration : class, IDALGeneratorConfiguration<IDALGenerationEnvironment>
 {
-    public string Filename => $"Generated.{mappingGenerator.Assembly.Name}.hbm";
+    public string Filename => $"Generated.{mappingGenerator.Assembly.GetName().Name}.hbm";
 
 
     public XDocument GetRenderData() => mappingGenerator.Generate();

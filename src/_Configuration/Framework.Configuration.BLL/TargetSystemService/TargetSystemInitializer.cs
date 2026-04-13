@@ -2,7 +2,7 @@
 
 using Framework.BLL;
 using Framework.BLL.Domain.DTO;
-using Framework.BLL.Domain.Extensions;
+using Framework.BLL.Domain.TargetSystem;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Database;
@@ -26,21 +26,23 @@ public class TargetSystemInitializer(
 
     private void Register(TargetSystemInfo targetSystemInfo)
     {
+        var persistentTargetSystemInfo = targetSystemInfo as PersistentTargetSystemInfo;
+
         var bll = context.Logics.TargetSystem;
 
-        var isBase = targetSystemInfo.Id == PersistentHelper.BaseTargetSystemId;
+        var isBase = targetSystemInfo.Id == TargetSystemInfo.Base.Id;
 
         var targetSystem = bll.GetById(targetSystemInfo.Id, false, new DTOFetchRule<TargetSystem>(MainDTOType.RichDTO))
-                           ?? new TargetSystem(isBase, targetSystemInfo.IsMain, targetSystemInfo.IsRevision)
+                           ?? new TargetSystem(isBase, persistentTargetSystemInfo?.IsMain ?? false, persistentTargetSystemInfo?.IsRevision ?? false)
                               {
                                   Name = targetSystemInfo.Name, SubscriptionEnabled = !isBase, Id = targetSystemInfo.Id
                               }.Self(bll.Insert);
 
-        var mergeResult = targetSystem.DomainTypes.GetMergeResult(targetSystemInfo.DomainTypes, t => t.Id, t => t.Id);
+        var mergeResult = targetSystem.DomainTypes.GetMergeResult(targetSystemInfo.Domain.Types, t => t.Id, t => t.Id);
 
         foreach (var newItem in mergeResult.AddingItems)
         {
-            var newDomainType = new DomainType(targetSystem) { Id = newItem.Id, Name = newItem.Type.Name, NameSpace = newItem.Type.Namespace! };
+            var newDomainType = new DomainType(targetSystem) { Id = newItem.Id, Name = newItem.Type.Name, Namespace = newItem.Type.Namespace! };
 
             if (!isBase)
             {
@@ -52,7 +54,7 @@ public class TargetSystemInitializer(
 
         foreach (var (domainType, (type, _)) in mergeResult.CombineItems)
         {
-            var changedName = domainType.Name != type.Name || domainType.NameSpace != type.Namespace;
+            var changedName = domainType.Name != type.Name || domainType.Namespace != type.Namespace;
 
             var mergeEventResult = domainType.EventOperations.GetMergeResult(
                 context.EventOperationSource.GetEventOperations(type),
@@ -62,7 +64,7 @@ public class TargetSystemInitializer(
             if (changedName || (!isBase && !mergeEventResult.IsEmpty))
             {
                 domainType.Name = type.Name;
-                domainType.NameSpace = type.Namespace!;
+                domainType.Namespace = type.Namespace!;
 
                 if (!isBase)
                 {

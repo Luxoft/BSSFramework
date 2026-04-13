@@ -27,7 +27,7 @@ public abstract class UpdateToDomainObjectPropertyAssignerBase<TConfiguration>(
         if (justValueRefExpr == null) throw new ArgumentNullException(nameof(justValueRefExpr));
         if (innerAssignStatement == null) throw new ArgumentNullException(nameof(innerAssignStatement));
 
-        var editAttr = configuration.Environment.ExtendedMetadata.GetProperty(property).GetEditDomainObjectAttribute();
+        var editAttr = configuration.Environment.MetadataProxyProvider.Wrap(property).GetEditDomainObjectAttribute();
 
         return new CodeConditionStatement(justValueRefExpr.ToPropertyReference(nameof(Maybe<>.HasValue)))
                {

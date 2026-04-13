@@ -76,6 +76,10 @@
     <Project Path="Domain/Framework.Relations/Framework.Relations.csproj" />
     <Project Path="Domain/Framework.Restriction/Framework.Restriction.csproj" />
   </Folder>
+  <Folder Name="/ExtendedMetadata/">
+    <Project Path="ExtendedMetadata/Framework.ExtendedMetadata.Abstractions/Framework.ExtendedMetadata.Abstractions.csproj" />
+    <Project Path="ExtendedMetadata/Framework.ExtendedMetadata.Runtime/Framework.ExtendedMetadata.Runtime.csproj" />
+  </Folder>
   
   <Folder Name="/Infrastructure/">
     <Project Path="Infrastructure/Framework.Infrastructure.Abstractions/Framework.Infrastructure.Abstractions.csproj" />

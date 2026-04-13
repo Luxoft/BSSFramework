@@ -5,10 +5,8 @@ namespace Framework.Subscriptions;
 
 public static class InlineAttachmentHelper
 {
-    public static void InlineAttachment(MailMessage message, Attachment attachment)
-    {
-        message.Body = ReplaceSrcByName(message.Body, attachment.Name, attachment.ContentId);
-    }
+    public static void InlineAttachment(MailMessage message, Attachment attachment) =>
+        message.Body = ReplaceSrcByName(message.Body, attachment.Name!, attachment.ContentId);
 
     private static string ReplaceSrcByName(string body, string name, string contentId)
     {

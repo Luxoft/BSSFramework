@@ -1,17 +1,16 @@
-﻿using Framework.Application.Events;
+﻿using System.Collections.Frozen;
+using Framework.Application.Events;
 using Framework.Application.Lock;
 using Framework.Authorization.BLL;
-using Framework.Authorization.Domain;
 using Framework.BLL;
-using Framework.BLL.Domain.IdentityObject;
+using Framework.BLL.Domain.TargetSystem;
 using Framework.Configuration.BLL.TargetSystemService;
 using Framework.Configuration.Domain;
+using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.Core.TypeResolving;
 using Framework.Tracking;
 using Framework.Validation;
-
-using SecuritySystem.Notification;
 
 using PersistentDomainObjectBase = Framework.Configuration.Domain.PersistentDomainObjectBase;
 
@@ -21,13 +20,9 @@ public partial interface IConfigurationBLLContext :
 
     ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>,
 
-    ITypeResolverContainer<string>,
-
     ITrackingServiceContainer<PersistentDomainObjectBase>
 {
     IValidator Validator { get; }
-
-    INotificationPrincipalExtractor<Principal> NotificationPrincipalExtractor { get; }
 
     IDomainObjectEventMetadata EventOperationSource { get; }
 
@@ -35,31 +30,11 @@ public partial interface IConfigurationBLLContext :
 
     ISerializerFactory<string> SystemConstantSerializerFactory { get; }
 
-    ITypeResolver<string> SystemConstantTypeResolver { get; }
+    ITypeResolver<TypeNameIdentity> TargetSystemTypeResolver { get; }
 
-    ITypeResolver<DomainType> ComplexDomainTypeResolver { get; }
+    FrozenDictionary<PersistentTargetSystemInfo, ITargetSystemService> TargetSystemServices { get; }
 
-    DomainType? GetDomainType(Type type, bool throwOnNotFound);
+    DomainType GetDomainType(TypeNameIdentity type);
 
-    DomainType? GetDomainType(IDomainType type, bool throwOnNotFound = true);
-
-    ITargetSystemService GetTargetSystemService(TargetSystem targetSystem);
-
-    ITargetSystemService GetTargetSystemService(Type domainType, bool throwOnNotFound);
-
-    ITargetSystemService GetTargetSystemService(string name);
-
-    TargetSystemInfo GetTargetSystemInfo(Type domainType);
-
-    DomainTypeInfo GetDomainTypeInfo(Type domainType);
-
-    ITargetSystemService GetMainTargetSystemService();
-
-    IEnumerable<ITargetSystemService> GetTargetSystemServices();
-
-    /// <summary>
-    /// Получение текущей ревизии из аудита (пока возвращает 0, если вызван до флаша сессии)
-    /// </summary>
-    /// <returns></returns>
-    long GetCurrentRevision();
+    DomainType? TryGetDomainType(TypeNameIdentity type);
 }

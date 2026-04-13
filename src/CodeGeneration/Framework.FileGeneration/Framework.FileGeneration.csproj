@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ExtendedMetadata\Framework.ExtendedMetadata.Runtime\Framework.ExtendedMetadata.Runtime.csproj" />
     <ProjectReference Include="..\..\Projection\Framework.Projection.Runtime\Framework.Projection.Runtime.csproj" />
   </ItemGroup>
 

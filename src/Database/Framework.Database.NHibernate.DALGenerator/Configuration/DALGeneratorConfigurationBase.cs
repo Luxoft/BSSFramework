@@ -1,5 +1,6 @@
-﻿using Framework.Core;
-using Framework.Core.TypeResolving.TypeSource;
+﻿using System.Reflection;
+
+using Framework.Core;
 using Framework.Database.Metadata;
 using Framework.Database.NHibernate.DALGenerator._Internal;
 
@@ -22,17 +23,11 @@ public class DALGeneratorConfigurationBase<TEnvironment> : FileGeneratorConfigur
 
     public IEnumerable<IMappingGenerator> GetMappingGenerators() => from assembly in this.GetAssemblies() select this.GetMappingGenerator(assembly);
 
-    protected virtual IEnumerable<IAssemblyInfo> GetAssemblies()
+    protected virtual IEnumerable<Assembly> GetAssemblies()
     {
-        var baseRequest = from domainType in this.DomainTypes
-                          group domainType by domainType.Assembly
-                          into assemblyGroup
-                          let assembly = assemblyGroup.Key
-                          select new AssemblyInfo(assembly.GetName().Name!, assembly.FullName!, new TypeSource([.. assemblyGroup]));
-
-        foreach (var assemblyInfo in baseRequest)
+        foreach (var assembly in this.DomainTypes.Select(dt => dt.Assembly).Distinct())
         {
-            yield return assemblyInfo;
+            yield return assembly;
         }
 
         foreach (var projectionEnvironment in this.Environment.ProjectionEnvironments)
@@ -41,16 +36,16 @@ public class DALGeneratorConfigurationBase<TEnvironment> : FileGeneratorConfigur
         }
     }
 
-    protected virtual MappingGenerator CreateMappingGenerator(IAssemblyInfo assembly, AssemblyMetadata metadata) => new MappingGenerator(
+    protected virtual MappingGenerator CreateMappingGenerator(Assembly assembly, AssemblyMetadata metadata) => new MappingGenerator(
         assembly.ToGroup(metadata.DomainTypes),
         this.EscapeWordService,
         this.DatabaseName,
         this.UseSmartUpdate);
 
-    protected virtual AssemblyMetadata CreateAssemblyMetadata(IAssemblyInfo assembly) =>
+    protected virtual AssemblyMetadata CreateAssemblyMetadata(Assembly assembly) =>
         MetadataReader.GetAssemblyMetadata(this.Environment.PersistentDomainObjectBaseType, assembly);
 
-    private IMappingGenerator GetMappingGenerator(IAssemblyInfo assembly)
+    private IMappingGenerator GetMappingGenerator(Assembly assembly)
     {
         if (assembly == null) throw new ArgumentNullException(nameof(assembly));
 

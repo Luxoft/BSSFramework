@@ -37,7 +37,7 @@ public class SystemConstantInitializer(IConfigurationBLLContext context, [Disabl
     private async Task Initialize<T>(ApplicationVariable<T> typedSystemConstant, IReadOnlyList<SystemConstant> dbConstants, CancellationToken cancellationToken)
     {
         var systemConstant = dbConstants.SingleOrDefault(sc => string.Equals(sc.Code, typedSystemConstant.Name, StringComparison.CurrentCultureIgnoreCase))
-                             ?? new SystemConstant { Code = typedSystemConstant.Name, Type = context.Logics.DomainType.GetByType(typeof(T)) };
+                             ?? new SystemConstant { Code = typedSystemConstant.Name, Type = context.GetDomainType(typeof(T)) };
 
         if (!systemConstant.IsManual)
         {

@@ -1,34 +1,19 @@
 ﻿using System.Runtime.Serialization;
 
-using Framework.BLL.Domain.IdentityObject;
-using Framework.Database.Domain;
+using Framework.Core;
 
 namespace Framework.BLL.DTOMapping.Domain;
 
 [DataContract]
-public class TypeInfoDescriptionDTO : IDomainType
+public class TypeInfoDescriptionDTO
 {
-    public TypeInfoDescriptionDTO()
-    {
-    }
-
-    public TypeInfoDescriptionDTO(IDomainType domainType)
-    {
-        this.Name = domainType.Name;
-        this.NameSpace = domainType.NameSpace;
-    }
-
     [DataMember]
-    public string NameSpace { get; set; }
+    public string Namespace { get; set; }
 
     [DataMember]
     public string Name { get; set; }
 
-    public void MapToDomainObject(TypeInfoDescription typeInfoDescription)
-    {
-        typeInfoDescription.Name = this.Name;
-        typeInfoDescription.NameSpace = this.NameSpace;
-    }
+    public TypeNameIdentity ToDomainObject() => new() { Namespace = this.Namespace, Name = this.Name };
 
-    public override string ToString() => $"Name: {this.Name}, NameSpace: {this.NameSpace}";
+    public override string ToString() => $"Name: {this.Name}, Namespace: {this.Namespace}";
 }

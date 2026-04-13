@@ -1,12 +1,11 @@
-﻿using System.Xml.Linq;
-
-using Framework.Core.TypeResolving.TypeSource;
+﻿using System.Reflection;
+using System.Xml.Linq;
 
 namespace Framework.Database.NHibernate.DALGenerator._Internal;
 
 public interface IMappingGenerator
 {
-    IAssemblyInfo Assembly { get; }
+    Assembly Assembly { get; }
 
     XDocument Generate();
 }

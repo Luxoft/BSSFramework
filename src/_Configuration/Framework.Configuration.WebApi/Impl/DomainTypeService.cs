@@ -10,15 +10,6 @@ namespace Framework.Configuration.WebApi;
 public partial class ConfigMainController
 {
     [HttpPost]
-    public DomainTypeSimpleDTO GetSimpleDomainTypeByPath(string path) =>
-        this.Evaluate(
-            DBSessionMode.Read,
-            data =>
-                data.Context.Logics.DomainTypeFactory.Create(SecurityRole.Administrator)
-                    .GetByPath(path)
-                    .ToSimpleDTO(data.MappingService));
-
-    [HttpPost]
     public void ForceDomainTypeEvent(DomainTypeEventModelStrictDTO domainTypeEventModel)
     {
         if (domainTypeEventModel == null) throw new ArgumentNullException(nameof(domainTypeEventModel));
@@ -29,7 +20,8 @@ public partial class ConfigMainController
             {
                 evaluateData.Context.Authorization.SecuritySystem.CheckAccessAsync(SecurityRole.Administrator, this.HttpContext.RequestAborted).GetAwaiter().GetResult();
 
-                evaluateData.Context.Logics.DomainType.ForceEvent(domainTypeEventModel.ToDomainObject(evaluateData.MappingService));
+                evaluateData.Context.Logics.DomainType.ForceEventAsync(domainTypeEventModel.ToDomainObject(evaluateData.MappingService), this.HttpContext.RequestAborted)
+                            .GetAwaiter().GetResult();
             });
     }
 }

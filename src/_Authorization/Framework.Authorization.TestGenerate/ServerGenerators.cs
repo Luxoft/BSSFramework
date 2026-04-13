@@ -11,7 +11,10 @@ namespace Framework.Authorization.TestGenerate;
 public partial class ServerGenerators
 {
     [TestMethod]
-    public void GenerateMainTest() => this.GenerateMain().ToList();
+    public void GenerateMainTest()
+    {
+        this.GenerateMain().ToList();
+    }
 
     public IEnumerable<GeneratedFileInfo> GenerateMain() =>
         this.GenerateBLLCore()

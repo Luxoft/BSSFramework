@@ -69,7 +69,7 @@ public class DBGenerator(MappingSettings settings)
 
         var metadata = MetadataReader.GetAssemblyMetadata(
             settings.PersistentDomainObjectBaseType,
-            settings.GetDomainTypeAssemblies().Select(a => AssemblyInfo.Create(a)).ToArray());
+            settings.GetDomainTypeAssemblies().ToArray());
 
         this.FilterMetadata(metadata);
 

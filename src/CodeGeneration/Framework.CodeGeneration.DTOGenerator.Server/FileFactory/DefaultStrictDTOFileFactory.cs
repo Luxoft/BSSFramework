@@ -191,11 +191,11 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
             var currentSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, sourceFileType).ToParameterDeclarationExpression("source");
             var currentSourceParameterRefExpr = currentSourceParameter.ToVariableReferenceExpression();
 
-            var properties = this.Configuration.GetDomainTypeProperties(this.DomainType, sourceFileType).Intersect(this.GetProperties(false));
+            var properties = this.Configuration.GetDomainTypeProperties(this.DomainType!, sourceFileType).Intersect(this.GetProperties(false));
 
             yield return new CodeMemberMethod
                          {
-                                 Name = $"Map{sourceFileType.ShortName}To{this.FileType.ShortName}For{this.DomainType.Name}",
+                                 Name = $"Map{sourceFileType.ShortName}To{this.FileType.ShortName}For{this.DomainType!.Name}",
                                  Attributes = MemberAttributes.Public,
                                  Parameters = { targetParameter, currentSourceParameter }
                          }.WithStatement(new CodeThrowArgumentNullExceptionConditionStatement(currentSourceParameter))

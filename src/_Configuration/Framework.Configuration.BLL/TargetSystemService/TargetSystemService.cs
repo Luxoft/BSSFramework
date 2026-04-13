@@ -3,9 +3,9 @@
 using Framework.Application.Domain;
 using Framework.Application.Events;
 using Framework.BLL;
+using Framework.BLL.Domain.TargetSystem;
 using Framework.BLL.Services;
 using Framework.Configuration.Domain;
-using Framework.Core;
 using Framework.Core.TypeResolving;
 using Framework.Database;
 using Framework.Database.Domain;
@@ -14,56 +14,44 @@ using Framework.Subscriptions;
 namespace Framework.Configuration.BLL.TargetSystemService;
 
 public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
-    IConfigurationBLLContext context,
-    TBLLContext targetSystemContext,
-    TargetSystemInfo<TPersistentDomainObjectBase> targetSystemInfo,
+    TBLLContext context,
+    PersistentTargetSystemInfo targetSystemInfo,
     IEventOperationSender eventOperationSender,
     ISubscriptionResolver subscriptionResolver,
+    TargetSystem targetSystem,
     ICurrentRevisionService currentRevisionService) : ITargetSystemService
 
-    where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
+    where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
     where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
 {
-    private readonly Lazy<TargetSystem> lazyTargetSystem = LazyHelper.Create(() => context.Logics.TargetSystem.GetByName(targetSystemInfo.Name, true)!);
+    public TargetSystem TargetSystem { get; } = targetSystem;
 
-    public string Name { get; } = targetSystemInfo.Name;
-
-    public TBLLContext TargetSystemContext { get; } = targetSystemContext;
-
-    public Type BLLContextType { get; } = typeof(TBLLContext);
-
-    public ITypeResolver<string> TypeResolverS => this.TargetSystemContext.TypeResolver;
-
-    public ITypeResolver<DomainType> TypeResolver { get; } = targetSystemContext.TypeResolver.OverrideInput((DomainType domainType) => domainType.FullTypeName);
-
-    public TargetSystem TargetSystem => this.lazyTargetSystem.Value;
+    public ITypeResolver<DomainType> TypeResolver => field ??= targetSystemInfo.Domain.TypeResolver.OverrideInput((DomainType v) => v);
 
     public Type PersistentDomainObjectBaseType => typeof(TPersistentDomainObjectBase);
 
-    public void ForceEvent(DomainTypeEventOperation operation, long? revision, Guid domainObjectId)
+    public Task ForceEventAsync(DomainTypeEventModel eventModel, CancellationToken cancellationToken)
     {
-        if (operation == null) throw new ArgumentNullException(nameof(operation));
-        if (domainObjectId.IsDefault()) throw new ArgumentOutOfRangeException(nameof(domainObjectId));
+        var domainType = this.TypeResolver.Resolve(eventModel.Operation.DomainType);
 
-        var domainType = this.TypeResolver.TryResolve(operation.DomainType);
-
-        new Action<string, long?, Guid>(this.ForceEvent<TPersistentDomainObjectBase>)
-            .CreateGenericMethod(domainType)
-            .Invoke(this, [operation.Name, revision, domainObjectId]);
+        return new Func<DomainTypeEventModel, CancellationToken, Task>(this.ForceEvent<TPersistentDomainObjectBase>)
+               .CreateGenericMethod(domainType)
+               .Invoke<Task>(this, [eventModel, cancellationToken]);
     }
 
-    private void ForceEvent<TDomainObject>(string operationName, long? revision, Guid domainObjectId)
+    private async Task ForceEvent<TDomainObject>(DomainTypeEventModel eventModel, CancellationToken cancellationToken)
         where TDomainObject : class, TPersistentDomainObjectBase
     {
-        var bll = this.TargetSystemContext.Logics.Default.Create<TDomainObject>();
+        var bll = context.Logics.Default.Create<TDomainObject>();
 
-        var domainObject = revision == null
-                               ? bll.GetById(domainObjectId, true)
-                               : bll.GetObjectByRevision(domainObjectId, revision.Value);
+        foreach (var domainObjectId in eventModel.DomainObjectIdents)
+        {
+            var domainObject = eventModel.Revision == null ? bll.GetById(domainObjectId, true) : bll.GetObjectByRevision(domainObjectId, eventModel.Revision.Value);
 
-        var domainObjectEvent = new EventOperation(operationName);
+            var domainObjectEvent = new EventOperation(eventModel.Operation.Name);
 
-        eventOperationSender.Send(domainObject, domainObjectEvent, CancellationToken.None).GetAwaiter().GetResult();
+            await eventOperationSender.Send(domainObject, domainObjectEvent, cancellationToken);
+        }
     }
 
     public bool IsAssignable(Type domainType) => typeof(TPersistentDomainObjectBase).IsAssignableFrom(domainType);
@@ -84,13 +72,11 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
             {
                 if (subscriptionResolver.DomainTypes.Contains(item.Key.Type))
                 {
-                    yield return new ObjectModificationInfo<Guid>
-                                 {
-                                     Identity = ((TPersistentDomainObjectBase)item.Key.Object).Id,
-                                     Revision = revisionNumber,
-                                     ModificationType = item.Value.ToModificationType(),
-                                     TypeInfo = new TypeInfoDescription(item.Key.Type)
-                                 };
+                    yield return new ObjectModificationInfo<Guid>(
+                        Identity: ((TPersistentDomainObjectBase)item.Key.Object).Id,
+                        Revision: revisionNumber,
+                        ModificationType: item.Value.ToModificationType(),
+                        TypeInfo: item.Key.Type);
                 }
             }
         }

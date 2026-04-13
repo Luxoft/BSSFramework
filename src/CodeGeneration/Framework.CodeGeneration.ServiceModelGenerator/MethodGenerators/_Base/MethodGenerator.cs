@@ -8,23 +8,24 @@ using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
-using Framework.CodeGeneration.ServiceModelGenerator._Legacy;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
+using Framework.Core;
 using Framework.Database;
 using Framework.FileGeneration.Configuration;
+
 using SecuritySystem;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 
 public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : GeneratorConfigurationContainer<TConfiguration>, IServiceMethodGenerator
-        where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
-        where TBLLRoleAttribute : BLLServiceRoleAttribute
+    where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
+    where TBLLRoleAttribute : BLLServiceRoleAttribute
 {
     private readonly Lazy<ReadOnlyCollection<CodeParameterDeclarationExpression>> lazyParameters;
 
     protected MethodGenerator(TConfiguration configuration, Type domainType)
-            : base(configuration)
+        : base(configuration)
     {
         this.DomainType = domainType ?? throw new ArgumentNullException(nameof(domainType));
         this.lazyParameters = LazyHelper.Create(() => this.GetParameters().ToReadOnlyCollection());
@@ -42,8 +43,9 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
     protected abstract bool IsEdit { get; }
 
-    protected virtual TBLLRoleAttribute Attribute => this.Configuration.Environment.ExtendedMetadata.GetCustomAttribute<TBLLRoleAttribute>(this.DomainType)
-                                                         .FromMaybe(() => $"Attr {typeof(TBLLRoleAttribute)} not found for type {this.DomainType.FullName}");// ?? this.GetDefaultAttribute();
+    protected virtual TBLLRoleAttribute Attribute => this.Configuration.Environment.MetadataProxyProvider.Wrap(this.DomainType).GetCustomAttribute<TBLLRoleAttribute>()
+                                                         .FromMaybe(() =>
+                                                                        $"Attr {typeof(TBLLRoleAttribute)} not found for type {this.DomainType.FullName}"); // ?? this.GetDefaultAttribute();
 
     protected virtual DBSessionMode DefaultSessionMode => this.IsEdit ? DBSessionMode.Write : DBSessionMode.Read;
 
@@ -60,23 +62,22 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
     protected abstract string GetComment();
 
     public virtual CodeMemberMethod GetContractMethod() =>
-            new CodeMemberMethod
-                    {
-                            CustomAttributes = { typeof(OperationContractAttribute).ToTypeReference().ToAttributeDeclaration() },
-                            Name = this.Name,
-                            ReturnType = this.ReturnType
-                    }.WithParameters(this.Parameters)
-                     .WithComment(this.GetComment());
+        new CodeMemberMethod { Name = this.Name, ReturnType = this.ReturnType }.WithParameters(this.Parameters)
+                                                                               .WithComment(this.GetComment());
 
     public IEnumerable<CodeMemberMethod> GetFacadeMethods()
     {
         var evaluateDataParameterExpr = new CodeParameterDeclarationExpression(this.Configuration.EvaluateDataTypeReference, "evaluateData");
-        var bllParameterExpr = new CodeParameterDeclarationExpression(this.Configuration.Environment.BLLCore.GetCodeTypeReference(this.DomainType, BLLCoreGenerator.FileType.BLLInterface), "bll");
+        var bllParameterExpr = new CodeParameterDeclarationExpression(
+            this.Configuration.Environment.BLLCore.GetCodeTypeReference(this.DomainType, BLLCoreGenerator.FileType.BLLInterface),
+            "bll");
 
         return this.GetFacadeMethods(evaluateDataParameterExpr, bllParameterExpr);
     }
 
-    protected virtual IEnumerable<CodeMemberMethod> GetFacadeMethods(CodeParameterDeclarationExpression evaluateDataParameterExpr, CodeParameterDeclarationExpression bllParameterExpr)
+    protected virtual IEnumerable<CodeMemberMethod> GetFacadeMethods(
+        CodeParameterDeclarationExpression evaluateDataParameterExpr,
+        CodeParameterDeclarationExpression bllParameterExpr)
     {
         if (!this.Attribute.CustomImplementation)
         {
@@ -108,10 +109,10 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
     }
 
     protected CodeMethodReferenceExpression GetConvertToDTOMethod(BaseFileType dtoType) =>
-            this.Configuration.Environment.ServerDTO.GetConvertToDTOMethod(this.DomainType, dtoType);
+        this.Configuration.Environment.ServerDTO.GetConvertToDTOMethod(this.DomainType, dtoType);
 
     protected CodeMethodReferenceExpression GetConvertToDTOListMethod(BaseFileType dtoType) =>
-            this.Configuration.Environment.ServerDTO.GetConvertToDTOListMethod(this.DomainType, dtoType);
+        this.Configuration.Environment.ServerDTO.GetConvertToDTOListMethod(this.DomainType, dtoType);
 
     protected abstract IEnumerable<CodeParameterDeclarationExpression> GetParameters();
 
@@ -133,41 +134,45 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
         }
     }
 
-    protected CodeVariableDeclarationStatement GetCreateDefaultBLLVariableDeclaration(CodeExpression evaluateDataExpr, string varName, Type objectType, params CodeExpression[] parameters)
+    protected CodeVariableDeclarationStatement GetCreateDefaultBLLVariableDeclaration(
+        CodeExpression evaluateDataExpr,
+        string varName,
+        Type objectType,
+        params CodeExpression[] parameters)
     {
         var bllRef = new CodeTypeReference("var");
 
         var bllCreateExpr =
-                evaluateDataExpr.GetContext()
-                                .ToPropertyReference((IBLLFactoryContainerContext<object> context) => context.Logics)
-                                .ToPropertyReference("Default")
-                                .ToMethodInvokeExpression($"Create<{objectType}>");
+            evaluateDataExpr.GetContext()
+                            .ToPropertyReference((IBLLFactoryContainerContext<object> context) => context.Logics)
+                            .ToPropertyReference("Default")
+                            .ToMethodInvokeExpression($"Create<{objectType}>");
 
         return bllRef.ToVariableDeclarationStatement(varName, bllCreateExpr);
     }
 
     private CodeMemberMethod GetFacadeMethod(CodeParameterDeclarationExpression evaluateDataParameterExpr)
     {
-        var evaluateStatement = new CodeThisReferenceExpression().ToMethodInvokeExpression("Evaluate",
+        var evaluateStatement = new CodeThisReferenceExpression().ToMethodInvokeExpression(
+            "Evaluate",
             this.SessionMode.ToPrimitiveExpression(),
             new CodeLambdaExpression
             {
-                    Parameters = { new CodeParameterDeclarationExpression { Name = evaluateDataParameterExpr.Name } },
-                    Statements =
-                    {
-                            new CodeThisReferenceExpression().ToMethodInvokeExpression(this.InternalName, this.Parameters.Concat([evaluateDataParameterExpr]).Select(decl => decl.ToVariableReferenceExpression()))
-                                                             .ToResultStatement(this.ReturnType)
-                    }
+                Parameters = { new CodeParameterDeclarationExpression { Name = evaluateDataParameterExpr.Name } },
+                Statements =
+                {
+                    new CodeThisReferenceExpression().ToMethodInvokeExpression(
+                                                         this.InternalName,
+                                                         this.Parameters.Concat([evaluateDataParameterExpr]).Select(decl => decl.ToVariableReferenceExpression()))
+                                                     .ToResultStatement(this.ReturnType)
+                }
             });
 
         return new CodeMemberMethod
-               {
-                       Attributes = MemberAttributes.Public,
-                       Name = this.Name,
-                       ReturnType = this.ReturnType,
-                       Statements = { evaluateStatement.ToResultStatement(this.ReturnType) }
-               }.WithParameters(this.Parameters)
-                .WithComment(this.GetComment());
+            {
+                Attributes = MemberAttributes.Public, Name = this.Name, ReturnType = this.ReturnType, Statements = { evaluateStatement.ToResultStatement(this.ReturnType) }
+            }.WithParameters(this.Parameters)
+             .WithComment(this.GetComment());
     }
 
     private CodeMemberMethod GetFacadeMethodInternal(CodeParameterDeclarationExpression evaluateDataParameterExpr, CodeParameterDeclarationExpression bllParameterExpr)
@@ -178,14 +183,10 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
         var bllDecl = this.UseBLL ? this.GetBLLVariableDeclaration(evaluateDataExpr, bllParameterExpr, this.IsEdit) : null;
 
-        return new CodeMemberMethod
-               {
-                       Attributes = MemberAttributes.Family,
-                       Name = this.InternalName,
-                       ReturnType = this.ReturnType,
-               }.WithParameters(this.Parameters.Concat([evaluateDataParameterExpr]))
-                .WithStatements(this.UseBLL, () => [bllDecl])
-                .WithStatements(this.GetFacadeMethodInternalStatements(evaluateDataExpr, bllDecl.Maybe(v => v.ToVariableReferenceExpression())));
+        return new CodeMemberMethod { Attributes = MemberAttributes.Family, Name = this.InternalName, ReturnType = this.ReturnType, }
+               .WithParameters(this.Parameters.Concat([evaluateDataParameterExpr]))
+               .WithStatements(this.UseBLL, () => [bllDecl])
+               .WithStatements(this.GetFacadeMethodInternalStatements(evaluateDataExpr, bllDecl.Maybe(v => v.ToVariableReferenceExpression())));
     }
 
     protected CodeVariableDeclarationStatement GetBLLVariableDeclaration(CodeExpression evaluateDataExpr, CodeParameterDeclarationExpression bllParameterExpr, bool isEdit)
@@ -193,14 +194,18 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
         if (evaluateDataExpr == null) throw new ArgumentNullException(nameof(evaluateDataExpr));
 
         var bllCreateExpr = this.Configuration.Environment.BLLCore.Logics.GetCreateSecurityBLLExpr(
-         evaluateDataExpr.GetContext().ToPropertyReference((IBLLFactoryContainerContext<object> context) => context.Logics),
-         this.DomainType,
-         this.GetBLLSecurityParameter(evaluateDataExpr));
+            evaluateDataExpr.GetContext().ToPropertyReference((IBLLFactoryContainerContext<object> context) => context.Logics),
+            this.DomainType,
+            this.GetBLLSecurityParameter(evaluateDataExpr));
 
         return bllParameterExpr.Type.ToVariableDeclarationStatement(bllParameterExpr.Name, bllCreateExpr);
     }
 
-    protected CodeVariableDeclarationStatement GetDefaultBLLVariableDeclaration(CodeExpression evaluateDataExpr, string varName, Type objectType, params CodeExpression[] parameters)
+    protected CodeVariableDeclarationStatement GetDefaultBLLVariableDeclaration(
+        CodeExpression evaluateDataExpr,
+        string varName,
+        Type objectType,
+        params CodeExpression[] parameters)
     {
         var bllRef = this.Configuration.Environment.BLLCore.GetCodeTypeReference(objectType, BLLCoreGenerator.FileType.BLLInterface);
 

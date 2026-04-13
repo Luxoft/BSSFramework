@@ -3,7 +3,6 @@ using System.Reflection;
 
 using Framework.Core;
 
-
 namespace Framework.Projection.Lambda;
 
 /// <summary>
@@ -49,5 +48,5 @@ public interface IProjectionProperty : IProjectionAttributeProvider
     /// <summary>
     /// Виртуальное свойство интерфейса, которое имплементируется explicit-ом
     /// </summary>
-    PropertyInfo VirtualExplicitInterfaceProperty { get; }
+    PropertyInfo? VirtualExplicitInterfaceProperty { get; }
 }

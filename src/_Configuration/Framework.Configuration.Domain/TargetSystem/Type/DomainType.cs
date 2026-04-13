@@ -1,6 +1,4 @@
-﻿using Framework.BLL.Domain.IdentityObject;
-using Framework.BLL.Domain.Serialization;
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Database.Mapping;
 using Framework.Relations;
 using Framework.Restriction;
@@ -11,13 +9,13 @@ namespace Framework.Configuration.Domain;
 /// Описание доменного типа целевой системы
 /// </summary>
 [NotAuditedClass]
-public class DomainType : BaseDirectory, ITargetSystemElement<TargetSystem>, IDetail<TargetSystem>, IMaster<DomainTypeEventOperation>, IDomainType
+public class DomainType : BaseDirectory, IDetail<TargetSystem>, IMaster<DomainTypeEventOperation>
 {
     private readonly ICollection<DomainTypeEventOperation> eventOperations = new List<DomainTypeEventOperation>();
 
     private readonly TargetSystem targetSystem;
 
-    private string nameSpace;
+    private string @namespace;
 
     protected DomainType()
     {
@@ -44,37 +42,23 @@ public class DomainType : BaseDirectory, ITargetSystemElement<TargetSystem>, IDe
     /// Операции доменного типа
     /// </summary>
     [UniqueGroup]
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual IEnumerable<DomainTypeEventOperation> EventOperations => this.eventOperations;
-
-    /// <summary>
-    /// Название доменного типа
-    /// </summary>
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public override string Name
-    {
-        get => base.Name;
-        set => base.Name = value;
-    }
 
     /// <summary>
     /// Пространство имен
     /// </summary>
     [UniqueElement]
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public virtual string NameSpace
-    {
-        get => this.nameSpace.TrimNull();
-        set => this.nameSpace = value.TrimNull();
-    }
+    public virtual string Namespace { get => this.@namespace.TrimNull(); set => this.@namespace = value.TrimNull(); }
 
     /// <summary>
     /// Полное имя типа
     /// </summary>
     public virtual string FullTypeName =>
-        string.IsNullOrEmpty(this.NameSpace)
+        string.IsNullOrEmpty(this.Namespace)
             ? this.Name
-            : $"{this.NameSpace}.{this.Name}";
+            : $"{this.Namespace}.{this.Name}";
+
+    public static implicit operator TypeNameIdentity(DomainType domainType) => new() { Namespace = domainType.Namespace, Name = domainType.Name };
 
     #region IDetail<TargetSystem> Members
 

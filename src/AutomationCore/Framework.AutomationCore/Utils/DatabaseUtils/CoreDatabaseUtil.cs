@@ -15,7 +15,7 @@ namespace Framework.AutomationCore.Utils.DatabaseUtils;
 
 public static partial class CoreDatabaseUtil
 {
-    public static void ExecuteSqlFromFolder(string connectionString, string folder, string initialCatalog = null)
+    public static void ExecuteSqlFromFolder(string connectionString, string folder, string? initialCatalog = null)
     {
         string[] filePaths;
 
@@ -114,7 +114,7 @@ public static partial class CoreDatabaseUtil
         }
     }
 
-    public static void ExecuteSql(string connectionString, string sqlFileOrText, string initialCatalog = null)
+    public static void ExecuteSql(string connectionString, string sqlFileOrText, string? initialCatalog = null)
     {
         var builder = new SqlConnectionStringBuilder(connectionString);
 

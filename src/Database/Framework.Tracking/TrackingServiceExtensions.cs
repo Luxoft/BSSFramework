@@ -75,7 +75,7 @@ public static class TrackingServiceExtensions
                        }
                        else
                        {
-                           return new TRemovedItem[0];
+                           return [];
                        }
                    };
         }
@@ -101,7 +101,7 @@ public static class TrackingServiceExtensions
                        }
                        else
                        {
-                           return new TRemovedItem[0];
+                           return [];
                        }
                    };
         }

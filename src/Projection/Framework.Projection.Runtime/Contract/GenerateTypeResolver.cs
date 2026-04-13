@@ -2,7 +2,6 @@
 
 using Framework.Core;
 using Framework.Core.TypeResolving;
-using Framework.Core.TypeResolving.TypeSource;
 using Framework.Projection.Contract.ImplType;
 
 namespace Framework.Projection.Contract;

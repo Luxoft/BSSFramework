@@ -98,7 +98,7 @@ internal static class CodeDomHelper
         return fileFactory.GetDomainObjectParameter(domainType);
     }
 
-    public static CodeParameterDeclarationExpression GetDomainObjectParameter(this IFileFactory fileFactory, Type domainType = null)
+    public static CodeParameterDeclarationExpression GetDomainObjectParameter(this IFileFactory fileFactory, Type? domainType = null)
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
@@ -259,7 +259,7 @@ internal static class CodeDomHelper
 
         if (fileType == BaseFileType.IdentityDTO || fileType == BaseFileType.SimpleDTO || fileType == ServerFileType.SimpleIntegrationDTO)
         {
-            if (fileType == ServerFileType.SimpleIntegrationDTO && fileFactory.DomainType.IsIntegrationVersion())
+            if (fileType == ServerFileType.SimpleIntegrationDTO && fileFactory.Configuration.Environment.MetadataProxyProvider.Wrap(fileFactory.DomainType!).IsIntegrationVersion())
             {
                 return fileFactory.GetMappingServiceIdentityToIntegrationVersionDomainObjectMethod();
             }

@@ -13,13 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BLL\Framework.BLL.Domain\Framework.BLL.Domain.csproj" />
     <ProjectReference Include="..\..\Notification\Framework.Notification.Domain\Framework.Notification.Domain.csproj" />
     <ProjectReference Include="..\..\Subscriptions\Framework.Subscriptions.Domain\Framework.Subscriptions.Domain.csproj" />
+    <ProjectReference Include="..\..\Validation\Framework.Validation\Framework.Validation.csproj" />
     <ProjectReference Include="..\Framework.Configuration.Domain\Framework.Configuration.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="_LegacyModel\" />
   </ItemGroup>
 
 </Project>

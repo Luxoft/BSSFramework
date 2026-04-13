@@ -1,10 +1,11 @@
-﻿using Framework.Core.TypeResolving;
+﻿using Framework.Core;
+using Framework.Core.TypeResolving;
 
 namespace Framework.Application.Events;
 
 public interface IEventSystem
 {
-    ITypeResolver<string> TypeResolver { get; }
+    ITypeResolver<TypeNameIdentity> TypeResolver { get; }
 
     IDomainObjectEventMetadata DomainObjectEventMetadata { get; }
 

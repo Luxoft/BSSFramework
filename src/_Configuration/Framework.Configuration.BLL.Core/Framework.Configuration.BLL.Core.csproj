@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Database\Framework.Database.Abstractions\Framework.Database.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Database\Framework.Tracking.Abstractions\Framework.Tracking.Abstractions.csproj" />
     <ProjectReference Include="..\..\Notification\Framework.Notification.Abstractions\Framework.Notification.Abstractions.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.BLL.Core\Framework.Authorization.BLL.Core.csproj" />
     <ProjectReference Include="..\Framework.Configuration.Domain.Models\Framework.Configuration.Domain.Models.csproj" />

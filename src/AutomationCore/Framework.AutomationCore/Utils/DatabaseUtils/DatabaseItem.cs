@@ -12,7 +12,7 @@ public class DatabaseItem : IDatabaseItem
         string connectionString,
         string databaseCollation,
         string dbDataDirectory,
-        string initialCatalog = null,
+        string? initialCatalog = null,
         bool randomizeDatabaseName = false)
     {
         this.DbDataDirectory = dbDataDirectory;

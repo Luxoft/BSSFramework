@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 
 using Framework.BLL.Domain.DTO;
-using Framework.BLL.Fetching;
+using Framework.CodeGeneration.BLLGenerator.Fetching;
 using Framework.CodeGeneration.Configuration;
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;

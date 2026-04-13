@@ -28,7 +28,7 @@ public abstract class ProjectionSource : IProjectionSource
         {
             if (property.PropertyType.IsGenericTypeImplementation(typeof(Projection<>)))
             {
-                yield return (IProjection)property.GetValue(this);
+                yield return (IProjection)property.GetValue(this)!;
             }
         }
     }

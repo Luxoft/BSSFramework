@@ -6,7 +6,7 @@ using Framework.Core;
 
 namespace Framework.Restriction;
 
-public static class TypeExtensions
+public static class TypeExtensions2
 {
     public static IEnumerable<PropertyInfo> GetUniqueElementProperties(this Type type, string groupKey)
     {

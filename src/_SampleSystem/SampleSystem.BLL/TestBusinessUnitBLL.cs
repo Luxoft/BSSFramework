@@ -16,13 +16,4 @@ public partial class TestBusinessUnitBLL
             HierarchicalBusinessUnitFilterModel filter,
             FetchRule<TestBusinessUnit> fetchs) =>
         this.GetTreeByOData(selectOperation, fetchs);
-
-    public override SelectOperationResult<TestBusinessUnit> GetObjectsByOData(SelectOperation<TestBusinessUnit> selectOperation, FetchRule<TestBusinessUnit>? fetchRule = null)
-    {
-        var ss1 = selectOperation.Inject(this.GetUnsecureQueryable());
-
-        var ss2 = selectOperation.Inject(this.GetSecureQueryable());
-
-        return base.GetObjectsByOData(selectOperation, fetchRule);
-    }
 }

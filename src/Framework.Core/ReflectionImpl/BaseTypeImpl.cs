@@ -27,15 +27,22 @@ public class BaseTypeImpl : Type
 
     protected override bool HasElementTypeImpl() => throw new NotImplementedException();
 
-    protected override PropertyInfo GetPropertyImpl(string name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers) => throw new NotImplementedException();
+    protected override PropertyInfo? GetPropertyImpl(string name, BindingFlags bindingAttr, Binder? binder, Type? returnType, Type[]? types, ParameterModifier[]? modifiers) =>
+        throw new NotImplementedException();
 
     public override PropertyInfo[] GetProperties(BindingFlags bindingAttr) => throw new NotImplementedException();
 
-    protected override MethodInfo GetMethodImpl(string name, BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers) => throw new NotImplementedException();
+    protected override MethodInfo GetMethodImpl(
+        string name,
+        BindingFlags bindingAttr,
+        Binder? binder,
+        CallingConventions callConvention,
+        Type[]? types,
+        ParameterModifier[]? modifiers) => throw new NotImplementedException();
 
     public override MethodInfo[] GetMethods(BindingFlags bindingAttr) => throw new NotImplementedException();
 
-    public override FieldInfo GetField(string name, BindingFlags bindingAttr) => throw new NotImplementedException();
+    public override FieldInfo? GetField(string name, BindingFlags bindingAttr) => throw new NotImplementedException();
 
     public override FieldInfo[] GetFields(BindingFlags bindingAttr) => throw new NotImplementedException();
 
@@ -53,11 +60,24 @@ public class BaseTypeImpl : Type
 
     protected override bool IsCOMObjectImpl() => throw new NotImplementedException();
 
-    public override object InvokeMember(string name, BindingFlags invokeAttr, Binder binder, object target, object[] args, ParameterModifier[] modifiers, CultureInfo culture, string[] namedParameters) => throw new NotImplementedException();
+    public override object InvokeMember(
+        string name,
+        BindingFlags invokeAttr,
+        Binder? binder,
+        object? target,
+        object?[]? args,
+        ParameterModifier[]? modifiers,
+        CultureInfo? culture,
+        string[]? namedParameters) => throw new NotImplementedException();
 
     public override Type UnderlyingSystemType => throw new NotImplementedException();
 
-    protected override ConstructorInfo GetConstructorImpl(BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers) => throw new NotImplementedException();
+    protected override ConstructorInfo GetConstructorImpl(
+        BindingFlags bindingAttr,
+        Binder? binder,
+        CallingConventions callConvention,
+        Type[] types,
+        ParameterModifier[]? modifiers) => throw new NotImplementedException();
 
     public override string Name => throw new NotImplementedException();
 
@@ -71,9 +91,9 @@ public class BaseTypeImpl : Type
 
     public override string Namespace => throw new NotImplementedException();
 
-    public override string AssemblyQualifiedName => throw new NotImplementedException();
+    public override string? AssemblyQualifiedName => throw new NotImplementedException();
 
-    public override Type BaseType => throw new NotImplementedException();
+    public override Type? BaseType => throw new NotImplementedException();
 
     public override object[] GetCustomAttributes(Type attributeType, bool inherit) => throw new NotImplementedException();
 

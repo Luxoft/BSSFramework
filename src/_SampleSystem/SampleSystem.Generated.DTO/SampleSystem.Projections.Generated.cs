@@ -441,6 +441,82 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.NonPersistentContainer), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class NonPersistentContainerProjectionDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
+    {
+        
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> _locations;
+        
+        private Framework.Core.Period[] _periodArray;
+        
+        private SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO _testBU;
+        
+        private string _testString;
+        
+        public NonPersistentContainerProjectionDTO()
+        {
+        }
+        
+        public NonPersistentContainerProjectionDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Projections.NonPersistentContainer domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapNonPersistentContainer(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> Locations
+        {
+            get
+            {
+                return this._locations;
+            }
+            set
+            {
+                this._locations = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period[] PeriodArray
+        {
+            get
+            {
+                return this._periodArray;
+            }
+            set
+            {
+                this._periodArray = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO TestBU
+        {
+            get
+            {
+                return this._testBU;
+            }
+            set
+            {
+                this._testBU = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TestString
+        {
+            get
+            {
+                return this._testString;
+            }
+            set
+            {
+                this._testString = value;
+            }
+        }
+    }
+    
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.TestBusinessUnit), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class TestBusinessUnitProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
@@ -1243,82 +1319,6 @@ namespace SampleSystem.Generated.DTO
             set
             {
                 this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.UnpersitentContainer), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class UnpersitentContainerProjectionDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
-    {
-        
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> _locations;
-        
-        private Framework.Core.Period[] _periodArray;
-        
-        private SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO _testBU;
-        
-        private string _testString;
-        
-        public UnpersitentContainerProjectionDTO()
-        {
-        }
-        
-        public UnpersitentContainerProjectionDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Projections.UnpersitentContainer domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapUnpersitentContainer(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> Locations
-        {
-            get
-            {
-                return this._locations;
-            }
-            set
-            {
-                this._locations = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period[] PeriodArray
-        {
-            get
-            {
-                return this._periodArray;
-            }
-            set
-            {
-                this._periodArray = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO TestBU
-        {
-            get
-            {
-                return this._testBU;
-            }
-            set
-            {
-                this._testBU = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TestString
-        {
-            get
-            {
-                return this._testString;
-            }
-            set
-            {
-                this._testString = value;
             }
         }
     }

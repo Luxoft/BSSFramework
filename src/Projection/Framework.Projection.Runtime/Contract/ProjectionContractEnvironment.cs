@@ -1,15 +1,16 @@
-﻿using Framework.Core;
+﻿using System.Reflection;
+
+using Framework.Core;
 using Framework.Core.TypeResolving;
-using Framework.Core.TypeResolving.TypeSource;
-using Framework.Database.Metadata;
-using Framework.Projection.ExtendedMetadata;
+using Framework.ExtendedMetadata;
+using Framework.Projection._ImplType;
 
 namespace Framework.Projection.Contract;
 
 public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
 {
-    protected ProjectionContractEnvironment(IDomainTypeRootExtendedMetadata extendedMetadata, ITypeSource typeSource)
-        : base(extendedMetadata) =>
+    protected ProjectionContractEnvironment(IMetadataProxyProvider metadataProxyProvider, ITypeSource typeSource)
+        : base(metadataProxyProvider) =>
         this.ContractTypeResolver = LazyInterfaceImplementHelper.CreateProxy(() => this.CreateContractTypeResolver(typeSource));
 
     public ITypeResolver<Type> ContractTypeResolver { get; private set; }
@@ -19,13 +20,11 @@ public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
         var generateTypeResolver = new GenerateTypeResolver(this, typeSource);
 
         this.ContractTypeResolver = generateTypeResolver;
-
-        return TypeResolverHelper.Create(generateTypeResolver.ProjectionContracts.ToDictionary(type => type, generateTypeResolver.TryResolve));
+        return TypeResolverHelper.Create(generateTypeResolver.ProjectionContracts.ToDictionary(type => type, this.ContractTypeResolver.Resolve));
     }
 
-
     public static ProjectionContractEnvironment Create(
-        IDomainTypeRootExtendedMetadata extendedMetadata,
+        IMetadataProxyProvider metadataProxyProvider,
         ITypeSource typeSource,
         string assemblyName,
         string assemblyFullName,
@@ -34,7 +33,7 @@ public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
         string @namespace,
         bool useDependencySecurity = true) =>
         new DefaultProjectionContractEnvironment(
-            extendedMetadata,
+            metadataProxyProvider,
             typeSource,
             assemblyName,
             assemblyFullName,
@@ -43,55 +42,25 @@ public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
             @namespace,
             useDependencySecurity);
 
-    private class DefaultProjectionContractEnvironment : ProjectionContractEnvironment
+    private class DefaultProjectionContractEnvironment(
+        IMetadataProxyProvider metadataProxyProvider,
+        ITypeSource typeSource,
+        string assemblyFullName,
+        string assemblyName,
+        Type domainObjectBaseType,
+        Type persistentDomainObjectBaseType,
+        string @namespace,
+        bool useDependencySecurity) : ProjectionContractEnvironment(metadataProxyProvider, typeSource)
     {
-        public DefaultProjectionContractEnvironment(
-            IDomainTypeRootExtendedMetadata extendedMetadata,
-            ITypeSource typeSource,
-            string assemblyName,
-            string assemblyFullName,
-            Type domainObjectBaseType,
-            Type persistentDomainObjectBaseType,
-            string @namespace,
-            bool useDependencySecurity)
-            : base(extendedMetadata, typeSource)
-        {
-            if (assemblyName == null)
-            {
-                throw new ArgumentNullException(nameof(assemblyName));
-            }
+        public override string Namespace { get; } =
+            string.IsNullOrWhiteSpace(@namespace) ? throw new ArgumentException("Value cannot be null or whitespace.", nameof(@namespace)) : @namespace;
 
-            if (assemblyFullName == null)
-            {
-                throw new ArgumentNullException(nameof(assemblyFullName));
-            }
+        public override Assembly Assembly => field ??= new GeneratedAssembly(assemblyFullName, assemblyName, this.ContractTypeResolver);
 
-            if (@namespace == null)
-            {
-                throw new ArgumentNullException(nameof(@namespace));
-            }
+        public override bool UseDependencySecurity { get; } = useDependencySecurity;
 
-            if (string.IsNullOrWhiteSpace(@namespace))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(@namespace));
+        public override Type DomainObjectBaseType { get; } = domainObjectBaseType;
 
-
-            this.Assembly = LazyInterfaceImplementHelper.CreateProxy<IAssemblyInfo>(
-                () => new AssemblyInfo(assemblyName, assemblyFullName, this.ContractTypeResolver));
-            this.Namespace = @namespace;
-            this.DomainObjectBaseType = domainObjectBaseType ?? throw new ArgumentNullException(nameof(domainObjectBaseType));
-            this.PersistentDomainObjectBaseType = persistentDomainObjectBaseType
-                                                  ?? throw new ArgumentNullException(nameof(persistentDomainObjectBaseType));
-            this.UseDependencySecurity = useDependencySecurity;
-        }
-
-        public override string Namespace { get; }
-
-        public override IAssemblyInfo Assembly { get; }
-
-        public override bool UseDependencySecurity { get; }
-
-        public override Type DomainObjectBaseType { get; }
-
-        public override Type PersistentDomainObjectBaseType { get; }
+        public override Type PersistentDomainObjectBaseType { get; } = persistentDomainObjectBaseType;
     }
 }

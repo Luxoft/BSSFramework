@@ -18,16 +18,16 @@ public abstract class DTOMappingService<TBLLContext, TPersistentDomainObjectBase
 {
     public virtual IDTOMappingVersionService<TAuditPersistentDomainObjectBase, TVersion> VersionService { get; } = new DTOMappingVersionService<TBLLContext, TAuditPersistentDomainObjectBase, TIdent, TVersion>(context);
 
-    public virtual IBinaryConverter BinaryConverter { get; } = new BinaryConverter();
-
     protected bool HasAccess<TDomainObject>(TDomainObject domainObject, SecurityRule securityRule) =>
-        this.Context.ServiceProvider.GetRequiredService<IDomainSecurityService<TDomainObject>>()
+        this.Context
+            .ServiceProvider
+            .GetRequiredService<IDomainSecurityService<TDomainObject>>()
             .GetSecurityProvider(securityRule)
             .HasAccessAsync(domainObject)
             .GetAwaiter()
             .GetResult();
 
-    public virtual TDomainObject GetById<TDomainObject>(TIdent ident, IdCheckMode checkMode = IdCheckMode.SkipEmpty, LockRole lockRole = LockRole.None)
+    public virtual TDomainObject? GetById<TDomainObject>(TIdent ident, IdCheckMode checkMode = IdCheckMode.SkipEmpty, LockRole lockRole = LockRole.None)
             where TDomainObject : class, TPersistentDomainObjectBase =>
         this.Context.Logics.Default.Create<TDomainObject>().GetById(ident, checkMode, null, lockRole);
 

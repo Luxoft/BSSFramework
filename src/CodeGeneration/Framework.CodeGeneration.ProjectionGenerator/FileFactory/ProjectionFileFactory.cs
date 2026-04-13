@@ -4,7 +4,6 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.BLL.Domain.Persistent.Attributes;
-using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.CodeDom;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
@@ -132,7 +131,7 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
 
                 genProp.CustomAttributes.AddRange(attributes);
 
-                if (property.HasAttribute<MappingAttribute>(mappingAttr => mappingAttr.IsOneToOne) && this.Configuration.OneToOneSetter)
+                if (this.Configuration.Environment.MetadataProxyProvider.Wrap(property).HasAttribute<MappingAttribute>(mappingAttr => mappingAttr.IsOneToOne) && this.Configuration.OneToOneSetter)
                 {
                     genProp.SetStatements.Add(new CodePropertySetValueReferenceExpression().ToAssignStatement(new CodeThisReferenceExpression().ToFieldReference(genField)));
                 }
@@ -167,7 +166,7 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
 
         var expandPathAttr = property.GetCustomAttribute<ExpandPathAttribute>();
 
-        var propertyPath = property.GetExpandPath(false);
+        var propertyPath = this.Configuration.Environment.PropertyPathService.TryGetExpandPath(property)!;
 
         var getExpr = propertyPath.Aggregate(
 

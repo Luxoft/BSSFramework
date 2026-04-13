@@ -6,14 +6,14 @@ using CommonFramework;
 using CommonFramework.DependencyInjection;
 
 using Framework.Application.Domain;
-using Framework.BLL.Domain.Persistent.Extensions;
+using Framework.BLL.Services;
 using Framework.Core;
-using Framework.Core.TypeResolving.TypeSource;
+using Framework.Core.TypeResolving;
 using Framework.Database;
+using Framework.ExtendedMetadata;
 using Framework.FileGeneration.Extensions;
 using Framework.Projection;
 using Framework.Projection.Contract;
-using Framework.Projection.ExtendedMetadata;
 using Framework.Projection.Lambda;
 using Framework.Projection.Lambda.ProjectionSource._Base;
 
@@ -50,6 +50,8 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
         this.lazyServiceProvider = LazyHelper.Create(this.BuildServiceProvider);
 
         this.ProjectionEnvironments = LazyInterfaceImplementHelper.CreateProxy(() => this.GetProjectionEnvironments().ToReadOnlyCollectionI());
+
+        this.PropertyPathService = LazyInterfaceImplementHelper.CreateProxy<IPropertyPathService>(() => new PropertyPathService(this.MetadataProxyProvider));
     }
 
     public IServiceProvider ServiceProvider => this.lazyServiceProvider.Value;
@@ -62,13 +64,17 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
 
     public Type AuditPersistentDomainObjectBaseType { get; }
 
-    public virtual string TargetSystemName => this.PersistentDomainObjectBaseType.ExtractSystemName();
+    public virtual string TargetSystemName => this.PersistentDomainObjectBaseType.Namespace!.Split('.').Skip("Framework").First();
 
     public IReadOnlyCollection<IProjectionEnvironment> ProjectionEnvironments { get; }
 
-    public virtual IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } = new DomainTypeRootExtendedMetadataBuilder();
+    public IMetadataProxyProvider MetadataProxyProvider => field ??= new MetadataProxyProvider(this.GetExtendedAttributeSources());
+
+    public IPropertyPathService PropertyPathService { get; }
 
     public ReadOnlyCollection<Assembly> DomainObjectAssemblies => this.domainObjectAssemblies.Value;
+
+    protected virtual IEnumerable<ExtendedAttributeSource> GetExtendedAttributeSources() => [];
 
     protected virtual string ProjectionNamespace => $"{this.PersistentDomainObjectBaseType.GetNamespacePrefix()}.Domain.Projections";
 
@@ -101,6 +107,7 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
             yield return baseProjectionEnvironment;
         }
     }
+
     protected virtual IProjectionEnvironment? GetProjectionEnvironment() => null;
 
     /// <summary>
@@ -117,29 +124,28 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
 
         var fullAssemblyName = assemblyName + fullAssemblyNamePostfix;
 
-        return ProjectionContractEnvironment.Create(this.ExtendedMetadata,
-                                                    new TypeSource(this.GetDomainObjectAssemblies()),
-                                                    assemblyName,
-                                                    fullAssemblyName,
-                                                    this.DomainObjectBaseType,
-                                                    this.PersistentDomainObjectBaseType,
-                                                    this.ProjectionNamespace);
+        return ProjectionContractEnvironment.Create(
+            this.MetadataProxyProvider,
+            new TypeSource(this.GetDomainObjectAssemblies()),
+            assemblyName,
+            fullAssemblyName,
+            this.DomainObjectBaseType,
+            this.PersistentDomainObjectBaseType,
+            this.ProjectionNamespace);
     }
 
-    protected IProjectionEnvironment CreateDefaultProjectionLambdaEnvironment(IProjectionSource projectionSource, CreateProjectionLambdaSetupParams createParams)
-    {
-        if (projectionSource == null) throw new ArgumentNullException(nameof(projectionSource));
-        if (createParams == null) throw new ArgumentNullException(nameof(createParams));
+    protected IProjectionEnvironment CreateDefaultProjectionLambdaEnvironment(IProjectionSource projectionSource, CreateProjectionLambdaSetupParams createParams) =>
 
-        return ProjectionLambdaEnvironment.Create(this.ExtendedMetadata,
-                                                  projectionSource,
-                                                  createParams.AssemblyName,
-                                                  createParams.FullAssemblyName,
-                                                  this.DomainObjectBaseType,
-                                                  this.PersistentDomainObjectBaseType,
-                                                  this.ProjectionNamespace,
-                                                  createParams.UseDependencySecurity);
-    }
+        new DefaultProjectionLambdaEnvironment(
+            projectionSource,
+            this.MetadataProxyProvider,
+            this.PropertyPathService,
+            createParams.AssemblyName,
+            createParams.FullAssemblyName,
+            this.DomainObjectBaseType,
+            this.PersistentDomainObjectBaseType,
+            this.ProjectionNamespace,
+            createParams.UseDependencySecurity);
 
     protected IProjectionEnvironment CreateDefaultProjectionLambdaEnvironment(IProjectionSource projectionSource, Action<CreateProjectionLambdaSetupParams>? setupAction = null)
     {
@@ -158,18 +164,13 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
 
         var fullAssemblyName = assemblyName + fullAssemblyNamePostfix;
 
-        return new CreateProjectionLambdaSetupParams
-        {
-            AssemblyName = assemblyName,
-            FullAssemblyName = fullAssemblyName,
-            UseDependencySecurity = useDependencySecurity
-        };
+        return new CreateProjectionLambdaSetupParams { AssemblyName = assemblyName, FullAssemblyName = fullAssemblyName, UseDependencySecurity = useDependencySecurity };
     }
 
     protected IProjectionEnvironment CreateManualProjectionLambdaEnvironment(Assembly assembly)
     {
         if (assembly == null) throw new ArgumentNullException(nameof(assembly));
 
-        return new ManualProjectionEnvironment(assembly, this.PersistentDomainObjectBaseType);
+        return new ManualProjectionEnvironment(assembly, this.PersistentDomainObjectBaseType, this.MetadataProxyProvider);
     }
 }

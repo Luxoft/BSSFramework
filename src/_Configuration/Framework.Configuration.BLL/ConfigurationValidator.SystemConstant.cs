@@ -17,18 +17,18 @@ public partial class ConfigurationValidator
         else
         {
             return ValidationResult.TryCatch(() =>
-                                             {
-                                                 var domainType = this.Context.ComplexDomainTypeResolver.Resolve(source.Type);
+            {
+                var type = this.Context.TargetSystemTypeResolver.Resolve(source.Type);
 
-                                                 try
-                                                 {
-                                                     this.Context.SystemConstantSerializerFactory.Validate(domainType, source.Value);
-                                                 }
-                                                 catch (Exception ex)
-                                                 {
-                                                     throw new ValidationException($"Can't convert value \"{source.Value}\" to type \"{source.Type.FullTypeName}\"", ex);
-                                                 }
-                                             });
+                try
+                {
+                    this.Context.SystemConstantSerializerFactory.Validate(type, source.Value);
+                }
+                catch (Exception ex)
+                {
+                    throw new ValidationException($"Can't convert value \"{source.Value}\" to type \"{source.Type.FullTypeName}\"", ex);
+                }
+            });
         }
     }
 }

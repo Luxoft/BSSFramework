@@ -22,6 +22,7 @@ using Framework.CodeGeneration.DTOGenerator.Map;
 using Framework.CodeGeneration.FileFactory;
 using Framework.CodeGeneration.GeneratePolicy;
 using Framework.Core;
+using Framework.ExtendedMetadata;
 using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 using Framework.Relations;
@@ -162,7 +163,7 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
             {
                 return from property in withoutIdentity
 
-                       where property.IsWritable(fileType.Role, false)
+                       where this.Environment.MetadataProxyProvider.Wrap(property).IsWritable(fileType.Role, false)
 
                        select property;
             }
@@ -184,7 +185,9 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
 
         foreach (var domainType in this.DomainTypes)
         {
-            if (domainType.IsProjection())
+            var wrappedDomainType = this.Environment.MetadataProxyProvider.Wrap(domainType);
+
+            if (wrappedDomainType.IsProjection())
             {
                 yield return this.GetTypeMap(domainType, BaseFileType.ProjectionDTO);
             }
@@ -195,7 +198,7 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
                     yield return this.GetTypeMap(domainType, BaseFileType.IdentityDTO);
                 }
 
-                if (domainType.HasVisualIdentityProperties())
+                if (wrappedDomainType.HasVisualIdentityProperties())
                 {
                     yield return this.GetTypeMap(domainType, BaseFileType.VisualDTO);
                 }
@@ -219,12 +222,11 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        return new GenerateTypeMap(domainType, fileType, this.GetDomainTypeProperties(domainType, fileType).Select(property => this.GetPropertyMap(domainType, fileType, property)));
+        return new GenerateTypeMap(domainType, fileType, this.GetDomainTypeProperties(domainType, fileType).Select(property => this.GetPropertyMap(property, fileType)));
     }
 
-    private GeneratePropertyMap GetPropertyMap(Type domainType, DTOFileType fileType, PropertyInfo property)
+    private GeneratePropertyMap GetPropertyMap(PropertyInfo property, DTOFileType fileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
         var collectionElementType = property.PropertyType.GetCollectionOrArrayElementType();
@@ -277,7 +279,7 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
     public virtual CodeExpression GetCreateUpdateDTOExpression(
             Type domainType,
             CodeExpression currentStrictSource,
-            CodeExpression baseStrictSource,
+            CodeExpression? baseStrictSource,
             CodeExpression mappingService)
     {
         if (baseStrictSource == null)
@@ -317,8 +319,13 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        var serializationProperties = domainType.GetSerializationProperties(role);
+        var wrappedDomainObjectType = this.Environment.MetadataProxyProvider.TryWrap(domainType);
 
+        var serializationProperties =
+
+            wrappedDomainObjectType == null
+                ? domainType.GetSerializationProperties(role)
+                : wrappedDomainObjectType.GetSerializationProperties(role).Select(prop => prop.GetUnderlyingSystemProperty());
 
         if (fileType == BaseFileType.BaseAbstractDTO)
         {
@@ -336,7 +343,9 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
         {
             return from property in this.GetDomainTypeProperties(domainType, BaseFileType.SimpleDTO)
 
-                   where property.IsVisualIdentity() && property.PropertyType == typeof(string)
+                   where this.Environment
+                             .MetadataProxyProvider
+                             .Wrap(property).IsVisualIdentity() && property.PropertyType == typeof(string)
 
                    select property;
         }
@@ -382,7 +391,9 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
         {
             return from property in serializationProperties
 
-                   where property.IsWritable(role, true) || this.IsIdentityOrVersionProperty(property)
+                   let isWritable = this.Environment.MetadataProxyProvider.Wrap(property).IsWritable(role, true)
+
+                   where isWritable || this.IsIdentityOrVersionProperty(property)
 
                    select property;
         }
@@ -434,6 +445,6 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
 
     protected virtual IEnumerable<Type> GetProjectionTypes() =>
         this.Environment.ProjectionEnvironments
-            .SelectMany(projectionEnvironment => projectionEnvironment.Assembly.Types)
-            .Where(type => type.HasAttribute<ProjectionAttribute>(attr => attr.Role == ProjectionRole.Default));
+            .SelectMany(projectionEnvironment => projectionEnvironment.Assembly.GetTypes())
+            .Where(type => this.Environment.MetadataProxyProvider.Wrap(type).HasAttribute<ProjectionAttribute>(attr => attr.Role == ProjectionRole.Default));
 }

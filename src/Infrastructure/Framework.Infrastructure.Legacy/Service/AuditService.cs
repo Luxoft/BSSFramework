@@ -17,13 +17,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Infrastructure.Service;
 
-public class AuditService<TIdent, TBllContext, TBllFactoryContainer, TRootSecurityService, TPersistentObjectBase,
-                          TDomainPropertyRevisionsDto, TPropertyRevisionDto>(TBllContext bllContext)
+public class AuditService<TIdent, TBLLContext, TBllFactoryContainer, TRootSecurityService, TPersistentObjectBase,
+                          TDomainPropertyRevisionsDto, TPropertyRevisionDto>(TBLLContext bllContext)
     where TDomainPropertyRevisionsDto : DomainObjectPropertiesRevisionDTO<TIdent, TPropertyRevisionDto>, new()
     where TPropertyRevisionDto : PropertyRevisionDTOBase
     where TPersistentObjectBase : class, IIdentityObject<TIdent>
     where TBllFactoryContainer : IBLLFactoryContainer<IDefaultBLLFactory<TPersistentObjectBase, TIdent>>
-    where TBllContext : IBLLFactoryContainerContext<TBllFactoryContainer>, ISecurityServiceContainer<TRootSecurityService>, IServiceProviderContainer
+    where TBLLContext : IBLLFactoryContainerContext<TBllFactoryContainer>, ISecurityServiceContainer<TRootSecurityService>, IServiceProviderContainer
     where TRootSecurityService : IRootSecurityService
 {
     private static readonly Lazy<Type> GenericTPropertyRevisionDtoType = new Lazy<Type>(
@@ -76,7 +76,7 @@ public class AuditService<TIdent, TBllContext, TBllFactoryContainer, TRootSecuri
 
         if (typeof(TPersistentObjectBase).IsAssignableFrom(typeof(TProperty)))
         {
-            var typeResolver = bllContext.ServiceProvider.GetRequiredKeyedService<ITypeResolver<string>>("DTO");
+            var typeResolver = bllContext.ServiceProvider.GetRequiredKeyedService<ITypeResolver<TypeNameIdentity>>("DTO");
 
             var dtoType = typeResolver.Resolve(typeof(TProperty).Name + MainDTOType.SimpleDTO);
 

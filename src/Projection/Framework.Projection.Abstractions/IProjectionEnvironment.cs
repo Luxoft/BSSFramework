@@ -1,4 +1,6 @@
-﻿using Framework.Core.TypeResolving.TypeSource;
+﻿using System.Reflection;
+
+using Framework.ExtendedMetadata;
 
 namespace Framework.Projection;
 
@@ -15,10 +17,12 @@ public interface IProjectionEnvironment
     /// <summary>
     /// Сборка
     /// </summary>
-    IAssemblyInfo Assembly { get; }
+    Assembly Assembly { get; }
 
     /// <summary>
     /// Использование безопасности через атрибут `DependencySecurityAttribute`
     /// </summary>
     bool UseDependencySecurity { get; }
+
+    IMetadataProxyProvider MetadataProxyProvider { get; }
 }

@@ -8,12 +8,13 @@ using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.Core;
 using Framework.Core.ReflectionImpl;
 using Framework.Database.Mapping;
+using Framework.ExtendedMetadata;
 using Framework.Projection._ImplType;
 using Framework.Validation;
 
 namespace Framework.Projection.Contract.ImplType;
 
-internal class GeneratedType : BaseTypeImpl
+internal class GeneratedType : BaseTypeImpl, IWrappingObject
 {
     private readonly ProjectionContractEnvironment environment;
 
@@ -54,6 +55,7 @@ internal class GeneratedType : BaseTypeImpl
         this.customAttributes = this.GetCustomAttributes();
     }
 
+    public bool CanWrap => false;
 
     public override string FullName => $"{this.Namespace}.{this.Name}";
 
@@ -67,7 +69,7 @@ internal class GeneratedType : BaseTypeImpl
 
     public override Type BaseType => this.isPersistent ? this.environment.PersistentDomainObjectBaseType : this.environment.DomainObjectBaseType;
 
-    public override Assembly Assembly { get; } = null;
+    public override Assembly Assembly => this.environment.Assembly;
 
     public override Module Module { get; } = typeof(GeneratedType).Module;
 
@@ -81,7 +83,7 @@ internal class GeneratedType : BaseTypeImpl
 
     protected override bool IsByRefImpl() => false;
 
-    public override bool IsAssignableFrom(Type c) => this.Equals(c);
+    public override bool IsAssignableFrom(Type? c) => this == c;
 
     public override object[] GetCustomAttributes(Type attributeType, bool inherit) => (object[])this.customAttributes.Where(attributeType.IsInstanceOfType).ToArray(attributeType);
 
@@ -92,7 +94,7 @@ internal class GeneratedType : BaseTypeImpl
         {
             this.GetSourceTypeAttributes(),
 
-            this.ContractType.GetCustomAttributes().Where(v => !(v is ProjectionContractAttribute)),
+            this.ContractType.GetCustomAttributes().Where(v => v is not ProjectionContractAttribute),
 
             this.GetTableAttributes(),
 
@@ -103,12 +105,12 @@ internal class GeneratedType : BaseTypeImpl
         }.SelectMany().ToArray();
 
     private IEnumerable<Attribute> GetSourceTypeAttributes() =>
-        this.SourceType.GetCustomAttributes().Where(attr =>
-                                                        !(attr is TableAttribute)
-                                                        && !(attr is BLLRoleAttribute)
-                                                        && !(attr is ClassValidatorAttribute)
-                                                        && !(attr is DomainObjectAccessAttribute)
-                                                        && !(attr is DependencySecurityAttribute));
+        this.environment.MetadataProxyProvider.Wrap(this.SourceType).GetCustomAttributes().Where(attr =>
+                                                                                                     !(attr is TableAttribute)
+                                                                                                     && !(attr is BLLRoleAttribute)
+                                                                                                     && !(attr is ClassValidatorAttribute)
+                                                                                                     && !(attr is DomainObjectAccessAttribute)
+                                                                                                     && !(attr is DependencySecurityAttribute));
 
     private IEnumerable<Attribute> GetSecurityAttributes()
     {
@@ -120,7 +122,7 @@ internal class GeneratedType : BaseTypeImpl
 
     private IEnumerable<TableAttribute> GetTableAttributes()
     {
-        yield return this.SourceType.GetCustomAttribute<TableAttribute>() ?? new TableAttribute { Name = this.SourceType.Name };
+        yield return this.environment.MetadataProxyProvider.Wrap(this.SourceType).GetCustomAttribute<TableAttribute>() ?? new TableAttribute { Name = this.SourceType.Name };
     }
 
     private IEnumerable<ProjectionAttribute> GetProjectionAttributes()
@@ -132,13 +134,13 @@ internal class GeneratedType : BaseTypeImpl
 
     protected override bool IsPrimitiveImpl() => false;
 
-    public override FieldInfo GetField(string name, BindingFlags bindingAttr) => this.GetFields(bindingAttr).SingleOrDefault(f => f.Name == name);
+    public override FieldInfo? GetField(string name, BindingFlags bindingAttr) => this.GetFields(bindingAttr).SingleOrDefault(f => f.Name == name);
 
     public override FieldInfo[] GetFields(BindingFlags bindingAttr)
     {
         if (bindingAttr.HasFlag(BindingFlags.Instance | BindingFlags.NonPublic))
         {
-            return this.generatedFields;
+            return this.generatedFields.ToArray<FieldInfo>();
         }
         else
         {
@@ -166,7 +168,7 @@ internal class GeneratedType : BaseTypeImpl
         }
     }
 
-    protected override PropertyInfo GetPropertyImpl(string name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers) =>
+    protected override PropertyInfo? GetPropertyImpl(string name, BindingFlags bindingAttr, Binder? binder, Type? returnType, Type[]? types, ParameterModifier[]? modifiers) =>
         this.generatedProperties.SingleOrDefault(prop => prop.Name == name)
 
         ?? this.BaseType.GetProperty(name, bindingAttr);
@@ -185,23 +187,23 @@ internal class GeneratedType : BaseTypeImpl
 
                       select new
                              {
-                                     InterfaceMethod = prop.ContractProperty.GetMethod,
+                                 InterfaceMethod = prop.ContractProperty.GetMethod,
 
-                                     ImplementMethod = implementProp.GetMethod
+                                 ImplementMethod = implementProp.GetMethod
                              };
 
         var methods = request.ToArray();
 
         return new InterfaceMapping
                {
-                       InterfaceType = interfaceType,
-                       TargetType = this,
-                       InterfaceMethods = methods.ToArray(pair => pair.InterfaceMethod),
-                       TargetMethods = methods.ToArray(pair => pair.ImplementMethod)
+                   InterfaceType = interfaceType,
+                   TargetType = this,
+                   InterfaceMethods = methods.ToArray(pair => pair.InterfaceMethod),
+                   TargetMethods = methods.ToArray(pair => pair.ImplementMethod)
                };
     }
 
-    public override bool Equals(Type o) => ReferenceEquals(this, o);
+    public override bool Equals(Type? o) => ReferenceEquals(this, o);
 
     public override int GetHashCode() => this.FullName.GetHashCode();
 

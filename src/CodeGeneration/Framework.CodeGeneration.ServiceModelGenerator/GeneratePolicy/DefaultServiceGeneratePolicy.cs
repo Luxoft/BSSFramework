@@ -5,6 +5,7 @@ using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.GeneratePolicy;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
+using Framework.Core;
 using Framework.Projection;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.GeneratePolicy;
@@ -14,30 +15,30 @@ namespace Framework.CodeGeneration.ServiceModelGenerator.GeneratePolicy;
 /// </summary>
 public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment generationEnvironment) : IGeneratePolicy<MethodIdentity>
 {
-    public virtual bool Used(Type domainType, MethodIdentity identity)
+    public virtual bool Used(Type baseDomainType, MethodIdentity identity)
     {
-        var extendedMetadata = generationEnvironment.ExtendedMetadata;
+        var wrappedDomainType = generationEnvironment.MetadataProxyProvider.Wrap(baseDomainType);
 
-        var allowedSingleDTO = () => extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType, attr => attr.Single.Contains((MainDTOType)identity.DTOType.Value));
-        var allowedCollectionDTO = () => extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType, attr => attr.Collection.Contains((MainDTOType)identity.DTOType.Value));
+        var allowedSingleDTO = () => wrappedDomainType.HasAttribute<BLLViewRoleAttribute>(attr => attr.Single.Contains((MainDTOType)identity.DTOType!.Value));
+        var allowedCollectionDTO = () => wrappedDomainType.HasAttribute<BLLViewRoleAttribute>(attr => attr.Collection.Contains((MainDTOType)identity.DTOType!.Value));
 
-        Func<ProjectionFilterTargets, bool> allowedProjectionFilter = target => extendedMetadata.HasAttribute<ProjectionFilterAttribute>(domainType, attr => attr.FilterType == identity.ModelType && attr.Target.HasFlag(target));
+        Func<ProjectionFilterTargets, bool> allowedProjectionFilter = target => wrappedDomainType.HasAttribute<ProjectionFilterAttribute>(attr => attr.FilterType == identity.ModelType && attr.Target.HasFlag(target));
 
-        if (identity.DTOType == ViewDTOType.VisualDTO && !domainType.HasVisualIdentityProperties())
+        if (identity.DTOType == ViewDTOType.VisualDTO && !wrappedDomainType.HasVisualIdentityProperties())
         {
             return false;
         }
         else if (identity == MethodIdentityType.Save)
         {
-            return extendedMetadata.HasAttribute<BLLSaveRoleAttribute>(domainType, attr => attr.SaveType.HasFlag(BLLSaveType.Save) && attr.CountType.HasFlag(CountType.Single));
+            return wrappedDomainType.HasAttribute<BLLSaveRoleAttribute>(attr => attr.SaveType.HasFlag(BLLSaveType.Save) && attr.CountType.HasFlag(CountType.Single));
         }
         else if (identity == MethodIdentityType.SaveMany)
         {
-            return extendedMetadata.HasAttribute<BLLSaveRoleAttribute>(domainType, attr => attr.SaveType.HasFlag(BLLSaveType.Save) && attr.CountType.HasFlag(CountType.Many));
+            return wrappedDomainType.HasAttribute<BLLSaveRoleAttribute>(attr => attr.SaveType.HasFlag(BLLSaveType.Save) && attr.CountType.HasFlag(CountType.Many));
         }
         else if (identity == MethodIdentityType.Update)
         {
-            return extendedMetadata.HasAttribute<BLLSaveRoleAttribute>(domainType, attr => attr.SaveType.HasFlag(BLLSaveType.Update) && attr.CountType.HasFlag(CountType.Single));
+            return wrappedDomainType.HasAttribute<BLLSaveRoleAttribute>(attr => attr.SaveType.HasFlag(BLLSaveType.Update) && attr.CountType.HasFlag(CountType.Single));
         }
         else if (identity == MethodIdentityType.GetWithExtended)
         {
@@ -49,17 +50,17 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
         }
         else if (identity == MethodIdentityType.Remove)
         {
-            return extendedMetadata.HasAttribute<BLLRemoveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Single));
+            return wrappedDomainType.HasAttribute<BLLRemoveRoleAttribute>(attr => attr.CountType.HasFlag(CountType.Single));
         }
         else if (identity == MethodIdentityType.RemoveMany)
         {
-            return extendedMetadata.HasAttribute<BLLRemoveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Many));
+            return wrappedDomainType.HasAttribute<BLLRemoveRoleAttribute>(attr => attr.CountType.HasFlag(CountType.Many));
         }
         else if (identity == MethodIdentityType.GetPropertyRevisions
                  || identity == MethodIdentityType.GetPropertyRevisionByDateRange
                  || identity == MethodIdentityType.GetRevisions)
         {
-            return extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType);
+            return wrappedDomainType.HasAttribute<BLLViewRoleAttribute>();
         }
         else if (identity == MethodIdentityType.GetRevision)
         {
@@ -69,19 +70,19 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
                  || identity == MethodIdentityType.GetAttachment
                  || identity == MethodIdentityType.RemoveAttachment)
         {
-            return extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType);
+            return wrappedDomainType.HasAttribute<BLLViewRoleAttribute>();
         }
         else if (identity == MethodIdentityType.GetFileContainer)
         {
-            return extendedMetadata.HasAttribute<BLLViewRoleAttribute>(domainType);
+            return wrappedDomainType.HasAttribute<BLLViewRoleAttribute>();
         }
         else if (identity == MethodIdentityType.IntegrationSave)
         {
-            return extendedMetadata.HasAttribute<BLLIntegrationSaveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Single));
+            return wrappedDomainType.HasAttribute<BLLIntegrationSaveRoleAttribute>(attr => attr.CountType.HasFlag(CountType.Single));
         }
         else if (identity == MethodIdentityType.IntegrationSaveMany)
         {
-            return extendedMetadata.HasAttribute<BLLIntegrationSaveRoleAttribute>(domainType, attr => attr.CountType.HasFlag(CountType.Many));
+            return wrappedDomainType.HasAttribute<BLLIntegrationSaveRoleAttribute>(attr => attr.CountType.HasFlag(CountType.Many));
         }
         else if (identity == MethodIdentityType.IntegrationSaveByModel)
         {
@@ -89,7 +90,7 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
         }
         else if (identity == MethodIdentityType.IntegrationRemove)
         {
-            return extendedMetadata.HasAttribute<BLLIntegrationRemoveRoleAttribute>(domainType);
+            return wrappedDomainType.HasAttribute<BLLIntegrationRemoveRoleAttribute>();
         }
         else if (identity == MethodIdentityType.GetChangeModel || identity == MethodIdentityType.GetMassChangeModel)
         {
@@ -121,7 +122,7 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
         }
         else if (identity == MethodIdentityType.GetSingleByIdentity)
         {
-            if (domainType.IsProjection())
+            if (wrappedDomainType.IsProjection())
             {
                 return true;
             }
@@ -132,7 +133,7 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
         }
         else if (identity == MethodIdentityType.GetSingleByFilter)
         {
-            if (domainType.IsProjection())
+            if (wrappedDomainType.IsProjection())
             {
                 return allowedProjectionFilter(ProjectionFilterTargets.Single);
             }
@@ -149,7 +150,7 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
         {
             if (identity.DTOType == ViewDTOType.ProjectionDTO)
             {
-                return domainType.IsProjection();
+                return wrappedDomainType.IsProjection();
             }
             else
             {
@@ -158,7 +159,7 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
         }
         else if (identity == MethodIdentityType.GetListByFilter)
         {
-            if (domainType.IsProjection())
+            if (wrappedDomainType.IsProjection())
             {
                 return allowedProjectionFilter(ProjectionFilterTargets.Collection);
             }
@@ -173,7 +174,7 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
         }
         else if (identity == MethodIdentityType.GetODataListByQueryStringWithFilter)
         {
-            if (domainType.IsProjection())
+            if (wrappedDomainType.IsProjection())
             {
                 return allowedProjectionFilter(ProjectionFilterTargets.OData);
             }
@@ -184,7 +185,7 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
         }
         else if (identity == MethodIdentityType.GetODataTreeByQueryStringWithFilter)
         {
-            if (domainType.IsProjection())
+            if (wrappedDomainType.IsProjection())
             {
                 return allowedProjectionFilter(ProjectionFilterTargets.ODataTree);
             }

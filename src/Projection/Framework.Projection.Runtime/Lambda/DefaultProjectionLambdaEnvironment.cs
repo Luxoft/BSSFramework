@@ -1,54 +1,32 @@
-﻿using Framework.Core;
-using Framework.Core.TypeResolving.TypeSource;
-using Framework.Database.Metadata;
-using Framework.Projection.ExtendedMetadata;
+﻿using System.Reflection;
+
+using Framework.BLL.Services;
+using Framework.ExtendedMetadata;
+using Framework.Projection._ImplType;
 using Framework.Projection.Lambda.ProjectionSource._Base;
 
 namespace Framework.Projection.Lambda;
 
-public class DefaultProjectionLambdaEnvironment : ProjectionLambdaEnvironment
+public class DefaultProjectionLambdaEnvironment(
+    IProjectionSource projectionSource,
+    IMetadataProxyProvider metadataProxyProvider,
+    IPropertyPathService propertyPathService,
+    string assemblyName,
+    string assemblyFullName,
+    Type domainObjectBaseType,
+    Type persistentDomainObjectBaseType,
+    string @namespace,
+    bool useDependencySecurity = true) : ProjectionLambdaEnvironment(projectionSource, metadataProxyProvider, propertyPathService)
 {
-    public DefaultProjectionLambdaEnvironment(
-        IDomainTypeRootExtendedMetadata extendedMetadata,
-        IProjectionSource projectionSource,
-        string assemblyName,
-        string assemblyFullName,
-        Type domainObjectBaseType,
-        Type persistentDomainObjectBaseType,
-        string @namespace,
-        bool useDependencySecurity)
-        : base(extendedMetadata, projectionSource)
-    {
-        if (assemblyName == null)
-        {
-            throw new ArgumentNullException(nameof(assemblyName));
-        }
+    public override string Namespace { get; } =
+        string.IsNullOrWhiteSpace(@namespace) ? throw new ArgumentException("Value cannot be null or whitespace.", nameof(@namespace)) : @namespace;
 
-        if (assemblyFullName == null)
-        {
-            throw new ArgumentNullException(nameof(assemblyFullName));
-        }
+    public override Assembly Assembly => field ??= new GeneratedAssembly(assemblyFullName, assemblyName, this.ProjectionTypeResolver);
 
-        if (string.IsNullOrWhiteSpace(@namespace)) throw new ArgumentException("Value cannot be null or whitespace.", nameof(@namespace));
+    public override Type DomainObjectBaseType { get; } = domainObjectBaseType;
 
-
-        this.Assembly = LazyInterfaceImplementHelper.CreateProxy<IAssemblyInfo>(
-            () => new AssemblyInfo(assemblyName, assemblyFullName, this.ProjectionTypeResolver));
-        this.Namespace = @namespace;
-        this.DomainObjectBaseType = domainObjectBaseType ?? throw new ArgumentNullException(nameof(domainObjectBaseType));
-        this.PersistentDomainObjectBaseType =
-            persistentDomainObjectBaseType ?? throw new ArgumentNullException(nameof(persistentDomainObjectBaseType));
-        this.UseDependencySecurity = useDependencySecurity;
-    }
-
-    public override string Namespace { get; }
-
-    public override IAssemblyInfo Assembly { get; }
-
-    public override Type DomainObjectBaseType { get; }
-
-    public override Type PersistentDomainObjectBaseType { get; }
+    public override Type PersistentDomainObjectBaseType { get; } = persistentDomainObjectBaseType;
 
     /// <inheritdoc />
-    public override bool UseDependencySecurity { get; }
+    public override bool UseDependencySecurity { get; } = useDependencySecurity;
 }

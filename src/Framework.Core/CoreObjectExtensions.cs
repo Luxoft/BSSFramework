@@ -17,7 +17,7 @@ public static class CoreObjectExtensions
             .WithLock();
 
     [Obsolete("v10 This method will be protected in future")]
-    public static string ToFormattedString(this object source, string typeName = null)
+    public static string ToFormattedString(this object source, string? typeName = null)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 

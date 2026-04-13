@@ -6,12 +6,13 @@ using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.Core;
 using Framework.Core.ReflectionImpl;
+using Framework.ExtendedMetadata;
 using Framework.Projection._Extensions;
 using Framework.Projection._ImplType;
 
 namespace Framework.Projection.Lambda.ImplType;
 
-internal class GeneratedType : BaseTypeImpl
+internal class GeneratedType : BaseTypeImpl, IWrappingObject
 {
     private readonly ProjectionLambdaEnvironment environment;
 
@@ -59,6 +60,7 @@ internal class GeneratedType : BaseTypeImpl
         this.customAttributes = this.Projection.Attributes.ToArray();
     }
 
+    public bool CanWrap => false;
 
     public override string FullName => $"{this.Namespace}.{this.Name}";
 
@@ -80,10 +82,11 @@ internal class GeneratedType : BaseTypeImpl
 
     public override Type BaseType =>
 
-            this.isPersistent ? this.HasBaseSecurityType ? this.environment.GetSecurityProjectionType(this.SourceType) : this.environment.PersistentDomainObjectBaseType
-                    : this.environment.DomainObjectBaseType;
+        this.isPersistent
+            ? this.HasBaseSecurityType ? this.environment.GetSecurityProjectionType(this.SourceType) : this.environment.PersistentDomainObjectBaseType
+            : this.environment.DomainObjectBaseType;
 
-    public override Assembly Assembly { get; } = null;
+    public override Assembly Assembly => this.environment.Assembly;
 
     public override Module Module { get; } = typeof(GeneratedType).Module;
 
@@ -112,8 +115,10 @@ internal class GeneratedType : BaseTypeImpl
 
                 var implementedSubInterfaces = wrappedSubInterfaces.ToArray(wrappedSubInterface =>
 
-                                                                                    wrappedSubInterface.IsGenericType ? wrappedSubInterface.GetGenericTypeDefinition().CachedMakeGenericType(wrappedSubInterface.GetGenericArguments().ToArray(wrappedArg => argDict[wrappedArg]))
-                                                                                            : wrappedSubInterface);
+                                                                                wrappedSubInterface.IsGenericType
+                                                                                    ? wrappedSubInterface.GetGenericTypeDefinition().CachedMakeGenericType(
+                                                                                        wrappedSubInterface.GetGenericArguments().ToArray(wrappedArg => argDict[wrappedArg]))
+                                                                                    : wrappedSubInterface);
 
                 yield return implementedSubInterfaces;
             }
@@ -121,7 +126,7 @@ internal class GeneratedType : BaseTypeImpl
             {
                 yield return [securityNodeInterface];
             }
-        };
+        }
     }
 
     private IEnumerable<Type> GetSecurityNodeImplementInterfaces()
@@ -133,8 +138,8 @@ internal class GeneratedType : BaseTypeImpl
                 var securityArgs = securityInterface.GetGenericArguments().ToArray(this.environment.GetSecurityProjectionType);
 
                 var projectionSecurityInterface = securityInterface.IsGenericType
-                                                          ? securityInterface.GetGenericTypeDefinition().CachedMakeGenericType(securityArgs)
-                                                          : securityInterface;
+                                                      ? securityInterface.GetGenericTypeDefinition().CachedMakeGenericType(securityArgs)
+                                                      : securityInterface;
 
                 yield return projectionSecurityInterface;
             }
@@ -149,23 +154,23 @@ internal class GeneratedType : BaseTypeImpl
 
     protected override bool IsByRefImpl() => false;
 
-    public override bool IsAssignableFrom(Type c) => this.Equals(c);
+    public override bool IsAssignableFrom(Type? c) => this == c;
 
     public override object[] GetCustomAttributes(Type attributeType, bool inherit) => (object[])this.customAttributes.Where(attributeType.IsInstanceOfType).ToArray(attributeType);
 
-    public override object[] GetCustomAttributes(bool inherit) => this.customAttributes;
+    public override object[] GetCustomAttributes(bool inherit) => this.customAttributes.ToArray<object>();
 
     protected override TypeAttributes GetAttributeFlagsImpl() => TypeAttributes.BeforeFieldInit;
 
     protected override bool IsPrimitiveImpl() => false;
 
-    public override FieldInfo GetField(string name, BindingFlags bindingAttr) => this.GetFields(bindingAttr).SingleOrDefault(f => f.Name == name);
+    public override FieldInfo? GetField(string name, BindingFlags bindingAttr) => this.GetFields(bindingAttr).SingleOrDefault(f => f.Name == name);
 
     public override FieldInfo[] GetFields(BindingFlags bindingAttr)
     {
         if (bindingAttr.HasFlag(BindingFlags.Instance | BindingFlags.NonPublic))
         {
-            return this.generatedFields;
+            return this.generatedFields.ToArray<FieldInfo>();
         }
         else
         {
@@ -195,7 +200,7 @@ internal class GeneratedType : BaseTypeImpl
         }
     }
 
-    protected override PropertyInfo GetPropertyImpl(string name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers) =>
+    protected override PropertyInfo? GetPropertyImpl(string name, BindingFlags bindingAttr, Binder? binder, Type? returnType, Type[]? types, ParameterModifier[]? modifiers) =>
         this.generatedProperties.SingleOrDefault(prop => prop.Name == name)
 
         ?? this.generatedCustomProperties.SingleOrDefault(prop => prop.Name == name)
@@ -212,14 +217,14 @@ internal class GeneratedType : BaseTypeImpl
 
         return new InterfaceMapping
                {
-                       InterfaceType = interfaceType,
-                       TargetType = this,
-                       InterfaceMethods = interfaceExplicitProperties.ToArray(prop => prop.InterfaceProp.GetMethod),
-                       TargetMethods = interfaceExplicitProperties.ToArray(prop => prop.GetMethod)
+                   InterfaceType = interfaceType,
+                   TargetType = this,
+                   InterfaceMethods = interfaceExplicitProperties.ToArray(prop => prop.InterfaceProp.GetMethod!),
+                   TargetMethods = interfaceExplicitProperties.ToArray(prop => prop.GetMethod!)
                };
     }
 
-    public override bool Equals(Type o) => ReferenceEquals(this, o);
+    public override bool Equals(Type? o) => ReferenceEquals(this, o);
 
     public override int GetHashCode() => this.FullName.GetHashCode();
 
@@ -257,7 +262,9 @@ internal class GeneratedType : BaseTypeImpl
     private IEnumerable<ExplicitProperty> GetExplicitProperties()
     {
         var allInterfaceProperties = this.securityNodeInterfaces.SelectMany(genericSecurityInterface =>
-                                                                                    (genericSecurityInterface.IsGenericType ? genericSecurityInterface.GetGenericTypeDefinition() : genericSecurityInterface).GetAllInterfaceProperties()).Distinct().ToArray();
+                                                                                (genericSecurityInterface.IsGenericType
+                                                                                     ? genericSecurityInterface.GetGenericTypeDefinition()
+                                                                                     : genericSecurityInterface).GetAllInterfaceProperties()).Distinct().ToArray();
 
         var request = from generateProp in this.generatedProperties
 
@@ -279,7 +286,12 @@ internal class GeneratedType : BaseTypeImpl
             {
                 var propType = this.environment.BuildPropertyType(projectionProperty.Type);
 
-                yield return new ExplicitProperty(projectionProperty.VirtualExplicitInterfaceProperty, this, projectionProperty.VirtualExplicitInterfaceProperty.Name, propType, projectionProperty.Path);
+                yield return new ExplicitProperty(
+                    projectionProperty.VirtualExplicitInterfaceProperty,
+                    this,
+                    projectionProperty.VirtualExplicitInterfaceProperty.Name,
+                    propType,
+                    projectionProperty.Path);
             }
         }
     }

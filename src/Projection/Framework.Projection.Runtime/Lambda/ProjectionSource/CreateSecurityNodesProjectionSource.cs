@@ -1,7 +1,6 @@
 ﻿using CommonFramework;
 
 using Framework.BLL.Domain.Extensions;
-using Framework.BLL.Domain.Persistent.Extensions;
 using Framework.Core;
 using Framework.Projection.Lambda._Extensions;
 using Framework.Projection.Lambda.ProjectionBuilder;
@@ -9,15 +8,11 @@ using Framework.Projection.Lambda.ProjectionSource._Base;
 
 namespace Framework.Projection.Lambda.ProjectionSource;
 
-internal class CreateSecurityNodesProjectionSource(IProjectionSource baseSource, ProjectionLambdaEnvironment environment) : IProjectionSource
+internal class CreateSecurityNodesProjectionSource(ProjectionLambdaEnvironment environment, IProjectionSource baseSource) : IProjectionSource
 {
-    private readonly IProjectionSource baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
-
-    private readonly ProjectionLambdaEnvironment environment = environment ?? throw new ArgumentNullException(nameof(environment));
-
     public IEnumerable<IProjection> GetProjections()
     {
-        var builders = this.baseSource.GetProjections().ToBuilders();
+        var builders = baseSource.GetProjections().ToBuilders();
 
         var allTypes = builders.SelectMany(projection => new[] { projection.SourceType }.Concat(projection.Properties.Select(prop => prop.ElementType)))
                                .Distinct()
@@ -47,7 +42,7 @@ internal class CreateSecurityNodesProjectionSource(IProjectionSource baseSource,
         var allSecurityInterfaces = sourceType.GetSecurityNodeInterfaces()
                                               .SelectMany(i => i.GetAllInterfaces())
                                               .Distinct()
-                                              .Except(this.environment.PersistentDomainObjectBaseType.GetAllInterfaces())
+                                              .Except(environment.PersistentDomainObjectBaseType.GetAllInterfaces())
                                               .ToList();
 
         foreach (var interfaceType in allSecurityInterfaces)
@@ -56,18 +51,18 @@ internal class CreateSecurityNodesProjectionSource(IProjectionSource baseSource,
             {
                 var implProp = sourceType.GetImplementedProperty(interfaceProp);
 
-                var isExplicit = implProp.GetExpandPath().Maybe(path => path.IsEmpty);
+                var isExplicit = environment.PropertyPathService.TryGetExpandPath(implProp).Maybe(path => path.IsEmpty);
 
                 var name = $"{interfaceProp.Name}_Security";
 
-                projection.Properties.Add(new ProjectionPropertyBuilder(implProp.ToGetLambdaExpression(sourceType))
-                                          {
-                                                  Role = ProjectionPropertyRole.Security,
-                                                  Name = name,
-                                                  IgnoreSerialization = true,
-                                                  ElementProjection = securityProjections.GetValueOrDefault(implProp.PropertyType.GetCollectionOrArrayElementTypeOrSelf()),
-                                                  VirtualExplicitInterfaceProperty = isExplicit ? interfaceProp : null
-                                          });
+                projection.Properties.Add(new ProjectionPropertyBuilder(environment, implProp.ToGetLambdaExpression(sourceType))
+                                                {
+                                                    Role = ProjectionPropertyRole.Security,
+                                                    Name = name,
+                                                    IgnoreSerialization = true,
+                                                    ElementProjection = securityProjections.GetValueOrDefault(implProp.PropertyType.GetCollectionOrArrayElementTypeOrSelf()),
+                                                    VirtualExplicitInterfaceProperty = isExplicit ? interfaceProp : null
+                                                });
             }
         }
 

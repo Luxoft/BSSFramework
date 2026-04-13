@@ -27,14 +27,14 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        var isFixReferencePropertyMode = property.IsFixReference(this.FileType.Role);
+        var isFixReferencePropertyMode = this.Configuration.Environment.MetadataProxyProvider.Wrap(property).IsFixReference(this.FileType.Role);
 
         var getToDomainObjectExpr =
             (CodeExpression expr, Type type, bool isDetail) =>
             {
                 var methodName = "To" + type.Name;
 
-                if (this.Configuration.Environment.ExtendedMetadata.HasAttribute<AutoMappingAttribute>(property, attr => !attr.Enabled))
+                if (this.Configuration.Environment.MetadataProxyProvider.Wrap(property).HasAttribute<AutoMappingAttribute>(attr => !attr.Enabled))
                 {
                     if (this.Configuration.IsPersistentObject(type))
                     {

@@ -6,11 +6,12 @@ using Framework.Application.Events;
 using Framework.BLL;
 using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.Extensions;
-using Framework.BLL.Domain.Persistent.Visitors;
 using Framework.BLL.Services;
 using Framework.BLL.Validation;
+using Framework.BLL.Visitors;
 using Framework.Core;
 using Framework.Database;
+using Framework.ExtendedMetadata;
 using Framework.Infrastructure.ApiControllerBaseEvaluator;
 using Framework.Infrastructure.ContextEvaluator;
 using Framework.Infrastructure.Service;
@@ -36,8 +37,16 @@ public static class ServiceCollectionExtensions
     {
         public IServiceCollection AddLegacyGenericServices()
         {
+            services.AddSingleton<ITargetSystemTypeResolverContainer, TargetSystemTypeResolverContainer>();
+            services.AddSingleton<ITargetSystemInfoService, TargetSystemInfoService>();
+
+            services.AddScoped<IRootSecurityService, RootSecurityService>();
+
+            services.AddSingleton<IMetadataProxyProvider, MetadataProxyProvider>();
+            services.AddSingleton<IPropertyPathService, PropertyPathService>();
+
             services.AddScoped(typeof(EvaluatedData<,>));
-            services.AddKeyedScoped<IEventOperationSender, BLLEventOperationSender>("BLL");
+            services.AddKeyedScoped<IEventOperationSender, BLLEventOperationSender>(nameof(BLL));
 
             services.AddSingleton<Validation.IAvailableValues>(AvailableValuesHelper.AvailableValues.ToValidation());
             services.AddScoped(typeof(ITrackingService<>), typeof(TrackingService<>));
@@ -47,7 +56,7 @@ public static class ServiceCollectionExtensions
 
             services.AddSingleton<IExceptionExpander, TargetInvocationExceptionExpander>();
 
-            services.AddKeyedSingleton<IExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey, new ExpressionVisitorContainer(new ExpandPathVisitor()));
+            services.AddKeyedSingleton<IExpressionVisitorContainer, ExpandPathVisitorContainer>(IExpressionVisitorContainer.ElementKey);
 
             services.AddOData();
 

@@ -1,6 +1,6 @@
-﻿using Framework.BLL.Domain.IdentityObject;
+﻿using Framework.Application.Domain;
+using Framework.Database;
 using Framework.Database.Attributes;
-using Framework.Database.Domain;
 using Framework.Database.Mapping;
 using Framework.Restriction;
 

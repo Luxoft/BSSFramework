@@ -1,41 +1,32 @@
-﻿using System.Collections.Immutable;
+﻿using System.Reflection;
 
 using Framework.Core.ReflectionImpl;
-using Framework.Core.TypeResolving.TypeSource;
+using Framework.ExtendedMetadata;
 
 namespace Framework.Projection;
 
 /// <summary>
 /// Для генерации подменяет проекции в памяти на реально скомпилированные проекции в сборке
 /// </summary>
-public class AlreadyImplementedRuntimeProjectionEnvironment : IProjectionEnvironment
+public class AlreadyImplementedRuntimeProjectionEnvironment(IProjectionEnvironment baseEnvironment) : IProjectionEnvironment
 {
-    private readonly IProjectionEnvironment baseEnvironment;
+    public string Namespace { get; } = baseEnvironment.Namespace;
 
-    public AlreadyImplementedRuntimeProjectionEnvironment(IProjectionEnvironment baseEnvironment)
+    public Assembly Assembly { get; } = new AlreadyImplementedAssembly(baseEnvironment.Assembly);
+
+    public bool UseDependencySecurity { get; } = baseEnvironment.UseDependencySecurity;
+
+    public IMetadataProxyProvider MetadataProxyProvider { get; } = baseEnvironment.MetadataProxyProvider;
+
+    private class AlreadyImplementedAssembly(Assembly baseAssembly) : Assembly
     {
-        this.baseEnvironment = baseEnvironment ?? throw new ArgumentNullException(nameof(baseEnvironment));
+        //public string Name => baseAssembly.Name;
 
-        this.Namespace = this.baseEnvironment.Namespace;
-        this.Assembly = new AlreadyImplementedAssemblyInfo(this.baseEnvironment.Assembly);
-        this.UseDependencySecurity = this.baseEnvironment.UseDependencySecurity;
-    }
+        public override string? FullName => baseAssembly.FullName;
 
-    public string Namespace { get; }
-
-    public IAssemblyInfo Assembly { get; }
-
-    public bool UseDependencySecurity { get; }
-
-    private class AlreadyImplementedAssemblyInfo(IAssemblyInfo baseAssembly) : IAssemblyInfo
-    {
-        public string Name => baseAssembly.Name;
-
-        public string FullName => baseAssembly.FullName;
-
-        public ImmutableHashSet<Type> Types { get; } =
+        public override Type[] GetTypes() =>
         [
-            .. baseAssembly.Types.Select(baseType =>
+            .. baseAssembly.GetTypes().Select(baseType =>
             {
                 if (baseType is BaseTypeImpl genType)
                 {

@@ -1,7 +1,6 @@
 ﻿using Framework.Application;
 using Framework.Configuration.Domain;
 using Framework.Database;
-using Framework.Database.Domain;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
@@ -20,31 +19,31 @@ public class NotificationCountryTests : TestBase
         // Act
         this.ClearModifications();
 
-        var countryId = this.Evaluate(DBSessionMode.Write, context =>
-                                                           {
-                                                               var bll = context.Logics.Country;
+        var countryId = this.Evaluate(
+            DBSessionMode.Write,
+            context =>
+            {
+                var bll = context.Logics.Country;
 
-                                                               var country = new Country
-                                                                             {
-                                                                                     Code = Guid.NewGuid().ToString(),
-                                                                                     NameNative = Guid.NewGuid().ToString(),
-                                                                                     Culture = Guid.NewGuid().ToString(),
-                                                                                     Name = Guid.NewGuid().ToString()
-                                                                             };
+                var country = new Country
+                              {
+                                  Code = Guid.NewGuid().ToString(), NameNative = Guid.NewGuid().ToString(), Culture = Guid.NewGuid().ToString(), Name = Guid.NewGuid().ToString()
+                              };
 
-                                                               bll.Save(country);
+                bll.Save(country);
 
-                                                               country.Name = Guid.NewGuid().ToString();
+                country.Name = Guid.NewGuid().ToString();
 
-                                                               bll.Save(country);
+                bll.Save(country);
 
-                                                               return country.Id;
-                                                           });
+                return country.Id;
+            });
 
         // Assert
         this.GetModifications().Count.Should().Be(1);
 
-        this.GetModifications().Count(mod => mod.ModificationType == ModificationType.Save && mod.Identity == countryId && mod.TypeInfoDescription.Name == nameof(Country)).Should().Be(1);
+        this.GetModifications().Count(mod => mod.ModificationType == ModificationType.Save && mod.Identity == countryId && mod.TypeInfoDescription.Name == nameof(Country)).Should()
+            .Be(1);
     }
 
     [TestMethod]
@@ -55,22 +54,21 @@ public class NotificationCountryTests : TestBase
         // Act
         this.ClearModifications();
 
-        this.Evaluate(DBSessionMode.Write, context =>
-                                           {
-                                               var bll = context.Logics.Country;
+        this.Evaluate(
+            DBSessionMode.Write,
+            context =>
+            {
+                var bll = context.Logics.Country;
 
-                                               var country = new Country
-                                                             {
-                                                                     Code = Guid.NewGuid().ToString(),
-                                                                     NameNative = Guid.NewGuid().ToString(),
-                                                                     Culture = Guid.NewGuid().ToString(),
-                                                                     Name = Guid.NewGuid().ToString()
-                                                             };
+                var country = new Country
+                              {
+                                  Code = Guid.NewGuid().ToString(), NameNative = Guid.NewGuid().ToString(), Culture = Guid.NewGuid().ToString(), Name = Guid.NewGuid().ToString()
+                              };
 
-                                               bll.Save(country);
+                bll.Save(country);
 
-                                               bll.Remove(country);
-                                           });
+                bll.Remove(country);
+            });
 
         // Assert
         this.GetModifications().Count.Should().Be(0);
@@ -81,22 +79,21 @@ public class NotificationCountryTests : TestBase
     {
         // Arrange
         var countryController = this.MainWebApi.Country;
-        var countryId = this.Evaluate(DBSessionMode.Write, context =>
-                                                           {
-                                                               var bll = context.Logics.Country;
+        var countryId = this.Evaluate(
+            DBSessionMode.Write,
+            context =>
+            {
+                var bll = context.Logics.Country;
 
-                                                               var country = new Country
-                                                                             {
-                                                                                     Code = Guid.NewGuid().ToString(),
-                                                                                     NameNative = Guid.NewGuid().ToString(),
-                                                                                     Culture = Guid.NewGuid().ToString(),
-                                                                                     Name = Guid.NewGuid().ToString()
-                                                                             };
+                var country = new Country
+                              {
+                                  Code = Guid.NewGuid().ToString(), NameNative = Guid.NewGuid().ToString(), Culture = Guid.NewGuid().ToString(), Name = Guid.NewGuid().ToString()
+                              };
 
-                                                               bll.Save(country);
+                bll.Save(country);
 
-                                                               return country.Id;
-                                                           });
+                return country.Id;
+            });
 
         // Act
         this.ClearModifications();
@@ -105,7 +102,8 @@ public class NotificationCountryTests : TestBase
 
         // Assert
         this.GetModifications().Count.Should().Be(1);
-        this.GetModifications().Count(mod => mod.ModificationType == ModificationType.Remove && mod.Identity == countryId && mod.TypeInfoDescription.Name == nameof(Country)).Should().Be(1);
+        this.GetModifications().Count(mod => mod.ModificationType == ModificationType.Remove && mod.Identity == countryId && mod.TypeInfoDescription.Name == nameof(Country))
+            .Should().Be(1);
     }
 
 
@@ -117,18 +115,20 @@ public class NotificationCountryTests : TestBase
         var revision = 123;
 
         this.ClearModifications();
-        this.Evaluate(DBSessionMode.Write, context =>
-                                           {
-                                               var fakeModification = new DomainObjectModification()
-                                                                      {
-                                                                              DomainType = context.Configuration.GetDomainType(typeof(Country), true)!,
-                                                                              Type = ModificationType.Save,
-                                                                              Revision = revision,
-                                                                              DomainObjectId = domainObjectId
-                                                                      };
+        this.Evaluate(
+            DBSessionMode.Write,
+            context =>
+            {
+                var fakeModification = new DomainObjectModification()
+                                       {
+                                           DomainType = context.Configuration.GetDomainType(typeof(Country)),
+                                           Type = ModificationType.Save,
+                                           Revision = revision,
+                                           DomainObjectId = domainObjectId
+                                       };
 
-                                               context.Configuration.Logics.DomainObjectModification.Save(fakeModification);
-                                           });
+                context.Configuration.Logics.DomainObjectModification.Save(fakeModification);
+            });
 
         var configController = this.GetConfigurationControllerEvaluator(DefaultConstants.NOTIFICATION_ADMIN);
 

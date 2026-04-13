@@ -1,5 +1,4 @@
-﻿using Framework.BLL.Domain.Serialization;
-using Framework.Database.Mapping;
+﻿using Framework.Database.Mapping;
 using Framework.Relations;
 using Framework.Restriction;
 
@@ -46,7 +45,6 @@ public class TargetSystem : BaseDirectory, IMaster<DomainType>
     /// Коллекция доменных типов целевой системы
     /// </summary>
     [UniqueGroup]
-    [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual IEnumerable<DomainType> DomainTypes => this.domainTypes;
 
     /// <summary>

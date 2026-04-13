@@ -20,7 +20,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
     /// <param name="environment">Окружение</param>
     /// <param name="projectionProperty">Свойство проекции</param>
     public ProjectionPropertyAttributeSource(ProjectionLambdaEnvironment environment, IProjectionProperty projectionProperty)
-            : base(environment, projectionProperty)
+        : base(environment, projectionProperty)
     {
         this.ExpandPathHead = this.ProjectionValue.Path.TakeWhile(prop => this.Environment.IsPersistent(prop.PropertyType)).ToPropertyPath();
 
@@ -127,7 +127,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
     protected virtual DomainObjectAccessAttribute? TryCreateViewAccessAttribute() =>
         this.ProjectionValue
             .Path
-            .SelectMany(prop => this.Environment.ExtendedMetadata.GetProperty(prop).GetDomainObjectAccessAttributes())
+            .SelectMany(prop => this.Environment.MetadataProxyProvider.Wrap(prop).GetDomainObjectAccessAttributes())
             .Where(attr => !(attr is EditDomainObjectAttribute))
             .SingleMaybe()
             .GetValueOrDefault();
@@ -150,7 +150,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
         {
             var singlePathProp = this.ProjectionValue.Path.Single();
 
-            var propMapping = singlePathProp.GetCustomAttribute<MappingAttribute>();
+            var propMapping = this.Environment.MetadataProxyProvider.Wrap(singlePathProp).GetCustomAttribute<MappingAttribute>();
 
             if (propMapping != null)
             {
@@ -194,9 +194,9 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
 
             if (nonAbstractDeclType != this.SourceType)
             {
-                var existsColumnAttribute = property.GetCustomAttribute<MappingAttribute>();
+                var existsColumnAttribute = this.Environment.MetadataProxyProvider.Wrap(property).GetCustomAttribute<MappingAttribute>();
 
-                var existsTableAttribute = nonAbstractDeclType.GetTableAttribute();
+                var existsTableAttribute = this.Environment.MetadataProxyProvider.Wrap(nonAbstractDeclType).GetTableAttribute();
 
                 return existsColumnAttribute?.ExternalTableName ?? existsTableAttribute?.Name ?? nonAbstractDeclType.Name;
             }

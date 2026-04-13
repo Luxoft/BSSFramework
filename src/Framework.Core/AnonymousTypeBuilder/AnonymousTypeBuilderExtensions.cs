@@ -47,7 +47,7 @@ public static class AnonymousTypeBuilderExtensions
         return new FuncAnonymousTypeBuilder<TMap>(map => anonymousTypeBuilder.GetAnonymousType(map.SwitchName(getNewName(map))));
     }
 
-    public static IAnonymousTypeBuilder<TMap> WithCache<TMap>(this IAnonymousTypeBuilder<TMap> anonymousTypeBuilder, IEqualityComparer<TMap> equalityComparer = null)
+    public static IAnonymousTypeBuilder<TMap> WithCache<TMap>(this IAnonymousTypeBuilder<TMap> anonymousTypeBuilder, IEqualityComparer<TMap>? equalityComparer = null)
     {
         if (anonymousTypeBuilder == null) throw new ArgumentNullException(nameof(anonymousTypeBuilder));
 

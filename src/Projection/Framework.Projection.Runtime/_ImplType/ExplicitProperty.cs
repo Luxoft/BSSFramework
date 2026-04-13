@@ -6,21 +6,22 @@ using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.Core;
 
 using Framework.Core.ReflectionImpl;
+using Framework.ExtendedMetadata;
 
 namespace Framework.Projection._ImplType;
 
-internal class ExplicitProperty : BasePropertyInfoImpl
+internal class ExplicitProperty : BasePropertyInfoImpl, IWrappingObject
 {
     internal readonly PropertyInfo InterfaceProp;
 
     private readonly string baseName;
 
-    private readonly PropertyPath customPropertyPath;
+    private readonly PropertyPath? customPropertyPath;
 
     private readonly PropertyMethodInfoImpl getMethod = new();
 
 
-    public ExplicitProperty(PropertyInfo interfaceProp, Type reflectedType, string baseName, Type propertyType, PropertyPath customPropertyPath = null)
+    public ExplicitProperty(PropertyInfo interfaceProp, Type reflectedType, string baseName, Type propertyType, PropertyPath? customPropertyPath = null)
     {
         this.ReflectedType = reflectedType ?? throw new ArgumentNullException(nameof(reflectedType));
         this.InterfaceProp = this.GetGenericInterfaceProp(interfaceProp ?? throw new ArgumentNullException(nameof(interfaceProp)));
@@ -29,6 +30,7 @@ internal class ExplicitProperty : BasePropertyInfoImpl
         this.PropertyType = propertyType ?? throw new ArgumentNullException(nameof(propertyType));
     }
 
+    public bool CanWrap => false;
 
     public override Type PropertyType { get; }
 
@@ -36,18 +38,18 @@ internal class ExplicitProperty : BasePropertyInfoImpl
 
     public override Type DeclaringType => this.ReflectedType;
 
-    public override string Name => this.InterfaceProp.Name;// $"ExplicitProp_{this.baseProperty.Name}";
+    public override string Name => this.InterfaceProp.Name; // $"ExplicitProp_{this.baseProperty.Name}";
 
 
     private PropertyInfo GetGenericInterfaceProp(PropertyInfo baseProp)
     {
         if (baseProp == null) throw new ArgumentNullException(nameof(baseProp));
 
-        if (baseProp.ReflectedType.IsGenericType)
+        if (baseProp.ReflectedType!.IsGenericType)
         {
             var genericReflectedType = baseProp.ReflectedType.GetGenericTypeDefinition();
 
-            return genericReflectedType.GetProperty(baseProp.Name, true);
+            return genericReflectedType.GetProperty(baseProp.Name, true)!;
         }
 
         return baseProp;
@@ -64,19 +66,16 @@ internal class ExplicitProperty : BasePropertyInfoImpl
     }
 
     public override object[] GetCustomAttributes(bool inherit) =>
-        new Attribute[][]
-        {
-            this.GetExpandPathAttributes().ToArray()
-        }.SelectMany().ToArray();
+        new[] { this.GetExpandPathAttributes().ToArray<Attribute>() }.SelectMany().ToArray<object>();
 
     private IEnumerable<ExpandPathAttribute> GetExpandPathAttributes()
     {
-        yield return this.customPropertyPath.Maybe(path => new ExpandPathAttribute(path)) ?? new ExpandPathAttribute(this.baseName);
+        yield return this.customPropertyPath.Maybe(path => new ExpandPathAttribute(path.ToString())) ?? new ExpandPathAttribute(this.baseName);
     }
 
     public override ParameterInfo[] GetIndexParameters() => []; // this.sourceProperty.GetIndexParameters();
 
     public override MethodInfo GetGetMethod(bool nonPublic) => this.getMethod;
 
-    public override MethodInfo GetSetMethod(bool nonPublic) => null; //new PropertyMethodInfoImpl();
+    public override MethodInfo? GetSetMethod(bool nonPublic) => null; //new PropertyMethodInfoImpl();
 }

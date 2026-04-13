@@ -9,19 +9,19 @@ namespace Framework.Projection.Lambda._Extensions;
 internal static class TypeExtensions
 {
     private static readonly IDictionaryCache<Type, IDictionaryCache<Type, Type>> CollectionTypeCache = new DictionaryCache<Type, IDictionaryCache<Type, Type>>(
-     collectionType => new DictionaryCache<Type, Type>(collectionType.MakeProjectionCollectionType).WithLock()).WithLock();
+        collectionType => new DictionaryCache<Type, Type>(collectionType.MakeProjectionCollectionType).WithLock()).WithLock();
 
 
-    public static Type GetProjectionCollectionType(this Type type)
+    public static Type? GetProjectionCollectionType(this Type type)
     {
         if (type == null) { throw new ArgumentNullException(nameof(type)); }
 
         return type.IsCollection() ? type.GetCollectionType()
-               : type.IsArray && !type.GetElementType().IsPrimitive ? typeof(Array)
+               : type.IsArray && !type.GetElementType()!.IsPrimitive ? typeof(Array)
                : null;
     }
 
-    public static Type SafeMakeProjectionCollectionType(this Type collectionType, Type elementType)
+    public static Type SafeMakeProjectionCollectionType(this Type? collectionType, Type elementType)
     {
         if (elementType == null) { throw new ArgumentNullException(nameof(elementType)); }
 

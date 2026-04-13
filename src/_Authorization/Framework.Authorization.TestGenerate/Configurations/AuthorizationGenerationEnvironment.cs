@@ -6,13 +6,17 @@ using Framework.Authorization.TestGenerate.Configurations.DTO;
 using Framework.Authorization.TestGenerate.Configurations.Services.Main;
 using Framework.Authorization.TestGenerate.Configurations.Services.QueryService;
 using Framework.Authorization.TestGenerate.Configurations.Services.WebApi;
+using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.Database;
 using Framework.Database.NHibernate._MappingSettings;
-using Framework.Projection.ExtendedMetadata;
+using Framework.ExtendedMetadata;
+using Framework.ExtendedMetadata.Builder;
+using Framework.Tracking.Validation;
+using Framework.Validation;
 
 namespace Framework.Authorization.TestGenerate.Configurations;
 
@@ -65,29 +69,62 @@ public partial class AuthorizationGenerationEnvironment : GenerationEnvironmentB
 
     public MappingSettings GetMappingSettings(DatabaseName dbName, AuditDatabaseName dbAuditName) => new MappingSettings<PersistentDomainObjectBase>(dbName, dbAuditName);
 
-    public override IDomainTypeRootExtendedMetadata ExtendedMetadata { get; } =
+    protected override IEnumerable<ExtendedAttributeSource> GetExtendedAttributeSources()
+    {
+        yield return new ExtendedAttributeSourceBuilder()
+                     .Add<DomainObjectBase>(tb => tb.AddAttribute<AvailableDecimalValidatorAttribute>()
+                                                    .AddAttribute<AvailablePeriodValidatorAttribute>()
+                                                    .AddAttribute<AvailableDateTimeValidatorAttribute>()
+                                                    .AddAttribute<DefaultStringMaxLengthValidatorAttribute>())
 
-        new DomainTypeRootExtendedMetadataBuilder()
+                     .Add<PersistentDomainObjectBase>(tb => tb.AddProperty(v => v.Id, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
+                                                              .AddProperty(v => v.IsNew, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.Ignore))))
 
-            .Add<BusinessRole>(tb =>
-                                   tb.AddAttribute(new BLLViewRoleAttribute()))
+                     .Add<BaseDirectory>(tb => tb.AddProperty(v => v.Name, pb => pb.AddAttribute(new VisualIdentityAttribute())))
 
-            .Add<Principal>(tb =>
-                                tb.AddAttribute(new BLLViewRoleAttribute())
-                                  .AddAttribute(new BLLSaveRoleAttribute())
-                                  .AddAttribute(new BLLRemoveRoleAttribute()))
 
-            .Add<Permission>(tb =>
-                                 tb.AddAttribute(new BLLViewRoleAttribute { MaxCollection = MainDTOType.RichDTO })
-                                   .AddAttribute(new BLLRemoveRoleAttribute()))
+                     .Add<BusinessRole>(tb =>
+                                            tb.AddAttribute(new BLLViewRoleAttribute())
+                                              .AddProperty(v => v.Permissions, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.Ignore)))
+                                              .AddProperty(v => v.Description, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
+                         )
 
-            .Add<PermissionRestriction>(tb =>
-                                            tb.AddAttribute(new BLLRoleAttribute()))
+                     .Add<Principal>(tb =>
+                                         tb.AddAttribute(new BLLViewRoleAttribute())
+                                           .AddAttribute(new BLLSaveRoleAttribute())
+                                           .AddAttribute(new BLLRemoveRoleAttribute()))
 
-            .Add<SecurityContextType>(tb =>
-                                          tb.AddAttribute(new BLLViewRoleAttribute()))
-            .Add<DelegateToItemModel>(tb => tb.AddProperty(v => v.Permission,
-                                                           pb => pb.AddAttribute(new AutoMappingAttribute(false))));
+                     .Add<Permission>(tb =>
+                                          tb.AddAttribute(new BLLViewRoleAttribute { MaxCollection = MainDTOType.RichDTO })
+                                            .AddAttribute(new BLLRemoveRoleAttribute())
+                                            .AddProperty(
+                                                v => v.DelegatedTo,
+                                                pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.Ignore, DTORole.Event))
+                                                        .AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
+                                            .AddProperty(v => v.DelegatedFrom, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.Ignore)))
+                                            .AddProperty(v => v.Principal, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
+                                            .AddProperty(v => v.Role, pb => pb.AddAttribute(new FixedPropertyValidatorAttribute())))
+
+                     .Add<PermissionRestriction>(tb =>
+                                                     tb.AddAttribute(new BLLRoleAttribute())
+                                                       .AddProperty(v => v.Permission, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
+                                                       .AddProperty(
+                                                           v => v.SecurityContextType,
+                                                           pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.Ignore, DTORole.Integration))
+                                                                   .AddAttribute(new FixedPropertyValidatorAttribute()))
+                                                       .AddProperty(
+                                                           v => v.SecurityContextId,
+                                                           pb => pb.AddAttribute(new FixedPropertyValidatorAttribute())))
+
+                     .Add<SecurityContextType>(tb =>
+                                                   tb.AddAttribute(new BLLViewRoleAttribute())
+                                                     .AddProperty(v => v.Name, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly))))
+                     .Add<DelegateToItemModel>(tb => tb.AddProperty(
+                                                   v => v.Permission,
+                                                   pb => pb.AddAttribute(new AutoMappingAttribute(false))))
+                     .Build();
+
+    }
 
     public static readonly AuthorizationGenerationEnvironment Default = new();
 }

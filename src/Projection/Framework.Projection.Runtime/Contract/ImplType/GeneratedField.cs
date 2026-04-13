@@ -2,11 +2,12 @@
 
 using Framework.Core;
 using Framework.Core.ReflectionImpl;
+using Framework.ExtendedMetadata;
 using Framework.Projection._Extensions;
 
 namespace Framework.Projection.Contract.ImplType;
 
-internal class GeneratedField : BaseFieldInfoImpl
+internal class GeneratedField : BaseFieldInfoImpl, IWrappingObject
 {
     private readonly ProjectionContractEnvironment environment;
 
@@ -26,6 +27,8 @@ internal class GeneratedField : BaseFieldInfoImpl
         this.FieldType = this.property.PropertyType.IsCollection() ? typeof(ICollection<>).CachedMakeGenericType(this.property.PropertyType.GetCollectionElementType()) : this.property.PropertyType;
     }
 
+    public bool CanWrap => false;
+
     public override Type FieldType { get; }
 
     public override Type ReflectedType { get; }
@@ -35,7 +38,7 @@ internal class GeneratedField : BaseFieldInfoImpl
     public override string Name { get; }
 
 
-    public override object[] GetCustomAttributes(Type attributeType, bool inherit) => (object[])new object[0].ToArray(attributeType);
+    public override object[] GetCustomAttributes(Type attributeType, bool inherit) => (object[])Array.Empty<object>().ToArray(attributeType);
 
     public override bool IsDefined(Type attributeType, bool inherit) => this.GetCustomAttributes(attributeType, inherit).Any();
 }

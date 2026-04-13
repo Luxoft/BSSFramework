@@ -16,7 +16,7 @@ public static class UpdateExtensions
             Func<TTarget, TKey> getTargetKey,
             Func<TSource, TTarget> createAndMapFunc,
             Action<TTarget> removeAction,
-            IEqualityComparer<TKey> keyComparer = null)
+            IEqualityComparer<TKey>? keyComparer = null)
     {
         var actualComparer = keyComparer ?? new EqualityComparerImpl<TKey>((key1, key2) => !key1.IsDefault() && !key2.IsDefault() && EqualityComparer<TKey>.Default.Equals(key1, key2));
 

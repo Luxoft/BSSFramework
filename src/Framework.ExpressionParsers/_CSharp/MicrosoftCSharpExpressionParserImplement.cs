@@ -516,7 +516,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
         private char currentChar;
         Token token;
 
-        public ExpressionParserService(ParameterExpression[] parameters, string expression, object[] values)
+        public ExpressionParserService(ParameterExpression[]? parameters, string expression, object[]? values)
         {
             if (expression == null) throw new ArgumentNullException(nameof(expression));
             if (keywords == null) keywords = CreateKeywords();
@@ -573,7 +573,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
             this.symbols.Add(name, value);
         }
 
-        public Expression Parse(Type resultType)
+        public Expression Parse(Type? resultType)
         {
             var exprPos = this.token.Pos;
             var expr = this.ParseExpression();
@@ -1176,7 +1176,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
                                   GetTypeName(exprType), GetTypeName(type));
         }
 
-        Expression ParseMemberAccess(Type type, Expression instance)
+        Expression ParseMemberAccess(Type type, Expression? instance)
         {
             if (instance != null)
             {

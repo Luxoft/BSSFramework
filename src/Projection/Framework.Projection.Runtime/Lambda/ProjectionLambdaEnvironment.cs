@@ -1,11 +1,12 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Immutable;
 
 using CommonFramework;
 
+using Framework.BLL.Services;
 using Framework.Core;
 using Framework.Core.TypeResolving;
 using Framework.Projection._Extensions;
-using Framework.Projection.ExtendedMetadata;
+using Framework.ExtendedMetadata;
 using Framework.Projection.Lambda._Extensions;
 using Framework.Projection.Lambda.Exceptions;
 using Framework.Projection.Lambda.ImplType;
@@ -20,20 +21,17 @@ namespace Framework.Projection.Lambda;
 /// </summary>
 public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
 {
-    private IReadOnlyList<IProjection> projections;
+    private ImmutableArray<IProjection> projections;
 
-    /// <summary>
-    /// Конструктор
-    /// </summary>
-    /// <param name="projectionSource">Источник проекций</param>
-    protected ProjectionLambdaEnvironment(IDomainTypeRootExtendedMetadata extendedMetadata, IProjectionSource projectionSource)
-        : base(extendedMetadata)
+    protected ProjectionLambdaEnvironment(IProjectionSource projectionSource, IMetadataProxyProvider metadataProxyProvider, IPropertyPathService propertyPathService)
+        : base(metadataProxyProvider)
     {
-        if (projectionSource == null) throw new ArgumentNullException(nameof(projectionSource));
+        this.PropertyPathService = propertyPathService;
 
         this.ProjectionTypeResolver = LazyInterfaceImplementHelper.CreateProxy(() => this.CreateProjectionTypeResolver(projectionSource));
     }
 
+    public IPropertyPathService PropertyPathService { get; }
 
     public ITypeResolver<IProjection> ProjectionTypeResolver { get; private set; }
 
@@ -43,35 +41,24 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
 
         this.ProjectionTypeResolver = generateTypeResolver;
 
-        this.projections = projectionSource.Pipe(v => new LinkAllProjectionSource(v))
-                                           .Pipe(v => new VerifyUniqueProjectionSource(v))
-                                           .Pipe(
-                                               v => this.UseDependencySecurity
-                                                        ? (IProjectionSource)v
-                                                        : new CreateSecurityNodesProjectionSource(v, this))
-                                           .Pipe(v => new CreateAutoNodesProjectionSource(v, this))
-                                           .Pipe(v => new InjectMissedParentsProjectionSource(v))
-                                           .Pipe(v => new InjectAttributesProjectionSource(v, this))
-                                           .GetProjections()
-                                           .ToList();
+        this.projections =
+        [
+            ..projectionSource.Pipe(v => new ExpandPathProjectionSource(this, v))
+                              .Pipe(v => new LinkAllProjectionSource(v))
+                              .Pipe(v => new VerifyUniqueProjectionSource(v))
+                              .Pipe(v => this.UseDependencySecurity ? (IProjectionSource)v : new CreateSecurityNodesProjectionSource(this, v))
+                              .Pipe(v => new CreateAutoNodesProjectionSource(this, v))
+                              .Pipe(v => new InjectMissedParentsProjectionSource(this, v))
+                              .Pipe(v => new InjectAttributesProjectionSource(this, v))
+                              .GetProjections()
+        ];
 
-        return TypeResolverHelper.Create(this.projections.ToDictionary(projection => projection, generateTypeResolver.TryResolve));
-    }
-
-    public Type GetProjectionTypeByRole(Type sourceType, ProjectionRole role)
-    {
-        if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
-        if (!Enum.IsDefined(typeof(ProjectionRole), role))
-            throw new InvalidEnumArgumentException(nameof(role), (int)role, typeof(ProjectionRole));
-
-        return this.ProjectionTypeResolver.TryResolve(this.projections.GetProjectionByRole(sourceType, role));
+        return TypeResolverHelper.Create(this.projections.ToDictionary(projection => projection, this.ProjectionTypeResolver.Resolve));
     }
 
     public Type GetSecurityProjectionType(Type sourceType)
     {
-        if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
-
-        return this.ProjectionTypeResolver.TryResolve(this.projections.GetSecurityProjection(sourceType));
+        return this.ProjectionTypeResolver.Resolve(this.projections.TryGetSecurityProjection(sourceType)!);
     }
 
     /// <summary>
@@ -181,23 +168,4 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
 
         return new ProjectionCustomPropertyAttributeSource(this, projectionCustomProperty);
     }
-
-    public static ProjectionLambdaEnvironment Create(
-        IDomainTypeRootExtendedMetadata extendedMetadata,
-        IProjectionSource projectionSource,
-        string assemblyName,
-        string assemblyFullName,
-        Type domainObjectBaseType,
-        Type persistentDomainObjectBaseType,
-        string @namespace,
-        bool useDependencySecurity = true) =>
-        new DefaultProjectionLambdaEnvironment(
-            extendedMetadata,
-            projectionSource,
-            assemblyName,
-            assemblyFullName,
-            domainObjectBaseType,
-            persistentDomainObjectBaseType,
-            @namespace,
-            useDependencySecurity);
 }

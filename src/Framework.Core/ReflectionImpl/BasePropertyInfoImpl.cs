@@ -15,9 +15,9 @@ public abstract class BasePropertyInfoImpl : PropertyInfo
 
     public override MethodInfo[] GetAccessors(bool nonPublic) => throw new NotImplementedException();
 
-    public override MethodInfo GetGetMethod(bool nonPublic) => throw new NotImplementedException();
+    public override MethodInfo? GetGetMethod(bool nonPublic) => throw new NotImplementedException();
 
-    public override MethodInfo GetSetMethod(bool nonPublic) => throw new NotImplementedException();
+    public override MethodInfo? GetSetMethod(bool nonPublic) => throw new NotImplementedException();
 
     public override ParameterInfo[] GetIndexParameters() => throw new NotImplementedException();
 

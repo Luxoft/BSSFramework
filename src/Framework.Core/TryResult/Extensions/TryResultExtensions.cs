@@ -39,7 +39,7 @@ public static partial class TryResultExtensions
 
     public static ITryResult<T> SelectMany<T>(this ITryResult<ITryResult<T>> value) => value.Match(res => res, TryResult.CreateFault<T>);
 
-    public static void Match<T>(this ITryResult<T> source, Action<T> successAction, Action<Exception> faultAction = null)
+    public static void Match<T>(this ITryResult<T> source, Action<T> successAction, Action<Exception>? faultAction = null)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (successAction == null) throw new ArgumentNullException(nameof(successAction));

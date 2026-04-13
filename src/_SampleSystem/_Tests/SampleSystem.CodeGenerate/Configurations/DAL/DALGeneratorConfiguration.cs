@@ -1,5 +1,6 @@
-﻿using Framework.Core;
-using Framework.Core.TypeResolving.TypeSource;
+﻿using System.Reflection;
+
+using Framework.Core;
 using Framework.Database.Metadata;
 using Framework.Database.NHibernate.DALGenerator.Configuration;
 
@@ -7,7 +8,7 @@ namespace SampleSystem.CodeGenerate;
 
 public class DALGeneratorConfiguration(ServerGenerationEnvironment environment) : DALGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {
-    protected override AssemblyMetadata CreateAssemblyMetadata(IAssemblyInfo assembly)
+    protected override AssemblyMetadata CreateAssemblyMetadata(Assembly assembly)
     {
         var baseResult = base.CreateAssemblyMetadata(assembly);
 

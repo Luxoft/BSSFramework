@@ -33,7 +33,9 @@ public class DefaultProjectionDTOFileFactory<TConfiguration> : DTOFileFactory<TC
 
         this.sourceType = this.DomainType.GetProjectionSourceType();
 
-        this.ignoreIdProp = domainType.GetProperties().Any(prop => this.Configuration.IsIdentityProperty(prop) && prop.IsIgnored(DTORole.Client));
+        this.ignoreIdProp = domainType.GetProperties()
+                                      .Any(prop => this.Configuration.IsIdentityProperty(prop)
+                                                   && this.Configuration.Environment.MetadataProxyProvider.Wrap(prop).IsIgnored(DTORole.Client));
     }
 
     public override IPropertyCodeTypeReferenceService CodeTypeReferenceService { get; }

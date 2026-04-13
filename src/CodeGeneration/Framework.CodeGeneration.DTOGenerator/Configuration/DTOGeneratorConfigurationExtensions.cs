@@ -56,7 +56,7 @@ public static class DTOGeneratorConfigurationExtensions
         return configuration.IsIdentityProperty(property) || property.HasAttribute<VersionAttribute>();
     }
 
-    public static CodeExpression GetIdentityPropertyCodeExpression(this IDTOGeneratorConfiguration<IDTOGenerationEnvironment> configuration, CodeExpression currentExpr = null)
+    public static CodeExpression GetIdentityPropertyCodeExpression(this IDTOGeneratorConfiguration<IDTOGenerationEnvironment> configuration, CodeExpression? currentExpr = null)
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 

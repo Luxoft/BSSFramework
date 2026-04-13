@@ -636,6 +636,8 @@ namespace SampleSystem.Generated.DTO
         
         void MapMiniBusinessUnitEmployeeRole(SampleSystem.Domain.Projections.MiniBusinessUnitEmployeeRole domainObject, SampleSystem.Generated.DTO.MiniBusinessUnitEmployeeRoleProjectionDTO mappingObject);
         
+        void MapNonPersistentContainer(SampleSystem.Domain.Projections.NonPersistentContainer domainObject, SampleSystem.Generated.DTO.NonPersistentContainerProjectionDTO mappingObject);
+        
         void MapNoSecurityObject(SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO mappingObject);
         
         void MapNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO mappingObject, SampleSystem.Domain.NoSecurityObject domainObject);
@@ -859,8 +861,6 @@ namespace SampleSystem.Generated.DTO
         void MapTestSecuritySubObjItem3(SampleSystem.Domain.TestSecuritySubObjItem3 domainObject, SampleSystem.Generated.DTO.TestSecuritySubObjItem3EventRichDTO mappingObject);
         
         void MapTestUnpersistentObject(SampleSystem.Domain.TestUnpersistentObject domainObject, SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO mappingObject);
-        
-        void MapUnpersitentContainer(SampleSystem.Domain.Projections.UnpersitentContainer domainObject, SampleSystem.Generated.DTO.UnpersitentContainerProjectionDTO mappingObject);
         
         void MapVisualEmployee(SampleSystem.Domain.Projections.VisualEmployee domainObject, SampleSystem.Generated.DTO.VisualEmployeeProjectionDTO mappingObject);
         
@@ -6361,6 +6361,21 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
+        public virtual void MapNonPersistentContainer(SampleSystem.Domain.Projections.NonPersistentContainer domainObject, SampleSystem.Generated.DTO.NonPersistentContainerProjectionDTO mappingObject)
+        {
+            mappingObject.Locations = SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(domainObject.Locations, this);
+            mappingObject.PeriodArray = domainObject.PeriodArray;
+            if (!object.ReferenceEquals(domainObject.TestBU, null))
+            {
+                mappingObject.TestBU = SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(domainObject.TestBU, this);
+            }
+            else
+            {
+                mappingObject.TestBU = null;
+            }
+            mappingObject.TestString = domainObject.TestString;
+        }
+        
         public virtual void MapNoSecurityObject(SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO mappingObject)
         {
         }
@@ -7679,21 +7694,6 @@ namespace SampleSystem.Generated.DTO
             where TDomainObject : SampleSystem.Domain.DomainObjectBase
         {
             mappingObject.MapToDomainObject(this, domainObject);
-        }
-        
-        public virtual void MapUnpersitentContainer(SampleSystem.Domain.Projections.UnpersitentContainer domainObject, SampleSystem.Generated.DTO.UnpersitentContainerProjectionDTO mappingObject)
-        {
-            mappingObject.Locations = SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(domainObject.Locations, this);
-            mappingObject.PeriodArray = domainObject.PeriodArray;
-            if (!object.ReferenceEquals(domainObject.TestBU, null))
-            {
-                mappingObject.TestBU = SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(domainObject.TestBU, this);
-            }
-            else
-            {
-                mappingObject.TestBU = null;
-            }
-            mappingObject.TestString = domainObject.TestString;
         }
         
         public virtual void MapVisualEmployee(SampleSystem.Domain.Projections.VisualEmployee domainObject, SampleSystem.Generated.DTO.VisualEmployeeProjectionDTO mappingObject)

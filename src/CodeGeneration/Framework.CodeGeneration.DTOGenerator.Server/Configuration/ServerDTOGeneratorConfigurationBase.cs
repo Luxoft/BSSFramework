@@ -5,10 +5,10 @@ using System.Reflection;
 using CommonFramework;
 using CommonFramework.DictionaryCache;
 
+using Framework.Application.Domain;
 using Framework.Application.Events;
 using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.DTO;
-using Framework.BLL.Domain.IdentityObject;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom.Extensions;

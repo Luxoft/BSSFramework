@@ -4,7 +4,6 @@ using System.Xml.Linq;
 using CommonFramework;
 
 using Framework.Core;
-using Framework.Core.TypeResolving.TypeSource;
 using Framework.Database.Mapping;
 using Framework.Database.Metadata;
 using Framework.Database.SqlMapper;
@@ -14,7 +13,7 @@ using Microsoft.SqlServer.Management.Smo;
 
 namespace Framework.Database.NHibernate.DALGenerator._Internal;
 
-public class MappingGenerator(IGrouping<IAssemblyInfo, DomainTypeMetadata> assemblyGroup, IEscapeWordService escapeWordService, DatabaseName schema, bool useSmartUpdate)
+public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGroup, IEscapeWordService escapeWordService, DatabaseName schema, bool useSmartUpdate)
     : IMappingGenerator
 {
     private const string NHibernateNamespace = "nhibernate-mapping-2.2";
@@ -25,11 +24,11 @@ public class MappingGenerator(IGrouping<IAssemblyInfo, DomainTypeMetadata> assem
 
     private static readonly XNamespace RootNameNamespace = "urn:" + NHibernateNamespace;
 
-    private readonly IGrouping<IAssemblyInfo, DomainTypeMetadata> assemblyGroup = assemblyGroup ?? throw new ArgumentNullException(nameof(assemblyGroup));
+    private readonly IGrouping<Assembly, DomainTypeMetadata> assemblyGroup = assemblyGroup ?? throw new ArgumentNullException(nameof(assemblyGroup));
 
     private readonly DatabaseName schema = schema ?? throw new ArgumentNullException(nameof(schema));
 
-    public IAssemblyInfo Assembly => this.assemblyGroup.Key;
+    public Assembly Assembly => this.assemblyGroup.Key;
 
     public XDocument Generate()
     {
@@ -334,7 +333,7 @@ public class MappingGenerator(IGrouping<IAssemblyInfo, DomainTypeMetadata> assem
     private XElement CreateRoot()
     {
         var result = new XElement(RootNameNamespace + NHibernateMappingRootName)
-                     .WithAttribute(AssemblyName, this.Assembly.Name)
+                     .WithAttribute(AssemblyName, this.Assembly.GetName().Name!)
                      .WithAttribute("auto-import", false)
                      .MaybeWithAttribute(SchemaName, this.schema);
 

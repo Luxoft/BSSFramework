@@ -69,7 +69,7 @@ public class HistoryQueryOptimized<TEntity, TRevisionEntity, TIdentity>(
                                                                                  (RevisionType)versionsEntity[revisionTypePropertyName]);
     }
 
-    public object GetIdentityValue(string entityName, IDictionary versionsEntity)
+    public object GetIdentityValue(string entityName, IDictionary? versionsEntity)
     {
         const string typeKey = "$type$";
 

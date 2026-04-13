@@ -23,7 +23,7 @@ public class DependencyGeneratePolicy : CachedGeneratePolicy<RoleFileType>
     protected IReadOnlyCollection<GenerateTypeMap> Maps { get; }
 
 
-    protected bool IsUsedProperty(DTOFileType ownerFileType, Type elementType, RoleFileType elementFileType, bool? detailFlag = null)
+    protected bool IsUsedProperty(DTOFileType? ownerFileType, Type elementType, RoleFileType elementFileType, bool? detailFlag = null)
     {
         if (elementFileType == null) throw new ArgumentNullException(nameof(elementFileType));
         if (elementType == null) throw new ArgumentNullException(nameof(elementType));

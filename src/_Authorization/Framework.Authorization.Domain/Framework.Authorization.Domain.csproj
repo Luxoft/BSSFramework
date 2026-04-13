@@ -9,9 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BLL\Framework.BLL.Domain\Framework.BLL.Domain.csproj" />
+    <ProjectReference Include="..\..\Application\Framework.Application.Domain\Framework.Application.Domain.csproj" />
+    <ProjectReference Include="..\..\Database\Framework.Database.Domain\Framework.Database.Domain.csproj" />
     <ProjectReference Include="..\..\Database\Framework.Database.Mapping\Framework.Database.Mapping.csproj" />
-    <ProjectReference Include="..\..\Database\Framework.Tracking.Validation\Framework.Tracking.Validation.csproj" />
+    <ProjectReference Include="..\..\Domain\Framework.Relations\Framework.Relations.csproj" />
   </ItemGroup>
 
 </Project>

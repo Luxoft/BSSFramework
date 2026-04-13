@@ -1,6 +1,6 @@
 ﻿using System.CodeDom;
 
-using Framework.BLL.Domain.IdentityObject;
+using Framework.Application.Domain;
 using Framework.CodeDom.Extensions;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.Configuration;

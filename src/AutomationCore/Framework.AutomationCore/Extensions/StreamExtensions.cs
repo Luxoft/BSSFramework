@@ -2,7 +2,7 @@
 
 public static class StreamExtensions
 {
-    public static void Save(this Stream stream, string folder, string fileName = null, string extension = "xlsx")
+    public static void Save(this Stream stream, string folder, string? fileName = null, string extension = "xlsx")
     {
         fileName = fileName != null ? $"{fileName}.{extension}" : $"report_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.{extension}";
         var filePath = Path.Combine(folder, fileName);

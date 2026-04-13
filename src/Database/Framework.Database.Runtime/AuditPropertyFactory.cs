@@ -1,4 +1,5 @@
 ﻿using CommonFramework.Auth;
+
 using Framework.Database.AuditProperty;
 
 namespace Framework.Database;

@@ -1,7 +1,8 @@
 ﻿using System.Collections.Immutable;
 using System.Reflection;
 
-namespace Framework.Core.TypeResolving.TypeSource;
+// ReSharper disable once CheckNamespace
+namespace Framework.Core.TypeResolving;
 
 public class TypeSource(ImmutableHashSet<Type> types) : ITypeSource
 {

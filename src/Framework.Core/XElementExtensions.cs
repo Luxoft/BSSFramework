@@ -17,7 +17,7 @@ public static class XElementExtensions
 
     public static XElement WithAttribute(this XElement source, string name, object value) => source.WithAttribute(XName.Get(name), value);
 
-    public static XElement MaybeWithAttribute(this XElement source, string name, object value)
+    public static XElement MaybeWithAttribute(this XElement source, string name, object? value)
     {
         if (null != value)
         {

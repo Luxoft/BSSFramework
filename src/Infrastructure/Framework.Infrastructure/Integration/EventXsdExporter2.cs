@@ -78,7 +78,7 @@ public class EventXsdExporter2 : IEventXsdExporter2
         return set;
     }
 
-    private static string ToFileName(string targetNamespace) =>
+    private static string ToFileName(string? targetNamespace) =>
         targetNamespace == null
             ? FileNameWithoutNamespace
             : $"{targetNamespace.Replace("http://", string.Empty).Replace("/", "_").Replace(".", "_")}.xsd";

@@ -17,7 +17,7 @@ public abstract class AuditGeneratorConfigurationBase<TEnvironment>(TEnvironment
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 
-        foreach (var dtoType in domainType.GetViewDTOTypes())
+        foreach (var dtoType in this.Environment.MetadataProxyProvider.Wrap(domainType).GetViewDTOTypes())
         {
             yield return new GetObjectWithRevisionMethodGenerator<AuditGeneratorConfigurationBase<TEnvironment>>(this, domainType, dtoType);
         }

@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ExtendedMetadata\Framework.ExtendedMetadata.Abstractions\Framework.ExtendedMetadata.Abstractions.csproj" />
     <ProjectReference Include="..\..\Framework.Core\Framework.Core.csproj" />
   </ItemGroup>
 

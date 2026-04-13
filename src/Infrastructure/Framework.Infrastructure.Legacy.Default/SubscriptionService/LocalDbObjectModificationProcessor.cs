@@ -23,7 +23,7 @@ public class LocalDbObjectModificationProcessor : BLLContextContainer<IConfigura
     {
         var domainObjectModification = new DomainObjectModification
                                        {
-                                           DomainType = this.Context.GetDomainType(changedObjectInfo.TypeInfoDescription)!,
+                                           DomainType = this.Context.GetDomainType(changedObjectInfo.TypeInfoDescription.ToDomainObject()),
                                            DomainObjectId = changedObjectInfo.Identity,
                                            Revision = changedObjectInfo.Revision,
                                            Type = changedObjectInfo.ModificationType

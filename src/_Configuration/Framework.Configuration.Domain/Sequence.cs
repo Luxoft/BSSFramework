@@ -1,6 +1,5 @@
 ﻿using Framework.Database.Mapping;
 using Framework.Restriction;
-using Framework.Validation;
 
 namespace Framework.Configuration.Domain;
 
@@ -16,7 +15,6 @@ public class Sequence : BaseDirectory
     /// <summary>
     /// Значение элемента
     /// </summary>
-    [Int64ValueValidator(Min = 0)]
     public virtual long Number
     {
         get => this.number;

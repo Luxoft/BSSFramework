@@ -1,4 +1,5 @@
 ﻿using Framework.Database;
+using Framework.Infrastructure.ContextEvaluator;
 using Framework.Infrastructure.Service;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +15,7 @@ public class ApiControllerBaseSingleCallEvaluator<TBLLContext, TMappingService>(
     {
         if (this.evaluateInvoked)
         {
-            throw new Exception("Allowed single evaluate. For multiply session DON'T use this method. Use IContextEvaluator<,>");
+            throw new Exception($"Allowed single evaluate. For multiply session DON'T use this method. Use {nameof(IContextEvaluator<,>)}");
         }
 
         this.evaluateInvoked = true;
@@ -27,5 +28,3 @@ public class ApiControllerBaseSingleCallEvaluator<TBLLContext, TMappingService>(
         return getResult(serviceProvider.GetRequiredService<EvaluatedData<TBLLContext, TMappingService>>());
     }
 }
-
-

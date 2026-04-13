@@ -63,7 +63,7 @@ public class AuditDTOModelFileGenerator<TConfiguration>(TConfiguration configura
         yield return new CodeAttributeDeclaration(typeof(DataContractAttribute).FullName);
 
         var allDomainPersistentObject = this.Configuration.DomainTypes
-                                            .Where(z => !z.GetCustomAttributes<NotAuditedClassAttribute>().Any())
+                                            .Where(z => !this.Configuration.Environment.MetadataProxyProvider.Wrap(z).HasAttribute<NotAuditedClassAttribute>())
                                             .Where(z => !z.IsAbstract)
                                             .Where(z => this.Configuration.Environment.PersistentDomainObjectBaseType.IsAssignableFrom(z))
                                             .OrderBy(z => z.Name)
@@ -71,10 +71,10 @@ public class AuditDTOModelFileGenerator<TConfiguration>(TConfiguration configura
 
         var allPropertyInfoCollection = allDomainPersistentObject
                                         .SelectMany(z => z.GetProperties())
-                                        .Where(z => z.GetCustomAttributes<CustomSerializationAttribute>().EmptyIfNull().All(q => q.Mode != CustomSerializationMode.Ignore))
+                                        .Where(z => this.Configuration.Environment.MetadataProxyProvider.Wrap(z).GetCustomAttributes<CustomSerializationAttribute>().EmptyIfNull().All(q => q.Mode != CustomSerializationMode.Ignore))
                                         .Select(z => z.PropertyType)
                                         .Where(z => !z.IsProjection())
-                                        .Where(z => !z.GetCustomAttributes<NotAuditedClassAttribute>().Any())
+                                        .Where(z => !this.Configuration.Environment.MetadataProxyProvider.Wrap(z).HasAttribute<NotAuditedClassAttribute>())
                                         .Where(z => !z.IsAbstract)
                                         .Distinct()
                                         .OrderBy(z => z.Name)

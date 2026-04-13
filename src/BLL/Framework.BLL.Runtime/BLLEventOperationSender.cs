@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.BLL;
 
-public class BLLEventOperationSender([FromKeyedServices("BLL")] IEnumerable<IEventOperationReceiver> receivers) : IEventOperationSender
+public class BLLEventOperationSender([FromKeyedServices(nameof(BLL))] IEnumerable<IEventOperationReceiver> receivers) : IEventOperationSender
 {
     public async Task Send<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken cancellationToken)
     {

@@ -2,11 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Reflection;
 
-using CommonFramework;
-
 using Framework.BLL.Domain.DTO;
-using Framework.BLL.Fetching;
-using Framework.BLL.Fetching.PathFactory;
+using Framework.CodeGeneration.BLLGenerator.Fetching;
+using Framework.CodeGeneration.BLLGenerator.Fetching.PathFactory;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.FileFactory;
 using Framework.Core;
@@ -16,31 +14,17 @@ using Framework.Validation;
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 
-public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGeneratorConfiguration<TEnvironment, FileType>, IBLLGeneratorConfiguration<TEnvironment>
-        where TEnvironment : class, IBLLGenerationEnvironment
+public abstract class BLLGeneratorConfigurationBase<TEnvironment>(TEnvironment environment)
+    : CodeGeneratorConfiguration<TEnvironment, FileType>(environment), IBLLGeneratorConfiguration<TEnvironment>
+    where TEnvironment : class, IBLLGenerationEnvironment
 {
-
-    private readonly Lazy<ReadOnlyCollection<Type>> lazyValidationTypes;
-
-    protected BLLGeneratorConfigurationBase(TEnvironment environment)
-            : base(environment)
-    {
-        this.lazyValidationTypes = LazyHelper.Create(() => this.GetValidationTypes().ToReadOnlyCollection());
-
-        this.Logics = LazyInterfaceImplementHelper.CreateProxy(this.GetLogics);
-
-        IFetchPathFactory<ViewDTOType> factory = new ExpandFetchPathFactory(this.Environment.PersistentDomainObjectBaseType);
-
-        this.FetchPathFactory = factory.WithCompress();
-    }
-
     /// <inheritdoc />
     public virtual bool GenerateExternalPropertyValidators { get; } = false;
 
     /// <inheritdoc />
     public virtual bool GenerateExternalClassValidators { get; } = false;
 
-    public ReadOnlyCollection<Type> ValidationTypes => this.lazyValidationTypes.Value;
+    public ReadOnlyCollection<Type> ValidationTypes => field ??= [.. this.GetValidationTypes()];
 
 
     protected virtual IEnumerable<Type> GetValidationTypes()
@@ -77,16 +61,12 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGenerato
     /// <inheritdoc />
     public virtual bool SquashPropertyValidators(PropertyInfo property) => true;
 
-    public virtual bool GenerateDomainServiceConstructor(Type domainType)
-    {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+    public virtual IBLLFactoryContainerGeneratorConfiguration Logics => field ??= new BLLFactoryContainerGeneratorConfiguration<BLLGeneratorConfigurationBase<TEnvironment>>(this);
 
-        return true;
-    }
-
-    public virtual IBLLFactoryContainerGeneratorConfiguration Logics { get; }
-
-    public virtual IFetchPathFactory<ViewDTOType> FetchPathFactory { get; }
+    public virtual IFetchPathFactory<ViewDTOType> FetchPathFactory => field ??= new ExpandFetchPathFactory(
+                                                                         this.Environment.MetadataProxyProvider,
+                                                                         this.Environment.PropertyPathService,
+                                                                         this.Environment.PersistentDomainObjectBaseType).WithCompress();
 
     public virtual bool GenerateDTOFetchRuleExpander => true;
 
@@ -131,8 +111,6 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment> : CodeGenerato
     }
 
     protected override IEnumerable<Type> GetDomainTypes() => this.Environment.BLLCore.BLLDomainTypes;
-
-    protected virtual IBLLFactoryContainerGeneratorConfiguration GetLogics() => new BLLFactoryContainerGeneratorConfiguration<BLLGeneratorConfigurationBase<TEnvironment>>(this);
 
     protected virtual ICodeFileFactoryHeader<FileType> SecurityDomainBLLBaseFileFactoryHeader { get; } =
 

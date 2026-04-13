@@ -17,10 +17,10 @@ public partial class DataHelper
 {
     public EmployeeIdentityDTO SaveEmployee(
             Guid? id = null,
-            string login = null,
-            Fio nameEng = null,
-            Fio nameNative = null,
-            Fio nameRussian = null,
+            string? login = null,
+            Fio? nameEng = null,
+            Fio? nameNative = null,
+            Fio? nameRussian = null,
             BusinessUnitIdentityDTO? coreBusinessUnit = null,
             HRDepartmentIdentityDTO? hrDepartment = null,
             ManagementUnitIdentityDTO? managementUnit = null,
@@ -28,7 +28,7 @@ public partial class DataHelper
             EmployeeRegistrationTypeIdentityDTO? registrationType = null,
             EmployeeRoleIdentityDTO? role = null,
             EmployeeRoleDegreeIdentityDTO? roleDegree = null,
-            string email = null,
+            string? email = null,
             int? pin = null,
             DateTime? birthDate = null,
             DateTime? hireDate = null,
@@ -149,8 +149,8 @@ public partial class DataHelper
 
     public EmployeePositionIdentityDTO SaveEmployeePosition(
             Guid? id = null,
-            string name = null,
-            string englishName = null,
+            string? name = null,
+            string? englishName = null,
             LocationIdentityDTO? location = null,
             long externalId = 1,
             bool active = true)
@@ -186,7 +186,7 @@ public partial class DataHelper
 
     public EmployeeRegistrationTypeIdentityDTO SaveEmployeeRegistrationType(
             Guid? id = null,
-            string name = null,
+            string? name = null,
             long externalId = 1,
             bool active = true)
     {
@@ -216,7 +216,7 @@ public partial class DataHelper
 
     public EmployeeRoleIdentityDTO SaveEmployeeRole(
             Guid? id = null,
-            string name = null,
+            string? name = null,
             bool active = true)
     {
         EmployeeRole role;
@@ -240,7 +240,7 @@ public partial class DataHelper
 
     public EmployeeRoleDegreeIdentityDTO SaveEmployeeRoleDegree(
             Guid? id = null,
-            string name = null,
+            string? name = null,
             bool active = true)
     {
         EmployeeRoleDegree roleDegree;
@@ -269,7 +269,7 @@ public partial class DataHelper
                 context.ServiceProvider.GetRequiredService<ICurrentUserSource<Employee>>().CurrentUser
                        .ToSimpleDTO(context.ServiceProvider.GetRequiredService<ISampleSystemDTOMappingService>()));
 
-    public EmployeeSpecializationIdentityDTO SaveSpecialization(Guid? id = null, string name = null) =>
+    public EmployeeSpecializationIdentityDTO SaveSpecialization(Guid? id = null, string? name = null) =>
         this.EvaluateWrite(
             context =>
             {

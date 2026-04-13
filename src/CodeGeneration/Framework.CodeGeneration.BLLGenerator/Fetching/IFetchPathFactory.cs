@@ -1,7 +1,6 @@
 ﻿using Framework.Core;
 
-
-namespace Framework.BLL.Fetching;
+namespace Framework.CodeGeneration.BLLGenerator.Fetching;
 
 public interface IFetchPathFactory<in T>
 {

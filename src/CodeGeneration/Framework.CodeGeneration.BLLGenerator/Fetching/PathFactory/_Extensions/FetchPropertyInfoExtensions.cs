@@ -5,7 +5,7 @@ using Framework.BLL.Domain.DTO.Extensions;
 using Framework.Core;
 using Framework.Relations;
 
-namespace Framework.BLL.Fetching.PathFactory._Extensions;
+namespace Framework.CodeGeneration.BLLGenerator.Fetching.PathFactory._Extensions;
 
 internal static class FetchPropertyInfoExtensions
 {

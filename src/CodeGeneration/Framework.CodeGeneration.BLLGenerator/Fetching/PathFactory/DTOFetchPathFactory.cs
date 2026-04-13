@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Data;
 using System.Reflection;
 
 using CommonFramework;
@@ -8,30 +9,17 @@ using Framework.BLL.Domain.DTO.Extensions;
 using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.Serialization.Extensions;
 using Framework.BLL.Extensions;
-using Framework.BLL.Fetching.PathFactory._Extensions;
+using Framework.CodeGeneration.BLLGenerator.Fetching.PathFactory._Extensions;
 using Framework.Core;
 using Framework.Database.Mapping;
+using Framework.ExtendedMetadata;
 using Framework.Relations;
 
-namespace Framework.BLL.Fetching.PathFactory;
+namespace Framework.CodeGeneration.BLLGenerator.Fetching.PathFactory;
 
-public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
+public class DTOFetchPathFactory(IMetadataProxyProvider metadataProxyProvider, Type persistentDomainObjectBase, int maxRecurseLevel = 1)
+    : IFetchPathFactory<ViewDTOType>
 {
-    private readonly int maxRecurseLevel;
-
-    private readonly Type persistentDomainObjectBaseType;
-
-
-    public DTOFetchPathFactory(Type persistentDomainObjectBase, int maxRecurseLevel = 1)
-    {
-        if (persistentDomainObjectBase == null) throw new ArgumentNullException(nameof(persistentDomainObjectBase));
-        if (maxRecurseLevel < 0) { throw new ArgumentOutOfRangeException(nameof(maxRecurseLevel)); }
-
-        this.persistentDomainObjectBaseType = persistentDomainObjectBase;
-        this.maxRecurseLevel = maxRecurseLevel;
-    }
-
-
     public IEnumerable<PropertyPath> Create(Type startDomainType, ViewDTOType dtoType)
     {
         if (startDomainType == null) throw new ArgumentNullException(nameof(startDomainType));
@@ -48,12 +36,16 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
-        return this.persistentDomainObjectBaseType.IsAssignableFrom(type);
+        return persistentDomainObjectBase.IsAssignableFrom(type);
     }
+
+    private IEnumerable<PropertyInfo> GetSerializationProperties(Type domainType) =>
+        metadataProxyProvider.TryWrap(domainType)?.GetSerializationProperties().Select(prop => prop.GetUnderlyingSystemProperty())
+        ?? domainType.GetSerializationProperties();
 
     protected IEnumerable<PropertyInfo> GetProperties(Type domainType, ViewDTOType dtoType)
     {
-        var serializationProperties = domainType.GetSerializationProperties();
+        var serializationProperties = this.GetSerializationProperties(domainType);
 
         switch (dtoType)
         {
@@ -61,7 +53,7 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
 
                 return from property in this.GetProperties(domainType, ViewDTOType.SimpleDTO)
 
-                       where property.IsVisualIdentity()
+                       where metadataProxyProvider.Wrap(property).IsVisualIdentity()
 
                        select property;
 
@@ -82,7 +74,7 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
 
                 return from property in serializationProperties
 
-                       where !property.IsDetail() && this.IsTransferType(property.PropertyType)
+                       where !metadataProxyProvider.Wrap(property).IsDetail() && this.IsTransferType(property.PropertyType)
 
                        select property;
 
@@ -92,7 +84,7 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
 
                        let elementType = property.PropertyType.GetCollectionOrArrayElementType()
 
-                       where (property.IsDetail() && this.IsTransferType(property.PropertyType))
+                       where (metadataProxyProvider.Wrap(property).IsDetail() && this.IsTransferType(property.PropertyType))
 
                              || (elementType != null && this.IsTransferType(elementType))
 
@@ -116,15 +108,15 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
 
     protected virtual PropertyLoadNode GetLoadNode(Type domainType, ViewDTOType maxDTOType, int recurseLevel = 0, Func<PropertyInfo, bool>? subPropertyFilter = null)
     {
-        var subNodesRequest = from property in domainType.GetSerializationProperties()
+        var subNodesRequest = from property in this.GetSerializationProperties(domainType)
 
-                              where !property.GetPrivateField().Maybe(field => field.HasAttribute<NotPersistentFieldAttribute>())
+                              where !metadataProxyProvider.Wrap(property).GetPrivateField().Maybe(field => field.HasAttribute<NotPersistentFieldAttribute>())
 
                               where subPropertyFilter == null || subPropertyFilter(property)
 
                               orderby property.Name
 
-                              let subNode = this.GetLoadNode(domainType, property, maxDTOType, recurseLevel)
+                              let subNode = this.TryGetLoadNode(domainType, property, maxDTOType, recurseLevel)
 
                               where subNode != null
 
@@ -136,15 +128,15 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
                                     this.GetProperties(domainType, ViewDTOType.SimpleDTO.Min(maxDTOType)).OrderBy(property => property.Name));
     }
 
-    private PropertyLoadNode GetLoadNode(Type domainType, PropertyInfo property, ViewDTOType maxDTOType, int recurseLevel)
+    private PropertyLoadNode? TryGetLoadNode(Type domainType, PropertyInfo property, ViewDTOType maxDTOType, int recurseLevel)
     {
         var isRecurse = domainType == property.GetNestedType();
 
-        if (!isRecurse || recurseLevel != this.maxRecurseLevel)
+        if (!isRecurse || recurseLevel != maxRecurseLevel)
         {
             var nextRecurseLevel = recurseLevel + (isRecurse ? 1 : 0);
 
-            var nextMaxDTOType = maxDTOType == ViewDTOType.ProjectionDTO ? ViewDTOType.ProjectionDTO : (ViewDTOType)property.GetMainDTOType((MainDTOType)maxDTOType);
+            var nextMaxDTOType = maxDTOType == ViewDTOType.ProjectionDTO ? ViewDTOType.ProjectionDTO : (ViewDTOType)metadataProxyProvider.Wrap(property).GetMainDTOType((MainDTOType)maxDTOType);
 
             if (maxDTOType >= ViewDTOType.FullDTO && this.IsTransferType(property.PropertyType))
             {
@@ -160,7 +152,7 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
 
                                                 subProperty.PropertyType.IsCollection()
                                                 || subProperty.PropertyType != domainType
-                                                || subProperty.IsNotMaster());
+                                                || metadataProxyProvider.Wrap(subProperty).IsNotMaster());
             }
         }
 

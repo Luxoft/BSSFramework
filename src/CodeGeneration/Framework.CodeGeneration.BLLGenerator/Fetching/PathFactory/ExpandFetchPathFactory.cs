@@ -5,19 +5,29 @@ using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.BLL.Extensions;
 using Framework.BLL.Services;
 using Framework.Core;
+using Framework.ExtendedMetadata;
 
-namespace Framework.BLL.Fetching.PathFactory;
+namespace Framework.CodeGeneration.BLLGenerator.Fetching.PathFactory;
 
-public class ExpandFetchPathFactory(IPropertyPathService propertyPathService, Type persistentDomainObjectBase, int maxRecurseLevel = 1) :
-    DTOFetchPathFactory(persistentDomainObjectBase, maxRecurseLevel)
+public class ExpandFetchPathFactory(
+    IMetadataProxyProvider metadataProxyProvider,
+    IPropertyPathService propertyPathService, Type persistentDomainObjectBase, int maxRecurseLevel = 1) :
+    DTOFetchPathFactory(metadataProxyProvider, persistentDomainObjectBase, maxRecurseLevel)
 {
     protected override PropertyLoadNode ExpandNode(PropertyLoadNode node)
     {
         if (node == null) throw new ArgumentNullException(nameof(node));
 
-        var withoutIgnoreNode = node.WhereP(property => !property.HasAttribute<IgnoreFetchAttribute>(), false);
+        var withoutIgnoreNode = node.WhereP(property => !metadataProxyProvider.Wrap(property).HasAttribute<IgnoreFetchAttribute>(), false);
 
-        var pureNode = withoutIgnoreNode.WhereP(property => !property.HasAttribute<ExpandPathAttribute>() && !property.HasAttribute<FetchPathAttribute>(), false);
+        var pureNode = withoutIgnoreNode.WhereP(
+            property =>
+            {
+                var wrapProp = metadataProxyProvider.Wrap(property);
+
+                return !wrapProp.HasAttribute<ExpandPathAttribute>() && !wrapProp.HasAttribute<FetchPathAttribute>();
+            },
+            false);
 
         var pathProperties = withoutIgnoreNode.Properties.Keys.Except(pureNode.Properties.Keys)
                                               .Concat(withoutIgnoreNode.PrimitiveProperties.Except(pureNode.PrimitiveProperties))

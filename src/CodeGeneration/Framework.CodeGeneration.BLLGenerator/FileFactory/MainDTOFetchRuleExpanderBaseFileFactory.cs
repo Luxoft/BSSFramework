@@ -120,7 +120,7 @@ public class MainDTOFetchRuleExpanderBaseFileFactory<TConfiguration>(TConfigurat
     {
         var paths = this.Configuration
                         .FetchPathFactory
-                        .Create(this.Configuration.Environment.MetadataProxyProvider.Wrap(domainType), dtoType)
+                        .Create(domainType, dtoType)
                         .ToArray();
 
         if (paths.Any())

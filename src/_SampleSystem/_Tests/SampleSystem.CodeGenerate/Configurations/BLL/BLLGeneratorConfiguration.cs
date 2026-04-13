@@ -22,6 +22,4 @@ public class BLLGeneratorConfiguration(ServerGenerationEnvironment environment) 
         };
 
     public override bool SquashPropertyValidators(PropertyInfo property) => property != typeof(Employee).GetProperty(nameof(Employee.ExternalId));
-
-    public override bool GenerateDomainServiceConstructor(Type domainType) => !new[] { typeof(Employee) }.Contains(domainType);
 }

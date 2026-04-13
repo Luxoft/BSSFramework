@@ -7,7 +7,6 @@ using Framework.Authorization.Generated.DTO;
 using Framework.BLL.DependencyInjection;
 using Framework.BLL.DTOMapping.DTOMapper;
 using Framework.BLL.Events.SubscriptionManager;
-using Framework.BLL.Services;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Jobs;
 using Framework.Configuration.BLL.Notification;
@@ -20,7 +19,6 @@ using Framework.Infrastructure.SubscriptionService;
 using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem;
-
 using SecuritySystem.DependencyInjection;
 
 namespace Framework.Infrastructure.DependencyInjection;
@@ -46,8 +44,6 @@ public static class ServiceCollectionExtensions
             services.AddScoped<IConfigurationDTOMappingService, ConfigurationServerPrimitiveDTOMappingService>();
 
             services.AddScoped<IObjectModificationProcessor, LocalDbObjectModificationProcessor>();
-
-            services.AddScoped<IRootSecurityService, RootSecurityService>();
 
             services.AddAuthorizationBLL();
             services.AddConfigurationBLL();

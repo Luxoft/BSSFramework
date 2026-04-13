@@ -38,6 +38,9 @@ public static class ServiceCollectionExtensions
         public IServiceCollection AddLegacyGenericServices()
         {
             services.AddSingleton<ITargetSystemTypeResolverContainer, TargetSystemTypeResolverContainer>();
+            services.AddSingleton<ITargetSystemInfoService, TargetSystemInfoService>();
+
+            services.AddScoped<IRootSecurityService, RootSecurityService>();
 
             services.AddSingleton<IMetadataProxyProvider, MetadataProxyProvider>();
             services.AddSingleton<IPropertyPathService, PropertyPathService>();

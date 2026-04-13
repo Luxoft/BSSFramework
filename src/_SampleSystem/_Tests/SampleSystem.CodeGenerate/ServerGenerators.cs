@@ -1,6 +1,4 @@
 ﻿using System.CodeDom;
-using System.Collections.Immutable;
-using System.Reflection;
 
 using CommonFramework;
 
@@ -15,10 +13,8 @@ using Framework.CodeGeneration.ProjectionGenerator;
 using Framework.CodeGeneration.ServiceModelGenerator.AutoRequest;
 using Framework.CodeGeneration.WebApiGenerator;
 using Framework.Configuration.TestGenerate.Configurations;
-using Framework.Core;
 using Framework.Database;
 using Framework.Database.NHibernate.DALGenerator;
-using Framework.ExtendedMetadata;
 using Framework.FileGeneration;
 
 using Microsoft.AspNetCore.Mvc;

@@ -21,7 +21,16 @@ public class MetadataProxyProvider(IReadOnlyDictionary<MemberInfo, ImmutableArra
         }
         else if (value is Type type)
         {
-            return (T)(object)this.MapType(type.GetTypeInfo());
+            var proxyType = (T)(object)this.MapType(type.GetTypeInfo());
+
+            if (proxyType.GetType() == value.GetType())
+            {
+                return null;
+            }
+            else
+            {
+                return proxyType;
+            }
         }
         else if (value is PropertyInfo property)
         {
@@ -29,9 +38,16 @@ public class MetadataProxyProvider(IReadOnlyDictionary<MemberInfo, ImmutableArra
 
             var wrappedProperties = wrappedType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
 
-            var prop = wrappedProperties.Single(prop => prop.Name == property.Name);
+            var proxyProp = (T)(object)wrappedProperties.Single(prop => prop.Name == property.Name);
 
-            return (T)(object)prop;
+            if (proxyProp.GetType() == value.GetType())
+            {
+                return null;
+            }
+            else
+            {
+                return proxyProp;
+            }
         }
         else
         {
@@ -39,28 +55,23 @@ public class MetadataProxyProvider(IReadOnlyDictionary<MemberInfo, ImmutableArra
         }
     }
 
-    protected override IEnumerable<object> GetCustomAttributes(MemberInfo member, IEnumerable<object> declaredAttributes) //=>
+    protected override IEnumerable<object> GetCustomAttributes(MemberInfo member, IEnumerable<object> declaredAttributes)
+    {
+        if (member is PropertyInfo prop)
+        {
+            var baseAttributes = prop.GetCustomAttributes();
 
-        //this.cache.GetOrAdd(
-          //  member,
-            //_ =>
-            {
-                if (member is PropertyInfo prop)
-                {
-                    var baseAttributes = prop.GetCustomAttributes();
+            var newAttributes = prop.GetBaseProperties().SelectMany(p => extendedAttributes.GetValueOrDefault(p, [])).Distinct();
 
-                    var newAttributes = prop.GetBaseProperties().SelectMany(p => extendedAttributes.GetValueOrDefault(p, [])).Distinct();
+            return [.. newAttributes, .. baseAttributes];
+        }
+        else
+        {
+            var baseAttributes = base.GetCustomAttributes(member, declaredAttributes);
 
-                    return [.. newAttributes, .. baseAttributes];
-                }
-                else
-                {
-                    var baseAttributes = base.GetCustomAttributes(member, declaredAttributes);
+            var newAttributes = extendedAttributes.GetValueOrDefault(member, []);
 
-                    var newAttributes = extendedAttributes.GetValueOrDefault(member, []);
-
-                    return [.. newAttributes, .. baseAttributes];
-                }
-            }
-            //);
+            return [.. newAttributes, .. baseAttributes];
+        }
+    }
 }

@@ -21,7 +21,7 @@ public class DefaultProjectionLambdaEnvironment(
     public override string Namespace { get; } =
         string.IsNullOrWhiteSpace(@namespace) ? throw new ArgumentException("Value cannot be null or whitespace.", nameof(@namespace)) : @namespace;
 
-    public override Assembly Assembly => field ??= new GenAssembly(assemblyFullName, assemblyName, this.ProjectionTypeResolver);
+    public override Assembly Assembly => field ??= new GeneratedAssembly(assemblyFullName, assemblyName, this.ProjectionTypeResolver);
 
     public override Type DomainObjectBaseType { get; } = domainObjectBaseType;
 

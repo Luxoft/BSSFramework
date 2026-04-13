@@ -150,7 +150,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
         {
             var singlePathProp = this.ProjectionValue.Path.Single();
 
-            var propMapping = singlePathProp.GetCustomAttribute<MappingAttribute>();
+            var propMapping = this.Environment.MetadataProxyProvider.Wrap(singlePathProp).GetCustomAttribute<MappingAttribute>();
 
             if (propMapping != null)
             {
@@ -194,9 +194,9 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
 
             if (nonAbstractDeclType != this.SourceType)
             {
-                var existsColumnAttribute = property.GetCustomAttribute<MappingAttribute>();
+                var existsColumnAttribute = this.Environment.MetadataProxyProvider.Wrap(property).GetCustomAttribute<MappingAttribute>();
 
-                var existsTableAttribute = nonAbstractDeclType.GetTableAttribute();
+                var existsTableAttribute = this.Environment.MetadataProxyProvider.Wrap(nonAbstractDeclType).GetTableAttribute();
 
                 return existsColumnAttribute?.ExternalTableName ?? existsTableAttribute?.Name ?? nonAbstractDeclType.Name;
             }

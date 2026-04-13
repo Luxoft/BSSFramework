@@ -23,7 +23,6 @@ public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
         return TypeResolverHelper.Create(generateTypeResolver.ProjectionContracts.ToDictionary(type => type, this.ContractTypeResolver.Resolve));
     }
 
-
     public static ProjectionContractEnvironment Create(
         IMetadataProxyProvider metadataProxyProvider,
         ITypeSource typeSource,
@@ -56,7 +55,7 @@ public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
         public override string Namespace { get; } =
             string.IsNullOrWhiteSpace(@namespace) ? throw new ArgumentException("Value cannot be null or whitespace.", nameof(@namespace)) : @namespace;
 
-        public override Assembly Assembly => field ??= new GenAssembly(assemblyFullName, assemblyName, this.ContractTypeResolver);
+        public override Assembly Assembly => field ??= new GeneratedAssembly(assemblyFullName, assemblyName, this.ContractTypeResolver);
 
         public override bool UseDependencySecurity { get; } = useDependencySecurity;
 

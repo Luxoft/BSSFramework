@@ -5,7 +5,7 @@ using Framework.ExtendedMetadata;
 
 namespace Framework.Projection._ImplType;
 
-public class GenAssembly(string fullName, string name, ITypeSource typeSource) : Assembly, IWrappingObject
+public class GeneratedAssembly(string fullName, string name, ITypeSource typeSource) : Assembly, IWrappingObject
 {
     public bool CanWrap => false;
 
@@ -13,5 +13,5 @@ public class GenAssembly(string fullName, string name, ITypeSource typeSource) :
 
     public override string FullName { get; } = fullName;
 
-    public override AssemblyName GetName() => new AssemblyName(name) { Name = name };
+    public override AssemblyName GetName() => new (name) { Name = name };
 }

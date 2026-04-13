@@ -154,7 +154,7 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
 
     protected override bool IsByRefImpl() => false;
 
-    public override bool IsAssignableFrom(Type? c) => this.Equals(c);
+    public override bool IsAssignableFrom(Type? c) => this == c;
 
     public override object[] GetCustomAttributes(Type attributeType, bool inherit) => (object[])this.customAttributes.Where(attributeType.IsInstanceOfType).ToArray(attributeType);
 

@@ -10,7 +10,7 @@ public class ManualProjectionEnvironment(Assembly assembly, Type persistentDomai
 {
     public string Namespace => throw new NotImplementedException("Single namespace not required");
 
-    public Assembly Assembly { get; } = new GenAssembly(
+    public Assembly Assembly { get; } = new GeneratedAssembly(
         assembly.FullName!,
         assembly.GetName().Name!,
         new TypeSource([.. assembly.GetTypes().Where(persistentDomainObjectBaseType.IsAssignableFrom)]));

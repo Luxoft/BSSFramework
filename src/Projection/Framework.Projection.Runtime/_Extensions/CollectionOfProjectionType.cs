@@ -31,17 +31,17 @@ internal class CollectionOfProjectionType : BaseTypeImpl, IWrappingObject
 
     public override Assembly Assembly => this.originalType.Assembly;
 
-    public override Type BaseType => this.originalType.BaseType;
+    public override Type? BaseType => this.originalType.BaseType;
 
-    public override string AssemblyQualifiedName => this.originalType.AssemblyQualifiedName;
+    public override string? AssemblyQualifiedName => this.originalType.AssemblyQualifiedName;
 
     public override bool ContainsGenericParameters => this.originalType.ContainsGenericParameters;
 
     public override IEnumerable<CustomAttributeData> CustomAttributes => this.originalType.CustomAttributes;
 
-    public override MethodBase DeclaringMethod => this.originalType.DeclaringMethod;
+    public override MethodBase? DeclaringMethod => this.originalType.DeclaringMethod;
 
-    public override Type DeclaringType => this.originalType.DeclaringType;
+    public override Type? DeclaringType => this.originalType.DeclaringType;
 
     public override bool IsGenericType => this.originalType.IsGenericType;
 

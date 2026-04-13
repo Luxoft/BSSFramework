@@ -83,7 +83,7 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
 
     protected override bool IsByRefImpl() => false;
 
-    public override bool IsAssignableFrom(Type c) => this.Equals(c);
+    public override bool IsAssignableFrom(Type? c) => this == c;
 
     public override object[] GetCustomAttributes(Type attributeType, bool inherit) => (object[])this.customAttributes.Where(attributeType.IsInstanceOfType).ToArray(attributeType);
 
@@ -94,7 +94,7 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
         {
             this.GetSourceTypeAttributes(),
 
-            this.ContractType.GetCustomAttributes().Where(v => !(v is ProjectionContractAttribute)),
+            this.ContractType.GetCustomAttributes().Where(v => v is not ProjectionContractAttribute),
 
             this.GetTableAttributes(),
 
@@ -105,12 +105,12 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
         }.SelectMany().ToArray();
 
     private IEnumerable<Attribute> GetSourceTypeAttributes() =>
-        this.SourceType.GetCustomAttributes().Where(attr =>
-                                                        !(attr is TableAttribute)
-                                                        && !(attr is BLLRoleAttribute)
-                                                        && !(attr is ClassValidatorAttribute)
-                                                        && !(attr is DomainObjectAccessAttribute)
-                                                        && !(attr is DependencySecurityAttribute));
+        this.environment.MetadataProxyProvider.Wrap(this.SourceType).GetCustomAttributes().Where(attr =>
+                                                                                                     !(attr is TableAttribute)
+                                                                                                     && !(attr is BLLRoleAttribute)
+                                                                                                     && !(attr is ClassValidatorAttribute)
+                                                                                                     && !(attr is DomainObjectAccessAttribute)
+                                                                                                     && !(attr is DependencySecurityAttribute));
 
     private IEnumerable<Attribute> GetSecurityAttributes()
     {
@@ -122,7 +122,7 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
 
     private IEnumerable<TableAttribute> GetTableAttributes()
     {
-        yield return this.SourceType.GetCustomAttribute<TableAttribute>() ?? new TableAttribute { Name = this.SourceType.Name };
+        yield return this.environment.MetadataProxyProvider.Wrap(this.SourceType).GetCustomAttribute<TableAttribute>() ?? new TableAttribute { Name = this.SourceType.Name };
     }
 
     private IEnumerable<ProjectionAttribute> GetProjectionAttributes()
@@ -134,13 +134,13 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
 
     protected override bool IsPrimitiveImpl() => false;
 
-    public override FieldInfo GetField(string name, BindingFlags bindingAttr) => this.GetFields(bindingAttr).SingleOrDefault(f => f.Name == name);
+    public override FieldInfo? GetField(string name, BindingFlags bindingAttr) => this.GetFields(bindingAttr).SingleOrDefault(f => f.Name == name);
 
     public override FieldInfo[] GetFields(BindingFlags bindingAttr)
     {
         if (bindingAttr.HasFlag(BindingFlags.Instance | BindingFlags.NonPublic))
         {
-            return this.generatedFields;
+            return this.generatedFields.ToArray<FieldInfo>();
         }
         else
         {
@@ -168,7 +168,7 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
         }
     }
 
-    protected override PropertyInfo GetPropertyImpl(string name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers) =>
+    protected override PropertyInfo? GetPropertyImpl(string name, BindingFlags bindingAttr, Binder? binder, Type? returnType, Type[]? types, ParameterModifier[]? modifiers) =>
         this.generatedProperties.SingleOrDefault(prop => prop.Name == name)
 
         ?? this.BaseType.GetProperty(name, bindingAttr);
@@ -203,7 +203,7 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
                };
     }
 
-    public override bool Equals(Type o) => ReferenceEquals(this, o);
+    public override bool Equals(Type? o) => ReferenceEquals(this, o);
 
     public override int GetHashCode() => this.FullName.GetHashCode();
 

@@ -30,12 +30,14 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
     /// </summary>
     public Type SourceType => this.ProjectionValue.SourceType;
 
+    private Type WrappedSourceType => field ??= this.Environment.MetadataProxyProvider.Wrap(this.SourceType);
+
     /// <summary>
     /// Флаг указания, что проекция наследуется от базовой секурной проекции.
     /// </summary>
     protected bool HasBaseSecurityType => this.ProjectionValue.Role == ProjectionRole.Default
                                           && !this.Environment.UseDependencySecurity
-                                          && this.ProjectionValue.SourceType.HasSecurityNodeInterfaces();
+                                          && this.WrappedSourceType.HasSecurityNodeInterfaces();
 
 
     /// <inheritdoc />
@@ -55,7 +57,7 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
     }
 
     private IEnumerable<Attribute> GetSourceTypeAttributes() =>
-        this.SourceType.GetCustomAttributes().Where(attr =>
+        this.WrappedSourceType.GetCustomAttributes().Where(attr =>
                                                         !(attr is TableAttribute)
                                                         && !(attr is BLLRoleAttribute)
                                                         && !(attr is ClassValidatorAttribute)
@@ -73,7 +75,7 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
         }
         else
         {
-            foreach (var attr in this.SourceType.GetCustomAttributes().Where(attr => attr is DomainObjectAccessAttribute))
+            foreach (var attr in this.WrappedSourceType.GetCustomAttributes().Where(attr => attr is DomainObjectAccessAttribute))
             {
                 yield return attr;
             }
@@ -104,7 +106,7 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
 
     private TableAttribute CreateTableAttribute()
     {
-        var result = this.SourceType.GetCustomAttribute<TableAttribute>() ?? new TableAttribute { Name = this.SourceType.Name };
+        var result = this.WrappedSourceType.GetCustomAttribute<TableAttribute>() ?? new TableAttribute { Name = this.SourceType.Name };
 
         return result;
     }

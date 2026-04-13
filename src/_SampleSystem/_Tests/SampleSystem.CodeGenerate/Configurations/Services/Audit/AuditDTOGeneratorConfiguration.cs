@@ -1,6 +1,5 @@
 ﻿using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
-
-using TypeExtensions = Framework.Projection.TypeExtensions;
+using Framework.Projection;
 
 namespace SampleSystem.CodeGenerate.Configurations.Services.Audit;
 
@@ -10,5 +9,5 @@ public class AuditDTOGeneratorConfiguration(ServerGenerationEnvironment environm
 
     protected override string PropertyRevisionDTOPrefixName => "SampleSystem";
 
-    protected override IEnumerable<Type> GetDomainTypes() => base.GetDomainTypes().Where(z => !TypeExtensions.IsProjection(z));
+    protected override IEnumerable<Type> GetDomainTypes() => base.GetDomainTypes().Where(v => !v.IsProjection());
 }

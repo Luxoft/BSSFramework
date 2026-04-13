@@ -79,7 +79,6 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
             }
         }
 
-
         {
             foreach (var projectionFilterAttribute in this.Environment.MetadataProxyProvider.GetProxy(domainType).GetCustomAttributes<ProjectionFilterAttribute>())
             {
@@ -132,7 +131,7 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
             yield return projectionPropAttr.ToAttributeDeclaration();
         }
 
-        if (property.GetCustomAttribute<ExpandPathAttribute>() is {} expandPathAttribute)
+        if (property.GetCustomAttribute<ExpandPathAttribute>() is { } expandPathAttribute)
         {
             yield return expandPathAttribute.ToAttributeDeclaration();
         }
@@ -158,7 +157,7 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
         }
     }
 
-    protected override IEnumerable<Type> GetDomainTypes() => this.projectionEnvironment.Assembly.Types;
+    protected override IEnumerable<Type> GetDomainTypes() => this.projectionEnvironment.Assembly.GetTypes().Where(this.Environment.PersistentDomainObjectBaseType.IsAssignableFrom);
 
     protected override IEnumerable<ICodeFileFactoryHeader<FileType>> GetFileFactoryHeaders()
     {

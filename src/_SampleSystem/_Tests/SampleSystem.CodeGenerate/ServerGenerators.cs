@@ -34,7 +34,7 @@ public partial class ServerGenerators
     public void GenerateMainTest()
     {
         var prov = new MetadataProxyProvider(new Dictionary<MemberInfo, ImmutableArray<Attribute>>());
-        var proj = this.environment.ProjectionEnvironments.SelectMany(p => p.Assembly.Types).Single(p => p.Name == "TestBusinessUnit");
+        var proj = this.environment.ProjectionEnvironments.SelectMany(p => p.Assembly.GetTypes()).Single(p => p.Name == "TestBusinessUnit");
         var projWarp = prov.Wrap(proj);
 
         var prop = projWarp.GetProperty("BusinessUnitEmployeeRoles")!;

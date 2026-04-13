@@ -13,7 +13,7 @@ public abstract class FileGeneratorConfiguration<TEnvironment> : IFileGeneratorC
     {
         this.Environment = environment;
 
-        this.domainTypesLazy = LazyHelper.Create(() => this.GetDomainTypes().OrderBy(x => x.FullName).ToImmutableArray());
+        this.domainTypesLazy = LazyHelper.Create(() => this.GetDomainTypes().OrderBy(v => v.FullName).ToImmutableArray());
     }
 
     public TEnvironment Environment { get; }

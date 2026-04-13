@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using System.Reflection;
+
+using Framework.Core;
 using Framework.Core.TypeResolving;
 using Framework.Database.Metadata;
 using Framework.Database.NHibernate.DALGenerator._Internal;
@@ -24,15 +26,9 @@ public class DALGeneratorConfigurationBase<TEnvironment> : FileGeneratorConfigur
 
     protected virtual IEnumerable<Assembly> GetAssemblies()
     {
-        var baseRequest = from domainType in this.DomainTypes
-                          group domainType by domainType.Assembly
-                          into assemblyGroup
-                          let assembly = assemblyGroup.Key
-                          select new Assembly(assembly.GetName().Name!, assembly.FullName!, new TypeSource([.. assemblyGroup]));
-
-        foreach (var assemblyInfo in baseRequest)
+        foreach (var assembly in this.DomainTypes.Select(dt => dt.Assembly).Distinct())
         {
-            yield return assemblyInfo;
+            yield return assembly;
         }
 
         foreach (var projectionEnvironment in this.Environment.ProjectionEnvironments)

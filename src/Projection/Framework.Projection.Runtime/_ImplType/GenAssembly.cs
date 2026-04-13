@@ -9,4 +9,6 @@ public class GenAssembly(string fullName, string name, ITypeSource typeSource) :
     public override Type[] GetTypes() => [.. typeSource.Types];
 
     public override string FullName { get; } = fullName;
+
+    public override AssemblyName GetName() => new AssemblyName(name) { Name = name };
 }

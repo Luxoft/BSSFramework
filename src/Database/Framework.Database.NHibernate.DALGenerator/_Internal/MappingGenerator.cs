@@ -4,7 +4,6 @@ using System.Xml.Linq;
 using CommonFramework;
 
 using Framework.Core;
-using Framework.Core.TypeResolving;
 using Framework.Database.Mapping;
 using Framework.Database.Metadata;
 using Framework.Database.SqlMapper;
@@ -334,7 +333,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
     private XElement CreateRoot()
     {
         var result = new XElement(RootNameNamespace + NHibernateMappingRootName)
-                     .WithAttribute(AssemblyName, this.Assembly.Name)
+                     .WithAttribute(AssemblyName, this.Assembly.GetName().Name!)
                      .WithAttribute("auto-import", false)
                      .MaybeWithAttribute(SchemaName, this.schema);
 

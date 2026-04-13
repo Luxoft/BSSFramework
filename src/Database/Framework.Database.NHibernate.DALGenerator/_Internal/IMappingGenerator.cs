@@ -1,6 +1,5 @@
-﻿using System.Xml.Linq;
-
-using Framework.Core.TypeResolving;
+﻿using System.Reflection;
+using System.Xml.Linq;
 
 namespace Framework.Database.NHibernate.DALGenerator._Internal;
 

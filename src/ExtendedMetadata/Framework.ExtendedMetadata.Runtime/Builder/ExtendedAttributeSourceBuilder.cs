@@ -1,14 +1,15 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Frozen;
+using System.Collections.Immutable;
 using System.Reflection;
 
 namespace Framework.ExtendedMetadata.Builder;
 
-public class MetadataProxyProviderBuilder : IMetadataProxyProviderBuilder
+public class ExtendedAttributeSourceBuilder : IExtendedAttributeSourceBuilder
 {
     private readonly Dictionary<Type, IDomainTypeMetadataBuilder> types = [];
 
 
-    public IMetadataProxyProviderBuilder Add<TDomainType>(Action<IDomainTypeMetadataBuilder<TDomainType>> setupAction)
+    public IExtendedAttributeSourceBuilder Add<TDomainType>(Action<IDomainTypeMetadataBuilder<TDomainType>> setupAction)
     {
         var typeBuilder = new DomainTypeMetadataBuilder<TDomainType>();
 
@@ -19,7 +20,7 @@ public class MetadataProxyProviderBuilder : IMetadataProxyProviderBuilder
         return this;
     }
 
-    public IMetadataProxyProvider Build() => new MetadataProxyProvider(this.GetExtendedAttributes().ToDictionary());
+    public ExtendedAttributeSource Build() => new(this.GetExtendedAttributes().ToFrozenDictionary(v => v.Item1, v => v.Item2));
 
     private IEnumerable<(MemberInfo, ImmutableArray<Attribute>)> GetExtendedAttributes()
     {

@@ -60,66 +60,69 @@ public partial class ConfigurationGenerationEnvironment : GenerationEnvironmentB
 
     public MappingSettings GetMappingSettings(DatabaseName dbName) => new MappingSettings<PersistentDomainObjectBase>(dbName);
 
-    public override IMetadataProxyProvider MetadataProxyProvider { get; } =
+    protected override IEnumerable<ExtendedAttributeSource> GetExtendedAttributeSources()
+    {
 
-        new MetadataProxyProviderBuilder()
+        yield return new ExtendedAttributeSourceBuilder()
+                     .Add<DomainObjectBase>(tb => tb.AddAttribute<AvailableDecimalValidatorAttribute>()
+                                                    .AddAttribute<AvailablePeriodValidatorAttribute>()
+                                                    .AddAttribute<AvailableDateTimeValidatorAttribute>()
+                                                    .AddAttribute<DefaultStringMaxLengthValidatorAttribute>())
 
-            .Add<DomainObjectBase>(tb => tb.AddAttribute<AvailableDecimalValidatorAttribute>()
-                                           .AddAttribute<AvailablePeriodValidatorAttribute>()
-                                           .AddAttribute<AvailableDateTimeValidatorAttribute>()
-                                           .AddAttribute<DefaultStringMaxLengthValidatorAttribute>())
-
-            .Add<PersistentDomainObjectBase>(tb => tb.AddProperty(v => v.Id, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
-                                                     .AddProperty(v => v.IsNew, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.Ignore))))
-
-
-            .Add<BaseDirectory>(tb => tb.AddProperty(v => v.Name, pb => pb.AddAttribute(new VisualIdentityAttribute())))
+                     .Add<PersistentDomainObjectBase>(tb => tb.AddProperty(v => v.Id, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
+                                                              .AddProperty(v => v.IsNew, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.Ignore))))
 
 
-            .Add<DomainObjectEvent>(tb =>
-                                        tb.AddAttribute(new BLLRoleAttribute()))
-
-            .Add<DomainObjectModification>(tb =>
-                                               tb.AddAttribute(new BLLRoleAttribute()))
-
-            .Add<SentMessage>(tb =>
-                                  tb.AddAttribute(new BLLRoleAttribute()))
-
-            .Add<Sequence>(tb =>
-                               tb.AddAttribute(new BLLViewRoleAttribute())
-                                 .AddAttribute(new BLLSaveRoleAttribute())
-                                 .AddAttribute(new BLLRemoveRoleAttribute())
-                                 .AddProperty(v => v.Number, pb => pb.AddAttribute(new Int64ValueValidatorAttribute { Min = 0})))
-
-            .Add<SystemConstant>(tb =>
-                                     tb.AddAttribute(new BLLViewRoleAttribute())
-                                       .AddAttribute(new BLLSaveRoleAttribute { AllowCreate = false })
-                                       .AddProperty(v => v.Type, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
-                                       .AddProperty(
-                                           v => v.Code,
-                                           pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly))
-                                                   .AddAttribute(new VisualIdentityAttribute()))
-                                       .AddProperty(
-                                           v => v.IsManual,
-                                           pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly))))
+                     .Add<BaseDirectory>(tb => tb.AddProperty(v => v.Name, pb => pb.AddAttribute(new VisualIdentityAttribute())))
 
 
-            .Add<TargetSystem>(tb =>
-                                   tb.AddAttribute(new BLLViewRoleAttribute())
-                                     .AddAttribute(new BLLSaveRoleAttribute { AllowCreate = false })
-                                     .AddProperty(
-                                         v => v.DomainTypes,
-                                         pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly))))
+                     .Add<DomainObjectEvent>(tb =>
+                                                 tb.AddAttribute(new BLLRoleAttribute()))
 
-            .Add<DomainType>(tb =>
-                                 tb.AddAttribute(new BLLViewRoleAttribute())
-                                   .AddProperty(v => v.EventOperations, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
-                                   .AddProperty(v => v.Name, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
-                                   .AddProperty(v => v.Namespace, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly))))
+                     .Add<DomainObjectModification>(tb =>
+                                                        tb.AddAttribute(new BLLRoleAttribute()))
 
-            .Add<DomainObjectNotification>(tb =>
-                                               tb.AddAttribute(new BLLRoleAttribute()))
-            .Build();
+                     .Add<SentMessage>(tb =>
+                                           tb.AddAttribute(new BLLRoleAttribute()))
+
+                     .Add<Sequence>(tb =>
+                                        tb.AddAttribute(new BLLViewRoleAttribute())
+                                          .AddAttribute(new BLLSaveRoleAttribute())
+                                          .AddAttribute(new BLLRemoveRoleAttribute())
+                                          .AddProperty(v => v.Number, pb => pb.AddAttribute(new Int64ValueValidatorAttribute { Min = 0 })))
+
+                     .Add<SystemConstant>(tb =>
+                                              tb.AddAttribute(new BLLViewRoleAttribute())
+                                                .AddAttribute(new BLLSaveRoleAttribute { AllowCreate = false })
+                                                .AddProperty(v => v.Type, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
+                                                .AddProperty(
+                                                    v => v.Code,
+                                                    pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly))
+                                                            .AddAttribute(new VisualIdentityAttribute()))
+                                                .AddProperty(
+                                                    v => v.IsManual,
+                                                    pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly))))
+
+
+                     .Add<TargetSystem>(tb =>
+                                            tb.AddAttribute(new BLLViewRoleAttribute())
+                                              .AddAttribute(new BLLSaveRoleAttribute { AllowCreate = false })
+                                              .AddProperty(
+                                                  v => v.DomainTypes,
+                                                  pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly))))
+
+                     .Add<DomainType>(tb =>
+                                          tb.AddAttribute(new BLLViewRoleAttribute())
+                                            .AddProperty(v => v.EventOperations, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
+                                            .AddProperty(v => v.Name, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly)))
+                                            .AddProperty(v => v.Namespace, pb => pb.AddAttribute(new CustomSerializationAttribute(CustomSerializationMode.ReadOnly))))
+
+                     .Add<DomainObjectNotification>(tb =>
+                                                        tb.AddAttribute(new BLLRoleAttribute()))
+                     .Build();
+    }
+
+
 
     public static readonly ConfigurationGenerationEnvironment Default = new();
 }

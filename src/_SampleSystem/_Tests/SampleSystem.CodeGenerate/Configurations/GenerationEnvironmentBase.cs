@@ -1,13 +1,16 @@
 ﻿using System.Collections.Immutable;
 using System.Reflection;
+
 using Framework.BLL.Domain.Attributes;
 using Framework.CodeGeneration.Configuration;
 using Framework.ExtendedMetadata;
 using Framework.ExtendedMetadata.Builder;
 using Framework.Projection;
+
 using SampleSystem.Domain;
 using SampleSystem.Domain.ManualProjections;
 using SampleSystem.Security;
+
 using SecuritySystem;
 
 namespace SampleSystem.CodeGenerate;
@@ -47,31 +50,32 @@ public abstract class GenerationEnvironmentBase : CodeGenerationEnvironment<Doma
             typeof(TestManualEmployeeProjection).Assembly);
     }
 
-    public override IMetadataProxyProvider MetadataProxyProvider { get; } =
-
-        new MetadataProxyProviderBuilder()
-            .Add<Employee>(b => b.AddProperty(
-                                     e => e.PersonalCellPhones,
-                                     pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePersonalCellPhoneView))
-                                             .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit)))
-                                 .AddProperty(
-                                     e => e.Login,
-                                     pb => pb.AddAttribute(new ViewDomainObjectAttribute(SecurityRule.View))
-                                             .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeeEdit)))
-                                 .AddProperty(
-                                     e => e.PersonalCellPhone,
-                                     pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePersonalCellPhoneView)))
-                                 .AddProperty(
-                                     e => e.Position,
-                                     pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePositionView))
-                                             .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePositionEdit))))
-            .Add<Example1>(b => b.AddProperty(
-                               e => e.Field3,
-                               pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.LocationView))
-                                       .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.LocationEdit))))
-            .Add<HRDepartment>(b => b.AddProperty(
-                                   e => e.CompanyLegalEntity,
-                                   pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.CompanyLegalEntityView))
-                                           .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.CompanyLegalEntityEdit))))
-            .Build();
+    protected override IEnumerable<ExtendedAttributeSource> GetExtendedAttributeSources()
+    {
+        yield return new ExtendedAttributeSourceBuilder()
+                     .Add<Employee>(b => b.AddProperty(
+                                              e => e.PersonalCellPhones,
+                                              pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePersonalCellPhoneView))
+                                                      .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit)))
+                                          .AddProperty(
+                                              e => e.Login,
+                                              pb => pb.AddAttribute(new ViewDomainObjectAttribute(SecurityRule.View))
+                                                      .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeeEdit)))
+                                          .AddProperty(
+                                              e => e.PersonalCellPhone,
+                                              pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePersonalCellPhoneView)))
+                                          .AddProperty(
+                                              e => e.Position,
+                                              pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePositionView))
+                                                      .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePositionEdit))))
+                     .Add<Example1>(b => b.AddProperty(
+                                        e => e.Field3,
+                                        pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.LocationView))
+                                                .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.LocationEdit))))
+                     .Add<HRDepartment>(b => b.AddProperty(
+                                            e => e.CompanyLegalEntity,
+                                            pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.CompanyLegalEntityView))
+                                                    .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.CompanyLegalEntityEdit))))
+                     .Build();
+    }
 }

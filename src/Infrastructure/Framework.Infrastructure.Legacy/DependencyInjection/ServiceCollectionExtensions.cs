@@ -11,6 +11,7 @@ using Framework.BLL.Validation;
 using Framework.BLL.Visitors;
 using Framework.Core;
 using Framework.Database;
+using Framework.ExtendedMetadata;
 using Framework.Infrastructure.ApiControllerBaseEvaluator;
 using Framework.Infrastructure.ContextEvaluator;
 using Framework.Infrastructure.Service;
@@ -38,6 +39,7 @@ public static class ServiceCollectionExtensions
         {
             services.AddSingleton<ITargetSystemTypeResolverContainer, TargetSystemTypeResolverContainer>();
 
+            services.AddSingleton<IMetadataProxyProvider, MetadataProxyProvider>();
             services.AddSingleton<IPropertyPathService, PropertyPathService>();
 
             services.AddScoped(typeof(EvaluatedData<,>));

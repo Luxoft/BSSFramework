@@ -14,7 +14,6 @@ using Framework.ExtendedMetadata;
 using Framework.FileGeneration.Extensions;
 using Framework.Projection;
 using Framework.Projection.Contract;
-using Framework.ExtendedMetadata.Builder;
 using Framework.Projection.Lambda;
 using Framework.Projection.Lambda.ProjectionSource._Base;
 
@@ -69,11 +68,13 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
 
     public IReadOnlyCollection<IProjectionEnvironment> ProjectionEnvironments { get; }
 
-    public virtual IMetadataProxyProvider MetadataProxyProvider { get; } = new MetadataProxyProviderBuilder().Build();
+    public IMetadataProxyProvider MetadataProxyProvider => field ??= new MetadataProxyProvider(this.GetExtendedAttributeSources());
 
     public IPropertyPathService PropertyPathService { get; }
 
     public ReadOnlyCollection<Assembly> DomainObjectAssemblies => this.domainObjectAssemblies.Value;
+
+    protected virtual IEnumerable<ExtendedAttributeSource> GetExtendedAttributeSources() => [];
 
     protected virtual string ProjectionNamespace => $"{this.PersistentDomainObjectBaseType.GetNamespacePrefix()}.Domain.Projections";
 

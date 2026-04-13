@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Concurrent;
+using System.Collections.Immutable;
 using System.Reflection;
 using System.Reflection.Context;
 
@@ -6,8 +7,14 @@ using Framework.Core;
 
 namespace Framework.ExtendedMetadata;
 
-public class MetadataProxyProvider(IReadOnlyDictionary<MemberInfo, ImmutableArray<Attribute>> extendedAttributes) : CustomReflectionContext, IMetadataProxyProvider
+public class MetadataProxyProvider(IEnumerable<ExtendedAttributeSource> extendedAttributeSourceList) : CustomReflectionContext, IMetadataProxyProvider
 {
+    private readonly ExtendedAttributeSource extendedAttributeSource = new(extendedAttributeSourceList);
+
+    private readonly ConcurrentDictionary<PropertyInfo, ImmutableArray<Attribute>> propCache = [];
+
+    private readonly ConcurrentDictionary<Type, ImmutableArray<Attribute>> typeCache = [];
+
     public T Wrap<T>(T value)
         where T : class, ICustomAttributeProvider =>
         this.TryWrap(value) ?? value;
@@ -59,19 +66,37 @@ public class MetadataProxyProvider(IReadOnlyDictionary<MemberInfo, ImmutableArra
     {
         if (member is PropertyInfo prop)
         {
-            var baseAttributes = prop.GetCustomAttributes();
+            return this.GetCustomAttributes(prop);
+        }
+        else if (member is Type type)
+        {
+            var baseAttributes = base.GetCustomAttributes(member, declaredAttributes);
 
-            var newAttributes = prop.GetBaseProperties().SelectMany(p => extendedAttributes.GetValueOrDefault(p, [])).Distinct();
+            var newAttributes = this.GetExtendedAttributes(type);
 
             return [.. newAttributes, .. baseAttributes];
         }
         else
         {
-            var baseAttributes = base.GetCustomAttributes(member, declaredAttributes);
-
-            var newAttributes = extendedAttributes.GetValueOrDefault(member, []);
-
-            return [.. newAttributes, .. baseAttributes];
+            return base.GetCustomAttributes(member, declaredAttributes);
         }
     }
+
+    private ImmutableArray<Attribute> GetExtendedAttributes(Type type) =>
+
+        this.typeCache.GetOrAdd(type, _ => this.extendedAttributeSource.ExtendedAttributes.GetValueOrDefault(type, []));
+
+    private ImmutableArray<Attribute> GetCustomAttributes(PropertyInfo prop) =>
+
+        this.propCache.GetOrAdd(
+            prop,
+            _ =>
+            {
+                var baseAttributes = prop.GetCustomAttributes();
+
+                var newAttributes = prop.GetBaseProperties().SelectMany(p => this.extendedAttributeSource.ExtendedAttributes.GetValueOrDefault(p, [])).Distinct();
+
+                return [.. newAttributes, .. baseAttributes];
+            });
+
 }

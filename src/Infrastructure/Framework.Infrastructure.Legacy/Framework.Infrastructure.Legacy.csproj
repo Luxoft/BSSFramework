@@ -20,6 +20,7 @@
     <ProjectReference Include="..\..\BLL\Framework.BLL\Framework.BLL.csproj" />
     <ProjectReference Include="..\..\Database\Framework.Database.Abstractions\Framework.Database.Abstractions.csproj" />
     <ProjectReference Include="..\..\Database\Framework.Tracking\Framework.Tracking.csproj" />
+    <ProjectReference Include="..\..\ExtendedMetadata\Framework.ExtendedMetadata.Runtime\Framework.ExtendedMetadata.Runtime.csproj" />
     <ProjectReference Include="..\..\Projection\Framework.Projection.Domain\Framework.Projection.Domain.csproj" />
     <ProjectReference Include="..\..\Validation\Framework.Validation.Abstractions\Framework.Validation.Abstractions.csproj" />
     <ProjectReference Include="..\Framework.Infrastructure\Framework.Infrastructure.csproj" />

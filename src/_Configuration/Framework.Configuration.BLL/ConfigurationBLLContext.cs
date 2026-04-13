@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Frozen;
+using System.Collections.Immutable;
 
 using CommonFramework;
 
@@ -73,10 +74,12 @@ public partial class ConfigurationBLLContext(
 
     public IDomainObjectEventMetadata EventOperationSource { get; } = eventOperationSource;
 
+    private ImmutableList<TargetSystem> TargetSystems => field ??= [..this.Logics.TargetSystem.GetUnsecureQueryable()];
+
     public FrozenDictionary<PersistentTargetSystemInfo, ITargetSystemService> TargetSystemServices =>
 
         field ??= targetSystemInfoList.Join(
-                                          this.Logics.TargetSystem.GetUnsecureQueryable(),
+                                          this.TargetSystems,
                                           tsi => tsi.Id,
                                           ts => ts.Id,
                                           (tsi, ts) =>
@@ -91,9 +94,8 @@ public partial class ConfigurationBLLContext(
     public DomainType? TryGetDomainType(TypeNameIdentity typeNameIdentity) =>
         this.domainTypeCache.GetOrAdd(
             typeNameIdentity,
-            _ => this.TargetSystemServices
-                     .Values
-                     .SelectMany(tss => tss.TargetSystem.DomainTypes)
+            _ => this.TargetSystems
+                     .SelectMany(ts => ts.DomainTypes)
                      .SingleOrDefault(dt => dt.Namespace == typeNameIdentity.Namespace && dt.Name == typeNameIdentity.Name));
 
     public DomainType GetDomainType(TypeNameIdentity typeNameIdentity) =>

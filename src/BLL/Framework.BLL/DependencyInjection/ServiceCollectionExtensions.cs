@@ -47,7 +47,6 @@ public static class ServiceCollectionExtensions
         TValidatorImpl,
         TBLLFactoryContainerDecl,
         TBLLFactoryContainerImpl,
-        TBLLContextSettings,
         TFetchRuleExpander>(this IServiceCollection services)
         where TBLLContextImpl : class, TBLLContextDecl
 
@@ -58,7 +57,6 @@ public static class ServiceCollectionExtensions
 
         where TBLLFactoryContainerDecl : class
         where TBLLFactoryContainerImpl : class, TBLLFactoryContainerDecl, IBLLFactoryInitializer
-        where TBLLContextSettings : class
         where TBLLContextDecl : class
 
         where TFetchRuleExpander : class, IFetchRuleExpander
@@ -80,7 +78,6 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<TValidatorDecl, TValidatorImpl>()
                 .AddScoped<TBLLFactoryContainerDecl, TBLLFactoryContainerImpl>()
-                .AddSingleton<TBLLContextSettings>()
                 .AddScopedFromLazyInterfaceImplement<TBLLContextDecl, TBLLContextImpl>()
 
                 .Self(TBLLFactoryContainerImpl.RegisterBLLFactory);

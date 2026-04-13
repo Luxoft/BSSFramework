@@ -6,5 +6,5 @@ public interface IPathAttribute
 {
     string Path { get; }
 
-    public PropertyPath GetPropertyPath(Type domainType) => new (domainType, this.Path);
+    public PropertyPath GetPropertyPath(Type domainType) => new(domainType, this.Path);
 }

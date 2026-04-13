@@ -9,6 +9,7 @@ internal class CollectionOfProjectionType : BaseTypeImpl
     private readonly Type originalType;
 
     private readonly Type checkCollectionBlankType;
+
     private readonly Type elementType;
 
     public CollectionOfProjectionType(Type originalType)
@@ -21,9 +22,9 @@ internal class CollectionOfProjectionType : BaseTypeImpl
 
     public override string Name => this.originalType.Name;
 
-    public override string Namespace => this.originalType.Namespace;
+    public override string Namespace => this.originalType.Namespace!;
 
-    public override string FullName => this.originalType.FullName;
+    public override string FullName => this.originalType.FullName!;
 
     public override Assembly Assembly => this.originalType.Assembly;
 
@@ -59,9 +60,9 @@ internal class CollectionOfProjectionType : BaseTypeImpl
 
     protected override TypeAttributes GetAttributeFlagsImpl() => this.originalType.Attributes;
 
-    public override bool IsAssignableFrom(Type targetType)
+    public override bool IsAssignableFrom(Type? targetType)
     {
-        if (targetType.IsGenericType)
+        if (targetType?.IsGenericType == true)
         {
             var targetElementTypes = targetType.GetGenericArguments();
 
@@ -76,4 +77,6 @@ internal class CollectionOfProjectionType : BaseTypeImpl
 
         return false;
     }
+
+    protected override PropertyInfo? GetPropertyImpl(string name, BindingFlags bindingAttr, Binder? binder, Type? returnType, Type[]? types, ParameterModifier[]? modifiers) => null;
 }

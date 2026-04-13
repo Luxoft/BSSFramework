@@ -1,7 +1,6 @@
-﻿using System.Collections.Immutable;
+﻿using System.Reflection;
 
 using Framework.Core.ReflectionImpl;
-using Framework.Core.TypeResolving;
 using Framework.ExtendedMetadata;
 
 namespace Framework.Projection;
@@ -13,21 +12,21 @@ public class AlreadyImplementedRuntimeProjectionEnvironment(IProjectionEnvironme
 {
     public string Namespace { get; } = baseEnvironment.Namespace;
 
-    public IAssemblyInfo Assembly { get; } = new AlreadyImplementedAssemblyInfo(baseEnvironment.Assembly);
+    public Assembly Assembly { get; } = new AlreadyImplementedAssembly(baseEnvironment.Assembly);
 
     public bool UseDependencySecurity { get; } = baseEnvironment.UseDependencySecurity;
 
     public IMetadataProxyProvider MetadataProxyProvider { get; } = baseEnvironment.MetadataProxyProvider;
 
-    private class AlreadyImplementedAssemblyInfo(IAssemblyInfo baseAssembly) : IAssemblyInfo
+    private class AlreadyImplementedAssembly(Assembly baseAssembly) : Assembly
     {
-        public string Name => baseAssembly.Name;
+        //public string Name => baseAssembly.Name;
 
-        public string FullName => baseAssembly.FullName;
+        public override string? FullName => baseAssembly.FullName;
 
-        public ImmutableHashSet<Type> Types { get; } =
+        public override Type[] GetTypes() =>
         [
-            .. baseAssembly.Types.Select(baseType =>
+            .. baseAssembly.GetTypes().Select(baseType =>
             {
                 if (baseType is BaseTypeImpl genType)
                 {

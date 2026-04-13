@@ -1,4 +1,6 @@
-﻿using CommonFramework;
+﻿using System.Reflection;
+
+using CommonFramework;
 
 using Framework.Database.Metadata;
 using Framework.Database.NHibernate._MappingSettings;
@@ -69,7 +71,7 @@ public class DBGenerator(MappingSettings settings)
 
         var metadata = MetadataReader.GetAssemblyMetadata(
             settings.PersistentDomainObjectBaseType,
-            settings.GetDomainTypeAssemblies().Select(a => AssemblyInfo.Create(a)).ToArray());
+            settings.GetDomainTypeAssemblies().ToArray());
 
         this.FilterMetadata(metadata);
 

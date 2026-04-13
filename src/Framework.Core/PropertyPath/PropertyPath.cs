@@ -16,7 +16,7 @@ public class PropertyPath(IEnumerable<PropertyInfo> properties) : ReadOnlyCollec
     }
 
     public PropertyPath(Type sourceType, string path)
-        : this(sourceType, path.Split('.'))
+        : this(sourceType, path.Split('.', StringSplitOptions.RemoveEmptyEntries))
     {
     }
 
@@ -78,14 +78,58 @@ public class PropertyPath(IEnumerable<PropertyInfo> properties) : ReadOnlyCollec
     public new static PropertyPath Empty { get; } = new([]);
 
 
-    private static IEnumerable<PropertyInfo> GetProperties(Type sourceType, IEnumerable<string> properties) =>
-
-        properties.Scan(
+    private static IEnumerable<PropertyInfo> GetProperties(Type sourceType, IEnumerable<string> properties)
+    {
+        return properties.Scan(
             default(PropertyInfo),
             (prevProperty, propertyName) =>
             {
+                var currentType2 = prevProperty == null ? sourceType : prevProperty.PropertyType.UnderlyingSystemType.GetCollectionElementTypeOrSelf();
+
+                var currentType3 = prevProperty == null ? sourceType : prevProperty.PropertyType.GetCollectionElementTypeOrSelf2();
+
                 var currentType = prevProperty == null ? sourceType : prevProperty.PropertyType.GetCollectionElementTypeOrSelf();
 
                 return currentType.GetRequiredProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
             }).Skip(1).Select(v => v!);
+    }
+}
+
+internal static class My
+{
+    private static readonly HashSet<Type> CollectionTypes = new[]
+                                                            {
+                                                                typeof(IEnumerable<>),
+                                                                typeof(List<>),
+                                                                typeof(Collection<>),
+                                                                typeof(IList<>),
+                                                                typeof(ICollection<>),
+                                                                typeof(ObservableCollection<>),
+                                                                typeof(IReadOnlyList<>),
+                                                                typeof(IReadOnlyCollection<>)
+                                                            }.ToHashSet();
+
+    extension(Type type)
+    {
+        public Type GetCollectionElementTypeOrSelf2() => type.GetCollectionElementType2() ?? type;
+
+        public Type? GetCollectionElementType2() => type.GetCollectionType2() != null ? type.UnderlyingSystemType.GetGenericArguments().Single() : null;
+
+        public Type? GetCollectionType2()
+        {
+            var realType = type.UnderlyingSystemType;
+
+            if (realType.IsGenericType)
+            {
+                var genericType = realType.GetGenericTypeDefinition();
+
+                if (CollectionTypes.Contains(genericType))
+                {
+                    return genericType;
+                }
+            }
+
+            return null;
+        }
+    }
 }

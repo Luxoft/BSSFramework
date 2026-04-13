@@ -1,18 +1,21 @@
 ﻿using System.Reflection;
 
 using Framework.Core.TypeResolving;
-using Framework.Database.Metadata;
 using Framework.ExtendedMetadata;
+using Framework.Projection._ImplType;
 
 namespace Framework.Projection.Lambda;
 
-public class ManualProjectionEnvironment(Assembly assembly, Type persistentDomainObjectBaseType, IMetadataProxyProvider metadataProxyProvider ) : IProjectionEnvironment
+public class ManualProjectionEnvironment(Assembly assembly, Type persistentDomainObjectBaseType, IMetadataProxyProvider metadataProxyProvider) : IProjectionEnvironment
 {
     public string Namespace => throw new NotImplementedException("Single namespace not required");
 
-    public IAssemblyInfo Assembly { get; } = AssemblyInfo.Create(assembly, persistentDomainObjectBaseType.IsAssignableFrom);
+    public Assembly Assembly { get; } = new GenAssembly(
+        assembly.FullName!,
+        assembly.GetName().Name!,
+        new TypeSource([.. assembly.GetTypes().Where(persistentDomainObjectBaseType.IsAssignableFrom)]));
 
     public bool UseDependencySecurity { get; } = true;
 
-    public IMetadataProxyProvider MetadataProxyProvider  { get; } = metadataProxyProvider ;
+    public IMetadataProxyProvider MetadataProxyProvider { get; } = metadataProxyProvider;
 }

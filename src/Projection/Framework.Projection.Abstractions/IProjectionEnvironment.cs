@@ -1,4 +1,5 @@
-﻿using Framework.Core.TypeResolving;
+﻿using System.Reflection;
+
 using Framework.ExtendedMetadata;
 
 namespace Framework.Projection;
@@ -16,7 +17,7 @@ public interface IProjectionEnvironment
     /// <summary>
     /// Сборка
     /// </summary>
-    IAssemblyInfo Assembly { get; }
+    Assembly Assembly { get; }
 
     /// <summary>
     /// Использование безопасности через атрибут `DependencySecurityAttribute`

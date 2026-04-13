@@ -147,9 +147,9 @@ public static class MetadataReader
                 return result;
             };
 
-    public static AssemblyMetadata GetAssemblyMetadata(Type persistentDomainObjectBase, params IAssemblyInfo[] assemblies)
+    public static AssemblyMetadata GetAssemblyMetadata(Type persistentDomainObjectBase, params Assembly[] assemblies)
     {
-        var allTypes = assemblies.SelectMany(z => z.Types).ToArray();
+        var allTypes = assemblies.SelectMany(z => z.GetTypes()).ToArray();
 
         var result = new AssemblyMetadata(persistentDomainObjectBase);
         var typesToProcess = allTypes

@@ -6,7 +6,7 @@ namespace Framework.Database.NHibernate.DALGenerator._Internal;
 
 public interface IMappingGenerator
 {
-    IAssemblyInfo Assembly { get; }
+    Assembly Assembly { get; }
 
     XDocument Generate();
 }

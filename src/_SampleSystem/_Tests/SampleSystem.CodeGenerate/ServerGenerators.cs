@@ -1,4 +1,6 @@
 ﻿using System.CodeDom;
+using System.Collections.Immutable;
+using System.Reflection;
 
 using CommonFramework;
 
@@ -13,8 +15,10 @@ using Framework.CodeGeneration.ProjectionGenerator;
 using Framework.CodeGeneration.ServiceModelGenerator.AutoRequest;
 using Framework.CodeGeneration.WebApiGenerator;
 using Framework.Configuration.TestGenerate.Configurations;
+using Framework.Core;
 using Framework.Database;
 using Framework.Database.NHibernate.DALGenerator;
+using Framework.ExtendedMetadata;
 using Framework.FileGeneration;
 
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +31,29 @@ namespace SampleSystem.CodeGenerate;
 public partial class ServerGenerators
 {
     [TestMethod]
-    public void GenerateMainTest() => this.GenerateMain().ToList();
+    public void GenerateMainTest()
+    {
+        var prov = new MetadataProxyProvider(new Dictionary<MemberInfo, ImmutableArray<Attribute>>());
+        var proj = this.environment.ProjectionEnvironments.SelectMany(p => p.Assembly.Types).Single(p => p.Name == "TestBusinessUnit");
+        var projWarp = prov.Wrap(proj);
+
+        var prop = projWarp.GetProperty("BusinessUnitEmployeeRoles")!;
+
+        var isGenType = prop.PropertyType.IsGenericType;
+
+        var path = new PropertyPath(projWarp, "BusinessUnitEmployeeRoles.Employee");
+
+        var x1 = typeof(IEnumerable<>);
+        var x2 = prov.Wrap(x1);
+        var x3 = x1.MakeGenericType(proj);
+
+
+        var z1 = x1.IsGenericType;
+        var z2 = x2.IsGenericType;
+        var z3 = x3.IsGenericType;
+
+        this.GenerateMain().ToList();
+    }
 
     public IEnumerable<GeneratedFileInfo> GenerateMain() =>
         this.GenerateMainProjections()

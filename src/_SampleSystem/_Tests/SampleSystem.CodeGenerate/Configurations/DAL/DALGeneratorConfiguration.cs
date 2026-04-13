@@ -7,7 +7,7 @@ namespace SampleSystem.CodeGenerate;
 
 public class DALGeneratorConfiguration(ServerGenerationEnvironment environment) : DALGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {
-    protected override AssemblyMetadata CreateAssemblyMetadata(IAssemblyInfo assembly)
+    protected override AssemblyMetadata CreateAssemblyMetadata(Assembly assembly)
     {
         var baseResult = base.CreateAssemblyMetadata(assembly);
 

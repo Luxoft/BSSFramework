@@ -29,7 +29,7 @@ public abstract class ProjectionEnvironmentBase : IProjectionEnvironment
 
     public PropertyInfo IdentityProperty => this.lazyIdentityProperty.Value;
 
-    public abstract IAssemblyInfo Assembly { get; }
+    public abstract Assembly Assembly { get; }
 
     /// <inheritdoc />
     public abstract bool UseDependencySecurity { get; }

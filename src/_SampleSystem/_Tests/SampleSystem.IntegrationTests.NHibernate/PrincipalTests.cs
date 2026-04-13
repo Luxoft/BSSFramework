@@ -1,4 +1,5 @@
 ﻿using Framework.Application.Events;
+using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
 using Framework.Core;
 
@@ -36,8 +37,8 @@ public class PrincipalTests : TestBase
 
         var configFacade = this.GetConfigurationControllerEvaluator();
 
-        var domainTypeIdentity = configFacade.Evaluate(c => c.GetSimpleDomainTypes()
-                                                             .Single(dt => dt.Namespace == "Authorization" && dt.Name == "Principal"))
+        var domainTypeIdentity = configFacade.Evaluate(c => c.GetSimpleDomainTypes())
+                                             .Single(dt => dt.Namespace == typeof(Principal).Namespace && dt.Name == nameof(Principal))
                                              .Identity;
 
         var domainType = configFacade.Evaluate(c => c.GetRichDomainType(domainTypeIdentity));
@@ -77,8 +78,8 @@ public class PrincipalTests : TestBase
 
         var configFacade = this.GetConfigurationControllerEvaluator();
 
-        var domainTypeIdentity = configFacade.Evaluate(c => c.GetSimpleDomainTypes()
-                                                             .Single(dt => dt.Namespace == "Authorization" && dt.Name == "Permission"))
+        var domainTypeIdentity = configFacade.Evaluate(c => c.GetSimpleDomainTypes())
+                                             .Single(dt => dt.Namespace == typeof(Permission).Namespace && dt.Name == nameof(Permission))
                                              .Identity;
 
         var domainType = configFacade.Evaluate(c => c.GetRichDomainType(domainTypeIdentity));

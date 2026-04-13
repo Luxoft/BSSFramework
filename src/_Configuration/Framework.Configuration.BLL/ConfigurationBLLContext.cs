@@ -81,7 +81,7 @@ public partial class ConfigurationBLLContext(
                                           {
                                               var targetSystemServiceType = typeof(TargetSystemService<,>).MakeGenericType(tsi.BllContextType, tsi.PersistentDomainObjectBaseType);
 
-                                              return (tsi, serviceProxyFactory.Create<ITargetSystemService>(targetSystemServiceType, ts));
+                                              return (tsi, serviceProxyFactory.Create<ITargetSystemService>(targetSystemServiceType, tsi, ts));
                                           })
                                       .ToFrozenDictionary(pair => pair.tsi, pair => pair.Item2);
 

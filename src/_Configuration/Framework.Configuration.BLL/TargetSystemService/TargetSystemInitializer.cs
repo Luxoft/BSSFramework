@@ -30,7 +30,7 @@ public class TargetSystemInitializer(
 
         var bll = context.Logics.TargetSystem;
 
-        var isBase = targetSystemInfo == TargetSystemInfo.Base;
+        var isBase = targetSystemInfo.Id == TargetSystemInfo.Base.Id;
 
         var targetSystem = bll.GetById(targetSystemInfo.Id, false, new DTOFetchRule<TargetSystem>(MainDTOType.RichDTO))
                            ?? new TargetSystem(isBase, persistentTargetSystemInfo?.IsMain ?? false, persistentTargetSystemInfo?.IsRevision ?? false)

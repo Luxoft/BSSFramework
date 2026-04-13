@@ -14,7 +14,7 @@ public static class PersistentTargetSystemInfoHelper
             Name = nameof(Authorization),
             Id = new("{f065289e-4dc5-48c9-be44-a2ee0131e631}"),
             IsMain = false,
-            IsRevision = false,
+            IsRevision = true,
             Domain = new(
             [
                 new(typeof(BusinessRole), new("{3823172C-B703-46FD-A82F-B55833EBCD38}")),
@@ -32,7 +32,7 @@ public static class PersistentTargetSystemInfoHelper
             Name = nameof(Configuration),
             Id = new("{50465868-4B49-42CF-A702-A39400E6C317}"),
             IsMain = false,
-            IsRevision = false,
+            IsRevision = true,
             Domain = new(
             [
                 new(typeof(SystemConstant), new("{42C47133-A8C5-4E8E-9D46-385038BFE2B9}")),

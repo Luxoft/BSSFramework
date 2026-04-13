@@ -6,8 +6,6 @@ using Framework.Configuration.BLL;
 using Framework.Tracking;
 using Framework.Validation;
 
-using GenericQueryable.Fetching;
-
 using HierarchicalExpand;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -34,8 +32,7 @@ public partial class SampleSystemBLLContext(
     IAuthorizationBLLContext authorization,
     IConfigurationBLLContext configuration,
     ISecurityAccessorResolver securityAccessorResolver,
-    ICurrentUserSource<Employee> currentEmployeeSource,
-    IFetchRuleExpander fetchRuleExpander)
+    ICurrentUserSource<Employee> currentEmployeeSource)
     : SecurityBLLBaseContext<PersistentDomainObjectBase, Guid, ISampleSystemBLLFactoryContainer>(
         serviceProvider,
         operationSender,
@@ -49,8 +46,6 @@ public partial class SampleSystemBLLContext(
     public override ISampleSystemBLLFactoryContainer Logics { get; } = logics;
 
     public IAuthorizationBLLContext Authorization { get; } = authorization;
-
-    public IFetchRuleExpander FetchRuleExpander { get; } = fetchRuleExpander;
 
     public ICurrentUserSource<Employee> CurrentEmployeeSource { get; } = currentEmployeeSource;
 

@@ -1,17 +1,14 @@
 ﻿using CommonFramework;
+using CommonFramework.DependencyInjection;
 
-using Framework.Application.Domain;
-using Framework.BLL;
 using Framework.BLL.Domain.TargetSystem;
-using Framework.BLL.Services;
 using Framework.Configuration.BLL.TargetSystemService;
-using Framework.DependencyInjection;
 
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Infrastructure.DependencyInjection;
 
-public class TargetSystemSetup : ITargetSystemSetup
+public class TargetSystemSetup : ITargetSystemSetup, IServiceInitializer
 {
     private readonly List<Action<IServiceCollection>> registerActions = [];
 
@@ -21,52 +18,13 @@ public class TargetSystemSetup : ITargetSystemSetup
 
     public bool RegisterConfiguration { get; set; } = true;
 
-    public ITargetSystemSetup AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(
-        string name,
-        Guid id,
-        bool isMain,
-        bool isRevision,
-        IEnumerable<DomainTypeInfo> domainTypes)
-        where TBLLContext : class,
-        ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
-        where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
+    public ITargetSystemSetup AddTargetSystem(PersistentTargetSystemInfo targetSystemInfo)
     {
-        var info = new PersistentTargetSystemInfo
-                   {
-                       PersistentDomainObjectBaseType = typeof(TPersistentDomainObjectBase),
-                       BllContextType = typeof(TPersistentDomainObjectBase),
-
-                   }
-
-            name,
-            id,
-            isMain,
-            isRevision,
-            domainTypes.ToList());
-
-        return this.AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(info);
-    }
-
-    public ITargetSystemSetup AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(TargetSystemInfo<TPersistentDomainObjectBase> info)
-        where TBLLContext : class, ITypeResolverContainer<string>,
-        ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
-        where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
-    {
-        this.AddTargetSystem(info);
-
-        this.registerActions.Add(services => services.AddScopedFromLazyInterfaceImplement<ITargetSystemService, TargetSystemService<TBLLContext, TPersistentDomainObjectBase>>());
-
-        return this;
-    }
-
-    public ITargetSystemSetup AddTargetSystem<TPersistentDomainObjectBase>(TargetSystemInfo<TPersistentDomainObjectBase> info)
-    {
-        this.registerActions.Add(
-            sc =>
-            {
-                sc.AddSingleton(info);
-                sc.AddSingleton<TargetSystemInfo>(info);
-            });
+        this.registerActions.Add(sc =>
+        {
+            sc.AddSingleton<TargetSystemInfo>(targetSystemInfo);
+            sc.AddSingleton(targetSystemInfo);
+        });
 
         return this;
     }
@@ -74,6 +32,21 @@ public class TargetSystemSetup : ITargetSystemSetup
     public void Initialize(IServiceCollection services)
     {
         services.AddScoped<ITargetSystemInitializer, TargetSystemInitializer>();
+
+        if (this.RegisterBase)
+        {
+            services.AddSingleton(TargetSystemInfo.Base);
+        }
+
+        if (this.RegisterAuthorization)
+        {
+            this.AddTargetSystem(PersistentTargetSystemInfoHelper.Authorization);
+        }
+
+        if (this.RegisterConfiguration)
+        {
+            this.AddTargetSystem(PersistentTargetSystemInfoHelper.Configuration);
+        }
 
         this.registerActions.Foreach(action => action(services));
     }

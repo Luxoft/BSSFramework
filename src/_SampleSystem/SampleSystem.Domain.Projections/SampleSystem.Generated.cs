@@ -353,6 +353,56 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.DomainObjectBase), Framework.Projection.ProjectionRole.Default)]
+    public abstract partial class CustomNonPersistentContainerBase : SampleSystem.Domain.DomainObjectBase
+    {
+        
+        protected CustomNonPersistentContainerBase()
+        {
+        }
+        
+        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
+        public abstract System.Collections.Generic.List<SampleSystem.Domain.Projections.TestLocation> Locations
+        {
+            get;
+            set;
+        }
+        
+        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
+        public abstract Framework.Core.Period[] PeriodArray
+        {
+            get;
+            set;
+        }
+        
+        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
+        public abstract SampleSystem.Domain.Projections.TestBusinessUnit TestBU
+        {
+            get;
+            set;
+        }
+        
+        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
+        public abstract string TestString
+        {
+            get;
+            set;
+        }
+    }
+    
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.DomainObjectBase), Framework.Projection.ProjectionRole.Default)]
+    public partial class NonPersistentContainer : SampleSystem.Domain.Projections.CustomNonPersistentContainerBase
+    {
+        
+        protected NonPersistentContainer()
+        {
+        }
+    }
+    
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
     public abstract partial class CustomTestBusinessUnitBase : SampleSystem.Domain.PersistentDomainObjectBase
     {

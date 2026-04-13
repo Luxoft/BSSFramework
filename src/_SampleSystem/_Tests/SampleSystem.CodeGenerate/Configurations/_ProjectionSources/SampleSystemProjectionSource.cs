@@ -118,7 +118,7 @@ public class SampleSystemProjectionSource : ProjectionSource
                                       .Property(obj => obj.Period.StartDate, "PeriodStartDateXXX")
                                       .Property(obj => obj.Name);
 
-        this.UnpersitentContainer = new Projection<DomainObjectBase>(() => this.UnpersitentContainer)
+        this.NonPersistentContainer = new Projection<DomainObjectBase>(() => this.NonPersistentContainer)
                                     .CustomProperty<string>("TestString", true)
                                     .CustomProperty("TestBU", true, () => this.TestBusinessUnit)
                                     .CustomManyProperty<Period>("PeriodArray", true, null, typeof(Array))
@@ -180,7 +180,7 @@ public class SampleSystemProjectionSource : ProjectionSource
 
     public Projection<TestObjForNested> CustomTestObjForNested { get; }
 
-    public Projection<DomainObjectBase> UnpersitentContainer { get; }
+    public Projection<DomainObjectBase> NonPersistentContainer { get; }
 
     public Projection<Project> VisualProject { get; }
 

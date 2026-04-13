@@ -157,7 +157,7 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
         }
     }
 
-    protected override IEnumerable<Type> GetDomainTypes() => this.projectionEnvironment.Assembly.GetTypes().Where(this.Environment.PersistentDomainObjectBaseType.IsAssignableFrom);
+    protected override IEnumerable<Type> GetDomainTypes() => this.projectionEnvironment.Assembly.GetTypes().Where(this.Environment.DomainObjectBaseType.IsAssignableFrom);
 
     protected override IEnumerable<ICodeFileFactoryHeader<FileType>> GetFileFactoryHeaders()
     {

@@ -34,30 +34,30 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProviderPool root
     /// <summary>
     /// Отчистка списка нотифицаций
     /// </summary>
-    public override void ClearNotifications() => this.EvaluateWrite(context => this.GetConfigurationBLLContext(context).Logics.DomainObjectNotification.Pipe(bll => bll.GetFullList().ForEach(bll.Remove)));
+    public override void ClearNotifications() =>
+        this.EvaluateWrite(context => this.GetConfigurationBLLContext(context).Logics.DomainObjectNotification.Pipe(bll => bll.GetFullList().ForEach(bll.Remove)));
 
     /// <summary>
     /// Получение списка модификаций
     /// </summary>
     /// <returns></returns>
     protected virtual List<ObjectModificationInfoDTO<Guid>> GetModifications() =>
-        this.EvaluateRead(
-            context =>
+        this.EvaluateRead(context =>
 
-                this.GetConfigurationBLLContext(context).Logics.DomainObjectModification.GetFullList()
-                    .ToList(
-                        mod => new ObjectModificationInfoDTO<Guid>
-                               {
-                                   Identity = mod.DomainObjectId,
-                                   ModificationType = mod.Type,
-                                   Revision = mod.Revision,
-                                   TypeInfoDescription = new TypeInfoDescriptionDTO(mod.DomainType)
-                               }));
+                              this.GetConfigurationBLLContext(context).Logics.DomainObjectModification.GetFullList()
+                                  .ToList(mod => new ObjectModificationInfoDTO<Guid>
+                                                 {
+                                                     Identity = mod.DomainObjectId,
+                                                     ModificationType = mod.Type,
+                                                     Revision = mod.Revision,
+                                                     TypeInfoDescription = new TypeInfoDescriptionDTO { Name = mod.DomainType.Name, Namespace = mod.DomainType.Namespace }
+                                                 }));
 
     /// <summary>
     /// Отчистка списка модификаций
     /// </summary>
-    protected virtual void ClearModifications() => this.EvaluateWrite(context => this.GetConfigurationBLLContext(context).Logics.DomainObjectModification.Pipe(bll => bll.GetFullList().ForEach(bll.Remove)));
+    protected virtual void ClearModifications() =>
+        this.EvaluateWrite(context => this.GetConfigurationBLLContext(context).Logics.DomainObjectModification.Pipe(bll => bll.GetFullList().ForEach(bll.Remove)));
 
     /// <summary>
     /// Отчистка интеграционных евентов
@@ -74,7 +74,8 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProviderPool root
         });
     }
 
-    protected int GetIntegrationEventCount() => this.EvaluateRead(ctx => ctx.ServiceProvider.GetRequiredService<IRepositoryFactory<DomainObjectEvent>>().Create().GetQueryable().Count());
+    protected int GetIntegrationEventCount() =>
+        this.EvaluateRead(ctx => ctx.ServiceProvider.GetRequiredService<IRepositoryFactory<DomainObjectEvent>>().Create().GetQueryable().Count());
 
 
     /// <summary>
@@ -85,10 +86,9 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProviderPool root
     {
         var serializeType = typeof(T).FullName;
 
-        return this.EvaluateRead(
-            context => this.GetConfigurationBLLContext(context).Logics.DomainObjectEvent
-                .GetListBy(v => v.SerializeType == serializeType && v.QueueTag == queueTag)
-                .ToList(obj => DataContractSerializerHelper.Deserialize<T>(obj.SerializeData)));
+        return this.EvaluateRead(context => this.GetConfigurationBLLContext(context).Logics.DomainObjectEvent
+                                                .GetListBy(v => v.SerializeType == serializeType && v.QueueTag == queueTag)
+                                                .ToList(obj => DataContractSerializerHelper.Deserialize<T>(obj.SerializeData)));
     }
 
     /// <summary>
@@ -96,7 +96,6 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProviderPool root
     /// </summary>
     /// <returns></returns>
     protected virtual List<NotificationEventDTO> GetNotifications() =>
-        this.EvaluateRead(
-            context => this.GetConfigurationBLLContext(context).Logics.DomainObjectNotification.GetFullList()
-                           .ToList(obj => DataContractSerializerHelper.Deserialize<NotificationEventDTO>(obj.SerializeData)));
+        this.EvaluateRead(context => this.GetConfigurationBLLContext(context).Logics.DomainObjectNotification.GetFullList()
+                                         .ToList(obj => DataContractSerializerHelper.Deserialize<NotificationEventDTO>(obj.SerializeData)));
 }

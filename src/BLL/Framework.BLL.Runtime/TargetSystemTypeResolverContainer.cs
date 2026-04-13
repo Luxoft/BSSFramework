@@ -6,5 +6,5 @@ namespace Framework.BLL;
 
 public class TargetSystemTypeResolverContainer(IEnumerable<TargetSystemInfo> targetSystemInfoList) : ITargetSystemTypeResolverContainer
 {
-    public ITypeResolver<TypeNameIdentity> TypeResolver => field ??= targetSystemInfoList.Select(v => v.TypeResolver).ToComposite();
+    public ITypeResolver<TypeNameIdentity> TypeResolver => field ??= targetSystemInfoList.Select(v => v.Domain.TypeResolver).ToComposite();
 }

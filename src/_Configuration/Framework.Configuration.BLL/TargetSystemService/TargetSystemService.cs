@@ -24,9 +24,9 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
     where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
     where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
 {
-    public ITypeResolver<DomainType> TypeResolver { get; } = targetSystemInfo.TypeResolver.OverrideInput((DomainType v) => v);
-
     public TargetSystem TargetSystem { get; } = targetSystem;
+
+    public ITypeResolver<DomainType> TypeResolver => field ??= targetSystemInfo.Domain.TypeResolver.OverrideInput((DomainType v) => v);
 
     public Type PersistentDomainObjectBaseType => typeof(TPersistentDomainObjectBase);
 

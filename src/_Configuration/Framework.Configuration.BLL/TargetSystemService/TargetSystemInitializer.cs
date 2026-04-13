@@ -38,7 +38,7 @@ public class TargetSystemInitializer(
                                   Name = targetSystemInfo.Name, SubscriptionEnabled = !isBase, Id = targetSystemInfo.Id
                               }.Self(bll.Insert);
 
-        var mergeResult = targetSystem.DomainTypes.GetMergeResult(targetSystemInfo.DomainTypes, t => t.Id, t => t.Id);
+        var mergeResult = targetSystem.DomainTypes.GetMergeResult(targetSystemInfo.Domain.Types, t => t.Id, t => t.Id);
 
         foreach (var newItem in mergeResult.AddingItems)
         {

@@ -2,7 +2,7 @@
 
 namespace SampleSystem.Domain.Projections;
 
-public partial class UnpersitentContainer
+public partial class NonPersistentContainer
 {
     public override List<TestLocation> Locations { get; set; }
 

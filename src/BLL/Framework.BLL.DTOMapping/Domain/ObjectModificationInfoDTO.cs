@@ -20,6 +20,9 @@ public class ObjectModificationInfoDTO<TIdent>
     [DataMember]
     public long Revision { get; set; }
 
+    public ObjectModificationInfoDTO()
+    {
+    }
 
     public ObjectModificationInfoDTO(ObjectModificationInfo<TIdent> source)
     {

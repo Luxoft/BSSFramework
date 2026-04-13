@@ -1,7 +1,4 @@
-﻿using Framework.Application.Domain;
-using Framework.BLL;
-using Framework.BLL.Domain.TargetSystem;
-using Framework.BLL.Services;
+﻿using Framework.BLL.Domain.TargetSystem;
 
 namespace Framework.Infrastructure.DependencyInjection;
 
@@ -13,7 +10,5 @@ public interface ITargetSystemSetup
 
     bool RegisterConfiguration { get; set; }
 
-    ITargetSystemSetup AddTargetSystem<TBLLContext, TPersistentDomainObjectBase>(string name, Guid id, bool isMain, bool isRevision, IEnumerable<DomainTypeInfo> domainTypes)
-        where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
-        where TPersistentDomainObjectBase : class, IIdentityObject<Guid>;
+    ITargetSystemSetup AddTargetSystem(PersistentTargetSystemInfo targetSystemInfo);
 }

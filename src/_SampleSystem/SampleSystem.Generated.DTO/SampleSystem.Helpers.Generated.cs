@@ -1411,6 +1411,11 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.MiniBusinessUnitEmployeeRoleProjectionDTO(mappingService, domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.NonPersistentContainerProjectionDTO ToProjectionDTO(this SampleSystem.Domain.Projections.NonPersistentContainer domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.NonPersistentContainerProjectionDTO(mappingService, domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO ToProjectionDTO(this SampleSystem.Domain.Projections.TestBusinessUnit domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO(mappingService, domainObject);
@@ -1466,11 +1471,6 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.TestSecurityObjItemProjectionDTO(mappingService, domainObject);
         }
         
-        public static SampleSystem.Generated.DTO.UnpersitentContainerProjectionDTO ToProjectionDTO(this SampleSystem.Domain.Projections.UnpersitentContainer domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return new SampleSystem.Generated.DTO.UnpersitentContainerProjectionDTO(mappingService, domainObject);
-        }
-        
         public static SampleSystem.Generated.DTO.VisualEmployeeProjectionDTO ToProjectionDTO(this SampleSystem.Domain.Projections.VisualEmployee domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.VisualEmployeeProjectionDTO(mappingService, domainObject);
@@ -1512,6 +1512,11 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.MiniBusinessUnitEmployeeRoleProjectionDTO> ToProjectionDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Projections.MiniBusinessUnitEmployeeRole> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.NonPersistentContainerProjectionDTO> ToProjectionDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Projections.NonPersistentContainer> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(domainObject, mappingService));
         }
@@ -1567,11 +1572,6 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecurityObjItemProjectionDTO> ToProjectionDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Projections.TestSecurityObjItemProjection> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.UnpersitentContainerProjectionDTO> ToProjectionDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Projections.UnpersitentContainer> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(domainObject, mappingService));
         }

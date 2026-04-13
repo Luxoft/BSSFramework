@@ -1,4 +1,5 @@
 ﻿using Framework.Authorization.Generated.DTO;
+using Framework.Core.TypeResolving;
 using Framework.Infrastructure.Integration;
 
 using Microsoft.AspNetCore.Mvc;

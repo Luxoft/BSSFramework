@@ -2,6 +2,8 @@
 
 using CommonFramework;
 
+using Framework.Validation.Validators;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Validation;

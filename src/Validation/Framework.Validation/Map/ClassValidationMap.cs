@@ -1,6 +1,7 @@
 ﻿using CommonFramework;
 
 using Framework.Validation.Map;
+using Framework.Validation.Validators;
 
 namespace Framework.Validation;
 

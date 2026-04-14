@@ -4,6 +4,7 @@ using CommonFramework;
 
 using Framework.Core;
 using Framework.Validation.Map;
+using Framework.Validation.Validators;
 
 using Microsoft.Extensions.DependencyInjection;
 

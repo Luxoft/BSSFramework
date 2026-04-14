@@ -1,4 +1,6 @@
-﻿namespace Framework.Validation;
+﻿using Framework.Validation.Validators;
+
+namespace Framework.Validation;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class EnglishAlphabetValidatorAttribute : PropertyValidatorAttribute

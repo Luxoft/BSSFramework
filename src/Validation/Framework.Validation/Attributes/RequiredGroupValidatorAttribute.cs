@@ -1,4 +1,6 @@
-﻿namespace Framework.Validation;
+﻿using Framework.Validation.Validators;
+
+namespace Framework.Validation;
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 public class RequiredGroupValidatorAttribute(RequiredGroupValidatorMode mode) : ClassValidatorAttribute

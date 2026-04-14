@@ -1,4 +1,6 @@
-﻿namespace Framework.Validation;
+﻿using Framework.Validation.Validators;
+
+namespace Framework.Validation;
 
 public class SelfClassValidator<TSource> : IClassValidator<TSource>
         where TSource : IClassValidator<TSource>

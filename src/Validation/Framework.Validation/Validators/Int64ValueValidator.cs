@@ -1,4 +1,6 @@
-﻿namespace Framework.Validation;
+﻿using Framework.Validation.Validators;
+
+namespace Framework.Validation;
 
 public class Int64ValueValidator(long min, long max) : IPropertyValidator<object, long>
 {

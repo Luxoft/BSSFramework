@@ -2,7 +2,7 @@
 
 using Framework.Infrastructure.Middleware;
 
-namespace Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
+namespace Framework.AutomationCore.ServiceEnvironment;
 
 public class TestWebApiCurrentMethodResolver : IWebApiCurrentMethodResolver
 {

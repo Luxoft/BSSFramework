@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
 
-using Framework.Database.NHibernate._MappingSettings;
 using Framework.Database.NHibernate.DBGenerator.Contracts;
+using Framework.Database.NHibernate.Mapping;
 
 using NHibernate.Cfg;
 using NHibernate.Engine;

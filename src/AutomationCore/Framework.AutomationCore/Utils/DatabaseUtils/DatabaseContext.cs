@@ -3,12 +3,11 @@
 using Framework.AutomationCore.Settings;
 using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
-
-using SqlConnection = Microsoft.Data.SqlClient.SqlConnection;
 
 namespace Framework.AutomationCore.Utils.DatabaseUtils;
 
@@ -91,7 +90,7 @@ public class DatabaseContext : IDatabaseContext
     private string GetLocalDbConnectionString(string connectionString, string instanceName)
         => DataSourceRegex.Replace(connectionString, $"Data Source=(localdb)\\{instanceName}");
 
-    private static readonly Regex DataSourceRegex = new Regex("Data Source=([^;]*)", RegexOptions.Compiled | RegexOptions.NonBacktracking);
+    private static readonly Regex DataSourceRegex = new("Data Source=([^;]*)", RegexOptions.Compiled | RegexOptions.NonBacktracking);
 }
 
 

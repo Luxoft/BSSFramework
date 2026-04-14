@@ -4,9 +4,9 @@ namespace Framework.CodeDom.Extend;
 
 public class CodeForeachStatement : CodeStatement
 {
-    private CodeStatementCollection statements = new CodeStatementCollection();
+    private CodeStatementCollection statements = new();
 
-    private CodeParameterDeclarationExpression iterator = new CodeParameterDeclarationExpression();
+    private CodeParameterDeclarationExpression iterator = new();
 
     public CodeStatementCollection Statements
     {

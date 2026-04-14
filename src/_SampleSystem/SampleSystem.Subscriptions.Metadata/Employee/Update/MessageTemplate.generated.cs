@@ -15,7 +15,7 @@ using Framework.Subscriptions.Metadata;
 namespace SampleSystem.Subscriptions.Metadata.Employee.Update
 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    public partial class _Employee_Update_MessageTemplate_cshtml : RazorTemplate<Domain.Employee>
+    public partial class _Employee_Update_MessageTemplate_cshtml : RazorTemplate<Domain.Employee.Employee>
     {
 #line hidden
 

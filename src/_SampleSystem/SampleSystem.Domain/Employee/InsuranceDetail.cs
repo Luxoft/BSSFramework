@@ -4,7 +4,7 @@ using Framework.BLL.Domain.Serialization;
 
 using SampleSystem.Domain.Inline;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Employee;
 
 public class InsuranceDetail : AuditPersistentDomainObjectBase
 {

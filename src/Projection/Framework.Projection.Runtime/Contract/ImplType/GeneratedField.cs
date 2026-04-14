@@ -3,7 +3,7 @@
 using Framework.Core;
 using Framework.Core.ReflectionImpl;
 using Framework.ExtendedMetadata;
-using Framework.Projection._Extensions;
+using Framework.Projection.Extensions;
 
 namespace Framework.Projection.Contract.ImplType;
 

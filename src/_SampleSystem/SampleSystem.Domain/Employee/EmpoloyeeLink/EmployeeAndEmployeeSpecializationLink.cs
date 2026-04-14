@@ -3,7 +3,7 @@
 using Framework.Relations;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Employee.EmpoloyeeLink;
 
 public class EmployeeAndEmployeeSpecializationLink : AuditPersistentDomainObjectBase, IDetail<Employee>
 {

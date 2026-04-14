@@ -1,4 +1,4 @@
-﻿using SampleSystem.Domain;
+﻿using SampleSystem.Domain.Directories;
 
 using SecuritySystem.Providers;
 

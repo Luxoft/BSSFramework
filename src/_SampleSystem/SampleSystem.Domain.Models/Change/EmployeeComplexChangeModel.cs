@@ -1,6 +1,8 @@
-﻿namespace SampleSystem.Domain;
+﻿using SampleSystem.Domain.Models.Change._Base;
 
-public class EmployeeComplexChangeModel : DomainObjectComplexChangeModel<Employee>
+namespace SampleSystem.Domain.Models.Change;
+
+public class EmployeeComplexChangeModel : DomainObjectComplexChangeModel<Employee.Employee>
 {
     public string Email { get; set; }
 }

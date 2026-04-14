@@ -3,7 +3,9 @@ using Framework.CodeGeneration.DTOGenerator.Server;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.FileFactory;
 
-namespace SampleSystem.CodeGenerate.ServerDTO;
+using SampleSystem.CodeGenerate.Configurations.DTO.Server.FileFactory;
+
+namespace SampleSystem.CodeGenerate.Configurations.DTO.Server;
 
 public class SampleSystemServerFileGenerator<TConfiguration>(TConfiguration configuration) : ServerFileGenerator<TConfiguration>(configuration)
     where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>

@@ -28,14 +28,14 @@
         protected virtual SampleSystem.Generated.DTO.EmployeeRoleFullDTO GetFullEmployeeRoleByNameInternal(string employeeRoleName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRoleBLL bll = evaluateData.Context.Logics.EmployeeRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRole domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeeRoleName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            SampleSystem.Domain.Employee.EmployeeRole domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeeRoleName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeeRoleFullDTO GetFullEmployeeRoleInternal(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO employeeRoleIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRoleBLL bll = evaluateData.Context.Logics.EmployeeRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRole domainObject = bll.GetById(employeeRoleIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            SampleSystem.Domain.Employee.EmployeeRole domainObject = bll.GetById(employeeRoleIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -60,13 +60,13 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRoleFullDTO> GetFullEmployeeRolesByIdentsInternal(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO[] employeeRoleIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRoleBLL bll = evaluateData.Context.Logics.EmployeeRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(employeeRoleIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(employeeRoleIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRoleFullDTO> GetFullEmployeeRolesInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRoleBLL bll = evaluateData.Context.Logics.EmployeeRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -90,14 +90,14 @@
         protected virtual SampleSystem.Generated.DTO.EmployeeRoleRichDTO GetRichEmployeeRoleByNameInternal(string employeeRoleName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRoleBLL bll = evaluateData.Context.Logics.EmployeeRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRole domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeeRoleName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            SampleSystem.Domain.Employee.EmployeeRole domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeeRoleName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeeRoleRichDTO GetRichEmployeeRoleInternal(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO employeeRoleIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRoleBLL bll = evaluateData.Context.Logics.EmployeeRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRole domainObject = bll.GetById(employeeRoleIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            SampleSystem.Domain.Employee.EmployeeRole domainObject = bll.GetById(employeeRoleIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -122,14 +122,14 @@
         protected virtual SampleSystem.Generated.DTO.EmployeeRoleSimpleDTO GetSimpleEmployeeRoleByNameInternal(string employeeRoleName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRoleBLL bll = evaluateData.Context.Logics.EmployeeRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRole domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeeRoleName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.Employee.EmployeeRole domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeeRoleName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeeRoleSimpleDTO GetSimpleEmployeeRoleInternal(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO employeeRoleIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRoleBLL bll = evaluateData.Context.Logics.EmployeeRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRole domainObject = bll.GetById(employeeRoleIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.Employee.EmployeeRole domainObject = bll.GetById(employeeRoleIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -154,13 +154,13 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRoleSimpleDTO> GetSimpleEmployeeRolesByIdentsInternal(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO[] employeeRoleIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRoleBLL bll = evaluateData.Context.Logics.EmployeeRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(employeeRoleIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(employeeRoleIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRoleSimpleDTO> GetSimpleEmployeeRolesInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRoleBLL bll = evaluateData.Context.Logics.EmployeeRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -184,14 +184,14 @@
         protected virtual SampleSystem.Generated.DTO.EmployeeRoleVisualDTO GetVisualEmployeeRoleByNameInternal(string employeeRoleName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRoleBLL bll = evaluateData.Context.Logics.EmployeeRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRole domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeeRoleName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
+            SampleSystem.Domain.Employee.EmployeeRole domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, employeeRoleName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeeRoleVisualDTO GetVisualEmployeeRoleInternal(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO employeeRoleIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRoleBLL bll = evaluateData.Context.Logics.EmployeeRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRole domainObject = bll.GetById(employeeRoleIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
+            SampleSystem.Domain.Employee.EmployeeRole domainObject = bll.GetById(employeeRoleIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -216,13 +216,13 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRoleVisualDTO> GetVisualEmployeeRolesByIdentsInternal(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO[] employeeRoleIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRoleBLL bll = evaluateData.Context.Logics.EmployeeRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(employeeRoleIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(employeeRoleIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeRoleVisualDTO> GetVisualEmployeeRolesInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRoleBLL bll = evaluateData.Context.Logics.EmployeeRoleFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.EmployeeRole>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
     }
 }

@@ -1,10 +1,9 @@
-﻿using ASP;
-
-using Framework.Application;
+﻿using Framework.Application;
 using Framework.Database;
 
-using SampleSystem.Domain;
+using SampleSystem.Domain.Directories;
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
 
 namespace SampleSystem.IntegrationTests;
 

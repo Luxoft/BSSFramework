@@ -1,9 +1,9 @@
 ﻿using Framework.Core;
 using Framework.Relations;
 using Framework.Restriction;
-using Framework.Validation;
+using Framework.Validation.Attributes;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Employee;
 
 public class EmployeeCellPhoneBase : AuditPersistentDomainObjectBase, IDetail<Employee>
 {

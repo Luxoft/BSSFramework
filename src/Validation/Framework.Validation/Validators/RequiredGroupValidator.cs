@@ -5,8 +5,9 @@ using CommonFramework;
 
 using Framework.Core;
 using Framework.Restriction;
+using Framework.Validation.Extensions;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Validators;
 
 public class RequiredGroupValidator : DynamicClassValidator
 {

@@ -1,6 +1,7 @@
 ﻿using Framework.BLL.Domain.DirectMode;
 using Framework.BLL.Domain.Models;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Authorization.Domain;
 
 [DirectMode(DirectMode.In | DirectMode.Out)]

@@ -1,4 +1,4 @@
-﻿namespace SampleSystem.Domain;
+﻿namespace SampleSystem.Domain.Employee;
 
 /// <summary>
 /// Специальная деталь для проверки OneToOne-связи

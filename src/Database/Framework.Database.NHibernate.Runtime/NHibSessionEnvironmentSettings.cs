@@ -2,5 +2,5 @@
 
 public class NHibSessionEnvironmentSettings : INHibSessionEnvironmentSettings
 {
-    public TimeSpan TransactionTimeout { get; } = new TimeSpan(0, 20, 0);
+    public TimeSpan TransactionTimeout { get; } = new(0, 20, 0);
 }

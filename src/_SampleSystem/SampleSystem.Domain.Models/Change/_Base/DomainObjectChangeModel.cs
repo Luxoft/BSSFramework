@@ -2,7 +2,7 @@
 using Framework.BLL.Domain.Models;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Models.Change._Base;
 
 [DirectMode(DirectMode.In | DirectMode.Out)]
 public abstract class DomainObjectChangeModel<TDomainObject> : DomainObjectBase, IDomainObjectChangeModel<TDomainObject>

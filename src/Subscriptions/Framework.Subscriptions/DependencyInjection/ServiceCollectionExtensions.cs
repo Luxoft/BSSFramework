@@ -5,7 +5,6 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.Infrastructure.DependencyInjection;
-using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
 
 using Microsoft.Extensions.DependencyInjection;

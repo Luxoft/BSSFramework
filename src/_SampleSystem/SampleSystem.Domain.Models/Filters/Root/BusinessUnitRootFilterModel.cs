@@ -1,6 +1,9 @@
 ﻿using Framework.Core;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Models.Filters._Base;
+
+namespace SampleSystem.Domain.Models.Filters.Root;
 
 /// <summary>
 ///
@@ -14,7 +17,7 @@ public class BusinessUnitRootFilterModel : DomainObjectRootFilterModel<BusinessU
     /// <value>
     /// The employee.
     /// </value>
-    public Employee Employee { get; set; }
+    public Employee.Employee Employee { get; set; }
 
     /// <summary>
     /// Gets or sets the list days.

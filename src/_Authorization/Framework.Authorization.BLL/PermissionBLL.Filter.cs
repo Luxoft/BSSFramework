@@ -1,6 +1,6 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.BLL.Domain.Models;
-using Framework.Validation;
+using Framework.Validation.Extensions;
 
 using GenericQueryable.Fetching;
 

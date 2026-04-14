@@ -19,7 +19,8 @@ using Framework.FileGeneration;
 
 using Microsoft.AspNetCore.Mvc;
 
-using SampleSystem.CodeGenerate.ServerDTO;
+using SampleSystem.CodeGenerate.Configurations.BLLCore;
+using SampleSystem.CodeGenerate.Configurations.DTO.Server;
 
 namespace SampleSystem.CodeGenerate;
 

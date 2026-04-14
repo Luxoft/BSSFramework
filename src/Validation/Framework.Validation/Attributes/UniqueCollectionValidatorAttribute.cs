@@ -1,4 +1,6 @@
-﻿namespace Framework.Validation;
+﻿using Framework.Validation.Validators;
+
+namespace Framework.Validation.Attributes;
 
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
 //[Obsolete("Use Framework.Restriction.UniqueGroup")]

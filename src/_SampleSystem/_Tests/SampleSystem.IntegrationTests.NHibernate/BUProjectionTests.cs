@@ -1,7 +1,7 @@
 ﻿using Framework.Application;
 using Framework.Database;
 
-using SampleSystem.Domain;
+using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Inline;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.MainQuery;

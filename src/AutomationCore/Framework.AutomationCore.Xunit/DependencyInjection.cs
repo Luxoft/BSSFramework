@@ -1,6 +1,6 @@
 ﻿using Bss.Testing.Xunit.Interfaces;
 
-using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
+using Framework.AutomationCore.ServiceEnvironment;
 using Framework.AutomationCore.Settings;
 using Framework.AutomationCore.Xunit.ServiceEnvironment;
 

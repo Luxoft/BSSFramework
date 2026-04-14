@@ -4,15 +4,15 @@ using Framework.BLL.Domain.ServiceRole;
 using Framework.Relations;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.BU;
 
 [BLLViewRole, BLLSaveRole, BLLRemoveRole]
-public class BusinessUnitHrDepartment : AuditPersistentDomainObjectBase, IDetail<HRDepartment>
+public class BusinessUnitHrDepartment : AuditPersistentDomainObjectBase, IDetail<HRDepartment.HRDepartment>
 {
     private BusinessUnit businessUnit;
-    private HRDepartment hRDepartment;
+    private HRDepartment.HRDepartment hRDepartment;
 
-    public BusinessUnitHrDepartment(HRDepartment hrDepartment)
+    public BusinessUnitHrDepartment(HRDepartment.HRDepartment hrDepartment)
     {
         this.hRDepartment = hrDepartment;
         this.hRDepartment.Maybe(z => z.AddDetail(this));
@@ -32,11 +32,11 @@ public class BusinessUnitHrDepartment : AuditPersistentDomainObjectBase, IDetail
 
     [Required]
     [UniqueElement]
-    public virtual HRDepartment HRDepartment
+    public virtual HRDepartment.HRDepartment HRDepartment
     {
         get => this.hRDepartment;
         set => this.hRDepartment = value;
     }
 
-    HRDepartment IDetail<HRDepartment>.Master => this.hRDepartment;
+    HRDepartment.HRDepartment IDetail<HRDepartment.HRDepartment>.Master => this.hRDepartment;
 }

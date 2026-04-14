@@ -1,6 +1,7 @@
 ﻿using Framework.Configuration.Domain;
 using Framework.Core.Serialization;
 using Framework.Validation;
+using Framework.Validation.Map;
 
 namespace Framework.Configuration.BLL;
 

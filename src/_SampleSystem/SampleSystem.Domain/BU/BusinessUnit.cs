@@ -5,11 +5,15 @@ using Framework.BLL.Domain.ServiceRole;
 using Framework.Core;
 using Framework.Relations;
 using Framework.Restriction;
-using Framework.Validation;
+using Framework.Validation.Attributes;
+using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.Enums;
+using SampleSystem.Domain.MU;
+using SampleSystem.Domain.Projects;
 
 using SecuritySystem;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.BU;
 
 [BLLViewRole, BLLSaveRole(AllowCreate = false)]
 public partial class BusinessUnit :

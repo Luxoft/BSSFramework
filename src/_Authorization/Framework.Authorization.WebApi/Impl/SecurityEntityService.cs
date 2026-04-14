@@ -7,6 +7,7 @@ using SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 using Microsoft.AspNetCore.Mvc;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Authorization.WebApi;
 
 public partial class AuthMainController

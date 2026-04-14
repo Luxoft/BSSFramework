@@ -2,7 +2,9 @@
 
 using CommonFramework;
 
-namespace Framework.Validation;
+using Framework.Validation.Extensions;
+
+namespace Framework.Validation.Map;
 
 public static class ValidationMapExtensions
 {

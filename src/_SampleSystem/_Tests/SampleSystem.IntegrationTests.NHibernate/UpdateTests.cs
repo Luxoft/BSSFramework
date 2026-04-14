@@ -81,9 +81,9 @@ public class UpdateTests : TestBase
                                                                                   Field3 = Maybe.Return(Guid.NewGuid()),
                                                                                   Items2 = new List<Example2StrictDTO>
                                                                                       {
-                                                                                              new Example2StrictDTO { Field1 = Guid.NewGuid(), Field2 = Guid.NewGuid() },
-                                                                                              new Example2StrictDTO { Field1 = Guid.NewGuid(), Field2 = Guid.NewGuid() },
-                                                                                              new Example2StrictDTO { Field1 = Guid.NewGuid(), Field2 = Guid.NewGuid() }
+                                                                                              new() { Field1 = Guid.NewGuid(), Field2 = Guid.NewGuid() },
+                                                                                              new() { Field1 = Guid.NewGuid(), Field2 = Guid.NewGuid() },
+                                                                                              new() { Field1 = Guid.NewGuid(), Field2 = Guid.NewGuid() }
                                                                                       }
                                                                           })));
 

@@ -1,4 +1,5 @@
-﻿namespace Framework.Validation;
+﻿// ReSharper disable once CheckNamespace
+namespace Framework.Validation.Attributes;
 
 public abstract class ValidatorAttribute : Attribute, IValidationData
 {

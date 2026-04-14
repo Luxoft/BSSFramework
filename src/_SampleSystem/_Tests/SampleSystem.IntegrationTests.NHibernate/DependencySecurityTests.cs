@@ -1,6 +1,6 @@
-﻿using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+﻿using Framework.AutomationCore.RootServiceProviderContainer;
 
-using SampleSystem.Domain;
+using SampleSystem.Domain.TestDependency;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;

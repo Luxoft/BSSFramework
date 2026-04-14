@@ -9,9 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Abstractions\Framework.Infrastructure.Abstractions.csproj" />
-    <ProjectReference Include="..\Framework.Subscriptions.Metadata\Framework.Subscriptions.Metadata.csproj" />
     <ProjectReference Include="..\Framework.Subscriptions.Runtime\Framework.Subscriptions.Runtime.csproj" />
+
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Abstractions\Framework.Infrastructure.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

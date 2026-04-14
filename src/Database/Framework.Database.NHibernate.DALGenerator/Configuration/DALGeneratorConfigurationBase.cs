@@ -2,8 +2,7 @@
 
 using Framework.Core;
 using Framework.Database.Metadata;
-using Framework.Database.NHibernate.DALGenerator._Internal;
-
+using Framework.Database.NHibernate.DALGenerator.Internal;
 using Framework.FileGeneration.Configuration;
 
 namespace Framework.Database.NHibernate.DALGenerator.Configuration;
@@ -36,7 +35,7 @@ public class DALGeneratorConfigurationBase<TEnvironment> : FileGeneratorConfigur
         }
     }
 
-    protected virtual MappingGenerator CreateMappingGenerator(Assembly assembly, AssemblyMetadata metadata) => new MappingGenerator(
+    protected virtual MappingGenerator CreateMappingGenerator(Assembly assembly, AssemblyMetadata metadata) => new(
         assembly.ToGroup(metadata.DomainTypes),
         this.EscapeWordService,
         this.DatabaseName,

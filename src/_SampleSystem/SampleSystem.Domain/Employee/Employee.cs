@@ -9,14 +9,18 @@ using Framework.Core;
 using Framework.Database.Mapping;
 using Framework.Relations;
 using Framework.Restriction;
-using SecuritySystem;
+using Framework.Validation.Attributes;
 
-using Framework.Validation;
-
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.Employee.EmpoloyeeLink;
 using SampleSystem.Domain.Enums;
 using SampleSystem.Domain.Inline;
+using SampleSystem.Domain.MU;
 
-namespace SampleSystem.Domain;
+using SecuritySystem;
+
+namespace SampleSystem.Domain.Employee;
 
 [UniqueGroup(UseDbEvaluation = true)]
 [BLLViewRole(Max = MainDTOType.FullDTO)]
@@ -43,16 +47,16 @@ public partial class Employee :
     private readonly ICollection<EmployeeAndEmployeeSpecializationLink> specializations = new List<EmployeeAndEmployeeSpecializationLink>();
 
     private BusinessUnit? coreBusinessUnit;
-    private HRDepartment? hRDepartment;
+    private HRDepartment.HRDepartment? hRDepartment;
     private EmployeePosition position;
     private Employee ppm;
 
     private Period educationDuration;
     private Gender gender;
 
-    private FioShort nameEng = new FioShort();
-    private Fio nameNative = new Fio();
-    private Fio nameRussian = new Fio();
+    private FioShort nameEng = new();
+    private Fio nameNative = new();
+    private Fio nameRussian = new();
     private EmployeeRegistrationType registrationType;
 
     private string email;
@@ -281,7 +285,7 @@ public partial class Employee :
     }
 
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public virtual HRDepartment? HRDepartment
+    public virtual HRDepartment.HRDepartment? HRDepartment
     {
         get => this.hRDepartment;
         set => this.hRDepartment = value;

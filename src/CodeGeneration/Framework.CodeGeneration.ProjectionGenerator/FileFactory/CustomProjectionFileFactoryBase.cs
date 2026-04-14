@@ -3,8 +3,8 @@ using System.Reflection;
 
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.FileFactory;
-using Framework.CodeGeneration.ProjectionGenerator._Extensions;
 using Framework.CodeGeneration.ProjectionGenerator.Configuration;
+using Framework.CodeGeneration.ProjectionGenerator.Extensions;
 using Framework.Core;
 using Framework.Projection;
 

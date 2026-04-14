@@ -1,6 +1,8 @@
-﻿namespace SampleSystem.Domain;
+﻿using SampleSystem.Domain.Models.Change._Base;
 
-public class EmployeeEmailMassChangeModel : DomainObjectMassChangeModel<Employee>
+namespace SampleSystem.Domain.Models.Change;
+
+public class EmployeeEmailMassChangeModel : DomainObjectMassChangeModel<Employee.Employee>
 {
     public string Email { get; set; }
 }

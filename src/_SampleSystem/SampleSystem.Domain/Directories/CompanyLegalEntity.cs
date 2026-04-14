@@ -3,7 +3,9 @@ using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.Enums;
+
+namespace SampleSystem.Domain.Directories;
 
 [BLLViewRole, BLLSaveRole, BLLRemoveRole]
 [UniqueGroup]

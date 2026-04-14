@@ -168,7 +168,7 @@ namespace SampleSystem.Generated.DTO
         
         private string _aribaStatusDescription;
         
-        private SampleSystem.Domain.AribaStatusType _aribaStatusType;
+        private SampleSystem.Domain.Ariba.AribaStatusType _aribaStatusType;
         
         private SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO _baseObj;
         
@@ -204,7 +204,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.AribaStatusType AribaStatusType
+        public SampleSystem.Domain.Ariba.AribaStatusType AribaStatusType
         {
             get
             {

@@ -1,3 +1,3 @@
-﻿namespace SampleSystem.Domain.UniqueByMaster;
+﻿namespace SampleSystem.Domain.UniqueByParent;
 
 public class ParentEntity : AuditPersistentDomainObjectBase;

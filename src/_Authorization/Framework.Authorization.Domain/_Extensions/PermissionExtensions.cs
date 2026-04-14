@@ -1,4 +1,5 @@
-﻿namespace Framework.Authorization.Domain;
+﻿// ReSharper disable once CheckNamespace
+namespace Framework.Authorization.Domain;
 
 public static class PermissionExtensions
 {

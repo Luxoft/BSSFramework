@@ -6,7 +6,7 @@ using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Examples.AttachmentTemplateEvaluator;
 
-public class AttachmentTemplateEvaluatorSubscription : Subscription<Domain.Employee, _Examples_AttachmentTemplateEvaluator_MessageTemplate_cshtml>
+public class AttachmentTemplateEvaluatorSubscription : Subscription<Domain.Employee.Employee, _Examples_AttachmentTemplateEvaluator_MessageTemplate_cshtml>
 {
     public const string AttachmentName = "report.html";
 
@@ -14,17 +14,17 @@ public class AttachmentTemplateEvaluatorSubscription : Subscription<Domain.Emplo
 
     public override MailAddress Sender { get; } = new("AttachmentTemplateEvaluator@luxoft.com", "SampleSystem");
 
-    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Employee> versions)
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee.Employee>> GetTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Employee.Employee> versions)
     {
         yield return new("tester@luxoft.com", versions);
     }
 
-    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee>> GetCopyTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Employee> versions)
+    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee.Employee>> GetCopyTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Employee.Employee> versions)
     {
         yield return new("tester@luxoft.com", versions);
     }
 
-    public override IEnumerable<System.Net.Mail.Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Employee> versions)
+    public override IEnumerable<System.Net.Mail.Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Employee.Employee> versions)
     {
         var template = Encoding.UTF8.GetBytes($"Hello world! {versions.Current!.NameNative}");
 

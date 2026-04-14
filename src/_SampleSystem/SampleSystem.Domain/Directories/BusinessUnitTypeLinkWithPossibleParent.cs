@@ -1,6 +1,6 @@
 ﻿using Framework.Relations;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Directories;
 
 public class BusinessUnitTypeLinkWithPossibleParent :
         AuditPersistentDomainObjectBase,

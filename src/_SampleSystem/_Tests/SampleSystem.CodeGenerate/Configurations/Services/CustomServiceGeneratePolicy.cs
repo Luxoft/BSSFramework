@@ -5,10 +5,11 @@ using Framework.CodeGeneration.ServiceModelGenerator;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.GeneratePolicy;
 
+using SampleSystem.CodeGenerate.Configurations._ProjectionSources;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.MU;
 
-using SampleSystem.Domain;
-
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations.Services;
 
 /// <summary>
 /// Кастомная политика для управления генерацией фасадных методов (пример для обработки генерируемых методов по ComplexChange-модели)

@@ -1,3 +1,5 @@
-﻿namespace SampleSystem.Domain;
+﻿using SampleSystem.Domain._Projections;
+
+namespace SampleSystem.Domain.Directories;
 
 public partial class BusinessUnitType : IBusinessUnitTypeVisualProjection;

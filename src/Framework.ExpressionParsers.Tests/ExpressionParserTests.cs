@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 
-using Framework.ExpressionParsers.Native._Exceptions;
+using Framework.ExpressionParsers.Native.Exceptions;
 
 using NUnit.Framework;
 

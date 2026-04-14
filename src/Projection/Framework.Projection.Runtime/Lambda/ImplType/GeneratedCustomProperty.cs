@@ -4,7 +4,7 @@ using CommonFramework;
 
 using Framework.Core.ReflectionImpl;
 using Framework.ExtendedMetadata;
-using Framework.Projection._ImplType;
+using Framework.Projection.ImplType;
 
 namespace Framework.Projection.Lambda.ImplType;
 

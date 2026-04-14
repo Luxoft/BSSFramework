@@ -2,7 +2,7 @@
 
 using CommonFramework;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Validators;
 
 public interface IDynamicValidator<in TInput, out TElementValidator>
 {

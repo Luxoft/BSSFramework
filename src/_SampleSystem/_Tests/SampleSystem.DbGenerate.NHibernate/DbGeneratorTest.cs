@@ -1,9 +1,9 @@
 ﻿using Framework.Database;
 using Framework.Database.ConnectionStringSource;
-using Framework.Database.NHibernate._MappingSettings;
 using Framework.Database.NHibernate.DBGenerator;
+using Framework.Database.NHibernate.Mapping;
 
-using SampleSystem.CodeGenerate;
+using SampleSystem.CodeGenerate.Configurations;
 using SampleSystem.Generated.DAL.NHibernate;
 
 namespace SampleSystem.DbGenerate.NHibernate;

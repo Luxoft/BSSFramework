@@ -1,4 +1,4 @@
-﻿namespace Framework.Validation;
+﻿namespace Framework.Validation.Attributes;
 
 /// <summary>
 /// Атрибут, указывающий на то, что валидация будет происходить с раскрытием свойств класса

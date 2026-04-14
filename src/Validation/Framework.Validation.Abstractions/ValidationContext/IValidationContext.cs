@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Validation;
 
 /// <summary>

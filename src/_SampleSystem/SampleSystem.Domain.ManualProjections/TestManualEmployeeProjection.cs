@@ -7,9 +7,9 @@ using Framework.Projection;
 namespace SampleSystem.Domain.ManualProjections;
 
 [BLLProjectionViewRole]
-[Projection(typeof(Employee), ProjectionRole.Default)]
-[DependencySecurity(typeof(Employee))]
-[Table(Name = nameof(Employee))]
+[Projection(typeof(Employee.Employee), ProjectionRole.Default)]
+[DependencySecurity(typeof(Employee.Employee))]
+[Table(Name = nameof(Employee.Employee))]
 public class TestManualEmployeeProjection : PersistentDomainObjectBase
 {
     private readonly string login;

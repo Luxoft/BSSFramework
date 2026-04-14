@@ -8,5 +8,5 @@ public class DateModel : DomainObjectBase
 
     public int? Day { get; set; }
 
-    public DateTime StartDate() => new DateTime(this.Year, this.Month.GetValueOrDefault(1), this.Day.GetValueOrDefault(1));
+    public DateTime StartDate() => new(this.Year, this.Month.GetValueOrDefault(1), this.Day.GetValueOrDefault(1));
 }

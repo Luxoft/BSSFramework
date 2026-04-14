@@ -1,4 +1,5 @@
-﻿using SampleSystem.Domain;
+﻿using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Employee;
 
 namespace SampleSystem.BLL;
 

@@ -1,4 +1,4 @@
-﻿using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+﻿using Framework.AutomationCore.RootServiceProviderContainer;
 
 using SampleSystem.Domain.EnversBug1676;
 using SampleSystem.IntegrationTests.__Support.TestData;

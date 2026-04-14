@@ -7,7 +7,6 @@ using Framework.BLL.Domain.ServiceRole;
 using Framework.BLL.DTOMapping.Domain;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Audit;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Audit;
 

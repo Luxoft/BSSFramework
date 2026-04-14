@@ -19,7 +19,7 @@
         protected virtual SampleSystem.Generated.DTO.PrincipalFullDTO GetFullPrincipalInternal(SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.Principal domainObject = bll.GetById(principalIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            SampleSystem.Domain.ExternalPrincipal.Principal domainObject = bll.GetById(principalIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -44,13 +44,13 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.PrincipalFullDTO> GetFullPrincipalsByIdentsInternal(SampleSystem.Generated.DTO.PrincipalIdentityDTO[] principalIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(principalIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(principalIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.PrincipalFullDTO> GetFullPrincipalsInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -65,7 +65,7 @@
         protected virtual SampleSystem.Generated.DTO.PrincipalRichDTO GetRichPrincipalInternal(SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.Principal domainObject = bll.GetById(principalIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            SampleSystem.Domain.ExternalPrincipal.Principal domainObject = bll.GetById(principalIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -81,7 +81,7 @@
         protected virtual SampleSystem.Generated.DTO.PrincipalSimpleDTO GetSimplePrincipalInternal(SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.Principal domainObject = bll.GetById(principalIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.ExternalPrincipal.Principal domainObject = bll.GetById(principalIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -106,13 +106,13 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.PrincipalSimpleDTO> GetSimplePrincipalsByIdentsInternal(SampleSystem.Generated.DTO.PrincipalIdentityDTO[] principalIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(principalIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(principalIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.PrincipalSimpleDTO> GetSimplePrincipalsInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -132,7 +132,7 @@
         
         protected virtual SampleSystem.Generated.DTO.PrincipalIdentityDTO SavePrincipalInternal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrict, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData, SampleSystem.BLL.IPrincipalBLL bll)
         {
-            SampleSystem.Domain.Principal domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByIdOrCreate(bll, principalStrict.Id);
+            SampleSystem.Domain.ExternalPrincipal.Principal domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByIdOrCreate(bll, principalStrict.Id);
             principalStrict.MapToDomainObject(evaluateData.MappingService, domainObject);
             bll.Save(domainObject);
             return SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject);

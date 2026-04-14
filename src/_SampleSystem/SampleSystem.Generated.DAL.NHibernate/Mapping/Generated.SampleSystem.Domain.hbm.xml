@@ -1,25 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <hibernate-mapping assembly="SampleSystem.Domain" auto-import="false" schema="SampleSystem.dbo" xmlns="urn:nhibernate-mapping-2.2">
-  <class name="SampleSystem.Domain.Address" table="Address">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="AddressType" column="addressType" access="field.camelcase" />
-    <property name="CityName" column="cityName" length="100" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="RegionName" column="regionName" length="100" access="field.camelcase" />
-    <property name="Street" column="street" length="100" access="field.camelcase" />
-    <property name="Zip" column="zip" length="100" access="field.camelcase" />
-    <many-to-one name="CountryName" column="countryNameId" class="SampleSystem.Domain.Country" access="field.camelcase" />
-    <many-to-one name="LegalEntity" column="legalEntityId" class="SampleSystem.Domain.LegalEntityBase" access="field.camelcase" />
-  </class>
   <class name="SampleSystem.Domain.AnotherSqlParserTestObj" table="SqlParserTestObj">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
@@ -47,12 +27,12 @@
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
-    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
-    <many-to-one name="Location" column="locationId" class="SampleSystem.Domain.Location" access="field.camelcase" />
-    <many-to-one name="ManagementUnit" column="managementUnitId" class="SampleSystem.Domain.ManagementUnit" access="field.camelcase" />
+    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BU.BusinessUnit" access="field.camelcase" />
+    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee.Employee" access="field.camelcase" />
+    <many-to-one name="Location" column="locationId" class="SampleSystem.Domain.Directories.Location" access="field.camelcase" />
+    <many-to-one name="ManagementUnit" column="managementUnitId" class="SampleSystem.Domain.MU.ManagementUnit" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.BusinessUnit" table="BusinessUnit">
+  <class name="SampleSystem.Domain.BU.BusinessUnit" table="BusinessUnit">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -79,31 +59,31 @@
     <property name="Options" column="options" access="field.camelcase" />
     <property name="ProjectStartMailList" column="projectStartMailList" access="field.camelcase" />
     <property name="Rank" column="rank" access="field.camelcase" />
-    <many-to-one name="BusinessUnitForRent" column="businessUnitForRentId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
-    <many-to-one name="BusinessUnitType" column="businessUnitTypeId" class="SampleSystem.Domain.BusinessUnitType" access="field.camelcase" />
-    <many-to-one name="Parent" column="parentId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
+    <many-to-one name="BusinessUnitForRent" column="businessUnitForRentId" class="SampleSystem.Domain.BU.BusinessUnit" access="field.camelcase" />
+    <many-to-one name="BusinessUnitType" column="businessUnitTypeId" class="SampleSystem.Domain.Directories.BusinessUnitType" access="field.camelcase" />
+    <many-to-one name="Parent" column="parentId" class="SampleSystem.Domain.BU.BusinessUnit" access="field.camelcase" />
     <set name="BusinessUnitEmployeeRoles" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="businessUnitId" />
-      <one-to-many class="SampleSystem.Domain.BusinessUnitEmployeeRole" />
+      <one-to-many class="SampleSystem.Domain.BU.BusinessUnitEmployeeRole" />
     </set>
     <set name="Children" inverse="true" access="field.camelcase" cascade="None">
       <key column="parentId" />
-      <one-to-many class="SampleSystem.Domain.BusinessUnit" />
+      <one-to-many class="SampleSystem.Domain.BU.BusinessUnit" />
     </set>
     <set name="ManagerCommissions" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="businessUnitId" />
-      <one-to-many class="SampleSystem.Domain.BusinessUnitManagerCommissionLink" />
+      <one-to-many class="SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink" />
     </set>
     <set name="Projects" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="businessUnitId" />
-      <one-to-many class="SampleSystem.Domain.Project" />
+      <one-to-many class="SampleSystem.Domain.Projects.Project" />
     </set>
     <component name="Period" class="Framework.Core.Period, Framework.Core" access="field.camelcase">
       <property name="EndDate" column="periodendDate" access="field.camelcase" type="timestamp" />
       <property name="StartDate" column="periodstartDate" access="field.camelcase" type="timestamp" />
     </component>
   </class>
-  <class name="SampleSystem.Domain.BusinessUnitAncestorLink" table="BusinessUnitAncestorLink">
+  <class name="SampleSystem.Domain.BU.BusinessUnitAncestorLink" table="BusinessUnitAncestorLink">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -115,10 +95,10 @@
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="Ancestor" column="ancestorId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
-    <many-to-one name="Child" column="childId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
+    <many-to-one name="Ancestor" column="ancestorId" class="SampleSystem.Domain.BU.BusinessUnit" access="field.camelcase" />
+    <many-to-one name="Child" column="childId" class="SampleSystem.Domain.BU.BusinessUnit" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.BusinessUnitEmployeeRole" table="BusinessUnitEmployeeRole">
+  <class name="SampleSystem.Domain.BU.BusinessUnitEmployeeRole" table="BusinessUnitEmployeeRole">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -131,10 +111,10 @@
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="Role" column="role" access="field.camelcase" />
-    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
-    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
+    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BU.BusinessUnit" access="field.camelcase" />
+    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee.Employee" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.BusinessUnitHrDepartment" table="BusinessUnitHrDepartment">
+  <class name="SampleSystem.Domain.BU.BusinessUnitHrDepartment" table="BusinessUnitHrDepartment">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -146,10 +126,10 @@
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BusinessUnit" unique-key="UIX_businessUnit_hRDepartmentBusinessUnitHrDepartment" access="field.camelcase" />
-    <many-to-one name="HRDepartment" column="hRDepartmentId" class="SampleSystem.Domain.HRDepartment" unique-key="UIX_businessUnit_hRDepartmentBusinessUnitHrDepartment" access="field.camelcase" />
+    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BU.BusinessUnit" unique-key="UIX_businessUnit_hRDepartmentBusinessUnitHrDepartment" access="field.camelcase" />
+    <many-to-one name="HRDepartment" column="hRDepartmentId" class="SampleSystem.Domain.HRDepartment.HRDepartment" unique-key="UIX_businessUnit_hRDepartmentBusinessUnitHrDepartment" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.BusinessUnitManagerCommissionLink" table="BusinessUnitManagerCommissionLink">
+  <class name="SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink" table="BusinessUnitManagerCommissionLink">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -162,14 +142,14 @@
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BusinessUnit" unique-key="UIX_businessUnit_managerBusinessUnitManagerCommissionLink" access="field.camelcase" />
-    <many-to-one name="Manager" column="managerId" class="SampleSystem.Domain.Employee" unique-key="UIX_businessUnit_managerBusinessUnitManagerCommissionLink" access="field.camelcase" />
+    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BU.BusinessUnit" unique-key="UIX_businessUnit_managerBusinessUnitManagerCommissionLink" access="field.camelcase" />
+    <many-to-one name="Manager" column="managerId" class="SampleSystem.Domain.Employee.Employee" unique-key="UIX_businessUnit_managerBusinessUnitManagerCommissionLink" access="field.camelcase" />
     <component name="Period" class="Framework.Core.Period, Framework.Core" access="field.camelcase">
       <property name="EndDate" column="periodendDate" access="field.camelcase" type="timestamp" />
       <property name="StartDate" column="periodstartDate" access="field.camelcase" type="timestamp" />
     </component>
   </class>
-  <class name="SampleSystem.Domain.BusinessUnitToAncestorChildView" table="BusinessUnitToAncestorChildView" mutable="false" schema-action="none">
+  <class name="SampleSystem.Domain.BU.BusinessUnitToAncestorChildView" table="BusinessUnitToAncestorChildView" mutable="false" schema-action="none">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -181,10 +161,30 @@
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="ChildOrAncestor" column="childOrAncestorId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
-    <many-to-one name="Source" column="sourceId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
+    <many-to-one name="ChildOrAncestor" column="childOrAncestorId" class="SampleSystem.Domain.BU.BusinessUnit" access="field.camelcase" />
+    <many-to-one name="Source" column="sourceId" class="SampleSystem.Domain.BU.BusinessUnit" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.BusinessUnitType" table="BusinessUnitType">
+  <class name="SampleSystem.Domain.Directories.Address" table="Address">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="AddressType" column="addressType" access="field.camelcase" />
+    <property name="CityName" column="cityName" length="100" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="RegionName" column="regionName" length="100" access="field.camelcase" />
+    <property name="Street" column="street" length="100" access="field.camelcase" />
+    <property name="Zip" column="zip" length="100" access="field.camelcase" />
+    <many-to-one name="CountryName" column="countryNameId" class="SampleSystem.Domain.Directories.Country" access="field.camelcase" />
+    <many-to-one name="LegalEntity" column="legalEntityId" class="SampleSystem.Domain.Directories.LegalEntityBase" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.Directories.BusinessUnitType" table="BusinessUnitType">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -215,18 +215,18 @@
     <property name="TransferBOConfirm" column="transferBOConfirm" access="field.camelcase" />
     <set name="PossibleFinancialProjectTypes" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="businessUnitTypeId" />
-      <one-to-many class="SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType" />
+      <one-to-many class="SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType" />
     </set>
     <set name="PossibleParents" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="businessUnitTypeId" />
-      <one-to-many class="SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent" />
+      <one-to-many class="SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent" />
     </set>
     <set name="TransferTo" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="businessUnitTypeId" />
-      <one-to-many class="SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo" />
+      <one-to-many class="SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo" />
     </set>
   </class>
-  <class name="SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType" table="BusinessUnitTypeLinkWithPossibleFinancialProjectType">
+  <class name="SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType" table="BusinessUnitTypeLinkWithPossibleFinancialProjectType">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -239,9 +239,9 @@
     <property name="FinancialProjectType" column="financialProjectType" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="BusinessUnitType" column="businessUnitTypeId" class="SampleSystem.Domain.BusinessUnitType" access="field.camelcase" />
+    <many-to-one name="BusinessUnitType" column="businessUnitTypeId" class="SampleSystem.Domain.Directories.BusinessUnitType" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent" table="BusinessUnitTypeLinkWithPossibleParent">
+  <class name="SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent" table="BusinessUnitTypeLinkWithPossibleParent">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -253,10 +253,10 @@
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="BusinessUnitType" column="businessUnitTypeId" class="SampleSystem.Domain.BusinessUnitType" access="field.camelcase" />
-    <many-to-one name="PossibleParent" column="possibleParentId" class="SampleSystem.Domain.BusinessUnitType" access="field.camelcase" />
+    <many-to-one name="BusinessUnitType" column="businessUnitTypeId" class="SampleSystem.Domain.Directories.BusinessUnitType" access="field.camelcase" />
+    <many-to-one name="PossibleParent" column="possibleParentId" class="SampleSystem.Domain.Directories.BusinessUnitType" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo" table="BusinessUnitTypeLinkWithTransferTo">
+  <class name="SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo" table="BusinessUnitTypeLinkWithTransferTo">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -268,10 +268,10 @@
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="BusinessUnitType" column="businessUnitTypeId" class="SampleSystem.Domain.BusinessUnitType" access="field.camelcase" />
-    <many-to-one name="TransferTo" column="transferToId" class="SampleSystem.Domain.BusinessUnitType" access="field.camelcase" />
+    <many-to-one name="BusinessUnitType" column="businessUnitTypeId" class="SampleSystem.Domain.Directories.BusinessUnitType" access="field.camelcase" />
+    <many-to-one name="TransferTo" column="transferToId" class="SampleSystem.Domain.Directories.BusinessUnitType" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.Country" table="Country">
+  <class name="SampleSystem.Domain.Directories.Country" table="Country">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -288,7 +288,116 @@
     <property name="Name" column="name" unique-key="UIX_nameCountry" access="field.camelcase" />
     <property name="NameNative" column="nameNative" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.Employee" table="Employee">
+  <class name="SampleSystem.Domain.Directories.LegalEntityBase" table="LegalEntityBase">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_nameLegalEntityBase" access="field.camelcase" />
+    <property name="NameEnglish" column="nameEnglish" access="field.camelcase" />
+    <many-to-one name="BaseObj" column="baseObjId" class="SampleSystem.Domain.Directories.TestObjForNested" access="field.camelcase" />
+    <set name="Addresses" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="legalEntityId" />
+      <one-to-many class="SampleSystem.Domain.Directories.Address" />
+    </set>
+    <component name="AribaStatus" class="SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus, SampleSystem.Domain" access="field.camelcase">
+      <property name="Date" column="aribaStatusdate" access="field.camelcase" type="timestamp" />
+      <property name="Description" column="aribaStatusdescription" access="field.camelcase" length="2147483647" />
+      <property name="Type" column="aribaStatustype" access="field.camelcase" />
+    </component>
+    <joined-subclass name="SampleSystem.Domain.Directories.CompanyLegalEntity" table="CompanyLegalEntity">
+      <key column="id" />
+      <property name="Code" column="code" length="100" access="field.camelcase" />
+      <property name="Type" column="type" access="field.camelcase" />
+      <many-to-one name="CurrentObj" column="currentObjId" class="SampleSystem.Domain.Directories.TestObjForNested" access="field.camelcase" />
+      <many-to-one name="Parent" column="parentId" class="SampleSystem.Domain.Directories.CompanyLegalEntity" access="field.camelcase" />
+    </joined-subclass>
+  </class>
+  <class name="SampleSystem.Domain.Directories.Location" table="Location">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="BinaryData" column="binaryData" length="2147483647" access="field.camelcase" />
+    <property name="CloseDate" column="closeDate" access="field.camelcase" />
+    <property name="Code" column="code" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="DeepLevel" column="deepLevel" access="field.camelcase" />
+    <property name="IsFinancial" column="isFinancial" access="field.camelcase" />
+    <property name="LocationType" column="locationType" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_nameLocation" access="field.camelcase" />
+    <many-to-one name="Country" column="countryId" class="SampleSystem.Domain.Directories.Country" access="field.camelcase" />
+    <many-to-one name="Parent" column="parentId" class="SampleSystem.Domain.Directories.Location" access="field.camelcase" />
+    <set name="Children" inverse="true" access="field.camelcase" cascade="None">
+      <key column="parentId" />
+      <one-to-many class="SampleSystem.Domain.Directories.Location" />
+    </set>
+  </class>
+  <class name="SampleSystem.Domain.Directories.LocationAncestorLink" table="LocationAncestorLink">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="Ancestor" column="ancestorId" class="SampleSystem.Domain.Directories.Location" access="field.camelcase" />
+    <many-to-one name="Child" column="childId" class="SampleSystem.Domain.Directories.Location" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.Directories.LocationToAncestorChildView" table="LocationToAncestorChildView" mutable="false" schema-action="none">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="ChildOrAncestor" column="childOrAncestorId" class="SampleSystem.Domain.Directories.Location" access="field.camelcase" />
+    <many-to-one name="Source" column="sourceId" class="SampleSystem.Domain.Directories.Location" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.Directories.TestObjForNestedBase" table="TestObjForNestedBase">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <component name="Period" class="Framework.Core.Period, Framework.Core" access="field.camelcase">
+      <property name="EndDate" column="periodendDate" access="field.camelcase" type="timestamp" />
+      <property name="StartDate" column="periodstartDate" access="field.camelcase" type="timestamp" />
+    </component>
+    <joined-subclass name="SampleSystem.Domain.Directories.TestObjForNested" table="TestObjForNested">
+      <key column="id" />
+    </joined-subclass>
+  </class>
+  <class name="SampleSystem.Domain.Employee.Employee" table="Employee">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -316,34 +425,34 @@
     <property name="PersonalCellPhone" column="personalCellPhone" access="field.camelcase" />
     <property name="Pin" column="pin" access="field.camelcase" />
     <property name="PlannedHireDate" column="plannedHireDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="CoreBusinessUnit" column="coreBusinessUnitId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
-    <many-to-one name="HRDepartment" column="hRDepartmentId" class="SampleSystem.Domain.HRDepartment" access="field.camelcase" />
-    <many-to-one name="ManagementUnit" column="managementUnitId" class="SampleSystem.Domain.ManagementUnit" access="field.camelcase" />
-    <many-to-one name="Position" column="positionId" class="SampleSystem.Domain.EmployeePosition" access="field.camelcase" />
-    <many-to-one name="Ppm" column="ppmId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
-    <many-to-one name="RegistrationType" column="registrationTypeId" class="SampleSystem.Domain.EmployeeRegistrationType" access="field.camelcase" />
-    <many-to-one name="Role" column="roleId" class="SampleSystem.Domain.EmployeeRole" access="field.camelcase" />
-    <many-to-one name="RoleDegree" column="roleDegreeId" class="SampleSystem.Domain.EmployeeRoleDegree" access="field.camelcase" />
-    <many-to-one name="VacationApprover" column="vacationApproverId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
+    <many-to-one name="CoreBusinessUnit" column="coreBusinessUnitId" class="SampleSystem.Domain.BU.BusinessUnit" access="field.camelcase" />
+    <many-to-one name="HRDepartment" column="hRDepartmentId" class="SampleSystem.Domain.HRDepartment.HRDepartment" access="field.camelcase" />
+    <many-to-one name="ManagementUnit" column="managementUnitId" class="SampleSystem.Domain.MU.ManagementUnit" access="field.camelcase" />
+    <many-to-one name="Position" column="positionId" class="SampleSystem.Domain.Employee.EmployeePosition" access="field.camelcase" />
+    <many-to-one name="Ppm" column="ppmId" class="SampleSystem.Domain.Employee.Employee" access="field.camelcase" />
+    <many-to-one name="RegistrationType" column="registrationTypeId" class="SampleSystem.Domain.Employee.EmployeeRegistrationType" access="field.camelcase" />
+    <many-to-one name="Role" column="roleId" class="SampleSystem.Domain.Employee.EmployeeRole" access="field.camelcase" />
+    <many-to-one name="RoleDegree" column="roleDegreeId" class="SampleSystem.Domain.Employee.EmployeeRoleDegree" access="field.camelcase" />
+    <many-to-one name="VacationApprover" column="vacationApproverId" class="SampleSystem.Domain.Employee.Employee" access="field.camelcase" />
     <set name="CellPhones" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="employeeId" />
-      <one-to-many class="SampleSystem.Domain.EmployeeCellPhone" />
+      <one-to-many class="SampleSystem.Domain.Employee.EmployeeCellPhone" />
     </set>
     <set name="EmployeePhotos" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="employeeId" />
-      <one-to-many class="SampleSystem.Domain.EmployeePhoto" />
+      <one-to-many class="SampleSystem.Domain.Employee.EmployeePhoto" />
     </set>
     <set name="EmployeeToEmployeeLinks" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="ownerId" />
-      <one-to-many class="SampleSystem.Domain.EmployeeToEmployeeLink" />
+      <one-to-many class="SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink" />
     </set>
     <set name="PersonalCellPhones" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="employeeId" />
-      <one-to-many class="SampleSystem.Domain.EmployeePersonalCellPhone" />
+      <one-to-many class="SampleSystem.Domain.Employee.EmployeePersonalCellPhone" />
     </set>
     <set name="Specializations" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="employeeId" />
-      <one-to-many class="SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink" />
+      <one-to-many class="SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink" />
     </set>
     <component name="EducationDuration" class="Framework.Core.Period, Framework.Core" access="field.camelcase">
       <property name="EndDate" column="educationDurationendDate" access="field.camelcase" type="timestamp" />
@@ -368,22 +477,7 @@
       <property name="StartDate" column="workPeriodstartDate" access="field.camelcase" type="timestamp" />
     </component>
   </class>
-  <class name="SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink" table="EmployeeAndEmployeeSpecializationLink">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee" unique-key="UIX_employee_specializationEmployeeAndEmployeeSpecializationLink" access="field.camelcase" />
-    <many-to-one name="Specialization" column="specializationId" class="SampleSystem.Domain.EmployeeSpecialization" unique-key="UIX_employee_specializationEmployeeAndEmployeeSpecializationLink" access="field.camelcase" />
-  </class>
-  <class name="SampleSystem.Domain.EmployeeCellPhoneBase" table="EmployeeCellPhoneBase">
+  <class name="SampleSystem.Domain.Employee.EmployeeCellPhoneBase" table="EmployeeCellPhoneBase">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -399,15 +493,15 @@
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="Number" column="number" length="7" access="field.camelcase" />
-    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
-    <joined-subclass name="SampleSystem.Domain.EmployeeCellPhone" table="EmployeeCellPhone">
+    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee.Employee" access="field.camelcase" />
+    <joined-subclass name="SampleSystem.Domain.Employee.EmployeeCellPhone" table="EmployeeCellPhone">
       <key column="id" />
     </joined-subclass>
-    <joined-subclass name="SampleSystem.Domain.EmployeePersonalCellPhone" table="EmployeePersonalCellPhone">
+    <joined-subclass name="SampleSystem.Domain.Employee.EmployeePersonalCellPhone" table="EmployeePersonalCellPhone">
       <key column="id" />
     </joined-subclass>
   </class>
-  <class name="SampleSystem.Domain.EmployeePhoto" table="EmployeePhoto">
+  <class name="SampleSystem.Domain.Employee.EmployeePhoto" table="EmployeePhoto">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -422,9 +516,9 @@
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="Type" column="type" unique-key="UIX_employee_typeEmployeePhoto" access="field.camelcase" />
-    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee" unique-key="UIX_employee_typeEmployeePhoto" access="field.camelcase" />
+    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee.Employee" unique-key="UIX_employee_typeEmployeePhoto" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.EmployeePosition" table="EmployeePosition">
+  <class name="SampleSystem.Domain.Employee.EmployeePosition" table="EmployeePosition">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -439,9 +533,9 @@
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="Name" column="name" unique-key="UIX_englishName_location_nameEmployeePosition" access="field.camelcase" />
-    <many-to-one name="Location" column="locationId" class="SampleSystem.Domain.Location" unique-key="UIX_englishName_location_nameEmployeePosition" access="field.camelcase" />
+    <many-to-one name="Location" column="locationId" class="SampleSystem.Domain.Directories.Location" unique-key="UIX_englishName_location_nameEmployeePosition" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.EmployeeRegistrationType" table="EmployeeRegistrationType">
+  <class name="SampleSystem.Domain.Employee.EmployeeRegistrationType" table="EmployeeRegistrationType">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -456,7 +550,7 @@
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="Name" column="name" unique-key="UIX_nameEmployeeRegistrationType" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.EmployeeRole" table="EmployeeRole">
+  <class name="SampleSystem.Domain.Employee.EmployeeRole" table="EmployeeRole">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -470,7 +564,7 @@
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="Name" column="name" unique-key="UIX_nameEmployeeRole" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.EmployeeRoleDegree" table="EmployeeRoleDegree">
+  <class name="SampleSystem.Domain.Employee.EmployeeRoleDegree" table="EmployeeRoleDegree">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -484,7 +578,7 @@
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="Name" column="name" unique-key="UIX_nameEmployeeRoleDegree" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.EmployeeSpecialization" table="EmployeeSpecialization">
+  <class name="SampleSystem.Domain.Employee.EmployeeSpecialization" table="EmployeeSpecialization">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -498,7 +592,22 @@
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="Name" column="name" unique-key="UIX_nameEmployeeSpecialization" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.EmployeeToEmployeeLink" table="EmployeeToEmployeeLink">
+  <class name="SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink" table="EmployeeAndEmployeeSpecializationLink">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee.Employee" unique-key="UIX_employee_specializationEmployeeAndEmployeeSpecializationLink" access="field.camelcase" />
+    <many-to-one name="Specialization" column="specializationId" class="SampleSystem.Domain.Employee.EmployeeSpecialization" unique-key="UIX_employee_specializationEmployeeAndEmployeeSpecializationLink" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink" table="EmployeeToEmployeeLink">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -511,8 +620,116 @@
     <property name="EmployeeLinkType" column="employeeLinkType" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="LinkedEmployee" column="linkedEmployeeId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
-    <many-to-one name="Owner" column="ownerId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
+    <many-to-one name="LinkedEmployee" column="linkedEmployeeId" class="SampleSystem.Domain.Employee.Employee" access="field.camelcase" />
+    <many-to-one name="Owner" column="ownerId" class="SampleSystem.Domain.Employee.Employee" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.Employee.IMRequestDetail" table="IMRequestDetail">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="Request" column="requestId" class="SampleSystem.Domain.Employee.IMRequest" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.Employee.Information" table="Information">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Email" column="email" length="50" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <joined-subclass name="SampleSystem.Domain.Employee.EmployeeInformation" table="EmployeeInformation">
+      <key column="id" />
+      <property name="PersonalEmail" column="personalEmail" length="50" access="field.camelcase" />
+    </joined-subclass>
+    <joined-subclass name="SampleSystem.Domain.Employee.IMRequest" table="IMRequest">
+      <key column="id" />
+      <property name="Message" column="message" length="50" access="field.camelcase" />
+      <one-to-one name="OneToOneDetail" class="SampleSystem.Domain.Employee.IMRequestDetail" property-ref="Request" cascade="all-delete-orphan" />
+    </joined-subclass>
+  </class>
+  <class name="SampleSystem.Domain.Employee.InsuranceDetail" table="InsuranceDetail">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="Age" column="age" access="field.camelcase" />
+    <property name="BirthDate" column="birthDate" type="timestamp" access="field.camelcase" />
+    <property name="CellPhone" column="cellPhone" access="field.camelcase" />
+    <property name="Cost" column="cost" precision="19" scale="4" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="LandlinePhone" column="landlinePhone" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="RegistrationAddress" column="registrationAddress" access="field.camelcase" />
+    <property name="ResidentalAddress" column="residentalAddress" access="field.camelcase" />
+    <component name="Fio" class="SampleSystem.Domain.Inline.Fio, SampleSystem.Domain" access="field.camelcase">
+      <property name="FirstName" column="fiofirstName" access="field.camelcase" length="50" />
+      <property name="LastName" column="fiolastName" access="field.camelcase" length="50" />
+      <property name="MiddleName" column="fiomiddleName" access="field.camelcase" length="50" />
+    </component>
+  </class>
+  <class name="SampleSystem.Domain.Employee.RoleRoleDegreeLink" table="RoleRoleDegreeLink">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="AnotherRole" column="anotherRoleId" class="SampleSystem.Domain.Employee.EmployeeRole" access="field.camelcase" />
+    <many-to-one name="Role" column="roleId" class="SampleSystem.Domain.Employee.EmployeeRole" unique-key="unilink_RoleRoleDegreeLink" access="field.camelcase" />
+    <many-to-one name="RoleDegree" column="roleDegreeId" class="SampleSystem.Domain.Employee.EmployeeRoleDegree" unique-key="unilink_RoleRoleDegreeLink" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.Employee.TestExceptObject" table="TestExceptObject">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee.Employee" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.Employee.TestRestrictionObject" table="TestRestrictionObject">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="RestrictionHandler" column="restrictionHandler" access="field.camelcase" />
+    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BU.BusinessUnit" access="field.camelcase" />
   </class>
   <class name="SampleSystem.Domain.EnversBug1676.Coefficient1676" table="Coefficient1676">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
@@ -563,7 +780,21 @@
     <property name="Name" column="name" access="field.camelcase" />
     <many-to-one name="Location" column="locationId" class="SampleSystem.Domain.EnversBug1676.Location1676" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.Example1" table="Example1">
+  <class name="SampleSystem.Domain.ExternalPrincipal.Principal" table="Principal">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ExternalId" column="externalId" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.ForUpdate.Example1" table="Example1">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -580,10 +811,10 @@
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <set name="Items2" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="parentId" />
-      <one-to-many class="SampleSystem.Domain.Example2" />
+      <one-to-many class="SampleSystem.Domain.ForUpdate.Example2" />
     </set>
   </class>
-  <class name="SampleSystem.Domain.Example2" table="Example2">
+  <class name="SampleSystem.Domain.ForUpdate.Example2" table="Example2">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -597,23 +828,9 @@
     <property name="Field2" column="field2" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="Parent" column="parentId" class="SampleSystem.Domain.Example1" access="field.camelcase" />
+    <many-to-one name="Parent" column="parentId" class="SampleSystem.Domain.ForUpdate.Example1" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.GenericNamedLock" table="GenericNamedLock">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Name" column="name" unique-key="UIX_nameGenericNamedLock" access="field.camelcase" />
-  </class>
-  <class name="SampleSystem.Domain.HRDepartment" table="HRDepartment">
+  <class name="SampleSystem.Domain.HRDepartment.HRDepartment" table="HRDepartment">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -632,33 +849,33 @@
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="Name" column="name" unique-key="uni_name_HRDepartment" access="field.camelcase" />
     <property name="NameNative" column="nameNative" unique-key="uni_namenative_HRDepartment" access="field.camelcase" />
-    <many-to-one name="ApprovedBy" column="approvedById" class="SampleSystem.Domain.Employee" access="field.camelcase" />
-    <many-to-one name="CompanyLegalEntity" column="companyLegalEntityId" class="SampleSystem.Domain.CompanyLegalEntity" access="field.camelcase" />
-    <many-to-one name="Head" column="headId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
-    <many-to-one name="Location" column="locationId" class="SampleSystem.Domain.Location" access="field.camelcase" />
-    <many-to-one name="Parent" column="parentId" class="SampleSystem.Domain.HRDepartment" access="field.camelcase" />
+    <many-to-one name="ApprovedBy" column="approvedById" class="SampleSystem.Domain.Employee.Employee" access="field.camelcase" />
+    <many-to-one name="CompanyLegalEntity" column="companyLegalEntityId" class="SampleSystem.Domain.Directories.CompanyLegalEntity" access="field.camelcase" />
+    <many-to-one name="Head" column="headId" class="SampleSystem.Domain.Employee.Employee" access="field.camelcase" />
+    <many-to-one name="Location" column="locationId" class="SampleSystem.Domain.Directories.Location" access="field.camelcase" />
+    <many-to-one name="Parent" column="parentId" class="SampleSystem.Domain.HRDepartment.HRDepartment" access="field.camelcase" />
     <set name="BusinessUnitHrDepartments" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="hRDepartmentId" />
-      <one-to-many class="SampleSystem.Domain.BusinessUnitHrDepartment" />
+      <one-to-many class="SampleSystem.Domain.BU.BusinessUnitHrDepartment" />
     </set>
     <set name="Children" inverse="true" access="field.camelcase" cascade="None">
       <key column="parentId" />
-      <one-to-many class="SampleSystem.Domain.HRDepartment" />
+      <one-to-many class="SampleSystem.Domain.HRDepartment.HRDepartment" />
     </set>
     <set name="EmployeePositions" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="hrDepartmentId" />
-      <one-to-many class="SampleSystem.Domain.HRDepartmentEmployeePosition" />
+      <one-to-many class="SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition" />
     </set>
     <set name="HrDepartmentRoleEmployees" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="hRDepartmentId" />
-      <one-to-many class="SampleSystem.Domain.HRDepartmentRoleEmployee" />
+      <one-to-many class="SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee" />
     </set>
     <set name="ManagementUnits" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="hRDepartmentId" />
-      <one-to-many class="SampleSystem.Domain.ManagementUnitAndHRDepartmentLink" />
+      <one-to-many class="SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink" />
     </set>
   </class>
-  <class name="SampleSystem.Domain.HRDepartmentEmployeePosition" table="HRDepartmentEmployeePosition">
+  <class name="SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition" table="HRDepartmentEmployeePosition">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -670,10 +887,10 @@
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="EmployeePosition" column="employeePositionId" class="SampleSystem.Domain.EmployeePosition" unique-key="UIX_employeePosition_hrDepartmentHRDepartmentEmployeePosition" access="field.camelcase" />
-    <many-to-one name="HrDepartment" column="hrDepartmentId" class="SampleSystem.Domain.HRDepartment" unique-key="UIX_employeePosition_hrDepartmentHRDepartmentEmployeePosition" access="field.camelcase" />
+    <many-to-one name="EmployeePosition" column="employeePositionId" class="SampleSystem.Domain.Employee.EmployeePosition" unique-key="UIX_employeePosition_hrDepartmentHRDepartmentEmployeePosition" access="field.camelcase" />
+    <many-to-one name="HrDepartment" column="hrDepartmentId" class="SampleSystem.Domain.HRDepartment.HRDepartment" unique-key="UIX_employeePosition_hrDepartmentHRDepartmentEmployeePosition" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.HRDepartmentRoleEmployee" table="HRDepartmentRoleEmployee">
+  <class name="SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee" table="HRDepartmentRoleEmployee">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -686,71 +903,8 @@
     <property name="HRDepartmentEmployeeRoleType" column="hRDepartmentEmployeeRoleType" unique-key="UIX_employee_hRDepartment_hRDepartmentEmployeeRoleTypeHRDepartmentRoleEmployee" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee" unique-key="UIX_employee_hRDepartment_hRDepartmentEmployeeRoleTypeHRDepartmentRoleEmployee" access="field.camelcase" />
-    <many-to-one name="HRDepartment" column="hRDepartmentId" class="SampleSystem.Domain.HRDepartment" unique-key="UIX_employee_hRDepartment_hRDepartmentEmployeeRoleTypeHRDepartmentRoleEmployee" access="field.camelcase" />
-  </class>
-  <class name="SampleSystem.Domain.IMRequestDetail" table="IMRequestDetail">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="Request" column="requestId" class="SampleSystem.Domain.IMRequest" access="field.camelcase" />
-  </class>
-  <class name="SampleSystem.Domain.Information" table="Information">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="Email" column="email" length="50" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Name" column="name" access="field.camelcase" />
-    <joined-subclass name="SampleSystem.Domain.EmployeeInformation" table="EmployeeInformation">
-      <key column="id" />
-      <property name="PersonalEmail" column="personalEmail" length="50" access="field.camelcase" />
-    </joined-subclass>
-    <joined-subclass name="SampleSystem.Domain.IMRequest" table="IMRequest">
-      <key column="id" />
-      <property name="Message" column="message" length="50" access="field.camelcase" />
-      <one-to-one name="OneToOneDetail" class="SampleSystem.Domain.IMRequestDetail" property-ref="Request" cascade="all-delete-orphan" />
-    </joined-subclass>
-  </class>
-  <class name="SampleSystem.Domain.InsuranceDetail" table="InsuranceDetail">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="Age" column="age" access="field.camelcase" />
-    <property name="BirthDate" column="birthDate" type="timestamp" access="field.camelcase" />
-    <property name="CellPhone" column="cellPhone" access="field.camelcase" />
-    <property name="Cost" column="cost" precision="19" scale="4" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="LandlinePhone" column="landlinePhone" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="RegistrationAddress" column="registrationAddress" access="field.camelcase" />
-    <property name="ResidentalAddress" column="residentalAddress" access="field.camelcase" />
-    <component name="Fio" class="SampleSystem.Domain.Inline.Fio, SampleSystem.Domain" access="field.camelcase">
-      <property name="FirstName" column="fiofirstName" access="field.camelcase" length="50" />
-      <property name="LastName" column="fiolastName" access="field.camelcase" length="50" />
-      <property name="MiddleName" column="fiomiddleName" access="field.camelcase" length="50" />
-    </component>
+    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee.Employee" unique-key="UIX_employee_hRDepartment_hRDepartmentEmployeeRoleTypeHRDepartmentRoleEmployee" access="field.camelcase" />
+    <many-to-one name="HRDepartment" column="hRDepartmentId" class="SampleSystem.Domain.HRDepartment.HRDepartment" unique-key="UIX_employee_hRDepartment_hRDepartmentEmployeeRoleTypeHRDepartmentRoleEmployee" access="field.camelcase" />
   </class>
   <class name="SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1" table="IntegrationVersionContainer1">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
@@ -782,95 +936,7 @@
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="Name" column="name" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.LegalEntityBase" table="LegalEntityBase">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Name" column="name" unique-key="UIX_nameLegalEntityBase" access="field.camelcase" />
-    <property name="NameEnglish" column="nameEnglish" access="field.camelcase" />
-    <many-to-one name="BaseObj" column="baseObjId" class="SampleSystem.Domain.TestObjForNested" access="field.camelcase" />
-    <set name="Addresses" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
-      <key column="legalEntityId" />
-      <one-to-many class="SampleSystem.Domain.Address" />
-    </set>
-    <component name="AribaStatus" class="SampleSystem.Domain.RevenueDocumentAribaStatus, SampleSystem.Domain" access="field.camelcase">
-      <property name="Date" column="aribaStatusdate" access="field.camelcase" type="timestamp" />
-      <property name="Description" column="aribaStatusdescription" access="field.camelcase" length="2147483647" />
-      <property name="Type" column="aribaStatustype" access="field.camelcase" />
-    </component>
-    <joined-subclass name="SampleSystem.Domain.CompanyLegalEntity" table="CompanyLegalEntity">
-      <key column="id" />
-      <property name="Code" column="code" length="100" access="field.camelcase" />
-      <property name="Type" column="type" access="field.camelcase" />
-      <many-to-one name="CurrentObj" column="currentObjId" class="SampleSystem.Domain.TestObjForNested" access="field.camelcase" />
-      <many-to-one name="Parent" column="parentId" class="SampleSystem.Domain.CompanyLegalEntity" access="field.camelcase" />
-    </joined-subclass>
-  </class>
-  <class name="SampleSystem.Domain.Location" table="Location">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="BinaryData" column="binaryData" length="2147483647" access="field.camelcase" />
-    <property name="CloseDate" column="closeDate" access="field.camelcase" />
-    <property name="Code" column="code" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="DeepLevel" column="deepLevel" access="field.camelcase" />
-    <property name="IsFinancial" column="isFinancial" access="field.camelcase" />
-    <property name="LocationType" column="locationType" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Name" column="name" unique-key="UIX_nameLocation" access="field.camelcase" />
-    <many-to-one name="Country" column="countryId" class="SampleSystem.Domain.Country" access="field.camelcase" />
-    <many-to-one name="Parent" column="parentId" class="SampleSystem.Domain.Location" access="field.camelcase" />
-    <set name="Children" inverse="true" access="field.camelcase" cascade="None">
-      <key column="parentId" />
-      <one-to-many class="SampleSystem.Domain.Location" />
-    </set>
-  </class>
-  <class name="SampleSystem.Domain.LocationAncestorLink" table="LocationAncestorLink">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="Ancestor" column="ancestorId" class="SampleSystem.Domain.Location" access="field.camelcase" />
-    <many-to-one name="Child" column="childId" class="SampleSystem.Domain.Location" access="field.camelcase" />
-  </class>
-  <class name="SampleSystem.Domain.LocationToAncestorChildView" table="LocationToAncestorChildView" mutable="false" schema-action="none">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="ChildOrAncestor" column="childOrAncestorId" class="SampleSystem.Domain.Location" access="field.camelcase" />
-    <many-to-one name="Source" column="sourceId" class="SampleSystem.Domain.Location" access="field.camelcase" />
-  </class>
-  <class name="SampleSystem.Domain.ManagementUnit" table="ManagementUnit">
+  <class name="SampleSystem.Domain.MU.ManagementUnit" table="ManagementUnit">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -886,25 +952,25 @@
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="Name" column="name" access="field.camelcase" />
-    <many-to-one name="Parent" column="parentId" class="SampleSystem.Domain.ManagementUnit" access="field.camelcase" />
+    <many-to-one name="Parent" column="parentId" class="SampleSystem.Domain.MU.ManagementUnit" access="field.camelcase" />
     <set name="BusinessUnits" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="managementUnitId" />
-      <one-to-many class="SampleSystem.Domain.ManagementUnitAndBusinessUnitLink" />
+      <one-to-many class="SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink" />
     </set>
     <set name="Children" inverse="true" access="field.camelcase" cascade="None">
       <key column="parentId" />
-      <one-to-many class="SampleSystem.Domain.ManagementUnit" />
+      <one-to-many class="SampleSystem.Domain.MU.ManagementUnit" />
     </set>
     <set name="HRDepartments" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="managementUnitId" />
-      <one-to-many class="SampleSystem.Domain.ManagementUnitAndHRDepartmentLink" />
+      <one-to-many class="SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink" />
     </set>
     <component name="Period" class="Framework.Core.Period, Framework.Core" access="field.camelcase">
       <property name="EndDate" column="periodendDate" access="field.camelcase" type="timestamp" />
       <property name="StartDate" column="periodstartDate" access="field.camelcase" type="timestamp" />
     </component>
   </class>
-  <class name="SampleSystem.Domain.ManagementUnitAncestorLink" table="ManagementUnitAncestorLink">
+  <class name="SampleSystem.Domain.MU.ManagementUnitAncestorLink" table="ManagementUnitAncestorLink">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -916,10 +982,10 @@
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="Ancestor" column="ancestorId" class="SampleSystem.Domain.ManagementUnit" access="field.camelcase" />
-    <many-to-one name="Child" column="childId" class="SampleSystem.Domain.ManagementUnit" access="field.camelcase" />
+    <many-to-one name="Ancestor" column="ancestorId" class="SampleSystem.Domain.MU.ManagementUnit" access="field.camelcase" />
+    <many-to-one name="Child" column="childId" class="SampleSystem.Domain.MU.ManagementUnit" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.ManagementUnitAndBusinessUnitLink" table="ManagementUnitAndBusinessUnitLink">
+  <class name="SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink" table="ManagementUnitAndBusinessUnitLink">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -932,10 +998,10 @@
     <property name="EqualBU" column="equalBU" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BusinessUnit" unique-key="UIX_businessUnit_managementUnitManagementUnitAndBusinessUnitLink" access="field.camelcase" />
-    <many-to-one name="ManagementUnit" column="managementUnitId" class="SampleSystem.Domain.ManagementUnit" unique-key="UIX_businessUnit_managementUnitManagementUnitAndBusinessUnitLink" access="field.camelcase" />
+    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BU.BusinessUnit" unique-key="UIX_businessUnit_managementUnitManagementUnitAndBusinessUnitLink" access="field.camelcase" />
+    <many-to-one name="ManagementUnit" column="managementUnitId" class="SampleSystem.Domain.MU.ManagementUnit" unique-key="UIX_businessUnit_managementUnitManagementUnitAndBusinessUnitLink" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.ManagementUnitAndHRDepartmentLink" table="ManagementUnitAndHRDepartmentLink">
+  <class name="SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink" table="ManagementUnitAndHRDepartmentLink">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -947,10 +1013,10 @@
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="HRDepartment" column="hRDepartmentId" class="SampleSystem.Domain.HRDepartment" unique-key="UIX_hRDepartment_managementUnitManagementUnitAndHRDepartmentLink" access="field.camelcase" />
-    <many-to-one name="ManagementUnit" column="managementUnitId" class="SampleSystem.Domain.ManagementUnit" unique-key="UIX_hRDepartment_managementUnitManagementUnitAndHRDepartmentLink" access="field.camelcase" />
+    <many-to-one name="HRDepartment" column="hRDepartmentId" class="SampleSystem.Domain.HRDepartment.HRDepartment" unique-key="UIX_hRDepartment_managementUnitManagementUnitAndHRDepartmentLink" access="field.camelcase" />
+    <many-to-one name="ManagementUnit" column="managementUnitId" class="SampleSystem.Domain.MU.ManagementUnit" unique-key="UIX_hRDepartment_managementUnitManagementUnitAndHRDepartmentLink" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.ManagementUnitToAncestorChildView" table="ManagementUnitToAncestorChildView" mutable="false" schema-action="none">
+  <class name="SampleSystem.Domain.MU.ManagementUnitToAncestorChildView" table="ManagementUnitToAncestorChildView" mutable="false" schema-action="none">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -962,8 +1028,22 @@
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="ChildOrAncestor" column="childOrAncestorId" class="SampleSystem.Domain.ManagementUnit" access="field.camelcase" />
-    <many-to-one name="Source" column="sourceId" class="SampleSystem.Domain.ManagementUnit" access="field.camelcase" />
+    <many-to-one name="ChildOrAncestor" column="childOrAncestorId" class="SampleSystem.Domain.MU.ManagementUnit" access="field.camelcase" />
+    <many-to-one name="Source" column="sourceId" class="SampleSystem.Domain.MU.ManagementUnit" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.NLock.GenericNamedLock" table="GenericNamedLock">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_nameGenericNamedLock" access="field.camelcase" />
   </class>
   <class name="SampleSystem.Domain.NoSecurityObject" table="NoSecurityObject">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
@@ -978,21 +1058,7 @@
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.Principal" table="Principal">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ExternalId" column="externalId" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-  </class>
-  <class name="SampleSystem.Domain.Project" table="Project">
+  <class name="SampleSystem.Domain.Projects.Project" table="Project">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -1008,23 +1074,7 @@
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="PlannedEndDate" column="plannedEndDate" type="timestamp" access="field.camelcase" />
     <property name="StartDate" column="startDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
-  </class>
-  <class name="SampleSystem.Domain.RoleRoleDegreeLink" table="RoleRoleDegreeLink">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="AnotherRole" column="anotherRoleId" class="SampleSystem.Domain.EmployeeRole" access="field.camelcase" />
-    <many-to-one name="Role" column="roleId" class="SampleSystem.Domain.EmployeeRole" unique-key="unilink_RoleRoleDegreeLink" access="field.camelcase" />
-    <many-to-one name="RoleDegree" column="roleDegreeId" class="SampleSystem.Domain.EmployeeRoleDegree" unique-key="unilink_RoleRoleDegreeLink" access="field.camelcase" />
+    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BU.BusinessUnit" access="field.camelcase" />
   </class>
   <class name="SampleSystem.Domain.SqlParserTestObj" table="SqlParserTestObj">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
@@ -1069,7 +1119,7 @@
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="Name" column="name" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.TestExceptObject" table="TestExceptObject">
+  <class name="SampleSystem.Domain.TestDependency.TestRootSecurityObj" table="TestRootSecurityObj">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
@@ -1081,7 +1131,140 @@
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BU.BusinessUnit" access="field.camelcase" />
+    <many-to-one name="Location" column="locationId" class="SampleSystem.Domain.Directories.Location" access="field.camelcase" />
+    <many-to-one name="ManagementUnitFluentMapping" column="managementUnitFluentMappingId" class="SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping" access="field.camelcase" />
+    <set name="Items" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="firstMasterId" />
+      <one-to-many class="SampleSystem.Domain.TestDependency.TestSecurityObjItem" />
+    </set>
+  </class>
+  <class name="SampleSystem.Domain.TestDependency.TestSecurityObjItem" table="TestSecurityObjItem">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <many-to-one name="FirstMaster" column="firstMasterId" class="SampleSystem.Domain.TestDependency.TestRootSecurityObj" access="field.camelcase" />
+    <set name="Items" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="innerMasterId" />
+      <one-to-many class="SampleSystem.Domain.TestDependency.TestSecuritySubObjItem" />
+    </set>
+    <set name="Items2" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="innerMasterId" />
+      <one-to-many class="SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2" />
+    </set>
+    <set name="Items3" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="innerMasterId" />
+      <one-to-many class="SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3" />
+    </set>
+  </class>
+  <class name="SampleSystem.Domain.TestDependency.TestSecuritySubObjItem" table="TestSecuritySubObjItem">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <many-to-one name="InnerMaster" column="innerMasterId" class="SampleSystem.Domain.TestDependency.TestSecurityObjItem" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2" table="TestSecuritySubObjItem2">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <many-to-one name="InnerMaster" column="innerMasterId" class="SampleSystem.Domain.TestDependency.TestSecurityObjItem" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3" table="TestSecuritySubObjItem3">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <many-to-one name="InnerMaster" column="innerMasterId" class="SampleSystem.Domain.TestDependency.TestSecurityObjItem" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.TestDeserializedAuth.TestItemAuthObject" table="TestItemAuthObject">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BU.BusinessUnit" access="field.camelcase" />
+    <many-to-one name="ManagementUnit" column="managementUnitId" class="SampleSystem.Domain.MU.ManagementUnit" access="field.camelcase" />
+    <many-to-one name="Master" column="masterId" class="SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject" table="TestPerformanceObject">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BU.BusinessUnit" access="field.camelcase" />
+    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee.Employee" access="field.camelcase" />
+    <many-to-one name="Location" column="locationId" class="SampleSystem.Domain.Directories.Location" access="field.camelcase" />
+    <many-to-one name="ManagementUnit" column="managementUnitId" class="SampleSystem.Domain.MU.ManagementUnit" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject" table="TestPlainAuthObject">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee.Employee" access="field.camelcase" />
+    <many-to-one name="Location" column="locationId" class="SampleSystem.Domain.Directories.Location" access="field.camelcase" />
+    <set name="Items" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="masterId" />
+      <one-to-many class="SampleSystem.Domain.TestDeserializedAuth.TestItemAuthObject" />
+    </set>
   </class>
   <class name="SampleSystem.Domain.TestForceAbstract.ClassA" table="ClassA">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
@@ -1124,23 +1307,7 @@
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <property name="TestImmutablePrimitiveProperty" column="testImmutablePrimitiveProperty" access="field.camelcase" />
-    <many-to-one name="TestImmutableRefProperty" column="testImmutableRefPropertyId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
-  </class>
-  <class name="SampleSystem.Domain.TestItemAuthObject" table="TestItemAuthObject">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
-    <many-to-one name="ManagementUnit" column="managementUnitId" class="SampleSystem.Domain.ManagementUnit" access="field.camelcase" />
-    <many-to-one name="Master" column="masterId" class="SampleSystem.Domain.TestPlainAuthObject" access="field.camelcase" />
+    <many-to-one name="TestImmutableRefProperty" column="testImmutableRefPropertyId" class="SampleSystem.Domain.Employee.Employee" access="field.camelcase" />
   </class>
   <class name="SampleSystem.Domain.TestJobObject" table="TestJobObject">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
@@ -1155,65 +1322,6 @@
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.TestObjForNestedBase" table="TestObjForNestedBase">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Name" column="name" access="field.camelcase" />
-    <component name="Period" class="Framework.Core.Period, Framework.Core" access="field.camelcase">
-      <property name="EndDate" column="periodendDate" access="field.camelcase" type="timestamp" />
-      <property name="StartDate" column="periodstartDate" access="field.camelcase" type="timestamp" />
-    </component>
-    <joined-subclass name="SampleSystem.Domain.TestObjForNested" table="TestObjForNested">
-      <key column="id" />
-    </joined-subclass>
-  </class>
-  <class name="SampleSystem.Domain.TestPerformanceObject" table="TestPerformanceObject">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Name" column="name" access="field.camelcase" />
-    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
-    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
-    <many-to-one name="Location" column="locationId" class="SampleSystem.Domain.Location" access="field.camelcase" />
-    <many-to-one name="ManagementUnit" column="managementUnitId" class="SampleSystem.Domain.ManagementUnit" access="field.camelcase" />
-  </class>
-  <class name="SampleSystem.Domain.TestPlainAuthObject" table="TestPlainAuthObject">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Name" column="name" access="field.camelcase" />
-    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
-    <many-to-one name="Location" column="locationId" class="SampleSystem.Domain.Location" access="field.camelcase" />
-    <set name="Items" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
-      <key column="masterId" />
-      <one-to-many class="SampleSystem.Domain.TestItemAuthObject" />
-    </set>
-  </class>
   <class name="SampleSystem.Domain.TestRelativeEmployeeChildObject" table="TestRelativeEmployeeChildObject">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
@@ -1226,7 +1334,7 @@
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
+    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee.Employee" access="field.camelcase" />
     <many-to-one name="Master" column="masterId" class="SampleSystem.Domain.TestRelativeEmployeeParentObject" access="field.camelcase" />
   </class>
   <class name="SampleSystem.Domain.TestRelativeEmployeeObject" table="TestRelativeEmployeeObject">
@@ -1241,8 +1349,8 @@
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="EmployeeRef1" column="employeeRef1Id" class="SampleSystem.Domain.Employee" access="field.camelcase" />
-    <many-to-one name="EmployeeRef2" column="employeeRef2Id" class="SampleSystem.Domain.Employee" access="field.camelcase" />
+    <many-to-one name="EmployeeRef1" column="employeeRef1Id" class="SampleSystem.Domain.Employee.Employee" access="field.camelcase" />
+    <many-to-one name="EmployeeRef2" column="employeeRef2Id" class="SampleSystem.Domain.Employee.Employee" access="field.camelcase" />
   </class>
   <class name="SampleSystem.Domain.TestRelativeEmployeeParentObject" table="TestRelativeEmployeeParentObject">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
@@ -1261,127 +1369,6 @@
       <one-to-many class="SampleSystem.Domain.TestRelativeEmployeeChildObject" />
     </set>
   </class>
-  <class name="SampleSystem.Domain.TestRestrictionObject" table="TestRestrictionObject">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="RestrictionHandler" column="restrictionHandler" access="field.camelcase" />
-    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
-  </class>
-  <class name="SampleSystem.Domain.TestRootSecurityObj" table="TestRootSecurityObj">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Name" column="name" access="field.camelcase" />
-    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
-    <many-to-one name="Location" column="locationId" class="SampleSystem.Domain.Location" access="field.camelcase" />
-    <many-to-one name="ManagementUnitFluentMapping" column="managementUnitFluentMappingId" class="SampleSystem.Domain.ManagementUnitFluentMapping" access="field.camelcase" />
-    <set name="Items" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
-      <key column="firstMasterId" />
-      <one-to-many class="SampleSystem.Domain.TestSecurityObjItem" />
-    </set>
-  </class>
-  <class name="SampleSystem.Domain.TestSecurityObjItem" table="TestSecurityObjItem">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Name" column="name" access="field.camelcase" />
-    <many-to-one name="FirstMaster" column="firstMasterId" class="SampleSystem.Domain.TestRootSecurityObj" access="field.camelcase" />
-    <set name="Items" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
-      <key column="innerMasterId" />
-      <one-to-many class="SampleSystem.Domain.TestSecuritySubObjItem" />
-    </set>
-    <set name="Items2" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
-      <key column="innerMasterId" />
-      <one-to-many class="SampleSystem.Domain.TestSecuritySubObjItem2" />
-    </set>
-    <set name="Items3" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
-      <key column="innerMasterId" />
-      <one-to-many class="SampleSystem.Domain.TestSecuritySubObjItem3" />
-    </set>
-  </class>
-  <class name="SampleSystem.Domain.TestSecuritySubObjItem" table="TestSecuritySubObjItem">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Name" column="name" access="field.camelcase" />
-    <many-to-one name="InnerMaster" column="innerMasterId" class="SampleSystem.Domain.TestSecurityObjItem" access="field.camelcase" />
-  </class>
-  <class name="SampleSystem.Domain.TestSecuritySubObjItem2" table="TestSecuritySubObjItem2">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Name" column="name" access="field.camelcase" />
-    <many-to-one name="InnerMaster" column="innerMasterId" class="SampleSystem.Domain.TestSecurityObjItem" access="field.camelcase" />
-  </class>
-  <class name="SampleSystem.Domain.TestSecuritySubObjItem3" table="TestSecuritySubObjItem3">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Name" column="name" access="field.camelcase" />
-    <many-to-one name="InnerMaster" column="innerMasterId" class="SampleSystem.Domain.TestSecurityObjItem" access="field.camelcase" />
-  </class>
-  <class name="SampleSystem.Domain.UniqueByMaster.ParentEntity" table="ParentEntity">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-  </class>
   <class name="SampleSystem.Domain.UniqueByParent.ChildEntity" table="ChildEntity">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
@@ -1394,6 +1381,19 @@
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="Parent" column="parentId" class="SampleSystem.Domain.UniqueByMaster.ParentEntity" unique-key="parent_ChildEntity" access="field.camelcase" />
+    <many-to-one name="Parent" column="parentId" class="SampleSystem.Domain.UniqueByParent.ParentEntity" unique-key="parent_ChildEntity" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.UniqueByParent.ParentEntity" table="ParentEntity">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
   </class>
 </hibernate-mapping>

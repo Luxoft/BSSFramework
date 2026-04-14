@@ -1,6 +1,7 @@
 ﻿using Framework.Restriction;
+using Framework.Validation.Validators;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Attributes;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class RequiredValidatorAttribute : PropertyValidatorAttribute

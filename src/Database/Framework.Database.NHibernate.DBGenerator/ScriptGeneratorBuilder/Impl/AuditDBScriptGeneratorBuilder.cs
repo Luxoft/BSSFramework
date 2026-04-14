@@ -1,8 +1,8 @@
-﻿using Framework.Database.NHibernate._MappingSettings;
-using Framework.Database.NHibernate.DBGenerator.AuditDBGenerator;
+﻿using Framework.Database.NHibernate.DBGenerator.AuditDBGenerator;
 using Framework.Database.NHibernate.DBGenerator.Contracts;
 using Framework.Database.NHibernate.DBGenerator.ScriptGeneratorBuilder.Contracts;
 using Framework.Database.NHibernate.DBGenerator.Team;
+using Framework.Database.NHibernate.Mapping;
 
 namespace Framework.Database.NHibernate.DBGenerator.ScriptGeneratorBuilder.Impl;
 

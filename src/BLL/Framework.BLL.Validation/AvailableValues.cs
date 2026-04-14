@@ -15,7 +15,7 @@ public record AvailableValues(Range<decimal> DecimalRange, Range<DateTime> DateT
 
     int ISizeContainer<string>.Size => this.DefaultMaxStringSize;
 
-    public static readonly AvailableValues Infinity = new AvailableValues(Range<decimal>.Infinity, Range<DateTime>.Infinity, int.MaxValue);
+    public static readonly AvailableValues Infinity = new(Range<decimal>.Infinity, Range<DateTime>.Infinity, int.MaxValue);
 
     public static readonly AvailableValues Default =
         ((decimal)Math.Pow(10, 15) - 1M)

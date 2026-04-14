@@ -1,0 +1,23 @@
+﻿using CommonFramework;
+
+namespace SampleSystem.Domain.Projections;
+
+public partial class TestBusinessUnit
+{
+    public override string CalcProp
+    {
+        get => this.Name + this.Name;
+        set => throw new NotImplementedException();
+    }
+
+    public override string[][] CalcMatrix => new string[][]
+                                             {
+                                                 ["A", "B"], ["B", "C"]
+                                             };
+
+    public override TestBusinessUnitType CalcProjectionProp => null;
+
+    public override string HerBusinessUnit_Full => EnumerableExtensions.GetAllElements<HerBusinessUnit>(this.Her, h => h.Parent).Join(",", bu => bu.Name);
+
+    public override string Employees => Enumerable.OrderBy<MiniBusinessUnitEmployeeRole, string>(this.BusinessUnitEmployeeRoles, link => link.Employee.NameEngFirstName).Join(",", link => link.Employee.NameEngFirstName);
+}

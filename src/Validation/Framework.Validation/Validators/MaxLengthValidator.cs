@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Validators;
 
 public class MaxLengthValidator : IDynamicPropertyValidator
 {

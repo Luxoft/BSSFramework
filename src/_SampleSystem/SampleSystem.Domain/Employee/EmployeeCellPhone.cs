@@ -1,6 +1,6 @@
 ﻿using Framework.Relations;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Employee;
 
 public class EmployeeCellPhone : EmployeeCellPhoneBase
 {

@@ -1,6 +1,8 @@
 ﻿using Framework.BLL.Domain.ServiceRole;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+
+namespace SampleSystem.Domain.Employee;
 
 [BLLViewRole]
 public class TestRestrictionObject : AuditPersistentDomainObjectBase

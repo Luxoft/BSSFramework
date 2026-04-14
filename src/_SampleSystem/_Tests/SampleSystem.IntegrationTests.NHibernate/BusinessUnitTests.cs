@@ -1,5 +1,5 @@
 ﻿using Framework.Application;
-using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+using Framework.AutomationCore.RootServiceProviderContainer;
 using Framework.AutomationCore.Utils;
 using Framework.BLL.Domain.Persistent;
 using Framework.Core;
@@ -7,12 +7,14 @@ using Framework.Database;
 
 using SecuritySystem;
 
-using SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Enums;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
-using SampleSystem.WebApiCore.Controllers.Main;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
+
+using BusinessUnitController = SampleSystem.WebApiCore.Controllers.Main.BusinessUnitController;
 
 namespace SampleSystem.IntegrationTests;
 

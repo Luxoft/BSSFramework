@@ -7,7 +7,7 @@
 [AttributeUsage(AttributeTargets.Property)]
 public class LengthAndPrecisionAttribute(int length, int precision) : Attribute
 {
-    public static readonly LengthAndPrecisionAttribute Default = new LengthAndPrecisionAttribute(19,4);
+    public static readonly LengthAndPrecisionAttribute Default = new(19,4);
 
     public int Precision => precision;
 

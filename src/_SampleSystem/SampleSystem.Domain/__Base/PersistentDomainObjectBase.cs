@@ -2,6 +2,7 @@
 using Framework.BLL.Domain.Serialization;
 using Framework.Core;
 
+// ReSharper disable once CheckNamespace
 namespace SampleSystem.Domain;
 
 public abstract class PersistentDomainObjectBase : DomainObjectBase, IIdentityObject<Guid>, IEquatable<PersistentDomainObjectBase>

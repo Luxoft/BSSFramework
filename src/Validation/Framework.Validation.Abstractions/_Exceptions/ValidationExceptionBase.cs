@@ -1,4 +1,5 @@
-﻿namespace Framework.Validation;
+﻿// ReSharper disable once CheckNamespace
+namespace Framework.Validation;
 
 public class ValidationExceptionBase : Exception
 {

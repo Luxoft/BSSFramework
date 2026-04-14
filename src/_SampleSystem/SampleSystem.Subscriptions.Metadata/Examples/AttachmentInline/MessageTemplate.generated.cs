@@ -17,7 +17,7 @@ using SampleSystem.Subscriptions.Metadata.Examples.Attachment;
 namespace SampleSystem.Subscriptions.Metadata.Examples.AttachmentInline
 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    public partial class _Examples_AttachmentInline_MessageTemplate_cshtml : RazorTemplate<Domain.Employee>
+    public partial class _Examples_AttachmentInline_MessageTemplate_cshtml : RazorTemplate<Domain.Employee.Employee>
     {
 #line hidden
 

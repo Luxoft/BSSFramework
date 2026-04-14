@@ -1,6 +1,7 @@
 ﻿using Framework.Core;
 using Framework.Database;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Authorization.Domain;
 
 /// <summary>

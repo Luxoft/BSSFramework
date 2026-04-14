@@ -10,20 +10,6 @@ namespace Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 
 public static class TypeExtensions
 {
-    internal static string ToGetSecurityPathMethodName(this Type domainType)
-    {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
-        return $"Get{domainType.Name}SecurityPath";
-    }
-
-    internal static string ToGetSecurityProviderMethodName(this Type domainType)
-    {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
-        return $"Get{domainType.Name}SecurityProvider";
-    }
-
     public static DirectMode GetDirectMode(this Type model)
     {
         if (model == null) throw new ArgumentNullException(nameof(model));

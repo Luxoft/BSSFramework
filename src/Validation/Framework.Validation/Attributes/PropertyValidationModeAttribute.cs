@@ -1,4 +1,4 @@
-﻿namespace Framework.Validation;
+﻿namespace Framework.Validation.Attributes;
 
 /// <summary>
 /// Àòðèáóò äëÿ âûáîðî÷íîé âàëèäàöèè ñâîéñòâà

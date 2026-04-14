@@ -5,7 +5,8 @@ using CommonFramework;
 
 using Framework.Application.Domain;
 using Framework.Restriction;
-using Framework.Validation;
+using Framework.Validation.Extensions;
+using Framework.Validation.Validators;
 
 using Microsoft.Extensions.DependencyInjection;
 

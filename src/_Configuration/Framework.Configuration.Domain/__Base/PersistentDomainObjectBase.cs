@@ -1,6 +1,7 @@
 ﻿using Framework.Application.Domain;
 using Framework.Core;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Configuration.Domain;
 
 public abstract class PersistentDomainObjectBase : DomainObjectBase, IEquatable<PersistentDomainObjectBase>, IIdentityObject<Guid>

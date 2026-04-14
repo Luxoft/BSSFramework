@@ -1,4 +1,4 @@
-﻿namespace SampleSystem.Domain;
+﻿namespace SampleSystem.Domain.Employee;
 
 public class TestExceptObject : AuditPersistentDomainObjectBase
 {

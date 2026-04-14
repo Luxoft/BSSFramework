@@ -16,7 +16,7 @@ using SecuritySystem.Credential;
 using SecuritySystem.Services;
 using SecuritySystem.Testing;
 
-namespace Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
+namespace Framework.AutomationCore.ServiceEnvironment;
 
 public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvider, UserCredential? customUserCredential = null)
     where TController : ControllerBase

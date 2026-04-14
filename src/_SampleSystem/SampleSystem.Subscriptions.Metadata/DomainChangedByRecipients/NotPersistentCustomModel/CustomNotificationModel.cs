@@ -2,13 +2,13 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SampleSystem.Domain;
+using SampleSystem.Domain.Directories;
 
 namespace SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
 
-public class CustomNotificationModel(IServiceProvider serviceProvider, Domain.Country country)
+public class CustomNotificationModel(IServiceProvider serviceProvider, Domain.Directories.Country country)
 {
-    public Domain.Country Country { get; } = country;
+    public Domain.Directories.Country Country { get; } = country;
 
     public int LocationsCount { get; } = serviceProvider.GetRequiredService<IQueryableSource>().GetQueryable<Location>().Count(x => x.Country == country);
 }

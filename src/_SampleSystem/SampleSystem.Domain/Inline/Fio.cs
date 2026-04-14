@@ -2,7 +2,7 @@
 
 using Framework.Core;
 using Framework.Restriction;
-using Framework.Validation;
+using Framework.Validation.Attributes;
 
 namespace SampleSystem.Domain.Inline;
 

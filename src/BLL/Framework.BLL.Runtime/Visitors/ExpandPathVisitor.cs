@@ -7,9 +7,6 @@ using CommonFramework.DictionaryCache;
 using Framework.BLL.Services;
 using Framework.Core;
 
-using BinaryExpression = System.Linq.Expressions.BinaryExpression;
-using Expression = System.Linq.Expressions.Expression;
-
 namespace Framework.BLL.Visitors;
 
 public class ExpandPathVisitor(IPropertyPathService propertyPathService) : ExpressionVisitor

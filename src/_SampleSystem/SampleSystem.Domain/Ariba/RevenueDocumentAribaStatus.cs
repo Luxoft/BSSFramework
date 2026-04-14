@@ -2,7 +2,7 @@
 
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Ariba;
 
 [DataContract(Namespace = "")]
 public struct RevenueDocumentAribaStatus(AribaStatusType type, string description, DateTime? date) : IEquatable<RevenueDocumentAribaStatus>

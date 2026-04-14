@@ -10,7 +10,7 @@ public class TestImmutableObj : AuditPersistentDomainObjectBase
 {
     private string testImmutablePrimitiveProperty;
 
-    private Employee testImmutableRefProperty;
+    private Employee.Employee testImmutableRefProperty;
 
     [FixedPropertyValidator]
     public virtual string TestImmutablePrimitiveProperty
@@ -20,7 +20,7 @@ public class TestImmutableObj : AuditPersistentDomainObjectBase
     }
 
     [FixedPropertyValidator]
-    public virtual Employee TestImmutableRefProperty
+    public virtual Employee.Employee TestImmutableRefProperty
     {
         get => this.testImmutableRefProperty;
         set => this.testImmutableRefProperty = value;

@@ -1,4 +1,6 @@
-﻿namespace Framework.Validation;
+﻿using Framework.Validation.Map;
+
+namespace Framework.Validation.Validators.Deep;
 
 /// <summary>
 /// Внутренняя валидация коллекции

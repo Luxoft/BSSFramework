@@ -7,9 +7,12 @@ using Framework.BLL.Domain.Persistent.IdentityObject;
 using Framework.Core;
 using Framework.Relations;
 using Framework.Restriction;
-using Framework.Validation;
+using Framework.Validation.Attributes;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Enums;
+using SampleSystem.Domain.Validation;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Projects;
 
 [System.Diagnostics.DebuggerDisplay("{Code}-{GetProjectTypeName()}")]
 public class Project :

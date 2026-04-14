@@ -5,6 +5,7 @@ using Framework.BLL.Domain.Exceptions;
 using Framework.Core;
 using Framework.Relations;
 using Framework.Validation;
+using Framework.Validation.Extensions;
 
 namespace Framework.Authorization.BLL;
 

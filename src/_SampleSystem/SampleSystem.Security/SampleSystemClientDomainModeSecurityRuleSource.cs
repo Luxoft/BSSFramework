@@ -1,6 +1,6 @@
-﻿using SecuritySystem.SecurityRuleInfo;
+﻿using SampleSystem.Domain;
 
-using SampleSystem.Domain;
+using SecuritySystem.SecurityRuleInfo;
 
 namespace SampleSystem.Security;
 

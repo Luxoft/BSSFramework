@@ -1,5 +1,6 @@
 ﻿using Framework.Relations;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Authorization.Domain;
 
 public class DelegateToItemModel : DomainObjectBase

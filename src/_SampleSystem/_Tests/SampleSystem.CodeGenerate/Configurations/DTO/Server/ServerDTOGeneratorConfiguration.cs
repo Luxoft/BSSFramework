@@ -12,9 +12,12 @@ using Framework.CodeGeneration.FileFactory;
 using Framework.CodeGeneration.GeneratePolicy;
 using Framework.CodeGeneration.ServiceModelGenerator.DTOGeneratePolicy;
 
+using SampleSystem.CodeGenerate.Configurations.Services.Integration;
+using SampleSystem.CodeGenerate.Configurations.Services.Main;
+using SampleSystem.CodeGenerate.Configurations.Services.QueryService;
 using SampleSystem.EventMetadata;
 
-namespace SampleSystem.CodeGenerate.ServerDTO;
+namespace SampleSystem.CodeGenerate.Configurations.DTO.Server;
 
 public class ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environment) : ServerDTOGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {

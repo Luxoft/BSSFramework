@@ -1,14 +1,14 @@
 ﻿using Framework.AutomationCore.Enums;
-using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment.Services;
+using Framework.AutomationCore.ServiceEnvironment.Services;
 using Framework.AutomationCore.Settings;
-using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 using Framework.AutomationCore.Utils.DatabaseUtils;
+using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
 using Microsoft.Extensions.Options;
 
 using SecuritySystem.Testing;
 
-namespace Framework.AutomationCore.ServiceEnvironment;
+namespace Framework.AutomationCore;
 
 public class TestInitializeAndCleanup(
     IOptions<AutomationFrameworkSettings> settings,

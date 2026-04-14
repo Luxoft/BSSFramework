@@ -4,7 +4,7 @@ using Framework.Database;
 using SecuritySystem.Credential;
 using SecuritySystem.Testing;
 
-namespace Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment.Services;
+namespace Framework.AutomationCore.ServiceEnvironment.Services;
 
 public class BssTestingEvaluator<TService>(IServiceEvaluator<TService> serviceEvaluator) : ITestingEvaluator<TService>
     where TService : notnull

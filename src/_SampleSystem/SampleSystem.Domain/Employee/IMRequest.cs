@@ -4,7 +4,7 @@ using Framework.Database.Mapping;
 using Framework.Relations;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Employee;
 
 [BLLViewRole]
 public class IMRequest : Information

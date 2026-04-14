@@ -3,12 +3,11 @@ using Framework.Application.Repository;
 using Framework.BLL;
 using Framework.Database;
 
-using SampleSystem.Domain;
-
 using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
+using SampleSystem.Domain.Employee;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;

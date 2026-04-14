@@ -1,11 +1,11 @@
-﻿using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+﻿using Framework.AutomationCore.RootServiceProviderContainer;
 using Framework.AutomationCore.Utils;
 using Framework.Core;
 
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
 

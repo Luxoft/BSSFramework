@@ -1,5 +1,4 @@
-﻿using Framework.Projection.Lambda._Extensions;
-using Framework.Projection.Lambda.ProjectionSource._Base;
+﻿using Framework.Projection.Lambda.Extensions;
 using Framework.Projection.Lambda.ProjectionSource.AutoProjection;
 
 namespace Framework.Projection.Lambda.ProjectionSource;

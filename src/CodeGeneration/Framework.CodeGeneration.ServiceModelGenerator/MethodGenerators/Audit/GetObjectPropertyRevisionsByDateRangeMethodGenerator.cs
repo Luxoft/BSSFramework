@@ -3,7 +3,6 @@
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Audit;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Audit._Base;
 using Framework.Core;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Audit;

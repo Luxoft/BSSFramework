@@ -1,5 +1,4 @@
-﻿using Framework.Configuration.TestGenerate._Base;
-using Framework.Configuration.TestGenerate.Configurations;
+﻿using Framework.Configuration.TestGenerate.Configurations;
 
 namespace Framework.Configuration.TestGenerate;
 

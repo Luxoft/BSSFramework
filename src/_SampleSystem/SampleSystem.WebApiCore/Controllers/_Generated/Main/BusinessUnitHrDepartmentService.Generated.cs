@@ -19,7 +19,7 @@
         protected virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentFullDTO GetFullBusinessUnitHrDepartmentInternal(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitHrDepartmentBLL bll = evaluateData.Context.Logics.BusinessUnitHrDepartmentFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.BusinessUnitHrDepartment domainObject = bll.GetById(businessUnitHrDepartmentIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BusinessUnitHrDepartment>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            SampleSystem.Domain.BU.BusinessUnitHrDepartment domainObject = bll.GetById(businessUnitHrDepartmentIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnitHrDepartment>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -44,13 +44,13 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentFullDTO> GetFullBusinessUnitHrDepartmentsByIdentsInternal(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO[] businessUnitHrDepartmentIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitHrDepartmentBLL bll = evaluateData.Context.Logics.BusinessUnitHrDepartmentFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(businessUnitHrDepartmentIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BusinessUnitHrDepartment>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(businessUnitHrDepartmentIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnitHrDepartment>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentFullDTO> GetFullBusinessUnitHrDepartmentsInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitHrDepartmentBLL bll = evaluateData.Context.Logics.BusinessUnitHrDepartmentFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BusinessUnitHrDepartment>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnitHrDepartment>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -65,7 +65,7 @@
         protected virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentRichDTO GetRichBusinessUnitHrDepartmentInternal(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitHrDepartmentBLL bll = evaluateData.Context.Logics.BusinessUnitHrDepartmentFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.BusinessUnitHrDepartment domainObject = bll.GetById(businessUnitHrDepartmentIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BusinessUnitHrDepartment>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            SampleSystem.Domain.BU.BusinessUnitHrDepartment domainObject = bll.GetById(businessUnitHrDepartmentIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnitHrDepartment>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -81,7 +81,7 @@
         protected virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentSimpleDTO GetSimpleBusinessUnitHrDepartmentInternal(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitHrDepartmentBLL bll = evaluateData.Context.Logics.BusinessUnitHrDepartmentFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.BusinessUnitHrDepartment domainObject = bll.GetById(businessUnitHrDepartmentIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BusinessUnitHrDepartment>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.BU.BusinessUnitHrDepartment domainObject = bll.GetById(businessUnitHrDepartmentIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnitHrDepartment>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -106,13 +106,13 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentSimpleDTO> GetSimpleBusinessUnitHrDepartmentsByIdentsInternal(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO[] businessUnitHrDepartmentIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitHrDepartmentBLL bll = evaluateData.Context.Logics.BusinessUnitHrDepartmentFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(businessUnitHrDepartmentIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BusinessUnitHrDepartment>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(businessUnitHrDepartmentIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnitHrDepartment>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentSimpleDTO> GetSimpleBusinessUnitHrDepartmentsInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitHrDepartmentBLL bll = evaluateData.Context.Logics.BusinessUnitHrDepartmentFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BusinessUnitHrDepartment>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnitHrDepartment>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -132,7 +132,7 @@
         
         protected virtual void RemoveBusinessUnitHrDepartmentInternal(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdent, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData, SampleSystem.BLL.IBusinessUnitHrDepartmentBLL bll)
         {
-            SampleSystem.Domain.BusinessUnitHrDepartment domainObject = bll.GetById(businessUnitHrDepartmentIdent.Id, true);
+            SampleSystem.Domain.BU.BusinessUnitHrDepartment domainObject = bll.GetById(businessUnitHrDepartmentIdent.Id, true);
             bll.Remove(domainObject);
         }
         
@@ -153,7 +153,7 @@
         
         protected virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO SaveBusinessUnitHrDepartmentInternal(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentStrictDTO businessUnitHrDepartmentStrict, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData, SampleSystem.BLL.IBusinessUnitHrDepartmentBLL bll)
         {
-            SampleSystem.Domain.BusinessUnitHrDepartment domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByIdOrCreate(bll, businessUnitHrDepartmentStrict.Id);
+            SampleSystem.Domain.BU.BusinessUnitHrDepartment domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByIdOrCreate(bll, businessUnitHrDepartmentStrict.Id);
             businessUnitHrDepartmentStrict.MapToDomainObject(evaluateData.MappingService, domainObject);
             bll.Save(domainObject);
             return SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject);

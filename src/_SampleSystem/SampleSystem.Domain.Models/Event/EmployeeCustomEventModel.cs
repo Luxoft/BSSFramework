@@ -1,4 +1,4 @@
-﻿namespace SampleSystem.Domain;
+﻿namespace SampleSystem.Domain.Models.Event;
 
 public class EmployeeCustomEventModel : DomainObjectBase
 {
@@ -6,7 +6,7 @@ public class EmployeeCustomEventModel : DomainObjectBase
     {
     }
 
-    public EmployeeCustomEventModel(Employee employee)
+    public EmployeeCustomEventModel(Employee.Employee employee)
     {
         if (employee == null) { throw new ArgumentNullException(nameof(employee)); }
 

@@ -10,7 +10,7 @@ public static class EvaluateExtension
 {
     public static IAuditCriterion ToCriterion(this Expression expression)
     {
-        var visitor = new Visitor();
+        var visitor = new CriterionVisitor();
         visitor.Visit(expression);
         return visitor.Criterion;
     }

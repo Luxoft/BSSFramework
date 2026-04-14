@@ -2,7 +2,7 @@
 using Framework.CodeGeneration.BLLCoreGenerator;
 using Framework.CodeGeneration.FileFactory;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations.BLLCore;
 
 /// <summary>
 /// Кастомный генератор BLL-core (пример с подменой стандартного BLLInterfaceFileFactory)
@@ -15,7 +15,7 @@ public class SampleSystemBLLCoreFileGenerator(BLLCoreGeneratorConfiguration conf
         {
             if (fileGenerator is ICodeFileFactory<FileType> bllInterfaceFileFactory && bllInterfaceFileFactory.FileType == FileType.BLLInterface)
             {
-                yield return new SampleSystemBLLInterfaceFileFactory(this.Configuration, bllInterfaceFileFactory.DomainType);
+                yield return new SampleSystemBLLInterfaceFileFactory(this.Configuration, bllInterfaceFileFactory.DomainType!);
             }
             else
             {

@@ -4,9 +4,10 @@ using GenericQueryable.Fetching;
 
 using OData.Domain;
 
-using SampleSystem.Domain;
+using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Models.Filters;
-using SampleSystem.Domain.Projections;
+
+using BusinessUnitProgramClass = SampleSystem.Domain.Projections.BusinessUnitProgramClass;
 
 namespace SampleSystem.BLL;
 

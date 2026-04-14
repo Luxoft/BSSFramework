@@ -11,9 +11,9 @@ namespace SampleSystem.Domain.Projections
 {
     
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit))]
     [Framework.Database.Mapping.TableAttribute(Name="BusinessUnit")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
     public partial class BusinessUnitIdentity : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -22,7 +22,7 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
     public abstract partial class CustomBusinessUnitProgramClassBase : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -45,10 +45,10 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit))]
     [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
     [Framework.Database.Mapping.TableAttribute(Name="BusinessUnit")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
     [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel), Framework.Projection.ProjectionFilterTargets.OData)]
     public partial class BusinessUnitProgramClass : SampleSystem.Domain.Projections.CustomBusinessUnitProgramClassBase
     {
@@ -124,9 +124,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnitType))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitType))]
     [Framework.Database.Mapping.TableAttribute(Name="BusinessUnitType")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnitType), Framework.Projection.ProjectionRole.AutoNode)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitType), Framework.Projection.ProjectionRole.AutoNode)]
     public partial class BusinessUnitProgramClass_AutoProp_BusinessUnitType : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -135,18 +135,18 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Directories.CompanyLegalEntity))]
     [Framework.BLL.Domain.Attributes.ViewDomainObjectAttribute(typeof(SampleSystem.Security.SampleSystemSecurityOperation), "BusinessUnitEdit")]
     [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
     [Framework.Database.Mapping.TableAttribute(Name="CompanyLegalEntity")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity), Framework.Projection.ProjectionRole.Default)]
-    [SampleSystem.Domain.ExampleCustomProjectionAttribute()]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Directories.CompanyLegalEntity), Framework.Projection.ProjectionRole.Default)]
+    [SampleSystem.Domain._CustomProjectionAttribute.ExampleCustomProjectionAttribute()]
     public partial class CustomCompanyLegalEntity : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
         private string aribaStatusDescription;
         
-        private SampleSystem.Domain.AribaStatusType aribaStatusType;
+        private SampleSystem.Domain.Ariba.AribaStatusType aribaStatusType;
         
         private SampleSystem.Domain.Projections.CustomTestObjForNested baseObj;
         
@@ -176,7 +176,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="aribaStatusType", ExternalTableName="LegalEntityBase")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual SampleSystem.Domain.AribaStatusType AribaStatusType
+        public virtual SampleSystem.Domain.Ariba.AribaStatusType AribaStatusType
         {
             get
             {
@@ -241,9 +241,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.TestObjForNested))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Directories.TestObjForNested))]
     [Framework.Database.Mapping.TableAttribute(Name="TestObjForNested")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.TestObjForNested), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Directories.TestObjForNested), Framework.Projection.ProjectionRole.Default)]
     public partial class CustomTestObjForNested : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -278,9 +278,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit))]
     [Framework.Database.Mapping.TableAttribute(Name="BusinessUnit")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
     public partial class HerBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -315,9 +315,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnitEmployeeRole))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitEmployeeRole))]
     [Framework.Database.Mapping.TableAttribute(Name="BusinessUnitEmployeeRole")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnitEmployeeRole), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitEmployeeRole), Framework.Projection.ProjectionRole.Default)]
     public partial class MiniBusinessUnitEmployeeRole : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -403,7 +403,7 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
     public abstract partial class CustomTestBusinessUnitBase : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -448,10 +448,10 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit))]
     [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
     [Framework.Database.Mapping.TableAttribute(Name="BusinessUnit")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
     [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel), Framework.Projection.ProjectionFilterTargets.ODataTree)]
     public partial class TestBusinessUnit : SampleSystem.Domain.Projections.CustomTestBusinessUnitBase
     {
@@ -539,9 +539,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit))]
     [Framework.Database.Mapping.TableAttribute(Name="BusinessUnit")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.AutoNode)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), Framework.Projection.ProjectionRole.AutoNode)]
     public partial class TestBusinessUnit_AutoProp_Parent : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -564,9 +564,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnitType))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitType))]
     [Framework.Database.Mapping.TableAttribute(Name="BusinessUnitType")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnitType), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitType), Framework.Projection.ProjectionRole.Default)]
     public partial class TestBusinessUnitType : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -625,10 +625,10 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.HRDepartment))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartment))]
     [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
     [Framework.Database.Mapping.TableAttribute(Name="HRDepartment")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.HRDepartment), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartment), Framework.Projection.ProjectionRole.Default)]
     public partial class TestDepartment : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -688,9 +688,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Location))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Directories.Location))]
     [Framework.Database.Mapping.TableAttribute(Name="Location")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Location), Framework.Projection.ProjectionRole.AutoNode)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Directories.Location), Framework.Projection.ProjectionRole.AutoNode)]
     public partial class TestDepartment_AutoProp_Location : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -713,11 +713,11 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee.Employee))]
     [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
     [Framework.Database.Mapping.TableAttribute(Name="Employee")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.TestEmployeeFilter), (Framework.Projection.ProjectionFilterTargets.Collection | Framework.Projection.ProjectionFilterTargets.OData))]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee.Employee), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter), (Framework.Projection.ProjectionFilterTargets.Collection | Framework.Projection.ProjectionFilterTargets.OData))]
     [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.EmployeeFilterModel), Framework.Projection.ProjectionFilterTargets.Collection)]
     [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel), Framework.Projection.ProjectionFilterTargets.Single)]
     public partial class TestEmployee : SampleSystem.Domain.PersistentDomainObjectBase
@@ -903,9 +903,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BusinessUnit))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit))]
     [Framework.Database.Mapping.TableAttribute(Name="BusinessUnit")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.AutoNode)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), Framework.Projection.ProjectionRole.AutoNode)]
     public partial class TestEmployee_AutoProp_CoreBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -955,9 +955,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.EmployeePosition))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee.EmployeePosition))]
     [Framework.Database.Mapping.TableAttribute(Name="EmployeePosition")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.EmployeePosition), Framework.Projection.ProjectionRole.AutoNode)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee.EmployeePosition), Framework.Projection.ProjectionRole.AutoNode)]
     public partial class TestEmployee_AutoProp_Position : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -980,9 +980,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee.Employee))]
     [Framework.Database.Mapping.TableAttribute(Name="Employee")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee), Framework.Projection.ProjectionRole.AutoNode)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee.Employee), Framework.Projection.ProjectionRole.AutoNode)]
     public partial class TestEmployee_AutoProp_Ppm : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -1005,9 +1005,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.EmployeeRole))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRole))]
     [Framework.Database.Mapping.TableAttribute(Name="EmployeeRole")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.EmployeeRole), Framework.Projection.ProjectionRole.AutoNode)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRole), Framework.Projection.ProjectionRole.AutoNode)]
     public partial class TestEmployee_AutoProp_Role : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -1030,10 +1030,10 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.IMRequest))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee.IMRequest))]
     [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
     [Framework.Database.Mapping.TableAttribute(Name="IMRequest")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.IMRequest), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee.IMRequest), Framework.Projection.ProjectionRole.Default)]
     public partial class TestIMRequest : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -1072,9 +1072,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.IMRequestDetail))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee.IMRequestDetail))]
     [Framework.Database.Mapping.TableAttribute(Name="IMRequestDetail")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.IMRequestDetail), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee.IMRequestDetail), Framework.Projection.ProjectionRole.Default)]
     public partial class TestIMRequestDetail : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -1097,10 +1097,10 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Location))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Directories.Location))]
     [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
     [Framework.Database.Mapping.TableAttribute(Name="Location")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Location), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Directories.Location), Framework.Projection.ProjectionRole.Default)]
     public partial class TestLocation : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -1136,7 +1136,7 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Location), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Directories.Location), Framework.Projection.ProjectionRole.Default)]
     public abstract partial class CustomTestLocationCollectionPropertiesBase : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -1173,10 +1173,10 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Location))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Directories.Location))]
     [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
     [Framework.Database.Mapping.TableAttribute(Name="Location")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Location), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Directories.Location), Framework.Projection.ProjectionRole.Default)]
     public partial class TestLocationCollectionProperties : SampleSystem.Domain.Projections.CustomTestLocationCollectionPropertiesBase
     {
         
@@ -1210,10 +1210,10 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.TestSecurityObjItem))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecurityObjItem))]
     [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
     [Framework.Database.Mapping.TableAttribute(Name="TestSecurityObjItem")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.TestSecurityObjItem), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecurityObjItem), Framework.Projection.ProjectionRole.Default)]
     public partial class TestSecurityObjItemProjection : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -1235,9 +1235,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee.Employee))]
     [Framework.Database.Mapping.TableAttribute(Name="Employee")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee.Employee), Framework.Projection.ProjectionRole.Default)]
     public partial class VisualEmployee : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -1273,9 +1273,9 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
-    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Project))]
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Projects.Project))]
     [Framework.Database.Mapping.TableAttribute(Name="Project")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Project), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Projects.Project), Framework.Projection.ProjectionRole.Default)]
     public partial class VisualProject : SampleSystem.Domain.PersistentDomainObjectBase
     {
         

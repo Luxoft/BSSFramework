@@ -5,8 +5,6 @@ using NHibernate.Dialect.Schema;
 using NHibernate.Engine;
 using NHibernate.Mapping;
 
-using Table = NHibernate.Mapping.Table;
-
 namespace Framework.Database.NHibernate.DBGenerator.AuditDBGenerator;
 
 class AuditTableGenerateContext(

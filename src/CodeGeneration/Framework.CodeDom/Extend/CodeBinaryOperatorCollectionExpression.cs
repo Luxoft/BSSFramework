@@ -18,5 +18,5 @@ public class CodeBinaryOperatorCollectionExpression : CodeExpression
 
     public CodeBinaryOperatorType Operator { get; set; }
 
-    public CodeExpressionCollection Expressions { get; set; } = new CodeExpressionCollection();
+    public CodeExpressionCollection Expressions { get; set; } = new();
 }

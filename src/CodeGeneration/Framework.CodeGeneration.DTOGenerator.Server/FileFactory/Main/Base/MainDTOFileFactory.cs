@@ -6,12 +6,10 @@ using CommonFramework;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
 using Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService.Base;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
-using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.FileFactory;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
-using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
-using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
-using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
 using Framework.CodeGeneration.DTOGenerator.Server.Members.MapToDomainObject;
 using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 

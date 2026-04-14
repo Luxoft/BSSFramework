@@ -1,4 +1,4 @@
-﻿namespace SampleSystem.Domain;
+﻿namespace SampleSystem.Domain.Models.Filters.Projection;
 
 public enum SampleEnumForStructDependency
 {

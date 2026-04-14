@@ -1,6 +1,5 @@
 ﻿using System.Collections.Immutable;
 
-using Framework.Core;
 using Framework.Subscriptions.Domain;
 
 namespace Framework.Subscriptions.Metadata;
@@ -16,7 +15,7 @@ public record NotificationMessageGenerationInfo<TRenderingObject>(ImmutableHashS
 
     private static IEnumerable<string> CreateMany(string emails) =>
 
-        from email in emails.TrimNull().Split([',', ';'], StringSplitOptions.RemoveEmptyEntries)
+        from email in emails.Trim().Split([',', ';'], StringSplitOptions.RemoveEmptyEntries)
 
         select email.Trim();
 }

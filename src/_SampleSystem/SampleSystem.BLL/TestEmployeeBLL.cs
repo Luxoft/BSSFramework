@@ -2,8 +2,8 @@
 
 using OData.Domain;
 
-using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Filters;
+using SampleSystem.Domain.Models.Filters.Projection;
 using SampleSystem.Domain.Projections;
 
 namespace SampleSystem.BLL;

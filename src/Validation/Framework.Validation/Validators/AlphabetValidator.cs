@@ -2,7 +2,7 @@
 
 using Framework.Core;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Validators;
 
 public class AlphabetValidator : IPropertyValidator<object, string>
 {

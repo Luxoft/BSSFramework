@@ -8,7 +8,7 @@ using Framework.Notification.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.Notification.Extensions;
+namespace Framework.Notification.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {

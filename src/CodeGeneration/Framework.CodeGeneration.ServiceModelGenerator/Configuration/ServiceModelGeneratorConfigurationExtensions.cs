@@ -1,7 +1,7 @@
 ﻿using System.CodeDom;
 using Framework.BLL;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 

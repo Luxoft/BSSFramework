@@ -8,9 +8,10 @@ using Framework.CodeDom;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
-using Framework.CodeGeneration.BLLGenerator.FileFactory.__Base;
 using Framework.Core;
 using Framework.Validation;
+using Framework.Validation.Map;
+using Framework.Validation.Validators;
 
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 

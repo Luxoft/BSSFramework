@@ -1,4 +1,4 @@
-﻿namespace Framework.Validation;
+﻿namespace Framework.Validation.Validators;
 
 public interface IElementValidator<in TValidationContext>
 {

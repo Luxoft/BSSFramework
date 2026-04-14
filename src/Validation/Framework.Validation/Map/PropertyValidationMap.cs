@@ -5,8 +5,10 @@ using CommonFramework;
 
 using Framework.Core.Visitors;
 using Framework.Relations;
+using Framework.Validation.Extensions;
+using Framework.Validation.Validators;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Map;
 
 /// <summary>
 /// Метаданные валидируемого свойства

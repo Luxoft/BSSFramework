@@ -3,10 +3,11 @@ using Framework.BLL.Domain.ServiceRole;
 using Framework.Core;
 using Framework.Relations;
 using Framework.Restriction;
+using SampleSystem.Domain.BU;
 
 using SecuritySystem;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.MU;
 
 [BLLViewRole, BLLSaveRole(AllowCreate = false)]
 public class ManagementUnit :

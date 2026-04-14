@@ -11,11 +11,11 @@ using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
-
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
 using SampleSystem.Domain;
+using SampleSystem.Domain.Models.Change._Base;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations.Services.Main;
 
 /// <summary>
 /// Генератор кастомного фасадного метода по ComplexChange-модели

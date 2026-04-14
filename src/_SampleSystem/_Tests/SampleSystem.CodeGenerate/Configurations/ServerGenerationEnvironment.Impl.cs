@@ -6,7 +6,7 @@ using Framework.CodeGeneration.ProjectionGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Audit;
 using Framework.Database.NHibernate.DALGenerator.Configuration;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations;
 
 public partial class ServerGenerationEnvironment :
         IBLLCoreGenerationEnvironment,

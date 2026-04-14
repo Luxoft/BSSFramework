@@ -1,6 +1,5 @@
 ﻿using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.CodeGeneration.BLLGenerator.FileFactory;
-using Framework.CodeGeneration.BLLGenerator.FileFactory.DomainBLL;
 
 namespace Framework.CodeGeneration.BLLGenerator;
 

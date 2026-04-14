@@ -1,7 +1,9 @@
 ﻿using Framework.BLL.Domain.ServiceRole;
 using Framework.Relations;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.Directories;
+
+namespace SampleSystem.Domain.TestDeserializedAuth;
 
 [BLLViewRole]
 public class TestPlainAuthObject : BaseDirectory, IMaster<TestItemAuthObject>
@@ -10,7 +12,7 @@ public class TestPlainAuthObject : BaseDirectory, IMaster<TestItemAuthObject>
 
     private Location location;
 
-    private Employee employee;
+    private Employee.Employee employee;
 
 
     public virtual Location Location
@@ -19,7 +21,7 @@ public class TestPlainAuthObject : BaseDirectory, IMaster<TestItemAuthObject>
         set => this.location = value;
     }
 
-    public virtual Employee Employee
+    public virtual Employee.Employee Employee
     {
         get => this.employee;
         set => this.employee = value;

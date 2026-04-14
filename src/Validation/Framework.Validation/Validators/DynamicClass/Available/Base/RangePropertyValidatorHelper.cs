@@ -1,29 +1,20 @@
 ﻿using Framework.Core;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Validators.DynamicClass.Available.Base;
 
 public static class RangePropertyValidatorHelper
 {
-    public static readonly RangePropertyValidatorInfo<DateTime, DateTime> DateTime = new RangePropertyValidatorInfo<DateTime, DateTime>((range, value) => range.ToPeriod().Contains(value));
+    public static readonly RangePropertyValidatorInfo<DateTime, DateTime> DateTime = new((range, value) => range.ToPeriod().Contains(value));
 
-    public static readonly RangePropertyValidatorInfo<DateTime, Period> Period = new RangePropertyValidatorInfo<DateTime, Period>((range, value) => range.ToPeriod().Contains(value));
+    public static readonly RangePropertyValidatorInfo<DateTime, Period> Period = new((range, value) => range.ToPeriod().Contains(value));
 
-    public static readonly RangePropertyValidatorInfo<decimal, decimal> Decimal = new RangePropertyValidatorInfo<decimal, decimal>((range, value) => range.Min <= value && value <= range.Max);
+    public static readonly RangePropertyValidatorInfo<decimal, decimal> Decimal = new((range, value) => range.Min <= value && value <= range.Max);
 
 
-    public class RangePropertyValidatorInfo<TRange, TProperty>
-            where TProperty : struct
+    public class RangePropertyValidatorInfo<TRange, TProperty>(Func<Range<TRange>, TProperty, bool> availableFunc)
+        where TProperty : struct
     {
-        public readonly Func<Range<TRange>, TProperty, bool> AvailableFunc;
-
-
-        public RangePropertyValidatorInfo(Func<Range<TRange>, TProperty, bool> availableFunc)
-        {
-            if (availableFunc == null) throw new ArgumentNullException(nameof(availableFunc));
-
-            this.AvailableFunc = availableFunc;
-        }
-
+        public readonly Func<Range<TRange>, TProperty, bool> AvailableFunc = availableFunc;
 
         public RangePropertyValidator<TSource, TProperty, TRange> Create<TSource>(Range<TRange> availableRange)
         {

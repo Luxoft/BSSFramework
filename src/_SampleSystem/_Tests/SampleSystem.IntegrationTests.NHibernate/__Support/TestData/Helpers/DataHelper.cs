@@ -1,11 +1,16 @@
-﻿using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
-using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
+﻿using Framework.AutomationCore.RootServiceProviderContainer;
+using Framework.AutomationCore.ServiceEnvironment;
 using Framework.AutomationCore.Utils;
 using Framework.BLL;
 using Framework.Core;
 
-using SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.Employee;
+using SampleSystem.Domain.Enums;
+using SampleSystem.Domain.HRDepartment;
 using SampleSystem.Domain.Inline;
+using SampleSystem.Domain.MU;
 using SampleSystem.Generated.DTO;
 using SampleSystem.WebApiCore.Controllers.Main;
 
@@ -169,7 +174,7 @@ public partial class DataHelper
         var possibleParentsList =
                 new List<BusinessUnitTypeLinkWithPossibleParentStrictDTO>
                 {
-                        new BusinessUnitTypeLinkWithPossibleParentStrictDTO
+                        new()
                         {
                                 BusinessUnitType = type.ToIdentityDTO(), PossibleParent = type.ToIdentityDTO()
                         }
@@ -195,7 +200,7 @@ public partial class DataHelper
             var transferToList =
                     new List<BusinessUnitTypeLinkWithTransferToStrictDTO>
                     {
-                            new BusinessUnitTypeLinkWithTransferToStrictDTO
+                            new()
                             {
                                     BusinessUnitType = type.ToIdentityDTO(), TransferTo = type.ToIdentityDTO()
                             }

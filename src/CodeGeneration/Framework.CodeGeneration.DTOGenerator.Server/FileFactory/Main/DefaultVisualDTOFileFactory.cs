@@ -1,6 +1,5 @@
 ﻿using System.CodeDom;
-
-using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.FileFactory;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main.Base;

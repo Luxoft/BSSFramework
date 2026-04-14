@@ -1,4 +1,4 @@
-﻿using Framework.AutomationCore.ServiceEnvironment.WebApi;
+﻿using Framework.AutomationCore.WebApi;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 

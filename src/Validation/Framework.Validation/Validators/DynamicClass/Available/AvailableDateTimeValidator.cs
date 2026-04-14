@@ -1,6 +1,7 @@
 ﻿using Framework.Core;
+using Framework.Validation.Validators.DynamicClass.Available.Base;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Validators.DynamicClass.Available;
 
 public class AvailableDateTimeValidator : RangeClassValidator<DateTime, DateTime>
 {
@@ -12,5 +13,5 @@ public class AvailableDateTimeValidator : RangeClassValidator<DateTime, DateTime
     protected override Func<Range<DateTime>, DateTime, bool> IsValidValueFunc { get; } = RangePropertyValidatorHelper.DateTime.AvailableFunc;
 
 
-    public static AvailableDateTimeValidator Value { get; } = new AvailableDateTimeValidator();
+    public static AvailableDateTimeValidator Value { get; } = new();
 }

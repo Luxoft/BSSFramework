@@ -9,7 +9,6 @@ using Framework.BLL.Domain.Persistent;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
-using Framework.CodeGeneration.BLLCoreGenerator.FileFactory.__Base;
 using Framework.Core;
 using Framework.FileGeneration.Configuration;
 using Framework.Projection;

@@ -1,5 +1,5 @@
 ﻿using Framework.Database;
-using Framework.Database.NHibernate._MappingSettings;
+using Framework.Database.NHibernate.Mapping;
 
 using SampleSystem.AuditDomain;
 

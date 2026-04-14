@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 
 using SampleSystem.BLL;
 using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
 using SampleSystem.Events;
 using SampleSystem.Generated.DTO;
 

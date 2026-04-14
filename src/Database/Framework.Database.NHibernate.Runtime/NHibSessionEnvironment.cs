@@ -1,6 +1,6 @@
 ﻿using CommonFramework.Auth;
 using Framework.Core;
-using Framework.Database.NHibernate._MappingSettings;
+using Framework.Database.NHibernate.Mapping;
 using Framework.Database.NHibernate.SqlExceptionProcessors;
 
 using GenericQueryable.NHibernate;

@@ -42,14 +42,14 @@ public class AuditPropertyPair : AuditPropertyPair<IAuditObject>
 
 
     public static AuditPropertyPair
-        GetCreateAuditProperty(ICurrentUser currentUser, TimeProvider timeProvider) => new AuditPropertyPair(
+        GetCreateAuditProperty(ICurrentUser currentUser, TimeProvider timeProvider) => new(
         currentUser,
         timeProvider,
         obj => obj.CreatedBy,
         obj => obj.CreateDate);
 
     public static AuditPropertyPair
-        GetModifyAuditProperty(ICurrentUser currentUser, TimeProvider timeProvider) => new AuditPropertyPair(
+        GetModifyAuditProperty(ICurrentUser currentUser, TimeProvider timeProvider) => new(
         currentUser,
         timeProvider,
         obj => obj.ModifiedBy,

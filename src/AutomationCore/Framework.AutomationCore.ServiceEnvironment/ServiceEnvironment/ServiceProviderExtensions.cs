@@ -5,7 +5,7 @@ using CommonFramework.Auth;
 using CommonFramework.DependencyInjection;
 
 using Framework.Application.Jobs;
-using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment.Services;
+using Framework.AutomationCore.ServiceEnvironment.Services;
 using Framework.AutomationCore.Settings;
 using Framework.Infrastructure.Middleware;
 using Framework.Infrastructure.WebApiExceptionExpander;
@@ -19,7 +19,7 @@ using SecuritySystem.Credential;
 using SecuritySystem.Testing;
 using SecuritySystem.Testing.DependencyInjection;
 
-namespace Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
+namespace Framework.AutomationCore.ServiceEnvironment;
 
 public static class ServiceProviderExtensions
 {

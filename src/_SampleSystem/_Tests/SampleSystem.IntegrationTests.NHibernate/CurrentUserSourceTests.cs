@@ -4,7 +4,7 @@ using Framework.Database;
 
 using SecuritySystem.UserSource;
 
-using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;

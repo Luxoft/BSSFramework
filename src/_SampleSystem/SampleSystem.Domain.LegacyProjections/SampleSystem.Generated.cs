@@ -12,8 +12,8 @@ namespace SampleSystem.Domain.Projections
     
     
     [Framework.Database.Mapping.TableAttribute(Name="BusinessUnit")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.SecurityNode)]
-    public partial class SecurityBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase, SecuritySystem.ISecurityContext, SampleSystem.Domain.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), Framework.Projection.ProjectionRole.SecurityNode)]
+    public partial class SecurityBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase, SecuritySystem.ISecurityContext, SampleSystem.Domain.BU.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>
     {
         
         protected SecurityBusinessUnit()
@@ -21,7 +21,7 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("")]
-        SampleSystem.Domain.Projections.SecurityBusinessUnit SampleSystem.Domain.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>.BusinessUnit
+        SampleSystem.Domain.Projections.SecurityBusinessUnit SampleSystem.Domain.BU.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>.BusinessUnit
         {
             get
             {
@@ -31,8 +31,8 @@ namespace SampleSystem.Domain.Projections
     }
     
     [Framework.Database.Mapping.TableAttribute(Name="Employee")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee), Framework.Projection.ProjectionRole.SecurityNode)]
-    public partial class SecurityEmployee : SampleSystem.Domain.PersistentDomainObjectBase, SecuritySystem.ISecurityContext, SampleSystem.Domain.IEmployeeSecurity<SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation>, SampleSystem.Domain.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>, SampleSystem.Domain.IDepartmentSecurityElement<SampleSystem.Domain.Projections.SecurityHRDepartment>, SampleSystem.Domain.IEmployeeSecurityElement<SampleSystem.Domain.Projections.SecurityEmployee, SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation>, SampleSystem.Domain.IEmployeeSecurityElement<SampleSystem.Domain.Projections.SecurityEmployee>
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee.Employee), Framework.Projection.ProjectionRole.SecurityNode)]
+    public partial class SecurityEmployee : SampleSystem.Domain.PersistentDomainObjectBase, SecuritySystem.ISecurityContext, SampleSystem.Domain.Employee.IEmployeeSecurity<SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation>, SampleSystem.Domain.BU.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>, SampleSystem.Domain.HRDepartment.IDepartmentSecurityElement<SampleSystem.Domain.Projections.SecurityHRDepartment>, SampleSystem.Domain.Employee.IEmployeeSecurityElement<SampleSystem.Domain.Projections.SecurityEmployee, SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation>, SampleSystem.Domain.Employee.IEmployeeSecurityElement<SampleSystem.Domain.Projections.SecurityEmployee>
     {
         
         private SampleSystem.Domain.Projections.SecurityBusinessUnit businessUnit_Security;
@@ -46,7 +46,7 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("BusinessUnit_Security")]
-        SampleSystem.Domain.Projections.SecurityBusinessUnit SampleSystem.Domain.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>.BusinessUnit
+        SampleSystem.Domain.Projections.SecurityBusinessUnit SampleSystem.Domain.BU.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>.BusinessUnit
         {
             get
             {
@@ -67,7 +67,7 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Department_Security")]
-        SampleSystem.Domain.Projections.SecurityHRDepartment SampleSystem.Domain.IDepartmentSecurityElement<SampleSystem.Domain.Projections.SecurityHRDepartment>.Department
+        SampleSystem.Domain.Projections.SecurityHRDepartment SampleSystem.Domain.HRDepartment.IDepartmentSecurityElement<SampleSystem.Domain.Projections.SecurityHRDepartment>.Department
         {
             get
             {
@@ -88,7 +88,7 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("")]
-        SampleSystem.Domain.Projections.SecurityEmployee SampleSystem.Domain.IEmployeeSecurityElement<SampleSystem.Domain.Projections.SecurityEmployee>.Employee
+        SampleSystem.Domain.Projections.SecurityEmployee SampleSystem.Domain.Employee.IEmployeeSecurityElement<SampleSystem.Domain.Projections.SecurityEmployee>.Employee
         {
             get
             {
@@ -97,7 +97,7 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Login_Security")]
-        string SampleSystem.Domain.IEmployeeSecurity<SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation>.Login
+        string SampleSystem.Domain.Employee.IEmployeeSecurity<SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation>.Login
         {
             get
             {
@@ -120,8 +120,8 @@ namespace SampleSystem.Domain.Projections
     }
     
     [Framework.Database.Mapping.TableAttribute(Name="HRDepartment")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.HRDepartment), Framework.Projection.ProjectionRole.SecurityNode)]
-    public partial class SecurityHRDepartment : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ILocationSecurityElement<SampleSystem.Domain.Projections.SecurityLocation>
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartment), Framework.Projection.ProjectionRole.SecurityNode)]
+    public partial class SecurityHRDepartment : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Directories.ILocationSecurityElement<SampleSystem.Domain.Projections.SecurityLocation>
     {
         
         private SampleSystem.Domain.Projections.SecurityLocation location_Security;
@@ -131,7 +131,7 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Location_Security")]
-        SampleSystem.Domain.Projections.SecurityLocation SampleSystem.Domain.ILocationSecurityElement<SampleSystem.Domain.Projections.SecurityLocation>.Location
+        SampleSystem.Domain.Projections.SecurityLocation SampleSystem.Domain.Directories.ILocationSecurityElement<SampleSystem.Domain.Projections.SecurityLocation>.Location
         {
             get
             {
@@ -153,7 +153,7 @@ namespace SampleSystem.Domain.Projections
     }
     
     [Framework.Database.Mapping.TableAttribute(Name="Location")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Location), Framework.Projection.ProjectionRole.SecurityNode)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Directories.Location), Framework.Projection.ProjectionRole.SecurityNode)]
     public partial class SecurityLocation : SampleSystem.Domain.PersistentDomainObjectBase, SecuritySystem.ISecurityContext
     {
         
@@ -165,7 +165,7 @@ namespace SampleSystem.Domain.Projections
     [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
     [Framework.Database.Mapping.InlineBaseTypeMappingAttribute()]
     [Framework.Database.Mapping.TableAttribute(Name="Employee")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee), Framework.Projection.ProjectionRole.Default)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee.Employee), Framework.Projection.ProjectionRole.Default)]
     [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.EmployeeFilterModel), Framework.Projection.ProjectionFilterTargets.Collection)]
     public partial class TestLegacyEmployee : SampleSystem.Domain.Projections.SecurityEmployee
     {
@@ -226,7 +226,7 @@ namespace SampleSystem.Domain.Projections
     }
     
     [Framework.Database.Mapping.TableAttribute(Name="EmployeeRole")]
-    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.EmployeeRole), Framework.Projection.ProjectionRole.AutoNode)]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRole), Framework.Projection.ProjectionRole.AutoNode)]
     public partial class TestLegacyEmployee_AutoProp_Role : SampleSystem.Domain.PersistentDomainObjectBase
     {
         

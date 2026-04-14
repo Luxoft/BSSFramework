@@ -9,10 +9,4 @@ public partial class BLLCoreGeneratorConfiguration(ConfigurationGenerationEnviro
     public override Type FilterModelType { get; } = typeof(DomainObjectFilterModel<>);
 
     public override Type CreateModelType { get; } = typeof(DomainObjectCreateModel<>);
-
-    public override Type FormatModelType { get; } = typeof(DomainObjectFormatModel<>);
-
-    public override Type ChangeModelType { get; } = typeof(DomainObjectChangeModel<>);
-
-    public override Type ContextFilterModelType { get; } = typeof(DomainObjectContextFilterModel<>);
 }

@@ -5,7 +5,7 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.BLL;
-using Framework.BLL.Domain.ServiceRole.Base;
+using Framework.BLL.Domain.ServiceRole;
 using Framework.BLL.Services;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.Configuration;

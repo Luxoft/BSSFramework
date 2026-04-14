@@ -3,6 +3,7 @@ using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Authorization.WebApi;
 
 public partial class AuthMainController

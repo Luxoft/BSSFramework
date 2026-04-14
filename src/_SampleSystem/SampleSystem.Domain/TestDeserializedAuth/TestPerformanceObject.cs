@@ -1,13 +1,17 @@
 ﻿using Framework.BLL.Domain.ServiceRole;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.MU;
+
+namespace SampleSystem.Domain.TestDeserializedAuth;
 
 [BLLViewRole]
 public class TestPerformanceObject : BaseDirectory
 {
     private Location location;
 
-    private Employee employee;
+    private Employee.Employee employee;
 
     private BusinessUnit businessUnit;
 
@@ -19,7 +23,7 @@ public class TestPerformanceObject : BaseDirectory
         set => this.location = value;
     }
 
-    public virtual Employee Employee
+    public virtual Employee.Employee Employee
     {
         get => this.employee;
         set => this.employee = value;

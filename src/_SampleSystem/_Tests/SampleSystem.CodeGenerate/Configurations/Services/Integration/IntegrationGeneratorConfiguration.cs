@@ -1,5 +1,5 @@
 ﻿using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Integration;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations.Services.Integration;
 
 public class IntegrationGeneratorConfiguration(ServerGenerationEnvironment environment) : IntegrationGeneratorConfigurationBase<ServerGenerationEnvironment>(environment);

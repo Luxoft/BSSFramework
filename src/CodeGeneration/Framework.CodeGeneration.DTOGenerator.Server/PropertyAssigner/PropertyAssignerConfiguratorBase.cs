@@ -1,12 +1,11 @@
 ﻿using System.CodeDom;
 using System.Reflection;
-using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.PropertyAssigner;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
-using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.__Base;
-using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.DomainObjectToSecurity;
-using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.ExpandMaybe;
-using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.SecurityToDomainObject.Strict;
-using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner._Security.SecurityToDomainObject.Update;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.Security.DomainObjectToSecurity;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.Security.ExpandMaybe;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.Security.SecurityToDomainObject.Strict;
+using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.Security.SecurityToDomainObject.Update;
 using Framework.FileGeneration.Configuration;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;

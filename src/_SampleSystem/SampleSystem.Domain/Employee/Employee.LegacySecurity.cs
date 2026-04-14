@@ -1,9 +1,13 @@
 ﻿using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.Persistent.Attributes;
 
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.HRDepartment;
+
 using SecuritySystem;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Employee;
 
 [SecurityNode]
 public interface IEmployeeSecurityElement<out TEmployee>
@@ -28,7 +32,7 @@ public interface IEmployeeSecurity<out TBusinessUnit, out TDepartment, out TLoca
     string Login { get; }
 }
 
-public partial class Employee : IEmployeeSecurity<BusinessUnit, HRDepartment, Location>, IEmployeeSecurityElement<Employee, BusinessUnit, HRDepartment, Location>
+public partial class Employee : IEmployeeSecurity<BusinessUnit, HRDepartment.HRDepartment, Location>, IEmployeeSecurityElement<Employee, BusinessUnit, HRDepartment.HRDepartment, Location>
 {
     [ExpandPath("")]
     Employee IEmployeeSecurityElement<Employee>.Employee => this;
@@ -37,5 +41,5 @@ public partial class Employee : IEmployeeSecurity<BusinessUnit, HRDepartment, Lo
     BusinessUnit IBusinessUnitSecurityElement<BusinessUnit>.BusinessUnit => this.CoreBusinessUnit;
 
     [ExpandPath(nameof(HRDepartment))]
-    HRDepartment IDepartmentSecurityElement<HRDepartment>.Department => this.HRDepartment;
+    HRDepartment.HRDepartment IDepartmentSecurityElement<HRDepartment.HRDepartment>.Department => this.HRDepartment;
 }

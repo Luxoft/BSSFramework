@@ -46,7 +46,7 @@
         {
             SampleSystem.BLL.IIntegrationVersionContainer1BLL bll = evaluateData.Context.Logics.IntegrationVersionContainer1;
             evaluateData.Context.Authorization.SecuritySystem.CheckAccessAsync(SecuritySystem.SecurityRole.SystemIntegration);
-            SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel integrationSaveModel = integrationVersionContainer1IntegrationSaveModel.ToDomainObject(evaluateData.MappingService);
+            SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel integrationSaveModel = integrationVersionContainer1IntegrationSaveModel.ToDomainObject(evaluateData.MappingService);
             SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 domainObject = integrationSaveModel.SavingObject;
             if ((domainObject.IntegrationVersion < integrationVersionContainer1IntegrationSaveModel.SavingObject.IntegrationVersion))
             {

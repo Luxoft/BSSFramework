@@ -1,5 +1,6 @@
 ﻿using Framework.Restriction;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Authorization.Domain;
 
 public class PermissionDirectFilterModel : DomainObjectContextFilterModel<Permission>

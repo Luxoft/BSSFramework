@@ -8,6 +8,7 @@ using SecuritySystem.UserSource;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;

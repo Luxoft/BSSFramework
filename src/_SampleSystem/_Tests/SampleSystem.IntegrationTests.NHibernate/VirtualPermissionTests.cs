@@ -1,7 +1,8 @@
 ﻿using Framework.Application;
 using Framework.Database;
 
-using SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Enums;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 

@@ -2,9 +2,8 @@
 
 using Framework.Core;
 using Framework.Database.Mapping;
-using Framework.Projection.Lambda._Extensions;
+using Framework.Projection.Lambda.Extensions;
 using Framework.Projection.Lambda.ProjectionBuilder;
-using Framework.Projection.Lambda.ProjectionSource._Base;
 using Framework.Relations;
 
 namespace Framework.Projection.Lambda.ProjectionSource;

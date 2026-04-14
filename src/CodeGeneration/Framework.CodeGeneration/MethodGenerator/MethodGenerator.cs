@@ -9,7 +9,7 @@ namespace Framework.CodeGeneration.MethodGenerator;
 
 public abstract class MethodGenerator : IMethodGenerator, IMethodGeneratorInfo
 {
-    private static readonly CodeMemberMethod DefaultMethod = new CodeMemberMethod();
+    private static readonly CodeMemberMethod DefaultMethod = new();
 
 
     private readonly Lazy<ReadOnlyCollection<CodeParameterDeclarationExpression>> lazyParameters;

@@ -1,6 +1,7 @@
 ﻿using Framework.Validation;
-
-using SampleSystem.Domain;
+using Framework.Validation.Map;
+using SampleSystem.Domain.Employee;
+using SampleSystem.Domain.Validation;
 
 // ReSharper disable once CheckNamespace
 namespace SampleSystem.BLL;

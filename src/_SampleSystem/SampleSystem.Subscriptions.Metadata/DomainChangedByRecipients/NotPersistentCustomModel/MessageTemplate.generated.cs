@@ -11,21 +11,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ASP
+namespace SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Framework.Subscriptions;
-    using SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
-
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     public partial class _DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml : RazorTemplate<CustomNotificationModel>
     {
 #line hidden
 
-        public override string Subject => $"Country {Current.Country.Code} has been updated";
+        public override string Subject => $"Country {this.Current.Country.Code} has been updated";
 
         public override void Execute()
         {
@@ -38,22 +31,22 @@ namespace ASP
 
 
 
-            WriteLiteral("\n<html>\n    <head></head>\n    <body>\n    <p>Country with code: ");
+            this.WriteLiteral("\n<html>\n    <head></head>\n    <body>\n    <p>Country with code: ");
 
 
-            Write(Current.Country.Code);
+            this.Write(this.Current.Country.Code);
 
-            WriteLiteral(" was updated and has ");
-
-
-            Write(Current.LocationsCount);
-
-            WriteLiteral(" locations</p>\n    <img src=\"");
+            this.WriteLiteral(" was updated and has ");
 
 
-            Write(SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel.Subscription.AttachmentName);
+            this.Write(this.Current.LocationsCount);
 
-            WriteLiteral("\"/>\n    </body>\n</html>\n");
+            this.WriteLiteral(" locations</p>\n    <img src=\"");
+
+
+            this.Write(SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel.Subscription.AttachmentName);
+
+            this.WriteLiteral("\"/>\n    </body>\n</html>\n");
 
 
         }

@@ -1,6 +1,7 @@
 ﻿using CommonFramework;
 
-namespace Framework.Validation;
+// ReSharper disable once CheckNamespace
+namespace Framework.Validation.Validators;
 
 public abstract class DynamicClassValidator : IDynamicClassValidator
 {

@@ -7,8 +7,10 @@ using Framework.Core;
 using Framework.Relations;
 using Framework.Restriction;
 using Framework.Validation;
+using Framework.Validation.Attributes;
+using Framework.Validation.Validators;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.BU;
 
 [BLLViewRole]
 [CustomName("Manager Commissions")]
@@ -18,7 +20,7 @@ public class BusinessUnitManagerCommissionLink : AuditPersistentDomainObjectBase
 
     private decimal commission;
 
-    private Employee manager;
+    private Employee.Employee manager;
 
     private Period period;
 
@@ -41,7 +43,7 @@ public class BusinessUnitManagerCommissionLink : AuditPersistentDomainObjectBase
     public BusinessUnitManagerCommissionLink(
             BusinessUnit businessUnit,
             decimal commission,
-            Employee manager,
+            Employee.Employee manager,
             Period period)
             : this(businessUnit)
     {
@@ -63,7 +65,7 @@ public class BusinessUnitManagerCommissionLink : AuditPersistentDomainObjectBase
 
     [Required]
     [UniqueElement]
-    public virtual Employee Manager
+    public virtual Employee.Employee Manager
     {
         get => this.manager;
         set => this.manager = value;

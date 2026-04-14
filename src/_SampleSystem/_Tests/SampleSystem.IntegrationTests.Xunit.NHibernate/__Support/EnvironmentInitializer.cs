@@ -3,7 +3,7 @@ using Bss.Testing.Xunit.Interfaces;
 
 using CommonFramework.DependencyInjection;
 
-using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
+using Framework.AutomationCore.ServiceEnvironment;
 using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 using Framework.AutomationCore.Xunit;
 using Framework.AutomationCore.Xunit.ServiceEnvironment;

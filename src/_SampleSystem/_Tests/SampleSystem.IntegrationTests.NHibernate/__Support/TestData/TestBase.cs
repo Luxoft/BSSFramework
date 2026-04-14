@@ -1,13 +1,12 @@
-﻿using Framework.AutomationCore.ServiceEnvironment;
-using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
+﻿using Framework.AutomationCore;
+using Framework.AutomationCore.ServiceEnvironment;
 
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.IntegrationTests.__Support.WebApi;
-using SampleSystem.WebApiCore.Controllers;
-
+using SampleSystem.WebApiCore.Controllers.Main;
 using SecuritySystem.Testing;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData;

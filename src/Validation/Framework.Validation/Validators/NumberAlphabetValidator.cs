@@ -1,4 +1,4 @@
-﻿namespace Framework.Validation;
+﻿namespace Framework.Validation.Validators;
 
 public class NumberAlphabetValidator(string externalChars) : AlphabetValidator(NumberAlphabet, externalChars)
 {

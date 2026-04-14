@@ -6,7 +6,7 @@ using Framework.BLL.Domain.Persistent.IdentityObject;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Query;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.Remove;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.Save;

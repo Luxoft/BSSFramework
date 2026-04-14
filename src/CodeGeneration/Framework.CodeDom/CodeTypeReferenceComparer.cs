@@ -22,5 +22,5 @@ public class CodeTypeReferenceComparer : IEqualityComparer<CodeTypeReference>
 
     public int GetHashCode(CodeTypeReference obj) => obj.Maybe(v => v.BaseType.GetHashCode());
 
-    public static readonly CodeTypeReferenceComparer Value = new CodeTypeReferenceComparer();
+    public static readonly CodeTypeReferenceComparer Value = new();
 }

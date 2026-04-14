@@ -1,13 +1,16 @@
 ﻿using Framework.Core;
 
 using SecuritySystem;
-
-using SampleSystem.Domain;
-
 using SecuritySystem.DependencyInjection;
 using SecuritySystem.VirtualPermission.DependencyInjection;
 
 using HierarchicalExpand;
+
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.Employee;
+using SampleSystem.Domain.Enums;
+using SampleSystem.Domain.MU;
 
 namespace SampleSystem.Security;
 

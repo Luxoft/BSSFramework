@@ -5,7 +5,7 @@ namespace Framework.Database.NHibernate.DBGenerator.ScriptGeneratorBuilder;
 
 class EmptyDatabaseScriptGenerator : IDatabaseScriptGenerator
 {
-    internal static EmptyDatabaseScriptGenerator Value = new EmptyDatabaseScriptGenerator();
+    internal static EmptyDatabaseScriptGenerator Value = new();
     private EmptyDatabaseScriptGenerator()
     {
 

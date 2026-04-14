@@ -1,5 +1,5 @@
 ﻿using CommonFramework;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.FileStore;
 
 using SecuritySystem;

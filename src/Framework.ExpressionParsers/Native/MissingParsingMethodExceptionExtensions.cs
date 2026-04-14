@@ -1,5 +1,5 @@
-﻿using Framework.ExpressionParsers._CSharp;
-using Framework.ExpressionParsers.Native._Exceptions;
+﻿using Framework.ExpressionParsers.CSharp;
+using Framework.ExpressionParsers.Native.Exceptions;
 
 namespace Framework.ExpressionParsers.Native;
 

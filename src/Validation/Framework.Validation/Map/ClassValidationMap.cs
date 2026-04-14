@@ -1,6 +1,8 @@
 ﻿using CommonFramework;
 
-namespace Framework.Validation;
+using Framework.Validation.Validators;
+
+namespace Framework.Validation.Map;
 
 public abstract class ClassValidationMap(string typeName) : IClassValidationMap, IValidatorCollection<IClassValidator>
 {
@@ -56,5 +58,5 @@ public class ClassValidationMap<TSource> : ClassValidationMap, IClassValidationM
 
     protected override IReadOnlyCollection<IClassValidator> BaseValidators => this.Validators;
 
-    public static readonly ClassValidationMap<TSource> Empty = new ClassValidationMap<TSource>([], []);
+    public static readonly ClassValidationMap<TSource> Empty = new([], []);
 }

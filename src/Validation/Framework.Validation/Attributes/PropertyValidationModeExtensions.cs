@@ -1,4 +1,4 @@
-﻿namespace Framework.Validation;
+﻿namespace Framework.Validation.Attributes;
 
 internal static class PropertyValidationModeExtensions
 {

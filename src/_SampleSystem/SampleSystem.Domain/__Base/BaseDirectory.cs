@@ -3,6 +3,7 @@ using Framework.BLL.Domain.Attributes;
 using Framework.Core;
 using Framework.Restriction;
 
+// ReSharper disable once CheckNamespace
 namespace SampleSystem.Domain;
 
 /// <summary>

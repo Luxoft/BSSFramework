@@ -8,16 +8,18 @@ using Framework.Core;
 using Framework.Relations;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+
+namespace SampleSystem.Domain.MU;
 
 [BLLViewRole, BLLSaveRole, BLLRemoveRole]
 public class ManagementUnitAndHRDepartmentLink :
         AuditPersistentDomainObjectBase,
         IDetail<ManagementUnit>,
-        IDetail<HRDepartment>,
+        IDetail<HRDepartment.HRDepartment>,
         IVisualIdentityObject
 {
-    private HRDepartment hRDepartment;
+    private HRDepartment.HRDepartment hRDepartment;
     private ManagementUnit managementUnit;
 
     public ManagementUnitAndHRDepartmentLink(ManagementUnit managementUnit)
@@ -26,13 +28,13 @@ public class ManagementUnitAndHRDepartmentLink :
         this.managementUnit.Maybe(z => z.AddDetail(this));
     }
 
-    public ManagementUnitAndHRDepartmentLink(HRDepartment hRDepartment)
+    public ManagementUnitAndHRDepartmentLink(HRDepartment.HRDepartment hRDepartment)
     {
         this.hRDepartment = hRDepartment;
         this.hRDepartment.Maybe(z => z.AddDetail(this));
     }
 
-    public ManagementUnitAndHRDepartmentLink(ManagementUnit managementUnit, HRDepartment hRDepartment)
+    public ManagementUnitAndHRDepartmentLink(ManagementUnit managementUnit, HRDepartment.HRDepartment hRDepartment)
             : this(managementUnit) =>
         this.hRDepartment = hRDepartment;
 
@@ -41,7 +43,7 @@ public class ManagementUnitAndHRDepartmentLink :
     }
 
     [UniqueElement]
-    public virtual HRDepartment HRDepartment
+    public virtual HRDepartment.HRDepartment HRDepartment
     {
         get => this.hRDepartment;
         set => this.hRDepartment = value;
@@ -62,7 +64,7 @@ public class ManagementUnitAndHRDepartmentLink :
 
     ManagementUnit IDetail<ManagementUnit>.Master => this.managementUnit;
 
-    HRDepartment IDetail<HRDepartment>.Master => this.hRDepartment;
+    HRDepartment.HRDepartment IDetail<HRDepartment.HRDepartment>.Master => this.hRDepartment;
 
     string IVisualIdentityObject.Name => this.HRDepartment.Maybe(x => x.Name) + "-" + this.ManagementUnit.Maybe(x => x.Name);
 }

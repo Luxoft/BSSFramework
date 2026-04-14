@@ -2,7 +2,9 @@
 using Framework.Core;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.Directories;
+
+namespace SampleSystem.Domain.Employee;
 
 [BLLViewRole]
 [UniqueGroup]

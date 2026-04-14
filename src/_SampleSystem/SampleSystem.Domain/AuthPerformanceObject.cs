@@ -1,4 +1,8 @@
-﻿namespace SampleSystem.Domain;
+﻿using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.MU;
+
+namespace SampleSystem.Domain;
 
 public class AuthPerformanceObject : AuditPersistentDomainObjectBase
 {
@@ -8,7 +12,7 @@ public class AuthPerformanceObject : AuditPersistentDomainObjectBase
 
     private Location? location;
 
-    private Employee? employee;
+    private Employee.Employee? employee;
 
 
     public virtual BusinessUnit? BusinessUnit { get => this.businessUnit; set => this.businessUnit = value; }
@@ -17,5 +21,5 @@ public class AuthPerformanceObject : AuditPersistentDomainObjectBase
 
     public virtual Location? Location { get => this.location; set => this.location = value; }
 
-    public virtual Employee? Employee { get => this.employee; set => this.employee = value; }
+    public virtual Employee.Employee? Employee { get => this.employee; set => this.employee = value; }
 }

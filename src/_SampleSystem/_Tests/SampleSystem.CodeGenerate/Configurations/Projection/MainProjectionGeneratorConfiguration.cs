@@ -5,9 +5,9 @@ using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ProjectionGenerator.Configuration;
 using Framework.Core;
 
-using SampleSystem.Domain;
+using SampleSystem.Domain._CustomProjectionAttribute;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations.Projection;
 
 public class MainProjectionGeneratorConfiguration(ServerGenerationEnvironment environment)
     : ProjectionGeneratorConfigurationBase<ServerGenerationEnvironment>(environment, environment.MainProjectionEnvironment)

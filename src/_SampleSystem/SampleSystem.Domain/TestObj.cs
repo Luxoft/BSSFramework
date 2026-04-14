@@ -1,7 +1,7 @@
 ﻿using Framework.Restriction;
 using Framework.Validation;
-
 using SampleSystem.Domain.Inline;
+using SampleSystem.Domain.Validation;
 
 namespace SampleSystem.Domain;
 

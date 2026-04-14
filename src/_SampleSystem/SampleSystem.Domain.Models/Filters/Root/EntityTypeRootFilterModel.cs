@@ -1,3 +1,5 @@
-﻿namespace SampleSystem.Domain;
+﻿using SampleSystem.Domain.Models.Filters._Base;
 
-public class EmployeeRootFilterModel : DomainObjectRootFilterModel<Employee>;
+namespace SampleSystem.Domain.Models.Filters.Root;
+
+public class EmployeeRootFilterModel : DomainObjectRootFilterModel<Employee.Employee>;

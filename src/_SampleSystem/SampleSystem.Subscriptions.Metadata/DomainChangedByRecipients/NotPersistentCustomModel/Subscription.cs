@@ -6,7 +6,7 @@ using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
 
-public class Subscription : Subscription<Domain.Country, CustomNotificationModel, ASP._DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml>
+public class Subscription : Subscription<Domain.Directories.Country, CustomNotificationModel, _DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml>
 {
 
     public const string AttachmentName = "test.txt";
@@ -17,18 +17,18 @@ public class Subscription : Subscription<Domain.Country, CustomNotificationModel
 
     public override CustomNotificationModel ConvertToRenderingObject(
         IServiceProvider serviceProvider,
-        Domain.Country domainObject) => new(serviceProvider, domainObject);
+        Domain.Directories.Country domainObject) => new(serviceProvider, domainObject);
 
     public override IEnumerable<NotificationMessageGenerationInfo<CustomNotificationModel>> GetTo(
         IServiceProvider serviceProvider,
-        DomainObjectVersions<Domain.Country> versions)
+        DomainObjectVersions<Domain.Directories.Country> versions)
     {
         yield return new("tester@luxoft.com", versions.ChangeDomainObject(c => this.ConvertToRenderingObject(serviceProvider, c)));
     }
 
     public override IEnumerable<NotificationMessageGenerationInfo<CustomNotificationModel>> GetReplyTo(
         IServiceProvider serviceProvider,
-        DomainObjectVersions<Domain.Country> versions)
+        DomainObjectVersions<Domain.Directories.Country> versions)
     {
         yield return new("replayTo@luxoft.com", versions.ChangeDomainObject(c => this.ConvertToRenderingObject(serviceProvider, c)));
     }

@@ -11,108 +11,6 @@ namespace SampleSystem.Generated.DTO
 {
     
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Address), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct AddressIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.AddressIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.AddressIdentityDTO EmptyField = new SampleSystem.Generated.DTO.AddressIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public AddressIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public AddressIdentityDTO(SampleSystem.Generated.DTO.AddressSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public AddressIdentityDTO(SampleSystem.Domain.Address domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public AddressIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.AddressIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.AddressIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.AddressIdentityDTO identity1, SampleSystem.Generated.DTO.AddressIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.AddressIdentityDTO identity1, SampleSystem.Generated.DTO.AddressIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.AddressIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.AddressIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.AddressIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.Address ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToAddress(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.AnotherSqlParserTestObj), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct AnotherSqlParserTestObjIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.AnotherSqlParserTestObjIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
@@ -299,7 +197,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct BusinessUnitIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -322,7 +220,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public BusinessUnitIdentityDTO(SampleSystem.Domain.BusinessUnit domainObject)
+        public BusinessUnitIdentityDTO(SampleSystem.Domain.BU.BusinessUnit domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -390,7 +288,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.BusinessUnit ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.BU.BusinessUnit ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnit(this);
         }
@@ -401,7 +299,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitAncestorLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitAncestorLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct BusinessUnitAncestorLinkIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.BusinessUnitAncestorLinkIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -415,7 +313,7 @@ namespace SampleSystem.Generated.DTO
             this._id = id;
         }
         
-        public BusinessUnitAncestorLinkIdentityDTO(SampleSystem.Domain.BusinessUnitAncestorLink domainObject)
+        public BusinessUnitAncestorLinkIdentityDTO(SampleSystem.Domain.BU.BusinessUnitAncestorLink domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -483,7 +381,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.BusinessUnitAncestorLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.BU.BusinessUnitAncestorLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnitAncestorLink(this);
         }
@@ -494,7 +392,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitEmployeeRole), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitEmployeeRole), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct BusinessUnitEmployeeRoleIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -517,7 +415,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public BusinessUnitEmployeeRoleIdentityDTO(SampleSystem.Domain.BusinessUnitEmployeeRole domainObject)
+        public BusinessUnitEmployeeRoleIdentityDTO(SampleSystem.Domain.BU.BusinessUnitEmployeeRole domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -585,7 +483,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.BusinessUnitEmployeeRole ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.BU.BusinessUnitEmployeeRole ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnitEmployeeRole(this);
         }
@@ -596,7 +494,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitHrDepartment), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitHrDepartment), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct BusinessUnitHrDepartmentIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -619,7 +517,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public BusinessUnitHrDepartmentIdentityDTO(SampleSystem.Domain.BusinessUnitHrDepartment domainObject)
+        public BusinessUnitHrDepartmentIdentityDTO(SampleSystem.Domain.BU.BusinessUnitHrDepartment domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -687,7 +585,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.BusinessUnitHrDepartment ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.BU.BusinessUnitHrDepartment ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnitHrDepartment(this);
         }
@@ -698,7 +596,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct BusinessUnitManagerCommissionLinkIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -721,7 +619,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public BusinessUnitManagerCommissionLinkIdentityDTO(SampleSystem.Domain.BusinessUnitManagerCommissionLink domainObject)
+        public BusinessUnitManagerCommissionLinkIdentityDTO(SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -789,7 +687,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.BusinessUnitManagerCommissionLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnitManagerCommissionLink(this);
         }
@@ -800,7 +698,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitToAncestorChildView), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitToAncestorChildView), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct BusinessUnitToAncestorChildViewIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -814,7 +712,7 @@ namespace SampleSystem.Generated.DTO
             this._id = id;
         }
         
-        public BusinessUnitToAncestorChildViewIdentityDTO(SampleSystem.Domain.BusinessUnitToAncestorChildView domainObject)
+        public BusinessUnitToAncestorChildViewIdentityDTO(SampleSystem.Domain.BU.BusinessUnitToAncestorChildView domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -882,7 +780,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.BusinessUnitToAncestorChildView ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.BU.BusinessUnitToAncestorChildView ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnitToAncestorChildView(this);
         }
@@ -893,7 +791,109 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitType), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.Address), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct AddressIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.AddressIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.AddressIdentityDTO EmptyField = new SampleSystem.Generated.DTO.AddressIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public AddressIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public AddressIdentityDTO(SampleSystem.Generated.DTO.AddressSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public AddressIdentityDTO(SampleSystem.Domain.Directories.Address domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public AddressIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.AddressIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.AddressIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.AddressIdentityDTO identity1, SampleSystem.Generated.DTO.AddressIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.AddressIdentityDTO identity1, SampleSystem.Generated.DTO.AddressIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.AddressIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.AddressIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.AddressIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Directories.Address ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToAddress(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitType), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct BusinessUnitTypeIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -916,7 +916,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public BusinessUnitTypeIdentityDTO(SampleSystem.Domain.BusinessUnitType domainObject)
+        public BusinessUnitTypeIdentityDTO(SampleSystem.Domain.Directories.BusinessUnitType domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -984,7 +984,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.BusinessUnitType ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Directories.BusinessUnitType ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnitType(this);
         }
@@ -995,7 +995,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct BusinessUnitTypeLinkWithPossibleFinancialProjectTypeIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -1018,7 +1018,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public BusinessUnitTypeLinkWithPossibleFinancialProjectTypeIdentityDTO(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType domainObject)
+        public BusinessUnitTypeLinkWithPossibleFinancialProjectTypeIdentityDTO(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -1086,7 +1086,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnitTypeLinkWithPossibleFinancialProjectType(this);
         }
@@ -1097,7 +1097,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct BusinessUnitTypeLinkWithPossibleParentIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -1120,7 +1120,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public BusinessUnitTypeLinkWithPossibleParentIdentityDTO(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent domainObject)
+        public BusinessUnitTypeLinkWithPossibleParentIdentityDTO(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -1188,7 +1188,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnitTypeLinkWithPossibleParent(this);
         }
@@ -1199,7 +1199,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct BusinessUnitTypeLinkWithTransferToIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -1222,7 +1222,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public BusinessUnitTypeLinkWithTransferToIdentityDTO(SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo domainObject)
+        public BusinessUnitTypeLinkWithTransferToIdentityDTO(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -1290,7 +1290,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnitTypeLinkWithTransferTo(this);
         }
@@ -1301,7 +1301,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.CompanyLegalEntity), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct CompanyLegalEntityIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -1324,7 +1324,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public CompanyLegalEntityIdentityDTO(SampleSystem.Domain.CompanyLegalEntity domainObject)
+        public CompanyLegalEntityIdentityDTO(SampleSystem.Domain.Directories.CompanyLegalEntity domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -1392,7 +1392,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.CompanyLegalEntity ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Directories.CompanyLegalEntity ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToCompanyLegalEntity(this);
         }
@@ -1403,7 +1403,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Country), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.Country), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct CountryIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.CountryIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -1426,7 +1426,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public CountryIdentityDTO(SampleSystem.Domain.Country domainObject)
+        public CountryIdentityDTO(SampleSystem.Domain.Directories.Country domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -1494,7 +1494,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.Country ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Directories.Country ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToCountry(this);
         }
@@ -1505,7 +1505,592 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.LegalEntityBase), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct LegalEntityBaseIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO EmptyField = new SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public LegalEntityBaseIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public LegalEntityBaseIdentityDTO(SampleSystem.Generated.DTO.LegalEntityBaseSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public LegalEntityBaseIdentityDTO(SampleSystem.Domain.Directories.LegalEntityBase domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public LegalEntityBaseIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO identity1, SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO identity1, SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Directories.LegalEntityBase ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToLegalEntityBase(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.Location), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct LocationIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.LocationIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.LocationIdentityDTO EmptyField = new SampleSystem.Generated.DTO.LocationIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public LocationIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public LocationIdentityDTO(SampleSystem.Generated.DTO.LocationSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public LocationIdentityDTO(SampleSystem.Domain.Directories.Location domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public LocationIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.LocationIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.LocationIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.LocationIdentityDTO identity1, SampleSystem.Generated.DTO.LocationIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.LocationIdentityDTO identity1, SampleSystem.Generated.DTO.LocationIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.LocationIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.LocationIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.LocationIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Directories.Location ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToLocation(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.LocationAncestorLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct LocationAncestorLinkIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO EmptyField = new SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public LocationAncestorLinkIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public LocationAncestorLinkIdentityDTO(SampleSystem.Domain.Directories.LocationAncestorLink domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public LocationAncestorLinkIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO identity1, SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO identity1, SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Directories.LocationAncestorLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToLocationAncestorLink(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.LocationToAncestorChildView), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct LocationToAncestorChildViewIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO EmptyField = new SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public LocationToAncestorChildViewIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public LocationToAncestorChildViewIdentityDTO(SampleSystem.Domain.Directories.LocationToAncestorChildView domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public LocationToAncestorChildViewIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO identity1, SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO identity1, SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Directories.LocationToAncestorChildView ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToLocationToAncestorChildView(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.TestObjForNested), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestObjForNestedIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestObjForNestedIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestObjForNestedIdentityDTO(SampleSystem.Generated.DTO.TestObjForNestedSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public TestObjForNestedIdentityDTO(SampleSystem.Domain.Directories.TestObjForNested domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestObjForNestedIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO identity1, SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO identity1, SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Directories.TestObjForNested ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestObjForNested(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.TestObjForNestedBase), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestObjForNestedBaseIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestObjForNestedBaseIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestObjForNestedBaseIdentityDTO(SampleSystem.Domain.Directories.TestObjForNestedBase domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestObjForNestedBaseIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO identity1, SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO identity1, SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Directories.TestObjForNestedBase ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestObjForNestedBase(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.Employee), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeeIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -1528,7 +2113,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public EmployeeIdentityDTO(SampleSystem.Domain.Employee domainObject)
+        public EmployeeIdentityDTO(SampleSystem.Domain.Employee.Employee domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -1596,7 +2181,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.Employee ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.Employee ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployee(this);
         }
@@ -1607,109 +2192,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct EmployeeAndEmployeeSpecializationLinkIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO EmptyField = new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public EmployeeAndEmployeeSpecializationLinkIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public EmployeeAndEmployeeSpecializationLinkIdentityDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public EmployeeAndEmployeeSpecializationLinkIdentityDTO(SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public EmployeeAndEmployeeSpecializationLinkIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO identity1, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO identity1, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToEmployeeAndEmployeeSpecializationLink(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCellPhone), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeCellPhone), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeeCellPhoneIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -1732,7 +2215,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public EmployeeCellPhoneIdentityDTO(SampleSystem.Domain.EmployeeCellPhone domainObject)
+        public EmployeeCellPhoneIdentityDTO(SampleSystem.Domain.Employee.EmployeeCellPhone domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -1800,7 +2283,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.EmployeeCellPhone ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.EmployeeCellPhone ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployeeCellPhone(this);
         }
@@ -1811,7 +2294,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCellPhoneBase), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeCellPhoneBase), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeeCellPhoneBaseIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -1825,7 +2308,7 @@ namespace SampleSystem.Generated.DTO
             this._id = id;
         }
         
-        public EmployeeCellPhoneBaseIdentityDTO(SampleSystem.Domain.EmployeeCellPhoneBase domainObject)
+        public EmployeeCellPhoneBaseIdentityDTO(SampleSystem.Domain.Employee.EmployeeCellPhoneBase domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -1893,7 +2376,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.EmployeeCellPhoneBase ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.EmployeeCellPhoneBase ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployeeCellPhoneBase(this);
         }
@@ -1904,7 +2387,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeInformation), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeInformation), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeeInformationIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -1927,7 +2410,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public EmployeeInformationIdentityDTO(SampleSystem.Domain.EmployeeInformation domainObject)
+        public EmployeeInformationIdentityDTO(SampleSystem.Domain.Employee.EmployeeInformation domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -1995,7 +2478,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.EmployeeInformation ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.EmployeeInformation ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployeeInformation(this);
         }
@@ -2006,7 +2489,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePersonalCellPhone), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeePersonalCellPhone), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeePersonalCellPhoneIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -2029,7 +2512,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public EmployeePersonalCellPhoneIdentityDTO(SampleSystem.Domain.EmployeePersonalCellPhone domainObject)
+        public EmployeePersonalCellPhoneIdentityDTO(SampleSystem.Domain.Employee.EmployeePersonalCellPhone domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -2097,7 +2580,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.EmployeePersonalCellPhone ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.EmployeePersonalCellPhone ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployeePersonalCellPhone(this);
         }
@@ -2108,7 +2591,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePhoto), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeePhoto), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeePhotoIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -2131,7 +2614,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public EmployeePhotoIdentityDTO(SampleSystem.Domain.EmployeePhoto domainObject)
+        public EmployeePhotoIdentityDTO(SampleSystem.Domain.Employee.EmployeePhoto domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -2199,7 +2682,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.EmployeePhoto ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.EmployeePhoto ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployeePhoto(this);
         }
@@ -2210,7 +2693,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePosition), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeePosition), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeePositionIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -2233,7 +2716,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public EmployeePositionIdentityDTO(SampleSystem.Domain.EmployeePosition domainObject)
+        public EmployeePositionIdentityDTO(SampleSystem.Domain.Employee.EmployeePosition domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -2301,7 +2784,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.EmployeePosition ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.EmployeePosition ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployeePosition(this);
         }
@@ -2312,7 +2795,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRegistrationType), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRegistrationType), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeeRegistrationTypeIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -2335,7 +2818,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public EmployeeRegistrationTypeIdentityDTO(SampleSystem.Domain.EmployeeRegistrationType domainObject)
+        public EmployeeRegistrationTypeIdentityDTO(SampleSystem.Domain.Employee.EmployeeRegistrationType domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -2403,7 +2886,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.EmployeeRegistrationType ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.EmployeeRegistrationType ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployeeRegistrationType(this);
         }
@@ -2414,7 +2897,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRole), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRole), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeeRoleIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -2437,7 +2920,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public EmployeeRoleIdentityDTO(SampleSystem.Domain.EmployeeRole domainObject)
+        public EmployeeRoleIdentityDTO(SampleSystem.Domain.Employee.EmployeeRole domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -2505,7 +2988,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.EmployeeRole ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.EmployeeRole ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployeeRole(this);
         }
@@ -2516,7 +2999,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRoleDegree), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRoleDegree), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeeRoleDegreeIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -2539,7 +3022,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public EmployeeRoleDegreeIdentityDTO(SampleSystem.Domain.EmployeeRoleDegree domainObject)
+        public EmployeeRoleDegreeIdentityDTO(SampleSystem.Domain.Employee.EmployeeRoleDegree domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -2607,7 +3090,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.EmployeeRoleDegree ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.EmployeeRoleDegree ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployeeRoleDegree(this);
         }
@@ -2618,7 +3101,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeSpecialization), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeSpecialization), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeeSpecializationIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -2641,7 +3124,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public EmployeeSpecializationIdentityDTO(SampleSystem.Domain.EmployeeSpecialization domainObject)
+        public EmployeeSpecializationIdentityDTO(SampleSystem.Domain.Employee.EmployeeSpecialization domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -2709,7 +3192,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.EmployeeSpecialization ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.EmployeeSpecialization ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployeeSpecialization(this);
         }
@@ -2720,7 +3203,109 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeToEmployeeLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct EmployeeAndEmployeeSpecializationLinkIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO EmptyField = new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public EmployeeAndEmployeeSpecializationLinkIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public EmployeeAndEmployeeSpecializationLinkIdentityDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public EmployeeAndEmployeeSpecializationLinkIdentityDTO(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public EmployeeAndEmployeeSpecializationLinkIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO identity1, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO identity1, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToEmployeeAndEmployeeSpecializationLink(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeeToEmployeeLinkIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -2743,7 +3328,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public EmployeeToEmployeeLinkIdentityDTO(SampleSystem.Domain.EmployeeToEmployeeLink domainObject)
+        public EmployeeToEmployeeLinkIdentityDTO(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -2811,9 +3396,696 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.EmployeeToEmployeeLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployeeToEmployeeLink(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.IMRequest), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct IMRequestIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.IMRequestIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.IMRequestIdentityDTO EmptyField = new SampleSystem.Generated.DTO.IMRequestIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public IMRequestIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public IMRequestIdentityDTO(SampleSystem.Generated.DTO.IMRequestSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public IMRequestIdentityDTO(SampleSystem.Domain.Employee.IMRequest domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public IMRequestIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.IMRequestIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.IMRequestIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.IMRequestIdentityDTO identity1, SampleSystem.Generated.DTO.IMRequestIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.IMRequestIdentityDTO identity1, SampleSystem.Generated.DTO.IMRequestIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.IMRequestIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.IMRequestIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.IMRequestIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Employee.IMRequest ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToIMRequest(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.IMRequestDetail), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct IMRequestDetailIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO EmptyField = new SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public IMRequestDetailIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public IMRequestDetailIdentityDTO(SampleSystem.Generated.DTO.IMRequestDetailSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public IMRequestDetailIdentityDTO(SampleSystem.Domain.Employee.IMRequestDetail domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public IMRequestDetailIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO identity1, SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO identity1, SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Employee.IMRequestDetail ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToIMRequestDetail(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.Information), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct InformationIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.InformationIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.InformationIdentityDTO EmptyField = new SampleSystem.Generated.DTO.InformationIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public InformationIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public InformationIdentityDTO(SampleSystem.Generated.DTO.InformationSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public InformationIdentityDTO(SampleSystem.Domain.Employee.Information domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public InformationIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.InformationIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.InformationIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.InformationIdentityDTO identity1, SampleSystem.Generated.DTO.InformationIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.InformationIdentityDTO identity1, SampleSystem.Generated.DTO.InformationIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.InformationIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.InformationIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.InformationIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Employee.Information ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToInformation(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.InsuranceDetail), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct InsuranceDetailIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO EmptyField = new SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public InsuranceDetailIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public InsuranceDetailIdentityDTO(SampleSystem.Domain.Employee.InsuranceDetail domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public InsuranceDetailIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO identity1, SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO identity1, SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Employee.InsuranceDetail ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToInsuranceDetail(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.RoleRoleDegreeLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct RoleRoleDegreeLinkIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO EmptyField = new SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public RoleRoleDegreeLinkIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public RoleRoleDegreeLinkIdentityDTO(SampleSystem.Domain.Employee.RoleRoleDegreeLink domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public RoleRoleDegreeLinkIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO identity1, SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO identity1, SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Employee.RoleRoleDegreeLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToRoleRoleDegreeLink(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.TestExceptObject), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestExceptObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestExceptObjectIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestExceptObjectIdentityDTO(SampleSystem.Domain.Employee.TestExceptObject domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestExceptObjectIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Employee.TestExceptObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestExceptObject(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.TestRestrictionObject), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestRestrictionObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestRestrictionObjectIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestRestrictionObjectIdentityDTO(SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public TestRestrictionObjectIdentityDTO(SampleSystem.Domain.Employee.TestRestrictionObject domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestRestrictionObjectIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.Employee.TestRestrictionObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestRestrictionObject(this);
         }
         
         public override string ToString()
@@ -3119,7 +4391,109 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example1), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ExternalPrincipal.Principal), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct PrincipalIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.PrincipalIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.PrincipalIdentityDTO EmptyField = new SampleSystem.Generated.DTO.PrincipalIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public PrincipalIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public PrincipalIdentityDTO(SampleSystem.Generated.DTO.PrincipalSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public PrincipalIdentityDTO(SampleSystem.Domain.ExternalPrincipal.Principal domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public PrincipalIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.PrincipalIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.PrincipalIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.PrincipalIdentityDTO identity1, SampleSystem.Generated.DTO.PrincipalIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.PrincipalIdentityDTO identity1, SampleSystem.Generated.DTO.PrincipalIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.PrincipalIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.PrincipalIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.PrincipalIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.ExternalPrincipal.Principal ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToPrincipal(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ForUpdate.Example1), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct Example1IdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.Example1IdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -3142,7 +4516,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public Example1IdentityDTO(SampleSystem.Domain.Example1 domainObject)
+        public Example1IdentityDTO(SampleSystem.Domain.ForUpdate.Example1 domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -3210,7 +4584,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.Example1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.ForUpdate.Example1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToExample1(this);
         }
@@ -3221,7 +4595,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example2), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ForUpdate.Example2), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct Example2IdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.Example2IdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -3244,7 +4618,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public Example2IdentityDTO(SampleSystem.Domain.Example2 domainObject)
+        public Example2IdentityDTO(SampleSystem.Domain.ForUpdate.Example2 domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -3312,7 +4686,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.Example2 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.ForUpdate.Example2 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToExample2(this);
         }
@@ -3323,100 +4697,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.GenericNamedLock), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct GenericNamedLockIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO EmptyField = new SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public GenericNamedLockIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public GenericNamedLockIdentityDTO(SampleSystem.Domain.GenericNamedLock domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public GenericNamedLockIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO identity1, SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO identity1, SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.GenericNamedLock ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToGenericNamedLock(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartment), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct HRDepartmentIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.HRDepartmentIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -3439,7 +4720,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public HRDepartmentIdentityDTO(SampleSystem.Domain.HRDepartment domainObject)
+        public HRDepartmentIdentityDTO(SampleSystem.Domain.HRDepartment.HRDepartment domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -3507,7 +4788,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.HRDepartment ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.HRDepartment.HRDepartment ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToHRDepartment(this);
         }
@@ -3518,7 +4799,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartmentEmployeePosition), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct HRDepartmentEmployeePositionIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.HRDepartmentEmployeePositionIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -3541,7 +4822,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public HRDepartmentEmployeePositionIdentityDTO(SampleSystem.Domain.HRDepartmentEmployeePosition domainObject)
+        public HRDepartmentEmployeePositionIdentityDTO(SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -3609,7 +4890,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.HRDepartmentEmployeePosition ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToHRDepartmentEmployeePosition(this);
         }
@@ -3620,7 +4901,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartmentRoleEmployee), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct HRDepartmentRoleEmployeeIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -3643,7 +4924,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public HRDepartmentRoleEmployeeIdentityDTO(SampleSystem.Domain.HRDepartmentRoleEmployee domainObject)
+        public HRDepartmentRoleEmployeeIdentityDTO(SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -3711,408 +4992,9 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.HRDepartmentRoleEmployee ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToHRDepartmentRoleEmployee(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IMRequest), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct IMRequestIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.IMRequestIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.IMRequestIdentityDTO EmptyField = new SampleSystem.Generated.DTO.IMRequestIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public IMRequestIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public IMRequestIdentityDTO(SampleSystem.Generated.DTO.IMRequestSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public IMRequestIdentityDTO(SampleSystem.Domain.IMRequest domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public IMRequestIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.IMRequestIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.IMRequestIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.IMRequestIdentityDTO identity1, SampleSystem.Generated.DTO.IMRequestIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.IMRequestIdentityDTO identity1, SampleSystem.Generated.DTO.IMRequestIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.IMRequestIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.IMRequestIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.IMRequestIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.IMRequest ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToIMRequest(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IMRequestDetail), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct IMRequestDetailIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO EmptyField = new SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public IMRequestDetailIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public IMRequestDetailIdentityDTO(SampleSystem.Generated.DTO.IMRequestDetailSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public IMRequestDetailIdentityDTO(SampleSystem.Domain.IMRequestDetail domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public IMRequestDetailIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO identity1, SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO identity1, SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.IMRequestDetail ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToIMRequestDetail(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Information), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct InformationIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.InformationIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.InformationIdentityDTO EmptyField = new SampleSystem.Generated.DTO.InformationIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public InformationIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public InformationIdentityDTO(SampleSystem.Generated.DTO.InformationSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public InformationIdentityDTO(SampleSystem.Domain.Information domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public InformationIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.InformationIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.InformationIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.InformationIdentityDTO identity1, SampleSystem.Generated.DTO.InformationIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.InformationIdentityDTO identity1, SampleSystem.Generated.DTO.InformationIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.InformationIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.InformationIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.InformationIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.Information ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToInformation(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.InsuranceDetail), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct InsuranceDetailIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO EmptyField = new SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public InsuranceDetailIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public InsuranceDetailIdentityDTO(SampleSystem.Domain.InsuranceDetail domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public InsuranceDetailIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO identity1, SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO identity1, SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.InsuranceDetail ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToInsuranceDetail(this);
         }
         
         public override string ToString()
@@ -4307,397 +5189,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.LegalEntityBase), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct LegalEntityBaseIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO EmptyField = new SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public LegalEntityBaseIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public LegalEntityBaseIdentityDTO(SampleSystem.Generated.DTO.LegalEntityBaseSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public LegalEntityBaseIdentityDTO(SampleSystem.Domain.LegalEntityBase domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public LegalEntityBaseIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO identity1, SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO identity1, SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.LegalEntityBase ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToLegalEntityBase(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Location), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct LocationIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.LocationIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.LocationIdentityDTO EmptyField = new SampleSystem.Generated.DTO.LocationIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public LocationIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public LocationIdentityDTO(SampleSystem.Generated.DTO.LocationSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public LocationIdentityDTO(SampleSystem.Domain.Location domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public LocationIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.LocationIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.LocationIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.LocationIdentityDTO identity1, SampleSystem.Generated.DTO.LocationIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.LocationIdentityDTO identity1, SampleSystem.Generated.DTO.LocationIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.LocationIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.LocationIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.LocationIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.Location ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToLocation(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.LocationAncestorLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct LocationAncestorLinkIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO EmptyField = new SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public LocationAncestorLinkIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public LocationAncestorLinkIdentityDTO(SampleSystem.Domain.LocationAncestorLink domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public LocationAncestorLinkIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO identity1, SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO identity1, SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.LocationAncestorLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToLocationAncestorLink(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.LocationToAncestorChildView), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct LocationToAncestorChildViewIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO EmptyField = new SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public LocationToAncestorChildViewIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public LocationToAncestorChildViewIdentityDTO(SampleSystem.Domain.LocationToAncestorChildView domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public LocationToAncestorChildViewIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO identity1, SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO identity1, SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.LocationToAncestorChildView ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToLocationToAncestorChildView(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnit), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnit), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct ManagementUnitIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.ManagementUnitIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -4720,7 +5212,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public ManagementUnitIdentityDTO(SampleSystem.Domain.ManagementUnit domainObject)
+        public ManagementUnitIdentityDTO(SampleSystem.Domain.MU.ManagementUnit domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -4788,7 +5280,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.ManagementUnit ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.MU.ManagementUnit ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToManagementUnit(this);
         }
@@ -4799,7 +5291,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAncestorLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnitAncestorLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct ManagementUnitAncestorLinkIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.ManagementUnitAncestorLinkIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -4813,7 +5305,7 @@ namespace SampleSystem.Generated.DTO
             this._id = id;
         }
         
-        public ManagementUnitAncestorLinkIdentityDTO(SampleSystem.Domain.ManagementUnitAncestorLink domainObject)
+        public ManagementUnitAncestorLinkIdentityDTO(SampleSystem.Domain.MU.ManagementUnitAncestorLink domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -4881,7 +5373,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.ManagementUnitAncestorLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.MU.ManagementUnitAncestorLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToManagementUnitAncestorLink(this);
         }
@@ -4892,7 +5384,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct ManagementUnitAndBusinessUnitLinkIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -4915,7 +5407,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public ManagementUnitAndBusinessUnitLinkIdentityDTO(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink domainObject)
+        public ManagementUnitAndBusinessUnitLinkIdentityDTO(SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -4983,7 +5475,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.ManagementUnitAndBusinessUnitLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToManagementUnitAndBusinessUnitLink(this);
         }
@@ -4994,7 +5486,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct ManagementUnitAndHRDepartmentLinkIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -5017,7 +5509,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public ManagementUnitAndHRDepartmentLinkIdentityDTO(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink domainObject)
+        public ManagementUnitAndHRDepartmentLinkIdentityDTO(SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -5085,7 +5577,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.ManagementUnitAndHRDepartmentLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToManagementUnitAndHRDepartmentLink(this);
         }
@@ -5096,109 +5588,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitFluentMapping), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct ManagementUnitFluentMappingIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO EmptyField = new SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public ManagementUnitFluentMappingIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public ManagementUnitFluentMappingIdentityDTO(SampleSystem.Generated.DTO.ManagementUnitFluentMappingSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public ManagementUnitFluentMappingIdentityDTO(SampleSystem.Domain.ManagementUnitFluentMapping domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public ManagementUnitFluentMappingIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO identity1, SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO identity1, SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.ManagementUnitFluentMapping ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToManagementUnitFluentMapping(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitToAncestorChildView), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnitToAncestorChildView), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct ManagementUnitToAncestorChildViewIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -5212,7 +5602,7 @@ namespace SampleSystem.Generated.DTO
             this._id = id;
         }
         
-        public ManagementUnitToAncestorChildViewIdentityDTO(SampleSystem.Domain.ManagementUnitToAncestorChildView domainObject)
+        public ManagementUnitToAncestorChildViewIdentityDTO(SampleSystem.Domain.MU.ManagementUnitToAncestorChildView domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -5280,9 +5670,297 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.ManagementUnitToAncestorChildView ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.MU.ManagementUnitToAncestorChildView ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToManagementUnitToAncestorChildView(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct ManagementUnitFluentMappingIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO EmptyField = new SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public ManagementUnitFluentMappingIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public ManagementUnitFluentMappingIdentityDTO(SampleSystem.Generated.DTO.ManagementUnitFluentMappingSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public ManagementUnitFluentMappingIdentityDTO(SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public ManagementUnitFluentMappingIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO identity1, SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO identity1, SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToManagementUnitFluentMapping(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.NhFluentMapping.PureFluentMappingObject), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct PureFluentMappingObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public PureFluentMappingObjectIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public PureFluentMappingObjectIdentityDTO(SampleSystem.Domain.NhFluentMapping.PureFluentMappingObject domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public PureFluentMappingObjectIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO identity1, SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO identity1, SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.NhFluentMapping.PureFluentMappingObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToPureFluentMappingObject(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.NLock.GenericNamedLock), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct GenericNamedLockIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO EmptyField = new SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public GenericNamedLockIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public GenericNamedLockIdentityDTO(SampleSystem.Domain.NLock.GenericNamedLock domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public GenericNamedLockIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO identity1, SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO identity1, SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.NLock.GenericNamedLock ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToGenericNamedLock(this);
         }
         
         public override string ToString()
@@ -5393,109 +6071,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Principal), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct PrincipalIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.PrincipalIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.PrincipalIdentityDTO EmptyField = new SampleSystem.Generated.DTO.PrincipalIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public PrincipalIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public PrincipalIdentityDTO(SampleSystem.Generated.DTO.PrincipalSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public PrincipalIdentityDTO(SampleSystem.Domain.Principal domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public PrincipalIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.PrincipalIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.PrincipalIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.PrincipalIdentityDTO identity1, SampleSystem.Generated.DTO.PrincipalIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.PrincipalIdentityDTO identity1, SampleSystem.Generated.DTO.PrincipalIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.PrincipalIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.PrincipalIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.PrincipalIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.Principal ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToPrincipal(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Project), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projects.Project), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct ProjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.ProjectIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -5509,7 +6085,7 @@ namespace SampleSystem.Generated.DTO
             this._id = id;
         }
         
-        public ProjectIdentityDTO(SampleSystem.Domain.Project domainObject)
+        public ProjectIdentityDTO(SampleSystem.Domain.Projects.Project domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -5577,195 +6153,9 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.Project ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Projects.Project ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToProject(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.PureFluentMappingObject), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct PureFluentMappingObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public PureFluentMappingObjectIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public PureFluentMappingObjectIdentityDTO(SampleSystem.Domain.PureFluentMappingObject domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public PureFluentMappingObjectIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO identity1, SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO identity1, SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.PureFluentMappingObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToPureFluentMappingObject(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.RoleRoleDegreeLink), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct RoleRoleDegreeLinkIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO EmptyField = new SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public RoleRoleDegreeLinkIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public RoleRoleDegreeLinkIdentityDTO(SampleSystem.Domain.RoleRoleDegreeLink domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public RoleRoleDegreeLinkIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO identity1, SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO identity1, SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.RoleRoleDegreeLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToRoleRoleDegreeLink(this);
         }
         
         public override string ToString()
@@ -6080,21 +6470,30 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestExceptObject), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestRootSecurityObj), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct TestExceptObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    public struct TestRootSecurityObjIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
-        private static SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO(System.Guid.Empty);
+        private static SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO(System.Guid.Empty);
         
         private System.Guid _id;
         
-        public TestExceptObjectIdentityDTO(System.Guid id)
+        public TestRootSecurityObjIdentityDTO(System.Guid id)
         {
             this._id = id;
         }
         
-        public TestExceptObjectIdentityDTO(SampleSystem.Domain.TestExceptObject domainObject)
+        public TestRootSecurityObjIdentityDTO(SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public TestRootSecurityObjIdentityDTO(SampleSystem.Domain.TestDependency.TestRootSecurityObj domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -6103,16 +6502,16 @@ namespace SampleSystem.Generated.DTO
             this._id = domainObject.Id;
         }
         
-        public TestExceptObjectIdentityDTO(string id) : 
+        public TestRootSecurityObjIdentityDTO(string id) : 
                 this(new System.Guid(id))
         {
         }
         
-        public static SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO Empty
+        public static SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO Empty
         {
             get
             {
-                return SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO.EmptyField;
+                return SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO.EmptyField;
             }
         }
         
@@ -6137,22 +6536,22 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public static bool operator !=(SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO identity2)
+        public static bool operator !=(SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO identity1, SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO identity2)
         {
             return !(identity1 == identity2);
         }
         
-        public static bool operator ==(SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO identity2)
+        public static bool operator ==(SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO identity1, SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO identity2)
         {
             return identity1.Equals(identity2);
         }
         
         public override bool Equals(object other)
         {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO)(other)));
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO)(other)));
         }
         
-        public bool Equals(SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO other)
+        public bool Equals(SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO other)
         {
             return (this._id == other.Id);
         }
@@ -6162,9 +6561,723 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.TestExceptObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.TestDependency.TestRootSecurityObj ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
-            return mappingService.ToTestExceptObject(this);
+            return mappingService.ToTestRootSecurityObj(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecurityObjItem), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestSecurityObjItemIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestSecurityObjItemIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestSecurityObjItemIdentityDTO(SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public TestSecurityObjItemIdentityDTO(SampleSystem.Domain.TestDependency.TestSecurityObjItem domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestSecurityObjItemIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO identity1, SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO identity1, SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TestDependency.TestSecurityObjItem ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestSecurityObjItem(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestSecuritySubObjItemIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestSecuritySubObjItemIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestSecuritySubObjItemIdentityDTO(SampleSystem.Generated.DTO.TestSecuritySubObjItemSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public TestSecuritySubObjItemIdentityDTO(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestSecuritySubObjItemIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO identity1, SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO identity1, SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TestDependency.TestSecuritySubObjItem ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestSecuritySubObjItem(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestSecuritySubObjItem2IdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestSecuritySubObjItem2IdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestSecuritySubObjItem2IdentityDTO(SampleSystem.Generated.DTO.TestSecuritySubObjItem2SimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public TestSecuritySubObjItem2IdentityDTO(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2 domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestSecuritySubObjItem2IdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO identity1, SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO identity1, SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestSecuritySubObjItem2(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestSecuritySubObjItem3IdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestSecuritySubObjItem3IdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestSecuritySubObjItem3IdentityDTO(SampleSystem.Generated.DTO.TestSecuritySubObjItem3SimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public TestSecuritySubObjItem3IdentityDTO(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3 domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestSecuritySubObjItem3IdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO identity1, SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO identity1, SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestSecuritySubObjItem3(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDeserializedAuth.TestItemAuthObject), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestItemAuthObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestItemAuthObjectIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestItemAuthObjectIdentityDTO(SampleSystem.Generated.DTO.TestItemAuthObjectSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public TestItemAuthObjectIdentityDTO(SampleSystem.Domain.TestDeserializedAuth.TestItemAuthObject domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestItemAuthObjectIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TestDeserializedAuth.TestItemAuthObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestItemAuthObject(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestPerformanceObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestPerformanceObjectIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestPerformanceObjectIdentityDTO(SampleSystem.Generated.DTO.TestPerformanceObjectSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public TestPerformanceObjectIdentityDTO(SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestPerformanceObjectIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestPerformanceObject(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestPlainAuthObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestPlainAuthObjectIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestPlainAuthObjectIdentityDTO(SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this._id = source.Id;
+        }
+        
+        public TestPlainAuthObjectIdentityDTO(SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestPlainAuthObjectIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestPlainAuthObject(this);
         }
         
         public override string ToString()
@@ -6554,108 +7667,6 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestItemAuthObject), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct TestItemAuthObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public TestItemAuthObjectIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public TestItemAuthObjectIdentityDTO(SampleSystem.Generated.DTO.TestItemAuthObjectSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public TestItemAuthObjectIdentityDTO(SampleSystem.Domain.TestItemAuthObject domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public TestItemAuthObjectIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.TestItemAuthObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToTestItemAuthObject(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestJobObject), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct TestJobObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestJobObjectIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
@@ -6741,405 +7752,6 @@ namespace SampleSystem.Generated.DTO
         public SampleSystem.Domain.TestJobObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToTestJobObject(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestObjForNested), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct TestObjForNestedIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public TestObjForNestedIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public TestObjForNestedIdentityDTO(SampleSystem.Generated.DTO.TestObjForNestedSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public TestObjForNestedIdentityDTO(SampleSystem.Domain.TestObjForNested domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public TestObjForNestedIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO identity1, SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO identity1, SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.TestObjForNested ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToTestObjForNested(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestObjForNestedBase), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct TestObjForNestedBaseIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public TestObjForNestedBaseIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public TestObjForNestedBaseIdentityDTO(SampleSystem.Domain.TestObjForNestedBase domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public TestObjForNestedBaseIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO identity1, SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO identity1, SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.TestObjForNestedBase ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToTestObjForNestedBase(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPerformanceObject), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct TestPerformanceObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public TestPerformanceObjectIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public TestPerformanceObjectIdentityDTO(SampleSystem.Generated.DTO.TestPerformanceObjectSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public TestPerformanceObjectIdentityDTO(SampleSystem.Domain.TestPerformanceObject domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public TestPerformanceObjectIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.TestPerformanceObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToTestPerformanceObject(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPlainAuthObject), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct TestPlainAuthObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public TestPlainAuthObjectIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public TestPlainAuthObjectIdentityDTO(SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public TestPlainAuthObjectIdentityDTO(SampleSystem.Domain.TestPlainAuthObject domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public TestPlainAuthObjectIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.TestPlainAuthObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToTestPlainAuthObject(this);
         }
         
         public override string ToString()
@@ -7427,711 +8039,6 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRestrictionObject), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct TestRestrictionObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public TestRestrictionObjectIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public TestRestrictionObjectIdentityDTO(SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public TestRestrictionObjectIdentityDTO(SampleSystem.Domain.TestRestrictionObject domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public TestRestrictionObjectIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.TestRestrictionObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToTestRestrictionObject(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRootSecurityObj), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct TestRootSecurityObjIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public TestRootSecurityObjIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public TestRootSecurityObjIdentityDTO(SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public TestRootSecurityObjIdentityDTO(SampleSystem.Domain.TestRootSecurityObj domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public TestRootSecurityObjIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO identity1, SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO identity1, SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.TestRootSecurityObj ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToTestRootSecurityObj(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecurityObjItem), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct TestSecurityObjItemIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public TestSecurityObjItemIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public TestSecurityObjItemIdentityDTO(SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public TestSecurityObjItemIdentityDTO(SampleSystem.Domain.TestSecurityObjItem domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public TestSecurityObjItemIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO identity1, SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO identity1, SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.TestSecurityObjItem ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToTestSecurityObjItem(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct TestSecuritySubObjItemIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public TestSecuritySubObjItemIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public TestSecuritySubObjItemIdentityDTO(SampleSystem.Generated.DTO.TestSecuritySubObjItemSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public TestSecuritySubObjItemIdentityDTO(SampleSystem.Domain.TestSecuritySubObjItem domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public TestSecuritySubObjItemIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO identity1, SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO identity1, SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.TestSecuritySubObjItem ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToTestSecuritySubObjItem(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem2), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct TestSecuritySubObjItem2IdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public TestSecuritySubObjItem2IdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public TestSecuritySubObjItem2IdentityDTO(SampleSystem.Generated.DTO.TestSecuritySubObjItem2SimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public TestSecuritySubObjItem2IdentityDTO(SampleSystem.Domain.TestSecuritySubObjItem2 domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public TestSecuritySubObjItem2IdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO identity1, SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO identity1, SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.TestSecuritySubObjItem2 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToTestSecuritySubObjItem2(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem3), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct TestSecuritySubObjItem3IdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public TestSecuritySubObjItem3IdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public TestSecuritySubObjItem3IdentityDTO(SampleSystem.Generated.DTO.TestSecuritySubObjItem3SimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public TestSecuritySubObjItem3IdentityDTO(SampleSystem.Domain.TestSecuritySubObjItem3 domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public TestSecuritySubObjItem3IdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO identity1, SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO identity1, SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.TestSecuritySubObjItem3 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToTestSecuritySubObjItem3(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.UniqueByMaster.ParentEntity), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct ParentEntityIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.ParentEntityIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.ParentEntityIdentityDTO EmptyField = new SampleSystem.Generated.DTO.ParentEntityIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public ParentEntityIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public ParentEntityIdentityDTO(SampleSystem.Domain.UniqueByMaster.ParentEntity domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public ParentEntityIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.ParentEntityIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.ParentEntityIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.ParentEntityIdentityDTO identity1, SampleSystem.Generated.DTO.ParentEntityIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.ParentEntityIdentityDTO identity1, SampleSystem.Generated.DTO.ParentEntityIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ParentEntityIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ParentEntityIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.ParentEntityIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.UniqueByMaster.ParentEntity ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToParentEntity(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.UniqueByParent.ChildEntity), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct ChildEntityIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.ChildEntityIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
@@ -8217,6 +8124,99 @@ namespace SampleSystem.Generated.DTO
         public SampleSystem.Domain.UniqueByParent.ChildEntity ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToChildEntity(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.UniqueByParent.ParentEntity), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct ParentEntityIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.ParentEntityIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.ParentEntityIdentityDTO EmptyField = new SampleSystem.Generated.DTO.ParentEntityIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public ParentEntityIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public ParentEntityIdentityDTO(SampleSystem.Domain.UniqueByParent.ParentEntity domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public ParentEntityIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.ParentEntityIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.ParentEntityIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.ParentEntityIdentityDTO identity1, SampleSystem.Generated.DTO.ParentEntityIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.ParentEntityIdentityDTO identity1, SampleSystem.Generated.DTO.ParentEntityIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ParentEntityIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ParentEntityIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.ParentEntityIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.UniqueByParent.ParentEntity ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToParentEntity(this);
         }
         
         public override string ToString()
@@ -8394,431 +8394,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Address), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AddressFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AddressRichDTO))]
-    public partial class AddressSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.AddressIdentityDTO>
-    {
-        
-        private SampleSystem.Domain.AddressType _addressType;
-        
-        private string _cityName;
-        
-        private string _regionName;
-        
-        private string _street;
-        
-        private string _zip;
-        
-        public AddressSimpleDTO()
-        {
-        }
-        
-        public AddressSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Address domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapAddress(domainObject, this);
-        }
-        
-        public AddressSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.AddressType AddressType
-        {
-            get
-            {
-                return this._addressType;
-            }
-            set
-            {
-                this._addressType = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CityName
-        {
-            get
-            {
-                return this._cityName;
-            }
-            set
-            {
-                this._cityName = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.AddressIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.AddressIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string RegionName
-        {
-            get
-            {
-                return this._regionName;
-            }
-            set
-            {
-                this._regionName = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Street
-        {
-            get
-            {
-                return this._street;
-            }
-            set
-            {
-                this._street = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Zip
-        {
-            get
-            {
-                return this._zip;
-            }
-            set
-            {
-                this._zip = value;
-            }
-        }
-        
-        public virtual SampleSystem.Generated.DTO.AddressStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.AddressStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Address), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AddressRichDTO))]
-    public partial class AddressFullDTO : SampleSystem.Generated.DTO.AddressSimpleDTO
-    {
-        
-        private SampleSystem.Generated.DTO.CountrySimpleDTO _countryName;
-        
-        private SampleSystem.Generated.DTO.LegalEntityBaseSimpleDTO _legalEntity;
-        
-        public AddressFullDTO()
-        {
-        }
-        
-        public AddressFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Address domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapAddress(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CountrySimpleDTO CountryName
-        {
-            get
-            {
-                return this._countryName;
-            }
-            set
-            {
-                this._countryName = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LegalEntityBaseSimpleDTO LegalEntity
-        {
-            get
-            {
-                return this._legalEntity;
-            }
-            set
-            {
-                this._legalEntity = value;
-            }
-        }
-        
-        public override SampleSystem.Generated.DTO.AddressStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.AddressStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Address), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class AddressRichDTO : SampleSystem.Generated.DTO.AddressFullDTO
-    {
-        
-        public AddressRichDTO()
-        {
-        }
-        
-        public AddressRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Address domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapAddress(domainObject, this);
-        }
-        
-        public override SampleSystem.Generated.DTO.AddressStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.AddressStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Address), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class AddressStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Address, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Address>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.AddressIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
-    {
-        
-        private SampleSystem.Domain.AddressType _addressType;
-        
-        private string _cityName;
-        
-        private SampleSystem.Generated.DTO.CountryIdentityDTO _countryName;
-        
-        private System.Guid _id;
-        
-        private string _regionName;
-        
-        private string _street;
-        
-        private long _version;
-        
-        private string _zip;
-        
-        public AddressStrictDTO()
-        {
-        }
-        
-        public AddressStrictDTO(SampleSystem.Generated.DTO.AddressRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.AddressFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForAddress(this, source);
-        }
-        
-        public AddressStrictDTO(SampleSystem.Generated.DTO.AddressRichDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public AddressStrictDTO(SampleSystem.Generated.DTO.AddressFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.AddressSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForAddress(this, source);
-        }
-        
-        public AddressStrictDTO(SampleSystem.Generated.DTO.AddressFullDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public AddressStrictDTO(SampleSystem.Generated.DTO.AddressSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForAddress(this, source);
-        }
-        
-        public AddressStrictDTO(SampleSystem.Generated.DTO.AddressSimpleDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private AddressStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.BasePersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBaseAuditPersistentToStrictForAddress(this, source);
-        }
-        
-        private AddressStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private AddressStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBasePersistentToStrictForAddress(this, source);
-        }
-        
-        private AddressStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.AddressType AddressType
-        {
-            get
-            {
-                return this._addressType;
-            }
-            set
-            {
-                this._addressType = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CityName
-        {
-            get
-            {
-                return this._cityName;
-            }
-            set
-            {
-                this._cityName = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CountryIdentityDTO CountryName
-        {
-            get
-            {
-                return this._countryName;
-            }
-            set
-            {
-                this._countryName = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.AddressIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.AddressIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string RegionName
-        {
-            get
-            {
-                return this._regionName;
-            }
-            set
-            {
-                this._regionName = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Street
-        {
-            get
-            {
-                return this._street;
-            }
-            set
-            {
-                this._street = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version
-        {
-            get
-            {
-                return this._version;
-            }
-            set
-            {
-                this._version = value;
-            }
-        }
-        
-        long Framework.Application.Domain.IVersionObject<long>.Version
-        {
-            get
-            {
-                return this.Version;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Zip
-        {
-            get
-            {
-                return this._zip;
-            }
-            set
-            {
-                this._zip = value;
-            }
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Address domainObject)
-        {
-            mappingService.MapAddress(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.Address ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToAddress(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class BusinessUnitVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
     {
@@ -8829,7 +8405,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnit domainObject) : 
+        public BusinessUnitVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BU.BusinessUnit domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnit(domainObject, this);
@@ -8858,7 +8434,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitRichDTO))]
@@ -8867,7 +8443,7 @@ namespace SampleSystem.Generated.DTO
         
         private bool _allowedForFilterRole;
         
-        private SampleSystem.Domain.BusinessUnitStatus _businessUnitStatus;
+        private SampleSystem.Domain.Enums.BusinessUnitStatus _businessUnitStatus;
         
         private string _businessUnitTypeName;
         
@@ -8899,7 +8475,7 @@ namespace SampleSystem.Generated.DTO
         
         private int _newBusinessStatusLeft;
         
-        private SampleSystem.Domain.BusinessUnitOptions _options;
+        private SampleSystem.Domain.Enums.BusinessUnitOptions _options;
         
         private Framework.Core.Period _period = Framework.Core.Period.Eternity;
         
@@ -8911,7 +8487,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnit domainObject) : 
+        public BusinessUnitSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BU.BusinessUnit domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnit(domainObject, this);
@@ -8936,7 +8512,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus
+        public SampleSystem.Domain.Enums.BusinessUnitStatus BusinessUnitStatus
         {
             get
             {
@@ -9153,7 +8729,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitOptions Options
+        public SampleSystem.Domain.Enums.BusinessUnitOptions Options
         {
             get
             {
@@ -9210,7 +8786,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitRichDTO))]
     public partial class BusinessUnitFullDTO : SampleSystem.Generated.DTO.BusinessUnitSimpleDTO
@@ -9226,7 +8802,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnit domainObject) : 
+        public BusinessUnitFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BU.BusinessUnit domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnit(domainObject, this);
@@ -9277,7 +8853,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class BusinessUnitRichDTO : SampleSystem.Generated.DTO.BusinessUnitFullDTO
     {
@@ -9294,7 +8870,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnit domainObject) : 
+        public BusinessUnitRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BU.BusinessUnit domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnit(domainObject, this);
@@ -9358,9 +8934,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnit, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnit>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class BusinessUnitStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BU.BusinessUnit, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BU.BusinessUnit>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private bool _allowedForFilterRole;
@@ -9369,7 +8945,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Generated.DTO.BusinessUnitIdentityDTO _businessUnitForRent;
         
-        private SampleSystem.Domain.BusinessUnitStatus _businessUnitStatus;
+        private SampleSystem.Domain.Enums.BusinessUnitStatus _businessUnitStatus;
         
         private decimal _commission;
         
@@ -9395,7 +8971,7 @@ namespace SampleSystem.Generated.DTO
         
         private int _newBusinessStatusLeft;
         
-        private SampleSystem.Domain.BusinessUnitOptions _options;
+        private SampleSystem.Domain.Enums.BusinessUnitOptions _options;
         
         private string _projectStartMailList;
         
@@ -9521,7 +9097,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus
+        public SampleSystem.Domain.Enums.BusinessUnitStatus BusinessUnitStatus
         {
             get
             {
@@ -9707,7 +9283,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitOptions Options
+        public SampleSystem.Domain.Enums.BusinessUnitOptions Options
         {
             get
             {
@@ -9766,36 +9342,36 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnit domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BU.BusinessUnit domainObject)
         {
             mappingService.MapBusinessUnit(this, domainObject);
         }
         
-        public SampleSystem.Domain.BusinessUnit ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.BU.BusinessUnit ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnit(this);
         }
         
-        public SampleSystem.Domain.BusinessUnit ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.BU.BusinessUnit ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToBusinessUnit(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitEmployeeRole), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitEmployeeRole), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleRichDTO))]
     public partial class BusinessUnitEmployeeRoleSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleIdentityDTO>
     {
         
-        private SampleSystem.Domain.BusinessUnitEmployeeRoleType _role;
+        private SampleSystem.Domain.Enums.BusinessUnitEmployeeRoleType _role;
         
         public BusinessUnitEmployeeRoleSimpleDTO()
         {
         }
         
-        public BusinessUnitEmployeeRoleSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitEmployeeRole domainObject) : 
+        public BusinessUnitEmployeeRoleSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BU.BusinessUnitEmployeeRole domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitEmployeeRole(domainObject, this);
@@ -9816,7 +9392,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitEmployeeRoleType Role
+        public SampleSystem.Domain.Enums.BusinessUnitEmployeeRoleType Role
         {
             get
             {
@@ -9834,7 +9410,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitEmployeeRole), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitEmployeeRole), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleRichDTO))]
     public partial class BusinessUnitEmployeeRoleFullDTO : SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleSimpleDTO
@@ -9848,7 +9424,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitEmployeeRoleFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitEmployeeRole domainObject) : 
+        public BusinessUnitEmployeeRoleFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BU.BusinessUnitEmployeeRole domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitEmployeeRole(domainObject, this);
@@ -9886,7 +9462,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitEmployeeRole), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitEmployeeRole), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class BusinessUnitEmployeeRoleRichDTO : SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleFullDTO
     {
@@ -9895,7 +9471,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitEmployeeRoleRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitEmployeeRole domainObject) : 
+        public BusinessUnitEmployeeRoleRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BU.BusinessUnitEmployeeRole domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitEmployeeRole(domainObject, this);
@@ -9907,16 +9483,16 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitEmployeeRole), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitEmployeeRole), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitEmployeeRoleStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitEmployeeRole, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitEmployeeRole>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class BusinessUnitEmployeeRoleStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BU.BusinessUnitEmployeeRole, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BU.BusinessUnitEmployeeRole>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.EmployeeIdentityDTO _employee;
         
         private System.Guid _id;
         
-        private SampleSystem.Domain.BusinessUnitEmployeeRoleType _role;
+        private SampleSystem.Domain.Enums.BusinessUnitEmployeeRoleType _role;
         
         private long _version;
         
@@ -10042,7 +9618,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitEmployeeRoleType Role
+        public SampleSystem.Domain.Enums.BusinessUnitEmployeeRoleType Role
         {
             get
             {
@@ -10075,18 +9651,18 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitEmployeeRole domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BU.BusinessUnitEmployeeRole domainObject)
         {
             mappingService.MapBusinessUnitEmployeeRole(this, domainObject);
         }
         
-        public SampleSystem.Domain.BusinessUnitEmployeeRole ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.BU.BusinessUnitEmployeeRole ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnitEmployeeRole(this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitHrDepartment), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitHrDepartment), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentRichDTO))]
@@ -10097,7 +9673,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitHrDepartmentSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitHrDepartment domainObject) : 
+        public BusinessUnitHrDepartmentSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BU.BusinessUnitHrDepartment domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitHrDepartment(domainObject, this);
@@ -10123,7 +9699,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitHrDepartment), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitHrDepartment), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentRichDTO))]
     public partial class BusinessUnitHrDepartmentFullDTO : SampleSystem.Generated.DTO.BusinessUnitHrDepartmentSimpleDTO
@@ -10137,7 +9713,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitHrDepartmentFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitHrDepartment domainObject) : 
+        public BusinessUnitHrDepartmentFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BU.BusinessUnitHrDepartment domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitHrDepartment(domainObject, this);
@@ -10175,7 +9751,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitHrDepartment), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitHrDepartment), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class BusinessUnitHrDepartmentRichDTO : SampleSystem.Generated.DTO.BusinessUnitHrDepartmentFullDTO
     {
@@ -10184,7 +9760,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitHrDepartmentRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitHrDepartment domainObject) : 
+        public BusinessUnitHrDepartmentRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BU.BusinessUnitHrDepartment domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitHrDepartment(domainObject, this);
@@ -10196,9 +9772,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitHrDepartment), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitHrDepartment), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitHrDepartmentStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitHrDepartment, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitHrDepartment>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class BusinessUnitHrDepartmentStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BU.BusinessUnitHrDepartment, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BU.BusinessUnitHrDepartment>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.BusinessUnitIdentityDTO _businessUnit;
@@ -10364,23 +9940,23 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitHrDepartment domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BU.BusinessUnitHrDepartment domainObject)
         {
             mappingService.MapBusinessUnitHrDepartment(this, domainObject);
         }
         
-        public SampleSystem.Domain.BusinessUnitHrDepartment ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.BU.BusinessUnitHrDepartment ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnitHrDepartment(this);
         }
         
-        public SampleSystem.Domain.BusinessUnitHrDepartment ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.BU.BusinessUnitHrDepartment ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToBusinessUnitHrDepartment(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkRichDTO))]
@@ -10395,7 +9971,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitManagerCommissionLinkSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitManagerCommissionLink domainObject) : 
+        public BusinessUnitManagerCommissionLinkSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitManagerCommissionLink(domainObject, this);
@@ -10447,7 +10023,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkRichDTO))]
     public partial class BusinessUnitManagerCommissionLinkFullDTO : SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkSimpleDTO
@@ -10461,7 +10037,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitManagerCommissionLinkFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitManagerCommissionLink domainObject) : 
+        public BusinessUnitManagerCommissionLinkFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitManagerCommissionLink(domainObject, this);
@@ -10499,7 +10075,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class BusinessUnitManagerCommissionLinkRichDTO : SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkFullDTO
     {
@@ -10508,7 +10084,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitManagerCommissionLinkRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitManagerCommissionLink domainObject) : 
+        public BusinessUnitManagerCommissionLinkRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitManagerCommissionLink(domainObject, this);
@@ -10520,9 +10096,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitManagerCommissionLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitManagerCommissionLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitManagerCommissionLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class BusinessUnitManagerCommissionLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.BusinessUnitIdentityDTO _businessUnit;
@@ -10718,118 +10294,447 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitManagerCommissionLink domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink domainObject)
         {
             mappingService.MapBusinessUnitManagerCommissionLink(this, domainObject);
         }
         
-        public SampleSystem.Domain.BusinessUnitManagerCommissionLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnitManagerCommissionLink(this);
         }
         
-        public SampleSystem.Domain.BusinessUnitManagerCommissionLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToBusinessUnitManagerCommissionLink(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitRootFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.Address), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitRootFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitRootFilterModel>
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AddressFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AddressRichDTO))]
+    public partial class AddressSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.AddressIdentityDTO>
     {
         
-        private System.DateTime[] _arrayDays;
+        private SampleSystem.Domain.Enums.AddressType _addressType;
         
-        private Framework.Core.Period[] _arrayPeriods;
+        private string _cityName;
         
-        private SampleSystem.Generated.DTO.EmployeeIdentityDTO _employee;
+        private string _regionName;
         
-        private System.Collections.Generic.List<System.DateTime> _listDays = new System.Collections.Generic.List<System.DateTime>();
+        private string _street;
         
-        private System.Collections.Generic.List<Framework.Core.Period> _listPeriods = new System.Collections.Generic.List<Framework.Core.Period>();
+        private string _zip;
         
-        public BusinessUnitRootFilterModelStrictDTO()
+        public AddressSimpleDTO()
         {
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime[] ArrayDays
+        public AddressSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.Address domainObject) : 
+                base(mappingService, domainObject)
         {
-            get
-            {
-                return this._arrayDays;
-            }
-            set
-            {
-                this._arrayDays = value;
-            }
+            mappingService.MapAddress(domainObject, this);
+        }
+        
+        public AddressSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period[] ArrayPeriods
+        public SampleSystem.Domain.Enums.AddressType AddressType
         {
             get
             {
-                return this._arrayPeriods;
+                return this._addressType;
             }
             set
             {
-                this._arrayPeriods = value;
+                this._addressType = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeIdentityDTO Employee
+        public string CityName
         {
             get
             {
-                return this._employee;
+                return this._cityName;
             }
             set
             {
-                this._employee = value;
+                this._cityName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.AddressIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.AddressIdentityDTO(this.Id);
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<System.DateTime> ListDays
+        public string RegionName
         {
             get
             {
-                return this._listDays;
+                return this._regionName;
             }
             set
             {
-                this._listDays = value;
+                this._regionName = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Framework.Core.Period> ListPeriods
+        public string Street
         {
             get
             {
-                return this._listPeriods;
+                return this._street;
             }
             set
             {
-                this._listPeriods = value;
+                this._street = value;
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitRootFilterModel domainObject)
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Zip
         {
-            mappingService.MapBusinessUnitRootFilterModel(this, domainObject);
+            get
+            {
+                return this._zip;
+            }
+            set
+            {
+                this._zip = value;
+            }
         }
         
-        public SampleSystem.Domain.BusinessUnitRootFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public virtual SampleSystem.Generated.DTO.AddressStrictDTO ToStrict()
         {
-            return mappingService.ToBusinessUnitRootFilterModel(this);
+            return new SampleSystem.Generated.DTO.AddressStrictDTO(this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitType), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.Address), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AddressRichDTO))]
+    public partial class AddressFullDTO : SampleSystem.Generated.DTO.AddressSimpleDTO
+    {
+        
+        private SampleSystem.Generated.DTO.CountrySimpleDTO _countryName;
+        
+        private SampleSystem.Generated.DTO.LegalEntityBaseSimpleDTO _legalEntity;
+        
+        public AddressFullDTO()
+        {
+        }
+        
+        public AddressFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.Address domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapAddress(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.CountrySimpleDTO CountryName
+        {
+            get
+            {
+                return this._countryName;
+            }
+            set
+            {
+                this._countryName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LegalEntityBaseSimpleDTO LegalEntity
+        {
+            get
+            {
+                return this._legalEntity;
+            }
+            set
+            {
+                this._legalEntity = value;
+            }
+        }
+        
+        public override SampleSystem.Generated.DTO.AddressStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.AddressStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.Address), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class AddressRichDTO : SampleSystem.Generated.DTO.AddressFullDTO
+    {
+        
+        public AddressRichDTO()
+        {
+        }
+        
+        public AddressRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.Address domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapAddress(domainObject, this);
+        }
+        
+        public override SampleSystem.Generated.DTO.AddressStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.AddressStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.Address), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class AddressStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.Address, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.Address>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.AddressIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    {
+        
+        private SampleSystem.Domain.Enums.AddressType _addressType;
+        
+        private string _cityName;
+        
+        private SampleSystem.Generated.DTO.CountryIdentityDTO _countryName;
+        
+        private System.Guid _id;
+        
+        private string _regionName;
+        
+        private string _street;
+        
+        private long _version;
+        
+        private string _zip;
+        
+        public AddressStrictDTO()
+        {
+        }
+        
+        public AddressStrictDTO(SampleSystem.Generated.DTO.AddressRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.AddressFullDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapRichToStrictForAddress(this, source);
+        }
+        
+        public AddressStrictDTO(SampleSystem.Generated.DTO.AddressRichDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public AddressStrictDTO(SampleSystem.Generated.DTO.AddressFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.AddressSimpleDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapFullToStrictForAddress(this, source);
+        }
+        
+        public AddressStrictDTO(SampleSystem.Generated.DTO.AddressFullDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public AddressStrictDTO(SampleSystem.Generated.DTO.AddressSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapSimpleToStrictForAddress(this, source);
+        }
+        
+        public AddressStrictDTO(SampleSystem.Generated.DTO.AddressSimpleDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        private AddressStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.BasePersistentDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapBaseAuditPersistentToStrictForAddress(this, source);
+        }
+        
+        private AddressStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        private AddressStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapBasePersistentToStrictForAddress(this, source);
+        }
+        
+        private AddressStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.Enums.AddressType AddressType
+        {
+            get
+            {
+                return this._addressType;
+            }
+            set
+            {
+                this._addressType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CityName
+        {
+            get
+            {
+                return this._cityName;
+            }
+            set
+            {
+                this._cityName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.CountryIdentityDTO CountryName
+        {
+            get
+            {
+                return this._countryName;
+            }
+            set
+            {
+                this._countryName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.AddressIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.AddressIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RegionName
+        {
+            get
+            {
+                return this._regionName;
+            }
+            set
+            {
+                this._regionName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Street
+        {
+            get
+            {
+                return this._street;
+            }
+            set
+            {
+                this._street = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
+        
+        long Framework.Application.Domain.IVersionObject<long>.Version
+        {
+            get
+            {
+                return this.Version;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Zip
+        {
+            get
+            {
+                return this._zip;
+            }
+            set
+            {
+                this._zip = value;
+            }
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.Address domainObject)
+        {
+            mappingService.MapAddress(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Directories.Address ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToAddress(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitType), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class BusinessUnitTypeVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO>
     {
@@ -10840,7 +10745,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitTypeVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitType domainObject) : 
+        public BusinessUnitTypeVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.BusinessUnitType domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitType(domainObject, this);
@@ -10869,7 +10774,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitType), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitType), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitTypeFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitTypeRichDTO))]
@@ -10898,9 +10803,9 @@ namespace SampleSystem.Generated.DTO
         
         private bool _needVertical;
         
-        private SampleSystem.Domain.PossibleStartDate? _possibleStartDate;
+        private SampleSystem.Domain.Enums.PossibleStartDate? _possibleStartDate;
         
-        private SampleSystem.Domain.PossibleStartDate? _possibleTransferDate;
+        private SampleSystem.Domain.Enums.PossibleStartDate? _possibleTransferDate;
         
         private bool _practiceAllowed;
         
@@ -10914,7 +10819,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitTypeSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitType domainObject) : 
+        public BusinessUnitTypeSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.BusinessUnitType domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitType(domainObject, this);
@@ -11078,7 +10983,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.PossibleStartDate? PossibleStartDate
+        public SampleSystem.Domain.Enums.PossibleStartDate? PossibleStartDate
         {
             get
             {
@@ -11091,7 +10996,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.PossibleStartDate? PossibleTransferDate
+        public SampleSystem.Domain.Enums.PossibleStartDate? PossibleTransferDate
         {
             get
             {
@@ -11161,7 +11066,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitType), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitType), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitTypeRichDTO))]
     public partial class BusinessUnitTypeFullDTO : SampleSystem.Generated.DTO.BusinessUnitTypeSimpleDTO
@@ -11171,7 +11076,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitTypeFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitType domainObject) : 
+        public BusinessUnitTypeFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.BusinessUnitType domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitType(domainObject, this);
@@ -11183,7 +11088,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitType), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitType), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class BusinessUnitTypeRichDTO : SampleSystem.Generated.DTO.BusinessUnitTypeFullDTO
     {
@@ -11198,7 +11103,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitTypeRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitType domainObject) : 
+        public BusinessUnitTypeRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.BusinessUnitType domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitType(domainObject, this);
@@ -11249,9 +11154,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitType), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitType), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitTypeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitType, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitType>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class BusinessUnitTypeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.BusinessUnitType, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.BusinessUnitType>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private bool _additionalStartConfirm;
@@ -11282,9 +11187,9 @@ namespace SampleSystem.Generated.DTO
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentStrictDTO> _possibleParents = new System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentStrictDTO>();
         
-        private SampleSystem.Domain.PossibleStartDate? _possibleStartDate;
+        private SampleSystem.Domain.Enums.PossibleStartDate? _possibleStartDate;
         
-        private SampleSystem.Domain.PossibleStartDate? _possibleTransferDate;
+        private SampleSystem.Domain.Enums.PossibleStartDate? _possibleTransferDate;
         
         private bool _practiceAllowed;
         
@@ -11576,7 +11481,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.PossibleStartDate? PossibleStartDate
+        public SampleSystem.Domain.Enums.PossibleStartDate? PossibleStartDate
         {
             get
             {
@@ -11589,7 +11494,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.PossibleStartDate? PossibleTransferDate
+        public SampleSystem.Domain.Enums.PossibleStartDate? PossibleTransferDate
         {
             get
             {
@@ -11687,36 +11592,36 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitType domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.BusinessUnitType domainObject)
         {
             mappingService.MapBusinessUnitType(this, domainObject);
         }
         
-        public SampleSystem.Domain.BusinessUnitType ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Directories.BusinessUnitType ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnitType(this);
         }
         
-        public SampleSystem.Domain.BusinessUnitType ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.Directories.BusinessUnitType ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToBusinessUnitType(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeRichDTO))]
     public partial class BusinessUnitTypeLinkWithPossibleFinancialProjectTypeSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeIdentityDTO>
     {
         
-        private SampleSystem.Domain.FinancialProjectType _financialProjectType;
+        private SampleSystem.Domain.Enums.FinancialProjectType _financialProjectType;
         
         public BusinessUnitTypeLinkWithPossibleFinancialProjectTypeSimpleDTO()
         {
         }
         
-        public BusinessUnitTypeLinkWithPossibleFinancialProjectTypeSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType domainObject) : 
+        public BusinessUnitTypeLinkWithPossibleFinancialProjectTypeSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitTypeLinkWithPossibleFinancialProjectType(domainObject, this);
@@ -11728,7 +11633,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.FinancialProjectType FinancialProjectType
+        public SampleSystem.Domain.Enums.FinancialProjectType FinancialProjectType
         {
             get
             {
@@ -11755,7 +11660,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeRichDTO))]
     public partial class BusinessUnitTypeLinkWithPossibleFinancialProjectTypeFullDTO : SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeSimpleDTO
@@ -11767,7 +11672,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitTypeLinkWithPossibleFinancialProjectTypeFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType domainObject) : 
+        public BusinessUnitTypeLinkWithPossibleFinancialProjectTypeFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitTypeLinkWithPossibleFinancialProjectType(domainObject, this);
@@ -11792,7 +11697,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class BusinessUnitTypeLinkWithPossibleFinancialProjectTypeRichDTO : SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeFullDTO
     {
@@ -11801,7 +11706,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitTypeLinkWithPossibleFinancialProjectTypeRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType domainObject) : 
+        public BusinessUnitTypeLinkWithPossibleFinancialProjectTypeRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitTypeLinkWithPossibleFinancialProjectType(domainObject, this);
@@ -11813,14 +11718,14 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitTypeLinkWithPossibleFinancialProjectTypeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class BusinessUnitTypeLinkWithPossibleFinancialProjectTypeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO _businessUnitType;
         
-        private SampleSystem.Domain.FinancialProjectType _financialProjectType;
+        private SampleSystem.Domain.Enums.FinancialProjectType _financialProjectType;
         
         private System.Guid _id;
         
@@ -11918,7 +11823,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.FinancialProjectType FinancialProjectType
+        public SampleSystem.Domain.Enums.FinancialProjectType FinancialProjectType
         {
             get
             {
@@ -11981,23 +11886,23 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType domainObject)
         {
             mappingService.MapBusinessUnitTypeLinkWithPossibleFinancialProjectType(this, domainObject);
         }
         
-        public SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnitTypeLinkWithPossibleFinancialProjectType(this);
         }
         
-        public SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleFinancialProjectType ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToBusinessUnitTypeLinkWithPossibleFinancialProjectType(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentRichDTO))]
@@ -12008,7 +11913,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitTypeLinkWithPossibleParentSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent domainObject) : 
+        public BusinessUnitTypeLinkWithPossibleParentSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitTypeLinkWithPossibleParent(domainObject, this);
@@ -12034,7 +11939,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentRichDTO))]
     public partial class BusinessUnitTypeLinkWithPossibleParentFullDTO : SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentSimpleDTO
@@ -12048,7 +11953,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitTypeLinkWithPossibleParentFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent domainObject) : 
+        public BusinessUnitTypeLinkWithPossibleParentFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitTypeLinkWithPossibleParent(domainObject, this);
@@ -12086,7 +11991,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class BusinessUnitTypeLinkWithPossibleParentRichDTO : SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentFullDTO
     {
@@ -12095,7 +12000,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitTypeLinkWithPossibleParentRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent domainObject) : 
+        public BusinessUnitTypeLinkWithPossibleParentRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitTypeLinkWithPossibleParent(domainObject, this);
@@ -12107,9 +12012,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitTypeLinkWithPossibleParentStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class BusinessUnitTypeLinkWithPossibleParentStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO _businessUnitType;
@@ -12275,23 +12180,23 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent domainObject)
         {
             mappingService.MapBusinessUnitTypeLinkWithPossibleParent(this, domainObject);
         }
         
-        public SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnitTypeLinkWithPossibleParent(this);
         }
         
-        public SampleSystem.Domain.BusinessUnitTypeLinkWithPossibleParent ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToBusinessUnitTypeLinkWithPossibleParent(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToRichDTO))]
@@ -12302,7 +12207,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitTypeLinkWithTransferToSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo domainObject) : 
+        public BusinessUnitTypeLinkWithTransferToSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitTypeLinkWithTransferTo(domainObject, this);
@@ -12328,7 +12233,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToRichDTO))]
     public partial class BusinessUnitTypeLinkWithTransferToFullDTO : SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToSimpleDTO
@@ -12342,7 +12247,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitTypeLinkWithTransferToFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo domainObject) : 
+        public BusinessUnitTypeLinkWithTransferToFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitTypeLinkWithTransferTo(domainObject, this);
@@ -12380,7 +12285,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class BusinessUnitTypeLinkWithTransferToRichDTO : SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToFullDTO
     {
@@ -12389,7 +12294,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public BusinessUnitTypeLinkWithTransferToRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo domainObject) : 
+        public BusinessUnitTypeLinkWithTransferToRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapBusinessUnitTypeLinkWithTransferTo(domainObject, this);
@@ -12401,9 +12306,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitTypeLinkWithTransferToStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class BusinessUnitTypeLinkWithTransferToStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO _businessUnitType;
@@ -12569,23 +12474,23 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo domainObject)
         {
             mappingService.MapBusinessUnitTypeLinkWithTransferTo(this, domainObject);
         }
         
-        public SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToBusinessUnitTypeLinkWithTransferTo(this);
         }
         
-        public SampleSystem.Domain.BusinessUnitTypeLinkWithTransferTo ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToBusinessUnitTypeLinkWithTransferTo(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.CompanyLegalEntity), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class CompanyLegalEntityVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>
     {
@@ -12596,7 +12501,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public CompanyLegalEntityVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.CompanyLegalEntity domainObject) : 
+        public CompanyLegalEntityVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.CompanyLegalEntity domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapCompanyLegalEntity(domainObject, this);
@@ -12625,14 +12530,14 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.CompanyLegalEntity), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.CompanyLegalEntityRichDTO))]
     public partial class CompanyLegalEntitySimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>
     {
         
-        private SampleSystem.Domain.RevenueDocumentAribaStatus _aribaStatus;
+        private SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus _aribaStatus;
         
         private string _code;
         
@@ -12640,13 +12545,13 @@ namespace SampleSystem.Generated.DTO
         
         private string _nameEnglish;
         
-        private SampleSystem.Domain.CompanyLegalEntityType _type;
+        private SampleSystem.Domain.Enums.CompanyLegalEntityType _type;
         
         public CompanyLegalEntitySimpleDTO()
         {
         }
         
-        public CompanyLegalEntitySimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.CompanyLegalEntity domainObject) : 
+        public CompanyLegalEntitySimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.CompanyLegalEntity domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapCompanyLegalEntity(domainObject, this);
@@ -12658,7 +12563,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.RevenueDocumentAribaStatus AribaStatus
+        public SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus AribaStatus
         {
             get
             {
@@ -12719,7 +12624,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.CompanyLegalEntityType Type
+        public SampleSystem.Domain.Enums.CompanyLegalEntityType Type
         {
             get
             {
@@ -12737,7 +12642,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.CompanyLegalEntity), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.CompanyLegalEntityRichDTO))]
     public partial class CompanyLegalEntityFullDTO : SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO
@@ -12753,7 +12658,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public CompanyLegalEntityFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.CompanyLegalEntity domainObject) : 
+        public CompanyLegalEntityFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.CompanyLegalEntity domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapCompanyLegalEntity(domainObject, this);
@@ -12804,7 +12709,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.CompanyLegalEntity), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class CompanyLegalEntityRichDTO : SampleSystem.Generated.DTO.CompanyLegalEntityFullDTO
     {
@@ -12815,7 +12720,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public CompanyLegalEntityRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.CompanyLegalEntity domainObject) : 
+        public CompanyLegalEntityRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.CompanyLegalEntity domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapCompanyLegalEntity(domainObject, this);
@@ -12840,9 +12745,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.CompanyLegalEntity), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class CompanyLegalEntityStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.CompanyLegalEntity, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.CompanyLegalEntity>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class CompanyLegalEntityStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.CompanyLegalEntity, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.CompanyLegalEntity>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private bool _active = true;
@@ -12863,7 +12768,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO _parent;
         
-        private SampleSystem.Domain.CompanyLegalEntityType _type;
+        private SampleSystem.Domain.Enums.CompanyLegalEntityType _type;
         
         private long _version;
         
@@ -13080,7 +12985,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.CompanyLegalEntityType Type
+        public SampleSystem.Domain.Enums.CompanyLegalEntityType Type
         {
             get
             {
@@ -13113,23 +13018,23 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.CompanyLegalEntity domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.CompanyLegalEntity domainObject)
         {
             mappingService.MapCompanyLegalEntity(this, domainObject);
         }
         
-        public SampleSystem.Domain.CompanyLegalEntity ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Directories.CompanyLegalEntity ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToCompanyLegalEntity(this);
         }
         
-        public SampleSystem.Domain.CompanyLegalEntity ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.Directories.CompanyLegalEntity ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToCompanyLegalEntity(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Country), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.Country), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class CountryVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CountryIdentityDTO>
     {
@@ -13140,7 +13045,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public CountryVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Country domainObject) : 
+        public CountryVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.Country domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapCountry(domainObject, this);
@@ -13169,7 +13074,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Country), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.Country), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.CountryFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.CountryRichDTO))]
@@ -13188,7 +13093,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public CountrySimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Country domainObject) : 
+        public CountrySimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.Country domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapCountry(domainObject, this);
@@ -13266,7 +13171,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Country), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.Country), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.CountryRichDTO))]
     public partial class CountryFullDTO : SampleSystem.Generated.DTO.CountrySimpleDTO
@@ -13276,7 +13181,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public CountryFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Country domainObject) : 
+        public CountryFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.Country domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapCountry(domainObject, this);
@@ -13288,7 +13193,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Country), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.Country), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class CountryRichDTO : SampleSystem.Generated.DTO.CountryFullDTO
     {
@@ -13297,7 +13202,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public CountryRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Country domainObject) : 
+        public CountryRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.Country domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapCountry(domainObject, this);
@@ -13309,9 +13214,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Country), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.Country), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class CountryStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Country, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Country>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CountryIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class CountryStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.Country, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.Country>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CountryIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private string _code;
@@ -13507,23 +13412,747 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Country domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.Country domainObject)
         {
             mappingService.MapCountry(this, domainObject);
         }
         
-        public SampleSystem.Domain.Country ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Directories.Country ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToCountry(this);
         }
         
-        public SampleSystem.Domain.Country ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.Directories.Country ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToCountry(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.LegalEntityBase), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class LegalEntityBaseSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO>
+    {
+        
+        private SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus _aribaStatus;
+        
+        private string _name;
+        
+        private string _nameEnglish;
+        
+        public LegalEntityBaseSimpleDTO()
+        {
+        }
+        
+        public LegalEntityBaseSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.LegalEntityBase domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapLegalEntityBase(domainObject, this);
+        }
+        
+        public LegalEntityBaseSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus AribaStatus
+        {
+            get
+            {
+                return this._aribaStatus;
+            }
+            set
+            {
+                this._aribaStatus = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NameEnglish
+        {
+            get
+            {
+                return this._nameEnglish;
+            }
+            set
+            {
+                this._nameEnglish = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.Location), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class LocationVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.LocationIdentityDTO>
+    {
+        
+        private string _name;
+        
+        public LocationVisualDTO()
+        {
+        }
+        
+        public LocationVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.Location domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapLocation(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.LocationIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.Location), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.LocationFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.LocationRichDTO))]
+    public partial class LocationSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.LocationIdentityDTO>
+    {
+        
+        private int _closeDate;
+        
+        private int _code;
+        
+        private bool _containsOnlyInactiveChildren;
+        
+        private int _deepLevel;
+        
+        private bool _isFinancial;
+        
+        private bool _isLeaf;
+        
+        private SampleSystem.Domain.Enums.LocationType _locationType;
+        
+        private string _name;
+        
+        public LocationSimpleDTO()
+        {
+        }
+        
+        public LocationSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.Location domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapLocation(domainObject, this);
+        }
+        
+        public LocationSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CloseDate
+        {
+            get
+            {
+                return this._closeDate;
+            }
+            set
+            {
+                this._closeDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                this._code = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool ContainsOnlyInactiveChildren
+        {
+            get
+            {
+                return this._containsOnlyInactiveChildren;
+            }
+            set
+            {
+                this._containsOnlyInactiveChildren = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel
+        {
+            get
+            {
+                return this._deepLevel;
+            }
+            set
+            {
+                this._deepLevel = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.LocationIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsFinancial
+        {
+            get
+            {
+                return this._isFinancial;
+            }
+            set
+            {
+                this._isFinancial = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsLeaf
+        {
+            get
+            {
+                return this._isLeaf;
+            }
+            set
+            {
+                this._isLeaf = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.Enums.LocationType LocationType
+        {
+            get
+            {
+                return this._locationType;
+            }
+            set
+            {
+                this._locationType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        public virtual SampleSystem.Generated.DTO.LocationStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.LocationStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.Location), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.LocationRichDTO))]
+    public partial class LocationFullDTO : SampleSystem.Generated.DTO.LocationSimpleDTO
+    {
+        
+        private SampleSystem.Generated.DTO.CountrySimpleDTO _country;
+        
+        private SampleSystem.Generated.DTO.LocationSimpleDTO _parent;
+        
+        public LocationFullDTO()
+        {
+        }
+        
+        public LocationFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.Location domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapLocation(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.CountrySimpleDTO Country
+        {
+            get
+            {
+                return this._country;
+            }
+            set
+            {
+                this._country = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationSimpleDTO Parent
+        {
+            get
+            {
+                return this._parent;
+            }
+            set
+            {
+                this._parent = value;
+            }
+        }
+        
+        public override SampleSystem.Generated.DTO.LocationStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.LocationStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.Location), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class LocationRichDTO : SampleSystem.Generated.DTO.LocationFullDTO
+    {
+        
+        private byte[] _binaryData;
+        
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationRichDTO> _children = new System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationRichDTO>();
+        
+        public LocationRichDTO()
+        {
+        }
+        
+        public LocationRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.Location domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapLocation(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] BinaryData
+        {
+            get
+            {
+                return this._binaryData;
+            }
+            set
+            {
+                this._binaryData = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationRichDTO> Children
+        {
+            get
+            {
+                return this._children;
+            }
+            set
+            {
+                this._children = value;
+            }
+        }
+        
+        public override SampleSystem.Generated.DTO.LocationStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.LocationStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.Location), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class LocationStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.Location, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.Location>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.LocationIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    {
+        
+        private bool _active = true;
+        
+        private byte[] _binaryData;
+        
+        private int _closeDate;
+        
+        private int _code;
+        
+        private SampleSystem.Generated.DTO.CountryIdentityDTO _country;
+        
+        private System.Guid _id;
+        
+        private bool _isFinancial;
+        
+        private SampleSystem.Domain.Enums.LocationType _locationType;
+        
+        private string _name;
+        
+        private SampleSystem.Generated.DTO.LocationIdentityDTO _parent;
+        
+        private long _version;
+        
+        public LocationStrictDTO()
+        {
+        }
+        
+        public LocationStrictDTO(SampleSystem.Generated.DTO.LocationRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.LocationFullDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapRichToStrictForLocation(this, source);
+        }
+        
+        public LocationStrictDTO(SampleSystem.Generated.DTO.LocationRichDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public LocationStrictDTO(SampleSystem.Generated.DTO.LocationFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.LocationSimpleDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapFullToStrictForLocation(this, source);
+        }
+        
+        public LocationStrictDTO(SampleSystem.Generated.DTO.LocationFullDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public LocationStrictDTO(SampleSystem.Generated.DTO.LocationSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapSimpleToStrictForLocation(this, source);
+        }
+        
+        public LocationStrictDTO(SampleSystem.Generated.DTO.LocationSimpleDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        private LocationStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.BasePersistentDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapBaseAuditPersistentToStrictForLocation(this, source);
+        }
+        
+        private LocationStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        private LocationStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapBasePersistentToStrictForLocation(this, source);
+        }
+        
+        private LocationStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] BinaryData
+        {
+            get
+            {
+                return this._binaryData;
+            }
+            set
+            {
+                this._binaryData = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CloseDate
+        {
+            get
+            {
+                return this._closeDate;
+            }
+            set
+            {
+                this._closeDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                this._code = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.CountryIdentityDTO Country
+        {
+            get
+            {
+                return this._country;
+            }
+            set
+            {
+                this._country = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.LocationIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsFinancial
+        {
+            get
+            {
+                return this._isFinancial;
+            }
+            set
+            {
+                this._isFinancial = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.Enums.LocationType LocationType
+        {
+            get
+            {
+                return this._locationType;
+            }
+            set
+            {
+                this._locationType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationIdentityDTO Parent
+        {
+            get
+            {
+                return this._parent;
+            }
+            set
+            {
+                this._parent = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
+        
+        long Framework.Application.Domain.IVersionObject<long>.Version
+        {
+            get
+            {
+                return this.Version;
+            }
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.Location domainObject)
+        {
+            mappingService.MapLocation(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Directories.Location ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToLocation(this);
+        }
+        
+        public SampleSystem.Domain.Directories.Location ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        {
+            return mappingService.ToLocation(this, allowCreate);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Directories.TestObjForNested), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestObjForNestedSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO>
+    {
+        
+        private string _name;
+        
+        private Framework.Core.Period _period = Framework.Core.Period.Eternity;
+        
+        public TestObjForNestedSimpleDTO()
+        {
+        }
+        
+        public TestObjForNestedSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Directories.TestObjForNested domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestObjForNested(domainObject, this);
+        }
+        
+        public TestObjForNestedSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period Period
+        {
+            get
+            {
+                return this._period;
+            }
+            set
+            {
+                this._period = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.Employee), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeRichDTO))]
@@ -13590,7 +14219,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee domainObject) : 
+        public EmployeeSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.Employee domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployee(domainObject, this);
@@ -13980,7 +14609,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.Employee), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeRichDTO))]
     public partial class EmployeeFullDTO : SampleSystem.Generated.DTO.EmployeeSimpleDTO
@@ -14012,7 +14641,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee domainObject) : 
+        public EmployeeFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.Employee domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployee(domainObject, this);
@@ -14167,7 +14796,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.Employee), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeeRichDTO : SampleSystem.Generated.DTO.EmployeeFullDTO
     {
@@ -14184,7 +14813,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee domainObject) : 
+        public EmployeeRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.Employee domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployee(domainObject, this);
@@ -14248,9 +14877,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.Employee), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class EmployeeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.Employee, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.Employee>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private int _age;
@@ -14821,25 +15450,25 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.Employee domainObject)
         {
             mappingService.MapEmployee(this, domainObject);
         }
         
-        public SampleSystem.Domain.Employee ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.Employee ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployee(this);
         }
         
-        public SampleSystem.Domain.Employee ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.Employee.Employee ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToEmployee(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.Employee), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class EmployeeUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.Employee, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.Employee>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private CommonFramework.Maybe<int> _age = CommonFramework.Maybe<int>.Nothing;
@@ -15381,458 +16010,23 @@ namespace SampleSystem.Generated.DTO
             Framework.BLL.DTOMapping.Extensions.UpdateExtensions.Compress<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkUpdateDTO, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO>(this.Specializations);
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.Employee domainObject)
         {
             mappingService.MapEmployee(this, domainObject);
         }
         
-        public SampleSystem.Domain.Employee ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.Employee ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployee(this);
         }
         
-        public SampleSystem.Domain.Employee ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.Employee.Employee ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToEmployee(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkRichDTO))]
-    public partial class EmployeeAndEmployeeSpecializationLinkSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO>
-    {
-        
-        public EmployeeAndEmployeeSpecializationLinkSimpleDTO()
-        {
-        }
-        
-        public EmployeeAndEmployeeSpecializationLinkSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapEmployeeAndEmployeeSpecializationLink(domainObject, this);
-        }
-        
-        public EmployeeAndEmployeeSpecializationLinkSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO(this.Id);
-            }
-        }
-        
-        public virtual SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkRichDTO))]
-    public partial class EmployeeAndEmployeeSpecializationLinkFullDTO : SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkSimpleDTO
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee;
-        
-        private SampleSystem.Generated.DTO.EmployeeSpecializationSimpleDTO _specialization;
-        
-        public EmployeeAndEmployeeSpecializationLinkFullDTO()
-        {
-        }
-        
-        public EmployeeAndEmployeeSpecializationLinkFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapEmployeeAndEmployeeSpecializationLink(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeSimpleDTO Employee
-        {
-            get
-            {
-                return this._employee;
-            }
-            set
-            {
-                this._employee = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeSpecializationSimpleDTO Specialization
-        {
-            get
-            {
-                return this._specialization;
-            }
-            set
-            {
-                this._specialization = value;
-            }
-        }
-        
-        public override SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeAndEmployeeSpecializationLinkRichDTO : SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkFullDTO
-    {
-        
-        public EmployeeAndEmployeeSpecializationLinkRichDTO()
-        {
-        }
-        
-        public EmployeeAndEmployeeSpecializationLinkRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapEmployeeAndEmployeeSpecializationLink(domainObject, this);
-        }
-        
-        public override SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeAndEmployeeSpecializationLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeIdentityDTO _employee;
-        
-        private System.Guid _id;
-        
-        private SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO _specialization;
-        
-        private long _version;
-        
-        public EmployeeAndEmployeeSpecializationLinkStrictDTO()
-        {
-        }
-        
-        public EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForEmployeeAndEmployeeSpecializationLink(this, source);
-        }
-        
-        public EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkRichDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForEmployeeAndEmployeeSpecializationLink(this, source);
-        }
-        
-        public EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkFullDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForEmployeeAndEmployeeSpecializationLink(this, source);
-        }
-        
-        public EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkSimpleDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.BasePersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBaseAuditPersistentToStrictForEmployeeAndEmployeeSpecializationLink(this, source);
-        }
-        
-        private EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBasePersistentToStrictForEmployeeAndEmployeeSpecializationLink(this, source);
-        }
-        
-        private EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeIdentityDTO Employee
-        {
-            get
-            {
-                return this._employee;
-            }
-            set
-            {
-                this._employee = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO Specialization
-        {
-            get
-            {
-                return this._specialization;
-            }
-            set
-            {
-                this._specialization = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version
-        {
-            get
-            {
-                return this._version;
-            }
-            set
-            {
-                this._version = value;
-            }
-        }
-        
-        long Framework.Application.Domain.IVersionObject<long>.Version
-        {
-            get
-            {
-                return this.Version;
-            }
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink domainObject)
-        {
-            mappingService.MapEmployeeAndEmployeeSpecializationLink(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToEmployeeAndEmployeeSpecializationLink(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeAndEmployeeSpecializationLinkUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
-    {
-        
-        private CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _employee = CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO>.Nothing;
-        
-        private System.Guid _id;
-        
-        private CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO> _specialization = CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO>.Nothing;
-        
-        private long _version;
-        
-        public EmployeeAndEmployeeSpecializationLinkUpdateDTO()
-        {
-        }
-        
-        public EmployeeAndEmployeeSpecializationLinkUpdateDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO currentSource, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapEmployeeAndEmployeeSpecializationLink(this, currentSource);
-        }
-        
-        public EmployeeAndEmployeeSpecializationLinkUpdateDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO currentSource) : 
-                this(currentSource, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public EmployeeAndEmployeeSpecializationLinkUpdateDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO currentSource, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO baseSource, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapEmployeeAndEmployeeSpecializationLink(this, currentSource, baseSource);
-        }
-        
-        public EmployeeAndEmployeeSpecializationLinkUpdateDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO currentSource, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO baseSource) : 
-                this(currentSource, baseSource, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> Employee
-        {
-            get
-            {
-                return this._employee;
-            }
-            set
-            {
-                this._employee = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public bool IsEmpty
-        {
-            get
-            {
-                return !this.Employee.HasValue && !this.Specialization.HasValue;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO> Specialization
-        {
-            get
-            {
-                return this._specialization;
-            }
-            set
-            {
-                this._specialization = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version
-        {
-            get
-            {
-                return this._version;
-            }
-            set
-            {
-                this._version = value;
-            }
-        }
-        
-        long Framework.Application.Domain.IVersionObject<long>.Version
-        {
-            get
-            {
-                return this.Version;
-            }
-        }
-        
-        public void Compress()
-        {
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink domainObject)
-        {
-            mappingService.MapEmployeeAndEmployeeSpecializationLink(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.EmployeeAndEmployeeSpecializationLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToEmployeeAndEmployeeSpecializationLink(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCellPhone), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeCellPhone), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeCellPhoneFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeCellPhoneRichDTO))]
@@ -15851,7 +16045,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeCellPhoneSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCellPhone domainObject) : 
+        public EmployeeCellPhoneSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeCellPhone domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeCellPhone(domainObject, this);
@@ -15929,7 +16123,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCellPhone), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeCellPhone), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeCellPhoneRichDTO))]
     public partial class EmployeeCellPhoneFullDTO : SampleSystem.Generated.DTO.EmployeeCellPhoneSimpleDTO
@@ -15941,7 +16135,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeCellPhoneFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCellPhone domainObject) : 
+        public EmployeeCellPhoneFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeCellPhone domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeCellPhone(domainObject, this);
@@ -15966,7 +16160,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCellPhone), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeCellPhone), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeeCellPhoneRichDTO : SampleSystem.Generated.DTO.EmployeeCellPhoneFullDTO
     {
@@ -15975,7 +16169,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeCellPhoneRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCellPhone domainObject) : 
+        public EmployeeCellPhoneRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeCellPhone domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeCellPhone(domainObject, this);
@@ -15987,9 +16181,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCellPhone), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeCellPhone), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeCellPhoneStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class EmployeeCellPhoneStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmployeeCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmployeeCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private string _cityCode;
@@ -16170,20 +16364,20 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCellPhone domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeCellPhone domainObject)
         {
             mappingService.MapEmployeeCellPhone(this, domainObject);
         }
         
-        public SampleSystem.Domain.EmployeeCellPhone ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.EmployeeCellPhone ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployeeCellPhone(this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCellPhone), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeCellPhone), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeCellPhoneUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class EmployeeCellPhoneUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmployeeCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmployeeCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private CommonFramework.Maybe<string> _cityCode = CommonFramework.Maybe<string>.Nothing;
@@ -16331,463 +16525,18 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCellPhone domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeCellPhone domainObject)
         {
             mappingService.MapEmployeeCellPhone(this, domainObject);
         }
         
-        public SampleSystem.Domain.EmployeeCellPhone ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.EmployeeCellPhone ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployeeCellPhone(this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeComplexChangeModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeComplexChangeModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeComplexChangeModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeComplexChangeModel>
-    {
-        
-        private string _email;
-        
-        private SampleSystem.Generated.DTO.EmployeeIdentityDTO _primaryChangingObject;
-        
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _secondaryChangingObjects = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO>();
-        
-        public EmployeeComplexChangeModelStrictDTO()
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email
-        {
-            get
-            {
-                return this._email;
-            }
-            set
-            {
-                this._email = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeIdentityDTO PrimaryChangingObject
-        {
-            get
-            {
-                return this._primaryChangingObject;
-            }
-            set
-            {
-                this._primaryChangingObject = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> SecondaryChangingObjects
-        {
-            get
-            {
-                return this._secondaryChangingObjects;
-            }
-            set
-            {
-                this._secondaryChangingObjects = value;
-            }
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeComplexChangeModel domainObject)
-        {
-            mappingService.MapEmployeeComplexChangeModel(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.EmployeeComplexChangeModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToEmployeeComplexChangeModel(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailChangeModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO))]
-    public partial class EmployeeEmailChangeModelSimpleDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
-    {
-        
-        private string _email;
-        
-        public EmployeeEmailChangeModelSimpleDTO()
-        {
-        }
-        
-        public EmployeeEmailChangeModelSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailChangeModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapEmployeeEmailChangeModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email
-        {
-            get
-            {
-                return this._email;
-            }
-            set
-            {
-                this._email = value;
-            }
-        }
-        
-        public virtual SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailChangeModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO))]
-    public partial class EmployeeEmailChangeModelFullDTO : SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _changingObject;
-        
-        public EmployeeEmailChangeModelFullDTO()
-        {
-        }
-        
-        public EmployeeEmailChangeModelFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailChangeModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapEmployeeEmailChangeModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeSimpleDTO ChangingObject
-        {
-            get
-            {
-                return this._changingObject;
-            }
-            set
-            {
-                this._changingObject = value;
-            }
-        }
-        
-        public override SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailChangeModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeEmailChangeModelRichDTO : SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO
-    {
-        
-        public EmployeeEmailChangeModelRichDTO()
-        {
-        }
-        
-        public EmployeeEmailChangeModelRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailChangeModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapEmployeeEmailChangeModel(domainObject, this);
-        }
-        
-        public override SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailChangeModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeEmailChangeModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeEmailChangeModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeEmailChangeModel>
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeIdentityDTO _changingObject;
-        
-        private string _email;
-        
-        public EmployeeEmailChangeModelStrictDTO()
-        {
-        }
-        
-        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForEmployeeEmailChangeModel(this, source);
-        }
-        
-        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForEmployeeEmailChangeModel(this, source);
-        }
-        
-        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForEmployeeEmailChangeModel(this, source);
-        }
-        
-        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeIdentityDTO ChangingObject
-        {
-            get
-            {
-                return this._changingObject;
-            }
-            set
-            {
-                this._changingObject = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email
-        {
-            get
-            {
-                return this._email;
-            }
-            set
-            {
-                this._email = value;
-            }
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailChangeModel domainObject)
-        {
-            mappingService.MapEmployeeEmailChangeModel(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.EmployeeEmailChangeModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToEmployeeEmailChangeModel(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailMassChangeModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO))]
-    public partial class EmployeeEmailMassChangeModelSimpleDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
-    {
-        
-        private string _email;
-        
-        public EmployeeEmailMassChangeModelSimpleDTO()
-        {
-        }
-        
-        public EmployeeEmailMassChangeModelSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapEmployeeEmailMassChangeModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email
-        {
-            get
-            {
-                return this._email;
-            }
-            set
-            {
-                this._email = value;
-            }
-        }
-        
-        public virtual SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailMassChangeModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO))]
-    public partial class EmployeeEmailMassChangeModelFullDTO : SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO
-    {
-        
-        public EmployeeEmailMassChangeModelFullDTO()
-        {
-        }
-        
-        public EmployeeEmailMassChangeModelFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapEmployeeEmailMassChangeModel(domainObject, this);
-        }
-        
-        public override SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailMassChangeModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeEmailMassChangeModelRichDTO : SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO
-    {
-        
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeSimpleDTO> _changingObjects = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeSimpleDTO>();
-        
-        public EmployeeEmailMassChangeModelRichDTO()
-        {
-        }
-        
-        public EmployeeEmailMassChangeModelRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapEmployeeEmailMassChangeModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeSimpleDTO> ChangingObjects
-        {
-            get
-            {
-                return this._changingObjects;
-            }
-            set
-            {
-                this._changingObjects = value;
-            }
-        }
-        
-        public override SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailMassChangeModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeEmailMassChangeModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeEmailMassChangeModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeEmailMassChangeModel>
-    {
-        
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _changingObjects = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO>();
-        
-        private string _email;
-        
-        public EmployeeEmailMassChangeModelStrictDTO()
-        {
-        }
-        
-        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForEmployeeEmailMassChangeModel(this, source);
-        }
-        
-        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForEmployeeEmailMassChangeModel(this, source);
-        }
-        
-        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForEmployeeEmailMassChangeModel(this, source);
-        }
-        
-        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> ChangingObjects
-        {
-            get
-            {
-                return this._changingObjects;
-            }
-            set
-            {
-                this._changingObjects = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email
-        {
-            get
-            {
-                return this._email;
-            }
-            set
-            {
-                this._email = value;
-            }
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject)
-        {
-            mappingService.MapEmployeeEmailMassChangeModel(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.EmployeeEmailMassChangeModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToEmployeeEmailMassChangeModel(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeInformation), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeInformation), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeeInformationVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO>
     {
@@ -16798,7 +16547,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeInformationVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeInformation domainObject) : 
+        public EmployeeInformationVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeInformation domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeInformation(domainObject, this);
@@ -16827,7 +16576,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeInformation), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeInformation), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeInformationFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeInformationRichDTO))]
@@ -16844,7 +16593,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeInformationSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeInformation domainObject) : 
+        public EmployeeInformationSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeInformation domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeInformation(domainObject, this);
@@ -16904,7 +16653,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeInformation), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeInformation), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeInformationRichDTO))]
     public partial class EmployeeInformationFullDTO : SampleSystem.Generated.DTO.EmployeeInformationSimpleDTO
@@ -16914,14 +16663,14 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeInformationFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeInformation domainObject) : 
+        public EmployeeInformationFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeInformation domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeInformation(domainObject, this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeInformation), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeInformation), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeeInformationRichDTO : SampleSystem.Generated.DTO.EmployeeInformationFullDTO
     {
@@ -16930,14 +16679,14 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeInformationRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeInformation domainObject) : 
+        public EmployeeInformationRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeInformation domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeInformation(domainObject, this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePersonalCellPhone), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeePersonalCellPhone), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeePersonalCellPhoneFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO))]
@@ -16956,7 +16705,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeePersonalCellPhoneSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePersonalCellPhone domainObject) : 
+        public EmployeePersonalCellPhoneSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeePersonalCellPhone domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeePersonalCellPhone(domainObject, this);
@@ -17034,7 +16783,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePersonalCellPhone), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeePersonalCellPhone), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO))]
     public partial class EmployeePersonalCellPhoneFullDTO : SampleSystem.Generated.DTO.EmployeePersonalCellPhoneSimpleDTO
@@ -17046,7 +16795,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeePersonalCellPhoneFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePersonalCellPhone domainObject) : 
+        public EmployeePersonalCellPhoneFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeePersonalCellPhone domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeePersonalCellPhone(domainObject, this);
@@ -17071,7 +16820,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePersonalCellPhone), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeePersonalCellPhone), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeePersonalCellPhoneRichDTO : SampleSystem.Generated.DTO.EmployeePersonalCellPhoneFullDTO
     {
@@ -17080,7 +16829,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeePersonalCellPhoneRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePersonalCellPhone domainObject) : 
+        public EmployeePersonalCellPhoneRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeePersonalCellPhone domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeePersonalCellPhone(domainObject, this);
@@ -17092,9 +16841,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePersonalCellPhone), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeePersonalCellPhone), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeePersonalCellPhoneStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeePersonalCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeePersonalCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class EmployeePersonalCellPhoneStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmployeePersonalCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmployeePersonalCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private string _cityCode;
@@ -17275,20 +17024,20 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePersonalCellPhone domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeePersonalCellPhone domainObject)
         {
             mappingService.MapEmployeePersonalCellPhone(this, domainObject);
         }
         
-        public SampleSystem.Domain.EmployeePersonalCellPhone ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.EmployeePersonalCellPhone ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployeePersonalCellPhone(this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePersonalCellPhone), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeePersonalCellPhone), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeePersonalCellPhoneUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeePersonalCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeePersonalCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class EmployeePersonalCellPhoneUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmployeePersonalCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmployeePersonalCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private CommonFramework.Maybe<string> _cityCode = CommonFramework.Maybe<string>.Nothing;
@@ -17436,18 +17185,18 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePersonalCellPhone domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeePersonalCellPhone domainObject)
         {
             mappingService.MapEmployeePersonalCellPhone(this, domainObject);
         }
         
-        public SampleSystem.Domain.EmployeePersonalCellPhone ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.EmployeePersonalCellPhone ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployeePersonalCellPhone(this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePhoto), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeePhoto), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeePhotoFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeePhotoRichDTO))]
@@ -17458,13 +17207,13 @@ namespace SampleSystem.Generated.DTO
         
         private bool _isDefault;
         
-        private SampleSystem.Domain.EmployeePhotoType _type;
+        private SampleSystem.Domain.Enums.EmployeePhotoType _type;
         
         public EmployeePhotoSimpleDTO()
         {
         }
         
-        public EmployeePhotoSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePhoto domainObject) : 
+        public EmployeePhotoSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeePhoto domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeePhoto(domainObject, this);
@@ -17511,7 +17260,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.EmployeePhotoType Type
+        public SampleSystem.Domain.Enums.EmployeePhotoType Type
         {
             get
             {
@@ -17524,7 +17273,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePhoto), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeePhoto), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeePhotoRichDTO))]
     public partial class EmployeePhotoFullDTO : SampleSystem.Generated.DTO.EmployeePhotoSimpleDTO
@@ -17536,7 +17285,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeePhotoFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePhoto domainObject) : 
+        public EmployeePhotoFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeePhoto domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeePhoto(domainObject, this);
@@ -17556,7 +17305,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePhoto), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeePhoto), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeePhotoRichDTO : SampleSystem.Generated.DTO.EmployeePhotoFullDTO
     {
@@ -17567,7 +17316,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeePhotoRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePhoto domainObject) : 
+        public EmployeePhotoRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeePhoto domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeePhoto(domainObject, this);
@@ -17587,7 +17336,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePosition), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeePosition), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeePositionVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>
     {
@@ -17598,7 +17347,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeePositionVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePosition domainObject) : 
+        public EmployeePositionVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeePosition domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeePosition(domainObject, this);
@@ -17627,7 +17376,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePosition), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeePosition), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeePositionFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeePositionRichDTO))]
@@ -17644,7 +17393,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeePositionSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePosition domainObject) : 
+        public EmployeePositionSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeePosition domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeePosition(domainObject, this);
@@ -17704,7 +17453,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePosition), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeePosition), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeePositionRichDTO))]
     public partial class EmployeePositionFullDTO : SampleSystem.Generated.DTO.EmployeePositionSimpleDTO
@@ -17716,7 +17465,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeePositionFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePosition domainObject) : 
+        public EmployeePositionFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeePosition domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeePosition(domainObject, this);
@@ -17736,7 +17485,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePosition), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeePosition), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeePositionRichDTO : SampleSystem.Generated.DTO.EmployeePositionFullDTO
     {
@@ -17745,14 +17494,14 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeePositionRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeePosition domainObject) : 
+        public EmployeePositionRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeePosition domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeePosition(domainObject, this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRegistrationType), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRegistrationType), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeeRegistrationTypeVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO>
     {
@@ -17763,7 +17512,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeRegistrationTypeVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRegistrationType domainObject) : 
+        public EmployeeRegistrationTypeVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeRegistrationType domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeRegistrationType(domainObject, this);
@@ -17792,7 +17541,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRegistrationType), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRegistrationType), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeRegistrationTypeFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeRegistrationTypeRichDTO))]
@@ -17807,7 +17556,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeRegistrationTypeSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRegistrationType domainObject) : 
+        public EmployeeRegistrationTypeSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeRegistrationType domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeRegistrationType(domainObject, this);
@@ -17854,7 +17603,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRegistrationType), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRegistrationType), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeRegistrationTypeRichDTO))]
     public partial class EmployeeRegistrationTypeFullDTO : SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO
@@ -17864,14 +17613,14 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeRegistrationTypeFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRegistrationType domainObject) : 
+        public EmployeeRegistrationTypeFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeRegistrationType domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeRegistrationType(domainObject, this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRegistrationType), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRegistrationType), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeeRegistrationTypeRichDTO : SampleSystem.Generated.DTO.EmployeeRegistrationTypeFullDTO
     {
@@ -17880,14 +17629,14 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeRegistrationTypeRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRegistrationType domainObject) : 
+        public EmployeeRegistrationTypeRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeRegistrationType domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeRegistrationType(domainObject, this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRole), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRole), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeeRoleVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO>
     {
@@ -17898,7 +17647,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeRoleVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRole domainObject) : 
+        public EmployeeRoleVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeRole domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeRole(domainObject, this);
@@ -17927,7 +17676,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRole), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRole), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeRoleFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeRoleRichDTO))]
@@ -17940,7 +17689,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeRoleSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRole domainObject) : 
+        public EmployeeRoleSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeRole domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeRole(domainObject, this);
@@ -17974,7 +17723,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRole), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRole), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeRoleRichDTO))]
     public partial class EmployeeRoleFullDTO : SampleSystem.Generated.DTO.EmployeeRoleSimpleDTO
@@ -17984,14 +17733,14 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeRoleFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRole domainObject) : 
+        public EmployeeRoleFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeRole domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeRole(domainObject, this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRole), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRole), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeeRoleRichDTO : SampleSystem.Generated.DTO.EmployeeRoleFullDTO
     {
@@ -18000,14 +17749,14 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeRoleRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRole domainObject) : 
+        public EmployeeRoleRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeRole domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeRole(domainObject, this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRoleDegree), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRoleDegree), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeeRoleDegreeVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO>
     {
@@ -18018,7 +17767,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeRoleDegreeVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRoleDegree domainObject) : 
+        public EmployeeRoleDegreeVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeRoleDegree domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeRoleDegree(domainObject, this);
@@ -18047,7 +17796,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRoleDegree), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRoleDegree), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeRoleDegreeFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeRoleDegreeRichDTO))]
@@ -18060,7 +17809,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeRoleDegreeSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRoleDegree domainObject) : 
+        public EmployeeRoleDegreeSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeRoleDegree domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeRoleDegree(domainObject, this);
@@ -18094,7 +17843,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRoleDegree), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRoleDegree), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeRoleDegreeRichDTO))]
     public partial class EmployeeRoleDegreeFullDTO : SampleSystem.Generated.DTO.EmployeeRoleDegreeSimpleDTO
@@ -18104,14 +17853,14 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeRoleDegreeFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRoleDegree domainObject) : 
+        public EmployeeRoleDegreeFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeRoleDegree domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeRoleDegree(domainObject, this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRoleDegree), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeRoleDegree), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeeRoleDegreeRichDTO : SampleSystem.Generated.DTO.EmployeeRoleDegreeFullDTO
     {
@@ -18120,34 +17869,14 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeRoleDegreeRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRoleDegree domainObject) : 
+        public EmployeeRoleDegreeRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeRoleDegree domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeRoleDegree(domainObject, this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRootFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeRootFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeRootFilterModel>
-    {
-        
-        public EmployeeRootFilterModelStrictDTO()
-        {
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRootFilterModel domainObject)
-        {
-            mappingService.MapEmployeeRootFilterModel(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.EmployeeRootFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToEmployeeRootFilterModel(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeSpecialization), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeSpecialization), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeeSpecializationVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO>
     {
@@ -18158,7 +17887,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeSpecializationVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeSpecialization domainObject) : 
+        public EmployeeSpecializationVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeSpecialization domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeSpecialization(domainObject, this);
@@ -18187,7 +17916,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeSpecialization), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeSpecialization), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeSpecializationFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeSpecializationRichDTO))]
@@ -18200,7 +17929,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeSpecializationSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeSpecialization domainObject) : 
+        public EmployeeSpecializationSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeSpecialization domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeSpecialization(domainObject, this);
@@ -18234,7 +17963,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeSpecialization), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeSpecialization), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeSpecializationRichDTO))]
     public partial class EmployeeSpecializationFullDTO : SampleSystem.Generated.DTO.EmployeeSpecializationSimpleDTO
@@ -18244,14 +17973,14 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeSpecializationFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeSpecialization domainObject) : 
+        public EmployeeSpecializationFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeSpecialization domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeSpecialization(domainObject, this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeSpecialization), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeSpecialization), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeeSpecializationRichDTO : SampleSystem.Generated.DTO.EmployeeSpecializationFullDTO
     {
@@ -18260,27 +17989,462 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeSpecializationRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeSpecialization domainObject) : 
+        public EmployeeSpecializationRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmployeeSpecialization domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeSpecialization(domainObject, this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeToEmployeeLink), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkRichDTO))]
+    public partial class EmployeeAndEmployeeSpecializationLinkSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO>
+    {
+        
+        public EmployeeAndEmployeeSpecializationLinkSimpleDTO()
+        {
+        }
+        
+        public EmployeeAndEmployeeSpecializationLinkSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapEmployeeAndEmployeeSpecializationLink(domainObject, this);
+        }
+        
+        public EmployeeAndEmployeeSpecializationLinkSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO(this.Id);
+            }
+        }
+        
+        public virtual SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkRichDTO))]
+    public partial class EmployeeAndEmployeeSpecializationLinkFullDTO : SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkSimpleDTO
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee;
+        
+        private SampleSystem.Generated.DTO.EmployeeSpecializationSimpleDTO _specialization;
+        
+        public EmployeeAndEmployeeSpecializationLinkFullDTO()
+        {
+        }
+        
+        public EmployeeAndEmployeeSpecializationLinkFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapEmployeeAndEmployeeSpecializationLink(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeSimpleDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeSpecializationSimpleDTO Specialization
+        {
+            get
+            {
+                return this._specialization;
+            }
+            set
+            {
+                this._specialization = value;
+            }
+        }
+        
+        public override SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class EmployeeAndEmployeeSpecializationLinkRichDTO : SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkFullDTO
+    {
+        
+        public EmployeeAndEmployeeSpecializationLinkRichDTO()
+        {
+        }
+        
+        public EmployeeAndEmployeeSpecializationLinkRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapEmployeeAndEmployeeSpecializationLink(domainObject, this);
+        }
+        
+        public override SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class EmployeeAndEmployeeSpecializationLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeIdentityDTO _employee;
+        
+        private System.Guid _id;
+        
+        private SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO _specialization;
+        
+        private long _version;
+        
+        public EmployeeAndEmployeeSpecializationLinkStrictDTO()
+        {
+        }
+        
+        public EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkFullDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapRichToStrictForEmployeeAndEmployeeSpecializationLink(this, source);
+        }
+        
+        public EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkRichDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkSimpleDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapFullToStrictForEmployeeAndEmployeeSpecializationLink(this, source);
+        }
+        
+        public EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkFullDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapSimpleToStrictForEmployeeAndEmployeeSpecializationLink(this, source);
+        }
+        
+        public EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkSimpleDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        private EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.BasePersistentDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapBaseAuditPersistentToStrictForEmployeeAndEmployeeSpecializationLink(this, source);
+        }
+        
+        private EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        private EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapBasePersistentToStrictForEmployeeAndEmployeeSpecializationLink(this, source);
+        }
+        
+        private EmployeeAndEmployeeSpecializationLinkStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeIdentityDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO Specialization
+        {
+            get
+            {
+                return this._specialization;
+            }
+            set
+            {
+                this._specialization = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
+        
+        long Framework.Application.Domain.IVersionObject<long>.Version
+        {
+            get
+            {
+                return this.Version;
+            }
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink domainObject)
+        {
+            mappingService.MapEmployeeAndEmployeeSpecializationLink(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToEmployeeAndEmployeeSpecializationLink(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class EmployeeAndEmployeeSpecializationLinkUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    {
+        
+        private CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _employee = CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO>.Nothing;
+        
+        private System.Guid _id;
+        
+        private CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO> _specialization = CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO>.Nothing;
+        
+        private long _version;
+        
+        public EmployeeAndEmployeeSpecializationLinkUpdateDTO()
+        {
+        }
+        
+        public EmployeeAndEmployeeSpecializationLinkUpdateDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO currentSource, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapEmployeeAndEmployeeSpecializationLink(this, currentSource);
+        }
+        
+        public EmployeeAndEmployeeSpecializationLinkUpdateDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO currentSource) : 
+                this(currentSource, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public EmployeeAndEmployeeSpecializationLinkUpdateDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO currentSource, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO baseSource, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapEmployeeAndEmployeeSpecializationLink(this, currentSource, baseSource);
+        }
+        
+        public EmployeeAndEmployeeSpecializationLinkUpdateDTO(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO currentSource, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO baseSource) : 
+                this(currentSource, baseSource, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public bool IsEmpty
+        {
+            get
+            {
+                return !this.Employee.HasValue && !this.Specialization.HasValue;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO> Specialization
+        {
+            get
+            {
+                return this._specialization;
+            }
+            set
+            {
+                this._specialization = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
+        
+        long Framework.Application.Domain.IVersionObject<long>.Version
+        {
+            get
+            {
+                return this.Version;
+            }
+        }
+        
+        public void Compress()
+        {
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink domainObject)
+        {
+            mappingService.MapEmployeeAndEmployeeSpecializationLink(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToEmployeeAndEmployeeSpecializationLink(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeToEmployeeLinkFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeToEmployeeLinkRichDTO))]
     public partial class EmployeeToEmployeeLinkSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO>
     {
         
-        private SampleSystem.Domain.EmployeeLinkType _employeeLinkType;
+        private SampleSystem.Domain.Enums.EmployeeLinkType _employeeLinkType;
         
         public EmployeeToEmployeeLinkSimpleDTO()
         {
         }
         
-        public EmployeeToEmployeeLinkSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeToEmployeeLink domainObject) : 
+        public EmployeeToEmployeeLinkSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeToEmployeeLink(domainObject, this);
@@ -18292,7 +18456,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.EmployeeLinkType EmployeeLinkType
+        public SampleSystem.Domain.Enums.EmployeeLinkType EmployeeLinkType
         {
             get
             {
@@ -18319,7 +18483,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeToEmployeeLink), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeToEmployeeLinkRichDTO))]
     public partial class EmployeeToEmployeeLinkFullDTO : SampleSystem.Generated.DTO.EmployeeToEmployeeLinkSimpleDTO
@@ -18333,7 +18497,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeToEmployeeLinkFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeToEmployeeLink domainObject) : 
+        public EmployeeToEmployeeLinkFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeToEmployeeLink(domainObject, this);
@@ -18371,7 +18535,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeToEmployeeLink), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeeToEmployeeLinkRichDTO : SampleSystem.Generated.DTO.EmployeeToEmployeeLinkFullDTO
     {
@@ -18380,7 +18544,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public EmployeeToEmployeeLinkRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeToEmployeeLink domainObject) : 
+        public EmployeeToEmployeeLinkRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapEmployeeToEmployeeLink(domainObject, this);
@@ -18392,12 +18556,12 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeToEmployeeLink), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeToEmployeeLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeToEmployeeLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeToEmployeeLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class EmployeeToEmployeeLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
-        private SampleSystem.Domain.EmployeeLinkType _employeeLinkType;
+        private SampleSystem.Domain.Enums.EmployeeLinkType _employeeLinkType;
         
         private System.Guid _id;
         
@@ -18484,7 +18648,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.EmployeeLinkType EmployeeLinkType
+        public SampleSystem.Domain.Enums.EmployeeLinkType EmployeeLinkType
         {
             get
             {
@@ -18560,23 +18724,23 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeToEmployeeLink domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink domainObject)
         {
             mappingService.MapEmployeeToEmployeeLink(this, domainObject);
         }
         
-        public SampleSystem.Domain.EmployeeToEmployeeLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployeeToEmployeeLink(this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeToEmployeeLink), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeToEmployeeLinkUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeToEmployeeLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeToEmployeeLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class EmployeeToEmployeeLinkUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
-        private CommonFramework.Maybe<SampleSystem.Domain.EmployeeLinkType> _employeeLinkType = CommonFramework.Maybe<SampleSystem.Domain.EmployeeLinkType>.Nothing;
+        private CommonFramework.Maybe<SampleSystem.Domain.Enums.EmployeeLinkType> _employeeLinkType = CommonFramework.Maybe<SampleSystem.Domain.Enums.EmployeeLinkType>.Nothing;
         
         private System.Guid _id;
         
@@ -18617,7 +18781,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Domain.EmployeeLinkType> EmployeeLinkType
+        public CommonFramework.Maybe<SampleSystem.Domain.Enums.EmployeeLinkType> EmployeeLinkType
         {
             get
             {
@@ -18706,14 +18870,489 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeToEmployeeLink domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink domainObject)
         {
             mappingService.MapEmployeeToEmployeeLink(this, domainObject);
         }
         
-        public SampleSystem.Domain.EmployeeToEmployeeLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToEmployeeToEmployeeLink(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.IMRequest), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class IMRequestVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.IMRequestIdentityDTO>
+    {
+        
+        private string _name;
+        
+        public IMRequestVisualDTO()
+        {
+        }
+        
+        public IMRequestVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.IMRequest domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapIMRequest(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IMRequestIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.IMRequestIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.IMRequest), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IMRequestFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IMRequestRichDTO))]
+    public partial class IMRequestSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.IMRequestIdentityDTO>
+    {
+        
+        private string _email;
+        
+        private string _message;
+        
+        private string _name;
+        
+        public IMRequestSimpleDTO()
+        {
+        }
+        
+        public IMRequestSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.IMRequest domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapIMRequest(domainObject, this);
+        }
+        
+        public IMRequestSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IMRequestIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.IMRequestIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message
+        {
+            get
+            {
+                return this._message;
+            }
+            set
+            {
+                this._message = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.IMRequest), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IMRequestRichDTO))]
+    public partial class IMRequestFullDTO : SampleSystem.Generated.DTO.IMRequestSimpleDTO
+    {
+        
+        public IMRequestFullDTO()
+        {
+        }
+        
+        public IMRequestFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.IMRequest domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapIMRequest(domainObject, this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.IMRequest), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class IMRequestRichDTO : SampleSystem.Generated.DTO.IMRequestFullDTO
+    {
+        
+        private SampleSystem.Generated.DTO.IMRequestDetailRichDTO _oneToOneDetail;
+        
+        public IMRequestRichDTO()
+        {
+        }
+        
+        public IMRequestRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.IMRequest domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapIMRequest(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IMRequestDetailRichDTO OneToOneDetail
+        {
+            get
+            {
+                return this._oneToOneDetail;
+            }
+            set
+            {
+                this._oneToOneDetail = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.IMRequestDetail), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IMRequestDetailFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IMRequestDetailRichDTO))]
+    public partial class IMRequestDetailSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO>
+    {
+        
+        public IMRequestDetailSimpleDTO()
+        {
+        }
+        
+        public IMRequestDetailSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.IMRequestDetail domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapIMRequestDetail(domainObject, this);
+        }
+        
+        public IMRequestDetailSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO(this.Id);
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.IMRequestDetail), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IMRequestDetailRichDTO))]
+    public partial class IMRequestDetailFullDTO : SampleSystem.Generated.DTO.IMRequestDetailSimpleDTO
+    {
+        
+        private SampleSystem.Generated.DTO.IMRequestSimpleDTO _request;
+        
+        public IMRequestDetailFullDTO()
+        {
+        }
+        
+        public IMRequestDetailFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.IMRequestDetail domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapIMRequestDetail(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IMRequestSimpleDTO Request
+        {
+            get
+            {
+                return this._request;
+            }
+            set
+            {
+                this._request = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.IMRequestDetail), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class IMRequestDetailRichDTO : SampleSystem.Generated.DTO.IMRequestDetailFullDTO
+    {
+        
+        public IMRequestDetailRichDTO()
+        {
+        }
+        
+        public IMRequestDetailRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.IMRequestDetail domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapIMRequestDetail(domainObject, this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.Information), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class InformationVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.InformationIdentityDTO>
+    {
+        
+        private string _name;
+        
+        public InformationVisualDTO()
+        {
+        }
+        
+        public InformationVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.Information domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapInformation(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.InformationIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.InformationIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.Information), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.InformationFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.InformationRichDTO))]
+    public partial class InformationSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.InformationIdentityDTO>
+    {
+        
+        private string _email;
+        
+        private string _name;
+        
+        public InformationSimpleDTO()
+        {
+        }
+        
+        public InformationSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.Information domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapInformation(domainObject, this);
+        }
+        
+        public InformationSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.InformationIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.InformationIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.Information), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.InformationRichDTO))]
+    public partial class InformationFullDTO : SampleSystem.Generated.DTO.InformationSimpleDTO
+    {
+        
+        public InformationFullDTO()
+        {
+        }
+        
+        public InformationFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.Information domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapInformation(domainObject, this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.Information), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class InformationRichDTO : SampleSystem.Generated.DTO.InformationFullDTO
+    {
+        
+        public InformationRichDTO()
+        {
+        }
+        
+        public InformationRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.Information domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapInformation(domainObject, this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.TestRestrictionObject), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRestrictionObjectRichDTO))]
+    public partial class TestRestrictionObjectSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO>
+    {
+        
+        private bool _restrictionHandler;
+        
+        public TestRestrictionObjectSimpleDTO()
+        {
+        }
+        
+        public TestRestrictionObjectSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.TestRestrictionObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestRestrictionObject(domainObject, this);
+        }
+        
+        public TestRestrictionObjectSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool RestrictionHandler
+        {
+            get
+            {
+                return this._restrictionHandler;
+            }
+            set
+            {
+                this._restrictionHandler = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.TestRestrictionObject), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRestrictionObjectRichDTO))]
+    public partial class TestRestrictionObjectFullDTO : SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO
+    {
+        
+        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit;
+        
+        public TestRestrictionObjectFullDTO()
+        {
+        }
+        
+        public TestRestrictionObjectFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.TestRestrictionObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestRestrictionObject(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitSimpleDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.TestRestrictionObject), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestRestrictionObjectRichDTO : SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO
+    {
+        
+        public TestRestrictionObjectRichDTO()
+        {
+        }
+        
+        public TestRestrictionObjectRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Employee.TestRestrictionObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestRestrictionObject(domainObject, this);
         }
     }
     
@@ -18987,7 +19626,271 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example1), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ExternalPrincipal.Principal), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.PrincipalFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.PrincipalRichDTO))]
+    public partial class PrincipalSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.PrincipalIdentityDTO>
+    {
+        
+        private string _externalId;
+        
+        public PrincipalSimpleDTO()
+        {
+        }
+        
+        public PrincipalSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ExternalPrincipal.Principal domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapPrincipal(domainObject, this);
+        }
+        
+        public PrincipalSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ExternalId
+        {
+            get
+            {
+                return this._externalId;
+            }
+            set
+            {
+                this._externalId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.PrincipalIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.PrincipalIdentityDTO(this.Id);
+            }
+        }
+        
+        public virtual SampleSystem.Generated.DTO.PrincipalStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.PrincipalStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ExternalPrincipal.Principal), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.PrincipalRichDTO))]
+    public partial class PrincipalFullDTO : SampleSystem.Generated.DTO.PrincipalSimpleDTO
+    {
+        
+        public PrincipalFullDTO()
+        {
+        }
+        
+        public PrincipalFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ExternalPrincipal.Principal domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapPrincipal(domainObject, this);
+        }
+        
+        public override SampleSystem.Generated.DTO.PrincipalStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.PrincipalStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ExternalPrincipal.Principal), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class PrincipalRichDTO : SampleSystem.Generated.DTO.PrincipalFullDTO
+    {
+        
+        public PrincipalRichDTO()
+        {
+        }
+        
+        public PrincipalRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ExternalPrincipal.Principal domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapPrincipal(domainObject, this);
+        }
+        
+        public override SampleSystem.Generated.DTO.PrincipalStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.PrincipalStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ExternalPrincipal.Principal), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class PrincipalStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ExternalPrincipal.Principal, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ExternalPrincipal.Principal>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.PrincipalIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    {
+        
+        private string _externalId;
+        
+        private System.Guid _id;
+        
+        private long _version;
+        
+        public PrincipalStrictDTO()
+        {
+        }
+        
+        public PrincipalStrictDTO(SampleSystem.Generated.DTO.PrincipalRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.PrincipalFullDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapRichToStrictForPrincipal(this, source);
+        }
+        
+        public PrincipalStrictDTO(SampleSystem.Generated.DTO.PrincipalRichDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public PrincipalStrictDTO(SampleSystem.Generated.DTO.PrincipalFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.PrincipalSimpleDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapFullToStrictForPrincipal(this, source);
+        }
+        
+        public PrincipalStrictDTO(SampleSystem.Generated.DTO.PrincipalFullDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public PrincipalStrictDTO(SampleSystem.Generated.DTO.PrincipalSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapSimpleToStrictForPrincipal(this, source);
+        }
+        
+        public PrincipalStrictDTO(SampleSystem.Generated.DTO.PrincipalSimpleDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        private PrincipalStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.BasePersistentDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapBaseAuditPersistentToStrictForPrincipal(this, source);
+        }
+        
+        private PrincipalStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        private PrincipalStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapBasePersistentToStrictForPrincipal(this, source);
+        }
+        
+        private PrincipalStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ExternalId
+        {
+            get
+            {
+                return this._externalId;
+            }
+            set
+            {
+                this._externalId = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.PrincipalIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.PrincipalIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
+        
+        long Framework.Application.Domain.IVersionObject<long>.Version
+        {
+            get
+            {
+                return this.Version;
+            }
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ExternalPrincipal.Principal domainObject)
+        {
+            mappingService.MapPrincipal(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.ExternalPrincipal.Principal ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToPrincipal(this);
+        }
+        
+        public SampleSystem.Domain.ExternalPrincipal.Principal ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        {
+            return mappingService.ToPrincipal(this, allowCreate);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ForUpdate.Example1), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.Example1FullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.Example1RichDTO))]
@@ -19004,7 +19907,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public Example1SimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Example1 domainObject) : 
+        public Example1SimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ForUpdate.Example1 domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapExample1(domainObject, this);
@@ -19069,7 +19972,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example1), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ForUpdate.Example1), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.Example1RichDTO))]
     public partial class Example1FullDTO : SampleSystem.Generated.DTO.Example1SimpleDTO
@@ -19079,7 +19982,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public Example1FullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Example1 domainObject) : 
+        public Example1FullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ForUpdate.Example1 domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapExample1(domainObject, this);
@@ -19091,7 +19994,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example1), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ForUpdate.Example1), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class Example1RichDTO : SampleSystem.Generated.DTO.Example1FullDTO
     {
@@ -19102,7 +20005,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public Example1RichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Example1 domainObject) : 
+        public Example1RichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ForUpdate.Example1 domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapExample1(domainObject, this);
@@ -19127,9 +20030,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example1), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ForUpdate.Example1), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class Example1StrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example1, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example1>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example1IdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class Example1StrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ForUpdate.Example1, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ForUpdate.Example1>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example1IdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private System.Guid _field1;
@@ -19325,25 +20228,25 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Example1 domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ForUpdate.Example1 domainObject)
         {
             mappingService.MapExample1(this, domainObject);
         }
         
-        public SampleSystem.Domain.Example1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.ForUpdate.Example1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToExample1(this);
         }
         
-        public SampleSystem.Domain.Example1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.ForUpdate.Example1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToExample1(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example1), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ForUpdate.Example1), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class Example1UpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example1, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example1>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example1IdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class Example1UpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ForUpdate.Example1, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ForUpdate.Example1>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example1IdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private CommonFramework.Maybe<System.Guid> _field1 = CommonFramework.Maybe<System.Guid>.Nothing;
@@ -19507,23 +20410,23 @@ namespace SampleSystem.Generated.DTO
             Framework.BLL.DTOMapping.Extensions.UpdateExtensions.Compress<SampleSystem.Generated.DTO.Example2UpdateDTO, SampleSystem.Generated.DTO.Example2IdentityDTO>(this.Items2);
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Example1 domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ForUpdate.Example1 domainObject)
         {
             mappingService.MapExample1(this, domainObject);
         }
         
-        public SampleSystem.Domain.Example1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.ForUpdate.Example1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToExample1(this);
         }
         
-        public SampleSystem.Domain.Example1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.ForUpdate.Example1 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToExample1(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example2), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ForUpdate.Example2), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.Example2FullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.Example2RichDTO))]
@@ -19538,7 +20441,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public Example2SimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Example2 domainObject) : 
+        public Example2SimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ForUpdate.Example2 domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapExample2(domainObject, this);
@@ -19590,7 +20493,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example2), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ForUpdate.Example2), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.Example2RichDTO))]
     public partial class Example2FullDTO : SampleSystem.Generated.DTO.Example2SimpleDTO
@@ -19602,7 +20505,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public Example2FullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Example2 domainObject) : 
+        public Example2FullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ForUpdate.Example2 domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapExample2(domainObject, this);
@@ -19627,7 +20530,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example2), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ForUpdate.Example2), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class Example2RichDTO : SampleSystem.Generated.DTO.Example2FullDTO
     {
@@ -19636,7 +20539,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public Example2RichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Example2 domainObject) : 
+        public Example2RichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ForUpdate.Example2 domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapExample2(domainObject, this);
@@ -19648,9 +20551,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example2), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ForUpdate.Example2), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class Example2StrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example2, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example2>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example2IdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class Example2StrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ForUpdate.Example2, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ForUpdate.Example2>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example2IdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private System.Guid _field1;
@@ -19816,20 +20719,20 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Example2 domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ForUpdate.Example2 domainObject)
         {
             mappingService.MapExample2(this, domainObject);
         }
         
-        public SampleSystem.Domain.Example2 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.ForUpdate.Example2 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToExample2(this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example2), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ForUpdate.Example2), "UpdateDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class Example2UpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example2, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Example2>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example2IdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class Example2UpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ForUpdate.Example2, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ForUpdate.Example2>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example2IdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private CommonFramework.Maybe<System.Guid> _field1 = CommonFramework.Maybe<System.Guid>.Nothing;
@@ -19962,18 +20865,18 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Example2 domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ForUpdate.Example2 domainObject)
         {
             mappingService.MapExample2(this, domainObject);
         }
         
-        public SampleSystem.Domain.Example2 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.ForUpdate.Example2 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToExample2(this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartment), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class HRDepartmentVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentIdentityDTO>
     {
@@ -19984,7 +20887,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public HRDepartmentVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment domainObject) : 
+        public HRDepartmentVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment.HRDepartment domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapHRDepartment(domainObject, this);
@@ -20013,7 +20916,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartment), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.HRDepartmentFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.HRDepartmentRichDTO))]
@@ -20042,7 +20945,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public HRDepartmentSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment domainObject) : 
+        public HRDepartmentSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment.HRDepartment domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapHRDepartment(domainObject, this);
@@ -20185,7 +21088,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartment), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.HRDepartmentRichDTO))]
     public partial class HRDepartmentFullDTO : SampleSystem.Generated.DTO.HRDepartmentSimpleDTO
@@ -20205,7 +21108,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public HRDepartmentFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment domainObject) : 
+        public HRDepartmentFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment.HRDepartment domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapHRDepartment(domainObject, this);
@@ -20282,7 +21185,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartment), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class HRDepartmentRichDTO : SampleSystem.Generated.DTO.HRDepartmentFullDTO
     {
@@ -20301,7 +21204,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public HRDepartmentRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment domainObject) : 
+        public HRDepartmentRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment.HRDepartment domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapHRDepartment(domainObject, this);
@@ -20378,9 +21281,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartment), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class HRDepartmentStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartment, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartment>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class HRDepartmentStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartment.HRDepartment, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartment.HRDepartment>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private bool _active = true;
@@ -20756,23 +21659,23 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment.HRDepartment domainObject)
         {
             mappingService.MapHRDepartment(this, domainObject);
         }
         
-        public SampleSystem.Domain.HRDepartment ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.HRDepartment.HRDepartment ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToHRDepartment(this);
         }
         
-        public SampleSystem.Domain.HRDepartment ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.HRDepartment.HRDepartment ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToHRDepartment(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartmentEmployeePosition), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.HRDepartmentEmployeePositionFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.HRDepartmentEmployeePositionRichDTO))]
@@ -20783,7 +21686,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public HRDepartmentEmployeePositionSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartmentEmployeePosition domainObject) : 
+        public HRDepartmentEmployeePositionSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapHRDepartmentEmployeePosition(domainObject, this);
@@ -20809,7 +21712,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartmentEmployeePosition), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.HRDepartmentEmployeePositionRichDTO))]
     public partial class HRDepartmentEmployeePositionFullDTO : SampleSystem.Generated.DTO.HRDepartmentEmployeePositionSimpleDTO
@@ -20823,7 +21726,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public HRDepartmentEmployeePositionFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartmentEmployeePosition domainObject) : 
+        public HRDepartmentEmployeePositionFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapHRDepartmentEmployeePosition(domainObject, this);
@@ -20861,7 +21764,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartmentEmployeePosition), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class HRDepartmentEmployeePositionRichDTO : SampleSystem.Generated.DTO.HRDepartmentEmployeePositionFullDTO
     {
@@ -20870,7 +21773,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public HRDepartmentEmployeePositionRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartmentEmployeePosition domainObject) : 
+        public HRDepartmentEmployeePositionRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapHRDepartmentEmployeePosition(domainObject, this);
@@ -20882,9 +21785,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartmentEmployeePosition), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class HRDepartmentEmployeePositionStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartmentEmployeePosition, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartmentEmployeePosition>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentEmployeePositionIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class HRDepartmentEmployeePositionStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentEmployeePositionIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.EmployeePositionIdentityDTO _employeePosition;
@@ -21050,36 +21953,36 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartmentEmployeePosition domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition domainObject)
         {
             mappingService.MapHRDepartmentEmployeePosition(this, domainObject);
         }
         
-        public SampleSystem.Domain.HRDepartmentEmployeePosition ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToHRDepartmentEmployeePosition(this);
         }
         
-        public SampleSystem.Domain.HRDepartmentEmployeePosition ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToHRDepartmentEmployeePosition(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartmentRoleEmployee), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeRichDTO))]
     public partial class HRDepartmentRoleEmployeeSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeIdentityDTO>
     {
         
-        private SampleSystem.Domain.HRDepartmentEmployeeRoleType _hRDepartmentEmployeeRoleType;
+        private SampleSystem.Domain.Enums.HRDepartmentEmployeeRoleType _hRDepartmentEmployeeRoleType;
         
         public HRDepartmentRoleEmployeeSimpleDTO()
         {
         }
         
-        public HRDepartmentRoleEmployeeSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartmentRoleEmployee domainObject) : 
+        public HRDepartmentRoleEmployeeSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapHRDepartmentRoleEmployee(domainObject, this);
@@ -21091,7 +21994,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.HRDepartmentEmployeeRoleType HRDepartmentEmployeeRoleType
+        public SampleSystem.Domain.Enums.HRDepartmentEmployeeRoleType HRDepartmentEmployeeRoleType
         {
             get
             {
@@ -21118,7 +22021,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartmentRoleEmployee), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeRichDTO))]
     public partial class HRDepartmentRoleEmployeeFullDTO : SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeSimpleDTO
@@ -21132,7 +22035,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public HRDepartmentRoleEmployeeFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartmentRoleEmployee domainObject) : 
+        public HRDepartmentRoleEmployeeFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapHRDepartmentRoleEmployee(domainObject, this);
@@ -21170,7 +22073,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartmentRoleEmployee), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class HRDepartmentRoleEmployeeRichDTO : SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeFullDTO
     {
@@ -21179,7 +22082,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public HRDepartmentRoleEmployeeRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartmentRoleEmployee domainObject) : 
+        public HRDepartmentRoleEmployeeRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapHRDepartmentRoleEmployee(domainObject, this);
@@ -21191,14 +22094,14 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartmentRoleEmployee), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class HRDepartmentRoleEmployeeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartmentRoleEmployee, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartmentRoleEmployee>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class HRDepartmentRoleEmployeeStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.EmployeeIdentityDTO _employee;
         
-        private SampleSystem.Domain.HRDepartmentEmployeeRoleType _hRDepartmentEmployeeRoleType;
+        private SampleSystem.Domain.Enums.HRDepartmentEmployeeRoleType _hRDepartmentEmployeeRoleType;
         
         private System.Guid _id;
         
@@ -21296,7 +22199,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.HRDepartmentEmployeeRoleType HRDepartmentEmployeeRoleType
+        public SampleSystem.Domain.Enums.HRDepartmentEmployeeRoleType HRDepartmentEmployeeRoleType
         {
             get
             {
@@ -21359,83 +22262,30 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartmentRoleEmployee domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee domainObject)
         {
             mappingService.MapHRDepartmentRoleEmployee(this, domainObject);
         }
         
-        public SampleSystem.Domain.HRDepartmentRoleEmployee ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToHRDepartmentRoleEmployee(this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IMRequest), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class IMRequestVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.IMRequestIdentityDTO>
-    {
-        
-        private string _name;
-        
-        public IMRequestVisualDTO()
-        {
-        }
-        
-        public IMRequestVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IMRequest domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapIMRequest(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IMRequestIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.IMRequestIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IMRequest), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IMRequestFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IMRequestRichDTO))]
-    public partial class IMRequestSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.IMRequestIdentityDTO>
+    public partial class EmployeeComplexChangeModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel>
     {
         
         private string _email;
         
-        private string _message;
+        private SampleSystem.Generated.DTO.EmployeeIdentityDTO _primaryChangingObject;
         
-        private string _name;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _secondaryChangingObjects = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO>();
         
-        public IMRequestSimpleDTO()
+        public EmployeeComplexChangeModelStrictDTO()
         {
-        }
-        
-        public IMRequestSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IMRequest domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapIMRequest(domainObject, this);
-        }
-        
-        public IMRequestSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -21451,234 +22301,60 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IMRequestIdentityDTO Identity
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeIdentityDTO PrimaryChangingObject
         {
             get
             {
-                return new SampleSystem.Generated.DTO.IMRequestIdentityDTO(this.Id);
+                return this._primaryChangingObject;
+            }
+            set
+            {
+                this._primaryChangingObject = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> SecondaryChangingObjects
         {
             get
             {
-                return this._message;
+                return this._secondaryChangingObjects;
             }
             set
             {
-                this._message = value;
+                this._secondaryChangingObjects = value;
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel domainObject)
         {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
+            mappingService.MapEmployeeComplexChangeModel(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToEmployeeComplexChangeModel(this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IMRequest), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IMRequestRichDTO))]
-    public partial class IMRequestFullDTO : SampleSystem.Generated.DTO.IMRequestSimpleDTO
-    {
-        
-        public IMRequestFullDTO()
-        {
-        }
-        
-        public IMRequestFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IMRequest domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapIMRequest(domainObject, this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IMRequest), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class IMRequestRichDTO : SampleSystem.Generated.DTO.IMRequestFullDTO
-    {
-        
-        private SampleSystem.Generated.DTO.IMRequestDetailRichDTO _oneToOneDetail;
-        
-        public IMRequestRichDTO()
-        {
-        }
-        
-        public IMRequestRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IMRequest domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapIMRequest(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IMRequestDetailRichDTO OneToOneDetail
-        {
-            get
-            {
-                return this._oneToOneDetail;
-            }
-            set
-            {
-                this._oneToOneDetail = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IMRequestDetail), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IMRequestDetailFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IMRequestDetailRichDTO))]
-    public partial class IMRequestDetailSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO>
-    {
-        
-        public IMRequestDetailSimpleDTO()
-        {
-        }
-        
-        public IMRequestDetailSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IMRequestDetail domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapIMRequestDetail(domainObject, this);
-        }
-        
-        public IMRequestDetailSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO(this.Id);
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IMRequestDetail), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IMRequestDetailRichDTO))]
-    public partial class IMRequestDetailFullDTO : SampleSystem.Generated.DTO.IMRequestDetailSimpleDTO
-    {
-        
-        private SampleSystem.Generated.DTO.IMRequestSimpleDTO _request;
-        
-        public IMRequestDetailFullDTO()
-        {
-        }
-        
-        public IMRequestDetailFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IMRequestDetail domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapIMRequestDetail(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IMRequestSimpleDTO Request
-        {
-            get
-            {
-                return this._request;
-            }
-            set
-            {
-                this._request = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IMRequestDetail), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class IMRequestDetailRichDTO : SampleSystem.Generated.DTO.IMRequestDetailFullDTO
-    {
-        
-        public IMRequestDetailRichDTO()
-        {
-        }
-        
-        public IMRequestDetailRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IMRequestDetail domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapIMRequestDetail(domainObject, this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Information), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class InformationVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.InformationIdentityDTO>
-    {
-        
-        private string _name;
-        
-        public InformationVisualDTO()
-        {
-        }
-        
-        public InformationVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Information domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapInformation(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.InformationIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.InformationIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Information), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.InformationFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.InformationRichDTO))]
-    public partial class InformationSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.InformationIdentityDTO>
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO))]
+    public partial class EmployeeEmailChangeModelSimpleDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
     {
         
         private string _email;
         
-        private string _name;
-        
-        public InformationSimpleDTO()
+        public EmployeeEmailChangeModelSimpleDTO()
         {
         }
         
-        public InformationSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Information domainObject) : 
+        public EmployeeEmailChangeModelSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject) : 
                 base(mappingService, domainObject)
         {
-            mappingService.MapInformation(domainObject, this);
-        }
-        
-        public InformationSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
+            mappingService.MapEmployeeEmailChangeModel(domainObject, this);
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -21694,727 +22370,645 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.InformationIdentityDTO Identity
+        public virtual SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO ToStrict()
         {
-            get
-            {
-                return new SampleSystem.Generated.DTO.InformationIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
+            return new SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO(this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Information), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.InformationRichDTO))]
-    public partial class InformationFullDTO : SampleSystem.Generated.DTO.InformationSimpleDTO
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO))]
+    public partial class EmployeeEmailChangeModelFullDTO : SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO
     {
         
-        public InformationFullDTO()
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _changingObject;
+        
+        public EmployeeEmailChangeModelFullDTO()
         {
         }
         
-        public InformationFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Information domainObject) : 
+        public EmployeeEmailChangeModelFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject) : 
                 base(mappingService, domainObject)
         {
-            mappingService.MapInformation(domainObject, this);
+            mappingService.MapEmployeeEmailChangeModel(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeSimpleDTO ChangingObject
+        {
+            get
+            {
+                return this._changingObject;
+            }
+            set
+            {
+                this._changingObject = value;
+            }
+        }
+        
+        public override SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO(this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Information), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class InformationRichDTO : SampleSystem.Generated.DTO.InformationFullDTO
+    public partial class EmployeeEmailChangeModelRichDTO : SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO
     {
         
-        public InformationRichDTO()
+        public EmployeeEmailChangeModelRichDTO()
         {
         }
         
-        public InformationRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Information domainObject) : 
+        public EmployeeEmailChangeModelRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject) : 
                 base(mappingService, domainObject)
         {
-            mappingService.MapInformation(domainObject, this);
+            mappingService.MapEmployeeEmailChangeModel(domainObject, this);
+        }
+        
+        public override SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO(this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.LegalEntityBase), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class LegalEntityBaseSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO>
+    public partial class EmployeeEmailChangeModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel>
     {
         
-        private SampleSystem.Domain.RevenueDocumentAribaStatus _aribaStatus;
+        private SampleSystem.Generated.DTO.EmployeeIdentityDTO _changingObject;
         
-        private string _name;
+        private string _email;
         
-        private string _nameEnglish;
-        
-        public LegalEntityBaseSimpleDTO()
+        public EmployeeEmailChangeModelStrictDTO()
         {
         }
         
-        public LegalEntityBaseSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.LegalEntityBase domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapLegalEntityBase(domainObject, this);
-        }
-        
-        public LegalEntityBaseSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.RevenueDocumentAribaStatus AribaStatus
-        {
-            get
-            {
-                return this._aribaStatus;
-            }
-            set
-            {
-                this._aribaStatus = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NameEnglish
-        {
-            get
-            {
-                return this._nameEnglish;
-            }
-            set
-            {
-                this._nameEnglish = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Location), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class LocationVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.LocationIdentityDTO>
-    {
-        
-        private string _name;
-        
-        public LocationVisualDTO()
-        {
-        }
-        
-        public LocationVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Location domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapLocation(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.LocationIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Location), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.LocationFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.LocationRichDTO))]
-    public partial class LocationSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.LocationIdentityDTO>
-    {
-        
-        private int _closeDate;
-        
-        private int _code;
-        
-        private bool _containsOnlyInactiveChildren;
-        
-        private int _deepLevel;
-        
-        private bool _isFinancial;
-        
-        private bool _isLeaf;
-        
-        private SampleSystem.Domain.LocationType _locationType;
-        
-        private string _name;
-        
-        public LocationSimpleDTO()
-        {
-        }
-        
-        public LocationSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Location domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapLocation(domainObject, this);
-        }
-        
-        public LocationSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int CloseDate
-        {
-            get
-            {
-                return this._closeDate;
-            }
-            set
-            {
-                this._closeDate = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Code
-        {
-            get
-            {
-                return this._code;
-            }
-            set
-            {
-                this._code = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool ContainsOnlyInactiveChildren
-        {
-            get
-            {
-                return this._containsOnlyInactiveChildren;
-            }
-            set
-            {
-                this._containsOnlyInactiveChildren = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int DeepLevel
-        {
-            get
-            {
-                return this._deepLevel;
-            }
-            set
-            {
-                this._deepLevel = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.LocationIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsFinancial
-        {
-            get
-            {
-                return this._isFinancial;
-            }
-            set
-            {
-                this._isFinancial = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsLeaf
-        {
-            get
-            {
-                return this._isLeaf;
-            }
-            set
-            {
-                this._isLeaf = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.LocationType LocationType
-        {
-            get
-            {
-                return this._locationType;
-            }
-            set
-            {
-                this._locationType = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-        
-        public virtual SampleSystem.Generated.DTO.LocationStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.LocationStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Location), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.LocationRichDTO))]
-    public partial class LocationFullDTO : SampleSystem.Generated.DTO.LocationSimpleDTO
-    {
-        
-        private SampleSystem.Generated.DTO.CountrySimpleDTO _country;
-        
-        private SampleSystem.Generated.DTO.LocationSimpleDTO _parent;
-        
-        public LocationFullDTO()
-        {
-        }
-        
-        public LocationFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Location domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapLocation(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CountrySimpleDTO Country
-        {
-            get
-            {
-                return this._country;
-            }
-            set
-            {
-                this._country = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationSimpleDTO Parent
-        {
-            get
-            {
-                return this._parent;
-            }
-            set
-            {
-                this._parent = value;
-            }
-        }
-        
-        public override SampleSystem.Generated.DTO.LocationStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.LocationStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Location), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class LocationRichDTO : SampleSystem.Generated.DTO.LocationFullDTO
-    {
-        
-        private byte[] _binaryData;
-        
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationRichDTO> _children = new System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationRichDTO>();
-        
-        public LocationRichDTO()
-        {
-        }
-        
-        public LocationRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Location domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapLocation(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] BinaryData
-        {
-            get
-            {
-                return this._binaryData;
-            }
-            set
-            {
-                this._binaryData = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationRichDTO> Children
-        {
-            get
-            {
-                return this._children;
-            }
-            set
-            {
-                this._children = value;
-            }
-        }
-        
-        public override SampleSystem.Generated.DTO.LocationStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.LocationStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Location), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class LocationStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Location, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Location>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.LocationIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
-    {
-        
-        private bool _active = true;
-        
-        private byte[] _binaryData;
-        
-        private int _closeDate;
-        
-        private int _code;
-        
-        private SampleSystem.Generated.DTO.CountryIdentityDTO _country;
-        
-        private System.Guid _id;
-        
-        private bool _isFinancial;
-        
-        private SampleSystem.Domain.LocationType _locationType;
-        
-        private string _name;
-        
-        private SampleSystem.Generated.DTO.LocationIdentityDTO _parent;
-        
-        private long _version;
-        
-        public LocationStrictDTO()
-        {
-        }
-        
-        public LocationStrictDTO(SampleSystem.Generated.DTO.LocationRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.LocationFullDTO)(source)), mappingService)
+        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO)(source)), mappingService)
         {
             if (object.ReferenceEquals(mappingService, null))
             {
                 throw new System.ArgumentNullException("mappingService");
             }
-            mappingService.MapRichToStrictForLocation(this, source);
+            mappingService.MapRichToStrictForEmployeeEmailChangeModel(this, source);
         }
         
-        public LocationStrictDTO(SampleSystem.Generated.DTO.LocationRichDTO source) : 
+        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO source) : 
                 this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
         {
         }
         
-        public LocationStrictDTO(SampleSystem.Generated.DTO.LocationFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.LocationSimpleDTO)(source)), mappingService)
+        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO)(source)), mappingService)
         {
             if (object.ReferenceEquals(mappingService, null))
             {
                 throw new System.ArgumentNullException("mappingService");
             }
-            mappingService.MapFullToStrictForLocation(this, source);
+            mappingService.MapFullToStrictForEmployeeEmailChangeModel(this, source);
         }
         
-        public LocationStrictDTO(SampleSystem.Generated.DTO.LocationFullDTO source) : 
+        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO source) : 
                 this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
         {
         }
         
-        public LocationStrictDTO(SampleSystem.Generated.DTO.LocationSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
+        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
         {
             if (object.ReferenceEquals(mappingService, null))
             {
                 throw new System.ArgumentNullException("mappingService");
             }
-            mappingService.MapSimpleToStrictForLocation(this, source);
+            mappingService.MapSimpleToStrictForEmployeeEmailChangeModel(this, source);
         }
         
-        public LocationStrictDTO(SampleSystem.Generated.DTO.LocationSimpleDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private LocationStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.BasePersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBaseAuditPersistentToStrictForLocation(this, source);
-        }
-        
-        private LocationStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private LocationStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBasePersistentToStrictForLocation(this, source);
-        }
-        
-        private LocationStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source) : 
+        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO source) : 
                 this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
         {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
+        public SampleSystem.Generated.DTO.EmployeeIdentityDTO ChangingObject
         {
             get
             {
-                return this._active;
+                return this._changingObject;
             }
             set
             {
-                this._active = value;
+                this._changingObject = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] BinaryData
+        public string Email
         {
             get
             {
-                return this._binaryData;
+                return this._email;
             }
             set
             {
-                this._binaryData = value;
+                this._email = value;
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int CloseDate
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject)
         {
-            get
-            {
-                return this._closeDate;
-            }
-            set
-            {
-                this._closeDate = value;
-            }
+            mappingService.MapEmployeeEmailChangeModel(this, domainObject);
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Code
+        public SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
-            get
-            {
-                return this._code;
-            }
-            set
-            {
-                this._code = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CountryIdentityDTO Country
-        {
-            get
-            {
-                return this._country;
-            }
-            set
-            {
-                this._country = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.LocationIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsFinancial
-        {
-            get
-            {
-                return this._isFinancial;
-            }
-            set
-            {
-                this._isFinancial = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.LocationType LocationType
-        {
-            get
-            {
-                return this._locationType;
-            }
-            set
-            {
-                this._locationType = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationIdentityDTO Parent
-        {
-            get
-            {
-                return this._parent;
-            }
-            set
-            {
-                this._parent = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version
-        {
-            get
-            {
-                return this._version;
-            }
-            set
-            {
-                this._version = value;
-            }
-        }
-        
-        long Framework.Application.Domain.IVersionObject<long>.Version
-        {
-            get
-            {
-                return this.Version;
-            }
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Location domainObject)
-        {
-            mappingService.MapLocation(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.Location ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToLocation(this);
-        }
-        
-        public SampleSystem.Domain.Location ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
-        {
-            return mappingService.ToLocation(this, allowCreate);
+            return mappingService.ToEmployeeEmailChangeModel(this);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnit), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO))]
+    public partial class EmployeeEmailMassChangeModelSimpleDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
+    {
+        
+        private string _email;
+        
+        public EmployeeEmailMassChangeModelSimpleDTO()
+        {
+        }
+        
+        public EmployeeEmailMassChangeModelSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapEmployeeEmailMassChangeModel(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+        
+        public virtual SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO))]
+    public partial class EmployeeEmailMassChangeModelFullDTO : SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO
+    {
+        
+        public EmployeeEmailMassChangeModelFullDTO()
+        {
+        }
+        
+        public EmployeeEmailMassChangeModelFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapEmployeeEmailMassChangeModel(domainObject, this);
+        }
+        
+        public override SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class EmployeeEmailMassChangeModelRichDTO : SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO
+    {
+        
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeSimpleDTO> _changingObjects = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeSimpleDTO>();
+        
+        public EmployeeEmailMassChangeModelRichDTO()
+        {
+        }
+        
+        public EmployeeEmailMassChangeModelRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapEmployeeEmailMassChangeModel(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeSimpleDTO> ChangingObjects
+        {
+            get
+            {
+                return this._changingObjects;
+            }
+            set
+            {
+                this._changingObjects = value;
+            }
+        }
+        
+        public override SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class EmployeeEmailMassChangeModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel>
+    {
+        
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _changingObjects = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO>();
+        
+        private string _email;
+        
+        public EmployeeEmailMassChangeModelStrictDTO()
+        {
+        }
+        
+        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapRichToStrictForEmployeeEmailMassChangeModel(this, source);
+        }
+        
+        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapFullToStrictForEmployeeEmailMassChangeModel(this, source);
+        }
+        
+        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapSimpleToStrictForEmployeeEmailMassChangeModel(this, source);
+        }
+        
+        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> ChangingObjects
+        {
+            get
+            {
+                return this._changingObjects;
+            }
+            set
+            {
+                this._changingObjects = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject)
+        {
+            mappingService.MapEmployeeEmailMassChangeModel(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToEmployeeEmailMassChangeModel(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class BusinessUnitProgramClassFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel>
+    {
+        
+        private System.Guid? _ancestorIdent;
+        
+        private string _filterVirtualName;
+        
+        public BusinessUnitProgramClassFilterModelStrictDTO()
+        {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid? AncestorIdent
+        {
+            get
+            {
+                return this._ancestorIdent;
+            }
+            set
+            {
+                this._ancestorIdent = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FilterVirtualName
+        {
+            get
+            {
+                return this._filterVirtualName;
+            }
+            set
+            {
+                this._filterVirtualName = value;
+            }
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel domainObject)
+        {
+            mappingService.MapBusinessUnitProgramClassFilterModel(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToBusinessUnitProgramClassFilterModel(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.EmployeeFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class EmployeeFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.EmployeeFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.EmployeeFilterModel>
+    {
+        
+        public EmployeeFilterModelStrictDTO()
+        {
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.EmployeeFilterModel domainObject)
+        {
+            mappingService.MapEmployeeFilterModel(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Models.Filters.EmployeeFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToEmployeeFilterModel(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class HierarchicalBusinessUnitFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel>
+    {
+        
+        public HierarchicalBusinessUnitFilterModelStrictDTO()
+        {
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel domainObject)
+        {
+            mappingService.MapHierarchicalBusinessUnitFilterModel(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToHierarchicalBusinessUnitFilterModel(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestEmployeeFilterStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter>
+    {
+        
+        private SampleSystem.Generated.DTO.BusinessUnitIdentityDTO _businessUnit;
+        
+        private SampleSystem.Domain.Models.Filters.Projection.SampleStruct _sampleStruct;
+        
+        private bool _testValue;
+        
+        public TestEmployeeFilterStrictDTO()
+        {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitIdentityDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.Models.Filters.Projection.SampleStruct SampleStruct
+        {
+            get
+            {
+                return this._sampleStruct;
+            }
+            set
+            {
+                this._sampleStruct = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool TestValue
+        {
+            get
+            {
+                return this._testValue;
+            }
+            set
+            {
+                this._testValue = value;
+            }
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter domainObject)
+        {
+            mappingService.MapTestEmployeeFilter(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestEmployeeFilter(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class BusinessUnitRootFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel>
+    {
+        
+        private System.DateTime[] _arrayDays;
+        
+        private Framework.Core.Period[] _arrayPeriods;
+        
+        private SampleSystem.Generated.DTO.EmployeeIdentityDTO _employee;
+        
+        private System.Collections.Generic.List<System.DateTime> _listDays = new System.Collections.Generic.List<System.DateTime>();
+        
+        private System.Collections.Generic.List<Framework.Core.Period> _listPeriods = new System.Collections.Generic.List<Framework.Core.Period>();
+        
+        public BusinessUnitRootFilterModelStrictDTO()
+        {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime[] ArrayDays
+        {
+            get
+            {
+                return this._arrayDays;
+            }
+            set
+            {
+                this._arrayDays = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period[] ArrayPeriods
+        {
+            get
+            {
+                return this._arrayPeriods;
+            }
+            set
+            {
+                this._arrayPeriods = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeIdentityDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<System.DateTime> ListDays
+        {
+            get
+            {
+                return this._listDays;
+            }
+            set
+            {
+                this._listDays = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Framework.Core.Period> ListPeriods
+        {
+            get
+            {
+                return this._listPeriods;
+            }
+            set
+            {
+                this._listPeriods = value;
+            }
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel domainObject)
+        {
+            mappingService.MapBusinessUnitRootFilterModel(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToBusinessUnitRootFilterModel(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class EmployeeRootFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel>
+    {
+        
+        public EmployeeRootFilterModelStrictDTO()
+        {
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel domainObject)
+        {
+            mappingService.MapEmployeeRootFilterModel(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToEmployeeRootFilterModel(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class SingleEmployeeFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel>
+    {
+        
+        public SingleEmployeeFilterModelStrictDTO()
+        {
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel domainObject)
+        {
+            mappingService.MapSingleEmployeeFilterModel(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToSingleEmployeeFilterModel(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnit), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class ManagementUnitVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ManagementUnitIdentityDTO>
     {
@@ -22425,7 +23019,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public ManagementUnitVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnit domainObject) : 
+        public ManagementUnitVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.MU.ManagementUnit domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapManagementUnit(domainObject, this);
@@ -22454,14 +23048,14 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnit), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnit), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ManagementUnitFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ManagementUnitRichDTO))]
     public partial class ManagementUnitSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ManagementUnitIdentityDTO>
     {
         
-        private SampleSystem.Domain.BusinessUnitStatus _businessUnitStatus;
+        private SampleSystem.Domain.Enums.BusinessUnitStatus _businessUnitStatus;
         
         private int _deepLevel;
         
@@ -22475,7 +23069,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public ManagementUnitSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnit domainObject) : 
+        public ManagementUnitSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.MU.ManagementUnit domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapManagementUnit(domainObject, this);
@@ -22487,7 +23081,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus
+        public SampleSystem.Domain.Enums.BusinessUnitStatus BusinessUnitStatus
         {
             get
             {
@@ -22566,7 +23160,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnit), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnit), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ManagementUnitRichDTO))]
     public partial class ManagementUnitFullDTO : SampleSystem.Generated.DTO.ManagementUnitSimpleDTO
@@ -22578,7 +23172,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public ManagementUnitFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnit domainObject) : 
+        public ManagementUnitFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.MU.ManagementUnit domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapManagementUnit(domainObject, this);
@@ -22603,7 +23197,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnit), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnit), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class ManagementUnitRichDTO : SampleSystem.Generated.DTO.ManagementUnitFullDTO
     {
@@ -22618,7 +23212,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public ManagementUnitRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnit domainObject) : 
+        public ManagementUnitRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.MU.ManagementUnit domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapManagementUnit(domainObject, this);
@@ -22669,14 +23263,14 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnit), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnit), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class ManagementUnitStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnit, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnit>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ManagementUnitIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class ManagementUnitStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.MU.ManagementUnit, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.MU.ManagementUnit>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ManagementUnitIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO> _businessUnits = new System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO>();
         
-        private SampleSystem.Domain.BusinessUnitStatus _businessUnitStatus;
+        private SampleSystem.Domain.Enums.BusinessUnitStatus _businessUnitStatus;
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO> _hRDepartments = new System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO>();
         
@@ -22782,7 +23376,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus
+        public SampleSystem.Domain.Enums.BusinessUnitStatus BusinessUnitStatus
         {
             get
             {
@@ -22897,23 +23491,23 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnit domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.MU.ManagementUnit domainObject)
         {
             mappingService.MapManagementUnit(this, domainObject);
         }
         
-        public SampleSystem.Domain.ManagementUnit ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.MU.ManagementUnit ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToManagementUnit(this);
         }
         
-        public SampleSystem.Domain.ManagementUnit ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.MU.ManagementUnit ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToManagementUnit(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkRichDTO))]
@@ -22926,7 +23520,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public ManagementUnitAndBusinessUnitLinkSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink domainObject) : 
+        public ManagementUnitAndBusinessUnitLinkSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapManagementUnitAndBusinessUnitLink(domainObject, this);
@@ -22965,7 +23559,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkRichDTO))]
     public partial class ManagementUnitAndBusinessUnitLinkFullDTO : SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkSimpleDTO
@@ -22979,7 +23573,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public ManagementUnitAndBusinessUnitLinkFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink domainObject) : 
+        public ManagementUnitAndBusinessUnitLinkFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapManagementUnitAndBusinessUnitLink(domainObject, this);
@@ -23017,7 +23611,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class ManagementUnitAndBusinessUnitLinkRichDTO : SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkFullDTO
     {
@@ -23026,7 +23620,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public ManagementUnitAndBusinessUnitLinkRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink domainObject) : 
+        public ManagementUnitAndBusinessUnitLinkRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapManagementUnitAndBusinessUnitLink(domainObject, this);
@@ -23038,9 +23632,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class ManagementUnitAndBusinessUnitLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class ManagementUnitAndBusinessUnitLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.BusinessUnitIdentityDTO _businessUnit;
@@ -23221,23 +23815,23 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink domainObject)
         {
             mappingService.MapManagementUnitAndBusinessUnitLink(this, domainObject);
         }
         
-        public SampleSystem.Domain.ManagementUnitAndBusinessUnitLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToManagementUnitAndBusinessUnitLink(this);
         }
         
-        public SampleSystem.Domain.ManagementUnitAndBusinessUnitLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToManagementUnitAndBusinessUnitLink(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkRichDTO))]
@@ -23248,7 +23842,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public ManagementUnitAndHRDepartmentLinkSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink domainObject) : 
+        public ManagementUnitAndHRDepartmentLinkSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapManagementUnitAndHRDepartmentLink(domainObject, this);
@@ -23274,7 +23868,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkRichDTO))]
     public partial class ManagementUnitAndHRDepartmentLinkFullDTO : SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkSimpleDTO
@@ -23288,7 +23882,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public ManagementUnitAndHRDepartmentLinkFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink domainObject) : 
+        public ManagementUnitAndHRDepartmentLinkFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapManagementUnitAndHRDepartmentLink(domainObject, this);
@@ -23326,7 +23920,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class ManagementUnitAndHRDepartmentLinkRichDTO : SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkFullDTO
     {
@@ -23335,7 +23929,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public ManagementUnitAndHRDepartmentLinkRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink domainObject) : 
+        public ManagementUnitAndHRDepartmentLinkRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapManagementUnitAndHRDepartmentLink(domainObject, this);
@@ -23347,9 +23941,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class ManagementUnitAndHRDepartmentLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class ManagementUnitAndHRDepartmentLinkStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private SampleSystem.Generated.DTO.HRDepartmentIdentityDTO _hRDepartment;
@@ -23515,32 +24109,32 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink domainObject)
         {
             mappingService.MapManagementUnitAndHRDepartmentLink(this, domainObject);
         }
         
-        public SampleSystem.Domain.ManagementUnitAndHRDepartmentLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToManagementUnitAndHRDepartmentLink(this);
         }
         
-        public SampleSystem.Domain.ManagementUnitAndHRDepartmentLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToManagementUnitAndHRDepartmentLink(this, allowCreate);
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitFluentMapping), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class ManagementUnitFluentMappingSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO>
     {
         
-        private SampleSystem.Domain.BusinessUnitStatus _businessUnitStatus;
+        private SampleSystem.Domain.Enums.BusinessUnitStatus _businessUnitStatus;
         
         private bool _isProduction;
         
-        private SampleSystem.Domain.MuComponent _muComponent;
+        private SampleSystem.Domain.NhFluentMapping.MuComponent _muComponent;
         
         private string _name;
         
@@ -23550,7 +24144,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public ManagementUnitFluentMappingSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ManagementUnitFluentMapping domainObject) : 
+        public ManagementUnitFluentMappingSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapManagementUnitFluentMapping(domainObject, this);
@@ -23562,7 +24156,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus
+        public SampleSystem.Domain.Enums.BusinessUnitStatus BusinessUnitStatus
         {
             get
             {
@@ -23597,7 +24191,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.MuComponent MuComponent
+        public SampleSystem.Domain.NhFluentMapping.MuComponent MuComponent
         {
             get
             {
@@ -23633,116 +24227,6 @@ namespace SampleSystem.Generated.DTO
             {
                 this._period = value;
             }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitProgramClassFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel>
-    {
-        
-        private System.Guid? _ancestorIdent;
-        
-        private string _filterVirtualName;
-        
-        public BusinessUnitProgramClassFilterModelStrictDTO()
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid? AncestorIdent
-        {
-            get
-            {
-                return this._ancestorIdent;
-            }
-            set
-            {
-                this._ancestorIdent = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FilterVirtualName
-        {
-            get
-            {
-                return this._filterVirtualName;
-            }
-            set
-            {
-                this._filterVirtualName = value;
-            }
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel domainObject)
-        {
-            mappingService.MapBusinessUnitProgramClassFilterModel(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToBusinessUnitProgramClassFilterModel(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.EmployeeFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.EmployeeFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.EmployeeFilterModel>
-    {
-        
-        public EmployeeFilterModelStrictDTO()
-        {
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.EmployeeFilterModel domainObject)
-        {
-            mappingService.MapEmployeeFilterModel(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.Models.Filters.EmployeeFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToEmployeeFilterModel(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class HierarchicalBusinessUnitFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel>
-    {
-        
-        public HierarchicalBusinessUnitFilterModelStrictDTO()
-        {
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel domainObject)
-        {
-            mappingService.MapHierarchicalBusinessUnitFilterModel(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToHierarchicalBusinessUnitFilterModel(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class SingleEmployeeFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel>
-    {
-        
-        public SingleEmployeeFilterModelStrictDTO()
-        {
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel domainObject)
-        {
-            mappingService.MapSingleEmployeeFilterModel(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToSingleEmployeeFilterModel(this);
         }
     }
     
@@ -23902,270 +24386,6 @@ namespace SampleSystem.Generated.DTO
         public SampleSystem.Domain.NoSecurityObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToNoSecurityObject(this, allowCreate);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Principal), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.PrincipalFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.PrincipalRichDTO))]
-    public partial class PrincipalSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.PrincipalIdentityDTO>
-    {
-        
-        private string _externalId;
-        
-        public PrincipalSimpleDTO()
-        {
-        }
-        
-        public PrincipalSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Principal domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapPrincipal(domainObject, this);
-        }
-        
-        public PrincipalSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ExternalId
-        {
-            get
-            {
-                return this._externalId;
-            }
-            set
-            {
-                this._externalId = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.PrincipalIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.PrincipalIdentityDTO(this.Id);
-            }
-        }
-        
-        public virtual SampleSystem.Generated.DTO.PrincipalStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.PrincipalStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Principal), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.PrincipalRichDTO))]
-    public partial class PrincipalFullDTO : SampleSystem.Generated.DTO.PrincipalSimpleDTO
-    {
-        
-        public PrincipalFullDTO()
-        {
-        }
-        
-        public PrincipalFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Principal domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapPrincipal(domainObject, this);
-        }
-        
-        public override SampleSystem.Generated.DTO.PrincipalStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.PrincipalStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Principal), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class PrincipalRichDTO : SampleSystem.Generated.DTO.PrincipalFullDTO
-    {
-        
-        public PrincipalRichDTO()
-        {
-        }
-        
-        public PrincipalRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Principal domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapPrincipal(domainObject, this);
-        }
-        
-        public override SampleSystem.Generated.DTO.PrincipalStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.PrincipalStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Principal), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class PrincipalStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Principal, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Principal>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.PrincipalIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
-    {
-        
-        private string _externalId;
-        
-        private System.Guid _id;
-        
-        private long _version;
-        
-        public PrincipalStrictDTO()
-        {
-        }
-        
-        public PrincipalStrictDTO(SampleSystem.Generated.DTO.PrincipalRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.PrincipalFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForPrincipal(this, source);
-        }
-        
-        public PrincipalStrictDTO(SampleSystem.Generated.DTO.PrincipalRichDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public PrincipalStrictDTO(SampleSystem.Generated.DTO.PrincipalFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.PrincipalSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForPrincipal(this, source);
-        }
-        
-        public PrincipalStrictDTO(SampleSystem.Generated.DTO.PrincipalFullDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public PrincipalStrictDTO(SampleSystem.Generated.DTO.PrincipalSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForPrincipal(this, source);
-        }
-        
-        public PrincipalStrictDTO(SampleSystem.Generated.DTO.PrincipalSimpleDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private PrincipalStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.BasePersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBaseAuditPersistentToStrictForPrincipal(this, source);
-        }
-        
-        private PrincipalStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private PrincipalStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBasePersistentToStrictForPrincipal(this, source);
-        }
-        
-        private PrincipalStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ExternalId
-        {
-            get
-            {
-                return this._externalId;
-            }
-            set
-            {
-                this._externalId = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.PrincipalIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.PrincipalIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version
-        {
-            get
-            {
-                return this._version;
-            }
-            set
-            {
-                this._version = value;
-            }
-        }
-        
-        long Framework.Application.Domain.IVersionObject<long>.Version
-        {
-            get
-            {
-                return this.Version;
-            }
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Principal domainObject)
-        {
-            mappingService.MapPrincipal(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.Principal ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToPrincipal(this);
-        }
-        
-        public SampleSystem.Domain.Principal ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
-        {
-            return mappingService.ToPrincipal(this, allowCreate);
         }
     }
     
@@ -24916,23 +25136,117 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestEmployeeFilter), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestRootSecurityObj), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestEmployeeFilterStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.TestEmployeeFilter>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.TestEmployeeFilter>
+    public partial class TestRootSecurityObjVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO>
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitIdentityDTO _businessUnit;
+        private string _name;
         
-        private SampleSystem.Domain.SampleStruct _sampleStruct;
-        
-        private bool _testValue;
-        
-        public TestEmployeeFilterStrictDTO()
+        public TestRootSecurityObjVisualDTO()
         {
         }
         
+        public TestRootSecurityObjVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestRootSecurityObj domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestRootSecurityObj(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO(this.Id);
+            }
+        }
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitIdentityDTO BusinessUnit
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestRootSecurityObj), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRootSecurityObjFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRootSecurityObjRichDTO))]
+    public partial class TestRootSecurityObjSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO>
+    {
+        
+        private string _name;
+        
+        public TestRootSecurityObjSimpleDTO()
+        {
+        }
+        
+        public TestRootSecurityObjSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestRootSecurityObj domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestRootSecurityObj(domainObject, this);
+        }
+        
+        public TestRootSecurityObjSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestRootSecurityObj), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRootSecurityObjRichDTO))]
+    public partial class TestRootSecurityObjFullDTO : SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO
+    {
+        
+        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit;
+        
+        private SampleSystem.Generated.DTO.LocationSimpleDTO _location;
+        
+        private SampleSystem.Generated.DTO.ManagementUnitFluentMappingSimpleDTO _managementUnitFluentMapping;
+        
+        public TestRootSecurityObjFullDTO()
+        {
+        }
+        
+        public TestRootSecurityObjFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestRootSecurityObj domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestRootSecurityObj(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitSimpleDTO BusinessUnit
         {
             get
             {
@@ -24945,39 +25259,1115 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.SampleStruct SampleStruct
+        public SampleSystem.Generated.DTO.LocationSimpleDTO Location
         {
             get
             {
-                return this._sampleStruct;
+                return this._location;
             }
             set
             {
-                this._sampleStruct = value;
+                this._location = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool TestValue
+        public SampleSystem.Generated.DTO.ManagementUnitFluentMappingSimpleDTO ManagementUnitFluentMapping
         {
             get
             {
-                return this._testValue;
+                return this._managementUnitFluentMapping;
             }
             set
             {
-                this._testValue = value;
+                this._managementUnitFluentMapping = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestRootSecurityObj), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestRootSecurityObjRichDTO : SampleSystem.Generated.DTO.TestRootSecurityObjFullDTO
+    {
+        
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecurityObjItemRichDTO> _items = new System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecurityObjItemRichDTO>();
+        
+        public TestRootSecurityObjRichDTO()
+        {
+        }
+        
+        public TestRootSecurityObjRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestRootSecurityObj domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestRootSecurityObj(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecurityObjItemRichDTO> Items
+        {
+            get
+            {
+                return this._items;
+            }
+            set
+            {
+                this._items = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecurityObjItem), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestSecurityObjItemVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO>
+    {
+        
+        private string _name;
+        
+        public TestSecurityObjItemVisualDTO()
+        {
+        }
+        
+        public TestSecurityObjItemVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestSecurityObjItem domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestSecurityObjItem(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO(this.Id);
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestEmployeeFilter domainObject)
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
         {
-            mappingService.MapTestEmployeeFilter(this, domainObject);
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecurityObjItem), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecurityObjItemFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecurityObjItemRichDTO))]
+    public partial class TestSecurityObjItemSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO>
+    {
+        
+        private string _name;
+        
+        public TestSecurityObjItemSimpleDTO()
+        {
         }
         
-        public SampleSystem.Domain.TestEmployeeFilter ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public TestSecurityObjItemSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestSecurityObjItem domainObject) : 
+                base(mappingService, domainObject)
         {
-            return mappingService.ToTestEmployeeFilter(this);
+            mappingService.MapTestSecurityObjItem(domainObject, this);
+        }
+        
+        public TestSecurityObjItemSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecurityObjItem), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecurityObjItemRichDTO))]
+    public partial class TestSecurityObjItemFullDTO : SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO
+    {
+        
+        private SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO _firstMaster;
+        
+        public TestSecurityObjItemFullDTO()
+        {
+        }
+        
+        public TestSecurityObjItemFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestSecurityObjItem domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestSecurityObjItem(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO FirstMaster
+        {
+            get
+            {
+                return this._firstMaster;
+            }
+            set
+            {
+                this._firstMaster = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecurityObjItem), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestSecurityObjItemRichDTO : SampleSystem.Generated.DTO.TestSecurityObjItemFullDTO
+    {
+        
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItemRichDTO> _items = new System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItemRichDTO>();
+        
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem2RichDTO> _items2 = new System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem2RichDTO>();
+        
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem3RichDTO> _items3 = new System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem3RichDTO>();
+        
+        public TestSecurityObjItemRichDTO()
+        {
+        }
+        
+        public TestSecurityObjItemRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestSecurityObjItem domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestSecurityObjItem(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItemRichDTO> Items
+        {
+            get
+            {
+                return this._items;
+            }
+            set
+            {
+                this._items = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem2RichDTO> Items2
+        {
+            get
+            {
+                return this._items2;
+            }
+            set
+            {
+                this._items2 = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem3RichDTO> Items3
+        {
+            get
+            {
+                return this._items3;
+            }
+            set
+            {
+                this._items3 = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestSecuritySubObjItemVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO>
+    {
+        
+        private string _name;
+        
+        public TestSecuritySubObjItemVisualDTO()
+        {
+        }
+        
+        public TestSecuritySubObjItemVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestSecuritySubObjItem(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItemFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItemRichDTO))]
+    public partial class TestSecuritySubObjItemSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO>
+    {
+        
+        private string _name;
+        
+        public TestSecuritySubObjItemSimpleDTO()
+        {
+        }
+        
+        public TestSecuritySubObjItemSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestSecuritySubObjItem(domainObject, this);
+        }
+        
+        public TestSecuritySubObjItemSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItemRichDTO))]
+    public partial class TestSecuritySubObjItemFullDTO : SampleSystem.Generated.DTO.TestSecuritySubObjItemSimpleDTO
+    {
+        
+        private SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO _innerMaster;
+        
+        public TestSecuritySubObjItemFullDTO()
+        {
+        }
+        
+        public TestSecuritySubObjItemFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestSecuritySubObjItem(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO InnerMaster
+        {
+            get
+            {
+                return this._innerMaster;
+            }
+            set
+            {
+                this._innerMaster = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestSecuritySubObjItemRichDTO : SampleSystem.Generated.DTO.TestSecuritySubObjItemFullDTO
+    {
+        
+        public TestSecuritySubObjItemRichDTO()
+        {
+        }
+        
+        public TestSecuritySubObjItemRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestSecuritySubObjItem(domainObject, this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestSecuritySubObjItem2VisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO>
+    {
+        
+        private string _name;
+        
+        public TestSecuritySubObjItem2VisualDTO()
+        {
+        }
+        
+        public TestSecuritySubObjItem2VisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2 domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestSecuritySubObjItem2(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem2FullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem2RichDTO))]
+    public partial class TestSecuritySubObjItem2SimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO>
+    {
+        
+        private string _name;
+        
+        public TestSecuritySubObjItem2SimpleDTO()
+        {
+        }
+        
+        public TestSecuritySubObjItem2SimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2 domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestSecuritySubObjItem2(domainObject, this);
+        }
+        
+        public TestSecuritySubObjItem2SimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem2RichDTO))]
+    public partial class TestSecuritySubObjItem2FullDTO : SampleSystem.Generated.DTO.TestSecuritySubObjItem2SimpleDTO
+    {
+        
+        private SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO _innerMaster;
+        
+        private SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO _rootSecurityObj;
+        
+        public TestSecuritySubObjItem2FullDTO()
+        {
+        }
+        
+        public TestSecuritySubObjItem2FullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2 domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestSecuritySubObjItem2(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO InnerMaster
+        {
+            get
+            {
+                return this._innerMaster;
+            }
+            set
+            {
+                this._innerMaster = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO RootSecurityObj
+        {
+            get
+            {
+                return this._rootSecurityObj;
+            }
+            set
+            {
+                this._rootSecurityObj = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestSecuritySubObjItem2RichDTO : SampleSystem.Generated.DTO.TestSecuritySubObjItem2FullDTO
+    {
+        
+        public TestSecuritySubObjItem2RichDTO()
+        {
+        }
+        
+        public TestSecuritySubObjItem2RichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2 domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestSecuritySubObjItem2(domainObject, this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestSecuritySubObjItem3VisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO>
+    {
+        
+        private string _name;
+        
+        public TestSecuritySubObjItem3VisualDTO()
+        {
+        }
+        
+        public TestSecuritySubObjItem3VisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3 domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestSecuritySubObjItem3(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem3FullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem3RichDTO))]
+    public partial class TestSecuritySubObjItem3SimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO>
+    {
+        
+        private string _name;
+        
+        public TestSecuritySubObjItem3SimpleDTO()
+        {
+        }
+        
+        public TestSecuritySubObjItem3SimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3 domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestSecuritySubObjItem3(domainObject, this);
+        }
+        
+        public TestSecuritySubObjItem3SimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem3RichDTO))]
+    public partial class TestSecuritySubObjItem3FullDTO : SampleSystem.Generated.DTO.TestSecuritySubObjItem3SimpleDTO
+    {
+        
+        private SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO _innerMaster;
+        
+        public TestSecuritySubObjItem3FullDTO()
+        {
+        }
+        
+        public TestSecuritySubObjItem3FullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3 domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestSecuritySubObjItem3(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO InnerMaster
+        {
+            get
+            {
+                return this._innerMaster;
+            }
+            set
+            {
+                this._innerMaster = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestSecuritySubObjItem3RichDTO : SampleSystem.Generated.DTO.TestSecuritySubObjItem3FullDTO
+    {
+        
+        public TestSecuritySubObjItem3RichDTO()
+        {
+        }
+        
+        public TestSecuritySubObjItem3RichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3 domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestSecuritySubObjItem3(domainObject, this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDeserializedAuth.TestItemAuthObject), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestItemAuthObjectFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestItemAuthObjectRichDTO))]
+    public partial class TestItemAuthObjectSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO>
+    {
+        
+        public TestItemAuthObjectSimpleDTO()
+        {
+        }
+        
+        public TestItemAuthObjectSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDeserializedAuth.TestItemAuthObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestItemAuthObject(domainObject, this);
+        }
+        
+        public TestItemAuthObjectSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO(this.Id);
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDeserializedAuth.TestItemAuthObject), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestItemAuthObjectRichDTO))]
+    public partial class TestItemAuthObjectFullDTO : SampleSystem.Generated.DTO.TestItemAuthObjectSimpleDTO
+    {
+        
+        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit;
+        
+        private SampleSystem.Generated.DTO.ManagementUnitSimpleDTO _managementUnit;
+        
+        private SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO _master;
+        
+        public TestItemAuthObjectFullDTO()
+        {
+        }
+        
+        public TestItemAuthObjectFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDeserializedAuth.TestItemAuthObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestItemAuthObject(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitSimpleDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitSimpleDTO ManagementUnit
+        {
+            get
+            {
+                return this._managementUnit;
+            }
+            set
+            {
+                this._managementUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO Master
+        {
+            get
+            {
+                return this._master;
+            }
+            set
+            {
+                this._master = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDeserializedAuth.TestItemAuthObject), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestItemAuthObjectRichDTO : SampleSystem.Generated.DTO.TestItemAuthObjectFullDTO
+    {
+        
+        public TestItemAuthObjectRichDTO()
+        {
+        }
+        
+        public TestItemAuthObjectRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDeserializedAuth.TestItemAuthObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestItemAuthObject(domainObject, this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestPerformanceObjectVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO>
+    {
+        
+        private string _name;
+        
+        public TestPerformanceObjectVisualDTO()
+        {
+        }
+        
+        public TestPerformanceObjectVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestPerformanceObject(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPerformanceObjectFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPerformanceObjectRichDTO))]
+    public partial class TestPerformanceObjectSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO>
+    {
+        
+        private string _name;
+        
+        public TestPerformanceObjectSimpleDTO()
+        {
+        }
+        
+        public TestPerformanceObjectSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestPerformanceObject(domainObject, this);
+        }
+        
+        public TestPerformanceObjectSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPerformanceObjectRichDTO))]
+    public partial class TestPerformanceObjectFullDTO : SampleSystem.Generated.DTO.TestPerformanceObjectSimpleDTO
+    {
+        
+        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit;
+        
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee;
+        
+        private SampleSystem.Generated.DTO.LocationSimpleDTO _location;
+        
+        private SampleSystem.Generated.DTO.ManagementUnitSimpleDTO _managementUnit;
+        
+        public TestPerformanceObjectFullDTO()
+        {
+        }
+        
+        public TestPerformanceObjectFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestPerformanceObject(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitSimpleDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeSimpleDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationSimpleDTO Location
+        {
+            get
+            {
+                return this._location;
+            }
+            set
+            {
+                this._location = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitSimpleDTO ManagementUnit
+        {
+            get
+            {
+                return this._managementUnit;
+            }
+            set
+            {
+                this._managementUnit = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestPerformanceObjectRichDTO : SampleSystem.Generated.DTO.TestPerformanceObjectFullDTO
+    {
+        
+        public TestPerformanceObjectRichDTO()
+        {
+        }
+        
+        public TestPerformanceObjectRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestPerformanceObject(domainObject, this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestPlainAuthObjectVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO>
+    {
+        
+        private string _name;
+        
+        public TestPlainAuthObjectVisualDTO()
+        {
+        }
+        
+        public TestPlainAuthObjectVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestPlainAuthObject(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectRichDTO))]
+    public partial class TestPlainAuthObjectSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO>
+    {
+        
+        private string _name;
+        
+        public TestPlainAuthObjectSimpleDTO()
+        {
+        }
+        
+        public TestPlainAuthObjectSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestPlainAuthObject(domainObject, this);
+        }
+        
+        public TestPlainAuthObjectSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectRichDTO))]
+    public partial class TestPlainAuthObjectFullDTO : SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee;
+        
+        private SampleSystem.Generated.DTO.LocationSimpleDTO _location;
+        
+        public TestPlainAuthObjectFullDTO()
+        {
+        }
+        
+        public TestPlainAuthObjectFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestPlainAuthObject(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeSimpleDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationSimpleDTO Location
+        {
+            get
+            {
+                return this._location;
+            }
+            set
+            {
+                this._location = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestPlainAuthObjectRichDTO : SampleSystem.Generated.DTO.TestPlainAuthObjectFullDTO
+    {
+        
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestItemAuthObjectRichDTO> _items = new System.Collections.Generic.List<SampleSystem.Generated.DTO.TestItemAuthObjectRichDTO>();
+        
+        public TestPlainAuthObjectRichDTO()
+        {
+        }
+        
+        public TestPlainAuthObjectRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestPlainAuthObject(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestItemAuthObjectRichDTO> Items
+        {
+            get
+            {
+                return this._items;
+            }
+            set
+            {
+                this._items = value;
+            }
         }
     }
     
@@ -25272,1396 +26662,6 @@ namespace SampleSystem.Generated.DTO
         public SampleSystem.Domain.TestImmutableObj ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToTestImmutableObj(this, allowCreate);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestItemAuthObject), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestItemAuthObjectFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestItemAuthObjectRichDTO))]
-    public partial class TestItemAuthObjectSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO>
-    {
-        
-        public TestItemAuthObjectSimpleDTO()
-        {
-        }
-        
-        public TestItemAuthObjectSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestItemAuthObject domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestItemAuthObject(domainObject, this);
-        }
-        
-        public TestItemAuthObjectSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO(this.Id);
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestItemAuthObject), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestItemAuthObjectRichDTO))]
-    public partial class TestItemAuthObjectFullDTO : SampleSystem.Generated.DTO.TestItemAuthObjectSimpleDTO
-    {
-        
-        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit;
-        
-        private SampleSystem.Generated.DTO.ManagementUnitSimpleDTO _managementUnit;
-        
-        private SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO _master;
-        
-        public TestItemAuthObjectFullDTO()
-        {
-        }
-        
-        public TestItemAuthObjectFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestItemAuthObject domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestItemAuthObject(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitSimpleDTO BusinessUnit
-        {
-            get
-            {
-                return this._businessUnit;
-            }
-            set
-            {
-                this._businessUnit = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitSimpleDTO ManagementUnit
-        {
-            get
-            {
-                return this._managementUnit;
-            }
-            set
-            {
-                this._managementUnit = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO Master
-        {
-            get
-            {
-                return this._master;
-            }
-            set
-            {
-                this._master = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestItemAuthObject), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestItemAuthObjectRichDTO : SampleSystem.Generated.DTO.TestItemAuthObjectFullDTO
-    {
-        
-        public TestItemAuthObjectRichDTO()
-        {
-        }
-        
-        public TestItemAuthObjectRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestItemAuthObject domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestItemAuthObject(domainObject, this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestObjForNested), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestObjForNestedSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO>
-    {
-        
-        private string _name;
-        
-        private Framework.Core.Period _period = Framework.Core.Period.Eternity;
-        
-        public TestObjForNestedSimpleDTO()
-        {
-        }
-        
-        public TestObjForNestedSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestObjForNested domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestObjForNested(domainObject, this);
-        }
-        
-        public TestObjForNestedSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period Period
-        {
-            get
-            {
-                return this._period;
-            }
-            set
-            {
-                this._period = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPerformanceObject), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestPerformanceObjectVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO>
-    {
-        
-        private string _name;
-        
-        public TestPerformanceObjectVisualDTO()
-        {
-        }
-        
-        public TestPerformanceObjectVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPerformanceObject domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestPerformanceObject(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPerformanceObject), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPerformanceObjectFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPerformanceObjectRichDTO))]
-    public partial class TestPerformanceObjectSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO>
-    {
-        
-        private string _name;
-        
-        public TestPerformanceObjectSimpleDTO()
-        {
-        }
-        
-        public TestPerformanceObjectSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPerformanceObject domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestPerformanceObject(domainObject, this);
-        }
-        
-        public TestPerformanceObjectSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPerformanceObject), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPerformanceObjectRichDTO))]
-    public partial class TestPerformanceObjectFullDTO : SampleSystem.Generated.DTO.TestPerformanceObjectSimpleDTO
-    {
-        
-        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit;
-        
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee;
-        
-        private SampleSystem.Generated.DTO.LocationSimpleDTO _location;
-        
-        private SampleSystem.Generated.DTO.ManagementUnitSimpleDTO _managementUnit;
-        
-        public TestPerformanceObjectFullDTO()
-        {
-        }
-        
-        public TestPerformanceObjectFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPerformanceObject domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestPerformanceObject(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitSimpleDTO BusinessUnit
-        {
-            get
-            {
-                return this._businessUnit;
-            }
-            set
-            {
-                this._businessUnit = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeSimpleDTO Employee
-        {
-            get
-            {
-                return this._employee;
-            }
-            set
-            {
-                this._employee = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationSimpleDTO Location
-        {
-            get
-            {
-                return this._location;
-            }
-            set
-            {
-                this._location = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitSimpleDTO ManagementUnit
-        {
-            get
-            {
-                return this._managementUnit;
-            }
-            set
-            {
-                this._managementUnit = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPerformanceObject), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestPerformanceObjectRichDTO : SampleSystem.Generated.DTO.TestPerformanceObjectFullDTO
-    {
-        
-        public TestPerformanceObjectRichDTO()
-        {
-        }
-        
-        public TestPerformanceObjectRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPerformanceObject domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestPerformanceObject(domainObject, this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPlainAuthObject), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestPlainAuthObjectVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO>
-    {
-        
-        private string _name;
-        
-        public TestPlainAuthObjectVisualDTO()
-        {
-        }
-        
-        public TestPlainAuthObjectVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPlainAuthObject domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestPlainAuthObject(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPlainAuthObject), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectRichDTO))]
-    public partial class TestPlainAuthObjectSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO>
-    {
-        
-        private string _name;
-        
-        public TestPlainAuthObjectSimpleDTO()
-        {
-        }
-        
-        public TestPlainAuthObjectSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPlainAuthObject domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestPlainAuthObject(domainObject, this);
-        }
-        
-        public TestPlainAuthObjectSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPlainAuthObject), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectRichDTO))]
-    public partial class TestPlainAuthObjectFullDTO : SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee;
-        
-        private SampleSystem.Generated.DTO.LocationSimpleDTO _location;
-        
-        public TestPlainAuthObjectFullDTO()
-        {
-        }
-        
-        public TestPlainAuthObjectFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPlainAuthObject domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestPlainAuthObject(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeSimpleDTO Employee
-        {
-            get
-            {
-                return this._employee;
-            }
-            set
-            {
-                this._employee = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationSimpleDTO Location
-        {
-            get
-            {
-                return this._location;
-            }
-            set
-            {
-                this._location = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPlainAuthObject), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestPlainAuthObjectRichDTO : SampleSystem.Generated.DTO.TestPlainAuthObjectFullDTO
-    {
-        
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestItemAuthObjectRichDTO> _items = new System.Collections.Generic.List<SampleSystem.Generated.DTO.TestItemAuthObjectRichDTO>();
-        
-        public TestPlainAuthObjectRichDTO()
-        {
-        }
-        
-        public TestPlainAuthObjectRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPlainAuthObject domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestPlainAuthObject(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestItemAuthObjectRichDTO> Items
-        {
-            get
-            {
-                return this._items;
-            }
-            set
-            {
-                this._items = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRestrictionObject), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRestrictionObjectRichDTO))]
-    public partial class TestRestrictionObjectSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO>
-    {
-        
-        private bool _restrictionHandler;
-        
-        public TestRestrictionObjectSimpleDTO()
-        {
-        }
-        
-        public TestRestrictionObjectSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRestrictionObject domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestRestrictionObject(domainObject, this);
-        }
-        
-        public TestRestrictionObjectSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool RestrictionHandler
-        {
-            get
-            {
-                return this._restrictionHandler;
-            }
-            set
-            {
-                this._restrictionHandler = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRestrictionObject), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRestrictionObjectRichDTO))]
-    public partial class TestRestrictionObjectFullDTO : SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO
-    {
-        
-        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit;
-        
-        public TestRestrictionObjectFullDTO()
-        {
-        }
-        
-        public TestRestrictionObjectFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRestrictionObject domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestRestrictionObject(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitSimpleDTO BusinessUnit
-        {
-            get
-            {
-                return this._businessUnit;
-            }
-            set
-            {
-                this._businessUnit = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRestrictionObject), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestRestrictionObjectRichDTO : SampleSystem.Generated.DTO.TestRestrictionObjectFullDTO
-    {
-        
-        public TestRestrictionObjectRichDTO()
-        {
-        }
-        
-        public TestRestrictionObjectRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRestrictionObject domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestRestrictionObject(domainObject, this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRootSecurityObj), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestRootSecurityObjVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO>
-    {
-        
-        private string _name;
-        
-        public TestRootSecurityObjVisualDTO()
-        {
-        }
-        
-        public TestRootSecurityObjVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRootSecurityObj domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestRootSecurityObj(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRootSecurityObj), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRootSecurityObjFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRootSecurityObjRichDTO))]
-    public partial class TestRootSecurityObjSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO>
-    {
-        
-        private string _name;
-        
-        public TestRootSecurityObjSimpleDTO()
-        {
-        }
-        
-        public TestRootSecurityObjSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRootSecurityObj domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestRootSecurityObj(domainObject, this);
-        }
-        
-        public TestRootSecurityObjSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRootSecurityObj), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRootSecurityObjRichDTO))]
-    public partial class TestRootSecurityObjFullDTO : SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO
-    {
-        
-        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit;
-        
-        private SampleSystem.Generated.DTO.LocationSimpleDTO _location;
-        
-        private SampleSystem.Generated.DTO.ManagementUnitFluentMappingSimpleDTO _managementUnitFluentMapping;
-        
-        public TestRootSecurityObjFullDTO()
-        {
-        }
-        
-        public TestRootSecurityObjFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRootSecurityObj domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestRootSecurityObj(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitSimpleDTO BusinessUnit
-        {
-            get
-            {
-                return this._businessUnit;
-            }
-            set
-            {
-                this._businessUnit = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationSimpleDTO Location
-        {
-            get
-            {
-                return this._location;
-            }
-            set
-            {
-                this._location = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitFluentMappingSimpleDTO ManagementUnitFluentMapping
-        {
-            get
-            {
-                return this._managementUnitFluentMapping;
-            }
-            set
-            {
-                this._managementUnitFluentMapping = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRootSecurityObj), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestRootSecurityObjRichDTO : SampleSystem.Generated.DTO.TestRootSecurityObjFullDTO
-    {
-        
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecurityObjItemRichDTO> _items = new System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecurityObjItemRichDTO>();
-        
-        public TestRootSecurityObjRichDTO()
-        {
-        }
-        
-        public TestRootSecurityObjRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestRootSecurityObj domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestRootSecurityObj(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecurityObjItemRichDTO> Items
-        {
-            get
-            {
-                return this._items;
-            }
-            set
-            {
-                this._items = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecurityObjItem), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestSecurityObjItemVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO>
-    {
-        
-        private string _name;
-        
-        public TestSecurityObjItemVisualDTO()
-        {
-        }
-        
-        public TestSecurityObjItemVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecurityObjItem domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestSecurityObjItem(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecurityObjItem), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecurityObjItemFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecurityObjItemRichDTO))]
-    public partial class TestSecurityObjItemSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO>
-    {
-        
-        private string _name;
-        
-        public TestSecurityObjItemSimpleDTO()
-        {
-        }
-        
-        public TestSecurityObjItemSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecurityObjItem domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestSecurityObjItem(domainObject, this);
-        }
-        
-        public TestSecurityObjItemSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecurityObjItem), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecurityObjItemRichDTO))]
-    public partial class TestSecurityObjItemFullDTO : SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO
-    {
-        
-        private SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO _firstMaster;
-        
-        public TestSecurityObjItemFullDTO()
-        {
-        }
-        
-        public TestSecurityObjItemFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecurityObjItem domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestSecurityObjItem(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO FirstMaster
-        {
-            get
-            {
-                return this._firstMaster;
-            }
-            set
-            {
-                this._firstMaster = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecurityObjItem), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestSecurityObjItemRichDTO : SampleSystem.Generated.DTO.TestSecurityObjItemFullDTO
-    {
-        
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItemRichDTO> _items = new System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItemRichDTO>();
-        
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem2RichDTO> _items2 = new System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem2RichDTO>();
-        
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem3RichDTO> _items3 = new System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem3RichDTO>();
-        
-        public TestSecurityObjItemRichDTO()
-        {
-        }
-        
-        public TestSecurityObjItemRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecurityObjItem domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestSecurityObjItem(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItemRichDTO> Items
-        {
-            get
-            {
-                return this._items;
-            }
-            set
-            {
-                this._items = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem2RichDTO> Items2
-        {
-            get
-            {
-                return this._items2;
-            }
-            set
-            {
-                this._items2 = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem3RichDTO> Items3
-        {
-            get
-            {
-                return this._items3;
-            }
-            set
-            {
-                this._items3 = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestSecuritySubObjItemVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO>
-    {
-        
-        private string _name;
-        
-        public TestSecuritySubObjItemVisualDTO()
-        {
-        }
-        
-        public TestSecuritySubObjItemVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestSecuritySubObjItem(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItemFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItemRichDTO))]
-    public partial class TestSecuritySubObjItemSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO>
-    {
-        
-        private string _name;
-        
-        public TestSecuritySubObjItemSimpleDTO()
-        {
-        }
-        
-        public TestSecuritySubObjItemSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestSecuritySubObjItem(domainObject, this);
-        }
-        
-        public TestSecuritySubObjItemSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItemRichDTO))]
-    public partial class TestSecuritySubObjItemFullDTO : SampleSystem.Generated.DTO.TestSecuritySubObjItemSimpleDTO
-    {
-        
-        private SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO _innerMaster;
-        
-        public TestSecuritySubObjItemFullDTO()
-        {
-        }
-        
-        public TestSecuritySubObjItemFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestSecuritySubObjItem(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO InnerMaster
-        {
-            get
-            {
-                return this._innerMaster;
-            }
-            set
-            {
-                this._innerMaster = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestSecuritySubObjItemRichDTO : SampleSystem.Generated.DTO.TestSecuritySubObjItemFullDTO
-    {
-        
-        public TestSecuritySubObjItemRichDTO()
-        {
-        }
-        
-        public TestSecuritySubObjItemRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestSecuritySubObjItem(domainObject, this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem2), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestSecuritySubObjItem2VisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO>
-    {
-        
-        private string _name;
-        
-        public TestSecuritySubObjItem2VisualDTO()
-        {
-        }
-        
-        public TestSecuritySubObjItem2VisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem2 domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestSecuritySubObjItem2(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem2), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem2FullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem2RichDTO))]
-    public partial class TestSecuritySubObjItem2SimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO>
-    {
-        
-        private string _name;
-        
-        public TestSecuritySubObjItem2SimpleDTO()
-        {
-        }
-        
-        public TestSecuritySubObjItem2SimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem2 domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestSecuritySubObjItem2(domainObject, this);
-        }
-        
-        public TestSecuritySubObjItem2SimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem2), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem2RichDTO))]
-    public partial class TestSecuritySubObjItem2FullDTO : SampleSystem.Generated.DTO.TestSecuritySubObjItem2SimpleDTO
-    {
-        
-        private SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO _innerMaster;
-        
-        private SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO _rootSecurityObj;
-        
-        public TestSecuritySubObjItem2FullDTO()
-        {
-        }
-        
-        public TestSecuritySubObjItem2FullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem2 domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestSecuritySubObjItem2(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO InnerMaster
-        {
-            get
-            {
-                return this._innerMaster;
-            }
-            set
-            {
-                this._innerMaster = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO RootSecurityObj
-        {
-            get
-            {
-                return this._rootSecurityObj;
-            }
-            set
-            {
-                this._rootSecurityObj = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem2), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestSecuritySubObjItem2RichDTO : SampleSystem.Generated.DTO.TestSecuritySubObjItem2FullDTO
-    {
-        
-        public TestSecuritySubObjItem2RichDTO()
-        {
-        }
-        
-        public TestSecuritySubObjItem2RichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem2 domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestSecuritySubObjItem2(domainObject, this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem3), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestSecuritySubObjItem3VisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO>
-    {
-        
-        private string _name;
-        
-        public TestSecuritySubObjItem3VisualDTO()
-        {
-        }
-        
-        public TestSecuritySubObjItem3VisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem3 domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestSecuritySubObjItem3(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem3), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem3FullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem3RichDTO))]
-    public partial class TestSecuritySubObjItem3SimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO>
-    {
-        
-        private string _name;
-        
-        public TestSecuritySubObjItem3SimpleDTO()
-        {
-        }
-        
-        public TestSecuritySubObjItem3SimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem3 domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestSecuritySubObjItem3(domainObject, this);
-        }
-        
-        public TestSecuritySubObjItem3SimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem3), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem3RichDTO))]
-    public partial class TestSecuritySubObjItem3FullDTO : SampleSystem.Generated.DTO.TestSecuritySubObjItem3SimpleDTO
-    {
-        
-        private SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO _innerMaster;
-        
-        public TestSecuritySubObjItem3FullDTO()
-        {
-        }
-        
-        public TestSecuritySubObjItem3FullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem3 domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestSecuritySubObjItem3(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO InnerMaster
-        {
-            get
-            {
-                return this._innerMaster;
-            }
-            set
-            {
-                this._innerMaster = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestSecuritySubObjItem3), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestSecuritySubObjItem3RichDTO : SampleSystem.Generated.DTO.TestSecuritySubObjItem3FullDTO
-    {
-        
-        public TestSecuritySubObjItem3RichDTO()
-        {
-        }
-        
-        public TestSecuritySubObjItem3RichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestSecuritySubObjItem3 domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapTestSecuritySubObjItem3(domainObject, this);
         }
     }
 }

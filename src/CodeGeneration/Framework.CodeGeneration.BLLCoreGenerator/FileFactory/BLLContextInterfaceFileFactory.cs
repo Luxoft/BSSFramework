@@ -4,7 +4,6 @@ using Framework.BLL;
 using Framework.BLL.Services;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
-using Framework.CodeGeneration.BLLCoreGenerator.FileFactory.__Base;
 
 namespace Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
 

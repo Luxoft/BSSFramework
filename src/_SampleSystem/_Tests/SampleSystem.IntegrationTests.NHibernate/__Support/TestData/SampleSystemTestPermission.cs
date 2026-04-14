@@ -1,6 +1,9 @@
 ﻿using CommonFramework;
 
-using SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.Employee;
+using SampleSystem.Domain.MU;
 using SampleSystem.Generated.DTO;
 
 using SecuritySystem;

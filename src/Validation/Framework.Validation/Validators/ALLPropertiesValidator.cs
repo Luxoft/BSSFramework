@@ -1,4 +1,4 @@
-﻿namespace Framework.Validation;
+﻿namespace Framework.Validation.Validators;
 
 public class AllPropertiesValidator<TProperty>(int operationContext) : IPropertyValidator<object, TProperty>
     where TProperty : class

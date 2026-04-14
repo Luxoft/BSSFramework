@@ -2,7 +2,9 @@
 using Framework.Relations;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.Enums;
+
+namespace SampleSystem.Domain.Directories;
 
 public class Address : AuditPersistentDomainObjectBase, IDetail<LegalEntityBase>
 {

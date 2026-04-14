@@ -6,7 +6,7 @@ namespace Framework.AutomationCore.Utils.DatabaseUtils;
 
 public static partial class CoreDatabaseUtil
 {
-    private static readonly Regex InitialCatalogRegex = new Regex("Initial Catalog=(\\w+);", RegexOptions.Compiled);
+    private static readonly Regex InitialCatalogRegex = new("Initial Catalog=(\\w+);", RegexOptions.Compiled);
 
     public static string CutInitialCatalog(string inputConnectionString) =>
         InitialCatalogRegex.Replace(inputConnectionString,"");

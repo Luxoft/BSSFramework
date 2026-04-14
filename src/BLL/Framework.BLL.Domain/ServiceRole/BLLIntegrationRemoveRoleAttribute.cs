@@ -1,6 +1,4 @@
-﻿using Framework.BLL.Domain.ServiceRole.Base;
-
-namespace Framework.BLL.Domain.ServiceRole;
+﻿namespace Framework.BLL.Domain.ServiceRole;
 
 /// <summary>
 /// Атрибут для удаления объекта через интеграцию

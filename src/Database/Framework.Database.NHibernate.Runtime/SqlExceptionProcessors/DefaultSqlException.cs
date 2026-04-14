@@ -2,7 +2,7 @@
 
 internal class DefaultSqlException : ISqlExceptionProcessor
 {
-    private static readonly Lazy<DefaultSqlException> InstanceLazy = new Lazy<DefaultSqlException>(()=> new DefaultSqlException(), true);
+    private static readonly Lazy<DefaultSqlException> InstanceLazy = new(()=> new DefaultSqlException(), true);
     public static DefaultSqlException Value => InstanceLazy.Value;
 
     private DefaultSqlException()

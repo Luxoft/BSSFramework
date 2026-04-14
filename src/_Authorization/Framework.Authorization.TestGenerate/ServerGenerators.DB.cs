@@ -1,8 +1,8 @@
 ﻿using Framework.Authorization.Generated.DAL.NHibernate;
 using Framework.Database;
 using Framework.Database.ConnectionStringSource;
-using Framework.Database.NHibernate._MappingSettings;
 using Framework.Database.NHibernate.DBGenerator;
+using Framework.Database.NHibernate.Mapping;
 
 namespace Framework.Authorization.TestGenerate;
 

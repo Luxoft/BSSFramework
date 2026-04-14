@@ -5,7 +5,7 @@ using Framework.Core;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Map;
 
 public abstract class ValidationMapBase : IValidationMap
 {

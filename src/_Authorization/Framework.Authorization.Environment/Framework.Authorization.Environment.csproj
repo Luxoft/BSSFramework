@@ -14,8 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Application\Framework.Application.Runtime\Framework.Application.Runtime.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
+
+    <ProjectReference Include="..\..\Application\Framework.Application.Runtime\Framework.Application.Runtime.csproj" />
   </ItemGroup>
 
 </Project>

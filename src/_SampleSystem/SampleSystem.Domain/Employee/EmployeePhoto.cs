@@ -4,7 +4,9 @@ using Framework.Database.Mapping;
 using Framework.Relations;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.Enums;
+
+namespace SampleSystem.Domain.Employee;
 
 [BLLViewRole]
 public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>

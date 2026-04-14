@@ -3,7 +3,7 @@
 using Framework.Core;
 using Framework.Core.TypeResolving;
 using Framework.ExtendedMetadata;
-using Framework.Projection._ImplType;
+using Framework.Projection.ImplType;
 
 namespace Framework.Projection.Contract;
 

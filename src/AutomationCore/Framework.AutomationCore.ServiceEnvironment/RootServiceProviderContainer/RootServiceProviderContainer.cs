@@ -1,5 +1,5 @@
 ﻿using Framework.Application.FinancialYear;
-using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
+using Framework.AutomationCore.ServiceEnvironment;
 using Framework.AutomationCore.Settings;
 using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem.Credential;
 
-namespace Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+namespace Framework.AutomationCore.RootServiceProviderContainer;
 
 public abstract class RootServiceProviderContainer(IServiceProvider rootServiceProvider) : IRootServiceProviderContainer
 {

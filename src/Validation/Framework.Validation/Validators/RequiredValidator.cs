@@ -4,10 +4,9 @@ using CommonFramework;
 
 using Framework.Application.Domain;
 using Framework.Core;
-
 using Framework.Restriction;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Validators;
 
 public class RequiredValidator(RequiredMode mode) : IPropertyValidator<object, object>, IDynamicPropertyValidator
 {
@@ -45,7 +44,7 @@ public class RequiredValidator(RequiredMode mode) : IPropertyValidator<object, o
     }
 
 
-    public static RequiredValidator Default { get; } = new RequiredValidator(RequiredMode.Default);
+    public static RequiredValidator Default { get; } = new(RequiredMode.Default);
 }
 
 public class RequiredValidator<TSource, TProperty>(RequiredMode mode) : IPropertyValidator<TSource, TProperty>
@@ -70,5 +69,5 @@ public class RequiredValidator<TSource, TProperty>(RequiredMode mode) : IPropert
 
     protected virtual bool IsValid(IPropertyValidationContext<TSource, TProperty> context) => RequiredHelper.IsValid(context.Value, mode);
 
-    public static RequiredValidator<TSource, TProperty> Default { get; } = new RequiredValidator<TSource, TProperty>(RequiredMode.Default);
+    public static RequiredValidator<TSource, TProperty> Default { get; } = new(RequiredMode.Default);
 }

@@ -6,7 +6,7 @@ public class TestRelativeEmployeeChildObject : AuditPersistentDomainObjectBase, 
 {
     private readonly TestRelativeEmployeeParentObject master;
 
-    private Employee employee;
+    private Employee.Employee employee;
 
     protected TestRelativeEmployeeChildObject()
     {
@@ -20,7 +20,7 @@ public class TestRelativeEmployeeChildObject : AuditPersistentDomainObjectBase, 
 
     public virtual TestRelativeEmployeeParentObject Master => this.master;
 
-    public virtual Employee Employee
+    public virtual Employee.Employee Employee
     {
         get => this.employee;
         set => this.employee = value;

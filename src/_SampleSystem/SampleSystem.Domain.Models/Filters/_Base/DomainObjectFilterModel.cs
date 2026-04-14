@@ -2,7 +2,7 @@
 
 using Framework.BLL.Domain.Models;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Models.Filters._Base;
 
 public abstract class DomainObjectFilterModel<TDomainObject> : DomainObjectBase, IDomainObjectFilterModel<TDomainObject>
         where TDomainObject : PersistentDomainObjectBase

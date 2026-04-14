@@ -1,11 +1,11 @@
 ﻿using Framework.CodeGeneration.GeneratePolicy;
 using Framework.CodeGeneration.ServiceModelGenerator;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Main;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
 using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations.Services.Main;
 
 /// <summary>
 /// Конфигурация для генерации основного фасада SampleSystem-системы (пример с добавлением генерации фасадных методов по ComplexChange-модели)

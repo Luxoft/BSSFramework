@@ -2,9 +2,11 @@
 
 using Framework.Core;
 using Framework.Restriction;
+using Framework.Validation.Attributes;
+
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Validators.DynamicClass;
 
 public class DefaultStringMaxLengthValidator : IManyPropertyDynamicClassValidator
 {
@@ -25,5 +27,5 @@ public class DefaultStringMaxLengthValidator : IManyPropertyDynamicClassValidato
     }
 
 
-    public static DefaultStringMaxLengthValidator Value { get; } = new DefaultStringMaxLengthValidator();
+    public static DefaultStringMaxLengthValidator Value { get; } = new();
 }

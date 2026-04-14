@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
-using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment.Services;
+using Framework.AutomationCore.ServiceEnvironment;
+using Framework.AutomationCore.ServiceEnvironment.Services;
 using Framework.AutomationCore.Settings;
 using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+namespace Framework.AutomationCore.RootServiceProviderContainer;
 
 public static class RootServiceProviderContainerExtensions
 {

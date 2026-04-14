@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Models.Filters._Base;
 
 public abstract class DomainObjectRootFilterModel<TDomainObject> : DomainObjectFilterModel<TDomainObject>
         where TDomainObject : PersistentDomainObjectBase

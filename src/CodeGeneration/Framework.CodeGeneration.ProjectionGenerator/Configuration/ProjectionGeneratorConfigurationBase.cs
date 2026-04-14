@@ -8,7 +8,7 @@ using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.FileFactory;
-using Framework.CodeGeneration.ProjectionGenerator._Extensions;
+using Framework.CodeGeneration.ProjectionGenerator.Extensions;
 using Framework.Core;
 using Framework.Database.Mapping;
 using Framework.FileGeneration.Configuration;

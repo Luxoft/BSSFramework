@@ -18,7 +18,7 @@ namespace SampleSystem.CodeGenerate.ServerDTO;
 
 public class ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environment) : ServerDTOGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {
-    public override string DataContractNamespace => this.Environment.DTODataContractNamespace;
+    public override string DataContractNamespace => nameof(SampleSystem);
 
     protected virtual ICodeFileFactoryHeader<MainDTOFileType> FullRefDTOFileFactoryHeader { get; } = SampleSystemFileType.FullRefDTO.ToHeader();
 

@@ -2,8 +2,7 @@
 using System.Reflection;
 
 using CommonFramework;
-using Framework.Application.Domain;
-using Framework.BLL.Domain.Extensions;
+
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -17,14 +16,12 @@ public class FixedPropertyValidator : IDynamicPropertyValidator
 {
     public IPropertyValidator GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
-        var identType = property.DeclaringType!.GetIdentType()!;
-
         var persistentDomainObjectBaseTypeResolver = serviceProvider.GetRequiredService<IPersistentDomainObjectBaseTypeResolver>();
 
         var persistentDomainObjectBaseType = persistentDomainObjectBaseTypeResolver.Resolve(property.ReflectedType!);
 
-        var validatorType = typeof(FixedPropertyValidator<,,,>)
-            .MakeGenericType(property.ReflectedType!, property.PropertyType, identType, persistentDomainObjectBaseType);
+        var validatorType = typeof(FixedPropertyValidator<,,>)
+            .MakeGenericType(property.ReflectedType!, property.PropertyType, persistentDomainObjectBaseType);
 
         return serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<IPropertyValidator>(validatorType, property.ToGetLambdaExpression());
     }
@@ -33,10 +30,9 @@ public class FixedPropertyValidator : IDynamicPropertyValidator
 /// <summary>
 /// Валидатор проверки неизменяемости свойства
 /// </summary>
-public class FixedPropertyValidator<TSource, TProperty, TIdent, TPersistentDomainObjectBase>(Expression<Func<TSource, TProperty>> propertyPath)
+public class FixedPropertyValidator<TSource, TProperty, TPersistentDomainObjectBase>(Expression<Func<TSource, TProperty>> propertyPath)
     : IPropertyValidator<TSource, TProperty>
-    where TSource : TPersistentDomainObjectBase
-    where TPersistentDomainObjectBase : IIdentityObject<TIdent>
+    where TSource : class, TPersistentDomainObjectBase
 {
     public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> validationContext)
     {

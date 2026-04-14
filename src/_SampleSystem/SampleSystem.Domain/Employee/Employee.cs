@@ -15,11 +15,9 @@ using Framework.Validation;
 
 using SampleSystem.Domain.Enums;
 using SampleSystem.Domain.Inline;
-using SampleSystem.Domain.Validators.Employee;
 
 namespace SampleSystem.Domain;
 
-[EmployeeValidator]
 [UniqueGroup(UseDbEvaluation = true)]
 [BLLViewRole(Max = MainDTOType.FullDTO)]
 [BLLSaveRole(SaveType = BLLSaveType.Both)]

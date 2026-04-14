@@ -13,7 +13,7 @@ public class TrackingService<TPersistentDomainObjectBase>(IObjectStateService ob
 {
     /// <inheritdoc />
     public TrackingResult<TDomainObject> GetChanges<TDomainObject>(TDomainObject value, GetChangesMode mode = GetChangesMode.Default)
-            where TDomainObject : TPersistentDomainObjectBase
+        where TDomainObject : class, TPersistentDomainObjectBase
     {
         if (this.GetPersistentState(value) == PersistentLifeObjectState.NotPersistent)
         {
@@ -27,14 +27,16 @@ public class TrackingService<TPersistentDomainObjectBase>(IObjectStateService ob
 
     /// <inheritdoc />
     public PersistentLifeObjectState GetPersistentState<TDomainObject>(TDomainObject value)
-            where TDomainObject : TPersistentDomainObjectBase =>
+        where TDomainObject : class, TPersistentDomainObjectBase =>
         objectStatesService.IsNew(value)
             ? PersistentLifeObjectState.NotPersistent
-            : objectStatesService.IsRemoving(value) ? PersistentLifeObjectState.MarkAsRemoved : PersistentLifeObjectState.Persistent;
+            : objectStatesService.IsRemoving(value)
+                ? PersistentLifeObjectState.MarkAsRemoved
+                : PersistentLifeObjectState.Persistent;
 
     /// <inheritdoc />
     public ChangingLifeObjectState GetChangingState<TDomainObject>(TDomainObject value)
-            where TDomainObject : TPersistentDomainObjectBase
+        where TDomainObject : class, TPersistentDomainObjectBase
     {
         if (this.GetPersistentState(value) == PersistentLifeObjectState.NotPersistent)
         {
@@ -46,7 +48,7 @@ public class TrackingService<TPersistentDomainObjectBase>(IObjectStateService ob
 
     /// <inheritdoc />
     public TProperty GetPrevOrCurrentValue<TDomainObject, TProperty>(TDomainObject domainObject, Expression<Func<TDomainObject, TProperty>> propertyExpression)
-            where TDomainObject : TPersistentDomainObjectBase
+        where TDomainObject : class, TPersistentDomainObjectBase
     {
         var defaultValue = propertyExpression.Compile()(domainObject);
 
@@ -55,15 +57,14 @@ public class TrackingService<TPersistentDomainObjectBase>(IObjectStateService ob
 
     /// <inheritdoc />
     public TProperty GetPrevValue<TDomainObject, TProperty>(TDomainObject domainObject, Expression<Func<TDomainObject, TProperty>> propertyExpression, TProperty defaultValue)
-            where TDomainObject : TPersistentDomainObjectBase
+        where TDomainObject : class, TPersistentDomainObjectBase
     {
         var changes = this.GetChanges(domainObject);
 
         return changes.GetPrevValue(propertyExpression, defaultValue);
     }
 
-
     private IEnumerable<ObjectState> GetModifiedObjectStates<TDomainObject>(TDomainObject value)
-            where TDomainObject : TPersistentDomainObjectBase =>
-        objectStatesService.GetModifiedObjectStates(value) ?? [];
+        where TDomainObject : class, TPersistentDomainObjectBase =>
+        objectStatesService.GetModifiedObjectStates(value);
 }

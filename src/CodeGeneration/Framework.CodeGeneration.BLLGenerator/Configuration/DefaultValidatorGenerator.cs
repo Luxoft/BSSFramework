@@ -4,7 +4,6 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.Application.Domain;
-using Framework.BLL.Domain.Extensions;
 using Framework.Core;
 using Framework.Restriction;
 using Framework.Validation;
@@ -361,27 +360,27 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
                              .ToTypeReferenceExpression()
                              .ToMethodReferenceExpression("TrimNull");
 
+        var createTupleExpr = new CodeParameterDeclarationExpression { Name = "source" }
+            .Pipe(param => new CodeLambdaExpression
+                           {
+                               Parameters = { param },
+                               Statements =
+                               {
+                                   groupElementType.ToTypeReference().ToObjectCreateExpression(
 
-        var createTupleExpr = new CodeParameterDeclarationExpression { Name = "source" }.Pipe(param => new CodeLambdaExpression
-                                                                                                       {
-                                                                                                           Parameters = { param },
-                                                                                                           Statements =
-                                                                                                           {
-                                                                                                               groupElementType.ToTypeReference().ToObjectCreateExpression(
-
-                                                                                                                   uniProperties.ToArray(prop => param
-                                                                                                                       .ToVariableReferenceExpression()
-                                                                                                                       .ToPropertyReference(prop)
-                                                                                                                       .Pipe(
-                                                                                                                           prop.PropertyType == typeof(string),
-                                                                                                                           expr => (CodeExpression)expr
-                                                                                                                               .ToStaticMethodInvokeExpression(trimNullMethod)
-                                                                                                                               .ToMethodInvokeExpression("ToLower")))
+                                       uniProperties.ToArray(prop => param
+                                                                     .ToVariableReferenceExpression()
+                                                                     .ToPropertyReference(prop)
+                                                                     .Pipe(
+                                                                         prop.PropertyType == typeof(string),
+                                                                         expr => (CodeExpression)expr
+                                                                                                 .ToStaticMethodInvokeExpression(trimNullMethod)
+                                                                                                 .ToMethodInvokeExpression("ToLower")))
 
 
-                                                                                                                   ).ToMethodReturnStatement()
-                                                                                                           }
-                                                                                                       });
+                                       ).ToMethodReturnStatement()
+                               }
+                           });
 
         return internalPropertyValidatorType
                .ToTypeReference()
@@ -392,35 +391,27 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
     {
         if (attribute == null) throw new ArgumentNullException(nameof(attribute));
 
-        var identType = property.DeclaringType!.GetIdentType();
-
-        var validatorType = typeof(FixedPropertyValidator<,,,>).MakeGenericType(
-            property.ReflectedType,
+        var validatorType = typeof(FixedPropertyValidator<,,>).MakeGenericType(
+            property.ReflectedType!,
             property.PropertyType,
-            identType,
             this.Configuration.Environment.PersistentDomainObjectBaseType);
 
-        var propertyExprLambda = new CodeParameterDeclarationExpression { Name = "source" }.Pipe(p => new CodeLambdaExpression
-                                                                                                      {
-                                                                                                          Parameters = { p },
-                                                                                                          Statements =
-                                                                                                          {
-                                                                                                              p.ToVariableReferenceExpression().ToPropertyReference(property)
-                                                                                                          }
-                                                                                                      });
+        var propertyExprLambda =
+            new CodeParameterDeclarationExpression { Name = "source" }
+                .Pipe(p => new CodeLambdaExpression { Parameters = { p }, Statements = { p.ToVariableReferenceExpression().ToPropertyReference(property) } });
 
         return validatorType.ToTypeReference().ToObjectCreateExpression(propertyExprLambda);
     }
 
     protected virtual CodeExpression ExpandClassAttributes(ClassValidatorAttribute attribute)
     {
-        if (attribute is RequiredGroupValidatorAttribute)
+        if (attribute is RequiredGroupValidatorAttribute validatorAttribute)
         {
-            return this.GetRequiredGroupValidator(attribute as RequiredGroupValidatorAttribute);
+            return this.GetRequiredGroupValidator(validatorAttribute);
         }
-        else if (attribute is UniDBGroupValidatorAttribute)
+        else if (attribute is UniDBGroupValidatorAttribute groupValidatorAttribute)
         {
-            return this.GetUniDbGroupValidator(attribute as UniDBGroupValidatorAttribute);
+            return this.GetUniDbGroupValidator(groupValidatorAttribute);
         }
         else
         {

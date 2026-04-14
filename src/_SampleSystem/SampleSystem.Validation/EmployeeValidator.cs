@@ -1,8 +1,10 @@
 ﻿using Framework.Validation;
 
-namespace SampleSystem.Domain.Validators.Employee;
+using SampleSystem.Domain;
 
-public sealed class EmployeeValidator : IClassValidator<Domain.Employee>
+namespace SampleSystem.Validation;
+
+public sealed class EmployeeValidator : IClassValidator<Employee>
 {
     public ValidationResult GetValidationResult(IClassValidationContext<Domain.Employee> validationContext)
     {

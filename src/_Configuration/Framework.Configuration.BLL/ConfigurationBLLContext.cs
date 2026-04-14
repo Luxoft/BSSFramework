@@ -15,7 +15,6 @@ using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.Core.TypeResolving;
-using Framework.Tracking;
 using Framework.Validation;
 
 using HierarchicalExpand;
@@ -23,8 +22,6 @@ using HierarchicalExpand;
 using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem.AccessDenied;
-
-using PersistentDomainObjectBase = Framework.Configuration.Domain.PersistentDomainObjectBase;
 
 namespace Framework.Configuration.BLL;
 
@@ -35,7 +32,6 @@ public partial class ConfigurationBLLContext(
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
     IServiceProxyFactory serviceProxyFactory,
     ITargetSystemTypeResolverContainer targetSystemTypeResolverContainer,
-    ITrackingService<PersistentDomainObjectBase> trackingService,
     IConfigurationValidator validator,
     IRootSecurityService securityService,
     IConfigurationBLLFactoryContainer logics,
@@ -52,8 +48,6 @@ public partial class ConfigurationBLLContext(
     accessDeniedExceptionService,
     hierarchicalObjectExpanderFactory)
 {
-    public ITrackingService<PersistentDomainObjectBase> TrackingService { get; } = trackingService;
-
     public IRootSecurityService SecurityService { get; } = securityService;
 
     public ITypeResolver<TypeNameIdentity> TargetSystemTypeResolver => targetSystemTypeResolverContainer.TypeResolver;

@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BLL\Framework.BLL.Runtime\Framework.BLL.Runtime.csproj" />
+    <ProjectReference Include="..\..\Notification\Framework.Notification.Abstractions\Framework.Notification.Abstractions.csproj" />
     <ProjectReference Include="..\..\Notification\Framework.Notification.DTO\Framework.Notification.DTO.csproj" />
     <ProjectReference Include="..\..\Subscriptions\Framework.Subscriptions.Abstractions\Framework.Subscriptions.Abstractions.csproj" />
     <ProjectReference Include="..\Framework.Configuration.BLL.Core\Framework.Configuration.BLL.Core.csproj" />

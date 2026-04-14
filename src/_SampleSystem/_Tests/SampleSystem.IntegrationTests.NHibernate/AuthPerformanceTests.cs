@@ -1,5 +1,4 @@
-﻿using Framework.Authorization.Domain;
-using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+﻿using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
 using Framework.BLL;
 using Framework.Core;
 
@@ -9,9 +8,6 @@ using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 using SecuritySystem;
-
-using PersistentDomainObjectBase = SampleSystem.Domain.PersistentDomainObjectBase;
-using Principal = Framework.Authorization.Domain.Principal;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -55,13 +51,13 @@ public class AuthPerformanceTests : TestBase
 
                                                 ctx.Logics.TestPerformanceObject.Save(genObjects);
 
-                                                var testPrincipal = new Principal { Name = TestUser };
+                                                var testPrincipal = new Framework.Authorization.Domain.Principal { Name = TestUser };
 
                                                 var adminRole = ctx.Authorization.Logics.BusinessRole.GetByName(SampleSystemSecurityRole.TestPerformance.Name);
 
                                                 foreach (var genObjectSubEnumerable in genObjects.Split(SplitBy))
                                                 {
-                                                    var genPermission = new Permission(testPrincipal) { Role = adminRole };
+                                                    var genPermission = new Framework.Authorization.Domain.Permission(testPrincipal) { Role = adminRole };
 
                                                     foreach (var genObject in genObjectSubEnumerable)
                                                     {
@@ -72,7 +68,7 @@ public class AuthPerformanceTests : TestBase
 
                                                             if (!genPermission.Restrictions.Select(fi => fi.SecurityContextId).Contains(securityContext.Id))
                                                             {
-                                                                new PermissionRestriction(genPermission)
+                                                                new Framework.Authorization.Domain.PermissionRestriction(genPermission)
                                                                 {
                                                                     SecurityContextId = securityContext.Id,
                                                                     SecurityContextType = ctx.Authorization.GetSecurityContextType(typeof(TSecurityContext))

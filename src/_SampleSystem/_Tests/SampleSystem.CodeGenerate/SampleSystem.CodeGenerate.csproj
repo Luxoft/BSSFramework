@@ -22,6 +22,7 @@
     <ProjectReference Include="..\..\SampleSystem.Domain.Models\SampleSystem.Domain.Models.csproj" />
     <ProjectReference Include="..\..\SampleSystem.EventMetadata\SampleSystem.EventMetadata.csproj" />
     <ProjectReference Include="..\..\SampleSystem.Security.Abstract\SampleSystem.Security.Abstract.csproj" />
+    <ProjectReference Include="..\..\SampleSystem.Validation\SampleSystem.Validation.csproj" />
   </ItemGroup>
 
 

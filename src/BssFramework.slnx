@@ -20,6 +20,7 @@
     <Project Path="BLL/Framework.BLL.DTOMapping/Framework.BLL.DTOMapping.csproj" />
     <Project Path="BLL/Framework.BLL.Events/Framework.BLL.Events.csproj" />
     <Project Path="BLL/Framework.BLL.Runtime/Framework.BLL.Runtime.csproj" />
+    <Project Path="BLL/Framework.BLL.Validation/Framework.BLL.Validation.csproj" />
     <Project Path="BLL/Framework.BLL/Framework.BLL.csproj" />
   </Folder>
   
@@ -168,6 +169,7 @@
     <Project Path="_SampleSystem/SampleSystem.ServiceEnvironment.NHibernate/SampleSystem.ServiceEnvironment.NHibernate.csproj" />
     <Project Path="_SampleSystem/SampleSystem.ServiceEnvironment/SampleSystem.ServiceEnvironment.csproj" />
     <Project Path="_SampleSystem/SampleSystem.Subscriptions.Metadata/SampleSystem.Subscriptions.Metadata.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Validation/SampleSystem.Validation.csproj" />
     <Project Path="_SampleSystem/SampleSystem.WebApiCore.EntityFramework/SampleSystem.WebApiCore.EntityFramework.csproj" />
     <Project Path="_SampleSystem/SampleSystem.WebApiCore.NHibernate/SampleSystem.WebApiCore.NHibernate.csproj" />
     <Project Path="_SampleSystem/SampleSystem.WebApiCore/SampleSystem.WebApiCore.csproj" />

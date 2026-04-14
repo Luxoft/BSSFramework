@@ -20,51 +20,26 @@ using Framework.Validation;
 
 namespace Framework.Authorization.TestGenerate.Configurations;
 
-public partial class AuthorizationGenerationEnvironment : GenerationEnvironmentBase
+public partial class AuthorizationGenerationEnvironment(DatabaseName databaseName) : GenerationEnvironmentBase
 {
-    public readonly BLLCoreGeneratorConfiguration BLLCore;
+    public BLLCoreGeneratorConfiguration BLLCore => field ??= new BLLCoreGeneratorConfiguration(this);
 
-    public readonly BLLGeneratorConfiguration BLL;
+    public BLLGeneratorConfiguration BLL => field ??= new BLLGeneratorConfiguration(this);
 
-    public readonly ServerDTOGeneratorConfiguration ServerDTO;
+    public ServerDTOGeneratorConfiguration ServerDTO => field ??= new ServerDTOGeneratorConfiguration(this);
 
-    public readonly MainServiceGeneratorConfiguration MainService;
+    public MainServiceGeneratorConfiguration MainService => field ??= new MainServiceGeneratorConfiguration(this);
 
-    public readonly QueryServiceGeneratorConfiguration QueryService;
+    public QueryServiceGeneratorConfiguration QueryService => field ??= new QueryServiceGeneratorConfiguration(this);
 
-    public readonly MainControllerConfiguration MainController;
-
-    public AuthorizationGenerationEnvironment()
-        : this(new DatabaseName("", "auth"))
-    {
-    }
-
-    public AuthorizationGenerationEnvironment(DatabaseName databaseName)
-    {
-        this.BLLCore = new BLLCoreGeneratorConfiguration(this);
-
-        this.BLL = new BLLGeneratorConfiguration(this);
-
-        this.ServerDTO = new ServerDTOGeneratorConfiguration(this);
-
-        this.MainService = new MainServiceGeneratorConfiguration(this);
-
-        this.QueryService = new QueryServiceGeneratorConfiguration(this);
-
-        this.MainController = new MainControllerConfiguration(this);
-
-        this.DatabaseName = databaseName ?? throw new ArgumentNullException(nameof(databaseName));
-    }
+    public MainControllerConfiguration MainController => field ??= new MainControllerConfiguration(this);
 
     /// <summary>
     /// Свойства содержащиеся в MappingSettings
     /// DatabaseName - Берётся из namespace'а сборки, которая сдержит тип PersistentDomainObjectBase (метод GetTargetSystemName);
     /// Types - Список доменных объектов. Это все типы наследованные от PersistentDomainObjectBase той сборки, в которой содеержится PersistentDomainObjectBase.
     /// </summary>
-    public MappingSettings MappingSettings => this.GetMappingSettings(this.DatabaseName, this.DatabaseName.ToDefaultAudit());
-
-
-    public DatabaseName DatabaseName { get; }
+    public MappingSettings MappingSettings => field ??= this.GetMappingSettings(databaseName, databaseName.ToDefaultAudit());
 
 
     public MappingSettings GetMappingSettings(DatabaseName dbName, AuditDatabaseName dbAuditName) => new MappingSettings<PersistentDomainObjectBase>(dbName, dbAuditName);
@@ -126,5 +101,5 @@ public partial class AuthorizationGenerationEnvironment : GenerationEnvironmentB
 
     }
 
-    public static readonly AuthorizationGenerationEnvironment Default = new();
+    public static readonly AuthorizationGenerationEnvironment Default = new(new DatabaseName("", "auth"));
 }

@@ -18,45 +18,21 @@ using Framework.Validation;
 
 namespace Framework.Configuration.TestGenerate.Configurations;
 
-public partial class ConfigurationGenerationEnvironment : GenerationEnvironmentBase
+public partial class ConfigurationGenerationEnvironment(DatabaseName databaseName) : GenerationEnvironmentBase
 {
-    public readonly BLLCoreGeneratorConfiguration BLLCore;
+    public BLLCoreGeneratorConfiguration BLLCore => field ??= new BLLCoreGeneratorConfiguration(this);
 
-    public readonly BLLGeneratorConfiguration BLL;
+    public BLLGeneratorConfiguration BLL => field ??= new BLLGeneratorConfiguration(this);
 
-    public readonly MainServiceGeneratorConfiguration MainService;
+    public MainServiceGeneratorConfiguration MainService => field ??= new MainServiceGeneratorConfiguration(this);
 
-    public readonly QueryServiceGeneratorConfiguration QueryService;
+    public QueryServiceGeneratorConfiguration QueryService => field ??= new QueryServiceGeneratorConfiguration(this);
 
-    public readonly ServerDTOGeneratorConfiguration ServerDTO;
+    public ServerDTOGeneratorConfiguration ServerDTO => field ??= new ServerDTOGeneratorConfiguration(this);
 
-    public readonly MainControllerConfiguration MainController;
+    public MainControllerConfiguration MainController => field ??= new MainControllerConfiguration(this);
 
-    public ConfigurationGenerationEnvironment()
-        : this(new DatabaseName("", "configuration"))
-    {
-    }
-
-    public ConfigurationGenerationEnvironment(DatabaseName databaseName)
-    {
-        this.BLLCore = new BLLCoreGeneratorConfiguration(this);
-
-        this.BLL = new BLLGeneratorConfiguration(this);
-
-        this.ServerDTO = new ServerDTOGeneratorConfiguration(this);
-
-        this.MainService = new MainServiceGeneratorConfiguration(this);
-
-        this.QueryService = new QueryServiceGeneratorConfiguration(this);
-
-        this.MainController = new MainControllerConfiguration(this);
-
-        this.DatabaseName = databaseName;
-    }
-
-    public DatabaseName DatabaseName { get; }
-
-    public MappingSettings MappingSettings => this.GetMappingSettings(this.DatabaseName);
+    public MappingSettings MappingSettings => field ??= this.GetMappingSettings(databaseName);
 
     public MappingSettings GetMappingSettings(DatabaseName dbName) => new MappingSettings<PersistentDomainObjectBase>(dbName);
 
@@ -124,5 +100,5 @@ public partial class ConfigurationGenerationEnvironment : GenerationEnvironmentB
 
 
 
-    public static readonly ConfigurationGenerationEnvironment Default = new();
+    public static readonly ConfigurationGenerationEnvironment Default = new(new DatabaseName("", "configuration"));
 }

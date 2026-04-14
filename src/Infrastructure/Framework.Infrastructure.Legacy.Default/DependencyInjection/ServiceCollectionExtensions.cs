@@ -16,6 +16,7 @@ using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.Infrastructure.LocalDBEvents;
 using Framework.Infrastructure.SubscriptionService;
+using Framework.Notification;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -32,6 +33,8 @@ public static class ServiceCollectionExtensions
 
         public IServiceCollection AddLegacyDefaultGenericServices()
         {
+            services.AddScoped<ISentNotificationLogger, ConfigurationSentNotificationLogger>();
+
             services.AddScoped<IApplicationVariableStorage, ConfigurationApplicationVariableStorage>();
             services.AddScoped<IEventSystem, ConfigurationEventSystem>();
 

@@ -1,7 +1,6 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.BLL;
 using Framework.Configuration.BLL;
-using Framework.Tracking;
 using Framework.Validation;
 
 using OData;
@@ -15,9 +14,7 @@ namespace SampleSystem.BLL;
 
 public partial interface ISampleSystemBLLContext :
 
-    ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>,
-
-    ITrackingServiceContainer<PersistentDomainObjectBase>
+    ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>
 {
     ICurrentUserSource<Employee> CurrentEmployeeSource { get; }
 

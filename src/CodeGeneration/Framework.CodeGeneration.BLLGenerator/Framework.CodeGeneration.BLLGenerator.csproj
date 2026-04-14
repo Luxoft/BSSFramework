@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BLL\Framework.BLL.Runtime\Framework.BLL.Runtime.csproj" />
+    <ProjectReference Include="..\..\BLL\Framework.BLL.Validation\Framework.BLL.Validation.csproj" />
     <ProjectReference Include="..\Framework.CodeGeneration.BLLCoreGenerator\Framework.CodeGeneration.BLLCoreGenerator.csproj" />
     <ProjectReference Include="..\..\Database\Framework.Tracking.Validation\Framework.Tracking.Validation.csproj" />
   </ItemGroup>

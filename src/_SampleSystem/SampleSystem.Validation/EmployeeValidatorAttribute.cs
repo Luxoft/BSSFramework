@@ -1,6 +1,6 @@
 ﻿using Framework.Validation;
 
-namespace SampleSystem.Domain.Validators.Employee;
+namespace SampleSystem.Validation;
 
 public sealed class EmployeeValidatorAttribute : ClassValidatorAttribute
 {

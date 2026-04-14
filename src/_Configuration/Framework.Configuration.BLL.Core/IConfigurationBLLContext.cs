@@ -1,4 +1,5 @@
 ﻿using System.Collections.Frozen;
+
 using Framework.Application.Events;
 using Framework.Application.Lock;
 using Framework.Authorization.BLL;
@@ -9,18 +10,13 @@ using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.Core.TypeResolving;
-using Framework.Tracking;
 using Framework.Validation;
-
-using PersistentDomainObjectBase = Framework.Configuration.Domain.PersistentDomainObjectBase;
 
 namespace Framework.Configuration.BLL;
 
 public partial interface IConfigurationBLLContext :
 
-    ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>,
-
-    ITrackingServiceContainer<PersistentDomainObjectBase>
+    ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>
 {
     IValidator Validator { get; }
 

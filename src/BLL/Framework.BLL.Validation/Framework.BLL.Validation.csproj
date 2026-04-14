@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Framework.BLL.Validation</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Validation\Framework.Validation\Framework.Validation.csproj" />
+    <ProjectReference Include="..\Framework.BLL.Abstractions\Framework.BLL.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,22 +1,20 @@
-﻿using System.Net.Mail;
-
-using Framework.Configuration.Domain;
+﻿using Framework.Configuration.Domain;
 
 namespace Framework.Configuration.BLL;
 
 public static class MailMessageExtensions
 {
-    public static SentMessage ToSentMessage(this MailMessage mailMessage) =>
+    public static SentMessage ToSentMessage(this Framework.Notification.Domain.Notification notification) =>
 
         new(
-            mailMessage.From!.Address,
-            string.Join(",", mailMessage.To.Select(z => z.Address)),
-            mailMessage.Subject,
-            mailMessage.Body,
+            notification.Message.From!.Address,
+            string.Join(",", notification.Message.To.Select(z => z.Address)),
+            notification.Message.Subject,
+            notification.Message.Body,
+            notification.TechnicalInformation.MessageTemplateCode,
             "",
-            string.Empty,
-            string.Join(",", mailMessage.CC.Select(z => z.Address)),
-            "",
-            null,
-            string.Join(",", mailMessage.ReplyToList.Select(z => z.Address)));
+            string.Join(",", notification.Message.CC.Select(z => z.Address)),
+            notification.TechnicalInformation.ContextObjectType,
+            notification.TechnicalInformation.ContextObjectId,
+            string.Join(",", notification.Message.ReplyToList.Select(z => z.Address)));
 }

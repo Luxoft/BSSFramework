@@ -1,59 +1,110 @@
-﻿using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
+﻿using System.Collections.Immutable;
+using System.Reflection;
+
+using Framework.BLL.Domain.Attributes;
+using Framework.CodeGeneration.Configuration;
+using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
+using Framework.ExtendedMetadata;
+using Framework.ExtendedMetadata.Builder;
+using Framework.Projection;
+using Framework.Validation;
 
 using SampleSystem.CodeGenerate.Configurations.Services.Audit;
+using SampleSystem.CodeGenerate.ServerDTO;
+using SampleSystem.Domain;
+using SampleSystem.Domain.ManualProjections;
+using SampleSystem.Security;
+using SampleSystem.Validation;
+
+using SecuritySystem;
 
 namespace SampleSystem.CodeGenerate;
 
-public partial class ServerGenerationEnvironment : GenerationEnvironmentBase
+public partial class ServerGenerationEnvironment() : CodeGenerationEnvironment<DomainObjectBase, PersistentDomainObjectBase,
+    AuditPersistentDomainObjectBase, Guid>(v => v.Id, typeof(DomainObjectFilterModel<>).Assembly)
 {
-    public readonly string DTODataContractNamespace = "SampleSystem";
+    public BLLCoreGeneratorConfiguration BLLCore => field ??= new BLLCoreGeneratorConfiguration(this);
 
+    public BLLGeneratorConfiguration BLL => field ??= new BLLGeneratorConfiguration(this);
 
-    public readonly BLLCoreGeneratorConfiguration BLLCore;
+    public ServerDTOGeneratorConfiguration ServerDTO => field ??= new ServerDTO.ServerDTOGeneratorConfiguration(this);
 
-    public readonly BLLGeneratorConfiguration BLL;
+    public MainServiceGeneratorConfiguration MainService => field ??= new MainServiceGeneratorConfiguration(this);
 
-    public readonly ServerDTO.ServerDTOGeneratorConfiguration ServerDTO;
+    public QueryServiceGeneratorConfiguration QueryService => field ??= new QueryServiceGeneratorConfiguration(this);
 
-    public readonly MainServiceGeneratorConfiguration MainService;
+    public IntegrationGeneratorConfiguration IntegrationService => field ??= new IntegrationGeneratorConfiguration(this);
 
-    public readonly QueryServiceGeneratorConfiguration QueryService;
+    public DALGeneratorConfiguration DAL => field ??= new DALGeneratorConfiguration(this);
 
-    public readonly IntegrationGeneratorConfiguration IntegrationService;
+    public MainProjectionGeneratorConfiguration MainProjection => field ??= new MainProjectionGeneratorConfiguration(this);
 
-    public readonly DALGeneratorConfiguration DAL;
+    public LegacyProjectionGeneratorConfiguration LegacyProjection => field ??= new LegacyProjectionGeneratorConfiguration(this);
 
-    public readonly MainProjectionGeneratorConfiguration MainProjection;
+    public AuditServiceGeneratorConfiguration AuditService => field ??= new AuditServiceGeneratorConfiguration(this);
 
-    public readonly LegacyProjectionGeneratorConfiguration LegacyProjection;
+    public IAuditDTOGeneratorConfiguration<IAuditDTOGenerationEnvironment> AuditDTO => field ??= new AuditDTOGeneratorConfiguration(this);
 
-    public readonly AuditServiceGeneratorConfiguration AuditService;
+    public IProjectionEnvironment MainProjectionEnvironment => field ??= this.CreateDefaultProjectionLambdaEnvironment(new SampleSystemProjectionSource());
 
+    public IProjectionEnvironment LegacyProjectionEnvironment =>
+        field ??= this.CreateDefaultProjectionLambdaEnvironment(
+            new LegacySampleSystemProjectionSource(),
+            this.GetCreateProjectionLambdaSetupParams(
+                projectionSubNamespace: "LegacyProjections",
+                useDependencySecurity: false));
 
-    public ServerGenerationEnvironment()
+    public override bool IsHierarchical(Type type) => new[] { typeof(BusinessUnit) }.Contains(type);
+
+    public override ImmutableArray<Type> SecurityRuleTypeList { get; } = [typeof(SampleSystemSecurityOperation), typeof(SecurityRule)];
+
+    protected override IEnumerable<Assembly> GetDomainObjectAssemblies() => base.GetDomainObjectAssemblies().Concat([typeof(Employee).Assembly]);
+
+    protected override IEnumerable<IProjectionEnvironment> GetProjectionEnvironments()
     {
-        this.BLLCore = new BLLCoreGeneratorConfiguration(this);
+        yield return this.MainProjectionEnvironment;
 
-        this.BLL = new BLLGeneratorConfiguration(this);
+        yield return this.LegacyProjectionEnvironment;
 
-        this.ServerDTO = new ServerDTO.ServerDTOGeneratorConfiguration(this);
-
-        this.MainService = new MainServiceGeneratorConfiguration(this);
-
-        this.QueryService = new QueryServiceGeneratorConfiguration(this);
-
-        this.IntegrationService = new IntegrationGeneratorConfiguration(this);
-
-        this.DAL = new DALGeneratorConfiguration(this);
-
-        this.MainProjection = new MainProjectionGeneratorConfiguration(this);
-
-        this.LegacyProjection = new LegacyProjectionGeneratorConfiguration(this);
-
-        this.AuditService = new AuditServiceGeneratorConfiguration(this);
-
-        this.AuditDTO = new AuditDTOGeneratorConfiguration(this);
+        yield return this.CreateManualProjectionLambdaEnvironment(typeof(TestManualEmployeeProjection).Assembly);
     }
 
-    public IAuditDTOGeneratorConfiguration<IAuditDTOGenerationEnvironment> AuditDTO { get; }
+    protected override IEnumerable<ExtendedAttributeSource> GetExtendedAttributeSources()
+    {
+        yield return new ExtendedAttributeSourceBuilder()
+
+                     .Add<DomainObjectBase>(tb => tb.AddAttribute<AvailableDecimalValidatorAttribute>()
+                                                    .AddAttribute<AvailablePeriodValidatorAttribute>()
+                                                    .AddAttribute<AvailableDateTimeValidatorAttribute>()
+                                                    .AddAttribute<DefaultStringMaxLengthValidatorAttribute>())
+
+                     .Add<Employee>(b => b.AddAttribute<EmployeeValidatorAttribute>()
+                                         .AddProperty(
+                                              e => e.PersonalCellPhones,
+                                              pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePersonalCellPhoneView))
+                                                      .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit)))
+                                          .AddProperty(
+                                              e => e.Login,
+                                              pb => pb.AddAttribute(new ViewDomainObjectAttribute(SecurityRule.View))
+                                                      .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeeEdit)))
+                                          .AddProperty(
+                                              e => e.PersonalCellPhone,
+                                              pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePersonalCellPhoneView)))
+                                          .AddProperty(
+                                              e => e.Position,
+                                              pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePositionView))
+                                                      .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeePositionEdit))))
+
+                     .Add<Example1>(b => b.AddProperty(
+                                        e => e.Field3,
+                                        pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.LocationView))
+                                                .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.LocationEdit))))
+
+                     .Add<HRDepartment>(b => b.AddProperty(
+                                            e => e.CompanyLegalEntity,
+                                            pb => pb.AddAttribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.CompanyLegalEntityView))
+                                                    .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.CompanyLegalEntityEdit))))
+
+                     .Build();
+    }
 }

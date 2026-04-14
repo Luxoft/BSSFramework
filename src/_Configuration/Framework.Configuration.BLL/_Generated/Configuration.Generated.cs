@@ -136,11 +136,6 @@ namespace Framework.Configuration.BLL
     
     public partial class SystemConstantBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SystemConstant>, Framework.Configuration.BLL.ISystemConstantBLL
     {
-        
-        public SystemConstantBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.SystemConstant> securityProvider) : 
-                base(context, securityProvider)
-        {
-        }
     }
     
     public partial class SystemConstantBLLFactory : Framework.BLL.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.ISystemConstantBLL, Framework.Configuration.BLL.SystemConstantBLL, Framework.Configuration.Domain.SystemConstant>, Framework.Configuration.BLL.ISystemConstantBLLFactory

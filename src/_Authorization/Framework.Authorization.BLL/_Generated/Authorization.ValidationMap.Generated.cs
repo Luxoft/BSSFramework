@@ -200,7 +200,7 @@ namespace Framework.Authorization.BLL
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.Permission, Framework.Authorization.Domain.BusinessRole>> GetPermission_RoleValidators()
         {
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.Permission, Framework.Authorization.Domain.BusinessRole>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.Tracking.Validation.FixedPropertyValidator<Framework.Authorization.Domain.Permission, Framework.Authorization.Domain.BusinessRole, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.Role);
+            yield return new Framework.Tracking.Validation.FixedPropertyValidator<Framework.Authorization.Domain.Permission, Framework.Authorization.Domain.BusinessRole, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.Role);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionDirectFilterModel, System.Guid>> GetPermissionDirectFilterModel_SecurityContextIdValidators()
@@ -260,13 +260,13 @@ namespace Framework.Authorization.BLL
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionRestriction, System.Guid>> GetPermissionRestriction_SecurityContextIdValidators()
         {
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.PermissionRestriction, System.Guid>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.Tracking.Validation.FixedPropertyValidator<Framework.Authorization.Domain.PermissionRestriction, System.Guid, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.SecurityContextId);
+            yield return new Framework.Tracking.Validation.FixedPropertyValidator<Framework.Authorization.Domain.PermissionRestriction, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.SecurityContextId);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionRestriction, Framework.Authorization.Domain.SecurityContextType>> GetPermissionRestriction_SecurityContextTypeValidators()
         {
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.PermissionRestriction, Framework.Authorization.Domain.SecurityContextType>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.Tracking.Validation.FixedPropertyValidator<Framework.Authorization.Domain.PermissionRestriction, Framework.Authorization.Domain.SecurityContextType, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.SecurityContextType);
+            yield return new Framework.Tracking.Validation.FixedPropertyValidator<Framework.Authorization.Domain.PermissionRestriction, Framework.Authorization.Domain.SecurityContextType, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.SecurityContextType);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Authorization.Domain.PermissionRestriction>> GetPermissionRestrictionProperties(Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.PermissionRestriction> currentClass)

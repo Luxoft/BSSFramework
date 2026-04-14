@@ -16,7 +16,7 @@ public interface ITrackingService<in TPersistentDomainObjectBase>
     /// <param name="mode">Mode that defines changes detection algorithm on not persistent objects (that not exist in DB)</param>
     /// <returns>Domain object changes object (collection)</returns>
     TrackingResult<TDomainObject> GetChanges<TDomainObject>(TDomainObject value, GetChangesMode mode = GetChangesMode.Default)
-            where TDomainObject : TPersistentDomainObjectBase;
+        where TDomainObject : class, TPersistentDomainObjectBase;
 
     /// <summary>
     /// Gets  a domain object's Persistent state, i.e. it can be new (not in DB), persistent (already in DB) or marked to remove from DB after session close.
@@ -25,7 +25,7 @@ public interface ITrackingService<in TPersistentDomainObjectBase>
     /// <param name="value">Domain object instance</param>
     /// <returns><see cref="PersistentLifeObjectState"/> enum that defines persistent state</returns>
     PersistentLifeObjectState GetPersistentState<TDomainObject>(TDomainObject value)
-            where TDomainObject : TPersistentDomainObjectBase;
+        where TDomainObject : class, TPersistentDomainObjectBase;
 
     /// <summary>
     ///     Gets a domain object's changing state <see cref="ChangingLifeObjectState" /> that defines whether the instance
@@ -35,7 +35,7 @@ public interface ITrackingService<in TPersistentDomainObjectBase>
     /// <param name="value">Domain object instance</param>
     /// <returns>Changing state value</returns>
     ChangingLifeObjectState GetChangingState<TDomainObject>(TDomainObject value)
-            where TDomainObject : TPersistentDomainObjectBase;
+        where TDomainObject : class, TPersistentDomainObjectBase;
 
     /// <summary>
     ///     Gets previous or current value that returns a domain object property specified by expression passed
@@ -46,7 +46,7 @@ public interface ITrackingService<in TPersistentDomainObjectBase>
     /// <param name="propertyExpression">Property get expression</param>
     /// <returns>Previous or current property value identified by expression specified</returns>
     TProperty GetPrevOrCurrentValue<TDomainObject, TProperty>(TDomainObject domainObject, Expression<Func<TDomainObject, TProperty>> propertyExpression)
-            where TDomainObject : TPersistentDomainObjectBase;
+        where TDomainObject : class, TPersistentDomainObjectBase;
 
     /// <summary>
     ///     Gets previous or default value that returns a domain object property specified by expression passed
@@ -58,5 +58,5 @@ public interface ITrackingService<in TPersistentDomainObjectBase>
     /// <param name="defaultValue">Default property value if no previous value found</param>
     /// <returns>Previous or default property value identified by expression specified</returns>
     TProperty GetPrevValue<TDomainObject, TProperty>(TDomainObject domainObject, Expression<Func<TDomainObject, TProperty>> propertyExpression, TProperty defaultValue)
-            where TDomainObject : TPersistentDomainObjectBase;
+        where TDomainObject : class, TPersistentDomainObjectBase;
 }

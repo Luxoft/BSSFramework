@@ -12,9 +12,9 @@ public partial class ServerGenerators
         string serverName,
         DatabaseScriptGeneratorMode generatorMode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
         DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnTargetDatabase,
-        IEnumerable<string> migrationScriptFolderPaths = null,
-        IEnumerable<string> auditMigrationScriptFolderPaths = null,
-        DbUserCredential credentials = null)
+        IEnumerable<string>? migrationScriptFolderPaths = null,
+        IEnumerable<string>? auditMigrationScriptFolderPaths = null,
+        DbUserCredential? credentials = null)
     {
         var generator = new DBGenerator(this.Environment.MappingSettings);
         var result = generator.Generate(
@@ -35,10 +35,10 @@ public partial class ServerGenerators
         AuditDatabaseName auditDatabaseName,
         DatabaseScriptGeneratorMode generatorMode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
         DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnTargetDatabase,
-        IEnumerable<string> migrationScriptFolderPaths = null,
-        IEnumerable<string> auditMigrationScriptFolderPaths = null,
+        IEnumerable<string>? migrationScriptFolderPaths = null,
+        IEnumerable<string>? auditMigrationScriptFolderPaths = null,
         bool preserveSchemaDatabase = false,
-        DbUserCredential credentials = null)
+        DbUserCredential? credentials = null)
     {
         var generator = new DBGenerator(this.GetAuthMappingSettings(serverName, databaseName, auditDatabaseName));
         var result = generator.Generate(

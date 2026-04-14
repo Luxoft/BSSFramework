@@ -5,5 +5,5 @@ namespace Framework.Configuration.TestGenerate.Configurations.BLL;
 
 public class BLLGeneratorConfiguration(ConfigurationGenerationEnvironment environment) : BLLGeneratorConfigurationBase<ConfigurationGenerationEnvironment>(environment)
 {
-    public override bool GenerateBllConstructor(Type domainType) => !new[] { typeof(DomainObjectModification) }.Contains(domainType) && base.GenerateBllConstructor(domainType);
+    public override bool GenerateBllConstructor(Type domainType) => !new[] { typeof(DomainObjectModification), typeof(SystemConstant) }.Contains(domainType) && base.GenerateBllConstructor(domainType);
 }

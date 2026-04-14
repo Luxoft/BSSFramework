@@ -5,6 +5,7 @@ using CommonFramework;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.Validation;
+using Framework.Validation.Map;
 
 using GenericQueryable.Fetching;
 

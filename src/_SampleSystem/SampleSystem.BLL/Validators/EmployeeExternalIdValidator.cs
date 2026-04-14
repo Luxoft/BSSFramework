@@ -1,4 +1,5 @@
 ﻿using Framework.Validation;
+using Framework.Validation.Validators;
 
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,7 +1,8 @@
 ﻿using Framework.Application.Domain;
 using Framework.Database.Domain;
 
-namespace SampleSystem.AuditDomain.__Base;
+// ReSharper disable once CheckNamespace
+namespace SampleSystem.AuditDomain;
 
 public abstract class SystemAuditPersistentDomainObjectBase : IIdentityObject<Guid>
 {

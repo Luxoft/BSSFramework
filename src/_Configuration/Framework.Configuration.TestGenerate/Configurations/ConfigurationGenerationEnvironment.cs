@@ -2,8 +2,8 @@
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.BLL.Domain.ServiceRole.Base;
+using Framework.CodeGeneration.Configuration;
 using Framework.Configuration.Domain;
-using Framework.Configuration.TestGenerate.Configurations._Base;
 using Framework.Configuration.TestGenerate.Configurations.BLL;
 using Framework.Configuration.TestGenerate.Configurations.BLLCore;
 using Framework.Configuration.TestGenerate.Configurations.DTO;
@@ -11,7 +11,7 @@ using Framework.Configuration.TestGenerate.Configurations.Services.Main;
 using Framework.Configuration.TestGenerate.Configurations.Services.QueryService;
 using Framework.Configuration.TestGenerate.Configurations.Services.WebApi;
 using Framework.Database;
-using Framework.Database.NHibernate._MappingSettings;
+using Framework.Database.NHibernate.Mapping;
 using Framework.ExtendedMetadata;
 using Framework.ExtendedMetadata.Builder;
 using Framework.Validation.Attributes;
@@ -20,8 +20,11 @@ using Framework.Validation.Attributes.Available.Range;
 
 namespace Framework.Configuration.TestGenerate.Configurations;
 
-public partial class ConfigurationGenerationEnvironment(DatabaseName databaseName) : GenerationEnvironmentBase
+public partial class ConfigurationGenerationEnvironment(DatabaseName databaseName)
+    : CodeGenerationEnvironment<DomainObjectBase, PersistentDomainObjectBase, AuditPersistentDomainObjectBase, Guid>(v => v.Id, typeof(DomainObjectFilterModel<>).Assembly)
 {
+    public readonly string DTODataContractNamespace = "Configuration";
+
     public BLLCoreGeneratorConfiguration BLLCore => field ??= new BLLCoreGeneratorConfiguration(this);
 
     public BLLGeneratorConfiguration BLL => field ??= new BLLGeneratorConfiguration(this);
@@ -99,8 +102,6 @@ public partial class ConfigurationGenerationEnvironment(DatabaseName databaseNam
                                                         tb.AddAttribute(new BLLRoleAttribute()))
                      .Build();
     }
-
-
 
     public static readonly ConfigurationGenerationEnvironment Default = new(new DatabaseName("", "configuration"));
 }

@@ -1,4 +1,5 @@
-﻿namespace SampleSystem.AuditDomain.__Base;
+﻿// ReSharper disable once CheckNamespace
+namespace SampleSystem.AuditDomain;
 
 public struct AuditIdentifier
 {

@@ -1,6 +1,6 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.Database;
-using Framework.Database.NHibernate._MappingSettings;
+using Framework.Database.NHibernate.Mapping;
 
 namespace Framework.Authorization.Generated.DAL.NHibernate;
 

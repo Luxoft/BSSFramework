@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using SampleSystem.Domain.ExternalPrincipal;
-
 namespace SampleSystem.Generated.DTO
 {
     
@@ -652,15 +650,15 @@ namespace SampleSystem.Generated.DTO
         
         void MapPersistentDomainObjectBase(SampleSystem.Domain.PersistentDomainObjectBase domainObject, SampleSystem.Generated.DTO.BasePersistentDTO mappingObject);
         
-        void MapPrincipal(Principal domainObject, SampleSystem.Generated.DTO.PrincipalSimpleDTO mappingObject);
+        void MapPrincipal(SampleSystem.Domain.ExternalPrincipal.Principal domainObject, SampleSystem.Generated.DTO.PrincipalSimpleDTO mappingObject);
         
-        void MapPrincipal(Principal domainObject, SampleSystem.Generated.DTO.PrincipalFullDTO mappingObject);
+        void MapPrincipal(SampleSystem.Domain.ExternalPrincipal.Principal domainObject, SampleSystem.Generated.DTO.PrincipalFullDTO mappingObject);
         
-        void MapPrincipal(Principal domainObject, SampleSystem.Generated.DTO.PrincipalRichDTO mappingObject);
+        void MapPrincipal(SampleSystem.Domain.ExternalPrincipal.Principal domainObject, SampleSystem.Generated.DTO.PrincipalRichDTO mappingObject);
         
-        void MapPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO mappingObject, Principal domainObject);
+        void MapPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO mappingObject, SampleSystem.Domain.ExternalPrincipal.Principal domainObject);
         
-        void MapPrincipal(Principal domainObject, SampleSystem.Generated.DTO.PrincipalEventRichDTO mappingObject);
+        void MapPrincipal(SampleSystem.Domain.ExternalPrincipal.Principal domainObject, SampleSystem.Generated.DTO.PrincipalEventRichDTO mappingObject);
         
         void MapProject(SampleSystem.Domain.Projects.Project domainObject, SampleSystem.Generated.DTO.ProjectEventRichDTO mappingObject);
         
@@ -1210,11 +1208,11 @@ namespace SampleSystem.Generated.DTO
         
         SampleSystem.Domain.UniqueByParent.ParentEntity ToParentEntity(SampleSystem.Generated.DTO.ParentEntityIdentityDTO parentEntityIdentityDTO);
         
-        Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdentityDTO);
+        SampleSystem.Domain.ExternalPrincipal.Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdentityDTO);
         
-        Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO);
+        SampleSystem.Domain.ExternalPrincipal.Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO);
         
-        Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO, bool allowCreate);
+        SampleSystem.Domain.ExternalPrincipal.Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO, bool allowCreate);
         
         SampleSystem.Domain.Projects.Project ToProject(SampleSystem.Generated.DTO.ProjectIdentityDTO projectIdentityDTO);
         
@@ -6425,26 +6423,26 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Id = domainObject.Id;
         }
         
-        public virtual void MapPrincipal(Principal domainObject, SampleSystem.Generated.DTO.PrincipalSimpleDTO mappingObject)
+        public virtual void MapPrincipal(SampleSystem.Domain.ExternalPrincipal.Principal domainObject, SampleSystem.Generated.DTO.PrincipalSimpleDTO mappingObject)
         {
             mappingObject.ExternalId = domainObject.ExternalId;
         }
         
-        public virtual void MapPrincipal(Principal domainObject, SampleSystem.Generated.DTO.PrincipalFullDTO mappingObject)
+        public virtual void MapPrincipal(SampleSystem.Domain.ExternalPrincipal.Principal domainObject, SampleSystem.Generated.DTO.PrincipalFullDTO mappingObject)
         {
         }
         
-        public virtual void MapPrincipal(Principal domainObject, SampleSystem.Generated.DTO.PrincipalRichDTO mappingObject)
+        public virtual void MapPrincipal(SampleSystem.Domain.ExternalPrincipal.Principal domainObject, SampleSystem.Generated.DTO.PrincipalRichDTO mappingObject)
         {
         }
         
-        public virtual void MapPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO mappingObject, Principal domainObject)
+        public virtual void MapPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO mappingObject, SampleSystem.Domain.ExternalPrincipal.Principal domainObject)
         {
             domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
             domainObject.ExternalId = mappingObject.ExternalId;
         }
         
-        public virtual void MapPrincipal(Principal domainObject, SampleSystem.Generated.DTO.PrincipalEventRichDTO mappingObject)
+        public virtual void MapPrincipal(SampleSystem.Domain.ExternalPrincipal.Principal domainObject, SampleSystem.Generated.DTO.PrincipalEventRichDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
@@ -8787,21 +8785,21 @@ namespace SampleSystem.Generated.DTO
             return this.GetById<SampleSystem.Domain.UniqueByParent.ParentEntity>(parentEntityIdentityDTO.Id);
         }
         
-        public virtual Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdentityDTO)
+        public virtual SampleSystem.Domain.ExternalPrincipal.Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdentityDTO)
         {
-            return this.GetById<Principal>(principalIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.ExternalPrincipal.Principal>(principalIdentityDTO.Id);
         }
         
-        public virtual Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO)
+        public virtual SampleSystem.Domain.ExternalPrincipal.Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO)
         {
-            return this.ToDomainObject<SampleSystem.Generated.DTO.PrincipalStrictDTO, Principal>(principalStrictDTO);
+            return this.ToDomainObject<SampleSystem.Generated.DTO.PrincipalStrictDTO, SampleSystem.Domain.ExternalPrincipal.Principal>(principalStrictDTO);
         }
         
-        public virtual Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO, bool allowCreate)
+        public virtual SampleSystem.Domain.ExternalPrincipal.Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO, bool allowCreate)
         {
             if (allowCreate)
             {
-                return this.ToDomainObject(principalStrictDTO, () => new Principal());
+                return this.ToDomainObject(principalStrictDTO, () => new SampleSystem.Domain.ExternalPrincipal.Principal());
             }
             else
             {

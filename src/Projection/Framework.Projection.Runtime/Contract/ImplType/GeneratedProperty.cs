@@ -5,8 +5,8 @@ using CommonFramework;
 using Framework.Core;
 using Framework.Core.ReflectionImpl;
 using Framework.ExtendedMetadata;
-using Framework.Projection._Extensions;
-using Framework.Projection._ImplType;
+using Framework.Projection.Extensions;
+using Framework.Projection.ImplType;
 
 namespace Framework.Projection.Contract.ImplType;
 

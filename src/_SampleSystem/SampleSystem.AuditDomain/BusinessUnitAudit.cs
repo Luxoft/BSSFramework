@@ -1,5 +1,3 @@
-﻿using SampleSystem.AuditDomain.__Base;
-
-namespace SampleSystem.AuditDomain;
+﻿namespace SampleSystem.AuditDomain;
 
 public class BusinessUnitAudit : SystemAuditPersistentDomainObjectBase;

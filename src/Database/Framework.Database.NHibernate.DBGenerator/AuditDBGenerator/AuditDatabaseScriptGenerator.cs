@@ -5,11 +5,11 @@ using CommonFramework.Auth;
 
 using Framework.Core;
 using Framework.Database.Mapping;
-using Framework.Database.NHibernate._MappingSettings;
 using Framework.Database.NHibernate.Audit;
 using Framework.Database.NHibernate.DAL.Revisions;
 using Framework.Database.NHibernate.DBGenerator.Contracts;
 using Framework.Database.NHibernate.DBGenerator.Team;
+using Framework.Database.NHibernate.Mapping;
 using Framework.Projection;
 
 using NHibernate.Cfg;

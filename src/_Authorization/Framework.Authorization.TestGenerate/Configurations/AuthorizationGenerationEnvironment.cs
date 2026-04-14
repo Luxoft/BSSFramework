@@ -1,5 +1,4 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.Authorization.TestGenerate.Configurations._Base;
 using Framework.Authorization.TestGenerate.Configurations.BLL;
 using Framework.Authorization.TestGenerate.Configurations.BLLCore;
 using Framework.Authorization.TestGenerate.Configurations.DTO;
@@ -11,8 +10,9 @@ using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.BLL.Domain.ServiceRole.Base;
+using Framework.CodeGeneration.Configuration;
 using Framework.Database;
-using Framework.Database.NHibernate._MappingSettings;
+using Framework.Database.NHibernate.Mapping;
 using Framework.ExtendedMetadata;
 using Framework.ExtendedMetadata.Builder;
 using Framework.Tracking.Validation;
@@ -21,7 +21,10 @@ using Framework.Validation.Attributes.Available.Range;
 
 namespace Framework.Authorization.TestGenerate.Configurations;
 
-public partial class AuthorizationGenerationEnvironment(DatabaseName databaseName) : GenerationEnvironmentBase
+public partial class AuthorizationGenerationEnvironment(DatabaseName databaseName)
+    : CodeGenerationEnvironment<DomainObjectBase, PersistentDomainObjectBase, AuditPersistentDomainObjectBase, Guid>(
+        v => v.Id,
+        typeof(DomainObjectChangeModel<>).Assembly)
 {
     public BLLCoreGeneratorConfiguration BLLCore => field ??= new BLLCoreGeneratorConfiguration(this);
 

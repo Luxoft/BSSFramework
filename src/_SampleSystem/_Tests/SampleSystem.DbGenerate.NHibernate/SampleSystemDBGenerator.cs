@@ -1,7 +1,7 @@
 ﻿using Framework.Database.Mapping;
 using Framework.Database.Metadata;
-using Framework.Database.NHibernate._MappingSettings;
 using Framework.Database.NHibernate.DBGenerator;
+using Framework.Database.NHibernate.Mapping;
 
 namespace SampleSystem.DbGenerate.NHibernate;
 

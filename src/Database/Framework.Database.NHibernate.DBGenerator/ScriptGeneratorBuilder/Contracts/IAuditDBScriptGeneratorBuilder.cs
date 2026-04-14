@@ -1,4 +1,4 @@
-﻿using Framework.Database.NHibernate._MappingSettings;
+﻿using Framework.Database.NHibernate.Mapping;
 
 namespace Framework.Database.NHibernate.DBGenerator.ScriptGeneratorBuilder.Contracts;
 

@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using SampleSystem.Domain.ExternalPrincipal;
-
 namespace SampleSystem.BLL
 {
     using GenericQueryable;
@@ -103,6 +101,10 @@ namespace SampleSystem.BLL
             {
                 return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetWorkingCalendar1676FetchRule(dtoType)))));
             }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ExternalPrincipal.Principal)))
+            {
+                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetPrincipalFetchRule(dtoType)))));
+            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ForUpdate.Example1)))
             {
                 return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetExample1FetchRule(dtoType)))));
@@ -138,10 +140,6 @@ namespace SampleSystem.BLL
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping)))
             {
                 return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetManagementUnitFluentMappingFetchRule(dtoType)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(Principal)))
-            {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetPrincipalFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.BusinessUnitProgramClass)))
             {
@@ -917,23 +915,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<Principal> TryGetPrincipalFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.ExternalPrincipal.Principal> TryGetPrincipalFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<Principal>.Empty;
+                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<Principal>.Empty;
+                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<Principal>.Empty;
+                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<Principal>.Empty;
+                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>.Empty;
             }
             else
             {

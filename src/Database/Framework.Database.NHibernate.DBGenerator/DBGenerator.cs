@@ -1,10 +1,10 @@
 ﻿using CommonFramework;
 
 using Framework.Database.Metadata;
-using Framework.Database.NHibernate._MappingSettings;
 using Framework.Database.NHibernate.DBGenerator.Contracts;
 using Framework.Database.NHibernate.DBGenerator.ScriptGeneratorBuilder;
 using Framework.Database.NHibernate.DBGenerator.ScriptGenerators.Support;
+using Framework.Database.NHibernate.Mapping;
 
 namespace Framework.Database.NHibernate.DBGenerator;
 

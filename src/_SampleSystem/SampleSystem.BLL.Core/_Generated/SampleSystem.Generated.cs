@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using SampleSystem.Domain.ExternalPrincipal;
-
 namespace SampleSystem.BLL
 {
     
@@ -738,6 +736,14 @@ namespace SampleSystem.BLL
     {
     }
     
+    public partial interface IPrincipalBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ExternalPrincipal.Principal, System.Guid>
+    {
+    }
+    
+    public partial interface IPrincipalBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IPrincipalBLL, SampleSystem.Domain.ExternalPrincipal.Principal>
+    {
+    }
+    
     public partial interface IExample1BLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ForUpdate.Example1, System.Guid>
     {
     }
@@ -809,14 +815,6 @@ namespace SampleSystem.BLL
     }
     
     public partial interface IManagementUnitFluentMappingBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitFluentMappingBLL, SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping>
-    {
-    }
-    
-    public partial interface IPrincipalBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, Principal, System.Guid>
-    {
-    }
-    
-    public partial interface IPrincipalBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IPrincipalBLL, Principal>
     {
     }
     

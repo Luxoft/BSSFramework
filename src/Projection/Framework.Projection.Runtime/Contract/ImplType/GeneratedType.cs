@@ -9,7 +9,7 @@ using Framework.Core;
 using Framework.Core.ReflectionImpl;
 using Framework.Database.Mapping;
 using Framework.ExtendedMetadata;
-using Framework.Projection._ImplType;
+using Framework.Projection.ImplType;
 using Framework.Validation.Attributes;
 
 namespace Framework.Projection.Contract.ImplType;

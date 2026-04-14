@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using SampleSystem.Domain.ExternalPrincipal;
-
 namespace SampleSystem.BLL
 {
     
@@ -73,6 +71,7 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.EnversBug1676.Coefficient1676>(this.GetCoefficient1676ValidationResult);
             base.RegisterHandler<SampleSystem.Domain.EnversBug1676.Location1676>(this.GetLocation1676ValidationResult);
             base.RegisterHandler<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>(this.GetWorkingCalendar1676ValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.ExternalPrincipal.Principal>(this.GetPrincipalValidationResult);
             base.RegisterHandler<SampleSystem.Domain.ForUpdate.Example1>(this.GetExample1ValidationResult);
             base.RegisterHandler<SampleSystem.Domain.ForUpdate.Example2>(this.GetExample2ValidationResult);
             base.RegisterHandler<SampleSystem.Domain.HRDepartment.HRDepartment>(this.GetHRDepartmentValidationResult);
@@ -105,7 +104,6 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.NhFluentMapping.PureFluentMappingObject>(this.GetPureFluentMappingObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.NLock.GenericNamedLock>(this.GetGenericNamedLockValidationResult);
             base.RegisterHandler<SampleSystem.Domain.NoSecurityObject>(this.GetNoSecurityObjectValidationResult);
-            base.RegisterHandler<Principal>(this.GetPrincipalValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Projects.Project>(this.GetProjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.SqlParserTestObj>(this.GetSqlParserTestObjValidationResult);
             base.RegisterHandler<SampleSystem.Domain.SqlParserTestObjContainer>(this.GetSqlParserTestObjContainerValidationResult);
@@ -504,7 +502,7 @@ namespace SampleSystem.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetPrincipalValidationResult(Principal source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetPrincipalValidationResult(SampleSystem.Domain.ExternalPrincipal.Principal source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

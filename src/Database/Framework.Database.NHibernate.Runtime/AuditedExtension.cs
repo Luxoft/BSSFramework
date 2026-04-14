@@ -1,10 +1,10 @@
 ﻿using CommonFramework;
 using CommonFramework.Auth;
 
-using Framework.Database.NHibernate._MappingSettings;
 using Framework.Database.NHibernate.Audit;
 using Framework.Database.NHibernate.DAL.Revisions;
 using Framework.Database.NHibernate.Envers.Forke;
+using Framework.Database.NHibernate.Mapping;
 
 using NHibernate.Cfg;
 using NHibernate.Envers.Configuration;

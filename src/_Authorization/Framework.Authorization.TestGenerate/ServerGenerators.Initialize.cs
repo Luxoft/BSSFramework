@@ -1,11 +1,10 @@
-﻿using Framework.Authorization.TestGenerate._Base;
-using Framework.Authorization.TestGenerate.Configurations;
+﻿using Framework.Authorization.TestGenerate.Configurations;
 
 namespace Framework.Authorization.TestGenerate;
 
 public partial class ServerGenerators(AuthorizationGenerationEnvironment environment) : GeneratorsBase
 {
-    protected readonly AuthorizationGenerationEnvironment Environment = environment ?? throw new ArgumentNullException(nameof(environment));
+    protected readonly AuthorizationGenerationEnvironment Environment = environment;
 
     public ServerGenerators()
             : this(AuthorizationGenerationEnvironment.Default)

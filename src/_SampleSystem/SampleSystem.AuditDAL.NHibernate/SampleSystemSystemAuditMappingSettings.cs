@@ -1,7 +1,7 @@
 ﻿using Framework.Database;
-using Framework.Database.NHibernate._MappingSettings;
+using Framework.Database.NHibernate.Mapping;
 
-using SampleSystem.AuditDomain.__Base;
+using SampleSystem.AuditDomain;
 
 namespace SampleSystem.AuditDAL.NHibernate;
 

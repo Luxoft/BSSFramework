@@ -2,7 +2,7 @@
 
 using Framework.Application.Jobs;
 using Framework.AutomationCore.Environment;
-using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
+using Framework.AutomationCore.ServiceEnvironment;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

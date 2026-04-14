@@ -1,5 +1,5 @@
 ﻿using Framework.AutomationCore.Enums;
-using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment.Services;
+using Framework.AutomationCore.ServiceEnvironment.Services;
 using Framework.AutomationCore.ServiceProviderPool;
 using Framework.AutomationCore.Utils.DatabaseUtils;
 
@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem.Testing;
 
-namespace Framework.AutomationCore.ServiceEnvironment;
+namespace Framework.AutomationCore;
 
 public abstract class IntegrationTestBase(IServiceProviderPool rootServiceProviderPool)
     : RootServiceProviderContainer.RootServiceProviderContainer(rootServiceProviderPool.Get())

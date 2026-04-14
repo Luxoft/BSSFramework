@@ -2,7 +2,7 @@
 
 using Framework.Application;
 using Framework.Application.Repository;
-using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+using Framework.AutomationCore.RootServiceProviderContainer;
 using Framework.AutomationCore.ServiceProviderPool;
 using Framework.BLL.DTOMapping.Domain;
 using Framework.Configuration.BLL;
@@ -16,7 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem.Credential;
 
-namespace Framework.AutomationCore.ServiceEnvironment;
+namespace Framework.AutomationCore;
 
 public abstract class IntegrationTestBase<TBLLContext>(IServiceProviderPool rootServiceProviderPool)
     : IntegrationTestBase(rootServiceProviderPool), IRootServiceProviderContainer<TBLLContext>

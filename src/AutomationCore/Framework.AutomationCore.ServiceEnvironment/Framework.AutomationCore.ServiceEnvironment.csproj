@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Luxoft.Framework.AutomationCore.ServiceEnvironment</PackageId>
+    <RootNamespace>Framework.AutomationCore</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

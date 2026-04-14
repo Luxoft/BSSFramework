@@ -1,5 +1,5 @@
 ﻿using Framework.Application;
-using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+using Framework.AutomationCore.RootServiceProviderContainer;
 using Framework.AutomationCore.Utils;
 using Framework.BLL.Domain.Persistent;
 using Framework.Core;

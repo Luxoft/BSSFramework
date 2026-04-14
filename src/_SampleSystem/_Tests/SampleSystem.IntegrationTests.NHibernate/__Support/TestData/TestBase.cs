@@ -1,5 +1,5 @@
-﻿using Framework.AutomationCore.ServiceEnvironment;
-using Framework.AutomationCore.ServiceEnvironment.ServiceEnvironment;
+﻿using Framework.AutomationCore;
+using Framework.AutomationCore.ServiceEnvironment;
 
 using Microsoft.Extensions.DependencyInjection;
 

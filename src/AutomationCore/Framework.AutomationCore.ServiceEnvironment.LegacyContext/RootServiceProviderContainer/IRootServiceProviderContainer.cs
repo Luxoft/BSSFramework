@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SecuritySystem.Credential;
 
-namespace Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+namespace Framework.AutomationCore.RootServiceProviderContainer;
 
 public interface IRootServiceProviderContainer<out TBLLContext> : IRootServiceProviderContainer, IServiceEvaluator<TBLLContext>
 {

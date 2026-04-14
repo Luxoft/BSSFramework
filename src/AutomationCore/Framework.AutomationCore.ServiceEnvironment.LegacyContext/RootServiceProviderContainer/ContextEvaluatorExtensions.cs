@@ -1,7 +1,7 @@
 ﻿using Framework.Application;
 using Framework.Database;
 
-namespace Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+namespace Framework.AutomationCore.RootServiceProviderContainer;
 
 public static class  ContextEvaluatorExtensions
 {

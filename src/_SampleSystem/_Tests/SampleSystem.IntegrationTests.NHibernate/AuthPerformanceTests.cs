@@ -1,4 +1,4 @@
-﻿using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+﻿using Framework.AutomationCore.RootServiceProviderContainer;
 using Framework.BLL;
 using Framework.Core;
 

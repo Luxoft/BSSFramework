@@ -3,7 +3,7 @@ using Framework.Infrastructure.ContextEvaluator;
 
 using SecuritySystem.Credential;
 
-namespace Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
+namespace Framework.AutomationCore.RootServiceProviderContainer;
 
 public static class ContextEvaluatorWithMappingExtensions
 {

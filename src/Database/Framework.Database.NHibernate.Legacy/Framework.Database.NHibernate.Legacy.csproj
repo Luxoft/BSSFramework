@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ExtendedMetadata\Framework.ExtendedMetadata.Abstractions\Framework.ExtendedMetadata.Abstractions.csproj" />
     <ProjectReference Include="..\..\Validation\Framework.Validation.Domain\Framework.Validation.Domain.csproj" />
     <ProjectReference Include="..\Framework.Database.Legacy.Abstractions\Framework.Database.Legacy.Abstractions.csproj" />
     <ProjectReference Include="..\Framework.Database.NHibernate\Framework.Database.NHibernate.csproj" />

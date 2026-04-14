@@ -23,8 +23,6 @@
     <PackageVersion Include="IvAt.GenericQueryable.Abstractions" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.GenericQueryable.EntityFramework" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.GenericQueryable.NHibernate" Version="$(IvAt)" />
-    <PackageVersion Include="IvAt.GenericQueryable.Runtime" Version="$(IvAt)" />
-    <PackageVersion Include="IvAt.HierarchicalExpand.Runtime" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.OData" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.OData.Abstractions" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.OData.Domain" Version="$(IvAt)" />
@@ -37,7 +35,6 @@
     <PackageVersion Include="IvAt.SecuritySystem.Notification" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.Notification.Abstractions" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.Notification.Domain" Version="$(IvAt)" />
-    <PackageVersion Include="IvAt.SecuritySystem.Runtime" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.Testing" Version="$(IvAt)" />
     <PackageVersion Include="IvAt.SecuritySystem.VirtualPermission" Version="$(IvAt)" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="$(BssPlatform)" />

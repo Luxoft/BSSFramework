@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Framework.BLL.Validation</PackageId>
+    <PackageId>Luxoft.Framework.BLL.Validation</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

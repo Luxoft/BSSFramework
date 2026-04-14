@@ -1,11 +1,12 @@
 ﻿using GenericQueryable.Fetching;
 
-using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Filters;
 
 using Framework.BLL;
 
 using SampleSystem.Domain.Employee;
+using SampleSystem.Domain.Models.Change;
+using SampleSystem.Domain.Models.Integration;
 
 namespace SampleSystem.BLL;
 

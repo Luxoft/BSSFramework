@@ -7,7 +7,6 @@ using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
 using Framework.ExtendedMetadata;
 using Framework.ExtendedMetadata.Builder;
 using Framework.Projection;
-using Framework.Validation;
 using Framework.Validation.Attributes.Available;
 using Framework.Validation.Attributes.Available.Range;
 
@@ -27,6 +26,7 @@ using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.ForUpdate;
 using SampleSystem.Domain.HRDepartment;
 using SampleSystem.Domain.ManualProjections;
+using SampleSystem.Domain.Models.Filters._Base;
 using SampleSystem.Security;
 using SampleSystem.Validation;
 

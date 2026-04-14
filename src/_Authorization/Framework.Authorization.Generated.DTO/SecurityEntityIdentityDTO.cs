@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-
 using Framework.Application.Domain;
 
 namespace Framework.Authorization.Generated.DTO;

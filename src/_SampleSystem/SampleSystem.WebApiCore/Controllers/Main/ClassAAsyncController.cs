@@ -6,11 +6,10 @@ using GenericQueryable;
 using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
-
 using SampleSystem.BLL._Command.CreateClassA;
 using SampleSystem.Domain.TestForceAbstract;
 
-namespace SampleSystem.WebApiCore.Controllers;
+namespace SampleSystem.WebApiCore.Controllers.Main;
 
 [Route("api/[controller]/[action]")]
 [ApiController]

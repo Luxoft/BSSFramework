@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using SampleSystem.Domain.ExternalPrincipal;
+
 namespace SampleSystem.BLL
 {
     using GenericQueryable;
@@ -137,7 +139,7 @@ namespace SampleSystem.BLL
             {
                 return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetManagementUnitFluentMappingFetchRule(dtoType)))));
             }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Principal)))
+            else if ((typeof(TDomainObject) == typeof(Principal)))
             {
                 return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetPrincipalFetchRule(dtoType)))));
             }
@@ -915,23 +917,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Principal> TryGetPrincipalFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual GenericQueryable.Fetching.PropertyFetchRule<Principal> TryGetPrincipalFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Principal>.Empty;
+                return GenericQueryable.Fetching.FetchRule<Principal>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Principal>.Empty;
+                return GenericQueryable.Fetching.FetchRule<Principal>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Principal>.Empty;
+                return GenericQueryable.Fetching.FetchRule<Principal>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Principal>.Empty;
+                return GenericQueryable.Fetching.FetchRule<Principal>.Empty;
             }
             else
             {

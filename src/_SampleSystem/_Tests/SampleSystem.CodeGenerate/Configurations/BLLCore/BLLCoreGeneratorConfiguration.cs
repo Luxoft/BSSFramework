@@ -1,6 +1,8 @@
 ﻿using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 
-using SampleSystem.Domain;
+using SampleSystem.Domain.Models.Change._Base;
+using SampleSystem.Domain.Models.Filters._Base;
+using SampleSystem.Domain.Models.Integration._Base;
 
 namespace SampleSystem.CodeGenerate.Configurations.BLLCore;
 

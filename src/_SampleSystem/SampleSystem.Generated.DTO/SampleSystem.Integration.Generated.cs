@@ -3562,46 +3562,6 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCustomIntegrationSaveModel), "RichIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeCustomIntegrationSaveModelIntegrationRichDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCustomIntegrationSaveModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeCustomIntegrationSaveModel>
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeIntegrationRichDTO _savingObject;
-        
-        public EmployeeCustomIntegrationSaveModelIntegrationRichDTO()
-        {
-        }
-        
-        public EmployeeCustomIntegrationSaveModelIntegrationRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCustomIntegrationSaveModel domainObject)
-        {
-            mappingService.MapEmployeeCustomIntegrationSaveModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeIntegrationRichDTO SavingObject
-        {
-            get
-            {
-                return this._savingObject;
-            }
-            set
-            {
-                this._savingObject = value;
-            }
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCustomIntegrationSaveModel domainObject)
-        {
-            mappingService.MapEmployeeCustomIntegrationSaveModel(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.EmployeeCustomIntegrationSaveModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToEmployeeCustomIntegrationSaveModel(this);
-        }
-    }
-    
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment.HRDepartment), "SimpleIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class HRDepartmentIntegrationSimpleDTO : Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.HRDepartment.HRDepartment>, Framework.Application.Domain.IIdentityObject<System.Guid>
@@ -3866,61 +3826,6 @@ namespace SampleSystem.Generated.DTO
         public SampleSystem.Domain.HRDepartment.HRDepartment ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToHRDepartment(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel), "RichIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel>
-    {
-        
-        private string _customName;
-        
-        private SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationSimpleDTO _savingObject;
-        
-        public IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO()
-        {
-        }
-        
-        public IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject)
-        {
-            mappingService.MapIntegrationVersionContainer1CustomIntegrationSaveModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CustomName
-        {
-            get
-            {
-                return this._customName;
-            }
-            set
-            {
-                this._customName = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationSimpleDTO SavingObject
-        {
-            get
-            {
-                return this._savingObject;
-            }
-            set
-            {
-                this._savingObject = value;
-            }
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject)
-        {
-            mappingService.MapIntegrationVersionContainer1CustomIntegrationSaveModel(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToIntegrationVersionContainer1CustomIntegrationSaveModel(this);
         }
     }
     
@@ -4417,6 +4322,101 @@ namespace SampleSystem.Generated.DTO
         public SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToIntegrationVersionContainer2(this, allowCreate);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel), "RichIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeCustomIntegrationSaveModelIntegrationRichDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel>
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeIntegrationRichDTO _savingObject;
+        
+        public EmployeeCustomIntegrationSaveModelIntegrationRichDTO()
+        {
+        }
+        
+        public EmployeeCustomIntegrationSaveModelIntegrationRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel domainObject)
+        {
+            mappingService.MapEmployeeCustomIntegrationSaveModel(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeIntegrationRichDTO SavingObject
+        {
+            get
+            {
+                return this._savingObject;
+            }
+            set
+            {
+                this._savingObject = value;
+            }
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel domainObject)
+        {
+            mappingService.MapEmployeeCustomIntegrationSaveModel(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToEmployeeCustomIntegrationSaveModel(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel), "RichIntegrationDTO", Framework.BLL.Domain.Serialization.DTORole.Integration)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel>
+    {
+        
+        private string _customName;
+        
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationSimpleDTO _savingObject;
+        
+        public IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO()
+        {
+        }
+        
+        public IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject)
+        {
+            mappingService.MapIntegrationVersionContainer1CustomIntegrationSaveModel(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CustomName
+        {
+            get
+            {
+                return this._customName;
+            }
+            set
+            {
+                this._customName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationSimpleDTO SavingObject
+        {
+            get
+            {
+                return this._savingObject;
+            }
+            set
+            {
+                this._savingObject = value;
+            }
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject)
+        {
+            mappingService.MapIntegrationVersionContainer1CustomIntegrationSaveModel(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToIntegrationVersionContainer1CustomIntegrationSaveModel(this);
         }
     }
     

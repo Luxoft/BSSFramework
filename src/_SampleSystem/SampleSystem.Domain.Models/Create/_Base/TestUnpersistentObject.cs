@@ -1,6 +1,6 @@
-using SampleSystem.Domain.BU;
+﻿using SampleSystem.Domain.BU;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Models.Create._Base;
 
 public class TestUnpersistentObject : DomainObjectBase
 {

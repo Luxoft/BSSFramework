@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using SampleSystem.Domain.ExternalPrincipal;
+
 namespace SampleSystem.Generated.DTO
 {
     
@@ -29,8 +31,6 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitRootFilterModelSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitRootFilterModelRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AddressSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AddressRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitTypeSaveEventDTO))]
@@ -99,18 +99,6 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestExceptObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRestrictionObjectSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRestrictionObjectRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeComplexChangeModelSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeComplexChangeModelRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeCustomEventModelSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeCustomEventModelRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailChangeModelSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeRootFilterModelSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeRootFilterModelRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.Coefficient1676SaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.Coefficient1676RemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.Location1676SaveEventDTO))]
@@ -127,14 +115,22 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.HRDepartmentEmployeePositionRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IntegrationVersionContainer1SaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IntegrationVersionContainer1RemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IntegrationVersionContainer2SaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IntegrationVersionContainer2RemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeComplexChangeModelSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeComplexChangeModelRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailChangeModelSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestUnpersistentObjectSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestUnpersistentObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.DateModelSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.DateModelRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeCustomEventModelSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeCustomEventModelRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitProgramClassFilterModelSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitProgramClassFilterModelRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeFilterModelSaveEventDTO))]
@@ -143,8 +139,18 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.GuidBasedFilterModelRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.HierarchicalBusinessUnitFilterModelSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.HierarchicalBusinessUnitFilterModelRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestEmployeeFilterSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestEmployeeFilterRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitRootFilterModelSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitRootFilterModelRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeRootFilterModelSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeRootFilterModelRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.SingleEmployeeFilterModelSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.SingleEmployeeFilterModelRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ManagementUnitSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ManagementUnitRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ManagementUnitAncestorLinkSaveEventDTO))]
@@ -191,8 +197,6 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPerformanceObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestEmployeeFilterSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestEmployeeFilterRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ClassASaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ClassARemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ClassAChildSaveEventDTO))]
@@ -211,8 +215,6 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRelativeEmployeeObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestUnpersistentObjectSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestUnpersistentObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ChildEntitySaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ChildEntityRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ParentEntitySaveEventDTO))]
@@ -3097,156 +3099,6 @@ namespace SampleSystem.Generated.DTO
             set
             {
                 this._version = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitRootFilterModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class BusinessUnitRootFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO businessUnitRootFilterModel;
-        
-        public BusinessUnitRootFilterModelSaveEventDTO()
-        {
-        }
-        
-        public BusinessUnitRootFilterModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitRootFilterModel domainObject)
-        {
-            this.businessUnitRootFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO BusinessUnitRootFilterModel
-        {
-            get
-            {
-                return this.businessUnitRootFilterModel;
-            }
-            set
-            {
-                this.businessUnitRootFilterModel = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitRootFilterModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class BusinessUnitRootFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO businessUnitRootFilterModel;
-        
-        public BusinessUnitRootFilterModelRemoveEventDTO()
-        {
-        }
-        
-        public BusinessUnitRootFilterModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitRootFilterModel domainObject)
-        {
-            this.businessUnitRootFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO BusinessUnitRootFilterModel
-        {
-            get
-            {
-                return this.businessUnitRootFilterModel;
-            }
-            set
-            {
-                this.businessUnitRootFilterModel = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitRootFilterModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class BusinessUnitRootFilterModelEventRichDTO
-    {
-        
-        private System.DateTime[] _arrayDays;
-        
-        private Framework.Core.Period[] _arrayPeriods;
-        
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
-        
-        private System.Collections.Generic.List<System.DateTime> _listDays;
-        
-        private System.Collections.Generic.List<Framework.Core.Period> _listPeriods;
-        
-        public BusinessUnitRootFilterModelEventRichDTO()
-        {
-        }
-        
-        public BusinessUnitRootFilterModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitRootFilterModel domainObject)
-        {
-            mappingService.MapBusinessUnitRootFilterModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime[] ArrayDays
-        {
-            get
-            {
-                return this._arrayDays;
-            }
-            set
-            {
-                this._arrayDays = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period[] ArrayPeriods
-        {
-            get
-            {
-                return this._arrayPeriods;
-            }
-            set
-            {
-                this._arrayPeriods = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee
-        {
-            get
-            {
-                return this._employee;
-            }
-            set
-            {
-                this._employee = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<System.DateTime> ListDays
-        {
-            get
-            {
-                return this._listDays;
-            }
-            set
-            {
-                this._listDays = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Framework.Core.Period> ListPeriods
-        {
-            get
-            {
-                return this._listPeriods;
-            }
-            set
-            {
-                this._listPeriods = value;
             }
         }
     }
@@ -14756,606 +14608,6 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeComplexChangeModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeComplexChangeModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO employeeComplexChangeModel;
-        
-        public EmployeeComplexChangeModelSaveEventDTO()
-        {
-        }
-        
-        public EmployeeComplexChangeModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeComplexChangeModel domainObject)
-        {
-            this.employeeComplexChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO EmployeeComplexChangeModel
-        {
-            get
-            {
-                return this.employeeComplexChangeModel;
-            }
-            set
-            {
-                this.employeeComplexChangeModel = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeComplexChangeModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeComplexChangeModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO employeeComplexChangeModel;
-        
-        public EmployeeComplexChangeModelRemoveEventDTO()
-        {
-        }
-        
-        public EmployeeComplexChangeModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeComplexChangeModel domainObject)
-        {
-            this.employeeComplexChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO EmployeeComplexChangeModel
-        {
-            get
-            {
-                return this.employeeComplexChangeModel;
-            }
-            set
-            {
-                this.employeeComplexChangeModel = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeComplexChangeModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeComplexChangeModelEventRichDTO
-    {
-        
-        private string _email;
-        
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _primaryChangingObject;
-        
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> _secondaryChangingObjects;
-        
-        public EmployeeComplexChangeModelEventRichDTO()
-        {
-        }
-        
-        public EmployeeComplexChangeModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeComplexChangeModel domainObject)
-        {
-            mappingService.MapEmployeeComplexChangeModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email
-        {
-            get
-            {
-                return this._email;
-            }
-            set
-            {
-                this._email = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO PrimaryChangingObject
-        {
-            get
-            {
-                return this._primaryChangingObject;
-            }
-            set
-            {
-                this._primaryChangingObject = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> SecondaryChangingObjects
-        {
-            get
-            {
-                return this._secondaryChangingObjects;
-            }
-            set
-            {
-                this._secondaryChangingObjects = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCustomEventModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeCustomEventModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO employeeCustomEventModel;
-        
-        public EmployeeCustomEventModelSaveEventDTO()
-        {
-        }
-        
-        public EmployeeCustomEventModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCustomEventModel domainObject)
-        {
-            this.employeeCustomEventModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO EmployeeCustomEventModel
-        {
-            get
-            {
-                return this.employeeCustomEventModel;
-            }
-            set
-            {
-                this.employeeCustomEventModel = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCustomEventModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeCustomEventModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO employeeCustomEventModel;
-        
-        public EmployeeCustomEventModelRemoveEventDTO()
-        {
-        }
-        
-        public EmployeeCustomEventModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCustomEventModel domainObject)
-        {
-            this.employeeCustomEventModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO EmployeeCustomEventModel
-        {
-            get
-            {
-                return this.employeeCustomEventModel;
-            }
-            set
-            {
-                this.employeeCustomEventModel = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCustomEventModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeCustomEventModelEventRichDTO
-    {
-        
-        private System.Guid _id;
-        
-        private string _login;
-        
-        public EmployeeCustomEventModelEventRichDTO()
-        {
-        }
-        
-        public EmployeeCustomEventModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCustomEventModel domainObject)
-        {
-            mappingService.MapEmployeeCustomEventModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Login
-        {
-            get
-            {
-                return this._login;
-            }
-            set
-            {
-                this._login = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCustomIntegrationSaveModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeCustomIntegrationSaveModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO employeeCustomIntegrationSaveModel;
-        
-        public EmployeeCustomIntegrationSaveModelSaveEventDTO()
-        {
-        }
-        
-        public EmployeeCustomIntegrationSaveModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCustomIntegrationSaveModel domainObject)
-        {
-            this.employeeCustomIntegrationSaveModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO EmployeeCustomIntegrationSaveModel
-        {
-            get
-            {
-                return this.employeeCustomIntegrationSaveModel;
-            }
-            set
-            {
-                this.employeeCustomIntegrationSaveModel = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCustomIntegrationSaveModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeCustomIntegrationSaveModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO employeeCustomIntegrationSaveModel;
-        
-        public EmployeeCustomIntegrationSaveModelRemoveEventDTO()
-        {
-        }
-        
-        public EmployeeCustomIntegrationSaveModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCustomIntegrationSaveModel domainObject)
-        {
-            this.employeeCustomIntegrationSaveModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO EmployeeCustomIntegrationSaveModel
-        {
-            get
-            {
-                return this.employeeCustomIntegrationSaveModel;
-            }
-            set
-            {
-                this.employeeCustomIntegrationSaveModel = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCustomIntegrationSaveModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeCustomIntegrationSaveModelEventRichDTO
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeEventRichDTO _savingObject;
-        
-        public EmployeeCustomIntegrationSaveModelEventRichDTO()
-        {
-        }
-        
-        public EmployeeCustomIntegrationSaveModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeCustomIntegrationSaveModel domainObject)
-        {
-            mappingService.MapEmployeeCustomIntegrationSaveModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventRichDTO SavingObject
-        {
-            get
-            {
-                return this._savingObject;
-            }
-            set
-            {
-                this._savingObject = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailChangeModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeEmailChangeModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO employeeEmailChangeModel;
-        
-        public EmployeeEmailChangeModelSaveEventDTO()
-        {
-        }
-        
-        public EmployeeEmailChangeModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailChangeModel domainObject)
-        {
-            this.employeeEmailChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO EmployeeEmailChangeModel
-        {
-            get
-            {
-                return this.employeeEmailChangeModel;
-            }
-            set
-            {
-                this.employeeEmailChangeModel = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailChangeModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeEmailChangeModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO employeeEmailChangeModel;
-        
-        public EmployeeEmailChangeModelRemoveEventDTO()
-        {
-        }
-        
-        public EmployeeEmailChangeModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailChangeModel domainObject)
-        {
-            this.employeeEmailChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO EmployeeEmailChangeModel
-        {
-            get
-            {
-                return this.employeeEmailChangeModel;
-            }
-            set
-            {
-                this.employeeEmailChangeModel = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailChangeModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeEmailChangeModelEventRichDTO
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _changingObject;
-        
-        private string _email;
-        
-        public EmployeeEmailChangeModelEventRichDTO()
-        {
-        }
-        
-        public EmployeeEmailChangeModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailChangeModel domainObject)
-        {
-            mappingService.MapEmployeeEmailChangeModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO ChangingObject
-        {
-            get
-            {
-                return this._changingObject;
-            }
-            set
-            {
-                this._changingObject = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email
-        {
-            get
-            {
-                return this._email;
-            }
-            set
-            {
-                this._email = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailMassChangeModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeEmailMassChangeModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO employeeEmailMassChangeModel;
-        
-        public EmployeeEmailMassChangeModelSaveEventDTO()
-        {
-        }
-        
-        public EmployeeEmailMassChangeModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject)
-        {
-            this.employeeEmailMassChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO EmployeeEmailMassChangeModel
-        {
-            get
-            {
-                return this.employeeEmailMassChangeModel;
-            }
-            set
-            {
-                this.employeeEmailMassChangeModel = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailMassChangeModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeEmailMassChangeModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO employeeEmailMassChangeModel;
-        
-        public EmployeeEmailMassChangeModelRemoveEventDTO()
-        {
-        }
-        
-        public EmployeeEmailMassChangeModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject)
-        {
-            this.employeeEmailMassChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO EmployeeEmailMassChangeModel
-        {
-            get
-            {
-                return this.employeeEmailMassChangeModel;
-            }
-            set
-            {
-                this.employeeEmailMassChangeModel = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailMassChangeModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeEmailMassChangeModelEventRichDTO
-    {
-        
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> _changingObjects;
-        
-        private string _email;
-        
-        public EmployeeEmailMassChangeModelEventRichDTO()
-        {
-        }
-        
-        public EmployeeEmailMassChangeModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject)
-        {
-            mappingService.MapEmployeeEmailMassChangeModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> ChangingObjects
-        {
-            get
-            {
-                return this._changingObjects;
-            }
-            set
-            {
-                this._changingObjects = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email
-        {
-            get
-            {
-                return this._email;
-            }
-            set
-            {
-                this._email = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRootFilterModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeRootFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO employeeRootFilterModel;
-        
-        public EmployeeRootFilterModelSaveEventDTO()
-        {
-        }
-        
-        public EmployeeRootFilterModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRootFilterModel domainObject)
-        {
-            this.employeeRootFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO EmployeeRootFilterModel
-        {
-            get
-            {
-                return this.employeeRootFilterModel;
-            }
-            set
-            {
-                this.employeeRootFilterModel = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRootFilterModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeRootFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO employeeRootFilterModel;
-        
-        public EmployeeRootFilterModelRemoveEventDTO()
-        {
-        }
-        
-        public EmployeeRootFilterModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRootFilterModel domainObject)
-        {
-            this.employeeRootFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO EmployeeRootFilterModel
-        {
-            get
-            {
-                return this.employeeRootFilterModel;
-            }
-            set
-            {
-                this.employeeRootFilterModel = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRootFilterModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeRootFilterModelEventRichDTO
-    {
-        
-        public EmployeeRootFilterModelEventRichDTO()
-        {
-        }
-        
-        public EmployeeRootFilterModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRootFilterModel domainObject)
-        {
-            mappingService.MapEmployeeRootFilterModel(domainObject, this);
-        }
-    }
-    
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EnversBug1676.Coefficient1676), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class Coefficient1676SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
@@ -17891,111 +17143,6 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class IntegrationVersionContainer1CustomIntegrationSaveModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO integrationVersionContainer1CustomIntegrationSaveModel;
-        
-        public IntegrationVersionContainer1CustomIntegrationSaveModelSaveEventDTO()
-        {
-        }
-        
-        public IntegrationVersionContainer1CustomIntegrationSaveModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject)
-        {
-            this.integrationVersionContainer1CustomIntegrationSaveModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO IntegrationVersionContainer1CustomIntegrationSaveModel
-        {
-            get
-            {
-                return this.integrationVersionContainer1CustomIntegrationSaveModel;
-            }
-            set
-            {
-                this.integrationVersionContainer1CustomIntegrationSaveModel = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class IntegrationVersionContainer1CustomIntegrationSaveModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO integrationVersionContainer1CustomIntegrationSaveModel;
-        
-        public IntegrationVersionContainer1CustomIntegrationSaveModelRemoveEventDTO()
-        {
-        }
-        
-        public IntegrationVersionContainer1CustomIntegrationSaveModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject)
-        {
-            this.integrationVersionContainer1CustomIntegrationSaveModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO IntegrationVersionContainer1CustomIntegrationSaveModel
-        {
-            get
-            {
-                return this.integrationVersionContainer1CustomIntegrationSaveModel;
-            }
-            set
-            {
-                this.integrationVersionContainer1CustomIntegrationSaveModel = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO
-    {
-        
-        private string _customName;
-        
-        private SampleSystem.Generated.DTO.IntegrationVersionContainer1EventSimpleDTO _savingObject;
-        
-        public IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO()
-        {
-        }
-        
-        public IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject)
-        {
-            mappingService.MapIntegrationVersionContainer1CustomIntegrationSaveModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CustomName
-        {
-            get
-            {
-                return this._customName;
-            }
-            set
-            {
-                this._customName = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.IntegrationVersionContainer1EventSimpleDTO SavingObject
-        {
-            get
-            {
-                return this._savingObject;
-            }
-            set
-            {
-                this._savingObject = value;
-            }
-        }
-    }
-    
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class IntegrationVersionContainer1SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
@@ -18521,6 +17668,456 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeComplexChangeModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO employeeComplexChangeModel;
+        
+        public EmployeeComplexChangeModelSaveEventDTO()
+        {
+        }
+        
+        public EmployeeComplexChangeModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel domainObject)
+        {
+            this.employeeComplexChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO EmployeeComplexChangeModel
+        {
+            get
+            {
+                return this.employeeComplexChangeModel;
+            }
+            set
+            {
+                this.employeeComplexChangeModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeComplexChangeModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO employeeComplexChangeModel;
+        
+        public EmployeeComplexChangeModelRemoveEventDTO()
+        {
+        }
+        
+        public EmployeeComplexChangeModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel domainObject)
+        {
+            this.employeeComplexChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO EmployeeComplexChangeModel
+        {
+            get
+            {
+                return this.employeeComplexChangeModel;
+            }
+            set
+            {
+                this.employeeComplexChangeModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeComplexChangeModelEventRichDTO
+    {
+        
+        private string _email;
+        
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _primaryChangingObject;
+        
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> _secondaryChangingObjects;
+        
+        public EmployeeComplexChangeModelEventRichDTO()
+        {
+        }
+        
+        public EmployeeComplexChangeModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel domainObject)
+        {
+            mappingService.MapEmployeeComplexChangeModel(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO PrimaryChangingObject
+        {
+            get
+            {
+                return this._primaryChangingObject;
+            }
+            set
+            {
+                this._primaryChangingObject = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> SecondaryChangingObjects
+        {
+            get
+            {
+                return this._secondaryChangingObjects;
+            }
+            set
+            {
+                this._secondaryChangingObjects = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeEmailChangeModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO employeeEmailChangeModel;
+        
+        public EmployeeEmailChangeModelSaveEventDTO()
+        {
+        }
+        
+        public EmployeeEmailChangeModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject)
+        {
+            this.employeeEmailChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO EmployeeEmailChangeModel
+        {
+            get
+            {
+                return this.employeeEmailChangeModel;
+            }
+            set
+            {
+                this.employeeEmailChangeModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeEmailChangeModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO employeeEmailChangeModel;
+        
+        public EmployeeEmailChangeModelRemoveEventDTO()
+        {
+        }
+        
+        public EmployeeEmailChangeModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject)
+        {
+            this.employeeEmailChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO EmployeeEmailChangeModel
+        {
+            get
+            {
+                return this.employeeEmailChangeModel;
+            }
+            set
+            {
+                this.employeeEmailChangeModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeEmailChangeModelEventRichDTO
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _changingObject;
+        
+        private string _email;
+        
+        public EmployeeEmailChangeModelEventRichDTO()
+        {
+        }
+        
+        public EmployeeEmailChangeModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject)
+        {
+            mappingService.MapEmployeeEmailChangeModel(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO ChangingObject
+        {
+            get
+            {
+                return this._changingObject;
+            }
+            set
+            {
+                this._changingObject = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeEmailMassChangeModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO employeeEmailMassChangeModel;
+        
+        public EmployeeEmailMassChangeModelSaveEventDTO()
+        {
+        }
+        
+        public EmployeeEmailMassChangeModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject)
+        {
+            this.employeeEmailMassChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO EmployeeEmailMassChangeModel
+        {
+            get
+            {
+                return this.employeeEmailMassChangeModel;
+            }
+            set
+            {
+                this.employeeEmailMassChangeModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeEmailMassChangeModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO employeeEmailMassChangeModel;
+        
+        public EmployeeEmailMassChangeModelRemoveEventDTO()
+        {
+        }
+        
+        public EmployeeEmailMassChangeModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject)
+        {
+            this.employeeEmailMassChangeModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO EmployeeEmailMassChangeModel
+        {
+            get
+            {
+                return this.employeeEmailMassChangeModel;
+            }
+            set
+            {
+                this.employeeEmailMassChangeModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeEmailMassChangeModelEventRichDTO
+    {
+        
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> _changingObjects;
+        
+        private string _email;
+        
+        public EmployeeEmailMassChangeModelEventRichDTO()
+        {
+        }
+        
+        public EmployeeEmailMassChangeModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject)
+        {
+            mappingService.MapEmployeeEmailMassChangeModel(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> ChangingObjects
+        {
+            get
+            {
+                return this._changingObjects;
+            }
+            set
+            {
+                this._changingObjects = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TestUnpersistentObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO testUnpersistentObject;
+        
+        public TestUnpersistentObjectSaveEventDTO()
+        {
+        }
+        
+        public TestUnpersistentObjectSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject domainObject)
+        {
+            this.testUnpersistentObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO TestUnpersistentObject
+        {
+            get
+            {
+                return this.testUnpersistentObject;
+            }
+            set
+            {
+                this.testUnpersistentObject = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TestUnpersistentObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO testUnpersistentObject;
+        
+        public TestUnpersistentObjectRemoveEventDTO()
+        {
+        }
+        
+        public TestUnpersistentObjectRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject domainObject)
+        {
+            this.testUnpersistentObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO TestUnpersistentObject
+        {
+            get
+            {
+                return this.testUnpersistentObject;
+            }
+            set
+            {
+                this.testUnpersistentObject = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TestUnpersistentObjectEventRichDTO
+    {
+        
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
+        
+        private string _value1;
+        
+        private int _value2;
+        
+        public TestUnpersistentObjectEventRichDTO()
+        {
+        }
+        
+        public TestUnpersistentObjectEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject domainObject)
+        {
+            mappingService.MapTestUnpersistentObject(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Value1
+        {
+            get
+            {
+                return this._value1;
+            }
+            set
+            {
+                this._value1 = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Value2
+        {
+            get
+            {
+                return this._value2;
+            }
+            set
+            {
+                this._value2 = value;
+            }
+        }
+    }
+    
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Custom.DateModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class DateModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
@@ -18637,6 +18234,111 @@ namespace SampleSystem.Generated.DTO
             set
             {
                 this._year = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Event.EmployeeCustomEventModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeCustomEventModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO employeeCustomEventModel;
+        
+        public EmployeeCustomEventModelSaveEventDTO()
+        {
+        }
+        
+        public EmployeeCustomEventModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Event.EmployeeCustomEventModel domainObject)
+        {
+            this.employeeCustomEventModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO EmployeeCustomEventModel
+        {
+            get
+            {
+                return this.employeeCustomEventModel;
+            }
+            set
+            {
+                this.employeeCustomEventModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Event.EmployeeCustomEventModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeCustomEventModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO employeeCustomEventModel;
+        
+        public EmployeeCustomEventModelRemoveEventDTO()
+        {
+        }
+        
+        public EmployeeCustomEventModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Event.EmployeeCustomEventModel domainObject)
+        {
+            this.employeeCustomEventModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO EmployeeCustomEventModel
+        {
+            get
+            {
+                return this.employeeCustomEventModel;
+            }
+            set
+            {
+                this.employeeCustomEventModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Event.EmployeeCustomEventModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeCustomEventModelEventRichDTO
+    {
+        
+        private System.Guid _id;
+        
+        private string _login;
+        
+        public EmployeeCustomEventModelEventRichDTO()
+        {
+        }
+        
+        public EmployeeCustomEventModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Event.EmployeeCustomEventModel domainObject)
+        {
+            mappingService.MapEmployeeCustomEventModel(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Login
+        {
+            get
+            {
+                return this._login;
+            }
+            set
+            {
+                this._login = value;
             }
         }
     }
@@ -19031,6 +18733,351 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TestEmployeeFilterSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO testEmployeeFilter;
+        
+        public TestEmployeeFilterSaveEventDTO()
+        {
+        }
+        
+        public TestEmployeeFilterSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter domainObject)
+        {
+            this.testEmployeeFilter = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO TestEmployeeFilter
+        {
+            get
+            {
+                return this.testEmployeeFilter;
+            }
+            set
+            {
+                this.testEmployeeFilter = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TestEmployeeFilterRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO testEmployeeFilter;
+        
+        public TestEmployeeFilterRemoveEventDTO()
+        {
+        }
+        
+        public TestEmployeeFilterRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter domainObject)
+        {
+            this.testEmployeeFilter = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO TestEmployeeFilter
+        {
+            get
+            {
+                return this.testEmployeeFilter;
+            }
+            set
+            {
+                this.testEmployeeFilter = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TestEmployeeFilterEventRichDTO
+    {
+        
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
+        
+        private SampleSystem.Domain.Models.Filters.Projection.SampleStruct _sampleStruct;
+        
+        private bool _testValue;
+        
+        public TestEmployeeFilterEventRichDTO()
+        {
+        }
+        
+        public TestEmployeeFilterEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter domainObject)
+        {
+            mappingService.MapTestEmployeeFilter(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.Models.Filters.Projection.SampleStruct SampleStruct
+        {
+            get
+            {
+                return this._sampleStruct;
+            }
+            set
+            {
+                this._sampleStruct = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool TestValue
+        {
+            get
+            {
+                return this._testValue;
+            }
+            set
+            {
+                this._testValue = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class BusinessUnitRootFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO businessUnitRootFilterModel;
+        
+        public BusinessUnitRootFilterModelSaveEventDTO()
+        {
+        }
+        
+        public BusinessUnitRootFilterModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel domainObject)
+        {
+            this.businessUnitRootFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO BusinessUnitRootFilterModel
+        {
+            get
+            {
+                return this.businessUnitRootFilterModel;
+            }
+            set
+            {
+                this.businessUnitRootFilterModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class BusinessUnitRootFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO businessUnitRootFilterModel;
+        
+        public BusinessUnitRootFilterModelRemoveEventDTO()
+        {
+        }
+        
+        public BusinessUnitRootFilterModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel domainObject)
+        {
+            this.businessUnitRootFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO BusinessUnitRootFilterModel
+        {
+            get
+            {
+                return this.businessUnitRootFilterModel;
+            }
+            set
+            {
+                this.businessUnitRootFilterModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class BusinessUnitRootFilterModelEventRichDTO
+    {
+        
+        private System.DateTime[] _arrayDays;
+        
+        private Framework.Core.Period[] _arrayPeriods;
+        
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
+        
+        private System.Collections.Generic.List<System.DateTime> _listDays;
+        
+        private System.Collections.Generic.List<Framework.Core.Period> _listPeriods;
+        
+        public BusinessUnitRootFilterModelEventRichDTO()
+        {
+        }
+        
+        public BusinessUnitRootFilterModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel domainObject)
+        {
+            mappingService.MapBusinessUnitRootFilterModel(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime[] ArrayDays
+        {
+            get
+            {
+                return this._arrayDays;
+            }
+            set
+            {
+                this._arrayDays = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period[] ArrayPeriods
+        {
+            get
+            {
+                return this._arrayPeriods;
+            }
+            set
+            {
+                this._arrayPeriods = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<System.DateTime> ListDays
+        {
+            get
+            {
+                return this._listDays;
+            }
+            set
+            {
+                this._listDays = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Framework.Core.Period> ListPeriods
+        {
+            get
+            {
+                return this._listPeriods;
+            }
+            set
+            {
+                this._listPeriods = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeRootFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO employeeRootFilterModel;
+        
+        public EmployeeRootFilterModelSaveEventDTO()
+        {
+        }
+        
+        public EmployeeRootFilterModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel domainObject)
+        {
+            this.employeeRootFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO EmployeeRootFilterModel
+        {
+            get
+            {
+                return this.employeeRootFilterModel;
+            }
+            set
+            {
+                this.employeeRootFilterModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeRootFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO employeeRootFilterModel;
+        
+        public EmployeeRootFilterModelRemoveEventDTO()
+        {
+        }
+        
+        public EmployeeRootFilterModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel domainObject)
+        {
+            this.employeeRootFilterModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO EmployeeRootFilterModel
+        {
+            get
+            {
+                return this.employeeRootFilterModel;
+            }
+            set
+            {
+                this.employeeRootFilterModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeRootFilterModelEventRichDTO
+    {
+        
+        public EmployeeRootFilterModelEventRichDTO()
+        {
+        }
+        
+        public EmployeeRootFilterModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel domainObject)
+        {
+            mappingService.MapEmployeeRootFilterModel(domainObject, this);
+        }
+    }
+    
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class SingleEmployeeFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
@@ -19103,6 +19150,201 @@ namespace SampleSystem.Generated.DTO
         public SingleEmployeeFilterModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel domainObject)
         {
             mappingService.MapSingleEmployeeFilterModel(domainObject, this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeCustomIntegrationSaveModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO employeeCustomIntegrationSaveModel;
+        
+        public EmployeeCustomIntegrationSaveModelSaveEventDTO()
+        {
+        }
+        
+        public EmployeeCustomIntegrationSaveModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel domainObject)
+        {
+            this.employeeCustomIntegrationSaveModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO EmployeeCustomIntegrationSaveModel
+        {
+            get
+            {
+                return this.employeeCustomIntegrationSaveModel;
+            }
+            set
+            {
+                this.employeeCustomIntegrationSaveModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeCustomIntegrationSaveModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO employeeCustomIntegrationSaveModel;
+        
+        public EmployeeCustomIntegrationSaveModelRemoveEventDTO()
+        {
+        }
+        
+        public EmployeeCustomIntegrationSaveModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel domainObject)
+        {
+            this.employeeCustomIntegrationSaveModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO EmployeeCustomIntegrationSaveModel
+        {
+            get
+            {
+                return this.employeeCustomIntegrationSaveModel;
+            }
+            set
+            {
+                this.employeeCustomIntegrationSaveModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class EmployeeCustomIntegrationSaveModelEventRichDTO
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeEventRichDTO _savingObject;
+        
+        public EmployeeCustomIntegrationSaveModelEventRichDTO()
+        {
+        }
+        
+        public EmployeeCustomIntegrationSaveModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel domainObject)
+        {
+            mappingService.MapEmployeeCustomIntegrationSaveModel(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventRichDTO SavingObject
+        {
+            get
+            {
+                return this._savingObject;
+            }
+            set
+            {
+                this._savingObject = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class IntegrationVersionContainer1CustomIntegrationSaveModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO integrationVersionContainer1CustomIntegrationSaveModel;
+        
+        public IntegrationVersionContainer1CustomIntegrationSaveModelSaveEventDTO()
+        {
+        }
+        
+        public IntegrationVersionContainer1CustomIntegrationSaveModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject)
+        {
+            this.integrationVersionContainer1CustomIntegrationSaveModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO IntegrationVersionContainer1CustomIntegrationSaveModel
+        {
+            get
+            {
+                return this.integrationVersionContainer1CustomIntegrationSaveModel;
+            }
+            set
+            {
+                this.integrationVersionContainer1CustomIntegrationSaveModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class IntegrationVersionContainer1CustomIntegrationSaveModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO integrationVersionContainer1CustomIntegrationSaveModel;
+        
+        public IntegrationVersionContainer1CustomIntegrationSaveModelRemoveEventDTO()
+        {
+        }
+        
+        public IntegrationVersionContainer1CustomIntegrationSaveModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject)
+        {
+            this.integrationVersionContainer1CustomIntegrationSaveModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO IntegrationVersionContainer1CustomIntegrationSaveModel
+        {
+            get
+            {
+                return this.integrationVersionContainer1CustomIntegrationSaveModel;
+            }
+            set
+            {
+                this.integrationVersionContainer1CustomIntegrationSaveModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO
+    {
+        
+        private string _customName;
+        
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer1EventSimpleDTO _savingObject;
+        
+        public IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO()
+        {
+        }
+        
+        public IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject)
+        {
+            mappingService.MapIntegrationVersionContainer1CustomIntegrationSaveModel(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CustomName
+        {
+            get
+            {
+                return this._customName;
+            }
+            set
+            {
+                this._customName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.IntegrationVersionContainer1EventSimpleDTO SavingObject
+        {
+            get
+            {
+                return this._savingObject;
+            }
+            set
+            {
+                this._savingObject = value;
+            }
         }
     }
     
@@ -21461,7 +21703,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Principal), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Principal), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class PrincipalSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
@@ -21472,7 +21714,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public PrincipalSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Principal domainObject)
+        public PrincipalSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, Principal domainObject)
         {
             this.principal = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
         }
@@ -21491,7 +21733,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Principal), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Principal), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class PrincipalRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
@@ -21502,7 +21744,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public PrincipalRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Principal domainObject)
+        public PrincipalRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, Principal domainObject)
         {
             this.principal = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
         }
@@ -21521,7 +21763,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Principal), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Principal), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class PrincipalEventRichDTO
     {
@@ -21546,7 +21788,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public PrincipalEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Principal domainObject)
+        public PrincipalEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, Principal domainObject)
         {
             mappingService.MapPrincipal(domainObject, this);
         }
@@ -25076,126 +25318,6 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestEmployeeFilter), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class TestEmployeeFilterSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO testEmployeeFilter;
-        
-        public TestEmployeeFilterSaveEventDTO()
-        {
-        }
-        
-        public TestEmployeeFilterSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestEmployeeFilter domainObject)
-        {
-            this.testEmployeeFilter = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO TestEmployeeFilter
-        {
-            get
-            {
-                return this.testEmployeeFilter;
-            }
-            set
-            {
-                this.testEmployeeFilter = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestEmployeeFilter), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class TestEmployeeFilterRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO testEmployeeFilter;
-        
-        public TestEmployeeFilterRemoveEventDTO()
-        {
-        }
-        
-        public TestEmployeeFilterRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestEmployeeFilter domainObject)
-        {
-            this.testEmployeeFilter = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO TestEmployeeFilter
-        {
-            get
-            {
-                return this.testEmployeeFilter;
-            }
-            set
-            {
-                this.testEmployeeFilter = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestEmployeeFilter), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class TestEmployeeFilterEventRichDTO
-    {
-        
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
-        
-        private SampleSystem.Domain.SampleStruct _sampleStruct;
-        
-        private bool _testValue;
-        
-        public TestEmployeeFilterEventRichDTO()
-        {
-        }
-        
-        public TestEmployeeFilterEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestEmployeeFilter domainObject)
-        {
-            mappingService.MapTestEmployeeFilter(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
-        {
-            get
-            {
-                return this._businessUnit;
-            }
-            set
-            {
-                this._businessUnit = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.SampleStruct SampleStruct
-        {
-            get
-            {
-                return this._sampleStruct;
-            }
-            set
-            {
-                this._sampleStruct = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool TestValue
-        {
-            get
-            {
-                return this._testValue;
-            }
-            set
-            {
-                this._testValue = value;
-            }
-        }
-    }
-    
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestForceAbstract.ClassA), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class ClassASaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
@@ -26827,126 +26949,6 @@ namespace SampleSystem.Generated.DTO
             set
             {
                 this._version = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestUnpersistentObject), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class TestUnpersistentObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO testUnpersistentObject;
-        
-        public TestUnpersistentObjectSaveEventDTO()
-        {
-        }
-        
-        public TestUnpersistentObjectSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestUnpersistentObject domainObject)
-        {
-            this.testUnpersistentObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO TestUnpersistentObject
-        {
-            get
-            {
-                return this.testUnpersistentObject;
-            }
-            set
-            {
-                this.testUnpersistentObject = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestUnpersistentObject), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class TestUnpersistentObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        private SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO testUnpersistentObject;
-        
-        public TestUnpersistentObjectRemoveEventDTO()
-        {
-        }
-        
-        public TestUnpersistentObjectRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestUnpersistentObject domainObject)
-        {
-            this.testUnpersistentObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO TestUnpersistentObject
-        {
-            get
-            {
-                return this.testUnpersistentObject;
-            }
-            set
-            {
-                this.testUnpersistentObject = value;
-            }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestUnpersistentObject), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class TestUnpersistentObjectEventRichDTO
-    {
-        
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
-        
-        private string _value1;
-        
-        private int _value2;
-        
-        public TestUnpersistentObjectEventRichDTO()
-        {
-        }
-        
-        public TestUnpersistentObjectEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestUnpersistentObject domainObject)
-        {
-            mappingService.MapTestUnpersistentObject(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
-        {
-            get
-            {
-                return this._businessUnit;
-            }
-            set
-            {
-                this._businessUnit = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Value1
-        {
-            get
-            {
-                return this._value1;
-            }
-            set
-            {
-                this._value1 = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Value2
-        {
-            get
-            {
-                return this._value2;
-            }
-            set
-            {
-                this._value2 = value;
             }
         }
     }

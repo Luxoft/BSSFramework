@@ -90,7 +90,7 @@
         {
             SampleSystem.BLL.ITestEmployeeBLL bll = evaluateData.Context.Logics.TestEmployeeFactory.Create(SecuritySystem.SecurityRule.View);
             OData.Domain.SelectOperation<SampleSystem.Domain.Projections.TestEmployee> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.Projections.TestEmployee>(odataQueryString);
-            SampleSystem.Domain.TestEmployeeFilter typedFilter = filter.ToDomainObject(evaluateData.MappingService);
+            SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             OData.Domain.SelectOperationResult<SampleSystem.Domain.Projections.TestEmployee> preResult = bll.GetObjectsByOData(selectOperation, typedFilter, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Projections.TestEmployee>(Framework.BLL.Domain.DTO.ViewDTOType.ProjectionDTO));
             return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestEmployeeProjectionDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }

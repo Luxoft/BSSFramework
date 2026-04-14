@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using SampleSystem.Domain.ExternalPrincipal;
+
 namespace SampleSystem.Generated.DTO
 {
     
@@ -88,9 +90,9 @@ namespace SampleSystem.Generated.DTO
         
         void MapBusinessUnitProgramClassFilterModel(SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel domainObject, SampleSystem.Generated.DTO.BusinessUnitProgramClassFilterModelEventRichDTO mappingObject);
         
-        void MapBusinessUnitRootFilterModel(SampleSystem.Generated.DTO.BusinessUnitRootFilterModelStrictDTO mappingObject, SampleSystem.Domain.BusinessUnitRootFilterModel domainObject);
+        void MapBusinessUnitRootFilterModel(SampleSystem.Generated.DTO.BusinessUnitRootFilterModelStrictDTO mappingObject, SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel domainObject);
         
-        void MapBusinessUnitRootFilterModel(SampleSystem.Domain.BusinessUnitRootFilterModel domainObject, SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO mappingObject);
+        void MapBusinessUnitRootFilterModel(SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel domainObject, SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO mappingObject);
         
         void MapBusinessUnitToAncestorChildView(SampleSystem.Domain.BU.BusinessUnitToAncestorChildView domainObject, SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewEventRichDTO mappingObject);
         
@@ -246,37 +248,37 @@ namespace SampleSystem.Generated.DTO
         
         void MapEmployeeCellPhoneBase(SampleSystem.Domain.Employee.EmployeeCellPhoneBase domainObject, SampleSystem.Generated.DTO.EmployeeCellPhoneBaseEventRichDTO mappingObject);
         
-        void MapEmployeeComplexChangeModel(SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO mappingObject, SampleSystem.Domain.EmployeeComplexChangeModel domainObject);
+        void MapEmployeeComplexChangeModel(SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO mappingObject, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel domainObject);
         
-        void MapEmployeeComplexChangeModel(SampleSystem.Domain.EmployeeComplexChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO mappingObject);
+        void MapEmployeeComplexChangeModel(SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO mappingObject);
         
-        void MapEmployeeCustomEventModel(SampleSystem.Domain.EmployeeCustomEventModel domainObject, SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO mappingObject);
+        void MapEmployeeCustomEventModel(SampleSystem.Domain.Models.Event.EmployeeCustomEventModel domainObject, SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO mappingObject);
         
-        void MapEmployeeCustomIntegrationSaveModel(SampleSystem.Domain.EmployeeCustomIntegrationSaveModel domainObject, SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelIntegrationRichDTO mappingObject);
+        void MapEmployeeCustomIntegrationSaveModel(SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel domainObject, SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelIntegrationRichDTO mappingObject);
         
-        void MapEmployeeCustomIntegrationSaveModel(SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelIntegrationRichDTO mappingObject, SampleSystem.Domain.EmployeeCustomIntegrationSaveModel domainObject);
+        void MapEmployeeCustomIntegrationSaveModel(SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelIntegrationRichDTO mappingObject, SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel domainObject);
         
-        void MapEmployeeCustomIntegrationSaveModel(SampleSystem.Domain.EmployeeCustomIntegrationSaveModel domainObject, SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO mappingObject);
+        void MapEmployeeCustomIntegrationSaveModel(SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel domainObject, SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO mappingObject);
         
-        void MapEmployeeEmailChangeModel(SampleSystem.Domain.EmployeeEmailChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO mappingObject);
+        void MapEmployeeEmailChangeModel(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO mappingObject);
         
-        void MapEmployeeEmailChangeModel(SampleSystem.Domain.EmployeeEmailChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO mappingObject);
+        void MapEmployeeEmailChangeModel(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO mappingObject);
         
-        void MapEmployeeEmailChangeModel(SampleSystem.Domain.EmployeeEmailChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO mappingObject);
+        void MapEmployeeEmailChangeModel(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO mappingObject);
         
-        void MapEmployeeEmailChangeModel(SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO mappingObject, SampleSystem.Domain.EmployeeEmailChangeModel domainObject);
+        void MapEmployeeEmailChangeModel(SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO mappingObject, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject);
         
-        void MapEmployeeEmailChangeModel(SampleSystem.Domain.EmployeeEmailChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO mappingObject);
+        void MapEmployeeEmailChangeModel(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO mappingObject);
         
-        void MapEmployeeEmailMassChangeModel(SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO mappingObject);
+        void MapEmployeeEmailMassChangeModel(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO mappingObject);
         
-        void MapEmployeeEmailMassChangeModel(SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO mappingObject);
+        void MapEmployeeEmailMassChangeModel(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO mappingObject);
         
-        void MapEmployeeEmailMassChangeModel(SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO mappingObject);
+        void MapEmployeeEmailMassChangeModel(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO mappingObject);
         
-        void MapEmployeeEmailMassChangeModel(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO mappingObject, SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject);
+        void MapEmployeeEmailMassChangeModel(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO mappingObject, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject);
         
-        void MapEmployeeEmailMassChangeModel(SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO mappingObject);
+        void MapEmployeeEmailMassChangeModel(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO mappingObject);
         
         void MapEmployeeFilterModel(SampleSystem.Generated.DTO.EmployeeFilterModelStrictDTO mappingObject, SampleSystem.Domain.Models.Filters.EmployeeFilterModel domainObject);
         
@@ -376,9 +378,9 @@ namespace SampleSystem.Generated.DTO
         
         void MapEmployeeRoleDegree(SampleSystem.Domain.Employee.EmployeeRoleDegree domainObject, SampleSystem.Generated.DTO.EmployeeRoleDegreeEventSimpleDTO mappingObject);
         
-        void MapEmployeeRootFilterModel(SampleSystem.Generated.DTO.EmployeeRootFilterModelStrictDTO mappingObject, SampleSystem.Domain.EmployeeRootFilterModel domainObject);
+        void MapEmployeeRootFilterModel(SampleSystem.Generated.DTO.EmployeeRootFilterModelStrictDTO mappingObject, SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel domainObject);
         
-        void MapEmployeeRootFilterModel(SampleSystem.Domain.EmployeeRootFilterModel domainObject, SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO mappingObject);
+        void MapEmployeeRootFilterModel(SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel domainObject, SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO mappingObject);
         
         void MapEmployeeSpecialization(SampleSystem.Domain.Employee.EmployeeSpecialization domainObject, SampleSystem.Generated.DTO.EmployeeSpecializationVisualDTO mappingObject);
         
@@ -534,11 +536,11 @@ namespace SampleSystem.Generated.DTO
         
         void MapIntegrationVersionContainer1(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 domainObject, SampleSystem.Generated.DTO.IntegrationVersionContainer1EventSimpleDTO mappingObject);
         
-        void MapIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject, SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO mappingObject);
+        void MapIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject, SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO mappingObject);
         
-        void MapIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO mappingObject, SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject);
+        void MapIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO mappingObject, SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject);
         
-        void MapIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject, SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO mappingObject);
+        void MapIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject, SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO mappingObject);
         
         void MapIntegrationVersionContainer2(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 domainObject, SampleSystem.Generated.DTO.IntegrationVersionContainer2IntegrationRichDTO mappingObject);
         
@@ -650,15 +652,15 @@ namespace SampleSystem.Generated.DTO
         
         void MapPersistentDomainObjectBase(SampleSystem.Domain.PersistentDomainObjectBase domainObject, SampleSystem.Generated.DTO.BasePersistentDTO mappingObject);
         
-        void MapPrincipal(SampleSystem.Domain.Principal domainObject, SampleSystem.Generated.DTO.PrincipalSimpleDTO mappingObject);
+        void MapPrincipal(Principal domainObject, SampleSystem.Generated.DTO.PrincipalSimpleDTO mappingObject);
         
-        void MapPrincipal(SampleSystem.Domain.Principal domainObject, SampleSystem.Generated.DTO.PrincipalFullDTO mappingObject);
+        void MapPrincipal(Principal domainObject, SampleSystem.Generated.DTO.PrincipalFullDTO mappingObject);
         
-        void MapPrincipal(SampleSystem.Domain.Principal domainObject, SampleSystem.Generated.DTO.PrincipalRichDTO mappingObject);
+        void MapPrincipal(Principal domainObject, SampleSystem.Generated.DTO.PrincipalRichDTO mappingObject);
         
-        void MapPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO mappingObject, SampleSystem.Domain.Principal domainObject);
+        void MapPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO mappingObject, Principal domainObject);
         
-        void MapPrincipal(SampleSystem.Domain.Principal domainObject, SampleSystem.Generated.DTO.PrincipalEventRichDTO mappingObject);
+        void MapPrincipal(Principal domainObject, SampleSystem.Generated.DTO.PrincipalEventRichDTO mappingObject);
         
         void MapProject(SampleSystem.Domain.Projects.Project domainObject, SampleSystem.Generated.DTO.ProjectEventRichDTO mappingObject);
         
@@ -714,9 +716,9 @@ namespace SampleSystem.Generated.DTO
         
         void MapTestEmployee(SampleSystem.Domain.Projections.TestEmployee domainObject, SampleSystem.Generated.DTO.TestEmployeeProjectionDTO mappingObject);
         
-        void MapTestEmployeeFilter(SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO mappingObject, SampleSystem.Domain.TestEmployeeFilter domainObject);
+        void MapTestEmployeeFilter(SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO mappingObject, SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter domainObject);
         
-        void MapTestEmployeeFilter(SampleSystem.Domain.TestEmployeeFilter domainObject, SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO mappingObject);
+        void MapTestEmployeeFilter(SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter domainObject, SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO mappingObject);
         
         void MapTestExceptObject(SampleSystem.Domain.Employee.TestExceptObject domainObject, SampleSystem.Generated.DTO.TestExceptObjectEventRichDTO mappingObject);
         
@@ -860,7 +862,7 @@ namespace SampleSystem.Generated.DTO
         
         void MapTestSecuritySubObjItem3(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3 domainObject, SampleSystem.Generated.DTO.TestSecuritySubObjItem3EventRichDTO mappingObject);
         
-        void MapTestUnpersistentObject(SampleSystem.Domain.TestUnpersistentObject domainObject, SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO mappingObject);
+        void MapTestUnpersistentObject(SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject domainObject, SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO mappingObject);
         
         void MapVisualEmployee(SampleSystem.Domain.Projections.VisualEmployee domainObject, SampleSystem.Generated.DTO.VisualEmployeeProjectionDTO mappingObject);
         
@@ -922,7 +924,7 @@ namespace SampleSystem.Generated.DTO
         
         SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel ToBusinessUnitProgramClassFilterModel(SampleSystem.Generated.DTO.BusinessUnitProgramClassFilterModelStrictDTO businessUnitProgramClassFilterModelStrictDTO);
         
-        SampleSystem.Domain.BusinessUnitRootFilterModel ToBusinessUnitRootFilterModel(SampleSystem.Generated.DTO.BusinessUnitRootFilterModelStrictDTO businessUnitRootFilterModelStrictDTO);
+        SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel ToBusinessUnitRootFilterModel(SampleSystem.Generated.DTO.BusinessUnitRootFilterModelStrictDTO businessUnitRootFilterModelStrictDTO);
         
         SampleSystem.Domain.BU.BusinessUnitToAncestorChildView ToBusinessUnitToAncestorChildView(SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewIdentityDTO businessUnitToAncestorChildViewIdentityDTO);
         
@@ -1022,13 +1024,13 @@ namespace SampleSystem.Generated.DTO
         
         SampleSystem.Domain.Employee.EmployeeCellPhoneBase ToEmployeeCellPhoneBase(SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO employeeCellPhoneBaseIdentityDTO);
         
-        SampleSystem.Domain.EmployeeComplexChangeModel ToEmployeeComplexChangeModel(SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO employeeComplexChangeModelStrictDTO);
+        SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel ToEmployeeComplexChangeModel(SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO employeeComplexChangeModelStrictDTO);
         
-        SampleSystem.Domain.EmployeeCustomIntegrationSaveModel ToEmployeeCustomIntegrationSaveModel(SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelIntegrationRichDTO employeeCustomIntegrationSaveModelRichIntegrationDTO);
+        SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel ToEmployeeCustomIntegrationSaveModel(SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelIntegrationRichDTO employeeCustomIntegrationSaveModelRichIntegrationDTO);
         
-        SampleSystem.Domain.EmployeeEmailChangeModel ToEmployeeEmailChangeModel(SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO employeeEmailChangeModelStrictDTO);
+        SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel ToEmployeeEmailChangeModel(SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO employeeEmailChangeModelStrictDTO);
         
-        SampleSystem.Domain.EmployeeEmailMassChangeModel ToEmployeeEmailMassChangeModel(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO employeeEmailMassChangeModelStrictDTO);
+        SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel ToEmployeeEmailMassChangeModel(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO employeeEmailMassChangeModelStrictDTO);
         
         SampleSystem.Domain.Models.Filters.EmployeeFilterModel ToEmployeeFilterModel(SampleSystem.Generated.DTO.EmployeeFilterModelStrictDTO employeeFilterModelStrictDTO);
         
@@ -1062,7 +1064,7 @@ namespace SampleSystem.Generated.DTO
         
         SampleSystem.Domain.Employee.EmployeeRoleDegree ToEmployeeRoleDegree(SampleSystem.Generated.DTO.EmployeeRoleDegreeIntegrationSimpleDTO employeeRoleDegreeSimpleIntegrationDTO);
         
-        SampleSystem.Domain.EmployeeRootFilterModel ToEmployeeRootFilterModel(SampleSystem.Generated.DTO.EmployeeRootFilterModelStrictDTO employeeRootFilterModelStrictDTO);
+        SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel ToEmployeeRootFilterModel(SampleSystem.Generated.DTO.EmployeeRootFilterModelStrictDTO employeeRootFilterModelStrictDTO);
         
         SampleSystem.Domain.Employee.EmployeeSpecialization ToEmployeeSpecialization(SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentityDTO);
         
@@ -1142,7 +1144,7 @@ namespace SampleSystem.Generated.DTO
         
         SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 ToIntegrationVersionContainer1(SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationSimpleDTO integrationVersionContainer1SimpleIntegrationDTO);
         
-        SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel ToIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO integrationVersionContainer1CustomIntegrationSaveModelRichIntegrationDTO);
+        SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel ToIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO integrationVersionContainer1CustomIntegrationSaveModelRichIntegrationDTO);
         
         SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 ToIntegrationVersionContainer2(SampleSystem.Generated.DTO.IntegrationVersionContainer2IdentityDTO integrationVersionContainer2IdentityDTO);
         
@@ -1208,11 +1210,11 @@ namespace SampleSystem.Generated.DTO
         
         SampleSystem.Domain.UniqueByParent.ParentEntity ToParentEntity(SampleSystem.Generated.DTO.ParentEntityIdentityDTO parentEntityIdentityDTO);
         
-        SampleSystem.Domain.Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdentityDTO);
+        Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdentityDTO);
         
-        SampleSystem.Domain.Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO);
+        Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO);
         
-        SampleSystem.Domain.Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO, bool allowCreate);
+        Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO, bool allowCreate);
         
         SampleSystem.Domain.Projects.Project ToProject(SampleSystem.Generated.DTO.ProjectIdentityDTO projectIdentityDTO);
         
@@ -1238,7 +1240,7 @@ namespace SampleSystem.Generated.DTO
         
         SampleSystem.Domain.TestDefaultFieldsMappingObj ToTestDefaultFieldsMappingObj(SampleSystem.Generated.DTO.TestDefaultFieldsMappingObjStrictDTO testDefaultFieldsMappingObjStrictDTO);
         
-        SampleSystem.Domain.TestEmployeeFilter ToTestEmployeeFilter(SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO testEmployeeFilterStrictDTO);
+        SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter ToTestEmployeeFilter(SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO testEmployeeFilterStrictDTO);
         
         SampleSystem.Domain.Employee.TestExceptObject ToTestExceptObject(SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO testExceptObjectIdentityDTO);
         
@@ -2022,7 +2024,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.FilterVirtualName = domainObject.FilterVirtualName;
         }
         
-        public virtual void MapBusinessUnitRootFilterModel(SampleSystem.Generated.DTO.BusinessUnitRootFilterModelStrictDTO mappingObject, SampleSystem.Domain.BusinessUnitRootFilterModel domainObject)
+        public virtual void MapBusinessUnitRootFilterModel(SampleSystem.Generated.DTO.BusinessUnitRootFilterModelStrictDTO mappingObject, SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel domainObject)
         {
             domainObject.ArrayDays = mappingObject.ArrayDays;
             domainObject.ArrayPeriods = mappingObject.ArrayPeriods;
@@ -2038,7 +2040,7 @@ namespace SampleSystem.Generated.DTO
             domainObject.ListPeriods = mappingObject.ListPeriods;
         }
         
-        public virtual void MapBusinessUnitRootFilterModel(SampleSystem.Domain.BusinessUnitRootFilterModel domainObject, SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO mappingObject)
+        public virtual void MapBusinessUnitRootFilterModel(SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel domainObject, SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO mappingObject)
         {
             mappingObject.ArrayDays = domainObject.ArrayDays;
             mappingObject.ArrayPeriods = domainObject.ArrayPeriods;
@@ -3963,7 +3965,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
-        public virtual void MapEmployeeComplexChangeModel(SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO mappingObject, SampleSystem.Domain.EmployeeComplexChangeModel domainObject)
+        public virtual void MapEmployeeComplexChangeModel(SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO mappingObject, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel domainObject)
         {
             domainObject.Email = mappingObject.Email;
             if (!object.Equals(mappingObject.PrimaryChangingObject, default(SampleSystem.Generated.DTO.EmployeeIdentityDTO)))
@@ -3980,7 +3982,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public virtual void MapEmployeeComplexChangeModel(SampleSystem.Domain.EmployeeComplexChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO mappingObject)
+        public virtual void MapEmployeeComplexChangeModel(SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO mappingObject)
         {
             mappingObject.Email = domainObject.Email;
             if (!object.ReferenceEquals(domainObject.PrimaryChangingObject, null))
@@ -3994,13 +3996,13 @@ namespace SampleSystem.Generated.DTO
             mappingObject.SecondaryChangingObjects = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTOList(domainObject.SecondaryChangingObjects, this);
         }
         
-        public virtual void MapEmployeeCustomEventModel(SampleSystem.Domain.EmployeeCustomEventModel domainObject, SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO mappingObject)
+        public virtual void MapEmployeeCustomEventModel(SampleSystem.Domain.Models.Event.EmployeeCustomEventModel domainObject, SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO mappingObject)
         {
             mappingObject.Id = domainObject.Id;
             mappingObject.Login = domainObject.Login;
         }
         
-        public virtual void MapEmployeeCustomIntegrationSaveModel(SampleSystem.Domain.EmployeeCustomIntegrationSaveModel domainObject, SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelIntegrationRichDTO mappingObject)
+        public virtual void MapEmployeeCustomIntegrationSaveModel(SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel domainObject, SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelIntegrationRichDTO mappingObject)
         {
             if (!object.ReferenceEquals(domainObject.SavingObject, null))
             {
@@ -4012,7 +4014,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public virtual void MapEmployeeCustomIntegrationSaveModel(SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelIntegrationRichDTO mappingObject, SampleSystem.Domain.EmployeeCustomIntegrationSaveModel domainObject)
+        public virtual void MapEmployeeCustomIntegrationSaveModel(SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelIntegrationRichDTO mappingObject, SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel domainObject)
         {
             if (!object.Equals(mappingObject.SavingObject, default(SampleSystem.Generated.DTO.EmployeeIntegrationRichDTO)))
             {
@@ -4024,7 +4026,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public virtual void MapEmployeeCustomIntegrationSaveModel(SampleSystem.Domain.EmployeeCustomIntegrationSaveModel domainObject, SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO mappingObject)
+        public virtual void MapEmployeeCustomIntegrationSaveModel(SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel domainObject, SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO mappingObject)
         {
             if (!object.ReferenceEquals(domainObject.SavingObject, null))
             {
@@ -4036,12 +4038,12 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public virtual void MapEmployeeEmailChangeModel(SampleSystem.Domain.EmployeeEmailChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO mappingObject)
+        public virtual void MapEmployeeEmailChangeModel(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO mappingObject)
         {
             mappingObject.Email = domainObject.Email;
         }
         
-        public virtual void MapEmployeeEmailChangeModel(SampleSystem.Domain.EmployeeEmailChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO mappingObject)
+        public virtual void MapEmployeeEmailChangeModel(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO mappingObject)
         {
             if (!object.ReferenceEquals(domainObject.ChangingObject, null))
             {
@@ -4053,11 +4055,11 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public virtual void MapEmployeeEmailChangeModel(SampleSystem.Domain.EmployeeEmailChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO mappingObject)
+        public virtual void MapEmployeeEmailChangeModel(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO mappingObject)
         {
         }
         
-        public virtual void MapEmployeeEmailChangeModel(SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO mappingObject, SampleSystem.Domain.EmployeeEmailChangeModel domainObject)
+        public virtual void MapEmployeeEmailChangeModel(SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO mappingObject, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject)
         {
             if (!object.Equals(mappingObject.ChangingObject, default(SampleSystem.Generated.DTO.EmployeeIdentityDTO)))
             {
@@ -4070,7 +4072,7 @@ namespace SampleSystem.Generated.DTO
             domainObject.Email = mappingObject.Email;
         }
         
-        public virtual void MapEmployeeEmailChangeModel(SampleSystem.Domain.EmployeeEmailChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO mappingObject)
+        public virtual void MapEmployeeEmailChangeModel(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO mappingObject)
         {
             if (!object.ReferenceEquals(domainObject.ChangingObject, null))
             {
@@ -4083,21 +4085,21 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Email = domainObject.Email;
         }
         
-        public virtual void MapEmployeeEmailMassChangeModel(SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO mappingObject)
+        public virtual void MapEmployeeEmailMassChangeModel(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO mappingObject)
         {
             mappingObject.Email = domainObject.Email;
         }
         
-        public virtual void MapEmployeeEmailMassChangeModel(SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO mappingObject)
+        public virtual void MapEmployeeEmailMassChangeModel(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO mappingObject)
         {
         }
         
-        public virtual void MapEmployeeEmailMassChangeModel(SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO mappingObject)
+        public virtual void MapEmployeeEmailMassChangeModel(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO mappingObject)
         {
             mappingObject.ChangingObjects = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(domainObject.ChangingObjects, this);
         }
         
-        public virtual void MapEmployeeEmailMassChangeModel(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO mappingObject, SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject)
+        public virtual void MapEmployeeEmailMassChangeModel(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO mappingObject, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject)
         {
             if (!object.ReferenceEquals(mappingObject.ChangingObjects, null))
             {
@@ -4106,7 +4108,7 @@ namespace SampleSystem.Generated.DTO
             domainObject.Email = mappingObject.Email;
         }
         
-        public virtual void MapEmployeeEmailMassChangeModel(SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO mappingObject)
+        public virtual void MapEmployeeEmailMassChangeModel(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO mappingObject)
         {
             mappingObject.ChangingObjects = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTOList(domainObject.ChangingObjects, this);
             mappingObject.Email = domainObject.Email;
@@ -4536,11 +4538,11 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
-        public virtual void MapEmployeeRootFilterModel(SampleSystem.Generated.DTO.EmployeeRootFilterModelStrictDTO mappingObject, SampleSystem.Domain.EmployeeRootFilterModel domainObject)
+        public virtual void MapEmployeeRootFilterModel(SampleSystem.Generated.DTO.EmployeeRootFilterModelStrictDTO mappingObject, SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel domainObject)
         {
         }
         
-        public virtual void MapEmployeeRootFilterModel(SampleSystem.Domain.EmployeeRootFilterModel domainObject, SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO mappingObject)
+        public virtual void MapEmployeeRootFilterModel(SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel domainObject, SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO mappingObject)
         {
         }
         
@@ -5608,7 +5610,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
-        public virtual void MapIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject, SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO mappingObject)
+        public virtual void MapIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject, SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO mappingObject)
         {
             mappingObject.CustomName = domainObject.CustomName;
             if (!object.ReferenceEquals(domainObject.SavingObject, null))
@@ -5621,7 +5623,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public virtual void MapIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO mappingObject, SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject)
+        public virtual void MapIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO mappingObject, SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject)
         {
             domainObject.CustomName = mappingObject.CustomName;
             if (!object.Equals(mappingObject.SavingObject, default(SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationSimpleDTO)))
@@ -5634,7 +5636,7 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public virtual void MapIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject, SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO mappingObject)
+        public virtual void MapIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel domainObject, SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO mappingObject)
         {
             mappingObject.CustomName = domainObject.CustomName;
             if (!object.ReferenceEquals(domainObject.SavingObject, null))
@@ -6423,26 +6425,26 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Id = domainObject.Id;
         }
         
-        public virtual void MapPrincipal(SampleSystem.Domain.Principal domainObject, SampleSystem.Generated.DTO.PrincipalSimpleDTO mappingObject)
+        public virtual void MapPrincipal(Principal domainObject, SampleSystem.Generated.DTO.PrincipalSimpleDTO mappingObject)
         {
             mappingObject.ExternalId = domainObject.ExternalId;
         }
         
-        public virtual void MapPrincipal(SampleSystem.Domain.Principal domainObject, SampleSystem.Generated.DTO.PrincipalFullDTO mappingObject)
+        public virtual void MapPrincipal(Principal domainObject, SampleSystem.Generated.DTO.PrincipalFullDTO mappingObject)
         {
         }
         
-        public virtual void MapPrincipal(SampleSystem.Domain.Principal domainObject, SampleSystem.Generated.DTO.PrincipalRichDTO mappingObject)
+        public virtual void MapPrincipal(Principal domainObject, SampleSystem.Generated.DTO.PrincipalRichDTO mappingObject)
         {
         }
         
-        public virtual void MapPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO mappingObject, SampleSystem.Domain.Principal domainObject)
+        public virtual void MapPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO mappingObject, Principal domainObject)
         {
             domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
             domainObject.ExternalId = mappingObject.ExternalId;
         }
         
-        public virtual void MapPrincipal(SampleSystem.Domain.Principal domainObject, SampleSystem.Generated.DTO.PrincipalEventRichDTO mappingObject)
+        public virtual void MapPrincipal(Principal domainObject, SampleSystem.Generated.DTO.PrincipalEventRichDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
@@ -6753,7 +6755,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.RoleName = domainObject.RoleName;
         }
         
-        public virtual void MapTestEmployeeFilter(SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO mappingObject, SampleSystem.Domain.TestEmployeeFilter domainObject)
+        public virtual void MapTestEmployeeFilter(SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO mappingObject, SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter domainObject)
         {
             if (!object.Equals(mappingObject.BusinessUnit, default(SampleSystem.Generated.DTO.BusinessUnitIdentityDTO)))
             {
@@ -6767,7 +6769,7 @@ namespace SampleSystem.Generated.DTO
             domainObject.TestValue = mappingObject.TestValue;
         }
         
-        public virtual void MapTestEmployeeFilter(SampleSystem.Domain.TestEmployeeFilter domainObject, SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO mappingObject)
+        public virtual void MapTestEmployeeFilter(SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter domainObject, SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO mappingObject)
         {
             if (!object.ReferenceEquals(domainObject.BusinessUnit, null))
             {
@@ -7675,7 +7677,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
-        public virtual void MapTestUnpersistentObject(SampleSystem.Domain.TestUnpersistentObject domainObject, SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO mappingObject)
+        public virtual void MapTestUnpersistentObject(SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject domainObject, SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO mappingObject)
         {
             if (!object.ReferenceEquals(domainObject.BusinessUnit, null))
             {
@@ -7888,9 +7890,9 @@ namespace SampleSystem.Generated.DTO
             return this.ToDomainObjectBase<SampleSystem.Generated.DTO.BusinessUnitProgramClassFilterModelStrictDTO, SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel>(businessUnitProgramClassFilterModelStrictDTO);
         }
         
-        public virtual SampleSystem.Domain.BusinessUnitRootFilterModel ToBusinessUnitRootFilterModel(SampleSystem.Generated.DTO.BusinessUnitRootFilterModelStrictDTO businessUnitRootFilterModelStrictDTO)
+        public virtual SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel ToBusinessUnitRootFilterModel(SampleSystem.Generated.DTO.BusinessUnitRootFilterModelStrictDTO businessUnitRootFilterModelStrictDTO)
         {
-            return this.ToDomainObjectBase<SampleSystem.Generated.DTO.BusinessUnitRootFilterModelStrictDTO, SampleSystem.Domain.BusinessUnitRootFilterModel>(businessUnitRootFilterModelStrictDTO);
+            return this.ToDomainObjectBase<SampleSystem.Generated.DTO.BusinessUnitRootFilterModelStrictDTO, SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel>(businessUnitRootFilterModelStrictDTO);
         }
         
         public virtual SampleSystem.Domain.BU.BusinessUnitToAncestorChildView ToBusinessUnitToAncestorChildView(SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewIdentityDTO businessUnitToAncestorChildViewIdentityDTO)
@@ -8238,24 +8240,24 @@ namespace SampleSystem.Generated.DTO
             return this.GetById<SampleSystem.Domain.Employee.EmployeeCellPhoneBase>(employeeCellPhoneBaseIdentityDTO.Id);
         }
         
-        public virtual SampleSystem.Domain.EmployeeComplexChangeModel ToEmployeeComplexChangeModel(SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO employeeComplexChangeModelStrictDTO)
+        public virtual SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel ToEmployeeComplexChangeModel(SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO employeeComplexChangeModelStrictDTO)
         {
-            return this.ToDomainObjectBase<SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO, SampleSystem.Domain.EmployeeComplexChangeModel>(employeeComplexChangeModelStrictDTO);
+            return this.ToDomainObjectBase<SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel>(employeeComplexChangeModelStrictDTO);
         }
         
-        public virtual SampleSystem.Domain.EmployeeCustomIntegrationSaveModel ToEmployeeCustomIntegrationSaveModel(SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelIntegrationRichDTO employeeCustomIntegrationSaveModelRichIntegrationDTO)
+        public virtual SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel ToEmployeeCustomIntegrationSaveModel(SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelIntegrationRichDTO employeeCustomIntegrationSaveModelRichIntegrationDTO)
         {
-            return this.ToDomainObjectBase<SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelIntegrationRichDTO, SampleSystem.Domain.EmployeeCustomIntegrationSaveModel>(employeeCustomIntegrationSaveModelRichIntegrationDTO);
+            return this.ToDomainObjectBase<SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelIntegrationRichDTO, SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel>(employeeCustomIntegrationSaveModelRichIntegrationDTO);
         }
         
-        public virtual SampleSystem.Domain.EmployeeEmailChangeModel ToEmployeeEmailChangeModel(SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO employeeEmailChangeModelStrictDTO)
+        public virtual SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel ToEmployeeEmailChangeModel(SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO employeeEmailChangeModelStrictDTO)
         {
-            return this.ToDomainObjectBase<SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO, SampleSystem.Domain.EmployeeEmailChangeModel>(employeeEmailChangeModelStrictDTO);
+            return this.ToDomainObjectBase<SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel>(employeeEmailChangeModelStrictDTO);
         }
         
-        public virtual SampleSystem.Domain.EmployeeEmailMassChangeModel ToEmployeeEmailMassChangeModel(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO employeeEmailMassChangeModelStrictDTO)
+        public virtual SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel ToEmployeeEmailMassChangeModel(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO employeeEmailMassChangeModelStrictDTO)
         {
-            return this.ToDomainObjectBase<SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO, SampleSystem.Domain.EmployeeEmailMassChangeModel>(employeeEmailMassChangeModelStrictDTO);
+            return this.ToDomainObjectBase<SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel>(employeeEmailMassChangeModelStrictDTO);
         }
         
         public virtual SampleSystem.Domain.Models.Filters.EmployeeFilterModel ToEmployeeFilterModel(SampleSystem.Generated.DTO.EmployeeFilterModelStrictDTO employeeFilterModelStrictDTO)
@@ -8338,9 +8340,9 @@ namespace SampleSystem.Generated.DTO
             return this.GetById<SampleSystem.Domain.Employee.EmployeeRoleDegree>(employeeRoleDegreeSimpleIntegrationDTO.Id);
         }
         
-        public virtual SampleSystem.Domain.EmployeeRootFilterModel ToEmployeeRootFilterModel(SampleSystem.Generated.DTO.EmployeeRootFilterModelStrictDTO employeeRootFilterModelStrictDTO)
+        public virtual SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel ToEmployeeRootFilterModel(SampleSystem.Generated.DTO.EmployeeRootFilterModelStrictDTO employeeRootFilterModelStrictDTO)
         {
-            return this.ToDomainObjectBase<SampleSystem.Generated.DTO.EmployeeRootFilterModelStrictDTO, SampleSystem.Domain.EmployeeRootFilterModel>(employeeRootFilterModelStrictDTO);
+            return this.ToDomainObjectBase<SampleSystem.Generated.DTO.EmployeeRootFilterModelStrictDTO, SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel>(employeeRootFilterModelStrictDTO);
         }
         
         public virtual SampleSystem.Domain.Employee.EmployeeSpecialization ToEmployeeSpecialization(SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentityDTO)
@@ -8578,9 +8580,9 @@ namespace SampleSystem.Generated.DTO
             return this.GetById<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(integrationVersionContainer1SimpleIntegrationDTO.Id, Framework.BLL.IdCheckMode.SkipEmpty, Framework.Database.LockRole.Update);
         }
         
-        public virtual SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel ToIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO integrationVersionContainer1CustomIntegrationSaveModelRichIntegrationDTO)
+        public virtual SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel ToIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO integrationVersionContainer1CustomIntegrationSaveModelRichIntegrationDTO)
         {
-            return this.ToDomainObjectBase<SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO, SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel>(integrationVersionContainer1CustomIntegrationSaveModelRichIntegrationDTO);
+            return this.ToDomainObjectBase<SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO, SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel>(integrationVersionContainer1CustomIntegrationSaveModelRichIntegrationDTO);
         }
         
         public virtual SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 ToIntegrationVersionContainer2(SampleSystem.Generated.DTO.IntegrationVersionContainer2IdentityDTO integrationVersionContainer2IdentityDTO)
@@ -8785,21 +8787,21 @@ namespace SampleSystem.Generated.DTO
             return this.GetById<SampleSystem.Domain.UniqueByParent.ParentEntity>(parentEntityIdentityDTO.Id);
         }
         
-        public virtual SampleSystem.Domain.Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdentityDTO)
+        public virtual Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Principal>(principalIdentityDTO.Id);
+            return this.GetById<Principal>(principalIdentityDTO.Id);
         }
         
-        public virtual SampleSystem.Domain.Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO)
+        public virtual Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO)
         {
-            return this.ToDomainObject<SampleSystem.Generated.DTO.PrincipalStrictDTO, SampleSystem.Domain.Principal>(principalStrictDTO);
+            return this.ToDomainObject<SampleSystem.Generated.DTO.PrincipalStrictDTO, Principal>(principalStrictDTO);
         }
         
-        public virtual SampleSystem.Domain.Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO, bool allowCreate)
+        public virtual Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO, bool allowCreate)
         {
             if (allowCreate)
             {
-                return this.ToDomainObject(principalStrictDTO, () => new SampleSystem.Domain.Principal());
+                return this.ToDomainObject(principalStrictDTO, () => new Principal());
             }
             else
             {
@@ -8881,9 +8883,9 @@ namespace SampleSystem.Generated.DTO
             return this.ToDomainObjectBase<SampleSystem.Generated.DTO.TestDefaultFieldsMappingObjStrictDTO, SampleSystem.Domain.TestDefaultFieldsMappingObj>(testDefaultFieldsMappingObjStrictDTO);
         }
         
-        public virtual SampleSystem.Domain.TestEmployeeFilter ToTestEmployeeFilter(SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO testEmployeeFilterStrictDTO)
+        public virtual SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter ToTestEmployeeFilter(SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO testEmployeeFilterStrictDTO)
         {
-            return this.ToDomainObjectBase<SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO, SampleSystem.Domain.TestEmployeeFilter>(testEmployeeFilterStrictDTO);
+            return this.ToDomainObjectBase<SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO, SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter>(testEmployeeFilterStrictDTO);
         }
         
         public virtual SampleSystem.Domain.Employee.TestExceptObject ToTestExceptObject(SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO testExceptObjectIdentityDTO)

@@ -1,4 +1,4 @@
-﻿namespace SampleSystem.AuditDomain;
+﻿namespace SampleSystem.AuditDomain.__Base;
 
 public struct AuditIdentifier
 {

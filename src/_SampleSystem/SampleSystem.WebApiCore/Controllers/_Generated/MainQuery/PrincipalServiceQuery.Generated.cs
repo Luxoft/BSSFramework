@@ -1,4 +1,6 @@
-﻿namespace SampleSystem.WebApiCore.Controllers.MainQuery
+﻿using SampleSystem.Domain.ExternalPrincipal;
+
+namespace SampleSystem.WebApiCore.Controllers.MainQuery
 {
     
     
@@ -19,8 +21,8 @@
         protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.PrincipalFullDTO> GetFullPrincipalsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            OData.Domain.SelectOperation<SampleSystem.Domain.Principal> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.Principal>(odataQueryString);
-            OData.Domain.SelectOperationResult<SampleSystem.Domain.Principal> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            OData.Domain.SelectOperation<Principal> selectOperation = evaluateData.Context.SelectOperationParser.Parse<Principal>(odataQueryString);
+            OData.Domain.SelectOperationResult<Principal> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<Principal>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.PrincipalFullDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
@@ -36,8 +38,8 @@
         protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.PrincipalSimpleDTO> GetSimplePrincipalsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(SecuritySystem.SecurityRule.View);
-            OData.Domain.SelectOperation<SampleSystem.Domain.Principal> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.Principal>(odataQueryString);
-            OData.Domain.SelectOperationResult<SampleSystem.Domain.Principal> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
+            OData.Domain.SelectOperation<Principal> selectOperation = evaluateData.Context.SelectOperationParser.Parse<Principal>(odataQueryString);
+            OData.Domain.SelectOperationResult<Principal> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<Principal>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.PrincipalSimpleDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
     }

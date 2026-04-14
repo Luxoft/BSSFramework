@@ -1,6 +1,5 @@
 ﻿using CommonFramework;
 
-using SampleSystem.Domain;
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Employee;

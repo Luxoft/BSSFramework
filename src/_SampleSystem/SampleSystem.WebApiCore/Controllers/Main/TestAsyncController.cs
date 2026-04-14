@@ -4,11 +4,8 @@ using Framework.Database;
 using GenericQueryable;
 
 using Microsoft.AspNetCore.Mvc;
-
-using SampleSystem.Domain;
 using SampleSystem.Domain.Directories;
 using SampleSystem.Generated.DTO;
-
 using SecuritySystem.Attributes;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;

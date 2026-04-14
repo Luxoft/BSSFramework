@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-using SampleSystem.Domain;
 using SampleSystem.Domain.Enums;
 using SampleSystem.Domain.Inline;
 using SampleSystem.IntegrationTests.__Support.TestData;

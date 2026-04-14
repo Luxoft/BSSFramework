@@ -717,7 +717,7 @@ namespace SampleSystem.Domain.Projections
     [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
     [Framework.Database.Mapping.TableAttribute(Name="Employee")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee.Employee), Framework.Projection.ProjectionRole.Default)]
-    [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.TestEmployeeFilter), (Framework.Projection.ProjectionFilterTargets.Collection | Framework.Projection.ProjectionFilterTargets.OData))]
+    [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter), (Framework.Projection.ProjectionFilterTargets.Collection | Framework.Projection.ProjectionFilterTargets.OData))]
     [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.EmployeeFilterModel), Framework.Projection.ProjectionFilterTargets.Collection)]
     [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel), Framework.Projection.ProjectionFilterTargets.Single)]
     public partial class TestEmployee : SampleSystem.Domain.PersistentDomainObjectBase

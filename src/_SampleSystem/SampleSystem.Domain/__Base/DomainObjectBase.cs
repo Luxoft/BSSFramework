@@ -1,4 +1,4 @@
-﻿using Framework.Validation;
+﻿
 
 // ReSharper disable once CheckNamespace
 namespace SampleSystem.Domain;

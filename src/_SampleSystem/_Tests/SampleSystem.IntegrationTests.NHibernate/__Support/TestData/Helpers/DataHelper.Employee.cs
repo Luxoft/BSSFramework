@@ -5,7 +5,6 @@ using Framework.Core;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SampleSystem.Domain;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;

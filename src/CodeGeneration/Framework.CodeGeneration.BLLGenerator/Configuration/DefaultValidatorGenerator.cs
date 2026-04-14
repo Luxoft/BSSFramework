@@ -7,9 +7,6 @@ using Framework.Application.Domain;
 using Framework.Core;
 using Framework.Restriction;
 using Framework.Validation;
-
-using ValidatorPairExpr = System.Collections.Generic.KeyValuePair<System.CodeDom.CodeExpression, Framework.Validation.IValidationData?>;
-using ValidatorExpr = System.Collections.Generic.IReadOnlyDictionary<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
 using Framework.BLL.Validation;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
@@ -24,6 +21,9 @@ using Framework.Validation.Validators;
 using Framework.Validation.Validators._Base.Extensions;
 using Framework.Validation.Validators.Deep;
 using Framework.Validation.Validators.DynamicClass.Available.Base;
+
+using ValidatorPairExpr = System.Collections.Generic.KeyValuePair<System.CodeDom.CodeExpression, Framework.Validation.IValidationData?>;
+using ValidatorExpr = System.Collections.Generic.IReadOnlyDictionary<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 

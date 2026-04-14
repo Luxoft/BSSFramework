@@ -1,6 +1,6 @@
 ﻿using SampleSystem.Domain.BU;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Models.Filters.Projection;
 
 public class TestEmployeeFilter : DomainObjectBase
 {

@@ -1,6 +1,5 @@
 ﻿using FluentNHibernate.Mapping;
 
-using SampleSystem.Domain;
 using SampleSystem.Domain.NhFluentMapping;
 
 namespace SampleSystem.Generated.DAL.NHibernate.FluentMapping;

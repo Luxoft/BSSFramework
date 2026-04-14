@@ -3,7 +3,6 @@ using Framework.Validation.Validators;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SampleSystem.Domain;
 using SampleSystem.Domain.Employee;
 
 // ReSharper disable once CheckNamespace

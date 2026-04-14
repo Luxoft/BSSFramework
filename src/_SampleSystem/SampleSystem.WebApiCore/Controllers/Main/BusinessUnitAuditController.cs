@@ -1,7 +1,6 @@
 ﻿using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
-
 using SampleSystem.AuditDomain;
 using SampleSystem.Generated.DTO;
 

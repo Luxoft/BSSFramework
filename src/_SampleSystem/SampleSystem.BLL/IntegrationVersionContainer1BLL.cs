@@ -1,5 +1,5 @@
-﻿using SampleSystem.Domain;
-using SampleSystem.Domain.IntegrationVersions;
+﻿using SampleSystem.Domain.IntegrationVersions;
+using SampleSystem.Domain.Models.Integration;
 
 namespace SampleSystem.BLL;
 

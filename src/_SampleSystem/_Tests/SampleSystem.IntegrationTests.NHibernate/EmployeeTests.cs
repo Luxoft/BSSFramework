@@ -5,9 +5,6 @@ using CommonFramework;
 using Framework.Application;
 using Framework.Application.Events;
 using Framework.AutomationCore.Utils.DatabaseUtils;
-
-using SampleSystem.Domain;
-
 using Framework.Configuration.Generated.DTO;
 using Framework.Database;
 using Framework.Database.NHibernate.Sessions;

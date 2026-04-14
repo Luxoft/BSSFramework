@@ -19,7 +19,7 @@
         protected virtual SampleSystem.Generated.DTO.EmployeeIdentityDTO ChangeEmployeeByComplexInternal(SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO employeeChangeModel, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.EmployeeFactory.Create(SecuritySystem.SecurityRule.Edit);
-            SampleSystem.Domain.EmployeeComplexChangeModel changeModel = employeeChangeModel.ToDomainObject(evaluateData.MappingService);
+            SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel changeModel = employeeChangeModel.ToDomainObject(evaluateData.MappingService);
             bll.CheckAccess(changeModel.PrimaryChangingObject);
             foreach(var secondaryDomainObject in changeModel.SecondaryChangingObjects)
             {
@@ -40,7 +40,7 @@
         protected virtual SampleSystem.Generated.DTO.EmployeeIdentityDTO ChangeEmployeeByEmailInternal(SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO employeeChangeModel, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.EmployeeFactory.Create(SecuritySystem.SecurityRule.Edit);
-            SampleSystem.Domain.EmployeeEmailChangeModel changeModel = employeeChangeModel.ToDomainObject(evaluateData.MappingService);
+            SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel changeModel = employeeChangeModel.ToDomainObject(evaluateData.MappingService);
             bll.CheckAccess(changeModel.ChangingObject);
             return SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(bll.ChangeByEmail(changeModel));
         }
@@ -102,7 +102,7 @@
         }
         
         /// <summary>
-        /// Get Employees (FullDTO) by filter (SampleSystem.Domain.EmployeeRootFilterModel)
+        /// Get Employees (FullDTO) by filter (SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeFullDTO> GetFullEmployeesByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRootFilterModelStrictDTO filter)
@@ -113,7 +113,7 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeFullDTO> GetFullEmployeesByRootFilterInternal(SampleSystem.Generated.DTO.EmployeeRootFilterModelStrictDTO filter, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.EmployeeFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
+            SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.Employee>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -196,7 +196,7 @@
         }
         
         /// <summary>
-        /// Get Employees (SimpleDTO) by filter (SampleSystem.Domain.EmployeeRootFilterModel)
+        /// Get Employees (SimpleDTO) by filter (SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeSimpleDTO> GetSimpleEmployeesByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeRootFilterModelStrictDTO filter)
@@ -207,7 +207,7 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeeSimpleDTO> GetSimpleEmployeesByRootFilterInternal(SampleSystem.Generated.DTO.EmployeeRootFilterModelStrictDTO filter, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.EmployeeFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeeRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
+            SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.Employee>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -229,7 +229,7 @@
         protected virtual System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> MassChangeEmployeeByEmailInternal(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO employeeChangeModel, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.EmployeeFactory.Create(SecuritySystem.SecurityRule.Edit);
-            SampleSystem.Domain.EmployeeEmailMassChangeModel changeModel = employeeChangeModel.ToDomainObject(evaluateData.MappingService);
+            SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel changeModel = employeeChangeModel.ToDomainObject(evaluateData.MappingService);
             foreach(var domainObject in changeModel.ChangingObjects)
             {
                 bll.CheckAccess(domainObject);
@@ -343,7 +343,7 @@
         }
         
         /// <summary>
-        /// Get TestEmployees (ProjectionDTO) by filter (SampleSystem.Domain.TestEmployeeFilter)
+        /// Get TestEmployees (ProjectionDTO) by filter (SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestEmployeeProjectionDTO> GetTestEmployeesByFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO filter)
@@ -354,7 +354,7 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestEmployeeProjectionDTO> GetTestEmployeesByFilterInternal(SampleSystem.Generated.DTO.TestEmployeeFilterStrictDTO filter, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestEmployeeBLL bll = evaluateData.Context.Logics.TestEmployeeFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.TestEmployeeFilter typedFilter = filter.ToDomainObject(evaluateData.MappingService);
+            SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(bll.GetListBy(typedFilter, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Projections.TestEmployee>(Framework.BLL.Domain.DTO.ViewDTOType.ProjectionDTO)), evaluateData.MappingService);
         }
         

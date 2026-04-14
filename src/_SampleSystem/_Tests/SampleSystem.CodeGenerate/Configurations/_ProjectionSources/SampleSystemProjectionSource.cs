@@ -11,6 +11,7 @@ using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.HRDepartment;
 using SampleSystem.Domain.Models.Filters;
+using SampleSystem.Domain.Models.Filters.Projection;
 using SampleSystem.Domain.Projects;
 using SampleSystem.Domain.TestDependency;
 using SampleSystem.Security;

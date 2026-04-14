@@ -6,7 +6,6 @@ using GenericQueryable;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 

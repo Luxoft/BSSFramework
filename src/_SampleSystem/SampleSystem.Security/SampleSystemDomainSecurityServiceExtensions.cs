@@ -5,6 +5,7 @@ using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.EnversBug1676;
+using SampleSystem.Domain.ExternalPrincipal;
 using SampleSystem.Domain.ForUpdate;
 using SampleSystem.Domain.HRDepartment;
 using SampleSystem.Domain.ManualProjections;
@@ -18,6 +19,8 @@ using SampleSystem.Security.Services;
 
 using SecuritySystem;
 using SecuritySystem.DependencyInjection;
+
+using TestBusinessUnit = SampleSystem.Domain.Projections.TestBusinessUnit;
 
 namespace SampleSystem.Security;
 

@@ -1,7 +1,7 @@
 ﻿using Framework.BLL.Domain.DirectMode;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Models.Change._Base;
 
 /// <summary>
 /// Базовая произвольная модель для изменений объектов (пример, для которого будет расширена генерация)

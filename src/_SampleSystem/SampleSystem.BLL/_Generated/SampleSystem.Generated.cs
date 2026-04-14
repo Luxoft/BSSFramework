@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using SampleSystem.Domain.ExternalPrincipal;
+
 namespace SampleSystem.BLL
 {
     
@@ -566,16 +568,16 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class PrincipalBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.Principal>, SampleSystem.BLL.IPrincipalBLL
+    public partial class PrincipalBLL : SampleSystem.BLL.SecurityDomainBLLBase<Principal>, SampleSystem.BLL.IPrincipalBLL
     {
         
-        public PrincipalBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<SampleSystem.Domain.Principal> securityProvider) : 
+        public PrincipalBLL(SampleSystem.BLL.ISampleSystemBLLContext context, SecuritySystem.Providers.ISecurityProvider<Principal> securityProvider) : 
                 base(context, securityProvider)
         {
         }
     }
     
-    public partial class PrincipalBLLFactory : Framework.BLL.SecurityBLLFactory<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.IPrincipalBLL, SampleSystem.BLL.PrincipalBLL, SampleSystem.Domain.Principal>, SampleSystem.BLL.IPrincipalBLLFactory
+    public partial class PrincipalBLLFactory : Framework.BLL.SecurityBLLFactory<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.IPrincipalBLL, SampleSystem.BLL.PrincipalBLL, Principal>, SampleSystem.BLL.IPrincipalBLLFactory
     {
         
         public PrincipalBLLFactory(SampleSystem.BLL.ISampleSystemBLLContext context) : 
@@ -2245,7 +2247,7 @@ namespace SampleSystem.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IManagementUnitFluentMappingBLLFactory, SampleSystem.BLL.ManagementUnitFluentMappingBLLFactory>(serviceCollection);
             CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping, System.Guid>, SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping>, SampleSystem.BLL.IManagementUnitFluentMappingBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IPrincipalBLLFactory, SampleSystem.BLL.PrincipalBLLFactory>(serviceCollection);
-            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Principal, System.Guid>, SampleSystem.Domain.Principal>, SampleSystem.BLL.IPrincipalBLLFactory>(serviceCollection);
+            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, Principal, System.Guid>, Principal>, SampleSystem.BLL.IPrincipalBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IBusinessUnitProgramClassBLLFactory, SampleSystem.BLL.BusinessUnitProgramClassBLLFactory>(serviceCollection);
             CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.BusinessUnitProgramClass, System.Guid>, SampleSystem.Domain.Projections.BusinessUnitProgramClass>, SampleSystem.BLL.IBusinessUnitProgramClassBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ICustomCompanyLegalEntityBLLFactory, SampleSystem.BLL.CustomCompanyLegalEntityBLLFactory>(serviceCollection);

@@ -2,7 +2,7 @@
 using Framework.BLL.Domain.Models;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Models.Change._Base;
 
 /// <summary>
 /// Общий тип для базовой модели для изменения коллекции объектов

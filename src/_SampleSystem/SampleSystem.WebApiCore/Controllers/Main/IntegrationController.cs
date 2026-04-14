@@ -3,12 +3,10 @@ using Framework.Core.TypeResolving;
 using Framework.Infrastructure.Integration;
 
 using Microsoft.AspNetCore.Mvc;
-
 using SampleSystem.Generated.DTO;
-
 using SecuritySystem;
 
-namespace SampleSystem.WebApiCore.Controllers;
+namespace SampleSystem.WebApiCore.Controllers.Main;
 
 [Route("api/[controller]/[action]")]
 [ApiController]

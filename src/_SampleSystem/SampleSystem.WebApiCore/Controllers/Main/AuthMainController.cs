@@ -5,10 +5,9 @@ using Framework.BLL.DTOMapping.Domain;
 using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
-
 using SecuritySystem;
 
-namespace SampleSystem.WebApiCore.Controllers;
+namespace SampleSystem.WebApiCore.Controllers.Main;
 
 public class AuthMainController : Framework.Authorization.WebApi.AuthMainController
 {

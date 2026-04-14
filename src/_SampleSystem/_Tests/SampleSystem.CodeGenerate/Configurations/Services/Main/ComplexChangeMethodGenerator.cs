@@ -14,6 +14,7 @@ using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.Models.Change._Base;
 
 namespace SampleSystem.CodeGenerate.Configurations.Services.Main;
 

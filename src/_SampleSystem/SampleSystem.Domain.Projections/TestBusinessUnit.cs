@@ -17,7 +17,7 @@ public partial class TestBusinessUnit
 
     public override TestBusinessUnitType CalcProjectionProp => null;
 
-    public override string HerBusinessUnit_Full => this.Her.GetAllElements(h => h.Parent).Join(",", bu => bu.Name);
+    public override string HerBusinessUnit_Full => EnumerableExtensions.GetAllElements<HerBusinessUnit>(this.Her, h => h.Parent).Join(",", bu => bu.Name);
 
-    public override string Employees => this.BusinessUnitEmployeeRoles.OrderBy(link => link.Employee.NameEngFirstName).Join(",", link => link.Employee.NameEngFirstName);
+    public override string Employees => Enumerable.OrderBy<MiniBusinessUnitEmployeeRole, string>(this.BusinessUnitEmployeeRoles, link => link.Employee.NameEngFirstName).Join(",", link => link.Employee.NameEngFirstName);
 }

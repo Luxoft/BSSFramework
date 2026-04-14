@@ -3,7 +3,6 @@ using Framework.Database.ConnectionStringSource;
 using Framework.Database.NHibernate._MappingSettings;
 using Framework.Database.NHibernate.DBGenerator;
 
-using SampleSystem.CodeGenerate;
 using SampleSystem.CodeGenerate.Configurations;
 using SampleSystem.Generated.DAL.NHibernate;
 

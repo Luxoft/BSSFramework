@@ -1,8 +1,9 @@
 ﻿using Framework.Core;
 
 using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Models.Filters._Base;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Models.Filters.Root;
 
 /// <summary>
 ///

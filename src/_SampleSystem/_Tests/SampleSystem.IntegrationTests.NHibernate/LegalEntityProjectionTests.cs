@@ -4,7 +4,6 @@ using Framework.AutomationCore.ServiceEnvironment.RootServiceProviderContainer;
 using Framework.BLL;
 using Framework.Core;
 
-using SampleSystem.Domain;
 using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Projections;
 using SampleSystem.IntegrationTests.__Support.TestData;

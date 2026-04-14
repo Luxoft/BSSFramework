@@ -1,6 +1,5 @@
 ﻿using Framework.Validation;
 
-using SampleSystem.Domain;
 using SampleSystem.Domain._Validation._Operation;
 
 // ReSharper disable once CheckNamespace

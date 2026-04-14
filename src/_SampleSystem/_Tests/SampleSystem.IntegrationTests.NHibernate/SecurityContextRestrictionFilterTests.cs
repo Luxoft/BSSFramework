@@ -1,7 +1,6 @@
 ﻿using Framework.Application;
 using Framework.Database;
 
-using SampleSystem.Domain;
 using SampleSystem.Domain.BU;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;

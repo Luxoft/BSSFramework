@@ -4,7 +4,6 @@ using Framework.AutomationCore.Utils;
 using Framework.BLL;
 using Framework.Core;
 
-using SampleSystem.Domain;
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Employee;

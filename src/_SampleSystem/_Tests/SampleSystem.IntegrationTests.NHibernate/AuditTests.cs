@@ -9,7 +9,6 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Audit;
 using SampleSystem.WebApiCore.Controllers.Main;
-
 using BusinessUnitController = SampleSystem.WebApiCore.Controllers.Audit.BusinessUnitController;
 
 namespace SampleSystem.IntegrationTests;

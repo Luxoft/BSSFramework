@@ -5,7 +5,8 @@ using GenericQueryable.Fetching;
 using OData.Domain;
 
 using SampleSystem.Domain.Models.Filters;
-using SampleSystem.Domain.Projections;
+
+using TestBusinessUnit = SampleSystem.Domain.Projections.TestBusinessUnit;
 
 namespace SampleSystem.BLL;
 

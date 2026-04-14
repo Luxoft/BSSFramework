@@ -16,7 +16,6 @@ using Framework.Database.NHibernate._MappingSettings;
 using Framework.ExtendedMetadata;
 using Framework.ExtendedMetadata.Builder;
 using Framework.Tracking.Validation;
-using Framework.Validation;
 using Framework.Validation.Attributes.Available;
 using Framework.Validation.Attributes.Available.Range;
 

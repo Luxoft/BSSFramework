@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using SampleSystem.Domain.ExternalPrincipal;
+
 namespace SampleSystem.BLL
 {
     
@@ -467,25 +469,25 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.BU.BusinessUnit, string>(source => source.ProjectStartMailList, currentClass, this.GetBusinessUnit_ProjectStartMailListValidators(), this.GetClassMap<string>(true));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.BusinessUnitRootFilterModel, System.Collections.Generic.List<System.DateTime>>> GetBusinessUnitRootFilterModel_ListDaysValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel, System.Collections.Generic.List<System.DateTime>>> GetBusinessUnitRootFilterModel_ListDaysValidators()
         {
-            yield return new Framework.Validation.Validators.Deep.DeepCollectionValidator<SampleSystem.Domain.BusinessUnitRootFilterModel, System.Collections.Generic.List<System.DateTime>, System.DateTime>();
+            yield return new Framework.Validation.Validators.Deep.DeepCollectionValidator<SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel, System.Collections.Generic.List<System.DateTime>, System.DateTime>();
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.BusinessUnitRootFilterModel, System.Collections.Generic.List<Framework.Core.Period>>> GetBusinessUnitRootFilterModel_ListPeriodsValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel, System.Collections.Generic.List<Framework.Core.Period>>> GetBusinessUnitRootFilterModel_ListPeriodsValidators()
         {
-            yield return new Framework.Validation.Validators.Deep.DeepCollectionValidator<SampleSystem.Domain.BusinessUnitRootFilterModel, System.Collections.Generic.List<Framework.Core.Period>, Framework.Core.Period>();
+            yield return new Framework.Validation.Validators.Deep.DeepCollectionValidator<SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel, System.Collections.Generic.List<Framework.Core.Period>, Framework.Core.Period>();
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.BusinessUnitRootFilterModel>> GetBusinessUnitRootFilterModelProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.BusinessUnitRootFilterModel> currentClass)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel>> GetBusinessUnitRootFilterModelProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel> currentClass)
         {
-            yield return new Framework.Validation.Map.CollectionPropertyValidationMap<SampleSystem.Domain.BusinessUnitRootFilterModel, System.Collections.Generic.List<System.DateTime>, System.DateTime>(source => source.ListDays, currentClass, this.GetBusinessUnitRootFilterModel_ListDaysValidators(), this.GetClassMap<System.DateTime>(true));
-            yield return new Framework.Validation.Map.CollectionPropertyValidationMap<SampleSystem.Domain.BusinessUnitRootFilterModel, System.Collections.Generic.List<Framework.Core.Period>, Framework.Core.Period>(source => source.ListPeriods, currentClass, this.GetBusinessUnitRootFilterModel_ListPeriodsValidators(), this.GetClassMap<Framework.Core.Period>(true));
+            yield return new Framework.Validation.Map.CollectionPropertyValidationMap<SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel, System.Collections.Generic.List<System.DateTime>, System.DateTime>(source => source.ListDays, currentClass, this.GetBusinessUnitRootFilterModel_ListDaysValidators(), this.GetClassMap<System.DateTime>(true));
+            yield return new Framework.Validation.Map.CollectionPropertyValidationMap<SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel, System.Collections.Generic.List<Framework.Core.Period>, Framework.Core.Period>(source => source.ListPeriods, currentClass, this.GetBusinessUnitRootFilterModel_ListPeriodsValidators(), this.GetClassMap<Framework.Core.Period>(true));
         }
         
-        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.BusinessUnitRootFilterModel> GetBusinessUnitRootFilterModelValidationMap()
+        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel> GetBusinessUnitRootFilterModelValidationMap()
         {
-            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.BusinessUnitRootFilterModel>(this.GetBusinessUnitRootFilterModelProperties);
+            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel>(this.GetBusinessUnitRootFilterModelProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.BU.BusinessUnitToAncestorChildView, System.DateTime?>> GetBusinessUnitToAncestorChildView_CreateDateValidators()
@@ -1223,106 +1225,106 @@ namespace SampleSystem.BLL
             return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.Employee.EmployeeCellPhone>(this.GetEmployeeCellPhoneProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.EmployeeComplexChangeModel, string>> GetEmployeeComplexChangeModel_EmailValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel, string>> GetEmployeeComplexChangeModel_EmailValidators()
         {
-            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.EmployeeComplexChangeModel>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.EmployeeComplexChangeModel, SampleSystem.Domain.Employee.Employee>> GetEmployeeComplexChangeModel_PrimaryChangingObjectValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel, SampleSystem.Domain.Employee.Employee>> GetEmployeeComplexChangeModel_PrimaryChangingObjectValidators()
         {
-            yield return new Framework.Validation.Validators.RequiredValidator<SampleSystem.Domain.EmployeeComplexChangeModel, SampleSystem.Domain.Employee.Employee>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.Validation.Validators.RequiredValidator<SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel, SampleSystem.Domain.Employee.Employee>(Framework.Restriction.RequiredMode.Default);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.EmployeeComplexChangeModel, System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee>>> GetEmployeeComplexChangeModel_SecondaryChangingObjectsValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel, System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee>>> GetEmployeeComplexChangeModel_SecondaryChangingObjectsValidators()
         {
-            yield return new Framework.Validation.Validators.RequiredValidator<SampleSystem.Domain.EmployeeComplexChangeModel, System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee>>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.Validation.Validators.Deep.DeepCollectionValidator<SampleSystem.Domain.EmployeeComplexChangeModel, System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee>, SampleSystem.Domain.Employee.Employee>();
+            yield return new Framework.Validation.Validators.RequiredValidator<SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel, System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee>>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.Validation.Validators.Deep.DeepCollectionValidator<SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel, System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee>, SampleSystem.Domain.Employee.Employee>();
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.EmployeeComplexChangeModel>> GetEmployeeComplexChangeModelProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.EmployeeComplexChangeModel> currentClass)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel>> GetEmployeeComplexChangeModelProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel> currentClass)
         {
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.EmployeeComplexChangeModel, string>(source => source.Email, currentClass, this.GetEmployeeComplexChangeModel_EmailValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.EmployeeComplexChangeModel, SampleSystem.Domain.Employee.Employee>(source => source.PrimaryChangingObject, currentClass, this.GetEmployeeComplexChangeModel_PrimaryChangingObjectValidators(), this.GetClassMap<SampleSystem.Domain.Employee.Employee>(true));
-            yield return new Framework.Validation.Map.CollectionPropertyValidationMap<SampleSystem.Domain.EmployeeComplexChangeModel, System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee>, SampleSystem.Domain.Employee.Employee>(source => source.SecondaryChangingObjects, currentClass, this.GetEmployeeComplexChangeModel_SecondaryChangingObjectsValidators(), this.GetClassMap<SampleSystem.Domain.Employee.Employee>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel, string>(source => source.Email, currentClass, this.GetEmployeeComplexChangeModel_EmailValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel, SampleSystem.Domain.Employee.Employee>(source => source.PrimaryChangingObject, currentClass, this.GetEmployeeComplexChangeModel_PrimaryChangingObjectValidators(), this.GetClassMap<SampleSystem.Domain.Employee.Employee>(true));
+            yield return new Framework.Validation.Map.CollectionPropertyValidationMap<SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel, System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee>, SampleSystem.Domain.Employee.Employee>(source => source.SecondaryChangingObjects, currentClass, this.GetEmployeeComplexChangeModel_SecondaryChangingObjectsValidators(), this.GetClassMap<SampleSystem.Domain.Employee.Employee>(true));
         }
         
-        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.EmployeeComplexChangeModel> GetEmployeeComplexChangeModelValidationMap()
+        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel> GetEmployeeComplexChangeModelValidationMap()
         {
-            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.EmployeeComplexChangeModel>(this.GetEmployeeComplexChangeModelProperties);
+            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel>(this.GetEmployeeComplexChangeModelProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.EmployeeCustomEventModel, string>> GetEmployeeCustomEventModel_LoginValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Models.Event.EmployeeCustomEventModel, string>> GetEmployeeCustomEventModel_LoginValidators()
         {
-            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.EmployeeCustomEventModel>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Models.Event.EmployeeCustomEventModel>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.EmployeeCustomEventModel>> GetEmployeeCustomEventModelProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.EmployeeCustomEventModel> currentClass)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.Models.Event.EmployeeCustomEventModel>> GetEmployeeCustomEventModelProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Event.EmployeeCustomEventModel> currentClass)
         {
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.EmployeeCustomEventModel, string>(source => source.Login, currentClass, this.GetEmployeeCustomEventModel_LoginValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Models.Event.EmployeeCustomEventModel, string>(source => source.Login, currentClass, this.GetEmployeeCustomEventModel_LoginValidators(), this.GetClassMap<string>(true));
         }
         
-        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.EmployeeCustomEventModel> GetEmployeeCustomEventModelValidationMap()
+        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Event.EmployeeCustomEventModel> GetEmployeeCustomEventModelValidationMap()
         {
-            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.EmployeeCustomEventModel>(this.GetEmployeeCustomEventModelProperties);
+            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.Models.Event.EmployeeCustomEventModel>(this.GetEmployeeCustomEventModelProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.EmployeeCustomIntegrationSaveModel, SampleSystem.Domain.Employee.Employee>> GetEmployeeCustomIntegrationSaveModel_SavingObjectValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel, SampleSystem.Domain.Employee.Employee>> GetEmployeeCustomIntegrationSaveModel_SavingObjectValidators()
         {
-            yield return new Framework.Validation.Validators.RequiredValidator<SampleSystem.Domain.EmployeeCustomIntegrationSaveModel, SampleSystem.Domain.Employee.Employee>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.Validation.Validators.Deep.DeepSingleValidator<SampleSystem.Domain.EmployeeCustomIntegrationSaveModel, SampleSystem.Domain.Employee.Employee>();
+            yield return new Framework.Validation.Validators.RequiredValidator<SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel, SampleSystem.Domain.Employee.Employee>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.Validation.Validators.Deep.DeepSingleValidator<SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel, SampleSystem.Domain.Employee.Employee>();
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.EmployeeCustomIntegrationSaveModel>> GetEmployeeCustomIntegrationSaveModelProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.EmployeeCustomIntegrationSaveModel> currentClass)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel>> GetEmployeeCustomIntegrationSaveModelProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel> currentClass)
         {
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.EmployeeCustomIntegrationSaveModel, SampleSystem.Domain.Employee.Employee>(source => source.SavingObject, currentClass, this.GetEmployeeCustomIntegrationSaveModel_SavingObjectValidators(), this.GetClassMap<SampleSystem.Domain.Employee.Employee>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel, SampleSystem.Domain.Employee.Employee>(source => source.SavingObject, currentClass, this.GetEmployeeCustomIntegrationSaveModel_SavingObjectValidators(), this.GetClassMap<SampleSystem.Domain.Employee.Employee>(true));
         }
         
-        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.EmployeeCustomIntegrationSaveModel> GetEmployeeCustomIntegrationSaveModelValidationMap()
+        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel> GetEmployeeCustomIntegrationSaveModelValidationMap()
         {
-            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.EmployeeCustomIntegrationSaveModel>(this.GetEmployeeCustomIntegrationSaveModelProperties);
+            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel>(this.GetEmployeeCustomIntegrationSaveModelProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.EmployeeEmailChangeModel, SampleSystem.Domain.Employee.Employee>> GetEmployeeEmailChangeModel_ChangingObjectValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel, SampleSystem.Domain.Employee.Employee>> GetEmployeeEmailChangeModel_ChangingObjectValidators()
         {
-            yield return new Framework.Validation.Validators.RequiredValidator<SampleSystem.Domain.EmployeeEmailChangeModel, SampleSystem.Domain.Employee.Employee>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.Validation.Validators.RequiredValidator<SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel, SampleSystem.Domain.Employee.Employee>(Framework.Restriction.RequiredMode.Default);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.EmployeeEmailChangeModel, string>> GetEmployeeEmailChangeModel_EmailValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel, string>> GetEmployeeEmailChangeModel_EmailValidators()
         {
-            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.EmployeeEmailChangeModel>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.EmployeeEmailChangeModel>> GetEmployeeEmailChangeModelProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.EmployeeEmailChangeModel> currentClass)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel>> GetEmployeeEmailChangeModelProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel> currentClass)
         {
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.EmployeeEmailChangeModel, SampleSystem.Domain.Employee.Employee>(source => source.ChangingObject, currentClass, this.GetEmployeeEmailChangeModel_ChangingObjectValidators(), this.GetClassMap<SampleSystem.Domain.Employee.Employee>(true));
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.EmployeeEmailChangeModel, string>(source => source.Email, currentClass, this.GetEmployeeEmailChangeModel_EmailValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel, SampleSystem.Domain.Employee.Employee>(source => source.ChangingObject, currentClass, this.GetEmployeeEmailChangeModel_ChangingObjectValidators(), this.GetClassMap<SampleSystem.Domain.Employee.Employee>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel, string>(source => source.Email, currentClass, this.GetEmployeeEmailChangeModel_EmailValidators(), this.GetClassMap<string>(true));
         }
         
-        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.EmployeeEmailChangeModel> GetEmployeeEmailChangeModelValidationMap()
+        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel> GetEmployeeEmailChangeModelValidationMap()
         {
-            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.EmployeeEmailChangeModel>(this.GetEmployeeEmailChangeModelProperties);
+            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel>(this.GetEmployeeEmailChangeModelProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.EmployeeEmailMassChangeModel, System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee>>> GetEmployeeEmailMassChangeModel_ChangingObjectsValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel, System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee>>> GetEmployeeEmailMassChangeModel_ChangingObjectsValidators()
         {
-            yield return new Framework.Validation.Validators.RequiredValidator<SampleSystem.Domain.EmployeeEmailMassChangeModel, System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee>>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.Validation.Validators.Deep.DeepCollectionValidator<SampleSystem.Domain.EmployeeEmailMassChangeModel, System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee>, SampleSystem.Domain.Employee.Employee>();
+            yield return new Framework.Validation.Validators.RequiredValidator<SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel, System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee>>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.Validation.Validators.Deep.DeepCollectionValidator<SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel, System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee>, SampleSystem.Domain.Employee.Employee>();
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.EmployeeEmailMassChangeModel, string>> GetEmployeeEmailMassChangeModel_EmailValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel, string>> GetEmployeeEmailMassChangeModel_EmailValidators()
         {
-            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.EmployeeEmailMassChangeModel>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.EmployeeEmailMassChangeModel>> GetEmployeeEmailMassChangeModelProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.EmployeeEmailMassChangeModel> currentClass)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel>> GetEmployeeEmailMassChangeModelProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel> currentClass)
         {
-            yield return new Framework.Validation.Map.CollectionPropertyValidationMap<SampleSystem.Domain.EmployeeEmailMassChangeModel, System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee>, SampleSystem.Domain.Employee.Employee>(source => source.ChangingObjects, currentClass, this.GetEmployeeEmailMassChangeModel_ChangingObjectsValidators(), this.GetClassMap<SampleSystem.Domain.Employee.Employee>(true));
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.EmployeeEmailMassChangeModel, string>(source => source.Email, currentClass, this.GetEmployeeEmailMassChangeModel_EmailValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.CollectionPropertyValidationMap<SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel, System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee>, SampleSystem.Domain.Employee.Employee>(source => source.ChangingObjects, currentClass, this.GetEmployeeEmailMassChangeModel_ChangingObjectsValidators(), this.GetClassMap<SampleSystem.Domain.Employee.Employee>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel, string>(source => source.Email, currentClass, this.GetEmployeeEmailMassChangeModel_EmailValidators(), this.GetClassMap<string>(true));
         }
         
-        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.EmployeeEmailMassChangeModel> GetEmployeeEmailMassChangeModelValidationMap()
+        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel> GetEmployeeEmailMassChangeModelValidationMap()
         {
-            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.EmployeeEmailMassChangeModel>(this.GetEmployeeEmailMassChangeModelProperties);
+            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel>(this.GetEmployeeEmailMassChangeModelProperties);
         }
         
         protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Filters.EmployeeFilterModel> GetEmployeeFilterModelValidationMap()
@@ -1697,9 +1699,9 @@ namespace SampleSystem.BLL
             return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.Employee.EmployeeRole>(this.GetEmployeeRoleProperties);
         }
         
-        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.EmployeeRootFilterModel> GetEmployeeRootFilterModelValidationMap()
+        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel> GetEmployeeRootFilterModelValidationMap()
         {
-            return Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.EmployeeRootFilterModel>.Empty;
+            return Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel>.Empty;
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Employee.EmployeeSpecialization, System.DateTime?>> GetEmployeeSpecialization_CreateDateValidators()
@@ -2431,25 +2433,25 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel, string>> GetIntegrationVersionContainer1CustomIntegrationSaveModel_CustomNameValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel, string>> GetIntegrationVersionContainer1CustomIntegrationSaveModel_CustomNameValidators()
         {
-            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>> GetIntegrationVersionContainer1CustomIntegrationSaveModel_SavingObjectValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>> GetIntegrationVersionContainer1CustomIntegrationSaveModel_SavingObjectValidators()
         {
-            yield return new Framework.Validation.Validators.RequiredValidator<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.Validation.Validators.RequiredValidator<SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(Framework.Restriction.RequiredMode.Default);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel>> GetIntegrationVersionContainer1CustomIntegrationSaveModelProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel> currentClass)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel>> GetIntegrationVersionContainer1CustomIntegrationSaveModelProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel> currentClass)
         {
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel, string>(source => source.CustomName, currentClass, this.GetIntegrationVersionContainer1CustomIntegrationSaveModel_CustomNameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(source => source.SavingObject, currentClass, this.GetIntegrationVersionContainer1CustomIntegrationSaveModel_SavingObjectValidators(), this.GetClassMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel, string>(source => source.CustomName, currentClass, this.GetIntegrationVersionContainer1CustomIntegrationSaveModel_CustomNameValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel, SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(source => source.SavingObject, currentClass, this.GetIntegrationVersionContainer1CustomIntegrationSaveModel_SavingObjectValidators(), this.GetClassMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(true));
         }
         
-        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel> GetIntegrationVersionContainer1CustomIntegrationSaveModelValidationMap()
+        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel> GetIntegrationVersionContainer1CustomIntegrationSaveModelValidationMap()
         {
-            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel>(this.GetIntegrationVersionContainer1CustomIntegrationSaveModelProperties);
+            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel>(this.GetIntegrationVersionContainer1CustomIntegrationSaveModelProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>> GetIntegrationVersionContainer1Properties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1> currentClass)
@@ -2538,10 +2540,6 @@ namespace SampleSystem.BLL
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.BU.BusinessUnitToAncestorChildView)))
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetBusinessUnitToAncestorChildViewValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.BusinessUnitRootFilterModel)))
-            {
-                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetBusinessUnitRootFilterModelValidationMap()));
             }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.Directories.Address)))
             {
@@ -2679,30 +2677,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetTestRestrictionObjectValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.EmployeeComplexChangeModel)))
-            {
-                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetEmployeeComplexChangeModelValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.EmployeeCustomEventModel)))
-            {
-                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetEmployeeCustomEventModelValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.EmployeeCustomIntegrationSaveModel)))
-            {
-                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetEmployeeCustomIntegrationSaveModelValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.EmployeeEmailChangeModel)))
-            {
-                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetEmployeeEmailChangeModelValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.EmployeeEmailMassChangeModel)))
-            {
-                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetEmployeeEmailMassChangeModelValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.EmployeeRootFilterModel)))
-            {
-                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetEmployeeRootFilterModelValidationMap()));
-            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.EnversBug1676.Coefficient1676)))
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetCoefficient1676ValidationMap()));
@@ -2735,10 +2709,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetHRDepartmentRoleEmployeeValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel)))
-            {
-                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetIntegrationVersionContainer1CustomIntegrationSaveModelValidationMap()));
-            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1)))
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetIntegrationVersionContainer1ValidationMap()));
@@ -2747,9 +2717,29 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetIntegrationVersionContainer2ValidationMap()));
             }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel)))
+            {
+                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetEmployeeComplexChangeModelValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel)))
+            {
+                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetEmployeeEmailChangeModelValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel)))
+            {
+                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetEmployeeEmailMassChangeModelValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject)))
+            {
+                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetTestUnpersistentObjectValidationMap()));
+            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.Models.Custom.DateModel)))
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetDateModelValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Models.Event.EmployeeCustomEventModel)))
+            {
+                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetEmployeeCustomEventModelValidationMap()));
             }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel)))
             {
@@ -2767,9 +2757,29 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetHierarchicalBusinessUnitFilterModelValidationMap()));
             }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter)))
+            {
+                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetTestEmployeeFilterValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel)))
+            {
+                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetBusinessUnitRootFilterModelValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel)))
+            {
+                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetEmployeeRootFilterModelValidationMap()));
+            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel)))
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetSingleEmployeeFilterModelValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel)))
+            {
+                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetEmployeeCustomIntegrationSaveModelValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel)))
+            {
+                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetIntegrationVersionContainer1CustomIntegrationSaveModelValidationMap()));
             }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.MU.ManagementUnit)))
             {
@@ -2807,7 +2817,7 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetNoSecurityObjectValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Principal)))
+            else if ((typeof(TSource) == typeof(Principal)))
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetPrincipalValidationMap()));
             }
@@ -2863,10 +2873,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetTestPlainAuthObjectValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestEmployeeFilter)))
-            {
-                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetTestEmployeeFilterValidationMap()));
-            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestForceAbstract.ClassA)))
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetClassAValidationMap()));
@@ -2902,10 +2908,6 @@ namespace SampleSystem.BLL
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestRelativeEmployeeParentObject)))
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetTestRelativeEmployeeParentObjectValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestUnpersistentObject)))
-            {
-                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetTestUnpersistentObjectValidationMap()));
             }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.UniqueByParent.ChildEntity)))
             {
@@ -3480,43 +3482,43 @@ namespace SampleSystem.BLL
             return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.UniqueByParent.ParentEntity>(this.GetParentEntityProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Principal, System.DateTime?>> GetPrincipal_CreateDateValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<Principal, System.DateTime?>> GetPrincipal_CreateDateValidators()
         {
-            yield return Framework.Validation.Validators.DynamicClass.Available.Base.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.Principal>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+            yield return Framework.Validation.Validators.DynamicClass.Available.Base.RangePropertyValidatorHelper.DateTime.CreateNullable<Principal>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Principal, string>> GetPrincipal_CreatedByValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<Principal, string>> GetPrincipal_CreatedByValidators()
         {
-            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Principal>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<Principal>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Principal, string>> GetPrincipal_ExternalIdValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<Principal, string>> GetPrincipal_ExternalIdValidators()
         {
-            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Principal>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<Principal>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Principal, string>> GetPrincipal_ModifiedByValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<Principal, string>> GetPrincipal_ModifiedByValidators()
         {
-            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Principal>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<Principal>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Principal, System.DateTime?>> GetPrincipal_ModifyDateValidators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<Principal, System.DateTime?>> GetPrincipal_ModifyDateValidators()
         {
-            yield return Framework.Validation.Validators.DynamicClass.Available.Base.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.Principal>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+            yield return Framework.Validation.Validators.DynamicClass.Available.Base.RangePropertyValidatorHelper.DateTime.CreateNullable<Principal>(this.AvailableValues.GetAvailableRange<System.DateTime>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.Principal>> GetPrincipalProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Principal> currentClass)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<Principal>> GetPrincipalProperties(Framework.Validation.Map.IClassValidationMap<Principal> currentClass)
         {
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Principal, System.DateTime?>(source => source.CreateDate, currentClass, this.GetPrincipal_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Principal, string>(source => source.CreatedBy, currentClass, this.GetPrincipal_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Principal, string>(source => source.ExternalId, currentClass, this.GetPrincipal_ExternalIdValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Principal, string>(source => source.ModifiedBy, currentClass, this.GetPrincipal_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Principal, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetPrincipal_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<Principal, System.DateTime?>(source => source.CreateDate, currentClass, this.GetPrincipal_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<Principal, string>(source => source.CreatedBy, currentClass, this.GetPrincipal_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<Principal, string>(source => source.ExternalId, currentClass, this.GetPrincipal_ExternalIdValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<Principal, string>(source => source.ModifiedBy, currentClass, this.GetPrincipal_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<Principal, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetPrincipal_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
         }
         
-        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Principal> GetPrincipalValidationMap()
+        protected virtual Framework.Validation.Map.IClassValidationMap<Principal> GetPrincipalValidationMap()
         {
-            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.Principal>(this.GetPrincipalProperties);
+            return new Framework.Validation.Map.ClassValidationMap<Principal>(this.GetPrincipalProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Projects.Project, SampleSystem.Domain.BU.BusinessUnit>> GetProject_BusinessUnitValidators()
@@ -3783,9 +3785,9 @@ namespace SampleSystem.BLL
             return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.TestDefaultFieldsMappingObj>(this.GetTestDefaultFieldsMappingObjProperties);
         }
         
-        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.TestEmployeeFilter> GetTestEmployeeFilterValidationMap()
+        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter> GetTestEmployeeFilterValidationMap()
         {
-            return Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.TestEmployeeFilter>.Empty;
+            return Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter>.Empty;
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Employee.TestExceptObject, System.DateTime?>> GetTestExceptObject_CreateDateValidators()
@@ -4489,19 +4491,19 @@ namespace SampleSystem.BLL
             return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem>(this.GetTestSecuritySubObjItemProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestUnpersistentObject, string>> GetTestUnpersistentObject_Value1Validators()
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject, string>> GetTestUnpersistentObject_Value1Validators()
         {
-            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestUnpersistentObject>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject>(this.AvailableValues.GetAvailableSize<string>());
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.TestUnpersistentObject>> GetTestUnpersistentObjectProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.TestUnpersistentObject> currentClass)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject>> GetTestUnpersistentObjectProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject> currentClass)
         {
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.TestUnpersistentObject, string>(source => source.Value1, currentClass, this.GetTestUnpersistentObject_Value1Validators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject, string>(source => source.Value1, currentClass, this.GetTestUnpersistentObject_Value1Validators(), this.GetClassMap<string>(true));
         }
         
-        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.TestUnpersistentObject> GetTestUnpersistentObjectValidationMap()
+        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject> GetTestUnpersistentObjectValidationMap()
         {
-            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.TestUnpersistentObject>(this.GetTestUnpersistentObjectProperties);
+            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject>(this.GetTestUnpersistentObjectProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676, System.DateTime?>> GetWorkingCalendar1676_CreateDateValidators()

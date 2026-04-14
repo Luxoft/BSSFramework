@@ -8,18 +8,11 @@ using Expression = System.Linq.Expressions.Expression;
 
 namespace Framework.Database.NHibernate.Envers.LinqVisitors.Visitors;
 
-internal class Visitor : ExpressionVisitor
+internal class CriterionVisitor : ExpressionVisitor
 {
     private readonly Immutable<IAuditCriterion> criterion = new();
 
     public IAuditCriterion Criterion => this.criterion.Value;
-
-    public static IAuditCriterion GetCriterion(Expression expression)
-    {
-        var visitor = new Visitor();
-        visitor.Visit(expression);
-        return visitor.Criterion;
-    }
 
     protected override Expression VisitMethodCall(MethodCallExpression node)
     {

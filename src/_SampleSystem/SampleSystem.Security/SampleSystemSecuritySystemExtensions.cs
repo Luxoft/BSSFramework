@@ -1,9 +1,6 @@
 ﻿using Framework.Core;
 
 using SecuritySystem;
-
-using SampleSystem.Domain;
-
 using SecuritySystem.DependencyInjection;
 using SecuritySystem.VirtualPermission.DependencyInjection;
 

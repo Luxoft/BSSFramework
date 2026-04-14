@@ -3,7 +3,6 @@ using Framework.Database;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SampleSystem.Domain;
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.MU;
@@ -13,8 +12,6 @@ using SampleSystem.Security;
 
 using SecuritySystem.Notification;
 using SecuritySystem.Notification.Domain;
-
-using Principal = Framework.Authorization.Domain.Principal;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -400,7 +397,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
 
         this.Evaluate(
             DBSessionMode.Read,
-            context => context.ServiceProvider.GetRequiredService<INotificationPrincipalExtractor<Principal>>()
+            context => context.ServiceProvider.GetRequiredService<INotificationPrincipalExtractor<Framework.Authorization.Domain.Principal>>()
                               .GetPrincipalsAsync([SampleSystemSecurityRole.SearchTestBusinessRole], [..notificationFilterGroups])
                               .ToListAsync()
                               .GetAwaiter()

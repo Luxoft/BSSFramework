@@ -1,7 +1,6 @@
 ﻿using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
-
 using SampleSystem.BLL;
 using SampleSystem.Generated.DTO;
 

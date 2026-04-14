@@ -2,7 +2,8 @@
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
-using SampleSystem.WebApiCore.Controllers;
+using SampleSystem.WebApiCore.Controllers.Main;
+using DelegateToItemModelStrictDTO = Framework.Authorization.Generated.DTO.DelegateToItemModelStrictDTO;
 
 namespace SampleSystem.IntegrationTests.Auth;
 

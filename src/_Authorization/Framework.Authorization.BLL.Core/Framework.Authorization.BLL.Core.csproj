@@ -10,6 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IvAt.SecuritySystem.GeneralPermission.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Framework.Authorization.Domain.Models\Framework.Authorization.Domain.Models.csproj" />
 
     <ProjectReference Include="..\..\BLL\Framework.BLL.Abstractions\Framework.BLL.Abstractions.csproj" />

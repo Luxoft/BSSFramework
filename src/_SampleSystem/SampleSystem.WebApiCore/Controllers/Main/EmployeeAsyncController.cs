@@ -6,8 +6,6 @@ using Framework.Database;
 using GenericQueryable;
 
 using Microsoft.AspNetCore.Mvc;
-
-using SampleSystem.Domain;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Generated.DTO;
 

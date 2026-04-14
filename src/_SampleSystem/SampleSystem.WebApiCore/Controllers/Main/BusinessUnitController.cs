@@ -1,16 +1,14 @@
 ﻿using Framework.BLL;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Persistent;
-using Framework.BLL.OData;
 using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
 
 using OData.Domain;
-
-using SampleSystem.Domain;
 using SampleSystem.Domain.BU;
 using SampleSystem.Generated.DTO;
+using SelectOperationResultExtensions = Framework.BLL.OData.SelectOperationResultExtensions;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
@@ -24,7 +22,7 @@ public partial class BusinessUnitController
             {
                 var bll = evaluateData.Context.Logics.BusinessUnit;
                 var tree = bll.GetTree(new DTOFetchRule<BusinessUnit>(ViewDTOType.FullDTO));
-                return tree.ChangeItem(unit => unit.ToFullDTO(evaluateData.MappingService));
+                return HierarchicalNodeExtensions.ChangeItem<BusinessUnit, BusinessUnitFullDTO, Guid>(tree, unit => LambdaHelper.ToFullDTO((BusinessUnit)unit, evaluateData.MappingService));
             });
 
     [HttpPost]
@@ -40,6 +38,6 @@ public partial class BusinessUnitController
                     selectOperation,
                     new DTOFetchRule<BusinessUnit>(ViewDTOType.FullDTO));
 
-                return odataTree.ChangeItem(x => x.ToFullDTO(evaluateData.MappingService));
+                return SelectOperationResultExtensions.ChangeItem<BusinessUnit, BusinessUnitFullDTO, Guid>(odataTree, x => LambdaHelper.ToFullDTO((BusinessUnit)x, evaluateData.MappingService));
             });
 }

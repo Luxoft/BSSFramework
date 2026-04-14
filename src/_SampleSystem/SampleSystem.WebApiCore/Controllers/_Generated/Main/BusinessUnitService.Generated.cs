@@ -64,7 +64,7 @@
         }
         
         /// <summary>
-        /// Get BusinessUnits (FullDTO) by filter (SampleSystem.Domain.BusinessUnitRootFilterModel)
+        /// Get BusinessUnits (FullDTO) by filter (SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.BusinessUnitFullDTO> GetFullBusinessUnitsByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.BusinessUnitRootFilterModelStrictDTO filter)
@@ -75,7 +75,7 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.BusinessUnitFullDTO> GetFullBusinessUnitsByRootFilterInternal(SampleSystem.Generated.DTO.BusinessUnitRootFilterModelStrictDTO filter, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitBLL bll = evaluateData.Context.Logics.BusinessUnitFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.BusinessUnitRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
+            SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnit>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -174,7 +174,7 @@
         }
         
         /// <summary>
-        /// Get BusinessUnits (SimpleDTO) by filter (SampleSystem.Domain.BusinessUnitRootFilterModel)
+        /// Get BusinessUnits (SimpleDTO) by filter (SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.BusinessUnitSimpleDTO> GetSimpleBusinessUnitsByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.BusinessUnitRootFilterModelStrictDTO filter)
@@ -185,7 +185,7 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.BusinessUnitSimpleDTO> GetSimpleBusinessUnitsByRootFilterInternal(SampleSystem.Generated.DTO.BusinessUnitRootFilterModelStrictDTO filter, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitBLL bll = evaluateData.Context.Logics.BusinessUnitFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.BusinessUnitRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
+            SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnit>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -252,7 +252,7 @@
         }
         
         /// <summary>
-        /// Get BusinessUnits (VisualDTO) by filter (SampleSystem.Domain.BusinessUnitRootFilterModel)
+        /// Get BusinessUnits (VisualDTO) by filter (SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel)
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.BusinessUnitVisualDTO> GetVisualBusinessUnitsByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.BusinessUnitRootFilterModelStrictDTO filter)
@@ -263,7 +263,7 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.BusinessUnitVisualDTO> GetVisualBusinessUnitsByRootFilterInternal(SampleSystem.Generated.DTO.BusinessUnitRootFilterModelStrictDTO filter, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitBLL bll = evaluateData.Context.Logics.BusinessUnitFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.BusinessUnitRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
+            SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListBy(typedFilter, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnit>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         

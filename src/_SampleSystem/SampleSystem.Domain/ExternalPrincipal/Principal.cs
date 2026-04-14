@@ -1,8 +1,7 @@
 ﻿using Framework.BLL.Domain.ServiceRole;
 using Framework.Core;
 
-// ReSharper disable once CheckNamespace
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.ExternalPrincipal;
 
 /// <summary>
 /// #IADFRAME-1300

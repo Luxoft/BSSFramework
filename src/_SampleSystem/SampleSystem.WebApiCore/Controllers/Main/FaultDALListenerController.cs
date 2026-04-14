@@ -4,10 +4,8 @@ using Framework.Application.Repository;
 using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
-
 using SampleSystem.Domain;
 using SampleSystem.ServiceEnvironment;
-
 using SecuritySystem.Attributes;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;

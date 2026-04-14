@@ -8,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-using SampleSystem.Domain;
 using SampleSystem.Domain.Employee;
 using SampleSystem.EventMetadata;
 using SampleSystem.Security;

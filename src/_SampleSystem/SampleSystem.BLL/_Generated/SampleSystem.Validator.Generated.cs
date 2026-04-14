@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using SampleSystem.Domain.ExternalPrincipal;
+
 namespace SampleSystem.BLL
 {
     
@@ -34,7 +36,6 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.BU.BusinessUnitHrDepartment>(this.GetBusinessUnitHrDepartmentValidationResult);
             base.RegisterHandler<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>(this.GetBusinessUnitManagerCommissionLinkValidationResult);
             base.RegisterHandler<SampleSystem.Domain.BU.BusinessUnitToAncestorChildView>(this.GetBusinessUnitToAncestorChildViewValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.BusinessUnitRootFilterModel>(this.GetBusinessUnitRootFilterModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Directories.Address>(this.GetAddressValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Directories.BusinessUnitType>(this.GetBusinessUnitTypeValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType>(this.GetBusinessUnitTypeLinkWithPossibleFinancialProjectTypeValidationResult);
@@ -69,12 +70,6 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.Employee.RoleRoleDegreeLink>(this.GetRoleRoleDegreeLinkValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Employee.TestExceptObject>(this.GetTestExceptObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Employee.TestRestrictionObject>(this.GetTestRestrictionObjectValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.EmployeeComplexChangeModel>(this.GetEmployeeComplexChangeModelValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.EmployeeCustomEventModel>(this.GetEmployeeCustomEventModelValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.EmployeeCustomIntegrationSaveModel>(this.GetEmployeeCustomIntegrationSaveModelValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.EmployeeEmailChangeModel>(this.GetEmployeeEmailChangeModelValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.EmployeeEmailMassChangeModel>(this.GetEmployeeEmailMassChangeModelValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.EmployeeRootFilterModel>(this.GetEmployeeRootFilterModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.EnversBug1676.Coefficient1676>(this.GetCoefficient1676ValidationResult);
             base.RegisterHandler<SampleSystem.Domain.EnversBug1676.Location1676>(this.GetLocation1676ValidationResult);
             base.RegisterHandler<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>(this.GetWorkingCalendar1676ValidationResult);
@@ -83,15 +78,24 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.HRDepartment.HRDepartment>(this.GetHRDepartmentValidationResult);
             base.RegisterHandler<SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition>(this.GetHRDepartmentEmployeePositionValidationResult);
             base.RegisterHandler<SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee>(this.GetHRDepartmentRoleEmployeeValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel>(this.GetIntegrationVersionContainer1CustomIntegrationSaveModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(this.GetIntegrationVersionContainer1ValidationResult);
             base.RegisterHandler<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>(this.GetIntegrationVersionContainer2ValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel>(this.GetEmployeeComplexChangeModelValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel>(this.GetEmployeeEmailChangeModelValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel>(this.GetEmployeeEmailMassChangeModelValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject>(this.GetTestUnpersistentObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Models.Custom.DateModel>(this.GetDateModelValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.Models.Event.EmployeeCustomEventModel>(this.GetEmployeeCustomEventModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel>(this.GetBusinessUnitProgramClassFilterModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Models.Filters.EmployeeFilterModel>(this.GetEmployeeFilterModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Models.Filters.GuidBasedFilterModel>(this.GetGuidBasedFilterModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel>(this.GetHierarchicalBusinessUnitFilterModelValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter>(this.GetTestEmployeeFilterValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel>(this.GetBusinessUnitRootFilterModelValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel>(this.GetEmployeeRootFilterModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel>(this.GetSingleEmployeeFilterModelValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel>(this.GetEmployeeCustomIntegrationSaveModelValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel>(this.GetIntegrationVersionContainer1CustomIntegrationSaveModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.MU.ManagementUnit>(this.GetManagementUnitValidationResult);
             base.RegisterHandler<SampleSystem.Domain.MU.ManagementUnitAncestorLink>(this.GetManagementUnitAncestorLinkValidationResult);
             base.RegisterHandler<SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink>(this.GetManagementUnitAndBusinessUnitLinkValidationResult);
@@ -101,7 +105,7 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.NhFluentMapping.PureFluentMappingObject>(this.GetPureFluentMappingObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.NLock.GenericNamedLock>(this.GetGenericNamedLockValidationResult);
             base.RegisterHandler<SampleSystem.Domain.NoSecurityObject>(this.GetNoSecurityObjectValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.Principal>(this.GetPrincipalValidationResult);
+            base.RegisterHandler<Principal>(this.GetPrincipalValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Projects.Project>(this.GetProjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.SqlParserTestObj>(this.GetSqlParserTestObjValidationResult);
             base.RegisterHandler<SampleSystem.Domain.SqlParserTestObjContainer>(this.GetSqlParserTestObjContainerValidationResult);
@@ -115,7 +119,6 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.TestDeserializedAuth.TestItemAuthObject>(this.GetTestItemAuthObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>(this.GetTestPerformanceObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject>(this.GetTestPlainAuthObjectValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.TestEmployeeFilter>(this.GetTestEmployeeFilterValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestForceAbstract.ClassA>(this.GetClassAValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestForceAbstract.ClassAChild>(this.GetClassAChildValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestForceAbstract.ConcreteClassA>(this.GetConcreteClassAValidationResult);
@@ -125,7 +128,6 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.TestRelativeEmployeeChildObject>(this.GetTestRelativeEmployeeChildObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestRelativeEmployeeObject>(this.GetTestRelativeEmployeeObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestRelativeEmployeeParentObject>(this.GetTestRelativeEmployeeParentObjectValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.TestUnpersistentObject>(this.GetTestUnpersistentObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.UniqueByParent.ChildEntity>(this.GetChildEntityValidationResult);
             base.RegisterHandler<SampleSystem.Domain.UniqueByParent.ParentEntity>(this.GetParentEntityValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Inline.Fio>(this.GetFioValidationResult);
@@ -172,7 +174,7 @@ namespace SampleSystem.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetBusinessUnitRootFilterModelValidationResult(SampleSystem.Domain.BusinessUnitRootFilterModel source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetBusinessUnitRootFilterModelValidationResult(SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
@@ -262,27 +264,27 @@ namespace SampleSystem.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeComplexChangeModelValidationResult(SampleSystem.Domain.EmployeeComplexChangeModel source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeComplexChangeModelValidationResult(SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeCustomEventModelValidationResult(SampleSystem.Domain.EmployeeCustomEventModel source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeCustomEventModelValidationResult(SampleSystem.Domain.Models.Event.EmployeeCustomEventModel source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeCustomIntegrationSaveModelValidationResult(SampleSystem.Domain.EmployeeCustomIntegrationSaveModel source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeCustomIntegrationSaveModelValidationResult(SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeEmailChangeModelValidationResult(SampleSystem.Domain.EmployeeEmailChangeModel source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeEmailChangeModelValidationResult(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeEmailMassChangeModelValidationResult(SampleSystem.Domain.EmployeeEmailMassChangeModel source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeEmailMassChangeModelValidationResult(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
@@ -327,7 +329,7 @@ namespace SampleSystem.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeRootFilterModelValidationResult(SampleSystem.Domain.EmployeeRootFilterModel source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeRootFilterModelValidationResult(SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
@@ -422,7 +424,7 @@ namespace SampleSystem.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetIntegrationVersionContainer1CustomIntegrationSaveModelValidationResult(SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetIntegrationVersionContainer1CustomIntegrationSaveModelValidationResult(SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
@@ -502,7 +504,7 @@ namespace SampleSystem.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetPrincipalValidationResult(SampleSystem.Domain.Principal source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetPrincipalValidationResult(Principal source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
@@ -547,7 +549,7 @@ namespace SampleSystem.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestEmployeeFilterValidationResult(SampleSystem.Domain.TestEmployeeFilter source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestEmployeeFilterValidationResult(SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
@@ -642,7 +644,7 @@ namespace SampleSystem.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestUnpersistentObjectValidationResult(SampleSystem.Domain.TestUnpersistentObject source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestUnpersistentObjectValidationResult(SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject source, SampleSystem.Domain._Validation._Operation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

@@ -3,8 +3,6 @@ using Framework.Application.Repository;
 using Framework.BLL;
 using Framework.Database;
 
-using SampleSystem.Domain;
-
 using SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;

@@ -1,6 +1,5 @@
 ﻿using MediatR;
 
-using SampleSystem.Domain;
 using SampleSystem.Domain.NhFluentMapping;
 
 namespace SampleSystem.BLL._Command.CreateManagementUnitFluentMapping;

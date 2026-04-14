@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using SampleSystem.Domain.ExternalPrincipal;
+
 namespace SampleSystem.Generated.DTO
 {
     
@@ -5969,7 +5971,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Principal), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Principal), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct PrincipalIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.PrincipalIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
@@ -5992,7 +5994,7 @@ namespace SampleSystem.Generated.DTO
             this._id = source.Id;
         }
         
-        public PrincipalIdentityDTO(SampleSystem.Domain.Principal domainObject)
+        public PrincipalIdentityDTO(Principal domainObject)
         {
             if (object.ReferenceEquals(domainObject, null))
             {
@@ -6060,7 +6062,7 @@ namespace SampleSystem.Generated.DTO
             return this.Id.GetHashCode();
         }
         
-        public SampleSystem.Domain.Principal ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public Principal ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToPrincipal(this);
         }
@@ -10307,101 +10309,6 @@ namespace SampleSystem.Generated.DTO
         public SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToBusinessUnitManagerCommissionLink(this, allowCreate);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitRootFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class BusinessUnitRootFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.BusinessUnitRootFilterModel>
-    {
-        
-        private System.DateTime[] _arrayDays;
-        
-        private Framework.Core.Period[] _arrayPeriods;
-        
-        private SampleSystem.Generated.DTO.EmployeeIdentityDTO _employee;
-        
-        private System.Collections.Generic.List<System.DateTime> _listDays = new System.Collections.Generic.List<System.DateTime>();
-        
-        private System.Collections.Generic.List<Framework.Core.Period> _listPeriods = new System.Collections.Generic.List<Framework.Core.Period>();
-        
-        public BusinessUnitRootFilterModelStrictDTO()
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime[] ArrayDays
-        {
-            get
-            {
-                return this._arrayDays;
-            }
-            set
-            {
-                this._arrayDays = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period[] ArrayPeriods
-        {
-            get
-            {
-                return this._arrayPeriods;
-            }
-            set
-            {
-                this._arrayPeriods = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeIdentityDTO Employee
-        {
-            get
-            {
-                return this._employee;
-            }
-            set
-            {
-                this._employee = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<System.DateTime> ListDays
-        {
-            get
-            {
-                return this._listDays;
-            }
-            set
-            {
-                this._listDays = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Framework.Core.Period> ListPeriods
-        {
-            get
-            {
-                return this._listPeriods;
-            }
-            set
-            {
-                this._listPeriods = value;
-            }
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.BusinessUnitRootFilterModel domainObject)
-        {
-            mappingService.MapBusinessUnitRootFilterModel(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.BusinessUnitRootFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToBusinessUnitRootFilterModel(this);
         }
     }
     
@@ -19451,471 +19358,6 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeComplexChangeModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeComplexChangeModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeComplexChangeModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeComplexChangeModel>
-    {
-        
-        private string _email;
-        
-        private SampleSystem.Generated.DTO.EmployeeIdentityDTO _primaryChangingObject;
-        
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _secondaryChangingObjects = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO>();
-        
-        public EmployeeComplexChangeModelStrictDTO()
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email
-        {
-            get
-            {
-                return this._email;
-            }
-            set
-            {
-                this._email = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeIdentityDTO PrimaryChangingObject
-        {
-            get
-            {
-                return this._primaryChangingObject;
-            }
-            set
-            {
-                this._primaryChangingObject = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> SecondaryChangingObjects
-        {
-            get
-            {
-                return this._secondaryChangingObjects;
-            }
-            set
-            {
-                this._secondaryChangingObjects = value;
-            }
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeComplexChangeModel domainObject)
-        {
-            mappingService.MapEmployeeComplexChangeModel(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.EmployeeComplexChangeModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToEmployeeComplexChangeModel(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailChangeModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO))]
-    public partial class EmployeeEmailChangeModelSimpleDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
-    {
-        
-        private string _email;
-        
-        public EmployeeEmailChangeModelSimpleDTO()
-        {
-        }
-        
-        public EmployeeEmailChangeModelSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailChangeModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapEmployeeEmailChangeModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email
-        {
-            get
-            {
-                return this._email;
-            }
-            set
-            {
-                this._email = value;
-            }
-        }
-        
-        public virtual SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailChangeModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO))]
-    public partial class EmployeeEmailChangeModelFullDTO : SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _changingObject;
-        
-        public EmployeeEmailChangeModelFullDTO()
-        {
-        }
-        
-        public EmployeeEmailChangeModelFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailChangeModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapEmployeeEmailChangeModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeSimpleDTO ChangingObject
-        {
-            get
-            {
-                return this._changingObject;
-            }
-            set
-            {
-                this._changingObject = value;
-            }
-        }
-        
-        public override SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailChangeModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeEmailChangeModelRichDTO : SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO
-    {
-        
-        public EmployeeEmailChangeModelRichDTO()
-        {
-        }
-        
-        public EmployeeEmailChangeModelRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailChangeModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapEmployeeEmailChangeModel(domainObject, this);
-        }
-        
-        public override SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailChangeModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeEmailChangeModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeEmailChangeModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeEmailChangeModel>
-    {
-        
-        private SampleSystem.Generated.DTO.EmployeeIdentityDTO _changingObject;
-        
-        private string _email;
-        
-        public EmployeeEmailChangeModelStrictDTO()
-        {
-        }
-        
-        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForEmployeeEmailChangeModel(this, source);
-        }
-        
-        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForEmployeeEmailChangeModel(this, source);
-        }
-        
-        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForEmployeeEmailChangeModel(this, source);
-        }
-        
-        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeIdentityDTO ChangingObject
-        {
-            get
-            {
-                return this._changingObject;
-            }
-            set
-            {
-                this._changingObject = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email
-        {
-            get
-            {
-                return this._email;
-            }
-            set
-            {
-                this._email = value;
-            }
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailChangeModel domainObject)
-        {
-            mappingService.MapEmployeeEmailChangeModel(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.EmployeeEmailChangeModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToEmployeeEmailChangeModel(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailMassChangeModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO))]
-    public partial class EmployeeEmailMassChangeModelSimpleDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
-    {
-        
-        private string _email;
-        
-        public EmployeeEmailMassChangeModelSimpleDTO()
-        {
-        }
-        
-        public EmployeeEmailMassChangeModelSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapEmployeeEmailMassChangeModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email
-        {
-            get
-            {
-                return this._email;
-            }
-            set
-            {
-                this._email = value;
-            }
-        }
-        
-        public virtual SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailMassChangeModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO))]
-    public partial class EmployeeEmailMassChangeModelFullDTO : SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO
-    {
-        
-        public EmployeeEmailMassChangeModelFullDTO()
-        {
-        }
-        
-        public EmployeeEmailMassChangeModelFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapEmployeeEmailMassChangeModel(domainObject, this);
-        }
-        
-        public override SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailMassChangeModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeEmailMassChangeModelRichDTO : SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO
-    {
-        
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeSimpleDTO> _changingObjects = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeSimpleDTO>();
-        
-        public EmployeeEmailMassChangeModelRichDTO()
-        {
-        }
-        
-        public EmployeeEmailMassChangeModelRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapEmployeeEmailMassChangeModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeSimpleDTO> ChangingObjects
-        {
-            get
-            {
-                return this._changingObjects;
-            }
-            set
-            {
-                this._changingObjects = value;
-            }
-        }
-        
-        public override SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeEmailMassChangeModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeEmailMassChangeModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeEmailMassChangeModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeEmailMassChangeModel>
-    {
-        
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _changingObjects = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO>();
-        
-        private string _email;
-        
-        public EmployeeEmailMassChangeModelStrictDTO()
-        {
-        }
-        
-        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForEmployeeEmailMassChangeModel(this, source);
-        }
-        
-        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForEmployeeEmailMassChangeModel(this, source);
-        }
-        
-        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForEmployeeEmailMassChangeModel(this, source);
-        }
-        
-        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> ChangingObjects
-        {
-            get
-            {
-                return this._changingObjects;
-            }
-            set
-            {
-                this._changingObjects = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email
-        {
-            get
-            {
-                return this._email;
-            }
-            set
-            {
-                this._email = value;
-            }
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeEmailMassChangeModel domainObject)
-        {
-            mappingService.MapEmployeeEmailMassChangeModel(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.EmployeeEmailMassChangeModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToEmployeeEmailMassChangeModel(this);
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRootFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeRootFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.EmployeeRootFilterModel>
-    {
-        
-        public EmployeeRootFilterModelStrictDTO()
-        {
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.EmployeeRootFilterModel domainObject)
-        {
-            mappingService.MapEmployeeRootFilterModel(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.EmployeeRootFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToEmployeeRootFilterModel(this);
-        }
-    }
-    
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EnversBug1676.Location1676), "VisualDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class Location1676VisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Location1676IdentityDTO>
@@ -22569,6 +22011,451 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class EmployeeComplexChangeModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel>
+    {
+        
+        private string _email;
+        
+        private SampleSystem.Generated.DTO.EmployeeIdentityDTO _primaryChangingObject;
+        
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _secondaryChangingObjects = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO>();
+        
+        public EmployeeComplexChangeModelStrictDTO()
+        {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeIdentityDTO PrimaryChangingObject
+        {
+            get
+            {
+                return this._primaryChangingObject;
+            }
+            set
+            {
+                this._primaryChangingObject = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> SecondaryChangingObjects
+        {
+            get
+            {
+                return this._secondaryChangingObjects;
+            }
+            set
+            {
+                this._secondaryChangingObjects = value;
+            }
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel domainObject)
+        {
+            mappingService.MapEmployeeComplexChangeModel(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToEmployeeComplexChangeModel(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO))]
+    public partial class EmployeeEmailChangeModelSimpleDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
+    {
+        
+        private string _email;
+        
+        public EmployeeEmailChangeModelSimpleDTO()
+        {
+        }
+        
+        public EmployeeEmailChangeModelSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapEmployeeEmailChangeModel(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+        
+        public virtual SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO))]
+    public partial class EmployeeEmailChangeModelFullDTO : SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _changingObject;
+        
+        public EmployeeEmailChangeModelFullDTO()
+        {
+        }
+        
+        public EmployeeEmailChangeModelFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapEmployeeEmailChangeModel(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeSimpleDTO ChangingObject
+        {
+            get
+            {
+                return this._changingObject;
+            }
+            set
+            {
+                this._changingObject = value;
+            }
+        }
+        
+        public override SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class EmployeeEmailChangeModelRichDTO : SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO
+    {
+        
+        public EmployeeEmailChangeModelRichDTO()
+        {
+        }
+        
+        public EmployeeEmailChangeModelRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapEmployeeEmailChangeModel(domainObject, this);
+        }
+        
+        public override SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.EmployeeEmailChangeModelStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class EmployeeEmailChangeModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel>
+    {
+        
+        private SampleSystem.Generated.DTO.EmployeeIdentityDTO _changingObject;
+        
+        private string _email;
+        
+        public EmployeeEmailChangeModelStrictDTO()
+        {
+        }
+        
+        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapRichToStrictForEmployeeEmailChangeModel(this, source);
+        }
+        
+        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelRichDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapFullToStrictForEmployeeEmailChangeModel(this, source);
+        }
+        
+        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelFullDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapSimpleToStrictForEmployeeEmailChangeModel(this, source);
+        }
+        
+        public EmployeeEmailChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeIdentityDTO ChangingObject
+        {
+            get
+            {
+                return this._changingObject;
+            }
+            set
+            {
+                this._changingObject = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel domainObject)
+        {
+            mappingService.MapEmployeeEmailChangeModel(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToEmployeeEmailChangeModel(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO))]
+    public partial class EmployeeEmailMassChangeModelSimpleDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
+    {
+        
+        private string _email;
+        
+        public EmployeeEmailMassChangeModelSimpleDTO()
+        {
+        }
+        
+        public EmployeeEmailMassChangeModelSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapEmployeeEmailMassChangeModel(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+        
+        public virtual SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO))]
+    public partial class EmployeeEmailMassChangeModelFullDTO : SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO
+    {
+        
+        public EmployeeEmailMassChangeModelFullDTO()
+        {
+        }
+        
+        public EmployeeEmailMassChangeModelFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapEmployeeEmailMassChangeModel(domainObject, this);
+        }
+        
+        public override SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class EmployeeEmailMassChangeModelRichDTO : SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO
+    {
+        
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeSimpleDTO> _changingObjects = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeSimpleDTO>();
+        
+        public EmployeeEmailMassChangeModelRichDTO()
+        {
+        }
+        
+        public EmployeeEmailMassChangeModelRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapEmployeeEmailMassChangeModel(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeSimpleDTO> ChangingObjects
+        {
+            get
+            {
+                return this._changingObjects;
+            }
+            set
+            {
+                this._changingObjects = value;
+            }
+        }
+        
+        public override SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO ToStrict()
+        {
+            return new SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelStrictDTO(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class EmployeeEmailMassChangeModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel>
+    {
+        
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _changingObjects = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO>();
+        
+        private string _email;
+        
+        public EmployeeEmailMassChangeModelStrictDTO()
+        {
+        }
+        
+        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapRichToStrictForEmployeeEmailMassChangeModel(this, source);
+        }
+        
+        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelRichDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
+                this(((SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO)(source)), mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapFullToStrictForEmployeeEmailMassChangeModel(this, source);
+        }
+        
+        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelFullDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
+        {
+            if (object.ReferenceEquals(mappingService, null))
+            {
+                throw new System.ArgumentNullException("mappingService");
+            }
+            mappingService.MapSimpleToStrictForEmployeeEmailMassChangeModel(this, source);
+        }
+        
+        public EmployeeEmailMassChangeModelStrictDTO(SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelSimpleDTO source) : 
+                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
+        {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> ChangingObjects
+        {
+            get
+            {
+                return this._changingObjects;
+            }
+            set
+            {
+                this._changingObjects = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email
+        {
+            get
+            {
+                return this._email;
+            }
+            set
+            {
+                this._email = value;
+            }
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel domainObject)
+        {
+            mappingService.MapEmployeeEmailMassChangeModel(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToEmployeeEmailMassChangeModel(this);
+        }
+    }
+    
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class BusinessUnitProgramClassFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel>
@@ -22656,6 +22543,186 @@ namespace SampleSystem.Generated.DTO
         public SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToHierarchicalBusinessUnitFilterModel(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestEmployeeFilterStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter>
+    {
+        
+        private SampleSystem.Generated.DTO.BusinessUnitIdentityDTO _businessUnit;
+        
+        private SampleSystem.Domain.Models.Filters.Projection.SampleStruct _sampleStruct;
+        
+        private bool _testValue;
+        
+        public TestEmployeeFilterStrictDTO()
+        {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitIdentityDTO BusinessUnit
+        {
+            get
+            {
+                return this._businessUnit;
+            }
+            set
+            {
+                this._businessUnit = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Domain.Models.Filters.Projection.SampleStruct SampleStruct
+        {
+            get
+            {
+                return this._sampleStruct;
+            }
+            set
+            {
+                this._sampleStruct = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool TestValue
+        {
+            get
+            {
+                return this._testValue;
+            }
+            set
+            {
+                this._testValue = value;
+            }
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter domainObject)
+        {
+            mappingService.MapTestEmployeeFilter(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestEmployeeFilter(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class BusinessUnitRootFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel>
+    {
+        
+        private System.DateTime[] _arrayDays;
+        
+        private Framework.Core.Period[] _arrayPeriods;
+        
+        private SampleSystem.Generated.DTO.EmployeeIdentityDTO _employee;
+        
+        private System.Collections.Generic.List<System.DateTime> _listDays = new System.Collections.Generic.List<System.DateTime>();
+        
+        private System.Collections.Generic.List<Framework.Core.Period> _listPeriods = new System.Collections.Generic.List<Framework.Core.Period>();
+        
+        public BusinessUnitRootFilterModelStrictDTO()
+        {
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime[] ArrayDays
+        {
+            get
+            {
+                return this._arrayDays;
+            }
+            set
+            {
+                this._arrayDays = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period[] ArrayPeriods
+        {
+            get
+            {
+                return this._arrayPeriods;
+            }
+            set
+            {
+                this._arrayPeriods = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeIdentityDTO Employee
+        {
+            get
+            {
+                return this._employee;
+            }
+            set
+            {
+                this._employee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<System.DateTime> ListDays
+        {
+            get
+            {
+                return this._listDays;
+            }
+            set
+            {
+                this._listDays = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Framework.Core.Period> ListPeriods
+        {
+            get
+            {
+                return this._listPeriods;
+            }
+            set
+            {
+                this._listPeriods = value;
+            }
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel domainObject)
+        {
+            mappingService.MapBusinessUnitRootFilterModel(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToBusinessUnitRootFilterModel(this);
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class EmployeeRootFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel>
+    {
+        
+        public EmployeeRootFilterModelStrictDTO()
+        {
+        }
+        
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel domainObject)
+        {
+            mappingService.MapEmployeeRootFilterModel(this, domainObject);
+        }
+        
+        public SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToEmployeeRootFilterModel(this);
         }
     }
     
@@ -24060,7 +24127,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Principal), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Principal), "SimpleDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.PrincipalFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.PrincipalRichDTO))]
@@ -24073,7 +24140,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public PrincipalSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Principal domainObject) : 
+        public PrincipalSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, Principal domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapPrincipal(domainObject, this);
@@ -24112,7 +24179,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Principal), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Principal), "FullDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.PrincipalRichDTO))]
     public partial class PrincipalFullDTO : SampleSystem.Generated.DTO.PrincipalSimpleDTO
@@ -24122,7 +24189,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public PrincipalFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Principal domainObject) : 
+        public PrincipalFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, Principal domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapPrincipal(domainObject, this);
@@ -24134,7 +24201,7 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Principal), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Principal), "RichDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class PrincipalRichDTO : SampleSystem.Generated.DTO.PrincipalFullDTO
     {
@@ -24143,7 +24210,7 @@ namespace SampleSystem.Generated.DTO
         {
         }
         
-        public PrincipalRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Principal domainObject) : 
+        public PrincipalRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, Principal domainObject) : 
                 base(mappingService, domainObject)
         {
             mappingService.MapPrincipal(domainObject, this);
@@ -24155,9 +24222,9 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Principal), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(Principal), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class PrincipalStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Principal, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Principal>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.PrincipalIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
+    public partial class PrincipalStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, Principal, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, Principal>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.PrincipalIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
         private string _externalId;
@@ -24308,17 +24375,17 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Principal domainObject)
+        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, Principal domainObject)
         {
             mappingService.MapPrincipal(this, domainObject);
         }
         
-        public SampleSystem.Domain.Principal ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        public Principal ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return mappingService.ToPrincipal(this);
         }
         
-        public SampleSystem.Domain.Principal ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
+        public Principal ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToPrincipal(this, allowCreate);
         }
@@ -26303,71 +26370,6 @@ namespace SampleSystem.Generated.DTO
             {
                 this._items = value;
             }
-        }
-    }
-    
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestEmployeeFilter), "StrictDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class TestEmployeeFilterStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.TestEmployeeFilter>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.TestEmployeeFilter>
-    {
-        
-        private SampleSystem.Generated.DTO.BusinessUnitIdentityDTO _businessUnit;
-        
-        private SampleSystem.Domain.SampleStruct _sampleStruct;
-        
-        private bool _testValue;
-        
-        public TestEmployeeFilterStrictDTO()
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitIdentityDTO BusinessUnit
-        {
-            get
-            {
-                return this._businessUnit;
-            }
-            set
-            {
-                this._businessUnit = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Domain.SampleStruct SampleStruct
-        {
-            get
-            {
-                return this._sampleStruct;
-            }
-            set
-            {
-                this._sampleStruct = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool TestValue
-        {
-            get
-            {
-                return this._testValue;
-            }
-            set
-            {
-                this._testValue = value;
-            }
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestEmployeeFilter domainObject)
-        {
-            mappingService.MapTestEmployeeFilter(this, domainObject);
-        }
-        
-        public SampleSystem.Domain.TestEmployeeFilter ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToTestEmployeeFilter(this);
         }
     }
     

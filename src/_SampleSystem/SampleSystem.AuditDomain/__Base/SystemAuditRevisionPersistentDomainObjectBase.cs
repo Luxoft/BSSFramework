@@ -1,6 +1,6 @@
 ﻿using Framework.Application.Domain;
 
-namespace SampleSystem.AuditDomain;
+namespace SampleSystem.AuditDomain.__Base;
 
 public abstract class SystemAuditRevisionPersistentDomainObjectBase : IIdentityObject<long>
 {

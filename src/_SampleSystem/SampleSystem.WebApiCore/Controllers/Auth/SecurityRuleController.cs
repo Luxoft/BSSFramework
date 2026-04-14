@@ -2,6 +2,7 @@
 
 using SecuritySystem.AvailableSecurity;
 
+// ReSharper disable once CheckNamespace
 namespace Authorization.WebApi.Controllers;
 
 [ApiController]

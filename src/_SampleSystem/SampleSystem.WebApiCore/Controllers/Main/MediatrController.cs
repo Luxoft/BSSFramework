@@ -4,7 +4,6 @@ using Framework.Infrastructure;
 using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
-
 using SampleSystem.BLL;
 using SampleSystem.BLL._Command.CreateIntegrationEvent;
 using SampleSystem.BLL._Command.CreateManagementUnitFluentMapping;
@@ -12,7 +11,7 @@ using SampleSystem.BLL._Query.GetEmployees;
 using SampleSystem.BLL._Query.GetManagementUnitFluentMappings;
 using SampleSystem.Generated.DTO;
 
-namespace SampleSystem.WebApiCore.Controllers;
+namespace SampleSystem.WebApiCore.Controllers.Main;
 
 [ApiController]
 [Route("authApi/[controller]/[action]")]

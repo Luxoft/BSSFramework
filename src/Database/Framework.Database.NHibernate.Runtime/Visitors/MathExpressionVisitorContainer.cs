@@ -2,7 +2,7 @@
 
 using Framework.Core.Visitors;
 
-namespace Framework.Database._Visitors.Containers;
+namespace Framework.Database.NHibernate.Visitors;
 
 public class MathExpressionVisitorContainer : ExpressionVisitorAggregator
 {

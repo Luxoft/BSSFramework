@@ -6,7 +6,7 @@ using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
 
-public class Subscription : Subscription<Domain.Directories.Country, CustomNotificationModel, ASP._DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml>
+public class Subscription : Subscription<Domain.Directories.Country, CustomNotificationModel, _DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml>
 {
 
     public const string AttachmentName = "test.txt";

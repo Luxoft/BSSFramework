@@ -1,4 +1,6 @@
-﻿namespace SampleSystem.AuditDomain;
+﻿using SampleSystem.AuditDomain.__Base;
+
+namespace SampleSystem.AuditDomain;
 
 public class SampleSystemAuditRevisionEntity : SystemAuditRevisionPersistentDomainObjectBase
 {

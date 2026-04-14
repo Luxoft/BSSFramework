@@ -1,10 +1,9 @@
 ﻿using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
-
 using SampleSystem.ServiceEnvironment;
 
-namespace SampleSystem.WebApiCore.Controllers;
+namespace SampleSystem.WebApiCore.Controllers.Main;
 
 [Route("api/[controller]/[action]")]
 [ApiController]

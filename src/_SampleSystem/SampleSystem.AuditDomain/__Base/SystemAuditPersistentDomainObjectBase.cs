@@ -1,7 +1,7 @@
 ﻿using Framework.Application.Domain;
 using Framework.Database.Domain;
 
-namespace SampleSystem.AuditDomain;
+namespace SampleSystem.AuditDomain.__Base;
 
 public abstract class SystemAuditPersistentDomainObjectBase : IIdentityObject<Guid>
 {

@@ -1,4 +1,5 @@
-﻿namespace Framework.Validation;
+﻿// ReSharper disable once CheckNamespace
+namespace Framework.Validation;
 
 public interface IElementValidator<in TValidationContext>
 {

@@ -6,10 +6,8 @@ using CommonFramework;
 
 using Framework.Application.Events;
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.FileFactory;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
-using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
-using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
 using Framework.CodeGeneration.DTOGenerator.Server.FileType;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Role.EventDTO;

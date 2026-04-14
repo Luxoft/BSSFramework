@@ -1,6 +1,5 @@
 ﻿using System.CodeDom;
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
-using Framework.CodeGeneration.BLLCoreGenerator.FileFactory.__Base;
 
 namespace Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
 

@@ -5,8 +5,7 @@ using CommonFramework;
 using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
-using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
-using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.__Base;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 

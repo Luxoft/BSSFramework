@@ -3,7 +3,7 @@
 using Framework.BLL.Services;
 using Framework.ExtendedMetadata;
 using Framework.Projection._ImplType;
-using Framework.Projection.Lambda.ProjectionSource._Base;
+using Framework.Projection.Lambda.ProjectionSource;
 
 namespace Framework.Projection.Lambda;
 

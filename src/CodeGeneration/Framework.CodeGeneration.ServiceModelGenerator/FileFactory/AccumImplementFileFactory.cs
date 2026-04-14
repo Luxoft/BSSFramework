@@ -1,6 +1,6 @@
 ﻿using System.CodeDom;
+
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
-using Framework.CodeGeneration.ServiceModelGenerator.FileFactory._Base;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.FileFactory;
 

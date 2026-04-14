@@ -2,8 +2,7 @@
 
 using Framework.Core;
 using Framework.Database.Metadata;
-using Framework.Database.NHibernate.DALGenerator._Internal;
-
+using Framework.Database.NHibernate.DALGenerator.Internal;
 using Framework.FileGeneration.Configuration;
 
 namespace Framework.Database.NHibernate.DALGenerator.Configuration;

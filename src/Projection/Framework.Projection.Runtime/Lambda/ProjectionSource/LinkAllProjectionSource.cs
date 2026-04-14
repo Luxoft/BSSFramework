@@ -1,6 +1,4 @@
-﻿using Framework.Projection.Lambda.ProjectionSource._Base;
-
-namespace Framework.Projection.Lambda.ProjectionSource;
+﻿namespace Framework.Projection.Lambda.ProjectionSource;
 
 internal class LinkAllProjectionSource(IProjectionSource baseSource) : IProjectionSource
 {

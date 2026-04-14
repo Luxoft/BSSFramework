@@ -9,7 +9,6 @@ using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileType;
-using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.__Base;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 

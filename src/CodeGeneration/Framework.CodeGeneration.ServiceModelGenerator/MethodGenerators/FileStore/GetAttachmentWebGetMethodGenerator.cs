@@ -6,7 +6,6 @@ using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.FileStoreAttachment;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.FileStore;
 

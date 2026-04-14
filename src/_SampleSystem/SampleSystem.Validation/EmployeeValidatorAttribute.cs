@@ -1,4 +1,4 @@
-﻿using Framework.Validation.Attributes._Base;
+﻿using Framework.Validation.Attributes;
 using Framework.Validation.Validators;
 
 namespace SampleSystem.Validation;

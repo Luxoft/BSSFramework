@@ -3,7 +3,7 @@
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
-using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.Members.MapToDomainObject;
 

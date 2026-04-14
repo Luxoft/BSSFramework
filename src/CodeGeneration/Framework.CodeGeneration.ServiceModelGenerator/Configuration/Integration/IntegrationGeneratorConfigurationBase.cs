@@ -2,7 +2,7 @@
 
 using Framework.BLL.Domain.DirectMode;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Remove;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save.ByModel;

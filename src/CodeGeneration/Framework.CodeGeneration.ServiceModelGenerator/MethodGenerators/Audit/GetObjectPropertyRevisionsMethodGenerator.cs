@@ -1,6 +1,5 @@
 ﻿using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Audit;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Audit._Base;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Audit;
 

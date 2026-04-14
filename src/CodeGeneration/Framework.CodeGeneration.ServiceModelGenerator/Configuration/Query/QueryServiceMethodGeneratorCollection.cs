@@ -3,7 +3,7 @@
 using Framework.BLL.Domain.DirectMode;
 using Framework.BLL.Domain.DTO;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Query.OData;
 using Framework.FileGeneration.Configuration;
 using Framework.Projection;

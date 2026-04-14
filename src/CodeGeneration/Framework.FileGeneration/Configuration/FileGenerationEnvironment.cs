@@ -15,8 +15,7 @@ using Framework.FileGeneration.Extensions;
 using Framework.Projection;
 using Framework.Projection.Contract;
 using Framework.Projection.Lambda;
-using Framework.Projection.Lambda.ProjectionSource._Base;
-
+using Framework.Projection.Lambda.ProjectionSource;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.FileGeneration.Configuration;

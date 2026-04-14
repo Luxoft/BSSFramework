@@ -8,7 +8,7 @@ using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Integration;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save.ByModel._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save.ByModel;
 using Framework.Core;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save;

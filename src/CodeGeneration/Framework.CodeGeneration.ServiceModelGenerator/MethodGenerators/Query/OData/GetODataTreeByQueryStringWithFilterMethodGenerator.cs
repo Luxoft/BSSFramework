@@ -9,7 +9,7 @@ using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View;
 using Framework.Core;
 using Framework.FileGeneration.Configuration;
 

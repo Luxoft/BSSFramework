@@ -1,6 +1,7 @@
 ﻿using Framework.Validation.Validators;
 
-namespace Framework.Validation.Attributes._Base;
+// ReSharper disable once CheckNamespace
+namespace Framework.Validation.Attributes;
 
 [AttributeUsage(AttributeTargets.Class)]
 public abstract class ClassValidatorAttribute : ValidatorAttribute

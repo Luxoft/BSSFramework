@@ -10,7 +10,6 @@ using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 using Framework.Database;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main;

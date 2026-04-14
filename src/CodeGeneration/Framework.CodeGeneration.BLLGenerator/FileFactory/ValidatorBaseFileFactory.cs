@@ -4,7 +4,6 @@ using System.Reflection;
 using Framework.BLL.Validation;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
-using Framework.CodeGeneration.BLLGenerator.FileFactory.__Base;
 using Framework.Validation;
 using Framework.Validation.Map;
 

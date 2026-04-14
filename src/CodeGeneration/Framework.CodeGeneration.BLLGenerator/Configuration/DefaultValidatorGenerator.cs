@@ -13,12 +13,10 @@ using Framework.CodeDom.Extensions;
 using Framework.Tracking.Validation;
 using Framework.FileGeneration.Configuration;
 using Framework.Validation.Attributes;
-using Framework.Validation.Attributes._Base;
 using Framework.Validation.Attributes.Available;
 using Framework.Validation.Attributes.Available.Range;
 using Framework.Validation.Extensions;
 using Framework.Validation.Validators;
-using Framework.Validation.Validators._Base.Extensions;
 using Framework.Validation.Validators.Deep;
 using Framework.Validation.Validators.DynamicClass.Available.Base;
 

@@ -3,10 +3,9 @@
 using CommonFramework;
 
 using Framework.Core;
-using Framework.Validation.Attributes._Base;
+using Framework.Validation.Attributes;
 using Framework.Validation.Extensions;
 using Framework.Validation.Validators;
-using Framework.Validation.Validators._Base.Extensions;
 using Framework.Validation.Validators.Deep;
 
 using Microsoft.Extensions.DependencyInjection;

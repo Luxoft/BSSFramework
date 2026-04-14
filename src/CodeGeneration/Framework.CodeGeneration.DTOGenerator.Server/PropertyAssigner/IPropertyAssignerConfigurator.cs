@@ -1,4 +1,4 @@
-﻿using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
+﻿using Framework.CodeGeneration.DTOGenerator.PropertyAssigner;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner;
 

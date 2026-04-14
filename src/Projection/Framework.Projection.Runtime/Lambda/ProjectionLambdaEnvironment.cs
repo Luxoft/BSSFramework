@@ -11,7 +11,6 @@ using Framework.Projection.Lambda._Extensions;
 using Framework.Projection.Lambda.Exceptions;
 using Framework.Projection.Lambda.ImplType;
 using Framework.Projection.Lambda.ProjectionSource;
-using Framework.Projection.Lambda.ProjectionSource._Base;
 using Framework.Projection.Lambda.ProjectionSource.AttributeSource;
 
 namespace Framework.Projection.Lambda;

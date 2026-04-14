@@ -10,7 +10,6 @@ using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
-using Framework.CodeGeneration.DTOGenerator.PropertyAssigner.__Base;
 using Framework.Core;
 using Framework.Relations;
 

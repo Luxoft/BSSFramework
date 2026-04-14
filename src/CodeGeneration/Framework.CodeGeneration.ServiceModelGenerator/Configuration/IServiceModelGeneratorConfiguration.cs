@@ -2,7 +2,7 @@
 
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.GeneratePolicy;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 

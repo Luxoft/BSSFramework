@@ -3,11 +3,8 @@
 using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory;
-using Framework.CodeGeneration.DTOGenerator.FileFactory._Helpers;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
-using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.__Base.ByProperty;
-using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
 

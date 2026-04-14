@@ -1,7 +1,7 @@
 ﻿using Framework.CodeGeneration.GeneratePolicy;
 using Framework.CodeGeneration.ServiceModelGenerator;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Main;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
 using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 

@@ -2,7 +2,7 @@
 
 using Framework.CodeGeneration.ServiceModelGenerator;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
-using Framework.CodeGeneration.ServiceModelGenerator.FileFactory._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.FileFactory;
 using Framework.Infrastructure;
 
 namespace Framework.CodeGeneration.WebApiGenerator;

@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 
-using Framework.Database.NHibernate.DALGenerator._Internal;
 using Framework.Database.NHibernate.DALGenerator.Configuration;
+using Framework.Database.NHibernate.DALGenerator.Internal;
 using Framework.FileGeneration;
 using Framework.FileGeneration.Configuration;
 

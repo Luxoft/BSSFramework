@@ -4,7 +4,6 @@ using System.Reflection;
 
 using Framework.BLL.Domain.DTO;
 using Framework.CodeGeneration.BLLGenerator.Fetching;
-using Framework.CodeGeneration.BLLGenerator.Fetching.PathFactory;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.FileFactory;
 using Framework.Core;
@@ -12,7 +11,6 @@ using Framework.FileGeneration.Configuration;
 using Framework.Restriction;
 using Framework.Validation;
 using Framework.Validation.Attributes;
-using Framework.Validation.Attributes._Base;
 using Framework.Validation.Extensions;
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;

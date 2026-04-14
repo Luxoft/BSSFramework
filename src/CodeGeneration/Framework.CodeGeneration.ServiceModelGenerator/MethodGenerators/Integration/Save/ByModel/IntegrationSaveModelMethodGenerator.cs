@@ -9,7 +9,7 @@ using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Server;
-using Framework.CodeGeneration.DTOGenerator.Server.FileFactory._Helpers;
+using Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Integration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;

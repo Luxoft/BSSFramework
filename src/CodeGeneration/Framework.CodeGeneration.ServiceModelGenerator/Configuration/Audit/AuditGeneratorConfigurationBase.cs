@@ -1,5 +1,5 @@
 ﻿using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Audit;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.Configuration.Audit;

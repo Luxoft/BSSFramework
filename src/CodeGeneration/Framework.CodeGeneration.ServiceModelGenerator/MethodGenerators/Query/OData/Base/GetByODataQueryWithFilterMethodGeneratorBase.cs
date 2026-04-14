@@ -7,8 +7,7 @@ using Framework.BLL.Domain.Extensions;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View._Base;
-
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View;
 using OData.Domain;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Query.OData.Base;

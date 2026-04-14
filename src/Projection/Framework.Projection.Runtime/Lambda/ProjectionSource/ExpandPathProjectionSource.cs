@@ -2,7 +2,6 @@
 
 using Framework.Database.Mapping.Extensions;
 using Framework.Projection.Lambda._Extensions;
-using Framework.Projection.Lambda.ProjectionSource._Base;
 
 namespace Framework.Projection.Lambda.ProjectionSource;
 

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.ExtendedMetadata</PackageId>
+    <PackageId>Luxoft.Framework.ExtendedMetadata.Runtime</PackageId>
     <RootNamespace>Framework.ExtendedMetadata</RootNamespace>
   </PropertyGroup>
 

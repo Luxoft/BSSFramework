@@ -27,9 +27,9 @@ public class CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOption
 
         private bool skipOptimizeValueNotEquality;
 
-        private string DeepOffset => new string(' ', this.Deep * 4);
+        private string DeepOffset => new(' ', this.Deep * 4);
 
-        private string NextDeepOffset => new string(' ', this.NextDeep * 4);
+        private string NextDeepOffset => new(' ', this.NextDeep * 4);
 
 
         public override CodeStatement VisitConditionStatement(CodeConditionStatement codeConditionStatement)

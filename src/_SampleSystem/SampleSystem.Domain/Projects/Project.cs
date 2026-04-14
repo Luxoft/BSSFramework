@@ -8,10 +8,9 @@ using Framework.Core;
 using Framework.Relations;
 using Framework.Restriction;
 using Framework.Validation.Attributes;
-
-using SampleSystem.Domain._Validation._Operation;
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Enums;
+using SampleSystem.Domain.Validation;
 
 namespace SampleSystem.Domain.Projects;
 

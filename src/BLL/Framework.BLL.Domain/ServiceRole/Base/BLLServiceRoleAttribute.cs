@@ -1,4 +1,5 @@
-﻿namespace Framework.BLL.Domain.ServiceRole.Base;
+﻿// ReSharper disable once CheckNamespace
+namespace Framework.BLL.Domain.ServiceRole;
 
 /// <summary>
 /// Базовый атрибут для фасадной роли

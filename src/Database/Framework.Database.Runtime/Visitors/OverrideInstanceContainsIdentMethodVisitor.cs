@@ -44,10 +44,8 @@ public class OverrideInstanceContainsIdentMethodVisitor<TIdent> : ExpressionVisi
 
     public static readonly OverrideInstanceContainsIdentMethodVisitor<TIdent> CollectionInterface =
 
-            new OverrideInstanceContainsIdentMethodVisitor<TIdent>(typeof(ICollection<TIdent>).GetMethod(CoreExpressionExtensions.GetMemberName((ICollection<TIdent> c) => c.Contains(default(TIdent))), true));
+            new(typeof(ICollection<TIdent>).GetMethod(CoreExpressionExtensions.GetMemberName((ICollection<TIdent> c) => c.Contains(default(TIdent))), true));
 
 
-    public static readonly OverrideInstanceContainsIdentMethodVisitor<TIdent> HashSet =
-
-            new OverrideInstanceContainsIdentMethodVisitor<TIdent>(new Func<TIdent, bool>(new HashSet<TIdent>().Contains).Method);
+    public static readonly OverrideInstanceContainsIdentMethodVisitor<TIdent> HashSet = new(new Func<TIdent, bool>(new HashSet<TIdent>().Contains).Method);
 }

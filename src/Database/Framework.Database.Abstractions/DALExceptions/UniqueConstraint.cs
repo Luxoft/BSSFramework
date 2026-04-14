@@ -8,7 +8,7 @@ namespace Framework.Database.DALExceptions;
 
 public struct UniqueConstraint
 {
-    private static readonly Regex FieldNameRegex = new Regex("(\\S*)Id");
+    private static readonly Regex FieldNameRegex = new("(\\S*)Id");
 
     public UniqueConstraint(DomainObjectInfo domainObjectInfo, string name, IEnumerable<string> properties, IDalValidationIdentitySource validationIdentitySource)
         : this()

@@ -3,8 +3,7 @@ using Framework.BLL.Domain.ServiceRole;
 using Framework.Core;
 using Framework.Relations;
 using Framework.Restriction;
-
-using SampleSystem.Domain.BU.__Base;
+using SampleSystem.Domain.BU;
 
 using SecuritySystem;
 

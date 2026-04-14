@@ -104,7 +104,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
 
         internal class ClassFactory
         {
-            public static readonly ClassFactory Instance = new ClassFactory();
+            public static readonly ClassFactory Instance = new();
 
             static ClassFactory() { }  // Trigger lazy initialization of static fields
 
@@ -297,7 +297,7 @@ internal static class MicrosoftCSharpExpressionParserImplement
 
             public class NoneResult : FindMethodsResult
             {
-                internal static NoneResult Instance = new NoneResult();
+                internal static NoneResult Instance = new();
                 private NoneResult()
                 {
                 }

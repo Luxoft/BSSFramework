@@ -1,8 +1,7 @@
 ﻿using Framework.Restriction;
 using Framework.Validation;
-
-using SampleSystem.Domain._Validation._Operation;
 using SampleSystem.Domain.Inline;
+using SampleSystem.Domain.Validation;
 
 namespace SampleSystem.Domain;
 

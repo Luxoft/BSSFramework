@@ -174,7 +174,7 @@ public partial class DataHelper
         var possibleParentsList =
                 new List<BusinessUnitTypeLinkWithPossibleParentStrictDTO>
                 {
-                        new BusinessUnitTypeLinkWithPossibleParentStrictDTO
+                        new()
                         {
                                 BusinessUnitType = type.ToIdentityDTO(), PossibleParent = type.ToIdentityDTO()
                         }
@@ -200,7 +200,7 @@ public partial class DataHelper
             var transferToList =
                     new List<BusinessUnitTypeLinkWithTransferToStrictDTO>
                     {
-                            new BusinessUnitTypeLinkWithTransferToStrictDTO
+                            new()
                             {
                                     BusinessUnitType = type.ToIdentityDTO(), TransferTo = type.ToIdentityDTO()
                             }

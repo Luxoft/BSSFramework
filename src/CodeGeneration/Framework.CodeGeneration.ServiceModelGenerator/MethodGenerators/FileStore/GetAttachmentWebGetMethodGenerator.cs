@@ -25,8 +25,8 @@ public class GetAttachmentWebGetMethodGenerator<TConfiguration>(TConfiguration c
 
     protected override IEnumerable<CodeParameterDeclarationExpression> GetParameters() =>
     [
-        new CodeParameterDeclarationExpression(typeof(Guid), "id"),
-        new CodeParameterDeclarationExpression(typeof(Guid), "randomGuid")
+        new(typeof(Guid), "id"),
+        new(typeof(Guid), "randomGuid")
     ];
 
     public override CodeMemberMethod GetContractMethod()

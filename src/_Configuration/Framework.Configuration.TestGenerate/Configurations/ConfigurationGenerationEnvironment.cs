@@ -1,7 +1,6 @@
 ﻿using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
-using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.CodeGeneration.Configuration;
 using Framework.Configuration.Domain;
 using Framework.Configuration.TestGenerate.Configurations.BLL;

@@ -6,7 +6,7 @@ internal partial class AuditPropertiesSetter
 {
     public class DomainObjectDescription
     {
-        private static readonly ConcurrentDictionary<Type, DomainObjectDescription> Cache = new ConcurrentDictionary<Type, DomainObjectDescription>();
+        private static readonly ConcurrentDictionary<Type, DomainObjectDescription> Cache = new();
 
         private DomainObjectDescription(Type type, string[] propertyNames)
         {

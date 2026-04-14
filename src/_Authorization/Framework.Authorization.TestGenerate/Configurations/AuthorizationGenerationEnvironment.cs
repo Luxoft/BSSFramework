@@ -9,7 +9,6 @@ using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
-using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.CodeGeneration.Configuration;
 using Framework.Database;
 using Framework.Database.NHibernate.Mapping;

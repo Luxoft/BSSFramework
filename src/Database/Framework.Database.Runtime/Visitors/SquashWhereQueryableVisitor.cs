@@ -102,7 +102,7 @@ internal class SquashWhereQueryableVisitor : ExpressionVisitor
 
         select (Expression)Expression.Call(method, innerCallExpr.Arguments[0], Expression.Quote(newFilter));
 
-    public static readonly SquashWhereQueryableVisitor Value = new SquashWhereQueryableVisitor();
+    public static readonly SquashWhereQueryableVisitor Value = new();
 
 
     private static Expression<Func<T, bool>> BuildExcept<T>(Expression<Func<T, bool>> expr1, Expression<Func<T, bool>> expr2)

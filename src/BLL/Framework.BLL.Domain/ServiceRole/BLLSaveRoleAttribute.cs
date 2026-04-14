@@ -1,23 +1,10 @@
-﻿using Framework.BLL.Domain.Helpers;
-using Framework.BLL.Domain.ServiceRole.Base;
-
-namespace Framework.BLL.Domain.ServiceRole;
+﻿namespace Framework.BLL.Domain.ServiceRole;
 
 /// <summary>
 /// Атрибут сохранения объекта через клиенсткий фасадный слой (так же дополнительно управляет CreateModelType/ChangeModelType/ExtendedModelType-моделями)
 /// </summary>
 public class BLLSaveRoleAttribute : BLLServiceRoleAttribute, IAllowCreateAttribute, ICountTypeContainer
 {
-    /// <inheritdoc />
-    public BLLSaveRoleAttribute()
-    {
-    }
-
-    [Obsolete(ObsoleteMessageHelper.LegacyCtorMessage, true)]
-    public BLLSaveRoleAttribute(bool customSave)
-    {
-    }
-
     /// <inheritdoc />
     public bool AllowCreate { get; set; } = true;
 

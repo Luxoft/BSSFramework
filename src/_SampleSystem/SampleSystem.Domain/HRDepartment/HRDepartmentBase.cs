@@ -3,9 +3,8 @@ using Framework.Core;
 using Framework.Restriction;
 using Framework.Validation;
 using Framework.Validation.Attributes;
-
-using SampleSystem.Domain._Validation._Operation;
 using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.Validation;
 
 namespace SampleSystem.Domain.HRDepartment;
 

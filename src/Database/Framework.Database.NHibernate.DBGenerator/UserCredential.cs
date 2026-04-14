@@ -25,7 +25,7 @@ public class DbUserCredential
 
     public virtual string Password => this.password;
 
-    public static DbUserCredential CreateDefault() => new DbUserCredential(null, null);
+    public static DbUserCredential CreateDefault() => new(null, null);
 
-    public static DbUserCredential Create(string name, string password) => new DbUserCredential(name, password);
+    public static DbUserCredential Create(string name, string password) => new(name, password);
 }

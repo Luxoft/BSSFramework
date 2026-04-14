@@ -1,5 +1,5 @@
 ﻿using MediatR;
 
-namespace SampleSystem.BLL._Command.CreateIntegrationEvent;
+namespace SampleSystem.BLL.Command.CreateIntegrationEvent;
 
 public record CreateIntegrationEventCommand : IRequest;

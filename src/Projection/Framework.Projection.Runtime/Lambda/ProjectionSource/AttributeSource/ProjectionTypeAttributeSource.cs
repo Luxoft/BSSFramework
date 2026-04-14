@@ -3,7 +3,6 @@
 using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.ServiceRole;
-using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.Database.Mapping;
 using Framework.Validation.Attributes;
 

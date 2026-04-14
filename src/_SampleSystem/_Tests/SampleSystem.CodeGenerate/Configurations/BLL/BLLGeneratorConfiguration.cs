@@ -1,10 +1,9 @@
 ﻿using System.Reflection;
 
 using Framework.CodeGeneration.BLLGenerator.Configuration;
-
-using SampleSystem.Domain._Validation._Operation;
 using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Employee;
+using SampleSystem.Domain.Validation;
 
 namespace SampleSystem.CodeGenerate.Configurations.BLL;
 

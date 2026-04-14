@@ -2,7 +2,7 @@
 
 using SampleSystem.Domain.NhFluentMapping;
 
-namespace SampleSystem.BLL._Command.CreateManagementUnitFluentMapping;
+namespace SampleSystem.BLL.Command.CreateManagementUnitFluentMapping;
 
 public class CreateManagementUnitFluentMappingHandler(IManagementUnitFluentMappingBLLFactory managementUnitFluentMappingBllFactory)
     : IRequestHandler<CreateManagementUnitFluentMappingCommand, Guid>

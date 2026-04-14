@@ -54,9 +54,9 @@ public partial class Employee :
     private Period educationDuration;
     private Gender gender;
 
-    private FioShort nameEng = new FioShort();
-    private Fio nameNative = new Fio();
-    private Fio nameRussian = new Fio();
+    private FioShort nameEng = new();
+    private Fio nameNative = new();
+    private Fio nameRussian = new();
     private EmployeeRegistrationType registrationType;
 
     private string email;

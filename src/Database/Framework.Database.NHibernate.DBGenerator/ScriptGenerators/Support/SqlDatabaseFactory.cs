@@ -37,7 +37,7 @@ public class SqlDatabaseFactory : ISqlDatabaseFactory
     /// <param name="serverName">Имя экземпляра SQL сервера</param>
     /// <returns>Подключенный к SQL серверу объект</returns>
     public static SqlDatabaseFactory CreateDefault(string serverName) =>
-            new SqlDatabaseFactory(new SqlConnectionInfo(serverName).Self(z => z.UseIntegratedSecurity = true));
+            new(new SqlConnectionInfo(serverName).Self(z => z.UseIntegratedSecurity = true));
 
     /// <summary>
     /// Создает стандартное подключение к экземпляру SQL сервера с именем <param name="serverName"></param>.
@@ -47,7 +47,7 @@ public class SqlDatabaseFactory : ISqlDatabaseFactory
     /// <param name="credentials">Учетная запись используемая для подключения к экземпляру SQL сервера</param>
     /// <returns>Подключенный к SQL серверу объект</returns>
     public static SqlDatabaseFactory Create(string serverName, DbUserCredential credentials) =>
-            new SqlDatabaseFactory(new SqlConnectionInfo(serverName, credentials.UserName, credentials.Password));
+            new(new SqlConnectionInfo(serverName, credentials.UserName, credentials.Password));
 
     /// <summary>
     /// Возвращает базу данных из экземпляра SQL сервера <see cref="ISqlDatabaseFactory.Server"/> с именем <paramref name="databaseName"/>

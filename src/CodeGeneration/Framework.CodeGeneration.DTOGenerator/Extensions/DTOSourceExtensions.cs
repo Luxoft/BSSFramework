@@ -4,7 +4,7 @@ using Framework.FileGeneration.Configuration;
 
 namespace Framework.CodeGeneration.DTOGenerator.Extensions;
 
-public static class DTOSouceExtensions
+public static class DTOSourceExtensions
 {
     public static bool IsPersistent<TConfiguration>(this IDTOSource<TConfiguration> source)
             where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>

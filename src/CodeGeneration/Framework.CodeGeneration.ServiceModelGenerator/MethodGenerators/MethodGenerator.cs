@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using CommonFramework;
 
 using Framework.BLL;
-using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;

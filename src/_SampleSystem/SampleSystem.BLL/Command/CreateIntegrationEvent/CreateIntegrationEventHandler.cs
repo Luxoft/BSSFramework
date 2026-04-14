@@ -2,10 +2,10 @@
 
 using MediatR;
 
-using SampleSystem.BLL._Command.ProcessIntegrationEvent;
+using SampleSystem.BLL.Command.ProcessIntegrationEvent;
 using SampleSystem.Domain.Directories;
 
-namespace SampleSystem.BLL._Command.CreateIntegrationEvent;
+namespace SampleSystem.BLL.Command.CreateIntegrationEvent;
 
 public class CreateIntegrationEventHandler(IIntegrationEventPublisher eventPublisher, ICountryBLLFactory countryBllFactory)
     : IRequestHandler<CreateIntegrationEventCommand>

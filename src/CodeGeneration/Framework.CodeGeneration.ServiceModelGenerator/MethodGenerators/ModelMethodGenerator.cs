@@ -1,5 +1,5 @@
 ﻿using CommonFramework;
-using Framework.BLL.Domain.ServiceRole.Base;
+
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.Core;
 using Framework.Database;

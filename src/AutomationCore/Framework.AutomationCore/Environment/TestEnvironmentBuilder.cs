@@ -105,7 +105,7 @@ public class TestEnvironmentBuilder
 
     protected virtual AssemblyInitializeAndCleanup GetAssemblyInitializeAndCleanup(
         IServiceProviderPool serviceProviderPool) =>
-        new AssemblyInitializeAndCleanup(
+        new(
             serviceProviderPool.Get,
             serviceProviderPool.Release);
 

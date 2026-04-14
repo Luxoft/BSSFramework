@@ -1,5 +1,5 @@
 ﻿using Bss.Platform.Events.Abstractions;
 
-namespace SampleSystem.BLL._Command.ProcessIntegrationEvent;
+namespace SampleSystem.BLL.Command.ProcessIntegrationEvent;
 
 public record TestIntegrationEvent(Guid CountryId) : IIntegrationEvent;

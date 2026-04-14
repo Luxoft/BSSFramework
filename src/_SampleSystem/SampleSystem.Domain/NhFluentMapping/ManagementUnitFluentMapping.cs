@@ -1,9 +1,7 @@
 ﻿using Framework.BLL.Domain.Serialization;
-using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.Core;
 using Framework.Database.Mapping;
-
-using SampleSystem.Domain.BU.__Base;
+using SampleSystem.Domain.BU;
 
 using SecuritySystem;
 

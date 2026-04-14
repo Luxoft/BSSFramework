@@ -18,7 +18,7 @@ namespace Framework.ExpressionParsers.CSharp;
 /// </summary>
 public class ScriptEngineService
 {
-    public static ScriptEngineService Value = new ScriptEngineService();
+    public static ScriptEngineService Value = new();
 
     private ScriptEngineService()
     {

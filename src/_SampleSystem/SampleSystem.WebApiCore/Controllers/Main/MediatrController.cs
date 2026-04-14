@@ -5,10 +5,10 @@ using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 using SampleSystem.BLL;
-using SampleSystem.BLL._Command.CreateIntegrationEvent;
-using SampleSystem.BLL._Command.CreateManagementUnitFluentMapping;
 using SampleSystem.BLL._Query.GetEmployees;
 using SampleSystem.BLL._Query.GetManagementUnitFluentMappings;
+using SampleSystem.BLL.Command.CreateIntegrationEvent;
+using SampleSystem.BLL.Command.CreateManagementUnitFluentMapping;
 using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;

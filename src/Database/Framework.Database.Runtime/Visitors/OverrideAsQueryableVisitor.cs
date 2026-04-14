@@ -102,5 +102,5 @@ public class RestoreQueryableCallsVisitor : ExpressionVisitor
     }
 
 
-    public static readonly RestoreQueryableCallsVisitor Value = new RestoreQueryableCallsVisitor();
+    public static readonly RestoreQueryableCallsVisitor Value = new();
 }

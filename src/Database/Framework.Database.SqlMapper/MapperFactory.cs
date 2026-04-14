@@ -7,7 +7,7 @@ namespace Framework.Database.SqlMapper;
 /// </summary>
 public static class MapperFactory
 {
-    private static readonly Dictionary<Type, IMapper> dictionary = new Dictionary<Type, IMapper>
+    private static readonly Dictionary<Type, IMapper> dictionary = new()
                                                                    {
                                                                        { typeof(ReferenceTypeFieldMetadata), new ReferenceTypeFieldMapper() },
                                                                        { typeof(PrimitiveTypeFieldMetadata), new PrimitiveTypeFieldMapper() },

@@ -13,5 +13,5 @@ public class AvailableDateTimeValidator : RangeClassValidator<DateTime, DateTime
     protected override Func<Range<DateTime>, DateTime, bool> IsValidValueFunc { get; } = RangePropertyValidatorHelper.DateTime.AvailableFunc;
 
 
-    public static AvailableDateTimeValidator Value { get; } = new AvailableDateTimeValidator();
+    public static AvailableDateTimeValidator Value { get; } = new();
 }

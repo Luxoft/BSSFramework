@@ -115,11 +115,11 @@ public class CSharpNativeExpressionParser(INativeBodyExpressionParser parser) : 
     /// Parse only primitive types
     /// </summary>
     /// <returns></returns>
-    public static readonly CSharpNativeExpressionParser Default = new CSharpNativeExpressionParser(new MicrosoftCSharpExpressionParser());
+    public static readonly CSharpNativeExpressionParser Default = new(new MicrosoftCSharpExpressionParser());
 
     /// <summary>
     /// Parse via compile
     /// </summary>
     /// <returns></returns>
-    public static readonly CSharpNativeExpressionParser Compile = new CSharpNativeExpressionParser(new RoslynCSharpExpressionParser());
+    public static readonly CSharpNativeExpressionParser Compile = new(new RoslynCSharpExpressionParser());
 }

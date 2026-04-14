@@ -58,5 +58,5 @@ public class ClassValidationMap<TSource> : ClassValidationMap, IClassValidationM
 
     protected override IReadOnlyCollection<IClassValidator> BaseValidators => this.Validators;
 
-    public static readonly ClassValidationMap<TSource> Empty = new ClassValidationMap<TSource>([], []);
+    public static readonly ClassValidationMap<TSource> Empty = new([], []);
 }

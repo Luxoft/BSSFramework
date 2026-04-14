@@ -26,7 +26,7 @@ public class AnyElementsValidator : IDynamicPropertyValidator
         return serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<IPropertyValidator>(typeof(AnyElementsValidator<>).MakeGenericType(elementType));
     }
 
-    public static AnyElementsValidator Value { get; } = new AnyElementsValidator();
+    public static AnyElementsValidator Value { get; } = new();
 }
 
 public class AnyElementsValidator<TElement> : IPropertyValidator<object, IEnumerable<TElement>?>

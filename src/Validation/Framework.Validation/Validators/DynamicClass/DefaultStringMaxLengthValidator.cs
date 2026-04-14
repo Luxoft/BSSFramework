@@ -27,5 +27,5 @@ public class DefaultStringMaxLengthValidator : IManyPropertyDynamicClassValidato
     }
 
 
-    public static DefaultStringMaxLengthValidator Value { get; } = new DefaultStringMaxLengthValidator();
+    public static DefaultStringMaxLengthValidator Value { get; } = new();
 }

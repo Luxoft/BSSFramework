@@ -4,10 +4,10 @@ using Framework.Application.Repository;
 
 using MediatR;
 
-using SampleSystem.BLL._Command.CreateClassA.Intergation;
+using SampleSystem.BLL.Command.CreateClassA.Intergation;
 using SampleSystem.Domain.TestForceAbstract;
 
-namespace SampleSystem.BLL._Command.CreateClassA;
+namespace SampleSystem.BLL.Command.CreateClassA;
 
 public record CreateClassAEventHandler(IRepositoryFactory<ClassA> Repository, IIntegrationEventPublisher EventPublisher)
     : IRequestHandler<CreateClassAEvent>

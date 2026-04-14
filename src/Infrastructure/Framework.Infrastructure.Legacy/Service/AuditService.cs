@@ -26,7 +26,7 @@ public class AuditService<TIdent, TBLLContext, TBllFactoryContainer, TRootSecuri
     where TBLLContext : IBLLFactoryContainerContext<TBllFactoryContainer>, ISecurityServiceContainer<TRootSecurityService>, IServiceProviderContainer
     where TRootSecurityService : IRootSecurityService
 {
-    private static readonly Lazy<Type> GenericTPropertyRevisionDtoType = new Lazy<Type>(
+    private static readonly Lazy<Type> GenericTPropertyRevisionDtoType = new(
      () => typeof(TPropertyRevisionDto)
            .Assembly
            .GetTypes()

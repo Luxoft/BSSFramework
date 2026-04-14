@@ -4,7 +4,7 @@ using CommonFramework;
 
 using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.Persistent.Attributes;
-using Framework.BLL.Domain.ServiceRole.Base;
+using Framework.BLL.Domain.ServiceRole;
 using Framework.Core;
 using Framework.Core.ReflectionImpl;
 using Framework.Database.Mapping;

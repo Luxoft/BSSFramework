@@ -35,7 +35,7 @@ public class DALGeneratorConfigurationBase<TEnvironment> : FileGeneratorConfigur
         }
     }
 
-    protected virtual MappingGenerator CreateMappingGenerator(Assembly assembly, AssemblyMetadata metadata) => new MappingGenerator(
+    protected virtual MappingGenerator CreateMappingGenerator(Assembly assembly, AssemblyMetadata metadata) => new(
         assembly.ToGroup(metadata.DomainTypes),
         this.EscapeWordService,
         this.DatabaseName,

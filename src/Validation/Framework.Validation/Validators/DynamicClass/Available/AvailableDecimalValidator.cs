@@ -13,5 +13,5 @@ public class AvailableDecimalValidator : RangeClassValidator<decimal, decimal>
     protected override Func<Range<decimal>, decimal, bool> IsValidValueFunc { get; } = RangePropertyValidatorHelper.Decimal.AvailableFunc;
 
 
-    public static AvailableDecimalValidator Value { get; } = new AvailableDecimalValidator();
+    public static AvailableDecimalValidator Value { get; } = new();
 }

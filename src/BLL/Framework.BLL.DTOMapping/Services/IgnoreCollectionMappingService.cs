@@ -13,5 +13,5 @@ public class IgnoreCollectionMappingService<TSource, TTarget> : ICollectionMappi
         if (target == null) throw new ArgumentNullException(nameof(target));
     }
 
-    public static readonly IgnoreCollectionMappingService<TSource, TTarget> Vaue = new IgnoreCollectionMappingService<TSource, TTarget>();
+    public static readonly IgnoreCollectionMappingService<TSource, TTarget> Vaue = new();
 }

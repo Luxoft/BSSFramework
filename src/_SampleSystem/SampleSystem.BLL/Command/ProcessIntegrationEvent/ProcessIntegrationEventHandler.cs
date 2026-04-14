@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace SampleSystem.BLL._Command.ProcessIntegrationEvent;
+namespace SampleSystem.BLL.Command.ProcessIntegrationEvent;
 
 public class ProcessIntegrationEventHandler(ICountryBLLFactory countryBllFactory) : INotificationHandler<TestIntegrationEvent>
 {

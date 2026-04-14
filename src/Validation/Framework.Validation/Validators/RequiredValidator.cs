@@ -44,7 +44,7 @@ public class RequiredValidator(RequiredMode mode) : IPropertyValidator<object, o
     }
 
 
-    public static RequiredValidator Default { get; } = new RequiredValidator(RequiredMode.Default);
+    public static RequiredValidator Default { get; } = new(RequiredMode.Default);
 }
 
 public class RequiredValidator<TSource, TProperty>(RequiredMode mode) : IPropertyValidator<TSource, TProperty>
@@ -69,5 +69,5 @@ public class RequiredValidator<TSource, TProperty>(RequiredMode mode) : IPropert
 
     protected virtual bool IsValid(IPropertyValidationContext<TSource, TProperty> context) => RequiredHelper.IsValid(context.Value, mode);
 
-    public static RequiredValidator<TSource, TProperty> Default { get; } = new RequiredValidator<TSource, TProperty>(RequiredMode.Default);
+    public static RequiredValidator<TSource, TProperty> Default { get; } = new(RequiredMode.Default);
 }

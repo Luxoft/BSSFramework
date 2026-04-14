@@ -1,5 +1,5 @@
 ﻿using Bss.Platform.Events.Abstractions;
 
-namespace SampleSystem.BLL._Command.CreateClassA.Intergation;
+namespace SampleSystem.BLL.Command.CreateClassA.Intergation;
 
 public record ClassACreatedEvent(Guid Id) : IIntegrationEvent;

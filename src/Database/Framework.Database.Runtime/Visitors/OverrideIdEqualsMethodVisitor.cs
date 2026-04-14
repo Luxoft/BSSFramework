@@ -10,7 +10,7 @@ internal class OverrideIdEqualsMethodVisitor<TIdent> : ExpressionVisitor
     private static readonly MethodInfo ObjectEqualsMethod = typeof(object).GetMethod(nameof(object.Equals), [typeof(object)]);
     private static readonly MethodInfo GenericEqualsMethod = typeof(TIdent).GetMethod(nameof(object.Equals), [typeof(TIdent)]);
 
-    private static readonly OverrideIdEqualsMethodVisitor<TIdent> Instance = new OverrideIdEqualsMethodVisitor<TIdent>();
+    private static readonly OverrideIdEqualsMethodVisitor<TIdent> Instance = new();
 
     private OverrideIdEqualsMethodVisitor()
     {

@@ -47,17 +47,17 @@ public class ModelRole(string name, DirectMode.DirectMode directMode) : IEquatab
 
 
 
-    public static readonly ModelRole Create = new ModelRole(() => Create, Domain.DirectMode.DirectMode.In);
+    public static readonly ModelRole Create = new(() => Create, Domain.DirectMode.DirectMode.In);
 
-    public static readonly ModelRole Extended = new ModelRole(() => Extended, Domain.DirectMode.DirectMode.Out | Domain.DirectMode.DirectMode.In);
+    public static readonly ModelRole Extended = new(() => Extended, Domain.DirectMode.DirectMode.Out | Domain.DirectMode.DirectMode.In);
 
-    public static readonly ModelRole Change = new ModelRole(() => Change, Domain.DirectMode.DirectMode.Out | Domain.DirectMode.DirectMode.In);
+    public static readonly ModelRole Change = new(() => Change, Domain.DirectMode.DirectMode.Out | Domain.DirectMode.DirectMode.In);
 
-    public static readonly ModelRole MassChange = new ModelRole(() => MassChange, Domain.DirectMode.DirectMode.Out | Domain.DirectMode.DirectMode.In);
+    public static readonly ModelRole MassChange = new(() => MassChange, Domain.DirectMode.DirectMode.Out | Domain.DirectMode.DirectMode.In);
 
-    public static readonly ModelRole Format = new ModelRole(() => Format, Domain.DirectMode.DirectMode.In);
+    public static readonly ModelRole Format = new(() => Format, Domain.DirectMode.DirectMode.In);
 
-    public static readonly ModelRole Filter = new ModelRole(() => Filter, Domain.DirectMode.DirectMode.In);
+    public static readonly ModelRole Filter = new(() => Filter, Domain.DirectMode.DirectMode.In);
 
-    public static readonly ModelRole IntegrationSave = new ModelRole(() => IntegrationSave, Domain.DirectMode.DirectMode.In);
+    public static readonly ModelRole IntegrationSave = new(() => IntegrationSave, Domain.DirectMode.DirectMode.In);
 }

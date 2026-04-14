@@ -14,12 +14,12 @@ public partial class BusinessUnitType :
         IMaster<BusinessUnitTypeLinkWithPossibleFinancialProjectType>,
         IMaster<BusinessUnitTypeLinkWithTransferTo>
 {
-    public static readonly Guid AccountTypeId = new Guid("E186F760-1BDE-4C95-8423-6C3CD2AFB4BF");
-    public static readonly Guid LobTypeId = new Guid("F513D669-5CB7-4C00-A1FE-941993C062FE");
-    public static readonly Guid ServiceTypeId = new Guid("410A7481-BDE9-413D-A430-FE2B0EC21805");
-    public static readonly Guid DivisionTypeId = new Guid("C746C9B1-7249-48EC-AA9B-5176787FB4EC");
-    public static readonly Guid ProgramTypeId = new Guid("0BDAC72D-2A31-438B-AA0A-82BB1FFE94EF");
-    public static readonly Guid SEAdministrativeId = new Guid("0436552c-3028-44ba-84e4-a171013c4686");
+    public static readonly Guid AccountTypeId = new("E186F760-1BDE-4C95-8423-6C3CD2AFB4BF");
+    public static readonly Guid LobTypeId = new("F513D669-5CB7-4C00-A1FE-941993C062FE");
+    public static readonly Guid ServiceTypeId = new("410A7481-BDE9-413D-A430-FE2B0EC21805");
+    public static readonly Guid DivisionTypeId = new("C746C9B1-7249-48EC-AA9B-5176787FB4EC");
+    public static readonly Guid ProgramTypeId = new("0BDAC72D-2A31-438B-AA0A-82BB1FFE94EF");
+    public static readonly Guid SEAdministrativeId = new("0436552c-3028-44ba-84e4-a171013c4686");
 
     private readonly ICollection<BusinessUnitTypeLinkWithPossibleParent> possibleParents =
             new List<BusinessUnitTypeLinkWithPossibleParent>();

@@ -3,9 +3,11 @@ using Framework.BLL.Domain.ServiceRole.Base;
 using Framework.Core;
 using Framework.Database.Mapping;
 
+using SampleSystem.Domain.BU.__Base;
+
 using SecuritySystem;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.NhFluentMapping;
 
 [BLLRole]
 [IgnoreHbmMapping]

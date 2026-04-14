@@ -1,7 +1,11 @@
 ﻿using Framework.BLL.Domain.ServiceRole;
 using Framework.Relations;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.NhFluentMapping;
+
+namespace SampleSystem.Domain.TestDependency;
 
 [BLLViewRole]
 public class TestRootSecurityObj : BaseDirectory, IMaster<TestSecurityObjItem>

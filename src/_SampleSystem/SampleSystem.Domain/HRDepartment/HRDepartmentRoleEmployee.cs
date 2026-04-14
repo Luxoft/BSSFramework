@@ -1,11 +1,13 @@
 ﻿using Framework.Relations;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.Enums;
+
+namespace SampleSystem.Domain.HRDepartment;
 
 public class HRDepartmentRoleEmployee : AuditPersistentDomainObjectBase, IDetail<HRDepartment>
 {
-    private Employee employee;
+    private Employee.Employee employee;
     private HRDepartment hRDepartment;
     private HRDepartmentEmployeeRoleType hRDepartmentEmployeeRoleType;
 
@@ -21,7 +23,7 @@ public class HRDepartmentRoleEmployee : AuditPersistentDomainObjectBase, IDetail
 
     [Required]
     [UniqueElement]
-    public virtual Employee Employee
+    public virtual Employee.Employee Employee
     {
         get => this.employee;
         set => this.employee = value;

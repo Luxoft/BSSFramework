@@ -2,6 +2,8 @@
 using Framework.Database.DALExceptions;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
+using SampleSystem.Domain.HRDepartment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 

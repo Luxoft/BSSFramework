@@ -1,7 +1,7 @@
 ﻿using Framework.BLL.Domain.ServiceRole;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Employee;
 
 [BLLViewRole]
 [UniqueGroup]

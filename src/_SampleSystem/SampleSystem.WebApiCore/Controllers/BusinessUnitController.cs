@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using OData.Domain;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.BU;
 using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;

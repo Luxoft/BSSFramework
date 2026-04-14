@@ -1,6 +1,6 @@
 ﻿using Framework.Database.Mapping;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.BU;
 
 [View]
 public class BusinessUnitToAncestorChildView : AuditPersistentDomainObjectBase

@@ -1,12 +1,13 @@
 ﻿using Framework.Validation;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
 
 namespace SampleSystem.Validation;
 
 public sealed class EmployeeValidator : IClassValidator<Employee>
 {
-    public ValidationResult GetValidationResult(IClassValidationContext<Domain.Employee> validationContext)
+    public ValidationResult GetValidationResult(IClassValidationContext<Employee> validationContext)
     {
         var source = validationContext.Source;
 

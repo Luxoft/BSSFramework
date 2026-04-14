@@ -1,7 +1,9 @@
 ﻿using Framework.Relations;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
+
+namespace SampleSystem.Domain.HRDepartment;
 
 public class HRDepartmentEmployeePosition : AuditPersistentDomainObjectBase, IDetail<HRDepartment>
 {

@@ -19,8 +19,8 @@
         protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkFullDTO> GetFullBusinessUnitManagerCommissionLinksByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL bll = evaluateData.Context.Logics.BusinessUnitManagerCommissionLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            OData.Domain.SelectOperation<SampleSystem.Domain.BusinessUnitManagerCommissionLink> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.BusinessUnitManagerCommissionLink>(odataQueryString);
-            OData.Domain.SelectOperationResult<SampleSystem.Domain.BusinessUnitManagerCommissionLink> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            OData.Domain.SelectOperation<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>(odataQueryString);
+            OData.Domain.SelectOperationResult<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkFullDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
@@ -36,8 +36,8 @@
         protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkSimpleDTO> GetSimpleBusinessUnitManagerCommissionLinksByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL bll = evaluateData.Context.Logics.BusinessUnitManagerCommissionLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            OData.Domain.SelectOperation<SampleSystem.Domain.BusinessUnitManagerCommissionLink> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.BusinessUnitManagerCommissionLink>(odataQueryString);
-            OData.Domain.SelectOperationResult<SampleSystem.Domain.BusinessUnitManagerCommissionLink> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
+            OData.Domain.SelectOperation<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>(odataQueryString);
+            OData.Domain.SelectOperationResult<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkSimpleDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
     }

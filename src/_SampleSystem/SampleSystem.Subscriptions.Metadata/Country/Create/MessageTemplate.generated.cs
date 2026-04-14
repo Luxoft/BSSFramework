@@ -15,7 +15,7 @@ using Framework.Subscriptions.Metadata;
 namespace SampleSystem.Subscriptions.Metadata.Country.Create
 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    public partial class _Country_Create_MessageTemplate_cshtml : RazorTemplate<Domain.Country>
+    public partial class _Country_Create_MessageTemplate_cshtml : RazorTemplate<Domain.Directories.Country>
     {
 #line hidden
 

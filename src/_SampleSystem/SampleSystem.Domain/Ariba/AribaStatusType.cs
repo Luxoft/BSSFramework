@@ -1,4 +1,4 @@
-﻿namespace SampleSystem.Domain;
+﻿namespace SampleSystem.Domain.Ariba;
 
 public enum AribaStatusType
 {

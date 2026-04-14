@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using OData;
 using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
 
 using SecuritySystem.AccessDenied;
 using SecuritySystem.SecurityAccessor;

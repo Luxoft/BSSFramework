@@ -1,6 +1,7 @@
 ﻿using Framework.BLL.Domain.ServiceRole;
 using Framework.Core;
 
+// ReSharper disable once CheckNamespace
 namespace SampleSystem.Domain;
 
 /// <summary>

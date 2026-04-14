@@ -8,6 +8,8 @@ using Framework.Database;
 using SecuritySystem;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Enums;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;

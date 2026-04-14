@@ -1,6 +1,7 @@
 ﻿using Framework.Application.Events;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
 
 namespace SampleSystem.EventMetadata;
 

@@ -7,7 +7,12 @@ using Framework.BLL.Domain.ServiceRole;
 using Framework.Relations;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.Enums;
+using SampleSystem.Domain.MU;
+
+namespace SampleSystem.Domain.HRDepartment;
 
 [BLLViewRole, BLLSaveRole(AllowCreate = false), BLLRemoveRole]
 public partial class HRDepartment :
@@ -26,7 +31,7 @@ public partial class HRDepartment :
     private readonly ICollection<ManagementUnitAndHRDepartmentLink> managementUnits = new List<ManagementUnitAndHRDepartmentLink>();
 
     private HRDepartment parent;
-    private Employee approvedBy;
+    private Employee.Employee approvedBy;
 
     public HRDepartment()
     {
@@ -79,7 +84,7 @@ public partial class HRDepartment :
         set => this.parent = value;
     }
 
-    public virtual Employee ApprovedBy
+    public virtual Employee.Employee ApprovedBy
     {
         get => this.approvedBy;
         set => this.approvedBy = value;
@@ -153,7 +158,7 @@ public partial class HRDepartment :
                    .Distinct();
     }
 
-    public virtual IEnumerable<Employee> GetHRInspectors() =>
+    public virtual IEnumerable<Employee.Employee> GetHRInspectors() =>
         this.hrDepartmentRoleEmployees
             .Where(z => z.HRDepartmentEmployeeRoleType == HRDepartmentEmployeeRoleType.Inspector)
             .Select(z => z.Employee);

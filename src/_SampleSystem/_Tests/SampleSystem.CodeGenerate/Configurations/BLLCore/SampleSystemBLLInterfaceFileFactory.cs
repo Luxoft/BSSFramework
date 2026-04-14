@@ -6,7 +6,9 @@ using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
 using Framework.FileGeneration.Configuration;
 
-namespace SampleSystem.CodeGenerate;
+using SampleSystem.CodeGenerate.Configurations.Services;
+
+namespace SampleSystem.CodeGenerate.Configurations.BLLCore;
 
 /// <summary>
 /// Кастомный фабричный класс для BLL-интерфейсов к доменным объектам (пример расширения с добавленеим обработки ComplexChangeModelType)

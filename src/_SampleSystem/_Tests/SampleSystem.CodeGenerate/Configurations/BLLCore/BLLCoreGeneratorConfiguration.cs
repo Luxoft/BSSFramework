@@ -2,22 +2,14 @@
 
 using SampleSystem.Domain;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations.BLLCore;
 
 public class BLLCoreGeneratorConfiguration(ServerGenerationEnvironment environment)
     : BLLCoreGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {
     public override Type FilterModelType { get; } = typeof(DomainObjectFilterModel<>);
 
-    public override Type ODataFilterModelType { get; } = typeof(DomainObjectODataFilterModel<>);
-
-    public override Type ODataContextFilterModelType { get; } = typeof(DomainObjectODataContextFilterModel<>);
-
     public override Type ContextFilterModelType { get; } = typeof(DomainObjectContextFilterModel<>);
-
-    public override Type CreateModelType { get; } = typeof(DomainObjectCreateModel<>);
-
-    public override Type FormatModelType { get; } = typeof(DomainObjectFormatModel<>);
 
     /// <inheritdoc />
     public override Type ChangeModelType { get; } = typeof(DomainObjectChangeModel<>);

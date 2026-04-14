@@ -1,6 +1,8 @@
 ﻿using Framework.Core;
 using Framework.FileGeneration.Checkout;
 
+using SampleSystem.CodeGenerate.Configurations;
+
 namespace SampleSystem.CodeGenerate;
 
 public partial class ServerGenerators

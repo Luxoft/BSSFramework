@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Directories;
 
 public class TestObjForNestedBase : BaseDirectory
 {

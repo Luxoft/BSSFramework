@@ -2,7 +2,7 @@
 using Framework.Restriction;
 using Framework.Validation;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Employee;
 
 [BLLRole]
 [UniqueGroup("UniLink")]

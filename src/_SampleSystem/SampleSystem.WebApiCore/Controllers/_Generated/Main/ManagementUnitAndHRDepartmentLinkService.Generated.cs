@@ -28,14 +28,14 @@
         protected virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkFullDTO GetFullManagementUnitAndHRDepartmentLinkByNameInternal(string managementUnitAndHRDepartmentLinkName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL bll = evaluateData.Context.Logics.ManagementUnitAndHRDepartmentLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.ManagementUnitAndHRDepartmentLink domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, managementUnitAndHRDepartmentLinkName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, managementUnitAndHRDepartmentLinkName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkFullDTO GetFullManagementUnitAndHRDepartmentLinkInternal(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL bll = evaluateData.Context.Logics.ManagementUnitAndHRDepartmentLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.ManagementUnitAndHRDepartmentLink domainObject = bll.GetById(managementUnitAndHRDepartmentLinkIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink domainObject = bll.GetById(managementUnitAndHRDepartmentLinkIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -60,13 +60,13 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkFullDTO> GetFullManagementUnitAndHRDepartmentLinksByIdentsInternal(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO[] managementUnitAndHRDepartmentLinkIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL bll = evaluateData.Context.Logics.ManagementUnitAndHRDepartmentLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(managementUnitAndHRDepartmentLinkIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(managementUnitAndHRDepartmentLinkIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkFullDTO> GetFullManagementUnitAndHRDepartmentLinksInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL bll = evaluateData.Context.Logics.ManagementUnitAndHRDepartmentLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -90,14 +90,14 @@
         protected virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkRichDTO GetRichManagementUnitAndHRDepartmentLinkByNameInternal(string managementUnitAndHRDepartmentLinkName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL bll = evaluateData.Context.Logics.ManagementUnitAndHRDepartmentLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.ManagementUnitAndHRDepartmentLink domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, managementUnitAndHRDepartmentLinkName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, managementUnitAndHRDepartmentLinkName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkRichDTO GetRichManagementUnitAndHRDepartmentLinkInternal(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL bll = evaluateData.Context.Logics.ManagementUnitAndHRDepartmentLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.ManagementUnitAndHRDepartmentLink domainObject = bll.GetById(managementUnitAndHRDepartmentLinkIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink domainObject = bll.GetById(managementUnitAndHRDepartmentLinkIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -122,14 +122,14 @@
         protected virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkSimpleDTO GetSimpleManagementUnitAndHRDepartmentLinkByNameInternal(string managementUnitAndHRDepartmentLinkName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL bll = evaluateData.Context.Logics.ManagementUnitAndHRDepartmentLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.ManagementUnitAndHRDepartmentLink domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, managementUnitAndHRDepartmentLinkName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, managementUnitAndHRDepartmentLinkName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkSimpleDTO GetSimpleManagementUnitAndHRDepartmentLinkInternal(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL bll = evaluateData.Context.Logics.ManagementUnitAndHRDepartmentLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.ManagementUnitAndHRDepartmentLink domainObject = bll.GetById(managementUnitAndHRDepartmentLinkIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink domainObject = bll.GetById(managementUnitAndHRDepartmentLinkIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -154,13 +154,13 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkSimpleDTO> GetSimpleManagementUnitAndHRDepartmentLinksByIdentsInternal(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO[] managementUnitAndHRDepartmentLinkIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL bll = evaluateData.Context.Logics.ManagementUnitAndHRDepartmentLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(managementUnitAndHRDepartmentLinkIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(managementUnitAndHRDepartmentLinkIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkSimpleDTO> GetSimpleManagementUnitAndHRDepartmentLinksInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL bll = evaluateData.Context.Logics.ManagementUnitAndHRDepartmentLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -180,7 +180,7 @@
         
         protected virtual void RemoveManagementUnitAndHRDepartmentLinkInternal(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdent, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData, SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL bll)
         {
-            SampleSystem.Domain.ManagementUnitAndHRDepartmentLink domainObject = bll.GetById(managementUnitAndHRDepartmentLinkIdent.Id, true);
+            SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink domainObject = bll.GetById(managementUnitAndHRDepartmentLinkIdent.Id, true);
             bll.Remove(domainObject);
         }
         
@@ -201,7 +201,7 @@
         
         protected virtual SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO SaveManagementUnitAndHRDepartmentLinkInternal(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO managementUnitAndHRDepartmentLinkStrict, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData, SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL bll)
         {
-            SampleSystem.Domain.ManagementUnitAndHRDepartmentLink domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByIdOrCreate(bll, managementUnitAndHRDepartmentLinkStrict.Id);
+            SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByIdOrCreate(bll, managementUnitAndHRDepartmentLinkStrict.Id);
             managementUnitAndHRDepartmentLinkStrict.MapToDomainObject(evaluateData.MappingService, domainObject);
             bll.Save(domainObject);
             return SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject);

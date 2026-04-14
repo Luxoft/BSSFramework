@@ -9,7 +9,11 @@ using Framework.Relations;
 using Framework.Restriction;
 using Framework.Validation;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain._Validation._Operation;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Enums;
+
+namespace SampleSystem.Domain.Projects;
 
 [System.Diagnostics.DebuggerDisplay("{Code}-{GetProjectTypeName()}")]
 public class Project :

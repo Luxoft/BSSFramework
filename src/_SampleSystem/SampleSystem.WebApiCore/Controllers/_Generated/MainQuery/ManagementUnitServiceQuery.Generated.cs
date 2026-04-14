@@ -19,8 +19,8 @@
         protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.ManagementUnitFullDTO> GetFullManagementUnitsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(SecuritySystem.SecurityRule.View);
-            OData.Domain.SelectOperation<SampleSystem.Domain.ManagementUnit> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.ManagementUnit>(odataQueryString);
-            OData.Domain.SelectOperationResult<SampleSystem.Domain.ManagementUnit> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ManagementUnit>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            OData.Domain.SelectOperation<SampleSystem.Domain.MU.ManagementUnit> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.MU.ManagementUnit>(odataQueryString);
+            OData.Domain.SelectOperationResult<SampleSystem.Domain.MU.ManagementUnit> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.MU.ManagementUnit>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.ManagementUnitFullDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
@@ -36,8 +36,8 @@
         protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.ManagementUnitSimpleDTO> GetSimpleManagementUnitsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(SecuritySystem.SecurityRule.View);
-            OData.Domain.SelectOperation<SampleSystem.Domain.ManagementUnit> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.ManagementUnit>(odataQueryString);
-            OData.Domain.SelectOperationResult<SampleSystem.Domain.ManagementUnit> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ManagementUnit>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
+            OData.Domain.SelectOperation<SampleSystem.Domain.MU.ManagementUnit> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.MU.ManagementUnit>(odataQueryString);
+            OData.Domain.SelectOperationResult<SampleSystem.Domain.MU.ManagementUnit> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.MU.ManagementUnit>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.ManagementUnitSimpleDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
@@ -53,8 +53,8 @@
         protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.ManagementUnitVisualDTO> GetVisualManagementUnitsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(SecuritySystem.SecurityRule.View);
-            OData.Domain.SelectOperation<SampleSystem.Domain.ManagementUnit> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.ManagementUnit>(odataQueryString);
-            OData.Domain.SelectOperationResult<SampleSystem.Domain.ManagementUnit> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ManagementUnit>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
+            OData.Domain.SelectOperation<SampleSystem.Domain.MU.ManagementUnit> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.MU.ManagementUnit>(odataQueryString);
+            OData.Domain.SelectOperationResult<SampleSystem.Domain.MU.ManagementUnit> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.MU.ManagementUnit>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.ManagementUnitVisualDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
     }

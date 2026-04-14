@@ -2,9 +2,11 @@
 
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 
-using SampleSystem.Domain;
+using SampleSystem.Domain._Validation._Operation;
+using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.Employee;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations.BLL;
 
 public class BLLGeneratorConfiguration(ServerGenerationEnvironment environment) : BLLGeneratorConfigurationBase<
     ServerGenerationEnvironment>(environment)

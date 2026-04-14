@@ -19,8 +19,8 @@
         protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestPerformanceObjectFullDTO> GetFullTestPerformanceObjectsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestPerformanceObjectBLL bll = evaluateData.Context.Logics.TestPerformanceObjectFactory.Create(SecuritySystem.SecurityRule.View);
-            OData.Domain.SelectOperation<SampleSystem.Domain.TestPerformanceObject> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.TestPerformanceObject>(odataQueryString);
-            OData.Domain.SelectOperationResult<SampleSystem.Domain.TestPerformanceObject> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.TestPerformanceObject>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            OData.Domain.SelectOperation<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>(odataQueryString);
+            OData.Domain.SelectOperationResult<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestPerformanceObjectFullDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
@@ -36,8 +36,8 @@
         protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestPerformanceObjectSimpleDTO> GetSimpleTestPerformanceObjectsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestPerformanceObjectBLL bll = evaluateData.Context.Logics.TestPerformanceObjectFactory.Create(SecuritySystem.SecurityRule.View);
-            OData.Domain.SelectOperation<SampleSystem.Domain.TestPerformanceObject> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.TestPerformanceObject>(odataQueryString);
-            OData.Domain.SelectOperationResult<SampleSystem.Domain.TestPerformanceObject> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.TestPerformanceObject>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
+            OData.Domain.SelectOperation<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>(odataQueryString);
+            OData.Domain.SelectOperationResult<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestPerformanceObjectSimpleDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
@@ -53,8 +53,8 @@
         protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestPerformanceObjectVisualDTO> GetVisualTestPerformanceObjectsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestPerformanceObjectBLL bll = evaluateData.Context.Logics.TestPerformanceObjectFactory.Create(SecuritySystem.SecurityRule.View);
-            OData.Domain.SelectOperation<SampleSystem.Domain.TestPerformanceObject> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.TestPerformanceObject>(odataQueryString);
-            OData.Domain.SelectOperationResult<SampleSystem.Domain.TestPerformanceObject> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.TestPerformanceObject>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
+            OData.Domain.SelectOperation<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>(odataQueryString);
+            OData.Domain.SelectOperationResult<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestPerformanceObjectVisualDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
     }

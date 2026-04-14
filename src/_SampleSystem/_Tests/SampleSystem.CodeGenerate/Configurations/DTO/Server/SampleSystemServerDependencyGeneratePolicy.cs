@@ -4,9 +4,9 @@ using Framework.CodeGeneration.DTOGenerator.Server;
 using Framework.CodeGeneration.DTOGenerator.Server.GeneratePolicy;
 using Framework.CodeGeneration.GeneratePolicy;
 
-using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
 
-namespace SampleSystem.CodeGenerate.ServerDTO;
+namespace SampleSystem.CodeGenerate.Configurations.DTO.Server;
 
 public class SampleSystemServerDependencyGeneratePolicy(IGeneratePolicy<RoleFileType> baseGeneratePolicy, IEnumerable<GenerateTypeMap> maps)
     : ServerDependencyGeneratePolicy(baseGeneratePolicy, maps)

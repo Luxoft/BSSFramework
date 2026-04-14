@@ -1,7 +1,7 @@
 ﻿using Framework.BLL.Domain.ServiceRole;
 using Framework.Relations;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.TestDependency;
 
 [BLLViewRole]
 public class TestSecurityObjItem : BaseDirectory, IDetail<TestRootSecurityObj>, IMaster<TestSecuritySubObjItem>, IMaster<TestSecuritySubObjItem2>, IMaster<TestSecuritySubObjItem3>

@@ -5,6 +5,11 @@ using Framework.Infrastructure.DependencyInjection;
 
 using SampleSystem.BLL;
 using SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.Employee;
+using SampleSystem.Domain.MU;
+using SampleSystem.Domain.NLock;
 using SampleSystem.Events;
 using SampleSystem.Generated.DTO;
 

@@ -1,6 +1,6 @@
 ﻿using Framework.Database.Mapping;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.MU;
 
 [View]
 public class ManagementUnitToAncestorChildView : AuditPersistentDomainObjectBase

@@ -4,7 +4,7 @@ using Framework.Core;
 using Framework.Database.Metadata;
 using Framework.Database.NHibernate.DALGenerator.Configuration;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations.DAL;
 
 public class DALGeneratorConfiguration(ServerGenerationEnvironment environment) : DALGeneratorConfigurationBase<ServerGenerationEnvironment>(environment)
 {

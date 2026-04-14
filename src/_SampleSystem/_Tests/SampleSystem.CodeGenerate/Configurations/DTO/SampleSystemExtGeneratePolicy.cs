@@ -2,8 +2,9 @@
 using Framework.CodeGeneration.GeneratePolicy;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations.DTO;
 
 public class SampleSystemExtGeneratePolicy : IGeneratePolicy<RoleFileType>
 {

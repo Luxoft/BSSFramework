@@ -1,7 +1,7 @@
 ﻿using Framework.Core;
 using Framework.Database.Mapping;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.NhFluentMapping;
 
 [IgnoreHbmMapping]
 public class PureFluentMappingObject : PersistentDomainObjectBase

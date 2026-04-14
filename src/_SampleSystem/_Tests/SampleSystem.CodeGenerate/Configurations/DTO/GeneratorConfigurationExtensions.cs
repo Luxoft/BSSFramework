@@ -3,7 +3,7 @@
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations.DTO;
 
 public static class GeneratorConfigurationExtensions
 {

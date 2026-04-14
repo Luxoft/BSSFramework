@@ -2,7 +2,7 @@
 
 namespace SampleSystem.Subscriptions.Metadata.Examples.RazerTemplateImpl;
 
-public class RazorTemplateImpl : RazorTemplate<Domain.Employee>
+public class RazorTemplateImpl : RazorTemplate<Domain.Employee.Employee>
 {
     public override string Subject => this.Current!.NameNative.FirstName + " loves string.concat";
 

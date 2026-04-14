@@ -4,6 +4,7 @@ using MediatR;
 
 using SampleSystem.BLL._Command.ProcessIntegrationEvent;
 using SampleSystem.Domain;
+using SampleSystem.Domain.Directories;
 
 namespace SampleSystem.BLL._Command.CreateIntegrationEvent;
 

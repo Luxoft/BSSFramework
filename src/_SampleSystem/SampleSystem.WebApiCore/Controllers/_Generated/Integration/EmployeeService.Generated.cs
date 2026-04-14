@@ -25,10 +25,10 @@
         
         protected virtual SampleSystem.Generated.DTO.EmployeeIdentityDTO SaveEmployeeInternal(SampleSystem.Generated.DTO.EmployeeIntegrationRichDTO employee, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData, SampleSystem.BLL.IEmployeeBLL bll)
         {
-            SampleSystem.Domain.Employee domainObject = bll.GetById(employee.Id, false);
+            SampleSystem.Domain.Employee.Employee domainObject = bll.GetById(employee.Id, false);
             if (object.ReferenceEquals(domainObject, null))
             {
-                domainObject = new SampleSystem.Domain.Employee();
+                domainObject = new SampleSystem.Domain.Employee.Employee();
             }
             employee.MapToDomainObject(evaluateData.MappingService, domainObject);
             bll.Insert(domainObject, employee.Id);

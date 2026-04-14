@@ -2,7 +2,9 @@
 using Framework.CodeGeneration.ServiceModelGenerator;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Query;
 
-namespace SampleSystem.CodeGenerate;
+using SampleSystem.CodeGenerate.Configurations._ProjectionSources;
+
+namespace SampleSystem.CodeGenerate.Configurations.Services.QueryService;
 
 public class QueryServiceGeneratorConfiguration : QueryGeneratorConfigurationBase<ServerGenerationEnvironment>
 {

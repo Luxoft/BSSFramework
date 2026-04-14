@@ -19,8 +19,8 @@
         protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.LocationFullDTO> GetFullLocationsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocationBLL bll = evaluateData.Context.Logics.LocationFactory.Create(SecuritySystem.SecurityRule.View);
-            OData.Domain.SelectOperation<SampleSystem.Domain.Location> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.Location>(odataQueryString);
-            OData.Domain.SelectOperationResult<SampleSystem.Domain.Location> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Location>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            OData.Domain.SelectOperation<SampleSystem.Domain.Directories.Location> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.Directories.Location>(odataQueryString);
+            OData.Domain.SelectOperationResult<SampleSystem.Domain.Directories.Location> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Location>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.LocationFullDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
@@ -36,8 +36,8 @@
         protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.LocationSimpleDTO> GetSimpleLocationsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocationBLL bll = evaluateData.Context.Logics.LocationFactory.Create(SecuritySystem.SecurityRule.View);
-            OData.Domain.SelectOperation<SampleSystem.Domain.Location> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.Location>(odataQueryString);
-            OData.Domain.SelectOperationResult<SampleSystem.Domain.Location> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Location>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
+            OData.Domain.SelectOperation<SampleSystem.Domain.Directories.Location> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.Directories.Location>(odataQueryString);
+            OData.Domain.SelectOperationResult<SampleSystem.Domain.Directories.Location> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Location>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.LocationSimpleDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
@@ -53,8 +53,8 @@
         protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.LocationVisualDTO> GetVisualLocationsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocationBLL bll = evaluateData.Context.Logics.LocationFactory.Create(SecuritySystem.SecurityRule.View);
-            OData.Domain.SelectOperation<SampleSystem.Domain.Location> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.Location>(odataQueryString);
-            OData.Domain.SelectOperationResult<SampleSystem.Domain.Location> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Location>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
+            OData.Domain.SelectOperation<SampleSystem.Domain.Directories.Location> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.Directories.Location>(odataQueryString);
+            OData.Domain.SelectOperationResult<SampleSystem.Domain.Directories.Location> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Location>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.LocationVisualDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         

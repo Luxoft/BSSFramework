@@ -8,6 +8,7 @@ using GenericQueryable;
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
 using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;

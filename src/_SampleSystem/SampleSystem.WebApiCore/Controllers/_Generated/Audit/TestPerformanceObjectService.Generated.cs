@@ -21,7 +21,7 @@
         protected virtual SampleSystem.Generated.DTO.TestPerformanceObjectFullDTO GetFullTestPerformanceObjectWithRevisionInternal(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestPerformanceObjectBLL bll = evaluateData.Context.Logics.TestPerformanceObjectFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.TestPerformanceObject domainObject = bll.GetObjectByRevision(testPerformanceObjectIdentity.Id, revision);
+            SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject domainObject = bll.GetObjectByRevision(testPerformanceObjectIdentity.Id, revision);
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -39,7 +39,7 @@
         protected virtual SampleSystem.Generated.DTO.TestPerformanceObjectRichDTO GetRichTestPerformanceObjectWithRevisionInternal(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestPerformanceObjectBLL bll = evaluateData.Context.Logics.TestPerformanceObjectFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.TestPerformanceObject domainObject = bll.GetObjectByRevision(testPerformanceObjectIdentity.Id, revision);
+            SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject domainObject = bll.GetObjectByRevision(testPerformanceObjectIdentity.Id, revision);
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -57,7 +57,7 @@
         protected virtual SampleSystem.Generated.DTO.TestPerformanceObjectSimpleDTO GetSimpleTestPerformanceObjectWithRevisionInternal(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestPerformanceObjectBLL bll = evaluateData.Context.Logics.TestPerformanceObjectFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.TestPerformanceObject domainObject = bll.GetObjectByRevision(testPerformanceObjectIdentity.Id, revision);
+            SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject domainObject = bll.GetObjectByRevision(testPerformanceObjectIdentity.Id, revision);
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -76,7 +76,7 @@
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestPerformanceObjectPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity, string propertyName, Framework.Core.Period? period, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestPerformanceObjectBLL bll = evaluateData.Context.Logics.TestPerformanceObjectFactory.Create(SecuritySystem.SecurityRule.View);
-            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.TestPerformanceObject>(testPerformanceObjectIdentity.Id, propertyName, period);
+            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>(testPerformanceObjectIdentity.Id, propertyName, period);
         }
         
         /// <summary>
@@ -93,7 +93,7 @@
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestPerformanceObjectPropertyRevisionsInternal(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity, string propertyName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestPerformanceObjectBLL bll = evaluateData.Context.Logics.TestPerformanceObjectFactory.Create(SecuritySystem.SecurityRule.View);
-            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.TestPerformanceObject>(testPerformanceObjectIdentity.Id, propertyName);
+            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>(testPerformanceObjectIdentity.Id, propertyName);
         }
         
         /// <summary>
@@ -125,7 +125,7 @@
         protected virtual SampleSystem.Generated.DTO.TestPerformanceObjectVisualDTO GetVisualTestPerformanceObjectWithRevisionInternal(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestPerformanceObjectBLL bll = evaluateData.Context.Logics.TestPerformanceObjectFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.TestPerformanceObject domainObject = bll.GetObjectByRevision(testPerformanceObjectIdentity.Id, revision);
+            SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject domainObject = bll.GetObjectByRevision(testPerformanceObjectIdentity.Id, revision);
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
     }

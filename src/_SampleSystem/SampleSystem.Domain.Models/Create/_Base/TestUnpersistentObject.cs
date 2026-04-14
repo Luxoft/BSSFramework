@@ -1,3 +1,5 @@
+using SampleSystem.Domain.BU;
+
 namespace SampleSystem.Domain;
 
 public class TestUnpersistentObject : DomainObjectBase

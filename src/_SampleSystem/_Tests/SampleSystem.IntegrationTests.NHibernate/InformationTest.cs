@@ -2,6 +2,7 @@
 using Framework.Database;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 

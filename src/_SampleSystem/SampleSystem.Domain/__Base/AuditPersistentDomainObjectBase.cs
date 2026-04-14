@@ -6,6 +6,7 @@ using Framework.Core;
 using Framework.Database;
 using Framework.Database.Attributes;
 
+// ReSharper disable once CheckNamespace
 namespace SampleSystem.Domain;
 
 /// <summary>

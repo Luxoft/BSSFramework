@@ -1,15 +1,21 @@
 ﻿using Framework.BLL.Domain.Attributes;
 using Framework.Core;
-
 using Framework.Projection;
 using Framework.Projection.Lambda;
 using Framework.Projection.Lambda.ProjectionSource._Base;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain._CustomProjectionAttribute;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.Employee;
+using SampleSystem.Domain.HRDepartment;
 using SampleSystem.Domain.Models.Filters;
+using SampleSystem.Domain.Projects;
+using SampleSystem.Domain.TestDependency;
 using SampleSystem.Security;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations._ProjectionSources;
 
 public class SampleSystemProjectionSource : ProjectionSource
 {

@@ -1,5 +1,6 @@
 ﻿using Framework.Validation;
 
+// ReSharper disable once CheckNamespace
 namespace SampleSystem.Domain;
 
 /// <summary>
@@ -8,8 +9,4 @@ namespace SampleSystem.Domain;
 /// <remarks>
 /// Для базового доменного объекта генерятся ДТО
 /// </remarks>
-[AvailableDecimalValidator]
-[AvailablePeriodValidator]
-[AvailableDateTimeValidator]
-[DefaultStringMaxLengthValidator]
 public abstract class DomainObjectBase;

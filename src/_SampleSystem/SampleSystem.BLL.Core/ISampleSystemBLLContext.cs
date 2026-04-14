@@ -6,6 +6,7 @@ using Framework.Validation;
 using OData;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
 
 using SecuritySystem.SecurityAccessor;
 using SecuritySystem.UserSource;

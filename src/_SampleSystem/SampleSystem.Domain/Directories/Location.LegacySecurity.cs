@@ -2,7 +2,7 @@
 
 using SecuritySystem;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Directories;
 
 [SecurityNode]
 public interface ILocationSecurityElement<out TLocation>

@@ -2,7 +2,9 @@
 
 using Framework.Relations;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.Enums;
+
+namespace SampleSystem.Domain.Employee.EmpoloyeeLink;
 
 public class EmployeeToEmployeeLink : AuditPersistentDomainObjectBase, IDetail<Employee>
 {

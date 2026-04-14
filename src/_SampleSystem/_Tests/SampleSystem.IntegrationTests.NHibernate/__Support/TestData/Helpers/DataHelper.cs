@@ -5,7 +5,13 @@ using Framework.BLL;
 using Framework.Core;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.Employee;
+using SampleSystem.Domain.Enums;
+using SampleSystem.Domain.HRDepartment;
 using SampleSystem.Domain.Inline;
+using SampleSystem.Domain.MU;
 using SampleSystem.Generated.DTO;
 using SampleSystem.WebApiCore.Controllers.Main;
 

@@ -3,7 +3,7 @@ using Framework.BLL.Domain.Persistent.Attributes;
 
 using SecuritySystem;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.BU;
 
 [SecurityNode]
 public interface IBusinessUnitSecurityElement<out TBusinessUnit>

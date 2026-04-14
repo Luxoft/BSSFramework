@@ -4,9 +4,11 @@ using Framework.BLL.Domain.ServiceRole;
 using Framework.Relations;
 using Framework.Restriction;
 
+using SampleSystem.Domain.Enums;
+
 using SecuritySystem;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Directories;
 
 [BLLViewRole, BLLSaveRole, BLLRemoveRole]
 [UniqueGroup]

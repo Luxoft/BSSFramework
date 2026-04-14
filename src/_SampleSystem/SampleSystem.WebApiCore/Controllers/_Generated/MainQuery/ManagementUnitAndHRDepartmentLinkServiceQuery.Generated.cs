@@ -19,8 +19,8 @@
         protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkFullDTO> GetFullManagementUnitAndHRDepartmentLinksByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL bll = evaluateData.Context.Logics.ManagementUnitAndHRDepartmentLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            OData.Domain.SelectOperation<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(odataQueryString);
-            OData.Domain.SelectOperationResult<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            OData.Domain.SelectOperation<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>(odataQueryString);
+            OData.Domain.SelectOperationResult<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkFullDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
         
@@ -36,8 +36,8 @@
         protected virtual OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkSimpleDTO> GetSimpleManagementUnitAndHRDepartmentLinksByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL bll = evaluateData.Context.Logics.ManagementUnitAndHRDepartmentLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            OData.Domain.SelectOperation<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(odataQueryString);
-            OData.Domain.SelectOperationResult<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
+            OData.Domain.SelectOperation<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>(odataQueryString);
+            OData.Domain.SelectOperationResult<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink> preResult = bll.GetObjectsByOData(selectOperation, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return new OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkSimpleDTO>(SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(preResult.Items, evaluateData.MappingService), preResult.TotalCount);
         }
     }

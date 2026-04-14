@@ -1,4 +1,4 @@
-﻿namespace SampleSystem.Domain;
+﻿namespace SampleSystem.Domain.Enums;
 
 public enum EmployeeLinkType
 {

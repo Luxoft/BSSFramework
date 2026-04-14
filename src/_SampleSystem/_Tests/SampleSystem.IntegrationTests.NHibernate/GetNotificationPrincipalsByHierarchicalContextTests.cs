@@ -4,6 +4,9 @@ using Framework.Database;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Employee;
+using SampleSystem.Domain.MU;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;

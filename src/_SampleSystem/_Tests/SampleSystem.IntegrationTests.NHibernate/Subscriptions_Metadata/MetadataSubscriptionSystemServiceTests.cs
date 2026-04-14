@@ -4,6 +4,7 @@ using Framework.Core;
 using Framework.Notification.Domain;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Models.Custom;
 using SampleSystem.IntegrationTests.__Support.TestData;
 

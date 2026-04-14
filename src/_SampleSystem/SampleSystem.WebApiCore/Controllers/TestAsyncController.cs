@@ -6,6 +6,7 @@ using GenericQueryable;
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.Directories;
 using SampleSystem.Generated.DTO;
 
 using SecuritySystem.Attributes;

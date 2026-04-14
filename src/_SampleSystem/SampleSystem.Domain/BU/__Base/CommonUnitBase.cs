@@ -1,4 +1,6 @@
-﻿namespace SampleSystem.Domain;
+﻿using SampleSystem.Domain.Enums;
+
+namespace SampleSystem.Domain.BU.__Base;
 
 public abstract class CommonUnitBase : BaseDirectory
 {

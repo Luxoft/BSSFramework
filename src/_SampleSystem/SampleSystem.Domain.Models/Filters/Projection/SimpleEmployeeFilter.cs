@@ -1,4 +1,6 @@
-﻿namespace SampleSystem.Domain;
+﻿using SampleSystem.Domain.BU;
+
+namespace SampleSystem.Domain;
 
 public class TestEmployeeFilter : DomainObjectBase
 {

@@ -1,3 +1,3 @@
 ﻿namespace SampleSystem.Domain;
 
-public class EmployeeRootFilterModel : DomainObjectRootFilterModel<Employee>;
+public class EmployeeRootFilterModel : DomainObjectRootFilterModel<Employee.Employee>;

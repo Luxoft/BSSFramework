@@ -1,7 +1,7 @@
 ﻿using Framework.BLL.Domain.ServiceRole;
 using Framework.Relations;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.ForUpdate;
 
 [BLLViewRole, BLLSaveRole(SaveType = BLLSaveType.Both )]
 public class Example1 : AuditPersistentDomainObjectBase, IMaster<Example2>

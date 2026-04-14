@@ -1,7 +1,7 @@
 ﻿using Framework.BLL.Domain.DirectMode;
 using Framework.BLL.Domain.Models;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations.Services;
 
 /// <summary>
 /// Кастомные роли SampleSystem-моделей

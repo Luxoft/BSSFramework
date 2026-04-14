@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
 using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;

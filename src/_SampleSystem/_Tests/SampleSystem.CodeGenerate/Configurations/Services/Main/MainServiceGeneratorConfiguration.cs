@@ -5,7 +5,7 @@ using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations.Services.Main;
 
 /// <summary>
 /// Конфигурация для генерации основного фасада SampleSystem-системы (пример с добавлением генерации фасадных методов по ComplexChange-модели)

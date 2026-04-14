@@ -1,6 +1,6 @@
 ﻿using Framework.BLL.Domain.Serialization;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.BU;
 
 public class BusinessUnitAncestorLink : AuditPersistentDomainObjectBase
 {

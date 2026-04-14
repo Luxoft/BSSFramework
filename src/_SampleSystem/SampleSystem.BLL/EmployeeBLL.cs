@@ -5,6 +5,8 @@ using SampleSystem.Domain.Models.Filters;
 
 using Framework.BLL;
 
+using SampleSystem.Domain.Employee;
+
 namespace SampleSystem.BLL;
 
 public partial class EmployeeBLL

@@ -3,7 +3,10 @@ using Framework.Core;
 using Framework.Restriction;
 using Framework.Validation;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain._Validation._Operation;
+using SampleSystem.Domain.Directories;
+
+namespace SampleSystem.Domain.HRDepartment;
 
 [UniqueGroup("Uni_Name")]
 [UniqueGroup("Uni_Code")]
@@ -15,7 +18,7 @@ public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable,
     private string codeNative;
     private string nameNative;
     private Location location;
-    private Employee head;
+    private Employee.Employee head;
     private long externalId;
     private CompanyLegalEntity companyLegalEntity;
     private bool isProduction;
@@ -88,7 +91,7 @@ public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable,
 
     [Required]
     [CustomName("Head of Department")]
-    public virtual Employee Head
+    public virtual Employee.Employee Head
     {
         get => this.head;
         set => this.head = value;

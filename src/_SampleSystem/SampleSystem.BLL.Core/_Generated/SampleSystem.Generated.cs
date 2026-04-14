@@ -554,129 +554,169 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial interface IBusinessUnitBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnit, System.Guid>
+    public partial interface IBusinessUnitBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BU.BusinessUnit, System.Guid>
     {
     }
     
-    public partial interface IBusinessUnitBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitBLL, SampleSystem.Domain.BusinessUnit>
+    public partial interface IBusinessUnitBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitBLL, SampleSystem.Domain.BU.BusinessUnit>
     {
     }
     
-    public partial interface IBusinessUnitHrDepartmentBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitHrDepartment, System.Guid>
+    public partial interface IBusinessUnitHrDepartmentBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BU.BusinessUnitHrDepartment, System.Guid>
     {
     }
     
-    public partial interface IBusinessUnitHrDepartmentBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitHrDepartmentBLL, SampleSystem.Domain.BusinessUnitHrDepartment>
+    public partial interface IBusinessUnitHrDepartmentBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitHrDepartmentBLL, SampleSystem.Domain.BU.BusinessUnitHrDepartment>
     {
     }
     
-    public partial interface IBusinessUnitManagerCommissionLinkBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitManagerCommissionLink, System.Guid>
+    public partial interface IBusinessUnitManagerCommissionLinkBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink, System.Guid>
     {
     }
     
-    public partial interface IBusinessUnitManagerCommissionLinkBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL, SampleSystem.Domain.BusinessUnitManagerCommissionLink>
+    public partial interface IBusinessUnitManagerCommissionLinkBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL, SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>
     {
     }
     
-    public partial interface IBusinessUnitTypeBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitType, System.Guid>
+    public partial interface IBusinessUnitTypeBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Directories.BusinessUnitType, System.Guid>
     {
     }
     
-    public partial interface IBusinessUnitTypeBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitTypeBLL, SampleSystem.Domain.BusinessUnitType>
+    public partial interface IBusinessUnitTypeBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IBusinessUnitTypeBLL, SampleSystem.Domain.Directories.BusinessUnitType>
     {
     }
     
-    public partial interface ICompanyLegalEntityBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.CompanyLegalEntity, System.Guid>
+    public partial interface ICompanyLegalEntityBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Directories.CompanyLegalEntity, System.Guid>
     {
     }
     
-    public partial interface ICompanyLegalEntityBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ICompanyLegalEntityBLL, SampleSystem.Domain.CompanyLegalEntity>
+    public partial interface ICompanyLegalEntityBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ICompanyLegalEntityBLL, SampleSystem.Domain.Directories.CompanyLegalEntity>
     {
     }
     
-    public partial interface ICountryBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Country, System.Guid>
+    public partial interface ICountryBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Directories.Country, System.Guid>
     {
     }
     
-    public partial interface ICountryBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ICountryBLL, SampleSystem.Domain.Country>
+    public partial interface ICountryBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ICountryBLL, SampleSystem.Domain.Directories.Country>
     {
     }
     
-    public partial interface IEmployeeBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Employee, System.Guid>
+    public partial interface ILocationBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Directories.Location, System.Guid>
+    {
+    }
+    
+    public partial interface ILocationBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ILocationBLL, SampleSystem.Domain.Directories.Location>
+    {
+    }
+    
+    public partial interface IEmployeeBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Employee.Employee, System.Guid>
     {
         
-        SampleSystem.Domain.Employee ChangeByEmail(SampleSystem.Domain.EmployeeEmailChangeModel changeModel);
+        SampleSystem.Domain.Employee.Employee ChangeByEmail(SampleSystem.Domain.EmployeeEmailChangeModel changeModel);
         
-        SampleSystem.Domain.Employee ComplexChange(SampleSystem.Domain.EmployeeComplexChangeModel changeModel);
+        SampleSystem.Domain.Employee.Employee ComplexChange(SampleSystem.Domain.EmployeeComplexChangeModel changeModel);
         
-        SampleSystem.Domain.EmployeeEmailChangeModel GetChangeByEmail(SampleSystem.Domain.Employee employee);
+        SampleSystem.Domain.EmployeeEmailChangeModel GetChangeByEmail(SampleSystem.Domain.Employee.Employee employee);
         
-        System.Collections.Generic.List<SampleSystem.Domain.Employee> GetListBy(SampleSystem.Domain.Models.Filters.EmployeeFilterModel filter, GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee> fetchs);
+        System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee> GetListBy(SampleSystem.Domain.Models.Filters.EmployeeFilterModel filter, GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.Employee> fetchs);
         
-        SampleSystem.Domain.EmployeeEmailMassChangeModel GetMassChangeByEmail(System.Collections.Generic.List<SampleSystem.Domain.Employee> employees);
+        SampleSystem.Domain.EmployeeEmailMassChangeModel GetMassChangeByEmail(System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee> employees);
         
-        SampleSystem.Domain.Employee IntegrationSave(SampleSystem.Domain.EmployeeCustomIntegrationSaveModel integrationSaveModel);
+        SampleSystem.Domain.Employee.Employee IntegrationSave(SampleSystem.Domain.EmployeeCustomIntegrationSaveModel integrationSaveModel);
         
-        System.Collections.Generic.List<SampleSystem.Domain.Employee> MassChangeByEmail(SampleSystem.Domain.EmployeeEmailMassChangeModel changeModel);
+        System.Collections.Generic.List<SampleSystem.Domain.Employee.Employee> MassChangeByEmail(SampleSystem.Domain.EmployeeEmailMassChangeModel changeModel);
     }
     
-    public partial interface IEmployeeBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeBLL, SampleSystem.Domain.Employee>
+    public partial interface IEmployeeBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeBLL, SampleSystem.Domain.Employee.Employee>
     {
     }
     
-    public partial interface IEmployeeInformationBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeInformation, System.Guid>
+    public partial interface IEmployeeInformationBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Employee.EmployeeInformation, System.Guid>
     {
     }
     
-    public partial interface IEmployeeInformationBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeInformationBLL, SampleSystem.Domain.EmployeeInformation>
+    public partial interface IEmployeeInformationBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeInformationBLL, SampleSystem.Domain.Employee.EmployeeInformation>
     {
     }
     
-    public partial interface IEmployeePhotoBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePhoto, System.Guid>
+    public partial interface IEmployeePhotoBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Employee.EmployeePhoto, System.Guid>
     {
     }
     
-    public partial interface IEmployeePhotoBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePhotoBLL, SampleSystem.Domain.EmployeePhoto>
+    public partial interface IEmployeePhotoBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePhotoBLL, SampleSystem.Domain.Employee.EmployeePhoto>
     {
     }
     
-    public partial interface IEmployeePositionBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePosition, System.Guid>
+    public partial interface IEmployeePositionBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Employee.EmployeePosition, System.Guid>
     {
     }
     
-    public partial interface IEmployeePositionBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePositionBLL, SampleSystem.Domain.EmployeePosition>
+    public partial interface IEmployeePositionBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IEmployeePositionBLL, SampleSystem.Domain.Employee.EmployeePosition>
     {
     }
     
-    public partial interface IEmployeeRegistrationTypeBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRegistrationType, System.Guid>
+    public partial interface IEmployeeRegistrationTypeBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Employee.EmployeeRegistrationType, System.Guid>
     {
     }
     
-    public partial interface IEmployeeRegistrationTypeBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRegistrationTypeBLL, SampleSystem.Domain.EmployeeRegistrationType>
+    public partial interface IEmployeeRegistrationTypeBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRegistrationTypeBLL, SampleSystem.Domain.Employee.EmployeeRegistrationType>
     {
     }
     
-    public partial interface IEmployeeRoleBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRole, System.Guid>
+    public partial interface IEmployeeRoleBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Employee.EmployeeRole, System.Guid>
     {
     }
     
-    public partial interface IEmployeeRoleBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleBLL, SampleSystem.Domain.EmployeeRole>
+    public partial interface IEmployeeRoleBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleBLL, SampleSystem.Domain.Employee.EmployeeRole>
     {
     }
     
-    public partial interface IEmployeeRoleDegreeBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRoleDegree, System.Guid>
+    public partial interface IEmployeeRoleDegreeBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Employee.EmployeeRoleDegree, System.Guid>
     {
     }
     
-    public partial interface IEmployeeRoleDegreeBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleDegreeBLL, SampleSystem.Domain.EmployeeRoleDegree>
+    public partial interface IEmployeeRoleDegreeBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeRoleDegreeBLL, SampleSystem.Domain.Employee.EmployeeRoleDegree>
     {
     }
     
-    public partial interface IEmployeeSpecializationBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeSpecialization, System.Guid>
+    public partial interface IEmployeeSpecializationBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Employee.EmployeeSpecialization, System.Guid>
     {
     }
     
-    public partial interface IEmployeeSpecializationBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeSpecializationBLL, SampleSystem.Domain.EmployeeSpecialization>
+    public partial interface IEmployeeSpecializationBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IEmployeeSpecializationBLL, SampleSystem.Domain.Employee.EmployeeSpecialization>
+    {
+    }
+    
+    public partial interface IIMRequestBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Employee.IMRequest, System.Guid>
+    {
+    }
+    
+    public partial interface IIMRequestBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IIMRequestBLL, SampleSystem.Domain.Employee.IMRequest>
+    {
+    }
+    
+    public partial interface IInformationBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Employee.Information, System.Guid>
+    {
+    }
+    
+    public partial interface IInformationBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IInformationBLL, SampleSystem.Domain.Employee.Information>
+    {
+    }
+    
+    public partial interface IRoleRoleDegreeLinkBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Employee.RoleRoleDegreeLink, System.Guid>
+    {
+    }
+    
+    public partial interface IRoleRoleDegreeLinkBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IRoleRoleDegreeLinkBLL, SampleSystem.Domain.Employee.RoleRoleDegreeLink>
+    {
+    }
+    
+    public partial interface ITestRestrictionObjectBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Employee.TestRestrictionObject, System.Guid>
+    {
+    }
+    
+    public partial interface ITestRestrictionObjectBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestRestrictionObjectBLL, SampleSystem.Domain.Employee.TestRestrictionObject>
     {
     }
     
@@ -696,35 +736,19 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IExample1BLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Example1, System.Guid>
+    public partial interface IExample1BLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ForUpdate.Example1, System.Guid>
     {
     }
     
-    public partial interface IExample1BLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IExample1BLL, SampleSystem.Domain.Example1>
+    public partial interface IExample1BLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IExample1BLL, SampleSystem.Domain.ForUpdate.Example1>
     {
     }
     
-    public partial interface IHRDepartmentBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.HRDepartment, System.Guid>
+    public partial interface IHRDepartmentBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.HRDepartment.HRDepartment, System.Guid>
     {
     }
     
-    public partial interface IHRDepartmentBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IHRDepartmentBLL, SampleSystem.Domain.HRDepartment>
-    {
-    }
-    
-    public partial interface IIMRequestBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IMRequest, System.Guid>
-    {
-    }
-    
-    public partial interface IIMRequestBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IIMRequestBLL, SampleSystem.Domain.IMRequest>
-    {
-    }
-    
-    public partial interface IInformationBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Information, System.Guid>
-    {
-    }
-    
-    public partial interface IInformationBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IInformationBLL, SampleSystem.Domain.Information>
+    public partial interface IHRDepartmentBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IHRDepartmentBLL, SampleSystem.Domain.HRDepartment.HRDepartment>
     {
     }
     
@@ -746,51 +770,43 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ILocationBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Location, System.Guid>
-    {
-    }
-    
-    public partial interface ILocationBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ILocationBLL, SampleSystem.Domain.Location>
-    {
-    }
-    
-    public partial interface IManagementUnitBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnit, System.Guid>
-    {
-    }
-    
-    public partial interface IManagementUnitBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitBLL, SampleSystem.Domain.ManagementUnit>
-    {
-    }
-    
-    public partial interface IManagementUnitAndBusinessUnitLinkBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, System.Guid>
-    {
-    }
-    
-    public partial interface IManagementUnitAndBusinessUnitLinkBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLL, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>
-    {
-    }
-    
-    public partial interface IManagementUnitAndHRDepartmentLinkBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, System.Guid>
-    {
-    }
-    
-    public partial interface IManagementUnitAndHRDepartmentLinkBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>
-    {
-    }
-    
-    public partial interface IManagementUnitFluentMappingBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitFluentMapping, System.Guid>
-    {
-    }
-    
-    public partial interface IManagementUnitFluentMappingBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitFluentMappingBLL, SampleSystem.Domain.ManagementUnitFluentMapping>
-    {
-    }
-    
     public partial interface ITestManualEmployeeProjectionBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection, System.Guid>
     {
     }
     
     public partial interface ITestManualEmployeeProjectionBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestManualEmployeeProjectionBLL, SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>
+    {
+    }
+    
+    public partial interface IManagementUnitBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.MU.ManagementUnit, System.Guid>
+    {
+    }
+    
+    public partial interface IManagementUnitBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitBLL, SampleSystem.Domain.MU.ManagementUnit>
+    {
+    }
+    
+    public partial interface IManagementUnitAndBusinessUnitLinkBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink, System.Guid>
+    {
+    }
+    
+    public partial interface IManagementUnitAndBusinessUnitLinkBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndBusinessUnitLinkBLL, SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink>
+    {
+    }
+    
+    public partial interface IManagementUnitAndHRDepartmentLinkBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink, System.Guid>
+    {
+    }
+    
+    public partial interface IManagementUnitAndHRDepartmentLinkBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLL, SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>
+    {
+    }
+    
+    public partial interface IManagementUnitFluentMappingBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping, System.Guid>
+    {
+    }
+    
+    public partial interface IManagementUnitFluentMappingBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IManagementUnitFluentMappingBLL, SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping>
     {
     }
     
@@ -904,14 +920,6 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IRoleRoleDegreeLinkBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.RoleRoleDegreeLink, System.Guid>
-    {
-    }
-    
-    public partial interface IRoleRoleDegreeLinkBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.IRoleRoleDegreeLinkBLL, SampleSystem.Domain.RoleRoleDegreeLink>
-    {
-    }
-    
     public partial interface ISqlParserTestObjBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.SqlParserTestObj, System.Guid>
     {
     }
@@ -936,75 +944,67 @@ namespace SampleSystem.BLL
     {
     }
     
+    public partial interface ITestRootSecurityObjBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestDependency.TestRootSecurityObj, System.Guid>
+    {
+    }
+    
+    public partial interface ITestRootSecurityObjBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestRootSecurityObjBLL, SampleSystem.Domain.TestDependency.TestRootSecurityObj>
+    {
+    }
+    
+    public partial interface ITestSecurityObjItemBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestDependency.TestSecurityObjItem, System.Guid>
+    {
+    }
+    
+    public partial interface ITestSecurityObjItemBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemBLL, SampleSystem.Domain.TestDependency.TestSecurityObjItem>
+    {
+    }
+    
+    public partial interface ITestSecuritySubObjItemBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem, System.Guid>
+    {
+    }
+    
+    public partial interface ITestSecuritySubObjItemBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItemBLL, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem>
+    {
+    }
+    
+    public partial interface ITestSecuritySubObjItem2BLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2, System.Guid>
+    {
+    }
+    
+    public partial interface ITestSecuritySubObjItem2BLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem2BLL, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2>
+    {
+    }
+    
+    public partial interface ITestSecuritySubObjItem3BLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3, System.Guid>
+    {
+    }
+    
+    public partial interface ITestSecuritySubObjItem3BLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3>
+    {
+    }
+    
+    public partial interface ITestPerformanceObjectBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject, System.Guid>
+    {
+    }
+    
+    public partial interface ITestPerformanceObjectBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestPerformanceObjectBLL, SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>
+    {
+    }
+    
+    public partial interface ITestPlainAuthObjectBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject, System.Guid>
+    {
+    }
+    
+    public partial interface ITestPlainAuthObjectBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestPlainAuthObjectBLL, SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject>
+    {
+    }
+    
     public partial interface ITestImmutableObjBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestImmutableObj, System.Guid>
     {
     }
     
     public partial interface ITestImmutableObjBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, SampleSystem.Domain.TestImmutableObj>
-    {
-    }
-    
-    public partial interface ITestPerformanceObjectBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPerformanceObject, System.Guid>
-    {
-    }
-    
-    public partial interface ITestPerformanceObjectBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestPerformanceObjectBLL, SampleSystem.Domain.TestPerformanceObject>
-    {
-    }
-    
-    public partial interface ITestPlainAuthObjectBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPlainAuthObject, System.Guid>
-    {
-    }
-    
-    public partial interface ITestPlainAuthObjectBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestPlainAuthObjectBLL, SampleSystem.Domain.TestPlainAuthObject>
-    {
-    }
-    
-    public partial interface ITestRestrictionObjectBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestRestrictionObject, System.Guid>
-    {
-    }
-    
-    public partial interface ITestRestrictionObjectBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestRestrictionObjectBLL, SampleSystem.Domain.TestRestrictionObject>
-    {
-    }
-    
-    public partial interface ITestRootSecurityObjBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestRootSecurityObj, System.Guid>
-    {
-    }
-    
-    public partial interface ITestRootSecurityObjBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestRootSecurityObjBLL, SampleSystem.Domain.TestRootSecurityObj>
-    {
-    }
-    
-    public partial interface ITestSecurityObjItemBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecurityObjItem, System.Guid>
-    {
-    }
-    
-    public partial interface ITestSecurityObjItemBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemBLL, SampleSystem.Domain.TestSecurityObjItem>
-    {
-    }
-    
-    public partial interface ITestSecuritySubObjItemBLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem, System.Guid>
-    {
-    }
-    
-    public partial interface ITestSecuritySubObjItemBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItemBLL, SampleSystem.Domain.TestSecuritySubObjItem>
-    {
-    }
-    
-    public partial interface ITestSecuritySubObjItem2BLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem2, System.Guid>
-    {
-    }
-    
-    public partial interface ITestSecuritySubObjItem2BLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem2BLL, SampleSystem.Domain.TestSecuritySubObjItem2>
-    {
-    }
-    
-    public partial interface ITestSecuritySubObjItem3BLL : Framework.BLL.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem3, System.Guid>
-    {
-    }
-    
-    public partial interface ITestSecuritySubObjItem3BLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, SampleSystem.Domain.TestSecuritySubObjItem3>
     {
     }
 }

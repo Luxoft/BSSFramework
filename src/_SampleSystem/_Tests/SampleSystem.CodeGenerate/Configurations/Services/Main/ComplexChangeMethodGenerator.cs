@@ -15,7 +15,7 @@ using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators._Base;
 
 using SampleSystem.Domain;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations.Services.Main;
 
 /// <summary>
 /// Генератор кастомного фасадного метода по ComplexChange-модели

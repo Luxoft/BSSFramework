@@ -3,12 +3,14 @@
 using Framework.Relations;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.Enums;
+
+namespace SampleSystem.Domain.BU;
 
 public class BusinessUnitEmployeeRole : AuditPersistentDomainObjectBase, IDetail<BusinessUnit>
 {
     private BusinessUnit businessUnit;
-    private Employee employee;
+    private Employee.Employee employee;
     private BusinessUnitEmployeeRoleType role;
 
     public BusinessUnitEmployeeRole(BusinessUnit businessUnit)
@@ -27,7 +29,7 @@ public class BusinessUnitEmployeeRole : AuditPersistentDomainObjectBase, IDetail
     public virtual BusinessUnit BusinessUnit => this.businessUnit;
 
     [Required]
-    public virtual Employee Employee
+    public virtual Employee.Employee Employee
     {
         get => this.employee;
         set => this.employee = value;
@@ -43,7 +45,7 @@ public class BusinessUnitEmployeeRole : AuditPersistentDomainObjectBase, IDetail
 
     public static BusinessUnitEmployeeRole Create(
             BusinessUnit businessUnit,
-            Employee employee,
+            Employee.Employee employee,
             BusinessUnitEmployeeRoleType role)
     {
         if (businessUnit == null)

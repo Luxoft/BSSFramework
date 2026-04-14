@@ -1,12 +1,12 @@
 ﻿using Framework.BLL.Domain.Serialization;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.NhFluentMapping;
 
 public class MuComponent
 {
     private bool? luxoftSignsFirst;
 
-    private Employee authorizedLuxoftSignatory;
+    private Employee.Employee authorizedLuxoftSignatory;
 
     public virtual bool? LuxoftSignsFirst
     {
@@ -15,7 +15,7 @@ public class MuComponent
     }
 
     [CustomSerialization(CustomSerializationMode.Ignore)]
-    public virtual Employee AuthorizedLuxoftSignatory
+    public virtual Employee.Employee AuthorizedLuxoftSignatory
     {
         get => this.authorizedLuxoftSignatory;
         set => this.authorizedLuxoftSignatory = value;

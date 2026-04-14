@@ -3,6 +3,7 @@ using Framework.BLL;
 using Framework.Core;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.TestDeserializedAuth;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;

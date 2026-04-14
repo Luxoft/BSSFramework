@@ -1,7 +1,5 @@
 ﻿using Framework.Restriction;
 
-using SampleSystem.Domain.UniqueByMaster;
-
 namespace SampleSystem.Domain.UniqueByParent;
 
 [UniqueGroup(nameof(Parent))]

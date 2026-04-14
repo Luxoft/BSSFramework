@@ -8,7 +8,9 @@ using Framework.Core;
 using Framework.Relations;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+
+namespace SampleSystem.Domain.MU;
 
 [BLLViewRole, BLLRemoveRole, BLLSaveRole]
 public class ManagementUnitAndBusinessUnitLink :
@@ -71,7 +73,7 @@ public class ManagementUnitAndBusinessUnitLink :
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client)]
     [ExpandPath("ManagementUnit.HRDepartments")]
     [DetailRole(false)]
-    public virtual IEnumerable<HRDepartment> LinkedHRDepartments => this.ManagementUnit.HRDepartments.ToList(link => link.HRDepartment);
+    public virtual IEnumerable<HRDepartment.HRDepartment> LinkedHRDepartments => this.ManagementUnit.HRDepartments.ToList(link => link.HRDepartment);
 
     ManagementUnit IDetail<ManagementUnit>.Master => this.managementUnit;
 

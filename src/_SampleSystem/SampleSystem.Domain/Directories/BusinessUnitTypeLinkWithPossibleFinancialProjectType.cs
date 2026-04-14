@@ -1,6 +1,8 @@
 ﻿using Framework.Relations;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.Enums;
+
+namespace SampleSystem.Domain.Directories;
 
 public class BusinessUnitTypeLinkWithPossibleFinancialProjectType :
         AuditPersistentDomainObjectBase,

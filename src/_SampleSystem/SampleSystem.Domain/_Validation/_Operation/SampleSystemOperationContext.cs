@@ -1,4 +1,4 @@
-﻿namespace SampleSystem.Domain;
+﻿namespace SampleSystem.Domain._Validation._Operation;
 
 /// <summary>
 /// Перечень действий, который можно делать c объектом

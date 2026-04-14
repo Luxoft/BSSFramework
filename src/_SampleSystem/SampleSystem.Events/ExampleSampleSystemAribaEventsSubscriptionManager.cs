@@ -1,6 +1,7 @@
 ﻿using Framework.BLL.Events.SubscriptionManager;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
 
 namespace SampleSystem.Events;
 

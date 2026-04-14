@@ -2,7 +2,9 @@
 using Framework.Relations;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.Ariba;
+
+namespace SampleSystem.Domain.Directories;
 
 public class LegalEntityBase : BaseDirectory, IMaster<Address>
 {

@@ -1,9 +1,18 @@
 ﻿using Framework.Infrastructure.DependencyInjection;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.EnversBug1676;
+using SampleSystem.Domain.ForUpdate;
+using SampleSystem.Domain.HRDepartment;
 using SampleSystem.Domain.ManualProjections;
+using SampleSystem.Domain.MU;
+using SampleSystem.Domain.NhFluentMapping;
 using SampleSystem.Domain.Projections;
+using SampleSystem.Domain.TestDependency;
+using SampleSystem.Domain.TestDeserializedAuth;
 using SampleSystem.Security.Metadata;
 using SampleSystem.Security.Services;
 

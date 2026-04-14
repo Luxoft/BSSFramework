@@ -5,6 +5,7 @@ using Framework.Database;
 using SecuritySystem;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 

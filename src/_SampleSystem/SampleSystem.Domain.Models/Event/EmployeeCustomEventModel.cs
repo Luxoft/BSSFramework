@@ -6,7 +6,7 @@ public class EmployeeCustomEventModel : DomainObjectBase
     {
     }
 
-    public EmployeeCustomEventModel(Employee employee)
+    public EmployeeCustomEventModel(Employee.Employee employee)
     {
         if (employee == null) { throw new ArgumentNullException(nameof(employee)); }
 

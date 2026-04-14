@@ -2,10 +2,10 @@
 using Framework.Projection.Lambda;
 using Framework.Projection.Lambda.ProjectionSource._Base;
 
-using SampleSystem.Domain;
+using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Models.Filters;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations._ProjectionSources;
 
 public class LegacySampleSystemProjectionSource : ProjectionSource
 {

@@ -3,6 +3,7 @@ using Framework.Configuration.Domain;
 using Framework.Database;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.Directories;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 

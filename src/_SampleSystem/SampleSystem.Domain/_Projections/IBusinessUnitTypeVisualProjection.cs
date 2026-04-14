@@ -2,7 +2,9 @@
 using Framework.BLL.Domain.ServiceRole;
 using Framework.Projection;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.Directories;
+
+namespace SampleSystem.Domain._Projections;
 
 [BLLProjectionViewRole]
 [ProjectionContract(typeof(BusinessUnitType))]

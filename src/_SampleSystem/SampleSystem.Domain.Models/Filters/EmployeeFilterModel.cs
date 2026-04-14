@@ -2,5 +2,5 @@
 
 namespace SampleSystem.Domain.Models.Filters;
 
-[ViewDomainObject(typeof(Employee))]
-public class EmployeeFilterModel : DomainObjectContextFilterModel<Employee>;
+[ViewDomainObject(typeof(Employee.Employee))]
+public class EmployeeFilterModel : DomainObjectContextFilterModel<Employee.Employee>;

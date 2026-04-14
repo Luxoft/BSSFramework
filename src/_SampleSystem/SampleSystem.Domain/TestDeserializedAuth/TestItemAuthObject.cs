@@ -1,6 +1,9 @@
 ﻿using Framework.Relations;
 
-namespace SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.MU;
+
+namespace SampleSystem.Domain.TestDeserializedAuth;
 
 public class TestItemAuthObject : AuditPersistentDomainObjectBase, IDetail<TestPlainAuthObject>
 {

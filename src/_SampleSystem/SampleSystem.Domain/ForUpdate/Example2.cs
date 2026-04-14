@@ -1,6 +1,6 @@
 ﻿using Framework.Relations;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.ForUpdate;
 
 public class Example2 : AuditPersistentDomainObjectBase, IDetail<Example1>
 {

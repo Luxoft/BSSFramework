@@ -4,9 +4,11 @@ using Framework.Core;
 using Framework.Relations;
 using Framework.Restriction;
 
+using SampleSystem.Domain.BU.__Base;
+
 using SecuritySystem;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.MU;
 
 [BLLViewRole, BLLSaveRole(AllowCreate = false)]
 public class ManagementUnit :

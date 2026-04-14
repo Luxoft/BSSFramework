@@ -9,16 +9,28 @@ using Framework.ExtendedMetadata.Builder;
 using Framework.Projection;
 using Framework.Validation;
 
+using SampleSystem.CodeGenerate.Configurations._ProjectionSources;
+using SampleSystem.CodeGenerate.Configurations.BLL;
+using SampleSystem.CodeGenerate.Configurations.BLLCore;
+using SampleSystem.CodeGenerate.Configurations.DAL;
+using SampleSystem.CodeGenerate.Configurations.DTO.Server;
+using SampleSystem.CodeGenerate.Configurations.Projection;
 using SampleSystem.CodeGenerate.Configurations.Services.Audit;
-using SampleSystem.CodeGenerate.ServerDTO;
+using SampleSystem.CodeGenerate.Configurations.Services.Integration;
+using SampleSystem.CodeGenerate.Configurations.Services.Main;
+using SampleSystem.CodeGenerate.Configurations.Services.QueryService;
 using SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Employee;
+using SampleSystem.Domain.ForUpdate;
+using SampleSystem.Domain.HRDepartment;
 using SampleSystem.Domain.ManualProjections;
 using SampleSystem.Security;
 using SampleSystem.Validation;
 
 using SecuritySystem;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations;
 
 public partial class ServerGenerationEnvironment() : CodeGenerationEnvironment<DomainObjectBase, PersistentDomainObjectBase,
     AuditPersistentDomainObjectBase, Guid>(v => v.Id, typeof(DomainObjectFilterModel<>).Assembly)
@@ -27,7 +39,7 @@ public partial class ServerGenerationEnvironment() : CodeGenerationEnvironment<D
 
     public BLLGeneratorConfiguration BLL => field ??= new BLLGeneratorConfiguration(this);
 
-    public ServerDTOGeneratorConfiguration ServerDTO => field ??= new ServerDTO.ServerDTOGeneratorConfiguration(this);
+    public ServerDTOGeneratorConfiguration ServerDTO => field ??= new ServerDTOGeneratorConfiguration(this);
 
     public MainServiceGeneratorConfiguration MainService => field ??= new MainServiceGeneratorConfiguration(this);
 

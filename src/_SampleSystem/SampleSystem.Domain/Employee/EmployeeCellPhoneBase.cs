@@ -3,7 +3,7 @@ using Framework.Relations;
 using Framework.Restriction;
 using Framework.Validation;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Employee;
 
 public class EmployeeCellPhoneBase : AuditPersistentDomainObjectBase, IDetail<Employee>
 {

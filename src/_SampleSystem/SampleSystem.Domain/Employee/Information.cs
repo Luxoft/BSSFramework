@@ -2,7 +2,7 @@
 using Framework.Core;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.Employee;
 
 [BLLViewRole]
 [BLLEventRole]

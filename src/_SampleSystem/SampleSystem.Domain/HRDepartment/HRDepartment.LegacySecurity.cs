@@ -1,8 +1,10 @@
 ﻿using Framework.BLL.Domain.Attributes;
 
+using SampleSystem.Domain.Directories;
+
 using SecuritySystem;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.HRDepartment;
 
 [SecurityNode]
 public interface IDepartmentSecurityElement<out TDepartment>

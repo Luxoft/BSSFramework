@@ -1,7 +1,9 @@
 ﻿using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 
-namespace SampleSystem.CodeGenerate.ServerDTO;
+using SampleSystem.CodeGenerate.Configurations.DTO.Server.FileFactory.Base;
+
+namespace SampleSystem.CodeGenerate.Configurations.DTO.Server.FileFactory;
 
 public class DefaultSimpleRefFullDetailDTOFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : RefDTOFileFactory<TConfiguration>(configuration, domainType)
     where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>

@@ -2,7 +2,7 @@
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main.Base;
 
-namespace SampleSystem.CodeGenerate.ServerDTO;
+namespace SampleSystem.CodeGenerate.Configurations.DTO.Server.FileFactory.Base;
 
 public abstract class RefDTOFileFactory<TConfiguration> : MainDTOFileFactory<TConfiguration>
 

@@ -1,6 +1,6 @@
 ﻿using Framework.CodeGeneration.ServiceModelGenerator;
 
-namespace SampleSystem.CodeGenerate;
+namespace SampleSystem.CodeGenerate.Configurations.Services;
 
 /// <summary>
 /// Кастомные идентификаторы генерируемых фасадных методов

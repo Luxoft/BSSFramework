@@ -2,7 +2,7 @@
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.GeneratePolicy;
 
-namespace SampleSystem.CodeGenerate.ServerDTO;
+namespace SampleSystem.CodeGenerate.Configurations.DTO.Server;
 
 public class SampleSystemEventDTORoleGeneratePolicy : IGeneratePolicy<RoleFileType>
 {

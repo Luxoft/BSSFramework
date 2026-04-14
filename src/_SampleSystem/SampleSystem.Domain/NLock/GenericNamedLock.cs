@@ -1,7 +1,7 @@
 ﻿using Framework.Database.Mapping;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain;
+namespace SampleSystem.Domain.NLock;
 
 [UniqueGroup]
 [NotAuditedClass]

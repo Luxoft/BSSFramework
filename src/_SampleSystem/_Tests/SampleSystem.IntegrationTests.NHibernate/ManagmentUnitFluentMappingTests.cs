@@ -3,6 +3,7 @@ using Framework.Core;
 using Framework.Database;
 
 using SampleSystem.Domain;
+using SampleSystem.Domain.NhFluentMapping;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;

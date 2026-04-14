@@ -12,7 +12,7 @@
 namespace SampleSystem.Subscriptions.Metadata.Examples.RazerInheritance
 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    public partial class _Examples_RazorInheritance_MessageTemplate_cshtml : LocalRazorTemplate<Domain.Employee>
+    public partial class _Examples_RazorInheritance_MessageTemplate_cshtml : LocalRazorTemplate<Domain.Employee.Employee>
     {
 #line hidden
 

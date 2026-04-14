@@ -19,7 +19,7 @@
         protected virtual SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkFullDTO GetFullBusinessUnitManagerCommissionLinkInternal(SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL bll = evaluateData.Context.Logics.BusinessUnitManagerCommissionLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.BusinessUnitManagerCommissionLink domainObject = bll.GetById(businessUnitManagerCommissionLinkIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink domainObject = bll.GetById(businessUnitManagerCommissionLinkIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -44,13 +44,13 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkFullDTO> GetFullBusinessUnitManagerCommissionLinksByIdentsInternal(SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO[] businessUnitManagerCommissionLinkIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL bll = evaluateData.Context.Logics.BusinessUnitManagerCommissionLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(businessUnitManagerCommissionLinkIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(businessUnitManagerCommissionLinkIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkFullDTO> GetFullBusinessUnitManagerCommissionLinksInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL bll = evaluateData.Context.Logics.BusinessUnitManagerCommissionLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         /// <summary>
@@ -65,7 +65,7 @@
         protected virtual SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkRichDTO GetRichBusinessUnitManagerCommissionLinkInternal(SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL bll = evaluateData.Context.Logics.BusinessUnitManagerCommissionLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.BusinessUnitManagerCommissionLink domainObject = bll.GetById(businessUnitManagerCommissionLinkIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
+            SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink domainObject = bll.GetById(businessUnitManagerCommissionLinkIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -81,7 +81,7 @@
         protected virtual SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkSimpleDTO GetSimpleBusinessUnitManagerCommissionLinkInternal(SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL bll = evaluateData.Context.Logics.BusinessUnitManagerCommissionLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.BusinessUnitManagerCommissionLink domainObject = bll.GetById(businessUnitManagerCommissionLinkIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
+            SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink domainObject = bll.GetById(businessUnitManagerCommissionLinkIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -106,13 +106,13 @@
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkSimpleDTO> GetSimpleBusinessUnitManagerCommissionLinksByIdentsInternal(SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO[] businessUnitManagerCommissionLinkIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL bll = evaluateData.Context.Logics.BusinessUnitManagerCommissionLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(businessUnitManagerCommissionLinkIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(businessUnitManagerCommissionLinkIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkSimpleDTO> GetSimpleBusinessUnitManagerCommissionLinksInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLL bll = evaluateData.Context.Logics.BusinessUnitManagerCommissionLinkFactory.Create(SecuritySystem.SecurityRule.View);
-            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
+            return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
     }
 }

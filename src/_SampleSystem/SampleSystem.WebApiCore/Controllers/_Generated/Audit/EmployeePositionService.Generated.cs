@@ -22,7 +22,7 @@
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeePositionPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, string propertyName, Framework.Core.Period? period, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.EmployeePosition>(employeePositionIdentity.Id, propertyName, period);
+            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.Employee.EmployeePosition>(employeePositionIdentity.Id, propertyName, period);
         }
         
         /// <summary>
@@ -39,7 +39,7 @@
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeePositionPropertyRevisionsInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, string propertyName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.EmployeePosition>(employeePositionIdentity.Id, propertyName);
+            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.Employee.EmployeePosition>(employeePositionIdentity.Id, propertyName);
         }
         
         /// <summary>
@@ -71,7 +71,7 @@
         protected virtual SampleSystem.Generated.DTO.EmployeePositionFullDTO GetFullEmployeePositionWithRevisionInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeePosition domainObject = bll.GetObjectByRevision(employeePositionIdentity.Id, revision);
+            SampleSystem.Domain.Employee.EmployeePosition domainObject = bll.GetObjectByRevision(employeePositionIdentity.Id, revision);
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -89,7 +89,7 @@
         protected virtual SampleSystem.Generated.DTO.EmployeePositionRichDTO GetRichEmployeePositionWithRevisionInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeePosition domainObject = bll.GetObjectByRevision(employeePositionIdentity.Id, revision);
+            SampleSystem.Domain.Employee.EmployeePosition domainObject = bll.GetObjectByRevision(employeePositionIdentity.Id, revision);
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -107,7 +107,7 @@
         protected virtual SampleSystem.Generated.DTO.EmployeePositionSimpleDTO GetSimpleEmployeePositionWithRevisionInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeePosition domainObject = bll.GetObjectByRevision(employeePositionIdentity.Id, revision);
+            SampleSystem.Domain.Employee.EmployeePosition domainObject = bll.GetObjectByRevision(employeePositionIdentity.Id, revision);
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
@@ -125,7 +125,7 @@
         protected virtual SampleSystem.Generated.DTO.EmployeePositionVisualDTO GetVisualEmployeePositionWithRevisionInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePositionBLL bll = evaluateData.Context.Logics.EmployeePositionFactory.Create(SecuritySystem.SecurityRule.View);
-            SampleSystem.Domain.EmployeePosition domainObject = bll.GetObjectByRevision(employeePositionIdentity.Id, revision);
+            SampleSystem.Domain.Employee.EmployeePosition domainObject = bll.GetObjectByRevision(employeePositionIdentity.Id, revision);
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
     }

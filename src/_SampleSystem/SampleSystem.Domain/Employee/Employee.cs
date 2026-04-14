@@ -10,6 +10,7 @@ using Framework.Database.Mapping;
 using Framework.Relations;
 using Framework.Restriction;
 using Framework.Validation;
+using Framework.Validation.Attributes;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Directories;

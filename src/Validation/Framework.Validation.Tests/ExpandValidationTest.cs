@@ -1,5 +1,8 @@
 ﻿using FluentAssertions;
 
+using Framework.Validation.Attributes;
+using Framework.Validation.Map;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using NUnit.Framework;

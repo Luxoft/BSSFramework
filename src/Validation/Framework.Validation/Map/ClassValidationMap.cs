@@ -1,9 +1,8 @@
 ﻿using CommonFramework;
 
-using Framework.Validation.Map;
 using Framework.Validation.Validators;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Map;
 
 public abstract class ClassValidationMap(string typeName) : IClassValidationMap, IValidatorCollection<IClassValidator>
 {

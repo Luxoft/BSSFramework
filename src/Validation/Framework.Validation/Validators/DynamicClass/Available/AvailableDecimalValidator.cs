@@ -1,6 +1,7 @@
 ﻿using Framework.Core;
+using Framework.Validation.Validators.DynamicClass.Available.Base;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Validators.DynamicClass.Available;
 
 public class AvailableDecimalValidator : RangeClassValidator<decimal, decimal>
 {

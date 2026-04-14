@@ -1,4 +1,4 @@
-﻿namespace Framework.Validation;
+﻿namespace Framework.Validation.Extensions;
 
 internal static class FuncExtensions
 {

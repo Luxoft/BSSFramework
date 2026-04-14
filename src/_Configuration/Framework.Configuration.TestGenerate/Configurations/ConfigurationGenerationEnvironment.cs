@@ -15,6 +15,9 @@ using Framework.Database.NHibernate._MappingSettings;
 using Framework.ExtendedMetadata;
 using Framework.ExtendedMetadata.Builder;
 using Framework.Validation;
+using Framework.Validation.Attributes;
+using Framework.Validation.Attributes.Available;
+using Framework.Validation.Attributes.Available.Range;
 
 namespace Framework.Configuration.TestGenerate.Configurations;
 

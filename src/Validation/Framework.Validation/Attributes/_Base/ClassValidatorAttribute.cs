@@ -1,6 +1,6 @@
 ﻿using Framework.Validation.Validators;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Attributes._Base;
 
 [AttributeUsage(AttributeTargets.Class)]
 public abstract class ClassValidatorAttribute : ValidatorAttribute

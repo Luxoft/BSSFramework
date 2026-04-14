@@ -3,8 +3,9 @@
 using CommonFramework;
 
 using Framework.Core;
+using Framework.Validation.Attributes;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Extensions;
 
 public static class TypeExtensions
 {

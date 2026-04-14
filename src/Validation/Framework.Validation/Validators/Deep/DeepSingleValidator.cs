@@ -1,8 +1,8 @@
 ﻿using CommonFramework;
 
-using Framework.Validation.Validators;
+using Framework.Validation.Map;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Validators.Deep;
 
 /// <summary>
 /// Внутренняя валидация

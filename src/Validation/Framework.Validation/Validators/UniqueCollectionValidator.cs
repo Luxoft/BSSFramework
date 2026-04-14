@@ -6,9 +6,9 @@ using CommonFramework;
 using Framework.Application.Domain;
 using Framework.Core;
 using Framework.Restriction;
-using Framework.Validation.Validators;
+using Framework.Validation.Extensions;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Validators;
 
 public class UniqueCollectionValidator(string groupKey) : IDynamicPropertyValidator
 {

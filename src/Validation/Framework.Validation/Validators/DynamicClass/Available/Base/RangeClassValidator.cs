@@ -3,11 +3,10 @@
 using CommonFramework;
 
 using Framework.Core;
-using Framework.Validation.Validators;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Validators.DynamicClass.Available.Base;
 
 public abstract class RangeClassValidator<TProperty, TRange> : IManyPropertyDynamicClassValidator
         where TProperty : struct

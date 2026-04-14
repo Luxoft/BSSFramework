@@ -1,6 +1,4 @@
-﻿using Framework.Validation.Validators;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation.Validators;
 
 public class IntValueValidator(int min, int max) : IPropertyValidator<object, int>
 {

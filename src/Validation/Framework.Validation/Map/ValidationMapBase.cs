@@ -2,11 +2,10 @@
 using CommonFramework.DictionaryCache;
 
 using Framework.Core;
-using Framework.Validation.Map;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Map;
 
 public abstract class ValidationMapBase : IValidationMap
 {

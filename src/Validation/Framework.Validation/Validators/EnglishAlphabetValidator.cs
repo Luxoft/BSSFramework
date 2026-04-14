@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Validators;
 
 public class EnglishAlphabetValidator(string externalChars) : AlphabetValidator(EnglishAlphabet, externalChars)
 {

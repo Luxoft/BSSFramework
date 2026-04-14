@@ -1,4 +1,4 @@
-﻿namespace Framework.Validation;
+﻿namespace Framework.Validation.Attributes._Base;
 
 public abstract class ValidatorAttribute : Attribute, IValidationData
 {

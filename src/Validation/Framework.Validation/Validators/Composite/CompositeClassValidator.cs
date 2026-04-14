@@ -1,6 +1,4 @@
-﻿using Framework.Validation.Validators;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation.Validators.Composite;
 
 public class CompositeClassValidator<TSource>(params IClassValidator<TSource>[] classValidators) : IClassValidator<TSource>
     where TSource : class

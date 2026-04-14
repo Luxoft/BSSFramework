@@ -8,6 +8,8 @@ using Framework.ExtendedMetadata;
 using Framework.ExtendedMetadata.Builder;
 using Framework.Projection;
 using Framework.Validation;
+using Framework.Validation.Attributes.Available;
+using Framework.Validation.Attributes.Available.Range;
 
 using SampleSystem.CodeGenerate.Configurations._ProjectionSources;
 using SampleSystem.CodeGenerate.Configurations.BLL;

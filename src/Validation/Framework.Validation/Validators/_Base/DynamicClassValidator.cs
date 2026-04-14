@@ -1,8 +1,6 @@
 ﻿using CommonFramework;
 
-using Framework.Validation.Validators;
-
-namespace Framework.Validation;
+namespace Framework.Validation.Validators._Base;
 
 public abstract class DynamicClassValidator : IDynamicClassValidator
 {

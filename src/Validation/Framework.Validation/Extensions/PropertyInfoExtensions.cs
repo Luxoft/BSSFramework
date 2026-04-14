@@ -4,8 +4,9 @@ using CommonFramework;
 
 using Framework.Core;
 using Framework.Relations;
+using Framework.Validation.Attributes;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Extensions;
 
 public static class PropertyInfoExtensions
 {

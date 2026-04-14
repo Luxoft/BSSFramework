@@ -1,6 +1,8 @@
-﻿using Framework.Validation.Validators;
+﻿using Framework.Validation.Attributes._Base;
+using Framework.Validation.Validators;
+using Framework.Validation.Validators.DynamicClass.Available;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Attributes.Available.Range;
 
 public class AvailablePeriodValidatorAttribute : ClassValidatorAttribute
 {

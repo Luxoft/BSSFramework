@@ -2,11 +2,12 @@
 
 using CommonFramework;
 
+using Framework.Validation.Attributes._Base;
 using Framework.Validation.Validators;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Attributes.Primitive;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class PrimitivePropertyValidatorAttribute(Type validatorType) : PropertyValidatorAttribute

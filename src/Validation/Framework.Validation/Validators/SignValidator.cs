@@ -2,9 +2,8 @@
 
 using Framework.Application.Domain;
 using Framework.Core;
-using Framework.Validation.Validators;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Validators;
 
 /// <summary>
 /// Represents numeric value sign validator that used by domain object properties validation

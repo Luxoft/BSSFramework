@@ -1,9 +1,9 @@
 ﻿using CommonFramework;
 
 using Framework.Core;
-using Framework.Validation.Validators;
+using Framework.Validation.Extensions;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Validators._Base.Extensions;
 
 public static class PropertyValidatorExtensions
 {

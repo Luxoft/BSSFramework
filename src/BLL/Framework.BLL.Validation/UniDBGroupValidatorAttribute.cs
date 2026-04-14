@@ -1,4 +1,5 @@
-﻿using Framework.Validation;
+﻿using Framework.Validation.Attributes._Base;
+using Framework.Validation.Validators;
 
 namespace Framework.BLL.Validation;
 

@@ -1,4 +1,5 @@
 ﻿using Framework.Validation;
+using Framework.Validation.Extensions;
 
 namespace Framework.Authorization.BLL;
 

@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.Validation;
+using Framework.Validation.Map;
 
 namespace Framework.BLL.Validation;
 

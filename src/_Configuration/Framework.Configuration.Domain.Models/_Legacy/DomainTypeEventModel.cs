@@ -1,6 +1,7 @@
 ﻿using Framework.Restriction;
 using Framework.Validation;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Configuration.Domain;
 
 /// <summary>

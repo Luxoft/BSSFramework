@@ -9,15 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.SecuritySystem.Notification.Abstractions" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\BLL\Framework.BLL.Domain\Framework.BLL.Domain.csproj" />
-    <ProjectReference Include="..\..\Notification\Framework.Notification.Domain\Framework.Notification.Domain.csproj" />
-    <ProjectReference Include="..\..\Subscriptions\Framework.Subscriptions.Domain\Framework.Subscriptions.Domain.csproj" />
-    <ProjectReference Include="..\..\Validation\Framework.Validation\Framework.Validation.csproj" />
     <ProjectReference Include="..\Framework.Configuration.Domain\Framework.Configuration.Domain.csproj" />
+    <ProjectReference Include="..\..\BLL\Framework.BLL.Domain\Framework.BLL.Domain.csproj" />
+    <ProjectReference Include="..\..\Validation\Framework.Validation\Framework.Validation.csproj" />
   </ItemGroup>
 
 </Project>

@@ -17,8 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Notification\Framework.Notification.Domain\Framework.Notification.Domain.csproj" />
     <ProjectReference Include="..\Framework.Subscriptions.Abstractions\Framework.Subscriptions.Abstractions.csproj" />
+
+    <ProjectReference Include="..\..\Notification\Framework.Notification.Domain\Framework.Notification.Domain.csproj" />
   </ItemGroup>
 
 </Project>

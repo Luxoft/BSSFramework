@@ -1,4 +1,5 @@
-﻿namespace Framework.Configuration.Domain;
+﻿// ReSharper disable once CheckNamespace
+namespace Framework.Configuration.Domain;
 
 /// <summary>
 /// Состояние обработки очереди

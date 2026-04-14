@@ -2,6 +2,7 @@
 
 using Framework.BLL.Domain.Models;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Configuration.Domain;
 
 public abstract class DomainObjectFilterModel<TDomainObject> : DomainObjectBase, IDomainObjectFilterModel<TDomainObject>

@@ -2,6 +2,7 @@
 using Framework.Relations;
 using Framework.Restriction;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Configuration.Domain;
 
 /// <summary>

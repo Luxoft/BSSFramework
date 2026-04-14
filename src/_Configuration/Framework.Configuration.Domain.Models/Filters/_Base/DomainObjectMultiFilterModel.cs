@@ -2,6 +2,7 @@
 
 using CommonFramework;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Configuration.Domain;
 
 public abstract class DomainObjectMultiFilterModel<TDomainObject> : DomainObjectFilterModel<TDomainObject>

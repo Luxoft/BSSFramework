@@ -2,6 +2,7 @@
 using Framework.Database;
 using Framework.Database.Mapping;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Configuration.Domain;
 
 /// <summary>

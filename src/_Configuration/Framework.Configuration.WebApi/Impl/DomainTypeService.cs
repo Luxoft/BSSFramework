@@ -5,6 +5,7 @@ using SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 
+// ReSharper disable once CheckNamespace
 namespace Framework.Configuration.WebApi;
 
 public partial class ConfigMainController

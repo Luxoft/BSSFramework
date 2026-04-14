@@ -1,6 +1,7 @@
 ﻿using System.CodeDom;
 
 using Framework.BLL;
+using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Integration;

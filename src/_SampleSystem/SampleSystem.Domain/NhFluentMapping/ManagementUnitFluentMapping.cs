@@ -1,4 +1,5 @@
 ﻿using Framework.BLL.Domain.Serialization;
+using Framework.BLL.Domain.ServiceRole;
 using Framework.Core;
 using Framework.Database.Mapping;
 using SampleSystem.Domain.BU;

@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using SampleSystem.Domain.Validation;
-
 namespace SampleSystem.BLL
 {
     
@@ -22,7 +20,7 @@ namespace SampleSystem.BLL
         }
     }
     
-    public abstract partial class SampleSystemValidatorBase : Framework.BLL.Validation.BLLContextHandlerValidator<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystemOperationContext>
+    public abstract partial class SampleSystemValidatorBase : Framework.BLL.Validation.BLLContextHandlerValidator<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.Validation.SampleSystemOperationContext>
     {
         
         public SampleSystemValidatorBase(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
@@ -134,522 +132,522 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.Inline.FioShort>(this.GetFioShortValidationResult);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetAddressValidationResult(SampleSystem.Domain.Directories.Address source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetAddressValidationResult(SampleSystem.Domain.Directories.Address source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetAnotherSqlParserTestObjValidationResult(SampleSystem.Domain.AnotherSqlParserTestObj source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetAnotherSqlParserTestObjValidationResult(SampleSystem.Domain.AnotherSqlParserTestObj source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetAuthPerformanceObjectValidationResult(SampleSystem.Domain.AuthPerformanceObject source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetAuthPerformanceObjectValidationResult(SampleSystem.Domain.AuthPerformanceObject source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetBusinessUnitAncestorLinkValidationResult(SampleSystem.Domain.BU.BusinessUnitAncestorLink source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetBusinessUnitAncestorLinkValidationResult(SampleSystem.Domain.BU.BusinessUnitAncestorLink source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetBusinessUnitEmployeeRoleValidationResult(SampleSystem.Domain.BU.BusinessUnitEmployeeRole source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetBusinessUnitEmployeeRoleValidationResult(SampleSystem.Domain.BU.BusinessUnitEmployeeRole source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetBusinessUnitHrDepartmentValidationResult(SampleSystem.Domain.BU.BusinessUnitHrDepartment source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetBusinessUnitHrDepartmentValidationResult(SampleSystem.Domain.BU.BusinessUnitHrDepartment source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetBusinessUnitManagerCommissionLinkValidationResult(SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetBusinessUnitManagerCommissionLinkValidationResult(SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetBusinessUnitProgramClassFilterModelValidationResult(SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetBusinessUnitProgramClassFilterModelValidationResult(SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetBusinessUnitRootFilterModelValidationResult(SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetBusinessUnitRootFilterModelValidationResult(SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetBusinessUnitToAncestorChildViewValidationResult(SampleSystem.Domain.BU.BusinessUnitToAncestorChildView source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetBusinessUnitToAncestorChildViewValidationResult(SampleSystem.Domain.BU.BusinessUnitToAncestorChildView source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetBusinessUnitTypeLinkWithPossibleFinancialProjectTypeValidationResult(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetBusinessUnitTypeLinkWithPossibleFinancialProjectTypeValidationResult(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetBusinessUnitTypeLinkWithPossibleParentValidationResult(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetBusinessUnitTypeLinkWithPossibleParentValidationResult(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetBusinessUnitTypeLinkWithTransferToValidationResult(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetBusinessUnitTypeLinkWithTransferToValidationResult(SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetBusinessUnitTypeValidationResult(SampleSystem.Domain.Directories.BusinessUnitType source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetBusinessUnitTypeValidationResult(SampleSystem.Domain.Directories.BusinessUnitType source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetBusinessUnitValidationResult(SampleSystem.Domain.BU.BusinessUnit source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetBusinessUnitValidationResult(SampleSystem.Domain.BU.BusinessUnit source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetChildEntityValidationResult(SampleSystem.Domain.UniqueByParent.ChildEntity source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetChildEntityValidationResult(SampleSystem.Domain.UniqueByParent.ChildEntity source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetClassAChildValidationResult(SampleSystem.Domain.TestForceAbstract.ClassAChild source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetClassAChildValidationResult(SampleSystem.Domain.TestForceAbstract.ClassAChild source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetClassAValidationResult(SampleSystem.Domain.TestForceAbstract.ClassA source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetClassAValidationResult(SampleSystem.Domain.TestForceAbstract.ClassA source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetCoefficient1676ValidationResult(SampleSystem.Domain.EnversBug1676.Coefficient1676 source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetCoefficient1676ValidationResult(SampleSystem.Domain.EnversBug1676.Coefficient1676 source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetCompanyLegalEntityValidationResult(SampleSystem.Domain.Directories.CompanyLegalEntity source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetCompanyLegalEntityValidationResult(SampleSystem.Domain.Directories.CompanyLegalEntity source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetConcreteClassAValidationResult(SampleSystem.Domain.TestForceAbstract.ConcreteClassA source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetConcreteClassAValidationResult(SampleSystem.Domain.TestForceAbstract.ConcreteClassA source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetCountryValidationResult(SampleSystem.Domain.Directories.Country source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetCountryValidationResult(SampleSystem.Domain.Directories.Country source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetDateModelValidationResult(SampleSystem.Domain.Models.Custom.DateModel source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetDateModelValidationResult(SampleSystem.Domain.Models.Custom.DateModel source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeAndEmployeeSpecializationLinkValidationResult(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeAndEmployeeSpecializationLinkValidationResult(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeCellPhoneBaseValidationResult(SampleSystem.Domain.Employee.EmployeeCellPhoneBase source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeCellPhoneBaseValidationResult(SampleSystem.Domain.Employee.EmployeeCellPhoneBase source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeCellPhoneValidationResult(SampleSystem.Domain.Employee.EmployeeCellPhone source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeCellPhoneValidationResult(SampleSystem.Domain.Employee.EmployeeCellPhone source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeComplexChangeModelValidationResult(SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeComplexChangeModelValidationResult(SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeCustomEventModelValidationResult(SampleSystem.Domain.Models.Event.EmployeeCustomEventModel source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeCustomEventModelValidationResult(SampleSystem.Domain.Models.Event.EmployeeCustomEventModel source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeCustomIntegrationSaveModelValidationResult(SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeCustomIntegrationSaveModelValidationResult(SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeEmailChangeModelValidationResult(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeEmailChangeModelValidationResult(SampleSystem.Domain.Models.Change.EmployeeEmailChangeModel source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeEmailMassChangeModelValidationResult(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeEmailMassChangeModelValidationResult(SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeFilterModelValidationResult(SampleSystem.Domain.Models.Filters.EmployeeFilterModel source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeFilterModelValidationResult(SampleSystem.Domain.Models.Filters.EmployeeFilterModel source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeInformationValidationResult(SampleSystem.Domain.Employee.EmployeeInformation source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeInformationValidationResult(SampleSystem.Domain.Employee.EmployeeInformation source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeePersonalCellPhoneValidationResult(SampleSystem.Domain.Employee.EmployeePersonalCellPhone source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeePersonalCellPhoneValidationResult(SampleSystem.Domain.Employee.EmployeePersonalCellPhone source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeePhotoValidationResult(SampleSystem.Domain.Employee.EmployeePhoto source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeePhotoValidationResult(SampleSystem.Domain.Employee.EmployeePhoto source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeePositionValidationResult(SampleSystem.Domain.Employee.EmployeePosition source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeePositionValidationResult(SampleSystem.Domain.Employee.EmployeePosition source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeRegistrationTypeValidationResult(SampleSystem.Domain.Employee.EmployeeRegistrationType source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeRegistrationTypeValidationResult(SampleSystem.Domain.Employee.EmployeeRegistrationType source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeRoleDegreeValidationResult(SampleSystem.Domain.Employee.EmployeeRoleDegree source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeRoleDegreeValidationResult(SampleSystem.Domain.Employee.EmployeeRoleDegree source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeRoleValidationResult(SampleSystem.Domain.Employee.EmployeeRole source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeRoleValidationResult(SampleSystem.Domain.Employee.EmployeeRole source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeRootFilterModelValidationResult(SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeRootFilterModelValidationResult(SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeSpecializationValidationResult(SampleSystem.Domain.Employee.EmployeeSpecialization source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeSpecializationValidationResult(SampleSystem.Domain.Employee.EmployeeSpecialization source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeToEmployeeLinkValidationResult(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeToEmployeeLinkValidationResult(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetEmployeeValidationResult(SampleSystem.Domain.Employee.Employee source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetEmployeeValidationResult(SampleSystem.Domain.Employee.Employee source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetExample1ValidationResult(SampleSystem.Domain.ForUpdate.Example1 source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetExample1ValidationResult(SampleSystem.Domain.ForUpdate.Example1 source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetExample2ValidationResult(SampleSystem.Domain.ForUpdate.Example2 source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetExample2ValidationResult(SampleSystem.Domain.ForUpdate.Example2 source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetFioShortValidationResult(SampleSystem.Domain.Inline.FioShort source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetFioShortValidationResult(SampleSystem.Domain.Inline.FioShort source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetFioValidationResult(SampleSystem.Domain.Inline.Fio source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetFioValidationResult(SampleSystem.Domain.Inline.Fio source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetGenericNamedLockValidationResult(SampleSystem.Domain.NLock.GenericNamedLock source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetGenericNamedLockValidationResult(SampleSystem.Domain.NLock.GenericNamedLock source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetGuidBasedFilterModelValidationResult(SampleSystem.Domain.Models.Filters.GuidBasedFilterModel source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetGuidBasedFilterModelValidationResult(SampleSystem.Domain.Models.Filters.GuidBasedFilterModel source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetHierarchicalBusinessUnitFilterModelValidationResult(SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetHierarchicalBusinessUnitFilterModelValidationResult(SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetHRDepartmentEmployeePositionValidationResult(SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetHRDepartmentEmployeePositionValidationResult(SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetHRDepartmentRoleEmployeeValidationResult(SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetHRDepartmentRoleEmployeeValidationResult(SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetHRDepartmentValidationResult(SampleSystem.Domain.HRDepartment.HRDepartment source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetHRDepartmentValidationResult(SampleSystem.Domain.HRDepartment.HRDepartment source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetIMRequestDetailValidationResult(SampleSystem.Domain.Employee.IMRequestDetail source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetIMRequestDetailValidationResult(SampleSystem.Domain.Employee.IMRequestDetail source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetIMRequestValidationResult(SampleSystem.Domain.Employee.IMRequest source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetIMRequestValidationResult(SampleSystem.Domain.Employee.IMRequest source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetInformationValidationResult(SampleSystem.Domain.Employee.Information source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetInformationValidationResult(SampleSystem.Domain.Employee.Information source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetInsuranceDetailValidationResult(SampleSystem.Domain.Employee.InsuranceDetail source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetInsuranceDetailValidationResult(SampleSystem.Domain.Employee.InsuranceDetail source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetInsuranceValidationResult(SampleSystem.Domain.Employee.Insurance source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetInsuranceValidationResult(SampleSystem.Domain.Employee.Insurance source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetIntegrationVersionContainer1CustomIntegrationSaveModelValidationResult(SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetIntegrationVersionContainer1CustomIntegrationSaveModelValidationResult(SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetIntegrationVersionContainer1ValidationResult(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetIntegrationVersionContainer1ValidationResult(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetIntegrationVersionContainer2ValidationResult(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetIntegrationVersionContainer2ValidationResult(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetLegalEntityBaseValidationResult(SampleSystem.Domain.Directories.LegalEntityBase source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetLegalEntityBaseValidationResult(SampleSystem.Domain.Directories.LegalEntityBase source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetLocation1676ValidationResult(SampleSystem.Domain.EnversBug1676.Location1676 source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetLocation1676ValidationResult(SampleSystem.Domain.EnversBug1676.Location1676 source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetLocationAncestorLinkValidationResult(SampleSystem.Domain.Directories.LocationAncestorLink source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetLocationAncestorLinkValidationResult(SampleSystem.Domain.Directories.LocationAncestorLink source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetLocationToAncestorChildViewValidationResult(SampleSystem.Domain.Directories.LocationToAncestorChildView source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetLocationToAncestorChildViewValidationResult(SampleSystem.Domain.Directories.LocationToAncestorChildView source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetLocationValidationResult(SampleSystem.Domain.Directories.Location source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetLocationValidationResult(SampleSystem.Domain.Directories.Location source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetManagementUnitAncestorLinkValidationResult(SampleSystem.Domain.MU.ManagementUnitAncestorLink source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetManagementUnitAncestorLinkValidationResult(SampleSystem.Domain.MU.ManagementUnitAncestorLink source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetManagementUnitAndBusinessUnitLinkValidationResult(SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetManagementUnitAndBusinessUnitLinkValidationResult(SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetManagementUnitAndHRDepartmentLinkValidationResult(SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetManagementUnitAndHRDepartmentLinkValidationResult(SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetManagementUnitFluentMappingValidationResult(SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetManagementUnitFluentMappingValidationResult(SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetManagementUnitToAncestorChildViewValidationResult(SampleSystem.Domain.MU.ManagementUnitToAncestorChildView source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetManagementUnitToAncestorChildViewValidationResult(SampleSystem.Domain.MU.ManagementUnitToAncestorChildView source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetManagementUnitValidationResult(SampleSystem.Domain.MU.ManagementUnit source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetManagementUnitValidationResult(SampleSystem.Domain.MU.ManagementUnit source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetNoSecurityObjectValidationResult(SampleSystem.Domain.NoSecurityObject source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetNoSecurityObjectValidationResult(SampleSystem.Domain.NoSecurityObject source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetParentEntityValidationResult(SampleSystem.Domain.UniqueByParent.ParentEntity source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetParentEntityValidationResult(SampleSystem.Domain.UniqueByParent.ParentEntity source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetPrincipalValidationResult(SampleSystem.Domain.ExternalPrincipal.Principal source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetPrincipalValidationResult(SampleSystem.Domain.ExternalPrincipal.Principal source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetProjectValidationResult(SampleSystem.Domain.Projects.Project source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetProjectValidationResult(SampleSystem.Domain.Projects.Project source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetPureFluentMappingObjectValidationResult(SampleSystem.Domain.NhFluentMapping.PureFluentMappingObject source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetPureFluentMappingObjectValidationResult(SampleSystem.Domain.NhFluentMapping.PureFluentMappingObject source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetRoleRoleDegreeLinkValidationResult(SampleSystem.Domain.Employee.RoleRoleDegreeLink source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetRoleRoleDegreeLinkValidationResult(SampleSystem.Domain.Employee.RoleRoleDegreeLink source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetSingleEmployeeFilterModelValidationResult(SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetSingleEmployeeFilterModelValidationResult(SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetSqlParserTestObjContainerValidationResult(SampleSystem.Domain.SqlParserTestObjContainer source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetSqlParserTestObjContainerValidationResult(SampleSystem.Domain.SqlParserTestObjContainer source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetSqlParserTestObjValidationResult(SampleSystem.Domain.SqlParserTestObj source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetSqlParserTestObjValidationResult(SampleSystem.Domain.SqlParserTestObj source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestCustomContextSecurityObjValidationResult(SampleSystem.Domain.TestCustomContextSecurityObj source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestCustomContextSecurityObjValidationResult(SampleSystem.Domain.TestCustomContextSecurityObj source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestDefaultFieldsMappingObjValidationResult(SampleSystem.Domain.TestDefaultFieldsMappingObj source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestDefaultFieldsMappingObjValidationResult(SampleSystem.Domain.TestDefaultFieldsMappingObj source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestEmployeeFilterValidationResult(SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestEmployeeFilterValidationResult(SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestExceptObjectValidationResult(SampleSystem.Domain.Employee.TestExceptObject source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestExceptObjectValidationResult(SampleSystem.Domain.Employee.TestExceptObject source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestImmutableObjValidationResult(SampleSystem.Domain.TestImmutableObj source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestImmutableObjValidationResult(SampleSystem.Domain.TestImmutableObj source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestItemAuthObjectValidationResult(SampleSystem.Domain.TestDeserializedAuth.TestItemAuthObject source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestItemAuthObjectValidationResult(SampleSystem.Domain.TestDeserializedAuth.TestItemAuthObject source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestJobObjectValidationResult(SampleSystem.Domain.TestJobObject source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestJobObjectValidationResult(SampleSystem.Domain.TestJobObject source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestObjForNestedBaseValidationResult(SampleSystem.Domain.Directories.TestObjForNestedBase source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestObjForNestedBaseValidationResult(SampleSystem.Domain.Directories.TestObjForNestedBase source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestObjForNestedValidationResult(SampleSystem.Domain.Directories.TestObjForNested source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestObjForNestedValidationResult(SampleSystem.Domain.Directories.TestObjForNested source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestObjValidationResult(SampleSystem.Domain.TestObj source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestObjValidationResult(SampleSystem.Domain.TestObj source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestPerformanceObjectValidationResult(SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestPerformanceObjectValidationResult(SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestPlainAuthObjectValidationResult(SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestPlainAuthObjectValidationResult(SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestRelativeEmployeeChildObjectValidationResult(SampleSystem.Domain.TestRelativeEmployeeChildObject source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestRelativeEmployeeChildObjectValidationResult(SampleSystem.Domain.TestRelativeEmployeeChildObject source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestRelativeEmployeeObjectValidationResult(SampleSystem.Domain.TestRelativeEmployeeObject source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestRelativeEmployeeObjectValidationResult(SampleSystem.Domain.TestRelativeEmployeeObject source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestRelativeEmployeeParentObjectValidationResult(SampleSystem.Domain.TestRelativeEmployeeParentObject source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestRelativeEmployeeParentObjectValidationResult(SampleSystem.Domain.TestRelativeEmployeeParentObject source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestRestrictionObjectValidationResult(SampleSystem.Domain.Employee.TestRestrictionObject source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestRestrictionObjectValidationResult(SampleSystem.Domain.Employee.TestRestrictionObject source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestRootSecurityObjValidationResult(SampleSystem.Domain.TestDependency.TestRootSecurityObj source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestRootSecurityObjValidationResult(SampleSystem.Domain.TestDependency.TestRootSecurityObj source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestSecurityObjItemValidationResult(SampleSystem.Domain.TestDependency.TestSecurityObjItem source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestSecurityObjItemValidationResult(SampleSystem.Domain.TestDependency.TestSecurityObjItem source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestSecuritySubObjItem2ValidationResult(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2 source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestSecuritySubObjItem2ValidationResult(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2 source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestSecuritySubObjItem3ValidationResult(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3 source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestSecuritySubObjItem3ValidationResult(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3 source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestSecuritySubObjItemValidationResult(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestSecuritySubObjItemValidationResult(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetTestUnpersistentObjectValidationResult(SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetTestUnpersistentObjectValidationResult(SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetWorkingCalendar1676ValidationResult(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 source, SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetWorkingCalendar1676ValidationResult(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

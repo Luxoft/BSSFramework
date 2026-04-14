@@ -2,7 +2,6 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SampleSystem.Domain;
 using SampleSystem.Domain.Directories;
 
 namespace SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;

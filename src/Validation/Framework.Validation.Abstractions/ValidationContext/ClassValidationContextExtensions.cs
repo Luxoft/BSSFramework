@@ -1,4 +1,6 @@
-﻿// ReSharper disable once CheckNamespace
+﻿using Framework.Validation.Map;
+
+// ReSharper disable once CheckNamespace
 namespace Framework.Validation;
 
 public static class ClassValidationContextExtensions
@@ -76,7 +78,7 @@ public static class ClassValidationContextExtensions
 
         public int OperationContext { get; }
 
-        public IValidationState ParentState { get; }
+        public IValidationState? ParentState { get; }
 
         public TExpectedSource Source { get; }
 

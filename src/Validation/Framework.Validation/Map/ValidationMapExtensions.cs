@@ -2,6 +2,8 @@
 
 using CommonFramework;
 
+using Framework.Validation.Map;
+
 namespace Framework.Validation;
 
 public static class ValidationMapExtensions

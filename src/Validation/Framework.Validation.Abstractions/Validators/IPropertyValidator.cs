@@ -1,5 +1,4 @@
-﻿// ReSharper disable once CheckNamespace
-namespace Framework.Validation;
+﻿namespace Framework.Validation.Validators;
 
 public interface IPropertyValidator;
 

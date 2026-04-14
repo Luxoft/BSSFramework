@@ -1,5 +1,8 @@
 ﻿using CommonFramework;
 
+using Framework.Validation.Map;
+
+// ReSharper disable once CheckNamespace
 namespace Framework.Validation;
 
 public static class PropertyValidationContextExtensions

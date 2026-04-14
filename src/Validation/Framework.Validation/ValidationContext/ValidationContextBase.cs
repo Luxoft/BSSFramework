@@ -1,4 +1,7 @@
-﻿namespace Framework.Validation;
+﻿using Framework.Validation.Map;
+
+// ReSharper disable once CheckNamespace
+namespace Framework.Validation;
 
 public class ValidationContextBase<TSource>(IValidator validator, int operationContext, TSource source, IValidationState? parentState)
     : IValidationContextBase<TSource>

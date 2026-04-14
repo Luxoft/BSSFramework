@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 
-namespace Framework.Validation;
+namespace Framework.Validation.Map;
 
 public interface IValidationMap : IServiceProviderContainer
 {

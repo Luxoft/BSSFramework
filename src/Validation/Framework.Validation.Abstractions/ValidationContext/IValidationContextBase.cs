@@ -1,6 +1,7 @@
-﻿// ReSharper disable once CheckNamespace
-namespace Framework.Validation;
+﻿using Framework.Validation.Map;
 
+// ReSharper disable once CheckNamespace
+namespace Framework.Validation;
 /// <summary>
 /// Контекст валидации
 /// </summary>

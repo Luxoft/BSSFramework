@@ -2,8 +2,7 @@
 
 using CommonFramework;
 
-// ReSharper disable once CheckNamespace
-namespace Framework.Validation;
+namespace Framework.Validation.Validators;
 
 public interface IDynamicValidator<in TInput, out TElementValidator>
 {

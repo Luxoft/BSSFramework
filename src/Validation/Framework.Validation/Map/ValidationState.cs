@@ -1,4 +1,6 @@
-﻿namespace Framework.Validation;
+﻿using Framework.Validation.Map;
+
+namespace Framework.Validation;
 
 /// <summary>
 /// Текущая позиция валидации

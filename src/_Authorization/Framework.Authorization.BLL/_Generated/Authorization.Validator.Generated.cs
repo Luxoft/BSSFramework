@@ -37,47 +37,47 @@ namespace Framework.Authorization.BLL
             base.RegisterHandler<Framework.Authorization.Domain.UpdatePermissionDelegatesModel>(this.GetUpdatePermissionDelegatesModelValidationResult);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetBusinessRoleValidationResult(Framework.Authorization.Domain.BusinessRole source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetBusinessRoleValidationResult(Framework.Authorization.Domain.BusinessRole source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetChangePermissionDelegatesModelValidationResult(Framework.Authorization.Domain.ChangePermissionDelegatesModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetChangePermissionDelegatesModelValidationResult(Framework.Authorization.Domain.ChangePermissionDelegatesModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetDelegateToItemModelValidationResult(Framework.Authorization.Domain.DelegateToItemModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetDelegateToItemModelValidationResult(Framework.Authorization.Domain.DelegateToItemModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetPermissionDirectFilterModelValidationResult(Framework.Authorization.Domain.PermissionDirectFilterModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetPermissionDirectFilterModelValidationResult(Framework.Authorization.Domain.PermissionDirectFilterModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetPermissionRestrictionValidationResult(Framework.Authorization.Domain.PermissionRestriction source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetPermissionRestrictionValidationResult(Framework.Authorization.Domain.PermissionRestriction source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetPermissionValidationResult(Framework.Authorization.Domain.Permission source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetPermissionValidationResult(Framework.Authorization.Domain.Permission source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetPrincipalValidationResult(Framework.Authorization.Domain.Principal source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetPrincipalValidationResult(Framework.Authorization.Domain.Principal source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetSecurityContextTypeValidationResult(Framework.Authorization.Domain.SecurityContextType source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetSecurityContextTypeValidationResult(Framework.Authorization.Domain.SecurityContextType source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetUpdatePermissionDelegatesModelValidationResult(Framework.Authorization.Domain.UpdatePermissionDelegatesModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.IValidationState ownerState)
+        protected virtual Framework.Validation.ValidationResult GetUpdatePermissionDelegatesModelValidationResult(Framework.Authorization.Domain.UpdatePermissionDelegatesModel source, Framework.Validation.OperationContextBase operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

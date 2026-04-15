@@ -1,4 +1,6 @@
-﻿namespace Framework.BLL.Domain.Exceptions;
+﻿using Framework.Application;
+
+namespace Framework.BLL.Exceptions;
 
 public class ObjectByIdNotFoundException<TIdent>(Type type, TIdent id) : BusinessLogicException($"{type.Name} with id = \"{id}\" not found");
 

@@ -1,7 +1,7 @@
 ﻿using Framework.Application;
 using Framework.Database;
 
-using SecuritySystem.Credential;
+using SecuritySystem;
 using SecuritySystem.Testing;
 
 namespace Framework.AutomationCore.ServiceEnvironment.Services;

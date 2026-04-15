@@ -4,7 +4,7 @@ using Framework.Projection;
 
 using SampleSystem.Domain.Directories;
 
-namespace SampleSystem.Domain._Projections;
+namespace SampleSystem.Domain.Projections;
 
 [BLLProjectionViewRole]
 [ProjectionContract(typeof(BusinessUnitType))]

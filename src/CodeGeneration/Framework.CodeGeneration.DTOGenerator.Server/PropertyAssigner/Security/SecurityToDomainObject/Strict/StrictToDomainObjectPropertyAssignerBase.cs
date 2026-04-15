@@ -3,7 +3,7 @@ using System.Reflection;
 
 using CommonFramework;
 
-using Framework.BLL.Domain.Exceptions;
+using Framework.Application;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;

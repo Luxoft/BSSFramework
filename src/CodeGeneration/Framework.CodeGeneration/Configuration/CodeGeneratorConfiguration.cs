@@ -2,7 +2,7 @@
 
 using CommonFramework;
 
-using Framework.BLL.Domain.Exceptions;
+using Framework.Application;
 using Framework.CodeGeneration.Extensions;
 using Framework.CodeGeneration.FileFactory;
 using Framework.FileGeneration.Configuration;

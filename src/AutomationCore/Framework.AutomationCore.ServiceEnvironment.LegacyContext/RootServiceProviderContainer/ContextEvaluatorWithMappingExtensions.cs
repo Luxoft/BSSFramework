@@ -1,7 +1,7 @@
 ﻿using Framework.Database;
 using Framework.Infrastructure.ContextEvaluator;
 
-using SecuritySystem.Credential;
+using SecuritySystem;
 
 namespace Framework.AutomationCore.RootServiceProviderContainer;
 

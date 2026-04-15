@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem.Credential;
+using SecuritySystem;
 using SecuritySystem.Services;
 
 namespace Framework.Application.Middleware;

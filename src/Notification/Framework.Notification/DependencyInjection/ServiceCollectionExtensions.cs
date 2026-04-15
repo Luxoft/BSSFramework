@@ -23,6 +23,8 @@ public static class ServiceCollectionExtensions
     {
         public void AddSmtpNotification(IConfiguration configuration, bool isProd)
         {
+            services.AddSingleton<IMessageSender<Notification.Domain.Notification>, NotificationMessageSender>();
+
             services.AddSingleton<IMailMessageModifier, HtmlMarkerMessageModifier>();
             services.AddSingleton<IMailMessageModifier, SubjectCleanerMailMessageModifier>();
             services.AddSingleton<IMailMessageModifier, RedirectToSupportMailMessageModifier>();

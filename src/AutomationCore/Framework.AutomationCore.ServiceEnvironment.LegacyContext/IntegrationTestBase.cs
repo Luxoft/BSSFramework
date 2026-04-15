@@ -14,7 +14,7 @@ using Framework.Notification.DTO;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem.Credential;
+using SecuritySystem;
 
 namespace Framework.AutomationCore;
 

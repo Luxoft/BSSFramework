@@ -8,8 +8,4 @@
     <ProjectReference Include="..\SampleSystem.Domain\SampleSystem.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Format\" />
-  </ItemGroup>
-
 </Project>

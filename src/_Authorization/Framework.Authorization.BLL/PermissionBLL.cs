@@ -1,7 +1,7 @@
 ﻿using CommonFramework;
 
+using Framework.Application;
 using Framework.Authorization.Domain;
-using Framework.BLL.Domain.Exceptions;
 using Framework.Core;
 using Framework.Relations;
 using Framework.Validation;

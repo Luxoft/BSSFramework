@@ -3,11 +3,11 @@ using System.Collections.Immutable;
 
 using CommonFramework;
 
+using Framework.Application;
 using Framework.Application.Events;
 using Framework.Application.Lock;
 using Framework.Authorization.BLL;
 using Framework.BLL;
-using Framework.BLL.Domain.Exceptions;
 using Framework.BLL.Domain.TargetSystem;
 using Framework.BLL.Services;
 using Framework.Configuration.BLL.TargetSystemService;

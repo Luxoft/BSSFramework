@@ -5,6 +5,7 @@ using Framework.Application;
 using Framework.Application.Auth;
 using Framework.Application.DependencyInjection;
 using Framework.Application.Events;
+using Framework.Core;
 using Framework.Database.DALListener;
 using Framework.Database.DependencyInjection;
 
@@ -12,6 +13,7 @@ using Framework.Infrastructure.Auth;
 using Framework.Infrastructure.DALListener;
 using Framework.Infrastructure.Integration;
 using Framework.Infrastructure.Middleware;
+using Framework.Infrastructure.Services;
 using Framework.Infrastructure.WebApiExceptionExpander;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -88,6 +90,8 @@ public class BssFrameworkSetup : IBssFrameworkSetup, IServiceInitializer
 
     public void Initialize(IServiceCollection services)
     {
+        services.AddSingleton<IExceptionExpander, RootExceptionExpander>();
+
         services.AddSingleton<ICultureSource>(CultureSource.CurrentCulture);
 
         services.AddGenericApplicationServices();

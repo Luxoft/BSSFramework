@@ -21,8 +21,6 @@ internal class SqlExceptionProcessorInterceptor : IExceptionExpander
 
     internal SqlExceptionProcessorInterceptor(ISessionFactory factory, Configuration cfg, IDalValidationIdentitySource dalValidationIdentitySource)
     {
-
-
         this.cfg = cfg;
         this.dalValidationIdentitySource = dalValidationIdentitySource;
         var connectionString = ((SessionFactoryImpl)factory).ConnectionProvider.GetConnection().ConnectionString;

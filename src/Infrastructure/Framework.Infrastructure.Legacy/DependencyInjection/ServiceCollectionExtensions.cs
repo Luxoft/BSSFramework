@@ -54,7 +54,7 @@ public static class ServiceCollectionExtensions
             services.ReplaceSingleton<IActualDomainTypeResolver, ProjectionActualDomainTypeResolver>();
             services.ReplaceSingleton<ISecurityContextInfoSource, ProjectionSecurityContextInfoSource>();
 
-            services.AddSingleton<IExceptionExpander, TargetInvocationExceptionExpander>();
+            services.AddKeyedSingleton<IExceptionExpander, TargetInvocationExceptionExpander>(IExceptionExpander.ElementKey);
 
             services.AddKeyedSingleton<IExpressionVisitorContainer, ExpandPathVisitorContainer>(IExpressionVisitorContainer.ElementKey);
 

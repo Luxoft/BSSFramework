@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Security;
 
+using Framework.Application;
 using Framework.Database;
 using Framework.Database.DALExceptions;
 
@@ -16,6 +17,7 @@ public record WebApiExceptionExpanderSettings(ImmutableArray<Type> HandledTypes)
         typeof(DALException),
         typeof(StaleDomainObjectStateException),
         typeof(SecuritySystemException),
-        typeof(FluentValidation.ValidationException)
+        typeof(FluentValidation.ValidationException),
+        typeof(BusinessLogicException)
     ]);
 }

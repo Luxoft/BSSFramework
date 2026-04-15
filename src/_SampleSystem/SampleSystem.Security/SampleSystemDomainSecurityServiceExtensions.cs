@@ -14,32 +14,35 @@ using SampleSystem.Domain.NhFluentMapping;
 using SampleSystem.Domain.Projections;
 using SampleSystem.Domain.TestDependency;
 using SampleSystem.Domain.TestDeserializedAuth;
-using SampleSystem.Security.Metadata;
 using SampleSystem.Security.Services;
 
 using SecuritySystem;
 using SecuritySystem.DependencyInjection;
 
-using TestBusinessUnit = SampleSystem.Domain.Projections.TestBusinessUnit;
-
 namespace SampleSystem.Security;
 
 public static class SampleSystemDomainSecurityServiceExtensions
 {
-    extension(ISecuritySystemSetup settings)
+    extension(ISecuritySystemSetup securitySystemSetup)
     {
         public ISecuritySystemSetup AddDomainSecurityServices() =>
-            settings.RegisterMainDomainSecurityServices()
-                    .RegisterDisabledDomainSecurityServices()
-                    .RegisterLegacyProjectionDomainSecurityServices()
+            securitySystemSetup
+                .RegisterMainDomainSecurityServices()
+                .RegisterDisabledDomainSecurityServices()
+                .RegisterLegacyProjectionDomainSecurityServices()
 
-                    .AddExtensions(new ProjectionDomainSecurityBssFrameworkExtension(typeof(TestBusinessUnit).Assembly))
-                    .AddExtensions(new ProjectionDomainSecurityBssFrameworkExtension(typeof(TestManualEmployeeProjection).Assembly));
+                .AddExtensions(new ProjectionDomainSecurityBssFrameworkExtension(typeof(TestBusinessUnit).Assembly))
+                .AddExtensions(new ProjectionDomainSecurityBssFrameworkExtension(typeof(TestManualEmployeeProjection).Assembly));
 
         private ISecuritySystemSetup RegisterMainDomainSecurityServices() =>
-            settings
-                .AddDomainSecurityMetadata<SampleSystemEmployeeDomainSecurityServiceMetadata>()
-                .AddDomainSecurityMetadata<SampleSystemEmployeeCellPhoneDomainSecurityServiceMetadata>()
+            securitySystemSetup
+                .AddDomainSecurity<EmployeeCellPhone>(b => b.SetDependency(v => v.Employee))
+                .AddDomainSecurity<Employee>(b => b.SetView(SampleSystemSecurityOperation.EmployeeView.Or(DomainSecurityRule.CurrentUser))
+                                                   .SetEdit(SampleSystemSecurityOperation.EmployeeEdit)
+                                                   .SetPath(
+                                                       SecurityPath<Employee>.Create(employee => employee)
+                                                                             .And(employee => employee.CoreBusinessUnit)
+                                                                             .And(employee => employee.Location)))
 
                 .AddDomainSecurity(
                     SampleSystemSecurityOperation.BusinessUnitView,
@@ -146,7 +149,7 @@ public static class SampleSystemDomainSecurityServiceExtensions
                 .AddDomainSecurity<TestSecuritySubObjItem3>(b => b.SetDependency(v => v.InnerMaster.FirstMaster));
 
         private ISecuritySystemSetup RegisterDisabledDomainSecurityServices() =>
-            settings
+            securitySystemSetup
                 .AddDomainSecurity<EmployeeInformation>(SecurityRule.Disabled)
                 .AddDomainSecurity<EmployeeRegistrationType>(SecurityRule.Disabled)
                 .AddDomainSecurity<IMRequest>(SecurityRule.Disabled)
@@ -160,14 +163,11 @@ public static class SampleSystemDomainSecurityServiceExtensions
                 .AddDomainSecurity<TestImmutableObj>(SecurityRule.Disabled, SecurityRule.Disabled);
 
         private ISecuritySystemSetup RegisterLegacyProjectionDomainSecurityServices() =>
-            settings.AddDomainSecurity<SecurityBusinessUnit>(b => b.SetUntypedDependency<BusinessUnit>())
-
-                    .AddDomainSecurity<SecurityEmployee>(b => b.SetUntypedDependency<Employee>())
-
-                    .AddDomainSecurity<SecurityHRDepartment>(b => b.SetUntypedDependency<HRDepartment>())
-
-                    .AddDomainSecurity<SecurityLocation>(b => b.SetUntypedDependency<Location>())
-
-                    .AddDomainSecurity<TestLegacyEmployee>(b => b.SetUntypedDependency<Employee>());
+            securitySystemSetup
+                .AddDomainSecurity<SecurityBusinessUnit>(b => b.SetUntypedDependency<BusinessUnit>())
+                .AddDomainSecurity<SecurityEmployee>(b => b.SetUntypedDependency<Employee>())
+                .AddDomainSecurity<SecurityHRDepartment>(b => b.SetUntypedDependency<HRDepartment>())
+                .AddDomainSecurity<SecurityLocation>(b => b.SetUntypedDependency<Location>())
+                .AddDomainSecurity<TestLegacyEmployee>(b => b.SetUntypedDependency<Employee>());
     }
 }

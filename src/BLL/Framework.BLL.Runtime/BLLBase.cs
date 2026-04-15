@@ -3,8 +3,8 @@
 using CommonFramework;
 using CommonFramework.IdentitySource;
 
+using Framework.Application;
 using Framework.Application.Domain;
-using Framework.BLL.Domain.Exceptions;
 using Framework.BLL.Domain.Models;
 using Framework.Core;
 using Framework.Database;

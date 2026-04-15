@@ -3,7 +3,7 @@ using Framework.Database;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem.Credential;
+using SecuritySystem;
 
 namespace Framework.Application;
 

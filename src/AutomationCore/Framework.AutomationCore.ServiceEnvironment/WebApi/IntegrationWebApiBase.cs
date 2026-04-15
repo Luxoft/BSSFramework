@@ -1,6 +1,6 @@
 ﻿using Framework.AutomationCore.ServiceEnvironment;
 
-using SecuritySystem.Credential;
+using SecuritySystem;
 
 namespace Framework.AutomationCore.WebApi;
 

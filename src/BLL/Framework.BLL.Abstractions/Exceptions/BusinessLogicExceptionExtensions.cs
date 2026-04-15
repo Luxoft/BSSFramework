@@ -1,6 +1,8 @@
 ﻿using CommonFramework;
 
-namespace Framework.BLL.Domain.Exceptions;
+using Framework.Application;
+
+namespace Framework.BLL.Exceptions;
 
 public static class BusinessLogicExceptionExtensions
 {

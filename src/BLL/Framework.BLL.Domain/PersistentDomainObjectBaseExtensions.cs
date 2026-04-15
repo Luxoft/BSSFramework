@@ -4,7 +4,6 @@ using System.Reflection;
 using CommonFramework;
 
 using Framework.Application.Domain;
-using Framework.BLL.Domain.Exceptions;
 using Framework.Core;
 
 namespace Framework.BLL.Domain;
@@ -38,7 +37,7 @@ public static class PersistentDomainObjectBaseExtensions
         {
             if (!source.Id.IsDefault())
             {
-                throw new BusinessLogicException("Field \"{0}\" of object \"{1}\" can't be changed because already initialized", field.Name, source.GetType().Name);
+                throw new InvalidOperationException($"Field \"{field.Name}\" of object \"{source.GetType().Name}\" can't be changed because already initialized");
             }
 
             field.SetValue(source, newValue);
@@ -72,7 +71,7 @@ public static class PersistentDomainObjectBaseExtensions
         {
             if (!source.Id.IsDefault())
             {
-                throw new BusinessLogicException("Property \"{0}\" of object \"{1}\" can't be changed because already initialized", property.Name, source.GetType().Name);
+                throw new InvalidOperationException($"Property \"{property.Name}\" of object \"{source.GetType().Name}\" can't be changed because already initialized");
             }
 
             customSetAction();

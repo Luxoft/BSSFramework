@@ -15,8 +15,10 @@ using Framework.ExtendedMetadata;
 using Framework.Infrastructure.ApiControllerBaseEvaluator;
 using Framework.Infrastructure.ContextEvaluator;
 using Framework.Infrastructure.Service;
+using Framework.Infrastructure.WebApiExceptionExpander;
 using Framework.Projection;
 using Framework.Tracking;
+using Framework.Validation;
 
 using HierarchicalExpand;
 
@@ -48,13 +50,15 @@ public static class ServiceCollectionExtensions
             services.AddScoped(typeof(EvaluatedData<,>));
             services.AddKeyedScoped<IEventOperationSender, BLLEventOperationSender>(nameof(BLL));
 
-            services.AddSingleton<Validation.IAvailableValues>(AvailableValuesHelper.AvailableValues.ToValidation());
+            services.AddSingleton<IAvailableValues>(AvailableValuesHelper.AvailableValues.ToValidation());
             services.AddScoped(typeof(ITrackingService<>), typeof(TrackingService<>));
 
             services.ReplaceSingleton<IActualDomainTypeResolver, ProjectionActualDomainTypeResolver>();
             services.ReplaceSingleton<ISecurityContextInfoSource, ProjectionSecurityContextInfoSource>();
 
             services.AddKeyedSingleton<IExceptionExpander, TargetInvocationExceptionExpander>(IExceptionExpander.ElementKey);
+
+            services.AddSingleton(new WebApiExceptionExpanderSettings([typeof(ValidationException)]));
 
             services.AddKeyedSingleton<IExpressionVisitorContainer, ExpandPathVisitorContainer>(IExpressionVisitorContainer.ElementKey);
 

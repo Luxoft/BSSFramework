@@ -3,8 +3,8 @@
 using CommonFramework;
 
 using Framework.Application.Domain;
-using Framework.BLL.Domain.Exceptions;
 using Framework.BLL.Domain.Persistent.IdentityObject;
+using Framework.BLL.Exceptions;
 using Framework.Core;
 
 using GenericQueryable;

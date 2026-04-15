@@ -1,7 +1,7 @@
 ﻿using Framework.Database;
 using Framework.Infrastructure.Service;
 
-using SecuritySystem.Credential;
+using SecuritySystem;
 
 namespace Framework.Infrastructure.ContextEvaluator;
 

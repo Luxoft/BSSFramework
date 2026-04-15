@@ -1,4 +1,4 @@
-﻿using Framework.BLL.Domain.Exceptions;
+﻿using Framework.Application;
 using Framework.Configuration.Domain;
 using Framework.Validation.Extensions;
 

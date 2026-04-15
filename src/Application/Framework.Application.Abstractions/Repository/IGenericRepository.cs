@@ -16,6 +16,7 @@ public interface IGenericRepository<TDomainObject, in TIdent>
     /// Load actually returns a proxy object and doesn't need to access the database right when you issue that Load call.
     /// https://www.tutorialspoint.com/nhibernate/nhibernate_load_get.htm
     /// </summary>
+    TDomainObject Load(TIdent id);
 
     /// <summary>
     /// Load actually returns a proxy object and doesn't need to access the database right when you issue that Load call.

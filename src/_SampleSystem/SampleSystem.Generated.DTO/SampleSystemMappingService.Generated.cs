@@ -3018,7 +3018,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    throw new Framework.BLL.Domain.Exceptions.BusinessLogicException("Access for write to field \"Login\" denied");
+                    throw new Framework.Application.BusinessLogicException("Access for write to field \"Login\" denied");
                 }
             }
             if (mappingObject.PersonalCellPhones.HasValue)
@@ -3032,7 +3032,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    throw new Framework.BLL.Domain.Exceptions.BusinessLogicException("Access for write to field \"PersonalCellPhones\" denied");
+                    throw new Framework.Application.BusinessLogicException("Access for write to field \"PersonalCellPhones\" denied");
                 }
             }
             if (mappingObject.Position.HasValue)
@@ -3050,7 +3050,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    throw new Framework.BLL.Domain.Exceptions.BusinessLogicException("Access for write to field \"Position\" denied");
+                    throw new Framework.Application.BusinessLogicException("Access for write to field \"Position\" denied");
                 }
             }
         }
@@ -3122,7 +3122,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    throw new Framework.BLL.Domain.Exceptions.BusinessLogicException("Access for write to field \"Login\" denied");
+                    throw new Framework.Application.BusinessLogicException("Access for write to field \"Login\" denied");
                 }
             }
             if (mappingObject.NameEng.HasValue)
@@ -3164,7 +3164,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    throw new Framework.BLL.Domain.Exceptions.BusinessLogicException("Access for write to field \"Position\" denied");
+                    throw new Framework.Application.BusinessLogicException("Access for write to field \"Position\" denied");
                 }
             }
             if (mappingObject.Ppm.HasValue)
@@ -4775,7 +4775,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    throw new Framework.BLL.Domain.Exceptions.BusinessLogicException("Access for write to field \"Field3\" denied");
+                    throw new Framework.Application.BusinessLogicException("Access for write to field \"Field3\" denied");
                 }
             }
         }
@@ -4803,7 +4803,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    throw new Framework.BLL.Domain.Exceptions.BusinessLogicException("Access for write to field \"Field3\" denied");
+                    throw new Framework.Application.BusinessLogicException("Access for write to field \"Field3\" denied");
                 }
             }
         }
@@ -5087,7 +5087,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    throw new Framework.BLL.Domain.Exceptions.BusinessLogicException("Access for write to field \"CompanyLegalEntity\" denied");
+                    throw new Framework.Application.BusinessLogicException("Access for write to field \"CompanyLegalEntity\" denied");
                 }
             }
         }

@@ -5,7 +5,7 @@ using Framework.Projection;
 
 using SampleSystem.Domain.BU;
 
-namespace SampleSystem.Domain._Projections;
+namespace SampleSystem.Domain.Projections;
 
 [BLLProjectionViewRole]
 [ProjectionContract(typeof(BusinessUnit))]

@@ -1,4 +1,4 @@
-﻿namespace Framework.BLL.Domain.Exceptions;
+﻿namespace Framework.Application;
 
 public class BusinessLogicException : Exception
 {

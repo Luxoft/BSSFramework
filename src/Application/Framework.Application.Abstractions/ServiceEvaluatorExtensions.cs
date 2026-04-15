@@ -2,7 +2,7 @@
 
 using Framework.Database;
 
-using SecuritySystem.Credential;
+using SecuritySystem;
 
 namespace Framework.Application;
 

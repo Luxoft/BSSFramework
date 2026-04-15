@@ -1,7 +1,7 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
-using Framework.BLL.Domain.Exceptions;
+using Framework.Application;
 using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner;

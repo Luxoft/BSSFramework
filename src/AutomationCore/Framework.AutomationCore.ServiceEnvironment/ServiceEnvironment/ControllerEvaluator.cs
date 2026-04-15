@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem.Credential;
+using SecuritySystem;
 using SecuritySystem.Services;
 using SecuritySystem.Testing;
 

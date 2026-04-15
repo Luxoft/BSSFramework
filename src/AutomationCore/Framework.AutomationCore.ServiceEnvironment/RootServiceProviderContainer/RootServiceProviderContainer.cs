@@ -6,7 +6,7 @@ using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem.Credential;
+using SecuritySystem;
 
 namespace Framework.AutomationCore.RootServiceProviderContainer;
 

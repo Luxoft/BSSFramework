@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
-using Framework.BLL.Domain.Exceptions;
+
+using Framework.Application;
 using Framework.BLL.Domain.Models;
 using Framework.Database;
 

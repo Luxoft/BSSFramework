@@ -4,7 +4,7 @@ using Framework.Core;
 
 namespace Framework.Infrastructure.WebApiExceptionExpander;
 
-public class WebApiExceptionExpander(WebApiExceptionExpanderSettings settings, IExceptionExpander exceptionExpander) : IWebApiExceptionExpander
+public class WebApiExceptionExpander(IEnumerable<WebApiExceptionExpanderSettings> settingsList, IExceptionExpander exceptionExpander) : IWebApiExceptionExpander
 {
     private readonly ConcurrentDictionary<Type, bool> isHandledExceptionCache = [];
 
@@ -21,5 +21,5 @@ public class WebApiExceptionExpander(WebApiExceptionExpanderSettings settings, I
 
     private bool IsHandledException(Exception exception) => this.isHandledExceptionCache.GetOrAdd(
         exception.GetType(),
-        exceptionType => exceptionType.IsAssignableToAny(settings.HandledTypes));
+        exceptionType => settingsList.Any(settings => exceptionType.IsAssignableToAny(settings.HandledTypes)));
 }

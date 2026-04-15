@@ -4,8 +4,8 @@ using System.Linq.Expressions;
 using CommonFramework;
 
 using Framework.Application.Domain;
-using Framework.BLL.Domain.Exceptions;
 using Framework.BLL.Domain.Persistent;
+using Framework.BLL.Exceptions;
 using Framework.Core;
 using Framework.Database;
 

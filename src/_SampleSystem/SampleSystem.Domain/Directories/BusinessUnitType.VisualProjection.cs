@@ -1,4 +1,4 @@
-﻿using SampleSystem.Domain._Projections;
+﻿using SampleSystem.Domain.Projections;
 
 namespace SampleSystem.Domain.Directories;
 

@@ -5,6 +5,8 @@
 /// </summary>
 public interface IExceptionExpander
 {
+    public const string ElementKey = "Element";
+
     /// <summary>
     /// Пыпытка раскрытие исключения
     /// </summary>

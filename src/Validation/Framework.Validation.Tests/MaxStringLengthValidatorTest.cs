@@ -1,15 +1,10 @@
-﻿using FluentAssertions;
-
-using Framework.Validation.Map;
+﻿using Framework.Validation.Map;
 using Framework.Validation.Validators;
 
 using NSubstitute;
 
-using NUnit.Framework;
-
 namespace Framework.Validation.Tests;
 
-[TestFixture]
 public class MaxStringLengthValidatorTest
 {
     private const string PropertyName = "p";
@@ -22,8 +17,7 @@ public class MaxStringLengthValidatorTest
     private IPropertyValidationMap map;
     private IClassValidationMap validationMap;
 
-    [SetUp]
-    public void Init()
+    public MaxStringLengthValidatorTest()
     {
         this.context = Substitute.For<IPropertyValidationContext<DomainObject, string>>();
         this.map = Substitute.For<IPropertyValidationMap>();
@@ -34,10 +28,11 @@ public class MaxStringLengthValidatorTest
         this.validationMap.TypeName.Returns(TypeName);
     }
 
-    [TestCase(null)]
-    [TestCase("")]
-    [TestCase("a")]
-    [TestCase("abcde")]
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("a")]
+    [InlineData("abcde")]
     public void GetValidationResult_StringValidator_ValueNullOrShorterThanMax_NoErrors(string value)
     {
         // Arrange
@@ -49,10 +44,10 @@ public class MaxStringLengthValidatorTest
         var result = validator.GetValidationResult(this.context);
 
         // Assert
-        result.Errors.Should().BeEmpty();
+        Assert.Empty(result.Errors);
     }
 
-    [Test]
+    [Fact]
     public void GetValidationResult_ValueLongerThanMax_ErrorMessageInExpectedFormat()
     {
         // Arrange
@@ -65,19 +60,19 @@ public class MaxStringLengthValidatorTest
         var result = validator.GetValidationResult(this.context);
 
         // Assert
-        result.Errors[0].Message.Should().Be($"The length of {PropertyName} property of {TypeName} should not be more than {MaxLength}");
+        Assert.Equal($"The length of {PropertyName} property of {TypeName} should not be more than {MaxLength}", result.Errors[0].Message);
     }
 
-    [Test]
+    [Fact]
     public void GetValidationResult_NullContext_ThrowArgumentNullException()
     {
         // Arrange
         var validator = new MaxLengthValidator.StringMaxLengthValidator<DomainObject>(MaxLength);
 
         // Act
-        object TestDelegate() => validator.GetValidationResult(null);
+        object TestDelegate() => validator.GetValidationResult(null!);
 
         // Assert
-        Assert.That(TestDelegate, Throws.TypeOf<ArgumentNullException>());
+        Assert.Throws<ArgumentNullException>(TestDelegate);
     }
 }

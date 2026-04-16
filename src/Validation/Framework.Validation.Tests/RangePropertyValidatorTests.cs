@@ -1,23 +1,17 @@
-﻿using FluentAssertions;
-
-using Framework.Validation.Map;
+﻿using Framework.Validation.Map;
 using Framework.Validation.Validators.DynamicClass.Available.Base;
 
 using NSubstitute;
 
-using NUnit.Framework;
-
 namespace Framework.Validation.Tests;
 
-[TestFixture]
 public class RangePropertyValidatorTests
 {
     private IPropertyValidationContext<DomainObject, decimal> context = null!;
 
     private readonly Framework.BLL.Validation.AvailableValues availableValues = BLL.Validation.AvailableValues.Default;
 
-    [SetUp]
-    public void Init()
+    public RangePropertyValidatorTests()
     {
         this.context = Substitute.For<IPropertyValidationContext<DomainObject, decimal>>();
         var map = Substitute.For<IPropertyValidationMap>();
@@ -32,7 +26,7 @@ public class RangePropertyValidatorTests
         validationMap.TypeName.Returns("decimal");
     }
 
-    [Test]
+    [Fact]
     public void GetValidationResult_DecimalValidatorMaxPositiveValue_Success()
     {
         // Arrange
@@ -44,10 +38,10 @@ public class RangePropertyValidatorTests
         var result = validator.GetValidationResult(this.context);
 
         // Assert
-        result.Errors.Should().BeEmpty();
+        Assert.Empty(result.Errors);
     }
 
-    [Test]
+    [Fact]
     public void GetValidationResult_DecimalValidatorMaxNegativeValue_Success()
     {
         // Arrange
@@ -59,10 +53,10 @@ public class RangePropertyValidatorTests
         var result = validator.GetValidationResult(this.context);
 
         // Assert
-        result.Errors.Should().BeEmpty();
+        Assert.Empty(result.Errors);
     }
 
-    [Test]
+    [Fact]
     public void GetValidationResult_DecimalValidatorMaxPositiveValuePlusOne_Failure()
     {
         // Arrange
@@ -74,10 +68,10 @@ public class RangePropertyValidatorTests
         var result = validator.GetValidationResult(this.context);
 
         // Assert
-        result.Errors[0].Message.Should().Be("decimal has Number value was too overflow for a decimal");
+        Assert.Equal("decimal has Number value was too overflow for a decimal", result.Errors[0].Message);
     }
 
-    [Test]
+    [Fact]
     public void GetValidationResult_DecimalValidatorMaxNegativeValueMinusOne_Failure()
     {
         // Arrange
@@ -89,6 +83,6 @@ public class RangePropertyValidatorTests
         var result = validator.GetValidationResult(this.context);
 
         // Assert
-        result.Errors[0].Message.Should().Be("decimal has Number value was too overflow for a decimal");
+        Assert.Equal("decimal has Number value was too overflow for a decimal", result.Errors[0].Message);
     }
 }

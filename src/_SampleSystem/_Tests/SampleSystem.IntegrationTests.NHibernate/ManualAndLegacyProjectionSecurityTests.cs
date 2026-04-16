@@ -21,8 +21,7 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
 
     private BusinessUnitIdentityDTO bu2Ident;
 
-    [TestInitialize]
-    public void SetUp()
+    public ManualAndLegacyProjectionSecurityTests()
     {
         this.bu1Ident = this.DataHelper.SaveBusinessUnit();
 

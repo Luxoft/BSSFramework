@@ -7,7 +7,7 @@ public partial class ServerGenerators(ConfigurationGenerationEnvironment environ
     protected readonly ConfigurationGenerationEnvironment Environment = environment ?? throw new ArgumentNullException(nameof(environment));
 
     public ServerGenerators()
-            : this(ConfigurationGenerationEnvironment.Default)
+        : this(ConfigurationGenerationEnvironment.Default)
     {
     }
 

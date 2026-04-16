@@ -6,14 +6,15 @@ using Framework.Database.NHibernate.Mapping;
 using SampleSystem.CodeGenerate.Configurations;
 using SampleSystem.Generated.DAL.NHibernate;
 
+using Xunit;
+
 namespace SampleSystem.DbGenerate.NHibernate;
 
-[TestClass]
 public class DbGeneratorTest
 {
     private readonly ServerGenerationEnvironment environment = new();
 
-    [TestMethod]
+    [Fact]
     public void GenerateLocal() => this.GenerateAllDB(@".");
 
     public void GenerateDatabase(DbGenerationOptions options)

@@ -35,8 +35,7 @@ public class ExtraQueryableSecurityPathTests : TestBase
 
     private LocationIdentityDTO loc2Ident;
 
-    [TestInitialize]
-    public void SetUp()
+    public ExtraQueryableSecurityPathTests()
     {
         this.bu1Ident = this.DataHelper.SaveBusinessUnit();
 

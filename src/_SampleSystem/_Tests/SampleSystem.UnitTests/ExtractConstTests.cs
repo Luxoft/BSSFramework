@@ -2,8 +2,6 @@
 
 using CommonFramework;
 
-using FluentAssertions;
-
 using Framework.Core;
 using Framework.Database.Visitors;
 
@@ -22,7 +20,9 @@ public class ExtractConstTests
 
         Action action = () => testExpr.UpdateBase(OverrideHashSetVisitor<Guid>.Value);
 
-        action.Should().NotThrow();
+        var exception = Record.Exception(action);
+
+        Assert.Null(exception);
     }
 
     public record Parameters(Period Period);

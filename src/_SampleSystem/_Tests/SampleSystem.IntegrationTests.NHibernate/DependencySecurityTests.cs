@@ -31,8 +31,7 @@ public class DependencySecurityTests : TestBase
 
     private BusinessUnitIdentityDTO bu2Ident;
 
-    [TestInitialize]
-    public void SetUp()
+    public DependencySecurityTests()
     {
         this.bu1Ident = this.DataHelper.SaveBusinessUnit();
 

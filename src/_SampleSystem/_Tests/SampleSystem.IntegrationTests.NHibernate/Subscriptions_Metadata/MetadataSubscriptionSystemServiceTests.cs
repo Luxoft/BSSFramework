@@ -12,8 +12,7 @@ namespace SampleSystem.IntegrationTests.Subscriptions_Metadata;
 [TestClass]
 public sealed class MetadataSubscriptionSystemServiceTests : TestBase
 {
-    [TestInitialize]
-    public void SetUp() => this.GetNotifications().Clear();
+    public MetadataSubscriptionSystemServiceTests() => this.GetNotifications().Clear();
 
     [TestMethod]
     public void SubscriptionFromMetadataShouldBeSent()

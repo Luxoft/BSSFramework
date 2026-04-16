@@ -10,11 +10,6 @@ namespace SampleSystem.IntegrationTests;
 [TestClass]
 public class ManagmentUnitFluentMappingTests : TestBase
 {
-    [TestInitialize]
-    public void SetUp()
-    {
-    }
-
     [TestMethod]
     public void CheckBusinessUnitSecondaryAccess_HasAccess()
     {

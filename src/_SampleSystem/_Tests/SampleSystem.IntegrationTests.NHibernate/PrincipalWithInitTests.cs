@@ -20,8 +20,7 @@ public class PrincipalWithInitTests : TestBase
 
     private Period testPeriod;
 
-    [TestInitialize]
-    public void SetUp()
+    public PrincipalWithInitTests()
     {
         this.testPeriod = this.TimeProvider.GetCurrentMonth();
 

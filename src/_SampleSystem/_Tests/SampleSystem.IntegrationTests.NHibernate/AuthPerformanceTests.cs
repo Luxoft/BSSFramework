@@ -21,8 +21,7 @@ public class AuthPerformanceTests : TestBase
 
     private const int SplitBy = 25;
 
-    [TestInitialize]
-    public void SetUp()
+    public AuthPerformanceTests()
     {
         var genLoc = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveLocation());
 

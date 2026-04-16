@@ -27,8 +27,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
 
     private BusinessUnitIdentityDTO buWithAllowedFilter;
 
-    [TestInitialize]
-    public void SetUp()
+    public SecurityContextRestrictionFilterTests()
     {
         this.employee = this.DataHelper.SaveEmployee(login: this.employeeLogin);
 
@@ -86,7 +85,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
                                           });
 
         // Assert
-        allowedBuList.Should().BeEquivalentTo([this.buWithAllowedFilter]);
+        allowedBuList.Should().BeEquivalentTo(new[] { this.buWithAllowedFilter });
     }
 
     [TestMethod]
@@ -100,7 +99,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
             ctx => ctx.Logics.BusinessUnitFactory.Create(DefaultRestrictionRule).GetSecureQueryable().Select(bu => bu.ToIdentityDTO()).ToList());
 
         // Assert
-        allowedBuList.Should().BeEquivalentTo([this.buWithAllowedFilter]);
+        allowedBuList.Should().BeEquivalentTo(new[] { this.buWithAllowedFilter });
     }
 
     [TestMethod]

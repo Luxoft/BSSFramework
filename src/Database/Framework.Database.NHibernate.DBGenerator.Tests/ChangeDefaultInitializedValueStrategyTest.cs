@@ -5,15 +5,11 @@ using Framework.Database.NHibernate.DBGenerator.Tests.Support;
 
 using Microsoft.SqlServer.Management.Smo;
 
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
-
 namespace Framework.Database.NHibernate.DBGenerator.Tests;
 
-[TestFixture]
 public class ChangeDefaultInitializedValueStrategyTest
 {
-    [Test]
+    [Fact]
     public void Execute_NotAddedNewFields_OnlyTemplateScriptGenerated()
     {
         // Arrange
@@ -26,10 +22,10 @@ public class ChangeDefaultInitializedValueStrategyTest
 
         // Assert
         var clippedScript = SkipDefaultTemplate(resultScript).ToList();
-        ClassicAssert.AreEqual(0, clippedScript.Count);
+        Assert.Equal(0, clippedScript.Count);
     }
 
-    [Test]
+    [Fact]
     public void Execute_AddedNewNotVersionField_OnlyTemplateScriptGenerated()
     {
         // Arrange
@@ -49,10 +45,10 @@ public class ChangeDefaultInitializedValueStrategyTest
 
         // Assert
         var clippedScript = SkipDefaultTemplate(resultScript).ToList();
-        ClassicAssert.AreEqual(0, clippedScript.Count);
+        Assert.Equal(0, clippedScript.Count);
     }
 
-    [Test]
+    [Fact]
     public void Execute_AddedNewVersionField_GeneratedUpdateValueScript()
     {
         // Arrange
@@ -72,8 +68,8 @@ public class ChangeDefaultInitializedValueStrategyTest
 
         // Assert
         var clippedScript = SkipDefaultTemplate(resultScript).ToList();
-        ClassicAssert.AreEqual(1, clippedScript.Count);
-        ClassicAssert.AreEqual($"update Object set [test]=0{Environment.NewLine}", clippedScript.Single());
+        Assert.Equal(1, clippedScript.Count);
+        Assert.Equal($"update Object set [test]=0{Environment.NewLine}", clippedScript.Single());
     }
 
     private DatabaseScriptGeneratorStrategyInfo CreateDatabaseScriptGeneratorStrategyInfo(IEnumerable<DomainTypeMetadata> domainTypeMetadata)

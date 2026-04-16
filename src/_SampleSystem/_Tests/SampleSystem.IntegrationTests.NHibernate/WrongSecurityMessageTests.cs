@@ -19,8 +19,7 @@ public class WrongSecurityMessageTests : TestBase
 
     private static readonly Guid TestPrincipalId = Guid.NewGuid();
 
-    [TestInitialize]
-    public void SetUp() => this.DataHelper.SaveEmployee(login: TestPrincipalName, id: TestPrincipalId);
+    public WrongSecurityMessageTests() => this.DataHelper.SaveEmployee(login: TestPrincipalName, id: TestPrincipalId);
 
     [TestMethod]
     public void UseWrongSecurityMode_ErrorMessageCorrected() => this.UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SecurityRule.Edit);

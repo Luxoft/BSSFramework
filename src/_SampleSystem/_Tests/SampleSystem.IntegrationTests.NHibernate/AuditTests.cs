@@ -46,7 +46,7 @@ public class AuditTests : TestBase
         // Assert
         var actualRevesionCount = employeeAuditController.Evaluate(c => c.GetEmployeeRevisions(employeeIdentity));
 
-        actualRevesionCount.RevisionInfos.Count().Should().Be(testCount + 1);
+        Assert.Equal(testCount + 1, actualRevesionCount.RevisionInfos.Count());
     }
 
     [Fact]
@@ -93,7 +93,7 @@ public class AuditTests : TestBase
                                                                      }));
 
         var expected = Enumerable.Range(-1, testCount).Skip(skip).First();
-        lastEmployeeState.NameEng.FirstName.Should().Be($"{expected}");
+        Assert.Equal($"{expected}", lastEmployeeState.NameEng.FirstName);
     }
 
     [Fact]
@@ -120,7 +120,7 @@ public class AuditTests : TestBase
                                                                              PropertyName = $"{nameof(Employee.CoreBusinessUnit)}"
                                                                      }));
 
-        propertyRevisions.RevisionInfos.Count().Should().Be(1);
+        Assert.Single(propertyRevisions.RevisionInfos);
     }
 
     [Fact]
@@ -165,7 +165,7 @@ public class AuditTests : TestBase
                                                            .FirstOrDefault() as SampleSystemPropertyRevisionDTO<string>;
 
         var expected = Enumerable.Range(-1, testCount).Skip(skip).First();
-        checkPropertyRevision?.Value.Should().Be($"{expected}{emailTail}");
+        Assert.Equal($"{expected}{emailTail}", checkPropertyRevision?.Value);
     }
 
     [Fact]
@@ -210,7 +210,7 @@ public class AuditTests : TestBase
                                                    .FirstOrDefault() as SampleSystemPropertyRevisionDTO<string>;
 
         var expected = Enumerable.Range(-1, testCount).Skip(skip).First();
-        firstRevision.RevisionType.Should().Be(AuditRevisionType.Added);
+        Assert.Equal(AuditRevisionType.Added, firstRevision.RevisionType);
     }
 
     [Fact]
@@ -255,8 +255,8 @@ public class AuditTests : TestBase
                                                          .Distinct()
                                                          .ToList();
 
-        afterFirstRevisions.Count.Should().Be(1);
-        afterFirstRevisions.First().Should().Be(AuditRevisionType.Modified);
+        Assert.Single(afterFirstRevisions);
+        Assert.Equal(AuditRevisionType.Modified, afterFirstRevisions.First());
     }
 
 
@@ -281,10 +281,10 @@ public class AuditTests : TestBase
                           .Evaluate(c => c.LoadFromCustomAuditMapping(newBu, newBuRevInfo.RevisionNumber));
 
 
-        auditBu.Revision.Should().Be(newBuRevInfo.RevisionNumber);
-        auditBu.Author.Should().Be(testUser);
-        newBuRevInfo.Author.Should().Be(testUser);
+        Assert.Equal(newBuRevInfo.RevisionNumber, auditBu.Revision);
+        Assert.Equal(testUser, auditBu.Author);
+        Assert.Equal(testUser, newBuRevInfo.Author);
 
-        auditBu.BuIdent.Should().Be(newBu);
+        Assert.Equal(newBu, auditBu.BuIdent);
     }
 }

@@ -67,8 +67,8 @@ public class DependencySecurityTests : TestBase
         var items = testSecurityObjItemController.Evaluate(c => c.GetVisualTestSecurityObjItems()).ToList();
 
         // Assert
-        items.Count().Should().Be(1);
-        items[0].Name.Should().Be(TestObjItem2);
+        var item = Assert.Single(items);
+        Assert.Equal(TestObjItem2, item.Name);
     }
 
     [Fact]
@@ -81,8 +81,8 @@ public class DependencySecurityTests : TestBase
         var items = testSecurityObjItemController.Evaluate(c => c.GetTestSecurityObjItemProjections()).ToList();
 
         // Assert
-        items.Count().Should().Be(1);
-        items[0].Name.Should().Be(TestObjItem2);
+        var item = Assert.Single(items);
+        Assert.Equal(TestObjItem2, item.Name);
     }
 
     [Fact]
@@ -95,8 +95,8 @@ public class DependencySecurityTests : TestBase
         var items = testSecuritySubObjItemController.Evaluate(c => c.GetVisualTestSecuritySubObjItems()).ToList();
 
         // Assert
-        items.Count().Should().Be(1);
-        items[0].Name.Should().Be(TestObjSubItem1);
+        var item = Assert.Single(items);
+        Assert.Equal(TestObjSubItem1, item.Name);
     }
 
     [Fact]
@@ -109,8 +109,8 @@ public class DependencySecurityTests : TestBase
         var items = testSecuritySubObjItem2Controller.Evaluate(c => c.GetVisualTestSecuritySubObjItem2s()).ToList();
 
         // Assert
-        items.Count().Should().Be(1);
-        items[0].Name.Should().Be(TestObjSubItem2);
+        var item = Assert.Single(items);
+        Assert.Equal(TestObjSubItem2, item.Name);
     }
 
     [Fact]
@@ -123,7 +123,7 @@ public class DependencySecurityTests : TestBase
         var items = testSecuritySubObjItem3Controller.Evaluate(c => c.GetVisualTestSecuritySubObjItem3s()).ToList();
 
         // Assert
-        items.Count().Should().Be(1);
-        items[0].Name.Should().Be(TestObjSubItem3);
+        var item = Assert.Single(items);
+        Assert.Equal(TestObjSubItem3, item.Name);
     }
 }

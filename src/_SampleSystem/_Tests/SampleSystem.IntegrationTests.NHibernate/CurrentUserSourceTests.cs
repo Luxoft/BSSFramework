@@ -30,7 +30,7 @@ public class CurrentUserSourceTests : TestBase
             });
 
         // Assert
-        employeeId.Should().Be(result);
+        Assert.Equal(result, employeeId);
     }
 
     [Fact]
@@ -40,12 +40,16 @@ public class CurrentUserSourceTests : TestBase
         var randomName = TextRandomizer.RandomString(10);
 
         // Act
-        var action = () => this.Evaluate(
-                         DBSessionMode.Read,
-                         randomName,
-                         ctx => ctx.CurrentEmployeeSource.CurrentUser.Id);
+        var action = () =>
+        {
+            this.Evaluate(
+                DBSessionMode.Read,
+                randomName,
+                ctx => ctx.CurrentEmployeeSource.CurrentUser.Id);
+        };
 
         // Assert
-        action.Should().Throw<UserSourceException>().And.Message.Should().Be($"{nameof(Employee)} \"{randomName}\" not found");
+        var exception = Assert.Throws<UserSourceException>(action);
+        Assert.Equal($"{nameof(Employee)} \"{randomName}\" not found", exception.Message);
     }
 }

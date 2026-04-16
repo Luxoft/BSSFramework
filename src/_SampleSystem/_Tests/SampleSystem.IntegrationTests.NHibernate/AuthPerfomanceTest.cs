@@ -63,7 +63,7 @@ public class AuthPerformanceTest : TestBase
                             });
 
         // Assert
-        authPerfCount.Should().Be(findCount);
+        Assert.Equal(findCount, authPerfCount);
     }
 
     private void GeneratePermission()

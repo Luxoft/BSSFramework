@@ -22,7 +22,7 @@ public class AsyncControllerTests : TestBase
         // Assert
         var location = loadedLocationList.SingleOrDefault(bu => bu.Name == saveDto.Name && bu.Identity == ident);
 
-        location.Should().NotBeNull();
+        Assert.NotNull(location);
     }
 
     [Fact]
@@ -36,6 +36,6 @@ public class AsyncControllerTests : TestBase
         // Act
         Func<Task> saveTask = () => asyncControllerEvaluator.EvaluateAsync(c => c.AsyncSaveLocationWithWriteException(saveDto, default));
 
-        await saveTask.Should().ThrowAsync<InvalidOperationException>("Invalid session mode. Expected Write");
+        await Assert.ThrowsAsync<InvalidOperationException>(saveTask);
     }
 }

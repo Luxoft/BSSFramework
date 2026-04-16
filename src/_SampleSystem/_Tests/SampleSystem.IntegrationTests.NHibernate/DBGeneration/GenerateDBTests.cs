@@ -22,6 +22,6 @@ public class GenerateDBTests : TestBase
                                                                this.DatabaseContext.Main.Password)));
 
         // Assert
-        action.Should().NotThrow();
+        Assert.Null(Record.Exception(action));
     }
 }

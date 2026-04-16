@@ -19,8 +19,8 @@ public class ImpersonateTests : TestBase
         var fullList = await controllerEvaluator.EvaluateAsync(c => c.GetFullList(default));
 
         // Assert
-        fullList.Should().ContainSingle(obj => obj.Id == testObj.Id)
-                .Subject.ModifiedBy.Should().Be(testImpersonateLogin);
+        var savedObject = Assert.Single(fullList, obj => obj.Id == testObj.Id);
+        Assert.Equal(testImpersonateLogin, savedObject.ModifiedBy);
     }
 
 }

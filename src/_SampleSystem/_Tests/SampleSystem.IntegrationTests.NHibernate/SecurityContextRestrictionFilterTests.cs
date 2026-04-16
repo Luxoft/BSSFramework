@@ -48,7 +48,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
                          });
 
         // Assert
-        action.Should().Throw<SecuritySystemValidationException>().And.Message.Should().Contain($"SecurityContext: '{this.defaultBu.Id}' denied by filter");
+        Assert.Contains($"SecurityContext: '{this.defaultBu.Id}' denied by filter", Assert.Throws<SecuritySystemValidationException>(action).Message);
     }
 
     [Fact]
@@ -64,7 +64,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
                          });
 
         // Assert
-        action.Should().NotThrow();
+        action();
     }
 
 
@@ -84,7 +84,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
                                           });
 
         // Assert
-        allowedBuList.Should().BeEquivalentTo(new[] { this.buWithAllowedFilter });
+        Assert.Equal(new[] { this.buWithAllowedFilter }, allowedBuList);
     }
 
     [Fact]
@@ -98,7 +98,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
             ctx => ctx.Logics.BusinessUnitFactory.Create(DefaultRestrictionRule).GetSecureQueryable().Select(bu => bu.ToIdentityDTO()).ToList());
 
         // Assert
-        allowedBuList.Should().BeEquivalentTo(new[] { this.buWithAllowedFilter });
+        Assert.Equal(new[] { this.buWithAllowedFilter }, allowedBuList);
     }
 
     [Fact]
@@ -121,7 +121,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
                                      });
 
         // Assert
-        accesors.Should().Contain(this.employeeLogin);
+        Assert.Contains(this.employeeLogin, accesors);
     }
 
     [Fact]
@@ -144,7 +144,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
                                                 });
 
         // Assert
-        accesors.Should().Contain(this.employeeLogin);
+        Assert.Contains(this.employeeLogin, accesors);
     }
 
     [Fact]
@@ -167,6 +167,6 @@ public class SecurityContextRestrictionFilterTests : TestBase
                                           });
 
         // Assert
-        accesors.Should().NotContainInConsecutiveOrder(this.employeeLogin);
+        Assert.DoesNotContain(this.employeeLogin, accesors);
     }
 }

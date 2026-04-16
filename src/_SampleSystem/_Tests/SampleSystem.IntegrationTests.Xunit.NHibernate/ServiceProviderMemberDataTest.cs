@@ -12,7 +12,7 @@ public class ServiceProviderMemberDataTest(IServiceProvider serviceProvider) : T
 {
     [BssTheory]
     [ServiceProviderMemberData(nameof(GetMemberData))]
-    public void GetDataFromServiceProvider(FullSecurityRole role) => role.Name.Should().NotBeNull();
+    public void GetDataFromServiceProvider(FullSecurityRole role) => Assert.NotNull(role.Name);
 
     protected IEnumerable<object> GetMemberData() =>
         this.ServiceProvider.GetRequiredService<ISecurityRoleSource>().SecurityRoles.Select(x => new [] { x });

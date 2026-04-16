@@ -22,7 +22,7 @@ public class PrincipalTests : TestBase
         var principalId = (Guid)this.AuthManager.For(name).CreatePrincipal().GetId();
 
         // Assert
-        this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
+        Assert.Contains(this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery"), dto => dto.Principal.Id == principalId);
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public class PrincipalTests : TestBase
                                                           }));
 
         // Assert
-        this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
+        Assert.Contains(this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery"), dto => dto.Principal.Id == principalId);
     }
 
     [Fact]
@@ -95,7 +95,7 @@ public class PrincipalTests : TestBase
                                                           }));
 
         // Assert
-        this.GetIntegrationEvents<PermissionSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Permission.Id == permissionIdentity.Id);
-        this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
+        Assert.Contains(this.GetIntegrationEvents<PermissionSaveEventDTO>("authDALQuery"), dto => dto.Permission.Id == permissionIdentity.Id);
+        Assert.Contains(this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery"), dto => dto.Principal.Id == principalId);
     }
 }

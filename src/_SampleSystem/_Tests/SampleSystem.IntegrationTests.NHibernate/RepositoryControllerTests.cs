@@ -19,6 +19,6 @@ public class RepositoryControllerTests : TestBase
         var currentEmployee = await employeeController.EvaluateAsync(c => c.GetCurrentEmployee(default));
 
         // Assert
-        result.Employees.Should().Contain(currentEmployee.Identity);
+        Assert.Contains(currentEmployee.Identity, result.Employees);
     }
 }

@@ -61,8 +61,7 @@ public class VirtualPermissionTests : TestBase
                        .GetSecureQueryable().Select(bu => bu.Id).ToList());
 
         // Assert
-        accessToBuList.Should().ContainSingle();
-        accessToBuList[0].Should().Be(this.Datas[0].BuId);
+        Assert.Equal(this.Datas[0].BuId, Assert.Single(accessToBuList));
     }
 
     [Fact]
@@ -86,7 +85,7 @@ public class VirtualPermissionTests : TestBase
                 });
 
         // Assert
-        accessorList.Should().Contain(this.Datas[0].UserLogin);
+        Assert.Contains(this.Datas[0].UserLogin, accessorList);
     }
 
     [Fact]
@@ -109,7 +108,7 @@ public class VirtualPermissionTests : TestBase
                 });
 
         // Assert
-        hasAccess.Should().BeTrue();
+        Assert.True(hasAccess);
     }
 
     [Fact]
@@ -132,7 +131,7 @@ public class VirtualPermissionTests : TestBase
                 });
 
         // Assert
-        hasAccess.Should().BeFalse();
+        Assert.False(hasAccess);
     }
 
     [Fact]
@@ -152,6 +151,6 @@ public class VirtualPermissionTests : TestBase
                 });
 
         // Assert
-        hasAccess.Should().BeFalse();
+        Assert.False(hasAccess);
     }
 }

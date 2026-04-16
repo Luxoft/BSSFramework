@@ -69,12 +69,11 @@ public class BusinessUnitTests : TestBase
                 }));
 
         // Assert
-        businessUnitTree.TotalCount.Should().Be(2);
-        businessUnitTree.Items.Length.Should().Be(2);
+        Assert.Equal(2, businessUnitTree.TotalCount);
+        Assert.Equal(2, businessUnitTree.Items.Length);
 
-        businessUnitTree.Items.Should().Contain(node => node.Item.Name == DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME && !node.OnlyView);
-        businessUnitTree.Items.Should()
-                        .Contain(node => node.Item.Name == DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_NAME && node.OnlyView);
+        Assert.Contains(businessUnitTree.Items, node => node.Item.Name == DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME && !node.OnlyView);
+        Assert.Contains(businessUnitTree.Items, node => node.Item.Name == DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_NAME && node.OnlyView);
     }
 
     [Fact]
@@ -93,8 +92,8 @@ public class BusinessUnitTests : TestBase
                 }));
 
         // Assert
-        businessUnitTree.TotalCount.Should().Be(0);
-        businessUnitTree.Items.Length.Should().Be(0);
+        Assert.Equal(0, businessUnitTree.TotalCount);
+        Assert.Empty(businessUnitTree.Items);
     }
 
     // Two test in one for performance reasons
@@ -133,9 +132,9 @@ public class BusinessUnitTests : TestBase
             });
 
         // Assert
-        result.Count.Should().Be(2);
-        result.Should().Contain(node => node.Item == parentBu.Id && node.OnlyView);
-        result.Should().Contain(node => node.Item == childBu.Id && !node.OnlyView);
+        Assert.Equal(2, result.Count);
+        Assert.Contains(result, node => node.Item == parentBu.Id && node.OnlyView);
+        Assert.Contains(result, node => node.Item == childBu.Id && !node.OnlyView);
     }
 
     private void TestGetFullBusinessUnitsTreeByOData()
@@ -145,8 +144,8 @@ public class BusinessUnitTests : TestBase
         var businessUnitTree = businessUnitQueryController.Evaluate(c => c.GetFullBusinessUnitsTreeByOData(string.Empty));
 
         // Assert
-        businessUnitTree.TotalCount.Should().Be(ParentsCount + ExistedBusinessUnitsInDatabase);
-        businessUnitTree.Items.Length.Should().Be(ParentsCount + ExistedBusinessUnitsInDatabase);
+        Assert.Equal(ParentsCount + ExistedBusinessUnitsInDatabase, businessUnitTree.TotalCount);
+        Assert.Equal(ParentsCount + ExistedBusinessUnitsInDatabase, businessUnitTree.Items.Length);
     }
 
     private void TestGetFullBusinessUnitsTree()
@@ -156,7 +155,7 @@ public class BusinessUnitTests : TestBase
         var tree = businessUnitController.Evaluate(c => c.GetFullBusinessUnitsTree());
 
         // Assert
-        tree.Should().HaveCount(ParentsCount + ExistedBusinessUnitsInDatabase);
+        Assert.Equal(ParentsCount + ExistedBusinessUnitsInDatabase, tree.Count());
     }
 
     private void CreateBigBuTree()

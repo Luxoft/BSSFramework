@@ -54,11 +54,11 @@ public class LegalEntityProjectionTests : TestBase
 
 
         // Assert
-        result.Name.Should().BeEquivalentTo(name);
-        result.NameEnglish.Should().BeEquivalentTo(nameEnglish);
-        result.Code.Should().BeEquivalentTo(code);
-        result.BaseObjName.Should().BeEquivalentTo(baseObjName);
-        result.CurrentObjName.Should().BeEquivalentTo(nestedObjName);
-        ((object)result.PeriodStartDate).Should().BeEquivalentTo((object)period.StartDate);
+        Assert.Equal(name, result.Name);
+        Assert.Equal(nameEnglish, result.NameEnglish);
+        Assert.Equal(code, result.Code);
+        Assert.Equal(baseObjName, result.BaseObjName);
+        Assert.Equal(nestedObjName, result.CurrentObjName);
+        Assert.Equal(period.StartDate, result.PeriodStartDate);
     }
 }

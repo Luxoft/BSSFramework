@@ -32,8 +32,8 @@ public class PrincipalTests : TestBase
 
         // Assert
         var permissionSimple = authorizationController.Evaluate(c => c.GetSimplePermission(permissionIdentity));
-        permissionSimple.CreatedBy.Should().Be(currentUser.Login.ToString());
-        permissionSimple.ModifiedBy.Should().Be(currentUser.Login.ToString());
+        Assert.Equal(currentUser.Login.ToString(), permissionSimple.CreatedBy);
+        Assert.Equal(currentUser.Login.ToString(), permissionSimple.ModifiedBy);
     }
 
     [Fact]
@@ -57,10 +57,10 @@ public class PrincipalTests : TestBase
         // Assert
         var principalRich = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichPrincipal(principalIdentity));
 
-        principalRich.Name.Should().Be(Name);
-        principalRich.CreatedBy.Should().Be(currentUser.Login.ToString());
-        principalRich.ModifiedBy.Should().Be(currentUser.Login.ToString());
-        principalRich.Permissions.First().Role.Identity.Should().Be(businessRoleIdentity);
+        Assert.Equal(Name, principalRich.Name);
+        Assert.Equal(currentUser.Login.ToString(), principalRich.CreatedBy);
+        Assert.Equal(currentUser.Login.ToString(), principalRich.ModifiedBy);
+        Assert.Equal(businessRoleIdentity, principalRich.Permissions.First().Role.Identity);
     }
 
     [Fact]
@@ -82,8 +82,8 @@ public class PrincipalTests : TestBase
         // Assert
         var principalSimple = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalStrict.Identity));
 
-        principalSimple.Name.Should().Be(NewName);
-        principalSimple.ModifiedBy.Should().Be(currentUser.Login.ToString());
+        Assert.Equal(NewName, principalSimple.Name);
+        Assert.Equal(currentUser.Login.ToString(), principalSimple.ModifiedBy);
     }
 
     [Fact]
@@ -125,11 +125,11 @@ public class PrincipalTests : TestBase
                                                                                      .Single(x => x.Principal.Identity == newPrincipalIdentity)).Identity;
 
         var newPermissionFull = this.GetAuthControllerEvaluator().Evaluate(c => c.GetFullPermission(newPermissionIdentity));
-        newPermissionFull.CreatedBy.Should().Be(currentUser.Login.ToString());
-        newPermissionFull.ModifiedBy.Should().Be(currentUser.Login.ToString());
+        Assert.Equal(currentUser.Login.ToString(), newPermissionFull.CreatedBy);
+        Assert.Equal(currentUser.Login.ToString(), newPermissionFull.ModifiedBy);
 
         var permissionSimple = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichPermission(permissionIdentity));
-        permissionSimple.DelegatedTo.Any().Should().BeTrue();
+        Assert.True(permissionSimple.DelegatedTo.Any());
     }
 
     [Fact]
@@ -150,7 +150,7 @@ public class PrincipalTests : TestBase
         Action call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePermission(permissionIdentity));
 
         // Assert
-        call.Should().Throw<Exception>().WithMessage("Permission with id = \"*\" not found");
+        Assert.Matches("^Permission with id = \".*\" not found$", Assert.Throws<Exception>(call).Message);
     }
 
     [Fact]
@@ -163,7 +163,7 @@ public class PrincipalTests : TestBase
         var call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.RemovePrincipal(principalIdentity));
 
         // Assert
-        call.Should().Throw<Exception>().WithMessage("Removing principal \"*\" must be empty");
+        Assert.Matches("^Removing principal \".*\" must be empty$", Assert.Throws<Exception>(call).Message);
     }
 
     [Fact]
@@ -179,6 +179,6 @@ public class PrincipalTests : TestBase
         var call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalIdentity));
 
         // Assert
-        call.Should().Throw<Exception>().WithMessage("Principal with id = \"*\" not found");
+        Assert.Matches("^Principal with id = \".*\" not found$", Assert.Throws<Exception>(call).Message);
     }
 }

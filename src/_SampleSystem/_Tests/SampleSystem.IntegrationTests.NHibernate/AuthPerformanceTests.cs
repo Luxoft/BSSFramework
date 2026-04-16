@@ -107,6 +107,6 @@ public class AuthPerformanceTests : TestBase
         Console.WriteLine("WorkTime: " + duration);
 
         // Assert
-        testPerformanceObjects.Count().Should().Be(Limit * Limit * Limit * Limit);
+        Assert.Equal(Limit * Limit * Limit * Limit, testPerformanceObjects.Count());
     }
 }

@@ -29,6 +29,6 @@ public class NhibDateTimeTests : TestBase
         // Assert
         var reloadedObj = example1Controller.Evaluate(c => c.GetSimpleExample1(objIdentity));
 
-        reloadedObj.CreateDate.Should().BeCloseTo(testDate, TimeSpan.FromSeconds(1));
+        Assert.InRange((reloadedObj.CreateDate! - testDate).Value.Duration(), TimeSpan.Zero, TimeSpan.FromSeconds(1));
     }
 }

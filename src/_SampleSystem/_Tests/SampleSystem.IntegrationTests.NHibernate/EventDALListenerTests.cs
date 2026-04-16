@@ -22,6 +22,6 @@ public class EventDALListenerTests : TestBase
                 CancellationToken.None));
 
         // Assert
-        await action.Should().NotThrowAsync();
+        await action();
     }
 }

@@ -97,8 +97,8 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter, employeeFilter);
 
         // Assert
-        result.Length.Should().Be(1);
-        result.Single().Should().Be(this.searchNotificationEmployeeLogin1);
+        Assert.Single(result);
+        Assert.Equal(this.searchNotificationEmployeeLogin1, result.Single());
     }
 
     [Fact]
@@ -126,7 +126,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter);
 
         // Assert
-        result.Length.Should().Be(0);
+        Assert.Empty(result);
     }
 
     [Fact]
@@ -160,7 +160,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter, employeeChildFilter);
 
         // Assert
-        result.Length.Should().Be(0);
+        Assert.Empty(result);
     }
 
     [Fact]
@@ -200,7 +200,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter, employeeChildFilter);
 
         // Assert
-        result.Length.Should().Be(1);
+        Assert.Single(result);
     }
 
     [Fact]
@@ -233,8 +233,8 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter);
 
         // Assert
-        result.Length.Should().Be(1);
-        result.Single().Should().Be(this.searchNotificationEmployeeLogin1);
+        Assert.Single(result);
+        Assert.Equal(this.searchNotificationEmployeeLogin1, result.Single());
     }
 
 
@@ -270,8 +270,8 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter);
 
         // Assert
-        result.Length.Should().Be(1);
-        result.Single().Should().Be(this.searchNotificationEmployeeLogin1);
+        Assert.Single(result);
+        Assert.Equal(this.searchNotificationEmployeeLogin1, result.Single());
     }
 
     [Fact]
@@ -308,8 +308,8 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter);
 
         // Assert
-        result.Length.Should().Be(1);
-        result.Single().Should().Be(this.searchNotificationEmployeeLogin1);
+        Assert.Single(result);
+        Assert.Equal(this.searchNotificationEmployeeLogin1, result.Single());
     }
 
     [Theory]
@@ -351,8 +351,8 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
                          : this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter);
 
         // Assert
-        result.Length.Should().Be(1);
-        result.Single().Should().Be(swapPriority ? this.searchNotificationEmployeeLogin2 : this.searchNotificationEmployeeLogin1);
+        Assert.Single(result);
+        Assert.Equal(swapPriority ? this.searchNotificationEmployeeLogin2 : this.searchNotificationEmployeeLogin1, result.Single());
     }
 
     [Fact]
@@ -386,9 +386,9 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter);
 
         // Assert
-        result.Length.Should().Be(2);
-        result.Should().Contain(this.searchNotificationEmployeeLogin1);
-        result.Should().Contain(this.searchNotificationEmployeeLogin2);
+        Assert.Equal(2, result.Length);
+        Assert.Contains(this.searchNotificationEmployeeLogin1, result);
+        Assert.Contains(this.searchNotificationEmployeeLogin2, result);
     }
 
     private string[] GetNotificationPrincipalsByRoles(params NotificationFilterGroup[] notificationFilterGroups) =>

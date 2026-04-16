@@ -33,7 +33,7 @@ public class InformationTest : TestBase
                                            });
 
         // Assert
-        this.GetIntegrationEvents<InformationSaveEventDTO>().Should().ContainSingle(dto => dto.Information.Id == id);
-        this.GetIntegrationEvents<InformationRemoveEventDTO>().Should().ContainSingle(dto => dto.Information.Id == id);
+        Assert.Single(this.GetIntegrationEvents<InformationSaveEventDTO>(), dto => dto.Information.Id == id);
+        Assert.Single(this.GetIntegrationEvents<InformationRemoveEventDTO>(), dto => dto.Information.Id == id);
     }
 }

@@ -25,7 +25,7 @@ public class FullTextSearchTests : TestBase
                           {
                               var bll = context.Logics.Employee;
                               var employees = bll.GetUnsecureQueryable().Where(e => e.Email.FullTextContains("admin")).ToList();
-                              employees.Should().HaveCount(1);
+                              Assert.Single(employees);
                           });
     }
 }

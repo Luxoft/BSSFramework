@@ -98,6 +98,6 @@ public class PrincipalWithInitTests : TestBase
                    };
 
         // Assert
-        call.Should().Throw<SecuritySystemValidationException>().And.Message.Should().Contain(expectedErrorMessage);
+        Assert.Contains(expectedErrorMessage, Assert.Throws<SecuritySystemValidationException>(call).Message);
     }
 }

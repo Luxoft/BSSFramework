@@ -14,12 +14,12 @@ public class DefaultFieldsTests
         // Act
 
         // Assert
-        dto.IntVal.Should().NotBe(default(int));
-        dto.StrVal.Should().NotBe(default(string));
-        dto.EnumVal.Should().NotBe(default(DayOfWeek));
+        Assert.NotEqual(default(int), dto.IntVal);
+        Assert.NotEqual(default(string), dto.StrVal);
+        Assert.NotEqual(default(DayOfWeek), dto.EnumVal);
 
-        dto.IntVal.Should().Be(TestDefaultFieldsMappingObj.IntDefaultVal);
-        dto.StrVal.Should().Be(TestDefaultFieldsMappingObj.StringDefaultVal);
-        dto.EnumVal.Should().Be(TestDefaultFieldsMappingObj.EnumDefaultVal);
+        Assert.Equal(TestDefaultFieldsMappingObj.IntDefaultVal, dto.IntVal);
+        Assert.Equal(TestDefaultFieldsMappingObj.StringDefaultVal, dto.StrVal);
+        Assert.Equal(TestDefaultFieldsMappingObj.EnumDefaultVal, dto.EnumVal);
     }
 }

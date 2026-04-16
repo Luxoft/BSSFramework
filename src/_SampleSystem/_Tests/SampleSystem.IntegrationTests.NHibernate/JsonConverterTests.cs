@@ -22,7 +22,7 @@ public class JsonConverterTests : TestBase
         var restored = JsonSerializer.Deserialize<DateTime>(jsonText, options);
 
         //Assert
-        now.Should().Be(restored);
+        Assert.Equal(now, restored);
     }
 
 
@@ -39,7 +39,7 @@ public class JsonConverterTests : TestBase
         var restored = JsonSerializer.Deserialize<Period>(jsonText, options);
 
         //Assert
-        testPeriod.Should().Be(restored);
+        Assert.Equal(testPeriod, restored);
     }
 
     [Fact]
@@ -55,6 +55,6 @@ public class JsonConverterTests : TestBase
         var restored = JsonSerializer.Deserialize<Period>(jsonText, options);
 
         //Assert
-        testPeriod.Should().Be(restored);
+        Assert.Equal(testPeriod, restored);
     }
 }

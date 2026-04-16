@@ -37,6 +37,6 @@ public class NhibArrayContainsTest : TestBase
             ctx => ctx.Logics.BusinessUnit.GetUnsecureQueryable().Where(totalFilter).Select(v => v.Id).Single());
 
         // Assert
-        buId.Should().Be(bu.Id);
+        Assert.Equal(bu.Id, buId);
     }
 }

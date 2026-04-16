@@ -44,7 +44,7 @@ public class RestrictionRoleTests : TestBase
                          .Select(v => v.Identity);
 
         // Assert
-        result.Should().BeEquivalentTo(new[] { testObjects[0], testObjects[2] });
+        Assert.Equal(new[] { testObjects[0], testObjects[2] }, result);
     }
 
     [Fact]
@@ -56,7 +56,7 @@ public class RestrictionRoleTests : TestBase
         var action = () => this.AuthManager.For().SetRole(SampleSystemSecurityRole.RestrictionRole);
 
         // Assert
-        action.Should().NotThrow();
+        action();
     }
 
     [Fact]
@@ -73,7 +73,7 @@ public class RestrictionRoleTests : TestBase
                                  businessUnit: businessUnit));
 
         // Assert
-        action.Should().NotThrow();
+        action();
     }
 
     [Fact]
@@ -90,8 +90,7 @@ public class RestrictionRoleTests : TestBase
                                  location: location));
 
         // Assert
-        action.Should().Throw<SecuritySystemValidationException>()
-              .And.Message.Should().Contain($"Invalid SecurityContextType: {nameof(Location)}");
+        Assert.Contains($"Invalid SecurityContextType: {nameof(Location)}", Assert.Throws<SecuritySystemValidationException>(action).Message);
     }
 
     [Fact]
@@ -125,7 +124,7 @@ public class RestrictionRoleTests : TestBase
             });
 
         // Assert
-        result.Should().BeEquivalentTo(new[] { testObjects[0], testObjects[2] });
+        Assert.Equal(new[] { testObjects[0], testObjects[2] }, result);
     }
 
     [Fact]
@@ -159,7 +158,7 @@ public class RestrictionRoleTests : TestBase
             });
 
         // Assert
-        result.Should().BeEquivalentTo(new[] { testObjects[0], testObjects[2] });
+        Assert.Equal(new[] { testObjects[0], testObjects[2] }, result);
     }
 
     [Fact]
@@ -173,8 +172,8 @@ public class RestrictionRoleTests : TestBase
                          new SampleSystemTestPermission(SampleSystemSecurityRole.RequiredRestrictionRole, location: location));
 
         // Assert
-        action.Should().Throw<SecuritySystemValidationException>()
-              .And.Message.Should().Contain(
-                  $"{nameof(Framework.Authorization.Domain.Permission)} must contain the required contexts: {nameof(BusinessUnit)}");
+        Assert.Contains(
+            $"{nameof(Framework.Authorization.Domain.Permission)} must contain the required contexts: {nameof(BusinessUnit)}",
+            Assert.Throws<SecuritySystemValidationException>(action).Message);
     }
 }

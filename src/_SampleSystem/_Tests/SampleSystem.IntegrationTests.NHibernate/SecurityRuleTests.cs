@@ -49,7 +49,7 @@ public class SecurityRuleTests : TestBase
                       .Select(obj => obj.Id).ToList());
 
         // Assert
-        loadedObjects.Should().BeEquivalentTo(new[] { testObjectIdents[0] });
+        Assert.Equal(new[] { testObjectIdents[0] }, loadedObjects);
     }
 
     [Fact]
@@ -71,8 +71,6 @@ public class SecurityRuleTests : TestBase
                          });
 
         // Assert
-        action.Should()
-              .Throw<Exception>()
-              .WithMessage(faultMessage);
+        Assert.Equal(faultMessage, Assert.Throws<Exception>(action).Message);
     }
 }

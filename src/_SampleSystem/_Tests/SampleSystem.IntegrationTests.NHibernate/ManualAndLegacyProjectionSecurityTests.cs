@@ -45,8 +45,8 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
         var items = employeeQueryController.Evaluate(c => c.GetTestManualEmployeeProjectionsByODataQueryString($"$filter={nameof(TestManualEmployeeProjection.CoreBusinessUnitId)} ne null")).Items;
 
         // Assert
-        items.Count().Should().Be(1);
-        items[0].Identity.Should().Be(this.TestEmp2);
+        Assert.Single(items);
+        Assert.Equal(this.TestEmp2, items[0].Identity);
     }
 
     [Fact]
@@ -59,8 +59,8 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
         var items = employeeQueryController.Evaluate(c => c.GetTestLegacyEmployeesByODataQueryString($"$filter={nameof(TestLegacyEmployee.BusinessUnit_Security)} ne null")).Items;
 
         // Assert
-        items.Count().Should().Be(1);
-        items[0].Identity.Should().Be(this.TestEmp2);
+        Assert.Single(items);
+        Assert.Equal(this.TestEmp2, items[0].Identity);
     }
 
 

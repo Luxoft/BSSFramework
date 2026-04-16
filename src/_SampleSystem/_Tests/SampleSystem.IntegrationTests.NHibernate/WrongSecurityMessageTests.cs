@@ -40,8 +40,8 @@ public class WrongSecurityMessageTests : TestBase
                          ctx => ctx.Logics.EmployeeFactory.Create(securityRule).CheckAccess(ctx.CurrentEmployeeSource.CurrentUser));
 
         // Assert
-        action.Should()
-              .Throw<AccessDeniedException>()
-              .WithMessage($"You have no permissions to access object with type = '{nameof(Employee)}' (id = '{TestPrincipalId}', securityRule = '{securityRule}')");
+        Assert.Equal(
+            $"You have no permissions to access object with type = '{nameof(Employee)}' (id = '{TestPrincipalId}', securityRule = '{securityRule}')",
+            Assert.Throws<AccessDeniedException>(action).Message);
     }
 }

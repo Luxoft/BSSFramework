@@ -24,7 +24,7 @@ public class JobTests : TestBase
         // Assert
         var newCount = GetJobInstanceCount();
 
-        (newCount - prevCount).Should().Be(repeatCount);
+        Assert.Equal(repeatCount, newCount - prevCount);
 
         int GetJobInstanceCount() =>
             this.Evaluate(

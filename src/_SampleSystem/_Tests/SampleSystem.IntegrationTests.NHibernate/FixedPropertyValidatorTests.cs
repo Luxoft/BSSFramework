@@ -24,9 +24,9 @@ public class FixedPropertyValidatorTests : TestBase
                                       };
 
         // Assert
-        changePropertyAction.Should()
-                            .Throw<Exception>(
-                                              $"{nameof(TestImmutableObj.TestImmutablePrimitiveProperty)} field in {nameof(TestImmutableObj)} can't be changed");
+        Assert.Equal(
+            $"{nameof(TestImmutableObj.TestImmutablePrimitiveProperty)} field in {nameof(TestImmutableObj)} can't be changed",
+            Assert.Throws<Exception>(changePropertyAction).Message);
     }
 
     [Fact]
@@ -46,9 +46,9 @@ public class FixedPropertyValidatorTests : TestBase
                                       };
 
         // Assert
-        changePropertyAction.Should()
-                            .Throw<Exception>(
-                                              $"{nameof(TestImmutableObj.TestImmutableRefProperty)} field in {nameof(TestImmutableObj)} can't be changed");
+        Assert.Equal(
+            $"{nameof(TestImmutableObj.TestImmutableRefProperty)} field in {nameof(TestImmutableObj)} can't be changed",
+            Assert.Throws<Exception>(changePropertyAction).Message);
     }
 
     [Fact]
@@ -61,7 +61,7 @@ public class FixedPropertyValidatorTests : TestBase
         Action insertAction = () => integrationController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjIntegrationRichDTO { TestImmutablePrimitiveProperty = "AAA", Id = Guid.NewGuid() }));
 
         // Assert
-        insertAction.Should().NotThrow();
+        insertAction();
     }
 
     [Fact]
@@ -76,7 +76,9 @@ public class FixedPropertyValidatorTests : TestBase
         Action changePropertyAction = () => integrationTestImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjIntegrationRichDTO { TestImmutablePrimitiveProperty = "BBB", Id = identity.Id }));
 
         // Assert
-        changePropertyAction.Should().Throw<Exception>($"{nameof(TestImmutableObj.TestImmutablePrimitiveProperty)} field in {nameof(TestImmutableObj)} can't be changed");
+        Assert.Equal(
+            $"{nameof(TestImmutableObj.TestImmutablePrimitiveProperty)} field in {nameof(TestImmutableObj)} can't be changed",
+            Assert.Throws<Exception>(changePropertyAction).Message);
     }
 
 }

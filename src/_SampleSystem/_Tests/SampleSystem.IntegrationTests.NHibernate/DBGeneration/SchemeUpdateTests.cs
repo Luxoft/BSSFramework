@@ -15,6 +15,7 @@ public class SchemeUpdateTests : TestBase
         var action = new Action(() => UseSchemeUpdateTest.UseSchemeUpdate(this.DatabaseContext.Main.ConnectionString));
 
         // Assert
-        action.Should().NotThrow();
+        var ex = Record.Exception(action);
+        Assert.Null(ex);
     }
 }

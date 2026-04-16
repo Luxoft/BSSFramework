@@ -23,7 +23,7 @@ public class ExpandPathTests : TestBase
                                 });
 
         // Assert
-        action.Should().NotThrow();
+        action();
     }
 
     [Fact]
@@ -40,7 +40,7 @@ public class ExpandPathTests : TestBase
                                 });
 
         // Assert
-        action.Should().NotThrow();
+        action();
     }
 
     [Fact]
@@ -61,7 +61,7 @@ public class ExpandPathTests : TestBase
                                 });
 
         // Assert
-        action.Should().NotThrow();
+        action();
     }
 
 
@@ -79,6 +79,6 @@ public class ExpandPathTests : TestBase
                                 });
 
         // Assert
-        action.Should().NotThrow();
+        action();
     }
 }

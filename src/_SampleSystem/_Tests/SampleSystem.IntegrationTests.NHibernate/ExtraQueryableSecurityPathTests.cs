@@ -89,7 +89,6 @@ public class ExtraQueryableSecurityPathTests : TestBase
             });
 
         // Assert
-        items.Count().Should().Be(1);
-        items[0].Should().Be(this.TestEmp2.Id);
+        Assert.Equal(this.TestEmp2.Id, Assert.Single(items));
     }
 }

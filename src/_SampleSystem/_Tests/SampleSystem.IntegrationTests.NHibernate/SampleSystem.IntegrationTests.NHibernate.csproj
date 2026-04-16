@@ -20,7 +20,6 @@
     <Content Include="__Support\*\**\*.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="..\..\..\__SolutionItems\Testing\FluentAssertionsShim.cs" Link="Testing\FluentAssertionsShim.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,7 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="FluentAssertions" />
     <Using Include="Xunit" />
   </ItemGroup>
 

@@ -35,7 +35,6 @@ public class CsprojValidationTests
         catch (Exception ex)
         {
             throw new Xunit.Sdk.XunitException($"{file} — XML parse error: {ex.Message}");
-            return;
         }
 
         var packageId = doc

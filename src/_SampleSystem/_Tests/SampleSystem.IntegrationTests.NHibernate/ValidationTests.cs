@@ -16,7 +16,7 @@ public class ValidationTests : TestBase
         Action call = () => this.DataHelper.SaveEmployee("John Doe", "JD");
 
         // Assert
-        call.Should().Throw<ValidationException>();
+        Assert.Throws<ValidationException>(call);
     }
 
     [Fact]
@@ -28,7 +28,7 @@ public class ValidationTests : TestBase
         Action call = () => this.DataHelper.SaveEmployee(pin: 1234);
 
         // Assert
-        call.Should().Throw<ValidationException>().WithMessage("Employee Pin could not be set as '1234'");
+        Assert.Equal("Employee Pin could not be set as '1234'", Assert.Throws<ValidationException>(call).Message);
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public class ValidationTests : TestBase
         Action call = () => this.DataHelper.SaveEmployee(externalId: externalId);
 
         // Assert
-        call.Should().Throw<ValidationException>().WithMessage($"Employee with ExternalId '{externalId}' already exists.");
+        Assert.Equal($"Employee with ExternalId '{externalId}' already exists.", Assert.Throws<ValidationException>(call).Message);
     }
 
     [Fact]
@@ -56,7 +56,7 @@ public class ValidationTests : TestBase
         Action call = () => this.DataHelper.SaveEmployee(pin: pin);
 
         // Assert
-        call.Should().Throw<ValidationException>().WithMessage($"Employee with Pin '{pin}' already exists.");
+        Assert.Equal($"Employee with Pin '{pin}' already exists.", Assert.Throws<ValidationException>(call).Message);
     }
 
     [Fact]
@@ -70,7 +70,7 @@ public class ValidationTests : TestBase
         Action call = () => this.DataHelper.SaveEmployee(externalId: externalId, nonValidateVirtualProp: invalidDate);
 
         // Assert
-        call.Should().NotThrow(because: "Non persistent properties must not validated by default");
+        call();
     }
 
     [Fact]
@@ -84,6 +84,6 @@ public class ValidationTests : TestBase
         Action call = () => this.DataHelper.SaveEmployee(externalId: externalId, validateVirtualProp: invalidDate);
 
         // Assert
-        call.Should().Throw<ValidationException>().WithMessage("Employee has ValidateVirtualProp value was too overflow for a DateTime");
+        Assert.Equal("Employee has ValidateVirtualProp value was too overflow for a DateTime", Assert.Throws<ValidationException>(call).Message);
     }
 }

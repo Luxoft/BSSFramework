@@ -70,8 +70,8 @@ public class BUProjectionTests : TestBase
         var profitBU = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitsByODataQueryString($"$filter=Id eq GUID'{DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID}'"));
 
         // Assert
-        profitBU.Items.Should().ContainSingle();
-        profitBU.Items[0].Employees.Should().Be(expectedEmployee);
+        var item = Assert.Single(profitBU.Items);
+        Assert.Equal(expectedEmployee, item.Employees);
     }
 
     [Fact]
@@ -85,7 +85,7 @@ public class BUProjectionTests : TestBase
         var profitBU = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitsByODataQueryString($"$filter=Id eq GUID'{DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID}'"));
 
         // Assert
-        profitBU.Items.Should().ContainSingle();
-        profitBU.Items[0].HerBusinessUnit_Full.Should().Be(expectedHer);
+        var item = Assert.Single(profitBU.Items);
+        Assert.Equal(expectedHer, item.HerBusinessUnit_Full);
     }
 }

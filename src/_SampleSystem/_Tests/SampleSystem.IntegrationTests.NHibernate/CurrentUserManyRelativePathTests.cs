@@ -69,6 +69,6 @@ public class CurrentUserManyRelativePathTests : TestBase
                          .ToArray();
 
         // Assert
-        results.Should().BeEquivalentTo(expectedResult);
+        Assert.Equal(expectedResult, results);
     }
 }

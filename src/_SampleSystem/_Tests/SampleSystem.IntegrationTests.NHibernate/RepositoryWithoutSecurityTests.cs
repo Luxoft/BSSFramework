@@ -1,7 +1,4 @@
-﻿using SecuritySystem;
-
-using SampleSystem.Domain;
-using SampleSystem.IntegrationTests.__Support.TestData;
+﻿using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
@@ -20,7 +17,7 @@ public class RepositoryWithoutSecurityTests : TestBase
         var fullList = await controllerEvaluator.EvaluateAsync(c => c.GetFullList(default));
 
         // Assert
-        fullList.Should().Contain(testObj);
+        Assert.Contains(testObj, fullList);
     }
 
     [Fact]
@@ -33,6 +30,6 @@ public class RepositoryWithoutSecurityTests : TestBase
         Func<Task> saveAction = () => controllerEvaluator.EvaluateAsync(c => c.TestFaultSave(default));
 
         // Assert
-        await saveAction.Should().ThrowAsync<ArgumentOutOfRangeException>($"{nameof(SecurityRule)} with mode '{SecurityRule.Edit}' not found for type '{nameof(NoSecurityObject)}'");
+        await Assert.ThrowsAsync<ArgumentOutOfRangeException>(saveAction);
     }
 }

@@ -14,7 +14,7 @@ public class EventXsdExporterTests
         var stream = exporter2.Export("Test", "test", [typeof(TestDto)]);
 
         // Assert
-        stream.Should().BeReadable();
+        Assert.True(stream.CanRead);
     }
 
     public class TestDto

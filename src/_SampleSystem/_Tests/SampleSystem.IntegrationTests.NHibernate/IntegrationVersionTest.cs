@@ -48,8 +48,8 @@ public class IntegrationVersionTest : TestBase
         // Assert
 
         var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
-        actual.Name.Should().Be(expectedName);
-        actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
+        Assert.Equal(expectedName, actual.Name);
+        Assert.Equal(expectedIntegrationVersion, actual.IntegrationVersion);
     }
 
     [Fact]
@@ -88,8 +88,8 @@ public class IntegrationVersionTest : TestBase
         // Assert
 
         var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
-        actual.Name.Should().Be(expectedName);
-        actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
+        Assert.Equal(expectedName, actual.Name);
+        Assert.Equal(expectedIntegrationVersion, actual.IntegrationVersion);
     }
 
     [Fact]
@@ -128,8 +128,8 @@ public class IntegrationVersionTest : TestBase
         // Assert
 
         var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
-        actual.Name.Should().Be(expectedName);
-        actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
+        Assert.Equal(expectedName, actual.Name);
+        Assert.Equal(expectedIntegrationVersion, actual.IntegrationVersion);
     }
 
     [Fact]
@@ -169,8 +169,8 @@ public class IntegrationVersionTest : TestBase
         // Assert
 
         var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer2>().GetById(id));
-        actual.Name.Should().Be(expectedName);
-        actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
+        Assert.Equal(expectedName, actual.Name);
+        Assert.Equal(expectedIntegrationVersion, actual.IntegrationVersion);
     }
 
     [Fact]
@@ -209,8 +209,8 @@ public class IntegrationVersionTest : TestBase
         // Assert
 
         var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer2>().GetById(id));
-        actual.Name.Should().Be(expectedName);
-        actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
+        Assert.Equal(expectedName, actual.Name);
+        Assert.Equal(expectedIntegrationVersion, actual.IntegrationVersion);
     }
 
     [Fact]
@@ -251,8 +251,8 @@ public class IntegrationVersionTest : TestBase
         // Assert
 
         var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer2>().GetById(id));
-        actual.Name.Should().Be(nextName);
-        actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
+        Assert.Equal(nextName, actual.Name);
+        Assert.Equal(expectedIntegrationVersion, actual.IntegrationVersion);
     }
 
     [Fact]
@@ -301,8 +301,8 @@ public class IntegrationVersionTest : TestBase
         // Assert
 
         var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
-        actual.Name.Should().Be(expectedName);
-        actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
+        Assert.Equal(expectedName, actual.Name);
+        Assert.Equal(expectedIntegrationVersion, actual.IntegrationVersion);
     }
 
     [Fact]
@@ -351,7 +351,7 @@ public class IntegrationVersionTest : TestBase
         // Assert
 
         var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
-        actual.Name.Should().Be(modelName);
-        actual.IntegrationVersion.Should().Be(expectedIntegrationVersion + 1);
+        Assert.Equal(modelName, actual.Name);
+        Assert.Equal(expectedIntegrationVersion + 1, actual.IntegrationVersion);
     }
 }

@@ -27,9 +27,9 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
                                         .Where(n => n.From == "SampleSystem@luxoft.com");
 
         // Assert
-        errors.Should().HaveCount(0);
-        expectedNotifications.Should().HaveCount(1);
-        expectedNotifications.Single().Recipients.Single(z => z.Type == RecipientRole.ReplyTo).Name.Should().Be("replayTo@luxoft.com");
+        Assert.Empty(errors);
+        var notification = Assert.Single(expectedNotifications);
+        Assert.Equal("replayTo@luxoft.com", Assert.Single(notification.Recipients, z => z.Type == RecipientRole.ReplyTo).Name);
     }
 
     [Fact]
@@ -50,13 +50,10 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         this.LogError(errors);
 
         // Assert
-        errors.Should().HaveCount(0);
-        expectedNotifications.Should().HaveCount(1);
-        expectedNotifications.Single().Message.Message.Should().BeEquivalentTo(message);
-        expectedNotifications.Single()
-                             .Recipients.Any(z => z.Type == RecipientRole.ReplyTo)
-                             .Should()
-                             .BeFalse();
+        Assert.Empty(errors);
+        var notification = Assert.Single(expectedNotifications);
+        Assert.Equal(message, notification.Message.Message);
+        Assert.False(notification.Recipients.Any(z => z.Type == RecipientRole.ReplyTo));
     }
 
     [Fact]
@@ -75,9 +72,8 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
                                         .ToList();
 
         // Assert
-        errors.Should().HaveCount(0);
-        expectedNotifications.Should().HaveCount(1);
-        expectedNotifications.Single().Message.Message.Should().BeEquivalentTo(message);
+        Assert.Empty(errors);
+        Assert.Equal(message, Assert.Single(expectedNotifications).Message.Message);
     }
 
     /// <summary>
@@ -100,8 +96,8 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         // Assert
         var notification = expectedNotifications.Single();
         var attachment = notification.Attachments.Single();
-        attachment.Content.Should().BeEquivalentTo(content);
-        attachment.Name.Should().Be(SampleSystem.Subscriptions.Metadata.Examples.Attachment.AttachmentSubscription.AttachmentName);
+        Assert.Equal(content, attachment.Content);
+        Assert.Equal(SampleSystem.Subscriptions.Metadata.Examples.Attachment.AttachmentSubscription.AttachmentName, attachment.Name);
     }
 
     /// <summary>
@@ -123,8 +119,8 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         // Assert
         var notification = expectedNotifications.Single();
         var attachment = notification.Attachments.Single();
-        Encoding.UTF8.GetString(attachment.Content).Should().BeEquivalentTo(content);
-        attachment.Name.Should().Be(SampleSystem.Subscriptions.Metadata.Examples.AttachmentTemplateEvaluator.AttachmentTemplateEvaluatorSubscription.AttachmentName);
+        Assert.Equal(content, Encoding.UTF8.GetString(attachment.Content));
+        Assert.Equal(SampleSystem.Subscriptions.Metadata.Examples.AttachmentTemplateEvaluator.AttachmentTemplateEvaluatorSubscription.AttachmentName, attachment.Name);
     }
 
     /// <summary>
@@ -147,8 +143,8 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         // Assert
         var notification = expectedNotifications.Single();
         var message = string.Format(messageTemplate, notification.Attachments[0].ContentId);
-        notification.Message.Message.Should().BeEquivalentTo(message);
-        notification.Attachments.Should().HaveCount(1);
+        Assert.Equal(message, notification.Message.Message);
+        Assert.Single(notification.Attachments);
     }
 
     [Fact]
@@ -163,7 +159,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
                                         .Where(n => n.From == "DateModelCreateSampleSystem@luxoft.com");
 
         // Assert
-        expectedNotifications.Should().HaveCount(1);
+        Assert.Single(expectedNotifications);
     }
 
     private Employee CreateEmployee()

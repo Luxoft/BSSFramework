@@ -63,7 +63,7 @@ public class EmployeeProjectionTests : TestBase
         var employee = result.Items.SingleOrDefault(e => e.Id == identity.Id);
 
         // Assert
-        employee.Should().NotBeNull();
+        Assert.NotNull(employee);
     }
 
     [Fact]
@@ -80,7 +80,7 @@ public class EmployeeProjectionTests : TestBase
         var logins = employees.Select(dto => dto.Login);
 
         // Assert
-        logins.Should().BeEquivalentTo(expected);
+        Assert.Equal(expected, logins);
     }
 
     [Fact]
@@ -95,8 +95,8 @@ public class EmployeeProjectionTests : TestBase
         // Assert
         var positions = employees.Select(dto => dto.PositionName);
         var logins = employees.Select(dto => dto.Login);
-        positions.All(x => x.HasValue).Should().BeFalse();
-        logins.All(x => x.HasValue).Should().BeTrue();
+        Assert.False(positions.All(x => x.HasValue));
+        Assert.True(logins.All(x => x.HasValue));
     }
 
     [Fact]
@@ -110,7 +110,7 @@ public class EmployeeProjectionTests : TestBase
         var positions = result.Select(dto => dto.PositionName);
 
         // Assert
-        positions.All(x => x.HasValue).Should().BeTrue();
+        Assert.True(positions.All(x => x.HasValue));
     }
 
     [Fact]
@@ -132,6 +132,6 @@ public class EmployeeProjectionTests : TestBase
                                .Items.Where(e => e.Login.ToString().StartsWith("PST_")).Select(e => e.Login);
 
         // Assert
-        actual.Should().BeEquivalentTo(expected);
+        Assert.Equal(expected, actual);
     }
 }

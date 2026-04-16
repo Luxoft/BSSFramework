@@ -19,6 +19,6 @@ public class UniqueGroupTests : TestBase
         var action = new Action(() => this.DataHelper.SaveRoleRoleDegreeLink(role, roleDegree));
 
         // Assert
-        action.Should().Throw<UniqueViolationConstraintDALException>().WithMessage("Role-Seniority link with same:'Role,Seniority' already exists");
+        Assert.Equal("Role-Seniority link with same:'Role,Seniority' already exists", Assert.Throws<UniqueViolationConstraintDALException>(action).Message);
     }
 }

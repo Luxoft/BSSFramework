@@ -17,7 +17,7 @@ public class TypeSerializationTests
                                   .ToArray();
 
         // Assert
-        wrongTypes.Should().HaveCount(0);
+        Assert.Empty(wrongTypes);
     }
 
     [Fact]
@@ -40,6 +40,6 @@ public class TypeSerializationTests
                                   .ToArray();
 
         // Assert
-        wrongTypes.Should().HaveCount(0);
+        Assert.Empty(wrongTypes);
     }
 }

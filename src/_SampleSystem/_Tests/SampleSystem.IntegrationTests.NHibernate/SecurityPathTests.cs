@@ -37,6 +37,6 @@ public class SecurityPathTests : TestBase
                                    });
 
         // Assert
-        result.Should().BeEquivalentTo(employeeIdentity);
+        Assert.Equal(employeeIdentity, result);
     }
 }

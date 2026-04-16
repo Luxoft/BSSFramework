@@ -3,7 +3,6 @@
 using CommonFramework;
 using CommonFramework.ExpressionEvaluate;
 
-using Framework.Application.Domain;
 using Framework.Core;
 using Framework.Database.Domain;
 using Framework.Database.NHibernate.DAL.Revisions;
@@ -22,7 +21,7 @@ using NHibernate.Linq;
 namespace Framework.Database.NHibernate;
 
 public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDomainObject, TIdent> asyncDal) : IDAL<TDomainObject, TIdent>
-    where TDomainObject : class, IIdentityObject<TIdent>
+    where TDomainObject : class
 {
     private static readonly LambdaCompileCache LambdaCompileCache = new(LambdaCompileMode.None);
 

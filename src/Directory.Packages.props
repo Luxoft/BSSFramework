@@ -2,7 +2,7 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
-    <IvAt>3.3.1.0</IvAt>
+    <IvAt>3.3.2.0</IvAt>
     <BssPlatform>[1.6.2]</BssPlatform>
   </PropertyGroup>
   <ItemGroup>

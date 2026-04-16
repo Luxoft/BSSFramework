@@ -10,6 +10,8 @@ using Framework.DependencyInjection;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 
+using Xunit;
+
 using NHibernate.Tool.hbm2ddl;
 
 using SampleSystem.DbGenerate.NHibernate.Migrations;
@@ -17,10 +19,9 @@ using SampleSystem.ServiceEnvironment.DependencyInjection;
 
 namespace SampleSystem.DbGenerate.NHibernate;
 
-[TestClass]
 public class UseSchemeUpdateTest
 {
-    [TestMethod]
+    [Fact]
     public void LocalDb()
     {
         const string connectionString =

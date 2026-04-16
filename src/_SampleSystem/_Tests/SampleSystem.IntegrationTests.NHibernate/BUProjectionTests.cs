@@ -15,8 +15,7 @@ public class BUProjectionTests : TestBase
     private const string TestEmployee1Login = "Test Employee 1";
     private const string TestEmployee2Login = "Test Employee 2";
 
-    [TestInitialize]
-    public void SetUp()
+    public BUProjectionTests()
     {
         var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 

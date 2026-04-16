@@ -10,6 +10,8 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
+using Xunit;
+
 using SecuritySystem.Notification;
 using SecuritySystem.Notification.Domain;
 
@@ -44,8 +46,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
 
     private string searchNotificationEmployeeLogin2 = nameof(searchNotificationEmployeeLogin2);
 
-    [TestInitialize]
-    public void Setup()
+    public GetNotificationPrincipalsByHierarchicalContextTests()
     {
         this.rootBusinessUnit = this.DataHelper.SaveBusinessUnit(id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID);
         this.child_1_0_BusinessUnit = this.DataHelper.SaveBusinessUnit(parent: this.rootBusinessUnit);
@@ -314,9 +315,9 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         result.Single().Should().Be(this.searchNotificationEmployeeLogin1);
     }
 
-    [TestMethod]
-    [DataRow(false)]
-    [DataRow(true)]
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
     public void GetPrincipals_DirectOrFirstParentOrEmpty_Test3_Searched(bool swapPriority)
     {
         // Arrange

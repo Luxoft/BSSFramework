@@ -32,8 +32,7 @@ public class AuthPerformanceTest : TestBase
 
     private static readonly int Size = 5;
 
-    [TestInitialize]
-    public void SetUp()
+    public AuthPerformanceTest()
     {
         this.fbuSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (BusinessUnitIdentityDTO?)this.DataHelper.SaveBusinessUnit())];
 

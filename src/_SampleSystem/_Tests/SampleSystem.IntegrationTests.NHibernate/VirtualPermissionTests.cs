@@ -14,8 +14,7 @@ public class VirtualPermissionTests : TestBase
     private (string UserLogin, Guid BuId, Guid EmployeeId)[] Datas;
 
 
-    [TestInitialize]
-    public void SetUp() =>
+    public VirtualPermissionTests() =>
         this.Datas = new[] { "testEmployeeLogin", "otherTestEmployeeLogin" }
                      .Select(
                          userLogin =>

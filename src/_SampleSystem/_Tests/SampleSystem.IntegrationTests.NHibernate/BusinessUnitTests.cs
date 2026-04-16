@@ -27,8 +27,7 @@ public class BusinessUnitTests : TestBase
 
     private const int ExistedBusinessUnitsInDatabase = 3;
 
-    [TestInitialize]
-    public void SetUp()
+    public BusinessUnitTests()
     {
         var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 

@@ -18,8 +18,7 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests.__Support;
 
-[TestClass]
-public class InitializeAndCleanup
+public static class InitializeAndCleanup
 {
     public static readonly TestEnvironment TestEnvironment = new TestEnvironmentBuilder()
                                                              .WithDefaultConfiguration($"{nameof(SampleSystem)}_")
@@ -27,13 +26,19 @@ public class InitializeAndCleanup
                                                              .WithServiceProviderBuildFunc(GetServices)
                                                              .Build();
 
-    [AssemblyInitialize]
-    public static async Task EnvironmentInitialize(TestContext testContext) =>
-        await TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentInitializeAsync();
+    private static readonly Lazy<Task> InitializationTask = new(() => TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentInitializeAsync());
 
-    [AssemblyCleanup]
-    public static async Task EnvironmentCleanup() =>
-        await TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentCleanupAsync();
+    private static int cleanupRegistrationState;
+
+    public static void EnsureInitialized()
+    {
+        InitializationTask.Value.GetAwaiter().GetResult();
+
+        if (Interlocked.Exchange(ref cleanupRegistrationState, 1) == 0)
+        {
+            AppDomain.CurrentDomain.ProcessExit += (_, _) => TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentCleanupAsync().GetAwaiter().GetResult();
+        }
+    }
 
     private static IServiceCollection GetServices(IConfiguration configuration, IServiceCollection services) =>
         services

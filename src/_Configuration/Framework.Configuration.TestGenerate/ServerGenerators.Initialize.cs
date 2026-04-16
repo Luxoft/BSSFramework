@@ -2,9 +2,14 @@
 
 namespace Framework.Configuration.TestGenerate;
 
-public partial class ServerGenerators(ConfigurationGenerationEnvironment environment) : GeneratorsBase
+public partial class ServerGenerators : GeneratorsBase
 {
-    protected readonly ConfigurationGenerationEnvironment Environment = environment ?? throw new ArgumentNullException(nameof(environment));
+    internal ServerGenerators(ConfigurationGenerationEnvironment environment)
+    {
+        this.Environment = environment ?? throw new ArgumentNullException(nameof(environment));
+    }
+
+    protected readonly ConfigurationGenerationEnvironment Environment;
 
     public ServerGenerators()
             : this(ConfigurationGenerationEnvironment.Default)

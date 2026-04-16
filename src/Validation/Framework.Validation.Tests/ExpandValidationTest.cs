@@ -1,18 +1,13 @@
-﻿using FluentAssertions;
-
-using Framework.Validation.Attributes;
+﻿using Framework.Validation.Attributes;
 using Framework.Validation.Map;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using NUnit.Framework;
-
 namespace Framework.Validation.Tests;
 
-[TestFixture]
 public class ExpandValidationTest
 {
-    [Test]
+    [Fact]
     public void ExpandValidation_CheckCompositeProperty_ErrorContainsFullPropertyPath()
     {
         // Arrange
@@ -30,8 +25,8 @@ public class ExpandValidationTest
         var result = validator.GetValidationResult(source);
 
         // Assert
-        result.Errors.Should().HaveCount(1);
-        result.Errors[0].Message.Should().Be("The field CompositeProp.SomeProperty of type TestRootClass must be initialized");
+        Assert.Single(result.Errors);
+        Assert.Equal("The field CompositeProp.SomeProperty of type TestRootClass must be initialized", result.Errors[0].Message);
     }
 }
 

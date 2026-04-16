@@ -16,8 +16,7 @@ public class CurrentUserManyRelativePathTests : TestBase
 
     private Guid testObj;
 
-    [TestInitialize]
-    public void Setup()
+    public CurrentUserManyRelativePathTests()
     {
         this.testEmployeeIdents =
 

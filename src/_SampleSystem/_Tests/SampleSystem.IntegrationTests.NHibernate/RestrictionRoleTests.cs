@@ -45,7 +45,7 @@ public class RestrictionRoleTests : TestBase
                          .Select(v => v.Identity);
 
         // Assert
-        result.Should().BeEquivalentTo([testObjects[0], testObjects[2]]);
+        result.Should().BeEquivalentTo(new[] { testObjects[0], testObjects[2] });
     }
 
     [TestMethod]
@@ -126,7 +126,7 @@ public class RestrictionRoleTests : TestBase
             });
 
         // Assert
-        result.Should().BeEquivalentTo([testObjects[0], testObjects[2]]);
+        result.Should().BeEquivalentTo(new[] { testObjects[0], testObjects[2] });
     }
 
     [TestMethod]
@@ -160,7 +160,7 @@ public class RestrictionRoleTests : TestBase
             });
 
         // Assert
-        result.Should().BeEquivalentTo([testObjects[0], testObjects[2]]);
+        result.Should().BeEquivalentTo(new[] { testObjects[0], testObjects[2] });
     }
 
     [TestMethod]

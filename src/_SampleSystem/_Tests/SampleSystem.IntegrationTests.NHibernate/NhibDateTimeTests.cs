@@ -11,11 +11,9 @@ public class NhibDateTimeTests : TestBase
 {
     private DateTime prevDateTime;
 
-    [TestInitialize]
-    public void SetUp() => this.prevDateTime = this.TimeProvider.GetLocalNow().DateTime;
+    public NhibDateTimeTests() => this.prevDateTime = this.TimeProvider.GetLocalNow().DateTime;
 
-    [TestCleanup]
-    public void TestCleanup() => this.SetCurrentDateTime(this.prevDateTime);
+    protected override void BeforeCleanup() => this.SetCurrentDateTime(this.prevDateTime);
 
     [TestMethod]
     public void CreateObject_CreatedDateOverride()

@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
     <ProjectReference Include="..\Framework.Database.NHibernate.Runtime\Framework.Database.NHibernate.Runtime.csproj" />
 
     <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Abstractions\Framework.Infrastructure.Abstractions.csproj" />

@@ -1,7 +1,5 @@
 ﻿using System.Xml.Linq;
 
-using Xunit;
-
 namespace SampleSystem.CheckGenTests;
 
 public class CsprojValidationTests

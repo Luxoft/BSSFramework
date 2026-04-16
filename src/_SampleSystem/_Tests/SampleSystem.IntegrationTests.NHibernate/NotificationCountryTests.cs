@@ -6,8 +6,6 @@ using SampleSystem.Domain.Directories;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class NotificationCountryTests : TestBase

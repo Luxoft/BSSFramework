@@ -10,8 +10,6 @@ using SampleSystem.Security;
 
 using SecuritySystem.AccessDenied;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class WrongSecurityMessageTests : TestBase

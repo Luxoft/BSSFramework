@@ -8,8 +8,6 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 using SecuritySystem;
 using SampleSystem.WebApiCore.Controllers.Main;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class PrincipalTests : TestBase

@@ -1,7 +1,5 @@
 ﻿using SampleSystem.IntegrationTests.__Support.TestData;
 
-using Xunit;
-
 using ValidationException = Framework.Validation.ValidationException;
 
 namespace SampleSystem.IntegrationTests;

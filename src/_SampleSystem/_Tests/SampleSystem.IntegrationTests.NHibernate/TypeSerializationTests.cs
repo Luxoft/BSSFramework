@@ -3,8 +3,6 @@ using System.Runtime.Serialization;
 
 using Framework.Core;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class TypeSerializationTests

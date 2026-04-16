@@ -7,8 +7,6 @@ using SecuritySystem.UserSource;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using Xunit;
-
 using SampleSystem.Domain;
 using SampleSystem.Domain.Employee;
 using SampleSystem.IntegrationTests.__Support.TestData;

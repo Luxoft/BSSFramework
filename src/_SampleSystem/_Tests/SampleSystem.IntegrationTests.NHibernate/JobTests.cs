@@ -6,8 +6,6 @@ using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.ServiceEnvironment.Jobs;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class JobTests : TestBase

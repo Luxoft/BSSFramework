@@ -6,8 +6,6 @@ using Framework.Database.NHibernate.Mapping;
 using SampleSystem.CodeGenerate.Configurations;
 using SampleSystem.Generated.DAL.NHibernate;
 
-using Xunit;
-
 namespace SampleSystem.DbGenerate.NHibernate;
 
 public class DbGeneratorTest

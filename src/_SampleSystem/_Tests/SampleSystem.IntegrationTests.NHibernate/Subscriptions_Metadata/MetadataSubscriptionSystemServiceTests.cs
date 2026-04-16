@@ -7,8 +7,6 @@ using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Models.Custom;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests.Subscriptions_Metadata;
 
 public sealed class MetadataSubscriptionSystemServiceTests : TestBase

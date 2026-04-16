@@ -1,8 +1,6 @@
 ﻿using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class DefaultFieldsTests

@@ -14,8 +14,6 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class ExtraQueryableSecurityPathTests : TestBase

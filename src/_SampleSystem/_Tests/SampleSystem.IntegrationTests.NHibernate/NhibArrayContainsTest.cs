@@ -10,8 +10,6 @@ using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Enums;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class NhibArrayContainsTest : TestBase

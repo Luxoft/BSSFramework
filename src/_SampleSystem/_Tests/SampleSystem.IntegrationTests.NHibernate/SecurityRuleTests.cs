@@ -10,8 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.Domain.Employee;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class SecurityRuleTests : TestBase

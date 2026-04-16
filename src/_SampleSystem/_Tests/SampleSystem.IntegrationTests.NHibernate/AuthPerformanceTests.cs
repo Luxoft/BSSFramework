@@ -10,8 +10,6 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 using SecuritySystem;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class AuthPerformanceTests : TestBase

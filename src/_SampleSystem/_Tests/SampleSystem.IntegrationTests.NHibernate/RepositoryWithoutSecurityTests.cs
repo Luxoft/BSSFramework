@@ -4,8 +4,6 @@ using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class RepositoryWithoutSecurityTests : TestBase

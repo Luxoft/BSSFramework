@@ -7,8 +7,6 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Integration;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class IntegrationVersionTest : TestBase

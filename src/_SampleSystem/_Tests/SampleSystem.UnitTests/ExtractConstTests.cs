@@ -5,8 +5,6 @@ using CommonFramework;
 using Framework.Core;
 using Framework.Database.Visitors;
 
-using Xunit;
-
 namespace SampleSystem.UnitTests;
 
 public class ExtractConstTests

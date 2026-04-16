@@ -6,8 +6,6 @@ using Framework.CodeGeneration.WebApiGenerator.SingleController;
 
 using Framework.FileGeneration;
 
-using Xunit;
-
 namespace Framework.Configuration.TestGenerate;
 
 public partial class ServerGenerators

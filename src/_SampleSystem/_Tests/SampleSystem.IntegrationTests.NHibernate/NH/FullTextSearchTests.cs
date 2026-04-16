@@ -2,8 +2,6 @@
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests.NH;
 
 public class FullTextSearchTests : TestBase

@@ -6,8 +6,6 @@ using SampleSystem.Domain.Inline;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class BUProjectionTests : TestBase

@@ -10,8 +10,6 @@ using Framework.DependencyInjection;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 
-using Xunit;
-
 using NHibernate.Tool.hbm2ddl;
 
 using SampleSystem.DbGenerate.NHibernate.Migrations;

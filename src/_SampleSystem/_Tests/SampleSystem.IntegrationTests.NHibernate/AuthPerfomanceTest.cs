@@ -15,8 +15,6 @@ using SampleSystem.Security;
 
 using SecuritySystem;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class AuthPerformanceTest : TestBase

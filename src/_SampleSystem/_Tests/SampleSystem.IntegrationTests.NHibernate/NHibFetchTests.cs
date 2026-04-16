@@ -5,8 +5,6 @@ using GenericQueryable;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class NHibFetchTests : TestBase

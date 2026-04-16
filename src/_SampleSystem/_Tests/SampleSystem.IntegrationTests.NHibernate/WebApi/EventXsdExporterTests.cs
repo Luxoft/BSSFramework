@@ -1,7 +1,5 @@
 ﻿using Framework.Infrastructure.Integration;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests.WebApi;
 
 public class EventXsdExporterTests

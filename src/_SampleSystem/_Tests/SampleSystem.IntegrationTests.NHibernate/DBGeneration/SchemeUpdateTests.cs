@@ -1,8 +1,6 @@
 ﻿using SampleSystem.DbGenerate.NHibernate;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests.DBGeneration;
 
 public class SchemeUpdateTests : TestBase

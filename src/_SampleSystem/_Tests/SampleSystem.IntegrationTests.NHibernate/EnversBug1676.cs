@@ -3,8 +3,6 @@
 using SampleSystem.Domain.EnversBug1676;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class EnversBug1676 : TestBase

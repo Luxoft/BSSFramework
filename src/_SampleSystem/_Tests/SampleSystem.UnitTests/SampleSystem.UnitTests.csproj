@@ -17,4 +17,8 @@
     <ProjectReference Include="..\..\..\Database\Framework.Database.Runtime\Framework.Database.Runtime.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
 </Project>

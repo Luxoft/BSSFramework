@@ -7,8 +7,6 @@ using SecuritySystem;
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class CurrentUserManyRelativePathTests : TestBase

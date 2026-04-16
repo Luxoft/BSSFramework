@@ -28,5 +28,8 @@
     <ProjectReference Include="..\..\SampleSystem.Validation\SampleSystem.Validation.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
 
 </Project>

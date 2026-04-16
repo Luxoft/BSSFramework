@@ -2,8 +2,6 @@
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
-using Xunit;
-
 namespace FluentAssertions;
 
 public static class AssertionExtensions

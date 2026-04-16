@@ -5,8 +5,6 @@ using SampleSystem.Domain.Directories;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class SubscriptionCustomNotPersistentModelTests : TestBase

@@ -1,7 +1,5 @@
 ﻿using SampleSystem.IntegrationTests.__Support.TestData;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests.WebApi;
 
 public class WebApiTests : TestBase

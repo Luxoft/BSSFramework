@@ -1,7 +1,5 @@
 ﻿using Framework.FileGeneration;
 
-using Xunit;
-
 namespace SampleSystem.CheckGenTests;
 
 public class GenerationTests

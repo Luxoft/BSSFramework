@@ -5,8 +5,6 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class ManualAndLegacyProjectionSecurityTests : TestBase

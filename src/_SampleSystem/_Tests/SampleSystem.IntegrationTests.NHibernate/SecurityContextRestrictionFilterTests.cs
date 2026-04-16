@@ -9,8 +9,6 @@ using SampleSystem.Security;
 using SecuritySystem;
 using SecuritySystem.Validation;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class SecurityContextRestrictionFilterTests : TestBase

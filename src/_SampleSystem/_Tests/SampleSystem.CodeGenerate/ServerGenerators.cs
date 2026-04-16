@@ -22,8 +22,6 @@ using Microsoft.AspNetCore.Mvc;
 using SampleSystem.CodeGenerate.Configurations.BLLCore;
 using SampleSystem.CodeGenerate.Configurations.DTO.Server;
 
-using Xunit;
-
 namespace SampleSystem.CodeGenerate;
 
 public partial class ServerGenerators

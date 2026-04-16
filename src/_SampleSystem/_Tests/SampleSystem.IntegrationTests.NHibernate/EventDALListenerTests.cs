@@ -4,8 +4,6 @@ using Framework.Database;
 using SampleSystem.EventMetadata;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class EventDALListenerTests : TestBase

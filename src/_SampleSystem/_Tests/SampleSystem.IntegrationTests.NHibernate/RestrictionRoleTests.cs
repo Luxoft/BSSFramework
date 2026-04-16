@@ -12,8 +12,6 @@ using SampleSystem.WebApiCore.Controllers.Main;
 using SecuritySystem;
 using SecuritySystem.Validation;
 
-using Xunit;
-
 namespace SampleSystem.IntegrationTests;
 
 public class RestrictionRoleTests : TestBase

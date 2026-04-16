@@ -15,12 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
+    <ProjectReference Include="..\Framework.Database.Runtime\Framework.Database.Runtime.csproj" />
+    <ProjectReference Include="..\Framework.Tracking\Framework.Tracking.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framework.Database.Runtime\Framework.Database.Runtime.csproj" />
-    <ProjectReference Include="..\Framework.Tracking\Framework.Tracking.csproj" />
+    <Using Include="Xunit" />
   </ItemGroup>
 
 </Project>

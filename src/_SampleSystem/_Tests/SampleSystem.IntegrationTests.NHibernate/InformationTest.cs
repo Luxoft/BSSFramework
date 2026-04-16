@@ -5,12 +5,13 @@ using SampleSystem.Domain.Employee;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class InformationTest : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void CreateAndRemoveInformation_ContainsIntegrationEvents()
     {
         // Arrange

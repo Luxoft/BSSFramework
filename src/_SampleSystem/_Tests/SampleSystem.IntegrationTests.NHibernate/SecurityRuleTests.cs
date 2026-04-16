@@ -10,12 +10,13 @@ using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.Domain.Employee;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class SecurityRuleTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public async Task ApplyExceptRule_CurrentUserExcepted()
     {
         // Arrange
@@ -53,7 +54,7 @@ public class SecurityRuleTests : TestBase
         loadedObjects.Should().BeEquivalentTo(new[] { testObjectIdents[0] });
     }
 
-    [TestMethod]
+    [Fact]
     public void ApplyOverrideFaultMessageRule_FaultMessageChanged()
     {
         // Arrange

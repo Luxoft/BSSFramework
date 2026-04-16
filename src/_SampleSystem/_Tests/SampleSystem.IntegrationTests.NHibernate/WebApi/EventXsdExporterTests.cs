@@ -1,11 +1,12 @@
 ﻿using Framework.Infrastructure.Integration;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests.WebApi;
 
-[TestClass]
 public class EventXsdExporterTests
 {
-    [TestMethod]
+    [Fact]
     public void WebApi_CallMethod()
     {
         // Arrange

@@ -8,12 +8,13 @@ using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Projections;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class LegalEntityProjectionTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void LegalEntityProjectionNestedMappingTest()
     {
         // Arrange

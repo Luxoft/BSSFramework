@@ -5,12 +5,13 @@ using Framework.Infrastructure.JsonConverter;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class JsonConverterTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void DateTimeConverted_ResultCorrected()
     {
         //Arrange
@@ -27,7 +28,7 @@ public class JsonConverterTests : TestBase
     }
 
 
-    [TestMethod]
+    [Fact]
     public void PeriodConverted_ResultCorrected()
     {
         //Arrange
@@ -43,7 +44,7 @@ public class JsonConverterTests : TestBase
         testPeriod.Should().Be(restored);
     }
 
-    [TestMethod]
+    [Fact]
     public void PeriodWithNullConverted_ResultCorrected()
     {
         //Arrange

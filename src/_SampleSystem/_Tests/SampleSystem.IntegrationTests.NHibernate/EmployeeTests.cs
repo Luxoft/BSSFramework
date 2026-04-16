@@ -19,12 +19,13 @@ using SampleSystem.Domain.Employee;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class EmployeeTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void GetEmployeeFromDB_FilterByAge_ReturnNotNulRecords()
     {
         /*
@@ -48,7 +49,7 @@ public class EmployeeTests : TestBase
         actual.Select(z => z.Age).All(z => z == 10).Should().BeTrue();
     }
 
-    [TestMethod]
+    [Fact]
     public void AddNewEmployee_CheckEmployeeSaved()
     {
         // Arrange
@@ -62,7 +63,7 @@ public class EmployeeTests : TestBase
         employees.Should().Contain(e => e.Id == employeeIdentity.Id);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetEmployeeByOData_ContainsForNumberProperty_OnlyRequestedDataInTheResult()
     {
         // Arrange
@@ -87,7 +88,7 @@ public class EmployeeTests : TestBase
         pins.Should().NotContain(456);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetEmployeeByOData_TakeTestWithoutSorting_OnlyRequestedDataInTheResult()
     {
         // Arrange
@@ -128,7 +129,7 @@ public class EmployeeTests : TestBase
         pins.Should().NotContain(secondPin);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetEmployeeByOData_TakeAndSkipTestWithoutSorting_OnlyRequestedDataInTheResult()
     {
         // Arrange
@@ -169,7 +170,7 @@ public class EmployeeTests : TestBase
         pins.Should().NotContain(firstPin);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetEmployeeByOData_TakeAndSkipTestWithSorting_OnlyRequestedDataInTheResult()
     {
         // Arrange
@@ -194,7 +195,7 @@ public class EmployeeTests : TestBase
         pins.Should().NotContain(456);
     }
 
-    [TestMethod]
+    [Fact]
     public void ForceDomainTypeEvent_ForceEmployeeSaveEvent_ContainsEventEmployee()
     {
         // Arrange
@@ -222,7 +223,7 @@ public class EmployeeTests : TestBase
             .ContainSingle(dto => dto.EmployeeCustomEventModel.Id == employeeIdentity.Id);
     }
 
-    [TestMethod]
+    [Fact]
     public void ChangeEmployee_ProcessModifications_ContainsNotification()
     {
         // Arrange
@@ -258,7 +259,7 @@ public class EmployeeTests : TestBase
                    && dto.TechnicalInformation.ContextObjectId == employeeIdentity.Id);
     }
 
-    [TestMethod]
+    [Fact]
     public void ChangeEmployee_ProcessModifications_ChangedUnprocessedCount()
     {
         // Arrange
@@ -292,7 +293,7 @@ public class EmployeeTests : TestBase
         postProcessedNotificationState.UnprocessedCount.Should().BeGreaterThanOrEqualTo(1);
     }
 
-    [TestMethod]
+    [Fact]
     public void ChangeEmployee_ContainsAribaEvent()
     {
         // Arrange
@@ -311,8 +312,7 @@ public class EmployeeTests : TestBase
         this.GetIntegrationEvents<EmployeeSaveEventDTO>("ariba").Should().ContainSingle(dto => dto.Employee.Id == employeeIdentity.Id);
     }
 
-    [TestMethod]
-    [Ignore]
+    [Fact(Skip = "Skip")]
     public void EventListenerTest() =>
         this.Evaluate(
             DBSessionMode.Write,
@@ -324,7 +324,7 @@ public class EmployeeTests : TestBase
                 return;
             });
 
-    [TestMethod]
+    [Fact]
     public void ChangeEmployeeWithoutVersionInfo_RaisedStateException()
     {
         // Arrange
@@ -340,7 +340,7 @@ public class EmployeeTests : TestBase
         call.Should().Throw<Exception>().WithMessage($"Object '{nameof(Employee)}' was updated or deleted by another transaction");
     }
 
-    [TestMethod]
+    [Fact]
     public void LoadEmployeeCellPhoneByDependencySecurity_ObjectLoaded()
     {
         // Arrange

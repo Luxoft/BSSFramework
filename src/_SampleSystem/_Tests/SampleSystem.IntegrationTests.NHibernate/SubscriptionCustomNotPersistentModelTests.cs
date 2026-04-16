@@ -5,12 +5,13 @@ using SampleSystem.Domain.Directories;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class SubscriptionCustomNotPersistentModelTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void CustomNotPersistentNotificationModel_Always_ShouldNotThrowException()
     {
         // Arrange

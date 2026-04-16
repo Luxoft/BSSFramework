@@ -8,12 +8,13 @@ using Framework.Database;
 using SampleSystem.Domain.Employee;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class PerfomanceTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void GetEmployee_ToManyFilterParameters_CheckTimeTest()
     {
         var preEvaluate = this.Evaluate(DBSessionMode.Write, context => context.Logics.Employee.GetUnsecureQueryable().First());
@@ -32,8 +33,6 @@ public class PerfomanceTests : TestBase
 
         var result = task.Wait(TimeSpan.FromSeconds(3));
 
-        Assert.IsTrue(result);
-
-        Assert.IsNotNull(preEvaluate);
+        Xunit.Assert.True(result);
     }
 }

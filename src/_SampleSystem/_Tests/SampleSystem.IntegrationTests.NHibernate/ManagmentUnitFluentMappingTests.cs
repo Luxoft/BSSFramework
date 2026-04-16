@@ -5,12 +5,13 @@ using Framework.Database;
 using SampleSystem.Domain.NhFluentMapping;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class ManagmentUnitFluentMappingTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void CheckBusinessUnitSecondaryAccess_HasAccess()
     {
         // Arrange

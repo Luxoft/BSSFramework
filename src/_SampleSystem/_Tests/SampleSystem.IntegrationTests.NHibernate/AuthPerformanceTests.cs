@@ -10,9 +10,10 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 using SecuritySystem;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class AuthPerformanceTests : TestBase
 {
     private const string TestUser = "TestUser";
@@ -89,7 +90,7 @@ public class AuthPerformanceTests : TestBase
                                             });
     }
 
-    [TestMethod]
+    [Fact]
     public void CreateObjectsWithPermissions_HasAccessToAllObjects()
     {
         // Arrange

@@ -7,12 +7,13 @@ using SecuritySystem.UserSource;
 using SampleSystem.Domain.Employee;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class CurrentUserSourceTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void TryGetCurrentUserWithEmployee_CurrentUserResolved()
     {
         // Arrange
@@ -34,7 +35,7 @@ public class CurrentUserSourceTests : TestBase
         employeeId.Should().Be(result);
     }
 
-    [TestMethod]
+    [Fact]
     public void TryGetCurrentUserWithoutEmployee_ExceptionRaised()
     {
         // Arrange

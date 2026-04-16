@@ -3,12 +3,13 @@ using System.Runtime.Serialization;
 
 using Framework.Core;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class TypeSerializationTests
 {
-    [TestMethod]
+    [Fact]
     public void GetTypesWithFieldSerialization_TypesNotExists()
     {
         // Act
@@ -21,7 +22,7 @@ public class TypeSerializationTests
         wrongTypes.Should().HaveCount(0);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetDataContractTypesWithMissedPropertyDataMemberDeclaration_TypesNotExists()
     {
         // Act

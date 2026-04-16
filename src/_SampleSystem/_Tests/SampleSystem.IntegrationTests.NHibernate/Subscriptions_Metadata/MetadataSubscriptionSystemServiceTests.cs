@@ -7,14 +7,15 @@ using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Models.Custom;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests.Subscriptions_Metadata;
 
-[TestClass]
 public sealed class MetadataSubscriptionSystemServiceTests : TestBase
 {
     public MetadataSubscriptionSystemServiceTests() => this.GetNotifications().Clear();
 
-    [TestMethod]
+    [Fact]
     public void SubscriptionFromMetadataShouldBeSent()
     {
         // Arrange
@@ -33,7 +34,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         expectedNotifications.Single().Recipients.Single(z => z.Type == RecipientRole.ReplyTo).Name.Should().Be("replayTo@luxoft.com");
     }
 
-    [TestMethod]
+    [Fact]
     public void RazorTemplateImpl_SubscriptionFromMetadataShouldBeSent()
     {
         // Arrange
@@ -60,7 +61,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
                              .BeFalse();
     }
 
-    [TestMethod]
+    [Fact]
     public void LocalRazorTemplate_SubscriptionFromMetadataShouldBeSent()
     {
         // Arrange
@@ -85,7 +86,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
     /// IADFRAME-1525 Сделать пример использования аттачей в CodeFirst подписках
     /// </summary>
     /// <remarks>Создать тест: подписка с аттачем, который добавляется в нотификацию</remarks>
-    [TestMethod]
+    [Fact]
     public void AttachTest()
     {
         // Arrange
@@ -109,7 +110,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
     /// IADFRAME-1525 Сделать пример использования аттачей в CodeFirst подписках
     /// </summary>
     /// <remarks>Создать тест: подписка с аттачем который провернут через шаблонизатор (TemplateEvaluatorFactory) просто текст, который добавляется в нотификацию</remarks>
-    [TestMethod]
+    [Fact]
     public void AttachTemplateEvaluatorTest()
     {
         // Arrange
@@ -132,7 +133,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
     /// IADFRAME-1525 Сделать пример использования аттачей в CodeFirst подписках
     /// </summary>
     /// <remarks>Создать тест: подписка с inline аттачем (ContentId), который добавляется в нотификацию</remarks>
-    [TestMethod]
+    [Fact]
     public void AttachInlinedTest()
     {
         // Arrange
@@ -152,7 +153,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         notification.Attachments.Should().HaveCount(1);
     }
 
-    [TestMethod]
+    [Fact]
     public void DateModelCreateSubscriptionTest()
     {
         // Arrange

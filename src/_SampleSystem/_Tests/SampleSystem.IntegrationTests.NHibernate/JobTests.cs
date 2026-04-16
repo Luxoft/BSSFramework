@@ -6,12 +6,13 @@ using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.ServiceEnvironment.Jobs;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class JobTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public async Task InvokeJobs_JobObjectsCreated()
     {
         // Arrange

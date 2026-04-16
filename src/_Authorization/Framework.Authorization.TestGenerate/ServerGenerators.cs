@@ -5,12 +5,13 @@ using Framework.CodeGeneration.Extensions;
 using Framework.CodeGeneration.WebApiGenerator.SingleController;
 using Framework.FileGeneration;
 
+using Xunit;
+
 namespace Framework.Authorization.TestGenerate;
 
-[TestClass]
 public partial class ServerGenerators
 {
-    [TestMethod]
+    [Fact]
     public void GenerateMainTest() => this.GenerateMain().ToList();
 
     public IEnumerable<GeneratedFileInfo> GenerateMain() =>
@@ -19,7 +20,7 @@ public partial class ServerGenerators
             .Concat(this.GenerateServerDTO())
             .Concat(this.GenerateMainController());
 
-    [TestMethod]
+    [Fact]
     public void GenerateBLLCoreTest() => this.GenerateBLLCore().ToList();
 
     private IEnumerable<GeneratedFileInfo> GenerateBLLCore()
@@ -29,7 +30,7 @@ public partial class ServerGenerators
         yield return generator.GenerateSingle(this.GeneratePath + @"/Framework.Authorization.BLL.Core/_Generated", "Authorization.Generated", this.CheckOutService);
     }
 
-    [TestMethod]
+    [Fact]
     public void GenerateBLLTest() => this.GenerateBLL().ToList();
 
     private IEnumerable<GeneratedFileInfo> GenerateBLL()
@@ -45,7 +46,7 @@ public partial class ServerGenerators
             this.CheckOutService);
     }
 
-    [TestMethod]
+    [Fact]
     public void GenerateServerDTOTest() => this.GenerateServerDTO().ToList();
 
     private IEnumerable<GeneratedFileInfo> GenerateServerDTO()
@@ -58,7 +59,7 @@ public partial class ServerGenerators
                                               this.CheckOutService);
     }
 
-    [TestMethod]
+    [Fact]
     public void GenerateMainControllerTest() => this.GenerateMainController().ToList();
 
 

@@ -14,9 +14,10 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class ExtraQueryableSecurityPathTests : TestBase
 {
     private EmployeeIdentityDTO TestEmployee;
@@ -58,7 +59,7 @@ public class ExtraQueryableSecurityPathTests : TestBase
         this.TestEmp3 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu2Ident, location: this.loc2Ident);
     }
 
-    [TestMethod]
+    [Fact]
     public void TestExtraQueryableSecurityPath_LoadedWithExtraQueryableFilter()
     {
         // Arrange

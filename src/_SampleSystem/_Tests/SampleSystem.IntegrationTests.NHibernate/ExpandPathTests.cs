@@ -4,12 +4,13 @@ using Framework.Database;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class ExpandPathTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void LiftToNullableContainsExt_ShouldNotThrowException()
     {
         // Arrange
@@ -27,7 +28,7 @@ public class ExpandPathTests : TestBase
         action.Should().NotThrow();
     }
 
-    [TestMethod]
+    [Fact]
     public void LiftToNullableBinaryExpression_ShouldNotThrowException()
     {
         // Arrange
@@ -44,7 +45,7 @@ public class ExpandPathTests : TestBase
         action.Should().NotThrow();
     }
 
-    [TestMethod]
+    [Fact]
     public void LiftToNullablePeriodIntersect_ShouldNotThrowException()
     {
         // Arrange
@@ -66,7 +67,7 @@ public class ExpandPathTests : TestBase
     }
 
 
-    [TestMethod]
+    [Fact]
     public void LiftToNullablePeriodContains_ShouldNotThrowException()
     {
         // Arrange

@@ -13,11 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\..\__SolutionItems\Testing\MSTestCompatibility.cs" Link="Testing\MSTestCompatibility.cs" />
     <ProjectReference Include="..\..\..\CodeGeneration\Framework.CodeGeneration.ProjectionGenerator\Framework.CodeGeneration.ProjectionGenerator.csproj" />
     <ProjectReference Include="..\..\..\CodeGeneration\Framework.CodeGeneration.WebApiGenerator\Framework.CodeGeneration.WebApiGenerator.csproj" />
     <ProjectReference Include="..\..\..\CodeGeneration\Framework.CodeGeneration.BLLGenerator\Framework.CodeGeneration.BLLGenerator.csproj" />

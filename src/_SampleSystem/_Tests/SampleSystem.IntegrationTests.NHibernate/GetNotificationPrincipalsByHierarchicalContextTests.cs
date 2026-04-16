@@ -17,7 +17,6 @@ using SecuritySystem.Notification.Domain;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
 {
     private BusinessUnitIdentityDTO rootBusinessUnit;
@@ -63,7 +62,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         this.rootEmployee = this.DataHelper.SaveEmployee();
     }
 
-    [TestMethod]
+    [Fact]
     public void GetPrincipals_Direct_Test1_Searched()
     {
         // Arrange
@@ -104,7 +103,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         result.Single().Should().Be(this.searchNotificationEmployeeLogin1);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetPrincipals_Direct_Test2_Missed()
     {
         // Arrange
@@ -132,7 +131,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         result.Length.Should().Be(0);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetPrincipals_Direct_Test3_Missed()
     {
         // Arrange
@@ -166,7 +165,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         result.Length.Should().Be(0);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetPrincipals_Direct_Test4_Searched()
     {
         // Arrange
@@ -206,7 +205,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         result.Length.Should().Be(1);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetPrincipals_DirectOrEmpty_Test1_Searched()
     {
         // Arrange
@@ -241,7 +240,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
     }
 
 
-    [TestMethod]
+    [Fact]
     public void GetPrincipals_DirectOrFirstParentOrEmpty_Test1_Searched()
     {
         // Arrange
@@ -277,7 +276,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         result.Single().Should().Be(this.searchNotificationEmployeeLogin1);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetPrincipals_DirectOrFirstParentOrEmpty_Test2_Searched()
     {
         // Arrange
@@ -358,7 +357,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         result.Single().Should().Be(swapPriority ? this.searchNotificationEmployeeLogin2 : this.searchNotificationEmployeeLogin1);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetPrincipals_All_Test1_Searched()
     {
         // Arrange

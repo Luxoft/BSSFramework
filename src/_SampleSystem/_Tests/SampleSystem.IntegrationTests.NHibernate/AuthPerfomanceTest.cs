@@ -15,9 +15,10 @@ using SampleSystem.Security;
 
 using SecuritySystem;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class AuthPerformanceTest : TestBase
 {
     private IReadOnlyCollection<BusinessUnitIdentityDTO?> fbuSource;
@@ -47,7 +48,7 @@ public class AuthPerformanceTest : TestBase
         this.GeneratePermission();
     }
 
-    [TestMethod]
+    [Fact]
     public async Task LoadGenerateAuthPerformanceObjects_CountEquals()
     {
         // Arrange

@@ -4,12 +4,13 @@ using Framework.Database;
 using SampleSystem.EventMetadata;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class EventDALListenerTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public async Task Employee_SendCustomEventOperation_ExceptionNotThrow()
     {
         //Arrange

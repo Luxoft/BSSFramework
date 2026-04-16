@@ -1,11 +1,12 @@
 ﻿using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests.WebApi;
 
-[TestClass]
 public class WebApiTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void WebApi_CallMethod()
     {
         // Arrange

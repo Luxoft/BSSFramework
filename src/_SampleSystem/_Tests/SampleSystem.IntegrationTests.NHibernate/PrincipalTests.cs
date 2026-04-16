@@ -8,12 +8,13 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 using SecuritySystem;
 using SampleSystem.WebApiCore.Controllers.Main;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class PrincipalTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void CreatePrincipal_SaveEventExist()
     {
         // Arrange
@@ -26,7 +27,7 @@ public class PrincipalTests : TestBase
         this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
     }
 
-    [TestMethod]
+    [Fact]
     public void CreatePrincipal_ForceEventExist()
     {
         // Arrange
@@ -58,7 +59,7 @@ public class PrincipalTests : TestBase
         this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalId);
     }
 
-    [TestMethod]
+    [Fact]
     public void CreatePermission_ForceDependencyEventExist()
     {
         // Arrange

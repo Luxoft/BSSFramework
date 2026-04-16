@@ -21,7 +21,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Compile Include="..\..\..\__SolutionItems\Testing\FluentAssertionsShim.cs" Link="Testing\FluentAssertionsShim.cs" />
-    <Compile Include="..\..\..\__SolutionItems\Testing\MSTestCompatibility.cs" Link="Testing\MSTestCompatibility.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,7 +37,6 @@
 
   <ItemGroup>
     <Using Include="FluentAssertions" />
-    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 
 </Project>

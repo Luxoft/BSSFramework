@@ -7,12 +7,13 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class UpdateTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void ExampleContainer_UpdatePropertyChanged1()
     {
         // Arrange
@@ -40,7 +41,7 @@ public class UpdateTests : TestBase
         currentStrictDTO.Field3.Should().Be(strictSource.Field3);
     }
 
-    [TestMethod]
+    [Fact]
     public void ExampleContainer_UpdatePropertyChanged2()
     {
         // Arrange
@@ -68,7 +69,7 @@ public class UpdateTests : TestBase
         updateDTO.Field3.HasValue.Should().Be(true);
     }
 
-    [TestMethod]
+    [Fact]
     public void ExampleContainer_UpdatePropertyChanged3()
     {
         // Arrange

@@ -2,12 +2,13 @@
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class AsyncControllerTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public async Task TestSaveLocation_LocationSaved()
     {
         // Arrange
@@ -26,7 +27,7 @@ public class AsyncControllerTests : TestBase
         location.Should().NotBeNull();
     }
 
-    [TestMethod]
+    [Fact]
     public async Task TestSaveLocationWithWriteException_ExceptionRaised()
     {
         // Arrange

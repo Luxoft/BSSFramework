@@ -3,12 +3,13 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class FixedPropertyValidatorTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void PrimitiveImmutablePropertyChanged_RaisedValidationError()
     {
         // Arrange
@@ -30,7 +31,7 @@ public class FixedPropertyValidatorTests : TestBase
                                               $"{nameof(TestImmutableObj.TestImmutablePrimitiveProperty)} field in {nameof(TestImmutableObj)} can't be changed");
     }
 
-    [TestMethod]
+    [Fact]
     public void ReferenceImmutablePropertyChanged_RaisedValidationError()
     {
         // Arrange
@@ -52,7 +53,7 @@ public class FixedPropertyValidatorTests : TestBase
                                               $"{nameof(TestImmutableObj.TestImmutableRefProperty)} field in {nameof(TestImmutableObj)} can't be changed");
     }
 
-    [TestMethod]
+    [Fact]
     public void ImmutablePropertyInitializedByIntegration_ShouldNotThrowException()
     {
         // Arrange
@@ -65,7 +66,7 @@ public class FixedPropertyValidatorTests : TestBase
         insertAction.Should().NotThrow();
     }
 
-    [TestMethod]
+    [Fact]
     public void ImmutablePropertyChangedByIntegration_RaisedValidationError()
     {
         // Arrange

@@ -7,9 +7,10 @@ using SecuritySystem;
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class CurrentUserManyRelativePathTests : TestBase
 {
     private Guid[] testEmployeeIdents;
@@ -44,7 +45,7 @@ public class CurrentUserManyRelativePathTests : TestBase
             });
     }
 
-    [TestMethod]
+    [Fact]
     public void TestManyRelativeEmployeeObject_FilterByEmployee_ObjectFound()
     {
         // Arrange

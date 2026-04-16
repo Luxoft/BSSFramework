@@ -2,9 +2,10 @@
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests.NH;
 
-[TestClass]
 public class FullTextSearchTests : TestBase
 {
     /// <summary>
@@ -17,8 +18,7 @@ public class FullTextSearchTests : TestBase
     /// "/src/_SampleSystem/_Tests/SampleSystem.IntegrationTests/__Support/Scripts/SampleSystem/Sample.sql"
     /// раскоментировать SQL код с заголовком "Create and populate Full Text Catalog".
     /// </summary>
-    [TestMethod]
-    [Ignore]
+    [Fact(Skip = "Skip")]
     public void FullTextContainsFunctionWorksCorrect()
     {
         Task.Delay(10000).Wait();

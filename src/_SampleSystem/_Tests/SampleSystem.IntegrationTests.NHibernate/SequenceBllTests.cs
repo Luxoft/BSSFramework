@@ -4,12 +4,13 @@ using Framework.Database;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class SequenceBllTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void GetNextNumber_TwoCallsInParallelTransactions_ShouldGiveDifferentNumbers()
     {
         // Arrange
@@ -60,7 +61,7 @@ public class SequenceBllTests : TestBase
         new[] { numberFast1, numberFast2, numberWithWait1, numberWithWait2 }.Should().OnlyHaveUniqueItems();
     }
 
-    [TestMethod]
+    [Fact]
     public void GetNextNumber_TwoCallsOneTransaction_ShouldGiveDifferentNumbers()
     {
         // Arrange
@@ -82,7 +83,7 @@ public class SequenceBllTests : TestBase
         numbers.Number2.Should().Be(3);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetNextNumber_TwoCallsDifferentTransaction_ShouldGiveDifferentNumbers()
     {
         // Arrange

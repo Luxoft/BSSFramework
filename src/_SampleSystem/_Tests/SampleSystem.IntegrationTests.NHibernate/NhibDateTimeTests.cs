@@ -4,9 +4,10 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class NhibDateTimeTests : TestBase
 {
     private DateTime prevDateTime;
@@ -15,7 +16,7 @@ public class NhibDateTimeTests : TestBase
 
     protected override void BeforeCleanup() => this.SetCurrentDateTime(this.prevDateTime);
 
-    [TestMethod]
+    [Fact]
     public void CreateObject_CreatedDateOverride()
     {
         // Arrange

@@ -10,9 +10,10 @@ using SampleSystem.Security;
 
 using SecuritySystem.AccessDenied;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class WrongSecurityMessageTests : TestBase
 {
     private static readonly string TestPrincipalName = TextRandomizer.RandomString(10);
@@ -21,13 +22,13 @@ public class WrongSecurityMessageTests : TestBase
 
     public WrongSecurityMessageTests() => this.DataHelper.SaveEmployee(login: TestPrincipalName, id: TestPrincipalId);
 
-    [TestMethod]
+    [Fact]
     public void UseWrongSecurityMode_ErrorMessageCorrected() => this.UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SecurityRule.Edit);
 
-    [TestMethod]
+    [Fact]
     public void UseWrongSecurityOperation_ErrorMessageCorrected() => this.UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SampleSystemSecurityOperation.EmployeeEdit);
 
-    [TestMethod]
+    [Fact]
     public void UseWrongSecurityRole_ErrorMessageCorrected() => this.UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SampleSystemSecurityRole.SeManager);
 
     private void UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SecurityRule securityRule)

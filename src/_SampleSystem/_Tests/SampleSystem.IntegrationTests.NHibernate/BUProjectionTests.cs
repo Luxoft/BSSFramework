@@ -6,9 +6,10 @@ using SampleSystem.Domain.Inline;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class BUProjectionTests : TestBase
 {
     private const string TestEmployee0Login = "Test Employee 0";
@@ -60,7 +61,7 @@ public class BUProjectionTests : TestBase
                       });
     }
 
-    [TestMethod]
+    [Fact]
     public void BusinessUnitProjectionCalcCollectionPropTest()
     {
         // Arrange
@@ -75,7 +76,7 @@ public class BUProjectionTests : TestBase
         profitBU.Items[0].Employees.Should().Be(expectedEmployee);
     }
 
-    [TestMethod]
+    [Fact]
     public void BusinessUnitProjectionCalcHerPropTest()
     {
         // Arrange

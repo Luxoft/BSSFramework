@@ -3,17 +3,19 @@
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
+
+using Xunit;
+
 using DelegateToItemModelStrictDTO = Framework.Authorization.Generated.DTO.DelegateToItemModelStrictDTO;
 
 namespace SampleSystem.IntegrationTests.Auth;
 
-[TestClass]
 public class PrincipalTests : TestBase
 {
     private const string Name = "luxoft\\Login";
     private const string NewName = "luxoft\\ChangeLogin";
 
-    [TestMethod]
+    [Fact]
     public void AddPermission_CheckAddition()
     {
         // Arrange
@@ -36,7 +38,7 @@ public class PrincipalTests : TestBase
         permissionSimple.ModifiedBy.Should().Be(currentUser.Login.ToString());
     }
 
-    [TestMethod]
+    [Fact]
     public void SavePrincipal_CheckCreateon()
     {
         // Arrange
@@ -63,7 +65,7 @@ public class PrincipalTests : TestBase
         principalRich.Permissions.First().Role.Identity.Should().Be(businessRoleIdentity);
     }
 
-    [TestMethod]
+    [Fact]
     public void SavePrincipal_CheckPrincipalChanges()
     {
         // Arrange
@@ -86,7 +88,7 @@ public class PrincipalTests : TestBase
         principalSimple.ModifiedBy.Should().Be(currentUser.Login.ToString());
     }
 
-    [TestMethod]
+    [Fact]
     public void PermissionDelegate_CheckChanges()
     {
         // Arrange
@@ -132,7 +134,7 @@ public class PrincipalTests : TestBase
         permissionSimple.DelegatedTo.Any().Should().BeTrue();
     }
 
-    [TestMethod]
+    [Fact]
     public void RemovePermission_CheckRemoval()
     {
         // Arrange
@@ -153,7 +155,7 @@ public class PrincipalTests : TestBase
         call.Should().Throw<Exception>().WithMessage("Permission with id = \"*\" not found");
     }
 
-    [TestMethod]
+    [Fact]
     public void RemovePrincipalWithRole_CheckException()
     {
         // Arrange
@@ -166,7 +168,7 @@ public class PrincipalTests : TestBase
         call.Should().Throw<Exception>().WithMessage("Removing principal \"*\" must be empty");
     }
 
-    [TestMethod]
+    [Fact]
     public void RemovePrincipal_CheckRemoval()
     {
         // Arrange

@@ -5,14 +5,15 @@ using Microsoft.SqlServer.Management.Smo;
 using SampleSystem.DbGenerate.NHibernate;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 using Index = Microsoft.SqlServer.Management.Smo.Index;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 
-[TestClass]
 public class UniqueGroupDatabaseScriptGeneratorTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void GenerateLocal_UniqueIndexExistsWithLessColumns_RecreatesColumns()
     {
         // Arrange

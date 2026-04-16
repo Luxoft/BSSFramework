@@ -5,12 +5,13 @@ using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.ForUpdate;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class TransactionFlushBeforeCommit : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void ShouldNotConsiderChangesWhileTransactionIsNotCommited()
     {
         // Arrange
@@ -41,7 +42,7 @@ public class TransactionFlushBeforeCommit : TestBase
             .BeEquivalentTo(object2.Name);
     }
 
-    [TestMethod]
+    [Fact]
     public void FewDifferentTypeObjectWithTheSameId_Should_SuccessfullySave()
     {
         // Arrange

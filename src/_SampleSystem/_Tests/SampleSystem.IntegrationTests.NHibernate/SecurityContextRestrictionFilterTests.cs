@@ -9,9 +9,10 @@ using SampleSystem.Security;
 using SecuritySystem;
 using SecuritySystem.Validation;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class SecurityContextRestrictionFilterTests : TestBase
 {
     private static readonly SecurityRole DefaultSecurityRole = SampleSystemSecurityRole.DefaultRole;
@@ -36,7 +37,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
         this.buWithAllowedFilter = this.DataHelper.SaveBusinessUnit(allowedForFilterRole: true);
     }
 
-    [TestMethod]
+    [Fact]
     public void CreatePermissionWithRestrictionFilter_ApplyInvalidBusinessUnit_ExceptionRaised()
     {
         // Arrange
@@ -52,7 +53,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
         action.Should().Throw<SecuritySystemValidationException>().And.Message.Should().Contain($"SecurityContext: '{this.defaultBu.Id}' denied by filter");
     }
 
-    [TestMethod]
+    [Fact]
     public void CreatePermissionWithRestrictionFilter_ApplyCorrectBusinessUnit_ExceptionNotRaised()
     {
         // Arrange
@@ -69,7 +70,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
     }
 
 
-    [TestMethod]
+    [Fact]
     public void CreateCustomRestrictionRule_ApplyGrandPermission_OnlyCorrectBuFounded()
     {
         // Arrange
@@ -88,7 +89,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
         allowedBuList.Should().BeEquivalentTo(new[] { this.buWithAllowedFilter });
     }
 
-    [TestMethod]
+    [Fact]
     public void CreateCustomRestrictionRule_ApplySingleCorrectBU_OnlyCorrectBuFounded()
     {
         // Arrange
@@ -102,7 +103,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
         allowedBuList.Should().BeEquivalentTo(new[] { this.buWithAllowedFilter });
     }
 
-    [TestMethod]
+    [Fact]
     public async Task CreateCustomRestrictionRule_SearchAccessorsForGrandPermission_EmployeeFounded()
     {
         // Arrange
@@ -125,7 +126,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
         accesors.Should().Contain(this.employeeLogin);
     }
 
-    [TestMethod]
+    [Fact]
     public async Task CreateCustomRestrictionRule_SearchAccessorsForCorrectBU_EmployeeFounded()
     {
         // Arrange
@@ -148,7 +149,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
         accesors.Should().Contain(this.employeeLogin);
     }
 
-    [TestMethod]
+    [Fact]
     public async Task CreateCustomRestrictionRule_SearchAccessorsForIncorrectBU_EmployeeNotFounded()
     {
         // Arrange

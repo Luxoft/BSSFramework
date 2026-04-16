@@ -14,11 +14,12 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
+using Xunit;
+
 using BusinessUnitController = SampleSystem.WebApiCore.Controllers.Main.BusinessUnitController;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class BusinessUnitTests : TestBase
 {
     private const string EmployeeName = "TestSecondaryAccessEmployee";
@@ -54,7 +55,7 @@ public class BusinessUnitTests : TestBase
                 new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)));
     }
 
-    [TestMethod]
+    [Fact]
     public void CheckBusinessUnitSecondaryAccess_HasAccess()
     {
         // Arrange
@@ -78,7 +79,7 @@ public class BusinessUnitTests : TestBase
                         .Contain(node => node.Item.Name == DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_NAME && node.OnlyView);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetTreeWithFilter()
     {
         // Arrange
@@ -99,7 +100,7 @@ public class BusinessUnitTests : TestBase
     }
 
     // Two test in one for performance reasons
-    [TestMethod]
+    [Fact]
     public void GetFullBusinessUnitsTreeTwoTestInOne()
     {
         // Arrange
@@ -110,7 +111,7 @@ public class BusinessUnitTests : TestBase
         this.TestGetFullBusinessUnitsTree();
     }
 
-    [TestMethod]
+    [Fact]
     public void LoadTreeWithMiddlePermission_RootParentLoadedWithViewMode()
     {
         // Arrange

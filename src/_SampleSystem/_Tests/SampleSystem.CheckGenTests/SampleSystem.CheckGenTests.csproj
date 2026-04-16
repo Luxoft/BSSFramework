@@ -14,11 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\..\__SolutionItems\Testing\MSTestCompatibility.cs" Link="Testing\MSTestCompatibility.cs" />
     <ProjectReference Include="..\SampleSystem.CodeGenerate\SampleSystem.CodeGenerate.csproj" />
   </ItemGroup>
 

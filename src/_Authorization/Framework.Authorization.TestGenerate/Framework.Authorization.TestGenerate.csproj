@@ -14,12 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-    <Compile Include="..\..\__SolutionItems\Testing\MSTestCompatibility.cs" Link="Testing\MSTestCompatibility.cs" />
   </ItemGroup>
 
   <ItemGroup>

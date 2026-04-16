@@ -7,12 +7,13 @@ using SampleSystem.Domain.HRDepartment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class SqlParserTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void SaveNullIntoNotNullProperty_RequiredConstraintDALException()
     {
         // Arrange
@@ -27,7 +28,7 @@ public class SqlParserTests : TestBase
               .Contain("The field \'notNullColumn\' of type SqlParserTestObj must be initialized");
     }
 
-    [TestMethod]
+    [Fact]
     public void SaveNotUniqueProperty_UniqueViolationConstraintDALException()
     {
         // Arrange
@@ -48,7 +49,7 @@ public class SqlParserTests : TestBase
               .Contain("SqlParserTestObj with same:\'UniqueColumn\' already exists");
     }
 
-    [TestMethod]
+    [Fact]
     public void RemoveLinkedObject_RemoveLinkedObjectsDALException()
     {
         // Arrange
@@ -73,7 +74,7 @@ public class SqlParserTests : TestBase
         action.Should().Throw<RemoveLinkedObjectsDALException>().And.Message.Should().Contain($"{nameof(SqlParserTestObj)} cannot be removed because it is used in {nameof(SqlParserTestObjContainer)}");
     }
 
-    [TestMethod]
+    [Fact]
     public void RemoveHRDepartment_HasEmployeeWithHRDepartment_CorrectExceptionMessage()
     {
         // Arrange

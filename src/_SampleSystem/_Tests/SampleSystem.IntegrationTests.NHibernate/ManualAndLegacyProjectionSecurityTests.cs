@@ -5,9 +5,10 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class ManualAndLegacyProjectionSecurityTests : TestBase
 {
     private const string TestEmployeeLogin = "MALProjection SecurityTester";
@@ -36,7 +37,7 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
         this.TestEmp2 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu2Ident);
     }
 
-    [TestMethod]
+    [Fact]
     public void TestManualEmployeeProjection_LoadedByManualDependencySecurity()
     {
         // Arrange
@@ -50,7 +51,7 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
         items[0].Identity.Should().Be(this.TestEmp2);
     }
 
-    [TestMethod]
+    [Fact]
     public void TestLegacyEmployeeProjection_LoadedByLegacyGenericSecurity()
     {
         // Arrange
@@ -65,7 +66,7 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
     }
 
 
-    //[TestMethod]
+    //[Fact]
     //public void TestLegacyEmployeeProjection_AccessorsResolved()
     //{
     //    // Arrange

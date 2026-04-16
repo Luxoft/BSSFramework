@@ -1,12 +1,13 @@
 ﻿using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class DefaultFieldsTests
 {
-    [TestMethod]
+    [Fact]
     public void GetDefaultValueFromAttr_CompareWithDTO_DefaultValuesEquals()
     {
         // Arrange

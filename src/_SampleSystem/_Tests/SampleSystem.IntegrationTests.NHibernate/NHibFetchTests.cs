@@ -5,12 +5,13 @@ using GenericQueryable;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class NHibFetchTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void TestPropCollection_TestPassed() =>
         this.Evaluate(
             DBSessionMode.Read,

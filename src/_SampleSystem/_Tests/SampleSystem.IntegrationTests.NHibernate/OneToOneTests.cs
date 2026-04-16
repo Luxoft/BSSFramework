@@ -5,12 +5,13 @@ using SampleSystem.Domain.Employee;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class OneToOneTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void GetRequestProjection_ContainsOneToOneDetail_Initialized()
     {
         // Arrange

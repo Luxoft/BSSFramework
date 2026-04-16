@@ -5,14 +5,15 @@ using Microsoft.SqlServer.Management.Smo;
 using SampleSystem.DbGenerate.NHibernate;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 using Index = Microsoft.SqlServer.Management.Smo.Index;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 
-[TestClass]
 public class ChangeIndexesStrategyTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void GenerateLocal_ColumnHasIndexWithIncludedColumns_PreventsDefaultIndexFromGeneration()
     {
         // Arrange
@@ -56,7 +57,7 @@ public class ChangeIndexesStrategyTests : TestBase
                     .And.NotContain(x => x.Name == baseIndexName);
     }
 
-    [TestMethod]
+    [Fact]
     public void GenerateLocal_IgnoredIndex_NotCreated()
     {
         // Arrange
@@ -87,7 +88,7 @@ public class ChangeIndexesStrategyTests : TestBase
                     .NotContain(x => x.Name == ignoredIndexName);
     }
 
-    [TestMethod]
+    [Fact]
     public void GenerateLocal_UniqueFieldForFK_NoDuplicates()
     {
         // Arrange

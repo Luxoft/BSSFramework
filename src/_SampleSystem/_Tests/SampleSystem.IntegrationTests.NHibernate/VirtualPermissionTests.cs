@@ -6,9 +6,10 @@ using SampleSystem.Domain.Enums;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class VirtualPermissionTests : TestBase
 {
     private (string UserLogin, Guid BuId, Guid EmployeeId)[] Datas;
@@ -46,7 +47,7 @@ public class VirtualPermissionTests : TestBase
                          })
                      .ToArray();
 
-    [TestMethod]
+    [Fact]
     public void VirtualPermission_EmployeeWithLink_HasAccessByVirtualPermission()
     {
         // Arrange
@@ -66,7 +67,7 @@ public class VirtualPermissionTests : TestBase
         accessToBuList[0].Should().Be(this.Datas[0].BuId);
     }
 
-    [TestMethod]
+    [Fact]
     public  async Task VirtualPermission_EmployeeWithLink_ResolvedByAccessors()
     {
         // Arrange
@@ -90,7 +91,7 @@ public class VirtualPermissionTests : TestBase
         accessorList.Should().Contain(this.Datas[0].UserLogin);
     }
 
-    [TestMethod]
+    [Fact]
     public async Task VirtualPermission_EmployeeWithMyLink_AccessGranted()
     {
         // Arrange
@@ -113,7 +114,7 @@ public class VirtualPermissionTests : TestBase
         hasAccess.Should().BeTrue();
     }
 
-    [TestMethod]
+    [Fact]
     public async Task VirtualPermission_EmployeeWithNotMyLink_AccessDenied()
     {
         // Arrange
@@ -136,7 +137,7 @@ public class VirtualPermissionTests : TestBase
         hasAccess.Should().BeFalse();
     }
 
-    [TestMethod]
+    [Fact]
     public async Task VirtualPermission_NoNameWithoutLink_AccessDenied()
     {
         // Arrange

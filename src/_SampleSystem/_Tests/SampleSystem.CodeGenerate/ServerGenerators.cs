@@ -22,12 +22,13 @@ using Microsoft.AspNetCore.Mvc;
 using SampleSystem.CodeGenerate.Configurations.BLLCore;
 using SampleSystem.CodeGenerate.Configurations.DTO.Server;
 
+using Xunit;
+
 namespace SampleSystem.CodeGenerate;
 
-[TestClass]
 public partial class ServerGenerators
 {
-    [TestMethod]
+    [Fact]
     public void GenerateMainTest() => this.GenerateMain().ToList();
 
     public IEnumerable<GeneratedFileInfo> GenerateMain() =>
@@ -45,7 +46,7 @@ public partial class ServerGenerators
             .Concat(this.GenerateAuditWebApiNetCore())
             .Concat(this.GenerateConfigurationWebApiNetCoreTest());
 
-    [TestMethod]
+    [Fact]
     public void GenerateMainWebApiNetCoreTest() => this.GenerateMainWebApiNetCore().ToList();
 
     public IEnumerable<GeneratedFileInfo> GenerateMainWebApiNetCore()
@@ -145,7 +146,7 @@ public partial class ServerGenerators
                         .Generate<CodeNamespace>(Path.Combine(this.webApiNetCorePath, "Configuration"));
     }
 
-    [TestMethod]
+    [Fact]
     public void GenerateMainProjectionsTest() => this.GenerateMainProjections().ToList();
 
     private IEnumerable<GeneratedFileInfo> GenerateMainProjections()
@@ -159,7 +160,7 @@ public partial class ServerGenerators
             false);
     }
 
-    [TestMethod]
+    [Fact]
     public void GenerateLegacyProjectionsTest() => this.GenerateLegacyProjections().ToList();
 
     private IEnumerable<GeneratedFileInfo> GenerateLegacyProjections()
@@ -173,7 +174,7 @@ public partial class ServerGenerators
             false);
     }
 
-    [TestMethod]
+    [Fact]
     public void GenerateBLLCoreTest() => this.GenerateBLLCore().ToList();
 
     /// <summary>
@@ -191,7 +192,7 @@ public partial class ServerGenerators
             this.CheckOutService);
     }
 
-    [TestMethod]
+    [Fact]
     public void GenerateBLLTest() => this.GenerateBLL().ToList();
 
     private IEnumerable<GeneratedFileInfo> GenerateBLL()
@@ -207,7 +208,7 @@ public partial class ServerGenerators
             this.CheckOutService);
     }
 
-    [TestMethod]
+    [Fact]
     public void GenerateServerDTOTest() => this.GenerateServerDTO().ToList();
 
     private IEnumerable<GeneratedFileInfo> GenerateServerDTO()
@@ -235,7 +236,7 @@ public partial class ServerGenerators
             this.CheckOutService);
     }
 
-    [TestMethod]
+    [Fact]
     public void GenerateAuditDTOTest() => this.GenerateAuditDTO().ToList();
 
     private IEnumerable<GeneratedFileInfo> GenerateAuditDTO()
@@ -251,7 +252,7 @@ public partial class ServerGenerators
                 this.environment.ServerDTO);
     }
 
-    [TestMethod]
+    [Fact]
     public void GenerateDALTest() => this.GenerateDAL().ToList();
 
     private IEnumerable<GeneratedFileInfo> GenerateDAL()

@@ -3,12 +3,13 @@
 using SampleSystem.Domain.EnversBug1676;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class EnversBug1676 : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void OneToOneMapping()
     {
         // Arrange

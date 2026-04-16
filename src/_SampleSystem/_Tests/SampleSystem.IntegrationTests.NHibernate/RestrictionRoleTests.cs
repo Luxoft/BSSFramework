@@ -12,12 +12,13 @@ using SampleSystem.WebApiCore.Controllers.Main;
 using SecuritySystem;
 using SecuritySystem.Validation;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class RestrictionRoleTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void GetRestrictionObjectsWithRestrictionRole_RestrictionApplied()
     {
         // Arrange
@@ -48,7 +49,7 @@ public class RestrictionRoleTests : TestBase
         result.Should().BeEquivalentTo(new[] { testObjects[0], testObjects[2] });
     }
 
-    [TestMethod]
+    [Fact]
     public void TryCreateEmptyPermission_PermissionCreated()
     {
         // Arrange
@@ -60,7 +61,7 @@ public class RestrictionRoleTests : TestBase
         action.Should().NotThrow();
     }
 
-    [TestMethod]
+    [Fact]
     public void TryCreatePermissionWithCorrectSecurityContext_PermissionCreated()
     {
         // Arrange
@@ -77,7 +78,7 @@ public class RestrictionRoleTests : TestBase
         action.Should().NotThrow();
     }
 
-    [TestMethod]
+    [Fact]
     public void TryCreatePermissionWithInvalidSecurityContext_ExceptionRaised()
     {
         // Arrange
@@ -95,7 +96,7 @@ public class RestrictionRoleTests : TestBase
               .And.Message.Should().Contain($"Invalid SecurityContextType: {nameof(Location)}");
     }
 
-    [TestMethod]
+    [Fact]
     public void GetRestrictionFromHeaderObjectsWithConditionRule_RestrictionApplied()
     {
         // Arrange
@@ -129,7 +130,7 @@ public class RestrictionRoleTests : TestBase
         result.Should().BeEquivalentTo(new[] { testObjects[0], testObjects[2] });
     }
 
-    [TestMethod]
+    [Fact]
     public void GetRestrictionObjectsWithConditionRule_RestrictionApplied()
     {
         // Arrange
@@ -163,7 +164,7 @@ public class RestrictionRoleTests : TestBase
         result.Should().BeEquivalentTo(new[] { testObjects[0], testObjects[2] });
     }
 
-    [TestMethod]
+    [Fact]
     public void TryCreatePermissionWithoutRequiredSecurityContext_ExceptionRaised()
     {
         // Arrange

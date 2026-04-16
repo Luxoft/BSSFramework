@@ -6,12 +6,13 @@ using SampleSystem.Domain.Directories;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class NotificationCountryTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void CreateAndUpdateCountry_SingleModificationExists()
     {
         // Arrange
@@ -46,7 +47,7 @@ public class NotificationCountryTests : TestBase
             .Be(1);
     }
 
-    [TestMethod]
+    [Fact]
     public void CreateAndRemoveCountry_ModificationNotExists()
     {
         // Arrange
@@ -74,7 +75,7 @@ public class NotificationCountryTests : TestBase
         this.GetModifications().Count.Should().Be(0);
     }
 
-    [TestMethod]
+    [Fact]
     public void RemoveCountry_RemoveModificationExists()
     {
         // Arrange
@@ -107,7 +108,7 @@ public class NotificationCountryTests : TestBase
     }
 
 
-    [TestMethod]
+    [Fact]
     public void EmulateFailureCountryModification_RaisedException()
     {
         // Arrange

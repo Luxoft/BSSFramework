@@ -6,9 +6,10 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class DependencySecurityTests : TestBase
 {
     private const string TestEmployeeLogin = "DS SecurityTester";
@@ -58,7 +59,7 @@ public class DependencySecurityTests : TestBase
                            });
     }
 
-    [TestMethod]
+    [Fact]
     public void TestSecurityObjItem_LoadedByDependencySecurity()
     {
         // Arrange
@@ -72,7 +73,7 @@ public class DependencySecurityTests : TestBase
         items[0].Name.Should().Be(TestObjItem2);
     }
 
-    [TestMethod]
+    [Fact]
     public void TestSecurityObjItemProjection_LoadedByDependencySecurity()
     {
         // Arrange
@@ -86,7 +87,7 @@ public class DependencySecurityTests : TestBase
         items[0].Name.Should().Be(TestObjItem2);
     }
 
-    [TestMethod]
+    [Fact]
     public void TestSecurityObjSubItem1_LoadedByDependencySecurity()
     {
         // Arrange
@@ -100,7 +101,7 @@ public class DependencySecurityTests : TestBase
         items[0].Name.Should().Be(TestObjSubItem1);
     }
 
-    [TestMethod]
+    [Fact]
     public void TestSecurityObjSubItem2_LoadedByDependencySecurity()
     {
         // Arrange
@@ -114,7 +115,7 @@ public class DependencySecurityTests : TestBase
         items[0].Name.Should().Be(TestObjSubItem2);
     }
 
-    [TestMethod]
+    [Fact]
     public void TestSecurityObjSubItem3_LoadedByDependencySecurity()
     {
         // Arrange

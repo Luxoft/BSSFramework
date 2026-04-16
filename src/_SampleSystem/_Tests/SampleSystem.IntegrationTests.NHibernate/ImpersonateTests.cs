@@ -1,12 +1,13 @@
 ﻿using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class ImpersonateTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public async Task SaveDataWithImpersonate_ImpersonateWork()
     {
         // Arrange

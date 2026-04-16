@@ -11,9 +11,10 @@ using SampleSystem.Security;
 using SecuritySystem;
 using SecuritySystem.Validation;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class PrincipalWithInitTests : TestBase
 {
     private const string TestPrincipalName = "Duplicate Permission Tester";
@@ -49,7 +50,7 @@ public class PrincipalWithInitTests : TestBase
             new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)) { Period = new PermissionPeriod(this.testPeriod.StartDate, this.testPeriod.EndDate) });
     }
 
-    [TestMethod]
+    [Fact]
     public void CreateDuplicatePermission_ValidationError()
     {
         // Arrange

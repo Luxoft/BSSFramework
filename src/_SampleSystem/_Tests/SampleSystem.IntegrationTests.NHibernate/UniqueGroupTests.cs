@@ -2,12 +2,13 @@
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class UniqueGroupTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void UniqueGroup_NonUniqueEntityCreated_ErrorUsesCustomName()
     {
         // Arrange

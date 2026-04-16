@@ -7,12 +7,13 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Integration;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class IntegrationVersionTest : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void SaveWithMoreVersion_IgnoreLessPolicy_ValueSaved()
     {
         //Arrange
@@ -53,7 +54,7 @@ public class IntegrationVersionTest : TestBase
         actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
     }
 
-    [TestMethod]
+    [Fact]
     public void SaveWithLessVersion_IgnoreLessPolicy_ValueIgnore()
     {
         //Arrange
@@ -93,7 +94,7 @@ public class IntegrationVersionTest : TestBase
         actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
     }
 
-    [TestMethod]
+    [Fact]
     public void SaveWithEqualVersion_IgnoreLessPolicy_ValueIgnored()
     {
         //Arrange
@@ -133,7 +134,7 @@ public class IntegrationVersionTest : TestBase
         actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
     }
 
-    [TestMethod]
+    [Fact]
     public void SaveWithMoreVersion_IgnoreLessOrEqualPolicy_ValueSaved()
     {
         //Arrange
@@ -174,7 +175,7 @@ public class IntegrationVersionTest : TestBase
         actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
     }
 
-    [TestMethod]
+    [Fact]
     public void SaveWithLessVersion_IgnoreLessOrEqualPolicy_ValueIgnore()
     {
         //Arrange
@@ -214,7 +215,7 @@ public class IntegrationVersionTest : TestBase
         actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
     }
 
-    [TestMethod]
+    [Fact]
     public void SaveWithEqualVersion_IgnoreLessOrEqualPolicy_ValueIgnored()
     {
         //Arrange
@@ -256,7 +257,7 @@ public class IntegrationVersionTest : TestBase
         actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
     }
 
-    [TestMethod]
+    [Fact]
     public void SaveModelWithLessVersion_IgnoreLessOrEqualPolicy_ValueIgnore()
     {
         //Arrange
@@ -306,7 +307,7 @@ public class IntegrationVersionTest : TestBase
         actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
     }
 
-    [TestMethod]
+    [Fact]
     public void SaveModelWithEqualVersion_IgnoreLessOrEqualPolicy_ValueIgnored()
     {
         //Arrange

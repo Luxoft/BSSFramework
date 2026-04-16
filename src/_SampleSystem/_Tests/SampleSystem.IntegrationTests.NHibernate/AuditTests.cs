@@ -9,14 +9,16 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Audit;
 using SampleSystem.WebApiCore.Controllers.Main;
+
+using Xunit;
+
 using BusinessUnitController = SampleSystem.WebApiCore.Controllers.Audit.BusinessUnitController;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class AuditTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void GetObjectRevisions_CheckCount_Correct()
     {
         // Act
@@ -49,7 +51,7 @@ public class AuditTests : TestBase
         actualRevesionCount.RevisionInfos.Count().Should().Be(testCount + 1);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetObjectByRevision_CheckState_Correct()
     {
         // Act
@@ -96,7 +98,7 @@ public class AuditTests : TestBase
         lastEmployeeState.NameEng.FirstName.Should().Be($"{expected}");
     }
 
-    [TestMethod]
+    [Fact]
     public void GetObjectPropertyRevisions_CallNotChangeProperty_RevisionsIsOne()
     {
         // Act
@@ -123,7 +125,7 @@ public class AuditTests : TestBase
         propertyRevisions.RevisionInfos.Count().Should().Be(1);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetObjectPropertyRevisions_ChangePrimitiveProperty_CorrectRevisions()
     {
         // Act
@@ -168,7 +170,7 @@ public class AuditTests : TestBase
         checkPropertyRevision?.Value.Should().Be($"{expected}{emailTail}");
     }
 
-    [TestMethod]
+    [Fact]
     public void GetObjectPropertyRevisions_CheckFirstRevisioins_HasAddedState()
     {
         // Act
@@ -213,7 +215,7 @@ public class AuditTests : TestBase
         firstRevision.RevisionType.Should().Be(AuditRevisionType.Added);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetObjectPropertyRevisions_CheckAfterFirstRevisioins_AllModifiedState()
     {
         // Act
@@ -260,7 +262,7 @@ public class AuditTests : TestBase
     }
 
 
-    [TestMethod]
+    [Fact]
     public void CrateNewBu_AuditBuLoadedFromCustomMapping()
     {
         // Arrange

@@ -4,12 +4,13 @@ using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class RepositoryWithoutSecurityTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public async Task GetDataFromUnsecurityRepository_DataLoaded()
     {
         // Arrange
@@ -24,7 +25,7 @@ public class RepositoryWithoutSecurityTests : TestBase
         fullList.Should().Contain(testObj);
     }
 
-    [TestMethod]
+    [Fact]
     public async Task GetDataFromUnsecurityRepository_TryLoadWithSecurity_DataLoadFaileds()
     {
         // Arrange

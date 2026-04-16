@@ -1,14 +1,14 @@
 ﻿using SampleSystem.IntegrationTests.__Support.TestData;
 
+using Xunit;
+
 using ValidationException = Framework.Validation.ValidationException;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class ValidationTests : TestBase
 {
-    [TestMethod]
-    [Description("Проверяется уникальности путём запрос к БД.")]
+    [Fact]
     public void ValidateByDB_ValidationException()
     {
         // Arrange
@@ -21,8 +21,7 @@ public class ValidationTests : TestBase
         call.Should().Throw<ValidationException>();
     }
 
-    [Description("Проверка с использованием атрибута.")]
-    [TestMethod]
+    [Fact]
     public void ValidateByClassAttribute_ValidationException()
     {
         // Arrange
@@ -34,8 +33,7 @@ public class ValidationTests : TestBase
         call.Should().Throw<ValidationException>().WithMessage("Employee Pin could not be set as '1234'");
     }
 
-    [TestMethod]
-    [Description("Проверка с использованием ValidationMap и валидатора конкретного доменного типа.")]
+    [Fact]
     public void ValidateByConcreteValidator_ValidationException()
     {
         // Arrange
@@ -49,8 +47,7 @@ public class ValidationTests : TestBase
         call.Should().Throw<ValidationException>().WithMessage($"Employee with ExternalId '{externalId}' already exists.");
     }
 
-    [Description("Проверка с использованием глобального валидатора целевой системы.")]
-    [TestMethod]
+    [Fact]
     public void ValidateByGlobalValidator_ValidationException()
     {
         // Arrange
@@ -64,8 +61,7 @@ public class ValidationTests : TestBase
         call.Should().Throw<ValidationException>().WithMessage($"Employee with Pin '{pin}' already exists.");
     }
 
-    [TestMethod]
-    [Description("#IADFRAME-334")]
+    [Fact]
     public void Validate_HasInvalidVirtualProperty_ShouldNotThrow()
     {
         // Arrange
@@ -79,8 +75,7 @@ public class ValidationTests : TestBase
         call.Should().NotThrow(because: "Non persistent properties must not validated by default");
     }
 
-    [TestMethod]
-    [Description("#IADFRAME-334")]
+    [Fact]
     public void Validate_HasInvalidVirtualPropertyMarkedWithAttribute_ShouldThrow()
     {
         // Arrange

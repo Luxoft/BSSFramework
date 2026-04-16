@@ -7,9 +7,10 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
+using Xunit;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class EmployeeProjectionTests : TestBase
 {
     private const string ProjectionPrincipalName = "Projection Tester";
@@ -52,7 +53,7 @@ public class EmployeeProjectionTests : TestBase
         this.AuthManager.For(TestEmployee3Login).SetRole(SampleSystemSecurityRole.TestRole2);
     }
 
-    [TestMethod]
+    [Fact]
     public void EmployeeProjectionTest()
     {
         // Arrange
@@ -67,7 +68,7 @@ public class EmployeeProjectionTests : TestBase
         employee.Should().NotBeNull();
     }
 
-    [TestMethod]
+    [Fact]
     public void EmployeeProjectionColumnSecurityTest()
     {
         // Arrange
@@ -84,7 +85,7 @@ public class EmployeeProjectionTests : TestBase
         logins.Should().BeEquivalentTo(expected);
     }
 
-    [TestMethod]
+    [Fact]
     public void EmployeeProjectionSecurityTestNoAccess()
     {
         // Arrange
@@ -100,7 +101,7 @@ public class EmployeeProjectionTests : TestBase
         logins.All(x => x.HasValue).Should().BeTrue();
     }
 
-    [TestMethod]
+    [Fact]
     public void EmployeeProjectionSecurityTestHasAccess()
     {
         // Arrange
@@ -114,7 +115,7 @@ public class EmployeeProjectionTests : TestBase
         positions.All(x => x.HasValue).Should().BeTrue();
     }
 
-    [TestMethod]
+    [Fact]
     public void EmployeeProjectionSortingTest()
     {
         // Arrange

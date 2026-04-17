@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.Domain.Employee;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using SecuritySystem.AccessDenied;
+
 namespace SampleSystem.IntegrationTests;
 
 public class SecurityRuleTests : TestBase
@@ -71,6 +73,6 @@ public class SecurityRuleTests : TestBase
                          });
 
         // Assert
-        Assert.Equal(faultMessage, Assert.Throws<Exception>(action).Message);
+        Assert.Equal(faultMessage, Assert.Throws<AccessDeniedException>(action).Message);
     }
 }

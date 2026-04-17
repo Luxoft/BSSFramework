@@ -335,7 +335,7 @@ public class EmployeeTests : TestBase
                 c => c.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = Maybe.Return("1234") })));
 
         // Assert
-        Assert.Equal($"Object '{nameof(Employee)}' was updated or deleted by another transaction", Assert.Throws<Exception>(call).Message);
+        Assert.Equal($"Object '{nameof(Employee)}' was updated or deleted by another transaction", Assert.Throws<StaleDomainObjectStateException>(call).Message);
     }
 
     [Fact]

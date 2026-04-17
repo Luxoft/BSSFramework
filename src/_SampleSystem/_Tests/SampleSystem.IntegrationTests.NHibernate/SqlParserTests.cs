@@ -98,6 +98,6 @@ public class SqlParserTests : TestBase
         Action action = () => hRDepartmentController.Evaluate(c => c.RemoveHRDepartment(fullEmployee.HRDepartment.Identity));
 
         // Assert
-        Assert.Equal($"{nameof(HRDepartment)} cannot be removed because it is used in {nameof(Employee)}", Assert.Throws<Exception>(action).Message);
+        Assert.Equal($"{nameof(HRDepartment)} cannot be removed because it is used in {nameof(Employee)}", Assert.Throws<RemoveLinkedObjectsDALException>(action).Message);
     }
 }

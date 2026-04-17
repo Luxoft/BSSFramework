@@ -42,6 +42,6 @@ public class FixedPropertyValidator<TSource, TProperty, TPersistentDomainObjectB
         return ValidationResult.FromCondition(
             trackingService.GetPersistentState(validationContext.Source) == PersistentLifeObjectState.NotPersistent
             || !trackingService.GetChanges(validationContext.Source).HasChange(propertyPath),
-            () => $"{validationContext.GetPropertyName()} field in {validationContext.GetPropertyTypeName()} can't be changed");
+            () => $"{validationContext.GetPropertyName()} field in {validationContext.GetSourceTypeName()} can't be changed");
     }
 }

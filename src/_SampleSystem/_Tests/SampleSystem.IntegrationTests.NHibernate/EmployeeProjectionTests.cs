@@ -70,14 +70,14 @@ public class EmployeeProjectionTests : TestBase
     public void EmployeeProjectionColumnSecurityTest()
     {
         // Arrange
-        var expected = new[] { ProjectionPrincipalName, TestEmployee2Login }.ToArray(Maybe.Return);
+        var expected = new[] { ProjectionPrincipalName, TestEmployee2Login }.Select(Maybe.Return).OrderBy(v => v.ToString()).ToArray();
         var controller = this.GetControllerEvaluator<EmployeeQueryController>(ProjectionPrincipalName);
 
         // Act
         var employees = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString("$filter=CoreBusinessUnit ne null"))
                                .Items;
 
-        var logins = employees.Select(dto => dto.Login);
+        var logins = employees.Select(dto => dto.Login).OrderBy(v => v.ToString());
 
         // Assert
         Assert.Equal(expected, logins);

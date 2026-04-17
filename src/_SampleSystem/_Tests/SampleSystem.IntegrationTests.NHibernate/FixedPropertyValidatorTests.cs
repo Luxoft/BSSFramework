@@ -26,7 +26,7 @@ public class FixedPropertyValidatorTests : TestBase
         // Assert
         Assert.Equal(
             $"{nameof(TestImmutableObj.TestImmutablePrimitiveProperty)} field in {nameof(TestImmutableObj)} can't be changed",
-            Assert.Throws<Exception>(changePropertyAction).Message);
+            Assert.Throws<Framework.Validation.ValidationException>(changePropertyAction).Message);
     }
 
     [Fact]
@@ -46,9 +46,9 @@ public class FixedPropertyValidatorTests : TestBase
                                       };
 
         // Assert
-        Assert.Equal(
+            Assert.Equal(
             $"{nameof(TestImmutableObj.TestImmutableRefProperty)} field in {nameof(TestImmutableObj)} can't be changed",
-            Assert.Throws<Exception>(changePropertyAction).Message);
+            Assert.Throws<Framework.Validation.ValidationException>(changePropertyAction).Message);
     }
 
     [Fact]
@@ -78,7 +78,7 @@ public class FixedPropertyValidatorTests : TestBase
         // Assert
         Assert.Equal(
             $"{nameof(TestImmutableObj.TestImmutablePrimitiveProperty)} field in {nameof(TestImmutableObj)} can't be changed",
-            Assert.Throws<Exception>(changePropertyAction).Message);
+            Assert.Throws<Framework.Validation.ValidationException>(changePropertyAction).Message);
     }
 
 }

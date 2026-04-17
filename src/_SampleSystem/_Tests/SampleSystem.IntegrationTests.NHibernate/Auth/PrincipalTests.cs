@@ -1,8 +1,11 @@
 ﻿using Framework.Authorization.Generated.DTO;
+using Framework.BLL.Exceptions;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
+
+using SecuritySystem;
 
 using DelegateToItemModelStrictDTO = Framework.Authorization.Generated.DTO.DelegateToItemModelStrictDTO;
 
@@ -150,7 +153,7 @@ public class PrincipalTests : TestBase
         Action call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePermission(permissionIdentity));
 
         // Assert
-        Assert.Matches("^Permission with id = \".*\" not found$", Assert.Throws<Exception>(call).Message);
+        Assert.Matches("^Permission with id = \".*\" not found$", Assert.Throws<ObjectByIdNotFoundException<Guid>>(call).Message);
     }
 
     [Fact]
@@ -163,7 +166,7 @@ public class PrincipalTests : TestBase
         var call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.RemovePrincipal(principalIdentity));
 
         // Assert
-        Assert.Matches("^Removing principal \".*\" must be empty$", Assert.Throws<Exception>(call).Message);
+        Assert.Matches("^Removing principal \".*\" must be empty$", Assert.Throws<SecuritySystemException>(call).Message);
     }
 
     [Fact]
@@ -179,6 +182,6 @@ public class PrincipalTests : TestBase
         var call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalIdentity));
 
         // Assert
-        Assert.Matches("^Principal with id = \".*\" not found$", Assert.Throws<Exception>(call).Message);
+        Assert.Matches("^Principal with id = \".*\" not found$", Assert.Throws<ObjectByIdNotFoundException<Guid>>(call).Message);
     }
 }

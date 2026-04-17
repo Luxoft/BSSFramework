@@ -132,6 +132,6 @@ public class NotificationCountryTests : TestBase
         var call = new Action(() => configController.Evaluate(c => c.ProcessModifications(1000)));
 
         // Assert
-        Assert.Equal("both arguments (previous and current) can't be null", Assert.Throws<ArgumentException>(call).Message);
+        Assert.Equal("Both arguments (previous and current) can't be null", Assert.Throws<ArgumentException>(call).Message);
     }
 }

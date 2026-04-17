@@ -12,10 +12,9 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class NhibArrayContainsTest : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void LinqContainsOverArray_TranslatedAndExecutedCorrectly()
     {
         // Arrange
@@ -38,6 +37,6 @@ public class NhibArrayContainsTest : TestBase
             ctx => ctx.Logics.BusinessUnit.GetUnsecureQueryable().Where(totalFilter).Select(v => v.Id).Single());
 
         // Assert
-        buId.Should().Be(bu.Id);
+        Assert.Equal(bu.Id, buId);
     }
 }

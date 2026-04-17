@@ -2,10 +2,9 @@
 
 namespace SampleSystem.IntegrationTests.WebApi;
 
-[TestClass]
 public class WebApiTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void WebApi_CallMethod()
     {
         // Arrange
@@ -17,6 +16,6 @@ public class WebApiTests : TestBase
         var employees = employeeController.Evaluate(c => c.GetSimpleEmployees());
 
         // Assert
-        employees.Should().Contain(e => e.Id == employeeIdentity.Id);
+        Assert.Contains(employees, e => e.Id == employeeIdentity.Id);
     }
 }

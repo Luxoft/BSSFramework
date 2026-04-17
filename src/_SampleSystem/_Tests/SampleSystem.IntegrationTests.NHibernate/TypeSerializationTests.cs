@@ -5,10 +5,9 @@ using Framework.Core;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class TypeSerializationTests
 {
-    [TestMethod]
+    [Fact]
     public void GetTypesWithFieldSerialization_TypesNotExists()
     {
         // Act
@@ -18,10 +17,10 @@ public class TypeSerializationTests
                                   .ToArray();
 
         // Assert
-        wrongTypes.Should().HaveCount(0);
+        Assert.Empty(wrongTypes);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetDataContractTypesWithMissedPropertyDataMemberDeclaration_TypesNotExists()
     {
         // Act
@@ -41,6 +40,6 @@ public class TypeSerializationTests
                                   .ToArray();
 
         // Assert
-        wrongTypes.Should().HaveCount(0);
+        Assert.Empty(wrongTypes);
     }
 }

@@ -8,14 +8,12 @@ using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class VirtualPermissionTests : TestBase
 {
     private (string UserLogin, Guid BuId, Guid EmployeeId)[] Datas;
 
 
-    [TestInitialize]
-    public void SetUp() =>
+    public VirtualPermissionTests() =>
         this.Datas = new[] { "testEmployeeLogin", "otherTestEmployeeLogin" }
                      .Select(
                          userLogin =>
@@ -47,7 +45,7 @@ public class VirtualPermissionTests : TestBase
                          })
                      .ToArray();
 
-    [TestMethod]
+    [Fact]
     public void VirtualPermission_EmployeeWithLink_HasAccessByVirtualPermission()
     {
         // Arrange
@@ -63,11 +61,10 @@ public class VirtualPermissionTests : TestBase
                        .GetSecureQueryable().Select(bu => bu.Id).ToList());
 
         // Assert
-        accessToBuList.Should().ContainSingle();
-        accessToBuList[0].Should().Be(this.Datas[0].BuId);
+        Assert.Equal(this.Datas[0].BuId, Assert.Single(accessToBuList));
     }
 
-    [TestMethod]
+    [Fact]
     public  async Task VirtualPermission_EmployeeWithLink_ResolvedByAccessors()
     {
         // Arrange
@@ -88,10 +85,10 @@ public class VirtualPermissionTests : TestBase
                 });
 
         // Assert
-        accessorList.Should().Contain(this.Datas[0].UserLogin);
+        Assert.Contains(this.Datas[0].UserLogin, accessorList);
     }
 
-    [TestMethod]
+    [Fact]
     public async Task VirtualPermission_EmployeeWithMyLink_AccessGranted()
     {
         // Arrange
@@ -111,10 +108,10 @@ public class VirtualPermissionTests : TestBase
                 });
 
         // Assert
-        hasAccess.Should().BeTrue();
+        Assert.True(hasAccess);
     }
 
-    [TestMethod]
+    [Fact]
     public async Task VirtualPermission_EmployeeWithNotMyLink_AccessDenied()
     {
         // Arrange
@@ -134,10 +131,10 @@ public class VirtualPermissionTests : TestBase
                 });
 
         // Assert
-        hasAccess.Should().BeFalse();
+        Assert.False(hasAccess);
     }
 
-    [TestMethod]
+    [Fact]
     public async Task VirtualPermission_NoNameWithoutLink_AccessDenied()
     {
         // Arrange
@@ -154,6 +151,6 @@ public class VirtualPermissionTests : TestBase
                 });
 
         // Assert
-        hasAccess.Should().BeFalse();
+        Assert.False(hasAccess);
     }
 }

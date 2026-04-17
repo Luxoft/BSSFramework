@@ -3,10 +3,9 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class ImpersonateTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public async Task SaveDataWithImpersonate_ImpersonateWork()
     {
         // Arrange
@@ -20,8 +19,8 @@ public class ImpersonateTests : TestBase
         var fullList = await controllerEvaluator.EvaluateAsync(c => c.GetFullList(default));
 
         // Assert
-        fullList.Should().ContainSingle(obj => obj.Id == testObj.Id)
-                .Subject.ModifiedBy.Should().Be(testImpersonateLogin);
+        var savedObject = Assert.Single(fullList, obj => obj.Id == testObj.Id);
+        Assert.Equal(testImpersonateLogin, savedObject.ModifiedBy);
     }
 
 }

@@ -3,10 +3,9 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class RepositoryControllerTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public async Task TestLoadFromRepository_CurrentEmployeeLoaded()
     {
         // Arrange
@@ -20,6 +19,6 @@ public class RepositoryControllerTests : TestBase
         var currentEmployee = await employeeController.EvaluateAsync(c => c.GetCurrentEmployee(default));
 
         // Assert
-        result.Employees.Should().Contain(currentEmployee.Identity);
+        Assert.Contains(currentEmployee.Identity, result.Employees);
     }
 }

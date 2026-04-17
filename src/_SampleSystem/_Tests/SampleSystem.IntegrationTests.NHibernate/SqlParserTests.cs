@@ -9,10 +9,9 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class SqlParserTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void SaveNullIntoNotNullProperty_RequiredConstraintDALException()
     {
         // Arrange
@@ -22,12 +21,10 @@ public class SqlParserTests : TestBase
         Action action = () => this.EvaluateWrite(context => { context.Logics.SqlParserTestObj.Save(testObject); });
 
         // Assert
-        action.Should().Throw<RequiredConstraintDALException>()
-              .And.Message.Should()
-              .Contain("The field \'notNullColumn\' of type SqlParserTestObj must be initialized");
+        Assert.Contains("The field \'notNullColumn\' of type SqlParserTestObj must be initialized", Assert.Throws<RequiredConstraintDALException>(action).Message);
     }
 
-    [TestMethod]
+    [Fact]
     public void SaveNotUniqueProperty_UniqueViolationConstraintDALException()
     {
         // Arrange
@@ -43,12 +40,10 @@ public class SqlParserTests : TestBase
                                                  });
 
         // Assert
-        action.Should().Throw<UniqueViolationConstraintDALException>()
-              .And.Message.Should()
-              .Contain("SqlParserTestObj with same:\'UniqueColumn\' already exists");
+        Assert.Contains("SqlParserTestObj with same:\'UniqueColumn\' already exists", Assert.Throws<UniqueViolationConstraintDALException>(action).Message);
     }
 
-    [TestMethod]
+    [Fact]
     public void RemoveLinkedObject_RemoveLinkedObjectsDALException()
     {
         // Arrange
@@ -70,10 +65,10 @@ public class SqlParserTests : TestBase
                                                  });
 
         // Assert
-        action.Should().Throw<RemoveLinkedObjectsDALException>().And.Message.Should().Contain($"{nameof(SqlParserTestObj)} cannot be removed because it is used in {nameof(SqlParserTestObjContainer)}");
+        Assert.Contains($"{nameof(SqlParserTestObj)} cannot be removed because it is used in {nameof(SqlParserTestObjContainer)}", Assert.Throws<RemoveLinkedObjectsDALException>(action).Message);
     }
 
-    [TestMethod]
+    [Fact]
     public void RemoveHRDepartment_HasEmployeeWithHRDepartment_CorrectExceptionMessage()
     {
         // Arrange
@@ -103,6 +98,6 @@ public class SqlParserTests : TestBase
         Action action = () => hRDepartmentController.Evaluate(c => c.RemoveHRDepartment(fullEmployee.HRDepartment.Identity));
 
         // Assert
-        action.Should().Throw<Exception>().WithMessage($"{nameof(HRDepartment)} cannot be removed because it is used in {nameof(Employee)}");
+        Assert.Equal($"{nameof(HRDepartment)} cannot be removed because it is used in {nameof(Employee)}", Assert.Throws<RemoveLinkedObjectsDALException>(action).Message);
     }
 }

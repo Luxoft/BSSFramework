@@ -2,7 +2,7 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
-    <IvAt>3.3.2.0</IvAt>
+    <IvAt>3.3.3.0</IvAt>
     <BssPlatform>[1.6.2]</BssPlatform>
   </PropertyGroup>
   <ItemGroup>
@@ -46,7 +46,6 @@
     <PackageVersion Include="MediatR" Version="14.1.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc" Version="2.3.9" />
     <PackageVersion Include="FluentValidation" Version="12.1.1" />
-    <PackageVersion Include="FluentAssertions" Version="[7.2.0]" />
     <PackageVersion Include="FluentMigrator" Version="8.0.1" />
     <PackageVersion Include="FluentMigrator.Runner" Version="8.0.1" />
     <PackageVersion Include="FluentNHibernate" Version="3.4.1" />
@@ -74,14 +73,9 @@
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.6" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.4.0" />
     <PackageVersion Include="Microsoft.SqlServer.SqlManagementObjects" Version="181.19.0" />
-    <PackageVersion Include="MSTest.TestAdapter" Version="4.2.1" />
-    <PackageVersion Include="MSTest.TestFramework" Version="4.2.1" />
     <PackageVersion Include="NHibernate" Version="5.6.0" />
     <PackageVersion Include="NHibernate.Envers" Version="5.6.0" />
     <PackageVersion Include="NSubstitute" Version="5.3.0" />
-    <PackageVersion Include="NUnit" Version="4.5.1" />
-    <PackageVersion Include="NUnit.ConsoleRunner" Version="3.22.0" />
-    <PackageVersion Include="NUnit3TestAdapter" Version="6.2.0" />
     <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="[7.2.0]" />
     <PackageVersion Include="System.CodeDom" Version="10.0.6" />
     <PackageVersion Include="System.Reflection.Context" Version="10.0.6" />
@@ -91,7 +85,5 @@
     <PackageVersion Include="Unity.Interception" Version="5.11.1" />
     <PackageVersion Include="xunit" Version="2.9.3" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
-    <PackageVersion Include="xunit.abstractions" Version="2.0.3" />
-    <PackageVersion Include="xunit.core" Version="2.9.3" />
   </ItemGroup>
 </Project>

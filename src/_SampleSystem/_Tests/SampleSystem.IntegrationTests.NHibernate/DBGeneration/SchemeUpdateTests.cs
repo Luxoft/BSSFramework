@@ -3,10 +3,9 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 
-[TestClass]
 public class SchemeUpdateTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void SchemeUpdate_ExistsDatabase_ShouldNotFail()
     {
         // Arrange
@@ -16,6 +15,7 @@ public class SchemeUpdateTests : TestBase
         var action = new Action(() => UseSchemeUpdateTest.UseSchemeUpdate(this.DatabaseContext.Main.ConnectionString));
 
         // Assert
-        action.Should().NotThrow();
+        var ex = Record.Exception(action);
+        Assert.Null(ex);
     }
 }

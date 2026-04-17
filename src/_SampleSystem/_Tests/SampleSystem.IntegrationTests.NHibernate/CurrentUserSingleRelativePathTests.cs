@@ -13,13 +13,11 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class CurrentUserSingleRelativePathTests : TestBase
 {
     private Guid[] testObjectIdents;
 
-    [TestInitialize]
-    public void Setup() =>
+    public CurrentUserSingleRelativePathTests() =>
         this.testObjectIdents = this.Evaluate(
             DBSessionMode.Write,
             ctx =>
@@ -35,8 +33,8 @@ public class CurrentUserSingleRelativePathTests : TestBase
                 return new[] { testObj1.Id, testObj2.Id };
             });
 
-    [TestMethod]
-    [DynamicData(nameof(TestRelativeEmployeeObject_FilterByPrimaryEmployeeRef_EmployeeBySecondaryRefMissed_Source), DynamicDataSourceType.Method)]
+    [Theory]
+    [MemberData(nameof(TestRelativeEmployeeObject_FilterByPrimaryEmployeeRef_EmployeeBySecondaryRefMissed_Source))]
     public void TestRelativeEmployeeObject_FilterByEmployeeRef1_EmployeeRef2Missed(string propName, int expectedIndex)
     {
         // Arrange
@@ -52,10 +50,10 @@ public class CurrentUserSingleRelativePathTests : TestBase
                       .Select(obj => obj.Id).ToList());
 
         // Assert
-        loadedObjects.Should().BeEquivalentTo([this.testObjectIdents[expectedIndex]]);
+        Xunit.Assert.Equal([this.testObjectIdents[expectedIndex]], loadedObjects);
     }
 
-    private static IEnumerable<object[]> TestRelativeEmployeeObject_FilterByPrimaryEmployeeRef_EmployeeBySecondaryRefMissed_Source() =>
+    public static IEnumerable<object[]> TestRelativeEmployeeObject_FilterByPrimaryEmployeeRef_EmployeeBySecondaryRefMissed_Source() =>
     [
         [nameof(TestRelativeEmployeeObject.EmployeeRef1), 0],
         [nameof(TestRelativeEmployeeObject.EmployeeRef2), 1],

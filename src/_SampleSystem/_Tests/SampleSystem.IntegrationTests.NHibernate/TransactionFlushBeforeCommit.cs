@@ -7,10 +7,9 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class TransactionFlushBeforeCommit : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void ShouldNotConsiderChangesWhileTransactionIsNotCommited()
     {
         // Arrange
@@ -33,15 +32,14 @@ public class TransactionFlushBeforeCommit : TestBase
                       });
 
         // Assert
-        this.Evaluate(
-                DBSessionMode.Read,
-                context => context.Logics.Information.GetUnsecureQueryable().Single(x => x.Email == object1.Email))
-            .Name
-            .Should()
-            .BeEquivalentTo(object2.Name);
+        var actualObject2Name = this.Evaluate(
+            DBSessionMode.Read,
+            context => context.Logics.Information.GetUnsecureQueryable().Single(x => x.Email == object1.Email).Name);
+
+        Assert.Equal(object2.Name, actualObject2Name);
     }
 
-    [TestMethod]
+    [Fact]
     public void FewDifferentTypeObjectWithTheSameId_Should_SuccessfullySave()
     {
         // Arrange
@@ -59,18 +57,16 @@ public class TransactionFlushBeforeCommit : TestBase
                       });
 
         // Assert
-        this.Evaluate(
-                DBSessionMode.Read,
-                context => context.Logics.Information.GetUnsecureQueryable().Single(x => x.Id == objectId1))
-            .Name
-            .Should()
-            .BeEquivalentTo(object1.Name);
+        var savedInformationName = this.Evaluate(
+            DBSessionMode.Read,
+            context => context.Logics.Information.GetUnsecureQueryable().Single(x => x.Id == objectId1).Name);
 
-        this.Evaluate(
-                DBSessionMode.Read,
-                context => context.Logics.Example1.GetUnsecureQueryable().Single(x => x.Id == objectId2))
-            .Field1
-            .Should()
-            .Be(object2.Field1);
+        Assert.Equal(object1.Name, savedInformationName);
+
+        var savedExampleField1 = this.Evaluate(
+            DBSessionMode.Read,
+            context => context.Logics.Example1.GetUnsecureQueryable().Single(x => x.Id == objectId2).Field1);
+
+        Assert.Equal(object2.Field1, savedExampleField1);
     }
 }

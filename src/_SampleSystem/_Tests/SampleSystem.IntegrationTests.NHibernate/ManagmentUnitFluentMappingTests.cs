@@ -7,15 +7,9 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class ManagmentUnitFluentMappingTests : TestBase
 {
-    [TestInitialize]
-    public void SetUp()
-    {
-    }
-
-    [TestMethod]
+    [Fact]
     public void CheckBusinessUnitSecondaryAccess_HasAccess()
     {
         // Arrange
@@ -57,7 +51,7 @@ public class ManagmentUnitFluentMappingTests : TestBase
                               });
 
         // Assert
-        r.Should().HaveCount(1);
-        r[0].EmployeeId.Should().Be(employeeId.Id);
+        var item = Assert.Single(r);
+        Assert.Equal(employeeId.Id, item.EmployeeId);
     }
 }

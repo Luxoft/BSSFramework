@@ -9,10 +9,9 @@ using Index = Microsoft.SqlServer.Management.Smo.Index;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 
-[TestClass]
 public class ChangeIndexesStrategyTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void GenerateLocal_ColumnHasIndexWithIncludedColumns_PreventsDefaultIndexFromGeneration()
     {
         // Arrange
@@ -50,13 +49,12 @@ public class ChangeIndexesStrategyTests : TestBase
         var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
         // Assert
-        changedTable.Indexes.Cast<Index>()
-                    .Should()
-                    .Contain(x => x.Name == newIndexName)
-                    .And.NotContain(x => x.Name == baseIndexName);
+        var indexes = changedTable.Indexes.Cast<Index>().ToList();
+        Assert.Contains(indexes, x => x.Name == newIndexName);
+        Assert.DoesNotContain(indexes, x => x.Name == baseIndexName);
     }
 
-    [TestMethod]
+    [Fact]
     public void GenerateLocal_IgnoredIndex_NotCreated()
     {
         // Arrange
@@ -82,12 +80,10 @@ public class ChangeIndexesStrategyTests : TestBase
         var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
         // Assert
-        changedTable.Indexes.Cast<Index>()
-                    .Should()
-                    .NotContain(x => x.Name == ignoredIndexName);
+        Assert.DoesNotContain(changedTable.Indexes.Cast<Index>(), x => x.Name == ignoredIndexName);
     }
 
-    [TestMethod]
+    [Fact]
     public void GenerateLocal_UniqueFieldForFK_NoDuplicates()
     {
         // Arrange
@@ -105,8 +101,6 @@ public class ChangeIndexesStrategyTests : TestBase
         var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, "Employee");
 
         // Assert
-        changedTable.Indexes.Cast<Index>()
-                    .Should()
-                    .NotContain(x => x.Name == "IX_ChildEntity_parentId");
+        Assert.DoesNotContain(changedTable.Indexes.Cast<Index>(), x => x.Name == "IX_ChildEntity_parentId");
     }
 }

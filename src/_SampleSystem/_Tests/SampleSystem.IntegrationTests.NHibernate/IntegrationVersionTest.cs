@@ -9,10 +9,9 @@ using SampleSystem.WebApiCore.Controllers.Integration;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class IntegrationVersionTest : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void SaveWithMoreVersion_IgnoreLessPolicy_ValueSaved()
     {
         //Arrange
@@ -49,11 +48,11 @@ public class IntegrationVersionTest : TestBase
         // Assert
 
         var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
-        actual.Name.Should().Be(expectedName);
-        actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
+        Assert.Equal(expectedName, actual.Name);
+        Assert.Equal(expectedIntegrationVersion, actual.IntegrationVersion);
     }
 
-    [TestMethod]
+    [Fact]
     public void SaveWithLessVersion_IgnoreLessPolicy_ValueIgnore()
     {
         //Arrange
@@ -89,11 +88,11 @@ public class IntegrationVersionTest : TestBase
         // Assert
 
         var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
-        actual.Name.Should().Be(expectedName);
-        actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
+        Assert.Equal(expectedName, actual.Name);
+        Assert.Equal(expectedIntegrationVersion, actual.IntegrationVersion);
     }
 
-    [TestMethod]
+    [Fact]
     public void SaveWithEqualVersion_IgnoreLessPolicy_ValueIgnored()
     {
         //Arrange
@@ -129,11 +128,11 @@ public class IntegrationVersionTest : TestBase
         // Assert
 
         var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
-        actual.Name.Should().Be(expectedName);
-        actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
+        Assert.Equal(expectedName, actual.Name);
+        Assert.Equal(expectedIntegrationVersion, actual.IntegrationVersion);
     }
 
-    [TestMethod]
+    [Fact]
     public void SaveWithMoreVersion_IgnoreLessOrEqualPolicy_ValueSaved()
     {
         //Arrange
@@ -170,11 +169,11 @@ public class IntegrationVersionTest : TestBase
         // Assert
 
         var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer2>().GetById(id));
-        actual.Name.Should().Be(expectedName);
-        actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
+        Assert.Equal(expectedName, actual.Name);
+        Assert.Equal(expectedIntegrationVersion, actual.IntegrationVersion);
     }
 
-    [TestMethod]
+    [Fact]
     public void SaveWithLessVersion_IgnoreLessOrEqualPolicy_ValueIgnore()
     {
         //Arrange
@@ -210,11 +209,11 @@ public class IntegrationVersionTest : TestBase
         // Assert
 
         var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer2>().GetById(id));
-        actual.Name.Should().Be(expectedName);
-        actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
+        Assert.Equal(expectedName, actual.Name);
+        Assert.Equal(expectedIntegrationVersion, actual.IntegrationVersion);
     }
 
-    [TestMethod]
+    [Fact]
     public void SaveWithEqualVersion_IgnoreLessOrEqualPolicy_ValueIgnored()
     {
         //Arrange
@@ -252,11 +251,11 @@ public class IntegrationVersionTest : TestBase
         // Assert
 
         var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer2>().GetById(id));
-        actual.Name.Should().Be(nextName);
-        actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
+        Assert.Equal(nextName, actual.Name);
+        Assert.Equal(expectedIntegrationVersion, actual.IntegrationVersion);
     }
 
-    [TestMethod]
+    [Fact]
     public void SaveModelWithLessVersion_IgnoreLessOrEqualPolicy_ValueIgnore()
     {
         //Arrange
@@ -302,11 +301,11 @@ public class IntegrationVersionTest : TestBase
         // Assert
 
         var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
-        actual.Name.Should().Be(expectedName);
-        actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
+        Assert.Equal(expectedName, actual.Name);
+        Assert.Equal(expectedIntegrationVersion, actual.IntegrationVersion);
     }
 
-    [TestMethod]
+    [Fact]
     public void SaveModelWithEqualVersion_IgnoreLessOrEqualPolicy_ValueIgnored()
     {
         //Arrange
@@ -352,7 +351,7 @@ public class IntegrationVersionTest : TestBase
         // Assert
 
         var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
-        actual.Name.Should().Be(modelName);
-        actual.IntegrationVersion.Should().Be(expectedIntegrationVersion + 1);
+        Assert.Equal(modelName, actual.Name);
+        Assert.Equal(expectedIntegrationVersion + 1, actual.IntegrationVersion);
     }
 }

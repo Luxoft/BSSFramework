@@ -5,10 +5,9 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class EnversBug1676 : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void OneToOneMapping()
     {
         // Arrange
@@ -66,19 +65,19 @@ public class EnversBug1676 : TestBase
                           {
                               var locationRevisions = context.Logics.Location1676.GetObjectRevisions(locaitionId).RevisionInfos.OrderBy(z => z.RevisionNumber).ToList();
 
-                              locationRevisions.Count.Should().Be(4);
+                               Assert.Equal(4, locationRevisions.Count);
 
                               var version1 = context.Logics.Location1676.GetObjectByRevision(locaitionId, locationRevisions[0].RevisionNumber);
-                              version1.Coefficient.NormCoefficient.Should().Be(version1Norm);
+                               Assert.Equal(version1Norm, version1.Coefficient.NormCoefficient);
 
                               var version2 = context.Logics.Location1676.GetObjectByRevision(locaitionId, locationRevisions[1].RevisionNumber);
-                              version2.Coefficient.NormCoefficient.Should().Be(version1Norm);
+                               Assert.Equal(version1Norm, version2.Coefficient.NormCoefficient);
 
                               var version3 = context.Logics.Location1676.GetObjectByRevision(locaitionId, locationRevisions[2].RevisionNumber);
-                              version3.Coefficient.NormCoefficient.Should().Be(version2Norm);
+                               Assert.Equal(version2Norm, version3.Coefficient.NormCoefficient);
 
                               var version4 = context.Logics.Location1676.GetObjectByRevision(locaitionId, locationRevisions[3].RevisionNumber);
-                              version4.Coefficient.NormCoefficient.Should().Be(version2Norm);
+                               Assert.Equal(version2Norm, version4.Coefficient.NormCoefficient);
                           });
     }
 }

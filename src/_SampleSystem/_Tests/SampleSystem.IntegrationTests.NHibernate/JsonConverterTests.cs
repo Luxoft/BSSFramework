@@ -7,10 +7,9 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class JsonConverterTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void DateTimeConverted_ResultCorrected()
     {
         //Arrange
@@ -23,11 +22,11 @@ public class JsonConverterTests : TestBase
         var restored = JsonSerializer.Deserialize<DateTime>(jsonText, options);
 
         //Assert
-        now.Should().Be(restored);
+        Assert.Equal(now, restored);
     }
 
 
-    [TestMethod]
+    [Fact]
     public void PeriodConverted_ResultCorrected()
     {
         //Arrange
@@ -40,10 +39,10 @@ public class JsonConverterTests : TestBase
         var restored = JsonSerializer.Deserialize<Period>(jsonText, options);
 
         //Assert
-        testPeriod.Should().Be(restored);
+        Assert.Equal(testPeriod, restored);
     }
 
-    [TestMethod]
+    [Fact]
     public void PeriodWithNullConverted_ResultCorrected()
     {
         //Arrange
@@ -56,6 +55,6 @@ public class JsonConverterTests : TestBase
         var restored = JsonSerializer.Deserialize<Period>(jsonText, options);
 
         //Assert
-        testPeriod.Should().Be(restored);
+        Assert.Equal(testPeriod, restored);
     }
 }

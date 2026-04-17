@@ -2,14 +2,9 @@
 
 namespace Framework.Authorization.TestGenerate;
 
-public partial class ServerGenerators(AuthorizationGenerationEnvironment environment) : GeneratorsBase
+public partial class ServerGenerators(AuthorizationGenerationEnvironment? environment = null) : GeneratorsBase
 {
-    protected readonly AuthorizationGenerationEnvironment Environment = environment;
-
-    public ServerGenerators()
-            : this(AuthorizationGenerationEnvironment.Default)
-    {
-    }
+    protected readonly AuthorizationGenerationEnvironment Environment = environment ?? AuthorizationGenerationEnvironment.Default;
 
     protected override string GeneratePath => this.FrameworkPath + @"/src/_Authorization";
 }

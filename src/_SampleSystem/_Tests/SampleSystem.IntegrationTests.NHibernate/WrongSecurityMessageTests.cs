@@ -12,23 +12,21 @@ using SecuritySystem.AccessDenied;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class WrongSecurityMessageTests : TestBase
 {
     private static readonly string TestPrincipalName = TextRandomizer.RandomString(10);
 
     private static readonly Guid TestPrincipalId = Guid.NewGuid();
 
-    [TestInitialize]
-    public void SetUp() => this.DataHelper.SaveEmployee(login: TestPrincipalName, id: TestPrincipalId);
+    public WrongSecurityMessageTests() => this.DataHelper.SaveEmployee(login: TestPrincipalName, id: TestPrincipalId);
 
-    [TestMethod]
+    [Fact]
     public void UseWrongSecurityMode_ErrorMessageCorrected() => this.UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SecurityRule.Edit);
 
-    [TestMethod]
+    [Fact]
     public void UseWrongSecurityOperation_ErrorMessageCorrected() => this.UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SampleSystemSecurityOperation.EmployeeEdit);
 
-    [TestMethod]
+    [Fact]
     public void UseWrongSecurityRole_ErrorMessageCorrected() => this.UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SampleSystemSecurityRole.SeManager);
 
     private void UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SecurityRule securityRule)
@@ -42,8 +40,8 @@ public class WrongSecurityMessageTests : TestBase
                          ctx => ctx.Logics.EmployeeFactory.Create(securityRule).CheckAccess(ctx.CurrentEmployeeSource.CurrentUser));
 
         // Assert
-        action.Should()
-              .Throw<AccessDeniedException>()
-              .WithMessage($"You have no permissions to access object with type = '{nameof(Employee)}' (id = '{TestPrincipalId}', securityRule = '{securityRule}')");
+        Assert.Equal(
+            $"You have no permissions to access object with type = '{nameof(Employee)}' (id = '{TestPrincipalId}', securityRule = '{securityRule}')",
+            Assert.Throws<AccessDeniedException>(action).Message);
     }
 }

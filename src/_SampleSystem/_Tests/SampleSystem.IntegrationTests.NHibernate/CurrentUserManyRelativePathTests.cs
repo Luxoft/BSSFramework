@@ -9,15 +9,13 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class CurrentUserManyRelativePathTests : TestBase
 {
     private Guid[] testEmployeeIdents;
 
     private Guid testObj;
 
-    [TestInitialize]
-    public void Setup()
+    public CurrentUserManyRelativePathTests()
     {
         this.testEmployeeIdents =
 
@@ -45,7 +43,7 @@ public class CurrentUserManyRelativePathTests : TestBase
             });
     }
 
-    [TestMethod]
+    [Fact]
     public void TestManyRelativeEmployeeObject_FilterByEmployee_ObjectFound()
     {
         // Arrange
@@ -71,6 +69,6 @@ public class CurrentUserManyRelativePathTests : TestBase
                          .ToArray();
 
         // Assert
-        results.Should().BeEquivalentTo(expectedResult);
+        Assert.Equal(expectedResult, results);
     }
 }

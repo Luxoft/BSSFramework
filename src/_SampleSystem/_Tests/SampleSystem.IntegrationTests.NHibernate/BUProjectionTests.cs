@@ -8,15 +8,13 @@ using SampleSystem.WebApiCore.Controllers.MainQuery;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class BUProjectionTests : TestBase
 {
     private const string TestEmployee0Login = "Test Employee 0";
     private const string TestEmployee1Login = "Test Employee 1";
     private const string TestEmployee2Login = "Test Employee 2";
 
-    [TestInitialize]
-    public void SetUp()
+    public BUProjectionTests()
     {
         var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 
@@ -61,7 +59,7 @@ public class BUProjectionTests : TestBase
                       });
     }
 
-    [TestMethod]
+    [Fact]
     public void BusinessUnitProjectionCalcCollectionPropTest()
     {
         // Arrange
@@ -72,11 +70,11 @@ public class BUProjectionTests : TestBase
         var profitBU = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitsByODataQueryString($"$filter=Id eq GUID'{DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID}'"));
 
         // Assert
-        profitBU.Items.Should().ContainSingle();
-        profitBU.Items[0].Employees.Should().Be(expectedEmployee);
+        var item = Assert.Single(profitBU.Items);
+        Assert.Equal(expectedEmployee, item.Employees);
     }
 
-    [TestMethod]
+    [Fact]
     public void BusinessUnitProjectionCalcHerPropTest()
     {
         // Arrange
@@ -87,7 +85,7 @@ public class BUProjectionTests : TestBase
         var profitBU = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitsByODataQueryString($"$filter=Id eq GUID'{DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID}'"));
 
         // Assert
-        profitBU.Items.Should().ContainSingle();
-        profitBU.Items[0].HerBusinessUnit_Full.Should().Be(expectedHer);
+        var item = Assert.Single(profitBU.Items);
+        Assert.Equal(expectedHer, item.HerBusinessUnit_Full);
     }
 }

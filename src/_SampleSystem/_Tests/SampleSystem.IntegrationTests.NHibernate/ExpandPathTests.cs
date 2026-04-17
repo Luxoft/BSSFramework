@@ -6,10 +6,9 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class ExpandPathTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void LiftToNullableContainsExt_ShouldNotThrowException()
     {
         // Arrange
@@ -24,10 +23,10 @@ public class ExpandPathTests : TestBase
                                 });
 
         // Assert
-        action.Should().NotThrow();
+        action();
     }
 
-    [TestMethod]
+    [Fact]
     public void LiftToNullableBinaryExpression_ShouldNotThrowException()
     {
         // Arrange
@@ -41,10 +40,10 @@ public class ExpandPathTests : TestBase
                                 });
 
         // Assert
-        action.Should().NotThrow();
+        action();
     }
 
-    [TestMethod]
+    [Fact]
     public void LiftToNullablePeriodIntersect_ShouldNotThrowException()
     {
         // Arrange
@@ -62,11 +61,11 @@ public class ExpandPathTests : TestBase
                                 });
 
         // Assert
-        action.Should().NotThrow();
+        action();
     }
 
 
-    [TestMethod]
+    [Fact]
     public void LiftToNullablePeriodContains_ShouldNotThrowException()
     {
         // Arrange
@@ -80,6 +79,6 @@ public class ExpandPathTests : TestBase
                                 });
 
         // Assert
-        action.Should().NotThrow();
+        action();
     }
 }

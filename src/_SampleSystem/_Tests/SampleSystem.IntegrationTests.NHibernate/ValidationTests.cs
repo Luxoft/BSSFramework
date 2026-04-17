@@ -4,11 +4,9 @@ using ValidationException = Framework.Validation.ValidationException;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class ValidationTests : TestBase
 {
-    [TestMethod]
-    [Description("Проверяется уникальности путём запрос к БД.")]
+    [Fact]
     public void ValidateByDB_ValidationException()
     {
         // Arrange
@@ -18,11 +16,10 @@ public class ValidationTests : TestBase
         Action call = () => this.DataHelper.SaveEmployee("John Doe", "JD");
 
         // Assert
-        call.Should().Throw<ValidationException>();
+        Assert.Throws<ValidationException>(call);
     }
 
-    [Description("Проверка с использованием атрибута.")]
-    [TestMethod]
+    [Fact]
     public void ValidateByClassAttribute_ValidationException()
     {
         // Arrange
@@ -31,11 +28,10 @@ public class ValidationTests : TestBase
         Action call = () => this.DataHelper.SaveEmployee(pin: 1234);
 
         // Assert
-        call.Should().Throw<ValidationException>().WithMessage("Employee Pin could not be set as '1234'");
+        Assert.Equal("Employee Pin could not be set as '1234'", Assert.Throws<ValidationException>(call).Message);
     }
 
-    [TestMethod]
-    [Description("Проверка с использованием ValidationMap и валидатора конкретного доменного типа.")]
+    [Fact]
     public void ValidateByConcreteValidator_ValidationException()
     {
         // Arrange
@@ -46,11 +42,10 @@ public class ValidationTests : TestBase
         Action call = () => this.DataHelper.SaveEmployee(externalId: externalId);
 
         // Assert
-        call.Should().Throw<ValidationException>().WithMessage($"Employee with ExternalId '{externalId}' already exists.");
+        Assert.Equal($"Employee with ExternalId '{externalId}' already exists.", Assert.Throws<ValidationException>(call).Message);
     }
 
-    [Description("Проверка с использованием глобального валидатора целевой системы.")]
-    [TestMethod]
+    [Fact]
     public void ValidateByGlobalValidator_ValidationException()
     {
         // Arrange
@@ -61,11 +56,10 @@ public class ValidationTests : TestBase
         Action call = () => this.DataHelper.SaveEmployee(pin: pin);
 
         // Assert
-        call.Should().Throw<ValidationException>().WithMessage($"Employee with Pin '{pin}' already exists.");
+        Assert.Equal($"Employee with Pin '{pin}' already exists.", Assert.Throws<ValidationException>(call).Message);
     }
 
-    [TestMethod]
-    [Description("#IADFRAME-334")]
+    [Fact]
     public void Validate_HasInvalidVirtualProperty_ShouldNotThrow()
     {
         // Arrange
@@ -76,11 +70,10 @@ public class ValidationTests : TestBase
         Action call = () => this.DataHelper.SaveEmployee(externalId: externalId, nonValidateVirtualProp: invalidDate);
 
         // Assert
-        call.Should().NotThrow(because: "Non persistent properties must not validated by default");
+        call();
     }
 
-    [TestMethod]
-    [Description("#IADFRAME-334")]
+    [Fact]
     public void Validate_HasInvalidVirtualPropertyMarkedWithAttribute_ShouldThrow()
     {
         // Arrange
@@ -91,6 +84,6 @@ public class ValidationTests : TestBase
         Action call = () => this.DataHelper.SaveEmployee(externalId: externalId, validateVirtualProp: invalidDate);
 
         // Assert
-        call.Should().Throw<ValidationException>().WithMessage("Employee has ValidateVirtualProp value was too overflow for a DateTime");
+        Assert.Equal("Employee has ValidateVirtualProp value was too overflow for a DateTime", Assert.Throws<ValidationException>(call).Message);
     }
 }

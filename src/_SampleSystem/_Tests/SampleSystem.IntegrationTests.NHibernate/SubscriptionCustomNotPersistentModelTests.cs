@@ -7,10 +7,9 @@ using SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersisten
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class SubscriptionCustomNotPersistentModelTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void CustomNotPersistentNotificationModel_Always_ShouldNotThrowException()
     {
         // Arrange
@@ -59,6 +58,6 @@ public class SubscriptionCustomNotPersistentModelTests : TestBase
         var notifications = this.GetNotifications();
 
         // Assert
-        notifications.Should().Contain(x => x.TechnicalInformation.MessageTemplateCode == typeof(_DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml).FullName);
+        Assert.Contains(notifications, x => x.TechnicalInformation.MessageTemplateCode == typeof(_DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml).FullName);
     }
 }

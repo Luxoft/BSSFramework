@@ -17,10 +17,9 @@ using SampleSystem.ServiceEnvironment.DependencyInjection;
 
 namespace SampleSystem.DbGenerate.NHibernate;
 
-[TestClass]
 public class UseSchemeUpdateTest
 {
-    [TestMethod]
+    [Fact]
     public void LocalDb()
     {
         const string connectionString =

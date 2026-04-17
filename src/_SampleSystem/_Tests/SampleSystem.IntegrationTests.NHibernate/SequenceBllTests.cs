@@ -6,10 +6,9 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class SequenceBllTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void GetNextNumber_TwoCallsInParallelTransactions_ShouldGiveDifferentNumbers()
     {
         // Arrange
@@ -57,10 +56,11 @@ public class SequenceBllTests : TestBase
 
         // Assert
         Task.WaitAll(taskWithWait, taskFast);
-        new[] { numberFast1, numberFast2, numberWithWait1, numberWithWait2 }.Should().OnlyHaveUniqueItems();
+        var numbers = new[] { numberFast1, numberFast2, numberWithWait1, numberWithWait2 };
+        Assert.Equal(numbers.Length, numbers.Distinct().Count());
     }
 
-    [TestMethod]
+    [Fact]
     public void GetNextNumber_TwoCallsOneTransaction_ShouldGiveDifferentNumbers()
     {
         // Arrange
@@ -78,11 +78,11 @@ public class SequenceBllTests : TestBase
             });
 
         // Assert
-        numbers.Number1.Should().Be(2);
-        numbers.Number2.Should().Be(3);
+        Assert.Equal(2, numbers.Number1);
+        Assert.Equal(3, numbers.Number2);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetNextNumber_TwoCallsDifferentTransaction_ShouldGiveDifferentNumbers()
     {
         // Arrange
@@ -99,8 +99,8 @@ public class SequenceBllTests : TestBase
             context => context.Configuration.Logics.Sequence.GetNextNumber(name));
 
         // Assert
-        number1.Should().Be(2);
-        number2.Should().Be(3);
+        Assert.Equal(2, number1);
+        Assert.Equal(3, number2);
     }
 
     private class SequenceBllMock(

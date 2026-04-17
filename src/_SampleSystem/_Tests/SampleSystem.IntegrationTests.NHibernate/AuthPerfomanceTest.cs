@@ -17,7 +17,6 @@ using SecuritySystem;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class AuthPerformanceTest : TestBase
 {
     private IReadOnlyCollection<BusinessUnitIdentityDTO?> fbuSource;
@@ -32,8 +31,7 @@ public class AuthPerformanceTest : TestBase
 
     private static readonly int Size = 5;
 
-    [TestInitialize]
-    public void SetUp()
+    public AuthPerformanceTest()
     {
         this.fbuSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (BusinessUnitIdentityDTO?)this.DataHelper.SaveBusinessUnit())];
 
@@ -48,7 +46,7 @@ public class AuthPerformanceTest : TestBase
         this.GeneratePermission();
     }
 
-    [TestMethod]
+    [Fact]
     public async Task LoadGenerateAuthPerformanceObjects_CountEquals()
     {
         // Arrange
@@ -65,7 +63,7 @@ public class AuthPerformanceTest : TestBase
                             });
 
         // Assert
-        authPerfCount.Should().Be(findCount);
+        Assert.Equal(findCount, authPerfCount);
     }
 
     private void GeneratePermission()

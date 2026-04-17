@@ -8,10 +8,9 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class NotificationCountryTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void CreateAndUpdateCountry_SingleModificationExists()
     {
         // Arrange
@@ -40,13 +39,11 @@ public class NotificationCountryTests : TestBase
             });
 
         // Assert
-        this.GetModifications().Count.Should().Be(1);
-
-        this.GetModifications().Count(mod => mod.ModificationType == ModificationType.Save && mod.Identity == countryId && mod.TypeInfoDescription.Name == nameof(Country)).Should()
-            .Be(1);
+        Assert.Single(this.GetModifications());
+        Assert.Equal(1, this.GetModifications().Count(mod => mod.ModificationType == ModificationType.Save && mod.Identity == countryId && mod.TypeInfoDescription.Name == nameof(Country)));
     }
 
-    [TestMethod]
+    [Fact]
     public void CreateAndRemoveCountry_ModificationNotExists()
     {
         // Arrange
@@ -71,10 +68,10 @@ public class NotificationCountryTests : TestBase
             });
 
         // Assert
-        this.GetModifications().Count.Should().Be(0);
+        Assert.Empty(this.GetModifications());
     }
 
-    [TestMethod]
+    [Fact]
     public void RemoveCountry_RemoveModificationExists()
     {
         // Arrange
@@ -101,13 +98,12 @@ public class NotificationCountryTests : TestBase
         countryController.Evaluate(c => c.RemoveCountry(new CountryIdentityDTO { Id = countryId }));
 
         // Assert
-        this.GetModifications().Count.Should().Be(1);
-        this.GetModifications().Count(mod => mod.ModificationType == ModificationType.Remove && mod.Identity == countryId && mod.TypeInfoDescription.Name == nameof(Country))
-            .Should().Be(1);
+        Assert.Single(this.GetModifications());
+        Assert.Equal(1, this.GetModifications().Count(mod => mod.ModificationType == ModificationType.Remove && mod.Identity == countryId && mod.TypeInfoDescription.Name == nameof(Country)));
     }
 
 
-    [TestMethod]
+    [Fact]
     public void EmulateFailureCountryModification_RaisedException()
     {
         // Arrange
@@ -136,6 +132,6 @@ public class NotificationCountryTests : TestBase
         var call = new Action(() => configController.Evaluate(c => c.ProcessModifications(1000)));
 
         // Assert
-        call.Should().Throw<ArgumentException>().WithMessage("both arguments (previous and current) can't be null");
+        Assert.Equal("Both arguments (previous and current) can't be null", Assert.Throws<ArgumentException>(call).Message);
     }
 }

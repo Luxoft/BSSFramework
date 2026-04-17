@@ -9,10 +9,9 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class CurrentUserSourceTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void TryGetCurrentUserWithEmployee_CurrentUserResolved()
     {
         // Arrange
@@ -31,22 +30,26 @@ public class CurrentUserSourceTests : TestBase
             });
 
         // Assert
-        employeeId.Should().Be(result);
+        Assert.Equal(result, employeeId);
     }
 
-    [TestMethod]
+    [Fact]
     public void TryGetCurrentUserWithoutEmployee_ExceptionRaised()
     {
         // Arrange
         var randomName = TextRandomizer.RandomString(10);
 
         // Act
-        var action = () => this.Evaluate(
-                         DBSessionMode.Read,
-                         randomName,
-                         ctx => ctx.CurrentEmployeeSource.CurrentUser.Id);
+        var action = () =>
+        {
+            this.Evaluate(
+                DBSessionMode.Read,
+                randomName,
+                ctx => ctx.CurrentEmployeeSource.CurrentUser.Id);
+        };
 
         // Assert
-        action.Should().Throw<UserSourceException>().And.Message.Should().Be($"{nameof(Employee)} \"{randomName}\" not found");
+        var exception = Assert.Throws<UserSourceException>(action);
+        Assert.Equal($"{nameof(Employee)} \"{randomName}\" not found", exception.Message);
     }
 }

@@ -12,10 +12,9 @@ using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class SecurityPathTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void SecurityPathWithContext_EmployeeWithoutContextRestrictions_EmployeeShouldHaveAccess()
     {
         // Arrange
@@ -38,6 +37,6 @@ public class SecurityPathTests : TestBase
                                    });
 
         // Assert
-        result.Should().BeEquivalentTo(employeeIdentity);
+        Assert.Equal(employeeIdentity, result);
     }
 }

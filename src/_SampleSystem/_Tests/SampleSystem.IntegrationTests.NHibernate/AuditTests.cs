@@ -9,14 +9,14 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Audit;
 using SampleSystem.WebApiCore.Controllers.Main;
+
 using BusinessUnitController = SampleSystem.WebApiCore.Controllers.Audit.BusinessUnitController;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class AuditTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void GetObjectRevisions_CheckCount_Correct()
     {
         // Act
@@ -46,10 +46,10 @@ public class AuditTests : TestBase
         // Assert
         var actualRevesionCount = employeeAuditController.Evaluate(c => c.GetEmployeeRevisions(employeeIdentity));
 
-        actualRevesionCount.RevisionInfos.Count().Should().Be(testCount + 1);
+        Assert.Equal(testCount + 1, actualRevesionCount.RevisionInfos.Count());
     }
 
-    [TestMethod]
+    [Fact]
     public void GetObjectByRevision_CheckState_Correct()
     {
         // Act
@@ -93,10 +93,10 @@ public class AuditTests : TestBase
                                                                      }));
 
         var expected = Enumerable.Range(-1, testCount).Skip(skip).First();
-        lastEmployeeState.NameEng.FirstName.Should().Be($"{expected}");
+        Assert.Equal($"{expected}", lastEmployeeState.NameEng.FirstName);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetObjectPropertyRevisions_CallNotChangeProperty_RevisionsIsOne()
     {
         // Act
@@ -120,10 +120,10 @@ public class AuditTests : TestBase
                                                                              PropertyName = $"{nameof(Employee.CoreBusinessUnit)}"
                                                                      }));
 
-        propertyRevisions.RevisionInfos.Count().Should().Be(1);
+        Assert.Single(propertyRevisions.RevisionInfos);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetObjectPropertyRevisions_ChangePrimitiveProperty_CorrectRevisions()
     {
         // Act
@@ -165,10 +165,10 @@ public class AuditTests : TestBase
                                                            .FirstOrDefault() as SampleSystemPropertyRevisionDTO<string>;
 
         var expected = Enumerable.Range(-1, testCount).Skip(skip).First();
-        checkPropertyRevision?.Value.Should().Be($"{expected}{emailTail}");
+        Assert.Equal($"{expected}{emailTail}", checkPropertyRevision?.Value);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetObjectPropertyRevisions_CheckFirstRevisioins_HasAddedState()
     {
         // Act
@@ -210,10 +210,10 @@ public class AuditTests : TestBase
                                                    .FirstOrDefault() as SampleSystemPropertyRevisionDTO<string>;
 
         var expected = Enumerable.Range(-1, testCount).Skip(skip).First();
-        firstRevision.RevisionType.Should().Be(AuditRevisionType.Added);
+        Assert.Equal(AuditRevisionType.Added, firstRevision.RevisionType);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetObjectPropertyRevisions_CheckAfterFirstRevisioins_AllModifiedState()
     {
         // Act
@@ -255,12 +255,12 @@ public class AuditTests : TestBase
                                                          .Distinct()
                                                          .ToList();
 
-        afterFirstRevisions.Count.Should().Be(1);
-        afterFirstRevisions.First().Should().Be(AuditRevisionType.Modified);
+        Assert.Single(afterFirstRevisions);
+        Assert.Equal(AuditRevisionType.Modified, afterFirstRevisions.First());
     }
 
 
-    [TestMethod]
+    [Fact]
     public void CrateNewBu_AuditBuLoadedFromCustomMapping()
     {
         // Arrange
@@ -281,10 +281,10 @@ public class AuditTests : TestBase
                           .Evaluate(c => c.LoadFromCustomAuditMapping(newBu, newBuRevInfo.RevisionNumber));
 
 
-        auditBu.Revision.Should().Be(newBuRevInfo.RevisionNumber);
-        auditBu.Author.Should().Be(testUser);
-        newBuRevInfo.Author.Should().Be(testUser);
+        Assert.Equal(newBuRevInfo.RevisionNumber, auditBu.Revision);
+        Assert.Equal(testUser, auditBu.Author);
+        Assert.Equal(testUser, newBuRevInfo.Author);
 
-        auditBu.BuIdent.Should().Be(newBu);
+        Assert.Equal(newBu, auditBu.BuIdent);
     }
 }

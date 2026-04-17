@@ -21,10 +21,9 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class EmployeeTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void GetEmployeeFromDB_FilterByAge_ReturnNotNulRecords()
     {
         /*
@@ -44,11 +43,11 @@ public class EmployeeTests : TestBase
             ctx => ctx.Logics.Employee.GetUnsecureQueryable().Where(q => q.Age == 10).ToList());
 
         // Assert
-        actual.Count().Should().Be(1);
-        actual.Select(z => z.Age).All(z => z == 10).Should().BeTrue();
+        Assert.Single(actual);
+        Assert.True(actual.Select(z => z.Age).All(z => z == 10));
     }
 
-    [TestMethod]
+    [Fact]
     public void AddNewEmployee_CheckEmployeeSaved()
     {
         // Arrange
@@ -59,10 +58,10 @@ public class EmployeeTests : TestBase
         var employees = employeeController.Evaluate(c => c.GetSimpleEmployees());
 
         // Assert
-        employees.Should().Contain(e => e.Id == employeeIdentity.Id);
+        Assert.Contains(employees, e => e.Id == employeeIdentity.Id);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetEmployeeByOData_ContainsForNumberProperty_OnlyRequestedDataInTheResult()
     {
         // Arrange
@@ -83,11 +82,11 @@ public class EmployeeTests : TestBase
 
         // Assert
         var pins = result.Items.Select(x => x.Pin).ToArray();
-        pins.Should().Contain(123);
-        pins.Should().NotContain(456);
+        Assert.Contains(123, pins);
+        Assert.DoesNotContain(456, pins);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetEmployeeByOData_TakeTestWithoutSorting_OnlyRequestedDataInTheResult()
     {
         // Arrange
@@ -124,11 +123,11 @@ public class EmployeeTests : TestBase
         var secondPin = idToPinMap[maxId];
 
         var pins = result.Items.Select(x => x.Pin).ToArray();
-        pins.Should().Contain(firstPin);
-        pins.Should().NotContain(secondPin);
+        Assert.Contains(firstPin, pins);
+        Assert.DoesNotContain(secondPin, pins);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetEmployeeByOData_TakeAndSkipTestWithoutSorting_OnlyRequestedDataInTheResult()
     {
         // Arrange
@@ -165,11 +164,11 @@ public class EmployeeTests : TestBase
         var secondPin = idToPinMap[maxId];
 
         var pins = result.Items.Select(x => x.Pin).ToArray();
-        pins.Should().Contain(secondPin);
-        pins.Should().NotContain(firstPin);
+        Assert.Contains(secondPin, pins);
+        Assert.DoesNotContain(firstPin, pins);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetEmployeeByOData_TakeAndSkipTestWithSorting_OnlyRequestedDataInTheResult()
     {
         // Arrange
@@ -190,11 +189,11 @@ public class EmployeeTests : TestBase
 
         // Assert
         var pins = result.Items.Select(x => x.Pin).ToArray();
-        pins.Should().Contain(123);
-        pins.Should().NotContain(456);
+        Assert.Contains(123, pins);
+        Assert.DoesNotContain(456, pins);
     }
 
-    [TestMethod]
+    [Fact]
     public void ForceDomainTypeEvent_ForceEmployeeSaveEvent_ContainsEventEmployee()
     {
         // Arrange
@@ -217,12 +216,11 @@ public class EmployeeTests : TestBase
                 }));
 
         // Assert
-        this.GetIntegrationEvents<EmployeeSaveEventDTO>().Should().ContainSingle(dto => dto.Employee.Id == employeeIdentity.Id);
-        this.GetIntegrationEvents<EmployeeCustomEventModelSaveEventDTO>().Should()
-            .ContainSingle(dto => dto.EmployeeCustomEventModel.Id == employeeIdentity.Id);
+        Assert.Single(this.GetIntegrationEvents<EmployeeSaveEventDTO>(), dto => dto.Employee.Id == employeeIdentity.Id);
+        Assert.Single(this.GetIntegrationEvents<EmployeeCustomEventModelSaveEventDTO>(), dto => dto.EmployeeCustomEventModel.Id == employeeIdentity.Id);
     }
 
-    [TestMethod]
+    [Fact]
     public void ChangeEmployee_ProcessModifications_ContainsNotification()
     {
         // Arrange
@@ -249,16 +247,17 @@ public class EmployeeTests : TestBase
         var modifications = this.GetModifications();
         var notifications = this.GetNotifications();
 
-        processedModCount.Should().BeGreaterThan(0);
+        Assert.True(processedModCount > 0);
 
-        modifications.Should().ContainSingle(dto => dto.ModificationType == ModificationType.Save && dto.Identity == employeeIdentity.Id);
-        notifications.Should().ContainSingle(
+        Assert.Single(modifications, dto => dto.ModificationType == ModificationType.Save && dto.Identity == employeeIdentity.Id);
+        Assert.Single(
+            notifications,
             dto => dto.From == "SampleSystem@luxoft.com"
                    && dto.Message.Message.Contains("Hi there!!!")
                    && dto.TechnicalInformation.ContextObjectId == employeeIdentity.Id);
     }
 
-    [TestMethod]
+    [Fact]
     public void ChangeEmployee_ProcessModifications_ChangedUnprocessedCount()
     {
         // Arrange
@@ -285,14 +284,14 @@ public class EmployeeTests : TestBase
         var postProcessedNotificationState = restFacade.Evaluate(c => c.GetNotificationQueueProcessingState());
 
         // Assert
-        preProcessedModificationState.UnprocessedCount.Should().Be(1);
-        preProcessedNotificationState.UnprocessedCount.Should().Be(0);
+        Assert.Equal(1, preProcessedModificationState.UnprocessedCount);
+        Assert.Equal(0, preProcessedNotificationState.UnprocessedCount);
 
-        postProcessedModificationState.UnprocessedCount.Should().Be(0);
-        postProcessedNotificationState.UnprocessedCount.Should().BeGreaterThanOrEqualTo(1);
+        Assert.Equal(0, postProcessedModificationState.UnprocessedCount);
+        Assert.True(postProcessedNotificationState.UnprocessedCount >= 1);
     }
 
-    [TestMethod]
+    [Fact]
     public void ChangeEmployee_ContainsAribaEvent()
     {
         // Arrange
@@ -308,11 +307,10 @@ public class EmployeeTests : TestBase
                 new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = Maybe.Return("1234"), Version = employeeVersion }));
 
         // Assert
-        this.GetIntegrationEvents<EmployeeSaveEventDTO>("ariba").Should().ContainSingle(dto => dto.Employee.Id == employeeIdentity.Id);
+        Assert.Single(this.GetIntegrationEvents<EmployeeSaveEventDTO>("ariba"), dto => dto.Employee.Id == employeeIdentity.Id);
     }
 
-    [TestMethod]
-    [Ignore]
+    [Fact(Skip = "Skip")]
     public void EventListenerTest() =>
         this.Evaluate(
             DBSessionMode.Write,
@@ -324,7 +322,7 @@ public class EmployeeTests : TestBase
                 return;
             });
 
-    [TestMethod]
+    [Fact]
     public void ChangeEmployeeWithoutVersionInfo_RaisedStateException()
     {
         // Arrange
@@ -337,10 +335,10 @@ public class EmployeeTests : TestBase
                 c => c.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = Maybe.Return("1234") })));
 
         // Assert
-        call.Should().Throw<Exception>().WithMessage($"Object '{nameof(Employee)}' was updated or deleted by another transaction");
+        Assert.Equal($"Object '{nameof(Employee)}' was updated or deleted by another transaction", Assert.Throws<StaleDomainObjectStateException>(call).Message);
     }
 
-    [TestMethod]
+    [Fact]
     public void LoadEmployeeCellPhoneByDependencySecurity_ObjectLoaded()
     {
         // Arrange
@@ -356,6 +354,6 @@ public class EmployeeTests : TestBase
             });
 
         // Assert
-        notNull.Should().Be(true);
+        Assert.True(notNull);
     }
 }

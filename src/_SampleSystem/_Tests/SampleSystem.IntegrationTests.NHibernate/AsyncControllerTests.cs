@@ -4,10 +4,9 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class AsyncControllerTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public async Task TestSaveLocation_LocationSaved()
     {
         // Arrange
@@ -23,10 +22,10 @@ public class AsyncControllerTests : TestBase
         // Assert
         var location = loadedLocationList.SingleOrDefault(bu => bu.Name == saveDto.Name && bu.Identity == ident);
 
-        location.Should().NotBeNull();
+        Assert.NotNull(location);
     }
 
-    [TestMethod]
+    [Fact]
     public async Task TestSaveLocationWithWriteException_ExceptionRaised()
     {
         // Arrange
@@ -37,6 +36,6 @@ public class AsyncControllerTests : TestBase
         // Act
         Func<Task> saveTask = () => asyncControllerEvaluator.EvaluateAsync(c => c.AsyncSaveLocationWithWriteException(saveDto, default));
 
-        await saveTask.Should().ThrowAsync<InvalidOperationException>("Invalid session mode. Expected Write");
+        await Assert.ThrowsAsync<InvalidOperationException>(saveTask);
     }
 }

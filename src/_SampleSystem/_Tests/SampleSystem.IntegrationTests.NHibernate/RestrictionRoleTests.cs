@@ -14,10 +14,9 @@ using SecuritySystem.Validation;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class RestrictionRoleTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void GetRestrictionObjectsWithRestrictionRole_RestrictionApplied()
     {
         // Arrange
@@ -45,10 +44,10 @@ public class RestrictionRoleTests : TestBase
                          .Select(v => v.Identity);
 
         // Assert
-        result.Should().BeEquivalentTo([testObjects[0], testObjects[2]]);
+        Assert.Equal(new[] { testObjects[0], testObjects[2] }, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void TryCreateEmptyPermission_PermissionCreated()
     {
         // Arrange
@@ -57,10 +56,10 @@ public class RestrictionRoleTests : TestBase
         var action = () => this.AuthManager.For().SetRole(SampleSystemSecurityRole.RestrictionRole);
 
         // Assert
-        action.Should().NotThrow();
+        action();
     }
 
-    [TestMethod]
+    [Fact]
     public void TryCreatePermissionWithCorrectSecurityContext_PermissionCreated()
     {
         // Arrange
@@ -74,10 +73,10 @@ public class RestrictionRoleTests : TestBase
                                  businessUnit: businessUnit));
 
         // Assert
-        action.Should().NotThrow();
+        action();
     }
 
-    [TestMethod]
+    [Fact]
     public void TryCreatePermissionWithInvalidSecurityContext_ExceptionRaised()
     {
         // Arrange
@@ -91,11 +90,10 @@ public class RestrictionRoleTests : TestBase
                                  location: location));
 
         // Assert
-        action.Should().Throw<SecuritySystemValidationException>()
-              .And.Message.Should().Contain($"Invalid SecurityContextType: {nameof(Location)}");
+        Assert.Contains($"Invalid SecurityContextType: {nameof(Location)}", Assert.Throws<SecuritySystemValidationException>(action).Message);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetRestrictionFromHeaderObjectsWithConditionRule_RestrictionApplied()
     {
         // Arrange
@@ -126,10 +124,10 @@ public class RestrictionRoleTests : TestBase
             });
 
         // Assert
-        result.Should().BeEquivalentTo([testObjects[0], testObjects[2]]);
+        Assert.Equal(new[] { testObjects[0], testObjects[2] }, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void GetRestrictionObjectsWithConditionRule_RestrictionApplied()
     {
         // Arrange
@@ -160,10 +158,10 @@ public class RestrictionRoleTests : TestBase
             });
 
         // Assert
-        result.Should().BeEquivalentTo([testObjects[0], testObjects[2]]);
+        Assert.Equal(new[] { testObjects[0], testObjects[2] }, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void TryCreatePermissionWithoutRequiredSecurityContext_ExceptionRaised()
     {
         // Arrange
@@ -174,8 +172,8 @@ public class RestrictionRoleTests : TestBase
                          new SampleSystemTestPermission(SampleSystemSecurityRole.RequiredRestrictionRole, location: location));
 
         // Assert
-        action.Should().Throw<SecuritySystemValidationException>()
-              .And.Message.Should().Contain(
-                  $"{nameof(Framework.Authorization.Domain.Permission)} must contain the required contexts: {nameof(BusinessUnit)}");
+        Assert.Contains(
+            $"{nameof(Framework.Authorization.Domain.Permission)} must contain the required contexts: {nameof(BusinessUnit)}",
+            Assert.Throws<SecuritySystemValidationException>(action).Message);
     }
 }

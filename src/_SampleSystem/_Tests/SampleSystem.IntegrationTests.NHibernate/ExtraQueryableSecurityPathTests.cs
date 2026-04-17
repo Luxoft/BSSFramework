@@ -16,7 +16,6 @@ using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class ExtraQueryableSecurityPathTests : TestBase
 {
     private EmployeeIdentityDTO TestEmployee;
@@ -35,8 +34,7 @@ public class ExtraQueryableSecurityPathTests : TestBase
 
     private LocationIdentityDTO loc2Ident;
 
-    [TestInitialize]
-    public void SetUp()
+    public ExtraQueryableSecurityPathTests()
     {
         this.bu1Ident = this.DataHelper.SaveBusinessUnit();
 
@@ -59,7 +57,7 @@ public class ExtraQueryableSecurityPathTests : TestBase
         this.TestEmp3 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu2Ident, location: this.loc2Ident);
     }
 
-    [TestMethod]
+    [Fact]
     public void TestExtraQueryableSecurityPath_LoadedWithExtraQueryableFilter()
     {
         // Arrange
@@ -91,7 +89,6 @@ public class ExtraQueryableSecurityPathTests : TestBase
             });
 
         // Assert
-        items.Count().Should().Be(1);
-        items[0].Should().Be(this.TestEmp2.Id);
+        Assert.Equal(this.TestEmp2.Id, Assert.Single(items));
     }
 }

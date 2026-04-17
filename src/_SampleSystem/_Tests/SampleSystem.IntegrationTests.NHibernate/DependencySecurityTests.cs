@@ -8,7 +8,6 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class DependencySecurityTests : TestBase
 {
     private const string TestEmployeeLogin = "DS SecurityTester";
@@ -31,8 +30,7 @@ public class DependencySecurityTests : TestBase
 
     private BusinessUnitIdentityDTO bu2Ident;
 
-    [TestInitialize]
-    public void SetUp()
+    public DependencySecurityTests()
     {
         this.bu1Ident = this.DataHelper.SaveBusinessUnit();
 
@@ -59,7 +57,7 @@ public class DependencySecurityTests : TestBase
                            });
     }
 
-    [TestMethod]
+    [Fact]
     public void TestSecurityObjItem_LoadedByDependencySecurity()
     {
         // Arrange
@@ -69,11 +67,11 @@ public class DependencySecurityTests : TestBase
         var items = testSecurityObjItemController.Evaluate(c => c.GetVisualTestSecurityObjItems()).ToList();
 
         // Assert
-        items.Count().Should().Be(1);
-        items[0].Name.Should().Be(TestObjItem2);
+        var item = Assert.Single(items);
+        Assert.Equal(TestObjItem2, item.Name);
     }
 
-    [TestMethod]
+    [Fact]
     public void TestSecurityObjItemProjection_LoadedByDependencySecurity()
     {
         // Arrange
@@ -83,11 +81,11 @@ public class DependencySecurityTests : TestBase
         var items = testSecurityObjItemController.Evaluate(c => c.GetTestSecurityObjItemProjections()).ToList();
 
         // Assert
-        items.Count().Should().Be(1);
-        items[0].Name.Should().Be(TestObjItem2);
+        var item = Assert.Single(items);
+        Assert.Equal(TestObjItem2, item.Name);
     }
 
-    [TestMethod]
+    [Fact]
     public void TestSecurityObjSubItem1_LoadedByDependencySecurity()
     {
         // Arrange
@@ -97,11 +95,11 @@ public class DependencySecurityTests : TestBase
         var items = testSecuritySubObjItemController.Evaluate(c => c.GetVisualTestSecuritySubObjItems()).ToList();
 
         // Assert
-        items.Count().Should().Be(1);
-        items[0].Name.Should().Be(TestObjSubItem1);
+        var item = Assert.Single(items);
+        Assert.Equal(TestObjSubItem1, item.Name);
     }
 
-    [TestMethod]
+    [Fact]
     public void TestSecurityObjSubItem2_LoadedByDependencySecurity()
     {
         // Arrange
@@ -111,11 +109,11 @@ public class DependencySecurityTests : TestBase
         var items = testSecuritySubObjItem2Controller.Evaluate(c => c.GetVisualTestSecuritySubObjItem2s()).ToList();
 
         // Assert
-        items.Count().Should().Be(1);
-        items[0].Name.Should().Be(TestObjSubItem2);
+        var item = Assert.Single(items);
+        Assert.Equal(TestObjSubItem2, item.Name);
     }
 
-    [TestMethod]
+    [Fact]
     public void TestSecurityObjSubItem3_LoadedByDependencySecurity()
     {
         // Arrange
@@ -125,7 +123,7 @@ public class DependencySecurityTests : TestBase
         var items = testSecuritySubObjItem3Controller.Evaluate(c => c.GetVisualTestSecuritySubObjItem3s()).ToList();
 
         // Assert
-        items.Count().Should().Be(1);
-        items[0].Name.Should().Be(TestObjSubItem3);
+        var item = Assert.Single(items);
+        Assert.Equal(TestObjSubItem3, item.Name);
     }
 }

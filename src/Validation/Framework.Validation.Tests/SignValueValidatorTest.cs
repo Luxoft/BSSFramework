@@ -1,15 +1,10 @@
-﻿using FluentAssertions;
-
-using Framework.Validation.Map;
+﻿using Framework.Validation.Map;
 using Framework.Validation.Validators;
 
 using NSubstitute;
 
-using NUnit.Framework;
-
 namespace Framework.Validation.Tests;
 
-[TestFixture]
 public class SignValueValidatorTest
 {
     private const string PropertyName = "p";
@@ -20,8 +15,7 @@ public class SignValueValidatorTest
     private IPropertyValidationMap map;
     private IClassValidationMap validationMap;
 
-    [SetUp]
-    public void Init()
+    public SignValueValidatorTest()
     {
         this.context = Substitute.For<IPropertyValidationContext<object, object>>();
         this.map = Substitute.For<IPropertyValidationMap>();
@@ -32,10 +26,11 @@ public class SignValueValidatorTest
         this.validationMap.TypeName.Returns(TypeName);
     }
 
-    [TestCase(SignType.Positive)]
-    [TestCase(SignType.Zero)]
-    [TestCase(SignType.Negative)]
-    [TestCase(SignType.ZeroAndPositive)]
+    [Theory]
+    [InlineData(SignType.Positive)]
+    [InlineData(SignType.Zero)]
+    [InlineData(SignType.Negative)]
+    [InlineData(SignType.ZeroAndPositive)]
     public void GetValidationResult_NullValue_NoErrors(SignType signType)
     {
         // Arrange
@@ -47,11 +42,12 @@ public class SignValueValidatorTest
         var result = validator.GetValidationResult(this.context);
 
         // Assert
-        result.Errors.Should().BeEmpty();
+        Assert.Empty(result.Errors);
     }
 
-    [TestCase(0)]
-    [TestCase(1)]
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
     public void GetValidationResult_ZeroAndPositiveCorrectValue_NoErrors(int value)
     {
         // Arrange
@@ -63,10 +59,10 @@ public class SignValueValidatorTest
         var result = validator.GetValidationResult(this.context);
 
         // Assert
-        result.Errors.Should().BeEmpty();
+        Assert.Empty(result.Errors);
     }
 
-    [Test]
+    [Fact]
     public void GetValidationResult_ZeroAndPositiveIncorrectValue_ErrorMessageInExpectedFormat()
     {
         // Arrange
@@ -78,10 +74,10 @@ public class SignValueValidatorTest
         var result = validator.GetValidationResult(this.context);
 
         // Assert
-        result.Errors[0].Message.Should().Be("The p of t must be greater or equal 0");
+        Assert.Equal("The p of t must be greater or equal 0", result.Errors[0].Message);
     }
 
-    [Test]
+    [Fact]
     public void GetValidationResult_PositiveCorrectValue_NoErrors()
     {
         // Arrange
@@ -93,10 +89,10 @@ public class SignValueValidatorTest
         var result = validator.GetValidationResult(this.context);
 
         // Assert
-        result.Errors.Should().BeEmpty();
+        Assert.Empty(result.Errors);
     }
 
-    [Test]
+    [Fact]
     public void GetValidationResult_PositiveNegativeValue_ErrorMessageInExpectedFormat()
     {
         // Arrange
@@ -108,10 +104,10 @@ public class SignValueValidatorTest
         var result = validator.GetValidationResult(this.context);
 
         // Assert
-        result.Errors[0].Message.Should().Be("The p of t must be greater than 0");
+        Assert.Equal("The p of t must be greater than 0", result.Errors[0].Message);
     }
 
-    [Test]
+    [Fact]
     public void GetValidationResult_PositiveZeroValue_ErrorMessageInExpectedFormat()
     {
         // Arrange
@@ -123,10 +119,10 @@ public class SignValueValidatorTest
         var result = validator.GetValidationResult(this.context);
 
         // Assert
-        result.Errors[0].Message.Should().Be("The p of t can not be equal 0");
+        Assert.Equal("The p of t can not be equal 0", result.Errors[0].Message);
     }
 
-    [Test]
+    [Fact]
     public void GetValidationResult_ZeroCorrectValue_NoErrors()
     {
         // Arrange
@@ -138,26 +134,27 @@ public class SignValueValidatorTest
         var result = validator.GetValidationResult(this.context);
 
         // Assert
-        result.Errors.Should().BeEmpty();
+        Assert.Empty(result.Errors);
     }
 
-    [TestCase(-1)]
-    [TestCase(1)]
+    [Theory]
+    [InlineData(-1)]
+    [InlineData(1)]
     public void GetValidationResult_NotZeroValue_ErrorMessageInExpectedFormat(int value)
     {
         // Arrange
         var validator = new SignValidator(SignType.Zero);
         this.context.Source.Returns(new object());
-        this.context.Value.Returns(-1);
+        this.context.Value.Returns(value);
 
         // Act
         var result = validator.GetValidationResult(this.context);
 
         // Assert
-        result.Errors[0].Message.Should().Be("The p of t must be 0");
+        Assert.Equal("The p of t must be 0", result.Errors[0].Message);
     }
 
-    [Test]
+    [Fact]
     public void GetValidationResult_NegativeCorrectValue_NoErrors()
     {
         // Arrange
@@ -169,10 +166,10 @@ public class SignValueValidatorTest
         var result = validator.GetValidationResult(this.context);
 
         // Assert
-        result.Errors.Should().BeEmpty();
+        Assert.Empty(result.Errors);
     }
 
-    [Test]
+    [Fact]
     public void GetValidationResult_NegativePositiveValue_ErrorMessageInExpectedFormat()
     {
         // Arrange
@@ -184,10 +181,10 @@ public class SignValueValidatorTest
         var result = validator.GetValidationResult(this.context);
 
         // Assert
-        result.Errors[0].Message.Should().Be("The p of t must be less than 0");
+        Assert.Equal("The p of t must be less than 0", result.Errors[0].Message);
     }
 
-    [Test]
+    [Fact]
     public void GetValidationResult_NegativeZeroValue_ErrorMessageInExpectedFormat()
     {
         // Arrange
@@ -199,19 +196,19 @@ public class SignValueValidatorTest
         var result = validator.GetValidationResult(this.context);
 
         // Assert
-        result.Errors[0].Message.Should().Be("The p of t can not be equal 0");
+        Assert.Equal("The p of t can not be equal 0", result.Errors[0].Message);
     }
 
-    [Test]
+    [Fact]
     public void GetValidationResult_NullContext_ThrowArgumentNullException()
     {
         // Arrange
         var validator = new SignValidator(SignType.Negative);
 
         // Act
-        object TestDelegate() => validator.GetValidationResult(null);
+        object TestDelegate() => validator.GetValidationResult(null!);
 
         // Assert
-        Assert.That(TestDelegate, Throws.TypeOf<ArgumentNullException>());
+        Assert.Throws<ArgumentNullException>(TestDelegate);
     }
 }

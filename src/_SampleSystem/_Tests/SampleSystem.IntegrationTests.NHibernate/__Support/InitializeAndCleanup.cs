@@ -18,22 +18,13 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests.__Support;
 
-[TestClass]
-public class InitializeAndCleanup
+public class AssemblyFixture : IAsyncLifetime
 {
     public static readonly TestEnvironment TestEnvironment = new TestEnvironmentBuilder()
                                                              .WithDefaultConfiguration($"{nameof(SampleSystem)}_")
                                                              .WithDatabaseGenerator<SampleSystemTestDatabaseGenerator>()
                                                              .WithServiceProviderBuildFunc(GetServices)
                                                              .Build();
-
-    [AssemblyInitialize]
-    public static async Task EnvironmentInitialize(TestContext testContext) =>
-        await TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentInitializeAsync();
-
-    [AssemblyCleanup]
-    public static async Task EnvironmentCleanup() =>
-        await TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentCleanupAsync();
 
     private static IServiceCollection GetServices(IConfiguration configuration, IServiceCollection services) =>
         services
@@ -53,4 +44,12 @@ public class InitializeAndCleanup
             .AddSingleton<DataHelper>()
 
             .AddSingleton<TestDataInitializer>();
+
+    public Task InitializeAsync() => TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentInitializeAsync();
+
+    public async Task DisposeAsync()
+    {
+        await TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentCleanupAsync();
+        GC.SuppressFinalize(this);
+    }
 }

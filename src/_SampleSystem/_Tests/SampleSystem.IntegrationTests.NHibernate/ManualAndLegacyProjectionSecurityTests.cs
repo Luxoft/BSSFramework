@@ -7,7 +7,6 @@ using SampleSystem.WebApiCore.Controllers.MainQuery;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class ManualAndLegacyProjectionSecurityTests : TestBase
 {
     private const string TestEmployeeLogin = "MALProjection SecurityTester";
@@ -21,8 +20,7 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
 
     private BusinessUnitIdentityDTO bu2Ident;
 
-    [TestInitialize]
-    public void SetUp()
+    public ManualAndLegacyProjectionSecurityTests()
     {
         this.bu1Ident = this.DataHelper.SaveBusinessUnit();
 
@@ -37,7 +35,7 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
         this.TestEmp2 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu2Ident);
     }
 
-    [TestMethod]
+    [Fact]
     public void TestManualEmployeeProjection_LoadedByManualDependencySecurity()
     {
         // Arrange
@@ -47,11 +45,11 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
         var items = employeeQueryController.Evaluate(c => c.GetTestManualEmployeeProjectionsByODataQueryString($"$filter={nameof(TestManualEmployeeProjection.CoreBusinessUnitId)} ne null")).Items;
 
         // Assert
-        items.Count().Should().Be(1);
-        items[0].Identity.Should().Be(this.TestEmp2);
+        Assert.Single(items);
+        Assert.Equal(this.TestEmp2, items[0].Identity);
     }
 
-    [TestMethod]
+    [Fact]
     public void TestLegacyEmployeeProjection_LoadedByLegacyGenericSecurity()
     {
         // Arrange
@@ -61,12 +59,12 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
         var items = employeeQueryController.Evaluate(c => c.GetTestLegacyEmployeesByODataQueryString($"$filter={nameof(TestLegacyEmployee.BusinessUnit_Security)} ne null")).Items;
 
         // Assert
-        items.Count().Should().Be(1);
-        items[0].Identity.Should().Be(this.TestEmp2);
+        Assert.Single(items);
+        Assert.Equal(this.TestEmp2, items[0].Identity);
     }
 
 
-    //[TestMethod]
+    //[Fact]
     //public void TestLegacyEmployeeProjection_AccessorsResolved()
     //{
     //    // Arrange

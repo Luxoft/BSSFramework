@@ -1,14 +1,8 @@
-﻿using FluentAssertions;
-
-using Framework.Database;
-
+﻿using Framework.Database;
 using NSubstitute;
-
-using NUnit.Framework;
 
 namespace Framework.Tracking.Tests;
 
-[TestFixture]
 public class TrackingServiceTests
 {
     private IObjectStateService objectStateService;
@@ -17,14 +11,13 @@ public class TrackingServiceTests
 
     private readonly IPersistentInfoService persistentInfoService = new PersistentInfoService();
 
-    [SetUp]
-    public void Initialize()
+    public TrackingServiceTests()
     {
         this.objectStateService = Substitute.For<IObjectStateService>();
         this.trackingService = new TrackingService<PersistentDomainObject>(this.objectStateService, this.persistentInfoService);
     }
 
-    [Test]
+    [Fact]
     public void GetPersistentState_IsNewTrue_ReturnNotPersistent()
     {
         // Arrange
@@ -35,10 +28,10 @@ public class TrackingServiceTests
         var state = this.trackingService.GetPersistentState(domainObject);
 
         // Assert
-        state.Should().Be(PersistentLifeObjectState.NotPersistent);
+        Assert.Equal(PersistentLifeObjectState.NotPersistent, state);
     }
 
-    [Test]
+    [Fact]
     public void GetPersistentState_IsNewFalseIsRemovingFalse_ReturnPersistent()
     {
         // Arrange
@@ -50,10 +43,10 @@ public class TrackingServiceTests
         var state = this.trackingService.GetPersistentState(domainObject);
 
         // Assert
-        state.Should().Be(PersistentLifeObjectState.Persistent);
+        Assert.Equal(PersistentLifeObjectState.Persistent, state);
     }
 
-    [Test]
+    [Fact]
     public void GetPersistentState_IsNewFalseIsRemovingTrue_ReturnMarkAsRemoved()
     {
         // Arrange
@@ -65,10 +58,10 @@ public class TrackingServiceTests
         var state = this.trackingService.GetPersistentState(domainObject);
 
         // Assert
-        state.Should().Be(PersistentLifeObjectState.MarkAsRemoved);
+        Assert.Equal(PersistentLifeObjectState.MarkAsRemoved, state);
     }
 
-    [Test]
+    [Fact]
     public void GetChanges_IsNewFalseIsRemovingFalseNoChanges_ResultShouldBeEmpty()
     {
         // Arrange
@@ -81,10 +74,10 @@ public class TrackingServiceTests
         var result = this.trackingService.GetChanges(domainObject);
 
         // Assert
-        result.Should().BeEmpty();
+        Assert.Empty(result);
     }
 
-    [Test]
+    [Fact]
     public void GetChanges_IsNewFalseIsRemovingFalseOneChange_ResultShouldHaveCountOne()
     {
         // Arrange
@@ -98,10 +91,10 @@ public class TrackingServiceTests
         var result = this.trackingService.GetChanges(domainObject);
 
         // Assert
-        result.Should().HaveCount(1);
+        Assert.Single(result);
     }
 
-    [Test]
+    [Fact]
     public void GetChanges_IsNewFalseIsRemovingFalseSeveralChanges_ResultShouldHaveAsManyChangesAsGetModifiedObjectStatesReturned()
     {
         // Arrange
@@ -117,10 +110,10 @@ public class TrackingServiceTests
         var result = this.trackingService.GetChanges(domainObject);
 
         // Assert
-        result.Should().HaveCount(objectStates.Length);
+        Assert.Equal(objectStates.Length, result.Count());
     }
 
-    [Test]
+    [Fact]
     public void GetChanges_IsNewTrue_ResultShouldHaveAllPropertiesChanges()
     {
         // Arrange
@@ -132,10 +125,10 @@ public class TrackingServiceTests
         var result = this.trackingService.GetChanges(domainObject);
 
         // Assert
-        result.Should().HaveCount(allProperties.Length);
+        Assert.Equal(allProperties.Length, result.Count());
     }
 
-    [Test]
+    [Fact]
     public void GetChanges_NewModeIsNewTrueNoPropertiesSet_ResultShouldHaveZeroChanges()
     {
         // Arrange
@@ -146,10 +139,10 @@ public class TrackingServiceTests
         var result = this.trackingService.GetChanges(domainObject, GetChangesMode.IgnoreDefaultValues);
 
         // Assert
-        result.Should().HaveCount(0);
+        Assert.Empty(result);
     }
 
-    [Test]
+    [Fact]
     public void GetChanges_DefaultModeIsNewTrueNoPropertiesSet_ResultShouldHaveZeroChanges()
     {
         // Arrange
@@ -160,10 +153,10 @@ public class TrackingServiceTests
         var result = this.trackingService.GetChanges(domainObject);
 
         // Assert
-        result.Should().HaveCount(5);
+        Assert.Equal(5, result.Count());
     }
 
-    [Test]
+    [Fact]
     public void GetChangingState_IsNewTrue_ReturnChanging()
     {
         // Arrange
@@ -174,10 +167,10 @@ public class TrackingServiceTests
         var result = this.trackingService.GetChangingState(domainObject);
 
         // Assert
-        result.Should().Be(ChangingLifeObjectState.Changing);
+        Assert.Equal(ChangingLifeObjectState.Changing, result);
     }
 
-    [Test]
+    [Fact]
     public void GetChangingState_IsNewFalseHasChanges_ReturnChanging()
     {
         // Arrange
@@ -191,10 +184,10 @@ public class TrackingServiceTests
         var result = this.trackingService.GetChangingState(domainObject);
 
         // Assert
-        result.Should().Be(ChangingLifeObjectState.Changing);
+        Assert.Equal(ChangingLifeObjectState.Changing, result);
     }
 
-    [Test]
+    [Fact]
     public void GetChangingState_IsNewFalseNoChanges_ReturnOriginal()
     {
         // Arrange
@@ -207,10 +200,10 @@ public class TrackingServiceTests
         var result = this.trackingService.GetChangingState(domainObject);
 
         // Assert
-        result.Should().Be(ChangingLifeObjectState.Original);
+        Assert.Equal(ChangingLifeObjectState.Original, result);
     }
 
-    [Test]
+    [Fact]
     public void GetPrevValue_IsNewFalseNoChangesNoPrevValue_ReturnDefault()
     {
         // Arrange
@@ -225,10 +218,10 @@ public class TrackingServiceTests
         var result = this.trackingService.GetPrevValue(domainObject, x => x.Name, DefaultName);
 
         // Assert
-        result.Should().Be(DefaultName);
+        Assert.Equal(DefaultName, result);
     }
 
-    [Test]
+    [Fact]
     public void GetPrevValue_IsNewFalseHasChangesHasPrevValue_ReturnPrevValue()
     {
         // Arrange
@@ -245,10 +238,10 @@ public class TrackingServiceTests
         var result = this.trackingService.GetPrevValue(domainObject, x => x.Name, DefaultName);
 
         // Assert
-        result.Should().Be(PrevName);
+        Assert.Equal(PrevName, result);
     }
 
-    [Test]
+    [Fact]
     public void GetPrevOrCurrentValue_IsNewFalseNoChangesNoPrevValue_ReturnCurrentValue()
     {
         // Arrange
@@ -262,10 +255,10 @@ public class TrackingServiceTests
         var result = this.trackingService.GetPrevOrCurrentValue(domainObject, x => x.Name);
 
         // Assert
-        result.Should().Be(CurrName);
+        Assert.Equal(CurrName, result);
     }
 
-    [Test]
+    [Fact]
     public void GetPrevOrCurrentValue_IsNewFalseHasChangesHasPrevValue_ReturnPrevValue()
     {
         // Arrange
@@ -281,13 +274,13 @@ public class TrackingServiceTests
         var result = this.trackingService.GetPrevOrCurrentValue(domainObject, x => x.Name);
 
         // Assert
-        result.Should().Be(PrevName);
+        Assert.Equal(PrevName, result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_RealChangedReferenceProperty_ResultTrue()
     {
         // Arrange
@@ -300,13 +293,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => x.Name);
 
         // Assert
-        result.Should().BeTrue();
+        Assert.True(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_RealChangedNullableProperty_ResultTrue()
     {
         // Arrange
@@ -319,13 +312,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => x.ModifiedAt);
 
         // Assert
-        result.Should().BeTrue();
+        Assert.True(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_RealChangedValueProperty_ResultTrue()
     {
         // Arrange
@@ -338,13 +331,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => x.CreatedAt);
 
         // Assert
-        result.Should().BeTrue();
+        Assert.True(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_RealChangedCollectionProperty_ResultTrue()
     {
         // Arrange
@@ -357,13 +350,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => x.Array);
 
         // Assert
-        result.Should().BeTrue();
+        Assert.True(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_RealNotChangedReferencePropertyNewMode_ResultFalse()
     {
         // Arrange
@@ -376,13 +369,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => x.Name);
 
         // Assert
-        result.Should().BeFalse();
+        Assert.False(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_RealNotChangedReferencePropertyDefaultMode_ResultTrue()
     {
         // Arrange
@@ -395,13 +388,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => x.Name);
 
         // Assert
-        result.Should().BeTrue();
+        Assert.True(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_RealNotChangedNullablePropertyNewMode_ResultFalse()
     {
         // Arrange
@@ -414,13 +407,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => x.ModifiedAt);
 
         // Assert
-        result.Should().BeFalse();
+        Assert.False(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_RealNotChangedNullablePropertyDefaultMode_ResultTrue()
     {
         // Arrange
@@ -433,13 +426,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => x.ModifiedAt);
 
         // Assert
-        result.Should().BeTrue();
+        Assert.True(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_RealNotChangedValuePropertyNewMode_ResultFalse()
     {
         // Arrange
@@ -452,13 +445,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => x.CreatedAt);
 
         // Assert
-        result.Should().BeFalse();
+        Assert.False(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_RealNotChangedValuePropertyDefaultMode_ResultTrue()
     {
         // Arrange
@@ -471,13 +464,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => x.CreatedAt);
 
         // Assert
-        result.Should().BeTrue();
+        Assert.True(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_RealNotChangedArrayPropertyNewMode_ResultFalse()
     {
         // Arrange
@@ -490,13 +483,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => x.Array);
 
         // Assert
-        result.Should().BeFalse();
+        Assert.False(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_RealNotChangedArrayPropertyDefaultMode_ResultTrue()
     {
         // Arrange
@@ -509,13 +502,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => x.Array);
 
         // Assert
-        result.Should().BeTrue();
+        Assert.True(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_ObjectVersionRealChangedValueProperty_ResultTrue()
     {
         // Arrange
@@ -528,13 +521,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => (object)x.CreatedAt);
 
         // Assert
-        result.Should().BeTrue();
+        Assert.True(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_ObjectVersionRealChangedReferenceProperty_ResultTrue()
     {
         // Arrange
@@ -547,13 +540,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => (object)x.Name);
 
         // Assert
-        result.Should().BeTrue();
+        Assert.True(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_ObjectVersionRealChangedNullableProperty_ResultTrue()
     {
         // Arrange
@@ -566,13 +559,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => (object)x.ModifiedAt);
 
         // Assert
-        result.Should().BeTrue();
+        Assert.True(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_ObjectVersionRealChangedArrayProperty_ResultTrue()
     {
         // Arrange
@@ -585,13 +578,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => (object)x.Array);
 
         // Assert
-        result.Should().BeTrue();
+        Assert.True(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_ObjectVersionRealNotChangedReferencePropertyNewMode_ResultFalse()
     {
         // Arrange
@@ -604,13 +597,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => (object)x.Name);
 
         // Assert
-        result.Should().BeFalse();
+        Assert.False(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_ObjectVersionRealNotChangedReferencePropertyDefaultMode_ResultTrue()
     {
         // Arrange
@@ -623,13 +616,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => (object)x.Name);
 
         // Assert
-        result.Should().BeTrue();
+        Assert.True(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_ObjectVersionRealNotChangedNullablePropertyNewMode_ResultFalse()
     {
         // Arrange
@@ -642,13 +635,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => (object)x.ModifiedAt);
 
         // Assert
-        result.Should().BeFalse();
+        Assert.False(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_ObjectVersionRealNotChangedNullablePropertyDefaultMode_ResultTrue()
     {
         // Arrange
@@ -661,13 +654,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => (object)x.ModifiedAt);
 
         // Assert
-        result.Should().BeTrue();
+        Assert.True(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_ObjectVersionRealNotChangedValuePropertyNewMode_ResultFalse()
     {
         // Arrange
@@ -680,13 +673,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => (object)x.CreatedAt);
 
         // Assert
-        result.Should().BeFalse();
+        Assert.False(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_ObjectVersionRealNotChangedValuePropertyDefault_ResultTrue()
     {
         // Arrange
@@ -699,13 +692,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => (object)x.CreatedAt);
 
         // Assert
-        result.Should().BeTrue();
+        Assert.True(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_ObjectVersionRealNotChangedArrayPropertyNewMode_ResultFalse()
     {
         // Arrange
@@ -718,13 +711,13 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => (object)x.Array);
 
         // Assert
-        result.Should().BeFalse();
+        Assert.False(result);
     }
 
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
-    [Test]
+    [Fact]
     public void HasChange_ObjectVersionRealNotChangedArrayPropertyDefaultMode_ResultTrue()
     {
         // Arrange
@@ -737,6 +730,6 @@ public class TrackingServiceTests
         var result = changes.HasChange(x => (object)x.Array);
 
         // Assert
-        result.Should().BeTrue();
+        Assert.True(result);
     }
 }

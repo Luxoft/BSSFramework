@@ -10,12 +10,13 @@ using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.Domain.Employee;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
+using SecuritySystem.AccessDenied;
+
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class SecurityRuleTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public async Task ApplyExceptRule_CurrentUserExcepted()
     {
         // Arrange
@@ -50,10 +51,10 @@ public class SecurityRuleTests : TestBase
                       .Select(obj => obj.Id).ToList());
 
         // Assert
-        loadedObjects.Should().BeEquivalentTo([testObjectIdents[0]]);
+        Assert.Equal(new[] { testObjectIdents[0] }, loadedObjects);
     }
 
-    [TestMethod]
+    [Fact]
     public void ApplyOverrideFaultMessageRule_FaultMessageChanged()
     {
         // Arrange
@@ -72,8 +73,6 @@ public class SecurityRuleTests : TestBase
                          });
 
         // Assert
-        action.Should()
-              .Throw<Exception>()
-              .WithMessage(faultMessage);
+        Assert.Equal(faultMessage, Assert.Throws<AccessDeniedException>(action).Message);
     }
 }

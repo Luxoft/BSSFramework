@@ -7,16 +7,15 @@ using SampleSystem.BLL;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.IntegrationTests.__Support.WebApi;
 using SampleSystem.WebApiCore.Controllers.Main;
+
 using SecuritySystem.Testing;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData;
 
-[TestClass]
-public class TestBase : IntegrationTestBase<ISampleSystemBLLContext>
+[Collection("Test Collection")]
+public class TestBase : IntegrationTestBase<ISampleSystemBLLContext>, IDisposable
 {
-    protected TestBase() : base(InitializeAndCleanup.TestEnvironment.ServiceProviderPool)
-    {
-    }
+    protected TestBase() : base(AssemblyFixture.TestEnvironment.ServiceProviderPool) => base.Initialize();
 
     public MainWebApi MainWebApi => new(this.RootServiceProvider);
 
@@ -26,11 +25,15 @@ public class TestBase : IntegrationTestBase<ISampleSystemBLLContext>
 
     protected RootAuthManager AuthManager => this.RootServiceProvider.GetRequiredService<RootAuthManager>();
 
-    [TestInitialize]
-    public void TestBaseInitialize() => base.Initialize();
+    public void Dispose()
+    {
+        this.BeforeCleanup();
+        base.Cleanup();
+    }
 
-    [TestCleanup]
-    public void BaseTestCleanup() => base.Cleanup();
+    protected virtual void BeforeCleanup()
+    {
+    }
 
     protected ControllerEvaluator<AuthMainController> GetAuthControllerEvaluator(string? principalName = null) => this.GetControllerEvaluator<AuthMainController>(principalName);
 

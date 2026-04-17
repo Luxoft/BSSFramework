@@ -2,10 +2,9 @@
 
 namespace SampleSystem.IntegrationTests.WebApi;
 
-[TestClass]
 public class EventXsdExporterTests
 {
-    [TestMethod]
+    [Fact]
     public void WebApi_CallMethod()
     {
         // Arrange
@@ -15,7 +14,7 @@ public class EventXsdExporterTests
         var stream = exporter2.Export("Test", "test", [typeof(TestDto)]);
 
         // Assert
-        stream.Should().BeReadable();
+        Assert.True(stream.CanRead);
     }
 
     public class TestDto

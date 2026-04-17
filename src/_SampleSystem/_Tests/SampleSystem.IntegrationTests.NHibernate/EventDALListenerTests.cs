@@ -6,10 +6,9 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class EventDALListenerTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public async Task Employee_SendCustomEventOperation_ExceptionNotThrow()
     {
         //Arrange
@@ -23,6 +22,6 @@ public class EventDALListenerTests : TestBase
                 CancellationToken.None));
 
         // Assert
-        await action.Should().NotThrowAsync();
+        await action();
     }
 }

@@ -9,10 +9,9 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class UpdateTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void ExampleContainer_UpdatePropertyChanged1()
     {
         // Arrange
@@ -35,12 +34,12 @@ public class UpdateTests : TestBase
         // Assert
         var currentStrictDTO = rich.ToStrict();
 
-        currentStrictDTO.Field1.Should().Be(strictSource.Field1);
-        currentStrictDTO.Field2.Should().Be(strictSource.Field2);
-        currentStrictDTO.Field3.Should().Be(strictSource.Field3);
+        Assert.Equal(strictSource.Field1, currentStrictDTO.Field1);
+        Assert.Equal(strictSource.Field2, currentStrictDTO.Field2);
+        Assert.Equal(strictSource.Field3, currentStrictDTO.Field3);
     }
 
-    [TestMethod]
+    [Fact]
     public void ExampleContainer_UpdatePropertyChanged2()
     {
         // Arrange
@@ -63,12 +62,12 @@ public class UpdateTests : TestBase
         var updateDTO = new Example1UpdateDTO(strictSource, strictTarget);
 
         // Assert
-        updateDTO.Field1.HasValue.Should().Be(false);
-        updateDTO.Field2.HasValue.Should().Be(true);
-        updateDTO.Field3.HasValue.Should().Be(true);
+        Assert.False(updateDTO.Field1.HasValue);
+        Assert.True(updateDTO.Field2.HasValue);
+        Assert.True(updateDTO.Field3.HasValue);
     }
 
-    [TestMethod]
+    [Fact]
     public void ExampleContainer_UpdatePropertyChanged3()
     {
         // Arrange
@@ -113,23 +112,23 @@ public class UpdateTests : TestBase
         var createdItems = savedItems.Where(item => item.Value.Id.IsDefault()).ToList();
 
         // Assert
-        updateDTO.Field1.HasValue.Should().Be(true);
-        updateDTO.Field2.HasValue.Should().Be(false);
-        updateDTO.Field3.HasValue.Should().Be(false);
+        Assert.True(updateDTO.Field1.HasValue);
+        Assert.False(updateDTO.Field2.HasValue);
+        Assert.False(updateDTO.Field3.HasValue);
 
-        updateDTO.Items2.Count.Should().Be(3);
+        Assert.Equal(3, updateDTO.Items2.Count);
 
-        removedItems.Count.Should().Be(1);
-        removedItems[0].Identity.Should().BeEquivalentTo(removingItem.Identity);
+        Assert.Single(removedItems);
+        Assert.Equal(removingItem.Identity, removedItems[0].Identity);
 
-        resavedItems.Count.Should().Be(1);
-        resavedItems[0].Value.Identity.Should().BeEquivalentTo(resavingItem.Identity);
-        resavedItems[0].Value.Field1.HasValue.Should().Be(true);
-        resavedItems[0].Value.Field2.HasValue.Should().Be(false);
+        Assert.Single(resavedItems);
+        Assert.Equal(resavingItem.Identity, resavedItems[0].Value.Identity);
+        Assert.True(resavedItems[0].Value.Field1.HasValue);
+        Assert.False(resavedItems[0].Value.Field2.HasValue);
 
-        createdItems.Count.Should().Be(1);
-        createdItems[0].Value.Identity.Should().BeEquivalentTo(creatingItem.Identity);
-        createdItems[0].Value.Field1.HasValue.Should().Be(true);
-        createdItems[0].Value.Field2.HasValue.Should().Be(true);
+        Assert.Single(createdItems);
+        Assert.Equal(creatingItem.Identity, createdItems[0].Value.Identity);
+        Assert.True(createdItems[0].Value.Field1.HasValue);
+        Assert.True(createdItems[0].Value.Field2.HasValue);
     }
 }

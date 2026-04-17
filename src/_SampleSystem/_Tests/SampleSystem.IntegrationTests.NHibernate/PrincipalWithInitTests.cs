@@ -13,15 +13,13 @@ using SecuritySystem.Validation;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class PrincipalWithInitTests : TestBase
 {
     private const string TestPrincipalName = "Duplicate Permission Tester";
 
     private Period testPeriod;
 
-    [TestInitialize]
-    public void SetUp()
+    public PrincipalWithInitTests()
     {
         this.testPeriod = this.TimeProvider.GetCurrentMonth();
 
@@ -50,7 +48,7 @@ public class PrincipalWithInitTests : TestBase
             new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)) { Period = new PermissionPeriod(this.testPeriod.StartDate, this.testPeriod.EndDate) });
     }
 
-    [TestMethod]
+    [Fact]
     public void CreateDuplicatePermission_ValidationError()
     {
         // Arrange
@@ -100,6 +98,6 @@ public class PrincipalWithInitTests : TestBase
                    };
 
         // Assert
-        call.Should().Throw<SecuritySystemValidationException>().And.Message.Should().Contain(expectedErrorMessage);
+        Assert.Contains(expectedErrorMessage, Assert.Throws<SecuritySystemValidationException>(call).Message);
     }
 }

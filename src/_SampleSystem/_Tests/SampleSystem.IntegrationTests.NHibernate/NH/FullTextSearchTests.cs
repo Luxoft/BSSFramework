@@ -4,7 +4,6 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests.NH;
 
-[TestClass]
 public class FullTextSearchTests : TestBase
 {
     /// <summary>
@@ -17,8 +16,7 @@ public class FullTextSearchTests : TestBase
     /// "/src/_SampleSystem/_Tests/SampleSystem.IntegrationTests/__Support/Scripts/SampleSystem/Sample.sql"
     /// раскоментировать SQL код с заголовком "Create and populate Full Text Catalog".
     /// </summary>
-    [TestMethod]
-    [Ignore]
+    [Fact(Skip = "Skip")]
     public void FullTextContainsFunctionWorksCorrect()
     {
         Task.Delay(10000).Wait();
@@ -27,7 +25,7 @@ public class FullTextSearchTests : TestBase
                           {
                               var bll = context.Logics.Employee;
                               var employees = bll.GetUnsecureQueryable().Where(e => e.Email.FullTextContains("admin")).ToList();
-                              employees.Should().HaveCount(1);
+                              Assert.Single(employees);
                           });
     }
 }

@@ -9,10 +9,9 @@ using Index = Microsoft.SqlServer.Management.Smo.Index;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 
-[TestClass]
 public class UniqueGroupDatabaseScriptGeneratorTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void GenerateLocal_UniqueIndexExistsWithLessColumns_RecreatesColumns()
     {
         // Arrange
@@ -48,12 +47,10 @@ public class UniqueGroupDatabaseScriptGeneratorTests : TestBase
         var indexes = changedTable.Indexes.Cast<Index>().ToList();
 
         // Assert
-        indexes.Should().Contain(x => x.Name == indexName);
-        indexes.First(x => x.Name == indexName)
-               .IndexedColumns.Cast<IndexedColumn>()
-               .Should()
-               .HaveCount(2)
-               .And.Contain(x => x.Name == "roleDegreeId")
-               .And.Contain(x => x.Name == "roleId");
+        Assert.Contains(indexes, x => x.Name == indexName);
+        var indexedColumns = indexes.First(x => x.Name == indexName).IndexedColumns.Cast<IndexedColumn>().ToList();
+        Assert.Equal(2, indexedColumns.Count);
+        Assert.Contains(indexedColumns, x => x.Name == "roleDegreeId");
+        Assert.Contains(indexedColumns, x => x.Name == "roleId");
     }
 }

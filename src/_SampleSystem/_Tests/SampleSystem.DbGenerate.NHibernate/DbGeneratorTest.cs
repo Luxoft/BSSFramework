@@ -8,12 +8,11 @@ using SampleSystem.Generated.DAL.NHibernate;
 
 namespace SampleSystem.DbGenerate.NHibernate;
 
-[TestClass]
 public class DbGeneratorTest
 {
     private readonly ServerGenerationEnvironment environment = new();
 
-    [TestMethod]
+    [Fact]
     public void GenerateLocal() => this.GenerateAllDB(@".");
 
     public void GenerateDatabase(DbGenerationOptions options)

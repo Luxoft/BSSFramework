@@ -12,7 +12,6 @@ using SecuritySystem;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class AuthPerformanceTests : TestBase
 {
     private const string TestUser = "TestUser";
@@ -21,8 +20,7 @@ public class AuthPerformanceTests : TestBase
 
     private const int SplitBy = 25;
 
-    [TestInitialize]
-    public void SetUp()
+    public AuthPerformanceTests()
     {
         var genLoc = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveLocation());
 
@@ -90,7 +88,7 @@ public class AuthPerformanceTests : TestBase
                                             });
     }
 
-    [TestMethod]
+    [Fact]
     public void CreateObjectsWithPermissions_HasAccessToAllObjects()
     {
         // Arrange
@@ -109,6 +107,6 @@ public class AuthPerformanceTests : TestBase
         Console.WriteLine("WorkTime: " + duration);
 
         // Assert
-        testPerformanceObjects.Count().Should().Be(Limit * Limit * Limit * Limit);
+        Assert.Equal(Limit * Limit * Limit * Limit, testPerformanceObjects.Count());
     }
 }

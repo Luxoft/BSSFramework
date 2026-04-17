@@ -5,10 +5,9 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class FixedPropertyValidatorTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void PrimitiveImmutablePropertyChanged_RaisedValidationError()
     {
         // Arrange
@@ -25,12 +24,12 @@ public class FixedPropertyValidatorTests : TestBase
                                       };
 
         // Assert
-        changePropertyAction.Should()
-                            .Throw<Exception>(
-                                              $"{nameof(TestImmutableObj.TestImmutablePrimitiveProperty)} field in {nameof(TestImmutableObj)} can't be changed");
+        Assert.Equal(
+            $"{nameof(TestImmutableObj.TestImmutablePrimitiveProperty)} field in {nameof(TestImmutableObj)} can't be changed",
+            Assert.Throws<Framework.Validation.ValidationException>(changePropertyAction).Message);
     }
 
-    [TestMethod]
+    [Fact]
     public void ReferenceImmutablePropertyChanged_RaisedValidationError()
     {
         // Arrange
@@ -47,12 +46,12 @@ public class FixedPropertyValidatorTests : TestBase
                                       };
 
         // Assert
-        changePropertyAction.Should()
-                            .Throw<Exception>(
-                                              $"{nameof(TestImmutableObj.TestImmutableRefProperty)} field in {nameof(TestImmutableObj)} can't be changed");
+            Assert.Equal(
+            $"{nameof(TestImmutableObj.TestImmutableRefProperty)} field in {nameof(TestImmutableObj)} can't be changed",
+            Assert.Throws<Framework.Validation.ValidationException>(changePropertyAction).Message);
     }
 
-    [TestMethod]
+    [Fact]
     public void ImmutablePropertyInitializedByIntegration_ShouldNotThrowException()
     {
         // Arrange
@@ -62,10 +61,10 @@ public class FixedPropertyValidatorTests : TestBase
         Action insertAction = () => integrationController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjIntegrationRichDTO { TestImmutablePrimitiveProperty = "AAA", Id = Guid.NewGuid() }));
 
         // Assert
-        insertAction.Should().NotThrow();
+        insertAction();
     }
 
-    [TestMethod]
+    [Fact]
     public void ImmutablePropertyChangedByIntegration_RaisedValidationError()
     {
         // Arrange
@@ -77,7 +76,9 @@ public class FixedPropertyValidatorTests : TestBase
         Action changePropertyAction = () => integrationTestImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjIntegrationRichDTO { TestImmutablePrimitiveProperty = "BBB", Id = identity.Id }));
 
         // Assert
-        changePropertyAction.Should().Throw<Exception>($"{nameof(TestImmutableObj.TestImmutablePrimitiveProperty)} field in {nameof(TestImmutableObj)} can't be changed");
+        Assert.Equal(
+            $"{nameof(TestImmutableObj.TestImmutablePrimitiveProperty)} field in {nameof(TestImmutableObj)} can't be changed",
+            Assert.Throws<Framework.Validation.ValidationException>(changePropertyAction).Message);
     }
 
 }

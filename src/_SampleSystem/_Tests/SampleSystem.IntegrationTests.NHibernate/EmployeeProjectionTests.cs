@@ -9,7 +9,6 @@ using SampleSystem.WebApiCore.Controllers.MainQuery;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class EmployeeProjectionTests : TestBase
 {
     private const string ProjectionPrincipalName = "Projection Tester";
@@ -17,8 +16,7 @@ public class EmployeeProjectionTests : TestBase
     private const string TestEmployee2Login = "Test Employee 2";
     private const string TestEmployee3Login = "Test Employee 3";
 
-    [TestInitialize]
-    public void SetUp()
+    public EmployeeProjectionTests()
     {
         var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 
@@ -53,7 +51,7 @@ public class EmployeeProjectionTests : TestBase
         this.AuthManager.For(TestEmployee3Login).SetRole(SampleSystemSecurityRole.TestRole2);
     }
 
-    [TestMethod]
+    [Fact]
     public void EmployeeProjectionTest()
     {
         // Arrange
@@ -65,27 +63,27 @@ public class EmployeeProjectionTests : TestBase
         var employee = result.Items.SingleOrDefault(e => e.Id == identity.Id);
 
         // Assert
-        employee.Should().NotBeNull();
+        Assert.NotNull(employee);
     }
 
-    [TestMethod]
+    [Fact]
     public void EmployeeProjectionColumnSecurityTest()
     {
         // Arrange
-        var expected = new[] { ProjectionPrincipalName, TestEmployee2Login }.ToArray(Maybe.Return);
+        var expected = new[] { ProjectionPrincipalName, TestEmployee2Login }.Select(Maybe.Return).OrderBy(v => v.ToString()).ToArray();
         var controller = this.GetControllerEvaluator<EmployeeQueryController>(ProjectionPrincipalName);
 
         // Act
         var employees = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString("$filter=CoreBusinessUnit ne null"))
                                .Items;
 
-        var logins = employees.Select(dto => dto.Login);
+        var logins = employees.Select(dto => dto.Login).OrderBy(v => v.ToString());
 
         // Assert
-        logins.Should().BeEquivalentTo(expected);
+        Assert.Equal(expected, logins);
     }
 
-    [TestMethod]
+    [Fact]
     public void EmployeeProjectionSecurityTestNoAccess()
     {
         // Arrange
@@ -97,11 +95,11 @@ public class EmployeeProjectionTests : TestBase
         // Assert
         var positions = employees.Select(dto => dto.PositionName);
         var logins = employees.Select(dto => dto.Login);
-        positions.All(x => x.HasValue).Should().BeFalse();
-        logins.All(x => x.HasValue).Should().BeTrue();
+        Assert.False(positions.All(x => x.HasValue));
+        Assert.True(logins.All(x => x.HasValue));
     }
 
-    [TestMethod]
+    [Fact]
     public void EmployeeProjectionSecurityTestHasAccess()
     {
         // Arrange
@@ -112,10 +110,10 @@ public class EmployeeProjectionTests : TestBase
         var positions = result.Select(dto => dto.PositionName);
 
         // Assert
-        positions.All(x => x.HasValue).Should().BeTrue();
+        Assert.True(positions.All(x => x.HasValue));
     }
 
-    [TestMethod]
+    [Fact]
     public void EmployeeProjectionSortingTest()
     {
         // Arrange
@@ -134,6 +132,6 @@ public class EmployeeProjectionTests : TestBase
                                .Items.Where(e => e.Login.ToString().StartsWith("PST_")).Select(e => e.Login);
 
         // Assert
-        actual.Should().BeEquivalentTo(expected);
+        Assert.Equal(expected, actual);
     }
 }

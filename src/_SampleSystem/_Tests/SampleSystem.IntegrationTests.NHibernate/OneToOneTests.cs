@@ -7,10 +7,9 @@ using SampleSystem.WebApiCore.Controllers.MainQuery;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class OneToOneTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void GetRequestProjection_ContainsOneToOneDetail_Initialized()
     {
         // Arrange
@@ -39,6 +38,6 @@ public class OneToOneTests : TestBase
         var result = iMRequestQueryController.Evaluate(c => c.GetTestIMRequestsByODataQueryString(""));
 
         // Assert
-        result.Items.Should().Contain(request => request.Id == idents.RequestId && request.OneToOneDetail.Id == idents.DetailId);
+        Assert.Contains(result.Items, request => request.Id == idents.RequestId && request.OneToOneDetail.Id == idents.DetailId);
     }
 }

@@ -8,10 +8,9 @@ using SampleSystem.ServiceEnvironment.Jobs;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class JobTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public async Task InvokeJobs_JobObjectsCreated()
     {
         // Arrange
@@ -25,7 +24,7 @@ public class JobTests : TestBase
         // Assert
         var newCount = GetJobInstanceCount();
 
-        (newCount - prevCount).Should().Be(repeatCount);
+        Assert.Equal(repeatCount, newCount - prevCount);
 
         int GetJobInstanceCount() =>
             this.Evaluate(

@@ -7,10 +7,9 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-[TestClass]
 public class NHibFetchTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void TestPropCollection_TestPassed() =>
         this.Evaluate(
             DBSessionMode.Read,

@@ -2,7 +2,6 @@
 
 namespace SampleSystem.CheckGenTests;
 
-[TestClass]
 public class CsprojValidationTests
 {
     // =====================================================
@@ -19,22 +18,23 @@ public class CsprojValidationTests
         }
     }
 
-    [DataTestMethod]
-    [DynamicData(nameof(GetCsprojFiles), DynamicDataSourceType.Method)]
+    [Theory]
+    [MemberData(nameof(GetCsprojFiles))]
     public void PackageId_Should_Match_Convention(string file)
     {
+        // Arrange
         var projectName = Path.GetFileNameWithoutExtension(file);
         var expected = $"Luxoft.{projectName}";
 
         XDocument doc;
         try
         {
+            // Act
             doc = XDocument.Load(file);
         }
         catch (Exception ex)
         {
-            Assert.Fail($"{file} — XML parse error: {ex.Message}");
-            return;
+            throw new Xunit.Sdk.XunitException($"{file} — XML parse error: {ex.Message}");
         }
 
         var packageId = doc
@@ -46,10 +46,10 @@ public class CsprojValidationTests
         if (packageId == null)
             return;
 
-        Assert.AreEqual(
+        // Assert
+        Xunit.Assert.Equal(
             expected,
-            packageId,
-            $"{file}\nExpected: {expected}\nActual:   {packageId}");
+            packageId);
     }
 
     // =====================================================
@@ -74,17 +74,22 @@ public class CsprojValidationTests
         }
     }
 
-    [DataTestMethod]
-    [DynamicData(nameof(GetCsprojFilesForSlnx), DynamicDataSourceType.Method)]
+    [Theory]
+    [MemberData(nameof(GetCsprojFilesForSlnx))]
     public void Csproj_Should_Be_Registered_In_Slnx(
         string root,
         string file,
         HashSet<string> slnxProjects)
     {
+        // Arrange
         var relative = ToRelativePath(root, file);
 
-        Assert.IsTrue(
-            slnxProjects.Contains(relative),
+        // Act
+        var containsProject = slnxProjects.Contains(relative);
+
+        // Assert
+        Xunit.Assert.True(
+            containsProject,
             $"""
             Project not found in .slnx
 

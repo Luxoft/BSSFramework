@@ -5,10 +5,9 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 
-[TestClass]
 public class GenerateDBTests : TestBase
 {
-    [TestMethod]
+    [Fact]
     public void GenerateDB_SecondTime_ShouldNotFail()
     {
         // Arrange
@@ -23,6 +22,6 @@ public class GenerateDBTests : TestBase
                                                                this.DatabaseContext.Main.Password)));
 
         // Assert
-        action.Should().NotThrow();
+        Assert.Null(Record.Exception(action));
     }
 }

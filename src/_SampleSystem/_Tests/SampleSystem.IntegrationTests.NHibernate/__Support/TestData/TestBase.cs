@@ -7,17 +7,15 @@ using SampleSystem.BLL;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.IntegrationTests.__Support.WebApi;
 using SampleSystem.WebApiCore.Controllers.Main;
+
 using SecuritySystem.Testing;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData;
 
+[Collection("Test Collection")]
 public class TestBase : IntegrationTestBase<ISampleSystemBLLContext>, IDisposable
 {
-    protected TestBase() : base(InitializeAndCleanup.TestEnvironment.ServiceProviderPool)
-    {
-        InitializeAndCleanup.EnsureInitialized();
-        base.Initialize();
-    }
+    protected TestBase() : base(AssemblyFixture.TestEnvironment.ServiceProviderPool) => base.Initialize();
 
     public MainWebApi MainWebApi => new(this.RootServiceProvider);
 

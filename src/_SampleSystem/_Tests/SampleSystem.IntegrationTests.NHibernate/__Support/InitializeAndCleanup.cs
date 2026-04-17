@@ -18,27 +18,13 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests.__Support;
 
-public static class InitializeAndCleanup
+public class AssemblyFixture : IAsyncLifetime
 {
     public static readonly TestEnvironment TestEnvironment = new TestEnvironmentBuilder()
                                                              .WithDefaultConfiguration($"{nameof(SampleSystem)}_")
                                                              .WithDatabaseGenerator<SampleSystemTestDatabaseGenerator>()
                                                              .WithServiceProviderBuildFunc(GetServices)
                                                              .Build();
-
-    private static readonly Lazy<Task> InitializationTask = new(() => TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentInitializeAsync());
-
-    private static int cleanupRegistrationState;
-
-    public static void EnsureInitialized()
-    {
-        InitializationTask.Value.GetAwaiter().GetResult();
-
-        if (Interlocked.Exchange(ref cleanupRegistrationState, 1) == 0)
-        {
-            AppDomain.CurrentDomain.ProcessExit += (_, _) => TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentCleanupAsync().GetAwaiter().GetResult();
-        }
-    }
 
     private static IServiceCollection GetServices(IConfiguration configuration, IServiceCollection services) =>
         services
@@ -58,4 +44,12 @@ public static class InitializeAndCleanup
             .AddSingleton<DataHelper>()
 
             .AddSingleton<TestDataInitializer>();
+
+    public Task InitializeAsync() => TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentInitializeAsync();
+
+    public async Task DisposeAsync()
+    {
+        await TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentCleanupAsync();
+        GC.SuppressFinalize(this);
+    }
 }

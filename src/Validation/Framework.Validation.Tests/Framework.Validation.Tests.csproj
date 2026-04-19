@@ -16,8 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framework.Validation\Framework.Validation.csproj" />
-
     <ProjectReference Include="..\..\BLL\Framework.BLL.Runtime\Framework.BLL.Runtime.csproj" />
   </ItemGroup>
 

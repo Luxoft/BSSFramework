@@ -21,7 +21,6 @@
     <ProjectReference Include="..\..\Database\Framework.Database.Domain\Framework.Database.Domain.csproj" />
     <ProjectReference Include="..\..\Database\Framework.Database.Mapping\Framework.Database.Mapping.csproj" />
     <ProjectReference Include="..\..\Database\Framework.Tracking.Abstractions\Framework.Tracking.Abstractions.csproj" />
-    <ProjectReference Include="..\..\Validation\Framework.Validation\Framework.Validation.csproj" />
     <ProjectReference Include="..\Framework.BLL.Validation\Framework.BLL.Validation.csproj" />
   </ItemGroup>
 

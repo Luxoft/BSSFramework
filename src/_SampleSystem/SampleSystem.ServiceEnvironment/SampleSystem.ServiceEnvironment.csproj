@@ -18,8 +18,6 @@
 
     <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Legacy\Framework.Infrastructure.Legacy.csproj" />
 
-    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure\Framework.Infrastructure.csproj" />
-
     <ProjectReference Include="..\..\Notification\Framework.Notification\Framework.Notification.csproj" />
 
     <ProjectReference Include="..\..\Subscriptions\Framework.Subscriptions\Framework.Subscriptions.csproj" />

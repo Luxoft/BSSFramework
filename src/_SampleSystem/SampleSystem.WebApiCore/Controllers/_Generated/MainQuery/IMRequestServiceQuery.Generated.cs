@@ -16,7 +16,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullIMRequestsByODataQueryStringInternal(odataQueryString, evaluateData));
         }
         
-        protected virtual Anch.OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.IMRequestFullDTO> GetFullIMRequestsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Anch.OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.IMRequestFullDTO> GetFullIMRequestsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Anch.OData.Domain.SelectOperation<SampleSystem.Domain.Employee.IMRequest> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.Employee.IMRequest>(odataQueryString);
@@ -33,7 +33,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleIMRequestsByODataQueryStringInternal(odataQueryString, evaluateData));
         }
         
-        protected virtual Anch.OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.IMRequestSimpleDTO> GetSimpleIMRequestsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Anch.OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.IMRequestSimpleDTO> GetSimpleIMRequestsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Anch.OData.Domain.SelectOperation<SampleSystem.Domain.Employee.IMRequest> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.Employee.IMRequest>(odataQueryString);
@@ -50,7 +50,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualIMRequestsByODataQueryStringInternal(odataQueryString, evaluateData));
         }
         
-        protected virtual Anch.OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.IMRequestVisualDTO> GetVisualIMRequestsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Anch.OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.IMRequestVisualDTO> GetVisualIMRequestsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Anch.OData.Domain.SelectOperation<SampleSystem.Domain.Employee.IMRequest> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.Employee.IMRequest>(odataQueryString);
@@ -67,7 +67,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetTestIMRequestsByODataQueryStringInternal(odataQueryString, evaluateData));
         }
         
-        protected virtual Anch.OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestIMRequestProjectionDTO> GetTestIMRequestsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Anch.OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.TestIMRequestProjectionDTO> GetTestIMRequestsByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestIMRequestBLL bll = evaluateData.Context.Logics.TestIMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Anch.OData.Domain.SelectOperation<SampleSystem.Domain.Projections.TestIMRequest> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.Projections.TestIMRequest>(odataQueryString);

@@ -16,7 +16,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullLocation1676sByODataQueryStringInternal(odataQueryString, evaluateData));
         }
         
-        protected virtual Anch.OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.Location1676FullDTO> GetFullLocation1676sByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Anch.OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.Location1676FullDTO> GetFullLocation1676sByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             Anch.OData.Domain.SelectOperation<SampleSystem.Domain.EnversBug1676.Location1676> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.EnversBug1676.Location1676>(odataQueryString);
@@ -33,7 +33,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleLocation1676sByODataQueryStringInternal(odataQueryString, evaluateData));
         }
         
-        protected virtual Anch.OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.Location1676SimpleDTO> GetSimpleLocation1676sByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Anch.OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.Location1676SimpleDTO> GetSimpleLocation1676sByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             Anch.OData.Domain.SelectOperation<SampleSystem.Domain.EnversBug1676.Location1676> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.EnversBug1676.Location1676>(odataQueryString);
@@ -50,7 +50,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualLocation1676sByODataQueryStringInternal(odataQueryString, evaluateData));
         }
         
-        protected virtual Anch.OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.Location1676VisualDTO> GetVisualLocation1676sByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Anch.OData.Domain.SelectOperationResult<SampleSystem.Generated.DTO.Location1676VisualDTO> GetVisualLocation1676sByODataQueryStringInternal(string odataQueryString, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             Anch.OData.Domain.SelectOperation<SampleSystem.Domain.EnversBug1676.Location1676> selectOperation = evaluateData.Context.SelectOperationParser.Parse<SampleSystem.Domain.EnversBug1676.Location1676>(odataQueryString);

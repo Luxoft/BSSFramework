@@ -16,7 +16,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.CreateSequenceInternal(sequenceCreateModel, evaluateData));
         }
         
-        protected virtual Framework.Configuration.Generated.DTO.SequenceRichDTO CreateSequenceInternal(Framework.Configuration.Generated.DTO.SequenceCreateModelStrictDTO sequenceCreateModel, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual Framework.Configuration.Generated.DTO.SequenceRichDTO CreateSequenceInternal(Framework.Configuration.Generated.DTO.SequenceCreateModelStrictDTO sequenceCreateModel, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.Edit);
             Framework.Configuration.Domain.SequenceCreateModel createModel = sequenceCreateModel.ToDomainObject(evaluateData.MappingService);
@@ -43,14 +43,14 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullSequenceByNameInternal(sequenceName, evaluateData));
         }
         
-        protected virtual Framework.Configuration.Generated.DTO.SequenceFullDTO GetFullSequenceByNameInternal(string sequenceName, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual Framework.Configuration.Generated.DTO.SequenceFullDTO GetFullSequenceByNameInternal(string sequenceName, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.Sequence domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, sequenceName, true, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.Sequence>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual Framework.Configuration.Generated.DTO.SequenceFullDTO GetFullSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual Framework.Configuration.Generated.DTO.SequenceFullDTO GetFullSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.Sequence domainObject = bll.GetById(sequenceIdentity.Id, true, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.Sequence>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
@@ -75,7 +75,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullSequencesByIdentsInternal(sequenceIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesByIdentsInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesByIdentsInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(sequenceIdents, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.Sequence>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
@@ -90,14 +90,14 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullSequencesByRootFilterInternal(filter, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesByRootFilterInternal(Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesByRootFilterInternal(Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SequenceRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.Sequence>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesInternal(Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesInternal(Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.Sequence>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
@@ -121,14 +121,14 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichSequenceByNameInternal(sequenceName, evaluateData));
         }
         
-        protected virtual Framework.Configuration.Generated.DTO.SequenceRichDTO GetRichSequenceByNameInternal(string sequenceName, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual Framework.Configuration.Generated.DTO.SequenceRichDTO GetRichSequenceByNameInternal(string sequenceName, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.Sequence domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, sequenceName, true, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.Sequence>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual Framework.Configuration.Generated.DTO.SequenceRichDTO GetRichSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual Framework.Configuration.Generated.DTO.SequenceRichDTO GetRichSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.Sequence domainObject = bll.GetById(sequenceIdentity.Id, true, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.Sequence>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
@@ -153,14 +153,14 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleSequenceByNameInternal(sequenceName, evaluateData));
         }
         
-        protected virtual Framework.Configuration.Generated.DTO.SequenceSimpleDTO GetSimpleSequenceByNameInternal(string sequenceName, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual Framework.Configuration.Generated.DTO.SequenceSimpleDTO GetSimpleSequenceByNameInternal(string sequenceName, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.Sequence domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, sequenceName, true, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.Sequence>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual Framework.Configuration.Generated.DTO.SequenceSimpleDTO GetSimpleSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual Framework.Configuration.Generated.DTO.SequenceSimpleDTO GetSimpleSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.Sequence domainObject = bll.GetById(sequenceIdentity.Id, true, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.Sequence>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
@@ -185,7 +185,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleSequencesByIdentsInternal(sequenceIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesByIdentsInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesByIdentsInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(sequenceIdents, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.Sequence>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
@@ -200,14 +200,14 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleSequencesByRootFilterInternal(filter, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesByRootFilterInternal(Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesByRootFilterInternal(Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SequenceRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.Sequence>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesInternal(Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesInternal(Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.Sequence>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
@@ -231,14 +231,14 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualSequenceByNameInternal(sequenceName, evaluateData));
         }
         
-        protected virtual Framework.Configuration.Generated.DTO.SequenceVisualDTO GetVisualSequenceByNameInternal(string sequenceName, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual Framework.Configuration.Generated.DTO.SequenceVisualDTO GetVisualSequenceByNameInternal(string sequenceName, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.Sequence domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, sequenceName, true, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.Sequence>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual Framework.Configuration.Generated.DTO.SequenceVisualDTO GetVisualSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual Framework.Configuration.Generated.DTO.SequenceVisualDTO GetVisualSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.Sequence domainObject = bll.GetById(sequenceIdentity.Id, true, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.Sequence>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
@@ -263,7 +263,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualSequencesByIdentsInternal(sequenceIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesByIdentsInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesByIdentsInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(sequenceIdents, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.Sequence>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
@@ -278,14 +278,14 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualSequencesByRootFilterInternal(filter, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesByRootFilterInternal(Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesByRootFilterInternal(Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SequenceRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListBy(typedFilter, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.Sequence>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesInternal(Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesInternal(Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.Sequence>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
@@ -300,13 +300,13 @@
             this.Evaluate(Framework.Database.DBSessionMode.Write, evaluateData => this.RemoveSequenceInternal(sequenceIdent, evaluateData));
         }
         
-        protected virtual void RemoveSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual void RemoveSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.Edit);
             this.RemoveSequenceInternal(sequenceIdent, evaluateData, bll);
         }
         
-        protected virtual void RemoveSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData, Framework.Configuration.BLL.ISequenceBLL bll)
+        protected virtual void RemoveSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData, Framework.Configuration.BLL.ISequenceBLL bll)
         {
             Framework.Configuration.Domain.Sequence domainObject = bll.GetById(sequenceIdent.Id, true);
             bll.Remove(domainObject);
@@ -321,13 +321,13 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Write, evaluateData => this.SaveSequenceInternal(sequenceStrict, evaluateData));
         }
         
-        protected virtual Framework.Configuration.Generated.DTO.SequenceIdentityDTO SaveSequenceInternal(Framework.Configuration.Generated.DTO.SequenceStrictDTO sequenceStrict, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual Framework.Configuration.Generated.DTO.SequenceIdentityDTO SaveSequenceInternal(Framework.Configuration.Generated.DTO.SequenceStrictDTO sequenceStrict, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.SequenceFactory.Create(Anch.SecuritySystem.SecurityRule.Edit);
             return this.SaveSequenceInternal(sequenceStrict, evaluateData, bll);
         }
         
-        protected virtual Framework.Configuration.Generated.DTO.SequenceIdentityDTO SaveSequenceInternal(Framework.Configuration.Generated.DTO.SequenceStrictDTO sequenceStrict, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData, Framework.Configuration.BLL.ISequenceBLL bll)
+        protected virtual Framework.Configuration.Generated.DTO.SequenceIdentityDTO SaveSequenceInternal(Framework.Configuration.Generated.DTO.SequenceStrictDTO sequenceStrict, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData, Framework.Configuration.BLL.ISequenceBLL bll)
         {
             Framework.Configuration.Domain.Sequence domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByIdOrCreate(bll, sequenceStrict.Id);
             sequenceStrict.MapToDomainObject(evaluateData.MappingService, domainObject);

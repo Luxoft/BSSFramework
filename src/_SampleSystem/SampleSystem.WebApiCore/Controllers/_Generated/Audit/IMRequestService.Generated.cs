@@ -18,7 +18,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullIMRequestWithRevisionInternal(iMRequestIdentity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.IMRequestFullDTO GetFullIMRequestWithRevisionInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.IMRequestFullDTO GetFullIMRequestWithRevisionInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, long revision, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Employee.IMRequest domainObject = bll.GetObjectByRevision(iMRequestIdentity.Id, revision);
@@ -37,10 +37,10 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetIMRequestPropertyRevisionByDateRangeInternal(iMRequestIdentity, propertyName, period, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetIMRequestPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, string propertyName, Framework.Core.Period? period, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetIMRequestPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, string propertyName, Framework.Core.Period? period, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
-            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.Employee.IMRequest>(iMRequestIdentity.Id, propertyName, period);
+            return new Framework.Infrastructure.Services.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.Employee.IMRequest>(iMRequestIdentity.Id, propertyName, period);
         }
         
         /// <summary>
@@ -54,10 +54,10 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetIMRequestPropertyRevisionsInternal(iMRequestIdentity, propertyName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetIMRequestPropertyRevisionsInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, string propertyName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetIMRequestPropertyRevisionsInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, string propertyName, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
-            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.Employee.IMRequest>(iMRequestIdentity.Id, propertyName);
+            return new Framework.Infrastructure.Services.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.Employee.IMRequest>(iMRequestIdentity.Id, propertyName);
         }
         
         /// <summary>
@@ -69,7 +69,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetIMRequestRevisionsInternal(iMRequestIdentity, evaluateData));
         }
         
-        protected virtual Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO GetIMRequestRevisionsInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO GetIMRequestRevisionsInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return new Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO(bll.GetObjectRevisions(iMRequestIdentity.Id));
@@ -86,7 +86,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichIMRequestWithRevisionInternal(iMRequestIdentity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.IMRequestRichDTO GetRichIMRequestWithRevisionInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.IMRequestRichDTO GetRichIMRequestWithRevisionInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, long revision, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Employee.IMRequest domainObject = bll.GetObjectByRevision(iMRequestIdentity.Id, revision);
@@ -104,7 +104,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleIMRequestWithRevisionInternal(iMRequestIdentity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.IMRequestSimpleDTO GetSimpleIMRequestWithRevisionInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.IMRequestSimpleDTO GetSimpleIMRequestWithRevisionInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, long revision, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Employee.IMRequest domainObject = bll.GetObjectByRevision(iMRequestIdentity.Id, revision);
@@ -122,7 +122,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualIMRequestWithRevisionInternal(iMRequestIdentity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.IMRequestVisualDTO GetVisualIMRequestWithRevisionInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.IMRequestVisualDTO GetVisualIMRequestWithRevisionInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, long revision, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Employee.IMRequest domainObject = bll.GetObjectByRevision(iMRequestIdentity.Id, revision);

@@ -18,7 +18,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullInformationWithRevisionInternal(informationIdentity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.InformationFullDTO GetFullInformationWithRevisionInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.InformationFullDTO GetFullInformationWithRevisionInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, long revision, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IInformationBLL bll = evaluateData.Context.Logics.InformationFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Employee.Information domainObject = bll.GetObjectByRevision(informationIdentity.Id, revision);
@@ -37,10 +37,10 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetInformationPropertyRevisionByDateRangeInternal(informationIdentity, propertyName, period, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetInformationPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, string propertyName, Framework.Core.Period? period, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetInformationPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, string propertyName, Framework.Core.Period? period, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IInformationBLL bll = evaluateData.Context.Logics.InformationFactory.Create(Anch.SecuritySystem.SecurityRule.View);
-            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.Employee.Information>(informationIdentity.Id, propertyName, period);
+            return new Framework.Infrastructure.Services.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.Employee.Information>(informationIdentity.Id, propertyName, period);
         }
         
         /// <summary>
@@ -54,10 +54,10 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetInformationPropertyRevisionsInternal(informationIdentity, propertyName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetInformationPropertyRevisionsInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, string propertyName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetInformationPropertyRevisionsInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, string propertyName, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IInformationBLL bll = evaluateData.Context.Logics.InformationFactory.Create(Anch.SecuritySystem.SecurityRule.View);
-            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.Employee.Information>(informationIdentity.Id, propertyName);
+            return new Framework.Infrastructure.Services.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.Employee.Information>(informationIdentity.Id, propertyName);
         }
         
         /// <summary>
@@ -69,7 +69,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetInformationRevisionsInternal(informationIdentity, evaluateData));
         }
         
-        protected virtual Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO GetInformationRevisionsInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO GetInformationRevisionsInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IInformationBLL bll = evaluateData.Context.Logics.InformationFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return new Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO(bll.GetObjectRevisions(informationIdentity.Id));
@@ -86,7 +86,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichInformationWithRevisionInternal(informationIdentity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.InformationRichDTO GetRichInformationWithRevisionInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.InformationRichDTO GetRichInformationWithRevisionInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, long revision, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IInformationBLL bll = evaluateData.Context.Logics.InformationFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Employee.Information domainObject = bll.GetObjectByRevision(informationIdentity.Id, revision);
@@ -104,7 +104,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleInformationWithRevisionInternal(informationIdentity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.InformationSimpleDTO GetSimpleInformationWithRevisionInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.InformationSimpleDTO GetSimpleInformationWithRevisionInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, long revision, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IInformationBLL bll = evaluateData.Context.Logics.InformationFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Employee.Information domainObject = bll.GetObjectByRevision(informationIdentity.Id, revision);
@@ -122,7 +122,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualInformationWithRevisionInternal(informationIdentity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.InformationVisualDTO GetVisualInformationWithRevisionInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.InformationVisualDTO GetVisualInformationWithRevisionInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, long revision, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IInformationBLL bll = evaluateData.Context.Logics.InformationFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Employee.Information domainObject = bll.GetObjectByRevision(informationIdentity.Id, revision);

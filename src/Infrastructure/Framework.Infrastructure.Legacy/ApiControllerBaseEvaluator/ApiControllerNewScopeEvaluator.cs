@@ -1,6 +1,6 @@
 ﻿using Framework.Database;
 using Framework.Infrastructure.ContextEvaluator;
-using Framework.Infrastructure.Service;
+using Framework.Infrastructure.Services;
 
 namespace Framework.Infrastructure.ApiControllerBaseEvaluator;
 

@@ -2,7 +2,7 @@
 
 using Framework.Database;
 using Framework.Infrastructure.ApiControllerBaseEvaluator;
-using Framework.Infrastructure.Service;
+using Framework.Infrastructure.Services;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;

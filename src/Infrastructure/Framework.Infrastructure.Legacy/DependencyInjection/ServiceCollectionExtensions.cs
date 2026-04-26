@@ -14,7 +14,7 @@ using Framework.Database;
 using Framework.ExtendedMetadata;
 using Framework.Infrastructure.ApiControllerBaseEvaluator;
 using Framework.Infrastructure.ContextEvaluator;
-using Framework.Infrastructure.Service;
+using Framework.Infrastructure.Services;
 using Framework.Infrastructure.WebApiExceptionExpander;
 using Framework.Projection;
 using Framework.Tracking;

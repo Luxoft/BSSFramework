@@ -25,14 +25,14 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullPrincipalByNameInternal(principalName, evaluateData));
         }
         
-        protected virtual Framework.Authorization.Generated.DTO.PrincipalFullDTO GetFullPrincipalByNameInternal(string principalName, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual Framework.Authorization.Generated.DTO.PrincipalFullDTO GetFullPrincipalByNameInternal(string principalName, Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.Principal domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, principalName, true, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual Framework.Authorization.Generated.DTO.PrincipalFullDTO GetFullPrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual Framework.Authorization.Generated.DTO.PrincipalFullDTO GetFullPrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdentity, Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdentity.Id, true, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
@@ -57,13 +57,13 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullPrincipalsByIdentsInternal(principalIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalFullDTO> GetFullPrincipalsByIdentsInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO[] principalIdents, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalFullDTO> GetFullPrincipalsByIdentsInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO[] principalIdents, Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(principalIdents, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalFullDTO> GetFullPrincipalsInternal(Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalFullDTO> GetFullPrincipalsInternal(Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
@@ -87,14 +87,14 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichPrincipalByNameInternal(principalName, evaluateData));
         }
         
-        protected virtual Framework.Authorization.Generated.DTO.PrincipalRichDTO GetRichPrincipalByNameInternal(string principalName, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual Framework.Authorization.Generated.DTO.PrincipalRichDTO GetRichPrincipalByNameInternal(string principalName, Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.Principal domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, principalName, true, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual Framework.Authorization.Generated.DTO.PrincipalRichDTO GetRichPrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual Framework.Authorization.Generated.DTO.PrincipalRichDTO GetRichPrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdentity, Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdentity.Id, true, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
@@ -119,14 +119,14 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimplePrincipalByNameInternal(principalName, evaluateData));
         }
         
-        protected virtual Framework.Authorization.Generated.DTO.PrincipalSimpleDTO GetSimplePrincipalByNameInternal(string principalName, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual Framework.Authorization.Generated.DTO.PrincipalSimpleDTO GetSimplePrincipalByNameInternal(string principalName, Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.Principal domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, principalName, true, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual Framework.Authorization.Generated.DTO.PrincipalSimpleDTO GetSimplePrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual Framework.Authorization.Generated.DTO.PrincipalSimpleDTO GetSimplePrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdentity, Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdentity.Id, true, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
@@ -151,13 +151,13 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimplePrincipalsByIdentsInternal(principalIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalSimpleDTO> GetSimplePrincipalsByIdentsInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO[] principalIdents, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalSimpleDTO> GetSimplePrincipalsByIdentsInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO[] principalIdents, Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(principalIdents, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalSimpleDTO> GetSimplePrincipalsInternal(Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalSimpleDTO> GetSimplePrincipalsInternal(Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
@@ -181,14 +181,14 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualPrincipalByNameInternal(principalName, evaluateData));
         }
         
-        protected virtual Framework.Authorization.Generated.DTO.PrincipalVisualDTO GetVisualPrincipalByNameInternal(string principalName, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual Framework.Authorization.Generated.DTO.PrincipalVisualDTO GetVisualPrincipalByNameInternal(string principalName, Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.Principal domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, principalName, true, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual Framework.Authorization.Generated.DTO.PrincipalVisualDTO GetVisualPrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual Framework.Authorization.Generated.DTO.PrincipalVisualDTO GetVisualPrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdentity, Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdentity.Id, true, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
@@ -213,13 +213,13 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualPrincipalsByIdentsInternal(principalIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalVisualDTO> GetVisualPrincipalsByIdentsInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO[] principalIdents, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalVisualDTO> GetVisualPrincipalsByIdentsInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO[] principalIdents, Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(principalIdents, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalVisualDTO> GetVisualPrincipalsInternal(Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.PrincipalVisualDTO> GetVisualPrincipalsInternal(Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.Principal>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
@@ -234,13 +234,13 @@
             this.Evaluate(Framework.Database.DBSessionMode.Write, evaluateData => this.RemovePrincipalInternal(principalIdent, evaluateData));
         }
         
-        protected virtual void RemovePrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdent, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual void RemovePrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdent, Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(Anch.SecuritySystem.SecurityRule.Edit);
             this.RemovePrincipalInternal(principalIdent, evaluateData, bll);
         }
         
-        protected virtual void RemovePrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdent, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData, Framework.Authorization.BLL.IPrincipalBLL bll)
+        protected virtual void RemovePrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdent, Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData, Framework.Authorization.BLL.IPrincipalBLL bll)
         {
             Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdent.Id, true);
             bll.Remove(domainObject);
@@ -255,13 +255,13 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Write, evaluateData => this.SavePrincipalInternal(principalStrict, evaluateData));
         }
         
-        protected virtual Framework.Authorization.Generated.DTO.PrincipalIdentityDTO SavePrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalStrictDTO principalStrict, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual Framework.Authorization.Generated.DTO.PrincipalIdentityDTO SavePrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalStrictDTO principalStrict, Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.PrincipalFactory.Create(Anch.SecuritySystem.SecurityRule.Edit);
             return this.SavePrincipalInternal(principalStrict, evaluateData, bll);
         }
         
-        protected virtual Framework.Authorization.Generated.DTO.PrincipalIdentityDTO SavePrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalStrictDTO principalStrict, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData, Framework.Authorization.BLL.IPrincipalBLL bll)
+        protected virtual Framework.Authorization.Generated.DTO.PrincipalIdentityDTO SavePrincipalInternal(Framework.Authorization.Generated.DTO.PrincipalStrictDTO principalStrict, Framework.Infrastructure.Services.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData, Framework.Authorization.BLL.IPrincipalBLL bll)
         {
             Framework.Authorization.Domain.Principal domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByIdOrCreate(bll, principalStrict.Id);
             principalStrict.MapToDomainObject(evaluateData.MappingService, domainObject);

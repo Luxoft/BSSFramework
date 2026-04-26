@@ -16,7 +16,7 @@
             this.Evaluate(Framework.Database.DBSessionMode.Write, evaluateData => this.RemoveIntegrationVersionContainer1Internal(integrationVersionContainer1Ident, evaluateData));
         }
         
-        protected virtual void RemoveIntegrationVersionContainer1Internal(SampleSystem.Generated.DTO.IntegrationVersionContainer1IdentityDTO integrationVersionContainer1Ident, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual void RemoveIntegrationVersionContainer1Internal(SampleSystem.Generated.DTO.IntegrationVersionContainer1IdentityDTO integrationVersionContainer1Ident, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IIntegrationVersionContainer1BLL bll = evaluateData.Context.Logics.IntegrationVersionContainer1;
             evaluateData.Context.Authorization.SecuritySystem.CheckAccessAsync(Anch.SecuritySystem.SecurityRole.SystemIntegration);
@@ -42,7 +42,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Write, evaluateData => this.SaveIntegrationVersionContainer1ByCustomInternal(integrationVersionContainer1IntegrationSaveModel, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.IntegrationVersionContainer1IdentityDTO SaveIntegrationVersionContainer1ByCustomInternal(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO integrationVersionContainer1IntegrationSaveModel, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.IntegrationVersionContainer1IdentityDTO SaveIntegrationVersionContainer1ByCustomInternal(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO integrationVersionContainer1IntegrationSaveModel, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IIntegrationVersionContainer1BLL bll = evaluateData.Context.Logics.IntegrationVersionContainer1;
             evaluateData.Context.Authorization.SecuritySystem.CheckAccessAsync(Anch.SecuritySystem.SecurityRole.SystemIntegration);
@@ -56,14 +56,14 @@
             return SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject);
         }
         
-        protected virtual SampleSystem.Generated.DTO.IntegrationVersionContainer1IdentityDTO SaveIntegrationVersionContainer1Internal(SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationRichDTO integrationVersionContainer1, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.IntegrationVersionContainer1IdentityDTO SaveIntegrationVersionContainer1Internal(SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationRichDTO integrationVersionContainer1, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IIntegrationVersionContainer1BLL bll = evaluateData.Context.Logics.IntegrationVersionContainer1;
             evaluateData.Context.Authorization.SecuritySystem.CheckAccessAsync(Anch.SecuritySystem.SecurityRole.SystemIntegration);
             return this.SaveIntegrationVersionContainer1Internal(integrationVersionContainer1, evaluateData, bll);
         }
         
-        protected virtual SampleSystem.Generated.DTO.IntegrationVersionContainer1IdentityDTO SaveIntegrationVersionContainer1Internal(SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationRichDTO integrationVersionContainer1, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData, SampleSystem.BLL.IIntegrationVersionContainer1BLL bll)
+        protected virtual SampleSystem.Generated.DTO.IntegrationVersionContainer1IdentityDTO SaveIntegrationVersionContainer1Internal(SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationRichDTO integrationVersionContainer1, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData, SampleSystem.BLL.IIntegrationVersionContainer1BLL bll)
         {
             SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 domainObject = bll.GetById(integrationVersionContainer1.Id, false, null, Framework.Database.LockRole.Update);
             if (object.ReferenceEquals(domainObject, null))
@@ -87,7 +87,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Write, evaluateData => this.SaveIntegrationVersionContainer1sInternal(integrationVersionContainer1s, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.IntegrationVersionContainer1IdentityDTO> SaveIntegrationVersionContainer1sInternal(SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationRichDTO[] integrationVersionContainer1s, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.IntegrationVersionContainer1IdentityDTO> SaveIntegrationVersionContainer1sInternal(SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationRichDTO[] integrationVersionContainer1s, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IIntegrationVersionContainer1BLL bll = evaluateData.Context.Logics.IntegrationVersionContainer1;
             evaluateData.Context.Authorization.SecuritySystem.CheckAccessAsync(Anch.SecuritySystem.SecurityRole.SystemIntegration);

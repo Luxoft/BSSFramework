@@ -15,7 +15,7 @@ using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.Infrastructure.Service;
+namespace Framework.Infrastructure.Services;
 
 public class AuditService<TIdent, TBLLContext, TBllFactoryContainer, TRootSecurityService, TPersistentObjectBase,
                           TDomainPropertyRevisionsDto, TPropertyRevisionDto>(TBLLContext bllContext)

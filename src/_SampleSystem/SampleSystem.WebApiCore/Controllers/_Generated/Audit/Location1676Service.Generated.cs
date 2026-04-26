@@ -18,7 +18,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullLocation1676WithRevisionInternal(location1676Identity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.Location1676FullDTO GetFullLocation1676WithRevisionInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.Location1676FullDTO GetFullLocation1676WithRevisionInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, long revision, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.EnversBug1676.Location1676 domainObject = bll.GetObjectByRevision(location1676Identity.Id, revision);
@@ -37,10 +37,10 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetLocation1676PropertyRevisionByDateRangeInternal(location1676Identity, propertyName, period, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocation1676PropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, string propertyName, Framework.Core.Period? period, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocation1676PropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, string propertyName, Framework.Core.Period? period, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
-            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.EnversBug1676.Location1676>(location1676Identity.Id, propertyName, period);
+            return new Framework.Infrastructure.Services.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.EnversBug1676.Location1676>(location1676Identity.Id, propertyName, period);
         }
         
         /// <summary>
@@ -54,10 +54,10 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetLocation1676PropertyRevisionsInternal(location1676Identity, propertyName, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocation1676PropertyRevisionsInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, string propertyName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocation1676PropertyRevisionsInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, string propertyName, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
-            return new Framework.Infrastructure.Service.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.EnversBug1676.Location1676>(location1676Identity.Id, propertyName);
+            return new Framework.Infrastructure.Services.AuditService<System.Guid, SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, Framework.BLL.Services.IRootSecurityService, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO, SampleSystem.Generated.DTO.SampleSystemPropertyRevisionDTO>(evaluateData.Context).GetPropertyChanges<SampleSystem.Domain.EnversBug1676.Location1676>(location1676Identity.Id, propertyName);
         }
         
         /// <summary>
@@ -69,7 +69,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetLocation1676RevisionsInternal(location1676Identity, evaluateData));
         }
         
-        protected virtual Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO GetLocation1676RevisionsInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO GetLocation1676RevisionsInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             return new Framework.BLL.DTOMapping.Domain.DefaultDomainObjectRevisionDTO(bll.GetObjectRevisions(location1676Identity.Id));
@@ -86,7 +86,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichLocation1676WithRevisionInternal(location1676Identity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.Location1676RichDTO GetRichLocation1676WithRevisionInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.Location1676RichDTO GetRichLocation1676WithRevisionInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, long revision, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.EnversBug1676.Location1676 domainObject = bll.GetObjectByRevision(location1676Identity.Id, revision);
@@ -104,7 +104,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleLocation1676WithRevisionInternal(location1676Identity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.Location1676SimpleDTO GetSimpleLocation1676WithRevisionInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.Location1676SimpleDTO GetSimpleLocation1676WithRevisionInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, long revision, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.EnversBug1676.Location1676 domainObject = bll.GetObjectByRevision(location1676Identity.Id, revision);
@@ -122,7 +122,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualLocation1676WithRevisionInternal(location1676Identity, revision, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.Location1676VisualDTO GetVisualLocation1676WithRevisionInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, long revision, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.Location1676VisualDTO GetVisualLocation1676WithRevisionInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, long revision, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.EnversBug1676.Location1676 domainObject = bll.GetObjectByRevision(location1676Identity.Id, revision);

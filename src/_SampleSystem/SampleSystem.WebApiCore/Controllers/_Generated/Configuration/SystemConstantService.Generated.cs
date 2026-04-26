@@ -16,7 +16,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantInternal(systemConstantIdentity, evaluateData));
         }
         
-        protected virtual Framework.Configuration.Generated.DTO.SystemConstantFullDTO GetFullSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual Framework.Configuration.Generated.DTO.SystemConstantFullDTO GetFullSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstant domainObject = bll.GetById(systemConstantIdentity.Id, true, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.SystemConstant>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
@@ -41,7 +41,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantsByIdentsInternal(systemConstantIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> GetFullSystemConstantsByIdentsInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> GetFullSystemConstantsByIdentsInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(systemConstantIdents, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.SystemConstant>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
@@ -56,14 +56,14 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantsByRootFilterInternal(filter, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> GetFullSystemConstantsByRootFilterInternal(Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> GetFullSystemConstantsByRootFilterInternal(Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstantRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListBy(typedFilter, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.SystemConstant>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> GetFullSystemConstantsInternal(Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> GetFullSystemConstantsInternal(Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.SystemConstant>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
@@ -78,7 +78,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichSystemConstantInternal(systemConstantIdentity, evaluateData));
         }
         
-        protected virtual Framework.Configuration.Generated.DTO.SystemConstantRichDTO GetRichSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual Framework.Configuration.Generated.DTO.SystemConstantRichDTO GetRichSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstant domainObject = bll.GetById(systemConstantIdentity.Id, true, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.SystemConstant>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
@@ -94,7 +94,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantInternal(systemConstantIdentity, evaluateData));
         }
         
-        protected virtual Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO GetSimpleSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO GetSimpleSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstant domainObject = bll.GetById(systemConstantIdentity.Id, true, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.SystemConstant>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
@@ -119,7 +119,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantsByIdentsInternal(systemConstantIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> GetSimpleSystemConstantsByIdentsInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> GetSimpleSystemConstantsByIdentsInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(systemConstantIdents, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.SystemConstant>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
@@ -134,14 +134,14 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantsByRootFilterInternal(filter, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> GetSimpleSystemConstantsByRootFilterInternal(Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> GetSimpleSystemConstantsByRootFilterInternal(Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstantRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListBy(typedFilter, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.SystemConstant>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> GetSimpleSystemConstantsInternal(Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> GetSimpleSystemConstantsInternal(Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.SystemConstant>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
@@ -156,7 +156,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantInternal(systemConstantIdentity, evaluateData));
         }
         
-        protected virtual Framework.Configuration.Generated.DTO.SystemConstantVisualDTO GetVisualSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual Framework.Configuration.Generated.DTO.SystemConstantVisualDTO GetVisualSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstant domainObject = bll.GetById(systemConstantIdentity.Id, true, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.SystemConstant>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
@@ -181,7 +181,7 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantsByIdentsInternal(systemConstantIdents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> GetVisualSystemConstantsByIdentsInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> GetVisualSystemConstantsByIdentsInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(systemConstantIdents, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.SystemConstant>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
@@ -196,14 +196,14 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantsByRootFilterInternal(filter, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> GetVisualSystemConstantsByRootFilterInternal(Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> GetVisualSystemConstantsByRootFilterInternal(Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Configuration.Domain.SystemConstantRootFilterModel typedFilter = filter.ToDomainObject(evaluateData.MappingService);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListBy(typedFilter, new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.SystemConstant>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> GetVisualSystemConstantsInternal(Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> GetVisualSystemConstantsInternal(Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<Framework.Configuration.Domain.SystemConstant>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
@@ -218,13 +218,13 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Write, evaluateData => this.SaveSystemConstantInternal(systemConstantStrict, evaluateData));
         }
         
-        protected virtual Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO SaveSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantStrictDTO systemConstantStrict, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO SaveSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantStrictDTO systemConstantStrict, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstantFactory.Create(Anch.SecuritySystem.SecurityRule.Edit);
             return this.SaveSystemConstantInternal(systemConstantStrict, evaluateData, bll);
         }
         
-        protected virtual Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO SaveSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantStrictDTO systemConstantStrict, Framework.Infrastructure.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData, Framework.Configuration.BLL.ISystemConstantBLL bll)
+        protected virtual Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO SaveSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantStrictDTO systemConstantStrict, Framework.Infrastructure.Services.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData, Framework.Configuration.BLL.ISystemConstantBLL bll)
         {
             Framework.Configuration.Domain.SystemConstant domainObject = bll.GetById(systemConstantStrict.Id, true);
             systemConstantStrict.MapToDomainObject(evaluateData.MappingService, domainObject);

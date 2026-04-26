@@ -1,8 +1,8 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
-using CommonFramework;
-using CommonFramework.DictionaryCache;
+using Anch.Core;
+using Anch.Core.DictionaryCache;
 
 using Framework.BLL.Services;
 using Framework.Core;

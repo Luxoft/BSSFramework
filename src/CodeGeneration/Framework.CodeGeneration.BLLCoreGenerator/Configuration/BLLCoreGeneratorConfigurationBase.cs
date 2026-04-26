@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Reflection;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.BLL;
 using Framework.BLL.Domain.ServiceRole;
@@ -14,7 +14,7 @@ using Framework.Core;
 using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 #pragma warning disable S100 // Methods and properties should be named in camel case
 namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;

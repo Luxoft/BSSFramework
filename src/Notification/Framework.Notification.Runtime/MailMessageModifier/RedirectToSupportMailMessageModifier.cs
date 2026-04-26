@@ -1,6 +1,6 @@
 ﻿using System.Net.Mail;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.Notification.Settings;
 

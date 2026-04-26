@@ -25,16 +25,16 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullLocation1676ByNameInternal(location1676Name, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.Location1676FullDTO GetFullLocation1676ByNameInternal(string location1676Name, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.Location1676FullDTO GetFullLocation1676ByNameInternal(string location1676Name, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.EnversBug1676.Location1676 domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, location1676Name, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EnversBug1676.Location1676>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual SampleSystem.Generated.DTO.Location1676FullDTO GetFullLocation1676Internal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.Location1676FullDTO GetFullLocation1676Internal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.EnversBug1676.Location1676 domainObject = bll.GetById(location1676Identity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EnversBug1676.Location1676>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
@@ -57,15 +57,15 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetFullLocation1676sByIdentsInternal(location1676Idents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676FullDTO> GetFullLocation1676sByIdentsInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO[] location1676Idents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676FullDTO> GetFullLocation1676sByIdentsInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO[] location1676Idents, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(location1676Idents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EnversBug1676.Location1676>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676FullDTO> GetFullLocation1676sInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676FullDTO> GetFullLocation1676sInternal(Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EnversBug1676.Location1676>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -87,16 +87,16 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetRichLocation1676ByNameInternal(location1676Name, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.Location1676RichDTO GetRichLocation1676ByNameInternal(string location1676Name, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.Location1676RichDTO GetRichLocation1676ByNameInternal(string location1676Name, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.EnversBug1676.Location1676 domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, location1676Name, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EnversBug1676.Location1676>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual SampleSystem.Generated.DTO.Location1676RichDTO GetRichLocation1676Internal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.Location1676RichDTO GetRichLocation1676Internal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.EnversBug1676.Location1676 domainObject = bll.GetById(location1676Identity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EnversBug1676.Location1676>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
@@ -119,16 +119,16 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleLocation1676ByNameInternal(location1676Name, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.Location1676SimpleDTO GetSimpleLocation1676ByNameInternal(string location1676Name, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.Location1676SimpleDTO GetSimpleLocation1676ByNameInternal(string location1676Name, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.EnversBug1676.Location1676 domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, location1676Name, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EnversBug1676.Location1676>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual SampleSystem.Generated.DTO.Location1676SimpleDTO GetSimpleLocation1676Internal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.Location1676SimpleDTO GetSimpleLocation1676Internal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.EnversBug1676.Location1676 domainObject = bll.GetById(location1676Identity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EnversBug1676.Location1676>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
@@ -151,15 +151,15 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetSimpleLocation1676sByIdentsInternal(location1676Idents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676SimpleDTO> GetSimpleLocation1676sByIdentsInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO[] location1676Idents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676SimpleDTO> GetSimpleLocation1676sByIdentsInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO[] location1676Idents, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(location1676Idents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EnversBug1676.Location1676>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676SimpleDTO> GetSimpleLocation1676sInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676SimpleDTO> GetSimpleLocation1676sInternal(Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EnversBug1676.Location1676>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -181,16 +181,16 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualLocation1676ByNameInternal(location1676Name, evaluateData));
         }
         
-        protected virtual SampleSystem.Generated.DTO.Location1676VisualDTO GetVisualLocation1676ByNameInternal(string location1676Name, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.Location1676VisualDTO GetVisualLocation1676ByNameInternal(string location1676Name, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.EnversBug1676.Location1676 domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, location1676Name, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EnversBug1676.Location1676>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
-        protected virtual SampleSystem.Generated.DTO.Location1676VisualDTO GetVisualLocation1676Internal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual SampleSystem.Generated.DTO.Location1676VisualDTO GetVisualLocation1676Internal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.EnversBug1676.Location1676 domainObject = bll.GetById(location1676Identity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EnversBug1676.Location1676>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
@@ -213,15 +213,15 @@
             return this.Evaluate(Framework.Database.DBSessionMode.Read, evaluateData => this.GetVisualLocation1676sByIdentsInternal(location1676Idents, evaluateData));
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676VisualDTO> GetVisualLocation1676sByIdentsInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO[] location1676Idents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676VisualDTO> GetVisualLocation1676sByIdentsInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO[] location1676Idents, Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(location1676Idents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EnversBug1676.Location1676>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676VisualDTO> GetVisualLocation1676sInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.Location1676VisualDTO> GetVisualLocation1676sInternal(Framework.Infrastructure.Services.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676Factory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.EnversBug1676.Location1676>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
     }

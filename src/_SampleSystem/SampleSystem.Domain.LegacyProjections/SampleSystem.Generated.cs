@@ -13,7 +13,7 @@ namespace SampleSystem.Domain.Projections
     
     [Framework.Database.Mapping.TableAttribute(Name="BusinessUnit")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), Framework.Projection.ProjectionRole.SecurityNode)]
-    public partial class SecurityBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase, SecuritySystem.ISecurityContext, SampleSystem.Domain.BU.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>
+    public partial class SecurityBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase, Anch.SecuritySystem.ISecurityContext, SampleSystem.Domain.BU.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>
     {
         
         protected SecurityBusinessUnit()
@@ -32,7 +32,7 @@ namespace SampleSystem.Domain.Projections
     
     [Framework.Database.Mapping.TableAttribute(Name="Employee")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee.Employee), Framework.Projection.ProjectionRole.SecurityNode)]
-    public partial class SecurityEmployee : SampleSystem.Domain.PersistentDomainObjectBase, SecuritySystem.ISecurityContext, SampleSystem.Domain.Employee.IEmployeeSecurity<SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation>, SampleSystem.Domain.BU.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>, SampleSystem.Domain.HRDepartment.IDepartmentSecurityElement<SampleSystem.Domain.Projections.SecurityHRDepartment>, SampleSystem.Domain.Employee.IEmployeeSecurityElement<SampleSystem.Domain.Projections.SecurityEmployee, SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation>, SampleSystem.Domain.Employee.IEmployeeSecurityElement<SampleSystem.Domain.Projections.SecurityEmployee>
+    public partial class SecurityEmployee : SampleSystem.Domain.PersistentDomainObjectBase, Anch.SecuritySystem.ISecurityContext, SampleSystem.Domain.Employee.IEmployeeSecurity<SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation>, SampleSystem.Domain.BU.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>, SampleSystem.Domain.HRDepartment.IDepartmentSecurityElement<SampleSystem.Domain.Projections.SecurityHRDepartment>, SampleSystem.Domain.Employee.IEmployeeSecurityElement<SampleSystem.Domain.Projections.SecurityEmployee, SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation>, SampleSystem.Domain.Employee.IEmployeeSecurityElement<SampleSystem.Domain.Projections.SecurityEmployee>
     {
         
         private SampleSystem.Domain.Projections.SecurityBusinessUnit businessUnit_Security;
@@ -105,7 +105,7 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.BLL.Domain.Attributes.ViewDomainObjectAttribute(typeof(SecuritySystem.SecurityRule), "View")]
+        [Framework.BLL.Domain.Attributes.ViewDomainObjectAttribute(typeof(Anch.SecuritySystem.SecurityRule), "View")]
         [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Security)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="login")]
@@ -154,7 +154,7 @@ namespace SampleSystem.Domain.Projections
     
     [Framework.Database.Mapping.TableAttribute(Name="Location")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Directories.Location), Framework.Projection.ProjectionRole.SecurityNode)]
-    public partial class SecurityLocation : SampleSystem.Domain.PersistentDomainObjectBase, SecuritySystem.ISecurityContext
+    public partial class SecurityLocation : SampleSystem.Domain.PersistentDomainObjectBase, Anch.SecuritySystem.ISecurityContext
     {
         
         protected SecurityLocation()
@@ -178,7 +178,7 @@ namespace SampleSystem.Domain.Projections
         {
         }
         
-        [Framework.BLL.Domain.Attributes.ViewDomainObjectAttribute(typeof(SecuritySystem.SecurityRule), "View")]
+        [Framework.BLL.Domain.Attributes.ViewDomainObjectAttribute(typeof(Anch.SecuritySystem.SecurityRule), "View")]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="login")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]

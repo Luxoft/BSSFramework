@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlTypes;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.Application;
 using Framework.Application.Events;
@@ -9,7 +9,7 @@ using Framework.Configuration.Generated.DTO;
 using Framework.Database;
 using Framework.Database.NHibernate.Sessions;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 

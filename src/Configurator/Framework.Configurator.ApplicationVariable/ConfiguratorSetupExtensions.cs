@@ -1,4 +1,4 @@
-﻿using SecuritySystem.Configurator;
+﻿using Anch.SecuritySystem.Configurator;
 
 namespace Framework.Configurator;
 

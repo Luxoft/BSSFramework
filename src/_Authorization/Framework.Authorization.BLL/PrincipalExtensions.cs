@@ -1,6 +1,6 @@
 ﻿using Framework.Authorization.Domain;
 
-using SecuritySystem.ExternalSystem.Management;
+using Anch.SecuritySystem.ExternalSystem.Management;
 
 namespace Framework.Authorization.BLL;
 

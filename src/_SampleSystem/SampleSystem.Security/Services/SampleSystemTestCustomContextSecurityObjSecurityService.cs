@@ -1,9 +1,9 @@
-﻿using SecuritySystem;
+﻿using Anch.SecuritySystem;
 
 using SampleSystem.Domain;
 
-using SecuritySystem.DomainServices;
-using SecuritySystem.Providers;
+using Anch.SecuritySystem.DomainServices;
+using Anch.SecuritySystem.Providers;
 
 namespace SampleSystem.Security.Services;
 

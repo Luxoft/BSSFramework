@@ -1,6 +1,6 @@
 ﻿using Framework.BLL.Domain.Attributes;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace SampleSystem.Domain.Directories;
 

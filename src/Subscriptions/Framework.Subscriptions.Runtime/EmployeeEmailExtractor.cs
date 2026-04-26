@@ -1,14 +1,14 @@
 ﻿using System.Collections.Immutable;
 
-using CommonFramework;
-using CommonFramework.GenericRepository;
-using CommonFramework.VisualIdentitySource;
+using Anch.Core;
+using Anch.GenericRepository;
+using Anch.VisualIdentitySource;
 
-using GenericQueryable;
+using Anch.GenericQueryable;
 
-using SecuritySystem;
-using SecuritySystem.Notification;
-using SecuritySystem.Notification.Domain;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.Notification;
+using Anch.SecuritySystem.Notification.Domain;
 
 namespace Framework.Subscriptions;
 

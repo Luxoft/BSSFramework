@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.SecuritySystem.Testing" />
+    <PackageReference Include="Anch.SecuritySystem.Testing" />
   </ItemGroup>
 
   <ItemGroup>

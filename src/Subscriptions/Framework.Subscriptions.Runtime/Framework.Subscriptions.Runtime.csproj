@@ -10,10 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.CommonFramework.GenericRepository" />
-    <PackageReference Include="IvAt.CommonFramework.IdentitySource.Abstractions" />
-    <PackageReference Include="IvAt.CommonFramework.VisualIdentitySource.Abstractions" />
-    <PackageReference Include="IvAt.SecuritySystem.Notification.Abstractions" />
+    <PackageReference Include="Anch.GenericRepository" />
+    <PackageReference Include="Anch.IdentitySource.Abstractions" />
+    <PackageReference Include="Anch.VisualIdentitySource.Abstractions" />
+    <PackageReference Include="Anch.SecuritySystem.Notification.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>

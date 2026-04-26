@@ -1,5 +1,5 @@
-﻿using CommonFramework;
-using CommonFramework.DependencyInjection;
+﻿using Anch.Core;
+using Anch.DependencyInjection;
 
 using Framework.Application;
 using Framework.Application.Auth;
@@ -18,7 +18,7 @@ using Framework.Infrastructure.WebApiExceptionExpander;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem.DependencyInjection;
+using Anch.SecuritySystem.DependencyInjection;
 
 namespace Framework.Infrastructure.DependencyInjection;
 

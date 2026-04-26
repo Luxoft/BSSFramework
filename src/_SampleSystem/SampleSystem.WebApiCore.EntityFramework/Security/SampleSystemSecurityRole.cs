@@ -1,4 +1,4 @@
-﻿using SecuritySystem;
+﻿using Anch.SecuritySystem;
 
 namespace SampleSystem.WebApiCore.Security;
 

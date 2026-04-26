@@ -1,6 +1,6 @@
 ﻿using System.CodeDom;
 
-using CommonFramework;
+using Anch.Core;
 using Framework.BLL;
 using Framework.BLL.DTOMapping.Services;
 using Framework.CodeDom.Extend;
@@ -13,7 +13,7 @@ using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.Core;
 using Framework.Database;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
 

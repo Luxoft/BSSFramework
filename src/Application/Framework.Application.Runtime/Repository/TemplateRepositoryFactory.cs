@@ -1,8 +1,8 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
-using SecuritySystem;
-using SecuritySystem.DomainServices;
-using SecuritySystem.Providers;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.DomainServices;
+using Anch.SecuritySystem.Providers;
 
 namespace Framework.Application.Repository;
 

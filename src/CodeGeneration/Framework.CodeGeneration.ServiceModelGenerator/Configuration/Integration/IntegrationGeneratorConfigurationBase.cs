@@ -9,7 +9,7 @@ using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integratio
 using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.Configuration.Integration;
 

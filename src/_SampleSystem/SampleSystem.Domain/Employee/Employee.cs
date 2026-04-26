@@ -1,4 +1,4 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Fetching;
@@ -18,7 +18,7 @@ using SampleSystem.Domain.Enums;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Domain.MU;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace SampleSystem.Domain.Employee;
 

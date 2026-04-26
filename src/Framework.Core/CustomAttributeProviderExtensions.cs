@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Reflection;
 
-using CommonFramework;
-using CommonFramework.DictionaryCache;
+using Anch.Core;
+using Anch.Core.DictionaryCache;
 
 namespace Framework.Core;
 

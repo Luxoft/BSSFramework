@@ -1,7 +1,7 @@
 ﻿using System.Collections.Frozen;
 using System.Collections.Immutable;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.Application;
 using Framework.Application.Events;
@@ -17,11 +17,11 @@ using Framework.Core.Serialization;
 using Framework.Core.TypeResolving;
 using Framework.Validation;
 
-using HierarchicalExpand;
+using Anch.HierarchicalExpand;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem.AccessDenied;
+using Anch.SecuritySystem.AccessDenied;
 
 namespace Framework.Configuration.BLL;
 

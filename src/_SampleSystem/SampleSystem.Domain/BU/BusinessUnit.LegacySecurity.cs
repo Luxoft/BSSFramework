@@ -1,7 +1,7 @@
 ﻿using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.Persistent.Attributes;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace SampleSystem.Domain.BU;
 

@@ -1,9 +1,9 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
 using Framework.Database;
 
-using SecuritySystem.AccessDenied;
-using SecuritySystem.Providers;
+using Anch.SecuritySystem.AccessDenied;
+using Anch.SecuritySystem.Providers;
 
 namespace Framework.Application.Repository.Generic;
 

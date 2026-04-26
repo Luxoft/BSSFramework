@@ -1,4 +1,4 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
 using Framework.Application.Events;
 using Framework.BLL.Events.SubscriptionManager;

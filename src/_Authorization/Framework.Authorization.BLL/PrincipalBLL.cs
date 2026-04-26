@@ -4,7 +4,7 @@ using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem.Services;
+using Anch.SecuritySystem.Services;
 
 namespace Framework.Authorization.BLL;
 

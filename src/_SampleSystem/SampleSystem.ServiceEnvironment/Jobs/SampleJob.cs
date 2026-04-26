@@ -1,4 +1,4 @@
-﻿using CommonFramework.Auth;
+﻿using Anch.Core.Auth;
 
 using Framework.Application.Jobs;
 using Framework.Application.Repository;
@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 using SampleSystem.Domain;
 
-using SecuritySystem.Attributes;
+using Anch.SecuritySystem.Attributes;
 
 namespace SampleSystem.ServiceEnvironment.Jobs;
 

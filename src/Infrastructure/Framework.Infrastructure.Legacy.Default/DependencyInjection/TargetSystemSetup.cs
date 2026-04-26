@@ -1,5 +1,5 @@
-﻿using CommonFramework;
-using CommonFramework.DependencyInjection;
+﻿using Anch.Core;
+using Anch.DependencyInjection;
 
 using Framework.BLL.Domain.TargetSystem;
 using Framework.Configuration.BLL.TargetSystemService;

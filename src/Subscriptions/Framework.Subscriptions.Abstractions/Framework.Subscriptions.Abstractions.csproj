@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.SecuritySystem.Notification.Domain" />
+    <PackageReference Include="Anch.SecuritySystem.Notification.Domain" />
   </ItemGroup>
 
   <ItemGroup>

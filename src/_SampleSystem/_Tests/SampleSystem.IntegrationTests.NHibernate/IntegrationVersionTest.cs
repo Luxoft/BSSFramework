@@ -1,6 +1,6 @@
 ﻿using Framework.AutomationCore.RootServiceProviderContainer;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 using SampleSystem.Domain.IntegrationVersions;
 using SampleSystem.Generated.DTO;

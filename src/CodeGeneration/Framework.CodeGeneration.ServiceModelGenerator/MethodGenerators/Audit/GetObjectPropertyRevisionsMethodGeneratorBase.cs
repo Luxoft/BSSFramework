@@ -1,6 +1,6 @@
 ﻿using System.CodeDom;
 
-using CommonFramework;
+using Anch.Core;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom.Extensions;
@@ -9,7 +9,7 @@ using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Audit;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.Core;
 using Framework.FileGeneration.Configuration;
-using Framework.Infrastructure.Service;
+using Framework.Infrastructure.Services;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Audit;
 

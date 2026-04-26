@@ -1,13 +1,13 @@
 ﻿using System.CodeDom;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.BLL.Domain.DTO;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View;
-using OData.Domain;
+using Anch.OData.Domain;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Query.OData.Base;
 

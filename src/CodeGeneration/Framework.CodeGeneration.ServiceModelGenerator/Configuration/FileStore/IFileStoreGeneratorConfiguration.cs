@@ -1,6 +1,6 @@
 ﻿using Framework.CodeGeneration.Configuration;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.Configuration.FileStore;
 

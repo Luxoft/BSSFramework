@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Runtime.Serialization;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.Application.Events;
 using Framework.CodeDom.Extensions;

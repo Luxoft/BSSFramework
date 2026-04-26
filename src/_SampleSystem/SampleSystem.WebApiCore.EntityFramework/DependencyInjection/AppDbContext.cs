@@ -1,5 +1,5 @@
 ﻿using Framework.Database;
-using GenericQueryable.EntityFramework;
+using Anch.GenericQueryable.EntityFramework;
 
 using Microsoft.EntityFrameworkCore;
 

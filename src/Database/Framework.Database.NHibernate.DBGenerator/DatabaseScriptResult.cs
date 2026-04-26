@@ -1,4 +1,4 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
 using Framework.Database.NHibernate.DBGenerator.Contracts;
 using Framework.Database.NHibernate.DBGenerator.Team;

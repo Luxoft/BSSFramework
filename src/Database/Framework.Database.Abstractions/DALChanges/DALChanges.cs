@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 
-using CommonFramework;
-using CommonFramework.DictionaryCache;
+using Anch.Core;
+using Anch.Core.DictionaryCache;
 
 using Framework.Core;
 

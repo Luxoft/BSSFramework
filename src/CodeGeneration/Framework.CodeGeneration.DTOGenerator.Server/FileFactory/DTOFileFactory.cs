@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Runtime.Serialization;
 
-using CommonFramework;
+using Anch.Core;
 using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.BLL.DTOMapping.MappingObject;
 using Framework.CodeDom.Extensions;

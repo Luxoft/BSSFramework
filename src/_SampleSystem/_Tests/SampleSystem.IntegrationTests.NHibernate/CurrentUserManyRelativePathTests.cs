@@ -2,7 +2,7 @@
 using Framework.AutomationCore.RootServiceProviderContainer;
 using Framework.Database;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;

@@ -1,7 +1,7 @@
 ﻿using System.CodeDom;
 
-using CommonFramework;
-using CommonFramework.DependencyInjection;
+using Anch.Core;
+using Anch.DependencyInjection;
 
 using Framework.BLL;
 using Framework.CodeDom.Extensions;

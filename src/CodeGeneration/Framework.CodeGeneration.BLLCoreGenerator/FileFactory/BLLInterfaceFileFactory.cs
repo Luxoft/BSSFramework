@@ -1,6 +1,6 @@
 ﻿using System.CodeDom;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.BLL;
 using Framework.BLL.Domain.DirectMode;
@@ -13,9 +13,9 @@ using Framework.Core;
 using Framework.FileGeneration.Configuration;
 using Framework.Projection;
 
-using GenericQueryable.Fetching;
+using Anch.GenericQueryable.Fetching;
 
-using OData.Domain;
+using Anch.OData.Domain;
 
 namespace Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
 

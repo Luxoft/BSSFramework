@@ -6,7 +6,7 @@ using Framework.CodeGeneration.FileFactory;
 using Framework.CodeGeneration.GeneratePolicy;
 using Framework.CodeGeneration.ServiceModelGenerator.GeneratePolicy;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
-using Framework.Infrastructure.Service;
+using Framework.Infrastructure.Services;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 

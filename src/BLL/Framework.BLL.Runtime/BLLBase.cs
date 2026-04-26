@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 
-using CommonFramework;
-using CommonFramework.IdentitySource;
+using Anch.Core;
+using Anch.IdentitySource;
 
 using Framework.Application;
 using Framework.Application.Domain;
@@ -10,12 +10,12 @@ using Framework.Core;
 using Framework.Database;
 using Framework.Database.Domain;
 
-using GenericQueryable;
-using GenericQueryable.Fetching;
+using Anch.GenericQueryable;
+using Anch.GenericQueryable.Fetching;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using OData.Domain;
+using Anch.OData.Domain;
 
 namespace Framework.BLL;
 

@@ -1,12 +1,12 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
 using Framework.Application.ApplicationVariable;
 using Framework.Application.Repository;
 using Framework.Configuration.Domain;
 
-using GenericQueryable;
+using Anch.GenericQueryable;
 
-using SecuritySystem.Attributes;
+using Anch.SecuritySystem.Attributes;
 
 namespace Framework.Configuration.BLL;
 

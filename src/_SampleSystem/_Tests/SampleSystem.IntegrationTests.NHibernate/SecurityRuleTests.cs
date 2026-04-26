@@ -3,14 +3,14 @@ using Framework.Application.Repository;
 using Framework.BLL;
 using Framework.Database;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain.Employee;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-using SecuritySystem.AccessDenied;
+using Anch.SecuritySystem.AccessDenied;
 
 namespace SampleSystem.IntegrationTests;
 

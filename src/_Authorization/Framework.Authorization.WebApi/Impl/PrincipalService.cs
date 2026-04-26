@@ -1,7 +1,7 @@
 ﻿using Framework.Authorization.Generated.DTO;
 using Framework.Database;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 

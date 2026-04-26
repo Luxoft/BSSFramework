@@ -1,12 +1,12 @@
 ﻿using Framework.Application.Repository;
 using Framework.Database;
 
-using GenericQueryable;
+using Anch.GenericQueryable;
 
 using Microsoft.AspNetCore.Mvc;
 using SampleSystem.Domain.Directories;
 using SampleSystem.Generated.DTO;
-using SecuritySystem.Attributes;
+using Anch.SecuritySystem.Attributes;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 

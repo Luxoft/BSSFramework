@@ -1,8 +1,8 @@
 ﻿using Framework.Application.Repository.Generic;
 using Framework.Database;
 
-using SecuritySystem.AccessDenied;
-using SecuritySystem.Providers;
+using Anch.SecuritySystem.AccessDenied;
+using Anch.SecuritySystem.Providers;
 
 namespace Framework.Application.Repository.Default;
 

@@ -4,7 +4,7 @@ using Framework.Configurator.Interfaces;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem.Configurator;
+using Anch.SecuritySystem.Configurator;
 
 namespace Framework.Configurator;
 

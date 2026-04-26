@@ -1,4 +1,4 @@
-﻿using CommonFramework.Auth;
+﻿using Anch.Core.Auth;
 
 using Framework.Application.Auth;
 

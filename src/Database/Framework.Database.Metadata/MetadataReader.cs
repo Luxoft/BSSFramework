@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Reflection;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.Core;
 using Framework.Database.Mapping;

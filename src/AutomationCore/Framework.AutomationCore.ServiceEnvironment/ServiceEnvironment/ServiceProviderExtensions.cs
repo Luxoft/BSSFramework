@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 
-using CommonFramework;
-using CommonFramework.Auth;
-using CommonFramework.DependencyInjection;
+using Anch.Core;
+using Anch.Core.Auth;
+using Anch.DependencyInjection;
 
 using Framework.Application.Jobs;
 using Framework.AutomationCore.ServiceEnvironment.Services;
@@ -15,9 +15,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
-using SecuritySystem;
-using SecuritySystem.Testing;
-using SecuritySystem.Testing.DependencyInjection;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.Testing;
+using Anch.SecuritySystem.Testing.DependencyInjection;
 
 namespace Framework.AutomationCore.ServiceEnvironment;
 

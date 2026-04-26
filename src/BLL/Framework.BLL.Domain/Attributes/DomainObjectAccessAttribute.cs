@@ -1,6 +1,6 @@
 ﻿using Framework.BLL.Domain.Extensions;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.BLL.Domain.Attributes;
 

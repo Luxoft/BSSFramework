@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Reflection;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.BLL;
 using Framework.BLL.DTOMapping.MappingObject;

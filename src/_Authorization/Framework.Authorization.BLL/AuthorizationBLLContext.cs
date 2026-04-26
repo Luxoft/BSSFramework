@@ -1,5 +1,5 @@
-﻿using CommonFramework.Auth;
-using CommonFramework.DictionaryCache;
+﻿using Anch.Core.Auth;
+using Anch.Core.DictionaryCache;
 
 using Framework.Application.Events;
 using Framework.Authorization.Domain;
@@ -9,14 +9,14 @@ using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using HierarchicalExpand;
+using Anch.HierarchicalExpand;
 
-using SecuritySystem;
-using SecuritySystem.Services;
-using SecuritySystem.ExternalSystem.SecurityContextStorage;
-using SecuritySystem.AccessDenied;
-using SecuritySystem.GeneralPermission.Validation.Principal;
-using SecuritySystem.UserSource;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.Services;
+using Anch.SecuritySystem.ExternalSystem.SecurityContextStorage;
+using Anch.SecuritySystem.AccessDenied;
+using Anch.SecuritySystem.GeneralPermission.Validation.Principal;
+using Anch.SecuritySystem.UserSource;
 
 namespace Framework.Authorization.BLL;
 

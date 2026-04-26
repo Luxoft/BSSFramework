@@ -3,9 +3,9 @@ using Framework.Configurator.Interfaces;
 
 using Microsoft.AspNetCore.Http;
 
-using SecuritySystem;
-using SecuritySystem.Attributes;
-using SecuritySystem.Configurator.Handlers;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.Attributes;
+using Anch.SecuritySystem.Configurator.Handlers;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 

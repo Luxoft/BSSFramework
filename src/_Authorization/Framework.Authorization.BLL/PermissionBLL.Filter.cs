@@ -2,7 +2,7 @@
 using Framework.BLL.Domain.Models;
 using Framework.Validation.Extensions;
 
-using GenericQueryable.Fetching;
+using Anch.GenericQueryable.Fetching;
 
 namespace Framework.Authorization.BLL;
 

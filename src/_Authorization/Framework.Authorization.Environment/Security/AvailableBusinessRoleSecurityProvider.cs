@@ -1,17 +1,17 @@
 ﻿using System.Linq.Expressions;
 
-using CommonFramework;
-using CommonFramework.ExpressionEvaluate;
-using CommonFramework.RelativePath;
+using Anch.Core;
+using Anch.Core.ExpressionEvaluate;
+using Anch.RelativePath;
 
 using Framework.Authorization.Domain;
 
-using GenericQueryable;
+using Anch.GenericQueryable;
 
-using SecuritySystem;
-using SecuritySystem.Providers;
-using SecuritySystem.SecurityAccessor;
-using SecuritySystem.Services;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.Providers;
+using Anch.SecuritySystem.SecurityAccessor;
+using Anch.SecuritySystem.Services;
 
 namespace Framework.Authorization.Environment.Security;
 

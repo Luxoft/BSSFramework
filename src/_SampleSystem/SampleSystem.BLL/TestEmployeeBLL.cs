@@ -1,6 +1,6 @@
-﻿using GenericQueryable.Fetching;
+﻿using Anch.GenericQueryable.Fetching;
 
-using OData.Domain;
+using Anch.OData.Domain;
 
 using SampleSystem.Domain.Models.Filters;
 using SampleSystem.Domain.Models.Filters.Projection;

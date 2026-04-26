@@ -6,7 +6,7 @@ using Framework.Application.Domain;
 using Framework.Database;
 using Framework.FileGeneration.Configuration;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.Configuration;
 

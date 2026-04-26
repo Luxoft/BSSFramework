@@ -172,7 +172,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO _baseObj;
         
-        private CommonFramework.Maybe<string> _code;
+        private Anch.Core.Maybe<string> _code;
         
         private SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO _currentObj;
         
@@ -230,7 +230,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<string> Code
+        public Anch.Core.Maybe<string> Code
         {
             get
             {
@@ -816,11 +816,11 @@ namespace SampleSystem.Generated.DTO
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.VisualProjectProjectionDTO> _coreBusinessUnitProjects;
         
-        private CommonFramework.Maybe<string> _login;
+        private Anch.Core.Maybe<string> _login;
         
         private string _nameEngFirstName;
         
-        private CommonFramework.Maybe<string> _positionName;
+        private Anch.Core.Maybe<string> _positionName;
         
         private string _ppmNameNativeMiddleName;
         
@@ -900,7 +900,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<string> Login
+        public Anch.Core.Maybe<string> Login
         {
             get
             {
@@ -926,7 +926,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<string> PositionName
+        public Anch.Core.Maybe<string> PositionName
         {
             get
             {
@@ -1063,7 +1063,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestLegacyEmployeeProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>
     {
         
-        private CommonFramework.Maybe<string> _login;
+        private Anch.Core.Maybe<string> _login;
         
         private System.Guid? _roleId;
         
@@ -1089,7 +1089,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<string> Login
+        public Anch.Core.Maybe<string> Login
         {
             get
             {

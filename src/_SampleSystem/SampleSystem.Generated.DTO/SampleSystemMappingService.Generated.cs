@@ -2734,11 +2734,11 @@ namespace SampleSystem.Generated.DTO
             {
                 string resultCode;
                 resultCode = domainObject.Code;
-                mappingObject.Code = CommonFramework.Maybe.Return(resultCode);
+                mappingObject.Code = Anch.Core.Maybe.Return(resultCode);
             }
             else
             {
-                mappingObject.Code = CommonFramework.Maybe<string>.Nothing;
+                mappingObject.Code = Anch.Core.Maybe<string>.Nothing;
             }
             if (!object.ReferenceEquals(domainObject.CurrentObj, null))
             {
@@ -2788,15 +2788,15 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Landlinephone = domainObject.Landlinephone;
             mappingObject.LastActionDate = domainObject.LastActionDate;
             mappingObject.LocationCode = domainObject.LocationCode;
-            if (this.HasAccess(domainObject, SecuritySystem.SecurityRule.View))
+            if (this.HasAccess(domainObject, Anch.SecuritySystem.SecurityRule.View))
             {
                 string resultLogin;
                 resultLogin = domainObject.Login;
-                mappingObject.Login = CommonFramework.Maybe.Return(resultLogin);
+                mappingObject.Login = Anch.Core.Maybe.Return(resultLogin);
             }
             else
             {
-                mappingObject.Login = CommonFramework.Maybe<string>.Nothing;
+                mappingObject.Login = Anch.Core.Maybe<string>.Nothing;
             }
             mappingObject.MailAccountName = domainObject.MailAccountName;
             mappingObject.NameEng = domainObject.NameEng;
@@ -2807,11 +2807,11 @@ namespace SampleSystem.Generated.DTO
             {
                 string resultPersonalCellPhone;
                 resultPersonalCellPhone = domainObject.PersonalCellPhone;
-                mappingObject.PersonalCellPhone = CommonFramework.Maybe.Return(resultPersonalCellPhone);
+                mappingObject.PersonalCellPhone = Anch.Core.Maybe.Return(resultPersonalCellPhone);
             }
             else
             {
-                mappingObject.PersonalCellPhone = CommonFramework.Maybe<string>.Nothing;
+                mappingObject.PersonalCellPhone = Anch.Core.Maybe<string>.Nothing;
             }
             mappingObject.Pin = domainObject.Pin;
             mappingObject.PlannedHireDate = domainObject.PlannedHireDate;
@@ -2872,11 +2872,11 @@ namespace SampleSystem.Generated.DTO
                 {
                     resultPosition = null;
                 }
-                mappingObject.Position = CommonFramework.Maybe.Return(resultPosition);
+                mappingObject.Position = Anch.Core.Maybe.Return(resultPosition);
             }
             else
             {
-                mappingObject.Position = CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO>.Nothing;
+                mappingObject.Position = Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO>.Nothing;
             }
             if (!object.ReferenceEquals(domainObject.Ppm, null))
             {
@@ -2928,11 +2928,11 @@ namespace SampleSystem.Generated.DTO
             {
                 System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO> resultPersonalCellPhones;
                 resultPersonalCellPhones = SampleSystem.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.PersonalCellPhones, this);
-                mappingObject.PersonalCellPhones = CommonFramework.Maybe.Return(resultPersonalCellPhones);
+                mappingObject.PersonalCellPhones = Anch.Core.Maybe.Return(resultPersonalCellPhones);
             }
             else
             {
-                mappingObject.PersonalCellPhones = CommonFramework.Maybe<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO>>.Nothing;
+                mappingObject.PersonalCellPhones = Anch.Core.Maybe<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO>>.Nothing;
             }
             mappingObject.Specializations = SampleSystem.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.Specializations, this);
         }
@@ -4741,11 +4741,11 @@ namespace SampleSystem.Generated.DTO
             {
                 System.Guid resultField3;
                 resultField3 = domainObject.Field3;
-                mappingObject.Field3 = CommonFramework.Maybe.Return(resultField3);
+                mappingObject.Field3 = Anch.Core.Maybe.Return(resultField3);
             }
             else
             {
-                mappingObject.Field3 = CommonFramework.Maybe<System.Guid>.Nothing;
+                mappingObject.Field3 = Anch.Core.Maybe<System.Guid>.Nothing;
             }
         }
         
@@ -4980,11 +4980,11 @@ namespace SampleSystem.Generated.DTO
                 {
                     resultCompanyLegalEntity = null;
                 }
-                mappingObject.CompanyLegalEntity = CommonFramework.Maybe.Return(resultCompanyLegalEntity);
+                mappingObject.CompanyLegalEntity = Anch.Core.Maybe.Return(resultCompanyLegalEntity);
             }
             else
             {
-                mappingObject.CompanyLegalEntity = CommonFramework.Maybe<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO>.Nothing;
+                mappingObject.CompanyLegalEntity = Anch.Core.Maybe<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO>.Nothing;
             }
             if (!object.ReferenceEquals(domainObject.Head, null))
             {
@@ -6727,26 +6727,26 @@ namespace SampleSystem.Generated.DTO
             }
             mappingObject.CoreBusinessUnitName = domainObject.CoreBusinessUnitName;
             mappingObject.CoreBusinessUnitProjects = SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(domainObject.CoreBusinessUnitProjects, this);
-            if (this.HasAccess(domainObject, SecuritySystem.SecurityRule.View))
+            if (this.HasAccess(domainObject, Anch.SecuritySystem.SecurityRule.View))
             {
                 string resultLogin;
                 resultLogin = domainObject.Login;
-                mappingObject.Login = CommonFramework.Maybe.Return(resultLogin);
+                mappingObject.Login = Anch.Core.Maybe.Return(resultLogin);
             }
             else
             {
-                mappingObject.Login = CommonFramework.Maybe<string>.Nothing;
+                mappingObject.Login = Anch.Core.Maybe<string>.Nothing;
             }
             mappingObject.NameEngFirstName = domainObject.NameEngFirstName;
             if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.EmployeePositionView))
             {
                 string resultPositionName;
                 resultPositionName = domainObject.PositionName;
-                mappingObject.PositionName = CommonFramework.Maybe.Return(resultPositionName);
+                mappingObject.PositionName = Anch.Core.Maybe.Return(resultPositionName);
             }
             else
             {
-                mappingObject.PositionName = CommonFramework.Maybe<string>.Nothing;
+                mappingObject.PositionName = Anch.Core.Maybe<string>.Nothing;
             }
             mappingObject.PpmNameNativeMiddleName = domainObject.PpmNameNativeMiddleName;
             mappingObject.RoleId = domainObject.RoleId;
@@ -6988,15 +6988,15 @@ namespace SampleSystem.Generated.DTO
         
         public virtual void MapTestLegacyEmployee(SampleSystem.Domain.Projections.TestLegacyEmployee domainObject, SampleSystem.Generated.DTO.TestLegacyEmployeeProjectionDTO mappingObject)
         {
-            if (this.HasAccess(domainObject, SecuritySystem.SecurityRule.View))
+            if (this.HasAccess(domainObject, Anch.SecuritySystem.SecurityRule.View))
             {
                 string resultLogin;
                 resultLogin = domainObject.Login;
-                mappingObject.Login = CommonFramework.Maybe.Return(resultLogin);
+                mappingObject.Login = Anch.Core.Maybe.Return(resultLogin);
             }
             else
             {
-                mappingObject.Login = CommonFramework.Maybe<string>.Nothing;
+                mappingObject.Login = Anch.Core.Maybe<string>.Nothing;
             }
             mappingObject.RoleId = domainObject.RoleId;
             mappingObject.RoleName = domainObject.RoleName;

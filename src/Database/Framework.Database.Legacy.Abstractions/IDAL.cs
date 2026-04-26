@@ -1,4 +1,4 @@
-﻿using GenericQueryable.Fetching;
+﻿using Anch.GenericQueryable.Fetching;
 
 namespace Framework.Database;
 

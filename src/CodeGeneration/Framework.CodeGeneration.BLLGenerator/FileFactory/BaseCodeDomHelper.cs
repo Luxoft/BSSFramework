@@ -3,7 +3,7 @@ using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.Core;
 
-using SecuritySystem.Providers;
+using Anch.SecuritySystem.Providers;
 
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 

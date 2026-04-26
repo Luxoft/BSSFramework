@@ -1,6 +1,6 @@
 ﻿using System.CodeDom;
 
-using CommonFramework.DictionaryCache;
+using Anch.Core.DictionaryCache;
 
 using Framework.Core.Rendering;
 

@@ -12,7 +12,7 @@ using Framework.Core.Helpers;
 
 using Framework.Projection;
 
-using GenericQueryable.Fetching;
+using Anch.GenericQueryable.Fetching;
 
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
@@ -25,7 +25,7 @@ public class MainDTOFetchRuleExpanderBaseFileFactory<TConfiguration>(TConfigurat
 
     protected override IEnumerable<string> GetImportedNamespaces()
     {
-        yield return "GenericQueryable";
+        yield return $"{nameof(Anch)}.{nameof(Anch.GenericQueryable)}";
     }
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()

@@ -16,8 +16,8 @@ using SampleSystem.Domain.TestDependency;
 using SampleSystem.Domain.TestDeserializedAuth;
 using SampleSystem.Security.Services;
 
-using SecuritySystem;
-using SecuritySystem.DependencyInjection;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.DependencyInjection;
 
 namespace SampleSystem.Security;
 

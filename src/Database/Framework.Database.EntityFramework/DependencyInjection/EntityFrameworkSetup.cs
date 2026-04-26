@@ -1,11 +1,11 @@
-﻿using CommonFramework.DependencyInjection;
+﻿using Anch.DependencyInjection;
 
 using Framework.Core;
 using Framework.Database.EntityFramework.Sessions;
 using Framework.DependencyInjection;
 
-using GenericQueryable.DependencyInjection;
-using GenericQueryable.EntityFramework;
+using Anch.GenericQueryable.DependencyInjection;
+using Anch.GenericQueryable.EntityFramework;
 
 using Microsoft.Extensions.DependencyInjection;
 

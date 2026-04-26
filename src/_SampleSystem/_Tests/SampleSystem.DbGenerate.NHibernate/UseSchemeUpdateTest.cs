@@ -1,6 +1,6 @@
-﻿using CommonFramework.Auth;
-using CommonFramework.DependencyInjection;
-using CommonFramework.IdentitySource.DependencyInjection;
+﻿using Anch.Core.Auth;
+using Anch.DependencyInjection;
+using Anch.IdentitySource.DependencyInjection;
 
 using Framework.Core;
 using Framework.Database.DependencyInjection;

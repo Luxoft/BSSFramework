@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.SecuritySystem.GeneralPermission" />
-    <PackageReference Include="IvAt.SecuritySystem.Notification" />
+    <PackageReference Include="Anch.SecuritySystem.GeneralPermission" />
+    <PackageReference Include="Anch.SecuritySystem.Notification" />
   </ItemGroup>
 
   <ItemGroup>

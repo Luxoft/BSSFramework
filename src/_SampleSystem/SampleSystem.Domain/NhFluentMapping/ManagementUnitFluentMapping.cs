@@ -4,7 +4,7 @@ using Framework.Core;
 using Framework.Database.Mapping;
 using SampleSystem.Domain.BU;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace SampleSystem.Domain.NhFluentMapping;
 

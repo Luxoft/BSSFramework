@@ -3,7 +3,7 @@ using Framework.Database;
 
 using Microsoft.Extensions.Logging;
 
-using SecuritySystem.Configurator.Interfaces;
+using Anch.SecuritySystem.Configurator.Interfaces;
 
 namespace SampleSystem.WebApiCore.Services;
 

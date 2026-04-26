@@ -1,7 +1,7 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.Application.Domain;
 using Framework.Core;

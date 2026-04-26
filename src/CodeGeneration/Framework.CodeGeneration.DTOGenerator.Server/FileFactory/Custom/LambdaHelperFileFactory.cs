@@ -1,7 +1,7 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.BLL.Domain.Serialization.Extensions;
 using Framework.CodeDom.Extend;

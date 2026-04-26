@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.SecuritySystem.Configurator" />
+    <PackageReference Include="Anch.SecuritySystem.Configurator" />
   </ItemGroup>
 
   <ItemGroup>

@@ -4,7 +4,7 @@ using Framework.Core.Helpers;
 using Framework.Core;
 using Framework.Notification.DTO;
 
-using SecuritySystem.Attributes;
+using Anch.SecuritySystem.Attributes;
 
 namespace Framework.Configuration.BLL.Notification;
 

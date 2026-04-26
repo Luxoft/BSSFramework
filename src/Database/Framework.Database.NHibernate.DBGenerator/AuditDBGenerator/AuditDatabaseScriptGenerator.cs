@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
-using CommonFramework;
-using CommonFramework.Auth;
+using Anch.Core;
+using Anch.Core.Auth;
 
 using Framework.Core;
 using Framework.Database.Mapping;

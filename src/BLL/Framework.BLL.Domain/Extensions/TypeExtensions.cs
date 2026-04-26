@@ -1,9 +1,9 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
 using Framework.BLL.Domain.Attributes;
 using Framework.Core;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.BLL.Domain.Extensions;
 

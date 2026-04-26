@@ -2,7 +2,7 @@
 using System.CodeDom.Compiler;
 using System.Text;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;

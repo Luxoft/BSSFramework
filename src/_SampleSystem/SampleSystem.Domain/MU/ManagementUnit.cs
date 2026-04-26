@@ -5,7 +5,7 @@ using Framework.Relations;
 using Framework.Restriction;
 using SampleSystem.Domain.BU;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace SampleSystem.Domain.MU;
 

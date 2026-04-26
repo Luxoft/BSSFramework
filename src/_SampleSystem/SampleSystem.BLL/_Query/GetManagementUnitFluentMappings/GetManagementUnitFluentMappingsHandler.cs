@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace SampleSystem.BLL._Query.GetManagementUnitFluentMappings;
 

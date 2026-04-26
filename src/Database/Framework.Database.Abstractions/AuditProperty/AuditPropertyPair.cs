@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Linq.Expressions;
 
-using CommonFramework.Auth;
+using Anch.Core.Auth;
 
 namespace Framework.Database.AuditProperty;
 

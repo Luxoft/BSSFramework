@@ -3,7 +3,7 @@ using Bss.Platform.Api.Middlewares;
 using Bss.Platform.Events;
 using Bss.Platform.Logging;
 
-using CommonFramework.DependencyInjection;
+using Anch.DependencyInjection;
 
 using Framework.Configuration.BLL.Jobs;
 using Framework.Configurator;
@@ -28,8 +28,8 @@ using SampleSystem.ServiceEnvironment.DependencyInjection;
 using SampleSystem.ServiceEnvironment.Jobs;
 using SampleSystem.WebApiCore.Services;
 
-using SecuritySystem.Configurator;
-using SecuritySystem.Configurator.Interfaces;
+using Anch.SecuritySystem.Configurator;
+using Anch.SecuritySystem.Configurator.Interfaces;
 
 namespace SampleSystem.WebApiCore;
 

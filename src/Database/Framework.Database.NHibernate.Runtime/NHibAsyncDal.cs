@@ -1,10 +1,10 @@
-﻿using CommonFramework;
-using CommonFramework.IdentitySource;
+﻿using Anch.Core;
+using Anch.IdentitySource;
 using Framework.Core;
 using Framework.Database.NHibernate.Sessions;
 
-using GenericQueryable.NHibernate;
-using GenericQueryable.Services;
+using Anch.GenericQueryable.NHibernate;
+using Anch.GenericQueryable.Services;
 
 using NHibernate;
 

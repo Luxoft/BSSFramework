@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.OData.Abstractions" />
+    <PackageReference Include="Anch.OData.Abstractions" />
   </ItemGroup>
 
 </Project>

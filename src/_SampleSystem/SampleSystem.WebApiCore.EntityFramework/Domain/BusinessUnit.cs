@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace SampleSystem.WebApiCore.Domain;
 

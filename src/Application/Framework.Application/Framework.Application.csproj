@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.CommonFramework.DependencyInjection" />
+    <PackageReference Include="Anch.DependencyInjection" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Reflection;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.CodeDom;
 using Framework.CodeDom.Extensions;

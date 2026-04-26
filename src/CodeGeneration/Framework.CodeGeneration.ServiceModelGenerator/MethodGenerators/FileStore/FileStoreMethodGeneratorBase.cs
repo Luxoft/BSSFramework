@@ -7,7 +7,7 @@ using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.FileStore;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.FileStore;
 

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-using CommonFramework.DependencyInjection;
+using Anch.DependencyInjection;
 
 using Framework.Application.Events;
 using Framework.BLL;
@@ -14,22 +14,22 @@ using Framework.Database;
 using Framework.ExtendedMetadata;
 using Framework.Infrastructure.ApiControllerBaseEvaluator;
 using Framework.Infrastructure.ContextEvaluator;
-using Framework.Infrastructure.Service;
+using Framework.Infrastructure.Services;
 using Framework.Infrastructure.WebApiExceptionExpander;
 using Framework.Projection;
 using Framework.Tracking;
 using Framework.Validation;
 
-using HierarchicalExpand;
+using Anch.HierarchicalExpand;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using OData.DependencyInjection;
+using Anch.OData.DependencyInjection;
 
-using SecuritySystem;
-using SecuritySystem.DomainServices;
-using SecuritySystem.DomainServices.DependencySecurity;
-using SecuritySystem.SecurityRuleInfo;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.DomainServices;
+using Anch.SecuritySystem.DomainServices.DependencySecurity;
+using Anch.SecuritySystem.SecurityRuleInfo;
 
 namespace Framework.Infrastructure.DependencyInjection;
 

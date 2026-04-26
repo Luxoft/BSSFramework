@@ -2,9 +2,9 @@
 using Framework.BLL.Domain.Persistent;
 using Framework.Database;
 
-using GenericQueryable.Fetching;
+using Anch.GenericQueryable.Fetching;
 
-using OData.Domain;
+using Anch.OData.Domain;
 
 namespace Framework.BLL;
 

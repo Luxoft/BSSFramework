@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.BLL.Domain.Extensions;
 using Framework.BLL.Domain.Persistent.Attributes;

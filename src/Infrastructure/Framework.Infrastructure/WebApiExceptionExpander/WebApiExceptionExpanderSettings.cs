@@ -5,7 +5,7 @@ using Framework.Application;
 using Framework.Database;
 using Framework.Database.DALExceptions;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.Infrastructure.WebApiExceptionExpander;
 

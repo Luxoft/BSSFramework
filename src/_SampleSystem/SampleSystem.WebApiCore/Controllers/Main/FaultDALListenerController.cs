@@ -6,7 +6,7 @@ using Framework.Database;
 using Microsoft.AspNetCore.Mvc;
 using SampleSystem.Domain;
 using SampleSystem.ServiceEnvironment;
-using SecuritySystem.Attributes;
+using Anch.SecuritySystem.Attributes;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-using CommonFramework;
+using Anch.Core;
 
 // ReSharper disable once CheckNamespace
 namespace Framework.Core;

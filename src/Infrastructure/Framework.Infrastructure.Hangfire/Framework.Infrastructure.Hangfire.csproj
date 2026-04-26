@@ -11,7 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Hangfire.AspNetCore" />
     <PackageReference Include="Hangfire.SqlServer" />
-    <PackageReference Include="IvAt.CommonFramework" />
+    <PackageReference Include="Anch.Core" />
     <PackageReference Include="Microsoft.Data.SqlClient" />
   </ItemGroup>
 

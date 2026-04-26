@@ -1,4 +1,4 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
 using Framework.Application.Lock;
 using Framework.Configuration.BLL;
@@ -7,7 +7,7 @@ using Framework.Database;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem.GeneralPermission.Initialize;
+using Anch.SecuritySystem.GeneralPermission.Initialize;
 
 namespace SampleSystem.ServiceEnvironment;
 

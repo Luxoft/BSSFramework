@@ -3,7 +3,7 @@ using Framework.Application.Events;
 using Framework.Database.DALListener;
 using Framework.Database.DependencyInjection;
 
-using SecuritySystem.DependencyInjection;
+using Anch.SecuritySystem.DependencyInjection;
 
 namespace Framework.Infrastructure.DependencyInjection;
 

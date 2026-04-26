@@ -14193,7 +14193,7 @@ namespace SampleSystem.Generated.DTO
         
         private int? _locationCode;
         
-        private CommonFramework.Maybe<string> _login;
+        private Anch.Core.Maybe<string> _login;
         
         private string _mailAccountName;
         
@@ -14205,7 +14205,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime _nonValidateVirtualProp;
         
-        private CommonFramework.Maybe<string> _personalCellPhone;
+        private Anch.Core.Maybe<string> _personalCellPhone;
         
         private int? _pin;
         
@@ -14461,7 +14461,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<string> Login
+        public Anch.Core.Maybe<string> Login
         {
             get
             {
@@ -14539,7 +14539,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<string> PersonalCellPhone
+        public Anch.Core.Maybe<string> PersonalCellPhone
         {
             get
             {
@@ -14625,7 +14625,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Generated.DTO.EmployeeSimpleDTO _personalAssistant;
         
-        private CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> _position;
+        private Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> _position;
         
         private SampleSystem.Generated.DTO.EmployeeSimpleDTO _ppm;
         
@@ -14713,7 +14713,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> Position
+        public Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> Position
         {
             get
             {
@@ -14805,7 +14805,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkRichDTO> _employeeToEmployeeLinks = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkRichDTO>();
         
-        private CommonFramework.Maybe<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO>> _personalCellPhones;
+        private Anch.Core.Maybe<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO>> _personalCellPhones;
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkRichDTO> _specializations = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkRichDTO>();
         
@@ -14846,7 +14846,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO>> PersonalCellPhones
+        public Anch.Core.Maybe<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO>> PersonalCellPhones
         {
             get
             {
@@ -14908,7 +14908,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _lastActionDate;
         
-        private CommonFramework.Maybe<string> _login = CommonFramework.Maybe<string>.Nothing;
+        private Anch.Core.Maybe<string> _login = Anch.Core.Maybe<string>.Nothing;
         
         private SampleSystem.Domain.Inline.FioShort _nameEng;
         
@@ -14918,13 +14918,13 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime _nonValidateVirtualProp;
         
-        private CommonFramework.Maybe<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>> _personalCellPhones = CommonFramework.Maybe<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>>.Nothing;
+        private Anch.Core.Maybe<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>> _personalCellPhones = Anch.Core.Maybe<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>>.Nothing;
         
         private int? _pin;
         
         private System.DateTime? _plannedHireDate;
         
-        private CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO> _position = CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>.Nothing;
+        private Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO> _position = Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>.Nothing;
         
         private SampleSystem.Generated.DTO.EmployeeIdentityDTO _ppm;
         
@@ -15209,7 +15209,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<string> Login
+        public Anch.Core.Maybe<string> Login
         {
             get
             {
@@ -15274,7 +15274,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>> PersonalCellPhones
+        public Anch.Core.Maybe<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>> PersonalCellPhones
         {
             get
             {
@@ -15313,7 +15313,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO> Position
+        public Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO> Position
         {
             get
             {
@@ -15471,67 +15471,67 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.Employee, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.Employee>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
-        private CommonFramework.Maybe<int> _age = CommonFramework.Maybe<int>.Nothing;
+        private Anch.Core.Maybe<int> _age = Anch.Core.Maybe<int>.Nothing;
         
-        private CommonFramework.Maybe<System.DateTime?> _birthDate = CommonFramework.Maybe<System.Nullable<System.DateTime>>.Nothing;
+        private Anch.Core.Maybe<System.DateTime?> _birthDate = Anch.Core.Maybe<System.Nullable<System.DateTime>>.Nothing;
         
-        private CommonFramework.Maybe<bool> _canBePPM = CommonFramework.Maybe<bool>.Nothing;
+        private Anch.Core.Maybe<bool> _canBePPM = Anch.Core.Maybe<bool>.Nothing;
         
         private System.Collections.Generic.List<Framework.BLL.DTOMapping.MergeItemData.UpdateItemData<SampleSystem.Generated.DTO.EmployeeCellPhoneUpdateDTO, SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO>> _cellPhones = new System.Collections.Generic.List<Framework.BLL.DTOMapping.MergeItemData.UpdateItemData<SampleSystem.Generated.DTO.EmployeeCellPhoneUpdateDTO, SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO>>();
         
-        private CommonFramework.Maybe<Framework.Core.Period> _educationDuration = CommonFramework.Maybe<Framework.Core.Period>.Nothing;
+        private Anch.Core.Maybe<Framework.Core.Period> _educationDuration = Anch.Core.Maybe<Framework.Core.Period>.Nothing;
         
-        private CommonFramework.Maybe<string> _email = CommonFramework.Maybe<string>.Nothing;
+        private Anch.Core.Maybe<string> _email = Anch.Core.Maybe<string>.Nothing;
         
         private System.Collections.Generic.List<Framework.BLL.DTOMapping.MergeItemData.UpdateItemData<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkUpdateDTO, SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO>> _employeeToEmployeeLinks = new System.Collections.Generic.List<Framework.BLL.DTOMapping.MergeItemData.UpdateItemData<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkUpdateDTO, SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO>>();
         
-        private CommonFramework.Maybe<long> _externalId = CommonFramework.Maybe<long>.Nothing;
+        private Anch.Core.Maybe<long> _externalId = Anch.Core.Maybe<long>.Nothing;
         
-        private CommonFramework.Maybe<SampleSystem.Domain.Enums.Gender> _gender = CommonFramework.Maybe<SampleSystem.Domain.Enums.Gender>.Nothing;
+        private Anch.Core.Maybe<SampleSystem.Domain.Enums.Gender> _gender = Anch.Core.Maybe<SampleSystem.Domain.Enums.Gender>.Nothing;
         
         private System.Guid _id;
         
-        private CommonFramework.Maybe<string> _interphone = CommonFramework.Maybe<string>.Nothing;
+        private Anch.Core.Maybe<string> _interphone = Anch.Core.Maybe<string>.Nothing;
         
-        private CommonFramework.Maybe<string> _landlinephone = CommonFramework.Maybe<string>.Nothing;
+        private Anch.Core.Maybe<string> _landlinephone = Anch.Core.Maybe<string>.Nothing;
         
-        private CommonFramework.Maybe<System.DateTime?> _lastActionDate = CommonFramework.Maybe<System.Nullable<System.DateTime>>.Nothing;
+        private Anch.Core.Maybe<System.DateTime?> _lastActionDate = Anch.Core.Maybe<System.Nullable<System.DateTime>>.Nothing;
         
-        private CommonFramework.Maybe<string> _login = CommonFramework.Maybe<string>.Nothing;
+        private Anch.Core.Maybe<string> _login = Anch.Core.Maybe<string>.Nothing;
         
-        private CommonFramework.Maybe<SampleSystem.Domain.Inline.FioShort> _nameEng = CommonFramework.Maybe<SampleSystem.Domain.Inline.FioShort>.Nothing;
+        private Anch.Core.Maybe<SampleSystem.Domain.Inline.FioShort> _nameEng = Anch.Core.Maybe<SampleSystem.Domain.Inline.FioShort>.Nothing;
         
-        private CommonFramework.Maybe<SampleSystem.Domain.Inline.Fio> _nameNative = CommonFramework.Maybe<SampleSystem.Domain.Inline.Fio>.Nothing;
+        private Anch.Core.Maybe<SampleSystem.Domain.Inline.Fio> _nameNative = Anch.Core.Maybe<SampleSystem.Domain.Inline.Fio>.Nothing;
         
-        private CommonFramework.Maybe<SampleSystem.Domain.Inline.Fio> _nameRussian = CommonFramework.Maybe<SampleSystem.Domain.Inline.Fio>.Nothing;
+        private Anch.Core.Maybe<SampleSystem.Domain.Inline.Fio> _nameRussian = Anch.Core.Maybe<SampleSystem.Domain.Inline.Fio>.Nothing;
         
-        private CommonFramework.Maybe<System.DateTime> _nonValidateVirtualProp = CommonFramework.Maybe<System.DateTime>.Nothing;
+        private Anch.Core.Maybe<System.DateTime> _nonValidateVirtualProp = Anch.Core.Maybe<System.DateTime>.Nothing;
         
         private System.Collections.Generic.List<Framework.BLL.DTOMapping.MergeItemData.UpdateItemData<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneUpdateDTO, SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO>> _personalCellPhones = new System.Collections.Generic.List<Framework.BLL.DTOMapping.MergeItemData.UpdateItemData<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneUpdateDTO, SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO>>();
         
-        private CommonFramework.Maybe<int?> _pin = CommonFramework.Maybe<System.Nullable<int>>.Nothing;
+        private Anch.Core.Maybe<int?> _pin = Anch.Core.Maybe<System.Nullable<int>>.Nothing;
         
-        private CommonFramework.Maybe<System.DateTime?> _plannedHireDate = CommonFramework.Maybe<System.Nullable<System.DateTime>>.Nothing;
+        private Anch.Core.Maybe<System.DateTime?> _plannedHireDate = Anch.Core.Maybe<System.Nullable<System.DateTime>>.Nothing;
         
-        private CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO> _position = CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>.Nothing;
+        private Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO> _position = Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>.Nothing;
         
-        private CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _ppm = CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO>.Nothing;
+        private Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _ppm = Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO>.Nothing;
         
-        private CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO> _registrationType = CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO>.Nothing;
+        private Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO> _registrationType = Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO>.Nothing;
         
-        private CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO> _role = CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO>.Nothing;
+        private Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO> _role = Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO>.Nothing;
         
-        private CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO> _roleDegree = CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO>.Nothing;
+        private Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO> _roleDegree = Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO>.Nothing;
         
         private System.Collections.Generic.List<Framework.BLL.DTOMapping.MergeItemData.UpdateItemData<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkUpdateDTO, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO>> _specializations = new System.Collections.Generic.List<Framework.BLL.DTOMapping.MergeItemData.UpdateItemData<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkUpdateDTO, SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO>>();
         
-        private CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _vacationApprover = CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO>.Nothing;
+        private Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _vacationApprover = Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO>.Nothing;
         
-        private CommonFramework.Maybe<System.DateTime> _validateVirtualProp = CommonFramework.Maybe<System.DateTime>.Nothing;
+        private Anch.Core.Maybe<System.DateTime> _validateVirtualProp = Anch.Core.Maybe<System.DateTime>.Nothing;
         
         private long _version;
         
-        private CommonFramework.Maybe<Framework.Core.Period> _workPeriod = CommonFramework.Maybe<Framework.Core.Period>.Nothing;
+        private Anch.Core.Maybe<Framework.Core.Period> _workPeriod = Anch.Core.Maybe<Framework.Core.Period>.Nothing;
         
         public EmployeeUpdateDTO()
         {
@@ -15566,7 +15566,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<int> Age
+        public Anch.Core.Maybe<int> Age
         {
             get
             {
@@ -15579,7 +15579,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<System.DateTime?> BirthDate
+        public Anch.Core.Maybe<System.DateTime?> BirthDate
         {
             get
             {
@@ -15592,7 +15592,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<bool> CanBePPM
+        public Anch.Core.Maybe<bool> CanBePPM
         {
             get
             {
@@ -15618,7 +15618,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<Framework.Core.Period> EducationDuration
+        public Anch.Core.Maybe<Framework.Core.Period> EducationDuration
         {
             get
             {
@@ -15631,7 +15631,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<string> Email
+        public Anch.Core.Maybe<string> Email
         {
             get
             {
@@ -15657,7 +15657,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<long> ExternalId
+        public Anch.Core.Maybe<long> ExternalId
         {
             get
             {
@@ -15670,7 +15670,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Domain.Enums.Gender> Gender
+        public Anch.Core.Maybe<SampleSystem.Domain.Enums.Gender> Gender
         {
             get
             {
@@ -15713,7 +15713,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<string> Interphone
+        public Anch.Core.Maybe<string> Interphone
         {
             get
             {
@@ -15735,7 +15735,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<string> Landlinephone
+        public Anch.Core.Maybe<string> Landlinephone
         {
             get
             {
@@ -15748,7 +15748,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<System.DateTime?> LastActionDate
+        public Anch.Core.Maybe<System.DateTime?> LastActionDate
         {
             get
             {
@@ -15761,7 +15761,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<string> Login
+        public Anch.Core.Maybe<string> Login
         {
             get
             {
@@ -15774,7 +15774,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Domain.Inline.FioShort> NameEng
+        public Anch.Core.Maybe<SampleSystem.Domain.Inline.FioShort> NameEng
         {
             get
             {
@@ -15787,7 +15787,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Domain.Inline.Fio> NameNative
+        public Anch.Core.Maybe<SampleSystem.Domain.Inline.Fio> NameNative
         {
             get
             {
@@ -15800,7 +15800,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Domain.Inline.Fio> NameRussian
+        public Anch.Core.Maybe<SampleSystem.Domain.Inline.Fio> NameRussian
         {
             get
             {
@@ -15813,7 +15813,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<System.DateTime> NonValidateVirtualProp
+        public Anch.Core.Maybe<System.DateTime> NonValidateVirtualProp
         {
             get
             {
@@ -15839,7 +15839,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<int?> Pin
+        public Anch.Core.Maybe<int?> Pin
         {
             get
             {
@@ -15852,7 +15852,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<System.DateTime?> PlannedHireDate
+        public Anch.Core.Maybe<System.DateTime?> PlannedHireDate
         {
             get
             {
@@ -15865,7 +15865,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO> Position
+        public Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO> Position
         {
             get
             {
@@ -15878,7 +15878,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> Ppm
+        public Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> Ppm
         {
             get
             {
@@ -15891,7 +15891,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO> RegistrationType
+        public Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO> RegistrationType
         {
             get
             {
@@ -15904,7 +15904,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO> Role
+        public Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO> Role
         {
             get
             {
@@ -15917,7 +15917,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO> RoleDegree
+        public Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO> RoleDegree
         {
             get
             {
@@ -15943,7 +15943,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> VacationApprover
+        public Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> VacationApprover
         {
             get
             {
@@ -15956,7 +15956,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<System.DateTime> ValidateVirtualProp
+        public Anch.Core.Maybe<System.DateTime> ValidateVirtualProp
         {
             get
             {
@@ -15990,7 +15990,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<Framework.Core.Period> WorkPeriod
+        public Anch.Core.Maybe<Framework.Core.Period> WorkPeriod
         {
             get
             {
@@ -16380,13 +16380,13 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCellPhoneUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmployeeCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmployeeCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
-        private CommonFramework.Maybe<string> _cityCode = CommonFramework.Maybe<string>.Nothing;
+        private Anch.Core.Maybe<string> _cityCode = Anch.Core.Maybe<string>.Nothing;
         
-        private CommonFramework.Maybe<string> _countryCode = CommonFramework.Maybe<string>.Nothing;
+        private Anch.Core.Maybe<string> _countryCode = Anch.Core.Maybe<string>.Nothing;
         
         private System.Guid _id;
         
-        private CommonFramework.Maybe<string> _number = CommonFramework.Maybe<string>.Nothing;
+        private Anch.Core.Maybe<string> _number = Anch.Core.Maybe<string>.Nothing;
         
         private long _version;
         
@@ -16423,7 +16423,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<string> CityCode
+        public Anch.Core.Maybe<string> CityCode
         {
             get
             {
@@ -16436,7 +16436,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<string> CountryCode
+        public Anch.Core.Maybe<string> CountryCode
         {
             get
             {
@@ -16488,7 +16488,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<string> Number
+        public Anch.Core.Maybe<string> Number
         {
             get
             {
@@ -17040,13 +17040,13 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePersonalCellPhoneUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmployeePersonalCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmployeePersonalCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
-        private CommonFramework.Maybe<string> _cityCode = CommonFramework.Maybe<string>.Nothing;
+        private Anch.Core.Maybe<string> _cityCode = Anch.Core.Maybe<string>.Nothing;
         
-        private CommonFramework.Maybe<string> _countryCode = CommonFramework.Maybe<string>.Nothing;
+        private Anch.Core.Maybe<string> _countryCode = Anch.Core.Maybe<string>.Nothing;
         
         private System.Guid _id;
         
-        private CommonFramework.Maybe<string> _number = CommonFramework.Maybe<string>.Nothing;
+        private Anch.Core.Maybe<string> _number = Anch.Core.Maybe<string>.Nothing;
         
         private long _version;
         
@@ -17083,7 +17083,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<string> CityCode
+        public Anch.Core.Maybe<string> CityCode
         {
             get
             {
@@ -17096,7 +17096,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<string> CountryCode
+        public Anch.Core.Maybe<string> CountryCode
         {
             get
             {
@@ -17148,7 +17148,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<string> Number
+        public Anch.Core.Maybe<string> Number
         {
             get
             {
@@ -18290,11 +18290,11 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeAndEmployeeSpecializationLinkUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
-        private CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _employee = CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO>.Nothing;
+        private Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _employee = Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO>.Nothing;
         
         private System.Guid _id;
         
-        private CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO> _specialization = CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO>.Nothing;
+        private Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO> _specialization = Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO>.Nothing;
         
         private long _version;
         
@@ -18331,7 +18331,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> Employee
+        public Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> Employee
         {
             get
             {
@@ -18383,7 +18383,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO> Specialization
+        public Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO> Specialization
         {
             get
             {
@@ -18740,11 +18740,11 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeToEmployeeLinkUpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
-        private CommonFramework.Maybe<SampleSystem.Domain.Enums.EmployeeLinkType> _employeeLinkType = CommonFramework.Maybe<SampleSystem.Domain.Enums.EmployeeLinkType>.Nothing;
+        private Anch.Core.Maybe<SampleSystem.Domain.Enums.EmployeeLinkType> _employeeLinkType = Anch.Core.Maybe<SampleSystem.Domain.Enums.EmployeeLinkType>.Nothing;
         
         private System.Guid _id;
         
-        private CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _linkedEmployee = CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO>.Nothing;
+        private Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _linkedEmployee = Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO>.Nothing;
         
         private long _version;
         
@@ -18781,7 +18781,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Domain.Enums.EmployeeLinkType> EmployeeLinkType
+        public Anch.Core.Maybe<SampleSystem.Domain.Enums.EmployeeLinkType> EmployeeLinkType
         {
             get
             {
@@ -18833,7 +18833,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> LinkedEmployee
+        public Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeeIdentityDTO> LinkedEmployee
         {
             get
             {
@@ -19901,7 +19901,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid _field2;
         
-        private CommonFramework.Maybe<System.Guid> _field3;
+        private Anch.Core.Maybe<System.Guid> _field3;
         
         public Example1SimpleDTO()
         {
@@ -19945,7 +19945,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<System.Guid> Field3
+        public Anch.Core.Maybe<System.Guid> Field3
         {
             get
             {
@@ -20039,7 +20039,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid _field2;
         
-        private CommonFramework.Maybe<System.Guid> _field3 = CommonFramework.Maybe<System.Guid>.Nothing;
+        private Anch.Core.Maybe<System.Guid> _field3 = Anch.Core.Maybe<System.Guid>.Nothing;
         
         private System.Guid _id;
         
@@ -20152,7 +20152,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<System.Guid> Field3
+        public Anch.Core.Maybe<System.Guid> Field3
         {
             get
             {
@@ -20249,11 +20249,11 @@ namespace SampleSystem.Generated.DTO
     public partial class Example1UpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ForUpdate.Example1, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ForUpdate.Example1>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example1IdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
-        private CommonFramework.Maybe<System.Guid> _field1 = CommonFramework.Maybe<System.Guid>.Nothing;
+        private Anch.Core.Maybe<System.Guid> _field1 = Anch.Core.Maybe<System.Guid>.Nothing;
         
-        private CommonFramework.Maybe<System.Guid> _field2 = CommonFramework.Maybe<System.Guid>.Nothing;
+        private Anch.Core.Maybe<System.Guid> _field2 = Anch.Core.Maybe<System.Guid>.Nothing;
         
-        private CommonFramework.Maybe<System.Guid> _field3 = CommonFramework.Maybe<System.Guid>.Nothing;
+        private Anch.Core.Maybe<System.Guid> _field3 = Anch.Core.Maybe<System.Guid>.Nothing;
         
         private System.Guid _id;
         
@@ -20294,7 +20294,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<System.Guid> Field1
+        public Anch.Core.Maybe<System.Guid> Field1
         {
             get
             {
@@ -20307,7 +20307,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<System.Guid> Field2
+        public Anch.Core.Maybe<System.Guid> Field2
         {
             get
             {
@@ -20320,7 +20320,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<System.Guid> Field3
+        public Anch.Core.Maybe<System.Guid> Field3
         {
             get
             {
@@ -20735,9 +20735,9 @@ namespace SampleSystem.Generated.DTO
     public partial class Example2UpdateDTO : Framework.BLL.Domain.IdentityObject.IUpdateDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ForUpdate.Example2, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ForUpdate.Example2>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Example2IdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
-        private CommonFramework.Maybe<System.Guid> _field1 = CommonFramework.Maybe<System.Guid>.Nothing;
+        private Anch.Core.Maybe<System.Guid> _field1 = Anch.Core.Maybe<System.Guid>.Nothing;
         
-        private CommonFramework.Maybe<System.Guid> _field2 = CommonFramework.Maybe<System.Guid>.Nothing;
+        private Anch.Core.Maybe<System.Guid> _field2 = Anch.Core.Maybe<System.Guid>.Nothing;
         
         private System.Guid _id;
         
@@ -20776,7 +20776,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<System.Guid> Field1
+        public Anch.Core.Maybe<System.Guid> Field1
         {
             get
             {
@@ -20789,7 +20789,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<System.Guid> Field2
+        public Anch.Core.Maybe<System.Guid> Field2
         {
             get
             {
@@ -21096,7 +21096,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Generated.DTO.EmployeeSimpleDTO _approvedBy;
         
-        private CommonFramework.Maybe<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO> _companyLegalEntity;
+        private Anch.Core.Maybe<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO> _companyLegalEntity;
         
         private SampleSystem.Generated.DTO.EmployeeSimpleDTO _head;
         
@@ -21128,7 +21128,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO> CompanyLegalEntity
+        public Anch.Core.Maybe<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO> CompanyLegalEntity
         {
             get
             {
@@ -21296,7 +21296,7 @@ namespace SampleSystem.Generated.DTO
         
         private string _codeNative;
         
-        private CommonFramework.Maybe<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO> _companyLegalEntity = CommonFramework.Maybe<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>.Nothing;
+        private Anch.Core.Maybe<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO> _companyLegalEntity = Anch.Core.Maybe<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>.Nothing;
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.HRDepartmentEmployeePositionStrictDTO> _employeePositions = new System.Collections.Generic.List<SampleSystem.Generated.DTO.HRDepartmentEmployeePositionStrictDTO>();
         
@@ -21466,7 +21466,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CommonFramework.Maybe<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO> CompanyLegalEntity
+        public Anch.Core.Maybe<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO> CompanyLegalEntity
         {
             get
             {

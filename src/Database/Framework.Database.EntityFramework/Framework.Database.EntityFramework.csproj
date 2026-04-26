@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.CommonFramework.IdentitySource.Abstractions" />
-    <PackageReference Include="IvAt.GenericQueryable.EntityFramework" />
+    <PackageReference Include="Anch.IdentitySource.Abstractions" />
+    <PackageReference Include="Anch.GenericQueryable.EntityFramework" />
 
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />

@@ -1,10 +1,10 @@
 ﻿using Framework.Core;
 
-using SecuritySystem;
-using SecuritySystem.DependencyInjection;
-using SecuritySystem.VirtualPermission.DependencyInjection;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.DependencyInjection;
+using Anch.SecuritySystem.VirtualPermission.DependencyInjection;
 
-using HierarchicalExpand;
+using Anch.HierarchicalExpand;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Directories;

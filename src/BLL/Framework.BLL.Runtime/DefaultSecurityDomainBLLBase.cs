@@ -1,8 +1,8 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
 using Framework.Application.Domain;
 using Framework.BLL.Default;
-using SecuritySystem.Providers;
+using Anch.SecuritySystem.Providers;
 
 namespace Framework.BLL;
 

@@ -1,4 +1,4 @@
-﻿using SecuritySystem;
+﻿using Anch.SecuritySystem;
 
 namespace Framework.BLL.Mode.Attr;
 

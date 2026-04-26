@@ -1,6 +1,6 @@
-﻿using CommonFramework.DependencyInjection;
+﻿using Anch.DependencyInjection;
 
-using SecuritySystem.DependencyInjection;
+using Anch.SecuritySystem.DependencyInjection;
 
 namespace Framework.Authorization.Environment;
 

@@ -4,7 +4,7 @@ using Framework.Infrastructure.Integration;
 
 using Microsoft.AspNetCore.Mvc;
 using SampleSystem.Generated.DTO;
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 

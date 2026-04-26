@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.Database.NHibernate.Mapping;
 

@@ -1,8 +1,8 @@
 ﻿using Framework.BLL.Domain.Persistent;
 
-using GenericQueryable.Fetching;
+using Anch.GenericQueryable.Fetching;
 
-using OData.Domain;
+using Anch.OData.Domain;
 
 using SampleSystem.Domain.Models.Filters;
 

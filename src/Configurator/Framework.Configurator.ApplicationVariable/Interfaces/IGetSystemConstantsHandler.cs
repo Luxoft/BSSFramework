@@ -1,4 +1,4 @@
-﻿using SecuritySystem.Configurator.Interfaces;
+﻿using Anch.SecuritySystem.Configurator.Interfaces;
 
 namespace Framework.Configurator.Interfaces;
 

@@ -1,7 +1,7 @@
 ﻿using Framework.Application.Domain;
 
-using SecuritySystem;
-using SecuritySystem.Providers;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.Providers;
 
 namespace Framework.BLL;
 

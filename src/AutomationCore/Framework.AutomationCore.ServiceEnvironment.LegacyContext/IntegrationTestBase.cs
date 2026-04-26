@@ -1,4 +1,4 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
 using Framework.Application;
 using Framework.Application.Repository;
@@ -14,7 +14,7 @@ using Framework.Notification.DTO;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.AutomationCore;
 

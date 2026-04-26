@@ -3,7 +3,7 @@ using Framework.Core;
 using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 // ReSharper disable once CheckNamespace
 namespace Framework.Configuration.WebApi;

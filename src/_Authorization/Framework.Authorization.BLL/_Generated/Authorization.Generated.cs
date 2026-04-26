@@ -34,7 +34,7 @@ namespace Framework.Authorization.BLL
     public partial class BusinessRoleBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.BusinessRole>, Framework.Authorization.BLL.IBusinessRoleBLL
     {
         
-        public BusinessRoleBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Authorization.Domain.BusinessRole> securityProvider) : 
+        public BusinessRoleBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Anch.SecuritySystem.Providers.ISecurityProvider<Framework.Authorization.Domain.BusinessRole> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -52,7 +52,7 @@ namespace Framework.Authorization.BLL
     public partial class PermissionBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.Permission>, Framework.Authorization.BLL.IPermissionBLL
     {
         
-        public PermissionBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Authorization.Domain.Permission> securityProvider) : 
+        public PermissionBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Anch.SecuritySystem.Providers.ISecurityProvider<Framework.Authorization.Domain.Permission> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -70,7 +70,7 @@ namespace Framework.Authorization.BLL
     public partial class PermissionRestrictionBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.PermissionRestriction>, Framework.Authorization.BLL.IPermissionRestrictionBLL
     {
         
-        public PermissionRestrictionBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Authorization.Domain.PermissionRestriction> securityProvider) : 
+        public PermissionRestrictionBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Anch.SecuritySystem.Providers.ISecurityProvider<Framework.Authorization.Domain.PermissionRestriction> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -88,7 +88,7 @@ namespace Framework.Authorization.BLL
     public partial class PrincipalBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.Principal>, Framework.Authorization.BLL.IPrincipalBLL
     {
         
-        public PrincipalBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Authorization.Domain.Principal> securityProvider) : 
+        public PrincipalBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Anch.SecuritySystem.Providers.ISecurityProvider<Framework.Authorization.Domain.Principal> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -106,7 +106,7 @@ namespace Framework.Authorization.BLL
     public partial class SecurityContextTypeBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.SecurityContextType>, Framework.Authorization.BLL.ISecurityContextTypeBLL
     {
         
-        public SecurityContextTypeBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Authorization.Domain.SecurityContextType> securityProvider) : 
+        public SecurityContextTypeBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Anch.SecuritySystem.Providers.ISecurityProvider<Framework.Authorization.Domain.SecurityContextType> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -270,15 +270,15 @@ namespace Framework.Authorization.BLL
         public static void RegisterBLLFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
         {
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.IBusinessRoleBLLFactory, Framework.Authorization.BLL.BusinessRoleBLLFactory>(serviceCollection);
-            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.BusinessRole, System.Guid>, Framework.Authorization.Domain.BusinessRole>, Framework.Authorization.BLL.IBusinessRoleBLLFactory>(serviceCollection);
+            Anch.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.BusinessRole, System.Guid>, Framework.Authorization.Domain.BusinessRole>, Framework.Authorization.BLL.IBusinessRoleBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.IPermissionBLLFactory, Framework.Authorization.BLL.PermissionBLLFactory>(serviceCollection);
-            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Permission, System.Guid>, Framework.Authorization.Domain.Permission>, Framework.Authorization.BLL.IPermissionBLLFactory>(serviceCollection);
+            Anch.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Permission, System.Guid>, Framework.Authorization.Domain.Permission>, Framework.Authorization.BLL.IPermissionBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.IPermissionRestrictionBLLFactory, Framework.Authorization.BLL.PermissionRestrictionBLLFactory>(serviceCollection);
-            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.PermissionRestriction, System.Guid>, Framework.Authorization.Domain.PermissionRestriction>, Framework.Authorization.BLL.IPermissionRestrictionBLLFactory>(serviceCollection);
+            Anch.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.PermissionRestriction, System.Guid>, Framework.Authorization.Domain.PermissionRestriction>, Framework.Authorization.BLL.IPermissionRestrictionBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.IPrincipalBLLFactory, Framework.Authorization.BLL.PrincipalBLLFactory>(serviceCollection);
-            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Principal, System.Guid>, Framework.Authorization.Domain.Principal>, Framework.Authorization.BLL.IPrincipalBLLFactory>(serviceCollection);
+            Anch.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Principal, System.Guid>, Framework.Authorization.Domain.Principal>, Framework.Authorization.BLL.IPrincipalBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.ISecurityContextTypeBLLFactory, Framework.Authorization.BLL.SecurityContextTypeBLLFactory>(serviceCollection);
-            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.SecurityContextType, System.Guid>, Framework.Authorization.Domain.SecurityContextType>, Framework.Authorization.BLL.ISecurityContextTypeBLLFactory>(serviceCollection);
+            Anch.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.SecurityContextType, System.Guid>, Framework.Authorization.Domain.SecurityContextType>, Framework.Authorization.BLL.ISecurityContextTypeBLLFactory>(serviceCollection);
         }
     }
     
@@ -290,7 +290,7 @@ namespace Framework.Authorization.BLL
         {
         }
         
-        public override Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider)
+        public override Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(Anch.SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider)
         {
             return new Framework.Authorization.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context, securityProvider);
         }
@@ -304,7 +304,7 @@ namespace Framework.Authorization.BLL
         {
         }
         
-        protected override Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> CreateDefault<TDomainObject>(SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider)
+        protected override Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> CreateDefault<TDomainObject>(Anch.SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider)
         {
             return new Framework.Authorization.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context, securityProvider);
         }
@@ -314,7 +314,7 @@ namespace Framework.Authorization.BLL
         where TDomainObject : Framework.Authorization.Domain.PersistentDomainObjectBase
     {
         
-        public SecurityDomainBLLBase(Framework.Authorization.BLL.IAuthorizationBLLContext context, SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider) : 
+        public SecurityDomainBLLBase(Framework.Authorization.BLL.IAuthorizationBLLContext context, Anch.SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider) : 
                 base(context, securityProvider)
         {
         }

@@ -1,6 +1,6 @@
 ﻿using Framework.Database;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.Application;
 

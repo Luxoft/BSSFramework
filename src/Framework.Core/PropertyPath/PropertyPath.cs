@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Reflection;
 
-using CommonFramework;
+using Anch.Core;
 
 // ReSharper disable once CheckNamespace
 namespace Framework.Core;

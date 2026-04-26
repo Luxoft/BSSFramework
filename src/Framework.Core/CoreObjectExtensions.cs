@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-using CommonFramework.DictionaryCache;
+using Anch.Core.DictionaryCache;
 
 namespace Framework.Core;
 

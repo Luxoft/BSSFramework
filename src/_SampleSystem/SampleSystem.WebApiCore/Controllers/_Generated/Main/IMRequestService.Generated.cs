@@ -27,14 +27,14 @@
         
         protected virtual SampleSystem.Generated.DTO.IMRequestFullDTO GetFullIMRequestByNameInternal(string iMRequestName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Employee.IMRequest domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, iMRequestName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.IMRequest>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.IMRequestFullDTO GetFullIMRequestInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Employee.IMRequest domainObject = bll.GetById(iMRequestIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.IMRequest>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
@@ -59,13 +59,13 @@
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.IMRequestFullDTO> GetFullIMRequestsByIdentsInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO[] iMRequestIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(iMRequestIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.IMRequest>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.IMRequestFullDTO> GetFullIMRequestsInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.IMRequest>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -89,14 +89,14 @@
         
         protected virtual SampleSystem.Generated.DTO.IMRequestRichDTO GetRichIMRequestByNameInternal(string iMRequestName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Employee.IMRequest domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, iMRequestName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.IMRequest>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.IMRequestRichDTO GetRichIMRequestInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Employee.IMRequest domainObject = bll.GetById(iMRequestIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.IMRequest>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
@@ -121,14 +121,14 @@
         
         protected virtual SampleSystem.Generated.DTO.IMRequestSimpleDTO GetSimpleIMRequestByNameInternal(string iMRequestName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Employee.IMRequest domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, iMRequestName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.IMRequest>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.IMRequestSimpleDTO GetSimpleIMRequestInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Employee.IMRequest domainObject = bll.GetById(iMRequestIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.IMRequest>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
@@ -153,13 +153,13 @@
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.IMRequestSimpleDTO> GetSimpleIMRequestsByIdentsInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO[] iMRequestIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(iMRequestIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.IMRequest>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.IMRequestSimpleDTO> GetSimpleIMRequestsInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.IMRequest>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -183,14 +183,14 @@
         
         protected virtual SampleSystem.Generated.DTO.IMRequestVisualDTO GetVisualIMRequestByNameInternal(string iMRequestName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Employee.IMRequest domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, iMRequestName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.IMRequest>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.IMRequestVisualDTO GetVisualIMRequestInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Employee.IMRequest domainObject = bll.GetById(iMRequestIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.IMRequest>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
@@ -215,13 +215,13 @@
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.IMRequestVisualDTO> GetVisualIMRequestsByIdentsInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO[] iMRequestIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(iMRequestIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.IMRequest>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.IMRequestVisualDTO> GetVisualIMRequestsInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.IIMRequestBLL bll = evaluateData.Context.Logics.IMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Employee.IMRequest>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
@@ -236,7 +236,7 @@
         
         protected virtual SampleSystem.Generated.DTO.TestIMRequestProjectionDTO GetTestIMRequestInternal(SampleSystem.Generated.DTO.IMRequestIdentityDTO testIMRequestIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ITestIMRequestBLL bll = evaluateData.Context.Logics.TestIMRequestFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ITestIMRequestBLL bll = evaluateData.Context.Logics.TestIMRequestFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Projections.TestIMRequest domainObject = bll.GetById(testIMRequestIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Projections.TestIMRequest>(Framework.BLL.Domain.DTO.ViewDTOType.ProjectionDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(domainObject, evaluateData.MappingService);
         }

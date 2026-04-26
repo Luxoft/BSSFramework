@@ -1,11 +1,11 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
 using Framework.Application.Repository;
 using Framework.Core;
 
-using GenericQueryable;
+using Anch.GenericQueryable;
 
-using SecuritySystem.Attributes;
+using Anch.SecuritySystem.Attributes;
 
 namespace Framework.Application.Lock;
 

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;

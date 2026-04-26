@@ -5,7 +5,7 @@ using Framework.Core;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;

@@ -793,11 +793,11 @@ namespace SampleSystem.Domain.Projections
         {
             get
             {
-                return CommonFramework.EnumerableExtensions.EmptyIfNull(this.CoreBusinessUnit_Auto?.Projects_Last_CoreBusinessUnitProjects);
+                return Anch.Core.EnumerableExtensions.EmptyIfNull(this.CoreBusinessUnit_Auto?.Projects_Last_CoreBusinessUnitProjects);
             }
         }
         
-        [Framework.BLL.Domain.Attributes.ViewDomainObjectAttribute(typeof(SecuritySystem.SecurityRule), "View")]
+        [Framework.BLL.Domain.Attributes.ViewDomainObjectAttribute(typeof(Anch.SecuritySystem.SecurityRule), "View")]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="login")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]

@@ -1,6 +1,6 @@
 ﻿using System.CodeDom;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.Authorization.TestGenerate.Configurations;
 using Framework.BLL.Domain.Serialization;

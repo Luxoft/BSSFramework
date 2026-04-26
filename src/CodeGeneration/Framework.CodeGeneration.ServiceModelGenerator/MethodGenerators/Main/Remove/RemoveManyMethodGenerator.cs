@@ -1,6 +1,6 @@
 ﻿using System.CodeDom;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.BLL.Domain.DTO.Extensions;
 using Framework.BLL.Domain.ServiceRole;
@@ -74,7 +74,7 @@ public class RemoveManyMethodGenerator<TConfiguration> : BaseRemoveMethodGenerat
                          .ToVariableReferenceExpression()
                          .ToStaticMethodInvokeExpression(
 
-                                                         typeof(CommonFramework.EnumerableExtensions)
+                                                         typeof(Anch.Core.EnumerableExtensions)
                                                                  .ToTypeReferenceExpression()
                                                                  .ToMethodReferenceExpression("Foreach"), convertLambda)
 

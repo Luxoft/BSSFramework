@@ -5,7 +5,7 @@ using Framework.BLL.DTOMapping.Domain;
 using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 

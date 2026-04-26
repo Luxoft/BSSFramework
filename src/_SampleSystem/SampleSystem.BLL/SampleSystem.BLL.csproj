@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.OData.Abstractions" />
+    <PackageReference Include="Anch.OData.Abstractions" />
 
     <PackageReference Include="Luxoft.Bss.Platform.Events.Abstractions" />
 
-    <PackageReference Include="IvAt.CommonFramework.DependencyInjection" />
+    <PackageReference Include="Anch.DependencyInjection" />
   </ItemGroup>
 
   <ItemGroup>

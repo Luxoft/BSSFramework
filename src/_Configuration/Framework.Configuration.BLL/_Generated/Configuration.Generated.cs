@@ -34,7 +34,7 @@ namespace Framework.Configuration.BLL
     public partial class DomainObjectEventBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectEvent>, Framework.Configuration.BLL.IDomainObjectEventBLL
     {
         
-        public DomainObjectEventBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.DomainObjectEvent> securityProvider) : 
+        public DomainObjectEventBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Anch.SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.DomainObjectEvent> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -65,7 +65,7 @@ namespace Framework.Configuration.BLL
     public partial class DomainObjectNotificationBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainObjectNotification>, Framework.Configuration.BLL.IDomainObjectNotificationBLL
     {
         
-        public DomainObjectNotificationBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.DomainObjectNotification> securityProvider) : 
+        public DomainObjectNotificationBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Anch.SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.DomainObjectNotification> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -83,7 +83,7 @@ namespace Framework.Configuration.BLL
     public partial class DomainTypeBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.DomainType>, Framework.Configuration.BLL.IDomainTypeBLL
     {
         
-        public DomainTypeBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.DomainType> securityProvider) : 
+        public DomainTypeBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Anch.SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.DomainType> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -101,7 +101,7 @@ namespace Framework.Configuration.BLL
     public partial class SentMessageBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SentMessage>, Framework.Configuration.BLL.ISentMessageBLL
     {
         
-        public SentMessageBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.SentMessage> securityProvider) : 
+        public SentMessageBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Anch.SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.SentMessage> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -119,7 +119,7 @@ namespace Framework.Configuration.BLL
     public partial class SequenceBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.Sequence>, Framework.Configuration.BLL.ISequenceBLL
     {
         
-        public SequenceBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.Sequence> securityProvider) : 
+        public SequenceBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Anch.SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.Sequence> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -150,7 +150,7 @@ namespace Framework.Configuration.BLL
     public partial class TargetSystemBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.TargetSystem>, Framework.Configuration.BLL.ITargetSystemBLL
     {
         
-        public TargetSystemBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.TargetSystem> securityProvider) : 
+        public TargetSystemBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Anch.SecuritySystem.Providers.ISecurityProvider<Framework.Configuration.Domain.TargetSystem> securityProvider) : 
                 base(context, securityProvider)
         {
         }
@@ -380,21 +380,21 @@ namespace Framework.Configuration.BLL
         public static void RegisterBLLFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
         {
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IDomainObjectEventBLLFactory, Framework.Configuration.BLL.DomainObjectEventBLLFactory>(serviceCollection);
-            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>, Framework.Configuration.Domain.DomainObjectEvent>, Framework.Configuration.BLL.IDomainObjectEventBLLFactory>(serviceCollection);
+            Anch.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>, Framework.Configuration.Domain.DomainObjectEvent>, Framework.Configuration.BLL.IDomainObjectEventBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IDomainObjectModificationBLLFactory, Framework.Configuration.BLL.DomainObjectModificationBLLFactory>(serviceCollection);
-            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectModification, System.Guid>, Framework.Configuration.Domain.DomainObjectModification>, Framework.Configuration.BLL.IDomainObjectModificationBLLFactory>(serviceCollection);
+            Anch.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectModification, System.Guid>, Framework.Configuration.Domain.DomainObjectModification>, Framework.Configuration.BLL.IDomainObjectModificationBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IDomainObjectNotificationBLLFactory, Framework.Configuration.BLL.DomainObjectNotificationBLLFactory>(serviceCollection);
-            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectNotification, System.Guid>, Framework.Configuration.Domain.DomainObjectNotification>, Framework.Configuration.BLL.IDomainObjectNotificationBLLFactory>(serviceCollection);
+            Anch.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectNotification, System.Guid>, Framework.Configuration.Domain.DomainObjectNotification>, Framework.Configuration.BLL.IDomainObjectNotificationBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IDomainTypeBLLFactory, Framework.Configuration.BLL.DomainTypeBLLFactory>(serviceCollection);
-            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainType, System.Guid>, Framework.Configuration.Domain.DomainType>, Framework.Configuration.BLL.IDomainTypeBLLFactory>(serviceCollection);
+            Anch.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainType, System.Guid>, Framework.Configuration.Domain.DomainType>, Framework.Configuration.BLL.IDomainTypeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ISentMessageBLLFactory, Framework.Configuration.BLL.SentMessageBLLFactory>(serviceCollection);
-            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.SentMessage, System.Guid>, Framework.Configuration.Domain.SentMessage>, Framework.Configuration.BLL.ISentMessageBLLFactory>(serviceCollection);
+            Anch.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.SentMessage, System.Guid>, Framework.Configuration.Domain.SentMessage>, Framework.Configuration.BLL.ISentMessageBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ISequenceBLLFactory, Framework.Configuration.BLL.SequenceBLLFactory>(serviceCollection);
-            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.Sequence, System.Guid>, Framework.Configuration.Domain.Sequence>, Framework.Configuration.BLL.ISequenceBLLFactory>(serviceCollection);
+            Anch.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.Sequence, System.Guid>, Framework.Configuration.Domain.Sequence>, Framework.Configuration.BLL.ISequenceBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ISystemConstantBLLFactory, Framework.Configuration.BLL.SystemConstantBLLFactory>(serviceCollection);
-            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.SystemConstant, System.Guid>, Framework.Configuration.Domain.SystemConstant>, Framework.Configuration.BLL.ISystemConstantBLLFactory>(serviceCollection);
+            Anch.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.SystemConstant, System.Guid>, Framework.Configuration.Domain.SystemConstant>, Framework.Configuration.BLL.ISystemConstantBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ITargetSystemBLLFactory, Framework.Configuration.BLL.TargetSystemBLLFactory>(serviceCollection);
-            CommonFramework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.TargetSystem, System.Guid>, Framework.Configuration.Domain.TargetSystem>, Framework.Configuration.BLL.ITargetSystemBLLFactory>(serviceCollection);
+            Anch.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.BLL.ISecurityBLLFactory<Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.TargetSystem, System.Guid>, Framework.Configuration.Domain.TargetSystem>, Framework.Configuration.BLL.ITargetSystemBLLFactory>(serviceCollection);
         }
     }
     
@@ -406,7 +406,7 @@ namespace Framework.Configuration.BLL
         {
         }
         
-        public override Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider)
+        public override Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(Anch.SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider)
         {
             return new Framework.Configuration.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context, securityProvider);
         }
@@ -420,7 +420,7 @@ namespace Framework.Configuration.BLL
         {
         }
         
-        protected override Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> CreateDefault<TDomainObject>(SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider)
+        protected override Framework.BLL.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> CreateDefault<TDomainObject>(Anch.SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider)
         {
             return new Framework.Configuration.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context, securityProvider);
         }
@@ -430,7 +430,7 @@ namespace Framework.Configuration.BLL
         where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
     {
         
-        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider) : 
+        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Anch.SecuritySystem.Providers.ISecurityProvider<TDomainObject> securityProvider) : 
                 base(context, securityProvider)
         {
         }

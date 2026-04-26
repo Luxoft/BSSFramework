@@ -1,9 +1,9 @@
 ﻿using SampleSystem.WebApiCore.Domain;
 using SampleSystem.WebApiCore.Security;
 
-using SecuritySystem;
-using SecuritySystem.DependencyInjection;
-using SecuritySystem.VirtualPermission.DependencyInjection;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.DependencyInjection;
+using Anch.SecuritySystem.VirtualPermission.DependencyInjection;
 
 namespace SampleSystem.WebApiCore.DependencyInjection;
 

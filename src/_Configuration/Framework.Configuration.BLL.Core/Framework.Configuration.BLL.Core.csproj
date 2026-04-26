@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.SecuritySystem.Notification.Abstractions" />
+    <PackageReference Include="Anch.SecuritySystem.Notification.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>

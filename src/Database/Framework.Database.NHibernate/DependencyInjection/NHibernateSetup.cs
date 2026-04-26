@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-using CommonFramework.DependencyInjection;
+using Anch.DependencyInjection;
 
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
@@ -11,7 +11,7 @@ using Framework.Database.NHibernate.Sessions;
 using Framework.Database.NHibernate.Visitors;
 using Framework.DependencyInjection;
 
-using GenericQueryable.NHibernate;
+using Anch.GenericQueryable.NHibernate;
 
 using Microsoft.Extensions.DependencyInjection;
 

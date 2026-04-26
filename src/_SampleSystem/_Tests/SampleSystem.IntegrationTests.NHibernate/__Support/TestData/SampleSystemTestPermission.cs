@@ -1,4 +1,4 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Directories;
@@ -6,8 +6,8 @@ using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.MU;
 using SampleSystem.Generated.DTO;
 
-using SecuritySystem;
-using SecuritySystem.Testing;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.Testing;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData;
 

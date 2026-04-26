@@ -3,7 +3,7 @@ using Framework.Database;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.Application;
 

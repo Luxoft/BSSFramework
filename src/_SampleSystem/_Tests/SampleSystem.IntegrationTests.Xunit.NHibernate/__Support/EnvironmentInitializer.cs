@@ -1,7 +1,7 @@
 ﻿using Bss.Platform.Events.Abstractions;
 using Bss.Testing.Xunit.Interfaces;
 
-using CommonFramework.DependencyInjection;
+using Anch.DependencyInjection;
 
 using Framework.AutomationCore.ServiceEnvironment;
 using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;

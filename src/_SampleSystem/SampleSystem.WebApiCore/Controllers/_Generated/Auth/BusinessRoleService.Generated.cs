@@ -27,14 +27,14 @@
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleFullDTO GetFullBusinessRoleByNameInternal(string businessRoleName, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
+            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.BusinessRole domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, businessRoleName, true, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleFullDTO GetFullBusinessRoleInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
+            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdentity.Id, true, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
@@ -59,13 +59,13 @@
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleFullDTO> GetFullBusinessRolesByIdentsInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
+            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(businessRoleIdents, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleFullDTO> GetFullBusinessRolesInternal(Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
+            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -89,14 +89,14 @@
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleRichDTO GetRichBusinessRoleByNameInternal(string businessRoleName, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
+            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.BusinessRole domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, businessRoleName, true, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleRichDTO GetRichBusinessRoleInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
+            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdentity.Id, true, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
@@ -121,14 +121,14 @@
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO GetSimpleBusinessRoleByNameInternal(string businessRoleName, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
+            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.BusinessRole domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, businessRoleName, true, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO GetSimpleBusinessRoleInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
+            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdentity.Id, true, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
@@ -153,13 +153,13 @@
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO> GetSimpleBusinessRolesByIdentsInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
+            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(businessRoleIdents, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO> GetSimpleBusinessRolesInternal(Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
+            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -183,14 +183,14 @@
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO GetVisualBusinessRoleByNameInternal(string businessRoleName, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
+            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.BusinessRole domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, businessRoleName, true, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO GetVisualBusinessRoleInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
+            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdentity.Id, true, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
@@ -215,13 +215,13 @@
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO> GetVisualBusinessRolesByIdentsInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents, Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
+            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(businessRoleIdents, new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO> GetVisualBusinessRolesInternal(Framework.Infrastructure.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
-            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(SecuritySystem.SecurityRule.View);
+            Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRoleFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return Framework.Authorization.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<Framework.Authorization.Domain.BusinessRole>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
     }

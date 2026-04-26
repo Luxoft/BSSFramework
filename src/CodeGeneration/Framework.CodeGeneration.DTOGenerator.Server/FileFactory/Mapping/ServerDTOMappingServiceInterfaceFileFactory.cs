@@ -1,7 +1,7 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
 
-using CommonFramework;
+using Anch.Core;
 using Framework.BLL.DTOMapping.Services;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;

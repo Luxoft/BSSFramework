@@ -13,7 +13,7 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace SampleSystem.IntegrationTests;
 

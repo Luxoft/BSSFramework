@@ -20,8 +20,8 @@ using Framework.Notification;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem;
-using SecuritySystem.DependencyInjection;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.DependencyInjection;
 
 namespace Framework.Infrastructure.DependencyInjection;
 

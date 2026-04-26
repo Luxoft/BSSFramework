@@ -2,7 +2,7 @@
 
 using Framework.CodeDom.Extensions;
 using Framework.FileGeneration.Configuration;
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 

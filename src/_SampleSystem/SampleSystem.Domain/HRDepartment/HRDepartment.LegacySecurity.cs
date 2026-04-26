@@ -2,7 +2,7 @@
 
 using SampleSystem.Domain.Directories;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace SampleSystem.Domain.HRDepartment;
 

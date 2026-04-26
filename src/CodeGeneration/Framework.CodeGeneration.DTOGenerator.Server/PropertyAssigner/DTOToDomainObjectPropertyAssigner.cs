@@ -1,7 +1,7 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.Serialization.Extensions;
@@ -244,7 +244,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
         joinStatement.Parameters.Add(new CodeSnippetExpression("(domainItem, dtoItem)=>new{domainItem, dtoItem}"));
 
         var foreachStatement =
-                typeof(CommonFramework.EnumerableExtensions)
+                typeof(Anch.Core.EnumerableExtensions)
                         .ToTypeReferenceExpression()
                         .ToMethodInvokeExpression("Foreach");
 

@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.SecuritySystem.VirtualPermission" />
+    <PackageReference Include="Anch.SecuritySystem.VirtualPermission" />
   </ItemGroup>
 
   <ItemGroup>

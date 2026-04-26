@@ -1,9 +1,9 @@
-﻿using CommonFramework.Auth;
+﻿using Anch.Core.Auth;
 using Framework.Core;
 using Framework.Database.NHibernate.Mapping;
 using Framework.Database.NHibernate.SqlExceptionProcessors;
 
-using GenericQueryable.NHibernate;
+using Anch.GenericQueryable.NHibernate;
 
 using Microsoft.Extensions.DependencyInjection;
 

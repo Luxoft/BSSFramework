@@ -1,7 +1,7 @@
 ﻿using Framework.Application.Repository;
 using Framework.Database;
 
-using GenericQueryable;
+using Anch.GenericQueryable;
 
 using MediatR;
 

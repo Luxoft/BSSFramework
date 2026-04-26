@@ -1,4 +1,4 @@
-﻿using CommonFramework.GenericRepository;
+﻿using Anch.GenericRepository;
 
 using Framework.Database;
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Immutable;
 
-using CommonFramework;
+using Anch.Core;
 
 namespace Framework.Core.TypeResolving;
 

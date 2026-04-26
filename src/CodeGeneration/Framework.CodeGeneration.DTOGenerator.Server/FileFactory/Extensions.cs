@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-using CommonFramework;
+using Anch.Core;
 using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.Serialization.Extensions;

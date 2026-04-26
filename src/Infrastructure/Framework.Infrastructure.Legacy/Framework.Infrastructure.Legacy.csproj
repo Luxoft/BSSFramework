@@ -10,8 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.OData" />
-    <PackageReference Include="IvAt.SecuritySystem" />
+    <PackageReference Include="Anch.OData" />
+    <PackageReference Include="Anch.SecuritySystem" />
   </ItemGroup>
 
   <ItemGroup>

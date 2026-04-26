@@ -27,13 +27,13 @@
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountryFullDTO> GetFullCountriesByIdentsInternal(SampleSystem.Generated.DTO.CountryIdentityDTO[] countryIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetListByIdents(countryIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountryFullDTO> GetFullCountriesInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -57,7 +57,7 @@
         
         protected virtual SampleSystem.Generated.DTO.CountryFullDTO GetFullCountryByCodeInternal(string countryCode, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Directories.Country domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, countryCode, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
@@ -73,14 +73,14 @@
         
         protected virtual SampleSystem.Generated.DTO.CountryFullDTO GetFullCountryByNameInternal(string countryName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Directories.Country domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, countryName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.CountryFullDTO GetFullCountryInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Directories.Country domainObject = bll.GetById(countryIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, evaluateData.MappingService);
         }
@@ -105,7 +105,7 @@
         
         protected virtual SampleSystem.Generated.DTO.CountryRichDTO GetRichCountryByCodeInternal(string countryCode, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Directories.Country domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, countryCode, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
@@ -121,14 +121,14 @@
         
         protected virtual SampleSystem.Generated.DTO.CountryRichDTO GetRichCountryByNameInternal(string countryName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Directories.Country domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, countryName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.CountryRichDTO GetRichCountryInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Directories.Country domainObject = bll.GetById(countryIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.FullDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, evaluateData.MappingService);
         }
@@ -153,13 +153,13 @@
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountrySimpleDTO> GetSimpleCountriesByIdentsInternal(SampleSystem.Generated.DTO.CountryIdentityDTO[] countryIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetListByIdents(countryIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountrySimpleDTO> GetSimpleCountriesInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -183,7 +183,7 @@
         
         protected virtual SampleSystem.Generated.DTO.CountrySimpleDTO GetSimpleCountryByCodeInternal(string countryCode, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Directories.Country domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, countryCode, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
@@ -199,14 +199,14 @@
         
         protected virtual SampleSystem.Generated.DTO.CountrySimpleDTO GetSimpleCountryByNameInternal(string countryName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Directories.Country domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, countryName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.CountrySimpleDTO GetSimpleCountryInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Directories.Country domainObject = bll.GetById(countryIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, evaluateData.MappingService);
         }
@@ -231,13 +231,13 @@
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountryVisualDTO> GetVisualCountriesByIdentsInternal(SampleSystem.Generated.DTO.CountryIdentityDTO[] countryIdents, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetListByIdents(countryIdents, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountryVisualDTO> GetVisualCountriesInternal(Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
@@ -261,7 +261,7 @@
         
         protected virtual SampleSystem.Generated.DTO.CountryVisualDTO GetVisualCountryByCodeInternal(string countryCode, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Directories.Country domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByCode(bll, countryCode, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
@@ -277,14 +277,14 @@
         
         protected virtual SampleSystem.Generated.DTO.CountryVisualDTO GetVisualCountryByNameInternal(string countryName, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Directories.Country domainObject = Framework.BLL.DefaultDomainBLLBaseExtensions.GetByName(bll, countryName, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
         
         protected virtual SampleSystem.Generated.DTO.CountryVisualDTO GetVisualCountryInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.View);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.View);
             SampleSystem.Domain.Directories.Country domainObject = bll.GetById(countryIdentity.Id, true, new Framework.BLL.DTOFetchRule<SampleSystem.Domain.Directories.Country>(Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, evaluateData.MappingService);
         }
@@ -300,7 +300,7 @@
         
         protected virtual void RemoveCountryInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.Edit);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.Edit);
             this.RemoveCountryInternal(countryIdent, evaluateData, bll);
         }
         
@@ -321,7 +321,7 @@
         
         protected virtual SampleSystem.Generated.DTO.CountryIdentityDTO SaveCountryInternal(SampleSystem.Generated.DTO.CountryStrictDTO countryStrict, Framework.Infrastructure.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(SecuritySystem.SecurityRule.Edit);
+            SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.CountryFactory.Create(Anch.SecuritySystem.SecurityRule.Edit);
             return this.SaveCountryInternal(countryStrict, evaluateData, bll);
         }
         

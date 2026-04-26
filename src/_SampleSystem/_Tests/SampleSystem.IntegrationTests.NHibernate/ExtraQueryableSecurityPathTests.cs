@@ -1,11 +1,11 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
 using Framework.Application;
 using Framework.Core;
 using Framework.Database;
 
-using SecuritySystem;
-using SecuritySystem.Services;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;

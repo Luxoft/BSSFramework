@@ -4,8 +4,8 @@ using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Reflection;
 
-using CommonFramework;
-using CommonFramework.DictionaryCache;
+using Anch.Core;
+using Anch.Core.DictionaryCache;
 
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Extensions;

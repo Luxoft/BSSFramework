@@ -5,7 +5,7 @@ using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.FileGeneration.Configuration;
 
-using SecuritySystem.Providers;
+using Anch.SecuritySystem.Providers;
 
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 

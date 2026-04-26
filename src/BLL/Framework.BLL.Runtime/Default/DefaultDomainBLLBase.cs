@@ -1,7 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Linq.Expressions;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.Application.Domain;
 using Framework.BLL.Domain.Persistent;
@@ -9,14 +9,14 @@ using Framework.BLL.Exceptions;
 using Framework.Core;
 using Framework.Database;
 
-using GenericQueryable;
-using GenericQueryable.Fetching;
+using Anch.GenericQueryable;
+using Anch.GenericQueryable.Fetching;
 
-using HierarchicalExpand;
+using Anch.HierarchicalExpand;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using OData.Domain;
+using Anch.OData.Domain;
 
 namespace Framework.BLL.Default;
 

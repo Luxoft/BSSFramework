@@ -1,7 +1,7 @@
 ﻿using Framework.Application.Domain;
 using Framework.BLL.Domain.Persistent;
 
-using OData.Domain;
+using Anch.OData.Domain;
 
 namespace Framework.BLL.OData;
 

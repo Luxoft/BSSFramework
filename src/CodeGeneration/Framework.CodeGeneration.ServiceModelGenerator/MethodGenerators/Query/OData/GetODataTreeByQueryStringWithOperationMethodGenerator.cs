@@ -1,6 +1,6 @@
 ﻿using System.CodeDom;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.DTO.Extensions;
@@ -12,9 +12,9 @@ using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View;
 using Framework.FileGeneration.Configuration;
 
-using OData.Domain;
+using Anch.OData.Domain;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 using SelectOperationResultExtensions = Framework.BLL.OData.SelectOperationResultExtensions;
 

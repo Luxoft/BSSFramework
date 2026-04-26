@@ -10,8 +10,8 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
-using SecuritySystem.Notification;
-using SecuritySystem.Notification.Domain;
+using Anch.SecuritySystem.Notification;
+using Anch.SecuritySystem.Notification.Domain;
 
 namespace SampleSystem.IntegrationTests;
 

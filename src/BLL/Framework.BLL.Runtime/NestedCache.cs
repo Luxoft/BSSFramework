@@ -1,4 +1,4 @@
-﻿using CommonFramework.DictionaryCache;
+﻿using Anch.Core.DictionaryCache;
 using Framework.Application.Domain;
 
 namespace Framework.BLL;

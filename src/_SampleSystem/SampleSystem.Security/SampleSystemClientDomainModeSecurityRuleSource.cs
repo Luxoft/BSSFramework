@@ -1,6 +1,6 @@
 ﻿using SampleSystem.Domain;
 
-using SecuritySystem.SecurityRuleInfo;
+using Anch.SecuritySystem.SecurityRuleInfo;
 
 namespace SampleSystem.Security;
 

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 

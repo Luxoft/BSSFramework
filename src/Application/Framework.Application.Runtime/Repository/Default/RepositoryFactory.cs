@@ -1,6 +1,6 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
-using SecuritySystem.DomainServices;
+using Anch.SecuritySystem.DomainServices;
 
 namespace Framework.Application.Repository.Default;
 

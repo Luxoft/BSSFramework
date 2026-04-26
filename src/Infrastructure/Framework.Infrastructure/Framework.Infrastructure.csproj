@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" />
-    <PackageReference Include="IvAt.SecuritySystem" />
+    <PackageReference Include="Anch.SecuritySystem" />
   </ItemGroup>
 
   <ItemGroup>

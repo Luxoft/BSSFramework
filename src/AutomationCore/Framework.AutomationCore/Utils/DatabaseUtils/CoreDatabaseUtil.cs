@@ -2,7 +2,7 @@
 using System.Data;
 using System.Text.RegularExpressions;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 

@@ -1,9 +1,9 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
 using Framework.Authorization.Generated.DTO;
 using Framework.Database;
 
-using SecuritySystem.ExternalSystem.SecurityContextStorage;
+using Anch.SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 using Microsoft.AspNetCore.Mvc;
 

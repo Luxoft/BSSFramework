@@ -1,4 +1,4 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
@@ -11,7 +11,7 @@ using SampleSystem.Domain.Enums;
 using SampleSystem.Domain.MU;
 using SampleSystem.Domain.Projects;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace SampleSystem.Domain.BU;
 

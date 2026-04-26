@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IvAt.GenericQueryable.Abstractions" />
+    <PackageReference Include="Anch.GenericQueryable.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>

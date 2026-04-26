@@ -12,7 +12,7 @@
     <PackageReference Include="Dapper" />
     <PackageReference Include="Dapper.Contrib" />
 
-    <PackageReference Include="IvAt.CommonFramework.DependencyInjection" />
+    <PackageReference Include="Anch.DependencyInjection" />
 
     <PackageReference Include="MartinCostello.SqlLocalDb" />
 

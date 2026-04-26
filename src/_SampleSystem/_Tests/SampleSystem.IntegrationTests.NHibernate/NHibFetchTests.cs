@@ -1,7 +1,7 @@
 ﻿using Framework.Application;
 using Framework.Database;
 
-using GenericQueryable;
+using Anch.GenericQueryable;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 

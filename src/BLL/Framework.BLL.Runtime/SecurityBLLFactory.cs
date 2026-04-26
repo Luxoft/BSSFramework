@@ -1,12 +1,12 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
 using Framework.BLL.Services;
 using Framework.Core;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem;
-using SecuritySystem.Providers;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.Providers;
 
 namespace Framework.BLL;
 

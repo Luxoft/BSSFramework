@@ -1,7 +1,7 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.BLL;
 using Framework.BLL.Domain.ServiceRole;
@@ -14,7 +14,7 @@ using Framework.Core;
 using Framework.Database;
 using Framework.FileGeneration.Configuration;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
 

@@ -1,4 +1,4 @@
-﻿using SecuritySystem.AccessDenied;
+﻿using Anch.SecuritySystem.AccessDenied;
 
 namespace Framework.BLL;
 

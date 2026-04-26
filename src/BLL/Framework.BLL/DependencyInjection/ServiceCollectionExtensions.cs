@@ -1,13 +1,13 @@
 ﻿using System.Reflection;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.Validation;
 using Framework.Validation.Map;
 
-using GenericQueryable.Fetching;
+using Anch.GenericQueryable.Fetching;
 
 using Microsoft.Extensions.DependencyInjection;
 

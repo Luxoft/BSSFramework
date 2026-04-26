@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 
-using CommonFramework;
-using CommonFramework.ExpressionEvaluate;
+using Anch.Core;
+using Anch.Core.ExpressionEvaluate;
 
 using Framework.Core;
 using Framework.Database.Domain;
@@ -10,8 +10,8 @@ using Framework.Database.NHibernate.Envers;
 using Framework.Database.NHibernate.Envers.LinqVisitors;
 using Framework.Database.NHibernate.Sessions;
 
-using GenericQueryable;
-using GenericQueryable.Fetching;
+using Anch.GenericQueryable;
+using Anch.GenericQueryable.Fetching;
 
 using NHibernate;
 using NHibernate.Envers.Query;

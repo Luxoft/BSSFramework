@@ -1,7 +1,7 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.DTO;
@@ -15,7 +15,7 @@ using Framework.Core;
 using Framework.Database.Mapping;
 using Framework.Projection;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.ProjectionGenerator.Extensions;
 

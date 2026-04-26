@@ -1,7 +1,7 @@
 ﻿using Framework.Application.Domain;
 using Framework.Application.Events;
 
-using HierarchicalExpand;
+using Anch.HierarchicalExpand;
 
 namespace Framework.BLL.Default;
 

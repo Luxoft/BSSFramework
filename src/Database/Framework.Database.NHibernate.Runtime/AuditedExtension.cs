@@ -1,5 +1,5 @@
-﻿using CommonFramework;
-using CommonFramework.Auth;
+﻿using Anch.Core;
+using Anch.Core.Auth;
 
 using Framework.Database.NHibernate.Audit;
 using Framework.Database.NHibernate.DAL.Revisions;

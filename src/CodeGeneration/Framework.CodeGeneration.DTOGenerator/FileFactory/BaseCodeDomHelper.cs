@@ -1,7 +1,7 @@
 ﻿using System.CodeDom;
 using System.Runtime.Serialization;
 
-using CommonFramework;
+using Anch.Core;
 using Framework.Application.Domain;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.IdentityObject;

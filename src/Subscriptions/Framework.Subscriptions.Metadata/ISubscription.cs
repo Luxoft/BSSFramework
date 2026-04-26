@@ -3,8 +3,8 @@ using System.Net.Mail;
 
 using Framework.Subscriptions.Domain;
 
-using SecuritySystem;
-using SecuritySystem.Notification.Domain;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.Notification.Domain;
 
 namespace Framework.Subscriptions.Metadata;
 

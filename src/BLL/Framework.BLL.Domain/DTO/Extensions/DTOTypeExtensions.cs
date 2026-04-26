@@ -1,4 +1,4 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
 namespace Framework.BLL.Domain.DTO.Extensions;
 

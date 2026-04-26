@@ -7,7 +7,7 @@ using Framework.Subscriptions.Domain;
 
 using Microsoft.Extensions.Logging;
 
-using SecuritySystem.Providers;
+using Anch.SecuritySystem.Providers;
 
 namespace Framework.Configuration.BLL;
 

@@ -30,7 +30,7 @@ using SampleSystem.Domain.Models.Filters._Base;
 using SampleSystem.Security;
 using SampleSystem.Validation;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace SampleSystem.CodeGenerate.Configurations;
 

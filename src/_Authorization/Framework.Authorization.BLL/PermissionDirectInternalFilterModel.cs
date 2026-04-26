@@ -4,7 +4,7 @@ using Framework.Authorization.Domain;
 using Framework.BLL.Domain.Models;
 using Framework.Core;
 
-using SecuritySystem.ExternalSystem.SecurityContextStorage;
+using Anch.SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 namespace Framework.Authorization.BLL;
 

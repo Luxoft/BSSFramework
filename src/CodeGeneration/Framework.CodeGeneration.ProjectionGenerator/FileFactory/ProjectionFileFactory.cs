@@ -1,7 +1,7 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.CodeDom;
@@ -187,7 +187,7 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
                                              {
                                                  if (propertyPath.Count > 1 && property.PropertyType.IsCollection())
                                                  {
-                                                     return typeof(CommonFramework.EnumerableExtensions)
+                                                     return typeof(Anch.Core.EnumerableExtensions)
                                                             .ToTypeReferenceExpression()
                                                             .ToMethodInvokeExpression("EmptyIfNull", state.Expression);
                                                  }

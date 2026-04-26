@@ -1,14 +1,14 @@
 ﻿using System.Collections.Immutable;
 using System.Net.Mail;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.Subscriptions.Domain;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem;
-using SecuritySystem.Notification.Domain;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.Notification.Domain;
 
 namespace Framework.Subscriptions.Metadata;
 

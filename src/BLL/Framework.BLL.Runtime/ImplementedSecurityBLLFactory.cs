@@ -3,7 +3,7 @@ using Framework.BLL.Services;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem.Providers;
+using Anch.SecuritySystem.Providers;
 
 namespace Framework.BLL;
 

@@ -1,6 +1,6 @@
-﻿using CommonFramework;
-using CommonFramework.DependencyInjection;
-using CommonFramework.RelativePath.DependencyInjection;
+﻿using Anch.Core;
+using Anch.DependencyInjection;
+using Anch.RelativePath.DependencyInjection;
 
 using Framework.Application;
 using Framework.Authorization.Domain;
@@ -9,13 +9,13 @@ using Framework.Core;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem;
-using SecuritySystem.DependencyInjection;
-using SecuritySystem.ExternalSystem.ApplicationSecurity;
-using SecuritySystem.GeneralPermission.DependencyInjection;
-using SecuritySystem.GeneralPermission.Validation;
-using SecuritySystem.Notification.DependencyInjection;
-using SecuritySystem.UserSource;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.DependencyInjection;
+using Anch.SecuritySystem.ExternalSystem.ApplicationSecurity;
+using Anch.SecuritySystem.GeneralPermission.DependencyInjection;
+using Anch.SecuritySystem.GeneralPermission.Validation;
+using Anch.SecuritySystem.Notification.DependencyInjection;
+using Anch.SecuritySystem.UserSource;
 
 namespace Framework.Authorization.Environment;
 

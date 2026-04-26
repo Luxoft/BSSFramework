@@ -2,13 +2,13 @@
 using Framework.AutomationCore.Utils;
 using Framework.Database;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 using SampleSystem.Domain.Employee;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
-using SecuritySystem.AccessDenied;
+using Anch.SecuritySystem.AccessDenied;
 
 namespace SampleSystem.IntegrationTests;
 

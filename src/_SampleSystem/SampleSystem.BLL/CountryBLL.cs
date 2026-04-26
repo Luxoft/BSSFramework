@@ -1,6 +1,6 @@
 ﻿using SampleSystem.Domain.Directories;
 
-using SecuritySystem.Providers;
+using Anch.SecuritySystem.Providers;
 
 namespace SampleSystem.BLL;
 

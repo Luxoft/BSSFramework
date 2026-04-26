@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-using SecuritySystem.AvailableSecurity;
+using Anch.SecuritySystem.AvailableSecurity;
 
 // ReSharper disable once CheckNamespace
 namespace Authorization.WebApi.Controllers;

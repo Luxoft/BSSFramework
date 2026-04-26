@@ -9,225 +9,225 @@
 
 namespace SampleSystem.BLL
 {
-    using GenericQueryable;
+    using Anch.GenericQueryable;
     
     
     public abstract partial class SampleSystemMainDTOFetchRuleExpanderBase : Framework.BLL.DTOFetchRuleExpander<SampleSystem.Domain.PersistentDomainObjectBase>
     {
         
-        protected override GenericQueryable.Fetching.PropertyFetchRule<TDomainObject> TryExpand<TDomainObject>(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected override Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject> TryExpand<TDomainObject>(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BU.BusinessUnit)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetBusinessUnitFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetBusinessUnitFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BU.BusinessUnitHrDepartment)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetBusinessUnitHrDepartmentFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetBusinessUnitHrDepartmentFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetBusinessUnitManagerCommissionLinkFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetBusinessUnitManagerCommissionLinkFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Directories.BusinessUnitType)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetBusinessUnitTypeFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetBusinessUnitTypeFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Directories.CompanyLegalEntity)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetCompanyLegalEntityFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetCompanyLegalEntityFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Directories.Country)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetCountryFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetCountryFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Directories.Location)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetLocationFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetLocationFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Employee.Employee)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetEmployeeFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetEmployeeFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Employee.EmployeeInformation)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetEmployeeInformationFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetEmployeeInformationFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Employee.EmployeePhoto)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetEmployeePhotoFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetEmployeePhotoFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Employee.EmployeePosition)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetEmployeePositionFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetEmployeePositionFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Employee.EmployeeRegistrationType)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetEmployeeRegistrationTypeFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetEmployeeRegistrationTypeFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Employee.EmployeeRole)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetEmployeeRoleFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetEmployeeRoleFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Employee.EmployeeRoleDegree)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetEmployeeRoleDegreeFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetEmployeeRoleDegreeFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Employee.EmployeeSpecialization)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetEmployeeSpecializationFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetEmployeeSpecializationFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Employee.IMRequest)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetIMRequestFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetIMRequestFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Employee.Information)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetInformationFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetInformationFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Employee.RoleRoleDegreeLink)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetRoleRoleDegreeLinkFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetRoleRoleDegreeLinkFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Employee.TestRestrictionObject)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestRestrictionObjectFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestRestrictionObjectFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EnversBug1676.Location1676)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetLocation1676FetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetLocation1676FetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetWorkingCalendar1676FetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetWorkingCalendar1676FetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ExternalPrincipal.Principal)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetPrincipalFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetPrincipalFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ForUpdate.Example1)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetExample1FetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetExample1FetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.HRDepartment.HRDepartment)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetHRDepartmentFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetHRDepartmentFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetIntegrationVersionContainer1FetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetIntegrationVersionContainer1FetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetIntegrationVersionContainer2FetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetIntegrationVersionContainer2FetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestManualEmployeeProjectionFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestManualEmployeeProjectionFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.MU.ManagementUnit)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetManagementUnitFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetManagementUnitFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetManagementUnitAndBusinessUnitLinkFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetManagementUnitAndBusinessUnitLinkFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetManagementUnitAndHRDepartmentLinkFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetManagementUnitAndHRDepartmentLinkFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetManagementUnitFluentMappingFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetManagementUnitFluentMappingFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.BusinessUnitProgramClass)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetBusinessUnitProgramClassFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetBusinessUnitProgramClassFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.CustomCompanyLegalEntity)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetCustomCompanyLegalEntityFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetCustomCompanyLegalEntityFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestBusinessUnit)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestBusinessUnitFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestBusinessUnitFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestCustomContextSecurityObjProjectionFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestCustomContextSecurityObjProjectionFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestDepartment)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestDepartmentFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestDepartmentFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestEmployee)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestEmployeeFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestEmployeeFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestIMRequest)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestIMRequestFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestIMRequestFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLegacyEmployee)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestLegacyEmployeeFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestLegacyEmployeeFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLocation)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestLocationFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestLocationFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestLocationCollectionProperties)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestLocationCollectionPropertiesFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestLocationCollectionPropertiesFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestSecurityObjItemProjection)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestSecurityObjItemProjectionFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestSecurityObjItemProjectionFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SqlParserTestObj)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetSqlParserTestObjFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetSqlParserTestObjFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SqlParserTestObjContainer)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetSqlParserTestObjContainerFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetSqlParserTestObjContainerFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestCustomContextSecurityObj)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestCustomContextSecurityObjFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestCustomContextSecurityObjFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestDependency.TestRootSecurityObj)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestRootSecurityObjFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestRootSecurityObjFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestDependency.TestSecurityObjItem)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestSecurityObjItemFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestSecurityObjItemFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestSecuritySubObjItemFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestSecuritySubObjItemFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestSecuritySubObjItem2FetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestSecuritySubObjItem2FetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestSecuritySubObjItem3FetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestSecuritySubObjItem3FetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestPerformanceObjectFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestPerformanceObjectFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestPlainAuthObjectFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestPlainAuthObjectFetchRule(dtoType)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestImmutableObj)))
             {
-                return ((GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestImmutableObjFetchRule(dtoType)))));
+                return ((Anch.GenericQueryable.Fetching.PropertyFetchRule<TDomainObject>)(((object)(this.TryGetTestImmutableObjFetchRule(dtoType)))));
             }
             else
             {
@@ -235,23 +235,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.BU.BusinessUnit> TryGetBusinessUnitFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.BU.BusinessUnit> TryGetBusinessUnitFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnit>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnit>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnit>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnit>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnit>.Create(v => v.BusinessUnitForRent).Fetch(v => v.BusinessUnitType).Fetch(v => v.Parent);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnit>.Create(v => v.BusinessUnitForRent).Fetch(v => v.BusinessUnitType).Fetch(v => v.Parent);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnit>.Create(v => v.BusinessUnitEmployeeRoles).ThenFetch(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.BusinessUnitEmployeeRoles).ThenFetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.BusinessUnitForRent).Fetch(v => v.BusinessUnitType).Fetch(v => v.Children).ThenFetch(v => v.BusinessUnitEmployeeRoles).ThenFetch(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.BusinessUnitEmployeeRoles).ThenFetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Children).ThenFetch(v => v.BusinessUnitType).Fetch(v => v.Children).ThenFetch(v => v.ManagementUnits).ThenFetch(v => v.ManagementUnit).Fetch(v => v.Children).ThenFetch(v => v.ManagerCommissions).ThenFetch(v => v.Manager).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.ManagerCommissions).ThenFetch(v => v.Manager).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.ManagementUnits).ThenFetch(v => v.ManagementUnit).Fetch(v => v.ManagerCommissions).ThenFetch(v => v.Manager).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.ManagerCommissions).ThenFetch(v => v.Manager).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Parent);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnit>.Create(v => v.BusinessUnitEmployeeRoles).ThenFetch(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.BusinessUnitEmployeeRoles).ThenFetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.BusinessUnitForRent).Fetch(v => v.BusinessUnitType).Fetch(v => v.Children).ThenFetch(v => v.BusinessUnitEmployeeRoles).ThenFetch(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.BusinessUnitEmployeeRoles).ThenFetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Children).ThenFetch(v => v.BusinessUnitType).Fetch(v => v.Children).ThenFetch(v => v.ManagementUnits).ThenFetch(v => v.ManagementUnit).Fetch(v => v.Children).ThenFetch(v => v.ManagerCommissions).ThenFetch(v => v.Manager).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.ManagerCommissions).ThenFetch(v => v.Manager).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.ManagementUnits).ThenFetch(v => v.ManagementUnit).Fetch(v => v.ManagerCommissions).ThenFetch(v => v.Manager).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.ManagerCommissions).ThenFetch(v => v.Manager).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Parent);
             }
             else
             {
@@ -259,23 +259,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.BU.BusinessUnitHrDepartment> TryGetBusinessUnitHrDepartmentFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.BU.BusinessUnitHrDepartment> TryGetBusinessUnitHrDepartmentFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnitHrDepartment>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnitHrDepartment>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnitHrDepartment>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnitHrDepartment>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnitHrDepartment>.Create(v => v.BusinessUnit).Fetch(v => v.HRDepartment).ThenFetch(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnitHrDepartment>.Create(v => v.BusinessUnit).Fetch(v => v.HRDepartment).ThenFetch(v => v.Location);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnitHrDepartment>.Create(v => v.BusinessUnit).Fetch(v => v.HRDepartment).ThenFetch(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnitHrDepartment>.Create(v => v.BusinessUnit).Fetch(v => v.HRDepartment).ThenFetch(v => v.Location);
             }
             else
             {
@@ -283,23 +283,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink> TryGetBusinessUnitManagerCommissionLinkFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink> TryGetBusinessUnitManagerCommissionLinkFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>.Create(v => v.BusinessUnit).Fetch(v => v.Manager).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Manager).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>.Create(v => v.BusinessUnit).Fetch(v => v.Manager).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Manager).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>.Create(v => v.BusinessUnit).Fetch(v => v.Manager).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Manager).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>.Create(v => v.BusinessUnit).Fetch(v => v.Manager).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Manager).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location);
             }
             else
             {
@@ -307,27 +307,27 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.BusinessUnitProgramClass> TryGetBusinessUnitProgramClassFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.BusinessUnitProgramClass> TryGetBusinessUnitProgramClassFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.BusinessUnitProgramClass>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.BusinessUnitProgramClass>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.BusinessUnitProgramClass>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.BusinessUnitProgramClass>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.BusinessUnitProgramClass>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.BusinessUnitProgramClass>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.BusinessUnitProgramClass>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.BusinessUnitProgramClass>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.ProjectionDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.BusinessUnitProgramClass>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.BusinessUnitProgramClass>.Empty;
             }
             else
             {
@@ -335,23 +335,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Directories.BusinessUnitType> TryGetBusinessUnitTypeFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Directories.BusinessUnitType> TryGetBusinessUnitTypeFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.BusinessUnitType>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.BusinessUnitType>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.BusinessUnitType>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.BusinessUnitType>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.BusinessUnitType>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.BusinessUnitType>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.BusinessUnitType>.Create(v => v.PossibleFinancialProjectTypes).Fetch(v => v.PossibleParents).ThenFetch(v => v.PossibleParent).Fetch(v => v.TransferTo).ThenFetch(v => v.TransferTo);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.BusinessUnitType>.Create(v => v.PossibleFinancialProjectTypes).Fetch(v => v.PossibleParents).ThenFetch(v => v.PossibleParent).Fetch(v => v.TransferTo).ThenFetch(v => v.TransferTo);
             }
             else
             {
@@ -359,23 +359,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Directories.CompanyLegalEntity> TryGetCompanyLegalEntityFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Directories.CompanyLegalEntity> TryGetCompanyLegalEntityFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.CompanyLegalEntity>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.CompanyLegalEntity>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.CompanyLegalEntity>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.CompanyLegalEntity>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.CompanyLegalEntity>.Create(v => v.BaseObj).Fetch(v => v.CurrentObj).Fetch(v => v.Parent);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.CompanyLegalEntity>.Create(v => v.BaseObj).Fetch(v => v.CurrentObj).Fetch(v => v.Parent);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.CompanyLegalEntity>.Create(v => v.Addresses).ThenFetch(v => v.CountryName).Fetch(v => v.Addresses).ThenFetch(v => v.LegalEntity).Fetch(v => v.BaseObj).Fetch(v => v.CurrentObj).Fetch(v => v.Parent);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.CompanyLegalEntity>.Create(v => v.Addresses).ThenFetch(v => v.CountryName).Fetch(v => v.Addresses).ThenFetch(v => v.LegalEntity).Fetch(v => v.BaseObj).Fetch(v => v.CurrentObj).Fetch(v => v.Parent);
             }
             else
             {
@@ -383,23 +383,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Directories.Country> TryGetCountryFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Directories.Country> TryGetCountryFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.Country>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.Country>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.Country>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.Country>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.Country>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.Country>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.Country>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.Country>.Empty;
             }
             else
             {
@@ -407,27 +407,27 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.CustomCompanyLegalEntity> TryGetCustomCompanyLegalEntityFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.CustomCompanyLegalEntity> TryGetCustomCompanyLegalEntityFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>.Create(v => v.BaseObj).Fetch(v => v.CurrentObj);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>.Create(v => v.BaseObj).Fetch(v => v.CurrentObj);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>.Create(v => v.BaseObj).Fetch(v => v.CurrentObj);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>.Create(v => v.BaseObj).Fetch(v => v.CurrentObj);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.ProjectionDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>.Create(v => v.BaseObj).Fetch(v => v.CurrentObj);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>.Create(v => v.BaseObj).Fetch(v => v.CurrentObj);
             }
             else
             {
@@ -435,23 +435,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.Employee> TryGetEmployeeFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.Employee> TryGetEmployeeFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.Employee>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.Employee>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.Employee>.Create(v => v.CoreBusinessUnit).Fetch(v => v.HRDepartment).ThenFetch(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.Employee>.Create(v => v.CoreBusinessUnit).Fetch(v => v.HRDepartment).ThenFetch(v => v.Location);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.Employee>.Create(v => v.CoreBusinessUnit).Fetch(v => v.EmployeeToEmployeeLinks).ThenFetch(v => v.LinkedEmployee).Fetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.ManagementUnit).Fetch(v => v.Position).Fetch(v => v.Ppm).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Ppm).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.RegistrationType).Fetch(v => v.Role).Fetch(v => v.RoleDegree).Fetch(v => v.VacationApprover).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.VacationApprover).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.Employee>.Create(v => v.CoreBusinessUnit).Fetch(v => v.EmployeeToEmployeeLinks).ThenFetch(v => v.LinkedEmployee).Fetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.ManagementUnit).Fetch(v => v.Position).Fetch(v => v.Ppm).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Ppm).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.RegistrationType).Fetch(v => v.Role).Fetch(v => v.RoleDegree).Fetch(v => v.VacationApprover).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.VacationApprover).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.Employee>.Create(v => v.CellPhones).Fetch(v => v.CoreBusinessUnit).Fetch(v => v.EmployeeToEmployeeLinks).ThenFetch(v => v.LinkedEmployee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.EmployeeToEmployeeLinks).ThenFetch(v => v.LinkedEmployee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.ManagementUnit).Fetch(v => v.PersonalCellPhones).Fetch(v => v.Position).Fetch(v => v.Ppm).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Ppm).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.RegistrationType).Fetch(v => v.Role).Fetch(v => v.RoleDegree).Fetch(v => v.Specializations).ThenFetch(v => v.Specialization).Fetch(v => v.VacationApprover).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.VacationApprover).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.Employee>.Create(v => v.CellPhones).Fetch(v => v.CoreBusinessUnit).Fetch(v => v.EmployeeToEmployeeLinks).ThenFetch(v => v.LinkedEmployee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.EmployeeToEmployeeLinks).ThenFetch(v => v.LinkedEmployee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.ManagementUnit).Fetch(v => v.PersonalCellPhones).Fetch(v => v.Position).Fetch(v => v.Ppm).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Ppm).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.RegistrationType).Fetch(v => v.Role).Fetch(v => v.RoleDegree).Fetch(v => v.Specializations).ThenFetch(v => v.Specialization).Fetch(v => v.VacationApprover).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.VacationApprover).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location);
             }
             else
             {
@@ -459,23 +459,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.EmployeeInformation> TryGetEmployeeInformationFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.EmployeeInformation> TryGetEmployeeInformationFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeInformation>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeInformation>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeInformation>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeInformation>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeInformation>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeInformation>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeInformation>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeInformation>.Empty;
             }
             else
             {
@@ -483,23 +483,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.EmployeePhoto> TryGetEmployeePhotoFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.EmployeePhoto> TryGetEmployeePhotoFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeePhoto>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeePhoto>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeePhoto>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeePhoto>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeePhoto>.Create(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeePhoto>.Create(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeePhoto>.Create(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeePhoto>.Create(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location);
             }
             else
             {
@@ -507,23 +507,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.EmployeePosition> TryGetEmployeePositionFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.EmployeePosition> TryGetEmployeePositionFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeePosition>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeePosition>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeePosition>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeePosition>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeePosition>.Create(v => v.Location).ThenFetch(v => v.Children);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeePosition>.Create(v => v.Location).ThenFetch(v => v.Children);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeePosition>.Create(v => v.Location).ThenFetch(v => v.Children);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeePosition>.Create(v => v.Location).ThenFetch(v => v.Children);
             }
             else
             {
@@ -531,23 +531,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.EmployeeRegistrationType> TryGetEmployeeRegistrationTypeFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.EmployeeRegistrationType> TryGetEmployeeRegistrationTypeFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRegistrationType>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRegistrationType>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRegistrationType>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRegistrationType>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRegistrationType>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRegistrationType>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRegistrationType>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRegistrationType>.Empty;
             }
             else
             {
@@ -555,23 +555,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.EmployeeRoleDegree> TryGetEmployeeRoleDegreeFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.EmployeeRoleDegree> TryGetEmployeeRoleDegreeFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRoleDegree>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRoleDegree>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRoleDegree>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRoleDegree>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRoleDegree>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRoleDegree>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRoleDegree>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRoleDegree>.Empty;
             }
             else
             {
@@ -579,23 +579,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.EmployeeRole> TryGetEmployeeRoleFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.EmployeeRole> TryGetEmployeeRoleFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRole>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRole>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRole>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRole>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRole>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRole>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRole>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeRole>.Empty;
             }
             else
             {
@@ -603,23 +603,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.EmployeeSpecialization> TryGetEmployeeSpecializationFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.EmployeeSpecialization> TryGetEmployeeSpecializationFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeSpecialization>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeSpecialization>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeSpecialization>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeSpecialization>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeSpecialization>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeSpecialization>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeSpecialization>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.EmployeeSpecialization>.Empty;
             }
             else
             {
@@ -627,23 +627,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.ForUpdate.Example1> TryGetExample1FetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.ForUpdate.Example1> TryGetExample1FetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ForUpdate.Example1>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ForUpdate.Example1>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ForUpdate.Example1>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ForUpdate.Example1>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ForUpdate.Example1>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ForUpdate.Example1>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ForUpdate.Example1>.Create(v => v.Items2);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ForUpdate.Example1>.Create(v => v.Items2);
             }
             else
             {
@@ -651,23 +651,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.HRDepartment.HRDepartment> TryGetHRDepartmentFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.HRDepartment.HRDepartment> TryGetHRDepartmentFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.HRDepartment.HRDepartment>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.HRDepartment.HRDepartment>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.HRDepartment.HRDepartment>.Create(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.HRDepartment.HRDepartment>.Create(v => v.Location);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.HRDepartment.HRDepartment>.Create(v => v.ApprovedBy).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.ApprovedBy).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.CompanyLegalEntity).Fetch(v => v.Head).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Head).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Location).ThenFetch(v => v.Children).Fetch(v => v.Parent).ThenFetch(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.HRDepartment.HRDepartment>.Create(v => v.ApprovedBy).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.ApprovedBy).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.CompanyLegalEntity).Fetch(v => v.Head).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Head).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Location).ThenFetch(v => v.Children).Fetch(v => v.Parent).ThenFetch(v => v.Location);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.HRDepartment.HRDepartment>.Create(v => v.ApprovedBy).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.ApprovedBy).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.BusinessUnitHrDepartments).ThenFetch(v => v.BusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.ApprovedBy).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.ApprovedBy).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Children).ThenFetch(v => v.BusinessUnitHrDepartments).ThenFetch(v => v.BusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.CompanyLegalEntity).Fetch(v => v.Children).ThenFetch(v => v.EmployeePositions).ThenFetch(v => v.EmployeePosition).Fetch(v => v.Children).ThenFetch(v => v.Head).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.Head).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Children).ThenFetch(v => v.HrDepartmentRoleEmployees).ThenFetch(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.HrDepartmentRoleEmployees).ThenFetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Children).ThenFetch(v => v.Location).ThenFetch(v => v.Children).Fetch(v => v.Children).ThenFetch(v => v.ManagementUnits).ThenFetch(v => v.ManagementUnit).Fetch(v => v.CompanyLegalEntity).Fetch(v => v.EmployeePositions).ThenFetch(v => v.EmployeePosition).Fetch(v => v.Head).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Head).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.HrDepartmentRoleEmployees).ThenFetch(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.HrDepartmentRoleEmployees).ThenFetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Location).ThenFetch(v => v.Children).Fetch(v => v.ManagementUnits).ThenFetch(v => v.ManagementUnit).Fetch(v => v.Parent).ThenFetch(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.HRDepartment.HRDepartment>.Create(v => v.ApprovedBy).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.ApprovedBy).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.BusinessUnitHrDepartments).ThenFetch(v => v.BusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.ApprovedBy).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.ApprovedBy).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Children).ThenFetch(v => v.BusinessUnitHrDepartments).ThenFetch(v => v.BusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.CompanyLegalEntity).Fetch(v => v.Children).ThenFetch(v => v.EmployeePositions).ThenFetch(v => v.EmployeePosition).Fetch(v => v.Children).ThenFetch(v => v.Head).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.Head).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Children).ThenFetch(v => v.HrDepartmentRoleEmployees).ThenFetch(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.HrDepartmentRoleEmployees).ThenFetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Children).ThenFetch(v => v.Location).ThenFetch(v => v.Children).Fetch(v => v.Children).ThenFetch(v => v.ManagementUnits).ThenFetch(v => v.ManagementUnit).Fetch(v => v.CompanyLegalEntity).Fetch(v => v.EmployeePositions).ThenFetch(v => v.EmployeePosition).Fetch(v => v.Head).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Head).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.HrDepartmentRoleEmployees).ThenFetch(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.HrDepartmentRoleEmployees).ThenFetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Location).ThenFetch(v => v.Children).Fetch(v => v.ManagementUnits).ThenFetch(v => v.ManagementUnit).Fetch(v => v.Parent).ThenFetch(v => v.Location);
             }
             else
             {
@@ -675,23 +675,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.IMRequest> TryGetIMRequestFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.IMRequest> TryGetIMRequestFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.IMRequest>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.IMRequest>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.IMRequest>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.IMRequest>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.IMRequest>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.IMRequest>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.IMRequest>.Create(v => v.OneToOneDetail).ThenFetch(v => v.Request);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.IMRequest>.Create(v => v.OneToOneDetail).ThenFetch(v => v.Request);
             }
             else
             {
@@ -699,23 +699,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.Information> TryGetInformationFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.Information> TryGetInformationFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.Information>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.Information>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.Information>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.Information>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.Information>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.Information>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.Information>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.Information>.Empty;
             }
             else
             {
@@ -723,23 +723,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1> TryGetIntegrationVersionContainer1FetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1> TryGetIntegrationVersionContainer1FetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>.Empty;
             }
             else
             {
@@ -747,23 +747,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2> TryGetIntegrationVersionContainer2FetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2> TryGetIntegrationVersionContainer2FetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>.Empty;
             }
             else
             {
@@ -771,23 +771,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.EnversBug1676.Location1676> TryGetLocation1676FetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.EnversBug1676.Location1676> TryGetLocation1676FetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.EnversBug1676.Location1676>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.EnversBug1676.Location1676>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.EnversBug1676.Location1676>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.EnversBug1676.Location1676>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.EnversBug1676.Location1676>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.EnversBug1676.Location1676>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.EnversBug1676.Location1676>.Create(v => v.Calendar);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.EnversBug1676.Location1676>.Create(v => v.Calendar);
             }
             else
             {
@@ -795,23 +795,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Directories.Location> TryGetLocationFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Directories.Location> TryGetLocationFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.Location>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.Location>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.Location>.Create(v => v.Children);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.Location>.Create(v => v.Children);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.Location>.Create(v => v.Children).Fetch(v => v.Country).Fetch(v => v.Parent).ThenFetch(v => v.Children);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.Location>.Create(v => v.Children).Fetch(v => v.Country).Fetch(v => v.Parent).ThenFetch(v => v.Children);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.Location>.Create(v => v.Children).ThenFetch(v => v.Children).Fetch(v => v.Children).ThenFetch(v => v.Country).Fetch(v => v.Country).Fetch(v => v.Parent).ThenFetch(v => v.Children);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Directories.Location>.Create(v => v.Children).ThenFetch(v => v.Children).Fetch(v => v.Children).ThenFetch(v => v.Country).Fetch(v => v.Country).Fetch(v => v.Parent).ThenFetch(v => v.Children);
             }
             else
             {
@@ -819,23 +819,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink> TryGetManagementUnitAndBusinessUnitLinkFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink> TryGetManagementUnitAndBusinessUnitLinkFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink>.Create(v => v.BusinessUnit).Fetch(v => v.ManagementUnit);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink>.Create(v => v.BusinessUnit).Fetch(v => v.ManagementUnit);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink>.Create(v => v.BusinessUnit).Fetch(v => v.ManagementUnit);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink>.Create(v => v.BusinessUnit).Fetch(v => v.ManagementUnit);
             }
             else
             {
@@ -843,23 +843,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink> TryGetManagementUnitAndHRDepartmentLinkFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink> TryGetManagementUnitAndHRDepartmentLinkFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>.Create(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.ManagementUnit);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>.Create(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.ManagementUnit);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>.Create(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.ManagementUnit);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>.Create(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.ManagementUnit);
             }
             else
             {
@@ -867,23 +867,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.MU.ManagementUnit> TryGetManagementUnitFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.MU.ManagementUnit> TryGetManagementUnitFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnit>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnit>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnit>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnit>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnit>.Create(v => v.Parent);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnit>.Create(v => v.Parent);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnit>.Create(v => v.BusinessUnits).ThenFetch(v => v.BusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.BusinessUnits).ThenFetch(v => v.BusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.HRDepartments).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.HRDepartments).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Parent);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.MU.ManagementUnit>.Create(v => v.BusinessUnits).ThenFetch(v => v.BusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.BusinessUnits).ThenFetch(v => v.BusinessUnit).Fetch(v => v.Children).ThenFetch(v => v.HRDepartments).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.HRDepartments).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Parent);
             }
             else
             {
@@ -891,23 +891,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping> TryGetManagementUnitFluentMappingFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping> TryGetManagementUnitFluentMappingFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping>.Create(v => v.Parent);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping>.Create(v => v.Parent);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping>.Create(v => v.Children).Fetch(v => v.Parent);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping>.Create(v => v.Children).Fetch(v => v.Parent);
             }
             else
             {
@@ -915,23 +915,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.ExternalPrincipal.Principal> TryGetPrincipalFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.ExternalPrincipal.Principal> TryGetPrincipalFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ExternalPrincipal.Principal>.Empty;
             }
             else
             {
@@ -939,23 +939,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.RoleRoleDegreeLink> TryGetRoleRoleDegreeLinkFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.RoleRoleDegreeLink> TryGetRoleRoleDegreeLinkFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.RoleRoleDegreeLink>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.RoleRoleDegreeLink>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.RoleRoleDegreeLink>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.RoleRoleDegreeLink>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.RoleRoleDegreeLink>.Create(v => v.AnotherRole).Fetch(v => v.Role).Fetch(v => v.RoleDegree);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.RoleRoleDegreeLink>.Create(v => v.AnotherRole).Fetch(v => v.Role).Fetch(v => v.RoleDegree);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.RoleRoleDegreeLink>.Create(v => v.AnotherRole).Fetch(v => v.Role).Fetch(v => v.RoleDegree);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.RoleRoleDegreeLink>.Create(v => v.AnotherRole).Fetch(v => v.Role).Fetch(v => v.RoleDegree);
             }
             else
             {
@@ -963,23 +963,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.SqlParserTestObjContainer> TryGetSqlParserTestObjContainerFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.SqlParserTestObjContainer> TryGetSqlParserTestObjContainerFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.SqlParserTestObjContainer>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.SqlParserTestObjContainer>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.SqlParserTestObjContainer>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.SqlParserTestObjContainer>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.SqlParserTestObjContainer>.Create(v => v.IncludedObject);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.SqlParserTestObjContainer>.Create(v => v.IncludedObject);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.SqlParserTestObjContainer>.Create(v => v.IncludedObject);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.SqlParserTestObjContainer>.Create(v => v.IncludedObject);
             }
             else
             {
@@ -987,23 +987,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.SqlParserTestObj> TryGetSqlParserTestObjFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.SqlParserTestObj> TryGetSqlParserTestObjFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.SqlParserTestObj>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.SqlParserTestObj>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.SqlParserTestObj>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.SqlParserTestObj>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.SqlParserTestObj>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.SqlParserTestObj>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.SqlParserTestObj>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.SqlParserTestObj>.Empty;
             }
             else
             {
@@ -1011,27 +1011,27 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestBusinessUnit> TryGetTestBusinessUnitFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestBusinessUnit> TryGetTestBusinessUnitFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestBusinessUnit>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestBusinessUnit>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestBusinessUnit>.Create(v => v.BusinessUnitEmployeeRoles).ThenFetch(v => v.Employee).Fetch(v => v.Parent_Auto);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestBusinessUnit>.Create(v => v.BusinessUnitEmployeeRoles).ThenFetch(v => v.Employee).Fetch(v => v.Parent_Auto);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestBusinessUnit>.Create(v => v.BusinessUnitEmployeeRoles).ThenFetch(v => v.Employee).Fetch(v => v.Parent_Auto);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestBusinessUnit>.Create(v => v.BusinessUnitEmployeeRoles).ThenFetch(v => v.Employee).Fetch(v => v.Parent_Auto);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestBusinessUnit>.Create(v => v.BusinessUnitEmployeeRoles).ThenFetch(v => v.Employee).Fetch(v => v.Parent_Auto);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestBusinessUnit>.Create(v => v.BusinessUnitEmployeeRoles).ThenFetch(v => v.Employee).Fetch(v => v.Parent_Auto);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.ProjectionDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestBusinessUnit>.Create(v => v.BusinessUnitEmployeeRoles).ThenFetch(v => v.Employee).Fetch(v => v.Parent_Auto);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestBusinessUnit>.Create(v => v.BusinessUnitEmployeeRoles).ThenFetch(v => v.Employee).Fetch(v => v.Parent_Auto);
             }
             else
             {
@@ -1039,23 +1039,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestCustomContextSecurityObj> TryGetTestCustomContextSecurityObjFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestCustomContextSecurityObj> TryGetTestCustomContextSecurityObjFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestCustomContextSecurityObj>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestCustomContextSecurityObj>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestCustomContextSecurityObj>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestCustomContextSecurityObj>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestCustomContextSecurityObj>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestCustomContextSecurityObj>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestCustomContextSecurityObj>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestCustomContextSecurityObj>.Empty;
             }
             else
             {
@@ -1063,27 +1063,27 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection> TryGetTestCustomContextSecurityObjProjectionFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection> TryGetTestCustomContextSecurityObjProjectionFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.ProjectionDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>.Empty;
             }
             else
             {
@@ -1091,27 +1091,27 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestDepartment> TryGetTestDepartmentFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestDepartment> TryGetTestDepartmentFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestDepartment>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestDepartment>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestDepartment>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestDepartment>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestDepartment>.Create(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestDepartment>.Create(v => v.Location);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestDepartment>.Create(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestDepartment>.Create(v => v.Location);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.ProjectionDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestDepartment>.Create(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestDepartment>.Create(v => v.Location);
             }
             else
             {
@@ -1119,27 +1119,27 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestEmployee> TryGetTestEmployeeFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestEmployee> TryGetTestEmployeeFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestEmployee>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestEmployee>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestEmployee>.Create(v => v.CoreBusinessUnit_Auto).Fetch(v => v.Position_Auto).Fetch(v => v.Ppm_Auto).Fetch(v => v.Role_Auto);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestEmployee>.Create(v => v.CoreBusinessUnit_Auto).Fetch(v => v.Position_Auto).Fetch(v => v.Ppm_Auto).Fetch(v => v.Role_Auto);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestEmployee>.Create(v => v.CoreBusinessUnit).Fetch(v => v.CoreBusinessUnit_Auto).Fetch(v => v.Position_Auto).Fetch(v => v.Ppm_Auto).Fetch(v => v.Role_Auto);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestEmployee>.Create(v => v.CoreBusinessUnit).Fetch(v => v.CoreBusinessUnit_Auto).Fetch(v => v.Position_Auto).Fetch(v => v.Ppm_Auto).Fetch(v => v.Role_Auto);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestEmployee>.Create(v => v.CoreBusinessUnit).Fetch(v => v.CoreBusinessUnit_Auto).ThenFetch(v => v.Projects_Last_CoreBusinessUnitProjects).Fetch(v => v.Position_Auto).Fetch(v => v.Ppm_Auto).Fetch(v => v.Role_Auto);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestEmployee>.Create(v => v.CoreBusinessUnit).Fetch(v => v.CoreBusinessUnit_Auto).ThenFetch(v => v.Projects_Last_CoreBusinessUnitProjects).Fetch(v => v.Position_Auto).Fetch(v => v.Ppm_Auto).Fetch(v => v.Role_Auto);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.ProjectionDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestEmployee>.Create(v => v.CoreBusinessUnit).Fetch(v => v.CoreBusinessUnit_Auto).ThenFetch(v => v.Projects_Last_CoreBusinessUnitProjects).Fetch(v => v.Position_Auto).Fetch(v => v.Ppm_Auto).Fetch(v => v.Role_Auto);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestEmployee>.Create(v => v.CoreBusinessUnit).Fetch(v => v.CoreBusinessUnit_Auto).ThenFetch(v => v.Projects_Last_CoreBusinessUnitProjects).Fetch(v => v.Position_Auto).Fetch(v => v.Ppm_Auto).Fetch(v => v.Role_Auto);
             }
             else
             {
@@ -1147,23 +1147,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestImmutableObj> TryGetTestImmutableObjFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestImmutableObj> TryGetTestImmutableObjFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestImmutableObj>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestImmutableObj>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestImmutableObj>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestImmutableObj>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestImmutableObj>.Create(v => v.TestImmutableRefProperty).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.TestImmutableRefProperty).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestImmutableObj>.Create(v => v.TestImmutableRefProperty).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.TestImmutableRefProperty).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestImmutableObj>.Create(v => v.TestImmutableRefProperty).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.TestImmutableRefProperty).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestImmutableObj>.Create(v => v.TestImmutableRefProperty).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.TestImmutableRefProperty).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location);
             }
             else
             {
@@ -1171,27 +1171,27 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestIMRequest> TryGetTestIMRequestFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestIMRequest> TryGetTestIMRequestFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestIMRequest>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestIMRequest>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestIMRequest>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestIMRequest>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestIMRequest>.Create(v => v.OneToOneDetail);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestIMRequest>.Create(v => v.OneToOneDetail);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestIMRequest>.Create(v => v.OneToOneDetail);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestIMRequest>.Create(v => v.OneToOneDetail);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.ProjectionDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestIMRequest>.Create(v => v.OneToOneDetail);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestIMRequest>.Create(v => v.OneToOneDetail);
             }
             else
             {
@@ -1199,27 +1199,27 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestLegacyEmployee> TryGetTestLegacyEmployeeFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestLegacyEmployee> TryGetTestLegacyEmployeeFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLegacyEmployee>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLegacyEmployee>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLegacyEmployee>.Create(v => v.Role_Auto);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLegacyEmployee>.Create(v => v.Role_Auto);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLegacyEmployee>.Create(v => v.Role_Auto);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLegacyEmployee>.Create(v => v.Role_Auto);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLegacyEmployee>.Create(v => v.Role_Auto);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLegacyEmployee>.Create(v => v.Role_Auto);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.ProjectionDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLegacyEmployee>.Create(v => v.Role_Auto);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLegacyEmployee>.Create(v => v.Role_Auto);
             }
             else
             {
@@ -1227,27 +1227,27 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestLocationCollectionProperties> TryGetTestLocationCollectionPropertiesFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestLocationCollectionProperties> TryGetTestLocationCollectionPropertiesFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocationCollectionProperties>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocationCollectionProperties>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocationCollectionProperties>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocationCollectionProperties>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocationCollectionProperties>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocationCollectionProperties>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocationCollectionProperties>.Create(v => v.Children);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocationCollectionProperties>.Create(v => v.Children);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.ProjectionDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocationCollectionProperties>.Create(v => v.Children);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocationCollectionProperties>.Create(v => v.Children);
             }
             else
             {
@@ -1255,27 +1255,27 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestLocation> TryGetTestLocationFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestLocation> TryGetTestLocationFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocation>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocation>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocation>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocation>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocation>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocation>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocation>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocation>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.ProjectionDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocation>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestLocation>.Empty;
             }
             else
             {
@@ -1283,27 +1283,27 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection> TryGetTestManualEmployeeProjectionFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection> TryGetTestManualEmployeeProjectionFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.ProjectionDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>.Empty;
             }
             else
             {
@@ -1311,23 +1311,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject> TryGetTestPerformanceObjectFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject> TryGetTestPerformanceObjectFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>.Create(v => v.BusinessUnit).Fetch(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Location).ThenFetch(v => v.Children).Fetch(v => v.ManagementUnit);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>.Create(v => v.BusinessUnit).Fetch(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Location).ThenFetch(v => v.Children).Fetch(v => v.ManagementUnit);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>.Create(v => v.BusinessUnit).Fetch(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Location).ThenFetch(v => v.Children).Fetch(v => v.ManagementUnit);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>.Create(v => v.BusinessUnit).Fetch(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Location).ThenFetch(v => v.Children).Fetch(v => v.ManagementUnit);
             }
             else
             {
@@ -1335,23 +1335,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject> TryGetTestPlainAuthObjectFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject> TryGetTestPlainAuthObjectFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject>.Create(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Location).ThenFetch(v => v.Children);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject>.Create(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Location).ThenFetch(v => v.Children);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject>.Create(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Items).ThenFetch(v => v.BusinessUnit).Fetch(v => v.Items).ThenFetch(v => v.ManagementUnit).Fetch(v => v.Location).ThenFetch(v => v.Children);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject>.Create(v => v.Employee).ThenFetch(v => v.CoreBusinessUnit).Fetch(v => v.Employee).ThenFetch(v => v.HRDepartment).ThenFetch(v => v.Location).Fetch(v => v.Items).ThenFetch(v => v.BusinessUnit).Fetch(v => v.Items).ThenFetch(v => v.ManagementUnit).Fetch(v => v.Location).ThenFetch(v => v.Children);
             }
             else
             {
@@ -1359,23 +1359,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.TestRestrictionObject> TryGetTestRestrictionObjectFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Employee.TestRestrictionObject> TryGetTestRestrictionObjectFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.TestRestrictionObject>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.TestRestrictionObject>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.TestRestrictionObject>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.TestRestrictionObject>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.TestRestrictionObject>.Create(v => v.BusinessUnit);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.TestRestrictionObject>.Create(v => v.BusinessUnit);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.TestRestrictionObject>.Create(v => v.BusinessUnit);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Employee.TestRestrictionObject>.Create(v => v.BusinessUnit);
             }
             else
             {
@@ -1383,23 +1383,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestDependency.TestRootSecurityObj> TryGetTestRootSecurityObjFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestDependency.TestRootSecurityObj> TryGetTestRootSecurityObjFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestRootSecurityObj>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestRootSecurityObj>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestRootSecurityObj>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestRootSecurityObj>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestRootSecurityObj>.Create(v => v.BusinessUnit).Fetch(v => v.Location).ThenFetch(v => v.Children).Fetch(v => v.ManagementUnitFluentMapping);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestRootSecurityObj>.Create(v => v.BusinessUnit).Fetch(v => v.Location).ThenFetch(v => v.Children).Fetch(v => v.ManagementUnitFluentMapping);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestRootSecurityObj>.Create(v => v.BusinessUnit).Fetch(v => v.Items).ThenFetch(v => v.Items).Fetch(v => v.Items).ThenFetch(v => v.Items2).ThenFetch(v => v.InnerMaster).ThenFetch(v => v.FirstMaster).Fetch(v => v.Items).ThenFetch(v => v.Items3).Fetch(v => v.Location).ThenFetch(v => v.Children).Fetch(v => v.ManagementUnitFluentMapping);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestRootSecurityObj>.Create(v => v.BusinessUnit).Fetch(v => v.Items).ThenFetch(v => v.Items).Fetch(v => v.Items).ThenFetch(v => v.Items2).ThenFetch(v => v.InnerMaster).ThenFetch(v => v.FirstMaster).Fetch(v => v.Items).ThenFetch(v => v.Items3).Fetch(v => v.Location).ThenFetch(v => v.Children).Fetch(v => v.ManagementUnitFluentMapping);
             }
             else
             {
@@ -1407,23 +1407,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestDependency.TestSecurityObjItem> TryGetTestSecurityObjItemFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestDependency.TestSecurityObjItem> TryGetTestSecurityObjItemFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecurityObjItem>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecurityObjItem>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecurityObjItem>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecurityObjItem>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecurityObjItem>.Create(v => v.FirstMaster);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecurityObjItem>.Create(v => v.FirstMaster);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecurityObjItem>.Create(v => v.FirstMaster).Fetch(v => v.Items).Fetch(v => v.Items2).ThenFetch(v => v.InnerMaster).ThenFetch(v => v.FirstMaster).Fetch(v => v.Items3);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecurityObjItem>.Create(v => v.FirstMaster).Fetch(v => v.Items).Fetch(v => v.Items2).ThenFetch(v => v.InnerMaster).ThenFetch(v => v.FirstMaster).Fetch(v => v.Items3);
             }
             else
             {
@@ -1431,27 +1431,27 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestSecurityObjItemProjection> TryGetTestSecurityObjItemProjectionFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.Projections.TestSecurityObjItemProjection> TryGetTestSecurityObjItemProjectionFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.ProjectionDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>.Empty;
             }
             else
             {
@@ -1459,23 +1459,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2> TryGetTestSecuritySubObjItem2FetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2> TryGetTestSecuritySubObjItem2FetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2>.Create(v => v.InnerMaster).ThenFetch(v => v.FirstMaster);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2>.Create(v => v.InnerMaster).ThenFetch(v => v.FirstMaster);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2>.Create(v => v.InnerMaster).ThenFetch(v => v.FirstMaster);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2>.Create(v => v.InnerMaster).ThenFetch(v => v.FirstMaster);
             }
             else
             {
@@ -1483,23 +1483,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3> TryGetTestSecuritySubObjItem3FetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3> TryGetTestSecuritySubObjItem3FetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3>.Create(v => v.InnerMaster);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3>.Create(v => v.InnerMaster);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3>.Create(v => v.InnerMaster);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3>.Create(v => v.InnerMaster);
             }
             else
             {
@@ -1507,23 +1507,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem> TryGetTestSecuritySubObjItemFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem> TryGetTestSecuritySubObjItemFetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem>.Create(v => v.InnerMaster);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem>.Create(v => v.InnerMaster);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem>.Create(v => v.InnerMaster);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem>.Create(v => v.InnerMaster);
             }
             else
             {
@@ -1531,23 +1531,23 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676> TryGetWorkingCalendar1676FetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
+        protected virtual Anch.GenericQueryable.Fetching.PropertyFetchRule<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676> TryGetWorkingCalendar1676FetchRule(Framework.BLL.Domain.DTO.ViewDTOType dtoType)
         {
             if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.VisualDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.SimpleDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>.Empty;
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>.Empty;
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.FullDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>.Create(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>.Create(v => v.Location);
             }
             else if ((dtoType == Framework.BLL.Domain.DTO.ViewDTOType.RichDTO))
             {
-                return GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>.Create(v => v.Location);
+                return Anch.GenericQueryable.Fetching.FetchRule<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>.Create(v => v.Location);
             }
             else
             {

@@ -5,7 +5,7 @@ using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.HRDepartment;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace SampleSystem.Domain.Employee;
 

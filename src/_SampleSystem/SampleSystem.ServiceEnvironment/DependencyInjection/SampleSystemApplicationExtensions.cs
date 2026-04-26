@@ -1,4 +1,4 @@
-﻿using CommonFramework.RelativePath.DependencyInjection;
+﻿using Anch.RelativePath.DependencyInjection;
 
 using Framework.Core.TypeResolving;
 using Framework.Infrastructure.DependencyInjection;

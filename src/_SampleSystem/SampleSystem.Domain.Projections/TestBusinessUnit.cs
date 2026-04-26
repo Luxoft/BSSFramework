@@ -1,4 +1,4 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 
 namespace SampleSystem.Domain.Projections;
 

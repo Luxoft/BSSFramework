@@ -2,7 +2,7 @@
 using Bss.Platform.Api.Middlewares;
 using Bss.Platform.Logging;
 
-using CommonFramework.DependencyInjection;
+using Anch.DependencyInjection;
 
 using Framework.Infrastructure.JsonConverter;
 using Framework.Infrastructure.Middleware;
@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 using SampleSystem.WebApiCore.DependencyInjection;
 
-using SecuritySystem.Configurator;
+using Anch.SecuritySystem.Configurator;
 
 namespace SampleSystem.WebApiCore;
 

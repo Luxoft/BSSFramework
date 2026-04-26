@@ -1,7 +1,7 @@
 ﻿using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 
-using SecuritySystem.SecurityRuleInfo;
+using Anch.SecuritySystem.SecurityRuleInfo;
 
 using Swashbuckle.AspNetCore.SwaggerGen;
 

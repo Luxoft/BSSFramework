@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-using CommonFramework.DependencyInjection;
+using Anch.DependencyInjection;
 
 using Framework.Application.Lock;
 

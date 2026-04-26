@@ -6,7 +6,7 @@ using Framework.Restriction;
 
 using SampleSystem.Domain.Enums;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace SampleSystem.Domain.Directories;
 

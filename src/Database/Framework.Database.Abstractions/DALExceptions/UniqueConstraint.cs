@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-using CommonFramework;
+using Anch.Core;
 
 namespace Framework.Database.DALExceptions;
 

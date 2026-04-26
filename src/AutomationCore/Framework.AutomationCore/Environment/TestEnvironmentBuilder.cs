@@ -1,4 +1,4 @@
-﻿using CommonFramework.DependencyInjection;
+﻿using Anch.DependencyInjection;
 
 using Framework.AutomationCore.Extensions;
 using Framework.AutomationCore.ServiceProviderPool;

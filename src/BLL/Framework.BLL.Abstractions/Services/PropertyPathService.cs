@@ -3,7 +3,7 @@ using System.Collections.Immutable;
 
 using System.Reflection;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.BLL.Extensions;

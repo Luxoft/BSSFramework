@@ -1,8 +1,8 @@
 ﻿using Framework.Application.Repository;
 
-using GenericQueryable;
+using Anch.GenericQueryable;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Employee;

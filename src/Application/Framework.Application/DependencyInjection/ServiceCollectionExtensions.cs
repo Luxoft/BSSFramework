@@ -1,4 +1,4 @@
-﻿using CommonFramework.DependencyInjection;
+﻿using Anch.DependencyInjection;
 
 using Framework.Application.Events;
 using Framework.Application.FinancialYear;
@@ -11,7 +11,7 @@ using Framework.Database;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.Application.DependencyInjection;
 

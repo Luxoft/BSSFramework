@@ -1,6 +1,6 @@
 ﻿using Framework.Authorization.Domain;
 
-using SecuritySystem.GeneralPermission.Validation;
+using Anch.SecuritySystem.GeneralPermission.Validation;
 
 namespace Framework.Authorization.Environment;
 

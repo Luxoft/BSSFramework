@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-using SecuritySystem;
-using SecuritySystem.AccessDenied;
-using SecuritySystem.DomainServices;
-using SecuritySystem.Providers;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.AccessDenied;
+using Anch.SecuritySystem.DomainServices;
+using Anch.SecuritySystem.Providers;
 
 namespace Framework.BLL.Services;
 

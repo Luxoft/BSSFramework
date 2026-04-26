@@ -4,9 +4,9 @@ using Framework.Application;
 using Framework.BLL.Domain.Models;
 using Framework.Database;
 
-using GenericQueryable.Fetching;
+using Anch.GenericQueryable.Fetching;
 
-using OData.Domain;
+using Anch.OData.Domain;
 
 namespace Framework.BLL;
 

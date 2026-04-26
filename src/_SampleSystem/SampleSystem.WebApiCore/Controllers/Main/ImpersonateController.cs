@@ -2,7 +2,7 @@
 using Framework.Application.Repository;
 using Framework.Database;
 
-using GenericQueryable;
+using Anch.GenericQueryable;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;

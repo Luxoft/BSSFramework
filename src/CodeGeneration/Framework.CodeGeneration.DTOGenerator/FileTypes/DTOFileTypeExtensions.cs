@@ -1,6 +1,6 @@
 ﻿using System.CodeDom;
 
-using CommonFramework;
+using Anch.Core;
 
 namespace Framework.CodeGeneration.DTOGenerator.FileTypes;
 

@@ -1,8 +1,8 @@
-﻿using CommonFramework;
+﻿using Anch.Core;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.FileStore;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.Configuration.FileStore;
 

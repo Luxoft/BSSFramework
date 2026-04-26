@@ -1,8 +1,8 @@
 ﻿using System.Linq.Expressions;
 
-using GenericQueryable.Fetching;
+using Anch.GenericQueryable.Fetching;
 
-using OData.Domain;
+using Anch.OData.Domain;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Models.Filters;

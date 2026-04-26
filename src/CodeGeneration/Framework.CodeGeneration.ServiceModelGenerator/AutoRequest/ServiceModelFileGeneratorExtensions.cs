@@ -1,7 +1,7 @@
 ﻿using System.CodeDom;
 using System.Runtime.Serialization;
 
-using CommonFramework;
+using Anch.Core;
 
 using Framework.BLL.DTOMapping.Domain;
 using Framework.CodeDom.Extensions;

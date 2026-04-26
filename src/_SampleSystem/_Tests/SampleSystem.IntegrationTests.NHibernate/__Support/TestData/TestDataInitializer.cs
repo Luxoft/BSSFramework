@@ -7,9 +7,9 @@ using SampleSystem.Domain.Inline;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
 
-using SecuritySystem;
-using SecuritySystem.Services;
-using SecuritySystem.Testing;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.Services;
+using Anch.SecuritySystem.Testing;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData;
 

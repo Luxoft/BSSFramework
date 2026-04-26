@@ -1,4 +1,4 @@
-﻿using GenericQueryable.Fetching;
+﻿using Anch.GenericQueryable.Fetching;
 
 using SampleSystem.Domain.Models.Filters;
 using SampleSystem.Domain.Projections;

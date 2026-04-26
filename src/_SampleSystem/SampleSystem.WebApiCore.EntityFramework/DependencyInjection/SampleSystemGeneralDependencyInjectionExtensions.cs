@@ -1,4 +1,4 @@
-﻿using CommonFramework.DependencyInjection;
+﻿using Anch.DependencyInjection;
 
 using Framework.Database.EntityFramework.DependencyInjection;
 using Framework.Infrastructure.DependencyInjection;
@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 using SampleSystem.WebApiCore.Domain;
 
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace SampleSystem.WebApiCore.DependencyInjection;
 

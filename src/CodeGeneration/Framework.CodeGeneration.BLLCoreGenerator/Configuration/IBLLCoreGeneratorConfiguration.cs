@@ -1,7 +1,7 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
 using Framework.CodeGeneration.Configuration;
-using SecuritySystem;
+using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 

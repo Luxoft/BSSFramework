@@ -15,7 +15,7 @@ using Anch.SecuritySystem.Notification.Domain;
 
 namespace SampleSystem.IntegrationTests;
 
-public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
+public class GetNotificationPrincipalsByHierarchicalContextTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private BusinessUnitIdentityDTO rootBusinessUnit;
 

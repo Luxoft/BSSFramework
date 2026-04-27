@@ -7,7 +7,7 @@ using SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersisten
 
 namespace SampleSystem.IntegrationTests;
 
-public class SubscriptionCustomNotPersistentModelTests : TestBase
+public class SubscriptionCustomNotPersistentModelTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void CustomNotPersistentNotificationModel_Always_ShouldNotThrowException()

@@ -4,7 +4,7 @@ using ValidationException = Framework.Validation.ValidationException;
 
 namespace SampleSystem.IntegrationTests;
 
-public class ValidationTests : TestBase
+public class ValidationTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void ValidateByDB_ValidationException()

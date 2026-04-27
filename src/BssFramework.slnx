@@ -8,8 +8,7 @@
     <Project Path="Application/Framework.Application/Framework.Application.csproj" />
   </Folder>
   <Folder Name="/AutomationCore/">
-    <Project Path="AutomationCore/Framework.AutomationCore.ServiceEnvironment.LegacyContext/Framework.AutomationCore.ServiceEnvironment.LegacyContext.csproj" />
-    <Project Path="AutomationCore/Framework.AutomationCore.ServiceEnvironment/Framework.AutomationCore.ServiceEnvironment.csproj" />
+    <Project Path="AutomationCore/Framework.AutomationCore.Legacy/Framework.AutomationCore.Legacy.csproj" />
     <Project Path="AutomationCore/Framework.AutomationCore.Xunit/Framework.AutomationCore.Xunit.csproj" />
     <Project Path="AutomationCore/Framework.AutomationCore/Framework.AutomationCore.csproj" />
   </Folder>
@@ -184,7 +183,6 @@
     <Project Path="_SampleSystem/_Tests/SampleSystem.CodeGenerate/SampleSystem.CodeGenerate.csproj" />
     <Project Path="_SampleSystem/_Tests/SampleSystem.DbGenerate.NHibernate/SampleSystem.DbGenerate.NHibernate.csproj" />
     <Project Path="_SampleSystem/_Tests/SampleSystem.IntegrationTests.NHibernate/SampleSystem.IntegrationTests.NHibernate.csproj" />
-    <Project Path="_SampleSystem/_Tests/SampleSystem.IntegrationTests.Xunit.NHibernate/SampleSystem.IntegrationTests.Xunit.NHibernate.csproj" />
     <Project Path="_SampleSystem/_Tests/SampleSystem.UnitTests/SampleSystem.UnitTests.csproj" />
   </Folder>
 
@@ -193,6 +191,7 @@
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
   </Folder>
+  <Project Path="Anch.Testing.Database.Mssql/Anch.Testing.Database.Mssql.csproj" />
   
   <Project Path="Framework.Core/Framework.Core.csproj" />
   <Project Path="Framework.DependencyInjection/Framework.DependencyInjection.csproj" />

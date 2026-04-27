@@ -12,7 +12,7 @@ using Anch.SecuritySystem.AccessDenied;
 
 namespace SampleSystem.IntegrationTests;
 
-public class WrongSecurityMessageTests : TestBase
+public class WrongSecurityMessageTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private static readonly string TestPrincipalName = TextRandomizer.RandomString(10);
 

@@ -3,7 +3,7 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-public class RepositoryWithoutSecurityTests : TestBase
+public class RepositoryWithoutSecurityTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public async Task GetDataFromUnsecurityRepository_DataLoaded()

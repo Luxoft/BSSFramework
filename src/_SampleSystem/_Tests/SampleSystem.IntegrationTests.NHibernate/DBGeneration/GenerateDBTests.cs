@@ -5,7 +5,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 
-public class GenerateDBTests : TestBase
+public class GenerateDBTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void GenerateDB_SecondTime_ShouldNotFail()

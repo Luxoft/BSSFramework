@@ -13,7 +13,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class CurrentUserSingleRelativePathTests : TestBase
+public class CurrentUserSingleRelativePathTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private Guid[] testObjectIdents;
 

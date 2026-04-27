@@ -433,9 +433,9 @@ public partial class DataHelper
 
                                       if (legal == null)
                                       {
-                                          CompanyLegalEntity parentDomainObject = (parent == null)
-                                                                                          ? null
-                                                                                          : context.Logics.CompanyLegalEntity.GetById(parent.Value.Id);
+                                          var parentDomainObject = (parent == null)
+                                                                       ? null
+                                                                       : context.Logics.CompanyLegalEntity.GetById(parent.Value.Id);
 
                                           legal = new CompanyLegalEntity
                                                   {

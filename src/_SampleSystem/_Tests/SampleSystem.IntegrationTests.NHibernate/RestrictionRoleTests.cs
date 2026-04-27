@@ -14,7 +14,7 @@ using Anch.SecuritySystem.Validation;
 
 namespace SampleSystem.IntegrationTests;
 
-public class RestrictionRoleTests : TestBase
+public class RestrictionRoleTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void GetRestrictionObjectsWithRestrictionRole_RestrictionApplied()

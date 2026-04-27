@@ -7,7 +7,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class InformationTest : TestBase
+public class InformationTest(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void CreateAndRemoveInformation_ContainsIntegrationEvents()

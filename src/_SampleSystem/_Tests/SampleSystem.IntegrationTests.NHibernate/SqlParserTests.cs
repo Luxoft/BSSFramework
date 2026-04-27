@@ -9,7 +9,7 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-public class SqlParserTests : TestBase
+public class SqlParserTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void SaveNullIntoNotNullProperty_RequiredConstraintDALException()
@@ -18,7 +18,7 @@ public class SqlParserTests : TestBase
         var testObject = new SqlParserTestObj();
 
         // Act
-        Action action = () => this.EvaluateWrite(context => { context.Logics.SqlParserTestObj.Save(testObject); });
+        var action = () => this.EvaluateWrite(context => { context.Logics.SqlParserTestObj.Save(testObject); });
 
         // Assert
         Assert.Contains("The field \'notNullColumn\' of type SqlParserTestObj must be initialized", Assert.Throws<RequiredConstraintDALException>(action).Message);
@@ -32,7 +32,7 @@ public class SqlParserTests : TestBase
         var testObject2 = new SqlParserTestObj { UniqueColumn = "1", NotNullColumn = "2" };
 
         // Act
-        Action action = () => this.EvaluateWrite(
+        var action = () => this.EvaluateWrite(
                                                  context =>
                                                  {
                                                      context.Logics.SqlParserTestObj.Save(testObject1);
@@ -58,7 +58,7 @@ public class SqlParserTests : TestBase
                            });
 
         // Act
-        Action action = () => this.EvaluateWrite(
+        var action = () => this.EvaluateWrite(
                                                  context =>
                                                  {
                                                      context.Logics.SqlParserTestObj.Remove(testObject);
@@ -95,7 +95,7 @@ public class SqlParserTests : TestBase
         var fullEmployee = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
 
         // Act
-        Action action = () => hRDepartmentController.Evaluate(c => c.RemoveHRDepartment(fullEmployee.HRDepartment.Identity));
+        var action = () => hRDepartmentController.Evaluate(c => c.RemoveHRDepartment(fullEmployee.HRDepartment.Identity));
 
         // Assert
         Assert.Equal($"{nameof(HRDepartment)} cannot be removed because it is used in {nameof(Employee)}", Assert.Throws<RemoveLinkedObjectsDALException>(action).Message);

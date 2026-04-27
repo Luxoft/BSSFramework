@@ -9,7 +9,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests.Subscriptions_Metadata;
 
-public sealed class MetadataSubscriptionSystemServiceTests : TestBase
+public sealed class MetadataSubscriptionSystemServiceTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     public MetadataSubscriptionSystemServiceTests() => this.GetNotifications().Clear();
 

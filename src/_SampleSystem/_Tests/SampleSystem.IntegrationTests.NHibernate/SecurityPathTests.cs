@@ -12,7 +12,7 @@ using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
-public class SecurityPathTests : TestBase
+public class SecurityPathTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void SecurityPathWithContext_EmployeeWithoutContextRestrictions_EmployeeShouldHaveAccess()

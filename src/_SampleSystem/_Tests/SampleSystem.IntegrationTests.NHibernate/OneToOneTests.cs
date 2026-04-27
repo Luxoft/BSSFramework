@@ -7,7 +7,7 @@ using SampleSystem.WebApiCore.Controllers.MainQuery;
 
 namespace SampleSystem.IntegrationTests;
 
-public class OneToOneTests : TestBase
+public class OneToOneTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void GetRequestProjection_ContainsOneToOneDetail_Initialized()

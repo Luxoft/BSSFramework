@@ -9,7 +9,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class CurrentUserSourceTests : TestBase
+public class CurrentUserSourceTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void TryGetCurrentUserWithEmployee_CurrentUserResolved()

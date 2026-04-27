@@ -12,7 +12,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class NhibArrayContainsTest : TestBase
+public class NhibArrayContainsTest(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void LinqContainsOverArray_TranslatedAndExecutedCorrectly()

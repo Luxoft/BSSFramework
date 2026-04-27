@@ -11,7 +11,7 @@ using DelegateToItemModelStrictDTO = Framework.Authorization.Generated.DTO.Deleg
 
 namespace SampleSystem.IntegrationTests.Auth;
 
-public class PrincipalTests : TestBase
+public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private const string Name = "luxoft\\Login";
     private const string NewName = "luxoft\\ChangeLogin";

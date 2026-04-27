@@ -9,7 +9,7 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-public class UpdateTests : TestBase
+public class UpdateTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void ExampleContainer_UpdatePropertyChanged1()

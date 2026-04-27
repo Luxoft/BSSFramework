@@ -4,7 +4,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests.NH;
 
-public class FullTextSearchTests : TestBase
+public class FullTextSearchTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     /// <summary>
     /// Тест предназначен для проверки работоспособности диалекта NHibernate,

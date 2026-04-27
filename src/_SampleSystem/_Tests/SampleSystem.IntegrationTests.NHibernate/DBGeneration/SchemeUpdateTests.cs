@@ -3,7 +3,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 
-public class SchemeUpdateTests : TestBase
+public class SchemeUpdateTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void SchemeUpdate_ExistsDatabase_ShouldNotFail()

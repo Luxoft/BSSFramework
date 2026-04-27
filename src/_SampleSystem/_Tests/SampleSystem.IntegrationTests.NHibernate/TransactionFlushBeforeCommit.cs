@@ -7,7 +7,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class TransactionFlushBeforeCommit : TestBase
+public class TransactionFlushBeforeCommit(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void ShouldNotConsiderChangesWhileTransactionIsNotCommited()

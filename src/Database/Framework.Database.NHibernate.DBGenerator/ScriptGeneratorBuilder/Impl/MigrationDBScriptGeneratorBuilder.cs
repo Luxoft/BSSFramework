@@ -134,19 +134,16 @@ internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuil
         {
             try
             {
-                using (var connection = context.SqlDatabaseFactory.Server.ConnectionContext.SqlConnectionObject)
-                {
-                    connection.Open();
-                    ////var nextCommandText = commandText.Replace("GO", string.Empty);
-                    var replaceTargetDBText = commandText.Replace("$Database", context.DatabaseName.Name);
+                using var connection = context.SqlDatabaseFactory.Server.ConnectionContext.SqlConnectionObject;
+                connection.Open();
+                ////var nextCommandText = commandText.Replace("GO", string.Empty);
+                var replaceTargetDBText = commandText.Replace("$Database", context.DatabaseName.Name);
 
-                    context.SqlDatabaseFactory.Server.ConnectionContext.ExecuteNonQuery(replaceTargetDBText);
+                context.SqlDatabaseFactory.Server.ConnectionContext.ExecuteNonQuery(replaceTargetDBText);
 
-                    ////var command = new SqlCommand(replaceTargetDBText, connection);
-                    ////command.CommandType = CommandType.Text;
-                    ////command.ExecuteNonQuery();
-                }
-
+                ////var command = new SqlCommand(replaceTargetDBText, connection);
+                ////command.CommandType = CommandType.Text;
+                ////command.ExecuteNonQuery();
             }
             catch (Exception e)
             {
@@ -157,20 +154,18 @@ internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuil
         private List<MigrationDbScriptHeader> GetExecutedMigrationScripts(IDatabaseScriptGeneratorContext context)
         {
             var result = new List<MigrationDbScriptHeader>();
-            using (var connection = context.SqlDatabaseFactory.Server.ConnectionContext.SqlConnectionObject)
-            {
-                connection.Open();
-                var cmd = $"select name, scheme, version from {context.DatabaseName}.[{this.tableName}]";
-                var command = new Microsoft.Data.SqlClient.SqlCommand(cmd, connection);
-                var sqlResult = command.ExecuteReader();
+            using var connection = context.SqlDatabaseFactory.Server.ConnectionContext.SqlConnectionObject;
+            connection.Open();
+            var cmd = $"select name, scheme, version from {context.DatabaseName}.[{this.tableName}]";
+            var command = new Microsoft.Data.SqlClient.SqlCommand(cmd, connection);
+            var sqlResult = command.ExecuteReader();
 
-                while (sqlResult.Read())
-                {
-                    result.Add(new MigrationDbScriptHeader(
-                                                           sqlResult.GetString(0),
-                                                           sqlResult.GetString(1),
-                                                           sqlResult.GetString(2)));
-                }
+            while (sqlResult.Read())
+            {
+                result.Add(new MigrationDbScriptHeader(
+                               sqlResult.GetString(0),
+                               sqlResult.GetString(1),
+                               sqlResult.GetString(2)));
             }
 
             return result;

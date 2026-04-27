@@ -8,7 +8,7 @@ using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
-public class VirtualPermissionTests : TestBase
+public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private (string UserLogin, Guid BuId, Guid EmployeeId)[] Datas;
 

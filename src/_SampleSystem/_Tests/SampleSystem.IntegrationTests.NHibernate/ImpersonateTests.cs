@@ -3,7 +3,7 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-public class ImpersonateTests : TestBase
+public class ImpersonateTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public async Task SaveDataWithImpersonate_ImpersonateWork()

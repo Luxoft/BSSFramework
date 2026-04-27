@@ -10,7 +10,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class LegalEntityProjectionTests : TestBase
+public class LegalEntityProjectionTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void LegalEntityProjectionNestedMappingTest()

@@ -1,6 +1,5 @@
 ﻿using Framework.Application;
 using Framework.AutomationCore.RootServiceProviderContainer;
-using Framework.AutomationCore.Utils;
 using Framework.BLL.Domain.Persistent;
 using Framework.Core;
 using Framework.Database;
@@ -18,7 +17,7 @@ using BusinessUnitController = SampleSystem.WebApiCore.Controllers.Main.Business
 
 namespace SampleSystem.IntegrationTests;
 
-public class BusinessUnitTests : TestBase
+public class BusinessUnitTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private const string EmployeeName = "TestSecondaryAccessEmployee";
 

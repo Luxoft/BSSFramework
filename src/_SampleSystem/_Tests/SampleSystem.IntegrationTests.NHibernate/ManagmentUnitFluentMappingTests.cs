@@ -7,7 +7,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class ManagmentUnitFluentMappingTests : TestBase
+public class ManagmentUnitFluentMappingTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void CheckBusinessUnitSecondaryAccess_HasAccess()

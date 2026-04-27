@@ -6,7 +6,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class ExpandPathTests : TestBase
+public class ExpandPathTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void LiftToNullableContainsExt_ShouldNotThrowException()

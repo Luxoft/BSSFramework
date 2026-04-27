@@ -17,7 +17,7 @@ using Anch.SecuritySystem;
 
 namespace SampleSystem.IntegrationTests;
 
-public class AuthPerformanceTest : TestBase
+public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private IReadOnlyCollection<BusinessUnitIdentityDTO?> fbuSource;
 
@@ -92,7 +92,7 @@ public class AuthPerformanceTest : TestBase
                 var empRep = sp.GetRequiredService<IRepositoryFactory<Employee>>().Create();
                 var testObjRep = sp.GetRequiredService<IRepositoryFactory<AuthPerformanceObject>>().Create();
 
-                int count = 0;
+                var count = 0;
                 foreach (var fbu in this.fbuSource.Take(Size - 3))
                 {
                     foreach (var mbu in this.mbuSource.Take(Size - 3))

@@ -2,10 +2,12 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
-    <Anch>3.4.0.1</Anch>
+    <Anch>3.4.1.0</Anch>
     <BssPlatform>[1.6.2]</BssPlatform>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="Anch.Testing" Version="3.4.1" />
+    <PackageVersion Include="Anch.Testing.Database" Version="3.4.1" />
     <PackageVersion Include="CommandLineParser" Version="2.9.1" />
     <PackageVersion Include="Dapper" Version="2.1.72" />
     <PackageVersion Include="Dapper.Contrib" Version="2.0.78" />
@@ -29,14 +31,13 @@
     <PackageVersion Include="Anch.SecuritySystem.Notification" Version="$(Anch)" />
     <PackageVersion Include="Anch.SecuritySystem.Notification.Abstractions" Version="$(Anch)" />
     <PackageVersion Include="Anch.SecuritySystem.Notification.Domain" Version="$(Anch)" />
-    <PackageVersion Include="Anch.SecuritySystem.Testing" Version="$(Anch)" />
+    <PackageVersion Include="Anch.SecuritySystem.Testing" Version="3.4.1" />
     <PackageVersion Include="Anch.SecuritySystem.VirtualPermission" Version="$(Anch)" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Documentation" Version="$(BssPlatform)" />
     <PackageVersion Include="Luxoft.Bss.Platform.Api.Middlewares" Version="$(BssPlatform)" />
     <PackageVersion Include="Luxoft.Bss.Platform.Events" Version="$(BssPlatform)" />
     <PackageVersion Include="Luxoft.Bss.Platform.Events.Abstractions" Version="$(BssPlatform)" />
     <PackageVersion Include="Luxoft.Bss.Platform.Logging" Version="$(BssPlatform)" />
-    <PackageVersion Include="Luxoft.Bss.Testing.Xunit" Version="[1.0.2,)" />
     <PackageVersion Include="MediatR" Version="14.1.0" />
     <PackageVersion Include="FluentValidation" Version="12.1.1" />
     <PackageVersion Include="FluentMigrator" Version="8.0.1" />
@@ -70,7 +71,7 @@
     <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="[7.2.0]" />
     <PackageVersion Include="System.CodeDom" Version="10.0.7" />
     <PackageVersion Include="System.Reflection.Context" Version="10.0.7" />
-    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.v3" Version="3.2.2" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
   </ItemGroup>
 </Project>

@@ -10,7 +10,7 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-public class PrincipalTests : TestBase
+public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void CreatePrincipal_SaveEventExist()

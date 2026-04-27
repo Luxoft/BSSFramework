@@ -6,7 +6,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class SequenceBllTests : TestBase
+public class SequenceBllTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void GetNextNumber_TwoCallsInParallelTransactions_ShouldGiveDifferentNumbers()

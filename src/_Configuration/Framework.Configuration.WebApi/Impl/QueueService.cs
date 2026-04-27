@@ -20,7 +20,7 @@ public partial class ConfigMainController
 
                 context.Authorization.SecuritySystem.CheckAccessAsync(SecurityRole.SystemIntegration, this.HttpContext.RequestAborted).GetAwaiter().GetResult();
 
-                return context.Logics.DomainObjectModification.Process(limit == default(int) ? 1000 : limit);
+                return context.Logics.DomainObjectModification.Process(limit == 0 ? 1000 : limit);
             });
 
         return result.Match(v => v, ex => throw ex);

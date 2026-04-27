@@ -9,7 +9,7 @@ using Index = Microsoft.SqlServer.Management.Smo.Index;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 
-public class UniqueGroupDatabaseScriptGeneratorTests : TestBase
+public class UniqueGroupDatabaseScriptGeneratorTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void GenerateLocal_UniqueIndexExistsWithLessColumns_RecreatesColumns()

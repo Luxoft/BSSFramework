@@ -9,7 +9,7 @@ using SampleSystem.WebApiCore.Controllers.MainQuery;
 
 namespace SampleSystem.IntegrationTests;
 
-public class EmployeeProjectionTests : TestBase
+public class EmployeeProjectionTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private const string ProjectionPrincipalName = "Projection Tester";
     private const string TestEmployee1Login = "Test Employee 1";

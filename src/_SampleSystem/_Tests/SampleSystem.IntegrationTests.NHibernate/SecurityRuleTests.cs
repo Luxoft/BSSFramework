@@ -14,7 +14,7 @@ using Anch.SecuritySystem.AccessDenied;
 
 namespace SampleSystem.IntegrationTests;
 
-public class SecurityRuleTests : TestBase
+public class SecurityRuleTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public async Task ApplyExceptRule_CurrentUserExcepted()

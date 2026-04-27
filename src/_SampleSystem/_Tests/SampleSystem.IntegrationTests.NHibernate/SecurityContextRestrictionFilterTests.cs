@@ -11,7 +11,7 @@ using Anch.SecuritySystem.Validation;
 
 namespace SampleSystem.IntegrationTests;
 
-public class SecurityContextRestrictionFilterTests : TestBase
+public class SecurityContextRestrictionFilterTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private static readonly SecurityRole DefaultSecurityRole = SampleSystemSecurityRole.DefaultRole;
 

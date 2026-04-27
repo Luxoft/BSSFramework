@@ -8,7 +8,7 @@ using SampleSystem.WebApiCore.Controllers.MainQuery;
 
 namespace SampleSystem.IntegrationTests;
 
-public class BUProjectionTests : TestBase
+public class BUProjectionTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private const string TestEmployee0Login = "Test Employee 0";
     private const string TestEmployee1Login = "Test Employee 1";

@@ -7,7 +7,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class NHibFetchTests : TestBase
+public class NHibFetchTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void TestPropCollection_TestPassed() =>

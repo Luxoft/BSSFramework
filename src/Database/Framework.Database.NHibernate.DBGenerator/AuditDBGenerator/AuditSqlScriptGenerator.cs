@@ -29,7 +29,7 @@ internal class AuditSqlScriptGenerator
                         .Append(' ')
                         .Append(context.GetQualifiedTableName()).Append(" (");
 
-        bool identityColumn = table.IdentifierValue != null && table.IdentifierValue.IsIdentityColumn(dialect);
+        var identityColumn = table.IdentifierValue != null && table.IdentifierValue.IsIdentityColumn(dialect);
 
         // try to find out the name of the pk to create it as identity if the
         // identitygenerator is used
@@ -114,14 +114,14 @@ internal class AuditSqlScriptGenerator
             buf.Append(StringHelper.CommaSpace).Append(table.PrimaryKey.SqlConstraintString(dialect, defaultSchema));
         }
 
-        foreach (UniqueKey uk in table.UniqueKeyIterator)
+        foreach (var uk in table.UniqueKeyIterator)
         {
             buf.Append(',').Append(uk.SqlConstraintString(dialect));
         }
 
         if (dialect.SupportsTableCheck)
         {
-            foreach (string checkConstraint in table.CheckConstraintsIterator)
+            foreach (var checkConstraint in table.CheckConstraintsIterator)
             {
                 buf.Append(", check (").Append(checkConstraint).Append(") ");
             }

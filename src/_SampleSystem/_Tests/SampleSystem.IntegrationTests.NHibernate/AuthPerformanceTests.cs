@@ -12,7 +12,7 @@ using Anch.SecuritySystem;
 
 namespace SampleSystem.IntegrationTests;
 
-public class AuthPerformanceTests : TestBase
+public class AuthPerformanceTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private const string TestUser = "TestUser";
 

@@ -5,7 +5,7 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-public class FixedPropertyValidatorTests : TestBase
+public class FixedPropertyValidatorTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void PrimitiveImmutablePropertyChanged_RaisedValidationError()
@@ -16,7 +16,7 @@ public class FixedPropertyValidatorTests : TestBase
                                                                                        new TestImmutableObjStrictDTO { TestImmutablePrimitiveProperty = "AAA" }));
 
         // Act
-        Action changePropertyAction = () =>
+        var changePropertyAction = () =>
                                       {
                                           var dto = testImmutableObjController.Evaluate(c => c.GetRichTestImmutableObj(identity));
                                           dto.TestImmutablePrimitiveProperty = "BBB";
@@ -38,7 +38,7 @@ public class FixedPropertyValidatorTests : TestBase
         var identity = testImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjStrictDTO { }));
 
         // Act
-        Action changePropertyAction = () =>
+        var changePropertyAction = () =>
                                       {
                                           var dto = testImmutableObjController.Evaluate(c => c.GetRichTestImmutableObj(identity));
                                           dto.TestImmutableRefProperty = this.DataHelper.GetCurrentEmployee();

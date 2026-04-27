@@ -9,7 +9,7 @@ using Index = Microsoft.SqlServer.Management.Smo.Index;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 
-public class ChangeIndexesStrategyTests : TestBase
+public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void GenerateLocal_ColumnHasIndexWithIncludedColumns_PreventsDefaultIndexFromGeneration()

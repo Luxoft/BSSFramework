@@ -9,7 +9,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class CurrentUserManyRelativePathTests : TestBase
+public class CurrentUserManyRelativePathTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private Guid[] testEmployeeIdents;
 

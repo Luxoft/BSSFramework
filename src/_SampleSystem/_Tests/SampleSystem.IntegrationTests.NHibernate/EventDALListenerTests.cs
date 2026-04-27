@@ -6,7 +6,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class EventDALListenerTests : TestBase
+public class EventDALListenerTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public async Task Employee_SendCustomEventOperation_ExceptionNotThrow()

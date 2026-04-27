@@ -16,7 +16,7 @@ using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
-public class ExtraQueryableSecurityPathTests : TestBase
+public class ExtraQueryableSecurityPathTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private EmployeeIdentityDTO TestEmployee;
 

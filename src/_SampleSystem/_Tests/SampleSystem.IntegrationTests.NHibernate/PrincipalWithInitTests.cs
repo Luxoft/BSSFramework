@@ -13,7 +13,7 @@ using Anch.SecuritySystem.Validation;
 
 namespace SampleSystem.IntegrationTests;
 
-public class PrincipalWithInitTests : TestBase
+public class PrincipalWithInitTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private const string TestPrincipalName = "Duplicate Permission Tester";
 

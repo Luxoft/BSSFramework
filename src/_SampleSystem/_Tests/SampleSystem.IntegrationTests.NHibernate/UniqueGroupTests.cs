@@ -4,7 +4,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class UniqueGroupTests : TestBase
+public class UniqueGroupTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void UniqueGroup_NonUniqueEntityCreated_ErrorUsesCustomName()

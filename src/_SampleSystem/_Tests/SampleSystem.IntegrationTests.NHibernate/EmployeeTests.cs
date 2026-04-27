@@ -21,7 +21,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class EmployeeTests : TestBase
+public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void GetEmployeeFromDB_FilterByAge_ReturnNotNulRecords()

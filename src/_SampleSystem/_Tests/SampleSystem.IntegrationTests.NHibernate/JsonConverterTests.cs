@@ -7,7 +7,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class JsonConverterTests : TestBase
+public class JsonConverterTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void DateTimeConverted_ResultCorrected()

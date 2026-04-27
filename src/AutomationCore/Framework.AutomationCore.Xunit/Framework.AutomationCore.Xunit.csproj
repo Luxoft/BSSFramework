@@ -8,12 +8,4 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Luxoft.Bss.Testing.Xunit" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Framework.AutomationCore.ServiceEnvironment\Framework.AutomationCore.ServiceEnvironment.csproj" />
-  </ItemGroup>
-
 </Project>

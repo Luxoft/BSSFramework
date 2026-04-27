@@ -5,7 +5,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class EnversBug1676 : TestBase
+public class EnversBug1676(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void OneToOneMapping()

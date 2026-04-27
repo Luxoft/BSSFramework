@@ -7,7 +7,7 @@ using SampleSystem.WebApiCore.Controllers.MainQuery;
 
 namespace SampleSystem.IntegrationTests;
 
-public class ManualAndLegacyProjectionSecurityTests : TestBase
+public class ManualAndLegacyProjectionSecurityTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private const string TestEmployeeLogin = "MALProjection SecurityTester";
 

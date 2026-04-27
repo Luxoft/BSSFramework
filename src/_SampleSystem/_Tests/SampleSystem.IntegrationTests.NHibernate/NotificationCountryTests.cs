@@ -8,7 +8,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class NotificationCountryTests : TestBase
+public class NotificationCountryTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void CreateAndUpdateCountry_SingleModificationExists()

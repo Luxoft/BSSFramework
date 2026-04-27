@@ -1,5 +1,4 @@
-﻿using Framework.AutomationCore;
-using Framework.AutomationCore.ServiceEnvironment;
+﻿using Framework.AutomationCore.ServiceEnvironment;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,13 +9,12 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 using Anch.SecuritySystem.Testing;
 
+using Framework.AutomationCore.RootServiceProviderContainer;
+
 namespace SampleSystem.IntegrationTests.__Support.TestData;
 
-[Collection("Test Collection")]
-public class TestBase : IntegrationTestBase<ISampleSystemBLLContext>, IDisposable
+public class TestBase(IServiceProvider rootServiceProvider) : RootServiceProviderContainer<ISampleSystemBLLContext>(rootServiceProvider), IAsyncLifetime
 {
-    protected TestBase() : base(AssemblyFixture.TestEnvironment.ServiceProviderPool) => base.Initialize();
-
     public MainWebApi MainWebApi => new(this.RootServiceProvider);
 
     public MainAuditWebApi MainAuditWebApi => new(this.RootServiceProvider);
@@ -25,17 +23,15 @@ public class TestBase : IntegrationTestBase<ISampleSystemBLLContext>, IDisposabl
 
     protected RootAuthManager AuthManager => this.RootServiceProvider.GetRequiredService<RootAuthManager>();
 
-    public void Dispose()
-    {
-        this.BeforeCleanup();
-        base.Cleanup();
-    }
+    protected ControllerEvaluator<AuthMainController> GetAuthControllerEvaluator(string? principalName = null) =>
+        this.GetControllerEvaluator<AuthMainController>(principalName);
 
-    protected virtual void BeforeCleanup()
-    {
-    }
+    protected ControllerEvaluator<ConfigMainController> GetConfigurationControllerEvaluator(string? principalName = null) =>
+        this.GetControllerEvaluator<ConfigMainController>(principalName);
 
-    protected ControllerEvaluator<AuthMainController> GetAuthControllerEvaluator(string? principalName = null) => this.GetControllerEvaluator<AuthMainController>(principalName);
+    protected virtual ValueTask InitializeAsync(CancellationToken ct) => ValueTask.CompletedTask;
 
-    protected ControllerEvaluator<ConfigMainController> GetConfigurationControllerEvaluator(string? principalName = null) => this.GetControllerEvaluator<ConfigMainController>(principalName);
+    ValueTask IAsyncLifetime.InitializeAsync() => this.InitializeAsync(TestContext.Current.CancellationToken);
+
+    ValueTask IAsyncDisposable.DisposeAsync() => ValueTask.CompletedTask;
 }

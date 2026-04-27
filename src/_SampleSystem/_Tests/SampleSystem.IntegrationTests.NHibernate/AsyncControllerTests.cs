@@ -4,7 +4,7 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-public class AsyncControllerTests : TestBase
+public class AsyncControllerTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public async Task TestSaveLocation_LocationSaved()

@@ -8,7 +8,7 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-public class DependencySecurityTests : TestBase
+public class DependencySecurityTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private const string TestEmployeeLogin = "DS SecurityTester";
 

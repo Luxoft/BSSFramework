@@ -2,7 +2,7 @@
 
 namespace SampleSystem.IntegrationTests.WebApi;
 
-public class WebApiTests : TestBase
+public class WebApiTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void WebApi_CallMethod()

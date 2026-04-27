@@ -9,7 +9,7 @@ using SampleSystem.WebApiCore.Controllers.Integration;
 
 namespace SampleSystem.IntegrationTests;
 
-public class IntegrationVersionTest : TestBase
+public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void SaveWithMoreVersion_IgnoreLessPolicy_ValueSaved()

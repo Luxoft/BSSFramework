@@ -30,7 +30,7 @@ public class DependencySecurityTests(IServiceProvider rootServiceProvider) : Tes
 
     private BusinessUnitIdentityDTO bu2Ident;
 
-    public DependencySecurityTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
         this.bu1Ident = this.DataHelper.SaveBusinessUnit();
 
@@ -38,7 +38,7 @@ public class DependencySecurityTests(IServiceProvider rootServiceProvider) : Tes
 
         this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
 
-        this.AuthManager.For(TestEmployeeLogin).SetRole(new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident));
+        await this.AuthManager.For(TestEmployeeLogin).SetRoleAsync(new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident), ct);
 
         this.EvaluateWrite(
                            context =>

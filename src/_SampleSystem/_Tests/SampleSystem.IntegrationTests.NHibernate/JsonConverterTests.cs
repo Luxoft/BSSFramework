@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 
+using Framework.AutomationCore.RootServiceProviderContainer;
 using Framework.Core;
 using Framework.Infrastructure.JsonConverter;
 

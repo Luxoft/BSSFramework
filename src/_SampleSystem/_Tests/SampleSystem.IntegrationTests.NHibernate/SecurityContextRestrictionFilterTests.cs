@@ -26,7 +26,7 @@ public class SecurityContextRestrictionFilterTests(IServiceProvider rootServiceP
 
     private BusinessUnitIdentityDTO buWithAllowedFilter;
 
-    public SecurityContextRestrictionFilterTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
         this.employee = this.DataHelper.SaveEmployee(login: this.employeeLogin);
 

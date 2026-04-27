@@ -1,4 +1,5 @@
-﻿using Framework.Database.NHibernate.DBGenerator;
+﻿using Framework.AutomationCore.RootServiceProviderContainer;
+using Framework.Database.NHibernate.DBGenerator;
 
 using Microsoft.SqlServer.Management.Smo;
 
@@ -44,11 +45,11 @@ public class UniqueGroupDatabaseScriptGeneratorTests(IServiceProvider rootServic
         var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
         //  changedTable.Indexes.Refresh();
-        var indexes = changedTable.Indexes.Cast<Index>().ToList();
+        var indexes = changedTable.Indexes.ToList();
 
         // Assert
         Assert.Contains(indexes, x => x.Name == indexName);
-        var indexedColumns = indexes.First(x => x.Name == indexName).IndexedColumns.Cast<IndexedColumn>().ToList();
+        var indexedColumns = indexes.First(x => x.Name == indexName).IndexedColumns.ToList();
         Assert.Equal(2, indexedColumns.Count);
         Assert.Contains(indexedColumns, x => x.Name == "roleDegreeId");
         Assert.Contains(indexedColumns, x => x.Name == "roleId");

@@ -77,7 +77,7 @@ public static class MetadataReader
                               return null;
                           }
                           var result = f.FieldType.IsDomainType(d.AssemblyMetadata.PersistentDomainObjectBaseType)
-                                               ? new ReferenceTypeFieldMetadata(f.Name, f.FieldType, f.GetAttributes(d.DomainType).Cast<Attribute>(), d) : null;
+                                               ? new ReferenceTypeFieldMetadata(f.Name, f.FieldType, f.GetAttributes(d.DomainType), d) : null;
                           return result;
                       };
 

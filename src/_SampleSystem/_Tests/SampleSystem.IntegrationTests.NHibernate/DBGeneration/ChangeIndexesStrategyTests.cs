@@ -1,4 +1,5 @@
-﻿using Framework.Database.NHibernate.DBGenerator;
+﻿using Framework.AutomationCore.RootServiceProviderContainer;
+using Framework.Database.NHibernate.DBGenerator;
 
 using Microsoft.SqlServer.Management.Smo;
 
@@ -49,7 +50,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
         // Assert
-        var indexes = changedTable.Indexes.Cast<Index>().ToList();
+        var indexes = changedTable.Indexes.ToList();
         Assert.Contains(indexes, x => x.Name == newIndexName);
         Assert.DoesNotContain(indexes, x => x.Name == baseIndexName);
     }
@@ -80,7 +81,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
         // Assert
-        Assert.DoesNotContain(changedTable.Indexes.Cast<Index>(), x => x.Name == ignoredIndexName);
+        Assert.DoesNotContain(changedTable.Indexes, x => x.Name == ignoredIndexName);
     }
 
     [Fact]
@@ -101,6 +102,6 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, "Employee");
 
         // Assert
-        Assert.DoesNotContain(changedTable.Indexes.Cast<Index>(), x => x.Name == "IX_ChildEntity_parentId");
+        Assert.DoesNotContain(changedTable.Indexes, x => x.Name == "IX_ChildEntity_parentId");
     }
 }

@@ -20,7 +20,7 @@ public class ManualAndLegacyProjectionSecurityTests(IServiceProvider rootService
 
     private BusinessUnitIdentityDTO bu2Ident;
 
-    public ManualAndLegacyProjectionSecurityTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
         this.bu1Ident = this.DataHelper.SaveBusinessUnit();
 
@@ -28,7 +28,7 @@ public class ManualAndLegacyProjectionSecurityTests(IServiceProvider rootService
 
         this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
 
-        this.AuthManager.For(TestEmployeeLogin).SetRole(new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident));
+        await this.AuthManager.For(TestEmployeeLogin).SetRoleAsync(new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident), ct);
 
         this.TestEmp1 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu1Ident);
 

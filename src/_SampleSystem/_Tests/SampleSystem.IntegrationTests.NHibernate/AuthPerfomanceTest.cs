@@ -31,7 +31,7 @@ public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBas
 
     private static readonly int Size = 5;
 
-    public AuthPerformanceTest()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
         this.fbuSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (BusinessUnitIdentityDTO?)this.DataHelper.SaveBusinessUnit())];
 
@@ -41,9 +41,9 @@ public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBas
 
         this.employeeSource = [null, this.DataHelper.SaveEmployee()];
 
-        this.AuthManager.For(PrincipalName).CreatePrincipal();
+        await this.AuthManager.For(PrincipalName).CreatePrincipalAsync(ct);
 
-        this.GeneratePermission();
+        await this.GeneratePermissionAsync(ct);
     }
 
     [Fact]
@@ -66,7 +66,7 @@ public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBas
         Assert.Equal(findCount, authPerfCount);
     }
 
-    private void GeneratePermission()
+    private async ValueTask GeneratePermissionAsync(CancellationToken ct)
     {
         var request = from fbu in this.fbuSource
 
@@ -78,7 +78,7 @@ public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBas
 
                       select new SampleSystemTestPermission(SampleSystemSecurityRole.TestPerformance, fbu, mbu, location, employee).ToManagedPermission();
 
-        this.AuthManager.For(PrincipalName).SetRole(request.ToArray());
+        await this.AuthManager.For(PrincipalName).SetRoleAsync([.. request], ct);
     }
 
     private async Task<int> GenerateAuthPerformanceObject() =>

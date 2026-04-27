@@ -11,6 +11,8 @@ using SampleSystem.Security;
 using Anch.SecuritySystem;
 using Anch.SecuritySystem.Validation;
 
+using Framework.AutomationCore.RootServiceProviderContainer;
+
 namespace SampleSystem.IntegrationTests;
 
 public class PrincipalWithInitTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
@@ -19,7 +21,7 @@ public class PrincipalWithInitTests(IServiceProvider rootServiceProvider) : Test
 
     private Period testPeriod;
 
-    public PrincipalWithInitTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
         this.testPeriod = this.TimeProvider.GetCurrentMonth();
 
@@ -42,10 +44,11 @@ public class PrincipalWithInitTests(IServiceProvider rootServiceProvider) : Test
                                                           type: buTypeId,
                                                           parent: luxoftBuId);
 
-        this.AuthManager.For(TestPrincipalName).SetRole(
+        await this.AuthManager.For(TestPrincipalName).SetRoleAsync(
             new SampleSystemTestPermission(
             SampleSystemSecurityRole.TestPerformance,
-            new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)) { Period = new PermissionPeriod(this.testPeriod.StartDate, this.testPeriod.EndDate) });
+            new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)) { Period = new PermissionPeriod(this.testPeriod.StartDate, this.testPeriod.EndDate) },
+            ct);
     }
 
     [Fact]

@@ -6,6 +6,8 @@ using Framework.Database;
 
 using Anch.SecuritySystem;
 
+using Framework.AutomationCore.Utils;
+
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Enums;
 using SampleSystem.Generated.DTO;
@@ -25,7 +27,7 @@ public class BusinessUnitTests(IServiceProvider rootServiceProvider) : TestBase(
 
     private const int ExistedBusinessUnitsInDatabase = 3;
 
-    public BusinessUnitTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
         var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 
@@ -46,10 +48,11 @@ public class BusinessUnitTests(IServiceProvider rootServiceProvider) : TestBase(
             type: buTypeId,
             parent: luxoftBuId);
 
-        this.AuthManager.For(EmployeeName).SetRole(
+        await this.AuthManager.For(EmployeeName).SetRoleAsync(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.TestRole3,
-                new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)));
+                new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)),
+            ct);
     }
 
     [Fact]
@@ -59,13 +62,13 @@ public class BusinessUnitTests(IServiceProvider rootServiceProvider) : TestBase(
         var businessUnitQueryController = this.GetControllerEvaluator<BusinessUnitQueryController>(EmployeeName);
 
         // Act
-        var businessUnitTree = businessUnitQueryController.Evaluate(
-            c => c.GetTestBusinessUnitTreeByOperation(
-                new GetTestBusinessUnitTreeByOperationAutoRequest
-                {
-                    OdataQueryString = string.Empty,
-                    SecurityRule = new DomainSecurityRule.ClientSecurityRule(SampleSystemSecurityOperation.EmployeeEdit.Name)
-                }));
+        var businessUnitTree = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitTreeByOperation(
+                                                                        new GetTestBusinessUnitTreeByOperationAutoRequest
+                                                                        {
+                                                                            OdataQueryString = string.Empty,
+                                                                            SecurityRule = new DomainSecurityRule.ClientSecurityRule(
+                                                                                SampleSystemSecurityOperation.EmployeeEdit.Name)
+                                                                        }));
 
         // Assert
         Assert.Equal(2, businessUnitTree.TotalCount);
@@ -82,13 +85,13 @@ public class BusinessUnitTests(IServiceProvider rootServiceProvider) : TestBase(
         var businessUnitQueryController = this.GetControllerEvaluator<BusinessUnitQueryController>(EmployeeName);
 
         // Act
-        var businessUnitTree = businessUnitQueryController.Evaluate(
-            c => c.GetTestBusinessUnitTreeByOperation(
-                new GetTestBusinessUnitTreeByOperationAutoRequest
-                {
-                    OdataQueryString = "$filter=Name eq 'test'",
-                    SecurityRule = new DomainSecurityRule.ClientSecurityRule(SampleSystemSecurityOperation.EmployeeEdit.Name)
-                }));
+        var businessUnitTree = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitTreeByOperation(
+                                                                        new GetTestBusinessUnitTreeByOperationAutoRequest
+                                                                        {
+                                                                            OdataQueryString = "$filter=Name eq 'test'",
+                                                                            SecurityRule = new DomainSecurityRule.ClientSecurityRule(
+                                                                                SampleSystemSecurityOperation.EmployeeEdit.Name)
+                                                                        }));
 
         // Assert
         Assert.Equal(0, businessUnitTree.TotalCount);
@@ -162,31 +165,30 @@ public class BusinessUnitTests(IServiceProvider rootServiceProvider) : TestBase(
         var buAccountId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_ACCOUNT_ID);
 
         this.DataHelper
-            .EvaluateWrite(
-                context =>
+            .EvaluateWrite(context =>
+            {
+                var period = new Period(
+                    this.FinancialYearService.GetCurrentFinancialYear().StartDate
+                        .AddYears(-1));
+                var accountType = context.Logics.BusinessUnitType.GetById(buAccountId.Id);
+
+                for (var i = 0; i < ParentsCount; i++)
                 {
-                    var period = new Period(
-                        this.FinancialYearService.GetCurrentFinancialYear().StartDate
-                            .AddYears(-1));
-                    var accountType = context.Logics.BusinessUnitType.GetById(buAccountId.Id);
+                    var accountBu =
+                        new BusinessUnit
+                        {
+                            Id = Guid.NewGuid(),
+                            Active = true,
+                            Name = TextRandomizer.UniqueString("Account"),
+                            IsPool = true,
+                            BusinessUnitStatus = BusinessUnitStatus.Current,
+                            IsProduction = true,
+                            BusinessUnitType = accountType,
+                            Period = period
+                        };
 
-                    for (var i = 0; i < ParentsCount; i++)
-                    {
-                        var accountBu =
-                            new BusinessUnit
-                            {
-                                Id = Guid.NewGuid(),
-                                Active = true,
-                                Name = TextRandomizer.UniqueString("Account"),
-                                IsPool = true,
-                                BusinessUnitStatus = BusinessUnitStatus.Current,
-                                IsProduction = true,
-                                BusinessUnitType = accountType,
-                                Period = period
-                            };
-
-                        context.Logics.Default.Create<BusinessUnit>().Insert(accountBu, accountBu.Id);
-                    }
-                });
+                    context.Logics.Default.Create<BusinessUnit>().Insert(accountBu, accountBu.Id);
+                }
+            });
     }
 }

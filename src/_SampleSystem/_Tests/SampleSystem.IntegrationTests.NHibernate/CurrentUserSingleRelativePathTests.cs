@@ -17,7 +17,7 @@ public class CurrentUserSingleRelativePathTests(IServiceProvider rootServiceProv
 {
     private Guid[] testObjectIdents;
 
-    public CurrentUserSingleRelativePathTests() =>
+    protected override async ValueTask InitializeAsync(CancellationToken ct) =>
         this.testObjectIdents = this.Evaluate(
             DBSessionMode.Write,
             ctx =>

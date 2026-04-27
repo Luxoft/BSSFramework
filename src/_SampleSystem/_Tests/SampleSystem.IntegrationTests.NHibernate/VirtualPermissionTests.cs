@@ -13,7 +13,7 @@ public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : Test
     private (string UserLogin, Guid BuId, Guid EmployeeId)[] Datas;
 
 
-    public VirtualPermissionTests() =>
+    protected override async ValueTask InitializeAsync(CancellationToken ct) =>
         this.Datas = new[] { "testEmployeeLogin", "otherTestEmployeeLogin" }
                      .Select(
                          userLogin =>

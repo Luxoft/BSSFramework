@@ -16,7 +16,7 @@ public class EmployeeProjectionTests(IServiceProvider rootServiceProvider) : Tes
     private const string TestEmployee2Login = "Test Employee 2";
     private const string TestEmployee3Login = "Test Employee 3";
 
-    public EmployeeProjectionTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
         var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 
@@ -42,13 +42,14 @@ public class EmployeeProjectionTests(IServiceProvider rootServiceProvider) : Tes
         this.DataHelper.SaveEmployee(login: TestEmployee2Login, coreBusinessUnit: profitBuId);
         this.DataHelper.SaveEmployee(login: TestEmployee3Login, coreBusinessUnit: costBuId);
 
-        this.AuthManager.For(ProjectionPrincipalName).SetRole(
+        await this.AuthManager.For(ProjectionPrincipalName).SetRoleAsync(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SeManager,
-                new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)));
+                new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)),
+            ct);
 
-        this.AuthManager.For(TestEmployee1Login).SetRole(SampleSystemSecurityRole.TestRole1);
-        this.AuthManager.For(TestEmployee3Login).SetRole(SampleSystemSecurityRole.TestRole2);
+        await this.AuthManager.For(TestEmployee1Login).SetRoleAsync(SampleSystemSecurityRole.TestRole1, ct);
+        await this.AuthManager.For(TestEmployee3Login).SetRoleAsync(SampleSystemSecurityRole.TestRole2, ct);
     }
 
     [Fact]

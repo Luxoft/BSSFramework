@@ -15,13 +15,11 @@ public class CurrentUserManyRelativePathTests(IServiceProvider rootServiceProvid
 
     private Guid testObj;
 
-    public CurrentUserManyRelativePathTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
         this.testEmployeeIdents =
 
-            Enumerable.Range(0, 3).Select(
-                          _ => { return this.DataHelper.SaveEmployee().Id; })
-                      .ToArray();
+            Enumerable.Range(0, 3).Select(_ => this.DataHelper.SaveEmployee().Id).ToArray();
 
         this.testObj = this.EvaluateWrite(
             ctx =>
@@ -32,7 +30,7 @@ public class CurrentUserManyRelativePathTests(IServiceProvider rootServiceProvid
 
                 foreach (var testEmployeeIdent in this.testEmployeeIdents)
                 {
-                    var testEmployee = ctx.Logics.Employee.GetById(testEmployeeIdent, true);
+                    var testEmployee = ctx.Logics.Employee.GetById(testEmployeeIdent, true)!;
 
                     new TestRelativeEmployeeChildObject(parentObj) { Employee = testEmployee };
                 }

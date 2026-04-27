@@ -43,7 +43,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests(IServiceProvide
 
     private string searchNotificationEmployeeLogin2 = nameof(searchNotificationEmployeeLogin2);
 
-    public GetNotificationPrincipalsByHierarchicalContextTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
         this.rootBusinessUnit = this.DataHelper.SaveBusinessUnit(id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID);
         this.child_1_0_BusinessUnit = this.DataHelper.SaveBusinessUnit(parent: this.rootBusinessUnit);

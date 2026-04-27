@@ -11,6 +11,8 @@ using Framework.Database.NHibernate.Sessions;
 
 using Anch.SecuritySystem;
 
+using Framework.AutomationCore.RootServiceProviderContainer;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using NHibernate.Impl;

@@ -34,7 +34,7 @@ public class ExtraQueryableSecurityPathTests(IServiceProvider rootServiceProvide
 
     private LocationIdentityDTO loc2Ident;
 
-    public ExtraQueryableSecurityPathTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
         this.bu1Ident = this.DataHelper.SaveBusinessUnit();
 
@@ -46,9 +46,12 @@ public class ExtraQueryableSecurityPathTests(IServiceProvider rootServiceProvide
 
         this.TestEmployee = this.DataHelper.SaveEmployee(login: "EQSP SecurityTester");
 
-        this.AuthManager.For(this.TestEmployee.Id).SetRole(
-            new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident, null, this.loc1Ident),
-            new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident, null, this.loc2Ident));
+        await this.AuthManager.For(this.TestEmployee.Id).SetRoleAsync(
+            [
+                new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident, null, this.loc1Ident),
+                new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident, null, this.loc2Ident)
+            ],
+            ct);
 
         this.TestEmp1 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu1Ident, location: this.loc1Ident);
 

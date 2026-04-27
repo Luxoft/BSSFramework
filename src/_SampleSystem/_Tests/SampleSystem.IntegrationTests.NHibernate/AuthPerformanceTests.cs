@@ -20,7 +20,7 @@ public class AuthPerformanceTests(IServiceProvider rootServiceProvider) : TestBa
 
     private const int SplitBy = 25;
 
-    public AuthPerformanceTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
         var genLoc = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveLocation());
 

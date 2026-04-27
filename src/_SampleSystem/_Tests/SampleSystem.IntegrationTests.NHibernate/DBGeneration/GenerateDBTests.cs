@@ -1,4 +1,5 @@
-﻿using Framework.Database.NHibernate.DBGenerator;
+﻿using Framework.AutomationCore.RootServiceProviderContainer;
+using Framework.Database.NHibernate.DBGenerator;
 
 using SampleSystem.DbGenerate.NHibernate;
 using SampleSystem.IntegrationTests.__Support.TestData;

@@ -14,7 +14,7 @@ public class BUProjectionTests(IServiceProvider rootServiceProvider) : TestBase(
     private const string TestEmployee1Login = "Test Employee 1";
     private const string TestEmployee2Login = "Test Employee 2";
 
-    public BUProjectionTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
         var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 

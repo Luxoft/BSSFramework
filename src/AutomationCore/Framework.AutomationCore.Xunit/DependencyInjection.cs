@@ -1,17 +1,17 @@
-﻿using Bss.Testing.Xunit.Interfaces;
+﻿//using Bss.Testing.Xunit.Interfaces;
 
-using Framework.AutomationCore.ServiceEnvironment;
-using Framework.AutomationCore.Settings;
-using Framework.AutomationCore.Xunit.ServiceEnvironment;
+//using Framework.AutomationCore.ServiceEnvironment;
+//using Framework.AutomationCore.Settings;
+//using Framework.AutomationCore.Xunit.ServiceEnvironment;
 
-using Microsoft.Extensions.DependencyInjection;
+//using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.AutomationCore.Xunit;
+//namespace Framework.AutomationCore.Xunit;
 
-public static class DependencyInjection
-{
-    public static IServiceCollection AddXunitIntegrationTests(this IServiceCollection services, Action<AutomationFrameworkSettings>? setup = null) =>
-        services
-            .AddSingleton<ITestInitializeAndCleanup, DiTestInitializeAndCleanup>()
-            .AddIntegrationTests(setup);
-}
+//public static class DependencyInjection
+//{
+//    public static IServiceCollection AddXunitIntegrationTests(this IServiceCollection services, Action<AutomationFrameworkSettings>? setup = null) =>
+//        services
+//            .AddSingleton<ITestInitializeAndCleanup, DiTestInitializeAndCleanup>()
+//            .AddIntegrationTests(setup);
+//}

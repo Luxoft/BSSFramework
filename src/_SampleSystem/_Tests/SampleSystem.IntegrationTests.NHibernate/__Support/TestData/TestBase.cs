@@ -1,4 +1,7 @@
-﻿using Framework.AutomationCore.ServiceEnvironment;
+﻿using Anch.SecuritySystem.Testing;
+
+using Framework.AutomationCore;
+using Framework.AutomationCore.ServiceEnvironment;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -7,13 +10,9 @@ using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.IntegrationTests.__Support.WebApi;
 using SampleSystem.WebApiCore.Controllers.Main;
 
-using Anch.SecuritySystem.Testing;
-
-using Framework.AutomationCore.RootServiceProviderContainer;
-
 namespace SampleSystem.IntegrationTests.__Support.TestData;
 
-public class TestBase(IServiceProvider rootServiceProvider) : RootServiceProviderContainer<ISampleSystemBLLContext>(rootServiceProvider), IAsyncLifetime
+public class TestBase(IServiceProvider rootServiceProvider) : IntegrationTestBase<ISampleSystemBLLContext>(rootServiceProvider), IAsyncLifetime
 {
     public MainWebApi MainWebApi => new(this.RootServiceProvider);
 

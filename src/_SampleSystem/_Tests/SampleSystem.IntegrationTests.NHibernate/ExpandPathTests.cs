@@ -52,11 +52,12 @@ public class ExpandPathTests(IServiceProvider rootServiceProvider) : TestBase(ro
         // Act
         var action = new Action(() =>
                                 {
+                                    var currentMonth = this.TimeProvider.GetCurrentMonth();
+
                                     var res = this.Evaluate(
                                         DBSessionMode.Read,
                                         context => context.Logics.Employee.GetListBy(
-                                            employee => employee.CoreBusinessUnitPeriod.IsIntersected(
-                                                this.TimeProvider.GetCurrentMonth())));
+                                            employee => employee.CoreBusinessUnitPeriod.IsIntersected(currentMonth)));
 
                                     return;
                                 });
@@ -73,11 +74,15 @@ public class ExpandPathTests(IServiceProvider rootServiceProvider) : TestBase(ro
 
         // Act
         var action = new Action(() =>
-                                {
-                                    var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnitPeriod.Contains(this.TimeProvider.GetToday())));
+        {
+            var today = this.TimeProvider.GetToday();
 
-                                    return;
-                                });
+            var res = this.Evaluate(
+                DBSessionMode.Read,
+                context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnitPeriod.Contains(today)));
+
+            return;
+        });
 
         // Assert
         action();

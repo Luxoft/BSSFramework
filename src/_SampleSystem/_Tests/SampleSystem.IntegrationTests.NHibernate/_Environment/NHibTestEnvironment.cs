@@ -9,6 +9,7 @@ using Bss.Platform.Events.Abstractions;
 
 using Framework.Application.Jobs;
 using Framework.AutomationCore.ServiceEnvironment;
+using Framework.AutomationCore.Settings;
 using Framework.Database;
 using Framework.Database.ConnectionStringSource;
 
@@ -35,10 +36,11 @@ public class NHibTestEnvironment : ITestEnvironment
     {
         var configuration = new ConfigurationBuilder().AddJsonFile("testAppSettings.json", false, true).Build();
 
+        var automationFrameworkSettings = new AutomationFrameworkSettings();
+        configuration.Bind(nameof(AutomationFrameworkSettings), automationFrameworkSettings);
 
         var defaultConnectionString = configuration.GetConnectionString("DefaultConnection")
                                       ?? throw new InvalidOperationException("DefaultConnection string is not configured.");
-
 
 
         return services.AddGeneralDependencyInjection(configuration, new HostingEnvironment(), s => s.AddExtensions(new SampleSystemNHibernateExtension()))
@@ -63,16 +65,14 @@ public class NHibTestEnvironment : ITestEnvironment
                                                   .SetProvider<MssqlDatabaseTestingProvider>()
                                                   .SetEmptySchemaInitializer<EmptySchemaInitializer>()
                                                   .SetSharedTestDataInitializer<TestDataInitializer>()
-                                                  .SetSettings(new TestDatabaseSettings
-                                                               {
-                                                                   InitMode = DatabaseInitModeHelper.DatabaseInitMode,
-                                                                   DefaultConnectionString = new(defaultConnectionString)
-                                                               })
-                                                  .RebindActualConnection<IDefaultConnectionStringSource>(connectionString => new ManualDefaultConnectionStringSource(connectionString.Value)))
-
-
-                       .AddDatabaseTesting(dts => dts.SetProvider<MssqlDatabaseTestingProvider>()
-                                           )
+                                                  .SetSettings(
+                                                      new TestDatabaseSettings
+                                                      {
+                                                          InitMode = automationFrameworkSettings.DatabaseInitMode,
+                                                          DefaultConnectionString = new(defaultConnectionString)
+                                                      })
+                                                  .RebindActualConnection<IDefaultConnectionStringSource>(connectionString =>
+                                                      new ManualDefaultConnectionStringSource(connectionString.Value)))
 
                        .AddValidator<DuplicateServiceUsageValidator>()
                        .BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true });

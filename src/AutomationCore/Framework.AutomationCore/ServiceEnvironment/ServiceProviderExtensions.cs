@@ -81,8 +81,6 @@ public static class ServiceProviderExtensions
 
                            .AddSingleton(typeof(ControllerEvaluator<>))
 
-                           .Replace(ServiceDescriptor.KeyedSingleton<ICurrentUser, TestingDefaultCurrentUser>(ICurrentUser.DefaultKey))
-
                            .AddSecuritySystemTesting(b => b.SetEvaluator(typeof(BssTestingEvaluator<>))
                                                            .SetTestRootUserInfo(sp => sp.GetRequiredService<IOptions<AutomationFrameworkSettings>>()
                                                                                         .Pipe(options => new TestRootUserInfo(options.Value.IntegrationTestUserName))));

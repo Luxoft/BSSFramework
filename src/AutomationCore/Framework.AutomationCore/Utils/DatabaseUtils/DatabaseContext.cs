@@ -2,9 +2,9 @@
 
 using Framework.AutomationCore.Settings;
 using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
+using Framework.Database;
 
 using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
@@ -20,31 +20,26 @@ public class DatabaseContext : IDatabaseContext
 
     public DatabaseItem Main { get; }
 
-    private readonly Server server;
-
     public Dictionary<string, DatabaseItem> Secondary { get; }
 
     public DatabaseContext(
-        IConfiguration configuration,
+        IDefaultConnectionStringSource defaultConnectionStringSource,
         IOptions<AutomationFrameworkSettings> settings)
-    : this(configuration, settings.Value)
+    : this(defaultConnectionStringSource, settings.Value)
     {
     }
 
-    private DatabaseContext(
-        IConfiguration configuration,
-        AutomationFrameworkSettings settings)
+    private DatabaseContext(IDefaultConnectionStringSource defaultConnectionStringSource, AutomationFrameworkSettings settings)
     {
-        var connectionString = this.GetConnectionString(configuration, settings);
+        var actualConnectionString = GetConnectionString(defaultConnectionStringSource, settings);
 
         this.Main = new DatabaseItem(
-            connectionString,
+            actualConnectionString,
             settings.DatabaseCollation,
             settings.DbDataDirectory,
             null,
             settings.TestsParallelize);
 
-        if (settings.SecondaryDatabases != null)
         {
             this.Secondary = new Dictionary<string, DatabaseItem>();
             foreach (var database in settings.SecondaryDatabases)
@@ -52,7 +47,7 @@ public class DatabaseContext : IDatabaseContext
                 this.Secondary.Add(
                     database,
                     new DatabaseItem(
-                        connectionString,
+                        actualConnectionString,
                         settings.DatabaseCollation,
                         settings.DbDataDirectory,
                         database,
@@ -60,7 +55,7 @@ public class DatabaseContext : IDatabaseContext
             }
         }
 
-        this.server = new Server(new ServerConnection(new SqlConnection(
+        this.Server = new Server(new ServerConnection(new SqlConnection(
             CoreDatabaseUtil.CutInitialCatalog(this.Main.ConnectionString))));
     }
 
@@ -68,26 +63,24 @@ public class DatabaseContext : IDatabaseContext
     {
         get
         {
-            this.server.Refresh();
-            return this.server;
+            field.Refresh();
+            return field;
         }
     }
 
-    private string GetConnectionString(
-        IConfiguration configuration,
+    private static string GetConnectionString(
+        IDefaultConnectionStringSource defaultConnectionStringSource,
         AutomationFrameworkSettings settings)
     {
-        var connectionString = configuration.GetConnectionString(settings.ConnectionStringName);
-
         if (settings.UseLocalDb)
         {
-            connectionString = this.GetLocalDbConnectionString(connectionString, LocalDbInstanceName);
+            return GetLocalDbConnectionString(defaultConnectionStringSource.ConnectionString, LocalDbInstanceName);
         }
 
-        return connectionString;
+        return defaultConnectionStringSource.ConnectionString;
     }
 
-    private string GetLocalDbConnectionString(string connectionString, string instanceName)
+    private static string GetLocalDbConnectionString(string connectionString, string instanceName)
         => DataSourceRegex.Replace(connectionString, $"Data Source=(localdb)\\{instanceName}");
 
     private static readonly Regex DataSourceRegex = new("Data Source=([^;]*)", RegexOptions.Compiled | RegexOptions.NonBacktracking);

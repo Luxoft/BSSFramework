@@ -10,6 +10,8 @@ using Bss.Platform.Events.Abstractions;
 using Framework.Application.Jobs;
 using Framework.AutomationCore.ServiceEnvironment;
 using Framework.AutomationCore.Settings;
+using Framework.AutomationCore.Utils.DatabaseUtils;
+using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 using Framework.Database;
 using Framework.Database.ConnectionStringSource;
 
@@ -42,8 +44,9 @@ public class NHibTestEnvironment : ITestEnvironment
         var defaultConnectionString = configuration.GetConnectionString("DefaultConnection")
                                       ?? throw new InvalidOperationException("DefaultConnection string is not configured.");
 
+        return services.AddSingleton<IConfiguration>(configuration)
 
-        return services.AddGeneralDependencyInjection(configuration, new HostingEnvironment(), s => s.AddExtensions(new SampleSystemNHibernateExtension()))
+                       .AddGeneralDependencyInjection(configuration, new HostingEnvironment(), s => s.AddExtensions(new SampleSystemNHibernateExtension()))
 
                        .AddSingleton<SampleSystemInitializer>()
 

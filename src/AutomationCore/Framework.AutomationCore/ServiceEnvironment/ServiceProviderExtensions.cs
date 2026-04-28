@@ -19,6 +19,11 @@ using Anch.SecuritySystem;
 using Anch.SecuritySystem.Testing;
 using Anch.SecuritySystem.Testing.DependencyInjection;
 
+using Framework.AutomationCore.Utils.DatabaseUtils;
+using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
+
+using Microsoft.Extensions.Configuration;
+
 namespace Framework.AutomationCore.ServiceEnvironment;
 
 public static class ServiceProviderExtensions
@@ -72,7 +77,10 @@ public static class ServiceProviderExtensions
                 services.Configure(setup);
             }
 
-            return services.AddSingleton<IntegrationTestTimeProvider>()
+            return services.AddSingleton<IDatabaseContext, DatabaseContext>()
+
+
+                           .AddSingleton<IntegrationTestTimeProvider>()
                            .ReplaceSingletonFrom<TimeProvider, IntegrationTestTimeProvider>()
 
                            .AddScoped<TestWebApiCurrentMethodResolver>()

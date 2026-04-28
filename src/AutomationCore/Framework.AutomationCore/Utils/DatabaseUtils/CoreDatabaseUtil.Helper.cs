@@ -14,7 +14,7 @@ public static partial class CoreDatabaseUtil
     private static string GetInitialCatalog(string connectionString) =>
         InitialCatalogRegex.Matches(connectionString).First().Value;
 
-    private static Table GetTable(this Server server, string databaseName, string tableName)
+    private static Table? GetTable(this Server server, string databaseName, string tableName)
     {
         var database = server.GetDatabase(databaseName);
 
@@ -43,5 +43,5 @@ public static partial class CoreDatabaseUtil
     private static void SetModeMultiUser(this Server server, Microsoft.SqlServer.Management.Smo.Database database)
         => ExecuteSql(server.ConnectionContext.SqlConnectionObject, $"ALTER DATABASE [{database.Name}] SET MULTI_USER");
 
-    private static Microsoft.SqlServer.Management.Smo.Database GetDatabase(this Server server, string name) => server.Databases.Contains(name) ? server.Databases[name] : null;
+    private static Microsoft.SqlServer.Management.Smo.Database? GetDatabase(this Server server, string name) => server.Databases.Contains(name) ? server.Databases[name] : null;
 }

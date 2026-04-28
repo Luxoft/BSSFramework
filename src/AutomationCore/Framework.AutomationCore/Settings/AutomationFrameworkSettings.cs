@@ -20,8 +20,6 @@ public class AutomationFrameworkSettings
 
     public string TempFolder => Path.Combine(this.TestRunServerRootFolder, "temp");
 
-    public string ConnectionStringName { get; set; } = "DefaultConnection";
-
     public string[] SecondaryDatabases { get; set; } = [];
 
     public string[] LocalAdmins { get; set; } = [];

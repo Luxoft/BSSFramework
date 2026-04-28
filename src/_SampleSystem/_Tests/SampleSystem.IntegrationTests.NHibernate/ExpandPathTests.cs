@@ -17,11 +17,13 @@ public class ExpandPathTests(IServiceProvider rootServiceProvider) : TestBase(ro
 
         // Act
         var action = new Action(() =>
-                                {
-                                    var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnit.Period.ContainsExt(period.EndDate ?? period.StartDate)));
+        {
+            var res = this.Evaluate(
+                DBSessionMode.Read,
+                context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnit.Period.ContainsExt(period.EndDate ?? period.StartDate)));
 
-                                    return;
-                                });
+            return;
+        });
 
         // Assert
         action();
@@ -34,11 +36,11 @@ public class ExpandPathTests(IServiceProvider rootServiceProvider) : TestBase(ro
 
         // Act
         var action = new Action(() =>
-                                {
-                                    var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.LocationCode == null));
+        {
+            var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.LocationCode == null));
 
-                                    return;
-                                });
+            return;
+        });
 
         // Assert
         action();
@@ -51,16 +53,15 @@ public class ExpandPathTests(IServiceProvider rootServiceProvider) : TestBase(ro
 
         // Act
         var action = new Action(() =>
-                                {
-                                    var currentMonth = this.TimeProvider.GetCurrentMonth();
+        {
+            var currentMonth = this.TimeProvider.GetCurrentMonth();
 
-                                    var res = this.Evaluate(
-                                        DBSessionMode.Read,
-                                        context => context.Logics.Employee.GetListBy(
-                                            employee => employee.CoreBusinessUnitPeriod.IsIntersected(currentMonth)));
+            var res = this.Evaluate(
+                DBSessionMode.Read,
+                context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnitPeriod.IsIntersected(currentMonth)));
 
-                                    return;
-                                });
+            return;
+        });
 
         // Assert
         action();

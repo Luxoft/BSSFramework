@@ -34,8 +34,9 @@ public class AsyncControllerTests(IServiceProvider rootServiceProvider) : TestBa
         var saveDto = new LocationStrictDTO { Name = Guid.NewGuid().ToString(), CloseDate = 30, Code = 12345 };
 
         // Act
-        Func<Task> saveTask = () => asyncControllerEvaluator.EvaluateAsync(c => c.AsyncSaveLocationWithWriteException(saveDto, default));
+        var ex = await Record.ExceptionAsync(() => asyncControllerEvaluator.EvaluateAsync(c => c.AsyncSaveLocationWithWriteException(saveDto, default)));
 
-        await Assert.ThrowsAsync<InvalidOperationException>(saveTask);
+        // Assert
+        Assert.IsType<InvalidOperationException>(ex);
     }
 }

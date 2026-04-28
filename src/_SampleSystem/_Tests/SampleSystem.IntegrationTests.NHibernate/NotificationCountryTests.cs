@@ -129,9 +129,10 @@ public class NotificationCountryTests(IServiceProvider rootServiceProvider) : Te
         var configController = this.GetConfigurationControllerEvaluator(DefaultConstants.NOTIFICATION_ADMIN);
 
         // Act
-        var call = new Action(() => configController.Evaluate(c => c.ProcessModifications(1000)));
+        var ex = Record.Exception(() => configController.Evaluate(c => c.ProcessModifications(1000)));
 
         // Assert
-        Assert.Equal("Both arguments (previous and current) can't be null", Assert.Throws<ArgumentException>(call).Message);
+        var argumentException = Assert.IsType<ArgumentException>(ex);
+        Assert.Equal("Both arguments (previous and current) can't be null", argumentException.Message);
     }
 }

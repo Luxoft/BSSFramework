@@ -332,12 +332,13 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
         var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
 
         // Act
-        var call = new Action(
+        var ex = Record.Exception(
             () => employeeController.Evaluate(
                 c => c.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = Maybe.Return("1234") })));
 
         // Assert
-        Assert.Equal($"Object '{nameof(Employee)}' was updated or deleted by another transaction", Assert.Throws<StaleDomainObjectStateException>(call).Message);
+        var staleDomainObjectStateException = Assert.IsType<StaleDomainObjectStateException>(ex);
+        Assert.Equal($"Object '{nameof(Employee)}' was updated or deleted by another transaction", staleDomainObjectStateException.Message);
     }
 
     [Fact]

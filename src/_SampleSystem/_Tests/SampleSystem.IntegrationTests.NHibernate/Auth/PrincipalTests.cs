@@ -151,10 +151,11 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
 
         // Act
         this.GetAuthControllerEvaluator().Evaluate(c => c.RemovePermission(permissionIdentity));
-        Action call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePermission(permissionIdentity));
+        var ex = Record.Exception(() => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePermission(permissionIdentity)));
 
         // Assert
-        Assert.Matches("^Permission with id = \".*\" not found$", Assert.Throws<ObjectByIdNotFoundException<Guid>>(call).Message);
+        var notFoundException = Assert.IsType<ObjectByIdNotFoundException<Guid>>(ex);
+        Assert.Matches("^Permission with id = \".*\" not found$", notFoundException.Message);
     }
 
     [Fact]
@@ -164,10 +165,11 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
         var principalIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetCurrentPrincipal()).Identity;
 
         // Act
-        var call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.RemovePrincipal(principalIdentity));
+        var ex = Record.Exception(() => this.GetAuthControllerEvaluator().Evaluate(c => c.RemovePrincipal(principalIdentity)));
 
         // Assert
-        Assert.Matches("^Removing principal \".*\" must be empty$", Assert.Throws<SecuritySystemException>(call).Message);
+        var securityException = Assert.IsType<SecuritySystemException>(ex);
+        Assert.Matches("^Removing principal \".*\" must be empty$", securityException.Message);
     }
 
     [Fact]
@@ -180,9 +182,10 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
 
         // Act
         this.GetAuthControllerEvaluator().Evaluate(c => c.RemovePrincipal(principalIdentity));
-        var call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalIdentity));
+        var ex = Record.Exception(() => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalIdentity)));
 
         // Assert
-        Assert.Matches("^Principal with id = \".*\" not found$", Assert.Throws<ObjectByIdNotFoundException<Guid>>(call).Message);
+        var notFoundException = Assert.IsType<ObjectByIdNotFoundException<Guid>>(ex);
+        Assert.Matches("^Principal with id = \".*\" not found$", notFoundException.Message);
     }
 }

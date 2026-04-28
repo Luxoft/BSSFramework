@@ -64,16 +64,17 @@ public class SecurityRuleTests(IServiceProvider rootServiceProvider) : TestBase(
         var testSecurityRule = DomainSecurityRule.AccessDenied.WithOverrideAccessDeniedMessage(faultMessage);
 
         // Act
-        var action = () => this.Evaluate(
-                         DBSessionMode.Read,
-                         ctx =>
-                         {
-                             var bll = ctx.Logics.EmployeeFactory.Create(testSecurityRule);
+        var ex = Record.Exception(() => this.Evaluate(
+            DBSessionMode.Read,
+            ctx =>
+            {
+                var bll = ctx.Logics.EmployeeFactory.Create(testSecurityRule);
 
-                             bll.CheckAccess(ctx.CurrentEmployeeSource.CurrentUser);
-                         });
+                bll.CheckAccess(ctx.CurrentEmployeeSource.CurrentUser);
+            }));
 
         // Assert
-        Assert.Equal(faultMessage, Assert.Throws<AccessDeniedException>(action).Message);
+        var accessDeniedException = Assert.IsType<AccessDeniedException>(ex);
+        Assert.Equal(faultMessage, accessDeniedException.Message);
     }
 }

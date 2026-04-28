@@ -42,14 +42,15 @@ public class SecurityContextRestrictionFilterTests(IServiceProvider rootServiceP
         // Arrange
 
         // Act
-        var action = () => this.AuthManager.For(this.employee.Id).SetRole(
-                         new SampleSystemTestPermission(SampleSystemSecurityRole.WithRestrictionFilterRole)
-                         {
-                             BusinessUnit = this.defaultBu
-                         });
+        var ex = Record.Exception(() => this.AuthManager.For(this.employee.Id).SetRole(
+            new SampleSystemTestPermission(SampleSystemSecurityRole.WithRestrictionFilterRole)
+            {
+                BusinessUnit = this.defaultBu
+            }));
 
         // Assert
-        Assert.Contains($"SecurityContext: '{this.defaultBu.Id}' denied by filter", Assert.Throws<SecuritySystemValidationException>(action).Message);
+        var validationException = Assert.IsType<SecuritySystemValidationException>(ex);
+        Assert.Contains($"SecurityContext: '{this.defaultBu.Id}' denied by filter", validationException.Message);
     }
 
     [Fact]

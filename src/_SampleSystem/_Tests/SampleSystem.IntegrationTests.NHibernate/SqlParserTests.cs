@@ -18,10 +18,11 @@ public class SqlParserTests(IServiceProvider rootServiceProvider) : TestBase(roo
         var testObject = new SqlParserTestObj();
 
         // Act
-        var action = () => this.EvaluateWrite(context => { context.Logics.SqlParserTestObj.Save(testObject); });
+        var ex = Record.Exception(() => this.EvaluateWrite(context => { context.Logics.SqlParserTestObj.Save(testObject); }));
 
         // Assert
-        Assert.Contains("The field \'notNullColumn\' of type SqlParserTestObj must be initialized", Assert.Throws<RequiredConstraintDALException>(action).Message);
+        var requiredConstraintException = Assert.IsType<RequiredConstraintDALException>(ex);
+        Assert.Contains("The field \'notNullColumn\' of type SqlParserTestObj must be initialized", requiredConstraintException.Message);
     }
 
     [Fact]
@@ -32,15 +33,16 @@ public class SqlParserTests(IServiceProvider rootServiceProvider) : TestBase(roo
         var testObject2 = new SqlParserTestObj { UniqueColumn = "1", NotNullColumn = "2" };
 
         // Act
-        var action = () => this.EvaluateWrite(
-                                                 context =>
-                                                 {
-                                                     context.Logics.SqlParserTestObj.Save(testObject1);
-                                                     context.Logics.SqlParserTestObj.Save(testObject2);
-                                                 });
+        var ex = Record.Exception(() => this.EvaluateWrite(
+            context =>
+            {
+                context.Logics.SqlParserTestObj.Save(testObject1);
+                context.Logics.SqlParserTestObj.Save(testObject2);
+            }));
 
         // Assert
-        Assert.Contains("SqlParserTestObj with same:\'UniqueColumn\' already exists", Assert.Throws<UniqueViolationConstraintDALException>(action).Message);
+        var uniqueViolationException = Assert.IsType<UniqueViolationConstraintDALException>(ex);
+        Assert.Contains("SqlParserTestObj with same:\'UniqueColumn\' already exists", uniqueViolationException.Message);
     }
 
     [Fact]
@@ -58,14 +60,15 @@ public class SqlParserTests(IServiceProvider rootServiceProvider) : TestBase(roo
                            });
 
         // Act
-        var action = () => this.EvaluateWrite(
-                                                 context =>
-                                                 {
-                                                     context.Logics.SqlParserTestObj.Remove(testObject);
-                                                 });
+        var ex = Record.Exception(() => this.EvaluateWrite(
+            context =>
+            {
+                context.Logics.SqlParserTestObj.Remove(testObject);
+            }));
 
         // Assert
-        Assert.Contains($"{nameof(SqlParserTestObj)} cannot be removed because it is used in {nameof(SqlParserTestObjContainer)}", Assert.Throws<RemoveLinkedObjectsDALException>(action).Message);
+        var removeLinkedObjectsException = Assert.IsType<RemoveLinkedObjectsDALException>(ex);
+        Assert.Contains($"{nameof(SqlParserTestObj)} cannot be removed because it is used in {nameof(SqlParserTestObjContainer)}", removeLinkedObjectsException.Message);
     }
 
     [Fact]
@@ -95,9 +98,10 @@ public class SqlParserTests(IServiceProvider rootServiceProvider) : TestBase(roo
         var fullEmployee = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
 
         // Act
-        var action = () => hRDepartmentController.Evaluate(c => c.RemoveHRDepartment(fullEmployee.HRDepartment.Identity));
+        var ex = Record.Exception(() => hRDepartmentController.Evaluate(c => c.RemoveHRDepartment(fullEmployee.HRDepartment.Identity)));
 
         // Assert
-        Assert.Equal($"{nameof(HRDepartment)} cannot be removed because it is used in {nameof(Employee)}", Assert.Throws<RemoveLinkedObjectsDALException>(action).Message);
+        var removeLinkedObjectsException = Assert.IsType<RemoveLinkedObjectsDALException>(ex);
+        Assert.Equal($"{nameof(HRDepartment)} cannot be removed because it is used in {nameof(Employee)}", removeLinkedObjectsException.Message);
     }
 }

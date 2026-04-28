@@ -64,21 +64,20 @@ public class ExtraQueryableSecurityPathTests(IServiceProvider rootServiceProvide
     public void TestExtraQueryableSecurityPath_LoadedWithExtraQueryableFilter()
     {
         // Arrange
-        var createProviderFunc = FuncHelper.Create(
-            (ISampleSystemBLLContext context) =>
-            {
-                var extraQueryableSecurity = context.Logics.Location.GetUnsecureQueryable();
+        var createProviderFunc = FuncHelper.Create((ISampleSystemBLLContext context) =>
+        {
+            var extraQueryableSecurity = context.Logics.Location.GetUnsecureQueryable();
 
-                var extraSecurityPath = SecurityPath<Employee>.Create(e => e.CoreBusinessUnit, true)
-                                                              .And(e => e.Location, true)
-                                                              .And(
-                                                                  e => extraQueryableSecurity.Where(
-                                                                      l => l == e.Location && e.Location.Id == this.loc1Ident.Id), true);
+            var extraSecurityPath = SecurityPath<Employee>.Create(e => e.CoreBusinessUnit, true)
+                                                          .And(e => e.Location, true)
+                                                          .And(
+                                                              e => extraQueryableSecurity.Where(l => l == e.Location && e.Location.Id == this.loc1Ident.Id),
+                                                              true);
 
-                return context.ServiceProvider.GetRequiredService<IDomainSecurityProviderFactory<Employee>>().Create(
-                    SampleSystemSecurityOperation.EmployeeView,
-                    extraSecurityPath);
-            });
+            return context.ServiceProvider.GetRequiredService<IDomainSecurityProviderFactory<Employee>>().Create(
+                SampleSystemSecurityOperation.EmployeeView,
+                extraSecurityPath);
+        });
 
         // Act
         var items = this.Evaluate(

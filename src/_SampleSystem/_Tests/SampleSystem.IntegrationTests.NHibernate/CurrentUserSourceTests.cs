@@ -40,16 +40,14 @@ public class CurrentUserSourceTests(IServiceProvider rootServiceProvider) : Test
         var randomName = TextRandomizer.RandomString(10);
 
         // Act
-        var action = () =>
-        {
+        var ex = Record.Exception(() =>
             this.Evaluate(
                 DBSessionMode.Read,
                 randomName,
-                ctx => ctx.CurrentEmployeeSource.CurrentUser.Id);
-        };
+                ctx => ctx.CurrentEmployeeSource.CurrentUser.Id));
 
         // Assert
-        var exception = Assert.Throws<UserSourceException>(action);
-        Assert.Equal($"{nameof(Employee)} \"{randomName}\" not found", exception.Message);
+        var userSourceException = Assert.IsType<UserSourceException>(ex);
+        Assert.Equal($"{nameof(Employee)} \"{randomName}\" not found", userSourceException.Message);
     }
 }

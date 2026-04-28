@@ -36,14 +36,15 @@ public class WrongSecurityMessageTests(IServiceProvider rootServiceProvider) : T
         //Arrange
 
         // Act
-        var action = () => this.Evaluate(
-                         DBSessionMode.Read,
-                         TestPrincipalName,
-                         ctx => ctx.Logics.EmployeeFactory.Create(securityRule).CheckAccess(ctx.CurrentEmployeeSource.CurrentUser));
+        var ex = Record.Exception(() => this.Evaluate(
+            DBSessionMode.Read,
+            TestPrincipalName,
+            ctx => ctx.Logics.EmployeeFactory.Create(securityRule).CheckAccess(ctx.CurrentEmployeeSource.CurrentUser)));
 
         // Assert
+        var accessDeniedException = Assert.IsType<AccessDeniedException>(ex);
         Assert.Equal(
             $"You have no permissions to access object with type = '{nameof(Employee)}' (id = '{TestPrincipalId}', securityRule = '{securityRule}')",
-            Assert.Throws<AccessDeniedException>(action).Message);
+            accessDeniedException.Message);
     }
 }

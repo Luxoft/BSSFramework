@@ -102,6 +102,8 @@ public class PrincipalWithInitTests(IServiceProvider rootServiceProvider) : Test
                    };
 
         // Assert
-        Assert.Contains(expectedErrorMessage, Assert.Throws<SecuritySystemValidationException>(call).Message);
+        var ex = Record.Exception(() => call());
+        var validationException = Assert.IsType<SecuritySystemValidationException>(ex);
+        Assert.Contains(expectedErrorMessage, validationException.Message);
     }
 }

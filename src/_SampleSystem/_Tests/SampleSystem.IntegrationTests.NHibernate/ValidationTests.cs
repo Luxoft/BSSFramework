@@ -13,10 +13,10 @@ public class ValidationTests(IServiceProvider rootServiceProvider) : TestBase(ro
         this.DataHelper.SaveEmployee("John Doe", "JD");
 
         // Act
-        Action call = () => this.DataHelper.SaveEmployee("John Doe", "JD");
+        var ex = Record.Exception(() => this.DataHelper.SaveEmployee("John Doe", "JD"));
 
         // Assert
-        Assert.Throws<ValidationException>(call);
+        Assert.IsType<ValidationException>(ex);
     }
 
     [Fact]
@@ -25,10 +25,11 @@ public class ValidationTests(IServiceProvider rootServiceProvider) : TestBase(ro
         // Arrange
 
         // Act
-        Action call = () => this.DataHelper.SaveEmployee(pin: 1234);
+        var ex = Record.Exception(() => this.DataHelper.SaveEmployee(pin: 1234));
 
         // Assert
-        Assert.Equal("Employee Pin could not be set as '1234'", Assert.Throws<ValidationException>(call).Message);
+        var validationException = Assert.IsType<ValidationException>(ex);
+        Assert.Equal("Employee Pin could not be set as '1234'", validationException.Message);
     }
 
     [Fact]
@@ -39,10 +40,11 @@ public class ValidationTests(IServiceProvider rootServiceProvider) : TestBase(ro
         this.DataHelper.SaveEmployee(externalId: externalId);
 
         // Act
-        Action call = () => this.DataHelper.SaveEmployee(externalId: externalId);
+        var ex = Record.Exception(() => this.DataHelper.SaveEmployee(externalId: externalId));
 
         // Assert
-        Assert.Equal($"Employee with ExternalId '{externalId}' already exists.", Assert.Throws<ValidationException>(call).Message);
+        var validationException = Assert.IsType<ValidationException>(ex);
+        Assert.Equal($"Employee with ExternalId '{externalId}' already exists.", validationException.Message);
     }
 
     [Fact]
@@ -53,10 +55,11 @@ public class ValidationTests(IServiceProvider rootServiceProvider) : TestBase(ro
         this.DataHelper.SaveEmployee(pin: pin);
 
         // Act
-        Action call = () => this.DataHelper.SaveEmployee(pin: pin);
+        var ex = Record.Exception(() => this.DataHelper.SaveEmployee(pin: pin));
 
         // Assert
-        Assert.Equal($"Employee with Pin '{pin}' already exists.", Assert.Throws<ValidationException>(call).Message);
+        var validationException = Assert.IsType<ValidationException>(ex);
+        Assert.Equal($"Employee with Pin '{pin}' already exists.", validationException.Message);
     }
 
     [Fact]
@@ -81,9 +84,10 @@ public class ValidationTests(IServiceProvider rootServiceProvider) : TestBase(ro
         var invalidDate = DateTime.MinValue;
 
         // Act
-        Action call = () => this.DataHelper.SaveEmployee(externalId: externalId, validateVirtualProp: invalidDate);
+        var ex = Record.Exception(() => this.DataHelper.SaveEmployee(externalId: externalId, validateVirtualProp: invalidDate));
 
         // Assert
-        Assert.Equal("Employee has ValidateVirtualProp value was too overflow for a DateTime", Assert.Throws<ValidationException>(call).Message);
+        var validationException = Assert.IsType<ValidationException>(ex);
+        Assert.Equal("Employee has ValidateVirtualProp value was too overflow for a DateTime", validationException.Message);
     }
 }

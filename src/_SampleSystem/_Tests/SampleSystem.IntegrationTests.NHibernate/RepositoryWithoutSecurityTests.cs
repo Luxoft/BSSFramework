@@ -27,9 +27,9 @@ public class RepositoryWithoutSecurityTests(IServiceProvider rootServiceProvider
         var controllerEvaluator = this.GetControllerEvaluator<NoSecurityController>();
 
         // Act
-        Func<Task> saveAction = () => controllerEvaluator.EvaluateAsync(c => c.TestFaultSave(default));
+        var ex = await Record.ExceptionAsync(() => controllerEvaluator.EvaluateAsync(c => c.TestFaultSave(default)));
 
         // Assert
-        await Assert.ThrowsAsync<ArgumentOutOfRangeException>(saveAction);
+        Assert.IsType<ArgumentOutOfRangeException>(ex);
     }
 }

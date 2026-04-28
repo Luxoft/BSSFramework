@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 
 using Anch.Core;
-using Anch.Core.Auth;
 using Anch.DependencyInjection;
 
 using Framework.Application.Jobs;
@@ -12,7 +11,6 @@ using Framework.Infrastructure.WebApiExceptionExpander;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
 using Anch.SecuritySystem;
@@ -21,8 +19,6 @@ using Anch.SecuritySystem.Testing.DependencyInjection;
 
 using Framework.AutomationCore.Utils.DatabaseUtils;
 using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
-
-using Microsoft.Extensions.Configuration;
 
 namespace Framework.AutomationCore.ServiceEnvironment;
 

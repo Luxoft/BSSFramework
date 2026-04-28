@@ -10,8 +10,6 @@ using Bss.Platform.Events.Abstractions;
 using Framework.Application.Jobs;
 using Framework.AutomationCore.ServiceEnvironment;
 using Framework.AutomationCore.Settings;
-using Framework.AutomationCore.Utils.DatabaseUtils;
-using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 using Framework.Database;
 using Framework.Database.ConnectionStringSource;
 
@@ -67,7 +65,7 @@ public class NHibTestEnvironment : ITestEnvironment
                        .AddDatabaseTesting(dts => dts
                                                   .SetProvider<MssqlDatabaseTestingProvider>()
                                                   .SetEmptySchemaInitializer<EmptySchemaInitializer>()
-                                                  .SetSharedTestDataInitializer<TestDataInitializer>()
+                                                  .SetTestDataInitializer<TestDataInitializer>()
                                                   .SetSettings(
                                                       new TestDatabaseSettings
                                                       {
